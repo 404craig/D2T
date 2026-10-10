@@ -17,10 +17,10 @@
   --display: "Saira Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
   --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
   /* Card metals stay the same in both themes: they are printed objects. */
-  --bronze-a: #c58f5c; --bronze-b: #8a5a33; --bronze-ink: #2b1a0c;
-  --silver-a: #e3e7ea; --silver-b: #9aa4ab; --silver-ink: #1d2327;
-  --gold-a: #f3dc8a; --gold-b: #c39a2c; --gold-ink: #2a1f04;
-  --best-a: #8c5ce6; --best-b: #2a1159; --best-ink: #f6efff;
+  --bronze-a: #e2ac78; --bronze-m: #b8723f; --bronze-b: #6f3d27; --bronze-glow: rgba(196, 82, 92, .38); --bronze-ink: #2b1a0c;
+  --silver-a: #f6f8fa; --silver-m: #cdd5dd; --silver-b: #9aa0b2; --silver-glow: rgba(150, 168, 255, .4); --silver-ink: #1d2327;
+  --gold-a: #fceca6; --gold-m: #e5ba4b; --gold-b: #b67b18; --gold-glow: rgba(255, 128, 52, .38); --gold-ink: #2a1f04;
+  --best-a: #b08af7; --best-m: #6d3fd1; --best-b: #261063; --best-glow: rgba(240, 78, 196, .42); --best-ink: #f6efff; --best-trim: #e9c46a;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -57,18 +57,19 @@ button, select, input { font: inherit; color: inherit; }
 
 /* Cards */
 .card {
-  --a: var(--bronze-a); --b: var(--bronze-b); --ci: var(--bronze-ink);
+  --a: var(--bronze-a); --m: var(--bronze-m); --b: var(--bronze-b); --glow: var(--bronze-glow); --ci: var(--bronze-ink); --trim: transparent;
   position: relative; aspect-ratio: 0.7; width: 100%; max-width: 100%; border: 0; padding: 0; cursor: pointer;
-  background: linear-gradient(155deg, var(--a), var(--b)); color: var(--ci);
+  background: radial-gradient(120% 70% at 100% 100%, var(--glow), transparent 65%), linear-gradient(155deg, var(--a), var(--m) 55%, var(--b)); color: var(--ci);
   clip-path: polygon(50% 0, 100% 6%, 100% 88%, 50% 100%, 0 88%, 0 6%);
   font-family: var(--display); text-align: left; transition: transform .15s ease; overflow: hidden;
 }
 .card::before { content: ""; position: absolute; inset: 5px; clip-path: inherit; border: 0;
-  background: linear-gradient(155deg, rgba(255,255,255,.28), rgba(255,255,255,0) 45%); pointer-events: none; }
+  background: linear-gradient(170deg, rgba(255,255,255,.34), rgba(255,255,255,0) 45%); pointer-events: none; }
+.card::after { content: ""; position: absolute; inset: 9px; clip-path: polygon(50% 0, 100% 6%, 100% 88%, 50% 100%, 0 88%, 0 6%); box-shadow: inset 0 0 0 1px var(--trim); pointer-events: none; }
 .card:hover { transform: translateY(-3px); }
-.card.silver { --a: var(--silver-a); --b: var(--silver-b); --ci: var(--silver-ink); }
-.card.gold { --a: var(--gold-a); --b: var(--gold-b); --ci: var(--gold-ink); }
-.card.best { --a: var(--best-a); --b: var(--best-b); --ci: var(--best-ink); }
+.card.silver { --a: var(--silver-a); --m: var(--silver-m); --b: var(--silver-b); --glow: var(--silver-glow); --ci: var(--silver-ink); }
+.card.gold { --a: var(--gold-a); --m: var(--gold-m); --b: var(--gold-b); --glow: var(--gold-glow); --ci: var(--gold-ink); }
+.card.best { --a: var(--best-a); --m: var(--best-m); --b: var(--best-b); --glow: var(--best-glow); --ci: var(--best-ink); --trim: var(--best-trim); }
 .card .in { position: absolute; inset: 8% 10% 17%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; gap: 1.5cqi; container-type: inline-size; }
 .card .top { display: flex; justify-content: space-between; align-items: flex-start; }
 .card .ovr { font-size: 26cqi; font-weight: 800; line-height: .82; }

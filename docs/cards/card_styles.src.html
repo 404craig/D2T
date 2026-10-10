@@ -56,13 +56,14 @@ p { margin: 0; max-width: 68ch; }
 
 /* ---------- Cards ---------- */
 .card {
-  --a: #c58f5c; --b: #7d4f2b; --ci: #2b1a0c; --line-c: rgba(0,0,0,.28); --chip: rgba(0,0,0,.14); --trim: transparent;
+  --a: #c58f5c; --m: #a8693d; --b: #7d4f2b; --glow: transparent; --ci: #2b1a0c; --line-c: rgba(0,0,0,.28); --chip: rgba(0,0,0,.14); --trim: transparent;
   position: relative; width: 100%; max-width: 100%; aspect-ratio: 0.7; container-type: inline-size;
   clip-path: polygon(50% 0, 100% 6%, 100% 88%, 50% 100%, 0 88%, 0 6%);
-  background: linear-gradient(155deg, var(--a), var(--b)); color: var(--ci); font-family: var(--display); overflow: hidden;
+  background: radial-gradient(120% 70% at 100% 100%, var(--glow), transparent 65%), linear-gradient(155deg, var(--a), var(--m) 55%, var(--b));
+  color: var(--ci); font-family: var(--display); overflow: hidden;
 }
-.card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(155deg, rgba(255,255,255,.32), rgba(255,255,255,0) 42%); pointer-events: none; z-index: 1; }
-.card::after { content: ""; position: absolute; inset: 2.6cqi; clip-path: polygon(50% 0, 100% 6%, 100% 88%, 50% 100%, 0 88%, 0 6%); box-shadow: inset 0 0 0 1.2cqi var(--trim); pointer-events: none; z-index: 3; }
+.card::before { content: ""; position: absolute; inset: 3.2cqi; clip-path: polygon(50% 0, 100% 6%, 100% 88%, 50% 100%, 0 88%, 0 6%); background: linear-gradient(170deg, rgba(255,255,255,.34), rgba(255,255,255,0) 45%); pointer-events: none; z-index: 1; }
+.card::after { content: ""; position: absolute; inset: 5.4cqi; clip-path: polygon(50% 0, 100% 6%, 100% 88%, 50% 100%, 0 88%, 0 6%); box-shadow: inset 0 0 0 .7cqi var(--trim); pointer-events: none; z-index: 3; }
 .card .in { position: absolute; inset: 8% 10% 16%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; gap: 1.5cqi; z-index: 2; }
 .card .top { display: flex; justify-content: space-between; align-items: flex-start; }
 .card .ovr { font-size: 26cqi; font-weight: 800; line-height: .82; font-variant-numeric: tabular-nums; }
@@ -90,28 +91,28 @@ p { margin: 0; max-width: 68ch; }
 .card.L-C .mid .ghost svg { height: 62cqi; width: auto; }
 
 /* ---------- Tier colours ---------- */
-.card.bronze { --a: #d29a63; --b: #7d4f2b; --ci: #2b1a0c; }
-.card.silver { --a: #f0f2f4; --b: #98a2aa; --ci: #1d2327; }
-.card.gold { --a: #f7e293; --b: #c0951f; --ci: #2a1f04; }
+.card.bronze { --a: #e2ac78; --m: #b8723f; --b: #6f3d27; --glow: rgba(196, 82, 92, .38); --ci: #2b1a0c; }
+.card.silver { --a: #f6f8fa; --m: #cdd5dd; --b: #9aa0b2; --glow: rgba(150, 168, 255, .4); --ci: #1d2327; }
+.card.gold { --a: #fceca6; --m: #e5ba4b; --b: #b67b18; --glow: rgba(255, 128, 52, .38); --ci: #2a1f04; }
 
 /* Club's best player */
-.card.best-purple { --a: #8c5ce6; --b: #2a1159; --ci: #f6efff; --line-c: rgba(255,255,255,.35); --chip: rgba(255,255,255,.14); --trim: #e9c46a; }
-.card.best-club { --a: var(--club-a); --b: var(--club-b); --ci: var(--club-ink); --line-c: var(--club-line); --chip: rgba(127,127,127,.22); --trim: var(--club-trim); }
-.card.best-emerald { --a: #2fbf88; --b: #0a3b2b; --ci: #effff8; --line-c: rgba(255,255,255,.35); --chip: rgba(255,255,255,.14); --trim: #d8f6e6; }
-.card.best-navy { --a: #2b5a8c; --b: #0a1626; --ci: #f6e3a1; --line-c: rgba(246,227,161,.4); --chip: rgba(255,255,255,.12); --trim: #f6e3a1; }
-.card.best-orchid { --a: #f3c4f0; --b: #9b3fa6; --ci: #2c0a31; --line-c: rgba(44,10,49,.3); --chip: rgba(0,0,0,.1); --trim: #ffffff; }
+.card.best-purple { --a: #b08af7; --m: #6d3fd1; --b: #261063; --glow: rgba(240, 78, 196, .42); --ci: #f6efff; --line-c: rgba(255,255,255,.35); --chip: rgba(255,255,255,.14); --trim: #e9c46a; }
+.card.best-club { --a: var(--club-a); --m: color-mix(in srgb, var(--club-a), var(--club-b)); --b: var(--club-b); --ci: var(--club-ink); --line-c: var(--club-line); --chip: rgba(127,127,127,.22); --trim: var(--club-trim); }
+.card.best-emerald { --a: #4fd6a0; --m: #1f9a6c; --b: #0a3b2b; --glow: rgba(40, 170, 220, .35); --ci: #effff8; --line-c: rgba(255,255,255,.35); --chip: rgba(255,255,255,.14); --trim: #d8f6e6; }
+.card.best-navy { --a: #3b6fa6; --m: #1c3d66; --b: #0a1626; --glow: rgba(110, 80, 220, .35); --ci: #f6e3a1; --line-c: rgba(246,227,161,.4); --chip: rgba(255,255,255,.12); --trim: #f6e3a1; }
+.card.best-orchid { --a: #f6cff3; --m: #d58ee0; --b: #9b3fa6; --glow: rgba(120, 90, 255, .3); --ci: #2c0a31; --line-c: rgba(44,10,49,.3); --chip: rgba(0,0,0,.1); --trim: #ffffff; }
 
 /* Legends */
-.card.leg-platinum { --a: #f4f6f8; --b: #aab3bc; --ci: #1b2228; --trim: rgba(255,255,255,.9); }
+.card.leg-platinum { --a: #f6f8fa; --m: #d3d9df; --b: #aab3bc; --ci: #1b2228; --trim: rgba(255,255,255,.9); }
 .card.leg-platinum .holo, .card.leg-pearl .holo { position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: multiply; opacity: .55;
   background: linear-gradient(115deg, #ff7ac8 0%, #7cc8ff 18%, #8dffb4 34%, #ffe36e 50%, #ff92dc 66%, #8fb0ff 82%, #ff7ac8 100%); background-size: 300% 300%; animation: holo 7s ease-in-out infinite alternate; }
-.card.leg-red { --a: #d0213a; --b: #4a0612; --ci: #f8dc8a; --line-c: rgba(248,220,138,.45); --chip: rgba(255,255,255,.12); --trim: #f0c75e; }
-.card.leg-black { --a: #3a3a3d; --b: #050506; --ci: #e8c66a; --line-c: rgba(232,198,106,.45); --chip: rgba(232,198,106,.14); --trim: #e8c66a; }
-.card.leg-pearl { --a: #fffdf8; --b: #e7e1d6; --ci: #2a2620; --trim: transparent; }
+.card.leg-red { --a: #e0324a; --m: #a5132b; --b: #4a0612; --glow: rgba(255, 120, 40, .35); --ci: #f8dc8a; --line-c: rgba(248,220,138,.45); --chip: rgba(255,255,255,.12); --trim: #f0c75e; }
+.card.leg-black { --a: #45454a; --m: #1c1c20; --b: #050506; --glow: rgba(232, 198, 106, .18); --ci: #e8c66a; --line-c: rgba(232,198,106,.45); --chip: rgba(232,198,106,.14); --trim: #e8c66a; }
+.card.leg-pearl { --a: #fffdf8; --m: #f1ece2; --b: #e7e1d6; --ci: #2a2620; --trim: transparent; }
 .card.leg-pearl .holo { mix-blend-mode: normal; opacity: 1; }
 .card .face { position: absolute; inset: 3.2cqi; z-index: 1; clip-path: polygon(50% 0, 100% 6%, 100% 88%, 50% 100%, 0 88%, 0 6%); background: linear-gradient(155deg, #fffdf8, #e9e2d5); }
-.card.leg-icon { --a: #faf3df; --b: #d9c48f; --ci: #3a2a08; --line-c: rgba(58,42,8,.3); --trim: #8a6d1f; }
-.card.leg-icon::before { background: repeating-linear-gradient(135deg, rgba(255,255,255,.22) 0 2cqi, rgba(255,255,255,0) 2cqi 6cqi); }
+.card.leg-icon { --a: #fbf5e3; --m: #ecdcb0; --b: #d9c48f; --glow: rgba(200, 120, 60, .25); --ci: #3a2a08; --line-c: rgba(58,42,8,.3); --trim: #8a6d1f; }
+.card.leg-icon::before { background: linear-gradient(170deg, rgba(255,255,255,.34), rgba(255,255,255,0) 45%), repeating-linear-gradient(135deg, rgba(255,255,255,.22) 0 2cqi, rgba(255,255,255,0) 2cqi 6cqi); }
 @keyframes holo { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
 @media (prefers-reduced-motion: reduce) { .card .holo { animation: none; } }
 </style>
@@ -142,7 +143,7 @@ p { margin: 0; max-width: 68ch; }
   <section class="stack">
     <span class="eyebrow">Question 2</span>
     <h2>Bronze, silver, gold</h2>
-    <p>Fixed. Bronze under 65, silver 65 to 74, gold 75 and up. The metals are a little warmer and brighter than the lab so they hold up next to the special cards.</p>
+    <p>Fixed. Bronze under 65, silver 65 to 74, gold 75 and up. Every card has the lab's faded top border and a soft shift of colour across it: bronze runs copper to rose, silver cool white to lavender, gold lemon to amber. Only the special cards get the thin pinstripe inside the border.</p>
     <div class="options" id="metals"></div>
   </section>
 
