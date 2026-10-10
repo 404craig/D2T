@@ -64,12 +64,18 @@ function rate(data, cfg = DEFAULT_CFG) {
     grp.forEach(c => { c.ovr = Math.round(clamp(cfg.mid + cfg.spread * (c.score - m) / sd, 40, 95)); });
   }
   const topGoals = Math.max(...P.map(p => p.goals));
-  const clubTop = {};
-  for (const c of cards) clubTop[c.club] = Math.max(clubTop[c.club] || 0, c.goals);
+  const clubTop = {}, clubBest = {};
+  for (const c of cards) {
+    clubTop[c.club] = Math.max(clubTop[c.club] || 0, c.goals);
+    const b = clubBest[c.club];
+    if (!b || c.ovr > b.ovr || (c.ovr === b.ovr && c.score > b.score)) clubBest[c.club] = c;
+  }
   for (const c of cards) {
     const cl = club[c.club], b = [];
-    c.tier = c.ovr >= 75 ? 'gold' : c.ovr >= 65 ? 'silver' : 'bronze';
-    if (c.goals === topGoals) { b.push('Golden Boot'); c.tier = 'hero'; }
+    c.teamBest = clubBest[c.club] === c;
+    // Tiers: bronze, silver, gold by rating; each club's best player gets his own card.
+    c.tier = c.teamBest ? 'best' : c.ovr >= 75 ? 'gold' : c.ovr >= 65 ? 'silver' : 'bronze';
+    if (c.goals === topGoals) b.push('Golden Boot');
     else if (c.goals >= 3 && c.goals === clubTop[c.club]) b.push('Club top scorer');
     if (c.apps >= G) b.push('Ever-present');
     if (cl.pos === 1 && c.apps >= 10) b.push('Champion');
@@ -79,8 +85,6 @@ function rate(data, cfg = DEFAULT_CFG) {
     if (c.moved) b.push('Moved mid-season');
     c.badges = b;
     c.clubPos = cl.pos;
-    // Game money, not real fees: 1m at 65, doubling every 6 rating points.
-    c.price = Math.round(clamp(Math.pow(2, (c.ovr - 65) / 6), 0.1, 99) * 10) / 10;
   }
   return cards;
 }

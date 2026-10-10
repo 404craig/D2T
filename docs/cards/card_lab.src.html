@@ -20,7 +20,7 @@
   --bronze-a: #c58f5c; --bronze-b: #8a5a33; --bronze-ink: #2b1a0c;
   --silver-a: #e3e7ea; --silver-b: #9aa4ab; --silver-ink: #1d2327;
   --gold-a: #f3dc8a; --gold-b: #c39a2c; --gold-ink: #2a1f04;
-  --hero-a: #1b3a5c; --hero-b: #0b1626; --hero-ink: #f6e3a1;
+  --best-a: #8c5ce6; --best-b: #2a1159; --best-ink: #f6efff;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -68,13 +68,13 @@ button, select, input { font: inherit; color: inherit; }
 .card:hover { transform: translateY(-3px); }
 .card.silver { --a: var(--silver-a); --b: var(--silver-b); --ci: var(--silver-ink); }
 .card.gold { --a: var(--gold-a); --b: var(--gold-b); --ci: var(--gold-ink); }
-.card.hero { --a: var(--hero-a); --b: var(--hero-b); --ci: var(--hero-ink); }
+.card.best { --a: var(--best-a); --b: var(--best-b); --ci: var(--best-ink); }
 .card .in { position: absolute; inset: 8% 10% 17%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; gap: 1.5cqi; container-type: inline-size; }
 .card .top { display: flex; justify-content: space-between; align-items: flex-start; }
 .card .ovr { font-size: 26cqi; font-weight: 800; line-height: .82; }
 .card .pos { font-size: 10cqi; font-weight: 700; letter-spacing: .04em; }
 .card .fee { font-size: 9cqi; font-weight: 700; padding: 1.5cqi 3.5cqi; border-radius: 99px; background: rgba(0,0,0,.14); white-space: nowrap; }
-.card.hero .fee { background: rgba(255,255,255,.12); }
+.card.best .fee { background: rgba(255,255,255,.14); }
 .card .mono { align-self: center; justify-self: center; overflow: hidden; line-height: 1; font-size: 16cqi; font-weight: 800; opacity: .2; letter-spacing: -.02em; }
 .card .name { font-size: 12cqi; font-weight: 800; text-transform: uppercase; line-height: 1; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-bottom: 1px solid currentColor; padding-bottom: 2cqi; }
 .card .club { font-size: 7.5cqi; font-weight: 600; text-align: center; text-transform: uppercase; letter-spacing: .08em; opacity: .8; margin-top: 1cqi; }
@@ -122,20 +122,6 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 @media (max-width: 420px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } }
 .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: .85rem; color: var(--muted); }
 .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 5px; }
-
-/* Market */
-.market { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
-.mkt h3 { display: flex; justify-content: space-between; align-items: baseline; }
-.mkt h3 small { font: 600 .85rem var(--body); color: var(--muted); }
-.row { display: grid; grid-template-columns: 2.2em minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 7px 0; border-top: 1px solid var(--line); cursor: pointer; background: none; border-left: 0; border-right: 0; border-bottom: 0; text-align: left; width: 100%; }
-.row:hover .who b { color: var(--accent); }
-.row .o { font: 800 1.3rem/1 var(--display); font-variant-numeric: tabular-nums; }
-.row .who { min-width: 0; }
-.row .who b { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 600; }
-.row .who span { font-size: .8rem; color: var(--muted); }
-.row .up { font: 700 1rem var(--display); color: var(--accent); font-variant-numeric: tabular-nums; }
-.row .p { font-variant-numeric: tabular-nums; font-size: .85rem; color: var(--muted); display: block; }
-.row .r { display: grid; justify-items: end; gap: 0; line-height: 1.2; }
 
 /* What matters */
 .ranks { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; counter-reset: r; }
@@ -188,7 +174,7 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
       <aside class="panel formula" aria-label="Rating formula">
         <div class="stack" style="gap:8px">
           <h3>What the overall rating values</h3>
-          <p class="small">Weights for each position. Every card and fee updates as you drag.</p>
+          <p class="small">Weights for each position. Every card updates as you drag.</p>
         </div>
         <div class="tabs" id="posTabs" role="group" aria-label="Position"></div>
         <div class="stack" id="sliders" style="gap:10px"></div>
@@ -207,32 +193,23 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
             <option value="">All positions</option><option value="GK">Goalkeepers</option><option value="DEF">Defenders</option><option value="MID">Midfielders</option><option value="FWD">Forwards</option>
           </select>
           <select id="sort" aria-label="Sort">
-            <option value="ovr">Sort by rating</option><option value="price">Sort by fee</option><option value="apps">Sort by appearances</option><option value="goals">Sort by goals</option>
+            <option value="ovr">Sort by rating</option><option value="apps">Sort by appearances</option><option value="goals">Sort by goals</option>
           </select>
           <input type="search" id="q" placeholder="Find any player" aria-label="Find any player">
         </div>
         <div class="clubline" id="clubline"></div>
         <div class="grid" id="grid"></div>
-        <div class="legend"><span><i style="background:linear-gradient(155deg,var(--bronze-a),var(--bronze-b))"></i>Bronze under 65</span><span><i style="background:linear-gradient(155deg,var(--silver-a),var(--silver-b))"></i>Silver 65 to 74</span><span><i style="background:linear-gradient(155deg,var(--gold-a),var(--gold-b))"></i>Gold 75 and up</span><span><i style="background:linear-gradient(155deg,var(--hero-a),var(--hero-b))"></i>Season hero (Golden Boot)</span><span id="tierCount" class="num"></span></div>
+        <div class="legend"><span><i style="background:linear-gradient(155deg,var(--bronze-a),var(--bronze-b))"></i>Bronze under 65</span><span><i style="background:linear-gradient(155deg,var(--silver-a),var(--silver-b))"></i>Silver 65 to 74</span><span><i style="background:linear-gradient(155deg,var(--gold-a),var(--gold-b))"></i>Gold 75 and up</span><span><i style="background:linear-gradient(155deg,var(--best-a),var(--best-b))"></i>Club's best player</span><span id="tierCount" class="num"></span></div>
       </div>
     </div>
   </section>
 
   <section class="stack">
-    <span class="eyebrow">Transfer window</span>
-    <h2 id="mktTitle">Who could you afford?</h2>
-    <p>The real D2T decision: the best player at each position who beats your current first choice, within a fee you set. This is where rating, fee and position stop being separate numbers.</p>
-    <div class="slider" style="max-width:420px"><label for="budget">Max fee</label><input type="range" id="budget" min="0.5" max="25" step="0.5" value="4"><output id="budgetOut"></output></div>
-    <div class="market" id="market"></div>
-  </section>
-
-  <section class="stack">
     <span class="eyebrow">What matters most to the player</span>
-    <h2>Six things, in order</h2>
+    <h2>Five things, in order</h2>
     <p>D2T is a rebuild: you inherit a relegated squad and climb with signings from the same season. Every screen is a comparison, so the card should answer the comparison questions in the order a player asks them.</p>
     <ol class="ranks">
       <li><div><h3>Overall and position, readable in half a second</h3><p>"Is he better than who I have there?" is the question behind every tap. One big number and a position, top left, exactly where FIFA trained everyone to look. If a player has to read six stats to answer it, the card has failed.</p></div></li>
-      <li><div><h3>The fee, and whether it is a bargain</h3><p>A rebuild is about money. Ronaldo at 93 is useless to Derby if he costs the whole budget. Fee belongs on the front of the card, and the market should show rating gained against fee. With £4m a player, Derby can lift every line: Friedel in goal, Sol Campbell at the back, Hleb in midfield, Anelka up front.</p></div></li>
       <li><div><h3>Will he actually play?</h3><p>Appearances are our most reliable number and the one fans undervalue. A 90-rated player with 9 games is a gamble; FIT makes that visible. In a simulation it can double as injury and availability risk, which gives the stat a real job.</p></div></li>
       <li><div><h3>One real headline number</h3><p>Derived stats are a game. "31 goals in 34" is a memory. Showing the true season figure on the card (goals for attackers, team goals conceded for defenders and keepers) is what makes a 2007/08 card feel like 2007/08, and it lets fans check us. Tenaball showed that verified numbers are the hook.</p></div></li>
       <li><div><h3>A story badge</h3><p>Golden Boot, Ever-present, Champion, Relegated, Debut season, Moved mid-season. All computed from the data, all instantly understood. They do the job FIFA's special cards do and give the collection something to chase.</p></div></li>
@@ -249,7 +226,6 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
       <div class="panel"><h3>Experience starts at the Premier League</h3><p class="small">Torres spent his whole career before this at Atletico Madrid but shows EXP 66 because 2007/08 was his first PL season. Either rename it "PL experience" or add earlier careers.</p></div>
       <div class="panel"><h3>No ages, no minutes</h3><p class="small">Apps count a 2-minute sub the same as 90. With no date of birth there is no potential, decline or youth-prospect story, which a multi-season climb will want.</p></div>
       <div class="panel"><h3>Positions are listings</h3><p class="small">Positions come from squad lists, so Gareth Barry is a defender and Ronaldo a forward. Good enough for GK/DEF/MID/FWD, not for left back versus centre back.</p></div>
-      <div class="panel"><h3>Fees are made up</h3><p class="small">Fee here is game money from the rating curve (1m at 65, doubling every 6 points), not a real transfer fee. Real fees exist in Tenaball's signings boards for big moves only.</p></div>
     </div>
   </section>
 
@@ -275,7 +251,6 @@ const DATA = /*DATA*/;
   const clubInfo = Object.fromEntries(DATA.clubs.map(c => [c.name, c]));
   const G = DATA.clubs[0].p;
   const ord = n => n + (['th', 'st', 'nd', 'rd'][(n % 100 > 10 && n % 100 < 14) ? 0 : n % 10] || 'th');
-  const money = p => '£' + (p >= 10 ? p.toFixed(0) : p.toFixed(1)) + 'm';
   const STAT_NAMES = { GOL: 'Goals', IMP: 'Impact', FIT: 'Fitness', DEF: 'Defence', WIN: 'Winning', EXP: 'Experience', WAL: 'Wall', CLN: 'Clean sheets' };
   const ANATOMY = [
     ['GOL', 'Goals', 'Goals per appearance, with a few average games mixed in so a 1-in-1 cameo does not look like Ronaldo. Square-root scaled against the season best, so 31 in 34 still stands out from 24 in 36.', 'apps, goals'],
@@ -292,9 +267,9 @@ const DATA = /*DATA*/;
   function badgeLine(c) { return c.badges.find(b => b !== 'Relegated' && b !== 'Moved mid-season') || ''; }
   function cardHTML(c, tag) {
     const stats = faceKeys(c).map(k => `<span><b>${c.stats[k]}</b><i>${k}</i></span>`).join('');
-    const label = `${c.name}, ${c.pos}, ${c.club}, rated ${c.ovr}, fee ${money(c.price)}`;
+    const label = `${c.name}, ${c.pos}, ${c.club}, rated ${c.ovr}`;
     return `<${tag || 'button'} class="card ${c.tier}" data-i="${c.i}" aria-label="${esc(label)}" ${tag ? '' : 'type="button"'}>
-      <div class="in"><div class="top"><div><div class="ovr num">${c.ovr}</div><div class="pos">${c.pos}</div></div><div class="fee">${money(c.price)}</div></div>
+      <div class="in"><div class="top"><div><div class="ovr num">${c.ovr}</div><div class="pos">${c.pos}</div></div><div class="fee">07/08</div></div>
       <div class="mono">${esc(initials(c))}</div>
       <div><div class="name">${esc(nickname(c.name))}</div><div class="club">${esc(c.club)}</div></div>
       <div class="stats">${stats}</div>
@@ -309,7 +284,7 @@ const DATA = /*DATA*/;
 
   function renderHero() {
     const pick = (club, pos) => cards.filter(c => c.club === club && (!pos || c.pos === pos)).sort((a, b) => b.ovr - a.ovr)[0];
-    const hero = cards.find(c => c.tier === 'hero');
+    const hero = cards.find(c => c.club === 'Man Utd' && c.teamBest);
     const list = [pick('Liverpool', 'MID'), hero, pick('Derby')].filter(Boolean);
     $('heroCards').innerHTML = list.map(c => cardHTML(c)).join('');
   }
@@ -336,23 +311,9 @@ const DATA = /*DATA*/;
     const key = state.sort;
     list = list.slice().sort((a, b) => (b[key] - a[key]) || (b.score - a.score));
     $('grid').innerHTML = list.slice(0, 80).map(c => cardHTML(c)).join('') || '<p class="small">No players match.</p>';
-    const t = { hero: 0, gold: 0, silver: 0, bronze: 0 };
+    const t = { best: 0, gold: 0, silver: 0, bronze: 0 };
     cards.forEach(c => t[c.tier]++);
-    $('tierCount').textContent = `Whole season: ${t.gold + t.hero} gold, ${t.silver} silver, ${t.bronze} bronze`;
-  }
-  function renderMarket() {
-    const budget = +$('budget').value;
-    $('budgetOut').textContent = money(budget);
-    $('mktTitle').textContent = `Who could ${state.club} afford?`;
-    const xi = bestXI(state.club).xi;
-    $('market').innerHTML = ['GK', 'DEF', 'MID', 'FWD'].map(pos => {
-      const mine = xi.filter(c => c.pos === pos);
-      const bar = mine.length ? Math.min(...mine.map(c => c.ovr)) : 40;
-      const pool = cards.filter(c => c.pos === pos && c.club !== state.club && c.price <= budget && c.ovr > bar)
-        .sort((a, b) => b.ovr - a.ovr || a.price - b.price).slice(0, 5);
-      const rows = pool.map(c => `<button class="row" type="button" data-i="${c.i}"><span class="o">${c.ovr}</span><span class="who"><b>${esc(c.name)}</b><span>${esc(c.club)} · ${c.apps} apps${c.pos === 'GK' ? '' : ', ' + c.goals + ' goals'}</span></span><span class="r"><span class="up">+${c.ovr - bar}</span><span class="p">${money(c.price)}</span></span></button>`).join('');
-      return `<div class="panel mkt"><h3>${{ GK: 'Goalkeeper', DEF: 'Defenders', MID: 'Midfield', FWD: 'Attack' }[pos]} <small>beat your ${bar}</small></h3><div>${rows || '<p class="small">Nobody better at this fee. Raise the max fee.</p>'}</div></div>`;
-    }).join('');
+    $('tierCount').textContent = `Whole season: ${t.best} club's best, ${t.gold} gold, ${t.silver} silver, ${t.bronze} bronze`;
   }
   function whyRows(c) {
     const r = c.raw, cl = clubInfo[c.club], sh = Math.min(c.apps, G);
@@ -382,7 +343,6 @@ const DATA = /*DATA*/;
           <span class="stat"><b>${c.apps}</b><span>Apps</span></span>
           <span class="stat"><b>${c.goals}</b><span>Goals</span></span>
           <span class="stat"><b>${c.prevApps + c.apps}</b><span>PL apps total</span></span>
-          <span class="stat"><b>${money(c.price)}</b><span>Game fee</span></span>
         </div>
         <p class="small"><b style="color:var(--ink)">2006/07:</b> ${last}</p>
         <div style="overflow-x:auto"><table class="why"><tbody>${whyRows(c)}</tbody></table></div>
@@ -399,13 +359,13 @@ const DATA = /*DATA*/;
     $('shrink').value = cfg.shrink; $('shrinkOut').textContent = cfg.shrink;
     $('spread').value = cfg.spread; $('spreadOut').textContent = cfg.spread;
     $('attenuate').checked = cfg.attenuate;
-    renderHero(); renderClubline(); renderGrid(); renderMarket();
+    renderHero(); renderClubline(); renderGrid();
   }
 
   $('club').innerHTML = DATA.clubs.map(c => `<option value="${esc(c.name)}">${ord(c.pos)} ${esc(c.name)} (${c.pts} pts)</option>`).join('');
   if (!clubInfo[state.club]) state.club = 'Derby';
   $('club').value = state.club;
-  $('club').addEventListener('change', e => { state.club = e.target.value; state.q = ''; $('q').value = ''; store.set('d2t-card-club', state.club); renderClubline(); renderGrid(); renderMarket(); });
+  $('club').addEventListener('change', e => { state.club = e.target.value; state.q = ''; $('q').value = ''; store.set('d2t-card-club', state.club); renderClubline(); renderGrid(); });
   $('pos').addEventListener('change', e => { state.pos = e.target.value; renderGrid(); });
   $('sort').addEventListener('change', e => { state.sort = e.target.value; renderGrid(); });
   $('q').addEventListener('input', e => { state.q = e.target.value; renderGrid(); });
@@ -415,7 +375,6 @@ const DATA = /*DATA*/;
   $('spread').addEventListener('input', e => { cfg.spread = +e.target.value; recompute(); });
   $('attenuate').addEventListener('change', e => { cfg.attenuate = e.target.checked; recompute(); });
   $('reset').addEventListener('click', () => { cfg = clone(DEFAULT_CFG); renderTabs(); recompute(); });
-  $('budget').addEventListener('input', renderMarket);
   document.addEventListener('click', e => {
     const t = e.target.closest('[data-i]');
     if (t && !t.closest('#sheet')) { openSheet(+t.dataset.i); return; }

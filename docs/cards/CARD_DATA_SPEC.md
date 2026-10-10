@@ -35,7 +35,6 @@ Written 10 October 2026. Purpose: agree what goes on a D2T player card (simple v
 | FA Cup and League Cup finals | same | Club winners only, not who played |
 | Title medals, two-club champions, title captains | `PL_MANAGERS_2026-10-03.md` | Badges |
 | Minutes, penalties, headers, free kicks, streaks | `PL_SCORING_2026-10-03.md` | Top 10s only |
-| Real transfer fees | `PL_SIGNINGS`, `PL_SALES`, `PL_TRANSFERS_GROUNDS` | Big moves only, mostly recent |
 | Champions League apps, goals, assists, minutes by season | `cups/ucl/cl_player_seasons_uefa.csv` | Every UCL player-season. Needs name matching to PL players |
 | International caps, some dates of birth | `intl/intl/N1_*`, `N3_*`, `N4_*` | Selected nations only |
 | World Cup and Euro winners who played in the PL | `PL_SQUADS_DERBIES_2026-10-03.md` | Badges |
@@ -80,8 +79,7 @@ Everything here exists for all 34 seasons once the gathering is done.
 | Name, club, season | | Have |
 | Age that season | Age on 1 September | Gather: date of birth |
 | Nationality | Text, not an emoji flag (Tenaball lesson 4) | Have |
-| Fee | Game money from the rating | Formula |
-| Tier | Bronze, silver, gold, hero | Formula |
+| Card type | Bronze, silver, gold by rating; club's best player (one per club per season); legend (rule to be agreed). Colours and layout in `card_styles.html` | Formula |
 | Headline line | The real season: "31 goals, 6 assists, 34 apps" or "14 clean sheets, 29 apps" | Have goals and apps; gather assists and clean sheets |
 | One badge | The best story: Golden Boot, PFA Player of the Year, Champion, Ever-present, Debut season and so on | Mostly have |
 | Six face stats | Below | |
@@ -135,7 +133,9 @@ Checks, following the Tenaball rules:
 4. **Minutes before 2006/07:** worth a second gathering job (Transfermarkt or 11v11), or accept appearances only for the early era?
 5. **Opta detail as a single source:** acceptable since it is the league's own data?
 6. **Scope:** a pilot on 2007/08 (the lab season), checked end to end and shown in the lab, then the other 33 seasons. Recommended.
-7. **Fees:** keep game money from the rating, or show real fees where Tenaball has them?
+7. **Legend rule:** what earns a legend card (see `card_styles.html`).
+
+Decided 10 October 2026: no transfer value or fee on cards.
 
 ## 7. Open questions for the research itself
 
