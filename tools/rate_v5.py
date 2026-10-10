@@ -198,9 +198,15 @@ for r in rows:
         if sn and (pid, sn) in lp:
             parts.append((w, lp[(pid, sn)]))
     lp_score = sum(w * v for w, v in parts) / sum(w for w, _ in parts) / 20  # 0 to 1
+    lp1 = lp.get((pid, prev)) if prev else None
+    lp2 = lp.get((pid, prev2)) if prev2 else None
+    r["feat_rep"] = {"lp0": parts[0][1] / 20, "lp1": (lp1 if lp1 is not None else parts[0][1]) / 20,
+                     "lp2": (lp2 if lp2 is not None else parts[0][1]) / 20,
+                     "career": math.log1p(career_apps[pid]) / math.log1p(400)}
     aw = awards.get((season, nm(r["player"])), 0) + (0.6 if r["goals"] == top_goals else 0)
     ucl = min(ucl_min.get(nm(r["player"]), 0) / 900, 1.2) + (0.5 if ucl_winner and nm(ucl_winner) in nm(r["club"] + ("united" if r["club"] == "Man Utd" else "")) and r["apps"] >= 10 else 0)
     r["awards_pts"], r["titles"], r["lp"], r["ucl"] = aw, 0, round(lp_score * 20, 1), round(ucl, 2)
+    r["feat_rep"].update({"awards": min(aw, 2), "ucl": ucl})
     r["REP"] = (P["W_LP"] * lp_score + P["W_AW"] * min(aw, 2) + P["W_UCL"] * ucl
                 + P["W_CAR"] * math.log1p(career_apps[pid]) / math.log1p(400))
 
@@ -249,6 +255,7 @@ for r in rows:
                      "ovr": r["ovr"], "tier": tier, "stats": r["face"], "apps": r["apps"], "goals": r["goals"],
                      "assists": r["goal_assist"], "cleanSheets": r["clean_sheet"], "wdl": [r["wins"], r["draws"], r["losses"]],
                      "withPPG": r["with_ppg"], "withoutPPG": r["without_ppg"], "withoutGames": r["without_g"],
-                     "minutes": r["mins_played"], "goalsConceded": r["goals_conceded"], "awardsPts": r["awards_pts"], "role": r.get("role", ""), "lpPoints": r["lp"], "ucl": r["ucl"], "titles": r["titles"], "flag": r["flag"]})
+                     "minutes": r["mins_played"], "goalsConceded": r["goals_conceded"], "awardsPts": r["awards_pts"], "role": r.get("role", ""), "lpPoints": r["lp"], "feat": {**{k: round(v, 4) for k, v in r["z"].items()}, **{k: round(v, 4) for k, v in r["feat_rep"].items()},
+                     "games": round(r["games"], 1), "starts": int(r["lu"]["starts"]) if r.get("lu") else r["apps"], "perf": round(r["perf"], 4)}, "ucl": r["ucl"], "titles": r["titles"], "flag": r["flag"]})
 json.dump({"season": season, "conFromClub": not has_gc, "clubs": table, "players": out_rows}, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
 print(season, len(out_rows), "rated; GK conceded from", "feed" if has_gc else "club record (no per-player data)")

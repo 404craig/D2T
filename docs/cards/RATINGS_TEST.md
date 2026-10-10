@@ -96,3 +96,21 @@ Biggest remaining disagreements:
 - Starters at bottom clubs rated far too low: Shay Given 61 (86), Norwich 2019/20 regulars 55 to 61 (69 to 77), Newcastle 2008/09 defenders 58 to 61 (72 to 73), Ravanelli 71 (86).
 - Squad and utility players at title-winning clubs too high: O'Shea 90 (76), Phil Neville 89 (75), Beresford 90 (76), Giggs 2008/09 95 (83).
 - Too many 90+ cards (13 to 15 a season) and golds (about 110): tier thresholds or the curve need tightening.
+
+## Fit to the panel (`tools/fit_panel.py`)
+
+Craig preferred the panel's ratings (Van Dijk and Salah above Henderson). So instead of hand-tuning, a ridge regression learns the weights that best reproduce the panel, using only verified-data inputs: each position's stat z-scores, league position points (this season, last, two ago), awards, Champions League minutes, career appearances, share of games started and minutes played. The output is then stretched back to the panel's spread (the fit squeezes ratings toward the middle).
+
+Validation: each season scored by a model trained only on the other two seasons.
+
+| | Agreement (unseen season) | 08/09 | 19/20 | 96/97 | Avg gap |
+|---|---|---|---|---|---|
+| v5 hand-tuned | 0.842 | 0.825 | 0.896 | 0.814 | 4.9 |
+| Learned weights | 0.882 | 0.880 | 0.939 | 0.851 | 2.8 |
+
+Strongest learned signals (rating points per standard deviation): league position last season +1.4, forward goals +1.0, league position this season +0.8, share of starts +0.8, defenders' difference maker +0.8, minutes +0.7, Champions League minutes +0.7, league position two seasons ago +0.7, midfielders' difference maker, goals and assists +0.5 to +0.7, awards +0.4.
+
+Results (panel in brackets): 2019/20 De Bruyne 97 (94), Salah 93 (91), Van Dijk 90 (92), Alexander-Arnold 90, Henderson 89 (89), Wijnaldum 88 (86), Vardy 88 (88), Fabinho 81 (87). 2008/09 Gerrard 95 (92), Ronaldo 94 (94), Lampard 93, Ferdinand 84 (87), Modric 80 (86), Mascherano 79 (85). 1996/97 Shearer 96 (93), Beckham, Cantona and Schmeichel 90 (89 to 90), Keane 81 (85), Juninho 81 (88). 90+ cards per season: 4 to 7.
+
+Still off: holding midfielders (Fabinho, Mascherano) and stars at weak clubs (Given 73 against 86, Modric, Juninho, Ravanelli) a few points low; utility players at strong clubs (O'Shea, Phil Neville) about 8 high. With a 75.7 average, the gold cut-off at 75 makes over half the cards gold, so tier thresholds need moving (for example gold 82+, silver 72 to 81).
+Caution: three seasons and 383 panel players is a small training set, and the panel is opinion. More blind-panel seasons would make the weights sturdier.
