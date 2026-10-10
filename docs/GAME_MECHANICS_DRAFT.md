@@ -1,57 +1,52 @@
-# Draft: spins and card odds (10 October 2026)
+# Card odds and calibration against "DROP2TOP Game Rules v0.2" (10 October 2026)
 
-The repo has no written rules for spins yet, so this is a proposal with simulated numbers, for Craig and Aiden to agree or change. Simulator: `tools/sim_game.py`; raw results: `docs/cards/sim_results.json`.
+The rules are the D2T main session's "DROP2TOP Game Rules v0.2" doc. An earlier draft in this file invented its own spin rules; it is replaced by this one. Simulator: `tools/sim_rules_v02.py`; results: `docs/cards/sim_rules_v02.json`.
 
-## What was simulated
+## Rules simulated (from v0.2)
 
-- You take over a real relegated side (bottom three, any season 1992/93 to 2025/26) with its real squad. Typical starting best XI: about 71.
-- Each spin gives one card from any season (cards with 10+ apps). You keep it if it beats the weakest player in your best XI (1-4-4-2) at that position.
-- Spins come before the season ("pre-season") and before each matchday ("per game").
-- Matches: each side's goals are Poisson, with the rate set by the two best-XI ratings and home advantage. Fitted on all 13,166 real Premier League results: rate = exp(0.104 + 0.276 at home + 0.0475 x rating gap). Check: from the real squads, the real champion wins the simulated season about half the time, which is realistic.
-- The other 19 clubs are that season's real sides. About 2,400 simulated seasons per setting (title chances are accurate to roughly half a point).
+- Pick one of three relegated club-seasons (103 since 1992/93). Your team is exactly 11.
+- 17 rolls a season: 3 before GW1; 1 before GW4, 7, 10, 13, 16, 19; 3 in January (before GW21); 1 before GW24, 27, 30, 33, 36.
+- Each roll shows 3 cards; sign one (replacing a player) or pass. 5 respins a season.
+- Cards come from your club's season (players with 10+ games, not your club, never the same player twice); legends come from any season (here: each player's best season, 24 players whose best season is 93+).
+- Card levels are season-relative within position. Purple here is the best ~3.5% in each broad position, standing in for "best in each detailed position" until detailed positions exist.
+- Raiding: the selling club loses strength and its remaining real wins and draws can drop (chance 3x the strength lost).
+- Your 38 matches are simulated; the other 342 results are history, changed only by raiding.
 
-## Card categories (checked in this order)
+Recruiting styles: none; casual (signs a random card that improves the XI, never respins); strong (signs the best card, respins when no card adds 2+ to a shirt, picks the strongest of the three clubs).
 
-| Category | Rule | Share of all cards (10+ apps) |
-|---|---|---|
-| Legend | rated 93+ | 0.5% (72 cards) |
-| Club's best (purple) | top rated player at his club that season | 4.7% |
-| Gold | 80+ | 12.1% |
-| Silver | 70 to 79 | 57.3% |
-| Bronze | under 70 | 25.4% |
+## How many of each card you see (per season)
 
-## Results
+Each roll shows 3 cards, so 17 rolls show 51 cards, plus 3 more per respin used.
 
-Title = finish 1st. Per season = cards of each category you would see in that many spins.
+| Card | v0.2 share | Seen per season (casual, 51 cards) | Signed |
+|---|---|---|---|
+| Legend | 0.5% | about 0.26 (one run in four) | when seen |
+| Purple | 2.5% | about 1.4 | usually |
+| Gold | 17% | about 8.8 | most |
+| Silver | 35% | about 18 | some |
+| Bronze | 45% | about 22 | rarely |
 
-| Odds | Pre-season spins | Spins per game | Title | Top 4 | Stay up | Legends seen | Purples | Golds |
-|---|---|---|---|---|---|---|---|---|
-| Natural (as above) | 0 | 1 | 0.0% | 7% | 96% | 0.2 | 1.7 | 4.6 |
-| Natural | 10 | 1 | 1.0% | 21% | 99% | 0.3 | 2.2 | 5.8 |
-| Natural | 0 | 2 | 1.5% | 28% | 100% | 0.4 | 3.6 | 9.2 |
-| Natural | 10 | 2 | 3.0% | 40% | 100% | 0.5 | 4.1 | 10.5 |
-| Generous (1 / 6 / 20 / 45 / 28%) | 5 | 1 | 2.0% | 28% | 99% | 0.4 | 2.6 | 8.7 |
-| Generous | 10 | 1 | 2.7% | 41% | 100% | 0.5 | 2.9 | 9.7 |
-| Generous | 0 | 2 | 3.8% | 47% | 100% | 0.8 | 4.6 | 15.5 |
+## Calibration against the v0.2 targets
 
-## Proposal for about a 2% title chance
+| Setting | Derby 07/08, no signings | No signings: stay up | Casual: stay up | Strong: top half | Strong: title |
+|---|---|---|---|---|---|
+| Target (v0.2) | 20th, 10 to 20 pts | (should mostly go down) | about 50% | top half realistic | about 2% |
+| v0.2 shares, engine fitted on history, every signing a natural fit | 19.8th, 24 pts | 42% | 96% | 93% | 5.4% |
+| Steeper engine (0.08), v0.2 shares, natural fit | 20th, 13 pts | 18% | 95% | 98% | 16% |
+| Steeper engine, v0.2 shares, fit costs (50% green, 35% amber, 15% red) | 20th, 13 pts | 18% | 87% | 89% | 3.6% |
+| **Steeper engine, middle shares, fit costs** | **20th, 13 pts** | **19%** | **78%** | **82%** | **2.3%** |
+| Steeper engine, tough shares, fit costs | 20th, 13 pts | 18% | 69% | 71% | 1.2% |
 
-**5 pre-season spins, then 1 spin before every matchday (43 spins a season), with these odds per spin:**
+Middle shares: bronze 53%, silver 32%, gold 12.5%, purple 2%, legend 0.5%. Tough: 60 / 30 / 8.5 / 1.2 / 0.3.
 
-| Card | Chance per spin | In a season (43 spins) |
-|---|---|---|
-| Legend | 1 in 100 | about 0.4 (one every 2 to 3 seasons) |
-| Club's best (purple) | 6 in 100 | about 2.6 |
-| Gold | 20 in 100 | about 8.7 |
-| Silver | 45 in 100 | about 19 |
-| Bronze | 28 in 100 | about 12 |
+## What it means
 
-Simulated outcome: title 2.0%, top four 28%, average finish 6.7th, stay up 99%.
-Equivalent: natural odds with 2 spins per game and no pre-season spins gives 1.5%.
+1. **The match engine needs to be steeper than history.** Fitted on all real results, it lets unchanged relegated squads stay up 42% of the time and gives Derby 24 points. A rating-gap weight of 0.08 (history's is 0.0475) gives Derby 13 points and relegated squads 18% survival.
+2. **Position fit matters a lot.** If every signing slots in as a natural fit, 17 rolls rebuild the whole XI and strong runs win the title 16% of the time. The rules' amber (90%) and red (70%) costs bring that down; how often a card fits naturally depends on the detailed positions data, so it needs re-running once we have it.
+3. **With the middle shares, strong runs win the title 2.3% of the time** and reach the top half 82% of the time, which matches the targets.
+4. **Casual survival is still too high (78% against about 50%).** Options: a slightly steeper engine still, fewer gold cards, or accepting that anyone who signs sensible players usually stays up.
 
-## What this shows, and open questions
+## Differences with the card work in this repo
 
-- Spins are strong. With any setting that gives a 2% title chance, almost everyone stays up (99%+). If the game should also make survival hard, spins need a cost: limited squad slots, a transfer budget, a cap on how many spins you can keep, injuries, or a card that replaces your worst player whether it is better or not.
-- The title is mostly decided by luck on legends and purples: one legend card lifts a best XI by about 2 points.
-- Not modelled yet: fitness, injuries, suspensions, form, opponents strengthening, cup games, or a multi-season "Drop2Top" climb. Each would change the numbers; the simulator is set up to test them.
-- "Legend" here means a 93+ season card. If legends become a hand-picked or rule-based set (see card styles), the odds should be re-run.
+- v0.2 levels are season-relative by position (bronze lower third, gold top fifth, purple the best in each position). The card styles work used absolute ratings (gold 80+) and purple for each club's best player. These need one agreed definition; the simulation uses v0.2's.
+- Legends: v0.2 says "an all-time great, best season". The simulation uses players whose best season rates 93+ (24 players); the real list is still to be agreed.
