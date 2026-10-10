@@ -1,0 +1,555 @@
+season,club_feed,feed_id,name,feed_pos,appearances,goals,goal_assist,clean_sheet,wins,draws,losses,mins_played,game_started,goals_conceded,saves,yellow_card,red_card,own_goals
+1997/98,Arsenal,11,Nigel Winterburn,D,36,1,5,16,22,9,5,90,1,2,0,3,0,0
+1997/98,Arsenal,19,Ray Parlour,M,34,5,3,9,21,8,5,90,1,2,0,5,0,0
+1997/98,Arsenal,1132,Patrick Vieira,M,33,2,4,15,20,9,4,45,1,2,0,7,1,0
+1997/98,Arsenal,1299,Marc Overmars,M,32,12,5,11,22,6,4,90,1,2,0,0,0,0
+1997/98,Arsenal,1300,Emmanuel Petit,M,32,2,7,13,19,9,4,0,0,0,0,4,1,0
+1997/98,Arsenal,989,David Platt,M,31,3,3,3,18,7,6,90,1,2,0,4,0,0
+1997/98,Arsenal,1,David Seaman,G,31,0,0,13,18,8,5,90,1,2,4,1,0,0
+1997/98,Arsenal,991,Dennis Bergkamp,F,28,16,11,14,18,8,2,0,0,0,0,7,0,0
+1997/98,Arsenal,13,Lee Dixon,D,28,0,1,11,17,6,5,90,1,2,0,4,0,0
+1997/98,Arsenal,3,Tony Adams,D,26,3,1,16,17,4,5,90,1,2,0,6,0,0
+1997/98,Arsenal,1135,Nicolas Anelka,F,26,6,6,2,17,6,3,80,1,2,0,2,0,0
+1997/98,Arsenal,9,Steve Bould,D,24,0,2,7,14,8,2,45,0,0,0,9,0,0
+1997/98,Arsenal,29,Ian Wright,F,24,10,3,5,12,6,6,90,1,2,0,6,0,0
+1997/98,Arsenal,1297,Gilles Grimandi,D,22,1,0,6,11,7,4,90,1,2,0,6,0,0
+1997/98,Arsenal,14,Martin Keown,D,18,0,0,9,11,3,4,0,0,0,0,1,1,0
+1997/98,Arsenal,842,Stephen Hughes,M,17,2,1,4,10,4,3,0,0,0,0,0,0,0
+1997/98,Arsenal,1305,Christopher Wreh,F,16,3,1,0,11,0,5,10,0,0,0,0,0,0
+1997/98,Arsenal,1306,Luís Boa Morte,M,15,0,0,1,7,5,3,0,0,0,0,2,0,0
+1997/98,Arsenal,1129,Remi Garde,D,10,0,0,1,8,2,0,0,0,0,0,3,0,0
+1997/98,Arsenal,1296,Alexander Manninger,G,7,0,0,6,5,1,1,0,0,0,0,0,0,0
+1997/98,Arsenal,1131,Matt Upson,D,5,0,0,2,2,2,1,0,0,0,0,0,0,0
+1997/98,Arsenal,10,Scott Marshall,D,3,0,0,1,2,0,1,0,0,0,0,0,0,0
+1997/98,Arsenal,1304,Alberto Mendez,M,3,0,0,0,0,1,2,0,0,0,0,0,0,0
+1997/98,Arsenal,5,Gavin McGowan,D,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1997/98,Arsenal,1134,Isaiah Rankin,F,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1997/98,Arsenal,1303,Paolo Vernazza,M,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1997/98,Aston Villa,35,Ugo Ehiogu,D,37,2,1,8,17,5,15,0,0,0,0,4,1,0
+1997/98,Aston Villa,72,Alan Wright,D,37,0,4,9,17,6,14,0,0,0,0,1,0,0
+1997/98,Aston Villa,897,Simon Grayson,D,33,0,2,8,15,5,13,0,0,0,0,2,0,0
+1997/98,Aston Villa,153,Gareth Southgate,D,32,0,0,9,15,4,13,0,0,0,0,2,0,0
+1997/98,Aston Villa,847,Ian Taylor,M,32,6,2,4,13,5,14,0,0,0,0,6,0,0
+1997/98,Aston Villa,903,Mark Draper,M,31,3,4,7,14,5,12,0,0,0,0,4,0,0
+1997/98,Aston Villa,32,Mark Bosnich,G,30,0,0,9,15,5,10,0,0,0,0,1,0,0
+1997/98,Aston Villa,59,Dwight Yorke,M,30,12,3,7,15,3,12,0,0,0,0,5,0,0
+1997/98,Aston Villa,41,Steve Staunton,D,27,1,4,4,13,5,9,0,0,0,0,5,0,0
+1997/98,Aston Villa,909,Julian Joachim,F,26,8,2,4,12,3,11,0,0,0,0,0,0,0
+1997/98,Aston Villa,627,Stan Collymore,F,25,6,4,3,10,3,12,0,0,0,0,3,1,0
+1997/98,Aston Villa,1139,Fernando Nélson,D,25,0,5,3,10,5,10,0,0,0,0,1,0,0
+1997/98,Aston Villa,995,Savo Milosevic,F,23,7,4,0,8,5,10,0,0,0,0,5,0,0
+1997/98,Aston Villa,660,Riccardo Scimeca,D,21,0,0,2,8,4,9,0,0,0,0,0,0,0
+1997/98,Aston Villa,396,Gary Charles,D,18,1,1,2,8,4,6,0,0,0,0,1,0,0
+1997/98,Aston Villa,848,Lee Hendrie,M,17,3,2,3,11,1,5,0,0,0,0,1,0,0
+1997/98,Aston Villa,34,Michael Oakes,G,8,0,0,0,2,1,5,0,0,0,0,0,0,0
+1997/98,Aston Villa,663,Darren Byfield,F,7,0,0,0,4,1,2,0,0,0,0,2,0,0
+1997/98,Aston Villa,1020,Sasa Curcic,M,7,0,0,0,4,1,2,0,0,0,0,0,0,0
+1997/98,Aston Villa,112,Andy Townsend,M,3,0,0,0,0,0,3,0,0,0,0,0,0,0
+1997/98,Aston Villa,1308,Gareth Barry,M,2,0,0,1,2,0,0,0,0,0,0,0,0,0
+1997/98,Aston Villa,997,Richard Walker,F,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+1997/98,Aston Villa,998,Richard Walker,F,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+1997/98,Barnsley,1322,Neil Redfearn,M,37,10,2,6,10,5,22,0,0,0,0,3,0,0
+1997/98,Barnsley,98,Darren Barnard,D,35,2,4,5,9,5,21,0,0,0,0,7,1,0
+1997/98,Barnsley,1316,Nicky Eaden,D,35,0,1,6,10,5,20,0,0,0,0,4,0,0
+1997/98,Barnsley,1317,Adie Moses,D,35,0,0,4,9,5,21,0,0,0,0,8,0,1
+1997/98,Barnsley,1320,Martin Bullock,M,33,0,8,3,8,4,21,0,0,0,0,3,0,0
+1997/98,Barnsley,1311,David Watson,G,30,0,0,5,9,4,17,0,0,0,0,0,0,0
+1997/98,Barnsley,932,Ashley Ward,F,29,8,2,4,8,4,17,0,0,0,0,5,0,0
+1997/98,Barnsley,1315,Arjan De Zeeuw,D,26,0,1,4,6,4,16,0,0,0,0,5,0,0
+1997/98,Barnsley,1326,Andy Liddell,F,26,1,0,0,7,3,16,0,0,0,0,1,0,0
+1997/98,Barnsley,1319,Darren Sheridan,M,26,0,2,5,7,3,16,0,0,0,0,5,1,0
+1997/98,Barnsley,1479,Eric Tinkler,M,25,2,0,3,7,3,15,0,0,0,0,4,0,0
+1997/98,Barnsley,1324,Georgi Hristov,F,23,4,0,0,4,3,16,0,0,0,0,3,1,0
+1997/98,Barnsley,366,John Hendrie,F,20,1,0,1,4,5,11,0,0,0,0,0,0,0
+1997/98,Barnsley,1325,Clint Marcelle,F,20,0,1,1,4,2,14,0,0,0,0,0,0,0
+1997/98,Barnsley,1323,Jovo Bosancic,M,17,2,0,0,2,3,12,0,0,0,0,7,0,0
+1997/98,Barnsley,718,Matty Appleby,M,15,0,0,1,3,1,11,0,0,0,0,2,0,0
+1997/98,Barnsley,773,Jan Åge Fjørtoft,F,15,6,0,0,5,2,8,0,0,0,0,0,0,0
+1997/98,Barnsley,1318,Scott Jones,D,12,1,0,1,3,1,8,0,0,0,0,0,0,0
+1997/98,Barnsley,1314,Ales Krizan,D,12,0,1,1,2,2,8,0,0,0,0,2,0,0
+1997/98,Barnsley,1313,Chris Morgan,D,11,0,0,2,4,1,6,0,0,0,0,3,1,0
+1997/98,Barnsley,1481,Lars Leese,G,9,0,0,1,2,1,6,0,0,0,0,0,0,0
+1997/98,Barnsley,1312,Peter Markstedt,D,7,0,0,2,3,0,4,0,0,0,0,2,0,0
+1997/98,Barnsley,653,Peter Shirtliff,D,4,0,0,0,0,1,3,0,0,0,0,1,0,0
+1997/98,Barnsley,368,Paul Wilkinson,F,4,0,1,1,1,0,3,0,0,0,0,0,0,0
+1997/98,Barnsley,205,Neil Thompson,D,3,0,0,1,1,0,2,0,0,0,0,1,0,0
+1997/98,Barnsley,1480,Laurens Ten Heuvel,F,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1997/98,Blackburn Rovers,524,Jeff Kenna,D,37,0,2,14,16,9,12,0,0,0,0,2,0,1
+1997/98,Blackburn Rovers,1335,Stéphane Henchoz,D,36,0,0,13,15,10,11,0,0,0,0,6,0,1
+1997/98,Blackburn Rovers,390,Chris Sutton,F,35,18,6,12,15,10,10,0,0,0,0,7,1,0
+1997/98,Blackburn Rovers,75,Colin Hendry,D,34,1,1,11,14,9,11,0,0,0,0,7,0,0
+1997/98,Blackburn Rovers,300,Garry Flitcroft,M,33,0,4,8,15,7,11,0,0,0,0,7,0,0
+1997/98,Blackburn Rovers,87,Kevin Gallacher,F,33,16,4,9,15,9,9,0,0,0,0,2,0,0
+1997/98,Blackburn Rovers,78,Tim Sherwood,M,31,5,2,10,11,9,11,0,0,0,0,5,0,0
+1997/98,Blackburn Rovers,80,Jason Wilcox,M,31,4,4,6,12,8,11,0,0,0,0,4,2,0
+1997/98,Blackburn Rovers,1003,Billy McKinlay,M,30,0,0,9,14,7,9,0,0,0,0,8,0,0
+1997/98,Blackburn Rovers,79,Stuart Ripley,M,29,2,8,3,13,7,9,0,0,0,0,0,0,0
+1997/98,Blackburn Rovers,1004,Damien Duff,M,26,4,2,4,9,7,10,0,0,0,0,0,0,0
+1997/98,Blackburn Rovers,519,Tim Flowers,G,25,0,0,9,12,7,7,0,0,0,0,0,1,0
+1997/98,Blackburn Rovers,999,Gary Croft,D,23,1,0,6,11,6,6,0,0,0,0,1,0,0
+1997/98,Blackburn Rovers,1340,Martin Dahlin,F,21,4,0,0,7,5,9,0,0,0,0,2,0,0
+1997/98,Blackburn Rovers,942,Lars Bohinen,M,16,1,3,3,8,5,3,0,0,0,0,0,0,0
+1997/98,Blackburn Rovers,1334,Patrick Valery,D,15,0,0,4,5,6,4,0,0,0,0,2,1,0
+1997/98,Blackburn Rovers,1086,Alan Fettis,G,8,0,0,1,2,1,5,0,0,0,0,0,0,0
+1997/98,Blackburn Rovers,859,John Filan,G,7,0,0,4,4,2,1,0,0,0,0,0,0,0
+1997/98,Blackburn Rovers,96,Ian Pearce,D,5,0,0,0,4,1,0,0,0,0,0,1,0,0
+1997/98,Blackburn Rovers,820,Tore Pedersen,D,5,0,1,1,2,2,1,0,0,0,0,0,0,0
+1997/98,Blackburn Rovers,1339,Anders Andersson,F,4,0,0,0,2,1,1,0,0,0,0,0,0,0
+1997/98,Blackburn Rovers,852,Marlon Broomes,D,4,0,0,1,2,1,1,0,0,0,0,1,0,0
+1997/98,Blackburn Rovers,1005,James Beattie,F,3,0,0,0,1,0,2,0,0,0,0,0,0,0
+1997/98,Blackburn Rovers,1333,Callum Davidson,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1997/98,Bolton Wanderers,1346,Per Frandsen,M,38,2,4,9,9,13,16,0,0,0,0,6,0,0
+1997/98,Bolton Wanderers,548,Gudni Bergsson,D,35,2,0,8,8,13,14,0,0,0,0,8,1,0
+1997/98,Bolton Wanderers,745,Nathan Blake,F,35,12,5,8,8,13,14,0,0,0,0,6,1,0
+1997/98,Bolton Wanderers,1008,Keith Branagan,G,34,0,0,10,9,11,14,0,0,0,0,0,0,0
+1997/98,Bolton Wanderers,1019,Alan Thompson,M,33,9,6,9,9,12,12,0,0,0,0,6,1,0
+1997/98,Bolton Wanderers,362,Jamie Pollock,M,26,1,1,6,4,12,10,0,0,0,0,3,0,0
+1997/98,Bolton Wanderers,356,Andrew Todd,D,25,0,0,6,5,8,12,0,0,0,0,5,1,0
+1997/98,Bolton Wanderers,1344,Mark Fish,D,22,2,0,7,8,6,8,0,0,0,0,0,0,0
+1997/98,Bolton Wanderers,355,Jimmy Phillips,M,22,1,3,5,5,6,11,0,0,0,0,5,0,0
+1997/98,Bolton Wanderers,631,Scott Sellars,M,22,2,4,5,4,9,9,0,0,0,0,7,0,0
+1997/98,Bolton Wanderers,40,Neil Cox,D,21,1,0,4,6,6,9,0,0,0,0,1,0,0
+1997/98,Bolton Wanderers,603,Dean Holdsworth,F,20,3,0,4,7,5,8,0,0,0,0,6,0,0
+1997/98,Bolton Wanderers,194,Peter Beardsley,F,17,2,0,0,1,8,8,0,0,0,0,1,0,0
+1997/98,Bolton Wanderers,1345,Michael Johansen,M,16,1,1,0,3,6,7,0,0,0,0,2,0,0
+1997/98,Bolton Wanderers,1349,Arnar Gunnlaugsson,F,15,0,1,0,1,6,8,0,0,0,0,0,0,0
+1997/98,Bolton Wanderers,1014,Gerry Taggart,D,15,0,0,4,4,6,5,0,0,0,0,4,1,0
+1997/98,Bolton Wanderers,896,Mike Whitlow,D,13,0,1,4,2,6,5,0,0,0,0,0,0,0
+1997/98,Bolton Wanderers,510,John Sheridan,M,12,0,3,2,5,1,6,0,0,0,0,0,0,0
+1997/98,Bolton Wanderers,1348,Bob Taylor,F,12,3,1,1,4,3,5,0,0,0,0,0,0,0
+1997/98,Bolton Wanderers,234,Chris Fairclough,D,11,0,0,0,2,3,6,0,0,0,0,2,0,0
+1997/98,Bolton Wanderers,1023,John McGinlay,F,7,0,0,2,1,3,3,0,0,0,0,1,0,0
+1997/98,Bolton Wanderers,159,John Salako,M,7,0,0,0,2,1,4,0,0,0,0,0,0,0
+1997/98,Bolton Wanderers,892,Gavin Ward,G,6,0,0,0,0,2,4,0,0,0,0,0,0,0
+1997/98,Bolton Wanderers,491,Franz Carr,F,5,0,0,0,0,2,3,0,0,0,0,0,0,0
+1997/98,Bolton Wanderers,715,Robbie Elliott,D,4,0,0,1,1,2,1,0,0,0,0,0,0,0
+1997/98,Bolton Wanderers,1347,Gaetano Giallanza,F,3,0,0,0,1,0,2,0,0,0,0,0,0,0
+1997/98,Bolton Wanderers,1343,Hasney Aljofree,D,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+1997/98,Bolton Wanderers,1011,Steve McAnespie,D,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1997/98,Chelsea,1356,Tore Andre Flo,F,34,11,2,5,16,3,15,0,0,0,0,0,0,0
+1997/98,Chelsea,1148,Frank Leboeuf,D,32,5,4,10,17,3,12,0,0,0,0,7,1,0
+1997/98,Chelsea,954,Dan Petrescu,D,31,5,4,8,17,3,11,0,0,0,0,3,0,0
+1997/98,Chelsea,1149,Roberto Di Matteo,M,30,4,5,7,16,2,12,0,0,0,0,6,0,0
+1997/98,Chelsea,339,Mark Hughes,F,29,9,3,6,14,1,14,0,0,0,0,9,0,0
+1997/98,Chelsea,1350,Ed de Goey,G,28,0,0,12,16,3,9,0,0,0,0,0,0,0
+1997/98,Chelsea,1151,Gianfranco Zola,F,27,8,5,4,13,3,11,0,0,0,0,2,0,0
+1997/98,Chelsea,105,Steve Clarke,D,26,1,3,7,15,1,10,0,0,0,0,2,0,0
+1997/98,Chelsea,70,Graeme Le Saux,D,26,1,4,8,13,3,10,0,0,0,0,3,0,0
+1997/98,Chelsea,107,Dennis Wise,M,26,3,4,8,15,3,8,0,0,0,0,10,0,0
+1997/98,Chelsea,669,Michael Duberry,D,23,0,2,8,12,2,9,0,0,0,0,2,0,1
+1997/98,Chelsea,103,Frank Sinclair,D,22,1,0,7,13,2,7,0,0,0,0,4,1,0
+1997/98,Chelsea,1150,Gianluca Vialli,F,21,11,5,4,10,2,9,0,0,0,0,4,0,0
+1997/98,Chelsea,1029,Mark Nicholls,F,19,3,1,2,13,1,5,0,0,0,0,1,0,0
+1997/98,Chelsea,110,Eddie Newton,M,18,0,0,4,9,0,9,0,0,0,0,2,0,0
+1997/98,Chelsea,1355,Gustavo Poyet,M,14,4,2,3,8,1,5,0,0,0,0,1,0,0
+1997/98,Chelsea,1144,Danny Granville,D,13,0,0,3,7,1,5,0,0,0,0,2,0,0
+1997/98,Chelsea,1027,Jody Morris,M,12,1,1,2,6,0,6,0,0,0,0,0,0,0
+1997/98,Chelsea,102,Andy Myers,D,12,0,0,4,6,1,5,0,0,0,0,0,0,0
+1997/98,Chelsea,1351,Laurent Charvet,D,11,2,0,3,5,0,6,0,0,0,0,3,0,0
+1997/98,Chelsea,93,Dmitri Kharin,G,10,0,0,2,4,0,6,0,0,0,0,0,0,0
+1997/98,Chelsea,856,Paul Hughes,M,9,0,1,1,4,1,4,0,0,0,0,1,0,0
+1997/98,Chelsea,1145,Celestine Babayaro,D,8,0,0,4,6,0,2,0,0,0,0,2,0,0
+1997/98,Chelsea,1352,Bernard Lambourde,D,7,0,0,1,3,1,3,0,0,0,0,2,1,0
+1997/98,Chelsea,1028,Ruud Gullit,F,6,0,0,0,3,0,3,0,0,0,0,0,0,0
+1997/98,Chelsea,1147,Jon Harley,D,3,0,1,0,3,0,0,0,0,0,0,0,0,0
+1997/98,Chelsea,1354,Nick Crittenden,M,2,0,0,0,1,1,0,0,0,0,0,0,0,0
+1997/98,Chelsea,106,David Lee,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1997/98,Coventry City,338,Dion Dublin,F,36,18,10,11,12,15,9,0,0,0,0,4,1,0
+1997/98,Coventry City,1082,Darren Huckerby,F,34,14,1,9,12,13,9,0,0,0,0,9,0,0
+1997/98,Coventry City,154,Richard Shaw,D,33,0,0,10,9,14,10,0,0,0,0,2,0,0
+1997/98,Coventry City,1033,Paul Telfer,D,33,3,3,9,11,13,9,0,0,0,0,9,0,0
+1997/98,Coventry City,256,David Burrows,D,32,0,2,12,11,14,7,0,0,0,0,7,0,0
+1997/98,Coventry City,504,Roland Nilsson,D,32,0,0,13,10,14,8,0,0,0,0,3,0,0
+1997/98,Coventry City,1155,Gary Breen,D,30,1,1,10,10,13,7,0,0,0,0,2,1,0
+1997/98,Coventry City,1360,Trond Egil Soltvedt,M,30,1,4,6,12,13,5,0,0,0,0,1,0,0
+1997/98,Coventry City,860,Marcus Hall,D,25,1,1,6,8,9,8,0,0,0,0,9,0,0
+1997/98,Coventry City,122,Steve Ogrizovic,G,24,0,0,7,4,13,7,0,0,0,0,0,0,0
+1997/98,Coventry City,245,Noel Whelan,F,21,6,2,6,8,8,5,0,0,0,0,4,0,0
+1997/98,Coventry City,1030,Paul Williams,D,20,0,0,3,4,10,6,0,0,0,0,9,2,0
+1997/98,Coventry City,136,Willie Boland,M,19,0,1,3,4,10,5,0,0,0,0,3,0,0
+1997/98,Coventry City,1361,George Boateng,M,14,1,0,5,7,4,3,0,0,0,0,3,1,0
+1997/98,Coventry City,1358,Magnus Hedman,G,14,0,0,6,8,3,3,0,0,0,0,0,0,0
+1997/98,Coventry City,238,Gary McAllister,M,14,0,1,5,4,6,4,0,0,0,0,1,0,0
+1997/98,Coventry City,159,John Salako,M,11,0,1,3,2,5,4,0,0,0,0,1,0,0
+1997/98,Coventry City,1363,Simon Haworth,F,10,0,0,1,0,5,5,0,0,0,0,1,0,0
+1997/98,Coventry City,1366,Viorel Moldovan,F,10,1,0,1,5,3,2,0,0,0,0,0,0,0
+1997/98,Coventry City,1362,Gavin Strachan,M,9,0,0,0,5,2,2,0,0,0,0,0,0,0
+1997/98,Coventry City,1364,Kyle Lightbourne,F,7,0,0,0,1,3,3,0,0,0,0,1,0,0
+1997/98,Coventry City,1157,Michael O'Neill,M,4,0,0,0,1,2,1,0,0,0,0,0,0,0
+1997/98,Coventry City,1158,Andy Ducros,M,3,0,0,0,0,2,1,0,0,0,0,0,0,0
+1997/98,Coventry City,43,Kevin Richardson,M,3,0,0,0,0,2,1,0,0,0,0,0,0,0
+1997/98,Coventry City,1365,Martin Johansen,F,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1997/98,Coventry City,1032,Sam Shilton,M,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1997/98,Coventry City,130,Brian Borrows,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1997/98,Crystal Palace,1368,Kevin Miller,G,38,0,0,6,0,0,0,0,0,0,0,0,0,0
+1997/98,Crystal Palace,151,Dean Gordon,D,37,2,3,6,8,9,20,0,0,0,0,3,0,0
+1997/98,Crystal Palace,1370,Marc Edworthy,D,34,0,1,4,8,6,20,0,0,0,0,6,1,0
+1997/98,Crystal Palace,1371,Hermann Hreidarsson,D,30,2,0,5,5,9,16,0,0,0,0,8,0,1
+1997/98,Crystal Palace,160,Simon Rodger,M,29,2,4,5,7,7,15,0,0,0,0,2,0,0
+1997/98,Crystal Palace,12,Andy Linighan,D,26,0,1,6,6,8,12,0,0,0,0,4,0,0
+1997/98,Crystal Palace,1374,Jamie Fullarton,M,25,1,1,3,4,7,14,0,0,0,0,11,0,0
+1997/98,Crystal Palace,1475,Andy Roberts,D,25,0,1,5,5,7,13,0,0,0,0,5,0,0
+1997/98,Crystal Palace,116,Neil Shipperley,F,25,7,2,2,7,7,11,0,0,0,0,1,0,0
+1997/98,Crystal Palace,873,Bruce Dyer,F,24,4,1,1,5,4,15,0,0,0,0,4,0,0
+1997/98,Crystal Palace,1376,Attilio Lombardo,M,24,5,6,2,6,5,13,0,0,0,0,3,0,0
+1997/98,Crystal Palace,501,Paul Warhurst,D,22,3,3,3,5,7,10,0,0,0,0,3,0,0
+1997/98,Crystal Palace,1372,Jamie Smith,D,18,0,2,0,3,3,12,0,0,0,0,0,1,0
+1997/98,Crystal Palace,1382,Marcus Bent,F,16,5,1,1,3,1,12,0,0,0,0,2,0,0
+1997/98,Crystal Palace,1124,Tomas Brolin,F,13,0,1,0,2,0,11,0,0,0,0,2,0,0
+1997/98,Crystal Palace,1482,Neil Emblen,D,13,0,0,1,1,4,8,0,0,0,0,3,0,0
+1997/98,Crystal Palace,1369,Valérien Ismaël,D,13,0,0,0,2,1,10,0,0,0,0,3,1,0
+1997/98,Crystal Palace,1383,Michele Padovano,F,10,1,0,0,3,1,6,0,0,0,0,2,0,0
+1997/98,Crystal Palace,1486,Kevin Muscat,D,9,0,0,2,3,2,4,0,0,0,0,3,0,0
+1997/98,Crystal Palace,552,David Tuttle,D,9,0,0,1,3,0,6,0,0,0,0,5,0,0
+1997/98,Crystal Palace,1020,Sasa Curcic,M,8,1,1,0,2,1,5,0,0,0,0,0,0,0
+1997/98,Crystal Palace,1381,Matt Jansen,F,8,3,0,0,2,0,6,0,0,0,0,0,0,0
+1997/98,Crystal Palace,466,Dougie Freedman,F,7,0,1,0,2,2,3,0,0,0,0,0,0,0
+1997/98,Crystal Palace,1484,Carl Veart,M,6,0,0,0,2,3,1,0,0,0,0,1,0,0
+1997/98,Crystal Palace,1373,Itzik Zohar,M,6,0,1,0,0,2,4,0,0,0,0,0,0,0
+1997/98,Crystal Palace,870,Rory Ginty,M,5,0,0,0,0,2,3,0,0,0,0,0,0,0
+1997/98,Crystal Palace,1377,Patrizio Billio,M,3,0,0,0,1,0,2,0,0,0,0,1,0,0
+1997/98,Crystal Palace,1380,Leon McKenzie,F,3,0,0,0,0,2,1,0,0,0,0,0,0,0
+1997/98,Crystal Palace,168,George Ndah,F,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+1997/98,Crystal Palace,1485,Ivano Bonetti,M,2,0,0,0,1,1,0,0,0,0,0,0,0,0
+1997/98,Crystal Palace,866,Sagi Burton,D,2,0,0,1,0,2,0,0,0,0,0,0,0,0
+1997/98,Crystal Palace,865,Danny Boxall,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1997/98,Crystal Palace,1483,Gareth Davies,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1997/98,Crystal Palace,1375,Tony Folan,M,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1997/98,Crystal Palace,1384,Clinton Morrison,F,1,1,0,0,1,0,0,0,0,0,0,0,0,0
+1997/98,Crystal Palace,1378,Robert Quinn,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1997/98,Crystal Palace,2,Alan Miller,G,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1997/98,Derby County,1168,Chris Powell,D,37,1,2,11,15,7,15,0,0,0,0,3,0,0
+1997/98,Derby County,1161,Mart Poom,G,36,0,1,13,16,7,13,0,0,0,0,2,0,0
+1997/98,Derby County,684,Gary Rowett,D,35,1,3,11,16,7,12,0,0,0,0,4,0,0
+1997/98,Derby County,1175,Lee Carsley,M,34,1,0,11,14,6,14,0,0,0,0,10,0,0
+1997/98,Derby County,1394,Francesco Baiano,F,33,12,6,6,14,7,12,0,0,0,0,2,0,0
+1997/98,Derby County,1179,Paulo Wanchope,F,32,13,5,8,14,7,11,0,0,0,0,8,0,0
+1997/98,Derby County,1163,Christian Dailly,D,30,1,1,8,12,4,14,0,0,0,0,7,0,1
+1997/98,Derby County,1178,Dean Sturridge,F,30,9,3,3,13,5,12,0,0,0,0,8,0,0
+1997/98,Derby County,1393,Deon Burton,F,29,3,4,2,10,7,12,0,0,0,0,1,0,0
+1997/98,Derby County,1169,Jacob Laursen,D,28,1,0,7,13,3,12,0,0,0,0,5,0,1
+1997/98,Derby County,1392,Stefano Eranio,M,23,5,2,2,11,4,8,0,0,0,0,7,2,0
+1997/98,Derby County,1177,Darryl Powell,M,23,0,0,5,9,4,10,0,0,0,0,5,0,0
+1997/98,Derby County,1164,Igor Stimac,D,22,1,0,7,11,4,7,0,0,0,0,6,0,0
+1997/98,Derby County,1395,Jonathan Hunt,M,19,1,1,2,7,3,9,0,0,0,0,3,0,0
+1997/98,Derby County,1391,Rory Delap,M,13,0,0,3,5,1,7,0,0,0,0,2,0,0
+1997/98,Derby County,1174,Paul Trollope,M,10,0,0,0,5,2,3,0,0,0,0,0,0,0
+1997/98,Derby County,1173,Robin van der Laan,M,10,0,1,2,5,1,4,0,0,0,0,2,0,0
+1997/98,Derby County,1181,Ron Willems,F,10,0,0,1,4,3,3,0,0,0,0,0,0,0
+1997/98,Derby County,942,Lars Bohinen,M,9,1,0,3,3,1,5,0,0,0,0,1,0,0
+1997/98,Derby County,1388,Robert Kozluk,D,9,0,0,1,5,1,3,0,0,0,0,1,0,0
+1997/98,Derby County,1170,Mauricio Solis,M,9,0,0,0,3,0,6,0,0,0,0,0,0,0
+1997/98,Derby County,1166,Dean Yates,D,9,0,0,3,3,3,3,0,0,0,0,2,0,0
+1997/98,Derby County,1172,Aljosa Asanovic,M,4,1,1,0,1,1,2,0,0,0,0,1,0,0
+1997/98,Derby County,1165,Matt Carbon,D,4,0,0,1,1,0,3,0,0,0,0,1,0,0
+1997/98,Derby County,1389,Steve Elliott,D,3,0,0,1,1,2,0,0,0,0,0,0,0,0
+1997/98,Derby County,932,Ashley Ward,F,3,0,0,1,1,0,2,0,0,0,0,0,0,0
+1997/98,Derby County,890,Russell Hoult,G,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1997/98,Derby County,1171,Paul Simpson,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1997/98,Everton,1401,John Oster,M,31,1,1,3,6,9,16,0,0,0,0,2,0,0
+1997/98,Everton,1037,Craig Short,D,31,0,1,8,7,10,14,0,0,0,0,5,0,0
+1997/98,Everton,569,Nick Barmby,M,30,2,7,3,8,9,13,0,0,0,0,6,0,0
+1997/98,Everton,877,Duncan Ferguson,F,29,11,6,5,7,10,12,0,0,0,0,7,1,0
+1997/98,Everton,1186,Danny Cadamarteri,F,26,4,1,3,6,8,12,0,0,0,0,4,0,0
+1997/98,Everton,45,Gareth Farrelly,M,26,1,0,4,7,9,10,0,0,0,0,5,0,0
+1997/98,Everton,174,Dave Watson,D,26,0,0,6,5,10,11,0,0,0,0,2,0,1
+1997/98,Everton,1185,Michael Ball,D,25,1,0,4,7,9,9,0,0,0,0,4,0,0
+1997/98,Everton,1112,Slaven Bilic,D,24,0,1,3,5,6,13,0,0,0,0,6,3,1
+1997/98,Everton,1396,Thomas Myhre,G,22,0,0,7,6,10,6,0,0,0,0,0,0,0
+1997/98,Everton,239,Gary Speed,M,21,7,0,6,6,5,10,0,0,0,0,2,0,0
+1997/98,Everton,397,Carl Tiler,D,19,1,0,7,6,7,6,0,0,0,0,6,0,0
+1997/98,Everton,179,Andy Hinchcliffe,D,17,0,1,5,4,4,9,0,0,0,0,3,1,0
+1997/98,Everton,1403,Mickaël Madar,F,17,6,1,1,4,8,5,0,0,0,0,3,0,0
+1997/98,Everton,796,Danny Williamson,M,15,0,0,4,3,4,8,0,0,0,0,2,0,0
+1997/98,Everton,111,Graham Stuart,M,14,2,2,3,3,3,8,0,0,0,0,3,0,0
+1997/98,Everton,38,Earl Barrett,D,13,0,0,3,3,3,7,0,0,0,0,3,0,0
+1997/98,Everton,313,John O'Kane,D,12,0,2,3,2,7,3,0,0,0,0,5,0,0
+1997/98,Everton,172,Neville Southall,G,12,0,0,3,2,2,8,0,0,0,0,0,0,0
+1997/98,Everton,272,Don Hutchison,M,11,1,0,4,2,5,4,0,0,0,0,2,0,0
+1997/98,Everton,1042,Gavin McCann,M,11,0,0,2,3,6,2,0,0,0,0,2,0,0
+1997/98,Everton,291,Terry Phelan,D,9,0,0,1,1,2,6,0,0,0,0,2,0,0
+1997/98,Everton,881,Claus Thomsen,D,8,1,0,0,3,2,3,0,0,0,0,0,0,0
+1997/98,Everton,482,Mitch Ward,M,8,0,1,1,0,6,2,0,0,0,0,0,0,0
+1997/98,Everton,685,Tony Grant,M,7,1,1,0,2,3,2,0,0,0,0,0,0,0
+1997/98,Everton,1399,Tony Thomas,D,7,0,3,0,2,1,4,0,0,0,0,1,0,0
+1997/98,Everton,187,Peter Beagrie,,6,0,0,1,1,2,3,0,0,0,0,2,0,0
+1997/98,Everton,1043,Paul Michael Branch,F,6,0,0,0,0,1,5,0,0,0,0,0,0,0
+1997/98,Everton,117,John Spencer,F,6,0,1,2,2,3,1,0,0,0,0,0,0,0
+1997/98,Everton,1040,Graham Allen,D,5,0,0,0,1,2,2,0,0,0,0,1,0,0
+1997/98,Everton,416,Paul Gerrard,G,4,0,0,0,1,1,2,0,0,0,0,1,0,0
+1997/98,Everton,1184,Richard Dunne,D,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+1997/98,Everton,1402,Francis Jeffers,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1997/98,Everton,1041,Jon O'Connor,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1997/98,Leeds United,146,Nigel Martyn,G,37,0,1,11,17,8,12,0,0,0,0,0,0,0
+1997/98,Leeds United,694,Gary Kelly,D,34,0,8,9,16,7,11,0,0,0,0,6,1,0
+1997/98,Leeds United,228,David Wetherall,D,34,3,3,9,15,8,11,0,0,0,0,7,0,0
+1997/98,Leeds United,1413,Jimmy Floyd Hasselbaink,F,33,16,6,3,13,8,12,0,0,0,0,5,0,0
+1997/98,Leeds United,938,Alf Inge Haaland,D,32,7,0,8,14,7,11,0,0,0,0,6,1,0
+1997/98,Leeds United,423,Gunnar Halle,D,32,2,1,7,13,6,13,0,0,0,0,4,1,0
+1997/98,Leeds United,248,Rod Wallace,F,31,10,4,8,12,8,11,0,0,0,0,6,0,0
+1997/98,Leeds United,1410,Bruno Ribeiro,M,29,3,4,8,12,6,11,0,0,0,0,5,0,0
+1997/98,Leeds United,1049,Harry Kewell,M,29,5,2,7,13,6,10,0,0,0,0,2,1,0
+1997/98,Leeds United,886,Lucas Radebe,D,27,0,0,8,12,6,9,0,0,0,0,9,1,0
+1997/98,Leeds United,1409,David Robertson,M,26,0,2,8,11,6,9,0,0,0,0,6,0,0
+1997/98,Leeds United,1190,Lee Bowyer,M,25,3,5,3,13,5,7,0,0,0,0,5,0,0
+1997/98,Leeds United,108,David Hopkin,M,25,1,1,6,11,5,9,0,0,0,0,5,0,0
+1997/98,Leeds United,1189,Robert Molenaar,D,23,2,2,5,11,3,9,0,0,0,0,4,0,0
+1997/98,Leeds United,1045,Ian Harte,D,12,0,4,3,6,2,4,0,0,0,0,0,0,0
+1997/98,Leeds United,1192,Derek Lilley,F,12,1,0,0,3,4,5,0,0,0,0,0,0,0
+1997/98,Leeds United,1046,Alan Maybury,D,12,0,0,2,4,2,6,0,0,0,0,3,0,0
+1997/98,Leeds United,1405,Martin Hiden,D,11,0,0,3,6,1,4,0,0,0,0,2,0,0
+1997/98,Leeds United,1407,Stephen McPhail,M,4,0,1,0,3,0,1,0,0,0,0,0,0,0
+1997/98,Leeds United,1414,Lee Matthews,F,3,0,0,0,2,0,1,0,0,0,0,0,0,0
+1997/98,Leeds United,226,Mark Beeney,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1997/98,Leeds United,1047,Mark Jackson,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1997/98,Leicester City,1196,Matt Elliott,D,37,7,3,15,13,14,10,0,0,0,0,7,0,0
+1997/98,Leicester City,1201,Steve Guppy,M,37,2,10,13,13,13,11,0,0,0,0,4,0,0
+1997/98,Leicester City,1199,Neil Lennon,M,37,2,2,15,13,13,11,0,0,0,0,6,0,0
+1997/98,Leicester City,670,Muzzy Izzet,M,36,4,4,15,13,14,9,0,0,0,0,5,0,0
+1997/98,Leicester City,908,Emile Heskey,F,35,10,5,11,12,12,11,0,0,0,0,5,1,0
+1997/98,Leicester City,1195,Pontus Kaamark,D,35,0,0,12,12,14,9,0,0,0,0,2,0,0
+1997/98,Leicester City,706,Robbie Savage,M,35,2,2,7,11,13,11,0,0,0,0,4,0,0
+1997/98,Leicester City,1193,Kasey Keller,G,32,0,0,14,11,12,9,0,0,0,0,2,0,0
+1997/98,Leicester City,732,Spencer Prior,D,30,0,1,10,11,10,9,0,0,0,0,2,0,0
+1997/98,Leicester City,894,Steve Walsh,D,26,3,1,8,9,9,8,0,0,0,0,3,0,1
+1997/98,Leicester City,426,Ian Marshall,D,24,7,0,7,10,10,4,0,0,0,0,2,0,0
+1997/98,Leicester City,57,Graham Fenton,F,23,3,1,1,9,7,7,0,0,0,0,1,0,0
+1997/98,Leicester City,48,Garry Parker,M,22,3,2,3,6,10,6,0,0,0,0,1,0,0
+1997/98,Leicester City,193,Tony Cottee,F,19,4,0,1,7,8,4,0,0,0,0,0,0,0
+1997/98,Leicester City,1202,Steve Claridge,F,17,0,0,0,4,6,7,0,0,0,0,0,0,0
+1997/98,Leicester City,1417,Theo Zagorakis,M,14,1,0,2,5,5,4,0,0,0,0,1,0,0
+1997/98,Leicester City,1198,Stuart Campbell,M,11,0,0,0,6,2,3,0,0,0,0,1,0,0
+1997/98,Leicester City,1200,Stuart Wilson,M,11,2,1,0,2,3,6,0,0,0,0,0,0,0
+1997/98,Leicester City,1415,Pegguy Arphexad,G,6,0,0,1,2,2,2,0,0,0,0,0,0,0
+1997/98,Leicester City,733,Robert Ullathorne,D,6,1,0,0,1,2,3,0,0,0,0,0,1,0
+1997/98,Leicester City,502,Julian Watts,D,3,0,0,0,0,1,2,0,0,0,0,0,0,0
+1997/98,Leicester City,900,Sam McMahon,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1997/98,Liverpool,271,Steve McManaman,M,36,11,9,10,17,11,8,0,0,0,0,1,0,0
+1997/98,Liverpool,1208,Michael Owen,F,36,18,10,10,17,11,8,0,0,0,0,3,1,0
+1997/98,Liverpool,326,Paul Ince,M,31,8,6,9,14,11,6,0,0,0,0,8,0,0
+1997/98,Liverpool,973,Oyvind Leonhardsen,M,28,6,3,9,14,8,6,0,0,0,0,2,0,0
+1997/98,Liverpool,252,David James,G,27,0,0,11,13,8,6,0,0,0,0,1,0,0
+1997/98,Liverpool,259,Dominic Matteo,D,26,0,0,9,13,8,5,0,0,0,0,3,0,0
+1997/98,Liverpool,260,Stig Inge Bjornebye,D,25,0,6,7,11,6,8,0,0,0,0,3,0,0
+1997/98,Liverpool,254,Steve Harkness,D,25,0,2,8,13,8,4,0,0,0,0,6,0,0
+1997/98,Liverpool,1425,Karl-Heinz Riedle,F,25,6,0,2,11,6,8,0,0,0,0,1,0,0
+1997/98,Liverpool,1204,Bjorn Tore Kvarme,D,23,0,0,8,13,5,5,0,0,0,0,4,0,0
+1997/98,Liverpool,1205,Patrik Berger,M,22,3,1,1,8,6,8,0,0,0,0,0,0,0
+1997/98,Liverpool,261,Rob Jones,D,21,0,0,2,8,9,4,0,0,0,0,1,0,0
+1997/98,Liverpool,1052,Jason McAteer,M,21,2,2,7,12,4,5,0,0,0,0,4,0,0
+1997/98,Liverpool,915,Jamie Carragher,D,20,0,0,7,9,4,7,0,0,0,0,3,0,0
+1997/98,Liverpool,277,Robbie Fowler,F,20,9,2,8,10,6,4,0,0,0,0,2,1,0
+1997/98,Liverpool,262,Jamie Redknapp,M,20,3,2,8,12,6,2,0,0,0,0,3,0,0
+1997/98,Liverpool,128,Phil Babb,D,19,0,0,7,8,6,5,0,0,0,0,4,0,0
+1997/98,Liverpool,1423,Danny Murphy,M,16,0,1,0,5,4,7,0,0,0,0,1,0,0
+1997/98,Liverpool,1420,Brad Friedel,G,11,0,0,2,5,3,3,0,0,0,0,0,0,0
+1997/98,Liverpool,263,Michael Thomas,M,11,1,1,2,4,3,4,0,0,0,0,3,0,0
+1997/98,Liverpool,258,Mark Wright,D,6,0,0,1,2,3,1,0,0,0,0,0,0,0
+1997/98,Liverpool,1206,David Thompson,M,5,1,1,0,2,1,2,0,0,0,0,1,0,0
+1997/98,Liverpool,558,Neil Ruddock,D,2,0,0,0,0,1,1,0,0,0,0,0,0,1
+1997/98,Liverpool,916,Mark Kennedy,D,1,0,1,0,1,0,0,0,0,0,0,0,0,0
+1997/98,Manchester United,331,David Beckham,M,37,9,13,15,22,8,7,90,1,3,0,6,0,0
+1997/98,Manchester United,321,Gary Neville,D,34,0,3,16,19,8,7,90,1,3,0,2,0,0
+1997/98,Manchester United,332,Nicky Butt,M,33,3,3,17,21,7,5,90,1,3,0,7,0,0
+1997/98,Manchester United,725,Andrew Cole,F,33,15,7,12,20,7,6,90,1,3,0,5,0,0
+1997/98,Manchester United,320,Gary Pallister,D,33,0,0,13,21,7,5,39,1,2,0,5,1,0
+1997/98,Manchester United,307,Peter Schmeichel,G,32,0,0,16,19,8,5,90,1,3,5,0,0,0
+1997/98,Manchester United,336,Paul Scholes,M,31,8,5,8,16,8,7,90,1,3,0,8,0,0
+1997/98,Manchester United,576,Teddy Sheringham,F,31,9,10,12,18,7,6,90,1,3,0,3,0,0
+1997/98,Manchester United,921,Phil Neville,M,30,1,0,10,20,5,5,90,1,3,0,8,0,0
+1997/98,Manchester United,335,Ryan Giggs,M,29,8,9,15,19,6,4,72,1,2,0,1,0,0
+1997/98,Manchester United,74,Henning Berg,D,27,1,0,11,15,6,6,90,1,3,0,3,0,1
+1997/98,Manchester United,315,Denis Irwin,D,25,2,0,9,13,8,4,0,0,0,0,3,0,0
+1997/98,Manchester United,1210,Ronny Johnsen,D,22,2,1,7,13,2,7,51,0,1,0,2,0,0
+1997/98,Manchester United,1217,Ole Gunnar Solskjær,F,22,6,4,4,9,6,7,18,0,1,0,0,1,0
+1997/98,Manchester United,337,Brian McClair,F,13,0,0,0,10,1,2,0,0,0,0,0,0,0
+1997/98,Manchester United,1212,Karel Poborsky,M,10,2,0,0,7,2,1,0,0,0,0,1,0,0
+1997/98,Manchester United,407,Roy Keane,M,9,2,0,6,5,3,1,0,0,0,0,3,0,0
+1997/98,Manchester United,67,David May,D,9,0,0,3,4,3,2,0,0,0,0,3,0,0
+1997/98,Manchester United,1427,John Curtis,D,8,0,0,2,4,1,3,0,0,0,0,0,0,0
+1997/98,Manchester United,1216,Jordi Cruijff,M,5,0,0,2,4,1,0,0,0,0,0,1,0,0
+1997/98,Manchester United,327,Ben Thornley,M,5,0,0,0,1,2,2,0,0,0,0,0,0,0
+1997/98,Manchester United,1209,Raimond van der Gouw,G,5,0,0,3,3,1,1,0,0,0,0,0,0,0
+1997/98,Manchester United,1067,Michael Clegg,D,3,0,0,0,3,0,0,0,0,0,0,0,0,0
+1997/98,Manchester United,1211,Wes Brown,D,2,0,0,1,2,0,0,0,0,0,0,0,0,0
+1997/98,Manchester United,308,Kevin Pilkington,G,2,0,0,1,1,0,1,0,0,0,0,0,0,0
+1997/98,Manchester United,1426,Danny Higginbotham,D,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1997/98,Manchester United,1213,Phil Mulryne,M,1,0,0,1,1,0,0,0,0,0,0,0,0,0
+1997/98,Manchester United,1432,Erik Nevland,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1997/98,Manchester United,922,Ronnie Wallwork,D,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1997/98,Newcastle United,243,David Batty,M,32,1,0,8,10,10,12,0,0,0,0,8,3,0
+1997/98,Newcastle United,1439,Temuri Ketsbaia,M,31,3,3,5,7,10,14,0,0,0,0,3,0,0
+1997/98,Newcastle United,329,Keith Gillespie,M,29,4,2,4,8,7,14,0,0,0,0,3,0,0
+1997/98,Newcastle United,720,Steve Watson,D,29,1,3,7,11,6,12,0,0,0,0,3,0,0
+1997/98,Newcastle United,721,Robert Lee,M,28,4,2,6,10,9,9,0,0,0,0,3,0,0
+1997/98,Newcastle United,1433,Alessandro Pistone,D,28,0,2,6,8,7,13,0,0,0,0,6,0,0
+1997/98,Newcastle United,269,John Barnes,M,26,6,0,3,7,5,14,0,0,0,0,0,0,0
+1997/98,Newcastle United,395,Stuart Pearce,D,25,0,0,6,7,8,10,0,0,0,0,4,0,1
+1997/98,Newcastle United,851,Shay Given,G,24,0,0,8,7,8,9,0,0,0,0,1,0,0
+1997/98,Newcastle United,924,Philippe Albert,D,23,0,2,6,6,10,7,0,0,0,0,8,0,0
+1997/98,Newcastle United,590,Warren Barton,D,23,3,0,4,7,6,10,0,0,0,0,8,0,0
+1997/98,Newcastle United,1444,Jon Dahl Tomasson,F,23,3,1,2,8,4,11,0,0,0,0,1,0,0
+1997/98,Newcastle United,448,Darren Peacock,D,20,0,0,3,6,5,9,0,0,0,0,4,0,0
+1997/98,Newcastle United,710,John Beresford,D,18,2,2,4,7,3,8,0,0,0,0,3,0,1
+1997/98,Newcastle United,89,Alan Shearer,F,17,2,1,5,4,6,7,0,0,0,0,2,0,0
+1997/98,Newcastle United,714,Steve Howey,D,14,0,0,5,4,6,4,0,0,0,0,0,0,0
+1997/98,Newcastle United,1080,Shaka Hislop,G,13,0,0,2,4,2,7,0,0,0,0,0,0,0
+1997/98,Newcastle United,239,Gary Speed,M,13,1,1,4,2,6,5,0,0,0,0,1,0,0
+1997/98,Newcastle United,1443,Andreas Andersson,F,12,2,0,2,3,4,5,0,0,0,0,0,0,0
+1997/98,Newcastle United,1231,Des Hamilton,M,12,0,1,1,2,3,7,0,0,0,0,0,0,0
+1997/98,Newcastle United,1436,Nikolaos Dabizas,D,11,1,0,2,2,4,5,0,0,0,0,2,0,0
+1997/98,Newcastle United,1084,Faustino Asprilla,F,10,2,2,2,3,2,5,0,0,0,0,0,0,0
+1997/98,Newcastle United,275,Ian Rush,F,10,0,1,1,3,2,5,0,0,0,0,0,0,0
+1997/98,Newcastle United,1437,Andy Griffin,D,4,0,0,0,0,1,3,0,0,0,0,0,0,0
+1997/98,Newcastle United,1230,Aaron Hughes,D,4,0,0,0,0,1,3,0,0,0,0,0,0,0
+1997/98,Newcastle United,708,Pavel Srnicek,G,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1997/98,Sheffield Wednesday,750,Des Walker,D,38,0,0,8,12,8,18,0,0,0,0,0,0,0
+1997/98,Sheffield Wednesday,495,Kevin Pressman,G,36,0,0,7,12,7,17,0,0,0,0,0,0,0
+1997/98,Sheffield Wednesday,1451,Paolo Di Canio,F,35,12,6,4,12,5,18,0,0,0,0,10,0,0
+1997/98,Sheffield Wednesday,1096,Mark Pembridge,M,34,4,1,4,11,8,15,0,0,0,0,4,0,1
+1997/98,Sheffield Wednesday,1240,Benito Carbone,F,33,9,6,4,9,7,17,0,0,0,0,7,1,0
+1997/98,Sheffield Wednesday,664,Guy Whittingham,F,28,4,2,3,10,5,13,0,0,0,0,1,0,0
+1997/98,Sheffield Wednesday,125,Peter Atherton,D,27,3,1,6,10,6,11,0,0,0,0,8,0,0
+1997/98,Sheffield Wednesday,953,Ian Nolan,D,27,0,6,4,9,7,11,0,0,0,0,2,0,0
+1997/98,Sheffield Wednesday,231,Jon Newsome,D,25,2,1,7,8,6,11,0,0,0,0,3,0,1
+1997/98,Sheffield Wednesday,1241,Andy Booth,F,23,7,2,4,9,5,9,0,0,0,0,0,1,0
+1997/98,Sheffield Wednesday,505,Graham Hyde,M,22,1,1,0,8,3,11,0,0,0,0,8,0,1
+1997/98,Sheffield Wednesday,1446,Petter Rudi,M,22,0,1,4,7,5,10,0,0,0,0,2,0,0
+1997/98,Sheffield Wednesday,757,Jim Magilton,M,21,1,0,1,7,4,10,0,0,0,0,1,0,0
+1997/98,Sheffield Wednesday,1095,Dejan Stefanovic,D,20,2,0,2,5,4,11,0,0,0,0,6,1,0
+1997/98,Sheffield Wednesday,1238,Wayne Collins,M,19,5,1,0,4,5,10,0,0,0,0,2,0,0
+1997/98,Sheffield Wednesday,179,Andy Hinchcliffe,D,15,1,1,3,4,3,8,0,0,0,0,0,0,0
+1997/98,Sheffield Wednesday,38,Earl Barrett,D,10,0,1,2,2,1,7,0,0,0,0,4,0,0
+1997/98,Sheffield Wednesday,749,Lee Briscoe,D,7,0,2,0,3,1,3,0,0,0,0,2,0,0
+1997/98,Sheffield Wednesday,1097,Ritchie Humphreys,M,7,0,1,0,3,1,3,0,0,0,0,1,0,0
+1997/98,Sheffield Wednesday,253,Steve Nicol,D,7,0,0,2,2,1,4,0,0,0,0,1,0,0
+1997/98,Sheffield Wednesday,1447,Niclas Alexandersson,M,6,0,0,1,2,3,1,0,0,0,0,0,0,0
+1997/98,Sheffield Wednesday,1488,Patrick Blondeau,D,6,0,1,0,1,1,4,0,0,0,0,1,1,0
+1997/98,Sheffield Wednesday,514,David Hirst,F,6,0,1,2,2,1,3,0,0,0,0,1,0,0
+1997/98,Sheffield Wednesday,1445,Emerson Thome,D,6,0,0,0,1,1,4,0,0,0,0,1,0,0
+1997/98,Sheffield Wednesday,956,O'Neill Donaldson,F,5,0,0,0,1,0,4,0,0,0,0,0,0,0
+1997/98,Sheffield Wednesday,1239,Scott Oakes,M,4,0,0,0,2,1,1,0,0,0,0,0,0,0
+1997/98,Sheffield Wednesday,1487,Goce Sedloski,D,4,0,0,1,1,0,3,0,0,0,0,0,0,0
+1997/98,Sheffield Wednesday,1236,Matt Clarke,G,3,0,0,0,0,2,1,0,0,0,0,0,0,0
+1997/98,Sheffield Wednesday,1450,Christian Mayrleb,F,3,0,0,0,0,1,2,0,0,0,0,0,0,0
+1997/98,Sheffield Wednesday,752,Adem Poric,M,3,0,0,0,0,1,2,0,0,0,0,0,0,0
+1997/98,Sheffield Wednesday,1452,Francesco Sanetti,F,2,1,0,0,0,0,2,0,0,0,0,0,0,0
+1997/98,Sheffield Wednesday,1453,Junior Agogo,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1997/98,Sheffield Wednesday,411,Nigel Clough,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1997/98,Sheffield Wednesday,1454,Alan Quinn,M,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1997/98,Southampton,1455,Paul Jones,G,38,0,2,8,14,6,18,0,0,0,0,0,0,0
+1997/98,Southampton,528,Jason Dodd,D,36,1,6,8,14,6,16,0,0,0,0,2,0,0
+1997/98,Southampton,523,Francis Benali,D,33,1,1,6,13,6,14,0,0,0,0,2,2,0
+1997/98,Southampton,958,Matt Oakley,M,33,1,1,5,13,6,14,0,0,0,0,3,0,0
+1997/98,Southampton,522,Kenneth Monkou,D,32,1,1,6,11,5,16,0,0,0,0,6,1,0
+1997/98,Southampton,1246,Claus Lundekvam,D,31,0,0,5,13,5,13,0,0,0,0,8,0,0
+1997/98,Southampton,1250,Egil Ostenstad,F,29,11,2,2,10,5,14,0,0,0,0,3,0,0
+1997/98,Southampton,514,David Hirst,F,28,9,3,2,12,5,11,0,0,0,0,3,0,0
+1997/98,Southampton,43,Kevin Richardson,M,28,0,3,4,11,5,12,0,0,0,0,2,0,0
+1997/98,Southampton,533,Matthew Le Tissier,M,26,11,9,2,12,5,9,0,0,0,0,6,0,0
+1997/98,Southampton,497,Carlton Palmer,D,26,3,3,6,12,5,9,0,0,0,0,6,1,0
+1997/98,Southampton,1249,Kevin Davies,F,25,9,2,5,9,4,12,0,0,0,0,4,0,0
+1997/98,Southampton,1461,Andy Williams,D,20,0,0,0,0,0,0,0,0,0,0,2,0,0
+1997/98,Southampton,1245,Richard Dryden,D,13,0,0,3,5,3,5,0,0,0,0,2,0,0
+1997/98,Southampton,756,David Hughes,M,13,0,0,1,5,0,8,0,0,0,0,2,0,0
+1997/98,Southampton,854,Robbie Slater,M,11,0,0,0,5,2,4,0,0,0,0,1,0,0
+1997/98,Southampton,710,John Beresford,D,10,0,1,1,4,2,4,0,0,0,0,0,0,0
+1997/98,Southampton,612,Mickey Evans,F,10,0,0,0,2,1,7,0,0,0,0,0,0,0
+1997/98,Southampton,1459,Lee Todd,D,10,0,0,1,2,0,8,0,0,0,0,1,0,0
+1997/98,Southampton,1251,Steve Basham,F,9,0,1,0,4,1,4,0,0,0,0,0,0,0
+1997/98,Southampton,713,Alan Neilson,D,8,0,0,0,2,1,5,0,0,0,0,2,0,0
+1997/98,Southampton,1248,Duncan Spedding,M,7,0,0,1,2,0,5,0,0,0,0,0,0,0
+1997/98,Southampton,1490,Stig Johansen,F,6,0,0,0,1,0,5,0,0,0,0,1,0,0
+1997/98,Southampton,530,Neil Maddison,M,6,1,0,0,1,0,5,0,0,0,0,0,0,0
+1997/98,Southampton,757,Jim Magilton,M,5,0,0,1,1,0,4,0,0,0,0,1,0,0
+1997/98,Southampton,1489,Jason Bowen,M,3,0,0,0,0,1,2,0,0,0,0,0,0,0
+1997/98,Southampton,755,Simon Charlton,D,3,0,0,0,2,0,1,0,0,0,0,0,0,0
+1997/98,Southampton,1462,Kevin Gibbens,M,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+1997/98,Southampton,1244,Ulrich van Gobbel,D,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1997/98,Southampton,711,Matthew Robinson,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1997/98,Southampton,1457,Phil Warner,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1997/98,Southampton,1460,Andy Williams,F,0,0,0,0,5,3,12,0,0,0,0,0,0,0
+1997/98,Tottenham Hotspur,776,Stephen Carr,D,38,0,0,10,11,11,16,0,0,0,0,3,0,0
+1997/98,Tottenham Hotspur,557,Sol Campbell,D,34,0,1,8,9,11,14,0,0,0,0,4,0,1
+1997/98,Tottenham Hotspur,1083,David Ginola,F,34,6,9,5,9,10,15,0,0,0,0,7,0,0
+1997/98,Tottenham Hotspur,388,Ruel Fox,F,32,3,5,5,10,11,11,0,0,0,0,4,0,0
+1997/98,Tottenham Hotspur,544,Ian Walker,G,29,0,1,7,8,9,12,0,0,0,0,0,0,0
+1997/98,Tottenham Hotspur,775,Colin Calderwood,D,26,4,0,5,10,7,9,0,0,0,0,3,0,0
+1997/98,Tottenham Hotspur,1275,Allan Nielsen,M,26,3,3,2,6,10,10,0,0,0,0,3,0,0
+1997/98,Tottenham Hotspur,1274,Ramon Vega,D,25,3,1,5,6,9,10,0,0,0,0,7,1,1
+1997/98,Tottenham Hotspur,462,Les Ferdinand,F,21,5,5,4,7,5,9,0,0,0,0,2,0,0
+1997/98,Tottenham Hotspur,560,David Howells,M,20,0,0,4,7,4,9,0,0,0,0,3,0,0
+1997/98,Tottenham Hotspur,167,Chris Armstrong,F,19,5,0,1,5,7,7,0,0,0,0,2,0,0
+1997/98,Tottenham Hotspur,456,Andy Sinton,M,19,0,4,3,6,1,12,0,0,0,0,1,0,0
+1997/98,Tottenham Hotspur,1468,José Dominguez,F,18,2,1,2,5,5,8,0,0,0,0,4,0,0
+1997/98,Tottenham Hotspur,1466,Nicola Berti,M,17,3,3,4,6,6,5,0,0,0,0,5,0,0
+1997/98,Tottenham Hotspur,961,Stephen Clemence,M,17,0,1,4,4,5,8,0,0,0,0,1,0,0
+1997/98,Tottenham Hotspur,551,Justin Edinburgh,D,16,0,0,2,3,4,9,0,0,0,0,2,1,0
+1997/98,Tottenham Hotspur,452,Clive Wilson,D,16,0,1,4,6,4,6,0,0,0,0,1,0,0
+1997/98,Tottenham Hotspur,566,Darren Anderton,M,15,0,1,0,5,2,8,0,0,0,0,0,0,0
+1997/98,Tottenham Hotspur,965,Jürgen Klinsmann,F,15,9,5,3,5,6,4,0,0,0,0,1,0,0
+1997/98,Tottenham Hotspur,1277,Steffen Iversen,F,13,0,0,1,4,2,7,0,0,0,0,1,0,0
+1997/98,Tottenham Hotspur,549,Gary Mabbutt,D,11,0,0,2,1,5,5,0,0,0,0,1,0,0
+1997/98,Tottenham Hotspur,586,John Scales,D,10,0,0,2,3,1,6,0,0,0,0,1,0,0
+1997/98,Tottenham Hotspur,1272,Espen Baardsen,G,9,0,0,3,3,2,4,0,0,0,0,0,0,0
+1997/98,Tottenham Hotspur,779,Garry Brady,M,9,0,0,0,4,2,3,0,0,0,0,0,0,0
+1997/98,Tottenham Hotspur,1465,Moussa Saïb,M,9,1,1,0,4,3,2,0,0,0,0,0,0,0
+1997/98,Tottenham Hotspur,1106,Rory Allen,F,4,0,0,0,0,0,4,0,0,0,0,0,0,0
+1997/98,Tottenham Hotspur,1105,Neale Fenn,F,4,0,0,0,2,0,2,0,0,0,0,0,0,0
+1997/98,Tottenham Hotspur,780,Paul Mahorn,F,2,0,0,0,0,2,0,0,0,0,0,0,0,0
+1997/98,West Ham United,1247,Eyal Berkovic,M,35,7,10,3,15,8,12,0,0,0,0,2,0,0
+1997/98,West Ham United,1111,Rio Ferdinand,D,35,0,0,7,16,6,13,0,0,0,0,3,0,1
+1997/98,West Ham United,293,Steve Lomas,M,33,2,4,6,13,7,13,0,0,0,0,7,1,0
+1997/98,West Ham United,844,John Hartson,F,32,15,8,7,14,6,12,0,0,0,0,3,2,0
+1997/98,West Ham United,181,David Unsworth,D,32,2,2,7,13,6,13,0,0,0,0,6,1,0
+1997/98,West Ham United,800,Frank Lampard,M,31,5,2,6,11,7,13,0,0,0,0,6,0,0
+1997/98,West Ham United,96,Ian Pearce,D,30,1,2,6,12,7,11,0,0,0,0,2,0,0
+1997/98,West Ham United,1114,Stan Lazaridis,M,28,2,5,6,12,8,8,0,0,0,0,2,0,0
+1997/98,West Ham United,785,Steve Potts,D,23,0,1,3,10,4,9,0,0,0,0,2,0,0
+1997/98,West Ham United,768,John Moncur,M,20,1,1,3,8,3,9,0,0,0,0,9,0,0
+1997/98,West Ham United,1474,Samassi Abou,F,19,5,2,1,7,4,8,0,0,0,0,2,1,0
+1997/98,West Ham United,789,Tim Breacker,D,19,0,2,1,9,3,7,0,0,0,0,4,0,0
+1997/98,West Ham United,453,Andy Impey,M,19,0,0,2,8,6,5,0,0,0,0,1,0,0
+1997/98,West Ham United,741,Trevor Sinclair,M,14,7,1,4,5,6,3,0,0,0,0,5,0,0
+1997/98,West Ham United,200,Craig Forrest,G,13,0,0,5,7,2,4,0,0,0,0,0,0,0
+1997/98,West Ham United,928,Paul Kitson,F,13,4,0,1,6,2,5,0,0,0,0,1,0,0
+1997/98,West Ham United,782,Ludek Miklosko,G,13,0,0,0,5,1,7,0,0,0,0,0,0,1
+1997/98,West Ham United,538,Iain Dowie,F,12,0,1,1,4,1,7,0,0,0,0,1,0,0
+1997/98,West Ham United,1471,Bernard Lama,G,12,0,0,3,4,5,3,0,0,0,0,1,0,0
+1997/98,West Ham United,620,Keith Rowland,D,7,0,0,2,4,0,3,0,0,0,0,2,0,0
+1997/98,West Ham United,967,Michael Hughes,M,5,0,0,0,2,0,3,0,0,0,0,1,0,0
+1997/98,West Ham United,1116,Manny Omoyinmi,F,5,2,0,0,2,2,1,0,0,0,0,0,0,0
+1997/98,West Ham United,966,Marc Rieper,D,5,1,1,0,3,1,1,0,0,0,0,0,0,0
+1997/98,West Ham United,1491,Paulo Alves,F,4,0,0,0,3,0,1,0,0,0,0,0,0,0
+1997/98,West Ham United,795,Ian Bishop,M,3,0,0,0,1,0,2,0,0,0,0,0,0,0
+1997/98,West Ham United,1113,Scott Mean,M,3,0,0,0,2,0,1,0,0,0,0,0,0,0
+1997/98,West Ham United,968,Lee Hodges,M,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1997/98,West Ham United,1435,David Terrier,D,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1997/98,West Ham United,1234,Ian Thomas-Moore,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1997/98,West Ham United,2840,Abou Diaby,M,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+1997/98,Wimbledon,583,Neil Sullivan,G,38,0,0,13,10,14,14,0,0,0,0,0,0,0
+1997/98,Wimbledon,589,Dean Blackwell,D,35,0,0,12,10,13,12,0,0,0,0,4,0,0
+1997/98,Wimbledon,587,Chris Perry,D,35,1,2,12,10,12,13,0,0,0,0,7,0,0
+1997/98,Wimbledon,600,Neal Ardley,M,34,2,2,10,9,13,12,0,0,0,0,2,0,0
+1997/98,Wimbledon,972,Kenny Cunningham,D,32,0,3,10,8,11,13,0,0,0,0,2,0,0
+1997/98,Wimbledon,809,Marcus Gayle,F,30,2,2,3,7,9,14,0,0,0,0,1,0,0
+1997/98,Wimbledon,967,Michael Hughes,M,29,4,3,12,7,11,11,0,0,0,0,4,0,0
+1997/98,Wimbledon,1282,Ben Thatcher,D,26,0,0,9,8,8,10,0,0,0,0,2,2,0
+1997/98,Wimbledon,807,Alan Kimble,D,25,0,3,7,4,12,9,0,0,0,0,7,0,1
+1997/98,Wimbledon,599,Vinnie Jones,M,24,0,1,4,8,7,9,0,0,0,0,4,0,0
+1997/98,Wimbledon,1284,Carl Cort,F,22,4,3,3,7,6,9,0,0,0,0,0,0,0
+1997/98,Wimbledon,598,Robbie Earle,M,22,3,1,8,6,9,7,0,0,0,0,0,0,0
+1997/98,Wimbledon,1118,Jason Euell,F,19,4,1,0,4,8,7,0,0,0,0,1,0,0
+1997/98,Wimbledon,389,Efan Ekoku,F,16,4,1,1,4,7,5,0,0,0,0,0,0,0
+1997/98,Wimbledon,1478,Ceri Hughes,M,16,1,1,2,5,4,7,0,0,0,0,4,0,0
+1997/98,Wimbledon,1477,Carl Leaburn,F,16,4,2,5,4,7,5,0,0,0,0,0,0,0
+1997/98,Wimbledon,607,Andy Clarke,F,13,0,0,0,1,5,7,0,0,0,0,0,0,0
+1997/98,Wimbledon,1475,Andy Roberts,D,12,1,0,6,2,6,4,0,0,0,0,3,0,0
+1997/98,Wimbledon,592,Peter Fear,D,8,2,0,1,2,5,1,0,0,0,0,2,0,0
+1997/98,Wimbledon,584,Brian McAllister,D,7,0,0,0,0,3,4,0,0,0,0,1,0,0
+1997/98,Wimbledon,808,Stewart Castledine,M,6,0,0,0,2,2,2,0,0,0,0,1,0,0
+1997/98,Wimbledon,1492,Stale Solbakken,M,6,1,0,2,2,2,2,0,0,0,0,1,0,0
+1997/98,Wimbledon,603,Dean Holdsworth,F,5,0,0,0,0,2,3,0,0,0,0,1,0,0
+1997/98,Wimbledon,916,Mark Kennedy,D,4,0,0,1,0,3,1,0,0,0,0,0,0,0
+1997/98,Wimbledon,1283,Duncan Jupp,D,3,0,0,1,2,0,1,0,0,0,0,1,0,0
+1997/98,Wimbledon,1476,Damien Francis,M,2,0,0,0,0,0,2,0,0,0,0,0,0,0

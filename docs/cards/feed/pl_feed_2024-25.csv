@@ -1,0 +1,575 @@
+season,club_feed,feed_id,name,feed_pos,appearances,goals,goal_assist,clean_sheet,wins,draws,losses,mins_played,game_started,goals_conceded,saves,yellow_card,red_card,own_goals
+2024/25,Arsenal,7975,David Raya,G,38,0,0,13,20,14,4,3420,38,34,86,3,0,0
+2024/25,Arsenal,20486,Leandro Trossard,F,38,8,7,5,20,14,4,2550,28,26,0,2,1,0
+2024/25,Arsenal,4936,Thomas Partey,M,35,4,2,7,18,13,4,2799,31,30,0,4,0,0
+2024/25,Arsenal,15202,Declan Rice,M,35,4,7,7,18,13,4,2833,33,28,0,5,1,0
+2024/25,Arsenal,66204,William Saliba,D,35,2,0,12,19,12,4,3041,35,27,0,2,1,0
+2024/25,Arsenal,66104,Gabriel Martinelli,F,33,8,4,3,17,13,3,2300,25,25,0,1,0,0
+2024/25,Arsenal,67776,Jurriën Timber,D,30,1,3,7,16,12,2,2422,27,21,0,7,0,0
+2024/25,Arsenal,11419,Martin Ødegaard,M,30,3,8,5,16,12,2,2328,26,21,0,4,0,0
+2024/25,Arsenal,50234,Gabriel Magalhães,D,28,3,1,10,16,9,3,2365,28,22,0,4,0,0
+2024/25,Arsenal,19778,Mikel Merino,M,28,7,2,3,13,11,4,1581,17,17,0,2,1,0
+2024/25,Arsenal,114566,Ethan Nwaneri,M,26,4,2,1,13,9,4,889,11,4,0,1,0,0
+2024/25,Arsenal,49481,Bukayo Saka,F,25,6,10,2,13,10,2,1735,20,21,0,3,0,0
+2024/25,Arsenal,20810,Kai Havertz,F,23,9,3,7,14,7,2,1874,21,20,0,5,0,0
+2024/25,Arsenal,114564,Myles Lewis-Skelly,M,23,1,0,3,12,9,2,1370,15,16,0,3,2,0
+2024/25,Arsenal,69914,Riccardo Calafiori,D,19,2,1,0,11,6,2,984,11,12,0,4,0,0
+2024/25,Arsenal,19680,Gabriel Jesus,F,17,3,0,1,9,6,2,603,6,5,0,4,0,0
+2024/25,Arsenal,109478,Jakub Kiwior,D,17,1,0,3,8,7,2,1117,10,15,0,1,0,0
+2024/25,Arsenal,4316,Raheem Sterling,F,17,0,2,0,10,4,3,496,7,4,0,1,0,0
+2024/25,Arsenal,14548,Ben White,D,17,0,2,5,6,7,4,1198,13,13,0,2,0,0
+2024/25,Arsenal,5682,Jorginho,M,15,0,0,1,8,6,1,702,9,7,0,5,0,0
+2024/25,Arsenal,19620,Oleksandr Zinchenko,D,15,0,1,1,8,4,3,522,5,1,0,1,0,0
+2024/25,Arsenal,12185,Kieran Tierney,D,13,1,0,0,7,6,0,252,2,1,0,0,0,0
+2024/25,Arsenal,51479,Nathan Butler-Oyedeji,F,1,0,0,0,1,0,0,6,0,0,0,0,0,0
+2024/25,Arsenal,14450,Reiss Nelson,F,1,0,0,0,1,0,0,2,0,0,0,0,0,0
+2024/25,Arsenal,115169,Takehiro Tomiyasu,D,1,0,0,0,1,0,0,6,0,0,0,0,0,0
+2024/25,Aston Villa,8658,Ollie Watkins,F,38,16,8,4,19,9,10,2610,31,40,0,2,0,0
+2024/25,Aston Villa,4245,Emiliano Martínez,G,37,0,0,8,18,9,10,3195,37,45,100,5,1,0
+2024/25,Aston Villa,23968,Morgan Rogers,M,37,8,10,5,18,9,10,3129,37,40,0,10,0,0
+2024/25,Aston Villa,5865,Youri Tielemans,M,36,3,7,4,17,9,10,3032,35,46,0,4,0,0
+2024/25,Aston Villa,13274,Ezri Konsa,D,34,2,0,8,18,6,10,2937,33,45,0,1,0,0
+2024/25,Aston Villa,51423,John McGinn,M,34,1,4,2,18,6,10,2230,27,34,0,7,0,0
+2024/25,Aston Villa,5758,Lucas Digne,D,32,0,4,4,14,9,9,2358,28,36,0,4,0,0
+2024/25,Aston Villa,51223,Ian Maatsen,D,29,1,2,2,14,9,6,1128,10,16,0,2,0,0
+2024/25,Aston Villa,19888,Jacob Ramsey,M,29,1,3,0,15,7,7,1628,19,26,0,2,1,0
+2024/25,Aston Villa,13344,Matty Cash,D,27,1,1,5,14,6,7,2077,24,22,0,7,0,0
+2024/25,Aston Villa,25067,Boubacar Kamara,M,26,1,0,6,13,5,8,1725,20,22,0,2,0,0
+2024/25,Aston Villa,108096,Amadou Onana,M,26,3,0,2,14,4,8,1624,20,23,0,4,0,0
+2024/25,Aston Villa,20489,Leon Bailey,F,24,1,2,0,10,7,7,1143,14,19,0,3,0,0
+2024/25,Aston Villa,21529,Pau Torres,D,24,0,0,5,11,5,8,2020,23,33,0,2,0,0
+2024/25,Aston Villa,4115,Ross Barkley,M,20,3,1,1,10,5,5,569,3,10,0,3,0,0
+2024/25,Aston Villa,134048,Jhon Durán,F,20,7,0,0,8,6,6,626,4,12,0,3,1,0
+2024/25,Aston Villa,14456,Donyell Malen,F,14,3,0,0,8,3,3,298,2,6,0,0,0,0
+2024/25,Aston Villa,8900,Tyrone Mings,D,14,0,0,3,9,5,0,1121,12,11,0,1,0,0
+2024/25,Aston Villa,11428,Marco Asensio,M,13,3,1,2,8,2,3,745,9,8,0,2,0,0
+2024/25,Aston Villa,26408,Emiliano Buendía,M,12,0,0,0,7,3,2,89,0,2,0,1,0,0
+2024/25,Aston Villa,64519,Jaden Philogene,F,11,0,0,1,5,3,3,326,2,5,0,2,1,0
+2024/25,Aston Villa,13565,Marcus Rashford,F,10,2,2,0,6,2,2,443,4,6,0,0,0,0
+2024/25,Aston Villa,12994,Diego Carlos,D,10,0,0,1,3,4,3,828,8,15,0,1,0,0
+2024/25,Aston Villa,107846,Lamare Bogarde,M,8,0,0,0,3,3,2,475,5,11,0,2,0,0
+2024/25,Aston Villa,54893,Axel Disasi,D,7,0,0,1,3,2,2,488,5,9,0,2,0,0
+2024/25,Aston Villa,133169,Andrés García,D,7,0,0,0,3,2,2,317,5,5,0,0,0,0
+2024/25,Aston Villa,136672,Kosta Nedeljkovic,D,5,0,0,0,2,0,3,121,0,4,0,0,0,0
+2024/25,Aston Villa,11224,Robin Olsen,G,4,0,0,1,1,0,3,225,1,6,8,0,0,0
+2024/25,Bournemouth,116665,Milos Kerkez,D,38,2,5,9,15,11,12,3342,38,45,0,4,0,0
+2024/25,Bournemouth,25474,Antoine Semenyo,F,37,11,5,6,14,11,12,3209,36,41,0,9,0,0
+2024/25,Bournemouth,10766,Lewis Cook,M,36,1,3,5,13,11,12,2978,32,43,0,8,1,0
+2024/25,Bournemouth,67546,Illia Zabarnyi,D,36,0,1,8,15,10,11,3113,35,41,0,4,1,0
+2024/25,Bournemouth,21519,Justin Kluivert,F,34,12,6,1,14,9,11,2356,29,29,0,8,0,0
+2024/25,Bournemouth,123585,Dean Huijsen,D,32,3,2,7,13,9,10,2422,26,31,0,10,0,0
+2024/25,Bournemouth,133890,Dango Ouattara,F,32,7,4,2,13,11,8,2006,21,23,0,3,0,0
+2024/25,Bournemouth,11373,Kepa Arrizabalaga,G,31,0,0,8,13,7,11,2790,31,39,97,3,0,0
+2024/25,Bournemouth,33032,Evanilson,F,31,10,1,2,12,9,10,2335,28,29,0,1,1,0
+2024/25,Bournemouth,13706,David Brooks,M,29,2,0,0,11,8,10,949,9,12,0,3,0,0
+2024/25,Bournemouth,15572,Ryan Christie,M,29,2,3,4,12,8,9,2131,27,28,0,9,0,0
+2024/25,Bournemouth,14846,Marcus Tavernier,M,29,3,5,0,12,6,11,1938,20,29,0,6,0,0
+2024/25,Bournemouth,42894,Tyler Adams,M,28,0,3,4,11,8,9,1965,21,30,0,7,0,0
+2024/25,Bournemouth,3512,Adam Smith,D,25,0,0,3,10,7,8,1596,19,18,0,7,0,0
+2024/25,Bournemouth,74976,Alex Scott,M,20,0,0,0,7,6,7,751,8,8,0,3,0,0
+2024/25,Bournemouth,54989,Marcos Senesi,D,17,0,0,1,7,4,6,1108,13,17,0,5,0,0
+2024/25,Bournemouth,16582,Enes Ünal,F,17,2,1,0,8,4,5,331,2,3,0,2,0,0
+2024/25,Bournemouth,111987,Daniel Jebbison,F,16,1,0,0,5,5,6,105,0,2,0,1,0,0
+2024/25,Bournemouth,64370,Julián Araujo,D,12,0,0,0,3,4,5,497,7,10,0,2,0,0
+2024/25,Bournemouth,50498,Luis Sinisterra,F,12,1,1,0,4,3,5,230,1,4,0,0,0,0
+2024/25,Bournemouth,8882,Philip Billing,M,10,0,0,0,5,4,1,176,1,4,0,1,0,0
+2024/25,Bournemouth,51942,James Hill,D,10,0,1,0,3,4,3,448,6,9,0,1,0,0
+2024/25,Bournemouth,50453,Mark Travers,G,5,0,0,1,2,2,1,450,5,5,20,0,0,0
+2024/25,Bournemouth,133123,Ben Winterburn,M,4,0,0,0,2,2,0,22,0,0,0,0,0,0
+2024/25,Bournemouth,19970,Max Aarons,D,3,0,0,0,0,2,1,85,1,0,0,0,0,0
+2024/25,Bournemouth,302305,Julio Soler,D,3,0,0,0,2,0,1,9,0,1,0,0,0,0
+2024/25,Bournemouth,6593,Neto,G,2,0,0,0,0,2,0,180,2,2,11,0,0,0
+2024/25,Bournemouth,133124,Remy Rees-Dottin,F,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2024/25,Bournemouth,112378,Zain Silcott-Duberry,M,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2024/25,Brentford,24659,Nathan Collins,D,38,2,3,8,16,8,14,3420,38,57,0,5,0,0
+2024/25,Brentford,49731,Mikkel Damsgaard,M,38,2,10,2,16,8,14,2926,34,41,0,2,0,0
+2024/25,Brentford,24369,Keane Lewis-Potter,F,38,1,3,7,16,8,14,3101,36,49,0,7,0,0
+2024/25,Brentford,66360,Bryan Mbeumo,F,38,20,7,8,16,8,14,3415,38,55,0,3,0,0
+2024/25,Brentford,127594,Kevin Schade,M,38,11,2,2,16,8,14,2301,26,34,0,3,0,0
+2024/25,Brentford,33280,Mark Flekken,G,37,0,2,7,16,8,13,3276,37,55,153,1,0,0
+2024/25,Brentford,117497,Yoane Wissa,F,35,19,4,5,15,7,13,2927,34,45,0,5,0,0
+2024/25,Brentford,42331,Christian Nørgaard,M,34,5,4,4,16,6,12,2829,34,45,0,8,1,0
+2024/25,Brentford,23194,Vitaly Janelt,M,32,1,3,1,12,7,13,2266,27,38,0,3,0,2
+2024/25,Brentford,65987,Sepp van den Berg,D,31,0,0,5,14,6,11,2588,29,49,0,3,0,0
+2024/25,Brentford,128891,Yehor Yarmoliuk,M,31,0,0,2,13,8,10,1442,15,25,0,6,0,0
+2024/25,Brentford,20113,Kristoffer Ajer,D,24,0,0,1,9,5,10,1441,17,25,0,5,0,0
+2024/25,Brentford,49726,Mathias Jensen,M,24,0,2,1,12,5,7,852,8,17,0,2,0,0
+2024/25,Brentford,22043,Ethan Pinnock,D,22,2,0,2,10,3,9,1913,21,35,0,2,0,1
+2024/25,Brentford,32289,Fábio Carvalho,M,19,2,1,0,9,1,9,446,3,14,0,1,0,0
+2024/25,Brentford,21297,Mads Roerslev,D,19,0,2,2,7,2,10,1096,11,20,0,2,0,0
+2024/25,Brentford,133460,Michael Kayode,D,12,0,1,1,6,4,2,528,6,5,0,2,0,0
+2024/25,Brentford,144265,Yunus Konak,M,10,0,0,0,7,1,2,36,0,2,0,0,0,0
+2024/25,Brentford,23946,Paris Maghoma,M,8,0,0,0,3,1,4,112,0,1,0,0,0,0
+2024/25,Brentford,124052,Igor Thiago,F,8,0,0,0,4,2,2,168,1,4,0,0,0,0
+2024/25,Brentford,3909,Ben Mee,D,7,0,0,0,4,1,2,181,2,4,0,2,0,0
+2024/25,Brentford,10947,Rico Henry,D,5,0,0,0,3,1,1,94,0,3,0,0,0,0
+2024/25,Brentford,126962,Kim Ji-Soo,D,3,0,0,0,0,1,2,28,0,0,0,0,0,0
+2024/25,Brentford,148162,Gustavo Nunes,F,3,0,0,0,2,1,0,11,0,2,0,0,0,0
+2024/25,Brentford,108612,Frank Onyeka,M,2,0,0,0,1,0,1,23,0,0,0,0,0,0
+2024/25,Brentford,144788,Hákon Valdimarsson,G,2,0,0,0,0,1,1,144,1,2,3,0,0,0
+2024/25,Brentford,122142,Jayden Meghoma,D,1,0,0,0,0,0,1,4,0,0,0,0,0,0
+2024/25,Brentford,128264,Ryan Trevitt,M,1,0,0,0,0,0,1,3,0,0,0,0,0,0
+2024/25,Brighton & Hove Albion,117732,Kaoru Mitoma,F,36,10,4,3,16,11,9,2608,28,40,0,1,0,0
+2024/25,Brighton & Hove Albion,75709,Bart Verbruggen,G,36,0,1,7,14,13,9,3240,36,58,91,6,0,0
+2024/25,Brighton & Hove Albion,134333,Yasin Ayari,M,34,2,1,1,15,12,7,1966,22,28,0,4,0,0
+2024/25,Brighton & Hove Albion,124396,Carlos Baleba,M,34,3,1,4,15,12,7,2670,31,39,0,6,1,0
+2024/25,Brighton & Hove Albion,76090,Jan Paul van Hecke,D,34,1,0,7,14,12,8,2959,33,47,0,6,1,0
+2024/25,Brighton & Hove Albion,136175,Yankuba Minteh,F,32,6,4,1,13,12,7,1840,20,33,0,6,0,0
+2024/25,Brighton & Hove Albion,31904,Pervis Estupiñán,D,30,1,1,3,12,11,7,2403,26,44,0,5,0,0
+2024/25,Brighton & Hove Albion,3452,Danny Welbeck,F,30,10,4,2,14,9,7,2122,24,37,0,5,0,0
+2024/25,Brighton & Hove Albion,126317,Simon Adingra,F,29,2,2,0,12,10,7,1092,12,23,0,0,0,0
+2024/25,Brighton & Hove Albion,51830,Georginio Rutter,F,28,5,3,0,11,11,6,1666,19,29,0,2,0,0
+2024/25,Brighton & Hove Albion,72371,João Pedro,F,27,10,6,2,10,10,7,1953,23,27,0,4,1,0
+2024/25,Brighton & Hove Albion,112739,Jack Hinshelwood,M,26,5,2,2,13,6,7,1846,22,30,0,5,0,0
+2024/25,Brighton & Hove Albion,8163,Lewis Dunk,D,25,0,0,3,7,10,8,2083,23,42,0,5,0,1
+2024/25,Brighton & Hove Albion,72239,Mats Wieffer,M,25,1,4,2,11,7,7,1008,10,22,0,6,0,0
+2024/25,Brighton & Hove Albion,134176,Brajan Gruda,F,21,1,4,0,7,8,6,681,8,15,0,0,0,0
+2024/25,Brighton & Hove Albion,14671,Matt O'Riley,M,21,2,2,0,8,7,6,937,11,20,0,1,0,1
+2024/25,Brighton & Hove Albion,4874,Joël Veltman,D,21,0,0,5,10,8,3,1699,19,24,0,5,0,0
+2024/25,Brighton & Hove Albion,143240,Diego Gómez,M,16,1,0,0,9,3,4,512,4,13,0,0,0,0
+2024/25,Brighton & Hove Albion,23704,Tariq Lamptey,D,15,2,2,1,5,6,4,860,10,21,0,0,0,0
+2024/25,Brighton & Hove Albion,9426,Adam Webster,D,14,0,0,3,10,2,2,888,11,11,0,1,0,0
+2024/25,Brighton & Hove Albion,21912,Igor Julio,D,13,0,0,1,5,5,3,960,10,17,0,4,0,0
+2024/25,Brighton & Hove Albion,71590,Evan Ferguson,F,13,1,0,0,2,6,5,236,2,7,0,0,0,0
+2024/25,Brighton & Hove Albion,125827,Julio Enciso,M,12,0,0,0,4,6,2,288,2,4,0,0,0,0
+2024/25,Brighton & Hove Albion,8171,Solly March,M,8,0,0,0,4,2,2,162,1,3,0,2,0,0
+2024/25,Brighton & Hove Albion,50727,Ferdi Kadioglu,D,6,1,0,1,2,2,2,388,5,8,0,1,0,0
+2024/25,Brighton & Hove Albion,2100,James Milner,M,4,0,0,0,3,1,0,173,3,1,0,1,0,0
+2024/25,Brighton & Hove Albion,108751,Jakub Moder,M,4,0,0,0,2,1,1,9,0,0,0,0,0,0
+2024/25,Brighton & Hove Albion,26681,Eiran Cashin,D,2,0,0,0,0,0,2,19,0,2,0,0,0,0
+2024/25,Brighton & Hove Albion,24221,Billy Gilmour,M,2,0,0,0,2,0,0,97,1,1,0,0,0,0
+2024/25,Brighton & Hove Albion,3457,Jason Steele,G,2,0,0,1,2,0,0,180,2,1,3,0,0,0
+2024/25,Brighton & Hove Albion,129952,Harry Howell,F,1,0,0,0,1,0,0,6,0,0,0,0,0,0
+2024/25,Brighton & Hove Albion,68857,Jeremy Sarmiento,F,1,0,0,0,1,0,0,8,0,0,0,0,0,0
+2024/25,Chelsea,112203,Moisés Caicedo,M,38,1,2,10,20,9,9,3356,38,42,0,11,0,0
+2024/25,Chelsea,49293,Cole Palmer,M,37,15,8,5,20,9,8,3195,36,41,0,7,0,0
+2024/25,Chelsea,27277,Marc Cucurella,D,36,5,1,9,20,8,8,2989,33,38,0,8,1,0
+2024/25,Chelsea,63741,Enzo Fernández,M,36,6,7,7,18,9,9,2946,32,37,0,8,0,0
+2024/25,Chelsea,51229,Levi Colwill,D,35,2,1,10,18,8,9,3149,35,41,0,9,0,0
+2024/25,Chelsea,21998,Pedro Neto,F,35,4,6,4,17,9,9,2268,24,25,0,8,0,0
+2024/25,Chelsea,68827,Malo Gusto,D,32,0,1,4,15,8,9,1858,19,26,0,4,0,0
+2024/25,Chelsea,67407,Noni Madueke,F,32,7,3,2,18,9,5,2046,27,28,0,3,0,0
+2024/25,Chelsea,14538,Robert Sánchez,G,32,0,0,10,17,9,6,2880,32,34,95,5,0,0
+2024/25,Chelsea,14801,Jadon Sancho,F,31,3,4,3,17,6,8,1764,19,24,0,2,0,0
+2024/25,Chelsea,110526,Nicolas Jackson,F,30,10,5,0,15,9,6,2238,28,23,0,7,1,0
+2024/25,Chelsea,16784,Christopher Nkunku,F,27,3,2,0,13,6,8,911,9,16,0,2,0,0
+2024/25,Chelsea,13549,Tosin Adarabioyo,D,22,1,1,7,12,5,5,1404,15,14,0,4,0,0
+2024/25,Chelsea,14571,Reece James,D,19,1,1,2,9,4,6,1064,12,14,0,1,0,0
+2024/25,Chelsea,99282,Roméo Lavia,M,16,0,1,0,9,3,4,801,11,11,0,4,0,0
+2024/25,Chelsea,66284,Wesley Fofana,D,14,0,0,1,8,4,2,1176,14,13,0,7,0,0
+2024/25,Chelsea,14575,Trevoh Chalobah,D,13,0,1,3,7,2,4,911,11,12,0,2,0,0
+2024/25,Chelsea,14706,Kiernan Dewsbury-Hall,M,13,0,1,0,9,1,3,259,2,3,0,0,0,0
+2024/25,Chelsea,50856,João Félix,F,12,1,1,0,8,3,1,364,3,4,0,2,0,0
+2024/25,Chelsea,118442,Tyrique George,F,8,1,1,0,6,0,2,178,1,0,0,1,0,0
+2024/25,Chelsea,53991,Mykhailo Mudryk,M,7,0,0,0,3,4,0,145,1,2,0,0,0,0
+2024/25,Chelsea,119078,Renato Veiga,D,7,0,0,1,5,0,2,177,1,2,0,2,0,0
+2024/25,Chelsea,54893,Axel Disasi,D,6,1,0,1,4,1,1,365,4,3,0,1,0,0
+2024/25,Chelsea,75989,Filip Jörgensen,G,6,0,0,1,3,0,3,540,6,9,20,0,0,0
+2024/25,Chelsea,53612,Benoît Badiashile,D,5,0,0,0,3,0,2,333,3,5,0,0,0,0
+2024/25,Chelsea,125075,Josh Acheampong,D,4,0,0,0,2,2,0,169,2,3,0,1,0,0
+2024/25,Chelsea,130068,Marc Guiu,F,3,0,0,0,1,1,1,71,0,2,0,0,0,0
+2024/25,Chelsea,136952,Mathis Amougou,M,1,0,0,0,1,0,0,7,0,0,0,0,0,0
+2024/25,Chelsea,122945,Shumaira Mheuka,F,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2024/25,Crystal Palace,13988,Dean Henderson,G,38,0,0,11,13,14,11,3420,38,51,104,3,0,0
+2024/25,Crystal Palace,49796,Ismaïla Sarr,F,38,8,6,3,13,14,11,2714,30,39,0,4,0,0
+2024/25,Crystal Palace,20874,Jean-Philippe Mateta,F,37,14,2,4,12,14,11,2654,33,37,0,2,0,0
+2024/25,Crystal Palace,24334,Tyrick Mitchell,D,37,0,5,7,12,14,11,3102,37,46,0,2,0,0
+2024/25,Crystal Palace,76353,Daniel Muñoz,D,37,4,5,11,13,14,10,3233,37,46,0,10,0,0
+2024/25,Crystal Palace,76104,Maxence Lacroix,D,35,1,1,11,13,13,9,3118,35,45,0,5,0,0
+2024/25,Crystal Palace,21584,Eberechi Eze,M,34,8,8,2,13,12,9,2600,31,34,0,1,0,0
+2024/25,Crystal Palace,14569,Marc Guéhi,D,34,3,2,11,11,13,10,3059,34,42,0,7,1,3
+2024/25,Crystal Palace,49759,Daichi Kamada,M,34,0,0,2,12,11,11,1554,15,26,0,4,1,0
+2024/25,Crystal Palace,8589,Will Hughes,M,33,0,3,2,12,12,9,2118,24,31,0,11,0,0
+2024/25,Crystal Palace,37776,Jefferson Lerma,M,33,0,1,3,12,11,10,2276,26,36,0,9,0,0
+2024/25,Crystal Palace,14451,Eddie Nketiah,F,29,3,1,0,11,11,7,1026,9,17,0,4,1,0
+2024/25,Crystal Palace,50842,Chris Richards,D,24,1,0,7,10,7,7,1924,22,31,0,2,1,0
+2024/25,Crystal Palace,138981,Justin Devenny,M,23,1,1,0,10,8,5,496,4,8,0,1,0,0
+2024/25,Crystal Palace,69595,Adam Wharton,M,20,0,2,0,6,7,7,1326,16,21,0,2,0,0
+2024/25,Crystal Palace,4604,Nathaniel Clyne,D,13,0,0,0,4,5,4,481,5,11,0,1,0,0
+2024/25,Crystal Palace,126670,Cheick Doucouré,M,13,0,0,0,4,6,3,445,4,6,0,1,0,0
+2024/25,Crystal Palace,14575,Trevoh Chalobah,D,12,3,0,2,4,5,3,1063,12,13,0,1,0,0
+2024/25,Crystal Palace,8980,Jeffrey Schlupp,M,12,0,0,0,1,6,5,95,0,3,0,0,0,0
+2024/25,Crystal Palace,13491,Ben Chilwell,D,8,1,0,0,5,1,2,254,1,4,0,1,0,0
+2024/25,Crystal Palace,133297,Romain Esse,M,7,1,1,0,3,2,2,135,1,3,0,0,0,0
+2024/25,Crystal Palace,133681,Matheus França,F,4,1,0,0,1,2,1,52,0,0,0,0,0,0
+2024/25,Crystal Palace,125106,Asher Agbinone,M,2,0,0,0,0,0,2,4,0,0,0,0,0,0
+2024/25,Crystal Palace,16788,Odsonne Édouard,F,2,0,0,0,0,0,2,116,1,2,0,0,0,0
+2024/25,Crystal Palace,127828,Caleb Kporha,D,2,0,0,0,0,0,2,11,0,1,0,0,0,0
+2024/25,Crystal Palace,3929,Joel Ward,D,2,0,0,0,2,0,0,72,1,2,0,1,0,0
+2024/25,Crystal Palace,26151,Joachim Andersen,D,1,0,0,0,0,0,1,90,1,2,0,1,0,0
+2024/25,Crystal Palace,5595,Jordan Ayew,F,1,0,0,0,0,0,1,20,0,1,0,1,0,0
+2024/25,Crystal Palace,110549,Chadi Riad,D,1,0,0,0,0,0,1,90,1,2,0,0,0,0
+2024/25,Everton,4640,Jordan Pickford,G,38,0,1,12,11,15,12,3420,38,44,122,7,0,0
+2024/25,Everton,12582,Idrissa Gueye,M,37,0,3,11,11,14,12,3067,35,39,0,9,0,0
+2024/25,Everton,24983,Vitalii Mykolenko,D,35,1,2,10,11,12,12,3084,35,39,0,4,0,0
+2024/25,Everton,33135,Jack Harrison,F,34,1,0,2,9,14,11,2083,24,27,0,0,0,0
+2024/25,Everton,13823,Abdoulaye Doucouré,M,33,3,2,6,10,13,10,2577,31,33,0,3,1,0
+2024/25,Everton,31936,Iliman Ndiaye,F,33,9,0,7,10,11,12,2440,29,24,0,3,0,0
+2024/25,Everton,8143,James Tarkowski,D,33,1,1,10,8,14,11,2924,33,38,0,6,0,0
+2024/25,Everton,3062,Ashley Young,D,32,1,3,7,10,13,9,1869,19,22,0,7,1,0
+2024/25,Everton,66318,Jarrad Branthwaite,D,30,0,1,8,9,13,8,2510,28,28,0,4,0,0
+2024/25,Everton,126789,Beto,F,30,8,0,1,7,11,12,1528,15,24,0,2,0,0
+2024/25,Everton,9576,Dominic Calvert-Lewin,F,26,3,1,3,8,9,9,1613,19,18,0,2,0,0
+2024/25,Everton,118112,Jesper Lindstrøm,M,25,0,1,1,6,12,7,1240,15,14,0,2,0,0
+2024/25,Everton,23841,James Garner,M,21,0,1,4,8,9,4,1594,17,19,0,5,0,0
+2024/25,Everton,24797,Dwight McNeil,F,21,4,6,3,7,6,8,1371,15,24,0,1,0,0
+2024/25,Everton,112589,Jake O'Brien,D,20,2,0,5,7,7,6,1569,17,17,0,5,0,0
+2024/25,Everton,49738,Orel Mangala,M,19,1,0,3,5,8,6,1255,14,10,0,2,0,0
+2024/25,Everton,66538,Tim Iroegbunam,M,18,0,1,0,3,9,6,564,5,16,0,4,0,0
+2024/25,Everton,133612,Charly Alcaraz,M,15,2,3,0,5,7,3,761,7,9,0,4,0,0
+2024/25,Everton,4333,Michael Keane,D,14,3,0,3,5,3,6,1046,11,20,0,5,0,0
+2024/25,Everton,31442,Armando Broja,F,10,0,0,0,2,4,4,331,4,2,0,1,0,0
+2024/25,Everton,74585,Nathan Patterson,D,10,0,1,0,3,3,4,345,3,6,0,1,0,0
+2024/25,Everton,3600,Séamus Coleman,D,5,0,0,0,2,2,1,215,3,4,0,1,0,0
+2024/25,Everton,119034,Youssef Chermiti,F,4,0,0,0,0,2,2,42,0,0,0,1,0,0
+2024/25,Everton,134286,Harrison Armstrong,M,3,0,0,0,1,0,2,47,0,1,0,1,0,0
+2024/25,Everton,112267,Roman Dixon,D,1,0,0,0,0,0,1,90,1,4,0,0,0,0
+2024/25,Everton,10564,Mason Holgate,D,1,0,0,0,0,0,1,5,0,1,0,0,0,0
+2024/25,Fulham,4717,Alex Iwobi,F,38,9,6,2,15,9,14,2994,35,45,0,1,0,0
+2024/25,Fulham,11071,Raúl Jiménez,F,38,12,3,0,15,9,14,2505,30,37,0,4,0,0
+2024/25,Fulham,4985,Bernd Leno,G,38,0,1,5,15,9,14,3420,38,54,110,5,0,0
+2024/25,Fulham,14624,Antonee Robinson,D,36,0,10,5,14,9,13,3167,35,49,0,8,0,0
+2024/25,Fulham,4979,Adama Traoré,F,36,2,7,0,15,8,13,1769,18,28,0,3,0,0
+2024/25,Fulham,23793,Calvin Bassey,D,35,1,0,5,15,8,12,3074,34,47,0,7,0,0
+2024/25,Fulham,14445,Emile Smith Rowe,M,34,6,3,0,13,8,13,2061,25,28,0,3,0,0
+2024/25,Fulham,10476,Andreas Pereira,M,33,2,4,1,13,7,13,2022,25,32,0,8,0,0
+2024/25,Fulham,21614,Sander Berge,M,31,0,0,3,13,7,11,2227,26,35,0,6,0,0
+2024/25,Fulham,117763,Rodrigo Muniz,F,31,8,1,0,13,9,9,951,8,17,0,1,0,0
+2024/25,Fulham,16044,Sasa Lukic,M,30,0,2,0,11,8,11,2355,28,37,0,12,0,0
+2024/25,Fulham,26151,Joachim Andersen,D,29,0,0,4,13,3,13,2573,29,42,0,6,1,1
+2024/25,Fulham,3894,Tom Cairney,M,25,2,0,0,8,6,11,615,3,12,0,3,1,0
+2024/25,Fulham,13961,Harry Wilson,F,25,6,1,0,8,8,9,1157,12,21,0,2,0,0
+2024/25,Fulham,6712,Timothy Castagne,D,24,0,1,3,9,5,10,1643,17,28,0,1,0,0
+2024/25,Fulham,4880,Kenny Tete,D,22,0,2,2,8,6,8,1779,21,26,0,5,0,0
+2024/25,Fulham,49884,Issa Diop,D,21,0,0,1,8,8,5,1335,15,19,0,2,0,1
+2024/25,Fulham,14656,Ryan Sessegnon,M,16,4,2,0,8,1,7,580,7,10,0,1,0,0
+2024/25,Fulham,4818,Harrison Reed,M,12,0,0,0,6,3,3,92,0,3,0,2,0,0
+2024/25,Fulham,14450,Reiss Nelson,F,11,1,1,0,5,3,3,486,5,9,0,1,0,0
+2024/25,Fulham,4748,Willian,F,10,0,0,0,4,0,6,253,2,3,0,0,0,0
+2024/25,Fulham,35752,Jorge Cuenca,D,8,0,0,0,3,3,2,350,4,8,0,0,0,0
+2024/25,Fulham,128976,Josh King,M,8,0,0,0,3,2,3,126,1,0,0,0,0,0
+2024/25,Fulham,50501,Carlos Vinícius,F,3,0,0,0,1,1,1,13,0,1,0,0,0,0
+2024/25,Fulham,124083,Martial Godo,F,2,0,0,0,0,1,1,21,0,0,0,0,0,0
+2024/25,Fulham,66563,Jay Stansfield,F,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+2024/25,Ipswich Town,51813,Liam Delap,F,37,12,2,0,4,10,23,2612,32,58,0,12,0,0
+2024/25,Ipswich Town,15154,Dara O'Shea,D,35,0,2,2,4,9,22,3123,35,75,0,6,0,0
+2024/25,Ipswich Town,51454,Leif Davis,D,33,1,2,2,3,8,22,2746,32,69,0,5,1,0
+2024/25,Ipswich Town,8388,Sam Morsy,M,33,1,1,1,4,9,20,2753,31,67,0,10,0,1
+2024/25,Ipswich Town,32715,Jack Clarke,F,32,0,4,0,3,10,19,1170,12,31,0,2,0,0
+2024/25,Ipswich Town,19723,Jack Taylor,M,32,1,0,0,3,7,22,838,4,21,0,4,0,0
+2024/25,Ipswich Town,98300,Omari Hutchinson,F,31,3,2,0,3,8,20,2590,30,61,0,5,0,0
+2024/25,Ipswich Town,108613,Jens Cajuste,M,30,1,1,0,4,8,18,1976,25,46,0,2,0,0
+2024/25,Ipswich Town,14283,George Hirst,F,26,3,1,0,2,7,17,649,5,16,0,3,0,0
+2024/25,Ipswich Town,49254,Jacob Greaves,D,25,1,0,2,1,7,17,2205,25,53,0,5,0,0
+2024/25,Ipswich Town,15212,Ben Johnson,D,23,1,2,0,4,5,14,1348,14,36,0,3,1,0
+2024/25,Ipswich Town,10874,Conor Chaplin,F,22,1,1,0,1,6,15,854,10,19,0,2,0,0
+2024/25,Ipswich Town,13559,Axel Tuanzebe,D,22,0,1,1,2,8,12,1717,20,37,0,3,1,1
+2024/25,Ipswich Town,8417,Sam Szmodics,F,20,4,0,0,2,7,11,1001,13,18,0,2,0,0
+2024/25,Ipswich Town,10768,Kalvin Phillips,M,19,0,0,1,2,7,10,1239,14,29,0,4,1,0
+2024/25,Ipswich Town,14636,Nathan Broadhead,F,18,2,0,0,2,2,14,696,7,12,0,1,0,0
+2024/25,Ipswich Town,11000,Cameron Burgess,D,18,0,2,0,3,4,11,1540,16,37,0,0,0,0
+2024/25,Ipswich Town,8201,Wes Burns,F,18,0,1,0,2,6,10,933,12,23,0,1,0,0
+2024/25,Ipswich Town,19911,Arijanet Muric,G,18,0,0,1,2,6,10,1620,18,33,69,1,0,0
+2024/25,Ipswich Town,14203,Luke Woolfenden,D,15,0,0,1,1,4,10,1186,12,28,0,2,0,0
+2024/25,Ipswich Town,125827,Julio Enciso,M,13,2,3,0,1,3,9,876,12,18,0,3,0,0
+2024/25,Ipswich Town,10525,Alex Palmer,G,13,0,0,0,1,3,9,1170,13,30,45,2,0,0
+2024/25,Ipswich Town,51703,Ali Al Hamadi,F,11,0,0,0,2,3,6,125,0,5,0,3,0,0
+2024/25,Ipswich Town,4432,Massimo Luongo,M,11,0,0,0,1,3,7,197,2,6,0,0,0,0
+2024/25,Ipswich Town,64519,Jaden Philogene,F,10,2,0,0,1,1,8,475,5,17,0,1,0,0
+2024/25,Ipswich Town,19877,Harry Clarke,D,7,0,0,0,1,0,6,378,4,9,0,1,1,0
+2024/25,Ipswich Town,8159,Christian Walton,G,7,0,0,1,1,1,5,630,7,19,20,0,0,0
+2024/25,Ipswich Town,4864,Conor Townsend,D,6,0,1,0,1,2,3,335,3,6,0,1,0,0
+2024/25,Ipswich Town,33128,Chiedozie Ogbene,F,5,0,0,0,0,3,2,240,3,3,0,0,0,0
+2024/25,Ipswich Town,10968,Ben Godfrey,D,3,0,0,0,0,0,3,159,2,10,0,1,0,0
+2024/25,Ipswich Town,8264,Marcus Harness,F,2,0,0,0,0,0,2,43,0,2,0,0,0,0
+2024/25,Ipswich Town,13637,George Edmundson,D,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+2024/25,Leicester City,13515,James Justin,D,36,2,2,2,6,6,24,2920,34,68,0,6,0,0
+2024/25,Leicester City,8979,Jamie Vardy,F,35,9,4,0,6,7,22,2839,35,68,0,5,0,0
+2024/25,Leicester City,20566,Wout Faes,D,34,1,0,3,6,6,22,2812,30,63,0,4,0,0
+2024/25,Leicester City,123333,Bilal El Khannouss,M,32,2,3,1,5,5,22,2193,27,54,0,4,0,0
+2024/25,Leicester City,133430,Facundo Buonanotte,M,31,5,2,0,4,4,23,1513,14,33,0,8,0,0
+2024/25,Leicester City,50247,Boubakary Soumaré,M,31,0,0,1,5,5,21,2170,25,52,0,8,0,0
+2024/25,Leicester City,5595,Jordan Ayew,F,30,5,0,0,6,5,19,1644,19,41,0,5,0,0
+2024/25,Leicester City,123722,Victor Kristiansen,D,30,0,1,1,4,6,20,2489,29,62,0,1,0,1
+2024/25,Leicester City,14458,Stephy Mavididi,F,30,4,1,0,3,6,21,1613,16,38,0,2,0,0
+2024/25,Leicester City,20479,Wilfred Ndidi,M,28,0,5,2,5,7,16,2336,28,48,0,8,0,1
+2024/25,Leicester City,118083,Mads Hermansen,G,27,0,0,1,3,6,18,2385,27,58,103,1,0,0
+2024/25,Leicester City,21413,Oliver Skipp,M,24,0,0,1,5,4,15,1120,10,26,0,8,0,0
+2024/25,Leicester City,24994,Patson Daka,F,23,1,0,0,4,2,17,721,6,16,0,0,0,0
+2024/25,Leicester City,8192,Bobby De Cordova-Reid,F,23,1,2,0,4,3,16,742,9,17,0,2,0,0
+2024/25,Leicester City,4136,Conor Coady,D,22,1,0,2,4,4,14,1713,19,42,0,3,0,0
+2024/25,Leicester City,7488,Harry Winks,M,22,0,2,0,2,4,16,1540,17,34,0,4,0,0
+2024/25,Leicester City,66011,Caleb Okoli,D,19,1,0,1,2,4,13,1122,12,26,0,4,0,0
+2024/25,Leicester City,51553,Kasey McAteer,M,18,1,1,0,3,5,10,852,9,16,0,3,0,0
+2024/25,Leicester City,20109,Jannik Vestergaard,D,18,0,0,0,2,3,13,1395,16,35,0,5,0,1
+2024/25,Leicester City,23796,Luke Thomas,D,14,0,0,2,2,2,10,1112,13,23,0,3,0,0
+2024/25,Leicester City,127644,Abdul Fatawu,F,11,0,2,0,2,4,5,577,6,14,0,0,0,0
+2024/25,Leicester City,5343,Ricardo Pereira,D,10,0,0,0,1,2,7,385,4,8,0,1,0,0
+2024/25,Leicester City,25444,Jakub Stolarczyk,G,10,0,0,2,3,1,6,900,10,16,28,1,0,0
+2024/25,Leicester City,145759,Jeremy Monga,F,7,0,0,0,2,1,4,105,0,3,0,0,0,0
+2024/25,Leicester City,13248,Hamza Choudhury,M,4,0,0,0,0,1,3,130,1,5,0,0,0,0
+2024/25,Leicester City,75678,Woyo Coulibaly,D,4,0,0,0,1,0,3,107,1,6,0,1,0,0
+2024/25,Leicester City,16788,Odsonne Édouard,F,4,0,0,0,1,1,2,26,0,1,0,0,0,0
+2024/25,Leicester City,138550,Jake Evans,M,4,0,0,0,2,1,1,21,0,1,0,0,0,0
+2024/25,Leicester City,4522,Danny Ward,G,2,0,0,0,0,0,2,135,1,6,4,0,0,0
+2024/25,Leicester City,135804,Olabade Aluko,D,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+2024/25,Leicester City,112742,Will Alves,M,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+2024/25,Leicester City,117859,Michael Golding,M,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2024/25,Liverpool,5178,Mohamed Salah,F,38,29,18,8,25,9,4,3377,38,40,0,1,0,0
+2024/25,Liverpool,49909,Ryan Gravenberch,M,37,0,4,11,25,9,3,3168,37,35,0,6,1,0
+2024/25,Liverpool,5140,Virgil van Dijk,D,37,3,1,14,25,9,3,3330,37,38,0,5,0,0
+2024/25,Liverpool,66669,Luis Díaz,F,36,13,5,4,24,9,3,2411,28,21,0,2,0,0
+2024/25,Liverpool,33231,Dominik Szoboszlai,M,36,6,6,8,24,8,4,2496,29,29,0,6,0,0
+2024/25,Liverpool,32894,Cody Gakpo,F,35,10,4,1,23,8,4,1938,23,25,0,5,0,0
+2024/25,Liverpool,63633,Alexis Mac Allister,M,35,5,5,9,25,7,3,2606,30,24,0,6,0,0
+2024/25,Liverpool,14732,Trent Alexander-Arnold,D,33,3,6,4,22,9,2,2377,28,25,0,5,0,0
+2024/25,Liverpool,23815,Curtis Jones,M,33,3,3,1,20,9,4,1710,19,27,0,1,1,0
+2024/25,Liverpool,10458,Andy Robertson,D,33,0,1,6,22,9,2,2492,29,31,0,3,1,1
+2024/25,Liverpool,23593,Ibrahima Konaté,D,31,1,2,11,21,7,3,2565,30,28,0,5,0,0
+2024/25,Liverpool,70287,Darwin Núñez,F,30,5,2,0,18,8,4,1118,8,21,0,8,0,0
+2024/25,Liverpool,20559,Alisson Becker,G,28,0,0,9,18,7,3,2509,28,29,78,0,0,0
+2024/25,Liverpool,19758,Diogo Jota,F,26,6,3,1,16,7,3,1194,14,12,0,2,0,0
+2024/25,Liverpool,43586,Wataru Endo,M,20,0,0,0,16,2,2,261,1,5,0,0,0,0
+2024/25,Liverpool,68582,Conor Bradley,D,19,0,2,0,10,5,4,748,7,10,0,4,0,0
+2024/25,Liverpool,33185,Harvey Elliott,M,18,1,2,0,11,4,3,360,2,6,0,1,0,0
+2024/25,Liverpool,16006,Kostas Tsimikas,D,18,0,1,2,12,3,3,833,9,8,0,2,0,0
+2024/25,Liverpool,51557,Jarell Quansah,D,13,0,0,0,8,3,2,488,4,12,0,2,0,1
+2024/25,Liverpool,14723,Caoimhín Kelleher,G,10,0,0,4,7,2,1,900,10,12,27,0,0,0
+2024/25,Liverpool,10651,Joe Gomez,D,9,0,0,1,7,2,0,519,6,8,0,1,0,0
+2024/25,Liverpool,15802,Federico Chiesa,F,6,0,0,0,3,0,3,104,1,3,0,0,0,0
+2024/25,Liverpool,119292,Jayden Danns,F,1,0,0,0,1,0,0,10,0,1,0,0,0,0
+2024/25,Liverpool,24807,Vítezslav Jaros,G,1,0,0,0,1,0,0,11,0,0,1,0,0,0
+2024/25,Manchester City,67178,Josko Gvardiol,D,37,5,0,11,21,8,8,3279,36,41,0,2,0,0
+2024/25,Manchester City,5101,Ilkay Gündogan,M,33,1,6,3,19,7,7,2227,25,28,0,1,0,0
+2024/25,Manchester City,5067,Bernardo Silva,M,33,4,4,9,17,8,8,2667,29,36,0,7,0,0
+2024/25,Manchester City,65970,Erling Haaland,F,31,22,3,6,16,7,8,2741,31,38,0,2,0,0
+2024/25,Manchester City,12520,Mateo Kovacic,M,31,6,2,4,18,6,7,2202,25,28,0,5,1,0
+2024/25,Manchester City,54156,Jérémy Doku,F,29,3,6,3,16,7,6,1513,16,14,0,1,0,0
+2024/25,Manchester City,126943,Sávio,F,29,1,8,3,14,7,8,1770,21,25,0,3,0,0
+2024/25,Manchester City,4288,Kevin De Bruyne,M,28,4,7,4,15,6,7,1704,19,19,0,2,0,0
+2024/25,Manchester City,14805,Phil Foden,M,28,7,2,1,12,7,9,1779,20,24,0,2,0,0
+2024/25,Manchester City,99281,Rico Lewis,D,28,1,2,3,15,6,7,1891,21,27,0,3,1,0
+2024/25,Manchester City,16431,Rúben Dias,D,27,0,0,11,17,6,4,2269,25,21,0,4,0,1
+2024/25,Manchester City,15656,Manuel Akanji,D,26,0,0,5,16,5,5,2014,23,28,0,3,0,0
+2024/25,Manchester City,76204,Matheus Nunes,M,26,1,6,7,17,3,6,1673,19,19,0,4,0,0
+2024/25,Manchester City,12707,Ederson,G,26,0,4,10,16,4,6,2321,26,26,54,4,0,0
+2024/25,Manchester City,4260,Jack Grealish,M,20,1,1,1,12,4,4,715,7,10,0,3,0,0
+2024/25,Manchester City,76216,Omar Marmoush,F,16,7,0,3,10,3,3,1182,14,12,0,0,0,0
+2024/25,Manchester City,49270,James McAtee,M,15,3,0,0,11,2,2,342,3,6,0,1,0,0
+2024/25,Manchester City,3955,Kyle Walker,D,15,0,0,0,6,3,6,967,9,21,0,3,0,0
+2024/25,Manchester City,47133,Stefan Ortega,G,13,0,0,3,6,4,3,1099,12,18,33,1,0,0
+2024/25,Manchester City,67849,Nico González,M,11,1,0,3,8,1,2,763,9,7,0,3,0,0
+2024/25,Manchester City,4505,John Stones,D,11,2,0,1,7,1,3,545,6,11,0,1,0,0
+2024/25,Manchester City,4499,Nathan Aké,D,10,0,0,0,4,2,4,682,8,11,0,0,0,0
+2024/25,Manchester City,112948,Nico O'Reilly,M,9,2,0,2,7,2,0,527,6,3,0,0,0,0
+2024/25,Manchester City,137371,Abdukodir Khusanov,D,6,0,0,2,3,1,2,504,6,6,0,1,0,1
+2024/25,Manchester City,66657,Oscar Bobb,M,3,0,0,0,3,0,0,14,0,1,0,0,0,0
+2024/25,Manchester City,16286,Rodri,M,3,0,0,0,2,1,0,73,1,1,0,0,0,0
+2024/25,Manchester City,119611,Jahmai Simpson-Pusey,D,2,0,0,0,0,1,1,95,1,2,0,1,0,0
+2024/25,Manchester City,302583,Vitor Reis,D,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2024/25,Manchester City,135722,Claudio Echeverri,M,1,0,0,0,1,0,0,5,0,0,0,0,0,0
+2024/25,Manchester City,70143,Divin Mubama,F,1,0,0,0,1,0,0,27,0,0,0,0,0,0
+2024/25,Manchester United,33245,Noussair Mazraoui,D,37,0,1,4,11,9,17,2848,34,43,0,3,0,0
+2024/25,Manchester United,23396,Bruno Fernandes,M,36,8,10,9,11,9,16,3024,35,43,0,3,2,0
+2024/25,Manchester United,68987,Alejandro Garnacho,F,36,6,2,3,9,9,18,2195,23,36,0,3,0,0
+2024/25,Manchester United,11026,André Onana,G,34,0,0,9,10,9,15,3060,34,44,90,0,0,0
+2024/25,Manchester United,24252,Diogo Dalot,D,33,0,3,8,10,8,15,2813,31,45,0,5,0,0
+2024/25,Manchester United,122934,Rasmus Højlund,F,32,4,0,0,8,9,15,2013,23,31,0,2,0,0
+2024/25,Manchester United,50848,Joshua Zirkzee,F,32,3,1,2,10,8,14,1392,14,24,0,2,0,0
+2024/25,Manchester United,20226,Matthijs de Ligt,D,29,2,0,3,10,7,12,2128,25,36,0,3,0,0
+2024/25,Manchester United,118031,Manuel Ugarte,M,29,1,2,1,9,7,13,1789,22,33,0,11,0,1
+2024/25,Manchester United,9566,Harry Maguire,D,27,1,0,2,8,5,14,1757,19,27,0,7,0,0
+2024/25,Manchester United,69176,Amad Diallo,F,26,8,6,5,8,4,14,1901,20,30,0,5,0,0
+2024/25,Manchester United,108936,Kobbie Mainoo,M,25,0,0,2,7,4,14,1656,19,27,0,5,0,0
+2024/25,Manchester United,5793,Casemiro,M,24,1,0,3,8,7,9,1497,18,20,0,5,0,0
+2024/25,Manchester United,4845,Christian Eriksen,M,23,1,2,1,7,5,11,1059,11,16,0,4,0,0
+2024/25,Manchester United,118591,Leny Yoro,D,21,0,0,1,4,5,12,1162,12,24,0,5,0,0
+2024/25,Manchester United,67191,Lisandro Martínez,D,20,2,1,5,8,3,9,1754,20,27,0,7,0,0
+2024/25,Manchester United,14580,Mason Mount,M,17,1,0,0,4,3,10,621,8,11,0,3,0,0
+2024/25,Manchester United,5066,Victor Lindelöf,D,16,0,0,2,5,5,6,697,6,9,0,1,0,0
+2024/25,Manchester United,13565,Marcus Rashford,F,15,4,1,2,5,4,6,983,12,9,0,2,0,0
+2024/25,Manchester United,146567,Patrick Dorgu,D,12,0,0,2,2,3,7,842,10,11,0,3,1,0
+2024/25,Manchester United,75381,Antony,F,8,0,0,0,2,1,5,135,0,2,0,0,0,0
+2024/25,Manchester United,3156,Jonny Evans,D,7,0,0,1,5,2,0,314,3,2,0,1,0,0
+2024/25,Manchester United,129833,Chido Obi,F,7,0,0,0,2,2,3,160,1,5,0,1,0,0
+2024/25,Manchester United,4608,Luke Shaw,D,7,0,0,0,1,2,4,348,4,5,0,1,0,1
+2024/25,Manchester United,67221,Toby Collyer,M,6,0,0,0,3,1,2,175,0,2,0,0,0,0
+2024/25,Manchester United,133503,Harry Amass,D,5,0,0,0,1,0,4,346,4,9,0,0,0,0
+2024/25,Manchester United,71744,Altay Bayindir,G,4,0,0,1,1,0,3,360,4,10,8,0,0,0
+2024/25,Manchester United,133114,Ayden Heaven,D,4,0,0,0,2,1,1,171,2,1,0,1,0,0
+2024/25,Manchester United,23581,Tyrell Malacia,D,3,0,0,0,1,0,2,99,2,1,0,1,0,0
+2024/25,Manchester United,117564,Tyler Fredricson,D,2,0,0,0,0,0,2,166,2,5,0,0,0,0
+2024/25,Manchester United,14824,Scott McTominay,M,2,0,0,0,1,0,1,17,0,1,0,0,0,0
+2024/25,Newcastle United,74761,Bruno Guimarães,M,38,5,6,5,20,6,12,3282,38,44,0,7,0,0
+2024/25,Newcastle United,8707,Dan Burn,D,37,1,1,13,20,6,11,3330,37,45,0,11,0,2
+2024/25,Newcastle United,49495,Tino Livramento,D,37,0,1,7,19,6,12,2842,32,40,0,1,0,0
+2024/25,Newcastle United,71623,Sandro Tonali,M,36,4,2,10,19,5,12,2631,28,34,0,5,0,0
+2024/25,Newcastle United,9662,Jacob Murphy,M,35,8,12,2,18,5,12,2379,31,31,0,4,0,0
+2024/25,Newcastle United,23747,Anthony Gordon,F,34,6,5,2,17,6,11,2444,28,33,0,2,0,0
+2024/25,Newcastle United,21737,Alexander Isak,F,34,23,6,3,20,4,10,2769,34,41,0,1,0,0
+2024/25,Newcastle United,5220,Fabian Schär,D,34,4,0,10,17,5,12,2937,33,42,0,9,1,0
+2024/25,Newcastle United,14716,Harvey Barnes,M,33,9,4,3,18,6,9,1755,17,23,0,0,0,0
+2024/25,Newcastle United,14446,Joe Willock,M,32,0,2,0,15,6,11,1074,11,16,0,4,0,0
+2024/25,Newcastle United,20607,Joelinton,M,29,4,3,7,16,5,8,2404,29,32,0,10,0,0
+2024/25,Newcastle United,10079,Nick Pope,G,28,0,0,8,13,6,9,2520,28,35,88,2,0,0
+2024/25,Newcastle United,108922,Lewis Hall,D,27,0,4,7,13,5,9,2192,24,31,0,3,0,0
+2024/25,Newcastle United,14897,Sean Longstaff,M,25,0,0,2,14,5,6,786,8,11,0,2,0,0
+2024/25,Newcastle United,3905,Kieran Trippier,D,25,0,3,2,12,4,9,1308,14,18,0,1,0,0
+2024/25,Newcastle United,8454,Callum Wilson,F,18,0,0,0,8,3,7,357,2,7,0,1,0,0
+2024/25,Newcastle United,117647,Lewis Miley,M,14,1,0,0,10,0,4,304,1,4,0,0,0,0
+2024/25,Newcastle United,114590,William Osula,F,14,1,0,0,6,0,8,124,0,3,0,0,0,0
+2024/25,Newcastle United,66494,Emil Krafth,D,12,0,0,0,7,2,3,334,2,2,0,2,0,0
+2024/25,Newcastle United,6451,Martin Dúbravka,G,10,0,0,5,7,0,3,900,10,12,29,0,0,0
+2024/25,Newcastle United,21585,Lloyd Kelly,D,10,0,1,0,5,1,4,301,4,6,0,2,0,0
+2024/25,Newcastle United,54312,Miguel Almirón,M,9,0,0,0,4,2,3,151,1,3,0,0,0,0
+2024/25,Newcastle United,49908,Sven Botman,D,8,0,0,1,4,1,3,414,6,4,0,1,0,0
+2024/25,Newcastle United,4815,Matt Targett,D,2,0,0,0,1,0,1,20,0,0,0,0,0,0
+2024/25,Nottingham Forest,49259,Anthony Elanga,F,38,6,11,3,19,8,11,2507,31,35,0,1,0,0
+2024/25,Nottingham Forest,16723,Matz Sels,G,38,0,0,13,19,8,11,3420,38,46,120,4,0,0
+2024/25,Nottingham Forest,51593,Elliot Anderson,M,37,2,6,2,19,8,10,2742,33,37,0,10,0,0
+2024/25,Nottingham Forest,16035,Nikola Milenkovic,D,37,5,2,13,19,7,11,3330,37,45,0,4,0,0
+2024/25,Nottingham Forest,139648,Murillo,D,36,2,0,11,18,7,11,3191,36,44,0,6,0,0
+2024/25,Nottingham Forest,3756,Chris Wood,F,36,20,3,1,18,8,10,2976,35,37,0,1,0,0
+2024/25,Nottingham Forest,10439,Ola Aina,D,35,2,1,11,18,8,9,3003,35,39,0,5,0,0
+2024/25,Nottingham Forest,23811,Neco Williams,D,35,1,3,7,18,8,9,2590,28,31,0,7,0,0
+2024/25,Nottingham Forest,14238,Ryan Yates,M,35,2,1,6,17,8,10,1904,18,27,0,10,0,0
+2024/25,Nottingham Forest,115172,Nicolás Domínguez,M,34,0,1,3,18,6,10,1970,23,27,0,9,0,0
+2024/25,Nottingham Forest,15259,Morgan Gibbs-White,M,34,7,8,3,17,8,9,2822,34,34,0,9,1,0
+2024/25,Nottingham Forest,133025,Jota Silva,F,31,3,1,0,16,5,10,840,5,16,0,5,0,0
+2024/25,Nottingham Forest,23702,Callum Hudson-Odoi,F,31,5,2,3,16,6,9,2201,25,23,0,2,0,0
+2024/25,Nottingham Forest,15340,Taiwo Awoniyi,F,26,1,0,0,15,5,6,400,3,10,0,0,0,0
+2024/25,Nottingham Forest,67510,Morato,D,26,0,0,3,17,5,4,893,6,14,0,5,0,0
+2024/25,Nottingham Forest,144693,Ramón Sosa,F,19,1,0,0,9,3,7,281,1,5,0,1,0,0
+2024/25,Nottingham Forest,37221,Álex Moreno,D,15,0,1,1,6,3,6,959,11,16,0,2,0,0
+2024/25,Nottingham Forest,108816,Ibrahim Sangaré,M,13,0,1,0,5,4,4,590,7,6,0,3,0,0
+2024/25,Nottingham Forest,4617,James Ward-Prowse,M,9,0,1,1,4,2,3,398,5,7,0,0,1,0
+2024/25,Nottingham Forest,112510,Danilo,M,8,0,0,0,5,2,1,275,5,4,0,0,0,0
+2024/25,Nottingham Forest,16204,Willy Boly,D,6,0,0,0,4,1,1,146,1,1,0,1,0,0
+2024/25,Nottingham Forest,10933,Harry Toffolo,D,4,0,0,0,3,1,0,135,1,2,0,1,0,0
+2024/25,Nottingham Forest,146394,Eric da Silva Moreira,F,2,0,0,0,1,0,1,28,0,0,0,0,0,0
+2024/25,Southampton,119072,Mateus Fernandes,M,36,2,4,1,2,6,28,2919,34,66,0,8,0,0
+2024/25,Southampton,25281,Cameron Archer,F,35,2,0,0,1,6,28,1432,13,34,0,0,0,0
+2024/25,Southampton,25447,Taylor Harwood-Bellis,D,34,1,0,3,2,6,26,2828,32,65,0,9,0,0
+2024/25,Southampton,112917,Tyler Dibling,F,33,2,0,0,1,6,26,1874,20,50,0,6,0,0
+2024/25,Southampton,13815,Kyle Walker-Peters,D,33,0,2,2,2,4,27,2922,33,77,0,5,0,0
+2024/25,Southampton,13956,Joe Aribo,M,32,3,0,0,2,5,25,2018,21,56,0,1,0,0
+2024/25,Southampton,19589,Jan Bednarek,D,30,2,0,3,2,5,23,2535,30,57,0,7,0,0
+2024/25,Southampton,13703,Aaron Ramsdale,G,30,0,0,3,2,5,23,2700,30,66,125,2,0,0
+2024/25,Southampton,67238,Yukinari Sugawara,D,30,1,1,0,2,4,24,1555,16,46,0,4,0,0
+2024/25,Southampton,14383,Flynn Downes,M,27,1,0,3,1,6,20,2154,25,49,0,12,0,0
+2024/25,Southampton,123910,Kamaldeen Sulemana,F,26,1,1,0,1,4,21,1406,17,36,0,2,0,0
+2024/25,Southampton,74960,Lesley Ugochukwu,M,26,1,1,0,2,5,19,1664,18,39,0,7,0,0
+2024/25,Southampton,15713,Paul Onuachu,F,25,4,1,0,2,3,20,1044,11,26,0,4,0,0
+2024/25,Southampton,14252,Ryan Manning,D,24,0,1,0,1,4,19,1468,18,35,0,2,0,0
+2024/25,Southampton,9199,Adam Armstrong,F,20,2,2,1,1,3,16,1252,15,35,0,4,0,0
+2024/25,Southampton,4612,Jack Stephens,D,19,1,0,1,2,4,13,1394,17,28,0,2,2,0
+2024/25,Southampton,14997,Will Smallbone,M,18,1,0,0,1,1,16,682,6,22,0,1,0,0
+2024/25,Southampton,10565,James Bree,D,17,0,1,1,1,2,14,1073,13,31,0,0,0,0
+2024/25,Southampton,4618,Adam Lallana,M,14,0,2,0,2,1,11,356,5,8,0,4,0,0
+2024/25,Southampton,112549,Ross Stewart,F,12,1,0,0,0,3,9,385,4,9,0,1,0,0
+2024/25,Southampton,24716,Nathan Wood,D,11,0,0,1,0,1,10,772,9,20,0,2,0,0
+2024/25,Southampton,14242,Ben Brereton,F,10,0,0,0,0,2,8,448,4,10,0,1,0,0
+2024/25,Southampton,301829,Welington,D,10,0,0,0,1,3,6,480,6,10,0,1,0,0
+2024/25,Southampton,8052,Ryan Fraser,M,8,0,0,0,0,2,6,306,4,10,0,0,1,0
+2024/25,Southampton,8691,Charlie Taylor,D,8,0,0,0,0,1,7,353,3,12,0,1,0,0
+2024/25,Southampton,4573,Alex McCarthy,G,5,0,0,0,0,0,5,450,5,13,24,0,0,0
+2024/25,Southampton,108325,Armel Bella-Kotchap,D,4,0,0,0,0,0,4,329,2,13,0,0,0,0
+2024/25,Southampton,128389,Albert Grønbæk,M,4,0,0,0,1,0,3,143,2,3,0,0,0,0
+2024/25,Southampton,122173,Jay Robinson,F,4,0,0,0,0,0,4,135,1,2,0,0,0,0
+2024/25,Southampton,9462,Joe Lumley,G,3,0,0,0,0,1,2,270,3,7,13,0,0,0
+2024/25,Southampton,118447,Sam Amo-Ameyaw,F,2,0,0,0,0,0,2,26,0,0,0,1,0,0
+2024/25,Southampton,16758,Maxwel Cornet,F,2,0,0,0,0,0,2,71,1,4,0,1,0,0
+2024/25,Southampton,66658,Samuel Edozie,M,2,0,0,0,0,0,2,64,0,0,0,1,0,0
+2024/25,Southampton,136974,Joachim Kayi Sanda,D,2,0,0,0,0,0,2,12,0,1,0,0,0,0
+2024/25,Southampton,133612,Charly Alcaraz,M,1,0,0,0,0,0,1,9,0,0,0,0,0,0
+2024/25,Southampton,72360,Ronnie Edwards,D,1,0,0,0,0,0,1,12,0,1,0,0,0,0
+2024/25,Tottenham Hotspur,117318,Pape Matar Sarr,M,36,3,2,1,10,5,21,1913,22,38,0,6,0,0
+2024/25,Tottenham Hotspur,49374,Brennan Johnson,F,33,11,3,1,10,4,19,2179,24,38,0,5,0,0
+2024/25,Tottenham Hotspur,32229,Pedro Porro,D,33,2,6,5,11,4,18,2608,28,47,0,5,0,0
+2024/25,Tottenham Hotspur,49316,Dejan Kulusevski,M,32,7,4,5,10,4,18,2391,27,41,0,3,0,0
+2024/25,Tottenham Hotspur,8456,James Maddison,M,31,9,7,0,10,4,17,1816,21,32,0,6,0,0
+2024/25,Tottenham Hotspur,4999,Son Heung-Min,F,30,7,9,2,10,4,16,2116,24,35,0,1,0,0
+2024/25,Tottenham Hotspur,50245,Yves Bissouma,M,28,2,0,1,9,4,15,1405,16,28,0,7,0,0
+2024/25,Tottenham Hotspur,117596,Archie Gray,M,28,0,0,2,9,4,15,1743,19,41,0,1,0,1
+2024/25,Tottenham Hotspur,133603,Lucas Bergvall,M,27,0,1,1,9,3,15,1206,11,25,0,3,0,0
+2024/25,Tottenham Hotspur,10443,Dominic Solanke,F,27,9,3,2,7,3,17,2206,25,43,0,0,0,1
+2024/25,Tottenham Hotspur,22802,Rodrigo Bentancur,M,26,2,0,2,8,3,15,1653,21,26,0,9,0,0
+2024/25,Tottenham Hotspur,23764,Djed Spence,D,25,1,2,2,8,3,14,1790,19,39,0,2,1,1
+2024/25,Tottenham Hotspur,126824,Destiny Udogie,D,25,0,1,0,8,4,13,1931,24,35,0,2,0,1
+2024/25,Tottenham Hotspur,71923,Guglielmo Vicario,G,24,0,0,4,9,3,12,2160,24,37,68,1,0,0
+2024/25,Tottenham Hotspur,66635,Cristian Romero,D,18,1,0,2,6,2,10,1420,18,22,0,3,0,0
+2024/25,Tottenham Hotspur,23599,Timo Werner,F,18,0,3,0,4,3,11,508,4,12,0,0,0,0
+2024/25,Tottenham Hotspur,4408,Ben Davies,D,17,0,0,3,5,2,10,1330,14,26,0,5,0,0
+2024/25,Tottenham Hotspur,69070,Radu Dragusin,D,16,0,0,2,4,2,10,1251,14,29,0,1,0,0
+2024/25,Tottenham Hotspur,118579,Wilson Odobert,F,16,1,0,0,4,2,10,849,9,20,0,0,0,0
+2024/25,Tottenham Hotspur,24630,Richarlison,F,15,4,1,0,4,2,9,500,4,9,0,2,0,0
+2024/25,Tottenham Hotspur,76614,Mathys Tel,F,13,2,1,1,3,1,9,913,11,20,0,2,0,0
+2024/25,Tottenham Hotspur,75582,Micky van de Ven,D,13,0,2,1,4,2,7,1018,12,17,0,4,0,0
+2024/25,Tottenham Hotspur,25892,Kevin Danso,D,10,0,0,0,2,2,6,843,9,18,0,0,0,0
+2024/25,Tottenham Hotspur,127853,Mikey Moore,F,10,0,1,0,3,1,6,361,3,5,0,0,0,0
+2024/25,Tottenham Hotspur,3170,Fraser Forster,G,7,0,0,1,1,2,4,630,7,15,29,0,0,0
+2024/25,Tottenham Hotspur,123998,Antonín Kinsky,G,6,0,0,1,1,0,5,540,6,11,24,0,0,0
+2024/25,Tottenham Hotspur,39606,Sergio Reguilón,D,4,0,0,0,0,1,3,195,1,3,0,2,0,0
+2024/25,Tottenham Hotspur,119462,Will Lankshear,F,3,0,0,0,1,1,1,10,0,0,0,0,0,0
+2024/25,Tottenham Hotspur,66570,Dane Scarlett,F,3,0,1,0,2,0,1,31,0,1,0,0,0,0
+2024/25,Tottenham Hotspur,15114,Brandon Austin,G,1,0,0,0,0,0,1,90,1,2,2,0,0,0
+2024/25,Tottenham Hotspur,114273,Alfie Dorrington,D,1,0,0,0,1,0,0,13,0,0,0,0,0,0
+2024/25,West Ham United,13522,Maximilian Kilman,D,38,0,1,6,11,10,17,3349,38,62,0,5,0,0
+2024/25,West Ham United,14164,Aaron Wan-Bissaka,D,36,2,5,5,11,9,16,3154,35,59,0,1,0,1
+2024/25,West Ham United,25183,Tomás Soucek,M,35,9,1,5,11,10,14,2570,30,44,0,8,0,0
+2024/25,West Ham United,8868,Jarrod Bowen,F,34,13,8,5,10,9,15,2979,34,50,0,1,0,0
+2024/25,West Ham United,32638,Konstantinos Mavropanos,D,33,0,0,2,10,8,15,2037,21,38,0,4,1,0
+2024/25,West Ham United,55776,Lucas Paquetá,M,33,4,0,3,7,10,16,2384,27,50,0,10,0,0
+2024/25,West Ham United,51364,Mohammed Kudus,M,32,5,3,2,9,9,14,2601,31,46,0,2,1,0
+2024/25,West Ham United,16803,Emerson,D,31,2,1,1,9,9,13,2126,26,41,0,5,0,0
+2024/25,West Ham United,16268,Carlos Soler,M,31,1,1,0,9,9,13,1404,14,25,0,6,0,0
+2024/25,West Ham United,40211,Edson Álvarez,M,28,0,1,0,10,5,13,1781,20,29,0,7,1,0
+2024/25,West Ham United,63656,Jean-Clair Todibo,D,27,0,0,1,10,7,10,1831,20,33,0,3,0,0
+2024/25,West Ham United,5748,Alphonse Areola,G,26,0,0,4,6,7,13,2259,25,41,82,0,0,1
+2024/25,West Ham United,40159,Guido Rodríguez,M,23,0,1,1,9,6,8,1155,16,19,0,6,0,0
+2024/25,West Ham United,7336,Vladimír Coufal,D,22,0,0,0,5,7,10,1061,11,21,0,5,0,1
+2024/25,West Ham United,65961,Crysencio Summerville,F,19,1,1,0,5,5,9,780,7,20,0,2,0,0
+2024/25,West Ham United,8897,Aaron Cresswell,D,18,0,0,3,10,2,6,823,10,8,0,3,0,0
+2024/25,West Ham United,42569,Niclas Füllkrug,F,18,3,2,0,4,5,9,788,6,18,0,2,0,0
+2024/25,West Ham United,8245,Danny Ings,F,15,1,2,0,4,4,7,270,1,4,0,0,0,0
+2024/25,West Ham United,117579,Ollie Scarles,D,15,0,0,1,4,5,6,662,7,9,0,1,0,0
+2024/25,West Ham United,4617,James Ward-Prowse,M,15,1,1,3,4,4,7,1042,12,11,0,2,0,0
+2024/25,West Ham United,9595,Michail Antonio,F,14,1,1,0,4,3,7,844,11,18,0,1,0,0
+2024/25,West Ham United,3309,Lukasz Fabianski,G,14,0,0,2,6,3,5,1161,13,21,50,2,0,0
+2024/25,West Ham United,146354,Luís Guilherme,F,12,0,0,0,1,3,8,139,1,5,0,0,0,0
+2024/25,West Ham United,136505,Andy Irving,M,10,0,0,0,3,2,5,162,1,4,0,2,0,0
+2024/25,West Ham United,71590,Evan Ferguson,F,8,0,0,0,2,3,3,151,1,2,0,0,0,0
+2024/25,West Ham United,109713,Lewis Orford,M,2,0,0,0,0,0,2,47,0,1,0,0,0,0
+2024/25,West Ham United,109714,Kaelan Casey,D,1,0,0,0,0,1,0,1,0,0,0,0,0,0
+2024/25,Wolverhampton Wanderers,71432,Rayan Aït-Nouri,D,37,4,7,0,11,6,20,3127,37,67,0,5,1,0
+2024/25,Wolverhampton Wanderers,133679,João Gomes,M,36,3,1,4,11,6,19,2986,35,58,0,9,1,0
+2024/25,Wolverhampton Wanderers,126108,Jean-Ricner Bellegarde,M,35,2,7,0,11,5,19,1681,20,31,0,3,0,0
+2024/25,Wolverhampton Wanderers,35670,Jørgen Strand Larsen,F,35,14,4,1,11,6,18,2599,30,52,0,4,0,0
+2024/25,Wolverhampton Wanderers,16642,Nélson Semedo,D,34,0,4,4,12,6,16,2891,32,49,0,8,0,0
+2024/25,Wolverhampton Wanderers,51202,Matheus Cunha,F,33,15,6,3,9,5,19,2600,29,54,0,4,0,0
+2024/25,Wolverhampton Wanderers,143214,André,M,33,0,0,5,11,5,17,2484,31,46,0,7,0,0
+2024/25,Wolverhampton Wanderers,92635,Toti Gomes,D,31,0,1,8,12,5,14,2615,30,45,0,7,0,0
+2024/25,Wolverhampton Wanderers,4229,Matt Doherty,D,30,2,1,5,12,4,14,2113,25,38,0,6,0,1
+2024/25,Wolverhampton Wanderers,43010,Santiago Bueno,D,29,0,0,4,11,5,13,1683,18,34,0,2,0,0
+2024/25,Wolverhampton Wanderers,11130,Gonçalo Guedes,F,29,2,4,0,7,6,16,987,10,25,0,1,0,0
+2024/25,Wolverhampton Wanderers,15715,José Sá,G,29,0,0,7,11,5,13,2609,29,48,71,2,0,0
+2024/25,Wolverhampton Wanderers,108947,Rodrigo Gomes,F,25,2,0,0,9,3,13,797,7,20,0,0,0,0
+2024/25,Wolverhampton Wanderers,24637,Tommy Doyle,M,24,0,1,0,6,5,13,476,3,10,0,1,0,0
+2024/25,Wolverhampton Wanderers,19814,Pablo Sarabia,M,23,3,2,0,9,3,11,805,7,17,0,3,0,0
+2024/25,Wolverhampton Wanderers,20337,Hwang Hee-Chan,F,21,2,0,0,5,3,13,650,5,19,0,0,0,0
+2024/25,Wolverhampton Wanderers,5583,Mario Lemina,M,17,1,3,1,2,3,12,1363,15,39,0,4,0,0
+2024/25,Wolverhampton Wanderers,110203,Emmanuel Agbadou,D,16,1,0,4,7,2,7,1411,16,22,0,3,0,0
+2024/25,Wolverhampton Wanderers,4198,Craig Dawson,D,15,0,0,1,3,4,8,969,10,25,0,2,0,2
+2024/25,Wolverhampton Wanderers,76310,Marshall Munetsi,M,14,2,1,4,7,2,5,1078,12,11,0,0,0,0
+2024/25,Wolverhampton Wanderers,74608,Carlos Forbs,F,10,0,0,0,2,2,6,232,1,9,0,2,0,0
+2024/25,Wolverhampton Wanderers,4331,Sam Johnstone,G,7,0,0,0,0,1,6,630,7,17,23,0,0,0
+2024/25,Wolverhampton Wanderers,123672,Nasser Djiga,D,5,0,0,0,4,0,1,65,1,2,0,0,0,0
+2024/25,Wolverhampton Wanderers,115114,Yerson Mosquera,D,5,0,0,0,0,1,4,442,5,12,0,2,0,0
+2024/25,Wolverhampton Wanderers,147032,Pedro Lima,D,3,0,0,0,1,0,2,70,1,2,0,0,0,0
+2024/25,Wolverhampton Wanderers,9651,Dan Bentley,G,2,0,0,1,1,0,1,180,2,4,8,0,0,0
+2024/25,Wolverhampton Wanderers,11362,Daniel Podence,F,2,0,0,0,0,0,2,46,0,2,0,0,0,0
+2024/25,Wolverhampton Wanderers,10801,Tom King,G,1,0,0,0,0,1,0,1,0,0,0,0,0,0
+2024/25,Wolverhampton Wanderers,145492,Mateus Mané,F,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+2024/25,Wolverhampton Wanderers,108956,Alfie Pond,D,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2024/25,Wolverhampton Wanderers,122388,Chiquinho,F,1,0,0,0,0,0,1,6,0,0,0,0,0,0
+2024/25,Wolverhampton Wanderers,117315,Boubacar Traoré,M,1,0,0,0,1,0,0,1,0,0,0,0,0,0
