@@ -6,7 +6,7 @@
 "clubPos": 4,
 "player": "Wojciech Szczesny",
 "pos": "GK",
-"ovr": 86,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 63,
@@ -57,7 +57,7 @@
 "clubPos": 4,
 "player": "Olivier Giroud",
 "pos": "FWD",
-"ovr": 91,
+"ovr": 89,
 "tier": "best",
 "stats": {
 "GOL": 75,
@@ -212,7 +212,7 @@
 "clubPos": 4,
 "player": "Laurent Koscielny",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "CLN": 89,
@@ -317,7 +317,7 @@
 "clubPos": 4,
 "player": "Santi Cazorla",
 "pos": "MID",
-"ovr": 87,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 87,
@@ -528,7 +528,7 @@
 "clubPos": 4,
 "player": "Mesut Ozil",
 "pos": "MID",
-"ovr": 85,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "AST": 93,
@@ -686,7 +686,7 @@
 "clubPos": 4,
 "player": "Aaron Ramsey",
 "pos": "MID",
-"ovr": 89,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "AST": 94,
@@ -4423,7 +4423,7 @@
 "clubPos": 3,
 "player": "Branislav Ivanovic",
 "pos": "DEF",
-"ovr": 87,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "CLN": 72,
@@ -4475,7 +4475,7 @@
 "clubPos": 3,
 "player": "Eden Hazard",
 "pos": "MID",
-"ovr": 92,
+"ovr": 91,
 "tier": "best",
 "stats": {
 "AST": 80,
@@ -4528,7 +4528,7 @@
 "clubPos": 3,
 "player": "Petr Cech",
 "pos": "GK",
-"ovr": 90,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "CLN": 76,
@@ -4579,7 +4579,7 @@
 "clubPos": 3,
 "player": "John Terry",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "CLN": 76,
@@ -4631,7 +4631,7 @@
 "clubPos": 3,
 "player": "Oscar",
 "pos": "MID",
-"ovr": 86,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 56,
@@ -4736,7 +4736,7 @@
 "clubPos": 3,
 "player": "Ramires",
 "pos": "MID",
-"ovr": 84,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "AST": 53,
@@ -4840,7 +4840,7 @@
 "clubPos": 3,
 "player": "Cesar Azpilicueta",
 "pos": "DEF",
-"ovr": 82,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "CLN": 80,
@@ -4943,7 +4943,7 @@
 "clubPos": 3,
 "player": "Frank Lampard",
 "pos": "MID",
-"ovr": 85,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "AST": 68,
@@ -7606,7 +7606,7 @@
 "clubPos": 5,
 "player": "Tim Howard",
 "pos": "GK",
-"ovr": 84,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "CLN": 76,
@@ -7657,7 +7657,7 @@
 "clubPos": 5,
 "player": "Seamus Coleman",
 "pos": "DEF",
-"ovr": 81,
+"ovr": 80,
 "tier": "gold",
 "stats": {
 "CLN": 77,
@@ -7919,7 +7919,7 @@
 "clubPos": 5,
 "player": "Gareth Barry",
 "pos": "MID",
-"ovr": 83,
+"ovr": 82,
 "tier": "gold",
 "stats": {
 "AST": 64,
@@ -8023,7 +8023,7 @@
 "clubPos": 5,
 "player": "Romelu Lukaku",
 "pos": "FWD",
-"ovr": 85,
+"ovr": 84,
 "tier": "best",
 "stats": {
 "GOL": 80,
@@ -12541,7 +12541,7 @@
 "clubPos": 2,
 "player": "Jordan Henderson",
 "pos": "MID",
-"ovr": 83,
+"ovr": 82,
 "tier": "gold",
 "stats": {
 "AST": 78,
@@ -12594,7 +12594,7 @@
 "clubPos": 2,
 "player": "Steven Gerrard",
 "pos": "MID",
-"ovr": 88,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "AST": 96,
@@ -12856,7 +12856,7 @@
 "clubPos": 2,
 "player": "Daniel Sturridge",
 "pos": "FWD",
-"ovr": 90,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "GOL": 92,
@@ -13740,7 +13740,7 @@
 "clubPos": 1,
 "player": "Yaya Toure",
 "pos": "MID",
-"ovr": 94,
+"ovr": 92,
 "tier": "best",
 "stats": {
 "AST": 88,
@@ -13793,7 +13793,7 @@
 "clubPos": 1,
 "player": "Pablo Zabaleta",
 "pos": "DEF",
-"ovr": 86,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 77,
@@ -13845,7 +13845,7 @@
 "clubPos": 1,
 "player": "Samir Nasri",
 "pos": "MID",
-"ovr": 88,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 84,
@@ -13898,7 +13898,7 @@
 "clubPos": 1,
 "player": "Fernandinho",
 "pos": "MID",
-"ovr": 85,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "AST": 60,
@@ -13951,7 +13951,7 @@
 "clubPos": 1,
 "player": "Alvaro Negredo",
 "pos": "FWD",
-"ovr": 82,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "GOL": 69,
@@ -14002,7 +14002,7 @@
 "clubPos": 1,
 "player": "Edin Dzeko",
 "pos": "FWD",
-"ovr": 90,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "GOL": 89,
@@ -14053,7 +14053,7 @@
 "clubPos": 1,
 "player": "Joe Hart",
 "pos": "GK",
-"ovr": 88,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "CLN": 71,
@@ -14315,7 +14315,7 @@
 "clubPos": 1,
 "player": "Vincent Kompany",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "CLN": 48,
@@ -14367,7 +14367,7 @@
 "clubPos": 1,
 "player": "Martin Demichelis",
 "pos": "DEF",
-"ovr": 82,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "CLN": 76,
@@ -14419,7 +14419,7 @@
 "clubPos": 1,
 "player": "David Silva",
 "pos": "MID",
-"ovr": 90,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "AST": 93,
@@ -14472,7 +14472,7 @@
 "clubPos": 1,
 "player": "Sergio Aguero",
 "pos": "FWD",
-"ovr": 93,
+"ovr": 91,
 "tier": "gold",
 "stats": {
 "GOL": 96,
@@ -14938,7 +14938,7 @@
 "clubPos": 7,
 "player": "David de Gea",
 "pos": "GK",
-"ovr": 86,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 50,
@@ -14989,7 +14989,7 @@
 "clubPos": 7,
 "player": "Patrice Evra",
 "pos": "DEF",
-"ovr": 85,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "CLN": 74,
@@ -15094,7 +15094,7 @@
 "clubPos": 7,
 "player": "Wayne Rooney",
 "pos": "FWD",
-"ovr": 92,
+"ovr": 91,
 "tier": "best",
 "stats": {
 "GOL": 87,
@@ -15562,7 +15562,7 @@
 "clubPos": 7,
 "player": "Robin van Persie",
 "pos": "FWD",
-"ovr": 89,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "GOL": 89,
@@ -24777,7 +24777,7 @@
 "player": "Hugo Lloris",
 "pos": "GK",
 "ovr": 82,
-"tier": "gold",
+"tier": "best",
 "stats": {
 "CLN": 71,
 "CON": 59,
@@ -25509,8 +25509,8 @@
 "clubPos": 6,
 "player": "Emmanuel Adebayor",
 "pos": "FWD",
-"ovr": 83,
-"tier": "best",
+"ovr": 82,
+"tier": "gold",
 "stats": {
 "GOL": 82,
 "AST": 71,

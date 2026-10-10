@@ -141,3 +141,5 @@ Craig wants roughly 10 players per season in the 90s (the panel was stricter, gi
 The 90+ players per season: 1994/95 Shearer 97, Kanchelskis 91, Fowler, Pallister, Irwin, Ince, Schmeichel, Giggs, Les Ferdinand, Klinsmann 90. 2019/20 De Bruyne 97, Salah 95, Mane 92, Alexander-Arnold, Robertson, Henderson, Mahrez, Sterling, Aguero 91, Van Dijk 90. 2023/24 Haaland 97, Foden 95, Saka 93, Havertz, Salah, Rodri 91, Ben White, Odegaard, Bernardo Silva, Ederson 90.
 
 Names in the top ten that look generous: Riise and Dudek (2001/02, Liverpool finished 2nd), Kuyt (2008/09), Giroud (2013/14), Ben White and Havertz (2023/24). They are ever-present starters at clubs that finished high, the same workhorse pattern noted above.
+
+Update, same day: the top-only stretch above is switched off (Craig: it lifts the top without moving everyone else). Ratings are the learned scale with one even stretch for all players and no ceiling. 2008/09 then has 6 players at 90+, 20 at 85+, 69 at 80+. A uniform shift of +2 for every player would give 10 in the 90s while keeping all gaps the same.

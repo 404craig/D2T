@@ -105,7 +105,7 @@ print(f"all panel seasons after stretch: agreement {spearman(list(st), list(ty))
 # Game scale (a design choice, not learned): in each season the TOP_N best players
 # sit at 90 to TOP_MAX, the order is unchanged, and players ranked below ANCHOR
 # keep the fitted value. Between the anchor and the TOP_N-th player it is stretched linearly.
-TOP_N, TOP_MAX, ANCHOR = 10, 97, 60
+TOP_N, TOP_MAX, ANCHOR = 10, 97, 60  # not used: Craig, 10 Oct 2026, wants no top-only bending
 
 
 def game_scale(v):
@@ -121,7 +121,7 @@ def game_scale(v):
 
 if "--write" in sys.argv:
     for t, (rated, _) in data.items():
-        p = game_scale(final(np.array([features(r) for r in rated])))
+        p = final(np.array([features(r) for r in rated]))  # one even stretch for everyone; game_scale() kept but unused
         out = []
         for r, v in zip(rated, p):
             q = dict(r); q["ovr"] = int(round(min(99, max(40, v))))
