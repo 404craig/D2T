@@ -2,6 +2,7 @@
 "season": "2023-24",
 "players": [
 {
+"id": "Declan Rice",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Declan Rice",
@@ -55,11 +56,12 @@
 "flag": ""
 },
 {
+"id": "William Saliba",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "William Saliba",
 "pos": "DEF",
-"ovr": 87,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "CLN": 86,
@@ -107,11 +109,12 @@
 "flag": ""
 },
 {
+"id": "Kai Havertz",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Kai Havertz",
 "pos": "MID",
-"ovr": 88,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 79,
@@ -160,11 +163,12 @@
 "flag": ""
 },
 {
+"id": "Ben White",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Ben White",
 "pos": "DEF",
-"ovr": 87,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "CLN": 94,
@@ -212,11 +216,12 @@
 "flag": ""
 },
 {
+"id": "Gabriel Magalhaes",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Gabriel Magalhaes",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "CLN": 85,
@@ -264,11 +269,12 @@
 "flag": ""
 },
 {
+"id": "Bukayo Saka",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Bukayo Saka",
 "pos": "MID",
-"ovr": 92,
+"ovr": 91,
 "tier": "best",
 "stats": {
 "AST": 84,
@@ -317,6 +323,7 @@
 "flag": ""
 },
 {
+"id": "Gabriel Martinelli",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Gabriel Martinelli",
@@ -368,11 +375,12 @@
 "flag": ""
 },
 {
+"id": "Martin Odegaard",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Martin Odegaard",
 "pos": "MID",
-"ovr": 88,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "AST": 86,
@@ -421,11 +429,12 @@
 "flag": ""
 },
 {
+"id": "Leandro Trossard",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Leandro Trossard",
 "pos": "MID",
-"ovr": 86,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "AST": 49,
@@ -474,11 +483,12 @@
 "flag": ""
 },
 {
+"id": "David Raya",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "David Raya",
 "pos": "GK",
-"ovr": 87,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "CLN": 92,
@@ -525,6 +535,7 @@
 "flag": ""
 },
 {
+"id": "Gabriel Jesus",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Gabriel Jesus",
@@ -576,11 +587,12 @@
 "flag": ""
 },
 {
+"id": "Eddie Nketiah",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Eddie Nketiah",
 "pos": "FWD",
-"ovr": 76,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "GOL": 58,
@@ -627,11 +639,12 @@
 "flag": ""
 },
 {
+"id": "Oleksandr Zinchenko",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Oleksandr Zinchenko",
 "pos": "DEF",
-"ovr": 79,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "CLN": 71,
@@ -679,11 +692,12 @@
 "flag": ""
 },
 {
+"id": "Jorginho",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Jorginho",
 "pos": "MID",
-"ovr": 77,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "AST": 66,
@@ -732,11 +746,12 @@
 "flag": ""
 },
 {
+"id": "Takehiro Tomiyasu",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Takehiro Tomiyasu",
 "pos": "DEF",
-"ovr": 76,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 59,
@@ -784,11 +799,12 @@
 "flag": ""
 },
 {
+"id": "Jakub Kiwior",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Jakub Kiwior",
 "pos": "DEF",
-"ovr": 75,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 72,
@@ -836,11 +852,12 @@
 "flag": ""
 },
 {
+"id": "Reiss Nelson",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Reiss Nelson",
 "pos": "FWD",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "GOL": 38,
@@ -887,11 +904,12 @@
 "flag": ""
 },
 {
+"id": "Thomas Partey",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Thomas Partey",
 "pos": "MID",
-"ovr": 74,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "AST": 45,
@@ -940,11 +958,12 @@
 "flag": ""
 },
 {
+"id": "Emile Smith Rowe",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Emile Smith Rowe",
 "pos": "MID",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "AST": 65,
@@ -993,12 +1012,13 @@
 "flag": ""
 },
 {
+"id": "Fabio Vieira",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Fabio Vieira",
 "pos": "MID",
-"ovr": 70,
-"tier": "silver",
+"ovr": 68,
+"tier": "bronze",
 "stats": {
 "AST": 80,
 "GOL": 56,
@@ -1046,11 +1066,12 @@
 "flag": ""
 },
 {
+"id": "Aaron Ramsdale",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Aaron Ramsdale",
 "pos": "GK",
-"ovr": 72,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 26,
@@ -1097,11 +1118,12 @@
 "flag": ""
 },
 {
+"id": "Cedric Soares",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Cedric Soares",
 "pos": "DEF",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "CLN": 23,
@@ -1149,6 +1171,7 @@
 "flag": ""
 },
 {
+"id": "Mohamed Elneny",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Mohamed Elneny",
@@ -1202,11 +1225,12 @@
 "flag": ""
 },
 {
+"id": "Jurrien Timber",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Jurrien Timber",
 "pos": "DEF",
-"ovr": 63,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "CLN": 23,
@@ -1254,11 +1278,12 @@
 "flag": ""
 },
 {
+"id": "Ethan Nwaneri",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Ethan Nwaneri",
 "pos": "MID",
-"ovr": 63,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 54,
@@ -1307,6 +1332,7 @@
 "flag": ""
 },
 {
+"id": "Moussa Diaby",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Moussa Diaby",
@@ -1358,11 +1384,12 @@
 "flag": ""
 },
 {
+"id": "Ollie Watkins",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Ollie Watkins",
 "pos": "FWD",
-"ovr": 86,
+"ovr": 87,
 "tier": "best",
 "stats": {
 "GOL": 79,
@@ -1409,11 +1436,12 @@
 "flag": ""
 },
 {
+"id": "Leon Bailey",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Leon Bailey",
 "pos": "FWD",
-"ovr": 79,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "GOL": 61,
@@ -1460,12 +1488,13 @@
 "flag": ""
 },
 {
+"id": "Ezri Konsa",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Ezri Konsa",
 "pos": "DEF",
-"ovr": 79,
-"tier": "silver",
+"ovr": 80,
+"tier": "gold",
 "stats": {
 "CLN": 51,
 "THR": 42,
@@ -1512,6 +1541,7 @@
 "flag": ""
 },
 {
+"id": "John McGinn",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "John McGinn",
@@ -1565,11 +1595,12 @@
 "flag": ""
 },
 {
+"id": "Douglas Luiz",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Douglas Luiz",
 "pos": "MID",
-"ovr": 81,
+"ovr": 80,
 "tier": "gold",
 "stats": {
 "AST": 65,
@@ -1618,11 +1649,12 @@
 "flag": ""
 },
 {
+"id": "Emiliano Martinez",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Emiliano Martinez",
 "pos": "GK",
-"ovr": 81,
+"ovr": 82,
 "tier": "gold",
 "stats": {
 "CLN": 60,
@@ -1669,6 +1701,7 @@
 "flag": ""
 },
 {
+"id": "Lucas Digne",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Lucas Digne",
@@ -1721,6 +1754,7 @@
 "flag": ""
 },
 {
+"id": "Youri Tielemans",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Youri Tielemans",
@@ -1774,11 +1808,12 @@
 "flag": ""
 },
 {
+"id": "Matty Cash",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Matty Cash",
 "pos": "DEF",
-"ovr": 77,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "CLN": 31,
@@ -1826,12 +1861,13 @@
 "flag": ""
 },
 {
+"id": "Pau Torres",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Pau Torres",
 "pos": "DEF",
-"ovr": 80,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "CLN": 53,
 "THR": 51,
@@ -1878,11 +1914,12 @@
 "flag": ""
 },
 {
+"id": "Diego Carlos",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Diego Carlos",
 "pos": "DEF",
-"ovr": 72,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 81,
@@ -1930,11 +1967,12 @@
 "flag": ""
 },
 {
+"id": "Nicolo Zaniolo",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Nicolo Zaniolo",
 "pos": "MID",
-"ovr": 69,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "AST": 45,
@@ -1983,6 +2021,7 @@
 "flag": ""
 },
 {
+"id": "Jhon Duran",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Jhon Duran",
@@ -2034,11 +2073,12 @@
 "flag": ""
 },
 {
+"id": "Alex Moreno",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Alex Moreno",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 68,
@@ -2086,6 +2126,7 @@
 "flag": ""
 },
 {
+"id": "Boubacar Kamara",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Boubacar Kamara",
@@ -2139,6 +2180,7 @@
 "flag": ""
 },
 {
+"id": "Jacob Ramsey",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Jacob Ramsey",
@@ -2192,12 +2234,13 @@
 "flag": ""
 },
 {
+"id": "Clement Lenglet",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Clement Lenglet",
 "pos": "DEF",
-"ovr": 71,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 46,
 "THR": 53,
@@ -2244,11 +2287,12 @@
 "flag": ""
 },
 {
+"id": "Morgan Rogers",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Morgan Rogers",
 "pos": "MID",
-"ovr": 70,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "AST": 59,
@@ -2297,6 +2341,7 @@
 "flag": ""
 },
 {
+"id": "Tim Iroegbunam",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Tim Iroegbunam",
@@ -2350,11 +2395,12 @@
 "flag": ""
 },
 {
+"id": "Leander Dendoncker",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Leander Dendoncker",
 "pos": "MID",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "AST": 52,
@@ -2403,11 +2449,12 @@
 "flag": ""
 },
 {
+"id": "Calum Chambers",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Calum Chambers",
 "pos": "DEF",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "CLN": 41,
@@ -2455,11 +2502,12 @@
 "flag": ""
 },
 {
+"id": "Robin Olsen",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Robin Olsen",
 "pos": "GK",
-"ovr": 64,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 32,
@@ -2506,6 +2554,7 @@
 "flag": ""
 },
 {
+"id": "Kaine Kesler-Hayden",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Kaine Kesler-Hayden",
@@ -2558,11 +2607,12 @@
 "flag": ""
 },
 {
+"id": "Philippe Coutinho",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Philippe Coutinho",
 "pos": "MID",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "AST": 54,
@@ -2611,6 +2661,7 @@
 "flag": ""
 },
 {
+"id": "Omari Kellyman",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Omari Kellyman",
@@ -2664,6 +2715,7 @@
 "flag": ""
 },
 {
+"id": "Bertrand Traore",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Bertrand Traore",
@@ -2715,11 +2767,12 @@
 "flag": ""
 },
 {
+"id": "Cameron Archer",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Cameron Archer",
 "pos": "FWD",
-"ovr": 64,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "GOL": 52,
@@ -2766,11 +2819,12 @@
 "flag": ""
 },
 {
+"id": "Tyrone Mings",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Tyrone Mings",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "CLN": 46,
@@ -2818,6 +2872,7 @@
 "flag": ""
 },
 {
+"id": "Finley Munroe",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Finley Munroe",
@@ -2870,6 +2925,7 @@
 "flag": ""
 },
 {
+"id": "Jaden Philogene",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Jaden Philogene",
@@ -2923,11 +2979,12 @@
 "flag": ""
 },
 {
+"id": "Dominic Solanke",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Dominic Solanke",
 "pos": "FWD",
-"ovr": 80,
+"ovr": 79,
 "tier": "best",
 "stats": {
 "GOL": 72,
@@ -2974,6 +3031,7 @@
 "flag": ""
 },
 {
+"id": "Ryan Christie",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Ryan Christie",
@@ -3027,11 +3085,12 @@
 "flag": ""
 },
 {
+"id": "Illia Zabarnyi",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Illia Zabarnyi",
 "pos": "DEF",
-"ovr": 72,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 96,
@@ -3079,11 +3138,12 @@
 "flag": ""
 },
 {
+"id": "Lewis Cook",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Lewis Cook",
 "pos": "MID",
-"ovr": 74,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "AST": 55,
@@ -3132,11 +3192,12 @@
 "flag": ""
 },
 {
+"id": "Antoine Semenyo",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Antoine Semenyo",
 "pos": "FWD",
-"ovr": 74,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "GOL": 60,
@@ -3183,11 +3244,12 @@
 "flag": ""
 },
 {
+"id": "Justin Kluivert",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Justin Kluivert",
 "pos": "FWD",
-"ovr": 74,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "GOL": 59,
@@ -3234,11 +3296,12 @@
 "flag": ""
 },
 {
+"id": "Neto",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Neto",
 "pos": "GK",
-"ovr": 76,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "CLN": 56,
@@ -3285,11 +3348,12 @@
 "flag": ""
 },
 {
+"id": "Marcos Senesi",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Marcos Senesi",
 "pos": "DEF",
-"ovr": 74,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 64,
@@ -3337,12 +3401,13 @@
 "flag": ""
 },
 {
+"id": "Dango Ouattara",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Dango Ouattara",
 "pos": "FWD",
-"ovr": 69,
-"tier": "bronze",
+"ovr": 71,
+"tier": "silver",
 "stats": {
 "GOL": 43,
 "AST": 58,
@@ -3388,11 +3453,12 @@
 "flag": ""
 },
 {
+"id": "Marcus Tavernier",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Marcus Tavernier",
 "pos": "MID",
-"ovr": 75,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "AST": 67,
@@ -3441,11 +3507,12 @@
 "flag": ""
 },
 {
+"id": "Philip Billing",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Philip Billing",
 "pos": "MID",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "AST": 59,
@@ -3494,11 +3561,12 @@
 "flag": ""
 },
 {
+"id": "Milos Kerkez",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Milos Kerkez",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 72,
@@ -3546,11 +3614,12 @@
 "flag": ""
 },
 {
+"id": "Adam Smith",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Adam Smith",
 "pos": "DEF",
-"ovr": 76,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 86,
@@ -3598,12 +3667,13 @@
 "flag": ""
 },
 {
+"id": "Lloyd Kelly",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Lloyd Kelly",
 "pos": "DEF",
-"ovr": 69,
-"tier": "bronze",
+"ovr": 70,
+"tier": "silver",
 "stats": {
 "CLN": 59,
 "THR": 49,
@@ -3650,12 +3720,13 @@
 "flag": ""
 },
 {
+"id": "Alex Scott",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Alex Scott",
 "pos": "MID",
-"ovr": 68,
-"tier": "bronze",
+"ovr": 70,
+"tier": "silver",
 "stats": {
 "AST": 54,
 "GOL": 55,
@@ -3703,11 +3774,12 @@
 "flag": ""
 },
 {
+"id": "Max Aarons",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Max Aarons",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 39,
@@ -3755,11 +3827,12 @@
 "flag": ""
 },
 {
+"id": "Luis Sinisterra",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Luis Sinisterra",
 "pos": "MID",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "AST": 71,
@@ -3808,6 +3881,7 @@
 "flag": ""
 },
 {
+"id": "Enes Unal",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Enes Unal",
@@ -3859,11 +3933,12 @@
 "flag": ""
 },
 {
+"id": "David Brooks",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "David Brooks",
 "pos": "MID",
-"ovr": 66,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "AST": 66,
@@ -3912,6 +3987,7 @@
 "flag": ""
 },
 {
+"id": "Joe Rothwell",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Joe Rothwell",
@@ -3965,6 +4041,7 @@
 "flag": ""
 },
 {
+"id": "Chris Mepham",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Chris Mepham",
@@ -4017,6 +4094,7 @@
 "flag": ""
 },
 {
+"id": "Kieffer Moore",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Kieffer Moore",
@@ -4068,6 +4146,7 @@
 "flag": ""
 },
 {
+"id": "Romain Faivre",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Romain Faivre",
@@ -4121,11 +4200,12 @@
 "flag": ""
 },
 {
+"id": "James Hill",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "James Hill",
 "pos": "DEF",
-"ovr": 62,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "CLN": 40,
@@ -4173,11 +4253,12 @@
 "flag": ""
 },
 {
+"id": "Mark Travers",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Mark Travers",
 "pos": "GK",
-"ovr": 67,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "CLN": 86,
@@ -4224,11 +4305,12 @@
 "flag": ""
 },
 {
+"id": "Tyler Adams",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Tyler Adams",
 "pos": "MID",
-"ovr": 63,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 52,
@@ -4277,6 +4359,7 @@
 "flag": ""
 },
 {
+"id": "Jaidon Anthony",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Jaidon Anthony",
@@ -4328,11 +4411,12 @@
 "flag": ""
 },
 {
+"id": "Hamed Traore",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Hamed Traore",
 "pos": "MID",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "AST": 53,
@@ -4381,11 +4465,12 @@
 "flag": ""
 },
 {
+"id": "Ionut Radu",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Ionut Radu",
 "pos": "GK",
-"ovr": 62,
+"ovr": 61,
 "tier": "bronze",
 "stats": {
 "CLN": 36,
@@ -4432,6 +4517,7 @@
 "flag": ""
 },
 {
+"id": "Dominic Sadi",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Dominic Sadi",
@@ -4485,11 +4571,12 @@
 "flag": ""
 },
 {
+"id": "Vitaly Janelt",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Vitaly Janelt",
 "pos": "MID",
-"ovr": 76,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "AST": 53,
@@ -4538,11 +4625,12 @@
 "flag": ""
 },
 {
+"id": "Mark Flekken",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Mark Flekken",
 "pos": "GK",
-"ovr": 77,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "CLN": 60,
@@ -4589,6 +4677,7 @@
 "flag": ""
 },
 {
+"id": "Mads Roerslev",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Mads Roerslev",
@@ -4641,11 +4730,12 @@
 "flag": ""
 },
 {
+"id": "Yoane Wissa",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Yoane Wissa",
 "pos": "FWD",
-"ovr": 78,
+"ovr": 79,
 "tier": "silver",
 "stats": {
 "GOL": 66,
@@ -4692,11 +4782,12 @@
 "flag": ""
 },
 {
+"id": "Nathan Collins",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Nathan Collins",
 "pos": "DEF",
-"ovr": 72,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 75,
@@ -4744,6 +4835,7 @@
 "flag": ""
 },
 {
+"id": "Mathias Jensen",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Mathias Jensen",
@@ -4797,11 +4889,12 @@
 "flag": ""
 },
 {
+"id": "Christian Norgaard",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Christian Norgaard",
 "pos": "MID",
-"ovr": 73,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "AST": 45,
@@ -4850,12 +4943,13 @@
 "flag": ""
 },
 {
+"id": "Keane Lewis-Potter",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Keane Lewis-Potter",
 "pos": "FWD",
-"ovr": 68,
-"tier": "bronze",
+"ovr": 70,
+"tier": "silver",
 "stats": {
 "GOL": 49,
 "AST": 48,
@@ -4901,6 +4995,7 @@
 "flag": ""
 },
 {
+"id": "Neal Maupay",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Neal Maupay",
@@ -4952,11 +5047,12 @@
 "flag": ""
 },
 {
+"id": "Ethan Pinnock",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Ethan Pinnock",
 "pos": "DEF",
-"ovr": 75,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "CLN": 57,
@@ -5004,6 +5100,7 @@
 "flag": ""
 },
 {
+"id": "Kristoffer Ajer",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Kristoffer Ajer",
@@ -5056,11 +5153,12 @@
 "flag": ""
 },
 {
+"id": "Yehor Yarmoliuk",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Yehor Yarmoliuk",
 "pos": "MID",
-"ovr": 66,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "AST": 46,
@@ -5109,6 +5207,7 @@
 "flag": ""
 },
 {
+"id": "Frank Onyeka",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Frank Onyeka",
@@ -5162,11 +5261,12 @@
 "flag": ""
 },
 {
+"id": "Bryan Mbeumo",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Bryan Mbeumo",
 "pos": "MID",
-"ovr": 79,
+"ovr": 80,
 "tier": "best",
 "stats": {
 "AST": 82,
@@ -5215,11 +5315,12 @@
 "flag": ""
 },
 {
+"id": "Mikkel Damsgaard",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Mikkel Damsgaard",
 "pos": "MID",
-"ovr": 68,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "AST": 68,
@@ -5268,6 +5369,7 @@
 "flag": ""
 },
 {
+"id": "Saman Ghoddos",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Saman Ghoddos",
@@ -5319,11 +5421,12 @@
 "flag": ""
 },
 {
+"id": "Ivan Toney",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Ivan Toney",
 "pos": "FWD",
-"ovr": 73,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "GOL": 64,
@@ -5370,11 +5473,12 @@
 "flag": ""
 },
 {
+"id": "Ben Mee",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Ben Mee",
 "pos": "DEF",
-"ovr": 70,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "CLN": 48,
@@ -5422,11 +5526,12 @@
 "flag": ""
 },
 {
+"id": "Reguilon",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Reguilon",
 "pos": "DEF",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 70,
@@ -5474,6 +5579,7 @@
 "flag": ""
 },
 {
+"id": "Mathias Jorgensen",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Mathias Jorgensen",
@@ -5526,11 +5632,12 @@
 "flag": ""
 },
 {
+"id": "Kevin Schade",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Kevin Schade",
 "pos": "FWD",
-"ovr": 68,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "GOL": 61,
@@ -5577,11 +5684,12 @@
 "flag": ""
 },
 {
+"id": "Shandon Baptiste",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Shandon Baptiste",
 "pos": "MID",
-"ovr": 67,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 68,
@@ -5630,11 +5738,12 @@
 "flag": ""
 },
 {
+"id": "Aaron Hickey",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Aaron Hickey",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 68,
@@ -5682,6 +5791,7 @@
 "flag": ""
 },
 {
+"id": "Michael Olakigbe",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Michael Olakigbe",
@@ -5735,11 +5845,12 @@
 "flag": ""
 },
 {
+"id": "Rico Henry",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Rico Henry",
 "pos": "DEF",
-"ovr": 68,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "CLN": 60,
@@ -5787,11 +5898,12 @@
 "flag": ""
 },
 {
+"id": "Josh Dasilva",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Josh Dasilva",
 "pos": "MID",
-"ovr": 67,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "AST": 54,
@@ -5840,6 +5952,7 @@
 "flag": ""
 },
 {
+"id": "Myles Peart-Harris",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Myles Peart-Harris",
@@ -5893,11 +6006,12 @@
 "flag": ""
 },
 {
+"id": "Thomas Strakosha",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Thomas Strakosha",
 "pos": "GK",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 51,
@@ -5944,11 +6058,12 @@
 "flag": ""
 },
 {
+"id": "Pascal Gross",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Pascal Gross",
 "pos": "MID",
-"ovr": 80,
+"ovr": 81,
 "tier": "best",
 "stats": {
 "AST": 86,
@@ -5997,6 +6112,7 @@
 "flag": ""
 },
 {
+"id": "Lewis Dunk",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Lewis Dunk",
@@ -6049,6 +6165,7 @@
 "flag": ""
 },
 {
+"id": "Simon Adingra",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Simon Adingra",
@@ -6100,11 +6217,12 @@
 "flag": ""
 },
 {
+"id": "Joao Pedro",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Joao Pedro",
 "pos": "FWD",
-"ovr": 73,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "GOL": 58,
@@ -6151,11 +6269,12 @@
 "flag": ""
 },
 {
+"id": "Billy Gilmour",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Billy Gilmour",
 "pos": "MID",
-"ovr": 72,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "AST": 46,
@@ -6204,6 +6323,7 @@
 "flag": ""
 },
 {
+"id": "Danny Welbeck",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Danny Welbeck",
@@ -6255,11 +6375,12 @@
 "flag": ""
 },
 {
+"id": "Jan Paul van Hecke",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Jan Paul van Hecke",
 "pos": "DEF",
-"ovr": 72,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 66,
@@ -6307,12 +6428,13 @@
 "flag": ""
 },
 {
+"id": "Carlos Baleba",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Carlos Baleba",
 "pos": "MID",
-"ovr": 68,
-"tier": "bronze",
+"ovr": 71,
+"tier": "silver",
 "stats": {
 "AST": 42,
 "GOL": 46,
@@ -6360,11 +6482,12 @@
 "flag": ""
 },
 {
+"id": "Facundo Buonanotte",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Facundo Buonanotte",
 "pos": "MID",
-"ovr": 72,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "AST": 50,
@@ -6413,6 +6536,7 @@
 "flag": ""
 },
 {
+"id": "Evan Ferguson",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Evan Ferguson",
@@ -6464,6 +6588,7 @@
 "flag": ""
 },
 {
+"id": "Joel Veltman",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Joel Veltman",
@@ -6516,6 +6641,7 @@
 "flag": ""
 },
 {
+"id": "Adam Lallana",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Adam Lallana",
@@ -6569,11 +6695,12 @@
 "flag": ""
 },
 {
+"id": "Igor",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Igor",
 "pos": "DEF",
-"ovr": 69,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "CLN": 59,
@@ -6621,11 +6748,12 @@
 "flag": ""
 },
 {
+"id": "Bart Verbruggen",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Bart Verbruggen",
 "pos": "GK",
-"ovr": 73,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 68,
@@ -6672,6 +6800,7 @@
 "flag": ""
 },
 {
+"id": "Pervis Estupinan",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Pervis Estupinan",
@@ -6724,11 +6853,12 @@
 "flag": ""
 },
 {
+"id": "Ansu Fati",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Ansu Fati",
 "pos": "FWD",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "GOL": 56,
@@ -6775,12 +6905,13 @@
 "flag": ""
 },
 {
+"id": "Tariq Lamptey",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Tariq Lamptey",
 "pos": "DEF",
-"ovr": 70,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 46,
 "THR": 82,
@@ -6827,6 +6958,7 @@
 "flag": ""
 },
 {
+"id": "Kaoru Mitoma",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Kaoru Mitoma",
@@ -6880,6 +7012,7 @@
 "flag": ""
 },
 {
+"id": "Jakub Moder",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Jakub Moder",
@@ -6933,11 +7066,12 @@
 "flag": ""
 },
 {
+"id": "Jason Steele",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Jason Steele",
 "pos": "GK",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 45,
@@ -6984,11 +7118,12 @@
 "flag": ""
 },
 {
+"id": "James Milner",
 "club": "Brighton",
 "clubPos": 11,
 "player": "James Milner",
 "pos": "MID",
-"ovr": 73,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "AST": 69,
@@ -7037,11 +7172,12 @@
 "flag": ""
 },
 {
+"id": "Adam Webster",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Adam Webster",
 "pos": "DEF",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 57,
@@ -7089,6 +7225,7 @@
 "flag": ""
 },
 {
+"id": "Julio Enciso",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Julio Enciso",
@@ -7140,12 +7277,13 @@
 "flag": ""
 },
 {
+"id": "Jack Hinshelwood",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Jack Hinshelwood",
 "pos": "MID",
-"ovr": 67,
-"tier": "bronze",
+"ovr": 70,
+"tier": "silver",
 "stats": {
 "AST": 44,
 "GOL": 73,
@@ -7193,6 +7331,7 @@
 "flag": ""
 },
 {
+"id": "Mahmoud Dahoud",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Mahmoud Dahoud",
@@ -7246,6 +7385,7 @@
 "flag": ""
 },
 {
+"id": "Solly March",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Solly March",
@@ -7299,11 +7439,12 @@
 "flag": ""
 },
 {
+"id": "Valentin Barco",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Valentin Barco",
 "pos": "DEF",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 44,
@@ -7351,6 +7492,7 @@
 "flag": ""
 },
 {
+"id": "Benicio Baker-Boaitey",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Benicio Baker-Boaitey",
@@ -7404,6 +7546,7 @@
 "flag": ""
 },
 {
+"id": "Odeluga Offiah",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Odeluga Offiah",
@@ -7456,6 +7599,7 @@
 "flag": ""
 },
 {
+"id": "Mark O'Mahony",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Mark O'Mahony",
@@ -7507,11 +7651,12 @@
 "flag": ""
 },
 {
+"id": "Sander Berge",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Sander Berge",
 "pos": "MID",
-"ovr": 71,
+"ovr": 73,
 "tier": "best",
 "stats": {
 "AST": 48,
@@ -7560,12 +7705,13 @@
 "flag": ""
 },
 {
+"id": "Zeki Amdouni",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Zeki Amdouni",
 "pos": "FWD",
-"ovr": 70,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "GOL": 51,
 "AST": 45,
@@ -7611,6 +7757,7 @@
 "flag": ""
 },
 {
+"id": "Josh Brownhill",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Josh Brownhill",
@@ -7664,6 +7811,7 @@
 "flag": ""
 },
 {
+"id": "Dara O'Shea",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Dara O'Shea",
@@ -7716,11 +7864,12 @@
 "flag": ""
 },
 {
+"id": "Jacob Bruun Larsen",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Jacob Bruun Larsen",
 "pos": "FWD",
-"ovr": 69,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "GOL": 64,
@@ -7767,11 +7916,12 @@
 "flag": ""
 },
 {
+"id": "Vitinho",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Vitinho",
 "pos": "DEF",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "CLN": 56,
@@ -7819,6 +7969,7 @@
 "flag": ""
 },
 {
+"id": "Wilson Odobert",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Wilson Odobert",
@@ -7870,12 +8021,13 @@
 "flag": ""
 },
 {
+"id": "Charlie Taylor",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Charlie Taylor",
 "pos": "DEF",
-"ovr": 70,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 55,
 "THR": 52,
@@ -7922,11 +8074,12 @@
 "flag": ""
 },
 {
+"id": "James Trafford",
 "club": "Burnley",
 "clubPos": 19,
 "player": "James Trafford",
 "pos": "GK",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 50,
@@ -7973,11 +8126,12 @@
 "flag": ""
 },
 {
+"id": "Johann Berg Gudmundsson",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Johann Berg Gudmundsson",
 "pos": "MID",
-"ovr": 67,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "AST": 72,
@@ -8026,11 +8180,12 @@
 "flag": ""
 },
 {
+"id": "Josh Cullen",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Josh Cullen",
 "pos": "MID",
-"ovr": 69,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "AST": 61,
@@ -8079,12 +8234,13 @@
 "flag": ""
 },
 {
+"id": "Lyle Foster",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Lyle Foster",
 "pos": "FWD",
-"ovr": 70,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "GOL": 52,
 "AST": 58,
@@ -8130,6 +8286,7 @@
 "flag": ""
 },
 {
+"id": "Jay Rodriguez",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Jay Rodriguez",
@@ -8181,11 +8338,12 @@
 "flag": ""
 },
 {
+"id": "Maxime Esteve",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Maxime Esteve",
 "pos": "DEF",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "CLN": 43,
@@ -8233,11 +8391,12 @@
 "flag": ""
 },
 {
+"id": "Mike Tresor",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Mike Tresor",
 "pos": "MID",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "AST": 48,
@@ -8286,11 +8445,12 @@
 "flag": ""
 },
 {
+"id": "Lorenz Assignon",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Lorenz Assignon",
 "pos": "DEF",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 44,
@@ -8338,6 +8498,7 @@
 "flag": ""
 },
 {
+"id": "Jordan Beyer",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Jordan Beyer",
@@ -8390,6 +8551,7 @@
 "flag": ""
 },
 {
+"id": "David Datro Fofana",
 "club": "Burnley",
 "clubPos": 19,
 "player": "David Datro Fofana",
@@ -8441,11 +8603,12 @@
 "flag": ""
 },
 {
+"id": "Luca Koleosho",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Luca Koleosho",
 "pos": "MID",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 54,
@@ -8494,11 +8657,12 @@
 "flag": ""
 },
 {
+"id": "Aaron Ramsey (b.2003)",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Aaron Ramsey",
 "pos": "MID",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "AST": 47,
@@ -8547,11 +8711,12 @@
 "flag": ""
 },
 {
+"id": "Connor Roberts",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Connor Roberts",
 "pos": "DEF",
-"ovr": 64,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "CLN": 51,
@@ -8599,11 +8764,12 @@
 "flag": ""
 },
 {
+"id": "Ameen Al-Dakhil",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Ameen Al-Dakhil",
 "pos": "DEF",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "CLN": 47,
@@ -8651,11 +8817,12 @@
 "flag": ""
 },
 {
+"id": "Hannes Delcroix",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Hannes Delcroix",
 "pos": "DEF",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 57,
@@ -8703,11 +8870,12 @@
 "flag": ""
 },
 {
+"id": "Nathan Redmond",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Nathan Redmond",
 "pos": "MID",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 52,
@@ -8756,11 +8924,12 @@
 "flag": ""
 },
 {
+"id": "Arijanet Muric",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Arijanet Muric",
 "pos": "GK",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 50,
@@ -8807,6 +8976,7 @@
 "flag": ""
 },
 {
+"id": "Manuel Benson",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Manuel Benson",
@@ -8858,6 +9028,7 @@
 "flag": ""
 },
 {
+"id": "Hjalmar Ekdal",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Hjalmar Ekdal",
@@ -8910,11 +9081,12 @@
 "flag": ""
 },
 {
+"id": "Anass Zaroury",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Anass Zaroury",
 "pos": "FWD",
-"ovr": 62,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "GOL": 49,
@@ -8961,11 +9133,12 @@
 "flag": ""
 },
 {
+"id": "Jack Cork",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Jack Cork",
 "pos": "MID",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "AST": 54,
@@ -9014,6 +9187,7 @@
 "flag": ""
 },
 {
+"id": "Han-Noah Massengo",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Han-Noah Massengo",
@@ -9067,6 +9241,7 @@
 "flag": ""
 },
 {
+"id": "Michael Obafemi",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Michael Obafemi",
@@ -9118,12 +9293,13 @@
 "flag": ""
 },
 {
+"id": "Conor Gallagher",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Conor Gallagher",
 "pos": "MID",
-"ovr": 80,
-"tier": "gold",
+"ovr": 78,
+"tier": "silver",
 "stats": {
 "AST": 74,
 "GOL": 63,
@@ -9171,12 +9347,13 @@
 "flag": ""
 },
 {
+"id": "Moises Caicedo",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Moises Caicedo",
 "pos": "MID",
-"ovr": 78,
-"tier": "silver",
+"ovr": 80,
+"tier": "gold",
 "stats": {
 "AST": 54,
 "GOL": 44,
@@ -9224,6 +9401,7 @@
 "flag": ""
 },
 {
+"id": "Nicolas Jackson",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Nicolas Jackson",
@@ -9275,11 +9453,12 @@
 "flag": ""
 },
 {
+"id": "Cole Palmer",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Cole Palmer",
 "pos": "FWD",
-"ovr": 85,
+"ovr": 87,
 "tier": "best",
 "stats": {
 "GOL": 88,
@@ -9326,11 +9505,12 @@
 "flag": ""
 },
 {
+"id": "Axel Disasi",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Axel Disasi",
 "pos": "DEF",
-"ovr": 77,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 50,
@@ -9378,6 +9558,7 @@
 "flag": ""
 },
 {
+"id": "Thiago Silva",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Thiago Silva",
@@ -9430,11 +9611,12 @@
 "flag": ""
 },
 {
+"id": "Mykhailo Mudryk",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Mykhailo Mudryk",
 "pos": "MID",
-"ovr": 74,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "AST": 57,
@@ -9483,6 +9665,7 @@
 "flag": ""
 },
 {
+"id": "Raheem Sterling",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Raheem Sterling",
@@ -9534,11 +9717,12 @@
 "flag": ""
 },
 {
+"id": "Enzo Fernandez",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Enzo Fernandez",
 "pos": "MID",
-"ovr": 75,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "AST": 52,
@@ -9587,11 +9771,12 @@
 "flag": ""
 },
 {
+"id": "Malo Gusto",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Malo Gusto",
 "pos": "DEF",
-"ovr": 76,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 72,
@@ -9639,11 +9824,12 @@
 "flag": ""
 },
 {
+"id": "Levi Colwill",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Levi Colwill",
 "pos": "DEF",
-"ovr": 73,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "CLN": 70,
@@ -9691,11 +9877,12 @@
 "flag": ""
 },
 {
+"id": "Noni Madueke",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Noni Madueke",
 "pos": "MID",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "AST": 64,
@@ -9744,11 +9931,12 @@
 "flag": ""
 },
 {
+"id": "Djordje Petrovic",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Djordje Petrovic",
 "pos": "GK",
-"ovr": 77,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "CLN": 66,
@@ -9795,11 +9983,12 @@
 "flag": ""
 },
 {
+"id": "Marc Cucurella",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Marc Cucurella",
 "pos": "DEF",
-"ovr": 75,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "CLN": 57,
@@ -9847,11 +10036,12 @@
 "flag": ""
 },
 {
+"id": "Benoit Badiashile",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Benoit Badiashile",
 "pos": "DEF",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 56,
@@ -9899,11 +10089,12 @@
 "flag": ""
 },
 {
+"id": "Robert Sanchez",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Robert Sanchez",
 "pos": "GK",
-"ovr": 74,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 52,
@@ -9950,6 +10141,7 @@
 "flag": ""
 },
 {
+"id": "Armando Broja",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Armando Broja",
@@ -10001,11 +10193,12 @@
 "flag": ""
 },
 {
+"id": "Trevoh Chalobah",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Trevoh Chalobah",
 "pos": "MID",
-"ovr": 71,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "AST": 44,
@@ -10054,6 +10247,7 @@
 "flag": ""
 },
 {
+"id": "Ben Chilwell",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Ben Chilwell",
@@ -10106,11 +10300,12 @@
 "flag": ""
 },
 {
+"id": "Ian Maatsen",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Ian Maatsen",
 "pos": "DEF",
-"ovr": 66,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "CLN": 39,
@@ -10158,11 +10353,12 @@
 "flag": ""
 },
 {
+"id": "Lesley Ugochukwu",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Lesley Ugochukwu",
 "pos": "MID",
-"ovr": 65,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "AST": 49,
@@ -10211,11 +10407,12 @@
 "flag": ""
 },
 {
+"id": "Cesare Casadei",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Cesare Casadei",
 "pos": "MID",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "AST": 53,
@@ -10264,6 +10461,7 @@
 "flag": ""
 },
 {
+"id": "Alfie Gilchrist",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Alfie Gilchrist",
@@ -10316,6 +10514,7 @@
 "flag": ""
 },
 {
+"id": "Christopher Nkunku",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Christopher Nkunku",
@@ -10367,6 +10566,7 @@
 "flag": ""
 },
 {
+"id": "Reece James",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Reece James",
@@ -10419,11 +10619,12 @@
 "flag": ""
 },
 {
+"id": "Carney Chukwuemeka",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Carney Chukwuemeka",
 "pos": "MID",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 68,
@@ -10472,6 +10673,7 @@
 "flag": ""
 },
 {
+"id": "Mason Burstow",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Mason Burstow",
@@ -10523,6 +10725,7 @@
 "flag": ""
 },
 {
+"id": "Deivid Washington",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Deivid Washington",
@@ -10574,6 +10777,7 @@
 "flag": ""
 },
 {
+"id": "Josh Acheampong",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Josh Acheampong",
@@ -10626,11 +10830,12 @@
 "flag": ""
 },
 {
+"id": "Romeo Lavia",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Romeo Lavia",
 "pos": "MID",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "AST": 54,
@@ -10679,6 +10884,7 @@
 "flag": ""
 },
 {
+"id": "Alex Matos",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Alex Matos",
@@ -10730,6 +10936,7 @@
 "flag": ""
 },
 {
+"id": "Jimi Tauriainen",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Jimi Tauriainen",
@@ -10783,6 +10990,7 @@
 "flag": ""
 },
 {
+"id": "Joachim Andersen",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Joachim Andersen",
@@ -10835,6 +11043,7 @@
 "flag": ""
 },
 {
+"id": "Tyrick Mitchell",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Tyrick Mitchell",
@@ -10887,11 +11096,12 @@
 "flag": ""
 },
 {
+"id": "Jordan Ayew",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Jordan Ayew",
 "pos": "FWD",
-"ovr": 76,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "GOL": 42,
@@ -10938,11 +11148,12 @@
 "flag": ""
 },
 {
+"id": "Jean-Philippe Mateta",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Jean-Philippe Mateta",
 "pos": "FWD",
-"ovr": 79,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "GOL": 78,
@@ -10989,11 +11200,12 @@
 "flag": ""
 },
 {
+"id": "Odsonne Edouard",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Odsonne Edouard",
 "pos": "FWD",
-"ovr": 74,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "GOL": 60,
@@ -11040,11 +11252,12 @@
 "flag": ""
 },
 {
+"id": "Will Hughes",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Will Hughes",
 "pos": "MID",
-"ovr": 73,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "AST": 47,
@@ -11093,11 +11306,12 @@
 "flag": ""
 },
 {
+"id": "Jeffrey Schlupp",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Jeffrey Schlupp",
 "pos": "DEF",
-"ovr": 73,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "CLN": 60,
@@ -11145,6 +11359,7 @@
 "flag": ""
 },
 {
+"id": "Jefferson Lerma",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Jefferson Lerma",
@@ -11198,6 +11413,7 @@
 "flag": ""
 },
 {
+"id": "Eberechi Eze",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Eberechi Eze",
@@ -11251,11 +11467,12 @@
 "flag": ""
 },
 {
+"id": "Chris Richards",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Chris Richards",
 "pos": "DEF",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 40,
@@ -11303,11 +11520,12 @@
 "flag": ""
 },
 {
+"id": "Joel Ward",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Joel Ward",
 "pos": "DEF",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 53,
@@ -11355,11 +11573,12 @@
 "flag": ""
 },
 {
+"id": "Marc Guehi",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Marc Guehi",
 "pos": "DEF",
-"ovr": 74,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 65,
@@ -11407,11 +11626,12 @@
 "flag": ""
 },
 {
+"id": "Naouirou Ahamada",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Naouirou Ahamada",
 "pos": "MID",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "AST": 49,
@@ -11460,11 +11680,12 @@
 "flag": ""
 },
 {
+"id": "Sam Johnstone",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Sam Johnstone",
 "pos": "GK",
-"ovr": 73,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 76,
@@ -11511,11 +11732,12 @@
 "flag": ""
 },
 {
+"id": "Nathaniel Clyne",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Nathaniel Clyne",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 76,
@@ -11563,11 +11785,12 @@
 "flag": ""
 },
 {
+"id": "Michael Olise",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Michael Olise",
 "pos": "FWD",
-"ovr": 77,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "GOL": 72,
@@ -11614,11 +11837,12 @@
 "flag": ""
 },
 {
+"id": "Dean Henderson",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Dean Henderson",
 "pos": "GK",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "CLN": 49,
@@ -11665,11 +11889,12 @@
 "flag": ""
 },
 {
+"id": "Daniel Munoz",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Daniel Munoz",
 "pos": "DEF",
-"ovr": 72,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 72,
@@ -11717,6 +11942,7 @@
 "flag": ""
 },
 {
+"id": "Adam Wharton",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Adam Wharton",
@@ -11770,11 +11996,12 @@
 "flag": ""
 },
 {
+"id": "Cheick Doucoure",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Cheick Doucoure",
 "pos": "MID",
-"ovr": 68,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "AST": 44,
@@ -11823,6 +12050,7 @@
 "flag": ""
 },
 {
+"id": "Matheus Franca",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Matheus Franca",
@@ -11876,6 +12104,7 @@
 "flag": ""
 },
 {
+"id": "David Ozoh",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "David Ozoh",
@@ -11929,6 +12158,7 @@
 "flag": ""
 },
 {
+"id": "Jairo Riedewald",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Jairo Riedewald",
@@ -11982,6 +12212,7 @@
 "flag": ""
 },
 {
+"id": "Jesurun Rak-Sakyi",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Jesurun Rak-Sakyi",
@@ -12035,11 +12266,12 @@
 "flag": ""
 },
 {
+"id": "James Tomkins",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "James Tomkins",
 "pos": "DEF",
-"ovr": 64,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 39,
@@ -12087,11 +12319,12 @@
 "flag": ""
 },
 {
+"id": "Remi Matthews",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Remi Matthews",
 "pos": "GK",
-"ovr": 62,
+"ovr": 61,
 "tier": "bronze",
 "stats": {
 "CLN": 42,
@@ -12138,11 +12371,12 @@
 "flag": ""
 },
 {
+"id": "Jordan Pickford",
 "club": "Everton",
 "clubPos": 12,
 "player": "Jordan Pickford",
 "pos": "GK",
-"ovr": 79,
+"ovr": 80,
 "tier": "best",
 "stats": {
 "CLN": 78,
@@ -12189,11 +12423,12 @@
 "flag": ""
 },
 {
+"id": "James Tarkowski",
 "club": "Everton",
 "clubPos": 12,
 "player": "James Tarkowski",
 "pos": "DEF",
-"ovr": 75,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "CLN": 76,
@@ -12241,11 +12476,12 @@
 "flag": ""
 },
 {
+"id": "James Garner",
 "club": "Everton",
 "clubPos": 12,
 "player": "James Garner",
 "pos": "MID",
-"ovr": 74,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "AST": 48,
@@ -12294,6 +12530,7 @@
 "flag": ""
 },
 {
+"id": "Jarrad Branthwaite",
 "club": "Everton",
 "clubPos": 12,
 "player": "Jarrad Branthwaite",
@@ -12346,6 +12583,7 @@
 "flag": ""
 },
 {
+"id": "Dwight McNeil",
 "club": "Everton",
 "clubPos": 12,
 "player": "Dwight McNeil",
@@ -12399,11 +12637,12 @@
 "flag": ""
 },
 {
+"id": "Dominic Calvert-Lewin",
 "club": "Everton",
 "clubPos": 12,
 "player": "Dominic Calvert-Lewin",
 "pos": "FWD",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "GOL": 57,
@@ -12450,11 +12689,12 @@
 "flag": ""
 },
 {
+"id": "Abdoulaye Doucoure",
 "club": "Everton",
 "clubPos": 12,
 "player": "Abdoulaye Doucoure",
 "pos": "MID",
-"ovr": 76,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "AST": 50,
@@ -12503,11 +12743,12 @@
 "flag": ""
 },
 {
+"id": "Ashley Young",
 "club": "Everton",
 "clubPos": 12,
 "player": "Ashley Young",
 "pos": "DEF",
-"ovr": 74,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 63,
@@ -12555,6 +12796,7 @@
 "flag": ""
 },
 {
+"id": "Beto",
 "club": "Everton",
 "clubPos": 12,
 "player": "Beto",
@@ -12606,11 +12848,12 @@
 "flag": ""
 },
 {
+"id": "Amadou Onana",
 "club": "Everton",
 "clubPos": 12,
 "player": "Amadou Onana",
 "pos": "MID",
-"ovr": 71,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "AST": 40,
@@ -12659,6 +12902,7 @@
 "flag": ""
 },
 {
+"id": "Jack Harrison",
 "club": "Everton",
 "clubPos": 12,
 "player": "Jack Harrison",
@@ -12712,11 +12956,12 @@
 "flag": ""
 },
 {
+"id": "Vitaliy Mykolenko",
 "club": "Everton",
 "clubPos": 12,
 "player": "Vitaliy Mykolenko",
 "pos": "DEF",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 68,
@@ -12764,11 +13009,12 @@
 "flag": ""
 },
 {
+"id": "Idrissa Gueye",
 "club": "Everton",
 "clubPos": 12,
 "player": "Idrissa Gueye",
 "pos": "MID",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "AST": 41,
@@ -12817,11 +13063,12 @@
 "flag": ""
 },
 {
+"id": "Nathan Patterson",
 "club": "Everton",
 "clubPos": 12,
 "player": "Nathan Patterson",
 "pos": "DEF",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 31,
@@ -12869,6 +13116,7 @@
 "flag": ""
 },
 {
+"id": "Youssef Chermiti",
 "club": "Everton",
 "clubPos": 12,
 "player": "Youssef Chermiti",
@@ -12920,11 +13168,12 @@
 "flag": ""
 },
 {
+"id": "Ben Godfrey",
 "club": "Everton",
 "clubPos": 12,
 "player": "Ben Godfrey",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "CLN": 53,
@@ -12972,11 +13221,12 @@
 "flag": ""
 },
 {
+"id": "Arnaut Danjuma",
 "club": "Everton",
 "clubPos": 12,
 "player": "Arnaut Danjuma",
 "pos": "FWD",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "GOL": 37,
@@ -13023,6 +13273,7 @@
 "flag": ""
 },
 {
+"id": "Seamus Coleman",
 "club": "Everton",
 "clubPos": 12,
 "player": "Seamus Coleman",
@@ -13075,6 +13326,7 @@
 "flag": ""
 },
 {
+"id": "Lewis Dobbin",
 "club": "Everton",
 "clubPos": 12,
 "player": "Lewis Dobbin",
@@ -13126,11 +13378,12 @@
 "flag": ""
 },
 {
+"id": "Andre Gomes",
 "club": "Everton",
 "clubPos": 12,
 "player": "Andre Gomes",
 "pos": "MID",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "AST": 47,
@@ -13179,11 +13432,12 @@
 "flag": ""
 },
 {
+"id": "Michael Keane",
 "club": "Everton",
 "clubPos": 12,
 "player": "Michael Keane",
 "pos": "DEF",
-"ovr": 65,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "CLN": 32,
@@ -13231,11 +13485,12 @@
 "flag": ""
 },
 {
+"id": "Alex Iwobi",
 "club": "Everton",
 "clubPos": 12,
 "player": "Alex Iwobi",
 "pos": "MID",
-"ovr": 65,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "AST": 52,
@@ -13284,6 +13539,7 @@
 "flag": ""
 },
 {
+"id": "Neal Maupay",
 "club": "Everton",
 "clubPos": 12,
 "player": "Neal Maupay",
@@ -13335,6 +13591,7 @@
 "flag": ""
 },
 {
+"id": "Tom Cannon",
 "club": "Everton",
 "clubPos": 12,
 "player": "Tom Cannon",
@@ -13386,6 +13643,7 @@
 "flag": ""
 },
 {
+"id": "Tyler Onyango",
 "club": "Everton",
 "clubPos": 12,
 "player": "Tyler Onyango",
@@ -13439,6 +13697,7 @@
 "flag": ""
 },
 {
+"id": "Lewis Warrington",
 "club": "Everton",
 "clubPos": 12,
 "player": "Lewis Warrington",
@@ -13492,11 +13751,12 @@
 "flag": ""
 },
 {
+"id": "Bernd Leno",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Bernd Leno",
 "pos": "GK",
-"ovr": 79,
+"ovr": 80,
 "tier": "best",
 "stats": {
 "CLN": 68,
@@ -13543,11 +13803,12 @@
 "flag": ""
 },
 {
+"id": "Andreas Pereira",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Andreas Pereira",
 "pos": "MID",
-"ovr": 78,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "AST": 79,
@@ -13596,11 +13857,12 @@
 "flag": ""
 },
 {
+"id": "Antonee Robinson",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Antonee Robinson",
 "pos": "DEF",
-"ovr": 77,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "CLN": 63,
@@ -13648,6 +13910,7 @@
 "flag": ""
 },
 {
+"id": "Harry Wilson",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Harry Wilson",
@@ -13701,11 +13964,12 @@
 "flag": ""
 },
 {
+"id": "Tom Cairney",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Tom Cairney",
 "pos": "MID",
-"ovr": 72,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "AST": 76,
@@ -13754,11 +14018,12 @@
 "flag": ""
 },
 {
+"id": "Timothy Castagne",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Timothy Castagne",
 "pos": "DEF",
-"ovr": 74,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 78,
@@ -13806,11 +14071,12 @@
 "flag": ""
 },
 {
+"id": "Bobby De Cordova-Reid",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Bobby De Cordova-Reid",
 "pos": "MID",
-"ovr": 74,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "AST": 59,
@@ -13859,11 +14125,12 @@
 "flag": ""
 },
 {
+"id": "Joao Palhinha",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Joao Palhinha",
 "pos": "MID",
-"ovr": 75,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "AST": 44,
@@ -13912,11 +14179,12 @@
 "flag": ""
 },
 {
+"id": "Willian",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Willian",
 "pos": "MID",
-"ovr": 75,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "AST": 53,
@@ -13965,11 +14233,12 @@
 "flag": ""
 },
 {
+"id": "Alex Iwobi",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Alex Iwobi",
 "pos": "MID",
-"ovr": 74,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "AST": 52,
@@ -14018,11 +14287,12 @@
 "flag": ""
 },
 {
+"id": "Calvin Bassey",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Calvin Bassey",
 "pos": "DEF",
-"ovr": 72,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 56,
@@ -14070,11 +14340,12 @@
 "flag": ""
 },
 {
+"id": "Harrison Reed",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Harrison Reed",
 "pos": "MID",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "AST": 60,
@@ -14123,11 +14394,12 @@
 "flag": ""
 },
 {
+"id": "Rodrigo Muniz",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Rodrigo Muniz",
 "pos": "FWD",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "GOL": 70,
@@ -14174,11 +14446,12 @@
 "flag": ""
 },
 {
+"id": "Raul Jimenez",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Raul Jimenez",
 "pos": "FWD",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "GOL": 69,
@@ -14225,11 +14498,12 @@
 "flag": ""
 },
 {
+"id": "Sasa Lukic",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Sasa Lukic",
 "pos": "MID",
-"ovr": 68,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "AST": 43,
@@ -14278,6 +14552,7 @@
 "flag": ""
 },
 {
+"id": "Tosin Adarabioyo",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Tosin Adarabioyo",
@@ -14330,11 +14605,12 @@
 "flag": ""
 },
 {
+"id": "Issa Diop",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Issa Diop",
 "pos": "DEF",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 73,
@@ -14382,11 +14658,12 @@
 "flag": ""
 },
 {
+"id": "Tim Ream",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Tim Ream",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "CLN": 41,
@@ -14434,6 +14711,7 @@
 "flag": ""
 },
 {
+"id": "Adama Traore",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Adama Traore",
@@ -14485,11 +14763,12 @@
 "flag": ""
 },
 {
+"id": "Kenny Tete",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Kenny Tete",
 "pos": "DEF",
-"ovr": 68,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "CLN": 45,
@@ -14537,11 +14816,12 @@
 "flag": ""
 },
 {
+"id": "Carlos Vinicius",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Carlos Vinicius",
 "pos": "FWD",
-"ovr": 67,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "GOL": 54,
@@ -14588,6 +14868,7 @@
 "flag": ""
 },
 {
+"id": "Armando Broja",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Armando Broja",
@@ -14639,6 +14920,7 @@
 "flag": ""
 },
 {
+"id": "Fode Ballo-Toure",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Fode Ballo-Toure",
@@ -14691,6 +14973,7 @@
 "flag": ""
 },
 {
+"id": "Luke Harris",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Luke Harris",
@@ -14744,11 +15027,12 @@
 "flag": ""
 },
 {
+"id": "Aleksandar Mitrovic",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Aleksandar Mitrovic",
 "pos": "FWD",
-"ovr": 67,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "GOL": 58,
@@ -14795,12 +15079,13 @@
 "flag": ""
 },
 {
+"id": "Luis Diaz",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Luis Diaz",
 "pos": "FWD",
-"ovr": 79,
-"tier": "silver",
+"ovr": 82,
+"tier": "gold",
 "stats": {
 "GOL": 56,
 "AST": 64,
@@ -14846,11 +15131,12 @@
 "flag": ""
 },
 {
+"id": "Darwin Nunez",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Darwin Nunez",
 "pos": "FWD",
-"ovr": 82,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "GOL": 73,
@@ -14897,11 +15183,12 @@
 "flag": ""
 },
 {
+"id": "Virgil van Dijk",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Virgil van Dijk",
 "pos": "DEF",
-"ovr": 83,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 65,
@@ -14949,12 +15236,13 @@
 "flag": ""
 },
 {
+"id": "Cody Gakpo",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Cody Gakpo",
 "pos": "FWD",
-"ovr": 79,
-"tier": "silver",
+"ovr": 80,
+"tier": "gold",
 "stats": {
 "GOL": 70,
 "AST": 76,
@@ -15000,11 +15288,12 @@
 "flag": ""
 },
 {
+"id": "Harvey Elliott",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Harvey Elliott",
 "pos": "MID",
-"ovr": 77,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "AST": 89,
@@ -15053,11 +15342,12 @@
 "flag": ""
 },
 {
+"id": "Alexis Mac Allister",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Alexis Mac Allister",
 "pos": "MID",
-"ovr": 81,
+"ovr": 82,
 "tier": "gold",
 "stats": {
 "AST": 68,
@@ -15106,12 +15396,13 @@
 "flag": ""
 },
 {
+"id": "Dominik Szoboszlai",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Dominik Szoboszlai",
 "pos": "MID",
-"ovr": 78,
-"tier": "silver",
+"ovr": 81,
+"tier": "gold",
 "stats": {
 "AST": 53,
 "GOL": 59,
@@ -15159,6 +15450,7 @@
 "flag": ""
 },
 {
+"id": "Joe Gomez",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Joe Gomez",
@@ -15211,11 +15503,12 @@
 "flag": ""
 },
 {
+"id": "Mohamed Salah",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Mohamed Salah",
 "pos": "FWD",
-"ovr": 89,
+"ovr": 92,
 "tier": "best",
 "stats": {
 "GOL": 89,
@@ -15262,6 +15555,7 @@
 "flag": ""
 },
 {
+"id": "Wataru Endo",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Wataru Endo",
@@ -15315,6 +15609,7 @@
 "flag": ""
 },
 {
+"id": "Trent Alexander-Arnold",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Trent Alexander-Arnold",
@@ -15367,6 +15662,7 @@
 "flag": ""
 },
 {
+"id": "Alisson",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Alisson",
@@ -15418,11 +15714,12 @@
 "flag": ""
 },
 {
+"id": "Ryan Gravenberch",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Ryan Gravenberch",
 "pos": "MID",
-"ovr": 71,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "AST": 43,
@@ -15471,11 +15768,12 @@
 "flag": ""
 },
 {
+"id": "Curtis Jones",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Curtis Jones",
 "pos": "MID",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "AST": 52,
@@ -15524,6 +15822,7 @@
 "flag": ""
 },
 {
+"id": "Andy Robertson",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Andy Robertson",
@@ -15576,11 +15875,12 @@
 "flag": ""
 },
 {
+"id": "Ibrahima Konate",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Ibrahima Konate",
 "pos": "DEF",
-"ovr": 74,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "CLN": 80,
@@ -15628,6 +15928,7 @@
 "flag": ""
 },
 {
+"id": "Diogo Jota",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Diogo Jota",
@@ -15679,11 +15980,12 @@
 "flag": ""
 },
 {
+"id": "Jarell Quansah",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Jarell Quansah",
 "pos": "DEF",
-"ovr": 73,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 36,
@@ -15731,11 +16033,12 @@
 "flag": ""
 },
 {
+"id": "Kostas Tsimikas",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Kostas Tsimikas",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 89,
@@ -15783,11 +16086,12 @@
 "flag": ""
 },
 {
+"id": "Conor Bradley",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Conor Bradley",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 70,
@@ -15835,12 +16139,13 @@
 "flag": ""
 },
 {
+"id": "Caoimhin Kelleher",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Caoimhin Kelleher",
 "pos": "GK",
-"ovr": 69,
-"tier": "bronze",
+"ovr": 71,
+"tier": "silver",
 "stats": {
 "CLN": 43,
 "CON": 62,
@@ -15886,11 +16191,12 @@
 "flag": ""
 },
 {
+"id": "Joel Matip",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Joel Matip",
 "pos": "DEF",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "CLN": 48,
@@ -15938,6 +16244,7 @@
 "flag": ""
 },
 {
+"id": "Bobby Clark",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Bobby Clark",
@@ -15991,6 +16298,7 @@
 "flag": ""
 },
 {
+"id": "James McConnell",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "James McConnell",
@@ -16044,6 +16352,7 @@
 "flag": ""
 },
 {
+"id": "Jayden Danns",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Jayden Danns",
@@ -16095,11 +16404,12 @@
 "flag": ""
 },
 {
+"id": "Thiago",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Thiago",
 "pos": "MID",
-"ovr": 66,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "AST": 54,
@@ -16148,11 +16458,12 @@
 "flag": ""
 },
 {
+"id": "Stefan Bajcetic",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Stefan Bajcetic",
 "pos": "MID",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 54,
@@ -16201,6 +16512,7 @@
 "flag": ""
 },
 {
+"id": "Owen Beck",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Owen Beck",
@@ -16253,6 +16565,7 @@
 "flag": ""
 },
 {
+"id": "Ben Gannon-Doak",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Ben Gannon-Doak",
@@ -16306,6 +16619,7 @@
 "flag": ""
 },
 {
+"id": "Kaide Gordon",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Kaide Gordon",
@@ -16357,12 +16671,13 @@
 "flag": ""
 },
 {
+"id": "Thomas Kaminski",
 "club": "Luton",
 "clubPos": 18,
 "player": "Thomas Kaminski",
 "pos": "GK",
-"ovr": 75,
-"tier": "best",
+"ovr": 73,
+"tier": "silver",
 "stats": {
 "CLN": 40,
 "CON": 42,
@@ -16408,12 +16723,13 @@
 "flag": ""
 },
 {
+"id": "Carlton Morris",
 "club": "Luton",
 "clubPos": 18,
 "player": "Carlton Morris",
 "pos": "FWD",
 "ovr": 74,
-"tier": "silver",
+"tier": "best",
 "stats": {
 "GOL": 61,
 "AST": 56,
@@ -16459,11 +16775,12 @@
 "flag": ""
 },
 {
+"id": "Alfie Doughty",
 "club": "Luton",
 "clubPos": 18,
 "player": "Alfie Doughty",
 "pos": "DEF",
-"ovr": 73,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "CLN": 49,
@@ -16511,11 +16828,12 @@
 "flag": ""
 },
 {
+"id": "Tahith Chong",
 "club": "Luton",
 "clubPos": 18,
 "player": "Tahith Chong",
 "pos": "FWD",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "GOL": 48,
@@ -16562,11 +16880,12 @@
 "flag": ""
 },
 {
+"id": "Ross Barkley",
 "club": "Luton",
 "clubPos": 18,
 "player": "Ross Barkley",
 "pos": "MID",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "AST": 62,
@@ -16615,12 +16934,13 @@
 "flag": ""
 },
 {
+"id": "Teden Mengi",
 "club": "Luton",
 "clubPos": 18,
 "player": "Teden Mengi",
 "pos": "DEF",
-"ovr": 70,
-"tier": "silver",
+"ovr": 68,
+"tier": "bronze",
 "stats": {
 "CLN": 44,
 "THR": 44,
@@ -16667,11 +16987,12 @@
 "flag": ""
 },
 {
+"id": "Chiedozie Ogbene",
 "club": "Luton",
 "clubPos": 18,
 "player": "Chiedozie Ogbene",
 "pos": "MID",
-"ovr": 69,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "AST": 47,
@@ -16720,6 +17041,7 @@
 "flag": ""
 },
 {
+"id": "Elijah Adebayo",
 "club": "Luton",
 "clubPos": 18,
 "player": "Elijah Adebayo",
@@ -16771,11 +17093,12 @@
 "flag": ""
 },
 {
+"id": "Pelly Ruddock",
 "club": "Luton",
 "clubPos": 18,
 "player": "Pelly Ruddock",
 "pos": "MID",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "AST": 43,
@@ -16824,6 +17147,7 @@
 "flag": ""
 },
 {
+"id": "Andros Townsend",
 "club": "Luton",
 "clubPos": 18,
 "player": "Andros Townsend",
@@ -16875,11 +17199,12 @@
 "flag": ""
 },
 {
+"id": "Issa Kabore",
 "club": "Luton",
 "clubPos": 18,
 "player": "Issa Kabore",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 39,
@@ -16927,6 +17252,7 @@
 "flag": ""
 },
 {
+"id": "Cauley Woodrow",
 "club": "Luton",
 "clubPos": 18,
 "player": "Cauley Woodrow",
@@ -16978,11 +17304,12 @@
 "flag": ""
 },
 {
+"id": "Jordan Clark",
 "club": "Luton",
 "clubPos": 18,
 "player": "Jordan Clark",
 "pos": "MID",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 51,
@@ -17031,11 +17358,12 @@
 "flag": ""
 },
 {
+"id": "Reece Burke",
 "club": "Luton",
 "clubPos": 18,
 "player": "Reece Burke",
 "pos": "DEF",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "CLN": 52,
@@ -17083,11 +17411,12 @@
 "flag": ""
 },
 {
+"id": "Amari'i Bell",
 "club": "Luton",
 "clubPos": 18,
 "player": "Amari'i Bell",
 "pos": "DEF",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "CLN": 66,
@@ -17135,6 +17464,7 @@
 "flag": ""
 },
 {
+"id": "Gabriel Osho",
 "club": "Luton",
 "clubPos": 18,
 "player": "Gabriel Osho",
@@ -17187,11 +17517,12 @@
 "flag": ""
 },
 {
+"id": "Jacob Brown",
 "club": "Luton",
 "clubPos": 18,
 "player": "Jacob Brown",
 "pos": "FWD",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "GOL": 49,
@@ -17238,6 +17569,7 @@
 "flag": ""
 },
 {
+"id": "Luke Berry",
 "club": "Luton",
 "clubPos": 18,
 "player": "Luke Berry",
@@ -17291,12 +17623,13 @@
 "flag": ""
 },
 {
+"id": "Albert Sambi Lokonga",
 "club": "Luton",
 "clubPos": 18,
 "player": "Albert Sambi Lokonga",
 "pos": "MID",
-"ovr": 70,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "AST": 70,
 "GOL": 45,
@@ -17344,11 +17677,12 @@
 "flag": ""
 },
 {
+"id": "Tom Lockyer",
 "club": "Luton",
 "clubPos": 18,
 "player": "Tom Lockyer",
 "pos": "DEF",
-"ovr": 66,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "CLN": 45,
@@ -17396,11 +17730,12 @@
 "flag": ""
 },
 {
+"id": "Marvelous Nakamba",
 "club": "Luton",
 "clubPos": 18,
 "player": "Marvelous Nakamba",
 "pos": "MID",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "AST": 43,
@@ -17449,11 +17784,12 @@
 "flag": ""
 },
 {
+"id": "Ryan Giles",
 "club": "Luton",
 "clubPos": 18,
 "player": "Ryan Giles",
 "pos": "DEF",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 59,
@@ -17501,11 +17837,12 @@
 "flag": ""
 },
 {
+"id": "Daiki Hashioka",
 "club": "Luton",
 "clubPos": 18,
 "player": "Daiki Hashioka",
 "pos": "DEF",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 56,
@@ -17553,6 +17890,7 @@
 "flag": ""
 },
 {
+"id": "Mads Andersen",
 "club": "Luton",
 "clubPos": 18,
 "player": "Mads Andersen",
@@ -17605,11 +17943,12 @@
 "flag": ""
 },
 {
+"id": "Fred Onyedinma",
 "club": "Luton",
 "clubPos": 18,
 "player": "Fred Onyedinma",
 "pos": "MID",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "AST": 48,
@@ -17658,11 +17997,12 @@
 "flag": ""
 },
 {
+"id": "Joe Johnson",
 "club": "Luton",
 "clubPos": 18,
 "player": "Joe Johnson",
 "pos": "DEF",
-"ovr": 61,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 77,
@@ -17710,6 +18050,7 @@
 "flag": ""
 },
 {
+"id": "Zack Nelson",
 "club": "Luton",
 "clubPos": 18,
 "player": "Zack Nelson",
@@ -17763,6 +18104,7 @@
 "flag": ""
 },
 {
+"id": "James Shea",
 "club": "Luton",
 "clubPos": 18,
 "player": "James Shea",
@@ -17814,11 +18156,12 @@
 "flag": ""
 },
 {
+"id": "Julian Alvarez",
 "club": "Man City",
 "clubPos": 1,
 "player": "Julian Alvarez",
 "pos": "FWD",
-"ovr": 86,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "GOL": 65,
@@ -17865,11 +18208,12 @@
 "flag": ""
 },
 {
+"id": "Phil Foden",
 "club": "Man City",
 "clubPos": 1,
 "player": "Phil Foden",
 "pos": "MID",
-"ovr": 96,
+"ovr": 93,
 "tier": "gold",
 "stats": {
 "AST": 81,
@@ -17918,11 +18262,12 @@
 "flag": ""
 },
 {
+"id": "Rodri",
 "club": "Man City",
 "clubPos": 1,
 "player": "Rodri",
 "pos": "MID",
-"ovr": 90,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "AST": 84,
@@ -17971,11 +18316,12 @@
 "flag": ""
 },
 {
+"id": "Bernardo Silva",
 "club": "Man City",
 "clubPos": 1,
 "player": "Bernardo Silva",
 "pos": "MID",
-"ovr": 88,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "AST": 87,
@@ -18024,11 +18370,12 @@
 "flag": ""
 },
 {
+"id": "Ederson",
 "club": "Man City",
 "clubPos": 1,
 "player": "Ederson",
 "pos": "GK",
-"ovr": 88,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "CLN": 80,
@@ -18075,11 +18422,12 @@
 "flag": ""
 },
 {
+"id": "Kyle Walker",
 "club": "Man City",
 "clubPos": 1,
 "player": "Kyle Walker",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "CLN": 69,
@@ -18127,6 +18475,7 @@
 "flag": ""
 },
 {
+"id": "Erling Haaland",
 "club": "Man City",
 "clubPos": 1,
 "player": "Erling Haaland",
@@ -18178,11 +18527,12 @@
 "flag": ""
 },
 {
+"id": "Manuel Akanji",
 "club": "Man City",
 "clubPos": 1,
 "player": "Manuel Akanji",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 82,
 "tier": "gold",
 "stats": {
 "CLN": 84,
@@ -18230,6 +18580,7 @@
 "flag": ""
 },
 {
+"id": "Ruben Dias",
 "club": "Man City",
 "clubPos": 1,
 "player": "Ruben Dias",
@@ -18282,11 +18633,12 @@
 "flag": ""
 },
 {
+"id": "Mateo Kovacic",
 "club": "Man City",
 "clubPos": 1,
 "player": "Mateo Kovacic",
 "pos": "MID",
-"ovr": 77,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "AST": 42,
@@ -18335,12 +18687,13 @@
 "flag": ""
 },
 {
+"id": "Nathan Ake",
 "club": "Man City",
 "clubPos": 1,
 "player": "Nathan Ake",
 "pos": "DEF",
-"ovr": 81,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "CLN": 47,
 "THR": 72,
@@ -18387,6 +18740,7 @@
 "flag": ""
 },
 {
+"id": "Jeremy Doku",
 "club": "Man City",
 "clubPos": 1,
 "player": "Jeremy Doku",
@@ -18438,6 +18792,7 @@
 "flag": ""
 },
 {
+"id": "Josko Gvardiol",
 "club": "Man City",
 "clubPos": 1,
 "player": "Josko Gvardiol",
@@ -18490,12 +18845,13 @@
 "flag": ""
 },
 {
+"id": "Jack Grealish",
 "club": "Man City",
 "clubPos": 1,
 "player": "Jack Grealish",
 "pos": "MID",
-"ovr": 79,
-"tier": "silver",
+"ovr": 80,
+"tier": "gold",
 "stats": {
 "AST": 54,
 "GOL": 75,
@@ -18543,11 +18899,12 @@
 "flag": ""
 },
 {
+"id": "Kevin De Bruyne",
 "club": "Man City",
 "clubPos": 1,
 "player": "Kevin De Bruyne",
 "pos": "MID",
-"ovr": 86,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 98,
@@ -18596,11 +18953,12 @@
 "flag": ""
 },
 {
+"id": "Matheus Nunes",
 "club": "Man City",
 "clubPos": 1,
 "player": "Matheus Nunes",
 "pos": "MID",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "AST": 71,
@@ -18649,11 +19007,12 @@
 "flag": ""
 },
 {
+"id": "Rico Lewis",
 "club": "Man City",
 "clubPos": 1,
 "player": "Rico Lewis",
 "pos": "DEF",
-"ovr": 73,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "CLN": 71,
@@ -18701,6 +19060,7 @@
 "flag": ""
 },
 {
+"id": "John Stones",
 "club": "Man City",
 "clubPos": 1,
 "player": "John Stones",
@@ -18753,11 +19113,12 @@
 "flag": ""
 },
 {
+"id": "Oscar Bobb",
 "club": "Man City",
 "clubPos": 1,
 "player": "Oscar Bobb",
 "pos": "MID",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "AST": 66,
@@ -18806,11 +19167,12 @@
 "flag": ""
 },
 {
+"id": "Stefan Ortega",
 "club": "Man City",
 "clubPos": 1,
 "player": "Stefan Ortega",
 "pos": "GK",
-"ovr": 67,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "CLN": 26,
@@ -18857,11 +19219,12 @@
 "flag": ""
 },
 {
+"id": "Sergio Gomez",
 "club": "Man City",
 "clubPos": 1,
 "player": "Sergio Gomez",
 "pos": "MID",
-"ovr": 67,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 73,
@@ -18910,11 +19273,12 @@
 "flag": ""
 },
 {
+"id": "Kalvin Phillips",
 "club": "Man City",
 "clubPos": 1,
 "player": "Kalvin Phillips",
 "pos": "MID",
-"ovr": 65,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "AST": 53,
@@ -18963,11 +19327,12 @@
 "flag": ""
 },
 {
+"id": "Aymeric Laporte",
 "club": "Man City",
 "clubPos": 1,
 "player": "Aymeric Laporte",
 "pos": "DEF",
-"ovr": 66,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "CLN": 29,
@@ -19015,11 +19380,12 @@
 "flag": ""
 },
 {
+"id": "James McAtee",
 "club": "Man City",
 "clubPos": 1,
 "player": "James McAtee",
 "pos": "MID",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "AST": 54,
@@ -19068,12 +19434,13 @@
 "flag": ""
 },
 {
+"id": "Cole Palmer",
 "club": "Man City",
 "clubPos": 1,
 "player": "Cole Palmer",
 "pos": "FWD",
-"ovr": 67,
-"tier": "bronze",
+"ovr": 72,
+"tier": "silver",
 "stats": {
 "GOL": 52,
 "AST": 53,
@@ -19119,11 +19486,12 @@
 "flag": ""
 },
 {
+"id": "Andre Onana",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Andre Onana",
 "pos": "GK",
-"ovr": 84,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "CLN": 65,
@@ -19170,11 +19538,12 @@
 "flag": ""
 },
 {
+"id": "Diogo Dalot",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Diogo Dalot",
 "pos": "DEF",
-"ovr": 81,
+"ovr": 80,
 "tier": "gold",
 "stats": {
 "CLN": 62,
@@ -19222,11 +19591,12 @@
 "flag": ""
 },
 {
+"id": "Alejandro Garnacho",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Alejandro Garnacho",
 "pos": "FWD",
-"ovr": 77,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "GOL": 49,
@@ -19273,11 +19643,12 @@
 "flag": ""
 },
 {
+"id": "Bruno Fernandes",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Bruno Fernandes",
 "pos": "MID",
-"ovr": 87,
+"ovr": 88,
 "tier": "best",
 "stats": {
 "AST": 79,
@@ -19326,6 +19697,7 @@
 "flag": ""
 },
 {
+"id": "Marcus Rashford",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Marcus Rashford",
@@ -19377,11 +19749,12 @@
 "flag": ""
 },
 {
+"id": "Scott McTominay",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Scott McTominay",
 "pos": "MID",
-"ovr": 79,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "AST": 47,
@@ -19430,11 +19803,12 @@
 "flag": ""
 },
 {
+"id": "Rasmus Hojlund",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Rasmus Hojlund",
 "pos": "FWD",
-"ovr": 77,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "GOL": 66,
@@ -19481,6 +19855,7 @@
 "flag": ""
 },
 {
+"id": "Antony",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Antony",
@@ -19532,11 +19907,12 @@
 "flag": ""
 },
 {
+"id": "Casemiro",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Casemiro",
 "pos": "MID",
-"ovr": 77,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "AST": 54,
@@ -19585,11 +19961,12 @@
 "flag": ""
 },
 {
+"id": "Kobbie Mainoo",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Kobbie Mainoo",
 "pos": "MID",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "AST": 47,
@@ -19638,11 +20015,12 @@
 "flag": ""
 },
 {
+"id": "Jonny Evans",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Jonny Evans",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 64,
@@ -19690,6 +20068,7 @@
 "flag": ""
 },
 {
+"id": "Christian Eriksen",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Christian Eriksen",
@@ -19743,11 +20122,12 @@
 "flag": ""
 },
 {
+"id": "Harry Maguire",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Harry Maguire",
 "pos": "DEF",
-"ovr": 76,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 56,
@@ -19795,11 +20175,12 @@
 "flag": ""
 },
 {
+"id": "Raphael Varane",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Raphael Varane",
 "pos": "DEF",
-"ovr": 76,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 50,
@@ -19847,6 +20228,7 @@
 "flag": ""
 },
 {
+"id": "Aaron Wan-Bissaka",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Aaron Wan-Bissaka",
@@ -19899,11 +20281,12 @@
 "flag": ""
 },
 {
+"id": "Sofyan Amrabat",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Sofyan Amrabat",
 "pos": "MID",
-"ovr": 69,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "AST": 44,
@@ -19952,11 +20335,12 @@
 "flag": ""
 },
 {
+"id": "Victor Lindelof",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Victor Lindelof",
 "pos": "DEF",
-"ovr": 76,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 81,
@@ -20004,11 +20388,12 @@
 "flag": ""
 },
 {
+"id": "Mason Mount",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Mason Mount",
 "pos": "MID",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "AST": 47,
@@ -20057,6 +20442,7 @@
 "flag": ""
 },
 {
+"id": "Anthony Martial",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Anthony Martial",
@@ -20108,11 +20494,12 @@
 "flag": ""
 },
 {
+"id": "Luke Shaw",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Luke Shaw",
 "pos": "DEF",
-"ovr": 74,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 82,
@@ -20160,6 +20547,7 @@
 "flag": ""
 },
 {
+"id": "Lisandro Martinez",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Lisandro Martinez",
@@ -20212,11 +20600,12 @@
 "flag": ""
 },
 {
+"id": "Amad Diallo",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Amad Diallo",
 "pos": "MID",
-"ovr": 66,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "AST": 64,
@@ -20265,11 +20654,12 @@
 "flag": ""
 },
 {
+"id": "Facundo Pellistri",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Facundo Pellistri",
 "pos": "MID",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "AST": 69,
@@ -20318,11 +20708,12 @@
 "flag": ""
 },
 {
+"id": "Reguilon",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Reguilon",
 "pos": "DEF",
-"ovr": 66,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "CLN": 74,
@@ -20370,11 +20761,12 @@
 "flag": ""
 },
 {
+"id": "Willy Kambwala",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Willy Kambwala",
 "pos": "DEF",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 32,
@@ -20422,6 +20814,7 @@
 "flag": ""
 },
 {
+"id": "Hannibal Mejbri",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Hannibal Mejbri",
@@ -20475,6 +20868,7 @@
 "flag": ""
 },
 {
+"id": "Omari Forson",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Omari Forson",
@@ -20528,6 +20922,7 @@
 "flag": ""
 },
 {
+"id": "Jadon Sancho",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Jadon Sancho",
@@ -20579,6 +20974,7 @@
 "flag": ""
 },
 {
+"id": "Ethan Wheatley",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Ethan Wheatley",
@@ -20630,6 +21026,7 @@
 "flag": ""
 },
 {
+"id": "Dan Gore",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Dan Gore",
@@ -20683,11 +21080,12 @@
 "flag": ""
 },
 {
+"id": "Donny van de Beek",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Donny van de Beek",
 "pos": "MID",
-"ovr": 65,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "AST": 54,
@@ -20736,11 +21134,12 @@
 "flag": ""
 },
 {
+"id": "Bruno Guimaraes",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Bruno Guimaraes",
 "pos": "MID",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 77,
@@ -20789,11 +21188,12 @@
 "flag": ""
 },
 {
+"id": "Fabian Schar",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Fabian Schar",
 "pos": "DEF",
-"ovr": 82,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "CLN": 68,
@@ -20841,11 +21241,12 @@
 "flag": ""
 },
 {
+"id": "Anthony Gordon",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Anthony Gordon",
 "pos": "MID",
-"ovr": 83,
+"ovr": 82,
 "tier": "gold",
 "stats": {
 "AST": 88,
@@ -20894,11 +21295,12 @@
 "flag": ""
 },
 {
+"id": "Sean Longstaff",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Sean Longstaff",
 "pos": "MID",
-"ovr": 80,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "AST": 49,
@@ -20947,11 +21349,12 @@
 "flag": ""
 },
 {
+"id": "Miguel Almiron",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Miguel Almiron",
 "pos": "MID",
-"ovr": 78,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "AST": 47,
@@ -21000,6 +21403,7 @@
 "flag": ""
 },
 {
+"id": "Dan Burn",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Dan Burn",
@@ -21052,11 +21456,12 @@
 "flag": ""
 },
 {
+"id": "Alexander Isak",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Alexander Isak",
 "pos": "FWD",
-"ovr": 85,
+"ovr": 86,
 "tier": "best",
 "stats": {
 "GOL": 93,
@@ -21103,6 +21508,7 @@
 "flag": ""
 },
 {
+"id": "Kieran Trippier",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Kieran Trippier",
@@ -21155,11 +21561,12 @@
 "flag": ""
 },
 {
+"id": "Tino Livramento",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Tino Livramento",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "CLN": 34,
@@ -21207,6 +21614,7 @@
 "flag": ""
 },
 {
+"id": "Martin Dubravka",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Martin Dubravka",
@@ -21258,6 +21666,7 @@
 "flag": ""
 },
 {
+"id": "Elliot Anderson",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Elliot Anderson",
@@ -21311,6 +21720,7 @@
 "flag": ""
 },
 {
+"id": "Harvey Barnes",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Harvey Barnes",
@@ -21364,12 +21774,13 @@
 "flag": ""
 },
 {
+"id": "Jacob Murphy",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Jacob Murphy",
 "pos": "MID",
-"ovr": 80,
-"tier": "gold",
+"ovr": 78,
+"tier": "silver",
 "stats": {
 "AST": 94,
 "GOL": 65,
@@ -21417,11 +21828,12 @@
 "flag": ""
 },
 {
+"id": "Joelinton",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Joelinton",
 "pos": "MID",
-"ovr": 76,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "AST": 51,
@@ -21470,6 +21882,7 @@
 "flag": ""
 },
 {
+"id": "Callum Wilson",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Callum Wilson",
@@ -21521,11 +21934,12 @@
 "flag": ""
 },
 {
+"id": "Lewis Hall",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Lewis Hall",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "CLN": 49,
@@ -21573,11 +21987,12 @@
 "flag": ""
 },
 {
+"id": "Sven Botman",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Sven Botman",
 "pos": "DEF",
-"ovr": 74,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 59,
@@ -21625,11 +22040,12 @@
 "flag": ""
 },
 {
+"id": "Emil Krafth",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Emil Krafth",
 "pos": "DEF",
-"ovr": 68,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "CLN": 62,
@@ -21677,6 +22093,7 @@
 "flag": ""
 },
 {
+"id": "Lewis Miley",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Lewis Miley",
@@ -21730,12 +22147,13 @@
 "flag": ""
 },
 {
+"id": "Jamaal Lascelles",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Jamaal Lascelles",
 "pos": "DEF",
-"ovr": 71,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 86,
 "THR": 54,
@@ -21782,12 +22200,13 @@
 "flag": ""
 },
 {
+"id": "Nick Pope",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Nick Pope",
 "pos": "GK",
-"ovr": 80,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "CLN": 92,
 "CON": 88,
@@ -21833,11 +22252,12 @@
 "flag": ""
 },
 {
+"id": "Matt Ritchie",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Matt Ritchie",
 "pos": "MID",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 52,
@@ -21886,6 +22306,7 @@
 "flag": ""
 },
 {
+"id": "Joe Willock",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Joe Willock",
@@ -21939,12 +22360,13 @@
 "flag": ""
 },
 {
+"id": "Sandro Tonali",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Sandro Tonali",
 "pos": "MID",
-"ovr": 67,
-"tier": "bronze",
+"ovr": 71,
+"tier": "silver",
 "stats": {
 "AST": 48,
 "GOL": 62,
@@ -21992,6 +22414,7 @@
 "flag": ""
 },
 {
+"id": "Paul Dummett",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Paul Dummett",
@@ -22044,6 +22467,7 @@
 "flag": ""
 },
 {
+"id": "Joe White",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Joe White",
@@ -22097,11 +22521,12 @@
 "flag": ""
 },
 {
+"id": "Matt Targett",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Matt Targett",
 "pos": "DEF",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 36,
@@ -22149,6 +22574,7 @@
 "flag": ""
 },
 {
+"id": "Alex Murphy",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Alex Murphy",
@@ -22201,6 +22627,7 @@
 "flag": ""
 },
 {
+"id": "Amadou Diallo",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Amadou Diallo",
@@ -22254,6 +22681,7 @@
 "flag": ""
 },
 {
+"id": "Loris Karius",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Loris Karius",
@@ -22305,6 +22733,7 @@
 "flag": ""
 },
 {
+"id": "Michael Ndiweni",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Michael Ndiweni",
@@ -22356,6 +22785,7 @@
 "flag": ""
 },
 {
+"id": "Ben Parkinson",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Ben Parkinson",
@@ -22407,12 +22837,13 @@
 "flag": ""
 },
 {
+"id": "Morgan Gibbs-White",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Morgan Gibbs-White",
 "pos": "MID",
-"ovr": 76,
-"tier": "silver",
+"ovr": 78,
+"tier": "best",
 "stats": {
 "AST": 86,
 "GOL": 60,
@@ -22460,11 +22891,12 @@
 "flag": ""
 },
 {
+"id": "Anthony Elanga",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Anthony Elanga",
 "pos": "FWD",
-"ovr": 73,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "GOL": 43,
@@ -22511,12 +22943,13 @@
 "flag": ""
 },
 {
+"id": "Ryan Yates",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Ryan Yates",
 "pos": "MID",
-"ovr": 69,
-"tier": "bronze",
+"ovr": 71,
+"tier": "silver",
 "stats": {
 "AST": 47,
 "GOL": 43,
@@ -22564,11 +22997,12 @@
 "flag": ""
 },
 {
+"id": "Murillo",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Murillo",
 "pos": "DEF",
-"ovr": 72,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 40,
@@ -22616,12 +23050,13 @@
 "flag": ""
 },
 {
+"id": "Chris Wood",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Chris Wood",
 "pos": "FWD",
 "ovr": 77,
-"tier": "best",
+"tier": "silver",
 "stats": {
 "GOL": 83,
 "AST": 46,
@@ -22667,6 +23102,7 @@
 "flag": ""
 },
 {
+"id": "Danilo (Forest)",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Danilo",
@@ -22720,11 +23156,12 @@
 "flag": ""
 },
 {
+"id": "Callum Hudson-Odoi",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Callum Hudson-Odoi",
 "pos": "MID",
-"ovr": 72,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "AST": 47,
@@ -22773,11 +23210,12 @@
 "flag": ""
 },
 {
+"id": "Nicolas Dominguez",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Nicolas Dominguez",
 "pos": "MID",
-"ovr": 70,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "AST": 58,
@@ -22826,12 +23264,13 @@
 "flag": ""
 },
 {
+"id": "Neco Williams",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Neco Williams",
 "pos": "DEF",
-"ovr": 68,
-"tier": "bronze",
+"ovr": 70,
+"tier": "silver",
 "stats": {
 "CLN": 43,
 "THR": 49,
@@ -22878,11 +23317,12 @@
 "flag": ""
 },
 {
+"id": "Harry Toffolo",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Harry Toffolo",
 "pos": "DEF",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "CLN": 45,
@@ -22930,12 +23370,13 @@
 "flag": ""
 },
 {
+"id": "Ola Aina",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Ola Aina",
 "pos": "DEF",
-"ovr": 69,
-"tier": "bronze",
+"ovr": 73,
+"tier": "silver",
 "stats": {
 "CLN": 42,
 "THR": 58,
@@ -22982,11 +23423,12 @@
 "flag": ""
 },
 {
+"id": "Moussa Niakhate",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Moussa Niakhate",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "CLN": 34,
@@ -23034,6 +23476,7 @@
 "flag": ""
 },
 {
+"id": "Taiwo Awoniyi",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Taiwo Awoniyi",
@@ -23085,6 +23528,7 @@
 "flag": ""
 },
 {
+"id": "Willy Boly",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Willy Boly",
@@ -23137,6 +23581,7 @@
 "flag": ""
 },
 {
+"id": "Orel Mangala",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Orel Mangala",
@@ -23190,11 +23635,12 @@
 "flag": ""
 },
 {
+"id": "Divock Origi",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Divock Origi",
 "pos": "FWD",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "GOL": 41,
@@ -23241,11 +23687,12 @@
 "flag": ""
 },
 {
+"id": "Ibrahim Sangare",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Ibrahim Sangare",
 "pos": "MID",
-"ovr": 66,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "AST": 44,
@@ -23294,6 +23741,7 @@
 "flag": ""
 },
 {
+"id": "Matt Turner",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Matt Turner",
@@ -23345,12 +23793,13 @@
 "flag": ""
 },
 {
+"id": "Matz Sels",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Matz Sels",
 "pos": "GK",
-"ovr": 68,
-"tier": "bronze",
+"ovr": 72,
+"tier": "silver",
 "stats": {
 "CLN": 43,
 "CON": 70,
@@ -23396,6 +23845,7 @@
 "flag": ""
 },
 {
+"id": "Gonzalo Montiel",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Gonzalo Montiel",
@@ -23448,11 +23898,12 @@
 "flag": ""
 },
 {
+"id": "Serge Aurier",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Serge Aurier",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "CLN": 60,
@@ -23500,11 +23951,12 @@
 "flag": ""
 },
 {
+"id": "Cheikhou Kouyate",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Cheikhou Kouyate",
 "pos": "MID",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 51,
@@ -23553,11 +24005,12 @@
 "flag": ""
 },
 {
+"id": "Andrew Omobamidele",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Andrew Omobamidele",
 "pos": "DEF",
-"ovr": 64,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 42,
@@ -23605,6 +24058,7 @@
 "flag": ""
 },
 {
+"id": "Gio Reyna",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Gio Reyna",
@@ -23658,6 +24112,7 @@
 "flag": ""
 },
 {
+"id": "Nuno Tavares",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Nuno Tavares",
@@ -23710,11 +24165,12 @@
 "flag": ""
 },
 {
+"id": "Felipe",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Felipe",
 "pos": "DEF",
-"ovr": 64,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 78,
@@ -23762,11 +24218,12 @@
 "flag": ""
 },
 {
+"id": "Joe Worrall",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Joe Worrall",
 "pos": "DEF",
-"ovr": 65,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "CLN": 75,
@@ -23814,11 +24271,12 @@
 "flag": ""
 },
 {
+"id": "Scott McKenna",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Scott McKenna",
 "pos": "DEF",
-"ovr": 65,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "CLN": 76,
@@ -23866,11 +24324,12 @@
 "flag": ""
 },
 {
+"id": "Odysseas Vlachodimos",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Odysseas Vlachodimos",
 "pos": "GK",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "CLN": 53,
@@ -23917,6 +24376,7 @@
 "flag": ""
 },
 {
+"id": "Rodrigo Ribeiro",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Rodrigo Ribeiro",
@@ -23968,11 +24428,12 @@
 "flag": ""
 },
 {
+"id": "Brennan Johnson",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Brennan Johnson",
 "pos": "MID",
-"ovr": 66,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "AST": 50,
@@ -24021,6 +24482,7 @@
 "flag": ""
 },
 {
+"id": "Brandon Aguilera",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Brandon Aguilera",
@@ -24074,11 +24536,12 @@
 "flag": ""
 },
 {
+"id": "Andrey Santos",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Andrey Santos",
 "pos": "MID",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "AST": 54,
@@ -24127,11 +24590,12 @@
 "flag": ""
 },
 {
+"id": "Vinicius Souza",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Vinicius Souza",
 "pos": "MID",
-"ovr": 68,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "AST": 39,
@@ -24180,11 +24644,12 @@
 "flag": ""
 },
 {
+"id": "Gustavo Hamer",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Gustavo Hamer",
 "pos": "MID",
-"ovr": 72,
+"ovr": 71,
 "tier": "best",
 "stats": {
 "AST": 71,
@@ -24233,12 +24698,13 @@
 "flag": ""
 },
 {
+"id": "Jayden Bogle",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Jayden Bogle",
 "pos": "DEF",
-"ovr": 69,
-"tier": "bronze",
+"ovr": 71,
+"tier": "silver",
 "stats": {
 "CLN": 66,
 "THR": 56,
@@ -24285,11 +24751,12 @@
 "flag": ""
 },
 {
+"id": "Jack Robinson",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Jack Robinson",
 "pos": "DEF",
-"ovr": 69,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "CLN": 45,
@@ -24337,11 +24804,12 @@
 "flag": ""
 },
 {
+"id": "Auston Trusty",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Auston Trusty",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "CLN": 48,
@@ -24389,11 +24857,12 @@
 "flag": ""
 },
 {
+"id": "Anel Ahmedhodzic",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Anel Ahmedhodzic",
 "pos": "DEF",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "CLN": 47,
@@ -24441,12 +24910,13 @@
 "flag": ""
 },
 {
+"id": "Wes Foderingham",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Wes Foderingham",
 "pos": "GK",
-"ovr": 71,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 43,
 "CON": 38,
@@ -24492,11 +24962,12 @@
 "flag": ""
 },
 {
+"id": "James McAtee",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "James McAtee",
 "pos": "MID",
-"ovr": 69,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "AST": 63,
@@ -24545,11 +25016,12 @@
 "flag": ""
 },
 {
+"id": "Cameron Archer",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Cameron Archer",
 "pos": "FWD",
-"ovr": 68,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "GOL": 49,
@@ -24596,11 +25068,12 @@
 "flag": ""
 },
 {
+"id": "Oliver Norwood",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Oliver Norwood",
 "pos": "MID",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "AST": 42,
@@ -24649,11 +25122,12 @@
 "flag": ""
 },
 {
+"id": "Ben Osborn",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Ben Osborn",
 "pos": "MID",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "AST": 60,
@@ -24702,11 +25176,12 @@
 "flag": ""
 },
 {
+"id": "Oli McBurnie",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Oli McBurnie",
 "pos": "FWD",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "GOL": 56,
@@ -24753,11 +25228,12 @@
 "flag": ""
 },
 {
+"id": "William Osula",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "William Osula",
 "pos": "FWD",
-"ovr": 63,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "GOL": 42,
@@ -24804,11 +25280,12 @@
 "flag": ""
 },
 {
+"id": "Andre Brooks",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Andre Brooks",
 "pos": "MID",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "AST": 44,
@@ -24857,6 +25334,7 @@
 "flag": ""
 },
 {
+"id": "Anis Ben Slimane",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Anis Ben Slimane",
@@ -24910,11 +25388,12 @@
 "flag": ""
 },
 {
+"id": "Ben Brereton Diaz",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Ben Brereton Diaz",
 "pos": "FWD",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "GOL": 67,
@@ -24961,11 +25440,12 @@
 "flag": ""
 },
 {
+"id": "George Baldock",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "George Baldock",
 "pos": "DEF",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "CLN": 54,
@@ -25013,6 +25493,7 @@
 "flag": ""
 },
 {
+"id": "Rhian Brewster",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Rhian Brewster",
@@ -25064,11 +25545,12 @@
 "flag": ""
 },
 {
+"id": "Oliver Arblaster",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Oliver Arblaster",
 "pos": "MID",
-"ovr": 64,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "AST": 44,
@@ -25117,11 +25599,12 @@
 "flag": ""
 },
 {
+"id": "Luke Thomas",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Luke Thomas",
 "pos": "DEF",
-"ovr": 65,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "CLN": 55,
@@ -25169,6 +25652,7 @@
 "flag": ""
 },
 {
+"id": "Yasser Larouci",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Yasser Larouci",
@@ -25221,11 +25705,12 @@
 "flag": ""
 },
 {
+"id": "Mason Holgate",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Mason Holgate",
 "pos": "DEF",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 59,
@@ -25273,6 +25758,7 @@
 "flag": ""
 },
 {
+"id": "Max Lowe",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Max Lowe",
@@ -25325,11 +25811,12 @@
 "flag": ""
 },
 {
+"id": "Tom Davies",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Tom Davies",
 "pos": "MID",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "AST": 50,
@@ -25378,6 +25865,7 @@
 "flag": ""
 },
 {
+"id": "Ivo Grbic",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Ivo Grbic",
@@ -25429,6 +25917,7 @@
 "flag": ""
 },
 {
+"id": "Chris Basham",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Chris Basham",
@@ -25482,6 +25971,7 @@
 "flag": ""
 },
 {
+"id": "Benie Traore",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Benie Traore",
@@ -25535,11 +26025,12 @@
 "flag": ""
 },
 {
+"id": "John Egan",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "John Egan",
 "pos": "DEF",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 66,
@@ -25587,11 +26078,12 @@
 "flag": ""
 },
 {
+"id": "Rhys Norrington-Davies",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Rhys Norrington-Davies",
 "pos": "DEF",
-"ovr": 62,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "CLN": 80,
@@ -25639,6 +26131,7 @@
 "flag": ""
 },
 {
+"id": "John Fleck",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "John Fleck",
@@ -25692,6 +26185,7 @@
 "flag": ""
 },
 {
+"id": "Antwoine Hackford",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Antwoine Hackford",
@@ -25743,6 +26237,7 @@
 "flag": ""
 },
 {
+"id": "Sam Curtis",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Sam Curtis",
@@ -25795,6 +26290,7 @@
 "flag": ""
 },
 {
+"id": "Daniel Jebbison",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Daniel Jebbison",
@@ -25846,6 +26342,7 @@
 "flag": ""
 },
 {
+"id": "Ryan One",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Ryan One",
@@ -25897,6 +26394,7 @@
 "flag": ""
 },
 {
+"id": "Sydie Peck",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Sydie Peck",
@@ -25950,12 +26448,13 @@
 "flag": ""
 },
 {
+"id": "Guglielmo Vicario",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Guglielmo Vicario",
 "pos": "GK",
-"ovr": 83,
-"tier": "gold",
+"ovr": 78,
+"tier": "silver",
 "stats": {
 "CLN": 57,
 "CON": 61,
@@ -26001,11 +26500,12 @@
 "flag": ""
 },
 {
+"id": "Pierre-Emile Hojbjerg",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Pierre-Emile Hojbjerg",
 "pos": "MID",
-"ovr": 72,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "AST": 43,
@@ -26054,12 +26554,13 @@
 "flag": ""
 },
 {
+"id": "Dejan Kulusevski",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Dejan Kulusevski",
 "pos": "MID",
-"ovr": 80,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "AST": 55,
 "GOL": 78,
@@ -26107,11 +26608,12 @@
 "flag": ""
 },
 {
+"id": "Pedro Porro",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Pedro Porro",
 "pos": "DEF",
-"ovr": 79,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "CLN": 65,
@@ -26159,11 +26661,12 @@
 "flag": ""
 },
 {
+"id": "Son Heung-min",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Son Heung-min",
 "pos": "FWD",
-"ovr": 86,
+"ovr": 85,
 "tier": "best",
 "stats": {
 "GOL": 79,
@@ -26210,11 +26713,12 @@
 "flag": ""
 },
 {
+"id": "Pape Matar Sarr",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Pape Matar Sarr",
 "pos": "MID",
-"ovr": 76,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "AST": 60,
@@ -26263,11 +26767,12 @@
 "flag": ""
 },
 {
+"id": "Cristian Romero",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Cristian Romero",
 "pos": "DEF",
-"ovr": 79,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "CLN": 72,
@@ -26315,11 +26820,12 @@
 "flag": ""
 },
 {
+"id": "Brennan Johnson",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Brennan Johnson",
 "pos": "MID",
-"ovr": 79,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "AST": 94,
@@ -26368,11 +26874,12 @@
 "flag": ""
 },
 {
+"id": "Yves Bissouma",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Yves Bissouma",
 "pos": "MID",
-"ovr": 75,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "AST": 40,
@@ -26421,11 +26928,12 @@
 "flag": ""
 },
 {
+"id": "Richarlison",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Richarlison",
 "pos": "FWD",
-"ovr": 79,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "GOL": 79,
@@ -26472,12 +26980,13 @@
 "flag": ""
 },
 {
+"id": "James Maddison",
 "club": "Spurs",
 "clubPos": 5,
 "player": "James Maddison",
 "pos": "MID",
-"ovr": 80,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "AST": 91,
 "GOL": 74,
@@ -26525,11 +27034,12 @@
 "flag": ""
 },
 {
+"id": "Destiny Udogie",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Destiny Udogie",
 "pos": "DEF",
-"ovr": 79,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 60,
@@ -26577,11 +27087,12 @@
 "flag": ""
 },
 {
+"id": "Micky van de Ven",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Micky van de Ven",
 "pos": "DEF",
-"ovr": 78,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 61,
@@ -26629,11 +27140,12 @@
 "flag": ""
 },
 {
+"id": "Rodrigo Bentancur",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Rodrigo Bentancur",
 "pos": "MID",
-"ovr": 71,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "AST": 54,
@@ -26682,6 +27194,7 @@
 "flag": ""
 },
 {
+"id": "Emerson Royal",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Emerson Royal",
@@ -26734,11 +27247,12 @@
 "flag": ""
 },
 {
+"id": "Giovani Lo Celso",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Giovani Lo Celso",
 "pos": "MID",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "AST": 75,
@@ -26787,6 +27301,7 @@
 "flag": ""
 },
 {
+"id": "Oliver Skipp",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Oliver Skipp",
@@ -26840,11 +27355,12 @@
 "flag": ""
 },
 {
+"id": "Ben Davies",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Ben Davies",
 "pos": "DEF",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 38,
@@ -26892,6 +27408,7 @@
 "flag": ""
 },
 {
+"id": "Timo Werner",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Timo Werner",
@@ -26943,11 +27460,12 @@
 "flag": ""
 },
 {
+"id": "Bryan Gil",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Bryan Gil",
 "pos": "MID",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "AST": 51,
@@ -26996,6 +27514,7 @@
 "flag": ""
 },
 {
+"id": "Radu Dragusin",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Radu Dragusin",
@@ -27048,11 +27567,12 @@
 "flag": ""
 },
 {
+"id": "Alejo Veliz",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Alejo Veliz",
 "pos": "FWD",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "GOL": 60,
@@ -27099,11 +27619,12 @@
 "flag": ""
 },
 {
+"id": "Ivan Perisic",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Ivan Perisic",
 "pos": "FWD",
-"ovr": 64,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "GOL": 33,
@@ -27150,11 +27671,12 @@
 "flag": ""
 },
 {
+"id": "Manor Solomon",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Manor Solomon",
 "pos": "MID",
-"ovr": 67,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "AST": 83,
@@ -27203,11 +27725,12 @@
 "flag": ""
 },
 {
+"id": "Eric Dier",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Eric Dier",
 "pos": "DEF",
-"ovr": 70,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "CLN": 43,
@@ -27255,6 +27778,7 @@
 "flag": ""
 },
 {
+"id": "Dane Scarlett",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Dane Scarlett",
@@ -27306,6 +27830,7 @@
 "flag": ""
 },
 {
+"id": "Jamie Donley",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Jamie Donley",
@@ -27357,6 +27882,7 @@
 "flag": ""
 },
 {
+"id": "Mikey Moore",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Mikey Moore",
@@ -27408,6 +27934,7 @@
 "flag": ""
 },
 {
+"id": "Davinson Sanchez",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Davinson Sanchez",
@@ -27460,6 +27987,7 @@
 "flag": ""
 },
 {
+"id": "Tomas Soucek",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Tomas Soucek",
@@ -27513,6 +28041,7 @@
 "flag": ""
 },
 {
+"id": "James Ward-Prowse",
 "club": "West Ham",
 "clubPos": 9,
 "player": "James Ward-Prowse",
@@ -27566,11 +28095,12 @@
 "flag": ""
 },
 {
+"id": "Vladimir Coufal",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Vladimir Coufal",
 "pos": "DEF",
-"ovr": 77,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 48,
@@ -27618,11 +28148,12 @@
 "flag": ""
 },
 {
+"id": "Emerson",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Emerson",
 "pos": "DEF",
-"ovr": 75,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "CLN": 57,
@@ -27670,6 +28201,7 @@
 "flag": ""
 },
 {
+"id": "Jarrod Bowen",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Jarrod Bowen",
@@ -27721,11 +28253,12 @@
 "flag": ""
 },
 {
+"id": "Mohammed Kudus",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Mohammed Kudus",
 "pos": "MID",
-"ovr": 78,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "AST": 75,
@@ -27774,6 +28307,7 @@
 "flag": ""
 },
 {
+"id": "Kurt Zouma",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Kurt Zouma",
@@ -27826,11 +28360,12 @@
 "flag": ""
 },
 {
+"id": "Edson Alvarez",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Edson Alvarez",
 "pos": "DEF",
-"ovr": 75,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "CLN": 71,
@@ -27878,11 +28413,12 @@
 "flag": ""
 },
 {
+"id": "Alphonse Areola",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Alphonse Areola",
 "pos": "GK",
-"ovr": 75,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "CLN": 52,
@@ -27929,11 +28465,12 @@
 "flag": ""
 },
 {
+"id": "Lucas Paqueta",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Lucas Paqueta",
 "pos": "MID",
-"ovr": 77,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "AST": 74,
@@ -27982,6 +28519,7 @@
 "flag": ""
 },
 {
+"id": "Michail Antonio",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Michail Antonio",
@@ -28033,6 +28571,7 @@
 "flag": ""
 },
 {
+"id": "Nayef Aguerd",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Nayef Aguerd",
@@ -28085,6 +28624,7 @@
 "flag": ""
 },
 {
+"id": "Danny Ings",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Danny Ings",
@@ -28136,12 +28676,13 @@
 "flag": ""
 },
 {
+"id": "Konstantinos Mavropanos",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Konstantinos Mavropanos",
 "pos": "DEF",
-"ovr": 70,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 68,
 "THR": 50,
@@ -28188,11 +28729,12 @@
 "flag": ""
 },
 {
+"id": "Pablo Fornals",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Pablo Fornals",
 "pos": "MID",
-"ovr": 69,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "AST": 48,
@@ -28241,6 +28783,7 @@
 "flag": ""
 },
 {
+"id": "Ben Johnson",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Ben Johnson",
@@ -28293,6 +28836,7 @@
 "flag": ""
 },
 {
+"id": "Said Benrahma",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Said Benrahma",
@@ -28344,11 +28888,12 @@
 "flag": ""
 },
 {
+"id": "Aaron Cresswell",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Aaron Cresswell",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "CLN": 45,
@@ -28396,11 +28941,12 @@
 "flag": ""
 },
 {
+"id": "Angelo Ogbonna",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Angelo Ogbonna",
 "pos": "DEF",
-"ovr": 68,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "CLN": 82,
@@ -28448,6 +28994,7 @@
 "flag": ""
 },
 {
+"id": "Lukasz Fabianski",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Lukasz Fabianski",
@@ -28499,11 +29046,12 @@
 "flag": ""
 },
 {
+"id": "Kalvin Phillips",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Kalvin Phillips",
 "pos": "MID",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "AST": 49,
@@ -28552,11 +29100,12 @@
 "flag": ""
 },
 {
+"id": "Maxwel Cornet",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Maxwel Cornet",
 "pos": "MID",
-"ovr": 67,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "AST": 52,
@@ -28605,6 +29154,7 @@
 "flag": ""
 },
 {
+"id": "Divin Mubama",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Divin Mubama",
@@ -28656,6 +29206,7 @@
 "flag": ""
 },
 {
+"id": "Thilo Kehrer",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Thilo Kehrer",
@@ -28708,6 +29259,7 @@
 "flag": ""
 },
 {
+"id": "George Earthy",
 "club": "West Ham",
 "clubPos": 9,
 "player": "George Earthy",
@@ -28761,6 +29313,7 @@
 "flag": ""
 },
 {
+"id": "Kaelan Casey",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Kaelan Casey",
@@ -28813,11 +29366,12 @@
 "flag": ""
 },
 {
+"id": "Max Kilman",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Max Kilman",
 "pos": "DEF",
-"ovr": 76,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "CLN": 53,
@@ -28865,6 +29419,7 @@
 "flag": ""
 },
 {
+"id": "Nelson Semedo",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Nelson Semedo",
@@ -28917,11 +29472,12 @@
 "flag": ""
 },
 {
+"id": "Toti Gomes",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Toti Gomes",
 "pos": "DEF",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 53,
@@ -28969,11 +29525,12 @@
 "flag": ""
 },
 {
+"id": "Mario Lemina",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Mario Lemina",
 "pos": "MID",
-"ovr": 74,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "AST": 43,
@@ -29022,11 +29579,12 @@
 "flag": ""
 },
 {
+"id": "Jose Sa",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Jose Sa",
 "pos": "GK",
-"ovr": 77,
+"ovr": 78,
 "tier": "best",
 "stats": {
 "CLN": 45,
@@ -29073,11 +29631,12 @@
 "flag": ""
 },
 {
+"id": "Joao Gomes",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Joao Gomes",
 "pos": "MID",
-"ovr": 73,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "AST": 44,
@@ -29126,11 +29685,12 @@
 "flag": ""
 },
 {
+"id": "Rayan Ait-Nouri",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Rayan Ait-Nouri",
 "pos": "DEF",
-"ovr": 73,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "CLN": 50,
@@ -29178,11 +29738,12 @@
 "flag": ""
 },
 {
+"id": "Matheus Cunha",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Matheus Cunha",
 "pos": "FWD",
-"ovr": 76,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "GOL": 68,
@@ -29229,12 +29790,13 @@
 "flag": ""
 },
 {
+"id": "Matt Doherty",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Matt Doherty",
 "pos": "DEF",
-"ovr": 69,
-"tier": "bronze",
+"ovr": 70,
+"tier": "silver",
 "stats": {
 "CLN": 46,
 "THR": 53,
@@ -29281,11 +29843,12 @@
 "flag": ""
 },
 {
+"id": "Pablo Sarabia",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Pablo Sarabia",
 "pos": "MID",
-"ovr": 74,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "AST": 89,
@@ -29334,11 +29897,12 @@
 "flag": ""
 },
 {
+"id": "Hwang Hee-chan",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Hwang Hee-chan",
 "pos": "FWD",
-"ovr": 77,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "GOL": 69,
@@ -29385,6 +29949,7 @@
 "flag": ""
 },
 {
+"id": "Tommy Doyle",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Tommy Doyle",
@@ -29438,6 +30003,7 @@
 "flag": ""
 },
 {
+"id": "Craig Dawson",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Craig Dawson",
@@ -29490,11 +30056,12 @@
 "flag": ""
 },
 {
+"id": "Boubacar Traore",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Boubacar Traore",
 "pos": "MID",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "AST": 45,
@@ -29543,6 +30110,7 @@
 "flag": ""
 },
 {
+"id": "Jean-Ricner Bellegarde",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Jean-Ricner Bellegarde",
@@ -29596,11 +30164,12 @@
 "flag": ""
 },
 {
+"id": "Hugo Bueno",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Hugo Bueno",
 "pos": "DEF",
-"ovr": 66,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "CLN": 78,
@@ -29648,11 +30217,12 @@
 "flag": ""
 },
 {
+"id": "Pedro Neto",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Pedro Neto",
 "pos": "FWD",
-"ovr": 71,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "GOL": 39,
@@ -29699,11 +30269,12 @@
 "flag": ""
 },
 {
+"id": "Santiago Bueno",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Santiago Bueno",
 "pos": "DEF",
-"ovr": 65,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "CLN": 37,
@@ -29751,6 +30322,7 @@
 "flag": ""
 },
 {
+"id": "Sasa Kalajdzic",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Sasa Kalajdzic",
@@ -29802,6 +30374,7 @@
 "flag": ""
 },
 {
+"id": "Tawanda Chirewa",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Tawanda Chirewa",
@@ -29855,6 +30428,7 @@
 "flag": ""
 },
 {
+"id": "Fabio Silva",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Fabio Silva",
@@ -29906,6 +30480,7 @@
 "flag": ""
 },
 {
+"id": "Nathan Fraser",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Nathan Fraser",
@@ -29957,11 +30532,12 @@
 "flag": ""
 },
 {
+"id": "Daniel Bentley",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Daniel Bentley",
 "pos": "GK",
-"ovr": 67,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "CLN": 95,
@@ -30008,6 +30584,7 @@
 "flag": ""
 },
 {
+"id": "Leon Chiwome",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Leon Chiwome",
@@ -30059,11 +30636,12 @@
 "flag": ""
 },
 {
+"id": "Matheus Nunes",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Matheus Nunes",
 "pos": "MID",
-"ovr": 66,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "AST": 51,
@@ -30112,6 +30690,7 @@
 "flag": ""
 },
 {
+"id": "Jonny",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Jonny",
@@ -30164,6 +30743,7 @@
 "flag": ""
 },
 {
+"id": "Enso Gonzalez",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Enso Gonzalez",

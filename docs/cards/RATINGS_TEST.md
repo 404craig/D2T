@@ -143,3 +143,13 @@ The 90+ players per season: 1994/95 Shearer 97, Kanchelskis 91, Fowler, Palliste
 Names in the top ten that look generous: Riise and Dudek (2001/02, Liverpool finished 2nd), Kuyt (2008/09), Giroud (2013/14), Ben White and Havertz (2023/24). They are ever-present starters at clubs that finished high, the same workhorse pattern noted above.
 
 Update, same day: the top-only stretch above is switched off (Craig: it lifts the top without moving everyone else). Ratings are the learned scale with one even stretch for all players and no ceiling. 2008/09 then has 6 players at 90+, 20 at 85+, 69 at 80+. A uniform shift of +2 for every player would give 10 in the 90s while keeping all gaps the same.
+
+## 2000/01 to 2009/10 rated, with other seasons as inputs
+
+Data: subagents gathered full data (feed stats and match line-ups) for 2000/01, 2002/03, 2003/04, 2005/06, 2006/07, 2007/08 and 2009/10, and season stats for every other season from 1992/93 to 2025/26 except 2017/18 (still in progress), so every player has his surrounding seasons. Every Tenaball row matched. Notes: 2009/10 feed season totals miss about two matches for Blackburn, Burnley, Hull and Man City (line-ups and Tenaball agree, ratings use those); 2000/01 feed credits 2 of Steven Caldwell's Newcastle apps to Gary Caldwell; 1993/94 feed lists Mark Robinson (Newcastle) as "Matthew Robinson" with 0 apps.
+
+New inputs (Craig): the player's performance and club finish in his other Premier League seasons, up to two either side (adjacent seasons full weight, next ones half, weighted by minutes). The fit learns how much they count. Unseen-season agreement rose from 0.867 to 0.885 (average gap 2.4).
+
+Shift: +2 for everyone was tested and puts too many players in the 80s and 90s against the panel; no shift matches the panel's bands within 2 points (90s 2/2, 80s 24/22, 70s 53/55, 60s 21/21, panel/ours). OFFSET is 0.
+
+Results: `docs/cards/top50_2000-2010.json` and the page `docs/cards/top50.html`. For players with 10+ apps each season: 90s about 1 to 2%, 80s 12 to 15%, 70s 55 to 66%, 60s 20 to 30%. Players at 90+ per season: 2 to 7.

@@ -157,7 +157,7 @@ def game_scale(v):
     return out
 
 
-OFFSET = 2  # Craig, 10 Oct 2026: +2 for every player, gaps unchanged
+OFFSET = 0  # +2 was tested (Craig, 10 Oct 2026); 0 matches the panel's rating bands within 2 points, +2 puts too many in the 80s and 90s
 
 
 def band(v):

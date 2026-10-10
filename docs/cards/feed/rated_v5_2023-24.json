@@ -25,6 +25,7 @@
 ],
 "players": [
 {
+"id": "Declan Rice",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Declan Rice",
@@ -78,6 +79,7 @@
 "flag": ""
 },
 {
+"id": "William Saliba",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "William Saliba",
@@ -130,6 +132,7 @@
 "flag": ""
 },
 {
+"id": "Kai Havertz",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Kai Havertz",
@@ -183,6 +186,7 @@
 "flag": ""
 },
 {
+"id": "Ben White",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Ben White",
@@ -235,6 +239,7 @@
 "flag": ""
 },
 {
+"id": "Gabriel Magalhaes",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Gabriel Magalhaes",
@@ -287,6 +292,7 @@
 "flag": ""
 },
 {
+"id": "Bukayo Saka",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Bukayo Saka",
@@ -340,6 +346,7 @@
 "flag": ""
 },
 {
+"id": "Gabriel Martinelli",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Gabriel Martinelli",
@@ -391,6 +398,7 @@
 "flag": ""
 },
 {
+"id": "Martin Odegaard",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Martin Odegaard",
@@ -444,6 +452,7 @@
 "flag": ""
 },
 {
+"id": "Leandro Trossard",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Leandro Trossard",
@@ -497,6 +506,7 @@
 "flag": ""
 },
 {
+"id": "David Raya",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "David Raya",
@@ -548,6 +558,7 @@
 "flag": ""
 },
 {
+"id": "Gabriel Jesus",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Gabriel Jesus",
@@ -599,6 +610,7 @@
 "flag": ""
 },
 {
+"id": "Eddie Nketiah",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Eddie Nketiah",
@@ -650,6 +662,7 @@
 "flag": ""
 },
 {
+"id": "Oleksandr Zinchenko",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Oleksandr Zinchenko",
@@ -702,6 +715,7 @@
 "flag": ""
 },
 {
+"id": "Jorginho",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Jorginho",
@@ -755,6 +769,7 @@
 "flag": ""
 },
 {
+"id": "Takehiro Tomiyasu",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Takehiro Tomiyasu",
@@ -807,6 +822,7 @@
 "flag": ""
 },
 {
+"id": "Jakub Kiwior",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Jakub Kiwior",
@@ -859,6 +875,7 @@
 "flag": ""
 },
 {
+"id": "Reiss Nelson",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Reiss Nelson",
@@ -910,6 +927,7 @@
 "flag": ""
 },
 {
+"id": "Thomas Partey",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Thomas Partey",
@@ -963,6 +981,7 @@
 "flag": ""
 },
 {
+"id": "Emile Smith Rowe",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Emile Smith Rowe",
@@ -1016,6 +1035,7 @@
 "flag": ""
 },
 {
+"id": "Fabio Vieira",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Fabio Vieira",
@@ -1069,6 +1089,7 @@
 "flag": ""
 },
 {
+"id": "Aaron Ramsdale",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Aaron Ramsdale",
@@ -1120,6 +1141,7 @@
 "flag": ""
 },
 {
+"id": "Cedric Soares",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Cedric Soares",
@@ -1172,6 +1194,7 @@
 "flag": ""
 },
 {
+"id": "Mohamed Elneny",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Mohamed Elneny",
@@ -1225,6 +1248,7 @@
 "flag": ""
 },
 {
+"id": "Jurrien Timber",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Jurrien Timber",
@@ -1277,6 +1301,7 @@
 "flag": ""
 },
 {
+"id": "Ethan Nwaneri",
 "club": "Arsenal",
 "clubPos": 2,
 "player": "Ethan Nwaneri",
@@ -1330,6 +1355,7 @@
 "flag": ""
 },
 {
+"id": "Moussa Diaby",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Moussa Diaby",
@@ -1381,6 +1407,7 @@
 "flag": ""
 },
 {
+"id": "Ollie Watkins",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Ollie Watkins",
@@ -1432,6 +1459,7 @@
 "flag": ""
 },
 {
+"id": "Leon Bailey",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Leon Bailey",
@@ -1483,6 +1511,7 @@
 "flag": ""
 },
 {
+"id": "Ezri Konsa",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Ezri Konsa",
@@ -1535,6 +1564,7 @@
 "flag": ""
 },
 {
+"id": "John McGinn",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "John McGinn",
@@ -1588,6 +1618,7 @@
 "flag": ""
 },
 {
+"id": "Douglas Luiz",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Douglas Luiz",
@@ -1641,6 +1672,7 @@
 "flag": ""
 },
 {
+"id": "Emiliano Martinez",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Emiliano Martinez",
@@ -1692,6 +1724,7 @@
 "flag": ""
 },
 {
+"id": "Lucas Digne",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Lucas Digne",
@@ -1744,6 +1777,7 @@
 "flag": ""
 },
 {
+"id": "Youri Tielemans",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Youri Tielemans",
@@ -1797,6 +1831,7 @@
 "flag": ""
 },
 {
+"id": "Matty Cash",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Matty Cash",
@@ -1849,6 +1884,7 @@
 "flag": ""
 },
 {
+"id": "Pau Torres",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Pau Torres",
@@ -1901,6 +1937,7 @@
 "flag": ""
 },
 {
+"id": "Diego Carlos",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Diego Carlos",
@@ -1953,6 +1990,7 @@
 "flag": ""
 },
 {
+"id": "Nicolo Zaniolo",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Nicolo Zaniolo",
@@ -2006,6 +2044,7 @@
 "flag": ""
 },
 {
+"id": "Jhon Duran",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Jhon Duran",
@@ -2057,6 +2096,7 @@
 "flag": ""
 },
 {
+"id": "Alex Moreno",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Alex Moreno",
@@ -2109,6 +2149,7 @@
 "flag": ""
 },
 {
+"id": "Boubacar Kamara",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Boubacar Kamara",
@@ -2162,6 +2203,7 @@
 "flag": ""
 },
 {
+"id": "Jacob Ramsey",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Jacob Ramsey",
@@ -2215,6 +2257,7 @@
 "flag": ""
 },
 {
+"id": "Clement Lenglet",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Clement Lenglet",
@@ -2267,6 +2310,7 @@
 "flag": ""
 },
 {
+"id": "Morgan Rogers",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Morgan Rogers",
@@ -2320,6 +2364,7 @@
 "flag": ""
 },
 {
+"id": "Tim Iroegbunam",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Tim Iroegbunam",
@@ -2373,6 +2418,7 @@
 "flag": ""
 },
 {
+"id": "Leander Dendoncker",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Leander Dendoncker",
@@ -2426,6 +2472,7 @@
 "flag": ""
 },
 {
+"id": "Calum Chambers",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Calum Chambers",
@@ -2478,6 +2525,7 @@
 "flag": ""
 },
 {
+"id": "Robin Olsen",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Robin Olsen",
@@ -2529,6 +2577,7 @@
 "flag": ""
 },
 {
+"id": "Kaine Kesler-Hayden",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Kaine Kesler-Hayden",
@@ -2581,6 +2630,7 @@
 "flag": ""
 },
 {
+"id": "Philippe Coutinho",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Philippe Coutinho",
@@ -2634,6 +2684,7 @@
 "flag": ""
 },
 {
+"id": "Omari Kellyman",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Omari Kellyman",
@@ -2687,6 +2738,7 @@
 "flag": ""
 },
 {
+"id": "Bertrand Traore",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Bertrand Traore",
@@ -2738,6 +2790,7 @@
 "flag": ""
 },
 {
+"id": "Cameron Archer",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Cameron Archer",
@@ -2789,6 +2842,7 @@
 "flag": ""
 },
 {
+"id": "Tyrone Mings",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Tyrone Mings",
@@ -2841,6 +2895,7 @@
 "flag": ""
 },
 {
+"id": "Finley Munroe",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Finley Munroe",
@@ -2893,6 +2948,7 @@
 "flag": ""
 },
 {
+"id": "Jaden Philogene",
 "club": "Aston Villa",
 "clubPos": 4,
 "player": "Jaden Philogene",
@@ -2946,6 +3002,7 @@
 "flag": ""
 },
 {
+"id": "Dominic Solanke",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Dominic Solanke",
@@ -2997,6 +3054,7 @@
 "flag": ""
 },
 {
+"id": "Ryan Christie",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Ryan Christie",
@@ -3050,6 +3108,7 @@
 "flag": ""
 },
 {
+"id": "Illia Zabarnyi",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Illia Zabarnyi",
@@ -3102,6 +3161,7 @@
 "flag": ""
 },
 {
+"id": "Lewis Cook",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Lewis Cook",
@@ -3155,6 +3215,7 @@
 "flag": ""
 },
 {
+"id": "Antoine Semenyo",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Antoine Semenyo",
@@ -3206,6 +3267,7 @@
 "flag": ""
 },
 {
+"id": "Justin Kluivert",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Justin Kluivert",
@@ -3257,6 +3319,7 @@
 "flag": ""
 },
 {
+"id": "Neto",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Neto",
@@ -3308,6 +3371,7 @@
 "flag": ""
 },
 {
+"id": "Marcos Senesi",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Marcos Senesi",
@@ -3360,6 +3424,7 @@
 "flag": ""
 },
 {
+"id": "Dango Ouattara",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Dango Ouattara",
@@ -3411,6 +3476,7 @@
 "flag": ""
 },
 {
+"id": "Marcus Tavernier",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Marcus Tavernier",
@@ -3464,6 +3530,7 @@
 "flag": ""
 },
 {
+"id": "Philip Billing",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Philip Billing",
@@ -3517,6 +3584,7 @@
 "flag": ""
 },
 {
+"id": "Milos Kerkez",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Milos Kerkez",
@@ -3569,6 +3637,7 @@
 "flag": ""
 },
 {
+"id": "Adam Smith",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Adam Smith",
@@ -3621,6 +3690,7 @@
 "flag": ""
 },
 {
+"id": "Lloyd Kelly",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Lloyd Kelly",
@@ -3673,6 +3743,7 @@
 "flag": ""
 },
 {
+"id": "Alex Scott",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Alex Scott",
@@ -3726,6 +3797,7 @@
 "flag": ""
 },
 {
+"id": "Max Aarons",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Max Aarons",
@@ -3778,6 +3850,7 @@
 "flag": ""
 },
 {
+"id": "Luis Sinisterra",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Luis Sinisterra",
@@ -3831,6 +3904,7 @@
 "flag": ""
 },
 {
+"id": "Enes Unal",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Enes Unal",
@@ -3882,6 +3956,7 @@
 "flag": ""
 },
 {
+"id": "David Brooks",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "David Brooks",
@@ -3935,6 +4010,7 @@
 "flag": ""
 },
 {
+"id": "Joe Rothwell",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Joe Rothwell",
@@ -3988,6 +4064,7 @@
 "flag": ""
 },
 {
+"id": "Chris Mepham",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Chris Mepham",
@@ -4040,6 +4117,7 @@
 "flag": ""
 },
 {
+"id": "Kieffer Moore",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Kieffer Moore",
@@ -4091,6 +4169,7 @@
 "flag": ""
 },
 {
+"id": "Romain Faivre",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Romain Faivre",
@@ -4144,6 +4223,7 @@
 "flag": ""
 },
 {
+"id": "James Hill",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "James Hill",
@@ -4196,6 +4276,7 @@
 "flag": ""
 },
 {
+"id": "Mark Travers",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Mark Travers",
@@ -4247,6 +4328,7 @@
 "flag": ""
 },
 {
+"id": "Tyler Adams",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Tyler Adams",
@@ -4300,6 +4382,7 @@
 "flag": ""
 },
 {
+"id": "Jaidon Anthony",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Jaidon Anthony",
@@ -4351,6 +4434,7 @@
 "flag": ""
 },
 {
+"id": "Hamed Traore",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Hamed Traore",
@@ -4404,6 +4488,7 @@
 "flag": ""
 },
 {
+"id": "Ionut Radu",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Ionut Radu",
@@ -4455,6 +4540,7 @@
 "flag": ""
 },
 {
+"id": "Dominic Sadi",
 "club": "Bournemouth",
 "clubPos": 13,
 "player": "Dominic Sadi",
@@ -4508,6 +4594,7 @@
 "flag": ""
 },
 {
+"id": "Vitaly Janelt",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Vitaly Janelt",
@@ -4561,6 +4648,7 @@
 "flag": ""
 },
 {
+"id": "Mark Flekken",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Mark Flekken",
@@ -4612,6 +4700,7 @@
 "flag": ""
 },
 {
+"id": "Mads Roerslev",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Mads Roerslev",
@@ -4664,6 +4753,7 @@
 "flag": ""
 },
 {
+"id": "Yoane Wissa",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Yoane Wissa",
@@ -4715,6 +4805,7 @@
 "flag": ""
 },
 {
+"id": "Nathan Collins",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Nathan Collins",
@@ -4767,6 +4858,7 @@
 "flag": ""
 },
 {
+"id": "Mathias Jensen",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Mathias Jensen",
@@ -4820,6 +4912,7 @@
 "flag": ""
 },
 {
+"id": "Christian Norgaard",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Christian Norgaard",
@@ -4873,6 +4966,7 @@
 "flag": ""
 },
 {
+"id": "Keane Lewis-Potter",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Keane Lewis-Potter",
@@ -4924,6 +5018,7 @@
 "flag": ""
 },
 {
+"id": "Neal Maupay",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Neal Maupay",
@@ -4975,6 +5070,7 @@
 "flag": ""
 },
 {
+"id": "Ethan Pinnock",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Ethan Pinnock",
@@ -5027,6 +5123,7 @@
 "flag": ""
 },
 {
+"id": "Kristoffer Ajer",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Kristoffer Ajer",
@@ -5079,6 +5176,7 @@
 "flag": ""
 },
 {
+"id": "Yehor Yarmoliuk",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Yehor Yarmoliuk",
@@ -5132,6 +5230,7 @@
 "flag": ""
 },
 {
+"id": "Frank Onyeka",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Frank Onyeka",
@@ -5185,6 +5284,7 @@
 "flag": ""
 },
 {
+"id": "Bryan Mbeumo",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Bryan Mbeumo",
@@ -5238,6 +5338,7 @@
 "flag": ""
 },
 {
+"id": "Mikkel Damsgaard",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Mikkel Damsgaard",
@@ -5291,6 +5392,7 @@
 "flag": ""
 },
 {
+"id": "Saman Ghoddos",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Saman Ghoddos",
@@ -5342,6 +5444,7 @@
 "flag": ""
 },
 {
+"id": "Ivan Toney",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Ivan Toney",
@@ -5393,6 +5496,7 @@
 "flag": ""
 },
 {
+"id": "Ben Mee",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Ben Mee",
@@ -5445,6 +5549,7 @@
 "flag": ""
 },
 {
+"id": "Reguilon",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Reguilon",
@@ -5497,6 +5602,7 @@
 "flag": ""
 },
 {
+"id": "Mathias Jorgensen",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Mathias Jorgensen",
@@ -5549,6 +5655,7 @@
 "flag": ""
 },
 {
+"id": "Kevin Schade",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Kevin Schade",
@@ -5600,6 +5707,7 @@
 "flag": ""
 },
 {
+"id": "Shandon Baptiste",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Shandon Baptiste",
@@ -5653,6 +5761,7 @@
 "flag": ""
 },
 {
+"id": "Aaron Hickey",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Aaron Hickey",
@@ -5705,6 +5814,7 @@
 "flag": ""
 },
 {
+"id": "Michael Olakigbe",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Michael Olakigbe",
@@ -5758,6 +5868,7 @@
 "flag": ""
 },
 {
+"id": "Rico Henry",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Rico Henry",
@@ -5810,6 +5921,7 @@
 "flag": ""
 },
 {
+"id": "Josh Dasilva",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Josh Dasilva",
@@ -5863,6 +5975,7 @@
 "flag": ""
 },
 {
+"id": "Myles Peart-Harris",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Myles Peart-Harris",
@@ -5916,6 +6029,7 @@
 "flag": ""
 },
 {
+"id": "Thomas Strakosha",
 "club": "Brentford",
 "clubPos": 16,
 "player": "Thomas Strakosha",
@@ -5967,6 +6081,7 @@
 "flag": ""
 },
 {
+"id": "Pascal Gross",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Pascal Gross",
@@ -6020,6 +6135,7 @@
 "flag": ""
 },
 {
+"id": "Lewis Dunk",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Lewis Dunk",
@@ -6072,6 +6188,7 @@
 "flag": ""
 },
 {
+"id": "Simon Adingra",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Simon Adingra",
@@ -6123,6 +6240,7 @@
 "flag": ""
 },
 {
+"id": "Joao Pedro",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Joao Pedro",
@@ -6174,6 +6292,7 @@
 "flag": ""
 },
 {
+"id": "Billy Gilmour",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Billy Gilmour",
@@ -6227,6 +6346,7 @@
 "flag": ""
 },
 {
+"id": "Danny Welbeck",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Danny Welbeck",
@@ -6278,6 +6398,7 @@
 "flag": ""
 },
 {
+"id": "Jan Paul van Hecke",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Jan Paul van Hecke",
@@ -6330,6 +6451,7 @@
 "flag": ""
 },
 {
+"id": "Carlos Baleba",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Carlos Baleba",
@@ -6383,6 +6505,7 @@
 "flag": ""
 },
 {
+"id": "Facundo Buonanotte",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Facundo Buonanotte",
@@ -6436,6 +6559,7 @@
 "flag": ""
 },
 {
+"id": "Evan Ferguson",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Evan Ferguson",
@@ -6487,6 +6611,7 @@
 "flag": ""
 },
 {
+"id": "Joel Veltman",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Joel Veltman",
@@ -6539,6 +6664,7 @@
 "flag": ""
 },
 {
+"id": "Adam Lallana",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Adam Lallana",
@@ -6592,6 +6718,7 @@
 "flag": ""
 },
 {
+"id": "Igor",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Igor",
@@ -6644,6 +6771,7 @@
 "flag": ""
 },
 {
+"id": "Bart Verbruggen",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Bart Verbruggen",
@@ -6695,6 +6823,7 @@
 "flag": ""
 },
 {
+"id": "Pervis Estupinan",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Pervis Estupinan",
@@ -6747,6 +6876,7 @@
 "flag": ""
 },
 {
+"id": "Ansu Fati",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Ansu Fati",
@@ -6798,6 +6928,7 @@
 "flag": ""
 },
 {
+"id": "Tariq Lamptey",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Tariq Lamptey",
@@ -6850,6 +6981,7 @@
 "flag": ""
 },
 {
+"id": "Kaoru Mitoma",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Kaoru Mitoma",
@@ -6903,6 +7035,7 @@
 "flag": ""
 },
 {
+"id": "Jakub Moder",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Jakub Moder",
@@ -6956,6 +7089,7 @@
 "flag": ""
 },
 {
+"id": "Jason Steele",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Jason Steele",
@@ -7007,6 +7141,7 @@
 "flag": ""
 },
 {
+"id": "James Milner",
 "club": "Brighton",
 "clubPos": 11,
 "player": "James Milner",
@@ -7060,6 +7195,7 @@
 "flag": ""
 },
 {
+"id": "Adam Webster",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Adam Webster",
@@ -7112,6 +7248,7 @@
 "flag": ""
 },
 {
+"id": "Julio Enciso",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Julio Enciso",
@@ -7163,6 +7300,7 @@
 "flag": ""
 },
 {
+"id": "Jack Hinshelwood",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Jack Hinshelwood",
@@ -7216,6 +7354,7 @@
 "flag": ""
 },
 {
+"id": "Mahmoud Dahoud",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Mahmoud Dahoud",
@@ -7269,6 +7408,7 @@
 "flag": ""
 },
 {
+"id": "Solly March",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Solly March",
@@ -7322,6 +7462,7 @@
 "flag": ""
 },
 {
+"id": "Valentin Barco",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Valentin Barco",
@@ -7374,6 +7515,7 @@
 "flag": ""
 },
 {
+"id": "Benicio Baker-Boaitey",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Benicio Baker-Boaitey",
@@ -7427,6 +7569,7 @@
 "flag": ""
 },
 {
+"id": "Odeluga Offiah",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Odeluga Offiah",
@@ -7479,6 +7622,7 @@
 "flag": ""
 },
 {
+"id": "Mark O'Mahony",
 "club": "Brighton",
 "clubPos": 11,
 "player": "Mark O'Mahony",
@@ -7530,6 +7674,7 @@
 "flag": ""
 },
 {
+"id": "Sander Berge",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Sander Berge",
@@ -7583,6 +7728,7 @@
 "flag": ""
 },
 {
+"id": "Zeki Amdouni",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Zeki Amdouni",
@@ -7634,6 +7780,7 @@
 "flag": ""
 },
 {
+"id": "Josh Brownhill",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Josh Brownhill",
@@ -7687,6 +7834,7 @@
 "flag": ""
 },
 {
+"id": "Dara O'Shea",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Dara O'Shea",
@@ -7739,6 +7887,7 @@
 "flag": ""
 },
 {
+"id": "Jacob Bruun Larsen",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Jacob Bruun Larsen",
@@ -7790,6 +7939,7 @@
 "flag": ""
 },
 {
+"id": "Vitinho",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Vitinho",
@@ -7842,6 +7992,7 @@
 "flag": ""
 },
 {
+"id": "Wilson Odobert",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Wilson Odobert",
@@ -7893,6 +8044,7 @@
 "flag": ""
 },
 {
+"id": "Charlie Taylor",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Charlie Taylor",
@@ -7945,6 +8097,7 @@
 "flag": ""
 },
 {
+"id": "James Trafford",
 "club": "Burnley",
 "clubPos": 19,
 "player": "James Trafford",
@@ -7996,6 +8149,7 @@
 "flag": ""
 },
 {
+"id": "Johann Berg Gudmundsson",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Johann Berg Gudmundsson",
@@ -8049,6 +8203,7 @@
 "flag": ""
 },
 {
+"id": "Josh Cullen",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Josh Cullen",
@@ -8102,6 +8257,7 @@
 "flag": ""
 },
 {
+"id": "Lyle Foster",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Lyle Foster",
@@ -8153,6 +8309,7 @@
 "flag": ""
 },
 {
+"id": "Jay Rodriguez",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Jay Rodriguez",
@@ -8204,6 +8361,7 @@
 "flag": ""
 },
 {
+"id": "Maxime Esteve",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Maxime Esteve",
@@ -8256,6 +8414,7 @@
 "flag": ""
 },
 {
+"id": "Mike Tresor",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Mike Tresor",
@@ -8309,6 +8468,7 @@
 "flag": ""
 },
 {
+"id": "Lorenz Assignon",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Lorenz Assignon",
@@ -8361,6 +8521,7 @@
 "flag": ""
 },
 {
+"id": "Jordan Beyer",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Jordan Beyer",
@@ -8413,6 +8574,7 @@
 "flag": ""
 },
 {
+"id": "David Datro Fofana",
 "club": "Burnley",
 "clubPos": 19,
 "player": "David Datro Fofana",
@@ -8464,6 +8626,7 @@
 "flag": ""
 },
 {
+"id": "Luca Koleosho",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Luca Koleosho",
@@ -8517,6 +8680,7 @@
 "flag": ""
 },
 {
+"id": "Aaron Ramsey (b.2003)",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Aaron Ramsey",
@@ -8570,6 +8734,7 @@
 "flag": ""
 },
 {
+"id": "Connor Roberts",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Connor Roberts",
@@ -8622,6 +8787,7 @@
 "flag": ""
 },
 {
+"id": "Ameen Al-Dakhil",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Ameen Al-Dakhil",
@@ -8674,6 +8840,7 @@
 "flag": ""
 },
 {
+"id": "Hannes Delcroix",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Hannes Delcroix",
@@ -8726,6 +8893,7 @@
 "flag": ""
 },
 {
+"id": "Nathan Redmond",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Nathan Redmond",
@@ -8779,6 +8947,7 @@
 "flag": ""
 },
 {
+"id": "Arijanet Muric",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Arijanet Muric",
@@ -8830,6 +8999,7 @@
 "flag": ""
 },
 {
+"id": "Manuel Benson",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Manuel Benson",
@@ -8881,6 +9051,7 @@
 "flag": ""
 },
 {
+"id": "Hjalmar Ekdal",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Hjalmar Ekdal",
@@ -8933,6 +9104,7 @@
 "flag": ""
 },
 {
+"id": "Anass Zaroury",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Anass Zaroury",
@@ -8984,6 +9156,7 @@
 "flag": ""
 },
 {
+"id": "Jack Cork",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Jack Cork",
@@ -9037,6 +9210,7 @@
 "flag": ""
 },
 {
+"id": "Han-Noah Massengo",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Han-Noah Massengo",
@@ -9090,6 +9264,7 @@
 "flag": ""
 },
 {
+"id": "Michael Obafemi",
 "club": "Burnley",
 "clubPos": 19,
 "player": "Michael Obafemi",
@@ -9141,6 +9316,7 @@
 "flag": ""
 },
 {
+"id": "Conor Gallagher",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Conor Gallagher",
@@ -9194,6 +9370,7 @@
 "flag": ""
 },
 {
+"id": "Moises Caicedo",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Moises Caicedo",
@@ -9247,6 +9424,7 @@
 "flag": ""
 },
 {
+"id": "Nicolas Jackson",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Nicolas Jackson",
@@ -9298,6 +9476,7 @@
 "flag": ""
 },
 {
+"id": "Cole Palmer",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Cole Palmer",
@@ -9349,6 +9528,7 @@
 "flag": ""
 },
 {
+"id": "Axel Disasi",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Axel Disasi",
@@ -9401,6 +9581,7 @@
 "flag": ""
 },
 {
+"id": "Thiago Silva",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Thiago Silva",
@@ -9453,6 +9634,7 @@
 "flag": ""
 },
 {
+"id": "Mykhailo Mudryk",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Mykhailo Mudryk",
@@ -9506,6 +9688,7 @@
 "flag": ""
 },
 {
+"id": "Raheem Sterling",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Raheem Sterling",
@@ -9557,6 +9740,7 @@
 "flag": ""
 },
 {
+"id": "Enzo Fernandez",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Enzo Fernandez",
@@ -9610,6 +9794,7 @@
 "flag": ""
 },
 {
+"id": "Malo Gusto",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Malo Gusto",
@@ -9662,6 +9847,7 @@
 "flag": ""
 },
 {
+"id": "Levi Colwill",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Levi Colwill",
@@ -9714,6 +9900,7 @@
 "flag": ""
 },
 {
+"id": "Noni Madueke",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Noni Madueke",
@@ -9767,6 +9954,7 @@
 "flag": ""
 },
 {
+"id": "Djordje Petrovic",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Djordje Petrovic",
@@ -9818,6 +10006,7 @@
 "flag": ""
 },
 {
+"id": "Marc Cucurella",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Marc Cucurella",
@@ -9870,6 +10059,7 @@
 "flag": ""
 },
 {
+"id": "Benoit Badiashile",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Benoit Badiashile",
@@ -9922,6 +10112,7 @@
 "flag": ""
 },
 {
+"id": "Robert Sanchez",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Robert Sanchez",
@@ -9973,6 +10164,7 @@
 "flag": ""
 },
 {
+"id": "Armando Broja",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Armando Broja",
@@ -10024,6 +10216,7 @@
 "flag": ""
 },
 {
+"id": "Trevoh Chalobah",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Trevoh Chalobah",
@@ -10077,6 +10270,7 @@
 "flag": ""
 },
 {
+"id": "Ben Chilwell",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Ben Chilwell",
@@ -10129,6 +10323,7 @@
 "flag": ""
 },
 {
+"id": "Ian Maatsen",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Ian Maatsen",
@@ -10181,6 +10376,7 @@
 "flag": ""
 },
 {
+"id": "Lesley Ugochukwu",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Lesley Ugochukwu",
@@ -10234,6 +10430,7 @@
 "flag": ""
 },
 {
+"id": "Cesare Casadei",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Cesare Casadei",
@@ -10287,6 +10484,7 @@
 "flag": ""
 },
 {
+"id": "Alfie Gilchrist",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Alfie Gilchrist",
@@ -10339,6 +10537,7 @@
 "flag": ""
 },
 {
+"id": "Christopher Nkunku",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Christopher Nkunku",
@@ -10390,6 +10589,7 @@
 "flag": ""
 },
 {
+"id": "Reece James",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Reece James",
@@ -10442,6 +10642,7 @@
 "flag": ""
 },
 {
+"id": "Carney Chukwuemeka",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Carney Chukwuemeka",
@@ -10495,6 +10696,7 @@
 "flag": ""
 },
 {
+"id": "Mason Burstow",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Mason Burstow",
@@ -10546,6 +10748,7 @@
 "flag": ""
 },
 {
+"id": "Deivid Washington",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Deivid Washington",
@@ -10597,6 +10800,7 @@
 "flag": ""
 },
 {
+"id": "Josh Acheampong",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Josh Acheampong",
@@ -10649,6 +10853,7 @@
 "flag": ""
 },
 {
+"id": "Romeo Lavia",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Romeo Lavia",
@@ -10702,6 +10907,7 @@
 "flag": ""
 },
 {
+"id": "Alex Matos",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Alex Matos",
@@ -10753,6 +10959,7 @@
 "flag": ""
 },
 {
+"id": "Jimi Tauriainen",
 "club": "Chelsea",
 "clubPos": 6,
 "player": "Jimi Tauriainen",
@@ -10806,6 +11013,7 @@
 "flag": ""
 },
 {
+"id": "Joachim Andersen",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Joachim Andersen",
@@ -10858,6 +11066,7 @@
 "flag": ""
 },
 {
+"id": "Tyrick Mitchell",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Tyrick Mitchell",
@@ -10910,6 +11119,7 @@
 "flag": ""
 },
 {
+"id": "Jordan Ayew",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Jordan Ayew",
@@ -10961,6 +11171,7 @@
 "flag": ""
 },
 {
+"id": "Jean-Philippe Mateta",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Jean-Philippe Mateta",
@@ -11012,6 +11223,7 @@
 "flag": ""
 },
 {
+"id": "Odsonne Edouard",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Odsonne Edouard",
@@ -11063,6 +11275,7 @@
 "flag": ""
 },
 {
+"id": "Will Hughes",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Will Hughes",
@@ -11116,6 +11329,7 @@
 "flag": ""
 },
 {
+"id": "Jeffrey Schlupp",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Jeffrey Schlupp",
@@ -11168,6 +11382,7 @@
 "flag": ""
 },
 {
+"id": "Jefferson Lerma",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Jefferson Lerma",
@@ -11221,6 +11436,7 @@
 "flag": ""
 },
 {
+"id": "Eberechi Eze",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Eberechi Eze",
@@ -11274,6 +11490,7 @@
 "flag": ""
 },
 {
+"id": "Chris Richards",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Chris Richards",
@@ -11326,6 +11543,7 @@
 "flag": ""
 },
 {
+"id": "Joel Ward",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Joel Ward",
@@ -11378,6 +11596,7 @@
 "flag": ""
 },
 {
+"id": "Marc Guehi",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Marc Guehi",
@@ -11430,6 +11649,7 @@
 "flag": ""
 },
 {
+"id": "Naouirou Ahamada",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Naouirou Ahamada",
@@ -11483,6 +11703,7 @@
 "flag": ""
 },
 {
+"id": "Sam Johnstone",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Sam Johnstone",
@@ -11534,6 +11755,7 @@
 "flag": ""
 },
 {
+"id": "Nathaniel Clyne",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Nathaniel Clyne",
@@ -11586,6 +11808,7 @@
 "flag": ""
 },
 {
+"id": "Michael Olise",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Michael Olise",
@@ -11637,6 +11860,7 @@
 "flag": ""
 },
 {
+"id": "Dean Henderson",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Dean Henderson",
@@ -11688,6 +11912,7 @@
 "flag": ""
 },
 {
+"id": "Daniel Munoz",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Daniel Munoz",
@@ -11740,6 +11965,7 @@
 "flag": ""
 },
 {
+"id": "Adam Wharton",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Adam Wharton",
@@ -11793,6 +12019,7 @@
 "flag": ""
 },
 {
+"id": "Cheick Doucoure",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Cheick Doucoure",
@@ -11846,6 +12073,7 @@
 "flag": ""
 },
 {
+"id": "Matheus Franca",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Matheus Franca",
@@ -11899,6 +12127,7 @@
 "flag": ""
 },
 {
+"id": "David Ozoh",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "David Ozoh",
@@ -11952,6 +12181,7 @@
 "flag": ""
 },
 {
+"id": "Jairo Riedewald",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Jairo Riedewald",
@@ -12005,6 +12235,7 @@
 "flag": ""
 },
 {
+"id": "Jesurun Rak-Sakyi",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Jesurun Rak-Sakyi",
@@ -12058,6 +12289,7 @@
 "flag": ""
 },
 {
+"id": "James Tomkins",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "James Tomkins",
@@ -12110,6 +12342,7 @@
 "flag": ""
 },
 {
+"id": "Remi Matthews",
 "club": "Crystal Palace",
 "clubPos": 10,
 "player": "Remi Matthews",
@@ -12161,6 +12394,7 @@
 "flag": ""
 },
 {
+"id": "Jordan Pickford",
 "club": "Everton",
 "clubPos": 12,
 "player": "Jordan Pickford",
@@ -12212,6 +12446,7 @@
 "flag": ""
 },
 {
+"id": "James Tarkowski",
 "club": "Everton",
 "clubPos": 12,
 "player": "James Tarkowski",
@@ -12264,6 +12499,7 @@
 "flag": ""
 },
 {
+"id": "James Garner",
 "club": "Everton",
 "clubPos": 12,
 "player": "James Garner",
@@ -12317,6 +12553,7 @@
 "flag": ""
 },
 {
+"id": "Jarrad Branthwaite",
 "club": "Everton",
 "clubPos": 12,
 "player": "Jarrad Branthwaite",
@@ -12369,6 +12606,7 @@
 "flag": ""
 },
 {
+"id": "Dwight McNeil",
 "club": "Everton",
 "clubPos": 12,
 "player": "Dwight McNeil",
@@ -12422,6 +12660,7 @@
 "flag": ""
 },
 {
+"id": "Dominic Calvert-Lewin",
 "club": "Everton",
 "clubPos": 12,
 "player": "Dominic Calvert-Lewin",
@@ -12473,6 +12712,7 @@
 "flag": ""
 },
 {
+"id": "Abdoulaye Doucoure",
 "club": "Everton",
 "clubPos": 12,
 "player": "Abdoulaye Doucoure",
@@ -12526,6 +12766,7 @@
 "flag": ""
 },
 {
+"id": "Ashley Young",
 "club": "Everton",
 "clubPos": 12,
 "player": "Ashley Young",
@@ -12578,6 +12819,7 @@
 "flag": ""
 },
 {
+"id": "Beto",
 "club": "Everton",
 "clubPos": 12,
 "player": "Beto",
@@ -12629,6 +12871,7 @@
 "flag": ""
 },
 {
+"id": "Amadou Onana",
 "club": "Everton",
 "clubPos": 12,
 "player": "Amadou Onana",
@@ -12682,6 +12925,7 @@
 "flag": ""
 },
 {
+"id": "Jack Harrison",
 "club": "Everton",
 "clubPos": 12,
 "player": "Jack Harrison",
@@ -12735,6 +12979,7 @@
 "flag": ""
 },
 {
+"id": "Vitaliy Mykolenko",
 "club": "Everton",
 "clubPos": 12,
 "player": "Vitaliy Mykolenko",
@@ -12787,6 +13032,7 @@
 "flag": ""
 },
 {
+"id": "Idrissa Gueye",
 "club": "Everton",
 "clubPos": 12,
 "player": "Idrissa Gueye",
@@ -12840,6 +13086,7 @@
 "flag": ""
 },
 {
+"id": "Nathan Patterson",
 "club": "Everton",
 "clubPos": 12,
 "player": "Nathan Patterson",
@@ -12892,6 +13139,7 @@
 "flag": ""
 },
 {
+"id": "Youssef Chermiti",
 "club": "Everton",
 "clubPos": 12,
 "player": "Youssef Chermiti",
@@ -12943,6 +13191,7 @@
 "flag": ""
 },
 {
+"id": "Ben Godfrey",
 "club": "Everton",
 "clubPos": 12,
 "player": "Ben Godfrey",
@@ -12995,6 +13244,7 @@
 "flag": ""
 },
 {
+"id": "Arnaut Danjuma",
 "club": "Everton",
 "clubPos": 12,
 "player": "Arnaut Danjuma",
@@ -13046,6 +13296,7 @@
 "flag": ""
 },
 {
+"id": "Seamus Coleman",
 "club": "Everton",
 "clubPos": 12,
 "player": "Seamus Coleman",
@@ -13098,6 +13349,7 @@
 "flag": ""
 },
 {
+"id": "Lewis Dobbin",
 "club": "Everton",
 "clubPos": 12,
 "player": "Lewis Dobbin",
@@ -13149,6 +13401,7 @@
 "flag": ""
 },
 {
+"id": "Andre Gomes",
 "club": "Everton",
 "clubPos": 12,
 "player": "Andre Gomes",
@@ -13202,6 +13455,7 @@
 "flag": ""
 },
 {
+"id": "Michael Keane",
 "club": "Everton",
 "clubPos": 12,
 "player": "Michael Keane",
@@ -13254,6 +13508,7 @@
 "flag": ""
 },
 {
+"id": "Alex Iwobi",
 "club": "Everton",
 "clubPos": 12,
 "player": "Alex Iwobi",
@@ -13307,6 +13562,7 @@
 "flag": ""
 },
 {
+"id": "Neal Maupay",
 "club": "Everton",
 "clubPos": 12,
 "player": "Neal Maupay",
@@ -13358,6 +13614,7 @@
 "flag": ""
 },
 {
+"id": "Tom Cannon",
 "club": "Everton",
 "clubPos": 12,
 "player": "Tom Cannon",
@@ -13409,6 +13666,7 @@
 "flag": ""
 },
 {
+"id": "Tyler Onyango",
 "club": "Everton",
 "clubPos": 12,
 "player": "Tyler Onyango",
@@ -13462,6 +13720,7 @@
 "flag": ""
 },
 {
+"id": "Lewis Warrington",
 "club": "Everton",
 "clubPos": 12,
 "player": "Lewis Warrington",
@@ -13515,6 +13774,7 @@
 "flag": ""
 },
 {
+"id": "Bernd Leno",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Bernd Leno",
@@ -13566,6 +13826,7 @@
 "flag": ""
 },
 {
+"id": "Andreas Pereira",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Andreas Pereira",
@@ -13619,6 +13880,7 @@
 "flag": ""
 },
 {
+"id": "Antonee Robinson",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Antonee Robinson",
@@ -13671,6 +13933,7 @@
 "flag": ""
 },
 {
+"id": "Harry Wilson",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Harry Wilson",
@@ -13724,6 +13987,7 @@
 "flag": ""
 },
 {
+"id": "Tom Cairney",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Tom Cairney",
@@ -13777,6 +14041,7 @@
 "flag": ""
 },
 {
+"id": "Timothy Castagne",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Timothy Castagne",
@@ -13829,6 +14094,7 @@
 "flag": ""
 },
 {
+"id": "Bobby De Cordova-Reid",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Bobby De Cordova-Reid",
@@ -13882,6 +14148,7 @@
 "flag": ""
 },
 {
+"id": "Joao Palhinha",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Joao Palhinha",
@@ -13935,6 +14202,7 @@
 "flag": ""
 },
 {
+"id": "Willian",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Willian",
@@ -13988,6 +14256,7 @@
 "flag": ""
 },
 {
+"id": "Alex Iwobi",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Alex Iwobi",
@@ -14041,6 +14310,7 @@
 "flag": ""
 },
 {
+"id": "Calvin Bassey",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Calvin Bassey",
@@ -14093,6 +14363,7 @@
 "flag": ""
 },
 {
+"id": "Harrison Reed",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Harrison Reed",
@@ -14146,6 +14417,7 @@
 "flag": ""
 },
 {
+"id": "Rodrigo Muniz",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Rodrigo Muniz",
@@ -14197,6 +14469,7 @@
 "flag": ""
 },
 {
+"id": "Raul Jimenez",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Raul Jimenez",
@@ -14248,6 +14521,7 @@
 "flag": ""
 },
 {
+"id": "Sasa Lukic",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Sasa Lukic",
@@ -14301,6 +14575,7 @@
 "flag": ""
 },
 {
+"id": "Tosin Adarabioyo",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Tosin Adarabioyo",
@@ -14353,6 +14628,7 @@
 "flag": ""
 },
 {
+"id": "Issa Diop",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Issa Diop",
@@ -14405,6 +14681,7 @@
 "flag": ""
 },
 {
+"id": "Tim Ream",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Tim Ream",
@@ -14457,6 +14734,7 @@
 "flag": ""
 },
 {
+"id": "Adama Traore",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Adama Traore",
@@ -14508,6 +14786,7 @@
 "flag": ""
 },
 {
+"id": "Kenny Tete",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Kenny Tete",
@@ -14560,6 +14839,7 @@
 "flag": ""
 },
 {
+"id": "Carlos Vinicius",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Carlos Vinicius",
@@ -14611,6 +14891,7 @@
 "flag": ""
 },
 {
+"id": "Armando Broja",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Armando Broja",
@@ -14662,6 +14943,7 @@
 "flag": ""
 },
 {
+"id": "Fode Ballo-Toure",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Fode Ballo-Toure",
@@ -14714,6 +14996,7 @@
 "flag": ""
 },
 {
+"id": "Luke Harris",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Luke Harris",
@@ -14767,6 +15050,7 @@
 "flag": ""
 },
 {
+"id": "Aleksandar Mitrovic",
 "club": "Fulham",
 "clubPos": 14,
 "player": "Aleksandar Mitrovic",
@@ -14818,6 +15102,7 @@
 "flag": ""
 },
 {
+"id": "Luis Diaz",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Luis Diaz",
@@ -14869,6 +15154,7 @@
 "flag": ""
 },
 {
+"id": "Darwin Nunez",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Darwin Nunez",
@@ -14920,6 +15206,7 @@
 "flag": ""
 },
 {
+"id": "Virgil van Dijk",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Virgil van Dijk",
@@ -14972,6 +15259,7 @@
 "flag": ""
 },
 {
+"id": "Cody Gakpo",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Cody Gakpo",
@@ -15023,6 +15311,7 @@
 "flag": ""
 },
 {
+"id": "Harvey Elliott",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Harvey Elliott",
@@ -15076,6 +15365,7 @@
 "flag": ""
 },
 {
+"id": "Alexis Mac Allister",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Alexis Mac Allister",
@@ -15129,6 +15419,7 @@
 "flag": ""
 },
 {
+"id": "Dominik Szoboszlai",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Dominik Szoboszlai",
@@ -15182,6 +15473,7 @@
 "flag": ""
 },
 {
+"id": "Joe Gomez",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Joe Gomez",
@@ -15234,6 +15526,7 @@
 "flag": ""
 },
 {
+"id": "Mohamed Salah",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Mohamed Salah",
@@ -15285,6 +15578,7 @@
 "flag": ""
 },
 {
+"id": "Wataru Endo",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Wataru Endo",
@@ -15338,6 +15632,7 @@
 "flag": ""
 },
 {
+"id": "Trent Alexander-Arnold",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Trent Alexander-Arnold",
@@ -15390,6 +15685,7 @@
 "flag": ""
 },
 {
+"id": "Alisson",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Alisson",
@@ -15441,6 +15737,7 @@
 "flag": ""
 },
 {
+"id": "Ryan Gravenberch",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Ryan Gravenberch",
@@ -15494,6 +15791,7 @@
 "flag": ""
 },
 {
+"id": "Curtis Jones",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Curtis Jones",
@@ -15547,6 +15845,7 @@
 "flag": ""
 },
 {
+"id": "Andy Robertson",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Andy Robertson",
@@ -15599,6 +15898,7 @@
 "flag": ""
 },
 {
+"id": "Ibrahima Konate",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Ibrahima Konate",
@@ -15651,6 +15951,7 @@
 "flag": ""
 },
 {
+"id": "Diogo Jota",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Diogo Jota",
@@ -15702,6 +16003,7 @@
 "flag": ""
 },
 {
+"id": "Jarell Quansah",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Jarell Quansah",
@@ -15754,6 +16056,7 @@
 "flag": ""
 },
 {
+"id": "Kostas Tsimikas",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Kostas Tsimikas",
@@ -15806,6 +16109,7 @@
 "flag": ""
 },
 {
+"id": "Conor Bradley",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Conor Bradley",
@@ -15858,6 +16162,7 @@
 "flag": ""
 },
 {
+"id": "Caoimhin Kelleher",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Caoimhin Kelleher",
@@ -15909,6 +16214,7 @@
 "flag": ""
 },
 {
+"id": "Joel Matip",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Joel Matip",
@@ -15961,6 +16267,7 @@
 "flag": ""
 },
 {
+"id": "Bobby Clark",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Bobby Clark",
@@ -16014,6 +16321,7 @@
 "flag": ""
 },
 {
+"id": "James McConnell",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "James McConnell",
@@ -16067,6 +16375,7 @@
 "flag": ""
 },
 {
+"id": "Jayden Danns",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Jayden Danns",
@@ -16118,6 +16427,7 @@
 "flag": ""
 },
 {
+"id": "Thiago",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Thiago",
@@ -16171,6 +16481,7 @@
 "flag": ""
 },
 {
+"id": "Stefan Bajcetic",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Stefan Bajcetic",
@@ -16224,6 +16535,7 @@
 "flag": ""
 },
 {
+"id": "Owen Beck",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Owen Beck",
@@ -16276,6 +16588,7 @@
 "flag": ""
 },
 {
+"id": "Ben Gannon-Doak",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Ben Gannon-Doak",
@@ -16329,6 +16642,7 @@
 "flag": ""
 },
 {
+"id": "Kaide Gordon",
 "club": "Liverpool",
 "clubPos": 3,
 "player": "Kaide Gordon",
@@ -16380,6 +16694,7 @@
 "flag": ""
 },
 {
+"id": "Thomas Kaminski",
 "club": "Luton",
 "clubPos": 18,
 "player": "Thomas Kaminski",
@@ -16431,6 +16746,7 @@
 "flag": ""
 },
 {
+"id": "Carlton Morris",
 "club": "Luton",
 "clubPos": 18,
 "player": "Carlton Morris",
@@ -16482,6 +16798,7 @@
 "flag": ""
 },
 {
+"id": "Alfie Doughty",
 "club": "Luton",
 "clubPos": 18,
 "player": "Alfie Doughty",
@@ -16534,6 +16851,7 @@
 "flag": ""
 },
 {
+"id": "Tahith Chong",
 "club": "Luton",
 "clubPos": 18,
 "player": "Tahith Chong",
@@ -16585,6 +16903,7 @@
 "flag": ""
 },
 {
+"id": "Ross Barkley",
 "club": "Luton",
 "clubPos": 18,
 "player": "Ross Barkley",
@@ -16638,6 +16957,7 @@
 "flag": ""
 },
 {
+"id": "Teden Mengi",
 "club": "Luton",
 "clubPos": 18,
 "player": "Teden Mengi",
@@ -16690,6 +17010,7 @@
 "flag": ""
 },
 {
+"id": "Chiedozie Ogbene",
 "club": "Luton",
 "clubPos": 18,
 "player": "Chiedozie Ogbene",
@@ -16743,6 +17064,7 @@
 "flag": ""
 },
 {
+"id": "Elijah Adebayo",
 "club": "Luton",
 "clubPos": 18,
 "player": "Elijah Adebayo",
@@ -16794,6 +17116,7 @@
 "flag": ""
 },
 {
+"id": "Pelly Ruddock",
 "club": "Luton",
 "clubPos": 18,
 "player": "Pelly Ruddock",
@@ -16847,6 +17170,7 @@
 "flag": ""
 },
 {
+"id": "Andros Townsend",
 "club": "Luton",
 "clubPos": 18,
 "player": "Andros Townsend",
@@ -16898,6 +17222,7 @@
 "flag": ""
 },
 {
+"id": "Issa Kabore",
 "club": "Luton",
 "clubPos": 18,
 "player": "Issa Kabore",
@@ -16950,6 +17275,7 @@
 "flag": ""
 },
 {
+"id": "Cauley Woodrow",
 "club": "Luton",
 "clubPos": 18,
 "player": "Cauley Woodrow",
@@ -17001,6 +17327,7 @@
 "flag": ""
 },
 {
+"id": "Jordan Clark",
 "club": "Luton",
 "clubPos": 18,
 "player": "Jordan Clark",
@@ -17054,6 +17381,7 @@
 "flag": ""
 },
 {
+"id": "Reece Burke",
 "club": "Luton",
 "clubPos": 18,
 "player": "Reece Burke",
@@ -17106,6 +17434,7 @@
 "flag": ""
 },
 {
+"id": "Amari'i Bell",
 "club": "Luton",
 "clubPos": 18,
 "player": "Amari'i Bell",
@@ -17158,6 +17487,7 @@
 "flag": ""
 },
 {
+"id": "Gabriel Osho",
 "club": "Luton",
 "clubPos": 18,
 "player": "Gabriel Osho",
@@ -17210,6 +17540,7 @@
 "flag": ""
 },
 {
+"id": "Jacob Brown",
 "club": "Luton",
 "clubPos": 18,
 "player": "Jacob Brown",
@@ -17261,6 +17592,7 @@
 "flag": ""
 },
 {
+"id": "Luke Berry",
 "club": "Luton",
 "clubPos": 18,
 "player": "Luke Berry",
@@ -17314,6 +17646,7 @@
 "flag": ""
 },
 {
+"id": "Albert Sambi Lokonga",
 "club": "Luton",
 "clubPos": 18,
 "player": "Albert Sambi Lokonga",
@@ -17367,6 +17700,7 @@
 "flag": ""
 },
 {
+"id": "Tom Lockyer",
 "club": "Luton",
 "clubPos": 18,
 "player": "Tom Lockyer",
@@ -17419,6 +17753,7 @@
 "flag": ""
 },
 {
+"id": "Marvelous Nakamba",
 "club": "Luton",
 "clubPos": 18,
 "player": "Marvelous Nakamba",
@@ -17472,6 +17807,7 @@
 "flag": ""
 },
 {
+"id": "Ryan Giles",
 "club": "Luton",
 "clubPos": 18,
 "player": "Ryan Giles",
@@ -17524,6 +17860,7 @@
 "flag": ""
 },
 {
+"id": "Daiki Hashioka",
 "club": "Luton",
 "clubPos": 18,
 "player": "Daiki Hashioka",
@@ -17576,6 +17913,7 @@
 "flag": ""
 },
 {
+"id": "Mads Andersen",
 "club": "Luton",
 "clubPos": 18,
 "player": "Mads Andersen",
@@ -17628,6 +17966,7 @@
 "flag": ""
 },
 {
+"id": "Fred Onyedinma",
 "club": "Luton",
 "clubPos": 18,
 "player": "Fred Onyedinma",
@@ -17681,6 +18020,7 @@
 "flag": ""
 },
 {
+"id": "Joe Johnson",
 "club": "Luton",
 "clubPos": 18,
 "player": "Joe Johnson",
@@ -17733,6 +18073,7 @@
 "flag": ""
 },
 {
+"id": "Zack Nelson",
 "club": "Luton",
 "clubPos": 18,
 "player": "Zack Nelson",
@@ -17786,6 +18127,7 @@
 "flag": ""
 },
 {
+"id": "James Shea",
 "club": "Luton",
 "clubPos": 18,
 "player": "James Shea",
@@ -17837,6 +18179,7 @@
 "flag": ""
 },
 {
+"id": "Julian Alvarez",
 "club": "Man City",
 "clubPos": 1,
 "player": "Julian Alvarez",
@@ -17888,6 +18231,7 @@
 "flag": ""
 },
 {
+"id": "Phil Foden",
 "club": "Man City",
 "clubPos": 1,
 "player": "Phil Foden",
@@ -17941,6 +18285,7 @@
 "flag": ""
 },
 {
+"id": "Rodri",
 "club": "Man City",
 "clubPos": 1,
 "player": "Rodri",
@@ -17994,6 +18339,7 @@
 "flag": ""
 },
 {
+"id": "Bernardo Silva",
 "club": "Man City",
 "clubPos": 1,
 "player": "Bernardo Silva",
@@ -18047,6 +18393,7 @@
 "flag": ""
 },
 {
+"id": "Ederson",
 "club": "Man City",
 "clubPos": 1,
 "player": "Ederson",
@@ -18098,6 +18445,7 @@
 "flag": ""
 },
 {
+"id": "Kyle Walker",
 "club": "Man City",
 "clubPos": 1,
 "player": "Kyle Walker",
@@ -18150,6 +18498,7 @@
 "flag": ""
 },
 {
+"id": "Erling Haaland",
 "club": "Man City",
 "clubPos": 1,
 "player": "Erling Haaland",
@@ -18201,6 +18550,7 @@
 "flag": ""
 },
 {
+"id": "Manuel Akanji",
 "club": "Man City",
 "clubPos": 1,
 "player": "Manuel Akanji",
@@ -18253,6 +18603,7 @@
 "flag": ""
 },
 {
+"id": "Ruben Dias",
 "club": "Man City",
 "clubPos": 1,
 "player": "Ruben Dias",
@@ -18305,6 +18656,7 @@
 "flag": ""
 },
 {
+"id": "Mateo Kovacic",
 "club": "Man City",
 "clubPos": 1,
 "player": "Mateo Kovacic",
@@ -18358,6 +18710,7 @@
 "flag": ""
 },
 {
+"id": "Nathan Ake",
 "club": "Man City",
 "clubPos": 1,
 "player": "Nathan Ake",
@@ -18410,6 +18763,7 @@
 "flag": ""
 },
 {
+"id": "Jeremy Doku",
 "club": "Man City",
 "clubPos": 1,
 "player": "Jeremy Doku",
@@ -18461,6 +18815,7 @@
 "flag": ""
 },
 {
+"id": "Josko Gvardiol",
 "club": "Man City",
 "clubPos": 1,
 "player": "Josko Gvardiol",
@@ -18513,6 +18868,7 @@
 "flag": ""
 },
 {
+"id": "Jack Grealish",
 "club": "Man City",
 "clubPos": 1,
 "player": "Jack Grealish",
@@ -18566,6 +18922,7 @@
 "flag": ""
 },
 {
+"id": "Kevin De Bruyne",
 "club": "Man City",
 "clubPos": 1,
 "player": "Kevin De Bruyne",
@@ -18619,6 +18976,7 @@
 "flag": ""
 },
 {
+"id": "Matheus Nunes",
 "club": "Man City",
 "clubPos": 1,
 "player": "Matheus Nunes",
@@ -18672,6 +19030,7 @@
 "flag": ""
 },
 {
+"id": "Rico Lewis",
 "club": "Man City",
 "clubPos": 1,
 "player": "Rico Lewis",
@@ -18724,6 +19083,7 @@
 "flag": ""
 },
 {
+"id": "John Stones",
 "club": "Man City",
 "clubPos": 1,
 "player": "John Stones",
@@ -18776,6 +19136,7 @@
 "flag": ""
 },
 {
+"id": "Oscar Bobb",
 "club": "Man City",
 "clubPos": 1,
 "player": "Oscar Bobb",
@@ -18829,6 +19190,7 @@
 "flag": ""
 },
 {
+"id": "Stefan Ortega",
 "club": "Man City",
 "clubPos": 1,
 "player": "Stefan Ortega",
@@ -18880,6 +19242,7 @@
 "flag": ""
 },
 {
+"id": "Sergio Gomez",
 "club": "Man City",
 "clubPos": 1,
 "player": "Sergio Gomez",
@@ -18933,6 +19296,7 @@
 "flag": ""
 },
 {
+"id": "Kalvin Phillips",
 "club": "Man City",
 "clubPos": 1,
 "player": "Kalvin Phillips",
@@ -18986,6 +19350,7 @@
 "flag": ""
 },
 {
+"id": "Aymeric Laporte",
 "club": "Man City",
 "clubPos": 1,
 "player": "Aymeric Laporte",
@@ -19038,6 +19403,7 @@
 "flag": ""
 },
 {
+"id": "James McAtee",
 "club": "Man City",
 "clubPos": 1,
 "player": "James McAtee",
@@ -19091,6 +19457,7 @@
 "flag": ""
 },
 {
+"id": "Cole Palmer",
 "club": "Man City",
 "clubPos": 1,
 "player": "Cole Palmer",
@@ -19142,6 +19509,7 @@
 "flag": ""
 },
 {
+"id": "Andre Onana",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Andre Onana",
@@ -19193,6 +19561,7 @@
 "flag": ""
 },
 {
+"id": "Diogo Dalot",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Diogo Dalot",
@@ -19245,6 +19614,7 @@
 "flag": ""
 },
 {
+"id": "Alejandro Garnacho",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Alejandro Garnacho",
@@ -19296,6 +19666,7 @@
 "flag": ""
 },
 {
+"id": "Bruno Fernandes",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Bruno Fernandes",
@@ -19349,6 +19720,7 @@
 "flag": ""
 },
 {
+"id": "Marcus Rashford",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Marcus Rashford",
@@ -19400,6 +19772,7 @@
 "flag": ""
 },
 {
+"id": "Scott McTominay",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Scott McTominay",
@@ -19453,6 +19826,7 @@
 "flag": ""
 },
 {
+"id": "Rasmus Hojlund",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Rasmus Hojlund",
@@ -19504,6 +19878,7 @@
 "flag": ""
 },
 {
+"id": "Antony",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Antony",
@@ -19555,6 +19930,7 @@
 "flag": ""
 },
 {
+"id": "Casemiro",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Casemiro",
@@ -19608,6 +19984,7 @@
 "flag": ""
 },
 {
+"id": "Kobbie Mainoo",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Kobbie Mainoo",
@@ -19661,6 +20038,7 @@
 "flag": ""
 },
 {
+"id": "Jonny Evans",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Jonny Evans",
@@ -19713,6 +20091,7 @@
 "flag": ""
 },
 {
+"id": "Christian Eriksen",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Christian Eriksen",
@@ -19766,6 +20145,7 @@
 "flag": ""
 },
 {
+"id": "Harry Maguire",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Harry Maguire",
@@ -19818,6 +20198,7 @@
 "flag": ""
 },
 {
+"id": "Raphael Varane",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Raphael Varane",
@@ -19870,6 +20251,7 @@
 "flag": ""
 },
 {
+"id": "Aaron Wan-Bissaka",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Aaron Wan-Bissaka",
@@ -19922,6 +20304,7 @@
 "flag": ""
 },
 {
+"id": "Sofyan Amrabat",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Sofyan Amrabat",
@@ -19975,6 +20358,7 @@
 "flag": ""
 },
 {
+"id": "Victor Lindelof",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Victor Lindelof",
@@ -20027,6 +20411,7 @@
 "flag": ""
 },
 {
+"id": "Mason Mount",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Mason Mount",
@@ -20080,6 +20465,7 @@
 "flag": ""
 },
 {
+"id": "Anthony Martial",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Anthony Martial",
@@ -20131,6 +20517,7 @@
 "flag": ""
 },
 {
+"id": "Luke Shaw",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Luke Shaw",
@@ -20183,6 +20570,7 @@
 "flag": ""
 },
 {
+"id": "Lisandro Martinez",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Lisandro Martinez",
@@ -20235,6 +20623,7 @@
 "flag": ""
 },
 {
+"id": "Amad Diallo",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Amad Diallo",
@@ -20288,6 +20677,7 @@
 "flag": ""
 },
 {
+"id": "Facundo Pellistri",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Facundo Pellistri",
@@ -20341,6 +20731,7 @@
 "flag": ""
 },
 {
+"id": "Reguilon",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Reguilon",
@@ -20393,6 +20784,7 @@
 "flag": ""
 },
 {
+"id": "Willy Kambwala",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Willy Kambwala",
@@ -20445,6 +20837,7 @@
 "flag": ""
 },
 {
+"id": "Hannibal Mejbri",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Hannibal Mejbri",
@@ -20498,6 +20891,7 @@
 "flag": ""
 },
 {
+"id": "Omari Forson",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Omari Forson",
@@ -20551,6 +20945,7 @@
 "flag": ""
 },
 {
+"id": "Jadon Sancho",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Jadon Sancho",
@@ -20602,6 +20997,7 @@
 "flag": ""
 },
 {
+"id": "Ethan Wheatley",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Ethan Wheatley",
@@ -20653,6 +21049,7 @@
 "flag": ""
 },
 {
+"id": "Dan Gore",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Dan Gore",
@@ -20706,6 +21103,7 @@
 "flag": ""
 },
 {
+"id": "Donny van de Beek",
 "club": "Man Utd",
 "clubPos": 8,
 "player": "Donny van de Beek",
@@ -20759,6 +21157,7 @@
 "flag": ""
 },
 {
+"id": "Bruno Guimaraes",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Bruno Guimaraes",
@@ -20812,6 +21211,7 @@
 "flag": ""
 },
 {
+"id": "Fabian Schar",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Fabian Schar",
@@ -20864,6 +21264,7 @@
 "flag": ""
 },
 {
+"id": "Anthony Gordon",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Anthony Gordon",
@@ -20917,6 +21318,7 @@
 "flag": ""
 },
 {
+"id": "Sean Longstaff",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Sean Longstaff",
@@ -20970,6 +21372,7 @@
 "flag": ""
 },
 {
+"id": "Miguel Almiron",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Miguel Almiron",
@@ -21023,6 +21426,7 @@
 "flag": ""
 },
 {
+"id": "Dan Burn",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Dan Burn",
@@ -21075,6 +21479,7 @@
 "flag": ""
 },
 {
+"id": "Alexander Isak",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Alexander Isak",
@@ -21126,6 +21531,7 @@
 "flag": ""
 },
 {
+"id": "Kieran Trippier",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Kieran Trippier",
@@ -21178,6 +21584,7 @@
 "flag": ""
 },
 {
+"id": "Tino Livramento",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Tino Livramento",
@@ -21230,6 +21637,7 @@
 "flag": ""
 },
 {
+"id": "Martin Dubravka",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Martin Dubravka",
@@ -21281,6 +21689,7 @@
 "flag": ""
 },
 {
+"id": "Elliot Anderson",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Elliot Anderson",
@@ -21334,6 +21743,7 @@
 "flag": ""
 },
 {
+"id": "Harvey Barnes",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Harvey Barnes",
@@ -21387,6 +21797,7 @@
 "flag": ""
 },
 {
+"id": "Jacob Murphy",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Jacob Murphy",
@@ -21440,6 +21851,7 @@
 "flag": ""
 },
 {
+"id": "Joelinton",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Joelinton",
@@ -21493,6 +21905,7 @@
 "flag": ""
 },
 {
+"id": "Callum Wilson",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Callum Wilson",
@@ -21544,6 +21957,7 @@
 "flag": ""
 },
 {
+"id": "Lewis Hall",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Lewis Hall",
@@ -21596,6 +22010,7 @@
 "flag": ""
 },
 {
+"id": "Sven Botman",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Sven Botman",
@@ -21648,6 +22063,7 @@
 "flag": ""
 },
 {
+"id": "Emil Krafth",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Emil Krafth",
@@ -21700,6 +22116,7 @@
 "flag": ""
 },
 {
+"id": "Lewis Miley",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Lewis Miley",
@@ -21753,6 +22170,7 @@
 "flag": ""
 },
 {
+"id": "Jamaal Lascelles",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Jamaal Lascelles",
@@ -21805,6 +22223,7 @@
 "flag": ""
 },
 {
+"id": "Nick Pope",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Nick Pope",
@@ -21856,6 +22275,7 @@
 "flag": ""
 },
 {
+"id": "Matt Ritchie",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Matt Ritchie",
@@ -21909,6 +22329,7 @@
 "flag": ""
 },
 {
+"id": "Joe Willock",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Joe Willock",
@@ -21962,6 +22383,7 @@
 "flag": ""
 },
 {
+"id": "Sandro Tonali",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Sandro Tonali",
@@ -22015,6 +22437,7 @@
 "flag": ""
 },
 {
+"id": "Paul Dummett",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Paul Dummett",
@@ -22067,6 +22490,7 @@
 "flag": ""
 },
 {
+"id": "Joe White",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Joe White",
@@ -22120,6 +22544,7 @@
 "flag": ""
 },
 {
+"id": "Matt Targett",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Matt Targett",
@@ -22172,6 +22597,7 @@
 "flag": ""
 },
 {
+"id": "Alex Murphy",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Alex Murphy",
@@ -22224,6 +22650,7 @@
 "flag": ""
 },
 {
+"id": "Amadou Diallo",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Amadou Diallo",
@@ -22277,6 +22704,7 @@
 "flag": ""
 },
 {
+"id": "Loris Karius",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Loris Karius",
@@ -22328,6 +22756,7 @@
 "flag": ""
 },
 {
+"id": "Michael Ndiweni",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Michael Ndiweni",
@@ -22379,6 +22808,7 @@
 "flag": ""
 },
 {
+"id": "Ben Parkinson",
 "club": "Newcastle",
 "clubPos": 7,
 "player": "Ben Parkinson",
@@ -22430,6 +22860,7 @@
 "flag": ""
 },
 {
+"id": "Morgan Gibbs-White",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Morgan Gibbs-White",
@@ -22483,6 +22914,7 @@
 "flag": ""
 },
 {
+"id": "Anthony Elanga",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Anthony Elanga",
@@ -22534,6 +22966,7 @@
 "flag": ""
 },
 {
+"id": "Ryan Yates",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Ryan Yates",
@@ -22587,6 +23020,7 @@
 "flag": ""
 },
 {
+"id": "Murillo",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Murillo",
@@ -22639,6 +23073,7 @@
 "flag": ""
 },
 {
+"id": "Chris Wood",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Chris Wood",
@@ -22690,6 +23125,7 @@
 "flag": ""
 },
 {
+"id": "Danilo (Forest)",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Danilo",
@@ -22743,6 +23179,7 @@
 "flag": ""
 },
 {
+"id": "Callum Hudson-Odoi",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Callum Hudson-Odoi",
@@ -22796,6 +23233,7 @@
 "flag": ""
 },
 {
+"id": "Nicolas Dominguez",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Nicolas Dominguez",
@@ -22849,6 +23287,7 @@
 "flag": ""
 },
 {
+"id": "Neco Williams",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Neco Williams",
@@ -22901,6 +23340,7 @@
 "flag": ""
 },
 {
+"id": "Harry Toffolo",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Harry Toffolo",
@@ -22953,6 +23393,7 @@
 "flag": ""
 },
 {
+"id": "Ola Aina",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Ola Aina",
@@ -23005,6 +23446,7 @@
 "flag": ""
 },
 {
+"id": "Moussa Niakhate",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Moussa Niakhate",
@@ -23057,6 +23499,7 @@
 "flag": ""
 },
 {
+"id": "Taiwo Awoniyi",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Taiwo Awoniyi",
@@ -23108,6 +23551,7 @@
 "flag": ""
 },
 {
+"id": "Willy Boly",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Willy Boly",
@@ -23160,6 +23604,7 @@
 "flag": ""
 },
 {
+"id": "Orel Mangala",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Orel Mangala",
@@ -23213,6 +23658,7 @@
 "flag": ""
 },
 {
+"id": "Divock Origi",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Divock Origi",
@@ -23264,6 +23710,7 @@
 "flag": ""
 },
 {
+"id": "Ibrahim Sangare",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Ibrahim Sangare",
@@ -23317,6 +23764,7 @@
 "flag": ""
 },
 {
+"id": "Matt Turner",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Matt Turner",
@@ -23368,6 +23816,7 @@
 "flag": ""
 },
 {
+"id": "Matz Sels",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Matz Sels",
@@ -23419,6 +23868,7 @@
 "flag": ""
 },
 {
+"id": "Gonzalo Montiel",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Gonzalo Montiel",
@@ -23471,6 +23921,7 @@
 "flag": ""
 },
 {
+"id": "Serge Aurier",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Serge Aurier",
@@ -23523,6 +23974,7 @@
 "flag": ""
 },
 {
+"id": "Cheikhou Kouyate",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Cheikhou Kouyate",
@@ -23576,6 +24028,7 @@
 "flag": ""
 },
 {
+"id": "Andrew Omobamidele",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Andrew Omobamidele",
@@ -23628,6 +24081,7 @@
 "flag": ""
 },
 {
+"id": "Gio Reyna",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Gio Reyna",
@@ -23681,6 +24135,7 @@
 "flag": ""
 },
 {
+"id": "Nuno Tavares",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Nuno Tavares",
@@ -23733,6 +24188,7 @@
 "flag": ""
 },
 {
+"id": "Felipe",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Felipe",
@@ -23785,6 +24241,7 @@
 "flag": ""
 },
 {
+"id": "Joe Worrall",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Joe Worrall",
@@ -23837,6 +24294,7 @@
 "flag": ""
 },
 {
+"id": "Scott McKenna",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Scott McKenna",
@@ -23889,6 +24347,7 @@
 "flag": ""
 },
 {
+"id": "Odysseas Vlachodimos",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Odysseas Vlachodimos",
@@ -23940,6 +24399,7 @@
 "flag": ""
 },
 {
+"id": "Rodrigo Ribeiro",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Rodrigo Ribeiro",
@@ -23991,6 +24451,7 @@
 "flag": ""
 },
 {
+"id": "Brennan Johnson",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Brennan Johnson",
@@ -24044,6 +24505,7 @@
 "flag": ""
 },
 {
+"id": "Brandon Aguilera",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Brandon Aguilera",
@@ -24097,6 +24559,7 @@
 "flag": ""
 },
 {
+"id": "Andrey Santos",
 "club": "Nottingham Forest",
 "clubPos": 17,
 "player": "Andrey Santos",
@@ -24150,6 +24613,7 @@
 "flag": ""
 },
 {
+"id": "Vinicius Souza",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Vinicius Souza",
@@ -24203,6 +24667,7 @@
 "flag": ""
 },
 {
+"id": "Gustavo Hamer",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Gustavo Hamer",
@@ -24256,6 +24721,7 @@
 "flag": ""
 },
 {
+"id": "Jayden Bogle",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Jayden Bogle",
@@ -24308,6 +24774,7 @@
 "flag": ""
 },
 {
+"id": "Jack Robinson",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Jack Robinson",
@@ -24360,6 +24827,7 @@
 "flag": ""
 },
 {
+"id": "Auston Trusty",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Auston Trusty",
@@ -24412,6 +24880,7 @@
 "flag": ""
 },
 {
+"id": "Anel Ahmedhodzic",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Anel Ahmedhodzic",
@@ -24464,6 +24933,7 @@
 "flag": ""
 },
 {
+"id": "Wes Foderingham",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Wes Foderingham",
@@ -24515,6 +24985,7 @@
 "flag": ""
 },
 {
+"id": "James McAtee",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "James McAtee",
@@ -24568,6 +25039,7 @@
 "flag": ""
 },
 {
+"id": "Cameron Archer",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Cameron Archer",
@@ -24619,6 +25091,7 @@
 "flag": ""
 },
 {
+"id": "Oliver Norwood",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Oliver Norwood",
@@ -24672,6 +25145,7 @@
 "flag": ""
 },
 {
+"id": "Ben Osborn",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Ben Osborn",
@@ -24725,6 +25199,7 @@
 "flag": ""
 },
 {
+"id": "Oli McBurnie",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Oli McBurnie",
@@ -24776,6 +25251,7 @@
 "flag": ""
 },
 {
+"id": "William Osula",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "William Osula",
@@ -24827,6 +25303,7 @@
 "flag": ""
 },
 {
+"id": "Andre Brooks",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Andre Brooks",
@@ -24880,6 +25357,7 @@
 "flag": ""
 },
 {
+"id": "Anis Ben Slimane",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Anis Ben Slimane",
@@ -24933,6 +25411,7 @@
 "flag": ""
 },
 {
+"id": "Ben Brereton Diaz",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Ben Brereton Diaz",
@@ -24984,6 +25463,7 @@
 "flag": ""
 },
 {
+"id": "George Baldock",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "George Baldock",
@@ -25036,6 +25516,7 @@
 "flag": ""
 },
 {
+"id": "Rhian Brewster",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Rhian Brewster",
@@ -25087,6 +25568,7 @@
 "flag": ""
 },
 {
+"id": "Oliver Arblaster",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Oliver Arblaster",
@@ -25140,6 +25622,7 @@
 "flag": ""
 },
 {
+"id": "Luke Thomas",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Luke Thomas",
@@ -25192,6 +25675,7 @@
 "flag": ""
 },
 {
+"id": "Yasser Larouci",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Yasser Larouci",
@@ -25244,6 +25728,7 @@
 "flag": ""
 },
 {
+"id": "Mason Holgate",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Mason Holgate",
@@ -25296,6 +25781,7 @@
 "flag": ""
 },
 {
+"id": "Max Lowe",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Max Lowe",
@@ -25348,6 +25834,7 @@
 "flag": ""
 },
 {
+"id": "Tom Davies",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Tom Davies",
@@ -25401,6 +25888,7 @@
 "flag": ""
 },
 {
+"id": "Ivo Grbic",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Ivo Grbic",
@@ -25452,6 +25940,7 @@
 "flag": ""
 },
 {
+"id": "Chris Basham",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Chris Basham",
@@ -25505,6 +25994,7 @@
 "flag": ""
 },
 {
+"id": "Benie Traore",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Benie Traore",
@@ -25558,6 +26048,7 @@
 "flag": ""
 },
 {
+"id": "John Egan",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "John Egan",
@@ -25610,6 +26101,7 @@
 "flag": ""
 },
 {
+"id": "Rhys Norrington-Davies",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Rhys Norrington-Davies",
@@ -25662,6 +26154,7 @@
 "flag": ""
 },
 {
+"id": "John Fleck",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "John Fleck",
@@ -25715,6 +26208,7 @@
 "flag": ""
 },
 {
+"id": "Antwoine Hackford",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Antwoine Hackford",
@@ -25766,6 +26260,7 @@
 "flag": ""
 },
 {
+"id": "Sam Curtis",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Sam Curtis",
@@ -25818,6 +26313,7 @@
 "flag": ""
 },
 {
+"id": "Daniel Jebbison",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Daniel Jebbison",
@@ -25869,6 +26365,7 @@
 "flag": ""
 },
 {
+"id": "Ryan One",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Ryan One",
@@ -25920,6 +26417,7 @@
 "flag": ""
 },
 {
+"id": "Sydie Peck",
 "club": "Sheffield Utd",
 "clubPos": 20,
 "player": "Sydie Peck",
@@ -25973,6 +26471,7 @@
 "flag": ""
 },
 {
+"id": "Guglielmo Vicario",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Guglielmo Vicario",
@@ -26024,6 +26523,7 @@
 "flag": ""
 },
 {
+"id": "Pierre-Emile Hojbjerg",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Pierre-Emile Hojbjerg",
@@ -26077,6 +26577,7 @@
 "flag": ""
 },
 {
+"id": "Dejan Kulusevski",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Dejan Kulusevski",
@@ -26130,6 +26631,7 @@
 "flag": ""
 },
 {
+"id": "Pedro Porro",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Pedro Porro",
@@ -26182,6 +26684,7 @@
 "flag": ""
 },
 {
+"id": "Son Heung-min",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Son Heung-min",
@@ -26233,6 +26736,7 @@
 "flag": ""
 },
 {
+"id": "Pape Matar Sarr",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Pape Matar Sarr",
@@ -26286,6 +26790,7 @@
 "flag": ""
 },
 {
+"id": "Cristian Romero",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Cristian Romero",
@@ -26338,6 +26843,7 @@
 "flag": ""
 },
 {
+"id": "Brennan Johnson",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Brennan Johnson",
@@ -26391,6 +26897,7 @@
 "flag": ""
 },
 {
+"id": "Yves Bissouma",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Yves Bissouma",
@@ -26444,6 +26951,7 @@
 "flag": ""
 },
 {
+"id": "Richarlison",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Richarlison",
@@ -26495,6 +27003,7 @@
 "flag": ""
 },
 {
+"id": "James Maddison",
 "club": "Spurs",
 "clubPos": 5,
 "player": "James Maddison",
@@ -26548,6 +27057,7 @@
 "flag": ""
 },
 {
+"id": "Destiny Udogie",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Destiny Udogie",
@@ -26600,6 +27110,7 @@
 "flag": ""
 },
 {
+"id": "Micky van de Ven",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Micky van de Ven",
@@ -26652,6 +27163,7 @@
 "flag": ""
 },
 {
+"id": "Rodrigo Bentancur",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Rodrigo Bentancur",
@@ -26705,6 +27217,7 @@
 "flag": ""
 },
 {
+"id": "Emerson Royal",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Emerson Royal",
@@ -26757,6 +27270,7 @@
 "flag": ""
 },
 {
+"id": "Giovani Lo Celso",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Giovani Lo Celso",
@@ -26810,6 +27324,7 @@
 "flag": ""
 },
 {
+"id": "Oliver Skipp",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Oliver Skipp",
@@ -26863,6 +27378,7 @@
 "flag": ""
 },
 {
+"id": "Ben Davies",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Ben Davies",
@@ -26915,6 +27431,7 @@
 "flag": ""
 },
 {
+"id": "Timo Werner",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Timo Werner",
@@ -26966,6 +27483,7 @@
 "flag": ""
 },
 {
+"id": "Bryan Gil",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Bryan Gil",
@@ -27019,6 +27537,7 @@
 "flag": ""
 },
 {
+"id": "Radu Dragusin",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Radu Dragusin",
@@ -27071,6 +27590,7 @@
 "flag": ""
 },
 {
+"id": "Alejo Veliz",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Alejo Veliz",
@@ -27122,6 +27642,7 @@
 "flag": ""
 },
 {
+"id": "Ivan Perisic",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Ivan Perisic",
@@ -27173,6 +27694,7 @@
 "flag": ""
 },
 {
+"id": "Manor Solomon",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Manor Solomon",
@@ -27226,6 +27748,7 @@
 "flag": ""
 },
 {
+"id": "Eric Dier",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Eric Dier",
@@ -27278,6 +27801,7 @@
 "flag": ""
 },
 {
+"id": "Dane Scarlett",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Dane Scarlett",
@@ -27329,6 +27853,7 @@
 "flag": ""
 },
 {
+"id": "Jamie Donley",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Jamie Donley",
@@ -27380,6 +27905,7 @@
 "flag": ""
 },
 {
+"id": "Mikey Moore",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Mikey Moore",
@@ -27431,6 +27957,7 @@
 "flag": ""
 },
 {
+"id": "Davinson Sanchez",
 "club": "Spurs",
 "clubPos": 5,
 "player": "Davinson Sanchez",
@@ -27483,6 +28010,7 @@
 "flag": ""
 },
 {
+"id": "Tomas Soucek",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Tomas Soucek",
@@ -27536,6 +28064,7 @@
 "flag": ""
 },
 {
+"id": "James Ward-Prowse",
 "club": "West Ham",
 "clubPos": 9,
 "player": "James Ward-Prowse",
@@ -27589,6 +28118,7 @@
 "flag": ""
 },
 {
+"id": "Vladimir Coufal",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Vladimir Coufal",
@@ -27641,6 +28171,7 @@
 "flag": ""
 },
 {
+"id": "Emerson",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Emerson",
@@ -27693,6 +28224,7 @@
 "flag": ""
 },
 {
+"id": "Jarrod Bowen",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Jarrod Bowen",
@@ -27744,6 +28276,7 @@
 "flag": ""
 },
 {
+"id": "Mohammed Kudus",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Mohammed Kudus",
@@ -27797,6 +28330,7 @@
 "flag": ""
 },
 {
+"id": "Kurt Zouma",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Kurt Zouma",
@@ -27849,6 +28383,7 @@
 "flag": ""
 },
 {
+"id": "Edson Alvarez",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Edson Alvarez",
@@ -27901,6 +28436,7 @@
 "flag": ""
 },
 {
+"id": "Alphonse Areola",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Alphonse Areola",
@@ -27952,6 +28488,7 @@
 "flag": ""
 },
 {
+"id": "Lucas Paqueta",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Lucas Paqueta",
@@ -28005,6 +28542,7 @@
 "flag": ""
 },
 {
+"id": "Michail Antonio",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Michail Antonio",
@@ -28056,6 +28594,7 @@
 "flag": ""
 },
 {
+"id": "Nayef Aguerd",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Nayef Aguerd",
@@ -28108,6 +28647,7 @@
 "flag": ""
 },
 {
+"id": "Danny Ings",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Danny Ings",
@@ -28159,6 +28699,7 @@
 "flag": ""
 },
 {
+"id": "Konstantinos Mavropanos",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Konstantinos Mavropanos",
@@ -28211,6 +28752,7 @@
 "flag": ""
 },
 {
+"id": "Pablo Fornals",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Pablo Fornals",
@@ -28264,6 +28806,7 @@
 "flag": ""
 },
 {
+"id": "Ben Johnson",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Ben Johnson",
@@ -28316,6 +28859,7 @@
 "flag": ""
 },
 {
+"id": "Said Benrahma",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Said Benrahma",
@@ -28367,6 +28911,7 @@
 "flag": ""
 },
 {
+"id": "Aaron Cresswell",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Aaron Cresswell",
@@ -28419,6 +28964,7 @@
 "flag": ""
 },
 {
+"id": "Angelo Ogbonna",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Angelo Ogbonna",
@@ -28471,6 +29017,7 @@
 "flag": ""
 },
 {
+"id": "Lukasz Fabianski",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Lukasz Fabianski",
@@ -28522,6 +29069,7 @@
 "flag": ""
 },
 {
+"id": "Kalvin Phillips",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Kalvin Phillips",
@@ -28575,6 +29123,7 @@
 "flag": ""
 },
 {
+"id": "Maxwel Cornet",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Maxwel Cornet",
@@ -28628,6 +29177,7 @@
 "flag": ""
 },
 {
+"id": "Divin Mubama",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Divin Mubama",
@@ -28679,6 +29229,7 @@
 "flag": ""
 },
 {
+"id": "Thilo Kehrer",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Thilo Kehrer",
@@ -28731,6 +29282,7 @@
 "flag": ""
 },
 {
+"id": "George Earthy",
 "club": "West Ham",
 "clubPos": 9,
 "player": "George Earthy",
@@ -28784,6 +29336,7 @@
 "flag": ""
 },
 {
+"id": "Kaelan Casey",
 "club": "West Ham",
 "clubPos": 9,
 "player": "Kaelan Casey",
@@ -28836,6 +29389,7 @@
 "flag": ""
 },
 {
+"id": "Max Kilman",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Max Kilman",
@@ -28888,6 +29442,7 @@
 "flag": ""
 },
 {
+"id": "Nelson Semedo",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Nelson Semedo",
@@ -28940,6 +29495,7 @@
 "flag": ""
 },
 {
+"id": "Toti Gomes",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Toti Gomes",
@@ -28992,6 +29548,7 @@
 "flag": ""
 },
 {
+"id": "Mario Lemina",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Mario Lemina",
@@ -29045,6 +29602,7 @@
 "flag": ""
 },
 {
+"id": "Jose Sa",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Jose Sa",
@@ -29096,6 +29654,7 @@
 "flag": ""
 },
 {
+"id": "Joao Gomes",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Joao Gomes",
@@ -29149,6 +29708,7 @@
 "flag": ""
 },
 {
+"id": "Rayan Ait-Nouri",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Rayan Ait-Nouri",
@@ -29201,6 +29761,7 @@
 "flag": ""
 },
 {
+"id": "Matheus Cunha",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Matheus Cunha",
@@ -29252,6 +29813,7 @@
 "flag": ""
 },
 {
+"id": "Matt Doherty",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Matt Doherty",
@@ -29304,6 +29866,7 @@
 "flag": ""
 },
 {
+"id": "Pablo Sarabia",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Pablo Sarabia",
@@ -29357,6 +29920,7 @@
 "flag": ""
 },
 {
+"id": "Hwang Hee-chan",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Hwang Hee-chan",
@@ -29408,6 +29972,7 @@
 "flag": ""
 },
 {
+"id": "Tommy Doyle",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Tommy Doyle",
@@ -29461,6 +30026,7 @@
 "flag": ""
 },
 {
+"id": "Craig Dawson",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Craig Dawson",
@@ -29513,6 +30079,7 @@
 "flag": ""
 },
 {
+"id": "Boubacar Traore",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Boubacar Traore",
@@ -29566,6 +30133,7 @@
 "flag": ""
 },
 {
+"id": "Jean-Ricner Bellegarde",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Jean-Ricner Bellegarde",
@@ -29619,6 +30187,7 @@
 "flag": ""
 },
 {
+"id": "Hugo Bueno",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Hugo Bueno",
@@ -29671,6 +30240,7 @@
 "flag": ""
 },
 {
+"id": "Pedro Neto",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Pedro Neto",
@@ -29722,6 +30292,7 @@
 "flag": ""
 },
 {
+"id": "Santiago Bueno",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Santiago Bueno",
@@ -29774,6 +30345,7 @@
 "flag": ""
 },
 {
+"id": "Sasa Kalajdzic",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Sasa Kalajdzic",
@@ -29825,6 +30397,7 @@
 "flag": ""
 },
 {
+"id": "Tawanda Chirewa",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Tawanda Chirewa",
@@ -29878,6 +30451,7 @@
 "flag": ""
 },
 {
+"id": "Fabio Silva",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Fabio Silva",
@@ -29929,6 +30503,7 @@
 "flag": ""
 },
 {
+"id": "Nathan Fraser",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Nathan Fraser",
@@ -29980,6 +30555,7 @@
 "flag": ""
 },
 {
+"id": "Daniel Bentley",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Daniel Bentley",
@@ -30031,6 +30607,7 @@
 "flag": ""
 },
 {
+"id": "Leon Chiwome",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Leon Chiwome",
@@ -30082,6 +30659,7 @@
 "flag": ""
 },
 {
+"id": "Matheus Nunes",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Matheus Nunes",
@@ -30135,6 +30713,7 @@
 "flag": ""
 },
 {
+"id": "Jonny",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Jonny",
@@ -30187,6 +30766,7 @@
 "flag": ""
 },
 {
+"id": "Enso Gonzalez",
 "club": "Wolves",
 "clubPos": 15,
 "player": "Enso Gonzalez",

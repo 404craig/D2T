@@ -1,0 +1,77 @@
+<title>D2T Top 50, 2000 to 2010</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: a season strip across the top, the distribution as one stacked bar, then the top 50 as a dense table that scrolls sideways on phones. */
+:root {
+  --bg: #eef0f3; --panel: #ffffff; --ink: #151c23; --muted: #5d6873; --line: #d6dce1; --accent: #5a3fc0; --accent-ink: #fff;
+  --gold: #d9ab2b; --silver: #9aa3ad; --bronze: #b0743f; --purple: #6d3fd1;
+  --b90: #6d3fd1; --b80: #d9ab2b; --b70: #9aa3ad; --b60: #b0743f; --b50: #7a5236;
+  --display: "Saira Condensed", "Arial Narrow", sans-serif; --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #12161b; --panel: #1a2027; --ink: #e7ebee; --muted: #9aa5ae; --line: #2c353e; --accent: #a993ff; --accent-ink: #160b3a; color-scheme: dark; } }
+:root[data-theme="dark"] { --bg: #12161b; --panel: #1a2027; --ink: #e7ebee; --muted: #9aa5ae; --line: #2c353e; --accent: #a993ff; --accent-ink: #160b3a; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.45 var(--body); }
+.wrap { max-width: 1100px; margin: 0 auto; padding-inline: 16px; padding-block: 24px 56px; display: grid; gap: 22px; }
+h1 { font: 800 clamp(2rem, 5vw, 3rem)/1 var(--display); text-transform: uppercase; margin: 0; }
+p { margin: 0; max-width: 72ch; }
+.muted { color: var(--muted); }
+.seasons { display: flex; gap: 6px; flex-wrap: wrap; }
+.seasons button { border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 99px; padding: 6px 12px; font: 700 1rem var(--display); cursor: pointer; }
+.seasons button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.dist { display: grid; gap: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+.bar { display: flex; height: 18px; border-radius: 5px; overflow: hidden; }
+.bar span { display: block; height: 100%; }
+.keys { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .9rem; }
+.keys i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: 0; }
+.tablebox { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+table { border-collapse: collapse; width: 100%; min-width: 760px; font-variant-numeric: tabular-nums; }
+th, td { padding: 7px 10px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+th { font: 700 .82rem var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); position: sticky; top: 0; background: var(--panel); }
+td.n, th.n { text-align: right; }
+td.who { font-weight: 600; }
+.ovr { display: inline-block; min-width: 2.4em; text-align: center; font: 800 1.05rem var(--display); padding: 1px 6px; border-radius: 6px; color: #1b1407; }
+.ovr.g { background: var(--gold); } .ovr.s { background: var(--silver); } .ovr.b { background: var(--bronze); color: #fff; }
+.diff { font-size: .85rem; color: var(--muted); }
+.diff.big { color: #c0392b; font-weight: 700; }
+</style>
+<div class="wrap">
+  <header style="display:grid;gap:10px">
+    <h1>Top 50 by season, 2000 to 2010</h1>
+    <p class="muted">Draft ratings learned from eight seasons of blind panel ratings, using only verified data: goals, assists, clean sheets, minutes, starts, where the club finished, awards, and the player's other Premier League seasons (two either side). One even scale for every player, no extra shift. "Panel" is the blind panel's rating where that club and season were covered (2001/02, 2004/05 and 2008/09); a difference of 6 or more is in red.</p>
+  </header>
+  <div class="seasons" id="seasons" role="group" aria-label="Season"></div>
+  <section class="dist" id="dist"></section>
+  <div class="tablebox"><table><thead><tr><th class="n">#</th><th>Player</th><th>Club (finish)</th><th>Pos</th><th>Rating</th><th class="n">Panel</th><th class="n">Apps</th><th class="n">Mins</th><th class="n">G</th><th class="n">A</th><th class="n">CS</th></tr></thead><tbody id="rows"></tbody></table></div>
+  <p class="muted">Bands are for every player with 10 or more appearances that season. The panel's own spread on the players it rated: 90s 2%, 80s 24%, 70s 53%, 60s 21%. Card tiers: gold 80+, silver 70 to 79, bronze under 70.</p>
+</div>
+<script>
+const DATA = /*DATA*/;
+(function () {
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const seasons = Object.keys(DATA);
+  let cur = seasons[seasons.length - 1];
+  try { cur = localStorage.getItem('d2t-top50') || cur; } catch (e) {}
+  if (!DATA[cur]) cur = seasons[seasons.length - 1];
+  const label = t => t.replace('-', '/');
+  const COLORS = { '90s': 'var(--b90)', '80s': 'var(--b80)', '70s': 'var(--b70)', '60s': 'var(--b60)', '50s': 'var(--b50)' };
+  function render() {
+    $('seasons').innerHTML = seasons.map(t => `<button type="button" data-t="${t}" aria-pressed="${t === cur}">${label(t)}</button>`).join('');
+    const d = DATA[cur], n = d.n;
+    $('dist').innerHTML = `<strong>${label(cur)}: ${n} players with 10+ apps</strong>
+      <div class="bar" role="img" aria-label="Rating bands">${Object.entries(d.bands).map(([k, v]) => `<span style="width:${100 * v / n}%;background:${COLORS[k]}"></span>`).join('')}</div>
+      <div class="keys">${Object.entries(d.bands).map(([k, v]) => `<span><i style="background:${COLORS[k]}"></i>${k}: ${v} (${Math.round(100 * v / n)}%)</span>`).join('')}</div>`;
+    $('rows').innerHTML = d.players.map((r, i) => {
+      const tier = r.o >= 80 ? 'g' : r.o >= 70 ? 's' : 'b';
+      const df = r.pan == null ? '' : `${r.pan} <span class="diff${Math.abs(r.o - r.pan) >= 6 ? ' big' : ''}">(${r.o - r.pan >= 0 ? '+' : ''}${r.o - r.pan})</span>`;
+      return `<tr><td class="n">${i + 1}</td><td class="who">${esc(r.p)}</td><td>${esc(r.c)} (${r.f})</td><td>${r.pos}</td><td><span class="ovr ${tier}">${r.o}</span></td><td class="n">${df}</td><td class="n">${r.a}</td><td class="n">${r.m}</td><td class="n">${r.g}</td><td class="n">${r.as}</td><td class="n">${r.cs}</td></tr>`;
+    }).join('');
+  }
+  $('seasons').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; cur = b.dataset.t; try { localStorage.setItem('d2t-top50', cur); } catch (err) {} render(); });
+  render();
+})();
+</script>
