@@ -1014,7 +1014,7 @@
 "clubPos": 5,
 "player": "Mohamed Elneny",
 "pos": "MID",
-"ovr": 72,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "AST": 72,
@@ -1595,7 +1595,7 @@
 "clubPos": 14,
 "player": "Emiliano Buendia",
 "pos": "MID",
-"ovr": 75,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "AST": 86,
@@ -5631,7 +5631,7 @@
 "clubPos": 9,
 "player": "Moises Caicedo",
 "pos": "MID",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "AST": 61,
@@ -7219,7 +7219,7 @@
 "clubPos": 3,
 "player": "Edouard Mendy",
 "pos": "GK",
-"ovr": 84,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "CLN": 69,
@@ -7752,8 +7752,8 @@
 "clubPos": 3,
 "player": "Romelu Lukaku",
 "pos": "FWD",
-"ovr": 80,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "GOL": 81,
 "AST": 38,
@@ -11365,7 +11365,7 @@
 "clubPos": 16,
 "player": "Anwar El Ghazi",
 "pos": "FWD",
-"ovr": 65,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "GOL": 51,
@@ -11469,7 +11469,7 @@
 "clubPos": 16,
 "player": "Isaac Price",
 "pos": "MID",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "AST": 55,
@@ -11733,7 +11733,7 @@
 "clubPos": 17,
 "player": "Jack Harrison",
 "pos": "MID",
-"ovr": 77,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "AST": 45,
@@ -20125,7 +20125,7 @@
 "clubPos": 11,
 "player": "Karl Darlow",
 "pos": "GK",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 30,
@@ -22143,7 +22143,7 @@
 "clubPos": 15,
 "player": "Mohammed Salisu",
 "pos": "DEF",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 54,
@@ -25539,7 +25539,7 @@
 "clubPos": 19,
 "player": "Christian Kabasele",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "CLN": 56,
@@ -27658,7 +27658,7 @@
 "clubPos": 10,
 "player": "Jose Sa",
 "pos": "GK",
-"ovr": 78,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "CLN": 62,

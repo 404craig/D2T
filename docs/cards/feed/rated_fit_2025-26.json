@@ -1383,7 +1383,7 @@
 "clubPos": 4,
 "player": "Ollie Watkins",
 "pos": "FWD",
-"ovr": 88,
+"ovr": 87,
 "tier": "best",
 "stats": {
 "GOL": 84,
@@ -3348,7 +3348,7 @@
 "clubPos": 6,
 "player": "David Brooks",
 "pos": "MID",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "AST": 75,
@@ -4888,7 +4888,7 @@
 "clubPos": 9,
 "player": "Sepp van den Berg",
 "pos": "DEF",
-"ovr": 76,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 71,
@@ -5635,7 +5635,7 @@
 "clubPos": 9,
 "player": "Hakon Valdimarsson",
 "pos": "GK",
-"ovr": 62,
+"ovr": 61,
 "tier": "bronze",
 "stats": {
 "CLN": 49,
@@ -5792,7 +5792,7 @@
 "clubPos": 8,
 "player": "Danny Welbeck",
 "pos": "FWD",
-"ovr": 81,
+"ovr": 80,
 "tier": "best",
 "stats": {
 "GOL": 79,
@@ -8398,7 +8398,7 @@
 "clubPos": 19,
 "player": "Oliver Sonne",
 "pos": "DEF",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "CLN": 69,
@@ -11200,8 +11200,8 @@
 "clubPos": 15,
 "player": "Eddie Nketiah",
 "pos": "FWD",
-"ovr": 70,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "GOL": 56,
 "AST": 46,
@@ -11358,7 +11358,7 @@
 "clubPos": 15,
 "player": "Evann Guessand",
 "pos": "FWD",
-"ovr": 66,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "GOL": 53,
@@ -15557,7 +15557,7 @@
 "clubPos": 5,
 "player": "Virgil van Dijk",
 "pos": "DEF",
-"ovr": 88,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "CLN": 72,
@@ -15770,7 +15770,7 @@
 "clubPos": 5,
 "player": "Ibrahima Konate",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "CLN": 65,
@@ -16038,7 +16038,7 @@
 "clubPos": 5,
 "player": "Hugo Ekitike",
 "pos": "FWD",
-"ovr": 84,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "GOL": 78,
@@ -16142,7 +16142,7 @@
 "clubPos": 5,
 "player": "Alisson",
 "pos": "GK",
-"ovr": 81,
+"ovr": 80,
 "tier": "gold",
 "stats": {
 "CLN": 72,
@@ -16774,7 +16774,7 @@
 "clubPos": 5,
 "player": "Harvey Elliott",
 "pos": "MID",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "AST": 54,
@@ -17361,7 +17361,7 @@
 "clubPos": 2,
 "player": "Nico Gonzalez",
 "pos": "MID",
-"ovr": 76,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "AST": 42,
@@ -17469,7 +17469,7 @@
 "clubPos": 2,
 "player": "Rodri",
 "pos": "MID",
-"ovr": 81,
+"ovr": 80,
 "tier": "gold",
 "stats": {
 "AST": 42,
@@ -17839,7 +17839,7 @@
 "clubPos": 2,
 "player": "Marc Guehi",
 "pos": "DEF",
-"ovr": 77,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "CLN": 77,
@@ -18052,7 +18052,7 @@
 "clubPos": 2,
 "player": "Mateo Kovacic",
 "pos": "MID",
-"ovr": 72,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "AST": 73,
@@ -18637,7 +18637,7 @@
 "clubPos": 3,
 "player": "Senne Lammens",
 "pos": "GK",
-"ovr": 82,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "CLN": 67,
@@ -20871,7 +20871,7 @@
 "clubPos": 12,
 "player": "Jamaal Lascelles",
 "pos": "DEF",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 59,
@@ -22408,7 +22408,7 @@
 "clubPos": 16,
 "player": "Oleksandr Zinchenko",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "CLN": 43,
@@ -26858,7 +26858,7 @@
 "clubPos": 18,
 "player": "Pablo",
 "pos": "FWD",
-"ovr": 66,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "GOL": 41,

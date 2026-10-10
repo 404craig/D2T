@@ -8343,7 +8343,7 @@
 "player": "Mark Schwarzer",
 "pos": "GK",
 "ovr": 80,
-"tier": "gold",
+"tier": "best",
 "stats": {
 "CLN": 76,
 "CON": 73,
@@ -8767,8 +8767,8 @@
 "clubPos": 7,
 "player": "Andy Johnson",
 "pos": "FWD",
-"ovr": 81,
-"tier": "best",
+"ovr": 80,
+"tier": "gold",
 "stats": {
 "GOL": 62,
 "AST": 60,
@@ -10469,7 +10469,7 @@
 "clubPos": 17,
 "player": "Paul McShane",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "CLN": 58,
@@ -12965,7 +12965,7 @@
 "clubPos": 10,
 "player": "Gelson Fernandes",
 "pos": "MID",
-"ovr": 66,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "AST": 49,
@@ -20008,7 +20008,7 @@
 "clubPos": 14,
 "player": "Lassana Diarra",
 "pos": "MID",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "AST": 46,
@@ -22026,7 +22026,7 @@
 "clubPos": 16,
 "player": "Steed Malbranque",
 "pos": "MID",
-"ovr": 78,
+"ovr": 77,
 "tier": "best",
 "stats": {
 "AST": 88,
@@ -27647,7 +27647,7 @@
 "clubPos": 9,
 "player": "Diego Tristan",
 "pos": "FWD",
-"ovr": 69,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "GOL": 61,
@@ -29450,7 +29450,7 @@
 "clubPos": 11,
 "player": "Ben Watson",
 "pos": "MID",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 47,

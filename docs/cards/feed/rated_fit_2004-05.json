@@ -700,8 +700,8 @@
 "clubPos": 2,
 "player": "Sol Campbell",
 "pos": "DEF",
-"ovr": 80,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "CLN": 77,
 "THR": 59,
@@ -1336,7 +1336,7 @@
 "clubPos": 10,
 "player": "Nolberto Solano",
 "pos": "MID",
-"ovr": 81,
+"ovr": 80,
 "tier": "best",
 "stats": {
 "AST": 71,
@@ -2821,7 +2821,7 @@
 "clubPos": 12,
 "player": "Julian Gray",
 "pos": "MID",
-"ovr": 69,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "AST": 42,
@@ -3992,7 +3992,7 @@
 "clubPos": 15,
 "player": "Brett Emerton",
 "pos": "MID",
-"ovr": 77,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "AST": 62,
@@ -5424,7 +5424,7 @@
 "clubPos": 15,
 "player": "Javi de Pedro",
 "pos": "MID",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "AST": 56,
@@ -8182,7 +8182,7 @@
 "clubPos": 1,
 "player": "Claude Makelele",
 "pos": "MID",
-"ovr": 87,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 49,
@@ -9720,7 +9720,7 @@
 "clubPos": 18,
 "player": "Andy Johnson",
 "pos": "FWD",
-"ovr": 83,
+"ovr": 82,
 "tier": "best",
 "stats": {
 "GOL": 86,
@@ -15491,7 +15491,7 @@
 "clubPos": 8,
 "player": "Paul Bosvelt",
 "pos": "MID",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "AST": 41,
@@ -15917,7 +15917,7 @@
 "clubPos": 8,
 "player": "Bradley Wright-Phillips",
 "pos": "FWD",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "GOL": 55,
@@ -16610,7 +16610,7 @@
 "clubPos": 3,
 "player": "Rio Ferdinand",
 "pos": "DEF",
-"ovr": 85,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "CLN": 83,
@@ -17246,7 +17246,7 @@
 "clubPos": 3,
 "player": "Ruud van Nistelrooy",
 "pos": "FWD",
-"ovr": 87,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "GOL": 89,
@@ -19628,8 +19628,8 @@
 "clubPos": 14,
 "player": "James Milner",
 "pos": "MID",
-"ovr": 69,
-"tier": "bronze",
+"ovr": 70,
+"tier": "silver",
 "stats": {
 "AST": 54,
 "GOL": 57,
@@ -25034,7 +25034,7 @@
 "clubPos": 20,
 "player": "Kenwyne Jones",
 "pos": "FWD",
-"ovr": 62,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "GOL": 49,

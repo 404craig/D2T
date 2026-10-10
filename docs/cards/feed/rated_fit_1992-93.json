@@ -2127,7 +2127,7 @@
 "clubPos": 2,
 "player": "Mark Bosnich",
 "pos": "GK",
-"ovr": 75,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 59,
@@ -3136,7 +3136,7 @@
 "clubPos": 4,
 "player": "David May",
 "pos": "DEF",
-"ovr": 82,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "CLN": 62,
@@ -3667,7 +3667,7 @@
 "clubPos": 4,
 "player": "Kevin Gallacher",
 "pos": "FWD",
-"ovr": 75,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "GOL": 62,
@@ -4144,7 +4144,7 @@
 "clubPos": 11,
 "player": "Andy Townsend",
 "pos": "MID",
-"ovr": 78,
+"ovr": 77,
 "tier": "best",
 "stats": {
 "AST": 61,
@@ -4251,7 +4251,7 @@
 "clubPos": 11,
 "player": "Graham Stuart",
 "pos": "MID",
-"ovr": 76,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "AST": 65,
@@ -5310,7 +5310,7 @@
 "clubPos": 11,
 "player": "David Hopkin",
 "pos": "MID",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "AST": 52,
@@ -10189,7 +10189,7 @@
 "clubPos": 16,
 "player": "Gavin Johnson",
 "pos": "MID",
-"ovr": 73,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "AST": 53,
@@ -10877,7 +10877,7 @@
 "clubPos": 16,
 "player": "Craig Forrest",
 "pos": "GK",
-"ovr": 69,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "CLN": 52,
@@ -11407,7 +11407,7 @@
 "clubPos": 17,
 "player": "Jon Newsome",
 "pos": "DEF",
-"ovr": 74,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 51,
@@ -14060,7 +14060,7 @@
 "clubPos": 6,
 "player": "Nick Tanner",
 "pos": "DEF",
-"ovr": 61,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 50,
@@ -14645,7 +14645,7 @@
 "clubPos": 9,
 "player": "Steve McMahon",
 "pos": "MID",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "AST": 45,
@@ -17938,7 +17938,7 @@
 "player": "David Phillips",
 "pos": "MID",
 "ovr": 82,
-"tier": "gold",
+"tier": "best",
 "stats": {
 "AST": 61,
 "GOL": 68,
@@ -18044,8 +18044,8 @@
 "clubPos": 3,
 "player": "Chris Sutton",
 "pos": "FWD",
-"ovr": 83,
-"tier": "best",
+"ovr": 82,
+"tier": "gold",
 "stats": {
 "GOL": 52,
 "AST": 48,
@@ -22861,7 +22861,7 @@
 "clubPos": 14,
 "player": "Brian Gayle",
 "pos": "DEF",
-"ovr": 73,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "CLN": 59,
@@ -27956,7 +27956,7 @@
 "clubPos": 8,
 "player": "Kevin Watson",
 "pos": "MID",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "AST": 51,

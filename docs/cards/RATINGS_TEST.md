@@ -146,7 +146,7 @@ Update, same day: the top-only stretch above is switched off (Craig: it lifts th
 
 ## 2000/01 to 2009/10 rated, with other seasons as inputs
 
-Data: subagents gathered full data (feed stats and match line-ups) for 2000/01, 2002/03, 2003/04, 2005/06, 2006/07, 2007/08 and 2009/10, and season stats for every other season from 1992/93 to 2025/26 except 2017/18 (still in progress), so every player has his surrounding seasons. Every Tenaball row matched. Notes: 2009/10 feed season totals miss about two matches for Blackburn, Burnley, Hull and Man City (line-ups and Tenaball agree, ratings use those); 2000/01 feed credits 2 of Steven Caldwell's Newcastle apps to Gary Caldwell; 1993/94 feed lists Mark Robinson (Newcastle) as "Matthew Robinson" with 0 apps.
+Data: subagents gathered full data (feed stats and match line-ups) for 2000/01, 2002/03, 2003/04, 2005/06, 2006/07, 2007/08 and 2009/10, and season stats for every other season from 1992/93 to 2025/26, so every player has his surrounding seasons. Every Tenaball row matched. Notes: 2009/10 feed season totals miss about two matches for Blackburn, Burnley, Hull and Man City (line-ups and Tenaball agree, ratings use those); 2000/01 feed credits 2 of Steven Caldwell's Newcastle apps to Gary Caldwell; 1993/94 feed lists Mark Robinson (Newcastle) as "Matthew Robinson" with 0 apps.
 
 New inputs (Craig): the player's performance and club finish in his other Premier League seasons, up to two either side (adjacent seasons full weight, next ones half, weighted by minutes). The fit learns how much they count. Unseen-season agreement rose from 0.867 to 0.885 (average gap 2.4).
 

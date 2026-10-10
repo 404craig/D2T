@@ -1071,7 +1071,7 @@
 "clubPos": 2,
 "player": "Aaron Ramsdale",
 "pos": "GK",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 26,
@@ -1493,7 +1493,7 @@
 "clubPos": 4,
 "player": "Ezri Konsa",
 "pos": "DEF",
-"ovr": 80,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "CLN": 51,
@@ -1919,7 +1919,7 @@
 "clubPos": 4,
 "player": "Diego Carlos",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 81,
@@ -4735,7 +4735,7 @@
 "clubPos": 16,
 "player": "Yoane Wissa",
 "pos": "FWD",
-"ovr": 79,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "GOL": 66,
@@ -10466,7 +10466,7 @@
 "clubPos": 6,
 "player": "Alfie Gilchrist",
 "pos": "DEF",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 67,
@@ -14023,7 +14023,7 @@
 "clubPos": 14,
 "player": "Timothy Castagne",
 "pos": "DEF",
-"ovr": 75,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 78,
@@ -16728,8 +16728,8 @@
 "clubPos": 18,
 "player": "Carlton Morris",
 "pos": "FWD",
-"ovr": 74,
-"tier": "best",
+"ovr": 73,
+"tier": "silver",
 "stats": {
 "GOL": 61,
 "AST": 56,
@@ -16886,7 +16886,7 @@
 "player": "Ross Barkley",
 "pos": "MID",
 "ovr": 74,
-"tier": "silver",
+"tier": "best",
 "stats": {
 "AST": 62,
 "GOL": 66,
@@ -17046,7 +17046,7 @@
 "clubPos": 18,
 "player": "Elijah Adebayo",
 "pos": "FWD",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "GOL": 77,
@@ -18850,8 +18850,8 @@
 "clubPos": 1,
 "player": "Jack Grealish",
 "pos": "MID",
-"ovr": 80,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "AST": 54,
 "GOL": 75,
@@ -19702,7 +19702,7 @@
 "clubPos": 8,
 "player": "Marcus Rashford",
 "pos": "FWD",
-"ovr": 81,
+"ovr": 80,
 "tier": "gold",
 "stats": {
 "GOL": 58,
@@ -22686,7 +22686,7 @@
 "clubPos": 7,
 "player": "Loris Karius",
 "pos": "GK",
-"ovr": 62,
+"ovr": 61,
 "tier": "bronze",
 "stats": {
 "CLN": 36,
@@ -23215,7 +23215,7 @@
 "clubPos": 17,
 "player": "Nicolas Dominguez",
 "pos": "MID",
-"ovr": 72,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "AST": 58,
@@ -30222,7 +30222,7 @@
 "clubPos": 15,
 "player": "Pedro Neto",
 "pos": "FWD",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "GOL": 39,

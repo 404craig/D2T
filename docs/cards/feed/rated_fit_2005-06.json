@@ -2396,7 +2396,7 @@
 "clubPos": 16,
 "player": "Patrik Berger",
 "pos": "MID",
-"ovr": 67,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "AST": 69,
@@ -3676,7 +3676,7 @@
 "clubPos": 18,
 "player": "Jamie Clapham",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "CLN": 33,
@@ -11676,7 +11676,7 @@
 "clubPos": 12,
 "player": "Heidar Helguson",
 "pos": "FWD",
-"ovr": 73,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "GOL": 73,
@@ -14857,7 +14857,7 @@
 "clubPos": 15,
 "player": "Ben Thatcher",
 "pos": "DEF",
-"ovr": 68,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "CLN": 40,
@@ -15385,7 +15385,7 @@
 "clubPos": 15,
 "player": "Matt Mills",
 "pos": "DEF",
-"ovr": 62,
+"ovr": 61,
 "tier": "bronze",
 "stats": {
 "CLN": 80,
@@ -15700,7 +15700,7 @@
 "clubPos": 2,
 "player": "Park Ji-sung",
 "pos": "MID",
-"ovr": 79,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "AST": 93,
@@ -18616,7 +18616,7 @@
 "clubPos": 14,
 "player": "Tom Craddock",
 "pos": "FWD",
-"ovr": 62,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "GOL": 52,
@@ -28480,8 +28480,8 @@
 "clubPos": 10,
 "player": "Mike Pollitt",
 "pos": "GK",
-"ovr": 70,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 34,
 "CON": 36,

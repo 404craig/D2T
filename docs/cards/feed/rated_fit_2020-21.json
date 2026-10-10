@@ -113,7 +113,7 @@
 "clubPos": 8,
 "player": "Alexandre Lacazette",
 "pos": "FWD",
-"ovr": 82,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "GOL": 85,
@@ -165,8 +165,8 @@
 "clubPos": 8,
 "player": "Granit Xhaka",
 "pos": "MID",
-"ovr": 80,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "AST": 55,
 "GOL": 49,
@@ -3727,7 +3727,7 @@
 "clubPos": 16,
 "player": "Jakub Moder",
 "pos": "MID",
-"ovr": 66,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "AST": 48,
@@ -6115,7 +6115,7 @@
 "clubPos": 4,
 "player": "Cesar Azpilicueta",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "CLN": 81,
@@ -9877,8 +9877,8 @@
 "clubPos": 18,
 "player": "Alphonse Areola",
 "pos": "GK",
-"ovr": 74,
-"tier": "best",
+"ovr": 73,
+"tier": "silver",
 "stats": {
 "CLN": 56,
 "CON": 63,
@@ -10089,7 +10089,7 @@
 "player": "Bobby De Cordova-Reid",
 "pos": "MID",
 "ovr": 74,
-"tier": "silver",
+"tier": "best",
 "stats": {
 "AST": 55,
 "GOL": 77,
@@ -11258,7 +11258,7 @@
 "clubPos": 18,
 "player": "Terence Kongolo",
 "pos": "DEF",
-"ovr": 60,
+"ovr": 61,
 "tier": "bronze",
 "stats": {
 "CLN": 58,
@@ -16567,7 +16567,7 @@
 "clubPos": 1,
 "player": "Scott Carson",
 "pos": "GK",
-"ovr": 58,
+"ovr": 57,
 "tier": "bronze",
 "stats": {
 "CLN": 23,
@@ -16935,8 +16935,8 @@
 "clubPos": 2,
 "player": "Scott McTominay",
 "pos": "MID",
-"ovr": 79,
-"tier": "silver",
+"ovr": 80,
+"tier": "gold",
 "stats": {
 "AST": 49,
 "GOL": 70,
@@ -17943,7 +17943,7 @@
 "clubPos": 2,
 "player": "Anthony Elanga",
 "pos": "FWD",
-"ovr": 65,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "GOL": 58,
@@ -23092,7 +23092,7 @@
 "clubPos": 7,
 "player": "Toby Alderweireld",
 "pos": "DEF",
-"ovr": 79,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "CLN": 78,
@@ -24046,7 +24046,7 @@
 "clubPos": 19,
 "player": "Semi Ajayi",
 "pos": "DEF",
-"ovr": 66,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "CLN": 30,
@@ -26063,7 +26063,7 @@
 "clubPos": 6,
 "player": "Craig Dawson",
 "pos": "DEF",
-"ovr": 75,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 74,

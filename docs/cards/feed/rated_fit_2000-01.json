@@ -2495,8 +2495,8 @@
 "clubPos": 8,
 "player": "Ugo Ehiogu",
 "pos": "DEF",
-"ovr": 70,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 53,
 "THR": 54,
@@ -4513,7 +4513,7 @@
 "clubPos": 9,
 "player": "John Robinson",
 "pos": "MID",
-"ovr": 71,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "AST": 57,
@@ -7217,7 +7217,7 @@
 "clubPos": 19,
 "player": "Gary Breen",
 "pos": "DEF",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 52,
@@ -7324,7 +7324,7 @@
 "clubPos": 19,
 "player": "Paul Williams",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "CLN": 48,
@@ -10456,7 +10456,7 @@
 "clubPos": 16,
 "player": "Michael Ball",
 "pos": "DEF",
-"ovr": 72,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 86,
@@ -11149,7 +11149,7 @@
 "clubPos": 16,
 "player": "Duncan Ferguson",
 "pos": "FWD",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "GOL": 87,
@@ -11411,7 +11411,7 @@
 "clubPos": 16,
 "player": "Alessandro Pistone",
 "pos": "DEF",
-"ovr": 65,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "CLN": 60,
@@ -14480,7 +14480,7 @@
 "clubPos": 13,
 "player": "Gary Rowett",
 "pos": "DEF",
-"ovr": 75,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 57,
@@ -16333,7 +16333,7 @@
 "clubPos": 3,
 "player": "Stephane Henchoz",
 "pos": "DEF",
-"ovr": 76,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 98,
@@ -16652,7 +16652,7 @@
 "clubPos": 3,
 "player": "Vladimir Smicer",
 "pos": "MID",
-"ovr": 79,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "AST": 99,
@@ -17716,7 +17716,7 @@
 "clubPos": 18,
 "player": "Paulo Wanchope",
 "pos": "FWD",
-"ovr": 78,
+"ovr": 77,
 "tier": "best",
 "stats": {
 "GOL": 61,
@@ -19303,7 +19303,7 @@
 "clubPos": 1,
 "player": "Mikael Silvestre",
 "pos": "DEF",
-"ovr": 85,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "CLN": 59,
@@ -21477,7 +21477,7 @@
 "clubPos": 14,
 "player": "Carlos Marinelli",
 "pos": "MID",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "AST": 52,
@@ -21636,8 +21636,8 @@
 "clubPos": 14,
 "player": "Dean Windass",
 "pos": "MID",
-"ovr": 69,
-"tier": "bronze",
+"ovr": 70,
+"tier": "silver",
 "stats": {
 "AST": 49,
 "GOL": 87,
@@ -23862,7 +23862,7 @@
 "clubPos": 10,
 "player": "Tahar El Khalej",
 "pos": "MID",
-"ovr": 72,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "AST": 44,
@@ -29485,7 +29485,7 @@
 "clubPos": 15,
 "player": "Jermain Defoe",
 "pos": "FWD",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "GOL": 51,

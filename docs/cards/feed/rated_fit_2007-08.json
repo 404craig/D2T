@@ -6744,7 +6744,7 @@
 "clubPos": 16,
 "player": "Andranik Teymourian",
 "pos": "MID",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "AST": 55,
@@ -13628,8 +13628,8 @@
 "clubPos": 4,
 "player": "Alvaro Arbeloa",
 "pos": "DEF",
-"ovr": 80,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "CLN": 75,
 "THR": 52,
@@ -17867,7 +17867,7 @@
 "clubPos": 13,
 "player": "Lee Cattermole",
 "pos": "MID",
-"ovr": 68,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "AST": 46,
@@ -19876,8 +19876,8 @@
 "clubPos": 12,
 "player": "Emre Belozoglu",
 "pos": "MID",
-"ovr": 70,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "AST": 93,
 "GOL": 63,
@@ -20882,7 +20882,7 @@
 "clubPos": 8,
 "player": "Benjani",
 "pos": "FWD",
-"ovr": 76,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "GOL": 78,
@@ -21361,7 +21361,7 @@
 "clubPos": 8,
 "player": "Jermain Defoe",
 "pos": "FWD",
-"ovr": 78,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "GOL": 83,
@@ -22263,7 +22263,7 @@
 "clubPos": 18,
 "player": "Graeme Murty",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "CLN": 34,
@@ -24648,7 +24648,7 @@
 "clubPos": 15,
 "player": "Darren Ward",
 "pos": "GK",
-"ovr": 65,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "CLN": 78,
@@ -27515,7 +27515,7 @@
 "clubPos": 10,
 "player": "Craig Bellamy",
 "pos": "FWD",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "GOL": 64,
@@ -28045,7 +28045,7 @@
 "clubPos": 14,
 "player": "Kevin Kilbane",
 "pos": "MID",
-"ovr": 74,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "AST": 47,

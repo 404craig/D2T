@@ -2240,7 +2240,7 @@
 "clubPos": 6,
 "player": "Tyrone Mings",
 "pos": "DEF",
-"ovr": 76,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 69,
@@ -2399,7 +2399,7 @@
 "clubPos": 6,
 "player": "Jaden Philogene",
 "pos": "MID",
-"ovr": 67,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "AST": 49,
@@ -2611,8 +2611,8 @@
 "clubPos": 6,
 "player": "Axel Disasi",
 "pos": "DEF",
-"ovr": 69,
-"tier": "bronze",
+"ovr": 70,
+"tier": "silver",
 "stats": {
 "CLN": 58,
 "THR": 49,
@@ -3775,7 +3775,7 @@
 "clubPos": 9,
 "player": "Julian Araujo",
 "pos": "DEF",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 41,
@@ -3882,7 +3882,7 @@
 "clubPos": 9,
 "player": "Philip Billing",
 "pos": "MID",
-"ovr": 67,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "AST": 51,
@@ -5048,7 +5048,7 @@
 "clubPos": 10,
 "player": "Ethan Pinnock",
 "pos": "DEF",
-"ovr": 74,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "CLN": 48,
@@ -8497,8 +8497,8 @@
 "clubPos": 4,
 "player": "Joao Felix",
 "pos": "FWD",
-"ovr": 69,
-"tier": "bronze",
+"ovr": 70,
+"tier": "silver",
 "stats": {
 "GOL": 53,
 "AST": 63,
@@ -10829,7 +10829,7 @@
 "clubPos": 13,
 "player": "Abdoulaye Doucoure",
 "pos": "MID",
-"ovr": 77,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "AST": 51,
@@ -11735,7 +11735,7 @@
 "clubPos": 13,
 "player": "Seamus Coleman",
 "pos": "DEF",
-"ovr": 65,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "CLN": 37,
@@ -13700,7 +13700,7 @@
 "clubPos": 19,
 "player": "Omari Hutchinson",
 "pos": "MID",
-"ovr": 72,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "AST": 50,
@@ -14125,7 +14125,7 @@
 "clubPos": 19,
 "player": "Kalvin Phillips",
 "pos": "MID",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 43,
@@ -17988,7 +17988,7 @@
 "clubPos": 1,
 "player": "Vitezslav Jaros",
 "pos": "GK",
-"ovr": 61,
+"ovr": 60,
 "tier": "bronze",
 "stats": {
 "CLN": 29,
@@ -18359,7 +18359,7 @@
 "clubPos": 3,
 "player": "Savinho",
 "pos": "MID",
-"ovr": 79,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "AST": 92,
@@ -18734,7 +18734,7 @@
 "clubPos": 3,
 "player": "Ederson",
 "pos": "GK",
-"ovr": 87,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "CLN": 84,
@@ -20595,7 +20595,7 @@
 "clubPos": 15,
 "player": "Marcus Rashford",
 "pos": "FWD",
-"ovr": 77,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "GOL": 67,
@@ -23195,7 +23195,7 @@
 "clubPos": 7,
 "player": "Callum Hudson-Odoi",
 "pos": "MID",
-"ovr": 75,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "AST": 53,
@@ -26328,7 +26328,7 @@
 "clubPos": 17,
 "player": "Destiny Udogie",
 "pos": "DEF",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "CLN": 39,

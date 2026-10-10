@@ -1015,8 +1015,8 @@
 "clubPos": 1,
 "player": "Martin Keown",
 "pos": "DEF",
-"ovr": 70,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 37,
 "THR": 53,
@@ -3506,7 +3506,7 @@
 "clubPos": 10,
 "player": "Jovan Kirovski",
 "pos": "MID",
-"ovr": 62,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "AST": 55,
@@ -3667,7 +3667,7 @@
 "clubPos": 10,
 "player": "Geoff Horsfield",
 "pos": "FWD",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "GOL": 39,
@@ -3981,7 +3981,7 @@
 "clubPos": 15,
 "player": "Tugay",
 "pos": "MID",
-"ovr": 78,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "AST": 82,
@@ -4247,7 +4247,7 @@
 "clubPos": 15,
 "player": "Markus Babbel",
 "pos": "DEF",
-"ovr": 72,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 59,
@@ -4300,7 +4300,7 @@
 "clubPos": 15,
 "player": "Vratislav Gresko",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 52,
@@ -5575,7 +5575,7 @@
 "clubPos": 8,
 "player": "Jay-Jay Okocha",
 "pos": "MID",
-"ovr": 77,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "AST": 64,
@@ -5683,7 +5683,7 @@
 "clubPos": 8,
 "player": "Bruno N'Gotty",
 "pos": "DEF",
-"ovr": 77,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "CLN": 47,
@@ -7430,7 +7430,7 @@
 "clubPos": 7,
 "player": "Scott Parker",
 "pos": "MID",
-"ovr": 77,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "AST": 59,
@@ -9496,7 +9496,7 @@
 "clubPos": 17,
 "player": "Thomas Gravesen",
 "pos": "MID",
-"ovr": 77,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "AST": 61,
@@ -10717,7 +10717,7 @@
 "clubPos": 17,
 "player": "Steve Simonsen",
 "pos": "GK",
-"ovr": 61,
+"ovr": 60,
 "tier": "bronze",
 "stats": {
 "CLN": 55,
@@ -13262,8 +13262,8 @@
 "clubPos": 20,
 "player": "Jody Morris",
 "pos": "MID",
-"ovr": 70,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "AST": 46,
 "GOL": 43,
@@ -15969,7 +15969,7 @@
 "clubPos": 4,
 "player": "John Arne Riise",
 "pos": "MID",
-"ovr": 81,
+"ovr": 80,
 "tier": "gold",
 "stats": {
 "AST": 72,
@@ -17506,8 +17506,8 @@
 "clubPos": 16,
 "player": "Claudio Reyna",
 "pos": "MID",
-"ovr": 69,
-"tier": "bronze",
+"ovr": 70,
+"tier": "silver",
 "stats": {
 "AST": 51,
 "GOL": 56,
@@ -17666,7 +17666,7 @@
 "clubPos": 16,
 "player": "David Seaman",
 "pos": "GK",
-"ovr": 73,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "CLN": 46,
@@ -19202,7 +19202,7 @@
 "clubPos": 3,
 "player": "Kleberson",
 "pos": "MID",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "AST": 84,

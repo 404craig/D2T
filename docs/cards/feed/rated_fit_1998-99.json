@@ -4303,7 +4303,7 @@
 "player": "Chris Powell",
 "pos": "DEF",
 "ovr": 76,
-"tier": "silver",
+"tier": "best",
 "stats": {
 "CLN": 71,
 "THR": 47,
@@ -4355,8 +4355,8 @@
 "clubPos": 18,
 "player": "Danny Mills",
 "pos": "DEF",
-"ovr": 77,
-"tier": "best",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "CLN": 75,
 "THR": 72,
@@ -6737,7 +6737,7 @@
 "clubPos": 3,
 "player": "Brian Laudrup",
 "pos": "MID",
-"ovr": 67,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "AST": 67,
@@ -7055,7 +7055,7 @@
 "clubPos": 15,
 "player": "Richard Shaw",
 "pos": "DEF",
-"ovr": 74,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 64,
@@ -9176,7 +9176,7 @@
 "clubPos": 8,
 "player": "Francesco Baiano",
 "pos": "FWD",
-"ovr": 75,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "GOL": 56,
@@ -10712,7 +10712,7 @@
 "clubPos": 14,
 "player": "John Collins",
 "pos": "MID",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "AST": 43,
@@ -14803,7 +14803,7 @@
 "clubPos": 7,
 "player": "Michael Owen",
 "pos": "FWD",
-"ovr": 86,
+"ovr": 87,
 "tier": "best",
 "stats": {
 "GOL": 92,
@@ -28605,7 +28605,7 @@
 "clubPos": 16,
 "player": "Robbie Earle",
 "pos": "MID",
-"ovr": 77,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "AST": 52,
@@ -29399,7 +29399,7 @@
 "clubPos": 16,
 "player": "Ceri Hughes",
 "pos": "MID",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 57,
