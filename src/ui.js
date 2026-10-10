@@ -93,10 +93,50 @@ setInterval(() => {
 let sheetClose = null;
 function openSheet(title, body, { onClose, wide } = {}) {
   closeSheet(true);
-  $layer.innerHTML = `<div class="scrim" data-act="sheet-close"></div><div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="grab"></div><div class="sh"><span class="h2">${esc(title)}</span><button class="icon-btn" data-act="sheet-close" aria-label="Close">${ICON.close}</button></div><div class="sb">${body}</div></div>`;
+  $layer.innerHTML = `<div class="scrim" data-act="sheet-close"></div><div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="grabzone" data-act="sheet-close" role="button" aria-label="Close (or swipe down)"><div class="grab"></div></div><div class="sh"><span class="h2">${esc(title)}</span><button class="icon-btn" data-act="sheet-close" aria-label="Close">${ICON.close}</button></div><div class="sb">${body}</div></div>`;
   sheetClose = onClose || null;
   requestAnimationFrame(() => { $layer.querySelector(".scrim").classList.add("on"); $layer.querySelector(".sheet").classList.add("on"); });
+  dragToClose($layer.querySelector(".sheet"));
   history.pushState({ sheet: 1 }, "");
+}
+// Every slide-up panel can be swept away (Craig, 10 October 2026): drag the bar or the title row down,
+// or drag the content down once it is scrolled to the top. A short drag springs back.
+function dragToClose(sheet) {
+  const body = sheet.querySelector(".sb"), scrim = $layer.querySelector(".scrim");
+  let y0 = null, dy = 0, t0 = 0, moved = false;
+  const begin = y => { y0 = y; dy = 0; t0 = Date.now(); moved = false; sheet.style.transition = "none"; };
+  const follow = y => {
+    if (y0 == null) return false;
+    dy = Math.max(0, y - y0);
+    if (dy > 4) moved = true;
+    sheet.style.transform = dy ? `translateY(${dy}px)` : "";
+    if (scrim) scrim.style.opacity = String(Math.max(0, 1 - dy / (sheet.offsetHeight || 400)));
+    return dy > 0;
+  };
+  const release = () => {
+    if (y0 == null) return;
+    const fast = dy / Math.max(1, Date.now() - t0) > 0.5 && dy > 30;
+    sheet.style.transition = ""; sheet.style.transform = ""; if (scrim) scrim.style.opacity = "";
+    y0 = null;
+    if (dy > 90 || fast) closeSheet();
+    if (moved) { sheet.dataset.dragged = "1"; setTimeout(() => { delete sheet.dataset.dragged; }, 60); }
+  };
+  // The bar and title row: pointer events, so it works with a finger, a pen or a mouse.
+  sheet.querySelectorAll(".grabzone, .sh").forEach(h => {
+    h.addEventListener("pointerdown", e => {
+      if (e.target.closest("button") && !e.target.closest(".grabzone")) return;
+      begin(e.clientY); h.setPointerCapture && h.setPointerCapture(e.pointerId);
+    });
+    h.addEventListener("pointermove", e => follow(e.clientY));
+    h.addEventListener("pointerup", release);
+    h.addEventListener("pointercancel", release);
+  });
+  // The content: touch only, and only when it is already scrolled to the top.
+  let fromTop = false;
+  body.addEventListener("touchstart", e => { fromTop = body.scrollTop <= 0; if (fromTop) begin(e.touches[0].clientY); }, { passive: true });
+  body.addEventListener("touchmove", e => { if (fromTop && follow(e.touches[0].clientY) && e.cancelable) e.preventDefault(); }, { passive: false });
+  body.addEventListener("touchend", () => { if (fromTop) release(); });
+  body.addEventListener("touchcancel", () => { if (fromTop) release(); });
 }
 function closeSheet(silent) {
   if (!$layer.innerHTML) return;
@@ -665,7 +705,7 @@ const HOWTO = [
   "Every match is simulated from your team's strength in defence, midfield and attack against the real opponent. The other clubs' real results stay as they were, unless you sign their players: then they get weaker from that week on.",
   "Your score is the Rise: places climbed against where the club really finished. Earn a star for surviving, for the top half and for winning the league."
 ].map(p => `<span style="display:block;margin-bottom:12px">${p}</span>`).join("");
-const UPDATES = [["10 October 2026", [["1", "The first playable DROP2TOP: roll a club, pick your XI, 17 transfer rolls, live matches, the rewritten table and an end-of-season summary to share."]]]];
+const UPDATES = [["10 October 2026", [["2", "Every slide-up panel can be swept away: drag the bar or the title down, or tap the bar."], ["1", "The first playable DROP2TOP: roll a club, pick your XI, 17 transfer rolls, live matches, the rewritten table and an end-of-season summary to share."]]]];
 function viewUpdates() {
   return `<section class="view"><div class="hrow"><button class="icon-btn" data-act="nav" data-to="howto" aria-label="Back">${ICON.back}</button>${logo("s")}<span class="label">Build ${esc(window.D2T_BUILD)}</span></div>
     <h1 class="h1" style="margin-top:8px">LATEST UPDATES</h1>
@@ -805,6 +845,7 @@ function squadPicker(slot) {
 document.addEventListener("click", e => {
   const el = e.target.closest("[data-act]");
   if (!el || el.disabled) return;
+  if (el.closest(".sheet") && el.closest(".sheet").dataset.dragged) return;
   try { act(el.dataset.act, el); } catch (err) { console.error(err); closeSheet(true); render(); }
 });
 

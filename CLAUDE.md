@@ -9,6 +9,7 @@ A mobile web football game. The page is built: edit `src/` and `data/`, then run
 - Classic is the main mode and stays front and centre with fixed rules and few settings. Other ideas are "coming soon".
 - Design: pure black background, the club's colour as the only accent inside a run (lime `#D4FF00` on home), a large faded crest in real colours that fades out lower down, Exo 2 (Black Italic for headlines and numbers). Long logo on home, short D2T logo in games. Not casino-like. Audience 15 to 20 year olds.
 - No human voices in the audio: whistles, crowd and game sounds only.
+- Every slide-up panel (sheet) must be dismissable by dragging it down by its top bar or title row, or by tapping the bar (`dragToClose` in `openSheet`). Never build a sheet that only closes with its X.
 - The game rules live in the DROP2TOP Game Rules doc (claude.ai/code/artifact/ce64d453-8b55-490a-96e9-f5cb3f0d2cc7).
 
 ## How the game works (src/engine.js)

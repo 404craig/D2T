@@ -276,7 +276,9 @@ p { margin: 0; }
   padding: 10px 16px calc(var(--safe-b) + 16px); transform: translateY(100%); transition: transform .26s cubic-bezier(.2,.8,.2,1);
 }
 .sheet.on { transform: none; }
-.sheet .grab { width: 40px; height: 5px; border-radius: 3px; background: #333339; margin: 0 auto 10px; flex-shrink: 0; }
+.sheet .grabzone { margin: -10px -16px 2px; padding: 12px 0 14px; display: flex; justify-content: center; cursor: grab; touch-action: none; flex-shrink: 0; }
+.sheet .grab { width: 44px; height: 5px; border-radius: 3px; background: #4A4A52; }
+.sheet .sh { touch-action: none; }
 .sheet .sh { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; flex-shrink: 0; }
 .sheet .sb { overflow-y: auto; -webkit-overflow-scrolling: touch; display: flex; flex-direction: column; gap: 10px; padding-bottom: 6px; }
 .sheet .sb p { color: var(--soft); }
