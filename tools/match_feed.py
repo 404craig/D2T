@@ -16,7 +16,7 @@ sys.path.insert(0, __import__('os').path.dirname(__file__))
 from club_names import CLUB  # noqa: E402
 
 
-ALIAS = {"chicharito": "javier hernandez", "alex evtushok": "oleksandr yevtushok"}  # feed name -> Tenaball name
+ALIAS = {"chicharito": "javier hernandez", "alex evtushok": "oleksandr yevtushok", "zanka": "mathias jorgensen", "tahar elkhalej": "tahar el khalej"}  # feed name -> Tenaball name
 
 
 def norm(s):

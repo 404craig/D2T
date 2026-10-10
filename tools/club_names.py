@@ -7,4 +7,7 @@ CLUB = {"Manchester United": "Man Utd", "Manchester City": "Man City", "Tottenha
         "Sheffield United": "Sheffield Utd", "Sheffield Wednesday": "Sheffield Wed", "AFC Bournemouth": "Bournemouth",
         "Coventry City": "Coventry", "Derby County": "Derby", "Leeds United": "Leeds", "Nottingham Forest": "Nottingham Forest",
         "Middlesbrough": "Middlesbrough", "Sunderland": "Sunderland", "Southampton": "Southampton",
-        "Queens Park Rangers": "QPR", "Ipswich Town": "Ipswich", "Swansea City": "Swansea", "Cardiff City": "Cardiff"}
+        "Queens Park Rangers": "QPR", "Ipswich Town": "Ipswich", "Swansea City": "Swansea", "Cardiff City": "Cardiff",
+        "Charlton Athletic": "Charlton", "Birmingham City": "Birmingham", "Luton Town": "Luton",
+        "Bradford City": "Bradford", "Huddersfield Town": "Huddersfield", "Swindon Town": "Swindon",
+        "Oldham Athletic": "Oldham", "Barnsley": "Barnsley", "Blackpool": "Blackpool", "Brentford": "Brentford"}

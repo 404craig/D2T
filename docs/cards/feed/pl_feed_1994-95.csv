@@ -1,0 +1,555 @@
+season,club_feed,feed_id,name,feed_pos,appearances,goals,goal_assist,clean_sheet,wins,draws,losses,mins_played,game_started,goals_conceded,saves,yellow_card,red_card,own_goals
+1994/95,Arsenal,13,Lee Dixon,D,39,1,4,12,13,10,16,0,0,0,0,0,0,0
+1994/95,Arsenal,11,Nigel Winterburn,D,39,0,2,11,12,11,16,0,0,0,0,7,0,0
+1994/95,Arsenal,843,Stefan Schwarz,M,34,2,2,11,12,9,13,0,0,0,0,8,1,0
+1994/95,Arsenal,9,Steve Bould,D,31,0,0,9,12,6,13,0,0,0,0,5,0,0
+1994/95,Arsenal,14,Martin Keown,D,31,1,0,6,10,11,10,0,0,0,0,5,1,1
+1994/95,Arsenal,1,David Seaman,G,31,0,1,11,10,10,11,0,0,0,0,0,0,0
+1994/95,Arsenal,29,Ian Wright,F,31,18,3,6,10,7,14,0,0,0,0,9,0,0
+1994/95,Arsenal,19,Ray Parlour,M,30,0,1,5,9,10,11,0,0,0,0,0,0,0
+1994/95,Arsenal,3,Tony Adams,D,27,3,1,6,7,8,12,0,0,0,0,3,1,0
+1994/95,Arsenal,17,John Jensen,M,24,1,1,6,7,7,10,0,0,0,0,2,0,0
+1994/95,Arsenal,23,Paul Merson,M,24,4,7,5,7,5,12,0,0,0,0,3,0,0
+1994/95,Arsenal,25,Kevin Campbell,F,23,4,4,6,7,6,10,0,0,0,0,1,0,0
+1994/95,Arsenal,12,Andy Linighan,D,20,2,0,4,5,6,9,0,0,0,0,1,0,1
+1994/95,Arsenal,26,Alan Smith,F,19,2,2,4,7,5,7,0,0,0,0,0,0,0
+1994/95,Arsenal,844,John Hartson,F,15,7,0,2,4,5,6,0,0,0,0,5,1,0
+1994/95,Arsenal,7,Steve Morrow,D,15,1,0,3,4,4,7,0,0,0,0,0,0,0
+1994/95,Arsenal,222,Chris Kiwomya,F,14,3,0,2,6,4,4,0,0,0,0,1,0,0
+1994/95,Arsenal,841,Glenn Helder,M,13,0,2,3,4,2,7,0,0,0,0,0,0,0
+1994/95,Arsenal,20,Ian Selley,M,13,0,1,3,3,4,6,0,0,0,0,3,0,0
+1994/95,Arsenal,838,Vince Bartram,G,11,0,0,2,3,2,6,0,0,0,0,0,0,0
+1994/95,Arsenal,156,Eddie McGoldrick,M,11,0,1,4,3,5,3,0,0,0,0,2,0,0
+1994/95,Arsenal,27,Paul Dickov,F,9,0,0,2,2,4,3,0,0,0,0,2,0,0
+1994/95,Arsenal,18,David Hillier,M,9,0,1,0,4,3,2,0,0,0,0,0,0,0
+1994/95,Arsenal,21,Paul Davis,M,4,1,0,1,1,1,2,0,0,0,0,1,0,0
+1994/95,Arsenal,15,Jimmy Carter,M,3,0,0,0,0,1,2,0,0,0,0,1,0,0
+1994/95,Arsenal,16,Mark Flatts,M,3,0,0,0,0,2,1,0,0,0,0,0,0,0
+1994/95,Arsenal,659,Adrian Clarke,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1994/95,Arsenal,842,Stephen Hughes,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1994/95,Arsenal,5,Gavin McGowan,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1994/95,Arsenal,24,Paul Shaw,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1994/95,Aston Villa,37,Paul McGrath,D,40,0,0,8,11,14,15,0,0,0,0,5,0,0
+1994/95,Aston Villa,35,Ugo Ehiogu,D,39,3,0,11,10,15,14,0,0,0,0,7,0,0
+1994/95,Aston Villa,60,Dean Saunders,F,39,15,3,7,11,13,15,0,0,0,0,2,0,0
+1994/95,Aston Villa,59,Dwight Yorke,M,37,6,5,7,10,11,16,0,0,0,0,3,0,0
+1994/95,Aston Villa,41,Steve Staunton,D,35,5,7,7,10,11,14,0,0,0,0,7,0,0
+1994/95,Aston Villa,112,Andy Townsend,M,32,1,3,7,8,9,15,0,0,0,0,6,2,0
+1994/95,Aston Villa,32,Mark Bosnich,G,30,0,0,6,9,9,12,0,0,0,0,2,1,1
+1994/95,Aston Villa,39,Shaun Teale,D,28,0,3,9,8,10,10,0,0,0,0,3,0,0
+1994/95,Aston Villa,47,Ray Houghton,M,26,1,2,3,5,11,10,0,0,0,0,1,0,0
+1994/95,Aston Villa,38,Earl Barrett,D,25,0,1,7,7,9,9,0,0,0,0,3,0,0
+1994/95,Aston Villa,847,Ian Taylor,M,22,1,3,8,8,7,7,0,0,0,0,2,0,0
+1994/95,Aston Villa,43,Kevin Richardson,M,19,0,2,6,4,9,6,0,0,0,0,6,0,0
+1994/95,Aston Villa,57,Graham Fenton,F,17,2,1,1,3,6,8,0,0,0,0,4,0,0
+1994/95,Aston Villa,62,Dalian Atkinson,F,16,3,2,1,3,6,7,0,0,0,0,1,0,0
+1994/95,Aston Villa,396,Gary Charles,D,16,0,1,4,6,5,5,0,0,0,0,0,0,0
+1994/95,Aston Villa,498,Phil King,D,16,0,1,2,3,7,6,0,0,0,0,1,0,0
+1994/95,Aston Villa,849,Tommy Johnson,F,14,4,0,0,5,3,6,0,0,0,0,1,0,0
+1994/95,Aston Villa,48,Garry Parker,M,14,1,2,1,1,6,7,0,0,0,0,1,0,0
+1994/95,Aston Villa,604,John Fashanu,F,13,3,0,2,4,6,3,0,0,0,0,2,0,0
+1994/95,Aston Villa,33,Nigel Spink,G,13,0,0,5,2,6,5,0,0,0,0,0,0,0
+1994/95,Aston Villa,72,Alan Wright,D,8,0,0,3,2,3,3,0,0,0,0,0,0,0
+1994/95,Aston Villa,664,Guy Whittingham,F,7,2,1,1,0,4,3,0,0,0,0,0,0,0
+1994/95,Aston Villa,846,Nii Lamptey,F,6,0,0,0,1,1,4,0,0,0,0,2,0,0
+1994/95,Aston Villa,42,Bryan Small,D,5,0,0,1,1,2,2,0,0,0,0,0,0,0
+1994/95,Aston Villa,491,Franz Carr,F,2,0,0,0,0,2,0,0,0,0,0,0,0,0
+1994/95,Aston Villa,53,Chris Boden,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1994/95,Blackburn Rovers,89,Alan Shearer,F,42,34,13,15,27,8,7,0,0,0,0,4,0,0
+1994/95,Blackburn Rovers,74,Henning Berg,D,40,1,2,15,25,8,7,0,0,0,0,2,1,0
+1994/95,Blackburn Rovers,390,Chris Sutton,F,40,15,10,12,26,7,7,0,0,0,0,6,0,0
+1994/95,Blackburn Rovers,519,Tim Flowers,G,39,0,1,16,25,8,6,0,0,0,0,0,1,1
+1994/95,Blackburn Rovers,70,Graeme Le Saux,D,39,3,5,15,25,8,6,0,0,0,0,8,0,0
+1994/95,Blackburn Rovers,75,Colin Hendry,D,38,4,0,13,24,7,7,0,0,0,0,3,0,0
+1994/95,Blackburn Rovers,78,Tim Sherwood,M,38,6,1,15,24,8,6,0,0,0,0,10,0,0
+1994/95,Blackburn Rovers,79,Stuart Ripley,M,37,0,4,11,24,7,6,0,0,0,0,1,0,0
+1994/95,Blackburn Rovers,83,Mark Atkins,M,34,6,1,8,23,6,5,0,0,0,0,1,0,0
+1994/95,Blackburn Rovers,96,Ian Pearce,D,28,0,0,8,18,5,5,0,0,0,0,2,0,0
+1994/95,Blackburn Rovers,501,Paul Warhurst,D,27,2,0,7,18,5,4,0,0,0,0,3,0,0
+1994/95,Blackburn Rovers,80,Jason Wilcox,M,27,5,6,10,17,6,4,0,0,0,0,3,2,0
+1994/95,Blackburn Rovers,854,Robbie Slater,M,18,0,5,5,13,3,2,0,0,0,0,3,0,0
+1994/95,Blackburn Rovers,786,Tony Gale,D,15,0,0,6,11,3,1,0,0,0,0,1,0,0
+1994/95,Blackburn Rovers,86,Mike Newell,F,12,0,0,1,7,2,3,0,0,0,0,1,0,0
+1994/95,Blackburn Rovers,524,Jeff Kenna,D,9,1,0,2,5,1,3,0,0,0,0,1,0,0
+1994/95,Blackburn Rovers,243,David Batty,M,5,0,0,1,2,0,3,0,0,0,0,2,0,0
+1994/95,Blackburn Rovers,72,Alan Wright,D,5,0,0,1,3,0,2,0,0,0,0,1,0,0
+1994/95,Blackburn Rovers,64,Bobby Mimms,G,4,0,0,0,2,1,1,0,0,0,0,0,0,0
+1994/95,Blackburn Rovers,87,Kevin Gallacher,F,1,1,0,0,1,0,0,0,0,0,0,0,0,0
+1994/95,Blackburn Rovers,853,Richard Witschge,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1994/95,Chelsea,671,Gavin Peacock,M,38,4,8,11,13,12,13,0,0,0,0,4,0,0
+1994/95,Chelsea,858,Paul Furlong,F,36,10,4,7,12,11,13,0,0,0,0,6,0,0
+1994/95,Chelsea,95,Nigel Spackman,M,36,0,1,12,10,14,12,0,0,0,0,0,0,0
+1994/95,Chelsea,103,Frank Sinclair,D,35,3,0,10,10,13,12,0,0,0,0,10,0,1
+1994/95,Chelsea,101,Erland Johnsen,D,33,0,1,10,11,10,12,0,0,0,0,6,1,1
+1994/95,Chelsea,93,Dmitri Kharin,G,31,0,0,11,12,9,10,0,0,0,0,2,0,0
+1994/95,Chelsea,110,Eddie Newton,M,30,1,2,7,10,9,11,0,0,0,0,0,0,0
+1994/95,Chelsea,105,Steve Clarke,D,29,0,0,8,10,9,10,0,0,0,0,4,1,0
+1994/95,Chelsea,117,John Spencer,F,29,11,4,2,8,11,10,0,0,0,0,4,0,0
+1994/95,Chelsea,237,David Rocastle,M,28,0,1,7,11,9,8,0,0,0,0,3,0,0
+1994/95,Chelsea,109,Craig Burley,M,25,2,1,2,5,10,10,0,0,0,0,4,0,1
+1994/95,Chelsea,674,Mark Stein,F,24,8,2,3,5,12,7,0,0,0,0,3,0,0
+1994/95,Chelsea,673,Jakob Kjeldbjerg,M,23,1,1,7,9,7,7,0,0,0,0,3,0,0
+1994/95,Chelsea,855,Scott Minto,D,19,0,0,5,5,10,4,0,0,0,0,2,0,0
+1994/95,Chelsea,107,Dennis Wise,M,19,6,3,7,7,5,7,0,0,0,0,3,1,0
+1994/95,Chelsea,108,David Hopkin,M,15,1,3,0,5,7,3,0,0,0,0,1,0,0
+1994/95,Chelsea,106,David Lee,D,14,0,1,3,5,5,4,0,0,0,0,2,0,0
+1994/95,Chelsea,104,Anthony Barness,D,12,0,0,3,3,4,5,0,0,0,0,1,0,0
+1994/95,Chelsea,92,Kevin Hitchcock,G,12,0,0,2,2,6,4,0,0,0,0,0,0,0
+1994/95,Chelsea,672,Glenn Hoddle,M,12,0,2,0,3,5,4,0,0,0,0,0,0,0
+1994/95,Chelsea,102,Andy Myers,D,10,0,1,1,1,3,6,0,0,0,0,1,0,0
+1994/95,Chelsea,116,Neil Shipperley,F,10,2,0,1,4,3,3,0,0,0,0,0,0,0
+1994/95,Chelsea,99,Gareth Hall,D,6,0,0,2,2,3,1,0,0,0,0,1,0,0
+1994/95,Chelsea,675,Graham Rix,F,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1994/95,Coventry City,130,Brian Borrows,D,35,0,1,12,9,13,13,0,0,0,0,8,0,0
+1994/95,Coventry City,862,Paul Cook,M,34,3,6,11,10,10,14,0,0,0,0,5,0,0
+1994/95,Coventry City,122,Steve Ogrizovic,G,33,0,1,11,10,10,13,0,0,0,0,0,0,0
+1994/95,Coventry City,133,Sean Flynn,M,32,4,1,11,9,11,12,0,0,0,0,1,0,0
+1994/95,Coventry City,338,Dion Dublin,F,31,13,6,11,12,10,9,0,0,0,0,3,0,0
+1994/95,Coventry City,679,Ally Pickering,D,31,0,2,9,10,10,11,0,0,0,0,2,0,0
+1994/95,Coventry City,143,Peter Ndlovu,M,30,11,3,12,10,11,9,0,0,0,0,0,0,0
+1994/95,Coventry City,678,Julian Darby,D,29,0,0,9,8,10,11,0,0,0,0,5,0,1
+1994/95,Coventry City,680,Steve Morgan,D,28,0,1,9,8,9,11,0,0,0,0,6,0,0
+1994/95,Coventry City,124,David Rennie,D,28,0,1,8,9,8,11,0,0,0,0,2,0,0
+1994/95,Coventry City,139,Roy Wegerle,F,26,3,1,3,5,8,13,0,0,0,0,0,0,0
+1994/95,Coventry City,861,Cobi Jones,M,21,2,1,6,7,5,9,0,0,0,0,1,0,0
+1994/95,Coventry City,127,David Busst,D,20,2,2,6,6,7,7,0,0,0,0,2,0,0
+1994/95,Coventry City,975,Steven Pressley,D,19,1,0,7,4,7,8,0,0,0,0,5,1,1
+1994/95,Coventry City,264,Mike Marsh,M,15,2,1,4,4,5,6,0,0,0,0,2,0,0
+1994/95,Coventry City,43,Kevin Richardson,M,14,0,1,5,5,4,5,0,0,0,0,2,0,0
+1994/95,Coventry City,136,Willie Boland,M,12,0,0,1,2,5,5,0,0,0,0,1,0,0
+1994/95,Coventry City,256,David Burrows,D,11,0,0,4,3,4,4,0,0,0,0,3,0,1
+1994/95,Coventry City,140,Leigh Jenkinson,F,11,1,1,2,1,7,3,0,0,0,0,0,0,0
+1994/95,Coventry City,123,Jonathan Gould,G,7,0,0,2,1,3,3,0,0,0,0,0,0,1
+1994/95,Coventry City,138,John Williams,F,7,0,0,0,1,1,5,0,0,0,0,1,0,0
+1994/95,Coventry City,142,Mick Quinn,F,6,0,0,0,0,2,4,0,0,0,0,0,1,0
+1994/95,Coventry City,860,Marcus Hall,D,5,0,0,0,1,0,4,0,0,0,0,1,0,0
+1994/95,Coventry City,242,Gordon Strachan,M,5,0,2,1,2,1,2,0,0,0,0,1,0,0
+1994/95,Coventry City,677,Paul Williams,D,5,0,0,1,0,2,3,0,0,0,0,0,0,0
+1994/95,Coventry City,128,Phil Babb,D,3,0,0,0,0,1,2,0,0,0,0,1,0,0
+1994/95,Coventry City,976,Gary Gillespie,D,3,0,0,0,0,1,2,0,0,0,0,0,1,0
+1994/95,Coventry City,859,John Filan,G,2,0,0,1,1,1,0,0,0,0,0,0,0,0
+1994/95,Coventry City,681,Sandy Robertson,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1994/95,Crystal Palace,153,Gareth Southgate,D,42,3,4,15,11,12,19,0,0,0,0,5,0,0
+1994/95,Crystal Palace,151,Dean Gordon,D,41,2,1,14,10,12,19,0,0,0,0,4,0,0
+1994/95,Crystal Palace,154,Richard Shaw,D,41,0,0,15,11,12,18,0,0,0,0,4,0,0
+1994/95,Crystal Palace,167,Chris Armstrong,F,40,8,6,13,11,11,18,0,0,0,0,7,0,0
+1994/95,Crystal Palace,159,John Salako,M,39,4,4,13,11,12,16,0,0,0,0,2,0,0
+1994/95,Crystal Palace,146,Nigel Martyn,G,37,0,0,14,10,11,16,0,0,0,0,1,0,0
+1994/95,Crystal Palace,152,Chris Coleman,D,35,1,0,11,10,9,16,0,0,0,0,5,0,0
+1994/95,Crystal Palace,162,Ricky Newman,M,35,3,3,11,9,11,15,0,0,0,0,5,1,0
+1994/95,Crystal Palace,869,Darren Pitcher,M,25,0,0,8,7,8,10,0,0,0,0,5,0,0
+1994/95,Crystal Palace,977,Darren Patterson,D,22,1,0,5,4,8,10,0,0,0,0,8,0,0
+1994/95,Crystal Palace,147,John Humphrey,D,21,0,0,8,6,3,12,0,0,0,0,4,0,0
+1994/95,Crystal Palace,871,Andy Preece,M,20,4,2,5,6,5,9,0,0,0,0,0,0,0
+1994/95,Crystal Palace,155,Bobby Bowry,M,18,0,0,5,6,4,8,0,0,0,0,2,0,0
+1994/95,Crystal Palace,873,Bruce Dyer,F,16,1,2,1,1,6,9,0,0,0,0,1,0,0
+1994/95,Crystal Palace,538,Iain Dowie,F,15,4,0,4,4,3,8,0,0,0,0,3,0,0
+1994/95,Crystal Palace,150,Eric Young,D,13,0,1,2,4,3,6,0,0,0,0,2,0,0
+1994/95,Crystal Palace,168,George Ndah,F,12,1,1,0,3,2,7,0,0,0,0,0,0,0
+1994/95,Crystal Palace,864,Ian Cox,D,11,0,0,0,2,5,4,0,0,0,0,0,0,0
+1994/95,Crystal Palace,47,Ray Houghton,M,10,2,0,3,3,2,5,0,0,0,0,1,0,0
+1994/95,Crystal Palace,978,Rhys Wilmot,G,6,0,0,1,1,1,4,0,0,0,0,0,0,1
+1994/95,Crystal Palace,114,Damien Matthew,M,4,0,0,0,0,3,1,0,0,0,0,0,0,0
+1994/95,Crystal Palace,160,Simon Rodger,M,4,0,0,1,0,2,2,0,0,0,0,0,0,0
+1994/95,Crystal Palace,149,Paul Williams,D,4,0,0,0,0,2,2,0,0,0,0,0,0,0
+1994/95,Crystal Palace,872,Brian Launders,M,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1994/95,Crystal Palace,455,Ray Wilkins,M,1,0,0,0,0,0,1,0,0,0,0,1,0,0
+1994/95,Everton,172,Neville Southall,G,41,0,0,14,11,16,14,0,0,0,0,2,0,0
+1994/95,Everton,181,David Unsworth,D,38,3,0,13,9,17,12,0,0,0,0,8,0,0
+1994/95,Everton,174,Dave Watson,D,38,2,0,14,11,15,12,0,0,0,0,6,0,0
+1994/95,Everton,686,Joe Parkinson,M,34,0,1,13,9,14,11,0,0,0,0,6,0,0
+1994/95,Everton,186,Barry Horne,M,31,0,1,13,11,12,8,0,0,0,0,4,1,0
+1994/95,Everton,179,Andy Hinchcliffe,D,29,2,11,10,10,11,8,0,0,0,0,2,0,1
+1994/95,Everton,177,Matt Jackson,D,29,0,4,8,7,11,11,0,0,0,0,4,0,0
+1994/95,Everton,196,Paul Rideout,F,29,14,1,9,8,13,8,0,0,0,0,1,0,0
+1994/95,Everton,111,Graham Stuart,M,28,3,2,4,4,11,13,0,0,0,0,0,0,0
+1994/95,Everton,22,Anders Limpar,M,27,2,5,6,7,13,7,0,0,0,0,6,0,0
+1994/95,Everton,180,Gary Ablett,D,26,3,0,10,8,11,7,0,0,0,0,2,0,0
+1994/95,Everton,192,John Ebbrell,D,26,0,0,7,8,10,8,0,0,0,0,10,0,0
+1994/95,Everton,877,Duncan Ferguson,F,23,7,2,8,7,10,6,0,0,0,0,2,2,0
+1994/95,Everton,256,David Burrows,D,19,0,1,5,3,8,8,0,0,0,0,7,0,0
+1994/95,Everton,568,Vinny Samways,M,19,1,3,0,3,6,10,0,0,0,0,1,1,0
+1994/95,Everton,876,Daniel Amokachi,F,18,4,0,3,5,7,6,0,0,0,0,1,0,0
+1994/95,Everton,38,Earl Barrett,D,17,0,0,7,5,8,4,0,0,0,0,0,1,0
+1994/95,Everton,195,Stuart Barlow,F,11,2,1,2,3,4,4,0,0,0,0,2,1,0
+1994/95,Everton,979,Ian Durrant,M,5,0,0,1,1,1,3,0,0,0,0,0,0,0
+1994/95,Everton,685,Tony Grant,M,5,0,0,0,2,1,2,0,0,0,0,0,0,0
+1994/95,Everton,687,Brett Angell,F,4,0,0,0,1,1,2,0,0,0,0,2,0,0
+1994/95,Everton,193,Tony Cottee,F,3,0,0,0,0,1,2,0,0,0,0,0,0,0
+1994/95,Everton,189,Ian Snodin,M,3,0,0,0,0,2,1,0,0,0,0,1,0,0
+1994/95,Everton,684,Gary Rowett,D,2,0,0,0,0,0,2,0,0,0,0,1,0,0
+1994/95,Everton,182,Paul Holmes,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1994/95,Everton,171,Jason Kearton,G,1,0,0,1,0,1,0,0,0,0,0,1,0,0
+1994/95,Ipswich Town,201,Frank Yallop,D,41,1,2,3,7,6,28,0,0,0,0,3,0,0
+1994/95,Ipswich Town,203,Geraint Williams,D,38,1,0,2,5,6,27,0,0,0,0,4,0,0
+1994/95,Ipswich Town,200,Craig Forrest,G,36,0,0,2,6,5,25,0,0,0,0,1,0,0
+1994/95,Ipswich Town,881,Claus Thomsen,D,33,5,4,3,5,5,23,0,0,0,0,2,0,0
+1994/95,Ipswich Town,206,David Linighan,D,32,0,0,2,7,4,21,0,0,0,0,9,0,0
+1994/95,Ipswich Town,691,Stuart Slater,M,27,1,0,1,3,5,19,0,0,0,0,1,0,0
+1994/95,Ipswich Town,556,Steve Sedgley,D,26,4,1,2,5,4,17,0,0,0,0,1,0,0
+1994/95,Ipswich Town,204,John Wark,D,26,4,0,2,5,4,17,0,0,0,0,3,1,1
+1994/95,Ipswich Town,211,Simon Milton,M,25,2,1,0,3,4,18,0,0,0,0,4,0,0
+1994/95,Ipswich Town,692,Paul Mason,M,21,3,5,1,4,5,12,0,0,0,0,1,0,0
+1994/95,Ipswich Town,426,Ian Marshall,D,18,3,0,1,2,3,13,0,0,0,0,0,0,0
+1994/95,Ipswich Town,209,Gavin Johnson,M,17,0,0,1,3,1,13,0,0,0,0,1,0,0
+1994/95,Ipswich Town,981,Adrian Paz,F,17,1,2,2,4,3,10,0,0,0,0,1,0,0
+1994/95,Ipswich Town,246,Lee Chapman,,16,1,1,0,2,2,12,0,0,0,0,1,0,0
+1994/95,Ipswich Town,221,Bontcho Guenchev,F,16,1,1,0,3,0,13,0,0,0,0,1,0,0
+1994/95,Ipswich Town,222,Chris Kiwomya,F,15,3,3,0,3,3,9,0,0,0,0,0,0,0
+1994/95,Ipswich Town,216,Mick Stockwell,M,15,0,1,2,3,2,10,0,0,0,0,0,0,0
+1994/95,Ipswich Town,728,Alex Mathie,F,13,2,0,1,2,1,10,0,0,0,0,0,0,0
+1994/95,Ipswich Town,208,Phil Whelan,D,13,0,0,1,2,3,8,0,0,0,0,3,1,0
+1994/95,Ipswich Town,202,Steve Palmer,D,12,0,0,0,2,0,10,0,0,0,0,2,0,0
+1994/95,Ipswich Town,215,Adam Tanner,M,10,2,0,1,4,1,5,0,0,0,0,1,0,0
+1994/95,Ipswich Town,205,Neil Thompson,D,10,0,0,0,1,0,9,0,0,0,0,0,0,0
+1994/95,Ipswich Town,882,Tony Vaughan,D,10,0,0,0,1,2,7,0,0,0,0,4,0,0
+1994/95,Ipswich Town,207,Eddie Youds,D,10,0,0,1,1,1,8,0,0,0,0,4,0,1
+1994/95,Ipswich Town,879,Chris Swailes,D,4,0,0,0,0,0,4,0,0,0,0,1,0,1
+1994/95,Ipswich Town,220,Neil Gregory,F,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+1994/95,Ipswich Town,883,Lee Norfolk,M,3,0,1,0,2,0,1,0,0,0,0,0,0,0
+1994/95,Ipswich Town,878,Richard Wright,G,3,0,0,1,1,0,2,0,0,0,0,0,0,0
+1994/95,Ipswich Town,199,Clive Baker,G,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1994/95,Ipswich Town,690,Leo Cotterell,D,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1994/95,Ipswich Town,689,Kevin Ellis,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1994/95,Ipswich Town,213,David Gregory,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1994/95,Ipswich Town,980,Philip Morgan,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1994/95,Leeds United,694,Gary Kelly,D,42,0,2,16,20,13,9,0,0,0,0,7,0,0
+1994/95,Leeds United,225,John Lukic,G,42,0,0,17,20,13,9,0,0,0,0,0,0,0
+1994/95,Leeds United,238,Gary McAllister,M,41,6,8,17,19,13,9,0,0,0,0,1,0,0
+1994/95,Leeds United,497,Carlton Palmer,D,39,3,2,15,19,12,8,0,0,0,0,11,0,0
+1994/95,Leeds United,239,Gary Speed,M,39,3,9,15,20,10,9,0,0,0,0,6,0,0
+1994/95,Leeds United,228,David Wetherall,D,38,3,2,14,19,11,8,0,0,0,0,6,0,0
+1994/95,Leeds United,488,Brian Deane,F,35,9,3,11,17,12,6,0,0,0,0,10,0,0
+1994/95,Leeds United,248,Rod Wallace,F,32,4,3,7,16,8,8,0,0,0,0,6,0,0
+1994/95,Leeds United,229,Tony Dorigo,D,28,0,3,11,14,9,5,0,0,0,0,1,0,0
+1994/95,Leeds United,483,John Pemberton,M,27,0,1,11,13,9,5,0,0,0,0,7,0,0
+1994/95,Leeds United,496,Nigel Worthington,D,27,1,2,8,10,11,6,0,0,0,0,3,0,0
+1994/95,Leeds United,245,Noel Whelan,F,23,7,1,2,10,6,7,0,0,0,0,4,0,0
+1994/95,Leeds United,295,David White,M,23,3,2,9,9,8,6,0,0,0,0,3,0,0
+1994/95,Leeds United,888,Philemon Masinga,F,22,5,0,4,9,8,5,0,0,0,0,1,0,0
+1994/95,Leeds United,889,Anthony Yeboah,F,18,12,2,7,11,5,2,0,0,0,0,0,0,0
+1994/95,Leeds United,886,Lucas Radebe,D,12,0,0,2,5,5,2,0,0,0,0,2,0,0
+1994/95,Leeds United,242,Gordon Strachan,M,6,0,1,1,1,3,2,0,0,0,0,0,0,0
+1994/95,Leeds United,234,Chris Fairclough,D,5,0,0,1,3,0,2,0,0,0,0,0,0,0
+1994/95,Leeds United,693,Andrew Couzens,D,4,0,0,1,2,1,1,0,0,0,0,1,0,0
+1994/95,Leeds United,241,Mark Tinkler,M,3,0,1,1,1,2,0,0,0,0,0,0,0,0
+1994/95,Leeds United,232,Kevin Sharp,D,2,0,0,0,1,1,0,0,0,0,0,0,0,0
+1994/95,Leicester City,903,Mark Draper,M,39,5,2,3,5,10,24,0,0,0,0,6,0,0
+1994/95,Leicester City,906,Iwan Roberts,F,37,9,2,3,5,10,22,0,0,0,0,2,0,0
+1994/95,Leicester City,891,Kevin Poole,G,36,0,0,4,5,11,20,0,0,0,0,0,0,0
+1994/95,Leicester City,897,Simon Grayson,D,34,0,1,3,4,9,21,0,0,0,0,6,1,0
+1994/95,Leicester City,44,Mark Blake,M,30,3,1,2,5,5,20,0,0,0,0,8,0,0
+1994/95,Leicester City,907,David Lowe,F,29,8,3,2,5,6,18,0,0,0,0,3,1,0
+1994/95,Leicester City,893,Jimmy Willis,D,29,2,0,3,5,9,15,0,0,0,0,8,1,2
+1994/95,Leicester City,896,Mike Whitlow,D,28,2,3,3,4,7,17,0,0,0,0,6,1,0
+1994/95,Leicester City,898,Colin Hill,D,24,0,1,4,3,8,13,0,0,0,0,2,0,0
+1994/95,Leicester City,350,Nicky Mohan,D,23,0,1,1,3,4,16,0,0,0,0,4,1,0
+1994/95,Leicester City,901,Lee Philpott,M,23,0,0,1,2,6,15,0,0,0,0,4,0,0
+1994/95,Leicester City,984,Steve Thompson,M,19,0,1,2,2,6,11,0,0,0,0,0,0,0
+1994/95,Leicester City,905,Jamie Lawrence,M,17,1,3,2,3,4,10,0,0,0,0,0,0,0
+1994/95,Leicester City,386,Mark Robins,F,17,5,3,3,3,5,9,0,0,0,0,0,0,0
+1994/95,Leicester City,895,Neil Lewis,D,16,0,0,0,2,5,9,0,0,0,0,2,1,0
+1994/95,Leicester City,909,Julian Joachim,F,15,3,2,0,1,6,8,0,0,0,0,0,0,0
+1994/95,Leicester City,902,David Oldfield,M,14,1,0,1,2,3,9,0,0,0,0,1,0,0
+1994/95,Leicester City,48,Garry Parker,M,14,2,4,2,2,4,8,0,0,0,0,0,0,0
+1994/95,Leicester City,491,Franz Carr,F,13,1,1,0,2,3,8,0,0,0,0,0,0,0
+1994/95,Leicester City,311,Brian Carey,D,12,0,0,2,2,2,8,0,0,0,0,2,1,0
+1994/95,Leicester City,982,Richard Smith,D,12,0,0,1,1,3,8,0,0,0,0,3,1,0
+1994/95,Leicester City,611,Steve Agnew,M,11,0,1,0,1,3,7,0,0,0,0,1,0,0
+1994/95,Leicester City,899,Phil Gee,D,7,2,0,0,1,3,3,0,0,0,0,1,0,0
+1994/95,Leicester City,910,Ian Ormondroyd,F,6,0,0,0,1,1,4,0,0,0,0,0,0,0
+1994/95,Leicester City,892,Gavin Ward,G,6,0,0,0,1,0,5,0,0,0,0,1,0,0
+1994/95,Leicester City,983,Mick Galloway,M,5,0,3,0,0,3,2,0,0,0,0,3,0,0
+1994/95,Leicester City,894,Steve Walsh,D,5,0,0,0,1,0,4,0,0,0,0,0,0,0
+1994/95,Leicester City,908,Emile Heskey,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1994/95,Leicester City,900,Sam McMahon,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1994/95,Leicester City,904,Gary Mills,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1994/95,Liverpool,277,Robbie Fowler,F,42,25,6,16,21,11,10,0,0,0,0,4,0,0
+1994/95,Liverpool,252,David James,G,42,0,1,17,21,11,10,0,0,0,0,0,0,0
+1994/95,Liverpool,262,Jamie Redknapp,M,41,3,4,17,21,10,10,0,0,0,0,3,0,0
+1994/95,Liverpool,271,Steve McManaman,M,40,7,8,15,21,9,10,0,0,0,0,4,0,0
+1994/95,Liverpool,269,John Barnes,M,38,7,5,15,21,9,8,0,0,0,0,0,0,0
+1994/95,Liverpool,558,Neil Ruddock,D,37,2,0,16,18,11,8,0,0,0,0,6,0,1
+1994/95,Liverpool,275,Ian Rush,F,36,12,5,12,18,9,9,0,0,0,0,1,0,0
+1994/95,Liverpool,586,John Scales,D,35,2,0,12,15,11,9,0,0,0,0,3,0,0
+1994/95,Liverpool,128,Phil Babb,D,34,0,1,12,17,9,8,0,0,0,0,3,1,0
+1994/95,Liverpool,260,Stig Inge Bjornebye,D,31,0,6,12,16,9,6,0,0,0,0,1,0,0
+1994/95,Liverpool,261,Rob Jones,D,31,0,3,11,17,7,7,0,0,0,0,4,0,0
+1994/95,Liverpool,263,Michael Thomas,M,23,0,1,6,10,8,5,0,0,0,0,2,0,0
+1994/95,Liverpool,266,Mark Walters,M,18,0,0,2,6,7,5,0,0,0,0,1,0,0
+1994/95,Liverpool,267,Jan Mølby,M,14,2,3,2,7,2,5,0,0,0,0,0,0,0
+1994/95,Liverpool,411,Nigel Clough,M,10,0,0,1,4,3,3,0,0,0,0,0,0,0
+1994/95,Liverpool,254,Steve Harkness,D,8,1,0,3,3,3,2,0,0,0,0,1,0,0
+1994/95,Liverpool,259,Dominic Matteo,D,7,0,0,0,2,2,3,0,0,0,0,0,0,0
+1994/95,Liverpool,916,Mark Kennedy,D,6,0,1,1,3,0,3,0,0,0,0,1,0,0
+1994/95,Liverpool,258,Mark Wright,D,6,0,0,2,4,0,2,0,0,0,0,1,0,0
+1994/95,Liverpool,253,Steve Nicol,D,4,0,0,2,4,0,0,0,0,0,0,0,0,0
+1994/95,Liverpool,273,Lee Jones,F,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1994/95,Manchester City,769,Nicky Summerbee,M,41,1,3,10,12,12,17,0,0,0,0,4,0,0
+1994/95,Manchester City,703,Paul Walsh,F,39,12,3,7,12,12,15,0,0,0,0,1,0,0
+1994/95,Manchester City,187,Peter Beagrie,,37,2,7,7,12,11,14,0,0,0,0,3,0,0
+1994/95,Manchester City,300,Garry Flitcroft,M,37,5,4,8,12,9,16,0,0,0,0,6,0,0
+1994/95,Manchester City,304,Niall Quinn,F,35,8,5,3,11,9,15,0,0,0,0,4,0,0
+1994/95,Manchester City,282,Keith Curle,D,31,2,0,8,12,8,11,0,0,0,0,5,0,0
+1994/95,Manchester City,704,Uwe Rösler,F,31,15,5,5,10,8,13,0,0,0,0,6,1,0
+1994/95,Manchester City,285,Ian Brightwell,D,30,0,0,7,9,9,12,0,0,0,0,7,0,1
+1994/95,Manchester City,291,Terry Phelan,D,27,0,1,6,7,11,9,0,0,0,0,6,1,1
+1994/95,Manchester City,279,Tony Coton,G,23,0,0,5,8,7,8,0,0,0,0,0,0,1
+1994/95,Manchester City,352,Alan Kernaghan,D,22,1,1,5,5,8,9,0,0,0,0,3,0,0
+1994/95,Manchester City,287,Michel Vonk,D,21,0,2,3,3,8,10,0,0,0,0,1,0,2
+1994/95,Manchester City,919,Maurizio Gaudino,M,20,3,1,3,3,7,10,0,0,0,0,0,0,0
+1994/95,Manchester City,293,Steve Lomas,M,20,2,0,4,7,5,8,0,0,0,0,3,0,0
+1994/95,Manchester City,297,Fitzroy Simpson,M,16,2,1,1,4,7,5,0,0,0,0,2,0,0
+1994/95,Manchester City,280,Andy Dibble,G,15,0,0,4,5,5,5,0,0,0,0,1,1,1
+1994/95,Manchester City,290,Richard Edghill,D,14,0,0,2,6,4,4,0,0,0,0,3,1,0
+1994/95,Manchester City,292,Andy Hill,D,13,0,0,2,4,5,4,0,0,0,0,2,0,0
+1994/95,Manchester City,289,John Foster,D,11,0,1,1,2,3,6,0,0,0,0,1,0,0
+1994/95,Manchester City,286,David Brightwell,D,9,0,0,2,3,2,4,0,0,0,0,2,0,0
+1994/95,Manchester City,294,Steve McMahon,M,7,0,1,2,2,2,3,0,0,0,0,1,0,0
+1994/95,Manchester City,819,John Burridge,G,4,0,0,0,0,2,2,0,0,0,0,1,0,0
+1994/95,Manchester City,468,Simon Tracey,G,3,0,0,0,0,1,2,0,0,0,0,0,0,0
+1994/95,Manchester City,702,Carl Griffiths,F,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1994/95,Manchester City,298,David Kerr,M,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1994/95,Manchester City,303,Adie Mike,F,2,0,1,0,0,1,1,0,0,0,0,0,0,0
+1994/95,Manchester City,288,Scott Thomas,D,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1994/95,Manchester United,320,Gary Pallister,D,42,2,2,24,26,10,6,0,0,0,0,0,0,0
+1994/95,Manchester United,315,Denis Irwin,D,40,2,4,23,25,9,6,0,0,0,0,2,0,0
+1994/95,Manchester United,337,Brian McClair,F,40,5,2,18,24,10,6,0,0,0,0,2,0,0
+1994/95,Manchester United,326,Paul Ince,M,36,5,2,22,23,7,6,0,0,0,0,6,0,0
+1994/95,Manchester United,319,Steve Bruce,D,35,2,0,18,22,7,6,0,0,0,0,11,0,1
+1994/95,Manchester United,339,Mark Hughes,F,34,8,6,16,20,9,5,0,0,0,0,4,1,0
+1994/95,Manchester United,307,Peter Schmeichel,G,32,0,0,20,21,7,4,0,0,0,0,0,0,0
+1994/95,Manchester United,324,Andrei Kanchelskis,F,30,14,3,12,20,5,5,0,0,0,0,0,0,0
+1994/95,Manchester United,335,Ryan Giggs,M,29,1,11,14,17,7,5,0,0,0,0,3,0,0
+1994/95,Manchester United,328,Lee Sharpe,M,28,3,4,12,18,5,5,0,0,0,0,7,0,0
+1994/95,Manchester United,407,Roy Keane,M,25,2,4,7,13,7,5,0,0,0,0,7,0,0
+1994/95,Manchester United,332,Nicky Butt,M,22,1,1,3,12,6,4,0,0,0,0,4,0,0
+1994/95,Manchester United,342,Eric Cantona,F,21,12,6,11,13,5,3,0,0,0,0,4,1,0
+1994/95,Manchester United,67,David May,D,19,2,0,7,12,5,2,0,0,0,0,2,0,0
+1994/95,Manchester United,725,Andrew Cole,F,18,12,2,12,11,5,2,0,0,0,0,1,0,0
+1994/95,Manchester United,321,Gary Neville,D,18,0,1,9,11,6,1,0,0,0,0,5,0,0
+1994/95,Manchester United,336,Paul Scholes,M,17,5,2,2,11,4,2,0,0,0,0,0,0,0
+1994/95,Manchester United,309,Gary Walsh,G,10,0,0,3,5,3,2,0,0,0,0,0,0,0
+1994/95,Manchester United,329,Keith Gillespie,M,9,1,0,1,6,2,1,0,0,0,0,2,0,0
+1994/95,Manchester United,333,Simon Davies,M,5,0,0,0,3,2,0,0,0,0,0,0,0,0
+1994/95,Manchester United,331,David Beckham,M,4,0,0,1,2,2,0,0,0,0,0,0,0,0
+1994/95,Manchester United,921,Phil Neville,M,2,0,0,0,2,0,0,0,0,0,0,0,0,0
+1994/95,Manchester United,317,Paul Parker,D,2,0,0,0,1,0,1,0,0,0,0,0,1,0
+1994/95,Manchester United,308,Kevin Pilkington,G,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1994/95,Newcastle United,388,Ruel Fox,F,40,10,11,14,19,12,9,0,0,0,0,0,0,0
+1994/95,Newcastle United,925,Marc Hottiger,D,38,1,2,11,19,10,9,0,0,0,0,4,0,0
+1994/95,Newcastle United,708,Pavel Srnicek,G,38,0,0,13,18,12,8,0,0,0,0,1,2,0
+1994/95,Newcastle United,721,Robert Lee,M,35,9,5,9,16,10,9,0,0,0,0,3,1,0
+1994/95,Newcastle United,448,Darren Peacock,D,35,1,3,11,18,10,7,0,0,0,0,7,0,0
+1994/95,Newcastle United,194,Peter Beardsley,F,34,12,5,9,15,10,9,0,0,0,0,2,0,0
+1994/95,Newcastle United,710,John Beresford,D,33,0,3,11,16,11,6,0,0,0,0,0,0,0
+1994/95,Newcastle United,714,Steve Howey,D,30,1,1,9,12,10,8,0,0,0,0,6,0,0
+1994/95,Newcastle United,712,Barry Venison,D,28,1,2,10,14,8,6,0,0,0,0,3,0,0
+1994/95,Newcastle United,720,Steve Watson,D,27,4,2,5,10,9,8,0,0,0,0,3,0,0
+1994/95,Newcastle United,928,Paul Kitson,F,26,8,2,9,11,8,7,0,0,0,0,0,0,0
+1994/95,Newcastle United,723,Lee Clark,M,19,1,2,4,5,7,7,0,0,0,0,0,0,0
+1994/95,Newcastle United,725,Andrew Cole,F,18,9,3,6,10,6,2,0,0,0,0,2,0,0
+1994/95,Newcastle United,924,Philippe Albert,D,17,2,0,5,11,4,2,0,0,0,0,3,1,0
+1994/95,Newcastle United,329,Keith Gillespie,M,17,2,3,5,8,3,6,0,0,0,0,2,0,0
+1994/95,Newcastle United,722,Paul Bracewell,M,16,0,0,6,6,5,5,0,0,0,0,1,0,0
+1994/95,Newcastle United,715,Robbie Elliott,D,14,2,1,2,8,2,4,0,0,0,0,3,0,0
+1994/95,Newcastle United,631,Scott Sellars,M,12,0,1,2,9,2,1,0,0,0,0,2,0,0
+1994/95,Newcastle United,728,Alex Mathie,F,9,1,0,1,5,1,3,0,0,0,0,0,0,0
+1994/95,Newcastle United,250,Mike Hooper,G,6,0,0,1,3,1,2,0,0,0,0,0,0,0
+1994/95,Newcastle United,713,Alan Neilson,D,6,0,0,2,2,1,3,0,0,0,0,0,0,0
+1994/95,Newcastle United,727,Malcolm Allen,F,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1994/95,Norwich City,372,John Polston,D,38,0,0,10,9,11,18,0,0,0,0,5,0,0
+1994/95,Norwich City,376,Mark Bowen,D,36,2,1,8,8,12,16,0,0,0,0,7,0,0
+1994/95,Norwich City,231,Jon Newsome,D,35,3,2,9,10,9,16,0,0,0,0,6,0,0
+1994/95,Norwich City,382,Ian Crook,M,34,0,4,6,10,9,15,0,0,0,0,6,0,0
+1994/95,Norwich City,430,Neil Adams,M,33,3,1,4,8,11,14,0,0,0,0,2,0,0
+1994/95,Norwich City,380,Rob Newman,D,32,1,1,2,10,9,13,0,0,0,0,6,0,1
+1994/95,Norwich City,373,Daryl Sutch,D,30,1,3,4,5,9,16,0,0,0,0,2,0,0
+1994/95,Norwich City,733,Robert Ullathorne,D,27,2,0,8,5,7,15,0,0,0,0,4,0,0
+1994/95,Norwich City,478,Carl Bradshaw,M,26,1,0,6,6,9,11,0,0,0,0,5,0,0
+1994/95,Norwich City,384,Darren Eadie,M,26,2,3,5,8,8,10,0,0,0,0,0,0,0
+1994/95,Norwich City,429,Mike Milligan,M,26,2,1,4,9,6,11,0,0,0,0,7,0,0
+1994/95,Norwich City,383,Jeremy Goss,M,25,2,0,5,7,7,11,0,0,0,0,6,0,0
+1994/95,Norwich City,932,Ashley Ward,F,25,8,3,5,4,7,14,0,0,0,0,5,0,0
+1994/95,Norwich City,371,Bryan Gunn,G,21,0,0,7,8,6,7,0,0,0,0,1,0,0
+1994/95,Norwich City,730,Andy Marshall,G,21,0,0,3,2,6,13,0,0,0,0,0,0,0
+1994/95,Norwich City,305,Mike Sheron,F,21,1,0,1,5,7,9,0,0,0,0,0,0,0
+1994/95,Norwich City,387,Jamie Cureton,F,17,4,0,1,4,5,8,0,0,0,0,0,0,0
+1994/95,Norwich City,732,Spencer Prior,D,17,0,2,1,1,7,9,0,0,0,0,2,0,0
+1994/95,Norwich City,386,Mark Robins,F,17,4,3,1,6,6,5,0,0,0,0,0,0,0
+1994/95,Norwich City,734,Ade Akinbiyi,F,13,0,0,0,1,5,7,0,0,0,0,1,0,0
+1994/95,Norwich City,385,Andy Johnson,M,7,0,0,1,0,4,3,0,0,0,0,2,1,0
+1994/95,Norwich City,389,Efan Ekoku,F,6,0,1,1,3,2,1,0,0,0,0,1,0,0
+1994/95,Norwich City,987,Johnny Wright,D,2,0,0,0,1,1,0,0,0,0,0,0,0,0
+1994/95,Norwich City,377,Gary Megson,D,1,0,0,0,0,0,1,0,0,0,0,1,0,0
+1994/95,Norwich City,931,Keith O'Neill,M,1,0,0,0,0,1,0,0,0,0,0,1,0,0
+1994/95,Norwich City,468,Simon Tracey,G,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1994/95,Nottingham Forest,394,Mark Crossley,G,42,0,2,13,22,11,9,0,0,0,0,1,0,0
+1994/95,Nottingham Forest,398,Steve Chettle,D,41,0,1,13,22,10,9,0,0,0,0,3,1,1
+1994/95,Nottingham Forest,406,Steve Stone,M,41,5,8,12,22,10,9,0,0,0,0,5,0,0
+1994/95,Nottingham Forest,936,Des Lyttle,D,38,0,2,10,19,10,9,0,0,0,0,6,0,0
+1994/95,Nottingham Forest,641,David Phillips,M,38,1,3,10,19,11,8,0,0,0,0,2,0,0
+1994/95,Nottingham Forest,627,Stan Collymore,F,37,22,6,10,20,11,6,0,0,0,0,4,0,0
+1994/95,Nottingham Forest,943,Bryan Roy,F,37,13,11,5,22,8,7,0,0,0,0,4,0,0
+1994/95,Nottingham Forest,404,Ian Woan,M,37,5,7,9,18,10,9,0,0,0,0,6,0,0
+1994/95,Nottingham Forest,395,Stuart Pearce,D,36,8,0,12,21,8,7,0,0,0,0,7,0,0
+1994/95,Nottingham Forest,937,Colin Cooper,D,35,1,1,11,18,10,7,0,0,0,0,7,0,0
+1994/95,Nottingham Forest,942,Lars Bohinen,M,34,6,5,9,18,9,7,0,0,0,0,8,0,0
+1994/95,Nottingham Forest,944,Jason Lee,F,22,3,2,1,11,5,6,0,0,0,0,3,0,0
+1994/95,Nottingham Forest,938,Alf Inge Haaland,D,20,1,1,5,9,7,4,0,0,0,0,1,0,0
+1994/95,Nottingham Forest,401,Scot Gemmill,M,19,1,1,4,9,7,3,0,0,0,0,1,0,0
+1994/95,Nottingham Forest,413,Paul McGregor,F,11,1,0,0,6,2,3,0,0,0,0,1,0,0
+1994/95,Nottingham Forest,408,Kingsley Black,M,10,2,1,0,4,4,2,0,0,0,0,1,0,0
+1994/95,Nottingham Forest,397,Carl Tiler,D,3,0,0,1,1,0,2,0,0,0,0,1,0,0
+1994/95,Nottingham Forest,945,Gary Bull,F,1,1,0,1,1,0,0,0,0,0,0,1,0,0
+1994/95,Nottingham Forest,412,Robert Rosario,F,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1994/95,Nottingham Forest,935,Vance Warner,D,1,0,0,1,1,0,0,0,0,0,0,0,0,0
+1994/95,Queens Park Rangers,453,Andy Impey,M,40,3,2,9,16,9,15,0,0,0,0,4,0,0
+1994/95,Queens Park Rangers,451,Alan McDonald,D,39,1,1,10,17,9,13,0,0,0,0,6,0,2
+1994/95,Queens Park Rangers,460,Simon Barker,M,37,4,6,9,17,9,11,0,0,0,0,8,0,0
+1994/95,Queens Park Rangers,462,Les Ferdinand,F,37,24,9,5,13,9,15,0,0,0,0,6,1,0
+1994/95,Queens Park Rangers,951,Kevin Gallen,F,37,10,10,7,16,7,14,0,0,0,0,1,0,0
+1994/95,Queens Park Rangers,452,Clive Wilson,D,36,2,1,8,14,8,14,0,0,0,0,3,1,0
+1994/95,Queens Park Rangers,741,Trevor Sinclair,M,33,4,7,8,15,5,13,0,0,0,0,1,1,0
+1994/95,Queens Park Rangers,446,Ian Holloway,M,31,1,8,6,14,7,10,0,0,0,0,4,1,0
+1994/95,Queens Park Rangers,442,Tony Roberts,G,31,0,0,7,12,7,12,0,0,0,0,1,0,0
+1994/95,Queens Park Rangers,447,David Bardsley,D,30,0,4,6,10,6,14,0,0,0,0,7,0,0
+1994/95,Queens Park Rangers,443,Danny Maddix,D,27,1,1,6,12,6,9,0,0,0,0,6,0,0
+1994/95,Queens Park Rangers,739,Steve Yates,D,23,1,1,2,6,7,10,0,0,0,0,0,0,1
+1994/95,Queens Park Rangers,445,Rufus Brevett,D,19,0,1,3,7,5,7,0,0,0,0,5,0,0
+1994/95,Queens Park Rangers,465,Gary Penrice,F,19,3,0,0,7,5,7,0,0,0,0,1,0,0
+1994/95,Queens Park Rangers,240,Steve Hodge,M,15,0,1,3,6,2,7,0,0,0,0,4,0,0
+1994/95,Queens Park Rangers,444,Karl Ready,D,13,1,0,4,7,2,4,0,0,0,0,1,0,0
+1994/95,Queens Park Rangers,988,Sieb Dykstra,G,11,0,0,3,5,2,4,0,0,0,0,1,0,0
+1994/95,Queens Park Rangers,742,Danny Dichio,F,9,3,0,3,6,0,3,0,0,0,0,0,0,0
+1994/95,Queens Park Rangers,459,Michael Meaker,M,8,0,0,0,1,3,4,0,0,0,0,1,0,0
+1994/95,Queens Park Rangers,463,Bradley Allen,F,5,2,0,0,1,1,3,0,0,0,0,1,0,0
+1994/95,Queens Park Rangers,450,Alan McCarthy,D,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1994/95,Queens Park Rangers,455,Ray Wilkins,M,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1994/95,Queens Park Rangers,458,Devon White,M,1,0,0,0,0,0,1,0,0,0,0,0,0,1
+1994/95,Sheffield Wednesday,953,Ian Nolan,D,42,3,0,14,13,12,17,0,0,0,0,4,0,0
+1994/95,Sheffield Wednesday,125,Peter Atherton,D,41,1,6,14,13,12,16,0,0,0,0,5,0,0
+1994/95,Sheffield Wednesday,509,Chris Bart-Williams,M,38,2,7,9,11,12,15,0,0,0,0,6,0,0
+1994/95,Sheffield Wednesday,750,Des Walker,D,38,0,1,12,12,11,15,0,0,0,0,2,1,1
+1994/95,Sheffield Wednesday,513,Mark Bright,F,37,11,3,8,12,11,14,0,0,0,0,2,0,0
+1994/95,Sheffield Wednesday,510,John Sheridan,M,36,1,4,10,11,10,15,0,0,0,0,3,0,0
+1994/95,Sheffield Wednesday,505,Graham Hyde,M,35,5,1,8,12,8,15,0,0,0,0,7,0,0
+1994/95,Sheffield Wednesday,129,Andy Pearce,D,34,0,0,13,13,9,12,0,0,0,0,12,0,0
+1994/95,Sheffield Wednesday,495,Kevin Pressman,G,34,0,0,9,10,9,15,0,0,0,0,1,1,0
+1994/95,Sheffield Wednesday,954,Dan Petrescu,D,29,3,2,3,7,9,13,0,0,0,0,3,0,0
+1994/95,Sheffield Wednesday,456,Andy Sinton,M,25,0,4,3,6,6,13,0,0,0,0,1,0,0
+1994/95,Sheffield Wednesday,506,Chris Waddle,M,25,4,0,4,8,6,11,0,0,0,0,1,0,0
+1994/95,Sheffield Wednesday,516,Gordon Watson,F,23,2,0,0,6,10,7,0,0,0,0,0,1,0
+1994/95,Sheffield Wednesday,664,Guy Whittingham,F,21,9,0,4,7,5,9,0,0,0,0,0,0,0
+1994/95,Sheffield Wednesday,514,David Hirst,F,15,3,1,3,5,4,6,0,0,0,0,2,0,0
+1994/95,Sheffield Wednesday,847,Ian Taylor,M,14,1,2,2,5,5,4,0,0,0,0,1,0,0
+1994/95,Sheffield Wednesday,955,Klas Ingesson,M,13,2,0,2,5,5,3,0,0,0,0,2,0,0
+1994/95,Sheffield Wednesday,511,Michael Williams,F,10,1,0,4,3,2,5,0,0,0,0,0,0,0
+1994/95,Sheffield Wednesday,493,Chris Woods,G,9,0,0,5,3,3,3,0,0,0,0,0,0,0
+1994/95,Sheffield Wednesday,749,Lee Briscoe,D,6,0,0,2,2,2,2,0,0,0,0,0,0,0
+1994/95,Sheffield Wednesday,507,Ryan Jones,M,5,0,0,1,1,1,3,0,0,0,0,0,0,0
+1994/95,Sheffield Wednesday,752,Adem Poric,M,4,0,0,0,1,1,2,0,0,0,0,0,0,0
+1994/95,Sheffield Wednesday,751,Simon Coleman,D,1,0,0,0,0,0,1,0,0,0,0,1,0,0
+1994/95,Sheffield Wednesday,956,O'Neill Donaldson,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1994/95,Southampton,757,Jim Magilton,M,42,6,4,9,12,18,12,0,0,0,0,3,0,0
+1994/95,Southampton,533,Matthew Le Tissier,M,41,19,15,8,12,17,12,0,0,0,0,5,0,0
+1994/95,Southampton,521,Richard Hall,D,37,4,0,8,10,17,10,0,0,0,0,6,0,0
+1994/95,Southampton,523,Francis Benali,D,35,0,0,8,9,16,10,0,0,0,0,12,0,0
+1994/95,Southampton,530,Neil Maddison,M,35,3,4,6,9,15,11,0,0,0,0,2,0,1
+1994/95,Southampton,28,Neil Heaney,F,34,2,2,3,9,15,10,0,0,0,0,4,0,0
+1994/95,Southampton,522,Kenneth Monkou,D,31,1,0,6,9,13,9,0,0,0,0,12,0,0
+1994/95,Southampton,251,Bruce Grobbelaar,G,30,0,0,4,8,14,8,0,0,0,0,1,0,0
+1994/95,Southampton,524,Jeff Kenna,D,28,0,5,5,5,14,9,0,0,0,0,1,0,0
+1994/95,Southampton,535,Tommy Widdrington,M,28,0,1,5,7,13,8,0,0,0,0,5,0,0
+1994/95,Southampton,528,Jason Dodd,D,26,2,1,6,7,13,6,0,0,0,0,6,0,0
+1994/95,Southampton,755,Simon Charlton,D,25,1,1,3,10,7,8,0,0,0,0,1,0,0
+1994/95,Southampton,116,Neil Shipperley,F,19,4,3,6,6,9,4,0,0,0,0,3,0,0
+1994/95,Southampton,538,Iain Dowie,F,17,5,1,3,5,7,5,0,0,0,0,2,0,0
+1994/95,Southampton,959,Ronnie Ekelund,M,17,5,1,3,5,7,5,0,0,0,0,1,0,0
+1994/95,Southampton,91,Dave Beasant,G,13,0,0,4,5,4,4,0,0,0,0,0,0,0
+1994/95,Southampton,756,David Hughes,M,12,2,1,0,1,6,5,0,0,0,0,2,0,0
+1994/95,Southampton,516,Gordon Watson,F,12,3,1,4,6,3,3,0,0,0,0,2,0,0
+1994/95,Southampton,567,Paul Allen,M,11,0,0,0,3,3,5,0,0,0,0,2,0,0
+1994/95,Southampton,532,Paul Tisdale,M,7,0,1,0,3,2,2,0,0,0,0,0,0,0
+1994/95,Southampton,759,Craig Maskell,F,6,0,0,0,1,3,2,0,0,0,0,1,0,0
+1994/95,Southampton,539,Nicky Banger,F,4,2,0,0,0,2,2,0,0,0,0,0,0,0
+1994/95,Southampton,754,Paul McDonald,D,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1994/95,Southampton,958,Matt Oakley,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1994/95,Southampton,711,Matthew Robinson,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1994/95,Southampton,957,Peter Whiston,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1994/95,Tottenham Hotspur,576,Teddy Sheringham,F,42,18,8,11,16,14,12,0,0,0,0,3,0,0
+1994/95,Tottenham Hotspur,965,Jürgen Klinsmann,F,41,20,10,10,16,13,12,0,0,0,0,6,0,0
+1994/95,Tottenham Hotspur,544,Ian Walker,G,41,0,0,11,15,14,12,0,0,0,0,0,0,0
+1994/95,Tottenham Hotspur,569,Nick Barmby,M,38,9,6,6,14,13,11,0,0,0,0,0,0,0
+1994/95,Tottenham Hotspur,566,Darren Anderton,M,37,5,14,11,15,12,10,0,0,0,0,3,0,0
+1994/95,Tottenham Hotspur,775,Colin Calderwood,D,36,2,0,10,14,13,9,0,0,0,0,3,1,1
+1994/95,Tottenham Hotspur,549,Gary Mabbutt,D,36,0,1,11,16,12,8,0,0,0,0,2,0,0
+1994/95,Tottenham Hotspur,551,Justin Edinburgh,D,31,0,4,5,11,10,10,0,0,0,0,6,0,0
+1994/95,Tottenham Hotspur,557,Sol Campbell,D,30,0,0,6,11,8,11,0,0,0,0,0,1,0
+1994/95,Tottenham Hotspur,560,David Howells,M,26,1,1,6,10,10,6,0,0,0,0,2,0,0
+1994/95,Tottenham Hotspur,555,Dean Austin,D,24,0,0,11,11,10,3,0,0,0,0,5,0,0
+1994/95,Tottenham Hotspur,963,Gheorghe Popescu,D,23,3,0,6,10,7,6,0,0,0,0,3,0,0
+1994/95,Tottenham Hotspur,274,Ronny Rosenthal,F,20,0,2,7,7,9,4,0,0,0,0,5,0,0
+1994/95,Tottenham Hotspur,230,David Kerslake,D,18,0,0,0,5,4,9,0,0,0,0,3,0,0
+1994/95,Tottenham Hotspur,554,Stuart Nethercott,D,17,0,2,0,8,3,6,0,0,0,0,0,0,0
+1994/95,Tottenham Hotspur,962,Ilie Dumitrescu,M,13,4,1,0,5,3,5,0,0,0,0,1,0,0
+1994/95,Tottenham Hotspur,778,Micky Hazard,M,11,0,0,0,4,1,6,0,0,0,0,2,0,0
+1994/95,Tottenham Hotspur,212,Jason Dozzell,M,7,0,0,0,2,3,2,0,0,0,0,1,0,0
+1994/95,Tottenham Hotspur,565,Darren Caskey,M,4,0,0,0,2,0,2,0,0,0,0,0,0,0
+1994/95,Tottenham Hotspur,777,Kevin Scott,D,4,0,0,0,1,2,1,0,0,0,0,0,1,0
+1994/95,Tottenham Hotspur,563,Danny Hill,M,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+1994/95,Tottenham Hotspur,571,Gerry McMahon,M,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1994/95,Tottenham Hotspur,545,Erik Thorstvedt,G,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1994/95,Tottenham Hotspur,562,Andy Turner,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1994/95,West Ham United,782,Ludek Miklosko,G,42,0,0,13,13,11,18,0,0,0,0,1,0,0
+1994/95,West Ham United,785,Steve Potts,D,42,0,0,12,13,11,18,0,0,0,0,4,0,1
+1994/95,West Ham United,789,Tim Breacker,D,33,0,5,12,12,8,13,0,0,0,0,7,0,0
+1994/95,West Ham United,795,Ian Bishop,M,31,1,1,10,9,9,13,0,0,0,0,1,0,0
+1994/95,West Ham United,193,Tony Cottee,F,31,13,3,7,10,8,13,0,0,0,0,1,1,0
+1994/95,West Ham United,768,John Moncur,M,30,2,6,9,10,7,13,0,0,0,0,7,0,0
+1994/95,West Ham United,798,Martin Allen,M,29,2,1,9,9,7,13,0,0,0,0,7,1,0
+1994/95,West Ham United,696,Julian Dicks,D,29,5,1,8,10,8,11,0,0,0,0,8,0,0
+1994/95,West Ham United,793,Matt Holmes,M,24,1,1,5,6,8,10,0,0,0,0,3,0,0
+1994/95,West Ham United,787,Alvin Martin,D,24,0,1,7,8,4,12,0,0,0,0,3,0,0
+1994/95,West Ham United,272,Don Hutchison,M,23,9,4,3,8,6,9,0,0,0,0,5,1,0
+1994/95,West Ham United,801,Matthew Rush,F,23,2,3,5,9,4,10,0,0,0,0,4,0,0
+1994/95,West Ham United,966,Marc Rieper,D,21,1,0,6,6,8,7,0,0,0,0,0,0,0
+1994/95,West Ham United,805,Jeroen Boere,F,20,6,3,2,6,7,7,0,0,0,0,3,0,0
+1994/95,West Ham United,967,Michael Hughes,M,17,2,2,3,5,6,6,0,0,0,0,0,0,0
+1994/95,West Ham United,264,Mike Marsh,M,16,0,1,4,4,2,10,0,0,0,0,1,0,0
+1994/95,West Ham United,803,Trevor Morley,F,14,0,2,3,3,4,7,0,0,0,0,1,0,0
+1994/95,West Ham United,620,Keith Rowland,D,12,0,1,3,4,3,5,0,0,0,0,1,0,0
+1994/95,West Ham United,246,Lee Chapman,,10,0,0,2,4,1,5,0,0,0,0,0,0,0
+1994/95,West Ham United,790,Kenny Brown,D,9,0,0,0,1,3,5,0,0,0,0,0,0,0
+1994/95,West Ham United,764,Adrian Whitbread,D,8,0,0,1,1,2,5,0,0,0,0,0,0,0
+1994/95,West Ham United,791,Peter Butler,M,5,0,0,2,1,2,2,0,0,0,0,2,0,0
+1994/95,West Ham United,788,Simon Webster,D,5,0,0,0,2,2,1,0,0,0,0,0,0,0
+1994/95,West Ham United,256,David Burrows,D,4,0,0,1,0,1,3,0,0,0,0,0,0,0
+1994/95,West Ham United,796,Danny Williamson,M,4,0,0,0,1,2,1,0,0,0,0,1,0,0
+1994/95,West Ham United,799,Steve Jones,M,2,0,0,0,0,0,2,0,0,0,0,2,0,0
+1994/95,Wimbledon,590,Warren Barton,D,39,2,8,10,14,9,16,0,0,0,0,4,0,0
+1994/95,Wimbledon,596,Gary Elkins,M,36,1,4,11,13,10,13,0,0,0,0,7,0,0
+1994/95,Wimbledon,599,Vinnie Jones,M,33,3,1,8,10,11,12,0,0,0,0,8,2,0
+1994/95,Wimbledon,582,Hans Segers,G,32,0,0,6,11,7,14,0,0,0,0,3,0,0
+1994/95,Wimbledon,971,Alan Reeves,D,31,3,0,10,12,7,12,0,0,0,0,5,1,1
+1994/95,Wimbledon,972,Kenny Cunningham,D,28,0,0,9,11,8,9,0,0,0,0,1,0,0
+1994/95,Wimbledon,603,Dean Holdsworth,F,28,7,4,5,9,9,10,0,0,0,0,6,0,0
+1994/95,Wimbledon,614,Mick Harford,F,27,6,5,3,12,6,9,0,0,0,0,8,0,0
+1994/95,Wimbledon,807,Alan Kimble,D,26,0,3,9,11,8,7,0,0,0,0,4,1,0
+1994/95,Wimbledon,607,Andy Clarke,F,25,1,1,0,9,5,11,0,0,0,0,1,1,0
+1994/95,Wimbledon,389,Efan Ekoku,F,24,9,2,3,9,6,9,0,0,0,0,5,0,0
+1994/95,Wimbledon,809,Marcus Gayle,F,23,2,1,1,8,6,9,0,0,0,0,0,0,0
+1994/95,Wimbledon,148,Andy Thorn,F,23,1,0,5,9,5,9,0,0,0,0,4,1,0
+1994/95,Wimbledon,587,Chris Perry,D,22,0,0,6,10,5,7,0,0,0,0,3,0,0
+1994/95,Wimbledon,973,Oyvind Leonhardsen,M,20,4,2,4,7,6,7,0,0,0,0,3,0,0
+1994/95,Wimbledon,974,Jon Goodman,F,19,4,0,4,7,7,5,0,0,0,0,0,0,0
+1994/95,Wimbledon,591,Scott Fitzgerald,D,17,0,0,3,5,4,8,0,0,0,0,3,0,0
+1994/95,Wimbledon,600,Neal Ardley,M,14,1,1,1,3,3,8,0,0,0,0,1,0,0
+1994/95,Wimbledon,592,Peter Fear,D,14,1,1,1,6,3,5,0,0,0,0,3,0,0
+1994/95,Wimbledon,583,Neil Sullivan,G,11,0,0,6,4,5,2,0,0,0,0,0,0,0
+1994/95,Wimbledon,810,Gary Blissett,F,9,0,0,1,2,3,4,0,0,0,0,0,0,0
+1994/95,Wimbledon,598,Robbie Earle,M,9,0,3,1,4,2,3,0,0,0,0,0,0,0
+1994/95,Wimbledon,594,Steve Talboys,M,7,1,0,2,3,1,3,0,0,0,0,1,0,0
+1994/95,Wimbledon,808,Stewart Castledine,M,6,1,0,0,0,2,4,0,0,0,0,1,0,0
+1994/95,Wimbledon,588,Roger Joseph,D,3,0,0,1,1,0,2,0,0,0,0,1,0,0
+1994/95,Wimbledon,586,John Scales,D,3,0,0,0,0,2,1,0,0,0,0,0,0,0

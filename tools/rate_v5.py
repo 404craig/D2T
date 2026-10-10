@@ -256,6 +256,6 @@ for r in rows:
                      "assists": r["goal_assist"], "cleanSheets": r["clean_sheet"], "wdl": [r["wins"], r["draws"], r["losses"]],
                      "withPPG": r["with_ppg"], "withoutPPG": r["without_ppg"], "withoutGames": r["without_g"],
                      "minutes": r["mins_played"], "goalsConceded": r["goals_conceded"], "awardsPts": r["awards_pts"], "role": r.get("role", ""), "lpPoints": r["lp"], "feat": {**{k: round(v, 4) for k, v in r["z"].items()}, **{k: round(v, 4) for k, v in r["feat_rep"].items()},
-                     "games": round(r["games"], 1), "starts": int(r["lu"]["starts"]) if r.get("lu") else r["apps"], "perf": round(r["perf"], 4)}, "ucl": r["ucl"], "titles": r["titles"], "flag": r["flag"]})
+                     "games": round(r["games"], 1), "seasonGames": G, "starts": int(r["lu"]["starts"]) if r.get("lu") else r["apps"], "perf": round(r["perf"], 4)}, "ucl": r["ucl"], "titles": r["titles"], "flag": r["flag"]})
 json.dump({"season": season, "conFromClub": not has_gc, "clubs": table, "players": out_rows}, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
 print(season, len(out_rows), "rated; GK conceded from", "feed" if has_gc else "club record (no per-player data)")

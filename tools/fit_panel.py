@@ -20,14 +20,19 @@ import numpy as np
 sys.path.insert(0, "tools")
 from score_vs_panel import spearman  # noqa: E402
 
-SEASONS = {"2008-09": ["2008-09a", "2008-09b"], "2019-20": ["2019-20"], "1996-97": ["1996-97"]}
+import glob
+import re
+SEASONS = {}
+for f in sorted(glob.glob("docs/cards/panel/expected_*.csv")):
+    k = re.search(r"expected_(.+)\.csv", f).group(1)
+    SEASONS.setdefault(k[:7], []).append(k)
 STATS = ["GOL", "AST", "CLN", "CON", "THR", "DIF", "APP"]
 POS = ["GK", "DEF", "MID", "FWD"]
 
 
 def features(r):
     f = r["feat"]
-    G = 38 if not f else 38
+    G = f.get("seasonGames", 38)
     start_share = min(f["starts"], G) / G
     x = []
     for p in POS:  # each position gets its own weights for its own stats
@@ -77,6 +82,7 @@ for lam in [1, 3, 10, 30, 100]:
         per[t] = round(spearman(list(p), [b for _, b in te]), 3)
         preds += list(p); trues += [b for _, b in te]
     rho = spearman(preds, trues)
+    per = dict(sorted(per.items()))
     mae = float(np.mean(np.abs(np.array(preds) - np.array(trues))))
     print(f"lambda {lam:>3}: unseen-season agreement {rho:.3f} {per} avg gap {mae:.1f}")
     if not best or rho > best[1]:

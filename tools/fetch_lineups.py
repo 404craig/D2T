@@ -38,8 +38,17 @@ while True:
     if page + 1 >= f["pageInfo"]["numPages"]:
         break
     page += 1
-with ThreadPoolExecutor(8) as ex:
-    fixtures = list(ex.map(lambda i: get(f"{B}/fixtures/{i}?altIds=true"), ids))
+def fetch_fixture(i):
+    try:
+        return get(f"{B}/fixtures/{i}?altIds=true")
+    except RuntimeError:
+        return {"id": i, "failed": True}
+
+
+with ThreadPoolExecutor(6) as ex:
+    fixtures = list(ex.map(fetch_fixture, ids))
+failed = [f["id"] for f in fixtures if f.get("failed")]
+fixtures = [f for f in fixtures if not f.get("failed")]
 
 P = defaultdict(lambda: {"starts": 0, "subs": 0, "mins": 0, "gf_on": 0, "ga_on": 0, "cs_on": 0, "w": 0, "d": 0, "l": 0, "pos": Counter()})
 info = {}
@@ -106,5 +115,7 @@ with open(out, "w", newline="", encoding="utf-8") as fh:
         w.writerow([label, club, pid, info[pid]["name"], info[pid]["birth"], r["starts"], r["subs"], r["starts"] + r["subs"], r["mins"],
                     r["gf_on"], r["ga_on"], r["cs_on"], r["w"], r["d"], r["l"], " ".join(f"{k}:{v}" for k, v in r["pos"].most_common())])
 print(f"{label}: {len(fixtures)} matches, {len(P)} player-club rows -> {out}; score mismatches: {len(problems)}")
+if failed:
+    print("  matches that would not load:", failed)
 for p in problems[:10]:
     print("  ", p)

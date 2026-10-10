@@ -67,6 +67,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.5,
+"seasonGames": 38,
 "starts": 38,
 "perf": 0.9438
 },
@@ -117,6 +118,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.0,
+"seasonGames": 38,
 "starts": 30,
 "perf": 1.6101
 },
@@ -167,6 +169,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.3,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.509
 },
@@ -217,6 +220,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.8,
+"seasonGames": 38,
 "starts": 33,
 "perf": 1.0655
 },
@@ -267,6 +271,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.5,
+"seasonGames": 38,
 "starts": 31,
 "perf": 0.6477
 },
@@ -317,6 +322,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.6,
+"seasonGames": 38,
 "starts": 32,
 "perf": -0.0086
 },
@@ -369,6 +375,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.4,
+"seasonGames": 38,
 "starts": 30,
 "perf": 1.1888
 },
@@ -421,6 +428,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 17.7,
+"seasonGames": 38,
 "starts": 17,
 "perf": 0.5483
 },
@@ -471,6 +479,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.8,
+"seasonGames": 38,
 "starts": 28,
 "perf": 0.9399
 },
@@ -521,6 +530,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.0,
+"seasonGames": 38,
 "starts": 27,
 "perf": 1.0477
 },
@@ -573,6 +583,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.2,
+"seasonGames": 38,
 "starts": 27,
 "perf": 1.231
 },
@@ -623,6 +634,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.0,
+"seasonGames": 38,
 "starts": 22,
 "perf": 0.912
 },
@@ -673,6 +685,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.8,
+"seasonGames": 38,
 "starts": 14,
 "perf": 0.2026
 },
@@ -723,6 +736,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.0,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.6801
 },
@@ -775,6 +789,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.7,
+"seasonGames": 38,
 "starts": 9,
 "perf": 0.4586
 },
@@ -825,6 +840,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.1,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.3415
 },
@@ -877,6 +893,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.7,
+"seasonGames": 38,
 "starts": 7,
 "perf": 0.239
 },
@@ -927,6 +944,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.5,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.0913
 },
@@ -977,6 +995,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.9,
+"seasonGames": 38,
 "starts": 6,
 "perf": 0.237
 },
@@ -1027,6 +1046,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.2,
+"seasonGames": 38,
 "starts": 1,
 "perf": 0.1519
 },
@@ -1077,6 +1097,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.4,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0773
 },
@@ -1129,6 +1150,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0186
 },
@@ -1181,6 +1203,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.2,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0276
 },
@@ -1231,6 +1254,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0137
 },
@@ -1281,6 +1305,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1425
 },
@@ -1331,6 +1356,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.8,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.2472
 },
@@ -1381,6 +1407,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.9,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.2328
 },
@@ -1433,6 +1460,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.007
 },
@@ -1483,6 +1511,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 38.0,
+"seasonGames": 38,
 "starts": 38,
 "perf": 1.0477
 },
@@ -1533,6 +1562,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.9,
+"seasonGames": 38,
 "starts": 38,
 "perf": 1.0565
 },
@@ -1583,6 +1613,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.9,
+"seasonGames": 38,
 "starts": 37,
 "perf": 0.7498
 },
@@ -1635,6 +1666,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 29.9,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.9937
 },
@@ -1687,6 +1719,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.4,
+"seasonGames": 38,
 "starts": 34,
 "perf": 1.0971
 },
@@ -1737,6 +1770,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.8,
+"seasonGames": 38,
 "starts": 33,
 "perf": 1.2124
 },
@@ -1787,6 +1821,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.3,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.1351
 },
@@ -1837,6 +1872,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.9,
+"seasonGames": 38,
 "starts": 30,
 "perf": 0.908
 },
@@ -1889,6 +1925,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.9,
+"seasonGames": 38,
 "starts": 28,
 "perf": 1.1505
 },
@@ -1939,6 +1976,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.5,
+"seasonGames": 38,
 "starts": 28,
 "perf": 0.0398
 },
@@ -1991,6 +2029,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.1,
+"seasonGames": 38,
 "starts": 17,
 "perf": 0.2305
 },
@@ -2041,6 +2080,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.5,
+"seasonGames": 38,
 "starts": 20,
 "perf": 0.4176
 },
@@ -2091,6 +2131,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.5,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.0617
 },
@@ -2141,6 +2182,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.5,
+"seasonGames": 38,
 "starts": 18,
 "perf": 0.146
 },
@@ -2193,6 +2235,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.8,
+"seasonGames": 38,
 "starts": 11,
 "perf": 1.1738
 },
@@ -2243,6 +2286,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.2,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.3393
 },
@@ -2293,6 +2337,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.1,
+"seasonGames": 38,
 "starts": 9,
 "perf": -0.5465
 },
@@ -2343,6 +2388,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.2,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.6714
 },
@@ -2395,6 +2441,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.8,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0904
 },
@@ -2447,6 +2494,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.6,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1495
 },
@@ -2499,6 +2547,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.7,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0869
 },
@@ -2549,6 +2598,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.6,
+"seasonGames": 38,
 "starts": 37,
 "perf": -0.2627
 },
@@ -2601,6 +2651,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.6,
+"seasonGames": 38,
 "starts": 37,
 "perf": -0.0734
 },
@@ -2651,6 +2702,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.0,
+"seasonGames": 38,
 "starts": 36,
 "perf": -0.1407
 },
@@ -2701,6 +2753,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.0,
+"seasonGames": 38,
 "starts": 36,
 "perf": 0.0061
 },
@@ -2751,6 +2804,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 34.3,
+"seasonGames": 38,
 "starts": 35,
 "perf": 0.1372
 },
@@ -2801,6 +2855,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.9,
+"seasonGames": 38,
 "starts": 34,
 "perf": 0.0016
 },
@@ -2853,6 +2908,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.2,
+"seasonGames": 38,
 "starts": 27,
 "perf": -0.5771
 },
@@ -2905,6 +2961,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.7,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.5349
 },
@@ -2955,6 +3012,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.9,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.9755
 },
@@ -3007,6 +3065,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.6,
+"seasonGames": 38,
 "starts": 23,
 "perf": -0.0319
 },
@@ -3057,6 +3116,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.6,
+"seasonGames": 38,
 "starts": 24,
 "perf": 0.7894
 },
@@ -3109,6 +3169,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.0,
+"seasonGames": 38,
 "starts": 17,
 "perf": 0.108
 },
@@ -3161,6 +3222,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.6,
+"seasonGames": 38,
 "starts": 11,
 "perf": -0.1852
 },
@@ -3211,6 +3273,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.6,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.3838
 },
@@ -3263,6 +3326,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.7,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.5876
 },
@@ -3313,6 +3377,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.7,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.581
 },
@@ -3363,6 +3428,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.3,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.1793
 },
@@ -3413,6 +3479,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.0,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.5217
 },
@@ -3463,6 +3530,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.8,
+"seasonGames": 38,
 "starts": 8,
 "perf": -1.0559
 },
@@ -3513,6 +3581,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.1,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.2523
 },
@@ -3563,6 +3632,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.1,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.3682
 },
@@ -3613,6 +3683,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.0,
+"seasonGames": 38,
 "starts": 2,
 "perf": 0.0041
 },
@@ -3665,6 +3736,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.2,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0224
 },
@@ -3715,6 +3787,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1318
 },
@@ -3767,6 +3840,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1294
 },
@@ -3817,6 +3891,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.9,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.2233
 },
@@ -3869,6 +3944,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.1,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.3039
 },
@@ -3919,6 +3995,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.0,
+"seasonGames": 38,
 "starts": 34,
 "perf": 0.8731
 },
@@ -3971,6 +4048,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.7,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.0007
 },
@@ -4021,6 +4099,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.7,
+"seasonGames": 38,
 "starts": 31,
 "perf": 0.0179
 },
@@ -4073,6 +4152,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.1,
+"seasonGames": 38,
 "starts": 27,
 "perf": 0.0148
 },
@@ -4123,6 +4203,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.4,
+"seasonGames": 38,
 "starts": 23,
 "perf": 0.2205
 },
@@ -4173,6 +4254,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.3,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.309
 },
@@ -4223,6 +4305,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.3,
+"seasonGames": 38,
 "starts": 24,
 "perf": -0.4934
 },
@@ -4273,6 +4356,7 @@
 "awards": 1.0,
 "ucl": 0.0,
 "games": 21.9,
+"seasonGames": 38,
 "starts": 22,
 "perf": 0.6485
 },
@@ -4323,6 +4407,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.1,
+"seasonGames": 38,
 "starts": 20,
 "perf": -0.62
 },
@@ -4373,6 +4458,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 17.3,
+"seasonGames": 38,
 "starts": 17,
 "perf": -0.4828
 },
@@ -4423,6 +4509,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.4,
+"seasonGames": 38,
 "starts": 14,
 "perf": 0.8947
 },
@@ -4473,6 +4560,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.2,
+"seasonGames": 38,
 "starts": 15,
 "perf": 0.439
 },
@@ -4523,6 +4611,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.8,
+"seasonGames": 38,
 "starts": 13,
 "perf": -0.5794
 },
@@ -4575,6 +4664,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.6,
+"seasonGames": 38,
 "starts": 13,
 "perf": -0.2325
 },
@@ -4627,6 +4717,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.7,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.3985
 },
@@ -4677,6 +4768,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.1,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.4645
 },
@@ -4729,6 +4821,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.7,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.1039
 },
@@ -4781,6 +4874,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.3,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.3641
 },
@@ -4831,6 +4925,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.6,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.3139
 },
@@ -4881,6 +4976,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.6,
+"seasonGames": 38,
 "starts": 3,
 "perf": 0.2805
 },
@@ -4931,6 +5027,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.2,
+"seasonGames": 38,
 "starts": 5,
 "perf": 0.9251
 },
@@ -4981,6 +5078,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.3,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1249
 },
@@ -5031,6 +5129,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 0,
 "perf": 0.0064
 },
@@ -5081,6 +5180,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.6,
+"seasonGames": 38,
 "starts": 2,
 "perf": 0.3625
 },
@@ -5131,6 +5231,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.4,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1156
 },
@@ -5181,6 +5282,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.6,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0428
 },
@@ -5231,6 +5333,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.098
 },
@@ -5281,6 +5384,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.9,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0325
 },
@@ -5331,6 +5435,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.0,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0013
 },
@@ -5383,6 +5488,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 38.0,
+"seasonGames": 38,
 "starts": 38,
 "perf": 0.3334
 },
@@ -5433,6 +5539,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.9,
+"seasonGames": 38,
 "starts": 38,
 "perf": -0.1712
 },
@@ -5483,6 +5590,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 34.5,
+"seasonGames": 38,
 "starts": 35,
 "perf": -0.322
 },
@@ -5533,6 +5641,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.8,
+"seasonGames": 38,
 "starts": 34,
 "perf": -0.5473
 },
@@ -5583,6 +5692,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.3,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.0987
 },
@@ -5635,6 +5745,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.3,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.5199
 },
@@ -5685,6 +5796,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 29.3,
+"seasonGames": 38,
 "starts": 29,
 "perf": -0.4626
 },
@@ -5737,6 +5849,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.3,
+"seasonGames": 38,
 "starts": 25,
 "perf": 0.6712
 },
@@ -5789,6 +5902,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.7,
+"seasonGames": 38,
 "starts": 19,
 "perf": -0.8039
 },
@@ -5839,6 +5953,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.5,
+"seasonGames": 38,
 "starts": 21,
 "perf": -0.2324
 },
@@ -5891,6 +6006,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.7,
+"seasonGames": 38,
 "starts": 23,
 "perf": -0.4234
 },
@@ -5941,6 +6057,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.9,
+"seasonGames": 38,
 "starts": 16,
 "perf": -1.0489
 },
@@ -5991,6 +6108,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.9,
+"seasonGames": 38,
 "starts": 20,
 "perf": -0.2118
 },
@@ -6041,6 +6159,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.3,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.7309
 },
@@ -6091,6 +6210,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.6,
+"seasonGames": 38,
 "starts": 17,
 "perf": -1.2303
 },
@@ -6141,6 +6261,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.0,
+"seasonGames": 38,
 "starts": 10,
 "perf": 0.2946
 },
@@ -6191,6 +6312,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.6,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.172
 },
@@ -6243,6 +6365,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.3,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.341
 },
@@ -6293,6 +6416,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.9,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1675
 },
@@ -6343,6 +6467,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.0,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.4786
 },
@@ -6393,6 +6518,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.8,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.0151
 },
@@ -6445,6 +6571,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0104
 },
@@ -6495,6 +6622,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": 0.0023
 },
@@ -6547,6 +6675,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0121
 },
@@ -6599,6 +6728,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.6,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0673
 },
@@ -6649,6 +6779,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.5,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.0112
 },
@@ -6699,6 +6830,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.6,
+"seasonGames": 38,
 "starts": 35,
 "perf": -0.3072
 },
@@ -6749,6 +6881,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.9,
+"seasonGames": 38,
 "starts": 35,
 "perf": -0.1605
 },
@@ -6799,6 +6932,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.4,
+"seasonGames": 38,
 "starts": 35,
 "perf": -0.3761
 },
@@ -6851,6 +6985,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.6,
+"seasonGames": 38,
 "starts": 34,
 "perf": -0.0413
 },
@@ -6903,6 +7038,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.3,
+"seasonGames": 38,
 "starts": 27,
 "perf": -0.5638
 },
@@ -6953,6 +7089,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.5,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.3754
 },
@@ -7003,6 +7140,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.5,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.2444
 },
@@ -7053,6 +7191,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.1,
+"seasonGames": 38,
 "starts": 25,
 "perf": -0.0916
 },
@@ -7105,6 +7244,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.9,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.441
 },
@@ -7155,6 +7295,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.9,
+"seasonGames": 38,
 "starts": 23,
 "perf": -0.7573
 },
@@ -7205,6 +7346,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 20.8,
+"seasonGames": 38,
 "starts": 21,
 "perf": -0.3087
 },
@@ -7257,6 +7399,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.4,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.1033
 },
@@ -7309,6 +7452,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.9,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.4577
 },
@@ -7361,6 +7505,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.3,
+"seasonGames": 38,
 "starts": 15,
 "perf": 0.4964
 },
@@ -7411,6 +7556,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.4,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.4215
 },
@@ -7461,6 +7607,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.9,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.5448
 },
@@ -7513,6 +7660,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.5,
+"seasonGames": 38,
 "starts": 13,
 "perf": -0.1771
 },
@@ -7563,6 +7711,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.9,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.2194
 },
@@ -7613,6 +7762,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.6,
+"seasonGames": 38,
 "starts": 8,
 "perf": 0.3093
 },
@@ -7663,6 +7813,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.6,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.0552
 },
@@ -7713,6 +7864,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.9,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.0994
 },
@@ -7763,6 +7915,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.5,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.1261
 },
@@ -7813,6 +7966,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.0,
+"seasonGames": 38,
 "starts": 3,
 "perf": 0.351
 },
@@ -7865,6 +8019,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.3,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0307
 },
@@ -7917,6 +8072,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0096
 },
@@ -7969,6 +8125,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.0,
+"seasonGames": 38,
 "starts": 37,
 "perf": -0.1168
 },
@@ -8019,6 +8176,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.0,
+"seasonGames": 38,
 "starts": 36,
 "perf": -0.0137
 },
@@ -8071,6 +8229,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.1,
+"seasonGames": 38,
 "starts": 29,
 "perf": -0.0445
 },
@@ -8121,6 +8280,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.5,
+"seasonGames": 38,
 "starts": 34,
 "perf": -0.3765
 },
@@ -8171,6 +8331,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.7,
+"seasonGames": 38,
 "starts": 32,
 "perf": -0.1216
 },
@@ -8221,6 +8382,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.9,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.1237
 },
@@ -8271,6 +8433,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.7,
+"seasonGames": 38,
 "starts": 29,
 "perf": -0.257
 },
@@ -8323,6 +8486,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.6,
+"seasonGames": 38,
 "starts": 28,
 "perf": 0.1982
 },
@@ -8375,6 +8539,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.6,
+"seasonGames": 38,
 "starts": 22,
 "perf": 0.396
 },
@@ -8425,6 +8590,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.8,
+"seasonGames": 38,
 "starts": 13,
 "perf": -0.4341
 },
@@ -8475,6 +8641,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.1,
+"seasonGames": 38,
 "starts": 19,
 "perf": -0.1038
 },
@@ -8527,6 +8694,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.4,
+"seasonGames": 38,
 "starts": 20,
 "perf": 0.402
 },
@@ -8579,6 +8747,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.4,
+"seasonGames": 38,
 "starts": 11,
 "perf": -0.671
 },
@@ -8629,6 +8798,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 17.6,
+"seasonGames": 38,
 "starts": 18,
 "perf": 1.0861
 },
@@ -8681,6 +8851,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.9,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.5868
 },
@@ -8731,6 +8902,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.0,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.7575
 },
@@ -8781,6 +8953,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.7,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.5033
 },
@@ -8831,6 +9004,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.6,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.7224
 },
@@ -8881,6 +9055,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.0,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.6118
 },
@@ -8933,6 +9108,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.4,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.1346
 },
@@ -8983,6 +9159,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.0,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.4519
 },
@@ -9033,6 +9210,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.5,
+"seasonGames": 38,
 "starts": 4,
 "perf": 0.2816
 },
@@ -9083,6 +9261,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.2,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1833
 },
@@ -9135,6 +9314,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.2,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.153
 },
@@ -9185,6 +9365,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.6,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0863
 },
@@ -9235,6 +9416,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.5,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0632
 },
@@ -9285,6 +9467,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.0,
+"seasonGames": 38,
 "starts": 37,
 "perf": 0.6497
 },
@@ -9335,6 +9518,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 34.1,
+"seasonGames": 38,
 "starts": 34,
 "perf": 0.2459
 },
@@ -9385,6 +9569,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.9,
+"seasonGames": 38,
 "starts": 34,
 "perf": -0.4735
 },
@@ -9437,6 +9622,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.0,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.9372
 },
@@ -9487,6 +9673,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.6,
+"seasonGames": 38,
 "starts": 28,
 "perf": -0.1141
 },
@@ -9537,6 +9724,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.0,
+"seasonGames": 38,
 "starts": 25,
 "perf": 1.0078
 },
@@ -9587,6 +9775,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.9,
+"seasonGames": 38,
 "starts": 27,
 "perf": -0.1782
 },
@@ -9639,6 +9828,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.4,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.0814
 },
@@ -9691,6 +9881,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.8,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.689
 },
@@ -9741,6 +9932,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.9,
+"seasonGames": 38,
 "starts": 17,
 "perf": -0.4835
 },
@@ -9791,6 +9983,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 20.0,
+"seasonGames": 38,
 "starts": 20,
 "perf": 0.3758
 },
@@ -9841,6 +10034,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.4,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.897
 },
@@ -9891,6 +10085,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.0,
+"seasonGames": 38,
 "starts": 11,
 "perf": -0.6278
 },
@@ -9943,6 +10138,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.7,
+"seasonGames": 38,
 "starts": 15,
 "perf": 0.0199
 },
@@ -9993,6 +10189,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.5,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.6172
 },
@@ -10043,6 +10240,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.8,
+"seasonGames": 38,
 "starts": 11,
 "perf": 0.1726
 },
@@ -10093,6 +10291,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.0,
+"seasonGames": 38,
 "starts": 12,
 "perf": 0.6441
 },
@@ -10145,6 +10344,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.8,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.1353
 },
@@ -10195,6 +10395,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.0,
+"seasonGames": 38,
 "starts": 10,
 "perf": -1.2822
 },
@@ -10247,6 +10448,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.2357
 },
@@ -10297,6 +10499,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.7,
+"seasonGames": 38,
 "starts": 6,
 "perf": 0.0299
 },
@@ -10347,6 +10550,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.3,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.4088
 },
@@ -10397,6 +10601,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.1,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.4524
 },
@@ -10449,6 +10654,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.8,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.1334
 },
@@ -10501,6 +10707,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.1,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0592
 },
@@ -10551,6 +10758,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.2074
 },
@@ -10603,6 +10811,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.3,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.029
 },
@@ -10655,6 +10864,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.2,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0177
 },
@@ -10705,6 +10915,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.4358
 },
@@ -10757,6 +10968,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0993
 },
@@ -10807,6 +11019,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.4,
+"seasonGames": 38,
 "starts": 36,
 "perf": 0.0584
 },
@@ -10857,6 +11070,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.7,
+"seasonGames": 38,
 "starts": 35,
 "perf": 0.0944
 },
@@ -10909,6 +11123,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.0,
+"seasonGames": 38,
 "starts": 34,
 "perf": -0.3767
 },
@@ -10961,6 +11176,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.0,
+"seasonGames": 38,
 "starts": 35,
 "perf": -0.1613
 },
@@ -11011,6 +11227,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.6,
+"seasonGames": 38,
 "starts": 33,
 "perf": -0.4501
 },
@@ -11061,6 +11278,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.1,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.207
 },
@@ -11111,6 +11329,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.0,
+"seasonGames": 38,
 "starts": 31,
 "perf": 0.3965
 },
@@ -11163,6 +11382,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.0,
+"seasonGames": 38,
 "starts": 22,
 "perf": -0.0922
 },
@@ -11213,6 +11433,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.2,
+"seasonGames": 38,
 "starts": 19,
 "perf": -0.3014
 },
@@ -11263,6 +11484,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.0,
+"seasonGames": 38,
 "starts": 22,
 "perf": -0.331
 },
@@ -11315,6 +11537,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.7,
+"seasonGames": 38,
 "starts": 20,
 "perf": -0.3413
 },
@@ -11365,6 +11588,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.0,
+"seasonGames": 38,
 "starts": 22,
 "perf": 0.7644
 },
@@ -11415,6 +11639,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.2,
+"seasonGames": 38,
 "starts": 14,
 "perf": -0.191
 },
@@ -11465,6 +11690,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.0,
+"seasonGames": 38,
 "starts": 16,
 "perf": 0.0946
 },
@@ -11517,6 +11743,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.9,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.1274
 },
@@ -11569,6 +11796,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.9,
+"seasonGames": 38,
 "starts": 12,
 "perf": -0.0999
 },
@@ -11621,6 +11849,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.4,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.3358
 },
@@ -11671,6 +11900,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.5,
+"seasonGames": 38,
 "starts": 9,
 "perf": -0.1654
 },
@@ -11721,6 +11951,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.0,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.2453
 },
@@ -11771,6 +12002,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.5,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.8157
 },
@@ -11821,6 +12053,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.0,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.9899
 },
@@ -11871,6 +12104,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.5,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.4738
 },
@@ -11923,6 +12157,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.5,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0153
 },
@@ -11973,6 +12208,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.8,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0548
 },
@@ -12023,6 +12259,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.1,
+"seasonGames": 38,
 "starts": 38,
 "perf": 1.1187
 },
@@ -12073,6 +12310,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 38.0,
+"seasonGames": 38,
 "starts": 38,
 "perf": 0.62
 },
@@ -12125,6 +12363,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.3,
+"seasonGames": 38,
 "starts": 36,
 "perf": 0.771
 },
@@ -12177,6 +12416,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.2,
+"seasonGames": 38,
 "starts": 37,
 "perf": 1.024
 },
@@ -12229,6 +12469,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 34.1,
+"seasonGames": 38,
 "starts": 34,
 "perf": 0.8186
 },
@@ -12279,6 +12520,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.0,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.783
 },
@@ -12329,6 +12571,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.3,
+"seasonGames": 38,
 "starts": 32,
 "perf": 1.2958
 },
@@ -12381,6 +12624,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 29.0,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.5478
 },
@@ -12431,6 +12675,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.4,
+"seasonGames": 38,
 "starts": 25,
 "perf": 0.8525
 },
@@ -12481,6 +12726,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.1,
+"seasonGames": 38,
 "starts": 22,
 "perf": 0.6831
 },
@@ -12533,6 +12779,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.6,
+"seasonGames": 38,
 "starts": 13,
 "perf": 0.4217
 },
@@ -12585,6 +12832,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.9,
+"seasonGames": 38,
 "starts": 18,
 "perf": 0.2384
 },
@@ -12635,6 +12883,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.9,
+"seasonGames": 38,
 "starts": 21,
 "perf": 0.5851
 },
@@ -12685,6 +12934,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.5,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.3681
 },
@@ -12735,6 +12985,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.2,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.5179
 },
@@ -12785,6 +13036,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.2,
+"seasonGames": 38,
 "starts": 5,
 "perf": -1.0168
 },
@@ -12837,6 +13089,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.9,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0823
 },
@@ -12887,6 +13140,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.6,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.3697
 },
@@ -12937,6 +13191,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.5,
+"seasonGames": 38,
 "starts": 1,
 "perf": 0.0028
 },
@@ -12987,6 +13242,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0138
 },
@@ -13037,6 +13293,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.8,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.3012
 },
@@ -13087,6 +13344,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.4,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1013
 },
@@ -13139,6 +13397,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.9,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0184
 },
@@ -13191,6 +13450,7 @@
 "awards": 0.6,
 "ucl": 0.99,
 "games": 33.2,
+"seasonGames": 38,
 "starts": 33,
 "perf": 1.5186
 },
@@ -13241,6 +13501,7 @@
 "awards": 0,
 "ucl": 1.0,
 "games": 35.9,
+"seasonGames": 38,
 "starts": 36,
 "perf": 1.1703
 },
@@ -13291,6 +13552,7 @@
 "awards": 0,
 "ucl": 0.9,
 "games": 36.0,
+"seasonGames": 38,
 "starts": 36,
 "perf": 0.6305
 },
@@ -13341,6 +13603,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.8,
+"seasonGames": 38,
 "starts": 25,
 "perf": 1.2457
 },
@@ -13391,6 +13654,7 @@
 "awards": 0,
 "ucl": 0.79,
 "games": 28.8,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.8204
 },
@@ -13441,6 +13705,7 @@
 "awards": 0,
 "ucl": 0.8211,
 "games": 26.5,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.4688
 },
@@ -13491,6 +13756,7 @@
 "awards": 0,
 "ucl": 0.9844,
 "games": 30.2,
+"seasonGames": 38,
 "starts": 30,
 "perf": 0.9212
 },
@@ -13541,6 +13807,7 @@
 "awards": 0,
 "ucl": 0.7744,
 "games": 27.5,
+"seasonGames": 38,
 "starts": 28,
 "perf": 1.1577
 },
@@ -13591,6 +13858,7 @@
 "awards": 0,
 "ucl": 0.8,
 "games": 25.4,
+"seasonGames": 38,
 "starts": 27,
 "perf": -0.5094
 },
@@ -13643,6 +13911,7 @@
 "awards": 0,
 "ucl": 0.8022,
 "games": 21.4,
+"seasonGames": 38,
 "starts": 24,
 "perf": 1.2996
 },
@@ -13695,6 +13964,7 @@
 "awards": 0,
 "ucl": 0.58,
 "games": 23.8,
+"seasonGames": 38,
 "starts": 25,
 "perf": 2.1153
 },
@@ -13747,6 +14017,7 @@
 "awards": 0,
 "ucl": 0.1078,
 "games": 15.8,
+"seasonGames": 38,
 "starts": 16,
 "perf": 0.4843
 },
@@ -13799,6 +14070,7 @@
 "awards": 0,
 "ucl": 0.2389,
 "games": 14.1,
+"seasonGames": 38,
 "starts": 15,
 "perf": 1.4476
 },
@@ -13851,6 +14123,7 @@
 "awards": 0,
 "ucl": 0.5844,
 "games": 20.1,
+"seasonGames": 38,
 "starts": 21,
 "perf": 0.6186
 },
@@ -13901,6 +14174,7 @@
 "awards": 0,
 "ucl": 0.2478,
 "games": 11.5,
+"seasonGames": 38,
 "starts": 10,
 "perf": 1.315
 },
@@ -13951,6 +14225,7 @@
 "awards": 0,
 "ucl": 0.1511,
 "games": 7.9,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.4016
 },
@@ -14001,6 +14276,7 @@
 "awards": 0,
 "ucl": 0.1367,
 "games": 15.2,
+"seasonGames": 38,
 "starts": 15,
 "perf": 0.0688
 },
@@ -14053,6 +14329,7 @@
 "awards": 0,
 "ucl": 0.2533,
 "games": 11.2,
+"seasonGames": 38,
 "starts": 11,
 "perf": 0.1643
 },
@@ -14103,6 +14380,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.4,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.6492
 },
@@ -14153,6 +14431,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.4,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.1118
 },
@@ -14205,6 +14484,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.1,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0905
 },
@@ -14255,6 +14535,7 @@
 "awards": 0,
 "ucl": 0.1,
 "games": 2.0,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.1725
 },
@@ -14305,6 +14586,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.2717
 },
@@ -14357,6 +14639,7 @@
 "awards": 1.0,
 "ucl": 0.0,
 "games": 33.8,
+"seasonGames": 38,
 "starts": 34,
 "perf": 0.5846
 },
@@ -14407,6 +14690,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.8,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.3264
 },
@@ -14459,6 +14743,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.2,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.2578
 },
@@ -14509,6 +14794,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 29.4,
+"seasonGames": 38,
 "starts": 29,
 "perf": -0.627
 },
@@ -14561,6 +14847,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.0,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.5442
 },
@@ -14611,6 +14898,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.0,
+"seasonGames": 38,
 "starts": 30,
 "perf": 0.0988
 },
@@ -14661,6 +14949,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.0,
+"seasonGames": 38,
 "starts": 26,
 "perf": -0.8249
 },
@@ -14711,6 +15000,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.3,
+"seasonGames": 38,
 "starts": 22,
 "perf": -0.3256
 },
@@ -14763,6 +15053,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.4,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.4481
 },
@@ -14815,6 +15106,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.1,
+"seasonGames": 38,
 "starts": 19,
 "perf": 0.0232
 },
@@ -14865,6 +15157,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.9,
+"seasonGames": 38,
 "starts": 20,
 "perf": -0.8379
 },
@@ -14915,6 +15208,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.4,
+"seasonGames": 38,
 "starts": 17,
 "perf": -0.1135
 },
@@ -14967,6 +15261,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.9,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.5132
 },
@@ -15017,6 +15312,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.9,
+"seasonGames": 38,
 "starts": 14,
 "perf": 0.3115
 },
@@ -15067,6 +15363,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.0,
+"seasonGames": 38,
 "starts": 13,
 "perf": 0.4717
 },
@@ -15117,6 +15414,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.0,
+"seasonGames": 38,
 "starts": 12,
 "perf": -0.6907
 },
@@ -15169,6 +15467,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.9,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.1552
 },
@@ -15219,6 +15518,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.0,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.4854
 },
@@ -15269,6 +15569,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.2,
+"seasonGames": 38,
 "starts": 9,
 "perf": 0.0236
 },
@@ -15319,6 +15620,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.7,
+"seasonGames": 38,
 "starts": 9,
 "perf": 0.1039
 },
@@ -15369,6 +15671,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.8,
+"seasonGames": 38,
 "starts": 7,
 "perf": 0.7875
 },
@@ -15419,6 +15722,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.2,
+"seasonGames": 38,
 "starts": 4,
 "perf": 0.3841
 },
@@ -15469,6 +15773,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.3,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.1464
 },
@@ -15519,6 +15824,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.0,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.1368
 },
@@ -15569,6 +15875,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.2,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.2703
 },
@@ -15619,6 +15926,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.1396
 },
@@ -15669,6 +15977,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0726
 },
@@ -15719,6 +16028,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0418
 },
@@ -15771,6 +16081,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.7,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.09
 },
@@ -15823,6 +16134,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1419
 },
@@ -15873,6 +16185,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.3,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.7963
 },
@@ -15923,6 +16236,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.0,
+"seasonGames": 38,
 "starts": 35,
 "perf": 0.6096
 },
@@ -15975,6 +16289,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.2,
+"seasonGames": 38,
 "starts": 32,
 "perf": 1.1848
 },
@@ -16027,6 +16342,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.4,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.6532
 },
@@ -16079,6 +16395,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.0,
+"seasonGames": 38,
 "starts": 23,
 "perf": 0.1651
 },
@@ -16129,6 +16446,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.9,
+"seasonGames": 38,
 "starts": 30,
 "perf": 1.558
 },
@@ -16179,6 +16497,7 @@
 "awards": 1.6,
 "ucl": 0.0,
 "games": 30.9,
+"seasonGames": 38,
 "starts": 31,
 "perf": 2.2899
 },
@@ -16229,6 +16548,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.9,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.2772
 },
@@ -16279,6 +16599,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.8,
+"seasonGames": 38,
 "starts": 27,
 "perf": 0.64
 },
@@ -16329,6 +16650,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.5,
+"seasonGames": 38,
 "starts": 22,
 "perf": 0.1761
 },
@@ -16381,6 +16703,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.6,
+"seasonGames": 38,
 "starts": 9,
 "perf": 0.509
 },
@@ -16431,6 +16754,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.2,
+"seasonGames": 38,
 "starts": 17,
 "perf": 0.261
 },
@@ -16483,6 +16807,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.2,
+"seasonGames": 38,
 "starts": 20,
 "perf": 0.257
 },
@@ -16533,6 +16858,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.0,
+"seasonGames": 38,
 "starts": 22,
 "perf": 1.0011
 },
@@ -16583,6 +16909,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.1,
+"seasonGames": 38,
 "starts": 18,
 "perf": 1.2677
 },
@@ -16633,6 +16960,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.1,
+"seasonGames": 38,
 "starts": 14,
 "perf": 0.8719
 },
@@ -16683,6 +17011,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.0,
+"seasonGames": 38,
 "starts": 16,
 "perf": -0.8174
 },
@@ -16733,6 +17062,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.0,
+"seasonGames": 38,
 "starts": 8,
 "perf": 0.0487
 },
@@ -16783,6 +17113,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.8,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0682
 },
@@ -16835,6 +17166,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.5,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0491
 },
@@ -16885,6 +17217,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.3,
+"seasonGames": 38,
 "starts": 36,
 "perf": -0.5231
 },
@@ -16935,6 +17268,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.2,
+"seasonGames": 38,
 "starts": 33,
 "perf": -0.2691
 },
@@ -16985,6 +17319,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.4,
+"seasonGames": 38,
 "starts": 33,
 "perf": -0.7466
 },
@@ -17035,6 +17370,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.0,
+"seasonGames": 38,
 "starts": 33,
 "perf": -0.6448
 },
@@ -17085,6 +17421,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.7,
+"seasonGames": 38,
 "starts": 33,
 "perf": -0.4799
 },
@@ -17135,6 +17472,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.5,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.1303
 },
@@ -17185,6 +17523,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 29.9,
+"seasonGames": 38,
 "starts": 30,
 "perf": -0.569
 },
@@ -17237,6 +17576,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.2,
+"seasonGames": 38,
 "starts": 29,
 "perf": -0.691
 },
@@ -17289,6 +17629,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.1,
+"seasonGames": 38,
 "starts": 24,
 "perf": -0.7893
 },
@@ -17341,6 +17682,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.6,
+"seasonGames": 38,
 "starts": 16,
 "perf": -0.8267
 },
@@ -17393,6 +17735,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.8,
+"seasonGames": 38,
 "starts": 18,
 "perf": -0.5871
 },
@@ -17443,6 +17786,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.5,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.3692
 },
@@ -17493,6 +17837,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.6,
+"seasonGames": 38,
 "starts": 16,
 "perf": -0.0396
 },
@@ -17545,6 +17890,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.1,
+"seasonGames": 38,
 "starts": 16,
 "perf": -0.4529
 },
@@ -17595,6 +17941,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.2,
+"seasonGames": 38,
 "starts": 14,
 "perf": -0.3181
 },
@@ -17645,6 +17992,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.1,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.3323
 },
@@ -17695,6 +18043,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.9,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.4186
 },
@@ -17745,6 +18094,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.0,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.3695
 },
@@ -17795,6 +18145,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.9,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.7528
 },
@@ -17845,6 +18196,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.6,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.1249
 },
@@ -17895,6 +18247,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.1,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.1845
 },
@@ -17947,6 +18300,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.9,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.2182
 },
@@ -17997,6 +18351,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.5,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1747
 },
@@ -18047,6 +18402,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.0,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.022
 },
@@ -18097,6 +18453,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.7,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.037
 },
@@ -18147,6 +18504,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.9,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1008
 },
@@ -18197,6 +18555,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.3,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0313
 },
@@ -18249,6 +18608,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0084
 },
@@ -18299,6 +18659,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": 0.2691
 },
@@ -18349,6 +18710,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.5,
+"seasonGames": 38,
 "starts": 38,
 "perf": 0.0815
 },
@@ -18399,6 +18761,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.8,
+"seasonGames": 38,
 "starts": 38,
 "perf": 0.3321
 },
@@ -18449,6 +18812,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.8,
+"seasonGames": 38,
 "starts": 37,
 "perf": 0.3159
 },
@@ -18499,6 +18863,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.1,
+"seasonGames": 38,
 "starts": 36,
 "perf": 0.2731
 },
@@ -18549,6 +18914,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.1,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.0552
 },
@@ -18601,6 +18967,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.3,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.8713
 },
@@ -18653,6 +19020,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 17.7,
+"seasonGames": 38,
 "starts": 15,
 "perf": 0.2273
 },
@@ -18703,6 +19071,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.4,
+"seasonGames": 38,
 "starts": 29,
 "perf": -0.643
 },
@@ -18753,6 +19122,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.3,
+"seasonGames": 38,
 "starts": 14,
 "perf": -0.1501
 },
@@ -18803,6 +19173,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.6,
+"seasonGames": 38,
 "starts": 27,
 "perf": -0.1232
 },
@@ -18853,6 +19224,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.1,
+"seasonGames": 38,
 "starts": 24,
 "perf": 0.1805
 },
@@ -18903,6 +19275,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.5,
+"seasonGames": 38,
 "starts": 20,
 "perf": 0.1273
 },
@@ -18955,6 +19328,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 17.1,
+"seasonGames": 38,
 "starts": 19,
 "perf": -0.3171
 },
@@ -19007,6 +19381,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.5,
+"seasonGames": 38,
 "starts": 15,
 "perf": 0.5845
 },
@@ -19059,6 +19434,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.5,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.3077
 },
@@ -19111,6 +19487,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.0,
+"seasonGames": 38,
 "starts": 9,
 "perf": 0.0549
 },
@@ -19163,6 +19540,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.8,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.3151
 },
@@ -19213,6 +19591,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.0,
+"seasonGames": 38,
 "starts": 10,
 "perf": 0.1563
 },
@@ -19263,6 +19642,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.7,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.2076
 },
@@ -19313,6 +19693,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.5,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.076
 },
@@ -19365,6 +19746,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.6,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0633
 },
@@ -19415,6 +19797,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.2,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0029
 },
@@ -19465,6 +19848,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0024
 },
@@ -19517,6 +19901,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.2,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0291
 },
@@ -19569,6 +19954,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.1,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.1323
 },
@@ -19619,6 +20005,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.0,
+"seasonGames": 38,
 "starts": 25,
 "perf": 0.1882
 },
@@ -19669,6 +20056,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.4,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.1076
 },
@@ -19721,6 +20109,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.3,
+"seasonGames": 38,
 "starts": 22,
 "perf": -0.0993
 },
@@ -19771,6 +20160,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.9,
+"seasonGames": 38,
 "starts": 28,
 "perf": -0.2571
 },
@@ -19821,6 +20211,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.4,
+"seasonGames": 38,
 "starts": 28,
 "perf": 0.0813
 },
@@ -19871,6 +20262,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.0,
+"seasonGames": 38,
 "starts": 24,
 "perf": 0.015
 },
@@ -19923,6 +20315,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.1,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.7006
 },
@@ -19975,6 +20368,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.9,
+"seasonGames": 38,
 "starts": 23,
 "perf": -0.1539
 },
@@ -20025,6 +20419,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.5,
+"seasonGames": 38,
 "starts": 24,
 "perf": -0.3092
 },
@@ -20075,6 +20470,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.4,
+"seasonGames": 38,
 "starts": 24,
 "perf": -0.0352
 },
@@ -20125,6 +20521,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.3,
+"seasonGames": 38,
 "starts": 23,
 "perf": -0.7721
 },
@@ -20175,6 +20572,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.5,
+"seasonGames": 38,
 "starts": 14,
 "perf": 0.7164
 },
@@ -20227,6 +20625,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.3,
+"seasonGames": 38,
 "starts": 14,
 "perf": -0.6112
 },
@@ -20277,6 +20676,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.0,
+"seasonGames": 38,
 "starts": 18,
 "perf": 1.1434
 },
@@ -20327,6 +20727,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.8,
+"seasonGames": 38,
 "starts": 13,
 "perf": -1.088
 },
@@ -20377,6 +20778,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.2,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.3428
 },
@@ -20427,6 +20829,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.8,
+"seasonGames": 38,
 "starts": 8,
 "perf": -1.086
 },
@@ -20477,6 +20880,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.9,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.0942
 },
@@ -20527,6 +20931,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.4,
+"seasonGames": 38,
 "starts": 9,
 "perf": -0.4737
 },
@@ -20579,6 +20984,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.1,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.2116
 },
@@ -20631,6 +21037,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.9,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.3354
 },
@@ -20681,6 +21088,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.9,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.3395
 },
@@ -20731,6 +21139,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.9,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.2102
 },
@@ -20783,6 +21192,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.9,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0994
 },
@@ -20833,6 +21243,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.2,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.7845
 },
@@ -20883,6 +21294,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.0,
+"seasonGames": 38,
 "starts": 3,
 "perf": 0.1797
 },
@@ -20933,6 +21345,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.9,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.0594
 },
@@ -20983,6 +21396,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.5,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0521
 },
@@ -21033,6 +21447,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.6,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0751
 },
@@ -21085,6 +21500,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0141
 },
@@ -21137,6 +21553,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.0,
+"seasonGames": 38,
 "starts": 38,
 "perf": -0.1651
 },
@@ -21187,6 +21604,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.2,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.2151
 },
@@ -21237,6 +21655,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.9,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.2384
 },
@@ -21289,6 +21708,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.0,
+"seasonGames": 38,
 "starts": 32,
 "perf": -0.2674
 },
@@ -21339,6 +21759,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.7,
+"seasonGames": 38,
 "starts": 32,
 "perf": -0.6755
 },
@@ -21389,6 +21810,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.0,
+"seasonGames": 38,
 "starts": 30,
 "perf": -0.0523
 },
@@ -21439,6 +21861,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.2,
+"seasonGames": 38,
 "starts": 28,
 "perf": -0.2368
 },
@@ -21489,6 +21912,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.7,
+"seasonGames": 38,
 "starts": 28,
 "perf": -0.7293
 },
@@ -21539,6 +21963,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.9,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.2258
 },
@@ -21589,6 +22014,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.0,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.5524
 },
@@ -21639,6 +22065,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.0,
+"seasonGames": 38,
 "starts": 23,
 "perf": -0.9353
 },
@@ -21691,6 +22118,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.2,
+"seasonGames": 38,
 "starts": 20,
 "perf": -0.3734
 },
@@ -21743,6 +22171,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.7,
+"seasonGames": 38,
 "starts": 12,
 "perf": -0.5529
 },
@@ -21795,6 +22224,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.2,
+"seasonGames": 38,
 "starts": 11,
 "perf": 0.0942
 },
@@ -21845,6 +22275,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.2,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.4284
 },
@@ -21895,6 +22326,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.4,
+"seasonGames": 38,
 "starts": 9,
 "perf": -0.7997
 },
@@ -21945,6 +22377,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.3,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.3289
 },
@@ -21995,6 +22428,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.6,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.429
 },
@@ -22045,6 +22479,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.6,
+"seasonGames": 38,
 "starts": 10,
 "perf": 0.3371
 },
@@ -22095,6 +22530,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.3,
+"seasonGames": 38,
 "starts": 10,
 "perf": 0.6963
 },
@@ -22147,6 +22583,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.0,
+"seasonGames": 38,
 "starts": 9,
 "perf": -0.3879
 },
@@ -22199,6 +22636,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.8,
+"seasonGames": 38,
 "starts": 7,
 "perf": 0.462
 },
@@ -22251,6 +22689,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.4,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.0697
 },
@@ -22303,6 +22742,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.8,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0932
 },
@@ -22353,6 +22793,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1818
 },
@@ -22403,6 +22844,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.8,
+"seasonGames": 38,
 "starts": 38,
 "perf": 0.1414
 },
@@ -22453,6 +22895,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.5,
+"seasonGames": 38,
 "starts": 37,
 "perf": 0.2465
 },
@@ -22503,6 +22946,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.1,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.1317
 },
@@ -22555,6 +22999,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.3,
+"seasonGames": 38,
 "starts": 32,
 "perf": -0.058
 },
@@ -22607,6 +23052,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.6,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.0658
 },
@@ -22659,6 +23105,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.4,
+"seasonGames": 38,
 "starts": 28,
 "perf": 0.2779
 },
@@ -22709,6 +23156,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 29.0,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.4764
 },
@@ -22759,6 +23207,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.9,
+"seasonGames": 38,
 "starts": 24,
 "perf": -0.2785
 },
@@ -22809,6 +23258,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.5,
+"seasonGames": 38,
 "starts": 23,
 "perf": -0.0772
 },
@@ -22861,6 +23311,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.7,
+"seasonGames": 38,
 "starts": 19,
 "perf": -0.0277
 },
@@ -22911,6 +23362,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.5,
+"seasonGames": 38,
 "starts": 21,
 "perf": -0.0312
 },
@@ -22961,6 +23413,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.4,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.6703
 },
@@ -23013,6 +23466,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.3,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.2034
 },
@@ -23065,6 +23519,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.7,
+"seasonGames": 38,
 "starts": 14,
 "perf": 0.3264
 },
@@ -23115,6 +23570,7 @@
 "awards": 0,
 "ucl": 0.6,
 "games": 15.9,
+"seasonGames": 38,
 "starts": 16,
 "perf": 0.0197
 },
@@ -23165,6 +23621,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.5,
+"seasonGames": 38,
 "starts": 13,
 "perf": -0.2923
 },
@@ -23215,6 +23672,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.6,
+"seasonGames": 38,
 "starts": 9,
 "perf": -0.6135
 },
@@ -23265,6 +23723,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.8,
+"seasonGames": 38,
 "starts": 12,
 "perf": 0.2317
 },
@@ -23315,6 +23774,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.1,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.5121
 },
@@ -23365,6 +23825,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.8,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.5103
 },
@@ -23415,6 +23876,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.8,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.8163
 },
@@ -23465,6 +23927,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.9,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.1148
 },
@@ -23515,6 +23978,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.9,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.1601
 },
@@ -23565,6 +24029,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.5,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.232
 },
@@ -23615,6 +24080,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.7,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.1708
 },
@@ -23665,6 +24131,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.2,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0404
 },
@@ -23715,6 +24182,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.0,
+"seasonGames": 38,
 "starts": 36,
 "perf": -0.1285
 },
@@ -23765,6 +24233,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 34.6,
+"seasonGames": 38,
 "starts": 35,
 "perf": -0.0469
 },
@@ -23817,6 +24286,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.2,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.0793
 },
@@ -23867,6 +24337,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.0,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.2654
 },
@@ -23919,6 +24390,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.7,
+"seasonGames": 38,
 "starts": 26,
 "perf": -0.2223
 },
@@ -23969,6 +24441,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.3,
+"seasonGames": 38,
 "starts": 26,
 "perf": -0.0619
 },
@@ -24021,6 +24494,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.2,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.2689
 },
@@ -24071,6 +24545,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.2,
+"seasonGames": 38,
 "starts": 22,
 "perf": -0.7828
 },
@@ -24121,6 +24596,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.2,
+"seasonGames": 38,
 "starts": 18,
 "perf": -0.5873
 },
@@ -24173,6 +24649,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.1,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.0121
 },
@@ -24225,6 +24702,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.9,
+"seasonGames": 38,
 "starts": 13,
 "perf": -0.4175
 },
@@ -24275,6 +24753,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 17.4,
+"seasonGames": 38,
 "starts": 17,
 "perf": -0.3437
 },
@@ -24325,6 +24804,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.4,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.0232
 },
@@ -24375,6 +24855,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.4,
+"seasonGames": 38,
 "starts": 11,
 "perf": -0.3759
 },
@@ -24427,6 +24908,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.7,
+"seasonGames": 38,
 "starts": 13,
 "perf": -0.6514
 },
@@ -24477,6 +24959,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.7,
+"seasonGames": 38,
 "starts": 14,
 "perf": 0.5069
 },
@@ -24527,6 +25010,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.0,
+"seasonGames": 38,
 "starts": 11,
 "perf": -0.7736
 },
@@ -24579,6 +25063,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.7,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.2677
 },
@@ -24629,6 +25114,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.0,
+"seasonGames": 38,
 "starts": 11,
 "perf": 0.2648
 },
@@ -24679,6 +25165,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.8,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.3626
 },
@@ -24729,6 +25216,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.1,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.3743
 },
@@ -24779,6 +25267,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.0,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.5984
 },
@@ -24831,6 +25320,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.4,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.2181
 },
@@ -24881,6 +25371,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.0,
+"seasonGames": 38,
 "starts": 7,
 "perf": 0.1512
 },
@@ -24933,6 +25424,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.0,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.0796
 },
@@ -24983,6 +25475,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.0,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.7269
 },
@@ -25033,6 +25526,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.2,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.1008
 },
@@ -25085,6 +25579,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.1,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.2265
 },
@@ -25135,6 +25630,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1323
 },
@@ -25185,6 +25681,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.0,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0013
 },
@@ -25235,6 +25732,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": 0.1314
 },
@@ -25287,6 +25785,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0072
 },
@@ -25337,6 +25836,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.7,
+"seasonGames": 38,
 "starts": 37,
 "perf": 0.2538
 },
@@ -25387,6 +25887,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.0,
+"seasonGames": 38,
 "starts": 36,
 "perf": 0.4495
 },
@@ -25437,6 +25938,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.2,
+"seasonGames": 38,
 "starts": 34,
 "perf": -0.112
 },
@@ -25487,6 +25989,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.0,
+"seasonGames": 38,
 "starts": 36,
 "perf": 0.3855
 },
@@ -25539,6 +26042,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.4,
+"seasonGames": 38,
 "starts": 33,
 "perf": 1.0268
 },
@@ -25591,6 +26095,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.3,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.4713
 },
@@ -25641,6 +26146,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.3,
+"seasonGames": 38,
 "starts": 28,
 "perf": -0.0268
 },
@@ -25691,6 +26197,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.3,
+"seasonGames": 38,
 "starts": 28,
 "perf": 0.5389
 },
@@ -25743,6 +26250,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.6,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.2827
 },
@@ -25793,6 +26301,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.0,
+"seasonGames": 38,
 "starts": 22,
 "perf": -0.3655
 },
@@ -25845,6 +26354,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.6,
+"seasonGames": 38,
 "starts": 27,
 "perf": 0.3501
 },
@@ -25895,6 +26405,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.2,
+"seasonGames": 38,
 "starts": 10,
 "perf": 0.2327
 },
@@ -25945,6 +26456,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.9,
+"seasonGames": 38,
 "starts": 19,
 "perf": 0.2535
 },
@@ -25997,6 +26509,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.6,
+"seasonGames": 38,
 "starts": 9,
 "perf": -0.1234
 },
@@ -26047,6 +26560,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.6,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.5015
 },
@@ -26097,6 +26611,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.5,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.179
 },
@@ -26147,6 +26662,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.5,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.4951
 },
@@ -26197,6 +26713,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.9,
+"seasonGames": 38,
 "starts": 9,
 "perf": 0.3428
 },
@@ -26247,6 +26764,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.0,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.2646
 },
@@ -26299,6 +26817,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.5,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.4092
 },
@@ -26349,6 +26868,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.9,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.6001
 },
@@ -26399,6 +26919,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.3,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.3315
 },
@@ -26449,6 +26970,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.3,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0309
 },
@@ -26499,6 +27021,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.2,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0271
 },

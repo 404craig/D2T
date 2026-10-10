@@ -1,0 +1,562 @@
+season,club_feed,feed_id,name,feed_pos,appearances,goals,goal_assist,clean_sheet,wins,draws,losses,mins_played,game_started,goals_conceded,saves,yellow_card,red_card,own_goals
+2013/14,Arsenal,3543,Wojciech Szczesny,G,37,0,0,16,23,7,7,3330,37,41,111,2,0,0
+2013/14,Arsenal,4481,Olivier Giroud,F,36,16,8,10,22,7,7,3081,36,37,0,4,0,0
+2013/14,Arsenal,4246,Per Mertesacker,D,35,2,0,16,22,7,6,3150,35,39,0,3,0,0
+2013/14,Arsenal,3311,Bacary Sagna,D,35,1,2,15,23,5,7,3060,34,39,0,6,0,0
+2013/14,Arsenal,4030,Laurent Koscielny,D,32,2,0,16,22,4,6,2741,32,25,0,1,1,0
+2013/14,Arsenal,2704,Mikel Arteta,M,31,2,0,10,19,7,5,2407,27,28,0,3,1,1
+2013/14,Arsenal,4477,Santi Cazorla,M,31,4,8,10,20,5,6,2597,30,28,0,2,0,0
+2013/14,Arsenal,3046,Kieran Gibbs,D,28,0,1,8,16,7,5,2055,24,17,0,2,1,0
+2013/14,Arsenal,2611,Mathieu Flamini,M,27,2,0,4,18,5,4,1604,18,22,0,8,1,1
+2013/14,Arsenal,3052,Tomás Rosicky,M,27,2,1,2,16,6,5,1574,17,18,0,8,0,0
+2013/14,Arsenal,4714,Mesut Özil,M,26,5,9,7,17,5,4,2149,25,23,0,0,0,0
+2013/14,Arsenal,3547,Jack Wilshere,M,24,3,4,5,16,3,5,1719,19,23,0,6,0,0
+2013/14,Arsenal,4472,Nacho Monreal,D,23,0,1,6,19,1,3,1178,13,17,0,2,0,0
+2013/14,Arsenal,3548,Aaron Ramsey,M,23,10,8,7,16,3,4,1764,20,17,0,3,0,0
+2013/14,Arsenal,4480,Lukas Podolski,F,20,8,2,3,12,3,5,1172,14,11,0,0,0,0
+2013/14,Arsenal,4248,Carl Jenkinson,D,14,1,2,3,10,2,2,800,7,9,0,1,0,0
+2013/14,Arsenal,4252,Alex Oxlade-Chamberlain,M,14,2,2,1,5,4,5,523,6,12,0,0,0,0
+2013/14,Arsenal,3796,Thomas Vermaelen,D,14,0,1,1,7,3,4,782,7,16,0,0,0,0
+2013/14,Arsenal,2839,Theo Walcott,F,13,5,4,2,9,2,2,858,9,13,0,1,0,0
+2013/14,Arsenal,2844,Nicklas Bendtner,F,9,2,0,0,6,1,2,156,1,2,0,0,0,0
+2013/14,Arsenal,4478,Serge Gnabry,F,9,1,0,0,6,1,2,464,5,6,0,0,0,0
+2013/14,Arsenal,4718,Yaya Sanogo,F,8,0,0,0,4,2,2,71,0,1,0,0,0,0
+2013/14,Arsenal,4908,Kim Källström,M,3,0,0,0,2,1,0,128,1,2,0,1,0,0
+2013/14,Arsenal,2840,Abou Diaby,M,1,0,0,0,1,0,0,16,0,0,0,0,0,0
+2013/14,Arsenal,4482,Chuba Akpom,F,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2013/14,Arsenal,3309,Lukasz Fabianski,G,1,0,0,1,1,0,0,90,1,0,5,0,0,0
+2013/14,Arsenal,4036,Ryo Miyaichi,F,1,0,0,0,1,0,0,17,0,0,0,0,0,0
+2013/14,Aston Villa,3558,Brad Guzan,G,38,0,1,9,10,8,20,3420,38,61,110,1,0,0
+2013/14,Aston Villa,3803,Andreas Weimann,F,37,5,4,4,9,8,20,2660,31,46,0,1,0,0
+2013/14,Aston Villa,4721,Leandro Bacuna,M,35,5,1,9,10,8,17,2594,28,47,0,6,0,0
+2013/14,Aston Villa,4489,Ashley Westwood,M,35,3,2,7,8,8,19,3081,35,56,0,7,0,0
+2013/14,Aston Villa,3799,Fabian Delph,M,34,3,2,7,9,7,18,3003,33,54,0,7,0,1
+2013/14,Aston Villa,4486,Ron Vlaar,D,32,0,1,8,10,7,15,2805,32,47,0,4,0,0
+2013/14,Aston Villa,4488,Karim El Ahmadi,M,31,2,1,4,9,7,15,2187,26,39,0,7,0,0
+2013/14,Aston Villa,2622,Gabriel Agbonlahor,F,30,4,5,4,7,7,16,2447,29,41,0,7,0,0
+2013/14,Aston Villa,3561,Nathan Baker,D,30,0,0,6,9,5,16,2478,29,45,0,6,0,1
+2013/14,Aston Villa,3562,Ciaran Clark,D,27,0,0,5,8,6,13,2202,23,38,0,8,0,0
+2013/14,Aston Villa,4492,Christian Benteke,F,26,10,2,5,8,5,13,2128,24,38,0,4,0,0
+2013/14,Aston Villa,4487,Matthew Lowton,D,23,0,3,2,6,2,15,1663,18,36,0,4,0,0
+2013/14,Aston Villa,3564,Marc Albrighton,M,19,0,4,2,4,4,11,966,9,19,0,4,0,0
+2013/14,Aston Villa,4720,Antonio Luna,D,17,1,0,4,5,4,8,1381,16,18,0,2,0,1
+2013/14,Aston Villa,4722,Aleksandar Tonev,M,17,0,0,1,2,4,11,596,6,8,0,0,0,0
+2013/14,Aston Villa,2886,Ryan Bertrand,D,16,0,0,2,3,3,10,1391,16,31,0,3,0,0
+2013/14,Aston Villa,4724,Libor Kozák,F,14,4,0,1,4,5,5,781,8,9,0,1,0,0
+2013/14,Aston Villa,4490,Yacouba Sylla,M,11,0,0,2,4,3,4,548,5,10,0,1,0,0
+2013/14,Aston Villa,4363,Grant Holt,F,10,1,0,0,2,2,6,376,3,6,0,1,0,0
+2013/14,Aston Villa,4493,Jordan Bowery,D,9,0,1,0,3,1,5,234,2,6,0,0,0,1
+2013/14,Aston Villa,3672,Joe Bennett,D,5,0,0,0,1,1,3,244,3,2,0,2,0,0
+2013/14,Aston Villa,4725,Callum Robinson,F,4,0,0,0,0,1,3,46,0,4,0,0,0,0
+2013/14,Aston Villa,4723,Nicklas Helenius,F,3,0,0,0,1,0,2,49,0,1,0,0,0,0
+2013/14,Aston Villa,4719,Jores Okore,D,3,0,0,0,0,0,3,167,2,3,0,0,0,0
+2013/14,Aston Villa,3327,Chris Herd,M,2,0,0,0,0,0,2,171,2,4,0,2,0,0
+2013/14,Aston Villa,4260,Jack Grealish,M,1,0,0,0,0,0,1,2,0,2,0,0,0,0
+2013/14,Cardiff City,3957,Steven Caulker,D,38,5,0,7,7,9,22,3420,38,74,0,1,0,0
+2013/14,Cardiff City,2945,Fraizer Campbell,F,37,6,2,4,6,9,22,2773,32,56,0,4,0,0
+2013/14,Cardiff City,4726,David Marshall,G,37,0,0,7,7,8,22,3330,37,73,153,2,0,0
+2013/14,Cardiff City,3333,Jordon Mutch,M,35,7,5,4,7,9,19,2264,26,53,0,5,0,0
+2013/14,Cardiff City,4733,Gary Medel,M,34,0,1,2,7,9,18,2873,34,55,0,6,0,0
+2013/14,Cardiff City,2171,Peter Whittingham,M,32,3,5,6,6,8,18,2661,30,55,0,3,0,0
+2013/14,Cardiff City,4728,Ben Turner,D,31,0,1,6,6,8,17,2720,30,53,0,5,0,0
+2013/14,Cardiff City,4734,Kim Bo-Kyung,M,28,1,0,1,6,6,16,1674,21,31,0,4,0,0
+2013/14,Cardiff City,4730,Kévin Théophile-Catherine,D,28,0,0,6,6,8,14,2356,26,51,0,3,0,0
+2013/14,Cardiff City,4736,Aron Gunnarsson,M,23,1,2,2,5,6,12,1539,17,33,0,1,0,0
+2013/14,Cardiff City,1869,Craig Bellamy,F,22,1,1,1,5,3,14,1256,13,27,0,3,0,0
+2013/14,Cardiff City,4732,Declan John,D,20,0,0,2,2,4,14,1487,16,31,0,0,0,0
+2013/14,Cardiff City,4737,Don Cowie,M,18,0,2,2,2,6,10,960,10,28,0,1,0,0
+2013/14,Cardiff City,2750,Andrew Taylor,D,18,0,0,4,4,5,9,1573,18,33,0,0,0,0
+2013/14,Cardiff City,4735,Craig Noone,M,17,1,1,2,3,3,11,1225,13,28,0,2,0,0
+2013/14,Cardiff City,4204,Peter Odemwingie,F,15,1,0,0,3,3,9,796,11,17,0,1,0,0
+2013/14,Cardiff City,8317,Mats Møller Dæhli,M,13,1,0,0,2,3,8,626,5,13,0,0,0,0
+2013/14,Cardiff City,3665,Fábio,D,13,0,0,0,3,2,8,1002,13,23,0,2,0,0
+2013/14,Cardiff City,4539,Wilfried Zaha,F,12,0,1,0,2,3,7,583,5,13,0,1,0,0
+2013/14,Cardiff City,2796,Kenwyne Jones,F,11,1,1,1,2,2,7,583,6,15,0,0,0,0
+2013/14,Cardiff City,4739,Andreas Cornelius,F,8,0,0,0,1,2,5,107,0,4,0,0,0,0
+2013/14,Cardiff City,4710,Nicky Maynard,F,8,0,0,0,2,2,4,121,0,4,0,0,0,0
+2013/14,Cardiff City,7749,Juan Cala,D,7,2,0,1,1,1,5,585,7,15,0,3,1,0
+2013/14,Cardiff City,3921,Magnus Eikrem,M,6,0,1,0,1,1,4,198,1,8,0,0,0,0
+2013/14,Cardiff City,4857,Kevin McNaughton,D,5,0,0,0,1,0,4,281,3,8,0,0,0,0
+2013/14,Cardiff City,2836,Matthew Connolly,D,3,0,0,1,1,1,1,270,3,4,0,2,0,0
+2013/14,Cardiff City,4740,Rudy Gestede,F,3,0,0,0,0,1,2,49,0,2,0,0,0,0
+2013/14,Cardiff City,2074,Mark Hudson,D,2,0,0,0,0,0,2,147,2,3,0,0,0,0
+2013/14,Cardiff City,8318,Jo Inge Berget,M,1,0,0,0,0,0,1,11,0,0,0,0,0,0
+2013/14,Cardiff City,4743,Rhys Healey,F,1,0,0,0,0,0,1,14,0,0,0,0,0,0
+2013/14,Cardiff City,10634,Tom James,D,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+2013/14,Cardiff City,2761,Joe Lewis,G,1,0,0,0,0,1,0,90,1,1,4,0,0,0
+2013/14,Chelsea,3360,Branislav Ivanovic,D,36,3,1,16,23,7,6,3180,36,27,0,8,0,0
+2013/14,Chelsea,4503,Eden Hazard,F,35,14,7,6,23,7,5,2895,32,24,0,2,0,0
+2013/14,Chelsea,2651,Petr Cech,G,34,0,0,16,23,6,5,3060,34,24,81,0,0,0
+2013/14,Chelsea,1353,John Terry,D,34,2,1,16,22,6,6,3060,34,25,0,3,0,1
+2013/14,Chelsea,4501,Oscar,M,33,8,2,3,22,6,5,2143,24,14,0,4,0,0
+2013/14,Chelsea,2620,Gary Cahill,D,30,1,1,16,20,6,4,2623,29,19,0,2,0,0
+2013/14,Chelsea,4103,Ramires,M,30,1,2,10,19,6,5,2607,29,24,0,8,1,0
+2013/14,Chelsea,4750,André Schürrle,M,30,8,2,2,20,4,6,1326,15,10,0,1,0,0
+2013/14,Chelsea,4496,César Azpilicueta,D,29,0,0,12,19,6,4,2325,26,19,0,1,0,1
+2013/14,Chelsea,3420,Fernando Torres,F,28,5,5,3,17,5,6,1571,16,13,0,3,1,0
+2013/14,Chelsea,800,Frank Lampard,M,26,6,3,7,16,6,4,1702,20,13,0,4,0,0
+2013/14,Chelsea,4748,Willian,F,25,4,2,3,17,5,3,1677,18,14,0,3,1,0
+2013/14,Chelsea,3102,John Obi Mikel,M,24,1,1,6,16,6,2,1064,11,8,0,3,0,0
+2013/14,Chelsea,4751,Samuel Eto'o,F,21,9,2,2,14,3,4,1306,16,10,0,1,0,0
+2013/14,Chelsea,4213,Demba Ba,F,19,5,1,1,12,3,4,661,5,7,0,0,0,0
+2013/14,Chelsea,4100,David Luiz,D,19,0,1,4,12,4,3,1358,15,10,0,6,0,0
+2013/14,Chelsea,1494,Ashley Cole,D,17,0,2,8,12,3,2,1386,15,8,0,1,0,0
+2013/14,Chelsea,3861,Nemanja Matic,M,17,0,4,8,11,3,3,1364,15,7,0,3,0,0
+2013/14,Chelsea,4287,Juan Mata,M,13,0,2,0,8,2,3,834,11,11,0,0,0,0
+2013/14,Chelsea,5178,Mohamed Salah,F,10,2,1,2,6,2,2,500,6,2,0,1,0,0
+2013/14,Chelsea,2890,Michael Essien,M,5,0,0,0,5,0,0,147,2,2,0,2,0,0
+2013/14,Chelsea,1218,Mark Schwarzer,G,4,0,0,2,2,1,1,360,4,3,15,0,0,0
+2013/14,Chelsea,4288,Kevin De Bruyne,M,3,0,1,0,2,1,0,132,2,0,0,1,0,0
+2013/14,Chelsea,4101,Tomás Kalas,D,2,0,0,1,2,0,0,180,2,1,0,0,0,0
+2013/14,Chelsea,4290,Romelu Lukaku,F,2,0,0,0,2,0,0,40,0,0,0,0,0,0
+2013/14,Chelsea,4747,Marco van Ginkel,M,2,0,0,0,2,0,0,11,0,0,0,0,0,0
+2013/14,Chelsea,4499,Nathan Aké,D,1,0,0,0,1,0,0,11,0,0,0,0,0,0
+2013/14,Chelsea,2886,Ryan Bertrand,D,1,0,0,0,1,0,0,64,1,1,0,0,0,0
+2013/14,Chelsea,5180,John Swift,M,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2013/14,Crystal Palace,4766,Mile Jedinak,M,38,1,1,12,13,6,19,3389,38,46,0,7,0,0
+2013/14,Crystal Palace,1911,Damien Delaney,D,37,1,1,12,13,6,18,3285,37,45,0,9,0,1
+2013/14,Crystal Palace,2664,Julian Speroni,G,37,0,0,12,13,5,19,3330,37,46,116,0,0,0
+2013/14,Crystal Palace,3929,Joel Ward,D,36,0,2,12,13,6,17,3240,36,44,0,3,0,0
+2013/14,Crystal Palace,4084,Jason Puncheon,M,34,7,2,5,13,5,16,2515,29,40,0,2,0,0
+2013/14,Crystal Palace,4039,Marouane Chamakh,F,32,5,2,1,10,5,17,2308,27,38,0,9,0,0
+2013/14,Crystal Palace,4763,Yannick Bolasie,F,29,0,4,2,10,6,13,2038,23,24,0,1,1,0
+2013/14,Crystal Palace,2530,Cameron Jerome,F,28,2,1,3,10,4,14,1755,20,18,0,4,0,0
+2013/14,Crystal Palace,3887,Kagisho Dikgacoi,M,26,0,0,6,9,6,11,1955,25,23,0,3,1,0
+2013/14,Crystal Palace,3251,Adrian Mariappa,D,24,1,1,8,9,4,11,2113,23,31,0,6,0,0
+2013/14,Crystal Palace,3009,Danny Gabbidon,D,23,1,0,6,8,2,13,1974,22,26,0,0,0,1
+2013/14,Crystal Palace,4771,Dwight Gayle,F,23,7,0,0,3,3,17,882,8,17,0,1,0,0
+2013/14,Crystal Palace,4755,Dean Moxey,D,20,0,1,4,7,1,12,1518,18,25,0,2,0,0
+2013/14,Crystal Palace,3565,Barry Bannan,M,15,1,1,2,4,1,10,1005,13,14,0,1,0,0
+2013/14,Crystal Palace,4754,Jonathan Parr,D,15,0,0,2,8,2,5,756,7,10,0,0,0,0
+2013/14,Crystal Palace,3807,Scott Dann,D,14,1,0,5,6,4,4,1260,14,15,0,4,0,0
+2013/14,Crystal Palace,6047,Joe Ledley,M,14,2,1,4,6,4,4,1249,14,15,0,1,0,0
+2013/14,Crystal Palace,4772,Glenn Murray,F,14,1,1,0,6,4,4,394,3,5,0,1,0,0
+2013/14,Crystal Palace,4765,Stuart O'Keefe,M,12,1,0,0,8,1,3,390,2,9,0,2,0,0
+2013/14,Crystal Palace,2008,Jerome Thomas,M,9,0,0,0,1,2,6,367,3,5,0,2,0,0
+2013/14,Crystal Palace,4767,Jonny Williams,M,9,0,0,0,3,1,5,179,0,2,0,0,0,0
+2013/14,Crystal Palace,4004,Adlène Guédioura,M,8,0,0,0,1,1,6,317,4,5,0,0,0,0
+2013/14,Crystal Palace,4137,Tom Ince,M,8,1,1,0,1,4,3,411,5,5,0,0,0,0
+2013/14,Crystal Palace,4762,José Campaña,M,6,0,1,0,1,0,5,311,4,6,0,0,0,0
+2013/14,Crystal Palace,3483,Jimmy Kébé,M,6,0,0,0,1,0,5,189,2,7,0,0,0,0
+2013/14,Crystal Palace,1768,Kevin Phillips,F,4,0,0,0,0,0,4,76,0,0,0,0,0,0
+2013/14,Crystal Palace,4366,Aaron Wilbraham,F,4,0,0,0,3,0,1,81,1,1,0,0,0,0
+2013/14,Crystal Palace,4764,Owen Garvan,M,2,0,0,0,0,0,2,93,1,1,0,0,0,0
+2013/14,Crystal Palace,4422,Stephen Dobbie,F,1,0,0,0,0,0,1,66,1,1,0,0,0,0
+2013/14,Crystal Palace,2569,Wayne Hennessey,G,1,0,0,0,0,1,0,90,1,2,3,0,0,0
+2013/14,Crystal Palace,2293,Paddy McCarthy,M,1,0,0,0,1,0,0,26,0,0,0,0,0,0
+2013/14,Everton,1887,Leon Osman,M,38,3,4,5,21,9,8,2172,27,23,0,4,0,0
+2013/14,Everton,2516,Tim Howard,G,37,0,1,15,20,9,8,3263,37,37,112,4,1,1
+2013/14,Everton,3600,Séamus Coleman,D,36,6,2,15,20,9,7,3229,36,34,0,3,0,1
+2013/14,Everton,4115,Ross Barkley,M,34,6,0,3,18,8,8,2286,25,33,0,5,0,0
+2013/14,Everton,3979,James McCarthy,M,34,1,3,11,20,6,8,2856,31,33,0,5,0,0
+2013/14,Everton,2125,Sylvain Distin,D,33,0,0,13,20,8,5,2925,33,29,0,3,0,0
+2013/14,Everton,3030,Leighton Baines,D,32,5,4,13,17,8,7,2839,32,34,0,6,0,0
+2013/14,Everton,1308,Gareth Barry,M,32,3,4,13,20,6,6,2849,32,29,0,10,0,0
+2013/14,Everton,4507,Kevin Mirallas,F,32,8,8,2,17,9,6,2330,28,26,0,6,0,0
+2013/14,Everton,4290,Romelu Lukaku,F,31,15,6,7,19,6,6,2562,29,30,0,1,0,0
+2013/14,Everton,4510,Steven Naismith,F,31,5,2,3,19,5,7,1412,13,22,0,1,0,0
+2013/14,Everton,3222,Phil Jagielka,D,26,0,1,10,12,8,6,2316,26,28,0,2,0,0
+2013/14,Everton,4777,Gerard Deulofeu,F,25,3,3,2,14,5,6,893,9,8,0,1,0,0
+2013/14,Everton,3388,Steven Pienaar,M,23,1,2,5,11,8,4,1633,19,12,0,2,0,0
+2013/14,Everton,4505,John Stones,D,21,0,0,6,14,3,4,1368,15,19,0,1,0,0
+2013/14,Everton,8636,Aiden McGeady,M,16,0,1,0,9,1,6,470,4,6,0,0,0,0
+2013/14,Everton,4296,Nikica Jelavic,F,9,0,1,0,3,5,1,378,5,3,0,0,0,0
+2013/14,Everton,4504,Bryan Oviedo,D,9,2,2,2,6,2,1,718,8,6,0,1,0,1
+2013/14,Everton,4218,Antolín Alcáraz,D,6,0,0,0,2,1,3,495,5,11,0,0,0,1
+2013/14,Everton,4701,Arouna Koné,F,5,0,0,0,1,3,1,79,0,0,0,0,0,0
+2013/14,Everton,3604,Marouane Fellaini,M,3,0,0,2,0,3,0,270,3,2,0,0,0,0
+2013/14,Everton,4696,Joel Robles,G,2,0,0,0,1,0,1,156,1,2,5,0,0,0
+2013/14,Everton,2905,Victor Anichebe,F,1,0,0,0,0,1,0,1,0,0,0,0,0,0
+2013/14,Everton,7628,Lacina Emeghara Traoré,F,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2013/14,Everton,3868,Luke Garbutt,D,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+2013/14,Everton,2942,Darron Gibson,M,1,0,0,0,0,0,1,27,0,1,0,0,0,0
+2013/14,Everton,3867,John Heitinga,D,1,0,0,0,1,0,0,21,0,0,0,0,0,0
+2013/14,Everton,1881,Tony Hibbert,D,1,0,0,0,1,0,0,3,0,0,0,0,0,0
+2013/14,Fulham,2007,Steve Sidwell,M,38,7,2,5,9,5,24,3233,36,80,0,5,0,0
+2013/14,Fulham,1982,Kieran Richardson,D,31,4,3,2,8,5,18,2381,28,52,0,5,0,0
+2013/14,Fulham,4514,Sascha Riether,D,31,0,2,4,9,4,18,2646,30,60,0,3,0,1
+2013/14,Fulham,4302,Pajtim Kasami,M,29,3,0,2,9,1,19,1805,20,47,0,5,0,0
+2013/14,Fulham,1518,Scott Parker,M,29,2,1,1,5,5,19,2318,27,60,0,7,0,0
+2013/14,Fulham,2098,Darren Bent,F,24,3,2,0,3,2,19,1239,11,38,0,0,0,0
+2013/14,Fulham,4781,Fernando Amorebieta,D,23,1,0,3,7,4,12,1846,20,43,0,5,1,1
+2013/14,Fulham,3394,Brede Hangeland,D,23,0,0,3,6,4,13,1906,23,41,0,0,0,0
+2013/14,Fulham,3408,Alexander Kacaniklic,M,23,1,0,1,4,2,17,1299,15,30,0,0,0,0
+2013/14,Fulham,4516,Ashkan Dejagah,M,22,5,2,1,5,3,14,1301,13,38,0,5,0,0
+2013/14,Fulham,3610,David Stockdale,G,21,0,0,3,7,3,11,1738,19,42,75,0,0,1
+2013/14,Fulham,2110,John Arne Riise,D,20,0,0,1,4,3,13,1486,17,47,0,2,0,0
+2013/14,Fulham,4779,Maarten Stekelenburg,G,19,0,0,1,3,2,14,1682,19,43,79,0,0,0
+2013/14,Fulham,3247,Dimitar Berbatov,F,18,4,1,2,5,1,12,1568,18,33,0,3,0,1
+2013/14,Fulham,1004,Damien Duff,M,15,0,3,2,6,1,8,695,9,12,0,1,0,0
+2013/14,Fulham,3867,John Heitinga,D,14,1,1,2,3,4,7,1229,14,32,0,3,0,0
+2013/14,Fulham,4515,Giorgos Karagounis,M,14,0,0,0,3,0,11,656,6,17,0,1,0,0
+2013/14,Fulham,4667,Lewis Holtby,M,13,1,3,0,3,3,7,923,11,21,0,2,0,0
+2013/14,Fulham,1230,Aaron Hughes,D,13,0,0,2,3,0,10,1064,11,26,0,2,0,1
+2013/14,Fulham,3780,Hugo Rodallega,F,13,2,2,1,4,4,5,623,6,15,0,0,0,0
+2013/14,Fulham,4308,Bryan Ruiz,M,12,1,3,1,2,1,9,773,8,15,0,0,0,0
+2013/14,Fulham,2412,Philippe Senderos,D,12,1,1,2,4,1,7,1027,12,23,0,3,0,0
+2013/14,Fulham,3241,Adel Taarabt,M,12,0,1,1,3,0,9,594,7,16,0,0,0,0
+2013/14,Fulham,8707,Dan Burn,D,9,0,0,0,1,2,6,605,6,18,0,0,0,0
+2013/14,Fulham,8709,William Kvist,M,8,0,0,1,2,1,5,592,7,17,0,1,0,0
+2013/14,Fulham,4125,Cauley Woodrow,F,6,1,0,1,2,1,3,411,5,10,0,0,0,0
+2013/14,Fulham,4780,Elsad Zverotic,D,6,0,0,0,0,1,5,405,5,16,0,0,0,0
+2013/14,Fulham,3121,Clint Dempsey,F,5,0,0,0,0,0,5,355,4,11,0,0,0,0
+2013/14,Fulham,4304,Mahamadou Diarra,M,4,0,0,0,2,1,1,338,4,6,0,1,0,0
+2013/14,Fulham,4783,Derek Boateng,M,3,0,0,0,2,0,1,155,2,1,0,2,0,0
+2013/14,Fulham,6077,Kostas Mitroglou,F,3,0,0,0,0,1,2,151,1,6,0,0,0,0
+2013/14,Fulham,4310,Muamer Tankovic,F,3,0,0,0,0,1,2,59,1,0,0,0,0,0
+2013/14,Fulham,3923,Ryan Tunnicliffe,M,3,0,1,0,0,2,1,166,2,4,0,0,0,0
+2013/14,Fulham,3116,Matthew Briggs,D,2,0,0,0,1,0,1,87,0,1,0,0,0,0
+2013/14,Fulham,8712,Moussa Dembélé,F,2,0,0,0,0,0,2,88,1,3,0,0,0,0
+2013/14,Fulham,8710,Patrick Roberts,M,2,0,0,0,0,0,2,44,0,4,0,1,0,0
+2013/14,Fulham,4336,Larnell Cole,M,1,0,0,0,0,1,0,10,0,0,0,0,0,0
+2013/14,Fulham,4518,Chris David,M,1,1,0,0,0,1,0,67,0,2,0,1,0,0
+2013/14,Fulham,4784,Mesca,M,1,0,0,0,0,0,1,18,0,1,0,0,0,0
+2013/14,Hull City,4183,Ahmed El Mohamady,D,38,2,2,8,10,7,21,3329,38,51,0,3,0,0
+2013/14,Hull City,2997,Curtis Davies,D,37,2,1,10,10,7,20,3326,37,50,0,6,0,0
+2013/14,Hull City,2991,Tom Huddlestone,M,36,3,2,7,9,7,20,3144,35,48,0,4,1,0
+2013/14,Hull City,3244,Jake Livermore,M,36,3,4,9,10,6,20,3054,34,46,0,6,0,0
+2013/14,Hull City,3524,Maynor Figueroa,D,32,0,0,8,8,6,18,2715,31,42,0,6,0,0
+2013/14,Hull City,3714,David Meyler,M,30,2,1,4,8,6,16,2135,27,38,0,8,0,0
+2013/14,Hull City,4788,George Boyd,F,29,2,2,2,8,5,16,1197,9,17,0,2,0,0
+2013/14,Hull City,2464,Liam Rosenior,D,29,1,2,6,10,4,15,1986,22,28,0,5,0,0
+2013/14,Hull City,4791,Yannick Sagbo,F,28,2,1,2,8,6,14,1498,16,23,0,2,1,0
+2013/14,Hull City,4785,Allan McGregor,G,26,0,0,7,7,5,14,2227,26,31,69,0,2,0
+2013/14,Hull City,2936,James Chester,D,24,1,0,5,6,5,13,1868,22,30,0,0,0,2
+2013/14,Hull City,3743,Robert Koren,M,22,2,0,1,7,3,12,1135,10,14,0,1,0,0
+2013/14,Hull City,2624,Alex Bruce,D,20,0,0,0,2,4,14,1594,19,29,0,2,0,0
+2013/14,Hull City,2531,Danny Graham,F,18,1,1,1,5,5,8,1003,12,16,0,1,0,0
+2013/14,Hull City,2862,Sone Aluko,F,17,1,3,0,6,3,8,935,10,12,0,1,0,0
+2013/14,Hull City,4158,Robert Brady,M,16,3,1,0,6,3,7,890,11,13,0,2,0,0
+2013/14,Hull City,4296,Nikica Jelavic,F,16,4,0,1,4,2,10,1318,16,23,0,3,0,0
+2013/14,Hull City,3206,Shane Long,F,15,4,1,0,4,2,9,1206,15,20,0,0,0,0
+2013/14,Hull City,3225,Stephen Quinn,M,15,0,0,0,3,2,10,503,4,10,0,0,0,0
+2013/14,Hull City,709,Steve Harper,G,13,0,0,3,3,2,8,1100,11,19,33,1,0,0
+2013/14,Hull City,4863,Matty Fryatt,F,10,2,0,0,1,1,8,219,0,6,0,0,0,0
+2013/14,Hull City,2738,Paul McShane,D,10,0,0,2,3,1,6,686,9,9,0,0,0,0
+2013/14,Hull City,2878,Abdoulaye Diagne-Faye,D,3,0,0,2,1,1,1,270,3,2,0,0,0,0
+2013/14,Hull City,4789,Gedo,M,2,0,0,0,0,0,2,30,0,1,0,0,0,0
+2013/14,Hull City,4794,Nick Proschwitz,F,2,0,0,0,1,0,1,23,0,0,0,0,0,0
+2013/14,Hull City,4786,Eldin Jakupovic,G,1,0,0,0,0,0,1,90,1,3,4,0,0,0
+2013/14,Hull City,4792,Aaron McLean,F,1,0,0,0,0,0,1,6,0,0,0,0,0,0
+2013/14,Liverpool,4179,Simon Mignolet,G,38,0,0,10,26,6,6,3420,38,50,107,0,0,0
+2013/14,Liverpool,3404,Martin Skrtel,D,36,7,1,8,24,6,6,3222,36,50,0,6,0,4
+2013/14,Liverpool,3712,Jordan Henderson,M,35,4,7,10,25,5,5,3128,35,42,0,4,1,0
+2013/14,Liverpool,1575,Steven Gerrard,M,34,13,13,5,24,6,4,2900,33,44,0,7,0,0
+2013/14,Liverpool,4525,Philippe Coutinho,M,33,5,7,3,23,5,5,2334,28,37,0,1,0,0
+2013/14,Liverpool,4316,Raheem Sterling,F,33,9,5,2,23,5,5,2218,24,31,0,3,0,0
+2013/14,Liverpool,4138,Luis Suárez,F,33,31,12,7,23,5,5,2964,33,47,0,6,0,0
+2013/14,Liverpool,2148,Glen Johnson,D,29,0,2,7,21,4,4,2521,29,38,0,3,0,1
+2013/14,Liverpool,3154,Daniel Sturridge,F,29,21,7,4,20,6,3,2275,26,31,0,2,0,0
+2013/14,Liverpool,3137,Lucas Leiva,M,27,0,0,5,17,4,6,1872,20,27,0,6,0,0
+2013/14,Liverpool,4413,Joe Allen,M,24,1,0,3,17,4,3,1438,15,21,0,4,0,0
+2013/14,Liverpool,4129,Jon Flanagan,D,23,1,1,4,17,3,3,1898,23,30,0,3,0,0
+2013/14,Liverpool,2916,Daniel Agger,D,20,2,1,8,17,1,2,1420,16,16,0,0,0,0
+2013/14,Liverpool,2002,Kolo Touré,D,20,0,2,3,12,4,4,1439,15,20,0,2,0,1
+2013/14,Liverpool,3983,Victor Moses,M,19,1,0,0,11,4,4,644,6,12,0,1,0,0
+2013/14,Liverpool,4796,Mamadou Sakho,D,18,1,0,1,10,3,5,1480,17,25,0,0,0,0
+2013/14,Liverpool,4797,Aly Cissokho,D,15,0,1,2,10,3,2,1089,12,16,0,2,0,0
+2013/14,Liverpool,4800,Iago Aspas,F,14,0,1,0,9,1,4,380,5,2,0,3,0,0
+2013/14,Liverpool,4799,Luis Alberto,M,9,0,1,0,6,1,2,135,0,3,0,0,0,0
+2013/14,Liverpool,3462,José Enrique,D,8,0,2,3,6,1,1,602,6,4,0,0,0,0
+2013/14,Liverpool,3644,Martin Kelly,D,5,0,0,0,4,1,0,107,0,2,0,0,0,0
+2013/14,Liverpool,4130,Andre Wisdom,D,2,0,0,0,1,1,0,81,1,2,0,1,0,0
+2013/14,Liverpool,4527,Jordon Ibe,F,1,0,0,0,1,0,0,14,0,0,0,0,0,0
+2013/14,Liverpool,9030,Brad Smith,D,1,0,0,0,0,0,1,30,0,0,0,0,0,0
+2013/14,Liverpool,4317,João Teixeira,M,1,0,0,0,1,0,0,8,0,0,0,0,0,0
+2013/14,Manchester City,4148,Yaya Touré,M,35,20,9,10,25,4,6,2927,35,31,0,4,0,0
+2013/14,Manchester City,3654,Pablo Zabaleta,D,35,1,6,15,24,5,6,3079,34,33,0,11,0,0
+2013/14,Manchester City,3546,Samir Nasri,M,34,7,7,5,25,4,5,2498,29,25,0,3,0,0
+2013/14,Manchester City,4804,Fernandinho,M,33,5,3,9,26,3,4,2608,29,30,0,8,0,0
+2013/14,Manchester City,4805,Álvaro Negredo,F,32,9,3,4,22,5,5,1725,21,19,0,1,0,0
+2013/14,Manchester City,4151,Edin Dzeko,F,31,16,1,4,22,4,5,1991,23,22,0,4,0,0
+2013/14,Manchester City,3143,Joe Hart,G,31,0,0,13,22,4,5,2790,31,30,71,1,0,0
+2013/14,Manchester City,2100,James Milner,M,31,1,4,4,22,5,4,1358,12,19,0,3,0,0
+2013/14,Manchester City,4141,Aleksandar Kolarov,D,30,1,7,8,22,4,4,1969,21,21,0,2,0,0
+2013/14,Manchester City,4803,Jesús Navas,D,30,4,7,5,20,4,6,1774,18,17,0,0,0,0
+2013/14,Manchester City,4534,Javi García,M,29,0,0,6,21,4,4,1527,14,20,0,7,0,0
+2013/14,Manchester City,3653,Vincent Kompany,D,28,4,1,8,21,4,3,2365,28,30,0,6,1,1
+2013/14,Manchester City,4802,Martín Demichelis,D,27,2,1,12,19,4,4,2430,27,25,0,6,0,0
+2013/14,Manchester City,4145,David Silva,M,27,7,9,5,21,2,4,2173,26,21,0,5,0,0
+2013/14,Manchester City,4328,Sergio Agüero,F,23,17,6,2,16,3,4,1539,20,13,0,4,0,0
+2013/14,Manchester City,2413,Gaël Clichy,D,20,0,0,8,15,2,3,1660,18,20,0,1,0,0
+2013/14,Manchester City,4806,Stevan Jovetic,F,13,3,1,0,8,3,2,360,2,4,0,1,0,0
+2013/14,Manchester City,4532,Matija Nastasic,D,13,0,0,4,9,1,3,1027,11,10,0,4,0,0
+2013/14,Manchester City,2574,Joleon Lescott,D,10,0,0,4,8,0,2,784,8,6,0,0,0,0
+2013/14,Manchester City,4319,Costel Pantilimon,G,7,0,0,3,5,1,1,630,7,7,17,1,0,1
+2013/14,Manchester City,3389,Jack Rodwell,M,5,0,0,1,3,2,0,109,1,2,0,0,0,0
+2013/14,Manchester City,2925,Micah Richards,D,2,0,0,0,1,0,1,161,2,2,0,0,0,0
+2013/14,Manchester City,3908,Dedryck Boyata,D,1,0,0,0,1,0,0,55,1,0,0,0,0,0
+2013/14,Manchester United,4330,David de Gea,G,37,0,0,12,18,7,12,3330,37,43,99,1,0,0
+2013/14,Manchester United,2934,Patrice Evra,D,33,1,3,10,16,7,10,2884,33,36,0,2,0,0
+2013/14,Manchester United,1634,Michael Carrick,M,29,1,0,10,14,5,10,2413,26,30,0,5,0,1
+2013/14,Manchester United,2064,Wayne Rooney,F,29,17,10,7,15,6,8,2448,27,34,0,8,0,0
+2013/14,Manchester United,3285,Antonio Valencia,D,29,2,3,7,15,6,8,1940,20,22,0,6,1,0
+2013/14,Manchester United,4541,Adnan Januzaj,M,27,4,3,1,15,5,7,1640,15,18,0,7,0,0
+2013/14,Manchester United,3820,Phil Jones,D,26,1,2,8,14,3,9,2174,26,27,0,5,0,0
+2013/14,Manchester United,3613,Chris Smalling,D,25,1,0,8,13,6,6,1938,21,25,0,2,0,0
+2013/14,Manchester United,2935,Nemanja Vidic,D,25,0,0,7,12,5,8,2082,23,25,0,5,2,0
+2013/14,Manchester United,3452,Danny Welbeck,F,25,9,1,1,10,5,10,1459,15,22,0,2,0,0
+2013/14,Manchester United,4161,Chicharito,F,24,4,3,1,10,4,10,839,6,9,0,2,0,0
+2013/14,Manchester United,3448,Tom Cleverley,M,22,1,0,4,11,4,7,1579,18,19,0,3,0,0
+2013/14,Manchester United,2616,Robin van Persie,F,21,12,3,2,10,5,6,1584,18,17,0,2,0,0
+2013/14,Manchester United,3062,Ashley Young,D,20,2,1,3,10,4,6,1030,13,16,0,4,0,0
+2013/14,Manchester United,3664,Rafael,D,19,0,1,4,10,3,6,1418,18,19,0,5,0,0
+2013/14,Manchester United,4538,Shinji Kagawa,M,18,0,3,3,11,2,5,1170,14,13,0,0,0,0
+2013/14,Manchester United,3156,Jonny Evans,D,17,0,0,4,8,3,6,1377,17,20,0,0,0,0
+2013/14,Manchester United,3604,Marouane Fellaini,M,16,0,1,2,9,2,5,1106,12,14,0,2,0,0
+2013/14,Manchester United,4287,Juan Mata,M,15,6,4,3,7,3,5,1230,14,15,0,0,0,0
+2013/14,Manchester United,1111,Rio Ferdinand,D,14,0,0,4,4,4,6,1128,12,15,0,0,0,0
+2013/14,Manchester United,1943,Darren Fletcher,M,12,0,0,3,8,2,2,779,9,8,0,0,0,0
+2013/14,Manchester United,335,Ryan Giggs,M,12,0,0,0,7,3,2,503,6,4,0,3,0,0
+2013/14,Manchester United,3447,Nani,F,11,0,0,0,3,2,6,560,7,10,0,0,0,0
+2013/14,Manchester United,4537,Alexander Büttner,D,8,0,0,1,6,0,2,497,5,7,0,2,0,0
+2013/14,Manchester United,3446,Anderson,M,4,0,0,0,2,0,2,155,2,2,0,0,0,0
+2013/14,Manchester United,4539,Wilfried Zaha,F,2,0,0,0,1,0,1,28,0,0,0,0,0,0
+2013/14,Manchester United,5561,Tom Lawrence,M,1,0,0,0,1,0,0,70,1,1,0,0,0,0
+2013/14,Manchester United,4154,Anders Lindegaard,G,1,0,0,1,1,0,0,90,1,0,4,0,0,0
+2013/14,Manchester United,3665,Fábio,D,1,0,0,1,1,0,0,90,1,0,0,0,0,0
+2013/14,Manchester United,5562,James Wilson,F,1,2,0,0,1,0,0,64,1,1,0,0,0,0
+2013/14,Newcastle United,3169,Tim Krul,G,36,0,0,10,15,4,17,3240,36,51,101,0,0,0
+2013/14,Newcastle United,4554,Yoan Gouffran,M,35,6,3,2,15,3,17,2620,31,45,0,3,0,0
+2013/14,Newcastle United,4549,Moussa Sissoko,M,35,3,6,9,15,4,16,3034,35,49,0,8,0,0
+2013/14,Newcastle United,4550,Vurnon Anita,M,34,1,1,6,14,4,16,2461,28,45,0,2,0,0
+2013/14,Newcastle United,4172,Cheick Tioté,M,33,0,1,6,13,3,17,2764,31,47,0,10,0,0
+2013/14,Newcastle United,4024,Mike Williamson,D,33,0,0,8,13,3,17,2912,32,47,0,0,0,0
+2013/14,Newcastle United,4546,Mathieu Debuchy,D,29,1,3,8,12,4,13,2494,28,40,0,8,1,1
+2013/14,Newcastle United,4171,Hatem Ben Arfa,M,27,3,3,2,9,4,14,1303,13,30,0,1,0,0
+2013/14,Newcastle United,3680,Fabricio Coloccini,D,27,0,0,7,11,2,14,2405,27,40,0,2,0,0
+2013/14,Newcastle United,4339,Davide Santon,D,27,0,0,7,11,4,12,2223,26,35,0,1,0,0
+2013/14,Newcastle United,1962,Shola Ameobi,F,26,2,0,2,11,3,12,1284,14,13,0,1,1,0
+2013/14,Newcastle United,4572,Loïc Rémy,F,26,14,3,4,14,3,9,2103,24,28,0,2,1,0
+2013/14,Newcastle United,4346,Papiss Cissé,F,24,2,2,2,10,2,12,1383,15,29,0,0,0,0
+2013/14,Newcastle United,4544,Mapou Yanga-Mbiwa,D,23,0,0,5,9,2,12,1497,17,22,0,5,1,0
+2013/14,Newcastle United,4341,Yohan Cabaye,M,19,7,2,2,11,1,7,1509,17,18,0,5,0,0
+2013/14,Newcastle United,4340,Paul Dummett,D,18,1,0,2,5,1,12,1139,11,24,0,1,1,0
+2013/14,Newcastle United,9198,Luuk de Jong,F,12,0,1,0,3,0,9,671,8,15,0,0,0,0
+2013/14,Newcastle United,4545,Massadio Haïdara,D,11,0,0,0,2,2,7,426,3,14,0,2,0,0
+2013/14,Newcastle United,4176,Sammy Ameobi,F,10,0,0,0,1,3,6,372,4,8,0,1,0,0
+2013/14,Newcastle United,2323,Steven Taylor,D,10,1,0,1,2,1,7,730,9,18,0,0,1,0
+2013/14,Newcastle United,4342,Sylvain Marveaux,M,9,0,0,0,2,1,6,224,2,5,0,0,0,0
+2013/14,Newcastle United,3390,Dan Gosling,M,8,0,0,0,3,0,5,361,4,9,0,1,0,0
+2013/14,Newcastle United,9199,Adam Armstrong,F,4,0,0,0,0,0,4,30,0,1,0,0,0,0
+2013/14,Newcastle United,3919,Gabriel Obertan,M,3,0,0,0,2,0,1,33,0,1,0,0,0,0
+2013/14,Newcastle United,2214,Robert Elliot,G,2,0,0,0,0,0,2,180,2,8,7,0,0,0
+2013/14,Newcastle United,3683,Jonás Gutiérrez,M,2,0,0,0,1,0,1,63,1,2,0,0,0,0
+2013/14,Norwich City,2896,John Ruddy,G,38,0,0,12,8,9,21,3420,38,62,125,2,0,0
+2013/14,Norwich City,2867,Martin Olsson,D,34,0,1,11,7,9,18,2965,33,56,0,2,0,0
+2013/14,Norwich City,3811,Nathan Redmond,M,34,1,3,5,6,9,19,2158,23,38,0,2,0,0
+2013/14,Norwich City,4812,Gary Hooper,F,32,6,2,2,6,7,19,2018,22,37,0,0,0,0
+2013/14,Norwich City,4353,Bradley Johnson,M,32,3,1,7,7,8,17,2461,28,48,0,6,1,1
+2013/14,Norwich City,4349,Russell Martin,D,31,0,0,9,7,7,17,2616,29,50,0,2,0,1
+2013/14,Norwich City,4558,Robert Snodgrass,M,30,6,2,9,6,6,18,2572,29,41,0,6,0,0
+2013/14,Norwich City,3583,Johan Elmander,F,29,1,4,0,6,7,16,1487,16,25,0,3,0,0
+2013/14,Norwich City,4810,Leroy Fer,M,29,3,1,10,7,6,16,2465,28,41,0,5,1,0
+2013/14,Norwich City,3681,Sebastien Bassong,D,27,0,0,10,6,7,14,2378,27,42,0,1,0,1
+2013/14,Norwich City,4355,Jonny Howson,M,27,2,0,5,6,5,16,2084,23,45,0,3,0,0
+2013/14,Norwich City,4811,Ricky van Wolfswinkel,F,25,1,1,1,5,6,14,1394,16,19,0,1,0,0
+2013/14,Norwich City,2217,Michael Turner,D,22,0,0,6,4,6,12,1944,22,37,0,7,0,0
+2013/14,Norwich City,4560,Alexander Tettey,M,21,1,0,6,3,6,12,1488,17,23,0,7,0,0
+2013/14,Norwich City,4557,Steven Whittaker,D,20,1,1,3,4,6,10,1421,16,29,0,3,0,0
+2013/14,Norwich City,4351,Ryan Bennett,D,16,1,0,5,4,3,9,1348,14,22,0,6,0,0
+2013/14,Norwich City,4357,Wes Hoolahan,M,16,1,1,0,3,3,10,800,10,17,0,1,0,0
+2013/14,Norwich City,4356,Anthony Pilkington,M,15,1,1,0,3,3,9,831,10,19,0,2,0,0
+2013/14,Norwich City,4561,Josh Murphy,M,9,0,0,0,1,1,7,131,0,5,0,1,0,0
+2013/14,Norwich City,2239,Joseph Yobo,D,8,0,0,3,2,2,4,720,8,12,0,0,0,0
+2013/14,Norwich City,3427,Javier Garrido,D,6,0,0,1,1,1,4,516,6,8,0,2,0,0
+2013/14,Norwich City,4562,Luciano Becchio,F,5,0,0,0,3,1,1,54,0,0,0,0,0,0
+2013/14,Norwich City,3683,Jonás Gutiérrez,M,4,0,0,0,1,0,3,197,2,3,0,0,0,0
+2013/14,Norwich City,4029,Elliott Bennett,M,2,0,0,0,0,1,1,104,1,2,0,0,0,0
+2013/14,Norwich City,4865,Jamar Loza,F,1,0,0,0,0,0,1,32,0,1,0,0,0,0
+2013/14,Southampton,4618,Adam Lallana,M,38,9,6,4,15,11,12,3100,37,41,0,3,0,0
+2013/14,Southampton,4627,Rickie Lambert,F,37,13,10,7,15,10,12,2816,31,37,0,2,0,0
+2013/14,Southampton,4606,José Fonte,D,36,3,0,15,15,10,11,3181,35,41,0,7,0,0
+2013/14,Southampton,4608,Luke Shaw,D,35,0,1,13,14,11,10,2992,35,38,0,4,0,0
+2013/14,Southampton,2423,Steven Davis,M,34,2,7,5,14,8,12,2497,28,35,0,3,0,0
+2013/14,Southampton,4617,James Ward-Prowse,M,34,0,2,1,14,10,10,1601,16,23,0,3,0,0
+2013/14,Southampton,3851,Jay Rodriguez,F,33,15,3,4,13,9,11,2567,30,39,0,2,0,0
+2013/14,Southampton,4615,Morgan Schneiderlin,M,33,2,1,13,14,10,9,2766,31,35,0,8,0,0
+2013/14,Southampton,4813,Dejan Lovren,D,31,2,1,12,12,9,10,2788,31,37,0,7,0,0
+2013/14,Southampton,4601,Artur Boruc,G,29,0,1,14,14,9,6,2578,29,26,67,0,0,0
+2013/14,Southampton,2889,Jack Cork,D,28,0,1,4,12,7,9,1736,21,26,0,5,0,0
+2013/14,Southampton,4604,Nathaniel Clyne,D,25,0,4,10,11,7,7,1861,20,18,0,3,0,0
+2013/14,Southampton,4816,Victor Wanyama,M,23,0,0,8,11,6,6,1659,19,14,0,7,0,0
+2013/14,Southampton,4620,Calum Chambers,D,22,0,0,4,5,8,9,1641,18,29,0,0,0,0
+2013/14,Southampton,9650,Sam Gallagher,F,18,1,0,0,7,4,7,383,3,5,0,0,0,0
+2013/14,Southampton,4616,Gastón Ramírez,M,18,1,3,0,6,4,8,511,3,10,0,2,0,0
+2013/14,Southampton,4819,Daniel Osvaldo,F,13,3,0,3,4,5,4,855,9,10,0,3,0,0
+2013/14,Southampton,4619,Guly do Prado,M,9,0,0,0,6,2,1,76,0,2,0,0,0,0
+2013/14,Southampton,4600,Paulo Gazzaniga,G,8,0,0,1,1,2,5,662,7,15,14,0,0,0
+2013/14,Southampton,4605,Maya Yoshida,D,8,1,0,3,3,3,2,632,7,10,0,0,0,0
+2013/14,Southampton,4818,Harrison Reed,M,4,0,0,0,2,2,0,10,0,0,0,0,0,0
+2013/14,Southampton,2701,Daniel Fox,D,3,0,1,1,1,0,2,258,3,4,0,0,0,0
+2013/14,Southampton,4610,Jos Hooiveld,D,3,0,0,0,0,1,2,270,3,6,0,1,0,1
+2013/14,Southampton,2971,Kelvin Davis,G,2,0,0,0,0,0,2,180,2,5,4,0,0,0
+2013/14,Stoke City,4636,Geoff Cameron,D,37,2,1,8,13,10,14,3285,37,50,0,7,0,0
+2013/14,Stoke City,3158,Ryan Shawcross,D,37,1,0,9,12,11,14,3292,37,51,0,5,1,1
+2013/14,Stoke City,3821,Steven Nzonzi,M,36,2,1,9,12,11,13,3041,34,45,0,4,1,0
+2013/14,Stoke City,4821,Erik Pieters,D,36,1,2,7,11,11,14,2902,34,46,0,5,0,0
+2013/14,Stoke City,1629,Peter Crouch,F,34,8,5,5,11,10,13,2643,30,43,0,7,0,0
+2013/14,Stoke City,3471,Marc Wilson,M,33,0,0,7,12,9,12,2691,30,34,0,6,1,0
+2013/14,Stoke City,2537,Asmir Begovic,G,32,1,0,9,12,10,10,2880,32,36,104,1,0,0
+2013/14,Stoke City,2047,Jonathan Walters,F,32,5,2,4,10,9,13,2240,27,42,0,8,1,0
+2013/14,Stoke City,2299,Glenn Whelan,M,32,0,1,3,13,8,11,2361,28,35,0,4,1,0
+2013/14,Stoke City,4081,Charlie Adam,M,31,7,4,1,11,8,12,1759,20,33,0,6,0,0
+2013/14,Stoke City,4823,Marko Arnautovic,F,30,4,7,3,11,9,10,2253,27,26,0,3,0,0
+2013/14,Stoke City,2928,Stephen Ireland,M,25,2,2,3,8,8,9,1388,14,14,0,3,0,0
+2013/14,Stoke City,4526,Oussama Assaidi,M,19,4,0,3,4,8,7,1111,12,15,0,1,0,0
+2013/14,Stoke City,3527,Wilson Palacios,M,16,0,0,0,5,5,6,514,5,11,0,3,0,0
+2013/14,Stoke City,4204,Peter Odemwingie,F,15,5,1,1,7,4,4,1294,15,15,0,3,0,0
+2013/14,Stoke City,4822,Muniesa,D,13,0,0,0,5,4,4,827,7,13,0,0,0,0
+2013/14,Stoke City,2053,Robert Huth,D,12,0,1,3,3,4,5,1067,12,14,0,4,0,0
+2013/14,Stoke City,1772,Matthew Etherington,M,11,0,0,0,5,3,3,420,5,6,0,0,0,0
+2013/14,Stoke City,1495,Jermaine Pennant,M,8,1,0,0,3,1,4,178,0,2,0,1,0,0
+2013/14,Stoke City,2796,Kenwyne Jones,F,7,0,0,1,1,2,4,381,4,5,0,0,0,0
+2013/14,Stoke City,4153,John Guidetti,F,6,0,0,0,1,3,2,60,0,0,0,0,0,0
+2013/14,Stoke City,3702,Andy Wilkinson,D,5,0,0,1,1,1,3,274,2,9,0,1,0,0
+2013/14,Stoke City,1751,Thomas Sørensen,G,4,0,0,0,1,1,2,315,4,9,11,0,0,0
+2013/14,Stoke City,4634,Jack Butland,G,3,0,0,0,0,1,2,225,2,7,12,0,0,0
+2013/14,Stoke City,2530,Cameron Jerome,F,1,0,0,0,1,0,0,4,0,0,0,0,0,0
+2013/14,Stoke City,4637,Brek Shea,D,1,0,0,0,0,0,1,31,0,1,0,0,0,0
+2013/14,Sunderland,2274,Adam Johnson,M,36,8,5,0,9,7,20,2445,28,46,0,2,0,0
+2013/14,Sunderland,3713,Jack Colback,M,33,3,2,5,10,5,18,2425,28,41,0,6,0,0
+2013/14,Sunderland,1717,John O'Shea,D,33,1,0,10,9,7,17,2922,33,47,0,2,1,1
+2013/14,Sunderland,3863,Fabio Borini,F,32,7,2,7,10,7,15,2143,25,33,0,6,0,0
+2013/14,Sunderland,3897,Jozy Altidore,F,31,1,1,1,9,6,16,1776,19,33,0,3,0,0
+2013/14,Sunderland,2613,Sebastian Larsson,M,31,1,3,6,10,8,13,2217,24,31,0,6,0,0
+2013/14,Sunderland,2834,Vito Mannone,G,29,0,0,11,9,7,13,2567,28,38,131,0,0,0
+2013/14,Sunderland,4656,Ki Sung-Yueng,M,27,3,1,8,6,6,15,2185,25,41,0,3,0,0
+2013/14,Sunderland,2517,Phil Bardsley,D,26,2,0,6,6,6,14,2248,26,41,0,9,0,2
+2013/14,Sunderland,1211,Wes Brown,D,25,0,1,9,8,6,11,2064,24,28,0,2,3,1
+2013/14,Sunderland,2949,Lee Cattermole,M,24,1,0,5,7,5,12,1757,21,28,0,6,1,0
+2013/14,Sunderland,4830,Emanuele Giaccherini,M,24,4,4,2,6,6,12,1355,16,21,0,4,0,0
+2013/14,Sunderland,4825,Ondrej Celustka,D,21,0,0,4,6,4,11,1331,14,22,0,1,0,0
+2013/14,Sunderland,3850,Steven Fletcher,F,20,3,0,1,5,6,9,1223,13,20,0,1,0,1
+2013/14,Sunderland,2847,Craig Gardner,M,18,2,2,0,4,5,9,765,7,18,0,5,0,0
+2013/14,Sunderland,4093,Marcos Alonso,D,16,0,1,6,7,3,6,1439,16,22,0,4,1,0
+2013/14,Sunderland,4396,Connor Wickham,F,15,5,1,1,4,2,9,848,10,15,0,1,0,0
+2013/14,Sunderland,3364,Liam Bridcutt,M,12,0,0,2,4,1,7,847,9,20,0,4,0,0
+2013/14,Sunderland,9793,Santiago Vergini,D,11,0,0,3,4,1,6,978,10,21,0,2,0,0
+2013/14,Sunderland,2507,Keiren Westwood,G,10,0,0,0,1,1,8,853,10,22,29,0,0,0
+2013/14,Sunderland,4827,Valentin Roberge,D,9,0,1,1,1,2,6,668,7,14,0,1,0,0
+2013/14,Sunderland,4826,Modibo Diakité,D,7,0,0,1,1,2,4,630,7,13,0,0,0,0
+2013/14,Sunderland,3646,Andrea Dossena,D,7,0,0,0,1,3,3,490,6,10,0,1,1,0
+2013/14,Sunderland,9794,Ignacio Scocco,F,6,0,0,0,0,2,4,93,0,4,0,0,0,0
+2013/14,Sunderland,4397,Ji Dong-Won,F,5,0,0,0,0,1,4,201,2,3,0,0,0,0
+2013/14,Sunderland,3563,Carlos Cuellar,D,4,0,0,0,1,0,3,342,4,7,0,0,0,1
+2013/14,Sunderland,4831,Charalampos Mavrias,M,4,0,0,0,0,0,4,150,1,7,0,0,0,0
+2013/14,Sunderland,4077,David Vaughan,M,3,0,0,0,0,1,2,171,2,5,0,0,0,0
+2013/14,Sunderland,4185,Stéphane Sessègnon,M,2,0,0,0,0,1,1,117,2,1,0,0,0,0
+2013/14,Sunderland,4828,Cabral,M,1,0,0,0,0,0,1,90,1,1,0,0,0,0
+2013/14,Sunderland,4829,El Hadji Ba,M,1,0,0,0,0,0,1,19,0,0,0,0,0,0
+2013/14,Swansea City,2681,Wayne Routledge,M,35,2,4,4,10,7,18,2705,32,44,0,2,0,0
+2013/14,Swansea City,4838,Wilfried Bony,F,34,16,4,2,9,8,17,2472,27,41,0,4,0,0
+2013/14,Swansea City,4408,Ben Davies,D,34,2,1,6,11,8,15,2873,32,46,0,3,0,0
+2013/14,Swansea City,4657,Jonathan de Guzmán,M,34,4,3,3,11,9,14,2355,26,31,0,1,0,0
+2013/14,Swansea City,4403,Ashley Williams,D,34,1,1,7,9,9,16,3040,34,48,0,5,0,0
+2013/14,Swansea City,4135,Jonjo Shelvey,M,32,6,6,4,9,6,17,2475,29,41,0,4,0,0
+2013/14,Swansea City,4651,Chico Flores,D,31,2,0,8,8,8,15,2690,30,44,0,5,2,1
+2013/14,Swansea City,4405,Angel Rangel,D,30,0,1,7,9,8,13,2632,29,41,1,8,0,0
+2013/14,Swansea City,2341,Nathan Dyer,M,27,6,2,2,8,8,11,1750,19,30,0,1,0,0
+2013/14,Swansea City,4654,Pablo Hernández,M,27,2,7,1,7,7,13,1431,17,18,0,2,0,0
+2013/14,Swansea City,4398,Michel Vorm,G,26,0,0,7,9,6,11,2339,26,32,62,2,1,0
+2013/14,Swansea City,2152,Leon Britton,M,25,0,1,5,8,6,11,2020,23,32,0,2,0,0
+2013/14,Swansea City,4836,José Cañas,M,23,0,0,2,5,6,12,1670,19,28,0,5,0,0
+2013/14,Swansea City,4837,Alejandro Pozuelo,M,22,0,1,0,6,5,11,868,7,14,0,1,0,0
+2013/14,Swansea City,4835,Jordi Amat,D,17,0,0,1,5,3,9,1246,13,21,0,3,0,0
+2013/14,Swansea City,4659,Michu,F,17,2,2,4,4,5,8,1289,15,16,0,2,0,0
+2013/14,Swansea City,4401,Gerhard Tremmel,G,12,0,0,1,2,3,7,1080,12,22,33,0,0,0
+2013/14,Swansea City,4839,Álvaro Vázquez,F,12,0,1,0,5,2,5,410,5,5,0,0,0,0
+2013/14,Swansea City,4402,Neil Taylor,D,10,0,1,1,4,2,4,590,6,9,0,1,0,0
+2013/14,Swansea City,4652,Dwight Tiendalli,D,10,0,0,1,3,2,5,751,9,12,0,0,0,0
+2013/14,Swansea City,4655,Roland Lamah,M,9,2,2,0,2,3,4,455,4,11,0,1,0,0
+2013/14,Swansea City,3679,Marvin Emnes,F,7,1,0,0,4,1,2,135,2,2,0,2,0,0
+2013/14,Swansea City,3650,David N'Gog,F,3,0,0,0,0,0,3,42,0,0,0,0,0,0
+2013/14,Swansea City,3312,Kyle Bartley,D,2,0,0,0,2,0,0,91,1,1,0,0,0,0
+2013/14,Swansea City,7482,Jay Fulton,M,2,0,0,0,2,0,0,80,1,1,0,1,0,0
+2013/14,Swansea City,3204,Leroy Lita,F,2,0,0,0,0,1,1,34,0,1,0,0,0,0
+2013/14,Swansea City,4656,Ki Sung-Yueng,M,1,0,0,0,0,0,1,13,0,1,0,0,0,0
+2013/14,Tottenham Hotspur,4664,Hugo Lloris,G,37,0,0,14,21,6,10,3330,37,50,103,2,0,0
+2013/14,Tottenham Hotspur,2805,Michael Dawson,D,32,0,0,13,17,5,10,2838,31,40,0,7,0,0
+2013/14,Tottenham Hotspur,4841,Paulinho,M,30,6,2,9,16,5,9,2381,28,28,0,4,1,0
+2013/14,Tottenham Hotspur,4123,Mousa Dembélé,M,28,1,1,5,17,3,8,1819,22,20,0,5,0,0
+2013/14,Tottenham Hotspur,4846,Roberto Soldado,F,28,6,5,5,14,5,9,1931,22,27,0,6,0,0
+2013/14,Tottenham Hotspur,2270,Aaron Lennon,M,27,1,3,3,16,4,7,2187,26,40,0,1,0,0
+2013/14,Tottenham Hotspur,3955,Kyle Walker,D,26,1,2,9,14,5,7,2298,26,36,0,5,0,0
+2013/14,Tottenham Hotspur,4845,Christian Eriksen,M,25,7,8,3,14,5,6,1983,23,28,0,3,0,0
+2013/14,Tottenham Hotspur,4421,Gylfi Sigurdsson,M,25,5,0,1,12,5,8,1276,14,18,0,2,0,0
+2013/14,Tottenham Hotspur,3724,Andros Townsend,M,25,1,0,4,14,4,7,1225,12,10,0,2,0,0
+2013/14,Tottenham Hotspur,4844,Nacer Chadli,M,24,1,3,2,15,4,5,1453,15,24,0,1,0,0
+2013/14,Tottenham Hotspur,4666,Jan Vertonghen,D,23,0,0,10,11,4,8,2004,23,25,0,4,0,0
+2013/14,Tottenham Hotspur,3956,Kyle Naughton,D,22,0,0,6,12,2,8,1744,19,28,0,6,0,0
+2013/14,Tottenham Hotspur,3507,Danny Rose,D,22,1,2,5,13,3,6,1902,22,23,0,4,1,0
+2013/14,Tottenham Hotspur,2845,Emmanuel Adebayor,F,21,11,4,5,12,3,6,1808,20,27,0,0,0,0
+2013/14,Tottenham Hotspur,4840,Vlad Chiriches,D,17,1,0,6,10,4,3,1412,16,19,0,1,0,0
+2013/14,Tottenham Hotspur,4193,Sandro,M,17,1,0,1,8,2,7,827,10,15,0,6,0,1
+2013/14,Tottenham Hotspur,4847,Nabil Bentaleb,M,15,0,1,3,8,2,5,1068,11,20,0,2,0,0
+2013/14,Tottenham Hotspur,1526,Jermain Defoe,F,14,1,0,0,9,2,3,423,3,5,0,1,0,0
+2013/14,Tottenham Hotspur,4667,Lewis Holtby,M,13,1,0,0,6,3,4,567,6,11,0,1,0,0
+2013/14,Tottenham Hotspur,3508,Younes Kaboul,D,13,1,1,2,6,1,6,943,11,19,0,1,2,1
+2013/14,Tottenham Hotspur,4843,Étienne Capoue,M,12,1,0,2,8,0,4,686,8,11,0,1,0,0
+2013/14,Tottenham Hotspur,3960,Harry Kane,F,10,3,0,2,7,2,1,499,6,6,0,0,0,1
+2013/14,Tottenham Hotspur,4842,Érik Lamela,M,9,0,1,0,5,1,3,326,3,12,0,1,0,0
+2013/14,Tottenham Hotspur,4335,Ezekiel Fryers,D,7,0,0,2,4,1,2,399,3,6,0,0,0,0
+2013/14,Tottenham Hotspur,7486,Milos Veljkovic,D,2,0,0,0,2,0,0,30,0,0,0,0,0,0
+2013/14,Tottenham Hotspur,1420,Brad Friedel,G,1,0,0,0,0,0,1,90,1,1,3,0,0,0
+2013/14,Tottenham Hotspur,4433,Alex Pritchard,M,1,0,0,0,1,0,0,7,0,0,0,0,0,0
+2013/14,West Bromwich Albion,3751,Youssouf Mulumbu,M,37,2,2,7,7,15,15,3079,33,51,0,7,0,0
+2013/14,West Bromwich Albion,2013,Liam Ridgewell,D,33,1,2,6,6,14,13,2868,33,50,0,6,0,0
+2013/14,West Bromwich Albion,4205,Saido Berahino,F,32,5,1,0,6,12,14,1405,11,22,0,0,0,0
+2013/14,West Bromwich Albion,4437,Gareth McAuley,D,32,2,0,6,6,13,13,2860,32,49,0,4,0,1
+2013/14,West Bromwich Albion,2529,James Morrison,M,32,1,3,3,5,13,14,2209,23,39,0,1,0,0
+2013/14,West Bromwich Albion,3734,Jonas Olsson,D,32,1,0,7,7,13,12,2819,32,45,0,10,0,1
+2013/14,West Bromwich Albion,4849,Morgan Amalfitano,M,28,4,3,5,6,11,11,2151,26,33,0,3,0,0
+2013/14,West Bromwich Albion,3744,Chris Brunt,M,28,3,5,3,3,12,13,2243,25,43,0,7,0,0
+2013/14,West Bromwich Albion,4673,Claudio Yacob,M,27,1,0,3,5,12,10,1843,22,34,0,7,0,0
+2013/14,West Bromwich Albion,4185,Stéphane Sessègnon,M,26,5,1,2,7,9,10,1961,23,31,0,0,0,0
+2013/14,West Bromwich Albion,2905,Victor Anichebe,F,24,3,3,0,4,8,12,1215,11,25,0,3,0,0
+2013/14,West Bromwich Albion,2932,Ben Foster,G,24,0,0,3,4,10,10,2148,24,38,72,1,0,0
+2013/14,West Bromwich Albion,4851,Matej Vydra,F,23,3,3,0,3,9,11,667,7,12,0,0,0,0
+2013/14,West Bromwich Albion,4438,Billy Jones,D,21,0,0,4,5,8,8,1740,21,27,0,5,0,0
+2013/14,West Bromwich Albion,2435,Steven Reid,D,16,0,0,1,3,7,6,1306,16,27,0,3,0,0
+2013/14,West Bromwich Albion,3206,Shane Long,F,15,3,1,1,1,6,8,1038,11,14,0,2,0,0
+2013/14,West Bromwich Albion,3746,Graham Dorrans,M,14,2,0,2,3,4,7,1106,12,18,0,4,0,0
+2013/14,West Bromwich Albion,2390,Zoltán Gera,M,14,0,1,0,3,6,5,483,5,10,0,1,0,0
+2013/14,West Bromwich Albion,2011,Boaz Myhill,G,14,0,0,3,3,5,6,1260,14,21,41,0,0,0
+2013/14,West Bromwich Albion,1135,Nicolas Anelka,F,12,2,0,0,2,5,5,856,11,14,0,0,0,0
+2013/14,West Bromwich Albion,4198,Craig Dawson,D,12,0,2,1,2,4,6,950,10,17,0,1,0,0
+2013/14,West Bromwich Albion,4848,Diego Lugano,D,9,1,0,0,1,4,4,659,7,14,0,2,0,0
+2013/14,West Bromwich Albion,2892,Scott Sinclair,M,8,0,0,0,2,2,4,301,4,3,0,0,0,0
+2013/14,West Bromwich Albion,9980,Thievy Bifouma,F,6,2,0,0,1,3,2,252,3,6,0,0,0,0
+2013/14,West Bromwich Albion,4675,Markus Rosenberg,F,4,0,0,0,1,1,2,90,1,2,0,0,0,0
+2013/14,West Bromwich Albion,4439,Liam O'Neil,M,3,0,0,0,2,0,1,15,0,1,0,0,0,0
+2013/14,West Bromwich Albion,4671,Goran Popov,D,2,0,0,0,0,2,0,83,1,3,0,0,0,0
+2013/14,West Bromwich Albion,2817,Luke Daniels,G,1,0,0,0,0,1,0,12,0,0,1,0,0,0
+2013/14,West Ham United,3014,Mark Noble,M,38,3,4,13,11,7,20,3343,38,46,0,6,1,0
+2013/14,West Ham United,3982,Mohamed Diamé,M,35,4,2,4,8,7,20,2485,29,45,0,4,0,0
+2013/14,West Ham United,2040,Kevin Nolan,M,33,7,5,7,10,6,17,2694,33,35,0,7,2,0
+2013/14,West Ham United,4680,Guy Demel,D,32,1,0,11,11,7,14,2638,30,38,0,3,0,1
+2013/14,West Ham United,2122,Stewart Downing,M,32,1,2,10,11,4,17,2510,29,31,0,0,0,0
+2013/14,West Ham United,4000,Matthew Jarvis,M,32,2,3,3,8,7,17,1949,23,26,0,1,0,0
+2013/14,West Ham United,3517,James Tomkins,D,31,0,0,10,10,5,16,2601,31,37,0,5,1,0
+2013/14,West Ham United,2058,Carlton Cole,F,26,6,0,0,7,5,14,845,9,13,0,1,0,0
+2013/14,West Ham United,3010,James Collins,D,24,1,0,9,8,4,12,1899,22,25,0,6,0,0
+2013/14,West Ham United,1756,George McCartney,D,22,0,0,6,9,2,11,1840,20,27,0,4,0,0
+2013/14,West Ham United,4209,Winston Reid,D,22,1,0,7,7,4,11,1674,18,22,0,2,0,0
+2013/14,West Ham United,1632,Joe Cole,M,20,3,0,0,4,5,11,740,6,15,0,2,0,0
+2013/14,West Ham United,4852,Adrián,G,20,0,0,6,8,1,11,1800,20,27,86,2,0,0
+2013/14,West Ham United,2542,Matthew Taylor,M,20,0,0,4,8,2,10,1413,16,20,0,3,0,0
+2013/14,West Ham United,1342,Jussi Jääskeläinen,G,18,0,1,8,3,6,9,1620,18,24,65,0,0,0
+2013/14,West Ham United,2647,Joseph O'Brien,D,17,0,0,3,2,5,10,1234,13,19,0,4,0,0
+2013/14,West Ham United,4159,Ravel Morrison,M,16,3,2,3,2,5,9,1154,12,19,0,5,0,0
+2013/14,West Ham United,3175,Andy Carroll,F,15,2,4,0,5,1,9,1093,12,18,0,0,1,0
+2013/14,West Ham United,4853,Razvan Rat,D,15,0,0,3,2,4,9,1131,11,22,0,1,0,0
+2013/14,West Ham United,4690,Modibo Maiga,F,14,1,2,3,2,4,8,1007,11,14,0,0,0,0
+2013/14,West Ham United,3520,Jack Collison,M,10,0,0,0,1,3,6,462,6,9,0,0,0,0
+2013/14,West Ham United,5632,Antonio Nocerino,M,10,0,0,0,4,1,5,254,2,6,0,3,0,0
+2013/14,West Ham United,2447,Ricardo Vaz Tê,F,8,2,0,0,2,2,4,257,3,4,0,0,0,0
+2013/14,West Ham United,5688,Pablo Armero,D,5,0,0,0,1,0,4,322,3,7,0,1,0,0
+2013/14,West Ham United,3806,Roger Johnson,D,4,0,0,1,3,0,1,272,2,4,0,1,0,0
+2013/14,West Ham United,2283,Alou Diarra,M,3,0,0,0,2,0,1,113,1,2,0,1,0,0
+2013/14,West Ham United,4521,Mladen Petric,F,3,0,0,0,0,0,3,65,0,2,0,0,0,0
+2013/14,West Ham United,9985,Marco Borriello,F,2,0,0,0,2,0,0,90,0,0,0,0,0,0
+2013/14,West Ham United,4692,Elliot Lee,M,1,0,0,0,0,0,1,2,0,0,0,0,0,0

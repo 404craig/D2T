@@ -1,0 +1,581 @@
+season,club_feed,feed_id,name,birth,starts,subs,apps,mins,gf_on,ga_on,cs_on,w,d,l,positions
+2023/24,Arsenal,66204,William Saliba,24 March 2001,38,0,38,3718,94,31,18,28,5,5,D:38
+2023/24,Arsenal,15202,Declan Rice,14 January 1999,37,1,38,3460,87,30,17,28,5,5,M:38
+2023/24,Arsenal,50234,Gabriel Magalhães,19 December 1997,34,2,36,3305,81,28,16,27,4,5,D:36
+2023/24,Arsenal,11419,Martin Ødegaard,17 December 1998,35,0,35,3288,84,25,19,26,5,4,M:35
+2023/24,Arsenal,14548,Ben White,8 October 1997,35,2,37,3213,84,28,18,27,5,5,D:37
+2023/24,Arsenal,7975,David Raya,15 September 1995,32,0,32,3122,83,24,16,23,4,5,G:32
+2023/24,Arsenal,49481,Bukayo Saka,5 September 2001,35,0,35,3089,81,29,16,25,5,5,F:35
+2023/24,Arsenal,20810,Kai Havertz,11 June 1999,30,7,37,2833,80,24,16,28,5,4,M:24 F:13
+2023/24,Arsenal,66104,Gabriel Martinelli,18 June 2001,24,11,35,2143,55,23,10,26,4,5,F:35
+2023/24,Arsenal,19620,Oleksandr Zinchenko,15 December 1996,20,7,27,1856,38,15,9,19,4,4,D:27
+2023/24,Arsenal,20486,Leandro Trossard,4 December 1994,18,16,34,1784,47,12,12,25,4,5,F:31 M:3
+2023/24,Arsenal,19680,Gabriel Jesus,3 April 1997,17,10,27,1591,30,11,11,18,5,4,F:27
+2023/24,Arsenal,115169,Takehiro Tomiyasu,5 November 1998,10,12,22,1290,30,10,6,17,2,3,D:22
+2023/24,Arsenal,14451,Eddie Nketiah,30 May 1999,10,17,27,1230,24,10,6,18,4,5,F:27
+2023/24,Arsenal,109478,Jakub Kiwior,15 February 2000,11,9,20,1060,42,10,6,17,2,1,D:20
+2023/24,Arsenal,5682,Jorginho,20 December 1991,10,14,24,1038,25,13,4,18,4,2,M:24
+2023/24,Arsenal,4936,Thomas Partey,13 June 1993,9,5,14,852,20,5,5,12,2,0,M:11 D:3
+2023/24,Arsenal,13703,Aaron Ramsdale,14 May 1998,6,0,6,596,11,7,2,5,1,0,G:6
+2023/24,Arsenal,14445,Emile Smith Rowe,28 July 2000,3,10,13,419,12,3,3,9,2,2,M:13
+2023/24,Arsenal,14450,Reiss Nelson,10 December 1999,1,14,15,375,10,1,1,11,1,3,F:15
+2023/24,Arsenal,67631,Fábio Vieira,30 May 2000,2,9,11,364,11,2,1,8,2,1,M:11
+2023/24,Arsenal,11347,Cédric Soares,31 August 1991,0,3,3,80,1,0,0,3,0,0,D:3
+2023/24,Arsenal,67776,Jurriën Timber,17 June 2001,1,1,2,78,3,0,0,2,0,0,D:2
+2023/24,Arsenal,5239,Mohamed Elneny,11 July 1992,0,3,3,47,1,0,0,3,0,0,M:3
+2023/24,Arsenal,114566,Ethan Nwaneri,21 March 2007,0,1,1,17,0,0,0,1,0,0,M:1
+2023/24,Aston Villa,8658,Ollie Watkins,30 December 1995,37,0,37,3484,78,69,6,20,8,9,F:37
+2023/24,Aston Villa,13274,Ezri Konsa,23 October 1997,35,0,35,3343,74,65,6,18,8,9,D:35
+2023/24,Aston Villa,4245,Emiliano Martínez,2 September 1992,34,0,34,3311,78,60,7,19,8,7,G:34
+2023/24,Aston Villa,24626,Douglas Luiz,9 May 1998,35,0,35,3241,69,70,5,17,8,10,M:35
+2023/24,Aston Villa,51423,John McGinn,18 October 1994,35,0,35,3215,74,65,6,19,7,9,M:32 F:3
+2023/24,Aston Villa,21529,Pau Torres,16 January 1997,27,2,29,2705,61,48,5,18,6,5,D:29
+2023/24,Aston Villa,5758,Lucas Digne,20 July 1993,27,6,33,2617,58,52,5,17,7,9,D:32 M:1
+2023/24,Aston Villa,13344,Matty Cash,7 August 1997,23,6,29,2345,51,45,2,16,6,7,D:24 M:5
+2023/24,Aston Villa,51084,Moussa Diaby,7 July 1999,25,13,38,2321,43,49,7,20,8,10,F:27 M:11
+2023/24,Aston Villa,20489,Leon Bailey,9 August 1997,22,13,35,2239,59,40,5,18,8,9,M:34 F:1
+2023/24,Aston Villa,12994,Diego Carlos,15 March 1993,20,7,27,2024,39,41,6,12,6,9,D:27
+2023/24,Aston Villa,5865,Youri Tielemans,7 May 1997,17,15,32,1805,44,33,4,18,7,7,M:30 F:2
+2023/24,Aston Villa,25067,Boubacar Kamara,23 November 1999,20,0,20,1743,40,29,6,13,2,5,M:20
+2023/24,Aston Villa,21647,Clément Lenglet,17 June 1995,14,0,14,1238,24,29,2,5,3,6,D:14
+2023/24,Aston Villa,37221,Álex Moreno,8 June 1993,11,10,21,1163,26,22,3,10,5,6,D:20 M:1
+2023/24,Aston Villa,22795,Nicolò Zaniolo,2 July 1999,9,16,25,967,17,17,2,11,7,7,M:24 F:1
+2023/24,Aston Villa,19888,Jacob Ramsey,28 May 2001,8,8,16,957,25,15,0,11,2,3,M:16
+2023/24,Aston Villa,23968,Morgan Rogers,26 July 2002,8,3,11,680,13,14,2,6,3,2,M:8 F:3
+2023/24,Aston Villa,134048,Jhon Durán,13 December 2003,3,20,23,643,15,12,0,11,7,5,F:23
+2023/24,Aston Villa,11224,Robin Olsen,8 January 1990,4,1,5,441,4,14,0,1,1,3,G:5
+2023/24,Aston Villa,66538,Tim Iroegbunam,30 June 2003,1,8,9,222,2,7,0,4,1,4,M:9
+2023/24,Aston Villa,4620,Calum Chambers,20 January 1995,1,4,5,178,3,8,0,1,1,3,D:4 M:1
+2023/24,Aston Villa,5866,Leander Dendoncker,15 April 1995,1,7,8,174,3,3,0,6,0,2,M:8
+2023/24,Aston Villa,117753,Omari Kellyman,15 September 2005,0,2,2,45,0,1,0,0,0,2,M:2
+2023/24,Aston Villa,8900,Tyrone Mings,13 March 1993,1,0,1,31,1,2,0,0,0,1,D:1
+2023/24,Aston Villa,4525,Philippe Coutinho,12 June 1992,0,2,2,31,1,1,0,1,0,1,M:2
+2023/24,Aston Villa,10394,Bertrand Traoré,6 September 1995,0,2,2,20,0,0,0,2,0,0,M:2
+2023/24,Aston Villa,25281,Cameron Archer,9 December 2001,0,1,1,15,0,0,0,1,0,0,F:1
+2023/24,Aston Villa,53074,Kaine Kesler-Hayden,23 October 2002,0,3,3,13,0,0,0,2,0,1,D:3
+2023/24,Aston Villa,64519,Jaden Philogene,8 February 2002,0,1,1,10,0,1,0,0,0,1,M:1
+2023/24,Aston Villa,111116,Finley Munroe,8 February 2005,0,1,1,9,0,0,0,0,0,1,D:1
+2023/24,Bournemouth,67546,Illia Zabarnyi,1 September 2002,37,0,37,3641,55,74,8,12,9,16,D:37
+2023/24,Bournemouth,10443,Dominic Solanke,14 September 1997,37,1,38,3577,54,67,10,13,9,16,F:38
+2023/24,Bournemouth,6593,Neto,19 July 1989,32,0,32,3135,50,62,7,10,9,13,G:32
+2023/24,Bournemouth,15572,Ryan Christie,22 February 1995,35,2,37,3095,48,61,8,12,9,16,M:37
+2023/24,Bournemouth,10766,Lewis Cook,3 February 1997,32,1,33,3025,47,56,8,11,8,14,M:32 D:1
+2023/24,Bournemouth,54989,Marcos Senesi,10 May 1997,26,5,31,2431,40,48,6,9,8,14,D:31
+2023/24,Bournemouth,3512,Adam Smith,29 April 1991,25,3,28,2308,41,36,8,13,6,9,D:28
+2023/24,Bournemouth,25474,Antoine Semenyo,7 January 2000,25,8,33,2267,43,36,8,13,7,13,M:24 F:9
+2023/24,Bournemouth,14846,Marcus Tavernier,22 March 1999,25,5,30,2250,41,45,8,11,7,12,M:29 F:1
+2023/24,Bournemouth,116665,Milos Kerkez,7 November 2003,22,6,28,2108,29,43,6,8,8,12,D:27 M:1
+2023/24,Bournemouth,21519,Justin Kluivert,5 May 1999,26,6,32,1984,32,26,11,10,9,13,M:25 F:7
+2023/24,Bournemouth,21585,Lloyd Kelly,6 October 1998,17,6,23,1716,23,35,4,7,5,11,D:23
+2023/24,Bournemouth,8882,Philip Billing,11 June 1996,13,16,29,1553,19,40,2,10,6,13,M:29
+2023/24,Bournemouth,133890,Dango Ouattara,11 February 2002,12,18,30,1399,20,25,5,12,6,12,F:19 D:6 M:5
+2023/24,Bournemouth,19970,Max Aarons,4 January 2000,13,7,20,1350,14,38,2,4,4,12,D:20
+2023/24,Bournemouth,74976,Alex Scott,21 August 2003,11,12,23,1129,18,29,3,8,4,11,M:23
+2023/24,Bournemouth,50498,Luis Sinisterra,17 June 1999,7,13,20,793,13,19,1,7,6,7,F:13 M:7
+2023/24,Bournemouth,14063,Chris Mepham,5 November 1997,6,4,10,689,13,16,1,4,4,2,D:10
+2023/24,Bournemouth,10580,Joe Rothwell,11 January 1995,3,8,11,446,4,12,0,4,1,6,M:11
+2023/24,Bournemouth,16582,Enes Ünal,10 May 1997,2,14,16,443,12,10,1,6,3,7,F:16
+2023/24,Bournemouth,50453,Mark Travers,18 May 1999,4,0,4,404,5,5,2,2,0,2,G:4
+2023/24,Bournemouth,13706,David Brooks,8 July 1997,2,11,13,362,5,9,0,3,3,7,M:13
+2023/24,Bournemouth,20430,Ionut Radu,28 May 1997,2,0,2,200,3,7,0,1,0,1,G:2
+2023/24,Bournemouth,50460,Jaidon Anthony,1 December 1999,2,1,3,162,1,5,0,0,1,2,M:2 F:1
+2023/24,Bournemouth,10076,Kieffer Moore,8 August 1992,0,8,8,160,3,2,0,2,1,5,F:8
+2023/24,Bournemouth,42894,Tyler Adams,14 February 1999,1,2,3,151,4,3,0,2,0,1,M:3
+2023/24,Bournemouth,51942,James Hill,10 January 2002,1,4,5,105,1,1,0,3,1,1,D:5
+2023/24,Bournemouth,32159,Romain Faivre,14 July 1998,0,5,5,79,0,1,0,0,2,3,M:5
+2023/24,Bournemouth,63553,Hamed Traoré,16 February 2000,0,3,3,67,0,1,0,0,0,3,M:3
+2023/24,Bournemouth,118436,Dominic Sadi,2 September 2003,0,1,1,6,0,0,0,1,0,0,M:1
+2023/24,Brentford,33280,Mark Flekken,13 June 1993,37,0,37,3584,59,66,7,10,9,18,G:37
+2023/24,Brentford,23194,Vitaly Janelt,10 May 1998,37,1,38,3204,56,55,9,10,9,19,M:33 D:5
+2023/24,Brentford,24659,Nathan Collins,30 April 2001,29,3,32,2910,51,52,7,9,9,14,D:32
+2023/24,Brentford,22043,Ethan Pinnock,29 May 1993,28,1,29,2754,47,48,5,10,5,14,D:29
+2023/24,Brentford,42331,Christian Nørgaard,10 March 1994,30,1,31,2675,38,52,6,8,6,17,M:31
+2023/24,Brentford,117497,Yoane Wissa,3 September 1996,29,5,34,2624,45,43,11,8,9,17,F:29 M:5
+2023/24,Brentford,49726,Mathias Jensen,1 January 1996,27,5,32,2321,42,47,9,9,8,15,M:32
+2023/24,Brentford,21297,Mads Roerslev,24 June 1999,22,12,34,2152,38,43,5,10,7,17,D:18 M:16
+2023/24,Brentford,66360,Bryan Mbeumo,7 August 1999,22,3,25,2136,39,33,5,8,8,9,F:22 M:3
+2023/24,Brentford,20113,Kristoffer Ajer,17 April 1998,21,7,28,2000,31,34,5,8,8,12,D:28
+2023/24,Brentford,9246,Ivan Toney,16 March 1996,16,1,17,1599,24,31,3,3,5,9,F:17
+2023/24,Brentford,24369,Keane Lewis-Potter,22 February 2001,15,15,30,1580,28,30,6,7,7,16,F:24 M:6
+2023/24,Brentford,16256,Neal Maupay,14 August 1996,13,16,29,1496,26,36,3,8,4,17,F:29
+2023/24,Brentford,3909,Ben Mee,21 September 1989,15,1,16,1362,18,27,2,4,1,11,D:16
+2023/24,Brentford,108612,Frank Onyeka,1 January 1998,11,15,26,1297,20,28,1,5,7,14,M:26
+2023/24,Brentford,7103,Zanka,23 April 1990,12,2,14,1192,20,26,2,1,5,8,D:14
+2023/24,Brentford,39606,Sergio Reguilón,16 December 1996,14,2,16,1188,23,23,3,5,4,7,D:8 M:8
+2023/24,Brentford,49731,Mikkel Damsgaard,3 July 2000,7,16,23,954,18,10,5,5,5,13,M:23
+2023/24,Brentford,25094,Saman Ghoddos,6 September 1993,7,12,19,871,11,21,0,4,2,13,M:9 D:5 F:5
+2023/24,Brentford,128891,Yehor Yarmoliuk,1 March 2004,6,21,27,844,13,9,4,9,5,13,M:27
+2023/24,Brentford,115166,Aaron Hickey,10 June 2002,9,0,9,734,10,12,2,2,4,3,D:7 M:2
+2023/24,Brentford,10947,Rico Henry,8 July 1997,5,0,5,430,8,5,1,1,3,1,D:5
+2023/24,Brentford,127594,Kevin Schade,27 November 2001,3,8,11,398,8,5,1,4,4,3,M:8 F:3
+2023/24,Brentford,24773,Shandon Baptiste,8 April 1998,2,8,10,289,4,6,0,3,1,6,M:10
+2023/24,Brentford,6767,Thomas Strakosha,19 March 1995,1,1,2,149,3,2,0,1,0,1,G:2
+2023/24,Brentford,72453,Michael Olakigbe,25 April 2004,0,8,8,118,1,0,0,1,2,5,M:4 F:4
+2023/24,Brentford,14457,Josh Dasilva,23 October 1998,0,3,3,42,0,0,0,2,0,1,M:3
+2023/24,Brentford,49494,Myles Peart-Harris,18 September 2002,0,3,3,30,0,0,0,1,0,2,M:3
+2023/24,Brighton & Hove Albion,22542,Pascal Groß,15 June 1991,34,2,36,3369,53,52,7,11,12,13,M:31 D:4 F:1
+2023/24,Brighton & Hove Albion,8163,Lewis Dunk,21 November 1991,33,0,33,3086,54,54,5,11,10,12,D:33
+2023/24,Brighton & Hove Albion,76090,Jan Paul van Hecke,8 June 2000,26,2,28,2567,41,39,5,9,10,9,D:27 M:1
+2023/24,Brighton & Hove Albion,126317,Simon Adingra,1 January 2002,25,6,31,2369,37,41,4,9,10,12,M:24 F:7
+2023/24,Brighton & Hove Albion,24221,Billy Gilmour,11 June 2001,24,6,30,2276,46,40,6,11,9,10,M:30
+2023/24,Brighton & Hove Albion,72371,João Pedro,26 September 2001,19,12,31,2210,35,39,5,10,10,11,F:22 M:9
+2023/24,Brighton & Hove Albion,75709,Bart Verbruggen,18 August 2002,21,0,21,2047,33,30,4,7,8,6,G:21
+2023/24,Brighton & Hove Albion,3452,Danny Welbeck,26 November 1990,21,8,29,1783,28,30,8,9,8,12,F:24 M:5
+2023/24,Brighton & Hove Albion,4874,Joël Veltman,15 January 1992,17,10,27,1774,31,33,3,9,8,10,D:27
+2023/24,Brighton & Hove Albion,21912,Igor Julio,7 February 1998,17,7,24,1765,24,28,3,6,10,8,D:24
+2023/24,Brighton & Hove Albion,3457,Jason Steele,18 August 1990,17,0,17,1663,28,35,2,5,4,8,G:17
+2023/24,Brighton & Hove Albion,117732,Kaoru Mitoma,20 May 1997,15,4,19,1618,37,29,1,7,6,6,M:18 F:1
+2023/24,Brighton & Hove Albion,71590,Evan Ferguson,19 October 2004,15,12,27,1487,24,28,3,11,7,9,F:27
+2023/24,Brighton & Hove Albion,124396,Carlos Baleba,3 January 2004,15,12,27,1465,15,29,2,7,8,12,M:27
+2023/24,Brighton & Hove Albion,133430,Facundo Buonanotte,23 December 2004,17,10,27,1448,20,21,6,7,11,9,M:24 F:3
+2023/24,Brighton & Hove Albion,31904,Pervis Estupiñán,21 January 1998,15,4,19,1346,25,27,3,8,4,7,D:17 M:2
+2023/24,Brighton & Hove Albion,9426,Adam Webster,4 January 1995,13,2,15,1245,21,24,2,4,5,6,D:15
+2023/24,Brighton & Hove Albion,23704,Tariq Lamptey,30 September 2000,10,9,19,979,15,21,1,7,4,8,D:16 M:3
+2023/24,Brighton & Hove Albion,4618,Adam Lallana,10 May 1988,13,12,25,934,12,13,2,7,10,8,M:23 F:2
+2023/24,Brighton & Hove Albion,112739,Jack Hinshelwood,11 April 2005,8,4,12,926,18,18,2,4,4,4,M:6 D:6
+2023/24,Brighton & Hove Albion,2100,James Milner,4 January 1986,11,4,15,821,11,12,4,6,4,5,M:9 D:6
+2023/24,Brighton & Hove Albion,108751,Jakub Moder,7 April 1999,6,11,17,695,6,13,1,6,5,6,M:16 D:1
+2023/24,Brighton & Hove Albion,66735,Ansu Fati,31 October 2002,3,16,19,633,16,13,2,6,6,7,F:17 M:2
+2023/24,Brighton & Hove Albion,8171,Solly March,20 July 1994,7,0,7,578,16,11,2,3,1,3,M:5 D:2
+2023/24,Brighton & Hove Albion,125827,Julio Enciso,23 January 2004,5,7,12,529,10,13,0,4,3,5,F:8 M:4
+2023/24,Brighton & Hove Albion,12128,Mahmoud Dahoud,1 January 1996,6,3,9,477,11,6,2,5,4,0,M:9
+2023/24,Brighton & Hove Albion,120417,Valentín Barco,23 July 2004,3,3,6,343,1,9,0,1,0,5,D:6
+2023/24,Brighton & Hove Albion,33342,Odeluga Offiah,26 October 2002,1,3,4,152,1,3,0,0,1,3,D:4
+2023/24,Brighton & Hove Albion,134334,Mark O'Mahony,14 January 2005,1,2,3,75,0,1,0,0,1,2,F:3
+2023/24,Brighton & Hove Albion,62917,Benicio Baker-Boaitey,9 January 2004,0,5,5,74,1,1,0,1,2,2,F:5
+2023/24,Burnley,21614,Sander Berge,14 February 1998,34,3,37,3248,43,73,2,5,8,24,M:37
+2023/24,Burnley,15154,Dara O'Shea,4 March 1999,32,1,33,3136,43,75,2,4,7,22,D:33
+2023/24,Burnley,32280,James Trafford,10 October 2002,28,0,28,2746,32,66,2,3,5,20,G:28
+2023/24,Burnley,8691,Charlie Taylor,18 September 1993,25,3,28,2535,36,47,2,5,6,17,D:28
+2023/24,Burnley,110187,Vitinho,23 July 1999,26,6,32,2500,37,46,2,4,8,20,D:27 M:5
+2023/24,Burnley,9457,Josh Brownhill,19 December 1995,23,10,33,2469,33,57,2,5,7,21,M:33
+2023/24,Burnley,10539,Josh Cullen,7 April 1996,23,2,25,2221,29,49,0,3,7,15,M:25
+2023/24,Burnley,118579,Wilson Odobert,28 November 2004,25,4,29,2215,31,52,2,3,8,18,M:17 F:12
+2023/24,Burnley,128449,Zeki Amdouni,4 December 2000,27,7,34,2026,24,42,5,5,6,23,F:32 M:2
+2023/24,Burnley,64282,Lyle Foster,3 September 2000,22,2,24,2004,28,44,2,4,7,13,F:20 M:4
+2023/24,Burnley,124531,Maxime Estève,26 May 2002,15,1,16,1414,21,31,0,2,6,8,D:16
+2023/24,Burnley,19831,Jacob Bruun Larsen,19 September 1998,16,16,32,1367,15,23,3,5,7,20,F:17 M:15
+2023/24,Burnley,74963,Lorenz Assignon,22 June 2000,15,0,15,1328,15,33,0,2,5,8,D:15
+2023/24,Burnley,35699,Jordan Beyer,19 May 2000,15,0,15,1309,16,23,2,3,2,10,D:15
+2023/24,Burnley,6210,Jóhann Gudmundsson,27 October 1990,12,14,26,1297,22,28,2,2,7,17,M:25 F:1
+2023/24,Burnley,116827,Ameen Al-Dakhil,6 March 2002,12,1,13,1145,12,27,0,1,2,10,D:13
+2023/24,Burnley,125169,Luca Koleosho,15 September 2004,13,2,15,1000,12,23,3,2,1,12,M:10 F:5
+2023/24,Burnley,19911,Arijanet Muric,7 November 1998,10,0,10,971,16,16,0,2,4,4,G:10
+2023/24,Burnley,112581,Datro Fofana,22 December 2002,10,5,15,957,11,21,1,2,5,8,F:15
+2023/24,Burnley,3851,Jay Rodriguez,29 July 1989,7,14,21,949,11,18,1,3,4,14,F:21
+2023/24,Burnley,13917,Connor Roberts,23 September 1995,8,6,14,914,8,22,0,2,3,9,D:14
+2023/24,Burnley,21785,Hannes Delcroix,28 February 1999,5,7,12,676,7,27,0,2,2,8,D:12
+2023/24,Burnley,48285,Aaron Ramsey,21 January 2003,5,9,14,584,4,19,0,1,2,11,M:14
+2023/24,Burnley,75883,Mike Trésor,28 May 1999,3,13,16,504,6,10,0,2,4,10,F:14 M:2
+2023/24,Burnley,128456,Hjalmar Ekdal,21 October 1998,5,3,8,465,3,9,1,1,4,3,D:8
+2023/24,Burnley,3811,Nathan Redmond,6 March 1994,0,12,12,213,2,5,0,2,1,9,M:12
+2023/24,Burnley,116763,Anass Zaroury,7 November 2000,1,5,6,185,2,4,0,0,1,5,F:6
+2023/24,Burnley,52053,Manuel Benson,28 March 1997,1,7,8,158,0,5,0,0,1,7,F:7 M:1
+2023/24,Burnley,2889,Jack Cork,25 June 1989,0,4,4,51,1,0,0,0,1,3,M:4
+2023/24,Burnley,21532,Michael Obafemi,6 July 2000,0,2,2,35,1,0,0,1,0,1,F:2
+2023/24,Burnley,53671,Han-Noah Massengo,7 July 2001,0,3,3,35,2,0,0,0,1,2,M:3
+2023/24,Chelsea,21887,Conor Gallagher,6 February 2000,37,0,37,3374,73,63,8,18,9,10,M:37
+2023/24,Chelsea,112203,Moisés Caicedo,2 November 2001,33,2,35,3078,70,58,7,18,7,10,M:35
+2023/24,Chelsea,110526,Nicolas Jackson,20 June 2001,31,4,35,2999,69,56,9,16,9,10,F:32 M:3
+2023/24,Chelsea,54893,Axel Disasi,11 March 1998,29,2,31,2819,53,57,5,13,8,10,D:31
+2023/24,Chelsea,49293,Cole Palmer,6 May 2002,29,4,33,2804,69,52,7,16,8,9,M:27 F:6
+2023/24,Chelsea,5754,Thiago Silva,22 September 1984,28,3,31,2767,62,51,7,15,6,10,D:31
+2023/24,Chelsea,63741,Enzo Fernández,17 January 2001,26,2,28,2376,44,54,5,11,8,9,M:26 F:2
+2023/24,Chelsea,134403,Djordje Petrovic,8 October 1999,22,1,23,2176,54,41,5,13,5,5,G:23
+2023/24,Chelsea,4316,Raheem Sterling,8 December 1994,22,9,31,2144,43,45,5,13,7,11,M:17 F:14
+2023/24,Chelsea,51229,Levi Colwill,26 February 2003,20,3,23,1938,30,29,5,10,5,8,D:23
+2023/24,Chelsea,27277,Marc Cucurella,22 July 1998,20,1,21,1932,51,39,4,11,5,5,D:21
+2023/24,Chelsea,68827,Malo Gusto,19 May 2003,19,8,27,1873,41,32,5,14,7,6,D:23 M:4
+2023/24,Chelsea,53991,Mykhailo Mudryk,5 January 2001,18,13,31,1703,41,31,7,13,8,10,M:30 F:1
+2023/24,Chelsea,14538,Robert Sánchez,18 November 1997,16,0,16,1561,27,30,3,5,4,7,G:16
+2023/24,Chelsea,53612,Benoît Badiashile,26 March 2001,15,3,18,1480,32,33,3,9,3,6,D:18
+2023/24,Chelsea,67407,Noni Madueke,10 March 2002,13,10,23,1151,29,19,4,12,4,7,M:13 F:10
+2023/24,Chelsea,14575,Trevoh Chalobah,5 July 1999,10,3,13,1052,32,15,3,8,4,1,D:13
+2023/24,Chelsea,13491,Ben Chilwell,21 December 1996,9,4,13,813,16,17,1,4,4,5,D:8 M:5
+2023/24,Chelsea,31442,Armando Broja,10 September 2001,6,7,13,517,8,5,3,7,1,5,F:13
+2023/24,Chelsea,16784,Christopher Nkunku,14 November 1997,2,9,11,511,14,12,0,7,1,3,F:10 M:1
+2023/24,Chelsea,14571,Reece James,8 December 1999,5,5,10,451,8,12,0,3,3,4,D:9 M:1
+2023/24,Chelsea,74960,Lesley Ugochukwu,26 March 2004,3,9,12,365,3,6,1,5,3,4,M:12
+2023/24,Chelsea,51223,Ian Maatsen,10 March 2002,1,11,12,291,2,5,0,6,2,4,D:11 M:1
+2023/24,Chelsea,64140,Carney Chukwuemeka,20 October 2003,2,7,9,279,7,5,0,4,2,3,M:7 F:2
+2023/24,Chelsea,98288,Alfie Gilchrist,28 November 2003,2,9,11,268,8,6,1,8,1,2,D:11
+2023/24,Chelsea,75212,Cesare Casadei,10 January 2003,0,11,11,141,2,2,0,6,3,2,M:11
+2023/24,Chelsea,99282,Roméo Lavia,6 January 2004,0,1,1,41,1,0,0,1,0,0,M:1
+2023/24,Chelsea,139004,Deivid Washington,5 June 2005,0,2,2,27,1,1,0,1,0,1,F:2
+2023/24,Chelsea,117974,Mason Burstow,4 August 2003,0,2,2,18,0,1,0,1,0,1,F:2
+2023/24,Chelsea,125075,Josh Acheampong,5 May 2006,0,1,1,12,0,0,0,1,0,0,D:1
+2023/24,Chelsea,109777,Alex Matos,3 October 2004,0,1,1,3,0,0,0,1,0,0,F:1
+2023/24,Chelsea,98290,Jimi Tauriainen,8 March 2004,0,1,1,3,0,0,0,1,0,0,M:1
+2023/24,Crystal Palace,26151,Joachim Andersen,31 May 1996,38,0,38,3700,59,64,10,13,10,15,D:38
+2023/24,Crystal Palace,24334,Tyrick Mitchell,1 September 1999,37,0,37,3451,54,61,10,13,10,14,D:22 M:15
+2023/24,Crystal Palace,5595,Jordan Ayew,11 September 1991,30,5,35,2724,33,43,12,12,9,14,F:25 M:10
+2023/24,Crystal Palace,37776,Jefferson Lerma,25 October 1994,27,1,28,2583,32,52,5,8,6,14,M:25 D:3
+2023/24,Crystal Palace,20874,Jean-Philippe Mateta,28 June 1997,25,10,35,2479,48,48,8,11,10,14,F:35
+2023/24,Crystal Palace,50842,Chris Richards,28 March 2000,23,3,26,2299,45,40,4,10,8,8,D:18 M:8
+2023/24,Crystal Palace,14569,Marc Guéhi,13 July 2000,23,2,25,2189,30,34,6,9,6,10,D:24 M:1
+2023/24,Crystal Palace,21584,Eberechi Eze,29 June 1998,24,3,27,2177,43,32,8,12,6,9,M:14 F:13
+2023/24,Crystal Palace,3929,Joel Ward,29 October 1989,23,3,26,2163,25,38,5,8,7,11,D:26
+2023/24,Crystal Palace,8589,Will Hughes,17 April 1995,23,7,30,2024,31,44,8,10,7,13,M:30
+2023/24,Crystal Palace,4331,Sam Johnstone,25 March 1993,20,0,20,1953,23,29,6,5,6,9,G:20
+2023/24,Crystal Palace,13988,Dean Henderson,12 March 1997,18,0,18,1752,36,34,4,8,4,6,G:18
+2023/24,Crystal Palace,16788,Odsonne Édouard,16 January 1998,17,13,30,1683,16,26,6,10,7,13,F:30
+2023/24,Crystal Palace,76353,Daniel Muñoz,26 May 1996,16,0,16,1558,32,26,5,7,4,5,M:14 D:2
+2023/24,Crystal Palace,8980,Jeffrey Schlupp,23 December 1992,17,12,29,1468,14,27,4,11,6,12,M:24 F:5
+2023/24,Crystal Palace,4604,Nathaniel Clyne,5 April 1991,14,5,19,1450,31,16,5,8,5,6,D:18 M:1
+2023/24,Crystal Palace,32989,Michael Olise,12 December 2001,14,5,19,1382,34,19,3,8,4,7,F:11 M:8
+2023/24,Crystal Palace,69595,Adam Wharton,6 February 2004,15,1,16,1356,27,20,7,7,4,5,M:16
+2023/24,Crystal Palace,126670,Cheick Doucouré,8 January 2000,11,0,11,985,11,12,3,4,2,5,M:11
+2023/24,Crystal Palace,68086,Naouirou Ahamada,29 March 2002,0,20,20,505,13,14,0,4,5,11,M:20
+2023/24,Crystal Palace,133681,Matheus França,1 April 2004,1,9,10,298,7,9,0,2,1,7,F:9 M:1
+2023/24,Crystal Palace,4878,Jairo Riedewald,9 September 1996,2,7,9,275,2,3,1,6,3,0,M:9
+2023/24,Crystal Palace,112701,David Ozoh,6 May 2005,0,9,9,212,2,5,0,2,3,4,M:9
+2023/24,Crystal Palace,49504,Jesurun Rak-Sakyi,5 October 2002,0,6,6,173,1,3,1,0,2,4,M:6
+2023/24,Crystal Palace,3517,James Tomkins,29 March 1989,0,4,4,35,0,2,0,3,0,1,D:4
+2023/24,Crystal Palace,10827,Remi Matthews,10 February 1994,0,1,1,16,0,1,0,0,0,1,G:1
+2023/24,Everton,4640,Jordan Pickford,7 March 1994,38,0,38,3719,43,52,13,13,9,16,G:38
+2023/24,Everton,8143,James Tarkowski,19 November 1992,38,0,38,3711,43,52,13,13,9,16,D:38
+2023/24,Everton,66318,Jarrad Branthwaite,27 June 2002,35,0,35,3388,40,44,12,12,9,14,D:35
+2023/24,Everton,23841,James Garner,13 March 2001,34,3,37,3256,39,48,11,12,9,16,M:37
+2023/24,Everton,24797,Dwight McNeil,22 November 1999,33,2,35,3100,39,39,12,13,9,13,M:32 F:2 D:1
+2023/24,Everton,13823,Abdoulaye Doucouré,1 January 1993,32,0,32,2794,36,37,12,13,7,12,F:25 M:7
+2023/24,Everton,24983,Vitalii Mykolenko,29 May 1999,28,0,28,2675,32,37,9,10,7,11,D:28
+2023/24,Everton,3062,Ashley Young,9 July 1985,27,4,31,2438,31,34,8,11,8,12,D:23 M:8
+2023/24,Everton,33135,Jack Harrison,20 November 1996,25,4,29,2390,29,25,11,11,7,11,M:23 F:6
+2023/24,Everton,9576,Dominic Calvert-Lewin,16 March 1997,26,6,32,2266,28,27,13,11,8,13,F:32
+2023/24,Everton,108096,Amadou Onana,16 August 2001,23,7,30,2262,22,38,5,9,6,15,M:30
+2023/24,Everton,12582,Idrissa Gueye,26 September 1989,24,1,25,2000,25,26,6,9,7,9,M:25
+2023/24,Everton,10968,Ben Godfrey,15 January 1998,13,2,15,1207,12,13,4,3,7,5,D:15
+2023/24,Everton,74585,Nathan Patterson,16 October 2001,9,11,20,1132,13,22,2,6,3,11,D:20
+2023/24,Everton,126789,Beto,31 January 1998,9,21,30,1119,16,20,2,9,9,12,F:30
+2023/24,Everton,3600,Séamus Coleman,11 October 1988,7,5,12,745,5,10,4,3,4,5,D:12
+2023/24,Everton,16524,Arnaut Danjuma,31 January 1997,5,9,14,677,4,11,2,1,3,10,F:10 M:4
+2023/24,Everton,5061,André Gomes,30 July 1993,3,9,12,578,6,7,3,3,2,7,M:12
+2023/24,Everton,4333,Michael Keane,11 January 1993,4,5,9,490,3,14,1,2,0,7,D:9
+2023/24,Everton,119034,Youssef Chermiti,24 May 2004,1,17,18,314,3,4,1,7,3,8,F:18
+2023/24,Everton,51511,Lewis Dobbin,3 January 2003,1,11,12,304,3,4,1,3,2,7,F:11 M:1
+2023/24,Everton,4717,Alex Iwobi,3 May 1996,2,0,2,147,0,3,0,0,0,2,M:2
+2023/24,Everton,16256,Neal Maupay,14 August 1996,1,1,2,122,1,3,1,0,0,2,F:2
+2023/24,Everton,51519,Thomas Cannon,28 December 2002,0,1,1,6,0,0,0,0,0,1,F:1
+2023/24,Everton,51518,Lewis Warrington,10 October 2002,0,1,1,4,0,0,0,1,0,0,M:1
+2023/24,Everton,51510,Tyler Onyango,4 March 2003,0,1,1,2,0,0,0,0,0,1,M:1
+2023/24,Fulham,4985,Bernd Leno,4 March 1992,38,0,38,3725,61,66,10,13,8,17,G:38
+2023/24,Fulham,14624,Antonee Robinson,8 August 1997,37,0,37,3537,58,65,9,12,8,17,D:37
+2023/24,Fulham,19858,João Palhinha,9 July 1995,31,2,33,2885,48,50,9,9,8,16,M:33
+2023/24,Fulham,6712,Timothy Castagne,5 December 1995,29,5,34,2861,43,44,9,12,7,15,D:34
+2023/24,Fulham,10476,Andreas Pereira,1 January 1996,34,3,37,2694,42,45,14,12,8,17,M:37
+2023/24,Fulham,23793,Calvin Bassey,31 December 1999,25,4,29,2531,47,44,6,11,5,13,D:29
+2023/24,Fulham,4717,Alex Iwobi,3 May 1996,25,5,30,2318,42,41,7,11,5,14,M:25 F:5
+2023/24,Fulham,4748,Willian,9 August 1988,24,7,31,2193,36,30,9,11,7,13,M:19 F:12
+2023/24,Fulham,13961,Harry Wilson,22 March 1997,16,19,35,1802,25,33,5,13,5,17,M:29 F:6
+2023/24,Fulham,13549,Tosin Adarabioyo,24 September 1997,18,2,20,1766,28,27,6,8,4,8,D:20
+2023/24,Fulham,117763,Rodrigo Muniz,4 May 2001,18,8,26,1724,25,30,6,7,6,13,F:26
+2023/24,Fulham,3894,Tom Cairney,20 January 1991,14,20,34,1688,30,30,4,11,7,16,M:34
+2023/24,Fulham,4276,Tim Ream,5 October 1987,17,1,18,1626,30,32,3,6,4,8,D:18
+2023/24,Fulham,8192,Bobby De Cordova-Reid,2 February 1993,17,16,33,1552,25,32,3,11,8,14,F:21 M:12
+2023/24,Fulham,49884,Issa Diop,9 January 1997,16,2,18,1544,15,28,5,6,5,7,D:18
+2023/24,Fulham,11071,Raúl Jiménez,5 May 1991,18,6,24,1495,29,27,4,8,6,10,F:24
+2023/24,Fulham,4818,Harrison Reed,27 January 1995,15,12,27,1452,26,24,6,12,5,10,M:27
+2023/24,Fulham,16044,Sasa Lukic,13 August 1996,13,11,24,1248,14,20,5,7,5,12,M:24
+2023/24,Fulham,4880,Kenny Tete,9 October 1995,10,4,14,941,18,22,2,4,3,7,D:14
+2023/24,Fulham,4979,Adama Traoré,25 January 1996,1,16,17,504,14,13,0,5,3,9,F:16 M:1
+2023/24,Fulham,50501,Carlos Vinícius,25 March 1995,2,11,13,384,7,6,0,5,1,7,F:13
+2023/24,Fulham,31442,Armando Broja,10 September 2001,0,8,8,148,2,4,0,3,2,3,F:8
+2023/24,Fulham,20959,Fodé Ballo-Touré,3 January 1997,0,6,6,106,2,1,0,4,0,2,D:6
+2023/24,Fulham,107809,Luke Harris,4 March 2005,0,1,1,81,2,6,0,0,0,1,M:1
+2023/24,Fulham,5879,Aleksandar Mitrovic,16 September 1994,0,1,1,39,1,0,0,1,0,0,F:1
+2023/24,Liverpool,5140,Virgil van Dijk,8 July 1991,36,0,36,3447,84,40,9,22,10,4,D:36
+2023/24,Liverpool,66669,Luis Díaz,13 January 1997,32,5,37,2781,73,33,7,23,10,4,F:37
+2023/24,Liverpool,63633,Alexis Mac Allister,24 December 1998,31,2,33,2763,67,34,6,21,8,4,M:33
+2023/24,Liverpool,5178,Mohamed Salah,15 June 1992,28,4,32,2731,64,30,8,19,10,3,F:32
+2023/24,Liverpool,20559,Alisson Becker,2 October 1992,28,0,28,2726,66,30,8,16,8,4,G:28
+2023/24,Liverpool,14732,Trent Alexander-Arnold,7 October 1998,25,3,28,2295,57,28,8,16,8,4,D:28
+2023/24,Liverpool,33231,Dominik Szoboszlai,25 October 2000,25,8,33,2260,45,23,8,20,10,3,M:33
+2023/24,Liverpool,70287,Darwin Núñez,24 June 1999,22,14,36,2224,49,25,6,23,10,3,F:36
+2023/24,Liverpool,10651,Joe Gomez,23 May 1997,17,15,32,1987,52,19,9,21,8,3,D:31 M:1
+2023/24,Liverpool,43586,Wataru Endo,9 February 1993,20,9,29,1870,46,16,6,19,7,3,M:29
+2023/24,Liverpool,10458,Andy Robertson,11 March 1994,18,5,23,1836,46,22,4,14,5,4,D:23
+2023/24,Liverpool,32894,Cody Gakpo,7 May 1999,17,18,35,1809,55,19,5,23,9,3,F:32 M:3
+2023/24,Liverpool,23593,Ibrahima Konaté,25 May 1999,17,5,22,1721,39,17,6,13,5,4,D:22
+2023/24,Liverpool,33185,Harvey Elliott,4 April 2003,11,23,34,1546,44,13,4,21,10,3,M:30 F:4
+2023/24,Liverpool,51557,Jarell Quansah,29 January 2003,13,4,17,1293,34,16,2,12,4,1,D:17
+2023/24,Liverpool,23815,Curtis Jones,30 January 2001,14,9,23,1273,32,17,2,13,6,4,M:23
+2023/24,Liverpool,49909,Ryan Gravenberch,16 May 2002,12,14,26,1225,29,18,3,17,7,2,M:26
+2023/24,Liverpool,19758,Diogo Jota,4 December 1996,14,7,21,1219,36,10,5,15,3,3,F:21
+2023/24,Liverpool,14723,Caoimhín Kelleher,23 November 1998,10,0,10,986,26,11,2,8,2,0,G:10
+2023/24,Liverpool,5375,Joël Matip,8 August 1991,9,1,10,839,22,9,2,7,2,1,D:10
+2023/24,Liverpool,68582,Conor Bradley,9 July 2003,10,1,11,781,18,7,3,8,2,1,D:11
+2023/24,Liverpool,16006,Kostas Tsimikas,12 May 1996,8,5,13,760,16,7,4,8,4,1,D:13
+2023/24,Liverpool,67213,Bobby Clark,7 February 2005,1,4,5,112,2,0,1,5,0,0,M:5
+2023/24,Liverpool,114296,Stefan Bajcetic,22 October 2004,0,1,1,34,0,2,0,1,0,0,M:1
+2023/24,Liverpool,119292,Jayden Danns,16 January 2006,0,2,2,27,2,0,0,2,0,0,F:2
+2023/24,Liverpool,121972,Ben Gannon-Doak,11 November 2005,0,1,1,18,0,0,0,0,1,0,F:1
+2023/24,Liverpool,66565,Owen Beck,9 August 2002,0,1,1,16,1,0,0,1,0,0,D:1
+2023/24,Liverpool,109138,James McConnell,13 September 2004,0,3,3,15,1,0,0,3,0,0,M:3
+2023/24,Liverpool,5264,Thiago Alcântara,11 April 1991,0,1,1,13,0,1,0,0,0,1,M:1
+2023/24,Liverpool,70228,Kaide Gordon,5 October 2004,0,1,1,6,0,0,0,1,0,0,F:1
+2023/24,Luton Town,5844,Thomas Kaminski,23 October 1992,38,0,38,3697,52,89,2,6,8,24,G:38
+2023/24,Luton Town,24309,Alfie Doughty,21 December 1999,34,3,37,3087,46,78,2,6,8,23,M:32 D:5
+2023/24,Luton Town,11008,Carlton Morris,16 December 1995,32,6,38,3079,40,76,2,6,8,24,F:38
+2023/24,Luton Town,4115,Ross Barkley,5 December 1993,30,2,32,2834,43,67,2,5,7,20,M:32
+2023/24,Luton Town,27090,Teden Mengi,30 April 2002,28,2,30,2690,38,60,1,5,7,18,D:30
+2023/24,Luton Town,33128,Chiedozie Ogbene,1 May 1997,20,10,30,2181,35,50,2,5,7,18,F:20 M:10
+2023/24,Luton Town,20858,Tahith Chong,4 December 1999,20,13,33,2132,26,54,0,3,6,24,M:19 F:14
+2023/24,Luton Town,14960,Gabriel Osho,14 August 1998,21,0,21,2005,31,51,2,4,5,12,D:21
+2023/24,Luton Town,8923,Amari'i Bell,5 May 1994,21,0,21,1866,30,42,2,5,3,13,D:19 M:2
+2023/24,Luton Town,110234,Issa Kaboré,12 May 2001,21,3,24,1859,23,40,0,3,5,16,M:15 D:9
+2023/24,Luton Town,9982,Reece Burke,2 September 1996,20,2,22,1772,24,37,1,3,6,13,D:22
+2023/24,Luton Town,14685,Elijah Adebayo,7 January 1998,16,11,27,1549,30,39,2,5,6,16,F:27
+2023/24,Luton Town,10105,Jordan Clark,22 September 1993,14,9,23,1412,22,44,1,3,4,16,M:14 F:9
+2023/24,Luton Town,31861,Albert Sambi Lokonga,22 October 1999,16,1,17,1384,22,34,2,3,4,10,M:17
+2023/24,Luton Town,3724,Andros Townsend,16 July 1991,14,13,27,1319,16,27,3,5,6,16,F:14 M:13
+2023/24,Luton Town,8212,Tom Lockyer,3 December 1994,14,0,14,1253,12,23,0,2,3,9,D:14
+2023/24,Luton Town,4854,Pelly Mpanzu,22 March 1994,11,16,27,1239,13,30,1,5,4,18,M:27
+2023/24,Luton Town,45351,Marvelous Nakamba,19 January 1994,13,0,13,1209,10,24,0,1,3,9,M:13
+2023/24,Luton Town,21127,Jacob Brown,10 April 1998,12,7,19,1115,16,27,1,4,4,11,F:18 M:1
+2023/24,Luton Town,112538,Daiki Hashioka,17 May 1999,6,4,10,643,10,24,0,1,1,8,D:8 M:2
+2023/24,Luton Town,4125,Cauley Woodrow,2 December 1994,2,22,24,573,10,12,0,3,6,15,F:24
+2023/24,Luton Town,20081,Ryan Giles,26 January 2000,5,6,11,563,4,14,0,2,1,8,M:9 D:2
+2023/24,Luton Town,44737,Mads Andersen,27 December 1997,4,4,8,442,2,6,0,3,0,5,D:8
+2023/24,Luton Town,9154,Fred Onyedinma,24 November 1996,4,4,8,438,6,14,0,1,1,6,M:8
+2023/24,Luton Town,8303,Luke Berry,12 July 1992,2,15,17,421,8,8,0,2,4,11,M:17
+2023/24,Luton Town,134709,Joe Johnson,21 February 2006,0,2,2,87,2,8,0,0,0,2,D:2
+2023/24,Luton Town,3795,James Shea,16 June 1991,0,1,1,20,0,0,0,0,0,1,G:1
+2023/24,Luton Town,127740,Zack Nelson,21 April 2005,0,2,2,18,1,1,0,0,1,1,M:2
+2023/24,Manchester City,16286,Rodri,22 June 1996,34,0,34,3137,98,29,13,27,7,0,M:34
+2023/24,Manchester City,14805,Phil Foden,28 May 2000,33,2,35,3038,84,30,13,25,7,3,M:27 F:8
+2023/24,Manchester City,12707,Ederson,17 August 1993,33,0,33,2994,87,30,11,24,6,3,G:33
+2023/24,Manchester City,3955,Kyle Walker,28 May 1990,30,2,32,2987,86,31,10,23,6,3,D:31 M:1
+2023/24,Manchester City,52723,Julián Alvarez,31 January 2000,31,5,36,2796,86,26,11,27,6,3,M:19 F:17
+2023/24,Manchester City,5067,Bernardo Silva,10 August 1994,29,4,33,2781,78,27,10,24,7,2,M:30 F:3
+2023/24,Manchester City,16431,Rúben Dias,14 May 1997,28,2,30,2771,74,29,9,21,6,3,D:30
+2023/24,Manchester City,65970,Erling Haaland,21 July 2000,29,2,31,2732,75,28,10,22,6,3,F:31
+2023/24,Manchester City,15656,Manuel Akanji,19 July 1995,28,2,30,2708,80,25,11,22,6,2,D:26 M:4
+2023/24,Manchester City,67178,Josko Gvardiol,23 January 2002,26,2,28,2494,76,25,9,22,4,2,D:28
+2023/24,Manchester City,4499,Nathan Aké,18 February 1995,24,5,29,2203,58,23,6,21,6,2,D:29
+2023/24,Manchester City,54156,Jérémy Doku,27 May 2002,18,11,29,1719,56,21,1,21,6,2,F:16 M:13
+2023/24,Manchester City,12520,Mateo Kovacic,6 May 1994,16,14,30,1692,47,16,9,23,4,3,M:30
+2023/24,Manchester City,4288,Kevin De Bruyne,28 June 1991,15,3,18,1286,44,11,5,15,3,0,M:18
+2023/24,Manchester City,4505,John Stones,28 May 1994,12,4,16,1152,30,10,5,12,2,2,D:11 M:5
+2023/24,Manchester City,4260,Jack Grealish,10 September 1995,10,10,20,1128,30,13,3,15,4,1,M:19 F:1
+2023/24,Manchester City,99281,Rico Lewis,21 November 2004,8,8,16,884,29,10,4,11,3,2,D:12 M:4
+2023/24,Manchester City,76204,Matheus Nunes,27 August 1998,7,10,17,736,19,9,2,14,0,3,M:16 F:1
+2023/24,Manchester City,47133,Stefan Ortega,6 November 1992,5,4,9,697,20,7,1,7,2,0,G:9
+2023/24,Manchester City,66657,Oscar Bobb,12 July 2003,2,12,14,363,14,4,1,12,0,2,M:13 F:1
+2023/24,Manchester City,10768,Kalvin Phillips,2 December 1995,0,4,4,119,3,2,0,3,0,1,M:4
+2023/24,Manchester City,49139,Sergio Gómez,4 September 2000,0,6,6,84,3,1,0,6,0,0,M:6
+2023/24,Manchester City,11044,Aymeric Laporte,27 May 1994,0,1,1,20,0,0,0,1,0,0,D:1
+2023/24,Manchester City,49293,Cole Palmer,6 May 2002,0,1,1,19,0,0,0,1,0,0,M:1
+2023/24,Manchester City,49270,James McAtee,18 October 2002,0,1,1,4,0,0,0,1,0,0,M:1
+2023/24,Manchester United,11026,André Onana,2 April 1996,38,0,38,3735,57,62,9,18,6,14,G:38
+2023/24,Manchester United,24252,Diogo Dalot,18 March 1999,35,1,36,3470,56,59,8,17,6,13,D:36
+2023/24,Manchester United,23396,Bruno Fernandes,8 September 1994,35,0,35,3402,55,56,8,18,5,12,M:33 F:2
+2023/24,Manchester United,68987,Alejandro Garnacho,1 July 2004,30,6,36,2727,44,41,8,16,6,14,M:30 F:6
+2023/24,Manchester United,13565,Marcus Rashford,31 October 1997,26,7,33,2434,36,41,7,16,5,12,M:21 F:12
+2023/24,Manchester United,122934,Rasmus Højlund,4 February 2003,25,5,30,2280,36,39,6,14,6,10,F:30
+2023/24,Manchester United,5793,Casemiro,23 February 1992,24,1,25,2146,36,34,5,12,4,9,M:19 D:6
+2023/24,Manchester United,14824,Scott McTominay,8 December 1996,18,14,32,2137,31,32,7,18,4,10,M:30 F:2
+2023/24,Manchester United,108936,Kobbie Mainoo,19 April 2005,24,0,24,2000,33,33,7,10,6,8,M:24
+2023/24,Manchester United,14164,Aaron Wan-Bissaka,26 November 1997,20,2,22,1946,30,36,3,8,5,9,D:22
+2023/24,Manchester United,9566,Harry Maguire,5 March 1993,18,4,22,1833,33,31,4,11,4,7,D:22
+2023/24,Manchester United,3156,Jonny Evans,3 January 1988,15,8,23,1512,21,28,4,12,2,9,D:23
+2023/24,Manchester United,5782,Raphaël Varane,25 April 1993,16,6,22,1510,25,25,3,13,3,6,D:22
+2023/24,Manchester United,75381,Antony,24 February 2000,15,14,29,1460,20,26,3,12,5,12,M:15 F:14
+2023/24,Manchester United,5066,Victor Lindelöf,17 July 1994,14,5,19,1431,18,18,5,12,1,6,D:19
+2023/24,Manchester United,4845,Christian Eriksen,14 February 1992,12,10,22,1272,20,31,2,10,2,10,M:22
+2023/24,Manchester United,22744,Sofyan Amrabat,21 August 1996,10,11,21,1042,8,15,2,11,3,7,M:20 D:1
+2023/24,Manchester United,4608,Luke Shaw,12 July 1995,12,0,12,1024,16,13,4,7,1,4,D:12
+2023/24,Manchester United,67191,Lisandro Martínez,18 January 1998,8,3,11,700,12,12,1,6,2,3,D:11
+2023/24,Manchester United,14580,Mason Mount,10 January 1999,5,9,14,591,3,15,1,5,4,5,M:14
+2023/24,Manchester United,11272,Anthony Martial,5 December 1995,5,8,13,504,11,6,1,6,0,7,F:13
+2023/24,Manchester United,39606,Sergio Reguilón,16 December 1996,4,5,9,457,4,7,2,3,0,6,D:9
+2023/24,Manchester United,69176,Amad Diallo,11 July 2002,3,6,9,443,10,6,1,3,2,4,F:6 M:3
+2023/24,Manchester United,109721,Willy Kambwala,25 August 2004,3,5,8,388,5,10,0,2,2,4,D:8
+2023/24,Manchester United,108972,Facundo Pellistri,20 December 2001,1,8,9,227,2,2,0,3,1,5,M:9
+2023/24,Manchester United,68593,Hannibal Mejbri,21 January 2003,1,4,5,159,2,1,1,3,1,1,M:5
+2023/24,Manchester United,14801,Jadon Sancho,25 March 2000,0,3,3,110,2,1,0,2,0,1,F:3
+2023/24,Manchester United,66691,Omari Forson,20 July 2004,1,3,4,96,1,2,0,1,0,3,M:4
+2023/24,Manchester United,124366,Ethan Wheatley,20 January 2006,0,3,3,34,0,0,0,1,0,2,F:3
+2023/24,Manchester United,11031,Donny van de Beek,18 April 1997,0,1,1,7,0,0,0,0,0,1,M:1
+2023/24,Manchester United,112653,Daniel Gore,26 September 2004,0,1,1,6,0,0,0,1,0,0,M:1
+2023/24,Newcastle United,74761,Bruno Guimarães,16 November 1997,37,0,37,3525,83,67,10,18,6,13,M:37
+2023/24,Newcastle United,5220,Fabian Schär,20 December 1991,35,1,36,3317,73,64,9,17,5,14,D:36
+2023/24,Newcastle United,23747,Anthony Gordon,24 February 2001,34,1,35,3076,72,54,12,17,4,14,F:34 M:1
+2023/24,Newcastle United,14897,Sean Longstaff,30 October 1997,30,5,35,2984,76,57,10,16,6,13,M:35
+2023/24,Newcastle United,8707,Dan Burn,9 May 1992,32,1,33,2923,76,52,8,16,6,11,D:33
+2023/24,Newcastle United,3905,Kieran Trippier,19 September 1990,26,2,28,2424,49,43,6,12,5,11,D:28
+2023/24,Newcastle United,21737,Alexander Isak,21 September 1999,27,3,30,2400,53,48,8,14,3,13,F:30
+2023/24,Newcastle United,6451,Martin Dúbravka,15 January 1989,22,1,23,2171,49,48,4,10,4,9,G:23
+2023/24,Newcastle United,54312,Miguel Almirón,10 February 1994,23,10,33,2061,39,42,5,15,5,13,F:23 M:10
+2023/24,Newcastle United,49908,Sven Botman,12 January 2000,15,2,17,1486,37,30,4,7,2,8,D:17
+2023/24,Newcastle United,49495,Tino Livramento,12 November 2002,12,14,26,1469,32,31,2,14,3,9,D:26
+2023/24,Newcastle United,10079,Nick Pope,19 April 1992,15,0,15,1452,37,17,6,9,2,4,G:15
+2023/24,Newcastle United,20607,Joelinton,14 August 1996,15,5,20,1376,27,25,3,9,2,9,M:13 F:7
+2023/24,Newcastle United,9662,Jacob Murphy,24 February 1995,14,7,21,1280,42,27,5,12,5,4,F:11 M:9 D:1
+2023/24,Newcastle United,117647,Lewis Miley,1 May 2006,14,3,17,1276,27,30,2,6,2,9,M:17
+2023/24,Newcastle United,9257,Jamaal Lascelles,11 November 1993,13,3,16,1172,23,15,5,7,2,7,D:16
+2023/24,Newcastle United,51593,Elliot Anderson,6 November 2002,10,11,21,1128,31,15,6,12,3,6,M:20 F:1
+2023/24,Newcastle United,8454,Callum Wilson,27 February 1992,9,11,20,1109,30,15,6,10,3,7,F:20
+2023/24,Newcastle United,66494,Emil Krafth,2 August 1994,8,9,17,1018,28,21,3,9,2,6,D:17
+2023/24,Newcastle United,14716,Harvey Barnes,9 December 1997,7,14,21,915,25,11,2,11,4,6,M:14 F:7
+2023/24,Newcastle United,108922,Lewis Hall,8 September 2004,8,10,18,875,25,14,2,8,2,8,D:18
+2023/24,Newcastle United,71623,Sandro Tonali,8 May 2000,5,3,8,468,11,5,1,4,1,3,M:8
+2023/24,Newcastle United,14446,Joe Willock,20 August 1999,5,4,9,458,6,13,1,4,2,3,M:9
+2023/24,Newcastle United,3934,Matt Ritchie,10 September 1989,0,13,13,209,3,5,0,8,1,4,M:13
+2023/24,Newcastle United,19600,Loris Karius,22 June 1993,1,0,1,96,1,4,0,0,0,1,G:1
+2023/24,Newcastle United,4815,Matt Targett,18 September 1995,1,2,3,89,0,4,0,0,1,2,D:3
+2023/24,Newcastle United,4340,Paul Dummett,26 September 1991,0,5,5,46,0,1,0,4,1,0,D:5
+2023/24,Newcastle United,51807,Joe White,1 October 2002,0,4,4,36,2,0,0,1,1,2,M:4
+2023/24,Newcastle United,117625,Ben Parkinson,10 March 2005,0,1,1,32,0,1,0,0,0,1,F:1
+2023/24,Newcastle United,127659,Alex Murphy,25 June 2004,0,2,2,25,0,0,0,2,0,0,D:2
+2023/24,Newcastle United,66576,Michael Ndiweni,2 December 2003,0,1,1,3,0,0,0,1,0,0,F:1
+2023/24,Newcastle United,25280,Amadou Diallo,15 February 2003,0,1,1,3,0,0,0,1,0,0,F:1
+2023/24,Nottingham Forest,15259,Morgan Gibbs-White,27 January 2000,35,2,37,3417,53,60,4,9,9,19,M:25 F:12
+2023/24,Nottingham Forest,139648,Murillo,4 July 2002,32,0,32,3024,44,57,2,7,8,17,D:32
+2023/24,Nottingham Forest,49259,Anthony Elanga,27 April 2002,25,11,36,2654,47,48,1,9,8,19,F:20 M:16
+2023/24,Nottingham Forest,14238,Ryan Yates,21 November 1997,21,14,35,2218,35,38,1,9,8,18,M:35
+2023/24,Nottingham Forest,3756,Chris Wood,7 December 1991,20,11,31,2022,30,34,2,7,8,16,F:31
+2023/24,Nottingham Forest,23702,Callum Hudson-Odoi,7 November 2000,20,9,29,2001,36,41,2,6,7,16,M:18 F:11
+2023/24,Nottingham Forest,112510,Danilo,29 April 2001,20,9,29,1922,34,42,1,9,3,17,M:27 F:2
+2023/24,Nottingham Forest,23811,Neco Williams,13 April 2001,18,8,26,1821,26,33,1,6,6,14,D:22 M:4
+2023/24,Nottingham Forest,10439,Ola Aina,8 October 1996,20,2,22,1803,31,40,1,6,4,12,D:19 M:3
+2023/24,Nottingham Forest,54760,Matt Turner,24 June 1994,17,0,17,1684,24,28,2,4,5,8,G:17
+2023/24,Nottingham Forest,49738,Orel Mangala,18 March 1998,19,1,20,1665,19,32,2,4,5,11,M:20
+2023/24,Nottingham Forest,50862,Moussa Niakhaté,8 March 1996,15,6,21,1613,24,36,0,6,2,13,D:21
+2023/24,Nottingham Forest,10933,Harry Toffolo,19 August 1995,15,8,23,1613,22,30,1,5,6,12,D:21 M:2
+2023/24,Nottingham Forest,115172,Nicolás Domínguez,28 June 1998,19,7,26,1578,19,28,5,6,6,14,M:26
+2023/24,Nottingham Forest,16723,Matz Sels,26 February 1992,16,0,16,1565,25,27,1,4,4,8,G:16
+2023/24,Nottingham Forest,16204,Willy Boly,3 February 1991,18,2,20,1555,20,23,3,5,5,10,D:20
+2023/24,Nottingham Forest,15340,Taiwo Awoniyi,12 August 1997,12,8,20,1113,20,22,2,6,3,11,F:20
+2023/24,Nottingham Forest,108816,Ibrahim Sangaré,2 December 1997,13,4,17,1094,13,17,3,3,6,8,M:17
+2023/24,Nottingham Forest,11293,Sèrge Aurier,24 December 1992,10,2,12,905,11,15,1,3,3,6,D:8 M:4
+2023/24,Nottingham Forest,53085,Andrew Omobamidele,23 June 2002,8,3,11,862,14,15,0,2,2,7,D:11
+2023/24,Nottingham Forest,40153,Gonzalo Montiel,1 January 1997,8,6,14,858,14,11,1,5,3,6,D:14
+2023/24,Nottingham Forest,10465,Divock Origi,18 April 1995,6,14,20,718,6,6,2,2,6,12,F:16 M:4
+2023/24,Nottingham Forest,66094,Nuno Tavares,26 January 2000,5,3,8,514,8,9,1,2,3,3,D:8
+2023/24,Nottingham Forest,20547,Odysseas Vlachodimos,26 April 1994,5,0,5,487,7,13,0,1,0,4,G:5
+2023/24,Nottingham Forest,13622,Joe Worrall,10 January 1997,5,2,7,483,9,8,1,3,2,2,D:7
+2023/24,Nottingham Forest,107869,Scott McKenna,12 November 1996,5,0,5,454,9,6,1,2,1,2,D:5
+2023/24,Nottingham Forest,20130,Felipe,16 May 1989,4,3,7,405,4,10,1,1,3,3,D:7
+2023/24,Nottingham Forest,5861,Cheikhou Kouyaté,21 December 1989,2,10,12,292,1,6,0,4,4,4,M:12
+2023/24,Nottingham Forest,66630,Giovanni Reyna,13 November 2002,2,7,9,276,3,3,0,1,3,5,M:9
+2023/24,Nottingham Forest,49374,Brennan Johnson,23 May 2001,3,0,3,241,4,5,0,1,0,2,F:3
+2023/24,Nottingham Forest,119082,Rodrigo Ribeiro,28 April 2005,0,4,4,50,0,0,0,1,2,1,F:4
+2023/24,Nottingham Forest,134486,Brandon Aguilera,28 June 2003,0,1,1,15,0,0,0,0,0,1,M:1
+2023/24,Nottingham Forest,133245,Andrey Santos,3 May 2004,0,1,1,12,0,0,0,0,0,1,M:1
+2023/24,Sheffield United,3902,Jack Robinson,1 September 1993,31,3,34,3143,31,85,1,3,7,24,D:34
+2023/24,Sheffield United,20361,Gustavo Hamer,24 June 1997,34,2,36,3097,32,87,2,3,7,26,M:29 F:7
+2023/24,Sheffield United,14608,Jayden Bogle,27 July 2000,32,2,34,3008,30,83,3,3,6,25,M:21 D:13
+2023/24,Sheffield United,20855,Anel Ahmedhodzic,26 March 1999,29,2,31,2916,29,93,1,2,5,24,D:31
+2023/24,Sheffield United,3881,Wes Foderingham,14 January 1991,29,1,30,2905,25,83,1,3,4,23,G:30
+2023/24,Sheffield United,69865,Vinicius Souza,17 June 1999,29,7,36,2898,28,83,1,3,7,26,M:35 D:1
+2023/24,Sheffield United,54831,Auston Trusty,12 August 1998,28,4,32,2814,23,85,1,2,6,24,D:30 M:2
+2023/24,Sheffield United,25281,Cameron Archer,9 December 2001,21,8,29,1990,23,52,2,3,5,21,F:27 M:2
+2023/24,Sheffield United,49270,James McAtee,18 October 2002,20,10,30,1975,19,67,2,3,6,21,M:23 F:7
+2023/24,Sheffield United,3924,Oliver Norwood,12 April 1991,16,11,27,1643,13,48,0,2,6,19,M:27
+2023/24,Sheffield United,9266,Ben Osborn,5 August 1994,14,10,24,1533,19,41,0,2,4,18,M:22 F:1 D:1
+2023/24,Sheffield United,8107,Oliver McBurnie,4 June 1996,15,6,21,1407,21,41,1,0,6,15,F:21
+2023/24,Sheffield United,14242,Ben Brereton,18 April 1999,14,0,14,1184,16,40,0,0,4,10,F:10 M:4
+2023/24,Sheffield United,9169,George Baldock,9 March 1993,11,2,13,1062,11,21,0,1,4,8,D:9 M:4
+2023/24,Sheffield United,119457,Oliver Arblaster,8 January 2004,11,1,12,1011,13,29,0,0,3,9,M:12
+2023/24,Sheffield United,114588,Andre Brooks,20 August 2003,12,8,20,1007,5,32,1,1,2,17,M:18 F:2
+2023/24,Sheffield United,23796,Luke Thomas,10 June 2001,11,1,12,995,6,30,0,1,2,9,M:9 D:3
+2023/24,Sheffield United,114590,William Osula,4 August 2003,9,12,21,878,4,23,0,1,3,17,F:21
+2023/24,Sheffield United,50661,Ivo Grbic,18 January 1996,9,0,9,844,11,25,0,0,3,6,G:9
+2023/24,Sheffield United,10564,Mason Holgate,22 October 1996,9,1,10,769,11,24,0,1,2,7,D:10
+2023/24,Sheffield United,30528,Yasser Larouci,1 January 2001,6,5,11,578,5,11,0,0,2,9,M:6 D:5
+2023/24,Sheffield United,8578,Max Lowe,11 May 1997,4,6,10,559,6,12,0,2,1,7,D:8 M:2
+2023/24,Sheffield United,4394,John Egan,20 October 1992,6,0,6,514,4,17,0,0,1,5,D:6
+2023/24,Sheffield United,118095,Anis Ben Slimane,16 March 2001,4,11,15,493,2,14,1,1,2,12,M:13 F:2
+2023/24,Sheffield United,136982,Bénie Traoré,30 November 2002,3,5,8,429,2,13,0,0,1,7,F:8
+2023/24,Sheffield United,14742,Rhian Brewster,1 April 2000,3,10,13,412,0,8,0,2,1,10,F:13
+2023/24,Sheffield United,3581,Chris Basham,20 July 1988,3,5,8,376,2,6,0,0,1,7,D:7 M:1
+2023/24,Sheffield United,13389,Tom Davies,30 June 1998,2,7,9,275,2,11,0,1,1,7,M:9
+2023/24,Sheffield United,32673,Rhys Norrington-Davies,22 April 1999,2,3,5,140,1,8,0,1,1,3,D:5
+2023/24,Sheffield United,8444,John Fleck,24 August 1991,1,3,4,117,1,5,0,0,0,4,M:4
+2023/24,Sheffield United,145135,Sam Curtis,1 December 2005,0,1,1,34,0,0,0,0,0,1,D:1
+2023/24,Sheffield United,111987,Daniel Jebbison,13 August 2003,0,1,1,29,0,0,0,0,0,1,F:1
+2023/24,Sheffield United,83496,Antwoine Hackford,20 March 2004,0,2,2,26,0,1,0,0,0,2,F:2
+2023/24,Sheffield United,140364,Ryan Oné,26 June 2006,0,1,1,19,0,2,0,0,0,1,M:1
+2023/24,Sheffield United,119459,Sydie Peck,13 September 2004,0,1,1,15,0,0,0,1,0,0,M:1
+2023/24,Tottenham Hotspur,71923,Guglielmo Vicario,7 October 1996,38,0,38,3745,77,64,7,20,6,12,G:38
+2023/24,Tottenham Hotspur,32229,Pedro Porro,13 September 1999,35,0,35,3362,68,57,7,19,5,11,D:35
+2023/24,Tottenham Hotspur,4999,Son Heung-Min,8 July 1992,34,1,35,3125,64,54,7,19,4,12,F:25 M:10
+2023/24,Tottenham Hotspur,66635,Cristian Romero,27 April 1998,33,0,33,3047,66,45,7,19,5,9,D:33
+2023/24,Tottenham Hotspur,49316,Dejan Kulusevski,25 April 2000,31,5,36,2993,58,49,8,19,5,12,M:32 F:4
+2023/24,Tottenham Hotspur,126824,Destiny Udogie,28 November 2002,28,0,28,2578,58,43,5,16,6,6,D:28
+2023/24,Tottenham Hotspur,75582,Micky van de Ven,19 April 2001,27,0,27,2537,50,41,5,15,5,7,D:27
+2023/24,Tottenham Hotspur,49374,Brennan Johnson,23 May 2001,23,9,32,2247,51,38,5,15,5,12,M:17 F:15
+2023/24,Tottenham Hotspur,8456,James Maddison,23 November 1996,26,2,28,2212,48,34,7,16,4,8,M:28
+2023/24,Tottenham Hotspur,50245,Yves Bissouma,30 August 1996,26,2,28,2181,45,37,7,15,4,9,M:28
+2023/24,Tottenham Hotspur,117318,Pape Matar Sarr,14 September 2002,27,7,34,2172,41,29,9,19,4,11,M:34
+2023/24,Tottenham Hotspur,24630,Richarlison,10 May 1997,18,10,28,1626,39,21,8,15,6,7,F:24 M:4
+2023/24,Tottenham Hotspur,5272,Pierre-Emile Højbjerg,5 August 1995,8,28,36,1563,34,29,1,20,5,11,M:36
+2023/24,Tottenham Hotspur,63654,Emerson Royal,14 January 1999,11,11,22,1319,23,31,0,11,3,8,D:22
+2023/24,Tottenham Hotspur,4408,Ben Davies,24 April 1993,12,5,17,1210,26,21,1,10,1,6,D:17
+2023/24,Tottenham Hotspur,22802,Rodrigo Bentancur,25 June 1997,13,10,23,1100,19,25,1,10,3,10,M:23
+2023/24,Tottenham Hotspur,23599,Timo Werner,6 March 1996,10,3,13,858,20,17,0,6,3,4,M:9 F:4
+2023/24,Tottenham Hotspur,21413,Oliver Skipp,16 September 2000,5,16,21,838,17,17,1,12,4,5,M:20 D:1
+2023/24,Tottenham Hotspur,19851,Giovani Lo Celso,9 April 1996,4,18,22,635,12,12,1,9,2,11,M:22
+2023/24,Tottenham Hotspur,69070,Radu Dragusin,3 February 2002,4,5,9,505,10,7,1,5,2,2,D:9
+2023/24,Tottenham Hotspur,55700,Bryan Gil,11 February 2001,2,9,11,281,4,11,0,3,3,5,F:9 M:2
+2023/24,Tottenham Hotspur,4112,Eric Dier,15 January 1994,1,3,4,236,1,8,0,2,0,2,D:4
+2023/24,Tottenham Hotspur,62934,Manor Solomon,24 July 1999,2,3,5,227,6,2,0,4,1,0,F:3 M:2
+2023/24,Tottenham Hotspur,12901,Ivan Perisic,2 February 1989,0,5,5,146,4,1,0,4,1,0,M:5
+2023/24,Tottenham Hotspur,138107,Alejo Veliz,19 September 2003,0,8,8,92,3,2,0,5,0,3,F:8
+2023/24,Tottenham Hotspur,20224,Davinson Sánchez,12 June 1996,0,1,1,81,1,2,0,0,1,0,D:1
+2023/24,Tottenham Hotspur,66570,Dane Scarlett,24 March 2004,0,4,4,48,1,0,0,4,0,0,F:4
+2023/24,Tottenham Hotspur,127853,Mikey Moore,11 August 2007,0,2,2,20,0,0,0,1,0,1,M:2
+2023/24,Tottenham Hotspur,92626,Jamie Donley,3 January 2005,0,3,3,14,0,0,0,2,1,0,F:3
+2023/24,West Ham United,16803,Emerson,3 August 1994,35,1,36,3386,63,71,5,14,9,13,D:35 M:1
+2023/24,West Ham United,7336,Vladimír Coufal,22 August 1992,36,0,36,3353,63,74,4,14,8,14,D:35 M:1
+2023/24,West Ham United,8868,Jarrod Bowen,20 December 1996,34,0,34,3259,59,68,5,13,10,11,M:17 F:17
+2023/24,West Ham United,4617,James Ward-Prowse,1 November 1994,34,3,37,3240,57,68,5,14,9,14,M:37
+2023/24,West Ham United,25183,Tomás Soucek,27 February 1995,34,3,37,3096,57,69,5,13,10,14,M:37
+2023/24,West Ham United,5175,Kurt Zouma,27 October 1994,32,1,33,3090,58,67,3,13,7,13,D:33
+2023/24,West Ham United,5748,Alphonse Areola,27 February 1993,31,0,31,2920,51,58,4,11,9,11,G:31
+2023/24,West Ham United,55776,Lucas Paquetá,27 August 1997,31,0,31,2779,58,57,4,14,7,10,M:28 F:3
+2023/24,West Ham United,51364,Mohammed Kudus,2 August 2000,27,6,33,2699,47,63,3,12,7,14,M:31 F:2
+2023/24,West Ham United,40211,Edson Álvarez,24 October 1997,28,3,31,2554,41,49,5,13,7,11,M:31
+2023/24,West Ham United,108628,Nayef Aguerd,30 March 1996,21,0,21,1999,28,48,2,7,4,10,D:21
+2023/24,West Ham United,9595,Michail Antonio,28 March 1990,21,5,26,1770,39,39,5,9,6,11,F:25 M:1
+2023/24,West Ham United,32638,Konstantinos Mavropanos,11 December 1997,16,3,19,1646,32,28,3,6,7,6,D:19
+2023/24,West Ham United,3309,Lukasz Fabianski,18 April 1985,7,3,10,799,15,21,1,3,2,5,G:10
+2023/24,West Ham United,5514,Angelo Ogbonna,23 May 1988,7,4,11,686,12,15,2,6,2,3,D:11
+2023/24,West Ham United,20517,Saïd Benrahma,10 August 1995,5,8,13,681,13,9,3,6,3,4,F:8 M:5
+2023/24,West Ham United,15212,Ben Johnson,24 January 2000,4,10,14,651,5,16,1,4,4,6,D:12 M:2
+2023/24,West Ham United,8245,Danny Ings,23 July 1992,3,17,20,527,5,10,0,5,4,11,F:20
+2023/24,West Ham United,25246,Pablo Fornals,22 February 1996,4,11,15,512,6,9,1,7,4,4,M:15
+2023/24,West Ham United,8897,Aaron Cresswell,15 December 1989,4,7,11,498,7,12,0,3,2,6,D:11
+2023/24,West Ham United,10768,Kalvin Phillips,2 December 1995,3,5,8,345,4,10,0,1,2,5,M:8
+2023/24,West Ham United,16758,Maxwel Cornet,27 September 1996,1,6,7,147,2,3,0,0,3,4,F:6 M:1
+2023/24,West Ham United,70143,Divin Mubama,25 October 2004,0,5,5,112,2,2,0,2,2,1,F:5
+2023/24,West Ham United,11189,Thilo Kehrer,21 September 1996,0,4,4,46,0,1,0,2,1,1,D:4
+2023/24,West Ham United,110117,George Earthy,5 September 2004,0,3,3,46,1,0,0,1,0,2,M:3
+2023/24,West Ham United,109714,Kaelan Casey,28 October 2004,0,1,1,4,0,0,0,1,0,0,D:1
+2023/24,Wolverhampton Wanderers,13522,Maximilian Kilman,23 May 1997,38,0,38,3746,53,68,5,13,7,18,D:38
+2023/24,Wolverhampton Wanderers,16642,Nélson Semedo,16 November 1993,36,0,36,3330,46,63,5,12,7,17,M:22 D:14
+2023/24,Wolverhampton Wanderers,15715,José Sá,17 January 1993,35,0,35,3327,50,61,4,12,7,16,G:35
+2023/24,Wolverhampton Wanderers,5583,Mario Lemina,1 September 1993,34,1,35,3206,43,57,4,11,7,17,M:34 F:1
+2023/24,Wolverhampton Wanderers,92635,Toti Gomes,16 January 1999,31,4,35,3004,45,51,4,13,7,15,D:35
+2023/24,Wolverhampton Wanderers,133679,João Gomes,12 February 2001,32,2,34,2823,39,54,4,13,6,15,M:33 F:1
+2023/24,Wolverhampton Wanderers,51202,Matheus Cunha,27 May 1999,29,3,32,2592,43,48,6,10,7,15,F:32
+2023/24,Wolverhampton Wanderers,71432,Rayan Aït-Nouri,6 June 2001,29,4,33,2458,39,46,3,12,4,17,M:22 D:10 F:1
+2023/24,Wolverhampton Wanderers,4198,Craig Dawson,6 May 1990,25,0,25,2404,35,40,6,10,5,10,D:25
+2023/24,Wolverhampton Wanderers,20337,Hwang Hee-Chan,26 January 1996,25,4,29,2291,38,39,3,11,5,13,F:25 M:4
+2023/24,Wolverhampton Wanderers,19814,Pablo Sarabia,11 May 1992,20,10,30,1872,31,28,6,12,4,14,F:17 M:13
+2023/24,Wolverhampton Wanderers,21998,Pedro Neto,9 March 2000,18,2,20,1646,24,29,3,8,4,8,F:12 M:8
+2023/24,Wolverhampton Wanderers,24637,Tommy Doyle,17 October 2001,11,15,26,1385,20,24,3,8,4,14,M:25 F:1
+2023/24,Wolverhampton Wanderers,4229,Matt Doherty,16 January 1992,9,21,30,1349,19,21,1,12,6,12,D:22 M:8
+2023/24,Wolverhampton Wanderers,126108,Jean-Ricner Bellegarde,27 June 1998,10,12,22,1047,8,24,0,8,3,11,M:20 F:2
+2023/24,Wolverhampton Wanderers,117315,Boubacar Traoré,20 August 2001,7,17,24,986,12,24,0,6,6,12,M:24
+2023/24,Wolverhampton Wanderers,43010,Santiago Bueno,9 November 1998,9,3,12,910,12,18,0,3,2,7,D:12
+2023/24,Wolverhampton Wanderers,66692,Hugo Bueno,18 September 2002,7,15,22,876,8,17,2,7,4,11,D:17 M:5
+2023/24,Wolverhampton Wanderers,9651,Dan Bentley,13 July 1993,3,2,5,419,3,7,2,1,0,4,G:5
+2023/24,Wolverhampton Wanderers,66670,Fábio Silva,19 July 2002,3,5,8,315,2,9,1,2,1,5,F:8
+2023/24,Wolverhampton Wanderers,108319,Sasa Kalajdzic,7 July 1997,1,10,11,242,6,2,1,3,3,5,F:11
+2023/24,Wolverhampton Wanderers,112651,Nathan Fraser,22 February 2005,1,6,7,235,4,3,1,1,1,5,F:7
+2023/24,Wolverhampton Wanderers,69766,Tawanda Chirewa,12 October 2003,1,7,8,198,0,2,0,0,2,6,M:7 F:1
+2023/24,Wolverhampton Wanderers,76204,Matheus Nunes,27 August 1998,2,0,2,195,1,6,0,0,0,2,M:2
+2023/24,Wolverhampton Wanderers,127804,Leon Chiwome,10 January 2006,2,1,3,189,1,4,0,0,1,2,F:3
+2023/24,Wolverhampton Wanderers,20277,Jonny,3 March 1994,0,1,1,11,0,0,0,1,0,0,D:1
+2023/24,Wolverhampton Wanderers,139644,Enso González,20 January 2005,0,1,1,8,0,0,0,0,0,1,F:1
