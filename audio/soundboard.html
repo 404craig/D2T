@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Barlow:wght@400;500;600&family=Doto:wght@700;900&display=swap">
 <style>
 /* Layout: a floodlit stadium control desk. Scoreboard display on top, mixer strip, then
-   match moments, recordings, commentary and the synth lab as stacked bays. Single night look. */
+   match moments, recordings and the synth lab as stacked bays. Single night look. */
 :root {
   --bg: #0b171c;
   --panel: #12232a;
@@ -14,7 +14,6 @@
   --amber: #ffb43a;      /* scoreboard LEDs and sodium floodlights */
   --amber-dim: #6b4a17;
   --grass: #3cc47c;      /* recordings */
-  --sky: #6cc3ff;        /* commentary */
   --rose: #ff6b5e;       /* stop, losses */
   --violet: #c59bff;     /* synth */
   --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
@@ -46,7 +45,6 @@ button { cursor: pointer; }
 .legend { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; border: 1px solid currentColor; line-height: 1.3; }
 .tag.rec { color: var(--grass); }
-.tag.vo { color: var(--sky); }
 .tag.syn { color: var(--violet); }
 
 /* Scoreboard */
@@ -82,6 +80,9 @@ input[type="range"] { width: 100%; accent-color: var(--amber); margin: 4px 0; }
 .bay-head p { color: var(--muted); max-width: 60ch; font-size: 14px; }
 
 /* Match moments */
+.scene-groups { display: grid; gap: 22px; }
+.scene-group { display: grid; gap: 10px; }
+.scene-group > h3 { font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); font-family: var(--body); font-weight: 600; }
 .scenes { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
 .scene { text-align: left; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 14px; display: grid; gap: 8px; align-content: start; position: relative; }
 .scene:hover { border-color: var(--amber); }
@@ -91,7 +92,6 @@ input[type="range"] { width: 100%; accent-color: var(--amber); margin: 4px 0; }
 .chips { display: flex; flex-wrap: wrap; gap: 4px; }
 .chip { font-size: 11px; padding: 2px 6px; border-radius: 3px; background: var(--bg); border-left: 3px solid; line-height: 1.4; }
 .chip.rec { border-color: var(--grass); }
-.chip.vo { border-color: var(--sky); }
 .chip.syn { border-color: var(--violet); }
 
 /* Recording pads */
@@ -100,24 +100,13 @@ input[type="range"] { width: 100%; accent-color: var(--amber); margin: 4px 0; }
 .pad:hover { background: var(--panel-2); }
 .pad.sel { outline: 2px solid var(--grass); outline-offset: -1px; }
 .pad.playing::after { content: ""; position: absolute; inset: 8px 8px auto auto; width: 8px; height: 8px; border-radius: 50%; background: var(--grass); box-shadow: 0 0 8px var(--grass); }
+.pad-group { grid-column: 1 / -1; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-top: 6px; }
 .pad b { font-family: var(--display); font-size: 19px; font-weight: 700; line-height: 1.05; }
 .pad small { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
 .pad .tuned { color: var(--amber); }
 .inspector { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); align-items: end; }
 .inspector .ins-title { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; }
 .ins-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-
-/* Commentary */
-.voices { display: flex; flex-wrap: wrap; gap: 8px; }
-.voice { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 8px 12px; text-align: left; line-height: 1.25; }
-.voice small { display: block; color: var(--muted); font-size: 12px; }
-.voice[aria-pressed="true"] { border-color: var(--sky); box-shadow: inset 0 -3px 0 var(--sky); }
-.lines { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
-.line { text-align: left; background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--sky); border-radius: 4px; padding: 10px 12px; display: grid; gap: 2px; }
-.line:hover { background: var(--panel-2); }
-.line.playing { background: var(--panel-2); border-color: var(--sky); }
-.line q { font-weight: 500; quotes: "\201C" "\201D"; }
-.line small { color: var(--muted); font-size: 12px; }
 
 /* Synth lab */
 .synths { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
@@ -146,8 +135,8 @@ textarea.copy-fallback { width: 100%; min-height: 120px; background: var(--bg); 
     <div class="intro">
       <span class="eyebrow">DROP2TOP audio</span>
       <h1>Sound <span>Desk</span></h1>
-      <p>Every sound for the game in one place. Stadium recordings and commentary were made with ElevenLabs. Game sounds are synthesised live in your browser, so every slider changes the sound. Your tweaks are saved on this device.</p>
-      <div class="legend"><span class="tag rec">Recording</span><span class="tag vo">Commentary</span><span class="tag syn">Synth</span></div>
+      <p>Every sound for the game in one place. Whistles, crowd and card recordings were made with ElevenLabs. Game sounds are synthesised live in your browser, so every slider changes the sound. Your tweaks are saved on this device.</p>
+      <div class="legend"><span class="tag rec">Recording</span><span class="tag syn">Synth</span></div>
     </div>
     <div class="board" aria-live="polite">
       <div class="board-row">
@@ -168,7 +157,6 @@ textarea.copy-fallback { width: 100%; min-height: 120px; background: var(--bg); 
     <div class="fader"><label for="m_master">Master <output id="o_master"></output></label><input type="range" id="m_master" min="0" max="1.5" step="0.01"></div>
     <div class="fader"><label for="m_bed"><span class="toggle"><input type="checkbox" id="m_bedOn"> Crowd bed</span> <output id="o_bed"></output></label><input type="range" id="m_bed" min="0" max="1.5" step="0.01"></div>
     <div class="fader"><label for="m_rec">Recordings <output id="o_rec"></output></label><input type="range" id="m_rec" min="0" max="1.5" step="0.01"></div>
-    <div class="fader"><label for="m_vo">Commentary <output id="o_vo"></output></label><input type="range" id="m_vo" min="0" max="1.5" step="0.01"></div>
     <div class="fader"><label for="m_syn">Synth <output id="o_syn"></output></label><input type="range" id="m_syn" min="0" max="1.5" step="0.01"></div>
     <div class="fader"><label for="m_verb">Stadium echo <output id="o_verb"></output></label><input type="range" id="m_verb" min="0" max="1" step="0.01"></div>
   </section>
@@ -176,27 +164,18 @@ textarea.copy-fallback { width: 100%; min-height: 120px; background: var(--bg); 
   <section class="bay" aria-labelledby="h-scenes">
     <div class="bay-head">
       <div><span class="eyebrow">Layered cues</span><h2 id="h-scenes">Match moments</h2></div>
-      <p>Each moment layers recordings, commentary and synth sounds the way the game would. They use the commentator picked below and every tweak you make further down.</p>
+      <p>Each moment layers recordings and synth sounds the way the game would, and picks up every tweak you make further down.</p>
     </div>
-    <div class="scenes" id="scenes"></div>
+    <div class="scene-groups" id="scenes"></div>
   </section>
 
   <section class="bay" aria-labelledby="h-rec">
     <div class="bay-head">
-      <div><span class="eyebrow">ElevenLabs sound effects</span><h2 id="h-rec">Stadium recordings</h2></div>
+      <div><span class="eyebrow">ElevenLabs sound effects</span><h2 id="h-rec">Recordings</h2></div>
       <p>Tap a pad to play it and open its settings. Speed changes pitch too, like a record. Reverse is worth a go on the roar.</p>
     </div>
     <div class="pads" id="pads"></div>
     <div class="inspector" id="inspector"></div>
-  </section>
-
-  <section class="bay" aria-labelledby="h-vo">
-    <div class="bay-head">
-      <div><span class="eyebrow">ElevenLabs voices</span><h2 id="h-vo">Commentary</h2></div>
-      <p>Ten lines, three British voices. Pick one, or Rotate to hear a different voice each time.</p>
-    </div>
-    <div class="voices" id="voices" role="group" aria-label="Commentator"></div>
-    <div class="lines" id="lines"></div>
   </section>
 
   <section class="bay" aria-labelledby="h-syn">
@@ -217,7 +196,7 @@ textarea.copy-fallback { width: 100%; min-height: 120px; background: var(--bg); 
       <summary>What the recordings were asked for</summary>
       <ul id="prompts"></ul>
     </details>
-    <p>Audio files live in the D2T repo under <code>audio/sfx</code> and <code>audio/voice</code>. Levels are normalised so nothing jumps out.</p>
+    <p>Audio files live in the D2T repo under <code>audio/sfx</code>. Levels are normalised so nothing jumps out.</p>
   </footer>
 </div>
 <div class="toast" id="toast" hidden></div>
@@ -228,43 +207,34 @@ textarea.copy-fallback { width: 100%; min-height: 120px; background: var(--bg); 
 
 /* ---------- Content ---------- */
 const CLIPS = [
-  { id: "crowd_loop", label: "Crowd bed", note: "Seamless loop", prompt: "Large English football stadium crowd ambience, constant murmur and distant chanting, steady loopable background" },
-  { id: "chant", label: "Terrace chant", prompt: "English football fans singing a rousing terrace chant together in a stadium, clapping rhythm" },
-  { id: "goal_roar", label: "Goal roar", prompt: "Huge football stadium crowd erupts in a massive goal celebration roar, then sustained applause" },
-  { id: "groan", label: "Groan", prompt: "Football stadium crowd groans in disappointment after a near miss" },
-  { id: "boos", label: "Boos", prompt: "Football stadium crowd booing loudly and whistling in anger at the referee" },
-  { id: "applause", label: "Applause", prompt: "Football crowd warm applause and clapping, appreciative, some cheers" },
-  { id: "whistle", label: "Whistle", prompt: "Referee blows a single sharp short whistle blast on a football pitch" },
-  { id: "full_time", label: "Full-time whistle", prompt: "Referee blows three long whistle blasts for full time, crowd reacting" },
-  { id: "net_ripple", label: "Ball in the net", prompt: "Football hits the back of the net, sharp thud of a kick then a swish of the net" },
-  { id: "card_pack", label: "Card pack rip", prompt: "Tearing open a foil trading card pack, crinkly foil rip, then cards sliding out" },
-  { id: "trophy_fanfare", label: "Trophy fanfare", prompt: "Triumphant short brass fanfare for winning a trophy, celebratory, stadium echo" },
-  { id: "relegation_sting", label: "Relegation sting", prompt: "Sad descending trombone wah wah wah fail sound, comedic" },
-];
-const VOICES = [
-  { id: "daniel", name: "Daniel", desc: "Steady broadcaster" },
-  { id: "george", name: "George", desc: "Warm storyteller" },
-  { id: "lily", name: "Lily", desc: "Confident, velvety" },
-  { id: "rotate", name: "Rotate", desc: "New voice each time" },
-];
-const LINES = [
-  { id: "welcome", text: "Welcome to Drop to Top!", use: "Home screen" },
-  { id: "kickoff", text: "Here we go. Kick off!", use: "Match starts" },
-  { id: "goal", text: "And it's in! What a goal!", use: "You score" },
-  { id: "miss", text: "Oh, so close! Inches wide.", use: "Near miss" },
-  { id: "penalty", text: "Penalty! The referee points to the spot!", use: "Penalty given" },
-  { id: "signed", text: "Signed! A new face in the dressing room.", use: "Transfer done" },
-  { id: "fulltime", text: "And that's the final whistle.", use: "Match ends" },
-  { id: "promoted", text: "They're going up! Promotion secured!", use: "Promotion" },
-  { id: "champions", text: "Champions! From the drop, to the top!", use: "Title won" },
-  { id: "relegated", text: "Relegated. It's a long way back from here.", use: "Season failed" },
+  { id: "whistle", group: "Whistles", label: "Whistle", prompt: "Referee blows a single sharp short whistle blast on a football pitch" },
+  { id: "half_time", group: "Whistles", label: "Half-time whistle", prompt: "Referee blows two short whistle blasts for half time, crowd applause rising" },
+  { id: "full_time", group: "Whistles", label: "Full-time whistle", prompt: "Referee blows three long whistle blasts for full time, crowd reacting" },
+  { id: "crowd_loop", group: "Crowd", label: "Crowd bed", note: "Seamless loop", prompt: "Large English football stadium crowd ambience, constant murmur and distant chanting, steady loopable background" },
+  { id: "goal_roar", group: "Crowd", label: "Goal roar", prompt: "Huge football stadium crowd erupts in a massive goal celebration roar, then sustained applause" },
+  { id: "cheer_short", group: "Crowd", label: "Quick cheer", prompt: "Football stadium crowd short burst of cheering and clapping for a crunching tackle" },
+  { id: "crowd_ooh", group: "Crowd", label: "Ooh", prompt: "Large football crowd gasps in rising anticipation as a shot flies just over the bar, collective ooh" },
+  { id: "groan", group: "Crowd", label: "Groan", prompt: "Football stadium crowd groans in disappointment after a near miss" },
+  { id: "crowd_moan", group: "Crowd", label: "Moan", prompt: "Frustrated home football crowd moans and grumbles after a misplaced pass" },
+  { id: "boos", group: "Crowd", label: "Boos", prompt: "Football stadium crowd booing loudly and whistling in anger at the referee" },
+  { id: "applause", group: "Crowd", label: "Applause", prompt: "Football crowd warm applause and clapping, appreciative, some cheers" },
+  { id: "chant", group: "Crowd", label: "Terrace chant", prompt: "English football fans singing a rousing terrace chant together in a stadium, clapping rhythm" },
+  { id: "net_ripple", group: "Crowd", label: "Ball in the net", prompt: "Football hits the back of the net, sharp thud of a kick then a swish of the net" },
+  { id: "card_shuffle", group: "Cards", label: "Shuffle", prompt: "Deck of playing cards riffle shuffled then bridged, close up, crisp" },
+  { id: "card_deal", group: "Cards", label: "Deal three", prompt: "Three playing cards dealt quickly one after another onto a felt table, three crisp distinct card snaps" },
+  { id: "card_slide", group: "Cards", label: "Card slide", prompt: "A single playing card slid across a wooden table and tapped down, close up" },
+  { id: "card_pack", group: "Cards", label: "Pack rip", prompt: "Tearing open a foil trading card pack, crinkly foil rip, then cards sliding out" },
+  { id: "celebration", group: "Season end", label: "Promotion party", prompt: "Football stadium promotion party, crowd cheering wildly, fireworks bangs and air horns" },
+  { id: "trophy_fanfare", group: "Season end", label: "Trophy fanfare", prompt: "Triumphant short brass fanfare for winning a trophy, celebratory, stadium echo" },
+  { id: "stunned_silence", group: "Season end", label: "Stunned silence", prompt: "Football stadium falls into stunned near silence, a few scattered claps and disappointed murmurs, wind" },
+  { id: "relegation_sting", group: "Season end", label: "Relegation sting", prompt: "Sad descending trombone wah wah wah fail sound, comedic" },
 ];
 
 /* ---------- Saved state ---------- */
-const KEY = "d2t-sound-desk-v1";
-const DEFAULT_MASTER = { master: 0.9, bedOn: false, bed: 0.55, rec: 1, vo: 1, syn: 0.8, verb: 0.25 };
+const KEY = "d2t-sound-desk-v2";
+const DEFAULT_MASTER = { master: 0.9, bedOn: false, bed: 0.55, rec: 1, syn: 0.8, verb: 0.25 };
 const DEFAULT_CLIP = { gain: 1, rate: 1, pan: 0, loop: false, reverse: false };
-let state = { master: { ...DEFAULT_MASTER }, clips: {}, synth: {}, voice: "daniel", seed: 0 };
+let state = { master: { ...DEFAULT_MASTER }, clips: {}, synth: {}, seed: 0 };
 try { const s = JSON.parse(localStorage.getItem(KEY) || "null"); if (s) state = { ...state, ...s, master: { ...DEFAULT_MASTER, ...(s.master || {}) } }; } catch (e) {}
 if (!state.seed) state.seed = 1000 + Math.floor(Math.random() * 9000);
 let saveT = 0;
@@ -278,7 +248,7 @@ const comp = ctx.createDynamicsCompressor();
 comp.threshold.value = -10; comp.ratio.value = 4; comp.attack.value = 0.005; comp.release.value = 0.2;
 const master = ctx.createGain(); master.connect(comp); comp.connect(ctx.destination);
 const bus = {};
-for (const k of ["bed", "rec", "vo", "syn"]) { bus[k] = ctx.createGain(); bus[k].connect(master); }
+for (const k of ["bed", "rec", "syn"]) { bus[k] = ctx.createGain(); bus[k].connect(master); }
 const verbIn = ctx.createGain(), verb = ctx.createConvolver(), verbOut = ctx.createGain();
 verb.buffer = (() => {
   const len = Math.floor(ctx.sampleRate * 2.4), b = ctx.createBuffer(2, len, ctx.sampleRate);
@@ -293,7 +263,6 @@ function applyMaster() {
   master.gain.setTargetAtTime(m.master, now, 0.02);
   bus.bed.gain.setTargetAtTime(m.bed, now, 0.05);
   bus.rec.gain.setTargetAtTime(m.rec, now, 0.02);
-  bus.vo.gain.setTargetAtTime(m.vo, now, 0.02);
   bus.syn.gain.setTargetAtTime(m.syn, now, 0.02);
   verbOut.gain.setTargetAtTime(m.verb * 1.4, now, 0.02);
 }
@@ -304,7 +273,7 @@ window.addEventListener("keydown", unlock, { capture: true });
 
 /* Loading */
 const buffers = {}, reversed = {};
-let loaded = 0; const total = CLIPS.length + LINES.length * 3;
+let loaded = 0; const total = CLIPS.length;
 function decode(ab) { return new Promise((res, rej) => { const p = ctx.decodeAudioData(ab, res, rej); if (p && p.then) p.then(res, rej); }); }
 async function load(key, url) {
   try { const r = await fetch(url); if (!r.ok) throw new Error(r.status); buffers[key] = await decode(await r.arrayBuffer()); }
@@ -313,7 +282,6 @@ async function load(key, url) {
   if (key === "crowd_loop" && state.master.bedOn) startBed();
 }
 CLIPS.forEach(c => load(c.id, `sfx/${c.id}.mp3`));
-VOICES.slice(0, 3).forEach(v => LINES.forEach(l => load(`vo_${v.id}_${l.id}`, `voice/${v.id}_${l.id}.mp3`)));
 function reversedOf(id) {
   if (reversed[id]) return reversed[id];
   const s = buffers[id], b = ctx.createBuffer(s.numberOfChannels, s.length, s.sampleRate);
@@ -339,13 +307,6 @@ function playClip(id, { at = 0, gain = 1, onend } = {}) {
   const c = clipCfg(id);
   return playBuffer(c.reverse ? reversedOf(id) : buffers[id], { out: bus.rec, gain: c.gain * gain, rate: c.rate, pan: c.pan, loop: c.loop, at, onend });
 }
-let rotateIdx = 0;
-function currentVoice() { if (state.voice !== "rotate") return state.voice; return VOICES[rotateIdx++ % 3].id; }
-function playLine(id, { at = 0, voice, onend } = {}) {
-  const v = voice || currentVoice(), b = buffers[`vo_${v}_${id}`];
-  if (!b) return null;
-  return { voice: v, h: playBuffer(b, { out: bus.vo, at, send: 0.25, onend }) };
-}
 let bed = null;
 function startBed() { if (bed || !buffers.crowd_loop) return; bed = playBuffer(buffers.crowd_loop, { out: bus.bed, loop: true, send: 0.3 }); active.delete(bed); }
 function stopBed() { if (bed) { bed.stop(0.6); bed = null; } }
@@ -356,7 +317,7 @@ function envGain(dest, t, attack, decay, peak) {
   const g = ctx.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(peak, t + attack); g.gain.exponentialRampToValueAtTime(0.0001, t + attack + decay); g.connect(dest); return g;
 }
 function tone(dest, type, f, t, dur, peak, attack = 0.004) {
-  const o = ctx.createOscillator(); o.type = type; o.frequency.setValueAtTime(f, t);
+  const o = ctx.createOscillator(); o.type = type; o.frequency.setValueAtTime(Math.min(f, 18000), t);
   o.connect(envGain(dest, t, attack, dur, peak)); o.start(t); o.stop(t + attack + dur + 0.05); return o;
 }
 function noise(dest, t, dur, { type = "bandpass", f = 2000, f2, q = 1, peak = 0.5, attack = 0.003 } = {}) {
@@ -417,9 +378,37 @@ const SYNTHS = [
   { id: "heartbeat", name: "Penalty heartbeat", use: "Tension before a spot kick",
     params: [R("bpm", "Heart rate", 50, 160, 1, 92, "bpm"), R("beats", "Beats", 1, 12, 1, 6), R("depth", "Depth", 35, 120, 1, 55, "Hz"), R("build", "Speeds up", 0, 1, 0.05, 0.4)],
     play(o, p, t) { let tt = t, gap = 60 / p.bpm; for (let i = 0; i < p.beats; i++) { [0, 0.17].forEach((d, j) => { const s = tone(o, "sine", p.depth * (j ? 0.9 : 1.2), tt + d, 0.13, j ? 0.6 : 0.95, 0.004); s.frequency.exponentialRampToValueAtTime(p.depth * 0.6, tt + d + 0.12); }); tt += gap; gap *= 1 - p.build * 0.06; } return tt - t; } },
-  { id: "stamp", name: "Contract stamp", use: "A signing goes through",
+  { id: "stamp", name: "Lock in", use: "Confirm your starting XI or a signing",
     params: [R("weight", "Weight", 40, 200, 1, 85, "Hz"), R("thud", "Thud", 0.05, 0.5, 0.01, 0.18, "s"), R("paper", "Paper", 0, 1, 0.05, 0.5)],
     play(o, p, t) { const s = tone(o, "sine", p.weight * 2, t, p.thud, 0.9, 0.002); s.frequency.exponentialRampToValueAtTime(p.weight * 0.6, t + p.thud); noise(o, t, p.thud * 0.6, { type: "lowpass", f: 1200, peak: 0.5 }); if (p.paper) noise(o, t + 0.01, 0.08, { f: 3200, q: 0.8, peak: p.paper * 0.35 }); return p.thud; } },
+  { id: "deal3", name: "Roll 3 cards", use: "Three new player cards land, one ping each",
+    params: [R("cards", "Cards", 1, 5, 1, 3), R("gap", "Gap", 0.06, 0.5, 0.01, 0.2, "s"), R("pitch", "First ping", 300, 1600, 10, 660, "Hz"), R("rise", "Rise per card", 0, 7, 1, 4, "st"), R("whoosh", "Whoosh", 0, 1, 0.05, 0.7), R("sparkle", "Sparkle", 0, 1, 0.05, 0.5)],
+    play(o, p, t) { let tt = t; for (let i = 0; i < p.cards; i++) { tt = t + i * p.gap; if (p.whoosh) noise(o, tt, 0.09, { f: 1400, f2: 6500, q: 1.4, peak: p.whoosh * 0.8 }); tone(o, "triangle", p.pitch * semi(i * p.rise), tt + 0.06, 0.28, 0.26); }
+      const top = p.pitch * semi((p.cards - 1) * p.rise) * 2; if (p.sparkle) [0, 4, 7, 12].forEach((n, i) => tone(o, "sine", top * semi(n), tt + 0.25 + i * 0.05, 0.3, 0.06 * p.sparkle)); return tt - t + 0.6; } },
+  { id: "pick", name: "Pick a player", use: "Tapping a card to choose it",
+    params: [R("pitch", "Pitch", 300, 1500, 10, 700, "Hz"), R("lift", "Lift", 0, 12, 1, 7, "st"), R("len", "Length", 0.04, 0.3, 0.01, 0.09, "s"), R("thump", "Thump", 0, 1, 0.05, 0.5), C("wave", "Tone", ["sine", "triangle", "square"], "triangle")],
+    play(o, p, t) { const pk = p.wave === "square" ? 0.15 : 0.35; tone(o, p.wave, p.pitch, t, p.len, pk); tone(o, p.wave, p.pitch * semi(p.lift), t + p.len * 0.7, p.len * 1.8, pk);
+      if (p.thump) { const s = tone(o, "sine", 180, t, 0.1, p.thump * 0.7, 0.002); s.frequency.exponentialRampToValueAtTime(70, t + 0.1); } return p.len * 2.6; } },
+  { id: "subIn", name: "Player on", use: "Swapping a player into the team",
+    params: [R("len", "Length", 0.1, 0.8, 0.01, 0.3, "s"), R("low", "Start pitch", 150, 800, 10, 300, "Hz"), R("high", "End pitch", 600, 3000, 10, 1300, "Hz"), R("air", "Whoosh", 0, 1, 0.05, 0.6), R("pop", "Pop", 0, 1, 0.05, 0.6)],
+    play(o, p, t) { const s = tone(o, "triangle", p.low, t, p.len, 0.25, p.len * 0.6); s.frequency.exponentialRampToValueAtTime(p.high, t + p.len); if (p.air) noise(o, t, p.len, { f: 500, f2: 6000, q: 1.2, peak: p.air * 0.5, attack: p.len * 0.6 });
+      if (p.pop) tone(o, "sine", p.high * 1.5, t + p.len * 0.9, 0.12, p.pop * 0.35, 0.002); return p.len + 0.15; } },
+  { id: "subOut", name: "Player off", use: "Swapping a player out of the team",
+    params: [R("len", "Length", 0.1, 0.8, 0.01, 0.32, "s"), R("high", "Start pitch", 600, 3000, 10, 1100, "Hz"), R("low", "End pitch", 100, 600, 10, 220, "Hz"), R("air", "Whoosh", 0, 1, 0.05, 0.6), R("thud", "Thud", 0, 1, 0.05, 0.5)],
+    play(o, p, t) { const s = tone(o, "triangle", p.high, t, p.len, 0.25, 0.01); s.frequency.exponentialRampToValueAtTime(p.low, t + p.len); if (p.air) noise(o, t, p.len, { f: 6000, f2: 500, q: 1.2, peak: p.air * 0.5 });
+      if (p.thud) { const k = tone(o, "sine", 140, t + p.len * 0.85, 0.14, p.thud * 0.7, 0.002); k.frequency.exponentialRampToValueAtTime(55, t + p.len + 0.12); } return p.len + 0.2; } },
+  { id: "survived", name: "Season over", use: "Survived or finished mid-table",
+    params: [R("root", "Key", 150, 500, 1, 262, "Hz"), R("len", "Chord length", 0.2, 1, 0.01, 0.42, "s"), C("wave", "Tone", ["triangle", "sine", "square"], "triangle"), R("bell", "Bell", 0, 1, 0.05, 0.4)],
+    play(o, p, t) { const pk = p.wave === "square" ? 0.07 : 0.14; const chords = [[5, 9, 12], [7, 11, 14], [0, 4, 7, 12]];
+      chords.forEach((c, i) => c.forEach(n => tone(o, p.wave, p.root * semi(n), t + i * p.len, i === 2 ? p.len * 3 : p.len * 1.1, pk, 0.02)));
+      if (p.bell) tone(o, "sine", p.root * 4, t + 2 * p.len, 1.4, 0.12 * p.bell); return p.len * 5.5; } },
+  { id: "champions", name: "Champions fanfare", use: "Winning the league",
+    params: [R("root", "Key", 150, 450, 1, 233, "Hz"), R("speed", "Speed", 0.08, 0.3, 0.005, 0.14, "s"), R("brass", "Brassiness", 400, 5000, 10, 2200, "Hz"), R("hold", "Last note", 0.4, 2.5, 0.05, 1.3, "s"), R("drums", "Timpani", 0, 1, 0.05, 0.6)],
+    play(o, p, t) { const seq = [[0, 1], [0, 1], [0, 1], [7, 3], [5, 1], [7, 1], [12, 0]]; let tt = t;
+      seq.forEach(([n, d], i) => { const last = i === seq.length - 1, len = last ? p.hold : p.speed * d; const fl = ctx.createBiquadFilter(); fl.type = "lowpass"; fl.Q.value = 2; fl.frequency.setValueAtTime(p.brass * 0.35, tt); fl.frequency.linearRampToValueAtTime(p.brass, tt + 0.05); fl.connect(o);
+        [1, 1.006].forEach(dt => tone(fl, "sawtooth", p.root * semi(n) * dt, tt, len * 0.95, 0.12, 0.02)); if (last) [4, 7].forEach(x => tone(fl, "sawtooth", p.root * semi(x), tt, len, 0.08, 0.03));
+        if (p.drums && (i === 0 || i === 3 || last)) { const k = tone(o, "sine", 110, tt, 0.4, p.drums * 0.8, 0.003); k.frequency.exponentialRampToValueAtTime(60, tt + 0.4); }
+        tt += last ? len : p.speed * d * 1.15; }); return tt - t; } },
 ];
 const synthById = Object.fromEntries(SYNTHS.map(s => [s.id, s]));
 const synthDefaults = s => Object.fromEntries(s.params.map(p => [p.key, p.def]));
@@ -433,34 +422,39 @@ function playSynth(id, at = 0, gain = 1) {
 
 /* ---------- Match moments ---------- */
 const SCENES = [
-  { id: "welcome", name: "Welcome", when: "Opening the game", steps: [{ rec: "chant", at: 0, gain: 0.55 }, { vo: "welcome", at: 0.6 }, { syn: "tap", at: 2.6 }] },
-  { id: "kickoff", name: "Kick off", when: "First whistle", steps: [{ vo: "kickoff", at: 0 }, { rec: "whistle", at: 1.7 }, { rec: "applause", at: 1.9, gain: 0.5 }] },
-  { id: "goal", name: "Goal", when: "You score", steps: [{ syn: "kick", at: 0 }, { rec: "net_ripple", at: 0.12 }, { rec: "goal_roar", at: 0.35 }, { vo: "goal", at: 0.8 }] },
-  { id: "miss", name: "Near miss", when: "Shot goes wide", steps: [{ syn: "kick", at: 0 }, { rec: "groan", at: 0.3 }, { vo: "miss", at: 0.7 }] },
-  { id: "penalty", name: "Penalty", when: "Spot kick awarded", steps: [{ rec: "whistle", at: 0 }, { vo: "penalty", at: 0.7 }, { syn: "heartbeat", at: 3.4 }] },
-  { id: "decision", name: "Bad call", when: "Ref gives it against you", steps: [{ syn: "whistle", at: 0 }, { rec: "boos", at: 0.4 }] },
-  { id: "rating", name: "Card reveal", when: "A new player card", steps: [{ rec: "card_pack", at: 0 }, { syn: "cardFlip", at: 1.3 }, { syn: "ratingScan", at: 1.5 }] },
-  { id: "signing", name: "Signing", when: "Transfer completed", steps: [{ syn: "stamp", at: 0 }, { syn: "cash", at: 0.25 }, { vo: "signed", at: 0.9 }, { rec: "applause", at: 1.2, gain: 0.4 }] },
-  { id: "fulltime", name: "Full time", when: "Match over", steps: [{ rec: "full_time", at: 0 }, { rec: "applause", at: 2.8, gain: 0.6 }, { vo: "fulltime", at: 3.3 }] },
-  { id: "promoted", name: "Promoted", when: "Up a division", steps: [{ syn: "climb", at: 0 }, { rec: "chant", at: 0.6, gain: 0.8 }, { vo: "promoted", at: 1.3 }, { syn: "promotion", at: 4.3 }] },
-  { id: "champions", name: "Champions", when: "Top of the top flight", steps: [{ rec: "trophy_fanfare", at: 0 }, { rec: "goal_roar", at: 0.3, gain: 0.7 }, { vo: "champions", at: 1.0 }] },
-  { id: "relegated", name: "Relegated", when: "Down you go", steps: [{ rec: "boos", at: 0, gain: 0.5 }, { syn: "relegation", at: 0.5 }, { vo: "relegated", at: 2.9 }] },
+  { id: "kickoff", group: "Match", name: "Kick off", when: "First whistle", steps: [{ rec: "whistle", at: 0 }, { rec: "cheer_short", at: 0.25, gain: 0.6 }] },
+  { id: "goal", group: "Match", name: "Goal", when: "You score", steps: [{ syn: "kick", at: 0 }, { rec: "net_ripple", at: 0.12 }, { rec: "goal_roar", at: 0.35 }] },
+  { id: "miss", group: "Match", name: "Near miss", when: "Shot just over", steps: [{ syn: "kick", at: 0 }, { rec: "crowd_ooh", at: 0.12 }, { rec: "groan", at: 1.5, gain: 0.6 }] },
+  { id: "conceded", group: "Match", name: "Conceded", when: "They score", steps: [{ rec: "groan", at: 0 }, { rec: "crowd_moan", at: 1.4, gain: 0.8 }] },
+  { id: "tackle", group: "Match", name: "Big tackle", when: "Won the ball back", steps: [{ syn: "kick", at: 0, gain: 0.7 }, { rec: "cheer_short", at: 0.08 }] },
+  { id: "decision", group: "Match", name: "Bad call", when: "Ref gives it against you", steps: [{ syn: "whistle", at: 0 }, { rec: "boos", at: 0.4 }] },
+  { id: "penalty", group: "Match", name: "Penalty", when: "Spot kick awarded", steps: [{ rec: "whistle", at: 0 }, { rec: "crowd_ooh", at: 0.4, gain: 0.6 }, { syn: "heartbeat", at: 1.6 }] },
+  { id: "halftime", group: "Match", name: "Half time", when: "Break at 45", steps: [{ rec: "half_time", at: 0 }, { rec: "applause", at: 2.2, gain: 0.5 }] },
+  { id: "fulltime", group: "Match", name: "Full time", when: "Match over", steps: [{ rec: "full_time", at: 0 }, { rec: "applause", at: 2.8, gain: 0.6 }] },
+  { id: "roll3", group: "Cards and squad", name: "Roll 3 cards", when: "Three new players to choose from", steps: [{ rec: "card_shuffle", at: 0 }, { syn: "deal3", at: 1.0 }] },
+  { id: "roll3rec", group: "Cards and squad", name: "Roll 3 (real cards)", when: "Same moment, all recorded", steps: [{ rec: "card_shuffle", at: 0 }, { rec: "card_deal", at: 0.95 }] },
+  { id: "reveal", group: "Cards and squad", name: "Card reveal", when: "Rating counts up", steps: [{ rec: "card_slide", at: 0 }, { syn: "cardFlip", at: 0.3 }, { syn: "ratingScan", at: 0.45 }] },
+  { id: "pick", group: "Cards and squad", name: "Pick a player", when: "Choose one of the three", steps: [{ syn: "pick", at: 0 }, { rec: "card_slide", at: 0.05, gain: 0.7 }] },
+  { id: "subIn", group: "Cards and squad", name: "Swap in", when: "Player goes into the XI", steps: [{ syn: "subIn", at: 0 }, { rec: "cheer_short", at: 0.25, gain: 0.35 }] },
+  { id: "subOut", group: "Cards and squad", name: "Swap out", when: "Player drops to the bench", steps: [{ syn: "subOut", at: 0 }, { rec: "applause", at: 0.3, gain: 0.3 }] },
+  { id: "lockin", group: "Cards and squad", name: "Lock in XI", when: "Team confirmed", steps: [{ syn: "stamp", at: 0 }, { syn: "tap", at: 0.2 }] },
+  { id: "promoted", group: "Season end", name: "Promoted", when: "Up a division", steps: [{ syn: "climb", at: 0 }, { rec: "celebration", at: 0.6 }, { syn: "promotion", at: 1.4 }] },
+  { id: "champions", group: "Season end", name: "Champions", when: "Top of the league", steps: [{ rec: "trophy_fanfare", at: 0 }, { syn: "champions", at: 0.1, gain: 0.6 }, { rec: "goal_roar", at: 0.3, gain: 0.7 }, { rec: "celebration", at: 2.2, gain: 0.8 }] },
+  { id: "survived", group: "Season end", name: "Survived", when: "Mid-table, job done", steps: [{ syn: "survived", at: 0 }, { rec: "applause", at: 0.4, gain: 0.7 }] },
+  { id: "relegated", group: "Season end", name: "Relegated", when: "Down you go", steps: [{ rec: "stunned_silence", at: 0 }, { rec: "relegation_sting", at: 0.5 }, { rec: "boos", at: 2.8, gain: 0.4 }] },
 ];
 const sceneLen = sc => Math.max(...sc.steps.map(s => s.at + (s.rec && buffers[s.rec] ? buffers[s.rec].duration : 3)));
 function playScene(id, { label } = {}) {
   const sc = SCENES.find(s => s.id === id); if (!sc) return 0;
-  let who = "";
   sc.steps.forEach(s => {
     if (s.rec) playClip(s.rec, { at: s.at, gain: s.gain || 1 });
     if (s.syn) playSynth(s.syn, s.at, s.gain || 1);
-    if (s.vo) { const r = playLine(s.vo, { at: s.at }); if (r) who = r.voice; }
   });
   const el = document.querySelector(`[data-scene="${id}"]`);
   if (el) { el.classList.add("playing"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("playing"), sceneLen(sc) * 1000); }
-  if (!label) flash(`${sc.name}${who ? " · " + nameOf(who) : ""}`);
+  if (!label) flash(sc.name);
   return sceneLen(sc);
 }
-const nameOf = v => (VOICES.find(x => x.id === v) || {}).name || v;
 
 /* ---------- Display ---------- */
 const $ = id => document.getElementById(id);
@@ -471,7 +465,7 @@ function flash(t) { if (sim) return; ticker(t); busyTicker = true; clearTimeout(
 
 /* ---------- UI: mixer ---------- */
 const pct = v => Math.round(v * 100);
-["master", "bed", "rec", "vo", "syn", "verb"].forEach(k => {
+["master", "bed", "rec", "syn", "verb"].forEach(k => {
   const inp = $("m_" + k), out = $("o_" + k);
   inp.value = state.master[k]; out.textContent = pct(state.master[k]);
   inp.addEventListener("input", () => { state.master[k] = +inp.value; out.textContent = pct(+inp.value); applyMaster(); save(); });
@@ -480,8 +474,10 @@ $("m_bedOn").checked = state.master.bedOn;
 $("m_bedOn").addEventListener("change", e => { state.master.bedOn = e.target.checked; save(); unlock(); e.target.checked ? startBed() : stopBed(); });
 
 /* ---------- UI: scenes ---------- */
-const chipLabel = s => s.rec ? (CLIPS.find(c => c.id === s.rec) || {}).label : s.syn ? synthById[s.syn].name : `“${(LINES.find(l => l.id === s.vo) || {}).text}”`;
-$("scenes").innerHTML = SCENES.map(sc => `<button class="scene" type="button" data-scene="${sc.id}"><h3>${sc.name}</h3><span class="when">${sc.when}</span><span class="chips">${sc.steps.map(s => `<span class="chip ${s.rec ? "rec" : s.syn ? "syn" : "vo"}">${chipLabel(s)}</span>`).join("")}</span></button>`).join("");
+const chipLabel = s => s.rec ? (CLIPS.find(c => c.id === s.rec) || {}).label : synthById[s.syn].name;
+const groupsOf = list => [...new Set(list.map(x => x.group))];
+$("scenes").innerHTML = groupsOf(SCENES).map(g => `<div class="scene-group"><h3>${g}</h3><div class="scenes">${SCENES.filter(sc => sc.group === g).map(sc =>
+  `<button class="scene" type="button" data-scene="${sc.id}"><h3>${sc.name}</h3><span class="when">${sc.when}</span><span class="chips">${sc.steps.map(s => `<span class="chip ${s.rec ? "rec" : "syn"}">${chipLabel(s)}</span>`).join("")}</span></button>`).join("")}</div></div>`).join("");
 $("scenes").addEventListener("click", e => { const b = e.target.closest("[data-scene]"); if (b) { unlock(); playScene(b.dataset.scene); } });
 
 /* ---------- UI: pads + inspector ---------- */
@@ -489,9 +485,10 @@ let selected = "goal_roar";
 const playingPads = {};
 function isTuned(id) { const c = clipCfg(id); return Object.keys(DEFAULT_CLIP).some(k => c[k] !== DEFAULT_CLIP[k]); }
 function renderPads() {
-  $("pads").innerHTML = CLIPS.map(c => {
+  $("pads").innerHTML = CLIPS.map((c, i) => {
     const d = buffers[c.id] ? buffers[c.id].duration.toFixed(1) + "s" : "";
-    return `<button class="pad${c.id === selected ? " sel" : ""}${playingPads[c.id] ? " playing" : ""}" type="button" data-clip="${c.id}"><b>${c.label}</b><small>${c.note ? c.note + " · " : ""}${d}${isTuned(c.id) ? ' · <span class="tuned">tuned</span>' : ""}</small></button>`;
+    const head = i === 0 || CLIPS[i - 1].group !== c.group ? `<div class="pad-group">${c.group}</div>` : "";
+    return head + `<button class="pad${c.id === selected ? " sel" : ""}${playingPads[c.id] ? " playing" : ""}" type="button" data-clip="${c.id}"><b>${c.label}</b><small>${c.note ? c.note + " · " : ""}${d}${isTuned(c.id) ? ' · <span class="tuned">tuned</span>' : ""}</small></button>`;
   }).join("");
 }
 function renderInspector() {
@@ -522,16 +519,6 @@ $("inspector").addEventListener("click", e => {
   if (a === "play") playPad(selected);
   if (a === "stop" && playingPads[selected]) { playingPads[selected].stop(); delete playingPads[selected]; renderPads(); }
   if (a === "reset") { delete state.clips[selected]; save(); renderInspector(); renderPads(); }
-});
-
-/* ---------- UI: commentary ---------- */
-function renderVoices() { $("voices").innerHTML = VOICES.map(v => `<button class="voice" type="button" data-voice="${v.id}" aria-pressed="${state.voice === v.id}">${v.name}<small>${v.desc}</small></button>`).join(""); }
-$("voices").addEventListener("click", e => { const b = e.target.closest("[data-voice]"); if (b) { state.voice = b.dataset.voice; save(); renderVoices(); } });
-$("lines").innerHTML = LINES.map(l => `<button class="line" type="button" data-line="${l.id}"><q>${l.text}</q><small>${l.use}</small></button>`).join("");
-$("lines").addEventListener("click", e => {
-  const b = e.target.closest("[data-line]"); if (!b) return; unlock();
-  const r = playLine(b.dataset.line, { onend: () => b.classList.remove("playing") });
-  if (r) { b.classList.add("playing"); flash(`${nameOf(r.voice)}: ${LINES.find(l => l.id === b.dataset.line).text}`); }
 });
 
 /* ---------- UI: synth lab ---------- */
@@ -577,12 +564,12 @@ function copy(text, msg) {
 $("copyAll").addEventListener("click", () => {
   const tuned = Object.fromEntries(Object.keys(state.clips).map(id => [id, clipCfg(id)]));
   const synth = Object.fromEntries(SYNTHS.map(s => [s.id, synthCfg(s.id)]));
-  copy(JSON.stringify({ commentator: state.voice, mixer: state.master, recordings: tuned, synth }, null, 2), "All settings copied");
+  copy(JSON.stringify({ mixer: state.master, recordings: tuned, synth }, null, 2), "All settings copied");
 });
 let resetArmed = false;
 $("resetAll").addEventListener("click", e => {
   if (!resetArmed) { resetArmed = true; e.target.textContent = "Tap again to reset"; setTimeout(() => { resetArmed = false; e.target.textContent = "Reset everything"; }, 3000); return; }
-  state = { master: { ...DEFAULT_MASTER }, clips: {}, synth: {}, voice: "daniel", seed: state.seed }; save(); location.reload();
+  state = { master: { ...DEFAULT_MASTER }, clips: {}, synth: {}, seed: state.seed }; save(); location.reload();
 });
 
 /* ---------- Match simulator ---------- */
@@ -605,13 +592,13 @@ function startSim() {
   sim.iv = setInterval(() => {
     const s = sim; if (!s) return; s.min++; $("clock").textContent = String(s.min).padStart(2, "0") + "'"; s.cool--;
     const say = t => ticker(`${s.min}' ${t}`);
-    if (s.min === 45) { playSynth("whistle", 0, 1); say("Half time"); s.cool = 4; return; }
+    if (s.min === 45) { playScene("halftime", { label: true }); say(`Half time. D2T ${s.us}-${s.them} ${opp}`); s.cool = 6; return; }
     if (s.min >= 90) {
       clearInterval(s.iv); playScene("fulltime", { label: true }); say(`Full time. D2T ${s.us}-${s.them} ${opp}`);
-      const outcome = s.us > s.them ? "promoted" : s.us < s.them ? "relegated" : null;
+      const outcome = s.us > s.them ? "promoted" : s.us < s.them ? "relegated" : "survived";
       s.timers.push(setTimeout(() => { if (sim !== s) return;
-        if (outcome) { playScene(outcome, { label: true }); ticker(outcome === "promoted" ? "Won it. Going up" : "Beaten. Going down"); } else { playClip("applause"); ticker("A point apiece"); }
-        s.timers.push(setTimeout(() => sim === s && stopSim(), outcome ? 7000 : 3500));
+        playScene(outcome, { label: true }); ticker({ promoted: "Won it. Going up", relegated: "Beaten. Going down", survived: "A point. Safe for another year" }[outcome]);
+        s.timers.push(setTimeout(() => sim === s && stopSim(), 7000));
       }, 5000));
       return;
     }
@@ -619,10 +606,12 @@ function startSim() {
     const x = r();
     if (x < 0.05) { s.us++; setScore(s.us, s.them, opp); playScene("goal", { label: true }); say("GOAL! D2T score"); s.cool = 9; }
     else if (x < 0.11) { playScene("miss", { label: true }); say("Chance! Just wide"); s.cool = 7; }
-    else if (x < 0.14) { s.them++; setScore(s.us, s.them, opp); playClip("groan"); playClip("boos", { at: 1.2, gain: 0.5 }); say(`${opp} score`); s.cool = 7; }
+    else if (x < 0.14) { s.them++; setScore(s.us, s.them, opp); playScene("conceded", { label: true }); say(`${opp} score`); s.cool = 7; }
     else if (x < 0.16) { playScene("decision", { label: true }); say("Free kick given against D2T"); s.cool = 5; }
     else if (x < 0.18) { playClip("chant", { gain: 0.7 }); say("The away end in full voice"); s.cool = 7; }
-    else if (x < 0.19) { playScene("penalty", { label: true }); say("Penalty to D2T"); const ok = r() < 0.75;
+    else if (x < 0.2) { playScene("tackle", { label: true }); say("Huge tackle"); s.cool = 4; }
+    else if (x < 0.21) { playClip("crowd_moan"); say("Sloppy pass. The crowd let them know"); s.cool = 5; }
+    else if (x < 0.215) { playScene("penalty", { label: true }); say("Penalty to D2T"); const ok = r() < 0.75;
       s.timers.push(setTimeout(() => { if (sim !== s) return; if (ok) { s.us++; setScore(s.us, s.them, opp); playScene("goal", { label: true }); say("Penalty scored"); } else { playScene("miss", { label: true }); say("Penalty missed"); } }, 5200)); s.cool = 14; }
   }, 500);
 }
@@ -635,8 +624,8 @@ $("stopAll").addEventListener("click", () => {
 document.addEventListener("visibilitychange", () => { if (document.hidden && sim) stopSim("Match paused when you left the page"); });
 
 /* ---------- Footer + first render ---------- */
-$("prompts").innerHTML = CLIPS.map(c => `<li><b>${c.label}:</b> ${c.prompt}</li>`).join("") + `<li><b>Commentary:</b> ElevenLabs v3 voices Daniel, George and Lily reading the ten lines above.</li>`;
-renderPads(); renderInspector(); renderVoices();
+$("prompts").innerHTML = CLIPS.map(c => `<li><b>${c.label}:</b> ${c.prompt}</li>`).join("") ;
+renderPads(); renderInspector();
 const padTimer = setInterval(() => { renderPads(); if (loaded >= total) clearInterval(padTimer); }, 600);
 })();
 </script>
