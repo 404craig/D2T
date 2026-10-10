@@ -1,0 +1,561 @@
+season,club_feed,feed_id,name,feed_pos,appearances,goals,goal_assist,clean_sheet,wins,draws,losses,mins_played,game_started,goals_conceded,saves,yellow_card,red_card,own_goals
+2000/01,Arsenal,1659,Thierry Henry,F,35,17,9,10,19,10,6,0,0,0,0,4,0,0
+2000/01,Arsenal,19,Ray Parlour,M,33,4,1,11,15,10,8,0,0,0,0,4,0,0
+2000/01,Arsenal,1835,Robert Pirès,M,33,4,7,7,17,8,8,0,0,0,0,1,0,0
+2000/01,Arsenal,1297,Gilles Grimandi,D,30,1,2,8,18,7,5,0,0,0,0,4,1,0
+2000/01,Arsenal,1497,Freddie Ljungberg,M,30,6,3,5,14,9,7,0,0,0,0,3,0,0
+2000/01,Arsenal,1132,Patrick Vieira,M,30,5,4,12,16,7,7,0,0,0,0,5,2,0
+2000/01,Arsenal,13,Lee Dixon,D,29,1,2,10,15,9,5,0,0,0,0,2,0,0
+2000/01,Arsenal,14,Martin Keown,D,28,0,0,11,14,8,6,0,0,0,0,3,0,0
+2000/01,Arsenal,1502,Kanu,F,27,3,5,1,13,7,7,0,0,0,0,1,0,0
+2000/01,Arsenal,1836,Sylvain Wiltord,F,27,8,5,4,14,8,5,0,0,0,0,0,0,0
+2000/01,Arsenal,3,Tony Adams,D,26,1,2,14,18,4,4,0,0,0,0,7,0,0
+2000/01,Arsenal,991,Dennis Bergkamp,F,25,3,3,7,14,7,4,0,0,0,0,2,0,0
+2000/01,Arsenal,1651,Sylvinho,D,24,2,2,7,10,8,6,0,0,0,0,3,0,1
+2000/01,Arsenal,1,David Seaman,G,24,0,0,11,15,6,3,0,0,0,0,0,0,0
+2000/01,Arsenal,1650,Oleg Luzhny,D,19,0,1,6,10,5,4,0,0,0,0,1,0,0
+2000/01,Arsenal,1831,Lauren,D,18,2,0,6,13,3,2,0,0,0,0,3,0,0
+2000/01,Arsenal,1494,Ashley Cole,D,17,3,1,7,11,2,4,0,0,0,0,3,0,0
+2000/01,Arsenal,1298,Nelson Vivas,D,12,0,1,1,7,3,2,0,0,0,0,0,0,0
+2000/01,Arsenal,1296,Alexander Manninger,G,11,0,0,3,3,3,5,0,0,0,0,0,0,0
+2000/01,Arsenal,1832,Igors Stepanovs,D,9,0,0,4,5,2,2,0,0,0,0,0,0,0
+2000/01,Arsenal,1834,Edu,M,5,0,0,0,2,1,2,0,0,0,0,0,0,1
+2000/01,Arsenal,225,John Lukic,G,3,0,0,3,2,1,0,0,0,0,0,0,0,0
+2000/01,Arsenal,1837,Tomas Danilevicius,F,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+2000/01,Arsenal,1131,Matt Upson,D,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+2000/01,Arsenal,1303,Paolo Vernazza,M,2,1,0,0,1,1,0,0,0,0,0,0,0,0
+2000/01,Arsenal,1655,Stefan Malz,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,Aston Villa,252,David James,G,38,0,0,9,13,15,10,0,0,0,0,0,0,0
+2000/01,Aston Villa,23,Paul Merson,M,38,6,6,8,13,15,10,0,0,0,0,2,0,0
+2000/01,Aston Villa,72,Alan Wright,D,36,1,4,9,12,15,9,0,0,0,0,3,0,0
+2000/01,Aston Villa,406,Steve Stone,M,34,2,2,5,11,13,10,0,0,0,0,8,0,0
+2000/01,Aston Villa,1839,Özalan Alpay,D,33,0,0,7,12,12,9,0,0,0,0,12,0,1
+2000/01,Aston Villa,1361,George Boateng,M,33,1,0,7,12,12,9,0,0,0,0,9,0,1
+2000/01,Aston Villa,338,Dion Dublin,F,33,8,4,5,10,14,9,0,0,0,0,2,0,1
+2000/01,Aston Villa,848,Lee Hendrie,M,32,6,5,4,10,14,8,0,0,0,0,3,2,0
+2000/01,Aston Villa,153,Gareth Southgate,D,31,2,1,7,12,12,7,0,0,0,0,6,0,0
+2000/01,Aston Villa,1308,Gareth Barry,M,30,0,0,7,10,12,8,0,0,0,0,3,0,0
+2000/01,Aston Villa,847,Ian Taylor,M,29,4,2,5,11,11,7,0,0,0,0,3,1,0
+2000/01,Aston Villa,1083,David Ginola,F,27,3,4,1,9,10,8,0,0,0,0,7,0,0
+2000/01,Aston Villa,1309,Darius Vassell,F,23,4,1,2,9,7,7,0,0,0,0,2,0,0
+2000/01,Aston Villa,909,Julian Joachim,F,20,7,1,2,9,8,3,0,0,0,0,0,0,0
+2000/01,Aston Villa,1504,Mark Delaney,D,19,0,0,3,7,7,5,0,0,0,0,1,0,1
+2000/01,Aston Villa,41,Steve Staunton,D,14,0,2,1,4,5,5,0,0,0,0,0,0,0
+2000/01,Aston Villa,1843,Juan Pablo Ángel,F,9,1,1,0,3,2,4,0,0,0,0,1,0,0
+2000/01,Aston Villa,1744,Gilles De Bilde,F,4,0,0,0,2,0,2,0,0,0,0,0,0,0
+2000/01,Aston Villa,1662,John McGrath,M,3,0,0,0,1,0,2,0,0,0,0,0,0,0
+2000/01,Aston Villa,1987,Luc Nilis,F,3,1,0,0,1,1,1,0,0,0,0,0,0,0
+2000/01,Aston Villa,1505,Jlloyd Samuel,D,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+2000/01,Aston Villa,35,Ugo Ehiogu,D,2,0,0,0,1,0,1,0,0,0,0,1,0,0
+2000/01,Aston Villa,1840,Thomas Hitzlsperger,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,Bradford City,1670,Stuart McCall,M,37,1,0,6,5,11,21,0,0,0,0,4,1,0
+2000/01,Bradford City,932,Ashley Ward,F,33,4,4,3,3,10,20,0,0,0,0,9,0,0
+2000/01,Bradford City,1240,Benito Carbone,F,31,5,4,4,4,10,17,0,0,0,0,3,0,0
+2000/01,Bradford City,125,Peter Atherton,D,25,0,2,3,3,7,15,0,0,0,0,1,0,0
+2000/01,Bradford City,1672,Dean Windass,F,24,3,2,2,3,5,16,0,0,0,0,10,0,0
+2000/01,Bradford City,1673,Robbie Blake,M,21,4,0,0,3,6,12,0,0,0,0,0,0,0
+2000/01,Bradford City,1667,Wayne Jacobs,D,21,2,0,4,3,7,11,0,0,0,0,2,0,0
+2000/01,Bradford City,1189,Robert Molenaar,D,21,1,0,3,4,5,12,0,0,0,0,4,0,0
+2000/01,Bradford City,953,Ian Nolan,D,21,0,0,2,3,6,12,0,0,0,0,0,0,0
+2000/01,Bradford City,102,Andy Myers,D,20,1,0,3,5,6,9,0,0,0,0,2,0,0
+2000/01,Bradford City,187,Peter Beagrie,,19,1,1,0,1,6,12,0,0,0,0,2,0,0
+2000/01,Bradford City,309,Gary Walsh,G,19,0,0,3,3,4,12,0,0,0,0,2,0,0
+2000/01,Bradford City,1668,Gareth Whalley,M,19,0,1,2,3,7,9,0,0,0,0,0,0,0
+2000/01,Bradford City,1664,Andy O'Brien,D,18,0,0,2,3,4,11,0,0,0,0,1,0,0
+2000/01,Bradford City,228,David Wetherall,D,18,1,0,2,1,6,11,0,0,0,0,3,0,1
+2000/01,Bradford City,1236,Matt Clarke,G,17,0,0,2,2,6,9,0,0,0,0,3,0,0
+2000/01,Bradford City,1034,Eoin Jess,M,17,3,4,3,3,4,10,0,0,0,0,0,0,0
+2000/01,Bradford City,905,Jamie Lawrence,M,17,0,1,1,0,6,11,0,0,0,0,4,0,0
+2000/01,Bradford City,954,Dan Petrescu,D,17,1,1,1,1,6,10,0,0,0,0,1,0,0
+2000/01,Bradford City,423,Gunnar Halle,D,13,0,0,3,2,4,7,0,0,0,0,0,0,1
+2000/01,Bradford City,108,David Hopkin,M,11,0,0,2,1,2,8,0,0,0,0,1,0,0
+2000/01,Bradford City,1003,Billy McKinlay,M,11,0,0,0,3,1,7,0,0,0,0,3,0,0
+2000/01,Bradford City,328,Lee Sharpe,M,11,0,1,0,1,5,5,0,0,0,0,0,0,0
+2000/01,Bradford City,60,Dean Saunders,F,10,0,0,0,1,2,7,0,0,0,0,0,0,0
+2000/01,Bradford City,627,Stan Collymore,F,7,2,0,0,2,3,2,0,0,0,0,0,0,0
+2000/01,Bradford City,1845,Gary Locke,M,7,0,0,1,0,3,4,0,0,0,0,2,0,0
+2000/01,Bradford City,1671,Gareth Grant,F,5,0,0,0,1,2,2,0,0,0,0,0,0,0
+2000/01,Bradford City,1009,Aidan Davison,G,2,0,0,1,0,1,1,0,0,0,0,0,0,0
+2000/01,Bradford City,1669,Scott Kerr,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2000/01,Bradford City,1134,Isaiah Rankin,F,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2000/01,Charlton Athletic,1851,Claus Jensen,M,38,5,3,7,14,10,14,0,0,0,0,0,0,0
+2000/01,Charlton Athletic,111,Graham Stuart,M,35,5,8,11,14,9,12,0,0,0,0,7,0,0
+2000/01,Charlton Athletic,1168,Chris Powell,D,33,0,2,11,12,8,13,0,0,0,0,1,0,0
+2000/01,Charlton Athletic,1520,Mark Kinsella,M,32,2,2,8,11,7,14,0,0,0,0,4,0,0
+2000/01,Charlton Athletic,1517,Richard Rufus,D,32,2,1,13,13,10,9,0,0,0,0,7,1,1
+2000/01,Charlton Athletic,1855,Jonatan Johansson,F,31,11,2,5,11,7,13,0,0,0,0,2,0,0
+2000/01,Charlton Athletic,1522,John Robinson,M,29,2,2,5,12,6,11,0,0,0,0,4,0,0
+2000/01,Charlton Athletic,1850,Radostin Kishishev,M,27,0,3,5,9,8,10,0,0,0,0,4,0,0
+2000/01,Charlton Athletic,1516,Steve Brown,D,25,0,0,6,9,7,9,0,0,0,0,0,1,0
+2000/01,Charlton Athletic,1848,Dean Kiely,G,25,0,0,9,10,6,9,0,0,0,0,1,0,0
+2000/01,Charlton Athletic,1344,Mark Fish,D,24,1,0,6,9,6,9,0,0,0,0,0,0,1
+2000/01,Charlton Athletic,1515,Paul Konchesky,D,23,0,2,5,9,7,7,0,0,0,0,3,0,0
+2000/01,Charlton Athletic,356,Andrew Todd,D,23,1,0,7,11,6,6,0,0,0,0,2,0,0
+2000/01,Charlton Athletic,1853,Mathias Svensson,F,22,5,1,4,8,5,9,0,0,0,0,3,0,0
+2000/01,Charlton Athletic,1518,Scott Parker,M,20,1,0,2,7,5,8,0,0,0,0,5,0,0
+2000/01,Charlton Athletic,1854,Shaun Bartlett,F,18,7,1,3,7,6,5,0,0,0,0,0,0,0
+2000/01,Charlton Athletic,1529,Kevin Lisbie,F,18,0,2,0,5,7,6,0,0,0,0,0,0,0
+2000/01,Charlton Athletic,159,John Salako,M,17,0,1,0,3,6,8,0,0,0,0,1,0,0
+2000/01,Charlton Athletic,1514,Sasa Ilic,G,13,0,0,5,4,4,5,0,0,0,0,1,0,0
+2000/01,Charlton Athletic,1519,Shaun Newton,M,10,0,1,0,3,3,4,0,0,0,0,0,0,0
+2000/01,Charlton Athletic,1528,Andy Hunt,F,8,4,1,1,3,3,2,0,0,0,0,0,0,0
+2000/01,Charlton Athletic,1523,Martin Pringle,F,8,1,0,0,4,0,4,0,0,0,0,0,0,0
+2000/01,Charlton Athletic,397,Carl Tiler,D,7,0,0,2,2,1,4,0,0,0,0,0,1,0
+2000/01,Charlton Athletic,1988,Greg Shields,D,4,0,0,1,1,1,2,0,0,0,0,0,0,0
+2000/01,Charlton Athletic,1524,Charlie MacDonald,F,3,0,0,0,2,0,1,0,0,0,0,0,0,0
+2000/01,Charlton Athletic,1852,Karim Bagheri,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,Charlton Athletic,1847,Tony Caig,G,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2000/01,Chelsea,107,Dennis Wise,M,36,3,4,9,16,9,11,0,0,0,0,9,0,0
+2000/01,Chelsea,1151,Gianfranco Zola,F,36,9,4,3,16,9,11,0,0,0,0,1,0,0
+2000/01,Chelsea,1413,Jimmy Floyd Hasselbaink,F,35,23,9,7,15,10,10,0,0,0,0,6,1,0
+2000/01,Chelsea,1533,Marcel Desailly,D,34,2,1,8,15,10,9,0,0,0,0,10,0,0
+2000/01,Chelsea,1677,Mario Melchiot,D,31,0,3,6,16,6,9,0,0,0,0,2,0,0
+2000/01,Chelsea,1866,Eidur Gudjohnsen,F,30,10,6,3,13,7,10,0,0,0,0,0,0,0
+2000/01,Chelsea,1355,Gustavo Poyet,M,30,11,7,2,15,6,9,0,0,0,0,3,0,0
+2000/01,Chelsea,1535,Samuele Dalla Bona,M,29,2,3,6,14,7,8,0,0,0,0,8,0,0
+2000/01,Chelsea,1148,Frank Leboeuf,D,25,0,0,6,9,9,7,0,0,0,0,6,0,0
+2000/01,Chelsea,1145,Celestine Babayaro,D,24,0,5,2,13,5,6,0,0,0,0,4,0,0
+2000/01,Chelsea,1676,Carlo Cudicini,G,24,0,0,7,11,8,5,0,0,0,0,1,0,0
+2000/01,Chelsea,1353,John Terry,D,22,1,0,5,12,5,5,0,0,0,0,3,0,0
+2000/01,Chelsea,1027,Jody Morris,M,21,0,0,1,8,7,6,0,0,0,0,5,0,0
+2000/01,Chelsea,70,Graeme Le Saux,D,20,0,2,4,10,5,5,0,0,0,0,2,1,0
+2000/01,Chelsea,1860,Slavisa Jokanovic,M,19,0,1,2,9,5,5,0,0,0,0,5,0,0
+2000/01,Chelsea,1350,Ed de Goey,G,15,0,0,3,7,2,6,0,0,0,0,0,0,0
+2000/01,Chelsea,1532,Albert Ferrer,D,14,0,0,3,7,4,3,0,0,0,0,2,0,0
+2000/01,Chelsea,1356,Tore Andre Flo,F,14,3,3,0,4,5,5,0,0,0,0,1,0,0
+2000/01,Chelsea,1863,Jesper Grønkjaer,M,14,1,1,2,7,3,4,0,0,0,0,2,0,0
+2000/01,Chelsea,1862,Mario Stanic,M,12,2,0,1,7,2,3,0,0,0,0,1,0,0
+2000/01,Chelsea,1147,Jon Harley,D,10,0,0,1,3,4,3,0,0,0,0,1,0,0
+2000/01,Chelsea,1857,Winston Bogarde,D,9,0,0,0,4,2,3,0,0,0,0,0,0,0
+2000/01,Chelsea,1989,Christian Panucci,D,8,0,0,1,1,4,3,0,0,0,0,4,0,0
+2000/01,Chelsea,1149,Roberto Di Matteo,M,7,0,1,1,1,4,2,0,0,0,0,0,0,0
+2000/01,Chelsea,1861,Rati Aleksidze,M,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+2000/01,Chelsea,1352,Bernard Lambourde,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2000/01,Chelsea,1445,Emerson Thome,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,Coventry City,1869,Craig Bellamy,F,34,6,1,3,8,8,18,0,0,0,0,7,0,0
+2000/01,Coventry City,1687,Youssef Chippo,M,32,0,0,1,6,10,16,0,0,0,0,7,0,0
+2000/01,Coventry City,1156,John Eustace,M,32,2,1,2,6,7,19,0,0,0,0,11,0,0
+2000/01,Coventry City,1155,Gary Breen,D,31,1,2,4,6,7,18,0,0,0,0,8,0,0
+2000/01,Coventry City,1033,Paul Telfer,D,31,0,6,2,8,6,17,0,0,0,0,1,0,0
+2000/01,Coventry City,1030,Paul Williams,D,30,0,1,2,5,7,18,0,0,0,0,7,0,0
+2000/01,Coventry City,1688,Mustapha Hadji,M,29,6,3,3,5,8,16,0,0,0,0,1,1,0
+2000/01,Coventry City,1540,Barry Quinn,M,25,0,1,5,5,7,13,0,0,0,0,4,0,0
+2000/01,Coventry City,1206,David Thompson,M,25,3,3,2,4,7,14,0,0,0,0,9,1,0
+2000/01,Coventry City,1370,Marc Edworthy,D,24,1,0,2,4,8,12,0,0,0,0,1,0,0
+2000/01,Coventry City,154,Richard Shaw,D,24,0,0,5,6,6,12,0,0,0,0,1,0,0
+2000/01,Coventry City,1359,Chris Kirkland,G,23,0,0,4,5,6,12,0,0,0,0,1,1,0
+2000/01,Coventry City,1175,Lee Carsley,M,21,2,1,4,5,7,9,0,0,0,0,6,0,0
+2000/01,Coventry City,860,Marcus Hall,D,21,0,0,4,5,5,11,0,0,0,0,2,0,0
+2000/01,Coventry City,1543,John Aloisi,F,19,3,2,0,3,6,10,0,0,0,0,0,0,0
+2000/01,Coventry City,1691,Cedric Roussel,F,17,2,0,1,4,4,9,0,0,0,0,0,0,0
+2000/01,Coventry City,1358,Magnus Hedman,G,15,0,0,2,3,4,8,0,0,0,0,0,0,0
+2000/01,Coventry City,497,Carlton Palmer,D,15,0,0,1,4,3,8,0,0,0,0,4,1,0
+2000/01,Coventry City,1690,Herlyn Zuniga,F,15,1,0,1,2,6,7,0,0,0,0,2,0,0
+2000/01,Coventry City,844,John Hartson,F,12,6,0,4,3,4,5,0,0,0,0,4,0,0
+2000/01,Coventry City,1658,Jay Bothroyd,F,8,0,0,1,1,2,5,0,0,0,0,0,0,0
+2000/01,Coventry City,1539,Mohammed Konjic,D,8,0,0,1,2,2,4,0,0,0,0,0,0,0
+2000/01,Coventry City,1990,Ivan Guerrero,D,3,0,0,0,0,0,3,0,0,0,0,0,0,0
+2000/01,Coventry City,75,Colin Hendry,D,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+2000/01,Coventry City,1362,Gavin Strachan,M,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+2000/01,Coventry City,1686,Robert Betts,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2000/01,Coventry City,1868,Calum Davenport,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2000/01,Coventry City,2,Alan Miller,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,Derby County,1553,Malcolm Christie,F,34,8,1,3,9,10,15,0,0,0,0,5,0,0
+2000/01,Derby County,1391,Rory Delap,M,33,3,0,11,10,9,14,0,0,0,0,3,0,0
+2000/01,Derby County,1161,Mart Poom,G,33,0,0,10,7,10,16,0,0,0,0,0,0,0
+2000/01,Derby County,1393,Deon Burton,F,32,5,2,5,8,10,14,0,0,0,0,4,1,0
+2000/01,Derby County,1695,Chris Riggott,D,31,3,2,13,10,8,13,0,0,0,0,6,0,0
+2000/01,Derby County,1698,Seth Johnson,M,30,1,5,10,8,9,13,0,0,0,0,10,1,0
+2000/01,Derby County,1392,Stefano Eranio,M,28,2,6,3,8,8,12,0,0,0,0,7,0,0
+2000/01,Derby County,1546,Horacio Carbonari,D,27,1,0,12,9,8,10,0,0,0,0,6,1,1
+2000/01,Derby County,1177,Darryl Powell,M,27,1,0,7,8,7,12,0,0,0,0,3,0,0
+2000/01,Derby County,1426,Danny Higginbotham,D,26,0,1,4,5,10,11,0,0,0,0,3,0,0
+2000/01,Derby County,109,Craig Burley,M,24,2,2,9,7,7,10,0,0,0,0,5,0,0
+2000/01,Derby County,1058,Georgi Kinkladze,M,24,1,3,2,5,7,12,0,0,0,0,2,0,0
+2000/01,Derby County,1696,Lee Morris,F,20,0,0,1,7,5,8,0,0,0,0,3,0,0
+2000/01,Derby County,1872,Taribo West,D,18,0,0,10,9,4,5,0,0,0,0,3,0,1
+2000/01,Derby County,1551,Adam Murray,M,14,0,0,0,4,4,6,0,0,0,0,1,0,0
+2000/01,Derby County,1178,Dean Sturridge,F,14,1,1,0,1,6,7,0,0,0,0,2,0,0
+2000/01,Derby County,1873,Bjorn Otto Bragstad,D,12,0,1,0,0,6,6,0,0,0,0,0,0,0
+2000/01,Derby County,1877,Simo Valakari,M,11,1,1,0,0,7,4,0,0,0,0,3,0,0
+2000/01,Derby County,1876,Thordur Gudjonsson,M,10,1,0,0,3,2,5,0,0,0,0,1,0,0
+2000/01,Derby County,1871,Lilian Martin,D,9,0,1,1,3,4,2,0,0,0,0,3,0,0
+2000/01,Derby County,1700,Branko Strupar,F,9,6,0,1,2,4,3,0,0,0,0,1,0,0
+2000/01,Derby County,1549,Paul Boertien,M,8,1,1,3,4,1,3,0,0,0,0,3,0,0
+2000/01,Derby County,1875,Youl Mawene,D,8,0,0,1,2,2,4,0,0,0,0,2,0,1
+2000/01,Derby County,1545,Stefan Schnoor,D,8,0,1,1,0,5,3,0,0,0,0,2,0,0
+2000/01,Derby County,1389,Steve Elliott,D,6,0,0,0,0,3,3,0,0,0,0,1,0,0
+2000/01,Derby County,1693,Andy Oakes,G,6,0,0,3,3,2,1,0,0,0,0,0,0,0
+2000/01,Derby County,1233,Brian O'Neil,D,4,0,0,0,1,1,2,0,0,0,0,1,0,0
+2000/01,Derby County,1874,Con Blatsis,D,2,0,0,0,0,1,1,0,0,0,0,1,0,0
+2000/01,Derby County,942,Lars Bohinen,M,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+2000/01,Derby County,1697,Adam Bolder,M,2,0,0,0,1,1,0,0,0,0,0,0,0,0
+2000/01,Derby County,1548,Richard Jackson,D,2,0,0,0,0,2,0,0,0,0,0,0,0,0
+2000/01,Derby County,1694,Ian Evatt,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2000/01,Everton,1558,David Weir,D,37,1,2,5,10,9,18,90,1,3,0,4,0,0
+2000/01,Everton,720,Steve Watson,D,34,0,3,4,9,9,16,62,1,2,0,5,0,2
+2000/01,Everton,416,Paul Gerrard,G,32,0,0,5,10,7,15,90,1,3,2,2,0,0
+2000/01,Everton,1886,Thomas Gravesen,M,32,2,2,4,8,9,15,0,0,0,0,7,1,0
+2000/01,Everton,1185,Michael Ball,D,29,3,0,4,8,7,14,90,1,3,0,5,0,0
+2000/01,Everton,25,Kevin Campbell,F,29,9,2,4,9,8,12,90,1,3,0,1,0,0
+2000/01,Everton,181,David Unsworth,D,29,5,3,3,9,6,14,90,1,3,0,7,0,1
+2000/01,Everton,401,Scot Gemmill,M,28,2,1,2,8,5,15,90,1,3,0,7,0,0
+2000/01,Everton,1884,Alex Nyarko,M,22,1,0,4,5,4,13,90,1,3,0,6,1,0
+2000/01,Everton,1883,Idan Tal,M,22,2,0,0,6,5,11,0,0,0,0,4,0,0
+2000/01,Everton,1702,Joe-Max Moore,F,21,0,1,0,3,6,12,0,0,0,0,2,0,0
+2000/01,Everton,1096,Mark Pembridge,M,21,0,0,2,7,4,10,0,0,0,0,3,0,0
+2000/01,Everton,1447,Niclas Alexandersson,M,20,2,1,1,5,5,10,17,0,1,0,2,0,0
+2000/01,Everton,1882,Gary Naysmith,D,20,2,1,2,5,5,10,0,0,0,0,3,0,1
+2000/01,Everton,842,Stephen Hughes,M,18,0,1,3,6,4,8,0,0,0,0,3,0,0
+2000/01,Everton,1186,Danny Cadamarteri,F,16,4,2,1,5,4,7,0,0,0,0,2,0,0
+2000/01,Everton,1586,Paul Gascoigne,M,14,0,1,1,3,4,7,0,0,0,0,2,0,0
+2000/01,Everton,877,Duncan Ferguson,F,12,6,2,1,4,2,6,90,1,3,0,2,0,0
+2000/01,Everton,1402,Francis Jeffers,F,12,6,1,1,5,3,4,0,0,0,0,3,0,0
+2000/01,Everton,1701,Abel Xavier,D,11,0,0,2,3,2,6,90,1,3,0,2,1,0
+2000/01,Everton,1605,Richard Gough,D,9,0,0,1,3,3,3,73,1,2,0,1,0,0
+2000/01,Everton,339,Mark Hughes,F,9,0,0,0,2,3,4,0,0,0,0,1,0,0
+2000/01,Everton,1433,Alessandro Pistone,D,7,0,0,0,2,0,5,28,0,1,0,2,1,0
+2000/01,Everton,1396,Thomas Myhre,G,6,0,0,1,1,2,3,0,0,0,0,0,0,0
+2000/01,Everton,1557,Alex Cleland,D,5,0,0,1,3,1,1,0,0,0,0,0,0,0
+2000/01,Everton,1885,Kevin McLeod,M,5,0,0,0,2,0,3,0,0,0,0,1,0,0
+2000/01,Everton,1187,Phil Jevons,F,4,0,0,0,1,0,3,0,0,0,0,0,0,0
+2000/01,Everton,1184,Richard Dunne,D,3,0,0,0,0,2,1,0,0,0,0,1,0,0
+2000/01,Everton,1881,Tony Hibbert,D,3,0,0,1,2,0,1,0,0,0,0,0,0,0
+2000/01,Everton,1555,Peter Clarke,D,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2000/01,Everton,1554,Steve Simonsen,G,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2000/01,Ipswich Town,1898,Matt Holland,M,38,3,5,13,20,6,12,0,0,0,0,0,0,0
+2000/01,Ipswich Town,1899,Jermaine Wright,M,37,2,3,11,20,6,11,0,0,0,0,1,0,0
+2000/01,Ipswich Town,1371,Hermann Hreidarsson,D,36,1,4,12,19,6,11,0,0,0,0,3,0,0
+2000/01,Ipswich Town,878,Richard Wright,G,36,0,0,12,19,6,11,0,0,0,0,0,0,0
+2000/01,Ipswich Town,960,Jamie Clapham,D,35,2,3,8,20,4,11,0,0,0,0,2,0,0
+2000/01,Ipswich Town,884,James Scowcroft,F,34,4,3,4,17,6,11,0,0,0,0,1,0,0
+2000/01,Ipswich Town,1903,Marcus Stewart,F,34,19,4,3,17,6,11,0,0,0,0,2,1,0
+2000/01,Ipswich Town,757,Jim Magilton,M,33,1,5,8,18,5,10,0,0,0,0,1,0,0
+2000/01,Ipswich Town,1894,Fabian Wilnis,D,29,2,3,7,15,6,8,0,0,0,0,7,0,0
+2000/01,Ipswich Town,1895,John McGreal,D,28,1,0,10,17,3,8,0,0,0,0,1,1,0
+2000/01,Ipswich Town,1890,Titus Bramble,D,26,1,0,7,13,5,8,0,0,0,0,7,0,0
+2000/01,Ipswich Town,1901,Martijn Reuser,M,26,6,2,1,12,4,10,0,0,0,0,1,0,0
+2000/01,Ipswich Town,1896,Mark Venus,D,25,3,0,6,13,4,8,0,0,0,0,4,0,1
+2000/01,Ipswich Town,726,Alun Armstrong,F,21,7,2,3,12,3,6,0,0,0,0,0,0,0
+2000/01,Ipswich Town,1991,David Johnson,F,14,0,1,1,7,2,5,0,0,0,0,0,0,0
+2000/01,Ipswich Town,1897,Richard Naylor,D,13,1,3,1,7,3,3,0,0,0,0,0,0,0
+2000/01,Ipswich Town,424,Chris Makin,D,10,0,1,4,6,2,2,0,0,0,0,1,0,0
+2000/01,Ipswich Town,999,Gary Croft,D,8,0,0,0,2,1,5,0,0,0,0,1,0,0
+2000/01,Ipswich Town,1904,Mark Burchill,F,7,1,1,1,5,0,2,0,0,0,0,0,0,0
+2000/01,Ipswich Town,1889,Wayne Brown,D,4,0,0,0,0,0,4,0,0,0,0,0,0,0
+2000/01,Ipswich Town,1900,Nabil Abidallah,M,2,0,0,0,2,0,0,0,0,0,0,0,0,0
+2000/01,Ipswich Town,1008,Keith Branagan,G,2,0,0,1,1,0,1,0,0,0,0,0,0,0
+2000/01,Ipswich Town,586,John Scales,D,2,0,0,0,1,0,1,0,0,0,0,1,0,0
+2000/01,Leeds United,1190,Lee Bowyer,M,38,9,5,9,20,8,10,0,0,0,0,9,0,0
+2000/01,Leeds United,1909,Mark Viduka,F,34,17,4,7,19,6,9,0,0,0,0,5,0,0
+2000/01,Leeds United,1560,Olivier Dacourt,M,33,3,3,7,17,8,8,0,0,0,0,13,0,0
+2000/01,Leeds United,1412,Alan Smith,M,33,11,6,5,16,8,9,0,0,0,0,7,1,0
+2000/01,Leeds United,259,Dominic Matteo,D,30,0,1,6,15,7,8,0,0,0,0,1,0,0
+2000/01,Leeds United,1706,Eirik Bakke,M,29,2,1,6,18,5,6,0,0,0,0,9,0,0
+2000/01,Leeds United,1045,Ian Harte,D,29,7,6,9,18,7,4,0,0,0,0,1,0,0
+2000/01,Leeds United,694,Gary Kelly,D,24,0,3,4,10,5,9,0,0,0,0,1,0,0
+2000/01,Leeds United,1111,Rio Ferdinand,D,23,2,0,8,14,4,5,0,0,0,0,0,0,1
+2000/01,Leeds United,146,Nigel Martyn,G,23,0,1,8,15,5,3,0,0,0,0,0,0,0
+2000/01,Leeds United,929,Danny Mills,D,23,0,1,6,16,4,3,0,0,0,0,8,0,0
+2000/01,Leeds United,886,Lucas Radebe,D,20,0,0,6,8,7,5,0,0,0,0,7,1,0
+2000/01,Leeds United,1692,Robbie Keane,F,18,9,3,3,10,4,4,0,0,0,0,1,0,0
+2000/01,Leeds United,1049,Harry Kewell,M,17,2,4,1,10,2,5,0,0,0,0,2,0,0
+2000/01,Leeds United,80,Jason Wilcox,M,17,0,1,3,9,4,4,0,0,0,0,0,0,0
+2000/01,Leeds United,243,David Batty,M,16,0,0,5,11,4,1,0,0,0,0,2,1,0
+2000/01,Leeds United,1404,Paul Robinson,G,16,0,0,3,6,3,7,0,0,0,0,0,0,0
+2000/01,Leeds United,1565,Jonathan Woodgate,D,14,1,0,3,7,1,6,0,0,0,0,4,0,0
+2000/01,Leeds United,1270,Michael Bridges,F,7,0,3,1,3,2,2,0,0,0,0,0,0,0
+2000/01,Leeds United,1082,Darren Huckerby,F,7,0,0,0,2,2,3,0,0,0,0,0,0,0
+2000/01,Leeds United,1407,Stephen McPhail,M,7,0,0,1,2,2,3,0,0,0,0,0,0,0
+2000/01,Leeds United,669,Michael Duberry,D,5,0,0,1,1,2,2,0,0,0,0,0,0,0
+2000/01,Leeds United,1906,Jacob Burns,M,4,0,0,0,2,1,1,0,0,0,0,0,0,0
+2000/01,Leeds United,1705,Danny Hay,D,4,0,0,0,2,1,1,0,0,0,0,0,0,0
+2000/01,Leeds United,1411,Matthew Jones,M,4,0,0,0,1,0,3,0,0,0,0,0,0,1
+2000/01,Leeds United,1564,Gareth Evans,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,Leicester City,684,Gary Rowett,D,38,2,1,10,14,6,18,0,0,0,0,4,0,0
+2000/01,Leicester City,734,Ade Akinbiyi,F,37,9,2,6,14,6,17,0,0,0,0,1,0,0
+2000/01,Leicester City,1196,Matt Elliott,D,34,2,1,11,13,6,15,0,0,0,0,3,0,0
+2000/01,Leicester City,453,Andy Impey,M,33,0,1,7,10,5,18,0,0,0,0,2,0,0
+2000/01,Leicester City,706,Robbie Savage,M,33,4,0,10,14,6,13,0,0,0,0,7,0,0
+2000/01,Leicester City,1333,Callum Davidson,D,28,1,1,4,10,4,14,0,0,0,0,3,0,0
+2000/01,Leicester City,1201,Steve Guppy,M,28,1,3,3,10,3,15,0,0,0,0,1,0,0
+2000/01,Leicester City,670,Muzzy Izzet,M,27,7,1,7,12,5,10,0,0,0,0,4,0,0
+2000/01,Leicester City,384,Darren Eadie,M,24,2,1,2,10,4,10,0,0,0,0,4,0,0
+2000/01,Leicester City,1014,Gerry Taggart,D,24,2,1,10,10,6,8,0,0,0,0,10,1,0
+2000/01,Leicester City,519,Tim Flowers,G,22,0,0,6,10,5,7,0,0,0,0,0,0,0
+2000/01,Leicester City,1917,Trevor Benjamin,F,21,1,0,0,6,2,13,0,0,0,0,2,0,0
+2000/01,Leicester City,1513,Simon Royce,G,19,0,0,3,6,1,12,0,0,0,0,0,0,0
+2000/01,Leicester City,1349,Arnar Gunnlaugsson,F,17,3,1,0,5,2,10,0,0,0,0,0,0,0
+2000/01,Leicester City,103,Frank Sinclair,D,17,0,2,3,8,1,8,0,0,0,0,4,0,0
+2000/01,Leicester City,1199,Neil Lennon,M,15,0,3,6,7,5,3,0,0,0,0,4,0,0
+2000/01,Leicester City,1916,Junior Lewis,M,15,0,0,2,4,0,11,0,0,0,0,1,0,0
+2000/01,Leicester City,1569,Stefan Oakes,M,13,0,2,0,4,1,8,0,0,0,0,0,0,0
+2000/01,Leicester City,1178,Dean Sturridge,F,13,3,3,1,4,1,8,0,0,0,0,4,0,0
+2000/01,Leicester City,639,Phil Gilchrist,D,12,0,0,1,3,3,6,0,0,0,0,1,0,0
+2000/01,Leicester City,1411,Matthew Jones,M,11,0,0,0,3,1,7,0,0,0,0,0,1,0
+2000/01,Leicester City,1915,Lee Marshall,D,9,0,1,0,1,0,8,0,0,0,0,0,0,0
+2000/01,Leicester City,1449,Richard Cresswell,F,8,0,0,0,2,2,4,0,0,0,0,1,0,0
+2000/01,Leicester City,627,Stan Collymore,F,5,1,0,1,3,2,0,0,0,0,0,0,0,0
+2000/01,Leicester City,1911,Damien Delaney,D,5,0,0,0,1,0,4,0,0,0,0,1,0,0
+2000/01,Leicester City,1992,Roberto Mancini,F,4,0,0,0,1,1,2,0,0,0,0,0,0,0
+2000/01,Leicester City,193,Tony Cottee,F,2,0,0,0,1,1,0,0,0,0,0,0,0,0
+2000/01,Leicester City,1913,Kevin Ellison,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,Leicester City,894,Steve Walsh,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2000/01,Liverpool,1920,Markus Babbel,D,38,3,3,13,20,9,9,90,1,2,0,6,0,0
+2000/01,Liverpool,1709,Sander Westerveld,G,38,0,0,14,20,9,9,90,1,2,4,1,0,1
+2000/01,Liverpool,908,Emile Heskey,F,36,14,4,8,20,8,8,90,1,2,0,4,0,0
+2000/01,Liverpool,1710,Sami Hyypiä,D,35,3,1,14,19,7,9,90,1,2,0,0,0,0
+2000/01,Liverpool,915,Jamie Carragher,D,34,0,0,11,18,7,9,90,1,2,0,6,0,0
+2000/01,Liverpool,1575,Steven Gerrard,M,33,7,2,7,17,9,7,0,0,0,0,4,1,0
+2000/01,Liverpool,1335,Stéphane Henchoz,D,32,0,0,11,16,8,8,90,1,2,0,3,0,0
+2000/01,Liverpool,1595,Dietmar Hamann,M,30,2,3,9,14,9,7,90,1,2,0,5,1,0
+2000/01,Liverpool,238,Gary McAllister,M,30,5,5,5,17,5,8,90,1,2,0,1,1,0
+2000/01,Liverpool,1208,Michael Owen,F,28,16,3,3,15,6,7,0,0,0,0,0,0,0
+2000/01,Liverpool,277,Robbie Fowler,F,27,8,3,2,13,6,8,84,1,2,0,0,0,0
+2000/01,Liverpool,1423,Danny Murphy,M,27,4,3,2,13,6,8,0,0,0,0,1,1,0
+2000/01,Liverpool,1711,Vladimir Smicer,M,27,2,9,4,15,5,7,90,1,2,0,2,0,0
+2000/01,Liverpool,569,Nick Barmby,M,26,2,3,5,14,4,8,0,0,0,0,3,0,0
+2000/01,Liverpool,1727,Christian Ziege,D,16,1,2,2,8,4,4,0,0,0,0,3,0,0
+2000/01,Liverpool,1205,Patrik Berger,M,14,2,5,2,10,2,2,0,0,0,0,1,0,0
+2000/01,Liverpool,1921,Igor Biscan,D,13,0,0,2,7,4,2,77,1,1,0,1,1,0
+2000/01,Liverpool,1571,Djimi Traore,D,8,0,0,1,4,2,2,0,0,0,0,1,0,0
+2000/01,Liverpool,1919,Grégory Vignal,D,6,0,0,2,4,2,0,6,0,0,0,2,0,0
+2000/01,Liverpool,1925,Jari Litmanen,M,5,1,0,0,1,4,0,0,0,0,0,1,0,0
+2000/01,Liverpool,1573,Vegard Heggem,D,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+2000/01,Liverpool,1712,Erik Meijer,F,3,0,0,0,2,0,1,0,0,0,0,0,0,0
+2000/01,Liverpool,1570,Rigobert Song,D,3,0,0,0,1,2,0,0,0,0,0,2,0,0
+2000/01,Liverpool,1924,Bernard Diomede,M,2,0,0,0,0,2,0,0,0,0,0,2,0,0
+2000/01,Liverpool,1421,Stephen Wright,D,2,0,1,0,1,1,0,0,0,0,0,0,0,0
+2000/01,Liverpool,41,Steve Staunton,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2000/01,Manchester City,714,Steve Howey,D,36,6,1,5,8,10,18,0,0,0,0,7,0,0
+2000/01,Manchester City,938,Alf Inge Haaland,D,35,3,1,4,8,9,18,0,0,0,0,6,0,0
+2000/01,Manchester City,1936,Gerard Wiekens,M,34,2,0,5,8,9,17,0,0,0,0,2,0,0
+2000/01,Manchester City,1935,Danny Tiatto,M,33,2,3,6,7,9,17,0,0,0,0,9,2,0
+2000/01,Manchester City,1927,Nicky Weaver,G,31,0,0,6,6,9,16,0,0,0,0,2,0,0
+2000/01,Manchester City,1059,Jeff Whitley,M,31,1,4,5,7,8,16,0,0,0,0,7,0,0
+2000/01,Manchester City,1179,Paulo Wanchope,F,27,9,3,4,7,7,13,0,0,0,0,9,0,0
+2000/01,Manchester City,1938,Shaun Goater,F,26,6,0,2,5,8,13,0,0,0,0,1,0,0
+2000/01,Manchester City,1184,Richard Dunne,D,25,0,0,5,5,8,12,0,0,0,0,3,0,0
+2000/01,Manchester City,916,Mark Kennedy,D,25,0,4,2,6,4,15,0,0,0,0,2,0,0
+2000/01,Manchester City,27,Paul Dickov,F,21,4,2,2,4,3,14,0,0,0,0,7,1,0
+2000/01,Manchester City,732,Spencer Prior,D,21,1,0,3,5,4,12,0,0,0,0,3,0,0
+2000/01,Manchester City,1351,Laurent Charvet,D,20,0,1,2,4,4,12,0,0,0,0,1,0,0
+2000/01,Manchester City,1144,Danny Granville,D,19,0,1,2,4,6,9,0,0,0,0,2,0,0
+2000/01,Manchester City,1934,Shaun Wright-Phillips,M,15,0,0,1,2,5,8,0,0,0,0,0,0,0
+2000/01,Manchester City,767,Kevin Horlock,M,14,2,1,2,3,4,7,0,0,0,0,1,0,0
+2000/01,Manchester City,1082,Darren Huckerby,F,13,1,1,0,2,5,6,0,0,0,0,2,0,0
+2000/01,Manchester City,1928,Paul Ritchie,D,12,0,0,3,3,4,5,0,0,0,0,1,0,0
+2000/01,Manchester City,795,Ian Bishop,M,10,0,0,1,1,3,6,0,0,0,0,0,0,0
+2000/01,Manchester City,685,Tony Grant,M,10,0,0,1,2,3,5,0,0,0,0,1,0,0
+2000/01,Manchester City,324,Andrei Kanchelskis,F,10,0,1,1,2,4,4,0,0,0,0,0,0,0
+2000/01,Manchester City,1682,George Weah,F,7,1,1,0,1,2,4,0,0,0,0,0,0,0
+2000/01,Manchester City,290,Richard Edghill,D,6,0,0,0,1,1,4,0,0,0,0,1,0,1
+2000/01,Manchester City,1367,Carlo Nash,G,6,0,0,1,2,1,3,0,0,0,0,0,0,0
+2000/01,Manchester City,1250,Egil Ostenstad,F,4,0,0,0,0,1,3,0,0,0,0,0,0,0
+2000/01,Manchester City,666,Andy Morrison,D,3,0,0,0,0,2,1,0,0,0,0,1,0,0
+2000/01,Manchester City,917,Lee Crooks,D,2,0,0,0,0,1,1,0,0,0,0,1,0,0
+2000/01,Manchester City,1994,Daniel Allsopp,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,Manchester City,1933,Terry Dunfield,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,Manchester City,707,Tommy Wright,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,Manchester United,321,Gary Neville,D,32,1,1,13,21,8,3,0,0,0,0,4,0,0
+2000/01,Manchester United,336,Paul Scholes,M,32,6,5,9,20,8,4,0,0,0,0,3,0,0
+2000/01,Manchester United,331,David Beckham,M,31,9,12,10,19,8,4,0,0,0,0,3,0,0
+2000/01,Manchester United,335,Ryan Giggs,M,31,5,8,7,18,7,6,0,0,0,0,1,0,0
+2000/01,Manchester United,1217,Ole Gunnar Solskjær,F,31,10,4,5,22,7,2,0,0,0,0,1,0,0
+2000/01,Manchester United,1940,Fabien Barthez,G,30,0,0,14,21,5,4,0,0,0,0,1,0,0
+2000/01,Manchester United,1719,Mikaël Silvestre,D,30,1,2,9,18,7,5,0,0,0,0,2,0,0
+2000/01,Manchester United,921,Phil Neville,M,29,1,0,9,19,6,4,0,0,0,0,4,0,0
+2000/01,Manchester United,576,Teddy Sheringham,F,29,15,6,8,19,6,4,0,0,0,0,1,0,0
+2000/01,Manchester United,1211,Wes Brown,D,28,0,0,10,19,6,3,0,0,0,0,5,0,1
+2000/01,Manchester United,332,Nicky Butt,M,28,3,2,9,19,5,4,0,0,0,0,8,0,0
+2000/01,Manchester United,407,Roy Keane,M,28,2,7,10,18,7,3,0,0,0,0,2,1,0
+2000/01,Manchester United,59,Dwight Yorke,M,22,9,4,5,16,3,3,0,0,0,0,2,0,0
+2000/01,Manchester United,315,Denis Irwin,D,21,0,2,8,13,2,6,0,0,0,0,2,0,0
+2000/01,Manchester United,725,Andrew Cole,F,19,9,3,1,12,4,3,0,0,0,0,1,1,0
+2000/01,Manchester United,1723,Luke Chadwick,M,16,2,0,0,8,4,4,0,0,0,0,0,1,0
+2000/01,Manchester United,1580,Jaap Stam,D,15,0,0,6,10,5,0,0,0,0,0,1,0,0
+2000/01,Manchester United,922,Ronnie Wallwork,D,12,0,0,1,8,2,2,0,0,0,0,0,0,0
+2000/01,Manchester United,1210,Ronny Johnsen,D,11,1,0,3,6,1,4,0,0,0,0,1,0,0
+2000/01,Manchester United,1209,Raimond van der Gouw,G,10,0,0,1,4,3,3,0,0,0,0,0,0,0
+2000/01,Manchester United,1718,Quinton Fortune,M,7,2,0,4,6,0,1,0,0,0,0,0,0,0
+2000/01,Manchester United,1429,Jonathan Greening,M,7,0,1,1,5,1,1,0,0,0,0,1,0,0
+2000/01,Manchester United,1721,Michael Stewart,M,3,0,0,0,1,0,2,0,0,0,0,1,0,0
+2000/01,Manchester United,1939,Andy Goram,G,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+2000/01,Manchester United,67,David May,D,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+2000/01,Manchester United,74,Henning Berg,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2000/01,Manchester United,1581,Bojan Djordjic,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,Manchester United,1724,David Healy,F,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2000/01,Manchester United,1715,Paul Rachubka,G,1,0,0,1,1,0,0,0,0,0,0,0,0,0
+2000/01,Middlesbrough,1949,Christian Karembeu,M,33,4,4,5,9,12,12,0,0,0,0,3,1,0
+2000/01,Middlesbrough,1218,Mark Schwarzer,G,31,0,0,9,8,13,10,0,0,0,0,1,0,0
+2000/01,Middlesbrough,349,Curtis Fleming,D,30,0,1,4,5,14,11,0,0,0,0,4,0,0
+2000/01,Middlesbrough,326,Paul Ince,M,30,2,1,8,9,12,9,0,0,0,0,8,0,0
+2000/01,Middlesbrough,1070,Steve Vickers,D,30,0,0,7,7,11,12,0,0,0,0,2,0,1
+2000/01,Middlesbrough,1951,Alen Boksic,F,28,12,3,3,7,13,8,0,0,0,0,3,0,0
+2000/01,Middlesbrough,937,Colin Cooper,D,27,2,0,4,7,10,10,0,0,0,0,10,0,0
+2000/01,Middlesbrough,1587,Hamilton Ricard,F,27,4,3,1,5,10,12,0,0,0,0,5,0,0
+2000/01,Middlesbrough,245,Noel Whelan,F,27,1,1,3,6,13,8,0,0,0,0,3,0,1
+2000/01,Middlesbrough,488,Brian Deane,F,25,2,1,1,5,10,10,0,0,0,0,2,0,0
+2000/01,Middlesbrough,1222,Gianluca Festa,D,25,2,0,4,5,11,9,0,0,0,0,3,0,0
+2000/01,Middlesbrough,363,Robbie Mustoe,M,25,0,1,3,6,11,8,0,0,0,0,2,0,0
+2000/01,Middlesbrough,1950,Paul Okon,D,24,0,1,5,8,11,5,0,0,0,0,6,0,0
+2000/01,Middlesbrough,35,Ugo Ehiogu,D,21,3,1,6,5,9,7,0,0,0,0,1,1,0
+2000/01,Middlesbrough,151,Dean Gordon,D,20,1,2,3,4,7,9,0,0,0,0,2,0,0
+2000/01,Middlesbrough,359,Phil Stamp,M,19,1,1,0,3,6,10,0,0,0,0,4,1,0
+2000/01,Middlesbrough,931,Keith O'Neill,M,15,0,1,2,5,7,3,0,0,0,0,4,1,0
+2000/01,Middlesbrough,1220,Jason Gavin,D,14,0,0,4,4,5,5,0,0,0,0,4,0,0
+2000/01,Middlesbrough,1728,Carlos Marinelli,M,13,0,0,0,1,3,9,0,0,0,0,1,1,0
+2000/01,Middlesbrough,1952,Joseph-Desire Job,F,12,3,1,0,2,5,5,0,0,0,0,0,0,0
+2000/01,Middlesbrough,320,Gary Pallister,D,8,0,2,0,1,2,5,0,0,0,0,0,0,0
+2000/01,Middlesbrough,1672,Dean Windass,F,8,2,0,3,3,2,3,0,0,0,0,2,0,0
+2000/01,Middlesbrough,1076,Andy Campbell,F,7,0,1,0,0,3,4,0,0,0,0,0,0,0
+2000/01,Middlesbrough,1075,Mark Summerbell,M,7,1,0,0,1,3,3,0,0,0,0,4,0,0
+2000/01,Middlesbrough,394,Mark Crossley,G,5,0,0,0,1,0,4,0,0,0,0,0,1,0
+2000/01,Middlesbrough,1729,Mark Hudson,M,3,0,0,0,2,1,0,0,0,0,0,0,0,0
+2000/01,Middlesbrough,309,Gary Walsh,G,3,0,0,0,1,2,0,0,0,0,0,0,0,0
+2000/01,Middlesbrough,1583,Marlon Beresford,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,Newcastle United,1230,Aaron Hughes,D,35,0,1,6,12,8,15,0,0,0,0,2,0,0
+2000/01,Newcastle United,239,Gary Speed,M,35,5,3,6,14,8,13,0,0,0,0,8,1,0
+2000/01,Newcastle United,851,Shay Given,G,34,0,0,7,12,8,14,0,0,0,0,1,0,0
+2000/01,Newcastle United,1597,Nolberto Solano,M,33,6,10,2,12,7,14,0,0,0,0,3,2,0
+2000/01,Newcastle United,590,Warren Barton,D,29,0,0,5,10,7,12,0,0,0,0,6,1,0
+2000/01,Newcastle United,1956,Clarence Acuna,M,26,3,0,1,8,7,11,0,0,0,0,5,0,0
+2000/01,Newcastle United,1740,Kieron Dyer,M,26,5,5,3,10,4,12,0,0,0,0,0,1,0
+2000/01,Newcastle United,1957,Christian Bassedas,M,22,1,0,2,9,7,6,0,0,0,0,5,0,0
+2000/01,Newcastle United,721,Robert Lee,M,22,0,0,2,8,4,10,0,0,0,0,3,0,0
+2000/01,Newcastle United,1960,Daniel Cordone,F,21,2,1,1,6,6,9,0,0,0,0,0,0,0
+2000/01,Newcastle United,1959,Lomana Lua Lua,F,21,0,2,0,7,3,11,0,0,0,0,2,0,0
+2000/01,Newcastle United,1962,Shola Ameobi,F,20,2,2,0,5,7,8,0,0,0,0,0,0,0
+2000/01,Newcastle United,87,Kevin Gallacher,F,19,2,0,1,6,6,7,0,0,0,0,0,0,0
+2000/01,Newcastle United,1736,Alain Goma,D,19,1,1,3,7,4,8,0,0,0,0,4,0,0
+2000/01,Newcastle United,1437,Andy Griffin,D,19,0,0,0,6,5,8,0,0,0,0,2,0,0
+2000/01,Newcastle United,89,Alan Shearer,F,19,5,2,4,8,3,8,0,0,0,0,1,0,0
+2000/01,Newcastle United,1954,Wayne Quinn,D,15,0,1,1,5,4,6,0,0,0,0,0,0,0
+2000/01,Newcastle United,1590,Didier Domi,D,14,0,0,2,7,2,5,0,0,0,0,2,0,0
+2000/01,Newcastle United,1593,Stephen Glass,M,14,3,0,2,6,3,5,0,0,0,0,2,0,0
+2000/01,Newcastle United,1284,Carl Cort,F,13,6,2,3,4,4,5,0,0,0,0,1,0,0
+2000/01,Newcastle United,1436,Nikolaos Dabizas,D,9,0,0,3,4,3,2,0,0,0,0,1,0,0
+2000/01,Newcastle United,1664,Andy O'Brien,D,9,1,0,3,3,4,2,0,0,0,0,0,0,0
+2000/01,Newcastle United,1589,Steven Caldwell,D,7,0,0,0,2,1,4,0,0,0,0,1,0,0
+2000/01,Newcastle United,1351,Laurent Charvet,D,7,0,0,3,4,1,2,0,0,0,0,0,0,0
+2000/01,Newcastle United,1735,Elena Marcelino,D,6,0,0,0,3,0,3,0,0,0,0,1,0,0
+2000/01,Newcastle United,709,Steve Harper,G,5,0,0,0,2,1,2,0,0,0,0,0,0,0
+2000/01,Newcastle United,1732,Gary Caldwell,D,2,0,0,0,1,1,0,0,0,0,0,0,0,0
+2000/01,Newcastle United,1442,James Coppinger,M,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2000/01,Newcastle United,1739,Diego Gavilán,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2000/01,Newcastle United,1958,Brian Kerr,M,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2000/01,Southampton,1458,Wayne Bridge,D,38,0,2,14,14,10,14,0,0,0,0,1,0,1
+2000/01,Southampton,1246,Claus Lundekvam,D,38,0,0,13,14,10,14,0,0,0,0,3,0,1
+2000/01,Southampton,1005,James Beattie,F,37,11,4,10,14,9,14,0,0,0,0,5,0,0
+2000/01,Southampton,1455,Paul Jones,G,35,0,0,14,14,8,13,0,0,0,0,0,0,0
+2000/01,Southampton,958,Matt Oakley,M,35,1,0,12,12,9,14,0,0,0,0,1,0,0
+2000/01,Southampton,1749,Jo Tessem,M,33,4,2,10,14,8,11,0,0,0,0,1,0,0
+2000/01,Southampton,1747,Tahar El-Khalej,D,32,1,0,6,11,9,12,0,0,0,0,7,0,0
+2000/01,Southampton,1621,Hassan Kachloul,M,32,4,7,4,10,10,12,0,0,0,0,5,1,0
+2000/01,Southampton,528,Jason Dodd,D,31,1,1,10,10,8,13,0,0,0,0,2,0,0
+2000/01,Southampton,1623,Marian Pahars,F,31,9,6,6,12,7,12,0,0,0,0,1,0,0
+2000/01,Southampton,1748,Dean Richards,D,28,1,0,12,12,7,9,0,0,0,0,1,0,0
+2000/01,Southampton,1249,Kevin Davies,F,27,1,3,4,10,7,10,0,0,0,0,9,0,0
+2000/01,Southampton,812,Chris Marsden,M,23,0,1,3,9,7,7,0,0,0,0,4,0,0
+2000/01,Southampton,903,Mark Draper,M,22,1,1,5,7,7,8,0,0,0,0,5,0,0
+2000/01,Southampton,704,Uwe Rösler,F,20,0,0,0,4,5,11,0,0,0,0,3,0,0
+2000/01,Southampton,954,Dan Petrescu,D,9,2,1,2,5,1,3,0,0,0,0,0,0,0
+2000/01,Southampton,533,Matthew Le Tissier,M,8,1,0,0,2,1,5,0,0,0,0,1,0,0
+2000/01,Southampton,1360,Trond Egil Soltvedt,M,6,1,0,0,2,1,3,0,0,0,0,0,0,0
+2000/01,Southampton,523,Francis Benali,D,4,0,0,0,2,1,1,0,0,0,0,0,0,0
+2000/01,Southampton,1462,Kevin Gibbens,M,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+2000/01,Southampton,1243,Neil Moss,G,3,0,0,0,0,2,1,0,0,0,0,0,0,0
+2000/01,Southampton,79,Stuart Ripley,M,3,0,0,0,1,0,2,0,0,0,0,0,0,0
+2000/01,Southampton,1620,Garry Monk,D,2,0,0,0,2,0,0,0,0,0,0,0,0,0
+2000/01,Southampton,1963,Imants Bleidelis,D,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2000/01,Sunderland,1253,Michael Gray,D,36,1,2,13,15,12,9,0,0,0,0,5,1,0
+2000/01,Sunderland,1754,Jody Craddock,D,34,0,1,11,13,11,10,0,0,0,0,4,0,0
+2000/01,Sunderland,1768,Kevin Phillips,F,34,14,4,9,13,11,10,0,0,0,0,10,0,0
+2000/01,Sunderland,304,Niall Quinn,F,34,7,2,4,13,12,9,0,0,0,0,5,0,0
+2000/01,Sunderland,1751,Thomas Sørensen,G,34,0,0,12,15,11,8,0,0,0,0,0,0,0
+2000/01,Sunderland,272,Don Hutchison,M,32,8,6,7,11,12,9,0,0,0,0,11,1,0
+2000/01,Sunderland,1445,Emerson Thome,D,31,1,0,12,14,10,7,0,0,0,0,6,0,0
+2000/01,Sunderland,1757,Kevin Kilbane,M,30,4,2,7,12,9,9,0,0,0,0,2,1,0
+2000/01,Sunderland,1260,Darren Williams,D,28,0,0,10,13,8,7,0,0,0,0,7,0,0
+2000/01,Sunderland,1972,Julio Arca,M,27,2,4,6,11,9,7,0,0,0,0,5,0,0
+2000/01,Sunderland,424,Chris Makin,D,23,0,2,6,9,8,6,0,0,0,0,1,0,0
+2000/01,Sunderland,1042,Gavin McCann,M,22,3,3,6,9,7,6,0,0,0,0,4,0,0
+2000/01,Sunderland,843,Stefan Schwarz,M,20,1,3,3,7,7,6,0,0,0,0,5,0,0
+2000/01,Sunderland,1259,Alex Rae,M,18,2,3,7,10,4,4,0,0,0,0,2,1,0
+2000/01,Sunderland,742,Danny Dichio,F,15,1,1,0,8,3,4,0,0,0,0,2,0,0
+2000/01,Sunderland,1971,Stanislav Varga,D,12,1,0,2,4,2,6,0,0,0,0,2,1,0
+2000/01,Sunderland,1970,Patrice Carteron,D,8,1,1,2,3,3,2,0,0,0,0,0,0,0
+2000/01,Sunderland,1401,John Oster,M,8,0,0,0,1,2,5,0,0,0,0,0,1,0
+2000/01,Sunderland,1255,Darren Holloway,D,5,0,0,1,1,1,3,0,0,0,0,4,0,0
+2000/01,Sunderland,1967,Jürgen Macho,G,5,0,0,0,1,1,3,0,0,0,0,0,0,0
+2000/01,Sunderland,1758,Paul Thirlwell,M,5,0,0,1,2,0,3,0,0,0,0,1,0,0
+2000/01,Sunderland,1759,Thomas Butler,M,4,0,0,0,1,2,1,0,0,0,0,0,0,0
+2000/01,Sunderland,1752,Paul Butler,D,3,0,0,1,1,0,2,0,0,0,0,0,0,0
+2000/01,Sunderland,1973,Kevin Kyle,F,3,0,1,0,2,1,0,0,0,0,0,0,0,0
+2000/01,Sunderland,1762,Eric Roy,M,3,0,0,0,1,0,2,0,0,0,0,0,0,0
+2000/01,Sunderland,1756,George McCartney,D,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+2000/01,Sunderland,1767,Michael Reddy,F,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+2000/01,Sunderland,9,Steve Bould,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,Tottenham Hotspur,583,Neil Sullivan,G,35,0,0,9,13,8,14,0,0,0,0,1,1,0
+2000/01,Tottenham Hotspur,78,Tim Sherwood,M,33,2,3,6,11,8,14,0,0,0,0,4,0,0
+2000/01,Tottenham Hotspur,587,Chris Perry,D,32,1,0,7,12,9,11,0,0,0,0,3,0,0
+2000/01,Tottenham Hotspur,961,Stephen Clemence,M,29,1,7,6,10,8,11,0,0,0,0,4,0,0
+2000/01,Tottenham Hotspur,1978,Serhiy Rebrov,F,29,9,4,8,12,8,9,0,0,0,0,1,0,0
+2000/01,Tottenham Hotspur,776,Stephen Carr,D,28,3,2,4,11,6,11,0,0,0,0,5,0,0
+2000/01,Tottenham Hotspur,462,Les Ferdinand,F,28,10,1,3,10,7,11,0,0,0,0,4,0,1
+2000/01,Tottenham Hotspur,973,Oyvind Leonhardsen,M,25,3,4,6,9,8,8,0,0,0,0,0,0,0
+2000/01,Tottenham Hotspur,566,Darren Anderton,M,23,2,3,6,8,7,8,0,0,0,0,7,0,0
+2000/01,Tottenham Hotspur,1464,Luke Young,D,23,0,0,5,9,5,9,0,0,0,0,2,0,0
+2000/01,Tottenham Hotspur,1770,Gary Doherty,D,22,3,1,7,6,6,10,0,0,0,0,3,0,0
+2000/01,Tottenham Hotspur,557,Sol Campbell,D,21,2,0,8,7,7,7,0,0,0,0,1,0,0
+2000/01,Tottenham Hotspur,1628,Steffen Freund,M,21,0,0,6,7,6,8,0,0,0,0,4,0,0
+2000/01,Tottenham Hotspur,1627,Ledley King,D,18,1,1,7,6,7,5,0,0,0,0,0,0,0
+2000/01,Tottenham Hotspur,1975,Alton Thelwell,D,16,0,0,2,3,4,9,0,0,0,0,0,0,0
+2000/01,Tottenham Hotspur,1277,Steffen Iversen,F,14,2,1,3,5,2,7,0,0,0,0,2,0,0
+2000/01,Tottenham Hotspur,1645,Willem Korsten,M,14,3,0,1,4,3,7,0,0,0,0,0,1,0
+2000/01,Tottenham Hotspur,1775,Simon Davies,M,13,2,3,0,4,2,7,0,0,0,0,0,0,0
+2000/01,Tottenham Hotspur,1282,Ben Thatcher,D,12,0,0,0,6,2,4,0,0,0,0,2,1,0
+2000/01,Tottenham Hotspur,1274,Ramon Vega,D,10,0,0,1,3,2,5,0,0,0,0,3,0,0
+2000/01,Tottenham Hotspur,167,Chris Armstrong,F,9,2,0,0,3,3,3,0,0,0,0,0,0,0
+2000/01,Tottenham Hotspur,1771,Anthony Gardner,D,8,0,0,1,2,1,5,0,0,0,0,0,0,0
+2000/01,Tottenham Hotspur,1772,Matthew Etherington,M,6,0,0,0,1,2,3,0,0,0,0,1,0,0
+2000/01,Tottenham Hotspur,1774,John Piercy,M,5,0,0,0,2,0,3,0,0,0,0,0,0,0
+2000/01,Tottenham Hotspur,880,Mauricio Taricco,D,5,0,0,0,3,0,2,0,0,0,0,1,0,0
+2000/01,Tottenham Hotspur,1241,Andy Booth,F,4,0,0,2,1,2,1,0,0,0,0,0,0,0
+2000/01,Tottenham Hotspur,544,Ian Walker,G,4,0,0,2,1,2,1,0,0,0,0,0,0,0
+2000/01,Tottenham Hotspur,1776,Dave McEwen,F,3,0,0,0,0,3,0,0,0,0,0,0,0,0
+2000/01,Tottenham Hotspur,1468,José Dominguez,F,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+2000/01,West Ham United,1080,Shaka Hislop,G,34,0,0,8,9,10,15,0,0,0,0,1,0,0
+2000/01,West Ham United,395,Stuart Pearce,D,34,2,1,8,9,11,14,0,0,0,0,9,1,1
+2000/01,West Ham United,1634,Michael Carrick,M,33,1,3,7,10,11,12,0,0,0,0,2,0,0
+2000/01,West Ham United,11,Nigel Winterburn,D,33,1,1,5,9,10,14,0,0,0,0,7,0,0
+2000/01,West Ham United,1805,Frederic Kanoute,F,32,11,4,5,9,10,13,0,0,0,0,5,0,0
+2000/01,West Ham United,1451,Paolo Di Canio,F,31,9,7,6,9,12,10,0,0,0,0,6,0,0
+2000/01,West Ham United,1632,Joe Cole,M,30,5,2,3,6,9,15,0,0,0,0,5,0,0
+2000/01,West Ham United,800,Frank Lampard,M,30,7,3,6,9,8,13,0,0,0,0,3,0,0
+2000/01,West Ham United,293,Steve Lomas,M,20,1,0,4,5,8,7,0,0,0,0,4,0,0
+2000/01,West Ham United,741,Trevor Sinclair,M,19,3,3,4,7,7,5,0,0,0,0,1,0,0
+2000/01,West Ham United,1570,Rigobert Song,D,19,0,0,3,4,4,11,0,0,0,0,2,0,0
+2000/01,West Ham United,1164,Igor Stimac,D,19,0,0,1,6,6,7,0,0,0,0,3,1,0
+2000/01,West Ham United,768,John Moncur,M,16,0,0,0,5,6,5,0,0,0,0,6,0,0
+2000/01,West Ham United,96,Ian Pearce,D,15,1,0,2,5,3,7,0,0,0,0,0,0,1
+2000/01,West Ham United,1163,Christian Dailly,D,12,0,0,2,2,3,7,0,0,0,0,4,0,1
+2000/01,West Ham United,1111,Rio Ferdinand,D,12,0,0,3,4,5,3,0,0,0,0,0,0,1
+2000/01,West Ham United,1980,Sebastien Schemmel,D,12,0,0,1,2,4,6,0,0,0,0,0,0,0
+2000/01,West Ham United,1498,Kaba Diawara,F,11,0,0,2,4,2,5,0,0,0,0,0,0,0
+2000/01,West Ham United,1657,Davor Suker,F,11,2,0,0,2,3,6,0,0,0,0,5,0,0
+2000/01,West Ham United,785,Steve Potts,D,8,0,0,0,5,2,1,0,0,0,0,0,0,0
+2000/01,West Ham United,1998,Hannu Tihinen,D,8,0,0,1,1,3,4,0,0,0,0,1,0,0
+2000/01,West Ham United,1984,Svetoslav Todorov,F,8,1,1,0,1,0,7,0,0,0,0,1,0,0
+2000/01,West Ham United,1713,Titi Camara,F,6,0,0,0,2,0,4,0,0,0,0,1,0,0
+2000/01,West Ham United,1979,Hayden Foxe,D,5,0,0,1,1,0,4,0,0,0,0,2,0,0
+2000/01,West Ham United,200,Craig Forrest,G,4,0,0,0,0,2,2,0,0,0,0,0,0,0
+2000/01,West Ham United,1981,Ragnvald Soma,D,4,0,0,0,0,1,3,0,0,0,0,0,0,0
+2000/01,West Ham United,1983,Christian Bassila,M,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+2000/01,West Ham United,1630,Javier Margas,D,3,0,0,0,0,1,2,0,0,0,0,1,0,0
+2000/01,West Ham United,928,Paul Kitson,F,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+2000/01,West Ham United,1472,Stephen Bywater,G,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2000/01,West Ham United,396,Gary Charles,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,West Ham United,1526,Jermain Defoe,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,West Ham United,1637,Grant McCann,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2000/01,West Ham United,855,Scott Minto,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0

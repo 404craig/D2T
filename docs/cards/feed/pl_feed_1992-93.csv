@@ -1,0 +1,563 @@
+season,club_feed,feed_id,name,feed_pos,appearances,goals,goal_assist,clean_sheet,wins,draws,losses,mins_played,game_started,goals_conceded,saves,yellow_card,red_card,own_goals
+1992/93,Arsenal,1,David Seaman,G,39,0,0,15,15,10,14,0,0,0,0,0,0,1
+1992/93,Arsenal,25,Kevin Campbell,F,37,4,4,13,15,9,13,0,0,0,0,0,0,0
+1992/93,Arsenal,3,Tony Adams,D,35,0,0,13,15,8,12,0,0,0,0,3,0,0
+1992/93,Arsenal,23,Paul Merson,M,33,6,6,9,15,7,11,0,0,0,0,2,0,0
+1992/93,Arsenal,17,John Jensen,M,32,0,0,9,11,10,11,0,0,0,0,5,0,0
+1992/93,Arsenal,26,Alan Smith,F,31,3,3,8,10,9,12,0,0,0,0,0,0,0
+1992/93,Arsenal,29,Ian Wright,F,31,15,4,7,11,9,11,0,0,0,0,5,0,0
+1992/93,Arsenal,18,David Hillier,M,30,1,2,10,13,6,11,0,0,0,0,1,0,0
+1992/93,Arsenal,13,Lee Dixon,D,29,0,3,11,12,7,10,0,0,0,0,4,0,0
+1992/93,Arsenal,11,Nigel Winterburn,D,29,1,2,10,11,8,10,0,0,0,0,3,1,0
+1992/93,Arsenal,9,Steve Bould,D,24,1,1,9,9,4,11,0,0,0,0,5,0,0
+1992/93,Arsenal,22,Anders Limpar,M,23,2,2,0,10,5,8,0,0,0,0,1,0,0
+1992/93,Arsenal,12,Andy Linighan,D,21,2,0,8,5,10,6,0,0,0,0,1,0,0
+1992/93,Arsenal,19,Ray Parlour,M,21,1,3,5,6,6,9,0,0,0,0,3,0,0
+1992/93,Arsenal,15,Jimmy Carter,M,16,2,0,0,4,5,7,0,0,0,0,0,0,0
+1992/93,Arsenal,14,Martin Keown,D,16,0,0,6,4,6,6,0,0,0,0,0,0,0
+1992/93,Arsenal,7,Steve Morrow,D,16,0,0,5,7,1,8,0,0,0,0,0,0,0
+1992/93,Arsenal,8,David O'Leary,D,11,0,0,1,2,3,6,0,0,0,0,0,0,0
+1992/93,Arsenal,16,Mark Flatts,M,10,0,1,2,1,3,6,0,0,0,0,0,0,0
+1992/93,Arsenal,20,Ian Selley,M,9,0,0,3,1,3,5,0,0,0,0,2,0,0
+1992/93,Arsenal,6,Pal Lydersen,D,8,0,0,1,0,3,5,0,0,0,0,0,0,0
+1992/93,Arsenal,4,Colin Pates,D,7,0,0,1,4,1,2,0,0,0,0,0,0,0
+1992/93,Arsenal,21,Paul Davis,M,6,0,1,4,3,3,0,0,0,0,0,0,0,0
+1992/93,Arsenal,28,Neil Heaney,F,5,0,0,1,0,2,3,0,0,0,0,0,0,0
+1992/93,Arsenal,2,Alan Miller,G,4,0,0,1,0,1,3,0,0,0,0,0,0,0
+1992/93,Arsenal,27,Paul Dickov,F,3,2,0,0,2,0,1,0,0,0,0,0,0,0
+1992/93,Arsenal,10,Scott Marshall,D,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1992/93,Arsenal,5,Gavin McGowan,D,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1992/93,Arsenal,529,Perry Groves,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Aston Villa,38,Earl Barrett,D,42,1,2,15,21,11,10,0,0,0,0,3,0,0
+1992/93,Aston Villa,37,Paul McGrath,D,42,4,2,15,21,11,10,0,0,0,0,1,0,1
+1992/93,Aston Villa,43,Kevin Richardson,M,42,2,1,15,21,11,10,0,0,0,0,4,0,0
+1992/93,Aston Villa,41,Steve Staunton,D,42,2,8,15,21,11,10,0,0,0,0,2,0,0
+1992/93,Aston Villa,47,Ray Houghton,M,39,3,7,15,19,11,9,0,0,0,0,1,0,0
+1992/93,Aston Villa,39,Shaun Teale,D,39,1,0,14,19,11,9,0,0,0,0,7,0,0
+1992/93,Aston Villa,48,Garry Parker,M,37,9,1,11,18,10,9,0,0,0,0,0,0,0
+1992/93,Aston Villa,60,Dean Saunders,F,35,13,2,13,19,8,8,0,0,0,0,2,0,0
+1992/93,Aston Villa,62,Dalian Atkinson,F,28,11,4,8,13,9,6,0,0,0,0,1,0,0
+1992/93,Aston Villa,59,Dwight Yorke,M,27,6,3,4,15,7,5,0,0,0,0,0,0,0
+1992/93,Aston Villa,33,Nigel Spink,G,25,0,1,7,12,8,5,0,0,0,0,0,0,0
+1992/93,Aston Villa,32,Mark Bosnich,G,17,0,0,8,9,3,5,0,0,0,0,0,0,0
+1992/93,Aston Villa,46,Stephen Froggatt,M,17,1,5,3,10,4,3,0,0,0,0,1,0,0
+1992/93,Aston Villa,40,Neil Cox,D,15,1,1,2,12,0,3,0,0,0,0,1,0,0
+1992/93,Aston Villa,42,Bryan Small,D,14,0,1,2,6,4,4,0,0,0,0,0,0,0
+1992/93,Aston Villa,52,Tony Daley,M,13,2,0,0,3,5,5,0,0,0,0,0,0,0
+1992/93,Aston Villa,61,Cyrille Regis,F,13,1,3,2,4,4,5,0,0,0,0,0,0,0
+1992/93,Aston Villa,50,Stefan Beinlich,M,7,0,0,0,4,0,3,0,0,0,0,0,0,0
+1992/93,Aston Villa,35,Ugo Ehiogu,D,4,0,1,0,1,2,1,0,0,0,0,0,0,0
+1992/93,Aston Villa,51,Matthias Breitkreutz,M,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+1992/93,Aston Villa,58,Frank McAvennie,M,3,0,1,0,1,1,1,0,0,0,0,0,0,0
+1992/93,Aston Villa,49,David Farrell,M,2,0,0,0,1,1,0,0,0,0,0,0,0,0
+1992/93,Aston Villa,44,Mark Blake,M,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1992/93,Aston Villa,55,Martin Carruthers,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Blackburn Rovers,64,Bobby Mimms,G,42,0,0,19,20,11,11,0,0,0,0,0,0,0
+1992/93,Blackburn Rovers,75,Colin Hendry,D,41,1,2,19,19,11,11,0,0,0,0,6,0,1
+1992/93,Blackburn Rovers,86,Mike Newell,F,40,13,5,18,19,10,11,0,0,0,0,2,1,0
+1992/93,Blackburn Rovers,79,Stuart Ripley,M,40,7,6,15,20,10,10,0,0,0,0,1,0,0
+1992/93,Blackburn Rovers,78,Tim Sherwood,M,39,3,5,16,18,10,11,0,0,0,0,4,1,0
+1992/93,Blackburn Rovers,71,Kevin Moran,D,36,4,0,15,18,11,7,0,0,0,0,4,0,0
+1992/93,Blackburn Rovers,67,David May,D,34,1,3,17,16,11,7,0,0,0,0,6,0,1
+1992/93,Blackburn Rovers,80,Jason Wilcox,M,33,4,10,12,14,9,10,0,0,0,0,2,0,0
+1992/93,Blackburn Rovers,83,Mark Atkins,M,31,5,3,9,15,6,10,0,0,0,0,1,0,0
+1992/93,Blackburn Rovers,72,Alan Wright,D,25,0,1,11,11,6,8,0,0,0,0,0,0,0
+1992/93,Blackburn Rovers,84,Gordon Cowans,M,24,1,4,10,13,4,7,0,0,0,0,1,0,0
+1992/93,Blackburn Rovers,139,Roy Wegerle,F,22,4,0,5,6,7,9,0,0,0,0,2,0,0
+1992/93,Blackburn Rovers,89,Alan Shearer,F,21,16,4,9,10,7,4,0,0,0,0,3,0,0
+1992/93,Blackburn Rovers,69,Tony Dobson,D,18,0,1,8,8,7,3,0,0,0,0,2,1,0
+1992/93,Blackburn Rovers,68,Nicky Marker,D,15,0,0,3,8,1,6,0,0,0,0,1,0,0
+1992/93,Blackburn Rovers,73,Patrik Andersson,D,11,0,0,2,1,4,6,0,0,0,0,1,0,0
+1992/93,Blackburn Rovers,87,Kevin Gallacher,F,9,5,5,2,7,0,2,0,0,0,0,1,0,0
+1992/93,Blackburn Rovers,70,Graeme Le Saux,D,9,0,2,2,7,0,2,0,0,0,0,0,0,0
+1992/93,Blackburn Rovers,81,Chris Price,M,6,0,0,1,3,1,2,0,0,0,0,0,0,0
+1992/93,Blackburn Rovers,74,Henning Berg,D,4,0,1,1,2,1,1,0,0,0,0,0,0,0
+1992/93,Blackburn Rovers,76,Richard Brown,M,2,0,0,1,2,0,0,0,0,0,0,0,0,0
+1992/93,Blackburn Rovers,118,Steve Livingstone,F,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1992/93,Blackburn Rovers,613,Keith Hill,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1992/93,Blackburn Rovers,77,Simon Ireland,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Blackburn Rovers,85,Lee Makel,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1992/93,Chelsea,112,Andy Townsend,M,41,4,6,11,13,14,14,0,0,0,0,4,0,0
+1992/93,Chelsea,100,Mal Donaghy,D,40,2,1,11,13,14,13,0,0,0,0,0,0,0
+1992/93,Chelsea,111,Graham Stuart,M,39,9,7,8,12,14,13,0,0,0,0,3,0,0
+1992/93,Chelsea,99,Gareth Hall,D,37,2,0,8,13,11,13,0,0,0,0,6,0,0
+1992/93,Chelsea,110,Eddie Newton,M,34,5,1,8,11,12,11,0,0,0,0,1,0,0
+1992/93,Chelsea,103,Frank Sinclair,D,32,0,0,9,10,11,11,0,0,0,0,6,1,1
+1992/93,Chelsea,119,Robert Fleck,F,31,2,5,7,12,9,10,0,0,0,0,2,0,0
+1992/93,Chelsea,614,Mick Harford,F,28,9,2,7,10,7,11,0,0,0,0,5,0,0
+1992/93,Chelsea,107,Dennis Wise,M,27,3,5,8,10,9,8,0,0,0,0,8,0,0
+1992/93,Chelsea,106,David Lee,D,25,2,0,7,10,6,9,0,0,0,0,1,0,0
+1992/93,Chelsea,117,John Spencer,F,23,7,4,0,6,8,9,0,0,0,0,1,0,0
+1992/93,Chelsea,105,Steve Clarke,D,20,0,2,3,6,8,6,0,0,0,0,0,0,1
+1992/93,Chelsea,92,Kevin Hitchcock,G,20,0,0,7,7,6,7,0,0,0,0,0,0,0
+1992/93,Chelsea,91,Dave Beasant,G,17,0,0,4,5,7,5,0,0,0,0,1,0,0
+1992/93,Chelsea,70,Graeme Le Saux,D,14,0,1,1,4,4,6,0,0,0,0,2,0,0
+1992/93,Chelsea,98,Darren Barnard,D,13,1,2,2,6,3,4,0,0,0,0,0,0,0
+1992/93,Chelsea,101,Erland Johnsen,D,13,0,0,2,5,4,4,0,0,0,0,2,0,0
+1992/93,Chelsea,115,Tony Cascarino,F,9,2,3,1,3,4,2,0,0,0,0,0,1,0
+1992/93,Chelsea,97,Paul Elliott,D,7,0,1,2,2,3,2,0,0,0,0,1,0,0
+1992/93,Chelsea,599,Vinnie Jones,M,7,1,0,2,2,3,2,0,0,0,0,1,0,0
+1992/93,Chelsea,95,Nigel Spackman,M,6,0,0,2,2,1,3,0,0,0,0,0,0,0
+1992/93,Chelsea,93,Dmitri Kharin,G,5,0,0,0,2,1,2,0,0,0,0,0,0,0
+1992/93,Chelsea,108,David Hopkin,M,4,0,0,0,2,1,1,0,0,0,0,0,0,0
+1992/93,Chelsea,114,Damien Matthew,M,4,0,0,0,2,1,1,0,0,0,0,0,0,0
+1992/93,Chelsea,615,Joe Allon,F,3,0,0,0,0,1,2,0,0,0,0,0,0,0
+1992/93,Chelsea,109,Craig Burley,M,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+1992/93,Chelsea,102,Andy Myers,D,3,0,0,1,0,2,1,0,0,0,0,0,0,0
+1992/93,Chelsea,116,Neil Shipperley,F,3,1,1,0,1,0,2,0,0,0,0,0,0,0
+1992/93,Chelsea,104,Anthony Barness,D,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1992/93,Chelsea,118,Steve Livingstone,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Chelsea,96,Ian Pearce,D,1,0,0,0,0,0,1,0,0,0,0,1,0,0
+1992/93,Chelsea,173,Gerry Peyton,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Coventry City,138,John Williams,F,41,8,4,10,13,12,16,0,0,0,0,4,0,0
+1992/93,Coventry City,125,Peter Atherton,D,39,0,0,10,11,13,15,0,0,0,0,3,0,0
+1992/93,Coventry City,130,Brian Borrows,D,38,2,1,10,10,13,15,0,0,0,0,1,0,0
+1992/93,Coventry City,137,Lee Hurst,M,35,2,3,8,11,11,13,0,0,0,0,2,0,0
+1992/93,Coventry City,128,Phil Babb,D,34,0,0,8,10,10,14,0,0,0,0,2,0,0
+1992/93,Coventry City,122,Steve Ogrizovic,G,33,0,1,8,10,11,12,0,0,0,0,0,0,0
+1992/93,Coventry City,143,Peter Ndlovu,M,32,7,3,7,11,10,11,0,0,0,0,0,0,0
+1992/93,Coventry City,412,Robert Rosario,F,28,3,6,6,11,8,9,0,0,0,0,6,0,0
+1992/93,Coventry City,142,Mick Quinn,F,26,17,4,7,7,8,11,0,0,0,0,4,1,0
+1992/93,Coventry City,132,Lloyd McGrath,M,25,0,0,5,8,8,9,0,0,0,0,4,0,0
+1992/93,Coventry City,129,Andy Pearce,D,24,1,0,6,9,7,8,0,0,0,0,4,0,2
+1992/93,Coventry City,178,Kenny Sansom,D,21,0,2,4,8,6,7,0,0,0,0,0,0,0
+1992/93,Coventry City,87,Kevin Gallacher,F,20,6,2,2,6,8,6,0,0,0,0,1,0,0
+1992/93,Coventry City,618,Micky Gynn,M,20,3,2,5,8,3,9,0,0,0,0,0,0,0
+1992/93,Coventry City,135,Stewart Robson,M,15,0,2,4,6,5,4,0,0,0,0,0,0,0
+1992/93,Coventry City,617,Terry Fleming,M,11,0,1,1,5,2,4,0,0,0,0,0,0,0
+1992/93,Coventry City,127,David Busst,D,10,0,0,3,3,2,5,0,0,0,0,0,0,0
+1992/93,Coventry City,123,Jonathan Gould,G,9,0,0,3,3,2,4,0,0,0,0,0,0,0
+1992/93,Coventry City,124,David Rennie,D,9,0,0,2,1,3,5,0,0,0,0,1,0,0
+1992/93,Coventry City,133,Sean Flynn,M,7,0,0,0,1,1,5,0,0,0,0,0,0,0
+1992/93,Coventry City,619,David Smith,M,6,1,1,2,3,1,2,0,0,0,0,0,0,0
+1992/93,Coventry City,139,Roy Wegerle,F,6,0,0,0,1,2,3,0,0,0,0,0,0,0
+1992/93,Coventry City,140,Leigh Jenkinson,F,5,0,0,0,0,2,3,0,0,0,0,0,0,0
+1992/93,Coventry City,621,Peter Billing,D,3,0,0,0,0,1,2,0,0,0,0,0,0,0
+1992/93,Coventry City,126,Chris Greenman,D,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1992/93,Coventry City,620,Keith Rowland,D,2,0,1,0,1,1,0,0,0,0,0,0,0,0
+1992/93,Coventry City,624,Paul Williams,D,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1992/93,Coventry City,136,Willie Boland,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Coventry City,623,Craig Middleton,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Coventry City,141,Tony Sheridan,F,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1992/93,Crystal Palace,146,Nigel Martyn,G,42,0,0,11,11,16,15,0,0,0,0,2,0,0
+1992/93,Crystal Palace,156,Eddie McGoldrick,M,42,8,4,10,11,16,15,0,0,0,0,4,0,0
+1992/93,Crystal Palace,152,Chris Coleman,D,38,5,4,8,10,15,13,0,0,0,0,1,0,0
+1992/93,Crystal Palace,150,Eric Young,D,38,6,0,11,11,15,12,0,0,0,0,7,0,0
+1992/93,Crystal Palace,167,Chris Armstrong,F,35,15,2,10,11,11,13,0,0,0,0,3,1,0
+1992/93,Crystal Palace,148,Andy Thorn,F,34,1,2,8,10,11,13,0,0,0,0,4,1,0
+1992/93,Crystal Palace,154,Richard Shaw,D,33,0,1,8,10,14,9,0,0,0,0,0,0,1
+1992/93,Crystal Palace,153,Gareth Southgate,D,33,3,4,6,8,15,10,0,0,0,0,1,0,0
+1992/93,Crystal Palace,147,John Humphrey,D,32,0,0,8,9,11,12,0,0,0,0,1,0,0
+1992/93,Crystal Palace,626,Simon Osborn,M,31,2,1,6,9,10,12,0,0,0,0,0,0,0
+1992/93,Crystal Palace,165,Geoff Thomas,M,29,2,2,8,7,12,10,0,0,0,0,3,0,0
+1992/93,Crystal Palace,160,Simon Rodger,M,23,2,2,7,8,8,7,0,0,0,0,0,0,0
+1992/93,Crystal Palace,161,Lee Sinnott,M,19,0,0,2,3,6,10,0,0,0,0,1,1,0
+1992/93,Crystal Palace,149,Paul Williams,D,18,0,2,3,4,7,7,0,0,0,0,1,0,0
+1992/93,Crystal Palace,168,George Ndah,F,13,0,0,1,2,5,6,0,0,0,0,0,0,0
+1992/93,Crystal Palace,159,John Salako,M,13,0,6,2,1,6,6,0,0,0,0,0,0,0
+1992/93,Crystal Palace,155,Bobby Bowry,M,11,1,2,2,6,2,3,0,0,0,0,0,0,0
+1992/93,Crystal Palace,151,Dean Gordon,D,10,0,1,0,0,6,4,0,0,0,0,0,0,0
+1992/93,Crystal Palace,513,Mark Bright,F,5,1,0,0,0,2,3,0,0,0,0,0,0,0
+1992/93,Crystal Palace,169,Grant Watts,F,4,0,0,0,1,0,3,0,0,0,0,0,0,0
+1992/93,Crystal Palace,627,Stan Collymore,F,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1992/93,Crystal Palace,162,Ricky Newman,M,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1992/93,Crystal Palace,157,Stuart Massey,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Crystal Palace,158,Paul Mortimer,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1992/93,Everton,180,Gary Ablett,D,40,0,2,9,14,7,19,0,0,0,0,6,0,0
+1992/93,Everton,172,Neville Southall,G,40,0,0,11,15,7,18,0,0,0,0,1,2,0
+1992/93,Everton,174,Dave Watson,D,40,1,3,11,14,8,18,0,0,0,0,4,0,0
+1992/93,Everton,194,Peter Beardsley,F,39,10,7,11,15,8,16,0,0,0,0,0,0,0
+1992/93,Everton,186,Barry Horne,M,34,1,1,7,11,7,16,0,0,0,0,3,0,0
+1992/93,Everton,177,Matt Jackson,D,27,3,1,8,11,4,12,0,0,0,0,0,0,0
+1992/93,Everton,195,Stuart Barlow,F,26,5,1,1,9,4,13,0,0,0,0,0,0,0
+1992/93,Everton,193,Tony Cottee,F,26,12,1,5,9,4,13,0,0,0,0,3,0,0
+1992/93,Everton,179,Andy Hinchcliffe,D,25,1,3,7,7,6,12,0,0,0,0,0,0,0
+1992/93,Everton,192,John Ebbrell,D,24,1,2,10,11,5,8,0,0,0,0,0,0,0
+1992/93,Everton,196,Paul Rideout,F,24,3,0,1,9,5,10,0,0,0,0,0,1,0
+1992/93,Everton,191,Preki,M,23,3,0,4,7,4,12,0,0,0,0,0,0,0
+1992/93,Everton,187,Peter Beagrie,,22,3,0,0,7,5,10,0,0,0,0,2,0,0
+1992/93,Everton,189,Ian Snodin,M,20,1,3,2,8,3,9,0,0,0,0,5,0,0
+1992/93,Everton,190,Robert Warzycha,M,20,1,4,1,4,5,11,0,0,0,0,0,0,0
+1992/93,Everton,184,Mark Ward,D,19,1,3,5,9,5,5,0,0,0,0,2,0,0
+1992/93,Everton,183,Alan Harper,D,18,0,1,3,6,2,10,0,0,0,0,0,0,0
+1992/93,Everton,185,Billy Kenny,M,17,1,2,2,5,4,8,0,0,0,0,2,0,0
+1992/93,Everton,197,Mo Johnston,F,13,3,0,1,3,2,8,0,0,0,0,0,0,0
+1992/93,Everton,14,Martin Keown,D,13,0,0,3,6,1,6,0,0,0,0,1,0,0
+1992/93,Everton,178,Kenny Sansom,D,7,1,1,1,3,1,3,0,0,0,0,0,0,0
+1992/93,Everton,171,Jason Kearton,G,5,0,0,0,1,1,3,0,0,0,0,0,0,0
+1992/93,Everton,182,Paul Holmes,D,4,0,0,2,2,1,1,0,0,0,0,0,0,0
+1992/93,Everton,181,David Unsworth,D,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+1992/93,Everton,175,Iain Jenkins,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Everton,176,Neil Moore,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Ipswich Town,206,David Linighan,D,42,1,1,11,12,16,14,0,0,0,0,4,0,0
+1992/93,Ipswich Town,212,Jason Dozzell,M,41,7,9,11,12,16,13,0,0,0,0,3,0,0
+1992/93,Ipswich Town,209,Gavin Johnson,M,40,5,3,11,12,16,12,0,0,0,0,2,0,0
+1992/93,Ipswich Town,216,Mick Stockwell,M,39,4,5,10,11,16,12,0,0,0,0,1,0,0
+1992/93,Ipswich Town,222,Chris Kiwomya,F,38,10,2,9,10,14,14,0,0,0,0,3,0,0
+1992/93,Ipswich Town,204,John Wark,D,37,6,2,9,10,15,12,0,0,0,0,2,0,0
+1992/93,Ipswich Town,203,Geraint Williams,D,37,0,3,11,11,15,11,0,0,0,0,2,0,0
+1992/93,Ipswich Town,208,Phil Whelan,D,32,0,1,7,10,11,11,0,0,0,0,5,0,1
+1992/93,Ipswich Town,199,Clive Baker,G,31,0,0,8,8,10,13,0,0,0,0,0,0,0
+1992/93,Ipswich Town,205,Neil Thompson,D,31,3,4,10,10,14,7,0,0,0,0,1,0,1
+1992/93,Ipswich Town,219,Paul Goddard,F,25,3,1,2,5,12,8,0,0,0,0,0,0,0
+1992/93,Ipswich Town,214,Steve Whitton,M,24,3,2,3,6,7,11,0,0,0,0,1,0,0
+1992/93,Ipswich Town,221,Bontcho Guenchev,F,21,3,1,3,4,5,12,0,0,0,0,1,0,0
+1992/93,Ipswich Town,207,Eddie Youds,D,16,0,0,0,3,7,6,0,0,0,0,4,0,0
+1992/93,Ipswich Town,211,Simon Milton,M,12,2,0,0,3,5,4,0,0,0,0,2,0,0
+1992/93,Ipswich Town,200,Craig Forrest,G,11,0,0,2,3,7,1,0,0,0,0,0,1,0
+1992/93,Ipswich Town,218,Vlado Bozinoski,M,9,0,0,1,2,3,4,0,0,0,0,1,0,0
+1992/93,Ipswich Town,202,Steve Palmer,D,7,0,1,0,3,2,2,0,0,0,0,0,0,0
+1992/93,Ipswich Town,201,Frank Yallop,D,6,2,0,1,3,1,2,0,0,0,0,1,0,0
+1992/93,Ipswich Town,210,Glenn Pennyfather,M,4,0,0,0,1,1,2,0,0,0,0,0,0,0
+1992/93,Ipswich Town,213,David Gregory,M,3,1,0,0,1,1,1,0,0,0,0,0,0,0
+1992/93,Ipswich Town,629,Andy Petterson,G,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1992/93,Leeds United,246,Lee Chapman,,40,15,2,7,11,15,14,0,0,0,0,2,0,0
+1992/93,Leeds United,225,John Lukic,G,39,0,0,11,12,14,13,0,0,0,0,1,0,0
+1992/93,Leeds United,239,Gary Speed,M,39,7,2,11,12,12,15,0,0,0,0,3,0,0
+1992/93,Leeds United,231,Jon Newsome,D,37,0,0,6,10,14,13,0,0,0,0,2,0,0
+1992/93,Leeds United,630,Chris Whyte,D,34,1,4,7,9,11,14,0,0,0,0,6,0,0
+1992/93,Leeds United,229,Tony Dorigo,D,33,1,0,10,11,11,11,0,0,0,0,1,0,0
+1992/93,Leeds United,238,Gary McAllister,M,32,5,5,7,9,10,13,0,0,0,0,0,0,1
+1992/93,Leeds United,248,Rod Wallace,F,32,7,2,6,10,11,11,0,0,0,0,4,0,0
+1992/93,Leeds United,242,Gordon Strachan,M,31,4,6,6,9,9,13,0,0,0,0,3,0,0
+1992/93,Leeds United,243,David Batty,M,30,1,2,9,8,14,8,0,0,0,0,6,0,0
+1992/93,Leeds United,234,Chris Fairclough,D,30,3,2,7,11,8,11,0,0,0,0,2,0,0
+1992/93,Leeds United,240,Steve Hodge,M,23,2,1,1,4,11,8,0,0,0,0,2,0,0
+1992/93,Leeds United,237,David Rocastle,M,18,1,1,2,5,5,8,0,0,0,0,1,0,0
+1992/93,Leeds United,244,Carl Shutt,F,14,0,2,0,6,3,5,0,0,0,0,0,0,0
+1992/93,Leeds United,342,Eric Cantona,F,13,6,5,2,4,5,4,0,0,0,0,2,0,0
+1992/93,Leeds United,228,David Wetherall,D,13,1,0,5,4,6,3,0,0,0,0,3,0,0
+1992/93,Leeds United,235,Frank Strandli,M,10,2,1,1,3,4,3,0,0,0,0,3,0,0
+1992/93,Leeds United,230,David Kerslake,D,8,0,1,2,2,3,3,0,0,0,0,0,0,0
+1992/93,Leeds United,631,Scott Sellars,M,7,0,0,0,2,3,2,0,0,0,0,0,0,0
+1992/93,Leeds United,241,Mark Tinkler,M,7,0,1,0,1,4,2,0,0,0,0,0,0,0
+1992/93,Leeds United,247,Jamie Forrester,F,6,0,3,1,1,3,2,0,0,0,0,0,0,0
+1992/93,Leeds United,236,Ray Wallace,D,6,0,0,1,1,3,2,0,0,0,0,1,0,0
+1992/93,Leeds United,233,Dylan Kerr,D,5,0,0,0,1,2,2,0,0,0,0,0,0,0
+1992/93,Leeds United,227,Rob Bowman,D,4,0,0,2,1,1,2,0,0,0,0,0,0,0
+1992/93,Leeds United,232,Kevin Sharp,D,4,0,0,1,0,3,1,0,0,0,0,0,0,0
+1992/93,Leeds United,634,Imre Varadi,F,4,1,0,1,1,1,2,0,0,0,0,0,0,0
+1992/93,Leeds United,633,Mel Sterland,D,3,0,0,1,1,1,1,0,0,0,0,0,0,0
+1992/93,Leeds United,632,Mervyn Day,G,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1992/93,Leeds United,226,Mark Beeney,G,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1992/93,Leeds United,245,Noel Whelan,F,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1992/93,Liverpool,266,Mark Walters,M,34,11,5,5,11,9,14,90,1,3,0,2,0,0
+1992/93,Liverpool,258,Mark Wright,D,33,2,0,8,12,8,13,45,1,3,0,3,0,0
+1992/93,Liverpool,253,Steve Nicol,D,32,0,0,12,15,8,9,90,1,3,0,1,0,1
+1992/93,Liverpool,275,Ian Rush,F,32,14,1,10,13,10,9,90,1,3,0,3,0,0
+1992/93,Liverpool,272,Don Hutchison,M,31,7,3,8,13,6,12,90,1,3,0,2,0,0
+1992/93,Liverpool,271,Steve McManaman,M,31,4,6,8,13,9,9,0,0,0,0,0,0,0
+1992/93,Liverpool,256,David Burrows,D,30,2,2,8,14,6,10,90,1,3,0,3,0,0
+1992/93,Liverpool,261,Rob Jones,D,30,0,0,10,12,9,9,90,1,3,0,1,0,0
+1992/93,Liverpool,252,David James,G,29,0,0,9,9,9,11,90,1,3,0,0,1,0
+1992/93,Liverpool,262,Jamie Redknapp,M,29,2,5,6,10,7,12,90,1,3,0,2,1,0
+1992/93,Liverpool,264,Mike Marsh,M,28,1,3,4,8,9,11,0,0,0,0,1,0,0
+1992/93,Liverpool,269,John Barnes,M,27,5,6,10,11,7,9,90,1,3,0,0,0,0
+1992/93,Liverpool,274,Ronny Rosenthal,F,27,6,1,1,12,4,11,38,0,0,0,0,0,0
+1992/93,Liverpool,276,Paul Stewart,F,24,1,2,5,7,6,11,52,1,3,0,4,0,0
+1992/93,Liverpool,270,Ronnie Whelan,M,17,1,2,5,8,5,4,0,0,0,0,2,0,0
+1992/93,Liverpool,257,Torben Piechnik,D,16,0,0,3,6,2,8,45,0,0,0,2,0,0
+1992/93,Liverpool,260,Stig Inge Bjornebye,D,11,0,0,3,1,5,5,0,0,0,0,0,0,0
+1992/93,Liverpool,254,Steve Harkness,D,10,1,0,1,3,4,3,0,0,0,0,0,0,0
+1992/93,Liverpool,267,Jan Mølby,M,10,3,3,0,2,4,4,0,0,0,0,0,0,0
+1992/93,Liverpool,250,Mike Hooper,G,9,0,0,2,4,1,4,0,0,0,0,0,0,0
+1992/93,Liverpool,263,Michael Thomas,M,8,1,2,0,2,2,4,0,0,0,0,0,0,0
+1992/93,Liverpool,60,Dean Saunders,F,6,1,1,0,2,2,2,0,0,0,0,0,0,0
+1992/93,Liverpool,251,Bruce Grobbelaar,G,5,0,0,1,3,1,1,0,0,0,0,0,0,0
+1992/93,Liverpool,255,Nicky Tanner,D,4,0,0,0,0,1,3,0,0,0,0,0,0,0
+1992/93,Liverpool,268,Istvan Kozma,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Manchester City,295,David White,M,42,16,4,11,15,12,15,0,0,0,0,1,0,0
+1992/93,Manchester City,296,Richard Holden,M,41,3,9,10,15,12,14,0,0,0,0,3,0,0
+1992/93,Manchester City,279,Tony Coton,G,40,0,0,11,15,11,14,0,0,0,0,2,0,0
+1992/93,Manchester City,282,Keith Curle,D,39,3,0,9,13,11,15,0,0,0,0,5,0,0
+1992/93,Manchester City,304,Niall Quinn,F,39,9,11,10,14,12,13,0,0,0,0,2,1,0
+1992/93,Manchester City,305,Mike Sheron,F,38,11,3,7,14,11,13,0,0,0,0,0,0,0
+1992/93,Manchester City,291,Terry Phelan,D,37,0,4,10,14,11,12,0,0,0,0,4,0,2
+1992/93,Manchester City,300,Garry Flitcroft,M,32,5,1,9,10,9,13,0,0,0,0,3,0,1
+1992/93,Manchester City,297,Fitzroy Simpson,M,29,1,1,8,12,6,11,0,0,0,0,7,0,0
+1992/93,Manchester City,294,Steve McMahon,M,27,1,0,7,12,8,7,0,0,0,0,7,0,0
+1992/93,Manchester City,287,Michel Vonk,D,26,3,1,7,9,8,9,0,0,0,0,4,0,0
+1992/93,Manchester City,292,Andy Hill,D,24,1,1,6,7,6,11,0,0,0,0,0,0,0
+1992/93,Manchester City,285,Ian Brightwell,D,21,1,4,6,8,6,7,0,0,0,0,0,0,1
+1992/93,Manchester City,301,Peter Reid,M,20,0,2,0,4,9,7,0,0,0,0,1,0,0
+1992/93,Manchester City,283,Ray Ranson,D,17,0,1,4,6,5,6,0,0,0,0,4,0,0
+1992/93,Manchester City,286,David Brightwell,D,8,0,0,1,3,1,4,0,0,0,0,0,0,0
+1992/93,Manchester City,284,Kare Ingebrigtsen,M,7,0,0,0,2,3,2,0,0,0,0,0,0,0
+1992/93,Manchester City,299,Mike Quigley,M,5,0,0,0,1,1,3,0,0,0,0,0,0,0
+1992/93,Manchester City,303,Adie Mike,F,3,0,0,0,0,0,3,0,0,0,0,0,0,0
+1992/93,Manchester City,280,Andy Dibble,G,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1992/93,Manchester City,302,Paul Lake,M,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1992/93,Manchester City,298,David Kerr,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1992/93,Manchester City,281,Martyn Margetson,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Manchester United,319,Steve Bruce,D,42,5,3,17,24,12,6,90,1,1,0,6,0,0
+1992/93,Manchester United,337,Brian McClair,F,42,9,6,17,24,12,6,90,1,1,0,0,0,0
+1992/93,Manchester United,320,Gary Pallister,D,42,1,1,18,24,12,6,90,1,1,0,3,0,0
+1992/93,Manchester United,307,Peter Schmeichel,G,42,0,1,18,24,12,6,90,1,1,0,0,0,0
+1992/93,Manchester United,335,Ryan Giggs,M,41,9,5,15,24,11,6,90,1,1,0,1,0,0
+1992/93,Manchester United,339,Mark Hughes,F,41,15,3,16,23,12,6,90,1,1,0,7,0,0
+1992/93,Manchester United,326,Paul Ince,M,41,6,1,17,24,11,6,90,1,1,0,5,0,0
+1992/93,Manchester United,315,Denis Irwin,D,40,5,3,17,24,12,4,90,1,1,0,0,0,0
+1992/93,Manchester United,317,Paul Parker,D,31,1,0,12,19,8,4,90,1,1,0,0,0,0
+1992/93,Manchester United,324,Andrei Kanchelskis,F,27,3,1,2,13,9,5,0,0,0,0,0,0,0
+1992/93,Manchester United,328,Lee Sharpe,M,27,1,9,10,18,6,3,90,1,1,0,0,0,0
+1992/93,Manchester United,342,Eric Cantona,F,22,9,11,8,15,6,1,90,1,1,0,1,0,0
+1992/93,Manchester United,323,Darren Ferguson,M,15,0,0,6,5,6,4,0,0,0,0,2,0,0
+1992/93,Manchester United,325,Clayton Blackmore,M,14,0,2,5,4,6,4,0,0,0,0,1,0,0
+1992/93,Manchester United,322,Bryan Robson,M,14,1,0,2,10,2,2,0,0,0,0,2,0,0
+1992/93,Manchester United,330,Mike Phelan,M,11,0,1,1,6,3,2,0,0,0,0,1,0,0
+1992/93,Manchester United,338,Dion Dublin,F,7,1,0,2,3,1,3,0,0,0,0,1,0,0
+1992/93,Manchester United,341,Danny Wallace,F,2,0,0,0,0,2,0,0,0,0,0,0,0,0
+1992/93,Manchester United,332,Nicky Butt,M,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1992/93,Manchester United,409,Neil Webb,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1992/93,Middlesbrough,368,Paul Wilkinson,F,41,13,5,8,11,11,19,0,0,0,0,3,0,0
+1992/93,Middlesbrough,355,Jimmy Phillips,M,40,2,6,7,11,11,18,0,0,0,0,3,0,1
+1992/93,Middlesbrough,369,Tommy Wright,F,36,5,8,5,9,10,17,0,0,0,0,0,0,0
+1992/93,Middlesbrough,354,Derek Whyte,D,35,0,0,7,9,10,16,0,0,0,0,1,0,0
+1992/93,Middlesbrough,353,Andy Peake,D,33,0,2,7,10,7,16,0,0,0,0,7,0,0
+1992/93,Middlesbrough,366,John Hendrie,F,32,9,7,7,10,8,14,0,0,0,0,2,0,0
+1992/93,Middlesbrough,367,Willie Falconer,F,28,5,3,4,8,7,13,0,0,0,0,1,1,0
+1992/93,Middlesbrough,345,Steve Pears,G,26,0,0,4,5,6,15,0,0,0,0,1,0,0
+1992/93,Middlesbrough,361,Chris Morris,M,25,1,0,5,8,6,11,0,0,0,0,3,0,1
+1992/93,Middlesbrough,349,Curtis Fleming,D,24,0,0,4,6,7,11,0,0,0,0,3,0,0
+1992/93,Middlesbrough,363,Robbie Mustoe,M,23,1,1,4,7,6,10,0,0,0,0,1,0,0
+1992/93,Middlesbrough,352,Alan Kernaghan,D,22,2,0,6,7,6,9,0,0,0,0,1,1,0
+1992/93,Middlesbrough,362,Jamie Pollock,M,22,1,1,2,8,5,10,0,0,0,0,8,0,0
+1992/93,Middlesbrough,365,Craig Hignett,F,21,4,2,3,4,4,13,0,0,0,0,0,0,0
+1992/93,Middlesbrough,350,Nicky Mohan,D,18,2,0,2,3,4,11,0,0,0,0,4,0,0
+1992/93,Middlesbrough,636,Bernie Slaven,F,18,4,1,2,3,5,10,0,0,0,0,1,0,0
+1992/93,Middlesbrough,348,Jon Gittens,D,13,0,0,1,2,4,8,0,0,0,0,3,0,0
+1992/93,Middlesbrough,346,Ian Ironside,G,12,0,0,2,3,3,6,0,0,0,0,0,0,0
+1992/93,Middlesbrough,637,Mark Proctor,M,11,0,0,0,2,4,5,0,0,0,0,0,0,0
+1992/93,Middlesbrough,358,Graham Kavanagh,M,10,0,0,1,2,2,6,0,0,0,0,1,0,0
+1992/93,Middlesbrough,357,Chris Kamara,M,5,0,0,0,1,1,3,0,0,0,0,0,0,0
+1992/93,Middlesbrough,640,Brian Horne,G,4,0,0,2,2,2,0,0,0,0,0,0,0,0
+1992/93,Middlesbrough,638,Gary Parkinson,D,4,0,1,0,1,1,3,0,0,0,0,0,0,0
+1992/93,Middlesbrough,364,Dwight Marshall,F,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+1992/93,Middlesbrough,347,Andy Collett,G,2,0,0,0,1,1,0,0,0,0,0,0,0,0
+1992/93,Middlesbrough,360,Alan Moore,M,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1992/93,Norwich City,376,Mark Bowen,D,42,1,2,11,21,9,12,0,0,0,0,0,0,0
+1992/93,Norwich City,371,Bryan Gunn,G,42,0,0,11,21,9,12,0,0,0,0,1,0,0
+1992/93,Norwich City,641,David Phillips,M,42,9,6,11,21,9,12,0,0,0,0,0,0,0
+1992/93,Norwich City,378,Ian Culverhouse,D,41,0,2,11,21,8,12,0,0,0,0,1,0,0
+1992/93,Norwich City,390,Chris Sutton,F,38,8,1,11,19,9,10,0,0,0,0,5,0,0
+1992/93,Norwich City,386,Mark Robins,F,37,14,6,5,18,7,12,0,0,0,0,2,0,0
+1992/93,Norwich City,382,Ian Crook,M,34,3,5,9,17,7,10,0,0,0,0,0,0,0
+1992/93,Norwich City,388,Ruel Fox,F,34,4,8,9,15,8,11,0,0,0,0,0,0,0
+1992/93,Norwich City,372,John Polston,D,34,1,0,9,17,8,9,0,0,0,0,3,0,0
+1992/93,Norwich City,379,Ian Butterworth,D,26,1,0,2,15,3,8,0,0,0,0,1,0,0
+1992/93,Norwich City,383,Jeremy Goss,M,25,1,6,4,14,4,7,0,0,0,0,4,0,0
+1992/93,Norwich City,377,Gary Megson,D,23,1,0,6,13,3,7,0,0,0,0,2,0,0
+1992/93,Norwich City,373,Daryl Sutch,D,22,2,3,1,9,6,7,0,0,0,0,0,0,0
+1992/93,Norwich City,380,Rob Newman,D,18,2,3,4,8,6,4,0,0,0,0,2,0,0
+1992/93,Norwich City,391,Lee Power,F,18,6,1,2,10,3,5,0,0,0,0,1,0,0
+1992/93,Norwich City,439,Darren Beckford,F,8,1,0,0,4,2,2,0,0,0,0,0,0,0
+1992/93,Norwich City,375,Colin Woodthorpe,D,7,0,0,3,3,1,3,0,0,0,0,0,0,0
+1992/93,Norwich City,381,David Smith,M,6,0,0,3,3,2,1,0,0,0,0,1,0,0
+1992/93,Norwich City,389,Efan Ekoku,F,4,3,0,0,1,1,2,0,0,0,0,0,0,0
+1992/93,Norwich City,385,Andy Johnson,M,2,1,0,0,1,1,0,0,0,0,0,0,0,0
+1992/93,Norwich City,374,Jason Minett,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Nottingham Forest,411,Nigel Clough,M,42,10,2,8,10,10,22,0,0,0,0,2,0,0
+1992/93,Nottingham Forest,407,Roy Keane,M,40,6,2,9,10,10,20,0,0,0,0,7,0,0
+1992/93,Nottingham Forest,394,Mark Crossley,G,37,0,0,9,9,9,19,0,0,0,0,0,0,1
+1992/93,Nottingham Forest,397,Carl Tiler,D,37,0,0,8,9,10,18,0,0,0,0,6,0,0
+1992/93,Nottingham Forest,401,Scot Gemmill,M,33,1,5,8,8,8,17,0,0,0,0,1,0,0
+1992/93,Nottingham Forest,644,Brian Laws,D,33,0,0,6,7,8,18,0,0,0,0,3,0,0
+1992/93,Nottingham Forest,645,Gary Bannister,M,31,8,2,6,9,7,15,0,0,0,0,1,0,0
+1992/93,Nottingham Forest,398,Steve Chettle,D,30,0,0,6,7,5,18,0,0,0,0,0,0,0
+1992/93,Nottingham Forest,404,Ian Woan,M,28,3,9,6,9,5,14,0,0,0,0,2,0,0
+1992/93,Nottingham Forest,408,Kingsley Black,M,24,5,2,2,5,4,15,0,0,0,0,0,0,0
+1992/93,Nottingham Forest,410,Gary Crosby,M,23,1,0,5,4,6,13,0,0,0,0,0,0,0
+1992/93,Nottingham Forest,395,Stuart Pearce,D,23,2,2,6,5,6,12,0,0,0,0,1,0,0
+1992/93,Nottingham Forest,402,Thorvaldu Örlygsson,M,20,1,0,4,4,6,10,0,0,0,0,0,0,0
+1992/93,Nottingham Forest,396,Gary Charles,D,14,0,0,3,4,3,7,0,0,0,0,1,1,0
+1992/93,Nottingham Forest,643,Lee Glover,F,14,0,0,1,2,3,9,0,0,0,0,0,0,0
+1992/93,Nottingham Forest,406,Steve Stone,M,12,1,0,1,4,2,6,0,0,0,0,2,0,0
+1992/93,Nottingham Forest,412,Robert Rosario,F,10,1,1,0,2,3,5,0,0,0,0,0,0,0
+1992/93,Nottingham Forest,409,Neil Webb,M,9,0,2,3,4,1,4,0,0,0,0,0,0,0
+1992/93,Nottingham Forest,399,Brett Williams,D,9,0,0,2,2,2,5,0,0,0,0,2,0,0
+1992/93,Nottingham Forest,646,Ray McKinnon,D,6,1,0,1,0,3,3,0,0,0,0,0,0,0
+1992/93,Nottingham Forest,393,Andy Marriott,G,5,0,0,0,1,1,3,0,0,0,0,0,0,0
+1992/93,Nottingham Forest,647,Terry Wilson,M,5,0,0,1,1,0,4,0,0,0,0,0,0,0
+1992/93,Nottingham Forest,576,Teddy Sheringham,F,3,1,0,1,1,0,2,0,0,0,0,0,0,0
+1992/93,Oldham Athletic,429,Mike Milligan,M,42,3,1,3,13,10,19,90,1,2,0,3,0,0
+1992/93,Oldham Athletic,423,Gunnar Halle,D,41,5,7,3,13,10,18,90,1,2,0,2,0,0
+1992/93,Oldham Athletic,425,Richard Jobson,D,40,2,5,3,12,10,18,90,1,2,0,7,0,0
+1992/93,Oldham Athletic,436,Ian Olney,F,34,12,3,3,12,6,16,90,1,2,0,2,0,0
+1992/93,Oldham Athletic,420,Neil Pointon,D,34,3,1,2,10,8,16,90,1,2,0,5,0,0
+1992/93,Oldham Athletic,431,Paul Bernard,M,33,4,2,3,11,9,13,90,1,2,0,0,0,0
+1992/93,Oldham Athletic,430,Neil Adams,M,32,9,2,1,7,7,18,0,0,0,0,2,0,0
+1992/93,Oldham Athletic,428,Nick Henry,M,32,6,5,3,12,7,13,90,1,2,0,3,0,1
+1992/93,Oldham Athletic,422,Steve Redmond,D,31,0,3,2,10,7,14,90,1,2,0,3,0,0
+1992/93,Oldham Athletic,426,Ian Marshall,D,27,2,4,1,6,8,13,0,0,0,0,4,0,0
+1992/93,Oldham Athletic,416,Paul Gerrard,G,25,0,0,2,9,4,12,90,1,2,0,0,0,0
+1992/93,Oldham Athletic,419,Craig Fleming,D,24,0,0,2,9,4,11,90,1,2,0,2,0,0
+1992/93,Oldham Athletic,432,Graeme Sharp,F,21,7,5,1,6,6,9,0,0,0,0,0,0,0
+1992/93,Oldham Athletic,433,Roger Palmer,F,17,0,0,0,1,6,10,0,0,0,0,0,0,0
+1992/93,Oldham Athletic,415,Jon Hallworth,G,16,0,0,1,3,6,7,0,0,0,0,0,0,0
+1992/93,Oldham Athletic,427,Mark Brennan,M,14,3,4,1,5,2,7,0,0,0,0,3,0,0
+1992/93,Oldham Athletic,434,Andy Ritchie,F,12,3,3,0,5,2,5,11,0,0,0,1,0,0
+1992/93,Oldham Athletic,439,Darren Beckford,F,7,3,1,1,3,2,2,79,1,2,0,1,0,0
+1992/93,Oldham Athletic,418,Andy Barlow,D,6,0,0,0,2,2,2,0,0,0,0,1,0,0
+1992/93,Oldham Athletic,421,Neil McDonald,D,4,0,0,0,0,1,3,0,0,0,0,0,0,0
+1992/93,Oldham Athletic,435,Paul Moulden,F,4,0,0,0,0,1,3,0,0,0,0,0,0,0
+1992/93,Oldham Athletic,438,Neil Tolson,F,3,0,0,0,0,1,2,0,0,0,0,0,0,0
+1992/93,Oldham Athletic,648,John Keeley,G,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1992/93,Oldham Athletic,437,Orpheo Keizerweerd,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Queens Park Rangers,452,Clive Wilson,D,41,3,5,7,17,11,13,0,0,0,0,0,0,0
+1992/93,Queens Park Rangers,447,David Bardsley,D,40,3,7,8,16,11,13,0,0,0,0,3,0,1
+1992/93,Queens Park Rangers,453,Andy Impey,M,40,2,2,8,15,12,13,0,0,0,0,1,0,0
+1992/93,Queens Park Rangers,451,Alan McDonald,D,39,0,4,6,16,11,12,0,0,0,0,5,0,0
+1992/93,Queens Park Rangers,448,Darren Peacock,D,38,2,0,8,16,10,12,0,0,0,0,4,0,0
+1992/93,Queens Park Rangers,462,Les Ferdinand,F,37,20,5,6,16,11,10,0,0,0,0,6,0,0
+1992/93,Queens Park Rangers,456,Andy Sinton,M,36,7,9,7,15,11,10,0,0,0,0,1,0,0
+1992/93,Queens Park Rangers,442,Tony Roberts,G,28,0,1,5,11,8,9,0,0,0,0,0,0,0
+1992/93,Queens Park Rangers,455,Ray Wilkins,M,27,2,4,6,13,7,7,0,0,0,0,2,0,0
+1992/93,Queens Park Rangers,463,Bradley Allen,F,25,10,4,3,11,7,7,0,0,0,0,0,0,0
+1992/93,Queens Park Rangers,460,Simon Barker,M,25,1,1,5,11,8,6,0,0,0,0,2,0,0
+1992/93,Queens Park Rangers,446,Ian Holloway,M,24,2,1,2,10,6,8,0,0,0,0,2,0,0
+1992/93,Queens Park Rangers,461,Dennis Bailey,F,15,1,1,1,4,4,7,0,0,0,0,0,0,0
+1992/93,Queens Park Rangers,445,Rufus Brevett,D,15,0,0,3,4,6,5,0,0,0,0,0,0,1
+1992/93,Queens Park Rangers,465,Gary Penrice,F,15,6,0,1,6,4,5,0,0,0,0,1,0,0
+1992/93,Queens Park Rangers,441,Jan Stejskal,G,15,0,0,3,6,4,5,0,0,0,0,0,0,0
+1992/93,Queens Park Rangers,443,Danny Maddix,D,14,0,1,1,5,5,4,0,0,0,0,1,0,0
+1992/93,Queens Park Rangers,458,Devon White,M,7,2,0,0,1,3,3,0,0,0,0,1,0,0
+1992/93,Queens Park Rangers,454,Maurice Doyle,M,5,0,0,0,1,2,2,0,0,0,0,0,0,0
+1992/93,Queens Park Rangers,464,Garry Thompson,F,4,0,0,0,2,1,1,0,0,0,0,0,0,0
+1992/93,Queens Park Rangers,459,Michael Meaker,M,3,0,1,0,1,0,2,0,0,0,0,1,0,0
+1992/93,Queens Park Rangers,444,Karl Ready,D,3,0,0,1,1,1,1,0,0,0,0,0,0,0
+1992/93,Queens Park Rangers,649,Justin Channing,D,2,1,0,0,1,1,0,0,0,0,0,0,0,0
+1992/93,Sheffield United,488,Brian Deane,F,41,15,10,11,14,10,17,0,0,0,0,6,0,0
+1992/93,Sheffield United,471,Paul Beesley,D,39,2,1,9,12,10,17,0,0,0,0,4,0,0
+1992/93,Sheffield United,469,Alan Kelly,G,33,0,1,9,11,8,14,0,0,0,0,0,0,0
+1992/93,Sheffield United,478,Carl Bradshaw,M,32,1,2,6,9,9,14,0,0,0,0,5,1,0
+1992/93,Sheffield United,476,Brian Gayle,D,31,2,3,10,11,8,12,0,0,0,0,5,0,0
+1992/93,Sheffield United,480,Glyn Hodges,M,31,4,7,5,9,8,14,0,0,0,0,5,1,0
+1992/93,Sheffield United,489,Alan Cork,F,27,2,0,0,8,5,14,0,0,0,0,0,0,0
+1992/93,Sheffield United,472,Kevin Gage,D,27,0,0,6,9,6,12,0,0,0,0,2,0,0
+1992/93,Sheffield United,481,John Gannon,M,27,1,2,4,8,7,12,0,0,0,0,3,0,0
+1992/93,Sheffield United,490,Adrian Littlejohn,F,27,8,2,5,9,6,12,0,0,0,0,4,0,0
+1992/93,Sheffield United,479,Paul Rogers,M,27,3,1,6,9,8,10,0,0,0,0,2,0,0
+1992/93,Sheffield United,482,Mitch Ward,M,26,0,1,5,9,5,12,0,0,0,0,3,0,0
+1992/93,Sheffield United,477,Jamie Hoyland,D,22,2,2,5,8,3,11,0,0,0,0,0,0,0
+1992/93,Sheffield United,474,Tom Cowan,D,21,0,0,6,7,6,9,0,0,0,0,1,0,0
+1992/93,Sheffield United,483,John Pemberton,M,19,0,0,4,7,5,7,0,0,0,0,4,0,2
+1992/93,Sheffield United,485,Charlie Hartfield,M,17,0,1,4,7,3,7,0,0,0,0,3,0,0
+1992/93,Sheffield United,473,Ian Bryson,D,16,3,0,2,5,2,9,0,0,0,0,0,0,0
+1992/93,Sheffield United,484,Dane Whitehouse,M,14,5,2,2,7,5,2,0,0,0,0,2,0,0
+1992/93,Sheffield United,475,Dave Barnes,D,13,0,0,2,4,1,8,0,0,0,0,4,0,0
+1992/93,Sheffield United,468,Simon Tracey,G,10,0,0,2,3,2,5,0,0,0,0,0,1,0
+1992/93,Sheffield United,491,Franz Carr,F,8,3,1,2,4,0,4,0,0,0,0,1,0,0
+1992/93,Sheffield United,357,Chris Kamara,M,8,0,0,1,1,2,5,0,0,0,0,2,0,0
+1992/93,Sheffield United,650,Michael Lake,M,6,0,0,0,1,1,4,0,0,0,0,2,0,0
+1992/93,Sheffield United,652,Alan McLeary,D,3,0,0,0,1,0,2,0,0,0,0,0,0,0
+1992/93,Sheffield United,487,Andrew Scott,F,2,1,0,0,1,1,0,0,0,0,0,0,0,0
+1992/93,Sheffield Wednesday,496,Nigel Worthington,D,40,1,3,8,14,14,12,0,0,0,0,2,1,0
+1992/93,Sheffield Wednesday,493,Chris Woods,G,39,0,1,8,13,14,12,0,0,0,0,1,0,0
+1992/93,Sheffield Wednesday,509,Chris Bart-Williams,M,34,6,2,2,11,12,11,0,0,0,0,0,0,0
+1992/93,Sheffield Wednesday,497,Carlton Palmer,D,34,1,2,5,10,12,12,0,0,0,0,4,0,0
+1992/93,Sheffield Wednesday,506,Chris Waddle,M,33,1,8,6,12,11,10,0,0,0,0,0,0,0
+1992/93,Sheffield Wednesday,504,Roland Nilsson,D,32,1,0,4,10,11,11,0,0,0,0,0,0,0
+1992/93,Sheffield Wednesday,513,Mark Bright,F,30,11,2,7,11,9,10,0,0,0,0,3,0,0
+1992/93,Sheffield Wednesday,508,John Harkes,M,29,2,0,6,12,9,8,0,0,0,0,1,0,0
+1992/93,Sheffield Wednesday,501,Paul Warhurst,D,29,6,1,2,10,10,9,0,0,0,0,3,0,0
+1992/93,Sheffield Wednesday,499,Viv Anderson,D,26,3,0,5,10,7,9,0,0,0,0,3,0,0
+1992/93,Sheffield Wednesday,654,Danny Wilson,M,26,2,1,5,11,9,6,0,0,0,0,1,0,0
+1992/93,Sheffield Wednesday,510,John Sheridan,M,25,3,2,6,9,8,8,0,0,0,0,2,0,0
+1992/93,Sheffield Wednesday,514,David Hirst,F,22,11,4,4,7,10,5,0,0,0,0,2,0,0
+1992/93,Sheffield Wednesday,505,Graham Hyde,M,20,1,1,2,7,7,6,0,0,0,0,3,0,0
+1992/93,Sheffield Wednesday,653,Peter Shirtliff,D,20,0,1,4,10,4,6,0,0,0,0,1,0,0
+1992/93,Sheffield Wednesday,503,Nigel Pearson,D,16,1,0,3,4,7,5,0,0,0,0,0,0,0
+1992/93,Sheffield Wednesday,512,Nigel Jemson,F,13,0,2,1,5,2,6,0,0,0,0,0,0,0
+1992/93,Sheffield Wednesday,498,Phil King,D,12,1,2,1,4,5,3,0,0,0,0,0,0,0
+1992/93,Sheffield Wednesday,516,Gordon Watson,F,11,1,1,1,4,3,4,0,0,0,0,0,0,0
+1992/93,Sheffield Wednesday,507,Ryan Jones,M,9,0,1,1,3,4,2,0,0,0,0,1,0,0
+1992/93,Sheffield Wednesday,149,Paul Williams,D,7,1,0,1,1,3,3,0,0,0,0,0,0,0
+1992/93,Sheffield Wednesday,500,Simon Stewart,D,6,0,0,2,3,1,2,0,0,0,0,2,0,0
+1992/93,Sheffield Wednesday,515,Trevor Francis,F,5,0,0,0,1,1,3,0,0,0,0,0,0,0
+1992/93,Sheffield Wednesday,502,Julian Watts,D,4,0,0,1,2,1,1,0,0,0,0,0,0,0
+1992/93,Sheffield Wednesday,495,Kevin Pressman,G,3,0,0,1,2,0,1,0,0,0,0,0,0,0
+1992/93,Sheffield Wednesday,511,Michael Williams,F,3,0,1,1,2,0,1,0,0,0,0,0,0,0
+1992/93,Southampton,519,Tim Flowers,G,42,0,1,10,13,11,18,90,1,2,0,1,0,0
+1992/93,Southampton,533,Matthew Le Tissier,M,40,15,10,7,13,10,17,65,1,0,0,5,0,0
+1992/93,Southampton,520,Micky Adams,D,38,4,3,10,13,10,15,90,1,2,0,6,1,0
+1992/93,Southampton,530,Neil Maddison,M,37,4,2,9,13,9,15,90,1,2,0,0,0,0
+1992/93,Southampton,538,Iain Dowie,F,36,11,5,8,12,7,17,90,1,2,0,8,0,0
+1992/93,Southampton,523,Francis Benali,D,33,0,1,6,7,9,17,90,1,2,0,6,1,0
+1992/93,Southampton,522,Kenneth Monkou,D,33,1,1,8,11,7,15,90,1,2,0,4,0,0
+1992/93,Southampton,528,Jason Dodd,D,30,1,2,6,10,6,14,90,1,2,0,0,0,0
+1992/93,Southampton,534,Terry Hurlock,M,30,0,0,6,7,10,13,0,0,0,0,8,1,0
+1992/93,Southampton,524,Jeff Kenna,D,29,2,2,7,9,8,12,90,1,2,0,0,0,0
+1992/93,Southampton,521,Richard Hall,D,28,4,2,8,9,8,11,90,1,2,0,6,0,0
+1992/93,Southampton,539,Nicky Banger,F,27,6,4,3,10,4,13,25,0,2,0,0,0,0
+1992/93,Southampton,537,Glenn Cockerill,M,23,0,1,6,6,7,10,0,0,0,0,2,0,0
+1992/93,Southampton,525,Kevin Moore,D,18,2,1,2,6,4,8,0,0,0,0,3,0,0
+1992/93,Southampton,529,Perry Groves,M,15,2,1,0,5,4,6,0,0,0,0,2,0,0
+1992/93,Southampton,535,Tommy Widdrington,M,12,0,1,2,7,1,4,90,1,2,0,3,0,0
+1992/93,Southampton,541,David Speedie,F,11,0,0,1,2,4,5,0,0,0,0,2,0,0
+1992/93,Southampton,655,Kerry Dixon,F,9,2,0,1,1,4,4,0,0,0,0,0,0,0
+1992/93,Southampton,531,Steve Wood,M,4,0,0,1,0,3,1,0,0,0,0,0,0,0
+1992/93,Southampton,527,Matt Bound,D,3,0,0,0,0,2,1,0,0,0,0,0,0,0
+1992/93,Southampton,540,Paul Moody,F,3,0,0,0,0,2,1,0,0,0,0,1,0,0
+1992/93,Southampton,542,Lee Powell,F,2,0,0,0,0,2,0,0,0,0,0,0,0,0
+1992/93,Southampton,526,Derek Allan,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Southampton,536,Neal Bartlett,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Southampton,656,David Lee,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,567,Paul Allen,M,38,3,2,7,15,9,14,0,0,0,0,2,0,0
+1992/93,Tottenham Hotspur,558,Neil Ruddock,D,38,3,2,10,14,11,13,0,0,0,0,8,1,2
+1992/93,Tottenham Hotspur,576,Teddy Sheringham,F,38,21,9,9,16,9,13,0,0,0,0,1,0,0
+1992/93,Tottenham Hotspur,566,Darren Anderton,M,34,6,11,4,12,8,14,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,555,Dean Austin,D,34,0,1,8,15,8,11,0,0,0,0,5,0,0
+1992/93,Tottenham Hotspur,568,Vinny Samways,M,34,0,5,8,13,9,12,0,0,0,0,5,0,0
+1992/93,Tottenham Hotspur,551,Justin Edinburgh,D,32,0,0,9,12,9,11,0,0,0,0,2,0,0
+1992/93,Tottenham Hotspur,549,Gary Mabbutt,D,29,2,1,8,14,5,10,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,545,Erik Thorstvedt,G,27,0,0,8,12,6,9,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,569,Nick Barmby,M,22,6,3,0,9,4,9,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,556,Steve Sedgley,D,22,3,3,3,6,7,9,0,0,0,0,2,0,0
+1992/93,Tottenham Hotspur,560,David Howells,M,18,1,1,5,9,3,6,0,0,0,0,1,0,0
+1992/93,Tottenham Hotspur,574,Nayim,M,18,3,1,6,8,5,5,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,562,Andy Turner,M,18,3,0,0,6,5,7,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,572,Pat van der Hauwe,M,18,0,0,1,8,3,7,0,0,0,0,3,0,0
+1992/93,Tottenham Hotspur,577,Gordon Durie,F,17,3,1,4,5,7,5,0,0,0,0,3,0,0
+1992/93,Tottenham Hotspur,575,Andrew Gray,M,17,1,0,0,7,7,3,0,0,0,0,3,0,1
+1992/93,Tottenham Hotspur,544,Ian Walker,G,17,0,0,2,4,6,7,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,547,Jason Cundy,D,15,1,0,2,4,4,7,0,0,0,0,1,0,0
+1992/93,Tottenham Hotspur,548,Gudni Bergsson,D,5,0,0,0,2,1,2,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,550,Terry Fenwick,D,5,0,0,1,0,2,3,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,579,John Hendry,F,5,2,0,0,1,2,2,0,0,0,0,1,0,0
+1992/93,Tottenham Hotspur,554,Stuart Nethercott,D,5,0,0,0,1,2,2,0,0,0,0,1,0,0
+1992/93,Tottenham Hotspur,552,David Tuttle,D,5,0,0,0,1,3,1,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,561,Kevin Watson,M,5,0,0,1,1,1,3,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,563,Danny Hill,M,4,0,1,0,1,1,2,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,564,Lee Hodges,M,4,0,1,0,1,1,2,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,578,Paul Moran,F,3,0,0,0,2,1,0,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,553,David McDonald,D,2,0,0,0,1,0,1,0,0,0,0,1,0,0
+1992/93,Tottenham Hotspur,557,Sol Campbell,D,1,1,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Tottenham Hotspur,546,Kevin Dearden,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Wimbledon,598,Robbie Earle,M,42,7,5,12,14,12,16,0,0,0,0,4,0,0
+1992/93,Wimbledon,582,Hans Segers,G,41,0,1,13,14,11,16,0,0,0,0,1,0,0
+1992/93,Wimbledon,603,Dean Holdsworth,F,36,19,1,9,14,8,14,0,0,0,0,2,0,0
+1992/93,Wimbledon,607,Andy Clarke,F,33,5,2,2,10,10,13,0,0,0,0,1,0,0
+1992/93,Wimbledon,588,Roger Joseph,D,32,0,1,11,11,7,14,0,0,0,0,1,0,0
+1992/93,Wimbledon,586,John Scales,D,32,1,2,11,12,8,12,0,0,0,0,1,0,0
+1992/93,Wimbledon,604,John Fashanu,F,29,6,2,8,10,9,10,0,0,0,0,3,1,1
+1992/93,Wimbledon,599,Vinnie Jones,M,27,1,1,7,8,10,9,0,0,0,0,7,1,0
+1992/93,Wimbledon,584,Brian McAllister,D,27,0,1,9,10,9,8,0,0,0,0,6,2,0
+1992/93,Wimbledon,597,Lawrie Sanchez,M,27,4,3,7,9,7,11,0,0,0,0,8,0,0
+1992/93,Wimbledon,600,Neal Ardley,M,26,4,7,8,13,5,8,0,0,0,0,2,0,0
+1992/93,Wimbledon,589,Dean Blackwell,D,24,0,0,5,6,8,10,0,0,0,0,0,0,0
+1992/93,Wimbledon,590,Warren Barton,D,23,2,0,4,5,8,10,0,0,0,0,2,0,0
+1992/93,Wimbledon,591,Scott Fitzgerald,D,20,0,0,4,5,7,8,0,0,0,0,1,0,0
+1992/93,Wimbledon,585,Gerald Dobbs,D,19,1,2,4,8,3,8,0,0,0,0,3,1,0
+1992/93,Wimbledon,595,Paul Miller,M,19,1,2,2,3,7,9,0,0,0,0,1,0,0
+1992/93,Wimbledon,596,Gary Elkins,M,18,0,1,7,7,4,7,0,0,0,0,4,0,0
+1992/93,Wimbledon,608,Terry Gibson,F,8,1,1,1,2,2,4,0,0,0,0,1,0,0
+1992/93,Wimbledon,605,Steve Cotterill,F,7,3,1,1,1,2,4,0,0,0,0,0,0,0
+1992/93,Wimbledon,594,Steve Talboys,M,7,0,0,0,3,2,2,0,0,0,0,0,0,0
+1992/93,Wimbledon,658,Steve Anthrobus,F,5,0,0,1,1,2,2,0,0,0,0,0,0,0
+1992/93,Wimbledon,592,Peter Fear,D,4,0,0,0,2,1,1,0,0,0,0,0,0,0
+1992/93,Wimbledon,652,Alan McLeary,D,4,0,0,1,1,2,1,0,0,0,0,0,0,0
+1992/93,Wimbledon,606,Greg Berry,F,3,0,0,1,1,1,1,0,0,0,0,0,0,0
+1992/93,Wimbledon,602,Paul McGee,F,3,0,0,0,0,2,1,0,0,0,0,0,0,0
+1992/93,Wimbledon,601,Aidan Newhouse,F,1,1,0,0,0,0,1,0,0,0,0,0,0,0
+1992/93,Wimbledon,593,Justin Skinner,M,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1992/93,Wimbledon,583,Neil Sullivan,G,1,0,0,0,0,1,0,0,0,0,0,0,0,0
