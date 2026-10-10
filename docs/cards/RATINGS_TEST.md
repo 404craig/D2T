@@ -66,3 +66,33 @@ What the line-ups showed:
 | Modric 08/09 (Spurs, 8th) | 75 | 68 |
 
 Trade-off: reputation lifts title-winning squads (Poborsky 88, May 91, O'Shea 91, nine Man Utd players in the 1996/97 top 15) and pulls down good players at mid-table clubs (Modric 68, Fuller 64, Given 65 and 56). A reputation signal that does not depend on the club, such as international caps by season, would balance it; Tenaball only has caps for some nations.
+
+## v5: league position points, and a blind panel to measure against
+
+**Blind panel** (`docs/cards/panel/`). Four subagents rated every player with 10+ apps at 20 club-seasons from their own football knowledge, without seeing any of our numbers (383 players):
+- 2008/09: Man Utd, Liverpool, Chelsea, Arsenal, Everton, Aston Villa, Spurs, Stoke, Newcastle, West Brom
+- 2019/20: Liverpool, Man City, Leicester, Burnley, Norwich
+- 1996/97: Man Utd, Newcastle, Arsenal, Middlesbrough, Wimbledon
+
+`tools/score_vs_panel.py` scores any version against it: rank agreement (Spearman, 1.0 = same order), agreement on each club's order, and the average gap in rating points. The panel is opinion (and remembers fame), so it is a sense check, not the truth. EA ratings would be a second check once we have the files.
+
+**v5 reputation** (`tools/rate_v5.py`): league position points, 20 for 1st down to 1 for 20th (22-club seasons scaled), times his share of the club's games. Last season and the season before also count (seasons outside the Premier League are left out rather than scored zero). Plus awards and career appearances. Titles won are dropped. Champions League minutes were tested and add nothing beyond league position, so their weight is 0 by default.
+
+| Version | Rank agreement | 08/09 | 19/20 | 96/97 | Club order | Avg gap |
+|---|---|---|---|---|---|---|
+| v2 | 0.739 | 0.718 | 0.786 | 0.722 | 0.538 | 7.4 |
+| v3 | 0.777 | 0.756 | 0.827 | 0.751 | 0.612 | 7.5 |
+| v4 | 0.782 | 0.757 | 0.847 | 0.744 | 0.520 | 7.2 |
+| v5 first try | 0.808 | 0.782 | 0.865 | 0.790 | 0.559 | 7.3 |
+| v5 tuned (reputation 50%) | 0.842 | 0.825 | 0.896 | 0.814 | 0.634 | 4.9 |
+| v5 reputation 70% | 0.858 | 0.847 | 0.910 | 0.822 | 0.681 | 5.7 |
+| reputation only, no match stats | 0.845 | 0.840 | 0.904 | 0.805 | 0.691 | 7.5 |
+
+A 324-run sweep found: last season counting as much as this one (and the season before at half) agrees best; Champions League adds nothing; agreement peaks with reputation at 70 to 80% of the overall. Reputation alone already scores 0.845, which shows the panel mostly rates on fame and club success. v5 defaults to 50% so match performance still matters; it costs 0.016 of agreement.
+
+Named players, v5 tuned (panel in brackets): Henderson 97 (89), Fabinho 86 (87), Wijnaldum 92 (86), Van Dijk 94 (92), Salah 94 (91), Gerrard 97 (92), Ronaldo 94 (94), Mascherano 85 (85), Modric 79 (86), Cantona 90 (89), Schmeichel 91 (90), Keane 85 (85), Juninho 87 (88).
+
+Biggest remaining disagreements:
+- Starters at bottom clubs rated far too low: Shay Given 61 (86), Norwich 2019/20 regulars 55 to 61 (69 to 77), Newcastle 2008/09 defenders 58 to 61 (72 to 73), Ravanelli 71 (86).
+- Squad and utility players at title-winning clubs too high: O'Shea 90 (76), Phil Neville 89 (75), Beresford 90 (76), Giggs 2008/09 95 (83).
+- Too many 90+ cards (13 to 15 a season) and golds (about 110): tier thresholds or the curve need tightening.
