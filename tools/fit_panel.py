@@ -99,12 +99,29 @@ stretch = ty.std() / tp.std()
 print(f"stretch x{stretch:.2f} around {ty.mean():.1f}")
 def final(Xn):
     v = ty.mean() + (f(Xn) - tp.mean()) * stretch
-    return np.where(v > 90, 90 + (v - 90) * 0.6, v)  # soft ceiling: the very top is scarce, as in FIFA
+    return v
 st = final(np.array([a for a, _ in allp]))
 print(f"all panel seasons after stretch: agreement {spearman(list(st), list(ty)):.3f}, avg gap {np.mean(np.abs(st - ty)):.1f}")
+# Game scale (a design choice, not learned): in each season the TOP_N best players
+# sit at 90 to TOP_MAX, the order is unchanged, and players ranked below ANCHOR
+# keep the fitted value. Between the anchor and the TOP_N-th player it is stretched linearly.
+TOP_N, TOP_MAX, ANCHOR = 10, 97, 60
+
+
+def game_scale(v):
+    o = np.sort(v)[::-1]
+    v1, vn, va = o[0], o[TOP_N - 1], o[min(ANCHOR, len(o)) - 1]
+    out = v.copy()
+    hi = v >= vn
+    out[hi] = 90 + (v[hi] - vn) / max(v1 - vn, 1e-9) * (TOP_MAX - 90)
+    mid = (v < vn) & (v > va)
+    out[mid] = va + (v[mid] - va) / max(vn - va, 1e-9) * (89.4 - va)
+    return out
+
+
 if "--write" in sys.argv:
     for t, (rated, _) in data.items():
-        p = final(np.array([features(r) for r in rated]))
+        p = game_scale(final(np.array([features(r) for r in rated])))
         out = []
         for r, v in zip(rated, p):
             q = dict(r); q["ovr"] = int(round(min(99, max(40, v))))

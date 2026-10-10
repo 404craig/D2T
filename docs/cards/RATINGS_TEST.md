@@ -133,3 +133,11 @@ Defenders also get goals conceded while on the pitch as a learning input. The fi
 **Spread per season:** 90+ 1 to 6 players, 85+ 14 to 24, 80+ 49 to 69. Card tiers now gold 80+, silver 70 to 79, bronze under 70 (plus the club's best card).
 
 **Biggest remaining misses (8 or 9 points):** quality players with injury-hit seasons rated low (Laporte 77 against 85, Carvalho, Essien, Konate, Lisandro Martinez, Palhinha) and ever-present workhorses rated high (Kuyt 89 against 80, O'Shea 85 against 76, Giroud 89 against 81). Van Dijk 88 sits one point under Henderson 89 in 2019/20 (panel 92 against 89).
+
+## Game scale: about 10 players in the 90s each season
+
+Craig wants roughly 10 players per season in the 90s (the panel was stricter, giving 2 to 5 per half-league). This is a design setting in `tools/fit_panel.py`, applied after the learned ratings and the stretch: in each season the 10 best players sit at 90 to 97, the order is unchanged, players ranked below 60th keep their fitted value, and the band between is stretched to meet 90. The soft ceiling from the previous step is removed. Agreement with the panel is unchanged (0.883); the average gap moves from 2.5 to 2.7 because the top is now higher than the panel's.
+
+The 90+ players per season: 1994/95 Shearer 97, Kanchelskis 91, Fowler, Pallister, Irwin, Ince, Schmeichel, Giggs, Les Ferdinand, Klinsmann 90. 2019/20 De Bruyne 97, Salah 95, Mane 92, Alexander-Arnold, Robertson, Henderson, Mahrez, Sterling, Aguero 91, Van Dijk 90. 2023/24 Haaland 97, Foden 95, Saka 93, Havertz, Salah, Rodri 91, Ben White, Odegaard, Bernardo Silva, Ederson 90.
+
+Names in the top ten that look generous: Riise and Dudek (2001/02, Liverpool finished 2nd), Kuyt (2008/09), Giroud (2013/14), Ben White and Havertz (2023/24). They are ever-present starters at clubs that finished high, the same workhorse pattern noted above.
