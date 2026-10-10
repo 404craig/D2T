@@ -19,6 +19,16 @@ from club_names import CLUB  # noqa: E402
 ALIAS = {"chicharito": "javier hernandez", "alex evtushok": "oleksandr yevtushok", "zanka": "mathias jorgensen", "tahar elkhalej": "tahar el khalej"}  # feed name -> Tenaball name
 
 
+# Extra aliases, one JSON file per contributor: {"clubs": {feed name: Tenaball name}, "players": {feed name: Tenaball name}}
+import glob as _glob
+import json as _json
+import os as _os
+for _f in sorted(_glob.glob(_os.path.join(_os.path.dirname(__file__), "..", "docs", "cards", "feed", "aliases", "*.json"))):
+    _a = _json.load(open(_f, encoding="utf-8"))
+    CLUB.update(_a.get("clubs", {}))
+    ALIAS.update({k: v for k, v in _a.get("players", {}).items()})
+
+
 def norm(s):
     s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().lower()
     return "".join(ch for ch in s if ch.isalnum() or ch == " ").strip()
@@ -37,7 +47,7 @@ for f in feed:
         raise SystemExit(f"unknown club {f['club_feed']}")
     cands = by_club[club]
     n = norm(f["name"])
-    n = ALIAS.get(n, n)
+    n = norm(ALIAS.get(n, ALIAS.get(f["name"], n)))
     hit = [r for r in cands if norm(r["player"]) == n or norm(r["full_name"]) == n]
     if not hit:  # surname plus same apps
         sur = n.split()[-1] if n else ""

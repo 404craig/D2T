@@ -65,7 +65,8 @@ sys.path.insert(0, "tools")
 from club_names import CLUB  # noqa: E402
 lineup_path = merged_path.replace("merged_", "lineups_")
 LU = {}
-for x in csv.DictReader(open(lineup_path, encoding="utf-8")):
+import os as _os
+for x in (csv.DictReader(open(lineup_path, encoding="utf-8")) if _os.path.exists(lineup_path) else []):
     LU[(x["feed_id"], CLUB.get(x["club_feed"], x["club_feed"]))] = x
 for r in rows:
     x = LU.get((r["feed_id"], r["club"]))
@@ -254,7 +255,7 @@ for r in rows:
 out_rows = []
 for r in rows:
     tier = "best" if best[r["club"]] is r else "gold" if r["ovr"] >= 75 else "silver" if r["ovr"] >= 65 else "bronze"
-    out_rows.append({"club": r["club"], "clubPos": table.index(r["club"]) + 1, "player": r["player"], "pos": r["position"],
+    out_rows.append({"id": r["player_id"], "club": r["club"], "clubPos": table.index(r["club"]) + 1, "player": r["player"], "pos": r["position"],
                      "ovr": r["ovr"], "tier": tier, "stats": r["face"], "apps": r["apps"], "goals": r["goals"],
                      "assists": r["goal_assist"], "cleanSheets": r["clean_sheet"], "wdl": [r["wins"], r["draws"], r["losses"]],
                      "withPPG": r["with_ppg"], "withoutPPG": r["without_ppg"], "withoutGames": r["without_g"],
