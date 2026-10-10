@@ -6,7 +6,7 @@
 "clubPos": 3,
 "player": "Nigel Winterburn",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 82,
 "tier": "gold",
 "stats": {
 "CLN": 76,
@@ -37,6 +37,7 @@
 "THR": -0.0842,
 "DIF": 1.3548,
 "APP": 1.5311,
+"CON": 0.8579,
 "lp0": 0.9383,
 "lp1": 0.7579,
 "lp2": 0.4643,
@@ -44,6 +45,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.5,
+"seasonGames": 38,
 "starts": 38,
 "perf": 0.9438
 },
@@ -56,7 +58,7 @@
 "clubPos": 3,
 "player": "Ian Wright",
 "pos": "FWD",
-"ovr": 87,
+"ovr": 88,
 "tier": "best",
 "stats": {
 "GOL": 94,
@@ -94,6 +96,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.0,
+"seasonGames": 38,
 "starts": 30,
 "perf": 1.6101
 },
@@ -106,8 +109,8 @@
 "clubPos": 3,
 "player": "Steve Bould",
 "pos": "DEF",
-"ovr": 79,
-"tier": "gold",
+"ovr": 78,
+"tier": "silver",
 "stats": {
 "CLN": 67,
 "THR": 42,
@@ -137,6 +140,7 @@
 "THR": -1.1293,
 "DIF": 1.1985,
 "APP": 0.9664,
+"CON": 0.8643,
 "lp0": 0.8083,
 "lp1": 0.4,
 "lp2": 0.369,
@@ -144,6 +148,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.3,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.509
 },
@@ -156,7 +161,7 @@
 "clubPos": 3,
 "player": "Martin Keown",
 "pos": "DEF",
-"ovr": 82,
+"ovr": 80,
 "tier": "gold",
 "stats": {
 "CLN": 82,
@@ -187,6 +192,7 @@
 "THR": 0.0658,
 "DIF": 1.3967,
 "APP": 1.0183,
+"CON": 0.9515,
 "lp0": 0.8203,
 "lp1": 0.7158,
 "lp2": 0.369,
@@ -194,6 +200,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.8,
+"seasonGames": 38,
 "starts": 33,
 "perf": 1.0655
 },
@@ -206,7 +213,7 @@
 "clubPos": 3,
 "player": "Lee Dixon",
 "pos": "DEF",
-"ovr": 82,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "CLN": 64,
@@ -237,6 +244,7 @@
 "THR": 0.5722,
 "DIF": 1.5442,
 "APP": 0.7685,
+"CON": 0.5134,
 "lp0": 0.7628,
 "lp1": 0.8,
 "lp2": 0.4643,
@@ -244,6 +252,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.5,
+"seasonGames": 38,
 "starts": 31,
 "perf": 0.6477
 },
@@ -256,7 +265,7 @@
 "clubPos": 3,
 "player": "Paul Merson",
 "pos": "FWD",
-"ovr": 81,
+"ovr": 80,
 "tier": "gold",
 "stats": {
 "GOL": 46,
@@ -294,6 +303,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.6,
+"seasonGames": 38,
 "starts": 32,
 "perf": -0.0086
 },
@@ -306,7 +316,7 @@
 "clubPos": 3,
 "player": "Patrick Vieira",
 "pos": "MID",
-"ovr": 83,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "AST": 69,
@@ -346,6 +356,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.4,
+"seasonGames": 38,
 "starts": 30,
 "perf": 1.1888
 },
@@ -358,8 +369,8 @@
 "clubPos": 3,
 "player": "Ray Parlour",
 "pos": "MID",
-"ovr": 75,
-"tier": "gold",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "AST": 74,
 "GOL": 53,
@@ -398,6 +409,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 17.7,
+"seasonGames": 38,
 "starts": 17,
 "perf": 0.5483
 },
@@ -410,7 +422,7 @@
 "clubPos": 3,
 "player": "Dennis Bergkamp",
 "pos": "FWD",
-"ovr": 84,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "GOL": 74,
@@ -448,6 +460,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.8,
+"seasonGames": 38,
 "starts": 28,
 "perf": 0.9399
 },
@@ -460,8 +473,8 @@
 "clubPos": 3,
 "player": "Tony Adams",
 "pos": "DEF",
-"ovr": 77,
-"tier": "gold",
+"ovr": 78,
+"tier": "silver",
 "stats": {
 "CLN": 83,
 "THR": 75,
@@ -491,6 +504,7 @@
 "THR": 0.8798,
 "DIF": 1.4486,
 "APP": 0.1736,
+"CON": 0.6402,
 "lp0": 0.6258,
 "lp1": 0.4421,
 "lp2": 0.3214,
@@ -498,6 +512,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.0,
+"seasonGames": 38,
 "starts": 27,
 "perf": 1.0477
 },
@@ -550,6 +565,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.2,
+"seasonGames": 38,
 "starts": 27,
 "perf": 1.231
 },
@@ -562,7 +578,7 @@
 "clubPos": 3,
 "player": "David Seaman",
 "pos": "GK",
-"ovr": 80,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "CLN": 78,
@@ -600,6 +616,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.0,
+"seasonGames": 38,
 "starts": 22,
 "perf": 0.912
 },
@@ -612,7 +629,7 @@
 "clubPos": 3,
 "player": "John Hartson",
 "pos": "FWD",
-"ovr": 72,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "GOL": 57,
@@ -650,6 +667,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.8,
+"seasonGames": 38,
 "starts": 14,
 "perf": 0.2026
 },
@@ -700,6 +718,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.0,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.6801
 },
@@ -712,8 +731,8 @@
 "clubPos": 3,
 "player": "Stephen Hughes",
 "pos": "MID",
-"ovr": 67,
-"tier": "silver",
+"ovr": 68,
+"tier": "bronze",
 "stats": {
 "AST": 46,
 "GOL": 57,
@@ -752,6 +771,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.7,
+"seasonGames": 38,
 "starts": 9,
 "perf": 0.4586
 },
@@ -765,7 +785,7 @@
 "player": "Steve Morrow",
 "pos": "DEF",
 "ovr": 67,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 38,
 "THR": 67,
@@ -795,6 +815,7 @@
 "THR": 0.4084,
 "DIF": 1.0298,
 "APP": -1.8825,
+"CON": -2.4707,
 "lp0": 0.1525,
 "lp1": 0.0842,
 "lp2": 0.1786,
@@ -802,6 +823,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.1,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.3415
 },
@@ -814,8 +836,8 @@
 "clubPos": 3,
 "player": "Remi Garde",
 "pos": "MID",
-"ovr": 67,
-"tier": "silver",
+"ovr": 68,
+"tier": "bronze",
 "stats": {
 "AST": 66,
 "GOL": 47,
@@ -854,6 +876,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.7,
+"seasonGames": 38,
 "starts": 7,
 "perf": 0.239
 },
@@ -897,6 +920,7 @@
 "THR": 0.0315,
 "DIF": 1.2545,
 "APP": -1.4011,
+"CON": -1.7265,
 "lp0": 0.2633,
 "lp1": 0.3789,
 "lp2": 0.2381,
@@ -904,6 +928,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.5,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.0913
 },
@@ -916,8 +941,8 @@
 "clubPos": 3,
 "player": "Scott Marshall",
 "pos": "DEF",
-"ovr": 66,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "CLN": 81,
 "THR": 50,
@@ -947,6 +972,7 @@
 "THR": -0.5708,
 "DIF": 0.4675,
 "APP": -1.9043,
+"CON": 0.2748,
 "lp0": 0.1475,
 "lp1": 0.2316,
 "lp2": 0.1475,
@@ -954,6 +980,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.9,
+"seasonGames": 38,
 "starts": 6,
 "perf": 0.237
 },
@@ -966,8 +993,8 @@
 "clubPos": 3,
 "player": "Paul Shaw",
 "pos": "FWD",
-"ovr": 66,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "GOL": 67,
 "AST": 87,
@@ -1004,6 +1031,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.2,
+"seasonGames": 38,
 "starts": 1,
 "perf": 0.1519
 },
@@ -1016,7 +1044,7 @@
 "clubPos": 3,
 "player": "Nicolas Anelka",
 "pos": "FWD",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "GOL": 50,
@@ -1054,6 +1082,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.4,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0773
 },
@@ -1066,8 +1095,8 @@
 "clubPos": 3,
 "player": "Glenn Helder",
 "pos": "MID",
-"ovr": 66,
-"tier": "silver",
+"ovr": 65,
+"tier": "bronze",
 "stats": {
 "AST": 57,
 "GOL": 40,
@@ -1106,6 +1135,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0186
 },
@@ -1118,7 +1148,7 @@
 "clubPos": 3,
 "player": "David Hillier",
 "pos": "MID",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "AST": 57,
@@ -1158,6 +1188,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.2,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0276
 },
@@ -1208,6 +1239,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0137
 },
@@ -1258,6 +1290,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1425
 },
@@ -1301,6 +1334,7 @@
 "THR": -0.1942,
 "DIF": -0.4664,
 "APP": -2.4617,
+"CON": -1.9098,
 "lp0": 0.0192,
 "lp1": 0.0211,
 "lp2": 0.0119,
@@ -1308,6 +1342,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.8,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.2472
 },
@@ -1351,6 +1386,7 @@
 "THR": -0.2044,
 "DIF": 0.3699,
 "APP": -2.4509,
+"CON": -1.8246,
 "lp0": 0.0217,
 "lp1": 0.0842,
 "lp2": 0.0217,
@@ -1358,6 +1394,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.9,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.2328
 },
@@ -1410,6 +1447,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.007
 },
@@ -1422,7 +1460,7 @@
 "clubPos": 5,
 "player": "Ugo Ehiogu",
 "pos": "DEF",
-"ovr": 83,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "CLN": 81,
@@ -1453,6 +1491,7 @@
 "THR": 0.9772,
 "DIF": 0.7502,
 "APP": 1.5818,
+"CON": 0.817,
 "lp0": 0.8,
 "lp1": 0.8053,
 "lp2": 0.211,
@@ -1460,6 +1499,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 38.0,
+"seasonGames": 38,
 "starts": 38,
 "perf": 1.0477
 },
@@ -1472,7 +1512,7 @@
 "clubPos": 5,
 "player": "Alan Wright",
 "pos": "DEF",
-"ovr": 83,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "CLN": 81,
@@ -1503,6 +1543,7 @@
 "THR": 0.9833,
 "DIF": 0.7495,
 "APP": 1.5685,
+"CON": 0.7963,
 "lp0": 0.7974,
 "lp1": 0.85,
 "lp2": 0.1623,
@@ -1510,6 +1551,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.9,
+"seasonGames": 38,
 "starts": 38,
 "perf": 1.0565
 },
@@ -1522,7 +1564,7 @@
 "clubPos": 5,
 "player": "Dwight Yorke",
 "pos": "FWD",
-"ovr": 85,
+"ovr": 84,
 "tier": "best",
 "stats": {
 "GOL": 75,
@@ -1560,6 +1602,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.9,
+"seasonGames": 38,
 "starts": 37,
 "perf": 0.7498
 },
@@ -1572,8 +1615,8 @@
 "clubPos": 5,
 "player": "Ian Taylor",
 "pos": "MID",
-"ovr": 78,
-"tier": "gold",
+"ovr": 77,
+"tier": "silver",
 "stats": {
 "AST": 40,
 "GOL": 50,
@@ -1612,6 +1655,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 29.9,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.9937
 },
@@ -1624,7 +1668,7 @@
 "clubPos": 5,
 "player": "Andy Townsend",
 "pos": "MID",
-"ovr": 82,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "AST": 80,
@@ -1664,6 +1708,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.4,
+"seasonGames": 38,
 "starts": 34,
 "perf": 1.0971
 },
@@ -1676,8 +1721,8 @@
 "clubPos": 5,
 "player": "Fernando Nelson",
 "pos": "DEF",
-"ovr": 80,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "CLN": 90,
 "THR": 42,
@@ -1707,6 +1752,7 @@
 "THR": -1.1244,
 "DIF": 1.029,
 "APP": 0.9048,
+"CON": 1.3758,
 "lp0": 0.6688,
 "lp1": 0.6688,
 "lp2": 0.6688,
@@ -1714,6 +1760,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.8,
+"seasonGames": 38,
 "starts": 33,
 "perf": 1.2124
 },
@@ -1764,6 +1811,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.3,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.1351
 },
@@ -1777,7 +1825,7 @@
 "player": "Steve Staunton",
 "pos": "DEF",
 "ovr": 78,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 68,
 "THR": 65,
@@ -1807,6 +1855,7 @@
 "THR": 0.2599,
 "DIF": 2.4804,
 "APP": 0.4837,
+"CON": 1.0378,
 "lp0": 0.5871,
 "lp1": 0.2908,
 "lp2": 0.1894,
@@ -1814,6 +1863,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.9,
+"seasonGames": 38,
 "starts": 30,
 "perf": 0.908
 },
@@ -1827,7 +1877,7 @@
 "player": "Mark Draper",
 "pos": "MID",
 "ovr": 79,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "AST": 86,
 "GOL": 40,
@@ -1866,6 +1916,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.9,
+"seasonGames": 38,
 "starts": 28,
 "perf": 1.1505
 },
@@ -1878,8 +1929,8 @@
 "clubPos": 5,
 "player": "Gareth Southgate",
 "pos": "DEF",
-"ovr": 77,
-"tier": "gold",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "CLN": 59,
 "THR": 49,
@@ -1909,6 +1960,7 @@
 "THR": -0.6296,
 "DIF": 0.2506,
 "APP": 0.4415,
+"CON": -0.1287,
 "lp0": 0.5789,
 "lp1": 0.6934,
 "lp2": 0.1818,
@@ -1916,6 +1968,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.5,
+"seasonGames": 38,
 "starts": 28,
 "perf": 0.0398
 },
@@ -1928,7 +1981,7 @@
 "clubPos": 5,
 "player": "Sasa Curcic",
 "pos": "MID",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "AST": 54,
@@ -1968,6 +2021,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.1,
+"seasonGames": 38,
 "starts": 17,
 "perf": 0.2305
 },
@@ -1980,8 +2034,8 @@
 "clubPos": 5,
 "player": "Mark Bosnich",
 "pos": "GK",
-"ovr": 77,
-"tier": "gold",
+"ovr": 78,
+"tier": "silver",
 "stats": {
 "CLN": 75,
 "CON": 74,
@@ -2018,6 +2072,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.5,
+"seasonGames": 38,
 "starts": 20,
 "perf": 0.4176
 },
@@ -2030,7 +2085,7 @@
 "clubPos": 5,
 "player": "Tommy Johnson",
 "pos": "FWD",
-"ovr": 71,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "GOL": 59,
@@ -2068,6 +2123,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.5,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.0617
 },
@@ -2081,7 +2137,7 @@
 "player": "Michael Oakes",
 "pos": "GK",
 "ovr": 75,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 67,
 "CON": 59,
@@ -2118,6 +2174,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.5,
+"seasonGames": 38,
 "starts": 18,
 "perf": 0.146
 },
@@ -2170,6 +2227,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.8,
+"seasonGames": 38,
 "starts": 11,
 "perf": 1.1738
 },
@@ -2182,8 +2240,8 @@
 "clubPos": 5,
 "player": "Julian Joachim",
 "pos": "FWD",
-"ovr": 65,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "GOL": 56,
 "AST": 43,
@@ -2220,6 +2278,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.2,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.3393
 },
@@ -2233,7 +2292,7 @@
 "player": "Carl Tiler",
 "pos": "DEF",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 42,
 "THR": 62,
@@ -2263,6 +2322,7 @@
 "THR": 0.1325,
 "DIF": -0.2485,
 "APP": -1.5519,
+"CON": -0.992,
 "lp0": 0.1925,
 "lp1": 0.0224,
 "lp2": 0.0649,
@@ -2270,6 +2330,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.1,
+"seasonGames": 38,
 "starts": 9,
 "perf": -0.5465
 },
@@ -2313,6 +2374,7 @@
 "THR": -0.5327,
 "DIF": 0.1844,
 "APP": -1.9803,
+"CON": -0.3551,
 "lp0": 0.1095,
 "lp1": 0.1095,
 "lp2": 0.1095,
@@ -2320,6 +2382,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.2,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.6714
 },
@@ -2372,6 +2435,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.8,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0904
 },
@@ -2384,7 +2448,7 @@
 "clubPos": 5,
 "player": "Gareth Farrelly",
 "pos": "MID",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "AST": 55,
@@ -2424,6 +2488,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.6,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1495
 },
@@ -2476,6 +2541,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.7,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0869
 },
@@ -2488,8 +2554,8 @@
 "clubPos": 13,
 "player": "Jeff Kenna",
 "pos": "DEF",
-"ovr": 78,
-"tier": "gold",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "CLN": 55,
 "THR": 41,
@@ -2519,6 +2585,7 @@
 "THR": -1.1628,
 "DIF": -0.8866,
 "APP": 1.4345,
+"CON": 0.0103,
 "lp0": 0.3375,
 "lp1": 0.6316,
 "lp2": 0.5779,
@@ -2526,6 +2593,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.6,
+"seasonGames": 38,
 "starts": 37,
 "perf": -0.2627
 },
@@ -2538,8 +2606,8 @@
 "clubPos": 13,
 "player": "Tim Sherwood",
 "pos": "MID",
-"ovr": 81,
-"tier": "best",
+"ovr": 80,
+"tier": "gold",
 "stats": {
 "AST": 71,
 "GOL": 54,
@@ -2578,6 +2646,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.6,
+"seasonGames": 38,
 "starts": 37,
 "perf": -0.0734
 },
@@ -2590,8 +2659,8 @@
 "clubPos": 13,
 "player": "Henning Berg",
 "pos": "DEF",
-"ovr": 80,
-"tier": "gold",
+"ovr": 78,
+"tier": "silver",
 "stats": {
 "CLN": 57,
 "THR": 53,
@@ -2621,6 +2690,7 @@
 "THR": -0.4119,
 "DIF": -0.7828,
 "APP": 1.3646,
+"CON": 0.5868,
 "lp0": 0.3316,
 "lp1": 0.75,
 "lp2": 0.9524,
@@ -2628,6 +2698,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.0,
+"seasonGames": 38,
 "starts": 36,
 "perf": -0.1407
 },
@@ -2641,7 +2712,7 @@
 "player": "Tim Flowers",
 "pos": "GK",
 "ovr": 81,
-"tier": "gold",
+"tier": "best",
 "stats": {
 "CLN": 56,
 "CON": 62,
@@ -2678,6 +2749,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.0,
+"seasonGames": 38,
 "starts": 36,
 "perf": 0.0061
 },
@@ -2690,8 +2762,8 @@
 "clubPos": 13,
 "player": "Colin Hendry",
 "pos": "DEF",
-"ovr": 79,
-"tier": "gold",
+"ovr": 77,
+"tier": "silver",
 "stats": {
 "CLN": 70,
 "THR": 47,
@@ -2721,6 +2793,7 @@
 "THR": -0.7592,
 "DIF": -0.6699,
 "APP": 1.1848,
+"CON": 0.6103,
 "lp0": 0.3163,
 "lp1": 0.6513,
 "lp2": 0.9048,
@@ -2728,6 +2801,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 34.3,
+"seasonGames": 38,
 "starts": 35,
 "perf": 0.1372
 },
@@ -2741,7 +2815,7 @@
 "player": "Kevin Gallacher",
 "pos": "FWD",
 "ovr": 76,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "GOL": 60,
 "AST": 56,
@@ -2778,6 +2852,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.9,
+"seasonGames": 38,
 "starts": 34,
 "perf": 0.0016
 },
@@ -2830,6 +2905,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.2,
+"seasonGames": 38,
 "starts": 27,
 "perf": -0.5771
 },
@@ -2843,7 +2919,7 @@
 "player": "Jason Wilcox",
 "pos": "MID",
 "ovr": 76,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "AST": 65,
 "GOL": 61,
@@ -2882,6 +2958,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.7,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.5349
 },
@@ -2895,7 +2972,7 @@
 "player": "Graeme Le Saux",
 "pos": "DEF",
 "ovr": 76,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 84,
 "THR": 66,
@@ -2925,6 +3002,7 @@
 "THR": 0.351,
 "DIF": 1.1615,
 "APP": 0.2713,
+"CON": 0.9505,
 "lp0": 0.2389,
 "lp1": 0.2763,
 "lp2": 0.9286,
@@ -2932,6 +3010,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.9,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.9755
 },
@@ -2984,6 +3063,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.6,
+"seasonGames": 38,
 "starts": 23,
 "perf": -0.0319
 },
@@ -2997,7 +3077,7 @@
 "player": "Chris Sutton",
 "pos": "FWD",
 "ovr": 79,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "GOL": 77,
 "AST": 82,
@@ -3034,6 +3114,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.6,
+"seasonGames": 38,
 "starts": 24,
 "perf": 0.7894
 },
@@ -3086,6 +3167,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.0,
+"seasonGames": 38,
 "starts": 17,
 "perf": 0.108
 },
@@ -3099,7 +3181,7 @@
 "player": "Georgios Donis",
 "pos": "MID",
 "ovr": 68,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 72,
 "GOL": 67,
@@ -3138,6 +3220,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.6,
+"seasonGames": 38,
 "starts": 11,
 "perf": -0.1852
 },
@@ -3151,7 +3234,7 @@
 "player": "Graham Fenton",
 "pos": "FWD",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "GOL": 45,
 "AST": 75,
@@ -3188,6 +3271,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.6,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.3838
 },
@@ -3200,8 +3284,8 @@
 "clubPos": 13,
 "player": "Stuart Ripley",
 "pos": "MID",
-"ovr": 70,
-"tier": "silver",
+"ovr": 68,
+"tier": "bronze",
 "stats": {
 "AST": 67,
 "GOL": 45,
@@ -3240,6 +3324,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.7,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.5876
 },
@@ -3252,8 +3337,8 @@
 "clubPos": 13,
 "player": "Ian Pearce",
 "pos": "DEF",
-"ovr": 66,
-"tier": "silver",
+"ovr": 65,
+"tier": "bronze",
 "stats": {
 "CLN": 53,
 "THR": 49,
@@ -3283,6 +3368,7 @@
 "THR": -0.6564,
 "DIF": -1.2662,
 "APP": -1.7088,
+"CON": -0.7293,
 "lp0": 0.0709,
 "lp1": 0.2368,
 "lp2": 0.6667,
@@ -3290,6 +3376,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.7,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.581
 },
@@ -3302,8 +3389,8 @@
 "clubPos": 13,
 "player": "Per Pedersen",
 "pos": "FWD",
-"ovr": 65,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "GOL": 50,
 "AST": 76,
@@ -3340,6 +3427,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.3,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.1793
 },
@@ -3352,8 +3440,8 @@
 "clubPos": 13,
 "player": "Paul Warhurst",
 "pos": "DEF",
-"ovr": 67,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "CLN": 42,
 "THR": 82,
@@ -3383,6 +3471,7 @@
 "THR": 1.4159,
 "DIF": -0.7445,
 "APP": -1.8946,
+"CON": -0.3474,
 "lp0": 0.0552,
 "lp1": 0.1974,
 "lp2": 0.6429,
@@ -3390,6 +3479,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.0,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.5217
 },
@@ -3403,7 +3493,7 @@
 "player": "Chris Coleman",
 "pos": "DEF",
 "ovr": 65,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 35,
 "THR": 49,
@@ -3433,6 +3523,7 @@
 "THR": -0.6621,
 "DIF": -1.7793,
 "APP": -1.6943,
+"CON": -1.0876,
 "lp0": 0.0721,
 "lp1": 0.3947,
 "lp2": 0.1515,
@@ -3440,6 +3531,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.8,
+"seasonGames": 38,
 "starts": 8,
 "perf": -1.0559
 },
@@ -3483,6 +3575,7 @@
 "THR": -0.5251,
 "DIF": -1.2047,
 "APP": -1.9948,
+"CON": 0.0826,
 "lp0": 0.0467,
 "lp1": 0.1776,
 "lp2": 0.0467,
@@ -3490,6 +3583,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.1,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.2523
 },
@@ -3533,6 +3627,7 @@
 "THR": 0.6509,
 "DIF": -0.934,
 "APP": -2.1033,
+"CON": -0.5527,
 "lp0": 0.0375,
 "lp1": 0.0375,
 "lp2": 0.0375,
@@ -3540,6 +3635,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.1,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.3682
 },
@@ -3590,6 +3686,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.0,
+"seasonGames": 38,
 "starts": 2,
 "perf": 0.0041
 },
@@ -3642,6 +3739,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.2,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0224
 },
@@ -3654,7 +3752,7 @@
 "clubPos": 13,
 "player": "James Beattie",
 "pos": "FWD",
-"ovr": 61,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "GOL": 51,
@@ -3692,6 +3790,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1318
 },
@@ -3744,6 +3843,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1294
 },
@@ -3756,7 +3856,7 @@
 "clubPos": 6,
 "player": "Mark Hughes",
 "pos": "FWD",
-"ovr": 81,
+"ovr": 80,
 "tier": "best",
 "stats": {
 "GOL": 55,
@@ -3794,6 +3894,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.9,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.2233
 },
@@ -3806,7 +3907,7 @@
 "clubPos": 6,
 "player": "Roberto Di Matteo",
 "pos": "MID",
-"ovr": 81,
+"ovr": 80,
 "tier": "gold",
 "stats": {
 "AST": 46,
@@ -3846,6 +3947,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.1,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.3039
 },
@@ -3858,8 +3960,8 @@
 "clubPos": 6,
 "player": "Dan Petrescu",
 "pos": "DEF",
-"ovr": 80,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "CLN": 66,
 "THR": 95,
@@ -3889,6 +3991,7 @@
 "THR": 3.2469,
 "DIF": 1.1343,
 "APP": 1.0351,
+"CON": 0.9048,
 "lp0": 0.6507,
 "lp1": 0.3789,
 "lp2": 0.3139,
@@ -3896,6 +3999,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.0,
+"seasonGames": 38,
 "starts": 34,
 "perf": 0.8731
 },
@@ -3909,7 +4013,7 @@
 "player": "Craig Burley",
 "pos": "MID",
 "ovr": 75,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "AST": 57,
 "GOL": 51,
@@ -3948,6 +4052,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.7,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.0007
 },
@@ -3960,8 +4065,8 @@
 "clubPos": 6,
 "player": "Steve Clarke",
 "pos": "DEF",
-"ovr": 77,
-"tier": "gold",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "CLN": 53,
 "THR": 48,
@@ -3991,6 +4096,7 @@
 "THR": -0.6945,
 "DIF": 0.5253,
 "APP": 0.7842,
+"CON": -0.8832,
 "lp0": 0.605,
 "lp1": 0.2895,
 "lp2": 0.408,
@@ -3998,6 +4104,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.7,
+"seasonGames": 38,
 "starts": 31,
 "perf": 0.0179
 },
@@ -4010,8 +4117,8 @@
 "clubPos": 6,
 "player": "Dennis Wise",
 "pos": "MID",
-"ovr": 77,
-"tier": "gold",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "AST": 48,
 "GOL": 68,
@@ -4050,6 +4157,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.1,
+"seasonGames": 38,
 "starts": 27,
 "perf": 0.0148
 },
@@ -4063,7 +4171,7 @@
 "player": "Gianluca Vialli",
 "pos": "FWD",
 "ovr": 77,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "GOL": 65,
 "AST": 66,
@@ -4100,6 +4208,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.4,
+"seasonGames": 38,
 "starts": 23,
 "perf": 0.2205
 },
@@ -4113,7 +4222,7 @@
 "player": "Frank Leboeuf",
 "pos": "DEF",
 "ovr": 77,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 56,
 "THR": 90,
@@ -4143,6 +4252,7 @@
 "THR": 2.2988,
 "DIF": 0.6743,
 "APP": 0.2074,
+"CON": 0.3202,
 "lp0": 0.5002,
 "lp1": 0.5002,
 "lp2": 0.5002,
@@ -4150,6 +4260,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.3,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.309
 },
@@ -4193,6 +4304,7 @@
 "THR": 2.638,
 "DIF": -0.0686,
 "APP": -0.1244,
+"CON": -0.9389,
 "lp0": 0.4399,
 "lp1": 0.1316,
 "lp2": 0.2673,
@@ -4200,6 +4312,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.3,
+"seasonGames": 38,
 "starts": 24,
 "perf": -0.4934
 },
@@ -4250,6 +4363,7 @@
 "awards": 1.0,
 "ucl": 0.0,
 "games": 21.9,
+"seasonGames": 38,
 "starts": 22,
 "perf": 0.6485
 },
@@ -4262,7 +4376,7 @@
 "clubPos": 6,
 "player": "Frode Grodas",
 "pos": "GK",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 50,
@@ -4300,6 +4414,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.1,
+"seasonGames": 38,
 "starts": 20,
 "perf": -0.62
 },
@@ -4343,6 +4458,7 @@
 "THR": -0.3231,
 "DIF": 0.0298,
 "APP": -0.6686,
+"CON": -0.4567,
 "lp0": 0.341,
 "lp1": 0.1711,
 "lp2": 0.4924,
@@ -4350,6 +4466,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 17.3,
+"seasonGames": 38,
 "starts": 17,
 "perf": -0.4828
 },
@@ -4393,6 +4510,7 @@
 "THR": -0.1422,
 "DIF": 0.6439,
 "APP": -1.0898,
+"CON": 1.0719,
 "lp0": 0.2645,
 "lp1": 0.2895,
 "lp2": 0.4643,
@@ -4400,6 +4518,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.4,
+"seasonGames": 38,
 "starts": 14,
 "perf": 0.8947
 },
@@ -4412,7 +4531,7 @@
 "clubPos": 6,
 "player": "Andy Myers",
 "pos": "DEF",
-"ovr": 69,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 81,
@@ -4443,6 +4562,7 @@
 "THR": -0.1856,
 "DIF": 0.3925,
 "APP": -0.9993,
+"CON": -0.2266,
 "lp0": 0.2809,
 "lp1": 0.2632,
 "lp2": 0.1407,
@@ -4450,6 +4570,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.2,
+"seasonGames": 38,
 "starts": 15,
 "perf": 0.439
 },
@@ -4462,7 +4583,7 @@
 "clubPos": 6,
 "player": "Michael Duberry",
 "pos": "DEF",
-"ovr": 69,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 39,
@@ -4493,6 +4614,7 @@
 "THR": -0.1646,
 "DIF": 0.0163,
 "APP": -1.0439,
+"CON": -0.4156,
 "lp0": 0.2728,
 "lp1": 0.2895,
 "lp2": 0.2728,
@@ -4500,6 +4622,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.8,
+"seasonGames": 38,
 "starts": 13,
 "perf": -0.5794
 },
@@ -4512,7 +4635,7 @@
 "clubPos": 6,
 "player": "Eddie Newton",
 "pos": "MID",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "AST": 56,
@@ -4552,6 +4675,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.6,
+"seasonGames": 38,
 "starts": 13,
 "perf": -0.2325
 },
@@ -4565,7 +4689,7 @@
 "player": "Ruud Gullit",
 "pos": "MID",
 "ovr": 68,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 47,
 "GOL": 61,
@@ -4604,6 +4728,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.7,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.3985
 },
@@ -4616,7 +4741,7 @@
 "clubPos": 6,
 "player": "Kevin Hitchcock",
 "pos": "GK",
-"ovr": 69,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 34,
@@ -4654,6 +4779,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.1,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.4645
 },
@@ -4667,7 +4793,7 @@
 "player": "Paul Hughes",
 "pos": "MID",
 "ovr": 68,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 64,
 "GOL": 74,
@@ -4706,6 +4832,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.7,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.1039
 },
@@ -4758,6 +4885,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.3,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.3641
 },
@@ -4770,7 +4898,7 @@
 "clubPos": 6,
 "player": "Mark Nicholls",
 "pos": "FWD",
-"ovr": 62,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "GOL": 47,
@@ -4808,6 +4936,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.6,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.3139
 },
@@ -4820,7 +4949,7 @@
 "clubPos": 6,
 "player": "Danny Granville",
 "pos": "DEF",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "CLN": 87,
@@ -4851,6 +4980,7 @@
 "THR": 0.7218,
 "DIF": -0.0592,
 "APP": -2.1589,
+"CON": 1.5475,
 "lp0": 0.0702,
 "lp1": 0.0702,
 "lp2": 0.0702,
@@ -4858,6 +4988,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.6,
+"seasonGames": 38,
 "starts": 3,
 "perf": 0.2805
 },
@@ -4908,6 +5039,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.2,
+"seasonGames": 38,
 "starts": 5,
 "perf": 0.9251
 },
@@ -4920,7 +5052,7 @@
 "clubPos": 6,
 "player": "Paul Parker",
 "pos": "DEF",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "CLN": 55,
@@ -4951,6 +5083,7 @@
 "THR": -0.2426,
 "DIF": -0.051,
 "APP": -2.4086,
+"CON": 1.0894,
 "lp0": 0.0248,
 "lp1": 0.1579,
 "lp2": 0.0455,
@@ -4958,6 +5091,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.3,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1249
 },
@@ -4970,8 +5104,8 @@
 "clubPos": 6,
 "player": "John Spencer",
 "pos": "FWD",
-"ovr": 68,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "GOL": 65,
 "AST": 75,
@@ -5008,6 +5142,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 0,
 "perf": 0.0064
 },
@@ -5020,8 +5155,8 @@
 "clubPos": 6,
 "player": "Craig Forrest",
 "pos": "GK",
-"ovr": 66,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "CLN": 79,
 "CON": 90,
@@ -5058,6 +5193,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.6,
+"seasonGames": 38,
 "starts": 2,
 "perf": 0.3625
 },
@@ -5071,7 +5207,7 @@
 "player": "Terry Phelan",
 "pos": "DEF",
 "ovr": 65,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 54,
 "THR": 55,
@@ -5101,6 +5237,7 @@
 "THR": -0.2594,
 "DIF": 0.344,
 "APP": -2.3893,
+"CON": 0.5908,
 "lp0": 0.0283,
 "lp1": 0.2171,
 "lp2": 0.1753,
@@ -5108,6 +5245,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.4,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1156
 },
@@ -5151,6 +5289,7 @@
 "THR": -0.1815,
 "DIF": 0.2518,
 "APP": -2.475,
+"CON": 0.5793,
 "lp0": 0.0127,
 "lp1": 0.0127,
 "lp2": 0.0127,
@@ -5158,6 +5297,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.6,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0428
 },
@@ -5208,6 +5348,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.098
 },
@@ -5220,8 +5361,8 @@
 "clubPos": 6,
 "player": "David Lee",
 "pos": "DEF",
-"ovr": 67,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "CLN": 58,
 "THR": 79,
@@ -5251,6 +5392,7 @@
 "THR": 1.1853,
 "DIF": 0.3757,
 "APP": -2.4497,
+"CON": 0.7798,
 "lp0": 0.0173,
 "lp1": 0.4079,
 "lp2": 0.197,
@@ -5258,6 +5400,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.9,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0325
 },
@@ -5270,7 +5413,7 @@
 "clubPos": 6,
 "player": "Joe Sheerin",
 "pos": "FWD",
-"ovr": 61,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "GOL": 54,
@@ -5308,6 +5451,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.0,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0013
 },
@@ -5320,7 +5464,7 @@
 "clubPos": 18,
 "player": "Gary McAllister",
 "pos": "MID",
-"ovr": 81,
+"ovr": 80,
 "tier": "best",
 "stats": {
 "AST": 89,
@@ -5360,6 +5504,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 38.0,
+"seasonGames": 38,
 "starts": 38,
 "perf": 0.3334
 },
@@ -5372,8 +5517,8 @@
 "clubPos": 18,
 "player": "Steve Ogrizovic",
 "pos": "GK",
-"ovr": 75,
-"tier": "gold",
+"ovr": 77,
+"tier": "silver",
 "stats": {
 "CLN": 54,
 "CON": 54,
@@ -5410,6 +5555,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.9,
+"seasonGames": 38,
 "starts": 38,
 "perf": -0.1712
 },
@@ -5453,6 +5599,7 @@
 "THR": -1.1469,
 "DIF": -0.855,
 "APP": 1.2017,
+"CON": -0.3291,
 "lp0": 0.1816,
 "lp1": 0.1105,
 "lp2": 0.1775,
@@ -5460,6 +5607,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 34.5,
+"seasonGames": 38,
 "starts": 35,
 "perf": -0.322
 },
@@ -5472,7 +5620,7 @@
 "clubPos": 18,
 "player": "Noel Whelan",
 "pos": "FWD",
-"ovr": 74,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "GOL": 47,
@@ -5510,6 +5658,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.8,
+"seasonGames": 38,
 "starts": 34,
 "perf": -0.5473
 },
@@ -5523,7 +5672,7 @@
 "player": "Dion Dublin",
 "pos": "FWD",
 "ovr": 76,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "GOL": 73,
 "AST": 43,
@@ -5560,6 +5709,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.3,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.0987
 },
@@ -5612,6 +5762,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.3,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.5199
 },
@@ -5655,6 +5806,7 @@
 "THR": -0.2345,
 "DIF": -0.7896,
 "APP": 0.6382,
+"CON": -0.5734,
 "lp0": 0.1543,
 "lp1": 0.1684,
 "lp2": 0.0487,
@@ -5662,6 +5814,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 29.3,
+"seasonGames": 38,
 "starts": 29,
 "perf": -0.4626
 },
@@ -5714,6 +5867,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.3,
+"seasonGames": 38,
 "starts": 25,
 "perf": 0.6712
 },
@@ -5727,7 +5881,7 @@
 "player": "Eoin Jess",
 "pos": "MID",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 42,
 "GOL": 41,
@@ -5766,6 +5920,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.7,
+"seasonGames": 38,
 "starts": 19,
 "perf": -0.8039
 },
@@ -5778,7 +5933,7 @@
 "clubPos": 18,
 "player": "Darren Huckerby",
 "pos": "FWD",
-"ovr": 69,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "GOL": 52,
@@ -5816,6 +5971,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.5,
+"seasonGames": 38,
 "starts": 21,
 "perf": -0.2324
 },
@@ -5828,7 +5984,7 @@
 "clubPos": 18,
 "player": "John Salako",
 "pos": "MID",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "AST": 68,
@@ -5868,6 +6024,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.7,
+"seasonGames": 38,
 "starts": 23,
 "perf": -0.4234
 },
@@ -5881,7 +6038,7 @@
 "player": "Brian Borrows",
 "pos": "DEF",
 "ovr": 67,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 35,
 "THR": 45,
@@ -5911,6 +6068,7 @@
 "THR": -0.9073,
 "DIF": -1.1834,
 "APP": -0.8146,
+"CON": -1.1519,
 "lp0": 0.0839,
 "lp1": 0.1105,
 "lp2": 0.3409,
@@ -5918,6 +6076,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.9,
+"seasonGames": 38,
 "starts": 16,
 "perf": -1.0489
 },
@@ -5931,7 +6090,7 @@
 "player": "Liam Daish",
 "pos": "DEF",
 "ovr": 67,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 64,
 "THR": 63,
@@ -5961,6 +6120,7 @@
 "THR": 0.1969,
 "DIF": -1.0284,
 "APP": -0.4973,
+"CON": 0.3272,
 "lp0": 0.0992,
 "lp1": 0.0579,
 "lp2": 0.0992,
@@ -5968,6 +6128,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.9,
+"seasonGames": 38,
 "starts": 20,
 "perf": -0.2118
 },
@@ -5981,7 +6142,7 @@
 "player": "Peter Ndlovu",
 "pos": "FWD",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "GOL": 44,
 "AST": 38,
@@ -6018,6 +6179,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.3,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.7309
 },
@@ -6031,7 +6193,7 @@
 "player": "David Burrows",
 "pos": "DEF",
 "ovr": 67,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 29,
 "THR": 56,
@@ -6061,6 +6223,7 @@
 "THR": -0.249,
 "DIF": -0.9588,
 "APP": -0.8557,
+"CON": -0.7034,
 "lp0": 0.0819,
 "lp1": 0.0579,
 "lp2": 0.3019,
@@ -6068,6 +6231,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.6,
+"seasonGames": 38,
 "starts": 17,
 "perf": -1.2303
 },
@@ -6081,7 +6245,7 @@
 "player": "Marcus Hall",
 "pos": "DEF",
 "ovr": 65,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 86,
 "THR": 75,
@@ -6111,6 +6275,7 @@
 "THR": 0.8865,
 "DIF": -0.7933,
 "APP": -1.4626,
+"CON": 0.0874,
 "lp0": 0.0525,
 "lp1": 0.1316,
 "lp2": 0.0487,
@@ -6118,6 +6283,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.0,
+"seasonGames": 38,
 "starts": 10,
 "perf": 0.2946
 },
@@ -6161,6 +6327,7 @@
 "THR": 0.1759,
 "DIF": -1.7481,
 "APP": -1.611,
+"CON": -1.088,
 "lp0": 0.0453,
 "lp1": 0.0453,
 "lp2": 0.0453,
@@ -6168,6 +6335,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.6,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.172
 },
@@ -6220,6 +6388,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.3,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.341
 },
@@ -6232,7 +6401,7 @@
 "clubPos": 18,
 "player": "Andy Ducros",
 "pos": "FWD",
-"ovr": 62,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "GOL": 49,
@@ -6270,6 +6439,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.9,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1675
 },
@@ -6313,6 +6483,7 @@
 "THR": -0.3889,
 "DIF": -1.064,
 "APP": -2.2204,
+"CON": 0.4809,
 "lp0": 0.0157,
 "lp1": 0.0157,
 "lp2": 0.0157,
@@ -6320,6 +6491,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.0,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.4786
 },
@@ -6363,6 +6535,7 @@
 "THR": -0.2955,
 "DIF": -0.6978,
 "APP": -2.3459,
+"CON": -0.4422,
 "lp0": 0.0096,
 "lp1": 0.0096,
 "lp2": 0.0096,
@@ -6370,6 +6543,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.8,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.0151
 },
@@ -6422,6 +6596,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0104
 },
@@ -6434,7 +6609,7 @@
 "clubPos": 18,
 "player": "John Filan",
 "pos": "GK",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 73,
@@ -6472,6 +6647,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": 0.0023
 },
@@ -6524,6 +6700,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0121
 },
@@ -6576,6 +6753,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.6,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0673
 },
@@ -6588,8 +6766,8 @@
 "clubPos": 12,
 "player": "Christian Dailly",
 "pos": "DEF",
-"ovr": 76,
-"tier": "gold",
+"ovr": 75,
+"tier": "silver",
 "stats": {
 "CLN": 54,
 "THR": 82,
@@ -6619,6 +6797,7 @@
 "THR": 1.4141,
 "DIF": -0.4072,
 "APP": 0.7697,
+"CON": -0.9873,
 "lp0": 0.4016,
 "lp1": 0.4016,
 "lp2": 0.4016,
@@ -6626,6 +6805,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.5,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.0112
 },
@@ -6638,8 +6818,8 @@
 "clubPos": 12,
 "player": "Jacob Laursen",
 "pos": "DEF",
-"ovr": 76,
-"tier": "gold",
+"ovr": 75,
+"tier": "silver",
 "stats": {
 "CLN": 50,
 "THR": 54,
@@ -6669,6 +6849,7 @@
 "THR": -0.3295,
 "DIF": -0.6777,
 "APP": 1.0002,
+"CON": 0.5896,
 "lp0": 0.4295,
 "lp1": 0.4295,
 "lp2": 0.4295,
@@ -6676,6 +6857,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.6,
+"seasonGames": 38,
 "starts": 35,
 "perf": -0.3072
 },
@@ -6688,8 +6870,8 @@
 "clubPos": 12,
 "player": "Chris Powell",
 "pos": "DEF",
-"ovr": 76,
-"tier": "gold",
+"ovr": 75,
+"tier": "silver",
 "stats": {
 "CLN": 57,
 "THR": 54,
@@ -6719,6 +6901,7 @@
 "THR": -0.3618,
 "DIF": -0.7599,
 "APP": 1.1365,
+"CON": 0.5276,
 "lp0": 0.4461,
 "lp1": 0.4461,
 "lp2": 0.4461,
@@ -6726,6 +6909,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.9,
+"seasonGames": 38,
 "starts": 35,
 "perf": -0.1605
 },
@@ -6769,6 +6953,7 @@
 "THR": -0.348,
 "DIF": -0.8485,
 "APP": 1.0774,
+"CON": -0.3661,
 "lp0": 0.4389,
 "lp1": 0.4389,
 "lp2": 0.0173,
@@ -6776,6 +6961,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.4,
+"seasonGames": 38,
 "starts": 35,
 "perf": -0.3761
 },
@@ -6788,8 +6974,8 @@
 "clubPos": 12,
 "player": "Aljosa Asanovic",
 "pos": "MID",
-"ovr": 78,
-"tier": "best",
+"ovr": 77,
+"tier": "silver",
 "stats": {
 "AST": 60,
 "GOL": 74,
@@ -6828,6 +7014,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.6,
+"seasonGames": 38,
 "starts": 34,
 "perf": -0.0413
 },
@@ -6880,6 +7067,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.3,
+"seasonGames": 38,
 "starts": 27,
 "perf": -0.5638
 },
@@ -6892,8 +7080,8 @@
 "clubPos": 12,
 "player": "Russell Hoult",
 "pos": "GK",
-"ovr": 76,
-"tier": "gold",
+"ovr": 77,
+"tier": "silver",
 "stats": {
 "CLN": 51,
 "CON": 48,
@@ -6930,6 +7118,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.5,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.3754
 },
@@ -6942,8 +7131,8 @@
 "clubPos": 12,
 "player": "Dean Sturridge",
 "pos": "FWD",
-"ovr": 77,
-"tier": "gold",
+"ovr": 78,
+"tier": "best",
 "stats": {
 "GOL": 66,
 "AST": 45,
@@ -6980,6 +7169,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.5,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.2444
 },
@@ -7030,6 +7220,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.1,
+"seasonGames": 38,
 "starts": 25,
 "perf": -0.0916
 },
@@ -7043,7 +7234,7 @@
 "player": "Lee Carsley",
 "pos": "MID",
 "ovr": 68,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 43,
 "GOL": 42,
@@ -7082,6 +7273,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.9,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.441
 },
@@ -7125,6 +7317,7 @@
 "THR": -1.0265,
 "DIF": -0.7385,
 "APP": -0.0629,
+"CON": -1.3799,
 "lp0": 0.3007,
 "lp1": 0.6711,
 "lp2": 0.2165,
@@ -7132,6 +7325,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.9,
+"seasonGames": 38,
 "starts": 23,
 "perf": -0.7573
 },
@@ -7175,6 +7369,7 @@
 "THR": 0.6404,
 "DIF": -0.9318,
 "APP": -0.2837,
+"CON": -0.6402,
 "lp0": 0.274,
 "lp1": 0.274,
 "lp2": 0.274,
@@ -7182,6 +7377,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 20.8,
+"seasonGames": 38,
 "starts": 21,
 "perf": -0.3087
 },
@@ -7195,7 +7391,7 @@
 "player": "Paul Simpson",
 "pos": "MID",
 "ovr": 65,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 53,
 "GOL": 85,
@@ -7234,6 +7430,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.4,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.1033
 },
@@ -7247,7 +7444,7 @@
 "player": "Sean Flynn",
 "pos": "MID",
 "ovr": 68,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 59,
 "GOL": 56,
@@ -7286,6 +7483,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.9,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.4577
 },
@@ -7298,7 +7496,7 @@
 "clubPos": 12,
 "player": "Robin van der Laan",
 "pos": "MID",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "AST": 44,
@@ -7338,6 +7536,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.3,
+"seasonGames": 38,
 "starts": 15,
 "perf": 0.4964
 },
@@ -7350,8 +7549,8 @@
 "clubPos": 12,
 "player": "Ron Willems",
 "pos": "FWD",
-"ovr": 65,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "GOL": 55,
 "AST": 42,
@@ -7388,6 +7587,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.4,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.4215
 },
@@ -7400,7 +7600,7 @@
 "clubPos": 12,
 "player": "Marco Gabbiadini",
 "pos": "FWD",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "GOL": 43,
@@ -7438,6 +7638,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.9,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.5448
 },
@@ -7451,7 +7652,7 @@
 "player": "Paul Trollope",
 "pos": "MID",
 "ovr": 69,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 56,
 "GOL": 53,
@@ -7490,6 +7691,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.5,
+"seasonGames": 38,
 "starts": 13,
 "perf": -0.1771
 },
@@ -7502,7 +7704,7 @@
 "clubPos": 12,
 "player": "Matt Carbon",
 "pos": "DEF",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "CLN": 63,
@@ -7533,6 +7735,7 @@
 "THR": -0.5714,
 "DIF": -0.3214,
 "APP": -1.903,
+"CON": -0.1374,
 "lp0": 0.0778,
 "lp1": 0.0778,
 "lp2": 0.0778,
@@ -7540,6 +7743,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.9,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.2194
 },
@@ -7552,8 +7756,8 @@
 "clubPos": 12,
 "player": "Dean Yates",
 "pos": "DEF",
-"ovr": 66,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "CLN": 75,
 "THR": 65,
@@ -7583,6 +7787,7 @@
 "THR": 0.2648,
 "DIF": 1.006,
 "APP": -1.7233,
+"CON": 0.888,
 "lp0": 0.0996,
 "lp1": 0.0996,
 "lp2": 0.0996,
@@ -7590,6 +7795,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.6,
+"seasonGames": 38,
 "starts": 8,
 "perf": 0.3093
 },
@@ -7602,7 +7808,7 @@
 "clubPos": 12,
 "player": "Paulo Wanchope",
 "pos": "FWD",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "GOL": 57,
@@ -7640,6 +7846,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.6,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.0552
 },
@@ -7652,7 +7859,7 @@
 "clubPos": 12,
 "player": "Paul Parker",
 "pos": "DEF",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "CLN": 75,
@@ -7683,6 +7890,7 @@
 "THR": -0.4552,
 "DIF": -0.7527,
 "APP": -2.1178,
+"CON": 0.5108,
 "lp0": 0.0518,
 "lp1": 0.1579,
 "lp2": 0.0455,
@@ -7690,6 +7898,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.9,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.0994
 },
@@ -7702,7 +7911,7 @@
 "clubPos": 12,
 "player": "Mart Poom",
 "pos": "GK",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 55,
@@ -7740,6 +7949,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.5,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.1261
 },
@@ -7752,8 +7962,8 @@
 "clubPos": 12,
 "player": "Martin Taylor",
 "pos": "GK",
-"ovr": 65,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "CLN": 85,
 "CON": 84,
@@ -7790,6 +8000,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.0,
+"seasonGames": 38,
 "starts": 3,
 "perf": 0.351
 },
@@ -7842,6 +8053,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.3,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0307
 },
@@ -7894,6 +8106,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0096
 },
@@ -7946,6 +8159,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.0,
+"seasonGames": 38,
 "starts": 37,
 "perf": -0.1168
 },
@@ -7958,7 +8172,7 @@
 "clubPos": 16,
 "player": "Earl Barrett",
 "pos": "DEF",
-"ovr": 74,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "CLN": 62,
@@ -7989,6 +8203,7 @@
 "THR": -0.4119,
 "DIF": -0.7828,
 "APP": 1.3646,
+"CON": -0.3346,
 "lp0": 0.2842,
 "lp1": 0.1474,
 "lp2": 0.2825,
@@ -7996,6 +8211,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.0,
+"seasonGames": 38,
 "starts": 36,
 "perf": -0.0137
 },
@@ -8009,7 +8225,7 @@
 "player": "Graham Stuart",
 "pos": "MID",
 "ovr": 77,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "AST": 61,
 "GOL": 77,
@@ -8048,6 +8264,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.1,
+"seasonGames": 38,
 "starts": 29,
 "perf": -0.0445
 },
@@ -8061,7 +8278,7 @@
 "player": "Neville Southall",
 "pos": "GK",
 "ovr": 78,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 49,
 "CON": 50,
@@ -8098,6 +8315,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.5,
+"seasonGames": 38,
 "starts": 34,
 "perf": -0.3765
 },
@@ -8110,8 +8328,8 @@
 "clubPos": 16,
 "player": "David Unsworth",
 "pos": "DEF",
-"ovr": 76,
-"tier": "gold",
+"ovr": 75,
+"tier": "silver",
 "stats": {
 "CLN": 54,
 "THR": 75,
@@ -8141,6 +8359,7 @@
 "THR": 0.9249,
 "DIF": -0.7352,
 "APP": 0.8988,
+"CON": -0.5512,
 "lp0": 0.2504,
 "lp1": 0.5711,
 "lp2": 0.329,
@@ -8148,6 +8367,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.7,
+"seasonGames": 38,
 "starts": 32,
 "perf": -0.1216
 },
@@ -8160,8 +8380,8 @@
 "clubPos": 16,
 "player": "Duncan Ferguson",
 "pos": "FWD",
-"ovr": 76,
-"tier": "gold",
+"ovr": 75,
+"tier": "silver",
 "stats": {
 "GOL": 61,
 "AST": 64,
@@ -8198,6 +8418,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.9,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.1237
 },
@@ -8210,8 +8431,8 @@
 "clubPos": 16,
 "player": "Dave Watson",
 "pos": "DEF",
-"ovr": 75,
-"tier": "gold",
+"ovr": 74,
+"tier": "silver",
 "stats": {
 "CLN": 55,
 "THR": 49,
@@ -8241,6 +8462,7 @@
 "THR": -0.6333,
 "DIF": -0.559,
 "APP": 0.4596,
+"CON": 0.128,
 "lp0": 0.2184,
 "lp1": 0.6263,
 "lp2": 0.329,
@@ -8248,6 +8470,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.7,
+"seasonGames": 38,
 "starts": 29,
 "perf": -0.257
 },
@@ -8300,6 +8523,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.6,
+"seasonGames": 38,
 "starts": 28,
 "perf": 0.1982
 },
@@ -8313,7 +8537,7 @@
 "player": "Nick Barmby",
 "pos": "MID",
 "ovr": 77,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "AST": 93,
 "GOL": 83,
@@ -8352,6 +8576,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.6,
+"seasonGames": 38,
 "starts": 22,
 "perf": 0.396
 },
@@ -8365,7 +8590,7 @@
 "player": "Michael Branch",
 "pos": "FWD",
 "ovr": 67,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "GOL": 50,
 "AST": 58,
@@ -8402,6 +8627,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.8,
+"seasonGames": 38,
 "starts": 13,
 "perf": -0.4341
 },
@@ -8445,6 +8671,7 @@
 "THR": 0.2384,
 "DIF": -0.3321,
 "APP": -0.5769,
+"CON": 1.8163,
 "lp0": 0.1431,
 "lp1": 0.4237,
 "lp2": 0.1431,
@@ -8452,6 +8679,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.1,
+"seasonGames": 38,
 "starts": 19,
 "perf": -0.1038
 },
@@ -8465,7 +8693,7 @@
 "player": "Andrei Kanchelskis",
 "pos": "MID",
 "ovr": 78,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "AST": 63,
 "GOL": 92,
@@ -8504,6 +8732,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.4,
+"seasonGames": 38,
 "starts": 20,
 "perf": 0.402
 },
@@ -8517,7 +8746,7 @@
 "player": "Tony Grant",
 "pos": "MID",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 45,
 "GOL": 43,
@@ -8556,6 +8785,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.4,
+"seasonGames": 38,
 "starts": 11,
 "perf": -0.671
 },
@@ -8569,7 +8799,7 @@
 "player": "Andy Hinchcliffe",
 "pos": "DEF",
 "ovr": 76,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 77,
 "THR": 98,
@@ -8599,6 +8829,7 @@
 "THR": 5.115,
 "DIF": 1.5495,
 "APP": -0.6361,
+"CON": 1.9211,
 "lp0": 0.1388,
 "lp1": 0.5158,
 "lp2": 0.2511,
@@ -8606,6 +8837,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 17.6,
+"seasonGames": 38,
 "starts": 18,
 "perf": 1.0861
 },
@@ -8618,8 +8850,8 @@
 "clubPos": 16,
 "player": "Claus Thomsen",
 "pos": "MID",
-"ovr": 66,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "AST": 44,
 "GOL": 50,
@@ -8658,6 +8890,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.9,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.5868
 },
@@ -8670,8 +8903,8 @@
 "clubPos": 16,
 "player": "Terry Phelan",
 "pos": "DEF",
-"ovr": 67,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "CLN": 48,
 "THR": 45,
@@ -8701,6 +8934,7 @@
 "THR": -0.8615,
 "DIF": -1.3865,
 "APP": -1.0294,
+"CON": -1.1191,
 "lp0": 0.1102,
 "lp1": 0.2171,
 "lp2": 0.1753,
@@ -8708,6 +8942,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.0,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.7575
 },
@@ -8721,7 +8956,7 @@
 "player": "Paul Rideout",
 "pos": "FWD",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "GOL": 48,
 "AST": 45,
@@ -8758,6 +8993,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.7,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.5033
 },
@@ -8770,8 +9006,8 @@
 "clubPos": 16,
 "player": "Marc Hottiger",
 "pos": "DEF",
-"ovr": 66,
-"tier": "silver",
+"ovr": 65,
+"tier": "bronze",
 "stats": {
 "CLN": 34,
 "THR": 51,
@@ -8801,6 +9037,7 @@
 "THR": -0.4961,
 "DIF": -0.6782,
 "APP": -2.0478,
+"CON": -2.2596,
 "lp0": 0.0361,
 "lp1": 0.1908,
 "lp2": 0.6991,
@@ -8808,6 +9045,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.6,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.7224
 },
@@ -8851,6 +9089,7 @@
 "THR": -0.5772,
 "DIF": -1.03,
 "APP": -1.891,
+"CON": -0.1755,
 "lp0": 0.0475,
 "lp1": 0.0475,
 "lp2": 0.0475,
@@ -8858,6 +9097,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.0,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.6118
 },
@@ -8870,8 +9110,8 @@
 "clubPos": 16,
 "player": "John Ebbrell",
 "pos": "MID",
-"ovr": 69,
-"tier": "silver",
+"ovr": 68,
+"tier": "bronze",
 "stats": {
 "AST": 66,
 "GOL": 45,
@@ -8910,6 +9150,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.4,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.1346
 },
@@ -8953,6 +9194,7 @@
 "THR": -0.3872,
 "DIF": -0.4116,
 "APP": -2.2228,
+"CON": 0.23,
 "lp0": 0.0234,
 "lp1": 0.0234,
 "lp2": 0.0234,
@@ -8960,6 +9202,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.0,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.4519
 },
@@ -8973,7 +9216,7 @@
 "player": "Paul Gerrard",
 "pos": "GK",
 "ovr": 67,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 83,
 "CON": 75,
@@ -9010,6 +9253,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.5,
+"seasonGames": 38,
 "starts": 4,
 "perf": 0.2816
 },
@@ -9053,6 +9297,7 @@
 "THR": -0.233,
 "DIF": -0.6288,
 "APP": -2.4195,
+"CON": 0.583,
 "lp0": 0.0091,
 "lp1": 0.0091,
 "lp2": 0.0091,
@@ -9060,6 +9305,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.2,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1833
 },
@@ -9072,8 +9318,8 @@
 "clubPos": 16,
 "player": "Anders Limpar",
 "pos": "MID",
-"ovr": 67,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "AST": 55,
 "GOL": 49,
@@ -9112,6 +9358,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.2,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.153
 },
@@ -9155,6 +9402,7 @@
 "THR": -0.1792,
 "DIF": -0.4036,
 "APP": -2.4774,
+"CON": -0.5732,
 "lp0": 0.0049,
 "lp1": 0.0049,
 "lp2": 0.0049,
@@ -9162,6 +9410,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.6,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0863
 },
@@ -9174,7 +9423,7 @@
 "clubPos": 16,
 "player": "Danny Cadamarteri",
 "pos": "FWD",
-"ovr": 61,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "GOL": 52,
@@ -9212,6 +9461,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.5,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0632
 },
@@ -9225,7 +9475,7 @@
 "player": "Nigel Martyn",
 "pos": "GK",
 "ovr": 79,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 81,
 "CON": 68,
@@ -9262,6 +9512,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.0,
+"seasonGames": 38,
 "starts": 37,
 "perf": 0.6497
 },
@@ -9274,8 +9525,8 @@
 "clubPos": 11,
 "player": "Gary Kelly",
 "pos": "DEF",
-"ovr": 77,
-"tier": "gold",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "CLN": 75,
 "THR": 54,
@@ -9305,6 +9556,7 @@
 "THR": -0.3665,
 "DIF": -0.8629,
 "APP": 1.157,
+"CON": 0.5506,
 "lp0": 0.4037,
 "lp1": 0.4026,
 "lp2": 0.8182,
@@ -9312,6 +9564,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 34.1,
+"seasonGames": 38,
 "starts": 34,
 "perf": 0.2459
 },
@@ -9324,8 +9577,8 @@
 "clubPos": 11,
 "player": "Ian Rush",
 "pos": "FWD",
-"ovr": 78,
-"tier": "gold",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "GOL": 43,
 "AST": 55,
@@ -9362,6 +9615,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.9,
+"seasonGames": 38,
 "starts": 34,
 "perf": -0.4735
 },
@@ -9374,8 +9628,8 @@
 "clubPos": 11,
 "player": "Lee Bowyer",
 "pos": "MID",
-"ovr": 77,
-"tier": "gold",
+"ovr": 78,
+"tier": "silver",
 "stats": {
 "AST": 76,
 "GOL": 63,
@@ -9414,6 +9668,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.0,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.9372
 },
@@ -9457,6 +9712,7 @@
 "THR": -1.0841,
 "DIF": -0.5882,
 "APP": 0.4523,
+"CON": -0.3032,
 "lp0": 0.3268,
 "lp1": 0.1539,
 "lp2": 0.2338,
@@ -9464,6 +9720,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.6,
+"seasonGames": 38,
 "starts": 28,
 "perf": -0.1141
 },
@@ -9477,7 +9734,7 @@
 "player": "David Wetherall",
 "pos": "DEF",
 "ovr": 75,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 89,
 "THR": 43,
@@ -9507,6 +9764,7 @@
 "THR": -1.0546,
 "DIF": 0.9201,
 "APP": 0.1724,
+"CON": 1.5462,
 "lp0": 0.2963,
 "lp1": 0.4026,
 "lp2": 0.7403,
@@ -9514,6 +9772,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.0,
+"seasonGames": 38,
 "starts": 25,
 "perf": 1.0078
 },
@@ -9527,7 +9786,7 @@
 "player": "Brian Deane",
 "pos": "FWD",
 "ovr": 76,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "GOL": 49,
 "AST": 61,
@@ -9564,6 +9823,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.9,
+"seasonGames": 38,
 "starts": 27,
 "perf": -0.1782
 },
@@ -9616,6 +9876,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.4,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.0814
 },
@@ -9668,6 +9929,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.8,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.689
 },
@@ -9718,6 +9980,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.9,
+"seasonGames": 38,
 "starts": 17,
 "perf": -0.4835
 },
@@ -9730,7 +9993,7 @@
 "clubPos": 11,
 "player": "Gunnar Halle",
 "pos": "DEF",
-"ovr": 69,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 86,
@@ -9761,6 +10024,7 @@
 "THR": -0.9835,
 "DIF": -0.6414,
 "APP": -0.373,
+"CON": 1.6023,
 "lp0": 0.2368,
 "lp1": 0.2368,
 "lp2": 0.2368,
@@ -9768,6 +10032,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 20.0,
+"seasonGames": 38,
 "starts": 20,
 "perf": 0.3758
 },
@@ -9781,7 +10046,7 @@
 "player": "Tony Dorigo",
 "pos": "DEF",
 "ovr": 69,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 37,
 "THR": 56,
@@ -9811,6 +10076,7 @@
 "THR": -0.2409,
 "DIF": -0.9546,
 "APP": -0.875,
+"CON": 0.2308,
 "lp0": 0.1821,
 "lp1": 0.2013,
 "lp2": 0.5455,
@@ -9818,6 +10084,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.4,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.897
 },
@@ -9831,7 +10098,7 @@
 "player": "Mark Jackson",
 "pos": "DEF",
 "ovr": 65,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 47,
 "THR": 46,
@@ -9861,6 +10128,7 @@
 "THR": -0.8362,
 "DIF": -0.7587,
 "APP": -1.1356,
+"CON": 0.3483,
 "lp0": 0.1537,
 "lp1": 0.0118,
 "lp2": 0.1537,
@@ -9868,6 +10136,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.0,
+"seasonGames": 38,
 "starts": 11,
 "perf": -0.6278
 },
@@ -9880,8 +10149,8 @@
 "clubPos": 11,
 "player": "Mark Ford",
 "pos": "MID",
-"ovr": 68,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "AST": 44,
 "GOL": 53,
@@ -9920,6 +10189,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.7,
+"seasonGames": 38,
 "starts": 15,
 "perf": 0.0199
 },
@@ -9933,7 +10203,7 @@
 "player": "Ian Harte",
 "pos": "DEF",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 40,
 "THR": 72,
@@ -9963,6 +10233,7 @@
 "THR": 0.7293,
 "DIF": -0.5426,
 "APP": -1.2949,
+"CON": -2.0602,
 "lp0": 0.1363,
 "lp1": 0.0474,
 "lp2": 0.1363,
@@ -9970,6 +10241,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.5,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.6172
 },
@@ -9982,8 +10254,8 @@
 "clubPos": 11,
 "player": "Paul Beesley",
 "pos": "DEF",
-"ovr": 66,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "CLN": 79,
 "THR": 60,
@@ -10013,6 +10285,7 @@
 "THR": 0.0135,
 "DIF": -0.2327,
 "APP": -1.3721,
+"CON": -0.5474,
 "lp0": 0.1279,
 "lp1": 0.1184,
 "lp2": 0.1279,
@@ -10020,6 +10293,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.8,
+"seasonGames": 38,
 "starts": 11,
 "perf": 0.1726
 },
@@ -10032,8 +10306,8 @@
 "clubPos": 11,
 "player": "Robert Molenaar",
 "pos": "DEF",
-"ovr": 68,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 84,
 "THR": 59,
@@ -10063,6 +10337,7 @@
 "THR": -0.0626,
 "DIF": 1.1174,
 "APP": -1.2418,
+"CON": 1.0382,
 "lp0": 0.1421,
 "lp1": 0.1421,
 "lp2": 0.1421,
@@ -10070,6 +10345,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.0,
+"seasonGames": 38,
 "starts": 12,
 "perf": 0.6441
 },
@@ -10082,8 +10358,8 @@
 "clubPos": 11,
 "player": "Andy Couzens",
 "pos": "MID",
-"ovr": 66,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "AST": 49,
 "GOL": 63,
@@ -10122,6 +10398,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.8,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.1353
 },
@@ -10134,8 +10411,8 @@
 "clubPos": 11,
 "player": "Richard Jobson",
 "pos": "DEF",
-"ovr": 66,
-"tier": "silver",
+"ovr": 65,
+"tier": "bronze",
 "stats": {
 "CLN": 27,
 "THR": 47,
@@ -10165,6 +10442,7 @@
 "THR": -0.7454,
 "DIF": -0.7945,
 "APP": -1.459,
+"CON": -2.0903,
 "lp0": 0.1184,
 "lp1": 0.1421,
 "lp2": 0.1184,
@@ -10172,6 +10450,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.0,
+"seasonGames": 38,
 "starts": 10,
 "perf": -1.2822
 },
@@ -10184,7 +10463,7 @@
 "clubPos": 11,
 "player": "Andy Gray",
 "pos": "MID",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "AST": 54,
@@ -10224,6 +10503,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.2357
 },
@@ -10236,7 +10516,7 @@
 "clubPos": 11,
 "player": "Tony Yeboah",
 "pos": "FWD",
-"ovr": 69,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "GOL": 73,
@@ -10274,6 +10554,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.7,
+"seasonGames": 38,
 "starts": 6,
 "perf": 0.0299
 },
@@ -10286,7 +10567,7 @@
 "clubPos": 11,
 "player": "Mark Hateley",
 "pos": "FWD",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "GOL": 44,
@@ -10324,6 +10605,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.3,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.4088
 },
@@ -10336,7 +10618,7 @@
 "clubPos": 11,
 "player": "Derek Lilley",
 "pos": "FWD",
-"ovr": 62,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "GOL": 46,
@@ -10374,6 +10656,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.1,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.4524
 },
@@ -10426,6 +10709,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.8,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.1334
 },
@@ -10438,7 +10722,7 @@
 "clubPos": 11,
 "player": "Mark Tinkler",
 "pos": "MID",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "AST": 55,
@@ -10478,6 +10762,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.1,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0592
 },
@@ -10490,7 +10775,7 @@
 "clubPos": 11,
 "player": "Mark Beeney",
 "pos": "GK",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "CLN": 36,
@@ -10528,6 +10813,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.2074
 },
@@ -10540,7 +10826,7 @@
 "clubPos": 11,
 "player": "Jason Blunt",
 "pos": "MID",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "AST": 57,
@@ -10580,6 +10866,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.3,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.029
 },
@@ -10632,6 +10919,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.2,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0177
 },
@@ -10675,6 +10963,7 @@
 "THR": -0.2178,
 "DIF": -0.565,
 "APP": -2.4364,
+"CON": -2.3554,
 "lp0": 0.0118,
 "lp1": 0.0118,
 "lp2": 0.0118,
@@ -10682,6 +10971,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.4358
 },
@@ -10734,6 +11024,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0993
 },
@@ -10746,8 +11037,8 @@
 "clubPos": 9,
 "player": "Simon Grayson",
 "pos": "DEF",
-"ovr": 77,
-"tier": "gold",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "CLN": 60,
 "THR": 53,
@@ -10777,6 +11068,7 @@
 "THR": -0.398,
 "DIF": -0.3287,
 "APP": 1.2994,
+"CON": -0.2848,
 "lp0": 0.5589,
 "lp1": 0.5589,
 "lp2": 0.0736,
@@ -10784,6 +11076,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.4,
+"seasonGames": 38,
 "starts": 36,
 "perf": 0.0584
 },
@@ -10797,7 +11090,7 @@
 "player": "Emile Heskey",
 "pos": "FWD",
 "ovr": 78,
-"tier": "best",
+"tier": "silver",
 "stats": {
 "GOL": 58,
 "AST": 69,
@@ -10834,6 +11127,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.7,
+"seasonGames": 38,
 "starts": 35,
 "perf": 0.0944
 },
@@ -10846,8 +11140,8 @@
 "clubPos": 9,
 "player": "Muzzy Izzet",
 "pos": "MID",
-"ovr": 77,
-"tier": "gold",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "AST": 46,
 "GOL": 56,
@@ -10886,6 +11180,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.0,
+"seasonGames": 38,
 "starts": 34,
 "perf": -0.3767
 },
@@ -10898,8 +11193,8 @@
 "clubPos": 9,
 "player": "Neil Lennon",
 "pos": "MID",
-"ovr": 78,
-"tier": "gold",
+"ovr": 77,
+"tier": "silver",
 "stats": {
 "AST": 66,
 "GOL": 43,
@@ -10938,6 +11233,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.0,
+"seasonGames": 38,
 "starts": 35,
 "perf": -0.1613
 },
@@ -10950,8 +11246,8 @@
 "clubPos": 9,
 "player": "Spencer Prior",
 "pos": "DEF",
-"ovr": 75,
-"tier": "gold",
+"ovr": 74,
+"tier": "silver",
 "stats": {
 "CLN": 44,
 "THR": 42,
@@ -10981,6 +11277,7 @@
 "THR": -1.1138,
 "DIF": -0.2695,
 "APP": 0.7769,
+"CON": -0.0089,
 "lp0": 0.483,
 "lp1": 0.483,
 "lp2": 0.0552,
@@ -10988,6 +11285,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.6,
+"seasonGames": 38,
 "starts": 33,
 "perf": -0.4501
 },
@@ -11001,7 +11299,7 @@
 "player": "Steve Claridge",
 "pos": "FWD",
 "ovr": 78,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "GOL": 66,
 "AST": 68,
@@ -11038,6 +11336,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.1,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.207
 },
@@ -11050,8 +11349,8 @@
 "clubPos": 9,
 "player": "Kasey Keller",
 "pos": "GK",
-"ovr": 78,
-"tier": "gold",
+"ovr": 79,
+"tier": "best",
 "stats": {
 "CLN": 72,
 "CON": 66,
@@ -11088,6 +11387,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.0,
+"seasonGames": 38,
 "starts": 31,
 "perf": 0.3965
 },
@@ -11140,6 +11440,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.0,
+"seasonGames": 38,
 "starts": 22,
 "perf": -0.0922
 },
@@ -11152,7 +11453,7 @@
 "clubPos": 9,
 "player": "Ian Marshall",
 "pos": "FWD",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "GOL": 62,
@@ -11190,6 +11491,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.2,
+"seasonGames": 38,
 "starts": 19,
 "perf": -0.3014
 },
@@ -11233,6 +11535,7 @@
 "THR": -0.4866,
 "DIF": -0.5406,
 "APP": -0.1594,
+"CON": -0.6662,
 "lp0": 0.3468,
 "lp1": 0.0868,
 "lp2": 0.3468,
@@ -11240,6 +11543,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.0,
+"seasonGames": 38,
 "starts": 22,
 "perf": -0.331
 },
@@ -11292,6 +11596,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.7,
+"seasonGames": 38,
 "starts": 20,
 "perf": -0.3413
 },
@@ -11304,7 +11609,7 @@
 "clubPos": 9,
 "player": "Steve Walsh",
 "pos": "DEF",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 77,
@@ -11335,6 +11640,7 @@
 "THR": 1.0962,
 "DIF": 1.1406,
 "APP": -0.1606,
+"CON": 1.3501,
 "lp0": 0.3467,
 "lp1": 0.3467,
 "lp2": 0.0108,
@@ -11342,6 +11648,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.0,
+"seasonGames": 38,
 "starts": 22,
 "perf": 0.7644
 },
@@ -11355,7 +11662,7 @@
 "player": "Mike Whitlow",
 "pos": "DEF",
 "ovr": 68,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 64,
 "THR": 45,
@@ -11385,6 +11692,7 @@
 "THR": -0.8918,
 "DIF": -0.3786,
 "APP": -0.8907,
+"CON": 0.7262,
 "lp0": 0.2405,
 "lp1": 0.2405,
 "lp2": 0.0606,
@@ -11392,6 +11700,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.2,
+"seasonGames": 38,
 "starts": 14,
 "perf": -0.191
 },
@@ -11404,7 +11713,7 @@
 "clubPos": 9,
 "player": "Matt Elliott",
 "pos": "DEF",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 61,
@@ -11435,6 +11744,7 @@
 "THR": 2.2897,
 "DIF": -0.0218,
 "APP": -0.8074,
+"CON": 0.1033,
 "lp0": 0.2526,
 "lp1": 0.2526,
 "lp2": 0.2526,
@@ -11442,6 +11752,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.0,
+"seasonGames": 38,
 "starts": 16,
 "perf": 0.0946
 },
@@ -11454,8 +11765,8 @@
 "clubPos": 9,
 "player": "Jamie Lawrence",
 "pos": "MID",
-"ovr": 66,
-"tier": "silver",
+"ovr": 65,
+"tier": "bronze",
 "stats": {
 "AST": 69,
 "GOL": 48,
@@ -11494,6 +11805,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.9,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.1274
 },
@@ -11507,7 +11819,7 @@
 "player": "Steve Guppy",
 "pos": "MID",
 "ovr": 68,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 58,
 "GOL": 44,
@@ -11546,6 +11858,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.9,
+"seasonGames": 38,
 "starts": 12,
 "perf": -0.0999
 },
@@ -11598,6 +11911,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.4,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.3358
 },
@@ -11611,7 +11925,7 @@
 "player": "Pontus Kamark",
 "pos": "DEF",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 59,
 "THR": 48,
@@ -11641,6 +11955,7 @@
 "THR": -0.6905,
 "DIF": 0.2757,
 "APP": -1.6195,
+"CON": 0.5355,
 "lp0": 0.1346,
 "lp1": 0.1346,
 "lp2": 0.1346,
@@ -11648,6 +11963,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.5,
+"seasonGames": 38,
 "starts": 9,
 "perf": -0.1654
 },
@@ -11660,8 +11976,8 @@
 "clubPos": 9,
 "player": "Mark Robins",
 "pos": "FWD",
-"ovr": 65,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "GOL": 57,
 "AST": 46,
@@ -11698,6 +12014,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.0,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.2453
 },
@@ -11741,6 +12058,7 @@
 "THR": -0.5506,
 "DIF": -0.978,
 "APP": -1.9453,
+"CON": -0.3684,
 "lp0": 0.0872,
 "lp1": 0.0872,
 "lp2": 0.0519,
@@ -11748,6 +12066,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.5,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.8157
 },
@@ -11760,7 +12079,7 @@
 "clubPos": 9,
 "player": "Kevin Poole",
 "pos": "GK",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 32,
@@ -11798,6 +12117,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.0,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.9899
 },
@@ -11841,6 +12161,7 @@
 "THR": -0.4273,
 "DIF": -0.4545,
 "APP": -2.1625,
+"CON": -1.3492,
 "lp0": 0.0556,
 "lp1": 0.0556,
 "lp2": 0.0346,
@@ -11848,6 +12169,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.5,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.4738
 },
@@ -11900,6 +12222,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.5,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0153
 },
@@ -11943,6 +12266,7 @@
 "THR": -0.201,
 "DIF": 0.3525,
 "APP": -2.4545,
+"CON": -0.0388,
 "lp0": 0.0132,
 "lp1": 0.0132,
 "lp2": 0.0132,
@@ -11950,6 +12274,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.8,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0548
 },
@@ -11962,8 +12287,8 @@
 "clubPos": 4,
 "player": "Stig Inge Bjornebye",
 "pos": "DEF",
-"ovr": 81,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "CLN": 74,
 "THR": 92,
@@ -11993,6 +12318,7 @@
 "THR": 2.4828,
 "DIF": 1.3506,
 "APP": 1.4828,
+"CON": 0.9985,
 "lp0": 0.8296,
 "lp1": 0.0474,
 "lp2": 0.6374,
@@ -12000,6 +12326,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.1,
+"seasonGames": 38,
 "starts": 38,
 "perf": 1.1187
 },
@@ -12012,7 +12339,7 @@
 "clubPos": 4,
 "player": "David James",
 "pos": "GK",
-"ovr": 87,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 63,
@@ -12050,6 +12377,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 38.0,
+"seasonGames": 38,
 "starts": 38,
 "perf": 0.62
 },
@@ -12062,7 +12390,7 @@
 "clubPos": 4,
 "player": "Jason McAteer",
 "pos": "MID",
-"ovr": 83,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "AST": 78,
@@ -12102,6 +12430,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.3,
+"seasonGames": 38,
 "starts": 36,
 "perf": 0.771
 },
@@ -12114,7 +12443,7 @@
 "clubPos": 4,
 "player": "Steve McManaman",
 "pos": "MID",
-"ovr": 88,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 77,
@@ -12154,6 +12483,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.2,
+"seasonGames": 38,
 "starts": 37,
 "perf": 1.024
 },
@@ -12166,7 +12496,7 @@
 "clubPos": 4,
 "player": "John Barnes",
 "pos": "MID",
-"ovr": 86,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "AST": 79,
@@ -12206,6 +12536,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 34.1,
+"seasonGames": 38,
 "starts": 34,
 "perf": 0.8186
 },
@@ -12218,8 +12549,8 @@
 "clubPos": 4,
 "player": "Mark Wright",
 "pos": "DEF",
-"ovr": 80,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "CLN": 71,
 "THR": 62,
@@ -12249,6 +12580,7 @@
 "THR": 0.0948,
 "DIF": 1.4824,
 "APP": 0.9302,
+"CON": 0.5868,
 "lp0": 0.7158,
 "lp1": 0.6632,
 "lp2": 0.1234,
@@ -12256,6 +12588,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.0,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.783
 },
@@ -12268,7 +12601,7 @@
 "clubPos": 4,
 "player": "Robbie Fowler",
 "pos": "FWD",
-"ovr": 89,
+"ovr": 88,
 "tier": "best",
 "stats": {
 "GOL": 89,
@@ -12306,6 +12639,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.3,
+"seasonGames": 38,
 "starts": 32,
 "perf": 1.2958
 },
@@ -12318,8 +12652,8 @@
 "clubPos": 4,
 "player": "Michael Thomas",
 "pos": "MID",
-"ovr": 79,
-"tier": "gold",
+"ovr": 78,
+"tier": "silver",
 "stats": {
 "AST": 40,
 "GOL": 53,
@@ -12358,6 +12692,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 29.0,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.5478
 },
@@ -12370,7 +12705,7 @@
 "clubPos": 4,
 "player": "Stan Collymore",
 "pos": "FWD",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "GOL": 83,
@@ -12408,6 +12743,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.4,
+"seasonGames": 38,
 "starts": 25,
 "perf": 0.8525
 },
@@ -12420,7 +12756,7 @@
 "clubPos": 4,
 "player": "Dominic Matteo",
 "pos": "DEF",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "CLN": 80,
@@ -12451,6 +12787,7 @@
 "THR": -0.5186,
 "DIF": 0.9929,
 "APP": -0.04,
+"CON": 0.2436,
 "lp0": 0.516,
 "lp1": 0.1184,
 "lp2": 0.1439,
@@ -12458,6 +12795,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.1,
+"seasonGames": 38,
 "starts": 22,
 "perf": 0.6831
 },
@@ -12471,7 +12809,7 @@
 "player": "Patrik Berger",
 "pos": "MID",
 "ovr": 75,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "AST": 68,
 "GOL": 92,
@@ -12510,6 +12848,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.6,
+"seasonGames": 38,
 "starts": 13,
 "perf": 0.4217
 },
@@ -12522,8 +12861,8 @@
 "clubPos": 4,
 "player": "Jamie Redknapp",
 "pos": "MID",
-"ovr": 78,
-"tier": "gold",
+"ovr": 77,
+"tier": "silver",
 "stats": {
 "AST": 61,
 "GOL": 67,
@@ -12562,6 +12901,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.9,
+"seasonGames": 38,
 "starts": 18,
 "perf": 0.2384
 },
@@ -12575,7 +12915,7 @@
 "player": "Phil Babb",
 "pos": "DEF",
 "ovr": 78,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 70,
 "THR": 53,
@@ -12605,6 +12945,7 @@
 "THR": -0.4189,
 "DIF": 1.7891,
 "APP": -0.3887,
+"CON": 0.6451,
 "lp0": 0.4441,
 "lp1": 0.6632,
 "lp2": 0.7284,
@@ -12612,6 +12953,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.9,
+"seasonGames": 38,
 "starts": 21,
 "perf": 0.5851
 },
@@ -12655,6 +12997,7 @@
 "THR": -0.1494,
 "DIF": 0.8559,
 "APP": -1.0753,
+"CON": 0.7754,
 "lp0": 0.3027,
 "lp1": 0.4737,
 "lp2": 0.7608,
@@ -12662,6 +13005,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.5,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.3681
 },
@@ -12674,7 +13018,7 @@
 "clubPos": 4,
 "player": "Bjorn Tore Kvarme",
 "pos": "DEF",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 38,
@@ -12705,6 +13049,7 @@
 "THR": -0.8665,
 "DIF": 0.6456,
 "APP": -1.0077,
+"CON": -0.6536,
 "lp0": 0.3166,
 "lp1": 0.3166,
 "lp2": 0.3166,
@@ -12712,6 +13057,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.2,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.5179
 },
@@ -12724,8 +13070,8 @@
 "clubPos": 4,
 "player": "Steve Harkness",
 "pos": "DEF",
-"ovr": 68,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "CLN": 27,
 "THR": 50,
@@ -12755,6 +13101,7 @@
 "THR": -0.5885,
 "DIF": -0.2014,
 "APP": -1.8668,
+"CON": -1.8154,
 "lp0": 0.1397,
 "lp1": 0.5684,
 "lp2": 0.1645,
@@ -12762,6 +13109,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.2,
+"seasonGames": 38,
 "starts": 5,
 "perf": -1.0168
 },
@@ -12774,7 +13122,7 @@
 "clubPos": 4,
 "player": "Mark Kennedy",
 "pos": "MID",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "AST": 56,
@@ -12814,6 +13162,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.9,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0823
 },
@@ -12826,7 +13175,7 @@
 "clubPos": 4,
 "player": "John Scales",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 34,
@@ -12857,6 +13206,7 @@
 "THR": 0.8605,
 "DIF": 0.4003,
 "APP": -2.2578,
+"CON": -1.1116,
 "lp0": 0.0592,
 "lp1": 0.6395,
 "lp2": 0.7652,
@@ -12864,6 +13214,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.6,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.3697
 },
@@ -12907,6 +13258,7 @@
 "THR": 1.0612,
 "DIF": 0.2019,
 "APP": -2.3821,
+"CON": -0.1152,
 "lp0": 0.0336,
 "lp1": 0.0336,
 "lp2": 0.0336,
@@ -12914,6 +13266,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.5,
+"seasonGames": 38,
 "starts": 1,
 "perf": 0.0028
 },
@@ -12926,7 +13279,7 @@
 "clubPos": 4,
 "player": "Lee Jones",
 "pos": "FWD",
-"ovr": 61,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "GOL": 53,
@@ -12964,6 +13317,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0138
 },
@@ -12976,8 +13330,8 @@
 "clubPos": 4,
 "player": "Rob Jones",
 "pos": "DEF",
-"ovr": 70,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 37,
 "THR": 55,
@@ -13007,6 +13361,7 @@
 "THR": -0.2955,
 "DIF": 0.2631,
 "APP": -2.3459,
+"CON": -1.1205,
 "lp0": 0.041,
 "lp1": 0.7816,
 "lp2": 0.6374,
@@ -13014,6 +13369,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.8,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.3012
 },
@@ -13026,7 +13382,7 @@
 "clubPos": 4,
 "player": "Michael Owen",
 "pos": "FWD",
-"ovr": 62,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "GOL": 60,
@@ -13064,6 +13420,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.4,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1013
 },
@@ -13116,6 +13473,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.9,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0184
 },
@@ -13168,6 +13526,7 @@
 "awards": 0.6,
 "ucl": 0.99,
 "games": 33.2,
+"seasonGames": 38,
 "starts": 33,
 "perf": 1.5186
 },
@@ -13180,7 +13539,7 @@
 "clubPos": 1,
 "player": "Eric Cantona",
 "pos": "FWD",
-"ovr": 90,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "GOL": 67,
@@ -13218,6 +13577,7 @@
 "awards": 0,
 "ucl": 1.0,
 "games": 35.9,
+"seasonGames": 38,
 "starts": 36,
 "perf": 1.1703
 },
@@ -13230,7 +13590,7 @@
 "clubPos": 1,
 "player": "Peter Schmeichel",
 "pos": "GK",
-"ovr": 90,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "CLN": 70,
@@ -13268,6 +13628,7 @@
 "awards": 0,
 "ucl": 0.9,
 "games": 36.0,
+"seasonGames": 38,
 "starts": 36,
 "perf": 0.6305
 },
@@ -13280,7 +13641,7 @@
 "clubPos": 1,
 "player": "Ole Gunnar Solskjaer",
 "pos": "FWD",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "GOL": 88,
@@ -13318,6 +13679,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.8,
+"seasonGames": 38,
 "starts": 25,
 "perf": 1.2457
 },
@@ -13330,7 +13692,7 @@
 "clubPos": 1,
 "player": "Denis Irwin",
 "pos": "DEF",
-"ovr": 85,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "CLN": 75,
@@ -13361,6 +13723,7 @@
 "THR": -0.6568,
 "DIF": 1.702,
 "APP": 0.579,
+"CON": 0.8711,
 "lp0": 0.757,
 "lp1": 0.8158,
 "lp2": 0.9091,
@@ -13368,6 +13731,7 @@
 "awards": 0,
 "ucl": 0.79,
 "games": 28.8,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.8204
 },
@@ -13411,6 +13775,7 @@
 "THR": -0.6068,
 "DIF": 1.5607,
 "APP": 0.3329,
+"CON": 0.5326,
 "lp0": 0.6974,
 "lp1": 0.6974,
 "lp2": 0.6974,
@@ -13418,6 +13783,7 @@
 "awards": 0,
 "ucl": 0.8211,
 "games": 26.5,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.4688
 },
@@ -13461,6 +13827,7 @@
 "THR": 0.587,
 "DIF": 2.0292,
 "APP": 0.7359,
+"CON": 0.1815,
 "lp0": 0.795,
 "lp1": 0.8158,
 "lp2": 0.4091,
@@ -13468,6 +13835,7 @@
 "awards": 0,
 "ucl": 0.9844,
 "games": 30.2,
+"seasonGames": 38,
 "starts": 30,
 "perf": 0.9212
 },
@@ -13480,7 +13848,7 @@
 "clubPos": 1,
 "player": "David May",
 "pos": "DEF",
-"ovr": 80,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "CLN": 86,
@@ -13511,6 +13879,7 @@
 "THR": 0.2758,
 "DIF": 1.441,
 "APP": 0.4451,
+"CON": -0.077,
 "lp0": 0.7246,
 "lp1": 0.4211,
 "lp2": 0.4318,
@@ -13518,6 +13887,7 @@
 "awards": 0,
 "ucl": 0.7744,
 "games": 27.5,
+"seasonGames": 38,
 "starts": 28,
 "perf": 1.1577
 },
@@ -13561,6 +13931,7 @@
 "THR": 0.3781,
 "DIF": 1.9427,
 "APP": 0.2122,
+"CON": -1.1368,
 "lp0": 0.6681,
 "lp1": 0.5526,
 "lp2": 0.9545,
@@ -13568,6 +13939,7 @@
 "awards": 0,
 "ucl": 0.8,
 "games": 25.4,
+"seasonGames": 38,
 "starts": 27,
 "perf": -0.5094
 },
@@ -13620,6 +13992,7 @@
 "awards": 0,
 "ucl": 0.8022,
 "games": 21.4,
+"seasonGames": 38,
 "starts": 24,
 "perf": 1.2996
 },
@@ -13632,7 +14005,7 @@
 "clubPos": 1,
 "player": "Ryan Giggs",
 "pos": "MID",
-"ovr": 88,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "AST": 88,
@@ -13672,6 +14045,7 @@
 "awards": 0,
 "ucl": 0.58,
 "games": 23.8,
+"seasonGames": 38,
 "starts": 25,
 "perf": 2.1153
 },
@@ -13685,7 +14059,7 @@
 "player": "Paul Scholes",
 "pos": "MID",
 "ovr": 78,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "AST": 43,
 "GOL": 91,
@@ -13724,6 +14098,7 @@
 "awards": 0,
 "ucl": 0.1078,
 "games": 15.8,
+"seasonGames": 38,
 "starts": 16,
 "perf": 0.4843
 },
@@ -13736,8 +14111,8 @@
 "clubPos": 1,
 "player": "Karel Poborsky",
 "pos": "MID",
-"ovr": 77,
-"tier": "gold",
+"ovr": 78,
+"tier": "silver",
 "stats": {
 "AST": 79,
 "GOL": 74,
@@ -13776,6 +14151,7 @@
 "awards": 0,
 "ucl": 0.2389,
 "games": 14.1,
+"seasonGames": 38,
 "starts": 15,
 "perf": 1.4476
 },
@@ -13828,6 +14204,7 @@
 "awards": 0,
 "ucl": 0.5844,
 "games": 20.1,
+"seasonGames": 38,
 "starts": 21,
 "perf": 0.6186
 },
@@ -13840,7 +14217,7 @@
 "clubPos": 1,
 "player": "Andy Cole",
 "pos": "FWD",
-"ovr": 83,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "GOL": 87,
@@ -13878,6 +14255,7 @@
 "awards": 0,
 "ucl": 0.2478,
 "games": 11.5,
+"seasonGames": 38,
 "starts": 10,
 "perf": 1.315
 },
@@ -13928,6 +14306,7 @@
 "awards": 0,
 "ucl": 0.1511,
 "games": 7.9,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.4016
 },
@@ -13971,6 +14350,7 @@
 "THR": -0.2315,
 "DIF": 0.6698,
 "APP": -0.8967,
+"CON": -1.6862,
 "lp0": 0.3994,
 "lp1": 0.6316,
 "lp2": 0.0455,
@@ -13978,6 +14358,7 @@
 "awards": 0,
 "ucl": 0.1367,
 "games": 15.2,
+"seasonGames": 38,
 "starts": 15,
 "perf": 0.0688
 },
@@ -13990,7 +14371,7 @@
 "clubPos": 1,
 "player": "Jordi Cruyff",
 "pos": "MID",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "AST": 45,
@@ -14030,6 +14411,7 @@
 "awards": 0,
 "ucl": 0.2533,
 "games": 11.2,
+"seasonGames": 38,
 "starts": 11,
 "perf": 0.1643
 },
@@ -14043,7 +14425,7 @@
 "player": "Michael Clegg",
 "pos": "DEF",
 "ovr": 65,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 26,
 "THR": 53,
@@ -14073,6 +14455,7 @@
 "THR": -0.4203,
 "DIF": 1.001,
 "APP": -2.1733,
+"CON": -0.3369,
 "lp0": 0.0901,
 "lp1": 0.0901,
 "lp2": 0.0901,
@@ -14080,6 +14463,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.4,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.6492
 },
@@ -14092,7 +14476,7 @@
 "clubPos": 1,
 "player": "Chris Casper",
 "pos": "DEF",
-"ovr": 62,
+"ovr": 61,
 "tier": "bronze",
 "stats": {
 "CLN": 34,
@@ -14123,6 +14507,7 @@
 "THR": -0.159,
 "DIF": 0.1357,
 "APP": -2.4979,
+"CON": -0.16,
 "lp0": 0.0114,
 "lp1": 0.0114,
 "lp2": 0.0114,
@@ -14130,6 +14515,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.4,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.1118
 },
@@ -14182,6 +14568,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.1,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0905
 },
@@ -14194,7 +14581,7 @@
 "clubPos": 1,
 "player": "Raimond van der Gouw",
 "pos": "GK",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 51,
@@ -14232,6 +14619,7 @@
 "awards": 0,
 "ucl": 0.1,
 "games": 2.0,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.1725
 },
@@ -14244,7 +14632,7 @@
 "clubPos": 1,
 "player": "John O'Kane",
 "pos": "DEF",
-"ovr": 62,
+"ovr": 61,
 "tier": "bronze",
 "stats": {
 "CLN": 32,
@@ -14275,6 +14663,7 @@
 "THR": -0.2167,
 "DIF": -0.2292,
 "APP": -2.4376,
+"CON": -1.0286,
 "lp0": 0.026,
 "lp1": 0.0263,
 "lp2": 0.026,
@@ -14282,6 +14671,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.2717
 },
@@ -14334,6 +14724,7 @@
 "awards": 1.0,
 "ucl": 0.0,
 "games": 33.8,
+"seasonGames": 38,
 "starts": 34,
 "perf": 0.5846
 },
@@ -14347,7 +14738,7 @@
 "player": "Fabrizio Ravanelli",
 "pos": "FWD",
 "ovr": 77,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "GOL": 76,
 "AST": 57,
@@ -14384,6 +14775,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.8,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.3264
 },
@@ -14397,7 +14789,7 @@
 "player": "Emerson",
 "pos": "MID",
 "ovr": 75,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "AST": 86,
 "GOL": 63,
@@ -14436,6 +14828,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.2,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.2578
 },
@@ -14479,6 +14872,7 @@
 "THR": -0.2386,
 "DIF": -1.0771,
 "APP": 0.6526,
+"CON": -0.892,
 "lp0": 0.1937,
 "lp1": 0.3684,
 "lp2": 0.1937,
@@ -14486,6 +14880,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 29.4,
+"seasonGames": 38,
 "starts": 29,
 "perf": -0.627
 },
@@ -14538,6 +14933,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.0,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.5442
 },
@@ -14550,7 +14946,7 @@
 "clubPos": 15,
 "player": "Curtis Fleming",
 "pos": "DEF",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "CLN": 61,
@@ -14581,6 +14977,7 @@
 "THR": -0.2554,
 "DIF": 0.0262,
 "APP": 0.713,
+"CON": 0.5063,
 "lp0": 0.1974,
 "lp1": 0.1368,
 "lp2": 0.1974,
@@ -14588,6 +14985,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.0,
+"seasonGames": 38,
 "starts": 30,
 "perf": 0.0988
 },
@@ -14600,7 +14998,7 @@
 "clubPos": 15,
 "player": "Steve Vickers",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 40,
@@ -14631,6 +15029,7 @@
 "THR": -1.0668,
 "DIF": -1.0355,
 "APP": 0.2834,
+"CON": -0.7104,
 "lp0": 0.1713,
 "lp1": 0.3368,
 "lp2": 0.1713,
@@ -14638,6 +15037,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.0,
+"seasonGames": 38,
 "starts": 26,
 "perf": -0.8249
 },
@@ -14688,6 +15088,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.3,
+"seasonGames": 38,
 "starts": 22,
 "perf": -0.3256
 },
@@ -14701,7 +15102,7 @@
 "player": "Phil Stamp",
 "pos": "MID",
 "ovr": 68,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 65,
 "GOL": 51,
@@ -14740,6 +15141,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.4,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.4481
 },
@@ -14752,7 +15154,7 @@
 "clubPos": 15,
 "player": "Craig Hignett",
 "pos": "MID",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "AST": 74,
@@ -14792,6 +15194,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.1,
+"seasonGames": 38,
 "starts": 19,
 "perf": 0.0232
 },
@@ -14805,7 +15208,7 @@
 "player": "Derek Whyte",
 "pos": "DEF",
 "ovr": 68,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 41,
 "THR": 53,
@@ -14835,6 +15238,7 @@
 "THR": -0.3868,
 "DIF": -1.2837,
 "APP": -0.4876,
+"CON": -2.289,
 "lp0": 0.1246,
 "lp1": 0.2632,
 "lp2": 0.1246,
@@ -14842,6 +15246,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.9,
+"seasonGames": 38,
 "starts": 20,
 "perf": -0.8379
 },
@@ -14854,7 +15259,7 @@
 "clubPos": 15,
 "player": "Nigel Pearson",
 "pos": "DEF",
-"ovr": 69,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 61,
@@ -14885,6 +15290,7 @@
 "THR": -0.9178,
 "DIF": 0.1473,
 "APP": -0.7603,
+"CON": 1.256,
 "lp0": 0.1081,
 "lp1": 0.3789,
 "lp2": 0.1081,
@@ -14892,6 +15298,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.4,
+"seasonGames": 38,
 "starts": 17,
 "perf": -0.1135
 },
@@ -14905,7 +15312,7 @@
 "player": "Alan Moore",
 "pos": "MID",
 "ovr": 65,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 47,
 "GOL": 45,
@@ -14944,6 +15351,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.9,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.5132
 },
@@ -14956,8 +15364,8 @@
 "clubPos": 15,
 "player": "Clayton Blackmore",
 "pos": "DEF",
-"ovr": 68,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 70,
 "THR": 69,
@@ -14987,6 +15395,7 @@
 "THR": 0.5195,
 "DIF": 0.8534,
 "APP": -1.0306,
+"CON": 1.1969,
 "lp0": 0.0917,
 "lp1": 0.0526,
 "lp2": 0.0917,
@@ -14994,6 +15403,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.9,
+"seasonGames": 38,
 "starts": 14,
 "perf": 0.3115
 },
@@ -15006,8 +15416,8 @@
 "clubPos": 15,
 "player": "Gianluca Festa",
 "pos": "DEF",
-"ovr": 68,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 73,
 "THR": 58,
@@ -15037,6 +15447,7 @@
 "THR": -0.1204,
 "DIF": 1.5116,
 "APP": -1.1332,
+"CON": 1.4669,
 "lp0": 0.0855,
 "lp1": 0.0855,
 "lp2": 0.0855,
@@ -15044,6 +15455,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.0,
+"seasonGames": 38,
 "starts": 13,
 "perf": 0.4717
 },
@@ -15057,7 +15469,7 @@
 "player": "Gary Walsh",
 "pos": "GK",
 "ovr": 69,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 63,
 "CON": 37,
@@ -15094,6 +15506,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.0,
+"seasonGames": 38,
 "starts": 12,
 "perf": -0.6907
 },
@@ -15106,7 +15519,7 @@
 "clubPos": 15,
 "player": "Nick Barmby",
 "pos": "MID",
-"ovr": 72,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "AST": 60,
@@ -15146,6 +15559,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.9,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.1552
 },
@@ -15159,7 +15573,7 @@
 "player": "Alan Miller",
 "pos": "GK",
 "ovr": 67,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 51,
 "CON": 47,
@@ -15196,6 +15610,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.0,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.4854
 },
@@ -15208,7 +15623,7 @@
 "clubPos": 15,
 "player": "Ben Roberts",
 "pos": "GK",
-"ovr": 64,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "CLN": 55,
@@ -15246,6 +15661,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.2,
+"seasonGames": 38,
 "starts": 9,
 "perf": 0.0236
 },
@@ -15259,7 +15675,7 @@
 "player": "Phil Whelan",
 "pos": "DEF",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 74,
 "THR": 48,
@@ -15289,6 +15705,7 @@
 "THR": -0.6979,
 "DIF": 0.2561,
 "APP": -1.599,
+"CON": -0.3434,
 "lp0": 0.0573,
 "lp1": 0.1368,
 "lp2": 0.0141,
@@ -15296,6 +15713,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.7,
+"seasonGames": 38,
 "starts": 9,
 "perf": 0.1039
 },
@@ -15308,8 +15726,8 @@
 "clubPos": 15,
 "player": "Mark Schwarzer",
 "pos": "GK",
-"ovr": 67,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 86,
 "CON": 89,
@@ -15346,6 +15764,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.8,
+"seasonGames": 38,
 "starts": 7,
 "perf": 0.7875
 },
@@ -15358,7 +15777,7 @@
 "clubPos": 15,
 "player": "Vladimir Kinder",
 "pos": "DEF",
-"ovr": 62,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "CLN": 92,
@@ -15389,6 +15808,7 @@
 "THR": 0.639,
 "DIF": -0.4997,
 "APP": -2.0937,
+"CON": 1.4251,
 "lp0": 0.0273,
 "lp1": 0.0273,
 "lp2": 0.0273,
@@ -15396,6 +15816,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.2,
+"seasonGames": 38,
 "starts": 4,
 "perf": 0.3841
 },
@@ -15408,8 +15829,8 @@
 "clubPos": 15,
 "player": "Jan Aage Fjortoft",
 "pos": "FWD",
-"ovr": 65,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "GOL": 61,
 "AST": 49,
@@ -15446,6 +15867,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.3,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.1464
 },
@@ -15489,6 +15911,7 @@
 "THR": -0.5212,
 "DIF": -0.8108,
 "APP": -2.002,
+"CON": -1.5702,
 "lp0": 0.0329,
 "lp1": 0.1368,
 "lp2": 0.0329,
@@ -15496,6 +15919,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.0,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.1368
 },
@@ -15508,7 +15932,7 @@
 "clubPos": 15,
 "player": "Chris Morris",
 "pos": "DEF",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "CLN": 58,
@@ -15539,6 +15963,7 @@
 "THR": -0.4052,
 "DIF": -0.6604,
 "APP": -2.1963,
+"CON": 0.7556,
 "lp0": 0.0211,
 "lp1": 0.2421,
 "lp2": 0.0211,
@@ -15546,6 +15971,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.2,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.2703
 },
@@ -15558,7 +15984,7 @@
 "clubPos": 15,
 "player": "Andy Campbell",
 "pos": "FWD",
-"ovr": 61,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "GOL": 51,
@@ -15596,6 +16022,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.1396
 },
@@ -15608,7 +16035,7 @@
 "clubPos": 15,
 "player": "Chris Freestone",
 "pos": "FWD",
-"ovr": 62,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "GOL": 51,
@@ -15646,6 +16073,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0726
 },
@@ -15689,6 +16117,7 @@
 "THR": -0.2189,
 "DIF": -0.5696,
 "APP": -2.4352,
+"CON": -0.5219,
 "lp0": 0.0067,
 "lp1": 0.0737,
 "lp2": 0.0067,
@@ -15696,6 +16125,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0418
 },
@@ -15748,6 +16178,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.7,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.09
 },
@@ -15760,7 +16191,7 @@
 "clubPos": 15,
 "player": "Bryan Robson",
 "pos": "MID",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "AST": 56,
@@ -15800,6 +16231,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1419
 },
@@ -15812,8 +16244,8 @@
 "clubPos": 2,
 "player": "Steve Watson",
 "pos": "DEF",
-"ovr": 81,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "CLN": 76,
 "THR": 47,
@@ -15843,6 +16275,7 @@
 "THR": -0.7422,
 "DIF": 1.2736,
 "APP": 1.0726,
+"CON": 0.9973,
 "lp0": 0.7889,
 "lp1": 0.575,
 "lp2": 0.4968,
@@ -15850,6 +16283,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.3,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.7963
 },
@@ -15862,7 +16296,7 @@
 "clubPos": 2,
 "player": "Darren Peacock",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 82,
 "tier": "gold",
 "stats": {
 "CLN": 63,
@@ -15893,6 +16327,7 @@
 "THR": -0.3886,
 "DIF": 1.5487,
 "APP": 1.256,
+"CON": 0.5892,
 "lp0": 0.8289,
 "lp1": 0.85,
 "lp2": 0.6439,
@@ -15900,6 +16335,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.0,
+"seasonGames": 38,
 "starts": 35,
 "perf": 0.6096
 },
@@ -15912,7 +16348,7 @@
 "clubPos": 2,
 "player": "Rob Lee",
 "pos": "MID",
-"ovr": 87,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 90,
@@ -15952,6 +16388,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.2,
+"seasonGames": 38,
 "starts": 32,
 "perf": 1.1848
 },
@@ -15964,8 +16401,8 @@
 "clubPos": 2,
 "player": "David Batty",
 "pos": "MID",
-"ovr": 80,
-"tier": "gold",
+"ovr": 78,
+"tier": "silver",
 "stats": {
 "AST": 46,
 "GOL": 41,
@@ -16004,6 +16441,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.4,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.6532
 },
@@ -16016,8 +16454,8 @@
 "clubPos": 2,
 "player": "Keith Gillespie",
 "pos": "MID",
-"ovr": 78,
-"tier": "gold",
+"ovr": 77,
+"tier": "silver",
 "stats": {
 "AST": 58,
 "GOL": 50,
@@ -16056,6 +16494,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.0,
+"seasonGames": 38,
 "starts": 23,
 "perf": 0.1651
 },
@@ -16106,6 +16545,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.9,
+"seasonGames": 38,
 "starts": 30,
 "perf": 1.558
 },
@@ -16118,7 +16558,7 @@
 "clubPos": 2,
 "player": "Alan Shearer",
 "pos": "FWD",
-"ovr": 96,
+"ovr": 93,
 "tier": "best",
 "stats": {
 "GOL": 97,
@@ -16156,6 +16596,7 @@
 "awards": 1.6,
 "ucl": 0.0,
 "games": 30.9,
+"seasonGames": 38,
 "starts": 31,
 "perf": 2.2899
 },
@@ -16169,7 +16610,7 @@
 "player": "Robbie Elliott",
 "pos": "DEF",
 "ovr": 76,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 51,
 "THR": 91,
@@ -16199,6 +16640,7 @@
 "THR": 2.4069,
 "DIF": 0.7367,
 "APP": 0.5923,
+"CON": 0.2386,
 "lp0": 0.6842,
 "lp1": 0.15,
 "lp2": 0.2576,
@@ -16206,6 +16648,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.9,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.2772
 },
@@ -16219,7 +16662,7 @@
 "player": "Philippe Albert",
 "pos": "DEF",
 "ovr": 77,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 78,
 "THR": 73,
@@ -16249,6 +16692,7 @@
 "THR": 0.7738,
 "DIF": 0.4104,
 "APP": 0.3606,
+"CON": 0.3677,
 "lp0": 0.6337,
 "lp1": 0.575,
 "lp2": 0.3128,
@@ -16256,6 +16700,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.8,
+"seasonGames": 38,
 "starts": 27,
 "perf": 0.64
 },
@@ -16306,6 +16751,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.5,
+"seasonGames": 38,
 "starts": 22,
 "perf": 0.1761
 },
@@ -16318,8 +16764,8 @@
 "clubPos": 2,
 "player": "Lee Clark",
 "pos": "MID",
-"ovr": 75,
-"tier": "gold",
+"ovr": 74,
+"tier": "silver",
 "stats": {
 "AST": 45,
 "GOL": 62,
@@ -16358,6 +16804,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.6,
+"seasonGames": 38,
 "starts": 9,
 "perf": 0.509
 },
@@ -16370,7 +16817,7 @@
 "clubPos": 2,
 "player": "Faustino Asprilla",
 "pos": "FWD",
-"ovr": 73,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "GOL": 53,
@@ -16408,6 +16855,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.2,
+"seasonGames": 38,
 "starts": 17,
 "perf": 0.261
 },
@@ -16421,7 +16869,7 @@
 "player": "David Ginola",
 "pos": "MID",
 "ovr": 78,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "AST": 81,
 "GOL": 55,
@@ -16460,6 +16908,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.2,
+"seasonGames": 38,
 "starts": 20,
 "perf": 0.257
 },
@@ -16472,8 +16921,8 @@
 "clubPos": 2,
 "player": "Pavel Srnicek",
 "pos": "GK",
-"ovr": 78,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "CLN": 85,
 "CON": 82,
@@ -16510,6 +16959,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.0,
+"seasonGames": 38,
 "starts": 22,
 "perf": 1.0011
 },
@@ -16523,7 +16973,7 @@
 "player": "John Beresford",
 "pos": "DEF",
 "ovr": 79,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 87,
 "THR": 74,
@@ -16553,6 +17003,7 @@
 "THR": 0.8338,
 "DIF": 2.4271,
 "APP": -0.5781,
+"CON": 1.0336,
 "lp0": 0.4289,
 "lp1": 0.825,
 "lp2": 0.6071,
@@ -16560,6 +17011,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.1,
+"seasonGames": 38,
 "starts": 18,
 "perf": 1.2677
 },
@@ -16573,7 +17025,7 @@
 "player": "Warren Barton",
 "pos": "DEF",
 "ovr": 77,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 82,
 "THR": 92,
@@ -16603,6 +17055,7 @@
 "THR": 2.5644,
 "DIF": 1.327,
 "APP": -1.0125,
+"CON": 0.6526,
 "lp0": 0.3342,
 "lp1": 0.775,
 "lp2": 0.5909,
@@ -16610,6 +17063,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.1,
+"seasonGames": 38,
 "starts": 14,
 "perf": 0.8719
 },
@@ -16660,6 +17114,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.0,
+"seasonGames": 38,
 "starts": 16,
 "perf": -0.8174
 },
@@ -16703,6 +17158,7 @@
 "THR": 0.2264,
 "DIF": 2.2233,
 "APP": -1.6762,
+"CON": -0.9025,
 "lp0": 0.1895,
 "lp1": 0.7,
 "lp2": 0.5519,
@@ -16710,6 +17166,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.0,
+"seasonGames": 38,
 "starts": 8,
 "perf": 0.0487
 },
@@ -16722,8 +17179,8 @@
 "clubPos": 2,
 "player": "Paul Kitson",
 "pos": "FWD",
-"ovr": 65,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "GOL": 58,
 "AST": 52,
@@ -16760,6 +17217,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.8,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0682
 },
@@ -16812,6 +17270,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.5,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0491
 },
@@ -16824,8 +17283,8 @@
 "clubPos": 20,
 "player": "Colin Cooper",
 "pos": "DEF",
-"ovr": 76,
-"tier": "best",
+"ovr": 75,
+"tier": "silver",
 "stats": {
 "CLN": 49,
 "THR": 60,
@@ -16855,6 +17314,7 @@
 "THR": -0.0159,
 "DIF": -1.5908,
 "APP": 1.2849,
+"CON": -1.0239,
 "lp0": 0.0464,
 "lp1": 0.5842,
 "lp2": 0.7576,
@@ -16862,6 +17322,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.3,
+"seasonGames": 38,
 "starts": 36,
 "perf": -0.5231
 },
@@ -16905,6 +17366,7 @@
 "THR": 1.3053,
 "DIF": -1.4751,
 "APP": 0.9483,
+"CON": -0.5857,
 "lp0": 0.0423,
 "lp1": 0.2684,
 "lp2": 0.4329,
@@ -16912,6 +17374,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.2,
+"seasonGames": 38,
 "starts": 33,
 "perf": -0.2691
 },
@@ -16962,6 +17425,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.4,
+"seasonGames": 38,
 "starts": 33,
 "perf": -0.7466
 },
@@ -16974,8 +17438,8 @@
 "clubPos": 20,
 "player": "Mark Crossley",
 "pos": "GK",
-"ovr": 76,
-"tier": "gold",
+"ovr": 77,
+"tier": "best",
 "stats": {
 "CLN": 43,
 "CON": 48,
@@ -17012,6 +17476,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.0,
+"seasonGames": 38,
 "starts": 33,
 "perf": -0.6448
 },
@@ -17025,7 +17490,7 @@
 "player": "Stuart Pearce",
 "pos": "DEF",
 "ovr": 75,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 47,
 "THR": 76,
@@ -17055,6 +17520,7 @@
 "THR": 0.9268,
 "DIF": -1.3902,
 "APP": 0.8952,
+"CON": -0.924,
 "lp0": 0.0417,
 "lp1": 0.4895,
 "lp2": 0.7792,
@@ -17062,6 +17528,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.7,
+"seasonGames": 38,
 "starts": 33,
 "perf": -0.4799
 },
@@ -17074,8 +17541,8 @@
 "clubPos": 20,
 "player": "Steve Chettle",
 "pos": "DEF",
-"ovr": 75,
-"tier": "gold",
+"ovr": 74,
+"tier": "silver",
 "stats": {
 "CLN": 66,
 "THR": 48,
@@ -17105,6 +17572,7 @@
 "THR": -0.7103,
 "DIF": -1.1973,
 "APP": 0.8759,
+"CON": -0.1887,
 "lp0": 0.0414,
 "lp1": 0.5842,
 "lp2": 0.8874,
@@ -17112,6 +17580,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.5,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.1303
 },
@@ -17124,7 +17593,7 @@
 "clubPos": 20,
 "player": "Des Lyttle",
 "pos": "DEF",
-"ovr": 74,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "CLN": 50,
@@ -17155,6 +17624,7 @@
 "THR": -0.2527,
 "DIF": -1.5697,
 "APP": 0.7033,
+"CON": -0.0406,
 "lp0": 0.0394,
 "lp1": 0.5211,
 "lp2": 0.8225,
@@ -17162,6 +17632,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 29.9,
+"seasonGames": 38,
 "starts": 30,
 "perf": -0.569
 },
@@ -17174,8 +17645,8 @@
 "clubPos": 20,
 "player": "Ian Woan",
 "pos": "MID",
-"ovr": 75,
-"tier": "gold",
+"ovr": 74,
+"tier": "silver",
 "stats": {
 "AST": 47,
 "GOL": 51,
@@ -17214,6 +17685,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.2,
+"seasonGames": 38,
 "starts": 29,
 "perf": -0.691
 },
@@ -17226,7 +17698,7 @@
 "clubPos": 20,
 "player": "David Phillips",
 "pos": "MID",
-"ovr": 72,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "AST": 49,
@@ -17266,6 +17738,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.1,
+"seasonGames": 38,
 "starts": 24,
 "perf": -0.7893
 },
@@ -17279,7 +17752,7 @@
 "player": "Chris Allen",
 "pos": "MID",
 "ovr": 65,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 53,
 "GOL": 42,
@@ -17318,6 +17791,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 16.6,
+"seasonGames": 38,
 "starts": 16,
 "perf": -0.8267
 },
@@ -17330,7 +17804,7 @@
 "clubPos": 20,
 "player": "Scot Gemmill",
 "pos": "MID",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "AST": 62,
@@ -17370,6 +17844,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.8,
+"seasonGames": 38,
 "starts": 18,
 "perf": -0.5871
 },
@@ -17420,6 +17895,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.5,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.3692
 },
@@ -17432,7 +17908,7 @@
 "clubPos": 20,
 "player": "Kevin Campbell",
 "pos": "FWD",
-"ovr": 72,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "GOL": 61,
@@ -17470,6 +17946,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.6,
+"seasonGames": 38,
 "starts": 16,
 "perf": -0.0396
 },
@@ -17482,7 +17959,7 @@
 "clubPos": 20,
 "player": "Chris Bart-Williams",
 "pos": "MID",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "AST": 44,
@@ -17522,6 +17999,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.1,
+"seasonGames": 38,
 "starts": 16,
 "perf": -0.4529
 },
@@ -17534,7 +18012,7 @@
 "clubPos": 20,
 "player": "Nikola Jerkan",
 "pos": "DEF",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 62,
@@ -17565,6 +18043,7 @@
 "THR": -0.8424,
 "DIF": -0.6808,
 "APP": -1.1103,
+"CON": -0.2566,
 "lp0": 0.0174,
 "lp1": 0.0174,
 "lp2": 0.0174,
@@ -17572,6 +18051,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.2,
+"seasonGames": 38,
 "starts": 14,
 "perf": -0.3181
 },
@@ -17584,8 +18064,8 @@
 "clubPos": 20,
 "player": "Nigel Clough",
 "pos": "FWD",
-"ovr": 66,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "GOL": 42,
 "AST": 52,
@@ -17622,6 +18102,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.1,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.3323
 },
@@ -17634,8 +18115,8 @@
 "clubPos": 20,
 "player": "Jason Lee",
 "pos": "FWD",
-"ovr": 68,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "GOL": 47,
 "AST": 74,
@@ -17672,6 +18153,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.9,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.4186
 },
@@ -17722,6 +18204,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.0,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.3695
 },
@@ -17765,6 +18248,7 @@
 "THR": -0.5731,
 "DIF": -0.8162,
 "APP": -1.8994,
+"CON": -0.0021,
 "lp0": 0.0078,
 "lp1": 0.0078,
 "lp2": 0.0078,
@@ -17772,6 +18256,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.9,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.7528
 },
@@ -17784,7 +18269,7 @@
 "clubPos": 20,
 "player": "Paul McGregor",
 "pos": "FWD",
-"ovr": 62,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "GOL": 38,
@@ -17822,6 +18307,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.6,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.1249
 },
@@ -17865,6 +18351,7 @@
 "THR": -0.4675,
 "DIF": -0.7199,
 "APP": -2.0973,
+"CON": 0.2262,
 "lp0": 0.0054,
 "lp1": 0.0054,
 "lp2": 0.0054,
@@ -17872,6 +18359,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.1,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.1845
 },
@@ -17884,8 +18372,8 @@
 "clubPos": 20,
 "player": "Steve Stone",
 "pos": "MID",
-"ovr": 71,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "AST": 51,
 "GOL": 62,
@@ -17924,6 +18412,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.9,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.2182
 },
@@ -17936,7 +18425,7 @@
 "clubPos": 20,
 "player": "Ian Moore",
 "pos": "FWD",
-"ovr": 61,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "GOL": 50,
@@ -17974,6 +18463,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.5,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1747
 },
@@ -17986,7 +18476,7 @@
 "clubPos": 20,
 "player": "Alan Fettis",
 "pos": "GK",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 74,
@@ -18024,6 +18514,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.0,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.022
 },
@@ -18067,6 +18558,7 @@
 "THR": -0.3695,
 "DIF": -0.6616,
 "APP": -2.2481,
+"CON": 0.2713,
 "lp0": 0.0036,
 "lp1": 0.0036,
 "lp2": 0.0216,
@@ -18074,6 +18566,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.7,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.037
 },
@@ -18086,7 +18579,7 @@
 "clubPos": 20,
 "player": "Andrea Silenzi",
 "pos": "FWD",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "GOL": 52,
@@ -18124,6 +18617,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.9,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1008
 },
@@ -18136,7 +18630,7 @@
 "clubPos": 20,
 "player": "Steve Guinan",
 "pos": "FWD",
-"ovr": 61,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "GOL": 53,
@@ -18174,6 +18668,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.3,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0313
 },
@@ -18186,7 +18681,7 @@
 "clubPos": 20,
 "player": "Bobby Howe",
 "pos": "MID",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "AST": 58,
@@ -18226,6 +18721,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0084
 },
@@ -18238,8 +18734,8 @@
 "clubPos": 20,
 "player": "Tommy Wright",
 "pos": "GK",
-"ovr": 65,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "CLN": 92,
 "CON": 89,
@@ -18276,6 +18772,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": 0.2691
 },
@@ -18288,8 +18785,8 @@
 "clubPos": 7,
 "player": "Ian Nolan",
 "pos": "DEF",
-"ovr": 79,
-"tier": "gold",
+"ovr": 77,
+"tier": "silver",
 "stats": {
 "CLN": 50,
 "THR": 59,
@@ -18319,6 +18816,7 @@
 "THR": -0.0836,
 "DIF": 0.4006,
 "APP": 1.5287,
+"CON": -0.2927,
 "lp0": 0.691,
 "lp1": 0.2289,
 "lp2": 0.4545,
@@ -18326,6 +18824,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.5,
+"seasonGames": 38,
 "starts": 38,
 "perf": 0.0815
 },
@@ -18338,8 +18837,8 @@
 "clubPos": 7,
 "player": "Kevin Pressman",
 "pos": "GK",
-"ovr": 80,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "CLN": 66,
 "CON": 60,
@@ -18376,6 +18875,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.8,
+"seasonGames": 38,
 "starts": 38,
 "perf": 0.3321
 },
@@ -18388,8 +18888,8 @@
 "clubPos": 7,
 "player": "Peter Atherton",
 "pos": "DEF",
-"ovr": 79,
-"tier": "gold",
+"ovr": 77,
+"tier": "silver",
 "stats": {
 "CLN": 60,
 "THR": 59,
@@ -18419,6 +18919,7 @@
 "THR": -0.0638,
 "DIF": 0.4426,
 "APP": 1.4551,
+"CON": 0.0747,
 "lp0": 0.6785,
 "lp1": 0.2842,
 "lp2": 0.4437,
@@ -18426,6 +18927,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.8,
+"seasonGames": 38,
 "starts": 37,
 "perf": 0.3159
 },
@@ -18438,8 +18940,8 @@
 "clubPos": 7,
 "player": "Des Walker",
 "pos": "DEF",
-"ovr": 78,
-"tier": "gold",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "CLN": 64,
 "THR": 41,
@@ -18469,6 +18971,7 @@
 "THR": -1.1517,
 "DIF": 0.3922,
 "APP": 1.2692,
+"CON": 0.7628,
 "lp0": 0.647,
 "lp1": 0.2842,
 "lp2": 0.4113,
@@ -18476,6 +18979,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.1,
+"seasonGames": 38,
 "starts": 36,
 "perf": 0.2731
 },
@@ -18488,8 +18992,8 @@
 "clubPos": 7,
 "player": "Andy Booth",
 "pos": "FWD",
-"ovr": 80,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "GOL": 60,
 "AST": 50,
@@ -18526,6 +19030,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.1,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.0552
 },
@@ -18538,7 +19043,7 @@
 "clubPos": 7,
 "player": "Mark Pembridge",
 "pos": "MID",
-"ovr": 81,
+"ovr": 80,
 "tier": "best",
 "stats": {
 "AST": 89,
@@ -18578,6 +19083,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.3,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.8713
 },
@@ -18590,7 +19096,7 @@
 "clubPos": 7,
 "player": "Regi Blinker",
 "pos": "MID",
-"ovr": 71,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "AST": 83,
@@ -18630,6 +19136,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 17.7,
+"seasonGames": 38,
 "starts": 15,
 "perf": 0.2273
 },
@@ -18680,6 +19187,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.4,
+"seasonGames": 38,
 "starts": 29,
 "perf": -0.643
 },
@@ -18692,7 +19200,7 @@
 "clubPos": 7,
 "player": "Ritchie Humphreys",
 "pos": "FWD",
-"ovr": 68,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "GOL": 51,
@@ -18730,6 +19238,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.3,
+"seasonGames": 38,
 "starts": 14,
 "perf": -0.1501
 },
@@ -18773,6 +19282,7 @@
 "THR": 0.3205,
 "DIF": 0.3537,
 "APP": 0.3401,
+"CON": -0.4392,
 "lp0": 0.4894,
 "lp1": 0.0474,
 "lp2": 0.4894,
@@ -18780,6 +19290,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.6,
+"seasonGames": 38,
 "starts": 27,
 "perf": -0.1232
 },
@@ -18793,7 +19304,7 @@
 "player": "Benito Carbone",
 "pos": "FWD",
 "ovr": 76,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "GOL": 54,
 "AST": 82,
@@ -18830,6 +19341,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.1,
+"seasonGames": 38,
 "starts": 24,
 "perf": 0.1805
 },
@@ -18842,7 +19354,7 @@
 "clubPos": 7,
 "player": "David Hirst",
 "pos": "FWD",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "GOL": 66,
@@ -18880,6 +19392,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.5,
+"seasonGames": 38,
 "starts": 20,
 "perf": 0.1273
 },
@@ -18893,7 +19406,7 @@
 "player": "Steve Nicol",
 "pos": "MID",
 "ovr": 69,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 43,
 "GOL": 36,
@@ -18932,6 +19445,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 17.1,
+"seasonGames": 38,
 "starts": 19,
 "perf": -0.3171
 },
@@ -18984,6 +19498,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 15.5,
+"seasonGames": 38,
 "starts": 15,
 "perf": 0.5845
 },
@@ -18997,7 +19512,7 @@
 "player": "Scott Oakes",
 "pos": "MID",
 "ovr": 67,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 61,
 "GOL": 57,
@@ -19036,6 +19551,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.5,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.3077
 },
@@ -19088,6 +19604,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.0,
+"seasonGames": 38,
 "starts": 9,
 "perf": 0.0549
 },
@@ -19101,7 +19618,7 @@
 "player": "Wayne Collins",
 "pos": "MID",
 "ovr": 67,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 47,
 "GOL": 58,
@@ -19140,6 +19657,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.8,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.3151
 },
@@ -19152,8 +19670,8 @@
 "clubPos": 7,
 "player": "Jon Newsome",
 "pos": "DEF",
-"ovr": 68,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 66,
 "THR": 61,
@@ -19183,6 +19701,7 @@
 "THR": 0.0688,
 "DIF": 0.9438,
 "APP": -1.459,
+"CON": 0.5458,
 "lp0": 0.1842,
 "lp1": 0.0632,
 "lp2": 0.1136,
@@ -19190,6 +19709,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.0,
+"seasonGames": 38,
 "starts": 10,
 "perf": 0.1563
 },
@@ -19203,7 +19723,7 @@
 "player": "Lee Briscoe",
 "pos": "DEF",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 53,
 "THR": 51,
@@ -19233,6 +19753,7 @@
 "THR": -0.5062,
 "DIF": 0.4884,
 "APP": -2.0297,
+"CON": 1.301,
 "lp0": 0.0874,
 "lp1": 0.2053,
 "lp2": 0.0649,
@@ -19240,6 +19761,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.7,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.2076
 },
@@ -19252,7 +19774,7 @@
 "clubPos": 7,
 "player": "O'Neill Donaldson",
 "pos": "FWD",
-"ovr": 64,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "GOL": 66,
@@ -19290,6 +19812,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.5,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.076
 },
@@ -19302,8 +19825,8 @@
 "clubPos": 7,
 "player": "John Sheridan",
 "pos": "MID",
-"ovr": 65,
-"tier": "silver",
+"ovr": 64,
+"tier": "bronze",
 "stats": {
 "AST": 56,
 "GOL": 50,
@@ -19342,6 +19865,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.6,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0633
 },
@@ -19354,8 +19878,8 @@
 "clubPos": 7,
 "player": "Mark Bright",
 "pos": "FWD",
-"ovr": 67,
-"tier": "silver",
+"ovr": 68,
+"tier": "bronze",
 "stats": {
 "GOL": 67,
 "AST": 54,
@@ -19392,6 +19916,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.2,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0029
 },
@@ -19442,6 +19967,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0024
 },
@@ -19454,7 +19980,7 @@
 "clubPos": 7,
 "player": "Michael Williams",
 "pos": "MID",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "AST": 57,
@@ -19494,6 +20020,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.2,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0291
 },
@@ -19546,6 +20073,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.1,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.1323
 },
@@ -19558,7 +20086,7 @@
 "clubPos": 17,
 "player": "Matt Le Tissier",
 "pos": "FWD",
-"ovr": 75,
+"ovr": 76,
 "tier": "best",
 "stats": {
 "GOL": 83,
@@ -19596,6 +20124,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.0,
+"seasonGames": 38,
 "starts": 25,
 "perf": 0.1882
 },
@@ -19608,7 +20137,7 @@
 "clubPos": 17,
 "player": "Egil Ostenstad",
 "pos": "FWD",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "GOL": 60,
@@ -19646,6 +20175,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.4,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.1076
 },
@@ -19658,7 +20188,7 @@
 "clubPos": 17,
 "player": "Robbie Slater",
 "pos": "MID",
-"ovr": 73,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "AST": 68,
@@ -19698,6 +20228,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.3,
+"seasonGames": 38,
 "starts": 22,
 "perf": -0.0993
 },
@@ -19710,7 +20241,7 @@
 "clubPos": 17,
 "player": "Richard Dryden",
 "pos": "DEF",
-"ovr": 69,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 57,
@@ -19741,6 +20272,7 @@
 "THR": -0.6168,
 "DIF": -0.7026,
 "APP": 0.3799,
+"CON": 0.0142,
 "lp0": 0.1063,
 "lp1": 0.1063,
 "lp2": 0.1063,
@@ -19748,6 +20280,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.9,
+"seasonGames": 38,
 "starts": 28,
 "perf": -0.2571
 },
@@ -19791,6 +20324,7 @@
 "THR": 0.3274,
 "DIF": 0.1811,
 "APP": 0.3244,
+"CON": -0.5884,
 "lp0": 0.1043,
 "lp1": 0.1043,
 "lp2": 0.1043,
@@ -19798,6 +20332,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.4,
+"seasonGames": 38,
 "starts": 28,
 "perf": 0.0813
 },
@@ -19841,6 +20376,7 @@
 "THR": 0.3996,
 "DIF": -0.3942,
 "APP": 0.1664,
+"CON": 0.3173,
 "lp0": 0.0986,
 "lp1": 0.0711,
 "lp2": 0.1104,
@@ -19848,6 +20384,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.0,
+"seasonGames": 38,
 "starts": 24,
 "perf": 0.015
 },
@@ -19860,7 +20397,7 @@
 "clubPos": 17,
 "player": "Eyal Berkovic",
 "pos": "MID",
-"ovr": 74,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "AST": 92,
@@ -19900,6 +20437,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.1,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.7006
 },
@@ -19912,7 +20450,7 @@
 "clubPos": 17,
 "player": "Matt Oakley",
 "pos": "MID",
-"ovr": 69,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "AST": 42,
@@ -19952,6 +20490,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.9,
+"seasonGames": 38,
 "starts": 23,
 "perf": -0.1539
 },
@@ -19965,7 +20504,7 @@
 "player": "Simon Charlton",
 "pos": "DEF",
 "ovr": 69,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 59,
 "THR": 60,
@@ -19995,6 +20534,7 @@
 "THR": 0.0188,
 "DIF": -1.0891,
 "APP": -0.1063,
+"CON": -0.0186,
 "lp0": 0.0886,
 "lp1": 0.1026,
 "lp2": 0.3247,
@@ -20002,6 +20542,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.5,
+"seasonGames": 38,
 "starts": 24,
 "perf": -0.3092
 },
@@ -20045,6 +20586,7 @@
 "THR": -0.021,
 "DIF": 0.2016,
 "APP": -0.0062,
+"CON": -0.6812,
 "lp0": 0.0923,
 "lp1": 0.0923,
 "lp2": 0.0923,
@@ -20052,6 +20594,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.4,
+"seasonGames": 38,
 "starts": 24,
 "perf": -0.0352
 },
@@ -20065,7 +20608,7 @@
 "player": "Jason Dodd",
 "pos": "DEF",
 "ovr": 69,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 40,
 "THR": 61,
@@ -20095,6 +20638,7 @@
 "THR": 0.0712,
 "DIF": -1.0712,
 "APP": -0.2306,
+"CON": -1.1954,
 "lp0": 0.0841,
 "lp1": 0.1461,
 "lp2": 0.3377,
@@ -20102,6 +20646,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.3,
+"seasonGames": 38,
 "starts": 23,
 "perf": -0.7721
 },
@@ -20114,7 +20659,7 @@
 "clubPos": 17,
 "player": "Francis Benali",
 "pos": "DEF",
-"ovr": 69,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 87,
@@ -20145,6 +20690,7 @@
 "THR": -0.8758,
 "DIF": 1.0316,
 "APP": -0.9655,
+"CON": 1.6406,
 "lp0": 0.0574,
 "lp1": 0.1145,
 "lp2": 0.4545,
@@ -20152,6 +20698,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.5,
+"seasonGames": 38,
 "starts": 14,
 "perf": 0.7164
 },
@@ -20164,8 +20711,8 @@
 "clubPos": 17,
 "player": "Neil Maddison",
 "pos": "MID",
-"ovr": 68,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "AST": 45,
 "GOL": 58,
@@ -20204,6 +20751,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.3,
+"seasonGames": 38,
 "starts": 14,
 "perf": -0.6112
 },
@@ -20216,7 +20764,7 @@
 "clubPos": 17,
 "player": "Maik Taylor",
 "pos": "GK",
-"ovr": 71,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "CLN": 87,
@@ -20254,6 +20802,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.0,
+"seasonGames": 38,
 "starts": 18,
 "perf": 1.1434
 },
@@ -20266,8 +20815,8 @@
 "clubPos": 17,
 "player": "Dave Beasant",
 "pos": "GK",
-"ovr": 66,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "CLN": 35,
 "CON": 39,
@@ -20304,6 +20853,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.8,
+"seasonGames": 38,
 "starts": 13,
 "perf": -1.088
 },
@@ -20316,8 +20866,8 @@
 "clubPos": 17,
 "player": "Gordon Watson",
 "pos": "FWD",
-"ovr": 66,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "GOL": 52,
 "AST": 57,
@@ -20354,6 +20904,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.2,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.3428
 },
@@ -20366,8 +20917,8 @@
 "clubPos": 17,
 "player": "Ken Monkou",
 "pos": "DEF",
-"ovr": 65,
-"tier": "silver",
+"ovr": 64,
+"tier": "bronze",
 "stats": {
 "CLN": 36,
 "THR": 48,
@@ -20397,6 +20948,7 @@
 "THR": -0.7014,
 "DIF": -1.8801,
 "APP": -1.5893,
+"CON": -4.0391,
 "lp0": 0.0347,
 "lp1": 0.1263,
 "lp2": 0.4026,
@@ -20404,6 +20956,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.8,
+"seasonGames": 38,
 "starts": 8,
 "perf": -1.086
 },
@@ -20416,8 +20969,8 @@
 "clubPos": 17,
 "player": "Micky Evans",
 "pos": "FWD",
-"ovr": 66,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "GOL": 63,
 "AST": 40,
@@ -20454,6 +21007,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.9,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.0942
 },
@@ -20467,7 +21021,7 @@
 "player": "Neil Shipperley",
 "pos": "FWD",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "GOL": 43,
 "AST": 70,
@@ -20504,6 +21058,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.4,
+"seasonGames": 38,
 "starts": 9,
 "perf": -0.4737
 },
@@ -20517,7 +21072,7 @@
 "player": "Neil Heaney",
 "pos": "MID",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 50,
 "GOL": 60,
@@ -20556,6 +21111,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.1,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.2116
 },
@@ -20608,6 +21164,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.9,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.3354
 },
@@ -20620,7 +21177,7 @@
 "clubPos": 17,
 "player": "Matt Robinson",
 "pos": "DEF",
-"ovr": 62,
+"ovr": 61,
 "tier": "bronze",
 "stats": {
 "CLN": 59,
@@ -20651,6 +21208,7 @@
 "THR": -0.4559,
 "DIF": -0.9463,
 "APP": -2.1166,
+"CON": 0.2932,
 "lp0": 0.0156,
 "lp1": 0.0197,
 "lp2": 0.013,
@@ -20658,6 +21216,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.9,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.3395
 },
@@ -20670,7 +21229,7 @@
 "clubPos": 17,
 "player": "Steve Basham",
 "pos": "FWD",
-"ovr": 61,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "GOL": 49,
@@ -20708,6 +21267,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.9,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.2102
 },
@@ -20760,6 +21320,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.9,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0994
 },
@@ -20772,8 +21333,8 @@
 "clubPos": 17,
 "player": "Chris Woods",
 "pos": "GK",
-"ovr": 65,
-"tier": "silver",
+"ovr": 64,
+"tier": "bronze",
 "stats": {
 "CLN": 41,
 "CON": 28,
@@ -20810,6 +21371,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.2,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.7845
 },
@@ -20822,7 +21384,7 @@
 "clubPos": 17,
 "player": "Neil Moss",
 "pos": "GK",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 71,
@@ -20860,6 +21422,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.0,
+"seasonGames": 38,
 "starts": 3,
 "perf": 0.1797
 },
@@ -20872,7 +21435,7 @@
 "clubPos": 17,
 "player": "Barry Venison",
 "pos": "DEF",
-"ovr": 64,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "CLN": 74,
@@ -20903,6 +21466,7 @@
 "THR": -0.3022,
 "DIF": -0.6195,
 "APP": -2.3374,
+"CON": 1.0832,
 "lp0": 0.0075,
 "lp1": 0.0868,
 "lp2": 0.5152,
@@ -20910,6 +21474,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.9,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.0594
 },
@@ -20922,7 +21487,7 @@
 "clubPos": 17,
 "player": "Russell Watkinson",
 "pos": "FWD",
-"ovr": 61,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "GOL": 52,
@@ -20960,6 +21525,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.5,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0521
 },
@@ -20972,7 +21538,7 @@
 "clubPos": 17,
 "player": "Ali Dia",
 "pos": "FWD",
-"ovr": 61,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "GOL": 52,
@@ -21010,6 +21576,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.6,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0751
 },
@@ -21062,6 +21629,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0141
 },
@@ -21114,6 +21682,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.0,
+"seasonGames": 38,
 "starts": 38,
 "perf": -0.1651
 },
@@ -21126,7 +21695,7 @@
 "clubPos": 19,
 "player": "Michael Gray",
 "pos": "DEF",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 72,
@@ -21157,6 +21726,7 @@
 "THR": 0.5881,
 "DIF": -0.8287,
 "APP": 0.7335,
+"CON": 0.1754,
 "lp0": 0.0794,
 "lp1": 0.0794,
 "lp2": 0.0794,
@@ -21164,6 +21734,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.2,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.2151
 },
@@ -21176,7 +21747,7 @@
 "clubPos": 19,
 "player": "Richard Ord",
 "pos": "DEF",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 76,
@@ -21207,6 +21778,7 @@
 "THR": -0.3099,
 "DIF": -0.9137,
 "APP": 0.9205,
+"CON": 0.0305,
 "lp0": 0.084,
 "lp1": 0.084,
 "lp2": 0.084,
@@ -21214,6 +21786,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.9,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.2384
 },
@@ -21226,7 +21799,7 @@
 "clubPos": 19,
 "player": "Kevin Ball",
 "pos": "MID",
-"ovr": 71,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "AST": 61,
@@ -21266,6 +21839,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.0,
+"seasonGames": 38,
 "starts": 32,
 "perf": -0.2674
 },
@@ -21309,6 +21883,7 @@
 "THR": -1.1151,
 "DIF": -0.9944,
 "APP": 0.7926,
+"CON": -0.0827,
 "lp0": 0.0809,
 "lp1": 0.0658,
 "lp2": 0.0844,
@@ -21316,6 +21891,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.7,
+"seasonGames": 38,
 "starts": 32,
 "perf": -0.6755
 },
@@ -21359,6 +21935,7 @@
 "THR": 0.1711,
 "DIF": -0.8884,
 "APP": 0.713,
+"CON": -1.1002,
 "lp0": 0.0789,
 "lp1": 0.0789,
 "lp2": 0.0789,
@@ -21366,6 +21943,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.0,
+"seasonGames": 38,
 "starts": 30,
 "perf": -0.0523
 },
@@ -21379,7 +21957,7 @@
 "player": "Dariusz Kubicki",
 "pos": "DEF",
 "ovr": 69,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 61,
 "THR": 42,
@@ -21409,6 +21987,7 @@
 "THR": -1.0801,
 "DIF": -0.8542,
 "APP": 0.4125,
+"CON": -1.1087,
 "lp0": 0.0717,
 "lp1": 0.0717,
 "lp2": 0.0717,
@@ -21416,6 +21995,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 27.2,
+"seasonGames": 38,
 "starts": 28,
 "perf": -0.2368
 },
@@ -21428,7 +22008,7 @@
 "clubPos": 19,
 "player": "Lionel Perez",
 "pos": "GK",
-"ovr": 70,
+"ovr": 72,
 "tier": "silver",
 "stats": {
 "CLN": 46,
@@ -21466,6 +22046,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.7,
+"seasonGames": 38,
 "starts": 28,
 "perf": -0.7293
 },
@@ -21478,8 +22059,8 @@
 "clubPos": 19,
 "player": "Craig Russell",
 "pos": "FWD",
-"ovr": 66,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "GOL": 58,
 "AST": 48,
@@ -21516,6 +22097,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.9,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.2258
 },
@@ -21529,7 +22111,7 @@
 "player": "Michael Bridges",
 "pos": "FWD",
 "ovr": 65,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "GOL": 54,
 "AST": 38,
@@ -21566,6 +22148,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.0,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.5524
 },
@@ -21579,7 +22162,7 @@
 "player": "David Kelly",
 "pos": "FWD",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "GOL": 36,
 "AST": 49,
@@ -21616,6 +22199,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 22.0,
+"seasonGames": 38,
 "starts": 23,
 "perf": -0.9353
 },
@@ -21628,8 +22212,8 @@
 "clubPos": 19,
 "player": "Paul Stewart",
 "pos": "MID",
-"ovr": 68,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "AST": 42,
 "GOL": 70,
@@ -21668,6 +22252,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.2,
+"seasonGames": 38,
 "starts": 20,
 "perf": -0.3734
 },
@@ -21681,7 +22266,7 @@
 "player": "Alex Rae",
 "pos": "MID",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 56,
 "GOL": 64,
@@ -21720,6 +22305,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.7,
+"seasonGames": 38,
 "starts": 12,
 "perf": -0.5529
 },
@@ -21733,7 +22319,7 @@
 "player": "Steve Agnew",
 "pos": "MID",
 "ovr": 67,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 45,
 "GOL": 67,
@@ -21772,6 +22358,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.2,
+"seasonGames": 38,
 "starts": 11,
 "perf": 0.0942
 },
@@ -21785,7 +22372,7 @@
 "player": "Martin Scott",
 "pos": "DEF",
 "ovr": 65,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 57,
 "THR": 69,
@@ -21815,6 +22402,7 @@
 "THR": 0.498,
 "DIF": -1.2403,
 "APP": -1.0005,
+"CON": 0.5237,
 "lp0": 0.0374,
 "lp1": 0.0374,
 "lp2": 0.0374,
@@ -21822,6 +22410,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 14.2,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.4284
 },
@@ -21834,7 +22423,7 @@
 "clubPos": 19,
 "player": "Lee Howey",
 "pos": "DEF",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 45,
@@ -21865,6 +22454,7 @@
 "THR": -0.7256,
 "DIF": -1.412,
 "APP": -1.5193,
+"CON": -0.3041,
 "lp0": 0.0249,
 "lp1": 0.0249,
 "lp2": 0.0249,
@@ -21872,6 +22462,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.4,
+"seasonGames": 38,
 "starts": 9,
 "perf": -0.7997
 },
@@ -21885,7 +22476,7 @@
 "player": "Niall Quinn",
 "pos": "FWD",
 "ovr": 67,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "GOL": 53,
 "AST": 55,
@@ -21922,6 +22513,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.3,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.3289
 },
@@ -21972,6 +22564,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.6,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.429
 },
@@ -21984,8 +22577,8 @@
 "clubPos": 19,
 "player": "Darren Williams",
 "pos": "DEF",
-"ovr": 65,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "CLN": 80,
 "THR": 76,
@@ -22015,6 +22608,7 @@
 "THR": 0.9309,
 "DIF": 0.1524,
 "APP": -1.5061,
+"CON": 3.3408,
 "lp0": 0.0252,
 "lp1": 0.0252,
 "lp2": 0.0252,
@@ -22022,6 +22616,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.6,
+"seasonGames": 38,
 "starts": 10,
 "perf": 0.3371
 },
@@ -22034,8 +22629,8 @@
 "clubPos": 19,
 "player": "Tony Coton",
 "pos": "GK",
-"ovr": 67,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "CLN": 85,
 "CON": 89,
@@ -22072,6 +22667,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.3,
+"seasonGames": 38,
 "starts": 10,
 "perf": 0.6963
 },
@@ -22084,7 +22680,7 @@
 "clubPos": 19,
 "player": "John Mullin",
 "pos": "MID",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 47,
@@ -22124,6 +22720,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.0,
+"seasonGames": 38,
 "starts": 9,
 "perf": -0.3879
 },
@@ -22176,6 +22773,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.8,
+"seasonGames": 38,
 "starts": 7,
 "perf": 0.462
 },
@@ -22228,6 +22826,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.4,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.0697
 },
@@ -22280,6 +22879,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.8,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0932
 },
@@ -22323,6 +22923,7 @@
 "THR": -0.2178,
 "DIF": -0.565,
 "APP": -2.4364,
+"CON": 0.6563,
 "lp0": 0.0026,
 "lp1": 0.0026,
 "lp2": 0.0026,
@@ -22330,6 +22931,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1818
 },
@@ -22342,8 +22944,8 @@
 "clubPos": 10,
 "player": "Sol Campbell",
 "pos": "DEF",
-"ovr": 79,
-"tier": "gold",
+"ovr": 77,
+"tier": "silver",
 "stats": {
 "CLN": 67,
 "THR": 46,
@@ -22373,6 +22975,7 @@
 "THR": -0.8116,
 "DIF": -0.5544,
 "APP": 1.5637,
+"CON": -0.2184,
 "lp0": 0.5476,
 "lp1": 0.5303,
 "lp2": 0.5195,
@@ -22380,6 +22983,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 37.8,
+"seasonGames": 38,
 "starts": 38,
 "perf": 0.1414
 },
@@ -22392,7 +22996,7 @@
 "clubPos": 10,
 "player": "Ian Walker",
 "pos": "GK",
-"ovr": 82,
+"ovr": 81,
 "tier": "best",
 "stats": {
 "CLN": 71,
@@ -22430,6 +23034,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.5,
+"seasonGames": 38,
 "starts": 37,
 "perf": 0.2465
 },
@@ -22442,8 +23047,8 @@
 "clubPos": 10,
 "player": "Colin Calderwood",
 "pos": "DEF",
-"ovr": 77,
-"tier": "gold",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "CLN": 71,
 "THR": 41,
@@ -22473,6 +23078,7 @@
 "THR": -1.1358,
 "DIF": -0.6485,
 "APP": 1.0508,
+"CON": -0.0823,
 "lp0": 0.4792,
 "lp1": 0.4961,
 "lp2": 0.6234,
@@ -22480,6 +23086,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 33.1,
+"seasonGames": 38,
 "starts": 33,
 "perf": 0.1317
 },
@@ -22493,7 +23100,7 @@
 "player": "Andy Sinton",
 "pos": "MID",
 "ovr": 76,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "AST": 55,
 "GOL": 79,
@@ -22532,6 +23139,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.3,
+"seasonGames": 38,
 "starts": 32,
 "perf": -0.058
 },
@@ -22544,8 +23152,8 @@
 "clubPos": 10,
 "player": "David Howells",
 "pos": "MID",
-"ovr": 77,
-"tier": "gold",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "AST": 54,
 "GOL": 49,
@@ -22584,6 +23192,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 30.6,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.0658
 },
@@ -22597,7 +23206,7 @@
 "player": "Allan Nielsen",
 "pos": "MID",
 "ovr": 77,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "AST": 65,
 "GOL": 80,
@@ -22636,6 +23245,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.4,
+"seasonGames": 38,
 "starts": 28,
 "perf": 0.2779
 },
@@ -22686,6 +23296,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 29.0,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.4764
 },
@@ -22729,6 +23340,7 @@
 "THR": 0.9567,
 "DIF": -0.553,
 "APP": 0.0481,
+"CON": -1.789,
 "lp0": 0.3456,
 "lp1": 0.3456,
 "lp2": 0.3456,
@@ -22736,6 +23348,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.9,
+"seasonGames": 38,
 "starts": 24,
 "perf": -0.2785
 },
@@ -22779,6 +23392,7 @@
 "THR": -0.0243,
 "DIF": -0.5504,
 "APP": 0.0023,
+"CON": -0.4925,
 "lp0": 0.3395,
 "lp1": 0.4789,
 "lp2": 0.5844,
@@ -22786,6 +23400,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.5,
+"seasonGames": 38,
 "starts": 23,
 "perf": -0.0772
 },
@@ -22799,7 +23414,7 @@
 "player": "Ruel Fox",
 "pos": "MID",
 "ovr": 76,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "AST": 72,
 "GOL": 61,
@@ -22838,6 +23453,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.7,
+"seasonGames": 38,
 "starts": 19,
 "perf": -0.0277
 },
@@ -22881,6 +23497,7 @@
 "THR": -1.0067,
 "DIF": -0.6088,
 "APP": -0.2125,
+"CON": 1.8908,
 "lp0": 0.3109,
 "lp1": 0.3763,
 "lp2": 0.5368,
@@ -22888,6 +23505,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.5,
+"seasonGames": 38,
 "starts": 21,
 "perf": -0.0312
 },
@@ -22900,8 +23518,8 @@
 "clubPos": 10,
 "player": "Ronny Rosenthal",
 "pos": "FWD",
-"ovr": 67,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "GOL": 38,
 "AST": 57,
@@ -22938,6 +23556,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.4,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.6703
 },
@@ -22990,6 +23609,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.3,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.2034
 },
@@ -23002,7 +23622,7 @@
 "clubPos": 10,
 "player": "Darren Anderton",
 "pos": "MID",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "AST": 69,
@@ -23042,6 +23662,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.7,
+"seasonGames": 38,
 "starts": 14,
 "perf": 0.3264
 },
@@ -23054,7 +23675,7 @@
 "clubPos": 10,
 "player": "Steffen Iversen",
 "pos": "FWD",
-"ovr": 72,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "GOL": 63,
@@ -23092,6 +23713,7 @@
 "awards": 0,
 "ucl": 0.6,
 "games": 15.9,
+"seasonGames": 38,
 "starts": 16,
 "perf": 0.0197
 },
@@ -23105,7 +23727,7 @@
 "player": "Dean Austin",
 "pos": "DEF",
 "ovr": 69,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 65,
 "THR": 46,
@@ -23135,6 +23757,7 @@
 "THR": -0.8511,
 "DIF": -0.9076,
 "APP": -1.0741,
+"CON": 0.009,
 "lp0": 0.196,
 "lp1": 0.4789,
 "lp2": 0.4156,
@@ -23142,6 +23765,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.5,
+"seasonGames": 38,
 "starts": 13,
 "perf": -0.2923
 },
@@ -23154,8 +23778,8 @@
 "clubPos": 10,
 "player": "Rory Allen",
 "pos": "FWD",
-"ovr": 65,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "GOL": 51,
 "AST": 40,
@@ -23192,6 +23816,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 9.6,
+"seasonGames": 38,
 "starts": 9,
 "perf": -0.6135
 },
@@ -23204,7 +23829,7 @@
 "clubPos": 10,
 "player": "Chris Armstrong",
 "pos": "FWD",
-"ovr": 73,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "GOL": 72,
@@ -23242,6 +23867,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.8,
+"seasonGames": 38,
 "starts": 12,
 "perf": 0.2317
 },
@@ -23254,7 +23880,7 @@
 "clubPos": 10,
 "player": "John Scales",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 49,
@@ -23285,6 +23911,7 @@
 "THR": -0.7473,
 "DIF": -0.466,
 "APP": -1.453,
+"CON": 0.1839,
 "lp0": 0.1455,
 "lp1": 0.6395,
 "lp2": 0.7652,
@@ -23292,6 +23919,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.1,
+"seasonGames": 38,
 "starts": 10,
 "perf": -0.5121
 },
@@ -23304,8 +23932,8 @@
 "clubPos": 10,
 "player": "Stuart Nethercott",
 "pos": "DEF",
-"ovr": 66,
-"tier": "silver",
+"ovr": 65,
+"tier": "bronze",
 "stats": {
 "CLN": 31,
 "THR": 53,
@@ -23335,6 +23963,7 @@
 "THR": -0.3772,
 "DIF": 0.3685,
 "APP": -2.2373,
+"CON": -0.5516,
 "lp0": 0.041,
 "lp1": 0.2224,
 "lp2": 0.2944,
@@ -23342,6 +23971,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.8,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.5103
 },
@@ -23354,7 +23984,7 @@
 "clubPos": 10,
 "player": "Ramon Vega",
 "pos": "DEF",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 32,
@@ -23385,6 +24015,7 @@
 "THR": 1.2881,
 "DIF": -0.8533,
 "APP": -1.8053,
+"CON": 1.0202,
 "lp0": 0.0986,
 "lp1": 0.0986,
 "lp2": 0.0986,
@@ -23392,6 +24023,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.8,
+"seasonGames": 38,
 "starts": 8,
 "perf": -0.8163
 },
@@ -23404,7 +24036,7 @@
 "clubPos": 10,
 "player": "Neale Fenn",
 "pos": "FWD",
-"ovr": 61,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "GOL": 51,
@@ -23442,6 +24074,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.9,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.1148
 },
@@ -23454,7 +24087,7 @@
 "clubPos": 10,
 "player": "Paul McVeigh",
 "pos": "FWD",
-"ovr": 62,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "GOL": 58,
@@ -23492,6 +24125,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.9,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.1601
 },
@@ -23504,7 +24138,7 @@
 "clubPos": 10,
 "player": "Espen Baardsen",
 "pos": "GK",
-"ovr": 61,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 38,
@@ -23542,6 +24176,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.5,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.232
 },
@@ -23585,6 +24220,7 @@
 "THR": -0.1908,
 "DIF": -0.452,
 "APP": -2.4653,
+"CON": 0.2052,
 "lp0": 0.0106,
 "lp1": 0.0106,
 "lp2": 0.0106,
@@ -23592,6 +24228,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.7,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.1708
 },
@@ -23604,8 +24241,8 @@
 "clubPos": 10,
 "player": "Gary Mabbutt",
 "pos": "DEF",
-"ovr": 68,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "CLN": 43,
 "THR": 58,
@@ -23635,6 +24272,7 @@
 "THR": -0.1332,
 "DIF": 0.0027,
 "APP": -2.5233,
+"CON": 0.4278,
 "lp0": 0.0029,
 "lp1": 0.5474,
 "lp2": 0.6234,
@@ -23642,6 +24280,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.2,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.0404
 },
@@ -23654,7 +24293,7 @@
 "clubPos": 14,
 "player": "Ludek Miklosko",
 "pos": "GK",
-"ovr": 77,
+"ovr": 78,
 "tier": "best",
 "stats": {
 "CLN": 52,
@@ -23692,6 +24331,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.0,
+"seasonGames": 38,
 "starts": 36,
 "perf": -0.1285
 },
@@ -23735,6 +24375,7 @@
 "THR": -0.3798,
 "DIF": -1.1327,
 "APP": 1.2161,
+"CON": 0.315,
 "lp0": 0.3646,
 "lp1": 0.1882,
 "lp2": 0.3646,
@@ -23742,6 +24383,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 34.6,
+"seasonGames": 38,
 "starts": 35,
 "perf": -0.0469
 },
@@ -23755,7 +24397,7 @@
 "player": "Michael Hughes",
 "pos": "MID",
 "ovr": 75,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "AST": 81,
 "GOL": 53,
@@ -23794,6 +24436,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.2,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.0793
 },
@@ -23807,7 +24450,7 @@
 "player": "Julian Dicks",
 "pos": "DEF",
 "ovr": 75,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 47,
 "THR": 90,
@@ -23837,6 +24480,7 @@
 "THR": 2.2147,
 "DIF": -0.9902,
 "APP": 0.8216,
+"CON": -0.3761,
 "lp0": 0.3263,
 "lp1": 0.4921,
 "lp2": 0.2197,
@@ -23844,6 +24488,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.0,
+"seasonGames": 38,
 "starts": 31,
 "perf": -0.2654
 },
@@ -23896,6 +24541,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.7,
+"seasonGames": 38,
 "starts": 26,
 "perf": -0.2223
 },
@@ -23939,6 +24585,7 @@
 "THR": -0.5531,
 "DIF": -0.5134,
 "APP": 0.0976,
+"CON": -0.0767,
 "lp0": 0.2561,
 "lp1": 0.5211,
 "lp2": 0.1591,
@@ -23946,6 +24593,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.3,
+"seasonGames": 38,
 "starts": 26,
 "perf": -0.0619
 },
@@ -23998,6 +24646,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 24.2,
+"seasonGames": 38,
 "starts": 26,
 "perf": 0.2689
 },
@@ -24010,7 +24659,7 @@
 "clubPos": 14,
 "player": "Tim Breacker",
 "pos": "DEF",
-"ovr": 71,
+"ovr": 70,
 "tier": "silver",
 "stats": {
 "CLN": 40,
@@ -24041,6 +24690,7 @@
 "THR": -0.463,
 "DIF": -0.9583,
 "APP": -0.2427,
+"CON": -0.5917,
 "lp0": 0.2232,
 "lp1": 0.3184,
 "lp2": 0.25,
@@ -24048,6 +24698,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 21.2,
+"seasonGames": 38,
 "starts": 22,
 "perf": -0.7828
 },
@@ -24098,6 +24749,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 19.2,
+"seasonGames": 38,
 "starts": 18,
 "perf": -0.5873
 },
@@ -24110,7 +24762,7 @@
 "clubPos": 14,
 "player": "Hugo Porfirio",
 "pos": "MID",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "AST": 74,
@@ -24150,6 +24802,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.1,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.0121
 },
@@ -24163,7 +24816,7 @@
 "player": "Stan Lazaridis",
 "pos": "MID",
 "ovr": 67,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 57,
 "GOL": 54,
@@ -24202,6 +24855,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.9,
+"seasonGames": 38,
 "starts": 13,
 "perf": -0.4175
 },
@@ -24214,7 +24868,7 @@
 "clubPos": 14,
 "player": "Steve Potts",
 "pos": "DEF",
-"ovr": 72,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 50,
@@ -24245,6 +24899,7 @@
 "THR": -0.9374,
 "DIF": 0.09,
 "APP": -0.6542,
+"CON": -0.3169,
 "lp0": 0.1833,
 "lp1": 0.4921,
 "lp2": 0.3182,
@@ -24252,6 +24907,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 17.4,
+"seasonGames": 38,
 "starts": 17,
 "perf": -0.3437
 },
@@ -24265,7 +24921,7 @@
 "player": "Mark Bowen",
 "pos": "DEF",
 "ovr": 68,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 66,
 "THR": 58,
@@ -24295,6 +24951,7 @@
 "THR": -0.1404,
 "DIF": -0.0563,
 "APP": -1.0934,
+"CON": -1.76,
 "lp0": 0.1407,
 "lp1": 0.1407,
 "lp2": 0.1169,
@@ -24302,6 +24959,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.4,
+"seasonGames": 38,
 "starts": 15,
 "perf": -0.0232
 },
@@ -24315,7 +24973,7 @@
 "player": "Rio Ferdinand",
 "pos": "DEF",
 "ovr": 67,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 42,
 "THR": 73,
@@ -24345,6 +25003,7 @@
 "THR": 0.741,
 "DIF": 0.3549,
 "APP": -1.3082,
+"CON": 0.8396,
 "lp0": 0.1199,
 "lp1": 0.0145,
 "lp2": 0.1199,
@@ -24352,6 +25011,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.4,
+"seasonGames": 38,
 "starts": 11,
 "perf": -0.3759
 },
@@ -24365,7 +25025,7 @@
 "player": "Danny Williamson",
 "pos": "MID",
 "ovr": 68,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 57,
 "GOL": 49,
@@ -24404,6 +25064,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.7,
+"seasonGames": 38,
 "starts": 13,
 "perf": -0.6514
 },
@@ -24416,7 +25077,7 @@
 "clubPos": 14,
 "player": "Paul Kitson",
 "pos": "FWD",
-"ovr": 73,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "GOL": 78,
@@ -24454,6 +25115,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 13.7,
+"seasonGames": 38,
 "starts": 14,
 "perf": 0.5069
 },
@@ -24466,8 +25128,8 @@
 "clubPos": 14,
 "player": "Keith Rowland",
 "pos": "DEF",
-"ovr": 66,
-"tier": "silver",
+"ovr": 65,
+"tier": "bronze",
 "stats": {
 "CLN": 47,
 "THR": 61,
@@ -24497,6 +25159,7 @@
 "THR": 0.0704,
 "DIF": -1.7812,
 "APP": -1.4614,
+"CON": -1.7543,
 "lp0": 0.105,
 "lp1": 0.3329,
 "lp2": 0.0909,
@@ -24504,6 +25167,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 10.0,
+"seasonGames": 38,
 "starts": 11,
 "perf": -0.7736
 },
@@ -24556,6 +25220,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.7,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.2677
 },
@@ -24568,7 +25233,7 @@
 "clubPos": 14,
 "player": "John Hartson",
 "pos": "FWD",
-"ovr": 71,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "GOL": 71,
@@ -24606,6 +25271,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.0,
+"seasonGames": 38,
 "starts": 11,
 "perf": 0.2648
 },
@@ -24618,7 +25284,7 @@
 "clubPos": 14,
 "player": "Florin Raducioiu",
 "pos": "FWD",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "GOL": 56,
@@ -24656,6 +25322,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.8,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.3626
 },
@@ -24668,7 +25335,7 @@
 "clubPos": 14,
 "player": "Paulo Futre",
 "pos": "FWD",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "GOL": 45,
@@ -24706,6 +25373,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.1,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.3743
 },
@@ -24718,7 +25386,7 @@
 "clubPos": 14,
 "player": "Steve Jones",
 "pos": "FWD",
-"ovr": 62,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "GOL": 45,
@@ -24756,6 +25424,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.0,
+"seasonGames": 38,
 "starts": 5,
 "perf": -0.5984
 },
@@ -24769,7 +25438,7 @@
 "player": "Ilie Dumitrescu",
 "pos": "MID",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 52,
 "GOL": 72,
@@ -24808,6 +25477,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 3.4,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.2181
 },
@@ -24821,7 +25491,7 @@
 "player": "Richard Hall",
 "pos": "DEF",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 82,
 "THR": 49,
@@ -24851,6 +25521,7 @@
 "THR": -0.625,
 "DIF": -0.208,
 "APP": -1.7848,
+"CON": 0.7828,
 "lp0": 0.0737,
 "lp1": 0.1184,
 "lp2": 0.4805,
@@ -24858,6 +25529,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.0,
+"seasonGames": 38,
 "starts": 7,
 "perf": 0.1512
 },
@@ -24871,7 +25543,7 @@
 "player": "Steve Lomas",
 "pos": "MID",
 "ovr": 67,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 65,
 "GOL": 43,
@@ -24910,6 +25582,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 7.0,
+"seasonGames": 38,
 "starts": 7,
 "perf": -0.0796
 },
@@ -24923,7 +25596,7 @@
 "player": "Mike Newell",
 "pos": "FWD",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "GOL": 40,
 "AST": 43,
@@ -24960,6 +25633,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 6.0,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.7269
 },
@@ -24972,8 +25646,8 @@
 "clubPos": 14,
 "player": "Tony Cottee",
 "pos": "FWD",
-"ovr": 68,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "GOL": 63,
 "AST": 49,
@@ -25010,6 +25684,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.2,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.1008
 },
@@ -25022,8 +25697,8 @@
 "clubPos": 14,
 "player": "Robbie Slater",
 "pos": "MID",
-"ovr": 66,
-"tier": "silver",
+"ovr": 65,
+"tier": "bronze",
 "stats": {
 "AST": 54,
 "GOL": 43,
@@ -25062,6 +25737,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.1,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.2265
 },
@@ -25112,6 +25788,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": -0.1323
 },
@@ -25124,7 +25801,7 @@
 "clubPos": 14,
 "player": "Lee Boylan",
 "pos": "FWD",
-"ovr": 61,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "GOL": 54,
@@ -25162,6 +25839,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.0,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0013
 },
@@ -25175,7 +25853,7 @@
 "player": "Steve Mautone",
 "pos": "GK",
 "ovr": 65,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "CLN": 87,
 "CON": 74,
@@ -25212,6 +25890,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 1.0,
+"seasonGames": 38,
 "starts": 1,
 "perf": 0.1314
 },
@@ -25264,6 +25943,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.1,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0072
 },
@@ -25276,8 +25956,8 @@
 "clubPos": 8,
 "player": "Chris Perry",
 "pos": "DEF",
-"ovr": 78,
-"tier": "gold",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "CLN": 64,
 "THR": 46,
@@ -25307,6 +25987,7 @@
 "THR": -0.7956,
 "DIF": 0.1764,
 "APP": 1.4418,
+"CON": 0.5389,
 "lp0": 0.628,
 "lp1": 0.3408,
 "lp2": 0.3333,
@@ -25314,6 +25995,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.7,
+"seasonGames": 38,
 "starts": 37,
 "perf": 0.2538
 },
@@ -25326,8 +26008,8 @@
 "clubPos": 8,
 "player": "Kenny Cunningham",
 "pos": "DEF",
-"ovr": 78,
-"tier": "gold",
+"ovr": 77,
+"tier": "silver",
 "stats": {
 "CLN": 68,
 "THR": 53,
@@ -25357,6 +26039,7 @@
 "THR": -0.3883,
 "DIF": 0.4817,
 "APP": 1.2548,
+"CON": 0.3516,
 "lp0": 0.5985,
 "lp1": 0.3039,
 "lp2": 0.4242,
@@ -25364,6 +26047,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 35.0,
+"seasonGames": 38,
 "starts": 36,
 "perf": 0.4495
 },
@@ -25376,8 +26060,8 @@
 "clubPos": 8,
 "player": "Marcus Gayle",
 "pos": "FWD",
-"ovr": 77,
-"tier": "gold",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "GOL": 49,
 "AST": 56,
@@ -25414,6 +26098,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.2,
+"seasonGames": 38,
 "starts": 34,
 "perf": -0.112
 },
@@ -25427,7 +26112,7 @@
 "player": "Neil Sullivan",
 "pos": "GK",
 "ovr": 78,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "CLN": 65,
 "CON": 65,
@@ -25464,6 +26149,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 36.0,
+"seasonGames": 38,
 "starts": 36,
 "perf": 0.3855
 },
@@ -25477,7 +26163,7 @@
 "player": "Neal Ardley",
 "pos": "MID",
 "ovr": 78,
-"tier": "gold",
+"tier": "silver",
 "stats": {
 "AST": 96,
 "GOL": 50,
@@ -25516,6 +26202,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 32.4,
+"seasonGames": 38,
 "starts": 33,
 "perf": 1.0268
 },
@@ -25568,6 +26255,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 31.3,
+"seasonGames": 38,
 "starts": 32,
 "perf": 0.4713
 },
@@ -25580,8 +26268,8 @@
 "clubPos": 8,
 "player": "Alan Kimble",
 "pos": "DEF",
-"ovr": 76,
-"tier": "gold",
+"ovr": 75,
+"tier": "silver",
 "stats": {
 "CLN": 48,
 "THR": 64,
@@ -25611,6 +26299,7 @@
 "THR": 0.2419,
 "DIF": 0.6092,
 "APP": 0.5284,
+"CON": -0.0775,
 "lp0": 0.4841,
 "lp1": 0.2855,
 "lp2": 0.3939,
@@ -25618,6 +26307,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 28.3,
+"seasonGames": 38,
 "starts": 28,
 "perf": -0.0268
 },
@@ -25630,8 +26320,8 @@
 "clubPos": 8,
 "player": "Efan Ekoku",
 "pos": "FWD",
-"ovr": 78,
-"tier": "gold",
+"ovr": 79,
+"tier": "silver",
 "stats": {
 "GOL": 72,
 "AST": 46,
@@ -25668,6 +26358,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.3,
+"seasonGames": 38,
 "starts": 28,
 "perf": 0.5389
 },
@@ -25680,8 +26371,8 @@
 "clubPos": 8,
 "player": "Vinnie Jones",
 "pos": "MID",
-"ovr": 77,
-"tier": "gold",
+"ovr": 76,
+"tier": "silver",
 "stats": {
 "AST": 48,
 "GOL": 59,
@@ -25720,6 +26411,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 26.6,
+"seasonGames": 38,
 "starts": 29,
 "perf": 0.2827
 },
@@ -25763,6 +26455,7 @@
 "THR": -0.0049,
 "DIF": 0.3144,
 "APP": -0.0472,
+"CON": -0.4737,
 "lp0": 0.3934,
 "lp1": 0.0737,
 "lp2": 0.3934,
@@ -25770,6 +26463,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 23.0,
+"seasonGames": 38,
 "starts": 22,
 "perf": -0.3655
 },
@@ -25782,8 +26476,8 @@
 "clubPos": 8,
 "player": "Oyvind Leonhardsen",
 "pos": "MID",
-"ovr": 76,
-"tier": "gold",
+"ovr": 77,
+"tier": "silver",
 "stats": {
 "AST": 57,
 "GOL": 80,
@@ -25822,6 +26516,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 25.6,
+"seasonGames": 38,
 "starts": 27,
 "perf": 0.3501
 },
@@ -25834,7 +26529,7 @@
 "clubPos": 8,
 "player": "Dean Holdsworth",
 "pos": "FWD",
-"ovr": 73,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "GOL": 72,
@@ -25872,6 +26567,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 12.2,
+"seasonGames": 38,
 "starts": 10,
 "perf": 0.2327
 },
@@ -25884,7 +26580,7 @@
 "clubPos": 8,
 "player": "Brian McAllister",
 "pos": "DEF",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "CLN": 66,
@@ -25915,6 +26611,7 @@
 "THR": -0.9651,
 "DIF": 1.0369,
 "APP": -0.4913,
+"CON": 0.5543,
 "lp0": 0.3235,
 "lp1": 0.0184,
 "lp2": 0.3235,
@@ -25922,6 +26619,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 18.9,
+"seasonGames": 38,
 "starts": 19,
 "perf": 0.2535
 },
@@ -25935,7 +26633,7 @@
 "player": "Peter Fear",
 "pos": "MID",
 "ovr": 66,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "AST": 45,
 "GOL": 39,
@@ -25974,6 +26672,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 11.6,
+"seasonGames": 38,
 "starts": 9,
 "perf": -0.1234
 },
@@ -25986,8 +26685,8 @@
 "clubPos": 8,
 "player": "Jon Goodman",
 "pos": "FWD",
-"ovr": 65,
-"tier": "silver",
+"ovr": 66,
+"tier": "bronze",
 "stats": {
 "GOL": 48,
 "AST": 44,
@@ -26024,6 +26723,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.6,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.5015
 },
@@ -26037,7 +26737,7 @@
 "player": "Mick Harford",
 "pos": "FWD",
 "ovr": 67,
-"tier": "silver",
+"tier": "bronze",
 "stats": {
 "GOL": 51,
 "AST": 64,
@@ -26074,6 +26774,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.5,
+"seasonGames": 38,
 "starts": 3,
 "perf": -0.179
 },
@@ -26086,7 +26787,7 @@
 "clubPos": 8,
 "player": "Andy Clarke",
 "pos": "FWD",
-"ovr": 64,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "GOL": 40,
@@ -26124,6 +26825,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.5,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.4951
 },
@@ -26136,8 +26838,8 @@
 "clubPos": 8,
 "player": "Ben Thatcher",
 "pos": "DEF",
-"ovr": 66,
-"tier": "silver",
+"ovr": 67,
+"tier": "bronze",
 "stats": {
 "CLN": 83,
 "THR": 48,
@@ -26167,6 +26869,7 @@
 "THR": -0.7057,
 "DIF": 0.4178,
 "APP": -1.5773,
+"CON": 0.2474,
 "lp0": 0.1524,
 "lp1": 0.1524,
 "lp2": 0.1524,
@@ -26174,6 +26877,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 8.9,
+"seasonGames": 38,
 "starts": 9,
 "perf": 0.3428
 },
@@ -26186,7 +26890,7 @@
 "clubPos": 8,
 "player": "Jason Euell",
 "pos": "FWD",
-"ovr": 64,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "GOL": 59,
@@ -26224,6 +26928,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.0,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.2646
 },
@@ -26276,6 +26981,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 4.5,
+"seasonGames": 38,
 "starts": 4,
 "perf": -0.4092
 },
@@ -26288,7 +26994,7 @@
 "clubPos": 8,
 "player": "Duncan Jupp",
 "pos": "DEF",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "CLN": 42,
@@ -26319,6 +27025,7 @@
 "THR": -0.5685,
 "DIF": -0.6054,
 "APP": -1.9091,
+"CON": -0.0884,
 "lp0": 0.1002,
 "lp1": 0.1002,
 "lp2": 0.1002,
@@ -26326,6 +27033,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 5.9,
+"seasonGames": 38,
 "starts": 6,
 "perf": -0.6001
 },
@@ -26376,6 +27084,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 2.3,
+"seasonGames": 38,
 "starts": 2,
 "perf": -0.3315
 },
@@ -26388,8 +27097,8 @@
 "clubPos": 8,
 "player": "Alan Reeves",
 "pos": "DEF",
-"ovr": 66,
-"tier": "silver",
+"ovr": 65,
+"tier": "bronze",
 "stats": {
 "CLN": 53,
 "THR": 81,
@@ -26419,6 +27128,7 @@
 "THR": 1.3195,
 "DIF": -0.1952,
 "APP": -2.516,
+"CON": -1.4759,
 "lp0": 0.0046,
 "lp1": 0.2211,
 "lp2": 0.4697,
@@ -26426,6 +27136,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.3,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0309
 },
@@ -26438,7 +27149,7 @@
 "clubPos": 8,
 "player": "Carl Cort",
 "pos": "FWD",
-"ovr": 61,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "GOL": 53,
@@ -26476,6 +27187,7 @@
 "awards": 0,
 "ucl": 0.0,
 "games": 0.2,
+"seasonGames": 38,
 "starts": 0,
 "perf": -0.0271
 },

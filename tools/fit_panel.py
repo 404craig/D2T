@@ -97,9 +97,11 @@ for n, v in sorted(zip(NAMES, w[1:]), key=lambda z: -abs(z[1]))[:14]:
 tp = f(np.array([a for a, _ in allp])); ty = np.array([b for _, b in allp], float)
 stretch = ty.std() / tp.std()
 print(f"stretch x{stretch:.2f} around {ty.mean():.1f}")
-final = lambda Xn: ty.mean() + (f(Xn) - tp.mean()) * stretch
+def final(Xn):
+    v = ty.mean() + (f(Xn) - tp.mean()) * stretch
+    return np.where(v > 90, 90 + (v - 90) * 0.6, v)  # soft ceiling: the very top is scarce, as in FIFA
 st = final(np.array([a for a, _ in allp]))
-print(f"all three seasons after stretch: agreement {spearman(list(st), list(ty)):.3f}, avg gap {np.mean(np.abs(st - ty)):.1f}")
+print(f"all panel seasons after stretch: agreement {spearman(list(st), list(ty)):.3f}, avg gap {np.mean(np.abs(st - ty)):.1f}")
 if "--write" in sys.argv:
     for t, (rated, _) in data.items():
         p = final(np.array([features(r) for r in rated]))
@@ -113,6 +115,6 @@ if "--write" in sys.argv:
             if not b or q["ovr"] > b["ovr"]:
                 best_by[q["club"]] = q
         for q in out:
-            q["tier"] = "best" if best_by[q["club"]] is q else "gold" if q["ovr"] >= 75 else "silver" if q["ovr"] >= 65 else "bronze"
+            q["tier"] = "best" if best_by[q["club"]] is q else "gold" if q["ovr"] >= 80 else "silver" if q["ovr"] >= 70 else "bronze"
         json.dump({"season": t, "players": out}, open(f"docs/cards/feed/rated_fit_{t}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=0)
     print("wrote rated_fit_*.json")

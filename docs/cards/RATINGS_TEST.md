@@ -114,3 +114,22 @@ Results (panel in brackets): 2019/20 De Bruyne 97 (94), Salah 93 (91), Van Dijk 
 
 Still off: holding midfielders (Fabinho, Mascherano) and stars at weak clubs (Given 73 against 86, Modric, Juninho, Ravanelli) a few points low; utility players at strong clubs (O'Shea, Phil Neville) about 8 high. With a 75.7 average, the gold cut-off at 75 makes over half the cards gold, so tier thresholds need moving (for example gold 82+, silver 72 to 81).
 Caution: three seasons and 383 panel players is a small training set, and the panel is opinion. More blind-panel seasons would make the weights sturdier.
+
+## Eight seasons (10 October 2026, later still)
+
+Added 1994/95, 2001/02, 2004/05, 2013/14 and 2023/24: feed stats and match line-ups for every player (all 2,282 matches rebuild their final scores), and blind panels for ten clubs per season picked by final position (1st, 2nd, 3rd, 4th, 6th, 8th, 11th, 14th, 17th, bottom). The panel now covers 1,360 player-seasons across 60 club-seasons.
+
+Defenders also get goals conceded while on the pitch as a learning input. The fitted ratings are stretched back to the panel's spread, with a soft ceiling above 90 (each point above 90 counts 0.6), so the top stays scarce.
+
+**Leave-one-season-out** (each season predicted by a model trained on the other seven): agreement 0.867, average gap 2.6 points. By season: 1994/95 0.885, 1996/97 0.871, 2001/02 0.786, 2004/05 0.865, 2008/09 0.885, 2013/14 0.912, 2019/20 0.951, 2023/24 0.895. The weights carry across eras, so they can be trusted on the 26 seasons without a panel.
+
+| On all 1,360 panel players | Agreement | Club order | Avg gap |
+|---|---|---|---|
+| v5 hand-tuned | 0.821 | 0.641 | 5.1 |
+| Learned weights | 0.884 | 0.821 | 2.5 |
+
+**Top of each season:** 1994/95 Shearer 95; 1996/97 Shearer 93, Beckham 90; 2001/02 Henry 93, Pires 91; 2004/05 Henry 97, Lampard 96, Cech 91, Terry 90; 2008/09 Gerrard and Ronaldo 93, Anelka, Lampard, Torres, Rooney 91; 2013/14 Suarez 94, Yaya Toure and Aguero 91; 2019/20 De Bruyne 94, Salah 92, Mane 90; 2023/24 Haaland 95, Foden 93, Saka 91, Rodri 90.
+
+**Spread per season:** 90+ 1 to 6 players, 85+ 14 to 24, 80+ 49 to 69. Card tiers now gold 80+, silver 70 to 79, bronze under 70 (plus the club's best card).
+
+**Biggest remaining misses (8 or 9 points):** quality players with injury-hit seasons rated low (Laporte 77 against 85, Carvalho, Essien, Konate, Lisandro Martinez, Palhinha) and ever-present workhorses rated high (Kuyt 89 against 80, O'Shea 85 against 76, Giroud 89 against 81). Van Dijk 88 sits one point under Henderson 89 in 2019/20 (panel 92 against 89).

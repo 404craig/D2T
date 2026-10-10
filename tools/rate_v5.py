@@ -221,6 +221,9 @@ for pos, w in WEIGHTS.items():
     scales = {k: zscale(pos, k) for k in w}
     for r in [r for r in rows if r["position"] == pos]:
         r["z"] = {k: (r[k] - scales[k][0]) / scales[k][1] for k in w}
+        if pos == "DEF":  # goals conceded while on the pitch: a learning input for defenders, not a card stat
+            cm, cs_ = zscale(pos, "CON")
+            r["z_con"] = (r["CON"] - cm) / cs_
         r["face"] = {k: round(60 + 39 * math.tanh(r["z"][k] / 2.2)) for k in w}
         perf = sum(r["z"][k] * v for k, v in w.items()) / sum(w.values())
         r["role"] = ""
@@ -255,7 +258,7 @@ for r in rows:
                      "ovr": r["ovr"], "tier": tier, "stats": r["face"], "apps": r["apps"], "goals": r["goals"],
                      "assists": r["goal_assist"], "cleanSheets": r["clean_sheet"], "wdl": [r["wins"], r["draws"], r["losses"]],
                      "withPPG": r["with_ppg"], "withoutPPG": r["without_ppg"], "withoutGames": r["without_g"],
-                     "minutes": r["mins_played"], "goalsConceded": r["goals_conceded"], "awardsPts": r["awards_pts"], "role": r.get("role", ""), "lpPoints": r["lp"], "feat": {**{k: round(v, 4) for k, v in r["z"].items()}, **{k: round(v, 4) for k, v in r["feat_rep"].items()},
+                     "minutes": r["mins_played"], "goalsConceded": r["goals_conceded"], "awardsPts": r["awards_pts"], "role": r.get("role", ""), "lpPoints": r["lp"], "feat": {**{k: round(v, 4) for k, v in r["z"].items()}, **({"CON": round(r["z_con"], 4)} if "z_con" in r else {}), **{k: round(v, 4) for k, v in r["feat_rep"].items()},
                      "games": round(r["games"], 1), "seasonGames": G, "starts": int(r["lu"]["starts"]) if r.get("lu") else r["apps"], "perf": round(r["perf"], 4)}, "ucl": r["ucl"], "titles": r["titles"], "flag": r["flag"]})
 json.dump({"season": season, "conFromClub": not has_gc, "clubs": table, "players": out_rows}, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
 print(season, len(out_rows), "rated; GK conceded from", "feed" if has_gc else "club record (no per-player data)")

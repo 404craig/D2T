@@ -37,7 +37,13 @@ def spearman(a, b):
 def main():
     ver = sys.argv[1]
     pairs = []
-    for t, files in [("2008-09", ["2008-09a", "2008-09b"]), ("2019-20", ["2019-20"]), ("1996-97", ["1996-97"])]:
+    import glob, os, re
+    seasons = {}
+    for f in sorted(glob.glob("docs/cards/panel/expected_*.csv")):
+        k = re.search(r"expected_(.+)\.csv", f).group(1)
+        if os.path.exists(f"{os.environ.get('RATED_DIR', 'docs/cards/feed')}/rated_{ver}_{k[:7]}.json"):
+            seasons.setdefault(k[:7], []).append(k)
+    for t, files in seasons.items():
         rated = {(r["club"], r["player"]): r for r in json.load(open(f"{__import__("os").environ.get("RATED_DIR", "docs/cards/feed")}/rated_{ver}_{t}.json", encoding="utf-8"))["players"]}
         for f in files:
             for x in csv.DictReader(open(f"docs/cards/panel/expected_{f}.csv", encoding="utf-8")):
@@ -52,7 +58,7 @@ def main():
     for p in pairs:
         by_club[(p[0], p[1])].append(p)
     club_rho = sum(spearman([p[4] for p in v], [p[5] for p in v]) for v in by_club.values()) / len(by_club)
-    season_rho = {t: round(spearman([p[4] for p in pairs if p[0] == t], [p[5] for p in pairs if p[0] == t]), 3) for t in ["2008-09", "2019-20", "1996-97"]}
+    season_rho = {t: round(spearman([p[4] for p in pairs if p[0] == t], [p[5] for p in pairs if p[0] == t]), 3) for t in seasons}
     print(f"{ver}: n={len(pairs)} spearman={spearman(exp, got):.3f} by season={season_rho} club-order={club_rho:.3f} MAE={mae:.1f} bias={bias:+.1f}")
     if "--misses" in sys.argv:
         for p in sorted(pairs, key=lambda p: -abs(p[5] - p[4]))[:25]:
