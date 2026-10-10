@@ -1,0 +1,550 @@
+season,club_feed,feed_id,name,feed_pos,appearances,goals,goal_assist,clean_sheet,wins,draws,losses,mins_played,game_started,goals_conceded,saves,yellow_card,red_card,own_goals
+2014/15,Arsenal,4477,Santi Cazorla,M,37,7,11,12,22,8,7,2992,33,30,0,5,0,0
+2014/15,Arsenal,4246,Per Mertesacker,D,35,0,1,12,19,9,7,3150,35,34,0,2,0,0
+2014/15,Arsenal,4973,Alexis Sánchez,F,35,16,8,7,20,9,6,2949,34,32,0,4,0,0
+2014/15,Arsenal,3548,Aaron Ramsey,M,29,6,6,6,16,8,5,2009,23,18,0,6,0,0
+2014/15,Arsenal,4472,Nacho Monreal,D,28,0,1,9,17,7,4,2311,26,22,0,3,0,0
+2014/15,Arsenal,4481,Olivier Giroud,F,27,14,3,4,18,5,4,1867,21,14,0,5,1,0
+2014/15,Arsenal,4030,Laurent Koscielny,D,27,3,0,11,17,6,4,2288,26,19,0,4,0,0
+2014/15,Arsenal,3452,Danny Welbeck,F,25,4,3,2,15,5,5,1667,18,19,0,3,0,0
+2014/15,Arsenal,4620,Calum Chambers,D,23,1,1,6,13,5,5,1570,17,20,0,7,1,0
+2014/15,Arsenal,2611,Mathieu Flamini,M,23,1,1,4,13,7,3,1455,15,21,0,3,0,0
+2014/15,Arsenal,4252,Alex Oxlade-Chamberlain,M,23,1,1,0,12,6,5,1491,17,18,0,4,0,0
+2014/15,Arsenal,3549,Francis Coquelin,M,22,0,0,5,16,3,3,1663,19,14,0,5,0,0
+2014/15,Arsenal,3046,Kieran Gibbs,D,22,0,3,4,13,4,5,1657,18,22,0,3,0,1
+2014/15,Arsenal,4714,Mesut Özil,M,22,4,5,5,12,7,3,1859,21,16,0,0,0,0
+2014/15,Arsenal,4474,Héctor Bellerín,D,20,2,1,6,13,4,3,1561,17,15,0,5,0,0
+2014/15,Arsenal,10420,David Ospina,G,18,0,0,8,13,3,2,1620,18,11,47,0,0,0
+2014/15,Arsenal,3543,Wojciech Szczesny,G,17,0,0,3,7,6,4,1499,17,21,45,1,0,0
+2014/15,Arsenal,3052,Tomás Rosicky,M,15,2,1,1,11,1,3,576,5,7,0,1,0,0
+2014/15,Arsenal,2839,Theo Walcott,F,14,5,0,0,7,3,4,441,4,4,0,0,0,0
+2014/15,Arsenal,3547,Jack Wilshere,M,14,2,1,0,4,6,4,732,9,12,0,4,0,0
+2014/15,Arsenal,4546,Mathieu Debuchy,D,10,1,0,0,5,4,1,808,10,12,0,2,0,0
+2014/15,Arsenal,2704,Mikel Arteta,M,7,0,1,1,4,2,1,450,6,3,0,1,0,0
+2014/15,Arsenal,4480,Lukas Podolski,F,7,0,0,0,4,1,2,99,0,0,0,0,0,0
+2014/15,Arsenal,10423,Gabriel Paulista,D,6,0,1,1,6,0,0,349,4,4,0,0,0,0
+2014/15,Arsenal,4254,Joel Campbell,F,4,0,0,0,0,3,1,39,0,1,0,0,0,0
+2014/15,Arsenal,4245,Emiliano Martínez,G,4,0,0,2,2,0,2,301,3,4,4,0,0,0
+2014/15,Arsenal,4482,Chuba Akpom,F,3,0,0,0,1,0,2,27,0,0,0,0,0,0
+2014/15,Arsenal,4718,Yaya Sanogo,F,3,0,0,0,1,1,1,140,2,2,0,0,0,0
+2014/15,Arsenal,10428,Ainsley Maitland-Niles,M,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2014/15,Aston Villa,2622,Gabriel Agbonlahor,F,34,6,1,6,9,7,18,2693,30,42,0,7,1,0
+2014/15,Aston Villa,3558,Brad Guzan,G,34,0,0,9,8,8,18,3060,34,48,101,2,0,0
+2014/15,Aston Villa,3448,Tom Cleverley,M,31,3,0,4,8,6,17,2520,31,44,0,6,0,0
+2014/15,Aston Villa,3803,Andreas Weimann,F,31,3,2,4,7,7,17,1777,20,22,0,5,0,0
+2014/15,Aston Villa,3506,Alan Hutton,D,30,1,0,6,8,5,17,2417,27,42,0,8,0,0
+2014/15,Aston Villa,4492,Christian Benteke,F,29,13,2,5,7,4,18,2380,26,42,0,1,1,0
+2014/15,Aston Villa,3799,Fabian Delph,M,28,0,3,6,8,4,16,2434,27,46,0,1,1,0
+2014/15,Aston Villa,10430,Carlos Sánchez,M,28,1,0,3,8,8,12,1985,20,33,0,6,1,0
+2014/15,Aston Villa,2755,Charles N'Zogbia,M,27,0,2,0,8,6,13,1429,19,13,0,3,0,0
+2014/15,Aston Villa,4489,Ashley Westwood,M,27,0,1,6,8,4,15,2152,25,36,0,4,0,0
+2014/15,Aston Villa,4797,Aly Cissokho,D,25,0,0,6,5,7,13,2131,24,31,0,1,0,1
+2014/15,Aston Villa,3562,Ciaran Clark,D,25,1,2,1,5,7,13,1991,22,34,0,8,1,0
+2014/15,Aston Villa,4719,Jores Okore,D,23,1,0,4,6,5,12,2009,22,35,0,6,0,0
+2014/15,Aston Villa,1982,Kieran Richardson,D,22,0,1,4,8,4,10,1345,16,25,0,2,1,0
+2014/15,Aston Villa,4486,Ron Vlaar,D,20,0,1,6,5,6,9,1646,19,27,0,3,1,0
+2014/15,Aston Villa,4721,Leandro Bacuna,M,19,0,5,3,7,4,8,981,10,16,0,1,0,0
+2014/15,Aston Villa,4260,Jack Grealish,M,17,0,1,0,7,4,6,815,7,18,0,0,0,0
+2014/15,Aston Villa,1632,Joe Cole,M,12,1,1,0,3,3,6,279,3,6,0,0,0,0
+2014/15,Aston Villa,4487,Matthew Lowton,D,12,0,0,2,2,4,6,754,8,13,0,2,0,0
+2014/15,Aston Villa,3561,Nathan Baker,D,11,0,0,1,2,2,7,763,8,13,0,0,0,0
+2014/15,Aston Villa,2892,Scott Sinclair,M,9,1,0,1,1,0,8,461,5,7,0,0,0,0
+2014/15,Aston Villa,2412,Philippe Senderos,D,8,0,0,3,3,2,3,632,7,9,0,2,0,0
+2014/15,Aston Villa,2098,Darren Bent,F,7,0,0,0,2,2,3,78,0,2,0,0,0,0
+2014/15,Aston Villa,7568,Carles Gil,M,5,0,1,0,0,0,5,359,4,11,0,1,0,0
+2014/15,Aston Villa,851,Shay Given,G,3,0,0,1,2,0,1,270,3,8,9,1,0,0
+2014/15,Aston Villa,10432,Rushian Hepburn-Murphy,F,1,0,0,0,1,0,0,7,0,0,0,0,0,0
+2014/15,Aston Villa,4348,Jed Steer,G,1,0,0,0,0,0,1,90,1,1,2,0,0,0
+2014/15,Burnley,2933,Tom Heaton,G,38,0,0,10,7,12,19,3420,38,53,128,1,0,1
+2014/15,Burnley,2766,Jason Shackell,D,38,0,0,10,7,12,19,3347,38,51,0,3,0,1
+2014/15,Burnley,3905,Kieran Trippier,D,38,0,4,10,7,12,19,3416,38,53,0,2,0,0
+2014/15,Burnley,8242,Scott Arfield,M,37,2,1,9,6,12,19,3204,36,51,0,6,0,0
+2014/15,Burnley,2523,David Jones,D,36,0,0,8,7,11,18,3207,36,47,0,0,0,0
+2014/15,Burnley,8246,Ashley Barnes,F,35,5,2,4,7,11,17,2424,28,38,0,4,1,0
+2014/15,Burnley,4788,George Boyd,F,35,5,2,8,7,11,17,3011,35,49,0,7,0,0
+2014/15,Burnley,8245,Danny Ings,F,35,11,4,4,7,10,18,3033,35,47,0,6,0,0
+2014/15,Burnley,3909,Ben Mee,D,33,2,1,8,5,11,17,2887,32,44,0,10,0,0
+2014/15,Burnley,3392,Lukas Jutkiewicz,F,25,0,2,3,2,7,16,976,10,17,0,1,0,0
+2014/15,Burnley,3835,Michael Duff,D,21,0,0,8,4,6,11,1809,21,25,0,4,1,0
+2014/15,Burnley,4333,Michael Keane,D,21,0,1,2,5,7,9,1595,17,27,0,1,0,0
+2014/15,Burnley,2359,Dean Marney,M,20,0,0,5,4,8,8,1687,20,25,0,6,0,0
+2014/15,Burnley,2579,Michael Kightly,M,17,1,2,0,2,6,9,951,10,22,0,3,0,0
+2014/15,Burnley,4007,Sam Vokes,F,15,0,0,0,3,3,9,561,5,5,0,0,0,0
+2014/15,Burnley,3498,Ross Wallace,M,15,1,0,0,0,3,12,228,1,2,0,2,0,0
+2014/15,Burnley,4281,Marvin Sordell,F,14,0,0,0,0,3,11,281,2,2,0,2,0,0
+2014/15,Burnley,2542,Matthew Taylor,M,10,0,1,0,2,2,6,570,7,6,0,0,0,0
+2014/15,Burnley,3999,Stephen Ward,D,9,0,0,1,4,3,2,623,7,11,0,3,0,0
+2014/15,Burnley,2435,Steven Reid,D,7,0,0,0,3,3,1,109,1,3,0,1,0,0
+2014/15,Burnley,4105,Nathaniel Chalobah,M,4,0,0,0,0,0,4,66,0,3,0,1,0,0
+2014/15,Burnley,10435,Fredrik Ulvestad,M,2,0,0,0,1,1,0,67,1,0,0,1,0,0
+2014/15,Burnley,8232,Daniel Lafferty,D,1,0,0,0,1,0,0,16,0,0,0,0,0,0
+2014/15,Burnley,3837,Kevin Long,D,1,0,0,0,0,1,0,20,0,1,0,0,0,0
+2014/15,Chelsea,4503,Eden Hazard,F,38,14,9,12,26,9,3,3372,38,30,0,2,0,0
+2014/15,Chelsea,3360,Branislav Ivanovic,D,38,4,5,17,26,9,3,3419,38,32,0,10,1,0
+2014/15,Chelsea,1353,John Terry,D,38,5,0,17,26,9,3,3420,38,32,0,2,0,1
+2014/15,Chelsea,4748,Willian,F,36,2,3,3,25,9,2,2415,28,19,0,3,0,0
+2014/15,Chelsea,2620,Gary Cahill,D,36,1,0,14,25,8,3,2985,33,30,0,5,0,0
+2014/15,Chelsea,3861,Nemanja Matic,M,36,1,3,16,25,9,2,3123,35,28,0,10,1,0
+2014/15,Chelsea,2417,Cesc Fàbregas,M,34,3,18,10,23,8,3,2886,33,26,0,11,1,0
+2014/15,Chelsea,4911,Thibaut Courtois,G,32,0,0,12,20,9,3,2814,32,30,74,1,0,0
+2014/15,Chelsea,4496,César Azpilicueta,D,29,0,3,14,22,5,2,2484,29,20,0,1,1,0
+2014/15,Chelsea,4501,Oscar,M,28,6,8,2,20,6,2,2034,26,14,0,5,0,0
+2014/15,Chelsea,2662,Didier Drogba,F,28,4,1,3,20,7,1,856,8,5,0,5,0,0
+2014/15,Chelsea,4941,Diego Costa,F,26,20,3,2,18,5,3,2082,24,23,0,8,0,0
+2014/15,Chelsea,4103,Ramires,M,23,2,4,3,17,5,1,1102,11,13,0,4,0,0
+2014/15,Chelsea,4572,Loïc Rémy,F,19,7,0,0,13,5,1,665,6,8,0,0,0,0
+2014/15,Chelsea,3102,John Obi Mikel,M,18,0,1,1,13,4,1,696,6,8,0,1,0,0
+2014/15,Chelsea,4915,Filipe Luís,D,15,0,0,2,9,4,2,939,9,12,0,1,0,0
+2014/15,Chelsea,5175,Kurt Zouma,D,15,0,0,4,10,5,0,644,7,2,0,0,0,0
+2014/15,Chelsea,4750,André Schürrle,M,14,3,0,0,9,4,1,431,5,6,0,2,0,0
+2014/15,Chelsea,6615,Juan Cuadrado,M,12,0,0,0,7,4,1,311,4,1,0,2,0,0
+2014/15,Chelsea,2651,Petr Cech,G,7,0,0,4,7,0,0,606,6,2,16,0,0,0
+2014/15,Chelsea,5179,Ruben Loftus-Cheek,M,3,0,0,0,0,2,1,134,2,4,0,0,0,0
+2014/15,Chelsea,5178,Mohamed Salah,F,3,0,0,0,2,0,1,30,0,3,0,0,0,0
+2014/15,Chelsea,4499,Nathan Aké,D,1,0,0,0,0,0,1,17,0,0,0,0,0,0
+2014/15,Chelsea,4674,Isaiah Brown,M,1,0,0,0,0,0,1,11,0,0,0,0,0,0
+2014/15,Chelsea,4495,Andreas Christensen,D,1,0,0,0,1,0,0,12,0,0,0,0,0,0
+2014/15,Crystal Palace,4084,Jason Puncheon,M,37,6,7,6,13,9,15,2825,31,41,0,7,1,0
+2014/15,Crystal Palace,3929,Joel Ward,D,37,1,0,7,13,9,15,3330,37,49,0,4,0,0
+2014/15,Crystal Palace,2664,Julian Speroni,G,36,0,0,6,11,9,16,3205,36,49,90,1,0,0
+2014/15,Crystal Palace,4763,Yannick Bolasie,F,34,4,6,3,10,9,15,2776,31,42,0,3,0,0
+2014/15,Crystal Palace,3807,Scott Dann,D,34,2,3,6,13,7,14,2922,34,40,0,6,0,0
+2014/15,Crystal Palace,6047,Joe Ledley,M,32,2,0,5,12,7,13,2572,30,39,0,0,0,0
+2014/15,Crystal Palace,4224,James McArthur,M,32,2,0,5,13,7,12,2606,29,32,0,6,0,0
+2014/15,Crystal Palace,3644,Martin Kelly,D,31,0,1,4,12,7,12,2498,27,39,0,2,0,0
+2014/15,Crystal Palace,4539,Wilfried Zaha,F,31,4,2,2,10,9,12,1982,23,24,0,1,0,0
+2014/15,Crystal Palace,1911,Damien Delaney,D,29,0,0,5,11,5,13,2434,28,37,0,6,1,0
+2014/15,Crystal Palace,4771,Dwight Gayle,F,25,5,1,0,7,6,12,1090,11,18,0,1,0,0
+2014/15,Crystal Palace,4766,Mile Jedinak,M,24,5,3,5,6,7,11,2080,24,34,0,3,1,0
+2014/15,Crystal Palace,2945,Fraizer Campbell,F,20,4,0,0,4,6,10,1175,13,24,0,5,0,0
+2014/15,Crystal Palace,4039,Marouane Chamakh,F,18,2,0,1,4,6,8,1156,15,17,0,4,0,0
+2014/15,Crystal Palace,4772,Glenn Murray,F,17,7,3,0,9,1,7,866,9,10,0,3,1,0
+2014/15,Crystal Palace,3394,Brede Hangeland,D,14,2,1,2,3,5,6,1173,12,18,0,2,0,0
+2014/15,Crystal Palace,3251,Adrian Mariappa,D,12,0,0,3,2,5,5,840,8,13,0,3,0,0
+2014/15,Crystal Palace,4718,Yaya Sanogo,F,10,0,0,0,5,1,4,317,3,6,0,1,0,0
+2014/15,Crystal Palace,10444,Pape Souaré,D,9,0,0,1,5,0,4,606,7,9,0,1,0,0
+2014/15,Crystal Palace,3565,Barry Bannan,M,7,0,0,0,2,2,3,136,2,3,0,1,0,0
+2014/15,Crystal Palace,4004,Adlène Guédioura,M,7,0,0,0,5,1,1,122,0,2,0,1,0,0
+2014/15,Crystal Palace,3333,Jordon Mutch,M,7,0,0,0,4,0,3,332,4,3,0,2,0,0
+2014/15,Crystal Palace,1962,Shola Ameobi,F,4,0,0,0,2,0,2,38,0,1,0,0,0,0
+2014/15,Crystal Palace,3205,Kevin Doyle,F,3,0,0,0,1,1,1,34,0,0,0,0,0,0
+2014/15,Crystal Palace,2569,Wayne Hennessey,G,3,0,0,1,2,1,0,215,2,2,4,0,0,0
+2014/15,Crystal Palace,3830,Lee Chung-Yong,M,3,0,0,0,1,0,2,91,1,2,0,0,0,0
+2014/15,Crystal Palace,4765,Stuart O'Keefe,M,2,0,0,0,0,0,2,84,1,3,0,0,0,0
+2014/15,Crystal Palace,4767,Jonny Williams,M,2,0,0,0,0,1,1,34,0,0,0,0,0,0
+2014/15,Crystal Palace,4335,Ezekiel Fryers,D,1,0,0,0,1,0,0,3,0,0,0,0,0,0
+2014/15,Crystal Palace,2008,Jerome Thomas,M,1,0,0,0,0,0,1,6,0,0,0,0,0,0
+2014/15,Everton,3222,Phil Jagielka,D,37,4,0,10,12,11,14,3285,37,47,0,1,0,0
+2014/15,Everton,4290,Romelu Lukaku,F,36,10,5,2,11,10,15,2875,32,40,0,1,0,1
+2014/15,Everton,3600,Séamus Coleman,D,35,3,2,10,12,10,13,3065,34,43,0,5,0,1
+2014/15,Everton,1308,Gareth Barry,M,33,0,2,9,8,10,15,2827,33,40,0,10,1,0
+2014/15,Everton,2516,Tim Howard,G,32,0,0,7,11,8,13,2835,32,44,65,3,0,0
+2014/15,Everton,3030,Leighton Baines,D,31,2,9,9,10,10,11,2774,31,41,0,4,0,0
+2014/15,Everton,4510,Steven Naismith,F,31,6,0,3,10,10,11,2055,22,32,0,8,0,0
+2014/15,Everton,4115,Ross Barkley,M,29,2,2,3,10,8,11,1964,22,22,0,1,0,0
+2014/15,Everton,4507,Kevin Mirallas,F,29,7,1,1,7,9,13,1421,18,27,0,3,0,0
+2014/15,Everton,3979,James McCarthy,M,28,2,1,6,10,8,10,2403,27,35,0,7,0,0
+2014/15,Everton,10451,Muhamed Besic,M,23,0,0,1,7,7,9,1284,15,16,0,8,0,0
+2014/15,Everton,4505,John Stones,D,23,1,0,7,7,7,9,2043,23,25,0,1,0,0
+2014/15,Everton,1887,Leon Osman,M,21,2,2,3,9,4,8,1274,13,14,0,0,0,0
+2014/15,Everton,8636,Aiden McGeady,M,16,1,2,1,4,7,5,887,10,13,0,1,0,0
+2014/15,Everton,4751,Samuel Eto'o,F,14,3,1,1,4,3,7,782,8,18,0,1,0,0
+2014/15,Everton,2270,Aaron Lennon,M,14,2,0,3,6,3,5,1071,12,12,0,2,0,0
+2014/15,Everton,2125,Sylvain Distin,D,13,0,0,0,2,4,7,1080,12,26,0,0,0,0
+2014/15,Everton,4701,Arouna Koné,F,12,1,1,1,7,2,3,603,7,8,0,2,0,0
+2014/15,Everton,2942,Darron Gibson,M,9,0,0,1,3,2,4,411,3,8,0,0,0,0
+2014/15,Everton,3388,Steven Pienaar,M,9,0,2,0,3,5,1,314,3,5,0,1,0,0
+2014/15,Everton,4218,Antolín Alcáraz,D,8,0,0,2,3,2,3,527,6,6,0,1,1,0
+2014/15,Everton,4696,Joel Robles,G,7,0,0,3,1,3,3,585,6,6,15,1,0,0
+2014/15,Everton,4504,Bryan Oviedo,D,6,0,0,1,1,2,3,318,2,1,0,3,0,0
+2014/15,Everton,4859,Christian Atsu,M,5,0,1,0,2,2,1,110,1,5,0,0,0,0
+2014/15,Everton,3868,Luke Garbutt,D,4,0,0,0,0,0,4,286,3,8,0,1,0,0
+2014/15,Everton,1881,Tony Hibbert,D,4,0,0,0,1,1,2,331,4,5,0,0,0,0
+2014/15,Everton,9163,Brendan Galloway,D,2,0,0,0,1,0,1,174,2,2,0,1,0,0
+2014/15,Everton,4506,Jiang Guangtai,D,2,0,0,0,0,1,1,29,0,0,0,0,0,0
+2014/15,Hull City,4183,Ahmed El Mohamady,D,38,2,5,9,8,11,19,3419,38,51,0,4,0,0
+2014/15,Hull City,3244,Jake Livermore,M,35,1,1,8,7,10,18,3031,35,46,0,10,0,0
+2014/15,Hull City,2991,Tom Huddlestone,M,31,0,2,8,6,11,14,2545,30,35,0,6,2,0
+2014/15,Hull City,2805,Michael Dawson,D,28,1,0,7,5,9,14,2434,28,42,0,7,0,0
+2014/15,Hull City,3714,David Meyler,M,28,1,1,3,5,9,14,1729,19,27,0,7,1,0
+2014/15,Hull City,3225,Stephen Quinn,M,28,1,3,1,5,8,15,1637,17,24,0,3,1,0
+2014/15,Hull City,4158,Robert Brady,M,27,0,2,4,6,6,15,1755,17,24,0,2,0,0
+2014/15,Hull City,4296,Nikica Jelavic,F,26,8,1,4,6,8,12,1810,21,25,0,3,0,0
+2014/15,Hull City,4785,Allan McGregor,G,26,0,0,5,5,8,13,2340,26,39,64,0,0,0
+2014/15,Hull City,2862,Sone Aluko,F,25,1,0,0,4,6,15,1242,13,19,0,2,0,0
+2014/15,Hull City,10460,Abel Hernández,F,25,4,1,2,4,8,13,1312,15,17,0,2,0,0
+2014/15,Hull City,10458,Andy Robertson,D,24,0,2,1,3,10,11,1526,17,27,0,7,0,0
+2014/15,Hull City,2936,James Chester,D,23,2,0,7,6,6,11,1872,23,20,0,5,1,0
+2014/15,Hull City,2624,Alex Bruce,D,22,0,1,4,8,5,9,1448,17,17,0,3,0,0
+2014/15,Hull City,4616,Gastón Ramírez,M,22,1,2,0,7,5,10,984,11,13,0,1,1,0
+2014/15,Hull City,2997,Curtis Davies,D,21,0,0,4,4,5,12,1798,21,31,0,2,0,0
+2014/15,Hull City,2738,Paul McShane,D,20,1,0,5,5,5,10,1696,19,22,0,2,0,0
+2014/15,Hull City,10461,Dame N'Doye,F,15,5,1,2,4,4,7,1195,13,18,0,3,0,0
+2014/15,Hull City,2464,Liam Rosenior,D,13,0,1,0,5,4,4,577,5,9,0,0,0,0
+2014/15,Hull City,3982,Mohamed Diamé,M,12,4,0,1,1,5,6,879,10,18,0,2,0,0
+2014/15,Hull City,709,Steve Harper,G,10,0,0,4,3,2,5,853,10,10,30,0,0,0
+2014/15,Hull City,4171,Hatem Ben Arfa,M,8,0,0,0,0,3,5,384,5,5,0,1,0,0
+2014/15,Hull City,4137,Tom Ince,M,7,0,0,0,2,1,4,300,3,4,0,0,0,0
+2014/15,Hull City,4791,Yannick Sagbo,F,4,0,0,0,1,0,3,55,0,2,0,0,0,0
+2014/15,Hull City,3524,Maynor Figueroa,D,3,0,0,0,0,0,3,213,2,5,0,0,0,0
+2014/15,Hull City,4786,Eldin Jakupovic,G,3,0,0,1,0,2,1,227,2,2,8,0,0,0
+2014/15,Hull City,9566,Harry Maguire,D,3,0,0,0,1,0,2,92,0,3,0,1,0,0
+2014/15,Hull City,4788,George Boyd,F,1,0,0,0,0,1,0,9,0,1,0,0,0,0
+2014/15,Hull City,4558,Robert Snodgrass,M,1,0,0,0,1,0,0,40,1,0,0,0,0,0
+2014/15,Leicester City,8966,Wes Morgan,D,37,2,2,9,11,8,18,3288,37,52,0,1,1,2
+2014/15,Leicester City,8174,Leonardo Ulloa,F,37,11,3,1,11,7,19,2407,29,38,0,3,0,0
+2014/15,Leicester City,8979,Jamie Vardy,F,34,5,8,5,10,7,17,2245,26,40,0,5,0,0
+2014/15,Leicester City,8980,Jeffrey Schlupp,M,32,3,2,6,9,8,15,2539,30,40,0,4,0,1
+2014/15,Leicester City,10462,Esteban Cambiasso,M,31,5,1,6,10,5,16,2423,27,37,0,1,0,1
+2014/15,Leicester City,8983,Riyad Mahrez,F,30,4,3,4,8,8,14,2082,25,31,0,0,0,0
+2014/15,Leicester City,3478,David Nugent,F,29,5,2,3,7,7,15,1704,16,31,0,3,0,0
+2014/15,Leicester City,3669,Matty James,M,27,0,1,4,8,5,14,1890,20,33,0,2,1,0
+2014/15,Leicester City,3666,Ritchie De Laet,D,26,0,1,2,9,6,11,1883,20,38,0,3,0,0
+2014/15,Leicester City,1515,Paul Konchesky,D,26,1,1,4,5,5,16,2250,26,38,0,3,2,0
+2014/15,Leicester City,8970,Marcin Wasilewski,D,25,1,1,6,8,3,14,1989,22,28,0,6,0,0
+2014/15,Leicester City,8976,Andy King,M,24,2,0,3,8,4,12,1370,16,17,0,1,0,0
+2014/15,Leicester City,2508,Kasper Schmeichel,G,24,0,0,6,8,5,11,2160,24,37,80,0,0,0
+2014/15,Leicester City,3670,Danny Drinkwater,M,23,0,0,0,7,5,11,1488,16,27,0,1,0,0
+2014/15,Leicester City,3564,Marc Albrighton,M,18,2,3,4,8,2,8,1027,10,9,0,3,0,0
+2014/15,Leicester City,2053,Robert Huth,D,14,1,0,6,7,3,4,1180,14,13,0,2,0,0
+2014/15,Leicester City,3157,Danny Simpson,D,14,0,0,2,2,2,10,1185,13,20,0,4,0,0
+2014/15,Leicester City,6671,Andrej Kramaric,F,13,2,0,0,5,3,5,574,6,8,0,0,0,0
+2014/15,Leicester City,4614,Dean Hammond,M,12,0,0,1,5,4,3,781,9,13,0,3,0,0
+2014/15,Leicester City,8968,Liam Moore,D,11,0,0,1,2,3,6,936,10,19,0,4,0,0
+2014/15,Leicester City,8982,Anthony Knockaert,M,9,0,0,1,1,3,5,330,3,4,0,0,0,0
+2014/15,Leicester City,3183,Ben Hamer,G,8,0,0,3,3,1,4,720,8,8,21,0,0,0
+2014/15,Leicester City,3756,Chris Wood,F,7,1,0,0,1,2,4,107,0,3,0,0,0,0
+2014/15,Leicester City,1218,Mark Schwarzer,G,6,0,0,1,0,2,4,540,6,10,23,0,0,0
+2014/15,Leicester City,1131,Matt Upson,D,5,0,0,1,0,2,3,374,5,8,0,0,0,1
+2014/15,Leicester City,5561,Tom Lawrence,M,3,0,0,0,1,1,1,51,0,0,0,0,0,0
+2014/15,Leicester City,4540,Nick Powell,M,3,0,0,0,0,0,3,40,0,1,0,0,0,0
+2014/15,Leicester City,4086,Gary Taylor-Fletcher,F,1,0,0,0,0,0,1,17,0,1,0,0,0,0
+2014/15,Liverpool,3712,Jordan Henderson,M,37,6,9,13,18,8,11,3255,36,45,0,6,0,0
+2014/15,Liverpool,4179,Simon Mignolet,G,36,0,0,13,18,7,11,3224,35,43,89,0,0,1
+2014/15,Liverpool,4525,Philippe Coutinho,M,35,5,5,7,16,8,11,2799,32,43,0,3,0,0
+2014/15,Liverpool,4316,Raheem Sterling,F,35,7,7,8,16,8,11,3050,34,39,0,5,0,0
+2014/15,Liverpool,3404,Martin Skrtel,D,33,1,0,12,16,7,10,2970,33,41,0,8,0,0
+2014/15,Liverpool,1575,Steven Gerrard,M,29,9,1,5,11,8,10,2236,25,39,0,7,1,1
+2014/15,Liverpool,7219,Alberto Moreno,D,28,2,0,7,13,5,10,2262,26,33,0,6,0,0
+2014/15,Liverpool,5001,Emre Can,M,27,1,0,9,14,5,8,2065,23,26,0,2,1,0
+2014/15,Liverpool,4618,Adam Lallana,M,27,5,3,3,12,7,8,1789,23,22,0,4,0,0
+2014/15,Liverpool,4813,Dejan Lovren,D,26,0,0,6,13,4,9,2036,22,28,0,4,0,0
+2014/15,Liverpool,4627,Rickie Lambert,F,25,2,2,2,9,7,9,824,7,11,0,2,0,0
+2014/15,Liverpool,4413,Joe Allen,M,21,1,0,5,10,2,9,1471,16,22,0,3,0,0
+2014/15,Liverpool,3137,Lucas Leiva,M,20,0,0,6,11,5,4,1313,16,20,0,4,0,0
+2014/15,Liverpool,2148,Glen Johnson,D,19,1,0,4,10,3,6,1326,15,17,0,2,0,0
+2014/15,Liverpool,5078,Lazar Markovic,M,19,2,1,3,10,4,5,932,11,11,0,0,0,0
+2014/15,Liverpool,4152,Mario Balotelli,F,16,1,0,1,6,3,7,940,10,11,0,5,0,0
+2014/15,Liverpool,4796,Mamadou Sakho,D,16,0,0,7,8,3,5,1418,15,21,0,1,0,0
+2014/15,Liverpool,3863,Fabio Borini,F,12,1,1,0,4,3,5,392,3,7,0,1,1,0
+2014/15,Liverpool,4527,Jordon Ibe,F,12,0,0,1,6,3,3,618,7,7,0,0,0,0
+2014/15,Liverpool,3154,Daniel Sturridge,F,12,4,1,2,8,1,3,750,7,9,0,0,0,0
+2014/15,Liverpool,2002,Kolo Touré,D,12,0,0,2,6,3,3,710,7,12,0,0,0,0
+2014/15,Liverpool,4918,Javier Manquillo,D,10,0,0,2,5,2,3,761,10,11,0,3,0,0
+2014/15,Liverpool,3462,José Enrique,D,4,0,0,1,4,0,0,203,2,2,0,0,0,0
+2014/15,Liverpool,1947,Bradley Jones,G,3,0,0,0,1,1,1,196,3,5,4,0,0,0
+2014/15,Liverpool,4529,Jerome Sinclair,F,2,0,0,0,0,1,1,25,0,1,0,0,0,0
+2014/15,Manchester City,3143,Joe Hart,G,36,0,0,14,22,7,7,3240,36,34,87,1,0,0
+2014/15,Manchester City,4803,Jesús Navas,D,35,0,8,5,22,7,6,2248,23,29,0,3,0,0
+2014/15,Manchester City,4328,Sergio Agüero,F,33,26,8,5,20,6,7,2539,30,31,0,4,0,0
+2014/15,Manchester City,4804,Fernandinho,M,33,3,3,5,20,7,6,2273,25,33,0,7,0,0
+2014/15,Manchester City,800,Frank Lampard,M,32,6,1,0,21,6,5,989,10,7,0,1,0,0
+2014/15,Manchester City,2100,James Milner,M,32,5,7,3,21,6,5,1742,18,19,0,6,0,0
+2014/15,Manchester City,4145,David Silva,M,32,12,7,5,19,6,7,2659,32,32,0,8,0,0
+2014/15,Manchester City,4802,Martín Demichelis,D,31,1,0,9,20,6,5,2559,28,30,0,6,0,1
+2014/15,Manchester City,4148,Yaya Touré,M,29,10,1,10,21,2,6,2355,27,24,0,5,0,0
+2014/15,Manchester City,3654,Pablo Zabaleta,D,29,1,4,11,19,5,5,2586,29,29,0,6,1,1
+2014/15,Manchester City,3653,Vincent Kompany,D,25,0,0,5,14,4,7,2032,23,23,0,7,0,0
+2014/15,Manchester City,5334,Eliaquim Mangala,D,25,0,2,11,18,4,3,2189,24,22,0,3,1,1
+2014/15,Manchester City,5344,Fernando,M,25,2,2,9,17,5,3,1880,22,17,0,6,0,0
+2014/15,Manchester City,3546,Samir Nasri,M,24,2,6,2,15,5,4,1578,18,17,0,5,0,0
+2014/15,Manchester City,2413,Gaël Clichy,D,23,1,3,6,13,5,5,2058,23,27,0,1,0,0
+2014/15,Manchester City,4151,Edin Dzeko,F,22,4,2,1,11,5,6,932,11,9,0,1,0,0
+2014/15,Manchester City,4141,Aleksandar Kolarov,D,21,2,3,9,14,4,3,1486,16,12,0,4,0,0
+2014/15,Manchester City,4806,Stevan Jovetic,F,17,5,3,0,9,4,4,787,9,7,0,0,0,0
+2014/15,Manchester City,4838,Wilfried Bony,F,10,2,1,0,8,0,2,296,2,1,0,1,0,0
+2014/15,Manchester City,3311,Bacary Sagna,D,9,0,0,2,4,3,2,740,8,9,0,1,0,0
+2014/15,Manchester City,10471,José Pozo,M,3,0,0,0,3,0,0,137,1,0,0,0,0,0
+2014/15,Manchester City,3908,Dedryck Boyata,D,2,0,0,0,2,0,0,91,1,1,0,1,0,0
+2014/15,Manchester City,10466,Willy Caballero,G,2,0,0,0,2,0,0,180,2,4,6,0,0,0
+2014/15,Manchester City,2892,Scott Sinclair,M,2,0,0,0,1,1,0,3,0,0,0,0,0,0
+2014/15,Manchester United,4330,David de Gea,G,37,0,0,10,20,9,8,3314,37,36,93,0,0,0
+2014/15,Manchester United,4287,Juan Mata,M,33,9,4,3,17,9,7,2307,27,25,0,2,0,0
+2014/15,Manchester United,2064,Wayne Rooney,F,33,12,5,9,18,7,8,2876,33,30,0,5,1,0
+2014/15,Manchester United,3285,Antonio Valencia,D,32,0,2,8,19,7,6,2583,29,21,0,4,0,0
+2014/15,Manchester United,5794,Ángel Di María,M,27,3,10,0,14,6,7,1642,20,20,0,1,0,0
+2014/15,Manchester United,3604,Marouane Fellaini,M,27,6,0,3,15,5,7,1830,19,17,0,5,1,0
+2014/15,Manchester United,2616,Robin van Persie,F,27,10,2,4,12,9,6,2114,25,23,0,5,0,0
+2014/15,Manchester United,10477,Radamel Falcao,F,26,4,4,2,16,6,4,1286,14,15,0,2,0,0
+2014/15,Manchester United,10475,Ander Herrera,M,26,6,4,5,15,4,7,1868,19,23,0,6,0,0
+2014/15,Manchester United,3062,Ashley Young,D,26,2,5,7,13,8,5,2068,23,18,0,5,0,0
+2014/15,Manchester United,4888,Daley Blind,D,25,2,2,7,14,5,6,2171,25,27,0,4,0,0
+2014/15,Manchester United,3613,Chris Smalling,D,25,4,0,5,11,7,7,1879,21,23,0,1,1,0
+2014/15,Manchester United,3820,Phil Jones,D,22,0,0,5,10,9,3,1879,22,18,0,3,0,0
+2014/15,Manchester United,10472,Marcos Rojo,D,22,0,0,5,14,5,3,1764,20,19,0,6,0,0
+2014/15,Manchester United,1634,Michael Carrick,M,18,1,2,5,13,3,2,1454,16,10,0,1,0,0
+2014/15,Manchester United,4541,Adnan Januzaj,M,18,0,0,0,7,7,4,850,7,10,0,0,0,0
+2014/15,Manchester United,10473,Paddy McNair,D,16,0,0,0,10,1,5,1026,12,14,0,2,0,0
+2014/15,Manchester United,4608,Luke Shaw,D,16,0,0,1,6,5,5,1126,15,14,0,1,1,0
+2014/15,Manchester United,3156,Jonny Evans,D,14,0,0,5,9,4,1,1091,12,7,0,1,0,0
+2014/15,Manchester United,5562,James Wilson,F,13,1,0,0,9,3,1,348,2,3,0,3,0,0
+2014/15,Manchester United,7934,Tyler Blackett,D,11,0,0,2,3,4,4,650,6,10,0,3,1,1
+2014/15,Manchester United,1943,Darren Fletcher,M,11,0,0,1,7,3,1,364,4,6,0,1,0,0
+2014/15,Manchester United,3664,Rafael,D,10,0,1,0,5,4,1,590,6,11,0,2,0,0
+2014/15,Manchester United,4951,Víctor Valdés,G,2,0,0,1,0,2,0,106,1,1,7,0,0,0
+2014/15,Manchester United,3452,Danny Welbeck,F,2,0,0,0,0,2,0,44,0,0,0,0,0,0
+2014/15,Manchester United,3447,Nani,F,1,0,0,0,0,0,1,45,0,1,0,0,0,0
+2014/15,Manchester United,3448,Tom Cleverley,M,1,0,0,0,0,1,0,90,1,1,0,1,0,0
+2014/15,Manchester United,3446,Anderson,M,1,0,0,0,0,1,0,20,0,0,0,0,0,0
+2014/15,Manchester United,4161,Chicharito,F,1,0,0,0,0,0,1,45,1,1,0,0,0,0
+2014/15,Manchester United,10476,Andreas Pereira,M,1,0,0,0,1,0,0,13,0,0,0,0,0,0
+2014/15,Manchester United,4333,Michael Keane,D,1,0,0,0,0,1,0,46,0,0,0,0,0,0
+2014/15,Manchester United,4337,Jesse Lingard,M,1,0,0,0,0,0,1,24,1,0,0,0,0,0
+2014/15,Manchester United,4334,Tom Thorpe,D,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2014/15,Newcastle United,10480,Daryl Janmaat,D,37,1,6,8,10,8,19,3254,37,60,0,6,1,0
+2014/15,Newcastle United,10487,Ayoze Pérez,F,36,7,0,1,9,9,18,2369,25,50,0,0,0,0
+2014/15,Newcastle United,3713,Jack Colback,M,35,4,6,7,9,8,18,3129,35,61,0,12,0,0
+2014/15,Newcastle United,4549,Moussa Sissoko,M,34,4,2,8,10,8,16,3032,34,51,0,7,2,0
+2014/15,Newcastle United,3680,Fabricio Coloccini,D,32,1,0,6,9,8,15,2837,32,55,0,3,1,0
+2014/15,Newcastle United,10484,Rémy Cabella,M,31,1,2,1,8,7,16,1947,21,34,0,2,0,0
+2014/15,Newcastle United,4554,Yoan Gouffran,M,31,2,1,1,8,7,16,1969,24,44,0,3,0,0
+2014/15,Newcastle United,4024,Mike Williamson,D,31,1,1,4,7,8,16,2415,27,52,0,5,2,0
+2014/15,Newcastle United,3169,Tim Krul,G,30,0,1,8,8,7,15,2700,30,47,83,1,0,0
+2014/15,Newcastle United,4176,Sammy Ameobi,F,25,2,2,2,7,5,13,1422,15,12,0,2,0,0
+2014/15,Newcastle United,4340,Paul Dummett,D,25,0,0,5,8,7,10,2109,24,34,0,4,0,1
+2014/15,Newcastle United,10488,Emmanuel Rivière,F,23,1,1,1,3,8,12,1213,15,26,0,0,0,0
+2014/15,Newcastle United,4346,Papiss Cissé,F,22,11,1,3,8,6,8,1152,11,16,0,1,0,0
+2014/15,Newcastle United,4550,Vurnon Anita,M,19,0,0,1,4,4,11,1272,17,25,0,3,0,0
+2014/15,Newcastle United,4545,Massadio Haïdara,D,15,0,1,3,6,5,4,1099,12,19,0,0,0,0
+2014/15,Newcastle United,3027,Ryan Taylor,D,14,0,1,0,3,1,10,907,11,20,0,3,0,0
+2014/15,Newcastle United,4343,Mehdi Abeid,M,13,0,0,3,4,4,5,662,7,9,0,0,0,0
+2014/15,Newcastle United,3919,Gabriel Obertan,M,13,1,1,1,4,2,7,651,8,10,0,0,0,0
+2014/15,Newcastle United,9199,Adam Armstrong,F,11,0,1,0,1,1,9,202,1,8,0,1,0,0
+2014/15,Newcastle United,4172,Cheick Tioté,M,11,0,2,0,2,4,5,898,10,19,0,5,0,0
+2014/15,Newcastle United,3683,Jonás Gutiérrez,M,10,1,1,1,1,1,8,634,6,13,0,4,0,0
+2014/15,Newcastle United,2323,Steven Taylor,D,10,1,0,2,4,3,3,653,7,6,0,2,1,0
+2014/15,Newcastle United,4543,Jak Alnwick,G,6,0,0,0,2,1,3,495,5,14,10,0,0,0
+2014/15,Newcastle United,10483,Rolando Aarons,M,4,1,0,0,1,1,2,128,0,2,0,1,0,0
+2014/15,Newcastle United,4885,Siem de Jong,M,4,1,0,0,0,2,2,147,1,2,0,0,0,0
+2014/15,Newcastle United,2214,Robert Elliot,G,3,0,0,0,1,1,1,225,3,2,5,0,0,0
+2014/15,Newcastle United,3684,Haris Vuckic,F,1,0,0,0,0,0,1,8,0,0,0,0,0,0
+2014/15,Queens Park Rangers,2758,Robert Green,G,36,0,0,6,8,6,22,3184,36,65,132,1,0,0
+2014/15,Queens Park Rangers,9468,Charlie Austin,F,35,18,5,3,7,6,22,3069,35,65,0,4,1,0
+2014/15,Queens Park Rangers,3957,Steven Caulker,D,35,1,0,6,8,6,21,3015,34,61,0,1,0,1
+2014/15,Queens Park Rangers,3997,Karl Henry,M,33,0,0,5,7,6,20,2504,27,51,0,8,0,0
+2014/15,Queens Park Rangers,2603,Bobby Zamora,F,31,3,4,1,6,6,19,1782,19,25,0,4,0,0
+2014/15,Queens Park Rangers,4810,Leroy Fer,M,29,6,2,0,7,5,17,2365,27,53,0,4,0,0
+2014/15,Queens Park Rangers,2303,Joey Barton,M,28,1,3,5,7,6,15,2351,27,47,0,11,1,0
+2014/15,Queens Park Rangers,5511,Mauricio Isla,D,26,0,2,4,6,5,15,2131,24,43,0,4,0,0
+2014/15,Queens Park Rangers,4074,Matt Phillips,M,25,3,8,2,5,4,16,1822,20,47,0,1,0,0
+2014/15,Queens Park Rangers,1184,Richard Dunne,D,23,0,0,4,4,4,15,1872,22,39,0,7,0,1
+2014/15,Queens Park Rangers,2728,Nedum Onuoha,D,23,0,0,1,4,2,17,1927,22,40,0,2,1,2
+2014/15,Queens Park Rangers,4568,Yun Suk-Young,D,23,0,0,3,7,2,14,1725,19,39,0,4,0,0
+2014/15,Queens Park Rangers,3823,Junior Hoilett,F,22,0,0,1,5,2,15,878,9,22,0,2,0,0
+2014/15,Queens Park Rangers,3180,Niko Kranjcar,M,22,2,1,1,6,2,14,1113,11,28,0,2,0,0
+2014/15,Queens Park Rangers,5696,Eduardo Vargas,F,21,3,2,0,5,4,12,1385,16,31,0,1,0,0
+2014/15,Queens Park Rangers,4371,Clint Hill,D,19,1,0,2,4,4,11,1407,15,31,0,4,0,0
+2014/15,Queens Park Rangers,4193,Sandro,M,17,1,0,2,2,3,12,1219,17,20,0,6,0,0
+2014/15,Queens Park Rangers,2835,Armand Traore,D,16,0,0,0,3,2,11,780,7,19,0,2,0,0
+2014/15,Queens Park Rangers,1111,Rio Ferdinand,D,11,0,0,2,2,1,8,990,11,21,0,2,0,0
+2014/15,Queens Park Rangers,3333,Jordon Mutch,M,9,0,1,1,3,1,5,519,6,11,0,3,0,0
+2014/15,Queens Park Rangers,3241,Adel Taarabt,M,7,0,0,0,1,0,6,295,3,6,0,0,0,0
+2014/15,Queens Park Rangers,10494,Reece Grego-Cox,F,4,0,0,0,1,0,3,142,1,5,0,0,0,0
+2014/15,Queens Park Rangers,1934,Shaun Wright-Phillips,M,4,0,0,0,1,0,3,128,1,4,0,0,0,0
+2014/15,Queens Park Rangers,3338,Mauro Zárate,F,4,0,0,0,1,0,3,71,0,2,0,1,0,0
+2014/15,Queens Park Rangers,4378,Michael Doughty,M,3,0,0,0,1,1,1,51,0,2,0,0,0,0
+2014/15,Queens Park Rangers,10491,Darnell Furlong,D,3,0,0,0,0,0,3,225,3,7,0,1,0,0
+2014/15,Queens Park Rangers,4573,Alex McCarthy,G,3,0,0,0,1,0,2,236,2,8,10,0,0,0
+2014/15,Queens Park Rangers,4383,Alejandro Faurlin,M,2,0,0,0,0,0,2,91,1,1,0,0,0,0
+2014/15,Queens Park Rangers,4572,Loïc Rémy,F,2,0,0,0,0,0,2,180,2,5,0,0,0,0
+2014/15,Queens Park Rangers,10495,Brandon Comley,M,1,0,0,0,0,0,1,10,0,1,0,0,0,0
+2014/15,Queens Park Rangers,10492,Cole Kpekawa,D,1,0,0,0,0,0,1,5,0,1,0,0,0,0
+2014/15,Queens Park Rangers,3157,Danny Simpson,D,1,0,0,0,0,0,1,68,1,1,0,0,0,0
+2014/15,Southampton,10502,Graziano Pellè,F,38,12,2,13,18,6,14,3284,37,31,0,6,0,0
+2014/15,Southampton,4606,José Fonte,D,37,0,1,15,17,6,14,3330,37,32,0,5,0,0
+2014/15,Southampton,4604,Nathaniel Clyne,D,35,2,0,13,16,5,14,3147,35,32,0,4,0,0
+2014/15,Southampton,2423,Steven Davis,M,35,0,2,8,17,5,13,2648,32,24,0,3,0,0
+2014/15,Southampton,2886,Ryan Bertrand,D,34,2,2,13,17,4,13,3055,34,30,0,3,1,0
+2014/15,Southampton,3206,Shane Long,F,32,5,5,2,15,5,12,1539,16,15,0,2,0,0
+2014/15,Southampton,4816,Victor Wanyama,M,32,3,1,7,15,5,12,2360,26,26,0,10,0,0
+2014/15,Southampton,10498,Dusan Tadic,F,31,4,7,5,15,5,11,2060,24,16,0,2,0,0
+2014/15,Southampton,3170,Fraser Forster,G,30,0,0,13,16,5,9,2624,30,21,61,1,0,0
+2014/15,Southampton,6519,Sadio Mané,F,30,10,3,4,12,5,13,2135,24,25,0,5,0,0
+2014/15,Southampton,4916,Toby Alderweireld,D,26,1,0,9,13,4,9,2257,26,22,0,3,0,0
+2014/15,Southampton,4615,Morgan Schneiderlin,M,26,4,1,10,14,5,7,2185,24,16,0,5,1,0
+2014/15,Southampton,4617,James Ward-Prowse,M,25,1,6,3,12,5,8,1478,16,14,0,0,1,0
+2014/15,Southampton,4605,Maya Yoshida,D,22,1,1,6,9,4,9,1690,18,21,0,3,0,0
+2014/15,Southampton,10499,Eljero Elia,F,16,2,0,0,6,2,8,787,9,8,0,2,0,0
+2014/15,Southampton,2889,Jack Cork,D,12,2,0,1,9,2,1,476,5,0,0,0,0,0
+2014/15,Southampton,5937,Florin Gardos,D,11,0,0,1,8,2,1,574,5,3,0,1,0,0
+2014/15,Southampton,5057,Filip Djuricic,M,9,0,0,0,2,2,5,327,3,4,0,1,0,0
+2014/15,Southampton,4818,Harrison Reed,M,9,0,0,1,5,2,2,460,5,3,0,0,0,0
+2014/15,Southampton,2971,Kelvin Davis,G,7,0,0,1,2,1,4,616,6,9,15,0,0,0
+2014/15,Southampton,4815,Matt Targett,D,6,0,0,0,4,1,1,225,3,3,0,0,0,0
+2014/15,Southampton,4629,Emmanuel Mayuka,F,5,0,0,0,1,1,3,49,0,2,0,0,0,0
+2014/15,Southampton,4600,Paulo Gazzaniga,G,2,0,0,0,1,0,1,180,2,3,4,0,0,0
+2014/15,Southampton,10501,Jake Hesketh,M,2,0,0,0,0,0,2,52,1,1,0,1,0,0
+2014/15,Southampton,4624,Dominic Gape,M,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2014/15,Southampton,4621,Lloyd Isgrove,M,1,0,0,0,0,0,1,8,0,0,0,0,0,0
+2014/15,Southampton,4814,Jason McCarthy,D,1,0,0,0,1,0,0,3,0,0,0,0,0,0
+2014/15,Southampton,4616,Gastón Ramírez,M,1,0,0,0,1,0,0,24,0,0,0,0,0,0
+2014/15,Southampton,10503,Ryan Seager,F,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+2014/15,Stoke City,3821,Steven Nzonzi,M,38,3,1,9,15,9,14,3374,38,44,0,2,0,0
+2014/15,Stoke City,2537,Asmir Begovic,G,35,0,0,7,14,8,13,3150,35,43,86,3,0,0
+2014/15,Stoke City,3925,Mame Diouf,F,34,11,3,4,13,9,12,2437,28,31,0,7,0,0
+2014/15,Stoke City,1629,Peter Crouch,F,33,8,2,2,12,7,14,1675,17,23,0,4,0,0
+2014/15,Stoke City,3158,Ryan Shawcross,D,32,2,1,6,11,8,13,2832,32,39,0,7,0,0
+2014/15,Stoke City,2047,Jonathan Walters,F,32,8,4,4,14,7,11,2423,28,28,0,5,0,0
+2014/15,Stoke City,4821,Erik Pieters,D,31,0,2,7,12,8,11,2562,29,30,0,8,0,0
+2014/15,Stoke City,4081,Charlie Adam,M,29,7,1,0,12,6,11,1508,15,17,0,5,0,0
+2014/15,Stoke City,4823,Marko Arnautovic,F,29,1,5,2,9,7,13,1918,20,26,0,2,0,0
+2014/15,Stoke City,2299,Glenn Whelan,M,28,0,0,7,13,6,9,2264,26,27,0,6,0,0
+2014/15,Stoke City,4636,Geoff Cameron,D,27,0,1,4,10,7,10,2135,21,30,0,4,0,0
+2014/15,Stoke City,3471,Marc Wilson,M,27,0,0,5,11,6,10,2124,25,25,0,4,1,0
+2014/15,Stoke City,2517,Phil Bardsley,D,25,0,1,5,10,5,10,2082,24,29,0,6,0,0
+2014/15,Stoke City,3983,Victor Moses,M,19,3,3,2,9,4,6,1455,19,19,0,3,0,0
+2014/15,Stoke City,4822,Muniesa,D,19,0,0,6,10,3,6,1387,14,16,0,3,0,0
+2014/15,Stoke City,2928,Stephen Ireland,M,17,0,3,0,8,3,6,933,11,15,0,3,0,0
+2014/15,Stoke City,4898,Bojan,F,16,4,1,1,5,3,8,1209,14,20,0,2,0,0
+2014/15,Stoke City,2007,Steve Sidwell,M,12,0,0,0,4,4,4,447,5,8,0,3,0,0
+2014/15,Stoke City,4989,Philipp Wollscheid,D,12,0,0,2,6,3,3,1007,12,15,0,4,0,0
+2014/15,Stoke City,4526,Oussama Assaidi,M,9,0,1,0,3,1,5,224,1,4,0,1,0,0
+2014/15,Stoke City,4204,Peter Odemwingie,F,7,0,0,0,3,3,1,190,1,3,0,0,0,0
+2014/15,Stoke City,4634,Jack Butland,G,3,0,0,2,1,1,1,270,3,2,10,0,0,0
+2014/15,Stoke City,2053,Robert Huth,D,1,0,0,0,1,0,0,3,0,0,0,0,0,0
+2014/15,Stoke City,10507,Oliver Shenton,M,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+2014/15,Stoke City,10506,Dionatan Teixeira,D,1,0,0,0,1,0,0,4,0,0,0,0,0,0
+2014/15,Sunderland,1717,John O'Shea,D,37,0,0,12,6,17,14,3271,37,53,0,4,0,1
+2014/15,Sunderland,2613,Sebastian Larsson,M,36,3,3,7,7,16,13,3060,36,43,0,10,0,0
+2014/15,Sunderland,4396,Connor Wickham,F,36,5,1,7,7,16,13,2773,31,40,0,8,0,0
+2014/15,Sunderland,2274,Adam Johnson,M,32,4,1,5,6,14,12,2082,23,28,0,2,0,0
+2014/15,Sunderland,9793,Santiago Vergini,D,31,0,0,8,6,13,12,2623,28,40,0,6,0,1
+2014/15,Sunderland,3850,Steven Fletcher,F,30,5,2,4,6,12,12,1783,20,35,0,4,0,0
+2014/15,Sunderland,3981,Jordi Gómez,M,29,4,2,6,7,13,9,1941,22,24,0,7,0,0
+2014/15,Sunderland,2949,Lee Cattermole,M,28,1,0,9,6,15,7,2358,26,35,0,14,0,0
+2014/15,Sunderland,4319,Costel Pantilimon,G,28,0,0,11,6,12,10,2520,28,33,109,2,0,0
+2014/15,Sunderland,3362,Patrick van Aanholt,D,28,0,5,7,6,11,11,2306,26,39,0,4,0,1
+2014/15,Sunderland,1211,Wes Brown,D,25,0,0,8,3,12,10,1993,23,25,0,5,1,1
+2014/15,Sunderland,3389,Jack Rodwell,M,23,3,0,1,3,10,10,1486,17,34,0,5,0,0
+2014/15,Sunderland,8175,William Buckley,M,22,0,2,1,3,11,8,868,9,22,0,2,0,0
+2014/15,Sunderland,3364,Liam Bridcutt,M,18,0,2,2,5,8,5,907,10,15,0,6,1,1
+2014/15,Sunderland,1526,Jermain Defoe,F,17,4,0,4,4,6,7,1457,17,19,0,1,0,0
+2014/15,Sunderland,5665,Anthony Réveillere,D,16,0,1,5,2,9,5,1327,15,18,0,0,0,0
+2014/15,Sunderland,2531,Danny Graham,F,14,1,0,0,3,6,5,626,7,6,0,0,0,0
+2014/15,Sunderland,4438,Billy Jones,D,14,0,0,5,4,5,5,1255,14,18,0,7,0,0
+2014/15,Sunderland,10511,Ricardo Álvarez,M,13,0,0,0,1,7,5,494,5,11,0,3,0,0
+2014/15,Sunderland,3897,Jozy Altidore,F,11,0,0,0,1,6,4,304,2,4,0,0,0,0
+2014/15,Sunderland,4313,Sebastián Coates,D,10,0,0,4,3,3,4,822,9,12,0,1,0,0
+2014/15,Sunderland,2834,Vito Mannone,G,10,0,0,2,1,5,4,900,10,20,35,0,0,0
+2014/15,Sunderland,4830,Emanuele Giaccherini,M,8,0,0,0,0,3,5,304,2,5,0,2,0,0
+2014/15,Sunderland,4648,Mikael Mandron,F,1,0,0,0,0,0,1,4,0,0,0,0,0,0
+2014/15,Sunderland,4827,Valentin Roberge,D,1,0,0,0,0,1,0,90,1,2,0,1,0,0
+2014/15,Swansea City,3309,Lukasz Fabianski,G,37,0,0,13,16,8,13,3308,37,46,137,0,1,0
+2014/15,Swansea City,4403,Ashley Williams,D,37,0,0,13,16,8,13,3330,37,48,0,6,0,0
+2014/15,Swansea City,4402,Neil Taylor,D,34,0,2,13,15,8,11,3000,34,41,0,9,0,0
+2014/15,Swansea City,4656,Ki Sung-Yueng,M,33,8,1,10,15,7,11,2690,30,33,0,4,0,0
+2014/15,Swansea City,2341,Nathan Dyer,M,32,3,2,4,13,7,12,1868,23,29,0,2,0,0
+2014/15,Swansea City,4421,Gylfi Sigurdsson,M,32,7,10,4,13,7,12,2697,32,43,0,2,0,0
+2014/15,Swansea City,6900,Bafétimbi Gomis,F,31,7,0,1,12,7,12,1640,18,26,0,0,0,0
+2014/15,Swansea City,4135,Jonjo Shelvey,M,31,3,5,8,15,6,10,2454,28,30,0,8,1,1
+2014/15,Swansea City,10518,Jefferson Montero,M,30,1,7,2,13,5,12,1569,15,21,0,0,0,0
+2014/15,Swansea City,2681,Wayne Routledge,M,29,3,1,5,11,7,11,2316,27,31,0,1,1,0
+2014/15,Swansea City,5672,Federico Fernández,D,28,0,0,10,11,7,10,2475,27,37,0,0,0,0
+2014/15,Swansea City,4405,Angel Rangel,D,27,0,0,6,12,7,8,2036,22,25,0,1,1,0
+2014/15,Swansea City,4838,Wilfried Bony,F,20,9,2,2,8,5,7,1302,16,17,0,2,1,0
+2014/15,Swansea City,3679,Marvin Emnes,F,17,0,0,0,6,4,7,502,3,9,0,2,0,0
+2014/15,Swansea City,2889,Jack Cork,D,15,1,0,4,7,2,6,1325,15,19,0,1,0,0
+2014/15,Swansea City,4430,Tom Carroll,M,13,0,0,1,8,2,3,692,8,10,0,1,0,0
+2014/15,Swansea City,10520,Modou Barrow,F,11,0,1,0,4,3,4,277,1,4,0,1,0,0
+2014/15,Swansea City,4835,Jordi Amat,D,10,0,0,2,7,0,3,588,7,7,0,3,0,0
+2014/15,Swansea City,5074,Nélson Oliveira,F,10,1,0,0,4,2,4,389,4,9,0,0,0,0
+2014/15,Swansea City,3956,Kyle Naughton,D,10,0,1,2,5,1,4,858,10,10,0,1,0,0
+2014/15,Swansea City,4416,Jazz Richards,D,10,0,1,1,3,2,5,634,7,12,0,1,0,0
+2014/15,Swansea City,2152,Leon Britton,M,9,0,0,0,2,2,5,537,7,10,0,1,0,0
+2014/15,Swansea City,3312,Kyle Bartley,D,7,0,0,1,2,1,4,630,7,10,0,2,0,0
+2014/15,Swansea City,8650,Matt Grimes,M,3,0,0,0,2,0,1,42,0,1,0,0,0,0
+2014/15,Swansea City,4652,Dwight Tiendalli,D,3,0,0,0,2,0,1,128,1,5,0,0,0,0
+2014/15,Swansea City,7482,Jay Fulton,M,2,0,0,1,1,0,1,114,1,1,0,0,0,0
+2014/15,Swansea City,4401,Gerhard Tremmel,G,2,0,0,0,0,0,2,109,1,3,4,0,0,0
+2014/15,Swansea City,10519,Kenji Gorré,M,1,0,0,0,0,0,1,6,0,0,0,0,0,0
+2014/15,Tottenham Hotspur,4845,Christian Eriksen,M,38,10,2,7,19,7,12,3139,37,49,0,4,0,0
+2014/15,Tottenham Hotspur,4844,Nacer Chadli,M,35,11,5,2,16,7,12,2415,28,40,0,3,0,0
+2014/15,Tottenham Hotspur,4664,Hugo Lloris,G,35,0,0,8,18,6,11,3064,35,48,107,0,0,0
+2014/15,Tottenham Hotspur,3960,Harry Kane,F,34,21,4,3,19,6,9,2581,28,39,0,4,0,1
+2014/15,Tottenham Hotspur,4842,Érik Lamela,M,33,2,7,4,15,7,11,2299,25,30,0,6,0,0
+2014/15,Tottenham Hotspur,4666,Jan Vertonghen,D,32,0,0,7,18,5,9,2810,31,44,0,6,0,1
+2014/15,Tottenham Hotspur,3725,Ryan Mason,M,31,1,4,3,16,6,9,2325,29,36,0,10,0,0
+2014/15,Tottenham Hotspur,4112,Eric Dier,D,28,2,2,6,13,6,9,2290,25,37,0,4,0,0
+2014/15,Tottenham Hotspur,3507,Danny Rose,D,28,3,4,6,14,4,10,2372,27,38,0,7,0,0
+2014/15,Tottenham Hotspur,4847,Nabil Bentaleb,M,26,0,2,5,14,5,7,2195,25,35,0,8,0,0
+2014/15,Tottenham Hotspur,4123,Mousa Dembélé,M,26,1,1,0,14,4,8,1138,10,22,0,1,0,0
+2014/15,Tottenham Hotspur,4846,Roberto Soldado,F,24,1,1,0,12,3,9,794,7,14,0,1,0,0
+2014/15,Tottenham Hotspur,7215,Federico Fazio,D,20,0,0,5,10,3,7,1777,20,25,0,2,1,0
+2014/15,Tottenham Hotspur,3724,Andros Townsend,M,17,2,2,0,8,3,6,751,10,15,0,2,0,0
+2014/15,Tottenham Hotspur,4841,Paulinho,M,15,0,1,2,9,2,4,479,3,6,0,3,0,0
+2014/15,Tottenham Hotspur,3955,Kyle Walker,D,15,0,0,1,10,2,3,1307,15,24,0,3,0,0
+2014/15,Tottenham Hotspur,4408,Ben Davies,D,14,0,1,2,8,4,2,891,9,12,0,3,0,0
+2014/15,Tottenham Hotspur,2845,Emmanuel Adebayor,F,13,2,1,1,5,2,6,814,9,9,0,1,0,0
+2014/15,Tottenham Hotspur,4843,Étienne Capoue,M,12,0,0,3,4,2,6,901,11,15,0,2,0,0
+2014/15,Tottenham Hotspur,10523,Benjamin Stambouli,M,12,0,0,1,9,2,1,453,4,3,0,4,0,0
+2014/15,Tottenham Hotspur,3508,Younes Kaboul,D,11,0,0,3,4,2,5,990,11,16,0,2,0,0
+2014/15,Tottenham Hotspur,4840,Vlad Chiriches,D,10,0,0,2,2,4,4,709,8,10,0,2,1,0
+2014/15,Tottenham Hotspur,2270,Aaron Lennon,M,9,0,2,0,3,3,3,276,3,4,0,1,0,0
+2014/15,Tottenham Hotspur,3956,Kyle Naughton,D,5,0,0,0,3,1,1,326,5,4,0,0,2,0
+2014/15,Tottenham Hotspur,4398,Michel Vorm,G,4,0,0,1,2,1,1,356,3,5,12,0,0,0
+2014/15,Tottenham Hotspur,4667,Lewis Holtby,M,1,0,0,0,1,0,0,29,0,0,0,0,0,0
+2014/15,Tottenham Hotspur,10522,DeAndre Yedlin,D,1,0,0,0,0,0,1,11,0,0,0,0,0,0
+2014/15,West Bromwich Albion,4205,Saido Berahino,F,38,14,1,5,11,11,16,2929,32,46,0,2,0,0
+2014/15,West Bromwich Albion,2847,Craig Gardner,M,35,3,4,8,11,9,15,2684,30,36,0,10,0,0
+2014/15,West Bromwich Albion,3744,Chris Brunt,M,34,2,10,14,10,10,14,2895,33,41,0,5,0,0
+2014/15,West Bromwich Albion,2574,Joleon Lescott,D,34,1,2,15,11,9,14,3060,34,44,0,3,0,0
+2014/15,West Bromwich Albion,2529,James Morrison,M,33,2,1,8,10,9,14,2558,29,36,0,3,0,0
+2014/15,West Bromwich Albion,4198,Craig Dawson,D,29,2,0,11,9,8,12,2591,29,38,0,6,0,0
+2014/15,West Bromwich Albion,2932,Ben Foster,G,28,0,0,11,8,8,12,2486,28,34,75,2,0,0
+2014/15,West Bromwich Albion,4185,Stéphane Sessègnon,M,28,1,3,2,8,8,12,1761,20,29,0,5,0,0
+2014/15,West Bromwich Albion,6390,Brown Ideye,F,24,4,2,3,7,7,10,1296,13,17,0,2,0,0
+2014/15,West Bromwich Albion,4437,Gareth McAuley,D,24,1,0,12,8,7,9,2072,24,28,0,2,1,0
+2014/15,West Bromwich Albion,4130,Andre Wisdom,D,24,0,1,8,7,7,10,1971,22,29,0,1,0,0
+2014/15,West Bromwich Albion,2905,Victor Anichebe,F,21,3,1,1,4,8,9,1034,11,14,0,0,0,0
+2014/15,West Bromwich Albion,3746,Graham Dorrans,M,21,1,3,5,4,7,10,1593,19,24,0,5,0,0
+2014/15,West Bromwich Albion,4673,Claudio Yacob,M,20,0,0,9,8,7,5,1390,16,18,0,5,1,0
+2014/15,West Bromwich Albion,2129,Chris Baird,D,19,0,0,2,6,6,7,801,9,16,0,2,0,0
+2014/15,West Bromwich Albion,3751,Youssouf Mulumbu,M,17,0,0,2,2,6,9,902,10,14,0,1,1,0
+2014/15,West Bromwich Albion,1943,Darren Fletcher,M,15,1,0,8,6,4,5,1350,15,19,0,2,0,0
+2014/15,West Bromwich Albion,10527,Sébastien Pocognoli,D,15,0,0,3,4,5,6,1214,15,18,0,1,0,0
+2014/15,West Bromwich Albion,3734,Jonas Olsson,D,13,1,0,3,4,3,6,823,9,18,0,2,0,0
+2014/15,West Bromwich Albion,2011,Boaz Myhill,G,11,0,0,4,4,3,4,934,10,17,56,1,0,0
+2014/15,West Bromwich Albion,10528,Cristian Gamboa,D,10,0,1,0,2,0,8,236,1,3,0,1,0,0
+2014/15,West Bromwich Albion,3779,Callum McManaman,M,8,0,1,0,2,4,2,347,5,8,0,1,0,0
+2014/15,West Bromwich Albion,5354,Silvestre Varela,F,7,1,0,1,1,2,4,333,3,7,0,1,0,0
+2014/15,West Bromwich Albion,2930,Georgios Samaras,F,5,0,0,0,1,0,4,67,0,0,0,0,0,0
+2014/15,West Bromwich Albion,10548,Sebastián Blanco,M,3,0,0,0,0,1,2,36,0,0,0,1,0,0
+2014/15,West Bromwich Albion,10526,Jason Davidson,D,2,0,0,0,0,1,1,102,1,3,0,0,0,0
+2014/15,West Ham United,8897,Aaron Cresswell,D,38,2,4,9,12,11,15,3420,38,47,0,5,0,0
+2014/15,West Ham United,4852,Adrián,G,38,0,0,8,12,11,15,3391,38,47,129,3,1,0
+2014/15,West Ham United,2122,Stewart Downing,M,37,6,8,9,12,11,14,3313,37,45,0,3,0,0
+2014/15,West Ham United,4248,Carl Jenkinson,D,32,0,2,9,11,11,10,2667,29,30,0,2,0,0
+2014/15,West Ham United,10541,Enner Valencia,F,32,4,3,2,9,11,12,2105,25,24,0,2,0,0
+2014/15,West Ham United,5861,Cheikhou Kouyaté,M,31,4,2,5,9,10,12,2662,30,38,0,5,0,0
+2014/15,West Ham United,4209,Winston Reid,D,30,1,0,3,9,8,13,2503,29,39,0,10,0,0
+2014/15,West Ham United,2040,Kevin Nolan,M,29,1,1,2,10,7,12,1745,19,21,0,2,0,0
+2014/15,West Ham United,3014,Mark Noble,M,28,2,3,4,8,8,12,2307,27,31,0,4,0,1
+2014/15,West Ham United,2837,Alexandre Song,M,28,0,3,6,8,9,11,2249,25,32,0,4,0,0
+2014/15,West Ham United,3010,James Collins,D,27,0,0,5,10,7,10,1879,21,22,0,5,1,1
+2014/15,West Ham United,4849,Morgan Amalfitano,M,24,3,1,4,9,6,9,1180,14,18,0,3,0,0
+2014/15,West Ham United,2058,Carlton Cole,F,23,2,0,0,6,7,10,907,8,16,0,2,0,0
+2014/15,West Ham United,10540,Diafra Sakho,F,23,10,2,2,8,8,7,1760,20,23,0,2,0,0
+2014/15,West Ham United,3517,James Tomkins,D,22,1,3,3,8,7,7,1852,20,27,0,6,0,0
+2014/15,West Ham United,3175,Andy Carroll,F,14,5,1,3,5,5,4,1027,12,11,0,2,0,0
+2014/15,West Ham United,4000,Matthew Jarvis,M,11,0,0,0,3,5,3,413,4,5,0,0,0,0
+2014/15,West Ham United,2647,Joseph O'Brien,D,9,0,0,0,4,0,5,526,6,11,0,2,0,0
+2014/15,West Ham United,10538,Nenê,M,8,0,0,0,2,0,6,128,0,3,0,0,0,0
+2014/15,West Ham United,3338,Mauro Zárate,F,7,2,1,0,4,1,2,415,5,5,0,1,0,0
+2014/15,West Ham United,4680,Guy Demel,D,6,0,0,0,1,1,4,258,3,7,0,0,0,0
+2014/15,West Ham United,9982,Reece Burke,D,5,0,0,2,1,1,3,415,4,4,0,0,0,0
+2014/15,West Ham United,2447,Ricardo Vaz Tê,F,4,0,0,0,1,0,3,224,3,2,0,0,0,0
+2014/15,West Ham United,3982,Mohamed Diamé,M,3,0,0,0,1,0,2,55,0,3,0,0,0,0
+2014/15,West Ham United,8356,Diego Poyet,M,3,0,0,0,1,1,1,90,1,2,0,1,0,0
+2014/15,West Ham United,1342,Jussi Jääskeläinen,G,1,0,0,0,0,1,0,27,0,0,4,0,0,0
+2014/15,West Ham United,4692,Elliot Lee,M,1,0,0,0,0,0,1,13,0,1,0,0,0,0
+2014/15,West Ham United,4159,Ravel Morrison,M,1,0,0,0,0,0,1,33,0,2,0,0,0,0
