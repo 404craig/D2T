@@ -7,7 +7,7 @@
 "clubPos": 2,
 "player": "Thierry Henry",
 "pos": "FWD",
-"ovr": 91,
+"ovr": 93,
 "tier": "best",
 "stats": {
 "GOL": 78,
@@ -113,7 +113,7 @@
 "clubPos": 2,
 "player": "Robert Pires",
 "pos": "MID",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "AST": 77,
@@ -274,7 +274,7 @@
 "clubPos": 2,
 "player": "Patrick Vieira",
 "pos": "MID",
-"ovr": 88,
+"ovr": 90,
 "tier": "gold",
 "stats": {
 "AST": 63,
@@ -538,7 +538,7 @@
 "clubPos": 2,
 "player": "Tony Adams",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 66,
@@ -696,7 +696,7 @@
 "clubPos": 2,
 "player": "David Seaman",
 "pos": "GK",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 59,
@@ -5730,7 +5730,7 @@
 "clubPos": 6,
 "player": "Jimmy Floyd Hasselbaink",
 "pos": "FWD",
-"ovr": 88,
+"ovr": 90,
 "tier": "best",
 "stats": {
 "GOL": 83,
@@ -13102,7 +13102,7 @@
 "clubPos": 4,
 "player": "Lee Bowyer",
 "pos": "MID",
-"ovr": 86,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "AST": 62,
@@ -13156,7 +13156,7 @@
 "clubPos": 4,
 "player": "Mark Viduka",
 "pos": "FWD",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "GOL": 68,
@@ -13262,7 +13262,7 @@
 "clubPos": 4,
 "player": "Alan Smith",
 "pos": "FWD",
-"ovr": 82,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "GOL": 61,
@@ -13421,7 +13421,7 @@
 "clubPos": 4,
 "player": "Ian Harte",
 "pos": "DEF",
-"ovr": 88,
+"ovr": 90,
 "tier": "best",
 "stats": {
 "CLN": 58,
@@ -13580,7 +13580,7 @@
 "clubPos": 4,
 "player": "Nigel Martyn",
 "pos": "GK",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "CLN": 62,
@@ -16069,7 +16069,7 @@
 "clubPos": 3,
 "player": "Sander Westerveld",
 "pos": "GK",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 98,
@@ -16121,7 +16121,7 @@
 "clubPos": 3,
 "player": "Emile Heskey",
 "pos": "FWD",
-"ovr": 85,
+"ovr": 87,
 "tier": "best",
 "stats": {
 "GOL": 98,
@@ -16494,7 +16494,7 @@
 "clubPos": 3,
 "player": "Michael Owen",
 "pos": "FWD",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "GOL": 85,
@@ -18984,7 +18984,7 @@
 "clubPos": 1,
 "player": "Gary Neville",
 "pos": "DEF",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "CLN": 57,
@@ -19037,7 +19037,7 @@
 "clubPos": 1,
 "player": "Paul Scholes",
 "pos": "MID",
-"ovr": 89,
+"ovr": 90,
 "tier": "gold",
 "stats": {
 "AST": 68,
@@ -19091,7 +19091,7 @@
 "clubPos": 1,
 "player": "David Beckham",
 "pos": "MID",
-"ovr": 90,
+"ovr": 92,
 "tier": "best",
 "stats": {
 "AST": 90,
@@ -19145,7 +19145,7 @@
 "clubPos": 1,
 "player": "Ryan Giggs",
 "pos": "MID",
-"ovr": 87,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "AST": 83,
@@ -19303,7 +19303,7 @@
 "clubPos": 1,
 "player": "Mikael Silvestre",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 59,
@@ -19409,7 +19409,7 @@
 "clubPos": 1,
 "player": "Teddy Sheringham",
 "pos": "FWD",
-"ovr": 88,
+"ovr": 90,
 "tier": "gold",
 "stats": {
 "GOL": 78,
@@ -19514,7 +19514,7 @@
 "clubPos": 1,
 "player": "Nicky Butt",
 "pos": "MID",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 55,
@@ -19568,7 +19568,7 @@
 "clubPos": 1,
 "player": "Roy Keane",
 "pos": "MID",
-"ovr": 87,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "AST": 78,
@@ -19622,7 +19622,7 @@
 "clubPos": 1,
 "player": "Dwight Yorke",
 "pos": "FWD",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "GOL": 72,
@@ -19727,7 +19727,7 @@
 "clubPos": 1,
 "player": "Andy Cole",
 "pos": "FWD",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "GOL": 79,

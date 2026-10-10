@@ -7,7 +7,7 @@
 "clubPos": 2,
 "player": "David Raya",
 "pos": "GK",
-"ovr": 90,
+"ovr": 92,
 "tier": "best",
 "stats": {
 "CLN": 75,
@@ -59,7 +59,7 @@
 "clubPos": 2,
 "player": "Leandro Trossard",
 "pos": "MID",
-"ovr": 86,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "AST": 81,
@@ -167,7 +167,7 @@
 "clubPos": 2,
 "player": "Declan Rice",
 "pos": "MID",
-"ovr": 88,
+"ovr": 90,
 "tier": "gold",
 "stats": {
 "AST": 78,
@@ -221,7 +221,7 @@
 "clubPos": 2,
 "player": "William Saliba",
 "pos": "DEF",
-"ovr": 87,
+"ovr": 90,
 "tier": "gold",
 "stats": {
 "CLN": 83,
@@ -274,7 +274,7 @@
 "clubPos": 2,
 "player": "Gabriel Martinelli",
 "pos": "FWD",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "GOL": 62,
@@ -379,7 +379,7 @@
 "clubPos": 2,
 "player": "Martin Odegaard",
 "pos": "MID",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "AST": 87,
@@ -433,7 +433,7 @@
 "clubPos": 2,
 "player": "Gabriel Magalhaes",
 "pos": "DEF",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "CLN": 84,
@@ -594,7 +594,7 @@
 "clubPos": 2,
 "player": "Bukayo Saka",
 "pos": "MID",
-"ovr": 88,
+"ovr": 90,
 "tier": "gold",
 "stats": {
 "AST": 96,
@@ -648,7 +648,7 @@
 "clubPos": 2,
 "player": "Kai Havertz",
 "pos": "MID",
-"ovr": 85,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "AST": 63,
@@ -1335,7 +1335,7 @@
 "clubPos": 6,
 "player": "Ollie Watkins",
 "pos": "FWD",
-"ovr": 90,
+"ovr": 91,
 "tier": "best",
 "stats": {
 "GOL": 85,
@@ -1387,7 +1387,7 @@
 "clubPos": 6,
 "player": "Emiliano Martinez",
 "pos": "GK",
-"ovr": 84,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "CLN": 55,
@@ -1439,7 +1439,7 @@
 "clubPos": 6,
 "player": "Morgan Rogers",
 "pos": "MID",
-"ovr": 87,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "AST": 87,
@@ -1547,7 +1547,7 @@
 "clubPos": 6,
 "player": "Ezri Konsa",
 "pos": "DEF",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "CLN": 76,
@@ -4516,7 +4516,7 @@
 "clubPos": 10,
 "player": "Bryan Mbeumo",
 "pos": "MID",
-"ovr": 85,
+"ovr": 86,
 "tier": "best",
 "stats": {
 "AST": 73,
@@ -7598,7 +7598,7 @@
 "clubPos": 4,
 "player": "Cole Palmer",
 "pos": "FWD",
-"ovr": 85,
+"ovr": 86,
 "tier": "best",
 "stats": {
 "GOL": 77,
@@ -16772,7 +16772,7 @@
 "clubPos": 1,
 "player": "Mohamed Salah",
 "pos": "FWD",
-"ovr": 99,
+"ovr": 97,
 "tier": "best",
 "stats": {
 "GOL": 95,
@@ -16824,7 +16824,7 @@
 "clubPos": 1,
 "player": "Ryan Gravenberch",
 "pos": "MID",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "AST": 59,
@@ -16878,7 +16878,7 @@
 "clubPos": 1,
 "player": "Virgil van Dijk",
 "pos": "DEF",
-"ovr": 87,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "CLN": 84,
@@ -16931,7 +16931,7 @@
 "clubPos": 1,
 "player": "Luis Diaz",
 "pos": "FWD",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "GOL": 76,
@@ -16983,7 +16983,7 @@
 "clubPos": 1,
 "player": "Dominik Szoboszlai",
 "pos": "MID",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 76,
@@ -17037,7 +17037,7 @@
 "clubPos": 1,
 "player": "Cody Gakpo",
 "pos": "FWD",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "GOL": 74,
@@ -17089,7 +17089,7 @@
 "clubPos": 1,
 "player": "Alexis Mac Allister",
 "pos": "MID",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 69,
@@ -17143,7 +17143,7 @@
 "clubPos": 1,
 "player": "Trent Alexander-Arnold",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 38,
@@ -18040,7 +18040,7 @@
 "clubPos": 3,
 "player": "Josko Gvardiol",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 74,
@@ -18093,7 +18093,7 @@
 "clubPos": 3,
 "player": "Ilkay Gundogan",
 "pos": "MID",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 79,
@@ -18147,7 +18147,7 @@
 "clubPos": 3,
 "player": "Bernardo Silva",
 "pos": "MID",
-"ovr": 86,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "AST": 63,
@@ -18413,7 +18413,7 @@
 "clubPos": 3,
 "player": "Kevin De Bruyne",
 "pos": "MID",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 90,
@@ -18467,7 +18467,7 @@
 "clubPos": 3,
 "player": "Phil Foden",
 "pos": "MID",
-"ovr": 86,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "AST": 56,
@@ -18627,7 +18627,7 @@
 "clubPos": 3,
 "player": "Manuel Akanji",
 "pos": "DEF",
-"ovr": 82,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "CLN": 53,
@@ -18734,7 +18734,7 @@
 "clubPos": 3,
 "player": "Ederson",
 "pos": "GK",
-"ovr": 86,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "CLN": 84,
@@ -19691,7 +19691,7 @@
 "clubPos": 15,
 "player": "Bruno Fernandes",
 "pos": "MID",
-"ovr": 87,
+"ovr": 89,
 "tier": "best",
 "stats": {
 "AST": 88,
@@ -21604,7 +21604,7 @@
 "clubPos": 5,
 "player": "Alexander Isak",
 "pos": "FWD",
-"ovr": 87,
+"ovr": 89,
 "tier": "best",
 "stats": {
 "GOL": 95,

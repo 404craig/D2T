@@ -153,3 +153,7 @@ New inputs (Craig): the player's performance and club finish in his other Premie
 Shift: +2 for everyone was tested and puts too many players in the 80s and 90s against the panel; no shift matches the panel's bands within 2 points (90s 2/2, 80s 24/22, 70s 53/55, 60s 21/21, panel/ours). OFFSET is 0.
 
 Results: `docs/cards/top50_2000-2010.json` and the page `docs/cards/top50.html`. For players with 10+ apps each season: 90s about 1 to 2%, 80s 12 to 15%, 70s 55 to 66%, 60s 20 to 30%. Players at 90+ per season: 2 to 7.
+
+## Card curve (Craig: 6 to 8 players in the 90s, peaks mostly 96 to 97)
+
+`card_curve()` in `tools/fit_panel.py`, applied to every player after the learned rating. Values up to 82 are unchanged; 82 to the 90 line are lifted; above 90 the scale is squeezed (95.5 -> 96, 100.7 -> 97, 103 -> 99). The 90 line can move between 86.6 and 89.8 per season so 6 to 8 players clear 90, because seasons differ in depth. Order is unchanged and agreement with the panel rose to 0.900. Henry 2003/04 is the highest value in the data before the curve (102.9), so it is the one 99; his 2002/03 is 98, 2004/05 and 2005/06 97; Lampard peaks at 97. Every season 1993/94 to 2025/26 has 7 players at 90+ except 1997/98 (5). 1992/93 has only 1, because the first season has no earlier seasons to draw on; it needs its own handling. Band check on panel players (panel/ours): 90s 2/4, 80s 24/21, 70s 53/55, 60s 21/21.

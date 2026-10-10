@@ -60,7 +60,7 @@
 "clubPos": 3,
 "player": "Thomas Vermaelen",
 "pos": "DEF",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "CLN": 51,
@@ -113,7 +113,7 @@
 "clubPos": 3,
 "player": "Andrey Arshavin",
 "pos": "MID",
-"ovr": 82,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "AST": 47,
@@ -273,7 +273,7 @@
 "clubPos": 3,
 "player": "Cesc Fabregas",
 "pos": "MID",
-"ovr": 90,
+"ovr": 91,
 "tier": "best",
 "stats": {
 "AST": 97,
@@ -912,7 +912,7 @@
 "clubPos": 3,
 "player": "Robin van Persie",
 "pos": "FWD",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "GOL": 82,
@@ -1707,7 +1707,7 @@
 "player": "Ashley Young",
 "pos": "MID",
 "ovr": 84,
-"tier": "best",
+"tier": "gold",
 "stats": {
 "AST": 72,
 "GOL": 68,
@@ -1865,8 +1865,8 @@
 "clubPos": 6,
 "player": "James Milner",
 "pos": "MID",
-"ovr": 84,
-"tier": "gold",
+"ovr": 85,
+"tier": "best",
 "stats": {
 "AST": 90,
 "GOL": 71,
@@ -8346,7 +8346,7 @@
 "clubPos": 1,
 "player": "John Terry",
 "pos": "DEF",
-"ovr": 87,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "CLN": 66,
@@ -8399,7 +8399,7 @@
 "clubPos": 1,
 "player": "Frank Lampard",
 "pos": "MID",
-"ovr": 94,
+"ovr": 95,
 "tier": "best",
 "stats": {
 "AST": 93,
@@ -8453,7 +8453,7 @@
 "clubPos": 1,
 "player": "Petr Cech",
 "pos": "GK",
-"ovr": 87,
+"ovr": 90,
 "tier": "gold",
 "stats": {
 "CLN": 72,
@@ -8505,7 +8505,7 @@
 "clubPos": 1,
 "player": "Nicolas Anelka",
 "pos": "FWD",
-"ovr": 87,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "GOL": 69,
@@ -8557,7 +8557,7 @@
 "clubPos": 1,
 "player": "Florent Malouda",
 "pos": "MID",
-"ovr": 87,
+"ovr": 90,
 "tier": "gold",
 "stats": {
 "AST": 86,
@@ -8665,7 +8665,7 @@
 "clubPos": 1,
 "player": "Didier Drogba",
 "pos": "FWD",
-"ovr": 93,
+"ovr": 94,
 "tier": "gold",
 "stats": {
 "GOL": 95,
@@ -8770,7 +8770,7 @@
 "clubPos": 1,
 "player": "Ashley Cole",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 75,
@@ -14545,8 +14545,8 @@
 "clubPos": 7,
 "player": "Pepe Reina",
 "pos": "GK",
-"ovr": 87,
-"tier": "best",
+"ovr": 88,
+"tier": "gold",
 "stats": {
 "CLN": 77,
 "CON": 69,
@@ -14597,7 +14597,7 @@
 "clubPos": 7,
 "player": "Jamie Carragher",
 "pos": "DEF",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "CLN": 84,
@@ -14650,7 +14650,7 @@
 "clubPos": 7,
 "player": "Dirk Kuyt",
 "pos": "FWD",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "GOL": 57,
@@ -14810,8 +14810,8 @@
 "clubPos": 7,
 "player": "Steven Gerrard",
 "pos": "MID",
-"ovr": 87,
-"tier": "gold",
+"ovr": 89,
+"tier": "best",
 "stats": {
 "AST": 76,
 "GOL": 86,
@@ -15181,7 +15181,7 @@
 "clubPos": 7,
 "player": "Fernando Torres",
 "pos": "FWD",
-"ovr": 86,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "GOL": 96,
@@ -16136,7 +16136,7 @@
 "clubPos": 5,
 "player": "Gareth Barry",
 "pos": "MID",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "AST": 75,
@@ -16296,7 +16296,7 @@
 "clubPos": 5,
 "player": "Carlos Tevez",
 "pos": "FWD",
-"ovr": 88,
+"ovr": 90,
 "tier": "best",
 "stats": {
 "GOL": 89,
@@ -16560,7 +16560,7 @@
 "clubPos": 5,
 "player": "Emmanuel Adebayor",
 "pos": "FWD",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "GOL": 84,
@@ -17778,7 +17778,7 @@
 "clubPos": 2,
 "player": "Patrice Evra",
 "pos": "DEF",
-"ovr": 86,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "CLN": 81,
@@ -17885,7 +17885,7 @@
 "clubPos": 2,
 "player": "Dimitar Berbatov",
 "pos": "FWD",
-"ovr": 87,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "GOL": 79,
@@ -17937,7 +17937,7 @@
 "clubPos": 2,
 "player": "Wayne Rooney",
 "pos": "FWD",
-"ovr": 95,
+"ovr": 96,
 "tier": "best",
 "stats": {
 "GOL": 94,
@@ -18043,7 +18043,7 @@
 "clubPos": 2,
 "player": "Darren Fletcher",
 "pos": "MID",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 69,
@@ -18097,7 +18097,7 @@
 "clubPos": 2,
 "player": "Paul Scholes",
 "pos": "MID",
-"ovr": 82,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "AST": 62,
@@ -18205,7 +18205,7 @@
 "clubPos": 2,
 "player": "Nemanja Vidic",
 "pos": "DEF",
-"ovr": 86,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "CLN": 81,
@@ -18258,7 +18258,7 @@
 "clubPos": 2,
 "player": "Nani",
 "pos": "MID",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 86,
@@ -18312,7 +18312,7 @@
 "clubPos": 2,
 "player": "Edwin van der Sar",
 "pos": "GK",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "CLN": 82,

@@ -164,11 +164,30 @@ def band(v):
     return "90s" if v >= 90 else "80s" if v >= 80 else "70s" if v >= 70 else "60s" if v >= 60 else "50s and below"
 
 
+# Card curve (Craig, 10 Oct 2026): 6 to 8 players in the 90s each season; normal peaks
+# 96 to 97; only an outstanding season (about 103 before the curve, Henry 2003/04) reaches 99.
+# One curve for every player and season: values up to 82 are unchanged, 82 to the 90 line are
+# lifted, and above it the scale is squeezed (95.5 -> 96, 100.7 -> 97, 103 -> 99). The 90 line
+# may move between 86.6 and 89.8 per season so that 6 to 8 players clear 90 (seasons differ in depth).
+def card_curve(v):
+    def apply(t90):
+        return np.interp(v, [0, 82, t90, 95.5, 100.7, 103, 200], [0, 82, 89.5, 96, 97, 99, 99])
+    best = None
+    for t90 in np.arange(86.6, 89.81, 0.05):
+        c = int(np.sum(np.round(apply(t90)) >= 90))
+        score = (0 if 6 <= c <= 8 else 1, abs(c - 7), abs(t90 - 87.8))
+        if best is None or score < best[0]:
+            best = (score, t90)
+    return apply(best[1])
+
+
 if "--write" in sys.argv:
     # Band shares: the panel's own ratings against ours for the same players (with the offset)
     pan_b, our_b = {}, {}
     for t, (rated, pan) in data.items():
-        ours = final(np.array([features(r, t) for r, _ in pan])) + OFFSET
+        allv = card_curve(final(np.array([features(r, t) for r in rated])) + OFFSET)
+        lookup = {(r["club"], r["player"]): v for r, v in zip(rated, allv)}
+        ours = [lookup[(r["club"], r["player"])] for r, _ in pan]
         for (r, e), v in zip(pan, ours):
             pan_b[band(e)] = pan_b.get(band(e), 0) + 1
             our_b[band(round(v))] = our_b.get(band(round(v)), 0) + 1
@@ -179,7 +198,7 @@ if "--write" in sys.argv:
         rated = json.load(open(f"docs/cards/feed/rated_v5_{t}.json", encoding="utf-8"))["players"]
         if not all("perf" in (r.get("feat") or {}) for r in rated):
             continue
-        p = final(np.array([features(r, t) for r in rated])) + OFFSET  # one even stretch and shift for everyone
+        p = card_curve(final(np.array([features(r, t) for r in rated])) + OFFSET)
         out = []
         for r, v in zip(rated, p):
             q = dict(r); q["ovr"] = int(round(min(99, max(40, v))))

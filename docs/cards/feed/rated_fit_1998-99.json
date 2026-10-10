@@ -7,7 +7,7 @@
 "clubPos": 2,
 "player": "Marc Overmars",
 "pos": "MID",
-"ovr": 87,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "AST": 77,
@@ -61,7 +61,7 @@
 "clubPos": 2,
 "player": "Lee Dixon",
 "pos": "DEF",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "CLN": 82,
@@ -114,8 +114,8 @@
 "clubPos": 2,
 "player": "Nicolas Anelka",
 "pos": "FWD",
-"ovr": 88,
-"tier": "best",
+"ovr": 89,
+"tier": "gold",
 "stats": {
 "GOL": 79,
 "AST": 69,
@@ -166,7 +166,7 @@
 "clubPos": 2,
 "player": "Ray Parlour",
 "pos": "MID",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 52,
@@ -273,7 +273,7 @@
 "clubPos": 2,
 "player": "Patrick Vieira",
 "pos": "MID",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 60,
@@ -327,7 +327,7 @@
 "clubPos": 2,
 "player": "David Seaman",
 "pos": "GK",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 82,
@@ -432,8 +432,8 @@
 "clubPos": 2,
 "player": "Dennis Bergkamp",
 "pos": "FWD",
-"ovr": 88,
-"tier": "gold",
+"ovr": 90,
+"tier": "best",
 "stats": {
 "GOL": 80,
 "AST": 97,
@@ -5679,7 +5679,7 @@
 "clubPos": 3,
 "player": "Gianfranco Zola",
 "pos": "FWD",
-"ovr": 83,
+"ovr": 84,
 "tier": "best",
 "stats": {
 "GOL": 70,
@@ -5731,7 +5731,7 @@
 "clubPos": 3,
 "player": "Ed de Goey",
 "pos": "GK",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "CLN": 64,
@@ -11986,7 +11986,7 @@
 "clubPos": 4,
 "player": "Jimmy Floyd Hasselbaink",
 "pos": "FWD",
-"ovr": 88,
+"ovr": 90,
 "tier": "best",
 "stats": {
 "GOL": 87,
@@ -12199,7 +12199,7 @@
 "clubPos": 4,
 "player": "Nigel Martyn",
 "pos": "GK",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "CLN": 67,
@@ -14803,7 +14803,7 @@
 "clubPos": 7,
 "player": "Michael Owen",
 "pos": "FWD",
-"ovr": 87,
+"ovr": 88,
 "tier": "best",
 "stats": {
 "GOL": 92,
@@ -15812,7 +15812,7 @@
 "clubPos": 1,
 "player": "Roy Keane",
 "pos": "MID",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 40,
@@ -15920,7 +15920,7 @@
 "clubPos": 1,
 "player": "Gary Neville",
 "pos": "DEF",
-"ovr": 86,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "CLN": 71,
@@ -15973,7 +15973,7 @@
 "clubPos": 1,
 "player": "Peter Schmeichel",
 "pos": "GK",
-"ovr": 88,
+"ovr": 90,
 "tier": "gold",
 "stats": {
 "CLN": 61,
@@ -16025,7 +16025,7 @@
 "clubPos": 1,
 "player": "Andy Cole",
 "pos": "FWD",
-"ovr": 91,
+"ovr": 92,
 "tier": "gold",
 "stats": {
 "GOL": 90,
@@ -16183,7 +16183,7 @@
 "clubPos": 1,
 "player": "Paul Scholes",
 "pos": "MID",
-"ovr": 89,
+"ovr": 91,
 "tier": "gold",
 "stats": {
 "AST": 87,
@@ -16237,7 +16237,7 @@
 "clubPos": 1,
 "player": "Jaap Stam",
 "pos": "DEF",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "CLN": 57,
@@ -16290,7 +16290,7 @@
 "clubPos": 1,
 "player": "Denis Irwin",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 75,
@@ -16343,7 +16343,7 @@
 "clubPos": 1,
 "player": "Phil Neville",
 "pos": "DEF",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "CLN": 39,
@@ -16450,7 +16450,7 @@
 "clubPos": 1,
 "player": "Ryan Giggs",
 "pos": "MID",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "AST": 59,
@@ -16557,7 +16557,7 @@
 "clubPos": 1,
 "player": "Ole Gunnar Solskjaer",
 "pos": "FWD",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "GOL": 91,

@@ -2975,8 +2975,8 @@
 "clubPos": 4,
 "player": "Stuart Ripley",
 "pos": "MID",
-"ovr": 84,
-"tier": "gold",
+"ovr": 85,
+"tier": "best",
 "stats": {
 "AST": 62,
 "GOL": 64,
@@ -3457,7 +3457,7 @@
 "player": "Alan Shearer",
 "pos": "FWD",
 "ovr": 85,
-"tier": "best",
+"tier": "gold",
 "stats": {
 "GOL": 73,
 "AST": 61,
@@ -15547,7 +15547,7 @@
 "clubPos": 1,
 "player": "Peter Schmeichel",
 "pos": "GK",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 97,
@@ -15599,7 +15599,7 @@
 "clubPos": 1,
 "player": "Ryan Giggs",
 "pos": "MID",
-"ovr": 89,
+"ovr": 90,
 "tier": "best",
 "stats": {
 "AST": 95,
@@ -15653,7 +15653,7 @@
 "clubPos": 1,
 "player": "Mark Hughes",
 "pos": "FWD",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "GOL": 96,
@@ -15705,7 +15705,7 @@
 "clubPos": 1,
 "player": "Paul Ince",
 "pos": "MID",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 67,
@@ -15973,7 +15973,7 @@
 "clubPos": 1,
 "player": "Eric Cantona",
 "pos": "FWD",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "GOL": 88,
@@ -17938,7 +17938,7 @@
 "player": "David Phillips",
 "pos": "MID",
 "ovr": 82,
-"tier": "best",
+"tier": "gold",
 "stats": {
 "AST": 61,
 "GOL": 68,
@@ -18044,8 +18044,8 @@
 "clubPos": 3,
 "player": "Chris Sutton",
 "pos": "FWD",
-"ovr": 82,
-"tier": "gold",
+"ovr": 83,
+"tier": "best",
 "stats": {
 "GOL": 52,
 "AST": 48,
@@ -25412,7 +25412,7 @@
 "clubPos": 18,
 "player": "Matt Le Tissier",
 "pos": "FWD",
-"ovr": 84,
+"ovr": 85,
 "tier": "best",
 "stats": {
 "GOL": 96,

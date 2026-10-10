@@ -167,7 +167,7 @@
 "clubPos": 4,
 "player": "Robert Pires",
 "pos": "MID",
-"ovr": 88,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "AST": 72,
@@ -275,7 +275,7 @@
 "clubPos": 4,
 "player": "Thierry Henry",
 "pos": "FWD",
-"ovr": 99,
+"ovr": 97,
 "tier": "best",
 "stats": {
 "GOL": 97,
@@ -381,7 +381,7 @@
 "clubPos": 4,
 "player": "Jose Antonio Reyes",
 "pos": "FWD",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "GOL": 57,
@@ -8552,7 +8552,7 @@
 "clubPos": 1,
 "player": "John Terry",
 "pos": "DEF",
-"ovr": 89,
+"ovr": 90,
 "tier": "gold",
 "stats": {
 "CLN": 84,
@@ -8659,7 +8659,7 @@
 "clubPos": 1,
 "player": "Petr Cech",
 "pos": "GK",
-"ovr": 88,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "CLN": 72,
@@ -8765,7 +8765,7 @@
 "clubPos": 1,
 "player": "William Gallas",
 "pos": "DEF",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "CLN": 71,
@@ -8818,7 +8818,7 @@
 "clubPos": 1,
 "player": "Michael Essien",
 "pos": "MID",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 46,
@@ -8872,7 +8872,7 @@
 "clubPos": 1,
 "player": "Claude Makelele",
 "pos": "MID",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 53,
@@ -8978,7 +8978,7 @@
 "clubPos": 1,
 "player": "Didier Drogba",
 "pos": "FWD",
-"ovr": 89,
+"ovr": 91,
 "tier": "gold",
 "stats": {
 "GOL": 84,
@@ -9242,7 +9242,7 @@
 "clubPos": 1,
 "player": "Asier Del Horno",
 "pos": "DEF",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "CLN": 87,
@@ -12790,7 +12790,7 @@
 "clubPos": 3,
 "player": "Jamie Carragher",
 "pos": "DEF",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "CLN": 82,
@@ -13055,7 +13055,7 @@
 "clubPos": 3,
 "player": "Pepe Reina",
 "pos": "GK",
-"ovr": 88,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "CLN": 84,
@@ -13159,7 +13159,7 @@
 "clubPos": 3,
 "player": "Steven Gerrard",
 "pos": "MID",
-"ovr": 89,
+"ovr": 90,
 "tier": "best",
 "stats": {
 "AST": 72,
@@ -15490,7 +15490,7 @@
 "clubPos": 2,
 "player": "Rio Ferdinand",
 "pos": "DEF",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "CLN": 79,
@@ -15543,8 +15543,8 @@
 "clubPos": 2,
 "player": "Wayne Rooney",
 "pos": "FWD",
-"ovr": 89,
-"tier": "best",
+"ovr": 90,
+"tier": "gold",
 "stats": {
 "GOL": 77,
 "AST": 86,
@@ -15595,8 +15595,8 @@
 "clubPos": 2,
 "player": "Ruud van Nistelrooy",
 "pos": "FWD",
-"ovr": 89,
-"tier": "gold",
+"ovr": 91,
+"tier": "best",
 "stats": {
 "GOL": 94,
 "AST": 57,

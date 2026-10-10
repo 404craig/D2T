@@ -270,7 +270,7 @@
 "clubPos": 5,
 "player": "Dennis Bergkamp",
 "pos": "FWD",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "GOL": 65,
@@ -322,7 +322,7 @@
 "clubPos": 5,
 "player": "Ian Wright",
 "pos": "FWD",
-"ovr": 84,
+"ovr": 85,
 "tier": "best",
 "stats": {
 "GOL": 85,
@@ -2974,7 +2974,7 @@
 "clubPos": 7,
 "player": "Stuart Ripley",
 "pos": "MID",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "AST": 92,
@@ -8282,7 +8282,7 @@
 "clubPos": 6,
 "player": "Andrei Kanchelskis",
 "pos": "MID",
-"ovr": 87,
+"ovr": 90,
 "tier": "best",
 "stats": {
 "AST": 86,
@@ -11146,7 +11146,7 @@
 "clubPos": 3,
 "player": "Robbie Fowler",
 "pos": "FWD",
-"ovr": 90,
+"ovr": 92,
 "tier": "best",
 "stats": {
 "GOL": 94,
@@ -11198,7 +11198,7 @@
 "clubPos": 3,
 "player": "David James",
 "pos": "GK",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 78,
@@ -11250,7 +11250,7 @@
 "clubPos": 3,
 "player": "Steve McManaman",
 "pos": "MID",
-"ovr": 87,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "AST": 96,
@@ -11304,7 +11304,7 @@
 "clubPos": 3,
 "player": "John Barnes",
 "pos": "MID",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "AST": 90,
@@ -11411,7 +11411,7 @@
 "clubPos": 3,
 "player": "Stan Collymore",
 "pos": "FWD",
-"ovr": 86,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "GOL": 83,
@@ -13588,8 +13588,8 @@
 "clubPos": 1,
 "player": "Peter Schmeichel",
 "pos": "GK",
-"ovr": 88,
-"tier": "gold",
+"ovr": 91,
+"tier": "best",
 "stats": {
 "CLN": 89,
 "CON": 83,
@@ -13640,7 +13640,7 @@
 "clubPos": 1,
 "player": "Andy Cole",
 "pos": "FWD",
-"ovr": 86,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "GOL": 78,
@@ -13692,7 +13692,7 @@
 "clubPos": 1,
 "player": "David Beckham",
 "pos": "MID",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 71,
@@ -13746,8 +13746,8 @@
 "clubPos": 1,
 "player": "Ryan Giggs",
 "pos": "MID",
-"ovr": 89,
-"tier": "best",
+"ovr": 91,
+"tier": "gold",
 "stats": {
 "AST": 89,
 "GOL": 93,
@@ -13854,7 +13854,7 @@
 "clubPos": 1,
 "player": "Denis Irwin",
 "pos": "DEF",
-"ovr": 85,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "CLN": 80,
@@ -14067,7 +14067,7 @@
 "clubPos": 1,
 "player": "Eric Cantona",
 "pos": "FWD",
-"ovr": 89,
+"ovr": 91,
 "tier": "gold",
 "stats": {
 "GOL": 83,
@@ -16404,7 +16404,7 @@
 "clubPos": 2,
 "player": "Les Ferdinand",
 "pos": "FWD",
-"ovr": 90,
+"ovr": 92,
 "tier": "best",
 "stats": {
 "GOL": 93,
@@ -16456,7 +16456,7 @@
 "clubPos": 2,
 "player": "Rob Lee",
 "pos": "MID",
-"ovr": 84,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 62,
@@ -17728,7 +17728,7 @@
 "clubPos": 9,
 "player": "Steve Stone",
 "pos": "MID",
-"ovr": 83,
+"ovr": 84,
 "tier": "best",
 "stats": {
 "AST": 70,
@@ -22985,7 +22985,7 @@
 "clubPos": 8,
 "player": "Teddy Sheringham",
 "pos": "FWD",
-"ovr": 84,
+"ovr": 85,
 "tier": "best",
 "stats": {
 "GOL": 80,

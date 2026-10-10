@@ -7,7 +7,7 @@
 "clubPos": 4,
 "player": "David Seaman",
 "pos": "GK",
-"ovr": 83,
+"ovr": 84,
 "tier": "best",
 "stats": {
 "CLN": 85,
@@ -59,7 +59,7 @@
 "clubPos": 4,
 "player": "Ian Wright",
 "pos": "FWD",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "GOL": 88,
@@ -2556,7 +2556,7 @@
 "clubPos": 2,
 "player": "Henning Berg",
 "pos": "DEF",
-"ovr": 82,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "CLN": 84,
@@ -2715,7 +2715,7 @@
 "clubPos": 2,
 "player": "Stuart Ripley",
 "pos": "MID",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 82,
@@ -2769,7 +2769,7 @@
 "clubPos": 2,
 "player": "Alan Shearer",
 "pos": "FWD",
-"ovr": 93,
+"ovr": 94,
 "tier": "best",
 "stats": {
 "GOL": 96,
@@ -2875,7 +2875,7 @@
 "clubPos": 2,
 "player": "Jason Wilcox",
 "pos": "MID",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "AST": 91,
@@ -2981,7 +2981,7 @@
 "clubPos": 2,
 "player": "Tim Flowers",
 "pos": "GK",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "CLN": 84,
@@ -13173,7 +13173,7 @@
 "clubPos": 1,
 "player": "Denis Irwin",
 "pos": "DEF",
-"ovr": 87,
+"ovr": 90,
 "tier": "gold",
 "stats": {
 "CLN": 80,
@@ -13226,7 +13226,7 @@
 "clubPos": 1,
 "player": "Steve Bruce",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 70,
@@ -13279,7 +13279,7 @@
 "clubPos": 1,
 "player": "Gary Pallister",
 "pos": "DEF",
-"ovr": 86,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "CLN": 82,
@@ -13385,7 +13385,7 @@
 "clubPos": 1,
 "player": "Peter Schmeichel",
 "pos": "GK",
-"ovr": 88,
+"ovr": 90,
 "tier": "gold",
 "stats": {
 "CLN": 69,
@@ -13437,8 +13437,8 @@
 "clubPos": 1,
 "player": "Paul Ince",
 "pos": "MID",
-"ovr": 89,
-"tier": "gold",
+"ovr": 91,
+"tier": "best",
 "stats": {
 "AST": 90,
 "GOL": 82,
@@ -13491,8 +13491,8 @@
 "clubPos": 1,
 "player": "Ryan Giggs",
 "pos": "MID",
-"ovr": 90,
-"tier": "best",
+"ovr": 91,
+"tier": "gold",
 "stats": {
 "AST": 79,
 "GOL": 95,
@@ -13651,7 +13651,7 @@
 "clubPos": 1,
 "player": "Eric Cantona",
 "pos": "FWD",
-"ovr": 89,
+"ovr": 91,
 "tier": "gold",
 "stats": {
 "GOL": 83,
@@ -13703,7 +13703,7 @@
 "clubPos": 1,
 "player": "Andrei Kanchelskis",
 "pos": "MID",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "AST": 80,
@@ -13757,7 +13757,7 @@
 "clubPos": 1,
 "player": "Lee Sharpe",
 "pos": "MID",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 81,
@@ -14395,7 +14395,7 @@
 "clubPos": 3,
 "player": "Rob Lee",
 "pos": "MID",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 76,
@@ -14449,7 +14449,7 @@
 "clubPos": 3,
 "player": "Andy Cole",
 "pos": "FWD",
-"ovr": 92,
+"ovr": 93,
 "tier": "best",
 "stats": {
 "GOL": 94,
@@ -14554,7 +14554,7 @@
 "clubPos": 3,
 "player": "Peter Beardsley",
 "pos": "FWD",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "GOL": 84,
@@ -15986,7 +15986,7 @@
 "clubPos": 12,
 "player": "Chris Sutton",
 "pos": "FWD",
-"ovr": 86,
+"ovr": 87,
 "tier": "best",
 "stats": {
 "GOL": 85,
@@ -18744,7 +18744,7 @@
 "clubPos": 9,
 "player": "Les Ferdinand",
 "pos": "FWD",
-"ovr": 85,
+"ovr": 86,
 "tier": "best",
 "stats": {
 "GOL": 80,

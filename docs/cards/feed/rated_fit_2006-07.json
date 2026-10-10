@@ -7,7 +7,7 @@
 "clubPos": 4,
 "player": "Cesc Fabregas",
 "pos": "MID",
-"ovr": 87,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "AST": 95,
@@ -61,7 +61,7 @@
 "clubPos": 4,
 "player": "Jens Lehmann",
 "pos": "GK",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 51,
@@ -166,7 +166,7 @@
 "clubPos": 4,
 "player": "Gilberto Silva",
 "pos": "MID",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 52,
@@ -593,7 +593,7 @@
 "clubPos": 4,
 "player": "Robin van Persie",
 "pos": "MID",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 76,
@@ -861,7 +861,7 @@
 "clubPos": 4,
 "player": "Thierry Henry",
 "pos": "FWD",
-"ovr": 91,
+"ovr": 92,
 "tier": "best",
 "stats": {
 "GOL": 95,
@@ -7277,7 +7277,7 @@
 "clubPos": 2,
 "player": "Didier Drogba",
 "pos": "FWD",
-"ovr": 93,
+"ovr": 94,
 "tier": "gold",
 "stats": {
 "GOL": 91,
@@ -7329,7 +7329,7 @@
 "clubPos": 2,
 "player": "Michael Essien",
 "pos": "MID",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "AST": 59,
@@ -7435,7 +7435,7 @@
 "clubPos": 2,
 "player": "Ricardo Carvalho",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 74,
@@ -7540,7 +7540,7 @@
 "clubPos": 2,
 "player": "Claude Makelele",
 "pos": "MID",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 40,
@@ -7594,7 +7594,7 @@
 "clubPos": 2,
 "player": "John Terry",
 "pos": "DEF",
-"ovr": 87,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "CLN": 82,
@@ -11306,7 +11306,7 @@
 "clubPos": 3,
 "player": "Steven Gerrard",
 "pos": "MID",
-"ovr": 88,
+"ovr": 90,
 "tier": "gold",
 "stats": {
 "AST": 51,
@@ -11360,7 +11360,7 @@
 "clubPos": 3,
 "player": "Jamie Carragher",
 "pos": "DEF",
-"ovr": 86,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "CLN": 83,
@@ -11413,7 +11413,7 @@
 "clubPos": 3,
 "player": "Pepe Reina",
 "pos": "GK",
-"ovr": 89,
+"ovr": 91,
 "tier": "best",
 "stats": {
 "CLN": 77,
@@ -11465,7 +11465,7 @@
 "clubPos": 3,
 "player": "Dirk Kuyt",
 "pos": "FWD",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "GOL": 73,
@@ -11571,7 +11571,7 @@
 "clubPos": 3,
 "player": "Steve Finnan",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 79,
@@ -11624,7 +11624,7 @@
 "clubPos": 3,
 "player": "John Arne Riise",
 "pos": "MID",
-"ovr": 83,
+"ovr": 84,
 "tier": "gold",
 "stats": {
 "AST": 46,
@@ -11678,7 +11678,7 @@
 "clubPos": 3,
 "player": "Xabi Alonso",
 "pos": "MID",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 46,
@@ -14379,7 +14379,7 @@
 "clubPos": 1,
 "player": "Wayne Rooney",
 "pos": "FWD",
-"ovr": 93,
+"ovr": 94,
 "tier": "gold",
 "stats": {
 "GOL": 79,
@@ -14483,7 +14483,7 @@
 "clubPos": 1,
 "player": "Michael Carrick",
 "pos": "MID",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 63,
@@ -14537,7 +14537,7 @@
 "clubPos": 1,
 "player": "Rio Ferdinand",
 "pos": "DEF",
-"ovr": 88,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "CLN": 74,
@@ -14643,7 +14643,7 @@
 "clubPos": 1,
 "player": "Edwin van der Sar",
 "pos": "GK",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "CLN": 58,
@@ -14695,7 +14695,7 @@
 "clubPos": 1,
 "player": "Ryan Giggs",
 "pos": "MID",
-"ovr": 87,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "AST": 91,
@@ -14749,7 +14749,7 @@
 "clubPos": 1,
 "player": "Paul Scholes",
 "pos": "MID",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "AST": 46,
@@ -14803,7 +14803,7 @@
 "clubPos": 1,
 "player": "Nemanja Vidic",
 "pos": "DEF",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "CLN": 77,

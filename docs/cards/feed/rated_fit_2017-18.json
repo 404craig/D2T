@@ -5316,7 +5316,7 @@
 "player": "Cesar Azpilicueta",
 "pos": "DEF",
 "ovr": 87,
-"tier": "best",
+"tier": "gold",
 "stats": {
 "CLN": 75,
 "THR": 88,
@@ -5422,7 +5422,7 @@
 "clubPos": 5,
 "player": "Thibaut Courtois",
 "pos": "GK",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "CLN": 81,
@@ -5474,8 +5474,8 @@
 "clubPos": 5,
 "player": "Eden Hazard",
 "pos": "MID",
-"ovr": 87,
-"tier": "gold",
+"ovr": 88,
+"tier": "best",
 "stats": {
 "AST": 64,
 "GOL": 94,
@@ -12598,7 +12598,7 @@
 "clubPos": 4,
 "player": "Mohamed Salah",
 "pos": "MID",
-"ovr": 98,
+"ovr": 97,
 "tier": "best",
 "stats": {
 "AST": 86,
@@ -14033,7 +14033,7 @@
 "clubPos": 1,
 "player": "Ederson",
 "pos": "GK",
-"ovr": 89,
+"ovr": 90,
 "tier": "gold",
 "stats": {
 "CLN": 76,
@@ -14192,7 +14192,7 @@
 "clubPos": 1,
 "player": "Fernandinho",
 "pos": "MID",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "AST": 56,
@@ -14246,7 +14246,7 @@
 "clubPos": 1,
 "player": "Raheem Sterling",
 "pos": "MID",
-"ovr": 90,
+"ovr": 91,
 "tier": "gold",
 "stats": {
 "AST": 91,
@@ -22587,7 +22587,7 @@
 "clubPos": 3,
 "player": "Harry Kane",
 "pos": "FWD",
-"ovr": 94,
+"ovr": 95,
 "tier": "best",
 "stats": {
 "GOL": 96,
@@ -22691,7 +22691,7 @@
 "clubPos": 3,
 "player": "Dele Alli",
 "pos": "MID",
-"ovr": 87,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "AST": 86,

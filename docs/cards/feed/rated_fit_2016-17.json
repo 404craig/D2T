@@ -7,7 +7,7 @@
 "clubPos": 5,
 "player": "Alexis Sanchez",
 "pos": "FWD",
-"ovr": 90,
+"ovr": 91,
 "tier": "best",
 "stats": {
 "GOL": 88,
@@ -270,7 +270,7 @@
 "clubPos": 5,
 "player": "Mesut Ozil",
 "pos": "MID",
-"ovr": 87,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "AST": 85,
@@ -432,7 +432,7 @@
 "clubPos": 5,
 "player": "Olivier Giroud",
 "pos": "FWD",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "GOL": 91,
@@ -4413,7 +4413,7 @@
 "clubPos": 1,
 "player": "Cesar Azpilicueta",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 80,
@@ -4519,7 +4519,7 @@
 "clubPos": 1,
 "player": "Thibaut Courtois",
 "pos": "GK",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 78,
@@ -4571,7 +4571,7 @@
 "clubPos": 1,
 "player": "Eden Hazard",
 "pos": "MID",
-"ovr": 86,
+"ovr": 88,
 "tier": "gold",
 "stats": {
 "AST": 66,
@@ -4625,7 +4625,7 @@
 "clubPos": 1,
 "player": "Diego Costa",
 "pos": "FWD",
-"ovr": 88,
+"ovr": 90,
 "tier": "best",
 "stats": {
 "GOL": 86,
@@ -4677,7 +4677,7 @@
 "clubPos": 1,
 "player": "N'Golo Kante",
 "pos": "MID",
-"ovr": 87,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "AST": 46,
@@ -7336,7 +7336,7 @@
 "clubPos": 7,
 "player": "Romelu Lukaku",
 "pos": "FWD",
-"ovr": 87,
+"ovr": 88,
 "tier": "best",
 "stats": {
 "GOL": 88,
@@ -10419,7 +10419,7 @@
 "clubPos": 12,
 "player": "Jamie Vardy",
 "pos": "FWD",
-"ovr": 86,
+"ovr": 87,
 "tier": "best",
 "stats": {
 "GOL": 72,
@@ -11748,7 +11748,7 @@
 "player": "Roberto Firmino",
 "pos": "FWD",
 "ovr": 85,
-"tier": "best",
+"tier": "gold",
 "stats": {
 "GOL": 62,
 "AST": 77,
@@ -12171,8 +12171,8 @@
 "clubPos": 4,
 "player": "Sadio Mane",
 "pos": "MID",
-"ovr": 85,
-"tier": "gold",
+"ovr": 86,
+"tier": "best",
 "stats": {
 "AST": 73,
 "GOL": 97,
@@ -12810,7 +12810,7 @@
 "clubPos": 3,
 "player": "Kevin De Bruyne",
 "pos": "MID",
-"ovr": 89,
+"ovr": 90,
 "tier": "gold",
 "stats": {
 "AST": 98,
@@ -12864,7 +12864,7 @@
 "clubPos": 3,
 "player": "David Silva",
 "pos": "MID",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "AST": 78,
@@ -12918,7 +12918,7 @@
 "clubPos": 3,
 "player": "Raheem Sterling",
 "pos": "MID",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "AST": 76,
@@ -13026,7 +13026,7 @@
 "clubPos": 3,
 "player": "Sergio Aguero",
 "pos": "FWD",
-"ovr": 92,
+"ovr": 93,
 "tier": "best",
 "stats": {
 "GOL": 93,
@@ -21626,7 +21626,7 @@
 "clubPos": 15,
 "player": "Gylfi Sigurdsson",
 "pos": "MID",
-"ovr": 82,
+"ovr": 83,
 "tier": "best",
 "stats": {
 "AST": 91,
@@ -23061,7 +23061,7 @@
 "clubPos": 2,
 "player": "Dele Alli",
 "pos": "MID",
-"ovr": 90,
+"ovr": 92,
 "tier": "gold",
 "stats": {
 "AST": 76,
@@ -23115,7 +23115,7 @@
 "clubPos": 2,
 "player": "Eric Dier",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 79,
@@ -23168,7 +23168,7 @@
 "clubPos": 2,
 "player": "Christian Eriksen",
 "pos": "MID",
-"ovr": 90,
+"ovr": 91,
 "tier": "gold",
 "stats": {
 "AST": 95,
@@ -23276,7 +23276,7 @@
 "clubPos": 2,
 "player": "Hugo Lloris",
 "pos": "GK",
-"ovr": 86,
+"ovr": 87,
 "tier": "gold",
 "stats": {
 "CLN": 74,
@@ -23328,7 +23328,7 @@
 "clubPos": 2,
 "player": "Son Heung-min",
 "pos": "FWD",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "GOL": 75,
@@ -23433,7 +23433,7 @@
 "clubPos": 2,
 "player": "Kyle Walker",
 "pos": "DEF",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "CLN": 83,
@@ -23486,7 +23486,7 @@
 "clubPos": 2,
 "player": "Toby Alderweireld",
 "pos": "DEF",
-"ovr": 82,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "CLN": 85,
