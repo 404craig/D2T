@@ -41,3 +41,28 @@ Top of each season in v3: 2008/09 Lampard 94, Gerrard 94, Vidic 93, Torres 92, R
 - **Mid-season movers are split by club** (Given 65 at Newcastle and 57 at Man City). Should be merged into one season card or judged per club with the combined sample.
 - **1996/97 is flatter at the top** (3 players at 90+, against 5 to 8 in the modern seasons) because there is no per-player goals conceded or minutes.
 - **Data gap:** the feed is missing one 2008/09 Stoke v West Ham match (every player at both clubs is one app short of Tenaball).
+
+## v4: reputation, line-ups, holding midfielders (10 October 2026, later)
+
+**New data: match line-ups from the Premier League feed** (`tools/fetch_lineups.py`, `docs/cards/feed/lineups_*.csv`). Every match in all three seasons, back to 1996/97: starting XIs, substitutes, the minute of every substitution, goal and red card, the position each player was listed at, and dates of birth. All 1,140 matches rebuild their final scores exactly. From these we get, for every season: starts, minutes, goals conceded and clean sheets while each player was on the pitch (60+ minutes, nothing conceded). 11v11 blocks automated requests from here, and this source is the league's own, so it replaces the 11v11 plan.
+
+What the line-ups showed:
+- The feed's season clean sheets undercount some players: Evra 14 (feed 11), O'Shea 15 (12), Ferdinand 13 (12).
+- Pallister's 5 clean sheets in 1996/97 are real: 35 goals conceded in his 27 starts.
+- The missing 2008/09 Stoke v West Ham match is present in the line-ups.
+
+**v4 changes** (`tools/rate_v4.py`):
+- Reputation (REP), 33% of the overall, all from verified records: club finish this season (for his share of games), PFA Player of the Year, FWA, Player of the Season, PFA Young Player, Golden Glove, Golden Boot, career Premier League titles (10+ apps) and career appearances.
+- Rates per 90 minutes where minutes exist (now every season), so sub cameos are not full games.
+- Clean sheets and goals conceded while on the pitch, from the line-ups.
+- Midfielders are also rated as holding players (mostly difference maker and clean sheets); the better score counts.
+
+| | v3 | v4 |
+|---|---|---|
+| Henderson / Wijnaldum / Fabinho 19/20 | 90 / 81 / 79 | 95 / 89 / 82 |
+| Mascherano / Fletcher / Mikel 08/09 | 74 / 80 / 79 | 79 / 91 / 82 |
+| Ferdinand / Evra 08/09 | 70 / 65 | 79 / 81 |
+| Cantona / Schmeichel / Keane / Irwin 96/97 | 86 / 81 / 76 / 81 | 89 / 90 / 84 / 91 |
+| Modric 08/09 (Spurs, 8th) | 75 | 68 |
+
+Trade-off: reputation lifts title-winning squads (Poborsky 88, May 91, O'Shea 91, nine Man Utd players in the 1996/97 top 15) and pulls down good players at mid-table clubs (Modric 68, Fuller 64, Given 65 and 56). A reputation signal that does not depend on the club, such as international caps by season, would balance it; Tenaball only has caps for some nations.
