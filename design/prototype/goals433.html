@@ -1,0 +1,335 @@
+<title>D2T 433 Goals</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<link rel="stylesheet" href="core/base.css">
+<style>
+  /* Layout: phones (the visible 390 x 700 of Safari) in wrapping rows: pitch options, a turn step by step, a playable phone, then reveal and tally options. */
+  :root { color-scheme: dark; --bg: #000000; --fg: #FFFFFF; --soft: #BDBDC6; --muted: #8E8E99; --rule: #1E1E22; --line: #26262C; --panel: #0E0E10; --green: #12F06C; --mode: #FF7A1A; --mode-t: #FFB27A; }
+  html, body { height: auto; }
+  body { background: #08080A; color: var(--fg); font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 1720px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 30px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2', sans-serif; margin: 0 0 8px; }
+  .head p, .sec > p { margin: 0; color: var(--soft); font-size: 15px; max-width: 92ch; line-height: 1.5; }
+  .sec { display: flex; flex-direction: column; gap: 16px; padding-top: 24px; border-top: 1px solid var(--rule); }
+  .sec > h2 { font: 900 italic 30px/1 'Exo 2', sans-serif; margin: 0; }
+  .row { display: flex; gap: 26px; flex-wrap: wrap; justify-content: center; }
+  .opt { display: flex; flex-direction: column; gap: 10px; width: 390px; max-width: 100%; }
+  .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: var(--mode); }
+  .opt-h h3 { font: 900 italic 21px/1.05 'Exo 2', sans-serif; margin: 3px 0; }
+  .opt-h p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; min-height: 57px; }
+  button { font-family: inherit; cursor: pointer; border: 0; background: none; color: inherit; padding: 0; }
+  .phone { position: relative; width: 390px; max-width: 100%; height: 700px; border-radius: 26px; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,0.6); display: flex; flex-direction: column; }
+
+  /* chrome */
+  .tb { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px 4px; }
+  .tb .lg { height: 22px; color: #FFF; }
+  .acct { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel); display: grid; place-items: center; }
+  .acct svg { width: 17px; height: 17px; }
+  .tally { display: flex; align-items: center; justify-content: space-between; padding: 4px 16px 8px; }
+  .tally .l { display: flex; flex-direction: column; }
+  .tally .l small { font-size: 10.5px; font-weight: 800; letter-spacing: 0.14em; color: var(--mode-t); }
+  .tally .l span { font-size: 12px; color: var(--soft); font-weight: 600; }
+  .tally .r { display: flex; align-items: baseline; gap: 6px; }
+  .tally .r b { font: 900 italic 34px/1 'Exo 2'; font-variant-numeric: tabular-nums; }
+  .tally .r i { font-style: normal; font-size: 12px; font-weight: 800; color: var(--mode-t); }
+  .bar { margin-top: auto; display: flex; align-items: center; gap: 10px; padding: 8px 16px 12px; }
+  .circ { width: 54px; height: 54px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel); display: grid; place-items: center; position: relative; flex-shrink: 0; }
+  .circ .logo-mask { width: 30px; color: #FFF; }
+  .circ svg { width: 22px; height: 22px; }
+  .circ .n { position: absolute; top: -3px; right: -3px; min-width: 18px; height: 18px; border-radius: 9px; background: var(--mode); color: #000; font: 900 11px/18px 'Exo 2'; text-align: center; }
+  .spin { flex: 1; height: 56px; border-radius: 28px; background: var(--mode); color: #0A0A0A; display: flex; align-items: center; justify-content: center; gap: 10px; font: 900 italic 21px/1 'Exo 2'; text-transform: uppercase; }
+  .spin .logo-mask { width: 26px; color: #0A0A0A; }
+  .spin.off { opacity: 0.45; }
+
+  /* pitch */
+  .pitch { position: relative; margin: 0 12px; height: 372px; border-radius: 18px; overflow: hidden; isolation: isolate; }
+  .pitch .lines { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; }
+  .pitch .slotp { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 2px; z-index: 2; }
+  .pitch .nm { font: 900 italic 9.5px/1 'Exo 2'; text-transform: uppercase; padding: 2px 5px; border-radius: 4px; background: rgba(0,0,0,0.72); white-space: nowrap; }
+  .modename { position: absolute; left: 0; right: 0; z-index: 1; text-align: center; pointer-events: none; }
+  /* P1 night stadium */
+  .p1 { background: radial-gradient(90% 55% at 50% -10%, rgba(255,255,255,0.22), rgba(255,255,255,0) 60%), repeating-linear-gradient(180deg, #0D3A24 0 9%, #0A311E 9% 18%); }
+  .p1 .lines { stroke: rgba(255,255,255,0.28); }
+  .p1 .modename { top: 50%; transform: translateY(-50%); font: 900 italic 40px/1 'Exo 2'; color: rgba(255,255,255,0.10); letter-spacing: -0.01em; }
+  /* P2 chalk tactics board */
+  .p2 { background: radial-gradient(120% 90% at 50% 0%, #1E2126 0%, #0D0E10 70%); }
+  .p2 .lines { stroke: rgba(255,255,255,0.55); stroke-dasharray: 0; filter: url(#chalk); }
+  .p2 .modename { top: 50%; transform: translateY(-50%); font: 900 italic 22px/1 'Exo 2'; color: rgba(255,255,255,0.22); letter-spacing: 0.3em; }
+  /* P3 goal net */
+  .p3 { background: linear-gradient(180deg, #170B05 0%, #0B0604 100%); }
+  .p3::before { content: ''; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(45deg, rgba(255,122,26,0.12) 0 1px, transparent 1px 14px), repeating-linear-gradient(-45deg, rgba(255,122,26,0.12) 0 1px, transparent 1px 14px); -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,0.25) 100%); mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,0.25) 100%); }
+  .p3 .lines { stroke: rgba(255,178,122,0.35); }
+  .p3 .modename { top: 50%; transform: translateY(-50%); font: 900 italic 30px/1 'Exo 2'; color: rgba(255,122,26,0.28); letter-spacing: 0.08em; }
+  /* P4 mown stripes, diagonal, with the name cut into the grass */
+  .p4 { background: repeating-linear-gradient(135deg, #12452A 0 34px, #0E3A23 34px 68px); }
+  .p4 .lines { stroke: rgba(255,255,255,0.32); }
+  .p4 .modename { top: 50%; transform: translateY(-50%) rotate(-8deg); font: 900 italic 150px/1 'Exo 2'; color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,0.24); }
+
+  /* shirts */
+  .shirt { position: relative; width: var(--sw); aspect-ratio: 1 / 1.02; flex-shrink: 0; }
+  .shirt svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .shirt .body { fill: var(--fill); stroke: var(--trimc); stroke-width: 2.4; stroke-linejoin: round; }
+  .shirt .trim { fill: none; stroke: var(--trimc); stroke-width: 4; stroke-linecap: round; }
+  .shirt text { font-family: 'Exo 2', sans-serif; font-style: italic; font-weight: 900; text-anchor: middle; fill: var(--ink); }
+  .shirt.empty .body { fill: rgba(255,255,255,0.05); stroke: rgba(255,255,255,0.45); stroke-dasharray: 5 4; }
+  .shirt.empty text { fill: rgba(255,255,255,0.8); font-style: normal; }
+  .shirt.next .body { stroke: var(--mode); stroke-dasharray: none; fill: rgba(255,122,26,0.12); }
+  .shirt.next text { fill: var(--mode-t); }
+  .shirt.myst .body { fill: #16161B; stroke: #3A3A44; }
+  .shirt.myst text { fill: #4A4A56; }
+  .shirt.sel { transform: translateY(-6px) scale(1.06); }
+  .shirt.dim { transform: scale(0.94); opacity: 0.55; }
+  .shirt { transition: transform .22s cubic-bezier(.3,1.4,.5,1), opacity .22s; }
+  .shirt .tagc { position: absolute; left: 50%; top: -4px; width: 16px; height: 16px; margin-left: -8px; object-fit: contain; }
+  /* the three below the pitch */
+  .trio { display: flex; justify-content: center; gap: 12px; padding: 12px 16px 0; position: relative; }
+  .trio .cell { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .trio .cap { font-size: 10.5px; font-weight: 800; color: var(--muted); letter-spacing: 0.06em; height: 14px; }
+  .reelwin { position: relative; width: 104px; height: 108px; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%); }
+  .reelwin .strip { position: absolute; left: 4px; top: 0; display: flex; flex-direction: column; gap: 6px; }
+  .reelwin.blur .strip { filter: blur(0 6px); filter: url(#vblur); }
+  .hint { text-align: center; font-size: 11.5px; color: var(--muted); padding-top: 6px; height: 16px; }
+
+  /* reveal effects on a placed shirt */
+  .burst { position: absolute; left: 50%; top: 50%; width: 0; height: 0; pointer-events: none; z-index: 5; }
+  .burst i { position: absolute; left: 0; top: 0; width: 6px; height: 6px; border-radius: 2px; background: var(--c, var(--mode)); }
+  .ring { position: absolute; left: 50%; top: 50%; width: 20px; height: 20px; margin: -10px; border-radius: 50%; border: 3px solid var(--mode); pointer-events: none; z-index: 4; }
+  .plus { position: absolute; z-index: 6; font: 900 italic 18px/1 'Exo 2'; color: var(--mode); pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.7); }
+
+  /* reveal and tally option panels */
+  .panel { width: 390px; max-width: 100%; height: 300px; border-radius: 22px; background: #000; box-shadow: 0 0 0 1px #222228; position: relative; overflow: hidden; display: grid; place-items: center; }
+  .flipwrap { perspective: 600px; }
+  .flipper { position: relative; transform-style: preserve-3d; }
+  .flipper .face { backface-visibility: hidden; }
+  .flipper .face.back { position: absolute; inset: 0; transform: rotateY(180deg); }
+  .flap { display: inline-flex; gap: 4px; }
+  .flap span { display: inline-block; width: 38px; height: 52px; border-radius: 6px; background: #17171C; box-shadow: inset 0 -26px 0 rgba(0,0,0,0.25); font: 900 italic 40px/52px 'Exo 2'; text-align: center; color: #FFF; }
+  .tvar { width: 390px; max-width: 100%; border-radius: 18px; background: #000; box-shadow: 0 0 0 1px #222228; padding: 14px 16px; }
+  .t2 .track { height: 10px; border-radius: 5px; background: #1B1B21; overflow: hidden; margin-top: 8px; position: relative; }
+  .t2 .track i { position: absolute; left: 0; top: 0; bottom: 0; width: 95.8%; background: linear-gradient(90deg, #FF4D1A, var(--mode)); border-radius: 5px; }
+  .t2 .track b { position: absolute; right: 0; top: -3px; bottom: -3px; width: 2px; background: #FFF; }
+  .t3 { display: flex; align-items: center; gap: 14px; }
+  .t3 svg { width: 76px; height: 76px; }
+  @media (prefers-reduced-motion: reduce) { .shirt { transition: none; } }
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <filter id="vblur"><feGaussianBlur stdDeviation="0 7"/></filter>
+  <filter id="chalk"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="1" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter>
+</defs></svg>
+<div class="page">
+  <div class="head">
+    <h1>433 Goals</h1>
+    <p>A mockup of the 433 Goals mode: fill a 4-3-3 one shirt at a time from three spun players, and see how close your XI's Premier League career goals get to 433. Shirts are in each player's club colours (the club he scored most Premier League goals for) with his surname on the back. The goal number stays hidden until you place him. All names, clubs and goals are real (every Premier League player with 60+ games); the rules here are my reading of your brief, so treat the target and turn order as placeholders.</p>
+  </div>
+
+  <section class="sec"><h2>Pitch options</h2><p>Each one looks different from the Classic pitch and says the mode on the pitch itself. The mode gets its own colour, orange, as Classic uses your club's colour and Dare2Dream uses purple.</p><div class="row" id="pitches"></div></section>
+  <section class="sec"><h2>A turn, step by step</h2><p>Ready, spinning, picking, then the reveal. Shown on pitch option 1.</p><div class="row" id="steps"></div></section>
+  <section class="sec"><h2>Try it</h2><p>Tap Spin, tap a shirt to pick it (it grows, the others shrink), then tap it again or drag it onto the lit shirt on the pitch. Respin on the left, home on the right. Cycle the reveal style with the switch above the phone.</p><div class="row" id="play"></div></section>
+  <section class="sec"><h2>Reveal options</h2><p>What happens when a shirt lands on the pitch. Each panel loops.</p><div class="row" id="reveals"></div></section>
+  <section class="sec"><h2>Goal tally options</h2><p>The running total and how far it is from 433.</p><div class="row" id="tallies"></div></section>
+</div>
+<script src="data/data.js"></script>
+<script src="data/goals433.js"></script>
+<script src="core/app.js"></script>
+<script src="core/cards.js"></script>
+<script>
+(function () {
+  const D = D2T.data, P = window.D2T_433, TARGET = 433;
+  const hexrgb = (h) => { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255]; };
+  const lum = (h) => hexrgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }).reduce((t, v, i) => t + v * [0.2126, 0.7152, 0.0722][i], 0);
+  const contrast = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+  const kit = (clubName) => { const c = D.clubs[clubName] || { accent: '#888888', ink: '#111111', crest: '' };
+    const ink = contrast(c.accent, c.ink) >= 3 ? c.ink : (lum(c.accent) > 0.4 ? '#0A0A0A' : '#FFFFFF');
+    return { fill: c.accent, trim: c.ink === c.accent ? ink : c.ink, ink, crest: c.crest }; };
+  const SHIRT = 'M31 9 L42 4 Q50 11 58 4 L69 9 L95 24 L85 44 L74 38 L74 96 L26 96 L26 38 L15 44 L5 24 Z';
+  // back of a shirt: surname across the shoulders, goals (once revealed) as the number
+  function shirt(opts) {
+    const w = opts.w || 48, cls = opts.cls || '';
+    let k = { fill: '#222', trim: '#444', ink: '#fff' }, top = '', mid = '', crest = '';
+    if (opts.player) { k = kit(opts.player.club); crest = opts.tag ? `<img class="tagc" src="${k.crest}" alt="">` : ''; }
+    if (opts.state === 'empty' || opts.state === 'next') mid = `<text x="50" y="66" font-size="${opts.pos.length > 2 ? 20 : 24}">${opts.pos}</text>`;
+    if (opts.state === 'myst') mid = `<text x="50" y="72" font-size="44">?</text>`;
+    if (opts.player) {
+      if (w >= 60) {} 
+      const sur = opts.player.sur.toUpperCase(), fs = Math.min(15, 150 / Math.max(6, sur.length));
+      top = w < 60 ? '' : `<text x="50" y="33" font-size="${fs}" textLength="${Math.min(56, sur.length * fs * 0.62)}" lengthAdjust="spacingAndGlyphs">${D2T.esc(sur)}</text>`;
+      if (opts.goals != null) mid = `<text class="gnum" x="50" y="80" font-size="${String(opts.goals).length > 2 ? 29 : 40}">${opts.goals}</text>`;
+    }
+    const st = opts.state === 'empty' ? 'empty' : opts.state === 'next' ? 'empty next' : opts.state === 'myst' ? 'myst' : '';
+    return `<div class="shirt ${st} ${cls}" style="--sw:${w}px;--fill:${k.fill};--trimc:${k.trim};--ink:${k.ink}" ${opts.attr || ''}>${crest}<svg viewBox="0 0 100 100" aria-hidden="true"><path class="body" d="${SHIRT}"/><path class="trim" d="M42 4 Q50 11 58 4"/><path class="trim" d="M85 44 L95 24 M15 44 L5 24" stroke-width="3"/>${top}${mid}</svg></div>`;
+  }
+  // 4-3-3 slots: [label, broad position, x%, y%]
+  const SLOTS = [['GK', 'GK', 50, 88], ['LB', 'DEF', 12, 68], ['CB', 'DEF', 37, 71], ['CB', 'DEF', 63, 71], ['RB', 'DEF', 88, 68], ['CM', 'MID', 22, 45], ['CM', 'MID', 50, 47], ['CM', 'MID', 78, 45], ['LW', 'FWD', 18, 19], ['ST', 'FWD', 50, 16], ['RW', 'FWD', 82, 19]];
+  const LINES = `<svg class="lines" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="3" y="2.5" width="94" height="95" rx="1.5" stroke-width="0.5"/><line x1="3" y1="50" x2="97" y2="50" stroke-width="0.5"/><rect x="26" y="2.5" width="48" height="14" stroke-width="0.5"/><rect x="38" y="2.5" width="24" height="5" stroke-width="0.5"/><rect x="26" y="83.5" width="48" height="14" stroke-width="0.5"/><rect x="38" y="92.5" width="24" height="5" stroke-width="0.5"/></svg>`;
+  const CIRCLE = '<span style="position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px;border:1.4px solid rgba(255,255,255,0.25);border-radius:50%"></span>';
+  const NAMES = { p1: '433 GOALS', p2: '433 GOALS', p3: '433 GOALS', p4: '433' };
+  function pitch(style, filled, nextIdx, revealed) {
+    return `<div class="pitch ${style}">${LINES}${style === 'p2' ? '' : CIRCLE}<div class="modename">${NAMES[style]}</div>
+      ${SLOTS.map(([lab, pos, x, y], i) => { const f = filled[i];
+        const inner = f ? shirt({ w: 52, player: f, goals: revealed === false && i === filled.lastIdx ? null : f.goals, tag: true }) + `<span class="nm">${D2T.esc(f.sur)}</span>` : shirt({ w: 52, state: i === nextIdx ? 'next' : 'empty', pos: lab });
+        return `<div class="slotp" data-slot="${i}" style="left:${x}%;top:${y}%">${inner}</div>`; }).join('')}</div>`;
+  }
+  const ACCT = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.6-3.6 4.6-5.2 8-5.2s6.4 1.6 8 5.2"/></svg>';
+  const HOME = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></svg>';
+  const top = () => `<div class="tb">${D2T.logo('short', { cls: 'lg', style: 'height:22px' })}<span class="acct">${ACCT}</span></div>`;
+  const tally = (total, placed) => `<div class="tally"><div class="l"><small>433 GOALS</small><span>${placed} of 11 shirts filled</span></div><div class="r"><b class="tnum">${total}</b><i class="taway">${total >= TARGET ? 'TARGET HIT' : (TARGET - total) + ' away'}</i></div></div>`;
+  const bar = (label, respins, off) => `<div class="bar"><button class="circ rs">${D2T.logo('emblemLine')}<span class="n">${respins}</span></button><button class="spin${off ? ' off' : ''}">${D2T.logo('emblem')}<span class="lbl">${label}</span></button><button class="circ hm">${HOME}</button></div>`;
+  const trioMyst = () => `<div class="trio">${[0, 1, 2].map(() => `<div class="cell"><div class="reelwin">${`<div class="strip" style="top:6px">${shirt({ w: 96, state: 'myst' })}</div>`}</div><span class="cap"></span></div>`).join('')}</div>`;
+
+  // deterministic sample picks for the static screens
+  const pick = (pos, n, seed) => { const L = P[pos]; const out = []; let s = seed; while (out.length < n) { s = (s * 9301 + 49297) % 233280; const c = L[Math.floor(s / 233280 * Math.min(L.length, 220))]; if (!out.includes(c)) out.push(c); } return out; };
+  const XI = [pick('GK', 1, 3)[0], ...pick('DEF', 4, 7), ...pick('MID', 3, 11), ...pick('FWD', 3, 5)];
+  const partial = (n) => { const f = {}; XI.slice(0, n).forEach((p, i) => { f[i] = p; }); f.lastIdx = n - 1; return f; };
+  const sum = (f) => Object.keys(f).filter((k) => k !== 'lastIdx').reduce((t, k) => t + f[k].goals, 0);
+
+  // ---------- pitch options ----------
+  const PITCHES = [['p1', 'Night stadium', 'Classic’s mown stripes under a floodlight glow from the top, with 433 GOALS painted faintly across the middle.'],
+    ['p2', 'Chalk tactics board', 'A dark board with hand-drawn chalk lines, like a manager’s whiteboard. The mode name is chalked along the top.'],
+    ['p3', 'Goal net', 'Black and burnt orange with a goal-net mesh fading down the pitch: this mode is all about goals. Orange lines and the name in faint orange across the middle.'],
+    ['p4', 'Big 433 in the grass', 'Diagonal mown stripes with a huge outlined 433 cut into the grass behind the team.']];
+  const ready = (style) => `<div class="phone">${top()}${tally(0, 0)}${pitch(style, {}, 0)}${trioMyst()}<div class="hint">Spin for three goalkeepers</div>${bar('Spin', 3)}</div>`;
+  document.getElementById('pitches').innerHTML = PITCHES.map(([k, n, d], i) => `<div class="opt"><div class="opt-h"><span class="tag">PITCH ${i + 1}</span><h3>${n}</h3><p>${d}</p></div>${ready(k)}</div>`).join('');
+
+  // ---------- steps ----------
+  const four = partial(4), fourT = sum(four);
+  const cands = pick('DEF', 3, 41);
+  const trioCands = (sel, blur) => `<div class="trio">${cands.map((c, i) => `<div class="cell"><div class="reelwin${blur ? ' blur' : ''}"><div class="strip" style="top:${blur ? -150 - i * 60 : 6}px">${blur ? pick('DEF', 4, 90 + i).map((p) => shirt({ w: 96, player: p })).join('') : shirt({ w: 96, player: c, cls: sel == null ? '' : sel === i ? 'sel' : 'dim' })}</div></div><span class="cap">${blur ? '' : D2T.esc(c.club)}</span></div>`).join('')}</div>`;
+  const revealPitch = () => { const f = partial(5); f[4] = cands[1]; return f; };
+  const rp = revealPitch(), rpT = fourT + cands[1].goals;
+  const STEPS = [
+    ['1 · READY', 'Four shirts filled. The next open shirt (RB) glows orange; three mystery shirts wait below.', `<div class="phone">${top()}${tally(fourT, 4)}${pitch('p1', four, 4)}${trioMyst()}<div class="hint">Spin for three defenders</div>${bar('Spin', 3)}</div>`],
+    ['2 · SPINNING', 'Shirts race past in each reel with motion blur, landing left, middle, right, like the club spin. No goals on the backs.', `<div class="phone">${top()}${tally(fourT, 4)}${pitch('p1', four, 4)}${trioCands(null, true)}<div class="hint"></div>${bar('Spinning', 3, true)}</div>`],
+    ['3 · PICKED', 'Tap a shirt: it grows a little and the other two shrink. Tap again or drag it onto the glowing shirt.', `<div class="phone">${top()}${tally(fourT, 4)}${pitch('p1', four, 4)}${trioCands(1)}<div class="hint">Tap again or drag onto RB</div>${bar('Pick ' + cands[1].sur, 3)}</div>`],
+    ['4 · REVEAL', `He lands, the shirt bursts, his ${cands[1].goals} Premier League goals appear as the number and the total ticks up to ${rpT}.`, `<div class="phone reveal-demo">${top()}${tally(rpT, 5)}${pitch('p1', rp, 5)}${trioMyst()}<div class="hint">Spin for three defenders</div>${bar('Spin', 3)}</div>`]
+  ];
+  document.getElementById('steps').innerHTML = STEPS.map(([t, d, h]) => `<div class="opt"><div class="opt-h"><span class="tag">${t}</span><h3>${t.split(' · ')[1].toLowerCase().replace(/^./, (m) => m.toUpperCase())}</h3><p>${d}</p></div>${h}</div>`).join('');
+
+  // ---------- effects ----------
+  const COLORS = ['#FF7A1A', '#FFB020', '#FFFFFF', '#FF4D1A'];
+  function burstAt(host, x, y, big) {
+    const b = D2T.h('<div class="burst"></div>'); b.style.left = x + 'px'; b.style.top = y + 'px'; host.appendChild(b);
+    const n = big ? 28 : 18;
+    for (let i = 0; i < n; i++) {
+      const p = document.createElement('i'), a = (i / n) * Math.PI * 2 + Math.random() * 0.4, d = (big ? 70 : 46) + Math.random() * 30;
+      p.style.setProperty('--c', COLORS[i % COLORS.length]); b.appendChild(p);
+      p.animate([{ transform: 'translate(-3px,-3px) scale(1)', opacity: 1 }, { transform: `translate(${Math.cos(a) * d}px,${Math.sin(a) * d}px) rotate(${Math.random() * 360}deg) scale(.4)`, opacity: 0 }], { duration: 650 + Math.random() * 250, easing: 'cubic-bezier(.1,.8,.3,1)', fill: 'forwards' });
+    }
+    const r = D2T.h('<div class="ring"></div>'); r.style.left = x + 'px'; r.style.top = y + 'px'; host.appendChild(r);
+    r.animate([{ transform: 'scale(.5)', opacity: 1 }, { transform: 'scale(5)', opacity: 0 }], { duration: 600, easing: 'ease-out', fill: 'forwards' });
+    setTimeout(() => { b.remove(); r.remove(); }, 1000);
+  }
+  function tickTo(el, from, to, awayEl) {
+    const t0 = performance.now(), dur = 900;
+    const step = (now) => { const p = Math.min(1, (now - t0) / dur), v = Math.round(from + (to - from) * (1 - Math.pow(1 - p, 3))); el.textContent = v; if (awayEl) awayEl.textContent = v >= TARGET ? 'TARGET HIT' : (TARGET - v) + ' away'; if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }
+  // reveal styles: burst (number slams in), flip (shirt turns round), flap (number rolls like a scoreboard)
+  function revealShirt(slotEl, player, style, hostPhone) {
+    const svgNum = slotEl.querySelector('.gnum');
+    const shirtEl = slotEl.querySelector('.shirt');
+    const hr = hostPhone.getBoundingClientRect(), r = shirtEl.getBoundingClientRect();
+    const cx = r.left - hr.left + r.width / 2, cy = r.top - hr.top + r.height / 2;
+    if (style === 'flip') {
+      shirtEl.animate([{ transform: 'rotateY(0)' }, { transform: 'rotateY(90deg)', offset: 0.45 }, { transform: 'rotateY(-90deg)', offset: 0.46 }, { transform: 'rotateY(0)' }], { duration: 700, easing: 'ease-in-out' });
+      if (svgNum) { svgNum.style.opacity = 0; setTimeout(() => { svgNum.style.opacity = 1; burstAt(hostPhone, cx, cy, false); }, 330); }
+    } else if (style === 'flap') {
+      if (svgNum) { let k = 0; const end = player.goals; const iv = setInterval(() => { k++; svgNum.textContent = k >= 10 ? end : Math.floor(Math.random() * 99); if (k >= 10) clearInterval(iv); }, 60); }
+      shirtEl.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.15)' }, { transform: 'scale(1)' }], { duration: 700, delay: 560 });
+    } else {
+      burstAt(hostPhone, cx, cy, true);
+      shirtEl.animate([{ transform: 'scale(1.6)', filter: 'brightness(2.2)' }, { transform: 'scale(0.92)', offset: 0.5 }, { transform: 'scale(1)', filter: 'brightness(1)' }], { duration: 520, easing: 'cubic-bezier(.3,1.4,.5,1)' });
+      if (svgNum) svgNum.animate([{ opacity: 0, transform: 'scale(2.2)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 420, delay: 120, fill: 'backwards' });
+    }
+    const plus = D2T.h(`<div class="plus">+${player.goals}</div>`); plus.style.left = (cx + 18) + 'px'; plus.style.top = (cy - 26) + 'px'; hostPhone.appendChild(plus);
+    plus.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0)', offset: 0.2 }, { opacity: 0, transform: 'translateY(-26px)' }], { duration: 1300, easing: 'ease-out', fill: 'forwards' });
+    setTimeout(() => plus.remove(), 1400);
+  }
+  // loop the reveal on step 4
+  const demo = document.querySelector('.reveal-demo');
+  const demoLoop = () => { if (D2T.reduced()) return; const slot = demo.querySelector('[data-slot="4"]'); revealShirt(slot, cands[1], 'burst', demo); tickTo(demo.querySelector('.tnum'), fourT, rpT, demo.querySelector('.taway')); };
+  setTimeout(demoLoop, 900); setInterval(demoLoop, 4200);
+
+  // ---------- playable ----------
+  const playHost = document.getElementById('play');
+  playHost.innerHTML = `<div class="opt"><div class="opt-h"><span class="tag">PLAYABLE</span><h3>One full game</h3><p>Reveal style: <select id="rstyle" style="background:#111;color:#fff;border:1px solid #333;border-radius:8px;padding:4px 8px;font:inherit"><option value="burst">Burst</option><option value="flip">Flip</option><option value="flap">Scoreboard roll</option></select> · Pitch: <select id="pstyle" style="background:#111;color:#fff;border:1px solid #333;border-radius:8px;padding:4px 8px;font:inherit"><option value="p1">Night stadium</option><option value="p2">Chalk board</option><option value="p3">Goal net</option><option value="p4">Big 433</option></select></p></div><div class="phone" id="game"></div></div>`;
+  const G = { filled: {}, total: 0, respins: 3, cands: null, sel: null, phase: 'ready', pstyle: 'p1' };
+  const game = document.getElementById('game');
+  const nextIdx = () => SLOTS.findIndex((s, i) => !G.filled[i]);
+  const posName = { GK: 'goalkeepers', DEF: 'defenders', MID: 'midfielders', FWD: 'forwards' };
+  function renderGame() {
+    const ni = nextIdx(), done = ni < 0, placed = Object.keys(G.filled).length;
+    const f = Object.assign({}, G.filled);
+    let trio = trioMyst(), hint = done ? (G.total >= TARGET ? 'Target hit! Your XI scored ' + G.total : 'Full XI: ' + G.total + ' goals, ' + (TARGET - G.total) + ' short') : `Spin for three ${posName[SLOTS[ni][1]]}`;
+    let label = done ? 'Play again' : 'Spin';
+    if (G.cands) { trio = `<div class="trio">${G.cands.map((c, i) => `<div class="cell"><div class="reelwin"><div class="strip" style="top:6px">${shirt({ w: 96, player: c, cls: G.sel == null ? '' : G.sel === i ? 'sel' : 'dim', attr: `data-c="${i}"` })}</div></div><span class="cap">${D2T.esc(c.club)}</span></div>`).join('')}</div>`;
+      hint = G.sel == null ? 'Tap a shirt to pick him' : `Tap again or drag onto ${SLOTS[ni][0]}`; label = G.sel == null ? 'Pick one' : 'Pick ' + G.cands[G.sel].sur; }
+    game.innerHTML = `${top()}${tally(G.total, placed)}${pitch(G.pstyle, f, done ? -1 : ni)}${trio}<div class="hint">${hint}</div>${bar(label, G.respins, G.cands && G.sel == null)}`;
+    game.querySelector('.spin').onclick = onMain; game.querySelector('.rs').onclick = onRespin; game.querySelector('.hm').onclick = () => { Object.assign(G, { filled: {}, total: 0, respins: 3, cands: null, sel: null }); renderGame(); };
+    game.querySelectorAll('[data-c]').forEach((el) => { el.onclick = () => onShirt(+el.dataset.c); dragify(el, +el.dataset.c); });
+  }
+  function spinTo(cands) {
+    G.cands = null; G.sel = null; renderGame();
+    const wins = [...game.querySelectorAll('.reelwin')], pos = SLOTS[nextIdx()][1];
+    game.querySelector('.spin').classList.add('off'); game.querySelector('.lbl').textContent = 'Spinning';
+    const reduced = D2T.reduced();
+    wins.forEach((w, i) => {
+      const filler = pick(pos, 14, Math.floor(Math.random() * 99999));
+      const strip = w.querySelector('.strip');
+      strip.innerHTML = filler.concat([cands[i]]).map((p) => shirt({ w: 96, player: p })).join('');
+      const H = 102, endTop = 6 - filler.length * H;
+      if (reduced) { strip.style.top = endTop + 'px'; return; }
+      w.classList.add('blur');
+      strip.animate([{ top: '6px' }, { top: (endTop - 14) + 'px', offset: 0.92 }, { top: endTop + 'px' }], { duration: 1500 + i * 450, easing: 'cubic-bezier(.15,.6,.25,1)', fill: 'forwards' });
+      setTimeout(() => w.classList.remove('blur'), 1100 + i * 450);
+    });
+    setTimeout(() => { G.cands = cands; renderGame(); }, reduced ? 50 : 1500 + 2 * 450 + 80);
+  }
+  function onMain() {
+    const ni = nextIdx();
+    if (ni < 0) { Object.assign(G, { filled: {}, total: 0, respins: 3, cands: null, sel: null }); renderGame(); return; }
+    if (!G.cands) { spinTo(pick(SLOTS[ni][1], 3, Math.floor(Math.random() * 99999))); return; }
+    if (G.sel != null) place(G.sel);
+  }
+  function onRespin() { if (G.respins <= 0 || !G.cands) return; G.respins--; spinTo(pick(SLOTS[nextIdx()][1], 3, Math.floor(Math.random() * 99999))); }
+  function onShirt(i) { if (G.sel === i) { place(i); return; } G.sel = i; renderGame(); }
+  function place(i) {
+    const ni = nextIdx(), p = G.cands[i], from = G.total;
+    G.filled[ni] = p; G.total += p.goals; G.cands = null; G.sel = null; renderGame();
+    const slot = game.querySelector(`[data-slot="${ni}"]`);
+    revealShirt(slot, p, document.getElementById('rstyle').value, game);
+    tickTo(game.querySelector('.tnum'), from, G.total, game.querySelector('.taway'));
+  }
+  function dragify(el, i) {
+    el.addEventListener('pointerdown', (e) => {
+      const sx = e.clientX, sy = e.clientY; let ghost = null;
+      const move = (ev) => {
+        if (!ghost && Math.hypot(ev.clientX - sx, ev.clientY - sy) > 8) { G.sel = i; ghost = el.cloneNode(true); ghost.style.cssText += ';position:fixed;z-index:99;pointer-events:none;width:80px;opacity:.95'; document.body.appendChild(ghost); }
+        if (ghost) { ghost.style.left = (ev.clientX - 40) + 'px'; ghost.style.top = (ev.clientY - 40) + 'px'; }
+      };
+      const up = (ev) => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up);
+        if (!ghost) return; ghost.remove();
+        const t = game.querySelector(`[data-slot="${nextIdx()}"]`).getBoundingClientRect();
+        if (ev.clientX > t.left - 30 && ev.clientX < t.right + 30 && ev.clientY > t.top - 30 && ev.clientY < t.bottom + 30) place(i); else renderGame(); };
+      window.addEventListener('pointermove', move); window.addEventListener('pointerup', up);
+    });
+  }
+  document.getElementById('pstyle').onchange = (e) => { G.pstyle = e.target.value; renderGame(); };
+  renderGame();
+
+  // ---------- reveal option panels ----------
+  const sample = P.FWD[6];
+  const REV = [['burst', 'Burst', 'The shirt flashes, scales down onto the pitch and bursts into orange sparks; the number slams in big and settles.'],
+    ['flip', 'Flip', 'The shirt turns round once like a card; the number is on it when it comes back, with a smaller burst.'],
+    ['flap', 'Scoreboard roll', 'The number spins through random digits like an old scoreboard, then stops on his goals with a bump.']];
+  document.getElementById('reveals').innerHTML = REV.map(([k, n, d]) => `<div class="opt"><div class="opt-h"><span class="tag">REVEAL</span><h3>${n}</h3><p>${d}</p></div><div class="panel" data-r="${k}"><div class="slotp" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:6px">${shirt({ w: 130, player: sample, goals: sample.goals, tag: true })}<span class="nm" style="font-size:14px">${D2T.esc(sample.name)} · ${D2T.esc(sample.club)}</span></div></div></div>`).join('');
+  document.querySelectorAll('.panel').forEach((pn, i) => { const go = () => { if (!D2T.reduced()) revealShirt(pn.querySelector('.slotp'), sample, pn.dataset.r, pn); }; setTimeout(go, 600 + i * 500); setInterval(go, 3600); });
+
+  // ---------- tally options ----------
+  const T = 415;
+  document.getElementById('tallies').innerHTML = [
+    ['TALLY A', 'Number and gap', 'Big total on the right, the gap in small orange text under the mode name.', `<div class="tvar">${tally(T, 9).replace('class="tally"', 'class="tally" style="padding:0"')}</div>`],
+    ['TALLY B', 'Progress bar', 'A bar fills towards a white line at 433. The total and gap sit above it.', `<div class="tvar t2"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:10.5px;font-weight:800;letter-spacing:.14em;color:var(--mode-t)">433 GOALS</span><span><b style="font:900 italic 28px/1 Exo 2">${T}</b> <i style="font-style:normal;font-size:12px;font-weight:800;color:var(--mode-t)">${TARGET - T} away</i></span></div><div class="track"><i></i><b></b></div></div>`],
+    ['TALLY C', 'Ring', 'A ring that closes as goals come in, the total inside it, the gap beside it.', `<div class="tvar t3"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="33" fill="none" stroke="#1B1B21" stroke-width="8"/><circle cx="40" cy="40" r="33" fill="none" stroke="#FF7A1A" stroke-width="8" stroke-linecap="round" stroke-dasharray="${(T / TARGET * 207).toFixed(1)} 207" transform="rotate(-90 40 40)"/><text x="40" y="47" text-anchor="middle" font-family="Exo 2" font-weight="900" font-style="italic" font-size="22" fill="#fff">${T}</text></svg><div><div style="font-size:10.5px;font-weight:800;letter-spacing:.14em;color:var(--mode-t)">433 GOALS</div><div style="font:900 italic 22px/1.1 Exo 2">${TARGET - T} away</div><div style="font-size:12px;color:var(--soft)">9 of 11 shirts filled</div></div></div>`]
+  ].map(([t, n, d, h]) => `<div class="opt"><div class="opt-h"><span class="tag">${t}</span><h3>${n}</h3><p>${d}</p></div>${h}</div>`).join('');
+})();
+</script>
