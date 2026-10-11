@@ -221,12 +221,14 @@ function chooseClub(st, S, rel) {
   st.seasonKey = S.season; st.club = rel.c;
   st.formation = FORMATIONS[rel.f] ? rel.f : "4-4-2";
   st.log.push(["club", S.season, rel.c]);
-  if (st.mode === "dare2dream") { startDraft(st, S); return; }
+  if (DRAFT_MODES.includes(st.mode)) { startDraft(st, S); return; }
   st.xi = autoXI(S, rel.c, st.formation, rel.xi);
   st.phase = "setup";
 }
 
-/* ---------- Dare2Dream draft: start with no players, one spin per shirt ---------- */
+/* ---------- Dare2Dream and Club X draft: start with no players, one spin per shirt ---------- */
+// Club X (Craig, 11 Oct): your own club replaces the season's bottom side, drafts 11 the same way and must win the league.
+const DRAFT_MODES = ["dare2dream", "clubx"];
 // Shirts fill keeper first, then defence, midfield and attack. Each spin is three players for that shirt's
 // position from the same season (never your club's own squad, never one seen before). No respins in the draft.
 // A drafted player leaves his real club for the whole season, like a signing (a raid dated before the season).
@@ -327,7 +329,7 @@ function startSeason(st, S) {
   st.fixtures = fixturesOf(S, st.club);
   st.rolls = schedule(st.fixtures);
   // Dare2Dream's draft is its pre-season: no pre-season rolls.
-  if (st.mode === "dare2dream") st.rolls = st.rolls.filter(w => w.kind !== "pre");
+  if (DRAFT_MODES.includes(st.mode)) st.rolls = st.rolls.filter(w => w.kind !== "pre");
   st.rollIx = 0; st.rollStep = 0; st.gw = 1;
   st.seen = [...new Set((st.seen || []).concat(st.xi))];
   // Your own club's real squad never turns up as a card.
@@ -596,7 +598,7 @@ const API = {
   RULES, LEVELS, POS, NEAR, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
   fitOf, effRating, indexSeason, playerOf, clubAt, xiStrength, userStrength, clubXI, clubStrength,
   schedule, fixturesOf, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
-  draftOrder, draftSlot, draftFormation, draftPick,
+  draftOrder, draftSlot, draftFormation, draftPick, DRAFT_MODES,
   startSeason, inWindow, currentWindow, newRoll, respinCards, signPreview, sign, pass,
   otherResults, strengthLoss, expectedGoals, simMatch, playMatch, table, historyTable, historyPositions, positionsSoFar, seasonSummary
 };
