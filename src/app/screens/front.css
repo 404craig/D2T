@@ -237,5 +237,5 @@
 .fr-fan-c { display: block; }
 .fr-fan-c.fr-fan-in { position: absolute; left: 0; top: 0; }
 @media (prefers-reduced-motion: reduce) { .fr-fan-s { transition: none; } }
-.fr-clubx .fr-mark { width: 112px; right: -14px; opacity: 0.16; filter: grayscale(1) brightness(2.2); }
+.fr-clubx .fr-mark { width: 104px; right: -10px; opacity: 0.22; }
 .fr-clubx .fr-mark img { display: block; width: 100%; height: auto; }
