@@ -29,7 +29,7 @@
     if (!inRun()) return '';
     const eng = D2T.game.eng(), data = D2T.run(), c = data.club;
     const games = data.fixtures.length, played = eng.played.length;
-    const where = eng.phase === 'setup' ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, games)} · ${STEP_LABEL[D2T.game.stepFor()] || 'In progress'}`;
+    const where = eng.phase === 'draft' ? `Draft · Shirt ${eng.draft.step + 1} of ${eng.xi.length}` : eng.phase === 'setup' ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, games)} · ${STEP_LABEL[D2T.game.stepFor()] || 'In progress'}`;
     return `<button class="fr-card-btn fr-cont fr-in" style="--club:${c.accent}" data-act="continue" aria-label="Continue with ${D2T.esc(c.full)} ${data.season}, ${where}">
       <span class="fr-cont-crest"><img src="${c.crest}" alt=""></span>
       <span class="fr-cont-txt"><span class="fr-cont-lbl">CONTINUE · ${D2T.game.modeName().toUpperCase()}</span><span class="fr-cont-name" style="display:block">${D2T.esc(c.name)}</span>
@@ -59,7 +59,7 @@
           <span class="fr-go">${ARROW}</span></button>
         <button class="fr-card-btn fr-pick fr-dream fr-in" data-act="pick" data-mode="dare2dream">
           <span class="fr-mark">${D2T.logo('emblemLine')}</span>
-          <span><span class="fr-tag" style="display:block">DARE2DREAM</span><span class="fr-big" style="display:block">Any club, any season</span><span class="fr-sub" style="display:block">Beat the finish they really had.${dreams.runs ? ` ${dreams.dreams} of ${dreams.runs} dreams so far.` : ''}</span></span>
+          <span><span class="fr-tag" style="display:block">DARE2DREAM</span><span class="fr-big" style="display:block">Any club, no players</span><span class="fr-sub" style="display:block">Draft your XI, then beat their real finish.${dreams.runs ? ` ${dreams.dreams} of ${dreams.runs} dreams so far.` : ''}</span></span>
           <span class="fr-go">${ARROW}</span></button>
         <section class="fr-sect fr-in" aria-label="Your record">
           <div class="fr-sect-h"><h2>Your record</h2><span>${rec.runs} runs</span></div>

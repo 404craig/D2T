@@ -128,21 +128,28 @@
   GAME.preseason = () => GAME.eng().phase === 'setup';
   GAME.lineup = () => {
     const S = GAME.S(), eng = GAME.eng();
-    const xi = eng.xi.map((id) => GAME.card(S, id));
+    const xi = eng.xi.map((id) => (id == null ? null : GAME.card(S, id)));
     let subs = [];
-    if (GAME.preseason()) subs = E.squadOf(S, eng.club).filter((p) => !eng.xi.includes(p.id)).map((p) => GAME.card(S, p.id));
+    if (GAME.preseason() && GAME.mode() !== 'dare2dream') subs = E.squadOf(S, eng.club).filter((p) => !eng.xi.includes(p.id)).map((p) => GAME.card(S, p.id));
     const all = new Map(); xi.concat(subs).forEach((c) => c && all.set(String(c.id), c));
     return { all, xi, subs };
   };
   GAME.slots = () => E.FORMATIONS[GAME.eng().formation].map(([pos, x, y]) => ({ pos, role: E.SLOT_BROAD[pos], x, y: 89 - y * 0.86 }));
   GAME.formations = () => E.FORMATION_NAMES;
   GAME.formationDots = (f) => E.FORMATIONS[f].map(([pos, x, y]) => ({ x, y: 89 - y * 0.86 }));
-  GAME.fit = (cardId, slot) => { const S = GAME.S(), p = E.playerOf(S, cardId); return E.fitOf(p, E.FORMATIONS[GAME.eng().formation][slot][0]); };
+  GAME.fit = (cardId, slot) => { if (cardId == null) return 'green'; const S = GAME.S(), p = E.playerOf(S, cardId); return E.fitOf(p, E.FORMATIONS[GAME.eng().formation][slot][0]); };
   GAME.strength = () => E.userStrength(GAME.S(), GAME.eng());
-  GAME.rating = () => Math.round(GAME.strength().ovr);
+  // During a Dare2Dream draft some shirts are empty: the rating is the average of the shirts filled so far.
+  GAME.rating = () => {
+    const eng = GAME.eng(), S = GAME.S();
+    if (eng.xi.every((x) => x != null)) return Math.round(GAME.strength().ovr);
+    const slots = E.FORMATIONS[eng.formation], got = eng.xi.map((id, i) => (id == null ? null : E.effRating(E.playerOf(S, id), slots[i][0]))).filter((x) => x != null);
+    return got.length ? Math.round(got.reduce((a, b) => a + b, 0) / got.length) : 0;
+  };
   GAME.setFormation = (f) => {
     const S = GAME.S(), eng = GAME.eng();
-    if (GAME.preseason()) { eng.formation = f; eng.xi = E.autoXI(S, eng.club, f, []); }   // a new best XI from the squad
+    if (eng.phase === 'draft') E.draftFormation(eng, S, f);                                 // the empty shirts, before the first pick
+    else if (GAME.preseason() && GAME.mode() !== 'dare2dream') { eng.formation = f; eng.xi = E.autoXI(S, eng.club, f, []); }   // a new best XI from the squad
     else E.setFormation(eng, S, f);                                                         // your 11, re-seated
     D2T.save();
   };
@@ -155,7 +162,20 @@
     if (pitch < 0) return false;
     E.swapSetup(eng, pitch, sub); D2T.save(); return true;
   };
-  GAME.startSeason = () => { const ok = E.startSeason(GAME.eng(), GAME.S()); D2T.state.run.step = 'transfer'; D2T.save(); return ok; };
+  GAME.startSeason = () => { const ok = E.startSeason(GAME.eng(), GAME.S()); D2T.state.run.step = GAME.eng().phase === 'window' ? 'transfer' : 'fixtures'; D2T.save(); return ok; };
+
+  // ---------- Dare2Dream draft: one spin per shirt ----------
+  GAME.inDraft = () => GAME.eng().phase === 'draft';
+  GAME.draftInfo = () => {
+    const eng = GAME.eng(), slot = E.draftSlot(eng), pos = E.FORMATIONS[eng.formation][slot][0];
+    return { step: eng.draft.step + 1, of: eng.xi.length, slot, pos, broad: E.SLOT_BROAD[pos] };
+  };
+  GAME.draftPick = (cardId) => {
+    const eng = GAME.eng();
+    if (!E.draftPick(eng, GAME.S(), cardId)) return false;
+    D2T.state.run.step = eng.phase === 'draft' ? 'transfer' : 'squad';
+    D2T.save(); return true;
+  };
 
   // ---------- transfer rolls ----------
   GAME.rollCards = () => { const S = GAME.S(), r = GAME.eng().roll; return r ? r.cards.map((id) => GAME.card(S, id)) : []; };
@@ -227,6 +247,8 @@
     const ph = run.eng.phase;
     if (ph === 'clubroll') return 'spin';
     if (ph === 'setup') return run.tableSeen ? 'squad' : 'table';
+    // Dare2Dream: pick the shape on the squad screen, then the draft runs on the transfer screen
+    if (ph === 'draft') return !run.tableSeen ? 'table' : (run.eng.draft.step === 0 && run.step !== 'transfer' ? 'squad' : 'transfer');
     if (run.match) return 'match';
     if (ph === 'window') return 'transfer';
     if (ph === 'summary') return 'summary';
@@ -237,7 +259,8 @@
     if (!step) return false;
     const ph = run.eng.phase;
     if (screen === step) return true;
-    if (screen === 'squad') return ph === 'setup' || ph === 'prematch';
+    if (screen === 'squad') return ph === 'setup' || ph === 'prematch' || (ph === 'draft' && run.eng.draft.step === 0 && run.tableSeen);
+    if (screen === 'transfer') return ph === 'draft' && run.tableSeen;
     if (screen === 'fixtures' || screen === 'match') return ph === 'prematch' && !run.match;
     return false;
   };

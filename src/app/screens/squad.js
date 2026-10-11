@@ -17,9 +17,9 @@
       const eng = GAME.eng();
       SE.accent(root, club); SE.setStep(ctx, 'squad');
       const reduced = D2T.reduced();
-      const pre = GAME.preseason();
+      const pre = GAME.preseason(), drafting = GAME.inDraft(), dream = GAME.mode() === 'dare2dream';
       root.appendChild(D2T.topbar());
-      const gwLabel = pre ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, data.fixtures.length)}`;
+      const gwLabel = drafting ? 'Draft' : pre ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, data.fixtures.length)}`;
       const hist = data.table.find((r) => r.name === club.name);
       const goalLabel = GAME.mode() === 'dare2dream' && hist ? ` · Target ${hist.pos === 1 ? 'champions' : D2T.ordinal(GAME.target(hist.pos))}` : '';
       const body = D2T.h(`<div class="screen-body se-squad">
@@ -36,15 +36,16 @@
       root.appendChild(body);
 
       // ---------- the fixed bar: next fixture and the way on ----------
-      const fx = SE.fixture(data, pre ? 1 : eng.gw);
+      const fx = SE.fixture(data, pre || drafting ? 1 : eng.gw);
       const oppC = fx ? SE.club(data, fx.opp) : null;
       const nextHTML = fx ? `<div class="se-next"><img src="${oppC.crest}" alt=""><div class="se-next-t"><small>Next · GW${fx.gw} · ${SE.date(fx.date, false)}</small><b>${D2T.esc(oppC.name)}</b><span class="se-ha">${fx.ha === 'H' ? 'Home' : 'Away'}</span></div></div>` : '';
-      const label = pre ? 'Pre-season' : 'Play';
+      const label = drafting ? 'Start the draft' : pre ? (dream ? 'Start the season' : 'Pre-season') : 'Play';
       const bar = D2T.h(`<footer class="actionbar se-nextbar">${nextHTML}<button class="btn se-btn se-play" type="button">${label}</button></footer>`);
       root.appendChild(bar);
       const playBtn = bar.querySelector('button');
       playBtn.onclick = () => {
-        if (pre) { GAME.startSeason(); D2T.go('transfer'); return; }
+        if (drafting) { st.step = 'transfer'; D2T.save(); D2T.go('transfer'); return; }
+        if (pre) { GAME.startSeason(); D2T.go(GAME.eng().phase === 'window' ? 'transfer' : 'fixtures'); return; }
         if (eng.phase === 'window') { D2T.go('transfer'); return; }
         st.step = 'fixtures'; D2T.save(); D2T.go('fixtures');
       };
@@ -59,7 +60,9 @@
         L = GAME.lineup();
         const slots = GAME.slots();
         slotsEl.innerHTML = slots.map((s, i) => {
-          const c = L.xi[i], fit = GAME.fit(c.id, i), oop = fit !== 'green';
+          const c = L.xi[i];
+          if (!c) return `<div class="se-slot" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">${SE.emptyShirt(s.pos, PITCH_W)}</div>`;
+          const fit = GAME.fit(c.id, i), oop = fit !== 'green';
           return `<div class="se-slot${oop ? ' se-oop' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
             <div class="se-cardwrap" data-card="${c.id}" data-kind="pitch" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}${oop ? ', out of position' : ''}">
               ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false })}${oop ? `<span class="se-oopchip se-fit-${fit}">${s.pos}</span>` : ''}</div></div>`;
@@ -69,11 +72,14 @@
         subsEl.scrollLeft = sl;
         body.querySelector('.se-fname').textContent = GAME.eng().formation;
         const showSubs = L.subs.length > 0;
-        body.querySelector('.se-subshead').style.display = showSubs || pre ? '' : 'none';
+        body.querySelector('.se-subshead').style.display = showSubs || (pre && !dream) ? '' : 'none';
         subsEl.style.display = showSubs ? '' : 'none';
         let gone = body.querySelector('.se-gone');
-        if (!showSubs && !pre && !gone) { gone = D2T.h('<p class="se-note se-gone">The rest of the squad has gone. New faces only come through the transfer rolls, and each one takes a shirt from your XI.</p>'); subsEl.after(gone); }
-        if (gone) gone.style.display = showSubs || pre ? 'none' : '';
+        const goneText = drafting ? 'Pick your shape, then start the draft: 11 spins, one per shirt (keeper first, then defence, midfield and attack). Three players each time, no respins.'
+          : dream && pre ? 'Your drafted XI. Swap shirts or change the shape, then start the season. Your 5 respins are for the transfer rolls during the season.'
+          : 'The rest of the squad has gone. New faces only come through the transfer rolls, and each one takes a shirt from your XI.';
+        if (!showSubs && (!pre || dream) && !gone) { gone = D2T.h(`<p class="se-note se-gone">${goneText}</p>`); subsEl.after(gone); }
+        if (gone) gone.style.display = showSubs || (pre && !dream) ? 'none' : '';
         body.querySelector('.se-subs-t').textContent = `Squad · ${L.subs.length}`;
         setRating(GAME.rating());
         if (before) animateMoves(before);
@@ -244,7 +250,8 @@
         let pending = GAME.eng().formation;
         const tile = (k) => `<button class="se-formcard${k === pending ? ' is-on' : ''}" type="button" data-f="${k}" aria-pressed="${k === pending}">
           <span class="se-fpitch"><span class="se-fline"></span>${GAME.formationDots(k).map((s) => `<i style="left:${s.x}%;top:${s.y}%"></i>`).join('')}</span><b>${k}</b></button>`;
-        const note = pre ? 'Your best XI from the squad is picked for the shape you choose. You can still swap anyone after.' : 'Your 11 are moved into the new shape. Players out of their position play at 90% (near) or 70% (wrong).';
+        const note = drafting ? 'The draft fills this shape shirt by shirt. It is fixed once you make your first pick, then you can change it again before the season.'
+          : pre && !dream ? 'Your best XI from the squad is picked for the shape you choose. You can still swap anyone after.' : 'Your 11 are moved into the new shape. Players out of their position play at 90% (near) or 70% (wrong).';
         const el = D2T.h(`<div><div class="se-formgrid">${GAME.formations().map(tile).join('')}</div><p class="se-note">${note}</p><button class="btn se-btn se-done" type="button">Done</button></div>`);
         const sh = D2T.sheet({
           title: 'Formation', body: el,

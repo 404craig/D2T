@@ -36,7 +36,7 @@
         </ol>
 
         <h2 class="fr-h2">Dare2Dream</h2>
-        <p class="fr-lead">The same game with any club from any season. Finish higher than they really did, or win the league again if they won it.</p>
+        <p class="fr-lead">Spin any club from any season, but start with no players. Pick a formation, then draft your XI: 11 spins, one per shirt, three players each time, no respins. Then play the season with transfer rolls and 5 respins. Finish higher than they really did, or win the league again if they won it.</p>
 
         <h2 class="fr-h2">Card colours</h2>
         <p class="fr-lead" style="margin-bottom:6px">The big number is the rating. The colour tells you the level.</p>

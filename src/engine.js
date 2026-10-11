@@ -211,12 +211,61 @@ function respinClubs(st, catalogue) {
   return true;
 }
 function chooseClub(st, S, rel) {
-  // rel = { c, f, xi } for the chosen relegated club-season
+  // rel = { c, f, xi } for the chosen club-season
   st.seasonKey = S.season; st.club = rel.c;
   st.formation = FORMATIONS[rel.f] ? rel.f : "4-4-2";
+  st.log.push(["club", S.season, rel.c]);
+  if (st.mode === "dare2dream") { startDraft(st, S); return; }
   st.xi = autoXI(S, rel.c, st.formation, rel.xi);
   st.phase = "setup";
-  st.log.push(["club", S.season, rel.c]);
+}
+
+/* ---------- Dare2Dream draft: start with no players, one spin per shirt ---------- */
+// Shirts fill keeper first, then defence, midfield and attack. Each spin is three players for that shirt's
+// position from the same season (never your club's own squad, never one seen before). No respins in the draft.
+// A drafted player leaves his real club for the whole season, like a signing (a raid dated before the season).
+const BROAD_ORDER = { GK: 0, DEF: 1, MID: 2, FWD: 3 };
+function draftOrder(formation) {
+  const f = FORMATIONS[formation];
+  return f.map((_, i) => i).sort((a, b) => BROAD_ORDER[SLOT_BROAD[f[a][0]]] - BROAD_ORDER[SLOT_BROAD[f[b][0]]] || a - b);
+}
+function startDraft(st, S) {
+  st.xi = new Array(FORMATIONS[st.formation].length).fill(null);
+  st.seen = squadOf(S, st.club).map(p => p.id);
+  st.draft = { step: 0 };
+  st.phase = "draft";
+  newDraftRoll(st, S);
+}
+function draftSlot(st) { return draftOrder(st.formation)[st.draft.step]; }
+function newDraftRoll(st, S) {
+  const slot = draftSlot(st), broad = SLOT_BROAD[FORMATIONS[st.formation][slot][0]];
+  const r = stream(st.seed, "draft", st.draft.step);
+  const taken = new Set(), cards = [];
+  for (let k = 0; k < 3; k++) { const id = drawCard(r, S, st, S.legends, taken, broad); if (id != null) { cards.push(id); taken.add(id); } }
+  st.roll = { key: `d${st.draft.step}`, spin: 0, cards, window: "draft", slot, step: st.draft.step + 1, of: st.xi.length };
+}
+// The shape can change until the first pick (the keeper comes first in every formation).
+function draftFormation(st, S, f) {
+  if (st.phase !== "draft" || st.draft.step > 0 || !FORMATIONS[f]) return false;
+  st.formation = f; st.xi = new Array(FORMATIONS[f].length).fill(null);
+  newDraftRoll(st, S);
+  return true;
+}
+function draftPick(st, S, cardId) {
+  if (st.phase !== "draft" || !st.roll || !st.roll.cards.includes(cardId)) return false;
+  const slot = draftSlot(st), p = playerOf(S, cardId, S.legends);
+  st.xi[slot] = cardId;
+  for (const id of st.roll.cards) if (!st.seen.includes(id)) st.seen.push(id);
+  st.signed.push({ id: cardId, gw: 0, slot, out: null, from: p ? p.c : null, date: "0000-00-00", draft: true });
+  if (p && p.c != null && !String(cardId).startsWith("L:")) {
+    st.gone.push(cardId);
+    st.raids.push({ club: p.c, date: "0000-00-00", gw: 0 });
+  }
+  st.log.push(["draft", cardId, slot]);
+  st.draft.step++;
+  if (st.draft.step >= st.xi.length) { st.roll = null; st.phase = "setup"; return true; }
+  newDraftRoll(st, S);
+  return true;
 }
 // Fill a formation from the club's real squad: the given XI first where it fits,
 // then the best-fitting regular for each empty slot.
@@ -241,7 +290,7 @@ function autoXI(S, club, formation, preferred) {
   return xi;
 }
 function setFormation(st, S, f) {
-  if (st.phase !== "setup" && !(st.phase === "window")) return false;
+  if (!["setup", "window", "prematch"].includes(st.phase)) return false;
   if (!FORMATIONS[f]) return false;
   // Keep the same players, re-seated to the slots they fit best.
   const players = st.xi.filter(Boolean).map(id => playerOf(S, id, S.legends));
@@ -271,13 +320,15 @@ function startSeason(st, S) {
   if (st.phase !== "setup") return false;
   st.fixtures = fixturesOf(S, st.club);
   st.rolls = schedule(st.fixtures);
+  // Dare2Dream's draft is its pre-season: no pre-season rolls.
+  if (st.mode === "dare2dream") st.rolls = st.rolls.filter(w => w.kind !== "pre");
   st.rollIx = 0; st.rollStep = 0; st.gw = 1;
-  st.seen = st.xi.slice();
+  st.seen = [...new Set((st.seen || []).concat(st.xi))];
   // Your own club's real squad never turns up as a card.
   for (const p of squadOf(S, st.club)) if (!st.seen.includes(p.id)) st.seen.push(p.id);
   st.history = historyPositions(S, st.club);
-  st.phase = "window";
-  newRoll(st, S);
+  if (inWindow(st)) { st.phase = "window"; newRoll(st, S); }
+  else st.phase = "prematch";
   st.log.push(["start"]);
   return true;
 }
@@ -289,11 +340,11 @@ function cardPool(S, st) {
   const seen = new Set(st.seen);
   return S.players.filter(p => (p.a || 0) >= RULES.minApps && !seen.has(p.id));
 }
-function drawCard(r, S, st, legends, taken) {
+function drawCard(r, S, st, legends, taken, broad) {
   const lv = (() => { let x = r(); for (let i = 0; i < 5; i++) { x -= RULES.levelOdds[i]; if (x <= 0) return i; } return 0; })();
-  const pool = cardPool(S, st).filter(p => !taken.has(p.id));
+  const pool = cardPool(S, st).filter(p => !taken.has(p.id) && (!broad || broadOf(p) === broad));
   if (lv === 4 && legends && legends.length) {
-    const lp = legends.filter(l => !st.seen.includes(l.id) && !taken.has(l.id));
+    const lp = legends.filter(l => !st.seen.includes(l.id) && !taken.has(l.id) && (!broad || broadOf(l) === broad));
     if (lp.length) return lp[Math.floor(r() * lp.length)].id;
   }
   // Best level at or below the one drawn that still has players; then above.
@@ -517,6 +568,7 @@ function seasonSummary(S, st) {
   // Best signing: biggest rating gain over the player he replaced, weighted by games played for you.
   let best = null;
   for (const s of st.signed) {
+    if (s.draft) continue;
     const p = playerOf(S, s.id, S.legends), o = s.out != null ? playerOf(S, s.out, S.legends) : null;
     const games = st.fixtures.length - s.gw + 1;
     const gain = ((p ? p.r : 0) - (o ? o.r : 50)) * games;
@@ -537,6 +589,7 @@ const API = {
   RULES, LEVELS, POS, NEAR, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
   fitOf, effRating, indexSeason, playerOf, xiStrength, userStrength, clubXI, clubStrength,
   schedule, fixturesOf, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
+  draftOrder, draftSlot, draftFormation, draftPick,
   startSeason, inWindow, currentWindow, newRoll, respinCards, signPreview, sign, pass,
   otherResults, strengthLoss, expectedGoals, simMatch, playMatch, table, historyTable, historyPositions, positionsSoFar, seasonSummary
 };

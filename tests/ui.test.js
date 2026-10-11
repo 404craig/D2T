@@ -214,8 +214,30 @@ fs.mkdirSync(OUT, { recursive: true });
   check(/dream|Beat it|Do it again/i.test(await page.textContent(".se-fin")), "table does not show the Dare2Dream target");
   await page.click(".actionbar button"); await expectScreen("squad"); await wait(600);
   check(/Target/.test(await page.textContent(".se-sqsub")), "squad does not show the target");
-  await shot("31-d2d-squad");
-  await page.evaluate(() => { const G = window.D2T.game; G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
+  check(await page.evaluate(() => window.D2T.game.eng().phase === "draft" && window.D2T.game.eng().xi.every((x) => x == null)), "Dare2Dream should start with no players");
+  await shot("31-d2d-empty");
+  // the draft: one spin per shirt, tap then Sign for the first, drag for the second, the rest through the adapter
+  await page.click(".se-play"); await expectScreen("transfer");
+  check(!(await page.$(".sp-round.is-reload:not([style*='none'])")), "the draft should have no respin button");
+  for (let k = 0; k < 2; k++) {
+    await page.waitForSelector(".sp-main:not([disabled])", { timeout: 8000 }); await wait(250);
+    await page.click(".sp-main");
+    await page.waitForSelector(".sp-screen.is-placing", { timeout: 9000 }); await wait(600);
+    if (k === 0) { await shot("31b-d2d-draft"); await page.click(".sp-slot >> nth=0"); await wait(300); await page.click(".sp-main"); }
+    else {
+      const a = await (await page.$(".sp-slot >> nth=1")).boundingBox(), t = await (await page.$(".tr-field .se-slot.se-best .se-cardwrap")).boundingBox();
+      await page.mouse.move(a.x + a.width / 2, a.y + a.height / 2); await page.mouse.down();
+      await page.mouse.move(a.x + 40, a.y - 30, { steps: 4 }); await page.mouse.move(t.x + t.width / 2, t.y + t.height / 2, { steps: 8 }); await page.mouse.up();
+    }
+    await wait(1200);
+    check(await page.evaluate((n) => window.D2T.game.eng().xi.filter((x) => x != null).length === n, k + 1), `draft pick ${k + 1} did not land`);
+  }
+  await page.evaluate(() => { const G = window.D2T.game; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); window.D2T.go("squad"); });
+  await expectScreen("squad"); await wait(500);
+  check(await page.evaluate(() => window.D2T.game.eng().phase === "setup" && window.D2T.game.eng().xi.every((x) => x != null)), "the draft did not fill 11 shirts");
+  await page.click(".se-play"); await wait(800);
+  check((await screen()) === "fixtures", "Dare2Dream should go straight to GW1 (no pre-season rolls), on " + (await screen()));
+  await page.evaluate(() => { const G = window.D2T.game; for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(1200); await shot("32-d2d-summary");
   check(/Dream achieved|Fell short/.test(await page.textContent(".sm-head")), "Dare2Dream summary has no dream result");
   check(await page.evaluate(() => window.D2T.game.dreamRecord().runs === 1), "Dare2Dream run not recorded");
@@ -223,5 +245,5 @@ fs.mkdirSync(OUT, { recursive: true });
 
   await browser.close();
   if (errors.length) { console.log("FAIL\n" + errors.join("\n")); process.exit(1); }
-  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls (tap, drag, pass), fixtures, live match, refresh, season, summary, record, back, account, other screens, Dare2Dream");
+  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls (tap, drag, pass), fixtures, live match, refresh, season, summary, record, back, account, other screens, Dare2Dream draft");
 })().catch((e) => { console.error(e); process.exit(1); });

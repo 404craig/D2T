@@ -96,6 +96,8 @@
   };
   const LV_ACCENT = (p) => { const L = D2T.LV[p.level] || D2T.LV.bronze; return { accent: p.level === 'silver' ? '#DCE2E8' : p.level === 'bronze' ? '#D99A66' : L.text, ink: p.level === 'silver' || p.level === 'bronze' || p.level === 'gold' ? '#000' : '#fff' }; };
   const PITCH_W = 50;
+  const ROLE = { GK: 'goalkeeper', DEF: 'defender', MID: 'midfielder', FWD: 'forward' };
+  const ROLES = { GK: 'goalkeepers', DEF: 'defenders', MID: 'midfielders', FWD: 'forwards' };
 
   D2T.screen('transfer', {
     title: 'Transfer window', theme: 'black',
@@ -104,7 +106,9 @@
       const st = D2T.state.run, eng = GAME.eng(), run = D2T.run(), club = run.club;
       SE.accent(root, club);
       root.appendChild(D2T.topbar());
-      const info = GAME.windowInfo();
+      // Dare2Dream's draft runs here too: one spin per shirt, three players for that position, no respins, no pass.
+      const draft = GAME.inDraft(), di = draft ? GAME.draftInfo() : null;
+      const info = draft ? { name: 'Draft', step: di.step, of: di.of, overall: di.step, total: di.of, gw: 1 } : GAME.windowInfo();
       const rollKey = eng.roll ? `${eng.roll.key}.${eng.roll.spin}` : '';
       const lvName = (p) => (D2T.LV[p.level] || D2T.LV.bronze).name;
       const body = D2T.h('<div style="flex:1 1 auto;min-height:0;position:relative;display:flex;flex-direction:column"></div>');
@@ -118,8 +122,11 @@
       function drawPitch(best = -1, fresh = -1) {
         if (!slotsEl) return;
         const L = GAME.lineup();
+        if (draft) best = di.slot;
         slotsEl.innerHTML = GAME.slots().map((s, i) => {
-          const c = L.xi[i], fit = GAME.fit(c.id, i), oop = fit !== 'green';
+          const c = L.xi[i];
+          if (!c) return `<div class="se-slot${i === best ? ' se-best' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}"><div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="Empty ${s.pos} shirt${i === best ? ', the one you are picking for' : ''}">${SE.emptyShirt(s.pos, PITCH_W)}</div></div>`;
+          const fit = GAME.fit(c.id, i), oop = fit !== 'green';
           return `<div class="se-slot${i === best ? ' se-best' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
             <div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}. Sign the selected player here">
               ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: i === fresh })}${oop ? `<span class="se-oopchip se-fit-${fit}">${s.pos}</span>` : ''}</div></div>`;
@@ -132,7 +139,7 @@
       }
       function buildPitch() {
         field = D2T.h(`<div class="tr-pitch" aria-label="Your XI">
-          <div class="tr-head"><div class="tr-head-t"><b>${D2T.esc(info.name)} · Roll ${info.step} of ${info.of}</b><span>Drag a player onto a shirt to sign him there</span></div>
+          <div class="tr-head"><div class="tr-head-t"><b>${draft ? `Draft · Shirt ${info.step} of ${info.of}` : `${D2T.esc(info.name)} · Roll ${info.step} of ${info.of}`}</b><span>${draft ? `Drag one onto the lit ${di.pos} shirt` : 'Drag a player onto a shirt to sign him there'}</span></div>
             <div class="se-rating" aria-live="polite"><b class="tr-rating">0</b><i>Team<br>rating</i></div></div>
           <div class="se-pitch tr-field">${SE.pitchLines}<div class="se-slots"></div></div></div>`);
         api.el.insertBefore(field, api.el.querySelector('.sp-stage'));
@@ -164,7 +171,7 @@
           flip(true);
           field.animate([{ opacity: 0, transform: 'translateY(-14px)' }, { opacity: 1, transform: 'none' }], { duration: 420, delay: 160, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
         } else api.el.classList.add('is-placing');
-        api.hint('Drag a player onto the pitch, or tap him then a shirt');
+        api.hint(draft ? 'Drag one onto the lit shirt, or tap him then Sign' : 'Drag a player onto the pitch, or tap him then a shirt');
       }
       function leavePlacing() {
         if (!placing) return Promise.resolve();
@@ -183,14 +190,16 @@
       function sign(i, slot) {
         if (signing || !placing) return;
         const p = api.results()[i];
-        if (!p || !GAME.signAt(p.id, slot)) return;
+        if (draft && slot !== di.slot) { api.hint(`This pick goes in the lit ${di.pos} shirt`); return; }
+        if (!p || !(draft ? GAME.draftPick(p.id) : GAME.signAt(p.id, slot))) return;
         signing = true;
         SND.play('subIn');
         drawPitch(-1, slot);
         const s = api.slots[i];
         s.classList.add('is-signed');
         api.hint(`${surname(p.name)} is in. Welcome to ${club.name}.`);
-        timers.push(setTimeout(() => { if (alive) D2T.go(GAME.eng().phase === 'window' ? 'transfer' : 'squad'); }, reduced ? 300 : 1100));
+        const ph = GAME.eng().phase;
+        timers.push(setTimeout(() => { if (alive) D2T.go(ph === 'window' || ph === 'draft' ? 'transfer' : 'squad'); }, reduced ? 300 : (draft ? 800 : 1100)));
       }
       function pass() {
         if (signing) return;
@@ -220,7 +229,7 @@
           const p = api.results()[drag.i];
           ghost = D2T.h(`<div class="se-ghost" aria-hidden="true">${D2T.cards.player(p, { w: 64, mini: true, shine: false })}</div>`);
           host.appendChild(ghost);
-          drawPitch(GAME.bestSlot(p.id));
+          drawPitch(draft ? di.slot : GAME.bestSlot(p.id));
         }
         if (e.cancelable) e.preventDefault();
         const hr = host.getBoundingClientRect();
@@ -251,8 +260,9 @@
 
       const build = () => {
         api = D2T.roll.mount(body, {
-          kicker: `${info.name} · Roll ${info.step} of ${info.of}`, title: 'Who comes in?',
-          sub: `Roll ${info.overall} of ${info.total} this season${fx ? `, before GW${info.gw} against ${opp}` : ''}. Sign one or pass.`,
+          kicker: draft ? `Dare2Dream draft · Shirt ${info.step} of ${info.of}` : `${info.name} · Roll ${info.step} of ${info.of}`,
+          title: draft ? `Pick your ${ROLE[di.broad]}` : 'Who comes in?',
+          sub: draft ? `Three ${ROLES[di.broad]} from ${run.season} for your ${di.pos} shirt. No respins in the draft.` : `Roll ${info.overall} of ${info.total} this season${fx ? `, before GW${info.gw} against ${opp}` : ''}. Sign one or pass.`,
           pool: fillerCards(),
           render: (p, w) => D2T.cards.player(p, { w }),
           pick: () => { SND.play('roll3'); return GAME.rollCards(); },
@@ -261,22 +271,23 @@
           accent: LV_ACCENT,
           caption: (p) => `${p.pos} · ${lvName(p).toUpperCase()}`,
           details: (p) => D2T.cards.info(p, LV_ACCENT(p).accent),
-          mainLabel: 'Spin', pickLabel: 'Pass', spinningLabel: 'Rolling',
-          selectedLabel: () => 'Pass',
+          mainLabel: 'Spin', pickLabel: draft ? 'Pick one' : 'Pass', spinningLabel: 'Rolling',
+          selectedLabel: (p) => (draft ? `Sign ${surname(p.name)}` : 'Pass'),
           hintIdle: 'Hit Spin to roll three players', hintSettled: '', hintSelected: 'Tap a shirt to sign him there, or tap him again for his card',
-          respins: eng.respins,
+          respins: draft ? null : eng.respins,
           baseBtn: { accent: club.accent, ink: club.ink },
           onRespinsChange: () => { GAME.respinCards(); st.spun = ''; D2T.save(); },
           beforeSpin: () => leavePlacing(),
-          onSelect: (i, p) => { if (placing) drawPitch(GAME.bestSlot(p.id)); },
-          afterSettle: { label: 'Pass', onClick: pass },
-          onConfirm: () => {}
+          onSelect: (i, p) => { if (placing) drawPitch(draft ? di.slot : GAME.bestSlot(p.id)); },
+          afterSettle: draft ? null : { label: 'Pass', onClick: pass },
+          onConfirm: (p) => { if (draft) sign(api.results().indexOf(p), di.slot); }
         });
         api.el.classList.add('sp-reveal');
         buildPitch();
         if (st.spun === rollKey) enterPlacing(false);
       };
-      if (st.spun === rollKey) build();
+      // the emblem burst opens each window and the draft, not every one of the 11 draft spins
+      if (st.spun === rollKey || (draft && di.step > 1)) build();
       else intr = intro(body, () => { intr = null; build(); });
     },
     unmount() { kill && kill(); kill = null; intr && intr.cancel(); intr = null; api && api.unmount(); api = null; }

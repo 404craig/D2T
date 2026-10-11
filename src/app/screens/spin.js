@@ -288,7 +288,7 @@
       const goal = (c) => (c.pos === 1 ? 'Win the league again' : `Finish ${D2T.ordinal(GAME.target(c.pos))} or better`);
       api = mount(root, {
         kicker: `New run · ${GAME.modeName()}`, title: 'Pick your club',
-        sub: dream ? 'Three clubs from any season. Finish higher than they really did, or win the league again if they won it.' : 'Three clubs that went down. Pick one and take it from the drop to the top.',
+        sub: dream ? 'Three clubs from any season. You start with no players and draft your XI. Finish higher than they really did, or win the league again if they won it.' : 'Three clubs that went down. Pick one and take it from the drop to the top.',
         pool: GAME.spinPool(),
         render: (c, w) => D2T.cards.club(c, { w, footLabel: dream ? 'TO BEAT' : undefined }),
         pick: () => { SND.play('roll3'); return GAME.offer(); },

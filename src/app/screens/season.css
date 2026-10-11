@@ -300,3 +300,10 @@
 @media (prefers-reduced-motion: reduce) { .sm-in > *, .sm-line { animation: none; } }
 .sm-head.sm-miss { background: var(--ink-2); color: var(--soft); }
 .sm-ach.sm-ach-one { grid-template-columns: 1fr; }
+
+/* empty shirt (Dare2Dream draft) */
+.se-empty { display: grid; place-items: center; border: 1.5px dashed rgba(255,255,255,.35); border-radius: 8px; background: rgba(0,0,0,.25);
+  clip-path: polygon(0 10%, 12% 0, 88% 0, 100% 10%, 100% 86%, 50% 100%, 0 86%); }
+.se-empty span { font-size: 11px; font-weight: 900; letter-spacing: .06em; color: rgba(255,255,255,.6); }
+.se-slot.se-best .se-empty { border-color: var(--se-acc); background: var(--se-acc-a); animation: seBest 1.4s ease-in-out infinite; }
+.se-slot.se-best .se-empty span { color: var(--se-text); }
