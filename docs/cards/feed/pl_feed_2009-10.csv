@@ -1,0 +1,566 @@
+season,club_feed,feed_id,name,feed_pos,appearances,goals,goal_assist,clean_sheet,wins,draws,losses,mins_played,game_started,goals_conceded,saves,yellow_card,red_card,own_goals
+2009/10,Arsenal,3311,Bacary Sagna,D,35,0,3,10,20,6,9,2760,31,36,0,3,0,0
+2009/10,Arsenal,3796,Thomas Vermaelen,D,33,7,1,10,22,4,7,2799,33,34,0,3,1,1
+2009/10,Arsenal,3550,Andrey Arshavin,M,30,10,1,4,19,5,6,2265,25,28,0,2,0,0
+2009/10,Arsenal,2840,Abou Diaby,M,29,6,3,8,18,5,6,2322,26,30,0,2,0,1
+2009/10,Arsenal,2607,Manuel Almunia,G,29,0,1,10,18,4,7,2610,29,31,67,1,0,0
+2009/10,Arsenal,2417,Cesc Fàbregas,M,27,15,13,9,18,4,5,2193,26,26,0,5,0,0
+2009/10,Arsenal,2054,William Gallas,D,26,3,0,9,16,4,6,2340,26,30,0,2,0,0
+2009/10,Arsenal,3546,Samir Nasri,M,26,2,4,4,14,5,7,1887,22,25,0,2,0,0
+2009/10,Arsenal,2837,Alexandre Song,M,26,1,1,9,16,4,6,2239,25,24,0,10,0,0
+2009/10,Arsenal,2612,Emmanuel Eboué,D,25,1,3,5,16,2,7,1493,17,18,0,4,0,0
+2009/10,Arsenal,3052,Tomás Rosicky,M,25,3,4,1,14,4,7,1297,14,20,0,1,0,0
+2009/10,Arsenal,3318,Eduardo da Silva,F,24,2,4,0,15,4,5,1120,13,10,0,0,0,0
+2009/10,Arsenal,2413,Gaël Clichy,D,24,0,1,9,14,4,6,2086,23,27,0,4,0,0
+2009/10,Arsenal,2844,Nicklas Bendtner,F,23,6,5,2,13,4,6,1228,13,13,0,2,0,0
+2009/10,Arsenal,2839,Theo Walcott,F,23,3,2,1,13,3,7,1130,12,9,0,0,0,0
+2009/10,Arsenal,3053,Denilson,M,20,3,1,5,12,3,5,1573,19,21,0,2,0,0
+2009/10,Arsenal,3548,Aaron Ramsey,M,18,3,3,2,13,3,2,780,7,5,0,0,0,0
+2009/10,Arsenal,2616,Robin van Persie,F,16,9,7,3,9,2,5,1256,14,16,0,3,0,0
+2009/10,Arsenal,1719,Mikaël Silvestre,D,12,1,0,4,7,2,3,857,9,8,0,2,0,0
+2009/10,Arsenal,557,Sol Campbell,D,11,0,0,4,5,3,3,955,10,10,0,3,0,0
+2009/10,Arsenal,2843,Carlos Vela,F,11,1,0,0,7,1,3,226,1,3,0,0,0,0
+2009/10,Arsenal,2835,Armand Traore,D,9,0,0,2,5,1,3,805,9,10,0,2,0,0
+2009/10,Arsenal,2834,Vito Mannone,G,5,0,0,2,4,1,0,450,5,5,18,1,0,0
+2009/10,Arsenal,3317,Craig Eastmond,M,4,0,0,0,3,0,1,170,2,2,0,0,0,0
+2009/10,Arsenal,3309,Lukasz Fabianski,G,4,0,0,2,1,1,2,360,4,5,9,1,0,0
+2009/10,Arsenal,3054,Fran Mérida,M,4,1,0,0,2,1,1,61,0,2,0,0,0,0
+2009/10,Arsenal,3046,Kieran Gibbs,D,3,0,0,0,3,0,0,270,3,3,0,1,0,0
+2009/10,Arsenal,2609,Johan Djourou,D,1,0,0,0,1,0,0,28,0,0,0,0,0,0
+2009/10,Arsenal,3049,Henri Lansbury,M,1,0,0,0,1,0,0,13,0,0,0,0,0,0
+2009/10,Arsenal,3547,Jack Wilshere,M,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2009/10,Aston Villa,1420,Brad Friedel,G,38,0,0,15,17,13,8,3420,38,39,122,0,0,0
+2009/10,Aston Villa,3063,Stiliyan Petrov,M,37,0,1,14,16,13,8,3271,37,35,0,11,0,0
+2009/10,Aston Villa,3062,Ashley Young,D,37,5,7,15,17,13,7,3304,37,37,0,6,0,0
+2009/10,Aston Villa,2622,Gabriel Agbonlahor,F,36,13,3,13,17,11,8,3082,35,32,0,3,0,0
+2009/10,Aston Villa,3563,Carlos Cuellar,D,36,2,1,15,17,13,6,3240,36,30,0,6,1,0
+2009/10,Aston Villa,2100,James Milner,M,36,7,12,14,16,13,7,3174,36,37,0,5,0,1
+2009/10,Aston Villa,1184,Richard Dunne,D,35,3,0,14,15,13,7,3132,35,36,0,7,0,1
+2009/10,Aston Villa,3065,John Carew,F,33,10,3,0,14,12,7,2106,22,25,0,2,0,0
+2009/10,Aston Villa,908,Emile Heskey,F,31,3,2,3,14,11,6,1298,16,12,0,2,0,0
+2009/10,Aston Villa,2279,Stephen Warnock,D,30,0,3,10,14,9,7,2596,30,32,0,2,0,0
+2009/10,Aston Villa,3010,James Collins,D,27,1,0,10,11,11,5,2367,26,29,0,2,0,1
+2009/10,Aston Villa,2122,Stewart Downing,M,25,2,1,9,11,9,5,2074,23,20,0,1,0,0
+2009/10,Aston Villa,2007,Steve Sidwell,M,25,0,1,3,12,9,4,1215,12,19,0,3,0,0
+2009/10,Aston Villa,1464,Luke Young,D,16,0,0,7,6,5,5,1288,14,15,0,4,0,0
+2009/10,Aston Villa,3015,Nigel Reo-Coker,M,10,0,0,0,5,3,2,526,6,3,0,1,0,0
+2009/10,Aston Villa,3566,Nathan Delfouneso,F,9,1,0,0,3,2,4,187,0,7,0,0,0,0
+2009/10,Aston Villa,3799,Fabian Delph,M,8,0,0,0,3,2,3,292,4,6,0,3,0,0
+2009/10,Aston Villa,3465,Habib Beye,D,6,0,0,1,2,1,3,442,5,7,0,0,1,0
+2009/10,Aston Villa,3564,Marc Albrighton,M,3,0,0,0,0,1,2,57,0,1,0,0,0,0
+2009/10,Aston Villa,3186,Nicky Shorey,D,3,0,1,1,2,0,1,270,3,3,0,0,0,0
+2009/10,Aston Villa,2997,Curtis Davies,D,2,1,0,0,1,0,1,180,2,3,0,0,0,0
+2009/10,Aston Villa,3562,Ciaran Clark,D,1,0,0,1,1,0,0,90,1,0,0,0,0,0
+2009/10,Aston Villa,2847,Craig Gardner,M,1,0,0,0,1,0,0,4,0,0,0,1,0,0
+2009/10,Birmingham City,3806,Roger Johnson,D,38,0,1,11,13,11,14,3420,38,47,0,8,0,0
+2009/10,Birmingham City,2433,Barry Ferguson,M,37,0,0,10,13,10,14,3328,37,45,0,7,1,0
+2009/10,Birmingham City,3143,Joe Hart,G,36,0,0,10,13,10,13,3240,36,42,125,3,0,0
+2009/10,Birmingham City,2460,James McFadden,M,36,5,3,5,12,11,13,2653,32,33,0,6,0,0
+2009/10,Birmingham City,1190,Lee Bowyer,M,35,5,2,9,11,11,13,3011,34,42,0,8,0,0
+2009/10,Birmingham City,776,Stephen Carr,D,35,0,2,10,11,11,13,3112,35,42,0,10,0,0
+2009/10,Birmingham City,2172,Keith Fahey,M,34,0,2,4,12,10,12,1694,18,24,0,2,0,0
+2009/10,Birmingham City,2613,Sebastian Larsson,M,33,4,2,6,12,9,12,2380,26,30,0,3,0,0
+2009/10,Birmingham City,2530,Cameron Jerome,F,32,11,3,6,12,10,10,2684,32,33,0,5,0,0
+2009/10,Birmingham City,2013,Liam Ridgewell,D,31,3,1,8,11,10,10,2745,30,41,0,4,0,0
+2009/10,Birmingham City,3814,Christian Benitez,F,30,3,5,4,12,9,9,1934,21,25,0,1,0,0
+2009/10,Birmingham City,3807,Scott Dann,D,30,0,2,9,11,10,9,2700,30,39,0,4,0,1
+2009/10,Birmingham City,1768,Kevin Phillips,F,19,4,0,0,4,5,10,415,2,8,0,0,0,0
+2009/10,Birmingham City,2847,Craig Gardner,M,13,1,1,1,3,4,6,900,10,19,0,3,0,0
+2009/10,Birmingham City,3337,Garry O'Connor,F,10,1,0,1,3,1,6,554,5,7,0,2,0,0
+2009/10,Birmingham City,3810,Míchel,M,9,0,1,0,3,1,5,305,3,7,0,1,0,0
+2009/10,Birmingham City,1948,Stuart Parnaby,D,8,0,0,2,4,1,3,546,6,4,0,2,0,0
+2009/10,Birmingham City,1919,Grégory Vignal,D,8,0,0,0,2,2,4,501,6,6,0,3,0,0
+2009/10,Birmingham City,1175,Lee Carsley,M,7,0,0,0,2,1,4,352,3,6,0,1,0,0
+2009/10,Birmingham City,2120,Franck Queudrue,D,6,0,0,2,1,1,4,495,6,4,0,0,0,0
+2009/10,Birmingham City,2992,Teemu Tainio,M,6,0,0,1,2,1,3,361,5,6,0,0,0,0
+2009/10,Birmingham City,1542,Gary McSheffrey,F,5,0,0,0,2,1,2,99,1,2,0,1,0,0
+2009/10,Birmingham City,1242,Maik Taylor,G,2,0,0,1,0,1,1,180,2,5,7,0,0,0
+2009/10,Birmingham City,1336,Damien Johnson,M,1,0,0,0,0,1,0,2,0,0,0,0,0,0
+2009/10,Birmingham City,3816,Jay O'Shea,M,1,0,0,0,0,0,1,8,0,0,0,0,0,0
+2009/10,Blackburn Rovers,1404,Paul Robinson,G,34,0,1,12,11,10,14,3086,35,50,106,1,0,0
+2009/10,Blackburn Rovers,3569,Gaël Givet,D,33,2,2,10,11,10,13,2799,33,45,0,3,0,1
+2009/10,Blackburn Rovers,3821,Steven Nzonzi,M,32,2,0,10,10,11,12,2867,33,47,0,6,0,0
+2009/10,Blackburn Rovers,2636,Morten Pedersen,M,32,3,7,7,11,9,13,2423,27,41,0,5,0,0
+2009/10,Blackburn Rovers,2584,Keith Andrews,M,31,1,0,4,10,9,13,2112,22,39,0,4,0,0
+2009/10,Blackburn Rovers,3070,Christopher Samba,D,29,4,0,10,10,10,10,2597,30,35,0,4,1,0
+2009/10,Blackburn Rovers,2385,Jason Roberts,F,28,5,3,2,11,9,9,1548,15,22,0,1,0,0
+2009/10,Blackburn Rovers,2634,Ryan Nelsen,D,27,4,1,7,10,8,10,2270,25,38,0,3,0,0
+2009/10,Blackburn Rovers,3825,Nikola Kalinic,F,26,2,1,3,5,9,12,1448,14,25,0,2,0,0
+2009/10,Blackburn Rovers,2289,El Hadji Diouf,M,25,3,2,3,10,7,9,1945,24,33,0,3,0,0
+2009/10,Blackburn Rovers,3026,Pascal Chimbonda,D,23,1,1,7,8,7,9,1974,22,31,0,3,0,0
+2009/10,Blackburn Rovers,2434,Brett Emerton,M,23,0,1,4,11,6,7,1419,17,24,0,2,0,0
+2009/10,Blackburn Rovers,3823,Junior Hoilett,F,23,0,0,2,6,8,9,942,8,15,0,0,0,0
+2009/10,Blackburn Rovers,1337,David Dunn,M,22,9,2,3,10,6,7,1720,20,29,0,7,0,0
+2009/10,Blackburn Rovers,3366,Franco Di Santo,F,21,1,1,1,6,6,10,1159,15,19,0,3,0,0
+2009/10,Blackburn Rovers,2867,Martin Olsson,D,21,1,0,7,8,5,8,1720,19,29,0,1,0,0
+2009/10,Blackburn Rovers,3818,Míchel Salgado,D,21,0,1,5,9,5,7,1435,16,20,0,3,0,0
+2009/10,Blackburn Rovers,3571,Vince Grella,M,15,0,0,3,5,6,4,954,10,11,0,1,1,0
+2009/10,Blackburn Rovers,3080,Benni McCarthy,F,14,1,3,1,3,4,7,711,7,10,0,2,0,0
+2009/10,Blackburn Rovers,3599,Lars Jacobsen,D,12,0,0,1,4,2,7,1033,11,26,0,0,0,0
+2009/10,Blackburn Rovers,3820,Phil Jones,D,9,0,0,3,4,4,1,662,7,6,0,0,0,0
+2009/10,Blackburn Rovers,3067,Jason Brown,G,4,0,0,1,2,1,1,334,3,5,7,0,0,0
+2009/10,Blackburn Rovers,2435,Steven Reid,D,4,0,0,0,3,0,1,124,1,1,0,1,0,0
+2009/10,Blackburn Rovers,3822,Yildiray Bastürk,M,1,0,0,0,0,1,0,45,1,0,0,0,0,0
+2009/10,Blackburn Rovers,2204,Paul Gallagher,M,1,0,0,0,0,0,1,15,0,1,0,1,0,0
+2009/10,Blackburn Rovers,3819,Grant Hanley,D,1,0,0,1,1,0,0,90,1,0,0,0,0,0
+2009/10,Blackburn Rovers,3824,Amine Linganzi,M,1,0,0,0,1,0,0,45,1,0,0,0,0,0
+2009/10,Blackburn Rovers,2279,Stephen Warnock,D,1,0,0,0,0,0,1,90,1,2,0,1,0,0
+2009/10,Bolton Wanderers,1342,Jussi Jääskeläinen,G,38,0,0,5,10,9,19,3420,38,67,141,3,0,0
+2009/10,Bolton Wanderers,1249,Kevin Davies,F,37,7,7,4,10,9,18,3316,37,65,0,9,0,1
+2009/10,Bolton Wanderers,2542,Matthew Taylor,M,37,8,1,0,10,9,18,2582,29,51,0,2,0,0
+2009/10,Bolton Wanderers,2841,Fabrice Muamba,M,36,1,0,5,10,8,18,2946,35,55,0,11,0,0
+2009/10,Bolton Wanderers,2075,Zat Knight,D,35,1,0,5,10,8,17,3150,35,62,0,1,0,1
+2009/10,Bolton Wanderers,3830,Lee Chung-Yong,M,34,4,3,1,9,7,18,2411,27,50,0,4,0,0
+2009/10,Bolton Wanderers,2620,Gary Cahill,D,29,5,1,1,7,7,15,2610,29,55,0,3,0,0
+2009/10,Bolton Wanderers,3353,Tamir Cohen,M,27,3,3,3,7,8,12,2102,26,40,0,6,1,0
+2009/10,Bolton Wanderers,3829,Ivan Klasnic,F,27,8,1,0,9,7,11,1211,12,22,0,5,0,0
+2009/10,Bolton Wanderers,3623,Sam Ricketts,D,27,0,1,4,7,4,16,2167,25,43,0,1,1,1
+2009/10,Bolton Wanderers,3349,Grétar Steinsson,D,27,0,2,4,8,7,12,2217,25,39,0,4,1,0
+2009/10,Bolton Wanderers,3583,Johan Elmander,F,25,3,1,2,4,4,17,1353,15,22,0,2,0,0
+2009/10,Bolton Wanderers,1780,Paul Robinson,D,25,0,2,4,6,6,13,2192,24,42,0,7,0,0
+2009/10,Bolton Wanderers,2041,Ricardo Gardner,M,21,1,1,0,6,5,10,1105,11,26,0,1,0,0
+2009/10,Bolton Wanderers,2583,Mark Davies,M,17,0,0,0,2,6,9,549,5,13,0,1,0,0
+2009/10,Bolton Wanderers,3547,Jack Wilshere,M,14,1,1,0,5,2,7,1092,13,18,0,4,0,0
+2009/10,Bolton Wanderers,1505,Jlloyd Samuel,D,13,0,0,0,3,3,7,1028,12,23,0,4,1,1
+2009/10,Bolton Wanderers,3660,Vladimír Weiss,M,13,0,3,0,5,3,5,386,3,9,0,0,0,0
+2009/10,Bolton Wanderers,1042,Gavin McCann,M,11,0,0,0,2,4,5,531,5,11,0,4,0,0
+2009/10,Bolton Wanderers,3581,Chris Basham,D,8,0,1,0,3,2,3,236,2,3,0,0,0,0
+2009/10,Bolton Wanderers,1664,Andy O'Brien,D,6,0,0,1,1,2,3,514,6,7,0,0,0,0
+2009/10,Bolton Wanderers,2080,Sean Davis,M,3,0,0,0,0,0,3,234,3,3,0,2,1,0
+2009/10,Bolton Wanderers,3040,Stuart Holden,M,2,0,0,1,2,0,0,114,1,1,0,0,0,0
+2009/10,Bolton Wanderers,3831,Danny Ward,F,2,0,0,0,0,0,2,16,0,0,0,0,0,0
+2009/10,Bolton Wanderers,3584,Mustapha Riga,F,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+2009/10,Burnley,3845,Wade Elliott,M,37,4,4,3,8,6,24,3121,34,69,0,5,0,0
+2009/10,Burnley,3833,Brian Jensen,G,37,0,0,3,8,6,24,3345,38,80,149,3,0,0
+2009/10,Burnley,3279,Tyrone Mears,D,37,0,4,3,8,6,24,3420,38,82,0,7,0,0
+2009/10,Burnley,3850,Steven Fletcher,F,34,8,5,0,8,5,22,2873,35,65,0,1,0,0
+2009/10,Burnley,2524,Chris Eagles,M,33,2,3,0,6,6,22,1969,20,54,0,2,0,0
+2009/10,Burnley,3842,Graham Alexander,D,32,7,1,2,7,6,20,2747,33,64,0,3,0,0
+2009/10,Burnley,1673,Robbie Blake,M,30,2,3,1,7,5,19,1650,20,39,0,1,0,0
+2009/10,Burnley,3478,David Nugent,F,28,6,2,0,6,6,18,1877,20,45,0,0,0,0
+2009/10,Burnley,3189,André Bikey,D,26,1,0,3,8,5,15,2190,26,55,0,5,0,0
+2009/10,Burnley,2259,Clarke Carlisle,D,26,0,0,3,6,5,16,2374,27,56,0,8,0,1
+2009/10,Burnley,1929,Stephen Jordan,D,24,0,1,3,5,6,14,2024,23,43,0,2,1,1
+2009/10,Burnley,3844,Kevin McDonald,M,24,1,1,0,2,6,18,1456,15,31,0,5,0,0
+2009/10,Burnley,3852,Martin Paterson,F,23,4,2,0,6,1,16,1431,17,29,0,2,0,0
+2009/10,Burnley,3854,Steven Thompson,F,20,4,0,0,6,1,13,380,1,14,0,1,0,0
+2009/10,Burnley,2671,Leon Cort,D,15,0,1,0,2,1,12,1291,15,35,0,0,0,0
+2009/10,Burnley,2701,Daniel Fox,D,14,1,1,0,3,1,10,1149,13,33,0,3,0,0
+2009/10,Burnley,1589,Steven Caldwell,D,11,1,0,1,4,4,5,1062,12,24,0,1,1,0
+2009/10,Burnley,2889,Jack Cork,D,11,1,3,0,2,1,8,772,8,22,0,1,0,0
+2009/10,Burnley,3835,Michael Duff,D,11,0,0,0,1,1,9,951,10,23,0,5,0,0
+2009/10,Burnley,2173,Johannes Karl Gudjonsson,M,9,0,0,0,2,3,5,311,1,9,0,1,0,0
+2009/10,Burnley,3843,Christopher McCann,M,7,0,0,2,3,0,4,491,7,9,0,0,0,0
+2009/10,Burnley,4017,Fernando Guerrero,M,6,0,0,0,2,1,4,72,0,2,0,0,0,0
+2009/10,Burnley,4016,Christian Kalvenes,D,6,0,0,0,1,0,5,277,3,8,0,0,0,0
+2009/10,Burnley,3172,David Edgar,D,4,0,0,0,1,0,3,239,2,7,0,0,0,0
+2009/10,Burnley,3853,Frédéric Nimani,F,2,0,0,0,0,0,2,44,0,0,0,1,0,0
+2009/10,Burnley,3834,Diego Penny,G,1,0,0,0,0,0,1,75,0,2,1,0,0,0
+2009/10,Chelsea,1353,John Terry,D,37,2,2,17,26,5,6,3260,37,30,0,6,1,0
+2009/10,Chelsea,800,Frank Lampard,M,36,22,14,14,25,5,6,3220,36,32,0,0,0,0
+2009/10,Chelsea,2651,Petr Cech,G,34,0,1,17,25,4,5,3021,34,24,64,0,1,1
+2009/10,Chelsea,1135,Nicolas Anelka,F,33,11,7,9,24,3,6,2701,31,24,0,0,0,0
+2009/10,Chelsea,3363,Florent Malouda,M,33,12,8,9,22,5,6,2303,26,22,0,3,1,0
+2009/10,Chelsea,3103,Michael Ballack,M,32,4,5,10,24,4,4,2366,26,20,0,2,1,0
+2009/10,Chelsea,2662,Didier Drogba,F,32,29,10,11,21,5,6,2774,31,27,0,7,0,0
+2009/10,Chelsea,3360,Branislav Ivanovic,D,28,1,5,11,18,5,5,2255,25,20,0,6,0,0
+2009/10,Chelsea,1494,Ashley Cole,D,27,4,3,12,19,4,4,2155,25,16,0,4,0,0
+2009/10,Chelsea,1632,Joe Cole,M,26,2,5,2,19,4,3,1283,14,13,0,2,0,0
+2009/10,Chelsea,3102,John Obi Mikel,M,25,0,1,7,16,4,5,1744,21,17,0,3,0,0
+2009/10,Chelsea,3107,Salomon Kalou,M,23,5,3,0,17,3,3,955,11,11,0,2,0,0
+2009/10,Chelsea,2653,Ricardo Carvalho,D,22,0,1,9,14,3,5,1853,22,20,0,4,0,0
+2009/10,Chelsea,3592,Deco,M,19,2,2,4,14,2,3,1240,14,11,0,4,0,0
+2009/10,Chelsea,3860,Yuri Zhirkov,M,17,0,2,1,12,3,2,953,10,12,0,4,0,0
+2009/10,Chelsea,2655,Alex,D,16,1,0,6,13,2,1,1269,13,10,0,2,0,0
+2009/10,Chelsea,2890,Michael Essien,M,14,3,0,8,11,0,3,1195,13,9,0,2,0,0
+2009/10,Chelsea,2654,Paulo Ferreira,D,13,0,0,4,11,1,1,950,11,7,0,2,0,0
+2009/10,Chelsea,3154,Daniel Sturridge,F,13,1,0,0,7,4,2,289,2,2,0,0,0,0
+2009/10,Chelsea,3361,Juliano Belletti,D,11,0,1,2,6,2,3,483,4,4,0,1,1,0
+2009/10,Chelsea,3587,José Bosingwa,D,8,0,1,1,6,0,2,649,8,7,0,0,0,0
+2009/10,Chelsea,3863,Fabio Borini,F,4,0,0,0,3,1,0,32,0,0,0,0,0,0
+2009/10,Chelsea,3097,Henrique Hilário,G,3,0,0,1,1,0,2,218,2,6,5,0,0,0
+2009/10,Chelsea,3859,Jeffrey Bruma,D,2,0,0,0,2,0,0,57,0,0,0,0,0,0
+2009/10,Chelsea,3099,Sam Hutchinson,M,2,0,1,0,2,0,0,21,0,0,0,0,0,0
+2009/10,Chelsea,3861,Nemanja Matic,M,2,0,0,0,2,0,0,40,0,0,0,0,0,0
+2009/10,Chelsea,2309,Ross Turnbull,G,2,0,0,0,1,1,0,180,2,2,3,0,0,0
+2009/10,Chelsea,3362,Patrick van Aanholt,D,2,0,0,0,2,0,0,32,0,0,0,0,0,0
+2009/10,Chelsea,3594,Gaël Kakuta,M,1,0,0,0,1,0,0,31,0,0,0,0,0,0
+2009/10,Chelsea,3106,Andriy Shevchenko,F,1,0,0,0,1,0,0,3,0,0,0,0,0,0
+2009/10,Everton,2516,Tim Howard,G,38,0,0,11,16,13,9,3420,38,49,113,2,0,0
+2009/10,Everton,3030,Leighton Baines,D,37,1,8,11,16,13,8,3330,37,46,0,2,0,0
+2009/10,Everton,2705,Tim Cahill,F,33,8,4,7,13,12,8,2870,33,42,0,8,0,0
+2009/10,Everton,1598,Louis Saha,F,33,13,1,2,14,12,7,2328,26,30,0,2,0,0
+2009/10,Everton,3867,John Heitinga,D,31,0,3,9,13,11,7,2591,29,32,0,8,0,0
+2009/10,Everton,3388,Steven Pienaar,M,30,4,3,8,14,9,7,2661,30,38,0,8,1,0
+2009/10,Everton,2125,Sylvain Distin,D,29,0,1,8,14,8,7,2590,29,33,0,2,0,0
+2009/10,Everton,1887,Leon Osman,M,26,2,1,5,12,9,5,1993,25,23,0,3,0,1
+2009/10,Everton,3389,Jack Rodwell,M,26,2,1,2,9,10,7,1620,17,29,0,4,0,0
+2009/10,Everton,2553,Yakubu,F,25,5,4,1,7,12,6,1083,9,17,0,1,0,0
+2009/10,Everton,3876,Diniyar Bilyaletdinov,M,23,6,1,1,10,12,1,1434,16,18,0,1,1,0
+2009/10,Everton,3604,Marouane Fellaini,M,23,2,2,6,8,8,7,1763,20,28,0,6,0,0
+2009/10,Everton,921,Phil Neville,M,23,0,1,7,12,6,5,1955,22,26,0,1,0,0
+2009/10,Everton,1881,Tony Hibbert,D,20,0,0,2,8,6,6,1478,17,24,0,1,0,0
+2009/10,Everton,2239,Joseph Yobo,D,17,1,0,3,6,5,6,1184,14,22,0,2,0,1
+2009/10,Everton,3606,Jô,F,15,0,1,0,3,5,7,516,6,14,0,0,0,0
+2009/10,Everton,2704,Mikel Arteta,M,13,6,1,2,9,2,2,1030,11,11,0,3,0,0
+2009/10,Everton,3222,Phil Jagielka,D,12,0,0,5,6,5,1,1035,11,10,0,0,0,1
+2009/10,Everton,2018,Lucas Neill,D,12,0,2,1,2,6,4,918,10,19,0,1,0,0
+2009/10,Everton,2905,Victor Anichebe,F,11,1,2,0,7,2,2,482,6,7,0,1,0,0
+2009/10,Everton,3390,Dan Gosling,M,11,2,0,0,5,2,4,341,3,7,0,0,0,0
+2009/10,Everton,4020,Landon Donovan,M,10,2,3,0,6,2,2,649,7,4,0,1,0,0
+2009/10,Everton,2707,James Vaughan,F,8,1,0,0,4,3,1,54,0,1,0,0,0,0
+2009/10,Everton,3600,Séamus Coleman,D,3,0,1,0,1,1,1,105,0,3,0,0,0,0
+2009/10,Everton,3608,Jose Baxter,F,2,0,0,0,2,0,0,4,0,0,0,0,0,0
+2009/10,Everton,2412,Philippe Senderos,D,2,0,0,1,2,0,0,91,1,0,0,0,0,0
+2009/10,Everton,3607,Kieran Agard,F,1,0,0,0,0,1,0,1,0,0,0,0,0,0
+2009/10,Everton,2574,Joleon Lescott,D,1,0,0,0,0,0,1,90,1,6,0,0,0,0
+2009/10,Fulham,1218,Mark Schwarzer,G,37,0,0,12,11,10,16,3330,37,45,128,0,0,0
+2009/10,Fulham,1230,Aaron Hughes,D,34,0,0,12,11,10,13,3060,34,36,0,2,0,0
+2009/10,Fulham,2129,Chris Baird,D,32,0,1,11,10,10,12,2659,29,36,0,4,0,2
+2009/10,Fulham,1004,Damien Duff,M,32,6,3,7,10,9,13,2543,30,31,0,2,0,0
+2009/10,Fulham,3394,Brede Hangeland,D,32,1,0,11,11,9,12,2808,32,32,0,2,0,0
+2009/10,Fulham,3121,Clint Dempsey,F,29,7,3,6,9,6,14,2397,27,31,0,1,0,0
+2009/10,Fulham,2390,Zoltán Gera,M,27,2,3,4,8,7,12,1870,19,25,0,2,0,0
+2009/10,Fulham,1515,Paul Konchesky,D,27,1,1,8,9,7,11,2366,27,29,0,3,0,0
+2009/10,Fulham,2603,Bobby Zamora,F,27,8,4,4,10,7,10,2229,27,26,0,3,0,0
+2009/10,Fulham,1423,Danny Murphy,M,25,5,0,6,8,6,11,2141,25,26,0,5,0,0
+2009/10,Fulham,1429,Jonathan Greening,M,23,1,1,2,8,7,8,1501,15,19,0,5,0,0
+2009/10,Fulham,1432,Erik Nevland,F,23,3,4,2,9,5,9,1170,12,18,0,2,0,0
+2009/10,Fulham,3280,John Pantsil,D,22,0,1,6,8,6,8,1900,22,24,0,5,0,1
+2009/10,Fulham,1932,Dickson Etuhu,M,20,0,0,5,7,5,8,1331,14,15,0,3,0,0
+2009/10,Fulham,1775,Simon Davies,M,17,0,2,2,6,3,8,1000,12,9,0,1,0,0
+2009/10,Fulham,3887,Kagisho Dikgacoi,M,12,0,0,0,4,4,4,587,7,13,0,1,1,0
+2009/10,Fulham,3886,Bjørn Helge Riise,M,12,0,0,0,3,2,7,406,5,12,0,0,0,0
+2009/10,Fulham,3613,Chris Smalling,D,12,0,0,1,2,2,8,870,9,18,0,0,0,2
+2009/10,Fulham,3889,Stefano Okaka,F,11,2,0,0,4,2,5,442,3,6,0,1,0,0
+2009/10,Fulham,3890,David Elm,F,10,1,1,1,4,2,4,325,3,4,0,0,0,0
+2009/10,Fulham,2789,Diomansy Kamara,F,9,1,0,0,3,2,4,452,5,7,0,1,0,0
+2009/10,Fulham,3186,Nicky Shorey,D,9,0,0,4,3,2,4,810,9,12,0,1,0,0
+2009/10,Fulham,2695,Andrew Johnson,F,8,0,1,1,2,1,5,596,7,12,0,0,0,0
+2009/10,Fulham,1974,Stephen Kelly,D,8,0,0,0,1,1,6,595,7,14,0,1,0,0
+2009/10,Fulham,3399,Eddie Johnson,F,2,0,0,0,0,1,1,22,0,1,0,1,0,0
+2009/10,Fulham,2588,Seol Ki-Hyeon,M,2,0,0,0,1,1,0,2,0,0,0,0,0,0
+2009/10,Fulham,3612,Fredrik Stoor,D,2,0,0,0,0,0,2,24,0,2,0,0,0,0
+2009/10,Fulham,3396,Toni Kallio,D,1,0,0,0,0,0,1,45,0,1,0,0,0,0
+2009/10,Fulham,3610,David Stockdale,G,1,0,0,0,1,0,0,90,1,1,2,0,0,0
+2009/10,Hull City,3621,Andy Dawson,D,34,1,0,6,5,12,18,3068,35,63,0,7,0,1
+2009/10,Hull City,3899,Jan Vennegoor of Hesselink,F,30,3,2,1,5,11,15,1490,17,29,0,0,0,0
+2009/10,Hull City,1361,George Boateng,M,29,1,1,5,5,9,15,2221,26,52,0,3,2,0
+2009/10,Hull City,3897,Jozy Altidore,F,27,1,3,0,5,8,15,1461,16,34,0,4,1,0
+2009/10,Hull City,2011,Boaz Myhill,G,27,0,0,5,4,7,16,2430,27,58,108,2,0,0
+2009/10,Hull City,3196,Stephen Hunt,M,26,6,4,3,5,9,13,2322,27,51,0,4,0,0
+2009/10,Hull City,2738,Paul McShane,D,26,0,0,5,4,8,15,2295,26,51,0,5,0,0
+2009/10,Hull City,2195,Craig Fagan,F,25,2,2,3,4,8,13,1827,20,36,0,6,1,0
+2009/10,Hull City,3433,Geovanni,M,25,3,0,2,3,8,15,1538,16,31,0,3,1,0
+2009/10,Hull City,1771,Anthony Gardner,D,23,0,0,5,4,10,10,2154,24,41,0,1,0,1
+2009/10,Hull City,3624,Kamil Zayatte,D,22,2,1,4,4,8,11,1872,21,38,0,3,0,2
+2009/10,Hull City,1757,Kevin Kilbane,M,21,1,1,3,5,6,10,1351,15,34,0,2,0,0
+2009/10,Hull City,3892,Steven Mouyokolo,D,21,1,0,3,3,7,11,1673,19,35,0,1,0,0
+2009/10,Hull City,2206,Bernard Mendy,M,20,0,0,1,1,6,14,1391,15,35,0,6,1,0
+2009/10,Hull City,569,Nick Barmby,M,19,0,0,0,3,5,12,751,6,19,0,4,0,0
+2009/10,Hull City,1804,Richard García,F,18,0,1,1,3,7,8,1104,14,25,0,1,0,1
+2009/10,Hull City,3705,Seyi Olofinjana,M,18,1,0,2,5,4,10,1129,11,25,0,3,0,0
+2009/10,Hull City,2359,Dean Marney,M,15,1,3,1,3,4,9,1224,15,22,0,4,0,0
+2009/10,Hull City,1633,Jimmy Bullard,M,14,5,0,1,2,3,9,1054,13,24,0,0,0,0
+2009/10,Hull City,3896,Kamel Ghilas,F,12,1,1,0,2,2,9,582,6,20,0,0,0,0
+2009/10,Hull City,3894,Tom Cairney,M,11,1,0,2,1,5,5,900,10,15,0,1,0,0
+2009/10,Hull City,3618,Matt Duke,G,10,0,0,2,2,5,4,990,11,17,30,1,0,0
+2009/10,Hull City,3193,Ibrahima Sonko,D,9,0,0,2,2,1,6,810,9,20,0,0,0,0
+2009/10,Hull City,2101,Caleb Folan,F,8,2,0,0,1,2,5,568,7,14,0,1,0,0
+2009/10,Hull City,3778,Amr Zaki,F,6,0,0,0,1,2,3,227,2,5,0,0,0,0
+2009/10,Hull City,2217,Michael Turner,D,4,0,0,1,1,1,2,360,4,8,0,1,0,0
+2009/10,Hull City,3635,Daniel Cousin,F,3,0,0,0,0,0,3,77,1,5,0,0,0,0
+2009/10,Hull City,3898,Mark Cullen,F,3,1,0,1,0,2,1,194,2,2,0,0,0,0
+2009/10,Hull City,3632,Will Atkinson,M,2,1,0,1,0,2,0,180,2,2,0,1,0,0
+2009/10,Hull City,3622,Liam Cooper,D,2,0,0,0,0,0,2,124,1,7,0,0,0,0
+2009/10,Liverpool,2911,Pepe Reina,G,38,0,1,17,18,9,11,3420,38,35,101,2,0,0
+2009/10,Liverpool,915,Jamie Carragher,D,37,0,0,17,18,8,11,3254,37,31,0,7,1,0
+2009/10,Liverpool,3135,Dirk Kuijt,M,37,9,3,9,17,9,11,3016,35,33,0,3,0,0
+2009/10,Liverpool,3137,Lucas Leiva,M,35,0,2,13,16,8,11,2844,32,32,0,9,0,1
+2009/10,Liverpool,3136,Javier Mascherano,D,34,0,0,12,15,8,11,2755,31,31,0,9,2,0
+2009/10,Liverpool,1575,Steven Gerrard,M,33,9,7,11,16,8,9,2850,32,27,0,6,0,0
+2009/10,Liverpool,3125,Emiliano Insúa,D,31,0,4,13,16,7,8,2722,30,28,0,1,0,0
+2009/10,Liverpool,3013,Yossi Benayoun,M,30,6,4,2,14,6,10,1852,19,23,0,1,0,0
+2009/10,Liverpool,3413,Ryan Babel,F,25,4,1,2,10,6,9,954,9,8,0,1,0,0
+2009/10,Liverpool,2148,Glen Johnson,D,25,3,3,9,13,4,8,2141,24,22,0,1,0,1
+2009/10,Liverpool,3650,David N'Gog,F,24,5,0,0,12,8,4,1013,10,6,0,1,0,0
+2009/10,Liverpool,2916,Daniel Agger,D,23,0,0,11,11,6,6,1979,23,15,0,0,0,0
+2009/10,Liverpool,3420,Fernando Torres,F,22,18,3,2,12,2,8,1715,20,23,0,5,0,0
+2009/10,Liverpool,3404,Martin Skrtel,D,19,1,0,5,9,5,5,1410,16,18,0,5,0,0
+2009/10,Liverpool,3904,Alberto Aquilani,M,18,1,6,1,8,6,4,815,9,5,0,0,0,0
+2009/10,Liverpool,3903,Maxi Rodríguez,M,17,1,3,5,8,5,4,1207,14,9,0,1,0,0
+2009/10,Liverpool,3126,Fábio Aurélio,D,14,0,1,1,8,2,4,655,8,6,0,1,0,0
+2009/10,Liverpool,3900,Sotirios Kyrgiakos,D,14,1,0,6,5,6,3,1193,13,12,0,1,1,0
+2009/10,Liverpool,2929,Albert Riera,M,12,0,3,1,8,3,1,650,9,6,0,0,0,0
+2009/10,Liverpool,3421,Andrey Voronin,F,8,0,1,0,4,0,4,200,1,4,0,0,0,0
+2009/10,Liverpool,3643,Philipp Degen,D,7,0,0,0,3,1,3,327,3,3,0,1,1,0
+2009/10,Liverpool,3901,Daniel Ayala,D,5,0,0,2,2,0,3,234,2,1,0,0,0,0
+2009/10,Liverpool,3422,Dani Pacheco,M,4,0,0,0,2,2,0,40,0,0,0,0,0,0
+2009/10,Liverpool,3132,Nabil El Zhar,M,3,0,0,0,1,2,0,89,1,0,0,0,0,0
+2009/10,Liverpool,3647,Jay Spearing,M,3,0,0,0,1,0,2,76,1,1,0,0,0,0
+2009/10,Liverpool,3646,Andrea Dossena,D,2,0,0,0,1,0,1,54,1,1,0,0,0,0
+2009/10,Liverpool,3129,Stephen Darby,D,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2009/10,Liverpool,3651,Nathan Eccleston,F,1,0,0,0,0,0,1,12,0,1,0,0,0,0
+2009/10,Liverpool,3644,Martin Kelly,D,1,0,0,0,1,0,0,19,0,1,0,0,0,0
+2009/10,Liverpool,3902,Jack Robinson,D,1,0,0,0,0,1,0,2,0,0,0,0,0,0
+2009/10,Manchester City,1308,Gareth Barry,M,34,2,7,10,16,11,7,2996,34,40,0,4,0,0
+2009/10,Manchester City,3659,Nigel de Jong,M,34,0,0,7,16,11,7,2631,30,32,0,7,0,0
+2009/10,Manchester City,851,Shay Given,G,34,0,0,10,17,12,6,3136,35,42,96,2,0,0
+2009/10,Manchester City,3281,Carlos Tevez,F,34,23,7,6,17,11,7,2868,32,38,0,6,0,0
+2009/10,Manchester City,1869,Craig Bellamy,F,31,10,8,5,16,10,6,2378,26,37,0,3,1,0
+2009/10,Manchester City,2002,Kolo Touré,D,30,1,0,8,16,9,6,2709,31,36,0,1,0,0
+2009/10,Manchester City,1934,Shaun Wright-Phillips,M,29,4,7,4,13,12,5,1745,19,27,0,2,0,0
+2009/10,Manchester City,3654,Pablo Zabaleta,D,26,0,1,7,13,10,4,2101,23,24,0,8,1,0
+2009/10,Manchester City,2845,Emmanuel Adebayor,F,25,14,3,7,11,11,4,2212,25,26,0,1,0,1
+2009/10,Manchester City,3653,Vincent Kompany,D,25,2,1,7,13,8,4,1913,21,19,0,2,0,0
+2009/10,Manchester City,2925,Micah Richards,D,23,3,1,3,11,8,4,1647,19,26,0,2,0,0
+2009/10,Manchester City,1458,Wayne Bridge,D,22,0,0,5,9,10,4,1897,23,25,0,2,0,0
+2009/10,Manchester City,2928,Stephen Ireland,M,21,2,2,4,8,9,5,1452,16,23,0,0,0,0
+2009/10,Manchester City,3346,Roque Santa Cruz,F,19,3,0,0,7,8,4,636,6,10,0,1,0,0
+2009/10,Manchester City,2574,Joleon Lescott,D,17,1,1,3,6,11,1,1565,17,25,0,1,0,0
+2009/10,Manchester City,2274,Adam Johnson,M,16,1,5,3,7,5,4,1178,14,8,0,1,0,0
+2009/10,Manchester City,3435,Martin Petrov,M,15,4,3,1,7,5,4,723,8,10,0,0,0,0
+2009/10,Manchester City,1132,Patrick Vieira,M,13,1,1,2,5,4,4,814,8,8,0,2,0,0
+2009/10,Manchester City,3661,Robinho,F,10,0,3,0,6,2,2,541,6,6,0,0,0,0
+2009/10,Manchester City,1651,Sylvinho,D,10,0,0,0,7,2,1,485,6,11,0,2,0,0
+2009/10,Manchester City,2728,Nedum Onuoha,D,10,1,1,0,7,1,2,571,5,11,0,0,0,0
+2009/10,Manchester City,3427,Javier Garrido,D,9,1,0,1,7,1,1,633,7,5,0,1,0,0
+2009/10,Manchester City,3908,Dedryck Boyata,D,3,0,0,0,2,0,1,124,1,2,0,1,0,0
+2009/10,Manchester City,2798,Marton Fülöp,G,3,0,0,0,1,1,1,270,3,3,12,0,0,0
+2009/10,Manchester City,3906,Greg Cunningham,D,2,0,0,0,1,1,0,2,0,0,0,0,0,0
+2009/10,Manchester City,1184,Richard Dunne,D,2,0,0,2,2,0,0,180,2,0,0,0,0,0
+2009/10,Manchester City,2969,Benjani,F,2,0,1,0,1,0,1,126,1,1,0,0,0,0
+2009/10,Manchester City,3911,Abdisalam Abdulkadir Ibrahim,M,1,0,0,0,0,1,0,14,0,0,0,0,0,0
+2009/10,Manchester City,3151,Michael Johnson,M,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2009/10,Manchester City,3341,Gunnar Nielsen,G,1,0,0,0,0,1,0,14,0,0,1,0,0,0
+2009/10,Manchester City,3913,Alex Nimely,F,1,0,0,0,1,0,0,7,0,0,0,0,0,0
+2009/10,Manchester United,2934,Patrice Evra,D,38,0,3,16,27,4,7,3288,37,27,0,5,0,0
+2009/10,Manchester United,3285,Antonio Valencia,D,34,5,7,14,23,4,7,2615,29,18,0,3,0,0
+2009/10,Manchester United,3247,Dimitar Berbatov,F,33,12,5,7,24,3,6,2096,24,13,0,1,0,0
+2009/10,Manchester United,2064,Wayne Rooney,F,32,26,3,6,23,3,6,2723,32,24,0,6,0,0
+2009/10,Manchester United,1634,Michael Carrick,M,30,3,2,6,21,3,6,2111,22,20,0,1,0,0
+2009/10,Manchester United,1943,Darren Fletcher,M,30,4,5,10,22,3,5,2576,29,24,0,4,1,0
+2009/10,Manchester United,336,Paul Scholes,M,28,3,3,9,20,4,4,1946,24,13,0,8,1,0
+2009/10,Manchester United,335,Ryan Giggs,M,25,5,9,5,17,3,5,1814,20,18,0,0,0,0
+2009/10,Manchester United,2935,Nemanja Vidic,D,24,1,0,11,19,2,3,2107,24,15,0,7,1,0
+2009/10,Manchester United,3447,Nani,F,23,4,6,8,18,3,2,1588,19,9,0,1,1,0
+2009/10,Manchester United,2070,Edwin van der Sar,G,21,0,0,12,15,2,4,1890,21,13,57,0,0,0
+2009/10,Manchester United,1211,Wes Brown,D,19,0,0,7,13,2,4,1571,18,12,0,2,0,0
+2009/10,Manchester United,1208,Michael Owen,F,19,3,0,1,13,0,6,606,5,7,0,0,0,0
+2009/10,Manchester United,3156,Jonny Evans,D,18,0,0,7,12,3,3,1587,18,12,0,2,0,0
+2009/10,Manchester United,321,Gary Neville,D,17,0,1,8,13,1,3,1355,15,8,0,3,0,0
+2009/10,Manchester United,2940,Park Ji-Sung,M,17,3,1,2,11,2,4,968,10,9,0,0,0,0
+2009/10,Manchester United,2942,Darron Gibson,M,15,2,2,2,11,1,3,588,6,2,0,2,0,0
+2009/10,Manchester United,1717,John O'Shea,D,15,1,1,4,10,2,3,1117,12,12,0,0,0,0
+2009/10,Manchester United,3446,Anderson,M,14,1,2,2,9,1,4,864,10,12,0,1,0,0
+2009/10,Manchester United,1111,Rio Ferdinand,D,13,0,0,6,10,1,2,1083,12,10,0,0,0,0
+2009/10,Manchester United,2932,Ben Foster,G,9,0,0,4,7,1,1,810,9,8,23,0,0,0
+2009/10,Manchester United,2818,Tomasz Kuszczak,G,8,0,0,3,5,1,2,720,8,7,24,0,0,0
+2009/10,Manchester United,3664,Rafael,D,8,1,1,2,6,2,0,683,8,5,0,2,0,0
+2009/10,Manchester United,3919,Gabriel Obertan,M,7,0,0,0,5,0,2,164,1,2,0,0,0,0
+2009/10,Manchester United,3925,Mame Diouf,F,5,1,0,0,4,1,0,90,0,0,0,1,0,0
+2009/10,Manchester United,3454,Federico Macheda,F,5,1,1,0,3,1,1,127,1,1,0,0,0,0
+2009/10,Manchester United,3665,Fábio,D,5,0,0,1,4,0,1,148,1,1,0,0,0,0
+2009/10,Manchester United,3452,Danny Welbeck,F,5,0,0,0,3,1,1,137,1,3,0,0,0,0
+2009/10,Manchester United,3666,Ritchie De Laet,D,2,0,0,1,1,0,1,148,2,2,0,0,0,0
+2009/10,Manchester United,3445,Owen Hargreaves,M,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2009/10,Portsmouth,3939,Frédéric Piquionne,F,34,5,2,0,5,7,22,2280,26,48,0,2,0,0
+2009/10,Portsmouth,3471,Marc Wilson,M,28,0,1,5,5,5,18,2409,28,48,0,2,0,1
+2009/10,Portsmouth,2994,Jamie O'Hara,M,26,2,4,6,6,4,16,2256,25,44,0,8,0,0
+2009/10,Portsmouth,252,David James,G,25,0,0,3,5,4,16,2234,25,46,81,3,0,0
+2009/10,Portsmouth,918,Michael Brown,M,24,2,4,6,6,4,14,1931,22,32,0,4,1,0
+2009/10,Portsmouth,1502,Kanu,F,23,2,2,1,4,3,16,818,6,18,0,0,0,0
+2009/10,Portsmouth,2637,Aaron Mokoena,M,23,0,0,2,3,4,16,1732,21,34,0,7,0,0
+2009/10,Portsmouth,2645,Tal Ben Haim,D,22,0,0,5,4,3,15,1913,21,37,0,4,0,0
+2009/10,Portsmouth,3514,Kevin-Prince Boateng,M,22,3,2,4,5,2,15,1843,20,31,0,7,0,0
+2009/10,Portsmouth,2072,Steve Finnan,D,21,0,0,4,6,3,12,1808,20,32,0,2,0,0
+2009/10,Portsmouth,3695,Nadir Belhadj,M,19,3,2,1,4,1,14,1467,16,34,0,2,0,0
+2009/10,Portsmouth,3940,Aruna Dindane,F,19,8,2,3,4,4,11,1478,18,22,0,5,0,0
+2009/10,Portsmouth,3508,Younes Kaboul,D,19,3,0,4,3,3,13,1709,19,31,0,3,1,1
+2009/10,Portsmouth,3930,Anthony Henri Vanden Borre,D,19,0,2,1,2,4,13,1324,15,25,0,1,1,1
+2009/10,Portsmouth,1379,Hayden Mullins,M,18,0,0,1,4,2,12,1316,15,30,0,3,0,0
+2009/10,Portsmouth,3473,John Utaka,F,18,1,2,1,2,4,12,1048,10,18,0,1,0,0
+2009/10,Portsmouth,3936,Hassan Yebda,M,18,2,0,3,5,4,9,1277,15,19,0,2,0,0
+2009/10,Portsmouth,1371,Hermann Hreidarsson,D,17,1,0,2,4,2,11,1415,17,32,0,2,0,0
+2009/10,Portsmouth,1725,Danny Webber,F,17,1,1,0,3,3,11,460,4,13,0,1,0,0
+2009/10,Portsmouth,1799,Tommy Smith,F,16,1,1,1,4,3,9,1026,12,18,0,0,0,0
+2009/10,Portsmouth,3697,Angelos Basinas,M,12,0,0,2,1,4,7,770,7,13,0,3,0,0
+2009/10,Portsmouth,2711,Papa Bouba Diop,M,12,0,0,1,2,3,7,717,9,11,0,1,0,0
+2009/10,Portsmouth,3240,Ricardo Rocha,D,10,0,0,1,2,4,4,723,10,16,0,0,2,0
+2009/10,Portsmouth,1302,Richard Hughes,M,10,0,0,0,1,3,6,780,9,22,0,5,0,0
+2009/10,Portsmouth,2419,Quincy Owusu-Abeyie,F,10,0,0,0,2,0,8,357,3,11,0,0,0,0
+2009/10,Portsmouth,2537,Asmir Begovic,G,9,0,0,2,2,1,6,735,8,14,30,0,0,0
+2009/10,Portsmouth,1999,Jamie Ashdown,G,6,0,0,2,0,2,4,451,5,6,26,0,0,0
+2009/10,Portsmouth,3932,Lennard Sowah,D,5,0,0,0,1,3,1,340,3,5,0,0,0,0
+2009/10,Portsmouth,3180,Niko Kranjcar,M,4,0,0,0,0,0,4,360,4,7,0,0,0,0
+2009/10,Portsmouth,2125,Sylvain Distin,D,3,0,0,0,0,0,3,270,3,6,0,0,0,0
+2009/10,Portsmouth,3478,David Nugent,F,3,0,0,0,0,0,3,29,0,1,0,0,0,0
+2009/10,Portsmouth,3929,Joel Ward,D,3,0,0,1,1,1,1,145,1,1,0,0,0,0
+2009/10,Portsmouth,3934,Matt Ritchie,M,2,0,0,0,0,1,1,81,1,0,0,0,0,0
+2009/10,Stoke City,1391,Rory Delap,M,36,0,0,9,11,13,12,2885,34,43,0,3,0,0
+2009/10,Stoke City,2980,Dean Whitehead,M,36,0,0,10,10,14,12,2899,33,39,0,7,1,0
+2009/10,Stoke City,2787,Ricardo Fuller,F,35,3,3,2,11,12,12,2233,22,32,0,9,0,0
+2009/10,Stoke City,1772,Matthew Etherington,M,34,5,8,8,10,13,11,2894,33,40,0,1,0,0
+2009/10,Stoke City,1751,Thomas Sørensen,G,33,0,0,11,8,13,12,2867,33,35,106,0,0,0
+2009/10,Stoke City,2299,Glenn Whelan,M,33,2,2,8,10,11,12,2353,25,39,0,9,0,0
+2009/10,Stoke City,2053,Robert Huth,D,32,3,1,10,9,12,11,2743,30,39,0,6,0,0
+2009/10,Stoke City,2878,Abdoulaye Diagne-Faye,D,31,2,0,7,7,12,12,2386,30,30,0,4,2,0
+2009/10,Stoke City,3461,Tuncay Sanli,F,30,4,2,0,9,10,11,1284,13,20,0,2,0,0
+2009/10,Stoke City,3158,Ryan Shawcross,D,28,2,2,9,9,11,8,2449,27,36,0,8,1,0
+2009/10,Stoke City,2976,Danny Collins,D,25,0,1,7,6,8,11,2078,22,33,0,0,0,0
+2009/10,Stoke City,2981,Liam Lawrence,M,25,1,2,7,9,10,6,1378,14,13,0,0,0,0
+2009/10,Stoke City,3702,Andy Wilkinson,D,25,0,0,9,8,9,8,2034,21,27,0,5,1,0
+2009/10,Stoke City,1426,Danny Higginbotham,D,24,1,1,11,8,8,8,2003,23,26,0,0,0,1
+2009/10,Stoke City,3708,Mamady Sidibe,F,24,2,1,2,7,10,7,1531,19,17,0,0,0,0
+2009/10,Stoke City,1005,James Beattie,F,22,3,1,0,5,8,9,801,11,12,0,1,0,0
+2009/10,Stoke City,3207,Dave Kitson,F,18,3,1,1,6,6,6,934,10,9,0,1,0,0
+2009/10,Stoke City,2285,Salif Diao,M,16,1,1,2,6,6,4,945,11,11,0,7,0,0
+2009/10,Stoke City,2307,Danny Pugh,D,7,1,0,0,0,3,4,179,1,7,0,0,0,0
+2009/10,Stoke City,2537,Asmir Begovic,G,4,0,0,2,1,1,2,324,3,9,10,0,0,0
+2009/10,Stoke City,1554,Steve Simonsen,G,3,0,0,1,2,0,1,229,2,4,12,0,0,0
+2009/10,Stoke City,1449,Richard Cresswell,F,2,0,0,0,1,0,1,64,1,2,0,0,0,0
+2009/10,Stoke City,3947,Louis Moult,F,1,0,0,0,0,1,0,5,0,0,0,0,0,0
+2009/10,Sunderland,2098,Darren Bent,F,38,24,1,7,11,11,16,3388,38,54,0,5,0,0
+2009/10,Sunderland,3712,Jordan Henderson,M,33,1,5,2,9,9,15,2188,23,45,0,3,0,0
+2009/10,Sunderland,2796,Kenwyne Jones,F,32,9,3,3,9,9,14,2181,24,32,0,1,1,0
+2009/10,Sunderland,2945,Fraizer Campbell,F,31,4,4,3,10,7,14,1912,19,28,0,3,0,0
+2009/10,Sunderland,3951,Lorik Cana,D,31,0,1,6,8,10,13,2597,29,43,0,9,1,0
+2009/10,Sunderland,2078,Steed Malbranque,M,31,0,5,1,11,8,12,2086,30,31,0,3,0,0
+2009/10,Sunderland,1982,Kieran Richardson,D,29,1,1,3,9,5,15,2417,28,38,0,7,1,0
+2009/10,Sunderland,2217,Michael Turner,D,29,2,0,4,8,9,12,2548,29,39,0,7,2,0
+2009/10,Sunderland,2517,Phil Bardsley,D,26,0,0,3,9,5,12,1698,18,34,0,8,0,0
+2009/10,Sunderland,3488,Craig Gordon,G,26,0,0,5,8,8,10,2317,26,32,92,3,0,0
+2009/10,Sunderland,1756,George McCartney,D,25,0,0,3,5,9,11,1756,20,34,0,4,0,0
+2009/10,Sunderland,2393,Anton Ferdinand,D,24,0,1,4,11,4,9,1775,19,25,0,2,0,1
+2009/10,Sunderland,2949,Lee Cattermole,M,22,0,3,1,8,6,8,1494,19,19,0,7,1,0
+2009/10,Sunderland,2812,Andy Reid,M,21,2,6,1,4,7,10,1645,18,24,0,2,0,0
+2009/10,Sunderland,2056,Boudewijn Zenden,M,20,2,0,0,5,6,9,503,1,10,0,1,0,0
+2009/10,Sunderland,3949,Paulo Da Silva,D,16,0,0,1,4,5,7,1160,12,23,0,0,0,0
+2009/10,Sunderland,3948,John Mensah,D,16,1,0,1,6,5,5,1072,14,13,0,4,0,1
+2009/10,Sunderland,2798,Marton Fülöp,G,13,0,0,2,3,3,7,1103,12,24,31,0,0,0
+2009/10,Sunderland,3506,Alan Hutton,D,11,0,1,2,4,5,2,945,11,10,0,1,1,0
+2009/10,Sunderland,3714,David Meyler,M,10,0,0,1,4,3,3,730,9,15,0,4,1,0
+2009/10,Sunderland,2974,Nyron Nosworthy,D,10,0,0,0,1,4,5,707,7,15,0,3,0,0
+2009/10,Sunderland,2969,Benjani,F,8,0,0,0,3,2,3,120,1,3,0,0,0,0
+2009/10,Sunderland,2260,Matthew Kilgallon,D,7,0,0,2,1,3,3,612,6,7,0,0,0,0
+2009/10,Sunderland,2976,Danny Collins,D,3,0,0,1,2,0,1,270,3,4,0,0,0,0
+2009/10,Sunderland,1724,David Healy,F,3,0,0,0,0,0,3,32,0,0,0,0,0,0
+2009/10,Sunderland,2985,Daryl Murphy,F,3,0,0,0,0,2,1,168,2,9,0,0,0,0
+2009/10,Sunderland,3713,Jack Colback,M,1,0,0,0,0,0,1,11,0,1,0,0,1,0
+2009/10,Sunderland,2982,Grant Leadbitter,M,1,0,0,0,0,0,1,28,0,1,0,0,0,0
+2009/10,Tottenham Hotspur,1629,Peter Crouch,F,38,8,6,10,21,7,10,2209,21,25,0,1,0,0
+2009/10,Tottenham Hotspur,1526,Jermain Defoe,F,34,18,4,4,19,7,8,2567,31,25,0,3,1,0
+2009/10,Tottenham Hotspur,2991,Tom Huddlestone,M,33,2,3,12,19,6,8,2851,33,29,0,8,0,0
+2009/10,Tottenham Hotspur,3527,Wilson Palacios,M,33,1,1,8,16,7,10,2531,29,33,0,8,0,0
+2009/10,Tottenham Hotspur,3719,Heurelho Gomes,G,31,0,0,12,18,6,7,2717,31,26,92,2,0,0
+2009/10,Tottenham Hotspur,3239,Benoit Assou-Ekotto,D,30,1,2,6,18,4,8,2532,29,33,0,5,0,0
+2009/10,Tottenham Hotspur,3426,Vedran Corluka,D,29,1,2,10,16,7,6,2556,29,26,0,3,0,0
+2009/10,Tottenham Hotspur,2805,Michael Dawson,D,29,2,0,10,17,6,6,2333,25,22,0,4,0,0
+2009/10,Tottenham Hotspur,3681,Sebastien Bassong,D,28,1,0,4,15,5,8,2294,25,30,0,2,0,0
+2009/10,Tottenham Hotspur,3723,Luka Modric,M,25,3,3,5,15,4,6,1916,21,21,0,2,0,0
+2009/10,Tottenham Hotspur,3180,Niko Kranjcar,M,24,6,6,4,12,5,7,1660,19,16,0,3,0,0
+2009/10,Tottenham Hotspur,3513,Gareth Bale,F,23,3,5,7,13,4,6,1707,18,22,0,2,0,0
+2009/10,Tottenham Hotspur,2270,Aaron Lennon,M,22,3,9,4,12,4,6,1791,20,24,0,1,0,0
+2009/10,Tottenham Hotspur,1692,Robbie Keane,F,20,6,2,1,9,5,6,1160,15,16,0,1,0,0
+2009/10,Tottenham Hotspur,1627,Ledley King,D,20,2,0,5,11,3,6,1547,19,20,0,1,0,0
+2009/10,Tottenham Hotspur,2127,Jermaine Jenas,M,19,1,2,3,7,6,6,931,9,15,0,6,0,0
+2009/10,Tottenham Hotspur,3728,Roman Pavlyuchenko,F,16,5,2,0,11,0,5,746,8,10,0,1,0,0
+2009/10,Tottenham Hotspur,2009,David Bentley,M,15,2,1,4,9,2,4,984,11,9,0,1,0,0
+2009/10,Tottenham Hotspur,1866,Eidur Gudjohnsen,F,11,1,0,0,7,0,4,383,3,11,0,0,0,0
+2009/10,Tottenham Hotspur,3508,Younes Kaboul,D,10,0,0,2,7,0,3,785,8,12,0,2,0,0
+2009/10,Tottenham Hotspur,3506,Alan Hutton,D,8,0,0,0,3,1,4,233,1,6,0,2,0,0
+2009/10,Tottenham Hotspur,1676,Carlo Cudicini,G,7,0,0,1,4,1,2,613,6,11,37,0,0,0
+2009/10,Tottenham Hotspur,1565,Jonathan Woodgate,D,3,0,0,1,2,0,1,194,3,1,0,0,0,0
+2009/10,Tottenham Hotspur,2994,Jamie O'Hara,M,2,0,0,0,2,0,0,9,0,0,0,0,0,0
+2009/10,Tottenham Hotspur,3955,Kyle Walker,D,2,0,0,1,1,0,1,180,2,3,0,0,0,0
+2009/10,Tottenham Hotspur,2972,Ben Alnwick,G,1,0,0,0,0,0,1,90,1,4,3,0,0,0
+2009/10,Tottenham Hotspur,3729,Giovani dos Santos,M,1,0,0,0,0,0,1,12,0,0,0,0,0,0
+2009/10,Tottenham Hotspur,3244,Jake Livermore,M,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2009/10,Tottenham Hotspur,3956,Kyle Naughton,D,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2009/10,Tottenham Hotspur,3507,Danny Rose,D,1,1,0,0,1,0,0,45,1,0,0,0,0,0
+2009/10,West Ham United,2758,Robert Green,G,38,0,0,8,8,11,19,3403,38,66,122,0,0,1
+2009/10,West Ham United,3518,Julien Faubert,D,33,1,3,8,8,9,16,2820,32,49,0,6,0,0
+2009/10,West Ham United,1131,Matt Upson,D,33,3,0,8,7,11,15,2905,33,50,0,3,0,0
+2009/10,West Ham United,3761,Radoslav Kovác,M,31,2,2,4,6,9,16,2268,27,46,0,7,1,0
+2009/10,West Ham United,1518,Scott Parker,M,31,2,3,4,7,9,15,2576,30,52,0,8,1,0
+2009/10,West Ham United,2058,Carlton Cole,F,30,10,3,3,7,9,14,2284,26,46,0,3,0,1
+2009/10,West Ham United,3765,Valon Behrami,M,27,1,1,4,6,7,14,2055,24,39,0,0,0,0
+2009/10,West Ham United,3972,Alessandro Diamanti,F,27,7,3,2,3,8,16,1818,18,35,0,5,0,0
+2009/10,West Ham United,3014,Mark Noble,M,27,2,4,5,6,9,12,2122,25,38,0,5,1,0
+2009/10,West Ham United,2518,Jonathan Spector,D,27,0,0,5,7,7,13,2238,22,44,0,2,0,1
+2009/10,West Ham United,3766,Junior Stanislas,M,26,3,2,1,3,7,16,1239,11,29,0,2,0,0
+2009/10,West Ham United,3970,Guillermo Franco,F,23,5,3,0,6,5,12,1371,16,26,0,5,0,0
+2009/10,West Ham United,3517,James Tomkins,D,23,0,0,5,3,7,13,1996,22,37,0,0,0,0
+2009/10,West Ham United,3520,Jack Collison,M,22,2,3,4,5,8,9,1657,19,27,0,2,0,0
+2009/10,West Ham United,3762,Herita Ilunga,D,16,0,1,1,5,4,7,1210,16,27,0,2,0,0
+2009/10,West Ham United,3962,Manuel da Costa,D,15,2,0,1,4,5,6,1094,12,25,0,0,0,0
+2009/10,West Ham United,3771,Zavon Hines,F,13,1,0,0,2,4,7,599,5,14,0,3,0,0
+2009/10,West Ham United,3969,Ilan Araujo,F,11,4,0,0,4,2,5,575,6,12,0,0,0,0
+2009/10,West Ham United,4025,Luis Jiménez,M,11,1,2,1,4,3,4,657,6,11,0,3,0,0
+2009/10,West Ham United,1740,Kieron Dyer,M,10,0,1,0,1,1,8,357,4,6,0,0,0,0
+2009/10,West Ham United,3009,Danny Gabbidon,D,10,0,1,0,1,3,6,715,8,21,0,0,0,0
+2009/10,West Ham United,2815,Mido,F,9,0,0,0,2,1,6,495,5,8,0,2,0,0
+2009/10,West Ham United,3971,Frank Nouble,F,8,0,0,0,2,3,3,255,3,0,0,0,0,0
+2009/10,West Ham United,3963,Fabio Daprelà,D,7,0,0,0,2,1,4,372,4,10,0,2,0,0
+2009/10,West Ham United,3080,Benni McCarthy,F,5,0,0,0,0,0,5,155,2,5,0,0,0,0
+2009/10,West Ham United,3010,James Collins,D,3,0,0,2,1,1,1,270,3,2,0,1,0,0
+2009/10,West Ham United,1306,Luís Boa Morte,M,1,1,0,0,0,1,0,64,1,1,0,1,0,0
+2009/10,West Ham United,3759,Peter Kurucz,G,1,0,0,0,0,0,1,17,0,0,0,0,0,0
+2009/10,West Ham United,3521,Freddie Sears,F,1,0,0,0,0,1,0,12,0,0,0,0,0,0
+2009/10,West Ham United,3760,Jordan Spence,D,1,0,0,0,0,1,0,2,0,0,0,0,0,0
+2009/10,Wigan Athletic,3780,Hugo Rodallega,F,38,10,4,5,9,9,20,3322,38,73,0,6,0,0
+2009/10,Wigan Athletic,3029,Paul Scharner,D,38,4,3,4,9,9,20,2523,30,58,0,7,0,0
+2009/10,Wigan Athletic,2755,Charles N'Zogbia,M,36,5,6,6,8,8,20,3037,35,73,0,7,0,0
+2009/10,Wigan Athletic,1890,Titus Bramble,D,35,2,0,7,9,8,18,3111,35,66,0,10,0,0
+2009/10,Wigan Athletic,3524,Maynor Figueroa,D,35,1,1,8,9,8,18,3088,35,65,0,6,0,0
+2009/10,Wigan Athletic,3982,Mohamed Diamé,M,34,1,1,6,8,8,18,2864,34,63,0,6,0,0
+2009/10,Wigan Athletic,1359,Chris Kirkland,G,32,0,0,8,9,8,15,2769,32,56,88,0,0,0
+2009/10,Wigan Athletic,1677,Mario Melchiot,D,32,0,1,7,8,7,17,2853,32,66,0,2,0,0
+2009/10,Wigan Athletic,3984,Jason Scotland,F,32,1,2,0,7,8,17,1549,14,34,0,1,0,0
+2009/10,Wigan Athletic,3980,Hendry Thomas,M,31,0,0,3,8,5,18,2338,27,49,0,7,1,0
+2009/10,Wigan Athletic,2669,Emmerson Boyce,D,24,3,1,3,5,6,13,2036,23,55,0,1,0,0
+2009/10,Wigan Athletic,3981,Jordi Gómez,M,23,1,0,1,5,5,13,1259,11,31,0,3,0,0
+2009/10,Wigan Athletic,3979,James McCarthy,M,20,1,1,4,4,5,11,1637,19,36,0,3,0,1
+2009/10,Wigan Athletic,2892,Scott Sinclair,M,18,1,0,0,3,3,12,341,1,15,0,0,0,0
+2009/10,Wigan Athletic,1732,Gary Caldwell,D,16,2,0,4,3,4,9,1347,16,21,0,3,2,0
+2009/10,Wigan Athletic,3983,Victor Moses,M,14,1,3,0,3,4,7,431,2,11,0,0,0,0
+2009/10,Wigan Athletic,3985,Marcelo Moreno,F,12,0,1,1,3,4,5,727,9,10,0,0,0,0
+2009/10,Wigan Athletic,2382,Jason Koumas,M,8,1,0,1,2,2,4,423,6,7,0,0,0,0
+2009/10,Wigan Athletic,3975,Steve Gohouri,D,5,1,0,1,1,2,2,368,4,13,0,2,0,0
+2009/10,Wigan Athletic,2686,Ben Watson,M,5,1,0,0,1,1,3,335,4,11,0,0,0,0
+2009/10,Wigan Athletic,3774,Cho Won-Hee,M,4,0,0,0,1,0,3,111,1,9,0,0,0,0
+2009/10,Wigan Athletic,3022,Mike Pollitt,G,4,0,0,0,0,0,4,291,2,15,15,0,0,0
+2009/10,Wigan Athletic,3974,Vladimir Stojkovic,G,4,0,0,0,0,1,3,360,4,8,11,0,0,0
+2009/10,Wigan Athletic,2803,Erik Edman,D,3,0,0,0,0,1,2,187,2,11,0,1,0,0
+2009/10,Wigan Athletic,3270,Marlon King,F,3,0,0,0,2,0,1,14,0,0,0,0,0,0
+2009/10,Wigan Athletic,918,Michael Brown,M,2,0,0,1,1,0,1,152,2,1,0,0,0,0
+2009/10,Wigan Athletic,3335,Olivier Kapo,M,1,0,0,0,0,0,1,31,0,2,0,0,0,0
+2009/10,Wolverhampton Wanderers,3205,Kevin Doyle,F,34,9,1,5,8,11,15,2897,33,41,0,5,0,0
+2009/10,Wolverhampton Wanderers,3997,Karl Henry,M,34,0,0,6,9,8,17,3036,34,51,0,6,1,0
+2009/10,Wolverhampton Wanderers,4000,Matthew Jarvis,M,34,3,3,3,9,8,17,2655,30,37,0,3,0,0
+2009/10,Wolverhampton Wanderers,1754,Jody Craddock,D,33,5,2,8,8,11,14,2970,33,43,0,1,0,1
+2009/10,Wolverhampton Wanderers,3989,Christophe Berra,D,32,0,3,7,8,10,14,2835,32,45,0,6,0,0
+2009/10,Wolverhampton Wanderers,2887,Michael Mancienne,D,30,0,0,4,8,8,14,1989,22,33,0,6,0,1
+2009/10,Wolverhampton Wanderers,3993,Kevin Foley,D,25,0,0,6,6,7,12,1980,23,29,0,1,0,0
+2009/10,Wolverhampton Wanderers,2069,Marcus Hahnemann,G,25,0,0,7,7,7,11,2250,25,30,110,3,0,0
+2009/10,Wolverhampton Wanderers,2746,Sylvan Ebanks-Blake,F,23,2,0,2,6,3,14,1167,12,19,0,2,0,0
+2009/10,Wolverhampton Wanderers,3991,Ronald Zubar,D,23,1,2,5,4,10,9,2061,23,31,0,3,0,1
+2009/10,Wolverhampton Wanderers,3987,George Elokobi,D,22,0,0,3,5,9,8,1642,17,28,0,2,0,0
+2009/10,Wolverhampton Wanderers,3999,Stephen Ward,D,22,0,1,4,7,5,10,1576,18,19,0,2,1,0
+2009/10,Wolverhampton Wanderers,3996,David Edwards,M,20,1,0,1,5,6,9,1359,16,25,0,3,0,0
+2009/10,Wolverhampton Wanderers,2523,David Jones,D,20,1,2,2,5,7,8,1421,16,16,0,3,0,0
+2009/10,Wolverhampton Wanderers,4001,Nenad Milijas,M,19,2,3,0,5,7,7,977,12,14,0,1,0,0
+2009/10,Wolverhampton Wanderers,2485,Richard Stearman,D,16,1,0,2,4,3,9,1125,12,20,0,4,1,0
+2009/10,Wolverhampton Wanderers,3192,Gregory Halford,D,15,0,0,0,3,3,9,895,12,21,0,2,0,0
+2009/10,Wolverhampton Wanderers,4008,Chris Iwelumo,F,15,0,0,0,3,7,5,414,2,9,0,0,0,0
+2009/10,Wolverhampton Wanderers,4004,Adlène Guédioura,M,14,1,0,0,4,5,5,590,7,9,0,2,0,0
+2009/10,Wolverhampton Wanderers,2569,Wayne Hennessey,G,13,0,1,1,2,4,7,1170,13,26,46,0,0,0
+2009/10,Wolverhampton Wanderers,2477,Andy Keogh,F,13,1,1,0,3,1,9,742,8,15,0,4,0,0
+2009/10,Wolverhampton Wanderers,2579,Michael Kightly,M,9,0,0,0,1,3,5,424,3,9,0,3,0,0
+2009/10,Wolverhampton Wanderers,3603,Segundo Castillo,M,8,0,0,0,1,3,4,502,7,15,0,1,0,0
+2009/10,Wolverhampton Wanderers,4009,Stefan Maierhofer,F,8,1,0,0,2,2,4,179,1,6,0,0,1,0
+2009/10,Wolverhampton Wanderers,2338,Andrew Surman,M,7,0,0,0,1,0,6,315,3,10,0,0,0,0
+2009/10,Wolverhampton Wanderers,4007,Sam Vokes,F,5,0,0,0,1,1,3,42,0,0,0,0,0,0
+2009/10,Wolverhampton Wanderers,4002,Geoffrey Mujangi Bia,M,3,0,0,0,0,1,2,59,1,2,0,0,0,0
+2009/10,Wolverhampton Wanderers,3992,Matt Hill,D,2,0,0,0,0,0,2,180,2,6,0,0,0,0
+2009/10,Wolverhampton Wanderers,4003,George Friend,D,1,0,0,0,0,0,1,61,1,2,0,0,0,0

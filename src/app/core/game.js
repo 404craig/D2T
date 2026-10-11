@@ -39,17 +39,22 @@
   GAME.target = (histPos) => (histPos <= 1 ? 1 : histPos - 1);
   GAME.dreamMet = (finish, histPos) => finish <= GAME.target(histPos);
 
-  // ---------- legends: the best Premier League seasons in the fully rated data ----------
+  // ---------- legends: the top 3 players of every season (Craig, 11 Oct 2026) ----------
+  // One card per player-season, so a great can be a legend from more than one season.
+  // id "L:<name>:<season>"; his best legend card also answers to "L:<name>" for runs saved before.
   const LEGENDS = (() => {
-    const best = new Map();
+    const out = [];
     for (const [sk, S] of Object.entries(G.seasons)) {
-      for (const p of S.players) {
-        if (p.src !== 'x' || p.r < 93 || p.a < 20) continue;
-        const cur = best.get(p.n);
-        if (!cur || p.r > cur.r) best.set(p.n, { id: 'L:' + p.n, n: p.n, b: p.b, p: p.p, r: p.r, lv: 4, a: p.a, g: p.g, as: p.as, cs: p.cs, s6: p.s6, nat: p.nat, c: null, cn: S.clubs[p.c].name, sk });
+      const top = S.players.filter((p) => p.a >= 10).slice().sort((a, b) => b.r - a.r || b.a - a.a).slice(0, 3);
+      for (const p of top) {
+        const main = p.c2 != null && (p.a2 || 0) > (p.a1 || 0) ? p.c2 : p.c;
+        out.push({ id: 'L:' + p.n + ':' + sk, n: p.n, b: p.b, p: p.p, r: p.r, lv: 4, a: p.a, g: p.g, as: p.as, cs: p.cs, s6: p.s6, nat: p.nat, c: null, cn: S.clubs[main].name, sk });
       }
     }
-    return [...best.values()].sort((a, b) => b.r - a.r);
+    out.sort((a, b) => b.r - a.r);
+    const aliased = new Set();
+    for (const l of out) if (!aliased.has(l.n)) { l.alias = 'L:' + l.n; aliased.add(l.n); }
+    return out;
   })();
   GAME.legends = LEGENDS;
   GAME.season = (key) => { const S = G.seasons[key]; if (S && !S.legends) { S.legends = LEGENDS; E.indexSeason(S); } return S; };
@@ -60,10 +65,21 @@
     const p = E.playerOf(S, id);
     if (!p) return null;
     const legend = !!p.cn;
-    const clubName = legend ? p.cn : S.clubs[p.c].name;
+    // A January mover shows your club if he is in your squad, otherwise the club he was at on the current match date.
+    const eng = GAME.eng();
+    let shown = p.c;
+    if (!legend && p.c2 != null) {
+      const mine = eng && eng.seasonKey === S.season ? eng.club : null;
+      if (mine === p.c || mine === p.c2) shown = mine;
+      else {
+        const fx = eng && eng.fixtures && eng.seasonKey === S.season ? eng.fixtures[Math.max(0, (eng.gw || 1) - 1)] : null;
+        shown = E.clubAt(p, fx ? fx.date : null);
+      }
+    }
+    const clubName = legend ? p.cn : S.clubs[shown].name;
     const keys = p.b === 'GK' ? GK_KEYS : KEYS, stats = {};
     keys.forEach((k, i) => { stats[k] = p.s6 ? p.s6[i] : null; });
-    const two = !legend && p.c2 != null ? S.clubs[p.c2].name : null;
+    const two = !legend && p.c2 != null ? S.clubs[shown === p.c2 ? p.c : p.c2].name : null;
     return {
       id: p.id, name: p.n, club: clubName, club2: two, crest: crestOf(clubName), pos: p.b, ovr: p.r, level: LV[p.lv || 0],
       apps: p.a, goals: p.g, assists: p.as, cleanSheets: p.cs, nat: p.nat, season: legend ? p.sk : S.season,

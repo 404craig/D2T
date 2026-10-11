@@ -1,0 +1,524 @@
+season,club_feed,feed_id,name,feed_pos,appearances,goals,goal_assist,clean_sheet,wins,draws,losses,mins_played,game_started,goals_conceded,saves,yellow_card,red_card,own_goals
+2019/20,Arsenal,5110,Pierre-Emerick Aubameyang,F,36,22,3,8,14,12,10,3138,35,44,0,3,1,0
+2019/20,Arsenal,4100,David Luiz,D,33,2,1,8,11,14,8,2811,32,38,0,5,2,0
+2019/20,Arsenal,50252,Nicolas Pepe,F,31,5,6,1,13,9,9,2015,22,30,0,4,0,0
+2019/20,Arsenal,12136,Granit Xhaka,M,31,1,2,10,13,12,6,2591,30,31,0,10,0,0
+2019/20,Arsenal,6899,Alexandre Lacazette,F,30,10,4,0,9,12,9,1877,22,25,0,8,0,0
+2019/20,Arsenal,4985,Bernd Leno,G,30,0,0,7,9,13,8,2650,30,39,113,2,0,0
+2019/20,Arsenal,23033,Lucas Torreira,M,29,1,1,2,10,13,6,1508,17,23,0,7,0,0
+2019/20,Arsenal,14446,Joe Willock,M,29,1,1,0,10,9,10,844,8,16,0,2,0,0
+2019/20,Arsenal,5368,Sead Kolasinac,D,26,0,2,3,11,8,7,1699,19,26,0,4,0,0
+2019/20,Arsenal,49481,Bukayo Saka,F,26,1,5,4,9,10,7,1753,19,18,0,6,0,0
+2019/20,Arsenal,7163,Dani Ceballos,M,24,0,2,2,12,6,6,1699,18,21,0,1,0,0
+2019/20,Arsenal,50512,Mattéo Guendouzi,M,24,0,1,3,7,10,7,1748,19,31,0,6,0,0
+2019/20,Arsenal,10428,Ainsley Maitland-Niles,M,20,0,2,3,9,7,4,1383,15,21,0,4,1,0
+2019/20,Arsenal,5093,Sokratis Papastathopoulos,D,19,2,0,4,7,8,4,1697,19,25,0,6,0,0
+2019/20,Arsenal,4714,Mesut Özil,M,18,1,2,1,5,9,4,1448,18,20,0,1,0,0
+2019/20,Arsenal,14450,Reiss Nelson,F,17,1,0,1,8,5,4,627,7,7,0,1,0,0
+2019/20,Arsenal,4474,Héctor Bellerín,D,15,1,0,3,6,4,5,1159,13,18,0,2,0,0
+2019/20,Arsenal,3869,Shkodran Mustafi,D,15,0,1,4,5,6,4,1205,13,17,0,2,0,0
+2019/20,Arsenal,12185,Kieran Tierney,D,15,1,1,1,6,4,5,992,12,16,0,2,0,0
+2019/20,Arsenal,4620,Calum Chambers,D,14,1,1,3,4,6,4,1103,13,15,0,5,0,0
+2019/20,Arsenal,66104,Gabriel Martinelli,F,14,3,0,2,3,8,3,655,6,9,0,1,0,0
+2019/20,Arsenal,14451,Eddie Nketiah,F,13,2,0,0,7,3,3,633,7,8,0,0,1,0
+2019/20,Arsenal,4245,Emiliano Martínez,G,9,0,0,3,5,1,3,770,8,9,34,2,0,0
+2019/20,Arsenal,11575,Rob Holding,D,8,0,0,1,4,1,3,581,6,9,0,1,0,0
+2019/20,Arsenal,11347,Cédric Soares,D,5,1,0,0,3,0,2,250,3,2,0,0,0,0
+2019/20,Arsenal,5102,Henrikh Mkhitaryan,M,3,0,0,0,1,1,1,111,1,0,0,1,0,0
+2019/20,Arsenal,4472,Nacho Monreal,D,3,0,0,1,2,0,1,270,3,4,0,0,0,0
+2019/20,Arsenal,20097,Pablo Marí,D,2,0,0,1,1,0,1,114,2,0,0,0,0,0
+2019/20,Arsenal,14445,Emile Smith Rowe,M,2,0,0,0,0,1,1,97,1,0,0,0,0,0
+2019/20,Aston Villa,4260,Jack Grealish,M,36,8,5,7,9,8,19,3234,36,63,0,8,0,0
+2019/20,Aston Villa,24626,Douglas Luiz,M,36,3,2,6,9,7,20,2608,28,51,0,8,0,0
+2019/20,Aston Villa,11033,Anwar El Ghazi,F,34,4,4,2,7,8,19,2061,26,48,0,3,0,0
+2019/20,Aston Villa,16087,Trézéguet,M,34,6,1,1,8,7,19,1950,20,28,0,2,1,0
+2019/20,Aston Villa,8900,Tyrone Mings,D,33,2,2,6,8,8,17,2903,33,53,0,7,0,0
+2019/20,Aston Villa,45351,Marvelous Nakamba,M,29,0,0,0,7,6,16,1835,19,37,0,5,0,0
+2019/20,Aston Villa,51423,John McGinn,M,28,3,3,4,6,7,15,2316,27,41,0,3,0,0
+2019/20,Aston Villa,4815,Matt Targett,D,28,1,2,4,7,7,14,2295,27,40,0,4,0,0
+2019/20,Aston Villa,9377,Conor Hourihane,M,27,3,5,1,7,7,13,1538,18,29,0,4,0,0
+2019/20,Aston Villa,15549,Frédéric Guilbert,D,25,0,2,2,7,5,13,2041,22,36,0,7,0,0
+2019/20,Aston Villa,13274,Ezri Konsa,D,25,1,2,4,7,6,12,2042,24,39,0,3,0,0
+2019/20,Aston Villa,15580,Wesley,F,21,5,1,4,6,3,12,1790,21,31,0,3,0,0
+2019/20,Aston Villa,2933,Tom Heaton,G,20,0,0,4,6,3,11,1795,20,35,68,0,0,1
+2019/20,Aston Villa,13130,Keinan Davis,F,18,0,0,0,3,6,9,538,4,7,0,0,0,0
+2019/20,Aston Villa,4183,Ahmed El Mohamady,D,18,1,1,2,4,4,10,1026,11,28,0,1,0,0
+2019/20,Aston Villa,10000,Kortney Hause,D,18,1,0,2,3,4,11,1544,17,34,0,3,0,0
+2019/20,Aston Villa,12199,Björn Engels,D,17,1,0,2,3,2,12,1447,15,32,0,1,0,0
+2019/20,Aston Villa,20490,Mbwana Samatta,F,14,1,0,0,2,4,8,946,11,18,0,1,0,0
+2019/20,Aston Villa,4402,Neil Taylor,D,14,0,0,2,3,2,9,1089,11,25,0,2,0,0
+2019/20,Aston Villa,2911,Pepe Reina,G,12,0,0,2,3,3,6,1080,12,20,33,1,0,0
+2019/20,Aston Villa,3049,Henri Lansbury,M,10,0,0,0,3,1,6,191,2,6,0,0,0,0
+2019/20,Aston Villa,10604,Jota,M,10,0,1,0,2,1,7,332,4,5,0,0,0,0
+2019/20,Aston Villa,51416,Ørjan Nyland,G,7,0,0,1,1,2,4,537,5,12,15,0,0,0
+2019/20,Aston Villa,13240,Jonathan Adjo Kodjia,F,6,0,0,0,1,0,5,112,0,6,0,1,0,0
+2019/20,Aston Villa,3670,Danny Drinkwater,M,4,0,0,0,1,1,2,263,4,9,0,1,0,0
+2019/20,Aston Villa,31670,Indiana Vassilev,M,4,0,0,0,1,1,2,47,0,1,0,0,0,0
+2019/20,Aston Villa,16622,Borja Bastón,F,2,0,0,0,0,0,2,16,0,2,0,0,0,0
+2019/20,Aston Villa,4348,Jed Steer,G,1,0,0,0,0,0,1,8,1,0,0,0,0,0
+2019/20,Bournemouth,13703,Aaron Ramsdale,G,37,0,1,5,9,7,21,3330,37,62,129,0,0,0
+2019/20,Bournemouth,8454,Callum Wilson,F,35,8,1,3,8,7,20,2909,32,53,0,10,0,0
+2019/20,Bournemouth,8882,Philip Billing,M,34,1,1,4,9,6,19,2532,29,41,0,8,0,0
+2019/20,Bournemouth,37776,Jefferson Lerma,M,33,1,2,4,9,6,18,2709,31,48,0,11,1,0
+2019/20,Bournemouth,10443,Dominic Solanke,F,32,3,1,0,7,4,21,1644,17,39,0,1,0,0
+2019/20,Bournemouth,13961,Harry Wilson,F,31,7,0,0,7,5,19,1651,20,32,0,2,0,0
+2019/20,Bournemouth,4499,Nathan Aké,D,29,2,2,4,7,6,16,2505,29,46,0,2,0,0
+2019/20,Bournemouth,8045,Steve Cook,D,29,1,0,3,6,6,17,2430,28,47,0,6,1,0
+2019/20,Bournemouth,8052,Ryan Fraser,M,28,1,4,4,7,5,16,2063,21,34,0,2,0,0
+2019/20,Bournemouth,10766,Lewis Cook,M,27,0,0,2,6,4,17,1345,14,30,0,5,0,0
+2019/20,Bournemouth,26076,Diego Rico,D,27,0,4,5,8,5,14,2334,27,38,0,6,0,0
+2019/20,Bournemouth,3926,Joshua King,F,26,6,4,3,6,7,13,2019,24,37,0,0,0,0
+2019/20,Bournemouth,3390,Dan Gosling,M,24,3,1,2,5,3,16,1260,14,23,0,3,0,0
+2019/20,Bournemouth,3512,Adam Smith,D,24,0,1,3,5,5,14,2060,24,40,0,7,0,0
+2019/20,Bournemouth,10881,Jack Stacey,D,19,0,2,1,4,4,11,1541,17,27,0,2,0,0
+2019/20,Bournemouth,8044,Simon Francis,D,15,0,0,1,3,1,11,965,10,21,0,3,1,0
+2019/20,Bournemouth,3766,Junior Stanislas,M,15,3,0,1,2,2,11,712,7,17,0,1,0,0
+2019/20,Bournemouth,16524,Arnaut Danjuma,F,14,0,0,0,1,3,10,628,6,12,0,0,0,0
+2019/20,Bournemouth,14063,Chris Mepham,D,12,1,0,1,2,2,8,911,10,19,0,1,0,0
+2019/20,Bournemouth,13706,David Brooks,M,9,1,0,0,2,1,6,511,8,12,0,1,0,0
+2019/20,Bournemouth,21585,Lloyd Kelly,D,8,0,0,1,2,1,5,638,7,15,0,2,0,0
+2019/20,Bournemouth,2338,Andrew Surman,M,5,0,0,0,2,0,3,235,2,6,0,1,0,0
+2019/20,Bournemouth,13193,Jack Simpson,D,4,0,0,0,0,1,3,238,1,6,0,0,0,0
+2019/20,Bournemouth,13195,Sam Surridge,F,4,0,0,0,1,0,3,25,0,2,0,0,0,0
+2019/20,Bournemouth,3242,Charlie Daniels,D,2,0,0,0,1,0,1,127,2,2,0,0,0,0
+2019/20,Bournemouth,4527,Jordon Ibe,F,2,0,0,0,0,0,2,48,0,1,0,0,0,0
+2019/20,Bournemouth,50453,Mark Travers,G,1,0,0,0,0,0,1,90,1,3,2,0,0,0
+2019/20,Brighton & Hove Albion,12192,Mathew Ryan,G,38,0,0,9,9,14,15,3420,38,54,117,0,0,0
+2019/20,Brighton & Hove Albion,16256,Neal Maupay,F,37,10,3,5,9,13,15,2768,30,36,0,3,0,0
+2019/20,Brighton & Hove Albion,8163,Lewis Dunk,D,36,3,3,9,9,14,13,3231,36,50,0,9,0,0
+2019/20,Brighton & Hove Albion,16790,Davy Pröpper,M,35,1,2,6,8,14,13,2829,32,46,0,4,0,0
+2019/20,Brighton & Hove Albion,8707,Dan Burn,D,34,0,0,9,9,12,13,2881,33,42,0,5,0,0
+2019/20,Brighton & Hove Albion,8168,Dale Stephens,M,33,0,1,5,9,10,14,2528,28,42,0,8,0,0
+2019/20,Brighton & Hove Albion,19619,Aaron Mooy,M,31,2,2,2,6,14,11,2089,25,31,0,1,1,0
+2019/20,Brighton & Hove Albion,20486,Leandro Trossard,F,31,5,3,2,6,12,13,2013,22,34,0,0,0,0
+2019/20,Brighton & Hove Albion,9426,Adam Webster,D,31,3,1,5,7,12,12,2670,31,44,0,4,0,1
+2019/20,Brighton & Hove Albion,22542,Pascal Groß,M,29,2,4,2,7,10,12,1802,22,32,0,4,0,1
+2019/20,Brighton & Hove Albion,4955,Martín Montoya,D,27,0,1,6,7,8,12,1900,23,32,0,5,0,0
+2019/20,Brighton & Hove Albion,21653,Aaron Connolly,F,24,3,1,0,7,6,11,1261,14,22,0,0,0,0
+2019/20,Brighton & Hove Albion,4772,Glenn Murray,F,23,1,1,0,5,10,8,790,7,10,0,0,0,0
+2019/20,Brighton & Hove Albion,50245,Yves Bissouma,M,22,1,0,1,5,8,9,1260,15,18,0,4,0,0
+2019/20,Brighton & Hove Albion,20723,Steven Alzate,M,19,0,0,2,5,6,8,1183,12,18,0,1,0,0
+2019/20,Brighton & Hove Albion,3601,Shane Duffy,D,19,1,0,2,5,7,7,1232,12,18,0,2,0,0
+2019/20,Brighton & Hove Albion,8171,Solly March,M,19,0,1,0,3,8,8,1144,11,15,0,2,0,0
+2019/20,Brighton & Hove Albion,23591,Bernardo,D,14,0,0,0,3,5,6,678,7,17,0,1,0,0
+2019/20,Brighton & Hove Albion,15480,Alireza Jahanbakhsh,F,10,2,0,0,2,4,4,308,3,4,0,0,0,0
+2019/20,Brighton & Hove Albion,63633,Alexis Mac Allister,M,9,0,0,0,3,4,2,352,4,6,0,0,0,0
+2019/20,Brighton & Hove Albion,23704,Tariq Lamptey,D,8,0,1,1,2,3,3,589,7,8,0,2,0,0
+2019/20,Brighton & Hove Albion,16234,Ezequiel Schelotto,D,8,0,0,0,3,3,2,362,4,7,0,2,0,0
+2019/20,Brighton & Hove Albion,5721,Gaëtan Bong,D,4,0,0,0,1,2,1,57,0,3,0,0,0,0
+2019/20,Brighton & Hove Albion,37587,Florin Andone,F,3,1,0,0,1,1,1,72,1,0,0,0,1,0
+2019/20,Brighton & Hove Albion,7124,Jürgen Locadia,F,2,0,0,0,1,0,1,86,1,1,0,0,0,0
+2019/20,Burnley,24797,Dwight McNeil,F,38,2,6,11,15,9,14,3344,38,48,0,5,0,0
+2019/20,Burnley,10079,Nick Pope,G,38,0,0,15,15,9,14,3420,38,50,120,1,0,0
+2019/20,Burnley,8143,James Tarkowski,D,38,2,2,15,15,9,14,3420,38,50,0,10,0,0
+2019/20,Burnley,3851,Jay Rodriguez,F,36,8,1,6,14,9,13,2009,20,34,0,1,0,0
+2019/20,Burnley,4489,Ashley Westwood,M,35,2,6,15,15,9,11,3150,35,39,0,9,0,0
+2019/20,Burnley,3909,Ben Mee,D,32,1,1,13,13,6,13,2880,32,45,0,7,0,0
+2019/20,Burnley,3756,Chris Wood,F,32,14,1,6,12,9,11,2444,29,33,0,1,0,1
+2019/20,Burnley,2889,Jack Cork,D,30,0,0,10,12,6,12,2616,30,41,0,1,0,0
+2019/20,Burnley,8586,Jeff Hendrick,M,24,2,2,8,10,6,8,1934,22,30,0,8,0,0
+2019/20,Burnley,4821,Erik Pieters,D,24,0,4,6,8,6,10,1877,21,35,0,2,0,0
+2019/20,Burnley,8691,Charlie Taylor,D,24,0,1,10,11,6,7,1946,22,18,0,3,0,0
+2019/20,Burnley,2517,Phil Bardsley,D,21,0,1,9,10,5,6,1890,21,19,0,6,0,0
+2019/20,Burnley,8246,Ashley Barnes,F,19,6,0,2,7,3,9,1361,17,21,0,4,0,0
+2019/20,Burnley,4851,Matej Vydra,F,19,2,1,2,6,6,7,812,7,7,0,0,0,0
+2019/20,Burnley,4158,Robert Brady,M,17,1,2,0,5,2,10,450,5,10,0,1,0,0
+2019/20,Burnley,4487,Matthew Lowton,D,17,0,1,6,5,4,8,1530,17,31,0,2,0,0
+2019/20,Burnley,2270,Aaron Lennon,M,16,0,0,0,6,3,7,486,4,15,0,4,0,0
+2019/20,Burnley,6210,Jóhann Gudmundsson,F,12,1,1,1,3,4,5,622,6,7,0,0,0,0
+2019/20,Burnley,9457,Josh Brownhill,M,10,0,0,4,5,3,2,806,9,10,0,2,0,0
+2019/20,Burnley,3837,Kevin Long,D,8,0,0,2,3,3,2,562,6,5,0,0,0,0
+2019/20,Burnley,3670,Danny Drinkwater,M,1,0,0,0,0,0,1,59,1,2,0,0,0,0
+2019/20,Burnley,51505,Max Thompson,F,1,0,0,0,0,0,1,2,0,0,0,0,0,0
+2019/20,Burnley,9117,Ben Gibson,D,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2019/20,Chelsea,14580,Mason Mount,M,37,7,5,3,19,6,12,2872,32,44,0,3,0,0
+2019/20,Chelsea,4496,César Azpilicueta,D,36,2,6,7,19,6,11,3230,36,53,0,1,0,0
+2019/20,Chelsea,4748,Willian,F,36,9,7,6,19,6,11,2601,29,35,0,4,0,0
+2019/20,Chelsea,13286,Tammy Abraham,F,34,15,3,2,19,5,10,2221,25,34,0,2,0,1
+2019/20,Chelsea,11373,Kepa Arrizabalaga,G,33,0,0,8,18,4,11,2970,33,47,55,0,0,0
+2019/20,Chelsea,5682,Jorginho,M,31,4,2,4,15,6,10,2384,27,40,0,10,0,0
+2019/20,Chelsea,12520,Mateo Kovacic,M,31,1,3,2,16,6,9,2073,23,37,0,8,0,0
+2019/20,Chelsea,5175,Kurt Zouma,D,28,0,0,7,15,3,10,2343,25,37,0,6,0,1
+2019/20,Chelsea,15559,Christian Pulisic,M,25,9,4,1,13,3,9,1726,19,28,0,0,0,0
+2019/20,Chelsea,14571,Reece James,D,24,0,2,4,14,3,7,1513,16,23,0,1,0,0
+2019/20,Chelsea,23702,Callum Hudson-Odoi,F,22,1,5,1,12,3,7,850,7,14,0,1,0,0
+2019/20,Chelsea,13492,N'Golo Kanté,M,22,3,0,2,8,4,10,1733,20,25,0,4,0,0
+2019/20,Chelsea,4115,Ross Barkley,M,21,1,4,3,13,4,4,1104,13,14,0,0,0,0
+2019/20,Chelsea,4495,Andreas Christensen,D,21,0,0,3,10,4,7,1752,21,33,0,5,0,0
+2019/20,Chelsea,16801,Antonio Rüdiger,D,20,2,0,5,10,3,7,1710,19,24,0,3,0,1
+2019/20,Chelsea,4093,Marcos Alonso,D,18,4,2,5,13,1,4,1432,15,18,0,4,0,0
+2019/20,Chelsea,4481,Olivier Giroud,F,18,8,0,0,10,2,6,999,12,16,0,1,0,0
+2019/20,Chelsea,7450,Michy Batshuayi,F,16,1,1,0,7,3,6,226,1,8,0,0,0,0
+2019/20,Chelsea,16803,Emerson,D,15,0,0,1,4,3,8,1025,13,21,0,3,0,0
+2019/20,Chelsea,13281,Fikayo Tomori,D,15,1,0,4,9,2,4,1293,15,18,0,3,0,0
+2019/20,Chelsea,4972,Pedro,F,11,1,1,1,4,3,4,662,8,12,0,1,0,0
+2019/20,Chelsea,5179,Ruben Loftus-Cheek,M,7,0,1,0,5,0,2,205,2,3,0,0,0,0
+2019/20,Chelsea,24221,Billy Gilmour,M,6,0,0,1,5,1,0,192,2,3,0,0,0,0
+2019/20,Chelsea,10466,Willy Caballero,G,5,0,0,1,2,2,1,450,5,7,10,0,0,0
+2019/20,Chelsea,24708,Tino Anjorin,M,1,0,0,0,1,0,0,19,0,0,0,0,0,0
+2019/20,Chelsea,31442,Armando Broja,F,1,0,0,0,1,0,0,4,0,0,0,0,0,0
+2019/20,Chelsea,23704,Tariq Lamptey,D,1,0,0,0,1,0,0,31,0,0,0,0,0,0
+2019/20,Crystal Palace,4539,Wilfried Zaha,F,38,4,3,9,11,10,17,3280,37,46,0,5,0,0
+2019/20,Crystal Palace,5595,Jordan Ayew,F,37,9,2,6,11,10,16,3160,37,45,0,6,0,0
+2019/20,Crystal Palace,4224,James McArthur,M,37,0,3,7,11,10,16,3104,37,38,0,6,0,0
+2019/20,Crystal Palace,7548,Vicente Guaita,G,35,0,0,10,11,9,15,3150,35,42,110,1,0,1
+2019/20,Crystal Palace,5861,Cheikhou Kouyaté,M,35,1,1,6,11,9,15,2535,29,36,0,4,0,0
+2019/20,Crystal Palace,3979,James McCarthy,M,33,0,0,2,9,9,15,1672,16,29,0,9,0,0
+2019/20,Crystal Palace,5859,Luka Milivojevic,M,31,3,1,6,8,8,15,2514,28,38,0,12,0,0
+2019/20,Crystal Palace,3362,Patrick van Aanholt,D,29,3,2,8,11,3,15,2511,29,38,0,0,0,1
+2019/20,Crystal Palace,3929,Joel Ward,D,29,0,0,7,8,5,16,2383,27,36,0,4,0,0
+2019/20,Crystal Palace,2620,Gary Cahill,D,25,0,1,7,8,5,12,2168,25,35,0,1,0,0
+2019/20,Crystal Palace,4492,Christian Benteke,F,24,2,1,1,8,5,11,1257,13,18,0,4,1,0
+2019/20,Crystal Palace,3724,Andros Townsend,M,24,1,1,1,7,4,13,1289,14,23,0,0,0,0
+2019/20,Crystal Palace,3644,Martin Kelly,D,19,0,1,5,7,7,5,1550,17,16,0,0,0,0
+2019/20,Crystal Palace,3517,James Tomkins,D,18,1,1,3,3,7,8,1584,18,23,0,5,0,0
+2019/20,Crystal Palace,5377,Max Meyer,M,17,0,0,1,2,5,10,650,6,11,0,1,0,0
+2019/20,Crystal Palace,4878,Jairo Riedewald,M,17,0,0,0,4,7,6,764,7,9,0,0,0,0
+2019/20,Crystal Palace,8980,Jeffrey Schlupp,M,17,3,1,1,6,3,8,1034,11,16,0,2,0,0
+2019/20,Crystal Palace,3807,Scott Dann,D,16,0,1,5,5,3,8,1265,14,14,0,0,0,0
+2019/20,Crystal Palace,4796,Mamadou Sakho,D,14,0,0,0,4,3,7,931,11,21,0,1,1,0
+2019/20,Crystal Palace,4396,Connor Wickham,F,6,1,1,0,1,3,2,90,0,2,0,0,0,0
+2019/20,Crystal Palace,12114,Cenk Tosun,F,5,1,0,0,2,2,1,176,2,2,0,0,0,0
+2019/20,Crystal Palace,24334,Tyrick Mitchell,D,4,0,0,0,0,1,3,193,2,4,0,1,0,0
+2019/20,Crystal Palace,2569,Wayne Hennessey,G,3,0,0,0,0,1,2,270,3,8,16,0,0,0
+2019/20,Crystal Palace,53151,Brandon Pierrick,F,2,0,0,0,0,1,1,13,0,0,0,0,0,0
+2019/20,Crystal Palace,22952,Víctor Camarasa,M,1,0,0,0,0,0,1,5,0,0,0,0,0,0
+2019/20,Everton,4640,Jordan Pickford,G,38,0,0,9,13,10,15,3420,38,56,94,2,0,0
+2019/20,Everton,9576,Dominic Calvert-Lewin,F,36,13,1,5,12,10,14,2629,30,43,0,9,0,0
+2019/20,Everton,24630,Richarlison,F,36,13,3,6,13,8,15,3081,36,51,0,8,0,0
+2019/20,Everton,5758,Lucas Digne,D,35,0,7,7,12,9,14,3035,35,49,0,6,0,1
+2019/20,Everton,4421,Gylfi Sigurdsson,M,35,2,3,4,13,7,15,2563,28,45,0,3,0,0
+2019/20,Everton,4333,Michael Keane,D,31,2,0,7,12,7,12,2556,28,42,0,3,0,1
+2019/20,Everton,13389,Tom Davies,M,30,1,0,5,10,10,10,2026,23,34,0,8,0,0
+2019/20,Everton,20958,Moise Kean,F,29,2,2,0,7,9,13,835,6,15,0,1,0,0
+2019/20,Everton,32923,Yerry Mina,D,29,2,1,4,10,7,12,2281,25,37,0,3,0,1
+2019/20,Everton,5907,Bernard,M,27,3,2,3,9,8,10,1278,15,12,0,2,0,0
+2019/20,Everton,3600,Séamus Coleman,D,27,0,1,5,9,8,10,1839,21,28,0,3,1,0
+2019/20,Everton,10564,Mason Holgate,D,27,0,3,5,11,8,8,2054,24,34,0,5,0,0
+2019/20,Everton,4717,Alex Iwobi,F,25,1,0,0,7,6,12,1601,19,30,0,0,0,0
+2019/20,Everton,12576,Djibril Sidibé,D,25,0,4,4,9,6,10,1820,18,30,0,3,0,0
+2019/20,Everton,2839,Theo Walcott,F,25,2,3,0,10,5,10,1297,17,19,0,1,0,0
+2019/20,Everton,5061,André Gomes,M,19,0,1,5,6,6,7,1460,17,20,0,6,0,0
+2019/20,Everton,3799,Fabian Delph,M,16,0,0,1,5,4,7,1190,13,24,0,3,1,0
+2019/20,Everton,4615,Morgan Schneiderlin,M,15,0,0,0,4,2,9,1004,12,20,0,4,1,0
+2019/20,Everton,23747,Anthony Gordon,F,11,0,1,0,3,4,4,440,4,6,0,0,0,0
+2019/20,Everton,3030,Leighton Baines,D,8,0,0,0,3,2,3,401,4,8,0,0,0,0
+2019/20,Everton,12114,Cenk Tosun,F,5,1,0,0,1,2,2,290,2,4,0,0,0,0
+2019/20,Everton,66318,Jarrad Branthwaite,D,4,0,0,1,1,1,2,299,2,6,0,0,0,0
+2019/20,Everton,13390,Oumar Niasse,F,3,0,0,0,0,3,0,19,0,2,0,0,0,0
+2019/20,Everton,20187,Jean-Philippe Gbamin,M,2,0,0,1,1,1,0,135,1,0,0,0,0,0
+2019/20,Leicester City,3156,Jonny Evans,D,38,1,1,11,18,8,12,3385,38,41,0,8,1,1
+2019/20,Leicester City,2508,Kasper Schmeichel,G,38,0,0,13,18,8,12,3420,38,41,96,2,0,0
+2019/20,Leicester City,5865,Youri Tielemans,M,37,3,6,8,17,8,12,2834,32,35,0,2,0,0
+2019/20,Leicester City,14716,Harvey Barnes,M,36,6,8,1,17,7,12,2090,24,24,0,0,0,0
+2019/20,Leicester City,8979,Jamie Vardy,F,35,23,5,11,16,8,11,3034,34,38,0,2,0,0
+2019/20,Leicester City,26216,Çaglar Söyüncü,D,34,1,1,12,16,8,10,3037,34,33,0,4,1,0
+2019/20,Leicester City,10487,Ayoze Pérez,F,33,8,4,1,15,6,12,2019,26,25,0,0,0,0
+2019/20,Leicester City,20479,Wilfred Ndidi,M,32,2,1,11,17,6,9,2674,29,32,0,6,0,0
+2019/20,Leicester City,8456,James Maddison,M,31,6,3,8,15,7,9,2628,29,26,0,4,0,0
+2019/20,Leicester City,5343,Ricardo Pereira,D,28,3,2,10,15,5,8,2520,28,27,0,1,0,0
+2019/20,Leicester City,13491,Ben Chilwell,D,27,3,3,9,13,6,8,2375,27,26,0,3,0,0
+2019/20,Leicester City,5860,Dennis Praet,M,27,1,2,0,11,5,11,1132,12,17,0,2,0,0
+2019/20,Leicester City,7946,Demarai Gray,F,21,2,3,0,11,4,6,607,3,6,0,1,0,0
+2019/20,Leicester City,3564,Marc Albrighton,M,20,0,3,1,8,5,7,864,9,11,0,2,0,0
+2019/20,Leicester City,13248,Hamza Choudhury,M,20,1,1,0,9,5,6,889,10,12,0,2,1,0
+2019/20,Leicester City,13554,Kelechi Iheanacho,F,20,5,3,0,7,5,8,961,12,9,0,1,0,0
+2019/20,Leicester City,13515,James Justin,D,13,0,1,4,6,3,4,1010,11,14,0,1,0,1
+2019/20,Leicester City,5371,Christian Fuchs,D,11,0,0,2,6,2,3,769,8,10,0,0,0,0
+2019/20,Leicester City,8966,Wes Morgan,D,11,0,0,1,8,1,2,430,4,6,0,0,0,0
+2019/20,Leicester City,19617,Nampalys Mendy,M,7,0,0,0,4,1,2,291,4,3,0,0,0,0
+2019/20,Leicester City,4351,Ryan Bennett,D,5,0,0,1,2,1,2,330,3,8,0,0,0,0
+2019/20,Leicester City,23796,Luke Thomas,D,3,0,1,1,1,0,2,268,3,4,0,0,0,0
+2019/20,Leicester City,14283,George Hirst,F,2,0,0,0,0,0,2,9,0,1,0,0,0,0
+2019/20,Leicester City,3669,Matty James,M,1,0,0,0,0,0,1,5,0,0,0,0,0,0
+2019/20,Liverpool,14732,Trent Alexander-Arnold,D,38,4,13,12,32,3,3,3176,35,32,0,5,0,0
+2019/20,Liverpool,13511,Roberto Firmino,F,38,9,8,7,32,3,3,3001,34,26,0,0,0,0
+2019/20,Liverpool,5140,Virgil van Dijk,D,38,5,1,15,32,3,3,3420,38,33,0,1,0,0
+2019/20,Liverpool,7114,Georginio Wijnaldum,M,37,4,0,8,31,3,3,2948,35,28,0,0,0,0
+2019/20,Liverpool,10458,Andy Robertson,D,36,2,12,9,31,2,3,3113,34,31,0,2,0,0
+2019/20,Liverpool,6519,Sadio Mané,F,35,18,7,5,29,3,3,2753,31,28,0,3,0,0
+2019/20,Liverpool,5178,Mohamed Salah,F,34,19,10,11,30,1,3,2884,33,26,0,1,0,0
+2019/20,Liverpool,3712,Jordan Henderson,M,30,4,5,9,27,2,1,2244,26,14,0,2,0,0
+2019/20,Liverpool,4252,Alex Oxlade-Chamberlain,M,30,4,1,0,24,3,3,1492,17,12,0,1,0,1
+2019/20,Liverpool,20559,Alisson Becker,G,29,0,1,13,23,3,3,2545,29,23,58,0,1,0
+2019/20,Liverpool,10651,Joe Gomez,D,28,0,0,12,24,2,2,1999,22,16,0,7,0,0
+2019/20,Liverpool,10465,Divock Origi,F,28,4,1,0,23,2,3,706,7,12,0,1,0,0
+2019/20,Liverpool,11247,Fabinho,M,28,2,3,5,22,3,3,2074,22,26,0,6,0,0
+2019/20,Liverpool,2100,James Milner,M,22,2,2,3,21,1,0,926,9,9,0,4,0,0
+2019/20,Liverpool,12316,Naby Keïta,M,18,2,3,1,13,3,2,814,9,8,0,1,0,0
+2019/20,Liverpool,4618,Adam Lallana,M,15,1,1,0,13,1,1,374,3,5,0,1,0,0
+2019/20,Liverpool,4852,Adrián,G,11,0,0,2,11,0,0,873,9,10,18,1,0,0
+2019/20,Liverpool,4813,Dejan Lovren,D,10,0,1,0,8,1,1,777,9,11,0,1,0,0
+2019/20,Liverpool,12322,Takumi Minamino,M,10,0,0,0,6,1,3,242,2,2,0,0,0,0
+2019/20,Liverpool,5375,Joël Matip,D,9,1,0,2,7,2,0,704,8,5,0,0,0,0
+2019/20,Liverpool,5267,Xherdan Shaqiri,M,7,1,0,0,6,0,1,182,2,2,0,0,0,0
+2019/20,Liverpool,23815,Curtis Jones,M,6,1,0,0,5,1,0,122,1,1,0,0,0,0
+2019/20,Liverpool,23811,Neco Williams,D,6,0,0,0,4,1,1,230,3,2,0,1,0,0
+2019/20,Liverpool,33185,Harvey Elliott,M,2,0,0,0,2,0,0,7,0,0,0,0,0,0
+2019/20,Manchester City,4288,Kevin De Bruyne,M,35,13,20,9,25,3,7,2798,32,22,0,3,0,0
+2019/20,Manchester City,16286,Rodri,M,35,3,2,12,24,3,8,2486,29,27,0,8,0,0
+2019/20,Manchester City,12707,Ederson,G,35,0,0,16,24,3,8,3072,35,28,68,3,1,0
+2019/20,Manchester City,19680,Gabriel Jesus,F,34,14,7,6,23,3,8,2027,21,14,0,3,0,0
+2019/20,Manchester City,5067,Bernardo Silva,M,34,6,7,8,22,3,9,2029,23,24,0,5,0,0
+2019/20,Manchester City,8983,Riyad Mahrez,F,33,11,9,7,22,3,8,1940,21,15,0,0,0,0
+2019/20,Manchester City,4316,Raheem Sterling,F,33,20,1,7,21,3,9,2660,30,31,0,5,0,0
+2019/20,Manchester City,5101,Ilkay Gündogan,M,31,2,1,5,20,3,8,2017,21,28,0,7,0,0
+2019/20,Manchester City,4804,Fernandinho,M,30,0,1,6,20,2,8,2399,26,26,0,7,2,1
+2019/20,Manchester City,3955,Kyle Walker,D,29,1,4,10,20,2,7,2395,28,24,0,5,0,0
+2019/20,Manchester City,4145,David Silva,M,27,6,10,4,19,3,5,1832,22,15,0,0,0,0
+2019/20,Manchester City,4328,Sergio Agüero,F,24,16,3,3,16,2,6,1456,18,18,0,1,0,0
+2019/20,Manchester City,6058,Nicolás Otamendi,D,24,2,0,6,16,1,7,1711,18,21,0,3,0,0
+2019/20,Manchester City,14805,Phil Foden,M,23,5,2,2,20,1,2,892,9,7,0,0,0,0
+2019/20,Manchester City,5575,Benjamin Mendy,D,19,0,2,5,14,2,3,1496,18,13,0,3,0,0
+2019/20,Manchester City,19620,Oleksandr Zinchenko,D,19,0,0,6,12,1,6,1273,13,13,0,0,1,0
+2019/20,Manchester City,5051,João Cancelo,D,17,0,0,5,12,1,4,1205,13,11,0,4,0,0
+2019/20,Manchester City,4505,John Stones,D,16,0,0,3,11,2,3,1119,12,16,0,0,0,0
+2019/20,Manchester City,11044,Aymeric Laporte,D,15,1,0,3,12,1,2,1104,14,5,0,1,0,0
+2019/20,Manchester City,24635,Eric García,D,13,0,0,3,11,0,2,790,8,7,0,1,0,0
+2019/20,Manchester City,10467,Angeliño,D,6,0,0,0,4,0,2,422,4,7,0,1,0,0
+2019/20,Manchester City,5810,Claudio Bravo,G,4,0,0,1,2,0,2,346,3,7,8,0,0,0
+2019/20,Manchester City,24637,Tommy Doyle,M,1,0,0,0,1,0,0,15,0,0,0,0,0,0
+2019/20,Manchester City,5384,Leroy Sané,F,1,0,0,0,1,0,0,11,0,0,0,0,0,0
+2019/20,Manchester United,4330,David de Gea,G,38,0,0,13,18,12,8,3420,38,36,96,2,0,0
+2019/20,Manchester United,9566,Harry Maguire,D,38,1,1,13,18,12,8,3420,38,36,0,6,0,0
+2019/20,Manchester United,5066,Victor Lindelöf,D,35,1,0,12,17,12,6,3093,35,32,0,6,0,1
+2019/20,Manchester United,14164,Aaron Wan-Bissaka,D,35,0,4,11,17,11,7,3072,34,33,0,8,0,0
+2019/20,Manchester United,13797,Daniel James,M,33,3,6,3,15,10,8,2290,26,29,0,4,0,0
+2019/20,Manchester United,11272,Anthony Martial,F,32,17,6,3,16,10,6,2638,31,27,0,1,0,0
+2019/20,Manchester United,25266,Mason Greenwood,F,31,10,1,1,13,11,7,1312,12,13,0,0,0,0
+2019/20,Manchester United,13565,Marcus Rashford,F,31,17,7,4,15,10,6,2653,31,29,0,3,0,0
+2019/20,Manchester United,5906,Fred,M,29,0,0,5,13,9,7,2159,23,26,0,8,0,0
+2019/20,Manchester United,14824,Scott McTominay,M,27,4,1,2,14,8,5,1770,20,20,0,2,0,0
+2019/20,Manchester United,10476,Andreas Pereira,M,25,1,3,1,12,7,6,1488,18,16,0,3,0,0
+2019/20,Manchester United,4608,Luke Shaw,D,24,0,0,7,12,7,5,1734,20,15,0,7,0,0
+2019/20,Manchester United,4337,Jesse Lingard,M,22,1,0,0,9,7,6,932,9,14,0,3,0,0
+2019/20,Manchester United,3861,Nemanja Matic,M,21,0,2,8,12,5,4,1583,18,13,0,3,0,0
+2019/20,Manchester United,4287,Juan Mata,M,19,0,2,1,6,6,7,753,8,8,0,1,0,0
+2019/20,Manchester United,23834,Brandon Williams,D,17,1,0,4,8,6,3,1004,11,11,0,6,0,0
+2019/20,Manchester United,3920,Paul Pogba,M,16,1,3,4,8,6,2,1205,13,9,0,1,0,0
+2019/20,Manchester United,23396,Bruno Fernandes,M,14,8,7,3,9,5,0,1192,14,6,0,2,0,0
+2019/20,Manchester United,3062,Ashley Young,D,12,0,0,2,5,3,4,954,10,10,0,5,0,0
+2019/20,Manchester United,10957,Odion Ighalo,F,11,0,0,0,8,3,0,92,0,0,0,0,0,0
+2019/20,Manchester United,13559,Axel Tuanzebe,D,5,0,0,0,2,2,1,187,2,3,0,0,0,0
+2019/20,Manchester United,12937,Eric Bailly,D,4,0,0,1,3,1,0,148,1,1,0,0,0,0
+2019/20,Manchester United,24252,Diogo Dalot,D,4,0,0,0,1,1,2,66,1,1,0,0,0,0
+2019/20,Manchester United,20858,Tahith Chong,M,3,0,0,0,2,0,1,34,0,0,0,0,0,0
+2019/20,Manchester United,13561,Timothy Fosu-Mensah,D,3,0,0,1,2,1,0,136,2,1,0,1,0,0
+2019/20,Manchester United,10472,Marcos Rojo,D,3,0,0,0,1,1,1,121,1,2,0,1,0,0
+2019/20,Manchester United,14830,Angel Gomes,M,2,0,0,0,1,0,1,19,0,1,0,0,0,0
+2019/20,Manchester United,3820,Phil Jones,D,2,0,0,0,0,1,1,135,2,3,0,0,0,0
+2019/20,Manchester United,23841,James Garner,M,1,0,0,0,1,0,0,8,0,1,0,0,0,0
+2019/20,Newcastle United,20607,Joelinton,M,38,2,2,3,11,11,16,2699,32,46,0,7,0,0
+2019/20,Newcastle United,6451,Martin Dúbravka,G,38,0,0,11,11,11,16,3420,38,58,140,0,0,0
+2019/20,Newcastle United,54312,Miguel Almirón,M,36,4,2,6,11,11,14,3033,35,48,0,5,0,0
+2019/20,Newcastle United,5672,Federico Fernández,D,32,2,2,8,10,10,12,2618,29,42,0,8,0,1
+2019/20,Newcastle United,4713,Isaac Hayden,M,29,1,2,6,10,9,10,2226,26,32,0,4,1,0
+2019/20,Newcastle United,12817,Allan Saint-Maximin,F,26,3,4,2,10,8,8,1870,23,22,0,0,0,0
+2019/20,Newcastle United,4135,Jonjo Shelvey,M,26,6,2,5,9,7,10,2123,25,34,0,3,0,0
+2019/20,Newcastle United,9257,Jamaal Lascelles,D,24,1,0,7,8,8,8,2079,24,31,0,5,0,0
+2019/20,Newcastle United,14897,Sean Longstaff,M,23,1,1,2,7,5,11,1373,14,26,0,2,1,0
+2019/20,Newcastle United,5220,Fabian Schär,D,22,2,0,4,5,3,14,1633,18,37,0,5,0,0
+2019/20,Newcastle United,4918,Javier Manquillo,D,21,0,1,6,6,7,8,1599,18,21,0,5,0,0
+2019/20,Newcastle United,4771,Dwight Gayle,F,20,4,2,2,3,7,10,849,10,15,0,2,0,0
+2019/20,Newcastle United,4859,Christian Atsu,M,19,0,3,1,5,6,8,741,6,15,0,2,0,0
+2019/20,Newcastle United,3175,Andy Carroll,F,19,0,4,1,8,5,6,618,4,10,0,1,0,0
+2019/20,Newcastle United,7105,Jetro Willems,D,19,2,2,2,6,5,8,1498,18,24,0,0,0,0
+2019/20,Newcastle United,3934,Matt Ritchie,M,18,2,1,4,4,6,8,1315,14,19,0,4,0,0
+2019/20,Newcastle United,66494,Emil Krafth,D,17,0,1,2,5,4,8,1019,11,23,0,0,0,0
+2019/20,Newcastle United,4340,Paul Dummett,D,16,0,0,3,6,4,6,1228,14,20,0,2,0,1
+2019/20,Newcastle United,10522,DeAndre Yedlin,D,16,1,0,1,6,2,8,936,10,18,0,3,0,0
+2019/20,Newcastle United,3562,Ciaran Clark,D,14,2,0,4,6,5,3,1188,14,14,0,3,0,0
+2019/20,Newcastle United,6528,Valentino Lazaro,D,13,1,0,0,3,4,6,473,4,13,0,0,1,0
+2019/20,Newcastle United,4847,Nabil Bentaleb,M,12,0,0,2,2,4,6,749,8,16,0,2,0,0
+2019/20,Newcastle United,3507,Danny Rose,D,11,0,0,4,2,4,5,865,10,14,0,2,0,0
+2019/20,Newcastle United,14903,Matty Longstaff,M,9,2,0,1,2,3,4,572,6,11,0,1,0,0
+2019/20,Newcastle United,20196,Yoshinori Muto,M,8,0,0,0,1,1,6,207,2,7,0,0,0,0
+2019/20,Newcastle United,16607,Florian Lejeune,D,6,2,0,1,1,2,3,441,4,10,0,0,0,0
+2019/20,Newcastle United,4656,Ki Sung-Yueng,M,3,0,0,0,0,1,2,136,1,6,0,0,0,0
+2019/20,Newcastle United,19967,Kelland Watts,D,1,0,0,0,0,0,1,16,0,1,0,0,0,0
+2019/20,Norwich City,14944,Todd Cantwell,M,37,6,2,1,5,6,26,2500,30,54,0,6,0,0
+2019/20,Norwich City,33061,Kenny McLean,M,37,1,1,4,4,6,27,2964,32,63,0,5,0,0
+2019/20,Norwich City,19970,Max Aarons,D,36,0,1,5,4,6,26,3240,36,71,0,7,0,0
+2019/20,Norwich City,26408,Emiliano Buendía,M,36,1,7,2,5,6,25,2462,28,52,0,6,1,0
+2019/20,Norwich City,3169,Tim Krul,G,36,0,0,5,5,6,25,3240,36,68,132,4,0,1
+2019/20,Norwich City,5169,Teemu Pukki,F,36,11,3,2,5,6,25,2892,33,59,0,3,0,0
+2019/20,Norwich City,10968,Ben Godfrey,D,30,0,0,2,5,3,22,2646,30,62,0,3,1,1
+2019/20,Norwich City,4560,Alexander Tettey,M,30,1,1,4,5,5,20,2350,28,44,0,5,0,0
+2019/20,Norwich City,14938,Jamal Lewis,D,28,1,0,2,3,2,23,2303,25,56,0,4,0,0
+2019/20,Norwich City,33066,Onel Hernández,F,26,1,2,1,1,6,19,1381,14,32,0,0,0,0
+2019/20,Norwich City,23199,Marco Stiepermann,F,24,0,0,0,3,3,18,1187,14,32,0,6,0,0
+2019/20,Norwich City,11111,Josip Drmic,F,21,1,0,0,3,0,18,637,5,12,0,0,1,0
+2019/20,Norwich City,22040,Mario Vrancic,M,20,1,0,0,1,4,15,628,6,19,0,3,0,0
+2019/20,Norwich City,8945,Sam Byram,D,17,0,0,3,4,4,9,1294,15,23,0,4,0,0
+2019/20,Norwich City,22047,Christoph Zimmermann,D,17,0,1,3,2,5,10,1431,16,27,0,3,0,0
+2019/20,Norwich City,24412,Tom Trybull,M,16,0,0,1,2,4,10,1136,14,25,0,2,0,0
+2019/20,Norwich City,3819,Grant Hanley,D,15,0,0,2,3,3,9,1262,14,25,0,4,0,1
+2019/20,Norwich City,24641,Adam Idah,F,12,0,0,0,0,1,11,221,1,9,0,0,0,0
+2019/20,Norwich City,25203,Lukas Rupp,M,12,0,0,0,2,1,9,699,8,18,0,1,0,0
+2019/20,Norwich City,49990,Ibrahim Amadou,M,11,0,0,1,2,2,7,756,8,20,0,1,0,0
+2019/20,Norwich City,6820,Ondrej Duda,M,10,0,0,1,2,1,7,729,9,9,0,0,0,0
+2019/20,Norwich City,15558,Moritz Leitner,M,9,0,0,0,1,1,7,684,7,16,0,1,0,0
+2019/20,Norwich City,33067,Dennis Srbeny,F,8,1,0,0,2,1,5,41,0,2,0,0,0,0
+2019/20,Norwich City,12891,Timm Klose,D,7,0,0,0,0,0,7,585,7,13,0,0,0,0
+2019/20,Norwich City,26977,Josh Martin,F,5,0,0,0,0,0,5,32,0,2,0,0,0,0
+2019/20,Norwich City,8710,Patrick Roberts,M,3,0,0,0,0,0,3,24,0,2,0,0,0,0
+2019/20,Norwich City,19675,Michael McGovern,G,2,0,0,0,0,0,2,158,1,6,7,0,0,0
+2019/20,Norwich City,5361,Ralf Fährmann,G,1,0,0,0,0,0,1,22,1,1,1,0,0,0
+2019/20,Norwich City,19752,Akin Famewo,D,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+2019/20,Norwich City,32995,Jordan Thomas,D,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+2019/20,Sheffield United,9169,George Baldock,D,38,2,3,13,14,12,12,3420,38,39,0,7,0,0
+2019/20,Sheffield United,3581,Chris Basham,D,38,0,1,12,14,12,12,3255,38,37,0,4,0,0
+2019/20,Sheffield United,3924,Oliver Norwood,M,38,1,1,9,14,12,12,3100,37,36,0,8,0,0
+2019/20,Sheffield United,4258,Enda Stevens,D,38,2,4,12,14,12,12,3346,38,39,0,7,0,0
+2019/20,Sheffield United,4394,John Egan,D,36,2,0,12,14,11,11,3189,36,30,0,3,1,0
+2019/20,Sheffield United,13988,Dean Henderson,G,36,0,0,13,14,11,11,3240,36,33,97,2,0,0
+2019/20,Sheffield United,8107,Oliver McBurnie,F,36,6,0,0,14,10,12,2116,24,25,0,4,0,0
+2019/20,Sheffield United,4509,John Lundstram,M,34,5,3,9,12,11,11,2455,26,29,0,5,0,0
+2019/20,Sheffield United,9491,Jack O'Connell,D,33,0,1,12,13,11,9,2915,32,28,0,4,0,0
+2019/20,Sheffield United,8444,John Fleck,M,30,5,2,8,10,9,11,2517,28,30,0,8,0,0
+2019/20,Sheffield United,19603,Lys Mousset,F,30,6,4,0,12,10,8,1232,11,15,0,1,0,0
+2019/20,Sheffield United,2340,David McGoldrick,F,28,2,2,2,10,10,8,1822,22,18,0,2,0,0
+2019/20,Sheffield United,4626,Billy Sharp,F,25,3,2,0,7,8,10,1047,10,10,0,1,1,0
+2019/20,Sheffield United,4725,Callum Robinson,F,16,1,1,0,3,8,5,676,9,6,0,1,0,0
+2019/20,Sheffield United,21614,Sander Berge,M,14,1,1,1,6,3,5,949,12,11,0,0,0,0
+2019/20,Sheffield United,9266,Ben Osborn,M,13,0,0,2,8,3,2,591,6,4,0,0,0,0
+2019/20,Sheffield United,3320,Luke Freeman,M,11,0,0,0,3,5,3,362,3,5,0,2,0,0
+2019/20,Sheffield United,10451,Muhamed Besic,M,9,0,0,0,4,2,3,245,2,2,0,2,0,0
+2019/20,Sheffield United,3222,Phil Jagielka,D,6,0,0,0,4,1,1,240,2,6,0,0,0,0
+2019/20,Sheffield United,3902,Jack Robinson,D,6,0,0,1,1,2,3,505,6,11,0,0,0,0
+2019/20,Sheffield United,11034,Richairo Zivkovic,F,5,0,0,0,1,0,4,107,0,4,0,0,0,0
+2019/20,Sheffield United,2593,Leon Clarke,F,2,0,0,0,0,0,2,33,0,2,0,0,0,0
+2019/20,Sheffield United,9567,Kieron Freeman,D,2,0,0,0,1,0,1,6,0,0,0,0,0,0
+2019/20,Sheffield United,4727,Simon Moore,G,2,0,0,0,0,1,1,180,2,6,5,0,0,0
+2019/20,Sheffield United,4159,Ravel Morrison,M,1,0,0,0,0,0,1,12,0,0,0,0,0,0
+2019/20,Sheffield United,3389,Jack Rodwell,M,1,0,0,0,0,1,0,15,0,0,0,0,0,0
+2019/20,Southampton,8245,Danny Ings,F,38,22,2,1,15,7,16,2812,32,44,0,3,0,0
+2019/20,Southampton,4617,James Ward-Prowse,M,38,5,3,9,15,7,16,3420,38,60,0,9,0,0
+2019/20,Southampton,19589,Jan Bednarek,D,34,1,1,7,12,7,15,3058,34,57,0,4,0,1
+2019/20,Southampton,5272,Pierre-Emile Højbjerg,M,33,0,1,7,12,6,15,2750,30,51,0,5,0,0
+2019/20,Southampton,2886,Ryan Bertrand,D,32,1,1,7,13,5,14,2744,31,44,0,3,1,0
+2019/20,Southampton,3811,Nathan Redmond,M,32,4,4,6,13,6,13,2768,32,51,0,2,0,0
+2019/20,Southampton,10905,Ché Adams,F,30,4,2,0,13,5,12,1105,12,17,0,0,0,0
+2019/20,Southampton,12186,Stuart Armstrong,M,30,5,3,3,13,6,11,1713,19,25,0,4,0,0
+2019/20,Southampton,4286,Oriol Romeu,M,30,0,0,3,13,5,12,1858,20,38,0,5,0,0
+2019/20,Southampton,4573,Alex McCarthy,G,28,0,0,7,13,5,10,2520,28,35,79,0,0,0
+2019/20,Southampton,4612,Jack Stephens,D,28,1,3,7,12,4,12,2453,27,38,0,4,1,0
+2019/20,Southampton,3206,Shane Long,F,26,2,2,0,12,4,10,1399,15,20,0,0,0,0
+2019/20,Southampton,21532,Michael Obafemi,F,21,3,2,0,9,3,9,661,8,12,0,1,0,0
+2019/20,Southampton,12584,Sofiane Boufal,F,20,0,2,0,5,4,11,760,8,17,0,2,0,0
+2019/20,Southampton,20109,Jannik Vestergaard,D,19,1,0,4,6,3,10,1497,17,26,0,3,0,0
+2019/20,Southampton,52153,Moussa Djenepo,F,18,2,2,1,7,2,9,926,10,13,0,4,1,0
+2019/20,Southampton,11347,Cédric Soares,D,16,0,1,3,8,3,5,1309,16,18,0,1,0,0
+2019/20,Southampton,15011,Yan Valery,D,11,0,0,0,3,1,7,782,10,20,0,1,0,0
+2019/20,Southampton,15269,Angus Gunn,G,10,0,0,2,2,2,6,900,10,25,30,0,0,0
+2019/20,Southampton,13815,Kyle Walker-Peters,D,10,0,0,2,5,3,2,704,7,8,0,1,0,0
+2019/20,Southampton,14997,Will Smallbone,M,9,0,2,0,5,3,1,393,4,4,0,0,0,0
+2019/20,Southampton,4605,Maya Yoshida,D,8,0,0,1,2,2,4,558,6,18,0,1,0,0
+2019/20,Southampton,25892,Kevin Danso,D,6,0,1,1,1,2,3,276,3,8,0,0,1,0
+2019/20,Southampton,14452,Nathan Tella,F,1,0,0,0,1,0,0,2,0,0,0,0,0,0
+2019/20,Southampton,15013,Jake Vokins,D,1,0,0,0,0,1,0,90,1,1,0,0,0,0
+2019/20,Tottenham Hotspur,5762,Lucas Moura,F,35,4,4,1,15,9,11,2247,25,29,0,3,0,0
+2019/20,Tottenham Hotspur,4916,Toby Alderweireld,D,33,2,2,7,15,9,9,2958,33,39,0,7,0,1
+2019/20,Tottenham Hotspur,11293,Sèrge Aurier,D,33,1,5,6,15,9,9,2705,31,32,0,2,1,1
+2019/20,Tottenham Hotspur,7488,Harry Winks,M,31,0,0,4,15,8,8,2228,26,30,0,9,0,0
+2019/20,Tottenham Hotspur,4999,Son Heung-Min,F,30,11,10,4,14,8,8,2485,28,31,0,0,1,0
+2019/20,Tottenham Hotspur,3960,Harry Kane,F,29,18,2,5,13,8,8,2589,29,36,0,4,0,0
+2019/20,Tottenham Hotspur,20224,Davinson Sánchez,D,29,0,0,4,12,9,8,2431,27,37,0,6,0,0
+2019/20,Tottenham Hotspur,4549,Moussa Sissoko,M,29,2,1,5,13,8,8,2455,28,31,0,8,0,0
+2019/20,Tottenham Hotspur,19851,Giovani Lo Celso,M,28,0,2,2,10,10,8,1486,15,18,0,6,0,0
+2019/20,Tottenham Hotspur,9167,Dele Alli,M,25,8,4,0,9,8,8,1851,21,26,0,2,0,0
+2019/20,Tottenham Hotspur,4842,Érik Lamela,M,25,2,1,3,10,8,7,1211,12,12,0,3,0,0
+2019/20,Tottenham Hotspur,4666,Jan Vertonghen,D,23,1,1,4,10,6,7,1646,19,24,0,2,0,0
+2019/20,Tottenham Hotspur,4664,Hugo Lloris,G,21,0,0,6,11,6,4,1808,21,21,81,0,0,0
+2019/20,Tottenham Hotspur,25329,Tanguy Ndombélé,M,21,2,2,0,5,7,9,1007,12,17,0,3,0,0
+2019/20,Tottenham Hotspur,4845,Christian Eriksen,M,20,2,2,1,7,5,8,1090,10,18,0,5,0,0
+2019/20,Tottenham Hotspur,4112,Eric Dier,D,19,0,2,3,11,4,4,1341,15,23,0,5,0,0
+2019/20,Tottenham Hotspur,4408,Ben Davies,D,18,0,0,4,8,5,5,1431,16,19,0,6,0,0
+2019/20,Tottenham Hotspur,4600,Paulo Gazzaniga,G,18,0,0,2,5,5,8,1612,17,26,59,1,0,0
+2019/20,Tottenham Hotspur,12703,Steven Bergwijn,F,14,3,1,0,7,4,3,702,8,9,0,2,0,0
+2019/20,Tottenham Hotspur,3507,Danny Rose,D,12,0,0,0,4,3,5,894,10,14,0,5,0,0
+2019/20,Tottenham Hotspur,50857,Gedson Fernandes,M,7,0,0,0,3,3,1,62,0,1,0,0,0,0
+2019/20,Tottenham Hotspur,21413,Oliver Skipp,M,7,0,0,0,4,3,0,75,1,1,0,0,0,0
+2019/20,Tottenham Hotspur,14656,Ryan Sessegnon,M,6,0,0,0,3,2,1,342,4,5,0,0,0,0
+2019/20,Tottenham Hotspur,15116,Japhet Tanganga,D,6,0,0,2,1,2,3,526,6,7,0,1,0,0
+2019/20,Tottenham Hotspur,25309,Juan Foyth,D,4,0,0,0,1,3,0,66,1,3,0,1,0,0
+2019/20,Tottenham Hotspur,13815,Kyle Walker-Peters,D,3,0,0,0,1,1,1,242,3,4,0,0,0,0
+2019/20,Tottenham Hotspur,43856,Troy Parrott,F,2,0,0,0,1,0,1,6,0,0,0,0,0,0
+2019/20,Tottenham Hotspur,4816,Victor Wanyama,M,2,0,0,0,1,0,1,24,0,2,0,1,0,0
+2019/20,Tottenham Hotspur,15938,Georges-Kévin Nkoudou,M,1,0,0,0,1,0,0,2,0,0,0,0,0,0
+2019/20,Watford,2932,Ben Foster,G,38,0,0,9,8,10,20,3420,38,64,117,1,0,0
+2019/20,Watford,13823,Abdoulaye Doucouré,M,37,4,2,5,8,9,20,3167,36,61,0,9,0,1
+2019/20,Watford,4843,Étienne Capoue,M,30,0,3,6,8,6,16,2632,30,48,0,8,0,0
+2019/20,Watford,8589,Will Hughes,M,30,1,1,3,6,7,17,2262,27,46,0,9,0,0
+2019/20,Watford,3160,Craig Cathcart,D,29,0,0,8,6,8,15,2490,28,37,0,7,0,0
+2019/20,Watford,4198,Craig Dawson,D,29,2,0,4,6,8,15,2359,26,49,0,6,0,0
+2019/20,Watford,4777,Gerard Deulofeu,F,28,4,5,5,6,9,13,2105,25,34,0,3,0,0
+2019/20,Watford,22546,Kiko Femenía,D,28,0,0,4,6,6,16,2241,26,46,0,5,0,0
+2019/20,Watford,11213,Roberto Pereyra,M,28,3,0,2,5,10,13,1653,17,27,0,4,0,0
+2019/20,Watford,49796,Ismaïla Sarr,F,28,5,4,2,7,6,15,2028,22,35,0,1,0,0
+2019/20,Watford,9947,Troy Deeney,F,27,10,2,6,7,5,15,2234,26,39,0,3,0,0
+2019/20,Watford,19605,Christian Kabasele,D,27,0,2,6,7,9,11,2252,26,34,0,1,2,0
+2019/20,Watford,49992,Adam Masina,D,26,1,0,4,7,5,14,1818,20,31,0,3,0,0
+2019/20,Watford,9060,Andre Gray,F,23,2,0,0,3,6,14,746,7,17,0,1,0,0
+2019/20,Watford,4105,Nathaniel Chalobah,M,22,0,1,1,6,7,9,926,10,14,0,1,0,0
+2019/20,Watford,3251,Adrian Mariappa,D,20,0,0,3,4,4,12,1510,15,33,0,4,1,1
+2019/20,Watford,3448,Tom Cleverley,M,18,1,0,1,2,6,10,966,11,26,0,2,0,0
+2019/20,Watford,3452,Danny Welbeck,F,18,2,0,0,2,4,12,815,8,15,0,0,0,0
+2019/20,Watford,5713,José Holebas,D,14,0,0,1,2,4,8,1024,11,28,0,5,0,0
+2019/20,Watford,10480,Daryl Janmaat,D,8,0,1,3,1,5,2,608,7,5,0,1,0,1
+2019/20,Watford,50960,Ignacio Pussetto,F,7,0,0,0,1,2,4,67,0,3,0,1,0,0
+2019/20,Watford,19618,Isaac Success,F,5,0,0,0,1,1,3,65,0,3,0,1,0,0
+2019/20,Watford,19678,Domingos Quina,M,4,0,0,0,1,0,3,18,0,2,0,0,0,0
+2019/20,Watford,25292,Dimitri Foulquier,D,3,0,0,0,0,1,2,58,1,6,0,0,0,0
+2019/20,Watford,72371,João Pedro,F,3,0,0,0,0,0,3,22,0,1,0,0,0,0
+2019/20,Watford,13822,Sebastian Prödl,D,1,0,0,0,0,1,0,57,1,0,0,0,0,0
+2019/20,West Ham United,15202,Declan Rice,M,38,1,3,7,10,9,19,3420,38,62,0,6,0,0
+2019/20,West Ham United,25246,Pablo Fornals,M,36,2,5,3,10,9,17,2177,24,35,0,3,0,0
+2019/20,West Ham United,3014,Mark Noble,M,33,4,3,3,9,8,16,2684,32,44,0,5,0,0
+2019/20,West Ham United,49884,Issa Diop,D,32,3,1,4,8,9,15,2766,31,54,0,8,0,0
+2019/20,West Ham United,49761,Sébastien Haller,F,32,7,1,4,9,7,16,2263,24,41,0,1,0,0
+2019/20,West Ham United,8897,Aaron Cresswell,D,31,3,0,5,8,6,17,2730,31,51,0,7,0,0
+2019/20,West Ham United,5514,Angelo Ogbonna,D,31,2,0,6,10,8,13,2787,31,44,0,4,0,1
+2019/20,West Ham United,3958,Ryan Fredericks,D,27,0,3,6,8,6,13,2237,25,39,0,7,0,0
+2019/20,West Ham United,3309,Lukasz Fabianski,G,25,0,0,5,8,7,10,2119,25,34,72,1,0,0
+2019/20,West Ham United,6784,Felipe Anderson,M,25,1,4,0,6,4,15,1505,20,27,0,1,0,0
+2019/20,West Ham United,9595,Michail Antonio,F,24,10,3,1,7,5,12,1770,19,30,0,3,0,0
+2019/20,West Ham United,13872,Manuel Lanzini,M,24,0,2,2,4,8,12,1377,14,30,0,1,0,0
+2019/20,West Ham United,4558,Robert Snodgrass,M,24,5,5,1,6,4,14,1511,17,33,0,4,0,0
+2019/20,West Ham United,6389,Andrii Yarmolenko,M,23,5,1,0,8,7,8,988,10,17,0,2,0,0
+2019/20,West Ham United,32435,Fabián Balbuena,D,17,1,0,3,6,2,9,1176,13,24,0,2,0,0
+2019/20,West Ham United,11284,Arthur Masuaku,D,17,0,1,1,5,5,7,932,10,18,0,4,1,0
+2019/20,West Ham United,8868,Jarrod Bowen,F,13,1,4,0,4,3,6,919,11,13,0,0,0,0
+2019/20,West Ham United,25183,Tomás Soucek,M,13,3,0,1,3,4,6,1041,12,18,0,0,0,1
+2019/20,West Ham United,3654,Pablo Zabaleta,D,10,0,0,0,1,3,6,589,6,14,0,2,0,0
+2019/20,West Ham United,5248,Albian Ajeti,F,9,0,0,0,0,2,7,132,0,3,0,0,0,0
+2019/20,West Ham United,4909,Roberto Jiménez,G,8,0,0,0,0,2,6,686,7,17,36,0,0,1
+2019/20,West Ham United,3547,Jack Wilshere,M,8,0,0,0,3,2,3,210,2,5,0,0,0,0
+2019/20,West Ham United,10430,Carlos Sánchez,M,6,0,0,0,3,1,2,113,1,2,0,0,0,0
+2019/20,West Ham United,2912,David Martin,G,5,0,0,2,2,0,3,435,4,6,15,1,0,0
+2019/20,West Ham United,20064,Jeremy Ngakia,D,5,0,0,0,1,0,4,441,5,8,0,0,0,0
+2019/20,West Ham United,15212,Ben Johnson,D,3,0,0,0,1,2,0,270,3,3,0,0,0,0
+2019/20,West Ham United,4161,Chicharito,F,2,1,0,0,0,1,1,107,1,4,0,0,0,0
+2019/20,West Ham United,14637,Nathan Holland,M,2,0,0,0,0,0,2,31,0,1,0,0,0,0
+2019/20,West Ham United,2216,Darren Randolph,G,2,0,0,0,0,1,1,180,2,5,6,0,0,0
+2019/20,Wolverhampton Wanderers,4136,Conor Coady,D,38,0,0,13,15,14,9,3420,38,40,0,5,0,0
+2019/20,Wolverhampton Wanderers,11180,Rúben Neves,M,38,2,2,9,15,14,9,3059,35,35,0,9,0,0
+2019/20,Wolverhampton Wanderers,5866,Leander Dendoncker,M,38,4,0,10,15,14,9,2794,32,34,0,5,0,1
+2019/20,Wolverhampton Wanderers,11341,Rui Patrício,G,38,0,0,13,15,14,9,3420,38,40,91,0,0,0
+2019/20,Wolverhampton Wanderers,11259,João Moutinho,M,38,1,6,10,15,14,9,3107,34,36,0,7,0,0
+2019/20,Wolverhampton Wanderers,11071,Raúl Jiménez,F,38,17,6,5,15,14,9,3244,37,36,0,3,0,0
+2019/20,Wolverhampton Wanderers,4979,Adama Traoré,F,37,4,9,1,15,13,9,2606,27,33,0,1,0,0
+2019/20,Wolverhampton Wanderers,4229,Matt Doherty,D,36,4,3,12,15,14,7,2840,32,31,0,1,0,0
+2019/20,Wolverhampton Wanderers,20277,Jonny,D,35,2,2,9,14,13,8,2890,33,35,0,4,0,0
+2019/20,Wolverhampton Wanderers,19758,Diogo Jota,F,34,7,1,0,12,13,9,2297,27,28,0,4,0,0
+2019/20,Wolverhampton Wanderers,20745,Romain Saïss,D,33,2,1,10,14,10,9,2706,31,34,0,10,1,0
+2019/20,Wolverhampton Wanderers,21998,Pedro Neto,F,29,3,3,0,13,10,6,928,9,12,0,3,0,0
+2019/20,Wolverhampton Wanderers,16204,Willy Boly,D,22,0,1,12,9,9,4,1979,22,15,0,1,1,0
+2019/20,Wolverhampton Wanderers,20171,Rúben Vinagre,D,16,0,0,1,6,6,4,646,6,6,0,1,0,0
+2019/20,Wolverhampton Wanderers,22870,Patrick Cutrone,F,12,2,0,0,5,5,2,295,3,6,0,0,0,0
+2019/20,Wolverhampton Wanderers,4351,Ryan Bennett,D,11,0,0,1,4,4,3,606,7,9,0,2,0,0
+2019/20,Wolverhampton Wanderers,11362,Daniel Podence,F,9,1,0,0,4,4,1,287,3,0,0,0,0,0
+2019/20,Wolverhampton Wanderers,15259,Morgan Gibbs-White,M,7,0,0,0,3,1,3,126,1,2,0,0,0,0
+2019/20,Wolverhampton Wanderers,13522,Maximilian Kilman,D,3,0,0,0,1,1,1,184,2,2,0,0,0,0
+2019/20,Wolverhampton Wanderers,19564,Jesús Vallejo,D,2,0,0,0,0,1,1,162,1,6,0,1,0,0
+2019/20,Wolverhampton Wanderers,25191,Bruno Jordão,M,1,0,0,0,0,0,1,6,0,0,0,0,0,0

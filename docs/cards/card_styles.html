@@ -1,0 +1,288 @@
+<title>D2T Card Styles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: a swatch-book. Each decision is one row of cards on a quiet ground, with the choice named underneath. One layout switch at the top re-draws every card. */
+:root {
+  --bg: #e9ecef;
+  --panel: #f7f8f9;
+  --ink: #161d24;
+  --muted: #5b6670;
+  --line: #d0d6db;
+  --accent: #5a3fc0;
+  --accent-ink: #ffffff;
+  --display: "Saira Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #12161b; --panel: #1a2027; --ink: #e7ebee; --muted: #9aa5ae; --line: #2c353e; --accent: #a993ff; --accent-ink: #160b3a; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #12161b; --panel: #1a2027; --ink: #e7ebee; --muted: #9aa5ae; --line: #2c353e; --accent: #a993ff; --accent-ink: #160b3a; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 16px/1.5 var(--body); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 64px; display: grid; gap: 52px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.05; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); font-weight: 800; text-transform: uppercase; }
+h2 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 700; text-transform: uppercase; }
+h3 { font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+p { margin: 0; max-width: 68ch; }
+.eyebrow { font: 600 .8rem/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.lede { font-size: 1.1rem; color: var(--muted); }
+.small { font-size: .88rem; color: var(--muted); }
+.stack { display: grid; gap: 12px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.switch { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; border: 1px solid var(--line); border-radius: 99px; background: var(--panel); }
+.switch button { border: 0; background: transparent; color: var(--ink); border-radius: 99px; padding: 6px 14px; font: 700 .95rem var(--display); letter-spacing: .05em; cursor: pointer; }
+.switch button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+@media (max-width: 640px) { .bar { position: static !important; } }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; border-bottom: 1px solid var(--line); }
+
+.options { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
+.opt { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.opt .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.opt .cards.one { grid-template-columns: minmax(0, 170px); justify-content: center; }
+.opt.pick { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.tag { font: 700 .72rem/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.layouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+.ladder { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 760px) { .ladder { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.ladder figure { margin: 0; display: grid; gap: 8px; justify-items: center; text-align: center; }
+.ladder figcaption { font: 700 .95rem var(--display); text-transform: uppercase; letter-spacing: .05em; }
+.ladder figcaption span { display: block; font: 400 .82rem var(--body); text-transform: none; letter-spacing: 0; color: var(--muted); }
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.notes .opt { gap: 8px; }
+
+/* ---------- Cards ---------- */
+.card {
+  --a: #c58f5c; --m: #a8693d; --b: #7d4f2b; --glow: transparent; --ci: #2b1a0c; --line-c: rgba(0,0,0,.28); --chip: rgba(0,0,0,.14); --trim: transparent;
+  position: relative; width: 100%; max-width: 100%; aspect-ratio: 0.7; container-type: inline-size;
+  clip-path: polygon(50% 0, 100% 6%, 100% 88%, 50% 100%, 0 88%, 0 6%);
+  background: radial-gradient(120% 70% at 100% 100%, var(--glow), transparent 65%), linear-gradient(155deg, var(--a), var(--m) 55%, var(--b));
+  color: var(--ci); font-family: var(--display); overflow: hidden;
+}
+.card::before { content: ""; position: absolute; inset: 3.2cqi; clip-path: polygon(50% 0, 100% 6%, 100% 88%, 50% 100%, 0 88%, 0 6%); background: linear-gradient(170deg, rgba(255,255,255,.34), rgba(255,255,255,0) 45%); pointer-events: none; z-index: 1; }
+.card::after { content: ""; position: absolute; inset: 5.4cqi; clip-path: polygon(50% 0, 100% 6%, 100% 88%, 50% 100%, 0 88%, 0 6%); box-shadow: inset 0 0 0 .7cqi var(--trim); pointer-events: none; z-index: 3; }
+.card .in { position: absolute; inset: 8% 10% 16%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; gap: 1.5cqi; z-index: 2; }
+.card .top { display: flex; justify-content: space-between; align-items: flex-start; }
+.card .ovr { font-size: 26cqi; font-weight: 800; line-height: .82; font-variant-numeric: tabular-nums; }
+.card .pos { font-size: 10cqi; font-weight: 700; letter-spacing: .05em; }
+.card .corner-r { font-size: 11cqi; font-weight: 800; letter-spacing: .06em; line-height: 1; }
+.card .mid { display: grid; place-items: center; min-height: 0; position: relative; }
+.card.L-A .mid svg { height: 26cqi; width: auto; }
+.card .name { font-size: 12cqi; font-weight: 800; text-transform: uppercase; line-height: 1; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-bottom: 1px solid var(--line-c); padding-bottom: 2cqi; }
+.card .club { font-size: 7.5cqi; font-weight: 600; text-align: center; text-transform: uppercase; letter-spacing: .08em; opacity: .8; margin-top: 1cqi; }
+.card .stats { display: grid; grid-template-columns: repeat(var(--n, 6), minmax(0, 1fr)); margin-top: 2cqi; text-align: center; }
+.card .stats span { display: grid; gap: .8cqi; border-left: 1px solid var(--line-c); }
+.card .stats span:first-child { border-left: 0; }
+.card .stats b { font-size: 9.5cqi; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.card .stats i { font-size: 5.6cqi; font-style: normal; font-weight: 700; letter-spacing: .06em; opacity: .8; }
+.card .story { position: absolute; left: 0; right: 0; bottom: -13cqi; text-align: center; font-size: 7cqi; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-inline: 10cqi; }
+.card .kind { position: absolute; top: 1.6%; left: 0; right: 0; text-align: center; font-size: 6cqi; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; z-index: 2; opacity: .85; }
+
+/* Layout B: rating big and centred, badge top left, position top right */
+.card.L-B .top, .card.L-C .top { position: absolute; inset: 0 0 auto; z-index: 1; align-items: center; }
+.card.L-B .top svg { height: 16cqi; width: auto; }
+.card.L-B .mid, .card.L-C .mid { grid-row: 1 / 3; }
+.card .big { margin-top: 7cqi; font-size: 47cqi; font-weight: 800; line-height: .8; font-variant-numeric: tabular-nums; letter-spacing: -.02em; text-align: center; position: relative; }
+/* Layout C: like B, with the badge large and faint behind the number */
+.card.L-C .mid .ghost { position: absolute; inset: 0; display: grid; place-items: center; opacity: .22; }
+.card.L-C .mid .ghost svg { height: 62cqi; width: auto; }
+
+/* ---------- Tier colours ---------- */
+.card.bronze { --a: #e2ac78; --m: #b8723f; --b: #6f3d27; --glow: rgba(196, 82, 92, .38); --ci: #2b1a0c; }
+.card.silver { --a: #f6f8fa; --m: #cdd5dd; --b: #9aa0b2; --glow: rgba(150, 168, 255, .4); --ci: #1d2327; }
+.card.gold { --a: #fceca6; --m: #e5ba4b; --b: #b67b18; --glow: rgba(255, 128, 52, .38); --ci: #2a1f04; }
+
+/* Club's best player */
+.card.best-purple { --a: #b08af7; --m: #6d3fd1; --b: #261063; --glow: rgba(240, 78, 196, .42); --ci: #f6efff; --line-c: rgba(255,255,255,.35); --chip: rgba(255,255,255,.14); --trim: #e9c46a; }
+.card.best-club { --a: var(--club-a); --m: color-mix(in srgb, var(--club-a), var(--club-b)); --b: var(--club-b); --ci: var(--club-ink); --line-c: var(--club-line); --chip: rgba(127,127,127,.22); --trim: var(--club-trim); }
+.card.best-emerald { --a: #4fd6a0; --m: #1f9a6c; --b: #0a3b2b; --glow: rgba(40, 170, 220, .35); --ci: #effff8; --line-c: rgba(255,255,255,.35); --chip: rgba(255,255,255,.14); --trim: #d8f6e6; }
+.card.best-navy { --a: #3b6fa6; --m: #1c3d66; --b: #0a1626; --glow: rgba(110, 80, 220, .35); --ci: #f6e3a1; --line-c: rgba(246,227,161,.4); --chip: rgba(255,255,255,.12); --trim: #f6e3a1; }
+.card.best-orchid { --a: #f6cff3; --m: #d58ee0; --b: #9b3fa6; --glow: rgba(120, 90, 255, .3); --ci: #2c0a31; --line-c: rgba(44,10,49,.3); --chip: rgba(0,0,0,.1); --trim: #ffffff; }
+
+/* Legends */
+.card.leg-platinum { --a: #f6f8fa; --m: #d3d9df; --b: #aab3bc; --ci: #1b2228; --trim: rgba(255,255,255,.9); }
+.card.leg-platinum .holo, .card.leg-pearl .holo { position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: multiply; opacity: .55;
+  background: linear-gradient(115deg, #ff7ac8 0%, #7cc8ff 18%, #8dffb4 34%, #ffe36e 50%, #ff92dc 66%, #8fb0ff 82%, #ff7ac8 100%); background-size: 300% 300%; animation: holo 7s ease-in-out infinite alternate; }
+.card.leg-red { --a: #e0324a; --m: #a5132b; --b: #4a0612; --glow: rgba(255, 120, 40, .35); --ci: #f8dc8a; --line-c: rgba(248,220,138,.45); --chip: rgba(255,255,255,.12); --trim: #f0c75e; }
+.card.leg-black { --a: #45454a; --m: #1c1c20; --b: #050506; --glow: rgba(232, 198, 106, .18); --ci: #e8c66a; --line-c: rgba(232,198,106,.45); --chip: rgba(232,198,106,.14); --trim: #e8c66a; }
+.card.leg-pearl { --a: #fffdf8; --m: #f1ece2; --b: #e7e1d6; --ci: #2a2620; --trim: transparent; }
+.card.leg-pearl .holo { mix-blend-mode: normal; opacity: 1; }
+.card .face { position: absolute; inset: 3.2cqi; z-index: 1; clip-path: polygon(50% 0, 100% 6%, 100% 88%, 50% 100%, 0 88%, 0 6%); background: linear-gradient(155deg, #fffdf8, #e9e2d5); }
+.card.leg-icon { --a: #fbf5e3; --m: #ecdcb0; --b: #d9c48f; --glow: rgba(200, 120, 60, .25); --ci: #3a2a08; --line-c: rgba(58,42,8,.3); --trim: #8a6d1f; }
+.card.leg-icon::before { background: linear-gradient(170deg, rgba(255,255,255,.34), rgba(255,255,255,0) 45%), repeating-linear-gradient(135deg, rgba(255,255,255,.22) 0 2cqi, rgba(255,255,255,0) 2cqi 6cqi); }
+@keyframes holo { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+@media (prefers-reduced-motion: reduce) { .card .holo { animation: none; } }
+</style>
+
+<div class="wrap">
+  <header class="stack">
+    <span class="eyebrow">Drop2Top · card styles · draft ratings from 2007/08</span>
+    <h1>Card styles</h1>
+    <p class="lede">Two questions: where the club badge goes now there are no player photos, and what colours the five card types should be. Fees are gone from every card. Tap a layout below and every card on the page redraws in it.</p>
+  </header>
+
+  <div class="bar">
+    <div class="switch" role="group" aria-label="Card layout" id="layoutSwitch">
+      <button type="button" data-l="A">A · Badge in the middle</button>
+      <button type="button" data-l="B">B · Rating in the middle</button>
+      <button type="button" data-l="C">C · Rating over faded badge</button>
+    </div>
+  </div>
+
+  <section class="stack">
+    <span class="eyebrow">Question 1</span>
+    <h2>Where does the club badge go?</h2>
+    <p>The same two cards in each layout: a gold Gerrard and a bronze Savage, so you can see how a red badge and a white badge sit on different metals.</p>
+    <div class="layouts" id="layouts"></div>
+    <p class="small">The badges here are plain shields in club colours with a three-letter code, drawn by the game. Real crests would drop into the same spot, but they are trademarks, so a public App Store release would need licences or exactly this kind of stand-in.</p>
+  </section>
+
+  <section class="stack">
+    <span class="eyebrow">Question 2</span>
+    <h2>Bronze, silver, gold</h2>
+    <p>Fixed. Bronze under 65, silver 65 to 74, gold 75 and up. Every card has the lab's faded top border and a soft shift of colour across it: bronze runs copper to rose, silver cool white to lavender, gold lemon to amber. Only the special cards get the thin pinstripe inside the border.</p>
+    <div class="options" id="metals"></div>
+  </section>
+
+  <section class="stack">
+    <span class="eyebrow">Question 3</span>
+    <h2>Club's best player</h2>
+    <p>One card per club per season: the highest rated player in that squad. Each option shows Ronaldo (Man Utd, 93) and Kenny Miller (Derby, 66), because a club's best can be a superstar or the one decent player in a relegated side. The card has to make both feel special.</p>
+    <div class="options" id="best"></div>
+  </section>
+
+  <section class="stack">
+    <span class="eyebrow">Question 4</span>
+    <h2>Legends</h2>
+    <p>Shown on Ryan Giggs, 2007/08. How a player earns a legend card is still open (see the notes at the bottom). The legend has to look rarer than everything else, including a purple 93.</p>
+    <div class="options" id="legend"></div>
+  </section>
+
+  <section class="stack">
+    <span class="eyebrow">All five together</span>
+    <h2>The full set</h2>
+    <p id="setNote">Aiden's picks: purple for the club's best player, platinum with a colour shimmer for legends.</p>
+    <div class="switch" role="group" aria-label="Set to show" id="setSwitch">
+      <button type="button" data-s="aiden">Aiden's picks</button>
+      <button type="button" data-s="club">Club colours + red</button>
+      <button type="button" data-s="dark">Navy + black and gold</button>
+    </div>
+    <div class="ladder" id="ladder"></div>
+  </section>
+
+  <section class="stack">
+    <span class="eyebrow">Notes</span>
+    <h2>What to decide</h2>
+    <div class="notes">
+      <div class="opt"><h3>Layout</h3><p class="small">B or C makes the rating the hero, which suits a game where the rating is the decision. A wastes the middle of the card when the badge is a plain shield. C keeps the club in the picture without spending space on it, but the faded badge can muddy light cards (look at silver and platinum).</p></div>
+      <div class="opt"><h3>Club's best</h3><p class="small">Purple reads as special straight away and never clashes with a metal. Club colours are the most personal (a Derby fan gets a black and white card), but some clubs look like each other and a white club card can look like silver. An outline or a "Club's best" label helps whichever is chosen.</p></div>
+      <div class="opt"><h3>Legends</h3><p class="small">Platinum with a shimmer looks rarest, but at a glance it is close to silver, so it needs the moving shimmer to work. Red is bold and easy to tell apart, but Man Utd, Liverpool and Arsenal fans may read it as a club colour. Black and gold is unmistakable and works on any phone screen.</p></div>
+      <div class="opt"><h3>Who is a legend?</h3><p class="small">Options from data we have or will have: a player's best season when his career passes a bar (300 PL apps, 100 goals or 100 clean sheets); every PFA or Football Writers' Player of the Year season; or a hand-picked list. Same player can still have ordinary cards for his other seasons.</p></div>
+    </div>
+  </section>
+</div>
+
+<script>
+const PLAYERS = [{"name":"Robbie Savage","club":"Derby","pos":"MID","ovr":57,"stats":{"FIT":53,"WIN":45,"EXP":95,"GOL":33,"IMP":20,"DEF":47},"badges":["Relegated","Veteran","Moved mid-season"],"tier":"bronze"},{"name":"Nani","club":"Man Utd","pos":"MID","ovr":74,"stats":{"FIT":74,"WIN":88,"EXP":63,"GOL":49,"IMP":45,"DEF":89},"badges":["Champion","PL debut season"],"tier":"silver"},{"name":"Steven Gerrard","club":"Liverpool","pos":"MID","ovr":88,"stats":{"FIT":91,"WIN":85,"EXP":94,"GOL":67,"IMP":71,"DEF":89},"badges":["Veteran"],"tier":"gold"},{"name":"Kenny Miller","club":"Derby","pos":"FWD","ovr":66,"stats":{"FIT":82,"WIN":29,"EXP":72,"GOL":54,"IMP":77,"DEF":30},"badges":["Club top scorer","Relegated"],"tier":"best"},{"name":"Cristiano Ronaldo","club":"Man Utd","pos":"FWD","ovr":93,"stats":{"FIT":91,"WIN":95,"EXP":86,"GOL":99,"IMP":99,"DEF":96},"badges":["Golden Boot","Champion"],"tier":"best"},{"name":"Ryan Giggs","club":"Man Utd","pos":"MID","ovr":82,"stats":{"FIT":84,"WIN":92,"EXP":99,"GOL":47,"IMP":45,"DEF":93},"badges":["Champion","Veteran"],"tier":"gold"},{"name":"Pepe Reina","club":"Liverpool","pos":"GK","ovr":88,"stats":{"FIT":99,"WIN":88,"EXP":80,"WAL":92,"CLN":86},"badges":["Ever-present"],"tier":"best"},{"name":"Cesc Fabregas","club":"Arsenal","pos":"MID","ovr":83,"stats":{"FIT":87,"WIN":90,"EXP":84,"GOL":59,"IMP":59,"DEF":85},"badges":[],"tier":"gold"},{"name":"Roque Santa Cruz","club":"Blackburn","pos":"FWD","ovr":83,"stats":{"FIT":97,"WIN":69,"EXP":67,"GOL":80,"IMP":98,"DEF":68},"badges":["Club top scorer","PL debut season"],"tier":"best"},{"name":"Joe Cole","club":"Chelsea","pos":"MID","ovr":86,"stats":{"FIT":89,"WIN":92,"EXP":92,"GOL":59,"IMP":62,"DEF":91},"badges":[],"tier":"best"}];
+(function () {
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const P = n => PLAYERS.find(p => p.name === n);
+  // Plain shields in club colours: a stand-in for real crests.
+  const CLUBS = {
+    'Man Utd':   { code: 'MUN', f: '#da1f2b', s: '#111111', t: '#ffffff', style: 'solid', card: ['#d8202d', '#3a0508', '#ffffff', '#111111'] },
+    'Derby':     { code: 'DER', f: '#ffffff', s: '#111111', t: '#111111', style: 'band', card: ['#ffffff', '#b9bcbf', '#111111', '#111111'] },
+    'Liverpool': { code: 'LIV', f: '#c8102e', s: '#f6eb61', t: '#ffffff', style: 'solid', card: ['#d01734', '#4a0613', '#ffffff', '#f6eb61'] },
+    'Arsenal':   { code: 'ARS', f: '#ef0107', s: '#ffffff', t: '#ffffff', style: 'band', card: ['#ef1d23', '#5c0306', '#ffffff', '#ffffff'] },
+    'Blackburn': { code: 'BLB', f: '#1d5ba4', s: '#ffffff', t: '#1d5ba4', style: 'halves', card: ['#2a6ec0', '#0d2a52', '#ffffff', '#ffffff'] },
+    'Chelsea':   { code: 'CHE', f: '#034694', s: '#ffffff', t: '#ffffff', style: 'solid', card: ['#0a58b5', '#021f45', '#ffffff', '#ffffff'] }
+  };
+  function crest(club, cls) {
+    const c = CLUBS[club] || { code: club.slice(0, 3).toUpperCase(), f: '#777', s: '#fff', t: '#fff', style: 'solid' };
+    const shape = 'M50 4 L92 15 V50 C92 76 73 91 50 98 C27 91 8 76 8 50 V15 Z';
+    let fill = `<path d="${shape}" fill="${c.f}"/>`;
+    if (c.style === 'band') fill += `<path d="M8 58 H92 V66 H8 Z" fill="${c.s}" clip-path="url(#cp-${c.code})"/>`;
+    if (c.style === 'halves') fill += `<path d="M50 4 L92 15 V50 C92 76 73 91 50 98 Z" fill="${c.s}"/>`;
+    const text = c.style === 'halves'
+      ? `<text x="29" y="48" font-size="15" text-anchor="middle" fill="${c.s}" font-family="Saira Condensed, Arial Narrow, sans-serif" font-weight="800">${c.code.slice(0, 2)}</text><text x="71" y="48" font-size="15" text-anchor="middle" fill="${c.f}" font-family="Saira Condensed, Arial Narrow, sans-serif" font-weight="800">${c.code.slice(2)}</text>`
+      : `<text x="50" y="50" font-size="24" text-anchor="middle" fill="${c.t}" font-family="Saira Condensed, Arial Narrow, sans-serif" font-weight="800">${c.code}</text>`;
+    return `<svg class="${cls || ''}" viewBox="0 0 100 102" role="img" aria-label="${esc(club)} badge"><defs><clipPath id="cp-${c.code}"><path d="${shape}"/></clipPath></defs>${fill}<path d="${shape}" fill="none" stroke="${c.s}" stroke-width="4"/>${text}</svg>`;
+  }
+  const KIND = { 'best-purple': "Club's best", 'best-club': "Club's best", 'best-emerald': "Club's best", 'best-navy': "Club's best", 'best-orchid': "Club's best",
+    'leg-platinum': 'Legend', 'leg-red': 'Legend', 'leg-black': 'Legend', 'leg-pearl': 'Legend', 'leg-icon': 'Legend' };
+  let layout = 'B';
+  try { layout = localStorage.getItem('d2t-style-layout') || 'B'; } catch (e) {}
+  function card(p, style, opts) {
+    const L = (opts && opts.layout) || layout;
+    const keys = p.pos === 'GK' ? ['WAL', 'CLN', 'FIT', 'WIN', 'EXP'] : ['GOL', 'IMP', 'FIT', 'DEF', 'WIN', 'EXP'];
+    const stats = keys.map(k => `<span><b>${p.stats[k]}</b><i>${k}</i></span>`).join('');
+    const story = p.badges.find(b => b !== 'Relegated' && b !== 'Moved mid-season') || '';
+    const cc = CLUBS[p.club] && CLUBS[p.club].card;
+    const vars = style === 'best-club' && cc ? `--club-a:${cc[0]};--club-b:${cc[1]};--club-ink:${cc[2]};--club-trim:${cc[3]};--club-line:${cc[2]}55` : '';
+    const holo = (style === 'leg-platinum' || style === 'leg-pearl' ? '<div class="holo"></div>' : '') + (style === 'leg-pearl' ? '<div class="face"></div>' : '');
+    const kind = KIND[style] ? `<div class="kind">${KIND[style]}</div>` : '';
+    const mid = L === 'A' ? crest(p.club)
+      : L === 'B' ? `<div class="big">${p.ovr}</div>`
+      : `<div class="ghost">${crest(p.club)}</div><div class="big">${p.ovr}</div>`;
+    const top = L === 'A' ? `<div class="rate"><div class="ovr">${p.ovr}</div><div class="pos">${p.pos}</div></div>`
+      : `<span>${L === 'B' ? crest(p.club) : ''}</span><span class="corner-r">${p.pos}</span>`;
+    const label = `${p.name}, ${p.club}, ${p.pos}, rated ${p.ovr}`;
+    return `<div class="card L-${L} ${style}" style="${vars}" role="img" aria-label="${esc(label)}">${holo}${kind}
+      <div class="in"><div class="top">${top}</div>
+      <div class="mid">${mid}</div>
+      <div><div class="name">${esc(p.name.split(' ').slice(-1)[0])}</div><div class="club">${esc(p.club)} · 07/08</div></div>
+      <div class="stats" style="--n:${keys.length}">${stats}</div>
+      <div class="story">${esc(story)}</div></div></div>`;
+  }
+  function opt(title, tag, note, cards, pick) {
+    return `<div class="opt${pick ? ' pick' : ''}">${tag ? `<span class="tag">${tag}</span>` : ''}<h3>${title}</h3><div class="cards${cards.length === 1 ? ' one' : ''}">${cards.join('')}</div><p class="small">${note}</p></div>`;
+  }
+  const SETS = {
+    aiden: { best: 'best-purple', leg: 'leg-platinum', note: "Aiden's picks: purple for the club's best player, platinum with a colour shimmer for legends." },
+    club: { best: 'best-club', leg: 'leg-red', note: 'Club colours for the club\'s best player, red and gold for legends.' },
+    dark: { best: 'best-navy', leg: 'leg-black', note: 'Midnight navy for the club\'s best player, black and gold for legends.' }
+  };
+  let set = 'aiden';
+  function render() {
+    document.querySelectorAll('#layoutSwitch button').forEach(b => b.setAttribute('aria-pressed', b.dataset.l === layout));
+    document.querySelectorAll('#setSwitch button').forEach(b => b.setAttribute('aria-pressed', b.dataset.s === set));
+    const g = P('Steven Gerrard'), s = P('Robbie Savage'), r = P('Cristiano Ronaldo'), m = P('Kenny Miller'), gi = P('Ryan Giggs');
+    $('layouts').innerHTML = [
+      ['A', 'Badge in the middle', 'Rating top left, as FIFA does it. The badge takes the space a photo would fill.'],
+      ['B', 'Rating in the middle', 'The rating is the picture. Badge in the top left corner, position top right.'],
+      ['C', 'Rating over a faded badge', 'Big rating, with the badge large and faint behind it. Club colours stay on the card without a corner badge.']
+    ].map(([L, t, n]) => opt(t, 'Layout ' + L, n, [card(g, 'gold', { layout: L }), card(s, 'bronze', { layout: L })], L === layout)).join('');
+    $('metals').innerHTML = [
+      opt('Bronze', 'Under 65', 'Most of a relegated squad. Savage, Derby.', [card(s, 'bronze')]),
+      opt('Silver', '65 to 74', 'Good squad players. Nani, Man Utd.', [card(P('Nani'), 'silver')]),
+      opt('Gold', '75 and up', 'The best of the league. Gerrard, Liverpool.', [card(g, 'gold')])
+    ].join('');
+    $('best').innerHTML = [
+      ['best-purple', 'Purple', "Aiden's pick", 'Royal purple with a gold trim. Nothing else in the set is purple, so it always stands out.', true],
+      ['best-club', 'Club colours', 'Option', 'The card takes the club\'s own colours. Most personal; Derby\'s is black and white, United\'s red and black.'],
+      ['best-navy', 'Midnight navy', 'Option', 'Deep navy with gold lettering. Calm and premium; close to the lab\'s old hero card.'],
+      ['best-emerald', 'Emerald', 'Option', 'Green and white. Fresh, and nothing to do with any metal. Can read as Celtic or Plymouth-ish.'],
+      ['best-orchid', 'Orchid', 'Option', 'A lighter, pinker purple. Softer than royal purple and easier to read in daylight.']
+    ].map(([st, t, tag, n, pk]) => opt(t, tag, n, [card(r, st), card(m, st)], pk)).join('');
+    $('legend').innerHTML = [
+      ['leg-platinum', 'Platinum shimmer', "Aiden's pick", 'Pale platinum with a slow moving colour spectrum, like a holographic sticker. Still when reduced motion is on.', true],
+      ['leg-red', 'Red and gold', "Aiden's other pick", 'Deep red with gold lettering and trim. Bold and easy to spot across a grid.'],
+      ['leg-black', 'Black and gold', 'Option', 'Black card, gold foil lettering. Looks like a trophy; works in light and dark mode.'],
+      ['leg-pearl', 'Pearl with holo edge', 'Option', 'Warm white card with only the border in a moving spectrum. Quieter than full platinum.'],
+      ['leg-icon', 'Vintage cream', 'Option', 'Cream and gold with fine diagonal lines, like an old sticker album. Fits a 1992 to 2026 game.']
+    ].map(([st, t, tag, n, pk]) => opt(t, tag, n, [card(gi, st)], pk)).join('');
+    const S = SETS[set];
+    $('setNote').textContent = S.note;
+    $('ladder').innerHTML = [
+      [s, 'bronze', 'Bronze', 'Under 65'], [P('Nani'), 'silver', 'Silver', '65 to 74'], [g, 'gold', 'Gold', '75 and up'],
+      [r, S.best, "Club's best", 'One per club per season'], [gi, S.leg, 'Legend', 'Rule to be agreed']
+    ].map(([p, st, t, n]) => `<figure>${card(p, st)}<figcaption>${t}<span>${n}</span></figcaption></figure>`).join('');
+  }
+  $('layoutSwitch').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; layout = b.dataset.l; try { localStorage.setItem('d2t-style-layout', layout); } catch (err) {} render(); });
+  $('setSwitch').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; set = b.dataset.s; render(); });
+  render();
+})();
+</script>
