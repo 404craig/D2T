@@ -55,7 +55,65 @@
     const aliased = new Set();
     for (const l of out) if (!aliased.has(l.n)) { l.alias = 'L:' + l.n; aliased.add(l.n); }
     return out;
-  })();
+  
+  // ---------- Daily challenge ----------
+  // The same club and seed for everyone each day (UK date): one of the bottom 10 of any season, picked from a hash of
+  // the date. A real bottom-3 side plays Classic; anyone above the drop plays Dare2Dream. No respins, so everyone sees
+  // the same cards and only their choices differ. One go a day; it has its own save, so another run is never lost.
+  const DAILY_START = '2026-10-11';
+  GAME.today = () => {
+    try { return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); }
+    catch (e) { return new Date().toISOString().slice(0, 10); }
+  };
+  GAME.dailyNumber = (date) => Math.round((Date.parse(date + 'T12:00:00Z') - Date.parse(DAILY_START + 'T12:00:00Z')) / 864e5) + 1;
+  const dailyPool = (G.clubSeasons || []).filter((c) => c.pos > G.seasons[c.season].clubs.length - 10);
+  GAME.dailyEntry = (date) => {
+    const c = dailyPool[E.hash32('d2t-daily|' + date) % dailyPool.length], S = G.seasons[c.season];
+    const mode = c.pos > S.clubs.length - (S.relegationPlaces || 3) ? 'classic' : 'dare2dream';
+    return Object.assign({}, GAME.poolEntry(c.key), { mode, n: GAME.dailyNumber(date), date });
+  };
+  GAME.isDaily = () => !!(D2T.state.run && D2T.state.run.daily);
+  GAME.dailyResult = (date) => ((D2T.state.record.daily || {})[date || GAME.today()] || null);
+  const live = (r) => !!(r && r.eng && r.eng.seasonKey && r.eng.phase !== 'summary');
+  // The run not on screen: a run parked while the daily is played, or a daily put aside for another run.
+  GAME.otherRun = () => {
+    const st = D2T.state;
+    if (st.parked && live(st.parked)) return st.parked;
+    if (st.dailyRun && live(st.dailyRun) && !(st.record.daily || {})[st.dailyRun.daily]) return st.dailyRun;
+    return null;
+  };
+  // Put the run on screen aside (a daily goes to its own slot, anything else is parked) and bring `next` in.
+  const swapIn = (next) => {
+    const st = D2T.state, cur = st.run;
+    if (cur && live(cur) && cur !== next) { if (cur.daily) st.dailyRun = cur; else st.parked = cur; }
+    if (st.parked === next) st.parked = null;
+    if (st.dailyRun === next) st.dailyRun = null;
+    st.run = next;
+  };
+  GAME.switchToOther = () => { const o = GAME.otherRun(); if (o) { swapIn(o); D2T.save(); } return o; };
+  // Before a new Classic or Dare2Dream run: an unfinished daily keeps its own slot.
+  GAME.stashDaily = () => { const st = D2T.state; if (st.run && st.run.daily && live(st.run)) { st.dailyRun = st.run; st.run = null; D2T.save(); } };
+  GAME.startDaily = () => {
+    const st = D2T.state, date = GAME.today();
+    if (GAME.dailyResult(date)) return false;                                   // one go a day
+    if (st.run && st.run.daily === date) return true;
+    if (st.dailyRun && st.dailyRun.daily === date) { swapIn(st.dailyRun); D2T.save(); return true; }
+    const d = GAME.dailyEntry(date);
+    const eng = E.newRun({ seed: 'daily-' + date, mode: d.mode, catalogue: [{ key: d.key }], fixedClub: d.key });
+    eng.respins = 0;
+    swapIn({ step: 'table', eng, spun: true, daily: date });
+    GAME.chooseClub(d.key);
+    D2T.save();
+    return true;
+  };
+  GAME.dailyStreak = () => {
+    const days = D2T.state.record.daily || {};
+    let n = 0, d = new Date(GAME.today() + 'T12:00:00Z');
+    if (!days[GAME.today()]) d = new Date(d.getTime() - 864e5);                  // today not played yet: count to yesterday
+    while (days[d.toISOString().slice(0, 10)]) { n++; d = new Date(d.getTime() - 864e5); }
+    return n;
+  };
+})();
   GAME.legends = LEGENDS;
   GAME.season = (key) => { const S = G.seasons[key]; if (S && !S.legends) { S.legends = LEGENDS; E.indexSeason(S); } return S; };
 
@@ -291,6 +349,11 @@
     const entry = { key: k, mode, season: S.season, club: name, finish: F.finish, rise: F.rise, pts: F.pts, histFinish: F.histFinish,
       drop: F.finish <= n - rel, half: F.finish <= n / 2, top3: F.finish <= 3, title: F.finish === 1, at: new Date().toISOString().slice(0, 10) };
     if (mode === 'dare2dream') entry.dream = GAME.dreamMet(F.finish, F.histFinish);
+    if (run.daily) {
+      entry.daily = run.daily;
+      rec.daily = rec.daily || {};
+      if (!rec.daily[run.daily]) rec.daily[run.daily] = { n: GAME.dailyNumber(run.daily), club: name, season: S.season, mode, finish: F.finish, histFinish: F.histFinish, rise: F.rise, pts: F.pts, dream: entry.dream };
+    }
     rec.runs.push(entry);
     const book = mode === 'dare2dream' ? (rec.dreamClubs = rec.dreamClubs || {}) : rec.clubs;
     const c = book[k] || { runs: 0, finish: 99, rise: -99 };
@@ -302,7 +365,7 @@
   };
   // Classic's record. Cumulative counts (Craig, 11 Oct): a title also counts as top 3, top half and beating the drop.
   // Dare2Dream runs are kept apart: rescuing a relegated club is what these counts are about.
-  const classicRuns = () => D2T.state.record.runs.filter((r) => !r.mode || r.mode === 'classic');
+  const classicRuns = () => D2T.state.record.runs.filter((r) => (!r.mode || r.mode === 'classic') && !r.daily);
   GAME.record = () => {
     const runs = classicRuns();
     return { runs: runs.length, drop: runs.filter((r) => r.drop).length, half: runs.filter((r) => r.half).length,
@@ -311,7 +374,65 @@
   };
   GAME.classicRuns = classicRuns;
   GAME.dreamRecord = () => {
-    const runs = D2T.state.record.runs.filter((r) => r.mode === 'dare2dream');
+    const runs = D2T.state.record.runs.filter((r) => r.mode === 'dare2dream' && !r.daily);
     return { runs: runs.length, dreams: runs.filter((r) => r.dream).length, bestRise: runs.length ? Math.max(...runs.map((r) => r.rise)) : null };
+  };
+
+  // ---------- Daily challenge ----------
+  // The same club and seed for everyone each day (UK date): one of the bottom 10 of any season, picked from a hash of
+  // the date. A real bottom-3 side plays Classic; anyone above the drop plays Dare2Dream. No respins, so everyone sees
+  // the same cards and only their choices differ. One go a day; it has its own save, so another run is never lost.
+  const DAILY_START = '2026-10-11';
+  GAME.today = () => {
+    try { return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); }
+    catch (e) { return new Date().toISOString().slice(0, 10); }
+  };
+  GAME.dailyNumber = (date) => Math.round((Date.parse(date + 'T12:00:00Z') - Date.parse(DAILY_START + 'T12:00:00Z')) / 864e5) + 1;
+  const dailyPool = (G.clubSeasons || []).filter((c) => c.pos > G.seasons[c.season].clubs.length - 10);
+  GAME.dailyEntry = (date) => {
+    const c = dailyPool[E.hash32('d2t-daily|' + date) % dailyPool.length], S = G.seasons[c.season];
+    const mode = c.pos > S.clubs.length - (S.relegationPlaces || 3) ? 'classic' : 'dare2dream';
+    return Object.assign({}, GAME.poolEntry(c.key), { mode, n: GAME.dailyNumber(date), date });
+  };
+  GAME.isDaily = () => !!(D2T.state.run && D2T.state.run.daily);
+  GAME.dailyResult = (date) => ((D2T.state.record.daily || {})[date || GAME.today()] || null);
+  const live = (r) => !!(r && r.eng && r.eng.seasonKey && r.eng.phase !== 'summary');
+  // The run not on screen: a run parked while the daily is played, or a daily put aside for another run.
+  GAME.otherRun = () => {
+    const st = D2T.state;
+    if (st.parked && live(st.parked)) return st.parked;
+    if (st.dailyRun && live(st.dailyRun) && !(st.record.daily || {})[st.dailyRun.daily]) return st.dailyRun;
+    return null;
+  };
+  // Put the run on screen aside (a daily goes to its own slot, anything else is parked) and bring `next` in.
+  const swapIn = (next) => {
+    const st = D2T.state, cur = st.run;
+    if (cur && live(cur) && cur !== next) { if (cur.daily) st.dailyRun = cur; else st.parked = cur; }
+    if (st.parked === next) st.parked = null;
+    if (st.dailyRun === next) st.dailyRun = null;
+    st.run = next;
+  };
+  GAME.switchToOther = () => { const o = GAME.otherRun(); if (o) { swapIn(o); D2T.save(); } return o; };
+  // Before a new Classic or Dare2Dream run: an unfinished daily keeps its own slot.
+  GAME.stashDaily = () => { const st = D2T.state; if (st.run && st.run.daily && live(st.run)) { st.dailyRun = st.run; st.run = null; D2T.save(); } };
+  GAME.startDaily = () => {
+    const st = D2T.state, date = GAME.today();
+    if (GAME.dailyResult(date)) return false;                                   // one go a day
+    if (st.run && st.run.daily === date) return true;
+    if (st.dailyRun && st.dailyRun.daily === date) { swapIn(st.dailyRun); D2T.save(); return true; }
+    const d = GAME.dailyEntry(date);
+    const eng = E.newRun({ seed: 'daily-' + date, mode: d.mode, catalogue: [{ key: d.key }], fixedClub: d.key });
+    eng.respins = 0;
+    swapIn({ step: 'table', eng, spun: true, daily: date });
+    GAME.chooseClub(d.key);
+    D2T.save();
+    return true;
+  };
+  GAME.dailyStreak = () => {
+    const days = D2T.state.record.daily || {};
+    let n = 0, d = new Date(GAME.today() + 'T12:00:00Z');
+    if (!days[GAME.today()]) d = new Date(d.getTime() - 864e5);                  // today not played yet: count to yesterday
+    while (days[d.toISOString().slice(0, 10)]) { n++; d = new Date(d.getTime() - 864e5); }
+    return n;
   };
 })();

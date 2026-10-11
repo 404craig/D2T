@@ -246,7 +246,21 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => window.D2T.game.dreamRecord().runs === 1), "Dare2Dream run not recorded");
   check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, classicBefore), "Dare2Dream run changed Classic's record");
 
+  // ---------- Daily challenge: today's club for everyone, its own save, one go ----------
+  await page.evaluate(() => { const G = window.D2T.game; G.newRun("classic"); G.chooseClub(G.offer()[0].key); window.D2T.state.run.tableSeen = true; window.D2T.save(); window.D2T.go("home"); }); await wait(900);
+  const dEntry = await page.evaluate(() => { const d = window.D2T.game.dailyEntry(window.D2T.game.today()); return { key: d.key, mode: d.mode }; });
+  await page.click('[data-act="daily"]'); await wait(1500);
+  check((await screen()) === "table", "the daily did not open on the table, on " + (await screen()));
+  check(await page.evaluate((d) => { const r = window.D2T.state.run; return r.daily === window.D2T.game.today() && window.D2T.game.mode() === d.mode && r.eng.respins === 0; }, dEntry), "the daily did not start with today's club, its mode and no respins");
+  check(await page.evaluate(() => !!window.D2T.state.parked), "the run in progress was not kept aside for the daily");
+  await page.evaluate(() => { const G = window.D2T.game; window.D2T.state.run.tableSeen = true; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
+  await expectScreen("summary"); await wait(900); await shot("40-daily-summary");
+  check(await page.evaluate(() => !!window.D2T.game.dailyResult()), "the daily result was not recorded");
+  await page.click('[data-act="again"]'); await expectScreen("home"); await wait(800);
+  check(/Done/.test(await page.textContent(".fr-daily .fr-sub")), "home does not show today's daily as done");
+  check(!!(await page.$('[data-act="continue-other"]')), "the parked run has no Continue card after the daily");
+
   await browser.close();
   if (errors.length) { console.log("FAIL\n" + errors.join("\n")); process.exit(1); }
-  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls (tap, drag, pass), fixtures, live match, refresh, season, summary, record, back, account, other screens, Dare2Dream draft");
+  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls (tap, drag, pass), fixtures, live match, refresh, season, summary, record, back, account, other screens, Dare2Dream draft, Daily");
 })().catch((e) => { console.error(e); process.exit(1); });
