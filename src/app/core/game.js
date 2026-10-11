@@ -11,6 +11,9 @@
   // ---------- clubs ----------
   const clubs = {};
   Object.keys(G.clubs).forEach((n) => { const m = meta(n); clubs[n] = { name: n, full: m.full || n, code: m.code, crest: crestOf(n), accent: m.accent, ink: m.ink, text: m.text }; });
+  // Club X: Craig's badge goes in assets/clubx.png (a placeholder until then), the D2T green as its colour.
+  const X_BADGE = window.D2T_CLUBX_BADGE || 'data:image/svg+xml,' + encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 116'><path d='M50 3 L94 18 V60 C94 86 74 104 50 113 C26 104 6 86 6 60 V18 Z' fill='#0E0E10' stroke='#12F06C' stroke-width='5'/><path d='M32 36 L68 80 M68 36 L32 80' stroke='#12F06C' stroke-width='11' stroke-linecap='round'/></svg>");
+  clubs['Club X'] = { name: 'Club X', full: 'Club X', code: 'CLX', crest: X_BADGE, accent: '#12F06C', ink: '#000000', text: '#12F06C' };
   GAME.club = (name) => clubs[name] || Object.assign({ crest: crestOf(name) }, meta(name));
 
   // ---------- the club pool: every relegated club-season ----------
@@ -54,12 +57,18 @@
   // (or win the league again if they won it).
   GAME.MODES = {
     classic: { name: 'Classic', catalogue: () => G.catalogue, pool: () => pool },
-    dare2dream: { name: 'Dare2Dream', catalogue: () => G.clubSeasons, pool: () => allPool }
+    dare2dream: { name: 'Dare2Dream', catalogue: () => G.clubSeasons, pool: () => allPool },
+    clubx: { name: 'Club X', catalogue: () => xCatalogue, pool: () => xPool }
   };
+  // Club X: each season's bottom side, which your own club replaces. The season card shows who you replace.
+  const xCatalogue = Object.keys(G.seasons).map((sk) => { const t = (G.clubSeasons || []).filter((c) => c.season === sk); return t.sort((a, b) => b.pos - a.pos)[0]; }).filter(Boolean);
+  const xPool = xCatalogue.map((c) => { const champ = (G.clubSeasons || []).find((x) => x.season === c.season && x.pos === 1); return Object.assign({}, byKey.get(c.key), { champion: champ ? champ.club : '', championPts: champ ? champ.pts : 0 }); });
+  GAME.xPool = xPool;
+  GAME.isDraftMode = (m) => E.DRAFT_MODES.includes(m || GAME.mode());
   GAME.mode = () => { const e = GAME.eng(); return (e && e.mode) || 'classic'; };
   GAME.modeName = (m) => (GAME.MODES[m || GAME.mode()] || GAME.MODES.classic).name;
   // The finish a Dare2Dream run must reach: better than history, or first again for real champions.
-  GAME.target = (histPos) => (histPos <= 1 ? 1 : histPos - 1);
+  GAME.target = (histPos) => (GAME.mode() === 'clubx' || histPos <= 1 ? 1 : histPos - 1);
   GAME.dreamMet = (finish, histPos) => finish <= GAME.target(histPos);
 
   // ---------- legends: the top 3 players of every season (Craig, 11 Oct 2026) ----------
@@ -124,7 +133,7 @@
     D2T.save();
     return D2T.state.run;
   };
-  GAME.offer = () => GAME.eng().clubOffer.map(GAME.poolEntry);
+  GAME.offer = () => GAME.eng().clubOffer.map((k) => (GAME.mode() === 'clubx' ? xPool.find((x) => x.key === k) : null) || GAME.poolEntry(k));
   GAME.respinClubs = () => { const ok = E.respinClubs(GAME.eng(), (GAME.MODES[GAME.mode()] || GAME.MODES.classic).catalogue()); D2T.save(); return ok; };
   GAME.spinPool = () => (GAME.MODES[GAME.mode()] || GAME.MODES.classic).pool();
   GAME.chooseClub = (key) => {
@@ -135,9 +144,11 @@
     D2T.state.run.step = 'table'; D2T.state.run.tableSeen = false;
     D2T.save();
   };
-  GAME.clubName = () => { const S = GAME.S(); return S ? S.clubs[GAME.eng().club].name : null; };
+  // In a Club X run your club is called Club X wherever the replaced side would appear.
+  const nameOf = (S, c) => { const e = GAME.eng(); return e && e.mode === 'clubx' && e.seasonKey === S.season && c === e.club ? 'Club X' : S.clubs[c].name; };
+  GAME.clubName = () => { const S = GAME.S(); return S ? nameOf(S, GAME.eng().club) : null; };
 
-  const rowOf = (S, r, pos) => { const n = S.clubs[r.c].name, c = GAME.club(n); return { name: n, code: c.code, crest: c.crest, p: r.p, w: r.w, d: r.d, l: r.l, gf: r.gf, ga: r.ga, pts: r.pts, pos }; };
+  const rowOf = (S, r, pos) => { const n = nameOf(S, r.c), c = GAME.club(n); return { name: n, code: c.code, crest: c.crest, p: r.p, w: r.w, d: r.d, l: r.l, gf: r.gf, ga: r.ga, pts: r.pts, pos }; };
   GAME.historyTable = () => { const S = GAME.S(); return E.historyTable(S, S.deductions).map((r, i) => rowOf(S, r, i + 1)); };
   GAME.standings = (upto) => { const S = GAME.S(); return E.table(S, GAME.eng(), upto, S.deductions).map((r, i) => rowOf(S, r, i + 1)); };
   GAME.fixtures = () => {
@@ -169,7 +180,7 @@
     const S = GAME.S(), eng = GAME.eng();
     const xi = eng.xi.map((id) => (id == null ? null : GAME.card(S, id)));
     let subs = [];
-    if (GAME.preseason() && GAME.mode() !== 'dare2dream') subs = E.squadOf(S, eng.club).filter((p) => !eng.xi.includes(p.id)).map((p) => GAME.card(S, p.id));
+    if (GAME.preseason() && !GAME.isDraftMode()) subs = E.squadOf(S, eng.club).filter((p) => !eng.xi.includes(p.id)).map((p) => GAME.card(S, p.id));
     const all = new Map(); xi.concat(subs).forEach((c) => c && all.set(String(c.id), c));
     return { all, xi, subs };
   };
@@ -188,7 +199,7 @@
   GAME.setFormation = (f) => {
     const S = GAME.S(), eng = GAME.eng();
     if (eng.phase === 'draft') E.draftFormation(eng, S, f);                                 // the empty shirts, before the first pick
-    else if (GAME.preseason() && GAME.mode() !== 'dare2dream') { eng.formation = f; eng.xi = E.autoXI(S, eng.club, f, []); }   // a new best XI from the squad
+    else if (GAME.preseason() && !GAME.isDraftMode()) { eng.formation = f; eng.xi = E.autoXI(S, eng.club, f, []); }   // a new best XI from the squad
     else E.setFormation(eng, S, f);                                                         // your 11, re-seated
     D2T.save();
   };
@@ -313,14 +324,14 @@
     const rec = D2T.state.record, k = `${S.season}:${name}`;
     const entry = { key: k, mode, season: S.season, club: name, finish: F.finish, rise: F.rise, pts: F.pts, histFinish: F.histFinish,
       drop: F.finish <= n - rel, half: F.finish <= n / 2, top3: F.finish <= 3, title: F.finish === 1, at: new Date().toISOString().slice(0, 10) };
-    if (mode === 'dare2dream') entry.dream = GAME.dreamMet(F.finish, F.histFinish);
+    if (mode !== 'classic') entry.dream = GAME.dreamMet(F.finish, F.histFinish);
     if (run.daily) {
       entry.daily = run.daily;
       rec.daily = rec.daily || {};
       if (!rec.daily[run.daily]) rec.daily[run.daily] = { n: GAME.dailyNumber(run.daily), club: name, season: S.season, mode, finish: F.finish, histFinish: F.histFinish, rise: F.rise, pts: F.pts, dream: entry.dream };
     }
     rec.runs.push(entry);
-    const book = mode === 'dare2dream' ? (rec.dreamClubs = rec.dreamClubs || {}) : rec.clubs;
+    const book = mode === 'dare2dream' ? (rec.dreamClubs = rec.dreamClubs || {}) : mode === 'clubx' ? (rec.xClubs = rec.xClubs || {}) : rec.clubs;
     const c = book[k] || { runs: 0, finish: 99, rise: -99 };
     c.runs++; c.finish = Math.min(c.finish, F.finish); c.rise = Math.max(c.rise, F.rise);
     if (entry.dream) c.dream = true;
@@ -338,6 +349,10 @@
       bestRise: runs.length ? Math.max(...runs.map((r) => r.rise)) : null };
   };
   GAME.classicRuns = classicRuns;
+  GAME.xRecord = () => {
+    const runs = D2T.state.record.runs.filter((r) => r.mode === 'clubx' && !r.daily);
+    return { runs: runs.length, titles: runs.filter((r) => r.title).length, best: runs.length ? Math.min(...runs.map((r) => r.finish)) : null };
+  };
   GAME.dreamRecord = () => {
     const runs = D2T.state.record.runs.filter((r) => r.mode === 'dare2dream' && !r.daily);
     return { runs: runs.length, dreams: runs.filter((r) => r.dream).length, bestRise: runs.length ? Math.max(...runs.map((r) => r.rise)) : null };

@@ -99,8 +99,8 @@
       if (F.topScorer) { const c = card(F.topScorer.id); if (c) awards.push([`Top scorer · ${F.topScorer.goals} goal${F.topScorer.goals === 1 ? '' : 's'}`, c]); }
       if (F.bestSigning) { const c = card(F.bestSigning.id); if (c) awards.push([`Best signing · before GW${F.bestSigning.gw}`, c]); }
       const daily = run.daily || null;
-      const dream = GAME.mode() === 'dare2dream', met = dream && GAME.dreamMet(F.finish, F.histFinish);
-      const goal = F.histFinish === 1 ? 'Win the league again' : `Finish ${D2T.ordinal(GAME.target(F.histFinish))} or better`;
+      const dream = GAME.mode() !== 'classic', x = GAME.mode() === 'clubx', met = dream && GAME.dreamMet(F.finish, F.histFinish);
+      const goal = x ? 'Win the league' : F.histFinish === 1 ? 'Win the league again' : `Finish ${D2T.ordinal(GAME.target(F.histFinish))} or better`;
       const ach = dream ? [[goal, met]] : [['Beat the drop', F.finish <= n - rel], ['Top half', F.finish <= n / 2], ['Top 3', F.finish <= 3], ['Title', F.finish === 1]];
 
       const body = D2T.h(`<div class="screen-body sm">
@@ -108,7 +108,7 @@
         <div class="sm-in">
           <div class="se-kicker">Season over · ${D2T.esc(S.season)}</div>
           <h1 class="se-h1">${D2T.esc(club.full || club.name)}</h1>
-          <div class="sm-head${dream && !met ? ' sm-miss' : ''}">${dream ? (met ? 'Dream achieved' : 'Fell short') : headline(F)}</div>
+          <div class="sm-head${dream && !met ? ' sm-miss' : ''}">${dream ? (met ? (x ? 'Champions' : 'Dream achieved') : 'Fell short') : headline(F)}</div>
           <div class="sm-finish"><span class="sm-pos">${D2T.ordinal(F.finish)}</span>
             <span class="sm-sub"><b>${F.pts} pts · W${F.w} D${F.d} L${F.l}</b><span>History: ${D2T.ordinal(F.histFinish)}, ${F.histPts} pts</span></span></div>
           <div class="sm-tiles">
@@ -129,7 +129,7 @@
       const bar = D2T.h(`<footer class="actionbar"><button class="icon-btn" type="button" aria-label="Home">${D2T.ICON.home}</button><button class="btn se-btn se-wide" type="button" data-act="share">Share result</button></footer>`);
       root.append(body, bar);
 
-      const tag = dream ? (met ? 'Dare2Dream: dream achieved' : 'Dare2Dream') : '';
+      const tag = x ? (met ? 'Club X: champions' : 'Club X') : dream ? (met ? 'Dare2Dream: dream achieved' : 'Dare2Dream') : '';
       const sh = buildShare(F, club, S.season, line, daily ? `${GAME.dailyName(daily)}${tag ? ' · ' + tag : ''}` : tag);
       bar.querySelector('.icon-btn').onclick = () => D2T.go('home');
       bar.querySelector('[data-act="share"]').onclick = () => share(sh);

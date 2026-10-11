@@ -95,9 +95,9 @@ t("every relegated club-season can be played to the end", () => {
   }
 });
 // Dare2Dream: draft 11 (best effective rating each time), then play the season greedily.
-const draft = (seed, c, formation) => {
+const draft = (seed, c, formation, mode) => {
   const S = G.seasons[c.season], id = S.clubs.find(x => x.name === c.club).id;
-  const st = D.newRun({ seed, mode: "dare2dream", catalogue: G.clubSeasons });
+  const st = D.newRun({ seed, mode: mode || "dare2dream", catalogue: G.clubSeasons });
   D.chooseClub(st, S, { c: id, f: "4-4-2", xi: [] });
   if (formation) assert.ok(D.draftFormation(st, S, formation));
   while (st.phase === "draft") {
@@ -123,6 +123,21 @@ t("Dare2Dream: the draft fills 11 shirts in position from other clubs, then the 
     assert.ok(st.rolls.every(w => w.kind !== "pre"), "pre-season rolls should be dropped");
     assert.strictEqual(st.rolls.reduce((a, w) => a + w.n, 0), D.schedule(st.fixtures).reduce((a, w) => a + w.n, 0) - 3, c.key + " rolls");
     assert.strictEqual(st.phase, "prematch");
+  }
+});
+t("Club X: each season's bottom club is replaced by a drafted XI that plays the season out", () => {
+  const bottom = Object.values(G.clubSeasons.reduce((m, c) => { if (!m[c.season] || c.pos > m[c.season].pos) m[c.season] = c; return m; }, {}));
+  assert.strictEqual(bottom.length, Object.keys(G.seasons).length);
+  assert.ok(D.DRAFT_MODES.includes("clubx"));
+  for (const c of bottom.filter((_, i) => i % 6 === 0)) {
+    const { st, S } = draft("clx-" + c.key, c, null, "clubx");
+    assert.strictEqual(st.mode, "clubx");
+    assert.strictEqual(st.xi.filter(x => x != null).length, 11, c.key);
+    D.startSeason(st, S);
+    assert.ok(st.rolls.every(w => w.kind !== "pre"));
+    let g = 0;
+    while (st.phase !== "summary" && g++ < 700) { if (st.phase === "window") D.pass(st, S); else D.playMatch(st, S); }
+    assert.strictEqual(st.phase, "summary", c.key);
   }
 });
 t("Dare2Dream: a sample of drafted seasons plays to the end, and draft picks weaken their clubs", () => {

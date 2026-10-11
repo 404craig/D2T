@@ -17,11 +17,11 @@
       const eng = GAME.eng();
       SE.accent(root, club); SE.setStep(ctx, 'squad');
       const reduced = D2T.reduced();
-      const pre = GAME.preseason(), drafting = GAME.inDraft(), dream = GAME.mode() === 'dare2dream';
+      const pre = GAME.preseason(), drafting = GAME.inDraft(), dream = GAME.isDraftMode();
       root.appendChild(D2T.topbar());
       const gwLabel = drafting ? 'Draft' : pre ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, data.fixtures.length)}`;
       const hist = data.table.find((r) => r.name === club.name);
-      const goalLabel = GAME.mode() === 'dare2dream' && hist ? ` · Target ${hist.pos === 1 ? 'champions' : D2T.ordinal(GAME.target(hist.pos))}` : '';
+      const goalLabel = GAME.mode() !== 'classic' && hist ? ` · Target ${hist.pos === 1 || GAME.mode() === 'clubx' ? 'champions' : D2T.ordinal(GAME.target(hist.pos))}` : '';
       const body = D2T.h(`<div class="screen-body se-squad">
         <div class="se-sqhead">
           <img class="se-sqcrest" src="${club.crest}" alt="">

@@ -115,7 +115,7 @@
   D2T.screen('home', {
     title: 'Home', theme: 'black',
     mount(root, params) {
-      const rec = D2T.game.record(), dreams = D2T.game.dreamRecord();
+      const rec = D2T.game.record(), dreams = D2T.game.dreamRecord(), xr = D2T.game.xRecord();
       const body = D2T.h(`<div class="screen-body fr-home">
         <div class="fr-home-top"><button class="fr-home-logo" aria-label="DROP2TOP">${homeLogo()}</button></div>
         <button class="fr-card-btn fr-pick fr-classic fr-in" data-act="pick" data-mode="classic">
@@ -132,6 +132,10 @@
         <button class="fr-card-btn fr-pick fr-dream" data-act="pick" data-mode="dare2dream">
           <span class="fr-mark">${D2T.logo('emblemLine')}</span>
           <span><span class="fr-tag" style="display:block">DARE2DREAM</span><span class="fr-big" style="display:block">Any club, no players</span><span class="fr-sub" style="display:block">Draft your XI, then beat their real finish.${dreams.runs ? ` ${dreams.dreams} of ${dreams.runs} dreams so far.` : ''}</span></span>
+          <span class="fr-go">${ARROW}</span></button>
+        <button class="fr-card-btn fr-pick fr-dream fr-clubx" data-act="pick" data-mode="clubx">
+          <span class="fr-mark"><img src="${D2T.game.club('Club X').crest}" alt=""></span>
+          <span><span class="fr-tag" style="display:block">CLUB X</span><span class="fr-big" style="display:block">Replace the bottom club</span><span class="fr-sub" style="display:block">Draft 11 from scratch, then win the league.${xr.runs ? ` ${xr.titles} ${xr.titles === 1 ? 'title' : 'titles'} from ${xr.runs} ${xr.runs === 1 ? 'go' : 'goes'}.` : ''}</span></span>
           <span class="fr-go">${ARROW}</span></button>
         ${g433Card()}
           <div class="fr-sect-h fr-soon-h"><span>Coming soon</span></div>
