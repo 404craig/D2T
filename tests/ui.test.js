@@ -29,7 +29,7 @@ fs.mkdirSync(OUT, { recursive: true });
     if (small.length) errors.push(`tap targets under 40px on ${where}: ${small.join(", ")}`);
   };
 
-  await page.goto("file://" + path.join(__dirname, "..", "index.html"));
+  await page.goto(process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index.html"));
   await page.evaluate(() => { localStorage.clear(); localStorage.setItem("d2t-v2", JSON.stringify({ settings: { muted: true } })); });
   await page.reload();
   await expectScreen("intro");
