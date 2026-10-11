@@ -260,7 +260,25 @@ fs.mkdirSync(OUT, { recursive: true });
   check(/Done/.test(await page.textContent(".fr-daily .fr-sub")), "home does not show today's daily as done");
   check(!!(await page.$('[data-act="continue-other"]')), "the parked run has no Continue card after the daily");
 
+  // ---------- 433 Goals: spin, pick, refresh keeps the three, 11 shirts, result recorded apart ----------
+  const recBefore = await page.evaluate(() => JSON.stringify(window.D2T.game.record()));
+  await page.evaluate(() => { delete window.D2T.state.g433; window.D2T.save(); window.D2T.go("home"); }); await wait(900);
+  await page.click('[data-act="g433"]'); await expectScreen("goals433"); await wait(900);
+  await page.click(".g4 .sp-main"); await wait(2900);
+  const cands = await page.evaluate(() => window.D2T.state.g433.cands.map((p) => p.name).join());
+  await page.reload(); await wait(6500); await page.evaluate(() => window.D2T.go("goals433")); await wait(900);
+  check(await page.evaluate((c) => window.D2T.state.g433.cands.map((p) => p.name).join() === c, cands), "433: a refresh changed the three shirts");
+  for (let i = 0; i < 11; i++) {
+    if (!(await page.$(".g4 [data-c]"))) { await page.click(".g4 .sp-main"); await wait(2900); }
+    await page.click('.g4 [data-c="0"]'); await wait(200); await page.click('.g4 [data-c="0"]'); await wait(1800);
+  }
+  await wait(4500); await shot("50-433-end");
+  check(await page.evaluate(() => window.D2T.state.g433.filled.length === 11 && window.D2T.game.g433.record().games === 1), "433: the game did not fill 11 shirts and record a result");
+  check(await page.evaluate(() => window.D2T.state.g433.filled.every((p) => window.D2T.state.g433.filled.filter((q) => q.name === p.name).length === 1)), "433: the same player appeared twice");
+  check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, recBefore), "433 changed Classic's record");
+  check(!!(await page.$(".sheet")), "433: no result sheet at the end");
+
   await browser.close();
   if (errors.length) { console.log("FAIL\n" + errors.join("\n")); process.exit(1); }
-  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls (tap, drag, pass), fixtures, live match, refresh, season, summary, record, back, account, other screens, Dare2Dream draft, Daily");
+  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls (tap, drag, pass), fixtures, live match, refresh, season, summary, record, back, account, other screens, Dare2Dream draft, Daily, 433 Goals");
 })().catch((e) => { console.error(e); process.exit(1); });

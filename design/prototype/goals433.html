@@ -189,6 +189,7 @@
     document.body.insertAdjacentHTML('afterbegin', `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>${pats}
       <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.34"/><stop offset="0.32" stop-color="#fff" stop-opacity="0.08"/><stop offset="0.5" stop-color="#fff" stop-opacity="0"/><stop offset="0.78" stop-color="#000" stop-opacity="0.10"/><stop offset="1" stop-color="#000" stop-opacity="0.26"/></linearGradient>
       ${[1, 2].map((k) => [27, 30].map((y) => (() => { const r = k === 1 ? 3 : 5; return `<path id="arc-${k}-${y}" d="M14 ${y + r} Q50 ${y - r} 86 ${y + r}"/>`; })()).join('')).join('')}
+      <clipPath id="shirtclip"><path d="M31 9 L42 4 Q50 11 58 4 L69 9 L95 24 L85 44 L74 38 L74 96 L26 96 L26 38 L15 44 L5 24 Z"/></clipPath>
       <linearGradient id="glint" x1="0" y1="0" x2="1" y2="0.4"><stop offset="0.35" stop-color="#fff" stop-opacity="0"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.55"/><stop offset="0.65" stop-color="#fff" stop-opacity="0"/></linearGradient>
     </defs></svg>`);
   })();
@@ -234,14 +235,14 @@
       // goals still to come: a ? where the number will be printed (it becomes his goals when he lands on the pitch)
       if (opts.goals == null && (opts.qgoals ?? (big && CFG.backs === 'qgoals'))) mid = `<text class="qm" x="50" y="${crestStyle === 'print' ? 62 : 65}" font-size="30"${tstroke}>?</text>`;
       // the name kept secret: a big question mark on the back instead (club colours and crest still show)
-      if (opts.hide) { top = ''; const cy = crestStyle === 'centre' ? 29 : 54; mid = (k.pat ? `<circle cx="50" cy="${cy}" r="${crestStyle === 'centre' ? 10 : 20}" fill="${k.trim}"/>` : '') + `<text class="qm" x="50" y="${crestStyle === 'centre' ? 36 : 70}" font-size="${crestStyle === 'centre' ? 22 : 46}"${k.pat ? ' style="fill:#FFFFFF"' : tstroke}>?</text>`; }
+      if (opts.hide) { top = ''; mid = `<text class="qm" x="50" y="${crestStyle === 'centre' ? 36 : 70}" font-size="${crestStyle === 'centre' ? 22 : 46}"${tstroke}>?</text>`; }
       if (opts.goals != null) { const g = String(opts.goals); mid = `<text class="gnum" x="50" y="${crestStyle === 'print' ? 62 : 65}" font-size="30"${g.length > 2 ? ' textLength="46" lengthAdjust="spacingAndGlyphs"' : ''}${tstroke} style="transform-box:fill-box;transform-origin:center">${g}</text>`; }
     }
     const st = opts.state === 'empty' ? 'empty' : opts.state === 'next' ? 'empty next' : opts.state === 'myst' ? 'myst' : '';
     const body = SHIRT, slv = SLEEVES;
     const fillRef = opts.player && k.pat ? `url(#kp-${k.id})` : 'var(--fill)';
     const extra = opts.player ? (k.sl ? `<path d="${slv}" fill="${k.sl}" stroke="var(--trimc)" stroke-width="2.4" stroke-linejoin="round"/>` : '') : '';
-    const sheen = opts.player && (opts.sheen ?? big) ? `<path d="${body}" fill="url(#sheen)"/><path class="glint" d="${body}" fill="url(#glint)" opacity="0"/>` : '';
+    const sheen = opts.player && (opts.sheen ?? big) ? `<path d="${body}" fill="url(#sheen)"/><g clip-path="url(#shirtclip)"><path class="glint" d="${body}" fill="url(#glint)" opacity="0"/></g>` : '';
     const trimArms = '<path class="trim" d="M85 44 L95 24 M15 44 L5 24" stroke-width="3"/>';
     return `<div class="shirt ${st} ${cls}" style="--sw:${w}px;--fill:${k.fill};--trimc:${k.trim};--ink:${k.ink}" ${opts.attr || ''}>${crest}<svg viewBox="0 0 100 100" aria-hidden="true"><path class="body" d="${body}"${opts.player ? ` style="fill:${fillRef}"` : ''}/>${extra}${wm}${sheen}${opts.player ? `<path class="body" d="${body}" style="fill:none"/>` : ''}<path class="trim" d="M42 4 Q50 11 58 4"/>${trimArms}${top}${mid}${over}</svg></div>`;
   }
