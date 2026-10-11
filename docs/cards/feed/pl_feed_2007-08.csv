@@ -1,0 +1,555 @@
+season,club_feed,feed_id,name,feed_pos,appearances,goals,goal_assist,clean_sheet,wins,draws,losses,mins_played,game_started,goals_conceded,saves,yellow_card,red_card,own_goals
+2007/08,Arsenal,2413,Gaël Clichy,D,38,0,5,15,24,11,3,3331,37,30,0,5,0,0
+2007/08,Arsenal,2845,Emmanuel Adebayor,F,36,24,4,9,23,10,3,2932,32,23,0,3,0,0
+2007/08,Arsenal,2417,Cesc Fàbregas,M,32,7,17,11,20,10,2,2860,32,27,0,9,0,0
+2007/08,Arsenal,2054,William Gallas,D,31,4,0,11,17,11,3,2725,31,26,0,6,0,1
+2007/08,Arsenal,2838,Aliaksandr Hleb,M,31,2,6,5,19,10,2,2440,29,22,0,4,0,0
+2007/08,Arsenal,2611,Mathieu Flamini,M,30,3,2,10,19,10,1,2665,30,24,0,5,0,0
+2007/08,Arsenal,2002,Kolo Touré,D,30,2,2,8,19,8,3,2567,29,26,0,3,0,0
+2007/08,Arsenal,2607,Manuel Almunia,G,29,0,1,11,17,10,2,2610,29,24,71,0,0,0
+2007/08,Arsenal,3311,Bacary Sagna,D,29,1,4,10,17,10,2,2463,29,21,0,3,0,0
+2007/08,Arsenal,2844,Nicklas Bendtner,F,27,5,3,1,14,10,3,926,7,10,0,1,1,0
+2007/08,Arsenal,2839,Theo Walcott,F,25,4,3,3,14,8,3,1246,11,12,0,0,0,0
+2007/08,Arsenal,2165,Gilberto Silva,M,23,1,2,5,14,7,2,1182,12,11,0,1,0,0
+2007/08,Arsenal,2612,Emmanuel Eboué,D,23,0,2,1,14,6,3,1663,20,15,0,6,0,0
+2007/08,Arsenal,3052,Tomás Rosicky,M,18,6,2,5,13,4,1,1338,15,9,0,1,0,0
+2007/08,Arsenal,3318,Eduardo da Silva,F,17,4,3,3,11,5,1,965,13,6,0,3,0,0
+2007/08,Arsenal,2412,Philippe Senderos,D,17,2,0,7,11,6,0,1246,14,10,0,0,1,1
+2007/08,Arsenal,2840,Abou Diaby,M,15,1,1,2,11,3,1,714,9,9,0,0,1,0
+2007/08,Arsenal,2616,Robin van Persie,F,15,7,2,1,10,3,2,1079,13,13,0,2,0,0
+2007/08,Arsenal,3053,Denilson,M,13,0,1,3,9,3,1,538,4,4,0,0,0,0
+2007/08,Arsenal,2837,Alexandre Song,M,9,0,0,3,8,0,1,467,5,4,0,0,0,0
+2007/08,Arsenal,2893,Lassana Diarra,M,7,0,0,1,5,1,1,369,4,4,0,1,0,0
+2007/08,Arsenal,2409,Jens Lehmann,G,7,0,0,2,5,1,1,561,6,5,17,1,0,0
+2007/08,Arsenal,2163,Justin Hoyte,D,5,0,0,1,3,1,1,154,2,1,0,1,0,0
+2007/08,Arsenal,3309,Lukasz Fabianski,G,3,0,0,1,3,0,0,249,3,2,7,0,0,0
+2007/08,Arsenal,2835,Armand Traore,D,3,0,1,0,2,1,0,102,1,1,0,0,0,0
+2007/08,Arsenal,2609,Johan Djourou,D,2,0,0,1,2,0,0,103,1,0,0,0,0,0
+2007/08,Arsenal,3056,Mark Randall,M,1,0,0,0,1,0,0,9,0,0,0,0,0,0
+2007/08,Aston Villa,2846,Wilfred Bouma,D,38,1,1,9,16,12,10,3272,38,48,0,5,0,0
+2007/08,Aston Villa,2619,Martin Laursen,D,38,6,2,8,16,12,10,3369,38,50,0,1,0,1
+2007/08,Aston Villa,2622,Gabriel Agbonlahor,F,37,11,4,8,15,12,10,3279,37,47,0,4,0,0
+2007/08,Aston Villa,1308,Gareth Barry,M,37,9,10,8,16,11,10,3320,37,49,0,5,0,0
+2007/08,Aston Villa,3062,Ashley Young,D,37,9,14,6,16,12,9,3289,37,48,0,6,0,0
+2007/08,Aston Villa,3015,Nigel Reo-Coker,M,36,0,3,9,16,11,9,3108,36,44,0,9,1,1
+2007/08,Aston Villa,2250,Scott Carson,G,35,0,2,9,16,10,9,3126,35,45,80,1,1,0
+2007/08,Aston Villa,2012,Olof Mellberg,D,34,2,1,9,14,11,9,2964,33,46,0,4,1,0
+2007/08,Aston Villa,3065,John Carew,F,32,13,1,1,13,10,9,2567,32,36,0,5,0,0
+2007/08,Aston Villa,3063,Stiliyan Petrov,M,28,1,0,3,14,8,6,1842,22,26,0,3,0,0
+2007/08,Aston Villa,2075,Zat Knight,D,27,1,1,7,10,10,7,2196,25,28,0,1,1,0
+2007/08,Aston Villa,2847,Craig Gardner,M,23,3,0,1,10,6,7,1332,15,21,0,4,0,1
+2007/08,Aston Villa,1609,Marlon Harewood,F,23,5,0,0,9,8,6,496,1,16,0,2,0,0
+2007/08,Aston Villa,3066,Shaun Maloney,M,22,4,1,0,9,6,7,988,11,15,0,0,0,0
+2007/08,Aston Villa,2424,Luke Moore,F,15,1,0,1,8,4,3,846,8,8,0,1,0,0
+2007/08,Aston Villa,2997,Curtis Davies,D,12,1,0,0,7,4,1,812,9,13,0,1,0,0
+2007/08,Aston Villa,1205,Patrik Berger,M,8,0,1,0,3,2,3,167,0,3,0,1,0,0
+2007/08,Aston Villa,3064,Isaiah Osbourne,M,8,0,0,0,2,2,4,162,1,5,0,1,0,0
+2007/08,Aston Villa,3326,Moustapha Salifou,M,4,0,0,0,2,0,2,43,0,1,0,0,0,0
+2007/08,Aston Villa,1295,Stuart Taylor,G,4,0,0,0,0,2,2,293,3,6,11,0,0,0
+2007/08,Aston Villa,2620,Gary Cahill,D,1,0,0,0,0,0,1,45,0,1,0,0,0,0
+2007/08,Aston Villa,2681,Wayne Routledge,M,1,0,0,0,1,0,0,4,0,0,0,0,0,0
+2007/08,Birmingham City,1974,Stephen Kelly,D,38,0,0,3,8,11,19,3420,38,62,0,4,0,0
+2007/08,Birmingham City,2841,Fabrice Muamba,M,37,2,1,1,8,10,19,3205,37,62,0,5,0,0
+2007/08,Birmingham City,2613,Sebastian Larsson,M,35,6,5,2,8,11,16,2669,32,45,0,5,0,0
+2007/08,Birmingham City,2013,Liam Ridgewell,D,35,1,3,3,7,11,17,3105,35,54,0,10,0,1
+2007/08,Birmingham City,1242,Maik Taylor,G,34,0,0,3,8,10,16,3060,34,54,134,1,0,0
+2007/08,Birmingham City,2530,Cameron Jerome,F,33,7,1,1,7,8,18,1987,21,34,0,3,0,0
+2007/08,Birmingham City,1542,Gary McSheffrey,F,32,3,3,1,8,9,15,2055,24,35,0,4,0,0
+2007/08,Birmingham City,1538,Mikael Forssell,F,30,9,3,0,6,9,15,1693,21,32,0,0,0,0
+2007/08,Birmingham City,3335,Olivier Kapo,M,26,5,0,2,5,6,15,2018,22,39,0,5,0,0
+2007/08,Birmingham City,2625,Mehdi Nafti,M,26,0,1,2,6,6,14,1757,19,31,0,8,0,0
+2007/08,Birmingham City,3337,Garry O'Connor,F,23,2,0,0,4,7,12,768,5,14,0,0,0,0
+2007/08,Birmingham City,2643,Radhi Jaidi,D,18,0,0,1,5,4,9,1620,18,31,0,4,0,0
+2007/08,Birmingham City,1336,Damien Johnson,M,17,0,0,1,4,7,6,1414,17,24,0,5,1,0
+2007/08,Birmingham City,2120,Franck Queudrue,D,16,0,1,3,4,4,8,1216,14,17,0,3,1,0
+2007/08,Birmingham City,3330,Rafael Schmitz,D,15,0,1,0,3,3,9,1075,12,22,0,2,0,0
+2007/08,Birmingham City,2119,David Murphy,D,14,1,2,0,3,6,5,1260,14,26,0,2,0,0
+2007/08,Birmingham City,3338,Mauro Zárate,F,14,4,1,0,3,5,6,602,6,16,0,1,0,0
+2007/08,Birmingham City,2609,Johan Djourou,D,13,0,0,2,3,2,8,1156,13,23,0,0,0,0
+2007/08,Birmingham City,1948,Stuart Parnaby,D,13,0,0,0,4,5,4,634,4,10,0,2,0,0
+2007/08,Birmingham City,2460,James McFadden,M,12,4,4,0,1,6,5,924,10,18,0,2,0,0
+2007/08,Birmingham City,3334,Daniel de Ridder,M,10,0,1,0,2,1,7,579,6,10,0,1,0,0
+2007/08,Birmingham City,3527,Wilson Palacios,M,7,0,0,0,1,1,5,337,4,4,0,2,0,0
+2007/08,Birmingham City,2183,Mat Sadler,D,5,0,0,0,1,1,3,239,3,3,0,0,0,0
+2007/08,Birmingham City,1331,Martin Taylor,D,4,0,0,0,0,3,1,255,4,4,0,0,1,0
+2007/08,Birmingham City,2425,Colin Doyle,G,3,0,0,0,0,1,2,270,3,6,9,1,0,0
+2007/08,Birmingham City,2201,Neil Danns,M,2,0,0,0,0,0,2,20,0,0,0,0,0,0
+2007/08,Birmingham City,3336,Borja Oubiña,M,2,0,0,0,1,1,0,17,1,0,0,0,0,0
+2007/08,Birmingham City,3329,Richard Kingson,G,1,0,0,0,0,0,1,90,1,2,4,0,0,0
+2007/08,Blackburn Rovers,1420,Brad Friedel,G,38,0,0,8,15,13,10,3420,38,48,124,0,0,0
+2007/08,Blackburn Rovers,2009,David Bentley,M,37,6,8,8,15,13,9,3322,37,46,0,8,0,0
+2007/08,Blackburn Rovers,2636,Morten Pedersen,M,37,4,1,8,15,13,9,2872,32,36,0,6,0,0
+2007/08,Blackburn Rovers,3346,Roque Santa Cruz,F,37,19,5,6,15,12,10,3191,36,43,0,3,0,0
+2007/08,Blackburn Rovers,2279,Stephen Warnock,D,37,1,3,8,15,12,10,3286,37,42,0,9,0,0
+2007/08,Blackburn Rovers,2434,Brett Emerton,M,33,1,1,6,12,11,10,2753,31,39,0,2,1,0
+2007/08,Blackburn Rovers,3070,Christopher Samba,D,33,2,0,4,14,11,8,2892,33,43,0,10,1,0
+2007/08,Blackburn Rovers,1337,David Dunn,M,31,1,3,1,13,9,9,1965,25,27,0,6,1,0
+2007/08,Blackburn Rovers,3080,Benni McCarthy,F,31,8,0,1,12,10,9,1693,21,24,0,1,0,0
+2007/08,Blackburn Rovers,3069,André Ooijer,D,27,0,0,3,11,11,5,2018,23,25,0,2,0,0
+2007/08,Blackburn Rovers,2385,Jason Roberts,F,26,3,5,1,8,10,8,1254,11,21,0,2,0,0
+2007/08,Blackburn Rovers,2435,Steven Reid,D,24,0,0,4,7,9,8,1863,20,30,0,6,0,0
+2007/08,Blackburn Rovers,2437,Matt Derbyshire,F,23,3,1,0,11,8,4,603,4,9,0,1,0,0
+2007/08,Blackburn Rovers,2634,Ryan Nelsen,D,22,0,0,6,7,9,6,1936,22,28,0,3,2,1
+2007/08,Blackburn Rovers,2024,Tugay Kerimoglu,M,20,2,0,1,10,5,5,1123,12,13,0,4,1,0
+2007/08,Blackburn Rovers,2637,Aaron Mokoena,M,18,0,1,1,9,5,4,758,8,13,0,2,0,0
+2007/08,Blackburn Rovers,2866,Zurab Khizanishvili,D,13,0,0,3,6,4,3,952,10,12,0,2,0,0
+2007/08,Blackburn Rovers,706,Robbie Savage,M,12,0,0,1,6,3,3,809,10,13,0,4,0,0
+2007/08,Blackburn Rovers,3343,Johann Vogel,M,6,0,0,1,2,2,2,468,6,4,0,0,0,0
+2007/08,Blackburn Rovers,3071,Bruno Berner,D,2,0,0,0,0,1,1,180,2,4,0,1,0,0
+2007/08,Blackburn Rovers,2867,Martin Olsson,D,2,0,0,0,2,0,0,17,0,0,0,0,0,0
+2007/08,Blackburn Rovers,3347,Maceo Rigters,F,2,0,0,0,1,0,1,14,0,2,0,0,0,0
+2007/08,Bolton Wanderers,2289,El Hadji Diouf,M,34,4,6,7,9,7,18,2646,30,45,0,11,0,0
+2007/08,Bolton Wanderers,2040,Kevin Nolan,M,33,5,3,8,9,10,14,2780,33,35,0,10,0,0
+2007/08,Bolton Wanderers,1249,Kevin Davies,F,32,3,4,7,7,9,16,2646,31,45,0,10,0,0
+2007/08,Bolton Wanderers,1664,Andy O'Brien,D,32,0,0,11,8,10,14,2822,31,37,0,5,0,0
+2007/08,Bolton Wanderers,1042,Gavin McCann,M,31,1,0,6,7,9,15,2013,21,32,0,5,0,0
+2007/08,Bolton Wanderers,1342,Jussi Jääskeläinen,G,28,0,1,8,6,7,15,2520,28,42,76,1,0,1
+2007/08,Bolton Wanderers,2208,Ivan Campo,M,27,1,1,6,7,8,12,2063,25,29,0,8,0,0
+2007/08,Bolton Wanderers,2041,Ricardo Gardner,M,26,0,0,7,5,8,13,2221,25,34,0,2,0,0
+2007/08,Bolton Wanderers,3131,Danny Guthrie,M,25,0,0,6,7,7,11,1892,21,23,0,4,0,0
+2007/08,Bolton Wanderers,3082,Abdoulaye Méité,D,21,0,0,5,5,5,11,1800,21,31,0,1,0,0
+2007/08,Bolton Wanderers,1505,Jlloyd Samuel,D,20,0,0,4,6,5,9,1308,14,23,0,1,0,1
+2007/08,Bolton Wanderers,2647,Joseph O'Brien,D,19,0,1,2,1,8,10,1323,15,21,0,2,0,0
+2007/08,Bolton Wanderers,1135,Nicolas Anelka,F,18,10,1,4,5,3,10,1609,18,29,0,1,0,0
+2007/08,Bolton Wanderers,3349,Grétar Steinsson,D,16,0,1,7,4,5,7,1392,16,18,0,2,0,0
+2007/08,Bolton Wanderers,2542,Matthew Taylor,M,16,3,1,3,4,5,7,1386,16,20,0,1,0,0
+2007/08,Bolton Wanderers,2443,Stelios Giannakopoulos,M,15,2,0,0,2,4,9,285,1,8,0,0,0,0
+2007/08,Bolton Wanderers,2031,Nicky Hunt,D,14,0,0,3,4,1,9,1102,12,16,0,6,0,0
+2007/08,Bolton Wanderers,239,Gary Speed,M,14,1,0,1,3,5,6,972,11,18,0,2,0,0
+2007/08,Bolton Wanderers,2620,Gary Cahill,D,13,0,0,5,4,3,6,1149,13,18,0,0,0,0
+2007/08,Bolton Wanderers,3353,Tamir Cohen,M,10,1,0,0,2,2,6,292,3,6,0,1,0,0
+2007/08,Bolton Wanderers,2871,Ali Al Habsi,G,10,0,0,4,3,3,4,900,10,12,38,0,0,0
+2007/08,Bolton Wanderers,3352,Christian Wilhelmsson,M,8,0,0,0,2,2,4,232,0,3,0,0,0,0
+2007/08,Bolton Wanderers,3351,Mikel Alonso,M,7,0,0,0,1,1,5,357,4,6,0,0,0,0
+2007/08,Bolton Wanderers,3531,Gérald Cid,D,7,0,0,2,1,1,5,508,6,9,0,0,0,1
+2007/08,Bolton Wanderers,3084,Lubomir Michalik,D,7,0,1,2,0,3,4,496,5,10,0,1,0,1
+2007/08,Bolton Wanderers,3041,Grzegorz Rasiak,F,7,0,0,0,1,1,5,278,2,7,0,1,0,0
+2007/08,Bolton Wanderers,3356,Daniel Braaten,F,6,1,0,0,1,1,4,143,0,2,0,0,0,0
+2007/08,Bolton Wanderers,1791,Heidar Helguson,F,6,2,0,0,1,1,4,273,3,7,0,1,0,0
+2007/08,Bolton Wanderers,3087,Andranik Teymourian,M,3,0,0,0,0,2,1,77,1,2,0,0,0,0
+2007/08,Bolton Wanderers,2878,Abdoulaye Diagne-Faye,D,1,0,0,0,0,0,1,90,1,3,0,0,0,0
+2007/08,Bolton Wanderers,2447,Ricardo Vaz Tê,F,1,0,0,0,0,0,1,45,1,3,0,0,0,0
+2007/08,Chelsea,1632,Joe Cole,M,33,7,5,6,20,10,3,2490,28,18,0,5,0,0
+2007/08,Chelsea,3107,Salomon Kalou,M,30,7,10,9,20,7,3,2133,24,19,0,1,0,0
+2007/08,Chelsea,3102,John Obi Mikel,M,29,0,0,12,19,7,3,1948,21,9,0,5,1,0
+2007/08,Chelsea,2655,Alex,D,28,2,1,13,16,10,2,2066,22,15,0,3,0,0
+2007/08,Chelsea,1494,Ashley Cole,D,27,1,1,12,16,8,3,2415,27,22,0,4,1,0
+2007/08,Chelsea,2890,Michael Essien,M,27,6,3,8,18,7,2,2096,23,23,0,5,1,0
+2007/08,Chelsea,1934,Shaun Wright-Phillips,M,27,2,4,3,18,6,3,1651,20,11,0,1,0,0
+2007/08,Chelsea,2651,Petr Cech,G,26,0,0,14,15,8,3,2314,26,17,61,0,0,0
+2007/08,Chelsea,800,Frank Lampard,M,24,10,8,10,17,6,1,1956,23,14,0,4,0,0
+2007/08,Chelsea,3361,Juliano Belletti,D,23,2,1,13,15,7,1,1916,20,8,0,5,0,0
+2007/08,Chelsea,1353,John Terry,D,23,1,1,12,14,6,3,1898,23,13,0,6,0,0
+2007/08,Chelsea,3363,Florent Malouda,M,21,2,0,3,12,7,2,1397,16,9,0,2,0,0
+2007/08,Chelsea,3367,Claudio Pizarro,F,21,2,1,0,13,5,3,681,4,7,0,1,0,0
+2007/08,Chelsea,2653,Ricardo Carvalho,D,21,1,0,12,17,4,0,1749,21,13,0,6,1,0
+2007/08,Chelsea,2662,Didier Drogba,F,19,8,6,3,13,5,1,1529,17,13,0,5,1,0
+2007/08,Chelsea,3103,Michael Ballack,M,18,7,0,6,12,6,0,1414,16,11,0,5,0,0
+2007/08,Chelsea,2454,Claude Makelele,M,18,0,0,6,10,5,3,1221,15,10,0,1,0,0
+2007/08,Chelsea,2654,Paulo Ferreira,D,18,0,1,8,14,2,2,1290,15,14,0,1,0,0
+2007/08,Chelsea,3106,Andriy Shevchenko,F,17,5,1,3,9,6,2,741,8,6,0,0,0,0
+2007/08,Chelsea,2007,Steve Sidwell,M,15,0,1,2,13,2,0,513,7,2,0,1,0,0
+2007/08,Chelsea,1135,Nicolas Anelka,F,14,1,3,6,11,3,0,963,10,3,0,0,0,0
+2007/08,Chelsea,2645,Tal Ben Haim,D,13,0,0,3,6,5,2,1013,10,11,0,2,0,0
+2007/08,Chelsea,1458,Wayne Bridge,D,11,0,1,5,9,2,0,817,9,4,0,0,0,0
+2007/08,Chelsea,1676,Carlo Cudicini,G,10,0,0,6,8,2,0,900,10,7,23,0,0,0
+2007/08,Chelsea,3097,Henrique Hilário,G,3,0,0,0,3,0,0,206,2,2,3,0,0,0
+2007/08,Chelsea,2148,Glen Johnson,D,2,0,0,0,2,0,0,149,1,2,0,0,0,0
+2007/08,Chelsea,2892,Scott Sinclair,M,1,0,0,0,1,0,0,14,0,0,0,0,0,0
+2007/08,Derby County,1815,Darren Moore,D,31,0,0,2,0,7,24,2465,29,62,0,5,0,0
+2007/08,Derby County,2589,Kenny Miller,F,30,4,1,2,1,7,22,2574,30,63,0,4,0,0
+2007/08,Derby County,2199,Jay McEveley,D,29,2,0,1,1,5,23,1908,21,49,0,6,0,0
+2007/08,Derby County,2076,Dean Leacock,D,26,0,2,1,1,6,19,1997,22,48,0,3,0,1
+2007/08,Derby County,3279,Tyrone Mears,D,25,1,1,2,1,5,19,2009,22,59,0,2,0,0
+2007/08,Derby County,2081,Eddie Lewis,M,24,0,1,2,1,5,18,1912,22,49,0,3,0,1
+2007/08,Derby County,3377,Stephen Pearson,M,24,0,0,3,1,6,17,1995,23,50,0,0,0,0
+2007/08,Derby County,2819,Robert Earnshaw,F,22,1,0,0,0,5,17,926,7,27,0,0,0,0
+2007/08,Derby County,2195,Craig Fagan,F,22,0,0,1,0,6,16,1484,17,35,0,6,0,0
+2007/08,Derby County,3381,Giles Barnes,F,21,1,1,0,0,5,16,1379,14,30,0,0,0,0
+2007/08,Derby County,3536,Steve Howard,F,20,1,3,1,1,4,15,1392,14,36,0,3,0,0
+2007/08,Derby County,3212,Claude Davis,D,19,0,0,1,1,4,14,1540,19,31,0,2,1,0
+2007/08,Derby County,958,Matt Oakley,M,19,3,0,2,1,3,15,1671,19,40,0,3,0,0
+2007/08,Derby County,356,Andrew Todd,D,19,1,1,0,0,4,15,1361,14,43,0,2,0,0
+2007/08,Derby County,1472,Stephen Bywater,G,18,0,0,2,1,4,13,1620,18,41,62,1,0,0
+2007/08,Derby County,3034,Gary Teale,M,18,0,1,1,1,3,14,919,9,21,0,1,0,0
+2007/08,Derby County,706,Robbie Savage,M,16,0,0,0,0,3,13,1352,16,38,0,4,0,0
+2007/08,Derby County,3380,Emanuel Villa,F,16,3,0,0,0,4,12,915,9,28,0,3,0,0
+2007/08,Derby County,2993,Hossam Ghaly,M,15,0,1,0,0,4,11,1106,13,29,0,2,0,0
+2007/08,Derby County,1437,Andy Griffin,D,15,0,0,1,1,2,12,1150,13,31,0,4,0,0
+2007/08,Derby County,2112,Roy Carroll,G,14,0,1,1,0,3,11,1260,14,38,62,0,0,0
+2007/08,Derby County,2523,David Jones,D,14,1,0,0,0,3,11,869,11,23,0,4,0,0
+2007/08,Derby County,3378,Mile Sterjovski,M,12,0,1,0,0,2,10,692,9,20,0,0,0,0
+2007/08,Derby County,3379,Benny Feilhaber,M,10,0,0,0,1,1,8,293,1,12,0,1,0,0
+2007/08,Derby County,1370,Marc Edworthy,D,9,0,0,1,0,3,6,660,7,18,0,1,0,0
+2007/08,Derby County,1017,Alan Stubbs,D,8,0,0,1,0,2,6,647,8,20,0,2,0,0
+2007/08,Derby County,3370,Lewis Price,G,6,0,0,0,0,1,5,540,6,10,16,0,0,0
+2007/08,Derby County,2126,Laurent Robert,M,4,0,0,0,0,1,3,181,3,3,0,1,0,0
+2007/08,Derby County,2180,Michael Johnson,D,3,0,0,0,0,0,3,191,1,4,0,0,0,0
+2007/08,Derby County,1215,Jonathan Macken,F,3,0,0,0,0,0,3,41,0,1,0,0,0,0
+2007/08,Derby County,929,Danny Mills,D,2,0,0,0,0,0,2,122,2,1,0,0,0,0
+2007/08,Derby County,3374,Lewin Nyatanga,D,2,1,0,0,0,0,2,180,2,7,0,0,0,0
+2007/08,Derby County,3372,Miles Addison,D,1,0,0,0,0,0,1,90,1,3,1,0,0,0
+2007/08,Derby County,3373,Mohammed Camara,M,1,0,0,0,0,0,1,63,1,3,0,0,0,0
+2007/08,Derby County,3533,Robert Malcolm,M,1,0,0,0,0,0,1,59,1,3,0,0,0,0
+2007/08,Derby County,3382,Paris Simmons,F,1,0,0,0,0,0,1,26,0,2,0,0,0,0
+2007/08,Everton,2574,Joleon Lescott,D,38,8,1,14,19,8,11,3375,37,32,0,3,0,0
+2007/08,Everton,921,Phil Neville,M,37,2,2,12,18,8,11,3242,37,32,0,4,1,0
+2007/08,Everton,2516,Tim Howard,G,36,0,1,14,19,8,9,3240,36,30,89,1,0,0
+2007/08,Everton,1175,Lee Carsley,M,34,1,4,12,18,8,8,2870,33,28,0,6,0,0
+2007/08,Everton,3222,Phil Jagielka,D,34,1,3,11,18,6,10,2647,27,24,0,2,0,1
+2007/08,Everton,2239,Joseph Yobo,D,30,1,2,9,16,4,10,2609,29,29,0,0,0,0
+2007/08,Everton,2553,Yakubu,F,29,15,2,1,14,5,10,2166,26,18,0,2,0,0
+2007/08,Everton,2695,Andrew Johnson,F,29,6,4,6,14,6,9,1844,20,19,0,1,0,0
+2007/08,Everton,2704,Mikel Arteta,M,28,1,5,10,15,6,7,2446,27,22,0,2,1,0
+2007/08,Everton,1887,Leon Osman,M,28,4,1,7,14,6,8,2318,26,21,0,0,0,0
+2007/08,Everton,3388,Steven Pienaar,M,28,2,5,5,14,4,10,2088,25,22,0,6,0,0
+2007/08,Everton,2905,Victor Anichebe,F,27,1,1,0,12,7,8,1070,10,16,0,1,0,0
+2007/08,Everton,1881,Tony Hibbert,D,24,0,1,5,10,3,11,1929,22,22,0,3,1,0
+2007/08,Everton,3030,Leighton Baines,D,22,0,1,4,10,5,7,1134,13,12,0,1,0,0
+2007/08,Everton,2705,Tim Cahill,F,18,7,2,7,12,4,2,1506,18,10,0,4,0,0
+2007/08,Everton,3111,Manuel Fernandes,M,12,0,2,2,4,5,3,846,9,5,0,0,0,0
+2007/08,Everton,2460,James McFadden,M,12,2,0,0,5,2,5,469,5,4,0,2,0,0
+2007/08,Everton,2897,Nuno Valente,D,9,0,1,4,5,3,1,721,8,4,0,1,0,0
+2007/08,Everton,1886,Thomas Gravesen,M,8,0,1,0,4,2,2,173,1,1,0,1,0,0
+2007/08,Everton,1017,Alan Stubbs,D,8,1,0,1,5,1,2,562,7,6,0,0,0,0
+2007/08,Everton,2707,James Vaughan,F,8,1,0,0,6,2,0,137,0,0,0,0,0,0
+2007/08,Everton,3389,Jack Rodwell,M,2,0,0,0,2,0,0,4,0,0,0,0,0,0
+2007/08,Everton,3383,Stefan Wessels,G,2,0,0,0,0,0,2,180,2,3,2,0,0,0
+2007/08,Fulham,1775,Simon Davies,M,37,5,7,6,8,12,17,3209,36,57,0,6,0,1
+2007/08,Fulham,3121,Clint Dempsey,F,36,6,1,3,8,11,17,2674,29,46,0,4,0,0
+2007/08,Fulham,1515,Paul Konchesky,D,33,0,1,6,7,11,15,2925,33,52,0,5,1,0
+2007/08,Fulham,1423,Danny Murphy,M,33,5,1,4,7,11,15,2475,28,39,0,4,0,0
+2007/08,Fulham,1724,David Healy,F,30,4,0,0,5,10,15,1360,15,24,0,3,0,0
+2007/08,Fulham,1230,Aaron Hughes,D,30,0,0,7,7,10,13,2660,29,44,0,0,0,1
+2007/08,Fulham,2789,Diomansy Kamara,F,28,5,1,0,6,9,13,1615,17,32,0,6,0,0
+2007/08,Fulham,2463,Carlos Bocanegra,D,22,1,0,1,3,9,10,1617,18,32,0,5,0,0
+2007/08,Fulham,2423,Steven Davis,M,22,0,0,1,2,9,11,1849,22,34,0,3,0,0
+2007/08,Fulham,2329,Antti Niemi,G,22,0,0,2,2,9,11,1980,22,39,85,0,0,0
+2007/08,Fulham,3274,Hameur Bouazza,M,20,1,1,1,2,10,8,1198,15,25,0,1,1,0
+2007/08,Fulham,2129,Chris Baird,D,18,0,0,3,2,8,8,1465,17,26,0,1,1,0
+2007/08,Fulham,1633,Jimmy Bullard,M,17,2,3,2,6,3,8,1388,15,19,0,0,0,0
+2007/08,Fulham,2402,Brian McBride,F,17,4,0,3,7,2,8,1206,14,17,0,1,0,0
+2007/08,Fulham,3394,Brede Hangeland,D,15,0,0,5,6,3,6,1350,15,18,0,1,0,0
+2007/08,Fulham,2452,Aleksey Smertin,M,15,0,1,0,1,5,9,989,11,22,0,1,0,0
+2007/08,Fulham,3397,Leon Andreasen,M,13,0,0,1,5,3,5,788,9,10,0,2,1,0
+2007/08,Fulham,1193,Kasey Keller,G,13,0,0,5,5,3,5,1170,13,16,39,0,0,0
+2007/08,Fulham,2989,Paul Stalteri,D,13,0,1,4,5,2,6,1136,13,16,0,3,0,0
+2007/08,Fulham,1095,Dejan Stefanovic,D,13,0,0,1,1,5,7,1170,13,23,0,4,0,0
+2007/08,Fulham,2588,Seol Ki-Hyeon,M,12,0,1,0,0,6,6,353,4,6,0,0,0,0
+2007/08,Fulham,2870,Shefki Kuqi,F,10,0,1,0,1,4,5,403,3,11,0,0,0,0
+2007/08,Fulham,1830,Moritz Volz,D,9,0,0,0,1,1,7,484,5,14,0,1,1,0
+2007/08,Fulham,1432,Erik Nevland,F,8,2,0,0,5,0,3,215,2,2,0,1,0,0
+2007/08,Fulham,3114,Elliot Omozusi,D,8,0,0,0,1,3,4,689,8,11,0,1,1,0
+2007/08,Fulham,3399,Eddie Johnson,F,6,0,0,1,1,2,3,382,4,7,0,0,0,0
+2007/08,Fulham,2075,Zat Knight,D,4,0,0,0,1,0,3,328,4,6,0,0,0,0
+2007/08,Fulham,912,Tony Warner,G,3,0,0,0,1,0,2,270,3,5,15,1,0,0
+2007/08,Fulham,2711,Papa Bouba Diop,M,2,0,0,0,0,0,2,18,0,2,0,1,0,0
+2007/08,Fulham,2472,Collins John,F,2,0,0,0,0,1,1,34,0,1,0,0,0,0
+2007/08,Fulham,2220,Nathan Ashton,D,1,0,0,0,1,0,0,90,1,1,0,0,0,0
+2007/08,Fulham,2907,Philippe Christanval,D,1,0,0,0,0,1,0,15,0,0,0,0,0,0
+2007/08,Fulham,96,Ian Pearce,D,1,0,0,0,0,0,1,32,0,1,0,0,0,0
+2007/08,Liverpool,2911,Pepe Reina,G,38,0,1,18,21,13,4,3420,38,28,57,2,0,0
+2007/08,Liverpool,915,Jamie Carragher,D,35,0,2,14,19,12,4,3044,34,24,0,4,0,0
+2007/08,Liverpool,1575,Steven Gerrard,M,34,11,8,10,18,12,4,2843,32,25,0,3,0,0
+2007/08,Liverpool,3420,Fernando Torres,F,33,24,4,7,19,10,4,2542,29,19,0,5,0,0
+2007/08,Liverpool,3135,Dirk Kuijt,M,32,3,4,8,19,10,3,2163,24,16,0,2,0,0
+2007/08,Liverpool,3413,Ryan Babel,F,30,4,3,0,17,9,4,1416,15,7,0,1,0,0
+2007/08,Liverpool,3013,Yossi Benayoun,M,30,4,2,6,17,10,3,1573,15,16,0,0,0,0
+2007/08,Liverpool,2110,John Arne Riise,D,29,0,3,9,17,9,3,1983,22,19,0,3,0,0
+2007/08,Liverpool,3127,Álvaro Arbeloa,D,28,0,1,12,15,10,3,2273,26,21,0,4,0,0
+2007/08,Liverpool,1710,Sami Hyypiä,D,27,1,1,10,17,7,3,2024,24,15,0,1,0,1
+2007/08,Liverpool,3136,Javier Mascherano,D,25,1,1,8,13,9,3,2157,25,18,0,5,1,0
+2007/08,Liverpool,2072,Steve Finnan,D,24,0,2,9,11,12,1,1957,21,15,0,2,0,0
+2007/08,Liverpool,1629,Peter Crouch,F,21,5,1,4,9,10,2,924,9,7,0,0,0,0
+2007/08,Liverpool,2719,Xabi Alonso,M,19,2,1,5,12,5,2,1469,16,10,0,3,0,0
+2007/08,Liverpool,3421,Andrey Voronin,F,19,5,2,2,11,7,1,1120,13,12,0,2,0,0
+2007/08,Liverpool,1495,Jermaine Pennant,M,18,2,2,3,10,8,0,1135,14,7,0,3,0,0
+2007/08,Liverpool,3137,Lucas Leiva,M,18,0,4,6,14,3,1,1105,12,7,0,0,0,0
+2007/08,Liverpool,3126,Fábio Aurélio,D,16,1,1,2,10,3,3,1123,13,13,0,1,0,1
+2007/08,Liverpool,3404,Martin Skrtel,D,14,0,0,7,9,4,1,1191,13,10,0,1,0,0
+2007/08,Liverpool,1049,Harry Kewell,M,10,0,1,0,3,4,3,608,8,5,0,0,0,0
+2007/08,Liverpool,2921,Mohamed Sissoko,M,9,1,0,4,6,2,1,553,6,4,0,2,0,0
+2007/08,Liverpool,2916,Daniel Agger,D,5,0,0,2,3,2,0,435,4,2,0,0,0,0
+2007/08,Liverpool,3125,Emiliano Insúa,D,3,0,0,2,2,1,0,205,2,0,0,1,0,0
+2007/08,Liverpool,2917,Jack Hobbs,D,2,0,0,0,1,0,1,129,1,3,0,0,0,0
+2007/08,Liverpool,3411,Damien Plessis,M,2,0,0,0,0,2,0,180,2,3,0,0,0,0
+2007/08,Manchester City,1184,Richard Dunne,D,36,0,0,10,14,10,12,3045,36,40,0,2,2,1
+2007/08,Manchester City,3426,Vedran Corluka,D,35,0,2,10,14,10,11,2974,34,46,0,4,0,0
+2007/08,Manchester City,3435,Martin Petrov,M,34,5,8,9,14,9,11,2977,34,43,0,2,1,0
+2007/08,Manchester City,3434,Elano,M,34,8,9,0,13,9,12,2456,29,34,0,3,0,0
+2007/08,Manchester City,2928,Stephen Ireland,M,33,4,4,4,12,9,12,2568,32,38,0,1,1,0
+2007/08,Manchester City,1595,Dietmar Hamann,M,29,0,0,9,13,6,10,2206,26,29,0,8,0,0
+2007/08,Manchester City,1185,Michael Ball,D,28,0,0,3,11,7,10,1865,19,35,0,2,0,0
+2007/08,Manchester City,3427,Javier Garrido,D,27,0,1,8,12,7,8,1892,21,33,0,4,0,0
+2007/08,Manchester City,1309,Darius Vassell,F,27,6,3,1,8,8,11,1780,21,26,0,2,0,0
+2007/08,Manchester City,3436,Gelson Fernandes,M,26,2,0,3,8,9,9,1955,21,37,0,5,0,0
+2007/08,Manchester City,3143,Joe Hart,G,26,0,0,7,9,8,9,2340,26,34,107,0,0,0
+2007/08,Manchester City,2925,Micah Richards,D,25,0,0,8,11,7,7,2250,25,30,0,4,0,0
+2007/08,Manchester City,3151,Michael Johnson,M,23,2,2,7,12,3,8,1934,23,27,0,4,0,0
+2007/08,Manchester City,3439,Rolando Bianchi,F,19,4,1,0,7,7,5,761,7,10,0,0,0,0
+2007/08,Manchester City,3433,Geovanni,M,19,3,1,0,7,6,6,397,2,8,0,4,0,0
+2007/08,Manchester City,2728,Nedum Onuoha,D,16,1,1,5,6,5,5,1220,13,13,0,0,0,0
+2007/08,Manchester City,3153,Emile Mpenza,F,15,2,0,0,9,2,4,742,8,6,0,0,0,0
+2007/08,Manchester City,2296,Sun Jihai,D,14,0,0,1,6,2,6,803,7,20,0,2,0,1
+2007/08,Manchester City,2969,Benjani,F,13,3,0,2,4,2,7,1069,13,16,0,0,0,0
+2007/08,Manchester City,3440,Felipe Caicedo,F,10,0,0,0,3,2,5,210,0,5,0,1,0,0
+2007/08,Manchester City,3442,Nery Castillo,F,7,0,0,0,1,1,5,293,2,11,0,0,0,0
+2007/08,Manchester City,2508,Kasper Schmeichel,G,7,0,0,4,4,1,2,630,7,5,22,0,0,0
+2007/08,Manchester City,3149,Kelvin Etuhu,M,6,1,1,0,2,3,1,203,2,2,0,1,0,0
+2007/08,Manchester City,3142,Andreas Isaksson,G,5,0,0,0,2,1,2,450,5,14,12,0,0,0
+2007/08,Manchester City,2930,Georgios Samaras,F,5,0,0,0,3,1,1,254,2,8,0,0,0,0
+2007/08,Manchester City,3438,Valeri Emilov Bozhinov,F,3,0,0,0,3,0,0,49,1,0,0,0,0,0
+2007/08,Manchester City,3154,Daniel Sturridge,F,3,1,0,0,1,1,1,152,2,4,0,0,0,0
+2007/08,Manchester City,3429,Sam Williamson,D,1,0,0,0,1,0,0,36,0,0,0,1,0,0
+2007/08,Manchester United,1211,Wes Brown,D,36,1,2,16,25,6,5,3034,34,21,0,8,0,0
+2007/08,Manchester United,1111,Rio Ferdinand,D,35,2,1,17,24,6,5,3052,35,20,0,4,0,0
+2007/08,Manchester United,2522,Cristiano Ronaldo,F,34,31,6,16,25,6,3,2747,31,17,0,5,1,0
+2007/08,Manchester United,3281,Carlos Tevez,F,34,14,6,8,25,5,4,2686,31,16,0,1,0,0
+2007/08,Manchester United,2934,Patrice Evra,D,33,0,1,15,24,6,3,2823,33,16,0,4,0,0
+2007/08,Manchester United,2935,Nemanja Vidic,D,32,1,1,17,23,5,4,2673,32,13,0,5,0,0
+2007/08,Manchester United,1634,Michael Carrick,M,31,2,2,11,21,6,4,2199,24,14,0,2,0,0
+2007/08,Manchester United,335,Ryan Giggs,M,31,3,4,8,20,6,5,2235,26,17,0,1,0,0
+2007/08,Manchester United,2070,Edwin van der Sar,G,29,0,0,14,20,5,4,2565,29,18,72,2,0,0
+2007/08,Manchester United,1717,John O'Shea,D,28,0,1,6,18,5,5,1132,10,9,0,1,0,0
+2007/08,Manchester United,2064,Wayne Rooney,F,27,12,10,11,21,5,1,2184,25,13,0,8,0,0
+2007/08,Manchester United,3447,Nani,F,26,3,9,5,17,4,5,1568,16,12,0,2,1,0
+2007/08,Manchester United,3446,Anderson,M,24,0,1,3,18,2,4,1489,16,9,0,2,0,0
+2007/08,Manchester United,336,Paul Scholes,M,24,1,4,10,17,5,2,1842,22,12,0,3,0,0
+2007/08,Manchester United,3445,Owen Hargreaves,M,23,2,2,6,15,3,5,1527,16,11,0,2,0,0
+2007/08,Manchester United,1598,Louis Saha,F,17,5,0,1,14,1,2,734,6,6,0,0,0,0
+2007/08,Manchester United,1943,Darren Fletcher,M,16,0,2,2,13,1,2,639,5,6,0,1,0,0
+2007/08,Manchester United,2940,Park Ji-Sung,M,12,1,1,2,9,2,1,633,8,2,0,0,0,0
+2007/08,Manchester United,2818,Tomasz Kuszczak,G,9,0,0,5,7,1,1,765,8,4,22,0,0,0
+2007/08,Manchester United,2737,Gerard Piqué,D,9,0,0,2,7,1,1,477,5,3,0,0,0,0
+2007/08,Manchester United,2524,Chris Eagles,M,4,0,0,0,2,1,1,131,1,0,0,0,0,0
+2007/08,Manchester United,1719,Mikaël Silvestre,D,3,0,0,0,1,1,1,189,3,2,0,0,0,0
+2007/08,Manchester United,3157,Danny Simpson,D,3,0,1,0,3,0,0,128,1,1,0,0,0,0
+2007/08,Manchester United,2945,Fraizer Campbell,F,1,0,0,0,0,0,1,17,0,0,0,0,0,0
+2007/08,Manchester United,2932,Ben Foster,G,1,0,0,1,1,0,0,90,1,0,4,0,0,0
+2007/08,Middlesbrough,2122,Stewart Downing,M,38,9,6,7,10,12,16,3418,38,53,0,3,0,1
+2007/08,Middlesbrough,1464,Luke Young,D,35,1,1,7,9,12,14,3111,35,48,0,8,0,1
+2007/08,Middlesbrough,3461,Tuncay Sanli,F,34,8,2,3,9,11,14,2221,27,36,0,5,0,0
+2007/08,Middlesbrough,1218,Mark Schwarzer,G,34,0,0,8,9,11,14,3060,34,47,89,2,0,0
+2007/08,Middlesbrough,2749,David Wheater,D,34,3,0,7,9,12,13,3015,34,45,0,8,0,0
+2007/08,Middlesbrough,1361,George Boateng,M,33,1,3,4,8,11,14,2610,29,39,0,9,0,0
+2007/08,Middlesbrough,1656,Jérémie Aliadière,F,29,5,6,2,9,10,10,2164,26,28,0,3,1,0
+2007/08,Middlesbrough,2550,Gary O'Neil,M,26,0,3,4,6,10,10,2194,25,32,0,9,0,0
+2007/08,Middlesbrough,2948,Fábio Rochemback,M,26,1,4,4,7,8,11,1986,21,35,0,7,0,0
+2007/08,Middlesbrough,1972,Julio Arca,M,24,2,4,5,8,6,10,1868,23,28,0,6,0,0
+2007/08,Middlesbrough,2949,Lee Cattermole,M,24,1,0,2,5,8,11,989,10,19,0,5,0,0
+2007/08,Middlesbrough,2946,Emanuel Pogatetz,D,24,0,0,5,7,8,9,2130,23,29,1,3,0,1
+2007/08,Middlesbrough,2274,Adam Johnson,M,19,1,0,0,6,4,9,460,3,8,0,2,0,0
+2007/08,Middlesbrough,2750,Andrew Taylor,D,19,0,1,2,3,6,10,1558,18,31,0,1,0,0
+2007/08,Middlesbrough,1565,Jonathan Woodgate,D,16,0,0,3,4,3,9,1376,16,28,0,4,0,0
+2007/08,Middlesbrough,3167,Lee Dong-Gook,F,14,0,0,0,4,4,6,549,5,6,0,2,0,0
+2007/08,Middlesbrough,2053,Robert Huth,D,13,1,0,3,4,6,3,919,9,10,0,3,0,0
+2007/08,Middlesbrough,2815,Mido,F,12,2,0,0,3,4,5,748,8,15,0,4,1,0
+2007/08,Middlesbrough,3460,Afonso Alves,F,11,6,1,0,4,2,5,650,7,8,0,0,0,0
+2007/08,Middlesbrough,1695,Chris Riggott,D,10,1,0,2,3,2,5,828,9,11,0,0,0,1
+2007/08,Middlesbrough,3538,Ben Hutchinson,F,8,1,0,0,1,3,4,183,0,4,0,0,0,0
+2007/08,Middlesbrough,3458,Jonathan Grounds,D,5,0,0,1,1,2,2,424,5,6,0,1,0,1
+2007/08,Middlesbrough,3459,Mohamed Shawky,M,5,0,0,1,2,2,1,251,3,1,0,1,0,0
+2007/08,Middlesbrough,2313,Andrew Davies,D,4,0,0,0,1,0,3,277,3,4,0,0,0,0
+2007/08,Middlesbrough,2950,Tom Craddock,F,3,0,0,0,0,0,3,93,1,2,0,0,0,0
+2007/08,Middlesbrough,2309,Ross Turnbull,G,3,0,0,0,1,1,1,270,3,3,13,0,0,0
+2007/08,Middlesbrough,2553,Yakubu,F,2,0,0,0,0,0,2,156,2,3,0,0,0,0
+2007/08,Middlesbrough,3165,Seb Hines,D,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2007/08,Middlesbrough,1947,Bradley Jones,G,1,0,0,0,0,0,1,90,1,3,2,0,0,0
+2007/08,Middlesbrough,2751,Tony McMahon,D,1,0,0,0,1,0,0,14,0,1,0,0,0,0
+2007/08,Newcastle United,332,Nicky Butt,M,35,3,1,6,11,8,16,3003,35,61,0,13,0,0
+2007/08,Newcastle United,1412,Alan Smith,M,33,0,1,2,9,8,16,2391,26,55,0,9,1,0
+2007/08,Newcastle United,2755,Charles N'Zogbia,M,32,3,2,4,8,8,16,2434,27,53,0,6,0,0
+2007/08,Newcastle United,3176,Obafemi Martins,F,31,9,2,2,11,8,12,2058,23,28,0,1,0,0
+2007/08,Newcastle United,2323,Steven Taylor,D,31,1,1,6,7,10,14,2633,29,50,0,3,0,0
+2007/08,Newcastle United,3465,Habib Beye,D,29,1,2,4,9,6,14,2470,27,46,0,5,0,0
+2007/08,Newcastle United,2100,James Milner,M,29,2,2,4,7,7,15,2232,25,43,0,3,0,0
+2007/08,Newcastle United,1208,Michael Owen,F,29,11,0,6,8,8,13,2177,24,43,0,2,0,0
+2007/08,Newcastle United,2316,Geremi Sorele Nijtap Fotso,M,27,1,7,5,11,7,9,2063,24,28,0,3,0,0
+2007/08,Newcastle United,1909,Mark Viduka,F,26,7,1,0,9,9,8,1659,19,26,0,0,0,0
+2007/08,Newcastle United,2303,Joey Barton,M,23,1,3,5,7,7,9,1831,20,31,0,4,0,0
+2007/08,Newcastle United,3462,José Enrique,D,23,0,0,4,8,4,11,1619,18,30,0,1,0,0
+2007/08,Newcastle United,2878,Abdoulaye Diagne-Faye,D,22,1,0,3,6,3,13,1655,20,28,0,5,0,0
+2007/08,Newcastle United,709,Steve Harper,G,21,0,0,6,7,6,8,1791,19,28,72,0,0,0
+2007/08,Newcastle United,3539,David Rozehnal,D,21,0,0,4,7,6,8,1487,16,26,0,0,0,0
+2007/08,Newcastle United,3463,Caçapa,D,19,1,0,3,5,5,9,1433,16,33,0,1,0,0
+2007/08,Newcastle United,851,Shay Given,G,19,0,0,2,4,4,11,1629,19,37,49,2,0,1
+2007/08,Newcastle United,1004,Damien Duff,M,16,0,0,0,2,3,11,1064,12,30,0,3,0,0
+2007/08,Newcastle United,2955,Emre Belozoglu,M,14,1,4,0,4,3,7,590,6,11,0,2,0,0
+2007/08,Newcastle United,776,Stephen Carr,D,10,0,0,2,1,4,5,696,8,17,0,0,0,0
+2007/08,Newcastle United,1962,Shola Ameobi,F,6,0,0,1,2,2,2,273,2,2,0,0,0,0
+2007/08,Newcastle United,3172,David Edgar,D,5,0,0,1,4,1,0,186,2,2,0,0,0,0
+2007/08,Newcastle United,3175,Andy Carroll,F,4,0,1,0,2,0,2,137,1,5,0,0,0,0
+2007/08,Newcastle United,2532,Peter Ramage,D,3,0,1,0,1,1,1,58,0,1,0,0,0,0
+2007/08,Newcastle United,3464,Lamine Diatta,D,2,0,0,0,1,1,0,8,0,0,0,0,0,0
+2007/08,Newcastle United,3173,Kazenga LuaLua,F,2,0,0,0,0,1,1,21,0,1,0,0,0,0
+2007/08,Newcastle United,1597,Nolberto Solano,M,1,0,0,0,1,0,0,21,0,0,0,0,0,0
+2007/08,Portsmouth,2125,Sylvain Distin,D,36,0,1,15,15,8,13,3194,36,39,0,4,0,1
+2007/08,Portsmouth,252,David James,G,35,0,0,16,16,9,10,3150,35,36,137,2,0,0
+2007/08,Portsmouth,3180,Niko Kranjcar,M,34,4,2,11,15,7,12,2860,31,33,0,2,0,0
+2007/08,Portsmouth,1371,Hermann Hreidarsson,D,32,3,1,11,13,7,12,2591,30,33,0,3,1,0
+2007/08,Portsmouth,557,Sol Campbell,D,31,1,0,15,13,8,10,2790,31,31,0,2,0,2
+2007/08,Portsmouth,2148,Glen Johnson,D,29,1,4,14,14,6,9,2565,29,27,0,3,0,0
+2007/08,Portsmouth,3472,Sulley Muntari,M,29,4,3,13,12,8,9,2375,27,24,0,4,2,0
+2007/08,Portsmouth,3473,John Utaka,F,29,5,3,4,12,7,10,2017,25,24,0,1,0,0
+2007/08,Portsmouth,2711,Papa Bouba Diop,M,25,0,3,13,13,5,7,2158,25,22,0,7,0,0
+2007/08,Portsmouth,1502,Kanu,F,25,4,3,2,10,7,8,1370,13,16,0,1,0,0
+2007/08,Portsmouth,2969,Benjani,F,23,12,1,6,10,7,6,1839,21,20,0,1,0,0
+2007/08,Portsmouth,2080,Sean Davis,M,22,0,2,7,8,6,8,1646,18,20,0,8,0,0
+2007/08,Portsmouth,2808,Pedro Mendes,M,18,0,4,3,8,4,6,1219,14,16,0,2,0,0
+2007/08,Portsmouth,2802,Noé Pamarot,D,18,1,0,3,7,5,6,1167,14,13,0,3,0,0
+2007/08,Portsmouth,1831,Lauren,D,15,0,0,3,6,2,7,977,11,15,0,4,0,0
+2007/08,Portsmouth,3478,David Nugent,F,15,0,0,0,5,4,6,616,5,7,0,0,0,0
+2007/08,Portsmouth,1302,Richard Hughes,M,13,0,0,2,6,3,4,766,8,7,0,2,0,0
+2007/08,Portsmouth,2542,Matthew Taylor,M,13,1,1,0,5,4,4,452,3,7,0,2,0,0
+2007/08,Portsmouth,2111,Milan Baros,F,12,0,1,0,5,1,6,620,8,8,0,0,0,0
+2007/08,Portsmouth,1526,Jermain Defoe,F,12,8,1,4,5,2,5,1067,12,13,0,2,0,0
+2007/08,Portsmouth,2893,Lassana Diarra,M,12,1,0,3,5,1,6,1003,11,14,0,2,0,0
+2007/08,Portsmouth,3179,Arnold Mvuemba,M,8,0,0,1,3,1,4,315,3,4,0,0,0,0
+2007/08,Portsmouth,1999,Jamie Ashdown,G,3,0,0,0,0,0,3,270,3,4,10,0,0,0
+2007/08,Portsmouth,3469,Lucien Aubey,D,3,0,0,0,1,0,2,169,1,2,0,0,0,0
+2007/08,Portsmouth,1571,Djimi Traore,D,3,0,0,0,1,1,1,136,1,1,0,0,0,0
+2007/08,Portsmouth,2559,Martin Cranie,D,2,0,0,0,1,1,0,53,1,1,0,0,0,0
+2007/08,Portsmouth,2550,Gary O'Neil,M,2,0,0,0,1,0,1,143,2,2,0,0,0,0
+2007/08,Portsmouth,2970,Franck Songo'o,M,1,0,0,0,0,0,1,25,0,0,0,0,0,0
+2007/08,Reading,2069,Marcus Hahnemann,G,38,0,0,8,10,6,22,3420,38,66,151,3,0,0
+2007/08,Reading,1986,James Harper,M,38,6,1,7,10,6,22,3353,38,65,0,2,0,0
+2007/08,Reading,3196,Stephen Hunt,M,37,5,4,6,10,6,21,3316,37,64,0,6,0,0
+2007/08,Reading,3205,Kevin Doyle,F,36,6,2,4,10,6,20,3015,34,57,0,1,0,0
+2007/08,Reading,3186,Nicky Shorey,D,36,2,9,8,10,6,20,3221,36,61,0,5,0,0
+2007/08,Reading,2604,Ivar Ingimarsson,D,35,2,1,8,9,6,20,3001,33,57,0,6,0,1
+2007/08,Reading,3207,Dave Kitson,F,34,10,2,2,9,6,19,2526,28,54,0,3,1,0
+2007/08,Reading,3206,Shane Long,F,29,3,2,2,6,5,18,753,7,14,0,4,0,0
+2007/08,Reading,3185,Graeme Murty,D,28,0,0,3,7,4,17,2423,28,47,0,3,0,0
+2007/08,Reading,3189,André Bikey,D,22,3,0,5,7,5,10,1365,14,24,0,7,0,0
+2007/08,Reading,3480,Kalifa Cissé,D,22,1,1,0,5,3,14,1116,11,27,0,3,1,0
+2007/08,Reading,3197,Bobby Convey,M,20,0,2,0,4,3,13,1055,12,22,0,1,0,0
+2007/08,Reading,3200,Brynjar Gunnarsson,M,20,0,0,3,6,4,10,1500,18,30,0,3,1,0
+2007/08,Reading,1401,John Oster,M,18,0,2,2,6,2,10,1021,12,13,0,0,0,0
+2007/08,Reading,2464,Liam Rosenior,D,17,0,0,4,6,2,9,1248,15,24,0,2,0,0
+2007/08,Reading,3193,Ibrahima Sonko,D,16,0,1,0,3,3,10,1254,15,29,0,2,1,0
+2007/08,Reading,3204,Leroy Lita,F,14,1,2,1,3,1,10,896,10,15,0,1,0,0
+2007/08,Reading,3482,Marek Matejovsky,M,14,1,0,0,4,1,9,879,10,10,0,2,1,0
+2007/08,Reading,669,Michael Duberry,D,13,0,0,4,4,2,7,1023,12,19,0,2,0,1
+2007/08,Reading,3485,Emerse Faé,M,8,0,0,0,0,0,8,293,3,10,0,0,0,0
+2007/08,Reading,2169,Ulises de la Cruz,D,6,0,1,1,1,1,4,339,3,8,0,2,0,0
+2007/08,Reading,3483,Jimmy Kébé,M,5,0,0,0,1,0,4,142,1,3,0,0,0,0
+2007/08,Reading,2588,Seol Ki-Hyeon,M,3,0,0,0,1,1,1,140,2,0,0,1,0,0
+2007/08,Reading,868,Glen Little,M,2,0,0,0,0,1,1,51,0,1,0,0,0,0
+2007/08,Reading,3194,Scott Golbourne,D,1,0,0,0,0,0,1,63,1,2,0,0,0,0
+2007/08,Reading,1829,John Halls,D,1,0,0,0,0,0,1,7,0,1,0,0,0,0
+2007/08,Sunderland,2976,Danny Collins,D,36,1,1,5,11,5,20,3042,32,52,0,6,0,0
+2007/08,Sunderland,3488,Craig Gordon,G,34,0,0,6,10,5,19,3060,34,55,84,1,0,1
+2007/08,Sunderland,2128,Michael Chopra,F,33,6,0,1,9,6,18,2018,21,40,0,7,0,0
+2007/08,Sunderland,2796,Kenwyne Jones,F,33,7,6,4,9,5,19,2823,33,48,0,2,0,0
+2007/08,Sunderland,2982,Grant Leadbitter,M,31,2,4,0,9,5,17,1890,17,38,0,5,0,0
+2007/08,Sunderland,2974,Nyron Nosworthy,D,29,0,1,6,9,4,16,2517,29,37,0,3,0,0
+2007/08,Sunderland,2985,Daryl Murphy,F,28,3,3,4,10,3,15,1807,20,21,0,2,0,1
+2007/08,Sunderland,2980,Dean Whitehead,M,27,1,2,7,10,3,14,2399,27,38,0,8,0,0
+2007/08,Sunderland,2740,Liam Miller,M,24,1,2,2,7,3,14,1595,16,31,0,3,1,0
+2007/08,Sunderland,1426,Danny Higginbotham,D,21,3,0,2,4,5,12,1890,21,39,0,1,0,0
+2007/08,Sunderland,2738,Paul McShane,D,21,0,0,2,5,4,12,1766,20,37,0,3,1,1
+2007/08,Sunderland,3498,Ross Wallace,M,21,2,2,2,3,5,13,1501,18,32,0,3,0,0
+2007/08,Sunderland,1932,Dickson Etuhu,M,20,1,1,1,4,5,11,1508,18,30,0,4,0,0
+2007/08,Sunderland,2842,Anthony Stokes,F,20,1,0,0,5,5,10,738,8,10,0,1,0,0
+2007/08,Sunderland,59,Dwight Yorke,M,20,1,0,1,5,2,13,1254,17,24,0,4,1,0
+2007/08,Sunderland,3499,Roy O'Donovan,F,17,0,0,0,7,2,8,445,4,8,0,2,0,0
+2007/08,Sunderland,1982,Kieran Richardson,D,17,3,2,3,7,1,9,1115,15,12,0,3,0,0
+2007/08,Sunderland,3156,Jonny Evans,D,15,0,0,4,6,1,8,1337,15,15,0,0,0,0
+2007/08,Sunderland,3497,Carlos Edwards,M,13,0,0,1,6,2,5,849,11,17,0,0,0,0
+2007/08,Sunderland,2812,Andy Reid,M,13,1,2,1,5,1,7,985,11,13,0,2,0,0
+2007/08,Sunderland,2517,Phil Bardsley,D,11,0,0,4,5,1,5,990,11,10,0,3,0,0
+2007/08,Sunderland,3192,Gregory Halford,D,8,0,0,1,1,3,4,678,8,14,0,1,1,0
+2007/08,Sunderland,1045,Ian Harte,D,8,0,0,0,0,2,6,306,3,10,0,0,0,0
+2007/08,Sunderland,725,Andrew Cole,F,7,0,0,0,2,1,4,236,3,5,0,0,0,0
+2007/08,Sunderland,3502,Rade Prica,F,6,1,0,0,2,0,4,206,0,0,0,1,0,0
+2007/08,Sunderland,3037,David Connolly,F,3,0,0,0,0,1,2,95,1,2,0,0,0,0
+2007/08,Sunderland,3500,Martyn Waghorn,F,3,0,0,0,0,0,3,105,1,5,0,0,0,0
+2007/08,Sunderland,2759,Darren Ward,G,3,0,0,1,1,1,1,270,3,3,9,0,0,0
+2007/08,Sunderland,3491,Russell Anderson,D,1,0,0,0,0,0,1,28,0,1,0,0,0,0
+2007/08,Sunderland,2798,Marton Fülöp,G,1,0,0,0,0,0,1,90,1,1,3,0,0,0
+2007/08,Sunderland,2193,Stern John,F,1,1,0,0,0,1,0,31,0,1,0,0,0,0
+2007/08,Tottenham Hotspur,2078,Steed Malbranque,M,37,4,2,6,10,13,14,2850,35,44,0,4,0,0
+2007/08,Tottenham Hotspur,3247,Dimitar Berbatov,F,36,15,9,6,9,13,14,2992,33,56,0,3,0,0
+2007/08,Tottenham Hotspur,1692,Robbie Keane,F,36,15,3,2,9,13,14,2731,32,50,0,1,1,0
+2007/08,Tottenham Hotspur,3026,Pascal Chimbonda,D,32,2,5,6,10,11,11,2754,31,51,0,5,0,0
+2007/08,Tottenham Hotspur,2127,Jermaine Jenas,M,29,4,6,7,8,12,9,2476,28,38,0,3,0,0
+2007/08,Tottenham Hotspur,2270,Aaron Lennon,M,29,2,3,4,9,11,9,2136,25,32,0,1,0,0
+2007/08,Tottenham Hotspur,2991,Tom Huddlestone,M,28,3,7,6,8,9,11,1940,18,41,0,5,0,0
+2007/08,Tottenham Hotspur,3243,Didier Zokora,M,28,0,0,5,7,10,11,2254,25,40,0,6,0,0
+2007/08,Tottenham Hotspur,2098,Darren Bent,F,27,6,3,2,8,9,10,1134,11,22,0,0,0,0
+2007/08,Tottenham Hotspur,2805,Michael Dawson,D,27,1,0,4,7,11,9,2199,26,39,0,3,0,0
+2007/08,Tottenham Hotspur,1404,Paul Robinson,G,25,0,0,5,8,7,10,2250,25,47,61,0,0,0
+2007/08,Tottenham Hotspur,3508,Younes Kaboul,D,21,3,1,2,6,5,10,1607,19,35,0,1,0,0
+2007/08,Tottenham Hotspur,1526,Jermain Defoe,F,19,4,1,0,7,4,8,525,3,14,0,3,0,0
+2007/08,Tottenham Hotspur,2988,Lee Young-Pyo,D,18,0,0,4,7,3,8,1521,17,28,0,2,0,0
+2007/08,Tottenham Hotspur,2994,Jamie O'Hara,M,17,1,0,1,6,4,7,892,9,15,0,3,0,0
+2007/08,Tottenham Hotspur,2992,Teemu Tainio,M,16,0,0,0,7,3,6,647,6,14,0,1,0,0
+2007/08,Tottenham Hotspur,3506,Alan Hutton,D,14,0,1,4,4,6,4,1215,14,20,0,1,0,0
+2007/08,Tottenham Hotspur,3514,Kevin-Prince Boateng,M,13,0,0,1,7,3,3,587,7,8,0,2,0,0
+2007/08,Tottenham Hotspur,2799,Radek Cerny,G,13,0,1,4,3,6,4,1170,13,14,44,1,0,0
+2007/08,Tottenham Hotspur,1565,Jonathan Woodgate,D,12,1,0,3,3,6,3,1067,12,16,0,2,0,0
+2007/08,Tottenham Hotspur,3513,Gareth Bale,F,8,2,0,0,0,4,4,615,8,14,0,1,0,0
+2007/08,Tottenham Hotspur,3509,Gilberto,D,6,1,0,1,2,3,1,340,3,3,0,0,0,0
+2007/08,Tottenham Hotspur,3241,Adel Taarabt,M,6,0,0,0,2,0,4,121,0,3,0,0,0,0
+2007/08,Tottenham Hotspur,3240,Ricardo Rocha,D,5,0,0,1,1,2,2,424,4,7,0,1,0,1
+2007/08,Tottenham Hotspur,1771,Anthony Gardner,D,4,1,0,1,1,0,3,360,4,5,0,1,0,0
+2007/08,Tottenham Hotspur,1627,Ledley King,D,4,0,0,0,2,1,1,294,4,8,0,0,0,0
+2007/08,Tottenham Hotspur,2989,Paul Stalteri,D,3,0,0,0,1,0,2,236,3,4,0,0,0,0
+2007/08,Tottenham Hotspur,3510,Chris Gunter,D,2,0,0,0,0,1,1,78,1,1,0,0,0,0
+2007/08,Tottenham Hotspur,2681,Wayne Routledge,M,2,0,0,0,1,0,1,94,1,0,0,0,0,0
+2007/08,Tottenham Hotspur,3239,Benoit Assou-Ekotto,D,1,0,0,0,0,1,0,90,1,1,0,1,0,0
+2007/08,West Ham United,2758,Robert Green,G,38,0,0,8,13,10,15,3420,38,50,116,2,0,0
+2007/08,West Ham United,1756,George McCartney,D,38,1,4,7,13,10,15,3230,38,47,0,4,0,1
+2007/08,West Ham United,1379,Hayden Mullins,M,34,0,0,7,11,8,15,2814,32,39,0,3,0,0
+2007/08,West Ham United,2018,Lucas Neill,D,34,0,2,7,11,10,13,3060,34,46,0,4,0,0
+2007/08,West Ham United,2778,Dean Ashton,F,31,10,0,0,9,7,15,1994,20,32,0,0,0,0
+2007/08,West Ham United,2058,Carlton Cole,F,31,4,7,1,10,8,13,1895,21,24,0,9,0,0
+2007/08,West Ham United,3014,Mark Noble,M,31,3,3,6,11,8,12,2276,25,37,0,6,0,0
+2007/08,West Ham United,1131,Matt Upson,D,29,1,0,8,11,7,11,2583,29,30,0,2,0,0
+2007/08,West Ham United,1306,Luís Boa Morte,M,27,0,2,4,9,8,10,1489,18,25,0,2,1,0
+2007/08,West Ham United,2518,Jonathan Spector,D,26,0,0,1,10,7,9,1316,13,20,0,1,0,0
+2007/08,West Ham United,2393,Anton Ferdinand,D,25,2,0,4,8,6,11,1892,22,32,0,1,0,0
+2007/08,West Ham United,1497,Freddie Ljungberg,M,25,2,3,1,8,5,12,1856,22,31,0,3,0,0
+2007/08,West Ham United,1597,Nolberto Solano,M,23,4,1,1,8,7,8,1265,14,14,0,3,0,0
+2007/08,West Ham United,1772,Matthew Etherington,M,18,3,1,3,8,5,5,1314,15,13,0,2,0,0
+2007/08,West Ham United,1518,Scott Parker,M,18,1,0,1,5,5,8,1430,17,25,0,3,0,0
+2007/08,West Ham United,1190,Lee Bowyer,M,15,4,2,1,6,4,5,1010,12,10,0,7,0,0
+2007/08,West Ham United,3280,John Pantsil,D,14,0,0,0,5,3,6,673,4,14,0,5,0,0
+2007/08,West Ham United,2603,Bobby Zamora,F,13,1,2,1,3,3,7,914,11,19,0,1,0,0
+2007/08,West Ham United,2590,Henri Camara,F,10,0,1,0,2,3,5,338,3,6,0,1,0,0
+2007/08,West Ham United,3009,Danny Gabbidon,D,10,0,0,3,4,3,3,766,8,5,0,1,0,0
+2007/08,West Ham United,1869,Craig Bellamy,F,8,2,1,1,4,2,2,527,7,3,0,2,0,0
+2007/08,West Ham United,3518,Julien Faubert,D,7,0,0,0,3,3,1,344,4,7,0,1,0,0
+2007/08,West Ham United,3521,Freddie Sears,F,7,1,0,0,2,2,3,208,1,2,0,0,0,0
+2007/08,West Ham United,3517,James Tomkins,D,6,0,0,0,1,3,2,465,5,11,0,0,0,0
+2007/08,West Ham United,3010,James Collins,D,3,0,0,1,2,0,1,198,2,2,0,0,0,0
+2007/08,West Ham United,3520,Jack Collison,M,2,0,0,0,0,0,2,104,1,1,0,0,0,0
+2007/08,West Ham United,1740,Kieron Dyer,M,2,0,0,1,1,1,0,180,2,1,0,0,0,0
+2007/08,West Ham United,3017,Kyel Reid,M,1,0,0,0,0,0,1,10,0,1,0,0,0,0
+2007/08,Wigan Athletic,1359,Chris Kirkland,G,37,0,0,12,10,10,17,3330,37,49,100,0,0,0
+2007/08,Wigan Athletic,3029,Paul Scharner,D,37,4,1,10,9,10,18,3315,37,51,0,6,0,1
+2007/08,Wigan Athletic,1757,Kevin Kilbane,M,35,1,1,9,10,8,17,2961,33,47,0,2,1,0
+2007/08,Wigan Athletic,1382,Marcus Bent,F,31,7,2,2,7,7,17,2335,25,42,0,1,0,0
+2007/08,Wigan Athletic,918,Michael Brown,M,31,0,0,9,8,8,15,2470,27,36,0,11,0,0
+2007/08,Wigan Athletic,1677,Mario Melchiot,D,31,0,1,10,8,9,14,2638,31,31,0,2,1,0
+2007/08,Wigan Athletic,3285,Antonio Valencia,D,31,3,2,12,10,9,12,2712,30,35,0,5,0,0
+2007/08,Wigan Athletic,2382,Jason Koumas,M,30,1,4,6,7,9,14,1977,21,28,0,1,1,0
+2007/08,Wigan Athletic,2513,Antoine Sibierski,F,30,4,0,0,8,9,13,1011,10,12,0,1,0,0
+2007/08,Wigan Athletic,908,Emile Heskey,F,28,4,2,4,9,9,10,2087,27,24,0,6,0,0
+2007/08,Wigan Athletic,1890,Titus Bramble,D,26,2,1,5,6,5,15,2340,26,42,0,5,0,0
+2007/08,Wigan Athletic,2669,Emmerson Boyce,D,25,0,0,9,7,8,10,2204,24,31,0,1,0,0
+2007/08,Wigan Athletic,3286,Denny Landzaat,M,19,3,0,3,5,4,10,1585,19,30,0,2,0,0
+2007/08,Wigan Athletic,3027,Ryan Taylor,D,17,3,3,0,5,6,6,1121,12,17,0,4,0,0
+2007/08,Wigan Athletic,3527,Wilson Palacios,M,16,0,1,6,6,5,5,1392,16,12,0,4,1,0
+2007/08,Wigan Athletic,3270,Marlon King,F,15,1,0,0,5,5,5,667,8,7,0,1,0,0
+2007/08,Wigan Athletic,3291,Julius Aghahowa,F,14,0,1,0,4,3,7,415,2,10,0,2,0,0
+2007/08,Wigan Athletic,3283,Andreas Granqvist,D,14,0,0,2,3,2,9,1171,13,24,0,1,0,0
+2007/08,Wigan Athletic,3035,Josip Skoko,M,12,0,0,0,2,2,8,666,7,14,0,4,0,0
+2007/08,Wigan Athletic,2475,Salomon Olembé,M,8,0,0,0,3,1,4,198,2,3,0,0,0,0
+2007/08,Wigan Athletic,2803,Erik Edman,D,5,0,0,3,2,2,1,400,5,1,0,0,0,0
+2007/08,Wigan Athletic,3292,David Cotterill,M,2,0,0,0,0,1,1,100,2,4,0,0,0,0
+2007/08,Wigan Athletic,3524,Maynor Figueroa,D,2,0,0,0,1,0,1,91,1,2,0,0,0,0
+2007/08,Wigan Athletic,2101,Caleb Folan,F,2,0,0,0,1,0,1,79,1,1,0,0,0,0
+2007/08,Wigan Athletic,3526,Erik Hagen,D,1,0,0,0,0,0,1,74,1,1,0,0,0,0
+2007/08,Wigan Athletic,2558,Fitz Hall,D,1,0,0,0,0,0,1,39,0,4,0,0,0,0
+2007/08,Wigan Athletic,3022,Mike Pollitt,G,1,0,0,0,0,0,1,90,1,2,1,0,0,0

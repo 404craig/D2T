@@ -1,0 +1,554 @@
+season,club_feed,feed_id,name,feed_pos,appearances,goals,goal_assist,clean_sheet,wins,draws,losses,mins_played,game_started,goals_conceded,saves,yellow_card,red_card,own_goals
+2005/06,Arsenal,2409,Jens Lehmann,G,38,0,0,16,20,7,11,0,0,0,0,1,0,0
+2005/06,Arsenal,2417,Cesc Fàbregas,M,35,3,5,9,19,6,10,0,0,0,0,5,1,0
+2005/06,Arsenal,2165,Gilberto Silva,M,33,2,0,11,19,5,9,0,0,0,0,4,1,0
+2005/06,Arsenal,1835,Robert Pirès,M,33,7,4,6,17,5,11,0,0,0,0,2,0,0
+2005/06,Arsenal,2002,Kolo Touré,D,33,0,1,14,18,6,9,0,0,0,0,3,0,0
+2005/06,Arsenal,1659,Thierry Henry,F,32,27,8,10,18,5,9,0,0,0,0,2,0,0
+2005/06,Arsenal,2611,Mathieu Flamini,M,31,0,3,7,15,7,9,0,0,0,0,4,0,0
+2005/06,Arsenal,2415,José Antonio Reyes,M,26,5,10,3,14,7,5,0,0,0,0,5,0,0
+2005/06,Arsenal,2838,Aliaksandr Hleb,M,25,3,0,1,13,4,8,0,0,0,0,0,0,0
+2005/06,Arsenal,1497,Freddie Ljungberg,M,25,1,3,6,11,5,9,0,0,0,0,2,0,0
+2005/06,Arsenal,991,Dennis Bergkamp,F,24,2,1,2,15,4,5,0,0,0,0,2,0,0
+2005/06,Arsenal,2616,Robin van Persie,F,24,5,1,0,12,5,7,0,0,0,0,2,0,0
+2005/06,Arsenal,1831,Lauren,D,22,0,1,11,11,4,7,0,0,0,0,6,0,0
+2005/06,Arsenal,557,Sol Campbell,D,20,2,2,9,10,5,5,0,0,0,0,1,0,0
+2005/06,Arsenal,2412,Philippe Senderos,D,20,2,0,6,9,2,9,0,0,0,0,2,0,0
+2005/06,Arsenal,2612,Emmanuel Eboué,D,18,0,2,3,10,3,5,0,0,0,0,0,0,0
+2005/06,Arsenal,2845,Emmanuel Adebayor,F,13,4,4,2,7,3,3,0,0,0,0,0,0,0
+2005/06,Arsenal,2840,Abou Diaby,M,12,1,1,3,5,3,4,0,0,0,0,2,0,0
+2005/06,Arsenal,2162,Pascal Cygan,D,12,2,0,6,7,3,2,0,0,0,0,4,0,0
+2005/06,Arsenal,1494,Ashley Cole,D,11,0,0,4,8,1,2,0,0,0,0,3,0,0
+2005/06,Arsenal,2413,Gaël Clichy,D,7,0,0,2,4,2,1,0,0,0,0,2,0,0
+2005/06,Arsenal,2609,Johan Djourou,D,7,0,0,2,3,3,1,0,0,0,0,0,0,0
+2005/06,Arsenal,2837,Alexandre Song,M,5,0,0,1,4,1,0,0,0,0,0,0,0,0
+2005/06,Arsenal,2419,Quincy Owusu-Abeyie,F,4,0,0,0,0,1,3,0,0,0,0,0,0,0
+2005/06,Arsenal,2613,Sebastian Larsson,M,3,0,0,1,1,1,1,0,0,0,0,2,0,0
+2005/06,Arsenal,2164,Kerrea Gilbert,D,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+2005/06,Arsenal,2617,Arturo Lupoli,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2005/06,Aston Villa,1308,Gareth Barry,M,36,3,2,8,10,11,15,0,0,0,0,9,1,0
+2005/06,Aston Villa,1751,Thomas Sørensen,G,36,0,0,11,9,12,15,0,0,0,0,0,0,0
+2005/06,Aston Villa,2423,Steven Davis,M,35,4,2,10,10,12,13,0,0,0,0,0,0,0
+2005/06,Aston Villa,1230,Aaron Hughes,D,35,0,5,10,10,12,13,0,0,0,0,1,0,1
+2005/06,Aston Villa,1042,Gavin McCann,M,32,1,0,10,9,11,12,0,0,0,0,8,0,0
+2005/06,Aston Villa,2013,Liam Ridgewell,D,32,5,0,9,9,9,14,0,0,0,0,5,0,0
+2005/06,Aston Villa,1843,Juan Pablo Ángel,F,31,3,1,1,6,11,14,0,0,0,0,3,0,0
+2005/06,Aston Villa,2012,Olof Mellberg,D,27,0,0,5,6,8,13,0,0,0,0,5,0,0
+2005/06,Aston Villa,2100,James Milner,M,27,1,8,7,9,7,11,0,0,0,0,3,0,0
+2005/06,Aston Villa,2424,Luke Moore,F,27,8,2,1,7,10,10,0,0,0,0,2,0,0
+2005/06,Aston Villa,2111,Milan Baros,F,25,8,3,5,7,9,9,0,0,0,0,7,0,0
+2005/06,Aston Villa,1768,Kevin Phillips,F,23,4,4,5,8,6,9,0,0,0,0,0,0,0
+2005/06,Aston Villa,2846,Wilfred Bouma,D,20,0,0,6,6,6,8,0,0,0,0,2,0,0
+2005/06,Aston Villa,1505,Jlloyd Samuel,D,19,0,1,2,4,5,10,0,0,0,0,2,0,0
+2005/06,Aston Villa,848,Lee Hendrie,M,16,1,2,1,3,5,8,0,0,0,0,1,0,0
+2005/06,Aston Villa,1706,Eirik Bakke,M,14,0,0,1,4,4,6,0,0,0,0,1,0,0
+2005/06,Aston Villa,1504,Mark Delaney,D,12,1,1,4,3,4,5,0,0,0,0,3,0,0
+2005/06,Aston Villa,2622,Gabriel Agbonlahor,F,9,1,1,1,2,2,5,0,0,0,0,0,0,0
+2005/06,Aston Villa,1205,Patrik Berger,M,8,0,1,0,2,1,5,0,0,0,0,1,0,0
+2005/06,Aston Villa,2847,Craig Gardner,M,8,0,1,0,3,1,4,0,0,0,0,2,0,0
+2005/06,Aston Villa,2620,Gary Cahill,D,7,1,0,1,2,1,4,0,0,0,0,3,0,0
+2005/06,Aston Villa,2169,Ulises de la Cruz,D,7,0,0,1,1,2,4,0,0,0,0,0,0,0
+2005/06,Aston Villa,2520,Eric Djemba Djemba,M,4,0,0,0,1,0,3,0,0,0,0,0,0,0
+2005/06,Aston Villa,2171,Peter Whittingham,M,4,0,0,0,1,1,2,0,0,0,0,1,0,0
+2005/06,Aston Villa,1597,Nolberto Solano,M,3,0,0,0,0,2,1,0,0,0,0,0,1,0
+2005/06,Aston Villa,1295,Stuart Taylor,G,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+2005/06,Aston Villa,2619,Martin Laursen,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2005/06,Birmingham City,1495,Jermaine Pennant,M,38,2,6,7,8,10,20,0,0,0,0,4,0,0
+2005/06,Birmingham City,908,Emile Heskey,F,34,4,4,7,8,10,16,0,0,0,0,3,1,0
+2005/06,Birmingham City,1242,Maik Taylor,G,34,0,0,8,6,10,18,0,0,0,0,0,0,0
+2005/06,Birmingham City,972,Kenny Cunningham,D,31,0,0,7,7,8,16,0,0,0,0,5,1,0
+2005/06,Birmingham City,1336,Damien Johnson,M,31,0,2,8,8,9,14,0,0,0,0,5,1,0
+2005/06,Birmingham City,1538,Mikael Forssell,F,27,3,1,1,4,8,15,0,0,0,0,1,0,0
+2005/06,Birmingham City,332,Nicky Butt,M,24,3,0,3,5,6,13,0,0,0,0,5,1,0
+2005/06,Birmingham City,1131,Matt Upson,D,24,1,0,5,5,5,14,0,0,0,0,2,0,0
+2005/06,Birmingham City,2659,Jirí Jarosík,D,23,5,1,3,7,4,13,0,0,0,0,2,0,0
+2005/06,Birmingham City,1677,Mario Melchiot,D,23,1,1,6,6,6,11,0,0,0,0,3,0,0
+2005/06,Birmingham City,1133,Julian Gray,M,21,1,2,4,4,6,11,0,0,0,0,1,0,0
+2005/06,Birmingham City,1331,Martin Taylor,D,21,0,0,6,5,6,10,0,0,0,0,1,0,0
+2005/06,Birmingham City,2427,Neil Kilkenny,M,18,0,0,0,3,5,10,0,0,0,0,0,1,0
+2005/06,Birmingham City,1114,Stan Lazaridis,M,17,0,0,2,4,2,11,0,0,0,0,1,0,0
+2005/06,Birmingham City,2630,Walter Pandiani,F,17,2,0,0,3,4,10,0,0,0,0,1,0,0
+2005/06,Birmingham City,960,Jamie Clapham,D,16,1,1,1,2,4,10,0,0,0,0,2,0,0
+2005/06,Birmingham City,670,Muzzy Izzet,M,16,0,0,2,5,3,8,0,0,0,0,1,1,0
+2005/06,Birmingham City,2184,Olivier Tebily,D,16,0,0,2,3,5,8,0,0,0,0,3,0,0
+2005/06,Birmingham City,961,Stephen Clemence,M,15,0,0,3,3,4,8,0,0,0,0,4,0,1
+2005/06,Birmingham City,1337,David Dunn,M,15,2,1,0,5,3,7,0,0,0,0,0,0,0
+2005/06,Birmingham City,2861,DJ Campbell,F,11,0,0,0,1,4,6,0,0,0,0,0,0,0
+2005/06,Birmingham City,390,Chris Sutton,F,10,1,1,2,3,3,4,0,0,0,0,2,0,0
+2005/06,Birmingham City,2183,Mat Sadler,D,8,0,0,4,2,4,2,0,0,0,0,1,0,0
+2005/06,Birmingham City,2624,Alex Bruce,D,6,0,0,0,0,1,5,0,0,0,0,1,0,0
+2005/06,Birmingham City,2858,Martin Latka,D,6,0,0,1,1,2,3,0,0,0,0,2,0,0
+2005/06,Birmingham City,2855,Marcos Painter,D,4,0,0,1,1,1,2,0,0,0,0,0,0,0
+2005/06,Birmingham City,2177,Nico Vaesen,G,4,0,0,2,2,0,2,0,0,0,0,0,1,0
+2005/06,Birmingham City,2857,Matthew Birley,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2005/06,Birmingham City,1384,Clinton Morrison,F,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2005/06,Birmingham City,2625,Mehdi Nafti,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2005/06,Blackburn Rovers,1420,Brad Friedel,G,38,0,0,16,19,6,13,0,0,0,0,0,0,0
+2005/06,Blackburn Rovers,2018,Lucas Neill,D,35,1,0,13,18,5,12,0,0,0,0,10,1,0
+2005/06,Blackburn Rovers,2636,Morten Pedersen,M,34,9,5,9,17,6,11,0,0,0,0,3,0,0
+2005/06,Blackburn Rovers,2435,Steven Reid,D,34,4,2,11,17,6,11,0,0,0,0,7,0,0
+2005/06,Blackburn Rovers,706,Robbie Savage,M,34,1,3,14,16,6,12,0,0,0,0,10,1,0
+2005/06,Blackburn Rovers,2870,Shefki Kuqi,F,33,7,4,5,15,5,13,0,0,0,0,1,0,0
+2005/06,Blackburn Rovers,2634,Ryan Nelsen,D,31,0,1,12,15,6,10,0,0,0,0,4,0,0
+2005/06,Blackburn Rovers,2434,Brett Emerton,M,30,1,3,3,15,4,11,0,0,0,0,2,0,0
+2005/06,Blackburn Rovers,1253,Michael Gray,D,30,0,1,13,17,4,9,0,0,0,0,4,0,0
+2005/06,Blackburn Rovers,2009,David Bentley,M,29,3,1,3,16,4,9,0,0,0,0,7,0,0
+2005/06,Blackburn Rovers,1869,Craig Bellamy,F,27,13,2,6,14,4,9,0,0,0,0,5,0,0
+2005/06,Blackburn Rovers,2024,Tugay Kerimoglu,M,27,1,0,4,16,3,8,0,0,0,0,4,1,0
+2005/06,Blackburn Rovers,2866,Zurab Khizanishvili,D,26,1,0,11,15,4,7,0,0,0,0,2,1,1
+2005/06,Blackburn Rovers,2637,Aaron Mokoena,M,22,0,0,1,13,4,5,0,0,0,0,1,0,0
+2005/06,Blackburn Rovers,356,Andrew Todd,D,22,2,0,5,8,3,11,0,0,0,0,4,1,0
+2005/06,Blackburn Rovers,27,Paul Dickov,F,21,5,0,2,11,4,6,0,0,0,0,5,1,0
+2005/06,Blackburn Rovers,2288,Florent Sinama-Pongolle,F,10,1,1,0,7,0,3,0,0,0,0,0,0,0
+2005/06,Blackburn Rovers,2869,Sergio Peter,M,8,0,1,0,5,0,3,0,0,0,0,2,0,0
+2005/06,Blackburn Rovers,259,Dominic Matteo,D,6,0,0,2,2,2,2,0,0,0,0,2,0,0
+2005/06,Blackburn Rovers,1206,David Thompson,M,6,0,0,0,2,1,3,0,0,0,0,1,0,0
+2005/06,Blackburn Rovers,1381,Matt Jansen,F,4,0,0,0,1,1,2,0,0,0,0,0,0,0
+2005/06,Blackburn Rovers,2198,Vratislav Gresko,D,3,0,0,0,0,0,3,0,0,0,0,0,0,0
+2005/06,Blackburn Rovers,2638,Jemal Johnson,F,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+2005/06,Blackburn Rovers,300,Garry Flitcroft,M,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+2005/06,Blackburn Rovers,2204,Paul Gallagher,M,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2005/06,Bolton Wanderers,1342,Jussi Jääskeläinen,G,38,0,0,15,15,11,12,0,0,0,0,2,0,0
+2005/06,Bolton Wanderers,1249,Kevin Davies,F,37,7,7,10,15,10,12,0,0,0,0,9,0,0
+2005/06,Bolton Wanderers,2040,Kevin Nolan,M,36,9,4,14,15,10,11,0,0,0,0,7,0,0
+2005/06,Bolton Wanderers,2645,Tal Ben Haim,D,34,0,0,12,13,10,11,0,0,0,0,7,1,0
+2005/06,Bolton Wanderers,2443,Stelios Giannakopoulos,M,34,9,4,6,13,10,11,0,0,0,0,4,0,0
+2005/06,Bolton Wanderers,239,Gary Speed,M,31,4,3,11,13,7,11,0,0,0,0,2,0,0
+2005/06,Bolton Wanderers,2041,Ricardo Gardner,M,30,0,2,8,10,10,10,0,0,0,0,3,1,0
+2005/06,Bolton Wanderers,2032,Bruno N'Gotty,D,29,0,0,12,11,9,9,0,0,0,0,2,0,1
+2005/06,Bolton Wanderers,2878,Abdoulaye Diagne-Faye,D,27,1,1,5,12,5,10,0,0,0,0,7,0,0
+2005/06,Bolton Wanderers,2209,Jay Jay Okocha,M,27,1,2,2,10,7,10,0,0,0,0,1,0,0
+2005/06,Bolton Wanderers,2647,Joseph O'Brien,D,23,0,0,9,11,6,6,0,0,0,0,2,0,0
+2005/06,Bolton Wanderers,2447,Ricardo Vaz Tê,F,22,3,4,1,8,8,6,0,0,0,0,3,0,0
+2005/06,Bolton Wanderers,2877,Hidetoshi Nakata,M,21,1,2,4,9,5,7,0,0,0,0,1,1,0
+2005/06,Bolton Wanderers,2048,Henrik Pedersen,F,21,1,0,6,8,3,10,0,0,0,0,0,0,0
+2005/06,Bolton Wanderers,2289,El Hadji Diouf,M,20,3,1,2,9,5,6,0,0,0,0,4,1,0
+2005/06,Bolton Wanderers,2031,Nicky Hunt,D,20,0,1,3,7,8,5,0,0,0,0,1,0,0
+2005/06,Bolton Wanderers,2881,Jared Borgetti,F,19,2,0,0,8,5,6,0,0,0,0,0,0,0
+2005/06,Bolton Wanderers,2643,Radhi Jaidi,D,16,3,2,4,8,2,6,0,0,0,0,1,0,0
+2005/06,Bolton Wanderers,2208,Ivan Campo,M,15,2,0,2,6,5,4,0,0,0,0,2,0,0
+2005/06,Bolton Wanderers,2648,Khalilou Fadiga,M,8,1,0,0,2,5,1,0,0,0,0,2,0,0
+2005/06,Bolton Wanderers,1381,Matt Jansen,F,6,0,1,0,1,4,1,0,0,0,0,0,0,0
+2005/06,Bolton Wanderers,2246,Martin Djetou,D,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+2005/06,Bolton Wanderers,2131,Fabrice Fernandes,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2005/06,Bolton Wanderers,2874,Jaroslaw Fojut,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2005/06,Charlton Athletic,1850,Radostin Kishishev,M,37,0,1,9,13,8,16,0,0,0,0,7,0,0
+2005/06,Charlton Athletic,2098,Darren Bent,F,36,18,4,11,13,7,16,0,0,0,0,2,0,0
+2005/06,Charlton Athletic,1371,Hermann Hreidarsson,D,34,0,3,13,13,8,13,0,0,0,0,4,0,0
+2005/06,Charlton Athletic,2187,Bryan Hughes,M,33,3,3,6,12,7,14,0,0,0,0,3,0,0
+2005/06,Charlton Athletic,1464,Luke Young,D,32,1,2,11,12,7,13,0,0,0,0,8,0,0
+2005/06,Charlton Athletic,2093,Darren Ambrose,M,28,3,2,3,7,6,15,0,0,0,0,2,1,0
+2005/06,Charlton Athletic,587,Chris Perry,D,28,1,0,10,10,6,12,0,0,0,0,5,0,0
+2005/06,Charlton Athletic,1168,Chris Powell,D,27,0,2,8,11,5,11,0,0,0,0,2,0,1
+2005/06,Charlton Athletic,2008,Jerome Thomas,M,25,1,2,0,10,4,11,0,0,0,0,1,0,0
+2005/06,Charlton Athletic,1898,Matt Holland,M,23,1,0,6,5,7,11,0,0,0,0,0,0,0
+2005/06,Charlton Athletic,2225,Dennis Rommedahl,M,21,2,4,2,9,4,8,0,0,0,0,1,0,0
+2005/06,Charlton Athletic,1396,Thomas Myhre,G,20,0,0,9,6,7,7,0,0,0,0,0,0,0
+2005/06,Charlton Athletic,2518,Jonathan Spector,D,20,0,0,5,4,5,11,0,0,0,0,1,0,0
+2005/06,Charlton Athletic,1658,Jay Bothroyd,F,18,2,0,0,4,6,8,0,0,0,0,0,0,0
+2005/06,Charlton Athletic,1423,Danny Murphy,M,18,4,8,3,7,1,10,0,0,0,0,2,1,0
+2005/06,Charlton Athletic,2452,Aleksey Smertin,M,18,0,0,2,8,2,8,0,0,0,0,0,0,0
+2005/06,Charlton Athletic,1854,Shaun Bartlett,F,16,1,0,1,7,2,7,0,0,0,0,0,0,0
+2005/06,Charlton Athletic,2215,Stephan Andersen,G,15,0,0,3,6,1,8,0,0,0,0,2,0,0
+2005/06,Charlton Athletic,1382,Marcus Bent,F,13,2,0,3,3,7,3,0,0,0,0,0,0,0
+2005/06,Charlton Athletic,2051,Jonathan Fortune,D,11,0,0,3,3,2,6,0,0,0,0,1,0,0
+2005/06,Charlton Athletic,2344,Talal El Karkouri,D,10,0,1,0,3,2,5,0,0,0,0,1,0,0
+2005/06,Charlton Athletic,1118,Jason Euell,F,10,1,0,1,1,4,5,0,0,0,0,0,0,1
+2005/06,Charlton Athletic,2675,Gonzalo Sorondo,D,7,0,0,1,1,1,5,0,0,0,0,2,0,0
+2005/06,Charlton Athletic,1529,Kevin Lisbie,F,6,0,0,0,2,0,4,0,0,0,0,0,0,0
+2005/06,Charlton Athletic,1855,Jonatan Johansson,F,4,0,0,0,2,0,2,0,0,0,0,0,0,0
+2005/06,Charlton Athletic,2219,Osei Sankofa,D,4,0,0,0,1,0,3,0,0,0,0,0,0,0
+2005/06,Charlton Athletic,1848,Dean Kiely,G,3,0,0,1,1,0,2,0,0,0,0,0,0,0
+2005/06,Charlton Athletic,2224,Lloyd Sam,M,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+2005/06,Chelsea,1353,John Terry,D,36,4,0,20,29,4,3,0,0,0,0,4,0,0
+2005/06,Chelsea,800,Frank Lampard,M,35,16,8,19,27,4,4,0,0,0,0,4,0,0
+2005/06,Chelsea,2651,Petr Cech,G,34,0,0,17,27,4,3,0,0,0,0,1,0,0
+2005/06,Chelsea,1632,Joe Cole,M,34,7,4,5,25,4,5,0,0,0,0,7,0,0
+2005/06,Chelsea,2054,William Gallas,D,34,5,1,16,26,3,5,0,0,0,0,5,1,0
+2005/06,Chelsea,2890,Michael Essien,M,31,2,1,14,26,2,3,0,0,0,0,5,0,0
+2005/06,Chelsea,2454,Claude Makelele,M,31,0,2,12,25,4,2,0,0,0,0,7,0,0
+2005/06,Chelsea,2457,Hernán Crespo,F,30,10,1,1,23,4,3,0,0,0,0,1,0,0
+2005/06,Chelsea,2662,Didier Drogba,F,29,12,11,5,25,2,2,0,0,0,0,8,0,0
+2005/06,Chelsea,1004,Damien Duff,M,28,3,4,3,21,3,4,0,0,0,0,3,0,0
+2005/06,Chelsea,2658,Arjen Robben,F,28,6,3,4,23,3,2,0,0,0,0,2,2,0
+2005/06,Chelsea,1934,Shaun Wright-Phillips,M,27,0,3,0,20,2,5,0,0,0,0,0,0,0
+2005/06,Chelsea,1866,Eidur Gudjohnsen,F,26,2,5,3,19,4,3,0,0,0,0,2,0,0
+2005/06,Chelsea,2884,Asier Del Horno,D,25,1,5,13,20,3,2,0,0,0,0,1,0,0
+2005/06,Chelsea,2653,Ricardo Carvalho,D,24,1,1,11,17,3,4,0,0,0,0,5,1,0
+2005/06,Chelsea,2654,Paulo Ferreira,D,21,0,1,11,17,1,3,0,0,0,0,1,0,0
+2005/06,Chelsea,2316,Geremi Sorele Nijtap Fotso,M,15,2,0,4,13,0,2,0,0,0,0,1,0,0
+2005/06,Chelsea,2053,Robert Huth,D,13,0,1,1,9,2,2,0,0,0,0,3,0,0
+2005/06,Chelsea,2058,Carlton Cole,F,9,0,0,0,4,1,4,0,0,0,0,2,0,0
+2005/06,Chelsea,2891,Maniche,M,8,0,0,0,3,2,3,0,0,0,0,0,1,0
+2005/06,Chelsea,1676,Carlo Cudicini,G,4,0,0,2,3,0,1,0,0,0,0,0,0,0
+2005/06,Chelsea,2148,Glen Johnson,D,4,0,0,1,2,1,1,0,0,0,0,1,0,0
+2005/06,Chelsea,2893,Lassana Diarra,M,3,0,0,0,1,0,2,0,0,0,0,0,0,0
+2005/06,Chelsea,2231,Lenny Pidgeley,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2005/06,Chelsea,2894,Jimmy Smith,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2005/06,Everton,1887,Leon Osman,M,35,3,4,6,13,7,15,0,0,0,0,2,0,0
+2005/06,Everton,1757,Kevin Kilbane,M,34,0,1,5,14,6,14,0,0,0,0,4,0,0
+2005/06,Everton,921,Phil Neville,M,34,0,1,12,12,8,14,0,0,0,0,10,2,1
+2005/06,Everton,1558,David Weir,D,33,1,0,11,13,6,14,0,0,0,0,3,0,1
+2005/06,Everton,1005,James Beattie,F,32,10,3,6,13,6,13,0,0,0,0,3,0,0
+2005/06,Everton,2705,Tim Cahill,F,32,6,3,10,12,6,14,0,0,0,0,8,0,0
+2005/06,Everton,2460,James McFadden,M,32,6,2,4,10,7,15,0,0,0,0,3,0,0
+2005/06,Everton,1775,Simon Davies,M,30,1,1,5,8,7,15,0,0,0,0,2,0,0
+2005/06,Everton,2704,Mikel Arteta,M,29,1,7,6,12,6,11,0,0,0,0,5,1,0
+2005/06,Everton,1881,Tony Hibbert,D,29,0,0,11,13,6,10,0,0,0,0,8,0,0
+2005/06,Everton,2239,Joseph Yobo,D,29,1,0,10,9,5,15,0,0,0,0,1,0,0
+2005/06,Everton,877,Duncan Ferguson,F,27,1,0,2,7,7,13,0,0,0,0,2,1,1
+2005/06,Everton,146,Nigel Martyn,G,20,0,0,7,9,1,10,0,0,0,0,0,0,0
+2005/06,Everton,2897,Nuno Valente,D,20,0,0,5,7,5,8,0,0,0,0,3,0,0
+2005/06,Everton,1382,Marcus Bent,F,18,1,0,0,6,2,10,0,0,0,0,0,0,0
+2005/06,Everton,878,Richard Wright,G,15,0,0,3,5,5,5,0,0,0,0,0,0,0
+2005/06,Everton,1017,Alan Stubbs,D,14,0,0,4,6,5,3,0,0,0,0,2,0,0
+2005/06,Everton,2901,Andy van der Meijde,M,10,0,3,0,6,2,2,0,0,0,0,1,1,0
+2005/06,Everton,2898,Matteo Ferrari,D,8,0,0,1,3,1,4,0,0,0,0,2,0,0
+2005/06,Everton,1882,Gary Naysmith,D,7,0,0,2,2,2,3,0,0,0,0,1,0,0
+2005/06,Everton,1175,Lee Carsley,M,5,0,0,1,1,1,3,0,0,0,0,1,1,0
+2005/06,Everton,2235,Iain Turner,G,3,0,0,0,2,1,0,0,0,0,0,0,1,0
+2005/06,Everton,2905,Victor Anichebe,F,2,1,0,0,0,2,0,0,0,0,0,0,0,0
+2005/06,Everton,1433,Alessandro Pistone,D,2,0,0,0,1,0,1,0,0,0,0,1,0,0
+2005/06,Everton,1709,Sander Westerveld,G,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+2005/06,Everton,3039,Per Kroldrup,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2005/06,Everton,2896,John Ruddy,G,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2005/06,Everton,2707,James Vaughan,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2005/06,Fulham,2402,Brian McBride,F,38,9,3,6,14,6,18,0,0,0,0,3,0,0
+2005/06,Fulham,1306,Luís Boa Morte,M,35,6,9,8,13,6,16,0,0,0,0,9,1,0
+2005/06,Fulham,2472,Collins John,F,35,11,2,1,11,6,18,0,0,0,0,4,0,0
+2005/06,Fulham,2078,Steed Malbranque,M,34,6,4,8,13,5,16,0,0,0,0,4,0,0
+2005/06,Fulham,2066,Tomasz Radzinski,F,33,2,4,2,10,6,17,0,0,0,0,3,0,0
+2005/06,Fulham,2075,Zat Knight,D,30,0,0,7,10,5,15,0,0,0,0,2,0,1
+2005/06,Fulham,1791,Heidar Helguson,F,27,8,2,2,12,3,12,0,0,0,0,4,0,1
+2005/06,Fulham,2464,Liam Rosenior,D,24,0,1,7,11,3,10,0,0,0,0,5,0,0
+2005/06,Fulham,1830,Moritz Volz,D,23,0,1,6,7,5,11,0,0,0,0,3,0,0
+2005/06,Fulham,2711,Papa Bouba Diop,M,22,2,0,5,10,3,9,0,0,0,0,6,0,0
+2005/06,Fulham,2463,Carlos Bocanegra,D,21,1,0,5,7,4,10,0,0,0,0,5,0,1
+2005/06,Fulham,912,Tony Warner,G,18,0,0,2,4,2,12,0,0,0,0,0,0,1
+2005/06,Fulham,2294,Niclas Jensen,D,16,0,1,3,5,4,7,0,0,0,0,1,0,0
+2005/06,Fulham,2907,Philippe Christanval,D,15,0,0,1,6,2,7,0,0,0,0,4,0,0
+2005/06,Fulham,394,Mark Crossley,G,13,0,1,3,4,4,5,0,0,0,0,0,0,0
+2005/06,Fulham,1736,Alain Goma,D,13,0,0,2,4,2,7,0,0,0,0,0,0,0
+2005/06,Fulham,2079,Sylvain Legwinski,M,13,0,1,0,5,3,5,0,0,0,0,4,0,1
+2005/06,Fulham,1458,Wayne Bridge,D,12,0,2,3,6,0,6,0,0,0,0,2,0,0
+2005/06,Fulham,2910,Simon Elliott,M,12,0,3,2,6,0,6,0,0,0,0,1,0,0
+2005/06,Fulham,1851,Claus Jensen,M,11,2,1,3,2,3,6,0,0,0,0,0,0,0
+2005/06,Fulham,96,Ian Pearce,D,10,0,0,4,6,1,3,0,0,0,0,1,0,0
+2005/06,Fulham,2329,Antti Niemi,G,9,0,0,4,7,0,2,0,0,0,0,0,0,0
+2005/06,Fulham,918,Michael Brown,M,7,0,0,3,2,1,4,0,0,0,0,2,1,1
+2005/06,Fulham,2909,Ahmad Elrich,M,6,0,0,0,2,2,2,0,0,0,0,0,0,0
+2005/06,Fulham,2076,Dean Leacock,D,5,0,0,0,2,1,2,0,0,0,0,1,0,0
+2005/06,Fulham,1096,Mark Pembridge,M,5,0,0,2,1,1,3,0,0,0,0,0,0,0
+2005/06,Fulham,2468,Zesh Rehman,D,3,0,0,1,0,1,2,0,0,0,0,1,0,0
+2005/06,Liverpool,915,Jamie Carragher,D,36,0,2,21,24,6,6,0,0,0,0,5,0,0
+2005/06,Liverpool,1710,Sami Hyypiä,D,36,1,1,20,23,7,6,0,0,0,0,3,0,0
+2005/06,Liverpool,2719,Xabi Alonso,M,35,3,7,15,22,7,6,0,0,0,0,6,1,1
+2005/06,Liverpool,2723,Djibril Cissé,F,33,9,1,4,22,6,5,0,0,0,0,3,0,0
+2005/06,Liverpool,2072,Steve Finnan,D,33,0,3,20,23,5,5,0,0,0,0,2,0,0
+2005/06,Liverpool,2911,Pepe Reina,G,33,0,0,20,21,7,5,0,0,0,0,0,1,0
+2005/06,Liverpool,1629,Peter Crouch,F,32,8,5,2,20,6,6,0,0,0,0,4,0,0
+2005/06,Liverpool,1575,Steven Gerrard,M,32,10,5,17,21,7,4,0,0,0,0,2,1,0
+2005/06,Liverpool,2110,John Arne Riise,D,32,1,1,14,22,5,5,0,0,0,0,0,0,0
+2005/06,Liverpool,2718,Luis Garcia,M,31,7,3,7,21,6,4,0,0,0,0,4,1,0
+2005/06,Liverpool,2724,Fernando Morientes,F,28,5,5,5,22,3,3,0,0,0,0,1,0,0
+2005/06,Liverpool,1049,Harry Kewell,M,27,3,3,5,19,3,5,0,0,0,0,2,0,0
+2005/06,Liverpool,2921,Mohamed Sissoko,M,26,0,1,9,17,4,5,0,0,0,0,8,1,0
+2005/06,Liverpool,2279,Stephen Warnock,D,20,1,0,5,14,4,2,0,0,0,0,1,0,1
+2005/06,Liverpool,1595,Dietmar Hamann,M,17,0,1,3,10,5,2,0,0,0,0,1,0,0
+2005/06,Liverpool,1571,Djimi Traore,D,15,0,0,2,8,4,3,0,0,0,0,1,0,0
+2005/06,Liverpool,277,Robbie Fowler,F,14,5,1,1,10,2,2,0,0,0,0,0,0,0
+2005/06,Liverpool,2915,Jan Kromkamp,D,13,0,1,2,9,1,3,0,0,0,0,0,0,0
+2005/06,Liverpool,2288,Florent Sinama-Pongolle,F,7,0,0,0,2,3,2,0,0,0,0,1,0,0
+2005/06,Liverpool,2056,Boudewijn Zenden,M,7,2,0,3,5,2,0,0,0,0,0,0,0,0
+2005/06,Liverpool,2109,Jerzy Dudek,G,6,0,0,2,4,0,2,0,0,0,0,1,0,0
+2005/06,Liverpool,2716,Josemi,D,6,0,0,0,4,1,1,0,0,0,0,1,0,0
+2005/06,Liverpool,2916,Daniel Agger,D,4,0,0,1,3,1,0,0,0,0,0,1,0,0
+2005/06,Liverpool,2111,Milan Baros,F,2,0,0,0,1,1,0,0,0,0,0,0,0,0
+2005/06,Manchester City,252,David James,G,38,0,0,6,13,4,21,0,0,0,0,1,0,0
+2005/06,Manchester City,1309,Darius Vassell,F,36,8,7,2,13,4,19,0,0,0,0,4,0,0
+2005/06,Manchester City,1184,Richard Dunne,D,32,3,0,5,10,3,19,0,0,0,0,9,0,0
+2005/06,Manchester City,2303,Joey Barton,M,31,6,4,4,12,3,16,0,0,0,0,9,1,0
+2005/06,Manchester City,2125,Sylvain Distin,D,31,0,1,5,10,3,18,0,0,0,0,1,1,0
+2005/06,Manchester City,741,Trevor Sinclair,M,31,3,3,3,10,4,17,0,0,0,0,4,0,0
+2005/06,Manchester City,2296,Sun Jihai,D,29,0,0,3,12,3,14,0,0,0,0,3,0,0
+2005/06,Manchester City,2731,Kiki Musampa,M,27,0,1,1,11,3,13,0,0,0,0,3,0,0
+2005/06,Manchester City,2928,Stephen Ireland,M,24,0,2,2,8,2,14,0,0,0,0,0,0,0
+2005/06,Manchester City,2513,Antoine Sibierski,F,24,2,1,1,7,3,14,0,0,0,0,0,0,0
+2005/06,Manchester City,725,Andrew Cole,F,22,9,5,2,10,4,8,0,0,0,0,3,1,0
+2005/06,Manchester City,2138,Claudio Reyna,M,22,1,1,2,8,2,12,0,0,0,0,3,0,0
+2005/06,Manchester City,2729,Lee Croft,M,21,1,1,1,4,2,15,0,0,0,0,1,0,0
+2005/06,Manchester City,1929,Stephen Jordan,D,18,0,0,5,8,3,7,0,0,0,0,2,1,0
+2005/06,Manchester City,929,Danny Mills,D,18,1,0,3,6,3,9,0,0,0,0,6,0,0
+2005/06,Manchester City,1282,Ben Thatcher,D,18,0,0,1,5,2,11,0,0,0,0,5,0,0
+2005/06,Manchester City,2733,Bradley Wright-Phillips,F,18,1,0,0,5,3,10,0,0,0,0,1,0,0
+2005/06,Manchester City,2295,David Sommeil,D,16,2,1,2,5,1,10,0,0,0,0,2,0,0
+2005/06,Manchester City,2929,Albert Riera,M,15,1,0,1,5,0,10,0,0,0,0,2,0,0
+2005/06,Manchester City,2930,Georgios Samaras,F,14,4,1,0,4,0,10,0,0,0,0,1,0,0
+2005/06,Manchester City,2925,Micah Richards,D,13,0,1,1,4,0,9,0,0,0,0,2,0,0
+2005/06,Manchester City,2728,Nedum Onuoha,D,10,0,0,1,5,1,4,0,0,0,0,1,0,0
+2005/06,Manchester City,2514,Willo Flood,M,5,0,0,0,0,0,5,0,0,0,0,0,0,0
+2005/06,Manchester City,277,Robbie Fowler,F,4,1,0,0,2,1,1,0,0,0,0,1,0,0
+2005/06,Manchester City,2931,Ishmael Miller,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2005/06,Manchester City,2556,Matt Mills,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2005/06,Manchester United,2070,Edwin van der Sar,G,38,0,0,18,25,8,5,0,0,0,0,0,0,0
+2005/06,Manchester United,1111,Rio Ferdinand,D,37,3,0,17,24,8,5,0,0,0,0,0,1,0
+2005/06,Manchester United,2064,Wayne Rooney,F,36,16,9,14,24,7,5,0,0,0,0,8,0,0
+2005/06,Manchester United,2117,Ruud van Nistelrooij,F,35,21,3,12,23,7,5,0,0,0,0,5,0,0
+2005/06,Manchester United,1717,John O'Shea,D,34,1,2,13,23,7,4,0,0,0,0,5,0,0
+2005/06,Manchester United,2940,Park Ji-Sung,M,34,1,8,6,22,8,4,0,0,0,0,0,0,0
+2005/06,Manchester United,2522,Cristiano Ronaldo,F,33,9,6,6,21,7,5,0,0,0,0,8,1,0
+2005/06,Manchester United,1719,Mikaël Silvestre,D,33,1,2,10,21,7,5,0,0,0,0,4,0,0
+2005/06,Manchester United,1943,Darren Fletcher,M,27,1,2,7,17,6,4,0,0,0,0,3,0,0
+2005/06,Manchester United,335,Ryan Giggs,M,27,3,7,7,17,7,3,0,0,0,0,2,0,0
+2005/06,Manchester United,321,Gary Neville,D,25,0,0,12,17,5,3,0,0,0,0,3,0,0
+2005/06,Manchester United,1982,Kieran Richardson,D,22,1,1,3,12,5,5,0,0,0,0,4,0,0
+2005/06,Manchester United,1412,Alan Smith,M,21,1,2,4,13,5,3,0,0,0,0,4,0,0
+2005/06,Manchester United,336,Paul Scholes,M,20,2,2,6,13,5,2,0,0,0,0,3,0,0
+2005/06,Manchester United,1211,Wes Brown,D,19,0,2,10,14,3,2,0,0,0,0,3,0,0
+2005/06,Manchester United,1598,Louis Saha,F,19,7,1,1,14,2,3,0,0,0,0,0,0,0
+2005/06,Manchester United,2934,Patrice Evra,D,11,0,0,1,6,2,3,0,0,0,0,1,0,0
+2005/06,Manchester United,2935,Nemanja Vidic,D,11,0,0,3,9,0,2,0,0,0,0,3,0,0
+2005/06,Manchester United,2517,Phil Bardsley,D,8,0,0,0,5,1,2,0,0,0,0,1,0,0
+2005/06,Manchester United,407,Roy Keane,M,5,0,0,3,3,2,0,0,0,0,0,1,0,0
+2005/06,Manchester United,2745,Giuseppe Rossi,F,5,1,0,1,2,3,0,0,0,0,0,0,0,0
+2005/06,Manchester United,2736,Gabriel Heinze,D,4,0,0,1,3,1,0,0,0,0,0,0,0,0
+2005/06,Manchester United,2737,Gerard Piqué,D,3,0,0,1,3,0,0,0,0,0,0,0,0,0
+2005/06,Manchester United,1217,Ole Gunnar Solskjær,F,3,0,0,0,1,2,0,0,0,0,0,0,0,0
+2005/06,Manchester United,2516,Tim Howard,G,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2005/06,Manchester United,2740,Liam Miller,M,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2005/06,Middlesbrough,2553,Yakubu,F,34,13,6,2,10,8,16,0,0,0,0,0,0,0
+2005/06,Middlesbrough,2120,Franck Queudrue,D,29,3,3,6,10,8,11,0,0,0,0,5,0,0
+2005/06,Middlesbrough,2314,Doriva,M,27,0,0,4,8,7,12,0,0,0,0,4,1,0
+2005/06,Middlesbrough,1218,Mark Schwarzer,G,27,0,1,8,9,7,11,0,0,0,0,0,0,0
+2005/06,Middlesbrough,1909,Mark Viduka,F,27,7,4,1,6,7,14,0,0,0,0,0,0,0
+2005/06,Middlesbrough,1361,George Boateng,M,26,2,1,6,10,6,10,0,0,0,0,5,0,1
+2005/06,Middlesbrough,2529,James Morrison,M,24,1,5,1,6,6,12,0,0,0,0,0,0,0
+2005/06,Middlesbrough,2946,Emanuel Pogatetz,D,24,1,2,4,9,5,10,0,0,0,0,6,0,0
+2005/06,Middlesbrough,153,Gareth Southgate,D,24,0,2,7,8,7,9,0,0,0,0,2,0,0
+2005/06,Middlesbrough,1413,Jimmy Floyd Hasselbaink,F,22,9,2,0,8,5,9,0,0,0,0,4,0,0
+2005/06,Middlesbrough,1695,Chris Riggott,D,22,0,0,7,8,5,9,0,0,0,0,2,1,1
+2005/06,Middlesbrough,2948,Fábio Rochemback,M,22,2,3,3,7,5,10,0,0,0,0,4,0,0
+2005/06,Middlesbrough,1948,Stuart Parnaby,D,20,2,0,5,9,5,6,0,0,0,0,1,0,0
+2005/06,Middlesbrough,35,Ugo Ehiogu,D,18,0,0,2,4,4,10,0,0,0,0,0,1,0
+2005/06,Middlesbrough,2319,Massimo Maccarone,F,17,2,0,1,5,6,6,0,0,0,0,3,0,0
+2005/06,Middlesbrough,2528,Gaizka Mendieta,M,17,2,2,2,6,4,7,0,0,0,0,2,0,0
+2005/06,Middlesbrough,2527,Matthew Bates,D,16,0,1,2,3,5,8,0,0,0,0,4,0,0
+2005/06,Middlesbrough,2949,Lee Cattermole,M,14,1,1,5,5,3,6,0,0,0,0,4,0,0
+2005/06,Middlesbrough,2274,Adam Johnson,M,13,1,0,0,3,1,9,0,0,0,0,0,0,0
+2005/06,Middlesbrough,19,Ray Parlour,M,13,0,0,3,3,3,7,0,0,0,0,3,0,0
+2005/06,Middlesbrough,2750,Andrew Taylor,D,13,0,0,1,3,2,8,0,0,0,0,0,0,0
+2005/06,Middlesbrough,2313,Andrew Davies,D,12,0,0,0,6,1,5,0,0,0,0,0,0,0
+2005/06,Middlesbrough,2122,Stewart Downing,M,12,1,4,5,5,2,5,0,0,0,0,0,0,0
+2005/06,Middlesbrough,1947,Bradley Jones,G,9,0,0,2,3,1,5,0,0,0,0,0,0,0
+2005/06,Middlesbrough,1553,Malcolm Christie,F,6,0,0,0,1,2,3,0,0,0,0,0,0,0
+2005/06,Middlesbrough,2749,David Wheater,D,6,0,1,1,1,1,4,0,0,0,0,0,0,0
+2005/06,Middlesbrough,2123,Szilard Nemeth,F,5,0,1,0,3,2,0,0,0,0,0,0,0,0
+2005/06,Middlesbrough,1701,Abel Xavier,D,4,0,0,0,2,1,1,0,0,0,0,0,0,0
+2005/06,Middlesbrough,2748,Michael Reiziger,D,4,0,0,2,1,1,2,0,0,0,0,1,0,0
+2005/06,Middlesbrough,2531,Danny Graham,F,3,0,0,0,1,0,2,0,0,0,0,1,0,0
+2005/06,Middlesbrough,2753,Jason Kennedy,M,3,0,0,0,1,0,2,0,0,0,0,0,0,0
+2005/06,Middlesbrough,2751,Tony McMahon,D,3,0,0,0,0,1,2,0,0,0,0,0,0,0
+2005/06,Middlesbrough,2309,Ross Turnbull,G,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+2005/06,Middlesbrough,937,Colin Cooper,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2005/06,Middlesbrough,2950,Tom Craddock,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2005/06,Middlesbrough,1952,Joseph-Desire Job,F,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2005/06,Middlesbrough,2947,Josh Walker,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2005/06,Newcastle United,851,Shay Given,G,38,0,0,13,17,7,14,0,0,0,0,2,0,0
+2005/06,Newcastle United,2754,Jean-Alain Boumsong,D,33,0,0,8,12,7,14,0,0,0,0,2,1,0
+2005/06,Newcastle United,2755,Charles N'Zogbia,M,32,5,8,8,15,6,11,0,0,0,0,3,0,0
+2005/06,Newcastle United,89,Alan Shearer,F,32,10,4,5,14,5,13,0,0,0,0,3,0,0
+2005/06,Newcastle United,1962,Shola Ameobi,F,30,9,2,8,15,5,10,0,0,0,0,4,0,0
+2005/06,Newcastle United,1597,Nolberto Solano,M,29,6,2,6,15,4,10,0,0,0,0,2,0,1
+2005/06,Newcastle United,1145,Celestine Babayaro,D,28,0,1,10,11,5,12,0,0,0,0,3,1,0
+2005/06,Newcastle United,1190,Lee Bowyer,M,28,1,2,5,11,5,12,0,0,0,0,2,1,1
+2005/06,Newcastle United,1518,Scott Parker,M,26,1,1,7,10,5,11,0,0,0,0,8,1,0
+2005/06,Newcastle United,1890,Titus Bramble,D,24,2,1,7,13,5,6,0,0,0,0,4,0,0
+2005/06,Newcastle United,2532,Peter Ramage,D,23,0,1,6,10,3,10,0,0,0,0,4,0,0
+2005/06,Newcastle United,723,Lee Clark,M,22,1,1,2,11,5,6,0,0,0,0,4,0,0
+2005/06,Newcastle United,2547,Amdy Faye,M,22,0,2,4,11,5,6,0,0,0,0,2,0,0
+2005/06,Newcastle United,2955,Emre Belozoglu,M,20,2,2,4,10,1,9,0,0,0,0,4,0,0
+2005/06,Newcastle United,776,Stephen Carr,D,19,0,0,6,9,4,6,0,0,0,0,5,1,0
+2005/06,Newcastle United,715,Robbie Elliott,D,17,0,0,3,8,4,5,0,0,0,0,2,0,0
+2005/06,Newcastle United,2957,Albert Luque,F,14,1,0,0,2,4,8,0,0,0,0,1,0,0
+2005/06,Newcastle United,2128,Michael Chopra,F,13,1,1,1,7,2,4,0,0,0,0,0,0,0
+2005/06,Newcastle United,2323,Steven Taylor,D,12,0,0,4,4,3,5,0,0,0,0,4,1,0
+2005/06,Newcastle United,1740,Kieron Dyer,M,11,0,2,0,6,0,5,0,0,0,0,0,0,0
+2005/06,Newcastle United,1208,Michael Owen,F,11,7,1,4,6,2,3,0,0,0,0,0,0,0
+2005/06,Newcastle United,2952,Craig Moore,D,8,0,0,3,6,1,1,0,0,0,0,4,0,0
+2005/06,Newcastle United,2127,Jermaine Jenas,M,4,0,0,1,0,1,3,0,0,0,0,2,0,0
+2005/06,Newcastle United,2100,James Milner,M,3,0,0,1,0,1,2,0,0,0,0,0,0,0
+2005/06,Newcastle United,2756,Alan O'Brien,M,3,0,0,0,0,0,3,0,0,0,0,0,0,0
+2005/06,Newcastle United,2956,Matty Pattison,M,3,0,0,0,2,1,0,0,0,0,0,0,0,0
+2005/06,Portsmouth,2550,Gary O'Neil,M,36,6,2,5,10,8,18,0,0,0,0,2,0,0
+2005/06,Portsmouth,2542,Matthew Taylor,M,34,6,4,4,9,6,19,0,0,0,0,4,0,0
+2005/06,Portsmouth,2958,Brian Priske,D,30,0,3,4,10,7,13,0,0,0,0,1,0,0
+2005/06,Portsmouth,1664,Andy O'Brien,D,29,0,1,4,6,6,17,0,0,0,0,0,0,1
+2005/06,Portsmouth,1095,Dejan Stefanovic,D,28,0,0,5,8,8,12,0,0,0,0,5,0,0
+2005/06,Portsmouth,1302,Richard Hughes,M,26,0,0,3,7,5,14,0,0,0,0,8,0,1
+2005/06,Portsmouth,1959,Lomana Lua Lua,F,25,7,3,2,6,5,14,0,0,0,0,2,0,0
+2005/06,Portsmouth,1984,Svetoslav Todorov,F,24,4,1,0,8,5,11,0,0,0,0,0,0,0
+2005/06,Portsmouth,1437,Andy Griffin,D,22,0,0,2,3,4,15,0,0,0,0,6,0,1
+2005/06,Portsmouth,2541,Linvoy Primus,D,20,0,0,2,8,4,8,0,0,0,0,0,0,0
+2005/06,Portsmouth,1999,Jamie Ashdown,G,17,0,0,3,3,4,10,0,0,0,0,0,0,0
+2005/06,Portsmouth,2080,Sean Davis,M,17,1,0,0,6,3,8,0,0,0,0,1,0,0
+2005/06,Portsmouth,2966,Azar Karadas,F,17,1,0,0,4,3,10,0,0,0,0,4,0,0
+2005/06,Portsmouth,2126,Laurent Robert,M,17,1,3,1,3,4,10,0,0,0,0,1,1,0
+2005/06,Portsmouth,2969,Benjani,F,16,1,2,0,6,3,7,0,0,0,0,1,0,0
+2005/06,Portsmouth,1848,Dean Kiely,G,15,0,0,1,6,3,6,0,0,0,0,0,0,0
+2005/06,Portsmouth,2808,Pedro Mendes,M,14,3,0,1,5,3,6,0,0,0,0,4,0,0
+2005/06,Portsmouth,2960,Jhon Viáfara,M,14,1,0,0,2,3,9,0,0,0,0,4,0,0
+2005/06,Portsmouth,1919,Grégory Vignal,D,14,0,0,2,2,4,8,0,0,0,0,3,0,0
+2005/06,Portsmouth,2962,Andrés D'Alessandro,M,13,1,2,1,6,3,4,0,0,0,0,0,0,0
+2005/06,Portsmouth,2681,Wayne Routledge,M,13,0,3,0,4,3,6,0,0,0,0,0,0,0
+2005/06,Portsmouth,2965,Darío Silva,F,13,2,0,1,3,4,6,0,0,0,0,1,0,0
+2005/06,Portsmouth,2285,Salif Diao,M,11,0,0,1,2,2,7,0,0,0,0,3,0,0
+2005/06,Portsmouth,2964,Zvonimir Vukic,M,9,1,2,1,2,3,4,0,0,0,0,1,0,0
+2005/06,Portsmouth,2802,Noé Pamarot,D,8,0,0,0,2,0,6,0,0,0,0,0,0,0
+2005/06,Portsmouth,2554,Vincent Pericard,F,6,0,0,0,1,1,4,0,0,0,0,0,0,0
+2005/06,Portsmouth,1709,Sander Westerveld,G,6,0,0,1,1,1,4,0,0,0,0,0,0,0
+2005/06,Portsmouth,2786,Giannis Skopelitis,M,5,0,0,0,0,1,4,0,0,0,0,1,0,0
+2005/06,Portsmouth,2967,Collins Mbesuma,F,4,0,0,0,1,0,3,0,0,0,0,0,0,0
+2005/06,Portsmouth,2188,Aliou Cisse,M,3,0,0,0,1,0,2,0,0,0,0,1,0,0
+2005/06,Portsmouth,2963,Ognjen Koroman,M,3,1,0,0,0,0,3,0,0,0,0,0,0,0
+2005/06,Portsmouth,2555,Ivica Mornar,F,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+2005/06,Portsmouth,2968,Emanuel Olisadebe,F,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+2005/06,Portsmouth,2970,Franck Songo'o,M,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+2005/06,Sunderland,2980,Dean Whitehead,M,37,3,6,3,3,5,29,0,0,0,0,10,0,0
+2005/06,Sunderland,1155,Gary Breen,D,35,1,1,3,3,6,26,0,0,0,0,8,1,0
+2005/06,Sunderland,2971,Kelvin Davis,G,33,0,0,4,3,6,24,0,0,0,0,0,0,0
+2005/06,Sunderland,2974,Nyron Nosworthy,D,30,0,0,1,3,3,24,0,0,0,0,5,0,0
+2005/06,Sunderland,2436,Jon Stead,F,30,1,0,0,1,5,24,0,0,0,0,3,0,0
+2005/06,Sunderland,2981,Liam Lawrence,M,29,3,0,2,2,6,21,0,0,0,0,0,0,0
+2005/06,Sunderland,2095,Tommy Miller,M,29,3,2,2,3,4,22,0,0,0,0,4,0,0
+2005/06,Sunderland,2163,Justin Hoyte,D,27,1,0,4,3,6,18,0,0,0,0,2,0,0
+2005/06,Sunderland,2287,Anthony Le Tallec,F,27,3,0,0,3,5,19,0,0,0,0,0,0,0
+2005/06,Sunderland,1972,Julio Arca,M,24,1,3,3,2,3,19,0,0,0,0,5,0,0
+2005/06,Sunderland,1589,Steven Caldwell,D,24,0,1,3,3,3,18,0,0,0,0,7,1,0
+2005/06,Sunderland,2976,Danny Collins,D,23,1,0,3,1,4,18,0,0,0,0,0,0,1
+2005/06,Sunderland,1050,Andy Gray,F,21,1,1,1,2,3,16,0,0,0,0,1,0,0
+2005/06,Sunderland,2985,Daryl Murphy,F,18,1,0,1,1,5,12,0,0,0,0,0,0,0
+2005/06,Sunderland,2512,Stephen Elliott,F,15,2,0,0,1,2,12,0,0,0,0,0,0,0
+2005/06,Sunderland,2979,Andrew Welsh,M,14,0,1,0,1,1,12,0,0,0,0,0,1,0
+2005/06,Sunderland,1983,Christian Bassila,M,13,0,0,1,2,4,7,0,0,0,0,0,0,0
+2005/06,Sunderland,2984,Chris Brown,F,13,1,1,1,1,2,10,0,0,0,0,4,0,0
+2005/06,Sunderland,1973,Kevin Kyle,F,13,1,0,0,1,1,11,0,0,0,0,5,0,0
+2005/06,Sunderland,1756,George McCartney,D,13,0,0,1,1,2,10,0,0,0,0,4,0,0
+2005/06,Sunderland,2982,Grant Leadbitter,M,12,0,0,0,0,3,9,0,0,0,0,2,0,0
+2005/06,Sunderland,1017,Alan Stubbs,D,10,1,0,0,0,2,8,0,0,0,0,1,0,0
+2005/06,Sunderland,2474,Martin Woods,M,7,0,0,0,0,0,7,0,0,0,0,1,0,0
+2005/06,Sunderland,1391,Rory Delap,M,6,1,0,0,0,1,5,0,0,0,0,2,0,0
+2005/06,Sunderland,2972,Ben Alnwick,G,5,0,0,0,0,0,5,0,0,0,0,0,0,0
+2005/06,Sunderland,2549,Carl Robinson,M,5,0,0,0,0,0,5,0,0,0,0,1,0,0
+2005/06,Sunderland,2975,Daniel Smith,D,3,0,0,0,0,1,2,0,0,0,0,1,0,0
+2005/06,Sunderland,1421,Stephen Wright,D,2,0,0,0,0,0,2,0,0,0,0,1,1,0
+2005/06,Tottenham Hotspur,1404,Paul Robinson,G,38,0,0,13,18,11,9,0,0,0,0,1,0,0
+2005/06,Tottenham Hotspur,1526,Jermain Defoe,F,36,9,5,4,16,11,9,0,0,0,0,3,0,0
+2005/06,Tottenham Hotspur,1692,Robbie Keane,F,36,16,3,4,17,11,8,0,0,0,0,1,0,0
+2005/06,Tottenham Hotspur,1634,Michael Carrick,M,35,2,6,11,16,10,9,0,0,0,0,2,0,0
+2005/06,Tottenham Hotspur,2989,Paul Stalteri,D,33,1,1,11,16,10,7,0,0,0,0,5,1,0
+2005/06,Tottenham Hotspur,2805,Michael Dawson,D,32,0,2,10,14,9,9,0,0,0,0,4,2,0
+2005/06,Tottenham Hotspur,2990,Edgar Davids,M,31,1,1,7,14,9,8,0,0,0,0,9,1,0
+2005/06,Tottenham Hotspur,2988,Lee Young-Pyo,D,31,0,0,9,14,10,7,0,0,0,0,2,0,0
+2005/06,Tottenham Hotspur,2127,Jermaine Jenas,M,30,6,4,8,15,8,7,0,0,0,0,2,0,0
+2005/06,Tottenham Hotspur,2270,Aaron Lennon,M,27,2,3,2,13,8,6,0,0,0,0,0,0,0
+2005/06,Tottenham Hotspur,2815,Mido,F,27,11,6,4,14,7,6,0,0,0,0,4,1,0
+2005/06,Tottenham Hotspur,1627,Ledley King,D,26,3,1,5,13,9,4,0,0,0,0,1,0,0
+2005/06,Tottenham Hotspur,2992,Teemu Tainio,M,24,1,4,5,13,6,5,0,0,0,0,4,0,0
+2005/06,Tottenham Hotspur,1771,Anthony Gardner,D,17,0,0,8,8,4,5,0,0,0,0,2,0,0
+2005/06,Tottenham Hotspur,2812,Andy Reid,M,13,0,1,3,6,4,3,0,0,0,0,2,0,0
+2005/06,Tottenham Hotspur,1423,Danny Murphy,M,10,0,0,0,5,3,2,0,0,0,0,1,0,0
+2005/06,Tottenham Hotspur,918,Michael Brown,M,9,0,0,2,3,4,2,0,0,0,0,1,0,0
+2005/06,Tottenham Hotspur,1974,Stephen Kelly,D,9,0,0,2,4,1,4,0,0,0,0,0,0,0
+2005/06,Tottenham Hotspur,3041,Grzegorz Rasiak,F,8,0,0,0,2,4,2,0,0,0,0,1,0,0
+2005/06,Tottenham Hotspur,2808,Pedro Mendes,M,6,0,0,1,3,3,0,0,0,0,0,1,0,0
+2005/06,Tottenham Hotspur,1868,Calum Davenport,D,4,0,0,0,2,0,2,0,0,0,0,0,0,0
+2005/06,Tottenham Hotspur,2991,Tom Huddlestone,M,4,0,1,0,1,2,1,0,0,0,0,0,0,0
+2005/06,Tottenham Hotspur,2361,Lee Barnard,F,3,0,0,0,1,0,2,0,0,0,0,1,0,0
+2005/06,Tottenham Hotspur,2803,Erik Edman,D,3,0,0,3,2,1,0,0,0,0,0,0,0,0
+2005/06,Tottenham Hotspur,2804,Noureddine Naybet,D,3,0,0,1,2,1,0,0,0,0,0,1,0,0
+2005/06,Tottenham Hotspur,2681,Wayne Routledge,M,3,0,0,0,2,0,1,0,0,0,0,0,0,0
+2005/06,Tottenham Hotspur,2802,Noé Pamarot,D,2,0,0,0,2,0,0,0,0,0,0,1,0,0
+2005/06,Tottenham Hotspur,1773,Johnnie Jackson,M,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2005/06,Tottenham Hotspur,1805,Frederic Kanoute,F,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2005/06,West Bromwich Albion,1429,Jonathan Greening,M,38,2,4,8,7,9,22,0,0,0,0,2,0,0
+2005/06,West Bromwich Albion,2997,Curtis Davies,D,33,2,0,9,6,8,19,0,0,0,0,0,0,1
+2005/06,West Bromwich Albion,1780,Paul Robinson,D,33,0,2,8,5,9,19,0,0,0,0,7,0,0
+2005/06,West Bromwich Albion,2371,Martin Albrechtsen,D,31,1,0,5,7,4,20,0,0,0,0,2,0,0
+2005/06,West Bromwich Albion,1146,Neil Clement,D,31,1,0,9,6,8,17,0,0,0,0,4,0,0
+2005/06,West Bromwich Albion,2389,Nathan Ellington,F,31,5,0,1,6,6,19,0,0,0,0,0,0,0
+2005/06,West Bromwich Albion,922,Ronnie Wallwork,D,31,0,2,6,7,7,17,0,0,0,0,11,0,1
+2005/06,West Bromwich Albion,720,Steve Watson,D,30,1,0,6,6,8,16,0,0,0,0,4,0,1
+2005/06,West Bromwich Albion,25,Kevin Campbell,F,29,3,0,1,5,6,18,0,0,0,0,1,0,0
+2005/06,West Bromwich Albion,2818,Tomasz Kuszczak,G,28,0,0,9,5,7,16,0,0,0,0,1,0,0
+2005/06,West Bromwich Albion,2789,Diomansy Kamara,F,26,1,2,0,4,7,15,0,0,0,0,3,0,0
+2005/06,West Bromwich Albion,1502,Kanu,F,25,5,3,1,4,7,14,0,0,0,0,0,0,0
+2005/06,West Bromwich Albion,2005,Junichi Inamoto,M,22,0,3,7,4,6,12,0,0,0,0,0,0,0
+2005/06,West Bromwich Albion,2191,Darren Carter,M,20,1,0,3,6,4,10,0,0,0,0,2,0,0
+2005/06,West Bromwich Albion,2196,Geoff Horsfield,F,18,4,0,1,5,2,11,0,0,0,0,2,0,0
+2005/06,West Bromwich Albion,2390,Zoltán Gera,M,15,2,2,3,1,5,9,0,0,0,0,1,0,0
+2005/06,West Bromwich Albion,2819,Robert Earnshaw,F,12,1,0,0,3,2,7,0,0,0,0,0,0,0
+2005/06,West Bromwich Albion,1359,Chris Kirkland,G,10,0,0,1,2,2,6,0,0,0,0,0,0,0
+2005/06,West Bromwich Albion,1092,Nigel Quashie,M,9,1,0,2,1,3,5,0,0,0,0,1,1,0
+2005/06,West Bromwich Albion,385,Andy Johnson,M,8,0,0,2,1,3,4,0,0,0,0,1,0,0
+2005/06,West Bromwich Albion,2339,Richard Chaplow,M,7,0,0,0,0,1,6,0,0,0,0,0,0,0
+2005/06,West Bromwich Albion,2091,Thomas Gaardsoe,D,7,0,1,1,1,1,5,0,0,0,0,2,0,0
+2005/06,West Bromwich Albion,2999,Jan Kozak,M,6,0,0,0,1,1,4,0,0,0,0,0,0,0
+2005/06,West Bromwich Albion,1815,Darren Moore,D,5,0,0,0,3,0,2,0,0,0,0,0,1,0
+2005/06,West Bromwich Albion,3001,Stuart Nicholson,F,4,0,0,0,0,3,1,0,0,0,0,0,0,0
+2005/06,West Bromwich Albion,2996,Williams Martínez,D,2,1,0,0,0,1,1,0,0,0,0,1,0,0
+2005/06,West Bromwich Albion,660,Riccardo Scimeca,D,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+2005/06,West Bromwich Albion,2998,Jared Hodgkiss,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2005/06,West Bromwich Albion,890,Russell Hoult,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2005/06,West Ham United,1609,Marlon Harewood,F,37,14,4,3,16,7,14,0,0,0,0,5,0,0
+2005/06,West Ham United,1515,Paul Konchesky,D,37,1,4,7,16,7,14,0,0,0,0,4,1,0
+2005/06,West Ham United,1379,Hayden Mullins,M,35,0,0,5,14,7,14,0,0,0,0,2,1,0
+2005/06,West Ham United,3013,Yossi Benayoun,M,34,5,6,6,15,6,13,0,0,0,0,3,0,0
+2005/06,West Ham United,2603,Bobby Zamora,F,34,6,6,0,14,7,13,0,0,0,0,0,0,0
+2005/06,West Ham United,1772,Matthew Etherington,M,33,2,5,4,13,7,13,0,0,0,0,1,0,0
+2005/06,West Ham United,2393,Anton Ferdinand,D,33,2,2,7,13,7,13,0,0,0,0,5,0,0
+2005/06,West Ham United,3009,Danny Gabbidon,D,32,0,0,9,15,7,10,0,0,0,0,2,0,0
+2005/06,West Ham United,3015,Nigel Reo-Coker,M,31,5,4,7,14,6,11,0,0,0,0,3,0,0
+2005/06,West Ham United,1519,Shaun Newton,M,26,1,0,1,14,6,6,0,0,0,0,2,0,0
+2005/06,West Ham United,576,Teddy Sheringham,F,26,6,3,2,10,6,10,0,0,0,0,5,0,0
+2005/06,West Ham United,1163,Christian Dailly,D,22,0,1,0,11,3,8,0,0,0,0,4,0,0
+2005/06,West Ham United,2112,Roy Carroll,G,19,0,0,3,7,4,8,0,0,0,0,2,0,0
+2005/06,West Ham United,2150,Tomás Repka,D,19,0,0,4,8,5,6,0,0,0,0,4,0,0
+2005/06,West Ham United,1080,Shaka Hislop,G,16,0,0,4,8,3,5,0,0,0,0,0,0,0
+2005/06,West Ham United,3010,James Collins,D,14,2,0,2,3,2,9,0,0,0,0,0,0,0
+2005/06,West Ham United,3008,Lionel Scaloni,D,13,0,0,4,6,1,6,0,0,0,0,3,0,0
+2005/06,West Ham United,3012,Carl Fletcher,M,12,1,0,1,5,1,6,0,0,0,0,2,0,0
+2005/06,West Ham United,2778,Dean Ashton,F,11,3,0,0,6,2,3,0,0,0,0,0,0,0
+2005/06,West Ham United,2140,David Bellion,F,8,0,0,0,1,1,6,0,0,0,0,0,0,0
+2005/06,West Ham United,1656,Jérémie Aliadière,F,7,0,0,0,1,0,6,0,0,0,0,0,0,0
+2005/06,West Ham United,3018,Yaniv Katan,F,6,0,0,0,3,1,2,0,0,0,0,1,0,0
+2005/06,West Ham United,3014,Mark Noble,M,5,0,0,0,2,1,2,0,0,0,0,2,0,0
+2005/06,West Ham United,2151,Elliott Ward,D,4,0,0,1,1,0,3,0,0,0,0,0,0,0
+2005/06,West Ham United,3002,Jimmy Walker,G,3,0,0,1,1,0,2,0,0,0,0,0,0,0
+2005/06,West Ham United,3011,Clive Clarke,D,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+2005/06,West Ham United,3017,Kyel Reid,M,2,0,0,1,2,0,0,0,0,0,0,0,0,0
+2005/06,West Ham United,1472,Stephen Bywater,G,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2005/06,Wigan Athletic,3030,Leighton Baines,D,37,0,0,9,15,6,16,0,0,0,0,3,0,0
+2005/06,Wigan Athletic,3026,Pascal Chimbonda,D,37,2,3,10,15,6,16,0,0,0,0,6,0,1
+2005/06,Wigan Athletic,1633,Jimmy Bullard,M,36,4,4,8,15,6,15,0,0,0,0,0,0,0
+2005/06,Wigan Athletic,358,Graham Kavanagh,M,35,0,2,8,15,5,15,0,0,0,0,7,0,0
+2005/06,Wigan Athletic,2385,Jason Roberts,F,34,8,3,7,14,4,16,0,0,0,0,4,1,0
+2005/06,Wigan Athletic,1315,Arjan De Zeeuw,D,31,0,1,10,13,6,12,0,0,0,0,4,0,0
+2005/06,Wigan Athletic,3032,Lee McCulloch,D,30,5,1,7,12,4,14,0,0,0,0,7,1,0
+2005/06,Wigan Athletic,2590,Henri Camara,F,29,12,3,2,12,3,14,0,0,0,0,0,0,0
+2005/06,Wigan Athletic,1335,Stéphane Henchoz,D,26,0,0,5,10,4,12,0,0,0,0,8,0,0
+2005/06,Wigan Athletic,3022,Mike Pollitt,G,24,0,0,3,6,4,14,0,0,0,0,0,0,0
+2005/06,Wigan Athletic,3034,Gary Teale,M,24,0,3,1,9,4,11,0,0,0,0,0,1,0
+2005/06,Wigan Athletic,1476,Damien Francis,M,20,1,2,6,11,1,8,0,0,0,0,2,0,0
+2005/06,Wigan Athletic,3037,David Connolly,F,17,1,0,0,6,1,10,0,0,0,0,0,0,0
+2005/06,Wigan Athletic,177,Matt Jackson,D,16,0,0,2,5,2,9,0,0,0,0,2,0,0
+2005/06,Wigan Athletic,3033,Andreas Johansson,M,16,4,0,0,5,4,7,0,0,0,0,0,1,0
+2005/06,Wigan Athletic,3029,Paul Scharner,D,16,3,2,2,4,5,7,0,0,0,0,5,0,0
+2005/06,Wigan Athletic,859,John Filan,G,15,0,0,7,9,2,4,0,0,0,0,0,0,0
+2005/06,Wigan Athletic,3027,Ryan Taylor,D,11,0,0,2,8,0,3,0,0,0,0,2,0,0
+2005/06,Wigan Athletic,1206,David Thompson,M,10,2,1,0,2,3,5,0,0,0,0,4,0,1
+2005/06,Wigan Athletic,2811,Reto Ziegler,D,10,0,1,0,2,3,5,0,0,0,0,0,0,0
+2005/06,Wigan Athletic,2022,Alan Mahon,M,6,1,0,1,3,0,3,0,0,0,0,1,0,0
+2005/06,Wigan Athletic,3035,Josip Skoko,M,5,0,0,0,1,0,4,0,0,0,0,0,0,0
+2005/06,Wigan Athletic,2286,Neil Mellor,F,3,1,1,0,1,2,0,0,0,0,0,1,0,0
+2005/06,Wigan Athletic,3028,Steve McMillan,D,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+2005/06,Wigan Athletic,3025,David Wright,D,2,0,0,0,0,0,2,0,0,0,0,0,0,0
