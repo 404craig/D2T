@@ -75,7 +75,7 @@
 }
 
 /* ---------- squad / tactics ---------- */
-.se-squad { display: flex; flex-direction: column; min-height: 100%; padding-bottom: 4px; }
+.se-squad { display: flex; flex-direction: column; padding-bottom: 4px; }
 .se-sqhead { display: flex; align-items: center; gap: 10px; padding: 0 2px 8px; }
 .se-sqcrest { width: 30px; height: 30px; object-fit: contain; }
 .se-sqtext { flex: 1; min-width: 0; }
@@ -116,8 +116,8 @@
 .se-ghost { position: absolute; left: 0; top: 0; z-index: 45; pointer-events: none; filter: drop-shadow(0 14px 18px rgba(0,0,0,.7)); will-change: transform; }
 .se-dragging { cursor: grabbing; }
 
-.se-formlink { position: absolute; left: 8px; bottom: 8px; z-index: 210; display: inline-flex; align-items: center; gap: 5px; min-height: 44px; padding: 0 12px; border-radius: 14px; border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.6); color: #FFFFFF; font-size: 12.5px; font-weight: 800; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-.se-formlink b { color: var(--se-text); font-weight: 900; font-style: italic; font-size: 14px; }
+.se-formlink { position: absolute; left: 8px; bottom: 8px; z-index: 210; display: inline-flex; align-items: center; gap: 5px; min-height: 44px; padding: 0 9px; border-radius: 14px; border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.6); color: #FFFFFF; font-size: 11px; font-weight: 800; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.se-formlink b { color: var(--se-text); font-weight: 900; font-style: italic; font-size: 13px; }
 .se-formlink svg { width: 16px; height: 16px; color: var(--se-text); }
 .se-subshead { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin: 8px 2px 0; }
 .se-subs-t { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--soft); white-space: nowrap; }

@@ -100,6 +100,13 @@ Today a bronze or silver card is rarely wanted. Options, best first:
 - Continue is the club sweep: light club colour at the left, the true colour across the middle, a deeper shade at the right, with a metal rim, faint diagonal texture and the light sweep. Text and the arrow turn dark on light club colours. Options page: `design/prototype/continue-options.html` (idea 1).
 - Bottom bar icons are solid and slanted like the Black Italic type, all white, with one-line uppercase italic labels. Options page: `design/prototype/home-options.html`.
 
+## 8c. Squad screen (build 15, chosen 11 Oct)
+
+- Compact layout: header, pitch, subs and the bottom bar fit one screen with no scrolling, down to about 640px tall (Safari with its toolbars on a current iPhone is about 700).
+- One-line header (crest, club, season, team rating). The pitch flexes to the space left (300 to 470px tall). Formation is a chip on the bottom-left corner of the pitch.
+- Subs are a swipeable strip of pitch-style cards (60px). Pitch cards are 50px.
+- No glows on squad or pitch cards. Selected: the card lifts, its position tab turns white and a white marker sits under it. Targets scale up with an outline. Options page: `design/prototype/squad-fit.html` (option A).
+
 ## 9. How the prototype behaves (built 11 Oct)
 
 - **Intro:** short black D2T, emblem spins as it opens into DROP2TOP at 75% width, then the slogan types in (DROP and TOP reversed out), then the logo glides up into the green home. About 5 seconds, tap to skip, first launch only.
