@@ -37,7 +37,7 @@
   }
   function continueCard(act) {
     const eng = D2T.game.eng(), data = D2T.run(), c = data.club, run = D2T.state.run;
-    const label = run.daily ? D2T.game.dailyName(run.daily, true).toUpperCase() : D2T.game.modeName().toUpperCase();
+    const label = run.daily ? D2T.game.dailyName(run.daily, true).replace('Daily Challenge', 'Daily').toUpperCase() : D2T.game.modeName().toUpperCase();   // one line: CONTINUE · DAILY 11 OCT
     const games = data.fixtures.length, played = eng.played.length;
     const where = eng.phase === 'draft' ? `Draft · Shirt ${eng.draft.step + 1} of ${eng.xi.length}` : eng.phase === 'setup' ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, games)} · ${STEP_LABEL[D2T.game.stepFor()] || 'In progress'}`;
     // Club sweep (chosen 11 Oct): light club colour at the left, the true colour across the middle, a deeper shade at the right.
