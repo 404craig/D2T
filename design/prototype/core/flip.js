@@ -88,7 +88,7 @@
       requestAnimationFrame(() => { ov.style.opacity = '1'; setTimeout(() => { busy = false; }, 200); });
     } else {
       paint(0);
-      run(0, 1, 760, () => { busy = false; });
+      run(0, 1, 800, () => { busy = false; });
     }
 
     const close = () => {

@@ -19,8 +19,8 @@
 .sp-slot.is-sel::after { content: ''; position: absolute; inset: -6px; border-radius: 10px; pointer-events: none; box-shadow: 0 0 0 2px var(--sp-accent, var(--lime)); opacity: 0.9; clip-path: polygon(0 1.4em, 1.4em 0, calc(100% - 1.4em) 0, 100% 1.4em, 100% calc(100% - 2.2em), 50% 100%, 0 calc(100% - 2.2em)); font-size: 11px; animation: spRing .22s var(--ease-out) both; }
 @keyframes spRing { from { opacity: 0; transform: scale(.94); } to { opacity: .9; transform: none; } }
 .sp-glow { position: absolute; left: 50%; top: 50%; width: 220px; height: 300px; transform: translate(-50%, -50%); pointer-events: none; opacity: 0; z-index: 0;
-  background: radial-gradient(45% 42% at 50% 50%, var(--sp-accent, #fff) 0%, rgba(0,0,0,0) 70%); filter: blur(10px); transition: opacity .4s var(--ease-out); }
-.sp-slot.is-set .sp-glow { opacity: 0.38; }
+  background: radial-gradient(48% 44% at 50% 50%, var(--sp-accent, #fff) 0%, rgba(0,0,0,0) 72%); filter: blur(8px); transition: opacity .4s var(--ease-out); }
+.sp-slot.is-set .sp-glow { opacity: 0.6; }
 .sp-slot.is-other .sp-glow { opacity: 0.12; }
 .sp-win { position: absolute; left: 0; top: -44px; width: 114px; height: 278px; overflow: hidden; z-index: 1;
   -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 17%, #000 83%, rgba(0,0,0,0) 100%);
@@ -44,7 +44,7 @@
 .sp-slot.is-hit .sp-sweep { animation: spSweep .55s cubic-bezier(.3, .7, .2, 1) .04s both; }
 @keyframes spSweep { 0% { left: -60%; opacity: 0; } 15% { opacity: 1; } 100% { left: 130%; opacity: 0; } }
 .sp-slot.is-hit .sp-glow { animation: spGlowPop .6s var(--ease-out) both; }
-@keyframes spGlowPop { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.6); } 35% { opacity: .85; } 100% { opacity: .38; transform: translate(-50%, -50%) scale(1); } }
+@keyframes spGlowPop { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.6); } 35% { opacity: 1; } 100% { opacity: .6; transform: translate(-50%, -50%) scale(1); } }
 /* slot caption under each settled card (club code or player position) */
 .sp-cap { position: absolute; left: 0; right: 0; top: 198px; text-align: center; font-size: 12px; font-weight: 800; letter-spacing: .1em; color: var(--muted); opacity: 0; transform: translateY(4px); transition: opacity .3s, transform .3s var(--ease-out); }
 .sp-slot.is-set .sp-cap { opacity: 1; transform: none; }
@@ -57,6 +57,7 @@
 .sp-main { flex: 1 1 auto; min-height: 58px; border-radius: 29px; border: 0; background: var(--sp-btn, var(--lime)); color: var(--sp-btn-ink, #000); font-weight: 900; font-style: italic; font-size: 21px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 18px; letter-spacing: .01em; text-transform: uppercase; transition: background .25s, color .25s, transform .15s var(--ease-snap), opacity .2s; box-shadow: 0 10px 30px -10px var(--sp-btn, var(--lime)); }
 .sp-main:active { transform: scale(.97); }
 .sp-main[disabled] { opacity: .35; box-shadow: none; }
+.sp-main.is-spinning[disabled] { opacity: .85; }
 .sp-main .logo-mask { width: 26px; height: 26px; }
 .sp-main .sp-lbl { display: inline-block; }
 .sp-main.is-swap .sp-lbl { animation: spSwap .32s var(--ease-out) both; }
@@ -117,3 +118,7 @@
   .sp-slot, .sp-node, .sp-cap, .sp-glow { transition: none; }
   .sp-slot.is-hit .sp-strip, .sp-slot.is-hit .sp-sweep, .sp-slot.is-hit .sp-glow, .sp-reveal .sp-slot, .sp-main.is-spinning .logo-mask { animation: none; }
 }
+
+/* secondary pass option on the transfer roll */
+.sp-pass { align-self: center; min-height: 44px; padding: 0 18px; border: 0; background: none; color: var(--soft); font-weight: 700; font-size: 15px; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255,255,255,0.3); }
+.sp-pass:active { color: #fff; }

@@ -203,6 +203,7 @@
         done(); return;
       }
       const t0 = performance.now(), landed = [false, false, false];
+      let settledCalled = false;
       const step = (now) => {
         const t = (now - t0) / 1000;
         let allDone = true;
@@ -212,7 +213,9 @@
           if (!landed[i] && t >= P.landAt) { landed[i] = true; r.hit(cfg.accent(results[i]).accent); r.settle(P.target, cfg.caption && cfg.caption(results[i])); }
           if (s.phase !== 'done') allDone = false;
         });
-        if (!allDone) raf = requestAnimationFrame(step); else done();
+        // the moment the last reel lands the result is final: taps count while the bounce plays out
+        if (!settledCalled && landed.every(Boolean)) { settledCalled = true; done(); }
+        if (!allDone) raf = requestAnimationFrame(step);
       };
       raf = requestAnimationFrame(step);
     };
@@ -233,7 +236,7 @@
       spin();
     };
     if (cfg.pass) {
-      const p = D2T.h(`<button class="btn btn-ghost sp-pass" style="margin:0 16px 8px;min-height:44px">${cfg.pass.label}</button>`);
+      const p = D2T.h(`<button class="sp-pass">${cfg.pass.label}</button>`);
       el.insertBefore(p, el.querySelector('.sp-bar')); p.onclick = cfg.pass.onPass;
     }
     setRespins(); main.disabled = false;

@@ -9,8 +9,8 @@
     const host = D2T.h(`<div class="sp-intro" aria-hidden="true"><div class="sp-ring"></div><div class="sp-emblem">${D2T.logo('emblem', { label: '' })}</div><canvas></canvas></div>`);
     root.appendChild(host);
     const em = host.querySelector('.sp-emblem'), ring = host.querySelector('.sp-ring'), cv = host.querySelector('canvas');
-    let finished = false, raf = 0, timer = 0;
-    const end = (go) => { if (finished) return; finished = true; cancelAnimationFrame(raf); clearTimeout(timer); host.remove(); if (go) onDone(); };
+    let finished = false, revealed = false, raf = 0, timer = 0;
+    const end = (go) => { if (finished) return; finished = true; cancelAnimationFrame(raf); clearTimeout(timer); host.remove(); if (go && !revealed) { revealed = true; onDone(); } };
     const finish = () => end(true);
     host.addEventListener('click', finish);
     if (D2T.reduced()) { timer = setTimeout(finish, 350); return { cancel: () => end(false) }; }
@@ -21,8 +21,8 @@
     const SIZE = 128, cx = W / 2, cy = H / 2;
     const easeInOut = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-    // phase 1: turn (0 .. 820ms), with a pull back and a bit of growth
-    const T1 = 820, T2 = 720;
+    // phase 1: one full turn (0 .. 700ms); phase 2: a 150ms charge (it swells and brightens); phase 3: the burst (720ms)
+    const T1 = 700, TC = 150, T2 = 720;
     const t0 = performance.now();
     let particles = null;
     const img = new Image(); img.src = D2T.ASSET.emblem;
@@ -36,8 +36,8 @@
           const a = d[(y * SIZE + x) * 4 + 3]; if (a < 90) continue;
           const dx = x - SIZE / 2, dy = y - SIZE / 2, r = Math.hypot(dx, dy) || 1;
           const ang = Math.atan2(dy, dx) + (Math.random() - 0.5) * 0.5;
-          const sp = 180 + Math.random() * 420 + r * 2.2;
-          out.push({ x: cx + dx, y: cy + dy, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp, s: step * (0.7 + Math.random() * 0.6), life: 0.55 + Math.random() * 0.45, spin: (Math.random() - 0.5) * 12 });
+          const sp = 260 + Math.random() * 520 + r * 2.6;
+          out.push({ x: cx + dx, y: cy + dy, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp, s: step * (0.8 + Math.random() * 0.8), life: 0.5 + Math.random() * 0.5, spin: (Math.random() - 0.5) * 12 });
         }
         return out;
       } catch (e) { return null; }
@@ -50,15 +50,21 @@
         em.style.filter = k > 0.2 && k < 0.8 ? `blur(${(Math.sin(k * Math.PI) * 1.4).toFixed(2)}px)` : '';
         raf = requestAnimationFrame(step); return;
       }
+      if (t < T1 + TC) {
+        const c = (t - T1) / TC;
+        em.style.transform = `scale(${(0.86 + 0.34 * c * c).toFixed(3)})`;
+        em.style.filter = `brightness(${(1 + 0.8 * c).toFixed(2)}) blur(${(c * 0.8).toFixed(2)}px)`;
+        raf = requestAnimationFrame(step); return;
+      }
       if (!particles) {
         particles = buildParticles();
-        em.style.opacity = '0'; em.style.filter = '';
+        em.style.opacity = '0'; em.style.filter = ''; host.style.background = 'transparent';
         ring.style.transition = 'transform .7s cubic-bezier(.2,.8,.2,1), opacity .7s'; ring.style.opacity = '0.9';
         requestAnimationFrame(() => { ring.style.transform = 'translate(-50%,-50%) scale(4.2)'; ring.style.opacity = '0'; });
         if (!particles) { host.style.transition = 'opacity .4s'; host.style.opacity = '0'; timer = setTimeout(finish, 420); return; }
         particles.t = now;
       }
-      const u = (t - T1) / T2, dt = Math.min(0.05, (now - particles.t) / 1000); particles.t = now;
+      const u = (t - T1 - TC) / T2, dt = Math.min(0.05, (now - particles.t) / 1000); particles.t = now;
       ctx.clearRect(0, 0, W, H);
       let alive = 0;
       for (const p of particles) {
@@ -68,10 +74,9 @@
         ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.spin * u); ctx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s * 0.8); ctx.restore();
       }
       ctx.globalAlpha = 1;
-      // start the reveal while the last fragments are still fading so it reads as one motion
-      if (u > 0.55) host.style.opacity = String(Math.max(0, 1 - (u - 0.55) / 0.45));
-      host.style.pointerEvents = u > 0.55 ? 'none' : '';
-      if (u < 1 && alive) raf = requestAnimationFrame(step); else finish();
+      // the slots rise underneath while the last fragments are still fading, so it reads as one motion
+      if (u > 0.3 && !revealed) { revealed = true; host.style.pointerEvents = 'none'; onDone(); }
+      if (u < 1 && alive) raf = requestAnimationFrame(step); else end(false);
     };
     raf = requestAnimationFrame(step);
     return { cancel: () => end(false) };

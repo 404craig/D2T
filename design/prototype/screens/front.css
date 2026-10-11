@@ -111,7 +111,7 @@
 .fr-ex { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--black); background: var(--soft); border-radius: 5px; padding: 2px 6px; vertical-align: middle; }
 
 /* how to play */
-.fr-goal { font: 900 italic 27px/1.05 var(--font); text-transform: uppercase; margin: 6px 0 4px; }
+.fr-goal { font: 900 italic 23px/1.1 var(--font); text-transform: uppercase; margin: 14px 0 4px; padding: 14px 16px; border-left: 4px solid var(--lime); background: var(--ink); border-radius: 0 14px 14px 0; }
 .fr-goal em { font-style: italic; color: var(--lime); }
 .fr-steps { list-style: none; margin: 0; padding: 0; counter-reset: s; }
 .fr-steps li { position: relative; padding: 0 0 16px 50px; min-height: 40px; counter-increment: s; font-size: 15px; line-height: 1.4; color: var(--soft); }
@@ -147,8 +147,6 @@
 .fr-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--lime); color: #000; display: grid; place-items: center; font: 900 italic 28px var(--font); flex: none; }
 .fr-who-name { font: 900 italic 26px/1 var(--font); text-transform: uppercase; }
 .fr-who-mail { font-size: 14px; color: var(--soft); margin-top: 4px; word-break: break-all; }
-.fr-mini4 { display: flex; gap: 10px; font-weight: 800; }
-.fr-mini4 i { font-style: normal; color: var(--muted); font-weight: 700; font-size: 12px; margin-left: 2px; }
 .fr-danger { color: #FF6B6B; }
 .fr-stack { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
 

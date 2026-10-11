@@ -132,7 +132,7 @@
             <div class="se-fs-team${home ? '' : ' se-mine'}"><img src="${aC.crest}" alt=""><b>${D2T.esc(aC.name)}</b></div>
           </div>
           <div class="se-scorers"><ul>${hg}</ul><span class="se-ball">${ICON.goal}</span><ul>${ag}</ul></div>
-          <p class="se-note" style="text-align:center">Played out by the game from your XI. Your real ${data.season} result here was ${home ? `${fx.realFor}-${fx.realAgainst}` : `${fx.realAgainst}-${fx.realFor}`}.</p>
+          <p class="se-note" style="text-align:center">Played out by the game from your XI and the opposition's strength.</p>
         </div>`;
         body.scrollTop = 0;
         btn.textContent = 'League table'; btn.classList.remove('se-btn-ghost');
