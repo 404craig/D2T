@@ -219,3 +219,13 @@
 .fr-sect .fr-dream { margin-top: 2px; }
 .fr-soon-h { margin-top: 14px; }
 .fr-soon-h span { font-size: 12px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #8E8E99; }
+
+/* Classic: fanned club cards that shuffle (chosen 11 Oct) */
+.fr-classic { min-height: 182px; padding: 20px; align-items: center; }
+.fr-classic-txt { position: relative; z-index: 2; display: block; max-width: 56%; }
+.fr-classic .fr-big { font-size: 31px; }
+.fr-fan { position: absolute; right: -34px; top: 50%; width: 200px; height: 200px; transform: translateY(-50%); pointer-events: none; }
+.fr-fan-s { position: absolute; left: 50%; top: 50%; transform-origin: 50% 130%; transition: transform .7s cubic-bezier(.5,0,.2,1); }
+.fr-spin { display: inline-flex; align-items: center; gap: 8px; height: 42px; margin-top: 14px; padding: 0 18px; border-radius: 21px; background: var(--green-1); color: var(--on-green); font: 900 italic 15px/1 var(--font); }
+.fr-spin svg { width: 16px; height: 16px; }
+@media (prefers-reduced-motion: reduce) { .fr-fan-s { transition: none; } }

@@ -52,6 +52,21 @@
   const homeLogo = () => `<span class="fr-hl" role="img" aria-label="DROP2TOP">
     <span class="fr-hl-p fr-hl-emb" style="left:0;top:0;width:${P(234 / 1301)};height:100%;-webkit-mask-image:url('${D2T.ASSET.emblem}');mask-image:url('${D2T.ASSET.emblem}')"><i class="fr-hl-s" style="left:0;top:0;width:${P(1301 / 234)};height:100%"></i></span>
     <span class="fr-hl-p" style="left:${P(233 / 1301)};top:${P(41 / 237)};width:${P(1068 / 1301)};height:${P(143 / 237)};-webkit-mask-image:url('${D2T.ASSET.longText}');mask-image:url('${D2T.ASSET.longText}')"><i class="fr-hl-s" style="left:${P(-233 / 1068)};top:${P(-41 / 143)};width:${P(1301 / 1068)};height:${P(237 / 143)}"></i></span></span>`;
+  // Classic button (chosen 11 Oct, "shuffle"): three real relegated club cards fanned on the right. Every 10 to 15 seconds
+  // the back card slides round to the front, and the card leaving the front is swapped for another club while it is behind.
+  const FAN_POS = [
+    { t: 'translate(-50%,-50%) rotate(-13deg) translateY(6px)', z: 1 },
+    { t: 'translate(-50%,-50%) rotate(0deg) translateY(-6px)', z: 3 },
+    { t: 'translate(-50%,-50%) rotate(13deg) translateY(6px)', z: 2 }
+  ];
+  const fanUsed = new Set();
+  const fanCard = () => {
+    const pool = D2T.game.pool; let c, n = 0;
+    do { c = pool[Math.floor(Math.random() * pool.length)]; } while (fanUsed.has(c.key) && ++n < 20);
+    fanUsed.add(c.key); if (fanUsed.size > 12) fanUsed.delete(fanUsed.values().next().value);
+    return D2T.cards.club(c, { w: 84, delay: Math.random() * 3 });
+  };
+  let fanTimer = 0;
   let idleTimer = 0, idleFirst = 0;
 
   D2T.screen('home', {
@@ -60,10 +75,10 @@
       const rec = D2T.game.record(), dreams = D2T.game.dreamRecord();
       const body = D2T.h(`<div class="screen-body fr-home">
         <div class="fr-home-top"><button class="fr-home-logo" aria-label="DROP2TOP">${homeLogo()}</button></div>
-        <button class="fr-card-btn fr-pick fr-in" data-act="pick" data-mode="classic">
-          <span class="fr-mark">${D2T.logo('emblem')}</span>
-          <span><span class="fr-tag" style="display:block">CLASSIC</span><span class="fr-big" style="display:block">Pick a new club</span><span class="fr-sub" style="display:block">Take them from the drop to the top.</span></span>
-          <span class="fr-go">${ARROW}</span></button>
+        <button class="fr-card-btn fr-pick fr-classic fr-in" data-act="pick" data-mode="classic">
+          <span class="fr-fan" aria-hidden="true">${FAN_POS.map((p, i) => `<span class="fr-fan-s" style="transform:${p.t};z-index:${p.z}">${fanCard()}</span>`).join('')}</span>
+          <span class="fr-classic-txt"><span class="fr-tag" style="display:block">CLASSIC</span><span class="fr-big" style="display:block">Pick a new club</span><span class="fr-sub" style="display:block">Take them from the drop to the top.</span>
+          <span class="fr-spin">Spin for a club ${ARROW}</span></span></button>
         ${continueCard()}
         <section class="fr-sect fr-in" aria-label="Your record">
           <div class="fr-sect-h"><h2>Your record</h2><span>${rec.runs} runs</span></div>
@@ -109,6 +124,20 @@
       };
       clearTimeout(idleFirst); clearInterval(idleTimer);
       idleFirst = setTimeout(idle, 3500); idleTimer = setInterval(idle, 12000);
+      clearTimeout(fanTimer);
+      const fan = body.querySelector('.fr-fan');
+      let turn = 0;
+      const shuffle = () => {
+        if (!root.isConnected) return;
+        if (!document.hidden && !D2T.reduced()) {
+          turn = (turn + 1) % 3;
+          const slots = [...fan.children];
+          slots.forEach((el, i) => { const p = FAN_POS[(i + turn) % 3]; el.style.transform = p.t; el.style.zIndex = p.z; });
+          setTimeout(() => { const back = slots.find((el) => el.style.zIndex === '1'); if (back && root.isConnected) back.innerHTML = fanCard(); }, 900);
+        }
+        fanTimer = setTimeout(shuffle, 10000 + Math.random() * 5000);
+      };
+      fanTimer = setTimeout(shuffle, 10000 + Math.random() * 5000);
       const startNew = (from, mode) => { D2T.game.newRun(mode); D2T.toBlack('spin', { from }); };
       body.querySelectorAll('[data-act="pick"]').forEach((btn) => btn.onclick = (e) => {
         const from = e.currentTarget, mode = from.dataset.mode;
@@ -126,7 +155,7 @@
       body.querySelectorAll('.fr-mode').forEach((m) => m.onclick = () => { m.classList.remove('nudge'); void m.offsetWidth; m.classList.add('nudge'); });
       bar.querySelectorAll('[data-go]').forEach((b) => b.onclick = () => D2T.go(b.dataset.go));
     },
-    unmount() { clearTimeout(idleFirst); clearInterval(idleTimer); }
+    unmount() { clearTimeout(idleFirst); clearInterval(idleTimer); clearTimeout(fanTimer); }
   });
 
   // ---------- D2T.toBlack(next, {from}) ----------
