@@ -1,0 +1,98 @@
+<title>D2T Rounded Cards</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<link rel="stylesheet" href="core/base.css">
+<style>
+  /* Layout: one column of variant rows; each row = the five player levels, a club card and one big card. */
+  :root { color-scheme: dark; --bg: #000000; --fg: #FFFFFF; --soft: #BDBDC6; --muted: #8E8E99; --rule: #1E1E22; --lime: #D4FF00; }
+  html, body { height: auto; }
+  body { background: var(--bg); color: var(--fg); font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 1240px; margin: 0 auto; padding: 40px 16px 64px; display: flex; flex-direction: column; gap: 44px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2', sans-serif; margin: 0 0 8px; text-wrap: balance; }
+  .head p { margin: 0; color: var(--soft); font-size: 15px; max-width: 70ch; line-height: 1.5; }
+  .row { display: flex; flex-direction: column; gap: 18px; padding-top: 26px; border-top: 1px solid var(--rule); }
+  .row-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: var(--lime); }
+  .row-head h2 { font: 900 italic 28px/1 'Exo 2', sans-serif; margin: 0; }
+  .row-head span.note { color: var(--muted); font-size: 14px; }
+  .cards { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; }
+  .small { display: flex; gap: 14px; flex-wrap: wrap; }
+  .big { margin-left: auto; }
+  @media (max-width: 760px) { .big { margin-left: 0; } }
+  .lbl { margin-top: 8px; font-size: 12px; color: var(--muted); text-align: center; }
+  .cell { display: flex; flex-direction: column; align-items: center; }
+</style>
+<div class="page">
+  <div class="head">
+    <h1>Rounded cards</h1>
+    <p>The current v1 cards with the corners and the bottom point rounded off, in three strengths. Same faces, rims, sheen and layout. Real cards from the game data; ratings are the draft card engine.</p>
+  </div>
+  <div id="rows"></div>
+</div>
+<script src="data/data.js"></script>
+<script src="core/app.js"></script>
+<script src="core/cards.js"></script>
+<script>
+(function () {
+  // Card outline in a 114 x 190 box (the small card), matching v1: chamfered top corners, shallow point at the bottom.
+  const W = 114, H = 190, RIM = 2;
+  const V1 = (w, h, c, p) => [[0, c], [c, 0], [w - c, 0], [w, c], [w, h - p], [w / 2, h], [0, h - p]];
+  // Each variant: outline points + a corner radius per point (same units as the card box).
+  const VARIANTS = [
+    { key: 'v1', tag: 'NOW', name: 'Current v1', note: 'Sharp chamfers and point, for comparison.', pts: V1, r: [0, 0, 0, 0, 0, 0, 0] },
+    { key: 'a', tag: 'VARIANT A', name: 'Softened', note: 'Same shape, every corner eased just enough to lose the sharp edge.', pts: V1, r: [2.5, 2.5, 2.5, 2.5, 3, 4, 3] },
+    { key: 'b', tag: 'VARIANT B', name: 'Rounded', note: 'Chamfers and point clearly rounded. Reads friendlier, still a shield.', pts: V1, r: [6, 6, 6, 6, 8, 10, 8] },
+    { key: 'c', tag: 'VARIANT C', name: 'Smooth shield', note: 'Chamfers become round top corners and the point becomes a soft curve.',
+      pts: (w, h, c, p) => [[0, 0], [w, 0], [w, h - p], [w / 2, h], [0, h - p]], r: [13, 13, 12, 22, 12] }
+  ];
+  function roundedPath(pts, radii) {
+    const n = pts.length, seg = [];
+    for (let i = 0; i < n; i++) {
+      const P = pts[i], A = pts[(i - 1 + n) % n], B = pts[(i + 1) % n];
+      const la = Math.hypot(A[0] - P[0], A[1] - P[1]), lb = Math.hypot(B[0] - P[0], B[1] - P[1]);
+      const r = Math.min(radii[i], la / 2, lb / 2);
+      const t1 = [P[0] + (A[0] - P[0]) / la * r, P[1] + (A[1] - P[1]) / la * r];
+      const t2 = [P[0] + (B[0] - P[0]) / lb * r, P[1] + (B[1] - P[1]) / lb * r];
+      seg.push({ t1, P, t2 });
+    }
+    const f = (v) => +v.toFixed(2);
+    let d = `M${f(seg[0].t2[0])} ${f(seg[0].t2[1])}`;
+    for (let i = 1; i <= n; i++) { const s = seg[i % n]; d += ` L${f(s.t1[0])} ${f(s.t1[1])} Q${f(s.P[0])} ${f(s.P[1])} ${f(s.t2[0])} ${f(s.t2[1])}`; }
+    return d + 'Z';
+  }
+  const svgUri = (w, h, d) => `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${w} ${h}' preserveAspectRatio='none'><path d='${d}' fill='black'/></svg>`)}")`;
+  // Masks scale with the card because the SVG fills the element; rim inset is 0.2em = 2 units in the 114 box.
+  let css = '';
+  for (const v of VARIANTS) {
+    if (v.key === 'v1') continue;
+    const outer = roundedPath(v.pts(W, H, 12, 20), v.r);
+    const iw = W - 2 * RIM, ih = H - 2 * RIM;
+    const inner = roundedPath(v.pts(iw, ih, 11, 19), v.r.map((x) => Math.max(0, x - RIM * 0.6)));
+    css += `.rv-${v.key} .d2c-rim, .rv-${v.key} .d2c-face { clip-path: none; -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+      .rv-${v.key} .d2c-rim { -webkit-mask-image: ${svgUri(W, H, outer)}; mask-image: ${svgUri(W, H, outer)}; }
+      .rv-${v.key} .d2c-face { -webkit-mask-image: ${svgUri(iw, ih, inner)}; mask-image: ${svgUri(iw, ih, inner)}; }\n`;
+  }
+  const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+
+  // Real example cards
+  const D = D2T.data, wolves = D.runs['Wolves 2011/12'];
+  const pool = wolves.squad.concat(wolves.transferPool);
+  const pick = (lv) => pool.find((c) => c.level === lv && c.pos !== 'GK');
+  const players = [pick('bronze'), pick('silver'), pick('gold'), pick('baller'), D.sampleLegend];
+  const clubSeason = D.relegatedPool.find((c) => c.name === 'Wolves' && c.season === '2011/12');
+  const saints = D.relegatedPool.find((c) => c.name === 'Southampton' && c.season === '2024/25');
+  const C = D2T.cards;
+  document.getElementById('rows').innerHTML = VARIANTS.map((v) => `
+    <section class="row rv-${v.key}">
+      <div class="row-head"><span class="tag">${v.tag}</span><h2>${v.name}</h2><span class="note">${v.note}</span></div>
+      <div class="cards">
+        <div class="small">
+          ${players.map((p, i) => `<div class="cell">${C.player(p, { delay: i * 0.5 })}<span class="lbl">${D2T.LV[p.level].name}</span></div>`).join('')}
+          <div class="cell">${C.club(clubSeason, { delay: 2.5 })}<span class="lbl">Club</span></div>
+          <div class="cell">${C.club(saints, { delay: 3 })}<span class="lbl">Club</span></div>
+        </div>
+        <div class="big cell">${C.player(players[3], { w: 210 })}<span class="lbl">Big card</span></div>
+      </div>
+    </section>`).join('');
+})();
+</script>
