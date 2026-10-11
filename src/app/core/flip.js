@@ -19,7 +19,7 @@
 
   function backFace(w) {
     return `<div class="d2c sp-back" style="--w:${w}px" aria-hidden="true"><div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span>
-      <div class="sp-back-edge"></div><div class="sp-back-mark">${D2T.logo('emblem', { label: '' })}</div><span class="sp-back-word">DROP2TOP</span></div></div>`;
+      <svg class="sp-back-edge" viewBox="0 0 114 190" preserveAspectRatio="none" aria-hidden="true"><path d="M1.77 10.23 L10.23 1.77 Q12 0 14.5 0 L99.5 0 Q102 0 103.77 1.77 L112.23 10.23 Q114 12 114 14.5 L114 167 Q114 170 111.17 170.99 L60.77 188.68 Q57 190 53.23 188.68 L2.83 170.99 Q0 170 0 167 L0 14.5 Q0 12 1.77 10.23Z"/></svg><div class="sp-back-mark">${D2T.logo('emblem', { label: '' })}</div><span class="sp-back-word">DROP2TOP</span></div></div>`;
   }
 
   function openLarge(fromEl, html, opts = {}) {
