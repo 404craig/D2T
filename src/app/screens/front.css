@@ -42,9 +42,9 @@
 .fr-cont-crest { width: 62px; height: 62px; flex: none; display: grid; place-items: center; }
 .fr-cont-crest img { width: 62px; height: 62px; object-fit: contain; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.35)); }
 .fr-cont-txt { flex: 1; min-width: 0; }
-.fr-cont-lbl { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; opacity: 0.85; }
+.fr-cont-lbl { display: block; font-size: 11px; font-weight: 800; letter-spacing: 0.14em; opacity: 0.85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .fr-cont-name { font: 900 italic 25px/1 var(--font); text-transform: uppercase; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-shadow: var(--tsh); }
-.fr-cont-meta { font-size: 13px; font-weight: 700; opacity: 0.9; margin-top: 4px; }
+.fr-cont-meta { font-size: 13px; font-weight: 700; opacity: 0.9; margin-top: 4px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .fr-cont-bar { height: 5px; border-radius: 3px; background: var(--track); margin-top: 7px; overflow: hidden; }
 .fr-cont-bar i { display: block; height: 100%; background: currentColor; transform-origin: left; border-radius: 3px; }
 .fr-cont .fr-go { position: static; flex: none; width: 46px; height: 46px; border-radius: 50%; background: var(--goBg); color: var(--goFg); box-shadow: 0 3px 10px rgba(0,0,0,0.25); display: grid; place-items: center; }
