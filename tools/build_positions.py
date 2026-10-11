@@ -34,7 +34,7 @@ BROAD = {"GK": "GK", "CB": "DEF", "RB": "DEF", "LB": "DEF", "RWB": "DEF", "LWB":
 
 
 def norm(s):
-    s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().lower()
+    s = unicodedata.normalize("NFKD", s.replace("'", "").replace("’", "")).encode("ascii", "ignore").decode().lower()
     return re.sub(r"[^a-z]+", " ", s).strip()
 
 
