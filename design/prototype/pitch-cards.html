@@ -1,0 +1,166 @@
+<title>D2T Pitch Cards</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<link rel="stylesheet" href="core/base.css">
+<style>
+  /* Layout: one row per option. Left: the cards on a real-size phone pitch. Right: the same cards at 2.5x to read the detail. */
+  :root { color-scheme: dark; --bg: #000000; --fg: #FFFFFF; --soft: #BDBDC6; --muted: #8E8E99; --rule: #1E1E22; --green: #12F06C;
+    --gk: #FFB020; --def: #3BA4FF; --mid: #12F06C; --fwd: #FF4D5A; }
+  html, body { height: auto; }
+  body { background: var(--bg); color: var(--fg); font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 1180px; margin: 0 auto; padding: 40px 16px 64px; display: flex; flex-direction: column; gap: 40px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2', sans-serif; margin: 0 0 8px; }
+  .head p { margin: 0; color: var(--soft); font-size: 15px; max-width: 72ch; line-height: 1.5; }
+  .row { display: grid; grid-template-columns: 358px minmax(0, 1fr); gap: 32px; padding-top: 26px; border-top: 1px solid var(--rule); align-items: start; }
+  @media (max-width: 820px) { .row { grid-template-columns: minmax(0, 1fr); } }
+  .row-head { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: var(--green); }
+  .row-head h2 { font: 900 italic 28px/1 'Exo 2', sans-serif; margin: 0; }
+  .row-head .note { color: var(--muted); font-size: 14px; max-width: 70ch; line-height: 1.45; }
+  .cap { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  /* pitch, same look as the game */
+  .pitch { position: relative; width: 358px; max-width: 100%; height: 430px; border-radius: 18px; overflow: hidden;
+    background: repeating-linear-gradient(180deg, #0F3D22 0 43px, #0C3520 43px 86px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12); }
+  .pitch::before { content: ''; position: absolute; inset: 10px; border: 1.5px solid rgba(255,255,255,0.28); border-radius: 6px; }
+  .pitch::after { content: ''; position: absolute; left: 50%; top: 50%; width: 80px; height: 80px; margin: -40px 0 0 -40px; border: 1.5px solid rgba(255,255,255,0.28); border-radius: 50%; }
+  .pitch .half { position: absolute; left: 10px; right: 10px; top: 50%; height: 1.5px; background: rgba(255,255,255,0.28); }
+  .slot { position: absolute; transform: translate(-50%, -50%); z-index: 1; }
+  .zoom { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-end; }
+  .zoom .z { display: flex; flex-direction: column; align-items: center; }
+  .z-inner { zoom: 2.25; }
+
+  /* ---------- pitch card base: shiny face, softened shield mask (set per size by script) ---------- */
+  .pc { position: relative; width: var(--w); height: var(--h); font-size: calc(var(--w) / 5.6); filter: var(--glow); }
+  .pc .d2c-rim, .pc .d2c-face { -webkit-mask: var(--mo) 0 0 / 100% 100% no-repeat; mask: var(--mo) 0 0 / 100% 100% no-repeat; clip-path: none; }
+  .pc .d2c-face { inset: 0.2em; -webkit-mask-image: var(--mi); mask-image: var(--mi); }
+  .pc .d2c-rim { inset: 0; }
+  .pc .d2c-tex { background: repeating-linear-gradient(135deg, rgba(255,255,255,0.08) 0 0.15em, rgba(255,255,255,0) 0.15em 0.6em); }
+  .pc-body { position: absolute; inset: 0.2em; display: flex; flex-direction: column; color: var(--ink-c); }
+  .pc-first, .pc-last { display: block; text-align: center; white-space: nowrap; overflow: hidden; line-height: 1.05; padding: 0 0.15em; }
+  .pc-first { font-weight: 700; font-size: 0.82em; opacity: 0.85; }
+  .pc-last { font-weight: 900; font-style: italic; font-size: 1.05em; text-transform: uppercase; }
+  .pos-GK { --pos: var(--gk); } .pos-DEF { --pos: var(--def); } .pos-MID { --pos: var(--mid); } .pos-FWD { --pos: var(--fwd); }
+
+  /* Current (as in build 8) */
+  .cur .pc-body { padding: 0.55em 0.35em 1em; }
+  .cur .top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .cur .ovr { font: 900 italic 1.7em/0.9 'Exo 2'; }
+  .cur .pos { font-size: 0.65em; font-weight: 800; display: block; margin-top: 0.1em; }
+  .cur .crest { width: 2.3em; height: 2.3em; object-fit: contain; }
+  .cur .pc-last { font-size: 0.8em; margin-top: 0.4em; }
+
+  /* A: Big number. Rating dominates, position in a solid colour pill, two-line full name */
+  .va .pc-body { padding: 0.5em 0.3em 1.15em; }
+  .va .top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .va .ovr { font: 900 italic 2.45em/0.82 'Exo 2'; letter-spacing: -0.02em; }
+  .va .crest { width: 1.75em; height: 1.75em; object-fit: contain; margin-top: 0.05em; }
+  .va .pos { align-self: flex-start; margin-top: 0.3em; font-size: 0.72em; font-weight: 900; letter-spacing: 0.04em; padding: 0.12em 0.45em; border-radius: 0.35em; background: var(--pos); color: #0A0A0A; }
+  .va .grow { flex: 1; }
+  .va .pc-first { font-size: 0.72em; }
+
+  /* B: Name band. Rating and position across the top, crest faded behind, full name in a dark band */
+  .vb .pc-body { padding: 0.45em 0 0; }
+  .vb .top { display: flex; justify-content: space-between; align-items: center; padding: 0 0.35em; position: relative; z-index: 1; }
+  .vb .ovr { font: 900 italic 2.1em/0.85 'Exo 2'; }
+  .vb .pos { font-size: 0.8em; font-weight: 900; color: var(--pos); background: rgba(10,10,10,0.82); padding: 0.18em 0.4em; border-radius: 0.35em; letter-spacing: 0.04em; }
+  .vb .crest { position: absolute; left: 50%; top: 52%; width: 2.6em; height: 2.6em; margin: -1.3em 0 0 -1.3em; object-fit: contain; opacity: 0.9; }
+  .vb .band { margin-top: auto; background: rgba(10,10,10,0.84); color: #FFFFFF; padding: 0.25em 0 1.3em; border-top: 0.12em solid var(--pos); position: relative; z-index: 1; }
+  .vb .pc-first { font-size: 0.7em; opacity: 0.75; }
+  .vb .pc-last { font-size: 0.98em; }
+
+  /* C: Position tab. Position sits as a coloured tab above the card, rating big in the middle */
+  .vc { margin-top: 0.75em; }
+  .vc .tab { position: absolute; left: 50%; top: -0.78em; transform: translateX(-50%); z-index: 2; font-size: 0.78em; font-weight: 900; letter-spacing: 0.06em; line-height: 1; padding: 0.22em 0.55em 0.3em; border-radius: 0.4em 0.4em 0.2em 0.2em; background: var(--pos); color: #0A0A0A; box-shadow: 0 0.1em 0.3em rgba(0,0,0,0.5); }
+  .vc .pc-body { padding: 0.55em 0.3em 1.15em; align-items: center; }
+  .vc .mid { display: flex; align-items: center; justify-content: center; gap: 0.2em; width: 100%; }
+  .vc .ovr { font: 900 italic 2.3em/0.85 'Exo 2'; }
+  .vc .crest { width: 1.6em; height: 1.6em; object-fit: contain; }
+  .vc .grow { flex: 1; }
+  .vc .pc-first, .vc .pc-last { width: 100%; }
+  .vc .pc-first { font-size: 0.72em; }
+</style>
+<div class="page">
+  <div class="head">
+    <h1>Pitch cards</h1>
+    <p>The small cards on the squad pitch, at real size on a phone pitch (left) and blown up 2.25 times (right). Every option keeps the full name, makes the rating bigger and makes the position easier to read. Positions get one colour each: keeper amber, defence blue, midfield green, attack red. Example XI: Wolves 2011/12 after a few signings from that season; ratings are the draft card engine.</p>
+  </div>
+  <div id="rows"></div>
+</div>
+<script src="data/data.js"></script>
+<script src="core/app.js"></script>
+<script src="core/cards.js"></script>
+<script>
+(function () {
+  const D = D2T.data, run = D.runs['Wolves 2011/12'];
+  const sq = (n) => run.squad.find((c) => c.name === n);
+  const tp = (pos, lv) => run.transferPool.find((c) => c.pos === pos && c.level === lv);
+  // Example XI (4-4-2): real Wolves players plus three signings from the same season's pool
+  const XI = [
+    ['GK', sq('Wayne Hennessey'), 50, 88],
+    ['DEF', sq('Stephen Ward'), 13, 68], ['DEF', sq('Christophe Berra'), 37, 70], ['DEF', tp('DEF', 'gold'), 63, 70], ['DEF', sq('Ronald Zubar'), 87, 68],
+    ['MID', sq('Matt Jarvis'), 13, 44], ['MID', tp('MID', 'gold'), 37, 46], ['MID', sq('Jamie O\'Hara'), 63, 46], ['MID', sq('Stephen Hunt'), 87, 44],
+    ['FWD', sq('Steven Fletcher'), 35, 19], ['FWD', sq('Sylvan Ebanks-Blake'), 65, 19]
+  ];
+  const PW = 62;
+  const ZOOM = [XI[0][1], XI[3][1], XI[6][1], XI[9][1], XI[10][1]];
+
+  // softened shield path for any card box (same radii as the live cards)
+  function roundedPath(pts, radii) {
+    const n = pts.length, seg = [];
+    for (let i = 0; i < n; i++) {
+      const P = pts[i], A = pts[(i - 1 + n) % n], B = pts[(i + 1) % n];
+      const la = Math.hypot(A[0] - P[0], A[1] - P[1]), lb = Math.hypot(B[0] - P[0], B[1] - P[1]);
+      const r = Math.min(radii[i], la / 2, lb / 2);
+      seg.push({ t1: [P[0] + (A[0] - P[0]) / la * r, P[1] + (A[1] - P[1]) / la * r], P, t2: [P[0] + (B[0] - P[0]) / lb * r, P[1] + (B[1] - P[1]) / lb * r] });
+    }
+    const f = (v) => +v.toFixed(2);
+    let d = `M${f(seg[0].t2[0])} ${f(seg[0].t2[1])}`;
+    for (let i = 1; i <= n; i++) { const s = seg[i % n]; d += ` L${f(s.t1[0])} ${f(s.t1[1])} Q${f(s.P[0])} ${f(s.P[1])} ${f(s.t2[0])} ${f(s.t2[1])}`; }
+    return d + 'Z';
+  }
+  const shield = (w, h, c, p) => [[0, c], [c, 0], [w - c, 0], [w, c], [w, h - p], [w / 2, h], [0, h - p]];
+  const R = [2.5, 2.5, 2.5, 2.5, 3, 4, 3];
+  const uri = (w, h, d) => `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${w} ${h}' preserveAspectRatio='none'><path d='${d}' fill='black'/></svg>`)}")`;
+  function masks(ratio) { // in a 114-wide box, like the big cards
+    const W = 114, H = Math.round(114 * ratio);
+    return { o: uri(W, H, roundedPath(shield(W, H, 12, 18), R)), i: uri(W - 4, H - 4, roundedPath(shield(W - 4, H - 4, 11, 17), R.map((x) => Math.max(0, x - 1.2)))) };
+  }
+
+  const esc = D2T.esc;
+  const split = (n) => { const i = n.indexOf(' '); return i < 0 ? ['', n] : [n.slice(0, i), n.slice(i + 1)]; };
+  const VARIANTS = [
+    { key: 'cur', tag: 'NOW', name: 'Current (build 8)', ratio: 1.2, note: 'Surname only, rating at about 1.7x the card font, position as small text.',
+      inner: (c, f, l) => `<div class="top"><span><span class="ovr">${c.ovr}</span><span class="pos">${c.pos}</span></span><img class="crest" src="${c.crest}" alt=""></div><span class="pc-last" style="margin-top:auto">${esc(l)}</span>` },
+    { key: 'va', tag: 'OPTION A', name: 'Big number', ratio: 1.34, note: 'The rating is the biggest thing on the card, with the position in a solid colour pill under it and a small crest top right. Full name on two lines at the bottom.',
+      inner: (c, f, l) => `<div class="top"><span class="ovr">${c.ovr}</span><img class="crest" src="${c.crest}" alt=""></div><span class="pos">${c.pos}</span><span class="grow"></span><span class="pc-first">${esc(f)}</span><span class="pc-last">${esc(l)}</span>` },
+    { key: 'vb', tag: 'OPTION B', name: 'Name band', ratio: 1.38, note: 'Rating and position across the top, crest in the middle, and the full name in white on a dark band edged in the position colour. Easiest to read on any card colour.',
+      inner: (c, f, l) => `<div class="top"><span class="ovr">${c.ovr}</span><span class="pos">${c.pos}</span></div><img class="crest" src="${c.crest}" alt=""><div class="band"><span class="pc-first">${esc(f)}</span><span class="pc-last">${esc(l)}</span></div>` },
+    { key: 'vc', tag: 'OPTION C', name: 'Position tab', ratio: 1.3, note: 'The position becomes a coloured tab on top of the card, so the shape of the team reads at a glance. Big rating and crest side by side, full name below.',
+      inner: (c, f, l) => `<div class="mid"><span class="ovr">${c.ovr}</span><img class="crest" src="${c.crest}" alt=""></div><span class="grow"></span><span class="pc-first">${esc(f)}</span><span class="pc-last">${esc(l)}</span>` }
+  ];
+
+  function card(v, c, w) {
+    const L = D2T.LV[c.level], [f, l] = split(c.name), h = Math.round(w * v.ratio), m = masks(v.ratio);
+    const style = `--w:${w}px;--h:${h}px;--face:${L.face};--rim:${L.rim};--ink-c:${L.ink};--holo:${L.holo};--glow:${L.glow};--mo:${m.o};--mi:${m.i}`;
+    return `<div class="pc ${v.key} pos-${c.pos}" style="${style.replace(/"/g, '&quot;')}" aria-label="${esc(c.name)}, ${c.ovr}, ${c.pos}">
+      ${v.key === 'vc' ? `<span class="tab">${c.pos}</span>` : ''}
+      <div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2c-holo"></span></div>
+      <div class="pc-body">${v.inner(c, f, l)}</div></div>`;
+  }
+
+  document.getElementById('rows').innerHTML = VARIANTS.map((v) => `
+    <section class="row">
+      <div class="row-head"><span class="tag">${v.tag}</span><h2>${v.name}</h2><span class="note">${v.note}</span></div>
+      <div><div class="pitch"><span class="half"></span>${XI.map(([pos, c, x, y]) => `<div class="slot" style="left:${x}%;top:${y}%">${card(v, c, PW)}</div>`).join('')}</div>
+        <div class="cap">Real size: ${PW}px wide, ${Math.round(PW * v.ratio)}px tall${v.key === 'cur' ? '' : ' (game uses 56px today; 62px still fits four across)'}</div></div>
+      <div><div class="zoom">${ZOOM.map((c) => `<div class="z"><div class="z-inner">${card(v, c, PW)}</div><span class="cap">${D2T.LV[c.level].name} ${c.pos}</span></div>`).join('')}</div>
+        <div class="cap">2.25x for detail. Includes the longest name in the squad (Ebanks-Blake).</div></div>
+    </section>`).join('');
+
+  // shrink long names to fit, down to 50%
+  document.fonts.ready.then(() => document.querySelectorAll('.pc-first, .pc-last').forEach((el) => {
+    const base = parseFloat(getComputedStyle(el).fontSize); let s = 1;
+    while (el.scrollWidth > el.clientWidth + 0.5 && s > 0.5) { s -= 0.03; el.style.fontSize = (base * s) + 'px'; }
+  }));
+})();
+</script>
