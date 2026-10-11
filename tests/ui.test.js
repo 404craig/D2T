@@ -72,22 +72,36 @@ fs.mkdirSync(OUT, { recursive: true });
     await page.waitForFunction(() => { const e = window.D2T.game.eng(); return e.roll && window.D2T.state.run.spun === `${e.roll.key}.${e.roll.spin}`; }, null, { timeout: 8000 });
     await wait(400);
     if (r === 0) await shot("09-roll-landed");
+    await page.waitForSelector(".sp-screen.is-placing", { timeout: 4000 });
+    await wait(700);
+    if (r === 0) await shot("10-placing");
     if (r === 2) {
       const before = await page.evaluate(() => window.D2T.game.eng().signed.length);
-      await page.click(".sp-pass");
+      check((await page.textContent(".sp-main")).trim() === "Pass", "main button is not Pass after the roll lands");
+      await page.click(".sp-main");
       await wait(600);
       check(await page.evaluate((b) => window.D2T.game.eng().signed.length === b, before), "pass signed a player");
       break;
     }
-    await page.click(".sp-slot >> nth=0"); await wait(300);
-    await page.click(".sp-main");
-    await expectScreen("squad");
-    await wait(700);
-    if (r === 0) await shot("10-placing");
     const before = await page.evaluate(() => window.D2T.game.eng().signed.length);
-    await page.click(".se-slot.se-best [data-card]", { force: true });
-    await wait(700);
-    check(await page.evaluate((b) => window.D2T.game.eng().signed.length === b + 1, before), `roll ${r + 1}: signing was not placed`);
+    if (r === 0) {
+      // tap a card, then a shirt (the best one pulses)
+      await page.click(".sp-slot >> nth=0"); await wait(400);
+      await shot("10b-selected");
+      await page.click(".tr-field .se-slot.se-best .se-cardwrap", { force: true });
+    } else {
+      // drag a card onto a shirt
+      const a = await (await page.$(".sp-slot >> nth=1")).boundingBox();
+      const t = await (await page.$('.tr-field .se-cardwrap[data-i="5"]')).boundingBox();
+      await page.mouse.move(a.x + a.width / 2, a.y + a.height / 2); await page.mouse.down();
+      await page.mouse.move(a.x + a.width / 2, a.y - 30, { steps: 4 });
+      await page.mouse.move(t.x + t.width / 2, t.y + t.height / 2, { steps: 8 });
+      await page.mouse.up();
+    }
+    await wait(500);
+    if (r === 0) await shot("10c-signed");
+    check(await page.evaluate((b) => window.D2T.game.eng().signed.length === b + 1, before), `roll ${r + 1}: signing did not go through`);
+    await wait(900);
     if (r < 2) await expectScreen("transfer");
   }
   await expectScreen("squad");
@@ -107,9 +121,12 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.click(".se-main"); await wait(1800);
   for (let i = 0; i < 6 && (await page.textContent(".se-main")) !== "Continue"; i++) { await page.click(".se-main"); await wait(1500); }
   await shot("15-match-table");
-  await page.reload(); await wait(800);
+  // a fresh load plays the intro, then home's Continue goes back to the match
+  await page.reload(); await expectScreen("intro");
+  await page.click(".fr-skip", { force: true }); await expectScreen("home"); await wait(700);
   check(await page.evaluate((r) => JSON.stringify(window.D2T.game.eng().played[0]) === r, res1), "refresh changed the GW1 result");
-  check((await screen()) === "match", "refresh after the match did not return to the match screen, on " + (await screen()));
+  await page.click('[data-act="continue"]'); await wait(1600);
+  check((await screen()) === "match", "Continue after a refresh did not return to the match screen, on " + (await screen()));
   await page.click(".se-main"); await wait(1500);
   for (let i = 0; i < 6 && (await screen()) === "match"; i++) { await page.click(".se-main"); await wait(1200); }
   const after = await screen();
@@ -142,16 +159,35 @@ fs.mkdirSync(OUT, { recursive: true });
 
   const rec = await page.evaluate(() => window.D2T.state.record.runs.length);
   check(rec === 1, "expected 1 recorded run, got " + rec);
-  await page.reload(); await wait(800);
-  check((await screen()) === "summary", "refresh at the end did not stay on the summary");
+  await page.reload(); await expectScreen("intro");
+  await page.click(".fr-skip", { force: true }); await expectScreen("home");
+  await page.evaluate(() => window.D2T.go("summary")); await wait(800);
+  check((await screen()) === "summary", "the finished season's summary did not reopen after a refresh");
   check((await page.evaluate(() => window.D2T.state.record.runs.length)) === 1, "refresh recorded the run twice");
 
   // ---------- other screens ----------
-  for (const s of ["home", "howto", "league", "stats", "account"]) {
+  for (const s of ["home", "howto", "league", "account", "stats"]) {
     await page.evaluate((n) => window.D2T.go(n), s); await wait(900);
     check((await screen()) === s, `could not open ${s}`);
     await shot("20-" + s);
   }
+  // back arrow on a secondary page returns where you came from
+  await page.evaluate(() => window.D2T.go("stats")); await wait(500);
+  await page.click(".back-btn"); await wait(500);
+  check((await screen()) === "account", "back from stats did not return to account, on " + (await screen()));
+
+  // account: sign in against a stand-in for the Tenaball server (no real accounts touched)
+  await page.route("**/api/signin", (r) => r.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
+    body: JSON.stringify({ token: "a".repeat(64), user: { id: "x", name: "Craig", email: "craig@example.com" }, stats: {} }) }));
+  await page.route("**/api/signout", (r) => r.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: "{}" }));
+  await page.route("**/api/me", (r) => r.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: JSON.stringify({ user: { id: "x", name: "Craig", email: "craig@example.com" } }) }));
+  await page.fill('input[name="email"]', "craig@example.com"); await page.fill('input[name="pin"]', "1234");
+  await page.click('.fr-form [type="submit"]'); await wait(600);
+  check(/Craig/.test(await page.textContent(".fr-who-name").catch(() => "")), "sign in did not show the account");
+  await shot("21-account-signed-in");
+  await page.click('[data-act="out"]'); await wait(500);
+  check(!!(await page.$('input[name="email"]')), "sign out did not return to the sign-in form");
+
   // a run screen out of turn sends you to where the run is
   await page.evaluate(() => window.D2T.go("squad")); await wait(400);
   check((await screen()) === "summary", "squad opened after the season ended");
@@ -164,5 +200,5 @@ fs.mkdirSync(OUT, { recursive: true });
 
   await browser.close();
   if (errors.length) { console.log("FAIL\n" + errors.join("\n")); process.exit(1); }
-  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls, fixtures, live match, refresh, season, summary, record, other screens");
+  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls (tap, drag, pass), fixtures, live match, refresh, season, summary, record, back, account, other screens");
 })().catch((e) => { console.error(e); process.exit(1); });

@@ -6,7 +6,7 @@ Where this spec and the current build differ, this spec is the newer decision. W
 
 ## 1. Look
 
-- **Only the opening and the home screen are green; every other screen is black.** They use an FC-style green: a soft vertical gradient (`#12F06C` → `#5CF79F` → `#9DF4D8`), one broad light beam from top left, a thin line across, and a dark streak bottom right (reference: `design/reference/fc27_green.png`). Buttons on home are black with white text. Every other screen is pure black.
+- **Only the opening is green; home and every other screen are black (changed 11 Oct, see section 10).** They use an FC-style green: a soft vertical gradient (`#12F06C` → `#5CF79F` → `#9DF4D8`), one broad light beam from top left, a thin line across, and a dark streak bottom right (reference: `design/reference/fc27_green.png`). Buttons on home are black with white text. Every other screen is pure black.
 - **Logos:** long DROP2TOP on home (black on green). Inside the game, the short D2T logo, small and white, top left (tap = home). An account circle (person icon) top right on every screen except home.
 - **Accent:** inside a run, the club's colour is the only accent (buttons, highlights, the player's row in tables). Lime `#D4FF00` is the D2T accent outside a run (for example the Spin button before a club is picked).
 - **Type:** Exo 2 throughout, Black Italic for headlines and numbers.
@@ -113,6 +113,14 @@ Decided by Craig (11 Oct):
 - Changing formation suggests a new best XI, and can bring in squad players at the start of the game if needed.
 - Spin sounds (reel tick, landing thud): yes, but game sounds are a later pass.
 - The squad is only available at the start of the season: the whole real squad sits in the carousel before GW1, then only your XI is left and new faces come through transfer rolls (each takes a shirt from the XI).
+
+Decided by Craig (11 Oct, after build 3):
+- The opening animation plays on every fresh load. It ends by turning black as the logo glides to the top and turns white; home is black. Only the intro is green.
+- The new green `#12F06C` replaces lime as the game's colour everywhere outside a run.
+- Backgrounds blend into the phone and browser chrome at the top and bottom on iOS and Android, always.
+- Secondary pages get a back arrow. Account sign-in is live with the Tenaball email and PIN; stats are not on the account page.
+- Transfer: the picked card grows and the others darken; tapping it again enlarges it to the centre with his Premier League career rather than repeating the card's stats. After the spin the cards drop and the pitch appears; drag a card onto a shirt to sign. Respin lifts the cards back to the middle first.
+- Pitch cards are shorter and the +/- rating chips are gone. Long names shrink to fit. The respin button is a refresh icon.
 
 Still open:
 1. Slogan on every launch or first launch only (now first only)?

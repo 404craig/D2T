@@ -1,5 +1,5 @@
-// Home (green, black buttons). Also defines D2T.toBlack(next): the move from green into the black game screens,
-// where the logo turns from black to white with a green shimmer and lands as the small top-left logo.
+// Home (black, the new green as its accent). Also defines D2T.toBlack(next): the move into the game screens,
+// where green light glints through the white logo as it shrinks into the small top-left logo.
 (function () {
   const STEP_LABEL = { spin: 'Pick a club', table: 'Preview', squad: 'Squad', fixtures: 'Fixtures', match: 'Match day', transfer: 'Transfer' };
   const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
@@ -39,10 +39,9 @@
   }
 
   D2T.screen('home', {
-    title: 'Home', theme: 'green',
+    title: 'Home', theme: 'black',
     mount(root, params) {
       const rec = D2T.game.record();
-      root.insertAdjacentHTML('beforeend', D2T.greenBackdrop());
       const body = D2T.h(`<div class="screen-body fr-home">
         <div class="fr-home-top"><button class="fr-home-logo" aria-label="DROP2TOP">${D2T.logo('long')}</button></div>
         ${continueCard()}
@@ -52,7 +51,7 @@
           <span class="fr-go">${ARROW}</span></button>
         <section class="fr-sect fr-in" aria-label="Your record">
           <div class="fr-sect-h"><h2>Your record</h2><span>${rec.runs} runs</span></div>
-          ${D2T.frRecord(rec)}</section>
+          ${D2T.frRecord(rec, 'dark')}</section>
         <section class="fr-sect fr-in" aria-label="More game modes">
           <div class="fr-sect-h"><h2>More modes</h2><span>Coming soon</span></div>
           <div class="fr-modes">${MODES.map((m) => `<button class="fr-mode" aria-label="${m.name}, coming soon">
@@ -93,7 +92,7 @@
       };
       const cont = body.querySelector('[data-act="continue"]');
       if (cont) cont.onclick = (e) => D2T.toBlack(D2T.game.stepFor() || 'squad', { from: e.currentTarget });
-      body.querySelector('.fr-home-logo').onclick = () => { D2T.state.seenIntro = false; D2T.go('intro'); };
+      body.querySelector('.fr-home-logo').onclick = () => D2T.go('intro');
       body.querySelectorAll('.fr-mode').forEach((m) => m.onclick = () => { m.classList.remove('nudge'); void m.offsetWidth; m.classList.add('nudge'); });
       bar.querySelectorAll('[data-go]').forEach((b) => b.onclick = () => D2T.go(b.dataset.go));
     }
@@ -120,7 +119,7 @@
     const shortW = L.h * (857 / 241);
     const ov = D2T.h(`<div class="fr-tb" aria-hidden="true"><div class="fr-tb-black" style="left:${ox}px;top:${oy}px"></div>
       <div class="fr-tb-logo" style="width:${L.w}px;height:${L.h}px;transform:translate(${L.x}px,${L.y}px)">
-        <span class="fr-tb-m fr-tb-long" style="-webkit-mask-image:url('${D2T.ASSET.long}');mask-image:url('${D2T.ASSET.long}')"><i class="w"></i><i class="k"></i><i class="s"></i></span>
+        <span class="fr-tb-m fr-tb-long" style="-webkit-mask-image:url('${D2T.ASSET.long}');mask-image:url('${D2T.ASSET.long}')"><i class="w"></i><i class="s"></i></span>
         <span class="fr-tb-m fr-tb-short" style="-webkit-mask-image:url('${D2T.ASSET.short}');mask-image:url('${D2T.ASSET.short}');right:auto;width:${shortW}px;opacity:0"><i class="w"></i></span>
       </div></div>`);
     app.appendChild(ov);
@@ -133,8 +132,7 @@
     const body = scr.querySelector('.screen-body'), bar = scr.querySelector('.fr-tabbar');
     [body, bar].forEach((el) => el && el.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(.97)' }], { duration: 300, easing: 'ease-in', fill: 'forwards' }));
     black.animate([{ transform: 'scale(0)' }, { transform: `scale(${R})` }], { duration: 520, easing: 'cubic-bezier(.5,0,.3,1)', fill: 'forwards' });
-    // 2. logo: black fades to white while green glistens through it in waves, then settles on white
-    lng.querySelector('.k').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 520, delay: 160, easing: 'ease-in-out', fill: 'forwards' });
+    // 2. green glistens through the white logo in waves
     lng.querySelector('.s').animate([{ transform: 'translateX(-60%)' }, { transform: 'translateX(40%)' }], { duration: 1050, delay: 120, easing: 'cubic-bezier(.4,0,.3,1)', fill: 'forwards' });
     await D2T.wait(620);
 

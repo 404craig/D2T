@@ -83,8 +83,9 @@
 
   // ---------- the roll screen ----------
   // Cards, odds, respins and what you've already seen all come from the engine. A roll that has already spun shows
-  // where it landed instead of spinning again.
-  let api = null, intr = null, filler = null;
+  // where it landed instead of spinning again. Once the three cards land they drop into a tray and your pitch appears
+  // above them: drag a card onto a shirt to sign him there (or tap him, then the shirt). Respin lifts them back up first.
+  let api = null, intr = null, filler = null, kill = null;
   const fillerCards = () => {
     const S = D2T.game.S();
     if (filler && filler.season === S.season) return filler.cards;
@@ -93,19 +94,161 @@
     filler = { season: S.season, cards };
     return cards;
   };
+  const LV_ACCENT = (p) => { const L = D2T.LV[p.level] || D2T.LV.bronze; return { accent: p.level === 'silver' ? '#DCE2E8' : p.level === 'bronze' ? '#D99A66' : L.text, ink: p.level === 'silver' || p.level === 'bronze' || p.level === 'gold' ? '#000' : '#fff' }; };
+  const PITCH_W = 50;
+
   D2T.screen('transfer', {
     title: 'Transfer window', theme: 'black',
     mount(root) {
-      const GAME = D2T.game, SND = window.D2TSound || { play() {} };
-      const st = D2T.state.run, eng = GAME.eng(), run = D2T.run();
+      const GAME = D2T.game, SE = D2T.se, SND = window.D2TSound || { play() {} };
+      const st = D2T.state.run, eng = GAME.eng(), run = D2T.run(), club = run.club;
+      SE.accent(root, club);
       root.appendChild(D2T.topbar());
       const info = GAME.windowInfo();
       const rollKey = eng.roll ? `${eng.roll.key}.${eng.roll.spin}` : '';
-      const accent = run.club.accent, ink = run.club.ink;
       const lvName = (p) => (D2T.LV[p.level] || D2T.LV.bronze).name;
       const body = D2T.h('<div style="flex:1 1 auto;min-height:0;position:relative;display:flex;flex-direction:column"></div>');
       root.appendChild(body);
       const fx = GAME.fixture(info.gw), opp = fx ? D2T.esc(fx.opp) + (fx.ha === 'H' ? ' (H)' : ' (A)') : '';
+      const reduced = D2T.reduced();
+      let alive = true, placing = false, signing = false, field = null, slotsEl = null, ratingEl = null, timers = [];
+      kill = () => { alive = false; timers.forEach(clearTimeout); endDrag(true); };
+
+      // ---------- the pitch above the tray ----------
+      function drawPitch(best = -1, fresh = -1) {
+        if (!slotsEl) return;
+        const L = GAME.lineup();
+        slotsEl.innerHTML = GAME.slots().map((s, i) => {
+          const c = L.xi[i], fit = GAME.fit(c.id, i), oop = fit !== 'green';
+          return `<div class="se-slot${i === best ? ' se-best' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
+            <div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}. Sign the selected player here">
+              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: i === fresh })}${oop ? `<span class="se-oopchip se-fit-${fit}">${s.pos}</span>` : ''}</div></div>`;
+        }).join('');
+        ratingEl.textContent = GAME.rating();
+        if (fresh >= 0 && !reduced) {
+          const el = slotsEl.querySelector(`.se-cardwrap[data-i="${fresh}"]`);
+          el && el.animate([{ transform: 'scale(1.5)', filter: 'brightness(1.8)' }, { transform: 'scale(.95)' }, { transform: 'none', filter: 'none' }], { duration: 650, easing: 'cubic-bezier(.3,1.4,.5,1)' });
+        }
+      }
+      function buildPitch() {
+        field = D2T.h(`<div class="tr-pitch" aria-label="Your XI">
+          <div class="tr-head"><div class="tr-head-t"><b>${D2T.esc(info.name)} · Roll ${info.step} of ${info.of}</b><span>Drag a player onto a shirt to sign him there</span></div>
+            <div class="se-rating" aria-live="polite"><b class="tr-rating">0</b><i>Team<br>rating</i></div></div>
+          <div class="se-pitch tr-field">${SE.pitchLines}<div class="se-slots"></div></div></div>`);
+        api.el.insertBefore(field, api.el.querySelector('.sp-stage'));
+        slotsEl = field.querySelector('.se-slots'); ratingEl = field.querySelector('.tr-rating');
+        slotsEl.addEventListener('click', (e) => {
+          const w = e.target.closest('.se-cardwrap'); if (!w || !placing) return;
+          const i = api.selected();
+          if (i < 0) { api.hint('Pick one of the three first, then tap a shirt'); return; }
+          sign(i, +w.dataset.i);
+        });
+      }
+
+      // FLIP the row of cards between the middle of the screen and the tray
+      const row = () => api.el.querySelector('.sp-row');
+      function flip(toPlacing) {
+        const r = row(), b = r.getBoundingClientRect();
+        api.el.classList.toggle('is-placing', toPlacing);
+        const a = r.getBoundingClientRect();
+        if (reduced) return;
+        const dx = (b.left + b.width / 2) - (a.left + a.width / 2), dy = (b.top + b.height / 2) - (a.top + a.height / 2), sc = b.width / a.width;
+        const end = getComputedStyle(r).transform; const e = end === 'none' ? 'none' : end;
+        r.animate([{ transform: `translate(${dx}px,${dy}px) ${e === 'none' ? '' : e} scale(${sc})` }, { transform: e }], { duration: 520, easing: 'cubic-bezier(.5,0,.2,1)' });
+      }
+      function enterPlacing(animate) {
+        if (placing || !alive) return;
+        placing = true;
+        drawPitch();
+        if (animate && !reduced) {
+          flip(true);
+          field.animate([{ opacity: 0, transform: 'translateY(-14px)' }, { opacity: 1, transform: 'none' }], { duration: 420, delay: 160, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
+        } else api.el.classList.add('is-placing');
+        api.hint('Drag a player onto the pitch, or tap him then a shirt');
+      }
+      function leavePlacing() {
+        if (!placing) return Promise.resolve();
+        placing = false; api.clear();
+        if (reduced) { api.el.classList.remove('is-placing'); return Promise.resolve(); }
+        return new Promise((res) => {
+          field.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: 'ease-in', fill: 'forwards' }).onfinish = () => {
+            flip(false);
+            field.getAnimations().forEach((x) => x.cancel());
+            timers.push(setTimeout(res, 480));
+          };
+        });
+      }
+
+      // ---------- sign or pass ----------
+      function sign(i, slot) {
+        if (signing || !placing) return;
+        const p = api.results()[i];
+        if (!p || !GAME.signAt(p.id, slot)) return;
+        signing = true;
+        SND.play('subIn');
+        drawPitch(-1, slot);
+        const s = api.slots[i];
+        s.classList.add('is-signed');
+        api.hint(`${surname(p.name)} is in. Welcome to ${club.name}.`);
+        timers.push(setTimeout(() => { if (alive) D2T.go(GAME.eng().phase === 'window' ? 'transfer' : 'squad'); }, reduced ? 300 : 1100));
+      }
+      function pass() {
+        if (signing) return;
+        GAME.pass();
+        D2T.go(GAME.eng().phase === 'window' ? 'transfer' : 'squad');
+      }
+
+      // ---------- drag a card from the tray onto a shirt ----------
+      let drag = null, ghost = null, target = null, suppress = -1;
+      const host = document.getElementById('app');
+      function endDrag(cancel) {
+        if (ghost) ghost.remove(); ghost = null;
+        if (target) target.classList.remove('se-target'); target = null;
+        if (cancel) drag = null;
+      }
+      const onDown = (e) => {
+        if (!placing || signing || e.button) return;
+        const s = e.target.closest('.sp-slot'); if (!s || !api.el.contains(s)) return;
+        drag = { i: api.slots.indexOf(s), x0: e.clientX, y0: e.clientY, pid: e.pointerId, moved: false };
+      };
+      const onMove = (e) => {
+        if (!drag || e.pointerId !== drag.pid) return;
+        if (!drag.moved) {
+          if (Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 8) return;
+          drag.moved = true;
+          if (api.selected() !== drag.i) api.select(drag.i);
+          const p = api.results()[drag.i];
+          ghost = D2T.h(`<div class="se-ghost" aria-hidden="true">${D2T.cards.player(p, { w: 64, mini: true, shine: false })}</div>`);
+          host.appendChild(ghost);
+          drawPitch(GAME.bestSlot(p.id));
+        }
+        if (e.cancelable) e.preventDefault();
+        const hr = host.getBoundingClientRect();
+        ghost.style.transform = `translate(${e.clientX - hr.left - 32}px,${e.clientY - hr.top - 58}px) rotate(-4deg) scale(1.08)`;
+        const under = document.elementFromPoint(e.clientX, e.clientY);
+        let t = under && under.closest('.tr-field .se-cardwrap');
+        if (!t && under) { const sl = under.closest('.tr-field .se-slot'); t = sl && sl.querySelector('.se-cardwrap'); }
+        if (t !== target) { target && target.classList.remove('se-target'); target = t; target && target.classList.add('se-target'); }
+      };
+      const onUp = (e) => {
+        if (!drag || e.pointerId !== drag.pid) return;
+        const d = drag; drag = null;
+        if (!d.moved) return;
+        suppress = d.i;
+        const t = target; endDrag(false);
+        if (t) sign(d.i, +t.dataset.i);
+      };
+      window.addEventListener('pointermove', onMove, { passive: false });
+      window.addEventListener('pointerup', onUp);
+      window.addEventListener('pointercancel', () => { drag = null; endDrag(false); });
+      root.addEventListener('pointerdown', onDown);
+      // a drag is not a tap: swallow the click that follows it
+      root.addEventListener('click', (e) => { if (suppress >= 0 && e.target.closest('.sp-slot')) { e.stopPropagation(); e.preventDefault(); } suppress = -1; }, true);
+      const blockTouch = (e) => { if (drag && drag.moved && e.cancelable) e.preventDefault(); };
+      window.addEventListener('touchmove', blockTouch, { passive: false });
+      const prevKill = kill;
+      kill = () => { prevKill(); window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); window.removeEventListener('touchmove', blockTouch); };
+
       const build = () => {
         api = D2T.roll.mount(body, {
           kicker: `${info.name} · Roll ${info.step} of ${info.of}`, title: 'Who comes in?',
@@ -114,31 +257,28 @@
           render: (p, w) => D2T.cards.player(p, { w }),
           pick: () => { SND.play('roll3'); return GAME.rollCards(); },
           settled: st.spun === rollKey ? GAME.rollCards() : null,
-          onSettled: () => { st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); },
-          accent: (p) => { const L = D2T.LV[p.level] || D2T.LV.bronze; return { accent: p.level === 'silver' ? '#DCE2E8' : p.level === 'bronze' ? '#D99A66' : L.text, ink: p.level === 'silver' || p.level === 'bronze' || p.level === 'gold' ? '#000' : '#fff' }; },
+          onSettled: () => { st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); timers.push(setTimeout(() => enterPlacing(true), reduced ? 0 : 450)); },
+          accent: LV_ACCENT,
           caption: (p) => `${p.pos} · ${lvName(p).toUpperCase()}`,
-          details: (p) => {
-            const keys = p.pos === 'GK' ? D2T.GK_KEYS : D2T.KEYS;
-            const best = GAME.preview(p.id).reduce((b, o) => (o.delta > b.delta ? o : b), { delta: -1e9 });
-            const out = GAME.lineup().xi[best.slot];
-            return `<div class="sp-det-name">${D2T.esc(p.name)}</div><div class="sp-det-line">${D2T.esc(p.club)}${p.club2 ? ' / ' + D2T.esc(p.club2) : ''} ${p.season} · ${p.pos} · ${p.ovr} ${lvName(p)}${p.nat ? ' · ' + D2T.esc(p.nat) : ''} · ${p.apps} games, ${p.goals} goals${p.provisional ? ' · provisional rating' : ''}</div>
-              <div class="sp-det-grid cols-3">${keys.map((k) => `<span class="sp-det-stat"><b>${p.stats[k] == null ? '-' : p.stats[k]}</b><i>${k}</i></span>`).join('')}</div>
-              <div class="sp-det-badges"><span>Best spot: for ${D2T.esc(out ? out.name : '')}, team ${best.delta >= 0 ? '+' : ''}${best.delta.toFixed(1)}</span></div>`;
-          },
-          mainLabel: 'Spin', pickLabel: 'Pick a player', spinningLabel: 'Rolling',
-          selectedLabel: (p) => `Sign ${surname(p.name)}`,
-          hintIdle: 'Hit Spin to roll three players', hintSettled: 'Tap a player to pick them', hintSelected: 'Tap again for the full card, or sign them',
+          details: (p) => D2T.cards.info(p, LV_ACCENT(p).accent),
+          mainLabel: 'Spin', pickLabel: 'Pass', spinningLabel: 'Rolling',
+          selectedLabel: () => 'Pass',
+          hintIdle: 'Hit Spin to roll three players', hintSettled: '', hintSelected: 'Tap a shirt to sign him there, or tap him again for his card',
           respins: eng.respins,
-          baseBtn: { accent, ink },
+          baseBtn: { accent: club.accent, ink: club.ink },
           onRespinsChange: () => { GAME.respinCards(); st.spun = ''; D2T.save(); },
-          pass: { label: 'Pass on this roll', onPass: () => { GAME.pass(); D2T.go(GAME.eng().phase === 'window' ? 'transfer' : 'squad'); } },
-          onConfirm: (p) => { SND.play('pick'); GAME.hold(p.id); D2T.go('squad'); }
+          beforeSpin: () => leavePlacing(),
+          onSelect: (i, p) => { if (placing) drawPitch(GAME.bestSlot(p.id)); },
+          afterSettle: { label: 'Pass', onClick: pass },
+          onConfirm: () => {}
         });
         api.el.classList.add('sp-reveal');
+        buildPitch();
+        if (st.spun === rollKey) enterPlacing(false);
       };
       if (st.spun === rollKey) build();
       else intr = intro(body, () => { intr = null; build(); });
     },
-    unmount() { intr && intr.cancel(); intr = null; api && api.unmount(); api = null; }
+    unmount() { kill && kill(); kill = null; intr && intr.cancel(); intr = null; api && api.unmount(); api = null; }
   });
 })();

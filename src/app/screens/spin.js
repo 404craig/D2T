@@ -94,6 +94,8 @@
     get cardEl() { return this.slot.querySelector('.sp-node.is-hit .d2c') || this.slot.querySelector('.sp-node .d2c'); }
   }
 
+  const REFRESH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
+
   // ---------- the roll screen ----------
   // cfg: { kicker, title, sub, hint, pool: items, render(item) -> html, pick() -> [3 items], accent(item) -> {accent, ink},
   //        caption(item), details(item) -> html, mainLabel, selectedLabel(item), onConfirm(item), respins (number or null),
@@ -105,7 +107,7 @@
       <div class="sp-stage"><div class="sp-floor"></div><div class="sp-row"><div class="sp-slot"></div><div class="sp-slot"></div><div class="sp-slot"></div></div></div>
       <div class="sp-hint"></div>
       <div class="sp-bar">
-        <button class="sp-round is-reload" aria-label="Spin again">${D2T.logo('emblemLine', { label: '' })}<span class="sp-count"></span></button>
+        <button class="sp-round is-reload" aria-label="Spin again">${REFRESH}<span class="sp-count"></span></button>
         <button class="sp-main">${D2T.logo('emblem', { label: '' })}<span class="sp-lbl">${cfg.mainLabel || 'Spin'}</span></button>
         <button class="sp-round is-home" aria-label="Home">${D2T.ICON.home}</button>
       </div></div>`);
@@ -156,9 +158,9 @@
       if (selected === i) { openCard(i); return; }
       selected = i;
       slots.forEach((s, j) => { s.classList.toggle('is-sel', j === i); s.classList.toggle('is-other', j !== i); });
-      setMain(cfg.selectedLabel(results[i]), results[i]);
-      main.disabled = false;
+      if (!cfg.afterSettle) { setMain(cfg.selectedLabel(results[i]), results[i]); main.disabled = false; }
       hint(cfg.hintSelected || 'Tap it again to take a closer look');
+      cfg.onSelect && cfg.onSelect(i, results[i]);
     };
     const openCard = (i) => {
       if (open) return;
@@ -225,16 +227,28 @@
       state = 'settled';
       main.classList.remove('is-spinning'); main.disabled = true; setMain(cfg.pickLabel || 'Pick one', null);
       setRespins(); hint(cfg.hintSettled || 'Tap a card to pick it');
+      afterSettle();
       cfg.onSettled && cfg.onSettled(results);
     };
 
+    // cfg.afterSettle { label, onClick }: once the cards land the main button does something else (the transfer roll
+    // makes it Pass, as signing is a drag onto the pitch), whatever is selected.
+    function afterSettle() {
+      if (!cfg.afterSettle) return;
+      main.classList.add('is-after'); setMain(cfg.afterSettle.label, null); main.disabled = false;
+    }
     main.onclick = () => {
       if (state === 'idle') { spin(); return; }
+      if (state === 'settled' && cfg.afterSettle) { cfg.afterSettle.onClick(); return; }
       if (state === 'settled' && selected >= 0) cfg.onConfirm(results[selected], { respins });
     };
-    reload.onclick = () => {
-      if (state === 'spinning' || respins == null || respins <= 0) return;
+    let respinning = false;
+    reload.onclick = async () => {
+      if (state === 'spinning' || respinning || respins == null || respins <= 0) return;
       respins -= 1; cfg.onRespinsChange && cfg.onRespinsChange(respins);
+      main.classList.remove('is-after');
+      respinning = true;
+      try { if (cfg.beforeSpin) await cfg.beforeSpin(); } finally { respinning = false; }
       spin();
     };
     if (cfg.pass) {
@@ -249,10 +263,12 @@
       results = cfg.settled;
       reels.forEach((r, i) => { r.load([cfg.render(results[i], 114)]); r.draw(0, 0); r.settle(0, cfg.caption && cfg.caption(results[i])); r.slot.classList.add('is-set'); });
       state = 'settled'; main.disabled = true; setMain(cfg.pickLabel || 'Pick one', null); setRespins(); hint(cfg.hintSettled || 'Tap a card to pick it');
+      afterSettle();
     }
 
     return {
-      el, reels, slots, spin,
+      el, reels, slots, spin, select, openCard, hint,
+      results: () => results, selected: () => selected, settled: () => state === 'settled', clear: clearSelection,
       unmount() { cancelAnimationFrame(raf); stopTick(); timers.forEach(clearTimeout); if (open) { try { open.el.remove(); } catch (e) { /* gone */ } } }
     };
   }

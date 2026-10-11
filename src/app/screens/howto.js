@@ -20,7 +20,7 @@
   D2T.screen('howto', {
     title: 'How to play', theme: 'black',
     mount(root) {
-      root.appendChild(D2T.topbar());
+      root.appendChild(D2T.topbar({ back: true }));
       const cards = pickCards();
       const body = D2T.h(`<div class="screen-body fr-page">
         <h1 class="fr-title">How to play</h1>

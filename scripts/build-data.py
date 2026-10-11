@@ -170,6 +170,18 @@ def main():
         prow[p["season"]].append(p)
 
     game = {"v": 1, "seasons": {}, "catalogue": [], "clubs": clubs_meta}
+    # Whole Premier League careers (every season in the data) for the big card: games, goals, seasons, clubs in order.
+    careers, cidx = [], {}
+    for r in sorted(players, key=lambda r: (r["player_id"], r["season"], r["club"])):
+        pid = r["player_id"]
+        if pid not in cidx:
+            cidx[pid] = len(careers)
+            careers.append({"a": 0, "g": 0, "s": [], "c": []})
+        k = careers[cidx[pid]]
+        k["a"] += int(r["apps"]); k["g"] += int(r["goals"])
+        if r["season"] not in k["s"]: k["s"].append(r["season"])
+        if r["club"] not in k["c"]: k["c"].append(r["club"])
+    game["careers"] = [{"a": k["a"], "g": k["g"], "n": len(k["s"]), "f": k["s"][0], "l": k["s"][-1], "c": k["c"]} for k in careers]
     career = defaultdict(int)   # Premier League appearances before the current season, per person
     for season in sorted(by_season):
         table = tables[season]
@@ -195,7 +207,7 @@ def main():
                 q["a"] += int(r["apps"]); q["g"] += int(r["goals"])
                 q["r"] = max(q["r"], rating)
                 continue
-            people[pid] = {"n": r["player"], "c": cix[r["club"]], "b": r["position"], "p": pos,
+            people[pid] = {"k": cidx[pid], "n": r["player"], "c": cix[r["club"]], "b": r["position"], "p": pos,
                            "r": rating, "a": int(r["apps"]), "g": int(r["goals"]), "nat": r["nationality"],
                            "a1": int(r["apps"]), "g1": int(r["goals"]), "src": "x" if e else "f"}
             if e:
