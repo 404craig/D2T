@@ -104,15 +104,19 @@ Today a bronze or silver card is rarely wanted. Options, best first:
 - **Matches:** seeded Poisson from XI rating against opponent strength (from their real finish), 90 minutes in about 24 seconds, Skip to end gives the same result. Other clubs use their real results for gameweeks 1 to 3. A transfer roll comes after gameweek 3, 6, 9...
 - **Prototype limits:** spins always land on the three clubs with full data (Wolves 2011/12, Norwich 2019/20, Southampton 2024/25); achievement numbers and friends are examples.
 
-## 10. Open questions for Craig
+## 10. Decisions and open questions
 
-1. Record counts cumulative (a title also counts as top 3, top half and beat the drop)?
-2. Minimum runs (say 3) before a player is ranked in a friends league?
-3. Slogan on every launch or first launch only (now first only)?
-4. Create an account inside the same email then PIN flow, or a separate tab like Tenaball?
-5. Show the real result after each match for comparison ("Wolves really won 2-1")?
-6. Changing formation: suggest a new best XI (now) or keep your XI and move them, playing some out of position?
-7. Should out-of-position players lower the team rating, and how hard should matches be?
-8. Subs: whole squad in the carousel (now) or a bench of 7 plus reserves?
-9. Table reveal timing (about 4s down to your row, 4s for the reset)?
-10. Spin extras: reel tick and landing thud sounds, haptics, and an occasional "one card past and back" tease on the last reel?
+Decided by Craig (11 Oct):
+- Record counts are cumulative: a title also counts as top 3, top half and beat the drop.
+- No minimum number of runs before a player is ranked in a friends league.
+- Do not show the real result after a match.
+- Changing formation suggests a new best XI, and can bring in squad players at the start of the game if needed.
+- Spin sounds (reel tick, landing thud): yes, but game sounds are a later pass.
+
+Still open:
+1. Slogan on every launch or first launch only (now first only)?
+2. Create an account inside the same email then PIN flow, or a separate tab like Tenaball?
+3. Should out-of-position players lower the team rating, and how hard should matches be?
+4. Subs: whole squad in the carousel (now) or a bench of 7 plus reserves?
+5. Table reveal timing (about 4s down to your row, 4s for the reset)?
+6. Haptics and an occasional "one card past and back" tease on the last reel?
