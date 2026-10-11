@@ -45,26 +45,22 @@ for f in sorted(glob.glob("docs/cards/feed/rated_fit_*.json")):
     t = f.split("rated_fit_")[1][:7]
     seasons[t[:4] + "/" + t[5:]] = json.load(open(f, encoding="utf-8"))["players"]
 
-# legends: each all-time great's best season (best season 93+), one card per player
-best_season = {}
+# legends (Craig, 11 Oct 2026): the top 3 players of every season
+LEGENDS = []
 for s, ps in seasons.items():
-    for r in ps:
-        k = r.get("id", r["player"])
-        if r["apps"] >= 10 and (k not in best_season or r["ovr"] > best_season[k]["ovr"]):
-            best_season[k] = r
-LEGENDS = [r for r in best_season.values() if r["ovr"] >= 93]
+    LEGENDS += sorted(ps, key=lambda r: -r["ovr"])[:3]
 
 
-def levels(players):
-    """Season-relative card levels by broad position (purple = best ~3.5%, about one per detailed position)."""
+def levels(players, season_all):
+    """Card levels (Craig, 11 Oct 2026): purple = the season's top 5 players league-wide;
+    gold 80+, silver 70 to 79, bronze under 70."""
+    top5 = {id(r) for r in sorted(season_all, key=lambda r: -r["ovr"])[:5]}
     out = defaultdict(list)
-    for pos in NEED:
-        grp = sorted([r for r in players if r["pos"] == pos and r["apps"] >= 10], key=lambda r: -r["ovr"])
-        n = len(grp)
-        for i, r in enumerate(grp):
-            q = i / max(n, 1)
-            lvl = "purple" if q < 0.035 else "gold" if q < 0.20 else "silver" if q < 0.667 else "bronze"
-            out[lvl].append(r)
+    for r in players:
+        if r["apps"] < 10:
+            continue
+        lvl = "purple" if id(r) in top5 else "gold" if r["ovr"] >= 80 else "silver" if r["ovr"] >= 70 else "bronze"
+        out[lvl].append(r)
     return out
 
 
@@ -117,7 +113,7 @@ def run(s, club, style):
     for r in players:
         by_club[r["club"]].append(r)
     xi = xi_of(by_club[club])
-    lv = levels([r for r in players if r["club"] != club])
+    lv = levels([r for r in players if r["club"] != club], players)
     club_xi = {c: xi_of(ps) for c, ps in by_club.items()}
     base = {c: rating(x) for c, x in club_xi.items()}
     strength = dict(base)
@@ -132,6 +128,8 @@ def run(s, club, style):
             for _try in range(20):
                 lvl = rng.choice(list(SHARES), p=list(SHARES.values()))
                 pool = LEGENDS if lvl == "legend" else lv[lvl]
+                if not pool:
+                    continue
                 r = pool[rng.integers(len(pool))]
                 key = (r.get("id", r["player"]), r["club"])
                 if key not in seen:
@@ -231,7 +229,7 @@ def summary(style, runs, pick="random"):
 
 
 if __name__ == "__main__":
-    print(f"relegated club-seasons: {len(RELEGATED)}; legends (best season 93+): {len(LEGENDS)}")
+    print(f"relegated club-seasons: {len(RELEGATED)}; legends (top 3 of every season): {len(LEGENDS)}")
     d = [run("2007/08", "Derby", "none") for _ in range(300)]
     print(f"Derby 2007/08, no signings: avg finish {np.mean([x[0] for x in d]):.1f}, avg points {np.mean([x[1] for x in d]):.1f} (real: 20th, 11 pts)")
     rows = {}

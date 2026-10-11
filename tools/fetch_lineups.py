@@ -9,6 +9,7 @@ he was listed at, and date of birth. Built from the feed's line-ups and timed
 events (substitutions, goals, red cards).
 """
 import csv
+import datetime
 import json
 import sys
 import time
@@ -50,11 +51,13 @@ with ThreadPoolExecutor(6) as ex:
 failed = [f["id"] for f in fixtures if f.get("failed")]
 fixtures = [f for f in fixtures if not f.get("failed")]
 
-P = defaultdict(lambda: {"starts": 0, "subs": 0, "mins": 0, "gf_on": 0, "ga_on": 0, "cs_on": 0, "w": 0, "d": 0, "l": 0, "pos": Counter()})
+P = defaultdict(lambda: {"starts": 0, "subs": 0, "mins": 0, "gf_on": 0, "ga_on": 0, "cs_on": 0, "w": 0, "d": 0, "l": 0, "pos": Counter(), "first": "9999", "last": "0000"})
 info = {}
 problems = []
 for fx in fixtures:
     teams = {int(t["team"]["id"]): t for t in fx["teams"]}
+    _ms = (fx.get("kickoff") or {}).get("millis") or (fx.get("provisionalKickoff") or {}).get("millis")
+    mdate = datetime.datetime.fromtimestamp(_ms / 1000, datetime.timezone.utc).strftime("%Y-%m-%d") if _ms else ""
     tname = {k: v["team"]["name"] for k, v in teams.items()}
     home_id = int(fx["teams"][0]["team"]["id"])
     ev = fx.get("events") or []
@@ -107,13 +110,16 @@ for fx in fixtures:
                     r["cs_on"] += 1
                 r["w" if tf > ta else "d" if tf == ta else "l"] += 1
                 r["pos"][p.get("matchPosition", "")] += 1
+                if mdate:
+                    r["first"] = min(r["first"], mdate); r["last"] = max(r["last"], mdate)
                 info[pid] = {"name": p["name"]["display"], "birth": (p.get("birth") or {}).get("date", {}).get("label", "")}
 with open(out, "w", newline="", encoding="utf-8") as fh:
     w = csv.writer(fh)
-    w.writerow(["season", "club_feed", "feed_id", "name", "birth", "starts", "subs", "apps", "mins", "gf_on", "ga_on", "cs_on", "w", "d", "l", "positions"])
+    w.writerow(["season", "club_feed", "feed_id", "name", "birth", "starts", "subs", "apps", "mins", "gf_on", "ga_on", "cs_on", "w", "d", "l", "positions", "first_match", "last_match"])
     for (pid, club), r in sorted(P.items(), key=lambda kv: (kv[0][1], -kv[1]["mins"])):
         w.writerow([label, club, pid, info[pid]["name"], info[pid]["birth"], r["starts"], r["subs"], r["starts"] + r["subs"], r["mins"],
-                    r["gf_on"], r["ga_on"], r["cs_on"], r["w"], r["d"], r["l"], " ".join(f"{k}:{v}" for k, v in r["pos"].most_common())])
+                    r["gf_on"], r["ga_on"], r["cs_on"], r["w"], r["d"], r["l"], " ".join(f"{k}:{v}" for k, v in r["pos"].most_common()),
+                    r["first"] if r["first"] != "9999" else "", r["last"] if r["last"] != "0000" else ""])
 print(f"{label}: {len(fixtures)} matches, {len(P)} player-club rows -> {out}; score mismatches: {len(problems)}")
 if failed:
     print("  matches that would not load:", failed)
