@@ -129,6 +129,7 @@
   </div>
   <section class="sec"><h2>Crests on the spinning shirts</h2><p>Three ways to show the club on the big shirts. All three now have a slight sheen, and a light sweeps across each one as it lands. Derby, Spurs, Sheffield Wednesday and Swansea have thin line-drawn crests, so they always sit on a light disc or plate.</p><div class="row" id="crests"></div></section>
   <section class="sec"><h2>Every club's shirt</h2><p>Fewer plain red shirts with white outlines: stripes, hoops and halves where the club wears them, contrasting sleeves for Arsenal, Villa, West Ham and Burnley, and darker outlines (Man Utd black, Liverpool deep red). Numbers are all set at the three-figure size, and the crest sits bigger on a disc at the collar.</p><div class="kitgrid" id="kits"></div></section>
+  <section class="sec"><h2>Name on the big shirts</h2><p>Straight, or very slightly curved like the lettering printed on a real shirt. Short and long surnames side by side.</p><div class="row" id="arcs"></div></section>
   <section class="sec"><h2>Goalkeeper shirt, long-sleeved</h2><p>Three versions. Each shows the big spinning shirt and the size it plays at on the pitch.</p><div class="row" id="gks"></div></section>
   <section class="sec"><h2>Pitch options</h2><p>Each one says the mode on the pitch. Orange is this mode's colour.</p><div class="row" id="pitches"></div></section>
   <section class="sec"><h2>A turn, step by step</h2><p>Ready, spinning, picking, then the reveal.</p><div class="row" id="steps"></div></section>
@@ -183,6 +184,7 @@
       return `<pattern id="kp-${k.id}" patternUnits="userSpaceOnUse" ${sz}>${inner}</pattern>`; }).join('');
     document.body.insertAdjacentHTML('afterbegin', `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>${pats}
       <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.34"/><stop offset="0.32" stop-color="#fff" stop-opacity="0.08"/><stop offset="0.5" stop-color="#fff" stop-opacity="0"/><stop offset="0.78" stop-color="#000" stop-opacity="0.10"/><stop offset="1" stop-color="#000" stop-opacity="0.26"/></linearGradient>
+      ${[1, 2].map((k) => [27, 30].map((y) => (() => { const r = k === 1 ? 3 : 5; return `<path id="arc-${k}-${y}" d="M14 ${y + r} Q50 ${y - r} 86 ${y + r}"/>`; })()).join('')).join('')}
       <linearGradient id="glint" x1="0" y1="0" x2="1" y2="0.4"><stop offset="0.35" stop-color="#fff" stop-opacity="0"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.55"/><stop offset="0.65" stop-color="#fff" stop-opacity="0"/></linearGradient>
     </defs></svg>`);
   })();
@@ -192,9 +194,17 @@
   const LSLEEVES = 'M31 9 L14 24 L3 68 L15 72 L25 40 Z M69 9 L86 24 L97 68 L85 72 L75 40 Z';
   const CUFFS = 'M4.3 62 L16.5 66 L15 72 L3 68 Z M95.7 62 L83.5 66 L85 72 L97 68 Z';
   const GKCOL = '#FFB020';
-  const CFG = { crest: 'collar', gk: 2 };
+  const CFG = { crest: 'collar', gk: 2, arc: 0 };
   // back of a shirt: surname across the shoulders, then the number where a number is printed (upper back).
   // Goals always use the three-figure size, so 9 and 104 look the same weight.
+  // each letter placed on a shallow curve and tilted to follow it, squeezed sideways to fit the shoulders like the straight name
+  const GW = { I: 0.3, J: 0.5, M: 0.86, W: 0.9, "'": 0.25, ' ': 0.3, '-': 0.4 };
+  function arcName(sur, fs, ny, r, tstroke) {
+    const ws = [...sur].map((c) => (GW[c] || 0.62) * fs), W = ws.reduce((t, v) => t + v, 0), sx = Math.min(1, 42 / W);
+    let x = 50 - W / 2; const xs = [], ys = [], rs = [];
+    ws.forEach((wd) => { const cx = x + wd / 2, u = (cx - 50) * sx / 30; xs.push(cx.toFixed(2)); ys.push((ny + r * u * u).toFixed(2)); rs.push((Math.atan(2 * r * u / 30) * 180 / Math.PI).toFixed(1)); x += wd; });
+    return `<text font-size="${fs}" x="${xs.join(' ')}" y="${ys.join(' ')}" rotate="${rs.join(' ')}"${tstroke} transform="translate(50 0) scale(${sx.toFixed(3)} 1) translate(-50 0)">${[...sur].map((c) => D2T.esc(c)).join('')}</text>`;
+  }
   function shirt(opts) {
     const w = opts.w || 48, cls = opts.cls || '', big = w >= 80, gkv = opts.gk === true ? CFG.gk : (opts.gk || 0), long = gkv > 0;
     const crestStyle = opts.crest || CFG.crest;
@@ -214,7 +224,10 @@
     const tstroke = k.stroke ? ` stroke="${k.stroke}" stroke-width="2.6" paint-order="stroke" stroke-linejoin="round"` : '';
     if (opts.player) {
       const sur = opts.player.sur.toUpperCase(), fs = Math.min(13, 140 / Math.max(6, sur.length));
-      top = w < 80 ? '' : `<text x="50" y="${crestStyle === 'collar' ? 30 : 27}" font-size="${fs}" textLength="${Math.min(50, sur.length * fs * 0.62)}" lengthAdjust="spacingAndGlyphs"${tstroke}>${D2T.esc(sur)}</text>`;
+      const ny = crestStyle === 'collar' ? 30 : 27, tl = Math.min(42, sur.length * fs * 0.62), arc = opts.arc ?? CFG.arc;
+      // straight, or very slightly arched like printed shirt lettering: the middle stays at the straight height and the ends drop
+      top = w < 80 ? '' : arc ? arcName(sur, fs, ny, arc === 1 ? 2.5 : 4.5, tstroke)
+        : `<text x="50" y="${ny}" font-size="${fs}" textLength="${tl}" lengthAdjust="spacingAndGlyphs"${tstroke}>${D2T.esc(sur)}</text>`;
       if (opts.goals != null) { const g = String(opts.goals); mid = `<text class="gnum" x="50" y="${crestStyle === 'print' ? 62 : 65}" font-size="30"${g.length > 2 ? ' textLength="46" lengthAdjust="spacingAndGlyphs"' : ''}${tstroke} style="transform-box:fill-box;transform-origin:center">${g}</text>`; }
     }
     const st = opts.state === 'empty' ? 'empty' : opts.state === 'next' ? 'empty next' : opts.state === 'myst' ? 'myst' : '';
@@ -442,7 +455,7 @@
   setTimeout(revealLoop, 900); setInterval(revealLoop, 4200);
 
   // ---------- playable ----------
-  document.getElementById('play').innerHTML = `<div class="opt"><div class="opt-h"><span class="tag">PLAYABLE</span><h3>One full game</h3><p>Reveal: <select id="rstyle"><option value="burst">Burst</option><option value="flip">Flip</option><option value="flap">Scoreboard roll</option></select> · Pitch: <select id="pstyle"><option value="p1">Night stadium</option><option value="p2">Chalk board</option><option value="p3">Goal net</option><option value="p4">Big 433</option></select> · Crest: <select id="cstyle"><option value="collar">Disc at the collar</option><option value="water">Faded watermark</option><option value="print">Printed on the back</option></select> · Keeper: <select id="gstyle"><option value="1">Club colours</option><option value="2" selected>Keeper amber</option><option value="3">Dark club tone</option></select> <button class="replay" id="auto" style="margin-left:6px">Fill for me</button></p></div><div class="phone" id="game"></div></div>`;
+  document.getElementById('play').innerHTML = `<div class="opt"><div class="opt-h"><span class="tag">PLAYABLE</span><h3>One full game</h3><p>Reveal: <select id="rstyle"><option value="burst">Burst</option><option value="flip">Flip</option><option value="flap">Scoreboard roll</option></select> · Pitch: <select id="pstyle"><option value="p1">Night stadium</option><option value="p2">Chalk board</option><option value="p3">Goal net</option><option value="p4">Big 433</option></select> · Crest: <select id="cstyle"><option value="collar">Disc at the collar</option><option value="water">Faded watermark</option><option value="print">Printed on the back</option></select> · Keeper: <select id="gstyle"><option value="1">Club colours</option><option value="2" selected>Keeper amber</option><option value="3">Dark club tone</option></select> · Name: <select id="astyle"><option value="0">Straight</option><option value="1">Slight curve</option><option value="2">A touch more</option></select> <button class="replay" id="auto" style="margin-left:6px">Fill for me</button></p></div><div class="phone" id="game"></div></div>`;
   const G = { filled: {}, total: 0, respins: 3, cands: null, sel: null, busy: false, pstyle: 'p1' };
   const game = document.getElementById('game');
   const nextIdx = () => SLOTS.findIndex((s, i) => !G.filled[i]);
@@ -508,6 +521,7 @@
     });
   }
   document.getElementById('cstyle').onchange = (e) => { CFG.crest = e.target.value; if (!G.busy) renderGame(); };
+  document.getElementById('astyle').onchange = (e) => { CFG.arc = +e.target.value; };
   document.getElementById('gstyle').onchange = (e) => { CFG.gk = +e.target.value; if (!G.busy) renderGame(); };
   document.getElementById('pstyle').onchange = (e) => { G.pstyle = e.target.value; if (!G.busy) renderGame(); };
   document.getElementById('auto').onclick = async () => {
@@ -547,6 +561,9 @@
   });
   const clubsAll = Object.keys(D.clubs).filter((c) => ALL.some((p) => p.club === c)).sort();
   document.getElementById('kits').innerHTML = clubsAll.map((c) => { const p = ALL.filter((x) => x.club === c).sort((a, b) => b.goals - a.goals)[0]; return `<div class="k">${shirt({ w: 64, player: p, goals: p.goals })}<span>${D2T.esc(c)}</span></div>`; }).join('');
+  const ARCS = [[0, 'Straight', 'As now: the name runs flat across the shoulders.'], [1, 'Slight curve', 'The name arches very gently: the ends sit a pixel or two lower than the middle on the phone.'], [2, 'A touch more', 'A little more arch, closer to a real printed name.']];
+  const arcTrio = ['Wayne Rooney', 'Dennis Bergkamp', 'Ole Gunnar Solskjaer'].map(byName).filter(Boolean);
+  document.getElementById('arcs').innerHTML = ARCS.map(([v, n, d]) => `<div class="opt"><div class="opt-h"><span class="tag">NAME</span><h3>${n}</h3><p>${d}</p></div><div class="panel" style="height:200px"><div class="trio">${arcTrio.map((p) => `<div class="cell">${shirt({ w: 96, player: p, arc: v })}<span class="cap">${D2T.esc(p.club)}</span></div>`).join('')}</div></div></div>`).join('');
   const GKV = [[1, '1 · Club colours', 'The keeper wears the club shirt with long sleeves. Simple, but he blends in with the outfield.'],
     [2, '2 · Keeper amber', 'Every keeper in amber (the GK colour from the position tabs) with cuffs in the club colour. Stands out at once.'],
     [3, '3 · Dark club tone', 'A deep shade of the club colour with bright club-colour sleeves and cuffs, like a 90s keeper kit.']];
