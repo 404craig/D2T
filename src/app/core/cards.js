@@ -58,9 +58,9 @@
       <div class="d2c-body"><div class="d2c-mid"><span class="d2c-ovr">${c.ovr}</span><img class="d2c-crest" src="${c.crest}" alt=""></div>
       <span class="d2c-first d2c-fit">${esc(first)}</span><span class="d2c-last">${esc(last)}</span></div></div></div>`;
     }
-    return `<div class="d2c d2c-player${opts.mini ? ' mini' : ''} ${opts.cls || ''}" style="${style}" data-level="${c.level}" aria-label="${esc(c.name)}, ${c.ovr} ${L.name}, ${c.pos}">
+    return `<div class="d2c d2c-player${opts.mini ? ' mini' : ''} ${opts.cls || ''}" style="${style}" data-level="${c.level}" aria-label="${esc(c.name)}, ${c.ovr} ${L.name}, ${c.main || c.pos}">
       <div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2c-holo"></span>${shine}
-      <div class="d2c-body"><div class="d2c-top"><div class="d2c-left"><span class="d2c-ovr">${c.ovr}</span><span class="d2c-pos">${c.pos}</span><span class="d2c-rule"></span><span class="d2c-lvl">${L.label}</span></div>
+      <div class="d2c-body"><div class="d2c-top"><div class="d2c-left"><span class="d2c-ovr">${c.ovr}</span><span class="d2c-pos">${c.main || c.pos}</span><span class="d2c-rule"></span><span class="d2c-lvl">${L.label}</span></div>
       <img class="d2c-crest" src="${c.crest}" alt=""></div>
       <span class="d2c-first">${esc(first)}</span><span class="d2c-last">${esc(last)}</span><span class="d2c-div"></span><div class="d2c-stats">${stats}</div></div></div></div>`;
   }

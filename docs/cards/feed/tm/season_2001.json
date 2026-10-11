@@ -1,0 +1,4434 @@
+{
+"3473": {
+"slug": "thomas-sorensen",
+"club": "afc-sunderland",
+"positions": {
+"0": 28,
+"1": 6
+}
+},
+"3567": {
+"slug": "jurgen-macho",
+"club": "afc-sunderland",
+"positions": {
+"0": 3,
+"1": 1
+}
+},
+"3642": {
+"slug": "joachim-bjorklund",
+"club": "afc-sunderland",
+"positions": {
+"0": 9,
+"3": 3
+}
+},
+"9495": {
+"slug": "stanislav-varga",
+"club": "afc-sunderland",
+"positions": {
+"0": 7,
+"3": 2
+}
+},
+"3643": {
+"slug": "emerson-thome",
+"club": "afc-sunderland",
+"positions": {
+"0": 11,
+"3": 1
+}
+},
+"4129": {
+"slug": "jody-craddock",
+"club": "afc-sunderland",
+"positions": {
+"0": 23,
+"3": 7
+}
+},
+"4128": {
+"slug": "michael-gray",
+"club": "afc-sunderland",
+"positions": {
+"0": 29,
+"4": 6
+}
+},
+"3775": {
+"slug": "george-mccartney",
+"club": "afc-sunderland",
+"positions": {
+"0": 14,
+"4": 1,
+"9": 1,
+"3": 2
+}
+},
+"2888": {
+"slug": "bernt-haas",
+"club": "afc-sunderland",
+"positions": {
+"0": 22,
+"5": 5
+}
+},
+"3324": {
+"slug": "darren-williams",
+"club": "afc-sunderland",
+"positions": {
+"0": 24,
+"5": 2,
+"3": 2
+}
+},
+"4122": {
+"slug": "paul-thirlwell",
+"club": "afc-sunderland",
+"positions": {
+"0": 13,
+"9": 1
+}
+},
+"3475": {
+"slug": "claudio-reyna",
+"club": "afc-sunderland",
+"positions": {
+"0": 14,
+"7": 3
+}
+},
+"4136": {
+"slug": "gavin-mccann",
+"club": "afc-sunderland",
+"positions": {
+"0": 23,
+"7": 6
+}
+},
+"4239": {
+"slug": "alex-rae",
+"club": "afc-sunderland",
+"positions": {
+"9": 1,
+"0": 1
+}
+},
+"4123": {
+"slug": "stefan-schwarz",
+"club": "afc-sunderland",
+"positions": {
+"0": 15,
+"7": 5
+}
+},
+"3280": {
+"slug": "julio-arca",
+"club": "afc-sunderland",
+"positions": {
+"0": 18,
+"9": 2,
+"8": 2
+}
+},
+"3710": {
+"slug": "jason-mcateer",
+"club": "afc-sunderland",
+"positions": {
+"0": 24,
+"8": 5,
+"7": 1
+}
+},
+"4132": {
+"slug": "thomas-butler",
+"club": "afc-sunderland",
+"positions": {
+"0": 7
+}
+},
+"4135": {
+"slug": "kevin-kilbane",
+"club": "afc-sunderland",
+"positions": {
+"0": 24,
+"9": 3,
+"8": 1
+}
+},
+"3880": {
+"slug": "don-hutchison",
+"club": "afc-sunderland",
+"positions": {
+"0": 22,
+"7": 3,
+"10": 1
+}
+},
+"1450": {
+"slug": "lilian-laslandes",
+"club": "afc-sunderland",
+"positions": {
+"0": 10,
+"9": 1,
+"14": 1
+}
+},
+"26415": {
+"slug": "patrick-mboma",
+"club": "afc-sunderland",
+"positions": {
+"0": 7,
+"14": 2
+}
+},
+"104110": {
+"slug": "niall-quinn",
+"club": "afc-sunderland",
+"positions": {
+"0": 33,
+"14": 5
+}
+},
+"3131": {
+"slug": "kevin-phillips",
+"club": "afc-sunderland",
+"positions": {
+"0": 30,
+"14": 5,
+"13": 2
+}
+},
+"3115": {
+"slug": "david-bellion",
+"club": "afc-sunderland",
+"positions": {
+"0": 9
+}
+},
+"4121": {
+"slug": "kevin-kyle",
+"club": "afc-sunderland",
+"positions": {
+"0": 6
+}
+},
+"3465": {
+"slug": "peter-schmeichel",
+"club": "aston-villa",
+"positions": {
+"0": 24,
+"1": 5
+}
+},
+"3719": {
+"slug": "peter-enckelman",
+"club": "aston-villa",
+"positions": {
+"0": 8,
+"1": 1
+}
+},
+"3098": {
+"slug": "olof-mellberg",
+"club": "aston-villa",
+"positions": {
+"0": 27,
+"3": 5
+}
+},
+"3504": {
+"slug": "alpay-ozalan",
+"club": "aston-villa",
+"positions": {
+"0": 11,
+"3": 3
+}
+},
+"3331": {
+"slug": "alan-wright",
+"club": "aston-villa",
+"positions": {
+"0": 18,
+"5": 1,
+"4": 4
+}
+},
+"3839": {
+"slug": "steve-staunton",
+"club": "aston-villa",
+"positions": {
+"0": 29,
+"3": 4
+}
+},
+"4067": {
+"slug": "jlloyd-samuel",
+"club": "aston-villa",
+"positions": {
+"0": 20,
+"4": 2,
+"5": 1
+}
+},
+"3841": {
+"slug": "mark-delaney",
+"club": "aston-villa",
+"positions": {
+"0": 27,
+"5": 3
+}
+},
+"3358": {
+"slug": "george-boateng",
+"club": "aston-villa",
+"positions": {
+"0": 31,
+"6": 5,
+"7": 1
+}
+},
+"3291": {
+"slug": "gareth-barry",
+"club": "aston-villa",
+"positions": {
+"0": 18,
+"6": 1,
+"9": 1
+}
+},
+"3667": {
+"slug": "ian-taylor",
+"club": "aston-villa",
+"positions": {
+"0": 14,
+"6": 1,
+"7": 1
+}
+},
+"4069": {
+"slug": "lee-hendrie",
+"club": "aston-villa",
+"positions": {
+"0": 24,
+"7": 4,
+"8": 1
+}
+},
+"1573": {
+"slug": "thomas-hitzlsperger",
+"club": "aston-villa",
+"positions": {
+"0": 11,
+"10": 1
+}
+},
+"3364": {
+"slug": "steve-stone",
+"club": "aston-villa",
+"positions": {
+"0": 18,
+"5": 2,
+"7": 1,
+"9": 1
+}
+},
+"4066": {
+"slug": "hassan-kachloul",
+"club": "aston-villa",
+"positions": {
+"0": 17,
+"9": 5
+}
+},
+"3250": {
+"slug": "paul-merson",
+"club": "aston-villa",
+"positions": {
+"8": 3,
+"0": 17,
+"13": 1
+}
+},
+"3840": {
+"slug": "mustapha-hadji",
+"club": "aston-villa",
+"positions": {
+"0": 20,
+"8": 2,
+"13": 1
+}
+},
+"104897": {
+"slug": "david-ginola",
+"club": "aston-villa",
+"positions": {
+"0": 8,
+"12": 1,
+"13": 1
+}
+},
+"3278": {
+"slug": "juan-pablo-angel",
+"club": "aston-villa",
+"positions": {
+"0": 25,
+"13": 3,
+"14": 1
+}
+},
+"3763": {
+"slug": "dion-dublin",
+"club": "aston-villa",
+"positions": {
+"0": 19,
+"14": 2
+}
+},
+"4072": {
+"slug": "peter-crouch",
+"club": "aston-villa",
+"positions": {
+"0": 7
+}
+},
+"3285": {
+"slug": "bosko-balaban",
+"club": "aston-villa",
+"positions": {
+"0": 7,
+"13": 1
+}
+},
+"3236": {
+"slug": "darius-vassell",
+"club": "aston-villa",
+"positions": {
+"0": 32,
+"14": 4
+}
+},
+"3476": {
+"slug": "brad-friedel",
+"club": "blackburn-rovers",
+"positions": {
+"0": 25,
+"1": 11
+}
+},
+"3819": {
+"slug": "alan-kelly",
+"club": "blackburn-rovers",
+"positions": {
+"0": 2
+}
+},
+"3821": {
+"slug": "craig-short",
+"club": "blackburn-rovers",
+"positions": {
+"0": 18,
+"3": 4
+}
+},
+"3822": {
+"slug": "martin-taylor",
+"club": "blackburn-rovers",
+"positions": {
+"0": 14,
+"3": 4,
+"4": 1
+}
+},
+"102510": {
+"slug": "stig-inge-bjornebye",
+"club": "blackburn-rovers",
+"positions": {
+"0": 17,
+"4": 5,
+"3": 1
+}
+},
+"205": {
+"slug": "nils-eric-johansson",
+"club": "blackburn-rovers",
+"positions": {
+"0": 16,
+"3": 2,
+"4": 1
+}
+},
+"8050": {
+"slug": "hakan-unsal",
+"club": "blackburn-rovers",
+"positions": {
+"0": 8
+}
+},
+"7913": {
+"slug": "john-curtis",
+"club": "blackburn-rovers",
+"positions": {
+"0": 8,
+"5": 2
+}
+},
+"3823": {
+"slug": "henning-berg",
+"club": "blackburn-rovers",
+"positions": {
+"0": 25,
+"3": 7,
+"5": 2
+}
+},
+"3826": {
+"slug": "lucas-neill",
+"club": "blackburn-rovers",
+"positions": {
+"0": 22,
+"5": 4,
+"4": 1,
+"3": 4
+}
+},
+"3703": {
+"slug": "tugay-kerimoglu",
+"club": "blackburn-rovers",
+"positions": {
+"0": 24,
+"6": 5,
+"7": 4
+}
+},
+"3706": {
+"slug": "garry-flitcroft",
+"club": "blackburn-rovers",
+"positions": {
+"0": 20,
+"7": 9
+}
+},
+"3259": {
+"slug": "damien-duff",
+"club": "blackburn-rovers",
+"positions": {
+"0": 25,
+"11": 4,
+"8": 1,
+"12": 2
+}
+},
+"3827": {
+"slug": "keith-gillespie",
+"club": "blackburn-rovers",
+"positions": {
+"0": 25,
+"8": 5,
+"7": 2
+}
+},
+"3940": {
+"slug": "damien-johnson",
+"club": "blackburn-rovers",
+"positions": {
+"0": 4,
+"9": 1,
+"8": 1,
+"7": 1
+}
+},
+"3483": {
+"slug": "alan-mahon",
+"club": "blackburn-rovers",
+"positions": {
+"0": 8,
+"7": 2,
+"9": 3
+}
+},
+"4243": {
+"slug": "david-dunn",
+"club": "blackburn-rovers",
+"positions": {
+"0": 24,
+"7": 2,
+"10": 1,
+"9": 2
+}
+},
+"3787": {
+"slug": "craig-hignett",
+"club": "blackburn-rovers",
+"positions": {
+"0": 17,
+"12": 3
+}
+},
+"8022": {
+"slug": "mark-hughes",
+"club": "blackburn-rovers",
+"positions": {
+"0": 19,
+"14": 1,
+"13": 1
+}
+},
+"4229": {
+"slug": "nathan-blake",
+"club": "blackburn-rovers",
+"positions": {
+"14": 1,
+"0": 2
+}
+},
+"3238": {
+"slug": "andy-cole",
+"club": "blackburn-rovers",
+"positions": {
+"0": 20,
+"14": 6
+}
+},
+"9958": {
+"slug": "marcus-bent",
+"club": "blackburn-rovers",
+"positions": {
+"14": 7,
+"0": 26
+}
+},
+"10502": {
+"slug": "matt-jansen",
+"club": "blackburn-rovers",
+"positions": {
+"0": 25,
+"14": 10
+}
+},
+"7979": {
+"slug": "yordi",
+"club": "blackburn-rovers",
+"positions": {
+"0": 8
+}
+},
+"3705": {
+"slug": "egil-ostenstad",
+"club": "blackburn-rovers",
+"positions": {
+"14": 1,
+"0": 3
+}
+},
+"3704": {
+"slug": "corrado-grabbi",
+"club": "blackburn-rovers",
+"positions": {
+"0": 10,
+"14": 4
+}
+},
+"3287": {
+"slug": "steve-banks",
+"club": "bolton-wanderers",
+"positions": {
+"0": 1
+}
+},
+"3692": {
+"slug": "jussi-jaaskelainen",
+"club": "bolton-wanderers",
+"positions": {
+"1": 9,
+"0": 25
+}
+},
+"16832": {
+"slug": "kevin-poole",
+"club": "bolton-wanderers",
+"positions": {
+"1": 1,
+"0": 2
+}
+},
+"3964": {
+"slug": "bruno-ngotty",
+"club": "bolton-wanderers",
+"positions": {
+"3": 1,
+"0": 20,
+"5": 5
+}
+},
+"3268": {
+"slug": "gudni-bergsson",
+"club": "bolton-wanderers",
+"positions": {
+"3": 8,
+"0": 22
+}
+},
+"103642": {
+"slug": "colin-hendry",
+"club": "bolton-wanderers",
+"positions": {
+"0": 3
+}
+},
+"107794": {
+"slug": "ian-marshall",
+"club": "bolton-wanderers",
+"positions": {
+"0": 1
+}
+},
+"171813": {
+"slug": "djibril-diawara",
+"club": "bolton-wanderers",
+"positions": {
+"0": 8,
+"3": 1
+}
+},
+"343": {
+"slug": "konstantinos-konstantinidis",
+"club": "bolton-wanderers",
+"positions": {
+"3": 2,
+"0": 1
+}
+},
+"3318": {
+"slug": "mike-whitlow",
+"club": "bolton-wanderers",
+"positions": {
+"3": 8,
+"0": 21
+}
+},
+"6264": {
+"slug": "ricardo-gardner",
+"club": "bolton-wanderers",
+"positions": {
+"0": 24,
+"9": 3,
+"12": 1,
+"8": 1,
+"13": 1,
+"7": 1
+}
+},
+"3288": {
+"slug": "anthony-barness",
+"club": "bolton-wanderers",
+"positions": {
+"5": 5,
+"0": 20
+}
+},
+"19846": {
+"slug": "simon-charlton",
+"club": "bolton-wanderers",
+"positions": {
+"4": 10,
+"0": 26
+}
+},
+"3943": {
+"slug": "leam-richardson",
+"club": "bolton-wanderers",
+"positions": {
+"0": 1
+}
+},
+"12103": {
+"slug": "mario-espartero",
+"club": "bolton-wanderers",
+"positions": {
+"0": 3
+}
+},
+"324": {
+"slug": "stig-tofting",
+"club": "bolton-wanderers",
+"positions": {
+"6": 1,
+"0": 5
+}
+},
+"3307": {
+"slug": "paul-warhurst",
+"club": "bolton-wanderers",
+"positions": {
+"0": 19,
+"6": 3,
+"7": 2,
+"3": 1
+}
+},
+"3735": {
+"slug": "per-frandsen",
+"club": "bolton-wanderers",
+"positions": {
+"7": 4,
+"0": 22,
+"8": 2,
+"10": 1
+}
+},
+"14074": {
+"slug": "nicky-southall",
+"club": "bolton-wanderers",
+"positions": {
+"0": 17,
+"6": 1
+}
+},
+"9878": {
+"slug": "gareth-farrelly",
+"club": "bolton-wanderers",
+"positions": {
+"11": 1,
+"9": 1,
+"0": 13,
+"7": 3
+}
+},
+"4": {
+"slug": "youri-djorkaeff",
+"club": "bolton-wanderers",
+"positions": {
+"12": 2,
+"0": 8,
+"9": 1,
+"10": 1
+}
+},
+"3950": {
+"slug": "kevin-nolan",
+"club": "bolton-wanderers",
+"positions": {
+"7": 3,
+"0": 25,
+"10": 5,
+"8": 1,
+"9": 1
+}
+},
+"3946": {
+"slug": "jeff-smith",
+"club": "bolton-wanderers",
+"positions": {
+"7": 1
+}
+},
+"16169": {
+"slug": "jermaine-johnson",
+"club": "bolton-wanderers",
+"positions": {
+"0": 8,
+"12": 2
+}
+},
+"22482": {
+"slug": "bo-hansen",
+"club": "bolton-wanderers",
+"positions": {
+"0": 14,
+"14": 2,
+"10": 1
+}
+},
+"3947": {
+"slug": "henrik-pedersen",
+"club": "bolton-wanderers",
+"positions": {
+"0": 9,
+"11": 1,
+"12": 1
+}
+},
+"13792": {
+"slug": "dean-holdsworth",
+"club": "bolton-wanderers",
+"positions": {
+"14": 6,
+"0": 24,
+"11": 1
+}
+},
+"104": {
+"slug": "fredi-bobic",
+"club": "bolton-wanderers",
+"positions": {
+"14": 4,
+"0": 12
+}
+},
+"4062": {
+"slug": "michael-ricketts",
+"club": "bolton-wanderers",
+"positions": {
+"14": 6,
+"0": 31
+}
+},
+"13803": {
+"slug": "rod-wallace",
+"club": "bolton-wanderers",
+"positions": {
+"14": 3,
+"0": 15,
+"11": 1
+}
+},
+"3748": {
+"slug": "dean-kiely",
+"club": "charlton-athletic",
+"positions": {
+"0": 33,
+"1": 5
+}
+},
+"13401": {
+"slug": "steve-brown",
+"club": "charlton-athletic",
+"positions": {
+"0": 12,
+"3": 1
+}
+},
+"3087": {
+"slug": "mark-fish",
+"club": "charlton-athletic",
+"positions": {
+"0": 23,
+"3": 2
+}
+},
+"4101": {
+"slug": "richard-rufus",
+"club": "charlton-athletic",
+"positions": {
+"0": 8,
+"3": 2
+}
+},
+"3103": {
+"slug": "andy-todd",
+"club": "charlton-athletic",
+"positions": {
+"0": 5
+}
+},
+"4103": {
+"slug": "jonathan-fortune",
+"club": "charlton-athletic",
+"positions": {
+"0": 17,
+"3": 2
+}
+},
+"9810": {
+"slug": "jorge-costa",
+"club": "charlton-athletic",
+"positions": {
+"0": 21,
+"3": 3
+}
+},
+"4100": {
+"slug": "chris-powell",
+"club": "charlton-athletic",
+"positions": {
+"0": 32,
+"4": 2,
+"9": 2
+}
+},
+"3296": {
+"slug": "paul-konchesky",
+"club": "charlton-athletic",
+"positions": {
+"0": 30,
+"9": 3,
+"4": 1
+}
+},
+"3271": {
+"slug": "luke-young",
+"club": "charlton-athletic",
+"positions": {
+"0": 29,
+"5": 3,
+"8": 2
+}
+},
+"3001": {
+"slug": "radostin-kishishev",
+"club": "charlton-athletic",
+"positions": {
+"0": 2
+}
+},
+"4064": {
+"slug": "mark-kinsella",
+"club": "charlton-athletic",
+"positions": {
+"0": 15,
+"6": 2
+}
+},
+"3293": {
+"slug": "chris-bart-williams",
+"club": "charlton-athletic",
+"positions": {
+"0": 14,
+"7": 1,
+"6": 1
+}
+},
+"3785": {
+"slug": "scott-parker",
+"club": "charlton-athletic",
+"positions": {
+"0": 34,
+"7": 3,
+"6": 1
+}
+},
+"175582": {
+"slug": "gavin-peacock",
+"club": "charlton-athletic",
+"positions": {
+"0": 5
+}
+},
+"13423": {
+"slug": "john-salako",
+"club": "charlton-athletic",
+"positions": {
+"0": 3
+}
+},
+"3099": {
+"slug": "claus-jensen",
+"club": "charlton-athletic",
+"positions": {
+"0": 16,
+"10": 1,
+"8": 1
+}
+},
+"3092": {
+"slug": "jason-euell",
+"club": "charlton-athletic",
+"positions": {
+"0": 32,
+"13": 3,
+"14": 1
+}
+},
+"3334": {
+"slug": "graham-stuart",
+"club": "charlton-athletic",
+"positions": {
+"0": 28,
+"12": 1,
+"10": 2
+}
+},
+"10428": {
+"slug": "john-robinson",
+"club": "charlton-athletic",
+"positions": {
+"0": 26,
+"11": 1,
+"12": 1
+}
+},
+"3117": {
+"slug": "jonatan-johansson",
+"club": "charlton-athletic",
+"positions": {
+"0": 26,
+"14": 2,
+"13": 1
+}
+},
+"3861": {
+"slug": "mathias-svensson",
+"club": "charlton-athletic",
+"positions": {
+"0": 11,
+"14": 1
+}
+},
+"4097": {
+"slug": "kevin-lisbie",
+"club": "charlton-athletic",
+"positions": {
+"0": 21,
+"14": 1
+}
+},
+"51351": {
+"slug": "charlie-macdonald",
+"club": "charlton-athletic",
+"positions": {
+"0": 2
+}
+},
+"3089": {
+"slug": "shaun-bartlett",
+"club": "charlton-athletic",
+"positions": {
+"0": 14
+}
+},
+"3715": {
+"slug": "mart-poom",
+"club": "derby-county",
+"positions": {
+"0": 15,
+"1": 1
+}
+},
+"141044": {
+"slug": "ian-feuer",
+"club": "derby-county",
+"positions": {
+"0": 1,
+"1": 1
+}
+},
+"13480": {
+"slug": "andy-oakes",
+"club": "derby-county",
+"positions": {
+"0": 12,
+"1": 7
+}
+},
+"20082": {
+"slug": "patrick-foletti",
+"club": "derby-county",
+"positions": {
+"0": 2
+}
+},
+"30799": {
+"slug": "horacio-carbonari",
+"club": "derby-county",
+"positions": {
+"0": 3
+}
+},
+"669": {
+"slug": "brian-oneil",
+"club": "derby-county",
+"positions": {
+"0": 7,
+"3": 2,
+"6": 1
+}
+},
+"4081": {
+"slug": "darryl-powell",
+"club": "derby-county",
+"positions": {
+"0": 19,
+"6": 3,
+"9": 1
+}
+},
+"3782": {
+"slug": "chris-riggott",
+"club": "derby-county",
+"positions": {
+"0": 28,
+"3": 9
+}
+},
+"3686": {
+"slug": "danny-higginbotham",
+"club": "derby-county",
+"positions": {
+"0": 28,
+"3": 9
+}
+},
+"13471": {
+"slug": "youl-mawene",
+"club": "derby-county",
+"positions": {
+"0": 14,
+"5": 2,
+"3": 1
+}
+},
+"13457": {
+"slug": "steve-elliott",
+"club": "derby-county",
+"positions": {
+"0": 5
+}
+},
+"37127": {
+"slug": "ian-evatt",
+"club": "derby-county",
+"positions": {
+"0": 3
+}
+},
+"13502": {
+"slug": "luciano-zavagno",
+"club": "derby-county",
+"positions": {
+"0": 21,
+"9": 2,
+"3": 1,
+"4": 2
+}
+},
+"13440": {
+"slug": "paul-boertien",
+"club": "derby-county",
+"positions": {
+"0": 25,
+"4": 6,
+"9": 1
+}
+},
+"13238": {
+"slug": "warren-barton",
+"club": "derby-county",
+"positions": {
+"0": 10,
+"6": 1,
+"5": 8
+}
+},
+"13467": {
+"slug": "richard-jackson",
+"club": "derby-county",
+"positions": {
+"0": 6,
+"5": 2
+}
+},
+"15458": {
+"slug": "daniele-daino",
+"club": "derby-county",
+"positions": {
+"0": 2
+}
+},
+"8506": {
+"slug": "francois-grenet",
+"club": "derby-county",
+"positions": {
+"0": 15
+}
+},
+"48025": {
+"slug": "simo-valakari",
+"club": "derby-county",
+"positions": {
+"0": 6,
+"6": 1,
+"8": 2
+}
+},
+"13441": {
+"slug": "adam-bolder",
+"club": "derby-county",
+"positions": {
+"0": 11
+}
+},
+"23919": {
+"slug": "pierre-ducrocq",
+"club": "derby-county",
+"positions": {
+"6": 3,
+"0": 16
+}
+},
+"3635": {
+"slug": "seth-johnson",
+"club": "derby-county",
+"positions": {
+"0": 13,
+"7": 3,
+"8": 1,
+"9": 3
+}
+},
+"14183": {
+"slug": "rob-lee",
+"club": "derby-county",
+"positions": {
+"0": 10,
+"7": 17,
+"8": 1,
+"6": 1
+}
+},
+"9408": {
+"slug": "adam-murray",
+"club": "derby-county",
+"positions": {
+"0": 4,
+"7": 2
+}
+},
+"11319": {
+"slug": "craig-burley",
+"club": "derby-county",
+"positions": {
+"0": 8,
+"8": 2,
+"10": 1
+}
+},
+"3425": {
+"slug": "giorgi-kinkladze",
+"club": "derby-county",
+"positions": {
+"0": 18,
+"10": 5,
+"7": 1
+}
+},
+"3389": {
+"slug": "benny-carbone",
+"club": "derby-county",
+"positions": {
+"0": 24,
+"9": 1,
+"10": 1
+}
+},
+"25387": {
+"slug": "marvin-robinson",
+"club": "derby-county",
+"positions": {
+"0": 2
+}
+},
+"3464": {
+"slug": "deon-burton",
+"club": "derby-county",
+"positions": {
+"0": 14,
+"14": 2,
+"13": 1
+}
+},
+"4226": {
+"slug": "fabrizio-ravanelli",
+"club": "derby-county",
+"positions": {
+"0": 24,
+"14": 7
+}
+},
+"3790": {
+"slug": "malcolm-christie",
+"club": "derby-county",
+"positions": {
+"0": 28,
+"12": 2,
+"13": 2,
+"14": 2,
+"8": 1
+}
+},
+"13476": {
+"slug": "lee-morris",
+"club": "derby-county",
+"positions": {
+"0": 11,
+"11": 1,
+"14": 2,
+"9": 1
+}
+},
+"12402": {
+"slug": "gary-twigg",
+"club": "derby-county",
+"positions": {
+"0": 1
+}
+},
+"10444": {
+"slug": "branko-strupar",
+"club": "derby-county",
+"positions": {
+"0": 8,
+"14": 4
+}
+},
+"3141": {
+"slug": "david-seaman",
+"club": "fc-arsenal",
+"positions": {
+"1": 17
+}
+},
+"3190": {
+"slug": "stuart-taylor",
+"club": "fc-arsenal",
+"positions": {
+"0": 1,
+"1": 9
+}
+},
+"3120": {
+"slug": "richard-wright",
+"club": "fc-arsenal",
+"positions": {
+"1": 12
+}
+},
+"28238": {
+"slug": "tony-adams",
+"club": "fc-arsenal",
+"positions": {
+"3": 10
+}
+},
+"3184": {
+"slug": "martin-keown",
+"club": "fc-arsenal",
+"positions": {
+"3": 21,
+"0": 1
+}
+},
+"3273": {
+"slug": "matthew-upson",
+"club": "fc-arsenal",
+"positions": {
+"4": 3,
+"3": 7,
+"0": 4
+}
+},
+"3198": {
+"slug": "sol-campbell",
+"club": "fc-arsenal",
+"positions": {
+"3": 29,
+"0": 2
+}
+},
+"3200": {
+"slug": "igors-stepanovs",
+"club": "fc-arsenal",
+"positions": {
+"3": 6
+}
+},
+"3182": {
+"slug": "ashley-cole",
+"club": "fc-arsenal",
+"positions": {
+"4": 29
+}
+},
+"3191": {
+"slug": "giovanni-van-bronckhorst",
+"club": "fc-arsenal",
+"positions": {
+"4": 2,
+"9": 1,
+"0": 8,
+"6": 9,
+"7": 1
+}
+},
+"28240": {
+"slug": "lee-dixon",
+"club": "fc-arsenal",
+"positions": {
+"5": 3,
+"0": 9,
+"8": 1
+}
+},
+"3189": {
+"slug": "lauren",
+"club": "fc-arsenal",
+"positions": {
+"5": 24,
+"4": 1,
+"8": 2
+}
+},
+"3196": {
+"slug": "oleg-luzhnyi",
+"club": "fc-arsenal",
+"positions": {
+"3": 1,
+"4": 3,
+"0": 3,
+"5": 11
+}
+},
+"3183": {
+"slug": "patrick-vieira",
+"club": "fc-arsenal",
+"positions": {
+"0": 1,
+"6": 34,
+"7": 1
+}
+},
+"15297": {
+"slug": "gilles-grimandi",
+"club": "fc-arsenal",
+"positions": {
+"6": 10,
+"0": 14,
+"3": 2
+}
+},
+"3208": {
+"slug": "ray-parlour",
+"club": "fc-arsenal",
+"positions": {
+"8": 7,
+"9": 4,
+"7": 14,
+"6": 1,
+"0": 1
+}
+},
+"3192": {
+"slug": "edu-gaspar",
+"club": "fc-arsenal",
+"positions": {
+"7": 9,
+"0": 5
+}
+},
+"3134": {
+"slug": "freddie-ljungberg",
+"club": "fc-arsenal",
+"positions": {
+"8": 21,
+"12": 2,
+"9": 1,
+"0": 1
+}
+},
+"3185": {
+"slug": "robert-pires",
+"club": "fc-arsenal",
+"positions": {
+"9": 23,
+"11": 4,
+"0": 1
+}
+},
+"3187": {
+"slug": "dennis-bergkamp",
+"club": "fc-arsenal",
+"positions": {
+"13": 15,
+"14": 7,
+"10": 2,
+"0": 9
+}
+},
+"3188": {
+"slug": "sylvain-wiltord",
+"club": "fc-arsenal",
+"positions": {
+"11": 4,
+"13": 13,
+"14": 1,
+"12": 6,
+"0": 8
+}
+},
+"3186": {
+"slug": "francis-jeffers",
+"club": "fc-arsenal",
+"positions": {
+"0": 4,
+"14": 2
+}
+},
+"3207": {
+"slug": "thierry-henry",
+"club": "fc-arsenal",
+"positions": {
+"14": 30,
+"13": 1,
+"0": 2
+}
+},
+"3133": {
+"slug": "nwankwo-kanu",
+"club": "fc-arsenal",
+"positions": {
+"14": 10,
+"0": 11,
+"13": 2
+}
+},
+"3266": {
+"slug": "jeremie-aliadiere",
+"club": "fc-arsenal",
+"positions": {
+"0": 1
+}
+},
+"3150": {
+"slug": "ed-de-goey",
+"club": "fc-chelsea",
+"positions": {
+"1": 5,
+"0": 1
+}
+},
+"3151": {
+"slug": "carlo-cudicini",
+"club": "fc-chelsea",
+"positions": {
+"0": 23,
+"1": 5
+}
+},
+"3249": {
+"slug": "mark-bosnich",
+"club": "fc-chelsea",
+"positions": {
+"0": 5
+}
+},
+"3154": {
+"slug": "marcel-desailly",
+"club": "fc-chelsea",
+"positions": {
+"0": 16,
+"3": 8
+}
+},
+"3156": {
+"slug": "william-gallas",
+"club": "fc-chelsea",
+"positions": {
+"0": 22,
+"3": 6,
+"8": 1,
+"5": 1
+}
+},
+"3160": {
+"slug": "john-terry",
+"club": "fc-chelsea",
+"positions": {
+"0": 25,
+"3": 8
+}
+},
+"2998": {
+"slug": "robert-huth",
+"club": "fc-chelsea",
+"positions": {
+"0": 1
+}
+},
+"3153": {
+"slug": "celestine-babayaro",
+"club": "fc-chelsea",
+"positions": {
+"0": 13,
+"4": 5
+}
+},
+"3157": {
+"slug": "graeme-le-saux",
+"club": "fc-chelsea",
+"positions": {
+"0": 18,
+"4": 5,
+"9": 4
+}
+},
+"4014": {
+"slug": "jon-harley",
+"club": "fc-chelsea",
+"positions": {
+"0": 8,
+"4": 1,
+"8": 1
+}
+},
+"3162": {
+"slug": "joe-keenan",
+"club": "fc-chelsea",
+"positions": {
+"0": 1
+}
+},
+"3158": {
+"slug": "mario-melchiot",
+"club": "fc-chelsea",
+"positions": {
+"0": 28,
+"5": 9
+}
+},
+"3152": {
+"slug": "albert-ferrer",
+"club": "fc-chelsea",
+"positions": {
+"0": 3,
+"5": 1
+}
+},
+"79065": {
+"slug": "slavisa-jokanovic",
+"club": "fc-chelsea",
+"positions": {
+"0": 17,
+"6": 1,
+"7": 2
+}
+},
+"3166": {
+"slug": "emmanuel-petit",
+"club": "fc-chelsea",
+"positions": {
+"0": 18,
+"6": 7,
+"7": 2
+}
+},
+"3163": {
+"slug": "frank-lampard",
+"club": "fc-chelsea",
+"positions": {
+"0": 28,
+"7": 9
+}
+},
+"3171": {
+"slug": "jody-morris",
+"club": "fc-chelsea",
+"positions": {
+"0": 5
+}
+},
+"4291": {
+"slug": "samuele-dalla-bona",
+"club": "fc-chelsea",
+"positions": {
+"0": 21,
+"6": 1,
+"7": 1,
+"9": 1
+}
+},
+"3173": {
+"slug": "boudewijn-zenden",
+"club": "fc-chelsea",
+"positions": {
+"0": 16,
+"9": 2,
+"8": 1,
+"11": 3
+}
+},
+"3137": {
+"slug": "jesper-gronkjaer",
+"club": "fc-chelsea",
+"positions": {
+"0": 6,
+"11": 4,
+"12": 3
+}
+},
+"3164": {
+"slug": "mario-stanic",
+"club": "fc-chelsea",
+"positions": {
+"0": 23,
+"12": 2,
+"8": 2
+}
+},
+"3177": {
+"slug": "gianfranco-zola",
+"club": "fc-chelsea",
+"positions": {
+"0": 28,
+"13": 7
+}
+},
+"3175": {
+"slug": "jimmy-floyd-hasselbaink",
+"club": "fc-chelsea",
+"positions": {
+"0": 25,
+"14": 10
+}
+},
+"3176": {
+"slug": "eidur-gudjohnsen",
+"club": "fc-chelsea",
+"positions": {
+"0": 25,
+"14": 4,
+"12": 1,
+"13": 2
+}
+},
+"3127": {
+"slug": "mikael-forssell",
+"club": "fc-chelsea",
+"positions": {
+"0": 20,
+"14": 2
+}
+},
+"3179": {
+"slug": "carlton-cole",
+"club": "fc-chelsea",
+"positions": {
+"0": 3
+}
+},
+"3583": {
+"slug": "steve-simonsen",
+"club": "fc-everton",
+"positions": {
+"1": 6,
+"0": 19
+}
+},
+"3584": {
+"slug": "paul-gerrard",
+"club": "fc-everton",
+"positions": {
+"0": 10,
+"1": 3
+}
+},
+"3472": {
+"slug": "alan-stubbs",
+"club": "fc-everton",
+"positions": {
+"3": 8,
+"0": 23
+}
+},
+"3312": {
+"slug": "david-weir",
+"club": "fc-everton",
+"positions": {
+"3": 7,
+"0": 28,
+"5": 1
+}
+},
+"25201": {
+"slug": "peter-clarke",
+"club": "fc-everton",
+"positions": {
+"0": 5,
+"3": 2
+}
+},
+"3588": {
+"slug": "alessandro-pistone",
+"club": "fc-everton",
+"positions": {
+"0": 20,
+"4": 2,
+"5": 2,
+"3": 1
+}
+},
+"3272": {
+"slug": "david-unsworth",
+"club": "fc-everton",
+"positions": {
+"4": 6,
+"0": 25,
+"6": 1,
+"3": 1
+}
+},
+"3589": {
+"slug": "gary-naysmith",
+"club": "fc-everton",
+"positions": {
+"0": 21,
+"9": 3
+}
+},
+"3309": {
+"slug": "steve-watson",
+"club": "fc-everton",
+"positions": {
+"5": 4,
+"0": 20,
+"13": 1
+}
+},
+"173069": {
+"slug": "alec-cleland",
+"club": "fc-everton",
+"positions": {
+"0": 3
+}
+},
+"3211": {
+"slug": "abel-xavier",
+"club": "fc-everton",
+"positions": {
+"5": 4,
+"0": 18
+}
+},
+"3614": {
+"slug": "tony-hibbert",
+"club": "fc-everton",
+"positions": {
+"8": 2,
+"0": 8
+}
+},
+"24485": {
+"slug": "idan-tal",
+"club": "fc-everton",
+"positions": {
+"0": 5,
+"6": 2
+}
+},
+"301": {
+"slug": "thomas-gravesen",
+"club": "fc-everton",
+"positions": {
+"0": 22,
+"7": 1,
+"6": 2
+}
+},
+"3586": {
+"slug": "tobias-linderoth",
+"club": "fc-everton",
+"positions": {
+"6": 2,
+"0": 6
+}
+},
+"3618": {
+"slug": "lee-carsley",
+"club": "fc-everton",
+"positions": {
+"6": 2,
+"0": 6
+}
+},
+"3617": {
+"slug": "scot-gemmill",
+"club": "fc-everton",
+"positions": {
+"0": 26,
+"10": 1,
+"7": 4,
+"6": 1
+}
+},
+"3265": {
+"slug": "niclas-alexandersson",
+"club": "fc-everton",
+"positions": {
+"8": 5,
+"0": 24,
+"9": 1,
+"7": 1
+}
+},
+"3095": {
+"slug": "jesper-blomqvist",
+"club": "fc-everton",
+"positions": {
+"0": 13,
+"9": 1,
+"13": 1
+}
+},
+"3615": {
+"slug": "mark-pembridge",
+"club": "fc-everton",
+"positions": {
+"9": 3,
+"0": 11
+}
+},
+"3830": {
+"slug": "paul-gascoigne",
+"club": "fc-everton",
+"positions": {
+"0": 17,
+"7": 1
+}
+},
+"4220": {
+"slug": "danny-cadamarteri",
+"club": "fc-everton",
+"positions": {
+"0": 3
+}
+},
+"3585": {
+"slug": "tomasz-radzinski",
+"club": "fc-everton",
+"positions": {
+"13": 1,
+"0": 23,
+"14": 3
+}
+},
+"3468": {
+"slug": "kevin-campbell",
+"club": "fc-everton",
+"positions": {
+"14": 5,
+"0": 17,
+"13": 1
+}
+},
+"3239": {
+"slug": "duncan-ferguson",
+"club": "fc-everton",
+"positions": {
+"0": 16,
+"14": 5,
+"13": 1
+}
+},
+"1529": {
+"slug": "joe-max-moore",
+"club": "fc-everton",
+"positions": {
+"0": 13,
+"12": 1,
+"8": 2
+}
+},
+"3616": {
+"slug": "nick-chadwick",
+"club": "fc-everton",
+"positions": {
+"0": 9
+}
+},
+"3516": {
+"slug": "edwin-van-der-sar",
+"club": "fc-fulham",
+"positions": {
+"1": 11,
+"0": 26
+}
+},
+"3723": {
+"slug": "maik-taylor",
+"club": "fc-fulham",
+"positions": {
+"0": 1
+}
+},
+"4004": {
+"slug": "andy-melville",
+"club": "fc-fulham",
+"positions": {
+"0": 26,
+"3": 9
+}
+},
+"175935": {
+"slug": "kit-symons",
+"club": "fc-fulham",
+"positions": {
+"3": 2,
+"0": 2
+}
+},
+"4012": {
+"slug": "zat-knight",
+"club": "fc-fulham",
+"positions": {
+"0": 6,
+"3": 4
+}
+},
+"4011": {
+"slug": "alain-goma",
+"club": "fc-fulham",
+"positions": {
+"3": 8,
+"0": 25
+}
+},
+"4002": {
+"slug": "abdeslam-ouaddou",
+"club": "fc-fulham",
+"positions": {
+"0": 6,
+"3": 2
+}
+},
+"3883": {
+"slug": "rufus-brevett",
+"club": "fc-fulham",
+"positions": {
+"4": 11,
+"0": 24
+}
+},
+"4038": {
+"slug": "steve-finnan",
+"club": "fc-fulham",
+"positions": {
+"0": 27,
+"5": 11
+}
+},
+"4036": {
+"slug": "sean-davis",
+"club": "fc-fulham",
+"positions": {
+"0": 22,
+"6": 7,
+"7": 1
+}
+},
+"3477": {
+"slug": "lee-clark",
+"club": "fc-fulham",
+"positions": {
+"0": 5,
+"9": 2,
+"8": 1,
+"7": 1
+}
+},
+"3815": {
+"slug": "sylvain-legwinski",
+"club": "fc-fulham",
+"positions": {
+"0": 24,
+"9": 2,
+"7": 3,
+"6": 2,
+"8": 2
+}
+},
+"3105": {
+"slug": "bjarne-goldbaek",
+"club": "fc-fulham",
+"positions": {
+"0": 11,
+"7": 2
+}
+},
+"3663": {
+"slug": "john-collins",
+"club": "fc-fulham",
+"positions": {
+"7": 3,
+"0": 24,
+"9": 5,
+"8": 2
+}
+},
+"3569": {
+"slug": "steed-malbranque",
+"club": "fc-fulham",
+"positions": {
+"8": 3,
+"0": 26,
+"7": 5,
+"9": 3
+}
+},
+"48085": {
+"slug": "kevin-betsy",
+"club": "fc-fulham",
+"positions": {
+"0": 1
+}
+},
+"3484": {
+"slug": "eddie-lewis",
+"club": "fc-fulham",
+"positions": {
+"0": 1
+}
+},
+"3724": {
+"slug": "andrejs-stolcers",
+"club": "fc-fulham",
+"positions": {
+"0": 5
+}
+},
+"3422": {
+"slug": "luis-boa-morte",
+"club": "fc-fulham",
+"positions": {
+"0": 16,
+"9": 4,
+"8": 1,
+"13": 2
+}
+},
+"3240": {
+"slug": "steve-marlet",
+"club": "fc-fulham",
+"positions": {
+"0": 19,
+"14": 5,
+"12": 1,
+"10": 1
+}
+},
+"4035": {
+"slug": "barry-hayles",
+"club": "fc-fulham",
+"positions": {
+"14": 9,
+"0": 26
+}
+},
+"4015": {
+"slug": "louis-saha",
+"club": "fc-fulham",
+"positions": {
+"0": 26,
+"11": 2,
+"14": 8
+}
+},
+"3326": {
+"slug": "calum-willock",
+"club": "fc-fulham",
+"positions": {
+"0": 1
+}
+},
+"3427": {
+"slug": "sander-westerveld",
+"club": "fc-liverpool",
+"positions": {
+"0": 1
+}
+},
+"3209": {
+"slug": "jerzy-dudek",
+"club": "fc-liverpool",
+"positions": {
+"1": 12,
+"0": 23
+}
+},
+"3282": {
+"slug": "pegguy-arphexad",
+"club": "fc-liverpool",
+"positions": {
+"0": 1,
+"1": 1
+}
+},
+"3219": {
+"slug": "chris-kirkland",
+"club": "fc-liverpool",
+"positions": {
+"0": 1
+}
+},
+"3210": {
+"slug": "stephane-henchoz",
+"club": "fc-liverpool",
+"positions": {
+"3": 11,
+"0": 25,
+"5": 1
+}
+},
+"3470": {
+"slug": "sami-hyypia",
+"club": "fc-liverpool",
+"positions": {
+"3": 13,
+"0": 24
+}
+},
+"192": {
+"slug": "markus-babbel",
+"club": "fc-liverpool",
+"positions": {
+"0": 1,
+"5": 1
+}
+},
+"3597": {
+"slug": "jamie-carragher",
+"club": "fc-liverpool",
+"positions": {
+"4": 4,
+"0": 21,
+"5": 6,
+"3": 2
+}
+},
+"3220": {
+"slug": "john-arne-riise",
+"club": "fc-liverpool",
+"positions": {
+"9": 4,
+"0": 26,
+"6": 1,
+"4": 7
+}
+},
+"4755": {
+"slug": "gregory-vignal",
+"club": "fc-liverpool",
+"positions": {
+"4": 2,
+"0": 2
+}
+},
+"4126": {
+"slug": "stephen-wright",
+"club": "fc-liverpool",
+"positions": {
+"0": 9,
+"5": 3
+}
+},
+"919": {
+"slug": "dietmar-hamann",
+"club": "fc-liverpool",
+"positions": {
+"7": 2,
+"0": 24,
+"6": 5
+}
+},
+"3601": {
+"slug": "igor-biscan",
+"club": "fc-liverpool",
+"positions": {
+"6": 2,
+"0": 1,
+"3": 1,
+"8": 1
+}
+},
+"3424": {
+"slug": "jamie-redknapp",
+"club": "fc-liverpool",
+"positions": {
+"0": 3,
+"7": 1
+}
+},
+"3221": {
+"slug": "danny-murphy",
+"club": "fc-liverpool",
+"positions": {
+"7": 4,
+"0": 27,
+"8": 1,
+"9": 3,
+"6": 1
+}
+},
+"3109": {
+"slug": "steven-gerrard",
+"club": "fc-liverpool",
+"positions": {
+"8": 6,
+"0": 20,
+"7": 2
+}
+},
+"10032": {
+"slug": "gary-mcallister",
+"club": "fc-liverpool",
+"positions": {
+"7": 6,
+"0": 17,
+"10": 2
+}
+},
+"3222": {
+"slug": "nick-barmby",
+"club": "fc-liverpool",
+"positions": {
+"0": 5,
+"8": 1
+}
+},
+"3217": {
+"slug": "vladimir-smicer",
+"club": "fc-liverpool",
+"positions": {
+"12": 1,
+"0": 18,
+"7": 1,
+"10": 2
+}
+},
+"3218": {
+"slug": "patrik-berger",
+"club": "fc-liverpool",
+"positions": {
+"9": 4,
+"0": 17
+}
+},
+"4675": {
+"slug": "jari-litmanen",
+"club": "fc-liverpool",
+"positions": {
+"10": 2,
+"0": 16,
+"14": 1,
+"13": 2
+}
+},
+"3142": {
+"slug": "emile-heskey",
+"club": "fc-liverpool",
+"positions": {
+"14": 9,
+"0": 26
+}
+},
+"3225": {
+"slug": "robbie-fowler",
+"club": "fc-liverpool",
+"positions": {
+"0": 22,
+"14": 9,
+"11": 1
+}
+},
+"3226": {
+"slug": "nicolas-anelka",
+"club": "fc-liverpool",
+"positions": {
+"11": 1,
+"0": 16,
+"14": 3
+}
+},
+"1397": {
+"slug": "michael-owen",
+"club": "fc-liverpool",
+"positions": {
+"14": 7,
+"0": 21,
+"13": 1
+}
+},
+"3357": {
+"slug": "mark-schwarzer",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 15,
+"1": 6
+}
+},
+"11479": {
+"slug": "marlon-beresford",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 1
+}
+},
+"4041": {
+"slug": "mark-crossley",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 14,
+"1": 4
+}
+},
+"3935": {
+"slug": "steve-vickers",
+"club": "fc-middlesbrough",
+"positions": {
+"3": 1,
+"0": 1
+}
+},
+"5596": {
+"slug": "gianluca-festa",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 8
+}
+},
+"3744": {
+"slug": "gareth-southgate",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 29,
+"3": 8
+}
+},
+"3247": {
+"slug": "ugo-ehiogu",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 22,
+"3": 7
+}
+},
+"10380": {
+"slug": "jason-gavin",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 9
+}
+},
+"10049": {
+"slug": "dean-gordon",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 1
+}
+},
+"3867": {
+"slug": "colin-cooper",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 14,
+"4": 4
+}
+},
+"3868": {
+"slug": "david-murphy",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 4,
+"8": 1
+}
+},
+"3711": {
+"slug": "franck-queudrue",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 22,
+"4": 6
+}
+},
+"11353": {
+"slug": "curtis-fleming",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 6,
+"5": 2
+}
+},
+"3712": {
+"slug": "robbie-stockdale",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 22,
+"5": 6
+}
+},
+"3321": {
+"slug": "luke-wilkshire",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 6,
+"8": 1
+}
+},
+"4092": {
+"slug": "paul-okon-engstler",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 4
+}
+},
+"49094": {
+"slug": "mark-hudson",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 2
+}
+},
+"13419": {
+"slug": "robbie-mustoe",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 28,
+"7": 8
+}
+},
+"3248": {
+"slug": "paul-ince",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 24,
+"6": 3,
+"7": 4
+}
+},
+"3865": {
+"slug": "jonathan-greening",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 28,
+"7": 1,
+"9": 5,
+"8": 1,
+"10": 1
+}
+},
+"3327": {
+"slug": "mark-wilson",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 10
+}
+},
+"12607": {
+"slug": "phil-stamp",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 6
+}
+},
+"149389": {
+"slug": "mickael-debeve",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 4
+}
+},
+"3649": {
+"slug": "allan-johnston",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 14,
+"9": 1,
+"5": 1,
+"8": 1
+}
+},
+"4063": {
+"slug": "stewart-downing",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 3
+}
+},
+"29613": {
+"slug": "carlos-marinelli",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 15,
+"8": 2,
+"9": 1,
+"12": 1,
+"10": 1
+}
+},
+"3863": {
+"slug": "szilard-nemeth",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 17,
+"13": 2,
+"12": 1
+}
+},
+"8058": {
+"slug": "brian-deane",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 19,
+"14": 3
+}
+},
+"3571": {
+"slug": "alen-boksic",
+"club": "fc-middlesbrough",
+"positions": {
+"14": 6,
+"0": 16
+}
+},
+"3650": {
+"slug": "joseph-desire-job",
+"club": "fc-middlesbrough",
+"positions": {
+"14": 2,
+"0": 2
+}
+},
+"12689": {
+"slug": "andy-campbell",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 4
+}
+},
+"103230": {
+"slug": "hamilton-ricard",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 8,
+"14": 1
+}
+},
+"3328": {
+"slug": "dean-windass",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 21,
+"14": 2,
+"10": 1,
+"13": 2,
+"8": 1
+}
+},
+"3315": {
+"slug": "noel-whelan",
+"club": "fc-middlesbrough",
+"positions": {
+"0": 16,
+"14": 3
+}
+},
+"3684": {
+"slug": "paul-jones",
+"club": "fc-southampton",
+"positions": {
+"0": 26,
+"1": 10
+}
+},
+"48075": {
+"slug": "neil-moss",
+"club": "fc-southampton",
+"positions": {
+"0": 2
+}
+},
+"3687": {
+"slug": "claus-lundekvam",
+"club": "fc-southampton",
+"positions": {
+"0": 27,
+"3": 7
+}
+},
+"3323": {
+"slug": "paul-williams",
+"club": "fc-southampton",
+"positions": {
+"0": 23,
+"3": 5
+}
+},
+"3829": {
+"slug": "dean-richards",
+"club": "fc-southampton",
+"positions": {
+"3": 26,
+"0": 2
+}
+},
+"3121": {
+"slug": "tahar-el-khalej",
+"club": "fc-southampton",
+"positions": {
+"0": 10,
+"3": 4
+}
+},
+"4111": {
+"slug": "garry-monk",
+"club": "fc-southampton",
+"positions": {
+"0": 1,
+"5": 1
+}
+},
+"3682": {
+"slug": "wayne-bridge",
+"club": "fc-southampton",
+"positions": {
+"0": 28,
+"4": 10
+}
+},
+"3298": {
+"slug": "francis-benali",
+"club": "fc-southampton",
+"positions": {
+"0": 3
+}
+},
+"3685": {
+"slug": "jason-dodd",
+"club": "fc-southampton",
+"positions": {
+"0": 24,
+"5": 5
+}
+},
+"102023": {
+"slug": "dan-petrescu",
+"club": "fc-southampton",
+"positions": {
+"0": 2
+}
+},
+"3362": {
+"slug": "paul-telfer",
+"club": "fc-southampton",
+"positions": {
+"0": 23,
+"8": 4,
+"7": 1
+}
+},
+"3688": {
+"slug": "anders-svensson",
+"club": "fc-southampton",
+"positions": {
+"0": 26,
+"6": 4,
+"7": 3,
+"11": 1
+}
+},
+"4117": {
+"slug": "chris-marsden",
+"club": "fc-southampton",
+"positions": {
+"0": 21,
+"9": 5,
+"7": 2
+}
+},
+"3784": {
+"slug": "matt-oakley",
+"club": "fc-southampton",
+"positions": {
+"0": 20,
+"6": 4,
+"7": 3
+}
+},
+"3681": {
+"slug": "mark-draper",
+"club": "fc-southampton",
+"positions": {
+"0": 1,
+"7": 1
+}
+},
+"4112": {
+"slug": "rory-delap",
+"club": "fc-southampton",
+"positions": {
+"0": 23,
+"8": 1,
+"7": 1,
+"5": 3
+}
+},
+"4109": {
+"slug": "jo-tessem",
+"club": "fc-southampton",
+"positions": {
+"0": 20,
+"7": 1,
+"8": 1
+}
+},
+"19390": {
+"slug": "paul-murray",
+"club": "fc-southampton",
+"positions": {
+"8": 1
+}
+},
+"107223": {
+"slug": "stuart-ripley",
+"club": "fc-southampton",
+"positions": {
+"0": 5
+}
+},
+"15387": {
+"slug": "imants-bleidelis",
+"club": "fc-southampton",
+"positions": {
+"0": 1
+}
+},
+"43705": {
+"slug": "matt-le-tissier",
+"club": "fc-southampton",
+"positions": {
+"0": 4
+}
+},
+"4116": {
+"slug": "fabrice-fernandes",
+"club": "fc-southampton",
+"positions": {
+"0": 11
+}
+},
+"3112": {
+"slug": "james-beattie",
+"club": "fc-southampton",
+"positions": {
+"0": 20,
+"14": 8
+}
+},
+"4114": {
+"slug": "kevin-davies",
+"club": "fc-southampton",
+"positions": {
+"0": 17,
+"14": 3,
+"12": 3
+}
+},
+"1440": {
+"slug": "uwe-rosler",
+"club": "fc-southampton",
+"positions": {
+"0": 2,
+"14": 2
+}
+},
+"3689": {
+"slug": "marians-pahars",
+"club": "fc-southampton",
+"positions": {
+"0": 27,
+"14": 6,
+"11": 3
+}
+},
+"13799": {
+"slug": "scott-mcdonald",
+"club": "fc-southampton",
+"positions": {
+"0": 2
+}
+},
+"3849": {
+"slug": "agustin-delgado",
+"club": "fc-southampton",
+"positions": {
+"0": 1
+}
+},
+"4113": {
+"slug": "brett-ormerod",
+"club": "fc-southampton",
+"positions": {
+"0": 17,
+"14": 1
+}
+},
+"13249": {
+"slug": "andy-marshall",
+"club": "ipswich-town",
+"positions": {
+"1": 3,
+"0": 10
+}
+},
+"195173": {
+"slug": "keith-branagan",
+"club": "ipswich-town",
+"positions": {
+"0": 1
+}
+},
+"5964": {
+"slug": "matteo-sereni",
+"club": "ipswich-town",
+"positions": {
+"0": 21,
+"1": 4
+}
+},
+"13250": {
+"slug": "john-mcgreal",
+"club": "ipswich-town",
+"positions": {
+"3": 4,
+"0": 22,
+"5": 1
+}
+},
+"13259": {
+"slug": "mark-venus",
+"club": "ipswich-town",
+"positions": {
+"3": 4,
+"0": 25
+}
+},
+"13252": {
+"slug": "richard-naylor",
+"club": "ipswich-town",
+"positions": {
+"0": 12,
+"14": 2
+}
+},
+"3130": {
+"slug": "titus-bramble",
+"club": "ipswich-town",
+"positions": {
+"5": 1,
+"0": 13,
+"3": 4
+}
+},
+"9984": {
+"slug": "thomas-gaardsoe",
+"club": "ipswich-town",
+"positions": {
+"0": 4
+}
+},
+"3938": {
+"slug": "jamie-clapham",
+"club": "ipswich-town",
+"positions": {
+"9": 3,
+"0": 28,
+"4": 1
+}
+},
+"3860": {
+"slug": "hermann-hreidarsson",
+"club": "ipswich-town",
+"positions": {
+"4": 4,
+"0": 31,
+"3": 1,
+"5": 2
+}
+},
+"13248": {
+"slug": "chris-makin",
+"club": "ipswich-town",
+"positions": {
+"0": 26,
+"5": 3,
+"4": 1
+}
+},
+"13260": {
+"slug": "fabian-wilnis",
+"club": "ipswich-town",
+"positions": {
+"0": 14
+}
+},
+"3481": {
+"slug": "jim-magilton",
+"club": "ipswich-town",
+"positions": {
+"0": 21,
+"7": 2,
+"8": 1
+}
+},
+"3102": {
+"slug": "matt-holland",
+"club": "ipswich-town",
+"positions": {
+"7": 6,
+"0": 31,
+"6": 1
+}
+},
+"13261": {
+"slug": "jermaine-wright",
+"club": "ipswich-town",
+"positions": {
+"0": 26,
+"8": 2,
+"10": 1
+}
+},
+"13251": {
+"slug": "tommy-miller",
+"club": "ipswich-town",
+"positions": {
+"7": 2,
+"0": 6
+}
+},
+"55962": {
+"slug": "sixto-peralta",
+"club": "ipswich-town",
+"positions": {
+"0": 20,
+"7": 2
+}
+},
+"4086": {
+"slug": "darren-ambrose",
+"club": "ipswich-town",
+"positions": {
+"0": 1
+}
+},
+"13244": {
+"slug": "ulrich-le-pen",
+"club": "ipswich-town",
+"positions": {
+"0": 1
+}
+},
+"13356": {
+"slug": "martijn-reuser",
+"club": "ipswich-town",
+"positions": {
+"8": 1,
+"0": 19,
+"9": 2,
+"11": 1,
+"10": 1
+}
+},
+"13241": {
+"slug": "finidi-george",
+"club": "ipswich-town",
+"positions": {
+"0": 22,
+"8": 1,
+"12": 1,
+"11": 1
+}
+},
+"13242": {
+"slug": "pablo-counago",
+"club": "ipswich-town",
+"positions": {
+"0": 12
+}
+},
+"13237": {
+"slug": "alun-armstrong",
+"club": "ipswich-town",
+"positions": {
+"0": 28,
+"14": 3
+}
+},
+"4119": {
+"slug": "marcus-stewart",
+"club": "ipswich-town",
+"positions": {
+"0": 25,
+"14": 3
+}
+},
+"13239": {
+"slug": "darren-bent",
+"club": "ipswich-town",
+"positions": {
+"14": 1,
+"0": 5
+}
+},
+"3629": {
+"slug": "nigel-martyn",
+"club": "leeds-united",
+"positions": {
+"0": 26,
+"1": 12
+}
+},
+"3224": {
+"slug": "jonathan-woodgate",
+"club": "leeds-united",
+"positions": {
+"0": 9,
+"3": 4
+}
+},
+"3633": {
+"slug": "michael-duberry",
+"club": "leeds-united",
+"positions": {
+"0": 2,
+"3": 1
+}
+},
+"3235": {
+"slug": "rio-ferdinand",
+"club": "leeds-united",
+"positions": {
+"0": 21,
+"3": 10
+}
+},
+"3634": {
+"slug": "ian-harte",
+"club": "leeds-united",
+"positions": {
+"0": 26,
+"4": 10
+}
+},
+"3765": {
+"slug": "dominic-matteo",
+"club": "leeds-united",
+"positions": {
+"0": 23,
+"3": 7,
+"4": 2
+}
+},
+"3631": {
+"slug": "gary-kelly",
+"club": "leeds-united",
+"positions": {
+"0": 17,
+"5": 2,
+"8": 1
+}
+},
+"3743": {
+"slug": "danny-mills",
+"club": "leeds-united",
+"positions": {
+"0": 18,
+"5": 9,
+"3": 1
+}
+},
+"12597": {
+"slug": "alan-maybury",
+"club": "leeds-united",
+"positions": {
+"0": 1
+}
+},
+"3572": {
+"slug": "olivier-dacourt",
+"club": "leeds-united",
+"positions": {
+"0": 11,
+"6": 5,
+"7": 1
+}
+},
+"3295": {
+"slug": "david-batty",
+"club": "leeds-united",
+"positions": {
+"0": 28,
+"6": 6,
+"7": 2
+}
+},
+"3877": {
+"slug": "lee-bowyer",
+"club": "leeds-united",
+"positions": {
+"0": 16,
+"10": 1,
+"8": 6,
+"7": 2
+}
+},
+"3768": {
+"slug": "alan-smith",
+"club": "leeds-united",
+"positions": {
+"0": 18,
+"8": 2,
+"12": 1,
+"13": 2
+}
+},
+"3284": {
+"slug": "eirik-bakke",
+"club": "leeds-united",
+"positions": {
+"0": 21,
+"9": 1,
+"7": 4,
+"8": 1
+}
+},
+"3764": {
+"slug": "stephen-mcphail",
+"club": "leeds-united",
+"positions": {
+"0": 1
+}
+},
+"3320": {
+"slug": "jason-wilcox",
+"club": "leeds-united",
+"positions": {
+"0": 12,
+"9": 1
+}
+},
+"3241": {
+"slug": "harry-kewell",
+"club": "leeds-united",
+"positions": {
+"0": 19,
+"11": 8
+}
+},
+"3144": {
+"slug": "robbie-keane",
+"club": "leeds-united",
+"positions": {
+"0": 19,
+"9": 1,
+"13": 1,
+"14": 4
+}
+},
+"3242": {
+"slug": "mark-viduka",
+"club": "leeds-united",
+"positions": {
+"0": 21,
+"14": 12
+}
+},
+"4249": {
+"slug": "tim-flowers",
+"club": "leicester-city",
+"positions": {
+"1": 2,
+"0": 2
+}
+},
+"4137": {
+"slug": "ian-walker",
+"club": "leicester-city",
+"positions": {
+"1": 8,
+"0": 27
+}
+},
+"4264": {
+"slug": "gerry-taggart",
+"club": "leicester-city",
+"positions": {
+"3": 1
+}
+},
+"4102": {
+"slug": "gary-rowett",
+"club": "leicester-city",
+"positions": {
+"5": 2,
+"0": 8,
+"3": 1
+}
+},
+"8056": {
+"slug": "frank-sinclair",
+"club": "leicester-city",
+"positions": {
+"3": 7,
+"0": 25,
+"5": 3
+}
+},
+"36861": {
+"slug": "damien-delaney",
+"club": "leicester-city",
+"positions": {
+"0": 3
+}
+},
+"107793": {
+"slug": "matt-elliott",
+"club": "leicester-city",
+"positions": {
+"3": 8,
+"0": 23
+}
+},
+"4253": {
+"slug": "jacob-laursen",
+"club": "leicester-city",
+"positions": {
+"0": 7,
+"3": 3
+}
+},
+"9214": {
+"slug": "matt-heath",
+"club": "leicester-city",
+"positions": {
+"0": 5
+}
+},
+"4261": {
+"slug": "jon-ashton",
+"club": "leicester-city",
+"positions": {
+"5": 1,
+"0": 6
+}
+},
+"4263": {
+"slug": "alan-rogers",
+"club": "leicester-city",
+"positions": {
+"4": 2,
+"0": 9,
+"11": 1,
+"9": 1
+}
+},
+"4251": {
+"slug": "callum-davidson",
+"club": "leicester-city",
+"positions": {
+"9": 2,
+"0": 21,
+"7": 1,
+"4": 6
+}
+},
+"9217": {
+"slug": "jordan-stewart",
+"club": "leicester-city",
+"positions": {
+"9": 2,
+"0": 7,
+"3": 3
+}
+},
+"4250": {
+"slug": "andy-impey",
+"club": "leicester-city",
+"positions": {
+"8": 3,
+"0": 21,
+"6": 2,
+"5": 1
+}
+},
+"4006": {
+"slug": "dennis-wise",
+"club": "leicester-city",
+"positions": {
+"0": 14,
+"7": 1,
+"8": 1,
+"9": 1
+}
+},
+"10425": {
+"slug": "martin-reeves",
+"club": "leicester-city",
+"positions": {
+"0": 5
+}
+},
+"4252": {
+"slug": "matt-jones",
+"club": "leicester-city",
+"positions": {
+"0": 7,
+"7": 2,
+"9": 1
+}
+},
+"3797": {
+"slug": "robbie-savage",
+"club": "leicester-city",
+"positions": {
+"6": 2,
+"0": 26,
+"7": 5,
+"8": 2
+}
+},
+"10418": {
+"slug": "stefan-oakes",
+"club": "leicester-city",
+"positions": {
+"9": 1,
+"0": 17,
+"7": 3
+}
+},
+"3671": {
+"slug": "lee-marshall",
+"club": "leicester-city",
+"positions": {
+"7": 2,
+"0": 30,
+"5": 2,
+"3": 1
+}
+},
+"9219": {
+"slug": "tommy-williamson",
+"club": "leicester-city",
+"positions": {
+"6": 1
+}
+},
+"3123": {
+"slug": "muzzy-izzet",
+"club": "leicester-city",
+"positions": {
+"6": 1,
+"8": 3,
+"0": 24,
+"12": 1,
+"7": 2
+}
+},
+"4134": {
+"slug": "matt-piper",
+"club": "leicester-city",
+"positions": {
+"13": 3,
+"0": 13
+}
+},
+"9215": {
+"slug": "junior-lewis",
+"club": "leicester-city",
+"positions": {
+"0": 5,
+"4": 1
+}
+},
+"9206": {
+"slug": "trevor-benjamin",
+"club": "leicester-city",
+"positions": {
+"0": 9,
+"11": 1,
+"14": 1
+}
+},
+"17955": {
+"slug": "arnar-gunnlaugsson",
+"club": "leicester-city",
+"positions": {
+"0": 2
+}
+},
+"4265": {
+"slug": "james-scowcroft",
+"club": "leicester-city",
+"positions": {
+"0": 19,
+"14": 4,
+"13": 1
+}
+},
+"4230": {
+"slug": "dean-sturridge",
+"club": "leicester-city",
+"positions": {
+"14": 4,
+"0": 5
+}
+},
+"4037": {
+"slug": "ade-akinbiyi",
+"club": "leicester-city",
+"positions": {
+"0": 16,
+"14": 4,
+"13": 1
+}
+},
+"9221": {
+"slug": "paul-dickov",
+"club": "leicester-city",
+"positions": {
+"14": 2,
+"0": 10
+}
+},
+"10435": {
+"slug": "jon-stevenson",
+"club": "leicester-city",
+"positions": {
+"14": 2,
+"0": 4
+}
+},
+"8057": {
+"slug": "tommy-wright",
+"club": "leicester-city",
+"positions": {
+"0": 1
+}
+},
+"3289": {
+"slug": "fabien-barthez",
+"club": "manchester-united",
+"positions": {
+"0": 21,
+"1": 11
+}
+},
+"3534": {
+"slug": "roy-carroll",
+"club": "manchester-united",
+"positions": {
+"0": 7
+}
+},
+"3644": {
+"slug": "raimond-van-der-gouw",
+"club": "manchester-united",
+"positions": {
+"0": 1
+}
+},
+"3557": {
+"slug": "jaap-stam",
+"club": "manchester-united",
+"positions": {
+"0": 1
+}
+},
+"3578": {
+"slug": "ronny-johnsen",
+"club": "manchester-united",
+"positions": {
+"3": 4,
+"0": 6
+}
+},
+"3113": {
+"slug": "laurent-blanc",
+"club": "manchester-united",
+"positions": {
+"0": 20,
+"3": 9
+}
+},
+"3538": {
+"slug": "david-may",
+"club": "manchester-united",
+"positions": {
+"3": 1,
+"0": 1
+}
+},
+"3405": {
+"slug": "wes-brown",
+"club": "manchester-united",
+"positions": {
+"0": 11,
+"3": 6
+}
+},
+"3540": {
+"slug": "john-oshea",
+"club": "manchester-united",
+"positions": {
+"0": 8,
+"3": 1
+}
+},
+"4280": {
+"slug": "denis-irwin",
+"club": "manchester-united",
+"positions": {
+"0": 10,
+"4": 2
+}
+},
+"3541": {
+"slug": "quinton-fortune",
+"club": "manchester-united",
+"positions": {
+"0": 11,
+"9": 3
+}
+},
+"3393": {
+"slug": "mikael-silvestre",
+"club": "manchester-united",
+"positions": {
+"4": 9,
+"0": 25,
+"3": 1
+}
+},
+"3403": {
+"slug": "gary-neville",
+"club": "manchester-united",
+"positions": {
+"0": 25,
+"5": 8,
+"3": 1
+}
+},
+"3404": {
+"slug": "phil-neville",
+"club": "manchester-united",
+"positions": {
+"0": 22,
+"5": 4,
+"4": 2
+}
+},
+"3543": {
+"slug": "nicky-butt",
+"club": "manchester-united",
+"positions": {
+"0": 19,
+"7": 4,
+"6": 2
+}
+},
+"3143": {
+"slug": "juan-sebastian-veron",
+"club": "manchester-united",
+"positions": {
+"8": 2,
+"0": 16,
+"7": 7,
+"10": 1
+}
+},
+"3396": {
+"slug": "roy-keane",
+"club": "manchester-united",
+"positions": {
+"0": 21,
+"6": 3,
+"7": 4
+}
+},
+"3397": {
+"slug": "paul-scholes",
+"club": "manchester-united",
+"positions": {
+"0": 26,
+"7": 4,
+"9": 4,
+"10": 1
+}
+},
+"3305": {
+"slug": "ronnie-wallwork",
+"club": "manchester-united",
+"positions": {
+"0": 1
+}
+},
+"3246": {
+"slug": "michael-stewart",
+"club": "manchester-united",
+"positions": {
+"0": 3
+}
+},
+"3139": {
+"slug": "david-beckham",
+"club": "manchester-united",
+"positions": {
+"8": 8,
+"0": 20
+}
+},
+"3406": {
+"slug": "ryan-giggs",
+"club": "manchester-united",
+"positions": {
+"0": 20,
+"9": 4,
+"13": 1
+}
+},
+"3658": {
+"slug": "luke-chadwick",
+"club": "manchester-united",
+"positions": {
+"0": 7,
+"8": 1
+}
+},
+"3407": {
+"slug": "ruud-van-nistelrooy",
+"club": "manchester-united",
+"positions": {
+"0": 24,
+"14": 8
+}
+},
+"3223": {
+"slug": "dwight-yorke",
+"club": "manchester-united",
+"positions": {
+"0": 8,
+"12": 1,
+"13": 1
+}
+},
+"3394": {
+"slug": "ole-gunnar-solskjaer",
+"club": "manchester-united",
+"positions": {
+"0": 24,
+"13": 1,
+"14": 3,
+"11": 2
+}
+},
+"3408": {
+"slug": "diego-forlan",
+"club": "manchester-united",
+"positions": {
+"0": 10,
+"14": 1,
+"13": 1,
+"11": 1
+}
+},
+"3146": {
+"slug": "shay-given",
+"club": "newcastle-united",
+"positions": {
+"1": 38
+}
+},
+"3228": {
+"slug": "andrew-obrien",
+"club": "newcastle-united",
+"positions": {
+"3": 31,
+"5": 1,
+"0": 2
+}
+},
+"3580": {
+"slug": "aaron-hughes",
+"club": "newcastle-united",
+"positions": {
+"5": 29,
+"6": 2,
+"3": 3
+}
+},
+"3356": {
+"slug": "sylvain-distin",
+"club": "newcastle-united",
+"positions": {
+"3": 11,
+"0": 8,
+"4": 9
+}
+},
+"3581": {
+"slug": "nikolaos-dabizas",
+"club": "newcastle-united",
+"positions": {
+"3": 33,
+"0": 2
+}
+},
+"3577": {
+"slug": "robbie-elliott",
+"club": "newcastle-united",
+"positions": {
+"4": 25,
+"0": 1,
+"9": 1
+}
+},
+"3301": {
+"slug": "olivier-bernard",
+"club": "newcastle-united",
+"positions": {
+"4": 2,
+"0": 12,
+"9": 2
+}
+},
+"3579": {
+"slug": "andy-griffin",
+"club": "newcastle-united",
+"positions": {
+"5": 3,
+"0": 1
+}
+},
+"3262": {
+"slug": "clarence-acuna",
+"club": "newcastle-united",
+"positions": {
+"0": 6,
+"7": 9,
+"6": 1
+}
+},
+"3461": {
+"slug": "jermaine-jenas",
+"club": "newcastle-united",
+"positions": {
+"0": 6,
+"7": 6
+}
+},
+"3459": {
+"slug": "gary-speed",
+"club": "newcastle-united",
+"positions": {
+"7": 28,
+"0": 1
+}
+},
+"3565": {
+"slug": "jamie-mcclen",
+"club": "newcastle-united",
+"positions": {
+"7": 3
+}
+},
+"3460": {
+"slug": "nolberto-solano",
+"club": "newcastle-united",
+"positions": {
+"8": 36,
+"7": 1
+}
+},
+"3118": {
+"slug": "kieron-dyer",
+"club": "newcastle-united",
+"positions": {
+"7": 13,
+"8": 1,
+"0": 3,
+"9": 1
+}
+},
+"3294": {
+"slug": "christian-bassedas",
+"club": "newcastle-united",
+"positions": {
+"7": 1,
+"8": 1
+}
+},
+"3297": {
+"slug": "craig-bellamy",
+"club": "newcastle-united",
+"positions": {
+"0": 1,
+"14": 16,
+"13": 10
+}
+},
+"3316": {
+"slug": "laurent-robert",
+"club": "newcastle-united",
+"positions": {
+"11": 25,
+"9": 10,
+"0": 1
+}
+},
+"3110": {
+"slug": "alan-shearer",
+"club": "newcastle-united",
+"positions": {
+"14": 36,
+"0": 1
+}
+},
+"3093": {
+"slug": "carl-cort",
+"club": "newcastle-united",
+"positions": {
+"0": 1,
+"14": 7
+}
+},
+"3458": {
+"slug": "lomana-lualua",
+"club": "newcastle-united",
+"positions": {
+"14": 5,
+"0": 13,
+"8": 1,
+"13": 1
+}
+},
+"3276": {
+"slug": "shola-ameobi",
+"club": "newcastle-united",
+"positions": {
+"0": 10,
+"14": 5
+}
+},
+"4045": {
+"slug": "neil-sullivan",
+"club": "tottenham-hotspur",
+"positions": {
+"1": 29
+}
+},
+"3608": {
+"slug": "kasey-keller",
+"club": "tottenham-hotspur",
+"positions": {
+"1": 9
+}
+},
+"3802": {
+"slug": "goran-bunjevcevic",
+"club": "tottenham-hotspur",
+"positions": {
+"6": 1,
+"3": 5
+}
+},
+"4051": {
+"slug": "chris-perry",
+"club": "tottenham-hotspur",
+"positions": {
+"3": 30,
+"5": 2,
+"8": 1
+}
+},
+"4052": {
+"slug": "gary-doherty",
+"club": "tottenham-hotspur",
+"positions": {
+"6": 1,
+"14": 1,
+"9": 1,
+"3": 4
+}
+},
+"3360": {
+"slug": "ledley-king",
+"club": "tottenham-hotspur",
+"positions": {
+"5": 2,
+"8": 1,
+"3": 29
+}
+},
+"4053": {
+"slug": "anthony-gardner",
+"club": "tottenham-hotspur",
+"positions": {
+"3": 13,
+"4": 1,
+"9": 1
+}
+},
+"4054": {
+"slug": "alton-thelwell",
+"club": "tottenham-hotspur",
+"positions": {
+"3": 2
+}
+},
+"4050": {
+"slug": "mauricio-taricco",
+"club": "tottenham-hotspur",
+"positions": {
+"9": 8,
+"5": 5,
+"8": 17
+}
+},
+"3304": {
+"slug": "ben-thatcher",
+"club": "tottenham-hotspur",
+"positions": {
+"3": 6,
+"4": 5,
+"8": 1
+}
+},
+"3990": {
+"slug": "steffen-freund",
+"club": "tottenham-hotspur",
+"positions": {
+"6": 20
+}
+},
+"4005": {
+"slug": "tim-sherwood",
+"club": "tottenham-hotspur",
+"positions": {
+"6": 15,
+"7": 4
+}
+},
+"4071": {
+"slug": "oyvind-leonhardsen",
+"club": "tottenham-hotspur",
+"positions": {
+"7": 7
+}
+},
+"3641": {
+"slug": "stephen-clemence",
+"club": "tottenham-hotspur",
+"positions": {
+"6": 2,
+"7": 4
+}
+},
+"3277": {
+"slug": "darren-anderton",
+"club": "tottenham-hotspur",
+"positions": {
+"7": 30,
+"8": 4,
+"0": 1
+}
+},
+"4056": {
+"slug": "simon-davies",
+"club": "tottenham-hotspur",
+"positions": {
+"8": 20,
+"10": 1,
+"7": 7,
+"5": 1,
+"9": 2
+}
+},
+"916": {
+"slug": "christian-ziege",
+"club": "tottenham-hotspur",
+"positions": {
+"9": 24,
+"4": 3
+}
+},
+"3788": {
+"slug": "matthew-etherington",
+"club": "tottenham-hotspur",
+"positions": {
+"9": 10,
+"13": 1
+}
+},
+"3361": {
+"slug": "gustavo-poyet",
+"club": "tottenham-hotspur",
+"positions": {
+"7": 27,
+"10": 3,
+"9": 2,
+"8": 2
+}
+},
+"3122": {
+"slug": "sergiy-rebrov",
+"club": "tottenham-hotspur",
+"positions": {
+"13": 17,
+"14": 6,
+"11": 2,
+"8": 1,
+"10": 3,
+"9": 1
+}
+},
+"3478": {
+"slug": "steffen-iversen",
+"club": "tottenham-hotspur",
+"positions": {
+"13": 12,
+"14": 3,
+"12": 1,
+"10": 1,
+"0": 1
+}
+},
+"3645": {
+"slug": "les-ferdinand",
+"club": "tottenham-hotspur",
+"positions": {
+"14": 25
+}
+},
+"3392": {
+"slug": "teddy-sheringham",
+"club": "tottenham-hotspur",
+"positions": {
+"14": 23,
+"13": 11
+}
+},
+"3646": {
+"slug": "david-james",
+"club": "west-ham-united",
+"positions": {
+"1": 5,
+"0": 21
+}
+},
+"4175": {
+"slug": "shaka-hislop",
+"club": "west-ham-united",
+"positions": {
+"0": 8,
+"1": 4
+}
+},
+"3647": {
+"slug": "tomas-repka",
+"club": "west-ham-united",
+"positions": {
+"3": 8,
+"0": 23
+}
+},
+"3336": {
+"slug": "hayden-foxe",
+"club": "west-ham-united",
+"positions": {
+"0": 6
+}
+},
+"3799": {
+"slug": "christian-dailly",
+"club": "west-ham-united",
+"positions": {
+"6": 2,
+"3": 8,
+"0": 28
+}
+},
+"1419": {
+"slug": "rigobert-song",
+"club": "west-ham-united",
+"positions": {
+"0": 3,
+"3": 2
+}
+},
+"3879": {
+"slug": "ian-pearce",
+"club": "west-ham-united",
+"positions": {
+"3": 4,
+"0": 5
+}
+},
+"3447": {
+"slug": "ragnvald-soma",
+"club": "west-ham-united",
+"positions": {
+"4": 1,
+"0": 2
+}
+},
+"3882": {
+"slug": "shaun-byrne",
+"club": "west-ham-united",
+"positions": {
+"0": 1
+}
+},
+"3648": {
+"slug": "nigel-winterburn",
+"club": "west-ham-united",
+"positions": {
+"4": 6,
+"0": 24,
+"9": 1
+}
+},
+"5013": {
+"slug": "vladimir-labant",
+"club": "west-ham-united",
+"positions": {
+"11": 1,
+"0": 10,
+"9": 1
+}
+},
+"3884": {
+"slug": "scott-minto",
+"club": "west-ham-united",
+"positions": {
+"0": 4,
+"4": 1
+}
+},
+"3798": {
+"slug": "sebastien-schemmel",
+"club": "west-ham-united",
+"positions": {
+"5": 7,
+"0": 27,
+"8": 1
+}
+},
+"3878": {
+"slug": "michael-carrick",
+"club": "west-ham-united",
+"positions": {
+"6": 6,
+"7": 3,
+"0": 21
+}
+},
+"3801": {
+"slug": "steve-lomas",
+"club": "west-ham-united",
+"positions": {
+"5": 1,
+"7": 4,
+"0": 10
+}
+},
+"3696": {
+"slug": "john-moncur",
+"club": "west-ham-united",
+"positions": {
+"7": 4,
+"0": 14,
+"9": 1
+}
+},
+"44291": {
+"slug": "grant-mccann",
+"club": "west-ham-united",
+"positions": {
+"0": 3
+}
+},
+"22403": {
+"slug": "laurent-courtois",
+"club": "west-ham-united",
+"positions": {
+"0": 6,
+"9": 1
+}
+},
+"3876": {
+"slug": "joe-cole",
+"club": "west-ham-united",
+"positions": {
+"12": 2,
+"10": 1,
+"0": 23,
+"9": 2,
+"11": 2
+}
+},
+"3253": {
+"slug": "trevor-sinclair",
+"club": "west-ham-united",
+"positions": {
+"11": 2,
+"12": 4,
+"0": 24,
+"7": 1,
+"8": 3
+}
+},
+"3695": {
+"slug": "richard-garcia",
+"club": "west-ham-united",
+"positions": {
+"14": 1,
+"0": 7
+}
+},
+"106847": {
+"slug": "titi-camara",
+"club": "west-ham-united",
+"positions": {
+"0": 1
+}
+},
+"3699": {
+"slug": "paolo-di-canio",
+"club": "west-ham-united",
+"positions": {
+"0": 21,
+"14": 5
+}
+},
+"107813": {
+"slug": "paul-kitson",
+"club": "west-ham-united",
+"positions": {
+"0": 6,
+"14": 1
+}
+},
+"3700": {
+"slug": "frederic-kanoute",
+"club": "west-ham-united",
+"positions": {
+"14": 7,
+"0": 20
+}
+},
+"3978": {
+"slug": "svetoslav-todorov",
+"club": "west-ham-united",
+"positions": {
+"0": 4,
+"14": 2
+}
+},
+"3875": {
+"slug": "jermain-defoe",
+"club": "west-ham-united",
+"positions": {
+"14": 3,
+"0": 31,
+"13": 1
+}
+}
+}

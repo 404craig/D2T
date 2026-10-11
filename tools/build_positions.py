@@ -54,7 +54,7 @@ def main():
             cache[pid] = json.load(open(os.path.join(TMDIR, "players", f"{pid}.json")))
         return cache[pid]
 
-    out, unmatched, report = {}, [], []
+    out, unmatched, report, audit = {}, [], [], []
     stats = Counter()
     for season in sorted(by_season):
         year = int(season[:4])
@@ -118,6 +118,9 @@ def main():
             taken.add(tid)
             stats["matched_" + how] += 1
             rec = tmplayer(str(tid))
+            tm_games = sum(rec["seasons"].get(str(year), {}).values())
+            apps = sum(int(r["apps"]) for r in rs)
+            audit.append([season, plid, tid, how, apps, tm_games])
             m, o, note = positions(rec["seasons"], year)
             if not m:
                 stats["no_positions"] += 1
@@ -145,6 +148,10 @@ def main():
         out[season] = season_out
     json.dump(out, open(os.path.join(ROOT, "data", "source", "positions.json"), "w"), separators=(",", ":"))
     json.dump(unmatched, open(os.path.join(TMDIR, "unmatched.json"), "w"), indent=1)
+    with open(os.path.join(TMDIR, "matches.csv"), "w", newline="") as fh:  # every match, with both game counts
+        w = csv.writer(fh)
+        w.writerow(["season", "player_id", "tm_id", "how", "apps", "tm_games"])
+        w.writerows(audit)
     return out, unmatched, report, stats
 
 
