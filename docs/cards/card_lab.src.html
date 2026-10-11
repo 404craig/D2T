@@ -1,0 +1,388 @@
+<title>D2T Card Lab 2007/08</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: a left-aligned reading column for the argument, then a two-pane lab (formula on the left, cards on the right) that stacks on phones. */
+:root {
+  --bg: #eef1f3;
+  --panel: #ffffff;
+  --ink: #15202a;
+  --muted: #5a6873;
+  --line: #d3dade;
+  --accent: #0d7357;
+  --accent-ink: #ffffff;
+  --down: #b3332b;
+  --chip: #e2e8eb;
+  --display: "Saira Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  /* Card metals stay the same in both themes: they are printed objects. */
+  --bronze-a: #e2ac78; --bronze-m: #b8723f; --bronze-b: #6f3d27; --bronze-glow: rgba(196, 82, 92, .38); --bronze-ink: #2b1a0c;
+  --silver-a: #f6f8fa; --silver-m: #cdd5dd; --silver-b: #9aa0b2; --silver-glow: rgba(150, 168, 255, .4); --silver-ink: #1d2327;
+  --gold-a: #fceca6; --gold-m: #e5ba4b; --gold-b: #b67b18; --gold-glow: rgba(255, 128, 52, .38); --gold-ink: #2a1f04;
+  --best-a: #b08af7; --best-m: #6d3fd1; --best-b: #261063; --best-glow: rgba(240, 78, 196, .42); --best-ink: #f6efff; --best-trim: #e9c46a;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f161c; --panel: #172129; --ink: #e6ecef; --muted: #96a4ad; --line: #2a3741;
+    --accent: #3cc79a; --accent-ink: #062018; --down: #ef6b5f; --chip: #22303a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f161c; --panel: #172129; --ink: #e6ecef; --muted: #96a4ad; --line: #2a3741;
+  --accent: #3cc79a; --accent-ink: #062018; --down: #ef6b5f; --chip: #22303a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 16px/1.5 var(--body); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 64px; display: grid; gap: 56px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: 0.01em; }
+h1 { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 800; text-transform: uppercase; }
+h2 { font-size: clamp(1.6rem, 3.6vw, 2.2rem); font-weight: 700; text-transform: uppercase; }
+h3 { font-size: 1.25rem; font-weight: 700; }
+p { margin: 0; max-width: 66ch; }
+.eyebrow { font: 600 0.8rem/1 var(--display); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+.lede { font-size: 1.12rem; color: var(--muted); }
+.stack { display: grid; gap: 14px; }
+.num { font-variant-numeric: tabular-nums; }
+a { color: var(--accent); }
+button, select, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: center; }
+.hero-cards { display: flex; gap: 12px; }
+.hero-cards .card { width: 150px; }
+.hero-cards .card:nth-child(2) { transform: translateY(-14px); }
+@media (max-width: 820px) { .hero { grid-template-columns: 1fr; } .hero-cards { justify-content: flex-start; } .hero-cards .card { flex: 1 1 0; width: auto; min-width: 0; max-width: 150px; } }
+
+/* Cards */
+.card {
+  --a: var(--bronze-a); --m: var(--bronze-m); --b: var(--bronze-b); --glow: var(--bronze-glow); --ci: var(--bronze-ink); --trim: transparent;
+  position: relative; aspect-ratio: 0.7; width: 100%; max-width: 100%; border: 0; padding: 0; cursor: pointer;
+  background: radial-gradient(120% 70% at 100% 100%, var(--glow), transparent 65%), linear-gradient(155deg, var(--a), var(--m) 55%, var(--b)); color: var(--ci);
+  clip-path: polygon(50% 0, 100% 6%, 100% 88%, 50% 100%, 0 88%, 0 6%);
+  font-family: var(--display); text-align: left; transition: transform .15s ease; overflow: hidden;
+}
+.card::before { content: ""; position: absolute; inset: 5px; clip-path: inherit; border: 0;
+  background: linear-gradient(170deg, rgba(255,255,255,.34), rgba(255,255,255,0) 45%); pointer-events: none; }
+.card::after { content: ""; position: absolute; inset: 9px; clip-path: polygon(50% 0, 100% 6%, 100% 88%, 50% 100%, 0 88%, 0 6%); box-shadow: inset 0 0 0 1px var(--trim); pointer-events: none; }
+.card:hover { transform: translateY(-3px); }
+.card.silver { --a: var(--silver-a); --m: var(--silver-m); --b: var(--silver-b); --glow: var(--silver-glow); --ci: var(--silver-ink); }
+.card.gold { --a: var(--gold-a); --m: var(--gold-m); --b: var(--gold-b); --glow: var(--gold-glow); --ci: var(--gold-ink); }
+.card.best { --a: var(--best-a); --m: var(--best-m); --b: var(--best-b); --glow: var(--best-glow); --ci: var(--best-ink); --trim: var(--best-trim); }
+.card .in { position: absolute; inset: 8% 10% 17%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; gap: 1.5cqi; container-type: inline-size; }
+.card .top { display: flex; justify-content: space-between; align-items: flex-start; }
+.card .ovr { font-size: 26cqi; font-weight: 800; line-height: .82; }
+.card .pos { font-size: 10cqi; font-weight: 700; letter-spacing: .04em; }
+.card .fee { font-size: 9cqi; font-weight: 700; padding: 1.5cqi 3.5cqi; border-radius: 99px; background: rgba(0,0,0,.14); white-space: nowrap; }
+.card.best .fee { background: rgba(255,255,255,.14); }
+.card .mono { align-self: center; justify-self: center; overflow: hidden; line-height: 1; font-size: 16cqi; font-weight: 800; opacity: .2; letter-spacing: -.02em; }
+.card .name { font-size: 12cqi; font-weight: 800; text-transform: uppercase; line-height: 1; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-bottom: 1px solid currentColor; padding-bottom: 2cqi; }
+.card .club { font-size: 7.5cqi; font-weight: 600; text-align: center; text-transform: uppercase; letter-spacing: .08em; opacity: .8; margin-top: 1cqi; }
+.card .stats { display: grid; grid-template-columns: 1fr 1fr; column-gap: 6cqi; row-gap: 0; font-size: 10cqi; line-height: 1.12; margin-top: 1cqi; }
+.card .stats span { display: flex; gap: 2.5cqi; justify-content: flex-start; }
+.card .stats b { font-weight: 800; min-width: 2ch; font-variant-numeric: tabular-nums; }
+.card .stats i { font-style: normal; font-weight: 600; opacity: .85; }
+.card .badge-dot { position: absolute; left: 0; right: 0; bottom: -13cqi; text-align: center; padding-inline: 10cqi; overflow: hidden; text-overflow: ellipsis; font-size: 7cqi; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .85; white-space: nowrap; }
+
+/* Anatomy */
+.anatomy { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.anatomy > div { background: var(--panel); padding: 16px 18px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.anatomy .k { font: 800 1.6rem/1 var(--display); color: var(--accent); }
+.anatomy .src { font-size: .85rem; color: var(--muted); }
+
+/* Lab */
+.lab { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 900px) { .lab { grid-template-columns: 1fr; } }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: grid; gap: 16px; min-width: 0; }
+.formula { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); }
+@media (max-width: 900px) { .formula { position: static; } }
+.tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+.tab { border: 1px solid var(--line); background: transparent; border-radius: 99px; padding: 4px 12px; cursor: pointer; font: 700 .9rem var(--display); letter-spacing: .06em; }
+.tab[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.slider { display: grid; grid-template-columns: 3.2em minmax(0, 1fr) 2.4em; gap: 10px; align-items: center; font-size: .92rem; }
+.slider label { font: 700 1rem var(--display); letter-spacing: .04em; }
+.slider output { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.toggle { display: flex; gap: 10px; align-items: flex-start; font-size: .92rem; }
+.toggle input { margin-top: 4px; accent-color: var(--accent); }
+.small { font-size: .85rem; color: var(--muted); }
+.btn { border: 1px solid var(--line); background: var(--chip); border-radius: 8px; padding: 7px 12px; cursor: pointer; font-weight: 600; }
+.btn:hover { border-color: var(--accent); }
+
+.board { display: grid; gap: 18px; min-width: 0; }
+.controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.controls select, .controls input[type="search"] { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; min-width: 0; }
+.controls input[type="search"] { flex: 1 1 180px; }
+.clubline { display: flex; gap: 8px 22px; flex-wrap: wrap; align-items: baseline; }
+.clubline .big { font: 800 2rem/1 var(--display); text-transform: uppercase; }
+.stat { display: grid; gap: 0; }
+.stat b { font: 700 1.4rem/1.1 var(--display); font-variant-numeric: tabular-nums; }
+.stat span { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(138px, 1fr)); gap: 14px; }
+@media (max-width: 420px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: .85rem; color: var(--muted); }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 5px; }
+
+/* What matters */
+.ranks { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; counter-reset: r; }
+.ranks li { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 16px; padding: 18px 0; border-top: 1px solid var(--line); counter-increment: r; }
+.ranks li::before { content: counter(r); font: 800 2.4rem/1 var(--display); color: var(--accent); }
+.ranks li > div { display: grid; gap: 6px; min-width: 0; }
+.gaps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.gaps .panel { gap: 8px; }
+.gaps h3 { color: var(--down); }
+
+/* Detail overlay */
+.overlay[hidden] { display: none; }
+.overlay { position: fixed; inset: 0; background: rgba(8, 14, 20, .55); display: grid; place-items: center; padding: 16px; z-index: 10; }
+.sheet { background: var(--panel); color: var(--ink); border-radius: 14px; max-width: 760px; width: 100%; max-height: calc(100% - 32px); overflow: auto; padding: 22px; display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 24px; position: relative; }
+@media (max-width: 620px) { .sheet { grid-template-columns: 1fr; } .sheet > .card { width: 170px; justify-self: center; } }
+.sheet .close { position: absolute; top: 10px; right: 10px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 10px; }
+.why { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.why td { padding: 6px 4px; border-top: 1px solid var(--line); vertical-align: top; }
+.why td:first-child { font: 700 1rem var(--display); width: 3em; }
+.why td:nth-child(2) { font: 800 1.1rem var(--display); width: 2.4em; font-variant-numeric: tabular-nums; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { background: var(--chip); border-radius: 99px; padding: 2px 10px; font-size: .8rem; font-weight: 600; }
+.chip.bad { color: var(--down); }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } .hero-cards .card:nth-child(2) { transform: none; } }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="stack">
+      <span class="eyebrow">Drop2Top card lab · Premier League 2007/08</span>
+      <h1>What is a 2007/08 player worth?</h1>
+      <p class="lede">Every number on these cards comes from three verified facts in the Tenaball data: appearances, goals and match results. Nothing is guessed. Pick a club, open a card to see how it was made, and drag the sliders to change what the game values.</p>
+      <p class="small">Why 2007/08: it is the season D2T's first prototype used, Derby went down with 11 points (the worst squad the game could hand you), and Ronaldo scored 31.</p>
+    </div>
+    <div class="hero-cards" id="heroCards"></div>
+  </header>
+
+  <section class="stack">
+    <span class="eyebrow">Card anatomy</span>
+    <h2>Six numbers, all from real data</h2>
+    <p>FIFA cards show pace, shooting and dribbling. We have none of that, and inventing it would break the verified-data rule. So the face stats describe what the data does know: did he score, did he matter, did he play, and how good was the team around him.</p>
+    <div class="anatomy" id="anatomy"></div>
+  </section>
+
+  <section class="stack" id="lab">
+    <span class="eyebrow">The lab</span>
+    <h2>Pick a club, then change the formula</h2>
+    <div class="lab">
+      <aside class="panel formula" aria-label="Rating formula">
+        <div class="stack" style="gap:8px">
+          <h3>What the overall rating values</h3>
+          <p class="small">Weights for each position. Every card updates as you drag.</p>
+        </div>
+        <div class="tabs" id="posTabs" role="group" aria-label="Position"></div>
+        <div class="stack" id="sliders" style="gap:10px"></div>
+        <label class="toggle"><input type="checkbox" id="attenuate" checked> <span>Scale team stats by games played <span class="small">(a 3-game Man Utd reserve does not get Man Utd's defence)</span></span></label>
+        <div class="slider"><label for="shrink">Trust</label><input type="range" id="shrink" min="0" max="15" step="1"><output id="shrinkOut"></output></div>
+        <p class="small" style="margin-top:-10px">Phantom average games added before scoring rate counts. 0 means one goal in one game is a perfect striker.</p>
+        <div class="slider"><label for="spread">Spread</label><input type="range" id="spread" min="5" max="14" step="1"><output id="spreadOut"></output></div>
+        <p class="small" style="margin-top:-10px">Rating points per standard deviation. Higher means more gold and more bronze, fewer silvers.</p>
+        <button class="btn" id="reset" type="button">Reset to draft formula</button>
+      </aside>
+
+      <div class="board">
+        <div class="controls">
+          <select id="club" aria-label="Club"></select>
+          <select id="pos" aria-label="Position filter">
+            <option value="">All positions</option><option value="GK">Goalkeepers</option><option value="DEF">Defenders</option><option value="MID">Midfielders</option><option value="FWD">Forwards</option>
+          </select>
+          <select id="sort" aria-label="Sort">
+            <option value="ovr">Sort by rating</option><option value="apps">Sort by appearances</option><option value="goals">Sort by goals</option>
+          </select>
+          <input type="search" id="q" placeholder="Find any player" aria-label="Find any player">
+        </div>
+        <div class="clubline" id="clubline"></div>
+        <div class="grid" id="grid"></div>
+        <div class="legend"><span><i style="background:linear-gradient(155deg,var(--bronze-a),var(--bronze-b))"></i>Bronze under 65</span><span><i style="background:linear-gradient(155deg,var(--silver-a),var(--silver-b))"></i>Silver 65 to 74</span><span><i style="background:linear-gradient(155deg,var(--gold-a),var(--gold-b))"></i>Gold 75 and up</span><span><i style="background:linear-gradient(155deg,var(--best-a),var(--best-b))"></i>Club's best player</span><span id="tierCount" class="num"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack">
+    <span class="eyebrow">What matters most to the player</span>
+    <h2>Five things, in order</h2>
+    <p>D2T is a rebuild: you inherit a relegated squad and climb with signings from the same season. Every screen is a comparison, so the card should answer the comparison questions in the order a player asks them.</p>
+    <ol class="ranks">
+      <li><div><h3>Overall and position, readable in half a second</h3><p>"Is he better than who I have there?" is the question behind every tap. One big number and a position, top left, exactly where FIFA trained everyone to look. If a player has to read six stats to answer it, the card has failed.</p></div></li>
+      <li><div><h3>Will he actually play?</h3><p>Appearances are our most reliable number and the one fans undervalue. A 90-rated player with 9 games is a gamble; FIT makes that visible. In a simulation it can double as injury and availability risk, which gives the stat a real job.</p></div></li>
+      <li><div><h3>One real headline number</h3><p>Derived stats are a game. "31 goals in 34" is a memory. Showing the true season figure on the card (goals for attackers, team goals conceded for defenders and keepers) is what makes a 2007/08 card feel like 2007/08, and it lets fans check us. Tenaball showed that verified numbers are the hook.</p></div></li>
+      <li><div><h3>A story badge</h3><p>Golden Boot, Ever-present, Champion, Relegated, Debut season, Moved mid-season. All computed from the data, all instantly understood. They do the job FIFA's special cards do and give the collection something to chase.</p></div></li>
+      <li><div><h3>The stats underneath</h3><p>GOL, IMP, DEF, WIN and EXP matter for tie-breaks and for the sim, but most players will only read them when two cards are close. Keep them on the card, keep them honest, and let a tap explain each one.</p></div></li>
+    </ol>
+  </section>
+
+  <section class="stack">
+    <span class="eyebrow">Problems this draft exposes</span>
+    <h2>What the data cannot do yet</h2>
+    <div class="gaps" id="gaps">
+      <div class="panel"><h3>Defenders are team ratings</h3><p class="small">We have no tackles, saves or clean sheets per player, so a defender's DEF is his club's goals conceded, scaled by his games. Wes Brown rates the same as Rio Ferdinand; a good keeper at Derby looks terrible. Per-player clean sheets would fix most of it.</p></div>
+      <div class="panel"><h3>Creators are invisible</h3><p class="small">No per-season assists, so Fabregas (a famous 2007/08) sits below Gerrard and level with Lampard. Tenaball has Opta assist boards but not every player-season. Gathering assists is the single best data job for the cards.</p></div>
+      <div class="panel"><h3>Experience starts at the Premier League</h3><p class="small">Torres spent his whole career before this at Atletico Madrid but shows EXP 66 because 2007/08 was his first PL season. Either rename it "PL experience" or add earlier careers.</p></div>
+      <div class="panel"><h3>No ages, no minutes</h3><p class="small">Apps count a 2-minute sub the same as 90. With no date of birth there is no potential, decline or youth-prospect story, which a multi-season climb will want.</p></div>
+      <div class="panel"><h3>Positions are listings</h3><p class="small">Positions come from squad lists, so Gareth Barry is a defender and Ronaldo a forward. Good enough for GK/DEF/MID/FWD, not for left back versus centre back.</p></div>
+    </div>
+  </section>
+
+  <footer class="small">Data: Tenaball <code>pl_players.csv</code> (two sources per row, goals reconciled for every club-season) and <code>pl_results.csv</code> (the 2007/08 table reproduces Man Utd 87 down to Derby 11). Ratings, fees and badges are this draft's formula and can change. Each player who moved mid-season has one card per club.</footer>
+</div>
+
+<div class="overlay" id="overlay" hidden><div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetName"></div></div>
+
+<script>
+/*ENGINE*/
+</script>
+<script>
+const DATA = /*DATA*/;
+(function () {
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const clone = o => JSON.parse(JSON.stringify(o));
+  const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  let cfg = clone(DEFAULT_CFG);
+  try { const saved = JSON.parse(store.get('d2t-card-cfg') || 'null'); if (saved && saved.weights) cfg = Object.assign(clone(DEFAULT_CFG), saved); } catch (e) {}
+  let cards = [], tabPos = 'FWD';
+  const state = { club: store.get('d2t-card-club') || 'Derby', pos: '', sort: 'ovr', q: '' };
+  const clubInfo = Object.fromEntries(DATA.clubs.map(c => [c.name, c]));
+  const G = DATA.clubs[0].p;
+  const ord = n => n + (['th', 'st', 'nd', 'rd'][(n % 100 > 10 && n % 100 < 14) ? 0 : n % 10] || 'th');
+  const STAT_NAMES = { GOL: 'Goals', IMP: 'Impact', FIT: 'Fitness', DEF: 'Defence', WIN: 'Winning', EXP: 'Experience', WAL: 'Wall', CLN: 'Clean sheets' };
+  const ANATOMY = [
+    ['GOL', 'Goals', 'Goals per appearance, with a few average games mixed in so a 1-in-1 cameo does not look like Ronaldo. Square-root scaled against the season best, so 31 in 34 still stands out from 24 in 36.', 'apps, goals'],
+    ['IMP', 'Impact', 'His share of his club\'s league goals. Kenny Miller scored 4 of Derby\'s 20: a small number that mattered a lot.', 'goals, club goals for'],
+    ['FIT', 'Fitness', 'Appearances out of 38. The most reliable number we have, and the best guide to whether he will be available.', 'apps'],
+    ['DEF', 'Defence', 'Club goals conceded per game, counted only for the share of games he played. Keepers get WAL (the same idea) and CLN (club clean sheets).', 'results, apps'],
+    ['WIN', 'Winning', 'Club points per game, again scaled by the games he played. The pedigree stat: who has lived in a winning dressing room.', 'results, apps'],
+    ['EXP', 'Experience', 'Premier League appearances up to the end of this season, on a log scale that tops out around 450.', 'every earlier season']
+  ];
+
+  function nickname(name) { const p = name.split(' '); return p.length > 1 ? p.slice(1).join(' ') : name; }
+  function initials(c) { return c.club.split(' ').map(w => w[0]).join('').slice(0, 3).toUpperCase(); }
+  function faceKeys(c) { return c.pos === 'GK' ? FACES.GK : FACES.OUT; }
+  function badgeLine(c) { return c.badges.find(b => b !== 'Relegated' && b !== 'Moved mid-season') || ''; }
+  function cardHTML(c, tag) {
+    const stats = faceKeys(c).map(k => `<span><b>${c.stats[k]}</b><i>${k}</i></span>`).join('');
+    const label = `${c.name}, ${c.pos}, ${c.club}, rated ${c.ovr}`;
+    return `<${tag || 'button'} class="card ${c.tier}" data-i="${c.i}" aria-label="${esc(label)}" ${tag ? '' : 'type="button"'}>
+      <div class="in"><div class="top"><div><div class="ovr num">${c.ovr}</div><div class="pos">${c.pos}</div></div><div class="fee">07/08</div></div>
+      <div class="mono">${esc(initials(c))}</div>
+      <div><div class="name">${esc(nickname(c.name))}</div><div class="club">${esc(c.club)}</div></div>
+      <div class="stats">${stats}</div>
+      <div class="badge-dot">${esc(badgeLine(c))}</div></div></${tag || 'button'}>`;
+  }
+  function bestXI(club) {
+    const sq = cards.filter(c => c.club === club).sort((a, b) => b.ovr - a.ovr);
+    const take = (p, n) => sq.filter(c => c.pos === p).slice(0, n);
+    const xi = [...take('GK', 1), ...take('DEF', 4), ...take('MID', 4), ...take('FWD', 2)];
+    return { xi, avg: xi.length ? xi.reduce((a, c) => a + c.ovr, 0) / xi.length : 0 };
+  }
+
+  function renderHero() {
+    const pick = (club, pos) => cards.filter(c => c.club === club && (!pos || c.pos === pos)).sort((a, b) => b.ovr - a.ovr)[0];
+    const hero = cards.find(c => c.club === 'Man Utd' && c.teamBest);
+    const list = [pick('Liverpool', 'MID'), hero, pick('Derby')].filter(Boolean);
+    $('heroCards').innerHTML = list.map(c => cardHTML(c)).join('');
+  }
+  function renderAnatomy() {
+    $('anatomy').innerHTML = ANATOMY.map(([k, n, d, s]) => `<div><span class="k">${k}</span><h3>${n}</h3><p class="small" style="color:var(--ink)">${d}</p><span class="src">From: ${s}</span></div>`).join('');
+  }
+  function renderTabs() {
+    $('posTabs').innerHTML = ['FWD', 'MID', 'DEF', 'GK'].map(p => `<button class="tab" type="button" aria-pressed="${p === tabPos}" data-p="${p}">${p}</button>`).join('');
+    const w = cfg.weights[tabPos];
+    $('sliders').innerHTML = Object.keys(w).map(k => `<div class="slider"><label for="w-${k}" title="${STAT_NAMES[k]}">${k}</label><input type="range" id="w-${k}" data-k="${k}" min="0" max="60" step="5" value="${w[k]}"><output class="num">${w[k]}</output></div>`).join('');
+  }
+  function renderClubline() {
+    const ci = clubInfo[state.club], xi = bestXI(state.club);
+    $('clubline').innerHTML = `<span class="big">${esc(state.club)}</span>
+      <span class="stat"><b>${ord(ci.pos)}</b><span>Finished</span></span>
+      <span class="stat"><b class="num">${ci.pts}</b><span>Points</span></span>
+      <span class="stat"><b class="num">${ci.gf}-${ci.ga}</b><span>Goals</span></span>
+      <span class="stat"><b class="num">${xi.avg.toFixed(1)}</b><span>Best XI rating</span></span>`;
+  }
+  function renderGrid() {
+    const q = state.q.trim().toLowerCase();
+    let list = q ? cards.filter(c => (c.name + ' ' + c.full).toLowerCase().includes(q)) : cards.filter(c => c.club === state.club);
+    if (state.pos) list = list.filter(c => c.pos === state.pos);
+    const key = state.sort;
+    list = list.slice().sort((a, b) => (b[key] - a[key]) || (b.score - a.score));
+    $('grid').innerHTML = list.slice(0, 80).map(c => cardHTML(c)).join('') || '<p class="small">No players match.</p>';
+    const t = { best: 0, gold: 0, silver: 0, bronze: 0 };
+    cards.forEach(c => t[c.tier]++);
+    $('tierCount').textContent = `Whole season: ${t.best} club's best, ${t.gold} gold, ${t.silver} silver, ${t.bronze} bronze`;
+  }
+  function whyRows(c) {
+    const r = c.raw, cl = clubInfo[c.club], sh = Math.min(c.apps, G);
+    const rows = {
+      GOL: `${c.goals} goals in ${c.apps} apps (${(c.goals / Math.max(1, c.apps)).toFixed(2)} a game; ${r.gpa.toFixed(2)} after the trust adjustment).`,
+      IMP: `${c.goals} of ${esc(c.club)}'s ${cl.gf} league goals (${Math.round(100 * r.imp)}%).`,
+      FIT: `${c.apps} of ${G} league games.`,
+      DEF: `${esc(c.club)} conceded ${cl.ga} (${(cl.ga / G).toFixed(2)} a game). Counted for his ${sh} games: ${r.ga.toFixed(2)}.`,
+      WAL: `${esc(c.club)} conceded ${cl.ga} (${(cl.ga / G).toFixed(2)} a game). Counted for his ${sh} games: ${r.ga.toFixed(2)}.`,
+      CLN: `${esc(c.club)} kept ${cl.cs} clean sheets. Counted for his ${sh} games.`,
+      WIN: `${esc(c.club)} took ${cl.pts} points (${(cl.pts / G).toFixed(2)} a game). Counted for his ${sh} games: ${r.ppg.toFixed(2)}.`,
+      EXP: `${c.prevApps + c.apps} Premier League apps by May 2008 (${c.prevApps} before this season, ${c.prevSeasons} earlier season${c.prevSeasons === 1 ? '' : 's'}).`
+    };
+    const w = cfg.weights[c.pos], tw = Object.values(w).reduce((a, b) => a + b, 0) || 1;
+    return faceKeys(c).map(k => `<tr><td>${k}</td><td>${c.stats[k]}</td><td>${rows[k]}${w[k] ? ` <span class="small">Weight ${Math.round(100 * w[k] / tw)}%.</span>` : ' <span class="small">Not in this position\'s rating.</span>'}</td></tr>`).join('');
+  }
+  function openSheet(i) {
+    const c = cards[i]; if (!c) return;
+    const cl = clubInfo[c.club];
+    const last = c.last ? `${c.last.apps} apps, ${c.last.goals} goals (${esc(c.last.clubs.join(', '))})` : 'Not in the Premier League';
+    $('sheet').innerHTML = `${cardHTML(c, 'div')}
+      <div class="stack">
+        <button class="btn close" type="button" id="closeSheet">Close</button>
+        <div class="stack" style="gap:4px"><span class="eyebrow">${esc(c.pos)} · ${esc(c.nat)}</span><h2 id="sheetName">${esc(c.full)}</h2><span class="small">${esc(c.club)}, finished ${ord(cl.pos)} with ${cl.pts} points</span></div>
+        <div class="chips">${c.badges.map(b => `<span class="chip ${b === 'Relegated' ? 'bad' : ''}">${esc(b)}</span>`).join('') || '<span class="small">No badges</span>'}</div>
+        <div class="facts">
+          <span class="stat"><b>${c.apps}</b><span>Apps</span></span>
+          <span class="stat"><b>${c.goals}</b><span>Goals</span></span>
+          <span class="stat"><b>${c.prevApps + c.apps}</b><span>PL apps total</span></span>
+        </div>
+        <p class="small"><b style="color:var(--ink)">2006/07:</b> ${last}</p>
+        <div style="overflow-x:auto"><table class="why"><tbody>${whyRows(c)}</tbody></table></div>
+        <p class="small">Overall ${c.ovr}: weighted score ${c.score.toFixed(1)}, compared with every ${c.pos} in 2007/08.</p>
+      </div>`;
+    $('overlay').hidden = false;
+    $('closeSheet').focus();
+  }
+  function closeSheet() { $('overlay').hidden = true; }
+
+  function recompute() {
+    cards = rate(DATA, cfg);
+    store.set('d2t-card-cfg', JSON.stringify(cfg));
+    $('shrink').value = cfg.shrink; $('shrinkOut').textContent = cfg.shrink;
+    $('spread').value = cfg.spread; $('spreadOut').textContent = cfg.spread;
+    $('attenuate').checked = cfg.attenuate;
+    renderHero(); renderClubline(); renderGrid();
+  }
+
+  $('club').innerHTML = DATA.clubs.map(c => `<option value="${esc(c.name)}">${ord(c.pos)} ${esc(c.name)} (${c.pts} pts)</option>`).join('');
+  if (!clubInfo[state.club]) state.club = 'Derby';
+  $('club').value = state.club;
+  $('club').addEventListener('change', e => { state.club = e.target.value; state.q = ''; $('q').value = ''; store.set('d2t-card-club', state.club); renderClubline(); renderGrid(); });
+  $('pos').addEventListener('change', e => { state.pos = e.target.value; renderGrid(); });
+  $('sort').addEventListener('change', e => { state.sort = e.target.value; renderGrid(); });
+  $('q').addEventListener('input', e => { state.q = e.target.value; renderGrid(); });
+  $('posTabs').addEventListener('click', e => { const b = e.target.closest('.tab'); if (!b) return; tabPos = b.dataset.p; renderTabs(); });
+  $('sliders').addEventListener('input', e => { const k = e.target.dataset.k; if (!k) return; cfg.weights[tabPos][k] = +e.target.value; e.target.nextElementSibling.textContent = e.target.value; recompute(); });
+  $('shrink').addEventListener('input', e => { cfg.shrink = +e.target.value; recompute(); });
+  $('spread').addEventListener('input', e => { cfg.spread = +e.target.value; recompute(); });
+  $('attenuate').addEventListener('change', e => { cfg.attenuate = e.target.checked; recompute(); });
+  $('reset').addEventListener('click', () => { cfg = clone(DEFAULT_CFG); renderTabs(); recompute(); });
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-i]');
+    if (t && !t.closest('#sheet')) { openSheet(+t.dataset.i); return; }
+    if (e.target === $('overlay') || e.target.id === 'closeSheet') closeSheet();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('overlay').hidden) closeSheet(); });
+
+  renderAnatomy(); renderTabs(); recompute();
+})();
+</script>

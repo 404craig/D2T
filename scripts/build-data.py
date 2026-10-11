@@ -134,6 +134,8 @@ def from_quantile(qs, pct):
 
 
 TIER_LEVEL = {"bronze": 0, "silver": 1, "gold": 2, "best": 3}
+_mp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "source", "moves.json")
+MOVES = json.load(open(_mp, encoding="utf-8")) if os.path.exists(_mp) else {}
 
 
 def card_stats(q, team, games, career_apps):
@@ -190,7 +192,13 @@ def main():
         fb = fallback_ratings(season, prow[season], table)
         # One card per person per season: a January mover keeps both clubs (c, c2) and combined numbers.
         people = {}
-        order = sorted(prow[season], key=lambda r: (r["player_id"], r["club"]))
+        # A January mover's clubs in the order he played for them (dates from the match line-ups,
+        # data/source/moves.json); without dates, the club with more games first.
+        mv = MOVES.get(season, {})
+        def club_order(r):
+            d = mv.get(r["player_id"], {}).get(r["club"])
+            return (r["player_id"], d[0] if d else "9999", -int(r["apps"]), r["club"])
+        order = sorted(prow[season], key=club_order)
         for r in order:
             pid = r["player_id"]
             e = ext.get((season, r["club"], pid)) or ext.get((season, r["club"], "name:" + r["player"]))
@@ -204,6 +212,8 @@ def main():
             if pid in people:
                 q = people[pid]
                 q["c2"] = cix[r["club"]]; q["a2"] = int(r["apps"]); q["g2"] = int(r["goals"])
+                d2 = mv.get(pid, {}).get(r["club"])
+                if d2: q["m2"] = d2[0]  # first game for his second club: the card shows that club from this date
                 q["a"] += int(r["apps"]); q["g"] += int(r["goals"])
                 q["r"] = max(q["r"], rating)
                 continue
@@ -214,6 +224,11 @@ def main():
                 people[pid]["lv"] = TIER_LEVEL.get(e.get("tier"), 0)
                 for k_in, k_out in (("assists", "as"), ("cleanSheets", "cs"), ("minutes", "mi"), ("stats", "st")):
                     if e.get(k_in) is not None: people[pid][k_out] = e[k_in]
+        # Purple (Craig, 11 Oct 2026): the season's top 5 players league-wide. Gold 80+, silver 70 to 79, bronze below.
+        ranked = sorted(people.values(), key=lambda q: (-q["r"], -q["a"], q["n"]))
+        top5 = {id(q) for q in ranked[:5]}
+        for q in people.values():
+            q["lv"] = 3 if id(q) in top5 else 2 if q["r"] >= 80 else 1 if q["r"] >= 70 else 0
         plist = []
         tmap = {c: t for c, t in table}
         games = 2 * (len(table) - 1)

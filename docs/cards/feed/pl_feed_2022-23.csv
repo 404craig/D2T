@@ -1,0 +1,570 @@
+season,club_feed,feed_id,name,feed_pos,appearances,goals,goal_assist,clean_sheet,wins,draws,losses,mins_played,game_started,goals_conceded,saves,yellow_card,red_card,own_goals
+2022/23,Arsenal,50234,Gabriel Magalhães,D,38,3,0,14,26,6,6,3411,38,43,0,5,0,0
+2022/23,Arsenal,13703,Aaron Ramsdale,G,38,0,0,14,26,6,6,3420,38,43,95,1,0,0
+2022/23,Arsenal,49481,Bukayo Saka,F,38,14,11,5,26,6,6,3191,37,42,0,6,0,0
+2022/23,Arsenal,14548,Ben White,D,38,2,5,9,26,6,6,3067,36,35,0,5,0,0
+2022/23,Arsenal,12136,Granit Xhaka,M,37,7,7,9,26,5,6,3004,36,35,0,5,0,0
+2022/23,Arsenal,11419,Martin Ødegaard,M,37,15,7,5,25,6,6,3143,37,38,0,4,0,0
+2022/23,Arsenal,66104,Gabriel Martinelli,F,36,15,5,6,25,6,5,2805,34,33,0,3,0,0
+2022/23,Arsenal,4936,Thomas Partey,M,33,3,0,10,23,6,4,2485,28,28,0,5,0,0
+2022/23,Arsenal,14451,Eddie Nketiah,F,30,4,1,1,19,5,6,1070,9,16,0,3,0,0
+2022/23,Arsenal,66204,William Saliba,D,27,2,1,11,21,3,3,2416,27,25,0,4,0,1
+2022/23,Arsenal,12185,Kieran Tierney,D,27,0,1,1,22,3,2,778,6,10,0,0,0,0
+2022/23,Arsenal,19620,Oleksandr Zinchenko,D,27,1,2,2,19,4,4,2132,26,28,0,3,0,0
+2022/23,Arsenal,19680,Gabriel Jesus,F,26,11,6,6,18,4,4,2074,24,23,0,6,0,0
+2022/23,Arsenal,67631,Fábio Vieira,M,22,1,2,0,14,4,4,499,3,5,0,0,0,0
+2022/23,Arsenal,115169,Takehiro Tomiyasu,D,21,0,1,1,16,2,3,653,6,11,0,2,0,0
+2022/23,Arsenal,20486,Leandro Trossard,F,20,1,10,0,11,4,5,929,10,15,0,0,0,0
+2022/23,Arsenal,5682,Jorginho,M,14,0,1,3,8,1,5,852,9,11,0,0,0,0
+2022/23,Arsenal,11575,Rob Holding,D,14,1,0,0,10,3,1,562,6,13,0,0,0,0
+2022/23,Arsenal,14445,Emile Smith Rowe,M,12,0,2,0,9,0,3,163,0,5,0,0,0,0
+2022/23,Arsenal,14450,Reiss Nelson,F,11,3,2,0,7,2,2,202,0,3,0,0,0,0
+2022/23,Arsenal,109478,Jakub Kiwior,D,7,1,0,1,4,1,2,427,5,6,0,0,0,0
+2022/23,Arsenal,31861,Albert Sambi Lokonga,M,6,0,0,0,5,0,1,196,2,3,0,0,0,0
+2022/23,Arsenal,5239,Mohamed Elneny,M,5,0,0,0,5,0,0,111,1,2,0,0,0,0
+2022/23,Arsenal,11347,Cédric Soares,D,2,0,0,0,2,0,0,28,0,0,0,0,0,0
+2022/23,Arsenal,114566,Ethan Nwaneri,M,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2022/23,Arsenal,125826,Marquinhos,F,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2022/23,Aston Villa,26408,Emiliano Buendía,M,38,5,2,3,18,7,13,2421,27,34,0,0,0,0
+2022/23,Aston Villa,13274,Ezri Konsa,D,38,0,0,11,18,7,13,3323,37,45,0,6,0,0
+2022/23,Aston Villa,24626,Douglas Luiz,M,37,6,6,8,17,7,13,2933,33,33,0,6,1,0
+2022/23,Aston Villa,8658,Ollie Watkins,F,37,15,6,9,17,7,13,3134,36,40,0,4,0,0
+2022/23,Aston Villa,4245,Emiliano Martínez,G,36,0,0,11,17,7,12,3140,36,38,98,7,0,1
+2022/23,Aston Villa,8900,Tyrone Mings,D,35,1,2,12,18,7,10,3150,35,40,0,7,0,1
+2022/23,Aston Villa,19888,Jacob Ramsey,M,35,6,7,5,17,6,12,2644,31,33,0,5,0,1
+2022/23,Aston Villa,51423,John McGinn,M,34,1,3,8,16,6,12,2695,30,31,0,7,0,0
+2022/23,Aston Villa,20489,Leon Bailey,F,33,4,4,0,16,5,12,1983,26,32,0,4,0,0
+2022/23,Aston Villa,3062,Ashley Young,D,29,1,0,8,14,7,8,2038,23,28,0,7,0,0
+2022/23,Aston Villa,5758,Lucas Digne,D,28,1,0,2,12,5,11,1499,18,25,0,5,0,1
+2022/23,Aston Villa,13344,Matty Cash,D,26,0,1,3,11,5,10,1820,20,29,0,4,0,0
+2022/23,Aston Villa,25067,Boubacar Kamara,M,24,0,1,3,12,3,9,1778,21,30,0,4,0,0
+2022/23,Aston Villa,4525,Philippe Coutinho,M,20,1,0,1,6,4,10,783,7,9,0,3,0,0
+2022/23,Aston Villa,5866,Leander Dendoncker,M,20,0,0,2,9,4,7,688,7,11,0,0,0,0
+2022/23,Aston Villa,37221,Álex Moreno,D,19,0,3,4,11,3,5,1335,14,10,0,3,0,0
+2022/23,Aston Villa,8245,Danny Ings,F,18,6,0,1,7,3,8,819,8,13,0,3,0,0
+2022/23,Aston Villa,4620,Calum Chambers,D,14,0,0,0,9,2,3,345,2,4,0,2,0,0
+2022/23,Aston Villa,134048,Jhon Durán,F,12,0,0,0,5,2,5,126,0,4,0,1,0,0
+2022/23,Aston Villa,10394,Bertrand Traoré,F,8,2,0,0,4,2,2,226,1,1,0,1,0,0
+2022/23,Aston Villa,25281,Cameron Archer,F,6,0,0,0,2,1,3,44,0,1,0,0,0,0
+2022/23,Aston Villa,11224,Robin Olsen,G,4,0,0,1,1,1,2,280,2,8,11,0,0,0
+2022/23,Aston Villa,12303,Ludwig Augustinsson,D,3,0,0,0,1,2,0,76,1,0,0,1,0,0
+2022/23,Aston Villa,19589,Jan Bednarek,D,3,0,0,0,1,1,1,98,1,1,0,0,0,0
+2022/23,Aston Villa,12994,Diego Carlos,D,3,0,0,0,1,0,2,204,2,3,0,0,0,0
+2022/23,Aston Villa,25068,Morgan Sanson,M,2,0,0,0,2,0,0,10,0,1,0,0,0,0
+2022/23,Bournemouth,37776,Jefferson Lerma,M,37,5,0,6,11,5,20,3165,37,67,0,7,0,1
+2022/23,Bournemouth,3512,Adam Smith,D,37,0,1,6,11,6,20,2948,34,58,0,11,0,0
+2022/23,Bournemouth,8882,Philip Billing,M,36,7,1,4,11,5,20,2783,34,54,0,5,0,0
+2022/23,Bournemouth,10443,Dominic Solanke,F,33,6,7,4,11,5,17,2866,32,52,0,2,0,0
+2022/23,Bournemouth,15572,Ryan Christie,M,32,1,1,2,10,4,17,1753,22,35,0,2,0,0
+2022/23,Bournemouth,54989,Marcos Senesi,D,31,2,0,4,8,4,19,2495,29,55,0,7,0,0
+2022/23,Bournemouth,50460,Jaidon Anthony,F,30,2,1,0,8,4,17,1246,11,29,0,2,0,0
+2022/23,Bournemouth,10766,Lewis Cook,M,28,0,2,3,7,4,17,1713,18,39,0,4,0,0
+2022/23,Bournemouth,10076,Kieffer Moore,F,27,4,0,1,6,4,16,1275,12,34,0,1,0,0
+2022/23,Bournemouth,6593,Neto,G,27,0,0,6,9,6,12,2295,27,39,100,4,0,0
+2022/23,Bournemouth,14063,Chris Mepham,D,26,0,0,5,7,5,14,2198,24,52,0,7,0,2
+2022/23,Bournemouth,21585,Lloyd Kelly,D,23,0,2,5,8,2,13,1951,23,38,0,3,0,0
+2022/23,Bournemouth,14846,Marcus Tavernier,M,23,5,4,2,9,5,9,1749,19,37,0,1,0,0
+2022/23,Bournemouth,10580,Joe Rothwell,M,20,0,1,2,7,1,12,1018,12,15,0,2,0,0
+2022/23,Bournemouth,133890,Dango Ouattara,F,19,1,3,1,7,2,10,1244,15,23,0,1,0,0
+2022/23,Bournemouth,49144,Jordan Zemura,D,19,0,1,3,4,5,9,1366,17,31,0,1,0,0
+2022/23,Bournemouth,4612,Jack Stephens,D,15,0,0,4,6,3,6,1082,13,22,0,3,0,0
+2022/23,Bournemouth,3958,Ryan Fredericks,D,12,0,0,0,3,3,6,531,5,11,0,1,0,0
+2022/23,Bournemouth,50453,Mark Travers,G,12,0,0,2,2,0,10,1035,11,32,36,0,0,0
+2022/23,Bournemouth,63208,Matías Viña,D,12,2,0,1,5,0,7,455,5,10,0,1,0,0
+2022/23,Bournemouth,25474,Antoine Semenyo,F,11,1,0,0,5,1,5,251,2,6,0,0,0,0
+2022/23,Bournemouth,10881,Jack Stacey,D,10,0,0,0,3,2,5,293,3,10,0,2,0,0
+2022/23,Bournemouth,10566,Ben Pearson,M,7,0,0,0,2,1,4,284,3,10,0,1,0,0
+2022/23,Bournemouth,63553,Hamed Traoré,M,7,0,0,0,2,1,4,429,5,8,0,0,0,0
+2022/23,Bournemouth,13706,David Brooks,M,6,0,0,0,0,0,6,171,2,4,0,1,0,0
+2022/23,Bournemouth,22561,Siriki Dembélé,M,6,0,0,0,0,1,5,102,0,2,0,0,0,0
+2022/23,Bournemouth,67546,Illia Zabarnyi,D,5,0,0,0,1,0,4,297,3,5,0,0,0,0
+2022/23,Bournemouth,3766,Junior Stanislas,M,4,0,0,0,1,0,3,58,0,1,0,0,0,0
+2022/23,Bournemouth,7887,Jamal Lowe,F,2,0,0,0,0,0,2,11,0,0,0,0,0,0
+2022/23,Bournemouth,117800,Owen Bevan,D,1,0,0,0,0,0,1,8,0,1,0,0,0,0
+2022/23,Bournemouth,32388,Emiliano Marcondes,M,1,0,0,0,0,0,1,8,0,1,0,0,0,0
+2022/23,Brentford,66360,Bryan Mbeumo,F,38,9,8,1,15,14,9,2929,36,39,0,5,0,0
+2022/23,Brentford,7975,David Raya,G,38,0,0,12,15,14,9,3420,38,46,154,1,0,1
+2022/23,Brentford,117497,Yoane Wissa,F,38,7,3,0,15,14,9,1599,16,17,0,3,0,0
+2022/23,Brentford,10947,Rico Henry,D,37,0,2,9,14,14,9,3242,37,46,0,4,0,0
+2022/23,Brentford,49726,Mathias Jensen,M,37,5,6,3,14,14,9,2829,37,40,0,5,0,0
+2022/23,Brentford,3909,Ben Mee,D,37,3,2,12,15,14,8,3272,37,40,0,2,0,0
+2022/23,Brentford,14457,Josh Dasilva,M,36,4,2,0,13,14,9,1381,14,17,0,1,0,0
+2022/23,Brentford,23194,Vitaly Janelt,M,35,3,1,6,15,12,8,2207,24,28,0,3,0,0
+2022/23,Brentford,9246,Ivan Toney,F,33,20,4,7,11,13,9,2953,33,42,0,9,0,0
+2022/23,Brentford,22043,Ethan Pinnock,D,30,3,0,10,13,10,7,2700,30,34,0,0,0,1
+2022/23,Brentford,49731,Mikkel Damsgaard,M,26,0,0,0,10,9,7,981,9,14,0,4,0,0
+2022/23,Brentford,115166,Aaron Hickey,D,26,0,1,1,10,8,8,1929,23,30,0,7,0,0
+2022/23,Brentford,24773,Shandon Baptiste,M,23,0,1,0,8,7,8,603,4,6,0,1,1,0
+2022/23,Brentford,42331,Christian Nørgaard,M,22,1,3,5,8,9,5,1770,21,23,0,6,0,0
+2022/23,Brentford,108612,Frank Onyeka,M,21,0,2,0,10,6,5,843,8,11,0,0,0,0
+2022/23,Brentford,21297,Mads Roerslev,D,20,0,0,5,12,6,2,1102,12,12,0,0,0,0
+2022/23,Brentford,7103,Zanka,D,18,0,0,4,9,6,3,1098,11,15,0,2,0,1
+2022/23,Brentford,127594,Kevin Schade,M,18,0,1,0,9,4,5,728,7,7,0,2,0,0
+2022/23,Brentford,25094,Saman Ghoddos,F,15,0,0,0,6,5,4,126,0,5,0,0,0,0
+2022/23,Brentford,12847,Pontus Jansson,D,12,1,0,1,4,4,4,725,9,14,0,0,0,0
+2022/23,Brentford,24369,Keane Lewis-Potter,F,10,0,1,0,3,6,1,317,3,4,0,0,0,0
+2022/23,Brentford,20113,Kristoffer Ajer,D,9,0,0,2,2,4,3,766,9,14,0,0,0,0
+2022/23,Brentford,13225,Sergi Canós,F,5,0,0,0,2,2,1,73,0,2,0,0,0,0
+2022/23,Brentford,25540,Mads Bech,D,4,0,0,0,2,2,0,19,0,0,0,0,0,0
+2022/23,Brentford,49461,Halil Dervisoglu,F,1,0,0,0,0,1,0,7,0,0,0,0,0,0
+2022/23,Brighton & Hove Albion,112203,Moisés Caicedo,M,37,1,1,9,18,8,11,3140,34,47,0,10,0,0
+2022/23,Brighton & Hove Albion,22542,Pascal Groß,M,37,9,8,10,17,8,12,3245,37,51,0,7,0,1
+2022/23,Brighton & Hove Albion,8163,Lewis Dunk,D,36,1,0,11,18,7,11,3239,36,50,0,4,0,1
+2022/23,Brighton & Hove Albion,31904,Pervis Estupiñán,D,35,1,5,7,17,6,12,2682,31,43,0,4,0,0
+2022/23,Brighton & Hove Albion,63633,Alexis Mac Allister,M,35,10,2,7,16,8,11,2886,31,45,0,8,0,1
+2022/23,Brighton & Hove Albion,8171,Solly March,M,33,7,7,3,16,7,10,2724,31,40,0,2,0,0
+2022/23,Brighton & Hove Albion,117732,Kaoru Mitoma,F,33,7,5,3,16,7,10,2315,24,35,0,0,0,0
+2022/23,Brighton & Hove Albion,4874,Joël Veltman,D,31,1,1,6,15,8,8,2194,25,29,0,6,0,0
+2022/23,Brighton & Hove Albion,3452,Danny Welbeck,F,31,6,3,3,15,7,9,1856,21,28,0,0,0,0
+2022/23,Brighton & Hove Albion,9426,Adam Webster,D,27,0,0,8,14,5,8,1988,23,27,0,2,0,1
+2022/23,Brighton & Hove Albion,14538,Robert Sánchez,G,23,0,0,6,11,5,7,2070,23,30,48,2,0,0
+2022/23,Brighton & Hove Albion,114957,Deniz Undav,F,22,5,0,0,9,4,9,619,6,9,0,2,0,1
+2022/23,Brighton & Hove Albion,125827,Julio Enciso,M,20,4,2,1,11,2,7,800,7,12,0,1,0,0
+2022/23,Brighton & Hove Albion,23704,Tariq Lamptey,D,20,0,0,0,9,5,6,441,3,7,0,1,0,0
+2022/23,Brighton & Hove Albion,71590,Evan Ferguson,F,19,6,2,0,9,4,6,951,10,12,0,1,0,0
+2022/23,Brighton & Hove Albion,51229,Levi Colwill,D,17,0,2,3,9,2,6,1220,13,21,0,1,0,0
+2022/23,Brighton & Hove Albion,4618,Adam Lallana,M,16,2,1,0,7,4,5,728,12,10,0,0,0,0
+2022/23,Brighton & Hove Albion,20486,Leandro Trossard,F,16,7,2,1,7,3,6,1325,16,23,0,1,0,0
+2022/23,Brighton & Hove Albion,3457,Jason Steele,G,15,0,1,6,7,3,5,1350,15,23,37,1,0,1
+2022/23,Brighton & Hove Albion,24221,Billy Gilmour,M,14,0,1,1,8,1,5,508,7,8,0,1,0,0
+2022/23,Brighton & Hove Albion,133430,Facundo Buonanotte,M,13,1,1,0,6,2,5,563,6,12,0,2,0,0
+2022/23,Brighton & Hove Albion,68857,Jeremy Sarmiento,F,9,0,1,0,7,0,2,169,1,2,0,1,0,0
+2022/23,Brighton & Hove Albion,76090,Jan Paul van Hecke,D,8,0,0,0,3,3,2,291,3,7,0,2,0,0
+2022/23,Brighton & Hove Albion,25467,Enock Mwepu,M,6,0,1,0,4,1,1,211,2,4,0,0,0,0
+2022/23,Brighton & Hove Albion,134333,Yasin Ayari,M,3,0,0,0,2,0,1,65,1,2,0,0,0,0
+2022/23,Brighton & Hove Albion,33342,Odeluga Offiah,D,2,0,0,0,0,0,2,23,0,3,0,0,0,0
+2022/23,Brighton & Hove Albion,112739,Jack Hinshelwood,M,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+2022/23,Brighton & Hove Albion,92706,Andrew Moran,M,1,0,0,0,1,0,0,11,0,1,0,0,0,0
+2022/23,Brighton & Hove Albion,92610,Cameron Peupion,M,1,0,0,0,0,0,1,5,0,2,0,0,0,0
+2022/23,Chelsea,21887,Conor Gallagher,M,35,3,1,3,11,10,14,1615,18,22,0,9,1,0
+2022/23,Chelsea,20810,Kai Havertz,F,35,7,1,4,11,10,14,2578,30,31,0,5,0,0
+2022/23,Chelsea,11373,Kepa Arrizabalaga,G,29,0,0,9,8,9,12,2565,29,33,91,1,0,0
+2022/23,Chelsea,4316,Raheem Sterling,F,28,6,3,1,8,8,12,1904,23,27,0,4,0,0
+2022/23,Chelsea,5754,Thiago Silva,D,27,0,2,6,8,8,11,2352,26,32,0,2,0,0
+2022/23,Chelsea,12520,Mateo Kovacic,M,27,1,2,1,8,7,12,1705,17,25,0,8,0,0
+2022/23,Chelsea,4496,César Azpilicueta,D,25,0,0,3,7,7,11,1522,16,21,0,3,0,1
+2022/23,Chelsea,14575,Trevoh Chalobah,D,25,0,0,4,8,6,11,1603,18,24,0,4,0,1
+2022/23,Chelsea,5179,Ruben Loftus-Cheek,M,25,0,1,2,9,7,9,1542,19,23,0,1,0,1
+2022/23,Chelsea,27277,Marc Cucurella,D,24,0,2,4,7,8,9,1676,21,20,0,4,0,0
+2022/23,Chelsea,14580,Mason Mount,M,24,3,2,3,8,7,9,1656,20,21,0,4,0,0
+2022/23,Chelsea,15559,Christian Pulisic,M,24,1,1,0,7,6,11,813,8,11,0,1,0,0
+2022/23,Chelsea,13491,Ben Chilwell,D,23,2,2,2,8,5,10,1408,15,19,0,3,0,0
+2022/23,Chelsea,6709,Kalidou Koulibaly,D,23,2,1,5,8,5,10,1800,20,22,0,5,1,0
+2022/23,Chelsea,63741,Enzo Fernández,M,18,0,2,2,3,6,9,1551,18,25,0,3,0,0
+2022/23,Chelsea,5682,Jorginho,M,18,2,0,5,8,5,5,1281,15,12,0,4,0,0
+2022/23,Chelsea,20750,Hakim Ziyech,M,18,0,3,1,3,5,10,653,6,7,0,1,0,0
+2022/23,Chelsea,50856,João Félix,F,16,4,0,0,3,5,8,943,11,15,0,1,1,0
+2022/23,Chelsea,14571,Reece James,D,16,1,1,2,6,5,5,1244,14,17,0,4,0,0
+2022/23,Chelsea,5110,Pierre-Emerick Aubameyang,F,15,1,0,0,4,4,7,550,5,8,0,1,0,0
+2022/23,Chelsea,66284,Wesley Fofana,D,15,1,0,2,4,3,8,1187,12,18,0,3,0,0
+2022/23,Chelsea,53991,Mykhailo Mudryk,M,15,0,2,0,2,4,9,655,7,10,0,1,0,0
+2022/23,Chelsea,64140,Carney Chukwuemeka,M,14,0,0,0,4,6,4,344,2,7,0,0,0,0
+2022/23,Chelsea,31442,Armando Broja,F,12,1,0,0,5,3,4,287,2,5,0,0,0,0
+2022/23,Chelsea,67407,Noni Madueke,F,12,1,0,0,2,4,6,646,7,13,0,0,0,0
+2022/23,Chelsea,53612,Benoît Badiashile,D,11,1,0,4,4,5,2,904,10,9,0,2,0,0
+2022/23,Chelsea,54889,Édouard Mendy,G,10,0,0,1,3,2,5,855,9,14,25,1,0,0
+2022/23,Chelsea,108922,Lewis Hall,D,9,0,0,0,1,3,5,658,8,11,0,1,0,0
+2022/23,Chelsea,13492,N'Golo Kanté,M,7,0,1,1,2,2,3,520,6,7,0,1,0,0
+2022/23,Chelsea,20268,Denis Zakaria,M,7,0,0,0,2,1,4,413,5,5,0,0,0,0
+2022/23,Chelsea,112581,Datro Fofana,F,3,0,0,0,0,1,2,68,1,1,0,0,0,0
+2022/23,Chelsea,98300,Omari Hutchinson,F,1,0,0,0,0,0,1,22,0,0,0,0,0,0
+2022/23,Crystal Palace,5595,Jordan Ayew,F,38,4,3,6,11,12,15,2720,31,41,0,5,0,0
+2022/23,Crystal Palace,21584,Eberechi Eze,M,38,10,4,4,11,12,15,2642,30,35,0,3,0,0
+2022/23,Crystal Palace,14569,Marc Guéhi,D,37,1,0,8,11,12,14,3329,37,46,0,8,0,1
+2022/23,Crystal Palace,32989,Michael Olise,M,37,2,11,4,11,12,14,2756,31,38,0,2,0,0
+2022/23,Crystal Palace,24334,Tyrick Mitchell,D,36,0,2,6,10,12,14,2896,34,38,0,5,1,0
+2022/23,Crystal Palace,16788,Odsonne Édouard,F,35,5,2,0,10,12,13,1805,20,25,0,3,0,0
+2022/23,Crystal Palace,126670,Cheick Doucouré,M,34,0,3,4,10,12,12,2784,34,41,0,9,1,0
+2022/23,Crystal Palace,8980,Jeffrey Schlupp,M,34,3,1,4,10,10,14,2546,30,38,0,7,0,0
+2022/23,Crystal Palace,26151,Joachim Andersen,D,32,1,0,8,11,9,12,2783,32,37,0,8,0,2
+2022/23,Crystal Palace,20874,Jean-Philippe Mateta,F,29,2,0,0,7,11,11,754,6,10,0,3,0,0
+2022/23,Crystal Palace,3929,Joel Ward,D,28,1,0,7,10,8,10,2255,24,35,0,6,0,0
+2022/23,Crystal Palace,7548,Vicente Guaita,G,27,0,0,6,7,9,11,2430,27,34,85,1,0,0
+2022/23,Crystal Palace,8589,Will Hughes,M,27,1,1,0,8,7,12,827,7,11,0,4,0,0
+2022/23,Crystal Palace,4539,Wilfried Zaha,F,27,7,2,3,9,6,12,2294,27,34,0,5,0,0
+2022/23,Crystal Palace,4604,Nathaniel Clyne,D,22,0,0,2,3,8,11,1642,19,23,0,3,0,0
+2022/23,Crystal Palace,5859,Luka Milivojevic,M,18,0,0,1,7,5,6,504,5,7,0,2,0,0
+2022/23,Crystal Palace,4331,Sam Johnstone,G,9,0,0,3,4,3,2,810,9,10,26,1,0,0
+2022/23,Crystal Palace,50842,Chris Richards,D,9,0,0,1,1,4,4,443,4,11,0,0,0,0
+2022/23,Crystal Palace,31861,Albert Sambi Lokonga,M,9,0,0,1,1,3,5,536,6,5,0,2,0,0
+2022/23,Crystal Palace,68086,Naouirou Ahamada,M,8,0,0,0,0,3,5,87,0,2,0,1,0,0
+2022/23,Crystal Palace,4878,Jairo Riedewald,M,6,0,0,0,3,2,1,60,0,0,0,0,0,0
+2022/23,Crystal Palace,3517,James Tomkins,D,6,1,0,0,1,1,4,337,3,8,0,1,1,0
+2022/23,Crystal Palace,4224,James McArthur,M,4,0,0,0,2,1,1,51,0,0,0,0,0,0
+2022/23,Crystal Palace,49485,Malcolm Ebiowei,F,3,0,0,0,0,0,3,31,0,1,0,0,0,0
+2022/23,Crystal Palace,107822,Joe Whitworth,G,2,0,0,0,0,0,2,180,2,5,5,0,0,0
+2022/23,Crystal Palace,112701,David Ozoh,M,1,0,0,0,0,1,0,1,0,0,0,0,0,0
+2022/23,Everton,4717,Alex Iwobi,F,38,2,7,8,8,12,18,3381,38,56,0,2,0,0
+2022/23,Everton,8143,James Tarkowski,D,38,1,1,9,8,12,18,3420,38,57,0,6,0,0
+2022/23,Everton,4640,Jordan Pickford,G,37,0,1,8,7,12,18,3330,37,57,124,6,0,0
+2022/23,Everton,24797,Dwight McNeil,F,36,7,3,5,8,11,17,2501,28,46,0,5,0,0
+2022/23,Everton,24983,Vitalii Mykolenko,D,34,0,0,7,7,10,17,2656,30,46,0,4,0,0
+2022/23,Everton,7946,Demarai Gray,F,33,4,1,1,5,11,17,2511,27,39,0,3,0,0
+2022/23,Everton,12582,Idrissa Gueye,M,33,0,1,6,8,9,16,2592,32,45,0,7,0,0
+2022/23,Everton,108096,Amadou Onana,M,33,1,2,5,8,10,15,2496,29,37,0,9,0,0
+2022/23,Everton,16256,Neal Maupay,F,27,1,0,1,7,6,14,1115,11,19,0,4,0,0
+2022/23,Everton,13823,Abdoulaye Doucouré,M,25,5,2,4,8,6,11,1528,17,26,0,6,1,0
+2022/23,Everton,4136,Conor Coady,D,24,1,1,7,6,6,12,2096,23,28,0,2,0,0
+2022/23,Everton,3600,Séamus Coleman,D,23,1,0,4,5,6,12,1662,20,25,0,1,0,0
+2022/23,Everton,13389,Tom Davies,M,19,0,0,0,4,7,8,529,4,9,0,3,0,0
+2022/23,Everton,74585,Nathan Patterson,D,19,0,0,2,2,8,9,1277,14,22,0,3,0,0
+2022/23,Everton,9576,Dominic Calvert-Lewin,F,17,2,1,1,3,5,9,1172,15,22,0,3,0,0
+2022/23,Everton,23841,James Garner,M,16,0,1,2,3,5,8,796,7,13,0,3,0,0
+2022/23,Everton,23747,Anthony Gordon,F,16,3,0,0,3,5,8,1096,12,13,0,6,0,0
+2022/23,Everton,10968,Ben Godfrey,D,13,0,1,1,1,5,7,801,10,18,0,2,0,0
+2022/23,Everton,4333,Michael Keane,D,12,1,2,2,1,7,4,983,10,22,0,0,0,0
+2022/23,Everton,19925,Ellis Simms,F,11,1,0,0,2,2,7,221,2,4,0,0,0,0
+2022/23,Everton,10564,Mason Holgate,D,8,0,0,0,0,4,4,508,5,9,0,1,1,0
+2022/23,Everton,32923,Yerry Mina,D,7,2,0,1,2,1,4,596,7,9,0,2,0,0
+2022/23,Everton,6030,Salomón Rondón,F,7,0,0,0,2,2,3,104,1,2,0,0,0,0
+2022/23,Everton,9167,Dele Alli,M,2,0,0,0,0,0,2,38,0,1,0,0,0,0
+2022/23,Everton,51519,Thomas Cannon,F,2,0,0,0,0,0,2,23,0,1,0,0,0,0
+2022/23,Everton,20171,Rúben Vinagre,D,2,0,0,0,0,1,1,24,0,0,0,0,0,0
+2022/23,Everton,2537,Asmir Begovic,G,1,0,0,1,1,0,0,90,1,0,4,0,0,0
+2022/23,Everton,70216,Isaac Price,M,1,0,0,0,0,0,1,32,0,0,0,1,0,0
+2022/23,Fulham,4818,Harrison Reed,M,37,3,4,7,15,7,15,2875,35,44,0,5,0,1
+2022/23,Fulham,8192,Bobby De Cordova-Reid,F,36,4,1,2,15,7,14,2480,29,40,0,8,0,0
+2022/23,Fulham,4985,Bernd Leno,G,36,0,0,8,15,5,16,3240,36,51,144,3,0,0
+2022/23,Fulham,19858,João Palhinha,M,35,3,0,7,15,7,13,3113,35,43,0,14,0,1
+2022/23,Fulham,14624,Antonee Robinson,D,35,0,1,9,14,7,14,3089,35,44,0,8,0,0
+2022/23,Fulham,3894,Tom Cairney,M,33,2,0,0,13,6,14,971,6,13,0,2,0,0
+2022/23,Fulham,10476,Andreas Pereira,M,33,4,6,0,13,6,14,2714,33,40,0,8,0,0
+2022/23,Fulham,4276,Tim Ream,D,33,1,0,8,13,6,14,2899,33,44,0,2,0,0
+2022/23,Fulham,4880,Kenny Tete,D,31,1,5,5,13,6,12,2573,29,36,0,8,0,0
+2022/23,Fulham,13961,Harry Wilson,F,29,2,3,0,11,5,13,1097,13,15,0,1,0,0
+2022/23,Fulham,50501,Carlos Vinícius,F,28,5,2,0,11,3,14,1101,11,20,0,3,0,0
+2022/23,Fulham,4748,Willian,F,27,5,5,2,13,5,9,2142,25,22,0,2,0,0
+2022/23,Fulham,13549,Tosin Adarabioyo,D,25,1,0,3,11,3,11,2084,23,39,0,4,0,0
+2022/23,Fulham,49884,Issa Diop,D,25,1,0,7,9,5,11,2009,21,26,0,2,0,0
+2022/23,Fulham,5879,Aleksandar Mitrovic,F,24,14,1,3,10,6,8,2011,23,30,0,7,0,0
+2022/23,Fulham,13797,Daniel James,M,20,2,1,0,6,1,13,610,5,16,0,0,0,0
+2022/23,Fulham,62934,Manor Solomon,F,19,4,0,0,6,4,9,562,4,11,0,0,0,0
+2022/23,Fulham,20178,Neeskens Kebano,M,17,0,3,0,7,4,6,766,9,10,0,0,0,0
+2022/23,Fulham,16044,Sasa Lukic,M,12,0,0,0,5,1,6,409,4,10,0,1,0,0
+2022/23,Fulham,11347,Cédric Soares,D,6,0,0,0,1,0,5,196,2,3,0,0,0,0
+2022/23,Fulham,4706,Kevin Mbabu,D,6,0,1,0,1,1,4,141,1,7,0,1,0,0
+2022/23,Fulham,3601,Shane Duffy,D,5,0,0,0,3,1,1,17,0,4,0,0,0,0
+2022/23,Fulham,4105,Nathaniel Chalobah,M,4,0,0,0,2,0,2,12,1,0,0,0,1,0
+2022/23,Fulham,107809,Luke Harris,M,3,0,0,0,2,0,1,10,0,1,0,0,0,0
+2022/23,Fulham,11248,Layvin Kurzawa,D,3,0,0,0,0,1,2,136,2,4,0,1,0,0
+2022/23,Fulham,66563,Jay Stansfield,F,3,0,0,0,1,1,1,86,1,2,0,0,0,0
+2022/23,Fulham,7490,Josh Onomah,M,2,0,0,0,0,0,2,14,0,2,0,0,0,0
+2022/23,Fulham,10727,Marek Rodák,G,2,0,0,1,0,2,0,180,2,2,2,0,0,0
+2022/23,Fulham,24704,Tyrese Francois,M,1,0,0,0,0,1,0,1,0,0,0,0,0,0
+2022/23,Leeds United,63289,Brenden Aaronson,M,36,1,3,1,7,10,19,2384,28,58,0,2,0,0
+2022/23,Leeds United,33135,Jack Harrison,F,36,5,7,2,7,10,19,2725,34,55,0,2,0,0
+2022/23,Leeds United,26220,Robin Koch,D,36,0,0,5,7,10,19,3177,36,74,0,7,0,1
+2022/23,Leeds United,66378,Illan Meslier,G,34,0,0,5,7,9,18,3060,34,67,94,3,0,0
+2022/23,Leeds United,22656,Marc Roca,M,32,1,2,0,7,8,17,2329,29,60,0,7,0,0
+2022/23,Leeds United,4095,Rodrigo,F,31,13,1,0,6,9,16,1943,23,43,0,6,0,0
+2022/23,Leeds United,3314,Luke Ayling,D,29,2,1,2,5,8,16,2049,22,48,0,3,0,0
+2022/23,Leeds United,33124,Pascal Struijk,D,29,2,1,4,6,8,15,2205,26,52,0,5,0,0
+2022/23,Leeds United,4291,Patrick Bamford,F,28,4,2,0,5,8,15,1521,18,31,0,3,0,0
+2022/23,Leeds United,65961,Crysencio Summerville,F,28,4,2,0,6,6,16,1416,12,38,0,4,0,0
+2022/23,Leeds United,15702,Rasmus Kristensen,D,26,3,1,1,6,5,15,1961,21,53,0,4,0,0
+2022/23,Leeds United,42894,Tyler Adams,M,24,0,0,5,5,8,11,2157,24,36,0,4,1,0
+2022/23,Leeds United,68676,Wilfried Gnonto,F,24,2,4,1,4,6,14,1348,14,28,0,7,0,0
+2022/23,Leeds United,33046,Junior Firpo,D,19,1,1,1,3,5,11,1367,14,33,0,5,1,0
+2022/23,Leeds United,22740,Weston McKennie,M,19,0,1,1,3,4,12,1439,16,35,0,7,0,0
+2022/23,Leeds United,50498,Luis Sinisterra,F,19,5,0,0,2,7,10,875,13,23,0,1,1,0
+2022/23,Leeds United,3622,Liam Cooper,D,18,1,0,2,2,4,12,1427,16,32,0,5,0,0
+2022/23,Leeds United,23911,Sam Greenwood,M,18,1,2,0,3,4,11,412,3,11,0,1,0,0
+2022/23,Leeds United,16130,Max Wöber,D,16,0,0,2,2,4,10,1263,14,23,0,3,0,0
+2022/23,Leeds United,51754,Joe Gelhardt,F,15,0,2,0,3,3,9,201,1,3,0,1,0,0
+2022/23,Leeds United,13089,Mateusz Klich,M,14,0,0,0,2,5,7,266,0,5,0,2,0,0
+2022/23,Leeds United,3877,Adam Forshaw,M,12,0,0,0,1,3,8,477,5,13,0,0,0,0
+2022/23,Leeds United,51830,Georginio Rutter,F,11,0,1,0,1,2,8,264,1,9,0,0,0,0
+2022/23,Leeds United,5790,Diego Llorente,D,8,0,0,1,2,2,4,648,7,12,0,1,0,0
+2022/23,Leeds United,13797,Daniel James,M,4,0,0,0,1,2,1,199,2,2,0,0,0,0
+2022/23,Leeds United,4696,Joel Robles,G,4,0,0,0,0,1,3,360,4,11,16,1,0,0
+2022/23,Leeds United,122133,Mateo Joseph,F,3,0,0,0,0,1,2,24,0,0,0,0,0,0
+2022/23,Leeds United,24811,Cody Drameh,D,1,0,0,0,0,0,1,70,1,3,0,0,0,0
+2022/23,Leeds United,64461,Darko Gyabi,M,1,0,0,0,0,0,1,7,0,0,0,0,0,0
+2022/23,Leicester City,6712,Timothy Castagne,D,37,2,3,7,9,7,21,3256,36,63,0,3,0,0
+2022/23,Leicester City,8979,Jamie Vardy,F,37,3,4,0,9,7,21,1851,19,38,0,1,0,0
+2022/23,Leicester City,14716,Harvey Barnes,M,34,13,1,3,8,6,20,2718,32,51,0,3,0,0
+2022/23,Leicester City,14706,Kiernan Dewsbury-Hall,M,31,2,2,3,9,4,18,2315,28,40,0,3,1,0
+2022/23,Leicester City,20566,Wout Faes,D,31,1,2,7,9,5,17,2787,31,51,0,4,1,2
+2022/23,Leicester City,5865,Youri Tielemans,M,31,3,2,3,8,6,17,2350,27,49,0,4,0,0
+2022/23,Leicester City,24994,Patson Daka,F,30,4,4,0,6,7,17,1180,13,24,0,2,0,0
+2022/23,Leicester City,8456,James Maddison,M,30,10,9,3,7,7,16,2484,28,54,0,10,0,0
+2022/23,Leicester City,13554,Kelechi Iheanacho,F,28,5,5,0,5,4,19,1121,11,23,0,0,0,0
+2022/23,Leicester City,20479,Wilfred Ndidi,M,27,0,0,0,5,4,18,1681,19,39,0,4,0,0
+2022/23,Leicester City,50247,Boubakary Soumaré,M,26,0,0,1,7,5,14,1635,20,30,0,9,0,0
+2022/23,Leicester City,4522,Danny Ward,G,26,0,0,6,7,3,16,2340,26,46,78,0,0,0
+2022/23,Leicester City,5860,Dennis Praet,M,22,1,0,0,7,5,10,639,6,10,0,1,0,0
+2022/23,Leicester City,12306,Daniel Amartey,D,20,0,0,5,4,4,12,1610,18,27,0,1,0,0
+2022/23,Leicester City,19617,Nampalys Mendy,M,19,1,0,0,8,3,8,751,7,13,0,1,0,0
+2022/23,Leicester City,23796,Luke Thomas,D,17,0,0,2,4,3,10,1071,11,20,0,3,0,1
+2022/23,Leicester City,13515,James Justin,D,14,0,0,4,4,2,8,1254,14,25,0,0,0,0
+2022/23,Leicester City,65804,Tetê,F,13,1,0,0,3,2,8,739,9,15,0,0,0,0
+2022/23,Leicester City,3156,Jonny Evans,D,13,0,0,1,2,2,9,1053,12,28,0,1,0,0
+2022/23,Leicester City,15332,Daniel Iversen,G,12,0,0,1,2,4,6,1080,12,22,38,0,0,1
+2022/23,Leicester City,123722,Victor Kristiansen,D,12,0,1,0,3,2,7,894,11,21,0,2,0,0
+2022/23,Leicester City,21809,Harry Souttar,D,12,0,1,1,2,2,8,991,11,19,0,2,0,1
+2022/23,Leicester City,5343,Ricardo Pereira,D,10,1,1,0,2,1,7,453,5,11,0,2,0,0
+2022/23,Leicester City,10487,Ayoze Pérez,F,8,0,1,0,2,0,6,380,3,5,0,0,0,0
+2022/23,Leicester City,26216,Çaglar Söyüncü,D,7,1,0,0,2,2,3,529,6,13,0,2,0,0
+2022/23,Leicester City,3564,Marc Albrighton,M,6,1,0,0,3,1,2,233,1,3,0,0,0,0
+2022/23,Leicester City,66284,Wesley Fofana,D,2,0,0,0,0,1,1,180,2,6,0,1,0,0
+2022/23,Leicester City,19890,Lewis Brunt,D,1,0,0,0,0,0,1,22,0,1,0,0,0,0
+2022/23,Liverpool,5178,Mohamed Salah,F,38,19,12,9,19,10,9,3294,37,45,0,2,0,0
+2022/23,Liverpool,14732,Trent Alexander-Arnold,D,37,2,9,7,19,9,9,2931,34,44,0,5,0,0
+2022/23,Liverpool,20559,Alisson Becker,G,37,0,1,14,19,9,9,3330,37,43,108,1,0,0
+2022/23,Liverpool,11247,Fabinho,M,36,0,2,9,18,10,8,2677,31,34,0,11,0,0
+2022/23,Liverpool,3712,Jordan Henderson,M,35,0,2,4,18,9,8,2075,23,30,0,2,0,0
+2022/23,Liverpool,10458,Andy Robertson,D,34,0,8,7,18,8,8,2588,29,34,0,3,0,0
+2022/23,Liverpool,33185,Harvey Elliott,M,32,1,2,1,15,8,9,1612,18,20,0,2,0,0
+2022/23,Liverpool,5140,Virgil van Dijk,D,32,3,1,11,18,7,7,2835,32,36,0,3,0,0
+2022/23,Liverpool,2100,James Milner,M,31,0,1,2,16,9,6,893,7,12,0,2,0,0
+2022/23,Liverpool,70287,Darwin Núñez,F,29,9,3,0,16,7,6,1699,19,22,0,1,1,0
+2022/23,Liverpool,13511,Roberto Firmino,F,25,11,4,0,11,8,6,1212,13,17,0,0,0,0
+2022/23,Liverpool,19758,Diogo Jota,F,22,7,4,1,12,7,3,1131,12,19,0,2,0,0
+2022/23,Liverpool,32894,Cody Gakpo,F,21,7,2,2,11,6,4,1465,17,19,0,0,0,0
+2022/23,Liverpool,10651,Joe Gomez,D,21,0,0,8,10,5,6,1461,15,16,0,3,0,0
+2022/23,Liverpool,16006,Kostas Tsimikas,D,20,0,4,1,9,6,5,768,9,11,0,3,0,0
+2022/23,Liverpool,5264,Thiago Alcântara,M,18,0,0,2,9,4,5,1254,14,23,0,2,0,0
+2022/23,Liverpool,23815,Curtis Jones,M,18,3,1,0,10,5,3,1039,12,15,0,2,0,0
+2022/23,Liverpool,23593,Ibrahima Konaté,D,18,0,0,7,9,4,5,1551,17,22,0,5,0,1
+2022/23,Liverpool,66669,Luis Díaz,F,17,4,2,2,9,6,2,997,11,11,0,2,0,0
+2022/23,Liverpool,5375,Joël Matip,D,14,1,0,3,4,6,4,1093,12,20,0,3,0,1
+2022/23,Liverpool,32289,Fábio Carvalho,M,13,2,0,0,6,4,3,341,4,3,0,0,0,0
+2022/23,Liverpool,114296,Stefan Bajcetic,M,11,1,0,0,7,2,2,526,6,4,0,2,0,0
+2022/23,Liverpool,4252,Alex Oxlade-Chamberlain,M,9,1,0,0,4,0,5,335,4,7,0,0,0,0
+2022/23,Liverpool,12316,Naby Keïta,M,8,0,0,0,3,2,3,293,3,4,0,1,0,0
+2022/23,Liverpool,121972,Ben Gannon-Doak,F,2,0,0,0,1,0,1,24,0,1,0,0,0,0
+2022/23,Liverpool,14051,Nathaniel Phillips,D,2,0,0,0,1,1,0,66,1,1,0,0,0,0
+2022/23,Liverpool,67213,Bobby Clark,M,1,0,0,0,1,0,0,7,0,0,0,0,0,0
+2022/23,Liverpool,14723,Caoimhín Kelleher,G,1,0,0,0,0,1,0,90,1,4,6,0,0,0
+2022/23,Manchester City,16286,Rodri,M,36,2,6,5,27,5,4,2920,34,26,0,5,0,0
+2022/23,Manchester City,65970,Erling Haaland,F,35,36,8,6,26,5,4,2776,33,26,0,5,0,0
+2022/23,Manchester City,12707,Ederson,G,35,0,1,11,26,4,5,3150,35,32,46,3,0,0
+2022/23,Manchester City,5067,Bernardo Silva,M,34,4,5,3,25,5,4,2203,24,24,0,5,0,0
+2022/23,Manchester City,4288,Kevin De Bruyne,M,32,7,16,3,23,5,4,2425,28,23,0,1,0,0
+2022/23,Manchester City,14805,Phil Foden,M,32,11,5,3,23,5,4,1843,22,16,0,1,0,0
+2022/23,Manchester City,52723,Julián Alvarez,F,31,9,0,3,24,3,4,1453,13,16,0,0,0,0
+2022/23,Manchester City,5101,Ilkay Gündogan,M,31,8,4,6,23,5,3,2357,27,20,0,0,0,0
+2022/23,Manchester City,8983,Riyad Mahrez,F,30,5,10,3,24,3,3,1923,22,23,0,2,0,0
+2022/23,Manchester City,15656,Manuel Akanji,D,29,0,1,6,24,1,4,2287,24,23,0,2,0,0
+2022/23,Manchester City,4260,Jack Grealish,M,28,5,7,6,24,2,2,2063,23,16,0,4,0,0
+2022/23,Manchester City,3955,Kyle Walker,D,27,0,0,6,20,4,3,1956,22,20,0,3,0,0
+2022/23,Manchester City,4499,Nathan Aké,D,26,1,0,6,18,4,4,1876,22,15,0,2,0,0
+2022/23,Manchester City,16431,Rúben Dias,D,26,0,0,7,22,3,1,1997,22,16,0,3,0,0
+2022/23,Manchester City,4505,John Stones,D,23,2,2,5,18,4,1,1848,21,17,0,2,0,1
+2022/23,Manchester City,5051,João Cancelo,D,17,2,1,4,12,2,3,1278,16,15,0,3,1,0
+2022/23,Manchester City,99281,Rico Lewis,D,14,0,0,1,10,2,2,903,10,8,0,1,0,0
+2022/23,Manchester City,49293,Cole Palmer,M,14,0,1,1,12,1,1,358,2,4,0,1,0,0
+2022/23,Manchester City,49139,Sergio Gómez,F,12,0,1,0,10,1,1,341,2,6,0,0,0,0
+2022/23,Manchester City,11044,Aymeric Laporte,D,12,0,0,3,9,1,2,993,11,10,0,0,0,0
+2022/23,Manchester City,10768,Kalvin Phillips,M,12,0,0,1,10,1,1,291,2,3,0,1,0,0
+2022/23,Manchester City,47133,Stefan Ortega,G,3,0,0,2,2,1,0,270,3,1,14,0,0,0
+2022/23,Manchester City,75201,Shea Charles,M,1,0,0,0,0,0,1,27,0,1,0,0,0,0
+2022/23,Manchester City,122772,Máximo Perrone,M,1,0,0,0,1,0,0,18,0,1,0,0,0,0
+2022/23,Manchester United,4330,David de Gea,G,38,0,0,17,23,6,9,3420,38,43,101,0,0,0
+2022/23,Manchester United,23396,Bruno Fernandes,M,37,8,8,16,23,6,8,3318,37,39,0,6,0,0
+2022/23,Manchester United,13565,Marcus Rashford,F,35,17,5,6,20,6,9,2888,32,39,0,2,0,0
+2022/23,Manchester United,5906,Fred,M,35,2,2,3,21,6,8,1234,12,22,0,6,0,0
+2022/23,Manchester United,4608,Luke Shaw,D,31,1,2,11,16,6,9,2555,30,35,0,8,0,0
+2022/23,Manchester United,5793,Casemiro,M,28,4,3,9,18,5,5,2125,24,21,0,7,2,0
+2022/23,Manchester United,4845,Christian Eriksen,M,28,1,8,1,19,3,6,2061,25,25,0,3,0,0
+2022/23,Manchester United,67191,Lisandro Martínez,D,27,1,0,8,15,5,7,2115,24,33,0,6,0,0
+2022/23,Manchester United,24252,Diogo Dalot,D,26,1,2,9,14,4,8,2155,24,34,0,6,0,0
+2022/23,Manchester United,14801,Jadon Sancho,F,26,6,3,2,15,5,6,1698,21,18,0,0,0,0
+2022/23,Manchester United,75381,Antony,F,25,4,2,3,14,5,6,1816,23,21,0,5,0,0
+2022/23,Manchester United,14824,Scott McTominay,M,24,1,0,4,15,3,6,1151,10,20,0,8,0,0
+2022/23,Manchester United,5782,Raphaël Varane,D,24,0,0,8,14,5,5,1916,22,22,0,1,0,1
+2022/23,Manchester United,23581,Tyrell Malacia,D,22,0,0,6,14,2,6,1393,14,14,0,6,0,0
+2022/23,Manchester United,11272,Anthony Martial,F,21,6,2,0,15,1,5,979,11,8,0,0,0,0
+2022/23,Manchester United,5066,Victor Lindelöf,D,20,0,0,5,12,3,5,1360,14,16,0,1,0,0
+2022/23,Manchester United,68987,Alejandro Garnacho,F,19,3,2,0,12,3,4,561,5,13,0,3,0,0
+2022/23,Manchester United,14164,Aaron Wan-Bissaka,D,19,0,0,7,13,3,3,1436,16,10,0,2,0,0
+2022/23,Manchester United,20261,Wout Weghorst,F,17,0,1,2,8,4,5,797,10,11,0,1,0,0
+2022/23,Manchester United,49259,Anthony Elanga,F,16,0,1,0,11,1,4,422,5,2,0,0,0,0
+2022/23,Manchester United,9566,Harry Maguire,D,16,0,0,5,13,1,2,762,8,7,0,4,0,0
+2022/23,Manchester United,7316,Marcel Sabitzer,M,11,0,1,1,6,1,4,628,7,7,0,1,0,0
+2022/23,Manchester United,2522,Cristiano Ronaldo,F,10,1,0,1,6,1,3,520,4,8,0,2,0,0
+2022/23,Manchester United,11031,Donny van de Beek,M,7,0,0,0,4,0,3,164,2,3,0,0,0,0
+2022/23,Manchester United,108972,Facundo Pellistri,M,4,0,0,0,1,2,1,60,0,1,0,0,0,0
+2022/23,Manchester United,108936,Kobbie Mainoo,M,1,0,0,0,1,0,0,10,0,0,0,0,0,0
+2022/23,Newcastle United,8707,Dan Burn,D,38,1,0,12,19,14,5,3115,35,30,0,6,0,0
+2022/23,Newcastle United,3905,Kieran Trippier,D,38,1,7,14,19,14,5,3347,38,31,0,5,0,1
+2022/23,Newcastle United,10079,Nick Pope,G,37,0,0,14,19,13,5,3262,37,32,87,3,1,0
+2022/23,Newcastle United,49908,Sven Botman,D,36,0,0,11,19,13,4,3129,35,30,0,2,0,0
+2022/23,Newcastle United,9662,Jacob Murphy,M,36,4,2,0,18,13,5,1243,14,12,0,0,0,0
+2022/23,Newcastle United,5220,Fabian Schär,D,36,1,3,12,19,14,3,3208,36,28,0,7,0,1
+2022/23,Newcastle United,14446,Joe Willock,M,35,3,6,1,19,12,4,2577,31,26,0,1,0,0
+2022/23,Newcastle United,54312,Miguel Almirón,M,34,11,2,3,15,14,5,2507,29,22,0,2,0,0
+2022/23,Newcastle United,14897,Sean Longstaff,M,33,1,4,11,17,12,4,2515,28,18,0,2,0,0
+2022/23,Newcastle United,20607,Joelinton,M,32,6,1,11,15,12,5,2662,30,26,0,12,0,0
+2022/23,Newcastle United,74761,Bruno Guimarães,M,32,4,5,9,19,10,3,2733,32,25,0,7,0,0
+2022/23,Newcastle United,8454,Callum Wilson,F,31,18,5,0,17,10,4,1885,21,16,0,4,0,0
+2022/23,Newcastle United,12817,Allan Saint-Maximin,F,25,1,5,0,11,11,3,1116,12,14,0,1,0,0
+2022/23,Newcastle United,51593,Elliot Anderson,M,22,0,1,0,11,7,4,396,3,7,0,0,0,0
+2022/23,Newcastle United,21737,Alexander Isak,F,22,10,1,1,10,7,5,1524,17,20,0,3,0,0
+2022/23,Newcastle United,3756,Chris Wood,F,18,2,0,0,9,8,1,440,4,3,0,0,0,0
+2022/23,Newcastle United,4815,Matt Targett,D,17,0,0,1,8,5,4,603,6,6,0,1,0,0
+2022/23,Newcastle United,23747,Anthony Gordon,F,16,1,0,0,7,5,4,480,4,5,0,1,0,0
+2022/23,Newcastle United,8052,Ryan Fraser,M,8,0,0,0,3,4,1,311,3,3,0,1,0,0
+2022/23,Newcastle United,9257,Jamaal Lascelles,D,7,0,0,0,4,1,2,215,2,5,0,4,0,0
+2022/23,Newcastle United,3934,Matt Ritchie,M,7,0,0,0,5,1,1,35,0,0,0,0,0,0
+2022/23,Newcastle United,4918,Javier Manquillo,D,4,0,0,0,4,0,0,34,0,1,0,0,0,0
+2022/23,Newcastle United,4135,Jonjo Shelvey,M,3,0,0,0,3,0,0,34,0,1,0,0,0,0
+2022/23,Newcastle United,6451,Martin Dúbravka,G,2,0,0,0,0,1,1,156,1,1,10,0,0,0
+2022/23,Newcastle United,14938,Jamal Lewis,D,2,0,0,0,1,1,0,9,0,1,0,0,0,0
+2022/23,Newcastle United,66494,Emil Krafth,D,1,0,0,0,0,1,0,1,0,0,0,0,0,0
+2022/23,Newcastle United,117647,Lewis Miley,M,1,0,0,0,0,1,0,15,0,0,0,0,0,0
+2022/23,Nottingham Forest,49374,Brennan Johnson,F,38,8,3,3,9,10,18,2850,33,54,0,6,0,0
+2022/23,Nottingham Forest,15259,Morgan Gibbs-White,M,35,5,8,5,8,11,16,2977,34,59,0,5,0,0
+2022/23,Nottingham Forest,23811,Neco Williams,D,31,1,0,2,7,8,16,1874,20,41,0,7,0,0
+2022/23,Nottingham Forest,13622,Joe Worrall,D,30,1,0,5,8,8,13,2216,21,44,0,6,0,0
+2022/23,Nottingham Forest,22624,Remo Freuler,M,28,0,0,6,5,7,15,2166,24,47,0,4,0,0
+2022/23,Nottingham Forest,65999,Renan Lodi,D,28,0,1,3,8,6,13,2221,26,48,0,7,0,0
+2022/23,Nottingham Forest,15340,Taiwo Awoniyi,F,27,10,1,0,6,7,14,1411,17,29,0,2,0,0
+2022/23,Nottingham Forest,49738,Orel Mangala,M,27,1,1,1,8,8,11,1555,20,24,0,3,0,0
+2022/23,Nottingham Forest,14238,Ryan Yates,M,26,0,2,5,6,9,11,1794,21,36,0,5,0,0
+2022/23,Nottingham Forest,11293,Sèrge Aurier,D,24,1,0,5,8,8,7,1949,22,31,0,2,0,0
+2022/23,Nottingham Forest,5861,Cheikhou Kouyaté,M,21,1,0,0,5,7,9,878,10,23,0,3,0,0
+2022/23,Nottingham Forest,107869,Scott McKenna,D,20,0,0,5,4,5,11,1573,19,32,0,4,0,0
+2022/23,Nottingham Forest,13195,Sam Surridge,F,20,1,0,0,6,4,9,292,1,5,0,2,0,0
+2022/23,Nottingham Forest,20701,Emmanuel Dennis,F,19,2,2,0,0,5,14,715,6,17,0,3,0,0
+2022/23,Nottingham Forest,10933,Harry Toffolo,D,19,0,0,1,4,7,8,935,9,17,0,2,0,0
+2022/23,Nottingham Forest,13988,Dean Henderson,G,18,0,0,6,5,5,8,1620,18,31,55,2,0,0
+2022/23,Nottingham Forest,4337,Jesse Lingard,M,17,0,0,1,3,3,11,927,12,17,0,1,0,0
+2022/23,Nottingham Forest,11299,Keylor Navas,G,17,0,0,1,4,4,9,1529,17,32,51,2,0,0
+2022/23,Nottingham Forest,20130,Felipe,D,16,0,1,0,3,4,9,1419,15,32,0,4,0,0
+2022/23,Nottingham Forest,50862,Moussa Niakhaté,D,14,0,0,1,4,3,7,1162,14,21,0,1,0,0
+2022/23,Nottingham Forest,5594,André Ayew,F,13,0,0,0,2,3,8,307,1,10,0,1,0,0
+2022/23,Nottingham Forest,112510,Danilo,M,13,3,2,0,4,4,5,979,12,17,0,1,0,0
+2022/23,Nottingham Forest,24353,Lewis O'Brien,M,13,1,0,1,3,3,7,580,6,14,0,2,0,0
+2022/23,Nottingham Forest,8045,Steve Cook,D,12,0,0,2,2,4,6,958,11,21,0,4,0,0
+2022/23,Nottingham Forest,16204,Willy Boly,D,11,0,1,3,5,2,3,687,9,9,0,2,0,0
+2022/23,Nottingham Forest,3713,Jack Colback,M,11,0,0,0,4,3,4,494,4,11,0,0,0,0
+2022/23,Nottingham Forest,4135,Jonjo Shelvey,M,8,0,0,0,0,2,6,541,6,10,0,2,0,0
+2022/23,Nottingham Forest,3756,Chris Wood,F,7,1,0,0,1,3,3,376,5,6,0,0,0,0
+2022/23,Nottingham Forest,32478,Gustavo Scarpa,M,6,0,0,0,2,1,3,180,2,1,0,1,0,0
+2022/23,Nottingham Forest,2569,Wayne Hennessey,G,4,0,0,0,1,2,1,181,3,5,9,0,0,0
+2022/23,Nottingham Forest,54000,Giulian Biancone,D,2,0,0,0,0,1,1,16,0,1,0,0,0,0
+2022/23,Nottingham Forest,51736,Alex Mighten,F,1,0,0,0,0,0,1,7,0,0,0,0,0,0
+2022/23,Nottingham Forest,7602,Cafú,M,1,0,0,0,1,0,0,6,0,0,0,0,0,0
+2022/23,Southampton,4617,James Ward-Prowse,M,38,9,4,4,6,7,25,3372,38,72,0,6,0,1
+2022/23,Southampton,15967,Mohamed Elyounoussi,M,33,1,1,1,6,6,21,2178,27,45,0,4,0,0
+2022/23,Southampton,12186,Stuart Armstrong,M,32,2,1,0,4,6,22,1405,14,34,0,6,0,0
+2022/23,Southampton,63840,Gavin Bazunu,G,32,0,0,4,6,6,20,2880,32,56,69,0,0,0
+2022/23,Southampton,13815,Kyle Walker-Peters,D,31,1,0,2,5,6,20,2652,30,58,0,4,0,0
+2022/23,Southampton,9199,Adam Armstrong,F,30,2,1,0,6,6,18,1334,14,24,0,2,0,0
+2022/23,Southampton,99282,Roméo Lavia,M,29,1,0,2,5,5,19,2230,26,50,0,9,0,0
+2022/23,Southampton,21495,Romain Perraud,D,29,2,2,2,4,5,20,1837,22,35,0,4,0,1
+2022/23,Southampton,10905,Ché Adams,F,28,5,3,1,5,5,18,1998,23,41,0,1,0,0
+2022/23,Southampton,108325,Armel Bella-Kotchap,D,24,0,2,3,4,5,15,1885,24,39,0,4,0,0
+2022/23,Southampton,10428,Ainsley Maitland-Niles,M,22,0,0,1,4,2,16,1403,13,31,0,3,0,0
+2022/23,Southampton,127416,Sékou Mara,F,22,1,2,0,4,4,14,541,4,10,0,1,0,0
+2022/23,Southampton,51775,Mohammed Salisu,D,22,0,1,1,4,4,14,1972,21,41,0,5,0,1
+2022/23,Southampton,13956,Joe Aribo,M,21,2,0,0,3,3,15,1228,13,24,0,2,0,0
+2022/23,Southampton,49961,Lyanco,D,21,1,1,0,5,3,13,1175,11,26,0,4,0,0
+2022/23,Southampton,19589,Jan Bednarek,D,20,0,0,3,2,5,13,1674,20,39,0,5,0,1
+2022/23,Southampton,2839,Theo Walcott,F,20,2,2,0,2,5,13,1134,13,30,0,1,0,1
+2022/23,Southampton,133612,Charly Alcaraz,M,18,4,2,0,3,4,11,1034,13,25,0,3,0,0
+2022/23,Southampton,49610,Ibrahima Diallo,M,18,0,0,0,4,3,11,815,11,19,0,4,0,0
+2022/23,Southampton,123910,Kamaldeen Sulemana,F,18,2,1,0,2,4,12,968,10,20,0,1,0,0
+2022/23,Southampton,66658,Samuel Edozie,M,17,0,0,0,1,2,14,559,5,9,0,0,0,0
+2022/23,Southampton,52153,Moussa Djenepo,F,16,0,2,0,3,1,12,704,7,14,0,1,0,0
+2022/23,Southampton,12314,Duje Caleta-Car,D,13,1,0,1,2,3,8,945,9,15,0,2,0,0
+2022/23,Southampton,15713,Paul Onuachu,F,11,0,0,0,1,2,8,405,4,7,0,0,0,0
+2022/23,Southampton,4573,Alex McCarthy,G,6,0,0,0,0,1,5,540,6,17,14,0,0,0
+2022/23,Southampton,10565,James Bree,D,5,0,0,0,0,1,4,368,4,12,0,1,0,0
+2022/23,Southampton,107842,Juan Larios,D,5,0,0,0,1,0,4,152,2,2,0,0,0,0
+2022/23,Southampton,112674,Dom Ballard,F,2,0,0,0,0,1,1,24,0,0,0,0,0,0
+2022/23,Southampton,49495,Tino Livramento,D,2,0,0,0,0,1,1,26,0,0,0,0,0,0
+2022/23,Southampton,4612,Jack Stephens,D,2,0,0,0,0,1,1,46,0,2,0,0,0,0
+2022/23,Southampton,118447,Sam Amo-Ameyaw,F,1,0,0,0,0,1,0,3,0,0,0,0,0,0
+2022/23,Southampton,92614,Kamari Doyle,M,1,0,0,0,0,0,1,6,0,0,0,0,0,0
+2022/23,Southampton,51999,Mislav Orsic,F,1,0,0,0,0,0,1,6,0,0,0,0,0,0
+2022/23,Southampton,3811,Nathan Redmond,M,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+2022/23,Southampton,4286,Oriol Romeu,M,1,0,0,0,0,0,1,75,1,4,0,0,0,0
+2022/23,Southampton,15011,Yan Valery,D,1,0,0,0,0,0,1,45,1,2,0,0,0,0
+2022/23,Tottenham Hotspur,3960,Harry Kane,F,38,30,3,8,18,6,14,3406,38,62,0,6,0,0
+2022/23,Tottenham Hotspur,4999,Son Heung-Min,F,36,10,6,2,17,6,13,2899,33,55,0,2,0,0
+2022/23,Tottenham Hotspur,5272,Pierre-Emile Højbjerg,M,35,4,5,10,17,6,12,3133,35,57,0,5,0,0
+2022/23,Tottenham Hotspur,12901,Ivan Perisic,F,34,1,8,2,14,6,14,2109,23,44,0,6,0,0
+2022/23,Tottenham Hotspur,4112,Eric Dier,D,33,2,1,9,17,6,10,2817,31,52,0,3,0,0
+2022/23,Tottenham Hotspur,4408,Ben Davies,D,31,2,2,9,15,5,11,2289,26,33,0,4,0,0
+2022/23,Tottenham Hotspur,49316,Dejan Kulusevski,M,30,2,7,0,14,6,10,2076,23,40,0,2,0,0
+2022/23,Tottenham Hotspur,24630,Richarlison,F,27,1,3,0,13,4,10,1006,12,18,0,3,0,0
+2022/23,Tottenham Hotspur,66635,Cristian Romero,D,27,0,1,6,13,4,10,2365,26,41,0,8,1,0
+2022/23,Tottenham Hotspur,63654,Emerson Royal,D,26,2,1,7,14,3,9,1736,20,26,0,2,1,0
+2022/23,Tottenham Hotspur,21647,Clément Lenglet,D,26,0,2,1,12,4,10,2026,24,35,0,4,0,0
+2022/23,Tottenham Hotspur,4664,Hugo Lloris,G,25,0,0,7,13,3,9,2205,25,39,79,0,0,1
+2022/23,Tottenham Hotspur,50245,Yves Bissouma,M,23,0,0,0,11,3,9,1004,10,20,0,6,0,0
+2022/23,Tottenham Hotspur,21413,Oliver Skipp,M,23,1,0,2,10,3,10,1494,18,28,0,7,0,0
+2022/23,Tottenham Hotspur,22802,Rodrigo Bentancur,M,18,5,2,4,11,1,6,1504,17,24,0,8,0,0
+2022/23,Tottenham Hotspur,20224,Davinson Sánchez,D,18,0,0,2,8,3,7,852,8,17,0,1,0,0
+2022/23,Tottenham Hotspur,14656,Ryan Sessegnon,M,17,2,0,1,9,1,7,811,9,15,0,4,0,0
+2022/23,Tottenham Hotspur,32229,Pedro Porro,D,15,3,3,1,5,3,7,1135,13,26,0,0,0,0
+2022/23,Tottenham Hotspur,5762,Lucas Moura,F,15,1,0,0,7,2,6,145,0,4,0,0,1,0
+2022/23,Tottenham Hotspur,3170,Fraser Forster,G,14,0,0,3,5,3,6,1215,13,24,32,1,0,0
+2022/23,Tottenham Hotspur,4229,Matt Doherty,D,12,1,0,1,5,1,6,666,7,9,0,0,0,0
+2022/23,Tottenham Hotspur,117318,Pape Matar Sarr,M,11,0,1,0,5,1,5,213,2,11,0,1,0,0
+2022/23,Tottenham Hotspur,16524,Arnaut Danjuma,F,9,1,0,0,2,1,6,163,1,5,0,0,0,0
+2022/23,Tottenham Hotspur,55700,Bryan Gil,F,4,0,1,0,2,0,2,148,2,1,0,1,0,0
+2022/23,Tottenham Hotspur,23764,Djed Spence,D,4,0,0,0,2,0,2,5,0,0,0,0,0,0
+2022/23,Tottenham Hotspur,15116,Japhet Tanganga,D,4,0,0,0,1,2,1,147,2,5,0,0,0,0
+2022/23,Tottenham Hotspur,117560,George Abbott,D,1,0,0,0,1,0,0,1,0,0,0,0,0,0
+2022/23,Tottenham Hotspur,51619,Matthew Craig,M,1,0,0,0,1,0,0,13,0,0,0,0,0,0
+2022/23,Tottenham Hotspur,49195,Harvey White,M,1,0,0,0,1,0,0,4,0,0,0,0,0,0
+2022/23,West Ham United,8868,Jarrod Bowen,F,38,6,5,7,11,7,20,3236,36,50,0,2,0,0
+2022/23,West Ham United,15202,Declan Rice,M,37,4,2,9,11,7,19,3272,36,50,0,5,0,0
+2022/23,West Ham United,3309,Lukasz Fabianski,G,36,0,0,8,11,6,19,3113,36,48,108,1,0,0
+2022/23,West Ham United,25183,Tomás Soucek,M,36,2,3,7,11,7,18,2819,32,42,0,3,0,0
+2022/23,West Ham United,20517,Saïd Benrahma,F,35,6,3,2,8,7,20,2070,22,32,0,0,0,0
+2022/23,West Ham United,9595,Michail Antonio,F,33,5,3,0,10,6,17,1835,21,29,0,2,0,0
+2022/23,West Ham United,25246,Pablo Fornals,M,32,3,1,1,10,5,17,1501,17,28,0,0,0,0
+2022/23,West Ham United,8897,Aaron Cresswell,D,28,0,1,5,9,4,15,2235,24,32,0,3,0,0
+2022/23,West Ham United,55776,Lucas Paquetá,M,28,4,3,0,8,7,13,2168,27,39,0,5,0,0
+2022/23,West Ham United,7336,Vladimír Coufal,D,27,0,1,2,7,6,14,2137,24,35,0,5,0,0
+2022/23,West Ham United,11189,Thilo Kehrer,D,27,0,2,5,8,7,12,2230,25,34,0,4,0,1
+2022/23,West Ham United,5175,Kurt Zouma,D,25,2,0,7,9,3,13,1990,24,29,0,0,0,0
+2022/23,West Ham United,16803,Emerson,D,22,1,0,0,7,5,10,1321,16,28,0,2,0,0
+2022/23,West Ham United,14383,Flynn Downes,M,21,0,0,0,7,4,10,758,7,14,0,2,0,0
+2022/23,West Ham United,108628,Nayef Aguerd,D,18,2,0,5,5,4,9,1595,17,28,0,4,0,0
+2022/23,West Ham United,8245,Danny Ings,F,17,2,2,0,6,3,8,770,7,13,0,1,0,0
+2022/23,West Ham United,15212,Ben Johnson,D,17,0,0,2,6,3,8,862,9,13,0,0,0,0
+2022/23,West Ham United,5514,Angelo Ogbonna,D,16,0,0,4,5,3,8,1236,13,19,0,0,0,0
+2022/23,West Ham United,11434,Gianluca Scamacca,F,16,3,0,0,4,2,10,928,11,12,0,3,0,0
+2022/23,West Ham United,16758,Maxwel Cornet,F,14,0,0,0,3,2,9,235,2,5,0,0,0,0
+2022/23,West Ham United,13872,Manuel Lanzini,M,10,1,0,0,2,1,7,245,2,5,0,0,0,0
+2022/23,West Ham United,4198,Craig Dawson,D,8,0,0,1,2,1,5,720,8,13,0,2,0,0
+2022/23,West Ham United,5748,Alphonse Areola,G,5,0,0,0,1,1,3,307,2,7,9,0,0,0
+2022/23,West Ham United,70143,Divin Mubama,F,3,0,0,0,1,0,2,36,0,0,0,0,0,0
+2022/23,West Ham United,15211,Conor Coventry,M,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+2022/23,Wolverhampton Wanderers,13522,Maximilian Kilman,D,37,0,0,11,11,7,19,3308,37,56,0,3,0,0
+2022/23,Wolverhampton Wanderers,16642,Nélson Semedo,D,36,0,1,7,10,8,18,2635,31,42,0,11,1,0
+2022/23,Wolverhampton Wanderers,15715,José Sá,G,36,0,0,11,11,7,18,3240,36,55,108,2,0,0
+2022/23,Wolverhampton Wanderers,11180,Rúben Neves,M,35,6,1,9,9,8,18,3022,33,48,0,12,0,0
+2022/23,Wolverhampton Wanderers,76204,Matheus Nunes,M,34,1,1,4,11,7,16,2475,30,38,0,2,1,0
+2022/23,Wolverhampton Wanderers,4979,Adama Traoré,F,34,2,1,0,11,7,16,1486,12,30,0,2,0,0
+2022/23,Wolverhampton Wanderers,11362,Daniel Podence,F,32,6,0,2,6,8,18,1770,20,31,0,5,0,0
+2022/23,Wolverhampton Wanderers,11259,João Moutinho,M,31,0,2,2,10,6,15,1783,20,28,0,3,0,0
+2022/23,Wolverhampton Wanderers,20337,Hwang Hee-Chan,F,27,3,1,0,9,4,14,1129,12,18,0,1,0,0
+2022/23,Wolverhampton Wanderers,24659,Nathan Collins,D,26,0,0,4,7,6,13,1812,19,36,0,2,1,0
+2022/23,Wolverhampton Wanderers,4941,Diego Costa,F,23,1,0,0,8,5,10,1245,16,17,0,5,1,0
+2022/23,Wolverhampton Wanderers,71432,Rayan Aït-Nouri,D,21,1,0,2,6,3,12,1067,9,18,0,4,0,1
+2022/23,Wolverhampton Wanderers,66692,Hugo Bueno,D,21,0,1,0,6,4,11,1315,16,29,0,1,0,0
+2022/23,Wolverhampton Wanderers,5583,Mario Lemina,M,19,0,1,2,8,3,8,1303,17,28,0,2,1,0
+2022/23,Wolverhampton Wanderers,20277,Jonny,D,18,1,0,4,5,3,10,1263,14,20,0,3,1,0
+2022/23,Wolverhampton Wanderers,21998,Pedro Neto,F,18,0,0,1,5,4,9,968,13,15,0,2,0,0
+2022/23,Wolverhampton Wanderers,4198,Craig Dawson,D,17,1,0,6,7,3,7,1415,17,18,0,4,0,0
+2022/23,Wolverhampton Wanderers,92635,Toti Gomes,D,17,1,0,4,7,3,7,981,10,14,0,6,0,0
+2022/23,Wolverhampton Wanderers,51202,Matheus Cunha,F,17,2,0,0,8,4,5,972,12,12,0,1,0,0
+2022/23,Wolverhampton Wanderers,11071,Raúl Jiménez,F,15,0,1,1,3,3,9,841,8,18,0,0,0,0
+2022/23,Wolverhampton Wanderers,11130,Gonçalo Guedes,F,13,1,1,0,2,4,7,709,8,12,0,1,0,0
+2022/23,Wolverhampton Wanderers,19814,Pablo Sarabia,M,13,1,0,0,5,3,5,770,9,9,0,3,0,0
+2022/23,Wolverhampton Wanderers,133679,João Gomes,M,11,1,0,1,4,1,6,650,7,18,0,5,0,0
+2022/23,Wolverhampton Wanderers,117315,Boubacar Traoré,M,10,0,1,0,1,2,7,405,4,9,0,2,0,0
+2022/23,Wolverhampton Wanderers,49269,Joe Hodge,M,6,0,0,0,2,1,3,174,1,5,0,1,0,0
+2022/23,Wolverhampton Wanderers,51648,Chem Campbell,M,5,0,0,0,0,0,5,69,0,2,0,0,0,0
+2022/23,Wolverhampton Wanderers,5866,Leander Dendoncker,M,4,0,0,1,0,2,2,213,2,3,0,0,0,0
+2022/23,Wolverhampton Wanderers,9651,Dan Bentley,G,2,0,0,0,0,1,1,180,2,3,11,0,0,0
+2022/23,Wolverhampton Wanderers,15259,Morgan Gibbs-White,M,2,0,0,1,0,1,1,180,2,2,0,1,0,0
+2022/23,Wolverhampton Wanderers,108319,Sasa Kalajdzic,F,1,0,0,0,1,0,0,45,1,0,0,0,0,0
+2022/23,Wolverhampton Wanderers,68580,Dexter Lembikisa,D,1,0,0,0,0,0,1,22,0,1,0,0,0,0
+2022/23,Wolverhampton Wanderers,13901,Connor Ronan,M,1,0,0,0,0,0,1,1,0,0,0,0,0,0

@@ -1,0 +1,533 @@
+season,club_feed,feed_id,name,feed_pos,appearances,goals,goal_assist,clean_sheet,wins,draws,losses,mins_played,game_started,goals_conceded,saves,yellow_card,red_card,own_goals
+2003/04,Arsenal,2409,Jens Lehmann,G,38,0,0,15,26,12,0,0,0,0,0,2,0,0
+2003/04,Arsenal,1659,Thierry Henry,F,37,30,6,15,26,11,0,0,0,0,0,3,0,0
+2003/04,Arsenal,2002,Kolo Touré,D,37,1,1,14,25,12,0,0,0,0,0,4,0,0
+2003/04,Arsenal,1835,Robert Pirès,M,36,14,8,4,26,10,0,0,0,0,0,0,0,0
+2003/04,Arsenal,557,Sol Campbell,D,35,1,1,14,24,11,0,0,0,0,0,2,1,0
+2003/04,Arsenal,2165,Gilberto Silva,M,32,4,4,9,22,10,0,0,0,0,0,2,0,0
+2003/04,Arsenal,1831,Lauren,D,32,0,1,10,23,9,0,0,0,0,0,5,0,1
+2003/04,Arsenal,1494,Ashley Cole,D,32,0,3,11,22,10,0,0,0,0,0,5,1,0
+2003/04,Arsenal,1834,Edu,M,30,2,2,4,22,8,0,0,0,0,0,4,0,0
+2003/04,Arsenal,1497,Freddie Ljungberg,M,30,4,5,2,20,10,0,0,0,0,0,2,0,0
+2003/04,Arsenal,1132,Patrick Vieira,M,29,3,4,12,20,9,0,0,0,0,0,9,1,0
+2003/04,Arsenal,991,Dennis Bergkamp,F,28,4,7,2,18,10,0,0,0,0,0,2,0,0
+2003/04,Arsenal,19,Ray Parlour,M,25,0,0,5,18,7,0,0,0,0,0,7,0,0
+2003/04,Arsenal,2162,Pascal Cygan,D,18,0,0,6,13,5,0,0,0,0,0,1,0,0
+2003/04,Arsenal,2415,José Antonio Reyes,M,13,2,1,0,8,5,0,0,0,0,0,0,0,0
+2003/04,Arsenal,2413,Gaël Clichy,D,12,0,0,3,8,4,0,0,0,0,0,1,0,0
+2003/04,Arsenal,1836,Sylvain Wiltord,F,12,3,0,1,8,4,0,0,0,0,0,0,0,0
+2003/04,Arsenal,1656,Jérémie Aliadière,F,10,0,0,0,6,4,0,0,0,0,0,1,0,0
+2003/04,Arsenal,1502,Kanu,F,10,1,2,0,6,4,0,0,0,0,0,0,0,0
+2003/04,Arsenal,14,Martin Keown,D,10,0,0,1,6,4,0,0,0,0,0,1,0,0
+2003/04,Arsenal,2009,David Bentley,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2003/04,Arsenal,2163,Justin Hoyte,D,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2003/04,Aston Villa,1505,Jlloyd Samuel,D,38,2,4,12,15,11,12,0,0,0,0,6,0,0
+2003/04,Aston Villa,1751,Thomas Sørensen,G,38,0,0,12,15,11,12,0,0,0,0,1,0,0
+2003/04,Aston Villa,1308,Gareth Barry,M,36,3,8,10,14,11,11,0,0,0,0,3,1,0
+2003/04,Aston Villa,1843,Juan Pablo Ángel,F,33,16,0,5,13,9,11,0,0,0,0,3,0,0
+2003/04,Aston Villa,2012,Olof Mellberg,D,33,1,0,12,14,9,10,0,0,0,0,4,0,0
+2003/04,Aston Villa,848,Lee Hendrie,M,32,2,3,1,11,9,12,0,0,0,0,10,0,0
+2003/04,Aston Villa,1840,Thomas Hitzlsperger,M,32,3,6,4,14,8,10,0,0,0,0,4,0,0
+2003/04,Aston Villa,1309,Darius Vassell,F,32,9,1,6,14,10,8,0,0,0,0,0,0,0
+2003/04,Aston Villa,2171,Peter Whittingham,M,32,0,4,5,11,10,11,0,0,0,0,5,0,0
+2003/04,Aston Villa,2169,Ulises de la Cruz,D,28,0,0,6,13,9,6,0,0,0,0,2,0,0
+2003/04,Aston Villa,1042,Gavin McCann,M,28,0,0,9,12,9,7,0,0,0,0,4,1,0
+2003/04,Aston Villa,1504,Mark Delaney,D,25,0,2,5,10,6,9,0,0,0,0,4,0,1
+2003/04,Aston Villa,338,Dion Dublin,F,23,3,0,5,9,7,7,0,0,0,0,1,0,0
+2003/04,Aston Villa,1210,Ronny Johnsen,D,23,1,0,4,8,7,8,0,0,0,0,3,0,0
+2003/04,Aston Villa,1629,Peter Crouch,F,16,4,3,1,7,4,5,0,0,0,0,2,0,0
+2003/04,Aston Villa,2175,Marcus Allbäck,F,15,1,0,0,5,3,7,0,0,0,0,0,0,0
+2003/04,Aston Villa,2013,Liam Ridgewell,D,11,0,0,1,5,3,3,0,0,0,0,0,0,0
+2003/04,Aston Villa,1597,Nolberto Solano,M,10,0,2,3,6,2,2,0,0,0,0,1,1,0
+2003/04,Aston Villa,1842,Stefan Moore,F,8,1,0,0,4,2,2,0,0,0,0,0,0,0
+2003/04,Aston Villa,2424,Luke Moore,F,7,0,0,0,3,3,1,0,0,0,0,1,0,0
+2003/04,Aston Villa,1839,Özalan Alpay,D,6,1,0,0,2,1,3,0,0,0,0,0,0,0
+2003/04,Aston Villa,1520,Mark Kinsella,M,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+2003/04,Aston Villa,2167,Stefan Postma,G,2,0,0,0,1,1,0,0,0,0,0,0,0,0
+2003/04,Aston Villa,1688,Mustapha Hadji,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Birmingham City,972,Kenny Cunningham,D,36,0,2,15,12,12,12,0,0,0,0,2,1,0
+2003/04,Birmingham City,961,Stephen Clemence,M,35,2,1,9,11,12,12,0,0,0,0,4,0,0
+2003/04,Birmingham City,1336,Damien Johnson,M,35,1,4,11,11,14,10,0,0,0,0,6,0,0
+2003/04,Birmingham City,1242,Maik Taylor,G,34,0,0,13,12,12,10,0,0,0,0,0,2,0
+2003/04,Birmingham City,1538,Mikael Forssell,F,32,17,1,3,10,10,12,0,0,0,0,1,0,0
+2003/04,Birmingham City,1384,Clinton Morrison,F,32,4,4,3,9,12,11,0,0,0,0,2,0,0
+2003/04,Birmingham City,706,Robbie Savage,M,31,3,4,10,9,13,9,0,0,0,0,13,0,0
+2003/04,Birmingham City,1114,Stan Lazaridis,M,30,2,5,5,8,12,10,0,0,0,0,0,0,0
+2003/04,Birmingham City,1131,Matt Upson,D,30,0,1,12,10,10,10,0,0,0,0,2,0,0
+2003/04,Birmingham City,2193,Stern John,F,29,4,0,0,8,13,8,0,0,0,0,0,0,0
+2003/04,Birmingham City,2184,Olivier Tebily,D,27,0,0,6,10,9,8,0,0,0,0,4,0,0
+2003/04,Birmingham City,2187,Bryan Hughes,M,26,3,1,3,6,11,9,0,0,0,0,0,0,0
+2003/04,Birmingham City,960,Jamie Clapham,D,25,0,1,10,6,11,8,0,0,0,0,0,0,0
+2003/04,Birmingham City,1337,David Dunn,M,21,2,1,7,8,7,6,0,0,0,0,3,0,0
+2003/04,Birmingham City,524,Jeff Kenna,D,17,2,0,5,8,6,3,0,0,0,0,1,0,0
+2003/04,Birmingham City,2188,Aliou Cisse,M,15,0,0,2,7,2,6,0,0,0,0,5,0,0
+2003/04,Birmingham City,2194,Christophe Dugarry,F,14,1,1,0,5,5,4,0,0,0,0,4,1,0
+2003/04,Birmingham City,1331,Martin Taylor,D,12,1,0,2,4,4,4,0,0,0,0,0,0,0
+2003/04,Birmingham City,2181,Darren Purse,D,9,0,0,4,3,5,1,0,0,0,0,0,1,0
+2003/04,Birmingham City,2176,Ian Bennett,G,6,0,0,2,0,2,4,0,0,0,0,0,0,0
+2003/04,Birmingham City,2189,Jovan Kirovski,M,6,0,0,0,2,1,3,0,0,0,0,0,0,0
+2003/04,Birmingham City,2191,Darren Carter,M,5,0,0,0,2,1,2,0,0,0,0,0,0,0
+2003/04,Birmingham City,2182,Martin Grainger,D,4,1,1,0,1,1,2,0,0,0,0,0,0,0
+2003/04,Birmingham City,2196,Geoff Horsfield,F,3,0,0,0,2,1,0,0,0,0,0,0,0,0
+2003/04,Birmingham City,2185,Paul Devlin,M,2,0,0,0,1,1,0,0,0,0,0,0,0,0
+2003/04,Birmingham City,2428,Andrew Barrowman,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Birmingham City,2594,Luciano Figueroa,F,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2003/04,Blackburn Rovers,2434,Brett Emerton,M,37,2,11,5,12,7,18,0,0,0,0,4,0,0
+2003/04,Blackburn Rovers,1420,Brad Friedel,G,36,1,0,8,12,7,17,0,0,0,0,0,0,0
+2003/04,Blackburn Rovers,2024,Tugay Kerimoglu,M,36,1,7,6,11,8,17,0,0,0,0,4,0,0
+2003/04,Blackburn Rovers,725,Andrew Cole,F,34,11,6,2,9,8,17,0,0,0,0,3,1,0
+2003/04,Blackburn Rovers,2018,Lucas Neill,D,32,2,0,6,11,8,13,0,0,0,0,6,1,0
+2003/04,Blackburn Rovers,300,Garry Flitcroft,M,31,3,1,5,9,7,15,0,0,0,0,9,0,0
+2003/04,Blackburn Rovers,2204,Paul Gallagher,M,26,3,4,1,8,6,12,0,0,0,0,2,0,0
+2003/04,Blackburn Rovers,1920,Markus Babbel,D,25,3,3,5,8,6,11,0,0,0,0,2,0,0
+2003/04,Blackburn Rovers,2198,Vratislav Gresko,D,24,1,0,4,8,4,12,0,0,0,0,6,0,0
+2003/04,Blackburn Rovers,59,Dwight Yorke,M,23,4,2,1,6,5,12,0,0,0,0,0,0,0
+2003/04,Blackburn Rovers,1381,Matt Jansen,F,19,2,2,0,6,3,10,0,0,0,0,0,0,0
+2003/04,Blackburn Rovers,1037,Craig Short,D,19,1,0,6,7,3,9,0,0,0,0,1,0,0
+2003/04,Blackburn Rovers,356,Andrew Todd,D,19,0,1,5,6,2,11,0,0,0,0,4,0,1
+2003/04,Blackburn Rovers,2435,Steven Reid,D,16,0,0,0,2,3,11,0,0,0,0,1,1,0
+2003/04,Blackburn Rovers,2433,Barry Ferguson,M,15,1,1,2,5,1,9,0,0,0,0,3,0,0
+2003/04,Blackburn Rovers,2023,Jonathan Douglas,M,14,1,0,4,5,4,5,0,0,0,0,3,0,0
+2003/04,Blackburn Rovers,1253,Michael Gray,D,14,0,0,4,4,3,7,0,0,0,0,1,0,0
+2003/04,Blackburn Rovers,2017,Nils-Eric Johansson,D,14,0,0,1,3,6,5,0,0,0,0,0,0,0
+2003/04,Blackburn Rovers,2436,Jon Stead,F,13,6,0,3,6,2,5,0,0,0,0,0,0,0
+2003/04,Blackburn Rovers,2430,Lorenzo Amoruso,D,12,3,0,2,6,2,4,0,0,0,0,3,0,0
+2003/04,Blackburn Rovers,1808,Martin Andresen,M,11,0,0,2,5,2,4,0,0,0,0,3,0,0
+2003/04,Blackburn Rovers,1331,Martin Taylor,D,11,0,0,0,1,4,6,0,0,0,0,0,0,0
+2003/04,Blackburn Rovers,1206,David Thompson,M,11,1,1,0,2,2,7,0,0,0,0,5,0,0
+2003/04,Blackburn Rovers,2595,Dino Baggio,M,9,1,0,0,2,1,6,0,0,0,0,1,0,0
+2003/04,Blackburn Rovers,2026,Corrado Grabbi,F,5,0,1,0,1,1,3,0,0,0,0,0,0,0
+2003/04,Blackburn Rovers,2022,Alan Mahon,M,3,0,0,1,1,1,1,0,0,0,0,0,0,0
+2003/04,Blackburn Rovers,1503,Peter Enckelman,G,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+2003/04,Blackburn Rovers,2201,Neil Danns,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Bolton Wanderers,2208,Ivan Campo,M,38,4,1,10,14,11,13,0,0,0,0,9,0,0
+2003/04,Bolton Wanderers,1249,Kevin Davies,F,38,9,9,9,14,11,13,0,0,0,0,9,0,0
+2003/04,Bolton Wanderers,1342,Jussi Jääskeläinen,G,38,0,0,10,14,11,13,0,0,0,0,2,0,0
+2003/04,Bolton Wanderers,2040,Kevin Nolan,M,37,9,1,9,14,11,12,0,0,0,0,8,0,1
+2003/04,Bolton Wanderers,2209,Jay Jay Okocha,M,35,0,4,8,13,9,13,0,0,0,0,4,0,0
+2003/04,Bolton Wanderers,1346,Per Frandsen,M,33,1,0,4,12,9,12,0,0,0,0,5,0,0
+2003/04,Bolton Wanderers,2032,Bruno N'Gotty,D,33,2,1,7,14,9,10,0,0,0,0,4,0,0
+2003/04,Bolton Wanderers,2048,Henrik Pedersen,F,33,7,0,2,13,10,10,0,0,0,0,2,0,0
+2003/04,Bolton Wanderers,755,Simon Charlton,D,31,0,2,7,11,9,11,0,0,0,0,1,0,1
+2003/04,Bolton Wanderers,2443,Stelios Giannakopoulos,M,31,2,3,3,13,7,11,0,0,0,0,4,0,0
+2003/04,Bolton Wanderers,2031,Nicky Hunt,D,31,1,1,6,14,7,10,0,0,0,0,6,0,0
+2003/04,Bolton Wanderers,2037,Youri Djorkaeff,M,27,8,3,1,10,9,8,0,0,0,0,1,0,0
+2003/04,Bolton Wanderers,1445,Emerson Thome,D,26,0,1,6,10,8,8,0,0,0,0,7,0,0
+2003/04,Bolton Wanderers,2041,Ricardo Gardner,M,22,0,0,7,6,8,8,0,0,0,0,5,0,0
+2003/04,Bolton Wanderers,104,Anthony Barness,D,15,0,0,1,7,4,4,0,0,0,0,0,0,0
+2003/04,Bolton Wanderers,2442,Ibrahim Ba,M,9,0,0,0,2,2,5,0,0,0,0,0,0,0
+2003/04,Bolton Wanderers,2446,Javi Moreno,F,8,0,0,0,4,1,3,0,0,0,0,0,0,0
+2003/04,Bolton Wanderers,2445,Jardel,F,7,0,0,0,0,3,4,0,0,0,0,1,0,0
+2003/04,Bolton Wanderers,2205,Florent Laville,D,5,0,0,1,1,2,2,0,0,0,0,1,0,0
+2003/04,Bolton Wanderers,868,Glen Little,M,4,0,1,0,0,2,2,0,0,0,0,0,0,0
+2003/04,Bolton Wanderers,714,Steve Howey,D,3,0,0,0,1,0,2,0,0,0,0,0,0,0
+2003/04,Bolton Wanderers,2211,Delroy Facey,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Bolton Wanderers,2278,Jon Otsemobor,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Bolton Wanderers,2447,Ricardo Vaz Tê,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Charlton Athletic,1898,Matt Holland,M,38,6,1,10,14,11,13,0,0,0,0,0,0,0
+2003/04,Charlton Athletic,1848,Dean Kiely,G,37,0,1,10,14,11,12,0,0,0,0,0,0,0
+2003/04,Charlton Athletic,1371,Hermann Hreidarsson,D,33,2,1,10,12,11,10,0,0,0,0,3,0,0
+2003/04,Charlton Athletic,1850,Radostin Kishishev,M,33,0,0,8,13,9,11,0,0,0,0,4,0,0
+2003/04,Charlton Athletic,1451,Paolo Di Canio,F,31,4,12,2,11,9,11,0,0,0,0,1,0,0
+2003/04,Charlton Athletic,1118,Jason Euell,F,31,10,2,7,11,11,9,0,0,0,0,4,1,0
+2003/04,Charlton Athletic,1851,Claus Jensen,M,31,4,5,5,10,8,13,0,0,0,0,1,0,0
+2003/04,Charlton Athletic,587,Chris Perry,D,29,1,0,7,12,7,10,0,0,0,0,6,0,0
+2003/04,Charlton Athletic,2051,Jonathan Fortune,D,28,2,0,5,10,9,9,0,0,0,0,2,0,0
+2003/04,Charlton Athletic,111,Graham Stuart,M,28,3,1,3,10,8,10,0,0,0,0,0,0,0
+2003/04,Charlton Athletic,1855,Jonatan Johansson,F,26,4,1,1,10,7,9,0,0,0,0,0,0,0
+2003/04,Charlton Athletic,1464,Luke Young,D,24,0,0,4,9,6,9,0,0,0,0,5,0,0
+2003/04,Charlton Athletic,1344,Mark Fish,D,23,0,0,7,11,5,7,0,0,0,0,1,1,0
+2003/04,Charlton Athletic,2058,Carlton Cole,F,21,4,0,0,7,6,8,0,0,0,0,0,0,0
+2003/04,Charlton Athletic,1515,Paul Konchesky,D,21,0,2,4,8,5,8,0,0,0,0,3,0,0
+2003/04,Charlton Athletic,1518,Scott Parker,M,20,2,2,6,9,6,5,0,0,0,0,6,1,0
+2003/04,Charlton Athletic,1854,Shaun Bartlett,F,19,5,0,1,6,5,8,0,0,0,0,1,0,0
+2003/04,Charlton Athletic,1168,Chris Powell,D,16,0,1,1,5,5,6,0,0,0,0,1,0,0
+2003/04,Charlton Athletic,1529,Kevin Lisbie,F,9,4,0,0,4,2,3,0,0,0,0,0,0,0
+2003/04,Charlton Athletic,1853,Mathias Svensson,F,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+2003/04,Charlton Athletic,2052,Jamal Campbell-Ryce,M,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+2003/04,Charlton Athletic,684,Gary Rowett,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Charlton Athletic,1513,Simon Royce,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Charlton Athletic,2008,Jerome Thomas,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2003/04,Chelsea,800,Frank Lampard,M,38,10,5,19,24,7,7,0,0,0,0,3,0,0
+2003/04,Chelsea,1632,Joe Cole,M,35,1,5,2,21,7,7,0,0,0,0,3,0,0
+2003/04,Chelsea,1458,Wayne Bridge,D,33,1,4,18,20,6,7,0,0,0,0,1,0,0
+2003/04,Chelsea,1353,John Terry,D,33,2,2,16,22,5,6,0,0,0,0,5,0,1
+2003/04,Chelsea,1863,Jesper Grønkjaer,M,31,2,2,5,20,5,6,0,0,0,0,5,0,0
+2003/04,Chelsea,1413,Jimmy Floyd Hasselbaink,F,30,12,5,8,19,6,5,0,0,0,0,6,0,0
+2003/04,Chelsea,2454,Claude Makelele,M,30,0,0,14,19,5,6,0,0,0,0,2,0,0
+2003/04,Chelsea,2054,William Gallas,D,29,0,0,16,21,4,4,0,0,0,0,1,0,0
+2003/04,Chelsea,1676,Carlo Cudicini,G,26,0,0,14,17,5,4,0,0,0,0,0,0,0
+2003/04,Chelsea,1866,Eidur Gudjohnsen,F,26,6,2,7,18,4,4,0,0,0,0,0,1,0
+2003/04,Chelsea,2456,Adrian Mutu,F,25,6,4,5,15,4,6,0,0,0,0,5,0,0
+2003/04,Chelsea,2316,Geremi Sorele Nijtap Fotso,M,25,1,4,7,13,5,7,0,0,0,0,0,1,0
+2003/04,Chelsea,1004,Damien Duff,M,23,5,9,4,16,4,3,0,0,0,0,0,0,0
+2003/04,Chelsea,1677,Mario Melchiot,D,23,2,0,11,15,4,4,0,0,0,0,1,0,0
+2003/04,Chelsea,2457,Hernán Crespo,F,19,10,0,2,11,3,5,0,0,0,0,1,0,0
+2003/04,Chelsea,2148,Glen Johnson,D,19,3,1,5,11,4,4,0,0,0,0,3,0,0
+2003/04,Chelsea,2053,Robert Huth,D,16,0,0,4,9,4,3,0,0,0,0,6,1,0
+2003/04,Chelsea,1533,Marcel Desailly,D,15,0,1,7,8,4,3,0,0,0,0,0,0,0
+2003/04,Chelsea,1518,Scott Parker,M,11,1,0,1,7,2,2,0,0,0,0,2,0,0
+2003/04,Chelsea,2449,Marco Ambrosio,G,8,0,0,4,4,2,2,0,0,0,0,0,0,0
+2003/04,Chelsea,2116,Juan Sebastián Verón,M,7,1,0,1,5,2,0,0,0,0,0,0,0,0
+2003/04,Chelsea,1145,Celestine Babayaro,D,6,1,2,2,4,2,0,0,0,0,0,0,0,0
+2003/04,Chelsea,1300,Emmanuel Petit,M,4,0,1,0,3,1,0,0,0,0,0,1,0,0
+2003/04,Chelsea,583,Neil Sullivan,G,4,0,0,3,3,0,1,0,0,0,0,0,0,0
+2003/04,Chelsea,2233,Alexis Nicolas,M,2,0,0,1,2,0,0,0,0,0,0,0,0,0
+2003/04,Chelsea,1862,Mario Stanic,M,2,0,0,0,2,0,0,0,0,0,0,0,0,0
+2003/04,Chelsea,2234,Filipe Oliveira,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2003/04,Everton,146,Nigel Martyn,G,34,0,0,10,8,11,15,0,0,0,0,0,0,0
+2003/04,Everton,2066,Tomasz Radzinski,F,34,8,4,2,9,9,16,0,0,0,0,2,0,0
+2003/04,Everton,2064,Wayne Rooney,F,34,9,4,4,8,11,15,0,0,0,0,11,0,0
+2003/04,Everton,1886,Thomas Gravesen,M,30,2,3,8,7,10,13,0,0,0,0,5,0,0
+2003/04,Everton,1757,Kevin Kilbane,M,30,3,1,7,8,10,12,0,0,0,0,1,0,0
+2003/04,Everton,1882,Gary Naysmith,D,29,2,5,7,6,11,12,0,0,0,0,2,1,0
+2003/04,Everton,2239,Joseph Yobo,D,28,2,0,7,7,9,12,0,0,0,0,0,0,1
+2003/04,Everton,2063,Tobias Linderoth,M,27,0,2,5,6,10,11,0,0,0,0,5,0,0
+2003/04,Everton,1017,Alan Stubbs,D,27,0,0,7,8,8,11,0,0,0,0,3,0,0
+2003/04,Everton,181,David Unsworth,D,26,3,0,4,8,6,12,0,0,0,0,3,0,0
+2003/04,Everton,1881,Tony Hibbert,D,25,0,1,8,6,7,12,0,0,0,0,1,0,0
+2003/04,Everton,720,Steve Watson,D,24,5,3,2,6,9,9,0,0,0,0,4,0,0
+2003/04,Everton,2460,James McFadden,M,23,0,1,0,5,5,13,0,0,0,0,3,0,0
+2003/04,Everton,1175,Lee Carsley,M,21,2,0,2,5,6,10,0,0,0,0,3,0,0
+2003/04,Everton,1433,Alessandro Pistone,D,21,0,0,2,5,7,9,0,0,0,0,1,0,0
+2003/04,Everton,877,Duncan Ferguson,F,20,5,2,3,5,6,9,0,0,0,0,4,1,0
+2003/04,Everton,1402,Francis Jeffers,F,18,0,0,1,3,7,8,0,0,0,0,2,0,0
+2003/04,Everton,25,Kevin Campbell,F,17,1,1,1,3,5,9,0,0,0,0,1,0,0
+2003/04,Everton,1884,Alex Nyarko,M,11,0,0,1,2,2,7,0,0,0,0,1,0,0
+2003/04,Everton,1558,David Weir,D,10,0,0,3,0,3,7,0,0,0,0,1,0,0
+2003/04,Everton,2242,Li Tie,M,5,0,0,1,0,3,2,0,0,0,0,0,1,0
+2003/04,Everton,1887,Leon Osman,M,4,1,0,0,1,0,3,0,0,0,0,0,0,0
+2003/04,Everton,1096,Mark Pembridge,M,4,0,2,0,1,1,2,0,0,0,0,0,0,0
+2003/04,Everton,878,Richard Wright,G,4,0,0,0,1,2,1,0,0,0,0,0,0,0
+2003/04,Everton,2065,Nick Chadwick,F,3,0,0,0,1,0,2,0,0,0,0,0,0,0
+2003/04,Everton,1555,Peter Clarke,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Everton,1554,Steve Simonsen,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Fulham,2078,Steed Malbranque,M,38,6,10,13,14,10,14,0,0,0,0,3,0,0
+2003/04,Fulham,2070,Edwin van der Sar,G,37,0,0,15,14,10,13,0,0,0,0,0,0,0
+2003/04,Fulham,1306,Luís Boa Morte,M,33,9,4,10,12,8,13,0,0,0,0,9,1,0
+2003/04,Fulham,1830,Moritz Volz,D,33,0,0,12,12,9,12,0,0,0,0,5,0,0
+2003/04,Fulham,2079,Sylvain Legwinski,M,32,0,1,10,11,9,12,0,0,0,0,7,1,0
+2003/04,Fulham,2075,Zat Knight,D,31,0,1,12,11,7,13,0,0,0,0,4,0,1
+2003/04,Fulham,2246,Martin Djetou,D,26,0,0,7,10,6,10,0,0,0,0,3,0,0
+2003/04,Fulham,2085,Barry Hayles,F,26,4,2,0,9,4,13,0,0,0,0,3,0,0
+2003/04,Fulham,723,Lee Clark,M,25,2,3,7,10,5,10,0,0,0,0,2,0,0
+2003/04,Fulham,2080,Sean Davis,M,24,5,2,7,8,6,10,0,0,0,0,5,0,0
+2003/04,Fulham,1736,Alain Goma,D,23,0,0,11,9,8,6,0,0,0,0,6,0,0
+2003/04,Fulham,2005,Junichi Inamoto,M,22,2,1,4,9,8,5,0,0,0,0,8,0,0
+2003/04,Fulham,1598,Louis Saha,F,21,13,5,3,9,4,8,0,0,0,0,1,0,0
+2003/04,Fulham,2466,Jerome Bonnissel,M,16,0,1,6,8,4,4,0,0,0,0,0,0,0
+2003/04,Fulham,2402,Brian McBride,F,16,4,1,1,5,6,5,0,0,0,0,0,0,0
+2003/04,Fulham,2463,Carlos Bocanegra,D,15,0,0,6,4,5,6,0,0,0,0,2,1,0
+2003/04,Fulham,96,Ian Pearce,D,13,0,0,5,4,5,4,0,0,0,0,0,0,0
+2003/04,Fulham,1096,Mark Pembridge,M,12,1,0,5,4,5,3,0,0,0,0,1,0,0
+2003/04,Fulham,1254,Andy Melville,D,9,0,0,2,3,1,5,0,0,0,0,1,0,0
+2003/04,Fulham,2467,Bobby Petta,M,9,0,0,0,3,3,3,0,0,0,0,0,0,0
+2003/04,Fulham,2472,Collins John,F,8,4,1,0,3,2,3,0,0,0,0,1,0,0
+2003/04,Fulham,2247,Facundo Sava,F,6,1,0,0,2,1,3,0,0,0,0,1,0,0
+2003/04,Fulham,2465,Adam Green,D,4,0,0,1,2,1,1,0,0,0,0,1,0,0
+2003/04,Fulham,1147,Jon Harley,D,4,0,0,0,1,0,3,0,0,0,0,0,0,0
+2003/04,Fulham,2076,Dean Leacock,D,4,0,0,1,2,1,1,0,0,0,0,2,0,0
+2003/04,Fulham,2469,Malik Buari,M,3,0,0,0,1,0,2,0,0,0,0,0,0,0
+2003/04,Fulham,394,Mark Crossley,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Fulham,2086,Steve Marlet,F,1,1,0,0,1,0,0,0,0,0,0,0,0,0
+2003/04,Fulham,2471,Darren Pratley,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Fulham,2468,Zesh Rehman,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2003/04,Leeds United,694,Gary Kelly,D,37,0,1,3,8,9,20,0,0,0,0,3,0,0
+2003/04,Leeds United,1495,Jermaine Pennant,M,36,2,6,1,8,8,20,0,0,0,0,5,0,0
+2003/04,Leeds United,1404,Paul Robinson,G,36,0,0,3,8,8,20,0,0,0,0,1,1,0
+2003/04,Leeds United,1412,Alan Smith,M,35,9,3,3,8,9,18,0,0,0,0,6,0,1
+2003/04,Leeds United,259,Dominic Matteo,D,33,2,0,2,8,9,16,0,0,0,0,8,1,0
+2003/04,Leeds United,2100,James Milner,M,30,3,0,2,6,7,17,0,0,0,0,2,0,0
+2003/04,Leeds United,1909,Mark Viduka,F,30,11,3,3,8,7,15,0,0,0,0,3,2,0
+2003/04,Leeds United,1698,Seth Johnson,M,25,2,4,1,6,5,14,0,0,0,0,5,0,0
+2003/04,Leeds United,1045,Ian Harte,D,23,1,4,2,6,6,11,0,0,0,0,0,0,1
+2003/04,Leeds United,669,Michael Duberry,D,19,3,0,2,4,5,10,0,0,0,0,2,0,0
+2003/04,Leeds United,2478,Lamine Sakho,F,17,1,1,1,2,3,12,0,0,0,0,3,0,0
+2003/04,Leeds United,886,Lucas Radebe,D,14,0,0,1,3,5,6,0,0,0,0,2,0,0
+2003/04,Leeds United,1589,Steven Caldwell,D,13,1,1,0,4,3,6,0,0,0,0,3,0,0
+2003/04,Leeds United,2473,Zoumana Camara,D,13,1,0,1,2,2,9,0,0,0,0,4,0,0
+2003/04,Leeds United,243,David Batty,M,12,0,1,2,3,4,5,0,0,0,0,5,0,0
+2003/04,Leeds United,1590,Didier Domi,D,12,0,1,0,3,4,5,0,0,0,0,5,0,0
+2003/04,Leeds United,1407,Stephen McPhail,M,12,1,0,0,2,5,5,0,0,0,0,2,0,0
+2003/04,Leeds United,1027,Jody Morris,M,12,0,0,0,2,2,8,0,0,0,0,2,0,0
+2003/04,Leeds United,2475,Salomon Olembé,M,12,0,0,0,1,0,11,0,0,0,0,3,0,0
+2003/04,Leeds United,2270,Aaron Lennon,M,11,0,1,0,1,1,9,0,0,0,0,0,0,0
+2003/04,Leeds United,1706,Eirik Bakke,M,10,1,0,0,2,3,5,0,0,0,0,2,0,0
+2003/04,Leeds United,1270,Michael Bridges,F,10,0,0,0,1,1,8,0,0,0,0,2,0,0
+2003/04,Leeds United,2260,Matthew Kilgallon,D,8,2,0,1,0,3,5,0,0,0,0,0,0,0
+2003/04,Leeds United,569,Nick Barmby,M,6,0,0,0,0,0,6,0,0,0,0,0,0,0
+2003/04,Leeds United,80,Jason Wilcox,M,6,0,0,0,0,3,3,0,0,0,0,1,0,0
+2003/04,Leeds United,2275,Simon Johnson,M,5,0,0,0,0,1,4,0,0,0,0,0,0,0
+2003/04,Leeds United,2597,Roque Júnior,D,5,0,0,0,0,0,5,0,0,0,0,1,1,0
+2003/04,Leeds United,2258,Frazer Richardson,D,4,0,0,0,0,2,2,0,0,0,0,0,0,0
+2003/04,Leeds United,2250,Scott Carson,G,3,0,0,0,0,1,2,0,0,0,0,0,0,0
+2003/04,Leeds United,2598,Cyril Chapuis,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Leicester City,544,Ian Walker,G,37,0,0,9,6,14,17,0,0,0,0,0,1,1
+2003/04,Leicester City,27,Paul Dickov,F,35,11,3,2,4,15,16,0,0,0,0,8,0,0
+2003/04,Leicester City,884,James Scowcroft,F,35,5,3,6,5,13,17,0,0,0,0,2,1,0
+2003/04,Leicester City,1382,Marcus Bent,F,33,9,3,5,6,12,15,0,0,0,0,3,0,0
+2003/04,Leicester City,670,Muzzy Izzet,M,30,2,14,9,6,11,13,0,0,0,0,8,0,0
+2003/04,Leicester City,462,Les Ferdinand,F,29,12,2,2,5,14,10,0,0,0,0,1,1,0
+2003/04,Leicester City,660,Riccardo Scimeca,D,29,1,2,6,3,12,14,0,0,0,0,5,1,0
+2003/04,Leicester City,1282,Ben Thatcher,D,29,1,1,7,5,12,12,0,0,0,0,8,0,2
+2003/04,Leicester City,1708,Jordan Stewart,D,25,1,2,5,5,10,10,0,0,0,0,1,0,0
+2003/04,Leicester City,2491,Lilian Nalis,M,20,1,0,1,3,7,10,0,0,0,0,1,0,1
+2003/04,Leicester City,1436,Nikolaos Dabizas,D,18,0,0,4,2,9,7,0,0,0,0,5,1,2
+2003/04,Leicester City,1003,Billy McKinlay,M,16,0,0,4,5,5,6,0,0,0,0,5,0,0
+2003/04,Leicester City,1427,John Curtis,D,15,0,0,3,2,5,8,0,0,0,0,0,0,1
+2003/04,Leicester City,1201,Steve Guppy,M,15,0,2,1,1,8,6,0,0,0,0,0,0,0
+2003/04,Leicester City,1628,Steffen Freund,M,14,0,1,2,1,7,6,0,0,0,0,1,0,0
+2003/04,Leicester City,103,Frank Sinclair,D,14,1,1,1,3,3,8,0,0,0,0,2,0,0
+2003/04,Leicester City,1333,Callum Davidson,D,13,0,0,1,1,7,5,0,0,0,0,2,0,0
+2003/04,Leicester City,2104,Matt Heath,D,13,0,0,3,2,6,5,0,0,0,0,2,0,0
+2003/04,Leicester City,365,Craig Hignett,F,13,1,0,0,3,4,6,0,0,0,0,2,0,0
+2003/04,Leicester City,714,Steve Howey,D,13,1,0,5,3,5,5,0,0,0,0,2,0,0
+2003/04,Leicester City,453,Andy Impey,M,13,0,0,3,3,3,7,0,0,0,0,1,0,0
+2003/04,Leicester City,329,Keith Gillespie,M,12,0,0,1,1,4,7,0,0,0,0,2,0,0
+2003/04,Leicester City,1014,Gerry Taggart,D,9,0,0,1,1,2,6,0,0,0,0,1,0,1
+2003/04,Leicester City,1600,Alan Rogers,D,8,0,0,1,0,2,6,0,0,0,0,0,1,0
+2003/04,Leicester City,2486,Peter Canero,D,7,0,0,0,1,3,3,0,0,0,0,0,0,0
+2003/04,Leicester City,1196,Matt Elliott,D,7,0,1,0,1,2,4,0,0,0,0,0,1,0
+2003/04,Leicester City,488,Brian Deane,F,5,0,1,0,1,2,2,0,0,0,0,0,0,0
+2003/04,Leicester City,1917,Trevor Benjamin,F,4,0,0,0,2,1,1,0,0,0,0,0,0,0
+2003/04,Leicester City,2480,Danny Coyne,G,4,0,0,0,0,1,3,0,0,0,0,0,0,0
+2003/04,Leicester City,2488,Paul Brooker,M,3,0,0,0,0,1,2,0,0,0,0,0,0,0
+2003/04,Liverpool,1710,Sami Hyypiä,D,38,4,0,15,16,12,10,0,0,0,0,1,0,1
+2003/04,Liverpool,1049,Harry Kewell,M,36,7,3,11,16,11,9,0,0,0,0,6,0,0
+2003/04,Liverpool,908,Emile Heskey,F,35,7,4,6,16,9,10,0,0,0,0,1,0,0
+2003/04,Liverpool,1575,Steven Gerrard,M,34,4,7,12,14,12,8,0,0,0,0,2,0,0
+2003/04,Liverpool,1423,Danny Murphy,M,31,5,4,7,15,10,6,0,0,0,0,3,0,0
+2003/04,Liverpool,2109,Jerzy Dudek,G,30,0,0,12,13,9,8,0,0,0,0,0,0,0
+2003/04,Liverpool,1921,Igor Biscan,D,29,0,0,9,13,7,9,0,0,0,0,4,0,0
+2003/04,Liverpool,1208,Michael Owen,F,29,16,3,9,13,9,7,0,0,0,0,0,0,0
+2003/04,Liverpool,2110,John Arne Riise,D,28,0,4,9,14,5,9,0,0,0,0,0,0,0
+2003/04,Liverpool,2289,El Hadji Diouf,M,26,0,2,2,11,6,9,0,0,0,0,9,1,0
+2003/04,Liverpool,1595,Dietmar Hamann,M,25,2,2,11,11,9,5,0,0,0,0,6,0,0
+2003/04,Liverpool,915,Jamie Carragher,D,22,0,1,12,9,9,4,0,0,0,0,2,0,0
+2003/04,Liverpool,2072,Steve Finnan,D,22,0,2,4,9,7,6,0,0,0,0,4,0,0
+2003/04,Liverpool,1711,Vladimir Smicer,M,20,3,1,0,9,5,6,0,0,0,0,1,0,0
+2003/04,Liverpool,1335,Stéphane Henchoz,D,18,0,0,6,6,7,5,0,0,0,0,4,0,0
+2003/04,Liverpool,2288,Florent Sinama-Pongolle,F,15,2,1,0,7,5,3,0,0,0,0,0,0,0
+2003/04,Liverpool,2111,Milan Baros,F,13,1,3,1,4,5,4,0,0,0,0,2,0,0
+2003/04,Liverpool,2287,Anthony Le Tallec,F,13,0,1,1,6,2,5,0,0,0,0,0,0,0
+2003/04,Liverpool,2284,Bruno Cheyrou,M,12,2,0,1,5,5,2,0,0,0,0,0,0,0
+2003/04,Liverpool,1571,Djimi Traore,D,7,0,0,3,3,2,2,0,0,0,0,0,0,0
+2003/04,Liverpool,1359,Chris Kirkland,G,6,0,0,1,2,3,1,0,0,0,0,1,0,0
+2003/04,Liverpool,2278,Jon Otsemobor,D,4,0,0,0,1,2,1,0,0,0,0,1,0,0
+2003/04,Liverpool,2285,Salif Diao,M,3,0,1,0,1,1,1,0,0,0,0,1,0,0
+2003/04,Liverpool,1455,Paul Jones,G,2,0,0,1,1,0,1,0,0,0,0,0,0,0
+2003/04,Liverpool,2277,Patrice Luzi,G,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2003/04,Liverpool,2282,John Welsh,M,1,0,0,0,0,0,1,0,0,0,0,1,0,0
+2003/04,Manchester City,2125,Sylvain Distin,D,38,2,0,7,9,14,15,0,0,0,0,6,0,0
+2003/04,Manchester City,1934,Shaun Wright-Phillips,M,34,7,2,5,8,14,12,0,0,0,0,2,1,0
+2003/04,Manchester City,2513,Antoine Sibierski,F,33,5,4,2,8,12,13,0,0,0,0,1,0,0
+2003/04,Manchester City,2296,Sun Jihai,D,33,1,5,6,9,12,12,0,0,0,0,8,0,1
+2003/04,Manchester City,1135,Nicolas Anelka,F,32,16,4,4,6,13,13,0,0,0,0,1,1,0
+2003/04,Manchester City,2509,Michael Tarnat,D,32,3,5,6,9,11,12,0,0,0,0,6,0,1
+2003/04,Manchester City,277,Robbie Fowler,F,31,7,0,2,5,12,14,0,0,0,0,2,0,0
+2003/04,Manchester City,1184,Richard Dunne,D,29,0,0,4,6,11,12,0,0,0,0,5,0,0
+2003/04,Manchester City,741,Trevor Sinclair,M,29,1,2,2,7,11,11,0,0,0,0,2,0,1
+2003/04,Manchester City,2303,Joey Barton,M,28,1,2,4,7,9,12,0,0,0,0,9,0,0
+2003/04,Manchester City,2511,Paul Bosvelt,M,25,0,1,3,4,11,10,0,0,0,0,3,0,0
+2003/04,Manchester City,2138,Claudio Reyna,M,23,1,1,2,7,7,9,0,0,0,0,0,0,0
+2003/04,Manchester City,271,Steve McManaman,M,22,0,1,2,5,9,8,0,0,0,0,1,0,0
+2003/04,Manchester City,1179,Paulo Wanchope,F,22,6,2,1,5,10,7,0,0,0,0,1,0,0
+2003/04,Manchester City,1,David Seaman,G,19,0,0,3,5,7,7,0,0,0,0,0,0,0
+2003/04,Manchester City,2295,David Sommeil,D,18,1,0,3,4,7,7,0,0,0,0,3,0,0
+2003/04,Manchester City,252,David James,G,17,0,0,3,4,7,6,0,0,0,0,0,0,0
+2003/04,Manchester City,1215,Jonathan Macken,F,15,1,2,1,4,7,4,0,0,0,0,0,0,0
+2003/04,Manchester City,1935,Danny Tiatto,M,5,0,1,0,2,2,1,0,0,0,0,1,0,0
+2003/04,Manchester City,2510,Daniel Van Buyten,D,5,0,0,1,1,1,3,0,0,0,0,0,1,0
+2003/04,Manchester City,1247,Eyal Berkovic,M,4,0,0,0,0,1,3,0,0,0,0,0,0,0
+2003/04,Manchester City,2290,Kevin Stuhr-Ellegaard,G,4,0,0,0,0,1,3,0,0,0,0,0,0,0
+2003/04,Manchester City,2512,Stephen Elliott,F,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+2003/04,Manchester City,1929,Stephen Jordan,D,2,0,0,0,2,0,0,0,0,0,0,0,0,0
+2003/04,Manchester United,1719,Mikaël Silvestre,D,34,0,1,11,20,5,9,0,0,0,0,2,0,0
+2003/04,Manchester United,335,Ryan Giggs,M,33,7,11,6,19,6,8,0,0,0,0,3,0,0
+2003/04,Manchester United,1717,John O'Shea,D,33,2,0,6,18,6,9,0,0,0,0,1,0,1
+2003/04,Manchester United,2516,Tim Howard,G,32,0,1,12,20,4,8,0,0,0,0,0,0,0
+2003/04,Manchester United,2117,Ruud van Nistelrooij,F,32,20,2,10,20,6,6,0,0,0,0,4,0,0
+2003/04,Manchester United,921,Phil Neville,M,31,0,2,9,19,5,7,0,0,0,0,5,0,0
+2003/04,Manchester United,321,Gary Neville,D,30,2,3,11,19,5,6,0,0,0,0,5,0,2
+2003/04,Manchester United,2522,Cristiano Ronaldo,F,29,4,4,4,18,3,8,0,0,0,0,4,1,0
+2003/04,Manchester United,407,Roy Keane,M,28,3,3,8,19,5,4,0,0,0,0,2,0,0
+2003/04,Manchester United,336,Paul Scholes,M,28,9,3,7,18,5,5,0,0,0,0,5,0,0
+2003/04,Manchester United,2118,Diego Forlán,F,24,4,4,1,14,3,7,0,0,0,0,2,0,0
+2003/04,Manchester United,1718,Quinton Fortune,M,23,0,2,6,14,4,5,0,0,0,0,2,0,0
+2003/04,Manchester United,1943,Darren Fletcher,M,22,0,1,2,14,3,5,0,0,0,0,0,2,0
+2003/04,Manchester United,332,Nicky Butt,M,21,1,0,3,14,1,6,0,0,0,0,2,0,0
+2003/04,Manchester United,1111,Rio Ferdinand,D,20,0,1,9,15,2,3,0,0,0,0,0,0,0
+2003/04,Manchester United,1211,Wes Brown,D,17,0,1,4,7,4,6,0,0,0,0,1,0,0
+2003/04,Manchester United,2520,Eric Djemba Djemba,M,15,0,1,2,10,1,4,0,0,0,0,1,0,0
+2003/04,Manchester United,2140,David Bellion,F,14,2,1,1,8,1,5,0,0,0,0,0,0,0
+2003/04,Manchester United,1217,Ole Gunnar Solskjær,F,13,0,2,0,6,3,4,0,0,0,0,2,0,0
+2003/04,Manchester United,2519,Kléberson,M,12,2,3,2,5,3,4,0,0,0,0,1,0,0
+2003/04,Manchester United,1598,Louis Saha,F,12,7,2,1,6,3,3,0,0,0,0,0,0,0
+2003/04,Manchester United,2112,Roy Carroll,G,6,0,0,2,3,2,1,0,0,0,0,0,0,0
+2003/04,Middlesbrough,1218,Mark Schwarzer,G,36,0,0,13,11,9,16,0,0,0,0,0,0,0
+2003/04,Middlesbrough,1361,George Boateng,M,35,0,2,13,11,9,15,0,0,0,0,6,0,0
+2003/04,Middlesbrough,2123,Szilard Nemeth,F,32,9,2,1,10,8,14,0,0,0,0,2,0,0
+2003/04,Middlesbrough,1072,Juninho Paulista,M,31,8,2,5,10,8,13,0,0,0,0,2,0,0
+2003/04,Middlesbrough,2528,Gaizka Mendieta,M,31,2,4,12,10,9,12,0,0,0,0,3,0,0
+2003/04,Middlesbrough,2120,Franck Queudrue,D,31,0,1,12,12,8,11,0,0,0,0,3,0,1
+2003/04,Middlesbrough,2056,Boudewijn Zenden,M,31,4,4,11,12,7,12,0,0,0,0,3,1,0
+2003/04,Middlesbrough,929,Danny Mills,D,28,0,1,8,11,4,13,0,0,0,0,10,0,1
+2003/04,Middlesbrough,153,Gareth Southgate,D,27,1,2,11,9,7,11,0,0,0,0,1,0,0
+2003/04,Middlesbrough,1429,Jonathan Greening,M,25,1,0,5,9,6,10,0,0,0,0,5,0,0
+2003/04,Middlesbrough,1952,Joseph-Desire Job,F,24,5,3,0,9,3,12,0,0,0,0,1,0,0
+2003/04,Middlesbrough,2319,Massimo Maccarone,F,23,6,2,0,8,6,9,0,0,0,0,3,0,0
+2003/04,Middlesbrough,2044,Michael Ricketts,F,23,2,1,0,8,6,9,0,0,0,0,2,0,0
+2003/04,Middlesbrough,2314,Doriva,M,21,0,2,6,9,3,9,0,0,0,0,6,0,0
+2003/04,Middlesbrough,2122,Stewart Downing,M,20,0,1,0,6,4,10,0,0,0,0,0,0,0
+2003/04,Middlesbrough,937,Colin Cooper,D,19,0,0,9,7,7,5,0,0,0,0,3,0,0
+2003/04,Middlesbrough,1695,Chris Riggott,D,17,0,0,4,6,3,8,0,0,0,0,2,0,0
+2003/04,Middlesbrough,35,Ugo Ehiogu,D,16,0,0,3,6,1,9,0,0,0,0,4,0,0
+2003/04,Middlesbrough,1948,Stuart Parnaby,D,13,0,0,2,3,3,7,0,0,0,0,1,0,0
+2003/04,Middlesbrough,1553,Malcolm Christie,F,10,1,1,0,3,2,5,0,0,0,0,1,0,0
+2003/04,Middlesbrough,2313,Andrew Davies,D,10,0,0,3,2,5,3,0,0,0,0,0,0,0
+2003/04,Middlesbrough,1584,Robbie Stockdale,D,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+2003/04,Middlesbrough,72,Alan Wright,D,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+2003/04,Middlesbrough,1947,Bradley Jones,G,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+2003/04,Middlesbrough,1728,Carlos Marinelli,M,1,1,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Middlesbrough,2529,James Morrison,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Middlesbrough,1367,Carlo Nash,G,1,0,0,1,1,0,0,0,0,0,0,0,0,0
+2003/04,Newcastle United,851,Shay Given,G,38,0,0,11,13,17,8,0,0,0,0,1,0,0
+2003/04,Newcastle United,239,Gary Speed,M,38,3,3,9,13,17,8,0,0,0,0,7,0,0
+2003/04,Newcastle United,89,Alan Shearer,F,37,22,4,11,13,17,7,0,0,0,0,1,0,0
+2003/04,Newcastle United,1955,Olivier Bernard,D,35,1,3,11,13,16,6,0,0,0,0,4,0,0
+2003/04,Newcastle United,2126,Laurent Robert,M,35,6,6,2,11,16,8,0,0,0,0,1,1,0
+2003/04,Newcastle United,1230,Aaron Hughes,D,34,0,0,10,13,15,6,0,0,0,0,0,0,0
+2003/04,Newcastle United,2127,Jermaine Jenas,M,31,2,2,9,10,14,7,0,0,0,0,3,0,0
+2003/04,Newcastle United,1890,Titus Bramble,D,29,0,0,7,11,11,7,0,0,0,0,7,0,1
+2003/04,Newcastle United,1664,Andy O'Brien,D,28,1,0,6,10,11,7,0,0,0,0,2,2,1
+2003/04,Newcastle United,1962,Shola Ameobi,F,26,7,2,2,10,9,7,0,0,0,0,0,0,0
+2003/04,Newcastle United,1740,Kieron Dyer,M,25,1,3,8,9,13,3,0,0,0,0,1,0,0
+2003/04,Newcastle United,2093,Darren Ambrose,M,24,2,2,0,11,8,5,0,0,0,0,3,0,0
+2003/04,Newcastle United,1190,Lee Bowyer,M,24,2,1,1,8,10,6,0,0,0,0,5,0,0
+2003/04,Newcastle United,1565,Jonathan Woodgate,D,18,0,0,6,8,8,2,0,0,0,0,3,0,0
+2003/04,Newcastle United,1869,Craig Bellamy,F,16,4,0,3,4,9,3,0,0,0,0,2,0,0
+2003/04,Newcastle United,2325,Hugo Viana,M,16,0,1,0,5,5,6,0,0,0,0,2,0,0
+2003/04,Newcastle United,1597,Nolberto Solano,M,12,0,3,1,3,7,2,0,0,0,0,0,0,0
+2003/04,Newcastle United,1959,Lomana Lua Lua,F,7,0,1,0,2,3,2,0,0,0,0,0,0,0
+2003/04,Newcastle United,1270,Michael Bridges,F,6,0,0,0,2,3,1,0,0,0,0,1,0,0
+2003/04,Newcastle United,2128,Michael Chopra,F,6,0,0,0,0,2,4,0,0,0,0,0,0,0
+2003/04,Newcastle United,1589,Steven Caldwell,D,5,0,0,0,0,4,1,0,0,0,0,0,0,0
+2003/04,Newcastle United,1437,Andy Griffin,D,5,0,0,1,0,3,2,0,0,0,0,2,0,0
+2003/04,Newcastle United,2533,Martin Brittain,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Newcastle United,2323,Steven Taylor,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Portsmouth,2553,Yakubu,F,37,16,3,3,12,9,16,0,0,0,0,2,0,0
+2003/04,Portsmouth,1315,Arjan De Zeeuw,D,36,1,3,8,12,9,15,0,0,0,0,7,0,0
+2003/04,Portsmouth,576,Teddy Sheringham,F,32,9,4,6,11,7,14,0,0,0,0,5,0,0
+2003/04,Portsmouth,1095,Dejan Stefanovic,D,32,3,0,5,12,6,14,0,0,0,0,4,1,0
+2003/04,Portsmouth,406,Steve Stone,M,32,2,5,5,11,8,13,0,0,0,0,2,1,0
+2003/04,Portsmouth,1080,Shaka Hislop,G,30,0,0,6,11,8,11,0,0,0,0,1,0,0
+2003/04,Portsmouth,2542,Matthew Taylor,M,30,0,3,4,8,6,16,0,0,0,0,2,0,2
+2003/04,Portsmouth,2547,Amdy Faye,M,27,0,0,6,8,9,10,0,0,0,0,7,0,0
+2003/04,Portsmouth,2452,Aleksey Smertin,M,26,0,0,3,8,7,11,0,0,0,0,3,0,0
+2003/04,Portsmouth,2541,Linvoy Primus,D,21,0,0,4,8,5,8,0,0,0,0,0,0,0
+2003/04,Portsmouth,1092,Nigel Quashie,M,21,1,0,2,7,8,6,0,0,0,0,5,0,0
+2003/04,Portsmouth,1205,Patrik Berger,M,20,5,5,5,6,5,9,0,0,0,0,3,1,0
+2003/04,Portsmouth,2601,Boris Zivkovic,D,18,0,1,5,4,4,10,0,0,0,0,4,0,0
+2003/04,Portsmouth,1959,Lomana Lua Lua,F,15,4,0,0,6,4,5,0,0,0,0,1,0,0
+2003/04,Portsmouth,1980,Sebastien Schemmel,D,14,0,1,2,4,3,7,0,0,0,0,5,0,1
+2003/04,Portsmouth,78,Tim Sherwood,M,13,0,1,0,3,2,8,0,0,0,0,6,0,0
+2003/04,Portsmouth,2540,Petri Pasanen,D,12,0,0,2,5,3,4,0,0,0,0,1,0,0
+2003/04,Portsmouth,1247,Eyal Berkovic,M,11,1,1,0,4,3,4,0,0,0,0,2,0,0
+2003/04,Portsmouth,1302,Richard Hughes,M,11,0,0,0,4,1,6,0,0,0,0,1,0,0
+2003/04,Portsmouth,1979,Hayden Foxe,D,10,1,0,1,3,1,6,0,0,0,0,2,0,0
+2003/04,Portsmouth,2385,Jason Roberts,F,10,1,0,0,1,1,8,0,0,0,0,0,0,0
+2003/04,Portsmouth,2555,Ivica Mornar,F,8,1,0,0,0,3,5,0,0,0,0,0,0,0
+2003/04,Portsmouth,1550,Kevin Harper,M,7,0,0,0,3,2,2,0,0,0,0,0,0,0
+2003/04,Portsmouth,1427,John Curtis,D,6,0,0,0,1,1,4,0,0,0,0,0,0,0
+2003/04,Portsmouth,2554,Vincent Pericard,F,6,0,0,0,2,2,2,0,0,0,0,1,0,0
+2003/04,Portsmouth,2536,Harald Wapenaar,G,5,0,0,1,1,0,4,0,0,0,0,0,0,0
+2003/04,Portsmouth,2550,Gary O'Neil,M,3,2,0,0,1,0,2,0,0,0,0,0,0,0
+2003/04,Portsmouth,708,Pavel Srnicek,G,3,0,0,1,0,1,2,0,0,0,0,0,0,0
+2003/04,Portsmouth,1393,Deon Burton,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Portsmouth,2543,Richard Duffy,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2003/04,Portsmouth,2549,Carl Robinson,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Portsmouth,1984,Svetoslav Todorov,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Southampton,1005,James Beattie,F,37,14,6,10,12,11,14,0,0,0,0,3,0,0
+2003/04,Southampton,1033,Paul Telfer,D,37,0,2,10,12,11,14,0,0,0,0,3,0,0
+2003/04,Southampton,1768,Kevin Phillips,F,34,12,3,3,10,10,14,0,0,0,0,2,1,0
+2003/04,Southampton,1246,Claus Lundekvam,D,31,1,2,10,11,10,10,0,0,0,0,2,0,0
+2003/04,Southampton,2130,Anders Svensson,M,30,0,2,5,9,8,13,0,0,0,0,6,0,0
+2003/04,Southampton,528,Jason Dodd,D,28,0,3,12,11,9,8,0,0,0,0,2,0,0
+2003/04,Southampton,2329,Antti Niemi,G,28,0,0,8,9,7,12,0,0,0,0,1,0,0
+2003/04,Southampton,1391,Rory Delap,M,27,1,2,6,8,9,10,0,0,0,0,1,0,0
+2003/04,Southampton,2131,Fabrice Fernandes,M,27,1,2,1,7,9,11,0,0,0,0,2,0,0
+2003/04,Southampton,1426,Danny Higginbotham,D,27,0,0,5,8,7,12,0,0,0,0,3,0,0
+2003/04,Southampton,1607,David Prutton,M,27,1,2,4,9,7,11,0,0,0,0,4,1,0
+2003/04,Southampton,2335,Michael Svensson,D,26,2,1,10,9,9,8,0,0,0,0,6,1,0
+2003/04,Southampton,2133,Brett Ormerod,F,22,5,0,1,6,5,11,0,0,0,0,1,0,0
+2003/04,Southampton,70,Graeme Le Saux,D,19,0,1,7,6,7,6,0,0,0,0,4,0,0
+2003/04,Southampton,2561,Neil McCann,M,18,0,0,1,5,5,8,0,0,0,0,4,0,0
+2003/04,Southampton,1623,Marian Pahars,F,14,2,1,1,4,3,7,0,0,0,0,0,0,0
+2003/04,Southampton,812,Chris Marsden,M,13,0,1,1,6,1,6,0,0,0,0,4,0,0
+2003/04,Southampton,2558,Fitz Hall,D,11,0,0,0,3,2,6,0,0,0,0,0,0,0
+2003/04,Southampton,2562,Yoann Folly,M,9,0,0,1,3,2,4,0,0,0,0,1,0,0
+2003/04,Southampton,1455,Paul Jones,G,8,0,0,4,3,3,2,0,0,0,0,0,0,0
+2003/04,Southampton,2560,Darren Kenton,D,7,0,0,0,1,1,5,0,0,0,0,0,0,0
+2003/04,Southampton,958,Matt Oakley,M,7,0,1,4,3,3,1,0,0,0,0,2,0,0
+2003/04,Southampton,2557,Stephen Crainey,D,5,0,1,0,0,1,4,0,0,0,0,0,0,0
+2003/04,Southampton,2563,Leandre Griffit,M,5,2,0,0,1,1,3,0,0,0,0,0,0,0
+2003/04,Southampton,2129,Chris Baird,D,4,0,0,0,1,0,3,0,0,0,0,1,0,0
+2003/04,Southampton,2132,Agustin Delgado,F,4,0,0,0,1,1,2,0,0,0,0,0,0,0
+2003/04,Southampton,1749,Jo Tessem,M,3,0,0,0,2,1,0,0,0,0,0,0,0,0
+2003/04,Southampton,2328,Alan Blayney,G,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+2003/04,Southampton,2559,Martin Cranie,D,1,0,0,0,0,0,1,0,0,0,0,0,0,1
+2003/04,Tottenham Hotspur,1193,Kasey Keller,G,38,0,0,8,13,6,19,0,0,0,0,0,0,0
+2003/04,Tottenham Hotspur,1692,Robbie Keane,F,34,14,3,6,12,5,17,0,0,0,0,1,0,0
+2003/04,Tottenham Hotspur,1771,Anthony Gardner,D,33,0,0,8,10,5,18,0,0,0,0,8,0,1
+2003/04,Tottenham Hotspur,776,Stephen Carr,D,32,1,2,6,11,5,16,0,0,0,0,8,1,1
+2003/04,Tottenham Hotspur,880,Mauricio Taricco,D,32,1,1,5,10,6,16,0,0,0,0,10,0,0
+2003/04,Tottenham Hotspur,1627,Ledley King,D,29,1,4,5,10,4,15,0,0,0,0,1,0,0
+2003/04,Tottenham Hotspur,1805,Frederic Kanoute,F,27,7,1,2,9,5,13,0,0,0,0,0,0,0
+2003/04,Tottenham Hotspur,2006,Rohan Ricketts,M,24,1,1,2,9,3,12,0,0,0,0,1,0,0
+2003/04,Tottenham Hotspur,1748,Dean Richards,D,23,0,1,4,7,4,12,0,0,0,0,3,0,0
+2003/04,Tottenham Hotspur,2566,Stéphane Dalmat,M,22,3,1,2,9,2,11,0,0,0,0,2,0,0
+2003/04,Tottenham Hotspur,566,Darren Anderton,M,20,1,4,3,7,4,9,0,0,0,0,4,0,0
+2003/04,Tottenham Hotspur,1355,Gustavo Poyet,M,20,3,1,2,9,4,7,0,0,0,0,1,0,0
+2003/04,Tottenham Hotspur,2568,Hélder Postiga,F,19,1,1,0,5,2,12,0,0,0,0,1,0,0
+2003/04,Tottenham Hotspur,918,Michael Brown,M,17,1,1,3,6,3,8,0,0,0,0,1,0,0
+2003/04,Tottenham Hotspur,1775,Simon Davies,M,17,2,1,3,7,4,6,0,0,0,0,2,0,0
+2003/04,Tottenham Hotspur,1770,Gary Doherty,D,17,0,0,2,6,2,9,0,0,0,0,3,0,1
+2003/04,Tottenham Hotspur,262,Jamie Redknapp,M,17,1,0,2,4,3,10,0,0,0,0,7,0,0
+2003/04,Tottenham Hotspur,2603,Bobby Zamora,F,16,0,2,0,4,2,10,0,0,0,0,1,0,0
+2003/04,Tottenham Hotspur,1526,Jermain Defoe,F,15,7,0,3,5,3,7,0,0,0,0,1,0,0
+2003/04,Tottenham Hotspur,1515,Paul Konchesky,D,12,0,1,1,4,2,6,0,0,0,0,4,0,0
+2003/04,Tottenham Hotspur,1773,Johnnie Jackson,M,11,1,2,0,4,2,5,0,0,0,0,0,0,0
+2003/04,Tottenham Hotspur,1974,Stephen Kelly,D,11,0,0,2,3,2,6,0,0,0,0,0,0,0
+2003/04,Tottenham Hotspur,1727,Christian Ziege,D,8,0,0,1,3,0,5,0,0,0,0,2,0,0
+2003/04,Tottenham Hotspur,2144,Goran Bunjevcevic,D,7,0,0,0,0,3,4,0,0,0,0,0,0,0
+2003/04,Tottenham Hotspur,2567,Mbulelo Mabizela,M,6,1,0,0,1,0,5,0,0,0,0,1,0,0
+2003/04,Tottenham Hotspur,2359,Dean Marney,M,3,0,0,0,1,0,2,0,0,0,0,1,0,0
+2003/04,Tottenham Hotspur,2356,Jonathan Blondel,M,1,0,0,0,0,0,1,0,0,0,0,1,0,0
+2003/04,Tottenham Hotspur,2360,Mark Yeates,M,1,0,0,1,1,0,0,0,0,0,0,0,0,0
+2003/04,Wolverhampton Wanderers,2572,Lee Naylor,D,38,0,0,7,7,12,19,0,0,0,0,6,0,0
+2003/04,Wolverhampton Wanderers,1752,Paul Butler,D,37,1,0,7,7,12,18,0,0,0,0,7,0,0
+2003/04,Wolverhampton Wanderers,1259,Alex Rae,M,33,5,3,5,6,11,16,0,0,0,0,10,1,0
+2003/04,Wolverhampton Wanderers,1754,Jody Craddock,D,32,1,1,6,5,9,18,0,0,0,0,2,0,1
+2003/04,Wolverhampton Wanderers,326,Paul Ince,M,32,2,2,6,6,9,17,0,0,0,0,13,1,0
+2003/04,Wolverhampton Wanderers,315,Denis Irwin,D,32,0,2,5,5,11,16,0,0,0,0,4,0,0
+2003/04,Wolverhampton Wanderers,916,Mark Kennedy,D,31,2,5,4,4,11,16,0,0,0,0,1,0,0
+2003/04,Wolverhampton Wanderers,2590,Henri Camara,F,30,7,3,3,6,9,15,0,0,0,0,2,0,0
+2003/04,Wolverhampton Wanderers,2581,Colin Cameron,M,30,4,0,5,6,9,15,0,0,0,0,5,0,0
+2003/04,Wolverhampton Wanderers,1519,Shaun Newton,M,28,0,1,2,6,9,13,0,0,0,0,1,0,0
+2003/04,Wolverhampton Wanderers,2589,Kenny Miller,F,25,2,1,1,5,9,11,0,0,0,0,2,0,0
+2003/04,Wolverhampton Wanderers,34,Michael Oakes,G,21,0,0,4,4,7,10,0,0,0,0,0,0,0
+2003/04,Wolverhampton Wanderers,1284,Carl Cort,F,16,5,2,2,3,5,8,0,0,0,0,0,0,0
+2003/04,Wolverhampton Wanderers,2592,Ioan Viorel Ganea,F,16,3,0,0,3,5,8,0,0,0,0,4,0,0
+2003/04,Wolverhampton Wanderers,1277,Steffen Iversen,F,16,4,0,0,2,5,9,0,0,0,0,1,0,0
+2003/04,Wolverhampton Wanderers,1455,Paul Jones,G,16,0,0,3,3,5,8,0,0,0,0,0,0,0
+2003/04,Wolverhampton Wanderers,745,Nathan Blake,F,13,1,2,3,2,4,7,0,0,0,0,3,0,0
+2003/04,Wolverhampton Wanderers,2173,Johannes Karl Gudjonsson,M,11,0,0,1,1,6,4,0,0,0,0,1,0,0
+2003/04,Wolverhampton Wanderers,2573,Mark Clyde,D,10,0,1,0,2,3,5,0,0,0,0,0,0,0
+2003/04,Wolverhampton Wanderers,2582,Silas,M,9,0,0,0,0,1,8,0,0,0,0,0,0,0
+2003/04,Wolverhampton Wanderers,2576,Isaac Okoronkwo,D,7,0,0,1,2,3,2,0,0,0,0,2,0,0
+2003/04,Wolverhampton Wanderers,1650,Oleg Luzhny,D,6,0,0,0,1,1,4,0,0,0,0,2,0,0
+2003/04,Wolverhampton Wanderers,1178,Dean Sturridge,F,5,0,1,0,0,0,5,0,0,0,0,0,0,0
+2003/04,Wolverhampton Wanderers,1621,Hassan Kachloul,M,4,0,0,0,3,1,0,0,0,0,0,0,0,0
+2003/04,Wolverhampton Wanderers,2584,Keith Andrews,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+2003/04,Wolverhampton Wanderers,1176,Kevin Cooper,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+2003/04,Wolverhampton Wanderers,2571,Matt Murray,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0

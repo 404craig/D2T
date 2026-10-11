@@ -1,0 +1,15371 @@
+{
+"season": "2019/20",
+"conFromClub": false,
+"clubs": [
+"Liverpool",
+"Man City",
+"Man Utd",
+"Chelsea",
+"Leicester",
+"Spurs",
+"Wolves",
+"Arsenal",
+"Sheffield Utd",
+"Burnley",
+"Southampton",
+"Everton",
+"Newcastle",
+"Crystal Palace",
+"Brighton",
+"West Ham",
+"Aston Villa",
+"Bournemouth",
+"Watford",
+"Norwich"
+],
+"players": [
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Pierre-Emerick Aubameyang",
+"pos": "FWD",
+"ovr": 85,
+"tier": "best",
+"stats": {
+"GOL": 92,
+"AST": 58,
+"DIF": 62,
+"APP": 78
+},
+"apps": 36,
+"goals": 22,
+"assists": 3,
+"cleanSheets": 8,
+"wdl": [
+14,
+12,
+10
+],
+"withPPG": 1.5,
+"withoutPPG": 1.0,
+"withoutGames": 2,
+"minutes": 3138,
+"goalsConceded": 44,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "David Luiz",
+"pos": "DEF",
+"ovr": 73,
+"tier": "silver",
+"stats": {
+"CLN": 68,
+"THR": 62,
+"DIF": 59,
+"APP": 79
+},
+"apps": 33,
+"goals": 2,
+"assists": 1,
+"cleanSheets": 8,
+"wdl": [
+11,
+14,
+8
+],
+"withPPG": 1.42,
+"withoutPPG": 1.8,
+"withoutGames": 5,
+"minutes": 2811,
+"goalsConceded": 38,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Nicolas Pepe",
+"pos": "FWD",
+"ovr": 68,
+"tier": "silver",
+"stats": {
+"GOL": 52,
+"AST": 82,
+"DIF": 64,
+"APP": 69
+},
+"apps": 31,
+"goals": 5,
+"assists": 6,
+"cleanSheets": 1,
+"wdl": [
+13,
+9,
+9
+],
+"withPPG": 1.55,
+"withoutPPG": 1.14,
+"withoutGames": 7,
+"minutes": 2015,
+"goalsConceded": 30,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Granit Xhaka",
+"pos": "MID",
+"ovr": 73,
+"tier": "silver",
+"stats": {
+"AST": 57,
+"GOL": 50,
+"CLN": 89,
+"DIF": 69,
+"APP": 71
+},
+"apps": 31,
+"goals": 1,
+"assists": 2,
+"cleanSheets": 10,
+"wdl": [
+13,
+12,
+6
+],
+"withPPG": 1.65,
+"withoutPPG": 0.71,
+"withoutGames": 7,
+"minutes": 2591,
+"goalsConceded": 31,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Alexandre Lacazette",
+"pos": "FWD",
+"ovr": 73,
+"tier": "silver",
+"stats": {
+"GOL": 71,
+"AST": 70,
+"DIF": 55,
+"APP": 67
+},
+"apps": 30,
+"goals": 10,
+"assists": 4,
+"cleanSheets": 0,
+"wdl": [
+9,
+12,
+9
+],
+"withPPG": 1.3,
+"withoutPPG": 2.12,
+"withoutGames": 8,
+"minutes": 1877,
+"goalsConceded": 25,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Bernd Leno",
+"pos": "GK",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"CLN": 49,
+"CON": 56,
+"DIF": 55,
+"APP": 60
+},
+"apps": 30,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 7,
+"wdl": [
+9,
+13,
+8
+],
+"withPPG": 1.33,
+"withoutPPG": 2.0,
+"withoutGames": 8,
+"minutes": 2650,
+"goalsConceded": 39,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Lucas Torreira",
+"pos": "MID",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"AST": 50,
+"GOL": 50,
+"CLN": 50,
+"DIF": 64,
+"APP": 67
+},
+"apps": 29,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 2,
+"wdl": [
+10,
+13,
+6
+],
+"withPPG": 1.48,
+"withoutPPG": 1.44,
+"withoutGames": 9,
+"minutes": 1508,
+"goalsConceded": 23,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Joe Willock",
+"pos": "MID",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"AST": 50,
+"GOL": 51,
+"CLN": 39,
+"DIF": 58,
+"APP": 67
+},
+"apps": 29,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+10,
+9,
+10
+],
+"withPPG": 1.34,
+"withoutPPG": 1.89,
+"withoutGames": 9,
+"minutes": 844,
+"goalsConceded": 16,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Sead Kolasinac",
+"pos": "DEF",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"CLN": 40,
+"THR": 59,
+"DIF": 70,
+"APP": 65
+},
+"apps": 26,
+"goals": 0,
+"assists": 2,
+"cleanSheets": 3,
+"wdl": [
+11,
+8,
+7
+],
+"withPPG": 1.58,
+"withoutPPG": 1.25,
+"withoutGames": 12,
+"minutes": 1699,
+"goalsConceded": 26,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Bukayo Saka",
+"pos": "MID",
+"ovr": 71,
+"tier": "silver",
+"stats": {
+"AST": 82,
+"GOL": 52,
+"CLN": 65,
+"DIF": 61,
+"APP": 60
+},
+"apps": 26,
+"goals": 1,
+"assists": 5,
+"cleanSheets": 4,
+"wdl": [
+9,
+10,
+7
+],
+"withPPG": 1.42,
+"withoutPPG": 1.58,
+"withoutGames": 12,
+"minutes": 1753,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Dani Ceballos",
+"pos": "MID",
+"ovr": 68,
+"tier": "silver",
+"stats": {
+"AST": 61,
+"GOL": 46,
+"CLN": 53,
+"DIF": 80,
+"APP": 56
+},
+"apps": 24,
+"goals": 0,
+"assists": 2,
+"cleanSheets": 2,
+"wdl": [
+12,
+6,
+6
+],
+"withPPG": 1.75,
+"withoutPPG": 1.0,
+"withoutGames": 14,
+"minutes": 1699,
+"goalsConceded": 21,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Matteo Guendouzi",
+"pos": "MID",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"AST": 52,
+"GOL": 40,
+"CLN": 60,
+"DIF": 57,
+"APP": 56
+},
+"apps": 24,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 3,
+"wdl": [
+7,
+10,
+7
+],
+"withPPG": 1.29,
+"withoutPPG": 1.79,
+"withoutGames": 14,
+"minutes": 1748,
+"goalsConceded": 31,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Ainsley Maitland-Niles",
+"pos": "MID",
+"ovr": 67,
+"tier": "silver",
+"stats": {
+"AST": 64,
+"GOL": 43,
+"CLN": 64,
+"DIF": 75,
+"APP": 47
+},
+"apps": 20,
+"goals": 0,
+"assists": 2,
+"cleanSheets": 3,
+"wdl": [
+9,
+7,
+4
+],
+"withPPG": 1.7,
+"withoutPPG": 1.22,
+"withoutGames": 18,
+"minutes": 1383,
+"goalsConceded": 21,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Sokratis Papastathopoulos",
+"pos": "DEF",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"CLN": 60,
+"THR": 65,
+"DIF": 64,
+"APP": 50
+},
+"apps": 19,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 4,
+"wdl": [
+7,
+8,
+4
+],
+"withPPG": 1.53,
+"withoutPPG": 1.42,
+"withoutGames": 19,
+"minutes": 1697,
+"goalsConceded": 25,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Mesut Ozil",
+"pos": "MID",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"AST": 66,
+"GOL": 68,
+"CLN": 50,
+"DIF": 58,
+"APP": 44
+},
+"apps": 18,
+"goals": 1,
+"assists": 2,
+"cleanSheets": 1,
+"wdl": [
+5,
+9,
+4
+],
+"withPPG": 1.33,
+"withoutPPG": 1.6,
+"withoutGames": 20,
+"minutes": 1448,
+"goalsConceded": 20,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Reiss Nelson",
+"pos": "FWD",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"GOL": 46,
+"AST": 43,
+"DIF": 74,
+"APP": 40
+},
+"apps": 17,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+8,
+5,
+4
+],
+"withPPG": 1.71,
+"withoutPPG": 1.29,
+"withoutGames": 21,
+"minutes": 627,
+"goalsConceded": 7,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Hector Bellerin",
+"pos": "DEF",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"CLN": 59,
+"THR": 57,
+"DIF": 60,
+"APP": 43
+},
+"apps": 15,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 3,
+"wdl": [
+6,
+4,
+5
+],
+"withPPG": 1.47,
+"withoutPPG": 1.48,
+"withoutGames": 23,
+"minutes": 1159,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Shkodran Mustafi",
+"pos": "DEF",
+"ovr": 67,
+"tier": "silver",
+"stats": {
+"CLN": 71,
+"THR": 57,
+"DIF": 58,
+"APP": 43
+},
+"apps": 15,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 4,
+"wdl": [
+5,
+6,
+4
+],
+"withPPG": 1.4,
+"withoutPPG": 1.52,
+"withoutGames": 23,
+"minutes": 1205,
+"goalsConceded": 17,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Kieran Tierney",
+"pos": "DEF",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"CLN": 37,
+"THR": 70,
+"DIF": 60,
+"APP": 43
+},
+"apps": 15,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 1,
+"wdl": [
+6,
+4,
+5
+],
+"withPPG": 1.47,
+"withoutPPG": 1.48,
+"withoutGames": 23,
+"minutes": 992,
+"goalsConceded": 16,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Calum Chambers",
+"pos": "DEF",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"CLN": 61,
+"THR": 71,
+"DIF": 55,
+"APP": 41
+},
+"apps": 14,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 3,
+"wdl": [
+4,
+6,
+4
+],
+"withPPG": 1.29,
+"withoutPPG": 1.58,
+"withoutGames": 24,
+"minutes": 1103,
+"goalsConceded": 15,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Gabriel Martinelli",
+"pos": "FWD",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"GOL": 57,
+"AST": 45,
+"DIF": 53,
+"APP": 36
+},
+"apps": 14,
+"goals": 3,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+3,
+8,
+3
+],
+"withPPG": 1.21,
+"withoutPPG": 1.62,
+"withoutGames": 24,
+"minutes": 655,
+"goalsConceded": 9,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Eddie Nketiah",
+"pos": "FWD",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"GOL": 54,
+"AST": 45,
+"DIF": 78,
+"APP": 35
+},
+"apps": 13,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+7,
+3,
+3
+],
+"withPPG": 1.85,
+"withoutPPG": 1.28,
+"withoutGames": 25,
+"minutes": 633,
+"goalsConceded": 8,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Emiliano Martinez",
+"pos": "GK",
+"ovr": 69,
+"tier": "silver",
+"stats": {
+"CLN": 75,
+"CON": 71,
+"DIF": 71,
+"APP": 30
+},
+"apps": 9,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 3,
+"wdl": [
+5,
+1,
+3
+],
+"withPPG": 1.78,
+"withoutPPG": 1.38,
+"withoutGames": 29,
+"minutes": 770,
+"goalsConceded": 9,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Rob Holding",
+"pos": "DEF",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"CLN": 50,
+"THR": 49,
+"DIF": 66,
+"APP": 33
+},
+"apps": 8,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+4,
+1,
+3
+],
+"withPPG": 1.62,
+"withoutPPG": 1.43,
+"withoutGames": 30,
+"minutes": 581,
+"goalsConceded": 9,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Cedric Soares",
+"pos": "DEF",
+"ovr": 57,
+"tier": "bronze",
+"stats": {
+"CLN": 42,
+"THR": 72,
+"DIF": 64,
+"APP": 30
+},
+"apps": 5,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+0,
+2
+],
+"withPPG": 1.8,
+"withoutPPG": 1.42,
+"withoutGames": 33,
+"minutes": 250,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Henrikh Mkhitaryan",
+"pos": "MID",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"AST": 55,
+"GOL": 75,
+"CLN": 54,
+"DIF": 59,
+"APP": 27
+},
+"apps": 3,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+1,
+1
+],
+"withPPG": 1.33,
+"withoutPPG": 1.49,
+"withoutGames": 35,
+"minutes": 111,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Nacho Monreal",
+"pos": "DEF",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"CLN": 69,
+"THR": 55,
+"DIF": 64,
+"APP": 28
+},
+"apps": 3,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+0,
+1
+],
+"withPPG": 2.0,
+"withoutPPG": 1.43,
+"withoutGames": 35,
+"minutes": 270,
+"goalsConceded": 4,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Pablo Mari",
+"pos": "DEF",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"CLN": 75,
+"THR": 57,
+"DIF": 58,
+"APP": 27
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+1,
+0,
+1
+],
+"withPPG": 1.5,
+"withoutPPG": 1.47,
+"withoutGames": 36,
+"minutes": 114,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Arsenal",
+"clubPos": 8,
+"player": "Emile Smith Rowe",
+"pos": "MID",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"AST": 56,
+"GOL": 56,
+"CLN": 56,
+"DIF": 54,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+1
+],
+"withPPG": 0.5,
+"withoutPPG": 1.53,
+"withoutGames": 36,
+"minutes": 97,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Jack Grealish",
+"pos": "MID",
+"ovr": 75,
+"tier": "best",
+"stats": {
+"AST": 74,
+"GOL": 83,
+"CLN": 73,
+"DIF": 46,
+"APP": 80
+},
+"apps": 36,
+"goals": 8,
+"assists": 5,
+"cleanSheets": 7,
+"wdl": [
+9,
+8,
+19
+],
+"withPPG": 0.97,
+"withoutPPG": 0.0,
+"withoutGames": 2,
+"minutes": 3234,
+"goalsConceded": 63,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Douglas Luiz",
+"pos": "MID",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"AST": 55,
+"GOL": 61,
+"CLN": 68,
+"DIF": 45,
+"APP": 80
+},
+"apps": 36,
+"goals": 3,
+"assists": 2,
+"cleanSheets": 6,
+"wdl": [
+9,
+7,
+20
+],
+"withPPG": 0.94,
+"withoutPPG": 0.5,
+"withoutGames": 2,
+"minutes": 2608,
+"goalsConceded": 51,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Anwar El Ghazi",
+"pos": "FWD",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"GOL": 48,
+"AST": 67,
+"DIF": 40,
+"APP": 75
+},
+"apps": 34,
+"goals": 4,
+"assists": 4,
+"cleanSheets": 2,
+"wdl": [
+7,
+8,
+19
+],
+"withPPG": 0.85,
+"withoutPPG": 1.5,
+"withoutGames": 4,
+"minutes": 2061,
+"goalsConceded": 48,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Trezeguet",
+"pos": "MID",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"AST": 49,
+"GOL": 78,
+"CLN": 43,
+"DIF": 44,
+"APP": 76
+},
+"apps": 34,
+"goals": 6,
+"assists": 1,
+"cleanSheets": 1,
+"wdl": [
+8,
+7,
+19
+],
+"withPPG": 0.91,
+"withoutPPG": 1.0,
+"withoutGames": 4,
+"minutes": 1950,
+"goalsConceded": 28,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Tyrone Mings",
+"pos": "DEF",
+"ovr": 67,
+"tier": "silver",
+"stats": {
+"CLN": 66,
+"THR": 69,
+"DIF": 42,
+"APP": 79
+},
+"apps": 33,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 6,
+"wdl": [
+8,
+8,
+17
+],
+"withPPG": 0.97,
+"withoutPPG": 0.6,
+"withoutGames": 5,
+"minutes": 2903,
+"goalsConceded": 53,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Marvelous Nakamba",
+"pos": "MID",
+"ovr": 51,
+"tier": "bronze",
+"stats": {
+"AST": 44,
+"GOL": 45,
+"CLN": 39,
+"DIF": 46,
+"APP": 67
+},
+"apps": 29,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+7,
+6,
+16
+],
+"withPPG": 0.93,
+"withoutPPG": 0.89,
+"withoutGames": 9,
+"minutes": 1835,
+"goalsConceded": 37,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "John McGinn",
+"pos": "MID",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"AST": 66,
+"GOL": 65,
+"CLN": 63,
+"DIF": 44,
+"APP": 64
+},
+"apps": 28,
+"goals": 3,
+"assists": 3,
+"cleanSheets": 4,
+"wdl": [
+6,
+7,
+15
+],
+"withPPG": 0.89,
+"withoutPPG": 1.0,
+"withoutGames": 10,
+"minutes": 2316,
+"goalsConceded": 41,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Matt Targett",
+"pos": "DEF",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"CLN": 58,
+"THR": 66,
+"DIF": 48,
+"APP": 69
+},
+"apps": 28,
+"goals": 1,
+"assists": 2,
+"cleanSheets": 4,
+"wdl": [
+7,
+7,
+14
+],
+"withPPG": 1.0,
+"withoutPPG": 0.7,
+"withoutGames": 10,
+"minutes": 2295,
+"goalsConceded": 40,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Conor Hourihane",
+"pos": "MID",
+"ovr": 69,
+"tier": "silver",
+"stats": {
+"AST": 81,
+"GOL": 66,
+"CLN": 45,
+"DIF": 54,
+"APP": 62
+},
+"apps": 27,
+"goals": 3,
+"assists": 5,
+"cleanSheets": 1,
+"wdl": [
+7,
+7,
+13
+],
+"withPPG": 1.04,
+"withoutPPG": 0.64,
+"withoutGames": 11,
+"minutes": 1538,
+"goalsConceded": 29,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Frederic Guilbert",
+"pos": "DEF",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"CLN": 45,
+"THR": 59,
+"DIF": 51,
+"APP": 63
+},
+"apps": 25,
+"goals": 0,
+"assists": 2,
+"cleanSheets": 2,
+"wdl": [
+7,
+5,
+13
+],
+"withPPG": 1.04,
+"withoutPPG": 0.69,
+"withoutGames": 13,
+"minutes": 2041,
+"goalsConceded": 36,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Ezri Konsa",
+"pos": "DEF",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"CLN": 62,
+"THR": 68,
+"DIF": 54,
+"APP": 63
+},
+"apps": 25,
+"goals": 1,
+"assists": 2,
+"cleanSheets": 4,
+"wdl": [
+7,
+6,
+12
+],
+"withPPG": 1.08,
+"withoutPPG": 0.62,
+"withoutGames": 13,
+"minutes": 2042,
+"goalsConceded": 39,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Wesley",
+"pos": "FWD",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"GOL": 59,
+"AST": 51,
+"DIF": 48,
+"APP": 48
+},
+"apps": 21,
+"goals": 5,
+"assists": 1,
+"cleanSheets": 4,
+"wdl": [
+6,
+3,
+12
+],
+"withPPG": 1.0,
+"withoutPPG": 0.82,
+"withoutGames": 17,
+"minutes": 1790,
+"goalsConceded": 31,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Tom Heaton",
+"pos": "GK",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"CLN": 60,
+"CON": 52,
+"DIF": 51,
+"APP": 43
+},
+"apps": 20,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 4,
+"wdl": [
+6,
+3,
+11
+],
+"withPPG": 1.05,
+"withoutPPG": 0.78,
+"withoutGames": 18,
+"minutes": 1795,
+"goalsConceded": 35,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Keinan Davis",
+"pos": "FWD",
+"ovr": 51,
+"tier": "bronze",
+"stats": {
+"GOL": 43,
+"AST": 43,
+"DIF": 42,
+"APP": 42
+},
+"apps": 18,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+6,
+9
+],
+"withPPG": 0.83,
+"withoutPPG": 1.0,
+"withoutGames": 20,
+"minutes": 538,
+"goalsConceded": 7,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Ahmed Elmohamady",
+"pos": "DEF",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"CLN": 54,
+"THR": 66,
+"DIF": 43,
+"APP": 48
+},
+"apps": 18,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 2,
+"wdl": [
+4,
+4,
+10
+],
+"withPPG": 0.89,
+"withoutPPG": 0.95,
+"withoutGames": 20,
+"minutes": 1026,
+"goalsConceded": 28,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Kortney Hause",
+"pos": "DEF",
+"ovr": 54,
+"tier": "bronze",
+"stats": {
+"CLN": 54,
+"THR": 54,
+"DIF": 39,
+"APP": 48
+},
+"apps": 18,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+3,
+4,
+11
+],
+"withPPG": 0.72,
+"withoutPPG": 1.1,
+"withoutGames": 20,
+"minutes": 1544,
+"goalsConceded": 34,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Bjorn Engels",
+"pos": "DEF",
+"ovr": 54,
+"tier": "bronze",
+"stats": {
+"CLN": 56,
+"THR": 55,
+"DIF": 37,
+"APP": 46
+},
+"apps": 17,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+3,
+2,
+12
+],
+"withPPG": 0.65,
+"withoutPPG": 1.14,
+"withoutGames": 21,
+"minutes": 1447,
+"goalsConceded": 32,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Mbwana Samatta",
+"pos": "FWD",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"GOL": 48,
+"AST": 45,
+"DIF": 41,
+"APP": 36
+},
+"apps": 14,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+2,
+4,
+8
+],
+"withPPG": 0.71,
+"withoutPPG": 1.04,
+"withoutGames": 24,
+"minutes": 946,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Neil Taylor",
+"pos": "DEF",
+"ovr": 57,
+"tier": "bronze",
+"stats": {
+"CLN": 62,
+"THR": 45,
+"DIF": 42,
+"APP": 41
+},
+"apps": 14,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+3,
+2,
+9
+],
+"withPPG": 0.79,
+"withoutPPG": 1.0,
+"withoutGames": 24,
+"minutes": 1089,
+"goalsConceded": 25,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Pepe Reina",
+"pos": "GK",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"CLN": 56,
+"CON": 64,
+"DIF": 49,
+"APP": 33
+},
+"apps": 12,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+3,
+3,
+6
+],
+"withPPG": 1.0,
+"withoutPPG": 0.88,
+"withoutGames": 26,
+"minutes": 1080,
+"goalsConceded": 20,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Henri Lansbury",
+"pos": "MID",
+"ovr": 55,
+"tier": "bronze",
+"stats": {
+"AST": 49,
+"GOL": 50,
+"CLN": 46,
+"DIF": 53,
+"APP": 32
+},
+"apps": 10,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+1,
+6
+],
+"withPPG": 1.0,
+"withoutPPG": 0.89,
+"withoutGames": 28,
+"minutes": 191,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Jota",
+"pos": "MID",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"AST": 63,
+"GOL": 50,
+"CLN": 46,
+"DIF": 45,
+"APP": 32
+},
+"apps": 10,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+2,
+1,
+7
+],
+"withPPG": 0.7,
+"withoutPPG": 1.0,
+"withoutGames": 28,
+"minutes": 332,
+"goalsConceded": 5,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Orjan Nyland",
+"pos": "GK",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"CLN": 58,
+"CON": 67,
+"DIF": 46,
+"APP": 29
+},
+"apps": 7,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+1,
+2,
+4
+],
+"withPPG": 0.71,
+"withoutPPG": 0.97,
+"withoutGames": 31,
+"minutes": 537,
+"goalsConceded": 12,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Jonathan Kodjia",
+"pos": "FWD",
+"ovr": 57,
+"tier": "bronze",
+"stats": {
+"GOL": 50,
+"AST": 50,
+"DIF": 44,
+"APP": 28
+},
+"apps": 6,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+5
+],
+"withPPG": 0.5,
+"withoutPPG": 1.0,
+"withoutGames": 32,
+"minutes": 112,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Danny Drinkwater",
+"pos": "MID",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"AST": 54,
+"GOL": 47,
+"CLN": 52,
+"DIF": 55,
+"APP": 27
+},
+"apps": 4,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+1,
+2
+],
+"withPPG": 1.0,
+"withoutPPG": 0.91,
+"withoutGames": 34,
+"minutes": 263,
+"goalsConceded": 9,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Indiana Vassilev",
+"pos": "MID",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"AST": 54,
+"GOL": 54,
+"CLN": 52,
+"DIF": 55,
+"APP": 27
+},
+"apps": 4,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+1,
+2
+],
+"withPPG": 1.0,
+"withoutPPG": 0.91,
+"withoutGames": 34,
+"minutes": 47,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Borja Baston",
+"pos": "FWD",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"GOL": 55,
+"AST": 56,
+"DIF": 48,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+2
+],
+"withPPG": 0.0,
+"withoutPPG": 0.97,
+"withoutGames": 36,
+"minutes": 16,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Aston Villa",
+"clubPos": 17,
+"player": "Jed Steer",
+"pos": "GK",
+"ovr": 67,
+"tier": "silver",
+"stats": {
+"CLN": 71,
+"CON": 90,
+"DIF": 52,
+"APP": 25
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+1
+],
+"withPPG": 0.0,
+"withoutPPG": 0.95,
+"withoutGames": 37,
+"minutes": 8,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Aaron Ramsdale",
+"pos": "GK",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"CLN": 45,
+"CON": 49,
+"DIF": 41,
+"APP": 73
+},
+"apps": 37,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 5,
+"wdl": [
+9,
+7,
+21
+],
+"withPPG": 0.92,
+"withoutPPG": 0.0,
+"withoutGames": 1,
+"minutes": 3330,
+"goalsConceded": 62,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Callum Wilson",
+"pos": "FWD",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"GOL": 61,
+"AST": 45,
+"DIF": 41,
+"APP": 77
+},
+"apps": 35,
+"goals": 8,
+"assists": 1,
+"cleanSheets": 3,
+"wdl": [
+8,
+7,
+20
+],
+"withPPG": 0.89,
+"withoutPPG": 1.0,
+"withoutGames": 3,
+"minutes": 2909,
+"goalsConceded": 53,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Philip Billing",
+"pos": "MID",
+"ovr": 57,
+"tier": "bronze",
+"stats": {
+"AST": 49,
+"GOL": 48,
+"CLN": 59,
+"DIF": 46,
+"APP": 76
+},
+"apps": 34,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 4,
+"wdl": [
+9,
+6,
+19
+],
+"withPPG": 0.97,
+"withoutPPG": 0.25,
+"withoutGames": 4,
+"minutes": 2532,
+"goalsConceded": 41,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Jefferson Lerma",
+"pos": "MID",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"AST": 56,
+"GOL": 49,
+"CLN": 59,
+"DIF": 47,
+"APP": 75
+},
+"apps": 33,
+"goals": 1,
+"assists": 2,
+"cleanSheets": 4,
+"wdl": [
+9,
+6,
+18
+],
+"withPPG": 1.0,
+"withoutPPG": 0.2,
+"withoutGames": 5,
+"minutes": 2709,
+"goalsConceded": 48,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Dominic Solanke",
+"pos": "FWD",
+"ovr": 51,
+"tier": "bronze",
+"stats": {
+"GOL": 40,
+"AST": 46,
+"DIF": 38,
+"APP": 71
+},
+"apps": 32,
+"goals": 3,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+7,
+4,
+21
+],
+"withPPG": 0.78,
+"withoutPPG": 1.5,
+"withoutGames": 6,
+"minutes": 1644,
+"goalsConceded": 39,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Harry Wilson",
+"pos": "MID",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"AST": 43,
+"GOL": 84,
+"CLN": 39,
+"DIF": 42,
+"APP": 71
+},
+"apps": 31,
+"goals": 7,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+7,
+5,
+19
+],
+"withPPG": 0.84,
+"withoutPPG": 1.14,
+"withoutGames": 7,
+"minutes": 1651,
+"goalsConceded": 32,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Nathan Ake",
+"pos": "DEF",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"CLN": 65,
+"THR": 73,
+"DIF": 44,
+"APP": 71
+},
+"apps": 29,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 4,
+"wdl": [
+7,
+6,
+16
+],
+"withPPG": 0.93,
+"withoutPPG": 0.78,
+"withoutGames": 9,
+"minutes": 2505,
+"goalsConceded": 46,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Steve Cook",
+"pos": "DEF",
+"ovr": 57,
+"tier": "bronze",
+"stats": {
+"CLN": 57,
+"THR": 48,
+"DIF": 39,
+"APP": 71
+},
+"apps": 29,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 3,
+"wdl": [
+6,
+6,
+17
+],
+"withPPG": 0.83,
+"withoutPPG": 1.11,
+"withoutGames": 9,
+"minutes": 2430,
+"goalsConceded": 47,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Ryan Fraser",
+"pos": "MID",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"AST": 74,
+"GOL": 59,
+"CLN": 63,
+"DIF": 47,
+"APP": 64
+},
+"apps": 28,
+"goals": 1,
+"assists": 4,
+"cleanSheets": 4,
+"wdl": [
+7,
+5,
+16
+],
+"withPPG": 0.93,
+"withoutPPG": 0.8,
+"withoutGames": 10,
+"minutes": 2063,
+"goalsConceded": 34,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Lewis Cook",
+"pos": "MID",
+"ovr": 51,
+"tier": "bronze",
+"stats": {
+"AST": 44,
+"GOL": 40,
+"CLN": 51,
+"DIF": 42,
+"APP": 62
+},
+"apps": 27,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+6,
+4,
+17
+],
+"withPPG": 0.81,
+"withoutPPG": 1.09,
+"withoutGames": 11,
+"minutes": 1345,
+"goalsConceded": 30,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Diego Rico",
+"pos": "DEF",
+"ovr": 75,
+"tier": "best",
+"stats": {
+"CLN": 76,
+"THR": 75,
+"DIF": 56,
+"APP": 67
+},
+"apps": 27,
+"goals": 0,
+"assists": 4,
+"cleanSheets": 5,
+"wdl": [
+8,
+5,
+14
+],
+"withPPG": 1.07,
+"withoutPPG": 0.45,
+"withoutGames": 11,
+"minutes": 2334,
+"goalsConceded": 38,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Josh King",
+"pos": "FWD",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"GOL": 60,
+"AST": 74,
+"DIF": 47,
+"APP": 58
+},
+"apps": 26,
+"goals": 6,
+"assists": 4,
+"cleanSheets": 3,
+"wdl": [
+6,
+7,
+13
+],
+"withPPG": 0.96,
+"withoutPPG": 0.75,
+"withoutGames": 12,
+"minutes": 2019,
+"goalsConceded": 37,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Dan Gosling",
+"pos": "MID",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"AST": 52,
+"GOL": 69,
+"CLN": 53,
+"DIF": 41,
+"APP": 56
+},
+"apps": 24,
+"goals": 3,
+"assists": 1,
+"cleanSheets": 2,
+"wdl": [
+5,
+3,
+16
+],
+"withPPG": 0.75,
+"withoutPPG": 1.14,
+"withoutGames": 14,
+"minutes": 1260,
+"goalsConceded": 23,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Adam Smith",
+"pos": "DEF",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"CLN": 63,
+"THR": 51,
+"DIF": 40,
+"APP": 61
+},
+"apps": 24,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 3,
+"wdl": [
+5,
+5,
+14
+],
+"withPPG": 0.83,
+"withoutPPG": 1.0,
+"withoutGames": 14,
+"minutes": 2060,
+"goalsConceded": 40,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Jack Stacey",
+"pos": "DEF",
+"ovr": 55,
+"tier": "bronze",
+"stats": {
+"CLN": 50,
+"THR": 65,
+"DIF": 41,
+"APP": 50
+},
+"apps": 19,
+"goals": 0,
+"assists": 2,
+"cleanSheets": 1,
+"wdl": [
+4,
+4,
+11
+],
+"withPPG": 0.84,
+"withoutPPG": 0.95,
+"withoutGames": 19,
+"minutes": 1541,
+"goalsConceded": 27,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Simon Francis",
+"pos": "DEF",
+"ovr": 54,
+"tier": "bronze",
+"stats": {
+"CLN": 56,
+"THR": 45,
+"DIF": 39,
+"APP": 43
+},
+"apps": 15,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+3,
+1,
+11
+],
+"withPPG": 0.67,
+"withoutPPG": 1.04,
+"withoutGames": 23,
+"minutes": 965,
+"goalsConceded": 21,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Junior Stanislas",
+"pos": "MID",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"AST": 47,
+"GOL": 86,
+"CLN": 52,
+"DIF": 39,
+"APP": 39
+},
+"apps": 15,
+"goals": 3,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+2,
+11
+],
+"withPPG": 0.53,
+"withoutPPG": 1.13,
+"withoutGames": 23,
+"minutes": 712,
+"goalsConceded": 17,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Arnaut Danjuma",
+"pos": "MID",
+"ovr": 50,
+"tier": "bronze",
+"stats": {
+"AST": 47,
+"GOL": 48,
+"CLN": 44,
+"DIF": 38,
+"APP": 37
+},
+"apps": 14,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+3,
+10
+],
+"withPPG": 0.43,
+"withoutPPG": 1.17,
+"withoutGames": 24,
+"minutes": 628,
+"goalsConceded": 12,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Chris Mepham",
+"pos": "DEF",
+"ovr": 57,
+"tier": "bronze",
+"stats": {
+"CLN": 61,
+"THR": 60,
+"DIF": 40,
+"APP": 38
+},
+"apps": 12,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+2,
+8
+],
+"withPPG": 0.67,
+"withoutPPG": 1.0,
+"withoutGames": 26,
+"minutes": 911,
+"goalsConceded": 19,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "David Brooks",
+"pos": "MID",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"AST": 50,
+"GOL": 84,
+"CLN": 47,
+"DIF": 48,
+"APP": 31
+},
+"apps": 9,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+2,
+1,
+6
+],
+"withPPG": 0.78,
+"withoutPPG": 0.93,
+"withoutGames": 29,
+"minutes": 511,
+"goalsConceded": 12,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Lloyd Kelly",
+"pos": "DEF",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"CLN": 71,
+"THR": 49,
+"DIF": 47,
+"APP": 33
+},
+"apps": 8,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+1,
+5
+],
+"withPPG": 0.88,
+"withoutPPG": 0.9,
+"withoutGames": 30,
+"minutes": 638,
+"goalsConceded": 15,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Andrew Surman",
+"pos": "MID",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"AST": 53,
+"GOL": 47,
+"CLN": 51,
+"DIF": 57,
+"APP": 28
+},
+"apps": 5,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+2,
+0,
+3
+],
+"withPPG": 1.2,
+"withoutPPG": 0.85,
+"withoutGames": 33,
+"minutes": 235,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Jack Simpson",
+"pos": "DEF",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"CLN": 66,
+"THR": 53,
+"DIF": 43,
+"APP": 29
+},
+"apps": 4,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+3
+],
+"withPPG": 0.25,
+"withoutPPG": 0.97,
+"withoutGames": 34,
+"minutes": 238,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Sam Surridge",
+"pos": "FWD",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"GOL": 52,
+"AST": 53,
+"DIF": 50,
+"APP": 27
+},
+"apps": 4,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+3
+],
+"withPPG": 0.75,
+"withoutPPG": 0.91,
+"withoutGames": 34,
+"minutes": 25,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Charlie Daniels",
+"pos": "DEF",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"CLN": 73,
+"THR": 57,
+"DIF": 58,
+"APP": 27
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+1
+],
+"withPPG": 1.5,
+"withoutPPG": 0.86,
+"withoutGames": 36,
+"minutes": 127,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Jordon Ibe",
+"pos": "MID",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"AST": 56,
+"GOL": 47,
+"CLN": 56,
+"DIF": 50,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+2
+],
+"withPPG": 0.0,
+"withoutPPG": 0.94,
+"withoutGames": 36,
+"minutes": 48,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Bournemouth",
+"clubPos": 18,
+"player": "Mark Travers",
+"pos": "GK",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"CLN": 82,
+"CON": 64,
+"DIF": 52,
+"APP": 25
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+1
+],
+"withPPG": 0.0,
+"withoutPPG": 0.92,
+"withoutGames": 37,
+"minutes": 90,
+"goalsConceded": 3,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Mat Ryan",
+"pos": "GK",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"CLN": 56,
+"CON": 55,
+"DIF": 46,
+"APP": 74
+},
+"apps": 38,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 9,
+"wdl": [
+9,
+14,
+15
+],
+"withPPG": 1.08,
+"withoutPPG": 1.08,
+"withoutGames": 0,
+"minutes": 3420,
+"goalsConceded": 54,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Neal Maupay",
+"pos": "FWD",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"GOL": 61,
+"AST": 58,
+"DIF": 47,
+"APP": 80
+},
+"apps": 37,
+"goals": 10,
+"assists": 3,
+"cleanSheets": 5,
+"wdl": [
+9,
+13,
+15
+],
+"withPPG": 1.08,
+"withoutPPG": 1.0,
+"withoutGames": 1,
+"minutes": 2768,
+"goalsConceded": 36,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Lewis Dunk",
+"pos": "DEF",
+"ovr": 75,
+"tier": "best",
+"stats": {
+"CLN": 74,
+"THR": 80,
+"DIF": 48,
+"APP": 83
+},
+"apps": 36,
+"goals": 3,
+"assists": 3,
+"cleanSheets": 9,
+"wdl": [
+9,
+14,
+13
+],
+"withPPG": 1.14,
+"withoutPPG": 0.0,
+"withoutGames": 2,
+"minutes": 3231,
+"goalsConceded": 50,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Davy Propper",
+"pos": "MID",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"AST": 55,
+"GOL": 46,
+"CLN": 69,
+"DIF": 49,
+"APP": 78
+},
+"apps": 35,
+"goals": 1,
+"assists": 2,
+"cleanSheets": 6,
+"wdl": [
+8,
+14,
+13
+],
+"withPPG": 1.09,
+"withoutPPG": 1.0,
+"withoutGames": 3,
+"minutes": 2829,
+"goalsConceded": 46,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Dan Burn",
+"pos": "DEF",
+"ovr": 72,
+"tier": "silver",
+"stats": {
+"CLN": 77,
+"THR": 41,
+"DIF": 48,
+"APP": 80
+},
+"apps": 34,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 9,
+"wdl": [
+9,
+12,
+13
+],
+"withPPG": 1.15,
+"withoutPPG": 0.5,
+"withoutGames": 4,
+"minutes": 2881,
+"goalsConceded": 42,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Dale Stephens",
+"pos": "MID",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"AST": 49,
+"GOL": 41,
+"CLN": 65,
+"DIF": 51,
+"APP": 75
+},
+"apps": 33,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 5,
+"wdl": [
+9,
+10,
+14
+],
+"withPPG": 1.12,
+"withoutPPG": 0.8,
+"withoutGames": 5,
+"minutes": 2528,
+"goalsConceded": 42,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Aaron Mooy",
+"pos": "MID",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"AST": 57,
+"GOL": 59,
+"CLN": 49,
+"DIF": 48,
+"APP": 71
+},
+"apps": 31,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 2,
+"wdl": [
+6,
+14,
+11
+],
+"withPPG": 1.03,
+"withoutPPG": 1.29,
+"withoutGames": 7,
+"minutes": 2089,
+"goalsConceded": 31,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Leandro Trossard",
+"pos": "MID",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"AST": 64,
+"GOL": 75,
+"CLN": 49,
+"DIF": 46,
+"APP": 71
+},
+"apps": 31,
+"goals": 5,
+"assists": 3,
+"cleanSheets": 2,
+"wdl": [
+6,
+12,
+13
+],
+"withPPG": 0.97,
+"withoutPPG": 1.57,
+"withoutGames": 7,
+"minutes": 2013,
+"goalsConceded": 34,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Adam Webster",
+"pos": "DEF",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"CLN": 53,
+"THR": 71,
+"DIF": 46,
+"APP": 75
+},
+"apps": 31,
+"goals": 3,
+"assists": 1,
+"cleanSheets": 5,
+"wdl": [
+7,
+12,
+12
+],
+"withPPG": 1.06,
+"withoutPPG": 1.14,
+"withoutGames": 7,
+"minutes": 2670,
+"goalsConceded": 44,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Pascal Gross",
+"pos": "MID",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"AST": 73,
+"GOL": 64,
+"CLN": 50,
+"DIF": 49,
+"APP": 67
+},
+"apps": 29,
+"goals": 2,
+"assists": 4,
+"cleanSheets": 2,
+"wdl": [
+7,
+10,
+12
+],
+"withPPG": 1.07,
+"withoutPPG": 1.11,
+"withoutGames": 9,
+"minutes": 1802,
+"goalsConceded": 32,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Martin Montoya",
+"pos": "DEF",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"CLN": 67,
+"THR": 49,
+"DIF": 46,
+"APP": 67
+},
+"apps": 27,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 6,
+"wdl": [
+7,
+8,
+12
+],
+"withPPG": 1.07,
+"withoutPPG": 1.09,
+"withoutGames": 11,
+"minutes": 1900,
+"goalsConceded": 32,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Aaron Connolly",
+"pos": "FWD",
+"ovr": 57,
+"tier": "bronze",
+"stats": {
+"GOL": 50,
+"AST": 49,
+"DIF": 51,
+"APP": 54
+},
+"apps": 24,
+"goals": 3,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+7,
+6,
+11
+],
+"withPPG": 1.12,
+"withoutPPG": 1.0,
+"withoutGames": 14,
+"minutes": 1261,
+"goalsConceded": 22,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Glenn Murray",
+"pos": "FWD",
+"ovr": 55,
+"tier": "bronze",
+"stats": {
+"GOL": 45,
+"AST": 50,
+"DIF": 49,
+"APP": 52
+},
+"apps": 23,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+5,
+10,
+8
+],
+"withPPG": 1.09,
+"withoutPPG": 1.07,
+"withoutGames": 15,
+"minutes": 790,
+"goalsConceded": 10,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Yves Bissouma",
+"pos": "MID",
+"ovr": 54,
+"tier": "bronze",
+"stats": {
+"AST": 45,
+"GOL": 47,
+"CLN": 47,
+"DIF": 49,
+"APP": 51
+},
+"apps": 22,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+5,
+8,
+9
+],
+"withPPG": 1.05,
+"withoutPPG": 1.12,
+"withoutGames": 16,
+"minutes": 1260,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Steven Alzate",
+"pos": "MID",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"AST": 46,
+"GOL": 47,
+"CLN": 57,
+"DIF": 52,
+"APP": 46
+},
+"apps": 19,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+5,
+6,
+8
+],
+"withPPG": 1.11,
+"withoutPPG": 1.05,
+"withoutGames": 19,
+"minutes": 1183,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Shane Duffy",
+"pos": "DEF",
+"ovr": 54,
+"tier": "bronze",
+"stats": {
+"CLN": 44,
+"THR": 54,
+"DIF": 53,
+"APP": 50
+},
+"apps": 19,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+5,
+7,
+7
+],
+"withPPG": 1.16,
+"withoutPPG": 1.0,
+"withoutGames": 19,
+"minutes": 1232,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Solly March",
+"pos": "MID",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"AST": 55,
+"GOL": 43,
+"CLN": 42,
+"DIF": 46,
+"APP": 46
+},
+"apps": 19,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+3,
+8,
+8
+],
+"withPPG": 0.89,
+"withoutPPG": 1.26,
+"withoutGames": 19,
+"minutes": 1144,
+"goalsConceded": 15,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Bernardo",
+"pos": "DEF",
+"ovr": 47,
+"tier": "bronze",
+"stats": {
+"CLN": 33,
+"THR": 45,
+"DIF": 47,
+"APP": 41
+},
+"apps": 14,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+5,
+6
+],
+"withPPG": 1.0,
+"withoutPPG": 1.12,
+"withoutGames": 24,
+"minutes": 678,
+"goalsConceded": 17,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Alireza Jahanbakhsh",
+"pos": "MID",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"AST": 49,
+"GOL": 74,
+"CLN": 46,
+"DIF": 51,
+"APP": 32
+},
+"apps": 10,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+2,
+4,
+4
+],
+"withPPG": 1.0,
+"withoutPPG": 1.11,
+"withoutGames": 28,
+"minutes": 308,
+"goalsConceded": 4,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Alexis Mac Allister",
+"pos": "MID",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"AST": 50,
+"GOL": 50,
+"CLN": 47,
+"DIF": 68,
+"APP": 31
+},
+"apps": 9,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+4,
+2
+],
+"withPPG": 1.44,
+"withoutPPG": 0.97,
+"withoutGames": 29,
+"minutes": 352,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Tariq Lamptey",
+"pos": "DEF",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"CLN": 54,
+"THR": 66,
+"DIF": 53,
+"APP": 33
+},
+"apps": 8,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 1,
+"wdl": [
+2,
+3,
+3
+],
+"withPPG": 1.12,
+"withoutPPG": 1.07,
+"withoutGames": 30,
+"minutes": 589,
+"goalsConceded": 8,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Ezequiel Schelotto",
+"pos": "DEF",
+"ovr": 55,
+"tier": "bronze",
+"stats": {
+"CLN": 39,
+"THR": 49,
+"DIF": 68,
+"APP": 33
+},
+"apps": 8,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+3,
+2
+],
+"withPPG": 1.5,
+"withoutPPG": 0.97,
+"withoutGames": 30,
+"minutes": 362,
+"goalsConceded": 7,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Gaetan Bong",
+"pos": "DEF",
+"ovr": 57,
+"tier": "bronze",
+"stats": {
+"CLN": 48,
+"THR": 53,
+"DIF": 56,
+"APP": 29
+},
+"apps": 4,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+2,
+1
+],
+"withPPG": 1.25,
+"withoutPPG": 1.06,
+"withoutGames": 34,
+"minutes": 57,
+"goalsConceded": 3,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Florin Andone",
+"pos": "FWD",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"GOL": 50,
+"AST": 54,
+"DIF": 57,
+"APP": 26
+},
+"apps": 3,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+1,
+1
+],
+"withPPG": 1.33,
+"withoutPPG": 1.06,
+"withoutGames": 35,
+"minutes": 72,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Brighton",
+"clubPos": 15,
+"player": "Jurgen Locadia",
+"pos": "FWD",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"GOL": 40,
+"AST": 56,
+"DIF": 59,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+1
+],
+"withPPG": 1.5,
+"withoutPPG": 1.06,
+"withoutGames": 36,
+"minutes": 86,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Dwight McNeil",
+"pos": "MID",
+"ovr": 78,
+"tier": "gold",
+"stats": {
+"AST": 78,
+"GOL": 58,
+"CLN": 87,
+"DIF": 61,
+"APP": 83
+},
+"apps": 38,
+"goals": 2,
+"assists": 6,
+"cleanSheets": 11,
+"wdl": [
+15,
+9,
+14
+],
+"withPPG": 1.42,
+"withoutPPG": 1.42,
+"withoutGames": 0,
+"minutes": 3344,
+"goalsConceded": 48,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Nick Pope",
+"pos": "GK",
+"ovr": 73,
+"tier": "silver",
+"stats": {
+"CLN": 76,
+"CON": 59,
+"DIF": 58,
+"APP": 74
+},
+"apps": 38,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 15,
+"wdl": [
+15,
+9,
+14
+],
+"withPPG": 1.42,
+"withoutPPG": 1.42,
+"withoutGames": 0,
+"minutes": 3420,
+"goalsConceded": 50,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "James Tarkowski",
+"pos": "DEF",
+"ovr": 82,
+"tier": "gold",
+"stats": {
+"CLN": 82,
+"THR": 66,
+"DIF": 59,
+"APP": 86
+},
+"apps": 38,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 15,
+"wdl": [
+15,
+9,
+14
+],
+"withPPG": 1.42,
+"withoutPPG": 1.42,
+"withoutGames": 0,
+"minutes": 3420,
+"goalsConceded": 50,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Jay Rodriguez",
+"pos": "FWD",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"GOL": 56,
+"AST": 45,
+"DIF": 59,
+"APP": 78
+},
+"apps": 36,
+"goals": 8,
+"assists": 1,
+"cleanSheets": 6,
+"wdl": [
+14,
+9,
+13
+],
+"withPPG": 1.42,
+"withoutPPG": 1.5,
+"withoutGames": 2,
+"minutes": 2009,
+"goalsConceded": 34,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Ashley Westwood",
+"pos": "MID",
+"ovr": 82,
+"tier": "best",
+"stats": {
+"AST": 80,
+"GOL": 53,
+"CLN": 95,
+"DIF": 65,
+"APP": 78
+},
+"apps": 35,
+"goals": 2,
+"assists": 6,
+"cleanSheets": 15,
+"wdl": [
+15,
+9,
+11
+],
+"withPPG": 1.54,
+"withoutPPG": 0.0,
+"withoutGames": 3,
+"minutes": 3150,
+"goalsConceded": 39,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Ben Mee",
+"pos": "DEF",
+"ovr": 79,
+"tier": "gold",
+"stats": {
+"CLN": 83,
+"THR": 55,
+"DIF": 58,
+"APP": 77
+},
+"apps": 32,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 13,
+"wdl": [
+13,
+6,
+13
+],
+"withPPG": 1.41,
+"withoutPPG": 1.5,
+"withoutGames": 6,
+"minutes": 2880,
+"goalsConceded": 45,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Chris Wood",
+"pos": "FWD",
+"ovr": 72,
+"tier": "silver",
+"stats": {
+"GOL": 76,
+"AST": 46,
+"DIF": 59,
+"APP": 71
+},
+"apps": 32,
+"goals": 14,
+"assists": 1,
+"cleanSheets": 6,
+"wdl": [
+12,
+9,
+11
+],
+"withPPG": 1.41,
+"withoutPPG": 1.5,
+"withoutGames": 6,
+"minutes": 2444,
+"goalsConceded": 33,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Jack Cork",
+"pos": "MID",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"AST": 43,
+"GOL": 42,
+"CLN": 90,
+"DIF": 60,
+"APP": 69
+},
+"apps": 30,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 10,
+"wdl": [
+12,
+6,
+12
+],
+"withPPG": 1.4,
+"withoutPPG": 1.5,
+"withoutGames": 8,
+"minutes": 2616,
+"goalsConceded": 41,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Jeff Hendrick",
+"pos": "MID",
+"ovr": 73,
+"tier": "silver",
+"stats": {
+"AST": 61,
+"GOL": 60,
+"CLN": 89,
+"DIF": 66,
+"APP": 56
+},
+"apps": 24,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 8,
+"wdl": [
+10,
+6,
+8
+],
+"withPPG": 1.5,
+"withoutPPG": 1.29,
+"withoutGames": 14,
+"minutes": 1934,
+"goalsConceded": 30,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Erik Pieters",
+"pos": "DEF",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"CLN": 48,
+"THR": 78,
+"DIF": 53,
+"APP": 61
+},
+"apps": 24,
+"goals": 0,
+"assists": 4,
+"cleanSheets": 6,
+"wdl": [
+8,
+6,
+10
+],
+"withPPG": 1.25,
+"withoutPPG": 1.71,
+"withoutGames": 14,
+"minutes": 1877,
+"goalsConceded": 35,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Charlie Taylor",
+"pos": "DEF",
+"ovr": 80,
+"tier": "gold",
+"stats": {
+"CLN": 82,
+"THR": 51,
+"DIF": 74,
+"APP": 61
+},
+"apps": 24,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 10,
+"wdl": [
+11,
+6,
+7
+],
+"withPPG": 1.62,
+"withoutPPG": 1.07,
+"withoutGames": 14,
+"minutes": 1946,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Phil Bardsley",
+"pos": "DEF",
+"ovr": 79,
+"tier": "gold",
+"stats": {
+"CLN": 82,
+"THR": 52,
+"DIF": 75,
+"APP": 54
+},
+"apps": 21,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 9,
+"wdl": [
+10,
+5,
+6
+],
+"withPPG": 1.67,
+"withoutPPG": 1.12,
+"withoutGames": 17,
+"minutes": 1890,
+"goalsConceded": 19,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Ashley Barnes",
+"pos": "FWD",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"GOL": 63,
+"AST": 43,
+"DIF": 54,
+"APP": 44
+},
+"apps": 19,
+"goals": 6,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+7,
+3,
+9
+],
+"withPPG": 1.26,
+"withoutPPG": 1.58,
+"withoutGames": 19,
+"minutes": 1361,
+"goalsConceded": 21,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Matej Vydra",
+"pos": "FWD",
+"ovr": 55,
+"tier": "bronze",
+"stats": {
+"GOL": 43,
+"AST": 52,
+"DIF": 54,
+"APP": 44
+},
+"apps": 19,
+"goals": 2,
+"assists": 1,
+"cleanSheets": 2,
+"wdl": [
+6,
+6,
+7
+],
+"withPPG": 1.26,
+"withoutPPG": 1.58,
+"withoutGames": 19,
+"minutes": 812,
+"goalsConceded": 7,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Robbie Brady",
+"pos": "MID",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"AST": 67,
+"GOL": 55,
+"CLN": 42,
+"DIF": 49,
+"APP": 42
+},
+"apps": 17,
+"goals": 1,
+"assists": 2,
+"cleanSheets": 0,
+"wdl": [
+5,
+2,
+10
+],
+"withPPG": 1.0,
+"withoutPPG": 1.76,
+"withoutGames": 21,
+"minutes": 450,
+"goalsConceded": 10,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Matthew Lowton",
+"pos": "DEF",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"CLN": 66,
+"THR": 55,
+"DIF": 49,
+"APP": 46
+},
+"apps": 17,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 6,
+"wdl": [
+5,
+4,
+8
+],
+"withPPG": 1.12,
+"withoutPPG": 1.67,
+"withoutGames": 21,
+"minutes": 1530,
+"goalsConceded": 31,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Aaron Lennon",
+"pos": "MID",
+"ovr": 55,
+"tier": "bronze",
+"stats": {
+"AST": 46,
+"GOL": 49,
+"CLN": 43,
+"DIF": 58,
+"APP": 40
+},
+"apps": 16,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+6,
+3,
+7
+],
+"withPPG": 1.31,
+"withoutPPG": 1.5,
+"withoutGames": 22,
+"minutes": 486,
+"goalsConceded": 15,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Johann Berg Gudmundsson",
+"pos": "MID",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"AST": 61,
+"GOL": 59,
+"CLN": 55,
+"DIF": 52,
+"APP": 35
+},
+"apps": 12,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 1,
+"wdl": [
+3,
+4,
+5
+],
+"withPPG": 1.08,
+"withoutPPG": 1.58,
+"withoutGames": 26,
+"minutes": 622,
+"goalsConceded": 7,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Josh Brownhill",
+"pos": "MID",
+"ovr": 67,
+"tier": "silver",
+"stats": {
+"AST": 49,
+"GOL": 50,
+"CLN": 87,
+"DIF": 75,
+"APP": 32
+},
+"apps": 10,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 4,
+"wdl": [
+5,
+3,
+2
+],
+"withPPG": 1.8,
+"withoutPPG": 1.29,
+"withoutGames": 28,
+"minutes": 806,
+"goalsConceded": 10,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Kevin Long",
+"pos": "DEF",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"CLN": 45,
+"THR": 49,
+"DIF": 62,
+"APP": 33
+},
+"apps": 8,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+3,
+3,
+2
+],
+"withPPG": 1.5,
+"withoutPPG": 1.4,
+"withoutGames": 30,
+"minutes": 562,
+"goalsConceded": 5,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Danny Drinkwater",
+"pos": "MID",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"AST": 58,
+"GOL": 49,
+"CLN": 58,
+"DIF": 54,
+"APP": 26
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+1
+],
+"withPPG": 0.0,
+"withoutPPG": 1.46,
+"withoutGames": 37,
+"minutes": 59,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Burnley",
+"clubPos": 10,
+"player": "Max Thompson",
+"pos": "FWD",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"GOL": 58,
+"AST": 58,
+"DIF": 52,
+"APP": 25
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+1
+],
+"withPPG": 0.0,
+"withoutPPG": 1.46,
+"withoutGames": 37,
+"minutes": 2,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Mason Mount",
+"pos": "MID",
+"ovr": 78,
+"tier": "gold",
+"stats": {
+"AST": 73,
+"GOL": 80,
+"CLN": 52,
+"DIF": 71,
+"APP": 81
+},
+"apps": 37,
+"goals": 7,
+"assists": 5,
+"cleanSheets": 3,
+"wdl": [
+19,
+6,
+12
+],
+"withPPG": 1.7,
+"withoutPPG": 3.0,
+"withoutGames": 1,
+"minutes": 2872,
+"goalsConceded": 44,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Cesar Azpilicueta",
+"pos": "DEF",
+"ovr": 77,
+"tier": "gold",
+"stats": {
+"CLN": 61,
+"THR": 88,
+"DIF": 72,
+"APP": 83
+},
+"apps": 36,
+"goals": 2,
+"assists": 6,
+"cleanSheets": 7,
+"wdl": [
+19,
+6,
+11
+],
+"withPPG": 1.75,
+"withoutPPG": 1.5,
+"withoutGames": 2,
+"minutes": 3230,
+"goalsConceded": 53,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Willian",
+"pos": "MID",
+"ovr": 86,
+"tier": "best",
+"stats": {
+"AST": 84,
+"GOL": 90,
+"CLN": 68,
+"DIF": 72,
+"APP": 80
+},
+"apps": 36,
+"goals": 9,
+"assists": 7,
+"cleanSheets": 6,
+"wdl": [
+19,
+6,
+11
+],
+"withPPG": 1.75,
+"withoutPPG": 1.5,
+"withoutGames": 2,
+"minutes": 2601,
+"goalsConceded": 35,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Tammy Abraham",
+"pos": "FWD",
+"ovr": 76,
+"tier": "gold",
+"stats": {
+"GOL": 73,
+"AST": 60,
+"DIF": 74,
+"APP": 75
+},
+"apps": 34,
+"goals": 15,
+"assists": 3,
+"cleanSheets": 2,
+"wdl": [
+19,
+5,
+10
+],
+"withPPG": 1.82,
+"withoutPPG": 1.0,
+"withoutGames": 4,
+"minutes": 2221,
+"goalsConceded": 34,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Kepa Arrizabalaga",
+"pos": "GK",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"CLN": 59,
+"CON": 55,
+"DIF": 70,
+"APP": 66
+},
+"apps": 33,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 8,
+"wdl": [
+18,
+4,
+11
+],
+"withPPG": 1.76,
+"withoutPPG": 1.6,
+"withoutGames": 5,
+"minutes": 2970,
+"goalsConceded": 47,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Jorginho",
+"pos": "MID",
+"ovr": 71,
+"tier": "silver",
+"stats": {
+"AST": 57,
+"GOL": 68,
+"CLN": 61,
+"DIF": 69,
+"APP": 71
+},
+"apps": 31,
+"goals": 4,
+"assists": 2,
+"cleanSheets": 4,
+"wdl": [
+15,
+6,
+10
+],
+"withPPG": 1.65,
+"withoutPPG": 2.14,
+"withoutGames": 7,
+"minutes": 2384,
+"goalsConceded": 40,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Mateo Kovacic",
+"pos": "MID",
+"ovr": 67,
+"tier": "silver",
+"stats": {
+"AST": 64,
+"GOL": 45,
+"CLN": 49,
+"DIF": 72,
+"APP": 71
+},
+"apps": 31,
+"goals": 1,
+"assists": 3,
+"cleanSheets": 2,
+"wdl": [
+16,
+6,
+9
+],
+"withPPG": 1.74,
+"withoutPPG": 1.71,
+"withoutGames": 7,
+"minutes": 2073,
+"goalsConceded": 37,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Kurt Zouma",
+"pos": "DEF",
+"ovr": 75,
+"tier": "gold",
+"stats": {
+"CLN": 73,
+"THR": 42,
+"DIF": 70,
+"APP": 69
+},
+"apps": 28,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 7,
+"wdl": [
+15,
+3,
+10
+],
+"withPPG": 1.71,
+"withoutPPG": 1.8,
+"withoutGames": 10,
+"minutes": 2343,
+"goalsConceded": 37,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Christian Pulisic",
+"pos": "FWD",
+"ovr": 73,
+"tier": "silver",
+"stats": {
+"GOL": 68,
+"AST": 75,
+"DIF": 68,
+"APP": 56
+},
+"apps": 25,
+"goals": 9,
+"assists": 4,
+"cleanSheets": 1,
+"wdl": [
+13,
+3,
+9
+],
+"withPPG": 1.68,
+"withoutPPG": 1.85,
+"withoutGames": 13,
+"minutes": 1726,
+"goalsConceded": 28,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Reece James",
+"pos": "DEF",
+"ovr": 70,
+"tier": "silver",
+"stats": {
+"CLN": 55,
+"THR": 60,
+"DIF": 79,
+"APP": 61
+},
+"apps": 24,
+"goals": 0,
+"assists": 2,
+"cleanSheets": 4,
+"wdl": [
+14,
+3,
+7
+],
+"withPPG": 1.88,
+"withoutPPG": 1.5,
+"withoutGames": 14,
+"minutes": 1513,
+"goalsConceded": 23,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Callum Hudson-Odoi",
+"pos": "MID",
+"ovr": 73,
+"tier": "silver",
+"stats": {
+"AST": 85,
+"GOL": 54,
+"CLN": 47,
+"DIF": 73,
+"APP": 51
+},
+"apps": 22,
+"goals": 1,
+"assists": 5,
+"cleanSheets": 1,
+"wdl": [
+12,
+3,
+7
+],
+"withPPG": 1.77,
+"withoutPPG": 1.69,
+"withoutGames": 16,
+"minutes": 850,
+"goalsConceded": 14,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "N'Golo Kante",
+"pos": "MID",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"AST": 45,
+"GOL": 67,
+"CLN": 54,
+"DIF": 56,
+"APP": 51
+},
+"apps": 22,
+"goals": 3,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+8,
+4,
+10
+],
+"withPPG": 1.27,
+"withoutPPG": 2.38,
+"withoutGames": 16,
+"minutes": 1733,
+"goalsConceded": 25,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Ross Barkley",
+"pos": "MID",
+"ovr": 79,
+"tier": "gold",
+"stats": {
+"AST": 80,
+"GOL": 60,
+"CLN": 63,
+"DIF": 85,
+"APP": 49
+},
+"apps": 21,
+"goals": 1,
+"assists": 4,
+"cleanSheets": 3,
+"wdl": [
+13,
+4,
+4
+],
+"withPPG": 2.05,
+"withoutPPG": 1.35,
+"withoutGames": 17,
+"minutes": 1104,
+"goalsConceded": 14,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Andreas Christensen",
+"pos": "DEF",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"CLN": 51,
+"THR": 43,
+"DIF": 66,
+"APP": 54
+},
+"apps": 21,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 3,
+"wdl": [
+10,
+4,
+7
+],
+"withPPG": 1.62,
+"withoutPPG": 1.88,
+"withoutGames": 17,
+"minutes": 1752,
+"goalsConceded": 33,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Antonio Rudiger",
+"pos": "DEF",
+"ovr": 73,
+"tier": "silver",
+"stats": {
+"CLN": 73,
+"THR": 64,
+"DIF": 66,
+"APP": 52
+},
+"apps": 20,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 5,
+"wdl": [
+10,
+3,
+7
+],
+"withPPG": 1.65,
+"withoutPPG": 1.83,
+"withoutGames": 18,
+"minutes": 1710,
+"goalsConceded": 24,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Marcos Alonso",
+"pos": "DEF",
+"ovr": 85,
+"tier": "gold",
+"stats": {
+"CLN": 77,
+"THR": 94,
+"DIF": 90,
+"APP": 48
+},
+"apps": 18,
+"goals": 4,
+"assists": 2,
+"cleanSheets": 5,
+"wdl": [
+13,
+1,
+4
+],
+"withPPG": 2.22,
+"withoutPPG": 1.3,
+"withoutGames": 20,
+"minutes": 1432,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Olivier Giroud",
+"pos": "FWD",
+"ovr": 71,
+"tier": "silver",
+"stats": {
+"GOL": 77,
+"AST": 43,
+"DIF": 71,
+"APP": 42
+},
+"apps": 18,
+"goals": 8,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+10,
+2,
+6
+],
+"withPPG": 1.78,
+"withoutPPG": 1.7,
+"withoutGames": 20,
+"minutes": 999,
+"goalsConceded": 16,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Michy Batshuayi",
+"pos": "FWD",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"GOL": 48,
+"AST": 55,
+"DIF": 61,
+"APP": 39
+},
+"apps": 16,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+7,
+3,
+6
+],
+"withPPG": 1.5,
+"withoutPPG": 1.91,
+"withoutGames": 22,
+"minutes": 226,
+"goalsConceded": 8,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Emerson",
+"pos": "DEF",
+"ovr": 50,
+"tier": "bronze",
+"stats": {
+"CLN": 40,
+"THR": 45,
+"DIF": 46,
+"APP": 43
+},
+"apps": 15,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+4,
+3,
+8
+],
+"withPPG": 1.0,
+"withoutPPG": 2.22,
+"withoutGames": 23,
+"minutes": 1025,
+"goalsConceded": 21,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Fikayo Tomori",
+"pos": "DEF",
+"ovr": 74,
+"tier": "silver",
+"stats": {
+"CLN": 75,
+"THR": 57,
+"DIF": 78,
+"APP": 43
+},
+"apps": 15,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 4,
+"wdl": [
+9,
+2,
+4
+],
+"withPPG": 1.93,
+"withoutPPG": 1.61,
+"withoutGames": 23,
+"minutes": 1293,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Pedro",
+"pos": "MID",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"AST": 62,
+"GOL": 80,
+"CLN": 56,
+"DIF": 59,
+"APP": 33
+},
+"apps": 11,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 1,
+"wdl": [
+4,
+3,
+4
+],
+"withPPG": 1.36,
+"withoutPPG": 1.89,
+"withoutGames": 27,
+"minutes": 662,
+"goalsConceded": 12,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Ruben Loftus-Cheek",
+"pos": "MID",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"AST": 67,
+"GOL": 61,
+"CLN": 49,
+"DIF": 73,
+"APP": 29
+},
+"apps": 7,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+5,
+0,
+2
+],
+"withPPG": 2.14,
+"withoutPPG": 1.65,
+"withoutGames": 31,
+"minutes": 205,
+"goalsConceded": 3,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Billy Gilmour",
+"pos": "MID",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"AST": 52,
+"GOL": 52,
+"CLN": 64,
+"DIF": 79,
+"APP": 29
+},
+"apps": 6,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+5,
+1,
+0
+],
+"withPPG": 2.67,
+"withoutPPG": 1.56,
+"withoutGames": 32,
+"minutes": 192,
+"goalsConceded": 3,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Willy Caballero",
+"pos": "GK",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"CLN": 58,
+"CON": 60,
+"DIF": 60,
+"APP": 27
+},
+"apps": 5,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+2,
+1
+],
+"withPPG": 1.6,
+"withoutPPG": 1.76,
+"withoutGames": 33,
+"minutes": 450,
+"goalsConceded": 7,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Tino Anjorin",
+"pos": "MID",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"AST": 58,
+"GOL": 57,
+"CLN": 58,
+"DIF": 66,
+"APP": 26
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+0
+],
+"withPPG": 3.0,
+"withoutPPG": 1.7,
+"withoutGames": 37,
+"minutes": 19,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Armando Broja",
+"pos": "FWD",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"GOL": 58,
+"AST": 58,
+"DIF": 64,
+"APP": 25
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+0
+],
+"withPPG": 3.0,
+"withoutPPG": 1.7,
+"withoutGames": 37,
+"minutes": 4,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Chelsea",
+"clubPos": 4,
+"player": "Tariq Lamptey",
+"pos": "DEF",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"CLN": 61,
+"THR": 58,
+"DIF": 64,
+"APP": 27
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+0
+],
+"withPPG": 3.0,
+"withoutPPG": 1.7,
+"withoutGames": 37,
+"minutes": 31,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Wilfried Zaha",
+"pos": "FWD",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"GOL": 45,
+"AST": 57,
+"DIF": 48,
+"APP": 82
+},
+"apps": 38,
+"goals": 4,
+"assists": 3,
+"cleanSheets": 9,
+"wdl": [
+11,
+10,
+17
+],
+"withPPG": 1.13,
+"withoutPPG": 1.13,
+"withoutGames": 0,
+"minutes": 3280,
+"goalsConceded": 46,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Jordan Ayew",
+"pos": "FWD",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"GOL": 56,
+"AST": 51,
+"DIF": 50,
+"APP": 80
+},
+"apps": 37,
+"goals": 9,
+"assists": 2,
+"cleanSheets": 6,
+"wdl": [
+11,
+10,
+16
+],
+"withPPG": 1.16,
+"withoutPPG": 0.0,
+"withoutGames": 1,
+"minutes": 3160,
+"goalsConceded": 45,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "James McArthur",
+"pos": "MID",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"AST": 61,
+"GOL": 45,
+"CLN": 72,
+"DIF": 52,
+"APP": 81
+},
+"apps": 37,
+"goals": 0,
+"assists": 3,
+"cleanSheets": 7,
+"wdl": [
+11,
+10,
+16
+],
+"withPPG": 1.16,
+"withoutPPG": 0.0,
+"withoutGames": 1,
+"minutes": 3104,
+"goalsConceded": 38,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Vicente Guaita",
+"pos": "GK",
+"ovr": 72,
+"tier": "silver",
+"stats": {
+"CLN": 68,
+"CON": 70,
+"DIF": 50,
+"APP": 69
+},
+"apps": 35,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 10,
+"wdl": [
+11,
+9,
+15
+],
+"withPPG": 1.2,
+"withoutPPG": 0.33,
+"withoutGames": 3,
+"minutes": 3150,
+"goalsConceded": 42,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Cheikhou Kouyate",
+"pos": "MID",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"AST": 49,
+"GOL": 50,
+"CLN": 69,
+"DIF": 53,
+"APP": 78
+},
+"apps": 35,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 6,
+"wdl": [
+11,
+9,
+15
+],
+"withPPG": 1.2,
+"withoutPPG": 0.33,
+"withoutGames": 3,
+"minutes": 2535,
+"goalsConceded": 36,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "James McCarthy",
+"pos": "MID",
+"ovr": 54,
+"tier": "bronze",
+"stats": {
+"AST": 43,
+"GOL": 44,
+"CLN": 48,
+"DIF": 50,
+"APP": 75
+},
+"apps": 33,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+9,
+9,
+15
+],
+"withPPG": 1.09,
+"withoutPPG": 1.4,
+"withoutGames": 5,
+"minutes": 1672,
+"goalsConceded": 29,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Luka Milivojevic",
+"pos": "MID",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"AST": 50,
+"GOL": 77,
+"CLN": 73,
+"DIF": 48,
+"APP": 71
+},
+"apps": 31,
+"goals": 3,
+"assists": 1,
+"cleanSheets": 6,
+"wdl": [
+8,
+8,
+15
+],
+"withPPG": 1.03,
+"withoutPPG": 1.57,
+"withoutGames": 7,
+"minutes": 2514,
+"goalsConceded": 38,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Patrick van Aanholt",
+"pos": "DEF",
+"ovr": 77,
+"tier": "best",
+"stats": {
+"CLN": 75,
+"THR": 80,
+"DIF": 60,
+"APP": 71
+},
+"apps": 29,
+"goals": 3,
+"assists": 2,
+"cleanSheets": 8,
+"wdl": [
+11,
+3,
+15
+],
+"withPPG": 1.24,
+"withoutPPG": 0.78,
+"withoutGames": 9,
+"minutes": 2511,
+"goalsConceded": 38,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Joel Ward",
+"pos": "DEF",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"CLN": 68,
+"THR": 41,
+"DIF": 44,
+"APP": 71
+},
+"apps": 29,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 7,
+"wdl": [
+8,
+5,
+16
+],
+"withPPG": 1.0,
+"withoutPPG": 1.56,
+"withoutGames": 9,
+"minutes": 2383,
+"goalsConceded": 36,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Gary Cahill",
+"pos": "DEF",
+"ovr": 70,
+"tier": "silver",
+"stats": {
+"CLN": 75,
+"THR": 50,
+"DIF": 51,
+"APP": 63
+},
+"apps": 25,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 7,
+"wdl": [
+8,
+5,
+12
+],
+"withPPG": 1.16,
+"withoutPPG": 1.08,
+"withoutGames": 13,
+"minutes": 2168,
+"goalsConceded": 35,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Christian Benteke",
+"pos": "FWD",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"GOL": 50,
+"AST": 49,
+"DIF": 55,
+"APP": 54
+},
+"apps": 24,
+"goals": 2,
+"assists": 1,
+"cleanSheets": 1,
+"wdl": [
+8,
+5,
+11
+],
+"withPPG": 1.21,
+"withoutPPG": 1.0,
+"withoutGames": 14,
+"minutes": 1257,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Andros Townsend",
+"pos": "MID",
+"ovr": 57,
+"tier": "bronze",
+"stats": {
+"AST": 52,
+"GOL": 56,
+"CLN": 46,
+"DIF": 49,
+"APP": 56
+},
+"apps": 24,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 1,
+"wdl": [
+7,
+4,
+13
+],
+"withPPG": 1.04,
+"withoutPPG": 1.29,
+"withoutGames": 14,
+"minutes": 1289,
+"goalsConceded": 23,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Martin Kelly",
+"pos": "DEF",
+"ovr": 72,
+"tier": "silver",
+"stats": {
+"CLN": 71,
+"THR": 54,
+"DIF": 71,
+"APP": 50
+},
+"apps": 19,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 5,
+"wdl": [
+7,
+7,
+5
+],
+"withPPG": 1.47,
+"withoutPPG": 0.79,
+"withoutGames": 19,
+"minutes": 1550,
+"goalsConceded": 16,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "James Tomkins",
+"pos": "DEF",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"CLN": 52,
+"THR": 66,
+"DIF": 43,
+"APP": 48
+},
+"apps": 18,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 3,
+"wdl": [
+3,
+7,
+8
+],
+"withPPG": 0.89,
+"withoutPPG": 1.35,
+"withoutGames": 20,
+"minutes": 1584,
+"goalsConceded": 23,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Max Meyer",
+"pos": "MID",
+"ovr": 51,
+"tier": "bronze",
+"stats": {
+"AST": 46,
+"GOL": 43,
+"CLN": 50,
+"DIF": 41,
+"APP": 42
+},
+"apps": 17,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+5,
+10
+],
+"withPPG": 0.65,
+"withoutPPG": 1.52,
+"withoutGames": 21,
+"minutes": 650,
+"goalsConceded": 11,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Jairo Riedewald",
+"pos": "MID",
+"ovr": 54,
+"tier": "bronze",
+"stats": {
+"AST": 46,
+"GOL": 47,
+"CLN": 42,
+"DIF": 52,
+"APP": 42
+},
+"apps": 17,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+4,
+7,
+6
+],
+"withPPG": 1.12,
+"withoutPPG": 1.14,
+"withoutGames": 21,
+"minutes": 764,
+"goalsConceded": 9,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Jeffrey Schlupp",
+"pos": "DEF",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"CLN": 35,
+"THR": 86,
+"DIF": 56,
+"APP": 46
+},
+"apps": 17,
+"goals": 3,
+"assists": 1,
+"cleanSheets": 1,
+"wdl": [
+6,
+3,
+8
+],
+"withPPG": 1.24,
+"withoutPPG": 1.05,
+"withoutGames": 21,
+"minutes": 1034,
+"goalsConceded": 16,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Scott Dann",
+"pos": "DEF",
+"ovr": 68,
+"tier": "silver",
+"stats": {
+"CLN": 79,
+"THR": 56,
+"DIF": 50,
+"APP": 44
+},
+"apps": 16,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 5,
+"wdl": [
+5,
+3,
+8
+],
+"withPPG": 1.12,
+"withoutPPG": 1.14,
+"withoutGames": 22,
+"minutes": 1265,
+"goalsConceded": 14,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Mamadou Sakho",
+"pos": "DEF",
+"ovr": 46,
+"tier": "bronze",
+"stats": {
+"CLN": 31,
+"THR": 45,
+"DIF": 49,
+"APP": 41
+},
+"apps": 14,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+4,
+3,
+7
+],
+"withPPG": 1.07,
+"withoutPPG": 1.17,
+"withoutGames": 24,
+"minutes": 931,
+"goalsConceded": 21,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Connor Wickham",
+"pos": "FWD",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"GOL": 49,
+"AST": 68,
+"DIF": 51,
+"APP": 28
+},
+"apps": 6,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+1,
+3,
+2
+],
+"withPPG": 1.0,
+"withoutPPG": 1.16,
+"withoutGames": 32,
+"minutes": 90,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Cenk Tosun",
+"pos": "FWD",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"GOL": 54,
+"AST": 51,
+"DIF": 61,
+"APP": 27
+},
+"apps": 5,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+2,
+2,
+1
+],
+"withPPG": 1.6,
+"withoutPPG": 1.06,
+"withoutGames": 33,
+"minutes": 176,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Tyrick Mitchell",
+"pos": "DEF",
+"ovr": 54,
+"tier": "bronze",
+"stats": {
+"CLN": 44,
+"THR": 53,
+"DIF": 43,
+"APP": 29
+},
+"apps": 4,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+3
+],
+"withPPG": 0.25,
+"withoutPPG": 1.24,
+"withoutGames": 34,
+"minutes": 193,
+"goalsConceded": 4,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Wayne Hennessey",
+"pos": "GK",
+"ovr": 52,
+"tier": "bronze",
+"stats": {
+"CLN": 38,
+"CON": 29,
+"DIF": 47,
+"APP": 26
+},
+"apps": 3,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+2
+],
+"withPPG": 0.33,
+"withoutPPG": 1.2,
+"withoutGames": 35,
+"minutes": 270,
+"goalsConceded": 8,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Brandon Pierrick",
+"pos": "MID",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"AST": 56,
+"GOL": 56,
+"CLN": 56,
+"DIF": 54,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+1
+],
+"withPPG": 0.5,
+"withoutPPG": 1.17,
+"withoutGames": 36,
+"minutes": 13,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Crystal Palace",
+"clubPos": 14,
+"player": "Victor Camarasa",
+"pos": "MID",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"AST": 58,
+"GOL": 77,
+"CLN": 58,
+"DIF": 54,
+"APP": 26
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+1
+],
+"withPPG": 0.0,
+"withoutPPG": 1.16,
+"withoutGames": 37,
+"minutes": 5,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Jordan Pickford",
+"pos": "GK",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"CLN": 56,
+"CON": 53,
+"DIF": 54,
+"APP": 74
+},
+"apps": 38,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 9,
+"wdl": [
+13,
+10,
+15
+],
+"withPPG": 1.29,
+"withoutPPG": 1.29,
+"withoutGames": 0,
+"minutes": 3420,
+"goalsConceded": 56,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Dominic Calvert-Lewin",
+"pos": "FWD",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"GOL": 66,
+"AST": 45,
+"DIF": 54,
+"APP": 78
+},
+"apps": 36,
+"goals": 13,
+"assists": 1,
+"cleanSheets": 5,
+"wdl": [
+12,
+10,
+14
+],
+"withPPG": 1.28,
+"withoutPPG": 1.5,
+"withoutGames": 2,
+"minutes": 2629,
+"goalsConceded": 43,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Richarlison",
+"pos": "FWD",
+"ovr": 71,
+"tier": "silver",
+"stats": {
+"GOL": 69,
+"AST": 58,
+"DIF": 55,
+"APP": 78
+},
+"apps": 36,
+"goals": 13,
+"assists": 3,
+"cleanSheets": 6,
+"wdl": [
+13,
+8,
+15
+],
+"withPPG": 1.31,
+"withoutPPG": 1.0,
+"withoutGames": 2,
+"minutes": 3081,
+"goalsConceded": 51,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Lucas Digne",
+"pos": "DEF",
+"ovr": 72,
+"tier": "silver",
+"stats": {
+"CLN": 62,
+"THR": 85,
+"DIF": 54,
+"APP": 82
+},
+"apps": 35,
+"goals": 0,
+"assists": 7,
+"cleanSheets": 7,
+"wdl": [
+12,
+9,
+14
+],
+"withPPG": 1.29,
+"withoutPPG": 1.33,
+"withoutGames": 3,
+"minutes": 3035,
+"goalsConceded": 49,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Gylfi Sigurdsson",
+"pos": "MID",
+"ovr": 69,
+"tier": "silver",
+"stats": {
+"AST": 62,
+"GOL": 67,
+"CLN": 58,
+"DIF": 57,
+"APP": 78
+},
+"apps": 35,
+"goals": 2,
+"assists": 3,
+"cleanSheets": 4,
+"wdl": [
+13,
+7,
+15
+],
+"withPPG": 1.31,
+"withoutPPG": 1.0,
+"withoutGames": 3,
+"minutes": 2563,
+"goalsConceded": 45,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Michael Keane",
+"pos": "DEF",
+"ovr": 71,
+"tier": "silver",
+"stats": {
+"CLN": 68,
+"THR": 55,
+"DIF": 58,
+"APP": 75
+},
+"apps": 31,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 7,
+"wdl": [
+12,
+7,
+12
+],
+"withPPG": 1.39,
+"withoutPPG": 0.86,
+"withoutGames": 7,
+"minutes": 2556,
+"goalsConceded": 42,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Tom Davies",
+"pos": "MID",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"AST": 43,
+"GOL": 49,
+"CLN": 68,
+"DIF": 61,
+"APP": 69
+},
+"apps": 30,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 5,
+"wdl": [
+10,
+10,
+10
+],
+"withPPG": 1.33,
+"withoutPPG": 1.12,
+"withoutGames": 8,
+"minutes": 2026,
+"goalsConceded": 34,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Moise Kean",
+"pos": "FWD",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"GOL": 45,
+"AST": 55,
+"DIF": 46,
+"APP": 65
+},
+"apps": 29,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 0,
+"wdl": [
+7,
+9,
+13
+],
+"withPPG": 1.03,
+"withoutPPG": 2.11,
+"withoutGames": 9,
+"minutes": 835,
+"goalsConceded": 15,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Yerry Mina",
+"pos": "DEF",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"CLN": 48,
+"THR": 65,
+"DIF": 53,
+"APP": 71
+},
+"apps": 29,
+"goals": 2,
+"assists": 1,
+"cleanSheets": 4,
+"wdl": [
+10,
+7,
+12
+],
+"withPPG": 1.28,
+"withoutPPG": 1.33,
+"withoutGames": 9,
+"minutes": 2281,
+"goalsConceded": 37,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Bernard",
+"pos": "MID",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"AST": 59,
+"GOL": 62,
+"CLN": 58,
+"DIF": 57,
+"APP": 62
+},
+"apps": 27,
+"goals": 3,
+"assists": 2,
+"cleanSheets": 3,
+"wdl": [
+9,
+8,
+10
+],
+"withPPG": 1.3,
+"withoutPPG": 1.27,
+"withoutGames": 11,
+"minutes": 1278,
+"goalsConceded": 12,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Seamus Coleman",
+"pos": "DEF",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"CLN": 59,
+"THR": 49,
+"DIF": 55,
+"APP": 67
+},
+"apps": 27,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 5,
+"wdl": [
+9,
+8,
+10
+],
+"withPPG": 1.3,
+"withoutPPG": 1.27,
+"withoutGames": 11,
+"minutes": 1839,
+"goalsConceded": 28,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Mason Holgate",
+"pos": "DEF",
+"ovr": 72,
+"tier": "best",
+"stats": {
+"CLN": 59,
+"THR": 67,
+"DIF": 75,
+"APP": 67
+},
+"apps": 27,
+"goals": 0,
+"assists": 3,
+"cleanSheets": 5,
+"wdl": [
+11,
+8,
+8
+],
+"withPPG": 1.52,
+"withoutPPG": 0.73,
+"withoutGames": 11,
+"minutes": 2054,
+"goalsConceded": 34,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Alex Iwobi",
+"pos": "MID",
+"ovr": 54,
+"tier": "bronze",
+"stats": {
+"AST": 44,
+"GOL": 55,
+"CLN": 40,
+"DIF": 50,
+"APP": 58
+},
+"apps": 25,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+7,
+6,
+12
+],
+"withPPG": 1.08,
+"withoutPPG": 1.69,
+"withoutGames": 13,
+"minutes": 1601,
+"goalsConceded": 30,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Djibril Sidibe",
+"pos": "DEF",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"CLN": 53,
+"THR": 77,
+"DIF": 57,
+"APP": 63
+},
+"apps": 25,
+"goals": 0,
+"assists": 4,
+"cleanSheets": 4,
+"wdl": [
+9,
+6,
+10
+],
+"withPPG": 1.32,
+"withoutPPG": 1.23,
+"withoutGames": 13,
+"minutes": 1820,
+"goalsConceded": 30,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Theo Walcott",
+"pos": "FWD",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"GOL": 45,
+"AST": 67,
+"DIF": 63,
+"APP": 56
+},
+"apps": 25,
+"goals": 2,
+"assists": 3,
+"cleanSheets": 0,
+"wdl": [
+10,
+5,
+10
+],
+"withPPG": 1.4,
+"withoutPPG": 1.08,
+"withoutGames": 13,
+"minutes": 1297,
+"goalsConceded": 19,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Andre Gomes",
+"pos": "MID",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"AST": 55,
+"GOL": 43,
+"CLN": 80,
+"DIF": 56,
+"APP": 46
+},
+"apps": 19,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 5,
+"wdl": [
+6,
+6,
+7
+],
+"withPPG": 1.26,
+"withoutPPG": 1.32,
+"withoutGames": 19,
+"minutes": 1460,
+"goalsConceded": 20,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Fabian Delph",
+"pos": "MID",
+"ovr": 55,
+"tier": "bronze",
+"stats": {
+"AST": 46,
+"GOL": 44,
+"CLN": 51,
+"DIF": 54,
+"APP": 40
+},
+"apps": 16,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+5,
+4,
+7
+],
+"withPPG": 1.19,
+"withoutPPG": 1.36,
+"withoutGames": 22,
+"minutes": 1190,
+"goalsConceded": 24,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Morgan Schneiderlin",
+"pos": "MID",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"AST": 47,
+"GOL": 47,
+"CLN": 43,
+"DIF": 48,
+"APP": 39
+},
+"apps": 15,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+4,
+2,
+9
+],
+"withPPG": 0.93,
+"withoutPPG": 1.52,
+"withoutGames": 23,
+"minutes": 1004,
+"goalsConceded": 20,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Anthony Gordon",
+"pos": "MID",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"AST": 62,
+"GOL": 49,
+"CLN": 45,
+"DIF": 55,
+"APP": 33
+},
+"apps": 11,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+3,
+4,
+4
+],
+"withPPG": 1.18,
+"withoutPPG": 1.33,
+"withoutGames": 27,
+"minutes": 440,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Leighton Baines",
+"pos": "DEF",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"CLN": 39,
+"THR": 49,
+"DIF": 59,
+"APP": 33
+},
+"apps": 8,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+2,
+3
+],
+"withPPG": 1.38,
+"withoutPPG": 1.27,
+"withoutGames": 30,
+"minutes": 401,
+"goalsConceded": 8,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Cenk Tosun",
+"pos": "FWD",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"GOL": 54,
+"AST": 51,
+"DIF": 52,
+"APP": 27
+},
+"apps": 5,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+2,
+2
+],
+"withPPG": 1.0,
+"withoutPPG": 1.33,
+"withoutGames": 33,
+"minutes": 290,
+"goalsConceded": 4,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Jarrad Branthwaite",
+"pos": "DEF",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"CLN": 69,
+"THR": 53,
+"DIF": 52,
+"APP": 29
+},
+"apps": 4,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+1,
+1,
+2
+],
+"withPPG": 1.0,
+"withoutPPG": 1.32,
+"withoutGames": 34,
+"minutes": 299,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Oumar Niasse",
+"pos": "FWD",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"GOL": 48,
+"AST": 54,
+"DIF": 54,
+"APP": 26
+},
+"apps": 3,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+3,
+0
+],
+"withPPG": 1.0,
+"withoutPPG": 1.31,
+"withoutGames": 35,
+"minutes": 19,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Everton",
+"clubPos": 12,
+"player": "Jean-Philippe Gbamin",
+"pos": "MID",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"AST": 56,
+"GOL": 56,
+"CLN": 74,
+"DIF": 64,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+1,
+1,
+0
+],
+"withPPG": 2.0,
+"withoutPPG": 1.25,
+"withoutGames": 36,
+"minutes": 135,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Jonny Evans",
+"pos": "DEF",
+"ovr": 75,
+"tier": "gold",
+"stats": {
+"CLN": 67,
+"THR": 52,
+"DIF": 68,
+"APP": 86
+},
+"apps": 38,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 11,
+"wdl": [
+18,
+8,
+12
+],
+"withPPG": 1.63,
+"withoutPPG": 1.63,
+"withoutGames": 0,
+"minutes": 3385,
+"goalsConceded": 41,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Kasper Schmeichel",
+"pos": "GK",
+"ovr": 74,
+"tier": "silver",
+"stats": {
+"CLN": 70,
+"CON": 67,
+"DIF": 66,
+"APP": 74
+},
+"apps": 38,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 13,
+"wdl": [
+18,
+8,
+12
+],
+"withPPG": 1.63,
+"withoutPPG": 1.63,
+"withoutGames": 0,
+"minutes": 3420,
+"goalsConceded": 41,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Youri Tielemans",
+"pos": "MID",
+"ovr": 78,
+"tier": "gold",
+"stats": {
+"AST": 78,
+"GOL": 60,
+"CLN": 77,
+"DIF": 67,
+"APP": 81
+},
+"apps": 37,
+"goals": 3,
+"assists": 6,
+"cleanSheets": 8,
+"wdl": [
+17,
+8,
+12
+],
+"withPPG": 1.59,
+"withoutPPG": 3.0,
+"withoutGames": 1,
+"minutes": 2834,
+"goalsConceded": 35,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Harvey Barnes",
+"pos": "MID",
+"ovr": 79,
+"tier": "gold",
+"stats": {
+"AST": 87,
+"GOL": 77,
+"CLN": 42,
+"DIF": 68,
+"APP": 80
+},
+"apps": 36,
+"goals": 6,
+"assists": 8,
+"cleanSheets": 1,
+"wdl": [
+17,
+7,
+12
+],
+"withPPG": 1.61,
+"withoutPPG": 2.0,
+"withoutGames": 2,
+"minutes": 2090,
+"goalsConceded": 24,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Jamie Vardy",
+"pos": "FWD",
+"ovr": 86,
+"tier": "best",
+"stats": {
+"GOL": 91,
+"AST": 73,
+"DIF": 66,
+"APP": 77
+},
+"apps": 35,
+"goals": 23,
+"assists": 5,
+"cleanSheets": 11,
+"wdl": [
+16,
+8,
+11
+],
+"withPPG": 1.6,
+"withoutPPG": 2.0,
+"withoutGames": 3,
+"minutes": 3034,
+"goalsConceded": 38,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Caglar Soyuncu",
+"pos": "DEF",
+"ovr": 81,
+"tier": "gold",
+"stats": {
+"CLN": 80,
+"THR": 54,
+"DIF": 68,
+"APP": 80
+},
+"apps": 34,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 12,
+"wdl": [
+16,
+8,
+10
+],
+"withPPG": 1.65,
+"withoutPPG": 1.5,
+"withoutGames": 4,
+"minutes": 3037,
+"goalsConceded": 33,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Ayoze Perez",
+"pos": "FWD",
+"ovr": 68,
+"tier": "silver",
+"stats": {
+"GOL": 58,
+"AST": 68,
+"DIF": 64,
+"APP": 73
+},
+"apps": 33,
+"goals": 8,
+"assists": 4,
+"cleanSheets": 1,
+"wdl": [
+15,
+6,
+12
+],
+"withPPG": 1.55,
+"withoutPPG": 2.2,
+"withoutGames": 5,
+"minutes": 2019,
+"goalsConceded": 25,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Wilfred Ndidi",
+"pos": "MID",
+"ovr": 74,
+"tier": "silver",
+"stats": {
+"AST": 49,
+"GOL": 54,
+"CLN": 91,
+"DIF": 73,
+"APP": 73
+},
+"apps": 32,
+"goals": 2,
+"assists": 1,
+"cleanSheets": 11,
+"wdl": [
+17,
+6,
+9
+],
+"withPPG": 1.78,
+"withoutPPG": 0.83,
+"withoutGames": 6,
+"minutes": 2674,
+"goalsConceded": 32,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "James Maddison",
+"pos": "MID",
+"ovr": 81,
+"tier": "gold",
+"stats": {
+"AST": 64,
+"GOL": 86,
+"CLN": 82,
+"DIF": 70,
+"APP": 71
+},
+"apps": 31,
+"goals": 6,
+"assists": 3,
+"cleanSheets": 8,
+"wdl": [
+15,
+7,
+9
+],
+"withPPG": 1.68,
+"withoutPPG": 1.43,
+"withoutGames": 7,
+"minutes": 2628,
+"goalsConceded": 26,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Ricardo Pereira",
+"pos": "DEF",
+"ovr": 84,
+"tier": "gold",
+"stats": {
+"CLN": 80,
+"THR": 81,
+"DIF": 80,
+"APP": 69
+},
+"apps": 28,
+"goals": 3,
+"assists": 2,
+"cleanSheets": 10,
+"wdl": [
+15,
+5,
+8
+],
+"withPPG": 1.79,
+"withoutPPG": 1.2,
+"withoutGames": 10,
+"minutes": 2520,
+"goalsConceded": 27,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Ben Chilwell",
+"pos": "DEF",
+"ovr": 80,
+"tier": "gold",
+"stats": {
+"CLN": 75,
+"THR": 87,
+"DIF": 70,
+"APP": 67
+},
+"apps": 27,
+"goals": 3,
+"assists": 3,
+"cleanSheets": 9,
+"wdl": [
+13,
+6,
+8
+],
+"withPPG": 1.67,
+"withoutPPG": 1.55,
+"withoutGames": 11,
+"minutes": 2375,
+"goalsConceded": 26,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Dennis Praet",
+"pos": "MID",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"AST": 59,
+"GOL": 52,
+"CLN": 40,
+"DIF": 60,
+"APP": 62
+},
+"apps": 27,
+"goals": 1,
+"assists": 2,
+"cleanSheets": 0,
+"wdl": [
+11,
+5,
+11
+],
+"withPPG": 1.41,
+"withoutPPG": 2.18,
+"withoutGames": 11,
+"minutes": 1132,
+"goalsConceded": 17,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Demarai Gray",
+"pos": "MID",
+"ovr": 70,
+"tier": "silver",
+"stats": {
+"AST": 72,
+"GOL": 62,
+"CLN": 41,
+"DIF": 75,
+"APP": 49
+},
+"apps": 21,
+"goals": 2,
+"assists": 3,
+"cleanSheets": 0,
+"wdl": [
+11,
+4,
+6
+],
+"withPPG": 1.76,
+"withoutPPG": 1.47,
+"withoutGames": 17,
+"minutes": 607,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Marc Albrighton",
+"pos": "MID",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"AST": 73,
+"GOL": 46,
+"CLN": 48,
+"DIF": 62,
+"APP": 47
+},
+"apps": 20,
+"goals": 0,
+"assists": 3,
+"cleanSheets": 1,
+"wdl": [
+8,
+5,
+7
+],
+"withPPG": 1.45,
+"withoutPPG": 1.83,
+"withoutGames": 18,
+"minutes": 864,
+"goalsConceded": 11,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Hamza Choudhury",
+"pos": "MID",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"AST": 54,
+"GOL": 55,
+"CLN": 41,
+"DIF": 66,
+"APP": 47
+},
+"apps": 20,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+9,
+5,
+6
+],
+"withPPG": 1.6,
+"withoutPPG": 1.67,
+"withoutGames": 18,
+"minutes": 889,
+"goalsConceded": 12,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Kelechi Iheanacho",
+"pos": "FWD",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"GOL": 55,
+"AST": 72,
+"DIF": 55,
+"APP": 46
+},
+"apps": 20,
+"goals": 5,
+"assists": 3,
+"cleanSheets": 0,
+"wdl": [
+7,
+5,
+8
+],
+"withPPG": 1.3,
+"withoutPPG": 2.0,
+"withoutGames": 18,
+"minutes": 961,
+"goalsConceded": 9,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "James Justin",
+"pos": "DEF",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"CLN": 64,
+"THR": 59,
+"DIF": 64,
+"APP": 39
+},
+"apps": 13,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 4,
+"wdl": [
+6,
+3,
+4
+],
+"withPPG": 1.62,
+"withoutPPG": 1.64,
+"withoutGames": 25,
+"minutes": 1010,
+"goalsConceded": 14,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Christian Fuchs",
+"pos": "DEF",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"CLN": 44,
+"THR": 47,
+"DIF": 72,
+"APP": 36
+},
+"apps": 11,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+6,
+2,
+3
+],
+"withPPG": 1.82,
+"withoutPPG": 1.56,
+"withoutGames": 27,
+"minutes": 769,
+"goalsConceded": 10,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Wes Morgan",
+"pos": "DEF",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"CLN": 34,
+"THR": 47,
+"DIF": 88,
+"APP": 36
+},
+"apps": 11,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+8,
+1,
+2
+],
+"withPPG": 2.27,
+"withoutPPG": 1.37,
+"withoutGames": 27,
+"minutes": 430,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Nampalys Mendy",
+"pos": "MID",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"AST": 51,
+"GOL": 40,
+"CLN": 49,
+"DIF": 68,
+"APP": 29
+},
+"apps": 7,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+4,
+1,
+2
+],
+"withPPG": 1.86,
+"withoutPPG": 1.58,
+"withoutGames": 31,
+"minutes": 291,
+"goalsConceded": 3,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Ryan Bennett",
+"pos": "DEF",
+"ovr": 57,
+"tier": "bronze",
+"stats": {
+"CLN": 47,
+"THR": 52,
+"DIF": 58,
+"APP": 30
+},
+"apps": 5,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+1,
+2
+],
+"withPPG": 1.4,
+"withoutPPG": 1.67,
+"withoutGames": 33,
+"minutes": 330,
+"goalsConceded": 8,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Luke Thomas",
+"pos": "DEF",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"CLN": 56,
+"THR": 77,
+"DIF": 53,
+"APP": 28
+},
+"apps": 3,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 1,
+"wdl": [
+1,
+0,
+2
+],
+"withPPG": 1.0,
+"withoutPPG": 1.69,
+"withoutGames": 35,
+"minutes": 268,
+"goalsConceded": 4,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "George Hirst",
+"pos": "FWD",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"GOL": 55,
+"AST": 56,
+"DIF": 48,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+2
+],
+"withPPG": 0.0,
+"withoutPPG": 1.72,
+"withoutGames": 36,
+"minutes": 9,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Leicester",
+"clubPos": 5,
+"player": "Matty James",
+"pos": "MID",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"AST": 58,
+"GOL": 40,
+"CLN": 58,
+"DIF": 54,
+"APP": 26
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+1
+],
+"withPPG": 0.0,
+"withoutPPG": 1.68,
+"withoutGames": 37,
+"minutes": 5,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Trent Alexander-Arnold",
+"pos": "DEF",
+"ovr": 90,
+"tier": "gold",
+"stats": {
+"CLN": 65,
+"THR": 98,
+"DIF": 93,
+"APP": 86
+},
+"apps": 38,
+"goals": 4,
+"assists": 13,
+"cleanSheets": 12,
+"wdl": [
+32,
+3,
+3
+],
+"withPPG": 2.61,
+"withoutPPG": 2.61,
+"withoutGames": 0,
+"minutes": 3176,
+"goalsConceded": 32,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Roberto Firmino",
+"pos": "FWD",
+"ovr": 81,
+"tier": "gold",
+"stats": {
+"GOL": 61,
+"AST": 86,
+"DIF": 92,
+"APP": 82
+},
+"apps": 38,
+"goals": 9,
+"assists": 8,
+"cleanSheets": 7,
+"wdl": [
+32,
+3,
+3
+],
+"withPPG": 2.61,
+"withoutPPG": 2.61,
+"withoutGames": 0,
+"minutes": 3001,
+"goalsConceded": 26,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Virgil van Dijk",
+"pos": "DEF",
+"ovr": 91,
+"tier": "gold",
+"stats": {
+"CLN": 82,
+"THR": 78,
+"DIF": 93,
+"APP": 86
+},
+"apps": 38,
+"goals": 5,
+"assists": 1,
+"cleanSheets": 15,
+"wdl": [
+32,
+3,
+3
+],
+"withPPG": 2.61,
+"withoutPPG": 2.61,
+"withoutGames": 0,
+"minutes": 3420,
+"goalsConceded": 33,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Georginio Wijnaldum",
+"pos": "MID",
+"ovr": 81,
+"tier": "gold",
+"stats": {
+"AST": 43,
+"GOL": 70,
+"CLN": 77,
+"DIF": 92,
+"APP": 81
+},
+"apps": 37,
+"goals": 4,
+"assists": 0,
+"cleanSheets": 8,
+"wdl": [
+31,
+3,
+3
+],
+"withPPG": 2.59,
+"withoutPPG": 3.0,
+"withoutGames": 1,
+"minutes": 2948,
+"goalsConceded": 28,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Andy Robertson",
+"pos": "DEF",
+"ovr": 85,
+"tier": "gold",
+"stats": {
+"CLN": 48,
+"THR": 98,
+"DIF": 93,
+"APP": 83
+},
+"apps": 36,
+"goals": 2,
+"assists": 12,
+"cleanSheets": 9,
+"wdl": [
+31,
+2,
+3
+],
+"withPPG": 2.64,
+"withoutPPG": 2.0,
+"withoutGames": 2,
+"minutes": 3113,
+"goalsConceded": 31,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Sadio Mane",
+"pos": "FWD",
+"ovr": 88,
+"tier": "gold",
+"stats": {
+"GOL": 84,
+"AST": 84,
+"DIF": 91,
+"APP": 77
+},
+"apps": 35,
+"goals": 18,
+"assists": 7,
+"cleanSheets": 5,
+"wdl": [
+29,
+3,
+3
+],
+"withPPG": 2.57,
+"withoutPPG": 3.0,
+"withoutGames": 3,
+"minutes": 2753,
+"goalsConceded": 28,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Mohamed Salah",
+"pos": "FWD",
+"ovr": 92,
+"tier": "best",
+"stats": {
+"GOL": 90,
+"AST": 94,
+"DIF": 93,
+"APP": 75
+},
+"apps": 34,
+"goals": 19,
+"assists": 10,
+"cleanSheets": 11,
+"wdl": [
+30,
+1,
+3
+],
+"withPPG": 2.68,
+"withoutPPG": 2.0,
+"withoutGames": 4,
+"minutes": 2884,
+"goalsConceded": 26,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Jordan Henderson",
+"pos": "MID",
+"ovr": 90,
+"tier": "gold",
+"stats": {
+"AST": 78,
+"GOL": 71,
+"CLN": 87,
+"DIF": 95,
+"APP": 69
+},
+"apps": 30,
+"goals": 4,
+"assists": 5,
+"cleanSheets": 9,
+"wdl": [
+27,
+2,
+1
+],
+"withPPG": 2.77,
+"withoutPPG": 2.0,
+"withoutGames": 8,
+"minutes": 2244,
+"goalsConceded": 14,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Alex Oxlade-Chamberlain",
+"pos": "MID",
+"ovr": 74,
+"tier": "silver",
+"stats": {
+"AST": 50,
+"GOL": 70,
+"CLN": 39,
+"DIF": 89,
+"APP": 69
+},
+"apps": 30,
+"goals": 4,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+24,
+3,
+3
+],
+"withPPG": 2.5,
+"withoutPPG": 3.0,
+"withoutGames": 8,
+"minutes": 1492,
+"goalsConceded": 12,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Alisson",
+"pos": "GK",
+"ovr": 84,
+"tier": "gold",
+"stats": {
+"CLN": 87,
+"CON": 77,
+"DIF": 88,
+"APP": 58
+},
+"apps": 29,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 13,
+"wdl": [
+23,
+3,
+3
+],
+"withPPG": 2.48,
+"withoutPPG": 3.0,
+"withoutGames": 9,
+"minutes": 2545,
+"goalsConceded": 23,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Joe Gomez",
+"pos": "DEF",
+"ovr": 88,
+"tier": "gold",
+"stats": {
+"CLN": 85,
+"THR": 42,
+"DIF": 93,
+"APP": 69
+},
+"apps": 28,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 12,
+"wdl": [
+24,
+2,
+2
+],
+"withPPG": 2.64,
+"withoutPPG": 2.5,
+"withoutGames": 10,
+"minutes": 1999,
+"goalsConceded": 16,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Divock Origi",
+"pos": "FWD",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"GOL": 50,
+"AST": 48,
+"DIF": 90,
+"APP": 63
+},
+"apps": 28,
+"goals": 4,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+23,
+2,
+3
+],
+"withPPG": 2.54,
+"withoutPPG": 2.8,
+"withoutGames": 10,
+"minutes": 706,
+"goalsConceded": 12,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Fabinho",
+"pos": "MID",
+"ovr": 79,
+"tier": "gold",
+"stats": {
+"AST": 66,
+"GOL": 55,
+"CLN": 70,
+"DIF": 88,
+"APP": 64
+},
+"apps": 28,
+"goals": 2,
+"assists": 3,
+"cleanSheets": 5,
+"wdl": [
+22,
+3,
+3
+],
+"withPPG": 2.46,
+"withoutPPG": 3.0,
+"withoutGames": 10,
+"minutes": 2074,
+"goalsConceded": 26,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "James Milner",
+"pos": "MID",
+"ovr": 82,
+"tier": "gold",
+"stats": {
+"AST": 62,
+"GOL": 64,
+"CLN": 62,
+"DIF": 95,
+"APP": 51
+},
+"apps": 22,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 3,
+"wdl": [
+21,
+1,
+0
+],
+"withPPG": 2.91,
+"withoutPPG": 2.19,
+"withoutGames": 16,
+"minutes": 926,
+"goalsConceded": 9,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Naby Keita",
+"pos": "MID",
+"ovr": 75,
+"tier": "gold",
+"stats": {
+"AST": 76,
+"GOL": 65,
+"CLN": 50,
+"DIF": 83,
+"APP": 44
+},
+"apps": 18,
+"goals": 2,
+"assists": 3,
+"cleanSheets": 1,
+"wdl": [
+13,
+3,
+2
+],
+"withPPG": 2.33,
+"withoutPPG": 2.85,
+"withoutGames": 20,
+"minutes": 814,
+"goalsConceded": 8,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Adam Lallana",
+"pos": "MID",
+"ovr": 72,
+"tier": "silver",
+"stats": {
+"AST": 58,
+"GOL": 68,
+"CLN": 43,
+"DIF": 88,
+"APP": 39
+},
+"apps": 15,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+13,
+1,
+1
+],
+"withPPG": 2.67,
+"withoutPPG": 2.57,
+"withoutGames": 23,
+"minutes": 374,
+"goalsConceded": 5,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Adrian",
+"pos": "GK",
+"ovr": 51,
+"tier": "bronze",
+"stats": {
+"CLN": 26,
+"CON": 53,
+"DIF": 91,
+"APP": 32
+},
+"apps": 11,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+11,
+0,
+0
+],
+"withPPG": 3.0,
+"withoutPPG": 2.44,
+"withoutGames": 27,
+"minutes": 873,
+"goalsConceded": 10,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Dejan Lovren",
+"pos": "DEF",
+"ovr": 50,
+"tier": "bronze",
+"stats": {
+"CLN": 26,
+"THR": 63,
+"DIF": 82,
+"APP": 35
+},
+"apps": 10,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+8,
+1,
+1
+],
+"withPPG": 2.5,
+"withoutPPG": 2.64,
+"withoutGames": 28,
+"minutes": 777,
+"goalsConceded": 11,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Takumi Minamino",
+"pos": "FWD",
+"ovr": 57,
+"tier": "bronze",
+"stats": {
+"GOL": 46,
+"AST": 47,
+"DIF": 70,
+"APP": 31
+},
+"apps": 10,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+6,
+1,
+3
+],
+"withPPG": 1.9,
+"withoutPPG": 2.86,
+"withoutGames": 28,
+"minutes": 242,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Joel Matip",
+"pos": "DEF",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"CLN": 42,
+"THR": 64,
+"DIF": 82,
+"APP": 34
+},
+"apps": 9,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+7,
+2,
+0
+],
+"withPPG": 2.56,
+"withoutPPG": 2.62,
+"withoutGames": 29,
+"minutes": 704,
+"goalsConceded": 5,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Xherdan Shaqiri",
+"pos": "MID",
+"ovr": 68,
+"tier": "silver",
+"stats": {
+"AST": 51,
+"GOL": 83,
+"CLN": 49,
+"DIF": 79,
+"APP": 29
+},
+"apps": 7,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+6,
+0,
+1
+],
+"withPPG": 2.57,
+"withoutPPG": 2.61,
+"withoutGames": 31,
+"minutes": 182,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Curtis Jones",
+"pos": "MID",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"AST": 52,
+"GOL": 67,
+"CLN": 50,
+"DIF": 79,
+"APP": 29
+},
+"apps": 6,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+5,
+1,
+0
+],
+"withPPG": 2.67,
+"withoutPPG": 2.59,
+"withoutGames": 32,
+"minutes": 122,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Neco Williams",
+"pos": "DEF",
+"ovr": 50,
+"tier": "bronze",
+"stats": {
+"CLN": 28,
+"THR": 51,
+"DIF": 71,
+"APP": 31
+},
+"apps": 6,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+4,
+1,
+1
+],
+"withPPG": 2.17,
+"withoutPPG": 2.69,
+"withoutGames": 32,
+"minutes": 230,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Liverpool",
+"clubPos": 1,
+"player": "Harvey Elliott",
+"pos": "MID",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"AST": 56,
+"GOL": 56,
+"CLN": 56,
+"DIF": 70,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+2,
+0,
+0
+],
+"withPPG": 3.0,
+"withoutPPG": 2.58,
+"withoutGames": 36,
+"minutes": 7,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Kevin De Bruyne",
+"pos": "MID",
+"ovr": 96,
+"tier": "best",
+"stats": {
+"AST": 99,
+"GOL": 97,
+"CLN": 83,
+"DIF": 85,
+"APP": 78
+},
+"apps": 35,
+"goals": 13,
+"assists": 20,
+"cleanSheets": 9,
+"wdl": [
+25,
+3,
+7
+],
+"withPPG": 2.23,
+"withoutPPG": 1.0,
+"withoutGames": 3,
+"minutes": 2798,
+"goalsConceded": 22,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Rodri",
+"pos": "MID",
+"ovr": 81,
+"tier": "gold",
+"stats": {
+"AST": 55,
+"GOL": 61,
+"CLN": 91,
+"DIF": 83,
+"APP": 78
+},
+"apps": 35,
+"goals": 3,
+"assists": 2,
+"cleanSheets": 12,
+"wdl": [
+24,
+3,
+8
+],
+"withPPG": 2.14,
+"withoutPPG": 2.0,
+"withoutGames": 3,
+"minutes": 2486,
+"goalsConceded": 27,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Ederson",
+"pos": "GK",
+"ovr": 84,
+"tier": "gold",
+"stats": {
+"CLN": 83,
+"CON": 82,
+"DIF": 82,
+"APP": 69
+},
+"apps": 35,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 16,
+"wdl": [
+24,
+3,
+8
+],
+"withPPG": 2.14,
+"withoutPPG": 2.0,
+"withoutGames": 3,
+"minutes": 3072,
+"goalsConceded": 28,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Gabriel Jesus",
+"pos": "FWD",
+"ovr": 83,
+"tier": "gold",
+"stats": {
+"GOL": 77,
+"AST": 84,
+"DIF": 83,
+"APP": 75
+},
+"apps": 34,
+"goals": 14,
+"assists": 7,
+"cleanSheets": 6,
+"wdl": [
+23,
+3,
+8
+],
+"withPPG": 2.12,
+"withoutPPG": 2.25,
+"withoutGames": 4,
+"minutes": 2027,
+"goalsConceded": 14,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Bernardo Silva",
+"pos": "MID",
+"ovr": 87,
+"tier": "gold",
+"stats": {
+"AST": 85,
+"GOL": 83,
+"CLN": 80,
+"DIF": 80,
+"APP": 76
+},
+"apps": 34,
+"goals": 6,
+"assists": 7,
+"cleanSheets": 8,
+"wdl": [
+22,
+3,
+9
+],
+"withPPG": 2.03,
+"withoutPPG": 3.0,
+"withoutGames": 4,
+"minutes": 2029,
+"goalsConceded": 24,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Riyad Mahrez",
+"pos": "MID",
+"ovr": 92,
+"tier": "gold",
+"stats": {
+"AST": 92,
+"GOL": 96,
+"CLN": 76,
+"DIF": 82,
+"APP": 75
+},
+"apps": 33,
+"goals": 11,
+"assists": 9,
+"cleanSheets": 7,
+"wdl": [
+22,
+3,
+8
+],
+"withPPG": 2.09,
+"withoutPPG": 2.4,
+"withoutGames": 5,
+"minutes": 1940,
+"goalsConceded": 15,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Raheem Sterling",
+"pos": "FWD",
+"ovr": 82,
+"tier": "gold",
+"stats": {
+"GOL": 87,
+"AST": 46,
+"DIF": 79,
+"APP": 73
+},
+"apps": 33,
+"goals": 20,
+"assists": 1,
+"cleanSheets": 7,
+"wdl": [
+21,
+3,
+9
+],
+"withPPG": 2.0,
+"withoutPPG": 3.0,
+"withoutGames": 5,
+"minutes": 2660,
+"goalsConceded": 31,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Ilkay Gundogan",
+"pos": "MID",
+"ovr": 73,
+"tier": "silver",
+"stats": {
+"AST": 50,
+"GOL": 65,
+"CLN": 67,
+"DIF": 80,
+"APP": 71
+},
+"apps": 31,
+"goals": 2,
+"assists": 1,
+"cleanSheets": 5,
+"wdl": [
+20,
+3,
+8
+],
+"withPPG": 2.03,
+"withoutPPG": 2.57,
+"withoutGames": 7,
+"minutes": 2017,
+"goalsConceded": 28,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Fernandinho",
+"pos": "MID",
+"ovr": 70,
+"tier": "silver",
+"stats": {
+"AST": 50,
+"GOL": 46,
+"CLN": 74,
+"DIF": 81,
+"APP": 69
+},
+"apps": 30,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 6,
+"wdl": [
+20,
+2,
+8
+],
+"withPPG": 2.07,
+"withoutPPG": 2.38,
+"withoutGames": 8,
+"minutes": 2399,
+"goalsConceded": 26,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Kyle Walker",
+"pos": "DEF",
+"ovr": 78,
+"tier": "gold",
+"stats": {
+"CLN": 61,
+"THR": 80,
+"DIF": 83,
+"APP": 71
+},
+"apps": 29,
+"goals": 1,
+"assists": 4,
+"cleanSheets": 10,
+"wdl": [
+20,
+2,
+7
+],
+"withPPG": 2.14,
+"withoutPPG": 2.11,
+"withoutGames": 9,
+"minutes": 2395,
+"goalsConceded": 24,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "David Silva",
+"pos": "MID",
+"ovr": 91,
+"tier": "gold",
+"stats": {
+"AST": 96,
+"GOL": 89,
+"CLN": 64,
+"DIF": 86,
+"APP": 62
+},
+"apps": 27,
+"goals": 6,
+"assists": 10,
+"cleanSheets": 4,
+"wdl": [
+19,
+3,
+5
+],
+"withPPG": 2.22,
+"withoutPPG": 1.91,
+"withoutGames": 11,
+"minutes": 1832,
+"goalsConceded": 15,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Sergio Aguero",
+"pos": "FWD",
+"ovr": 88,
+"tier": "gold",
+"stats": {
+"GOL": 94,
+"AST": 68,
+"DIF": 80,
+"APP": 54
+},
+"apps": 24,
+"goals": 16,
+"assists": 3,
+"cleanSheets": 3,
+"wdl": [
+16,
+2,
+6
+],
+"withPPG": 2.08,
+"withoutPPG": 2.21,
+"withoutGames": 14,
+"minutes": 1456,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Nicolas Otamendi",
+"pos": "DEF",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"CLN": 40,
+"THR": 60,
+"DIF": 79,
+"APP": 61
+},
+"apps": 24,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 6,
+"wdl": [
+16,
+1,
+7
+],
+"withPPG": 2.04,
+"withoutPPG": 2.29,
+"withoutGames": 14,
+"minutes": 1711,
+"goalsConceded": 21,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Phil Foden",
+"pos": "MID",
+"ovr": 85,
+"tier": "gold",
+"stats": {
+"AST": 62,
+"GOL": 82,
+"CLN": 54,
+"DIF": 95,
+"APP": 54
+},
+"apps": 23,
+"goals": 5,
+"assists": 2,
+"cleanSheets": 2,
+"wdl": [
+20,
+1,
+2
+],
+"withPPG": 2.65,
+"withoutPPG": 1.33,
+"withoutGames": 15,
+"minutes": 892,
+"goalsConceded": 7,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Benjamin Mendy",
+"pos": "DEF",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"CLN": 42,
+"THR": 65,
+"DIF": 88,
+"APP": 50
+},
+"apps": 19,
+"goals": 0,
+"assists": 2,
+"cleanSheets": 5,
+"wdl": [
+14,
+2,
+3
+],
+"withPPG": 2.32,
+"withoutPPG": 1.95,
+"withoutGames": 19,
+"minutes": 1496,
+"goalsConceded": 13,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Oleksandr Zinchenko",
+"pos": "DEF",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"CLN": 51,
+"THR": 44,
+"DIF": 75,
+"APP": 50
+},
+"apps": 19,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 6,
+"wdl": [
+12,
+1,
+6
+],
+"withPPG": 1.95,
+"withoutPPG": 2.32,
+"withoutGames": 19,
+"minutes": 1273,
+"goalsConceded": 13,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Joao Cancelo",
+"pos": "DEF",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"CLN": 47,
+"THR": 44,
+"DIF": 81,
+"APP": 46
+},
+"apps": 17,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 5,
+"wdl": [
+12,
+1,
+4
+],
+"withPPG": 2.18,
+"withoutPPG": 2.1,
+"withoutGames": 21,
+"minutes": 1205,
+"goalsConceded": 11,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "John Stones",
+"pos": "DEF",
+"ovr": 54,
+"tier": "bronze",
+"stats": {
+"CLN": 32,
+"THR": 45,
+"DIF": 81,
+"APP": 44
+},
+"apps": 16,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 3,
+"wdl": [
+11,
+2,
+3
+],
+"withPPG": 2.19,
+"withoutPPG": 2.09,
+"withoutGames": 22,
+"minutes": 1119,
+"goalsConceded": 16,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Aymeric Laporte",
+"pos": "DEF",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"CLN": 33,
+"THR": 57,
+"DIF": 90,
+"APP": 43
+},
+"apps": 15,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 3,
+"wdl": [
+12,
+1,
+2
+],
+"withPPG": 2.47,
+"withoutPPG": 1.91,
+"withoutGames": 23,
+"minutes": 1104,
+"goalsConceded": 5,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Eric Garcia",
+"pos": "DEF",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"CLN": 37,
+"THR": 46,
+"DIF": 90,
+"APP": 39
+},
+"apps": 13,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 3,
+"wdl": [
+11,
+0,
+2
+],
+"withPPG": 2.54,
+"withoutPPG": 1.92,
+"withoutGames": 25,
+"minutes": 790,
+"goalsConceded": 7,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Angelino",
+"pos": "DEF",
+"ovr": 48,
+"tier": "bronze",
+"stats": {
+"CLN": 26,
+"THR": 51,
+"DIF": 68,
+"APP": 31
+},
+"apps": 6,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+4,
+0,
+2
+],
+"withPPG": 2.0,
+"withoutPPG": 2.16,
+"withoutGames": 32,
+"minutes": 422,
+"goalsConceded": 7,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Claudio Bravo",
+"pos": "GK",
+"ovr": 47,
+"tier": "bronze",
+"stats": {
+"CLN": 27,
+"CON": 28,
+"DIF": 58,
+"APP": 27
+},
+"apps": 4,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+0,
+2
+],
+"withPPG": 1.5,
+"withoutPPG": 2.21,
+"withoutGames": 34,
+"minutes": 346,
+"goalsConceded": 7,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Tommy Doyle",
+"pos": "MID",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"AST": 58,
+"GOL": 57,
+"CLN": 58,
+"DIF": 66,
+"APP": 26
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+0
+],
+"withPPG": 3.0,
+"withoutPPG": 2.11,
+"withoutGames": 37,
+"minutes": 15,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Man City",
+"clubPos": 2,
+"player": "Leroy Sane",
+"pos": "FWD",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"GOL": 60,
+"AST": 58,
+"DIF": 64,
+"APP": 25
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+0
+],
+"withPPG": 3.0,
+"withoutPPG": 2.11,
+"withoutGames": 37,
+"minutes": 11,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "David de Gea",
+"pos": "GK",
+"ovr": 76,
+"tier": "gold",
+"stats": {
+"CLN": 70,
+"CON": 72,
+"DIF": 70,
+"APP": 74
+},
+"apps": 38,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 13,
+"wdl": [
+18,
+12,
+8
+],
+"withPPG": 1.74,
+"withoutPPG": 1.74,
+"withoutGames": 0,
+"minutes": 3420,
+"goalsConceded": 36,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Harry Maguire",
+"pos": "DEF",
+"ovr": 82,
+"tier": "gold",
+"stats": {
+"CLN": 79,
+"THR": 52,
+"DIF": 72,
+"APP": 86
+},
+"apps": 38,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 13,
+"wdl": [
+18,
+12,
+8
+],
+"withPPG": 1.74,
+"withoutPPG": 1.74,
+"withoutGames": 0,
+"minutes": 3420,
+"goalsConceded": 36,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Victor Lindelof",
+"pos": "DEF",
+"ovr": 81,
+"tier": "gold",
+"stats": {
+"CLN": 79,
+"THR": 47,
+"DIF": 74,
+"APP": 82
+},
+"apps": 35,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 12,
+"wdl": [
+17,
+12,
+6
+],
+"withPPG": 1.8,
+"withoutPPG": 1.0,
+"withoutGames": 3,
+"minutes": 3093,
+"goalsConceded": 32,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Aaron Wan-Bissaka",
+"pos": "DEF",
+"ovr": 80,
+"tier": "gold",
+"stats": {
+"CLN": 73,
+"THR": 68,
+"DIF": 73,
+"APP": 82
+},
+"apps": 35,
+"goals": 0,
+"assists": 4,
+"cleanSheets": 11,
+"wdl": [
+17,
+11,
+7
+],
+"withPPG": 1.77,
+"withoutPPG": 1.33,
+"withoutGames": 3,
+"minutes": 3072,
+"goalsConceded": 33,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Daniel James",
+"pos": "MID",
+"ovr": 76,
+"tier": "gold",
+"stats": {
+"AST": 81,
+"GOL": 62,
+"CLN": 54,
+"DIF": 70,
+"APP": 75
+},
+"apps": 33,
+"goals": 3,
+"assists": 6,
+"cleanSheets": 3,
+"wdl": [
+15,
+10,
+8
+],
+"withPPG": 1.67,
+"withoutPPG": 2.2,
+"withoutGames": 5,
+"minutes": 2290,
+"goalsConceded": 29,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Anthony Martial",
+"pos": "FWD",
+"ovr": 83,
+"tier": "gold",
+"stats": {
+"GOL": 83,
+"AST": 81,
+"DIF": 73,
+"APP": 71
+},
+"apps": 32,
+"goals": 17,
+"assists": 6,
+"cleanSheets": 3,
+"wdl": [
+16,
+10,
+6
+],
+"withPPG": 1.81,
+"withoutPPG": 1.33,
+"withoutGames": 6,
+"minutes": 2638,
+"goalsConceded": 27,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Mason Greenwood",
+"pos": "FWD",
+"ovr": 68,
+"tier": "silver",
+"stats": {
+"GOL": 66,
+"AST": 47,
+"DIF": 66,
+"APP": 69
+},
+"apps": 31,
+"goals": 10,
+"assists": 1,
+"cleanSheets": 1,
+"wdl": [
+13,
+11,
+7
+],
+"withPPG": 1.61,
+"withoutPPG": 2.29,
+"withoutGames": 7,
+"minutes": 1312,
+"goalsConceded": 13,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Marcus Rashford",
+"pos": "FWD",
+"ovr": 84,
+"tier": "gold",
+"stats": {
+"GOL": 82,
+"AST": 87,
+"DIF": 72,
+"APP": 69
+},
+"apps": 31,
+"goals": 17,
+"assists": 7,
+"cleanSheets": 4,
+"wdl": [
+15,
+10,
+6
+],
+"withPPG": 1.77,
+"withoutPPG": 1.57,
+"withoutGames": 7,
+"minutes": 2653,
+"goalsConceded": 29,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Fred",
+"pos": "MID",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"AST": 44,
+"GOL": 45,
+"CLN": 69,
+"DIF": 69,
+"APP": 67
+},
+"apps": 29,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 5,
+"wdl": [
+13,
+9,
+7
+],
+"withPPG": 1.66,
+"withoutPPG": 2.0,
+"withoutGames": 9,
+"minutes": 2159,
+"goalsConceded": 26,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Scott McTominay",
+"pos": "MID",
+"ovr": 71,
+"tier": "silver",
+"stats": {
+"AST": 51,
+"GOL": 71,
+"CLN": 51,
+"DIF": 79,
+"APP": 62
+},
+"apps": 27,
+"goals": 4,
+"assists": 1,
+"cleanSheets": 2,
+"wdl": [
+14,
+8,
+5
+],
+"withPPG": 1.85,
+"withoutPPG": 1.45,
+"withoutGames": 11,
+"minutes": 1770,
+"goalsConceded": 20,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Andreas Pereira",
+"pos": "MID",
+"ovr": 67,
+"tier": "silver",
+"stats": {
+"AST": 69,
+"GOL": 50,
+"CLN": 46,
+"DIF": 70,
+"APP": 58
+},
+"apps": 25,
+"goals": 1,
+"assists": 3,
+"cleanSheets": 1,
+"wdl": [
+12,
+7,
+6
+],
+"withPPG": 1.72,
+"withoutPPG": 1.77,
+"withoutGames": 13,
+"minutes": 1488,
+"goalsConceded": 16,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Luke Shaw",
+"pos": "DEF",
+"ovr": 71,
+"tier": "silver",
+"stats": {
+"CLN": 65,
+"THR": 42,
+"DIF": 74,
+"APP": 61
+},
+"apps": 24,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 7,
+"wdl": [
+12,
+7,
+5
+],
+"withPPG": 1.79,
+"withoutPPG": 1.64,
+"withoutGames": 14,
+"minutes": 1734,
+"goalsConceded": 15,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Jesse Lingard",
+"pos": "MID",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"AST": 45,
+"GOL": 61,
+"CLN": 41,
+"DIF": 65,
+"APP": 51
+},
+"apps": 22,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+9,
+7,
+6
+],
+"withPPG": 1.55,
+"withoutPPG": 2.0,
+"withoutGames": 16,
+"minutes": 932,
+"goalsConceded": 14,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Nemanja Matic",
+"pos": "MID",
+"ovr": 75,
+"tier": "gold",
+"stats": {
+"AST": 63,
+"GOL": 43,
+"CLN": 91,
+"DIF": 81,
+"APP": 49
+},
+"apps": 21,
+"goals": 0,
+"assists": 2,
+"cleanSheets": 8,
+"wdl": [
+12,
+5,
+4
+],
+"withPPG": 1.95,
+"withoutPPG": 1.47,
+"withoutGames": 17,
+"minutes": 1583,
+"goalsConceded": 13,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Juan Mata",
+"pos": "MID",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"AST": 65,
+"GOL": 61,
+"CLN": 49,
+"DIF": 56,
+"APP": 46
+},
+"apps": 19,
+"goals": 0,
+"assists": 2,
+"cleanSheets": 1,
+"wdl": [
+6,
+6,
+7
+],
+"withPPG": 1.26,
+"withoutPPG": 2.21,
+"withoutGames": 19,
+"minutes": 753,
+"goalsConceded": 8,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Brandon Williams",
+"pos": "DEF",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"CLN": 52,
+"THR": 55,
+"DIF": 70,
+"APP": 46
+},
+"apps": 17,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 4,
+"wdl": [
+8,
+6,
+3
+],
+"withPPG": 1.76,
+"withoutPPG": 1.71,
+"withoutGames": 21,
+"minutes": 1004,
+"goalsConceded": 11,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Paul Pogba",
+"pos": "MID",
+"ovr": 78,
+"tier": "gold",
+"stats": {
+"AST": 78,
+"GOL": 77,
+"CLN": 78,
+"DIF": 76,
+"APP": 40
+},
+"apps": 16,
+"goals": 1,
+"assists": 3,
+"cleanSheets": 4,
+"wdl": [
+8,
+6,
+2
+],
+"withPPG": 1.88,
+"withoutPPG": 1.64,
+"withoutGames": 22,
+"minutes": 1205,
+"goalsConceded": 9,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Bruno Fernandes",
+"pos": "MID",
+"ovr": 92,
+"tier": "best",
+"stats": {
+"AST": 97,
+"GOL": 97,
+"CLN": 72,
+"DIF": 88,
+"APP": 37
+},
+"apps": 14,
+"goals": 8,
+"assists": 7,
+"cleanSheets": 3,
+"wdl": [
+9,
+5,
+0
+],
+"withPPG": 2.29,
+"withoutPPG": 1.42,
+"withoutGames": 24,
+"minutes": 1192,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Ashley Young",
+"pos": "MID",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"AST": 48,
+"GOL": 57,
+"CLN": 66,
+"DIF": 62,
+"APP": 35
+},
+"apps": 12,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+5,
+3,
+4
+],
+"withPPG": 1.5,
+"withoutPPG": 1.85,
+"withoutGames": 26,
+"minutes": 954,
+"goalsConceded": 10,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Odion Ighalo",
+"pos": "FWD",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"GOL": 48,
+"AST": 46,
+"DIF": 90,
+"APP": 32
+},
+"apps": 11,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+8,
+3,
+0
+],
+"withPPG": 2.45,
+"withoutPPG": 1.44,
+"withoutGames": 27,
+"minutes": 92,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Axel Tuanzebe",
+"pos": "DEF",
+"ovr": 52,
+"tier": "bronze",
+"stats": {
+"CLN": 33,
+"THR": 52,
+"DIF": 61,
+"APP": 30
+},
+"apps": 5,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+2,
+2,
+1
+],
+"withPPG": 1.6,
+"withoutPPG": 1.76,
+"withoutGames": 33,
+"minutes": 187,
+"goalsConceded": 3,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Eric Bailly",
+"pos": "DEF",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"CLN": 51,
+"THR": 53,
+"DIF": 72,
+"APP": 29
+},
+"apps": 4,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+3,
+1,
+0
+],
+"withPPG": 2.5,
+"withoutPPG": 1.65,
+"withoutGames": 34,
+"minutes": 148,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Diogo Dalot",
+"pos": "DEF",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"CLN": 35,
+"THR": 53,
+"DIF": 52,
+"APP": 29
+},
+"apps": 4,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+1,
+2
+],
+"withPPG": 1.0,
+"withoutPPG": 1.82,
+"withoutGames": 34,
+"minutes": 66,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Tahith Chong",
+"pos": "FWD",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"GOL": 54,
+"AST": 54,
+"DIF": 64,
+"APP": 26
+},
+"apps": 3,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+2,
+0,
+1
+],
+"withPPG": 2.0,
+"withoutPPG": 1.71,
+"withoutGames": 35,
+"minutes": 34,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Tim Fosu-Mensah",
+"pos": "DEF",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"CLN": 56,
+"THR": 55,
+"DIF": 68,
+"APP": 28
+},
+"apps": 3,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+1,
+0
+],
+"withPPG": 2.33,
+"withoutPPG": 1.69,
+"withoutGames": 35,
+"minutes": 136,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Marcos Rojo",
+"pos": "DEF",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"CLN": 37,
+"THR": 55,
+"DIF": 57,
+"APP": 28
+},
+"apps": 3,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+1,
+1
+],
+"withPPG": 1.33,
+"withoutPPG": 1.77,
+"withoutGames": 35,
+"minutes": 121,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Angel Gomes",
+"pos": "MID",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"AST": 56,
+"GOL": 56,
+"CLN": 56,
+"DIF": 60,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+1
+],
+"withPPG": 1.5,
+"withoutPPG": 1.75,
+"withoutGames": 36,
+"minutes": 19,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "Phil Jones",
+"pos": "DEF",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"CLN": 40,
+"THR": 57,
+"DIF": 51,
+"APP": 27
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+1
+],
+"withPPG": 0.5,
+"withoutPPG": 1.81,
+"withoutGames": 36,
+"minutes": 135,
+"goalsConceded": 3,
+"flag": ""
+},
+{
+"club": "Man Utd",
+"clubPos": 3,
+"player": "James Garner",
+"pos": "MID",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"AST": 58,
+"GOL": 57,
+"CLN": 58,
+"DIF": 66,
+"APP": 26
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+0
+],
+"withPPG": 3.0,
+"withoutPPG": 1.7,
+"withoutGames": 37,
+"minutes": 8,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Joelinton",
+"pos": "FWD",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"GOL": 42,
+"AST": 51,
+"DIF": 49,
+"APP": 82
+},
+"apps": 38,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 3,
+"wdl": [
+11,
+11,
+16
+],
+"withPPG": 1.16,
+"withoutPPG": 1.16,
+"withoutGames": 0,
+"minutes": 2699,
+"goalsConceded": 46,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Martin Dubravka",
+"pos": "GK",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"CLN": 63,
+"CON": 51,
+"DIF": 49,
+"APP": 74
+},
+"apps": 38,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 11,
+"wdl": [
+11,
+11,
+16
+],
+"withPPG": 1.16,
+"withoutPPG": 1.16,
+"withoutGames": 0,
+"minutes": 3420,
+"goalsConceded": 58,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Miguel Almiron",
+"pos": "MID",
+"ovr": 67,
+"tier": "silver",
+"stats": {
+"AST": 55,
+"GOL": 66,
+"CLN": 68,
+"DIF": 54,
+"APP": 80
+},
+"apps": 36,
+"goals": 4,
+"assists": 2,
+"cleanSheets": 6,
+"wdl": [
+11,
+11,
+14
+],
+"withPPG": 1.22,
+"withoutPPG": 0.0,
+"withoutGames": 2,
+"minutes": 3033,
+"goalsConceded": 48,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Federico Fernandez",
+"pos": "DEF",
+"ovr": 70,
+"tier": "silver",
+"stats": {
+"CLN": 65,
+"THR": 70,
+"DIF": 52,
+"APP": 77
+},
+"apps": 32,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 8,
+"wdl": [
+10,
+10,
+12
+],
+"withPPG": 1.25,
+"withoutPPG": 0.67,
+"withoutGames": 6,
+"minutes": 2618,
+"goalsConceded": 42,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Isaac Hayden",
+"pos": "MID",
+"ovr": 69,
+"tier": "silver",
+"stats": {
+"AST": 58,
+"GOL": 48,
+"CLN": 75,
+"DIF": 70,
+"APP": 67
+},
+"apps": 29,
+"goals": 1,
+"assists": 2,
+"cleanSheets": 6,
+"wdl": [
+10,
+9,
+10
+],
+"withPPG": 1.34,
+"withoutPPG": 0.56,
+"withoutGames": 9,
+"minutes": 2226,
+"goalsConceded": 32,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Allan Saint-Maximin",
+"pos": "MID",
+"ovr": 75,
+"tier": "best",
+"stats": {
+"AST": 75,
+"GOL": 66,
+"CLN": 52,
+"DIF": 75,
+"APP": 60
+},
+"apps": 26,
+"goals": 3,
+"assists": 4,
+"cleanSheets": 2,
+"wdl": [
+10,
+8,
+8
+],
+"withPPG": 1.46,
+"withoutPPG": 0.5,
+"withoutGames": 12,
+"minutes": 1870,
+"goalsConceded": 22,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Jonjo Shelvey",
+"pos": "MID",
+"ovr": 74,
+"tier": "silver",
+"stats": {
+"AST": 60,
+"GOL": 84,
+"CLN": 72,
+"DIF": 64,
+"APP": 60
+},
+"apps": 26,
+"goals": 6,
+"assists": 2,
+"cleanSheets": 5,
+"wdl": [
+9,
+7,
+10
+],
+"withPPG": 1.31,
+"withoutPPG": 0.83,
+"withoutGames": 12,
+"minutes": 2123,
+"goalsConceded": 34,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Jamaal Lascelles",
+"pos": "DEF",
+"ovr": 72,
+"tier": "silver",
+"stats": {
+"CLN": 74,
+"THR": 51,
+"DIF": 63,
+"APP": 61
+},
+"apps": 24,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 7,
+"wdl": [
+8,
+8,
+8
+],
+"withPPG": 1.33,
+"withoutPPG": 0.86,
+"withoutGames": 14,
+"minutes": 2079,
+"goalsConceded": 31,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Sean Longstaff",
+"pos": "MID",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"AST": 53,
+"GOL": 53,
+"CLN": 54,
+"DIF": 52,
+"APP": 54
+},
+"apps": 23,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 2,
+"wdl": [
+7,
+5,
+11
+],
+"withPPG": 1.13,
+"withoutPPG": 1.2,
+"withoutGames": 15,
+"minutes": 1373,
+"goalsConceded": 26,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Fabian Schar",
+"pos": "DEF",
+"ovr": 54,
+"tier": "bronze",
+"stats": {
+"CLN": 50,
+"THR": 62,
+"DIF": 40,
+"APP": 56
+},
+"apps": 22,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 4,
+"wdl": [
+5,
+3,
+14
+],
+"withPPG": 0.82,
+"withoutPPG": 1.62,
+"withoutGames": 16,
+"minutes": 1633,
+"goalsConceded": 37,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Javier Manquillo",
+"pos": "DEF",
+"ovr": 67,
+"tier": "silver",
+"stats": {
+"CLN": 72,
+"THR": 52,
+"DIF": 52,
+"APP": 54
+},
+"apps": 21,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 6,
+"wdl": [
+6,
+7,
+8
+],
+"withPPG": 1.19,
+"withoutPPG": 1.12,
+"withoutGames": 17,
+"minutes": 1599,
+"goalsConceded": 21,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Dwight Gayle",
+"pos": "FWD",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"GOL": 54,
+"AST": 62,
+"DIF": 41,
+"APP": 46
+},
+"apps": 20,
+"goals": 4,
+"assists": 2,
+"cleanSheets": 2,
+"wdl": [
+3,
+7,
+10
+],
+"withPPG": 0.8,
+"withoutPPG": 1.56,
+"withoutGames": 18,
+"minutes": 849,
+"goalsConceded": 15,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Christian Atsu",
+"pos": "MID",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"AST": 74,
+"GOL": 44,
+"CLN": 49,
+"DIF": 52,
+"APP": 46
+},
+"apps": 19,
+"goals": 0,
+"assists": 3,
+"cleanSheets": 1,
+"wdl": [
+5,
+6,
+8
+],
+"withPPG": 1.11,
+"withoutPPG": 1.21,
+"withoutGames": 19,
+"minutes": 741,
+"goalsConceded": 15,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Andy Carroll",
+"pos": "FWD",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"GOL": 42,
+"AST": 82,
+"DIF": 73,
+"APP": 44
+},
+"apps": 19,
+"goals": 0,
+"assists": 4,
+"cleanSheets": 1,
+"wdl": [
+8,
+5,
+6
+],
+"withPPG": 1.53,
+"withoutPPG": 0.79,
+"withoutGames": 19,
+"minutes": 618,
+"goalsConceded": 10,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Jetro Willems",
+"pos": "DEF",
+"ovr": 54,
+"tier": "bronze",
+"stats": {
+"CLN": 37,
+"THR": 83,
+"DIF": 53,
+"APP": 50
+},
+"apps": 19,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 2,
+"wdl": [
+6,
+5,
+8
+],
+"withPPG": 1.21,
+"withoutPPG": 1.11,
+"withoutGames": 19,
+"minutes": 1498,
+"goalsConceded": 24,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Matt Ritchie",
+"pos": "MID",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"AST": 56,
+"GOL": 65,
+"CLN": 75,
+"DIF": 49,
+"APP": 44
+},
+"apps": 18,
+"goals": 2,
+"assists": 1,
+"cleanSheets": 4,
+"wdl": [
+4,
+6,
+8
+],
+"withPPG": 1.0,
+"withoutPPG": 1.3,
+"withoutGames": 20,
+"minutes": 1315,
+"goalsConceded": 19,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Emil Krafth",
+"pos": "DEF",
+"ovr": 51,
+"tier": "bronze",
+"stats": {
+"CLN": 40,
+"THR": 55,
+"DIF": 49,
+"APP": 46
+},
+"apps": 17,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 2,
+"wdl": [
+5,
+4,
+8
+],
+"withPPG": 1.12,
+"withoutPPG": 1.19,
+"withoutGames": 21,
+"minutes": 1019,
+"goalsConceded": 23,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Paul Dummett",
+"pos": "DEF",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"CLN": 52,
+"THR": 45,
+"DIF": 63,
+"APP": 44
+},
+"apps": 16,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 3,
+"wdl": [
+6,
+4,
+6
+],
+"withPPG": 1.38,
+"withoutPPG": 1.0,
+"withoutGames": 22,
+"minutes": 1228,
+"goalsConceded": 20,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "DeAndre Yedlin",
+"pos": "DEF",
+"ovr": 50,
+"tier": "bronze",
+"stats": {
+"CLN": 33,
+"THR": 56,
+"DIF": 56,
+"APP": 44
+},
+"apps": 16,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+6,
+2,
+8
+],
+"withPPG": 1.25,
+"withoutPPG": 1.09,
+"withoutGames": 22,
+"minutes": 936,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Ciaran Clark",
+"pos": "DEF",
+"ovr": 73,
+"tier": "silver",
+"stats": {
+"CLN": 70,
+"THR": 71,
+"DIF": 76,
+"APP": 41
+},
+"apps": 14,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 4,
+"wdl": [
+6,
+5,
+3
+],
+"withPPG": 1.64,
+"withoutPPG": 0.88,
+"withoutGames": 24,
+"minutes": 1188,
+"goalsConceded": 14,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Valentino Lazaro",
+"pos": "MID",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"AST": 48,
+"GOL": 59,
+"CLN": 44,
+"DIF": 50,
+"APP": 36
+},
+"apps": 13,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+4,
+6
+],
+"withPPG": 1.0,
+"withoutPPG": 1.24,
+"withoutGames": 25,
+"minutes": 473,
+"goalsConceded": 13,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Nabil Bentaleb",
+"pos": "MID",
+"ovr": 54,
+"tier": "bronze",
+"stats": {
+"AST": 48,
+"GOL": 40,
+"CLN": 66,
+"DIF": 47,
+"APP": 35
+},
+"apps": 12,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+2,
+4,
+6
+],
+"withPPG": 0.83,
+"withoutPPG": 1.31,
+"withoutGames": 26,
+"minutes": 749,
+"goalsConceded": 16,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Danny Rose",
+"pos": "DEF",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"CLN": 79,
+"THR": 47,
+"DIF": 46,
+"APP": 36
+},
+"apps": 11,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 4,
+"wdl": [
+2,
+4,
+5
+],
+"withPPG": 0.91,
+"withoutPPG": 1.26,
+"withoutGames": 27,
+"minutes": 865,
+"goalsConceded": 14,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Matty Longstaff",
+"pos": "MID",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"AST": 50,
+"GOL": 75,
+"CLN": 59,
+"DIF": 52,
+"APP": 31
+},
+"apps": 9,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+3,
+4
+],
+"withPPG": 1.0,
+"withoutPPG": 1.21,
+"withoutGames": 29,
+"minutes": 572,
+"goalsConceded": 11,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Yoshinori Muto",
+"pos": "FWD",
+"ovr": 55,
+"tier": "bronze",
+"stats": {
+"GOL": 48,
+"AST": 48,
+"DIF": 41,
+"APP": 29
+},
+"apps": 8,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+1,
+6
+],
+"withPPG": 0.5,
+"withoutPPG": 1.33,
+"withoutGames": 30,
+"minutes": 207,
+"goalsConceded": 7,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Florian Lejeune",
+"pos": "DEF",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"CLN": 52,
+"THR": 85,
+"DIF": 48,
+"APP": 31
+},
+"apps": 6,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+1,
+2,
+3
+],
+"withPPG": 0.83,
+"withoutPPG": 1.22,
+"withoutGames": 32,
+"minutes": 441,
+"goalsConceded": 10,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Ki Sung-yueng",
+"pos": "MID",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"AST": 55,
+"GOL": 56,
+"CLN": 54,
+"DIF": 50,
+"APP": 27
+},
+"apps": 3,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+2
+],
+"withPPG": 0.33,
+"withoutPPG": 1.23,
+"withoutGames": 35,
+"minutes": 136,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Newcastle",
+"clubPos": 13,
+"player": "Kell Watts",
+"pos": "DEF",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"CLN": 52,
+"THR": 58,
+"DIF": 52,
+"APP": 27
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+1
+],
+"withPPG": 0.0,
+"withoutPPG": 1.19,
+"withoutGames": 37,
+"minutes": 16,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Todd Cantwell",
+"pos": "MID",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"AST": 54,
+"GOL": 76,
+"CLN": 42,
+"DIF": 35,
+"APP": 81
+},
+"apps": 37,
+"goals": 6,
+"assists": 2,
+"cleanSheets": 1,
+"wdl": [
+5,
+6,
+26
+],
+"withPPG": 0.57,
+"withoutPPG": 0.0,
+"withoutGames": 1,
+"minutes": 2500,
+"goalsConceded": 54,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Kenny McLean",
+"pos": "MID",
+"ovr": 52,
+"tier": "bronze",
+"stats": {
+"AST": 48,
+"GOL": 49,
+"CLN": 57,
+"DIF": 33,
+"APP": 81
+},
+"apps": 37,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 4,
+"wdl": [
+4,
+6,
+27
+],
+"withPPG": 0.49,
+"withoutPPG": 3.0,
+"withoutGames": 1,
+"minutes": 2964,
+"goalsConceded": 63,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Max Aarons",
+"pos": "DEF",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"CLN": 64,
+"THR": 46,
+"DIF": 31,
+"APP": 83
+},
+"apps": 36,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 5,
+"wdl": [
+4,
+6,
+26
+],
+"withPPG": 0.5,
+"withoutPPG": 1.5,
+"withoutGames": 2,
+"minutes": 3240,
+"goalsConceded": 71,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Emiliano Buendia",
+"pos": "MID",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"AST": 84,
+"GOL": 49,
+"CLN": 47,
+"DIF": 35,
+"APP": 80
+},
+"apps": 36,
+"goals": 1,
+"assists": 7,
+"cleanSheets": 2,
+"wdl": [
+5,
+6,
+25
+],
+"withPPG": 0.58,
+"withoutPPG": 0.0,
+"withoutGames": 2,
+"minutes": 2462,
+"goalsConceded": 52,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Tim Krul",
+"pos": "GK",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"CLN": 46,
+"CON": 46,
+"DIF": 33,
+"APP": 71
+},
+"apps": 36,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 5,
+"wdl": [
+5,
+6,
+25
+],
+"withPPG": 0.58,
+"withoutPPG": 0.0,
+"withoutGames": 2,
+"minutes": 3240,
+"goalsConceded": 68,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Teemu Pukki",
+"pos": "FWD",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"GOL": 64,
+"AST": 58,
+"DIF": 33,
+"APP": 78
+},
+"apps": 36,
+"goals": 11,
+"assists": 3,
+"cleanSheets": 2,
+"wdl": [
+5,
+6,
+25
+],
+"withPPG": 0.58,
+"withoutPPG": 0.0,
+"withoutGames": 2,
+"minutes": 2892,
+"goalsConceded": 59,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Ben Godfrey",
+"pos": "MID",
+"ovr": 51,
+"tier": "bronze",
+"stats": {
+"AST": 43,
+"GOL": 45,
+"CLN": 49,
+"DIF": 39,
+"APP": 69
+},
+"apps": 30,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+5,
+3,
+22
+],
+"withPPG": 0.6,
+"withoutPPG": 0.38,
+"withoutGames": 8,
+"minutes": 2646,
+"goalsConceded": 62,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Alexander Tettey",
+"pos": "MID",
+"ovr": 57,
+"tier": "bronze",
+"stats": {
+"AST": 50,
+"GOL": 48,
+"CLN": 62,
+"DIF": 44,
+"APP": 69
+},
+"apps": 30,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 4,
+"wdl": [
+5,
+5,
+20
+],
+"withPPG": 0.67,
+"withoutPPG": 0.12,
+"withoutGames": 8,
+"minutes": 2350,
+"goalsConceded": 44,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Jamal Lewis",
+"pos": "DEF",
+"ovr": 50,
+"tier": "bronze",
+"stats": {
+"CLN": 50,
+"THR": 49,
+"DIF": 30,
+"APP": 69
+},
+"apps": 28,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+3,
+2,
+23
+],
+"withPPG": 0.39,
+"withoutPPG": 1.0,
+"withoutGames": 10,
+"minutes": 2303,
+"goalsConceded": 56,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Onel Hernandez",
+"pos": "MID",
+"ovr": 52,
+"tier": "bronze",
+"stats": {
+"AST": 60,
+"GOL": 52,
+"CLN": 45,
+"DIF": 32,
+"APP": 60
+},
+"apps": 26,
+"goals": 1,
+"assists": 2,
+"cleanSheets": 1,
+"wdl": [
+1,
+6,
+19
+],
+"withPPG": 0.35,
+"withoutPPG": 1.0,
+"withoutGames": 12,
+"minutes": 1381,
+"goalsConceded": 32,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Marco Stiepermann",
+"pos": "MID",
+"ovr": 48,
+"tier": "bronze",
+"stats": {
+"AST": 44,
+"GOL": 46,
+"CLN": 40,
+"DIF": 36,
+"APP": 56
+},
+"apps": 24,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+3,
+18
+],
+"withPPG": 0.5,
+"withoutPPG": 0.64,
+"withoutGames": 14,
+"minutes": 1187,
+"goalsConceded": 32,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Josip Drmic",
+"pos": "FWD",
+"ovr": 50,
+"tier": "bronze",
+"stats": {
+"GOL": 45,
+"AST": 42,
+"DIF": 33,
+"APP": 48
+},
+"apps": 21,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+0,
+18
+],
+"withPPG": 0.43,
+"withoutPPG": 0.71,
+"withoutGames": 17,
+"minutes": 637,
+"goalsConceded": 12,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Mario Vrancic",
+"pos": "MID",
+"ovr": 49,
+"tier": "bronze",
+"stats": {
+"AST": 45,
+"GOL": 55,
+"CLN": 41,
+"DIF": 34,
+"APP": 47
+},
+"apps": 20,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+4,
+15
+],
+"withPPG": 0.35,
+"withoutPPG": 0.78,
+"withoutGames": 18,
+"minutes": 628,
+"goalsConceded": 19,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Sam Byram",
+"pos": "DEF",
+"ovr": 67,
+"tier": "silver",
+"stats": {
+"CLN": 75,
+"THR": 44,
+"DIF": 55,
+"APP": 46
+},
+"apps": 17,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 3,
+"wdl": [
+4,
+4,
+9
+],
+"withPPG": 0.94,
+"withoutPPG": 0.24,
+"withoutGames": 21,
+"minutes": 1294,
+"goalsConceded": 23,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Christoph Zimmermann",
+"pos": "DEF",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"CLN": 75,
+"THR": 55,
+"DIF": 39,
+"APP": 46
+},
+"apps": 17,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 3,
+"wdl": [
+2,
+5,
+10
+],
+"withPPG": 0.65,
+"withoutPPG": 0.48,
+"withoutGames": 21,
+"minutes": 1431,
+"goalsConceded": 27,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Tom Trybull",
+"pos": "MID",
+"ovr": 52,
+"tier": "bronze",
+"stats": {
+"AST": 46,
+"GOL": 48,
+"CLN": 51,
+"DIF": 42,
+"APP": 40
+},
+"apps": 16,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+4,
+10
+],
+"withPPG": 0.62,
+"withoutPPG": 0.5,
+"withoutGames": 22,
+"minutes": 1136,
+"goalsConceded": 25,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Grant Hanley",
+"pos": "DEF",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"CLN": 68,
+"THR": 45,
+"DIF": 47,
+"APP": 43
+},
+"apps": 15,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+3,
+3,
+9
+],
+"withPPG": 0.8,
+"withoutPPG": 0.39,
+"withoutGames": 23,
+"minutes": 1262,
+"goalsConceded": 25,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Adam Idah",
+"pos": "FWD",
+"ovr": 51,
+"tier": "bronze",
+"stats": {
+"GOL": 45,
+"AST": 46,
+"DIF": 32,
+"APP": 33
+},
+"apps": 12,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+11
+],
+"withPPG": 0.08,
+"withoutPPG": 0.77,
+"withoutGames": 26,
+"minutes": 221,
+"goalsConceded": 9,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Lukas Rupp",
+"pos": "MID",
+"ovr": 52,
+"tier": "bronze",
+"stats": {
+"AST": 48,
+"GOL": 49,
+"CLN": 45,
+"DIF": 42,
+"APP": 35
+},
+"apps": 12,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+2,
+1,
+9
+],
+"withPPG": 0.58,
+"withoutPPG": 0.54,
+"withoutGames": 26,
+"minutes": 699,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Ibrahim Amadou",
+"pos": "MID",
+"ovr": 55,
+"tier": "bronze",
+"stats": {
+"AST": 49,
+"GOL": 49,
+"CLN": 56,
+"DIF": 48,
+"APP": 33
+},
+"apps": 11,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+2,
+7
+],
+"withPPG": 0.73,
+"withoutPPG": 0.48,
+"withoutGames": 27,
+"minutes": 756,
+"goalsConceded": 20,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Ondrej Duda",
+"pos": "MID",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"AST": 49,
+"GOL": 50,
+"CLN": 57,
+"DIF": 48,
+"APP": 32
+},
+"apps": 10,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+1,
+7
+],
+"withPPG": 0.7,
+"withoutPPG": 0.5,
+"withoutGames": 28,
+"minutes": 729,
+"goalsConceded": 9,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Moritz Leitner",
+"pos": "MID",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"AST": 50,
+"GOL": 50,
+"CLN": 47,
+"DIF": 42,
+"APP": 31
+},
+"apps": 9,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+1,
+7
+],
+"withPPG": 0.44,
+"withoutPPG": 0.59,
+"withoutGames": 29,
+"minutes": 684,
+"goalsConceded": 16,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Dennis Srbeny",
+"pos": "FWD",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"GOL": 54,
+"AST": 48,
+"DIF": 54,
+"APP": 29
+},
+"apps": 8,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+2,
+1,
+5
+],
+"withPPG": 0.88,
+"withoutPPG": 0.47,
+"withoutGames": 30,
+"minutes": 41,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Timm Klose",
+"pos": "DEF",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"CLN": 57,
+"THR": 50,
+"DIF": 35,
+"APP": 32
+},
+"apps": 7,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+7
+],
+"withPPG": 0.0,
+"withoutPPG": 0.68,
+"withoutGames": 31,
+"minutes": 585,
+"goalsConceded": 13,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Josh Martin",
+"pos": "MID",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"AST": 53,
+"GOL": 53,
+"CLN": 51,
+"DIF": 42,
+"APP": 28
+},
+"apps": 5,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+5
+],
+"withPPG": 0.0,
+"withoutPPG": 0.64,
+"withoutGames": 33,
+"minutes": 32,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Patrick Roberts",
+"pos": "MID",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"AST": 55,
+"GOL": 55,
+"CLN": 54,
+"DIF": 47,
+"APP": 27
+},
+"apps": 3,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+3
+],
+"withPPG": 0.0,
+"withoutPPG": 0.6,
+"withoutGames": 35,
+"minutes": 24,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Michael McGovern",
+"pos": "GK",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"CLN": 75,
+"CON": 67,
+"DIF": 48,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+2
+],
+"withPPG": 0.0,
+"withoutPPG": 0.58,
+"withoutGames": 36,
+"minutes": 158,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Ralf Fahrmann",
+"pos": "GK",
+"ovr": 69,
+"tier": "best",
+"stats": {
+"CLN": 82,
+"CON": 91,
+"DIF": 52,
+"APP": 25
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+1
+],
+"withPPG": 0.0,
+"withoutPPG": 0.57,
+"withoutGames": 37,
+"minutes": 22,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Akin Famewo",
+"pos": "DEF",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"CLN": 77,
+"THR": 58,
+"DIF": 52,
+"APP": 27
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+1
+],
+"withPPG": 0.0,
+"withoutPPG": 0.57,
+"withoutGames": 37,
+"minutes": 1,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Norwich",
+"clubPos": 20,
+"player": "Jordan Thomas",
+"pos": "DEF",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"CLN": 77,
+"THR": 58,
+"DIF": 52,
+"APP": 27
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+1
+],
+"withPPG": 0.0,
+"withoutPPG": 0.57,
+"withoutGames": 37,
+"minutes": 1,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "George Baldock",
+"pos": "DEF",
+"ovr": 80,
+"tier": "best",
+"stats": {
+"CLN": 79,
+"THR": 72,
+"DIF": 59,
+"APP": 86
+},
+"apps": 38,
+"goals": 2,
+"assists": 3,
+"cleanSheets": 13,
+"wdl": [
+14,
+12,
+12
+],
+"withPPG": 1.42,
+"withoutPPG": 1.42,
+"withoutGames": 0,
+"minutes": 3420,
+"goalsConceded": 39,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Chris Basham",
+"pos": "MID",
+"ovr": 68,
+"tier": "silver",
+"stats": {
+"AST": 48,
+"GOL": 43,
+"CLN": 89,
+"DIF": 61,
+"APP": 83
+},
+"apps": 38,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 12,
+"wdl": [
+14,
+12,
+12
+],
+"withPPG": 1.42,
+"withoutPPG": 1.42,
+"withoutGames": 0,
+"minutes": 3255,
+"goalsConceded": 37,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Oliver Norwood",
+"pos": "MID",
+"ovr": 67,
+"tier": "silver",
+"stats": {
+"AST": 48,
+"GOL": 49,
+"CLN": 80,
+"DIF": 61,
+"APP": 83
+},
+"apps": 38,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 9,
+"wdl": [
+14,
+12,
+12
+],
+"withPPG": 1.42,
+"withoutPPG": 1.42,
+"withoutGames": 0,
+"minutes": 3100,
+"goalsConceded": 36,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Enda Stevens",
+"pos": "DEF",
+"ovr": 78,
+"tier": "gold",
+"stats": {
+"CLN": 73,
+"THR": 78,
+"DIF": 59,
+"APP": 86
+},
+"apps": 38,
+"goals": 2,
+"assists": 4,
+"cleanSheets": 12,
+"wdl": [
+14,
+12,
+12
+],
+"withPPG": 1.42,
+"withoutPPG": 1.42,
+"withoutGames": 0,
+"minutes": 3346,
+"goalsConceded": 39,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "John Egan",
+"pos": "DEF",
+"ovr": 78,
+"tier": "gold",
+"stats": {
+"CLN": 77,
+"THR": 53,
+"DIF": 61,
+"APP": 83
+},
+"apps": 36,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 12,
+"wdl": [
+14,
+11,
+11
+],
+"withPPG": 1.47,
+"withoutPPG": 0.5,
+"withoutGames": 2,
+"minutes": 3189,
+"goalsConceded": 30,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Dean Henderson",
+"pos": "GK",
+"ovr": 79,
+"tier": "gold",
+"stats": {
+"CLN": 76,
+"CON": 78,
+"DIF": 60,
+"APP": 71
+},
+"apps": 36,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 13,
+"wdl": [
+14,
+11,
+11
+],
+"withPPG": 1.47,
+"withoutPPG": 0.5,
+"withoutGames": 2,
+"minutes": 3240,
+"goalsConceded": 33,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Oli McBurnie",
+"pos": "FWD",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"GOL": 52,
+"AST": 40,
+"DIF": 60,
+"APP": 78
+},
+"apps": 36,
+"goals": 6,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+14,
+10,
+12
+],
+"withPPG": 1.44,
+"withoutPPG": 1.0,
+"withoutGames": 2,
+"minutes": 2116,
+"goalsConceded": 25,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "John Lundstram",
+"pos": "MID",
+"ovr": 75,
+"tier": "gold",
+"stats": {
+"AST": 62,
+"GOL": 73,
+"CLN": 83,
+"DIF": 60,
+"APP": 76
+},
+"apps": 34,
+"goals": 5,
+"assists": 3,
+"cleanSheets": 9,
+"wdl": [
+12,
+11,
+11
+],
+"withPPG": 1.38,
+"withoutPPG": 1.75,
+"withoutGames": 4,
+"minutes": 2455,
+"goalsConceded": 29,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Jack O'Connell",
+"pos": "DEF",
+"ovr": 79,
+"tier": "gold",
+"stats": {
+"CLN": 82,
+"THR": 47,
+"DIF": 63,
+"APP": 79
+},
+"apps": 33,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 12,
+"wdl": [
+13,
+11,
+9
+],
+"withPPG": 1.52,
+"withoutPPG": 0.8,
+"withoutGames": 5,
+"minutes": 2915,
+"goalsConceded": 28,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "John Fleck",
+"pos": "MID",
+"ovr": 73,
+"tier": "silver",
+"stats": {
+"AST": 57,
+"GOL": 76,
+"CLN": 83,
+"DIF": 57,
+"APP": 69
+},
+"apps": 30,
+"goals": 5,
+"assists": 2,
+"cleanSheets": 8,
+"wdl": [
+10,
+9,
+11
+],
+"withPPG": 1.3,
+"withoutPPG": 1.88,
+"withoutGames": 8,
+"minutes": 2517,
+"goalsConceded": 30,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Lys Mousset",
+"pos": "FWD",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"GOL": 48,
+"AST": 70,
+"DIF": 71,
+"APP": 67
+},
+"apps": 30,
+"goals": 6,
+"assists": 4,
+"cleanSheets": 0,
+"wdl": [
+12,
+10,
+8
+],
+"withPPG": 1.53,
+"withoutPPG": 1.0,
+"withoutGames": 8,
+"minutes": 1232,
+"goalsConceded": 15,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "David McGoldrick",
+"pos": "FWD",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"GOL": 45,
+"AST": 56,
+"DIF": 60,
+"APP": 63
+},
+"apps": 28,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 2,
+"wdl": [
+10,
+10,
+8
+],
+"withPPG": 1.43,
+"withoutPPG": 1.4,
+"withoutGames": 10,
+"minutes": 1822,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Billy Sharp",
+"pos": "FWD",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"GOL": 49,
+"AST": 58,
+"DIF": 50,
+"APP": 56
+},
+"apps": 25,
+"goals": 3,
+"assists": 2,
+"cleanSheets": 0,
+"wdl": [
+7,
+8,
+10
+],
+"withPPG": 1.16,
+"withoutPPG": 1.92,
+"withoutGames": 13,
+"minutes": 1047,
+"goalsConceded": 10,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Callum Robinson",
+"pos": "FWD",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"GOL": 47,
+"AST": 55,
+"DIF": 49,
+"APP": 39
+},
+"apps": 16,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+3,
+8,
+5
+],
+"withPPG": 1.06,
+"withoutPPG": 1.68,
+"withoutGames": 22,
+"minutes": 676,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Sander Berge",
+"pos": "MID",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"AST": 59,
+"GOL": 58,
+"CLN": 53,
+"DIF": 64,
+"APP": 37
+},
+"apps": 14,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 1,
+"wdl": [
+6,
+3,
+5
+],
+"withPPG": 1.5,
+"withoutPPG": 1.38,
+"withoutGames": 24,
+"minutes": 949,
+"goalsConceded": 11,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Ben Osborn",
+"pos": "MID",
+"ovr": 67,
+"tier": "silver",
+"stats": {
+"AST": 48,
+"GOL": 48,
+"CLN": 64,
+"DIF": 86,
+"APP": 36
+},
+"apps": 13,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+8,
+3,
+2
+],
+"withPPG": 2.08,
+"withoutPPG": 1.08,
+"withoutGames": 25,
+"minutes": 591,
+"goalsConceded": 4,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Luke Freeman",
+"pos": "MID",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"AST": 49,
+"GOL": 49,
+"CLN": 45,
+"DIF": 57,
+"APP": 33
+},
+"apps": 11,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+5,
+3
+],
+"withPPG": 1.27,
+"withoutPPG": 1.48,
+"withoutGames": 27,
+"minutes": 362,
+"goalsConceded": 5,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Muhamed Besic",
+"pos": "MID",
+"ovr": 57,
+"tier": "bronze",
+"stats": {
+"AST": 50,
+"GOL": 40,
+"CLN": 47,
+"DIF": 66,
+"APP": 31
+},
+"apps": 9,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+4,
+2,
+3
+],
+"withPPG": 1.56,
+"withoutPPG": 1.38,
+"withoutGames": 29,
+"minutes": 245,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Phil Jagielka",
+"pos": "DEF",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"CLN": 32,
+"THR": 51,
+"DIF": 71,
+"APP": 31
+},
+"apps": 6,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+4,
+1,
+1
+],
+"withPPG": 2.17,
+"withoutPPG": 1.28,
+"withoutGames": 32,
+"minutes": 240,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Jack Robinson",
+"pos": "DEF",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"CLN": 44,
+"THR": 51,
+"DIF": 48,
+"APP": 31
+},
+"apps": 6,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+1,
+2,
+3
+],
+"withPPG": 0.83,
+"withoutPPG": 1.53,
+"withoutGames": 32,
+"minutes": 505,
+"goalsConceded": 11,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Richairo Zivkovic",
+"pos": "FWD",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"GOL": 51,
+"AST": 51,
+"DIF": 47,
+"APP": 27
+},
+"apps": 5,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+4
+],
+"withPPG": 0.6,
+"withoutPPG": 1.55,
+"withoutGames": 33,
+"minutes": 107,
+"goalsConceded": 4,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Leon Clarke",
+"pos": "FWD",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"GOL": 55,
+"AST": 56,
+"DIF": 48,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+2
+],
+"withPPG": 0.0,
+"withoutPPG": 1.5,
+"withoutGames": 36,
+"minutes": 33,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Kieron Freeman",
+"pos": "DEF",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"CLN": 40,
+"THR": 57,
+"DIF": 58,
+"APP": 27
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+1
+],
+"withPPG": 1.5,
+"withoutPPG": 1.42,
+"withoutGames": 36,
+"minutes": 6,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Simon Moore",
+"pos": "GK",
+"ovr": 52,
+"tier": "bronze",
+"stats": {
+"CLN": 31,
+"CON": 25,
+"DIF": 51,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+1
+],
+"withPPG": 0.5,
+"withoutPPG": 1.47,
+"withoutGames": 36,
+"minutes": 180,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Ravel Morrison",
+"pos": "MID",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"AST": 58,
+"GOL": 57,
+"CLN": 58,
+"DIF": 54,
+"APP": 26
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+1
+],
+"withPPG": 0.0,
+"withoutPPG": 1.46,
+"withoutGames": 37,
+"minutes": 12,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Sheffield Utd",
+"clubPos": 9,
+"player": "Jack Rodwell",
+"pos": "DEF",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"CLN": 44,
+"THR": 58,
+"DIF": 56,
+"APP": 27
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+0
+],
+"withPPG": 1.0,
+"withoutPPG": 1.43,
+"withoutGames": 37,
+"minutes": 15,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Danny Ings",
+"pos": "FWD",
+"ovr": 79,
+"tier": "best",
+"stats": {
+"GOL": 86,
+"AST": 51,
+"DIF": 57,
+"APP": 82
+},
+"apps": 38,
+"goals": 22,
+"assists": 2,
+"cleanSheets": 1,
+"wdl": [
+15,
+7,
+16
+],
+"withPPG": 1.37,
+"withoutPPG": 1.37,
+"withoutGames": 0,
+"minutes": 2812,
+"goalsConceded": 44,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "James Ward-Prowse",
+"pos": "MID",
+"ovr": 74,
+"tier": "silver",
+"stats": {
+"AST": 60,
+"GOL": 71,
+"CLN": 80,
+"DIF": 59,
+"APP": 83
+},
+"apps": 38,
+"goals": 5,
+"assists": 3,
+"cleanSheets": 9,
+"wdl": [
+15,
+7,
+16
+],
+"withPPG": 1.37,
+"withoutPPG": 1.37,
+"withoutGames": 0,
+"minutes": 3420,
+"goalsConceded": 60,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Jan Bednarek",
+"pos": "DEF",
+"ovr": 68,
+"tier": "silver",
+"stats": {
+"CLN": 64,
+"THR": 54,
+"DIF": 53,
+"APP": 80
+},
+"apps": 34,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 7,
+"wdl": [
+12,
+7,
+15
+],
+"withPPG": 1.26,
+"withoutPPG": 2.25,
+"withoutGames": 4,
+"minutes": 3058,
+"goalsConceded": 57,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Pierre-Emile Hojbjerg",
+"pos": "MID",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"AST": 49,
+"GOL": 43,
+"CLN": 76,
+"DIF": 56,
+"APP": 75
+},
+"apps": 33,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 7,
+"wdl": [
+12,
+6,
+15
+],
+"withPPG": 1.27,
+"withoutPPG": 2.0,
+"withoutGames": 5,
+"minutes": 2750,
+"goalsConceded": 51,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Ryan Bertrand",
+"pos": "DEF",
+"ovr": 70,
+"tier": "silver",
+"stats": {
+"CLN": 67,
+"THR": 55,
+"DIF": 57,
+"APP": 77
+},
+"apps": 32,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 7,
+"wdl": [
+13,
+5,
+14
+],
+"withPPG": 1.38,
+"withoutPPG": 1.33,
+"withoutGames": 6,
+"minutes": 2744,
+"goalsConceded": 44,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Nathan Redmond",
+"pos": "MID",
+"ovr": 74,
+"tier": "silver",
+"stats": {
+"AST": 70,
+"GOL": 72,
+"CLN": 72,
+"DIF": 60,
+"APP": 73
+},
+"apps": 32,
+"goals": 4,
+"assists": 4,
+"cleanSheets": 6,
+"wdl": [
+13,
+6,
+13
+],
+"withPPG": 1.41,
+"withoutPPG": 1.17,
+"withoutGames": 6,
+"minutes": 2768,
+"goalsConceded": 51,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Che Adams",
+"pos": "FWD",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"GOL": 50,
+"AST": 54,
+"DIF": 68,
+"APP": 67
+},
+"apps": 30,
+"goals": 4,
+"assists": 2,
+"cleanSheets": 0,
+"wdl": [
+13,
+5,
+12
+],
+"withPPG": 1.47,
+"withoutPPG": 1.0,
+"withoutGames": 8,
+"minutes": 1105,
+"goalsConceded": 17,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Stuart Armstrong",
+"pos": "MID",
+"ovr": 75,
+"tier": "gold",
+"stats": {
+"AST": 65,
+"GOL": 78,
+"CLN": 55,
+"DIF": 72,
+"APP": 69
+},
+"apps": 30,
+"goals": 5,
+"assists": 3,
+"cleanSheets": 3,
+"wdl": [
+13,
+6,
+11
+],
+"withPPG": 1.5,
+"withoutPPG": 0.88,
+"withoutGames": 8,
+"minutes": 1713,
+"goalsConceded": 25,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Oriol Romeu",
+"pos": "MID",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"AST": 43,
+"GOL": 42,
+"CLN": 55,
+"DIF": 69,
+"APP": 69
+},
+"apps": 30,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 3,
+"wdl": [
+13,
+5,
+12
+],
+"withPPG": 1.47,
+"withoutPPG": 1.0,
+"withoutGames": 8,
+"minutes": 1858,
+"goalsConceded": 38,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Alex McCarthy",
+"pos": "GK",
+"ovr": 75,
+"tier": "gold",
+"stats": {
+"CLN": 62,
+"CON": 80,
+"DIF": 74,
+"APP": 56
+},
+"apps": 28,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 7,
+"wdl": [
+13,
+5,
+10
+],
+"withPPG": 1.57,
+"withoutPPG": 0.8,
+"withoutGames": 10,
+"minutes": 2520,
+"goalsConceded": 35,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Jack Stephens",
+"pos": "DEF",
+"ovr": 76,
+"tier": "gold",
+"stats": {
+"CLN": 73,
+"THR": 74,
+"DIF": 63,
+"APP": 69
+},
+"apps": 28,
+"goals": 1,
+"assists": 3,
+"cleanSheets": 7,
+"wdl": [
+12,
+4,
+12
+],
+"withPPG": 1.43,
+"withoutPPG": 1.2,
+"withoutGames": 10,
+"minutes": 2453,
+"goalsConceded": 38,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Shane Long",
+"pos": "FWD",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"GOL": 43,
+"AST": 57,
+"DIF": 71,
+"APP": 58
+},
+"apps": 26,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 0,
+"wdl": [
+12,
+4,
+10
+],
+"withPPG": 1.54,
+"withoutPPG": 1.0,
+"withoutGames": 12,
+"minutes": 1399,
+"goalsConceded": 20,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Michael Obafemi",
+"pos": "FWD",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"GOL": 51,
+"AST": 61,
+"DIF": 61,
+"APP": 48
+},
+"apps": 21,
+"goals": 3,
+"assists": 2,
+"cleanSheets": 0,
+"wdl": [
+9,
+3,
+9
+],
+"withPPG": 1.43,
+"withoutPPG": 1.29,
+"withoutGames": 17,
+"minutes": 661,
+"goalsConceded": 12,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Sofiane Boufal",
+"pos": "MID",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"AST": 64,
+"GOL": 45,
+"CLN": 41,
+"DIF": 47,
+"APP": 47
+},
+"apps": 20,
+"goals": 0,
+"assists": 2,
+"cleanSheets": 0,
+"wdl": [
+5,
+4,
+11
+],
+"withPPG": 0.95,
+"withoutPPG": 1.83,
+"withoutGames": 18,
+"minutes": 760,
+"goalsConceded": 17,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Jannik Vestergaard",
+"pos": "DEF",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"CLN": 65,
+"THR": 54,
+"DIF": 49,
+"APP": 50
+},
+"apps": 19,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 4,
+"wdl": [
+6,
+3,
+10
+],
+"withPPG": 1.11,
+"withoutPPG": 1.63,
+"withoutGames": 19,
+"minutes": 1497,
+"goalsConceded": 26,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Moussa Djenepo",
+"pos": "MID",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"AST": 66,
+"GOL": 65,
+"CLN": 50,
+"DIF": 57,
+"APP": 44
+},
+"apps": 18,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 1,
+"wdl": [
+7,
+2,
+9
+],
+"withPPG": 1.28,
+"withoutPPG": 1.45,
+"withoutGames": 20,
+"minutes": 926,
+"goalsConceded": 13,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Cedric Soares",
+"pos": "DEF",
+"ovr": 68,
+"tier": "silver",
+"stats": {
+"CLN": 61,
+"THR": 56,
+"DIF": 75,
+"APP": 44
+},
+"apps": 16,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 3,
+"wdl": [
+8,
+3,
+5
+],
+"withPPG": 1.69,
+"withoutPPG": 1.14,
+"withoutGames": 22,
+"minutes": 1309,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Yan Valery",
+"pos": "DEF",
+"ovr": 48,
+"tier": "bronze",
+"stats": {
+"CLN": 36,
+"THR": 47,
+"DIF": 46,
+"APP": 36
+},
+"apps": 11,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+1,
+7
+],
+"withPPG": 0.91,
+"withoutPPG": 1.56,
+"withoutGames": 27,
+"minutes": 782,
+"goalsConceded": 20,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Angus Gunn",
+"pos": "GK",
+"ovr": 46,
+"tier": "bronze",
+"stats": {
+"CLN": 53,
+"CON": 25,
+"DIF": 45,
+"APP": 31
+},
+"apps": 10,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+2,
+2,
+6
+],
+"withPPG": 0.8,
+"withoutPPG": 1.57,
+"withoutGames": 28,
+"minutes": 900,
+"goalsConceded": 25,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Kyle Walker-Peters",
+"pos": "DEF",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"CLN": 64,
+"THR": 48,
+"DIF": 76,
+"APP": 35
+},
+"apps": 10,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+5,
+3,
+2
+],
+"withPPG": 1.8,
+"withoutPPG": 1.21,
+"withoutGames": 28,
+"minutes": 704,
+"goalsConceded": 8,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "William Smallbone",
+"pos": "MID",
+"ovr": 69,
+"tier": "silver",
+"stats": {
+"AST": 78,
+"GOL": 50,
+"CLN": 47,
+"DIF": 82,
+"APP": 31
+},
+"apps": 9,
+"goals": 0,
+"assists": 2,
+"cleanSheets": 0,
+"wdl": [
+5,
+3,
+1
+],
+"withPPG": 2.0,
+"withoutPPG": 1.17,
+"withoutGames": 29,
+"minutes": 393,
+"goalsConceded": 4,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Maya Yoshida",
+"pos": "DEF",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"CLN": 54,
+"THR": 49,
+"DIF": 49,
+"APP": 33
+},
+"apps": 8,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+2,
+4
+],
+"withPPG": 1.0,
+"withoutPPG": 1.47,
+"withoutGames": 30,
+"minutes": 558,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Kevin Danso",
+"pos": "DEF",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"CLN": 61,
+"THR": 70,
+"DIF": 48,
+"APP": 31
+},
+"apps": 6,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 1,
+"wdl": [
+1,
+2,
+3
+],
+"withPPG": 0.83,
+"withoutPPG": 1.47,
+"withoutGames": 32,
+"minutes": 276,
+"goalsConceded": 8,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Nathan Tella",
+"pos": "MID",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"AST": 58,
+"GOL": 57,
+"CLN": 58,
+"DIF": 66,
+"APP": 26
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+0
+],
+"withPPG": 3.0,
+"withoutPPG": 1.32,
+"withoutGames": 37,
+"minutes": 2,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Southampton",
+"clubPos": 11,
+"player": "Jake Vokins",
+"pos": "DEF",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"CLN": 61,
+"THR": 58,
+"DIF": 56,
+"APP": 27
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+0
+],
+"withPPG": 1.0,
+"withoutPPG": 1.38,
+"withoutGames": 37,
+"minutes": 90,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Lucas Moura",
+"pos": "MID",
+"ovr": 73,
+"tier": "silver",
+"stats": {
+"AST": 68,
+"GOL": 78,
+"CLN": 43,
+"DIF": 65,
+"APP": 78
+},
+"apps": 35,
+"goals": 4,
+"assists": 4,
+"cleanSheets": 1,
+"wdl": [
+15,
+9,
+11
+],
+"withPPG": 1.54,
+"withoutPPG": 1.67,
+"withoutGames": 3,
+"minutes": 2247,
+"goalsConceded": 29,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Toby Alderweireld",
+"pos": "DEF",
+"ovr": 76,
+"tier": "gold",
+"stats": {
+"CLN": 69,
+"THR": 69,
+"DIF": 67,
+"APP": 79
+},
+"apps": 33,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 7,
+"wdl": [
+15,
+9,
+9
+],
+"withPPG": 1.64,
+"withoutPPG": 1.0,
+"withoutGames": 5,
+"minutes": 2958,
+"goalsConceded": 39,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Serge Aurier",
+"pos": "DEF",
+"ovr": 75,
+"tier": "gold",
+"stats": {
+"CLN": 62,
+"THR": 82,
+"DIF": 67,
+"APP": 79
+},
+"apps": 33,
+"goals": 1,
+"assists": 5,
+"cleanSheets": 6,
+"wdl": [
+15,
+9,
+9
+],
+"withPPG": 1.64,
+"withoutPPG": 1.0,
+"withoutGames": 5,
+"minutes": 2705,
+"goalsConceded": 32,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Harry Winks",
+"pos": "MID",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"AST": 43,
+"GOL": 42,
+"CLN": 61,
+"DIF": 71,
+"APP": 71
+},
+"apps": 31,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 4,
+"wdl": [
+15,
+8,
+8
+],
+"withPPG": 1.71,
+"withoutPPG": 0.86,
+"withoutGames": 7,
+"minutes": 2228,
+"goalsConceded": 30,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Son Heung-min",
+"pos": "FWD",
+"ovr": 83,
+"tier": "gold",
+"stats": {
+"GOL": 72,
+"AST": 95,
+"DIF": 76,
+"APP": 67
+},
+"apps": 30,
+"goals": 11,
+"assists": 10,
+"cleanSheets": 4,
+"wdl": [
+14,
+8,
+8
+],
+"withPPG": 1.67,
+"withoutPPG": 1.12,
+"withoutGames": 8,
+"minutes": 2485,
+"goalsConceded": 31,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Harry Kane",
+"pos": "FWD",
+"ovr": 85,
+"tier": "best",
+"stats": {
+"GOL": 93,
+"AST": 55,
+"DIF": 71,
+"APP": 65
+},
+"apps": 29,
+"goals": 18,
+"assists": 2,
+"cleanSheets": 5,
+"wdl": [
+13,
+8,
+8
+],
+"withPPG": 1.62,
+"withoutPPG": 1.33,
+"withoutGames": 9,
+"minutes": 2589,
+"goalsConceded": 36,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Davinson Sanchez",
+"pos": "DEF",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"CLN": 52,
+"THR": 41,
+"DIF": 64,
+"APP": 71
+},
+"apps": 29,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 4,
+"wdl": [
+12,
+9,
+8
+],
+"withPPG": 1.55,
+"withoutPPG": 1.56,
+"withoutGames": 9,
+"minutes": 2431,
+"goalsConceded": 37,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Moussa Sissoko",
+"pos": "MID",
+"ovr": 68,
+"tier": "silver",
+"stats": {
+"AST": 50,
+"GOL": 56,
+"CLN": 69,
+"DIF": 72,
+"APP": 67
+},
+"apps": 29,
+"goals": 2,
+"assists": 1,
+"cleanSheets": 5,
+"wdl": [
+13,
+8,
+8
+],
+"withPPG": 1.62,
+"withoutPPG": 1.33,
+"withoutGames": 9,
+"minutes": 2455,
+"goalsConceded": 31,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Giovani Lo Celso",
+"pos": "MID",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"AST": 58,
+"GOL": 45,
+"CLN": 50,
+"DIF": 61,
+"APP": 64
+},
+"apps": 28,
+"goals": 0,
+"assists": 2,
+"cleanSheets": 2,
+"wdl": [
+10,
+10,
+8
+],
+"withPPG": 1.43,
+"withoutPPG": 1.9,
+"withoutGames": 10,
+"minutes": 1486,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Dele Alli",
+"pos": "MID",
+"ovr": 79,
+"tier": "gold",
+"stats": {
+"AST": 76,
+"GOL": 96,
+"CLN": 40,
+"DIF": 60,
+"APP": 58
+},
+"apps": 25,
+"goals": 8,
+"assists": 4,
+"cleanSheets": 0,
+"wdl": [
+9,
+8,
+8
+],
+"withPPG": 1.4,
+"withoutPPG": 1.85,
+"withoutGames": 13,
+"minutes": 1851,
+"goalsConceded": 26,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Erik Lamela",
+"pos": "MID",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"AST": 52,
+"GOL": 63,
+"CLN": 59,
+"DIF": 64,
+"APP": 58
+},
+"apps": 25,
+"goals": 2,
+"assists": 1,
+"cleanSheets": 3,
+"wdl": [
+10,
+8,
+7
+],
+"withPPG": 1.52,
+"withoutPPG": 1.62,
+"withoutGames": 13,
+"minutes": 1211,
+"goalsConceded": 12,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Jan Vertonghen",
+"pos": "DEF",
+"ovr": 67,
+"tier": "silver",
+"stats": {
+"CLN": 61,
+"THR": 61,
+"DIF": 64,
+"APP": 59
+},
+"apps": 23,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 4,
+"wdl": [
+10,
+6,
+7
+],
+"withPPG": 1.57,
+"withoutPPG": 1.53,
+"withoutGames": 15,
+"minutes": 1646,
+"goalsConceded": 24,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Hugo Lloris",
+"pos": "GK",
+"ovr": 78,
+"tier": "gold",
+"stats": {
+"CLN": 79,
+"CON": 79,
+"DIF": 80,
+"APP": 44
+},
+"apps": 21,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 6,
+"wdl": [
+11,
+6,
+4
+],
+"withPPG": 1.86,
+"withoutPPG": 1.18,
+"withoutGames": 17,
+"minutes": 1808,
+"goalsConceded": 21,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Tanguy Ndombele",
+"pos": "MID",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"AST": 63,
+"GOL": 62,
+"CLN": 41,
+"DIF": 50,
+"APP": 49
+},
+"apps": 21,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 0,
+"wdl": [
+5,
+7,
+9
+],
+"withPPG": 1.05,
+"withoutPPG": 2.18,
+"withoutGames": 17,
+"minutes": 1007,
+"goalsConceded": 17,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Christian Eriksen",
+"pos": "MID",
+"ovr": 67,
+"tier": "silver",
+"stats": {
+"AST": 64,
+"GOL": 78,
+"CLN": 48,
+"DIF": 57,
+"APP": 47
+},
+"apps": 20,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 1,
+"wdl": [
+7,
+5,
+8
+],
+"withPPG": 1.3,
+"withoutPPG": 1.83,
+"withoutGames": 18,
+"minutes": 1090,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Eric Dier",
+"pos": "MID",
+"ovr": 72,
+"tier": "silver",
+"stats": {
+"AST": 65,
+"GOL": 46,
+"CLN": 65,
+"DIF": 84,
+"APP": 46
+},
+"apps": 19,
+"goals": 0,
+"assists": 2,
+"cleanSheets": 3,
+"wdl": [
+11,
+4,
+4
+],
+"withPPG": 1.95,
+"withoutPPG": 1.16,
+"withoutGames": 19,
+"minutes": 1341,
+"goalsConceded": 23,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Ben Davies",
+"pos": "DEF",
+"ovr": 69,
+"tier": "silver",
+"stats": {
+"CLN": 71,
+"THR": 44,
+"DIF": 67,
+"APP": 48
+},
+"apps": 18,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 4,
+"wdl": [
+8,
+5,
+5
+],
+"withPPG": 1.61,
+"withoutPPG": 1.5,
+"withoutGames": 20,
+"minutes": 1431,
+"goalsConceded": 19,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Paulo Gazzaniga",
+"pos": "GK",
+"ovr": 48,
+"tier": "bronze",
+"stats": {
+"CLN": 33,
+"CON": 43,
+"DIF": 49,
+"APP": 40
+},
+"apps": 18,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+5,
+5,
+8
+],
+"withPPG": 1.11,
+"withoutPPG": 1.95,
+"withoutGames": 20,
+"minutes": 1612,
+"goalsConceded": 26,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Steven Bergwijn",
+"pos": "FWD",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"GOL": 57,
+"AST": 57,
+"DIF": 74,
+"APP": 36
+},
+"apps": 14,
+"goals": 3,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+7,
+4,
+3
+],
+"withPPG": 1.79,
+"withoutPPG": 1.42,
+"withoutGames": 24,
+"minutes": 702,
+"goalsConceded": 9,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Danny Rose",
+"pos": "DEF",
+"ovr": 50,
+"tier": "bronze",
+"stats": {
+"CLN": 37,
+"THR": 46,
+"DIF": 54,
+"APP": 38
+},
+"apps": 12,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+4,
+3,
+5
+],
+"withPPG": 1.25,
+"withoutPPG": 1.69,
+"withoutGames": 26,
+"minutes": 894,
+"goalsConceded": 14,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Gedson Fernandes",
+"pos": "MID",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"AST": 51,
+"GOL": 51,
+"CLN": 49,
+"DIF": 65,
+"APP": 29
+},
+"apps": 7,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+3,
+1
+],
+"withPPG": 1.71,
+"withoutPPG": 1.52,
+"withoutGames": 31,
+"minutes": 62,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Oliver Skipp",
+"pos": "MID",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"AST": 51,
+"GOL": 51,
+"CLN": 49,
+"DIF": 73,
+"APP": 29
+},
+"apps": 7,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+4,
+3,
+0
+],
+"withPPG": 2.14,
+"withoutPPG": 1.42,
+"withoutGames": 31,
+"minutes": 75,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Ryan Sessegnon",
+"pos": "MID",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"AST": 52,
+"GOL": 49,
+"CLN": 50,
+"DIF": 67,
+"APP": 29
+},
+"apps": 6,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+2,
+1
+],
+"withPPG": 1.83,
+"withoutPPG": 1.5,
+"withoutGames": 32,
+"minutes": 342,
+"goalsConceded": 5,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Japhet Tanganga",
+"pos": "DEF",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"CLN": 81,
+"THR": 51,
+"DIF": 48,
+"APP": 31
+},
+"apps": 6,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+1,
+2,
+3
+],
+"withPPG": 0.83,
+"withoutPPG": 1.69,
+"withoutGames": 32,
+"minutes": 526,
+"goalsConceded": 7,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Juan Foyth",
+"pos": "DEF",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"CLN": 52,
+"THR": 53,
+"DIF": 59,
+"APP": 29
+},
+"apps": 4,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+3,
+0
+],
+"withPPG": 1.5,
+"withoutPPG": 1.56,
+"withoutGames": 34,
+"minutes": 66,
+"goalsConceded": 3,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Kyle Walker-Peters",
+"pos": "DEF",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"CLN": 56,
+"THR": 55,
+"DIF": 57,
+"APP": 28
+},
+"apps": 3,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+1,
+1
+],
+"withPPG": 1.33,
+"withoutPPG": 1.57,
+"withoutGames": 35,
+"minutes": 242,
+"goalsConceded": 4,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Troy Parrott",
+"pos": "FWD",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"GOL": 55,
+"AST": 56,
+"DIF": 59,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+1
+],
+"withPPG": 1.5,
+"withoutPPG": 1.56,
+"withoutGames": 36,
+"minutes": 6,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Victor Wanyama",
+"pos": "MID",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"AST": 56,
+"GOL": 54,
+"CLN": 56,
+"DIF": 60,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+1
+],
+"withPPG": 1.5,
+"withoutPPG": 1.56,
+"withoutGames": 36,
+"minutes": 24,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Spurs",
+"clubPos": 6,
+"player": "Georges-Kevin Nkoudou",
+"pos": "MID",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"AST": 58,
+"GOL": 57,
+"CLN": 58,
+"DIF": 66,
+"APP": 26
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+0
+],
+"withPPG": 3.0,
+"withoutPPG": 1.51,
+"withoutGames": 37,
+"minutes": 2,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Ben Foster",
+"pos": "GK",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"CLN": 56,
+"CON": 46,
+"DIF": 41,
+"APP": 74
+},
+"apps": 38,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 9,
+"wdl": [
+8,
+10,
+20
+],
+"withPPG": 0.89,
+"withoutPPG": 0.89,
+"withoutGames": 0,
+"minutes": 3420,
+"goalsConceded": 64,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Abdoulaye Doucoure",
+"pos": "MID",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"AST": 54,
+"GOL": 70,
+"CLN": 62,
+"DIF": 43,
+"APP": 81
+},
+"apps": 37,
+"goals": 4,
+"assists": 2,
+"cleanSheets": 5,
+"wdl": [
+8,
+9,
+20
+],
+"withPPG": 0.89,
+"withoutPPG": 1.0,
+"withoutGames": 1,
+"minutes": 3167,
+"goalsConceded": 61,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Etienne Capoue",
+"pos": "MID",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"AST": 65,
+"GOL": 44,
+"CLN": 74,
+"DIF": 54,
+"APP": 69
+},
+"apps": 30,
+"goals": 0,
+"assists": 3,
+"cleanSheets": 6,
+"wdl": [
+8,
+6,
+16
+],
+"withPPG": 1.0,
+"withoutPPG": 0.5,
+"withoutGames": 8,
+"minutes": 2632,
+"goalsConceded": 48,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Will Hughes",
+"pos": "MID",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"AST": 50,
+"GOL": 52,
+"CLN": 55,
+"DIF": 42,
+"APP": 69
+},
+"apps": 30,
+"goals": 1,
+"assists": 1,
+"cleanSheets": 3,
+"wdl": [
+6,
+7,
+17
+],
+"withPPG": 0.83,
+"withoutPPG": 1.12,
+"withoutGames": 8,
+"minutes": 2262,
+"goalsConceded": 46,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Craig Cathcart",
+"pos": "DEF",
+"ovr": 68,
+"tier": "silver",
+"stats": {
+"CLN": 79,
+"THR": 41,
+"DIF": 41,
+"APP": 71
+},
+"apps": 29,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 8,
+"wdl": [
+6,
+8,
+15
+],
+"withPPG": 0.9,
+"withoutPPG": 0.89,
+"withoutGames": 9,
+"minutes": 2490,
+"goalsConceded": 37,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Craig Dawson",
+"pos": "DEF",
+"ovr": 55,
+"tier": "bronze",
+"stats": {
+"CLN": 48,
+"THR": 57,
+"DIF": 41,
+"APP": 71
+},
+"apps": 29,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 4,
+"wdl": [
+6,
+8,
+15
+],
+"withPPG": 0.9,
+"withoutPPG": 0.89,
+"withoutGames": 9,
+"minutes": 2359,
+"goalsConceded": 49,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Gerard Deulofeu",
+"pos": "FWD",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"GOL": 47,
+"AST": 79,
+"DIF": 47,
+"APP": 63
+},
+"apps": 28,
+"goals": 4,
+"assists": 5,
+"cleanSheets": 5,
+"wdl": [
+6,
+9,
+13
+],
+"withPPG": 0.96,
+"withoutPPG": 0.7,
+"withoutGames": 10,
+"minutes": 2105,
+"goalsConceded": 34,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Kiko Femenia",
+"pos": "MID",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"AST": 44,
+"GOL": 43,
+"CLN": 63,
+"DIF": 43,
+"APP": 64
+},
+"apps": 28,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 4,
+"wdl": [
+6,
+6,
+16
+],
+"withPPG": 0.86,
+"withoutPPG": 1.0,
+"withoutGames": 10,
+"minutes": 2241,
+"goalsConceded": 46,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Roberto Pereyra",
+"pos": "MID",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"AST": 44,
+"GOL": 72,
+"CLN": 50,
+"DIF": 44,
+"APP": 64
+},
+"apps": 28,
+"goals": 3,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+5,
+10,
+13
+],
+"withPPG": 0.89,
+"withoutPPG": 0.9,
+"withoutGames": 10,
+"minutes": 1653,
+"goalsConceded": 27,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Ismaila Sarr",
+"pos": "FWD",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"GOL": 53,
+"AST": 72,
+"DIF": 47,
+"APP": 63
+},
+"apps": 28,
+"goals": 5,
+"assists": 4,
+"cleanSheets": 2,
+"wdl": [
+7,
+6,
+15
+],
+"withPPG": 0.96,
+"withoutPPG": 0.7,
+"withoutGames": 10,
+"minutes": 2028,
+"goalsConceded": 35,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Troy Deeney",
+"pos": "FWD",
+"ovr": 67,
+"tier": "silver",
+"stats": {
+"GOL": 70,
+"AST": 56,
+"DIF": 47,
+"APP": 60
+},
+"apps": 27,
+"goals": 10,
+"assists": 2,
+"cleanSheets": 6,
+"wdl": [
+7,
+5,
+15
+],
+"withPPG": 0.96,
+"withoutPPG": 0.73,
+"withoutGames": 11,
+"minutes": 2234,
+"goalsConceded": 39,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Christian Kabasele",
+"pos": "DEF",
+"ovr": 70,
+"tier": "best",
+"stats": {
+"CLN": 67,
+"THR": 58,
+"DIF": 59,
+"APP": 67
+},
+"apps": 27,
+"goals": 0,
+"assists": 2,
+"cleanSheets": 6,
+"wdl": [
+7,
+9,
+11
+],
+"withPPG": 1.11,
+"withoutPPG": 0.36,
+"withoutGames": 11,
+"minutes": 2252,
+"goalsConceded": 34,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Adam Masina",
+"pos": "DEF",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"CLN": 52,
+"THR": 50,
+"DIF": 49,
+"APP": 65
+},
+"apps": 26,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 4,
+"wdl": [
+7,
+5,
+14
+],
+"withPPG": 1.0,
+"withoutPPG": 0.67,
+"withoutGames": 12,
+"minutes": 1818,
+"goalsConceded": 31,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Andre Gray",
+"pos": "FWD",
+"ovr": 52,
+"tier": "bronze",
+"stats": {
+"GOL": 46,
+"AST": 42,
+"DIF": 37,
+"APP": 52
+},
+"apps": 23,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+6,
+14
+],
+"withPPG": 0.65,
+"withoutPPG": 1.27,
+"withoutGames": 15,
+"minutes": 746,
+"goalsConceded": 17,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Nathaniel Chalobah",
+"pos": "MID",
+"ovr": 57,
+"tier": "bronze",
+"stats": {
+"AST": 53,
+"GOL": 40,
+"CLN": 47,
+"DIF": 60,
+"APP": 51
+},
+"apps": 22,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 1,
+"wdl": [
+6,
+7,
+9
+],
+"withPPG": 1.14,
+"withoutPPG": 0.56,
+"withoutGames": 16,
+"minutes": 926,
+"goalsConceded": 14,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Adrian Mariappa",
+"pos": "DEF",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"CLN": 52,
+"THR": 43,
+"DIF": 40,
+"APP": 52
+},
+"apps": 20,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 3,
+"wdl": [
+4,
+4,
+12
+],
+"withPPG": 0.8,
+"withoutPPG": 1.0,
+"withoutGames": 18,
+"minutes": 1510,
+"goalsConceded": 33,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Tom Cleverley",
+"pos": "MID",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"AST": 46,
+"GOL": 55,
+"CLN": 50,
+"DIF": 41,
+"APP": 44
+},
+"apps": 18,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+6,
+10
+],
+"withPPG": 0.67,
+"withoutPPG": 1.1,
+"withoutGames": 20,
+"minutes": 966,
+"goalsConceded": 26,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Danny Welbeck",
+"pos": "FWD",
+"ovr": 52,
+"tier": "bronze",
+"stats": {
+"GOL": 47,
+"AST": 43,
+"DIF": 36,
+"APP": 42
+},
+"apps": 18,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+2,
+4,
+12
+],
+"withPPG": 0.56,
+"withoutPPG": 1.2,
+"withoutGames": 20,
+"minutes": 815,
+"goalsConceded": 15,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Jose Holebas",
+"pos": "DEF",
+"ovr": 49,
+"tier": "bronze",
+"stats": {
+"CLN": 41,
+"THR": 45,
+"DIF": 40,
+"APP": 41
+},
+"apps": 14,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+2,
+4,
+8
+],
+"withPPG": 0.71,
+"withoutPPG": 1.0,
+"withoutGames": 24,
+"minutes": 1024,
+"goalsConceded": 28,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Daryl Janmaat",
+"pos": "DEF",
+"ovr": 70,
+"tier": "silver",
+"stats": {
+"CLN": 84,
+"THR": 66,
+"DIF": 51,
+"APP": 33
+},
+"apps": 8,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 3,
+"wdl": [
+1,
+5,
+2
+],
+"withPPG": 1.0,
+"withoutPPG": 0.87,
+"withoutGames": 30,
+"minutes": 608,
+"goalsConceded": 5,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Ignacio Pussetto",
+"pos": "FWD",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"GOL": 49,
+"AST": 49,
+"DIF": 46,
+"APP": 29
+},
+"apps": 7,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+2,
+4
+],
+"withPPG": 0.71,
+"withoutPPG": 0.94,
+"withoutGames": 31,
+"minutes": 67,
+"goalsConceded": 3,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Isaac Success",
+"pos": "FWD",
+"ovr": 54,
+"tier": "bronze",
+"stats": {
+"GOL": 36,
+"AST": 51,
+"DIF": 49,
+"APP": 27
+},
+"apps": 5,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+1,
+3
+],
+"withPPG": 0.8,
+"withoutPPG": 0.91,
+"withoutGames": 33,
+"minutes": 65,
+"goalsConceded": 3,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Domingos Quina",
+"pos": "MID",
+"ovr": 59,
+"tier": "bronze",
+"stats": {
+"AST": 54,
+"GOL": 54,
+"CLN": 52,
+"DIF": 52,
+"APP": 27
+},
+"apps": 4,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+3
+],
+"withPPG": 0.75,
+"withoutPPG": 0.91,
+"withoutGames": 34,
+"minutes": 18,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Dimitri Foulquier",
+"pos": "DEF",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"CLN": 52,
+"THR": 55,
+"DIF": 47,
+"APP": 28
+},
+"apps": 3,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+2
+],
+"withPPG": 0.33,
+"withoutPPG": 0.94,
+"withoutGames": 35,
+"minutes": 58,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Joao Pedro",
+"pos": "FWD",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"GOL": 54,
+"AST": 54,
+"DIF": 44,
+"APP": 26
+},
+"apps": 3,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+3
+],
+"withPPG": 0.0,
+"withoutPPG": 0.97,
+"withoutGames": 35,
+"minutes": 22,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "Watford",
+"clubPos": 19,
+"player": "Sebastian Prodl",
+"pos": "DEF",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"CLN": 61,
+"THR": 58,
+"DIF": 56,
+"APP": 27
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+0
+],
+"withPPG": 1.0,
+"withoutPPG": 0.89,
+"withoutGames": 37,
+"minutes": 57,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Declan Rice",
+"pos": "MID",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"AST": 60,
+"GOL": 46,
+"CLN": 72,
+"DIF": 47,
+"APP": 83
+},
+"apps": 38,
+"goals": 1,
+"assists": 3,
+"cleanSheets": 7,
+"wdl": [
+10,
+9,
+19
+],
+"withPPG": 1.03,
+"withoutPPG": 1.03,
+"withoutGames": 0,
+"minutes": 3420,
+"goalsConceded": 62,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Pablo Fornals",
+"pos": "MID",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"AST": 74,
+"GOL": 55,
+"CLN": 52,
+"DIF": 49,
+"APP": 80
+},
+"apps": 36,
+"goals": 2,
+"assists": 5,
+"cleanSheets": 3,
+"wdl": [
+10,
+9,
+17
+],
+"withPPG": 1.08,
+"withoutPPG": 0.0,
+"withoutGames": 2,
+"minutes": 2177,
+"goalsConceded": 35,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Mark Noble",
+"pos": "MID",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"AST": 63,
+"GOL": 71,
+"CLN": 54,
+"DIF": 49,
+"APP": 75
+},
+"apps": 33,
+"goals": 4,
+"assists": 3,
+"cleanSheets": 3,
+"wdl": [
+9,
+8,
+16
+],
+"withPPG": 1.06,
+"withoutPPG": 0.8,
+"withoutGames": 5,
+"minutes": 2684,
+"goalsConceded": 44,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Issa Diop",
+"pos": "DEF",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"CLN": 53,
+"THR": 70,
+"DIF": 44,
+"APP": 77
+},
+"apps": 32,
+"goals": 3,
+"assists": 1,
+"cleanSheets": 4,
+"wdl": [
+8,
+9,
+15
+],
+"withPPG": 1.03,
+"withoutPPG": 1.0,
+"withoutGames": 6,
+"minutes": 2766,
+"goalsConceded": 54,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Sebastien Haller",
+"pos": "FWD",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"GOL": 57,
+"AST": 46,
+"DIF": 47,
+"APP": 71
+},
+"apps": 32,
+"goals": 7,
+"assists": 1,
+"cleanSheets": 4,
+"wdl": [
+9,
+7,
+16
+],
+"withPPG": 1.06,
+"withoutPPG": 0.83,
+"withoutGames": 6,
+"minutes": 2263,
+"goalsConceded": 41,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Aaron Cresswell",
+"pos": "DEF",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"CLN": 62,
+"THR": 63,
+"DIF": 43,
+"APP": 75
+},
+"apps": 31,
+"goals": 3,
+"assists": 0,
+"cleanSheets": 5,
+"wdl": [
+8,
+6,
+17
+],
+"withPPG": 0.97,
+"withoutPPG": 1.29,
+"withoutGames": 7,
+"minutes": 2730,
+"goalsConceded": 51,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Angelo Ogbonna",
+"pos": "DEF",
+"ovr": 69,
+"tier": "silver",
+"stats": {
+"CLN": 69,
+"THR": 55,
+"DIF": 51,
+"APP": 75
+},
+"apps": 31,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 6,
+"wdl": [
+10,
+8,
+13
+],
+"withPPG": 1.23,
+"withoutPPG": 0.14,
+"withoutGames": 7,
+"minutes": 2787,
+"goalsConceded": 44,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Ryan Fredericks",
+"pos": "DEF",
+"ovr": 72,
+"tier": "silver",
+"stats": {
+"CLN": 75,
+"THR": 67,
+"DIF": 52,
+"APP": 67
+},
+"apps": 27,
+"goals": 0,
+"assists": 3,
+"cleanSheets": 6,
+"wdl": [
+8,
+6,
+13
+],
+"withPPG": 1.11,
+"withoutPPG": 0.82,
+"withoutGames": 11,
+"minutes": 2237,
+"goalsConceded": 39,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Lukasz Fabianski",
+"pos": "GK",
+"ovr": 69,
+"tier": "silver",
+"stats": {
+"CLN": 58,
+"CON": 75,
+"DIF": 61,
+"APP": 51
+},
+"apps": 25,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 5,
+"wdl": [
+8,
+7,
+10
+],
+"withPPG": 1.24,
+"withoutPPG": 0.62,
+"withoutGames": 13,
+"minutes": 2119,
+"goalsConceded": 34,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Felipe Anderson",
+"pos": "MID",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"AST": 76,
+"GOL": 68,
+"CLN": 40,
+"DIF": 44,
+"APP": 58
+},
+"apps": 25,
+"goals": 1,
+"assists": 4,
+"cleanSheets": 0,
+"wdl": [
+6,
+4,
+15
+],
+"withPPG": 0.88,
+"withoutPPG": 1.31,
+"withoutGames": 13,
+"minutes": 1505,
+"goalsConceded": 27,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Michail Antonio",
+"pos": "FWD",
+"ovr": 70,
+"tier": "silver",
+"stats": {
+"GOL": 72,
+"AST": 68,
+"DIF": 50,
+"APP": 54
+},
+"apps": 24,
+"goals": 10,
+"assists": 3,
+"cleanSheets": 1,
+"wdl": [
+7,
+5,
+12
+],
+"withPPG": 1.08,
+"withoutPPG": 0.93,
+"withoutGames": 14,
+"minutes": 1770,
+"goalsConceded": 30,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Manuel Lanzini",
+"pos": "MID",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"AST": 61,
+"GOL": 57,
+"CLN": 53,
+"DIF": 43,
+"APP": 56
+},
+"apps": 24,
+"goals": 0,
+"assists": 2,
+"cleanSheets": 2,
+"wdl": [
+4,
+8,
+12
+],
+"withPPG": 0.83,
+"withoutPPG": 1.36,
+"withoutGames": 14,
+"minutes": 1377,
+"goalsConceded": 30,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Robert Snodgrass",
+"pos": "MID",
+"ovr": 71,
+"tier": "silver",
+"stats": {
+"AST": 83,
+"GOL": 85,
+"CLN": 46,
+"DIF": 45,
+"APP": 56
+},
+"apps": 24,
+"goals": 5,
+"assists": 5,
+"cleanSheets": 1,
+"wdl": [
+6,
+4,
+14
+],
+"withPPG": 0.92,
+"withoutPPG": 1.21,
+"withoutGames": 14,
+"minutes": 1511,
+"goalsConceded": 33,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Andriy Yarmolenko",
+"pos": "FWD",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"GOL": 57,
+"AST": 50,
+"DIF": 69,
+"APP": 52
+},
+"apps": 23,
+"goals": 5,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+8,
+7,
+8
+],
+"withPPG": 1.35,
+"withoutPPG": 0.53,
+"withoutGames": 15,
+"minutes": 988,
+"goalsConceded": 17,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Fabian Balbuena",
+"pos": "DEF",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"CLN": 67,
+"THR": 55,
+"DIF": 55,
+"APP": 46
+},
+"apps": 17,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 3,
+"wdl": [
+6,
+2,
+9
+],
+"withPPG": 1.18,
+"withoutPPG": 0.9,
+"withoutGames": 21,
+"minutes": 1176,
+"goalsConceded": 24,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Arthur Masuaku",
+"pos": "DEF",
+"ovr": 55,
+"tier": "bronze",
+"stats": {
+"CLN": 45,
+"THR": 55,
+"DIF": 55,
+"APP": 46
+},
+"apps": 17,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 1,
+"wdl": [
+5,
+5,
+7
+],
+"withPPG": 1.18,
+"withoutPPG": 0.9,
+"withoutGames": 21,
+"minutes": 932,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Jarrod Bowen",
+"pos": "FWD",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"GOL": 49,
+"AST": 89,
+"DIF": 55,
+"APP": 35
+},
+"apps": 13,
+"goals": 1,
+"assists": 4,
+"cleanSheets": 0,
+"wdl": [
+4,
+3,
+6
+],
+"withPPG": 1.15,
+"withoutPPG": 0.96,
+"withoutGames": 25,
+"minutes": 919,
+"goalsConceded": 13,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Tomas Soucek",
+"pos": "MID",
+"ovr": 61,
+"tier": "bronze",
+"stats": {
+"AST": 48,
+"GOL": 79,
+"CLN": 54,
+"DIF": 50,
+"APP": 36
+},
+"apps": 13,
+"goals": 3,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+3,
+4,
+6
+],
+"withPPG": 1.0,
+"withoutPPG": 1.04,
+"withoutGames": 25,
+"minutes": 1041,
+"goalsConceded": 18,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Pablo Zabaleta",
+"pos": "DEF",
+"ovr": 50,
+"tier": "bronze",
+"stats": {
+"CLN": 43,
+"THR": 48,
+"DIF": 40,
+"APP": 35
+},
+"apps": 10,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+3,
+6
+],
+"withPPG": 0.6,
+"withoutPPG": 1.18,
+"withoutGames": 28,
+"minutes": 589,
+"goalsConceded": 14,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Albian Ajeti",
+"pos": "FWD",
+"ovr": 53,
+"tier": "bronze",
+"stats": {
+"GOL": 47,
+"AST": 48,
+"DIF": 36,
+"APP": 30
+},
+"apps": 9,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+2,
+7
+],
+"withPPG": 0.22,
+"withoutPPG": 1.28,
+"withoutGames": 29,
+"minutes": 132,
+"goalsConceded": 3,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Roberto",
+"pos": "GK",
+"ovr": 47,
+"tier": "bronze",
+"stats": {
+"CLN": 33,
+"CON": 37,
+"DIF": 38,
+"APP": 29
+},
+"apps": 8,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+2,
+6
+],
+"withPPG": 0.25,
+"withoutPPG": 1.23,
+"withoutGames": 30,
+"minutes": 686,
+"goalsConceded": 17,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Jack Wilshere",
+"pos": "MID",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"AST": 50,
+"GOL": 46,
+"CLN": 48,
+"DIF": 66,
+"APP": 30
+},
+"apps": 8,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+2,
+3
+],
+"withPPG": 1.38,
+"withoutPPG": 0.93,
+"withoutGames": 30,
+"minutes": 210,
+"goalsConceded": 5,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Carlos Sanchez",
+"pos": "MID",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"AST": 52,
+"GOL": 43,
+"CLN": 50,
+"DIF": 64,
+"APP": 29
+},
+"apps": 6,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+1,
+2
+],
+"withPPG": 1.67,
+"withoutPPG": 0.91,
+"withoutGames": 32,
+"minutes": 113,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "David Martin",
+"pos": "GK",
+"ovr": 74,
+"tier": "best",
+"stats": {
+"CLN": 90,
+"CON": 80,
+"DIF": 54,
+"APP": 27
+},
+"apps": 5,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 2,
+"wdl": [
+2,
+0,
+3
+],
+"withPPG": 1.2,
+"withoutPPG": 1.0,
+"withoutGames": 33,
+"minutes": 435,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Jeremy Ngakia",
+"pos": "DEF",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"CLN": 54,
+"THR": 52,
+"DIF": 46,
+"APP": 30
+},
+"apps": 5,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+0,
+4
+],
+"withPPG": 0.6,
+"withoutPPG": 1.09,
+"withoutGames": 33,
+"minutes": 441,
+"goalsConceded": 8,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Ben Johnson",
+"pos": "DEF",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"CLN": 60,
+"THR": 55,
+"DIF": 60,
+"APP": 28
+},
+"apps": 3,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+2,
+0
+],
+"withPPG": 1.67,
+"withoutPPG": 0.97,
+"withoutGames": 35,
+"minutes": 270,
+"goalsConceded": 3,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Javier Hernandez",
+"pos": "FWD",
+"ovr": 65,
+"tier": "silver",
+"stats": {
+"GOL": 72,
+"AST": 56,
+"DIF": 51,
+"APP": 26
+},
+"apps": 2,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+1
+],
+"withPPG": 0.5,
+"withoutPPG": 1.06,
+"withoutGames": 36,
+"minutes": 107,
+"goalsConceded": 4,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Nathan Holland",
+"pos": "MID",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"AST": 56,
+"GOL": 56,
+"CLN": 56,
+"DIF": 50,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+2
+],
+"withPPG": 0.0,
+"withoutPPG": 1.08,
+"withoutGames": 36,
+"minutes": 31,
+"goalsConceded": 1,
+"flag": ""
+},
+{
+"club": "West Ham",
+"clubPos": 16,
+"player": "Darren Randolph",
+"pos": "GK",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"CLN": 62,
+"CON": 54,
+"DIF": 51,
+"APP": 26
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+1
+],
+"withPPG": 0.5,
+"withoutPPG": 1.06,
+"withoutGames": 36,
+"minutes": 180,
+"goalsConceded": 5,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Conor Coady",
+"pos": "MID",
+"ovr": 68,
+"tier": "silver",
+"stats": {
+"AST": 43,
+"GOL": 40,
+"CLN": 91,
+"DIF": 66,
+"APP": 83
+},
+"apps": 38,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 13,
+"wdl": [
+15,
+14,
+9
+],
+"withPPG": 1.55,
+"withoutPPG": 1.55,
+"withoutGames": 0,
+"minutes": 3420,
+"goalsConceded": 40,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Ruben Neves",
+"pos": "MID",
+"ovr": 72,
+"tier": "silver",
+"stats": {
+"AST": 54,
+"GOL": 57,
+"CLN": 80,
+"DIF": 66,
+"APP": 83
+},
+"apps": 38,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 9,
+"wdl": [
+15,
+14,
+9
+],
+"withPPG": 1.55,
+"withoutPPG": 1.55,
+"withoutGames": 0,
+"minutes": 3059,
+"goalsConceded": 35,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Leander Dendoncker",
+"pos": "MID",
+"ovr": 71,
+"tier": "silver",
+"stats": {
+"AST": 43,
+"GOL": 65,
+"CLN": 84,
+"DIF": 66,
+"APP": 83
+},
+"apps": 38,
+"goals": 4,
+"assists": 0,
+"cleanSheets": 10,
+"wdl": [
+15,
+14,
+9
+],
+"withPPG": 1.55,
+"withoutPPG": 1.55,
+"withoutGames": 0,
+"minutes": 2794,
+"goalsConceded": 34,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Rui Patricio",
+"pos": "GK",
+"ovr": 74,
+"tier": "silver",
+"stats": {
+"CLN": 70,
+"CON": 68,
+"DIF": 63,
+"APP": 74
+},
+"apps": 38,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 13,
+"wdl": [
+15,
+14,
+9
+],
+"withPPG": 1.55,
+"withoutPPG": 1.55,
+"withoutGames": 0,
+"minutes": 3420,
+"goalsConceded": 40,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Joao Moutinho",
+"pos": "MID",
+"ovr": 76,
+"tier": "gold",
+"stats": {
+"AST": 78,
+"GOL": 46,
+"CLN": 84,
+"DIF": 66,
+"APP": 83
+},
+"apps": 38,
+"goals": 1,
+"assists": 6,
+"cleanSheets": 10,
+"wdl": [
+15,
+14,
+9
+],
+"withPPG": 1.55,
+"withoutPPG": 1.55,
+"withoutGames": 0,
+"minutes": 3107,
+"goalsConceded": 36,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Raul Jimenez",
+"pos": "FWD",
+"ovr": 80,
+"tier": "gold",
+"stats": {
+"GOL": 79,
+"AST": 76,
+"DIF": 65,
+"APP": 82
+},
+"apps": 38,
+"goals": 17,
+"assists": 6,
+"cleanSheets": 5,
+"wdl": [
+15,
+14,
+9
+],
+"withPPG": 1.55,
+"withoutPPG": 1.55,
+"withoutGames": 0,
+"minutes": 3244,
+"goalsConceded": 36,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Adama Traore",
+"pos": "FWD",
+"ovr": 66,
+"tier": "silver",
+"stats": {
+"GOL": 41,
+"AST": 90,
+"DIF": 65,
+"APP": 80
+},
+"apps": 37,
+"goals": 4,
+"assists": 9,
+"cleanSheets": 1,
+"wdl": [
+15,
+13,
+9
+],
+"withPPG": 1.57,
+"withoutPPG": 1.0,
+"withoutGames": 1,
+"minutes": 2606,
+"goalsConceded": 33,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Matt Doherty",
+"pos": "DEF",
+"ovr": 82,
+"tier": "gold",
+"stats": {
+"CLN": 77,
+"THR": 84,
+"DIF": 68,
+"APP": 83
+},
+"apps": 36,
+"goals": 4,
+"assists": 3,
+"cleanSheets": 12,
+"wdl": [
+15,
+14,
+7
+],
+"withPPG": 1.64,
+"withoutPPG": 0.0,
+"withoutGames": 2,
+"minutes": 2840,
+"goalsConceded": 31,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Jonny",
+"pos": "DEF",
+"ovr": 71,
+"tier": "silver",
+"stats": {
+"CLN": 59,
+"THR": 68,
+"DIF": 65,
+"APP": 82
+},
+"apps": 35,
+"goals": 2,
+"assists": 2,
+"cleanSheets": 9,
+"wdl": [
+14,
+13,
+8
+],
+"withPPG": 1.57,
+"withoutPPG": 1.33,
+"withoutGames": 3,
+"minutes": 2890,
+"goalsConceded": 35,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Diogo Jota",
+"pos": "FWD",
+"ovr": 63,
+"tier": "bronze",
+"stats": {
+"GOL": 56,
+"AST": 46,
+"DIF": 60,
+"APP": 75
+},
+"apps": 34,
+"goals": 7,
+"assists": 1,
+"cleanSheets": 0,
+"wdl": [
+12,
+13,
+9
+],
+"withPPG": 1.44,
+"withoutPPG": 2.5,
+"withoutGames": 4,
+"minutes": 2297,
+"goalsConceded": 28,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Romain Saiss",
+"pos": "MID",
+"ovr": 71,
+"tier": "silver",
+"stats": {
+"AST": 49,
+"GOL": 56,
+"CLN": 88,
+"DIF": 66,
+"APP": 75
+},
+"apps": 33,
+"goals": 2,
+"assists": 1,
+"cleanSheets": 10,
+"wdl": [
+14,
+10,
+9
+],
+"withPPG": 1.58,
+"withoutPPG": 1.4,
+"withoutGames": 5,
+"minutes": 2706,
+"goalsConceded": 34,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Pedro Neto",
+"pos": "MID",
+"ovr": 71,
+"tier": "silver",
+"stats": {
+"AST": 65,
+"GOL": 64,
+"CLN": 39,
+"DIF": 77,
+"APP": 67
+},
+"apps": 29,
+"goals": 3,
+"assists": 3,
+"cleanSheets": 0,
+"wdl": [
+13,
+10,
+6
+],
+"withPPG": 1.69,
+"withoutPPG": 1.11,
+"withoutGames": 9,
+"minutes": 928,
+"goalsConceded": 12,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Willy Boly",
+"pos": "DEF",
+"ovr": 89,
+"tier": "best",
+"stats": {
+"CLN": 96,
+"THR": 52,
+"DIF": 69,
+"APP": 56
+},
+"apps": 22,
+"goals": 0,
+"assists": 1,
+"cleanSheets": 12,
+"wdl": [
+9,
+9,
+4
+],
+"withPPG": 1.64,
+"withoutPPG": 1.44,
+"withoutGames": 16,
+"minutes": 1979,
+"goalsConceded": 15,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Ruben Vinagre",
+"pos": "DEF",
+"ovr": 47,
+"tier": "bronze",
+"stats": {
+"CLN": 29,
+"THR": 45,
+"DIF": 61,
+"APP": 44
+},
+"apps": 16,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+6,
+6,
+4
+],
+"withPPG": 1.5,
+"withoutPPG": 1.59,
+"withoutGames": 22,
+"minutes": 646,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Patrick Cutrone",
+"pos": "FWD",
+"ovr": 60,
+"tier": "bronze",
+"stats": {
+"GOL": 55,
+"AST": 46,
+"DIF": 68,
+"APP": 33
+},
+"apps": 12,
+"goals": 2,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+5,
+5,
+2
+],
+"withPPG": 1.67,
+"withoutPPG": 1.5,
+"withoutGames": 26,
+"minutes": 295,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Ryan Bennett",
+"pos": "DEF",
+"ovr": 50,
+"tier": "bronze",
+"stats": {
+"CLN": 34,
+"THR": 47,
+"DIF": 59,
+"APP": 36
+},
+"apps": 11,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 1,
+"wdl": [
+4,
+4,
+3
+],
+"withPPG": 1.45,
+"withoutPPG": 1.59,
+"withoutGames": 27,
+"minutes": 606,
+"goalsConceded": 9,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Daniel Podence",
+"pos": "MID",
+"ovr": 62,
+"tier": "bronze",
+"stats": {
+"AST": 50,
+"GOL": 63,
+"CLN": 47,
+"DIF": 72,
+"APP": 31
+},
+"apps": 9,
+"goals": 1,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+4,
+4,
+1
+],
+"withPPG": 1.78,
+"withoutPPG": 1.48,
+"withoutGames": 29,
+"minutes": 287,
+"goalsConceded": 0,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Morgan Gibbs-White",
+"pos": "MID",
+"ovr": 57,
+"tier": "bronze",
+"stats": {
+"AST": 51,
+"GOL": 40,
+"CLN": 49,
+"DIF": 60,
+"APP": 29
+},
+"apps": 7,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+3,
+1,
+3
+],
+"withPPG": 1.43,
+"withoutPPG": 1.58,
+"withoutGames": 31,
+"minutes": 126,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Max Kilman",
+"pos": "DEF",
+"ovr": 56,
+"tier": "bronze",
+"stats": {
+"CLN": 37,
+"THR": 55,
+"DIF": 57,
+"APP": 28
+},
+"apps": 3,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+1,
+1,
+1
+],
+"withPPG": 1.33,
+"withoutPPG": 1.57,
+"withoutGames": 35,
+"minutes": 184,
+"goalsConceded": 2,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Jesus Vallejo",
+"pos": "DEF",
+"ovr": 58,
+"tier": "bronze",
+"stats": {
+"CLN": 40,
+"THR": 57,
+"DIF": 51,
+"APP": 27
+},
+"apps": 2,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+1,
+1
+],
+"withPPG": 0.5,
+"withoutPPG": 1.61,
+"withoutGames": 36,
+"minutes": 162,
+"goalsConceded": 6,
+"flag": ""
+},
+{
+"club": "Wolves",
+"clubPos": 7,
+"player": "Bruno Jordao",
+"pos": "MID",
+"ovr": 64,
+"tier": "bronze",
+"stats": {
+"AST": 58,
+"GOL": 57,
+"CLN": 58,
+"DIF": 54,
+"APP": 26
+},
+"apps": 1,
+"goals": 0,
+"assists": 0,
+"cleanSheets": 0,
+"wdl": [
+0,
+0,
+1
+],
+"withPPG": 0.0,
+"withoutPPG": 1.59,
+"withoutGames": 37,
+"minutes": 6,
+"goalsConceded": 0,
+"flag": ""
+}
+]
+}

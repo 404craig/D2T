@@ -1,0 +1,551 @@
+season,club_feed,feed_id,name,feed_pos,appearances,goals,goal_assist,clean_sheet,wins,draws,losses,mins_played,game_started,goals_conceded,saves,yellow_card,red_card,own_goals
+1999/00,Arsenal,1659,Thierry Henry,F,31,17,8,1,17,7,7,0,0,0,0,6,0,0
+1999/00,Arsenal,1502,Kanu,F,31,12,4,4,20,5,6,0,0,0,0,2,0,0
+1999/00,Arsenal,1651,Sylvinho,D,31,1,3,6,18,7,6,0,0,0,0,3,0,0
+1999/00,Arsenal,1299,Marc Overmars,M,31,7,8,3,20,5,6,0,0,0,0,1,0,0
+1999/00,Arsenal,19,Ray Parlour,M,30,1,2,6,20,4,6,0,0,0,0,3,0,0
+1999/00,Arsenal,1132,Patrick Vieira,M,30,2,3,8,18,6,6,0,0,0,0,9,1,0
+1999/00,Arsenal,991,Dennis Bergkamp,F,28,6,9,1,17,4,7,0,0,0,0,6,0,0
+1999/00,Arsenal,13,Lee Dixon,D,28,3,1,6,17,5,6,0,0,0,0,3,0,0
+1999/00,Arsenal,1297,Gilles Grimandi,D,28,2,1,7,16,6,6,0,0,0,0,8,1,0
+1999/00,Arsenal,11,Nigel Winterburn,D,28,0,0,4,16,6,6,0,0,0,0,3,0,0
+1999/00,Arsenal,14,Martin Keown,D,27,1,0,6,14,5,8,0,0,0,0,5,1,0
+1999/00,Arsenal,1497,Freddie Ljungberg,M,26,6,2,4,13,5,8,0,0,0,0,2,1,0
+1999/00,Arsenal,1300,Emmanuel Petit,M,26,3,7,2,16,5,5,0,0,0,0,5,0,0
+1999/00,Arsenal,1,David Seaman,G,24,0,0,5,13,5,6,0,0,0,0,0,0,0
+1999/00,Arsenal,1657,Davor Suker,F,22,8,1,1,10,3,9,0,0,0,0,4,0,0
+1999/00,Arsenal,3,Tony Adams,D,21,0,1,7,15,2,4,0,0,0,0,2,0,0
+1999/00,Arsenal,1650,Oleg Luzhny,D,21,0,1,4,12,5,4,0,0,0,0,2,1,0
+1999/00,Arsenal,1296,Alexander Manninger,G,15,0,0,5,9,2,4,0,0,0,0,0,0,0
+1999/00,Arsenal,1131,Matt Upson,D,8,0,0,1,5,2,1,0,0,0,0,1,0,0
+1999/00,Arsenal,1655,Stefan Malz,M,5,1,1,0,2,1,2,0,0,0,0,0,0,0
+1999/00,Arsenal,1298,Nelson Vivas,D,5,0,2,1,5,0,0,0,0,0,0,1,0,0
+1999/00,Arsenal,1499,Graham Barrett,F,2,0,0,0,2,0,0,0,0,0,0,0,0,0
+1999/00,Arsenal,1306,Luís Boa Morte,M,2,0,0,0,1,1,0,0,0,0,0,0,0,0
+1999/00,Arsenal,842,Stephen Hughes,M,2,0,1,0,1,1,0,0,0,0,0,0,0,0
+1999/00,Arsenal,1303,Paolo Vernazza,M,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+1999/00,Arsenal,1496,Tommy Black,M,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1999/00,Arsenal,1494,Ashley Cole,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Arsenal,1133,Julian Gray,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Arsenal,1653,Brian McGovern,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Arsenal,1652,Rhys Weston,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Aston Villa,1361,George Boateng,M,33,2,0,7,14,11,8,0,0,0,0,9,0,0
+1999/00,Aston Villa,909,Julian Joachim,F,33,6,5,7,14,12,7,0,0,0,0,0,0,0
+1999/00,Aston Villa,23,Paul Merson,M,32,5,8,4,13,11,8,0,0,0,0,2,0,0
+1999/00,Aston Villa,72,Alan Wright,D,32,1,5,12,14,10,8,0,0,0,0,5,0,0
+1999/00,Aston Villa,35,Ugo Ehiogu,D,31,1,0,14,15,11,5,0,0,0,0,5,0,2
+1999/00,Aston Villa,153,Gareth Southgate,D,31,2,1,11,10,12,9,0,0,0,0,0,1,2
+1999/00,Aston Villa,1308,Gareth Barry,M,30,1,1,12,11,12,7,0,0,0,0,6,0,0
+1999/00,Aston Villa,848,Lee Hendrie,M,29,1,0,5,10,10,9,0,0,0,0,6,0,0
+1999/00,Aston Villa,252,David James,G,29,0,0,11,13,9,7,0,0,0,0,0,0,0
+1999/00,Aston Villa,847,Ian Taylor,M,29,5,0,10,10,10,9,0,0,0,0,8,0,0
+1999/00,Aston Villa,1504,Mark Delaney,D,28,1,2,10,10,9,9,0,0,0,0,6,0,0
+1999/00,Aston Villa,338,Dion Dublin,F,26,12,4,7,10,7,9,0,0,0,0,1,0,0
+1999/00,Aston Villa,1240,Benito Carbone,F,24,3,5,5,9,10,5,0,0,0,0,1,0,0
+1999/00,Aston Villa,406,Steve Stone,M,24,1,3,3,10,8,6,0,0,0,0,1,0,0
+1999/00,Aston Villa,1019,Alan Thompson,M,21,2,2,3,6,6,9,0,0,0,0,7,0,0
+1999/00,Aston Villa,775,Colin Calderwood,D,18,0,0,5,6,4,8,0,0,0,0,1,0,0
+1999/00,Aston Villa,720,Steve Watson,D,14,0,1,5,7,4,3,0,0,0,0,4,0,0
+1999/00,Aston Villa,1309,Darius Vassell,F,11,0,2,0,5,3,3,0,0,0,0,1,0,0
+1999/00,Aston Villa,1503,Peter Enckelman,G,10,0,0,4,2,4,4,0,0,0,0,0,0,0
+1999/00,Aston Villa,1505,Jlloyd Samuel,D,9,0,0,3,5,3,1,0,0,0,0,2,0,0
+1999/00,Aston Villa,1660,Najwan Ghrayib,D,5,0,0,0,2,2,1,0,0,0,0,0,0,0
+1999/00,Aston Villa,997,Richard Walker,F,5,2,0,0,0,0,0,0,0,0,0,0,0,0
+1999/00,Aston Villa,1661,Jonathan Bewers,D,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1999/00,Aston Villa,1123,Neil Cutler,G,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1999/00,Aston Villa,903,Mark Draper,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Aston Villa,998,Richard Walker,F,0,0,0,0,3,2,0,0,0,0,0,0,0,0
+1999/00,Bradford City,423,Gunnar Halle,D,38,0,5,7,9,9,20,0,0,0,0,8,0,0
+1999/00,Bradford City,228,David Wetherall,D,38,2,2,7,9,9,20,0,0,0,0,7,0,0
+1999/00,Bradford City,1672,Dean Windass,F,38,10,2,4,9,9,20,0,0,0,0,6,0,1
+1999/00,Bradford City,1664,Andy O'Brien,D,36,1,0,7,9,8,19,0,0,0,0,2,0,1
+1999/00,Bradford City,187,Peter Beagrie,,35,7,5,2,8,9,18,0,0,0,0,5,0,0
+1999/00,Bradford City,1670,Stuart McCall,M,34,1,2,6,8,8,18,0,0,0,0,6,0,0
+1999/00,Bradford City,60,Dean Saunders,F,34,3,2,3,9,8,17,0,0,0,0,1,0,0
+1999/00,Bradford City,1673,Robbie Blake,M,28,2,1,0,4,7,17,0,0,0,0,1,0,0
+1999/00,Bradford City,1667,Wayne Jacobs,D,24,0,0,3,7,5,12,0,0,0,0,3,0,0
+1999/00,Bradford City,905,Jamie Lawrence,M,23,3,0,2,5,5,13,0,0,0,0,3,0,0
+1999/00,Bradford City,1236,Matt Clarke,G,21,0,0,5,5,5,11,0,0,0,0,0,0,0
+1999/00,Bradford City,1674,Lee Mills,F,21,5,3,4,4,6,11,0,0,0,0,1,0,0
+1999/00,Bradford City,328,Lee Sharpe,M,18,0,1,2,4,3,11,0,0,0,0,1,0,0
+1999/00,Bradford City,1322,Neil Redfearn,M,17,1,0,2,3,5,9,0,0,0,0,6,0,0
+1999/00,Bradford City,1668,Gareth Whalley,M,16,1,1,2,4,4,8,0,0,0,0,0,0,0
+1999/00,Bradford City,1666,John Dreyer,D,14,1,1,4,5,3,6,0,0,0,0,4,0,1
+1999/00,Bradford City,102,Andy Myers,D,13,0,0,1,2,4,7,0,0,0,0,0,1,0
+1999/00,Bradford City,309,Gary Walsh,G,11,0,0,2,3,2,6,0,0,0,0,0,0,0
+1999/00,Bradford City,1134,Isaiah Rankin,F,9,0,0,0,2,2,5,0,0,0,0,0,0,0
+1999/00,Bradford City,1813,Cadete,F,7,0,0,0,0,2,5,0,0,0,0,0,0,0
+1999/00,Bradford City,1009,Aidan Davison,G,6,0,0,0,2,2,2,0,0,0,0,1,0,0
+1999/00,Bradford City,1665,Ashley Westwood,D,5,0,0,0,4,1,0,0,0,0,0,1,0,0
+1999/00,Bradford City,1814,Bruno Rodriguez,F,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1999/00,Bradford City,1671,Gareth Grant,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Bradford City,172,Neville Southall,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Chelsea,1350,Ed de Goey,G,37,0,0,16,17,11,9,0,0,0,0,1,0,0
+1999/00,Chelsea,1356,Tore Andre Flo,F,34,10,1,3,16,10,8,0,0,0,0,1,0,0
+1999/00,Chelsea,1355,Gustavo Poyet,M,33,10,5,8,16,10,7,0,0,0,0,5,0,0
+1999/00,Chelsea,1151,Gianfranco Zola,F,33,4,7,8,14,11,8,0,0,0,0,0,0,0
+1999/00,Chelsea,1027,Jody Morris,M,30,3,2,7,15,9,6,0,0,0,0,4,0,0
+1999/00,Chelsea,107,Dennis Wise,M,30,4,5,13,15,9,6,0,0,0,0,7,1,0
+1999/00,Chelsea,954,Dan Petrescu,D,29,4,5,4,15,8,6,0,0,0,0,2,0,0
+1999/00,Chelsea,1148,Frank Leboeuf,D,28,2,0,14,15,7,6,0,0,0,0,7,2,0
+1999/00,Chelsea,390,Chris Sutton,F,28,1,2,3,12,9,7,0,0,0,0,7,0,0
+1999/00,Chelsea,1679,Didier Deschamps,M,27,0,1,8,11,8,8,0,0,0,0,5,0,0
+1999/00,Chelsea,1145,Celestine Babayaro,D,25,0,0,11,13,7,5,0,0,0,0,3,0,0
+1999/00,Chelsea,1532,Albert Ferrer,D,25,0,3,10,11,9,5,0,0,0,0,4,0,0
+1999/00,Chelsea,1533,Marcel Desailly,D,23,1,0,10,10,6,7,0,0,0,0,2,1,0
+1999/00,Chelsea,1445,Emerson Thome,D,20,0,1,6,10,7,3,0,0,0,0,1,0,0
+1999/00,Chelsea,1149,Roberto Di Matteo,M,18,2,2,5,9,6,3,0,0,0,0,3,0,0
+1999/00,Chelsea,1147,Jon Harley,D,17,2,0,4,8,5,4,0,0,0,0,1,0,0
+1999/00,Chelsea,1680,Gabriele Ambrosetti,M,16,0,0,0,7,5,4,0,0,0,0,0,0,0
+1999/00,Chelsea,1352,Bernard Lambourde,D,15,2,0,5,7,2,6,0,0,0,0,3,0,0
+1999/00,Chelsea,1682,George Weah,F,11,3,3,3,6,3,2,0,0,0,0,0,0,0
+1999/00,Chelsea,1678,Jes Hogh,D,9,0,1,2,2,3,4,0,0,0,0,0,0,0
+1999/00,Chelsea,70,Graeme Le Saux,D,8,0,2,2,4,1,3,0,0,0,0,3,0,0
+1999/00,Chelsea,1536,Bjarne Goldbæk,M,6,0,0,0,3,1,2,0,0,0,0,0,0,0
+1999/00,Chelsea,1677,Mario Melchiot,D,5,0,1,1,2,1,2,0,0,0,0,0,0,0
+1999/00,Chelsea,1353,John Terry,D,4,0,0,1,2,1,1,0,0,0,0,0,0,0
+1999/00,Chelsea,1535,Samuele Dalla Bona,M,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+1999/00,Chelsea,1676,Carlo Cudicini,G,1,0,0,1,1,0,0,0,0,0,0,0,0,0
+1999/00,Chelsea,1534,Robert Wolleaston,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Coventry City,238,Gary McAllister,M,38,11,4,7,12,8,18,0,0,0,0,2,0,0
+1999/00,Coventry City,1358,Magnus Hedman,G,35,0,0,9,11,8,16,0,0,0,0,0,0,0
+1999/00,Coventry City,1687,Youssef Chippo,M,33,2,3,4,10,7,16,0,0,0,0,9,1,0
+1999/00,Coventry City,1688,Mustapha Hadji,M,33,6,7,6,11,7,15,0,0,0,0,5,0,0
+1999/00,Coventry City,1692,Robbie Keane,F,31,12,4,6,10,7,14,0,0,0,0,3,0,0
+1999/00,Coventry City,1033,Paul Telfer,D,30,0,0,6,10,8,12,0,0,0,0,2,0,0
+1999/00,Coventry City,154,Richard Shaw,D,29,0,0,6,8,5,16,0,0,0,0,3,0,0
+1999/00,Coventry City,1030,Paul Williams,D,28,1,0,6,8,8,12,0,0,0,0,4,0,0
+1999/00,Coventry City,46,Stephen Froggatt,M,26,1,2,5,7,7,12,0,0,0,0,5,0,0
+1999/00,Coventry City,245,Noel Whelan,F,26,1,2,5,8,4,14,0,0,0,0,3,0,0
+1999/00,Coventry City,1691,Cedric Roussel,F,22,6,6,3,8,4,10,0,0,0,0,1,0,0
+1999/00,Coventry City,1155,Gary Breen,D,21,0,0,3,6,5,10,0,0,0,0,2,0,0
+1999/00,Coventry City,1156,John Eustace,M,16,1,1,2,6,1,9,0,0,0,0,2,0,0
+1999/00,Coventry City,256,David Burrows,D,15,0,0,2,4,1,10,0,0,0,0,0,1,0
+1999/00,Coventry City,497,Carlton Palmer,D,15,1,0,5,6,5,4,0,0,0,0,4,0,0
+1999/00,Coventry City,1540,Barry Quinn,M,11,0,0,1,2,1,8,0,0,0,0,2,0,0
+1999/00,Coventry City,1370,Marc Edworthy,D,10,0,1,2,3,2,5,0,0,0,0,3,0,0
+1999/00,Coventry City,1685,Tomas Gustafsson,D,10,0,0,2,4,1,5,0,0,0,0,1,0,0
+1999/00,Coventry City,860,Marcus Hall,D,9,0,0,3,4,3,2,0,0,0,0,1,0,0
+1999/00,Coventry City,75,Colin Hendry,D,9,0,0,2,3,0,6,0,0,0,0,0,0,1
+1999/00,Coventry City,1689,Runar Normann,M,8,0,0,0,2,0,6,0,0,0,0,0,0,0
+1999/00,Coventry City,1543,John Aloisi,F,7,2,0,0,1,2,4,0,0,0,0,1,0,0
+1999/00,Coventry City,1690,Herlyn Zuniga,F,7,2,0,0,3,0,4,0,0,0,0,0,0,0
+1999/00,Coventry City,1539,Mohammed Konjic,D,4,0,0,1,1,1,2,0,0,0,0,1,0,0
+1999/00,Coventry City,1542,Gary McSheffrey,F,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+1999/00,Coventry City,122,Steve Ogrizovic,G,3,0,0,0,1,0,2,0,0,0,0,0,0,0
+1999/00,Coventry City,1362,Gavin Strachan,M,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+1999/00,Coventry City,1686,Robert Betts,M,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1999/00,Coventry City,1541,Paul Hall,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Coventry City,1082,Darren Huckerby,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Derby County,1698,Seth Johnson,M,36,1,4,8,8,10,18,0,0,0,0,13,0,0
+1999/00,Derby County,1169,Jacob Laursen,D,36,1,0,10,8,11,17,0,0,0,0,5,0,0
+1999/00,Derby County,1391,Rory Delap,M,34,8,4,10,9,9,16,0,0,0,0,6,1,0
+1999/00,Derby County,1177,Darryl Powell,M,31,2,1,10,9,9,13,0,0,0,0,6,0,0
+1999/00,Derby County,1546,Horacio Carbonari,D,29,2,0,9,7,10,12,0,0,0,0,10,0,1
+1999/00,Derby County,1545,Stefan Schnoor,D,29,0,1,6,9,8,12,0,0,0,0,4,2,0
+1999/00,Derby County,1161,Mart Poom,G,28,0,0,9,6,9,13,0,0,0,0,2,0,0
+1999/00,Derby County,1178,Dean Sturridge,F,25,6,0,1,5,7,13,0,0,0,0,3,0,0
+1999/00,Derby County,229,Tony Dorigo,D,23,0,0,3,5,6,12,0,0,0,0,4,0,0
+1999/00,Derby County,1553,Malcolm Christie,F,21,5,2,2,3,7,11,0,0,0,0,2,0,0
+1999/00,Derby County,1389,Steve Elliott,D,20,0,0,3,5,5,10,0,0,0,0,1,0,0
+1999/00,Derby County,732,Spencer Prior,D,20,0,0,3,5,4,11,0,0,0,0,6,0,0
+1999/00,Derby County,1393,Deon Burton,F,19,4,2,2,4,5,10,0,0,0,0,6,0,0
+1999/00,Derby County,1392,Stefano Eranio,M,19,0,0,1,4,4,11,0,0,0,0,4,0,1
+1999/00,Derby County,109,Craig Burley,M,18,5,1,6,5,8,5,0,0,0,0,7,0,0
+1999/00,Derby County,1058,Georgi Kinkladze,M,17,1,6,0,4,7,6,0,0,0,0,2,0,0
+1999/00,Derby County,1700,Branko Strupar,F,15,5,0,5,4,5,6,0,0,0,0,1,0,0
+1999/00,Derby County,942,Lars Bohinen,M,13,0,1,1,4,4,5,0,0,0,0,1,0,0
+1999/00,Derby County,1547,Vassilis Borbokis,D,12,0,1,1,3,2,7,0,0,0,0,2,0,0
+1999/00,Derby County,1227,Mikkel Beck,F,11,1,0,0,1,4,6,0,0,0,0,0,0,0
+1999/00,Derby County,890,Russell Hoult,G,10,0,0,2,3,2,5,0,0,0,0,1,0,0
+1999/00,Derby County,1394,Francesco Baiano,F,9,0,2,0,1,2,6,0,0,0,0,1,0,0
+1999/00,Derby County,1699,Esteban Fuertes,F,8,1,0,0,3,2,3,0,0,0,0,2,1,0
+1999/00,Derby County,1551,Adam Murray,M,8,0,0,0,2,2,4,0,0,0,0,1,0,0
+1999/00,Derby County,1552,Marvin Robinson,F,8,0,0,0,2,1,5,0,0,0,0,1,0,0
+1999/00,Derby County,1550,Kevin Harper,M,5,0,0,0,0,1,4,0,0,0,0,1,0,0
+1999/00,Derby County,1817,Avi Nimni,M,4,1,0,0,2,0,2,0,0,0,0,1,0,0
+1999/00,Derby County,1696,Lee Morris,F,3,0,0,0,1,0,2,0,0,0,0,0,0,0
+1999/00,Derby County,1549,Paul Boertien,M,2,0,0,0,1,1,0,0,0,0,0,0,0,0
+1999/00,Derby County,1548,Richard Jackson,D,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1999/00,Derby County,1695,Chris Riggott,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Everton,569,Nick Barmby,M,37,9,8,5,11,14,12,0,0,0,0,7,0,0
+1999/00,Everton,1559,John Collins,M,35,2,1,7,10,13,12,0,0,0,0,4,1,0
+1999/00,Everton,1558,David Weir,D,35,2,2,11,11,13,11,0,0,0,0,3,1,0
+1999/00,Everton,416,Paul Gerrard,G,34,0,0,9,9,13,12,0,0,0,0,3,0,0
+1999/00,Everton,181,David Unsworth,D,33,6,2,8,9,12,12,0,0,0,0,4,0,0
+1999/00,Everton,1184,Richard Dunne,D,31,0,0,8,10,11,10,0,0,0,0,4,2,0
+1999/00,Everton,272,Don Hutchison,M,31,6,4,7,10,12,9,0,0,0,0,7,1,0
+1999/00,Everton,1096,Mark Pembridge,M,31,2,5,6,10,12,9,0,0,0,0,4,0,0
+1999/00,Everton,1605,Richard Gough,D,29,1,1,9,10,9,10,0,0,0,0,3,0,0
+1999/00,Everton,25,Kevin Campbell,F,26,12,6,8,10,9,7,0,0,0,0,2,0,0
+1999/00,Everton,1185,Michael Ball,D,25,1,0,3,8,8,9,0,0,0,0,3,0,0
+1999/00,Everton,1402,Francis Jeffers,F,21,6,6,2,7,7,7,0,0,0,0,0,1,0
+1999/00,Everton,1701,Abel Xavier,D,20,0,0,4,8,6,6,0,0,0,0,0,0,0
+1999/00,Everton,1186,Danny Cadamarteri,F,17,1,2,1,4,6,7,0,0,0,0,2,0,0
+1999/00,Everton,1702,Joe-Max Moore,F,15,6,1,2,5,6,4,0,0,0,0,1,0,0
+1999/00,Everton,401,Scot Gemmill,M,14,1,0,1,4,5,5,0,0,0,0,1,0,0
+1999/00,Everton,842,Stephen Hughes,M,11,1,2,2,2,4,5,0,0,0,0,1,0,0
+1999/00,Everton,482,Mitch Ward,M,10,0,0,1,4,4,2,0,0,0,0,1,0,0
+1999/00,Everton,1557,Alex Cleland,D,9,0,0,0,3,3,3,0,0,0,0,1,0,0
+1999/00,Everton,339,Mark Hughes,F,9,1,1,0,2,2,5,0,0,0,0,2,0,0
+1999/00,Everton,174,Dave Watson,D,6,0,0,1,2,4,0,0,0,0,0,3,0,1
+1999/00,Everton,1396,Thomas Myhre,G,4,0,0,2,3,1,0,0,0,0,0,0,0,0
+1999/00,Everton,1187,Phil Jevons,F,3,0,1,1,1,0,2,0,0,0,0,0,0,0
+1999/00,Everton,849,Tommy Johnson,F,3,0,0,0,0,2,1,0,0,0,0,1,0,0
+1999/00,Everton,685,Tony Grant,M,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1999/00,Everton,1400,Jamie Milligan,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Everton,291,Terry Phelan,D,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1999/00,Everton,1554,Steve Simonsen,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Leeds United,146,Nigel Martyn,G,38,0,0,13,21,6,11,0,0,0,0,2,0,0
+1999/00,Leeds United,1049,Harry Kewell,M,36,10,4,11,19,6,11,0,0,0,0,6,0,0
+1999/00,Leeds United,1270,Michael Bridges,F,34,19,4,5,20,6,8,0,0,0,0,6,0,0
+1999/00,Leeds United,1565,Jonathan Woodgate,D,34,1,0,11,18,5,11,0,0,0,0,0,0,0
+1999/00,Leeds United,1190,Lee Bowyer,M,33,5,2,9,18,6,9,0,0,0,0,13,0,0
+1999/00,Leeds United,1045,Ian Harte,D,33,6,5,10,18,4,11,0,0,0,0,7,1,0
+1999/00,Leeds United,1082,Darren Huckerby,F,33,2,3,1,20,5,8,0,0,0,0,0,0,0
+1999/00,Leeds United,694,Gary Kelly,D,31,0,0,9,19,3,9,0,0,0,0,6,0,0
+1999/00,Leeds United,886,Lucas Radebe,D,31,0,0,11,18,5,8,0,0,0,0,2,0,1
+1999/00,Leeds United,1706,Eirik Bakke,M,29,2,1,3,15,3,11,0,0,0,0,7,0,0
+1999/00,Leeds United,1412,Alan Smith,M,26,4,3,3,14,4,8,0,0,0,0,5,1,0
+1999/00,Leeds United,1407,Stephen McPhail,M,24,2,4,6,12,5,7,0,0,0,0,0,0,0
+1999/00,Leeds United,80,Jason Wilcox,M,20,3,2,4,8,4,8,0,0,0,0,1,0,0
+1999/00,Leeds United,929,Danny Mills,D,17,1,1,8,10,5,2,0,0,0,0,5,0,0
+1999/00,Leeds United,243,David Batty,M,16,0,3,5,11,2,3,0,0,0,0,4,0,0
+1999/00,Leeds United,108,David Hopkin,M,14,1,1,2,9,2,3,0,0,0,0,1,0,0
+1999/00,Leeds United,669,Michael Duberry,D,13,1,0,3,7,2,4,0,0,0,0,4,1,0
+1999/00,Leeds United,938,Alf Inge Haaland,D,13,0,0,1,7,3,3,0,0,0,0,4,0,0
+1999/00,Leeds United,1411,Matthew Jones,M,11,0,2,3,7,1,3,0,0,0,0,2,0,0
+1999/00,Leeds United,1405,Martin Hiden,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Leicester City,1196,Matt Elliott,D,37,6,4,8,15,7,15,0,0,0,0,2,0,0
+1999/00,Leicester City,706,Robbie Savage,M,35,1,1,6,16,5,14,0,0,0,0,4,0,0
+1999/00,Leicester City,103,Frank Sinclair,D,34,0,2,7,15,5,14,0,0,0,0,7,1,2
+1999/00,Leicester City,193,Tony Cottee,F,33,13,1,4,14,6,13,0,0,0,0,1,0,0
+1999/00,Leicester City,670,Muzzy Izzet,M,32,8,3,7,14,4,14,0,0,0,0,3,0,0
+1999/00,Leicester City,1199,Neil Lennon,M,31,1,6,8,16,5,10,0,0,0,0,7,1,0
+1999/00,Leicester City,1014,Gerry Taggart,D,31,6,3,4,13,6,12,0,0,0,0,5,1,0
+1999/00,Leicester City,1201,Steve Guppy,M,30,2,7,8,15,4,11,0,0,0,0,2,0,1
+1999/00,Leicester City,519,Tim Flowers,G,29,0,0,4,13,5,11,0,0,0,0,1,0,0
+1999/00,Leicester City,453,Andy Impey,M,29,1,2,6,13,5,11,0,0,0,0,0,0,0
+1999/00,Leicester City,639,Phil Gilchrist,D,27,1,0,2,11,6,10,0,0,0,0,0,0,0
+1999/00,Leicester City,908,Emile Heskey,F,23,7,3,4,9,4,10,0,0,0,0,5,0,0
+1999/00,Leicester City,1569,Stefan Oakes,M,22,1,3,0,9,6,7,0,0,0,0,0,0,0
+1999/00,Leicester City,426,Ian Marshall,D,21,0,0,0,8,3,10,0,0,0,0,1,0,0
+1999/00,Leicester City,1417,Theo Zagorakis,M,17,1,1,0,6,5,6,0,0,0,0,2,0,0
+1999/00,Leicester City,384,Darren Eadie,M,16,0,0,1,6,3,7,0,0,0,0,0,0,0
+1999/00,Leicester City,1415,Pegguy Arphexad,G,11,0,0,3,4,3,4,0,0,0,0,0,0,0
+1999/00,Leicester City,894,Steve Walsh,D,11,0,0,0,4,2,5,0,0,0,0,2,0,0
+1999/00,Leicester City,627,Stan Collymore,F,6,4,1,0,2,1,3,0,0,0,0,1,0,0
+1999/00,Leicester City,1198,Stuart Campbell,M,4,0,1,0,1,1,2,0,0,0,0,0,0,0
+1999/00,Leicester City,1707,Danny Thomas,M,3,0,0,0,0,1,2,0,0,0,0,0,0,0
+1999/00,Leicester City,1418,Lawrie Dudfield,F,2,0,0,0,0,2,0,0,0,0,0,0,0,0
+1999/00,Leicester City,57,Graham Fenton,F,2,0,1,0,0,1,1,0,0,0,0,1,0,0
+1999/00,Leicester City,1349,Arnar Gunnlaugsson,F,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1999/00,Leicester City,1818,Tommy Goodwin,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Leicester City,1708,Jordan Stewart,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Liverpool,1710,Sami Hyypiä,D,38,2,2,15,19,10,9,0,0,0,0,2,0,0
+1999/00,Liverpool,915,Jamie Carragher,D,36,0,0,13,18,10,8,0,0,0,0,4,0,2
+1999/00,Liverpool,1709,Sander Westerveld,G,36,0,0,14,18,9,9,0,0,0,0,0,1,0
+1999/00,Liverpool,1205,Patrik Berger,M,34,9,3,13,16,9,9,0,0,0,0,2,0,0
+1999/00,Liverpool,1713,Titi Camara,F,33,9,1,1,17,8,8,0,0,0,0,7,0,0
+1999/00,Liverpool,259,Dominic Matteo,D,32,0,6,12,16,8,8,0,0,0,0,2,0,0
+1999/00,Liverpool,1575,Steven Gerrard,M,29,1,3,5,14,7,8,0,0,0,0,5,1,0
+1999/00,Liverpool,1335,Stéphane Henchoz,D,29,0,0,13,16,8,5,0,0,0,0,8,0,0
+1999/00,Liverpool,1595,Dietmar Hamann,M,28,1,2,10,14,8,6,0,0,0,0,6,0,0
+1999/00,Liverpool,1208,Michael Owen,F,27,11,3,2,12,9,6,0,0,0,0,2,0,0
+1999/00,Liverpool,1206,David Thompson,M,27,3,3,3,15,6,6,0,0,0,0,7,1,0
+1999/00,Liverpool,1423,Danny Murphy,M,23,3,2,0,13,6,4,0,0,0,0,3,0,0
+1999/00,Liverpool,1573,Vegard Heggem,D,22,1,0,1,11,5,6,0,0,0,0,0,0,0
+1999/00,Liverpool,262,Jamie Redknapp,M,22,3,1,7,10,5,7,0,0,0,0,4,0,0
+1999/00,Liverpool,1712,Erik Meijer,F,21,0,1,2,9,8,4,0,0,0,0,2,0,0
+1999/00,Liverpool,1711,Vladimir Smicer,M,21,1,4,2,12,4,5,0,0,0,0,1,0,0
+1999/00,Liverpool,1570,Rigobert Song,D,18,0,1,5,9,6,3,0,0,0,0,2,0,1
+1999/00,Liverpool,277,Robbie Fowler,F,14,3,0,1,5,3,6,0,0,0,0,1,0,0
+1999/00,Liverpool,908,Emile Heskey,F,12,3,1,4,5,4,3,0,0,0,0,0,0,0
+1999/00,Liverpool,41,Steve Staunton,D,12,0,1,2,6,2,4,0,0,0,0,2,1,0
+1999/00,Liverpool,1420,Brad Friedel,G,2,0,0,1,1,1,0,0,0,0,0,0,0,0
+1999/00,Liverpool,1576,Jon Newby,F,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1999/00,Liverpool,1425,Karl-Heinz Riedle,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Manchester United,1580,Jaap Stam,D,33,0,1,8,23,7,3,0,0,0,0,5,0,1
+1999/00,Manchester United,332,Nicky Butt,M,32,3,3,4,24,6,2,0,0,0,0,2,2,0
+1999/00,Manchester United,59,Dwight Yorke,M,32,20,3,6,24,6,2,0,0,0,0,1,0,0
+1999/00,Manchester United,331,David Beckham,M,31,6,15,6,22,6,3,0,0,0,0,6,0,0
+1999/00,Manchester United,336,Paul Scholes,M,31,9,5,7,25,3,3,0,0,0,0,7,0,1
+1999/00,Manchester United,1719,Mikaël Silvestre,D,31,0,0,9,22,6,3,0,0,0,0,0,0,0
+1999/00,Manchester United,335,Ryan Giggs,M,30,6,12,6,23,5,2,0,0,0,0,2,0,0
+1999/00,Manchester United,407,Roy Keane,M,29,5,1,10,23,4,2,0,0,0,0,7,1,0
+1999/00,Manchester United,921,Phil Neville,M,29,0,2,7,22,5,2,0,0,0,0,4,0,0
+1999/00,Manchester United,725,Andrew Cole,F,28,19,4,5,19,6,3,0,0,0,0,2,1,0
+1999/00,Manchester United,1217,Ole Gunnar Solskjær,F,28,12,7,3,19,6,3,0,0,0,0,2,0,0
+1999/00,Manchester United,576,Teddy Sheringham,F,27,5,6,3,19,6,2,0,0,0,0,0,0,0
+1999/00,Manchester United,315,Denis Irwin,D,25,3,1,7,16,6,3,0,0,0,0,1,0,0
+1999/00,Manchester United,32,Mark Bosnich,G,23,0,0,9,17,4,2,0,0,0,0,0,0,0
+1999/00,Manchester United,74,Henning Berg,D,22,1,0,5,17,4,1,0,0,0,0,2,0,2
+1999/00,Manchester United,321,Gary Neville,D,22,0,3,6,17,4,1,0,0,0,0,0,0,0
+1999/00,Manchester United,1209,Raimond van der Gouw,G,14,0,0,1,13,1,0,0,0,0,0,0,0,0
+1999/00,Manchester United,1216,Jordi Cruijff,M,8,3,0,0,6,2,0,0,0,0,0,1,0,0
+1999/00,Manchester United,1718,Quinton Fortune,M,6,2,1,2,6,0,0,0,0,0,0,0,0,0
+1999/00,Manchester United,922,Ronnie Wallwork,D,5,0,0,0,5,0,0,0,0,0,0,0,0,0
+1999/00,Manchester United,1429,Jonathan Greening,M,4,0,0,0,3,0,1,0,0,0,0,0,0,0
+1999/00,Manchester United,1714,Massimo Taibi,G,4,0,0,0,1,2,1,0,0,0,0,0,0,0
+1999/00,Manchester United,1426,Danny Higginbotham,D,3,0,0,0,3,0,0,0,0,0,0,0,0,0
+1999/00,Manchester United,1210,Ronny Johnsen,D,3,0,0,0,3,0,0,0,0,0,0,0,0,0
+1999/00,Manchester United,1428,Mark Wilson,M,3,0,0,0,2,0,1,0,0,0,0,0,0,0
+1999/00,Manchester United,1067,Michael Clegg,D,2,0,0,0,2,0,0,0,0,0,0,0,0,0
+1999/00,Manchester United,1065,Nick Culkin,G,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1999/00,Manchester United,1427,John Curtis,D,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1999/00,Manchester United,67,David May,D,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1999/00,Middlesbrough,1218,Mark Schwarzer,G,37,0,0,9,14,10,13,0,0,0,0,1,0,1
+1999/00,Middlesbrough,1587,Hamilton Ricard,F,34,12,3,1,12,10,12,0,0,0,0,7,0,0
+1999/00,Middlesbrough,326,Paul Ince,M,32,3,1,8,13,7,12,0,0,0,0,8,0,1
+1999/00,Middlesbrough,1070,Steve Vickers,D,32,0,1,5,12,10,10,0,0,0,0,5,0,0
+1999/00,Middlesbrough,488,Brian Deane,F,29,9,4,6,13,6,10,0,0,0,0,6,0,0
+1999/00,Middlesbrough,1222,Gianluca Festa,D,29,2,1,7,8,8,13,0,0,0,0,6,1,0
+1999/00,Middlesbrough,1727,Christian Ziege,D,29,6,6,6,12,8,9,0,0,0,0,9,1,0
+1999/00,Middlesbrough,1072,Juninho Paulista,M,28,4,2,4,9,9,10,0,0,0,0,1,0,0
+1999/00,Middlesbrough,363,Robbie Mustoe,M,28,0,0,2,10,7,11,0,0,0,0,4,0,0
+1999/00,Middlesbrough,349,Curtis Fleming,D,27,0,1,7,9,8,10,0,0,0,0,6,0,0
+1999/00,Middlesbrough,937,Colin Cooper,D,26,0,1,8,9,9,8,0,0,0,0,5,0,0
+1999/00,Middlesbrough,1076,Andy Campbell,F,25,4,2,2,8,6,11,0,0,0,0,0,0,0
+1999/00,Middlesbrough,320,Gary Pallister,D,21,1,0,6,7,5,9,0,0,0,0,5,0,0
+1999/00,Middlesbrough,1075,Mark Summerbell,M,19,0,0,5,6,7,6,0,0,0,0,4,0,1
+1999/00,Middlesbrough,931,Keith O'Neill,M,16,0,1,2,7,2,7,0,0,0,0,5,0,1
+1999/00,Middlesbrough,359,Phil Stamp,M,16,0,1,2,8,3,5,0,0,0,0,6,0,0
+1999/00,Middlesbrough,530,Neil Maddison,M,13,0,0,0,4,4,5,0,0,0,0,1,0,0
+1999/00,Middlesbrough,726,Alun Armstrong,F,12,1,0,0,5,2,5,0,0,0,0,0,0,0
+1999/00,Middlesbrough,1584,Robbie Stockdale,D,11,1,1,0,3,2,6,0,0,0,0,0,0,0
+1999/00,Middlesbrough,1586,Paul Gascoigne,M,8,1,1,0,3,1,4,0,0,0,0,1,1,0
+1999/00,Middlesbrough,1220,Jason Gavin,D,6,0,0,0,1,1,4,0,0,0,0,0,0,0
+1999/00,Middlesbrough,112,Andy Townsend,M,5,0,0,1,3,0,2,0,0,0,0,1,0,0
+1999/00,Middlesbrough,151,Dean Gordon,D,4,0,0,0,2,1,1,0,0,0,0,1,0,0
+1999/00,Middlesbrough,1728,Carlos Marinelli,M,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1999/00,Middlesbrough,1583,Marlon Beresford,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Middlesbrough,1224,Michael Cummins,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1999/00,Middlesbrough,1730,Sean Kilgannon,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1999/00,Middlesbrough,1226,Anthony Ormerod,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Newcastle United,89,Alan Shearer,F,37,23,7,12,14,9,14,0,0,0,0,2,1,0
+1999/00,Newcastle United,239,Gary Speed,M,36,9,3,12,13,9,14,0,0,0,0,6,0,0
+1999/00,Newcastle United,590,Warren Barton,D,34,0,3,8,13,7,14,0,0,0,0,5,1,0
+1999/00,Newcastle United,1740,Kieron Dyer,M,30,3,6,4,10,6,14,0,0,0,0,1,0,0
+1999/00,Newcastle United,721,Robert Lee,M,30,0,1,10,13,9,8,0,0,0,0,5,0,0
+1999/00,Newcastle United,1597,Nolberto Solano,M,30,3,15,3,10,7,13,0,0,0,0,6,0,0
+1999/00,Newcastle United,1436,Nikolaos Dabizas,D,29,3,0,10,12,9,8,0,0,0,0,6,1,0
+1999/00,Newcastle United,1590,Didier Domi,D,27,3,3,2,9,6,12,0,0,0,0,2,0,0
+1999/00,Newcastle United,1230,Aaron Hughes,D,27,2,2,7,11,6,10,0,0,0,0,0,0,0
+1999/00,Newcastle United,877,Duncan Ferguson,F,23,6,1,4,10,6,7,0,0,0,0,1,0,0
+1999/00,Newcastle United,1439,Temuri Ketsbaia,M,21,0,3,0,9,6,6,0,0,0,0,1,0,0
+1999/00,Newcastle United,87,Kevin Gallacher,F,20,2,0,2,9,7,4,0,0,0,0,0,0,0
+1999/00,Newcastle United,709,Steve Harper,G,18,0,0,5,8,5,5,0,0,0,0,0,0,0
+1999/00,Newcastle United,1433,Alessandro Pistone,D,15,1,0,5,5,8,2,0,0,0,0,1,0,0
+1999/00,Newcastle United,851,Shay Given,G,14,0,0,6,6,3,5,0,0,0,0,0,0,0
+1999/00,Newcastle United,1736,Alain Goma,D,14,0,0,2,3,1,10,0,0,0,0,5,0,0
+1999/00,Newcastle United,1596,Silvio Maric,M,13,0,0,0,4,4,5,0,0,0,0,0,0,0
+1999/00,Newcastle United,1735,Elena Marcelino,D,11,0,0,3,3,5,3,0,0,0,0,2,0,0
+1999/00,Newcastle United,1599,Paul Robinson,F,11,0,1,0,2,1,8,0,0,0,0,0,0,0
+1999/00,Newcastle United,714,Steve Howey,D,9,0,0,2,4,1,4,0,0,0,0,1,0,0
+1999/00,Newcastle United,1438,Jamie McClen,M,9,0,0,0,4,2,3,0,0,0,0,2,0,0
+1999/00,Newcastle United,1733,Hélder Cristóvão,D,8,1,0,3,5,2,1,0,0,0,0,2,0,0
+1999/00,Newcastle United,1593,Stephen Glass,M,7,1,0,0,3,3,1,0,0,0,0,0,0,0
+1999/00,Newcastle United,1820,Franck Dumas,D,6,0,0,2,1,3,2,0,0,0,0,1,0,0
+1999/00,Newcastle United,1739,Diego Gavilán,M,6,1,0,0,2,3,1,0,0,0,0,0,0,0
+1999/00,Newcastle United,1737,Fumaca,M,5,0,0,0,1,2,2,0,0,0,0,0,0,0
+1999/00,Newcastle United,1437,Andy Griffin,D,3,1,0,0,2,1,0,0,0,0,0,0,0,0
+1999/00,Newcastle United,1731,John Karelse,G,3,0,0,1,0,2,1,0,0,0,0,0,0,0
+1999/00,Newcastle United,707,Tommy Wright,G,3,0,0,0,0,0,3,0,0,0,0,0,0,0
+1999/00,Newcastle United,1591,David Beharall,D,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1999/00,Newcastle United,1351,Laurent Charvet,D,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+1999/00,Newcastle United,1592,Carl Serrant,D,2,0,0,0,0,0,2,0,0,0,0,0,0,0
+1999/00,Sheffield Wednesday,1744,Gilles De Bilde,F,38,10,3,4,8,7,23,0,0,0,0,3,0,0
+1999/00,Sheffield Wednesday,1447,Niclas Alexandersson,M,37,5,4,5,8,6,23,0,0,0,0,2,0,0
+1999/00,Sheffield Wednesday,750,Des Walker,D,37,0,0,6,8,7,22,0,0,0,0,0,0,0
+1999/00,Sheffield Wednesday,125,Peter Atherton,D,35,1,0,7,8,7,20,0,0,0,0,5,0,0
+1999/00,Sheffield Wednesday,1615,Wim Jonk,M,30,3,8,6,8,6,16,0,0,0,0,4,0,0
+1999/00,Sheffield Wednesday,179,Andy Hinchcliffe,D,29,1,2,6,7,7,15,0,0,0,0,0,0,0
+1999/00,Sheffield Wednesday,953,Ian Nolan,D,29,0,1,5,7,5,17,0,0,0,0,4,0,0
+1999/00,Sheffield Wednesday,1745,Gerald Sibon,F,28,5,1,2,6,5,17,0,0,0,0,2,0,0
+1999/00,Sheffield Wednesday,1614,Danny Sonner,M,27,0,1,1,4,6,17,0,0,0,0,5,1,0
+1999/00,Sheffield Wednesday,1241,Andy Booth,F,23,2,3,4,5,4,14,0,0,0,0,3,0,0
+1999/00,Sheffield Wednesday,1612,Steven Haslam,D,23,0,0,3,7,3,13,0,0,0,0,0,0,0
+1999/00,Sheffield Wednesday,1449,Richard Cresswell,F,20,1,0,0,3,2,15,0,0,0,0,3,0,0
+1999/00,Sheffield Wednesday,1446,Petter Rudi,M,20,2,0,1,1,3,16,0,0,0,0,2,0,0
+1999/00,Sheffield Wednesday,708,Pavel Srnicek,G,20,0,0,4,5,4,11,0,0,0,0,0,0,1
+1999/00,Sheffield Wednesday,495,Kevin Pressman,G,19,0,0,3,3,3,13,0,0,0,0,1,0,0
+1999/00,Sheffield Wednesday,1454,Alan Quinn,M,19,3,2,3,6,3,10,0,0,0,0,3,0,0
+1999/00,Sheffield Wednesday,1445,Emerson Thome,D,17,0,0,1,1,3,13,0,0,0,0,3,0,0
+1999/00,Sheffield Wednesday,749,Lee Briscoe,D,16,0,1,0,2,5,9,0,0,0,0,1,0,0
+1999/00,Sheffield Wednesday,1742,Simon Donnelly,M,12,1,1,0,3,2,7,0,0,0,0,2,0,0
+1999/00,Sheffield Wednesday,1240,Benito Carbone,F,7,2,0,0,0,1,6,0,0,0,0,0,0,0
+1999/00,Sheffield Wednesday,186,Barry Horne,M,7,0,0,1,3,1,3,0,0,0,0,0,0,0
+1999/00,Sheffield Wednesday,231,Jon Newsome,D,6,0,0,0,0,1,5,0,0,0,0,1,0,0
+1999/00,Sheffield Wednesday,1616,Philip Scott,M,5,0,0,0,1,1,3,0,0,0,0,1,0,0
+1999/00,Sheffield Wednesday,1448,Mark McKeever,M,2,0,0,0,1,1,0,0,0,0,0,0,0,0
+1999/00,Sheffield Wednesday,1743,Phil O'Donnell,M,1,0,0,0,0,0,1,0,0,0,0,1,0,0
+1999/00,Southampton,1748,Dean Richards,D,35,2,0,10,11,7,17,0,0,0,0,4,1,2
+1999/00,Southampton,1623,Marian Pahars,F,33,13,3,8,12,8,13,0,0,0,0,4,0,0
+1999/00,Southampton,1621,Hassan Kachloul,M,32,5,1,5,7,8,17,0,0,0,0,9,0,0
+1999/00,Southampton,528,Jason Dodd,D,31,0,2,9,9,8,14,0,0,0,0,5,0,0
+1999/00,Southampton,1455,Paul Jones,G,31,0,0,8,9,7,15,0,0,0,0,0,0,0
+1999/00,Southampton,958,Matt Oakley,M,31,3,3,7,9,8,14,0,0,0,0,3,0,0
+1999/00,Southampton,1246,Claus Lundekvam,D,27,0,2,7,9,4,14,0,0,0,0,3,1,1
+1999/00,Southampton,523,Francis Benali,D,26,0,0,5,7,6,13,0,0,0,0,4,0,1
+1999/00,Southampton,1749,Jo Tessem,M,25,4,0,7,8,4,13,0,0,0,0,0,0,0
+1999/00,Southampton,1360,Trond Egil Soltvedt,M,24,1,4,2,8,4,12,0,0,0,0,0,0,0
+1999/00,Southampton,1249,Kevin Davies,F,23,6,3,6,8,4,11,0,0,0,0,7,1,0
+1999/00,Southampton,79,Stuart Ripley,M,23,1,6,4,7,5,11,0,0,0,0,1,0,0
+1999/00,Southampton,812,Chris Marsden,M,21,0,1,6,9,3,9,0,0,0,0,6,0,0
+1999/00,Southampton,339,Mark Hughes,F,20,1,2,3,5,4,11,0,0,0,0,8,0,0
+1999/00,Southampton,1458,Wayne Bridge,D,19,1,2,5,7,3,9,0,0,0,0,0,0,0
+1999/00,Southampton,1005,James Beattie,F,18,0,0,1,3,5,10,0,0,0,0,2,0,0
+1999/00,Southampton,533,Matthew Le Tissier,M,18,3,5,1,4,3,11,0,0,0,0,3,0,0
+1999/00,Southampton,1306,Luís Boa Morte,M,14,1,1,1,5,2,7,0,0,0,0,1,1,0
+1999/00,Southampton,1747,Tahar El-Khalej,D,11,1,0,4,4,2,5,0,0,0,0,3,0,0
+1999/00,Southampton,1243,Neil Moss,G,9,0,0,3,3,1,5,0,0,0,0,0,0,0
+1999/00,Southampton,1619,Patrick Colleter,D,8,0,0,2,3,1,4,0,0,0,0,2,1,0
+1999/00,Southampton,710,John Beresford,D,3,0,0,0,2,0,1,0,0,0,0,0,0,0
+1999/00,Southampton,1056,Scott Hiley,D,3,0,0,0,1,1,1,0,0,0,0,0,0,0
+1999/00,Southampton,1250,Egil Ostenstad,F,3,1,0,1,2,0,1,0,0,0,0,2,0,0
+1999/00,Southampton,1622,Dani Rodrigues,M,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+1999/00,Southampton,1620,Garry Monk,D,2,0,0,1,1,0,1,0,0,0,0,0,0,1
+1999/00,Southampton,1624,Shayne Bradley,F,1,0,0,0,0,0,1,0,0,0,0,1,0,0
+1999/00,Southampton,1245,Richard Dryden,D,1,0,0,0,0,0,1,0,0,0,0,0,0,1
+1999/00,Southampton,1823,Marco Almeida,D,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Sunderland,304,Niall Quinn,F,37,14,8,1,16,10,11,0,0,0,0,6,0,0
+1999/00,Sunderland,1751,Thomas Sørensen,G,37,0,1,9,16,10,11,0,0,0,0,1,0,0
+1999/00,Sunderland,1768,Kevin Phillips,F,36,30,4,8,16,9,11,0,0,0,0,6,0,0
+1999/00,Sunderland,424,Chris Makin,D,34,1,0,9,15,9,10,0,0,0,0,11,1,0
+1999/00,Sunderland,1253,Michael Gray,D,33,0,4,9,15,8,10,0,0,0,0,0,0,0
+1999/00,Sunderland,1752,Paul Butler,D,32,1,1,9,12,8,12,0,0,0,0,6,0,0
+1999/00,Sunderland,769,Nicky Summerbee,M,32,1,5,8,14,8,10,0,0,0,0,3,0,0
+1999/00,Sunderland,843,Stefan Schwarz,M,27,1,2,5,12,8,7,0,0,0,0,11,0,0
+1999/00,Sunderland,1259,Alex Rae,M,26,3,5,3,10,7,9,0,0,0,0,8,2,0
+1999/00,Sunderland,1260,Darren Williams,D,25,0,1,0,11,6,8,0,0,0,0,2,0,0
+1999/00,Sunderland,1042,Gavin McCann,M,24,4,3,2,10,6,8,0,0,0,0,8,0,0
+1999/00,Sunderland,1762,Eric Roy,M,24,0,2,1,11,4,9,0,0,0,0,2,0,1
+1999/00,Sunderland,9,Steve Bould,D,20,0,0,6,10,5,5,0,0,0,0,3,1,0
+1999/00,Sunderland,1757,Kevin Kilbane,M,20,1,1,0,5,6,9,0,0,0,0,2,0,0
+1999/00,Sunderland,1754,Jody Craddock,D,19,0,0,2,7,5,7,0,0,0,0,1,0,0
+1999/00,Sunderland,1255,Darren Holloway,D,15,0,1,0,6,3,6,0,0,0,0,1,0,0
+1999/00,Sunderland,742,Danny Dichio,F,12,0,1,0,9,1,2,0,0,0,0,0,0,0
+1999/00,Sunderland,1261,Kevin Ball,M,11,0,0,2,7,2,2,0,0,0,0,4,0,0
+1999/00,Sunderland,1401,John Oster,M,10,0,1,0,3,3,4,0,0,0,0,1,0,0
+1999/00,Sunderland,1767,Michael Reddy,F,8,1,0,0,2,3,3,0,0,0,0,0,0,0
+1999/00,Sunderland,1758,Paul Thirlwell,M,8,0,0,1,3,4,1,0,0,0,0,2,0,0
+1999/00,Sunderland,1753,Thomas Helmer,D,2,0,0,0,0,1,1,0,0,0,0,1,0,0
+1999/00,Sunderland,1759,Thomas Butler,M,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1999/00,Sunderland,1765,Carsten Fredgaard,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Sunderland,1763,Chris Lumsdon,M,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Sunderland,393,Andy Marriott,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Sunderland,1766,Tyson Nuñez,F,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1999/00,Tottenham Hotspur,544,Ian Walker,G,38,0,0,8,15,8,15,0,0,0,0,1,0,0
+1999/00,Tottenham Hotspur,587,Chris Perry,D,37,1,0,8,14,8,15,0,0,0,0,8,0,0
+1999/00,Tottenham Hotspur,1083,David Ginola,F,36,3,7,4,15,7,14,0,0,0,0,3,0,0
+1999/00,Tottenham Hotspur,1277,Steffen Iversen,F,36,14,8,6,14,8,14,0,0,0,0,5,0,0
+1999/00,Tottenham Hotspur,776,Stephen Carr,D,34,3,3,6,14,7,13,0,0,0,0,5,0,1
+1999/00,Tottenham Hotspur,167,Chris Armstrong,F,31,14,1,5,11,8,12,0,0,0,0,4,0,1
+1999/00,Tottenham Hotspur,557,Sol Campbell,D,29,0,3,8,11,5,13,0,0,0,0,6,0,0
+1999/00,Tottenham Hotspur,880,Mauricio Taricco,D,29,0,5,5,12,6,11,0,0,0,0,10,0,0
+1999/00,Tottenham Hotspur,1628,Steffen Freund,M,27,0,2,5,11,5,11,0,0,0,0,9,0,0
+1999/00,Tottenham Hotspur,78,Tim Sherwood,M,27,8,1,3,12,5,10,0,0,0,0,9,0,0
+1999/00,Tottenham Hotspur,566,Darren Anderton,M,22,3,5,3,8,4,10,0,0,0,0,5,0,0
+1999/00,Tottenham Hotspur,973,Oyvind Leonhardsen,M,22,4,1,4,11,5,6,0,0,0,0,3,0,0
+1999/00,Tottenham Hotspur,961,Stephen Clemence,M,20,1,1,4,6,4,10,0,0,0,0,5,0,0
+1999/00,Tottenham Hotspur,1464,Luke Young,D,20,0,0,2,8,7,5,0,0,0,0,2,0,0
+1999/00,Tottenham Hotspur,1275,Allan Nielsen,M,14,0,1,1,3,5,6,0,0,0,0,2,1,0
+1999/00,Tottenham Hotspur,1468,José Dominguez,F,12,0,0,0,5,2,5,0,0,0,0,0,0,0
+1999/00,Tottenham Hotspur,462,Les Ferdinand,F,9,2,0,0,3,3,3,0,0,0,0,3,0,0
+1999/00,Tottenham Hotspur,1645,Willem Korsten,M,9,0,0,1,2,1,6,0,0,0,0,1,0,0
+1999/00,Tottenham Hotspur,551,Justin Edinburgh,D,8,0,0,1,2,1,5,0,0,0,0,3,0,0
+1999/00,Tottenham Hotspur,1772,Matthew Etherington,M,5,0,1,0,2,1,2,0,0,0,0,0,0,0
+1999/00,Tottenham Hotspur,1274,Ramon Vega,D,5,1,1,0,2,0,3,0,0,0,0,0,0,0
+1999/00,Tottenham Hotspur,586,John Scales,D,4,0,0,0,2,1,1,0,0,0,0,0,0,0
+1999/00,Tottenham Hotspur,1775,Simon Davies,M,3,0,0,0,0,1,2,0,0,0,0,0,0,0
+1999/00,Tottenham Hotspur,388,Ruel Fox,F,3,0,0,0,2,0,1,0,0,0,0,1,0,0
+1999/00,Tottenham Hotspur,1627,Ledley King,D,3,0,0,1,2,0,1,0,0,0,0,0,0,0
+1999/00,Tottenham Hotspur,1774,John Piercy,M,3,0,0,0,2,0,1,0,0,0,0,0,0,0
+1999/00,Tottenham Hotspur,1770,Gary Doherty,D,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+1999/00,Tottenham Hotspur,1776,Dave McEwen,F,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1999/00,Watford,202,Steve Palmer,D,38,0,0,6,6,6,26,0,0,0,0,0,0,0
+1999/00,Watford,1779,Robert Page,D,36,1,2,6,6,6,24,0,0,0,0,12,0,0
+1999/00,Watford,1790,Micah Hyde,M,34,3,4,5,5,6,23,0,0,0,0,7,1,0
+1999/00,Watford,1780,Paul Robinson,D,32,0,1,5,6,4,22,0,0,0,0,9,0,0
+1999/00,Watford,616,Alec Chamberlain,G,27,0,0,3,3,4,20,0,0,0,0,0,0,0
+1999/00,Watford,1787,Richard Johnson,M,23,3,1,2,3,3,17,0,0,0,0,4,0,1
+1999/00,Watford,1794,Michel Ngonge,F,23,5,1,0,4,3,16,0,0,0,0,1,0,0
+1999/00,Watford,1799,Tommy Smith,F,22,2,3,2,3,4,15,0,0,0,0,1,0,0
+1999/00,Watford,1825,Mark Williams,D,22,1,0,3,3,2,17,0,0,0,0,8,1,1
+1999/00,Watford,40,Neil Cox,D,21,0,1,2,3,5,13,0,0,0,0,1,1,0
+1999/00,Watford,1783,Nordin Wooter,F,20,1,1,1,2,5,13,0,0,0,0,0,0,0
+1999/00,Watford,1789,Peter Kennedy,M,18,1,2,4,4,2,12,0,0,0,0,4,0,0
+1999/00,Watford,1824,Clint Easton,D,17,0,0,2,3,3,11,0,0,0,0,2,0,0
+1999/00,Watford,1781,Nigel Gibbs,D,17,0,1,1,3,2,12,0,0,0,0,0,0,0
+1999/00,Watford,1791,Heidar Helguson,F,16,6,2,1,2,4,10,0,0,0,0,6,0,0
+1999/00,Watford,1646,Charlie Miller,M,14,0,2,0,0,2,12,0,0,0,0,3,0,0
+1999/00,Watford,1797,Allan Smart,F,14,5,1,1,2,3,9,0,0,0,0,1,0,0
+1999/00,Watford,1788,David Perpetuini,D,13,1,1,2,2,3,8,0,0,0,0,4,0,0
+1999/00,Watford,1784,Alexandre Bonnot,M,12,0,0,1,1,2,9,0,0,0,0,1,0,0
+1999/00,Watford,1792,Dominic Foley,F,12,1,0,0,3,1,8,0,0,0,0,0,0,0
+1999/00,Watford,1795,Tommy Mooney,F,12,2,1,3,4,1,7,0,0,0,0,2,0,0
+1999/00,Watford,1777,Chris Day,G,11,0,0,3,3,2,6,0,0,0,0,0,0,0
+1999/00,Watford,936,Des Lyttle,D,11,0,0,2,2,0,9,0,0,0,0,1,0,0
+1999/00,Watford,1785,Jóhann Gudmundsson,M,9,0,0,0,1,0,8,0,0,0,0,1,0,0
+1999/00,Watford,1778,Darren Ward,D,9,1,1,2,1,2,6,0,0,0,0,0,0,0
+1999/00,Watford,1826,Xavier Gravelaine,F,7,2,2,0,1,1,5,0,0,0,0,1,1,0
+1999/00,Watford,1796,Nick Wright,F,4,0,0,0,1,0,3,0,0,0,0,0,0,0
+1999/00,Watford,1798,Gifton Noel-Williams,F,3,0,1,0,0,2,1,0,0,0,0,1,0,0
+1999/00,Watford,1786,Adrian Bakalli,M,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1999/00,Watford,1782,James Panayi,D,2,0,0,0,0,1,1,0,0,0,0,0,0,0
+1999/00,Watford,1793,Stephen Brooker,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,West Ham United,741,Trevor Sinclair,M,36,7,8,10,14,10,12,0,0,0,0,5,1,0
+1999/00,West Ham United,1179,Paulo Wanchope,F,35,12,5,7,13,9,13,0,0,0,0,7,0,0
+1999/00,West Ham United,800,Frank Lampard,M,34,7,3,9,15,9,10,0,0,0,0,4,0,0
+1999/00,West Ham United,1111,Rio Ferdinand,D,33,0,0,8,13,10,10,0,0,0,0,2,0,0
+1999/00,West Ham United,1451,Paolo Di Canio,F,30,16,13,6,14,8,8,0,0,0,0,6,0,0
+1999/00,West Ham United,1635,Marc Vivien Foe,M,25,1,2,5,9,8,8,0,0,0,0,6,2,0
+1999/00,West Ham United,293,Steve Lomas,M,25,1,4,6,10,5,10,0,0,0,0,5,1,0
+1999/00,West Ham United,1164,Igor Stimac,D,24,1,0,5,9,6,9,0,0,0,0,9,1,0
+1999/00,West Ham United,1636,Marc Keller,M,23,0,1,4,8,6,9,0,0,0,0,4,0,0
+1999/00,West Ham United,1632,Joe Cole,M,22,1,1,2,8,8,6,0,0,0,0,1,0,0
+1999/00,West Ham United,1080,Shaka Hislop,G,22,0,0,5,9,7,6,0,0,0,0,0,1,0
+1999/00,West Ham United,768,John Moncur,M,22,1,0,3,8,4,10,0,0,0,0,7,1,0
+1999/00,West Ham United,1630,Javier Margas,D,18,1,1,3,7,7,4,0,0,0,0,1,1,0
+1999/00,West Ham United,855,Scott Minto,D,18,0,2,2,9,6,3,0,0,0,0,2,0,0
+1999/00,West Ham United,785,Steve Potts,D,17,0,0,4,6,5,6,0,0,0,0,1,0,0
+1999/00,West Ham United,558,Neil Ruddock,D,15,0,1,2,5,5,5,0,0,0,0,4,0,0
+1999/00,West Ham United,200,Craig Forrest,G,11,0,0,3,5,2,4,0,0,0,0,0,0,0
+1999/00,West Ham United,928,Paul Kitson,F,10,0,0,0,3,4,3,0,0,0,0,0,0,0
+1999/00,West Ham United,1634,Michael Carrick,M,8,1,2,1,5,1,2,0,0,0,0,0,0,0
+1999/00,West Ham United,1805,Frederic Kanoute,F,8,2,1,2,3,1,4,0,0,0,0,1,0,0
+1999/00,West Ham United,395,Stuart Pearce,D,8,0,0,2,6,1,1,0,0,0,0,3,0,0
+1999/00,West Ham United,1472,Stephen Bywater,G,4,0,0,1,1,1,2,0,0,0,0,0,0,0
+1999/00,West Ham United,396,Gary Charles,D,4,0,0,0,3,0,1,0,0,0,0,1,0,1
+1999/00,West Ham United,783,Ian Feuer,G,3,0,0,1,2,0,1,0,0,0,0,1,0,0
+1999/00,West Ham United,1631,Adam Newton,D,2,0,0,0,1,0,1,0,0,0,0,0,0,0
+1999/00,West Ham United,1802,Shaun Byrne,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
+1999/00,West Ham United,1514,Sasa Ilic,G,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,West Ham United,96,Ian Pearce,D,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1999/00,Wimbledon,972,Kenny Cunningham,D,37,0,4,5,7,12,18,0,0,0,0,1,0,0
+1999/00,Wimbledon,1118,Jason Euell,F,37,4,5,5,7,12,18,0,0,0,0,8,1,0
+1999/00,Wimbledon,583,Neil Sullivan,G,37,0,0,5,6,12,19,0,0,0,0,1,0,0
+1999/00,Wimbledon,1806,Trond Andersen,D,36,0,3,5,6,12,18,0,0,0,0,4,0,0
+1999/00,Wimbledon,809,Marcus Gayle,F,36,7,4,4,7,12,17,0,0,0,0,2,0,0
+1999/00,Wimbledon,1284,Carl Cort,F,34,9,6,3,7,11,16,0,0,0,0,2,0,0
+1999/00,Wimbledon,807,Alan Kimble,D,28,0,4,3,6,8,14,0,0,0,0,4,0,0
+1999/00,Wimbledon,598,Robbie Earle,M,25,3,0,4,6,8,11,0,0,0,0,2,0,0
+1999/00,Wimbledon,1371,Hermann Hreidarsson,D,24,1,0,5,5,7,12,0,0,0,0,3,0,0
+1999/00,Wimbledon,1807,Walid Badir,D,21,1,0,1,3,6,12,0,0,0,0,2,0,0
+1999/00,Wimbledon,1282,Ben Thatcher,D,20,0,2,3,4,9,7,0,0,0,0,4,0,0
+1999/00,Wimbledon,967,Michael Hughes,M,19,2,1,0,3,5,11,0,0,0,0,2,0,0
+1999/00,Wimbledon,1477,Carl Leaburn,F,18,0,0,0,3,5,10,0,0,0,0,0,0,0
+1999/00,Wimbledon,600,Neal Ardley,M,17,2,1,0,4,4,9,0,0,0,0,0,0,0
+1999/00,Wimbledon,589,Dean Blackwell,D,17,0,0,0,2,4,11,0,0,0,0,3,1,0
+1999/00,Wimbledon,844,John Hartson,F,16,9,4,1,4,8,4,0,0,0,0,3,2,0
+1999/00,Wimbledon,1475,Andy Roberts,D,16,0,1,0,3,6,7,0,0,0,0,1,0,0
+1999/00,Wimbledon,1808,Martin Andresen,M,14,1,0,0,4,3,7,0,0,0,0,1,0,0
+1999/00,Wimbledon,1810,Andreas Lund,F,12,2,1,0,1,1,10,0,0,0,0,1,0,0
+1999/00,Wimbledon,1476,Damien Francis,M,9,0,0,0,1,1,7,0,0,0,0,1,0,0
+1999/00,Wimbledon,1283,Duncan Jupp,D,9,0,0,0,1,2,6,0,0,0,0,1,0,0
+1999/00,Wimbledon,1827,Chris Willmott,D,7,0,0,1,2,1,4,0,0,0,0,0,0,0
+1999/00,Wimbledon,820,Tore Pedersen,D,6,0,0,0,1,3,2,0,0,0,0,2,0,0
+1999/00,Wimbledon,1639,Gareth Ainsworth,M,2,2,0,0,0,1,1,0,0,0,0,1,0,0
+1999/00,Wimbledon,1809,Wayne Gray,F,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+1999/00,Wimbledon,628,Paul Heald,G,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+1999/00,Wimbledon,1478,Ceri Hughes,M,1,0,0,0,0,1,0,0,0,0,0,0,0,0
