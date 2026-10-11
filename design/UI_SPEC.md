@@ -103,7 +103,7 @@ Today a bronze or silver card is rarely wanted. Options, best first:
 ## 8b2. Classic button (build 16, chosen 11 Oct)
 
 - "Shuffle": three real relegated club cards (random from the pool each visit) fanned on the right, running off the edge; the title, line and a green "Spin for a club" pill on the left.
-- Every 10 to 15 seconds (random) the back card slides round to the front; the card that ends up at the back is swapped for another club while it is behind, so new clubs keep appearing. Paused when the page is hidden; off with reduced motion. Options page: `design/prototype/fan-options.html` (alt 1).
+- Every 10 to 15 seconds (random) the back card slides round to the front; the card that ends up at the back is swapped for another club while it is behind, so new clubs keep appearing. The swap is a 0.9s cross-fade, never a snap (build 18). The three cards always show clearly different club colours (accents at least 110 apart in RGB). Paused when the page is hidden; off with reduced motion. Options page: `design/prototype/fan-options.html` (alt 1).
 - Still open: how the other mode blocks open (`design/prototype/home-full.html`, options X, Y, Z).
 
 ## 8c. Squad screen (build 15, chosen 11 Oct)

@@ -234,4 +234,6 @@
 .fr-fan-s { position: absolute; left: 50%; top: 50%; transform-origin: 50% 130%; transition: transform .7s cubic-bezier(.5,0,.2,1); }
 .fr-spin { display: inline-flex; align-items: center; gap: 8px; height: 42px; margin-top: 14px; padding: 0 18px; border-radius: 21px; background: var(--green-1); color: var(--on-green); font: 900 italic 15px/1 var(--font); }
 .fr-spin svg { width: 16px; height: 16px; }
+.fr-fan-c { display: block; }
+.fr-fan-c.fr-fan-in { position: absolute; left: 0; top: 0; }
 @media (prefers-reduced-motion: reduce) { .fr-fan-s { transition: none; } }
