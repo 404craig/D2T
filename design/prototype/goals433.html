@@ -3,8 +3,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
 <link rel="stylesheet" href="core/base.css">
 <style>
-  /* Layout: phones (the visible 390 x 700 of Safari) in wrapping rows: pitch options, a turn step by step, a playable phone, then reveal and tally options. */
-  :root { color-scheme: dark; --bg: #000000; --fg: #FFFFFF; --soft: #BDBDC6; --muted: #8E8E99; --rule: #1E1E22; --line: #26262C; --panel: #0E0E10; --green: #12F06C; --mode: #FF7A1A; --mode-t: #FFB27A; }
+  /* Layout: phones (the visible 390 x 700 of Safari) in wrapping rows: pitch options, a turn step by step, a playable phone, the three endings, then reveal options. */
+  :root { color-scheme: dark; --bg: #000000; --fg: #FFFFFF; --soft: #BDBDC6; --muted: #8E8E99; --rule: #1E1E22; --line: #26262C; --panel: #0E0E10; --green: #12F06C; --mode: #FF7A1A; --mode-t: #FFB27A; --over: #8E8E99; --gold: #FFC83D; }
   html, body { height: auto; }
   body { background: #08080A; color: var(--fg); font-family: 'Exo 2', Arial, sans-serif; }
   .page { max-width: 1720px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 30px; }
@@ -17,56 +17,64 @@
   .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: var(--mode); }
   .opt-h h3 { font: 900 italic 21px/1.05 'Exo 2', sans-serif; margin: 3px 0; }
   .opt-h p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; min-height: 57px; }
+  .replay { align-self: flex-start; font: 800 12px/1 'Exo 2'; color: #000; background: var(--mode); border-radius: 14px; padding: 7px 12px; }
   button { font-family: inherit; cursor: pointer; border: 0; background: none; color: inherit; padding: 0; }
+  select { background: #111; color: #fff; border: 1px solid #333; border-radius: 8px; padding: 4px 8px; font: inherit; }
   .phone { position: relative; width: 390px; max-width: 100%; height: 700px; border-radius: 26px; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,0.6); display: flex; flex-direction: column; }
 
   /* chrome */
-  .tb { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px 4px; }
+  .tb { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px 2px; }
   .tb .lg { height: 22px; color: #FFF; }
   .acct { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel); display: grid; place-items: center; }
   .acct svg { width: 17px; height: 17px; }
-  .tally { display: flex; align-items: center; justify-content: space-between; padding: 4px 16px 8px; }
-  .tally .l { display: flex; flex-direction: column; }
-  .tally .l small { font-size: 10.5px; font-weight: 800; letter-spacing: 0.14em; color: var(--mode-t); }
-  .tally .l span { font-size: 12px; color: var(--soft); font-weight: 600; }
-  .tally .r { display: flex; align-items: baseline; gap: 6px; }
-  .tally .r b { font: 900 italic 34px/1 'Exo 2'; font-variant-numeric: tabular-nums; }
-  .tally .r i { font-style: normal; font-size: 12px; font-weight: 800; color: var(--mode-t); }
   .bar { margin-top: auto; display: flex; align-items: center; gap: 10px; padding: 8px 16px 12px; }
   .circ { width: 54px; height: 54px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel); display: grid; place-items: center; position: relative; flex-shrink: 0; }
   .circ .logo-mask { width: 30px; color: #FFF; }
   .circ svg { width: 22px; height: 22px; }
   .circ .n { position: absolute; top: -3px; right: -3px; min-width: 18px; height: 18px; border-radius: 9px; background: var(--mode); color: #000; font: 900 11px/18px 'Exo 2'; text-align: center; }
-  .spin { flex: 1; height: 56px; border-radius: 28px; background: var(--mode); color: #0A0A0A; display: flex; align-items: center; justify-content: center; gap: 10px; font: 900 italic 21px/1 'Exo 2'; text-transform: uppercase; }
+  .spin { flex: 1; height: 56px; border-radius: 28px; background: var(--mode); color: #0A0A0A; display: flex; align-items: center; justify-content: center; gap: 10px; font: 900 italic 21px/1 'Exo 2'; text-transform: uppercase; transition: opacity .2s; }
   .spin .logo-mask { width: 26px; color: #0A0A0A; }
   .spin.off { opacity: 0.45; }
 
+  /* ---------- progress bar tally (chosen) ---------- */
+  .tally { padding: 4px 16px 16px; }
+  .tally .top { display: flex; justify-content: space-between; align-items: baseline; }
+  .tally .top small { font-size: 10.5px; font-weight: 800; letter-spacing: 0.14em; color: var(--mode-t); }
+  .tally .top small em { font-style: normal; color: var(--muted); letter-spacing: 0.04em; font-weight: 700; margin-left: 6px; }
+  .tally .top span { display: flex; align-items: baseline; gap: 6px; }
+  .tally .top b { font: 900 italic 28px/1 'Exo 2'; font-variant-numeric: tabular-nums; }
+  .tally .top i { font-style: normal; font-size: 12px; font-weight: 800; color: var(--mode-t); }
+  .tally .top i.overt { color: #C4C4CC; }
+  .tally .top i.exact { color: var(--gold); }
+  .track { position: relative; height: 10px; border-radius: 5px; background: #1B1B21; margin-top: 8px; }
+  .track .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; background: linear-gradient(90deg, #FF4D1A, var(--mode)); width: 0; }
+  .track .ovr { position: absolute; top: 0; bottom: 0; border-radius: 0 5px 5px 0; background: repeating-linear-gradient(135deg, #8E8E99 0 4px, #6E6E78 4px 8px); width: 0; }
+  .track .mark { position: absolute; top: -4px; bottom: -4px; width: 2px; margin-left: -1px; background: #FFF; border-radius: 1px; }
+  .track .mark::after { content: '433'; position: absolute; bottom: -11px; right: 4px; font: 900 italic 9px/1 'Exo 2'; color: #FFF; opacity: 0.7; }
+  .track.glow .fill { box-shadow: 0 0 14px rgba(255,200,61,0.9); background: linear-gradient(90deg, #FFB020, var(--gold)); }
+
   /* pitch */
-  .pitch { position: relative; margin: 0 12px; height: 372px; border-radius: 18px; overflow: hidden; isolation: isolate; }
+  .pitch { position: relative; margin: 0 12px; height: 366px; border-radius: 18px; overflow: hidden; isolation: isolate; flex-shrink: 0; }
   .pitch .lines { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; }
   .pitch .slotp { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 2px; z-index: 2; }
   .pitch .nm { font: 900 italic 9.5px/1 'Exo 2'; text-transform: uppercase; padding: 2px 5px; border-radius: 4px; background: rgba(0,0,0,0.72); white-space: nowrap; }
   .modename { position: absolute; left: 0; right: 0; z-index: 1; text-align: center; pointer-events: none; }
-  /* P1 night stadium */
   .p1 { background: radial-gradient(90% 55% at 50% -10%, rgba(255,255,255,0.22), rgba(255,255,255,0) 60%), repeating-linear-gradient(180deg, #0D3A24 0 9%, #0A311E 9% 18%); }
   .p1 .lines { stroke: rgba(255,255,255,0.28); }
-  .p1 .modename { top: 50%; transform: translateY(-50%); font: 900 italic 40px/1 'Exo 2'; color: rgba(255,255,255,0.10); letter-spacing: -0.01em; }
-  /* P2 chalk tactics board */
+  .p1 .modename { top: 50%; transform: translateY(-50%); font: 900 italic 40px/1 'Exo 2'; color: rgba(255,255,255,0.10); }
   .p2 { background: radial-gradient(120% 90% at 50% 0%, #1E2126 0%, #0D0E10 70%); }
-  .p2 .lines { stroke: rgba(255,255,255,0.55); stroke-dasharray: 0; filter: url(#chalk); }
+  .p2 .lines { stroke: rgba(255,255,255,0.55); filter: url(#chalk); }
   .p2 .modename { top: 50%; transform: translateY(-50%); font: 900 italic 22px/1 'Exo 2'; color: rgba(255,255,255,0.22); letter-spacing: 0.3em; }
-  /* P3 goal net */
   .p3 { background: linear-gradient(180deg, #170B05 0%, #0B0604 100%); }
   .p3::before { content: ''; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(45deg, rgba(255,122,26,0.12) 0 1px, transparent 1px 14px), repeating-linear-gradient(-45deg, rgba(255,122,26,0.12) 0 1px, transparent 1px 14px); -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,0.25) 100%); mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,0.25) 100%); }
   .p3 .lines { stroke: rgba(255,178,122,0.35); }
   .p3 .modename { top: 50%; transform: translateY(-50%); font: 900 italic 30px/1 'Exo 2'; color: rgba(255,122,26,0.28); letter-spacing: 0.08em; }
-  /* P4 mown stripes, diagonal, with the name cut into the grass */
   .p4 { background: repeating-linear-gradient(135deg, #12452A 0 34px, #0E3A23 34px 68px); }
   .p4 .lines { stroke: rgba(255,255,255,0.32); }
   .p4 .modename { top: 50%; transform: translateY(-50%) rotate(-8deg); font: 900 italic 150px/1 'Exo 2'; color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,0.24); }
 
   /* shirts */
-  .shirt { position: relative; width: var(--sw); aspect-ratio: 1 / 1.02; flex-shrink: 0; }
+  .shirt { position: relative; width: var(--sw); aspect-ratio: 1 / 1.02; flex-shrink: 0; transition: transform .22s cubic-bezier(.3,1.4,.5,1), opacity .22s; }
   .shirt svg { width: 100%; height: 100%; display: block; overflow: visible; }
   .shirt .body { fill: var(--fill); stroke: var(--trimc); stroke-width: 2.4; stroke-linejoin: round; }
   .shirt .trim { fill: none; stroke: var(--trimc); stroke-width: 4; stroke-linecap: round; }
@@ -79,54 +87,45 @@
   .shirt.myst text { fill: #4A4A56; }
   .shirt.sel { transform: translateY(-6px) scale(1.06); }
   .shirt.dim { transform: scale(0.94); opacity: 0.55; }
-  .shirt { transition: transform .22s cubic-bezier(.3,1.4,.5,1), opacity .22s; }
   .shirt .tagc { position: absolute; left: 50%; top: -4px; width: 16px; height: 16px; margin-left: -8px; object-fit: contain; }
-  /* the three below the pitch */
   .trio { display: flex; justify-content: center; gap: 12px; padding: 12px 16px 0; position: relative; }
   .trio .cell { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-  .trio .cap { font-size: 10.5px; font-weight: 800; color: var(--muted); letter-spacing: 0.06em; height: 14px; }
+  .trio .cap { font-size: 10.5px; font-weight: 800; color: var(--muted); letter-spacing: 0.06em; height: 14px; white-space: nowrap; }
   .reelwin { position: relative; width: 104px; height: 108px; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%); }
-  .reelwin .strip { position: absolute; left: 4px; top: 0; display: flex; flex-direction: column; gap: 6px; }
-  .reelwin.blur .strip { filter: blur(0 6px); filter: url(#vblur); }
+  .reelwin.landed { -webkit-mask-image: none; mask-image: none; overflow: visible; }
+  .reelwin .strip { position: absolute; left: 4px; top: 6px; display: flex; flex-direction: column; gap: 6px; will-change: transform; }
   .hint { text-align: center; font-size: 11.5px; color: var(--muted); padding-top: 6px; height: 16px; }
 
-  /* reveal effects on a placed shirt */
-  .burst { position: absolute; left: 50%; top: 50%; width: 0; height: 0; pointer-events: none; z-index: 5; }
+  /* effects */
+  .burst { position: absolute; left: 50%; top: 50%; width: 0; height: 0; pointer-events: none; z-index: 30; }
   .burst i { position: absolute; left: 0; top: 0; width: 6px; height: 6px; border-radius: 2px; background: var(--c, var(--mode)); }
-  .ring { position: absolute; left: 50%; top: 50%; width: 20px; height: 20px; margin: -10px; border-radius: 50%; border: 3px solid var(--mode); pointer-events: none; z-index: 4; }
-  .plus { position: absolute; z-index: 6; font: 900 italic 18px/1 'Exo 2'; color: var(--mode); pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.7); }
-
-  /* reveal and tally option panels */
+  .ring { position: absolute; width: 20px; height: 20px; margin: -10px; border-radius: 50%; border: 3px solid var(--mode); pointer-events: none; z-index: 29; }
+  .plus { position: absolute; z-index: 31; font: 900 italic 18px/1 'Exo 2'; color: var(--mode); pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.7); }
+  .flyer { position: absolute; z-index: 40; pointer-events: none; }
+  .confetti { position: absolute; inset: 0; z-index: 50; pointer-events: none; }
+  .bigmsg { position: absolute; left: 0; right: 0; z-index: 45; text-align: center; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .bigmsg b { font: 900 italic 120px/0.9 'Exo 2'; letter-spacing: -0.03em; color: var(--gold); text-shadow: 0 6px 30px rgba(0,0,0,0.6), 0 0 40px rgba(255,200,61,0.5); }
+  .bigmsg span { font: 900 italic 22px/1 'Exo 2'; text-transform: uppercase; letter-spacing: 0.06em; padding: 6px 14px; border-radius: 10px; background: rgba(0,0,0,0.75); }
+  .bigmsg.close b { font-size: 64px; color: #FFF; text-shadow: 0 6px 24px rgba(0,0,0,0.7); }
+  .bigmsg.close span { color: var(--mode-t); }
+  .bigmsg.over b { font-size: 72px; color: #C4C4CC; }
+  .dimmer { position: absolute; inset: 0; z-index: 44; background: rgba(0,0,0,0.55); pointer-events: none; }
   .panel { width: 390px; max-width: 100%; height: 300px; border-radius: 22px; background: #000; box-shadow: 0 0 0 1px #222228; position: relative; overflow: hidden; display: grid; place-items: center; }
-  .flipwrap { perspective: 600px; }
-  .flipper { position: relative; transform-style: preserve-3d; }
-  .flipper .face { backface-visibility: hidden; }
-  .flipper .face.back { position: absolute; inset: 0; transform: rotateY(180deg); }
-  .flap { display: inline-flex; gap: 4px; }
-  .flap span { display: inline-block; width: 38px; height: 52px; border-radius: 6px; background: #17171C; box-shadow: inset 0 -26px 0 rgba(0,0,0,0.25); font: 900 italic 40px/52px 'Exo 2'; text-align: center; color: #FFF; }
-  .tvar { width: 390px; max-width: 100%; border-radius: 18px; background: #000; box-shadow: 0 0 0 1px #222228; padding: 14px 16px; }
-  .t2 .track { height: 10px; border-radius: 5px; background: #1B1B21; overflow: hidden; margin-top: 8px; position: relative; }
-  .t2 .track i { position: absolute; left: 0; top: 0; bottom: 0; width: 95.8%; background: linear-gradient(90deg, #FF4D1A, var(--mode)); border-radius: 5px; }
-  .t2 .track b { position: absolute; right: 0; top: -3px; bottom: -3px; width: 2px; background: #FFF; }
-  .t3 { display: flex; align-items: center; gap: 14px; }
-  .t3 svg { width: 76px; height: 76px; }
   @media (prefers-reduced-motion: reduce) { .shirt { transition: none; } }
 </style>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <filter id="vblur"><feGaussianBlur stdDeviation="0 7"/></filter>
   <filter id="chalk"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="1" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter>
 </defs></svg>
 <div class="page">
   <div class="head">
     <h1>433 Goals</h1>
-    <p>A mockup of the 433 Goals mode: fill a 4-3-3 one shirt at a time from three spun players, and see how close your XI's Premier League career goals get to 433. Shirts are in each player's club colours (the club he scored most Premier League goals for) with his surname on the back. The goal number stays hidden until you place him. All names, clubs and goals are real (every Premier League player with 60+ games); the rules here are my reading of your brief, so treat the target and turn order as placeholders.</p>
+    <p>Round two. The tally is now the progress bar, and it runs past 433 in grey if you overshoot. Numbers sit higher on the shirts, where they are printed. The reels now slow down and settle smoothly instead of freezing. And there are three endings: so close, exactly 433, and blown past. Names, clubs and Premier League career goals are real (every Premier League player with 60+ games); the rules are still my reading of your brief.</p>
   </div>
-
-  <section class="sec"><h2>Pitch options</h2><p>Each one looks different from the Classic pitch and says the mode on the pitch itself. The mode gets its own colour, orange, as Classic uses your club's colour and Dare2Dream uses purple.</p><div class="row" id="pitches"></div></section>
-  <section class="sec"><h2>A turn, step by step</h2><p>Ready, spinning, picking, then the reveal. Shown on pitch option 1.</p><div class="row" id="steps"></div></section>
-  <section class="sec"><h2>Try it</h2><p>Tap Spin, tap a shirt to pick it (it grows, the others shrink), then tap it again or drag it onto the lit shirt on the pitch. Respin on the left, home on the right. Cycle the reveal style with the switch above the phone.</p><div class="row" id="play"></div></section>
+  <section class="sec"><h2>Pitch options</h2><p>Each one says the mode on the pitch. Orange is this mode's colour.</p><div class="row" id="pitches"></div></section>
+  <section class="sec"><h2>A turn, step by step</h2><p>Ready, spinning, picking, then the reveal.</p><div class="row" id="steps"></div></section>
+  <section class="sec"><h2>Try it</h2><p>Spin, tap a shirt to pick him, then tap again or drag him onto the glowing shirt. He flies to the pitch, the shirt bursts, his goals appear and the bar fills. Fill all 11 to see the ending. "Fill for me" plays the turns for you.</p><div class="row" id="play"></div></section>
+  <section class="sec"><h2>The three endings</h2><p>When the 11th shirt is filled. Real XIs that land on each result. Press Replay to see it again.</p><div class="row" id="endings"></div></section>
   <section class="sec"><h2>Reveal options</h2><p>What happens when a shirt lands on the pitch. Each panel loops.</p><div class="row" id="reveals"></div></section>
-  <section class="sec"><h2>Goal tally options</h2><p>The running total and how far it is from 433.</p><div class="row" id="tallies"></div></section>
 </div>
 <script src="data/data.js"></script>
 <script src="data/goals433.js"></script>
@@ -134,7 +133,8 @@
 <script src="core/cards.js"></script>
 <script>
 (function () {
-  const D = D2T.data, P = window.D2T_433, TARGET = 433;
+  const D = D2T.data, P = window.D2T_433, TARGET = 433, reduced = D2T.reduced();
+  const ALL = [].concat(P.GK, P.DEF, P.MID, P.FWD), byName = (n) => ALL.find((p) => p.name === n);
   const hexrgb = (h) => { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255]; };
   const lum = (h) => hexrgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }).reduce((t, v, i) => t + v * [0.2126, 0.7152, 0.0722][i], 0);
   const contrast = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
@@ -142,75 +142,122 @@
     const ink = contrast(c.accent, c.ink) >= 3 ? c.ink : (lum(c.accent) > 0.4 ? '#0A0A0A' : '#FFFFFF');
     return { fill: c.accent, trim: c.ink === c.accent ? ink : c.ink, ink, crest: c.crest }; };
   const SHIRT = 'M31 9 L42 4 Q50 11 58 4 L69 9 L95 24 L85 44 L74 38 L74 96 L26 96 L26 38 L15 44 L5 24 Z';
-  // back of a shirt: surname across the shoulders, goals (once revealed) as the number
+  // back of a shirt: surname across the shoulders, then the number where a number is printed (upper back)
   function shirt(opts) {
     const w = opts.w || 48, cls = opts.cls || '';
     let k = { fill: '#222', trim: '#444', ink: '#fff' }, top = '', mid = '', crest = '';
     if (opts.player) { k = kit(opts.player.club); crest = opts.tag ? `<img class="tagc" src="${k.crest}" alt="">` : ''; }
-    if (opts.state === 'empty' || opts.state === 'next') mid = `<text x="50" y="66" font-size="${opts.pos.length > 2 ? 20 : 24}">${opts.pos}</text>`;
-    if (opts.state === 'myst') mid = `<text x="50" y="72" font-size="44">?</text>`;
+    if (opts.state === 'empty' || opts.state === 'next') mid = `<text x="50" y="64" font-size="${opts.pos.length > 2 ? 20 : 24}">${opts.pos}</text>`;
+    if (opts.state === 'myst') mid = `<text x="50" y="70" font-size="44">?</text>`;
     if (opts.player) {
-      if (w >= 60) {} 
-      const sur = opts.player.sur.toUpperCase(), fs = Math.min(15, 150 / Math.max(6, sur.length));
-      top = w < 60 ? '' : `<text x="50" y="33" font-size="${fs}" textLength="${Math.min(56, sur.length * fs * 0.62)}" lengthAdjust="spacingAndGlyphs">${D2T.esc(sur)}</text>`;
-      if (opts.goals != null) mid = `<text class="gnum" x="50" y="80" font-size="${String(opts.goals).length > 2 ? 29 : 40}">${opts.goals}</text>`;
+      const sur = opts.player.sur.toUpperCase(), fs = Math.min(13, 140 / Math.max(6, sur.length));
+      top = w < 60 ? '' : `<text x="50" y="27" font-size="${fs}" textLength="${Math.min(52, sur.length * fs * 0.62)}" lengthAdjust="spacingAndGlyphs">${D2T.esc(sur)}</text>`;
+      if (opts.goals != null) { const big = String(opts.goals).length > 2; mid = `<text class="gnum" x="50" y="${w < 60 ? 64 : 63}" font-size="${big ? 28 : 36}" style="transform-box:fill-box;transform-origin:center">${opts.goals}</text>`; }
     }
     const st = opts.state === 'empty' ? 'empty' : opts.state === 'next' ? 'empty next' : opts.state === 'myst' ? 'myst' : '';
     return `<div class="shirt ${st} ${cls}" style="--sw:${w}px;--fill:${k.fill};--trimc:${k.trim};--ink:${k.ink}" ${opts.attr || ''}>${crest}<svg viewBox="0 0 100 100" aria-hidden="true"><path class="body" d="${SHIRT}"/><path class="trim" d="M42 4 Q50 11 58 4"/><path class="trim" d="M85 44 L95 24 M15 44 L5 24" stroke-width="3"/>${top}${mid}</svg></div>`;
   }
-  // 4-3-3 slots: [label, broad position, x%, y%]
   const SLOTS = [['GK', 'GK', 50, 88], ['LB', 'DEF', 12, 68], ['CB', 'DEF', 37, 71], ['CB', 'DEF', 63, 71], ['RB', 'DEF', 88, 68], ['CM', 'MID', 22, 45], ['CM', 'MID', 50, 47], ['CM', 'MID', 78, 45], ['LW', 'FWD', 18, 19], ['ST', 'FWD', 50, 16], ['RW', 'FWD', 82, 19]];
   const LINES = `<svg class="lines" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="3" y="2.5" width="94" height="95" rx="1.5" stroke-width="0.5"/><line x1="3" y1="50" x2="97" y2="50" stroke-width="0.5"/><rect x="26" y="2.5" width="48" height="14" stroke-width="0.5"/><rect x="38" y="2.5" width="24" height="5" stroke-width="0.5"/><rect x="26" y="83.5" width="48" height="14" stroke-width="0.5"/><rect x="38" y="92.5" width="24" height="5" stroke-width="0.5"/></svg>`;
   const CIRCLE = '<span style="position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px;border:1.4px solid rgba(255,255,255,0.25);border-radius:50%"></span>';
   const NAMES = { p1: '433 GOALS', p2: '433 GOALS', p3: '433 GOALS', p4: '433' };
-  function pitch(style, filled, nextIdx, revealed) {
-    return `<div class="pitch ${style}">${LINES}${style === 'p2' ? '' : CIRCLE}<div class="modename">${NAMES[style]}</div>
+  const pitch = (style, filled, nextIdx) => `<div class="pitch ${style}">${LINES}${style === 'p2' ? '' : CIRCLE}<div class="modename">${NAMES[style]}</div>
       ${SLOTS.map(([lab, pos, x, y], i) => { const f = filled[i];
-        const inner = f ? shirt({ w: 52, player: f, goals: revealed === false && i === filled.lastIdx ? null : f.goals, tag: true }) + `<span class="nm">${D2T.esc(f.sur)}</span>` : shirt({ w: 52, state: i === nextIdx ? 'next' : 'empty', pos: lab });
+        const inner = f ? shirt({ w: 52, player: f, goals: f.goals, tag: true }) + `<span class="nm">${D2T.esc(f.sur)}</span>` : shirt({ w: 52, state: i === nextIdx ? 'next' : 'empty', pos: lab });
         return `<div class="slotp" data-slot="${i}" style="left:${x}%;top:${y}%">${inner}</div>`; }).join('')}</div>`;
-  }
   const ACCT = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.6-3.6 4.6-5.2 8-5.2s6.4 1.6 8 5.2"/></svg>';
   const HOME = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></svg>';
   const top = () => `<div class="tb">${D2T.logo('short', { cls: 'lg', style: 'height:22px' })}<span class="acct">${ACCT}</span></div>`;
-  const tally = (total, placed) => `<div class="tally"><div class="l"><small>433 GOALS</small><span>${placed} of 11 shirts filled</span></div><div class="r"><b class="tnum">${total}</b><i class="taway">${total >= TARGET ? 'TARGET HIT' : (TARGET - total) + ' away'}</i></div></div>`;
-  const bar = (label, respins, off) => `<div class="bar"><button class="circ rs">${D2T.logo('emblemLine')}<span class="n">${respins}</span></button><button class="spin${off ? ' off' : ''}">${D2T.logo('emblem')}<span class="lbl">${label}</span></button><button class="circ hm">${HOME}</button></div>`;
-  const trioMyst = () => `<div class="trio">${[0, 1, 2].map(() => `<div class="cell"><div class="reelwin">${`<div class="strip" style="top:6px">${shirt({ w: 96, state: 'myst' })}</div>`}</div><span class="cap"></span></div>`).join('')}</div>`;
 
-  // deterministic sample picks for the static screens
-  const pick = (pos, n, seed) => { const L = P[pos]; const out = []; let s = seed; while (out.length < n) { s = (s * 9301 + 49297) % 233280; const c = L[Math.floor(s / 233280 * Math.min(L.length, 220))]; if (!out.includes(c)) out.push(c); } return out; };
-  const XI = [pick('GK', 1, 3)[0], ...pick('DEF', 4, 7), ...pick('MID', 3, 11), ...pick('FWD', 3, 5)];
-  const partial = (n) => { const f = {}; XI.slice(0, n).forEach((p, i) => { f[i] = p; }); f.lastIdx = n - 1; return f; };
-  const sum = (f) => Object.keys(f).filter((k) => k !== 'lastIdx').reduce((t, k) => t + f[k].goals, 0);
+  // ---------- progress bar ----------
+  // Under 433: orange fills towards the white 433 line at the right. Over: the line moves in to 433/total and the extra shows as grey.
+  const tally = (total, placed) => `<div class="tally"><div class="top"><small>433 GOALS<em>${placed} of 11</em></small><span><b class="tnum">${total}</b><i class="taway">${gapText(total)}</i></span></div>
+    <div class="track"><span class="ovr"></span><span class="fill"></span><span class="mark"></span></div></div>`;
+  const gapText = (t) => t === TARGET ? 'exactly 433' : t < TARGET ? (TARGET - t) + ' away' : (t - TARGET) + ' over';
+  function barState(t) { if (t <= TARGET) return { fill: t / TARGET, mark: 1, ovr: 0 }; const m = TARGET / t; return { fill: m, mark: m, ovr: 1 - m }; }
+  function paintBar(host, t) {
+    const tr = host.querySelector('.track'), s = barState(t);
+    tr.querySelector('.fill').style.width = (s.fill * 100) + '%';
+    tr.querySelector('.mark').style.left = (s.mark * 100) + '%';
+    const o = tr.querySelector('.ovr'); o.style.left = (s.mark * 100) + '%'; o.style.width = (s.ovr * 100) + '%';
+    const g = host.querySelector('.taway'); g.textContent = gapText(t); g.className = 'taway' + (t > TARGET ? ' overt' : t === TARGET ? ' exact' : '');
+  }
+  // count the number and the bar up together; crossing 433 = race past the line, burst on it, then the bar re-scales
+  function tickTo(host, from, to, done) {
+    const num = host.querySelector('.tnum'), tr = host.querySelector('.track');
+    if (reduced) { num.textContent = to; paintBar(host, to); done && done(); return; }
+    const crosses = from <= TARGET && to > TARGET, dur = crosses ? 1500 : 950, t0 = performance.now();
+    const fill = tr.querySelector('.fill'), mark = tr.querySelector('.mark'), ovr = tr.querySelector('.ovr');
+    let burstDone = false;
+    const step = (now) => {
+      const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3), v = Math.round(from + (to - from) * e);
+      num.textContent = v;
+      const g = host.querySelector('.taway'); g.textContent = gapText(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : '');
+      if (!crosses) paintBar(host, v);
+      else {
+        // phase 1 (to 55%): orange runs out past the line to beyond the track; phase 2: everything settles into the new scale
+        const runEnd = Math.min(1.08, to / TARGET);
+        if (p < 0.55) { const q = p / 0.55, w = (from / TARGET) + (runEnd - from / TARGET) * (1 - Math.pow(1 - q, 2)); fill.style.width = (w * 100) + '%'; mark.style.left = '100%'; ovr.style.width = '0%';
+          if (!burstDone && w >= 1) { burstDone = true; const r = tr.getBoundingClientRect(), hr = host.getBoundingClientRect(); burstAt(host, r.right - hr.left, r.top - hr.top + 5, true); tr.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(1.8)' }, { transform: 'scaleY(1)' }], { duration: 380 }); } }
+        else { const q = (p - 0.55) / 0.45, k = 1 - Math.pow(1 - q, 3), s = barState(to);
+          const f0 = runEnd, m0 = 1; fill.style.width = ((f0 + (s.fill - f0) * k) * 100) + '%'; mark.style.left = ((m0 + (s.mark - m0) * k) * 100) + '%';
+          ovr.style.left = mark.style.left; ovr.style.width = (s.ovr * k * 100) + '%'; }
+      }
+      if (p < 1) requestAnimationFrame(step); else { paintBar(host, to); done && done(); }
+    };
+    requestAnimationFrame(step);
+  }
 
-  // ---------- pitch options ----------
-  const PITCHES = [['p1', 'Night stadium', 'Classic’s mown stripes under a floodlight glow from the top, with 433 GOALS painted faintly across the middle.'],
-    ['p2', 'Chalk tactics board', 'A dark board with hand-drawn chalk lines, like a manager’s whiteboard. The mode name is chalked along the top.'],
-    ['p3', 'Goal net', 'Black and burnt orange with a goal-net mesh fading down the pitch: this mode is all about goals. Orange lines and the name in faint orange across the middle.'],
-    ['p4', 'Big 433 in the grass', 'Diagonal mown stripes with a huge outlined 433 cut into the grass behind the team.']];
-  const ready = (style) => `<div class="phone">${top()}${tally(0, 0)}${pitch(style, {}, 0)}${trioMyst()}<div class="hint">Spin for three goalkeepers</div>${bar('Spin', 3)}</div>`;
-  document.getElementById('pitches').innerHTML = PITCHES.map(([k, n, d], i) => `<div class="opt"><div class="opt-h"><span class="tag">PITCH ${i + 1}</span><h3>${n}</h3><p>${d}</p></div>${ready(k)}</div>`).join('');
+  const bar = (label, respins, off) => `<div class="bar"><button class="circ rs" aria-label="Respin">${D2T.logo('emblemLine')}<span class="n">${respins}</span></button><button class="spin${off ? ' off' : ''}">${D2T.logo('emblem')}<span class="lbl">${label}</span></button><button class="circ hm" aria-label="Home">${HOME}</button></div>`;
+  const trioMyst = () => `<div class="trio">${[0, 1, 2].map(() => `<div class="cell"><div class="reelwin"><div class="strip">${shirt({ w: 96, state: 'myst' })}</div></div><span class="cap"></span></div>`).join('')}</div>`;
 
-  // ---------- steps ----------
-  const four = partial(4), fourT = sum(four);
-  const cands = pick('DEF', 3, 41);
-  const trioCands = (sel, blur) => `<div class="trio">${cands.map((c, i) => `<div class="cell"><div class="reelwin${blur ? ' blur' : ''}"><div class="strip" style="top:${blur ? -150 - i * 60 : 6}px">${blur ? pick('DEF', 4, 90 + i).map((p) => shirt({ w: 96, player: p })).join('') : shirt({ w: 96, player: c, cls: sel == null ? '' : sel === i ? 'sel' : 'dim' })}</div></div><span class="cap">${blur ? '' : D2T.esc(c.club)}</span></div>`).join('')}</div>`;
-  const revealPitch = () => { const f = partial(5); f[4] = cands[1]; return f; };
-  const rp = revealPitch(), rpT = fourT + cands[1].goals;
-  const STEPS = [
-    ['1 · READY', 'Four shirts filled. The next open shirt (RB) glows orange; three mystery shirts wait below.', `<div class="phone">${top()}${tally(fourT, 4)}${pitch('p1', four, 4)}${trioMyst()}<div class="hint">Spin for three defenders</div>${bar('Spin', 3)}</div>`],
-    ['2 · SPINNING', 'Shirts race past in each reel with motion blur, landing left, middle, right, like the club spin. No goals on the backs.', `<div class="phone">${top()}${tally(fourT, 4)}${pitch('p1', four, 4)}${trioCands(null, true)}<div class="hint"></div>${bar('Spinning', 3, true)}</div>`],
-    ['3 · PICKED', 'Tap a shirt: it grows a little and the other two shrink. Tap again or drag it onto the glowing shirt.', `<div class="phone">${top()}${tally(fourT, 4)}${pitch('p1', four, 4)}${trioCands(1)}<div class="hint">Tap again or drag onto RB</div>${bar('Pick ' + cands[1].sur, 3)}</div>`],
-    ['4 · REVEAL', `He lands, the shirt bursts, his ${cands[1].goals} Premier League goals appear as the number and the total ticks up to ${rpT}.`, `<div class="phone reveal-demo">${top()}${tally(rpT, 5)}${pitch('p1', rp, 5)}${trioMyst()}<div class="hint">Spin for three defenders</div>${bar('Spin', 3)}</div>`]
-  ];
-  document.getElementById('steps').innerHTML = STEPS.map(([t, d, h]) => `<div class="opt"><div class="opt-h"><span class="tag">${t}</span><h3>${t.split(' · ')[1].toLowerCase().replace(/^./, (m) => m.toUpperCase())}</h3><p>${d}</p></div>${h}</div>`).join('');
+  // ---------- reels: transform-only, speed-based blur, a soft overshoot and settle (no freeze, no re-render on landing) ----------
+  let reelUid = 0;
+  function runReels(wins, targets, pos, opts = {}) {
+    const H = 102, base = 1250, stagger = 420;
+    return new Promise((resolve) => {
+      let landed = 0;
+      wins.forEach((w, i) => {
+        const strip = w.querySelector('.strip');
+        const filler = []; while (filler.length < 16) { const L = P[pos]; const c = L[Math.floor(Math.random() * Math.min(L.length, 260))]; if (c !== targets[i]) filler.push(c); }
+        strip.innerHTML = filler.concat([targets[i]]).map((p) => shirt({ w: 96, player: p })).join('');
+        const id = 'rb' + (++reelUid);
+        w.insertAdjacentHTML('afterbegin', `<svg width="0" height="0" style="position:absolute"><filter id="${id}" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="0 0"/></filter></svg>`);
+        const blur = w.querySelector('feGaussianBlur');
+        strip.style.filter = `url(#${id})`;
+        const D = filler.length * H, T = base + i * stagger;
+        if (reduced) { strip.style.transform = `translateY(${-D}px)`; finish(); return; }
+        const t0 = performance.now(); let lastY = 0, lastT = t0;
+        // ease: quick start, long fast run, smooth stop (quartic out), then a small spring past and back
+        const frame = (now) => {
+          const t = now - t0; let y;
+          if (t < T) { const u = t / T; y = D * (1 - Math.pow(1 - u, 4)); }
+          else { const s = (t - T) / 1000; y = D + 9 * Math.exp(-9 * s) * Math.sin(16 * s); }
+          const v = Math.abs(y - lastY) / Math.max(1, now - lastT) * 16; lastY = y; lastT = now;
+          blur.setAttribute('stdDeviation', `0 ${Math.min(9, Math.max(0, v * 0.22 - 0.6)).toFixed(2)}`);
+          strip.style.transform = `translateY(${-y}px)`;
+          if (t < T + 520) requestAnimationFrame(frame);
+          else { strip.style.transform = `translateY(${-D}px)`; blur.setAttribute('stdDeviation', '0 0'); finish(); }
+          if (t >= T && !w.dataset.hit) { w.dataset.hit = 1; w.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.06)' }, { transform: 'scale(1)' }], { duration: 300, easing: 'ease-out' }); opts.onLand && opts.onLand(i); }
+        };
+        requestAnimationFrame(frame);
+        function finish() {
+          // keep the landed shirt exactly where it is: drop the filler above it and move the strip to rest
+          strip.style.filter = ''; strip.innerHTML = shirt({ w: 96, player: targets[i], attr: `data-c="${i}"` }); strip.style.transform = 'none';
+          w.classList.add('landed');
+          if (++landed === wins.length) resolve();
+        }
+      });
+    });
+  }
 
   // ---------- effects ----------
   const COLORS = ['#FF7A1A', '#FFB020', '#FFFFFF', '#FF4D1A'];
   function burstAt(host, x, y, big) {
     const b = D2T.h('<div class="burst"></div>'); b.style.left = x + 'px'; b.style.top = y + 'px'; host.appendChild(b);
-    const n = big ? 28 : 18;
+    const n = big ? 28 : 16;
     for (let i = 0; i < n; i++) {
-      const p = document.createElement('i'), a = (i / n) * Math.PI * 2 + Math.random() * 0.4, d = (big ? 70 : 46) + Math.random() * 30;
+      const p = document.createElement('i'), a = (i / n) * Math.PI * 2 + Math.random() * 0.4, d = (big ? 70 : 42) + Math.random() * 30;
       p.style.setProperty('--c', COLORS[i % COLORS.length]); b.appendChild(p);
       p.animate([{ transform: 'translate(-3px,-3px) scale(1)', opacity: 1 }, { transform: `translate(${Math.cos(a) * d}px,${Math.sin(a) * d}px) rotate(${Math.random() * 360}deg) scale(.4)`, opacity: 0 }], { duration: 650 + Math.random() * 250, easing: 'cubic-bezier(.1,.8,.3,1)', fill: 'forwards' });
     }
@@ -218,118 +265,205 @@
     r.animate([{ transform: 'scale(.5)', opacity: 1 }, { transform: 'scale(5)', opacity: 0 }], { duration: 600, easing: 'ease-out', fill: 'forwards' });
     setTimeout(() => { b.remove(); r.remove(); }, 1000);
   }
-  function tickTo(el, from, to, awayEl) {
-    const t0 = performance.now(), dur = 900;
-    const step = (now) => { const p = Math.min(1, (now - t0) / dur), v = Math.round(from + (to - from) * (1 - Math.pow(1 - p, 3))); el.textContent = v; if (awayEl) awayEl.textContent = v >= TARGET ? 'TARGET HIT' : (TARGET - v) + ' away'; if (p < 1) requestAnimationFrame(step); };
-    requestAnimationFrame(step);
-  }
-  // reveal styles: burst (number slams in), flip (shirt turns round), flap (number rolls like a scoreboard)
-  function revealShirt(slotEl, player, style, hostPhone) {
-    const svgNum = slotEl.querySelector('.gnum');
-    const shirtEl = slotEl.querySelector('.shirt');
-    const hr = hostPhone.getBoundingClientRect(), r = shirtEl.getBoundingClientRect();
-    const cx = r.left - hr.left + r.width / 2, cy = r.top - hr.top + r.height / 2;
+  function revealShirt(slotEl, player, style, host) {
+    const num = slotEl.querySelector('.gnum'), sh = slotEl.querySelector('.shirt');
+    const hr = host.getBoundingClientRect(), r = sh.getBoundingClientRect(), cx = r.left - hr.left + r.width / 2, cy = r.top - hr.top + r.height / 2;
+    if (reduced) return;
     if (style === 'flip') {
-      shirtEl.animate([{ transform: 'rotateY(0)' }, { transform: 'rotateY(90deg)', offset: 0.45 }, { transform: 'rotateY(-90deg)', offset: 0.46 }, { transform: 'rotateY(0)' }], { duration: 700, easing: 'ease-in-out' });
-      if (svgNum) { svgNum.style.opacity = 0; setTimeout(() => { svgNum.style.opacity = 1; burstAt(hostPhone, cx, cy, false); }, 330); }
+      sh.animate([{ transform: 'rotateY(0)' }, { transform: 'rotateY(90deg)', offset: 0.45 }, { transform: 'rotateY(-90deg)', offset: 0.46 }, { transform: 'rotateY(0)' }], { duration: 700, easing: 'ease-in-out' });
+      if (num) { num.style.opacity = 0; setTimeout(() => { num.style.opacity = 1; burstAt(host, cx, cy, false); }, 330); }
     } else if (style === 'flap') {
-      if (svgNum) { let k = 0; const end = player.goals; const iv = setInterval(() => { k++; svgNum.textContent = k >= 10 ? end : Math.floor(Math.random() * 99); if (k >= 10) clearInterval(iv); }, 60); }
-      shirtEl.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.15)' }, { transform: 'scale(1)' }], { duration: 700, delay: 560 });
+      if (num) { let k = 0; const iv = setInterval(() => { k++; num.textContent = k >= 10 ? player.goals : Math.floor(Math.random() * 99); if (k >= 10) clearInterval(iv); }, 60); }
+      sh.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.15)' }, { transform: 'scale(1)' }], { duration: 700, delay: 560 });
     } else {
-      burstAt(hostPhone, cx, cy, true);
-      shirtEl.animate([{ transform: 'scale(1.6)', filter: 'brightness(2.2)' }, { transform: 'scale(0.92)', offset: 0.5 }, { transform: 'scale(1)', filter: 'brightness(1)' }], { duration: 520, easing: 'cubic-bezier(.3,1.4,.5,1)' });
-      if (svgNum) svgNum.animate([{ opacity: 0, transform: 'scale(2.2)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 420, delay: 120, fill: 'backwards' });
+      burstAt(host, cx, cy, true);
+      sh.animate([{ transform: 'scale(1.6)', filter: 'brightness(2.2)' }, { transform: 'scale(0.92)', offset: 0.5 }, { transform: 'scale(1)', filter: 'brightness(1)' }], { duration: 520, easing: 'cubic-bezier(.3,1.4,.5,1)' });
+      if (num) num.animate([{ opacity: 0, transform: 'scale(2.2)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 420, delay: 120, fill: 'backwards' });
     }
-    const plus = D2T.h(`<div class="plus">+${player.goals}</div>`); plus.style.left = (cx + 18) + 'px'; plus.style.top = (cy - 26) + 'px'; hostPhone.appendChild(plus);
+    const plus = D2T.h(`<div class="plus">+${player.goals}</div>`); plus.style.left = (cx + 18) + 'px'; plus.style.top = (cy - 26) + 'px'; host.appendChild(plus);
     plus.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0)', offset: 0.2 }, { opacity: 0, transform: 'translateY(-26px)' }], { duration: 1300, easing: 'ease-out', fill: 'forwards' });
     setTimeout(() => plus.remove(), 1400);
   }
-  // loop the reveal on step 4
-  const demo = document.querySelector('.reveal-demo');
-  const demoLoop = () => { if (D2T.reduced()) return; const slot = demo.querySelector('[data-slot="4"]'); revealShirt(slot, cands[1], 'burst', demo); tickTo(demo.querySelector('.tnum'), fourT, rpT, demo.querySelector('.taway')); };
-  setTimeout(demoLoop, 900); setInterval(demoLoop, 4200);
+
+  // ---------- endings ----------
+  function confetti(host, ms = 3200) {
+    const cv = document.createElement('canvas'); cv.className = 'confetti'; host.appendChild(cv);
+    const W = cv.width = host.clientWidth * 2, H = cv.height = host.clientHeight * 2, ctx = cv.getContext('2d');
+    const cols = ['#FFC83D', '#FF7A1A', '#FFFFFF', '#12F06C', '#FF4D5A'];
+    const ps = Array.from({ length: 180 }, (_, i) => ({ x: W / 2 + (Math.random() - 0.5) * 120, y: H * 0.42, vx: (Math.random() - 0.5) * 34, vy: -18 - Math.random() * 26, r: Math.random() * 6.3, vr: (Math.random() - 0.5) * 0.4, w: 8 + Math.random() * 10, h: 5 + Math.random() * 6, c: cols[i % cols.length] }));
+    const t0 = performance.now();
+    const f = (now) => { const t = now - t0; ctx.clearRect(0, 0, W, H);
+      ps.forEach((p) => { p.vy += 0.9; p.vx *= 0.985; p.vy *= 0.985; p.x += p.vx; p.y += p.vy; p.r += p.vr; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.globalAlpha = Math.max(0, 1 - Math.max(0, t - ms + 800) / 800); ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.r * 2))); ctx.restore(); });
+      if (t < ms) requestAnimationFrame(f); else cv.remove(); };
+    requestAnimationFrame(f);
+  }
+  function ending(host, total) {
+    if (reduced) return;
+    const pitchEl = host.querySelector('.pitch'), pr = pitchEl.getBoundingClientRect(), hr = host.getBoundingClientRect(), midY = pr.top - hr.top + pr.height / 2;
+    const msg = (cls, big, small) => { const m = D2T.h(`<div class="bigmsg ${cls}"><b>${big}</b><span>${small}</span></div>`); m.style.top = (midY - 70) + 'px'; host.appendChild(m); return m; };
+    const shirts = [...host.querySelectorAll('.pitch .slotp .shirt')];
+    if (total === TARGET) {
+      // EXACT: the bar turns gold, shirts light up in a wave, confetti, a giant 433 slams across the pitch
+      host.querySelector('.track').classList.add('glow');
+      shirts.forEach((s, i) => s.animate([{ transform: 'scale(1)', filter: 'brightness(1)' }, { transform: 'scale(1.25)', filter: 'brightness(1.8)' }, { transform: 'scale(1)', filter: 'brightness(1)' }], { duration: 500, delay: 80 * (10 - i) }));
+      setTimeout(() => { confetti(host);
+        const d = D2T.h('<div class="dimmer"></div>'); host.appendChild(d); d.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' });
+        const m = msg('', '433', 'Perfect. Exactly 433.');
+        m.querySelector('b').animate([{ transform: 'scale(3) rotate(-8deg)', opacity: 0 }, { transform: 'scale(0.92) rotate(-3deg)', opacity: 1, offset: 0.55 }, { transform: 'scale(1) rotate(-3deg)', opacity: 1 }], { duration: 650, easing: 'cubic-bezier(.2,.9,.3,1.2)', fill: 'forwards' });
+        pitchEl.animate([{ transform: 'translate(0,0)' }, { transform: 'translate(-6px,3px)' }, { transform: 'translate(5px,-2px)' }, { transform: 'translate(-3px,1px)' }, { transform: 'translate(0,0)' }], { duration: 380, delay: 360 });
+        m.querySelector('span').animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: 400, delay: 700, fill: 'backwards' });
+        setTimeout(() => { m.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, fill: 'forwards' }); d.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, fill: 'forwards' }); setTimeout(() => { m.remove(); d.remove(); }, 520); }, 3600);
+      }, 700);
+    } else if (TARGET - total > 25) {
+      // A LONG WAY SHORT: no drama, just the gap, so near misses still feel special
+      const m = msg('over', (TARGET - total) + ' short', 'Spin again to get closer');
+      m.animate([{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }], { duration: 450, easing: 'ease-out', fill: 'backwards' });
+      setTimeout(() => { m.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, fill: 'forwards' }); setTimeout(() => m.remove(), 520); }, 2600);
+    } else if (total < TARGET) {
+      // SO CLOSE: everything slows; the gap pulses like a heartbeat and the last bit of bar flashes empty
+      const gap = TARGET - total, d = D2T.h('<div class="dimmer"></div>'); host.appendChild(d); d.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600, fill: 'forwards' });
+      const m = msg('close', gap === 1 ? '1 GOAL' : gap + ' GOALS', 'So close');
+      m.animate([{ opacity: 0, transform: 'scale(0.9)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 500, easing: 'ease-out', fill: 'backwards' });
+      m.querySelector('b').animate([{ transform: 'scale(1)' }, { transform: 'scale(1.08)' }, { transform: 'scale(1)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }], { duration: 1100, iterations: 2, delay: 500 });
+      const tr = host.querySelector('.track'); const ghost = D2T.h('<span style="position:absolute;top:0;bottom:0;border-radius:0 5px 5px 0;background:rgba(255,255,255,0.35)"></span>');
+      ghost.style.left = (total / TARGET * 100) + '%'; ghost.style.right = '0'; tr.appendChild(ghost);
+      ghost.animate([{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }], { duration: 700, iterations: 4 });
+      host.querySelector('.taway').animate([{ transform: 'scale(1)' }, { transform: 'scale(1.3)' }, { transform: 'scale(1)' }], { duration: 700, iterations: 4 });
+      setTimeout(() => { m.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, fill: 'forwards' }); d.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, fill: 'forwards' }); setTimeout(() => { m.remove(); d.remove(); ghost.remove(); }, 520); }, 3300);
+    } else {
+      // BLOWN PAST: (the bar already raced past and re-scaled) the number spins past 433, then a grey stamp says how far over
+      const over = total - TARGET, m = msg('over', '+' + over, 'Blown past 433');
+      m.animate([{ opacity: 0, transform: 'translateX(-60px) skewX(-12deg)' }, { opacity: 1, transform: 'translateX(8px) skewX(-6deg)', offset: 0.6 }, { opacity: 1, transform: 'none' }], { duration: 600, easing: 'ease-out', fill: 'backwards' });
+      setTimeout(() => { m.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, fill: 'forwards' }); setTimeout(() => m.remove(), 520); }, 2800);
+    }
+  }
+
+  // ---------- pitch options ----------
+  const pickN = (pos, n, seed) => { const L = P[pos]; const out = []; let s = seed; while (out.length < n) { s = (s * 9301 + 49297) % 233280; const c = L[Math.floor(s / 233280 * Math.min(L.length, 220))]; if (!out.includes(c)) out.push(c); } return out; };
+  const PITCHES = [['p1', 'Night stadium', 'Classic’s mown stripes under a floodlight glow, 433 GOALS painted faintly across the middle.'],
+    ['p2', 'Chalk tactics board', 'A dark board with hand-drawn chalk lines, the mode name chalked faintly across the middle.'],
+    ['p3', 'Goal net', 'Black and burnt orange with a goal-net mesh fading down the pitch.'],
+    ['p4', 'Big 433 in the grass', 'Diagonal mown stripes with a huge outlined 433 cut into the grass.']];
+  const ready = (style) => `<div class="phone">${top()}${tally(0, 0)}${pitch(style, {}, 0)}${trioMyst()}<div class="hint">Spin for three goalkeepers</div>${bar('Spin', 3)}</div>`;
+  document.getElementById('pitches').innerHTML = PITCHES.map(([k, n, d], i) => `<div class="opt"><div class="opt-h"><span class="tag">PITCH ${i + 1}</span><h3>${n}</h3><p>${d}</p></div>${ready(k)}</div>`).join('');
+  document.querySelectorAll('#pitches .phone').forEach((ph) => paintBar(ph, 0));
+
+  // ---------- steps ----------
+  const XI = [pickN('GK', 1, 3)[0], ...pickN('DEF', 4, 7), ...pickN('MID', 3, 11), ...pickN('FWD', 3, 5)];
+  const part = (n) => { const f = {}; XI.slice(0, n).forEach((p, i) => { f[i] = p; }); return f; };
+  const sumOf = (f) => Object.values(f).reduce((t, p) => t + p.goals, 0);
+  const four = part(4), fourT = sumOf(four), cands = pickN('DEF', 3, 41);
+  const candTrio = (sel) => `<div class="trio">${cands.map((c, i) => `<div class="cell"><div class="reelwin landed"><div class="strip">${shirt({ w: 96, player: c, cls: sel == null ? '' : sel === i ? 'sel' : 'dim' })}</div></div><span class="cap">${D2T.esc(c.club)}</span></div>`).join('')}</div>`;
+  const rp = Object.assign(part(4), { 4: cands[1] }), rpT = fourT + cands[1].goals;
+  const STEPS = [
+    ['1 · READY', 'Ready', 'Four shirts filled. The next one (RB) glows orange; the bar shows how far there is to go.', `<div class="phone" data-t="${fourT}">${top()}${tally(fourT, 4)}${pitch('p1', four, 4)}${trioMyst()}<div class="hint">Spin for three defenders</div>${bar('Spin', 3)}</div>`],
+    ['2 · SPINNING', 'Spinning', 'The reels race, blur with speed, then slow down and settle with a little bounce, left, middle, right. This one loops.', `<div class="phone spin-demo" data-t="${fourT}">${top()}${tally(fourT, 4)}${pitch('p1', four, 4)}${trioMyst()}<div class="hint"></div>${bar('Spinning', 3, true)}</div>`],
+    ['3 · PICKED', 'Picked', 'Tap a shirt: it grows a little and the others shrink. Tap again or drag it onto the glowing shirt.', `<div class="phone" data-t="${fourT}">${top()}${tally(fourT, 4)}${pitch('p1', four, 4)}${candTrio(1)}<div class="hint">Tap again or drag onto RB</div>${bar('Pick ' + cands[1].sur, 3)}</div>`],
+    ['4 · REVEAL', 'Reveal', `He lands, the shirt bursts, his ${cands[1].goals} Premier League goals appear as the number, and the bar fills to ${rpT}. Loops.`, `<div class="phone reveal-demo" data-t="${rpT}">${top()}${tally(rpT, 5)}${pitch('p1', rp, 5)}${trioMyst()}<div class="hint">Spin for three defenders</div>${bar('Spin', 3)}</div>`]
+  ];
+  document.getElementById('steps').innerHTML = STEPS.map(([t, n, d, h]) => `<div class="opt"><div class="opt-h"><span class="tag">${t}</span><h3>${n}</h3><p>${d}</p></div>${h}</div>`).join('');
+  document.querySelectorAll('#steps .phone').forEach((ph) => paintBar(ph, +ph.dataset.t));
+  const sd = document.querySelector('.spin-demo');
+  const spinLoop = async () => { const wins = [...sd.querySelectorAll('.reelwin')]; wins.forEach((w) => { w.classList.remove('landed'); delete w.dataset.hit; w.querySelectorAll('svg[width="0"]').forEach((x) => x.remove()); w.querySelector('.strip').style.transform = ''; }); await runReels(wins, cands, 'DEF'); setTimeout(spinLoop, 1800); };
+  setTimeout(spinLoop, 700);
+  const rd = document.querySelector('.reveal-demo');
+  const revealLoop = () => { revealShirt(rd.querySelector('[data-slot="4"]'), cands[1], 'burst', rd); tickTo(rd, fourT, rpT); };
+  setTimeout(revealLoop, 900); setInterval(revealLoop, 4200);
 
   // ---------- playable ----------
-  const playHost = document.getElementById('play');
-  playHost.innerHTML = `<div class="opt"><div class="opt-h"><span class="tag">PLAYABLE</span><h3>One full game</h3><p>Reveal style: <select id="rstyle" style="background:#111;color:#fff;border:1px solid #333;border-radius:8px;padding:4px 8px;font:inherit"><option value="burst">Burst</option><option value="flip">Flip</option><option value="flap">Scoreboard roll</option></select> · Pitch: <select id="pstyle" style="background:#111;color:#fff;border:1px solid #333;border-radius:8px;padding:4px 8px;font:inherit"><option value="p1">Night stadium</option><option value="p2">Chalk board</option><option value="p3">Goal net</option><option value="p4">Big 433</option></select></p></div><div class="phone" id="game"></div></div>`;
-  const G = { filled: {}, total: 0, respins: 3, cands: null, sel: null, phase: 'ready', pstyle: 'p1' };
+  document.getElementById('play').innerHTML = `<div class="opt"><div class="opt-h"><span class="tag">PLAYABLE</span><h3>One full game</h3><p>Reveal: <select id="rstyle"><option value="burst">Burst</option><option value="flip">Flip</option><option value="flap">Scoreboard roll</option></select> · Pitch: <select id="pstyle"><option value="p1">Night stadium</option><option value="p2">Chalk board</option><option value="p3">Goal net</option><option value="p4">Big 433</option></select> <button class="replay" id="auto" style="margin-left:6px">Fill for me</button></p></div><div class="phone" id="game"></div></div>`;
+  const G = { filled: {}, total: 0, respins: 3, cands: null, sel: null, busy: false, pstyle: 'p1' };
   const game = document.getElementById('game');
   const nextIdx = () => SLOTS.findIndex((s, i) => !G.filled[i]);
   const posName = { GK: 'goalkeepers', DEF: 'defenders', MID: 'midfielders', FWD: 'forwards' };
+  const randPick = (pos) => pickN(pos, 3, Math.floor(Math.random() * 99999) + 1);
   function renderGame() {
-    const ni = nextIdx(), done = ni < 0, placed = Object.keys(G.filled).length;
-    const f = Object.assign({}, G.filled);
-    let trio = trioMyst(), hint = done ? (G.total >= TARGET ? 'Target hit! Your XI scored ' + G.total : 'Full XI: ' + G.total + ' goals, ' + (TARGET - G.total) + ' short') : `Spin for three ${posName[SLOTS[ni][1]]}`;
-    let label = done ? 'Play again' : 'Spin';
-    if (G.cands) { trio = `<div class="trio">${G.cands.map((c, i) => `<div class="cell"><div class="reelwin"><div class="strip" style="top:6px">${shirt({ w: 96, player: c, cls: G.sel == null ? '' : G.sel === i ? 'sel' : 'dim', attr: `data-c="${i}"` })}</div></div><span class="cap">${D2T.esc(c.club)}</span></div>`).join('')}</div>`;
-      hint = G.sel == null ? 'Tap a shirt to pick him' : `Tap again or drag onto ${SLOTS[ni][0]}`; label = G.sel == null ? 'Pick one' : 'Pick ' + G.cands[G.sel].sur; }
-    game.innerHTML = `${top()}${tally(G.total, placed)}${pitch(G.pstyle, f, done ? -1 : ni)}${trio}<div class="hint">${hint}</div>${bar(label, G.respins, G.cands && G.sel == null)}`;
-    game.querySelector('.spin').onclick = onMain; game.querySelector('.rs').onclick = onRespin; game.querySelector('.hm').onclick = () => { Object.assign(G, { filled: {}, total: 0, respins: 3, cands: null, sel: null }); renderGame(); };
+    const ni = nextIdx(), done = ni < 0;
+    game.innerHTML = `${top()}${tally(G.total, Object.keys(G.filled).length)}${pitch(G.pstyle, G.filled, done ? -1 : ni)}${trioMyst()}<div class="hint">${done ? 'Full XI: ' + gapText(G.total) : 'Spin for three ' + posName[SLOTS[ni][1]]}</div>${bar(done ? 'Play again' : 'Spin', G.respins)}`;
+    paintBar(game, G.total);
+    game.querySelector('.spin').onclick = onMain; game.querySelector('.rs').onclick = onRespin;
+    game.querySelector('.hm').onclick = () => { Object.assign(G, { filled: {}, total: 0, respins: 3, cands: null, sel: null, busy: false }); renderGame(); };
+  }
+  function setUI(label, hint, off) { game.querySelector('.lbl').textContent = label; game.querySelector('.hint').textContent = hint; game.querySelector('.spin').classList.toggle('off', !!off); }
+  async function spin() {
+    if (G.busy) return; G.busy = true; G.cands = null; G.sel = null;
+    const ni = nextIdx(), pos = SLOTS[ni][1], targets = randPick(pos);
+    const trio = game.querySelector('.trio'); trio.outerHTML = trioMyst();
+    game.querySelectorAll('.cap').forEach((c) => { c.textContent = ''; });
+    setUI('Spinning', '', true);
+    await runReels([...game.querySelectorAll('.reelwin')], targets, pos);
+    G.cands = targets; G.busy = false;
+    game.querySelectorAll('.cap').forEach((c, i) => { c.textContent = targets[i].club; });
+    setUI('Pick one', 'Tap a shirt to pick him', true);
     game.querySelectorAll('[data-c]').forEach((el) => { el.onclick = () => onShirt(+el.dataset.c); dragify(el, +el.dataset.c); });
   }
-  function spinTo(cands) {
-    G.cands = null; G.sel = null; renderGame();
-    const wins = [...game.querySelectorAll('.reelwin')], pos = SLOTS[nextIdx()][1];
-    game.querySelector('.spin').classList.add('off'); game.querySelector('.lbl').textContent = 'Spinning';
-    const reduced = D2T.reduced();
-    wins.forEach((w, i) => {
-      const filler = pick(pos, 14, Math.floor(Math.random() * 99999));
-      const strip = w.querySelector('.strip');
-      strip.innerHTML = filler.concat([cands[i]]).map((p) => shirt({ w: 96, player: p })).join('');
-      const H = 102, endTop = 6 - filler.length * H;
-      if (reduced) { strip.style.top = endTop + 'px'; return; }
-      w.classList.add('blur');
-      strip.animate([{ top: '6px' }, { top: (endTop - 14) + 'px', offset: 0.92 }, { top: endTop + 'px' }], { duration: 1500 + i * 450, easing: 'cubic-bezier(.15,.6,.25,1)', fill: 'forwards' });
-      setTimeout(() => w.classList.remove('blur'), 1100 + i * 450);
-    });
-    setTimeout(() => { G.cands = cands; renderGame(); }, reduced ? 50 : 1500 + 2 * 450 + 80);
+  function onShirt(i) {
+    if (G.sel === i) { place(i); return; }
+    G.sel = i;
+    game.querySelectorAll('[data-c]').forEach((el) => { const k = +el.dataset.c; el.classList.toggle('sel', k === i); el.classList.toggle('dim', k !== i); });
+    setUI('Pick ' + G.cands[i].sur, `Tap again or drag onto ${SLOTS[nextIdx()][0]}`);
   }
-  function onMain() {
-    const ni = nextIdx();
-    if (ni < 0) { Object.assign(G, { filled: {}, total: 0, respins: 3, cands: null, sel: null }); renderGame(); return; }
-    if (!G.cands) { spinTo(pick(SLOTS[ni][1], 3, Math.floor(Math.random() * 99999))); return; }
-    if (G.sel != null) place(G.sel);
-  }
-  function onRespin() { if (G.respins <= 0 || !G.cands) return; G.respins--; spinTo(pick(SLOTS[nextIdx()][1], 3, Math.floor(Math.random() * 99999))); }
-  function onShirt(i) { if (G.sel === i) { place(i); return; } G.sel = i; renderGame(); }
-  function place(i) {
-    const ni = nextIdx(), p = G.cands[i], from = G.total;
-    G.filled[ni] = p; G.total += p.goals; G.cands = null; G.sel = null; renderGame();
-    const slot = game.querySelector(`[data-slot="${ni}"]`);
-    revealShirt(slot, p, document.getElementById('rstyle').value, game);
-    tickTo(game.querySelector('.tnum'), from, G.total, game.querySelector('.taway'));
+  function onMain() { if (G.busy) return; const ni = nextIdx(); if (ni < 0) { Object.assign(G, { filled: {}, total: 0, respins: 3, cands: null, sel: null }); renderGame(); return; } if (!G.cands) { spin(); return; } if (G.sel != null) place(G.sel); }
+  function onRespin() { if (G.busy || G.respins <= 0 || !G.cands) return; G.respins--; game.querySelector('.rs .n').textContent = G.respins; spin(); }
+  function place(i, fromRect) {
+    if (G.busy) return; G.busy = true;
+    const ni = nextIdx(), p = G.cands[i], from = G.total, src = game.querySelector(`[data-c="${i}"]`);
+    const hr = game.getBoundingClientRect(), a = fromRect || src.getBoundingClientRect(), slot = game.querySelector(`[data-slot="${ni}"] .shirt`), b = slot.getBoundingClientRect();
+    // fly a copy of the shirt from the trio to its shirt on the pitch, then reveal
+    const fly = D2T.h(`<div class="flyer">${shirt({ w: 96, player: p })}</div>`); fly.style.left = (a.left - hr.left) + 'px'; fly.style.top = (a.top - hr.top) + 'px'; game.appendChild(fly);
+    src.style.visibility = 'hidden';
+    const s = b.width / a.width, dx = b.left - a.left + (b.width - a.width) / 2, dy = b.top - a.top + (b.height - a.height) / 2;
+    const anim = fly.animate([{ transform: 'translate(0,0) scale(1)' }, { transform: `translate(${dx * 0.5}px,${dy * 0.5 - 40}px) scale(${(1 + s) / 2 * 1.1})`, offset: 0.55 }, { transform: `translate(${dx}px,${dy}px) scale(${s})` }], { duration: reduced ? 1 : 520, easing: 'cubic-bezier(.5,0,.3,1)', fill: 'forwards' });
+    anim.onfinish = () => {
+      fly.remove(); G.filled[ni] = p; G.total += p.goals; G.cands = null; G.sel = null; renderGame();
+      const slotEl = game.querySelector(`[data-slot="${ni}"]`);
+      revealShirt(slotEl, p, document.getElementById('rstyle').value, game);
+      game.querySelector('.tnum').textContent = from; paintBar(game, from);
+      tickTo(game, from, G.total, () => { G.busy = false; if (nextIdx() < 0) ending(game, G.total); });
+    };
   }
   function dragify(el, i) {
     el.addEventListener('pointerdown', (e) => {
-      const sx = e.clientX, sy = e.clientY; let ghost = null;
+      if (G.busy) return; const sx = e.clientX, sy = e.clientY; let ghost = null;
       const move = (ev) => {
-        if (!ghost && Math.hypot(ev.clientX - sx, ev.clientY - sy) > 8) { G.sel = i; ghost = el.cloneNode(true); ghost.style.cssText += ';position:fixed;z-index:99;pointer-events:none;width:80px;opacity:.95'; document.body.appendChild(ghost); }
+        if (!ghost && Math.hypot(ev.clientX - sx, ev.clientY - sy) > 8) { onShirt(i); ghost = D2T.h(`<div style="position:fixed;z-index:99;pointer-events:none;opacity:.95">${shirt({ w: 80, player: G.cands[i] })}</div>`); document.body.appendChild(ghost); }
         if (ghost) { ghost.style.left = (ev.clientX - 40) + 'px'; ghost.style.top = (ev.clientY - 40) + 'px'; }
       };
       const up = (ev) => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up);
-        if (!ghost) return; ghost.remove();
+        if (!ghost) return; const gr = ghost.getBoundingClientRect(); ghost.remove();
         const t = game.querySelector(`[data-slot="${nextIdx()}"]`).getBoundingClientRect();
-        if (ev.clientX > t.left - 30 && ev.clientX < t.right + 30 && ev.clientY > t.top - 30 && ev.clientY < t.bottom + 30) place(i); else renderGame(); };
+        if (ev.clientX > t.left - 30 && ev.clientX < t.right + 30 && ev.clientY > t.top - 30 && ev.clientY < t.bottom + 30) place(i, gr); };
       window.addEventListener('pointermove', move); window.addEventListener('pointerup', up);
     });
   }
-  document.getElementById('pstyle').onchange = (e) => { G.pstyle = e.target.value; renderGame(); };
+  document.getElementById('pstyle').onchange = (e) => { G.pstyle = e.target.value; if (!G.busy) renderGame(); };
+  document.getElementById('auto').onclick = async () => {
+    while (nextIdx() >= 0) { if (!G.cands) { await spin(); } await new Promise((r) => setTimeout(r, 350)); const best = 0; onShirt(best); await new Promise((r) => setTimeout(r, 300)); place(best); await new Promise((r) => { const iv = setInterval(() => { if (!G.busy) { clearInterval(iv); r(); } }, 100); }); }
+  };
   renderGame();
 
-  // ---------- reveal option panels ----------
-  const sample = P.FWD[6];
-  const REV = [['burst', 'Burst', 'The shirt flashes, scales down onto the pitch and bursts into orange sparks; the number slams in big and settles.'],
-    ['flip', 'Flip', 'The shirt turns round once like a card; the number is on it when it comes back, with a smaller burst.'],
-    ['flap', 'Scoreboard roll', 'The number spins through random digits like an old scoreboard, then stops on his goals with a bump.']];
-  document.getElementById('reveals').innerHTML = REV.map(([k, n, d]) => `<div class="opt"><div class="opt-h"><span class="tag">REVEAL</span><h3>${n}</h3><p>${d}</p></div><div class="panel" data-r="${k}"><div class="slotp" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:6px">${shirt({ w: 130, player: sample, goals: sample.goals, tag: true })}<span class="nm" style="font-size:14px">${D2T.esc(sample.name)} · ${D2T.esc(sample.club)}</span></div></div></div>`).join('');
-  document.querySelectorAll('.panel').forEach((pn, i) => { const go = () => { if (!D2T.reduced()) revealShirt(pn.querySelector('.slotp'), sample, pn.dataset.r, pn); }; setTimeout(go, 600 + i * 500); setInterval(go, 3600); });
+  // ---------- endings ----------
+  const XIS = {
+    close: ['Dave Beasant', 'Kolo Toure', 'Nathan Ake', 'Steve Watson', 'Peter Atherton', 'Kai Havertz', 'David White', 'Craig Gardner', 'Roberto Firmino', 'Marcus Rashford', 'Olivier Giroud'],
+    exact: ['Steve Ogrizovic', 'Steve Howey', 'Phil Neville', 'Scott Dann', 'Martin Skrtel', 'Jamie Redknapp', "Charles N'Zogbia", 'Abdoulaye Doucoure', 'James Beattie', 'Didier Drogba', 'Dennis Bergkamp'],
+    over: ['Alisson', 'Nathan Ake', 'Christian Ziege', 'Andy Robertson', 'Matthew Upson', 'Darren Anderton', 'Jamie Redknapp', 'Oyvind Leonhardsen', 'Kevin Davies', 'Jermain Defoe', 'Kevin Phillips']
+  };
+  const END = [['close', 'SO CLOSE', 'Under by a few: the screen dims, "7 GOALS · So close" beats like a heartbeat, and the empty end of the bar flashes so you can see exactly what you missed.'],
+    ['exact', 'EXACTLY 433', 'The bar turns gold, the shirts light up in a wave from the striker back to the keeper, confetti bursts and a giant gold 433 slams across the pitch with a little shake.'],
+    ['over', 'BLOWN PAST', 'The bar races past the 433 line with a burst, then squeezes back so 433 fits and the extra runs on in grey. A grey "+64" stamps across the pitch.']];
+  document.getElementById('endings').innerHTML = END.map(([k, n, d]) => { const xi = XIS[k].map(byName); const f = {}; xi.forEach((p, i) => { f[i] = p; });
+    const t = xi.reduce((a, p) => a + p.goals, 0), before = t - xi[10].goals;
+    return `<div class="opt"><div class="opt-h"><span class="tag">ENDING</span><h3>${n} · ${t}</h3><p>${d}</p><button class="replay" data-e="${k}">Replay</button></div><div class="phone" data-end="${k}" data-t="${t}" data-b="${before}">${top()}${tally(t, 11)}${pitch('p1', f, -1)}<div class="hint" style="margin-top:14px">Last shirt: ${D2T.esc(xi[10].name)} (${xi[10].goals})</div>${bar('Play again', 3)}</div></div>`; }).join('');
+  const playEnding = (ph) => { const t = +ph.dataset.t, b = +ph.dataset.b; ph.querySelector('.track').classList.remove('glow'); ph.querySelectorAll('.bigmsg,.dimmer,.confetti').forEach((x) => x.remove());
+    paintBar(ph, b); ph.querySelector('.tnum').textContent = b; revealShirt(ph.querySelector('[data-slot="10"]'), byName(XIS[ph.dataset.end][10]), 'burst', ph);
+    setTimeout(() => tickTo(ph, b, t, () => ending(ph, t)), 250); };
+  document.querySelectorAll('[data-end]').forEach((ph, i) => { paintBar(ph, +ph.dataset.t); setTimeout(() => playEnding(ph), 1200 + i * 1500); });
+  document.querySelectorAll('[data-e]').forEach((btn) => { btn.onclick = () => playEnding(document.querySelector(`[data-end="${btn.dataset.e}"]`)); });
 
-  // ---------- tally options ----------
-  const T = 415;
-  document.getElementById('tallies').innerHTML = [
-    ['TALLY A', 'Number and gap', 'Big total on the right, the gap in small orange text under the mode name.', `<div class="tvar">${tally(T, 9).replace('class="tally"', 'class="tally" style="padding:0"')}</div>`],
-    ['TALLY B', 'Progress bar', 'A bar fills towards a white line at 433. The total and gap sit above it.', `<div class="tvar t2"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:10.5px;font-weight:800;letter-spacing:.14em;color:var(--mode-t)">433 GOALS</span><span><b style="font:900 italic 28px/1 Exo 2">${T}</b> <i style="font-style:normal;font-size:12px;font-weight:800;color:var(--mode-t)">${TARGET - T} away</i></span></div><div class="track"><i></i><b></b></div></div>`],
-    ['TALLY C', 'Ring', 'A ring that closes as goals come in, the total inside it, the gap beside it.', `<div class="tvar t3"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="33" fill="none" stroke="#1B1B21" stroke-width="8"/><circle cx="40" cy="40" r="33" fill="none" stroke="#FF7A1A" stroke-width="8" stroke-linecap="round" stroke-dasharray="${(T / TARGET * 207).toFixed(1)} 207" transform="rotate(-90 40 40)"/><text x="40" y="47" text-anchor="middle" font-family="Exo 2" font-weight="900" font-style="italic" font-size="22" fill="#fff">${T}</text></svg><div><div style="font-size:10.5px;font-weight:800;letter-spacing:.14em;color:var(--mode-t)">433 GOALS</div><div style="font:900 italic 22px/1.1 Exo 2">${TARGET - T} away</div><div style="font-size:12px;color:var(--soft)">9 of 11 shirts filled</div></div></div>`]
-  ].map(([t, n, d, h]) => `<div class="opt"><div class="opt-h"><span class="tag">${t}</span><h3>${n}</h3><p>${d}</p></div>${h}</div>`).join('');
+  // ---------- reveal panels ----------
+  const sample = P.FWD[6];
+  const REV = [['burst', 'Burst', 'The shirt flashes, scales down onto the pitch and bursts into orange sparks; the number slams in and settles.'], ['flip', 'Flip', 'The shirt turns round once like a card; the number is on it when it comes back.'], ['flap', 'Scoreboard roll', 'The number spins through random digits, then stops on his goals with a bump.']];
+  document.getElementById('reveals').innerHTML = REV.map(([k, n, d]) => `<div class="opt"><div class="opt-h"><span class="tag">REVEAL</span><h3>${n}</h3><p>${d}</p></div><div class="panel" data-r="${k}"><div class="slotp" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:6px">${shirt({ w: 140, player: sample, goals: sample.goals, tag: true })}<span class="nm" style="font-size:14px;font:900 italic 14px/1 Exo 2;padding:3px 8px;border-radius:5px;background:rgba(255,255,255,0.08)">${D2T.esc(sample.name)} · ${D2T.esc(sample.club)}</span></div></div></div>`).join('');
+  document.querySelectorAll('.panel').forEach((pn, i) => { const go = () => revealShirt(pn.querySelector('.slotp'), sample, pn.dataset.r, pn); setTimeout(go, 600 + i * 500); setInterval(go, 3600); });
 })();
 </script>
