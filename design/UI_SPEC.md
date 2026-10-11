@@ -15,7 +15,7 @@ Where this spec and the current build differ, this spec is the newer decision. W
 
 ## 2. Cards (v1, signed off)
 
-- Shield shape: chamfered top corners, shallow point at the bottom, a bright metal rim. Shiny gradient face per level with a faint diagonal texture, a top-left highlight and a light sweep every few seconds (off with reduced motion).
+- Shield shape: chamfered top corners, shallow point at the bottom, a bright metal rim. **Corners softened (Variant A, chosen 11 Oct):** every corner of the outline is rounded slightly, radius 2.5 on the four chamfer corners, 3 on the bottom shoulders and 4 on the bottom point, in a 114 x 190 card box (scale with the card). The prototype draws the outline as an SVG mask (`.d2c-rim` and `.d2c-face` in `design/prototype/core/base.css`); the comparison page is `design/prototype/rounded-cards.html`. Shiny gradient face per level with a faint diagonal texture, a top-left highlight and a light sweep every few seconds (off with reduced motion).
 - Levels: **Bronze** (under 65), **Silver** (65 to 74), **Gold** (75 and up), **Baller** (purple; a club's best player; renamed from "Purple"), **Legend** (rare all-time great seasons; pink, orange and yellow with a holo sheen). Baller and Legend glow.
 - Small card (114px wide, 3 across a phone): rating, position and level down the left, club crest top right, first name, surname in capitals, and six stats in a 3 x 2 grid with **each label under its number** (GOL IMP FIT / WIN DEF EXP). Goalkeepers show WAL, CLN, FIT, WIN, EXP.
 - Club card: same shape, face runs from the club colour at the top to near-black at the bottom; crest, club name, season chip, "Real finish 20th · 25 pts".
