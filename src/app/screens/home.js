@@ -17,7 +17,7 @@
   const MODES = [
     { name: 'Head to head', sub: 'Online, up to 3 players' },
     { name: '433 Goals', sub: "Get your XI's career goals close to 433" },
-    { name: 'Top2Drop', sub: 'Take the champions down' }
+    { name: 'Steal', sub: 'Every card comes from the club you play next' }
   ];
   D2T.frFrame = FRAME;
   D2T.frRecord = (rec, cls = '') => `<div class="fr-record ${cls}">
