@@ -136,6 +136,10 @@ def from_quantile(qs, pct):
 TIER_LEVEL = {"bronze": 0, "silver": 1, "gold": 2, "best": 3}
 _mp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "source", "moves.json")
 MOVES = json.load(open(_mp, encoding="utf-8")) if os.path.exists(_mp) else {}
+# Preferred positions per player-season, main first (tools/build_positions.py, from the position
+# Transfermarkt lists for every Premier League game). Players without them keep the broad position.
+_pp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "source", "positions.json")
+POSITIONS = json.load(open(_pp, encoding="utf-8")) if os.path.exists(_pp) else {}
 
 
 def card_stats(q, team, games, career_apps):
@@ -208,7 +212,7 @@ def main():
                 pct, a = fb[(r["club"], pid)]
                 rating = from_quantile(qmap.get(r["position"]), pct)
                 if a < 10: rating = round(55 + (rating - 55) * (0.55 + 0.045 * a))
-            pos = [r["position"]]
+            pos = POSITIONS.get(season, {}).get(pid) or [r["position"]]
             if pid in people:
                 q = people[pid]
                 q["c2"] = cix[r["club"]]; q["a2"] = int(r["apps"]); q["g2"] = int(r["goals"])

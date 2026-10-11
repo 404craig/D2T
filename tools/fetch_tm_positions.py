@@ -38,7 +38,10 @@ def get(url, tries=5):
 def player(pid):
     path = os.path.join(OUT, "players", f"{pid}.json")
     if os.path.exists(path):
-        return json.load(open(path))
+        try:
+            return json.load(open(path))
+        except ValueError:
+            pass  # half-written by another run; fetch again
     d = json.loads(get(f"{TM}/ceapi/performance-game/{pid}"))["data"]
     per = defaultdict(Counter)
     clubs = defaultdict(set)
@@ -50,7 +53,9 @@ def player(pid):
         clubs[gi["seasonId"]].add(str(g["clubsInformation"]["club"]["clubId"]))
     rec = {"id": pid, "seasons": {str(s): dict(c) for s, c in sorted(per.items())},
            "clubs": {str(s): sorted(c) for s, c in sorted(clubs.items())}}
-    json.dump(rec, open(path, "w"))
+    tmp = f"{path}.{os.getpid()}.tmp"
+    json.dump(rec, open(tmp, "w"))
+    os.replace(tmp, path)
     time.sleep(0.8)
     return rec
 
@@ -70,7 +75,10 @@ def season(year):
         if str(year) in rec["seasons"]:
             rows[pid] = {**meta, "positions": rec["seasons"][str(year)]}
     json.dump(rows, open(os.path.join(OUT, f"season_{year}.json"), "w"), indent=0)
-    print(f"{year}: {len(clubs)} clubs, {len(squad)} squad players, {len(rows)} played", flush=True)
+    games = sum(sum(r["positions"].values()) for r in rows.values())
+    known = sum(v for r in rows.values() for k, v in r["positions"].items() if k != "0")
+    print(f"{year}: {len(clubs)} clubs, {len(squad)} squad players, {len(rows)} played, "
+          f"{games} player-games, {100 * known / max(games, 1):.0f}% with a position", flush=True)
 
 
 if __name__ == "__main__":

@@ -131,6 +131,20 @@
         if (!sel) hintEl.textContent = pre ? 'Tap to select, drag onto the pitch' : '';
         else hintEl.textContent = sel.kind === 'sub' ? `Tap a player to bring on ${nm}` : `Tap a player to swap with ${nm}`;
         if (!pre) bar.dataset.hint = sel ? `Tap a player to swap with ${nm}` : '';
+        markFit(sel ? sel.id : null);
+      }
+      // While a player is selected or dragged, every shirt shows how he would fit it (green preferred, amber near, red not).
+      function markFit(id) {
+        const card = id == null ? null : L.all.get(String(id)), slots = GAME.slots();
+        slotsEl.querySelectorAll('.se-slot').forEach((sl) => {
+          sl.classList.remove('se-pf-green', 'se-pf-amber', 'se-pf-red');
+          sl.querySelectorAll('.se-pfchip').forEach((n) => n.remove());
+          sl.querySelectorAll('.se-oopchip').forEach((n) => { n.style.display = card ? 'none' : ''; });
+          if (!card) return;
+          const i = +sl.dataset.i, f = GAME.fit(card.id, i);
+          sl.classList.add('se-pf-' + f);
+          (sl.querySelector('.se-cardwrap') || sl).insertAdjacentHTML('beforeend', `<span class="se-oopchip se-pfchip se-fit-${f}">${slots[i].pos}</span>`);
+        });
       }
       function select(kind, id) { sel = { kind, id }; applySel(); }
       function clearSel() { sel = null; applySel(); }
@@ -200,7 +214,7 @@
         press.item.classList.add('se-dragsrc');
         root.classList.add('se-dragging');
         subsEl.style.overflowX = 'hidden';
-        sel = null; applySel();
+        sel = null; applySel(); markFit(press.id);
         moveGhost(e.clientX, e.clientY);
         hintEl.textContent = 'Drop on a player to swap';
       }
@@ -219,6 +233,7 @@
         subsEl.style.overflowX = '';
         p.item.classList.remove('se-dragsrc');
         t && t.classList.remove('se-target');
+        markFit(null);
         if (!g) return;
         const gr = g.querySelector('.d2c').getBoundingClientRect();
         if (t && x != null) {

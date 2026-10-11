@@ -47,7 +47,8 @@ const RULES = {
   rollEvery: 3,
   minApps: 10,
   levelOdds: [0.53, 0.32, 0.125, 0.02, 0.005], // bronze silver gold purple (season's top 5) legend (top 3 of every season); greedy runs win the title 2.3% across all 103 club-seasons (tests/calibrate-all.js)
-  fit: { green: 1, amber: 0.9, red: 0.7 },
+  // green: his main position 100%, his other preferred positions 95% (alt); amber next to one of them; red elsewhere.
+  fit: { green: 1, alt: 0.95, amber: 0.9, red: 0.7 },
   raidFactor: 3,           // chance a raided club's win/draw is downgraded = factor x strength lost
   raidCap: 0.6,
   raidBaseline: 60,        // strength lost is measured as a share of strength above this
@@ -82,8 +83,8 @@ const FORMATIONS = {
 };
 const FORMATION_NAMES = Object.keys(FORMATIONS);
 
-// Slots carry a detailed label (RB, CDM) but the data only knows four broad positions,
-// so fit is judged on the broad position until detailed positions arrive.
+// p is his preferred positions for the season, main first (from the match line-ups, built by
+// tools/positions_rule.py). Without them, p holds the broad position and fit is judged on that.
 const SLOT_BROAD = { GK: "GK", RB: "DEF", CB: "DEF", LB: "DEF", RWB: "DEF", LWB: "DEF",
   CDM: "MID", CM: "MID", CAM: "MID", RM: "MID", LM: "MID", RW: "FWD", LW: "FWD", ST: "FWD" };
 const NEAR_BROAD = { GK: [], DEF: ["MID"], MID: ["DEF", "FWD"], FWD: ["MID"] };
@@ -101,7 +102,11 @@ function fitOf(player, slotPos) {
   if ((NEAR_BROAD[sb] || []).includes(pb)) return "amber";
   return "red";
 }
-function effRating(player, slotPos) { return player ? player.r * RULES.fit[fitOf(player, slotPos)] : 40; }
+function effRating(player, slotPos) {
+  if (!player) return 40;
+  const f = fitOf(player, slotPos), main = (player.p || [])[0];
+  return player.r * (f === "green" && SLOT_BROAD[main] && main !== slotPos ? RULES.fit.alt : RULES.fit[f]);
+}
 
 /* ---------- season index ---------- */
 // A season bundle (built by scripts/build-data.py) looks like:

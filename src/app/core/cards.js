@@ -53,8 +53,8 @@
     const stats = keys.map((k) => `<span class="d2c-stat"><b>${c.stats[k] == null ? '-' : c.stats[k]}</b><i>${k}</i></span>`).join('');
     const shine = opts.shine === false ? '' : `<span class="d2t-shine" style="animation-delay:${opts.delay || 0}s"></span>`;
     if (opts.mini) { // pitch card: position tab, big rating beside the crest, full name
-      return `<div class="d2c d2c-player mini pos-${c.pos} ${opts.cls || ''}" style="${style}" data-level="${c.level}" aria-label="${esc(c.name)}, ${c.ovr} ${L.name}, ${c.pos}">
-      <span class="d2c-tab">${c.pos}</span><div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2c-holo"></span>${shine}
+      return `<div class="d2c d2c-player mini pos-${c.role || c.pos} ${opts.cls || ''}" style="${style}" data-level="${c.level}" aria-label="${esc(c.name)}, ${c.ovr} ${L.name}, ${c.main || c.pos}">
+      <span class="d2c-tab">${c.main || c.pos}</span><div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2c-holo"></span>${shine}
       <div class="d2c-body"><div class="d2c-mid"><span class="d2c-ovr">${c.ovr}</span><img class="d2c-crest" src="${c.crest}" alt=""></div>
       <span class="d2c-first d2c-fit">${esc(first)}</span><span class="d2c-last">${esc(last)}</span></div></div></div>`;
     }
@@ -112,6 +112,7 @@
     const season = `${c.apps} game${c.apps === 1 ? '' : 's'}, ${c.goals} goal${c.goals === 1 ? '' : 's'}${c.cleanSheets != null && (c.pos === 'GK' || c.pos === 'DEF') ? `, ${c.cleanSheets} clean sheet${c.cleanSheets === 1 ? '' : 's'}` : ''}`;
     return `<div class="sp-det" style="--sp-accent:${accent || '#fff'}"><div class="sp-det-name">${esc(c.name)}</div>
       <div class="sp-det-line">${esc(c.club)}${c.club2 ? ' / ' + esc(c.club2) : ''} ${c.season}: ${season}${c.nat ? ' · ' + esc(c.nat) : ''}${c.provisional ? ' · provisional rating' : ''}</div>
+      ${c.main ? `<div class="sp-det-pos"><span>Position</span><b class="is-main">${c.main}</b>${c.alt.length ? `<span>also</span>${c.alt.map((x) => `<b>${x}</b>`).join('')}` : ''}</div>` : ''}
       ${k ? `<div class="sp-det-grid cols-3"><span class="sp-det-stat"><b>${k.a}</b><i>PL GAMES</i></span><span class="sp-det-stat"><b>${k.g}</b><i>PL GOALS</i></span><span class="sp-det-stat"><b>${k.n}</b><i>SEASONS</i></span></div>
       <div class="sp-det-clubs"><span>Premier League ${yrs}</span>${k.c.map((n) => `<b>${esc(n)}</b>`).join('')}</div>` : ''}</div>`;
   }
