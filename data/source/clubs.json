@@ -1,0 +1,461 @@
+{
+ "Arsenal": {
+  "name": "Arsenal",
+  "full": "Arsenal",
+  "crest": "arsenal.png",
+  "accent": "#EF0107",
+  "ink": "#FFFFFF",
+  "text": "#FF4D52",
+  "code": "ARS"
+ },
+ "Aston Villa": {
+  "name": "Aston Villa",
+  "full": "Aston Villa",
+  "crest": "aston-villa.png",
+  "accent": "#95BFE5",
+  "ink": "#4A0E25",
+  "text": "#95BFE5",
+  "code": "AVL"
+ },
+ "Barnsley": {
+  "name": "Barnsley",
+  "full": "Barnsley",
+  "crest": "barnsley.png",
+  "accent": "#D71920",
+  "ink": "#FFFFFF",
+  "text": "#FF5A62",
+  "code": "BAR"
+ },
+ "Birmingham": {
+  "name": "Birmingham",
+  "full": "Birmingham City",
+  "crest": "birmingham.png",
+  "accent": "#2E55D6",
+  "ink": "#FFFFFF",
+  "text": "#7D96FF",
+  "code": "BIR"
+ },
+ "Blackburn": {
+  "name": "Blackburn",
+  "full": "Blackburn Rovers",
+  "crest": "blackburn.png",
+  "accent": "#009EE0",
+  "ink": "#00205B",
+  "text": "#3DB8F5",
+  "code": "BLB"
+ },
+ "Blackpool": {
+  "name": "Blackpool",
+  "full": "Blackpool",
+  "crest": "blackpool.png",
+  "accent": "#F68712",
+  "ink": "#000000",
+  "text": "#F68712",
+  "code": "BPL"
+ },
+ "Bolton": {
+  "name": "Bolton",
+  "full": "Bolton Wanderers",
+  "crest": "bolton.png",
+  "accent": "#FFFFFF",
+  "ink": "#1B1F4B",
+  "text": "#FFFFFF",
+  "code": "BOL"
+ },
+ "Bournemouth": {
+  "name": "Bournemouth",
+  "full": "Bournemouth",
+  "crest": "bournemouth.png",
+  "accent": "#DA291C",
+  "ink": "#FFFFFF",
+  "text": "#FF5A52",
+  "code": "BOU"
+ },
+ "Bradford": {
+  "name": "Bradford",
+  "full": "Bradford City",
+  "crest": "bradford.png",
+  "accent": "#F9B233",
+  "ink": "#6D1D2C",
+  "text": "#F9B233",
+  "code": "BRA"
+ },
+ "Brentford": {
+  "name": "Brentford",
+  "full": "Brentford",
+  "crest": "brentford.png",
+  "accent": "#E30613",
+  "ink": "#FFFFFF",
+  "text": "#FF4D55",
+  "code": "BRE"
+ },
+ "Brighton": {
+  "name": "Brighton",
+  "full": "Brighton",
+  "crest": "brighton.png",
+  "accent": "#0057B8",
+  "ink": "#FFFFFF",
+  "text": "#5BA0FF",
+  "code": "BHA"
+ },
+ "Burnley": {
+  "name": "Burnley",
+  "full": "Burnley",
+  "crest": "burnley.png",
+  "accent": "#99D6EA",
+  "ink": "#6C1D45",
+  "text": "#99D6EA",
+  "code": "BUR"
+ },
+ "Cardiff": {
+  "name": "Cardiff",
+  "full": "Cardiff City",
+  "crest": "cardiff.png",
+  "accent": "#0070B5",
+  "ink": "#FFFFFF",
+  "text": "#4AA8E8",
+  "code": "CAR"
+ },
+ "Charlton": {
+  "name": "Charlton",
+  "full": "Charlton Athletic",
+  "crest": "charlton.png",
+  "accent": "#D4021D",
+  "ink": "#FFFFFF",
+  "text": "#FF4D5E",
+  "code": "CHA"
+ },
+ "Chelsea": {
+  "name": "Chelsea",
+  "full": "Chelsea",
+  "crest": "chelsea.png",
+  "accent": "#2B63E0",
+  "ink": "#FFFFFF",
+  "text": "#6E95FF",
+  "code": "CHE"
+ },
+ "Coventry": {
+  "name": "Coventry",
+  "full": "Coventry City",
+  "crest": "coventry.png",
+  "accent": "#59CBE8",
+  "ink": "#002B5C",
+  "text": "#59CBE8",
+  "code": "COV"
+ },
+ "Crystal Palace": {
+  "name": "Crystal Palace",
+  "full": "Crystal Palace",
+  "crest": "crystal-palace.png",
+  "accent": "#C4122E",
+  "ink": "#FFFFFF",
+  "text": "#FF5068",
+  "code": "CRY"
+ },
+ "Derby": {
+  "name": "Derby",
+  "full": "Derby County",
+  "crest": "derby.png",
+  "accent": "#FFFFFF",
+  "ink": "#000000",
+  "text": "#FFFFFF",
+  "code": "DER"
+ },
+ "Everton": {
+  "name": "Everton",
+  "full": "Everton",
+  "crest": "everton.png",
+  "accent": "#2A5BD7",
+  "ink": "#FFFFFF",
+  "text": "#7393FF",
+  "code": "EVE"
+ },
+ "Fulham": {
+  "name": "Fulham",
+  "full": "Fulham",
+  "crest": "fulham.png",
+  "accent": "#FFFFFF",
+  "ink": "#000000",
+  "text": "#FFFFFF",
+  "code": "FUL"
+ },
+ "Huddersfield": {
+  "name": "Huddersfield",
+  "full": "Huddersfield Town",
+  "crest": "huddersfield.png",
+  "accent": "#1E7BD8",
+  "ink": "#FFFFFF",
+  "text": "#5AA8F0",
+  "code": "HUD"
+ },
+ "Hull": {
+  "name": "Hull",
+  "full": "Hull City",
+  "crest": "hull.png",
+  "accent": "#F5A12D",
+  "ink": "#000000",
+  "text": "#F5A12D",
+  "code": "HUL"
+ },
+ "Ipswich": {
+  "name": "Ipswich",
+  "full": "Ipswich",
+  "crest": "ipswich.png",
+  "accent": "#2E64D6",
+  "ink": "#FFFFFF",
+  "text": "#7397FF",
+  "code": "IPS"
+ },
+ "Leeds": {
+  "name": "Leeds",
+  "full": "Leeds United",
+  "crest": "leeds.png",
+  "accent": "#FFCD00",
+  "ink": "#1D428A",
+  "text": "#FFCD00",
+  "code": "LEE"
+ },
+ "Leicester": {
+  "name": "Leicester",
+  "full": "Leicester",
+  "crest": "leicester.png",
+  "accent": "#2C5BE0",
+  "ink": "#FFFFFF",
+  "text": "#7393FF",
+  "code": "LEI"
+ },
+ "Liverpool": {
+  "name": "Liverpool",
+  "full": "Liverpool FC",
+  "crest": "liverpool.png",
+  "accent": "#C8102E",
+  "ink": "#FFFFFF",
+  "text": "#FF4D63",
+  "code": "LIV"
+ },
+ "Luton": {
+  "name": "Luton",
+  "full": "Luton Town",
+  "crest": "luton.png",
+  "accent": "#F78F1E",
+  "ink": "#002D62",
+  "text": "#F78F1E",
+  "code": "LUT"
+ },
+ "Man City": {
+  "name": "Man City",
+  "full": "Manchester City",
+  "crest": "man-city.png",
+  "accent": "#6CABDD",
+  "ink": "#1C2C5B",
+  "text": "#6CABDD",
+  "code": "MCI"
+ },
+ "Man Utd": {
+  "name": "Man Utd",
+  "full": "Manchester United",
+  "crest": "man-utd.png",
+  "accent": "#DA291C",
+  "ink": "#FFFFFF",
+  "text": "#FF5A50",
+  "code": "MUN"
+ },
+ "Middlesbrough": {
+  "name": "Middlesbrough",
+  "full": "Middlesbrough",
+  "crest": "middlesbrough.png",
+  "accent": "#E11B22",
+  "ink": "#FFFFFF",
+  "text": "#FF545A",
+  "code": "MID"
+ },
+ "Newcastle": {
+  "name": "Newcastle",
+  "full": "Newcastle",
+  "crest": "newcastle.png",
+  "accent": "#FFFFFF",
+  "ink": "#000000",
+  "text": "#FFFFFF",
+  "code": "NEW"
+ },
+ "Norwich": {
+  "name": "Norwich",
+  "full": "Norwich City",
+  "crest": "norwich.png",
+  "accent": "#FFF200",
+  "ink": "#00502A",
+  "text": "#FFF200",
+  "code": "NOR"
+ },
+ "Nottingham Forest": {
+  "name": "Nottingham Forest",
+  "full": "Nottingham Forest",
+  "crest": "nottingham-forest.png",
+  "accent": "#DD0000",
+  "ink": "#FFFFFF",
+  "text": "#FF4D4D",
+  "code": "NFO"
+ },
+ "Oldham": {
+  "name": "Oldham",
+  "full": "Oldham Athletic",
+  "crest": "oldham.png",
+  "accent": "#2E6BD1",
+  "ink": "#FFFFFF",
+  "text": "#6B9BFF",
+  "code": "OLD"
+ },
+ "Portsmouth": {
+  "name": "Portsmouth",
+  "full": "Portsmouth",
+  "crest": "portsmouth.png",
+  "accent": "#2A4CE0",
+  "ink": "#FFFFFF",
+  "text": "#7A90FF",
+  "code": "POR"
+ },
+ "QPR": {
+  "name": "QPR",
+  "full": "Queens Park Rangers",
+  "crest": "qpr.png",
+  "accent": "#2D6FD0",
+  "ink": "#FFFFFF",
+  "text": "#6EA0F0",
+  "code": "QPR"
+ },
+ "Reading": {
+  "name": "Reading",
+  "full": "Reading",
+  "crest": "reading.png",
+  "accent": "#2A62D4",
+  "ink": "#FFFFFF",
+  "text": "#7099FF",
+  "code": "REA"
+ },
+ "Sheffield Utd": {
+  "name": "Sheffield Utd",
+  "full": "Sheffield United",
+  "crest": "sheffield-utd.png",
+  "accent": "#EE2737",
+  "ink": "#FFFFFF",
+  "text": "#FF5A66",
+  "code": "SHU"
+ },
+ "Sheffield Wed": {
+  "name": "Sheffield Wed",
+  "full": "Sheffield Wednesday",
+  "crest": "sheffield-wed.png",
+  "accent": "#1E5BC6",
+  "ink": "#FFFFFF",
+  "text": "#6A98F2",
+  "code": "SHW"
+ },
+ "Southampton": {
+  "name": "Southampton",
+  "full": "Southampton",
+  "crest": "southampton.png",
+  "accent": "#D71920",
+  "ink": "#FFFFFF",
+  "text": "#FF5A62",
+  "code": "SOU"
+ },
+ "Spurs": {
+  "name": "Spurs",
+  "full": "Tottenham",
+  "crest": "spurs.png",
+  "accent": "#FFFFFF",
+  "ink": "#132257",
+  "text": "#FFFFFF",
+  "code": "TOT"
+ },
+ "Stoke": {
+  "name": "Stoke",
+  "full": "Stoke City",
+  "crest": "stoke.png",
+  "accent": "#E03A3E",
+  "ink": "#FFFFFF",
+  "text": "#FF6266",
+  "code": "STK"
+ },
+ "Sunderland": {
+  "name": "Sunderland",
+  "full": "Sunderland",
+  "crest": "sunderland.png",
+  "accent": "#EB172B",
+  "ink": "#FFFFFF",
+  "text": "#FF5263",
+  "code": "SUN"
+ },
+ "Swansea": {
+  "name": "Swansea",
+  "full": "Swansea City",
+  "crest": "swansea.png",
+  "accent": "#FFFFFF",
+  "ink": "#121212",
+  "text": "#FFFFFF",
+  "code": "SWA"
+ },
+ "Swindon": {
+  "name": "Swindon",
+  "full": "Swindon Town",
+  "crest": "swindon.png",
+  "accent": "#DA291C",
+  "ink": "#FFFFFF",
+  "text": "#FF5A50",
+  "code": "SWI"
+ },
+ "Watford": {
+  "name": "Watford",
+  "full": "Watford",
+  "crest": "watford.png",
+  "accent": "#FBEE23",
+  "ink": "#000000",
+  "text": "#FBEE23",
+  "code": "WAT"
+ },
+ "West Brom": {
+  "name": "West Brom",
+  "full": "West Bromwich Albion",
+  "crest": "west-brom.png",
+  "accent": "#FFFFFF",
+  "ink": "#122F67",
+  "text": "#FFFFFF",
+  "code": "WBA"
+ },
+ "West Ham": {
+  "name": "West Ham",
+  "full": "West Ham",
+  "crest": "west-ham.png",
+  "accent": "#1BB1E7",
+  "ink": "#3B0F1E",
+  "text": "#1BB1E7",
+  "code": "WHU"
+ },
+ "Wigan": {
+  "name": "Wigan",
+  "full": "Wigan Athletic",
+  "crest": "wigan.png",
+  "accent": "#2C6BD0",
+  "ink": "#FFFFFF",
+  "text": "#6B9DF0",
+  "code": "WIG"
+ },
+ "Wimbledon": {
+  "name": "Wimbledon",
+  "full": "Wimbledon FC",
+  "crest": "wimbledon.png",
+  "accent": "#FFE600",
+  "ink": "#002D73",
+  "text": "#FFE600",
+  "code": "WIM"
+ },
+ "Wolves": {
+  "name": "Wolves",
+  "full": "Wolverhampton Wanderers",
+  "crest": "wolves.png",
+  "accent": "#FDB913",
+  "ink": "#1A1A1A",
+  "text": "#FDB913",
+  "code": "WOL"
+ }
+}

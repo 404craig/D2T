@@ -1,0 +1,144 @@
+/* spin agent styles: the club spin, the transfer roll and the card flip (prefix sp-) */
+
+/* ---------- roll screen layout ---------- */
+.sp-screen { display: flex; flex-direction: column; height: 100%; }
+.sp-head { padding: 6px 16px 0; position: relative; z-index: 2; }
+.sp-kicker { display: block; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.sp-title { margin: 0; font: var(--display); font-size: 34px; text-transform: uppercase; letter-spacing: -0.01em; }
+.sp-sub { margin: 8px 0 0; font-size: 15px; line-height: 1.35; color: var(--soft); }
+.sp-stage { position: relative; flex: 1 1 auto; min-height: 0; display: flex; align-items: center; justify-content: center; }
+.sp-row { position: relative; display: flex; gap: 8px; justify-content: center; align-items: center; width: 100%; padding: 0 16px; box-sizing: border-box; }
+/* soft floor under the reels so they feel placed, not floating */
+.sp-floor { position: absolute; left: 50%; top: 50%; width: 340px; height: 300px; transform: translate(-50%, -50%); pointer-events: none;
+  background: radial-gradient(60% 50% at 50% 50%, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0) 100%); }
+
+/* ---------- a slot: 114 x 190 in the layout; the reel window overflows it ---------- */
+.sp-slot { position: relative; width: 114px; height: 190px; flex-shrink: 0; transition: transform .22s var(--ease-snap), opacity .22s var(--ease-out); transform: translateZ(0); -webkit-tap-highlight-color: transparent; }
+.sp-slot.is-sel { transform: scale(1.08); z-index: 2; }
+.sp-slot.is-other { transform: scale(0.92); filter: brightness(.5); }
+.sp-glow { position: absolute; left: 50%; top: 50%; width: 220px; height: 300px; transform: translate(-50%, -50%); pointer-events: none; opacity: 0; z-index: 0;
+  background: radial-gradient(48% 44% at 50% 50%, var(--sp-accent, #fff) 0%, rgba(0,0,0,0) 72%); filter: blur(8px); transition: opacity .4s var(--ease-out); }
+.sp-slot.is-set .sp-glow { opacity: 0.6; }
+.sp-slot.is-other .sp-glow { opacity: 0.12; }
+.sp-win { position: absolute; left: 0; top: -44px; width: 114px; height: 278px; overflow: hidden; z-index: 1;
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 17%, #000 83%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 17%, #000 83%, rgba(0,0,0,0) 100%); }
+.sp-slot.is-set .sp-win { -webkit-mask-image: none; mask-image: none; }
+.sp-strip { position: absolute; left: 0; top: 44px; width: 114px; height: 190px; transform-origin: 50% 50%; will-change: transform, filter; }
+.sp-node { position: absolute; left: 0; top: 0; width: 114px; height: 190px; will-change: transform; transition: opacity .3s var(--ease-out); }
+.sp-node .d2c { filter: none; }
+.sp-node .d2t-shine { display: none; }
+.sp-slot.is-set .sp-node.is-hit .d2c { filter: var(--glow, none); }
+.sp-slot.is-set .sp-node.is-hit .d2t-shine { display: block; }
+.sp-node.is-gone { opacity: 0; }
+/* speed streak: a soft vertical lick of light that brightens with reel speed */
+.sp-streak { position: absolute; inset: 0; pointer-events: none; opacity: 0; z-index: 2;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.14) 38%, rgba(255,255,255,0.22) 50%, rgba(255,255,255,0.14) 62%, rgba(255,255,255,0) 100%); mix-blend-mode: screen; }
+/* impact on settle: scale pulse plus a light sweep over the card */
+.sp-slot.is-hit .sp-strip { animation: spImpact .46s cubic-bezier(.2, .9, .3, 1.3) both; }
+@keyframes spImpact { 0% { transform: scale(1); } 28% { transform: scale(1.065); } 100% { transform: scale(1); } }
+.sp-sweep { position: absolute; top: -20%; left: -60%; width: 40%; height: 140%; pointer-events: none; z-index: 3; opacity: 0; transform: rotate(16deg);
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.75) 50%, rgba(255,255,255,0) 100%); }
+.sp-slot.is-hit .sp-sweep { animation: spSweep .55s cubic-bezier(.3, .7, .2, 1) .04s both; }
+@keyframes spSweep { 0% { left: -60%; opacity: 0; } 15% { opacity: 1; } 100% { left: 130%; opacity: 0; } }
+.sp-slot.is-hit .sp-glow { animation: spGlowPop .6s var(--ease-out) both; }
+@keyframes spGlowPop { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.6); } 35% { opacity: 1; } 100% { opacity: .6; transform: translate(-50%, -50%) scale(1); } }
+/* slot caption under each settled card (club code or player position) */
+.sp-cap { position: absolute; left: 0; right: 0; top: 198px; text-align: center; font-size: 12px; font-weight: 800; letter-spacing: .1em; color: var(--muted); opacity: 0; transform: translateY(4px); transition: opacity .3s, transform .3s var(--ease-out); }
+.sp-slot.is-set .sp-cap { opacity: 1; transform: none; }
+/* placeholder scramble flicker */
+.sp-ph .d2c-scr { transition: opacity .12s; }
+.sp-ph.is-tick .d2c-scr { opacity: .55; }
+
+/* ---------- action bar ---------- */
+.sp-bar { display: flex; align-items: center; gap: 10px; padding: 10px 16px calc(env(safe-area-inset-bottom, 0px) + 24px); position: relative; z-index: 5; }
+.sp-main { flex: 1 1 auto; min-height: 58px; border-radius: 29px; border: 0; background: var(--sp-btn, var(--green-1)); color: var(--sp-btn-ink, #000); font-weight: 900; font-style: italic; font-size: 21px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 18px; letter-spacing: .01em; text-transform: uppercase; transition: background .25s, color .25s, transform .15s var(--ease-snap), opacity .2s; box-shadow: 0 6px 16px -6px var(--sp-btn, var(--green-1)); }
+.sp-main:active { transform: scale(.97); }
+.sp-main[disabled] { opacity: .35; box-shadow: none; }
+.sp-main.is-spinning[disabled] { opacity: .85; }
+.sp-main .logo-mask { width: 26px; height: 26px; }
+.sp-main .sp-lbl { display: inline-block; }
+.sp-main.is-swap .sp-lbl { animation: spSwap .32s var(--ease-out) both; }
+@keyframes spSwap { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: none; } }
+.sp-main.is-spinning .logo-mask { animation: spTurn .9s linear infinite; }
+@keyframes spTurn { to { transform: rotate(360deg); } }
+.sp-round { position: relative; width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--line); background: var(--ink); display: grid; place-items: center; padding: 0; flex-shrink: 0; color: #fff; transition: opacity .2s, transform .15s var(--ease-snap); }
+.sp-round:active { transform: scale(.94); }
+.sp-round[disabled] { opacity: .3; }
+.sp-round .logo-mask { width: 28px; height: 28px; }
+.sp-round svg { width: 24px; height: 24px; }
+.sp-round .sp-count { position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; padding: 0 5px; box-sizing: border-box; border-radius: 10px; background: var(--sp-btn, var(--green-1)); color: var(--sp-btn-ink, #000); font-size: 12px; font-weight: 900; font-style: italic; display: grid; place-items: center; border: 2px solid #000; }
+.sp-round.is-reload svg { width: 26px; height: 26px; transition: transform .3s var(--ease-out); }
+.sp-round.is-reload:not([disabled]):active svg { transform: rotate(-40deg); }
+.sp-hint { text-align: center; font-size: 13px; color: var(--muted); min-height: 18px; padding: 0 16px; position: relative; z-index: 2; transition: opacity .25s; }
+
+/* ---------- transfer intro: emblem spins, then bursts ---------- */
+.sp-intro { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; background: #000; }
+.sp-intro .sp-emblem { width: 128px; height: 128px; color: #fff; will-change: transform, opacity; }
+.sp-intro canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.sp-intro .sp-ring { position: absolute; left: 50%; top: 50%; width: 128px; height: 128px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.7); transform: translate(-50%, -50%) scale(.6); opacity: 0; pointer-events: none; }
+.sp-reveal .sp-slot { animation: spRise .5s var(--ease-out) both; }
+.sp-reveal .sp-slot:nth-child(2) { animation-delay: .06s; }
+.sp-reveal .sp-slot:nth-child(3) { animation-delay: .12s; }
+@keyframes spRise { 0% { opacity: 0; transform: translateY(18px) scale(.94); } 100% { opacity: 1; transform: none; } }
+
+/* ---------- large card flip overlay (D2T.cards.openLarge) ---------- */
+.sp-ov { position: absolute; inset: 0; z-index: 40; overflow: hidden; }
+.sp-ov-scrim { position: absolute; inset: 0; background: radial-gradient(70% 55% at 50% 42%, rgba(20,20,26,0.96) 0%, rgba(0,0,0,0.96) 100%); opacity: 0; will-change: opacity; }
+.sp-ov-blur { position: absolute; inset: 0; will-change: filter; }
+.sp-ov-stage { position: absolute; left: 50%; top: 50%; width: 0; height: 0; perspective: 1400px; perspective-origin: 50% 50%; }
+.sp-flip { position: absolute; left: 0; top: 0; transform-style: preserve-3d; will-change: transform; }
+.sp-face { position: absolute; inset: 0; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.sp-face.is-back { transform: rotateY(180deg); }
+.sp-ov-below { position: absolute; left: 16px; right: 16px; opacity: 0; transform: translateY(10px); will-change: transform, opacity; }
+.sp-ov-hint { position: absolute; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom, 0px) + 22px); text-align: center; font-size: 13px; color: var(--muted); opacity: 0; }
+/* card back: dark metal with the emblem in a brushed finish */
+.sp-back { --rim: linear-gradient(160deg, #6E6E78 0%, #2A2A31 45%, #0D0D10 100%); --face: linear-gradient(165deg, #2A2A31 0%, #141418 35%, #0A0A0C 70%, #1C1C22 100%); --glow: none; }
+.sp-back .d2c-tex { background: repeating-linear-gradient(135deg, rgba(255,255,255,0.07) 0 0.2em, rgba(255,255,255,0) 0.2em 0.7em); }
+.sp-back .d2c-hi { background: radial-gradient(120% 55% at 15% 0%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 60%); }
+.sp-back-mark { position: absolute; inset: 0; display: grid; place-items: center; }
+.sp-back-mark .logo-mask { width: 46%; aspect-ratio: 234/237; background: linear-gradient(160deg, #9A9AA6 0%, #4A4A54 50%, #8A8A96 100%); }
+.sp-back-edge { position: absolute; inset: 1.4em 1.2em 2.6em; border: 0.14em solid rgba(255,255,255,0.08); clip-path: polygon(0 1em, 1em 0, calc(100% - 1em) 0, 100% 1em, 100% calc(100% - 1.6em), 50% 100%, 0 calc(100% - 1.6em)); }
+.sp-back-word { position: absolute; left: 0; right: 0; bottom: 3.6em; text-align: center; font-size: 0.9em; letter-spacing: 0.3em; font-weight: 800; color: rgba(255,255,255,0.28); }
+
+/* detail block under the big card */
+.sp-det { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 12px 14px; color: #fff; }
+.sp-det-name { font: var(--display); font-size: 20px; text-transform: uppercase; }
+.sp-det-line { font-size: 13px; color: var(--soft); margin-top: 3px; }
+.sp-det-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
+.sp-det-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.sp-det-stat { text-align: center; background: rgba(0,0,0,0.35); border-radius: 10px; padding: 7px 2px; }
+.sp-det-stat b { display: block; font-weight: 900; font-style: italic; font-size: 20px; line-height: 1; color: var(--sp-accent, #fff); }
+.sp-det-stat i { display: block; font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .1em; color: var(--muted); margin-top: 4px; }
+.sp-det-clubs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; font-size: 12px; color: var(--muted); }
+.sp-det-clubs span { width: 100%; font-weight: 700; }
+.sp-det-clubs b { font-size: 12px; font-weight: 800; color: #fff; padding: 4px 9px; border-radius: 10px; background: rgba(255,255,255,0.1); }
+.sp-det-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.sp-det-badges span { font-size: 11px; font-weight: 800; padding: 4px 9px; border-radius: 10px; background: rgba(255,255,255,0.1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-slot, .sp-node, .sp-cap, .sp-glow { transition: none; }
+  .sp-slot.is-hit .sp-strip, .sp-slot.is-hit .sp-sweep, .sp-slot.is-hit .sp-glow, .sp-reveal .sp-slot, .sp-main.is-spinning .logo-mask { animation: none; }
+}
+
+/* secondary pass option on the transfer roll */
+.sp-pass { align-self: center; min-height: 44px; padding: 0 18px; border: 0; background: none; color: var(--soft); font-weight: 700; font-size: 15px; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255,255,255,0.3); }
+.sp-pass:active { color: #fff; }
+
+/* ---------- transfer: after the roll lands, the cards drop into a tray under your pitch ---------- */
+.sp-screen .tr-pitch { display: none; }
+.sp-screen.is-placing .sp-head, .sp-screen.is-placing .sp-floor { display: none; }
+.sp-screen.is-placing .tr-pitch { display: flex; flex-direction: column; gap: 8px; flex: 1 1 auto; min-height: 0; padding: 0 16px; }
+.sp-screen.is-placing .sp-stage { flex: 0 0 188px; }
+.sp-screen.is-placing .sp-slot.is-sel { transform: scale(1.14) translateY(-6px); }
+.sp-screen.is-placing .sp-slot.is-other { filter: brightness(.4); }
+.sp-main.is-after { background: var(--ink); color: #fff; border: 1px solid var(--line); box-shadow: none; }
+.sp-main.is-after .logo-mask { display: none; }
+.sp-screen.is-placing .sp-row { transform: scale(.78); }
+.sp-screen.is-placing .sp-slot { touch-action: none; }
+.sp-slot.is-signed { opacity: 0; transform: translateY(-40px) scale(.7); transition: opacity .35s, transform .45s var(--ease-out); }
+.tr-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.tr-head-t { min-width: 0; }
+.tr-head-t b { display: block; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.tr-head-t span { display: block; font-size: 14px; color: var(--soft); margin-top: 3px; }
+.se-pitch.tr-field { flex: 1 1 auto; min-height: 0; max-height: none; }

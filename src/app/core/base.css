@@ -1,0 +1,132 @@
+/* D2T prototype: shared tokens, chrome and card styles.
+   Layout: one phone-width column (max 430px) centred on any screen; each route fills it. */
+:root {
+  color-scheme: dark;
+  --black: #000000;
+  --ink: #0E0E10;          /* panels on black */
+  --ink-2: #17171B;        /* raised panels */
+  --line: #26262C;         /* hairlines on black */
+  --white: #FFFFFF;
+  --soft: #BDBDC6;         /* secondary text on black */
+  --muted: #8E8E99;        /* tertiary text on black */
+  --green-1: #12F06C;      /* green home, top */
+  --green-2: #5CF79F;      /* green home, middle */
+  --green-3: #9DF4D8;      /* green home, bottom (mint) */
+  --on-green: #0A0A0A;     /* text and buttons on green */
+  --font: 'Exo 2', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+  --display: 900 italic 1em/0.95 var(--font);
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-snap: cubic-bezier(.3, 1.4, .5, 1);
+}
+html, body { height: 100%; }
+body { margin: 0; background: var(--black); color: var(--white); font-family: var(--font); -webkit-tap-highlight-color: transparent; overscroll-behavior: none; }
+button { font-family: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-1); outline-offset: 2px; }
+
+/* App frame */
+#app { position: relative; height: 100%; max-width: 430px; margin: 0 auto; overflow: hidden; background: var(--black); }
+.screen { position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden; }
+.screen-body { position: relative; flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; padding: 0 16px; -webkit-overflow-scrolling: touch; }
+.theme-green { background: linear-gradient(180deg, var(--green-1) 0%, var(--green-2) 46%, var(--green-3) 100%); color: var(--on-green); }
+.theme-black { background: var(--black); color: var(--white); }
+
+/* Green backdrop lines (FC-style beams), drawn by D2T.greenBackdrop() */
+.green-backdrop { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.green-backdrop svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* Top chrome on in-game screens: white short logo left, account right */
+.topbar { position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between; padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 10px; min-height: 44px; }
+.topbar .logo-mask { height: 26px; }
+.topbar-l { display: flex; align-items: center; gap: 6px; }
+.back-btn { width: 44px; height: 44px; margin-left: -10px; border: 0; background: none; padding: 0; display: grid; place-items: center; color: #fff; }
+.back-btn svg { width: 26px; height: 26px; }
+.acct-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--ink); display: grid; place-items: center; padding: 0; }
+.acct-btn svg { width: 20px; height: 20px; }
+
+/* Logos are white alpha PNGs used as masks, so any colour or animated fill can show through */
+.logo-mask { display: block; background: currentColor; -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
+
+/* Buttons */
+.btn { min-height: 56px; border-radius: 28px; border: 0; font-weight: 900; font-style: italic; font-size: 19px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 22px; }
+.btn-black { background: var(--on-green); color: var(--white); }
+.btn-green { background: var(--green-1); color: var(--black); }
+.btn-ghost { background: var(--ink); color: var(--white); border: 1px solid var(--line); font-style: normal; font-weight: 800; font-size: 15px; }
+.icon-btn { width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--line); background: var(--ink); display: grid; place-items: center; padding: 0; flex-shrink: 0; }
+
+/* Bottom action bar (fixed play / continue bar) */
+.actionbar { position: relative; z-index: 5; display: flex; align-items: center; gap: 10px; padding: 10px 16px calc(env(safe-area-inset-bottom, 0px) + 14px); }
+
+/* Slide-up sheet: always dismissable by dragging its bar or title down, or tapping the bar */
+.sheet-scrim { position: absolute; inset: 0; z-index: 50; background: rgba(0,0,0,0.6); opacity: 0; transition: opacity .25s; }
+.sheet-scrim.open { opacity: 1; }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 51; max-height: 86%; display: flex; flex-direction: column; background: #111114; color: var(--white); border-radius: 22px 22px 0 0; border-top: 1px solid var(--line); transform: translateY(100%); transition: transform .32s var(--ease-out); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.sheet.open { transform: translateY(0); }
+.sheet-bar { padding: 10px 0 6px; display: grid; place-items: center; cursor: grab; touch-action: none; }
+.sheet-bar span { width: 44px; height: 5px; border-radius: 3px; background: #3A3A42; }
+.sheet-title { padding: 2px 18px 12px; font: var(--display); font-size: 24px; touch-action: none; }
+.sheet-body { overflow-y: auto; padding: 0 18px 18px; }
+
+/* ---------- Cards (v1 shiny style) ----------
+   Every size scales from one layout: set --w (card width). 1em = width / 11.4. */
+.d2c { --w: 114px; position: relative; width: var(--w); height: calc(var(--w) * 1.667); font-size: calc(var(--w) / 11.4); flex-shrink: 0; filter: var(--glow, none); -webkit-user-select: none; user-select: none; }
+.d2c-rim { position: absolute; inset: 0; background: var(--rim); clip-path: polygon(0 1.2em, 1.2em 0, calc(100% - 1.2em) 0, 100% 1.2em, 100% calc(100% - 2em), 50% 100%, 0 calc(100% - 2em)); }
+.d2c-face { position: absolute; inset: 0.2em; overflow: hidden; background: var(--face); color: var(--ink-c); clip-path: polygon(0 1.1em, 1.1em 0, calc(100% - 1.1em) 0, 100% 1.1em, 100% calc(100% - 1.9em), 50% 100%, 0 calc(100% - 1.9em)); }
+.d2c-tex { position: absolute; inset: 0; background: repeating-linear-gradient(135deg, rgba(255,255,255,0.10) 0 0.2em, rgba(255,255,255,0) 0.2em 0.7em); }
+.d2c-club .d2c-tex { background: var(--tex); -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 60%); mask-image: linear-gradient(180deg, #000 0%, transparent 60%); }
+.d2c-hi { position: absolute; inset: 0; background: radial-gradient(120% 55% at 15% 0%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 60%); }
+.d2c-holo { position: absolute; inset: 0; background: var(--holo, none); mix-blend-mode: screen; }
+.d2t-shine { position: absolute; top: -30%; left: -70%; width: 45%; height: 160%; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%); transform: rotate(18deg); animation: d2tShine 4.5s ease-in-out infinite; pointer-events: none; }
+@keyframes d2tShine { 0% { left: -70%; } 30% { left: 130%; } 100% { left: 130%; } }
+.d2c-body { position: relative; display: flex; flex-direction: column; height: 100%; box-sizing: border-box; padding: 1em 0.8em 2.4em; }
+.d2c-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.d2c-left { display: flex; flex-direction: column; align-items: center; width: 3.4em; }
+.d2c-ovr { font-weight: 900; font-style: italic; font-size: 3em; line-height: 0.9; }
+.d2c-pos { font-size: 1.1em; font-weight: 800; margin-top: 0.27em; }
+.d2c-rule { width: 1.8em; height: 0.1em; background: var(--line-c); margin: 0.5em 0 0.4em; }
+.d2c-lvl { font-size: 0.8em; font-weight: 800; letter-spacing: 0.1em; opacity: 0.85; }
+.d2c-crest { width: 5.8em; height: 5.8em; object-fit: contain; margin-top: 0.2em; filter: drop-shadow(0 0.3em 0.4em rgba(0,0,0,0.35)); }
+.d2c-first { font-size: 1.05em; font-weight: 600; text-align: center; margin-top: 0.85em; opacity: 0.8; line-height: 1.1; }
+.d2c-last { font-weight: 900; font-style: italic; font-size: 1.35em; line-height: 1.1; text-align: center; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.d2c-div { height: 0.1em; background: var(--line-c); margin: 0.5em 0.6em 0.4em; }
+.d2c-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 0.4em; text-align: center; }
+.d2c-stat { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+.d2c-stat b { font-size: 1.2em; font-weight: 900; }
+.d2c-stat i { font-style: normal; font-size: 0.75em; font-weight: 800; letter-spacing: 0.06em; margin-top: 0.1em; opacity: 0.8; }
+/* mini (pitch) cards drop the first name and the stats */
+.d2c.mini .d2c-first, .d2c.mini .d2c-stats, .d2c.mini .d2c-div, .d2c.mini .d2c-lvl, .d2c.mini .d2c-rule { display: none; }
+.d2c.mini { height: calc(var(--w) * 1.2); }
+.d2c.mini .d2c-body { padding: 1.1em 0.6em 2em; }
+.d2c.mini .d2c-crest { width: 4.6em; height: 4.6em; }
+.d2c.mini .d2c-last { font-size: 1.6em; margin-top: 1em; }
+.d2c.mini .d2c-ovr { font-size: 3.4em; }
+.d2c.mini .d2c-pos { font-size: 1.3em; }
+/* club card */
+.d2c-club .d2c-face { color: #FFFFFF; }
+.d2c-club .d2c-body { align-items: center; padding: 1.2em 0.8em 2.6em; }
+.d2c-club .d2c-crest { margin-top: 0; }
+.d2c-cname { font-weight: 900; font-style: italic; font-size: 1.35em; line-height: 1.05; text-align: center; text-transform: uppercase; margin-top: 0.7em; text-shadow: 0 0.2em 0.6em rgba(0,0,0,0.5); }
+.d2c-season { font-size: 1.1em; font-weight: 800; padding: 0.2em 0.7em; border-radius: 0.6em; background: rgba(0,0,0,0.35); margin-top: 0.5em; }
+.d2c-grow { flex-grow: 1; }
+.d2c-hr { width: 60%; height: 0.1em; background: rgba(255,255,255,0.25); margin-bottom: 0.5em; }
+.d2c-flabel { font-size: 0.85em; font-weight: 800; letter-spacing: 0.1em; opacity: 0.7; }
+.d2c-foot { font-weight: 900; font-size: 1.3em; color: var(--club-text); }
+/* placeholder (before a spin) */
+.d2c-ph .d2c-rim { background: linear-gradient(170deg, #3A3A42, #1C1C21); }
+.d2c-ph .d2c-face { background: linear-gradient(170deg, #1A1A1F 0%, #0C0C0E 100%); color: #5A5A64; }
+.d2c-q { font-weight: 900; font-style: italic; font-size: 6em; line-height: 1; margin-top: 0.15em; color: #3A3A44; }
+.d2c-fuzz { width: 6em; height: 6em; object-fit: contain; filter: blur(0.55em) grayscale(1) contrast(0.7); opacity: 0.55; }
+.d2c-scr { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 1em; font-weight: 700; letter-spacing: 0.08em; color: #4A4A54; text-align: center; line-height: 1.5; }
+/* selection states used by roll screens */
+.d2c.is-dim { opacity: 0.55; }
+
+@media (prefers-reduced-motion: reduce) {
+  .d2t-shine { animation: none; display: none; }
+  *, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}
+
+/* Browser chrome blending (Tenaball lesson): iOS Safari colours the status bar from a solid strip fixed at the top
+   (over 10px, not see-through) and Safari 26 tints its bottom toolbar from what is fixed at the bottom; Android uses
+   theme-color. D2T.chrome(top, bottom) keeps all of them, and the page background, in step with each screen. */
+.chrome-top, .chrome-bot { position: fixed; left: 0; right: 0; z-index: 90; pointer-events: none; background: #000; transition: background-color .9s ease; }
+.chrome-top { top: 0; height: max(12px, env(safe-area-inset-top, 0px)); }
+.chrome-bot { bottom: 0; height: max(12px, env(safe-area-inset-bottom, 0px)); }
