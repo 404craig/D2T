@@ -113,6 +113,14 @@ Today a bronze or silver card is rarely wanted. Options, best first:
 - Subs are a swipeable strip of pitch-style cards (60px). Pitch cards are 50px.
 - No glows on squad or pitch cards. Selected: the card lifts, its position tab turns white and a white marker sits under it. Targets scale up with an outline. Options page: `design/prototype/squad-fit.html` (option A).
 
+## 8d. 433 Goals shirts (prototype, chosen 11 Oct)
+
+- Mode colour orange `#FF7A1A`. Tally is the progress bar: orange fills to the white 433 line; past 433 it bursts on the line, re-scales so 433 fits and the extra runs on in grey stripes. Endings: so close (within 25), exactly 433 (gold bar, shirt wave, confetti, giant 433), blown past (grey "+N" stamp), a long way short (calm "N short").
+- Big spinning shirts: surname across the shoulders, a ? where the number goes, the club crest printed full colour under it (line-drawn crests on a light patch), slight sheen and a light sweep as each lands. The ? bursts into his goals when he lands on the pitch.
+- Pitch shirts (56px): crest on a light disc at the collar, goals always at the three-figure size. Keeper wears the short-sleeved club shirt.
+- Kits: club stripes, hoops, halves and sleeves, darker outlines instead of white on most (patterns and second colours are design choices, not from a checked source).
+- Options page: `design/prototype/goals433.html`. Still open: pitch style, reveal style, curved or straight names, and the rules.
+
 ## 9. How the prototype behaves (built 11 Oct)
 
 - **Intro:** short black D2T, emblem spins as it opens into DROP2TOP at 75% width, then the slogan types in (DROP and TOP reversed out), then the logo glides up into the green home. About 5 seconds, tap to skip, first launch only.

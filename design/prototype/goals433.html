@@ -128,7 +128,7 @@
 <div class="page">
   <div class="head">
     <h1>433 Goals</h1>
-    <p>Round five. The big spinning shirts now default to crest C (printed on the back) with a ? where the goals will go; the ? bursts into his goals when he lands on the pitch. The other options are kept below, and the playable game has dropdowns for each choice. Names, clubs and Premier League career goals are real (every Premier League player with 60+ games).</p>
+    <p>Chosen so far: big spinning shirts carry the name, a ? where the goals go and the crest printed below; the small pitch shirts keep the crest on a light disc at the collar. The other options stay on the page for reference. Names, clubs and Premier League career goals are real (every Premier League player with 60+ games).</p>
   </div>
   <section class="sec"><h2>Pitch shirts: disc or just the badge</h2><p>The light disc can look like a head, so here is the same XI with just the badge sitting on the collar. Line-drawn crests (Derby, Spurs, Sheffield Wednesday, Swansea) get a thin light edge so they still read on dark shirts.</p><div class="row" id="pcrests"></div></section>
   <section class="sec"><h2>Crests on the spinning shirts</h2><p>Six ways to show the club on the big shirts; D, E and F are new. They all have a slight sheen and a light sweep as they land. Each panel loops on Derby (a line-drawn crest), Man Utd and Newcastle.</p><div class="row" id="crests"></div></section>
@@ -586,7 +586,7 @@
   document.getElementById('pcrests').innerHTML = [['collar', 'Disc (as now)', 'Full-colour crest on a light disc at the collar.'], ['badge', 'Just the badge', 'The crest alone, slightly bigger, sitting on the collar.']]
     .map(([k, n, d]) => `<div class="opt"><div class="opt-h"><span class="tag">PITCH</span><h3>${n}</h3><p>${d}</p></div><div class="phone" style="height:auto;padding:12px 0">${pitch('p1', pxi, -1, k)}</div></div>`).join('');
   // question mark on the back
-  const QM = [['qgoals', 'Name on, ? for goals (with crest C)', 'His name is on the back and the crest is printed below; a ? sits where the number goes. When he lands on the pitch the ? bursts into his goals.'],
+  const QM = [['qgoals', 'Chosen · Name on, ? for goals (crest C)', 'His name is on the back and the crest is printed below; a ? sits where the number goes. When he lands on the pitch the ? bursts into his goals.'],
     ['reveal', '? then the name', 'They spin in with a ? on the back. A beat after each one lands, the shirt turns once and comes back with his name on. A small extra moment of suspense.'],
     ['secret', '? until he is placed', 'The name stays hidden: you pick on club alone, and you only find out who he is (and his goals) when he lands on the pitch. A bigger gamble; maybe a harder mode.']];
   document.getElementById('qms').innerHTML = QM.map(([k, n, d]) => `<div class="opt"><div class="opt-h"><span class="tag">BACKS</span><h3>${n}</h3><p>${d}</p></div><div class="panel" data-qm="${k}" style="height:200px">${trioMyst()}</div></div>`).join('');
