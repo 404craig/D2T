@@ -128,7 +128,7 @@
 <div class="page">
   <div class="head">
     <h1>433 Goals</h1>
-    <p>Round four. The keeper is back in a short-sleeved club shirt. New: just the badge instead of the light disc (pitch and big shirts), three more ways to show the crest on the big spinning shirts, and a version with a ? on the back while they spin. The playable game has dropdowns for each choice. Names, clubs and Premier League career goals are real (every Premier League player with 60+ games).</p>
+    <p>Round five. The big spinning shirts now default to crest C (printed on the back) with a ? where the goals will go; the ? bursts into his goals when he lands on the pitch. The other options are kept below, and the playable game has dropdowns for each choice. Names, clubs and Premier League career goals are real (every Premier League player with 60+ games).</p>
   </div>
   <section class="sec"><h2>Pitch shirts: disc or just the badge</h2><p>The light disc can look like a head, so here is the same XI with just the badge sitting on the collar. Line-drawn crests (Derby, Spurs, Sheffield Wednesday, Swansea) get a thin light edge so they still read on dark shirts.</p><div class="row" id="pcrests"></div></section>
   <section class="sec"><h2>Crests on the spinning shirts</h2><p>Six ways to show the club on the big shirts; D, E and F are new. They all have a slight sheen and a light sweep as they land. Each panel loops on Derby (a line-drawn crest), Man Utd and Newcastle.</p><div class="row" id="crests"></div></section>
@@ -194,7 +194,7 @@
   })();
   const SHIRT = 'M31 9 L42 4 Q50 11 58 4 L69 9 L95 24 L85 44 L74 38 L74 96 L26 96 L26 38 L15 44 L5 24 Z';
   const SLEEVES = 'M31 9 L5 24 L15 44 L26 38 Z M69 9 L95 24 L85 44 L74 38 Z';
-  const CFG = { crest: 'collar', pcrest: 'collar', arc: 0, backs: 'names' };
+  const CFG = { crest: 'print', pcrest: 'collar', arc: 0, backs: 'qgoals' };
   // back of a shirt: surname across the shoulders, then the number where a number is printed (upper back).
   // Goals always use the three-figure size, so 9 and 104 look the same weight.
   // each letter placed on a shallow curve and tilted to follow it, squeezed sideways to fit the shoulders like the straight name
@@ -231,6 +231,8 @@
       // straight, or very slightly arched like printed shirt lettering: the middle stays at the straight height and the ends drop
       top = w < 80 ? '' : arc ? arcName(sur, fs, ny, arc === 1 ? 2.5 : 4.5, tstroke)
         : `<text x="50" y="${ny}" font-size="${fs}" textLength="${tl}" lengthAdjust="spacingAndGlyphs"${tstroke}>${D2T.esc(sur)}</text>`;
+      // goals still to come: a ? where the number will be printed (it becomes his goals when he lands on the pitch)
+      if (opts.goals == null && (opts.qgoals ?? (big && CFG.backs === 'qgoals'))) mid = `<text class="qm" x="50" y="${crestStyle === 'print' ? 62 : 65}" font-size="30"${tstroke}>?</text>`;
       // the name kept secret: a big question mark on the back instead (club colours and crest still show)
       if (opts.hide) { top = ''; const cy = crestStyle === 'centre' ? 29 : 54; mid = (k.pat ? `<circle cx="50" cy="${cy}" r="${crestStyle === 'centre' ? 10 : 20}" fill="${k.trim}"/>` : '') + `<text class="qm" x="50" y="${crestStyle === 'centre' ? 36 : 70}" font-size="${crestStyle === 'centre' ? 22 : 46}"${k.pat ? ' style="fill:#FFFFFF"' : tstroke}>?</text>`; }
       if (opts.goals != null) { const g = String(opts.goals); mid = `<text class="gnum" x="50" y="${crestStyle === 'print' ? 62 : 65}" font-size="30"${g.length > 2 ? ' textLength="46" lengthAdjust="spacingAndGlyphs"' : ''}${tstroke} style="transform-box:fill-box;transform-origin:center">${g}</text>`; }
@@ -302,13 +304,13 @@
   // ---------- reels: transform-only, speed-based blur, a soft overshoot and settle (no freeze, no re-render on landing) ----------
   let reelUid = 0;
   function runReels(wins, targets, pos, opts = {}) {
-    const base = 1250, stagger = 420, cs = opts.crest, hide = !!opts.hide;
+    const base = 1250, stagger = 420, cs = opts.crest, hide = !!opts.hide, qgoals = opts.qgoals;
     return new Promise((resolve) => {
       let landed = 0;
       wins.forEach((w, i) => {
         const strip = w.querySelector('.strip');
         const filler = []; while (filler.length < 16) { const L = P[pos]; const c = L[Math.floor(Math.random() * Math.min(L.length, 260))]; if (c !== targets[i]) filler.push(c); }
-        strip.innerHTML = filler.concat([targets[i]]).map((p) => shirt({ w: 96, player: p, crest: cs, hide })).join('');
+        strip.innerHTML = filler.concat([targets[i]]).map((p) => shirt({ w: 96, player: p, crest: cs, hide, qgoals })).join('');
         const D = strip.lastElementChild.getBoundingClientRect().top - strip.firstElementChild.getBoundingClientRect().top; // measured, so the stop lines up exactly with the rest position
         const id = 'rb' + (++reelUid);
         w.insertAdjacentHTML('afterbegin', `<svg width="0" height="0" style="position:absolute"><filter id="${id}" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="0 0"/></filter></svg>`);
@@ -332,14 +334,14 @@
         requestAnimationFrame(frame);
         function finish() {
           // keep the landed shirt exactly where it is: drop the filler above it and move the strip to rest
-          strip.style.filter = ''; strip.innerHTML = shirt({ w: 96, player: targets[i], crest: cs, hide, attr: `data-c="${i}"` }); strip.style.transform = 'none'; glint(strip.firstElementChild);
+          strip.style.filter = ''; strip.innerHTML = shirt({ w: 96, player: targets[i], crest: cs, hide, qgoals, attr: `data-c="${i}"` }); strip.style.transform = 'none'; glint(strip.firstElementChild);
           w.classList.add('landed');
           const done = () => { if (++landed === wins.length) resolve(); };
           if (!(hide && opts.reveal) || reduced) { done(); return; }
           // "? then the name": a beat after landing the shirt turns once and comes back with his name on
           setTimeout(() => { const el = strip.firstElementChild;
             el.animate([{ transform: 'scaleX(1)' }, { transform: 'scaleX(0)' }], { duration: 160, easing: 'ease-in', fill: 'forwards' }).onfinish = () => {
-              strip.innerHTML = shirt({ w: 96, player: targets[i], crest: cs, attr: `data-c="${i}"` });
+              strip.innerHTML = shirt({ w: 96, player: targets[i], crest: cs, qgoals, attr: `data-c="${i}"` });
               strip.firstElementChild.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1.08)', offset: 0.7 }, { transform: 'scaleX(1)' }], { duration: 260, easing: 'ease-out' }); glint(strip.firstElementChild); done(); }; }, 380);
         }
       });
@@ -466,7 +468,7 @@
   setTimeout(revealLoop, 900); setInterval(revealLoop, 4200);
 
   // ---------- playable ----------
-  document.getElementById('play').innerHTML = `<div class="opt"><div class="opt-h"><span class="tag">PLAYABLE</span><h3>One full game</h3><p>Reveal: <select id="rstyle"><option value="burst">Burst</option><option value="flip">Flip</option><option value="flap">Scoreboard roll</option></select> · Pitch: <select id="pstyle"><option value="p1">Night stadium</option><option value="p2">Chalk board</option><option value="p3">Goal net</option><option value="p4">Big 433</option></select> · Pitch crest: <select id="pcstyle"><option value="collar">Disc</option><option value="badge">Just the badge</option></select> · Big shirt crest: <select id="cstyle"><option value="collar">A Disc</option><option value="water">B Watermark</option><option value="print">C Printed</option><option value="badge">D Just the badge</option><option value="centre">E Big in the middle</option><option value="sleeve">F Sleeve</option></select> · Backs: <select id="bstyle"><option value="names">Names</option><option value="reveal">? then the name</option><option value="secret">? until placed</option></select> · Name: <select id="astyle"><option value="0">Straight</option><option value="1">Slight curve</option><option value="2">A touch more</option></select> <button class="replay" id="auto" style="margin-left:6px">Fill for me</button></p></div><div class="phone" id="game"></div></div>`;
+  document.getElementById('play').innerHTML = `<div class="opt"><div class="opt-h"><span class="tag">PLAYABLE</span><h3>One full game</h3><p>Reveal: <select id="rstyle"><option value="burst">Burst</option><option value="flip">Flip</option><option value="flap">Scoreboard roll</option></select> · Pitch: <select id="pstyle"><option value="p1">Night stadium</option><option value="p2">Chalk board</option><option value="p3">Goal net</option><option value="p4">Big 433</option></select> · Pitch crest: <select id="pcstyle"><option value="collar">Disc</option><option value="badge">Just the badge</option></select> · Big shirt crest: <select id="cstyle"><option value="print">C Printed</option><option value="collar">A Disc</option><option value="water">B Watermark</option><option value="badge">D Just the badge</option><option value="centre">E Big in the middle</option><option value="sleeve">F Sleeve</option></select> · Backs: <select id="bstyle"><option value="qgoals">Name, ? for goals</option><option value="names">Name only</option><option value="reveal">? then the name</option><option value="secret">? until placed</option></select> · Name: <select id="astyle"><option value="0">Straight</option><option value="1">Slight curve</option><option value="2">A touch more</option></select> <button class="replay" id="auto" style="margin-left:6px">Fill for me</button></p></div><div class="phone" id="game"></div></div>`;
   const G = { filled: {}, total: 0, respins: 3, cands: null, sel: null, busy: false, pstyle: 'p1' };
   const game = document.getElementById('game');
   const nextIdx = () => SLOTS.findIndex((s, i) => !G.filled[i]);
@@ -571,7 +573,7 @@
   document.getElementById('crests').innerHTML = CR.map(([k, n, d]) => `<div class="opt"><div class="opt-h"><span class="tag">CREST</span><h3>${n}</h3><p>${d}</p></div><div class="panel" data-crest="${k}" style="height:200px">${trioMyst()}</div></div>`).join('');
   document.querySelectorAll('[data-crest]').forEach((pn, i) => {
     const caps = () => pn.querySelectorAll('.cap').forEach((c, j) => { c.textContent = crestTrio[j].club; });
-    const go = async () => { pn.innerHTML = trioMyst(); await runReels([...pn.querySelectorAll('.reelwin')], crestTrio, 'FWD', { crest: pn.dataset.crest }); caps(); setTimeout(go, 3200); };
+    const go = async () => { pn.innerHTML = trioMyst(); await runReels([...pn.querySelectorAll('.reelwin')], crestTrio, 'FWD', { crest: pn.dataset.crest, qgoals: false }); caps(); setTimeout(go, 3200); };
     setTimeout(go, 500 + i * 300);
   });
   const clubsAll = Object.keys(D.clubs).filter((c) => ALL.some((p) => p.club === c)).sort();
@@ -584,11 +586,12 @@
   document.getElementById('pcrests').innerHTML = [['collar', 'Disc (as now)', 'Full-colour crest on a light disc at the collar.'], ['badge', 'Just the badge', 'The crest alone, slightly bigger, sitting on the collar.']]
     .map(([k, n, d]) => `<div class="opt"><div class="opt-h"><span class="tag">PITCH</span><h3>${n}</h3><p>${d}</p></div><div class="phone" style="height:auto;padding:12px 0">${pitch('p1', pxi, -1, k)}</div></div>`).join('');
   // question mark on the back
-  const QM = [['reveal', '? then the name', 'They spin in with a ? on the back. A beat after each one lands, the shirt turns once and comes back with his name on. A small extra moment of suspense.'],
+  const QM = [['qgoals', 'Name on, ? for goals (with crest C)', 'His name is on the back and the crest is printed below; a ? sits where the number goes. When he lands on the pitch the ? bursts into his goals.'],
+    ['reveal', '? then the name', 'They spin in with a ? on the back. A beat after each one lands, the shirt turns once and comes back with his name on. A small extra moment of suspense.'],
     ['secret', '? until he is placed', 'The name stays hidden: you pick on club alone, and you only find out who he is (and his goals) when he lands on the pitch. A bigger gamble; maybe a harder mode.']];
   document.getElementById('qms').innerHTML = QM.map(([k, n, d]) => `<div class="opt"><div class="opt-h"><span class="tag">BACKS</span><h3>${n}</h3><p>${d}</p></div><div class="panel" data-qm="${k}" style="height:200px">${trioMyst()}</div></div>`).join('');
   document.querySelectorAll('[data-qm]').forEach((pn, i) => {
-    const go = async () => { pn.innerHTML = trioMyst(); await runReels([...pn.querySelectorAll('.reelwin')], crestTrio, 'FWD', { crest: 'badge', hide: true, reveal: pn.dataset.qm === 'reveal' });
+    const go = async () => { pn.innerHTML = trioMyst(); const q = pn.dataset.qm; await runReels([...pn.querySelectorAll('.reelwin')], crestTrio, 'FWD', { crest: q === 'qgoals' ? 'print' : 'badge', hide: q !== 'qgoals', reveal: q === 'reveal' });
       pn.querySelectorAll('.cap').forEach((c, j) => { c.textContent = crestTrio[j].club; }); setTimeout(go, 3400); };
     setTimeout(go, 700 + i * 300);
   });
