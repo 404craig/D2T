@@ -238,13 +238,14 @@
       main.classList.add('is-after'); setMain(cfg.afterSettle.label, null); main.disabled = false;
     }
     main.onclick = () => {
-      if (state === 'idle') { spin(); return; }
+      if (state === 'idle') { dropTip(); spin(); return; }
       if (state === 'settled' && cfg.afterSettle) { cfg.afterSettle.onClick(); return; }
       if (state === 'settled' && selected >= 0) cfg.onConfirm(results[selected], { respins });
     };
     let respinning = false;
     reload.onclick = async () => {
       if (state === 'spinning' || respinning || respins == null || respins <= 0) return;
+      dropTip();
       respins -= 1; cfg.onRespinsChange && cfg.onRespinsChange(respins);
       main.classList.remove('is-after');
       respinning = true;
@@ -255,6 +256,14 @@
       const p = D2T.h(`<button class="sp-pass">${cfg.pass.label}</button>`);
       el.insertBefore(p, el.querySelector('.sp-bar')); p.onclick = cfg.pass.onPass;
     }
+    // cfg.tip { text, onDone }: a handwritten note with a curved arrow pointing at the respin button (as Tenaball's
+    // "stats" note). It goes after the first spin or respin and onDone records that for the run.
+    let tipEl = null;
+    if (cfg.tip && respins != null) {
+      tipEl = D2T.h(`<div class="sp-tip" aria-hidden="true"><svg viewBox="0 0 44 60"><path d="M40 8 C20 6 8 22 14 52" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M6 43 L14 54 L22 45" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${cfg.tip.text}</span></div>`);
+      el.querySelector('.sp-bar').appendChild(tipEl);
+    }
+    const dropTip = () => { if (!tipEl) return; tipEl.classList.add('gone'); const t = tipEl; tipEl = null; setTimeout(() => t.remove(), 450); cfg.tip.onDone && cfg.tip.onDone(); };
     setRespins(); main.disabled = false; setMain(cfg.mainLabel || 'Spin', null);
     hint(cfg.hintIdle || '');
     // A spin that already happened (back, or a refresh) shows where it landed instead of spinning again.
@@ -302,6 +311,7 @@
         selectedLabel: () => 'Play',
         hintIdle: 'Hit Spin to see who you get', hintSettled: 'Tap a club to pick it', hintSelected: 'Tap it again for the full card, or hit Play',
         respins: eng.respins,
+        tip: st.tipDone || st.spun ? null : { text: `${eng.respins} respins, use them wisely!`, onDone: () => { st.tipDone = true; D2T.save(); } },
         onRespinsChange: () => { GAME.respinClubs(); st.spun = false; D2T.save(); },
         onConfirm: (c) => { SND.play('lockin'); GAME.chooseClub(c.key); D2T.go('table'); }
       });

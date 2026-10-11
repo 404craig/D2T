@@ -61,21 +61,28 @@
       const lD = lPiece(L0, L1), lROP = lPiece(L1, L3), l2 = lPiece(L3, L4), lT = lPiece(L4, L5), lOP = lPiece(L5, LE);
       const longWhole = piece(D2T.ASSET.long, lx, ly, WL, HL, 'opacity:0');
 
-      // slogan (characters wrapped per word so lines break between words)
+      // slogan (characters wrapped per word so lines break between words); "DROP TO THE TOP?" always has a line of its own
       const slogan = D2T.h('<p class="fr-slogan anim" aria-label="Do you have what it takes to take a team from the drop to the top?"></p>');
-      slogan.innerHTML = SLOGAN.split(' ').map((w) => {
-        const rev = w === 'DROP' || w === 'TOP?' ;
-        const word = rev ? w.replace('?', '') : w;
-        const chars = [...word].map((c) => `<span class="fr-c">${c}</span>`).join('');
+      const word = (w) => {
+        const rev = w === 'DROP' || w === 'TOP?';
+        const core = rev ? w.replace('?', '') : w;
+        const chars = [...core].map((c) => `<span class="fr-c">${c}</span>`).join('');
         const inner = rev ? `<span class="fr-rev"><i class="fr-rev-bg"></i>${chars}</span>${w.endsWith('?') ? '<span class="fr-c">?</span>' : ''}` : chars;
         return `<span class="fr-w" aria-hidden="true">${inner}</span>`;
-      }).join(' ');
+      };
+      const words = SLOGAN.split(' '), cut = words.indexOf('DROP');
+      slogan.innerHTML = words.slice(0, cut).map(word).join(' ') + '<br><span class="fr-sl2">' + words.slice(cut).map(word).join(' ') + '</span>';
       wrap.appendChild(slogan);
+      // shrink the type if the last line would not fit the width
+      const line2 = slogan.querySelector('.fr-sl2');
+      for (let fs = 31; fs > 18 && line2.getBoundingClientRect().width > slogan.clientWidth; fs--) slogan.style.fontSize = fs - 1 + 'px';
 
-      // where the logo sits during the slogan beat
-      const beatY = Math.max(90, vh * 0.2);
+      // the slogan sits exactly in the middle of the screen; the logo waits just above it
+      const slH = slogan.getBoundingClientRect().height;
+      const slTop = (vh - slH) / 2;
+      slogan.style.top = slTop + 'px';
+      const beatY = Math.max(24, slTop - 34 - HL);
       const beatShift = beatY - ly;
-      slogan.style.top = (beatY + HL + 34) + 'px';
 
       const skipBtn = wrap.querySelector('.fr-skip');
       timers.push(setTimeout(() => skipBtn.classList.add('on'), 900));

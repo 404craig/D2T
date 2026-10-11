@@ -98,7 +98,8 @@
 .sp-back .d2c-hi { background: radial-gradient(120% 55% at 15% 0%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 60%); }
 .sp-back-mark { position: absolute; inset: 0; display: grid; place-items: center; }
 .sp-back-mark .logo-mask { width: 46%; aspect-ratio: 234/237; background: linear-gradient(160deg, #9A9AA6 0%, #4A4A54 50%, #8A8A96 100%); }
-.sp-back-edge { position: absolute; inset: 1.4em 1.2em 2.6em; border: 0.14em solid rgba(255,255,255,0.08); clip-path: polygon(0 1em, 1em 0, calc(100% - 1em) 0, 100% 1em, 100% calc(100% - 1.6em), 50% 100%, 0 calc(100% - 1.6em)); }
+.sp-back-edge { position: absolute; left: 1.2em; right: 1.2em; top: 1.4em; bottom: 2.6em; width: calc(100% - 2.4em); height: calc(100% - 4em); overflow: visible; }
+.sp-back-edge path { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 0.14em; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
 .sp-back-word { position: absolute; left: 0; right: 0; bottom: 3.6em; text-align: center; font-size: 0.9em; letter-spacing: 0.3em; font-weight: 800; color: rgba(255,255,255,0.28); }
 
 /* detail block under the big card */
@@ -142,3 +143,11 @@
 .tr-head-t b { display: block; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .tr-head-t span { display: block; font-size: 14px; color: var(--soft); margin-top: 3px; }
 .se-pitch.tr-field { flex: 1 1 auto; min-height: 0; max-height: none; }
+
+/* handwritten note pointing at the respin button (as Tenaball's "stats" note) */
+.sp-tip { position: absolute; left: 30px; bottom: calc(100% - 4px); display: flex; align-items: flex-start; gap: 2px; color: #fff; pointer-events: none; opacity: .92; transition: opacity .4s; animation: spTipIn .5s .6s var(--ease-out) both; }
+.sp-tip svg { width: 34px; height: 46px; flex: none; }
+.sp-tip span { font-family: Caveat, 'Bradley Hand', 'Segoe Print', cursive; font-weight: 600; font-size: 23px; line-height: 1; white-space: nowrap; transform: rotate(-2.5deg); transform-origin: left bottom; margin-top: -2px; }
+.sp-tip.gone { opacity: 0; }
+@keyframes spTipIn { from { opacity: 0; transform: translateY(6px); } to { opacity: .92; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .sp-tip { animation: none; } }
