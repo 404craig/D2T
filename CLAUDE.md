@@ -1,6 +1,6 @@
 # DROP2TOP: notes for Claude Code
 
-A mobile web football game. The page is built: edit `src/` and `data/`, then run `python3 scripts/build-data.py` (if data changed) and `python3 scripts/build.py`. Never edit `index.html` by hand. Bump `version.txt` and add a line to `UPDATES` in `src/ui.js` for every change people will notice; Home Screen copies compare `version.txt` with `D2T_BUILD` and reload themselves.
+A mobile web football game. The page is built: edit `src/` and `data/`, then run `python3 scripts/build-data.py` (if data changed) and `python3 scripts/build.py`. Never edit `index.html` by hand. Bump `version.txt` for every change people will notice; Home Screen copies compare `version.txt` with `D2T_BUILD` and reload themselves (only on screens where nothing is lost).
 
 ## Rules set by Craig (keep these)
 
@@ -22,12 +22,15 @@ A mobile web football game. The page is built: edit `src/` and `data/`, then run
 - Raids: signing a player lowers his club's strength from that date; each of its later real wins or draws can be downgraded with chance 3 x the strength lost (`otherResults`). Everyone else's results stay as history.
 - Table: other clubs' matches count on their real dates; your 38 are simulated.
 
-## Interface (src/ui.js)
+## Interface (src/app)
 
-- Views: home, clubroll, hub (club-themed), squad, roll, match, summary, record, howto, updates. Sheets for the table, cards, menus and the game's own questions (`ask`), never `confirm`, `prompt` or `alert`.
-- Phone rules from Tenaball: tap targets 44px or more; safe-area padding; solid status bar strip (`.topfade`); a per-action double-tap guard (`busy`) and a watchdog; sound starts on the first tap; reduced motion respected; share image built ahead so Share opens at once.
-- Saved on the phone: `d2t-run-v1` (the run), `d2t-record-v1` (finished runs, stars per club, daily results), `d2t-settings-v1`.
-- Daily challenge: the club comes from a hash of the date (`dailyEntry`), the seed is `daily-YYYY-MM-DD`, one go per day.
+- Built from the design prototype (`design/prototype`, spec in `design/UI_SPEC.md`). `core/app.js` is the shell: `D2T.screen(name, def)`, hash routes, `D2T.state` saved as `d2t-v2`, `D2T.sheet`, `D2T.topbar`, logos as masks. `core/game.js` (`D2T.game`) is the only bridge to the engine and data: screens never call `D2TE` directly. `core/season.js` holds the in-run helpers, `core/boot.js` starts sound and the router.
+- Screens: intro and home (green), then black with the small white D2T logo and the account circle: howto, account, league, stats, spin (club roll), table (historic reveal), squad (pitch, formations, drag to swap, placing a signing), transfer (the roll), fixtures, match, summary.
+- In-run screens only open when the run has reached them (`GAME.allowed`, `GAME.stepFor`); spins and the table reveal never replay (`run.spun`, `run.tableSeen`). Matches are decided in the engine before the animation, so a refresh can't change a result.
+- Squad: the whole real squad is on the bench before the season and a formation change picks a new best XI; once the season starts only the XI is left. A signing is held (`run.pending`) until you tap the shirt it takes; the best spot pulses.
+- Achievements are cumulative (a title also counts as top 3, top half and beating the drop). The real result is never shown after a match.
+- Phone rules from Tenaball: tap targets 44px or more; safe-area padding; solid status bar strip (`.screen::before`); sound starts on the first tap; reduced motion respected; share image built ahead so Share opens at once; sheets drag closed.
+- Build order of CSS and JS is the list at the top of `scripts/build.py`; add new screens there.
 
 ## Data
 
