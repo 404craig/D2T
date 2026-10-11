@@ -1,6 +1,6 @@
 // Squad and tactics. Pitch with mini cards in formation, formation sheet, a carousel underneath, tap and drag swaps.
-// Before the season the carousel holds the whole real squad. Once the season starts it's just your 11, and the
-// carousel only appears for a new signing waiting for a shirt (the player he replaces leaves for good).
+// Before the season the carousel holds the whole real squad. Once the season starts it's just your 11; new players
+// are signed straight onto the pitch from the transfer roll (screens/transfer.js).
 (function () {
   const D2T = window.D2T, SE = D2T.se, GAME = D2T.game;
   const PITCH_W = 56, SUB_W = 92;
@@ -8,11 +8,7 @@
   const last = (n) => n.split(' ').slice(-1)[0];
   const idOf = (s) => (/^\d+$/.test(String(s)) ? +s : s);   // player ids are numbers; legend ids are text
 
-  const pitchLines = `<svg class="se-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-    <rect x="3" y="2" width="94" height="96" rx=".6"/><line x1="3" y1="50" x2="97" y2="50"/>
-    <rect x="24" y="2" width="52" height="15"/><rect x="38" y="2" width="24" height="5.5"/>
-    <rect x="24" y="83" width="52" height="15"/><rect x="38" y="92.5" width="24" height="5.5"/>
-  </svg><span class="se-circle" aria-hidden="true"></span><span class="se-spot" aria-hidden="true"></span>`;
+  const pitchLines = SE.pitchLines;
 
   D2T.screen('squad', {
     title: 'Squad', theme: 'black',
@@ -21,7 +17,7 @@
       const eng = GAME.eng();
       SE.accent(root, club); SE.setStep(ctx, 'squad');
       const reduced = D2T.reduced();
-      const pre = GAME.preseason(), placing = st.pending != null && eng.phase === 'window';
+      const pre = GAME.preseason();
       root.appendChild(D2T.topbar());
       const gwLabel = pre ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, data.fixtures.length)}`;
       const body = D2T.h(`<div class="screen-body se-squad">
@@ -34,7 +30,6 @@
         <button class="se-formlink" type="button">Change formation · <b class="se-fname"></b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="se-subshead"><span class="se-subs-t"></span><span class="se-hint" aria-live="polite"></span></div>
         <div class="se-subs" role="list" aria-label="Squad"></div>
-        ${placing ? '<button class="se-formlink se-cancel" type="button" style="align-self:center">Back to the roll</button>' : ''}
       </div>`);
       root.appendChild(body);
 
@@ -42,24 +37,19 @@
       const fx = SE.fixture(data, pre ? 1 : eng.gw);
       const oppC = fx ? SE.club(data, fx.opp) : null;
       const nextHTML = fx ? `<div class="se-next"><img src="${oppC.crest}" alt=""><div class="se-next-t"><small>Next · GW${fx.gw} · ${SE.date(fx.date, false)}</small><b>${D2T.esc(oppC.name)}</b><span class="se-ha">${fx.ha === 'H' ? 'Home' : 'Away'}</span></div></div>` : '';
-      const label = pre ? 'Pre-season' : placing ? 'Pick a shirt' : eng.phase === 'window' ? 'Transfers' : 'Play';
+      const label = pre ? 'Pre-season' : 'Play';
       const bar = D2T.h(`<footer class="actionbar se-nextbar">${nextHTML}<button class="btn se-btn se-play" type="button">${label}</button></footer>`);
       root.appendChild(bar);
       const playBtn = bar.querySelector('button');
-      if (placing) playBtn.disabled = true;
       playBtn.onclick = () => {
         if (pre) { GAME.startSeason(); D2T.go('transfer'); return; }
         if (eng.phase === 'window') { D2T.go('transfer'); return; }
         st.step = 'fixtures'; D2T.save(); D2T.go('fixtures');
       };
-      const cancel = body.querySelector('.se-cancel');
-      if (cancel) cancel.onclick = () => { st.pending = null; st.step = 'transfer'; D2T.save(); D2T.go('transfer'); };
 
       const slotsEl = body.querySelector('.se-slots'), subsEl = body.querySelector('.se-subs');
       const hintEl = body.querySelector('.se-hint'), ratingEl = body.querySelector('.se-rating-n');
       let L = null, sel = null, shownRating = 0;
-      const best = placing ? GAME.bestSlot(st.pending) : -1;
-      const preview = placing ? GAME.preview(st.pending) : null;
 
       // ---------- render ----------
       const allItems = () => [...root.querySelectorAll('[data-card]')];
@@ -68,14 +58,12 @@
         const slots = GAME.slots();
         slotsEl.innerHTML = slots.map((s, i) => {
           const c = L.xi[i], fit = GAME.fit(c.id, i), oop = fit !== 'green';
-          const d = preview ? preview[i].delta : null;
-          const deltaChip = preview ? `<span class="se-oopchip se-delta" style="background:${d > 0.05 ? 'var(--se-acc)' : '#2A2A30'};color:${d > 0.05 ? 'var(--se-ink)' : '#fff'}">${d > 0 ? '+' : ''}${d.toFixed(1)}</span>` : '';
-          return `<div class="se-slot${oop ? ' se-oop' : ''}${i === best ? ' se-best' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
+          return `<div class="se-slot${oop ? ' se-oop' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
             <div class="se-cardwrap" data-card="${c.id}" data-kind="pitch" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}${oop ? ', out of position' : ''}">
-              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false })}${deltaChip || (oop ? `<span class="se-oopchip se-fit-${fit}">${s.pos}</span>` : '')}</div></div>`;
+              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false })}${oop ? `<span class="se-oopchip se-fit-${fit}">${s.pos}</span>` : ''}</div></div>`;
         }).join('');
         const sl = subsEl.scrollLeft;
-        subsEl.innerHTML = L.subs.map((c) => `<div class="se-sub${placing ? ' se-newsign' : ''}" role="listitem"><div class="se-cardwrap" data-card="${c.id}" data-kind="sub" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, ${ROLE_NAME[c.pos]}${placing ? ', new signing' : ', in the squad'}">${D2T.cards.player(c, { w: SUB_W, shine: placing })}</div></div>`).join('');
+        subsEl.innerHTML = L.subs.map((c) => `<div class="se-sub" role="listitem"><div class="se-cardwrap" data-card="${c.id}" data-kind="sub" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, ${ROLE_NAME[c.pos]}, in the squad">${D2T.cards.player(c, { w: SUB_W, shine: false })}</div></div>`).join('');
         subsEl.scrollLeft = sl;
         body.querySelector('.se-fname').textContent = GAME.eng().formation;
         const showSubs = L.subs.length > 0;
@@ -84,7 +72,7 @@
         let gone = body.querySelector('.se-gone');
         if (!showSubs && !pre && !gone) { gone = D2T.h('<p class="se-note se-gone">The rest of the squad has gone. New faces only come through the transfer rolls, and each one takes a shirt from your XI.</p>'); subsEl.after(gone); }
         if (gone) gone.style.display = showSubs || pre ? 'none' : '';
-        body.querySelector('.se-subs-t').textContent = placing ? 'New signing' : `Squad · ${L.subs.length}`;
+        body.querySelector('.se-subs-t').textContent = `Squad · ${L.subs.length}`;
         setRating(GAME.rating());
         if (before) animateMoves(before);
         applySel();
@@ -127,36 +115,26 @@
       const nameOf = (id) => { const c = L.all.get(String(id)); return c ? c.name : ''; };
       function applySel() {
         root.querySelectorAll('.se-sel').forEach((n) => n.classList.remove('se-sel'));
-        slotsEl.classList.toggle('se-armed', !!sel || placing);
+        slotsEl.classList.toggle('se-armed', !!sel);
         if (sel) {
           const el = root.querySelector(`[data-kind="${sel.kind}"][data-card="${sel.id}"]`);
           if (el) el.classList.add('se-sel'); else sel = null;
         }
         const nm = sel ? last(nameOf(sel.id)) : '';
-        if (placing) hintEl.textContent = `Tap a shirt for ${last(nameOf(st.pending))}. Best spot is lit.`;
-        else if (!sel) hintEl.textContent = pre ? 'Tap to select, drag onto the pitch' : '';
+        if (!sel) hintEl.textContent = pre ? 'Tap to select, drag onto the pitch' : '';
         else hintEl.textContent = sel.kind === 'sub' ? `Tap a player to bring on ${nm}` : `Tap a player to swap with ${nm}`;
-        if (!pre && !placing) bar.dataset.hint = sel ? `Tap a player to swap with ${nm}` : '';
+        if (!pre) bar.dataset.hint = sel ? `Tap a player to swap with ${nm}` : '';
       }
       function select(kind, id) { sel = { kind, id }; applySel(); }
       function clearSel() { sel = null; applySel(); }
       function openBig(el, id) {
         const card = L.all.get(String(id)); if (!card) return;
-        const below = `<div class="sp-det" style="--sp-accent:${club.accent}"><div class="sp-det-name">${D2T.esc(card.name)}</div><div class="sp-det-line">${D2T.esc(card.club)}${card.club2 ? ' / ' + D2T.esc(card.club2) : ''} ${card.season} · ${card.pos} · ${card.apps} games, ${card.goals} goals${card.provisional ? ' · provisional rating' : ''}</div></div>`;
+        const below = D2T.cards.info(card, club.text);
         D2T.cards.openLarge(el.querySelector('.d2c') || el, D2T.cards.player(card, { w: 280 }), { below });
       }
 
-      // ---------- swaps and placing a signing ----------
-      function placeAt(slot, ghostRect) {
-        const before = new Map(allItems().map((el) => [el.dataset.card, el.getBoundingClientRect()]));
-        if (ghostRect) before.set(String(st.pending), ghostRect);
-        if (!GAME.place(slot)) return;
-        window.D2TSound && window.D2TSound.play('subIn');
-        if (GAME.eng().phase === 'window') { D2T.go('transfer'); return; }   // the next roll in this window
-        D2T.go('squad');
-      }
+      // ---------- swaps ----------
       function swap(a, b, ghostRect) { // a, b: { kind, id }
-        if (placing) { const pitch = a.kind === 'pitch' ? a : b.kind === 'pitch' ? b : null; if (pitch) placeAt(+root.querySelector(`[data-kind="pitch"][data-card="${pitch.id}"]`).dataset.i, ghostRect); return; }
         if (a.kind === 'sub' && b.kind === 'sub') return;
         const before = new Map(allItems().map((el) => [el.dataset.card, el.getBoundingClientRect()]));
         if (ghostRect) before.set(String(a.id), ghostRect);
@@ -169,11 +147,6 @@
       // ---------- taps ----------
       function tap(item) {
         const kind = item.dataset.kind, id = item.dataset.card;
-        if (placing) {
-          if (kind === 'pitch') { placeAt(+item.dataset.i); return; }
-          if (sel && sel.id === id) { openBig(item, id); return; }
-          select(kind, id); return;
-        }
         if (sel && sel.kind === kind && sel.id === id) { openBig(item, id); return; }
         if (sel && !(sel.kind === 'sub' && kind === 'sub')) { swap(sel, { kind, id }); return; }
         select(kind, id);
@@ -211,19 +184,18 @@
       const onCancel = (e) => { if (!press || e.pointerId !== press.id2) return; const p = press; press = null; if (p.dragging) drop(p, null, null); };
 
       function startDrag(e) {
-        if (placing && press.kind === 'pitch') { press = null; return; }
         press.dragging = true;
         const card = L.all.get(press.id), w = 70;
         const hr = host.getBoundingClientRect();
         ghost = D2T.h(`<div class="se-ghost" aria-hidden="true">${D2T.cards.player(card, { w, mini: true, shine: false })}</div>`);
-        ghost._hr = hr; ghost._w = w; ghost._h = w * 1.667;
+        ghost._hr = hr; ghost._w = w; ghost._h = w * 1.2;
         host.appendChild(ghost);
         press.item.classList.add('se-dragsrc');
         root.classList.add('se-dragging');
         subsEl.style.overflowX = 'hidden';
         sel = null; applySel();
         moveGhost(e.clientX, e.clientY);
-        hintEl.textContent = placing ? 'Drop on the player he replaces' : 'Drop on a player to swap';
+        hintEl.textContent = 'Drop on a player to swap';
       }
       function moveGhost(x, y) {
         const hr = ghost._hr;
@@ -279,7 +251,6 @@
             const before = new Map(allItems().map((n) => [n.dataset.card, n.getBoundingClientRect()]));
             GAME.setFormation(pending);
             sel = null;
-            if (placing) { D2T.go('squad'); return; }
             render(before);
           }
         });

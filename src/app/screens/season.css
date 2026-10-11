@@ -1,6 +1,6 @@
 /* Season agent: table, squad, fixtures, match. Every class starts with se-.
    Inside a run the club colour is the accent: --se-acc (fill), --se-ink (text on the fill), --se-text (accent text on black). */
-.se-run { --se-acc: var(--lime); --se-ink: #000; --se-text: var(--lime); --se-acc-a: rgba(212,255,0,.22); --se-acc-b: rgba(212,255,0,.55); }
+.se-run { --se-acc: var(--green-1); --se-ink: #000; --se-text: var(--green-1); --se-acc-a: rgba(18,240,108,.22); --se-acc-b: rgba(18,240,108,.55); }
 .se-run .screen-body { scrollbar-width: none; }
 .se-run .screen-body::-webkit-scrollbar { display: none; }
 

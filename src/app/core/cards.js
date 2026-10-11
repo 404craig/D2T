@@ -83,6 +83,32 @@
       <span class="d2c-grow"></span><span class="d2c-scr" data-scr="8">${scramble(8)}</span><span class="d2c-scr" data-scr="6">${scramble(6)}</span></div></div></div>`;
   }
 
+  // Long surnames shrink to fit the card instead of being cut with an ellipsis: every .d2c-last added to the page is
+  // measured once and scaled down (to 55% at most), and again once Exo 2 has loaded.
+  function fitName(el, force) {
+    if (!el.isConnected || (el.dataset.fit && !force)) return;
+    const cw = el.clientWidth; if (!cw) return;
+    el.dataset.fit = '1'; el.style.fontSize = '';
+    const sw = el.scrollWidth;
+    if (sw > cw + 1) { const fs = parseFloat(getComputedStyle(el).fontSize); el.style.fontSize = Math.max(fs * 0.55, fs * (cw / sw) * 0.97).toFixed(2) + 'px'; }
+  }
+  const fitIn = (n) => { if (n.nodeType !== 1) return; if (n.classList.contains('d2c-last')) fitName(n); else n.querySelectorAll('.d2c-last').forEach((e) => fitName(e)); };
+  if (typeof MutationObserver !== 'undefined') {
+    new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach(fitIn))).observe(document.documentElement, { childList: true, subtree: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => document.querySelectorAll('.d2c-last').forEach((e) => fitName(e, true)));
+  }
+
+  // What sits under a big player card: the facts the small card can't show (no repeat of its six stats).
+  // Career numbers are every Premier League season in the data; clean sheets only where the rated data has them.
+  function info(c, accent) {
+    const k = c.career, yrs = k ? (k.f === k.l ? k.f : `${k.f} to ${k.l}`) : '';
+    const season = `${c.apps} game${c.apps === 1 ? '' : 's'}, ${c.goals} goal${c.goals === 1 ? '' : 's'}${c.cleanSheets != null && (c.pos === 'GK' || c.pos === 'DEF') ? `, ${c.cleanSheets} clean sheet${c.cleanSheets === 1 ? '' : 's'}` : ''}`;
+    return `<div class="sp-det" style="--sp-accent:${accent || '#fff'}"><div class="sp-det-name">${esc(c.name)}</div>
+      <div class="sp-det-line">${esc(c.club)}${c.club2 ? ' / ' + esc(c.club2) : ''} ${c.season}: ${season}${c.nat ? ' · ' + esc(c.nat) : ''}${c.provisional ? ' · provisional rating' : ''}</div>
+      ${k ? `<div class="sp-det-grid cols-3"><span class="sp-det-stat"><b>${k.a}</b><i>PL GAMES</i></span><span class="sp-det-stat"><b>${k.g}</b><i>PL GOALS</i></span><span class="sp-det-stat"><b>${k.n}</b><i>SEASONS</i></span></div>
+      <div class="sp-det-clubs"><span>Premier League ${yrs}</span>${k.c.map((n) => `<b>${esc(n)}</b>`).join('')}</div>` : ''}</div>`;
+  }
+
   function ordinal(n) { const s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
 
   // Big detail card. Default is a plain scale overlay; core/flip.js replaces this with the spin transition.
@@ -99,5 +125,5 @@
   }
 
   D2T.LV = LV; D2T.KEYS = KEYS; D2T.GK_KEYS = GK_KEYS; D2T.esc = esc; D2T.ordinal = ordinal; D2T.mix = mix;
-  D2T.cards = { player, club, placeholder, openLarge, clubPaint, scramble };
+  D2T.cards = { player, club, placeholder, openLarge, clubPaint, scramble, info };
 })();

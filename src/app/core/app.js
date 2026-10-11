@@ -12,8 +12,7 @@
     run: null,                         // { step, eng (the engine's run), tableSeen, pending, match } (core/game.js)
     record: { runs: [], clubs: {} },   // finished runs, best per club
     account: { signedIn: false, name: '', email: '' },
-    settings: { muted: false },
-    seenIntro: false
+    settings: { muted: false }
   };
   function load() {
     let s;
@@ -70,12 +69,30 @@
   D2T.ICON = ICON;
 
   // In-game chrome: small white D2T logo top left (taps home), account circle top right.
+  // Pages reached from home or the account circle (howto, league, stats, account) get a back arrow before the logo.
   D2T.topbar = (opts = {}) => {
-    const el = D2T.h(`<header class="topbar"><button class="logo-home" aria-label="Home" style="border:0;background:none;padding:0;color:#fff;height:26px;display:flex">${D2T.logo('short', { style: 'height:26px' })}</button>
-      ${opts.middle || '<span></span>'}<button class="acct-btn" aria-label="Account">${ICON.account}</button></header>`);
+    const el = D2T.h(`<header class="topbar"><span class="topbar-l">${opts.back ? `<button class="back-btn" aria-label="Back">${ICON.back}</button>` : ''}<button class="logo-home" aria-label="Home" style="border:0;background:none;padding:0;color:#fff;height:26px;display:flex">${D2T.logo('short', { style: 'height:26px' })}</button></span>
+      ${opts.middle || '<span></span>'}${opts.noAccount ? '<span></span>' : `<button class="acct-btn" aria-label="Account">${ICON.account}</button>`}</header>`);
     el.querySelector('.logo-home').onclick = () => D2T.go('home');
-    el.querySelector('.acct-btn').onclick = () => D2T.go('account');
+    const acct = el.querySelector('.acct-btn'); if (acct) acct.onclick = () => D2T.go('account');
+    const back = el.querySelector('.back-btn'); if (back) back.onclick = D2T.back;
     return el;
+  };
+  D2T.back = () => { const p = prevName; D2T.go(p && p !== 'intro' && p !== currentName ? p : 'home'); };
+
+  // ---------- browser chrome: status bar, toolbars and page background follow each screen's top and bottom colours ----------
+  const THEME_CHROME = { green: ['#12F06C', '#9DF4D8'], black: ['#000000', '#000000'] };
+  let strips = null;
+  D2T.chrome = (top, bottom) => {
+    if (!strips) {
+      strips = [D2T.h('<div class="chrome-top" aria-hidden="true"></div>'), D2T.h('<div class="chrome-bot" aria-hidden="true"></div>')];
+      document.body.append(...strips);
+    }
+    strips[0].style.backgroundColor = top; strips[1].style.backgroundColor = bottom;
+    document.documentElement.style.backgroundColor = bottom; document.body.style.backgroundColor = bottom;
+    let m = document.querySelector('meta[name="theme-color"]');
+    if (!m) { m = document.createElement('meta'); m.name = 'theme-color'; document.head.appendChild(m); }
+    m.content = top;
   };
 
   // ---------- slide-up sheet with drag-to-close ----------
@@ -110,7 +127,7 @@
 
   // ---------- router ----------
   D2T.params = {};
-  let current = null, currentName = null;
+  let current = null, currentName = null, prevName = null, introPlayed = false;
   D2T.go = (name, params = {}) => {
     D2T.params = params;
     if (location.hash.slice(1) === name) render(name); else location.hash = name;
@@ -119,7 +136,7 @@
   // In-run screens only open when the saved run has reached them; anything else goes to where the run is.
   function routeName() {
     let n = location.hash.slice(1);
-    if (!D2T.screens[n]) n = D2T.state.seenIntro ? 'home' : 'intro';
+    if (!D2T.screens[n]) n = 'home';
     if (RUN_SCREENS.includes(n) && D2T.game) {
       if (n === 'spin' && !D2T.state.run) return n;
       if (!D2T.game.allowed(n)) { const step = D2T.game.stepFor(); return step || 'home'; }
@@ -134,7 +151,10 @@
     const root = D2T.h(`<main class="screen theme-${def.theme || 'black'}" data-screen="${name}"></main>`);
     app.querySelectorAll('.screen').forEach((n) => n.remove());
     app.appendChild(root);
+    if (currentName !== name) prevName = currentName;
     current = def; currentName = name;
+    const ch = def.chrome || THEME_CHROME[def.theme || 'black'] || THEME_CHROME.black;
+    D2T.chrome(ch[0], ch[1]);
     document.title = 'DROP2TOP' + (def.title ? ' · ' + def.title : '');
     try { def.mount(root, D2T.params || {}); } catch (e) { console.error(e); root.innerHTML = `<div style="padding:24px">Screen "${name}" failed to load: ${D2T.esc(e.message)}</div>`; }
     D2T.params = {};
@@ -144,7 +164,13 @@
     if (location.hash.slice(1) !== n) { history.replaceState(null, '', '#' + n); }
     render(n);
   });
-  D2T.start = () => { const n = routeName(); if (location.hash.slice(1) !== n) history.replaceState(null, '', '#' + n); render(n); checkVersion(); };
+  // Every fresh load opens with the intro, which hands over to home (where Continue picks up a run).
+  D2T.start = () => {
+    let n = routeName();
+    if (!introPlayed) { introPlayed = true; n = 'intro'; }
+    if (location.hash.slice(1) !== n) history.replaceState(null, '', '#' + n);
+    render(n); checkVersion();
+  };
 
   // Home Screen copies keep an old page in memory: look for a newer build when the game opens or comes back,
   // and reload only on screens where nothing is lost (Tenaball lesson).

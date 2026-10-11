@@ -5,7 +5,7 @@
   const D2T = window.D2T, G = window.D2T_GAME, E = window.D2TE, CR = window.D2T_CRESTS || {};
   const LV = ['bronze', 'silver', 'gold', 'baller', 'legend'];
   const crestOf = (name) => (CR[name] && (CR[name]['128'] || CR[name]['72'])) || '';
-  const meta = (name) => G.clubs[name] || { name, full: name, code: name.slice(0, 3).toUpperCase(), accent: '#D4FF00', ink: '#000000', text: '#D4FF00' };
+  const meta = (name) => G.clubs[name] || { name, full: name, code: name.slice(0, 3).toUpperCase(), accent: '#12F06C', ink: '#000000', text: '#12F06C' };
   const GAME = D2T.game = {};
 
   // ---------- clubs ----------
@@ -50,7 +50,7 @@
     return {
       id: p.id, name: p.n, club: clubName, club2: two, crest: crestOf(clubName), pos: p.b, ovr: p.r, level: LV[p.lv || 0],
       apps: p.a, goals: p.g, assists: p.as, cleanSheets: p.cs, nat: p.nat, season: legend ? p.sk : S.season,
-      provisional: p.src === 'f', stats
+      provisional: p.src === 'f', stats, career: p.k != null && G.careers ? G.careers[p.k] : null
     };
   };
   GAME.LV = LV;
@@ -58,6 +58,8 @@
   // ---------- the run ----------
   // D2T.state.run = { step, eng (the engine's run, saved whole), tableSeen, pending (a signing waiting for a shirt), match (gw on show) }
   GAME.eng = () => D2T.state.run && D2T.state.run.eng;
+  // Build 3 held a signing on the squad screen; now you sign straight from the roll, so an open hold goes back to it.
+  if (D2T.state.run && D2T.state.run.pending != null) { D2T.state.run.pending = null; D2T.state.run.step = 'transfer'; D2T.save(); }
   GAME.S = () => { const e = GAME.eng(); return e && e.seasonKey ? GAME.season(e.seasonKey) : null; };
   GAME.newRun = () => {
     const seed = 'r' + Date.now().toString(36) + Math.floor(Math.random() * 1e9).toString(36);
@@ -110,8 +112,6 @@
     const xi = eng.xi.map((id) => GAME.card(S, id));
     let subs = [];
     if (GAME.preseason()) subs = E.squadOf(S, eng.club).filter((p) => !eng.xi.includes(p.id)).map((p) => GAME.card(S, p.id));
-    const pend = D2T.state.run.pending;
-    if (pend != null && eng.phase === 'window') subs = [GAME.card(S, pend)];
     const all = new Map(); xi.concat(subs).forEach((c) => c && all.set(String(c.id), c));
     return { all, xi, subs };
   };
@@ -151,12 +151,11 @@
   };
   GAME.preview = (cardId) => E.signPreview(GAME.eng(), GAME.S(), cardId);
   GAME.bestSlot = (cardId) => { let b = 0, bd = -1e9; GAME.preview(cardId).forEach((o) => { if (o.delta > bd) { bd = o.delta; b = o.slot; } }); return b; };
-  GAME.hold = (cardId) => { D2T.state.run.pending = cardId; D2T.state.run.step = 'squad'; D2T.save(); };
-  // Place the waiting signing in a shirt: the player there leaves for good.
-  GAME.place = (slot) => {
-    const run = D2T.state.run, eng = GAME.eng(), id = run.pending;
-    if (id == null || !E.sign(eng, GAME.S(), id, slot)) return false;
-    run.pending = null; run.step = eng.phase === 'window' ? 'transfer' : 'squad';
+  // Sign a rolled player into a shirt: the player there leaves for good.
+  GAME.signAt = (cardId, slot) => {
+    const run = D2T.state.run, eng = GAME.eng();
+    if (!E.sign(eng, GAME.S(), cardId, slot)) return false;
+    run.step = eng.phase === 'window' ? 'transfer' : 'squad';
     D2T.save(); return true;
   };
   GAME.pass = () => { const eng = GAME.eng(); E.pass(eng, GAME.S()); D2T.state.run.step = eng.phase === 'window' ? 'transfer' : 'squad'; D2T.save(); };
@@ -210,7 +209,7 @@
     if (ph === 'clubroll') return 'spin';
     if (ph === 'setup') return run.tableSeen ? 'squad' : 'table';
     if (run.match) return 'match';
-    if (ph === 'window') return run.pending != null ? 'squad' : 'transfer';
+    if (ph === 'window') return 'transfer';
     if (ph === 'summary') return 'summary';
     return ['squad', 'fixtures', 'match'].includes(run.step) ? run.step : 'fixtures';
   };
@@ -219,7 +218,7 @@
     if (!step) return false;
     const ph = run.eng.phase;
     if (screen === step) return true;
-    if (screen === 'squad') return ph === 'setup' || ph === 'prematch' || ph === 'window';
+    if (screen === 'squad') return ph === 'setup' || ph === 'prematch';
     if (screen === 'fixtures' || screen === 'match') return ph === 'prematch' && !run.match;
     return false;
   };

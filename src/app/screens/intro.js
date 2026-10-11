@@ -1,5 +1,6 @@
 // Intro (green): the short D2T logo in black, then the emblem spins 360 while D2T opens into DROP2TOP,
-// then the slogan beat, then the logo glides to the top and hands over to the green home screen.
+// then the slogan beat, then the logo glides to the top as the green gives way to black and the logo turns white,
+// handing over to the black home screen. Plays every time the game is freshly loaded (tap to skip).
 // Geometry is measured from the logo PNGs (all cropped to content):
 //   short.png 857x241: emblem at (-2,1) 239x242, short_text at (240,38) 617x160
 //   long.png 1301x237: emblem at (0,0) 234x237, long_text at (233,41) 1068x143
@@ -79,10 +80,9 @@
       const skipBtn = wrap.querySelector('.fr-skip');
       timers.push(setTimeout(() => skipBtn.classList.add('on'), 900));
 
-      const finish = (handover) => {
+      const finish = (to) => {
         if (done) return; done = true;
-        D2T.state.seenIntro = true; D2T.save();
-        D2T.go('home', handover ? { fromIntro: handover } : { fromIntro: true });
+        D2T.go('home', { fromIntro: to || true });
       };
       wrap.addEventListener('click', () => finish(null));
 
@@ -157,11 +157,32 @@
         });
         await sleep(chars.length * step + 1250); if (done) return;
 
-        // 4. hand over: slogan lifts away, home takes the logo from here (FLIP) and brings its content in
+        // 4. hand over: the slogan lifts away, then the logo glides up and shrinks into the home header while the
+        // green gives way to black and the logo turns from black to white as green light ripples through it.
         anim(slogan, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-10px)' }], { duration: 260, easing: 'ease-in' });
+        anim(skipBtn, [{ opacity: 1 }, { opacity: 0 }], { duration: 200 });
         await sleep(240); if (done) return;
+        handover();
+        await sleep(1150); if (done) return;
+        finish(target());
+      }
+
+      // where the home logo will sit, measured from a hidden copy of the home header
+      const probe = D2T.h(`<div class="fr-home" aria-hidden="true" style="position:absolute;left:0;right:0;top:0;visibility:hidden;pointer-events:none"><div class="fr-home-top"><span class="fr-home-logo" style="display:block">${D2T.logo('long')}</span></div></div>`);
+      wrap.appendChild(probe);
+      const target = () => { const r = probe.querySelector('.logo-mask').getBoundingClientRect(), rr = root.getBoundingClientRect(); return { left: r.left - rr.left, top: r.top - rr.top, width: r.width }; };
+      function handover() {
         const r = longWhole.getBoundingClientRect(), rr = root.getBoundingClientRect();
-        finish({ left: r.left - rr.left, top: r.top - rr.top, width: r.width });
+        const from = { x: r.left - rr.left, y: r.top - rr.top, w: r.width, h: r.height }, to = target();
+        const fx = D2T.h(`<span class="fr-ihand fr-tb-m" aria-hidden="true" style="left:${from.x}px;top:${from.y}px;width:${from.w}px;height:${from.h}px;-webkit-mask-image:url('${D2T.ASSET.long}');mask-image:url('${D2T.ASSET.long}')"><i class="w"></i><i class="k"></i><i class="s"></i></span>`);
+        stage.appendChild(fx); longWhole.remove();
+        const black = D2T.h('<div class="fr-iblack" aria-hidden="true"></div>');
+        wrap.insertBefore(black, stage);
+        D2T.chrome('#000000', '#000000');
+        anim(black, [{ opacity: 0 }, { opacity: 1 }], { duration: 900, easing: 'cubic-bezier(.5,0,.3,1)' });
+        anim(fx, [{ transform: 'none' }, { transform: `translate(${to.left - from.x}px,${to.top - from.y}px) scale(${to.width / from.w})` }], { duration: 1000, easing: 'cubic-bezier(.6,0,.2,1)' });
+        anim(fx.querySelector('.k'), [{ opacity: 1 }, { opacity: 0 }], { duration: 620, delay: 220, easing: 'ease-in-out' });
+        anim(fx.querySelector('.s'), [{ transform: 'translateX(-60%)' }, { transform: 'translateX(40%)' }], { duration: 1100, delay: 120, easing: 'cubic-bezier(.4,0,.3,1)' });
       }
       play();
       cleanup = () => { done = true; anims.forEach((a) => { try { a.cancel(); } catch (e) {} }); timers.forEach(clearTimeout); };

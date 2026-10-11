@@ -8,7 +8,7 @@
   D2T.screen('league', {
     title: 'League', theme: 'black',
     mount(root) {
-      root.appendChild(D2T.topbar());
+      root.appendChild(D2T.topbar({ back: true }));
       const me = D2T.game.record();
       const body = D2T.h(`<div class="screen-body fr-page">
         <h1 class="fr-title">League</h1>
@@ -27,7 +27,7 @@
   D2T.screen('stats', {
     title: 'Stats', theme: 'black',
     mount(root) {
-      root.appendChild(D2T.topbar());
+      root.appendChild(D2T.topbar({ back: true }));
       const rec = D2T.game.record(), runs = D2T.state.record.runs;
       const best = runs.length ? Math.min(...runs.map((r) => r.finish)) : null;
       const clubs = Object.entries(D2T.state.record.clubs).sort((a, b) => a[1].finish - b[1].finish);
@@ -39,7 +39,7 @@
         <h2 class="fr-h2">Runs</h2>
         <div class="fr-panel">
           <div class="fr-row"><span>Runs played</span><span>${rec.runs}</span></div>
-          <div class="fr-row"><span>Rating</span><span class="fr-lime">${rating(rec)}%</span></div>
+          <div class="fr-row"><span>Rating</span><span class="fr-green">${rating(rec)}%</span></div>
           <div class="fr-row"><span>Best finish</span><span>${best ? D2T.ordinal(best) : '-'}</span></div>
           <div class="fr-row"><span>Best rise</span><span>${rec.bestRise == null ? '-' : (rec.bestRise > 0 ? '+' : '') + rec.bestRise}</span></div>
           <div class="fr-row"><span>Relegated</span><span>${Math.max(0, rec.runs - rec.drop)}</span></div>
