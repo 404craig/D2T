@@ -67,6 +67,10 @@
 .fr-back-face::before { content: ''; position: absolute; left: -30%; top: 8%; width: 160%; height: 2px; background: linear-gradient(90deg, transparent, rgba(18,240,108,.65), transparent); transform: rotate(28deg); }
 .fr-back-face::after { content: ''; position: absolute; left: -40%; bottom: 26%; width: 170%; height: 7px; background: linear-gradient(90deg, rgba(18,240,108,0), rgba(18,240,108,.35) 60%, rgba(0,0,0,.9)); transform: rotate(-16deg); }
 .fr-back .logo-mask { position: absolute; left: 50%; top: 42%; width: 50px; transform: translate(-50%, -50%); color: rgba(255,255,255,.22); }
+.fr-mode-art { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%); }
+.fr-mode-badge { width: 58px; }
+.fr-mode-badge svg { display: block; width: 100%; height: auto; }
+.fr-mode-num { font: 900 italic 38px/1 var(--font); color: var(--green-1); letter-spacing: -0.02em; }
 .fr-stamp { position: absolute; left: 50%; top: 72%; transform: translate(-50%, -50%) rotate(-12deg); border: 1.5px solid var(--green-1); color: var(--green-1); border-radius: 5px; padding: 2px 6px; font-size: 9.5px; font-weight: 900; letter-spacing: 0.12em; white-space: nowrap; background: rgba(0,0,0,.4); }
 .fr-mode-name { display: block; font: 900 italic 15px/1.05 var(--font); text-transform: uppercase; margin-top: 8px; }
 .fr-mode-sub { display: block; font-size: 11px; font-weight: 600; opacity: 0.7; margin-top: 2px; }

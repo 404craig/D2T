@@ -11,8 +11,13 @@
   };
   // card outline (chamfered top corners, shallow point at the bottom), as in .d2c-rim
   const FRAME = '<svg viewBox="0 0 100 128" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,11 11,1 89,1 99,11 99,108 50,127 1,108" stroke-linejoin="round"/></svg>';
+  // Club X: the made-up club for the Club X mode (same drawing as assets/brand/club_x.svg)
+  const CLUB_X = '<svg viewBox="0 0 100 120" aria-hidden="true"><path d="M50 4 L92 13 L92 58 C92 86 73 104 50 116 C27 104 8 86 8 58 L8 13 Z" fill="#000" stroke="#12F06C" stroke-width="4" stroke-linejoin="round"/><path d="M50 11 L86 18.5 L86 58 C86 82 70 97.5 50 108.5 C30 97.5 14 82 14 58 L14 18.5 Z" fill="none" stroke="#12F06C" stroke-width="1.2" stroke-opacity=".45" stroke-linejoin="round"/><text x="50" y="31" text-anchor="middle" fill="#fff" font-family="Exo 2, Arial Black, sans-serif" font-weight="900" font-style="italic" font-size="11" letter-spacing="2.5">CLUB</text><line x1="35" y1="47" x2="68" y2="91" stroke="#12F06C" stroke-width="11"/><line x1="31" y1="91" x2="63" y2="49" stroke="#000" stroke-width="17"/><line x1="31" y1="91" x2="63" y2="49" stroke="#12F06C" stroke-width="11"/><polygon points="72.1,37.1 72.5,56.3 53.5,41.7" fill="#12F06C" stroke="#000" stroke-width="2.5" stroke-linejoin="round" paint-order="stroke"/></svg>';
+  D2T.clubXBadge = CLUB_X;
   const MODES = [
     { name: 'Daily challenge', sub: '' },
+    { name: 'Hit 443', sub: 'Land exactly 443 goals', art: '<span class="fr-mode-art fr-mode-num">443</span>' },
+    { name: 'Club X', sub: 'Raid every team you play', art: `<span class="fr-mode-art fr-mode-badge">${CLUB_X}</span>` },
     { name: 'Head to head', sub: 'Online, up to 3 players' },
     { name: 'Draft', sub: '' },
     { name: 'Legends', sub: '' }
@@ -67,7 +72,7 @@
         <section class="fr-sect fr-in" aria-label="More game modes">
           <div class="fr-sect-h"><h2>More modes</h2><span>Coming soon</span></div>
           <div class="fr-modes">${MODES.map((m) => `<button class="fr-mode" aria-label="${m.name}, coming soon">
-            <span class="fr-back" style="display:block"><span class="fr-back-rim"></span><span class="fr-back-face"></span>${D2T.logo('emblemLine')}<span class="fr-stamp">COMING SOON</span></span>
+            <span class="fr-back" style="display:block"><span class="fr-back-rim"></span><span class="fr-back-face"></span>${m.art || D2T.logo('emblemLine')}<span class="fr-stamp">COMING SOON</span></span>
             <span class="fr-mode-name">${m.name}</span>${m.sub ? `<span class="fr-mode-sub">${m.sub}</span>` : ''}</button>`).join('')}</div></section>
       </div>`);
       root.appendChild(body);
