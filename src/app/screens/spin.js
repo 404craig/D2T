@@ -311,7 +311,7 @@
         selectedLabel: () => 'Play',
         hintIdle: 'Hit Spin to see who you get', hintSettled: 'Tap a club to pick it', hintSelected: 'Tap it again for the full card, or hit Play',
         respins: eng.respins,
-        tip: st.tipDone || st.spun ? null : { text: `${eng.respins} free respins`, onDone: () => { st.tipDone = true; D2T.save(); } },
+        tip: st.tipDone || st.spun ? null : { text: `${eng.respins} respins, use them wisely!`, onDone: () => { st.tipDone = true; D2T.save(); } },
         onRespinsChange: () => { GAME.respinClubs(); st.spun = false; D2T.save(); },
         onConfirm: (c) => { SND.play('lockin'); GAME.chooseClub(c.key); D2T.go('table'); }
       });
