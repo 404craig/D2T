@@ -16,8 +16,8 @@
   const FRAME = '<svg viewBox="0 0 100 128" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,11 11,1 89,1 99,11 99,108 50,127 1,108" stroke-linejoin="round"/></svg>';
   const MODES = [
     { name: 'Head to head', sub: 'Online, up to 3 players' },
-    { name: 'Draft', sub: '' },
-    { name: 'Legends', sub: '' }
+    { name: '433 Goals', sub: "Get your XI's career goals close to 433" },
+    { name: 'Steal', sub: 'Every card comes from the club you play next' }
   ];
   D2T.frFrame = FRAME;
   D2T.frRecord = (rec, cls = '') => `<div class="fr-record ${cls}">
@@ -37,7 +37,7 @@
   }
   function continueCard(act) {
     const eng = D2T.game.eng(), data = D2T.run(), c = data.club, run = D2T.state.run;
-    const label = run.daily ? `DAILY #${D2T.game.dailyNumber(run.daily)} · ${D2T.game.modeName().toUpperCase()}` : D2T.game.modeName().toUpperCase();
+    const label = run.daily ? D2T.game.dailyName(run.daily, true).replace('Daily Challenge', 'Daily').toUpperCase() : D2T.game.modeName().toUpperCase();   // one line: CONTINUE · DAILY 11 OCT
     const games = data.fixtures.length, played = eng.played.length;
     const where = eng.phase === 'draft' ? `Draft · Shirt ${eng.draft.step + 1} of ${eng.xi.length}` : eng.phase === 'setup' ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, games)} · ${STEP_LABEL[D2T.game.stepFor()] || 'In progress'}`;
     // Club sweep (chosen 11 Oct): light club colour at the left, the true colour across the middle, a deeper shade at the right.
@@ -58,15 +58,15 @@
     const G = D2T.game, d = G.dailyEntry(G.today()), res = G.dailyResult(), streak = G.dailyStreak();
     const goal = d.mode === 'classic' ? 'Classic: they went down. Rescue them.' : `Dare2Dream: draft from zero and beat ${D2T.ordinal(d.pos)}.`;
     const sub = res ? `Done: ${D2T.ordinal(res.finish)} (${res.rise > 0 ? '+' : ''}${res.rise}). Next one at midnight.` : goal;
-    return `<button class="fr-card-btn fr-pick fr-daily" data-act="daily" aria-label="Daily challenge ${d.n}, ${D2T.esc(d.full || d.name)} ${d.season}">
+    return `<button class="fr-card-btn fr-pick fr-daily" data-act="daily" aria-label="${G.dailyName(d.date)}, ${D2T.esc(d.full || d.name)} ${d.season}">
       <span class="fr-daily-crest"><img src="${d.crest}" alt=""></span>
-      <span><span class="fr-tag" style="display:block">DAILY #${d.n}${streak ? ` · ${streak} DAY STREAK` : ''}</span><span class="fr-big" style="display:block">${D2T.esc(d.name)} ${d.season}</span><span class="fr-sub" style="display:block">${sub}</span></span>
+      <span><span class="fr-tag" style="display:block">${G.dailyName(d.date).toUpperCase()}${streak ? ` · ${streak} DAY STREAK` : ''}</span><span class="fr-big" style="display:block">${D2T.esc(d.name)} ${d.season}</span><span class="fr-sub" style="display:block">${sub}</span></span>
       <span class="fr-go">${ARROW}</span></button>`;
   }
   function dailyDone() {
     const G = D2T.game, r = G.dailyResult(), d = G.dailyEntry(G.today());
-    const text = `DROP2TOP Daily #${r.n}\n${d.full || d.name} ${d.season} (${G.modeName(r.mode)})\nHistory: ${D2T.ordinal(r.histFinish)}\nMine: ${D2T.ordinal(r.finish)}, ${r.pts} pts\nTHE RISE ${r.rise > 0 ? '+' : ''}${r.rise}`;
-    const sh = D2T.sheet({ title: `Daily #${r.n} done`, body: `<p class="fr-lead">${D2T.esc(d.name)} ${d.season}: you finished ${D2T.ordinal(r.finish)} (history ${D2T.ordinal(r.histFinish)}). A new club for everyone at midnight.</p>
+    const text = `DROP2TOP ${G.dailyName(G.today())}\n${d.full || d.name} ${d.season} (${G.modeName(r.mode)})\nHistory: ${D2T.ordinal(r.histFinish)}\nMine: ${D2T.ordinal(r.finish)}, ${r.pts} pts\nTHE RISE ${r.rise > 0 ? '+' : ''}${r.rise}`;
+    const sh = D2T.sheet({ title: `${G.dailyName(G.today())}: done`, body: `<p class="fr-lead">${D2T.esc(d.name)} ${d.season}: you finished ${D2T.ordinal(r.finish)} (history ${D2T.ordinal(r.histFinish)}). A new club for everyone at midnight.</p>
       <div class="fr-stack"><button class="btn btn-green fr-btn-wide" data-k="share">Share with your mates</button></div>` });
     sh.body.querySelector('[data-k="share"]').onclick = async () => {
       try { if (navigator.share) { await navigator.share({ text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
