@@ -40,6 +40,11 @@ def season_tables(results):
                 if f > g: t["w"] += 1; t["pts"] += 3
                 elif f == g: t["d"] += 1; t["pts"] += 1
                 else: t["l"] += 1
+        for m in ms:
+            h, a, hg, ag = m["home"], m["away"], int(m["home_goals"]), int(m["away_goals"])
+            T[h].setdefault("cs", 0); T[a].setdefault("cs", 0)
+            if ag == 0: T[h]["cs"] += 1
+            if hg == 0: T[a]["cs"] += 1
         for (ds, dc), d in DEDUCTIONS.items():
             if ds == s and dc in T: T[dc]["pts"] -= d
         order = sorted(T.items(), key=lambda kv: (-kv[1]["pts"], -(kv[1]["gf"] - kv[1]["ga"]), -kv[1]["gf"], kv[0]))
@@ -131,6 +136,28 @@ def from_quantile(qs, pct):
 TIER_LEVEL = {"bronze": 0, "silver": 1, "gold": 2, "best": 3}
 
 
+def card_stats(q, team, games, career_apps):
+    """The six card numbers (20 to 99), all worked out from verified season numbers:
+    GOL scoring rate, IMP share of the club's goals, FIT games played, WIN club points per game,
+    DEF club goals conceded per game, EXP Premier League appearances so far.
+    Goalkeepers: WAL (club goals conceded, fewer is higher), CLN clean sheets, FIT, WIN, EXP."""
+    sc = lambda x: int(round(20 + 79 * max(0.0, min(1.0, x))))
+    a, g = q["a"], q["g"]
+    ppg, gapg = team["pts"] / team["p"], team["ga"] / team["p"]
+    fit = sc(a / games)
+    win = sc((ppg - 0.6) / 1.9)
+    defn = sc(1 - (gapg - 0.6) / 1.7)
+    exp = sc(math.log(1 + career_apps) / math.log(1 + 450))
+    if q["b"] == "GK":
+        cs = q.get("cs")
+        if cs is None: cs = team.get("cs", 0) * a / games
+        return [defn, sc(cs / 18), fit, win, exp]
+    gpg = g / max(a, 1)
+    gol = sc(math.sqrt(min(gpg / 0.75, 1)))
+    imp = sc(min(g / max(team["gf"], 1) / 0.3, 1) ** 0.75)
+    return [gol, imp, fit, win, defn, exp]
+
+
 def main():
     results = list(csv.DictReader(open(os.path.join(SRC, "pl_results.csv"), encoding="utf-8")))
     players = list(csv.DictReader(open(os.path.join(SRC, "pl_players.csv"), encoding="utf-8")))
@@ -143,6 +170,7 @@ def main():
         prow[p["season"]].append(p)
 
     game = {"v": 1, "seasons": {}, "catalogue": [], "clubs": clubs_meta}
+    career = defaultdict(int)   # Premier League appearances before the current season, per person
     for season in sorted(by_season):
         table = tables[season]
         names = sorted(c for c, _ in table)
@@ -175,9 +203,15 @@ def main():
                 for k_in, k_out in (("assists", "as"), ("cleanSheets", "cs"), ("minutes", "mi"), ("stats", "st")):
                     if e.get(k_in) is not None: people[pid][k_out] = e[k_in]
         plist = []
+        tmap = {c: t for c, t in table}
+        games = 2 * (len(table) - 1)
         for i, (pid, q) in enumerate(sorted(people.items())):
             q["id"] = i
+            main_club = names[q["c2"]] if q.get("c2") is not None and q.get("a2", 0) > q["a1"] else names[q["c"]]
+            q["s6"] = card_stats(q, tmap[main_club], games, career[pid] + q["a"])
             plist.append(q)
+        for pid, q in people.items():
+            career[pid] += q["a"]
         levels_for(plist)
         # Order matches by date; club indexes refer to names.
         ms = sorted(by_season[season], key=lambda m: (m["date"], m["home"]))

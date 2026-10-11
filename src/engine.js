@@ -511,8 +511,9 @@ function seasonSummary(S, st) {
   for (const c of relMine) if (!relHist.has(c) && c !== st.club) changes.push({ kind: "down", club: c });
   for (const c of relHist) if (!relMine.has(c) && c !== st.club) changes.push({ kind: "saved", club: c });
   // Goals and appearances for your players this season.
-  const goals = {}; for (const r of st.played) for (const e of r.events) if (e.us) goals[e.id] = (goals[e.id] || 0) + 1;
-  const topScorer = Object.entries(goals).sort((a, b) => b[1] - a[1])[0] || null;
+  const goalMap = new Map(); for (const r of st.played) for (const e of r.events) if (e.us) goalMap.set(e.id, (goalMap.get(e.id) || 0) + 1);
+  const goals = Object.fromEntries(goalMap);
+  const topScorer = [...goalMap.entries()].sort((a, b) => b[1] - a[1])[0] || null;
   // Best signing: biggest rating gain over the player he replaced, weighted by games played for you.
   let best = null;
   for (const s of st.signed) {
@@ -539,5 +540,5 @@ const API = {
   startSeason, inWindow, currentWindow, newRoll, respinCards, signPreview, sign, pass,
   otherResults, strengthLoss, expectedGoals, simMatch, playMatch, table, historyTable, historyPositions, positionsSoFar, seasonSummary
 };
-if (typeof module !== "undefined" && module.exports) module.exports = API; else root.D2T = API;
+if (typeof module !== "undefined" && module.exports) module.exports = API; else root.D2TE = API;
 })(typeof window !== "undefined" ? window : globalThis);
