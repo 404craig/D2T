@@ -35,6 +35,9 @@
           <li><b>Finish high</b>Your final place earns achievements: beat the drop, top half, top 3, the title.</li>
         </ol>
 
+        <h2 class="fr-h2">Dare2Dream</h2>
+        <p class="fr-lead">The same game with any club from any season. Finish higher than they really did, or win the league again if they won it.</p>
+
         <h2 class="fr-h2">Card colours</h2>
         <p class="fr-lead" style="margin-bottom:6px">The big number is the rating. The colour tells you the level.</p>
         <div class="fr-levels">${cards.map((x) => `<div class="fr-lv">${D2T.cards.player(x.card, { w: 128, shine: x.lv === 'baller' || x.lv === 'legend' })}

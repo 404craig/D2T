@@ -6,7 +6,7 @@ let n = 0; const t = (name, fn) => { fn(); n++; console.log("ok", name); };
 const play = (seed, season, club, strategy = "greedy") => {
   const S = G.seasons[season]; const c = S.clubs.find(x => x.name === club).id;
   const st = D.newRun({ seed, catalogue: G.catalogue, fixedClub: `${season}:${club}` });
-  D.chooseClub(st, S, S.relegated.find(r => r.c === c)); D.startSeason(st, S);
+  D.chooseClub(st, S, S.relegated.find(r => r.c === c) || { c, f: "4-4-2", xi: [] }); D.startSeason(st, S);
   const offered = [];
   let g = 0;
   while (st.phase !== "summary" && g++ < 600) {
@@ -92,6 +92,20 @@ t("every relegated club-season can be played to the end", () => {
     const r = play("all-" + c.key, c.season, c.club);
     assert.strictEqual(r.st.phase, "summary", c.key);
     assert.strictEqual(r.st.played.length, r.st.fixtures.length);
+  }
+});
+t("Dare2Dream: every club-season gets a full XI, and a sample plays to the end", () => {
+  assert.strictEqual(G.clubSeasons.length, 686);
+  for (const c of G.clubSeasons) {
+    const S = G.seasons[c.season], id = S.clubs.find(x => x.name === c.club).id;
+    const st = D.newRun({ seed: "d2d-" + c.key, mode: "dare2dream", catalogue: G.clubSeasons });
+    D.chooseClub(st, S, { c: id, f: "4-4-2", xi: [] });
+    assert.strictEqual(st.xi.filter(x => x != null).length, 11, c.key);
+    assert.strictEqual(new Set(st.xi).size, 11, c.key);
+  }
+  for (const c of G.clubSeasons.filter((_, i) => i % 40 === 0)) {
+    const r = play("d2d-play-" + c.key, c.season, c.club);
+    assert.strictEqual(r.st.phase, "summary", c.key);
   }
 });
 console.log(`${n} checks passed`);

@@ -20,10 +20,12 @@
       const pre = GAME.preseason();
       root.appendChild(D2T.topbar());
       const gwLabel = pre ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, data.fixtures.length)}`;
+      const hist = data.table.find((r) => r.name === club.name);
+      const goalLabel = GAME.mode() === 'dare2dream' && hist ? ` · Target ${hist.pos === 1 ? 'champions' : D2T.ordinal(GAME.target(hist.pos))}` : '';
       const body = D2T.h(`<div class="screen-body se-squad">
         <div class="se-sqhead">
           <img class="se-sqcrest" src="${club.crest}" alt="">
-          <div class="se-sqtext"><div class="se-sqname">${D2T.esc(club.name)}</div><div class="se-sqsub">${data.season} · ${gwLabel}</div></div>
+          <div class="se-sqtext"><div class="se-sqname">${D2T.esc(club.name)}</div><div class="se-sqsub">${data.season} · ${gwLabel}${goalLabel}</div></div>
           <div class="se-rating" aria-live="polite"><b class="se-rating-n">0</b><i>Team<br>rating</i></div>
         </div>
         <div class="se-pitch">${pitchLines}<div class="se-slots"></div></div>

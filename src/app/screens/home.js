@@ -32,22 +32,34 @@
     const where = eng.phase === 'setup' ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, games)} · ${STEP_LABEL[D2T.game.stepFor()] || 'In progress'}`;
     return `<button class="fr-card-btn fr-cont fr-in" style="--club:${c.accent}" data-act="continue" aria-label="Continue with ${D2T.esc(c.full)} ${data.season}, ${where}">
       <span class="fr-cont-crest"><img src="${c.crest}" alt=""></span>
-      <span class="fr-cont-txt"><span class="fr-cont-lbl">CONTINUE</span><span class="fr-cont-name" style="display:block">${D2T.esc(c.name)}</span>
+      <span class="fr-cont-txt"><span class="fr-cont-lbl">CONTINUE · ${D2T.game.modeName().toUpperCase()}</span><span class="fr-cont-name" style="display:block">${D2T.esc(c.name)}</span>
       <span class="fr-cont-meta" style="display:block">${data.season} · ${where}</span>
       <span class="fr-cont-bar" style="display:block"><i style="transform:scaleX(${Math.max(0.03, played / games)})"></i></span></span>
       <span class="fr-go">${ARROW}</span></button>`;
   }
 
+  // The long logo in two pieces (emblem and name, measured from long.png) so the emblem can turn on its own,
+  // each with a glint layer sized to the whole logo so one sweep runs across both.
+  const P = (n) => (n * 100).toFixed(3) + '%';
+  const homeLogo = () => `<span class="fr-hl" role="img" aria-label="DROP2TOP">
+    <span class="fr-hl-p fr-hl-emb" style="left:0;top:0;width:${P(234 / 1301)};height:100%;-webkit-mask-image:url('${D2T.ASSET.emblem}');mask-image:url('${D2T.ASSET.emblem}')"><i class="fr-hl-s" style="left:0;top:0;width:${P(1301 / 234)};height:100%"></i></span>
+    <span class="fr-hl-p" style="left:${P(233 / 1301)};top:${P(41 / 237)};width:${P(1068 / 1301)};height:${P(143 / 237)};-webkit-mask-image:url('${D2T.ASSET.longText}');mask-image:url('${D2T.ASSET.longText}')"><i class="fr-hl-s" style="left:${P(-233 / 1068)};top:${P(-41 / 143)};width:${P(1301 / 1068)};height:${P(237 / 143)}"></i></span></span>`;
+  let idleTimer = 0, idleFirst = 0;
+
   D2T.screen('home', {
     title: 'Home', theme: 'black',
     mount(root, params) {
-      const rec = D2T.game.record();
+      const rec = D2T.game.record(), dreams = D2T.game.dreamRecord();
       const body = D2T.h(`<div class="screen-body fr-home">
-        <div class="fr-home-top"><button class="fr-home-logo" aria-label="DROP2TOP">${D2T.logo('long')}</button></div>
+        <div class="fr-home-top"><button class="fr-home-logo" aria-label="DROP2TOP">${homeLogo()}</button></div>
         ${continueCard()}
-        <button class="fr-card-btn fr-pick fr-in" data-act="pick">
+        <button class="fr-card-btn fr-pick fr-in" data-act="pick" data-mode="classic">
           <span class="fr-mark">${D2T.logo('emblem')}</span>
-          <span><span class="fr-tag" style="display:block">CLASSIC</span><span class="fr-big" style="display:block">Pick a new club</span><span class="fr-sub" style="display:block">Dare to dream. Win the title!</span></span>
+          <span><span class="fr-tag" style="display:block">CLASSIC</span><span class="fr-big" style="display:block">Pick a new club</span><span class="fr-sub" style="display:block">Take them from the drop to the top.</span></span>
+          <span class="fr-go">${ARROW}</span></button>
+        <button class="fr-card-btn fr-pick fr-dream fr-in" data-act="pick" data-mode="dare2dream">
+          <span class="fr-mark">${D2T.logo('emblemLine')}</span>
+          <span><span class="fr-tag" style="display:block">DARE2DREAM</span><span class="fr-big" style="display:block">Any club, any season</span><span class="fr-sub" style="display:block">Beat the finish they really had.${dreams.runs ? ` ${dreams.dreams} of ${dreams.runs} dreams so far.` : ''}</span></span>
           <span class="fr-go">${ARROW}</span></button>
         <section class="fr-sect fr-in" aria-label="Your record">
           <div class="fr-sect-h"><h2>Your record</h2><span>${rec.runs} runs</span></div>
@@ -79,23 +91,33 @@
       } else if (fi && !D2T.reduced()) reveal(60);
       else ins.forEach((el) => el.classList.add('on'));
 
-      const startNew = (from) => { D2T.game.newRun(); D2T.toBlack('spin', { from }); };
-      body.querySelector('[data-act="pick"]').onclick = (e) => {
-        const from = e.currentTarget;
-        if (!inRun()) { startNew(from); return; }
+      // Every 12 seconds the emblem turns once and a green glint runs across the logo (not with reduced motion).
+      const idle = () => {
+        if (document.hidden || D2T.reduced() || !root.isConnected) return;
+        const emb = body.querySelector('.fr-hl-emb');
+        emb.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }], { duration: 1150, easing: 'cubic-bezier(.65,0,.25,1)' });
+        body.querySelectorAll('.fr-hl-s').forEach((g) => g.animate([{ transform: 'translateX(-62%)' }, { transform: 'translateX(62%)' }], { duration: 1300, delay: 950, easing: 'cubic-bezier(.4,0,.3,1)' }));
+      };
+      clearTimeout(idleFirst); clearInterval(idleTimer);
+      idleFirst = setTimeout(idle, 3500); idleTimer = setInterval(idle, 12000);
+      const startNew = (from, mode) => { D2T.game.newRun(mode); D2T.toBlack('spin', { from }); };
+      body.querySelectorAll('[data-act="pick"]').forEach((btn) => btn.onclick = (e) => {
+        const from = e.currentTarget, mode = from.dataset.mode;
+        if (!inRun()) { startNew(from, mode); return; }
         // the game's own question, never the phone's confirm box
         const name = D2T.run().club.name;
         const s = D2T.sheet({ title: 'Start a new run?', body: `<p class="fr-lead">Your ${D2T.esc(name)} run will be lost.</p>
           <div class="fr-two"><button class="btn btn-ghost" data-k="no">Keep playing</button><button class="btn btn-ghost fr-danger" data-k="yes">New run</button></div>` });
         s.body.querySelector('[data-k="no"]').onclick = s.close;
-        s.body.querySelector('[data-k="yes"]').onclick = () => { s.close(); startNew(from); };
-      };
+        s.body.querySelector('[data-k="yes"]').onclick = () => { s.close(); startNew(from, mode); };
+      });
       const cont = body.querySelector('[data-act="continue"]');
       if (cont) cont.onclick = (e) => D2T.toBlack(D2T.game.stepFor() || 'squad', { from: e.currentTarget });
       body.querySelector('.fr-home-logo').onclick = () => D2T.go('intro');
       body.querySelectorAll('.fr-mode').forEach((m) => m.onclick = () => { m.classList.remove('nudge'); void m.offsetWidth; m.classList.add('nudge'); });
       bar.querySelectorAll('[data-go]').forEach((b) => b.onclick = () => D2T.go(b.dataset.go));
-    }
+    },
+    unmount() { clearTimeout(idleFirst); clearInterval(idleTimer); }
   });
 
   // ---------- D2T.toBlack(next, {from}) ----------
@@ -105,7 +127,7 @@
   D2T.toBlack = async (next, opts = {}) => {
     const app = document.getElementById('app');
     const scr = app.querySelector('.screen');
-    const logoEl = scr && scr.querySelector('.fr-home-logo .logo-mask');
+    const logoEl = scr && scr.querySelector('.fr-home-logo .fr-hl');
     if (busy) return;
     if (D2T.reduced() || !logoEl) { D2T.go(next); return; }
     busy = true;

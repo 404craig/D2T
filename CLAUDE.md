@@ -6,8 +6,9 @@ A mobile web football game. The page is built: edit `src/` and `data/`, then run
 
 - Never use em dashes in any text in the game or docs. British English.
 - Only use data that has been checked against a source. If it can't be verified, stop rather than guess.
-- Classic is the main mode and stays front and centre with fixed rules and few settings. Other ideas are "coming soon".
+- Classic is the main mode and stays front and centre with fixed rules and few settings. Dare2Dream sits under it on home (Classic's rules, any club from any season, beat their real finish or win the league again if they won it). Other ideas are "coming soon"; the Daily challenge is scoped in the rules doc and waits on Craig's decisions.
 - Design: pure black background, the club's colour as the only accent inside a run and the D2T green `#12F06C` everywhere else (no lime), a large faded crest in real colours that fades out lower down, Exo 2 (Black Italic for headlines and numbers). Long logo on home, short D2T logo in games. Not casino-like. Audience 15 to 20 year olds.
+- The outline emblem (`emblem_line.png`) has a full ring: the old half moon at the bottom was replaced by the top ring turned 180 degrees. On home, the emblem turns once and a green glint runs across the long logo every 12 seconds (not with reduced motion).
 - The opening animation plays on every fresh load: green, the logo opens out, then it glides to the top as the green gives way to black and the logo turns white, landing on the black home.
 - Backgrounds must blend into the browser and phone chrome at the top and bottom (Dynamic Island and status bar, Safari's and Chrome's toolbars) on iOS and Android, always. Every screen declares its top and bottom colours (from its theme, or `chrome: [top, bottom]` on the screen) and `D2T.chrome` keeps `theme-color`, the fixed top and bottom strips and the page background in step. Check it whenever a screen or colour changes.
 - Secondary pages (how to play, league, stats, account) have a back arrow (`D2T.topbar({ back: true })`).
@@ -35,7 +36,7 @@ A mobile web football game. The page is built: edit `src/` and `data/`, then run
 - Team rating is the average of the 11 effective ratings (each cut to 90% or 70% when out of position).
 - Long surnames shrink to fit the card (`fitName` in `core/cards.js`), never an ellipsis unless at 55%.
 - Accounts: optional sign-in with the same email and 4-digit PIN accounts as Tenaball, on Tenaball's server (`tenaball.crw84.workers.dev`, which allows 404craig.github.io). Runs and records stay on the phone for now.
-- Achievements are cumulative (a title also counts as top 3, top half and beating the drop). The real result is never shown after a match.
+- Achievements are cumulative (a title also counts as top 3, top half and beating the drop) and count Classic runs only. Dare2Dream runs are recorded apart (`mode` on each run, `record.dreamClubs`, `GAME.dreamRecord`). The real result is never shown after a match.
 - Phone rules from Tenaball: tap targets 44px or more; safe-area padding; solid status bar strip (`.screen::before`); sound starts on the first tap; reduced motion respected; share image built ahead so Share opens at once; sheets drag closed.
 - Build order of CSS and JS is the list at the top of `scripts/build.py`; add new screens there.
 

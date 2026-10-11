@@ -33,8 +33,8 @@
   }
 
   // ---------- share: text and image built ahead so Share opens at once (Tenaball lesson) ----------
-  function buildShare(F, club, season, line) {
-    const text = `DROP2TOP\n${club.full || club.name} ${season}\nHistory: ${D2T.ordinal(F.histFinish)}, ${F.histPts} pts\nMine: ${D2T.ordinal(F.finish)}, ${F.pts} pts\nTHE RISE ${sign(F.rise)}\n${line}`;
+  function buildShare(F, club, season, line, tag) {
+    const text = `DROP2TOP${tag ? ' · ' + tag : ''}\n${club.full || club.name} ${season}\nHistory: ${D2T.ordinal(F.histFinish)}, ${F.histPts} pts\nMine: ${D2T.ordinal(F.finish)}, ${F.pts} pts\nTHE RISE ${sign(F.rise)}\n${line}`;
     const out = { text, file: null };
     try {
       const W = 1080, H = 1350, c = document.createElement('canvas'); c.width = W; c.height = H;
@@ -51,7 +51,7 @@
         if (cr) g.drawImage(cr, W / 2 - 110, 280, 220, 220);
         g.textAlign = 'center'; g.fillStyle = '#fff';
         g.font = "italic 900 76px 'Exo 2', sans-serif"; g.fillText((club.full || club.name).toUpperCase(), W / 2, 600);
-        g.font = "600 44px 'Exo 2', sans-serif"; g.fillStyle = '#BDBDC6'; g.fillText(season, W / 2, 662);
+        g.font = "600 44px 'Exo 2', sans-serif"; g.fillStyle = '#BDBDC6'; g.fillText(season + (tag ? ' · ' + tag : ''), W / 2, 662);
         g.fillStyle = '#0E0E10'; g.fillRect(90, 720, 900, 300); g.strokeStyle = '#222226'; g.lineWidth = 3; g.strokeRect(90, 720, 900, 300);
         g.font = "800 38px 'Exo 2', sans-serif"; g.fillStyle = '#8E8E99'; g.fillText('HISTORY', 315, 790); g.fillText('MINE', 765, 790);
         g.font = "italic 900 120px 'Exo 2', sans-serif"; g.fillStyle = '#fff'; g.fillText(D2T.ordinal(F.histFinish), 315, 915); g.fillStyle = club.text; g.fillText(D2T.ordinal(F.finish), 765, 915);
@@ -98,14 +98,16 @@
       if (F.playerOfSeason != null) { const c = card(F.playerOfSeason); if (c) awards.push(['Player of the season', c]); }
       if (F.topScorer) { const c = card(F.topScorer.id); if (c) awards.push([`Top scorer · ${F.topScorer.goals} goal${F.topScorer.goals === 1 ? '' : 's'}`, c]); }
       if (F.bestSigning) { const c = card(F.bestSigning.id); if (c) awards.push([`Best signing · before GW${F.bestSigning.gw}`, c]); }
-      const ach = [['Beat the drop', F.finish <= n - rel], ['Top half', F.finish <= n / 2], ['Top 3', F.finish <= 3], ['Title', F.finish === 1]];
+      const dream = GAME.mode() === 'dare2dream', met = dream && GAME.dreamMet(F.finish, F.histFinish);
+      const goal = F.histFinish === 1 ? 'Win the league again' : `Finish ${D2T.ordinal(GAME.target(F.histFinish))} or better`;
+      const ach = dream ? [[goal, met]] : [['Beat the drop', F.finish <= n - rel], ['Top half', F.finish <= n / 2], ['Top 3', F.finish <= 3], ['Title', F.finish === 1]];
 
       const body = D2T.h(`<div class="screen-body sm">
         <div class="sm-crest" aria-hidden="true" style="background-image:url('${club.crest}')"></div>
         <div class="sm-in">
           <div class="se-kicker">Season over · ${D2T.esc(S.season)}</div>
           <h1 class="se-h1">${D2T.esc(club.full || club.name)}</h1>
-          <div class="sm-head">${headline(F)}</div>
+          <div class="sm-head${dream && !met ? ' sm-miss' : ''}">${dream ? (met ? 'Dream achieved' : 'Fell short') : headline(F)}</div>
           <div class="sm-finish"><span class="sm-pos">${D2T.ordinal(F.finish)}</span>
             <span class="sm-sub"><b>${F.pts} pts · W${F.w} D${F.d} L${F.l}</b><span>History: ${D2T.ordinal(F.histFinish)}, ${F.histPts} pts</span></span></div>
           <div class="sm-tiles">
@@ -115,7 +117,7 @@
           </div>
           <div class="sm-panel"><div class="sm-label">Your season against history</div>${ghostSVG(F.positions, F.history, n, rel)}
             <div class="sm-key"><span><i class="sm-k1"></i>You</span><span><i class="sm-k2"></i>History</span></div></div>
-          <div class="sm-ach">${ach.map(([t, on]) => `<span class="${on ? 'on' : ''}">${t}</span>`).join('')}</div>
+          <div class="sm-ach${dream ? ' sm-ach-one' : ''}">${ach.map(([t, on]) => `<span class="${on ? 'on' : ''}">${t}</span>`).join('')}</div>
           ${awards.length ? `<div class="sm-label">Awards</div><div class="sm-awards">${awards.map(([t, c]) => `<button class="sm-award" data-id="${D2T.esc(String(c.id))}" aria-label="${D2T.esc(t)}: ${D2T.esc(c.name)}">${D2T.cards.player(c, { w: 96 })}<span>${D2T.esc(t)}</span></button>`).join('')}</div>` : ''}
           ${changes ? `<div class="sm-label">How you changed ${D2T.esc(S.season)}</div><div class="sm-list">${changes}</div>` : ''}
           <p class="sm-banter">${D2T.esc(line)}</p>
@@ -126,10 +128,10 @@
       const bar = D2T.h(`<footer class="actionbar"><button class="icon-btn" type="button" aria-label="Home">${D2T.ICON.home}</button><button class="btn se-btn se-wide" type="button" data-act="share">Share result</button></footer>`);
       root.append(body, bar);
 
-      const sh = buildShare(F, club, S.season, line);
+      const sh = buildShare(F, club, S.season, line, dream ? (met ? 'Dare2Dream: dream achieved' : 'Dare2Dream') : '');
       bar.querySelector('.icon-btn').onclick = () => D2T.go('home');
       bar.querySelector('[data-act="share"]').onclick = () => share(sh);
-      body.querySelector('[data-act="again"]').onclick = () => { D2T.state.run = null; D2T.save(); GAME.newRun(); D2T.go('spin'); };
+      body.querySelector('[data-act="again"]').onclick = () => { const m = GAME.mode(); D2T.state.run = null; D2T.save(); GAME.newRun(m); D2T.go('spin'); };
       body.querySelector('[data-act="table"]').onclick = () => {
         const rows = GAME.standings(null);
         D2T.sheet({ title: `Final table ${D2T.esc(S.season)}`, body: `<div class="se-run" style="--se-acc:${club.accent};--se-text:${club.text};--se-acc-b:${SE.rgba(club.accent, 0.55)}"><div class="se-table">${SE.tableHead()}${rows.map((r, i) => SE.rowHTML(r, club.name, i === n - rel - 1 ? 'se-zone' : '')).join('')}</div></div>` });

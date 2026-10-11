@@ -169,7 +169,7 @@ def main():
     for p in players:
         prow[p["season"]].append(p)
 
-    game = {"v": 1, "seasons": {}, "catalogue": [], "clubs": clubs_meta}
+    game = {"v": 1, "seasons": {}, "catalogue": [], "clubSeasons": [], "clubs": clubs_meta}
     # Whole Premier League careers (every season in the data) for the big card: games, goals, seasons, clubs in order.
     careers, cidx = [], {}
     for r in sorted(players, key=lambda r: (r["player_id"], r["season"], r["club"])):
@@ -239,6 +239,10 @@ def main():
         game["seasons"][season] = {"season": season, "clubs": [{"id": i, "name": c} for i, c in enumerate(names)],
                                    "matches": matches, "players": plist, "relegated": relegated,
                                    "deductions": deductions, "relegationPlaces": rel_n}
+        # every club-season with its real finish (Dare2Dream spins any of these)
+        for pos, (c, t) in enumerate(table, start=1):
+            game["clubSeasons"].append({"key": f"{season}:{c}", "season": season, "club": c, "pos": pos, "pts": t["pts"],
+                                        "w": t["w"], "d": t["d"], "l": t["l"], "gf": t["gf"], "ga": t["ga"]})
         for r in relegated:
             game["catalogue"].append({"key": f"{season}:{names[r['c']]}", "season": season, "club": names[r["c"]],
                                       "pos": r["pos"], "pts": r["pts"]})

@@ -28,13 +28,14 @@
     title: 'Stats', theme: 'black',
     mount(root) {
       root.appendChild(D2T.topbar({ back: true }));
-      const rec = D2T.game.record(), runs = D2T.state.record.runs;
+      const rec = D2T.game.record(), runs = D2T.game.classicRuns(), dr = D2T.game.dreamRecord();
+      const dreamClubs = Object.entries(D2T.state.record.dreamClubs || {}).sort((a, b) => (b[1].dream ? 1 : 0) - (a[1].dream ? 1 : 0) || a[1].finish - b[1].finish);
       const best = runs.length ? Math.min(...runs.map((r) => r.finish)) : null;
       const clubs = Object.entries(D2T.state.record.clubs).sort((a, b) => a[1].finish - b[1].finish);
       const run = D2T.state.run && D2T.state.run.eng && D2T.state.run.eng.seasonKey && D2T.state.run.eng.phase !== 'summary' ? D2T.run() : null;
       const body = D2T.h(`<div class="screen-body fr-page">
         <h1 class="fr-title">My stats</h1>
-        <p class="fr-lead" style="margin-bottom:14px">Your record across every run.</p>
+        <p class="fr-lead" style="margin-bottom:14px">Your Classic record across every run, then Dare2Dream.</p>
         ${D2T.frRecord(rec, 'dark')}
         <h2 class="fr-h2">Runs</h2>
         <div class="fr-panel">
@@ -45,7 +46,14 @@
           <div class="fr-row"><span>Relegated</span><span>${Math.max(0, rec.runs - rec.drop)}</span></div>
           ${run ? `<div class="fr-row"><span>Current run</span><span>${D2T.esc(run.club.name)} ${run.season}, GW ${D2T.game.eng().gw}</span></div>` : ''}
         </div>
-        <h2 class="fr-h2">Clubs played</h2>
+        <h2 class="fr-h2">Dare2Dream</h2>
+        <div class="fr-panel">
+          <div class="fr-row"><span>Runs played</span><span>${dr.runs}</span></div>
+          <div class="fr-row"><span>Dreams achieved</span><span class="fr-green">${dr.dreams}</span></div>
+          <div class="fr-row"><span>Best rise</span><span>${dr.bestRise == null ? '-' : (dr.bestRise > 0 ? '+' : '') + dr.bestRise}</span></div>
+        </div>
+        ${dreamClubs.length ? `<div class="fr-clubs" style="margin-top:12px">${dreamClubs.map(([k, c]) => { const [season, name] = k.split(':'); const cl = D2T.game.club(name); return `<div class="fr-club"><img src="${cl.crest}" alt=""><span>${D2T.esc(name)}<small>${season} · best ${D2T.ordinal(c.finish)}${c.dream ? ' · dream' : ''}</small></span></div>`; }).join('')}</div>` : ''}
+        <h2 class="fr-h2">Classic clubs played</h2>
         ${clubs.length ? `<div class="fr-clubs">${clubs.map(([k, c]) => { const [season, name] = k.split(':'); const cl = D2T.game.club(name); return `<div class="fr-club"><img src="${cl.crest}" alt=""><span>${D2T.esc(name)}<small>${season} · best ${D2T.ordinal(c.finish)}</small></span></div>`; }).join('')}</div>` : '<p class="fr-small">No finished seasons yet.</p>'}
       </div>`);
       root.appendChild(body);

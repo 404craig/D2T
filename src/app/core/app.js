@@ -46,7 +46,7 @@
   };
   // Logo as a mask so it can be any colour or carry an animated fill. kind: emblem | short | long | shortText | longText | emblemLine
   D2T.logo = (kind, opts = {}) => `<span class="logo-mask ${opts.cls || ''}" role="img" aria-label="${opts.label || (kind === 'long' ? 'DROP2TOP' : 'D2T')}" style="--src:url('${new URL(D2T.ASSET[kind], document.baseURI).href}');aspect-ratio:${LOGO_RATIO[kind]};${opts.style || ''}"></span>`;
-  const LOGO_RATIO = { emblem: '234/237', emblemLine: '258/261', short: '857/241', long: '1301/237', shortText: '617/160', longText: '1068/143' };
+  const LOGO_RATIO = { emblem: '234/237', emblemLine: '502/505', short: '857/241', long: '1301/237', shortText: '617/160', longText: '1068/143' };
   D2T.LOGO_RATIO = LOGO_RATIO;
 
   // Green FC-style backdrop: soft vertical gradient (from the theme class) plus light beams and a dark streak.
