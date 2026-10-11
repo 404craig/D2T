@@ -1,0 +1,143 @@
+<title>D2T Fanned Club Cards</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<link rel="stylesheet" href="core/base.css">
+<style>
+  /* Layout: six versions of the fanned club cards Classic button, each at real phone width (358px), in a wrapping grid. */
+  :root { color-scheme: dark; --bg: #000000; --fg: #FFFFFF; --soft: #BDBDC6; --muted: #8E8E99; --rule: #1E1E22; --line: #26262C; --green: #12F06C; }
+  html, body { height: auto; }
+  body { background: var(--bg); color: var(--fg); font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 1200px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 28px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2', sans-serif; margin: 0 0 8px; }
+  .head p { margin: 0; color: var(--soft); font-size: 15px; max-width: 80ch; line-height: 1.5; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 358px), 358px)); gap: 34px 32px; }
+  .opt { display: flex; flex-direction: column; gap: 10px; }
+  .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: var(--green); }
+  .opt-h h3 { font: 900 italic 21px/1.05 'Exo 2', sans-serif; margin: 3px 0; }
+  .opt-h p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; min-height: 57px; }
+  button { font-family: inherit; text-align: left; cursor: pointer; border: 0; background: none; color: inherit; padding: 0; }
+  .k { font-size: 11.5px; font-weight: 800; letter-spacing: 0.15em; color: var(--green); }
+  .t { font: 900 italic 31px/0.95 'Exo 2', sans-serif; text-transform: uppercase; margin: 0; }
+  .s { font-size: 14.5px; font-weight: 600; margin: 0; color: var(--soft); }
+  .cta { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 18px; border-radius: 21px; background: var(--green); color: #000; font: 900 italic 15px/1 'Exo 2'; }
+  .cta svg { width: 16px; height: 16px; }
+  .cl { position: relative; overflow: hidden; isolation: isolate; width: 100%; border-radius: 22px; background: #0E0E10; border: 1px solid var(--line); color: #FFF; }
+  .slot { position: absolute; left: 50%; top: 50%; }
+
+  /* 1 original, for comparison */
+  .f0 { padding: 20px; min-height: 168px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+  .f0 .fan { position: absolute; right: -6px; top: 50%; width: 150px; height: 150px; transform: translateY(-50%); }
+  .f0 .slot { transform-origin: 50% 120%; }
+  .txt { position: relative; display: flex; flex-direction: column; gap: 6px; }
+  .f0 .txt { max-width: 58%; }
+
+  /* 2 shuffle: bigger fan bleeding off the edge; every few seconds the back card comes to the front */
+  .f1 { padding: 20px; min-height: 180px; display: flex; flex-direction: column; justify-content: center; }
+  .f1 .txt { max-width: 56%; }
+  .f1 .fan { position: absolute; right: -34px; top: 50%; width: 200px; height: 200px; transform: translateY(-50%); }
+  .f1 .slot { transition: transform .7s cubic-bezier(.5,0,.2,1); transform-origin: 50% 130%; }
+
+  /* 3 deck: a neat stack on the right; the top card flips over to show the next club */
+  .f2 { padding: 20px; min-height: 180px; display: flex; flex-direction: column; justify-content: center; }
+  .f2 .txt { max-width: 58%; }
+  .f2 .deck { position: absolute; right: 22px; top: 50%; width: 92px; height: 140px; transform: translateY(-50%); perspective: 700px; }
+  .f2 .deck .slot { left: 0; top: 0; transition: transform .7s cubic-bezier(.5,0,.2,1), opacity .4s; }
+  .f2 .deck .slot.flip { transform: translate(-130%, -6px) rotate(-14deg) !important; opacity: 0; }
+
+  /* 4 top fan: three cards across the top of a taller button, words underneath */
+  .f3 { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 6px; }
+  .f3 { background: radial-gradient(90% 60% at 50% 0%, rgba(18,240,108,0.20), rgba(18,240,108,0) 70%), #0E0E10; }
+  .f3 .stage { position: relative; height: 176px; margin: 0 -20px 2px; }
+  .f3 .slot { transform-origin: 50% 140%; }
+  .f3 .row { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+  .go { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; background: var(--green); color: #000; }
+  .go svg { width: 22px; height: 22px; }
+
+  /* 5 hand: cards rise from the bottom edge like a hand of cards, title above */
+  .f4 { padding: 20px 20px 0; min-height: 270px; display: flex; flex-direction: column; gap: 6px; }
+  .f4 .hand { position: relative; height: 140px; margin-top: auto; }
+  .f4 .slot { top: auto; bottom: -46px; transform-origin: 50% 180%; transition: transform .3s; }
+  .f4 .go { position: absolute; right: 18px; top: 18px; }
+
+  /* 6 mystery: face-down backs either side, one real club peeking out of the middle */
+  .f5 { padding: 20px; min-height: 180px; display: flex; flex-direction: column; justify-content: center; }
+  .f5 .txt { max-width: 56%; }
+  .f5 .fan { position: absolute; right: -10px; top: 50%; width: 170px; height: 170px; transform: translateY(-50%); }
+  .f5 .slot { transform-origin: 50% 125%; }
+  .f5 .peek { animation: peek 3.2s ease-in-out infinite; }
+  @keyframes peek { 0%, 100% { transform: translate(-50%, -50%) translateY(10px); } 50% { transform: translate(-50%, -50%) translateY(-8px); } }
+
+  /* 7 green fan: Classic 1's solid green with the fan on top */
+  .f6 { background: var(--green); border: 0; color: #050505; padding: 20px; min-height: 172px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+  .f6 .k { color: rgba(0,0,0,0.65); } .f6 .s { color: rgba(0,0,0,0.75); }
+  .f6 .txt { max-width: 58%; }
+  .f6 .fan { position: absolute; right: -6px; top: 50%; width: 150px; height: 150px; transform: translateY(-50%); }
+  .f6 .slot { transform-origin: 50% 120%; }
+  .f6 .cta { background: #050505; color: var(--green); }
+  .f6 .wm { position: absolute; left: -40px; bottom: -60px; width: 200px; color: rgba(0,0,0,0.08); z-index: -1; }
+  .back { position: relative; --w: 84px; width: var(--w); height: calc(var(--w) * 1.667); filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6)); }
+  .back .d2c-rim { background: linear-gradient(160deg, #8A8A96, #2A2A32); }
+  .back .d2c-face { background: repeating-linear-gradient(135deg, rgba(255,255,255,0.05) 0 2px, rgba(255,255,255,0) 2px 7px), radial-gradient(120% 70% at 20% 0%, #3A3A44 0%, #16161B 65%); display: grid; place-items: center; font-size: calc(var(--w) / 11.4); }
+  .back .logo-mask { width: 50%; color: rgba(255,255,255,0.45); }
+  @media (prefers-reduced-motion: reduce) { .f5 .peek { animation: none; } }
+</style>
+<div class="page">
+  <div class="head">
+    <h1>Fanned club cards</h1>
+    <p>Six other takes on Classic 2, with the current version first for comparison. All use real relegated club cards; the moving ones show a different club every few seconds so it feels like the spin is waiting for you.</p>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+<script src="data/data.js"></script>
+<script src="core/app.js"></script>
+<script src="core/cards.js"></script>
+<script>
+(function () {
+  const D = D2T.data, C = D2T.cards;
+  const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
+  const pool = D.relegatedPool, pick = (n, s) => pool.find((p) => p.name === n && p.season === s);
+  const three = [pick('Norwich', '1994/95'), pick('Wolves', '2011/12'), pick('Southampton', '2024/25')];
+  const many = [three[0], three[1], three[2], pick('Sunderland', '2016/17') || pool[60], pick('Ipswich', '2001/02') || pool[30], pick('Leeds', '2003/04') || pool[40]].filter(Boolean);
+  const T = '<span class="k">CLASSIC</span><h4 class="t">Pick a new club</h4>';
+  const S = '<p class="s">Take them from the drop to the top.</p>';
+  const CTA = `<span class="cta">Spin for a club ${ARROW}</span>`;
+  const back = (w = 84) => `<div class="back d2c" style="--w:${w}px"><div class="d2c-rim"></div><div class="d2c-face">${D2T.logo('emblem')}</div></div>`;
+  const fanSlots = (cards, w, spread, lift) => cards.map((c, i) => { const mid = (cards.length - 1) / 2, d = i - mid;
+    return `<div class="slot" data-i="${i}" style="z-index:${10 - Math.abs(Math.round(d))};transform:translate(-50%,-50%) rotate(${d * spread}deg) translateY(${Math.abs(d) * lift - (d === 0 ? 6 : 0)}px)">${typeof c === 'string' ? c : C.club(c, { w, delay: i * 0.6 })}</div>`; }).join('');
+
+  const OPTS = [
+    { tag: 'NOW', name: 'Current fan', note: 'Three cards fanned on the right, title and a green pill on the left.',
+      html: `<button class="cl f0"><div class="fan">${fanSlots(three, 70, 14, 5)}</div><div class="txt">${T}${S}${CTA}</div></button>` },
+    { tag: 'ALT 1', name: 'Shuffle', note: 'A bigger fan that runs off the edge. Every few seconds the back card slides round to the front, so a different club is always on top.',
+      html: `<button class="cl f1" data-anim="shuffle"><div class="fan">${fanSlots(three, 84, 13, 6)}</div><div class="txt">${T}${S}<span style="height:8px"></span>${CTA}</div></button>` },
+    { tag: 'ALT 2', name: 'Deck', note: 'A neat deck on the right. The top card flicks away to the left and the next club is underneath, like dealing.',
+      html: `<button class="cl f2" data-anim="deck"><div class="deck">${many.slice().reverse().map((c, i) => `<div class="slot" style="z-index:${i};transform:translate(${(many.length - 1 - i) * -2}px, ${(many.length - 1 - i) * 2}px)">${C.club(c, { w: 84, shine: false })}</div>`).join('')}</div><div class="txt">${T}${S}<span style="height:8px"></span>${CTA}</div></button>` },
+    { tag: 'ALT 3', name: 'Fan on top', note: 'Taller button: the fan sits across the top on a soft green glow, with the words and an arrow underneath. The cards get the most room.',
+      html: `<button class="cl f3"><div class="stage">${fanSlots([three[0], three[1], three[2]], 78, 16, 8)}</div>${T}<div class="row">${S}<span class="go">${ARROW}</span></div></button>` },
+    { tag: 'ALT 4', name: 'Hand of cards', note: 'Five club cards rise from the bottom edge like a hand you are holding, title above. The middle card sits highest.',
+      html: `<button class="cl f4"><span class="go">${ARROW}</span>${T}${S}<div class="hand">${fanSlots(many.slice(0, 5), 74, 11, 9)}</div></button>` },
+    { tag: 'ALT 5', name: 'Mystery', note: 'Face-down D2T cards either side and one real club bobbing up in the middle: you know a club is in there, you just don’t know which.',
+      html: `<button class="cl f5" data-anim="mystery"><div class="fan">${fanSlots([back(80), `<div class="peekwrap">${C.club(three[1], { w: 84 })}</div>`, back(80)], 84, 15, 6)}</div><div class="txt">${T}${S}<span style="height:8px"></span>${CTA}</div></button>` },
+    { tag: 'ALT 6', name: 'Green fan', note: 'Classic 1 and 2 together: the solid green button with the fan on the right and a black pill. The loudest of the lot.',
+      html: `<button class="cl f6">${D2T.logo('emblem', { cls: 'wm' })}<div class="fan">${fanSlots(three, 70, 14, 5)}</div><div class="txt">${T}${S}${CTA}</div></button>` }
+  ];
+  document.getElementById('grid').innerHTML = OPTS.map((o) => `<div class="opt"><div class="opt-h"><span class="tag">${o.tag}</span><h3>${o.name}</h3><p>${o.note}</p></div>${o.html}</div>`).join('');
+  // fan on top: centre the slots in the stage
+  document.querySelectorAll('.f3 .slot').forEach((s) => { s.style.left = '50%'; s.style.top = '52%'; });
+  document.querySelectorAll('.f4 .slot').forEach((s, i) => { s.style.left = (18 + i * 16) + '%'; });
+  document.querySelectorAll('.f5 .slot:not(.peek)').forEach((s) => {});
+  if (D2T.reduced()) return;
+  // ALT 1: rotate positions every 2.6s
+  const sh = document.querySelector('[data-anim="shuffle"] .fan');
+  const pos = [...sh.children].map((s) => s.style.transform), zs = [...sh.children].map((s) => s.style.zIndex);
+  let k = 0;
+  setInterval(() => { k = (k + 1) % 3; [...sh.children].forEach((s, i) => { const j = (i + k) % 3; s.style.transform = pos[j]; s.style.zIndex = zs[j]; }); }, 2600);
+  // ALT 2: deal the top card away, then put it at the bottom
+  const deck = document.querySelector('[data-anim="deck"] .deck');
+  setInterval(() => {
+    const cards = [...deck.children], top = cards[cards.length - 1];
+    top.classList.add('flip');
+    setTimeout(() => { top.classList.remove('flip'); deck.prepend(top); [...deck.children].forEach((s, i, all) => { s.style.zIndex = i; s.style.transform = `translate(${(all.length - 1 - i) * -2}px, ${(all.length - 1 - i) * 2}px)`; }); }, 700);
+  }, 2400);
+})();
+</script>
