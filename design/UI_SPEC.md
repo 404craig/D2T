@@ -1,6 +1,6 @@
 # DROP2TOP interface spec (design round, 11 Oct 2026)
 
-This is the agreed direction from the design sessions with Craig, written so the build session (D2T main) can pick it up. The clickable prototype lives in `design/prototype/` (open `index.html` through a local server, or the published artifact). Craig's full brief for this round is in `design/BRIEF_2026-10-11.md`.
+This is the agreed direction from the design sessions with Craig, written so the build session (D2T main) can pick it up. The clickable prototype lives in `design/prototype/` (run `python3 -m http.server` in that folder and open `index.html`) and is published, private to Craig, at https://claude.ai/artifact/PbYBJCFJvAifegsfawct1H. Craig's full brief for this round is in `design/BRIEF_2026-10-11.md`.
 
 Where this spec and the current build differ, this spec is the newer decision. Where it says "proposal", Craig has not signed it off yet.
 
@@ -63,7 +63,7 @@ The prototype uses bare tokens (`#home`, `#spin`) because claude.ai artifact lin
 
 ## 5. Proposals waiting for Craig
 
-- **League rating:** a percentage per player = (beat the drop x 1 + top half x 2 + top 3 x 3 + title x 5) / (runs x 5) x 100. It rewards better finishes, and dividing by runs means people who play more are not automatically top. (The prototype's front agent may refine this; see the prototype notes.)
+- **League rating:** each run scores its best finish (beat the drop 1, top half 2, top 3 3, title 5); the rating is the average out of 5 as a percentage. Counts are cumulative (a title also counts as top 3, top half and beat the drop), so rating = (drop + half + top3 + 2 x titles) / (runs x 5) x 100.
 - **Coming soon modes listed:** Daily challenge, Head to head (online, up to 3), Draft, Legends. Names only; no rules promised.
 
 ## 6. Multiplayer (later, captured from Craig)
@@ -92,3 +92,27 @@ Today a bronze or silver card is rarely wanted. Options, best first:
 - `design/BRIEF_2026-10-11.md`: Craig's brief for this round, verbatim.
 - `design/reference/`: the FC27 green reference image (EA key art, reference only), the logo animation video and its frames.
 - Design canvases (claude.ai, private to Craig): Cards https://claude.ai/artifact/CSgEHPpQSqtkG5PxwfPkvz, Club Themes https://claude.ai/artifact/DjFu7XBFz65kq5S7Aivdmy.
+
+## 9. How the prototype behaves (built 11 Oct)
+
+- **Intro:** short black D2T, emblem spins as it opens into DROP2TOP at 75% width, then the slogan types in (DROP and TOP reversed out), then the logo glides up into the green home. About 5 seconds, tap to skip, first launch only.
+- **Into the game:** `D2T.toBlack()` (in `screens/home.js`): black spreads from the tapped button, the logo turns white with a green shimmer and lands as the small top-left logo of the next screen.
+- **Spin engine (`screens/spin.js`, `D2T.roll`):** three masked reels, 5 recycled nodes each, cards addressed by index so the strip never loops. Speed up to 24 cards a second, vertical blur by SVG `feGaussianBlur` scaled to speed, decel curve landing exactly on the target, then a damped spring (one soft bounce). Lands at about 2.4s, 3.0s and 3.7s (the right reel teases longest). Each landing: scale pulse, light sweep, glow in the club colour. Measured 60fps in Chromium.
+- **Card open (`core/flip.js`):** one full turn around the vertical axis with a D2T card back, 800ms open, 640ms close, horizontal blur during the fastest part of the turn.
+- **Transfer roll:** the emblem spins and bursts into about 600 fragments to reveal the slots. Prototype odds: bronze 14, silver 34, gold 38, baller 11, legend about 4.
+- **Table reveal:** a club-colour highlight runs down from 1st, slowing into your row, then a "New season" banner and every number counts down to 0.
+- **Matches:** seeded Poisson from XI rating against opponent strength (from their real finish), 90 minutes in about 24 seconds, Skip to end gives the same result. Other clubs use their real results for gameweeks 1 to 3. A transfer roll comes after gameweek 3, 6, 9...
+- **Prototype limits:** spins always land on the three clubs with full data (Wolves 2011/12, Norwich 2019/20, Southampton 2024/25); achievement numbers and friends are examples.
+
+## 10. Open questions for Craig
+
+1. Record counts cumulative (a title also counts as top 3, top half and beat the drop)?
+2. Minimum runs (say 3) before a player is ranked in a friends league?
+3. Slogan on every launch or first launch only (now first only)?
+4. Create an account inside the same email then PIN flow, or a separate tab like Tenaball?
+5. Show the real result after each match for comparison ("Wolves really won 2-1")?
+6. Changing formation: suggest a new best XI (now) or keep your XI and move them, playing some out of position?
+7. Should out-of-position players lower the team rating, and how hard should matches be?
+8. Subs: whole squad in the carousel (now) or a bench of 7 plus reserves?
+9. Table reveal timing (about 4s down to your row, 4s for the reset)?
+10. Spin extras: reel tick and landing thud sounds, haptics, and an occasional "one card past and back" tease on the last reel?
