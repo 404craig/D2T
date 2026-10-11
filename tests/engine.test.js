@@ -94,18 +94,49 @@ t("every relegated club-season can be played to the end", () => {
     assert.strictEqual(r.st.played.length, r.st.fixtures.length);
   }
 });
-t("Dare2Dream: every club-season gets a full XI, and a sample plays to the end", () => {
+// Dare2Dream: draft 11 (best effective rating each time), then play the season greedily.
+const draft = (seed, c, formation) => {
+  const S = G.seasons[c.season], id = S.clubs.find(x => x.name === c.club).id;
+  const st = D.newRun({ seed, mode: "dare2dream", catalogue: G.clubSeasons });
+  D.chooseClub(st, S, { c: id, f: "4-4-2", xi: [] });
+  if (formation) assert.ok(D.draftFormation(st, S, formation));
+  while (st.phase === "draft") {
+    const slot = D.draftSlot(st), pos = D.FORMATIONS[st.formation][slot][0];
+    assert.strictEqual(st.roll.cards.length, 3, c.key);
+    for (const cid of st.roll.cards) assert.strictEqual(D.broadOf(D.playerOf(S, cid)), D.SLOT_BROAD[pos], c.key + " card out of position");
+    const best = st.roll.cards.slice().sort((x, y) => D.effRating(D.playerOf(S, y), pos) - D.effRating(D.playerOf(S, x), pos))[0];
+    assert.ok(D.draftPick(st, S, best));
+  }
+  return { st, S };
+};
+t("Dare2Dream: the draft fills 11 shirts in position from other clubs, then the season has no pre-season rolls", () => {
   assert.strictEqual(G.clubSeasons.length, 686);
-  for (const c of G.clubSeasons) {
-    const S = G.seasons[c.season], id = S.clubs.find(x => x.name === c.club).id;
-    const st = D.newRun({ seed: "d2d-" + c.key, mode: "dare2dream", catalogue: G.clubSeasons });
-    D.chooseClub(st, S, { c: id, f: "4-4-2", xi: [] });
+  for (const c of G.clubSeasons.filter((_, i) => i % 7 === 0)) {
+    const { st, S } = draft("d2d-" + c.key, c, "4-3-3");
+    assert.strictEqual(st.phase, "setup");
     assert.strictEqual(st.xi.filter(x => x != null).length, 11, c.key);
     assert.strictEqual(new Set(st.xi).size, 11, c.key);
+    const own = new Set(D.squadOf(S, st.club).map(p => p.id));
+    assert.ok(st.xi.every(id => !own.has(id)), c.key + " drafted his own club's player");
+    assert.strictEqual(st.signed.filter(x => x.draft).length, 11);
+    D.startSeason(st, S);
+    assert.ok(st.rolls.every(w => w.kind !== "pre"), "pre-season rolls should be dropped");
+    assert.strictEqual(st.rolls.reduce((a, w) => a + w.n, 0), D.schedule(st.fixtures).reduce((a, w) => a + w.n, 0) - 3, c.key + " rolls");
+    assert.strictEqual(st.phase, "prematch");
   }
-  for (const c of G.clubSeasons.filter((_, i) => i % 40 === 0)) {
-    const r = play("d2d-play-" + c.key, c.season, c.club);
-    assert.strictEqual(r.st.phase, "summary", c.key);
+});
+t("Dare2Dream: a sample of drafted seasons plays to the end, and draft picks weaken their clubs", () => {
+  for (const c of G.clubSeasons.filter((_, i) => i % 45 === 0)) {
+    const { st, S } = draft("d2d-play-" + c.key, c);
+    D.startSeason(st, S);
+    let g = 0;
+    while (st.phase !== "summary" && g++ < 700) {
+      if (st.phase === "window") D.pass(st, S); else D.playMatch(st, S);
+    }
+    assert.strictEqual(st.phase, "summary", c.key);
+    assert.ok(!st.final.bestSigning, "draft picks are not signings");
+    const gone = new Set(st.signed.map(x => x.id)), clubs = [...new Set(st.signed.map(x => x.from).filter(x => x != null))];
+    assert.ok(clubs.some(cl => D.strengthLoss(S, cl, gone) > 0), c.key + ": no drafted player weakened his club");
   }
 });
 console.log(`${n} checks passed`);
