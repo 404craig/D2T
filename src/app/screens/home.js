@@ -3,12 +3,15 @@
 (function () {
   const STEP_LABEL = { spin: 'Pick a club', table: 'Preview', squad: 'Squad', fixtures: 'Fixtures', match: 'Match day', transfer: 'Transfer' };
   const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
+  // Bottom bar icons: solid and slanted like the Black Italic type, all white (chosen 11 Oct)
+  const SK = (d) => `<svg viewBox="0 0 24 24" aria-hidden="true"><g transform="skewX(-10) translate(2 0)">${d}</g></svg>`;
   const TAB_ICON = {
-    league: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8v5a4 4 0 01-8 0z"/><path d="M8 5.5H5.5a2.5 2.5 0 003 3.3M16 5.5h2.5a2.5 2.5 0 01-3 3.3M12 13v4M8.5 20h7"/></svg>',
-    stats: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect class="f" x="4" y="13" width="4.2" height="8" rx="1.2"/><rect class="f" x="9.9" y="8.5" width="4.2" height="12.5" rx="1.2"/><rect class="f" x="15.8" y="3.5" width="4.2" height="17.5" rx="1.2"/></svg>',
-    howto: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 014.8.9c0 1.7-2.4 2.2-2.4 3.8"/><circle class="f" cx="12" cy="17.3" r="1.2"/></svg>',
-    account: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"/></svg>'
+    league: SK('<path d="M6 3h12v4.5a6 6 0 01-12 0z"/><path d="M3 4.5h2.6v1.6A3.4 3.4 0 003.3 6zM18.4 4.5H21a3 3 0 01-2.6 3.3z"/><path d="M10.6 13h2.8v3.6H17V21H7v-4.4h3.6z"/>'),
+    stats: SK('<rect x="3" y="13" width="4.6" height="8" rx="1"/><rect x="9.7" y="8.5" width="4.6" height="12.5" rx="1"/><rect x="16.4" y="3" width="4.6" height="18" rx="1"/>'),
+    howto: SK('<path d="M6 2.5h12l3 3v11.2L12 21.5 3 16.7V5.5z"/><path class="k" d="M10.1 9.6a2 2 0 013.8.6c0 1.4-2 1.6-2 3h-1.8c0-2.4 2-2.4 2-3.1a.4.4 0 00-.8-.1zM11 14.4h1.9v1.9H11z"/>'),
+    account: SK('<circle cx="12" cy="7.5" r="4.3"/><path d="M3.5 21c.8-4.6 4.2-7.2 8.5-7.2s7.7 2.6 8.5 7.2z"/>')
   };
+
   // card outline (chamfered top corners, shallow point at the bottom), as in .d2c-rim
   const FRAME = '<svg viewBox="0 0 100 128" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,11 11,1 89,1 99,11 99,108 50,127 1,108" stroke-linejoin="round"/></svg>';
   const MODES = [
@@ -30,8 +33,13 @@
     const eng = D2T.game.eng(), data = D2T.run(), c = data.club;
     const games = data.fixtures.length, played = eng.played.length;
     const where = eng.phase === 'draft' ? `Draft · Shirt ${eng.draft.step + 1} of ${eng.xi.length}` : eng.phase === 'setup' ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, games)} · ${STEP_LABEL[D2T.game.stepFor()] || 'In progress'}`;
-    return `<button class="fr-card-btn fr-cont fr-in" style="--club:${c.accent}" data-act="continue" aria-label="Continue with ${D2T.esc(c.full)} ${data.season}, ${where}">
-      <span class="fr-cont-crest"><img src="${c.crest}" alt=""></span>
+    // Club sweep (chosen 11 Oct): light club colour at the left, the true colour across the middle, a deeper shade at the right.
+    const mix = D2T.mix, a = c.accent;
+    const lum = (h) => { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }).reduce((t, v, i) => t + v * [0.2126, 0.7152, 0.0722][i], 0); };
+    const dark = lum(a) > 0.33, txt = dark ? (lum(c.ink) < 0.08 ? c.ink : '#0A0A0A') : '#FFFFFF';
+    const paint = `--face:linear-gradient(100deg, ${mix(a, '#FFFFFF', 0.4)} 0%, ${a} 30%, ${a} 55%, ${mix(a, '#000000', 0.45)} 100%);--rim:linear-gradient(170deg, ${mix(a, '#FFFFFF', 0.7)}, ${mix(a, '#000000', 0.4)});--txt:${txt};--glowc:${a}44;--track:${dark ? 'rgba(0,0,0,0.18)' : 'rgba(255,255,255,0.25)'};--tsh:${dark ? 'none' : '0 2px 8px rgba(0,0,0,0.4)'};--goBg:${dark ? '#0A0A0A' : '#FFFFFF'};--goFg:${dark ? '#FFFFFF' : '#0A0A0A'}`;
+    return `<button class="fr-card-btn fr-cont fr-in" style="${paint}" data-act="continue" aria-label="Continue with ${D2T.esc(c.full)} ${data.season}, ${where}">
+      <span class="fr-cont-tex"></span><span class="fr-cont-hi"></span><span class="d2t-shine"></span><span class="fr-cont-crest"><img src="${c.crest}" alt=""></span>
       <span class="fr-cont-txt"><span class="fr-cont-lbl">CONTINUE · ${D2T.game.modeName().toUpperCase()}</span><span class="fr-cont-name" style="display:block">${D2T.esc(c.name)}</span>
       <span class="fr-cont-meta" style="display:block">${data.season} · ${where}</span>
       <span class="fr-cont-bar" style="display:block"><i style="transform:scaleX(${Math.max(0.03, played / games)})"></i></span></span>
@@ -52,20 +60,21 @@
       const rec = D2T.game.record(), dreams = D2T.game.dreamRecord();
       const body = D2T.h(`<div class="screen-body fr-home">
         <div class="fr-home-top"><button class="fr-home-logo" aria-label="DROP2TOP">${homeLogo()}</button></div>
-        ${continueCard()}
         <button class="fr-card-btn fr-pick fr-in" data-act="pick" data-mode="classic">
           <span class="fr-mark">${D2T.logo('emblem')}</span>
           <span><span class="fr-tag" style="display:block">CLASSIC</span><span class="fr-big" style="display:block">Pick a new club</span><span class="fr-sub" style="display:block">Take them from the drop to the top.</span></span>
           <span class="fr-go">${ARROW}</span></button>
-        <button class="fr-card-btn fr-pick fr-dream fr-in" data-act="pick" data-mode="dare2dream">
-          <span class="fr-mark">${D2T.logo('emblemLine')}</span>
-          <span><span class="fr-tag" style="display:block">DARE2DREAM</span><span class="fr-big" style="display:block">Any club, no players</span><span class="fr-sub" style="display:block">Draft your XI, then beat their real finish.${dreams.runs ? ` ${dreams.dreams} of ${dreams.runs} dreams so far.` : ''}</span></span>
-          <span class="fr-go">${ARROW}</span></button>
+        ${continueCard()}
         <section class="fr-sect fr-in" aria-label="Your record">
           <div class="fr-sect-h"><h2>Your record</h2><span>${rec.runs} runs</span></div>
           ${D2T.frRecord(rec, 'dark')}</section>
-        <section class="fr-sect fr-in" aria-label="More game modes">
-          <div class="fr-sect-h"><h2>More modes</h2><span>Coming soon</span></div>
+        <section class="fr-sect fr-in" aria-label="Other game modes">
+          <div class="fr-sect-h"><h2>Other modes</h2></div>
+        <button class="fr-card-btn fr-pick fr-dream" data-act="pick" data-mode="dare2dream">
+          <span class="fr-mark">${D2T.logo('emblemLine')}</span>
+          <span><span class="fr-tag" style="display:block">DARE2DREAM</span><span class="fr-big" style="display:block">Any club, no players</span><span class="fr-sub" style="display:block">Draft your XI, then beat their real finish.${dreams.runs ? ` ${dreams.dreams} of ${dreams.runs} dreams so far.` : ''}</span></span>
+          <span class="fr-go">${ARROW}</span></button>
+          <div class="fr-sect-h fr-soon-h"><span>Coming soon</span></div>
           <div class="fr-modes">${MODES.map((m) => `<button class="fr-mode" aria-label="${m.name}, coming soon">
             <span class="fr-back" style="display:block"><span class="fr-back-rim"></span><span class="fr-back-face"></span>${D2T.logo('emblemLine')}<span class="fr-stamp">COMING SOON</span></span>
             <span class="fr-mode-name">${m.name}</span>${m.sub ? `<span class="fr-mode-sub">${m.sub}</span>` : ''}</button>`).join('')}</div></section>

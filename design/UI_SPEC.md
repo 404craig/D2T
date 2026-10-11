@@ -94,6 +94,12 @@ Today a bronze or silver card is rarely wanted. Options, best first:
 - `design/reference/`: the FC27 green reference image (EA key art, reference only), the logo animation video and its frames.
 - Design canvases (claude.ai, private to Craig): Cards https://claude.ai/artifact/CSgEHPpQSqtkG5PxwfPkvz, Club Themes https://claude.ai/artifact/DjFu7XBFz65kq5S7Aivdmy.
 
+## 8b. Home (build 14, chosen 11 Oct)
+
+- Order: logo, Classic (Pick a new club), Continue, Your record, Other modes (Dare2Dream card, then the coming soon row).
+- Continue is the club sweep: light club colour at the left, the true colour across the middle, a deeper shade at the right, with a metal rim, faint diagonal texture and the light sweep. Text and the arrow turn dark on light club colours. Options page: `design/prototype/continue-options.html` (idea 1).
+- Bottom bar icons are solid and slanted like the Black Italic type, all white, with one-line uppercase italic labels. Options page: `design/prototype/home-options.html`.
+
 ## 9. How the prototype behaves (built 11 Oct)
 
 - **Intro:** short black D2T, emblem spins as it opens into DROP2TOP at 75% width, then the slogan types in (DROP and TOP reversed out), then the logo glides up into the green home. About 5 seconds, tap to skip, first launch only.
