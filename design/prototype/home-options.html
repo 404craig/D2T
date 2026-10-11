@@ -93,8 +93,8 @@
   .iconA svg .fill { fill: var(--green); stroke: none; }
   /* icon set B: solid, slanted like the Black Italic type */
   .iconB svg { fill: currentColor; stroke: none; }
-  .iconB svg .acc { fill: var(--green); }
-  .iconB .tab span { font-style: italic; font-weight: 900; text-transform: uppercase; font-size: 11px; letter-spacing: 0.6px; }
+  .iconB svg .acc { fill: currentColor; }
+  .iconB .tab span { font-style: italic; font-weight: 900; text-transform: uppercase; font-size: 11px; letter-spacing: 0.3px; white-space: nowrap; }
   /* icon set C: arrow line icons from the emblem's up and down arrows */
   .iconC svg { fill: none; stroke: currentColor; stroke-width: 2.3; stroke-linejoin: miter; stroke-linecap: square; }
   .iconC svg .acc { stroke: var(--green); }
@@ -164,9 +164,9 @@
         <div class="stack"><div class="mode locked"><h5>Daily</h5><span class="soon">SOON</span></div><div class="mode locked"><h5>Head to head</h5><span class="soon">SOON</span></div></div></div>
     </div>${tabs(set)}</div>`;
   const OPTS = [
-    { tag: 'OPTION 1', name: 'Club face', note: 'Continue uses the club card’s metal face, running left to right from the club colour into black, with the same rim. Icons: line icons inside the card shield, the detail in green.', c: 1, s: 'A' },
-    { tag: 'OPTION 2', name: 'Mini club card', note: 'Continue shows the actual club card, small, on a panel tinted in the club colour, with the button in club colours. Icons: solid and slanted like the Black Italic type, one green detail each.', c: 2, s: 'B' },
-    { tag: 'OPTION 3', name: 'Wide club card', note: 'Continue is a wide club card: club colour at the top falling to black, with the crest large and faded behind. Icons: square-cut line icons built from the emblem’s arrows.', c: 3, s: 'C' }
+    { tag: 'OPTION 1', name: 'Club face', note: 'Continue uses the club card’s metal face, running left to right from the club colour into black, with the same rim. Icons: solid and slanted, all white.', c: 1, s: 'B' },
+    { tag: 'OPTION 2', name: 'Mini club card', note: 'Continue shows the actual club card, small, on a panel tinted in the club colour, with the button in club colours. Icons: solid and slanted, all white.', c: 2, s: 'B' },
+    { tag: 'OPTION 3', name: 'Wide club card', note: 'Continue is a wide club card: club colour at the top falling to black, with the crest large and faded behind. Icons: square-cut line icons built from the emblem’s arrows.', c: 3, s: 'B' }
   ];
   document.getElementById('phones').innerHTML = OPTS.map((o) => `<section class="opt"><div class="opt-h"><span class="tag">${o.tag}</span><h2>${o.name}</h2><p>${o.note}</p></div>${home(o.c, o.s)}</section>`).join('');
 })();
