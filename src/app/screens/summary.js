@@ -130,7 +130,7 @@
       root.append(body, bar);
 
       const tag = dream ? (met ? 'Dare2Dream: dream achieved' : 'Dare2Dream') : '';
-      const sh = buildShare(F, club, S.season, line, daily ? `Daily #${GAME.dailyNumber(daily)}${tag ? ' · ' + tag : ''}` : tag);
+      const sh = buildShare(F, club, S.season, line, daily ? `${GAME.dailyName(daily)}${tag ? ' · ' + tag : ''}` : tag);
       bar.querySelector('.icon-btn').onclick = () => D2T.go('home');
       bar.querySelector('[data-act="share"]').onclick = () => share(sh);
       body.querySelector('[data-act="again"]').onclick = () => { if (daily) { D2T.go('home'); return; } const m = GAME.mode(); D2T.state.run = null; D2T.save(); GAME.newRun(m); D2T.go('spin'); };
