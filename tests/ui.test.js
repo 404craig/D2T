@@ -246,6 +246,28 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => window.D2T.game.dreamRecord().runs === 1), "Dare2Dream run not recorded");
   check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, classicBefore), "Dare2Dream run changed Classic's record");
 
+  // ---------- Club X: pick a season, replace its bottom club, draft 11, win the league ----------
+  await page.evaluate(() => window.D2T.go("home")); await wait(900);
+  await page.click('[data-act="pick"][data-mode="clubx"]');
+  await page.waitForSelector(".sheet [data-k='yes']", { timeout: 2000 }).then(() => page.click(".sheet [data-k='yes']")).catch(() => {});
+  await expectScreen("spin");
+  check(await page.evaluate(() => window.D2T.game.mode() === "clubx"), "Club X run did not start in its mode");
+  await wait(700); await page.click(".sp-main");
+  await page.waitForFunction(() => window.D2T.state.run.spun === true, null, { timeout: 8000 });
+  await wait(400); await shot("33-clx-spin");
+  check(await page.evaluate(() => { const o = window.D2T.game.offer(), cs = window.D2T_GAME.clubSeasons; return new Set(o.map((c) => c.season)).size === 3 && o.every((c) => c.pos === Math.max(...cs.filter((x) => x.season === c.season).map((x) => x.pos))); }), "Club X offer is not three seasons' bottom clubs");
+  await page.click(".sp-slot >> nth=0"); await wait(300); await page.click(".sp-main");
+  await expectScreen("table"); await page.click(".actionbar button"); await wait(400);
+  check(/Club X/.test(await page.textContent(".screen")), "table does not show Club X");
+  await shot("34-clx-table");
+  await page.click(".actionbar button"); await expectScreen("squad"); await wait(600);
+  check(await page.evaluate(() => window.D2T.game.eng().phase === "draft" && window.D2T.game.clubName() === "Club X"), "Club X should start in the draft as Club X");
+  await page.evaluate(() => { const G = window.D2T.game; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
+  await expectScreen("summary"); await wait(1200); await shot("35-clx-summary");
+  check(/Champions|Fell short/.test(await page.textContent(".sm-head")), "Club X summary has no result");
+  check(await page.evaluate(() => window.D2T.game.xRecord().runs === 1), "Club X run not recorded");
+  check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, classicBefore), "Club X run changed Classic's record");
+
   // ---------- Daily challenge: today's club for everyone, its own save, one go ----------
   await page.evaluate(() => { const G = window.D2T.game; G.newRun("classic"); G.chooseClub(G.offer()[0].key); window.D2T.state.run.tableSeen = true; window.D2T.save(); window.D2T.go("home"); }); await wait(900);
   const dEntry = await page.evaluate(() => { const d = window.D2T.game.dailyEntry(window.D2T.game.today()); return { key: d.key, mode: d.mode }; });
@@ -262,5 +284,5 @@ fs.mkdirSync(OUT, { recursive: true });
 
   await browser.close();
   if (errors.length) { console.log("FAIL\n" + errors.join("\n")); process.exit(1); }
-  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls (tap, drag, pass), fixtures, live match, refresh, season, summary, record, back, account, other screens, Dare2Dream draft, Daily");
+  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls (tap, drag, pass), fixtures, live match, refresh, season, summary, record, back, account, other screens, Dare2Dream draft, Club X, Daily");
 })().catch((e) => { console.error(e); process.exit(1); });

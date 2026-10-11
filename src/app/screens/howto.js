@@ -41,6 +41,9 @@
         <h2 class="fr-h2">Dare2Dream</h2>
         <p class="fr-lead">Spin any club from any season, but start with no players. Pick a formation, then draft your XI: 11 spins, one per shirt, three players each time, no respins. Then play the season with transfer rolls and 5 respins. Finish higher than they really did, or win the league again if they won it.</p>
 
+        <h2 class="fr-h2">Club X</h2>
+        <p class="fr-lead">Spin three seasons and pick one. Club X takes the place of that season's bottom club, with no players. Pick a formation and draft your XI the Dare2Dream way, then play the season with transfer rolls and 5 respins. Only the title counts.</p>
+
         <h2 class="fr-h2">Card colours</h2>
         <p class="fr-lead" style="margin-bottom:6px">The big number is the rating. The colour tells you the level.</p>
         <div class="fr-levels">${cards.map((x) => `<div class="fr-lv">${D2T.cards.player(x.card, { w: 128, shine: x.lv === 'baller' || x.lv === 'legend' })}
