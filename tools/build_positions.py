@@ -122,10 +122,20 @@ def main():
             if not m:
                 stats["no_positions"] += 1
                 continue
+            b = rs[0]["position"]
+            if note and BROAD[m] != b and not (b == "MID" and m in ("RW", "LW")):
+                # thin evidence (borrowed seasons) against Tenaball's checked broad position: lead with
+                # one of his positions in that broad, or keep the broad position alone
+                fit = [x for x in o if BROAD[x] == b]
+                if not fit:
+                    stats["thin_conflict_dropped"] += 1
+                    continue
+                o = [x for x in [m] + o if x != fit[0]]
+                m = fit[0]
+                stats["thin_conflict_reordered"] += 1
             season_out[plid] = [m] + o
             if how in ("surname", "fuzzy"):
                 report.append(f"{season} {rs[0]['player']} ({', '.join(sorted(clubs))}) -> TM {tm[str(tid)]['slug']} [{how}]")
-            b = rs[0]["position"]
             if b == "GK" or m == "GK":
                 stats["gk_ok" if (b == "GK") == (m == "GK") else "gk_clash"] += 1
                 if (b == "GK") != (m == "GK"):

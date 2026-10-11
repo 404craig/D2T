@@ -9,6 +9,15 @@
   "position": "MID"
  },
  {
+  "key": "1995/96|Mark Jackson",
+  "player": "Mark Jackson",
+  "clubs": [
+   "Leeds"
+  ],
+  "apps": 1,
+  "position": "DEF"
+ },
+ {
   "key": "1996/97|Manny Omoyinmi",
   "player": "Manny Omoyinmi",
   "clubs": [
@@ -27,6 +36,42 @@
   "position": "GK"
  },
  {
+  "key": "1997/98|Sagi Burton-Godwin",
+  "player": "Sagi Burton-Godwin",
+  "clubs": [
+   "Crystal Palace"
+  ],
+  "apps": 2,
+  "position": "DEF"
+ },
+ {
+  "key": "1999/00|Paul Jones",
+  "player": "Paul Jones",
+  "clubs": [
+   "Southampton"
+  ],
+  "apps": 31,
+  "position": "GK"
+ },
+ {
+  "key": "1999/00|Tomas Gustafsson",
+  "player": "Tomas Gustafsson",
+  "clubs": [
+   "Coventry"
+  ],
+  "apps": 10,
+  "position": "DEF"
+ },
+ {
+  "key": "1999/00|Trond Egil Soltvedt",
+  "player": "Trond Egil Soltvedt",
+  "clubs": [
+   "Southampton"
+  ],
+  "apps": 24,
+  "position": "DEF"
+ },
+ {
   "key": "2000/01|Paul Jones",
   "player": "Paul Jones",
   "clubs": [
@@ -34,6 +79,24 @@
   ],
   "apps": 35,
   "position": "GK"
+ },
+ {
+  "key": "2002/03|Li Tie",
+  "player": "Li Tie",
+  "clubs": [
+   "Everton"
+  ],
+  "apps": 29,
+  "position": "MID"
+ },
+ {
+  "key": "2002/03|Li Weifeng",
+  "player": "Li Weifeng",
+  "clubs": [
+   "Everton"
+  ],
+  "apps": 1,
+  "position": "DEF"
  },
  {
   "key": "2008/09|Jo",
@@ -82,6 +145,33 @@
   "position": "FWD"
  },
  {
+  "key": "2011/12|Javier Hernandez",
+  "player": "Javier Hernandez",
+  "clubs": [
+   "Man Utd"
+  ],
+  "apps": 28,
+  "position": "FWD"
+ },
+ {
+  "key": "2012/13|Guly do Prado",
+  "player": "Guly do Prado",
+  "clubs": [
+   "Southampton"
+  ],
+  "apps": 18,
+  "position": "MID"
+ },
+ {
+  "key": "2012/13|Javier Hernandez",
+  "player": "Javier Hernandez",
+  "clubs": [
+   "Man Utd"
+  ],
+  "apps": 22,
+  "position": "FWD"
+ },
+ {
   "key": "2017/18|Javier Hernandez",
   "player": "Javier Hernandez",
   "clubs": [
@@ -97,6 +187,33 @@
    "Huddersfield"
   ],
   "apps": 38,
+  "position": "DEF"
+ },
+ {
+  "key": "2018/19|Andre-Frank Zambo Anguissa",
+  "player": "Andre-Frank Zambo Anguissa",
+  "clubs": [
+   "Fulham"
+  ],
+  "apps": 22,
+  "position": "MID"
+ },
+ {
+  "key": "2018/19|Javier Hernandez",
+  "player": "Javier Hernandez",
+  "clubs": [
+   "West Ham"
+  ],
+  "apps": 25,
+  "position": "FWD"
+ },
+ {
+  "key": "2018/19|Mathias Jorgensen",
+  "player": "Mathias Jorgensen",
+  "clubs": [
+   "Huddersfield"
+  ],
+  "apps": 24,
   "position": "DEF"
  }
 ]
