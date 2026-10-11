@@ -219,3 +219,9 @@
 .fr-sect .fr-dream { margin-top: 2px; }
 .fr-soon-h { margin-top: 14px; }
 .fr-soon-h span { font-size: 12px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #8E8E99; }
+
+/* daily challenge card */
+.fr-daily { min-height: 96px; margin-bottom: 12px; padding-left: 14px; }
+.fr-daily .fr-big { font-size: 24px; }
+.fr-daily-crest { flex: none; width: 52px; height: 52px; border-radius: 14px; background: #1B1B20; display: grid; place-items: center; }
+.fr-daily-crest img { width: 40px; height: 40px; object-fit: contain; }

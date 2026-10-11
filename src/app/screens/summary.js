@@ -98,6 +98,7 @@
       if (F.playerOfSeason != null) { const c = card(F.playerOfSeason); if (c) awards.push(['Player of the season', c]); }
       if (F.topScorer) { const c = card(F.topScorer.id); if (c) awards.push([`Top scorer · ${F.topScorer.goals} goal${F.topScorer.goals === 1 ? '' : 's'}`, c]); }
       if (F.bestSigning) { const c = card(F.bestSigning.id); if (c) awards.push([`Best signing · before GW${F.bestSigning.gw}`, c]); }
+      const daily = run.daily || null;
       const dream = GAME.mode() === 'dare2dream', met = dream && GAME.dreamMet(F.finish, F.histFinish);
       const goal = F.histFinish === 1 ? 'Win the league again' : `Finish ${D2T.ordinal(GAME.target(F.histFinish))} or better`;
       const ach = dream ? [[goal, met]] : [['Beat the drop', F.finish <= n - rel], ['Top half', F.finish <= n / 2], ['Top 3', F.finish <= 3], ['Title', F.finish === 1]];
@@ -121,17 +122,18 @@
           ${awards.length ? `<div class="sm-label">Awards</div><div class="sm-awards">${awards.map(([t, c]) => `<button class="sm-award" data-id="${D2T.esc(String(c.id))}" aria-label="${D2T.esc(t)}: ${D2T.esc(c.name)}">${D2T.cards.player(c, { w: 96 })}<span>${D2T.esc(t)}</span></button>`).join('')}</div>` : ''}
           ${changes ? `<div class="sm-label">How you changed ${D2T.esc(S.season)}</div><div class="sm-list">${changes}</div>` : ''}
           <p class="sm-banter">${D2T.esc(line)}</p>
-          <div class="sm-two"><button class="btn btn-ghost" data-act="table">Final table</button><button class="btn btn-ghost" data-act="again">Play again</button></div>
+          <div class="sm-two"><button class="btn btn-ghost" data-act="table">Final table</button><button class="btn btn-ghost" data-act="again">${daily ? 'Home' : 'Play again'}</button></div>
           <div class="se-pad"></div>
         </div>
       </div>`);
       const bar = D2T.h(`<footer class="actionbar"><button class="icon-btn" type="button" aria-label="Home">${D2T.ICON.home}</button><button class="btn se-btn se-wide" type="button" data-act="share">Share result</button></footer>`);
       root.append(body, bar);
 
-      const sh = buildShare(F, club, S.season, line, dream ? (met ? 'Dare2Dream: dream achieved' : 'Dare2Dream') : '');
+      const tag = dream ? (met ? 'Dare2Dream: dream achieved' : 'Dare2Dream') : '';
+      const sh = buildShare(F, club, S.season, line, daily ? `Daily #${GAME.dailyNumber(daily)}${tag ? ' · ' + tag : ''}` : tag);
       bar.querySelector('.icon-btn').onclick = () => D2T.go('home');
       bar.querySelector('[data-act="share"]').onclick = () => share(sh);
-      body.querySelector('[data-act="again"]').onclick = () => { const m = GAME.mode(); D2T.state.run = null; D2T.save(); GAME.newRun(m); D2T.go('spin'); };
+      body.querySelector('[data-act="again"]').onclick = () => { if (daily) { D2T.go('home'); return; } const m = GAME.mode(); D2T.state.run = null; D2T.save(); GAME.newRun(m); D2T.go('spin'); };
       body.querySelector('[data-act="table"]').onclick = () => {
         const rows = GAME.standings(null);
         D2T.sheet({ title: `Final table ${D2T.esc(S.season)}`, body: `<div class="se-run" style="--se-acc:${club.accent};--se-text:${club.text};--se-acc-b:${SE.rgba(club.accent, 0.55)}"><div class="se-table">${SE.tableHead()}${rows.map((r, i) => SE.rowHTML(r, club.name, i === n - rel - 1 ? 'se-zone' : '')).join('')}</div></div>` });

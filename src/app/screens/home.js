@@ -15,7 +15,6 @@
   // card outline (chamfered top corners, shallow point at the bottom), as in .d2c-rim
   const FRAME = '<svg viewBox="0 0 100 128" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,11 11,1 89,1 99,11 99,108 50,127 1,108" stroke-linejoin="round"/></svg>';
   const MODES = [
-    { name: 'Daily challenge', sub: '' },
     { name: 'Head to head', sub: 'Online, up to 3 players' },
     { name: 'Draft', sub: '' },
     { name: 'Legends', sub: '' }
@@ -28,9 +27,17 @@
       <div class="fr-frame">${FRAME}<b>${rec.titles}</b><span>League titles</span></div></div>`;
 
   const inRun = () => { const r = D2T.state.run; return !!(r && r.eng && r.eng.seasonKey && r.eng.phase !== 'summary'); };
-  function continueCard() {
-    if (!inRun()) return '';
-    const eng = D2T.game.eng(), data = D2T.run(), c = data.club;
+  // Continue cards: the run on screen, and the other one (a run parked for the daily, or a daily put aside),
+  // drawn by viewing it as the run for a moment (nothing is saved).
+  function continueCards() {
+    let html = inRun() ? continueCard('continue') : '';
+    const other = D2T.game.otherRun();
+    if (other) { const keep = D2T.state.run; D2T.state.run = other; try { html += continueCard('continue-other'); } finally { D2T.state.run = keep; } }
+    return html;
+  }
+  function continueCard(act) {
+    const eng = D2T.game.eng(), data = D2T.run(), c = data.club, run = D2T.state.run;
+    const label = run.daily ? `DAILY #${D2T.game.dailyNumber(run.daily)} · ${D2T.game.modeName().toUpperCase()}` : D2T.game.modeName().toUpperCase();
     const games = data.fixtures.length, played = eng.played.length;
     const where = eng.phase === 'draft' ? `Draft · Shirt ${eng.draft.step + 1} of ${eng.xi.length}` : eng.phase === 'setup' ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, games)} · ${STEP_LABEL[D2T.game.stepFor()] || 'In progress'}`;
     // Club sweep (chosen 11 Oct): light club colour at the left, the true colour across the middle, a deeper shade at the right.
@@ -38,12 +45,33 @@
     const lum = (h) => { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }).reduce((t, v, i) => t + v * [0.2126, 0.7152, 0.0722][i], 0); };
     const dark = lum(a) > 0.33, txt = dark ? (lum(c.ink) < 0.08 ? c.ink : '#0A0A0A') : '#FFFFFF';
     const paint = `--face:linear-gradient(100deg, ${mix(a, '#FFFFFF', 0.4)} 0%, ${a} 30%, ${a} 55%, ${mix(a, '#000000', 0.45)} 100%);--rim:linear-gradient(170deg, ${mix(a, '#FFFFFF', 0.7)}, ${mix(a, '#000000', 0.4)});--txt:${txt};--glowc:${a}44;--track:${dark ? 'rgba(0,0,0,0.18)' : 'rgba(255,255,255,0.25)'};--tsh:${dark ? 'none' : '0 2px 8px rgba(0,0,0,0.4)'};--goBg:${dark ? '#0A0A0A' : '#FFFFFF'};--goFg:${dark ? '#FFFFFF' : '#0A0A0A'}`;
-    return `<button class="fr-card-btn fr-cont fr-in" style="${paint}" data-act="continue" aria-label="Continue with ${D2T.esc(c.full)} ${data.season}, ${where}">
+    return `<button class="fr-card-btn fr-cont fr-in" style="${paint}" data-act="${act}" aria-label="Continue with ${D2T.esc(c.full)} ${data.season}, ${where}">
       <span class="fr-cont-tex"></span><span class="fr-cont-hi"></span><span class="d2t-shine"></span><span class="fr-cont-crest"><img src="${c.crest}" alt=""></span>
-      <span class="fr-cont-txt"><span class="fr-cont-lbl">CONTINUE · ${D2T.game.modeName().toUpperCase()}</span><span class="fr-cont-name" style="display:block">${D2T.esc(c.name)}</span>
+      <span class="fr-cont-txt"><span class="fr-cont-lbl">CONTINUE · ${label}</span><span class="fr-cont-name" style="display:block">${D2T.esc(c.name)}</span>
       <span class="fr-cont-meta" style="display:block">${data.season} · ${where}</span>
       <span class="fr-cont-bar" style="display:block"><i style="transform:scaleX(${Math.max(0.03, played / games)})"></i></span></span>
       <span class="fr-go">${ARROW}</span></button>`;
+  }
+
+  // Daily challenge card: today's club for everyone, the mode it plays, and your result once played.
+  function dailyCard() {
+    const G = D2T.game, d = G.dailyEntry(G.today()), res = G.dailyResult(), streak = G.dailyStreak();
+    const goal = d.mode === 'classic' ? 'Classic: they went down. Rescue them.' : `Dare2Dream: draft from zero and beat ${D2T.ordinal(d.pos)}.`;
+    const sub = res ? `Done: ${D2T.ordinal(res.finish)} (${res.rise > 0 ? '+' : ''}${res.rise}). Next one at midnight.` : goal;
+    return `<button class="fr-card-btn fr-pick fr-daily" data-act="daily" aria-label="Daily challenge ${d.n}, ${D2T.esc(d.full || d.name)} ${d.season}">
+      <span class="fr-daily-crest"><img src="${d.crest}" alt=""></span>
+      <span><span class="fr-tag" style="display:block">DAILY #${d.n}${streak ? ` · ${streak} DAY STREAK` : ''}</span><span class="fr-big" style="display:block">${D2T.esc(d.name)} ${d.season}</span><span class="fr-sub" style="display:block">${sub}</span></span>
+      <span class="fr-go">${ARROW}</span></button>`;
+  }
+  function dailyDone() {
+    const G = D2T.game, r = G.dailyResult(), d = G.dailyEntry(G.today());
+    const text = `DROP2TOP Daily #${r.n}\n${d.full || d.name} ${d.season} (${G.modeName(r.mode)})\nHistory: ${D2T.ordinal(r.histFinish)}\nMine: ${D2T.ordinal(r.finish)}, ${r.pts} pts\nTHE RISE ${r.rise > 0 ? '+' : ''}${r.rise}`;
+    const sh = D2T.sheet({ title: `Daily #${r.n} done`, body: `<p class="fr-lead">${D2T.esc(d.name)} ${d.season}: you finished ${D2T.ordinal(r.finish)} (history ${D2T.ordinal(r.histFinish)}). A new club for everyone at midnight.</p>
+      <div class="fr-stack"><button class="btn btn-green fr-btn-wide" data-k="share">Share with your mates</button></div>` });
+    sh.body.querySelector('[data-k="share"]').onclick = async () => {
+      try { if (navigator.share) { await navigator.share({ text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
+      try { await navigator.clipboard.writeText(text); sh.body.querySelector('.fr-lead').textContent = 'Copied. Paste it into the group chat.'; } catch (e) { /* nothing to copy to */ }
+    };
   }
 
   // The long logo in two pieces (emblem and name, measured from long.png) so the emblem can turn on its own,
@@ -64,12 +92,13 @@
           <span class="fr-mark">${D2T.logo('emblem')}</span>
           <span><span class="fr-tag" style="display:block">CLASSIC</span><span class="fr-big" style="display:block">Pick a new club</span><span class="fr-sub" style="display:block">Take them from the drop to the top.</span></span>
           <span class="fr-go">${ARROW}</span></button>
-        ${continueCard()}
+        ${continueCards()}
         <section class="fr-sect fr-in" aria-label="Your record">
           <div class="fr-sect-h"><h2>Your record</h2><span>${rec.runs} runs</span></div>
           ${D2T.frRecord(rec, 'dark')}</section>
         <section class="fr-sect fr-in" aria-label="Other game modes">
           <div class="fr-sect-h"><h2>Other modes</h2></div>
+        ${dailyCard()}
         <button class="fr-card-btn fr-pick fr-dream" data-act="pick" data-mode="dare2dream">
           <span class="fr-mark">${D2T.logo('emblemLine')}</span>
           <span><span class="fr-tag" style="display:block">DARE2DREAM</span><span class="fr-big" style="display:block">Any club, no players</span><span class="fr-sub" style="display:block">Draft your XI, then beat their real finish.${dreams.runs ? ` ${dreams.dreams} of ${dreams.runs} dreams so far.` : ''}</span></span>
@@ -110,8 +139,16 @@
       clearTimeout(idleFirst); clearInterval(idleTimer);
       idleFirst = setTimeout(idle, 3500); idleTimer = setInterval(idle, 12000);
       const startNew = (from, mode) => { D2T.game.newRun(mode); D2T.toBlack('spin', { from }); };
+      const daily = body.querySelector('[data-act="daily"]');
+      if (daily) daily.onclick = (e) => {
+        if (D2T.game.dailyResult()) { dailyDone(); return; }
+        D2T.game.startDaily(); D2T.toBlack(D2T.game.stepFor() || 'table', { from: e.currentTarget });
+      };
+      const other = body.querySelector('[data-act="continue-other"]');
+      if (other) other.onclick = (e) => { D2T.game.switchToOther(); D2T.toBlack(D2T.game.stepFor() || 'squad', { from: e.currentTarget }); };
       body.querySelectorAll('[data-act="pick"]').forEach((btn) => btn.onclick = (e) => {
         const from = e.currentTarget, mode = from.dataset.mode;
+        D2T.game.stashDaily();                                   // an unfinished daily keeps its own slot
         if (!inRun()) { startNew(from, mode); return; }
         // the game's own question, never the phone's confirm box
         const name = D2T.run().club.name;

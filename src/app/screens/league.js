@@ -46,6 +46,12 @@
           <div class="fr-row"><span>Relegated</span><span>${Math.max(0, rec.runs - rec.drop)}</span></div>
           ${run ? `<div class="fr-row"><span>Current run</span><span>${D2T.esc(run.club.name)} ${run.season}, GW ${D2T.game.eng().gw}</span></div>` : ''}
         </div>
+        <h2 class="fr-h2">Daily challenge</h2>
+        <div class="fr-panel">
+          <div class="fr-row"><span>Days played</span><span>${Object.keys(D2T.state.record.daily || {}).length}</span></div>
+          <div class="fr-row"><span>Streak</span><span class="fr-green">${D2T.game.dailyStreak()}</span></div>
+          <div class="fr-row"><span>Best rise</span><span>${(() => { const d = Object.values(D2T.state.record.daily || {}); if (!d.length) return '-'; const b = Math.max(...d.map((x) => x.rise)); return (b > 0 ? '+' : '') + b; })()}</span></div>
+        </div>
         <h2 class="fr-h2">Dare2Dream</h2>
         <div class="fr-panel">
           <div class="fr-row"><span>Runs played</span><span>${dr.runs}</span></div>
