@@ -1,0 +1,324 @@
+season,club_feed,feed_id,name,profile_position,starts_with_slot,slots
+2014/15,Arsenal,3543,Wojciech Szczesny,Goalkeeper,1,GK:1
+2014/15,Arsenal,4620,Calum Chambers,Centre/Right Central Defender,1,RB:1
+2014/15,Arsenal,4546,Mathieu Debuchy,Right Full Back,1,CB:1
+2014/15,Arsenal,4246,Per Mertesacker,Centre Central Defender,1,CB:1
+2014/15,Arsenal,3046,Kieran Gibbs,Left Full Back,1,LB:1
+2014/15,Arsenal,4252,Alex Oxlade-Chamberlain,Right Winger,1,CM:1
+2014/15,Arsenal,2611,Mathieu Flamini,Centre Defensive Midfielder,1,CDM:1
+2014/15,Arsenal,4477,Santi Cazorla,Left/Centre/Right Attacking Midfielder,1,CM:1
+2014/15,Arsenal,4973,Alexis Sánchez,Left/Right Second Striker,1,RW:1
+2014/15,Arsenal,4481,Olivier Giroud,Centre Striker,1,ST:1
+2014/15,Arsenal,3452,Danny Welbeck,Left/Centre/Right Second Striker,1,LW:1
+2014/15,Aston Villa,3558,Brad Guzan,Goalkeeper,2,GK:2
+2014/15,Aston Villa,3506,Alan Hutton,Right Full Back,2,RB:2
+2014/15,Aston Villa,3448,Tom Cleverley,Centre Central Midfielder,2,CM:2
+2014/15,Aston Villa,4489,Ashley Westwood,Centre Central Midfielder,2,CDM:2
+2014/15,Aston Villa,3799,Fabian Delph,Left/Centre Central Midfielder,2,CM:2
+2014/15,Aston Villa,2622,Gabriel Agbonlahor,Centre Striker,2,RW:1 ST:1
+2014/15,Aston Villa,2412,Philippe Senderos,Centre Central Defender,1,CB:1
+2014/15,Aston Villa,3561,Nathan Baker,Centre Central Defender,1,CB:1
+2014/15,Aston Villa,4797,Aly Cissokho,Left Full Back,1,LB:1
+2014/15,Aston Villa,3803,Andreas Weimann,Centre Striker,1,ST:1
+2014/15,Aston Villa,1982,Kieran Richardson,Left Full Back,1,LW:1
+2014/15,Aston Villa,4719,Jores Okore,Centre Central Defender,1,CB:1
+2014/15,Aston Villa,3562,Ciaran Clark,Centre Central Defender,1,CB:1
+2014/15,Aston Villa,4487,Matthew Lowton,Right Full Back,1,LB:1
+2014/15,Aston Villa,2755,Charles N'Zogbia,Left Winger,1,CAM:1
+2014/15,Aston Villa,4492,Christian Benteke,Centre Striker,1,ST:1
+2014/15,Burnley,2933,Tom Heaton,Goalkeeper,2,GK:2
+2014/15,Burnley,3905,Kieran Trippier,Right Full Back,2,RB:2
+2014/15,Burnley,4333,Michael Keane,Centre Central Defender,2,CB:2
+2014/15,Burnley,2766,Jason Shackell,Centre Central Defender,2,CB:2
+2014/15,Burnley,3909,Ben Mee,Left/Centre Central Defender,2,LB:2
+2014/15,Burnley,4788,George Boyd,Winger,2,RM:2
+2014/15,Burnley,2359,Dean Marney,Centre Central Midfielder,2,CM:2
+2014/15,Burnley,2523,David Jones,Centre Central Midfielder,2,CM:2
+2014/15,Burnley,8242,Scott Arfield,Left/Centre/Right Attacking Midfielder,2,LM:2
+2014/15,Burnley,8246,Ashley Barnes,Centre Striker,2,ST:2
+2014/15,Burnley,8245,Danny Ings,Striker,2,ST:2
+2014/15,Chelsea,4911,Thibaut Courtois,Goalkeeper,3,GK:3
+2014/15,Chelsea,3360,Branislav Ivanovic,Centre/Right Central Defender,3,RB:3
+2014/15,Chelsea,1353,John Terry,Centre Central Defender,3,CB:3
+2014/15,Chelsea,2417,Cesc Fàbregas,Centre Central Midfielder,3,CDM:2 CAM:1
+2014/15,Chelsea,4503,Eden Hazard,Left/Centre/Right Second Striker,3,LW:3
+2014/15,Chelsea,2620,Gary Cahill,Centre Central Defender,2,CB:2
+2014/15,Chelsea,4496,César Azpilicueta,Left/Right Full Back,2,LB:2
+2014/15,Chelsea,3861,Nemanja Matic,Centre Central Midfielder,2,CDM:2
+2014/15,Chelsea,4501,Oscar,Centre Attacking Midfielder,2,CAM:2
+2014/15,Chelsea,4941,Diego Costa,Centre Striker,2,ST:2
+2014/15,Chelsea,4750,André Schürrle,Left/Centre/Right Attacking Midfielder,1,RW:1
+2014/15,Chelsea,4103,Ramires,Centre/Right Central Midfielder,1,RW:1
+2014/15,Chelsea,5175,Kurt Zouma,Centre Central Defender,1,CB:1
+2014/15,Chelsea,4915,Filipe Luís,Left Wing Back,1,LB:1
+2014/15,Chelsea,5179,Ruben Loftus-Cheek,Centre Central Midfielder,1,CDM:1
+2014/15,Chelsea,3102,John Obi Mikel,Centre Defensive Midfielder,1,CDM:1
+2014/15,Chelsea,4748,Willian,Left/Centre/Right Winger,1,RW:1
+2014/15,Chelsea,4572,Loïc Rémy,Left/Centre/Right Striker,1,ST:1
+2014/15,Crystal Palace,3644,Martin Kelly,Right Full Back,3,RB:1 LB:1 CB:1
+2014/15,Crystal Palace,3807,Scott Dann,Centre Central Defender,3,CB:3
+2014/15,Crystal Palace,3929,Joel Ward,Right Full Back,3,RB:2 LB:1
+2014/15,Crystal Palace,4084,Jason Puncheon,Left/Centre/Right Attacking Midfielder,3,RM:3
+2014/15,Crystal Palace,6047,Joe Ledley,Left/Centre Central Midfielder,3,CM:3
+2014/15,Crystal Palace,2664,Julian Speroni,Goalkeeper,2,GK:2
+2014/15,Crystal Palace,1911,Damien Delaney,Centre Central Defender,2,CB:2
+2014/15,Crystal Palace,4763,Yannick Bolasie,Left/Right Winger,2,LM:1 ST:1
+2014/15,Crystal Palace,4039,Marouane Chamakh,Centre Striker,2,CAM:1 ST:1
+2014/15,Crystal Palace,4771,Dwight Gayle,Centre Striker,2,ST:2
+2014/15,Crystal Palace,4224,James McArthur,Centre Central Midfielder,2,CM:2
+2014/15,Crystal Palace,4766,Mile Jedinak,Centre Central Midfielder,1,CM:1
+2014/15,Crystal Palace,4539,Wilfried Zaha,Left/Centre/Right Winger,1,LM:1
+2014/15,Crystal Palace,4718,Yaya Sanogo,Centre Striker,1,ST:1
+2014/15,Crystal Palace,2569,Wayne Hennessey,Goalkeeper,1,GK:1
+2014/15,Crystal Palace,10444,Pape Souaré,Left Full Back,1,LB:1
+2014/15,Crystal Palace,3830,Lee Chung-Yong,Right Winger,1,LM:1
+2014/15,Everton,4505,John Stones,Right Full Back,2,CB:2
+2014/15,Everton,3222,Phil Jagielka,Centre Central Defender,2,CB:2
+2014/15,Everton,3979,James McCarthy,Centre Central Midfielder,2,CM:2
+2014/15,Everton,1308,Gareth Barry,Centre Central Midfielder,2,CDM:2
+2014/15,Everton,10451,Muhamed Besic,Centre Defensive Midfielder,2,CM:2
+2014/15,Everton,4290,Romelu Lukaku,Centre Striker,2,RW:1 LW:1
+2014/15,Everton,4510,Steven Naismith,Centre Striker,2,ST:2
+2014/15,Everton,4507,Kevin Mirallas,Left/Right Winger,2,LW:1 RW:1
+2014/15,Everton,2516,Tim Howard,Goalkeeper,1,GK:1
+2014/15,Everton,1881,Tony Hibbert,Right Full Back,1,RB:1
+2014/15,Everton,3030,Leighton Baines,Left Full Back,1,LB:1
+2014/15,Everton,4696,Joel Robles,Goalkeeper,1,GK:1
+2014/15,Everton,3600,Séamus Coleman,Right Full Back,1,RB:1
+2014/15,Everton,4504,Bryan Oviedo,Left Full Back,1,LB:1
+2014/15,Hull City,2624,Alex Bruce,Centre/Right Central Defender,2,CB:2
+2014/15,Hull City,4183,Ahmed El Mohamady,Right Wing Back,2,RWB:2
+2014/15,Hull City,3244,Jake Livermore,Centre Central Midfielder,2,CM:2
+2014/15,Hull City,2991,Tom Huddlestone,Centre Central Midfielder,2,CM:2
+2014/15,Hull City,4158,Robert Brady,Left/Centre/Right Attacking Midfielder,2,LWB:2
+2014/15,Hull City,4786,Eldin Jakupovic,Goalkeeper,1,GK:1
+2014/15,Hull City,2936,James Chester,Centre/Right Central Defender,1,CB:1
+2014/15,Hull City,2997,Curtis Davies,Centre Central Defender,1,CB:1
+2014/15,Hull City,3982,Mohamed Diamé,Centre Defensive Midfielder,1,CM:1
+2014/15,Hull City,4171,Hatem Ben Arfa,Attacking Midfielder,1,CAM:1
+2014/15,Hull City,10460,Abel Hernández,Centre Striker,1,ST:1
+2014/15,Hull City,4785,Allan McGregor,Goalkeeper,1,GK:1
+2014/15,Hull City,2805,Michael Dawson,Centre Central Defender,1,CB:1
+2014/15,Hull City,2738,Paul McShane,Defender,1,CB:1
+2014/15,Hull City,3714,David Meyler,Centre Central Midfielder,1,CM:1
+2014/15,Hull City,4296,Nikica Jelavic,Centre Striker,1,ST:1
+2014/15,Hull City,10461,Dame N'Doye,Striker,1,ST:1
+2014/15,Leicester City,3666,Ritchie De Laet,Right Full Back,3,RB:2 LB:1
+2014/15,Leicester City,8970,Marcin Wasilewski,Centre/Right Central Defender,3,CB:3
+2014/15,Leicester City,8966,Wes Morgan,Centre Central Defender,3,CB:3
+2014/15,Leicester City,3669,Matty James,Centre Central Midfielder,3,CM:3
+2014/15,Leicester City,8979,Jamie Vardy,Centre Striker,3,ST:3
+2014/15,Leicester City,2508,Kasper Schmeichel,Goalkeeper,2,GK:2
+2014/15,Leicester City,1515,Paul Konchesky,Left Full Back,2,LB:2
+2014/15,Leicester City,10462,Esteban Cambiasso,Centre Defensive Midfielder,2,CDM:1 CM:1
+2014/15,Leicester City,3670,Danny Drinkwater,Centre Central Midfielder,2,CM:2
+2014/15,Leicester City,8983,Riyad Mahrez,Left/Right Winger,2,RM:1 CAM:1
+2014/15,Leicester City,8980,Jeffrey Schlupp,Left Winger,2,LM:1 CAM:1
+2014/15,Leicester City,8976,Andy King,Centre Central Midfielder,1,CAM:1
+2014/15,Leicester City,3478,David Nugent,Centre Striker,1,ST:1
+2014/15,Leicester City,8174,Leonardo Ulloa,Centre Striker,1,ST:1
+2014/15,Leicester City,3183,Ben Hamer,Goalkeeper,1,GK:1
+2014/15,Leicester City,3157,Danny Simpson,Right Full Back,1,RB:1
+2014/15,Leicester City,4614,Dean Hammond,Centre Central Midfielder,1,CM:1
+2014/15,Liverpool,3712,Jordan Henderson,Centre Central Midfielder,27,CM:14 CDM:6 RWB:4 RW:2 CAM:1
+2014/15,Liverpool,4179,Simon Mignolet,Goalkeeper,26,GK:26
+2014/15,Liverpool,3404,Martin Skrtel,Centre Central Defender,26,CB:26
+2014/15,Liverpool,1575,Steven Gerrard,Centre Defensive Midfielder,25,CDM:13 CM:7 CAM:2 RW:2 ST:1
+2014/15,Liverpool,4316,Raheem Sterling,Left/Centre/Right Attacking Midfielder,25,RW:8 LW:7 ST:6 CAM:2 RWB:2
+2014/15,Liverpool,4525,Philippe Coutinho,Left/Centre Attacking Midfielder,23,CAM:7 RW:7 LW:6 CM:2 CDM:1
+2014/15,Liverpool,7219,Alberto Moreno,Left Full Back,19,LB:10 LWB:9
+2014/15,Liverpool,4618,Adam Lallana,Left/Centre/Right Attacking Midfielder,18,LW:12 RW:3 CAM:1 CM:1 RWB:1
+2014/15,Liverpool,4813,Dejan Lovren,Centre Central Defender,17,CB:17
+2014/15,Liverpool,5001,Emre Can,Centre/Right Central Midfielder,14,CB:7 RB:4 CM:2 CDM:1
+2014/15,Liverpool,2148,Glen Johnson,Left/Right Full Back,13,LB:6 RB:5 CB:2
+2014/15,Liverpool,3137,Lucas Leiva,Centre Central Midfielder,11,CM:6 CDM:5
+2014/15,Liverpool,4796,Mamadou Sakho,Left/Centre Central Defender,11,CB:11
+2014/15,Liverpool,4413,Joe Allen,Centre Central Midfielder,10,CM:9 CDM:1
+2014/15,Liverpool,4918,Javier Manquillo,Right Full Back,9,RB:9
+2014/15,Liverpool,4152,Mario Balotelli,Centre Striker,9,ST:9
+2014/15,Liverpool,4627,Rickie Lambert,Centre Striker,7,ST:7
+2014/15,Liverpool,3154,Daniel Sturridge,Centre Striker,6,ST:6
+2014/15,Liverpool,5078,Lazar Markovic,Left/Right Winger,6,RW:2 LWB:2 RWB:1 CAM:1
+2014/15,Liverpool,2002,Kolo Touré,Centre Central Defender,6,CB:6
+2014/15,Liverpool,4527,Jordon Ibe,Left/Right Winger,4,RWB:3 RW:1
+2014/15,Liverpool,1947,Bradley Jones,Goalkeeper,3,GK:3
+2014/15,Liverpool,3863,Fabio Borini,Left/Centre/Right Striker,2,ST:2
+2014/15,Liverpool,3462,José Enrique,Left Full Back,2,LB:2
+2014/15,Manchester City,3143,Joe Hart,Goalkeeper,1,GK:1
+2014/15,Manchester City,3654,Pablo Zabaleta,Right Full Back,1,RB:1
+2014/15,Manchester City,3653,Vincent Kompany,Centre Central Defender,1,CB:1
+2014/15,Manchester City,4802,Martín Demichelis,Centre Central Defender,1,CB:1
+2014/15,Manchester City,2413,Gaël Clichy,Left Full Back,1,LB:1
+2014/15,Manchester City,3546,Samir Nasri,Left/Centre/Right Attacking Midfielder,1,RM:1
+2014/15,Manchester City,4148,Yaya Touré,Centre Central Midfielder,1,CM:1
+2014/15,Manchester City,5344,Fernando,Centre Defensive Midfielder,1,CM:1
+2014/15,Manchester City,4145,David Silva,Left/Centre/Right Attacking Midfielder,1,LM:1
+2014/15,Manchester City,4806,Stevan Jovetic,Left/Centre/Right Second Striker,1,CAM:1
+2014/15,Manchester City,4151,Edin Dzeko,Centre Striker,1,ST:1
+2014/15,Manchester United,4330,David de Gea,Goalkeeper,3,GK:3
+2014/15,Manchester United,3820,Phil Jones,Centre Central Defender,3,CB:3
+2014/15,Manchester United,3062,Ashley Young,Left/Right Wing Back,3,LWB:2 LM:1
+2014/15,Manchester United,4287,Juan Mata,Left/Centre/Right Attacking Midfielder,3,CAM:2 RM:1
+2014/15,Manchester United,2064,Wayne Rooney,Centre Second Striker,3,ST:2 CM:1
+2014/15,Manchester United,3613,Chris Smalling,Centre Central Defender,2,CB:2
+2014/15,Manchester United,10475,Ander Herrera,Centre Central Midfielder,2,CM:2
+2014/15,Manchester United,1634,Michael Carrick,Centre Central Midfielder,2,CB:1 CDM:1
+2014/15,Manchester United,3285,Antonio Valencia,Right Full Back,2,RWB:1 RB:1
+2014/15,Manchester United,3604,Marouane Fellaini,Centre Attacking Midfielder,2,CM:2
+2014/15,Manchester United,7934,Tyler Blackett,Left/Centre Full Back,1,CB:1
+2014/15,Manchester United,4337,Jesse Lingard,Left/Centre/Right Attacking Midfielder,1,RWB:1
+2014/15,Manchester United,1943,Darren Fletcher,Centre Central Midfielder,1,CM:1
+2014/15,Manchester United,4161,Chicharito,Centre Striker,1,ST:1
+2014/15,Manchester United,3156,Jonny Evans,Centre Central Defender,1,CB:1
+2014/15,Manchester United,2616,Robin van Persie,Centre Striker,1,ST:1
+2014/15,Manchester United,5562,James Wilson,Centre Striker,1,ST:1
+2014/15,Manchester United,4888,Daley Blind,Left/Centre Central Defender,1,LB:1
+2014/15,Newcastle United,3169,Tim Krul,Goalkeeper,3,GK:3
+2014/15,Newcastle United,10480,Daryl Janmaat,Right Full Back,3,RB:2 CB:1
+2014/15,Newcastle United,3713,Jack Colback,Left/Centre Central Midfielder,3,CDM:2 LB:1
+2014/15,Newcastle United,4549,Moussa Sissoko,Left/Centre/Right Attacking Midfielder,3,CAM:1 CM:1 RW:1
+2014/15,Newcastle United,3680,Fabricio Coloccini,Centre Central Defender,2,CB:2
+2014/15,Newcastle United,4340,Paul Dummett,Left Full Back,2,LB:2
+2014/15,Newcastle United,4176,Sammy Ameobi,Centre Striker,2,LW:2
+2014/15,Newcastle United,4346,Papiss Cissé,Centre Striker,2,ST:2
+2014/15,Newcastle United,4024,Mike Williamson,Centre Central Defender,2,CB:2
+2014/15,Newcastle United,3683,Jonás Gutiérrez,Left/Right Attacking Midfielder,2,CDM:1 LW:1
+2014/15,Newcastle United,2323,Steven Taylor,Centre Central Defender,1,CB:1
+2014/15,Newcastle United,4343,Mehdi Abeid,Centre Attacking Midfielder,1,CDM:1
+2014/15,Newcastle United,3919,Gabriel Obertan,Left/Right Winger,1,RW:1
+2014/15,Newcastle United,3027,Ryan Taylor,Left/Right Full Back,1,RB:1
+2014/15,Newcastle United,4554,Yoan Gouffran,Left/Right Winger,1,CM:1
+2014/15,Newcastle United,10484,Rémy Cabella,Left/Centre/Right Attacking Midfielder,1,RW:1
+2014/15,Newcastle United,10487,Ayoze Pérez,Centre/Right Second Striker,1,ST:1
+2014/15,Newcastle United,4550,Vurnon Anita,Left/Centre/Right Defensive Midfielder,1,CDM:1
+2014/15,Newcastle United,10488,Emmanuel Rivière,Centre Striker,1,CAM:1
+2014/15,Queens Park Rangers,3957,Steven Caulker,Centre Central Defender,4,CB:4
+2014/15,Queens Park Rangers,9468,Charlie Austin,Centre Striker,4,ST:4
+2014/15,Queens Park Rangers,2728,Nedum Onuoha,Centre Central Defender,3,RB:3
+2014/15,Queens Park Rangers,1184,Richard Dunne,Centre Central Defender,3,CB:3
+2014/15,Queens Park Rangers,3997,Karl Henry,Centre Central Midfielder,3,CM:2 LM:1
+2014/15,Queens Park Rangers,4810,Leroy Fer,Centre Central Midfielder,3,LM:1 CM:1 CAM:1
+2014/15,Queens Park Rangers,2758,Robert Green,Goalkeeper,3,GK:3
+2014/15,Queens Park Rangers,4074,Matt Phillips,Left/Right Winger,3,RM:3
+2014/15,Queens Park Rangers,2303,Joey Barton,Centre Central Midfielder,3,CM:3
+2014/15,Queens Park Rangers,4568,Yun Suk-Young,Left Full Back,2,LB:2
+2014/15,Queens Park Rangers,4193,Sandro,Centre Central Midfielder,2,CM:2
+2014/15,Queens Park Rangers,2603,Bobby Zamora,Centre Striker,2,ST:2
+2014/15,Queens Park Rangers,4371,Clint Hill,Left/Centre Central Defender,2,LB:2
+2014/15,Queens Park Rangers,4573,Alex McCarthy,Goalkeeper,1,GK:1
+2014/15,Queens Park Rangers,5511,Mauricio Isla,Right Wing Back,1,RM:1
+2014/15,Queens Park Rangers,2835,Armand Traore,Left Full Back,1,LM:1
+2014/15,Queens Park Rangers,3241,Adel Taarabt,Centre Attacking Midfielder,1,CAM:1
+2014/15,Queens Park Rangers,10491,Darnell Furlong,Centre/Right Full Back,1,RB:1
+2014/15,Queens Park Rangers,1111,Rio Ferdinand,Centre Central Defender,1,CB:1
+2014/15,Queens Park Rangers,3180,Niko Kranjcar,Left/Centre/Right Attacking Midfielder,1,LM:1
+2014/15,Southampton,3170,Fraser Forster,Goalkeeper,3,GK:3
+2014/15,Southampton,4604,Nathaniel Clyne,Right Full Back,3,RB:3
+2014/15,Southampton,4606,José Fonte,Centre Central Defender,3,CB:3
+2014/15,Southampton,4605,Maya Yoshida,Centre Central Defender,3,CB:2 LB:1
+2014/15,Southampton,2423,Steven Davis,Centre/Right Central Midfielder,3,CM:2 CDM:1
+2014/15,Southampton,4816,Victor Wanyama,Centre Defensive Midfielder,3,CDM:2 CM:1
+2014/15,Southampton,10502,Graziano Pellè,Centre Striker,3,ST:3
+2014/15,Southampton,4617,James Ward-Prowse,Centre Central Midfielder,2,RW:2
+2014/15,Southampton,6519,Sadio Mané,Left Winger,2,CAM:1 RW:1
+2014/15,Southampton,10499,Eljero Elia,Left/Centre/Right Attacking Midfielder,2,LW:2
+2014/15,Southampton,2886,Ryan Bertrand,Left Full Back,1,LB:1
+2014/15,Southampton,4615,Morgan Schneiderlin,Centre Defensive Midfielder,1,CDM:1
+2014/15,Southampton,10498,Dusan Tadic,Left/Right Winger,1,LW:1
+2014/15,Southampton,4815,Matt Targett,Left Full Back,1,LB:1
+2014/15,Southampton,5937,Florin Gardos,Centre Central Defender,1,CB:1
+2014/15,Southampton,4818,Harrison Reed,Centre Central Midfielder,1,CM:1
+2014/15,Stoke City,2537,Asmir Begovic,Goalkeeper,2,GK:2
+2014/15,Stoke City,4636,Geoff Cameron,Centre/Right Full Back,2,RB:2
+2014/15,Stoke City,3158,Ryan Shawcross,Centre Central Defender,2,CB:2
+2014/15,Stoke City,4821,Erik Pieters,Left Full Back,2,LB:2
+2014/15,Stoke City,3821,Steven Nzonzi,Centre Defensive Midfielder,2,CDM:2
+2014/15,Stoke City,2047,Jonathan Walters,Left/Centre/Right Second Striker,2,RW:2
+2014/15,Stoke City,4823,Marko Arnautovic,Left/Right Second Striker,2,LW:2
+2014/15,Stoke City,3925,Mame Diouf,Centre Striker,2,ST:2
+2014/15,Stoke City,3471,Marc Wilson,Left/Centre/Right Central Defender,1,CB:1
+2014/15,Stoke City,2007,Steve Sidwell,Centre Central Midfielder,1,CDM:1
+2014/15,Stoke City,4898,Bojan,Left/Centre/Right Striker,1,CAM:1
+2014/15,Stoke City,4822,Muniesa,Left/Centre Central Defender,1,CB:1
+2014/15,Stoke City,2299,Glenn Whelan,Centre Central Midfielder,1,CDM:1
+2014/15,Stoke City,4081,Charlie Adam,Left/Centre Central Midfielder,1,CAM:1
+2014/15,Sunderland,4319,Costel Pantilimon,Goalkeeper,3,GK:3
+2014/15,Sunderland,9793,Santiago Vergini,Centre Central Defender,3,RB:2 CB:1
+2014/15,Sunderland,1717,John O'Shea,Left/Centre/Right Central Defender,3,CB:3
+2014/15,Sunderland,2613,Sebastian Larsson,Centre/Right Central Midfielder,3,CM:3
+2014/15,Sunderland,3981,Jordi Gómez,Central Midfielder,3,CM:3
+2014/15,Sunderland,4396,Connor Wickham,Centre Striker,3,LM:1 ST:1 LW:1
+2014/15,Sunderland,1211,Wes Brown,Centre/Right Central Defender,2,CB:2
+2014/15,Sunderland,3364,Liam Bridcutt,Centre Defensive Midfielder,2,CDM:2
+2014/15,Sunderland,2274,Adam Johnson,Left/Right Winger,2,RM:2
+2014/15,Sunderland,3362,Patrick van Aanholt,Left Full Back,2,LB:2
+2014/15,Sunderland,5665,Anthony Réveillere,Right Full Back,1,LB:1
+2014/15,Sunderland,3897,Jozy Altidore,Centre Striker,1,ST:1
+2014/15,Sunderland,4830,Emanuele Giaccherini,Left/Right Winger,1,LM:1
+2014/15,Sunderland,4438,Billy Jones,Right Full Back,1,RB:1
+2014/15,Sunderland,2949,Lee Cattermole,Centre Defensive Midfielder,1,CDM:1
+2014/15,Sunderland,1526,Jermain Defoe,Centre Striker,1,RW:1
+2014/15,Sunderland,3850,Steven Fletcher,Centre Striker,1,ST:1
+2014/15,Swansea City,3309,Lukasz Fabianski,Goalkeeper,3,GK:3
+2014/15,Swansea City,4835,Jordi Amat,Centre Central Defender,3,CB:3
+2014/15,Swansea City,4403,Ashley Williams,Centre Central Defender,3,CB:3
+2014/15,Swansea City,4402,Neil Taylor,Left Full Back,3,LB:3
+2014/15,Swansea City,4656,Ki Sung-Yueng,Centre Central Midfielder,3,CDM:2 CM:1
+2014/15,Swansea City,4135,Jonjo Shelvey,Left/Centre/Right Attacking Midfielder,3,CDM:2 CM:1
+2014/15,Swansea City,4421,Gylfi Sigurdsson,Centre Attacking Midfielder,3,CAM:3
+2014/15,Swansea City,2681,Wayne Routledge,Right Winger,3,LW:2 ST:1
+2014/15,Swansea City,4405,Angel Rangel,Right Full Back,2,RB:2
+2014/15,Swansea City,2341,Nathan Dyer,Right Winger,2,RW:2
+2014/15,Swansea City,6900,Bafétimbi Gomis,Centre Striker,2,ST:2
+2014/15,Swansea City,4838,Wilfried Bony,Centre Striker,1,ST:1
+2014/15,Swansea City,3956,Kyle Naughton,Right Full Back,1,RB:1
+2014/15,Swansea City,2889,Jack Cork,Centre Central Midfielder,1,CDM:1
+2014/15,Tottenham Hotspur,4664,Hugo Lloris,Goalkeeper,2,GK:2
+2014/15,Tottenham Hotspur,4112,Eric Dier,Centre Central Defender,2,RB:1 CB:1
+2014/15,Tottenham Hotspur,4666,Jan Vertonghen,Centre Central Defender,2,CB:2
+2014/15,Tottenham Hotspur,3507,Danny Rose,Left Full Back,2,LB:2
+2014/15,Tottenham Hotspur,4847,Nabil Bentaleb,Centre Central Midfielder,2,CDM:2
+2014/15,Tottenham Hotspur,4842,Érik Lamela,Centre/Right Attacking Midfielder,2,RW:2
+2014/15,Tottenham Hotspur,4845,Christian Eriksen,Left/Centre/Right Attacking Midfielder,2,CAM:1 LW:1
+2014/15,Tottenham Hotspur,3508,Younes Kaboul,Centre/Right Central Defender,1,CB:1
+2014/15,Tottenham Hotspur,4843,Étienne Capoue,Centre Defensive Midfielder,1,CDM:1
+2014/15,Tottenham Hotspur,4844,Nacer Chadli,Left/Right Winger,1,LW:1
+2014/15,Tottenham Hotspur,2845,Emmanuel Adebayor,Centre Striker,1,ST:1
+2014/15,Tottenham Hotspur,3955,Kyle Walker,Right Full Back,1,RB:1
+2014/15,Tottenham Hotspur,3725,Ryan Mason,Centre Central Midfielder,1,CDM:1
+2014/15,Tottenham Hotspur,4123,Mousa Dembélé,Left/Centre Central Midfielder,1,CAM:1
+2014/15,Tottenham Hotspur,3960,Harry Kane,Centre Striker,1,ST:1
+2014/15,West Bromwich Albion,4198,Craig Dawson,Centre Central Defender,4,CB:2 RB:2
+2014/15,West Bromwich Albion,2574,Joleon Lescott,Centre Central Defender,4,CB:4
+2014/15,West Bromwich Albion,2847,Craig Gardner,Centre/Right Central Midfielder,4,CDM:2 LW:1 RM:1
+2014/15,West Bromwich Albion,2529,James Morrison,Right Winger,4,CDM:2 RW:1 LM:1
+2014/15,West Bromwich Albion,3744,Chris Brunt,Left Attacking Midfielder,4,LW:2 LB:2
+2014/15,West Bromwich Albion,4205,Saido Berahino,Centre Striker,4,ST:3 CAM:1
+2014/15,West Bromwich Albion,2932,Ben Foster,Goalkeeper,3,GK:3
+2014/15,West Bromwich Albion,10527,Sébastien Pocognoli,Left Full Back,2,LB:2
+2014/15,West Bromwich Albion,3746,Graham Dorrans,Centre Central Midfielder,2,RW:2
+2014/15,West Bromwich Albion,4185,Stéphane Sessègnon,Centre/Right Attacking Midfielder,2,CAM:2
+2014/15,West Bromwich Albion,4437,Gareth McAuley,Centre Central Defender,2,CB:2
+2014/15,West Bromwich Albion,1943,Darren Fletcher,Centre Central Midfielder,2,CDM:1 CM:1
+2014/15,West Bromwich Albion,4673,Claudio Yacob,Centre Defensive Midfielder,2,CDM:1 CM:1
+2014/15,West Bromwich Albion,10528,Cristian Gamboa,Right Full Back,1,RB:1
+2014/15,West Bromwich Albion,4130,Andre Wisdom,Right Full Back,1,RB:1
+2014/15,West Bromwich Albion,6390,Brown Ideye,Centre Striker,1,ST:1
+2014/15,West Bromwich Albion,2011,Boaz Myhill,Goalkeeper,1,GK:1
+2014/15,West Bromwich Albion,2905,Victor Anichebe,Centre Striker,1,ST:1
+2014/15,West Ham United,4852,Adrián,Goalkeeper,3,GK:3
+2014/15,West Ham United,8897,Aaron Cresswell,Left Full Back,3,LB:3
+2014/15,West Ham United,5861,Cheikhou Kouyaté,Centre Central Midfielder,3,CM:1 CB:1 CDM:1
+2014/15,West Ham United,2837,Alexandre Song,Centre Defensive Midfielder,3,CDM:2 CM:1
+2014/15,West Ham United,2122,Stewart Downing,Left/Right Winger,3,CAM:1 CM:1 RW:1
+2014/15,West Ham United,10541,Enner Valencia,Centre Striker,3,LW:2 ST:1
+2014/15,West Ham United,3517,James Tomkins,Centre Central Defender,2,CB:2
+2014/15,West Ham United,4209,Winston Reid,Centre/Right Central Defender,2,CB:2
+2014/15,West Ham United,10540,Diafra Sakho,Centre Striker,2,ST:1 RW:1
+2014/15,West Ham United,4248,Carl Jenkinson,Right Full Back,2,RB:2
+2014/15,West Ham United,2058,Carlton Cole,Centre Striker,2,ST:2
+2014/15,West Ham United,4680,Guy Demel,Right Full Back,1,RB:1
+2014/15,West Ham United,3014,Mark Noble,Centre Central Midfielder,1,CDM:1
+2014/15,West Ham United,4849,Morgan Amalfitano,Central Midfielder,1,CM:1
+2014/15,West Ham United,9982,Reece Burke,Centre Central Defender,1,CB:1
+2014/15,West Ham United,2040,Kevin Nolan,Centre Attacking Midfielder,1,CAM:1
