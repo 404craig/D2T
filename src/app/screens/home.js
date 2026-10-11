@@ -16,8 +16,8 @@
   const FRAME = '<svg viewBox="0 0 100 128" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,11 11,1 89,1 99,11 99,108 50,127 1,108" stroke-linejoin="round"/></svg>';
   const MODES = [
     { name: 'Head to head', sub: 'Online, up to 3 players' },
-    { name: 'Draft', sub: '' },
-    { name: 'Legends', sub: '' }
+    { name: '433 Goals', sub: "Get your XI's career goals close to 433" },
+    { name: 'Top2Drop', sub: 'Take the champions down' }
   ];
   D2T.frFrame = FRAME;
   D2T.frRecord = (rec, cls = '') => `<div class="fr-record ${cls}">
