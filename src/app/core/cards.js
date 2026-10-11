@@ -52,6 +52,12 @@
     const keys = c.pos === 'GK' ? GK_KEYS : KEYS;
     const stats = keys.map((k) => `<span class="d2c-stat"><b>${c.stats[k] == null ? '-' : c.stats[k]}</b><i>${k}</i></span>`).join('');
     const shine = opts.shine === false ? '' : `<span class="d2t-shine" style="animation-delay:${opts.delay || 0}s"></span>`;
+    if (opts.mini) { // pitch card: position tab, big rating beside the crest, full name
+      return `<div class="d2c d2c-player mini pos-${c.pos} ${opts.cls || ''}" style="${style}" data-level="${c.level}" aria-label="${esc(c.name)}, ${c.ovr} ${L.name}, ${c.pos}">
+      <span class="d2c-tab">${c.pos}</span><div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2c-holo"></span>${shine}
+      <div class="d2c-body"><div class="d2c-mid"><span class="d2c-ovr">${c.ovr}</span><img class="d2c-crest" src="${c.crest}" alt=""></div>
+      <span class="d2c-first d2c-fit">${esc(first)}</span><span class="d2c-last">${esc(last)}</span></div></div></div>`;
+    }
     return `<div class="d2c d2c-player${opts.mini ? ' mini' : ''} ${opts.cls || ''}" style="${style}" data-level="${c.level}" aria-label="${esc(c.name)}, ${c.ovr} ${L.name}, ${c.pos}">
       <div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2c-holo"></span>${shine}
       <div class="d2c-body"><div class="d2c-top"><div class="d2c-left"><span class="d2c-ovr">${c.ovr}</span><span class="d2c-pos">${c.pos}</span><span class="d2c-rule"></span><span class="d2c-lvl">${L.label}</span></div>
@@ -92,10 +98,11 @@
     const sw = el.scrollWidth;
     if (sw > cw + 1) { const fs = parseFloat(getComputedStyle(el).fontSize); el.style.fontSize = Math.max(fs * 0.55, fs * (cw / sw) * 0.97).toFixed(2) + 'px'; }
   }
-  const fitIn = (n) => { if (n.nodeType !== 1) return; if (n.classList.contains('d2c-last')) fitName(n); else n.querySelectorAll('.d2c-last').forEach((e) => fitName(e)); };
+  const FIT = '.d2c-last, .d2c-fit';
+  const fitIn = (n) => { if (n.nodeType !== 1) return; if (n.matches(FIT)) fitName(n); else n.querySelectorAll(FIT).forEach((e) => fitName(e)); };
   if (typeof MutationObserver !== 'undefined') {
     new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach(fitIn))).observe(document.documentElement, { childList: true, subtree: true });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => document.querySelectorAll('.d2c-last').forEach((e) => fitName(e, true)));
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => document.querySelectorAll(FIT).forEach((e) => fitName(e, true)));
   }
 
   // What sits under a big player card: the facts the small card can't show (no repeat of its six stats).
