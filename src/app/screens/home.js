@@ -10,7 +10,7 @@
     account: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"/></svg>'
   };
   // card outline (chamfered top corners, shallow point at the bottom), as in .d2c-rim
-  const FRAME = '<svg viewBox="0 0 100 128" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,11 11,1 89,1 99,11 99,108 50,127 1,108"/></svg>';
+  const FRAME = '<svg viewBox="0 0 100 128" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,11 11,1 89,1 99,11 99,108 50,127 1,108" stroke-linejoin="round"/></svg>';
   const MODES = [
     { name: 'Daily challenge', sub: '' },
     { name: 'Head to head', sub: 'Online, up to 3 players' },

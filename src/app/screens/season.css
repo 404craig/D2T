@@ -303,7 +303,7 @@
 
 /* empty shirt (Dare2Dream draft) */
 .se-empty { display: grid; place-items: center; border: 1.5px dashed rgba(255,255,255,.35); border-radius: 8px; background: rgba(0,0,0,.25);
-  clip-path: polygon(0 10%, 12% 0, 88% 0, 100% 10%, 100% 86%, 50% 100%, 0 86%); }
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20114%20137'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M1.77%2010.23%20L10.23%201.77%20Q12%200%2014.5%200%20L99.5%200%20Q102%200%20103.77%201.77%20L112.23%2010.23%20Q114%2012%20114%2014.5%20L114%20114.0%20Q114%20117.0%20111.17%20117.99%20L60.77%20135.68%20Q57%20137.0%2053.23%20135.68%20L2.83%20117.99%20Q0%20117.0%200%20114.0%20L0%2014.5%20Q0%2012%201.77%2010.23Z'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20114%20137'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M1.77%2010.23%20L10.23%201.77%20Q12%200%2014.5%200%20L99.5%200%20Q102%200%20103.77%201.77%20L112.23%2010.23%20Q114%2012%20114%2014.5%20L114%20114.0%20Q114%20117.0%20111.17%20117.99%20L60.77%20135.68%20Q57%20137.0%2053.23%20135.68%20L2.83%20117.99%20Q0%20117.0%200%20114.0%20L0%2014.5%20Q0%2012%201.77%2010.23Z'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat; }
 .se-empty span { font-size: 11px; font-weight: 900; letter-spacing: .06em; color: rgba(255,255,255,.6); }
 .se-slot.se-best .se-empty { border-color: var(--se-acc); background: var(--se-acc-a); animation: seBest 1.4s ease-in-out infinite; }
 .se-slot.se-best .se-empty span { color: var(--se-text); }
