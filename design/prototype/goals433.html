@@ -54,7 +54,7 @@
   .track.glow .fill { box-shadow: 0 0 14px rgba(255,200,61,0.9); background: linear-gradient(90deg, #FFB020, var(--gold)); }
 
   /* pitch */
-  .pitch { position: relative; margin: 0 12px; height: 366px; border-radius: 18px; overflow: hidden; isolation: isolate; flex-shrink: 0; }
+  .pitch { position: relative; margin: 0 12px; height: 358px; border-radius: 18px; overflow: hidden; isolation: isolate; flex-shrink: 0; }
   .pitch .lines { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; }
   .pitch .slotp { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 2px; z-index: 2; }
   .pitch .nm { font: 900 italic 9.5px/1 'Exo 2'; text-transform: uppercase; padding: 2px 5px; border-radius: 4px; background: rgba(0,0,0,0.72); white-space: nowrap; }
@@ -87,13 +87,15 @@
   .shirt.myst text { fill: #4A4A56; }
   .shirt.sel { transform: translateY(-6px) scale(1.06); }
   .shirt.dim { transform: scale(0.94); opacity: 0.55; }
-  .shirt .tagc { position: absolute; left: 50%; top: -4px; width: 16px; height: 16px; margin-left: -8px; object-fit: contain; }
+  .shirt .plate { position: absolute; left: 50%; top: calc(var(--d) * -0.42); width: var(--d); height: var(--d); margin-left: calc(var(--d) / -2); border-radius: 50%; background: #F4F4F6; box-shadow: 0 0 0 1.5px var(--trimc), 0 2px 5px rgba(0,0,0,0.45); display: grid; place-items: center; z-index: 2; }
+  .shirt .plate img { width: 76%; height: 76%; object-fit: contain; }
+  .shirt .glint { transform-box: view-box; }
   .trio { display: flex; justify-content: center; gap: 12px; padding: 12px 16px 0; position: relative; }
   .trio .cell { display: flex; flex-direction: column; align-items: center; gap: 4px; }
   .trio .cap { font-size: 10.5px; font-weight: 800; color: var(--muted); letter-spacing: 0.06em; height: 14px; white-space: nowrap; }
-  .reelwin { position: relative; width: 104px; height: 108px; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%); }
+  .reelwin { position: relative; width: 104px; height: 118px; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 18%, #000 86%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 18%, #000 86%, transparent 100%); }
   .reelwin.landed { -webkit-mask-image: none; mask-image: none; overflow: visible; }
-  .reelwin .strip { position: absolute; left: 4px; top: 6px; display: flex; flex-direction: column; gap: 6px; will-change: transform; }
+  .reelwin .strip { position: absolute; left: 4px; top: 14px; display: flex; flex-direction: column; gap: 16px; will-change: transform; }
   .hint { text-align: center; font-size: 11.5px; color: var(--muted); padding-top: 6px; height: 16px; }
 
   /* effects */
@@ -110,6 +112,10 @@
   .bigmsg.close span { color: var(--mode-t); }
   .bigmsg.over b { font-size: 72px; color: #C4C4CC; }
   .dimmer { position: absolute; inset: 0; z-index: 44; background: rgba(0,0,0,0.55); pointer-events: none; }
+  .kitgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 18px 10px; padding: 20px 16px; background: radial-gradient(120% 80% at 50% 0%, #0F3A24, #08200F); border-radius: 22px; }
+  .kitgrid .k { display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 10px; }
+  .kitgrid .k span { font-size: 10.5px; font-weight: 800; color: #DADAE0; text-align: center; }
+  .panel .trio { padding: 0; }
   .panel { width: 390px; max-width: 100%; height: 300px; border-radius: 22px; background: #000; box-shadow: 0 0 0 1px #222228; position: relative; overflow: hidden; display: grid; place-items: center; }
   @media (prefers-reduced-motion: reduce) { .shirt { transition: none; } }
 </style>
@@ -119,8 +125,11 @@
 <div class="page">
   <div class="head">
     <h1>433 Goals</h1>
-    <p>Round two. The tally is now the progress bar, and it runs past 433 in grey if you overshoot. Numbers sit higher on the shirts, where they are printed. The reels now slow down and settle smoothly instead of freezing. And there are three endings: so close, exactly 433, and blown past. Names, clubs and Premier League career goals are real (every Premier League player with 60+ games); the rules are still my reading of your brief.</p>
+    <p>Round three, the shirts. Crests are bigger and sit on a light disc at the collar, so line-drawn ones like Derby's ram stay clean. Goals are always set at the three-figure size on slightly bigger shirts. Clubs wear their stripes, hoops, halves and sleeves, with darker outlines instead of white on most. The big spinning shirts get crests (three options), a slight sheen and a light sweep as they land, and the keeper wears long sleeves (three versions). The playable game below lets you switch crest and keeper styles. Names, clubs and Premier League career goals are real (every Premier League player with 60+ games).</p>
   </div>
+  <section class="sec"><h2>Crests on the spinning shirts</h2><p>Three ways to show the club on the big shirts. All three now have a slight sheen, and a light sweeps across each one as it lands. Derby, Spurs, Sheffield Wednesday and Swansea have thin line-drawn crests, so they always sit on a light disc or plate.</p><div class="row" id="crests"></div></section>
+  <section class="sec"><h2>Every club's shirt</h2><p>Fewer plain red shirts with white outlines: stripes, hoops and halves where the club wears them, contrasting sleeves for Arsenal, Villa, West Ham and Burnley, and darker outlines (Man Utd black, Liverpool deep red). Numbers are all set at the three-figure size, and the crest sits bigger on a disc at the collar.</p><div class="kitgrid" id="kits"></div></section>
+  <section class="sec"><h2>Goalkeeper shirt, long-sleeved</h2><p>Three versions. Each shows the big spinning shirt and the size it plays at on the pitch.</p><div class="row" id="gks"></div></section>
   <section class="sec"><h2>Pitch options</h2><p>Each one says the mode on the pitch. Orange is this mode's colour.</p><div class="row" id="pitches"></div></section>
   <section class="sec"><h2>A turn, step by step</h2><p>Ready, spinning, picking, then the reveal.</p><div class="row" id="steps"></div></section>
   <section class="sec"><h2>Try it</h2><p>Spin, tap a shirt to pick him, then tap again or drag him onto the glowing shirt. He flies to the pitch, the shirt bursts, his goals appear and the bar fills. Fill all 11 to see the ending. "Fill for me" plays the turns for you.</p><div class="row" id="play"></div></section>
@@ -138,32 +147,93 @@
   const hexrgb = (h) => { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255]; };
   const lum = (h) => hexrgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }).reduce((t, v, i) => t + v * [0.2126, 0.7152, 0.0722][i], 0);
   const contrast = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
-  const kit = (clubName) => { const c = D.clubs[clubName] || { accent: '#888888', ink: '#111111', crest: '' };
-    const ink = contrast(c.accent, c.ink) >= 3 ? c.ink : (lum(c.accent) > 0.4 ? '#0A0A0A' : '#FFFFFF');
-    return { fill: c.accent, trim: c.ink === c.accent ? ink : c.ink, ink, crest: c.crest }; };
+  const shade = (h, k) => '#' + hexrgb(h).map((v) => Math.round(k < 0 ? v * (1 + k) : v + (255 - v) * k).toString(16).padStart(2, '0')).join('');
+  // Home kits: body colour from clubs.json, plus each club's pattern and second colour so fewer shirts are plain red with a white outline.
+  // pat: s = vertical stripes, h = hoops, v = halves; sl = sleeve colour; tr = outline; ink = number colour.
+  const KITS = {
+    'Arsenal': { sl: '#FFFFFF', tr: '#8A0A10' }, 'Liverpool': { tr: '#7A0A1C' }, 'Man Utd': { tr: '#1A1A1A' }, 'Chelsea': { tr: '#FFFFFF' },
+    'Spurs': { tr: '#132257', ink: '#132257' }, 'Newcastle': { pat: 's', b: '#111111', tr: '#111111', ink: '#FFFFFF' }, 'Everton': { tr: '#FFFFFF' },
+    'West Ham': { f: '#7A263A', sl: '#1BB1E7', tr: '#3E0F1D', ink: '#FFFFFF' }, 'Aston Villa': { f: '#670E36', sl: '#95BFE5', tr: '#3B0820', ink: '#FFFFFF' }, 'Man City': { tr: '#1C2C5B', ink: '#1C2C5B' },
+    'Southampton': { pat: 's', b: '#FFFFFF', tr: '#111111', ink: '#111111' }, 'Blackburn': { pat: 'v', b: '#FFFFFF', tr: '#0B2A55', ink: '#0B2A55' },
+    'Leicester': { tr: '#00184D' }, 'Leeds': { tr: '#1D428A', ink: '#1D428A' }, 'Crystal Palace': { pat: 's', b: '#1B458F', tr: '#0B1F45', ink: '#FFFFFF' },
+    'Middlesbrough': { tr: '#FFFFFF' }, 'Wolves': { tr: '#111111', ink: '#111111' }, 'Fulham': { tr: '#111111', ink: '#111111' }, 'Bolton': { tr: '#132257', ink: '#132257' },
+    'Sunderland': { pat: 's', b: '#FFFFFF', tr: '#111111', ink: '#111111' }, 'Bournemouth': { pat: 's', b: '#111111', tr: '#111111', ink: '#FFFFFF' },
+    'Norwich': { tr: '#00A650', ink: '#00843D' }, 'Brighton': { pat: 's', b: '#FFFFFF', tr: '#0B3B80', ink: '#0B3B80' }, 'Sheffield Wed': { pat: 's', b: '#FFFFFF', tr: '#0B1F55', ink: '#0B1F55' },
+    'West Brom': { pat: 's', b: '#FFFFFF', tr: '#0B1F45', ink: '#0B1F45' }, 'Coventry': { tr: '#1C3F66', ink: '#0F2440' }, 'Burnley': { f: '#6C1D45', sl: '#99D6EA', tr: '#3A0C25', ink: '#FFFFFF' },
+    'Stoke': { pat: 's', b: '#FFFFFF', tr: '#111111', ink: '#111111' }, 'Nottingham Forest': { tr: '#FFFFFF' }, 'QPR': { pat: 'h', b: '#FFFFFF', tr: '#0B2A55', ink: '#0B2A55' },
+    'Wimbledon': { f: '#002D73', tr: '#FFE600', ink: '#FFE600' }, 'Charlton': { tr: '#FFFFFF' }, 'Swansea': { tr: '#111111', ink: '#111111' }, 'Wigan': { pat: 's', b: '#FFFFFF', tr: '#0B2A55', ink: '#0B2A55' },
+    'Sheffield Utd': { pat: 's', b: '#FFFFFF', tr: '#111111', ink: '#111111' }, 'Derby': { tr: '#111111', ink: '#111111' }, 'Brentford': { pat: 's', b: '#FFFFFF', tr: '#111111', ink: '#111111' },
+    'Ipswich': { tr: '#FFFFFF' }, 'Watford': { tr: '#ED2127', ink: '#111111' }, 'Portsmouth': { tr: '#C8102E' }, 'Birmingham': { tr: '#FFFFFF' },
+    'Hull': { pat: 's', b: '#111111', tr: '#111111', ink: '#111111' }, 'Reading': { pat: 'h', b: '#FFFFFF', tr: '#00224D', ink: '#00224D' }, 'Oldham': { tr: '#002A5C' },
+    'Huddersfield': { pat: 's', b: '#FFFFFF', tr: '#0B2A55', ink: '#0B2A55' }, 'Bradford': { pat: 's', b: '#6D1D2C', tr: '#4A0818', ink: '#FFFFFF' },
+    'Cardiff': { tr: '#FFFFFF' }, 'Swindon': { tr: '#FFFFFF' }, 'Barnsley': { tr: '#7A0A0E' }
+  };
+  // thin black line-drawing crests (Derby's ram, Spurs' cockerel...) that vanish or tangle on a shirt: they always sit on a light disc
+  const LINE_CRESTS = new Set(['Derby', 'Sheffield Wed', 'Spurs', 'Swansea']);
+  const slug = (s) => s.toLowerCase().replace(/[^a-z]+/g, '-');
+  const kit = (clubName) => { const c0 = D.clubs[clubName] || { accent: '#888888', ink: '#111111', crest: '' }, x = KITS[clubName] || {}, c = Object.assign({}, c0, x.f ? { accent: x.f } : {});
+    const ink = x.ink || (contrast(c.accent, c.ink) >= 3 ? c.ink : (lum(c.accent) > 0.4 ? '#0A0A0A' : '#FFFFFF'));
+    const tr = x.tr || (c.ink === c.accent ? shade(c.accent, -0.45) : c.ink);
+    return { club: clubName, id: slug(clubName), fill: c.accent, b: x.b, pat: x.pat, sl: x.sl, trim: tr, ink, stroke: x.pat ? (lum(ink) > 0.4 ? '#111111' : '#FFFFFF') : '', crest: c.crest, line: LINE_CRESTS.has(clubName) }; };
+  // one set of pattern defs for every club, plus the sheen, made once
+  (function defs() {
+    const pats = Object.keys(KITS).filter((n) => KITS[n].pat).map((n) => { const k = kit(n), a = k.fill, b = k.b;
+      const inner = k.pat === 's' ? `<rect width="7" height="100" fill="${a}"/><rect x="7" width="7" height="100" fill="${b}"/>` : k.pat === 'h' ? `<rect width="100" height="8" fill="${a}"/><rect y="8" width="100" height="8" fill="${b}"/>` : `<rect width="50" height="100" fill="${a}"/><rect x="50" width="50" height="100" fill="${b}"/>`;
+      const sz = k.pat === 's' ? 'width="14" height="100" x="1"' : k.pat === 'h' ? 'width="100" height="16" y="2"' : 'width="100" height="100"';
+      return `<pattern id="kp-${k.id}" patternUnits="userSpaceOnUse" ${sz}>${inner}</pattern>`; }).join('');
+    document.body.insertAdjacentHTML('afterbegin', `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>${pats}
+      <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.34"/><stop offset="0.32" stop-color="#fff" stop-opacity="0.08"/><stop offset="0.5" stop-color="#fff" stop-opacity="0"/><stop offset="0.78" stop-color="#000" stop-opacity="0.10"/><stop offset="1" stop-color="#000" stop-opacity="0.26"/></linearGradient>
+      <linearGradient id="glint" x1="0" y1="0" x2="1" y2="0.4"><stop offset="0.35" stop-color="#fff" stop-opacity="0"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.55"/><stop offset="0.65" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    </defs></svg>`);
+  })();
   const SHIRT = 'M31 9 L42 4 Q50 11 58 4 L69 9 L95 24 L85 44 L74 38 L74 96 L26 96 L26 38 L15 44 L5 24 Z';
-  // back of a shirt: surname across the shoulders, then the number where a number is printed (upper back)
+  const SLEEVES = 'M31 9 L5 24 L15 44 L26 38 Z M69 9 L95 24 L85 44 L74 38 Z';
+  const LONG = 'M31 9 L42 4 Q50 11 58 4 L69 9 L86 24 L97 68 L85 72 L75 40 L74 96 L26 96 L25 40 L15 72 L3 68 L14 24 Z';
+  const LSLEEVES = 'M31 9 L14 24 L3 68 L15 72 L25 40 Z M69 9 L86 24 L97 68 L85 72 L75 40 Z';
+  const CUFFS = 'M4.3 62 L16.5 66 L15 72 L3 68 Z M95.7 62 L83.5 66 L85 72 L97 68 Z';
+  const GKCOL = '#FFB020';
+  const CFG = { crest: 'collar', gk: 2 };
+  // back of a shirt: surname across the shoulders, then the number where a number is printed (upper back).
+  // Goals always use the three-figure size, so 9 and 104 look the same weight.
   function shirt(opts) {
-    const w = opts.w || 48, cls = opts.cls || '';
-    let k = { fill: '#222', trim: '#444', ink: '#fff' }, top = '', mid = '', crest = '';
-    if (opts.player) { k = kit(opts.player.club); crest = opts.tag ? `<img class="tagc" src="${k.crest}" alt="">` : ''; }
+    const w = opts.w || 48, cls = opts.cls || '', big = w >= 80, gkv = opts.gk === true ? CFG.gk : (opts.gk || 0), long = gkv > 0;
+    const crestStyle = opts.crest || CFG.crest;
+    let k = { fill: '#222', trim: '#444', ink: '#fff' }, top = '', mid = '', over = '', crest = '', wm = '';
+    if (opts.player) {
+      k = kit(opts.player.club);
+      if (gkv === 2) k = Object.assign({}, k, { fill: GKCOL, pat: null, sl: null, trim: shade(GKCOL, -0.55), ink: '#111111', stroke: '', cuff: k.fill });
+      if (gkv === 3) k = Object.assign({}, k, { fill: shade(k.fill === '#FFFFFF' ? '#555560' : k.fill, -0.62), pat: null, sl: k.fill, trim: shade(k.fill === '#FFFFFF' ? '#555560' : k.fill, -0.8), ink: '#FFFFFF', stroke: '', cuff: k.b || k.trim });
+      if (opts.tag !== false && k.crest) {
+        if (crestStyle === 'collar') { const d = big ? 28 : Math.round(w * 0.4); crest = `<span class="plate" style="--d:${d}px"><img src="${k.crest}" alt=""></span>`; }
+        if (crestStyle === 'water') wm = `<image href="${k.crest}" x="24" y="34" width="52" height="58" opacity="${k.line ? 0.3 : 0.22}" preserveAspectRatio="xMidYMid meet" style="mix-blend-mode:${lum(k.fill) > 0.5 ? 'multiply' : 'luminosity'}"/>`;
+        if (crestStyle === 'print') over = (k.line ? `<rect x="40" y="70" width="20" height="21" rx="5" fill="#F4F4F6"/>` : '') + `<image href="${k.crest}" x="41" y="71" width="18" height="19" preserveAspectRatio="xMidYMid meet"/>`;
+      }
+    }
     if (opts.state === 'empty' || opts.state === 'next') mid = `<text x="50" y="64" font-size="${opts.pos.length > 2 ? 20 : 24}">${opts.pos}</text>`;
     if (opts.state === 'myst') mid = `<text x="50" y="70" font-size="44">?</text>`;
+    const tstroke = k.stroke ? ` stroke="${k.stroke}" stroke-width="2.6" paint-order="stroke" stroke-linejoin="round"` : '';
     if (opts.player) {
       const sur = opts.player.sur.toUpperCase(), fs = Math.min(13, 140 / Math.max(6, sur.length));
-      top = w < 60 ? '' : `<text x="50" y="27" font-size="${fs}" textLength="${Math.min(52, sur.length * fs * 0.62)}" lengthAdjust="spacingAndGlyphs">${D2T.esc(sur)}</text>`;
-      if (opts.goals != null) { const big = String(opts.goals).length > 2; mid = `<text class="gnum" x="50" y="${w < 60 ? 64 : 63}" font-size="${big ? 28 : 36}" style="transform-box:fill-box;transform-origin:center">${opts.goals}</text>`; }
+      top = w < 80 ? '' : `<text x="50" y="${crestStyle === 'collar' ? 30 : 27}" font-size="${fs}" textLength="${Math.min(50, sur.length * fs * 0.62)}" lengthAdjust="spacingAndGlyphs"${tstroke}>${D2T.esc(sur)}</text>`;
+      if (opts.goals != null) { const g = String(opts.goals); mid = `<text class="gnum" x="50" y="${crestStyle === 'print' ? 62 : 65}" font-size="30"${g.length > 2 ? ' textLength="46" lengthAdjust="spacingAndGlyphs"' : ''}${tstroke} style="transform-box:fill-box;transform-origin:center">${g}</text>`; }
     }
     const st = opts.state === 'empty' ? 'empty' : opts.state === 'next' ? 'empty next' : opts.state === 'myst' ? 'myst' : '';
-    return `<div class="shirt ${st} ${cls}" style="--sw:${w}px;--fill:${k.fill};--trimc:${k.trim};--ink:${k.ink}" ${opts.attr || ''}>${crest}<svg viewBox="0 0 100 100" aria-hidden="true"><path class="body" d="${SHIRT}"/><path class="trim" d="M42 4 Q50 11 58 4"/><path class="trim" d="M85 44 L95 24 M15 44 L5 24" stroke-width="3"/>${top}${mid}</svg></div>`;
+    const body = long ? LONG : SHIRT, slv = long ? LSLEEVES : SLEEVES;
+    const fillRef = opts.player && k.pat ? `url(#kp-${k.id})` : 'var(--fill)';
+    const extra = opts.player ? (k.sl ? `<path d="${slv}" fill="${k.sl}" stroke="var(--trimc)" stroke-width="2.4" stroke-linejoin="round"/>` : '') + (long && k.cuff ? `<path d="${CUFFS}" fill="${k.cuff}"/>` : '') : '';
+    const sheen = opts.player && (opts.sheen ?? big) ? `<path d="${body}" fill="url(#sheen)"/><path class="glint" d="${body}" fill="url(#glint)" opacity="0"/>` : '';
+    const trimArms = long ? '<path class="trim" d="M85 72 L97 68 M15 72 L3 68" stroke-width="3"/>' : '<path class="trim" d="M85 44 L95 24 M15 44 L5 24" stroke-width="3"/>';
+    return `<div class="shirt ${st} ${cls}" style="--sw:${w}px;--fill:${k.fill};--trimc:${k.trim};--ink:${k.ink}" ${opts.attr || ''}>${crest}<svg viewBox="0 0 100 100" aria-hidden="true"><path class="body" d="${body}"${opts.player ? ` style="fill:${fillRef}"` : ''}/>${extra}${wm}${sheen}${opts.player ? `<path class="body" d="${body}" style="fill:none"/>` : ''}<path class="trim" d="M42 4 Q50 11 58 4"/>${trimArms}${top}${mid}${over}</svg></div>`;
   }
-  const SLOTS = [['GK', 'GK', 50, 88], ['LB', 'DEF', 12, 68], ['CB', 'DEF', 37, 71], ['CB', 'DEF', 63, 71], ['RB', 'DEF', 88, 68], ['CM', 'MID', 22, 45], ['CM', 'MID', 50, 47], ['CM', 'MID', 78, 45], ['LW', 'FWD', 18, 19], ['ST', 'FWD', 50, 16], ['RW', 'FWD', 82, 19]];
+  // a quick light sweep across a big shirt (when it lands in the reel)
+  const glint = (el) => { const g = el && el.querySelector('.glint'); if (!g || reduced) return; g.animate([{ opacity: 0, transform: 'translateX(-60px)' }, { opacity: 1, transform: 'translateX(0)', offset: 0.5 }, { opacity: 0, transform: 'translateX(60px)' }], { duration: 650, easing: 'ease-in-out' }); };
+  const SLOTS = [['GK', 'GK', 50, 89], ['LB', 'DEF', 12, 66], ['CB', 'DEF', 36, 68.5], ['CB', 'DEF', 64, 68.5], ['RB', 'DEF', 88, 66], ['CM', 'MID', 21, 43], ['CM', 'MID', 50, 45], ['CM', 'MID', 79, 43], ['LW', 'FWD', 17, 18], ['ST', 'FWD', 50, 16], ['RW', 'FWD', 83, 18]];
   const LINES = `<svg class="lines" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="3" y="2.5" width="94" height="95" rx="1.5" stroke-width="0.5"/><line x1="3" y1="50" x2="97" y2="50" stroke-width="0.5"/><rect x="26" y="2.5" width="48" height="14" stroke-width="0.5"/><rect x="38" y="2.5" width="24" height="5" stroke-width="0.5"/><rect x="26" y="83.5" width="48" height="14" stroke-width="0.5"/><rect x="38" y="92.5" width="24" height="5" stroke-width="0.5"/></svg>`;
   const CIRCLE = '<span style="position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px;border:1.4px solid rgba(255,255,255,0.25);border-radius:50%"></span>';
   const NAMES = { p1: '433 GOALS', p2: '433 GOALS', p3: '433 GOALS', p4: '433' };
   const pitch = (style, filled, nextIdx) => `<div class="pitch ${style}">${LINES}${style === 'p2' ? '' : CIRCLE}<div class="modename">${NAMES[style]}</div>
       ${SLOTS.map(([lab, pos, x, y], i) => { const f = filled[i];
-        const inner = f ? shirt({ w: 52, player: f, goals: f.goals, tag: true }) + `<span class="nm">${D2T.esc(f.sur)}</span>` : shirt({ w: 52, state: i === nextIdx ? 'next' : 'empty', pos: lab });
+        const inner = f ? shirt({ w: 56, player: f, goals: f.goals, gk: i === 0 }) + `<span class="nm">${D2T.esc(f.sur)}</span>` : shirt({ w: 56, state: i === nextIdx ? 'next' : 'empty', pos: lab, gk: i === 0 ? CFG.gk : 0 });
         return `<div class="slotp" data-slot="${i}" style="left:${x}%;top:${y}%">${inner}</div>`; }).join('')}</div>`;
   const ACCT = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.6-3.6 4.6-5.2 8-5.2s6.4 1.6 8 5.2"/></svg>';
   const HOME = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></svg>';
@@ -214,18 +284,19 @@
   // ---------- reels: transform-only, speed-based blur, a soft overshoot and settle (no freeze, no re-render on landing) ----------
   let reelUid = 0;
   function runReels(wins, targets, pos, opts = {}) {
-    const H = 102, base = 1250, stagger = 420;
+    const base = 1250, stagger = 420, gk = pos === 'GK', cs = opts.crest;
     return new Promise((resolve) => {
       let landed = 0;
       wins.forEach((w, i) => {
         const strip = w.querySelector('.strip');
         const filler = []; while (filler.length < 16) { const L = P[pos]; const c = L[Math.floor(Math.random() * Math.min(L.length, 260))]; if (c !== targets[i]) filler.push(c); }
-        strip.innerHTML = filler.concat([targets[i]]).map((p) => shirt({ w: 96, player: p })).join('');
+        strip.innerHTML = filler.concat([targets[i]]).map((p) => shirt({ w: 96, player: p, gk, crest: cs })).join('');
+        const D = strip.lastElementChild.getBoundingClientRect().top - strip.firstElementChild.getBoundingClientRect().top; // measured, so the stop lines up exactly with the rest position
         const id = 'rb' + (++reelUid);
         w.insertAdjacentHTML('afterbegin', `<svg width="0" height="0" style="position:absolute"><filter id="${id}" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="0 0"/></filter></svg>`);
         const blur = w.querySelector('feGaussianBlur');
         strip.style.filter = `url(#${id})`;
-        const D = filler.length * H, T = base + i * stagger;
+        const T = base + i * stagger;
         if (reduced) { strip.style.transform = `translateY(${-D}px)`; finish(); return; }
         const t0 = performance.now(); let lastY = 0, lastT = t0;
         // ease: quick start, long fast run, smooth stop (quartic out), then a small spring past and back
@@ -243,7 +314,7 @@
         requestAnimationFrame(frame);
         function finish() {
           // keep the landed shirt exactly where it is: drop the filler above it and move the strip to rest
-          strip.style.filter = ''; strip.innerHTML = shirt({ w: 96, player: targets[i], attr: `data-c="${i}"` }); strip.style.transform = 'none';
+          strip.style.filter = ''; strip.innerHTML = shirt({ w: 96, player: targets[i], gk, crest: cs, attr: `data-c="${i}"` }); strip.style.transform = 'none'; glint(strip.firstElementChild);
           w.classList.add('landed');
           if (++landed === wins.length) resolve();
         }
@@ -371,7 +442,7 @@
   setTimeout(revealLoop, 900); setInterval(revealLoop, 4200);
 
   // ---------- playable ----------
-  document.getElementById('play').innerHTML = `<div class="opt"><div class="opt-h"><span class="tag">PLAYABLE</span><h3>One full game</h3><p>Reveal: <select id="rstyle"><option value="burst">Burst</option><option value="flip">Flip</option><option value="flap">Scoreboard roll</option></select> · Pitch: <select id="pstyle"><option value="p1">Night stadium</option><option value="p2">Chalk board</option><option value="p3">Goal net</option><option value="p4">Big 433</option></select> <button class="replay" id="auto" style="margin-left:6px">Fill for me</button></p></div><div class="phone" id="game"></div></div>`;
+  document.getElementById('play').innerHTML = `<div class="opt"><div class="opt-h"><span class="tag">PLAYABLE</span><h3>One full game</h3><p>Reveal: <select id="rstyle"><option value="burst">Burst</option><option value="flip">Flip</option><option value="flap">Scoreboard roll</option></select> · Pitch: <select id="pstyle"><option value="p1">Night stadium</option><option value="p2">Chalk board</option><option value="p3">Goal net</option><option value="p4">Big 433</option></select> · Crest: <select id="cstyle"><option value="collar">Disc at the collar</option><option value="water">Faded watermark</option><option value="print">Printed on the back</option></select> · Keeper: <select id="gstyle"><option value="1">Club colours</option><option value="2" selected>Keeper amber</option><option value="3">Dark club tone</option></select> <button class="replay" id="auto" style="margin-left:6px">Fill for me</button></p></div><div class="phone" id="game"></div></div>`;
   const G = { filled: {}, total: 0, respins: 3, cands: null, sel: null, busy: false, pstyle: 'p1' };
   const game = document.getElementById('game');
   const nextIdx = () => SLOTS.findIndex((s, i) => !G.filled[i]);
@@ -391,7 +462,7 @@
     const trio = game.querySelector('.trio'); trio.outerHTML = trioMyst();
     game.querySelectorAll('.cap').forEach((c) => { c.textContent = ''; });
     setUI('Spinning', '', true);
-    await runReels([...game.querySelectorAll('.reelwin')], targets, pos);
+    await runReels([...game.querySelectorAll('.reelwin')], targets, pos, { crest: CFG.crest });
     G.cands = targets; G.busy = false;
     game.querySelectorAll('.cap').forEach((c, i) => { c.textContent = targets[i].club; });
     setUI('Pick one', 'Tap a shirt to pick him', true);
@@ -410,7 +481,7 @@
     const ni = nextIdx(), p = G.cands[i], from = G.total, src = game.querySelector(`[data-c="${i}"]`);
     const hr = game.getBoundingClientRect(), a = fromRect || src.getBoundingClientRect(), slot = game.querySelector(`[data-slot="${ni}"] .shirt`), b = slot.getBoundingClientRect();
     // fly a copy of the shirt from the trio to its shirt on the pitch, then reveal
-    const fly = D2T.h(`<div class="flyer">${shirt({ w: 96, player: p })}</div>`); fly.style.left = (a.left - hr.left) + 'px'; fly.style.top = (a.top - hr.top) + 'px'; game.appendChild(fly);
+    const fly = D2T.h(`<div class="flyer">${shirt({ w: 96, player: p, gk: SLOTS[ni][1] === 'GK' })}</div>`); fly.style.left = (a.left - hr.left) + 'px'; fly.style.top = (a.top - hr.top) + 'px'; game.appendChild(fly);
     src.style.visibility = 'hidden';
     const s = b.width / a.width, dx = b.left - a.left + (b.width - a.width) / 2, dy = b.top - a.top + (b.height - a.height) / 2;
     const anim = fly.animate([{ transform: 'translate(0,0) scale(1)' }, { transform: `translate(${dx * 0.5}px,${dy * 0.5 - 40}px) scale(${(1 + s) / 2 * 1.1})`, offset: 0.55 }, { transform: `translate(${dx}px,${dy}px) scale(${s})` }], { duration: reduced ? 1 : 520, easing: 'cubic-bezier(.5,0,.3,1)', fill: 'forwards' });
@@ -426,7 +497,7 @@
     el.addEventListener('pointerdown', (e) => {
       if (G.busy) return; const sx = e.clientX, sy = e.clientY; let ghost = null;
       const move = (ev) => {
-        if (!ghost && Math.hypot(ev.clientX - sx, ev.clientY - sy) > 8) { onShirt(i); ghost = D2T.h(`<div style="position:fixed;z-index:99;pointer-events:none;opacity:.95">${shirt({ w: 80, player: G.cands[i] })}</div>`); document.body.appendChild(ghost); }
+        if (!ghost && Math.hypot(ev.clientX - sx, ev.clientY - sy) > 8) { onShirt(i); ghost = D2T.h(`<div style="position:fixed;z-index:99;pointer-events:none;opacity:.95">${shirt({ w: 80, player: G.cands[i], gk: SLOTS[nextIdx()][1] === 'GK' })}</div>`); document.body.appendChild(ghost); }
         if (ghost) { ghost.style.left = (ev.clientX - 40) + 'px'; ghost.style.top = (ev.clientY - 40) + 'px'; }
       };
       const up = (ev) => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up);
@@ -436,6 +507,8 @@
       window.addEventListener('pointermove', move); window.addEventListener('pointerup', up);
     });
   }
+  document.getElementById('cstyle').onchange = (e) => { CFG.crest = e.target.value; if (!G.busy) renderGame(); };
+  document.getElementById('gstyle').onchange = (e) => { CFG.gk = +e.target.value; if (!G.busy) renderGame(); };
   document.getElementById('pstyle').onchange = (e) => { G.pstyle = e.target.value; if (!G.busy) renderGame(); };
   document.getElementById('auto').onclick = async () => {
     while (nextIdx() >= 0) { if (!G.cands) { await spin(); } await new Promise((r) => setTimeout(r, 350)); const best = 0; onShirt(best); await new Promise((r) => setTimeout(r, 300)); place(best); await new Promise((r) => { const iv = setInterval(() => { if (!G.busy) { clearInterval(iv); r(); } }, 100); }); }
@@ -460,10 +533,30 @@
   document.querySelectorAll('[data-end]').forEach((ph, i) => { paintBar(ph, +ph.dataset.t); setTimeout(() => playEnding(ph), 1200 + i * 1500); });
   document.querySelectorAll('[data-e]').forEach((btn) => { btn.onclick = () => playEnding(document.querySelector(`[data-end="${btn.dataset.e}"]`)); });
 
+
+  // ---------- crest options, kit grid, keepers ----------
+  const CR = [['collar', 'A · Disc at the collar', 'Full-colour crest on a small light disc where the label would be. Every crest reads, even line-drawn ones. Same as the pitch shirts.'],
+    ['water', 'B · Faded watermark', 'A big crest faded into the shirt behind the name. Quiet, and it reads more like a kit design than a badge.'],
+    ['print', 'C · Printed on the back', 'A small full-colour crest printed under the name, like a back-of-shirt badge. Line crests get a light patch behind them.']];
+  const crestTrio = ['Derby', 'Man Utd', 'Newcastle'].map((c) => P.FWD.concat(P.MID).find((p) => p.club === c));
+  document.getElementById('crests').innerHTML = CR.map(([k, n, d]) => `<div class="opt"><div class="opt-h"><span class="tag">CREST</span><h3>${n}</h3><p>${d}</p></div><div class="panel" data-crest="${k}" style="height:190px">${trioMyst()}</div></div>`).join('');
+  document.querySelectorAll('[data-crest]').forEach((pn, i) => {
+    const caps = () => pn.querySelectorAll('.cap').forEach((c, j) => { c.textContent = crestTrio[j].club; });
+    const go = async () => { pn.innerHTML = trioMyst(); await runReels([...pn.querySelectorAll('.reelwin')], crestTrio, 'FWD', { crest: pn.dataset.crest }); caps(); setTimeout(go, 3200); };
+    setTimeout(go, 500 + i * 300);
+  });
+  const clubsAll = Object.keys(D.clubs).filter((c) => ALL.some((p) => p.club === c)).sort();
+  document.getElementById('kits').innerHTML = clubsAll.map((c) => { const p = ALL.filter((x) => x.club === c).sort((a, b) => b.goals - a.goals)[0]; return `<div class="k">${shirt({ w: 64, player: p, goals: p.goals })}<span>${D2T.esc(c)}</span></div>`; }).join('');
+  const GKV = [[1, '1 · Club colours', 'The keeper wears the club shirt with long sleeves. Simple, but he blends in with the outfield.'],
+    [2, '2 · Keeper amber', 'Every keeper in amber (the GK colour from the position tabs) with cuffs in the club colour. Stands out at once.'],
+    [3, '3 · Dark club tone', 'A deep shade of the club colour with bright club-colour sleeves and cuffs, like a 90s keeper kit.']];
+  const keepers = ['Steve Ogrizovic', 'David Seaman', 'Mart Poom'].map(byName).filter(Boolean);
+  document.getElementById('gks').innerHTML = GKV.map(([v, n, d]) => `<div class="opt"><div class="opt-h"><span class="tag">KEEPER</span><h3>${n}</h3><p>${d}</p></div><div class="panel" style="height:280px;align-content:center;gap:12px"><div class="trio">${keepers.map((p) => `<div class="cell">${shirt({ w: 96, player: p, gk: v })}<span class="cap">${D2T.esc(p.club)}</span></div>`).join('')}</div><div class="pitch p1" style="height:96px;width:300px;display:flex;justify-content:space-around;align-items:center;margin:0">${keepers.map((p) => `<div style="display:flex;flex-direction:column;align-items:center;gap:2px;padding-top:8px">${shirt({ w: 56, player: p, goals: p.goals, gk: v })}<span class="nm" style="font:900 italic 9.5px/1 'Exo 2';text-transform:uppercase;padding:2px 5px;border-radius:4px;background:rgba(0,0,0,0.72)">${D2T.esc(p.sur)}</span></div>`).join('')}</div></div></div>`).join('');
+
   // ---------- reveal panels ----------
   const sample = P.FWD[6];
   const REV = [['burst', 'Burst', 'The shirt flashes, scales down onto the pitch and bursts into orange sparks; the number slams in and settles.'], ['flip', 'Flip', 'The shirt turns round once like a card; the number is on it when it comes back.'], ['flap', 'Scoreboard roll', 'The number spins through random digits, then stops on his goals with a bump.']];
   document.getElementById('reveals').innerHTML = REV.map(([k, n, d]) => `<div class="opt"><div class="opt-h"><span class="tag">REVEAL</span><h3>${n}</h3><p>${d}</p></div><div class="panel" data-r="${k}"><div class="slotp" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:6px">${shirt({ w: 140, player: sample, goals: sample.goals, tag: true })}<span class="nm" style="font-size:14px;font:900 italic 14px/1 Exo 2;padding:3px 8px;border-radius:5px;background:rgba(255,255,255,0.08)">${D2T.esc(sample.name)} · ${D2T.esc(sample.club)}</span></div></div></div>`).join('');
-  document.querySelectorAll('.panel').forEach((pn, i) => { const go = () => revealShirt(pn.querySelector('.slotp'), sample, pn.dataset.r, pn); setTimeout(go, 600 + i * 500); setInterval(go, 3600); });
+  document.querySelectorAll('.panel[data-r]').forEach((pn, i) => { const go = () => revealShirt(pn.querySelector('.slotp'), sample, pn.dataset.r, pn); setTimeout(go, 600 + i * 500); setInterval(go, 3600); });
 })();
 </script>
