@@ -112,11 +112,11 @@ Decided by Craig (11 Oct):
 - Do not show the real result after a match.
 - Changing formation suggests a new best XI, and can bring in squad players at the start of the game if needed.
 - Spin sounds (reel tick, landing thud): yes, but game sounds are a later pass.
+- The squad is only available at the start of the season: the whole real squad sits in the carousel before GW1, then only your XI is left and new faces come through transfer rolls (each takes a shirt from the XI).
 
 Still open:
 1. Slogan on every launch or first launch only (now first only)?
 2. Create an account inside the same email then PIN flow, or a separate tab like Tenaball?
 3. Should out-of-position players lower the team rating, and how hard should matches be?
-4. Subs: whole squad in the carousel (now) or a bench of 7 plus reserves?
-5. Table reveal timing (about 4s down to your row, 4s for the reset)?
-6. Haptics and an occasional "one card past and back" tease on the last reel?
+4. Table reveal timing (about 4s down to your row, 4s for the reset)?
+5. Haptics and an occasional "one card past and back" tease on the last reel?
