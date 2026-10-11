@@ -16,8 +16,6 @@
 .sp-slot { position: relative; width: 114px; height: 190px; flex-shrink: 0; transition: transform .22s var(--ease-snap), opacity .22s var(--ease-out); transform: translateZ(0); -webkit-tap-highlight-color: transparent; }
 .sp-slot.is-sel { transform: scale(1.05); z-index: 2; }
 .sp-slot.is-other { transform: scale(0.95); opacity: 0.55; }
-.sp-slot.is-sel::after { content: ''; position: absolute; inset: -6px; border-radius: 10px; pointer-events: none; box-shadow: 0 0 0 2px var(--sp-accent, var(--lime)); opacity: 0.9; clip-path: polygon(0 1.4em, 1.4em 0, calc(100% - 1.4em) 0, 100% 1.4em, 100% calc(100% - 2.2em), 50% 100%, 0 calc(100% - 2.2em)); font-size: 11px; animation: spRing .22s var(--ease-out) both; }
-@keyframes spRing { from { opacity: 0; transform: scale(.94); } to { opacity: .9; transform: none; } }
 .sp-glow { position: absolute; left: 50%; top: 50%; width: 220px; height: 300px; transform: translate(-50%, -50%); pointer-events: none; opacity: 0; z-index: 0;
   background: radial-gradient(48% 44% at 50% 50%, var(--sp-accent, #fff) 0%, rgba(0,0,0,0) 72%); filter: blur(8px); transition: opacity .4s var(--ease-out); }
 .sp-slot.is-set .sp-glow { opacity: 0.6; }
@@ -69,7 +67,7 @@
 .sp-round[disabled] { opacity: .3; }
 .sp-round .logo-mask { width: 28px; height: 28px; }
 .sp-round svg { width: 24px; height: 24px; }
-.sp-round .sp-count { position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; padding: 0 5px; box-sizing: border-box; border-radius: 10px; background: var(--lime); color: #000; font-size: 12px; font-weight: 900; font-style: italic; display: grid; place-items: center; border: 2px solid #000; }
+.sp-round .sp-count { position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; padding: 0 5px; box-sizing: border-box; border-radius: 10px; background: var(--sp-btn, var(--lime)); color: var(--sp-btn-ink, #000); font-size: 12px; font-weight: 900; font-style: italic; display: grid; place-items: center; border: 2px solid #000; }
 .sp-round.is-reload:not([disabled]):active .logo-mask { transform: rotate(-30deg); transition: transform .3s; }
 .sp-hint { text-align: center; font-size: 13px; color: var(--muted); min-height: 18px; padding: 0 16px; position: relative; z-index: 2; transition: opacity .25s; }
 

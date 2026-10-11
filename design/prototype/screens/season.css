@@ -87,7 +87,7 @@
 .se-rating.se-bump { animation: seBump .5s cubic-bezier(.3,1.5,.5,1); }
 @keyframes seBump { 30% { transform: scale(1.1); } }
 
-.se-pitch { position: relative; flex: 1 0 auto; min-height: 392px; border-radius: 18px; overflow: hidden; isolation: isolate;
+.se-pitch { position: relative; flex: 1 0 auto; min-height: 392px; max-height: 480px; border-radius: 18px; overflow: hidden; isolation: isolate;
   background:
     radial-gradient(120% 60% at 50% 0%, rgba(120,255,170,.10), transparent 60%),
     radial-gradient(140% 90% at 50% 50%, transparent 55%, rgba(0,0,0,.55) 100%),
@@ -241,3 +241,6 @@
 .se-up { color: #3DDC84; } .se-down { color: #FF5A62; }
 .se-tr.se-landed .se-mv { color: var(--se-ink); }
 .se-aftertable .se-gw { font-size: 30px; }
+.se-fs-score { font-size: 76px; gap: 10px; }
+.se-fs-team b { font-size: 15px; white-space: normal; line-height: 1; overflow-wrap: anywhere; text-align: center; }
+.se-sb-team b { font-size: 15px; white-space: normal; line-height: 1; text-align: center; }

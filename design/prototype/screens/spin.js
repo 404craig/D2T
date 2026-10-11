@@ -119,8 +119,9 @@
     const hint = (t) => { hintEl.textContent = t || ''; };
     const setMain = (text, item) => {
       lbl.textContent = text; main.classList.remove('is-swap'); void main.offsetWidth; main.classList.add('is-swap');
-      if (item && cfg.accent) { const a = cfg.accent(item); main.style.setProperty('--sp-btn', a.accent); main.style.setProperty('--sp-btn-ink', a.ink); }
-      else { main.style.removeProperty('--sp-btn'); main.style.removeProperty('--sp-btn-ink'); }
+      const a = item && cfg.accent ? cfg.accent(item) : cfg.baseBtn;
+      if (a) { el.style.setProperty('--sp-btn', a.accent); el.style.setProperty('--sp-btn-ink', a.ink); }
+      else { el.style.removeProperty('--sp-btn'); el.style.removeProperty('--sp-btn-ink'); }
     };
     const setRespins = () => {
       if (respins == null) { reload.style.display = 'none'; return; }
@@ -172,8 +173,9 @@
     // build a reel sequence: [current card, filler..., target, filler x3]
     const sequence = (first, target, P) => {
       const n = P.target, filler = [];
-      let bag = shuffle(cfg.pool.filter((x) => x !== target));
-      while (filler.length < n + 3) { if (!bag.length) bag = shuffle(cfg.pool.filter((x) => x !== target)); filler.push(bag.pop()); }
+      const same = (x) => x.name === target.name && x.season === target.season;
+      let bag = shuffle(cfg.pool.filter((x) => !same(x)));
+      while (filler.length < n + 3) { if (!bag.length) bag = shuffle(cfg.pool.filter((x) => !same(x))); filler.push(bag.pop()); }
       const seq = [first];
       for (let i = 1; i < n; i++) seq.push(cfg.render(filler[i], 114));
       seq.push(cfg.render(target, 114));
@@ -239,7 +241,7 @@
       const p = D2T.h(`<button class="sp-pass">${cfg.pass.label}</button>`);
       el.insertBefore(p, el.querySelector('.sp-bar')); p.onclick = cfg.pass.onPass;
     }
-    setRespins(); main.disabled = false;
+    setRespins(); main.disabled = false; setMain(cfg.mainLabel || 'Spin', null);
     hint(cfg.hintIdle || '');
 
     return {

@@ -19,10 +19,9 @@
     cv.width = W * dpr; cv.height = H * dpr;
     const ctx = cv.getContext('2d'); ctx.scale(dpr, dpr);
     const SIZE = 128, cx = W / 2, cy = H / 2;
-    const easeInOut = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
     // phase 1: one full turn (0 .. 700ms); phase 2: a 150ms charge (it swells and brightens); phase 3: the burst (720ms)
-    const T1 = 700, TC = 150, T2 = 720;
+    const T1 = 640, TC = 150, T2 = 720;
     const t0 = performance.now();
     let particles = null;
     const img = new Image(); img.src = D2T.ASSET.emblem;
@@ -45,7 +44,7 @@
     const step = (now) => {
       const t = now - t0;
       if (t < T1) {
-        const k = easeInOut(Math.min(1, t / T1));
+        const q = Math.min(1, t / T1), k = q < 0.3 ? Math.pow(q / 0.3, 2) * 0.16 : 0.16 + 0.84 * (1 - Math.pow(1 - (q - 0.3) / 0.7, 1.7));
         em.style.transform = `rotate(${(k * 360).toFixed(1)}deg) scale(${(0.86 + 0.26 * Math.sin(k * Math.PI)).toFixed(3)})`;
         em.style.filter = k > 0.2 && k < 0.8 ? `blur(${(Math.sin(k * Math.PI) * 1.4).toFixed(2)}px)` : '';
         raf = requestAnimationFrame(step); return;
@@ -133,6 +132,7 @@
           selectedLabel: (p) => `Sign ${surname(p.name)}`,
           hintIdle: 'Hit Spin to roll three players', hintSettled: 'Tap a player to pick them', hintSelected: 'Tap again for the full card, or sign them',
           respins: st.respins == null ? null : st.respins,
+          baseBtn: { accent, ink },
           onRespinsChange: (n) => { if (D2T.state.run) { D2T.state.run.respins = n; D2T.save(); } },
           pass: { label: 'Pass on this roll', onPass: () => { if (D2T.state.run) { D2T.state.run.step = 'squad'; D2T.save(); } D2T.go('squad'); } },
           onConfirm: (p) => {
@@ -141,9 +141,6 @@
           }
         });
         api.el.classList.add('sp-reveal');
-        // inside a run the club colour is the accent for the main button
-        api.el.querySelector('.sp-main').style.setProperty('--sp-btn', accent);
-        api.el.querySelector('.sp-main').style.setProperty('--sp-btn-ink', ink);
       };
       intr = intro(body, () => { intr = null; build(); });
     },
