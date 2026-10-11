@@ -20,7 +20,8 @@ A mobile web football game. The page is built: edit `src/` and `data/`, then run
 
 - Pure and deterministic: every random draw comes from `stream(seed, purpose, step)`, so the same seed and choices replay identically. No clock, DOM or storage in the engine.
 - A run: club roll (3 relegated club-seasons, respins cost one of 5) → formation and XI from the real squad (the rest is forgotten) → 17 rolls: 3 pre-season, 1 every 3 games, 3 before the club's first January match, then 1 every 3 games (`schedule`).
-- Each roll is three cards from the same season (10+ league games, never your own squad, never a player seen before in the run). Levels: bronze, silver, gold, best (one per club, purple), legend (the rated data's best seasons, rare). Odds in `RULES.levelOdds`.
+- Each roll is three cards from the same season (10+ league games, never your own squad, never a player seen before in the run). Levels (Craig, 11 Oct): bronze under 70, silver 70 to 79, gold 80+, purple = the season's top 5 players league-wide, legend = the top 3 players of every season (102 cards, rarer than purple; ids `L:<name>:<season>`, older saved runs' `L:<name>` resolve to his best legend card). Odds in `RULES.levelOdds`, balanced with `node tests/calibrate-all.js`.
+- January movers: one card with both clubs, in the order he played for them; `m2` is his first game for the second club (from the match line-ups, `data/source/moves.json`). The card shows your club if he is in your squad, otherwise the club he was at on the current match date (`E.clubAt`), and signing him raids that club.
 - Positions: the data has GK, DEF, MID and FWD only, so fit is judged on the broad position (green same, amber neighbour at 90%, red at 70%). Slots keep detailed labels for when detailed positions arrive.
 - Matches: Poisson goals from attack v defence and midfield gaps, fitted to every real result (`tests/fit-match.js`, `RULES.match`). Opponents use their real squad's best XI minus anyone you've signed.
 - Raids: signing a player lowers his club's strength from that date; each of its later real wins or draws can be downgraded with chance 3 x the strength lost (`otherResults`). Everyone else's results stay as history.
@@ -43,10 +44,10 @@ A mobile web football game. The page is built: edit `src/` and `data/`, then run
 ## Data
 
 - `data/source/pl_results.csv` and `pl_players.csv` come from Tenaball (two sources each, see the READMEs there).
-- Ratings: `data/ratings/rated_fit_*.json` from the D2T player data work (provisional copies for 9 seasons). Seasons without one use a fallback model scaled to the same spread, marked `src: "f"` and shown as provisional on the card.
+- Ratings: `data/ratings/rated_fit_*.json` from the D2T player data work, every season 1992/93 to 2025/26 (method in `docs/cards/RATINGS_TEST.md`, built by `tools/rate_v5.py` and `tools/fit_panel.py` on the player data branch). The fallback model in `build-data.py` only applies if a season's file is missing (`src: "f"`, shown as provisional).
 - Club accents in `data/source/clubs.json` (`accent`, `ink`, `text`); every `text` passes 4.5:1 on black.
 - Crests are trademarks: fine for the family version, replace before any public release.
 
 ## Tests
 
-`node tests/engine.test.js`, `node tests/ui.test.js` (needs Playwright's Chromium), `node tests/calibrate.js <season> <club> <runs>` for balance.
+`node tests/engine.test.js`, `node tests/ui.test.js` (needs Playwright's Chromium), `node tests/calibrate.js <season> <club> <runs>` for one club, `node tests/calibrate-all.js [runs per club]` for balance across every relegated club-season.

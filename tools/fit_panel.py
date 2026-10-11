@@ -168,12 +168,12 @@ def band(v):
 # 96 to 97; only an outstanding season (about 103 before the curve, Henry 2003/04) reaches 99.
 # One curve for every player and season: values up to 82 are unchanged, 82 to the 90 line are
 # lifted, and above it the scale is squeezed (95.5 -> 96, 100.7 -> 97, 103 -> 99). The 90 line
-# may move between 86.6 and 89.8 per season so that 6 to 8 players clear 90 (seasons differ in depth).
+# may move between 83.0 and 89.8 per season (1992/93, with no earlier seasons, needs the low end) so that 6 to 8 players clear 90 (seasons differ in depth).
 def card_curve(v):
     def apply(t90):
         return np.interp(v, [0, 82, t90, 95.5, 100.7, 103, 200], [0, 82, 89.5, 96, 97, 99, 99])
     best = None
-    for t90 in np.arange(86.6, 89.81, 0.05):
+    for t90 in np.arange(83.0, 89.81, 0.05):
         c = int(np.sum(np.round(apply(t90)) >= 90))
         score = (0 if 6 <= c <= 8 else 1, abs(c - 7), abs(t90 - 87.8))
         if best is None or score < best[0]:

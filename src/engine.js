@@ -46,7 +46,7 @@ const RULES = {
   januaryRolls: 3,
   rollEvery: 3,
   minApps: 10,
-  levelOdds: [0.40, 0.35, 0.19, 0.05, 0.01],   // bronze silver gold best (purple) legend; tuned so strong runs win the title about 2% of the time across seasons
+  levelOdds: [0.53, 0.32, 0.125, 0.02, 0.005], // bronze silver gold purple (season's top 5) legend (top 3 of every season); greedy runs win the title 2.3% across all 103 club-seasons (tests/calibrate-all.js)
   fit: { green: 1, amber: 0.9, red: 0.7 },
   raidFactor: 3,           // chance a raided club's win/draw is downgraded = factor x strength lost
   raidCap: 0.6,

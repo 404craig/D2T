@@ -60,7 +60,7 @@ for fx in fixtures:
     mdate = datetime.datetime.fromtimestamp(_ms / 1000, datetime.timezone.utc).strftime("%Y-%m-%d") if _ms else ""
     tname = {k: v["team"]["name"] for k, v in teams.items()}
     home_id = int(fx["teams"][0]["team"]["id"])
-    ev = fx.get("events") or []
+    ev = [e for e in (fx.get("events") or []) if (e.get("clock") or {}).get("secs") is not None]  # skip events with no clock time
     end = max([e["clock"]["secs"] for e in ev if e.get("type") == "PE"] or [5400]) / 60
     end = max(end, 90)
     goals = []  # (minute, team that scored)

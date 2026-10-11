@@ -60,7 +60,7 @@
 "clubPos": 2,
 "player": "Kolo Toure",
 "pos": "MID",
-"ovr": 85,
+"ovr": 86,
 "tier": "gold",
 "stats": {
 "AST": 40,
@@ -114,7 +114,7 @@
 "clubPos": 2,
 "player": "Lauren",
 "pos": "MID",
-"ovr": 84,
+"ovr": 85,
 "tier": "gold",
 "stats": {
 "AST": 63,
@@ -382,7 +382,7 @@
 "clubPos": 2,
 "player": "Jose Antonio Reyes",
 "pos": "FWD",
-"ovr": 84,
+"ovr": 83,
 "tier": "gold",
 "stats": {
 "GOL": 69,
@@ -700,8 +700,8 @@
 "clubPos": 2,
 "player": "Sol Campbell",
 "pos": "DEF",
-"ovr": 79,
-"tier": "silver",
+"ovr": 80,
+"tier": "gold",
 "stats": {
 "CLN": 77,
 "THR": 59,
@@ -1494,7 +1494,7 @@
 "clubPos": 10,
 "player": "Jlloyd Samuel",
 "pos": "DEF",
-"ovr": 76,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "CLN": 71,
@@ -2026,7 +2026,7 @@
 "clubPos": 10,
 "player": "Darius Vassell",
 "pos": "FWD",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "GOL": 45,
@@ -3621,8 +3621,8 @@
 "clubPos": 12,
 "player": "Muzzy Izzet",
 "pos": "MID",
-"ovr": 70,
-"tier": "silver",
+"ovr": 69,
+"tier": "bronze",
 "stats": {
 "AST": 59,
 "GOL": 68,
@@ -3675,7 +3675,7 @@
 "clubPos": 12,
 "player": "Mehdi Nafti",
 "pos": "MID",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "AST": 47,
@@ -3992,7 +3992,7 @@
 "clubPos": 15,
 "player": "Brett Emerton",
 "pos": "MID",
-"ovr": 76,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "AST": 62,
@@ -4257,7 +4257,7 @@
 "clubPos": 15,
 "player": "Steven Reid",
 "pos": "MID",
-"ovr": 75,
+"ovr": 76,
 "tier": "silver",
 "stats": {
 "AST": 73,
@@ -5160,7 +5160,7 @@
 "clubPos": 15,
 "player": "Jay McEveley",
 "pos": "DEF",
-"ovr": 62,
+"ovr": 63,
 "tier": "bronze",
 "stats": {
 "CLN": 36,
@@ -5584,7 +5584,7 @@
 "clubPos": 6,
 "player": "Gary Speed",
 "pos": "MID",
-"ovr": 80,
+"ovr": 81,
 "tier": "best",
 "stats": {
 "AST": 65,
@@ -5638,7 +5638,7 @@
 "clubPos": 6,
 "player": "Bruno N'Gotty",
 "pos": "DEF",
-"ovr": 78,
+"ovr": 79,
 "tier": "silver",
 "stats": {
 "CLN": 58,
@@ -5743,8 +5743,8 @@
 "clubPos": 6,
 "player": "Kevin Nolan",
 "pos": "MID",
-"ovr": 79,
-"tier": "silver",
+"ovr": 80,
+"tier": "gold",
 "stats": {
 "AST": 53,
 "GOL": 71,
@@ -5797,7 +5797,7 @@
 "clubPos": 6,
 "player": "Kevin Davies",
 "pos": "FWD",
-"ovr": 80,
+"ovr": 81,
 "tier": "gold",
 "stats": {
 "GOL": 53,
@@ -7546,7 +7546,7 @@
 "clubPos": 11,
 "player": "Shaun Bartlett",
 "pos": "FWD",
-"ovr": 74,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "GOL": 55,
@@ -7811,7 +7811,7 @@
 "clubPos": 11,
 "player": "Kevin Lisbie",
 "pos": "FWD",
-"ovr": 67,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "GOL": 38,
@@ -8182,7 +8182,7 @@
 "clubPos": 1,
 "player": "Claude Makelele",
 "pos": "MID",
-"ovr": 88,
+"ovr": 89,
 "tier": "gold",
 "stats": {
 "AST": 49,
@@ -8449,7 +8449,7 @@
 "clubPos": 1,
 "player": "Paulo Ferreira",
 "pos": "DEF",
-"ovr": 83,
+"ovr": 82,
 "tier": "gold",
 "stats": {
 "CLN": 90,
@@ -9403,7 +9403,7 @@
 "clubPos": 1,
 "player": "Mikael Forssell",
 "pos": "FWD",
-"ovr": 68,
+"ovr": 69,
 "tier": "bronze",
 "stats": {
 "GOL": 70,
@@ -9772,8 +9772,8 @@
 "clubPos": 18,
 "player": "Fitz Hall",
 "pos": "DEF",
-"ovr": 69,
-"tier": "bronze",
+"ovr": 70,
+"tier": "silver",
 "stats": {
 "CLN": 58,
 "THR": 57,
@@ -11042,7 +11042,7 @@
 "clubPos": 18,
 "player": "Neil Shipperley",
 "pos": "FWD",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "GOL": 45,
@@ -11359,7 +11359,7 @@
 "clubPos": 4,
 "player": "David Weir",
 "pos": "DEF",
-"ovr": 76,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "CLN": 69,
@@ -11624,7 +11624,7 @@
 "clubPos": 4,
 "player": "Leon Osman",
 "pos": "MID",
-"ovr": 76,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "AST": 55,
@@ -11784,7 +11784,7 @@
 "clubPos": 4,
 "player": "James McFadden",
 "pos": "FWD",
-"ovr": 65,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "GOL": 32,
@@ -13583,7 +13583,7 @@
 "clubPos": 5,
 "player": "John Arne Riise",
 "pos": "MID",
-"ovr": 90,
+"ovr": 89,
 "tier": "best",
 "stats": {
 "AST": 80,
@@ -13903,7 +13903,7 @@
 "clubPos": 5,
 "player": "Milan Baros",
 "pos": "FWD",
-"ovr": 81,
+"ovr": 80,
 "tier": "gold",
 "stats": {
 "GOL": 74,
@@ -14906,7 +14906,7 @@
 "clubPos": 5,
 "player": "John Welsh",
 "pos": "DEF",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "CLN": 82,
@@ -14959,7 +14959,7 @@
 "clubPos": 5,
 "player": "Darren Potter",
 "pos": "MID",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "AST": 57,
@@ -15384,7 +15384,7 @@
 "clubPos": 8,
 "player": "Danny Mills",
 "pos": "DEF",
-"ovr": 75,
+"ovr": 74,
 "tier": "silver",
 "stats": {
 "CLN": 58,
@@ -15491,7 +15491,7 @@
 "clubPos": 8,
 "player": "Paul Bosvelt",
 "pos": "MID",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "AST": 41,
@@ -17298,7 +17298,7 @@
 "clubPos": 3,
 "player": "Louis Saha",
 "pos": "FWD",
-"ovr": 74,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "GOL": 60,
@@ -17934,7 +17934,7 @@
 "clubPos": 7,
 "player": "Stewart Downing",
 "pos": "MID",
-"ovr": 78,
+"ovr": 77,
 "tier": "silver",
 "stats": {
 "AST": 94,
@@ -18782,7 +18782,7 @@
 "clubPos": 7,
 "player": "Ugo Ehiogu",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "CLN": 70,
@@ -19842,7 +19842,7 @@
 "clubPos": 14,
 "player": "Craig Bellamy",
 "pos": "FWD",
-"ovr": 77,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "GOL": 65,
@@ -19894,7 +19894,7 @@
 "clubPos": 14,
 "player": "Olivier Bernard",
 "pos": "DEF",
-"ovr": 74,
+"ovr": 75,
 "tier": "silver",
 "stats": {
 "CLN": 47,
@@ -20214,7 +20214,7 @@
 "clubPos": 14,
 "player": "Steven Taylor",
 "pos": "DEF",
-"ovr": 68,
+"ovr": 67,
 "tier": "bronze",
 "stats": {
 "CLN": 64,
@@ -20428,7 +20428,7 @@
 "clubPos": 14,
 "player": "Peter Ramage",
 "pos": "DEF",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "CLN": 81,
@@ -20586,7 +20586,7 @@
 "clubPos": 14,
 "player": "Michael Chopra",
 "pos": "FWD",
-"ovr": 63,
+"ovr": 64,
 "tier": "bronze",
 "stats": {
 "GOL": 50,
@@ -21534,7 +21534,7 @@
 "clubPos": 19,
 "player": "Jason Shackell",
 "pos": "DEF",
-"ovr": 66,
+"ovr": 65,
 "tier": "bronze",
 "stats": {
 "CLN": 77,
@@ -21852,7 +21852,7 @@
 "clubPos": 19,
 "player": "Ian Henderson",
 "pos": "FWD",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "GOL": 50,
@@ -22430,7 +22430,7 @@
 "clubPos": 16,
 "player": "Gary O'Neil",
 "pos": "MID",
-"ovr": 70,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "AST": 57,
@@ -22857,7 +22857,7 @@
 "clubPos": 16,
 "player": "Richard Hughes",
 "pos": "MID",
-"ovr": 65,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "AST": 44,
@@ -23548,7 +23548,7 @@
 "clubPos": 20,
 "player": "Paul Telfer",
 "pos": "MID",
-"ovr": 72,
+"ovr": 73,
 "tier": "silver",
 "stats": {
 "AST": 53,
@@ -23654,7 +23654,7 @@
 "clubPos": 20,
 "player": "Peter Crouch",
 "pos": "FWD",
-"ovr": 77,
+"ovr": 78,
 "tier": "best",
 "stats": {
 "GOL": 82,
@@ -23866,7 +23866,7 @@
 "clubPos": 20,
 "player": "Danny Higginbotham",
 "pos": "DEF",
-"ovr": 67,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "CLN": 49,
@@ -24716,7 +24716,7 @@
 "clubPos": 20,
 "player": "Jason Dodd",
 "pos": "DEF",
-"ovr": 69,
+"ovr": 68,
 "tier": "bronze",
 "stats": {
 "CLN": 71,
@@ -24769,7 +24769,7 @@
 "clubPos": 20,
 "player": "Kasey Keller",
 "pos": "GK",
-"ovr": 65,
+"ovr": 66,
 "tier": "bronze",
 "stats": {
 "CLN": 50,
@@ -25034,7 +25034,7 @@
 "clubPos": 20,
 "player": "Kenwyne Jones",
 "pos": "FWD",
-"ovr": 63,
+"ovr": 62,
 "tier": "bronze",
 "stats": {
 "GOL": 49,
@@ -25191,7 +25191,7 @@
 "clubPos": 9,
 "player": "Paul Robinson",
 "pos": "GK",
-"ovr": 77,
+"ovr": 78,
 "tier": "silver",
 "stats": {
 "CLN": 61,
@@ -26785,7 +26785,7 @@
 "clubPos": 17,
 "player": "Zoltan Gera",
 "pos": "FWD",
-"ovr": 72,
+"ovr": 71,
 "tier": "silver",
 "stats": {
 "GOL": 49,
