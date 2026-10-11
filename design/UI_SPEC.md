@@ -6,7 +6,7 @@ Where this spec and the current build differ, this spec is the newer decision. W
 
 ## 1. Look
 
-- **Home is green, everything else is black.** Home uses an FC-style green: a soft vertical gradient (`#12F06C` → `#5CF79F` → `#9DF4D8`), one broad light beam from top left, a thin line across, and a dark streak bottom right (reference: `design/reference/fc27_green.png`). Buttons on home are black with white text. Every other screen is pure black.
+- **Only the opening and the home screen are green; every other screen is black.** They use an FC-style green: a soft vertical gradient (`#12F06C` → `#5CF79F` → `#9DF4D8`), one broad light beam from top left, a thin line across, and a dark streak bottom right (reference: `design/reference/fc27_green.png`). Buttons on home are black with white text. Every other screen is pure black.
 - **Logos:** long DROP2TOP on home (black on green). Inside the game, the short D2T logo, small and white, top left (tap = home). An account circle (person icon) top right on every screen except home.
 - **Accent:** inside a run, the club's colour is the only accent (buttons, highlights, the player's row in tables). Lime `#D4FF00` is the D2T accent outside a run (for example the Spin button before a club is picked).
 - **Type:** Exo 2 throughout, Black Italic for headlines and numbers.
