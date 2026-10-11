@@ -87,13 +87,18 @@
     { t: 'translate(-50%,-50%) rotate(0deg) translateY(-6px)', z: 3 },
     { t: 'translate(-50%,-50%) rotate(13deg) translateY(6px)', z: 2 }
   ];
+  // Always three clearly different club colours: a new card's accent must be far enough from the other two.
   const fanUsed = new Set();
-  const fanCard = () => {
+  const rgb = (h) => { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255]; };
+  const far = (a, b) => { const x = rgb(a), y = rgb(b); return Math.hypot(x[0] - y[0], x[1] - y[1], x[2] - y[2]) >= 110; };
+  const fanPick = (avoid = []) => {
     const pool = D2T.game.pool; let c, n = 0;
-    do { c = pool[Math.floor(Math.random() * pool.length)]; } while (fanUsed.has(c.key) && ++n < 20);
+    do { c = pool[Math.floor(Math.random() * pool.length)]; } while ((fanUsed.has(c.key) || avoid.some((x) => !far(x, c.accent))) && ++n < 200);
     fanUsed.add(c.key); if (fanUsed.size > 12) fanUsed.delete(fanUsed.values().next().value);
-    return D2T.cards.club(c, { w: 84, delay: Math.random() * 3 });
+    return c;
   };
+  const fanCard = (c) => `<span class="fr-fan-c" data-acc="${c.accent}">${D2T.cards.club(c, { w: 84, delay: Math.random() * 3 })}</span>`;
+  const fanStart = () => { const out = []; for (let i = 0; i < 3; i++) out.push(fanPick(out.map((c) => c.accent))); return out; };
   let fanTimer = 0;
   let idleTimer = 0, idleFirst = 0;
 
@@ -104,7 +109,7 @@
       const body = D2T.h(`<div class="screen-body fr-home">
         <div class="fr-home-top"><button class="fr-home-logo" aria-label="DROP2TOP">${homeLogo()}</button></div>
         <button class="fr-card-btn fr-pick fr-classic fr-in" data-act="pick" data-mode="classic">
-          <span class="fr-fan" aria-hidden="true">${FAN_POS.map((p, i) => `<span class="fr-fan-s" style="transform:${p.t};z-index:${p.z}">${fanCard()}</span>`).join('')}</span>
+          <span class="fr-fan" aria-hidden="true">${fanStart().map((c, i) => `<span class="fr-fan-s" style="transform:${FAN_POS[i].t};z-index:${FAN_POS[i].z}">${fanCard(c)}</span>`).join('')}</span>
           <span class="fr-classic-txt"><span class="fr-tag" style="display:block">CLASSIC</span><span class="fr-big" style="display:block">Pick a new club</span><span class="fr-sub" style="display:block">Take them from the drop to the top.</span>
           <span class="fr-spin">Spin for a club ${ARROW}</span></span></button>
         ${continueCards()}
@@ -162,7 +167,17 @@
           turn = (turn + 1) % 3;
           const slots = [...fan.children];
           slots.forEach((el, i) => { const p = FAN_POS[(i + turn) % 3]; el.style.transform = p.t; el.style.zIndex = p.z; });
-          setTimeout(() => { const back = slots.find((el) => el.style.zIndex === '1'); if (back && root.isConnected) back.innerHTML = fanCard(); }, 900);
+          // once the move has settled, cross-fade the card now at the back into a new club (never a snap)
+          setTimeout(() => {
+            const back = slots.find((el) => el.style.zIndex === '1'); if (!back || !root.isConnected) return;
+            const others = slots.filter((el) => el !== back).map((el) => el.querySelector('.fr-fan-c:last-child').dataset.acc);
+            const oldC = back.querySelector('.fr-fan-c:last-child'), next = D2T.h(fanCard(fanPick(others)));
+            next.classList.add('fr-fan-in'); back.appendChild(next);
+            const t = { duration: 900, easing: 'ease-in-out', fill: 'forwards' };
+            next.animate([{ opacity: 0 }, { opacity: 1 }], t);
+            oldC.animate([{ opacity: 1 }, { opacity: 0 }], t);
+            setTimeout(() => { oldC.remove(); next.classList.remove('fr-fan-in'); }, 950);
+          }, 900);
         }
         fanTimer = setTimeout(shuffle, 10000 + Math.random() * 5000);
       };
