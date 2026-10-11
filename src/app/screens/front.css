@@ -199,3 +199,13 @@
 .fr-pin-in { letter-spacing: .4em; font-size: 20px; }
 .fr-msg.ok { color: var(--soft); }
 .btn-green:disabled { opacity: .5; }
+
+/* home logo in two pieces: the emblem turns on its own; a green glint sweeps across both */
+.fr-hl { position: relative; display: block; width: 100%; aspect-ratio: 1301 / 237; }
+.fr-hl-p { position: absolute; display: block; overflow: hidden; background: #fff; -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+.fr-hl-emb { transform-origin: 50% 50.6%; will-change: transform; }
+.fr-hl-s { position: absolute; display: block; transform: translateX(-62%); pointer-events: none;
+  background: linear-gradient(105deg, rgba(18,240,108,0) 38%, rgba(18,240,108,.9) 45%, #9DF4D8 49%, #12F06C 52%, rgba(18,240,108,0) 60%); }
+.fr-dream { min-height: 104px; margin-top: 12px; }
+.fr-dream .fr-big { font-size: 26px; }
+.fr-dream .fr-mark { opacity: 0.14; }

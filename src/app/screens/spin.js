@@ -283,20 +283,21 @@
     mount(root) {
       const GAME = D2T.game, SND = window.D2TSound || { play() {} };
       if (!D2T.state.run || !GAME.eng() || GAME.eng().phase !== 'clubroll') GAME.newRun();
-      const st = D2T.state.run, eng = GAME.eng();
+      const st = D2T.state.run, eng = GAME.eng(), dream = GAME.mode() === 'dare2dream';
       root.appendChild(D2T.topbar());
+      const goal = (c) => (c.pos === 1 ? 'Win the league again' : `Finish ${D2T.ordinal(GAME.target(c.pos))} or better`);
       api = mount(root, {
-        kicker: 'New run · Classic', title: 'Pick your club',
-        sub: 'Three clubs that went down. Pick one and take it from the drop to the top.',
-        pool: GAME.pool,
-        render: (c, w) => D2T.cards.club(c, { w }),
+        kicker: `New run · ${GAME.modeName()}`, title: 'Pick your club',
+        sub: dream ? 'Three clubs from any season. Finish higher than they really did, or win the league again if they won it.' : 'Three clubs that went down. Pick one and take it from the drop to the top.',
+        pool: GAME.spinPool(),
+        render: (c, w) => D2T.cards.club(c, { w, footLabel: dream ? 'TO BEAT' : undefined }),
         pick: () => { SND.play('roll3'); return GAME.offer(); },
         settled: st.spun ? GAME.offer() : null,
         onSettled: () => { st.spun = true; D2T.save(); },
         accent: (c) => ({ accent: c.accent, ink: c.ink }),
         caption: (c) => c.code,
         details: (c) => `<div class="sp-det-name">${D2T.esc(c.full)}</div><div class="sp-det-line">${c.season} · Real finish ${D2T.ordinal(c.pos)} · ${c.gf} scored, ${c.ga} conceded</div>
-          <div class="sp-det-grid"><span class="sp-det-stat"><b>${c.w}</b><i>WON</i></span><span class="sp-det-stat"><b>${c.d}</b><i>DRAWN</i></span><span class="sp-det-stat"><b>${c.l}</b><i>LOST</i></span><span class="sp-det-stat"><b>${c.pts}</b><i>POINTS</i></span></div>`,
+          <div class="sp-det-grid"><span class="sp-det-stat"><b>${c.w}</b><i>WON</i></span><span class="sp-det-stat"><b>${c.d}</b><i>DRAWN</i></span><span class="sp-det-stat"><b>${c.l}</b><i>LOST</i></span><span class="sp-det-stat"><b>${c.pts}</b><i>POINTS</i></span></div>${dream ? `<div class="sp-det-badges"><span>Target: ${goal(c)}</span></div>` : ''}`,
         mainLabel: 'Spin', pickLabel: 'Pick a club', spinningLabel: 'Spinning',
         selectedLabel: () => 'Play',
         hintIdle: 'Hit Spin to see who you get', hintSettled: 'Tap a club to pick it', hintSelected: 'Tap it again for the full card, or hit Play',

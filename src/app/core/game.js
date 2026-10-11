@@ -19,8 +19,25 @@
     return Object.assign({}, GAME.club(c.club), { key: c.key, season: c.season, pos: c.pos, pts: c.pts, w: rel.w, d: rel.d, l: rel.l, gf: rel.gf, ga: rel.ga });
   });
   GAME.pool = pool;
-  GAME.poolEntry = (key) => pool.find((p) => p.key === key);
+  // Dare2Dream: every club in every season, with the finish they really had.
+  const allPool = (G.clubSeasons || []).map((c) => Object.assign({}, GAME.club(c.club), { key: c.key, season: c.season, pos: c.pos, pts: c.pts, w: c.w, d: c.d, l: c.l, gf: c.gf, ga: c.ga }));
+  const byKey = new Map(allPool.concat(pool).map((p) => [p.key, p]));
+  GAME.allPool = allPool;
+  GAME.poolEntry = (key) => byKey.get(key);
   D2T.data = { clubs, relegatedPool: pool };
+
+  // ---------- modes ----------
+  // classic: a relegated club, achievements for how high you take them. dare2dream: any club, beat their real finish
+  // (or win the league again if they won it).
+  GAME.MODES = {
+    classic: { name: 'Classic', catalogue: () => G.catalogue, pool: () => pool },
+    dare2dream: { name: 'Dare2Dream', catalogue: () => G.clubSeasons, pool: () => allPool }
+  };
+  GAME.mode = () => { const e = GAME.eng(); return (e && e.mode) || 'classic'; };
+  GAME.modeName = (m) => (GAME.MODES[m || GAME.mode()] || GAME.MODES.classic).name;
+  // The finish a Dare2Dream run must reach: better than history, or first again for real champions.
+  GAME.target = (histPos) => (histPos <= 1 ? 1 : histPos - 1);
+  GAME.dreamMet = (finish, histPos) => finish <= GAME.target(histPos);
 
   // ---------- legends: the best Premier League seasons in the fully rated data ----------
   const LEGENDS = (() => {
@@ -61,18 +78,20 @@
   // Build 3 held a signing on the squad screen; now you sign straight from the roll, so an open hold goes back to it.
   if (D2T.state.run && D2T.state.run.pending != null) { D2T.state.run.pending = null; D2T.state.run.step = 'transfer'; D2T.save(); }
   GAME.S = () => { const e = GAME.eng(); return e && e.seasonKey ? GAME.season(e.seasonKey) : null; };
-  GAME.newRun = () => {
+  GAME.newRun = (mode = 'classic') => {
+    const M = GAME.MODES[mode] || GAME.MODES.classic;
     const seed = 'r' + Date.now().toString(36) + Math.floor(Math.random() * 1e9).toString(36);
-    D2T.state.run = { step: 'spin', eng: E.newRun({ seed, catalogue: G.catalogue }), spun: false };
+    D2T.state.run = { step: 'spin', eng: E.newRun({ seed, mode, catalogue: M.catalogue() }), spun: false };
     D2T.save();
     return D2T.state.run;
   };
   GAME.offer = () => GAME.eng().clubOffer.map(GAME.poolEntry);
-  GAME.respinClubs = () => { const ok = E.respinClubs(GAME.eng(), G.catalogue); D2T.save(); return ok; };
+  GAME.respinClubs = () => { const ok = E.respinClubs(GAME.eng(), (GAME.MODES[GAME.mode()] || GAME.MODES.classic).catalogue()); D2T.save(); return ok; };
+  GAME.spinPool = () => (GAME.MODES[GAME.mode()] || GAME.MODES.classic).pool();
   GAME.chooseClub = (key) => {
     const eng = GAME.eng(), entry = GAME.poolEntry(key), S = GAME.season(entry.season);
     const club = S.clubs.findIndex((c) => c.name === entry.name);
-    E.chooseClub(eng, S, S.relegated.find((r) => r.c === club));
+    E.chooseClub(eng, S, S.relegated.find((r) => r.c === club) || { c: club, f: '4-4-2', xi: [] });
     eng.formation = eng.formation || '4-4-2';
     D2T.state.run.step = 'table'; D2T.state.run.tableSeen = false;
     D2T.save();
@@ -228,20 +247,32 @@
     const run = D2T.state.run, eng = GAME.eng(), S = GAME.S(), F = eng.final;
     if (!F || run.recorded) return F;
     run.recorded = true;
-    const name = GAME.clubName(), n = S.clubs.length, rel = S.relegationPlaces || 3;
-    const rec = D2T.state.record;
-    rec.runs.push({ key: `${S.season}:${name}`, season: S.season, club: name, finish: F.finish, rise: F.rise, pts: F.pts, histFinish: F.histFinish,
-      drop: F.finish <= n - rel, half: F.finish <= n / 2, top3: F.finish <= 3, title: F.finish === 1, at: new Date().toISOString().slice(0, 10) });
-    const k = `${S.season}:${name}`, c = rec.clubs[k] || { runs: 0, finish: 99, rise: -99 };
-    c.runs++; c.finish = Math.min(c.finish, F.finish); c.rise = Math.max(c.rise, F.rise); rec.clubs[k] = c;
+    const name = GAME.clubName(), n = S.clubs.length, rel = S.relegationPlaces || 3, mode = GAME.mode();
+    const rec = D2T.state.record, k = `${S.season}:${name}`;
+    const entry = { key: k, mode, season: S.season, club: name, finish: F.finish, rise: F.rise, pts: F.pts, histFinish: F.histFinish,
+      drop: F.finish <= n - rel, half: F.finish <= n / 2, top3: F.finish <= 3, title: F.finish === 1, at: new Date().toISOString().slice(0, 10) };
+    if (mode === 'dare2dream') entry.dream = GAME.dreamMet(F.finish, F.histFinish);
+    rec.runs.push(entry);
+    const book = mode === 'dare2dream' ? (rec.dreamClubs = rec.dreamClubs || {}) : rec.clubs;
+    const c = book[k] || { runs: 0, finish: 99, rise: -99 };
+    c.runs++; c.finish = Math.min(c.finish, F.finish); c.rise = Math.max(c.rise, F.rise);
+    if (entry.dream) c.dream = true;
+    book[k] = c;
     D2T.save();
     return F;
   };
-  // Cumulative counts (Craig, 11 Oct): a title also counts as top 3, top half and beating the drop.
+  // Classic's record. Cumulative counts (Craig, 11 Oct): a title also counts as top 3, top half and beating the drop.
+  // Dare2Dream runs are kept apart: rescuing a relegated club is what these counts are about.
+  const classicRuns = () => D2T.state.record.runs.filter((r) => !r.mode || r.mode === 'classic');
   GAME.record = () => {
-    const runs = D2T.state.record.runs;
+    const runs = classicRuns();
     return { runs: runs.length, drop: runs.filter((r) => r.drop).length, half: runs.filter((r) => r.half).length,
       top3: runs.filter((r) => r.top3).length, titles: runs.filter((r) => r.title).length,
       bestRise: runs.length ? Math.max(...runs.map((r) => r.rise)) : null };
+  };
+  GAME.classicRuns = classicRuns;
+  GAME.dreamRecord = () => {
+    const runs = D2T.state.record.runs.filter((r) => r.mode === 'dare2dream');
+    return { runs: runs.length, dreams: runs.filter((r) => r.dream).length, bestRise: runs.length ? Math.max(...runs.map((r) => r.rise)) : null };
   };
 })();

@@ -198,7 +198,30 @@ fs.mkdirSync(OUT, { recursive: true });
   await expectScreen("spin");
   check(await page.evaluate(() => window.D2T.game.eng().phase === "clubroll"), "play again did not start a new run");
 
+  // ---------- Dare2Dream: any club, beat their real finish ----------
+  const classicBefore = await page.evaluate(() => JSON.stringify(window.D2T.game.record()));
+  await page.evaluate(() => window.D2T.go("home")); await wait(900);
+  await page.click('[data-act="pick"][data-mode="dare2dream"]');
+  await page.waitForSelector(".sheet [data-k='yes']", { timeout: 2000 }).then(() => page.click(".sheet [data-k='yes']")).catch(() => {});
+  await expectScreen("spin");
+  check(await page.evaluate(() => window.D2T.game.mode() === "dare2dream"), "Dare2Dream run did not start in its mode");
+  await wait(700); await page.click(".sp-main");
+  await page.waitForFunction(() => window.D2T.state.run.spun === true, null, { timeout: 8000 });
+  await wait(400); await shot("30-d2d-spin");
+  check(await page.evaluate(() => window.D2T.game.offer().every((c) => c && c.key && window.D2T_GAME.clubSeasons.some((x) => x.key === c.key))), "Dare2Dream offer not from every club-season");
+  await page.click(".sp-slot >> nth=0"); await wait(300); await page.click(".sp-main");
+  await expectScreen("table"); await page.click(".actionbar button"); await wait(400);
+  check(/dream|Beat it|Do it again/i.test(await page.textContent(".se-fin")), "table does not show the Dare2Dream target");
+  await page.click(".actionbar button"); await expectScreen("squad"); await wait(600);
+  check(/Target/.test(await page.textContent(".se-sqsub")), "squad does not show the target");
+  await shot("31-d2d-squad");
+  await page.evaluate(() => { const G = window.D2T.game; G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
+  await expectScreen("summary"); await wait(1200); await shot("32-d2d-summary");
+  check(/Dream achieved|Fell short/.test(await page.textContent(".sm-head")), "Dare2Dream summary has no dream result");
+  check(await page.evaluate(() => window.D2T.game.dreamRecord().runs === 1), "Dare2Dream run not recorded");
+  check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, classicBefore), "Dare2Dream run changed Classic's record");
+
   await browser.close();
   if (errors.length) { console.log("FAIL\n" + errors.join("\n")); process.exit(1); }
-  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls (tap, drag, pass), fixtures, live match, refresh, season, summary, record, back, account, other screens");
+  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls (tap, drag, pass), fixtures, live match, refresh, season, summary, record, back, account, other screens, Dare2Dream");
 })().catch((e) => { console.error(e); process.exit(1); });
