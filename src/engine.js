@@ -122,8 +122,14 @@ function playerOf(S, id, legends) {
   legends = legends || S.legends;
   const ix = indexSeason(S);
   if (ix.byId.has(id)) return ix.byId.get(id);
-  if (legends && String(id).startsWith("L:")) return legends.find(l => l.id === id) || null;
+  // Legend ids are "L:<name>:<season>"; runs saved before that used "L:<name>" (the alias of his best card).
+  if (legends && String(id).startsWith("L:")) return legends.find(l => l.id === id) || legends.find(l => l.alias === id) || null;
   return null;
+}
+// The club a player was at on a date: a January mover belongs to his second club from his first game for it (m2).
+function clubAt(p, date) {
+  if (!p) return null;
+  return p.c2 != null && p.m2 && date && date >= p.m2 ? p.c2 : p.c;
 }
 
 /* ---------- strengths ---------- */
@@ -386,10 +392,11 @@ function sign(st, S, cardId, slot) {
   const out = st.xi[slot];
   st.xi[slot] = cardId;
   const p = playerOf(S, cardId, S.legends);
-  st.signed.push({ id: cardId, gw: st.gw, slot, out, from: p ? p.c : null, date: st.fixtures[st.gw - 1].date });
+  const sdate = st.fixtures[st.gw - 1].date;
+  st.signed.push({ id: cardId, gw: st.gw, slot, out, from: p ? clubAt(p, sdate) : null, date: sdate });
   if (p && p.c != null && !String(cardId).startsWith("L:")) {
     st.gone.push(cardId);
-    st.raids.push({ club: p.c, date: st.fixtures[st.gw - 1].date, gw: st.gw });
+    st.raids.push({ club: clubAt(p, sdate), date: sdate, gw: st.gw });
   }
   finishRoll(st, S);
   st.log.push(["sign", cardId, slot]);
@@ -587,7 +594,7 @@ function seasonSummary(S, st) {
 
 const API = {
   RULES, LEVELS, POS, NEAR, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
-  fitOf, effRating, indexSeason, playerOf, xiStrength, userStrength, clubXI, clubStrength,
+  fitOf, effRating, indexSeason, playerOf, clubAt, xiStrength, userStrength, clubXI, clubStrength,
   schedule, fixturesOf, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
   draftOrder, draftSlot, draftFormation, draftPick,
   startSeason, inWindow, currentWindow, newRoll, respinCards, signPreview, sign, pass,
