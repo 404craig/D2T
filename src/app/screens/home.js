@@ -48,7 +48,7 @@
     const dark = lum(a) > 0.33, txt = dark ? (lum(c.ink) < 0.08 ? c.ink : '#0A0A0A') : '#FFFFFF';
     const paint = `--face:linear-gradient(100deg, ${mix(a, '#FFFFFF', 0.4)} 0%, ${a} 30%, ${a} 55%, ${mix(a, '#000000', 0.45)} 100%);--rim:linear-gradient(170deg, ${mix(a, '#FFFFFF', 0.7)}, ${mix(a, '#000000', 0.4)});--txt:${txt};--glowc:${a}44;--track:${dark ? 'rgba(0,0,0,0.18)' : 'rgba(255,255,255,0.25)'};--tsh:${dark ? 'none' : '0 2px 8px rgba(0,0,0,0.4)'};--goBg:${dark ? '#0A0A0A' : '#FFFFFF'};--goFg:${dark ? '#FFFFFF' : '#0A0A0A'}`;
     return `<button class="fr-card-btn fr-cont fr-in" style="${paint}" data-act="${act}" aria-label="Continue with ${D2T.esc(c.full)} ${data.season}, ${where}">
-      <span class="fr-cont-tex"></span><span class="fr-cont-hi"></span><span class="d2t-shine slow" style="${shineBeat()}"></span><span class="fr-cont-crest"><img src="${c.crestLight || c.crest}" alt=""></span>
+      <span class="fr-cont-tex"></span><span class="fr-cont-hi"></span><span class="d2t-shine slow" style="${shineBeat()}"></span><span class="fr-cont-crest"><img src="${c.crestCard || c.crestLight || c.crest}" alt=""></span>
       <span class="fr-cont-txt"><span class="fr-cont-lbl">CONTINUE · ${label}</span><span class="fr-cont-name" style="display:block">${D2T.esc(c.name)}</span>
       <span class="fr-cont-meta" style="display:block">${data.season} · ${where}</span>
       <span class="fr-cont-bar" style="display:block"><i style="transform:scaleX(${Math.max(0.03, played / games)})"></i></span></span>
