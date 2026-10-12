@@ -279,7 +279,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await expectScreen("summary"); await wait(900); await shot("40-daily-summary");
   check(await page.evaluate(() => !!window.D2T.game.dailyResult()), "the daily result was not recorded");
   await page.click('[data-act="again"]'); await expectScreen("home"); await wait(800);
-  check(/Done/.test(await page.textContent(".fr-daily .fr-sub")), "home does not show today's daily as done");
+  check(/Done/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not show today's daily as done");
   check(!!(await page.$('[data-act="continue-other"]')), "the parked run has no Continue card after the daily");
 
   // ---------- 433 Goals: spin, pick, refresh keeps the three, 11 shirts, result recorded apart ----------

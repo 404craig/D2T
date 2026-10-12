@@ -121,6 +121,11 @@ Today a bronze or silver card is rarely wanted. Options, best first:
 - Kits: club stripes, hoops, halves and sleeves, darker outlines instead of white on most (patterns and second colours are design choices, not from a checked source).
 - Night stadium pitch, burst reveal, straight names, never a circle round a ?. Live as `src/app/screens/goals.js` (build 25). Options page: `design/prototype/goals433.html`.
 
+## 8e. Other games (build 28, chosen 12 Oct)
+
+- Section title "Other games". Option A: each card washed in its game's colour from the right, thin rim, faded mark on the right, button bottom right; all the same shape and height.
+- Daily Challenge white (date in the tag, club over season as the title, today's crest in full colour at the Club X badge's size), Dare2Dream blue, Club X green, 433 Goals orange ("Score exactly 433 goals"), Tenaball purple (opens https://404craig.github.io/Tenaball/). Options page: `design/prototype/modes-colour.html`.
+
 ## 9. How the prototype behaves (built 11 Oct)
 
 - **Intro:** short black D2T, emblem spins as it opens into DROP2TOP at 75% width, then the slogan types in (DROP and TOP reversed out), then the logo glides up into the green home. About 5 seconds, tap to skip, first launch only.

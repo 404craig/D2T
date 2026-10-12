@@ -239,3 +239,23 @@
 @media (prefers-reduced-motion: reduce) { .fr-fan-s { transition: none; } }
 .fr-clubx .fr-mark { width: 104px; right: -10px; opacity: 0.22; }
 .fr-clubx .fr-mark img { display: block; width: 100%; height: auto; }
+
+/* Other games (chosen 12 Oct, option A): one card shape; the game's colour (--c) washes in from the right with a thin rim,
+   its mark faded behind on the right. Today's daily crest is in full colour. */
+.fr-gm { box-sizing: border-box; color: #fff; min-height: 140px; padding: 18px 70px 18px 18px; border: 0; isolation: isolate; margin-top: 12px; text-decoration: none;
+  background: linear-gradient(100deg, var(--ink) 0%, var(--ink) 38%, color-mix(in srgb, var(--c) 30%, var(--ink)) 100%); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 45%, transparent); }
+.fr-gm::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, rgba(255,255,255,0) 2px 7px); }
+.fr-sect .fr-gm:first-of-type { margin-top: 2px; }
+.fr-gm-txt { display: block; position: relative; }
+.fr-gm-txt > span { display: block; }
+.fr-gm .fr-tag { font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--c); }
+.fr-gm .fr-big { font: 900 italic 26px/.95 var(--font); text-transform: uppercase; margin-top: 6px; }
+.fr-gm .fr-sub { font-size: 14px; font-weight: 600; color: #CFCFD6; margin-top: 7px; line-height: 1.35; }
+.fr-gm .fr-go { position: absolute; right: 16px; bottom: 16px; width: 40px; height: 40px; border-radius: 50%; background: var(--c); color: #0A0A0A; display: grid; place-items: center; }
+.fr-gm-mark { position: absolute; right: -14px; top: 50%; transform: translateY(-50%) rotate(-8deg); min-width: 120px; height: 120px; color: var(--c); opacity: .3; z-index: -1; display: grid; place-items: center; pointer-events: none; }
+.fr-gm-mark .logo-mask { width: 120px; }
+.fr-gm-mark img { width: 110px; height: auto; opacity: .9; }
+.fr-gm-433 { font: 900 italic 84px/1 var(--font); -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px currentColor; }
+/* the daily's crest at the Club X badge's size (a little wider: most crests are wider than tall), in full colour */
+.fr-gm-daily .fr-gm-mark { opacity: 1; }
+.fr-gm-daily .fr-gm-mark img.fr-gm-crest { width: 124px; height: 144px; object-fit: contain; opacity: 1; filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }

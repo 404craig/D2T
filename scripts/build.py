@@ -56,13 +56,16 @@ def main():
                 sounds[os.path.splitext(name)[0]] = f"data:audio/{kind};base64," + b64(os.path.join(sound_dir, name))
     badge_path = os.path.join(ROOT, "assets", "brand", "club_x.png")  # Craig's Club X badge (11 Oct)
     badge = "data:image/png;base64," + b64(badge_path) if os.path.exists(badge_path) else ""
+    tena_path = os.path.join(ROOT, "assets", "brand", "tenaball.png")  # Tenaball's ball for its card on home (12 Oct)
+    tena = "data:image/png;base64," + b64(tena_path) if os.path.exists(tena_path) else ""
     icon_path = os.path.join(ROOT, "assets", "icon-180.png")
     icon = "data:image/png;base64," + b64(icon_path) if os.path.exists(icon_path) else ""
 
     j = lambda o: json.dumps(o, separators=(",", ":"))
     data = (f"window.D2T_GAME={game};\nwindow.D2T_CRESTS={j(crests)};\n"
             f"window.D2T_LOGOS={j(logos)};\nwindow.D2T_SOUNDS={j(sounds)};"
-            + (f"\nwindow.D2T_CLUBX_BADGE={j(badge)};" if badge else ""))
+            + (f"\nwindow.D2T_CLUBX_BADGE={j(badge)};" if badge else "")
+            + (f"\nwindow.D2T_TENABALL_LOGO={j(tena)};" if tena else ""))
     out = html.replace("/*@CSS@*/", css).replace("/*@DATA@*/", data).replace("/*@JS@*/", js)
     out = out.replace("@BUILD@", version).replace("@ICON@", icon)
     left = re.findall(r"/\*@[A-Z]+@\*/", out)

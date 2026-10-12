@@ -52,15 +52,22 @@
       <span class="fr-go">${ARROW}</span></button>`;
   }
 
+  // Other games cards (chosen 12 Oct, option A): every card the same shape, its game's colour washing in from the right
+  // with a thin rim, the game's mark faded behind on the right. Daily white, Dare2Dream blue, Club X green, 433 orange, Tenaball purple.
+  const gameCard = ({ c, attrs, tag, big, sub, mark, cls = '', label, href }) => {
+    const inner = `<span class="fr-gm-mark" aria-hidden="true">${mark}</span>
+      <span class="fr-gm-txt"><span class="fr-tag">${tag}</span><span class="fr-big">${big}</span><span class="fr-sub">${sub}</span></span>
+      <span class="fr-go">${ARROW}</span>`;
+    return href ? `<a class="fr-card-btn fr-gm ${cls}" style="--c:${c}" href="${href}" target="_blank" rel="noopener" aria-label="${label}">${inner}</a>`
+      : `<button class="fr-card-btn fr-gm ${cls}" style="--c:${c}" ${attrs} aria-label="${label}">${inner}</button>`;
+  };
+
   // 433 Goals card (orange): carry on a game in progress, or your best so far.
   function g433Card() {
     const g = D2T.state.g433, n = g && g.filled ? g.filled.length : 0, rec = D2T.game.g433.record();
     const sub = n > 0 && n < 11 ? `Carry on: ${n} of 11 shirts, ${g.filled.reduce((t, p) => t + p.goals, 0)} goals so far.`
       : rec.games ? `Your best: ${rec.best === 0 ? 'exactly 433' : rec.best + ' away'}.${rec.exact ? ` Hit 433 ${rec.exact} ${rec.exact === 1 ? 'time' : 'times'}.` : ''}` : 'Spin 11 real players. Their Premier League goals must add up to 433.';
-    return `<button class="fr-card-btn fr-pick fr-dream fr-g4" data-act="g433" aria-label="433 Goals">
-      <span class="fr-g4-mark" aria-hidden="true">433</span>
-      <span><span class="fr-tag" style="display:block">433 GOALS</span><span class="fr-big" style="display:block">Hit exactly 433</span><span class="fr-sub" style="display:block">${sub}</span></span>
-      <span class="fr-go">${ARROW}</span></button>`;
+    return gameCard({ c: '#FF7A1A', attrs: 'data-act="g433"', label: '433 Goals', tag: '433 GOALS', big: 'Score exactly 433 goals', sub, mark: '<span class="fr-gm-433">433</span>' });
   }
 
   // Daily challenge card: today's club for everyone, the mode it plays, and your result once played.
@@ -68,10 +75,10 @@
     const G = D2T.game, d = G.dailyEntry(G.today()), res = G.dailyResult(), streak = G.dailyStreak();
     const goal = d.mode === 'classic' ? 'Classic: they went down. Rescue them.' : `Dare2Dream: draft from zero and beat ${D2T.ordinal(d.pos)}.`;
     const sub = res ? `Done: ${D2T.ordinal(res.finish)} (${res.rise > 0 ? '+' : ''}${res.rise}). Next one at midnight.` : goal;
-    return `<button class="fr-card-btn fr-pick fr-daily" data-act="daily" aria-label="${G.dailyName(d.date)}, ${D2T.esc(d.full || d.name)} ${d.season}">
-      <span class="fr-daily-crest"><img src="${d.crest}" alt=""></span>
-      <span><span class="fr-tag" style="display:block">${G.dailyName(d.date).toUpperCase()}${streak ? ` · ${streak} DAY STREAK` : ''}</span><span class="fr-big" style="display:block">${D2T.esc(d.name)} ${d.season}</span><span class="fr-sub" style="display:block">${sub}</span></span>
-      <span class="fr-go">${ARROW}</span></button>`;
+    // white, the date in the top row, today's crest in full colour where the other games keep their mark
+    const tag = G.dailyName(d.date, true).toUpperCase().replace('CHALLENGE ', 'CHALLENGE · ') + (streak ? ` · ${streak} DAY STREAK` : '');
+    return gameCard({ c: '#FFFFFF', cls: 'fr-gm-daily', attrs: 'data-act="daily"', label: `${G.dailyName(d.date)}, ${D2T.esc(d.full || d.name)} ${d.season}`,
+      tag, big: `${D2T.esc(d.name)}<br>${d.season}`, sub, mark: `<img class="fr-gm-crest" src="${d.crest}" alt="">` });
   }
   function dailyDone() {
     const G = D2T.game, r = G.dailyResult(), d = G.dailyEntry(G.today());
@@ -128,18 +135,13 @@
         <section class="fr-sect fr-in" aria-label="Your record">
           <div class="fr-sect-h"><h2>Your record</h2><span>${rec.runs} runs</span></div>
           ${D2T.frRecord(rec, 'dark')}</section>
-        <section class="fr-sect fr-in" aria-label="Other game modes">
-          <div class="fr-sect-h"><h2>Other modes</h2></div>
+        <section class="fr-sect fr-in" aria-label="Other games">
+          <div class="fr-sect-h"><h2>Other games</h2></div>
         ${dailyCard()}
-        <button class="fr-card-btn fr-pick fr-dream" data-act="pick" data-mode="dare2dream">
-          <span class="fr-mark">${D2T.logo('emblemLine')}</span>
-          <span><span class="fr-tag" style="display:block">DARE2DREAM</span><span class="fr-big" style="display:block">Any club, no players</span><span class="fr-sub" style="display:block">Draft your XI, then beat their real finish.${dreams.runs ? ` ${dreams.dreams} of ${dreams.runs} dreams so far.` : ''}</span></span>
-          <span class="fr-go">${ARROW}</span></button>
-        <button class="fr-card-btn fr-pick fr-dream fr-clubx" data-act="pick" data-mode="clubx">
-          <span class="fr-mark"><img src="${D2T.game.club('Club X').crest}" alt=""></span>
-          <span><span class="fr-tag" style="display:block">CLUB X</span><span class="fr-big" style="display:block">Replace the bottom club</span><span class="fr-sub" style="display:block">Draft 11 from scratch, then win the league.${xr.runs ? ` ${xr.titles} ${xr.titles === 1 ? 'title' : 'titles'} from ${xr.runs} ${xr.runs === 1 ? 'go' : 'goes'}.` : ''}</span></span>
-          <span class="fr-go">${ARROW}</span></button>
+        ${gameCard({ c: '#3BA4FF', attrs: 'data-act="pick" data-mode="dare2dream"', label: 'Dare2Dream', tag: 'DARE2DREAM', big: 'Any club, no players', sub: `Draft your XI, then beat their real finish.${dreams.runs ? ` ${dreams.dreams} of ${dreams.runs} dreams so far.` : ''}`, mark: D2T.logo('emblemLine') })}
+        ${gameCard({ c: '#12F06C', attrs: 'data-act="pick" data-mode="clubx"', label: 'Club X', tag: 'CLUB X', big: 'Replace the bottom club', sub: `Draft 11 from scratch, then win the league.${xr.runs ? ` ${xr.titles} ${xr.titles === 1 ? 'title' : 'titles'} from ${xr.runs} ${xr.runs === 1 ? 'go' : 'goes'}.` : ''}`, mark: `<img src="${D2T.game.club('Club X').crest}" alt="">` })}
         ${g433Card()}
+        ${gameCard({ c: '#A66BFF', href: 'https://404craig.github.io/Tenaball/', label: 'Tenaball, opens in a new tab', tag: 'TENABALL', big: 'Name the top ten', sub: 'Our football quiz. Opens Tenaball.', mark: `<img src="${window.D2T_TENABALL_LOGO || ''}" alt="">` })}
           <div class="fr-sect-h fr-soon-h"><span>Coming soon</span></div>
           <div class="fr-modes">${MODES.map((m) => `<button class="fr-mode" aria-label="${m.name}, coming soon">
             <span class="fr-back" style="display:block"><span class="fr-back-rim"></span><span class="fr-back-face"></span>${D2T.logo('emblemLine')}<span class="fr-stamp">COMING SOON</span></span>
