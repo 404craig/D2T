@@ -11,14 +11,14 @@
   // the pitch for a formation (UI_SPEC 8f): labels per line, spaced up to 25% apart, the outer pair of a 4 or 5 line 2% higher
   const LABELS = { DEF: { 3: ['CB', 'CB', 'CB'], 4: ['LB', 'CB', 'CB', 'RB'], 5: ['LWB', 'CB', 'CB', 'CB', 'RWB'] }, MID: { 2: ['CM', 'CM'], 3: ['CM', 'CM', 'CM'], 4: ['LM', 'CM', 'CM', 'RM'], 5: ['LM', 'CM', 'CM', 'CM', 'RM'] }, FWD: { 1: ['ST'], 2: ['ST', 'ST'], 3: ['LW', 'ST', 'RW'], 4: ['LW', 'ST', 'ST', 'RW'] } };
   const slotsFor = (f) => {
-    const [d, m, a] = String(f).split('').map(Number), out = [['GK', 'GK', 50, 87.5]];
-    [[d, 'DEF', 67], [m, 'MID', 43], [a, 'FWD', 17]].forEach(([n, pos, y]) => {
+    const sh = D2T.game.g433.shape(f), out = [['GK', 'GK', 50, 87.5]];
+    [[sh.DEF, 'DEF', 67], [sh.MID, 'MID', 43], [sh.FWD, 'FWD', 17]].forEach(([n, pos, y]) => {
       const gap = n === 1 ? 0 : Math.min(25, 76 / (n - 1));
       LABELS[pos][n].forEach((lab, i) => out.push([lab, pos, 50 + (i - (n - 1) / 2) * gap, y + (n >= 4 && (i === 0 || i === n - 1) ? -2 : 0)]));
     });
     return out;
   };
-  const shapeText = (f) => String(f).split('').join('-');
+  const shapeText = (f) => D2T.game.g433.shapeText(f);
   // this game's target and pitch (set from the saved formation on mount and for each new game)
   let TARGET = 433, FORM = '433', SLOTS = slotsFor('433');
   const setShape = (f) => { FORM = String(f); TARGET = +FORM; SLOTS = slotsFor(FORM); };
@@ -115,11 +115,10 @@
     const tr = host.querySelector('.g4-track'), s = barState(t), o = tr.querySelector('.ovr');
     tr.querySelector('.fill').style.width = (s.fill * 100) + '%'; tr.querySelector('.mark').style.left = (s.mark * 100) + '%';
     o.style.left = (s.mark * 100) + '%'; o.style.width = (s.ovr * 100) + '%';
-    tr.querySelector('.mark').dataset.t = TARGET;
     host.querySelector('.tnum').textContent = t; setGap(host, t);
   }
   // the tally (UI_SPEC 8f): "38 goals to go" in yellow under "Player 7 of 11", and the big scored number over "/352 GOALS"
-  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = toGo(v); host.querySelector('.ttarget').textContent = '/' + TARGET; g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v !== TARGET && Math.abs(v - TARGET) <= 20); }
+  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = toGo(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v !== TARGET && Math.abs(v - TARGET) <= 20); }
 
   const COLORS = ['#FFD21F', '#FFB000', '#FFFFFF', '#FFE375'];
   const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5"/></svg>';
@@ -189,7 +188,7 @@
           const n = count[SLOTS[+nm.parentElement.dataset.slot][1]];
           if (n < 2) return;
           const room = pw * Math.min(25, 76 / (n - 1)) / 100 - 6;
-          for (let fs = 9.5; fs > 6.5 && nm.scrollWidth > room; fs -= 0.5) nm.style.fontSize = fs - 0.5 + 'px';
+          const w = nm.scrollWidth; if (w > room) nm.style.fontSize = Math.max(6.5, 9.5 * room / w).toFixed(1) + 'px';   // one read, one write
         });
       };
       // with a player selected, the open shirts he fits pulse and the rest of the open ones step back
@@ -229,6 +228,7 @@
       }
       function render() {
         trioEl.innerHTML = S.cands ? trioLanded() : trioMyst();   // the trio first: the pitch takes the height that is left
+        wrap.querySelector('.ttarget').textContent = '/' + TARGET;
         sizePitch(); drawPitch(); setTally(total());
         idleUI();
       }
@@ -547,11 +547,10 @@
       // a dim layer, "THIS GAME'S TARGET", the eight formations rolling through the big number, slowing to stop on this one
       function reveal() {
         if (S.revealed) return;
-        S.revealed = true; save();
-        if (reduced) return;
+        if (reduced) { S.revealed = true; save(); return; }
         busy = true;
         const F = G4.FORMATIONS, end = Math.max(0, F.indexOf(FORM)), last = F.length * 2 + end;
-        const el = D2T.h(`<div class="g4-reveal" role="button" aria-label="This game's target is ${TARGET}: line up ${shapeText(FORM)}. Tap to start"><small>THIS GAME'S TARGET</small><b>${F[0]}</b><span>Line up ${shapeText(FORM)} · score ${TARGET}</span><div class="roll">${F.map((f) => `<i data-f="${f}">${f}</i>`).join('')}</div></div>`);
+        const el = D2T.h(`<div class="g4-reveal" role="button" tabindex="0" aria-label="This game's target is ${TARGET}: line up ${shapeText(FORM)}. Tap to start"><small>THIS GAME'S TARGET</small><b>${F[0]}</b><span>Line up ${shapeText(FORM)} · score ${TARGET}</span><div class="roll">${F.map((f) => `<i data-f="${f}">${f}</i>`).join('')}</div></div>`);
         wrap.appendChild(el);
         const big = el.querySelector('b'), chips = [...el.querySelectorAll('.roll i')], line = el.querySelector('span');
         line.style.opacity = 0;
@@ -559,10 +558,12 @@
         let k = 0, over = false;
         const finish = () => {
           if (over) return; over = true;
+          S.revealed = true; save();                         // seen: leaving mid-roll shows it again next time
           el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 320, fill: 'forwards' });
           later(() => { el.remove(); if (!root.isConnected) return; busy = false; idleUI(); }, 330);
         };
-        el.onclick = finish;
+        el.onclick = finish; el.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); finish(); } };
+        later(() => el.focus({ preventScroll: true }), 50);
         const step = () => {
           if (over || !root.isConnected) return;
           const f = F[k % F.length];

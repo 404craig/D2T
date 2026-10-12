@@ -49,22 +49,17 @@
     pickFormation: () => GAME.g433.FORMATIONS[Math.floor(Math.random() * GAME.g433.FORMATIONS.length)],
     shape: (f) => { const [d, m, a] = String(f).split('').map(Number); return { GK: 1, DEF: d, MID: m, FWD: a }; },
     depth: (f) => GAME.g433.DEPTH[f] || GAME.g433.TOP,
-    gift: (f) => (GAME.g433.GIFTS[f] != null ? GAME.g433.GIFTS[f] : GAME.g433.GIFT),
+    gift: (f) => (GAME.g433.GIFTS[f] != null ? GAME.g433.GIFTS[f] : 0.2),
+    shapeText: (f) => String(f).split('').join('-'),
     list: (pos) => g4lists[pos] || (g4lists[pos] = G4[pos].map(([name, sur, club, goals]) => ({ name, sur, club, goals, pos }))),
-    // three different players of a position from its 220 top scorers, never one already in your XI
-    draw(pos, avoid = []) {
-      const L = GAME.g433.list(pos), n = Math.min(L.length, GAME.g433.TOP), out = [];
-      let guard = 0;
-      while (out.length < 3 && guard++ < 500) { const p = L[Math.floor(Math.random() * n)]; if (!out.includes(p) && !avoid.includes(p.name)) out.push(p); }
-      return out;
-    },
     // Every spin (Craig, 12 Oct): three players from any position still open on the board, each position as likely as
     // its open shirts. On the last shot, if a player of that position has exactly the goals needed, one game in five
     // (GIFT, decided once per game, so respins keep it) puts him among the three. Balanced with a simulation of
-    // 40,000 games: a player who roughly knows career goals is offered the exact one about 1 game in 7.
-    GIFT: 0.2,
-    drawOpen(openPos, avoid = [], need = null, f) {
-      const slots = [], out = [], top = f ? GAME.g433.depth(f) : GAME.g433.TOP, pickFrom = (pos) => GAME.g433.list(pos).slice(0, top);
+    // 20,000 games per shape (tests/sim-goalrush.js): a casual player lands exactly about 1 game in 20, one who roughly
+    // knows career goals about 1 in 10. The formation is required: it sets the pool depth and the gift chance.
+    drawOpen(openPos, avoid, need, f) {
+      avoid = avoid || [];
+      const slots = [], out = [], top = GAME.g433.depth(f), pickFrom = (pos) => GAME.g433.list(pos).slice(0, top);
       Object.keys(openPos).forEach((pos) => { for (let i = 0; i < openPos[pos]; i++) slots.push(pos); });
       if (!slots.length) return out;
       if (need != null) { const hits = pickFrom(slots[0]).filter((p) => p.goals === need && !avoid.includes(p.name)); if (hits.length) out.push(hits[Math.floor(Math.random() * hits.length)]); }
@@ -73,10 +68,11 @@
       for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
       return out;
     },
-    canGift: (pos, need, avoid = [], f) => need >= 0 && GAME.g433.list(pos).slice(0, f ? GAME.g433.depth(f) : GAME.g433.TOP).some((p) => p.goals === need && !avoid.includes(p.name)),
-    record: () => Object.assign({ games: 0, exact: 0, best: null, bestTotal: null, last: null }, D2T.state.record.g433 || {}),
+    canGift: (pos, need, avoid, f) => need >= 0 && GAME.g433.list(pos).slice(0, GAME.g433.depth(f)).some((p) => p.goals === need && !avoid.includes(p.name)),
+    // a best or last from 433 Goals has no target saved: it was 433
+    record: () => { const r = Object.assign({ games: 0, exact: 0, best: null, bestTotal: null, last: null }, D2T.state.record.g433 || {}); if (r.best != null && !r.bestTarget) r.bestTarget = 433; if (r.last != null && !r.lastTarget) r.lastTarget = 433; return r; },
     // the record carries on from 433 Goals: best is "N away" whatever the target
-    finish(total, target = GAME.g433.TARGET) {
+    finish(total, target) {
       const r = GAME.g433.record(), gap = Math.abs(total - target), newBest = r.best == null || gap < r.best;
       r.games += 1; if (gap === 0) r.exact += 1;
       if (newBest) { r.best = gap; r.bestTotal = total; r.bestTarget = target; }

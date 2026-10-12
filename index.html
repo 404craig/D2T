@@ -973,7 +973,6 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .g4-track .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; background: linear-gradient(90deg, #FFB000, var(--g4)); width: 0; }
 .g4-track .ovr { position: absolute; top: 0; bottom: 0; border-radius: 0 5px 5px 0; background: repeating-linear-gradient(135deg, #8E8E99 0 4px, #6E6E78 4px 8px); width: 0; }
 .g4-track .mark { position: absolute; top: -4px; bottom: -4px; left: 100%; width: 2px; margin-left: -1px; background: #FFF; border-radius: 1px; }
-.g4-track .mark::after { content: none; position: absolute; bottom: -11px; right: 4px; font: 900 italic 9px/1 'Exo 2', sans-serif; color: #FFF; opacity: .7; }
 .g4-track .ghost { position: absolute; top: 0; bottom: 0; right: 0; border-radius: 0 5px 5px 0; background: rgba(255,255,255,.35); }
 .g4-track.glow .fill { box-shadow: 0 0 14px rgba(255,200,61,.9); background: linear-gradient(90deg, #FFB020, var(--g4-gold)); }
 
@@ -2629,22 +2628,17 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
     pickFormation: () => GAME.g433.FORMATIONS[Math.floor(Math.random() * GAME.g433.FORMATIONS.length)],
     shape: (f) => { const [d, m, a] = String(f).split('').map(Number); return { GK: 1, DEF: d, MID: m, FWD: a }; },
     depth: (f) => GAME.g433.DEPTH[f] || GAME.g433.TOP,
-    gift: (f) => (GAME.g433.GIFTS[f] != null ? GAME.g433.GIFTS[f] : GAME.g433.GIFT),
+    gift: (f) => (GAME.g433.GIFTS[f] != null ? GAME.g433.GIFTS[f] : 0.2),
+    shapeText: (f) => String(f).split('').join('-'),
     list: (pos) => g4lists[pos] || (g4lists[pos] = G4[pos].map(([name, sur, club, goals]) => ({ name, sur, club, goals, pos }))),
-    // three different players of a position from its 220 top scorers, never one already in your XI
-    draw(pos, avoid = []) {
-      const L = GAME.g433.list(pos), n = Math.min(L.length, GAME.g433.TOP), out = [];
-      let guard = 0;
-      while (out.length < 3 && guard++ < 500) { const p = L[Math.floor(Math.random() * n)]; if (!out.includes(p) && !avoid.includes(p.name)) out.push(p); }
-      return out;
-    },
     // Every spin (Craig, 12 Oct): three players from any position still open on the board, each position as likely as
     // its open shirts. On the last shot, if a player of that position has exactly the goals needed, one game in five
     // (GIFT, decided once per game, so respins keep it) puts him among the three. Balanced with a simulation of
-    // 40,000 games: a player who roughly knows career goals is offered the exact one about 1 game in 7.
-    GIFT: 0.2,
-    drawOpen(openPos, avoid = [], need = null, f) {
-      const slots = [], out = [], top = f ? GAME.g433.depth(f) : GAME.g433.TOP, pickFrom = (pos) => GAME.g433.list(pos).slice(0, top);
+    // 20,000 games per shape (tests/sim-goalrush.js): a casual player lands exactly about 1 game in 20, one who roughly
+    // knows career goals about 1 in 10. The formation is required: it sets the pool depth and the gift chance.
+    drawOpen(openPos, avoid, need, f) {
+      avoid = avoid || [];
+      const slots = [], out = [], top = GAME.g433.depth(f), pickFrom = (pos) => GAME.g433.list(pos).slice(0, top);
       Object.keys(openPos).forEach((pos) => { for (let i = 0; i < openPos[pos]; i++) slots.push(pos); });
       if (!slots.length) return out;
       if (need != null) { const hits = pickFrom(slots[0]).filter((p) => p.goals === need && !avoid.includes(p.name)); if (hits.length) out.push(hits[Math.floor(Math.random() * hits.length)]); }
@@ -2653,10 +2647,11 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
       for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
       return out;
     },
-    canGift: (pos, need, avoid = [], f) => need >= 0 && GAME.g433.list(pos).slice(0, f ? GAME.g433.depth(f) : GAME.g433.TOP).some((p) => p.goals === need && !avoid.includes(p.name)),
-    record: () => Object.assign({ games: 0, exact: 0, best: null, bestTotal: null, last: null }, D2T.state.record.g433 || {}),
+    canGift: (pos, need, avoid, f) => need >= 0 && GAME.g433.list(pos).slice(0, GAME.g433.depth(f)).some((p) => p.goals === need && !avoid.includes(p.name)),
+    // a best or last from 433 Goals has no target saved: it was 433
+    record: () => { const r = Object.assign({ games: 0, exact: 0, best: null, bestTotal: null, last: null }, D2T.state.record.g433 || {}); if (r.best != null && !r.bestTarget) r.bestTarget = 433; if (r.last != null && !r.lastTarget) r.lastTarget = 433; return r; },
     // the record carries on from 433 Goals: best is "N away" whatever the target
-    finish(total, target = GAME.g433.TARGET) {
+    finish(total, target) {
       const r = GAME.g433.record(), gap = Math.abs(total - target), newBest = r.best == null || gap < r.best;
       r.games += 1; if (gap === 0) r.exact += 1;
       if (newBest) { r.best = gap; r.bestTotal = total; r.bestTarget = target; }
@@ -3212,7 +3207,7 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
   // Goal Rush card (yellow, was 433 Goals; UI_SPEC 8f): carry on a game in progress, or your best so far.
   function g433Card() {
     const g = D2T.state.g433, n = g && g.filled ? g.filled.length : 0, rec = D2T.game.g433.record();
-    const shape = g && g.formation ? String(g.formation).split('').join('-') : '';
+    const shape = g && g.formation ? D2T.game.g433.shapeText(g.formation) : '';
     const sub = 'A random formation each game. Pick 11 real players whose career goals add up to it exactly.' + (n > 0 && n < 11 ? ` Carry on: ${shape ? shape + ', ' : ''}${n} of 11 picked.`
       : rec.games ? ` Your best: ${rec.best === 0 ? 'exactly on target' : rec.best + ' away'}.` : '');
     return gameCard({ c: '#FFD21F', attrs: 'data-act="g433"', label: 'Goal Rush', tag: 'GOAL RUSH', big: 'Score the exact number of goals', sub, mark: `<img src="${window.D2T_GOALRUSH_LOGO || ''}" alt="">` });
@@ -5188,14 +5183,14 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
   // the pitch for a formation (UI_SPEC 8f): labels per line, spaced up to 25% apart, the outer pair of a 4 or 5 line 2% higher
   const LABELS = { DEF: { 3: ['CB', 'CB', 'CB'], 4: ['LB', 'CB', 'CB', 'RB'], 5: ['LWB', 'CB', 'CB', 'CB', 'RWB'] }, MID: { 2: ['CM', 'CM'], 3: ['CM', 'CM', 'CM'], 4: ['LM', 'CM', 'CM', 'RM'], 5: ['LM', 'CM', 'CM', 'CM', 'RM'] }, FWD: { 1: ['ST'], 2: ['ST', 'ST'], 3: ['LW', 'ST', 'RW'], 4: ['LW', 'ST', 'ST', 'RW'] } };
   const slotsFor = (f) => {
-    const [d, m, a] = String(f).split('').map(Number), out = [['GK', 'GK', 50, 87.5]];
-    [[d, 'DEF', 67], [m, 'MID', 43], [a, 'FWD', 17]].forEach(([n, pos, y]) => {
+    const sh = D2T.game.g433.shape(f), out = [['GK', 'GK', 50, 87.5]];
+    [[sh.DEF, 'DEF', 67], [sh.MID, 'MID', 43], [sh.FWD, 'FWD', 17]].forEach(([n, pos, y]) => {
       const gap = n === 1 ? 0 : Math.min(25, 76 / (n - 1));
       LABELS[pos][n].forEach((lab, i) => out.push([lab, pos, 50 + (i - (n - 1) / 2) * gap, y + (n >= 4 && (i === 0 || i === n - 1) ? -2 : 0)]));
     });
     return out;
   };
-  const shapeText = (f) => String(f).split('').join('-');
+  const shapeText = (f) => D2T.game.g433.shapeText(f);
   // this game's target and pitch (set from the saved formation on mount and for each new game)
   let TARGET = 433, FORM = '433', SLOTS = slotsFor('433');
   const setShape = (f) => { FORM = String(f); TARGET = +FORM; SLOTS = slotsFor(FORM); };
@@ -5292,11 +5287,10 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
     const tr = host.querySelector('.g4-track'), s = barState(t), o = tr.querySelector('.ovr');
     tr.querySelector('.fill').style.width = (s.fill * 100) + '%'; tr.querySelector('.mark').style.left = (s.mark * 100) + '%';
     o.style.left = (s.mark * 100) + '%'; o.style.width = (s.ovr * 100) + '%';
-    tr.querySelector('.mark').dataset.t = TARGET;
     host.querySelector('.tnum').textContent = t; setGap(host, t);
   }
   // the tally (UI_SPEC 8f): "38 goals to go" in yellow under "Player 7 of 11", and the big scored number over "/352 GOALS"
-  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = toGo(v); host.querySelector('.ttarget').textContent = '/' + TARGET; g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v !== TARGET && Math.abs(v - TARGET) <= 20); }
+  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = toGo(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v !== TARGET && Math.abs(v - TARGET) <= 20); }
 
   const COLORS = ['#FFD21F', '#FFB000', '#FFFFFF', '#FFE375'];
   const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5"/></svg>';
@@ -5366,7 +5360,7 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
           const n = count[SLOTS[+nm.parentElement.dataset.slot][1]];
           if (n < 2) return;
           const room = pw * Math.min(25, 76 / (n - 1)) / 100 - 6;
-          for (let fs = 9.5; fs > 6.5 && nm.scrollWidth > room; fs -= 0.5) nm.style.fontSize = fs - 0.5 + 'px';
+          const w = nm.scrollWidth; if (w > room) nm.style.fontSize = Math.max(6.5, 9.5 * room / w).toFixed(1) + 'px';   // one read, one write
         });
       };
       // with a player selected, the open shirts he fits pulse and the rest of the open ones step back
@@ -5406,6 +5400,7 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
       }
       function render() {
         trioEl.innerHTML = S.cands ? trioLanded() : trioMyst();   // the trio first: the pitch takes the height that is left
+        wrap.querySelector('.ttarget').textContent = '/' + TARGET;
         sizePitch(); drawPitch(); setTally(total());
         idleUI();
       }
@@ -5724,11 +5719,10 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
       // a dim layer, "THIS GAME'S TARGET", the eight formations rolling through the big number, slowing to stop on this one
       function reveal() {
         if (S.revealed) return;
-        S.revealed = true; save();
-        if (reduced) return;
+        if (reduced) { S.revealed = true; save(); return; }
         busy = true;
         const F = G4.FORMATIONS, end = Math.max(0, F.indexOf(FORM)), last = F.length * 2 + end;
-        const el = D2T.h(`<div class="g4-reveal" role="button" aria-label="This game's target is ${TARGET}: line up ${shapeText(FORM)}. Tap to start"><small>THIS GAME'S TARGET</small><b>${F[0]}</b><span>Line up ${shapeText(FORM)} · score ${TARGET}</span><div class="roll">${F.map((f) => `<i data-f="${f}">${f}</i>`).join('')}</div></div>`);
+        const el = D2T.h(`<div class="g4-reveal" role="button" tabindex="0" aria-label="This game's target is ${TARGET}: line up ${shapeText(FORM)}. Tap to start"><small>THIS GAME'S TARGET</small><b>${F[0]}</b><span>Line up ${shapeText(FORM)} · score ${TARGET}</span><div class="roll">${F.map((f) => `<i data-f="${f}">${f}</i>`).join('')}</div></div>`);
         wrap.appendChild(el);
         const big = el.querySelector('b'), chips = [...el.querySelectorAll('.roll i')], line = el.querySelector('span');
         line.style.opacity = 0;
@@ -5736,10 +5730,12 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
         let k = 0, over = false;
         const finish = () => {
           if (over) return; over = true;
+          S.revealed = true; save();                         // seen: leaving mid-roll shows it again next time
           el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 320, fill: 'forwards' });
           later(() => { el.remove(); if (!root.isConnected) return; busy = false; idleUI(); }, 330);
         };
-        el.onclick = finish;
+        el.onclick = finish; el.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); finish(); } };
+        later(() => el.focus({ preventScroll: true }), 50);
         const step = () => {
           if (over || !root.isConnected) return;
           const f = F[k % F.length];

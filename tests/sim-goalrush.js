@@ -5,7 +5,7 @@ const G = require(require('path').join(__dirname, '..', 'data', 'game', 'game.js
 const TOP = 220; let POS = { GK: 1, DEF: 4, MID: 3, FWD: 3 }, T = 433;
 // pool depth per formation: each draws from that many top scorers per position, so a random XI lands near 77% of the
 // target for every shape (as 433 does with 220); five-at-the-back shapes need the deeper scorers cut off
-// last-shot gift chance per formation, so a player who roughly knows career goals hits it exactly about 1 game in 10
+// last-shot gift chance per formation: a casual player lands exactly about 1 game in 20, one who roughly knows career goals about 1 in 10
 const GIFT = { 442: 0.22, 433: 0.2, 451: 0.27, 352: 0.14, 343: 0.14, 424: 0.18, 532: 0.36, 541: 0.42 };
 const DEPTH = { 442: 180, 433: 220, 451: 145, 352: 310, 343: 355, 424: 260, 532: 105, 541: 75 };
 let L = {}, MEAN = {};

@@ -68,7 +68,7 @@
   // Goal Rush card (yellow, was 433 Goals; UI_SPEC 8f): carry on a game in progress, or your best so far.
   function g433Card() {
     const g = D2T.state.g433, n = g && g.filled ? g.filled.length : 0, rec = D2T.game.g433.record();
-    const shape = g && g.formation ? String(g.formation).split('').join('-') : '';
+    const shape = g && g.formation ? D2T.game.g433.shapeText(g.formation) : '';
     const sub = 'A random formation each game. Pick 11 real players whose career goals add up to it exactly.' + (n > 0 && n < 11 ? ` Carry on: ${shape ? shape + ', ' : ''}${n} of 11 picked.`
       : rec.games ? ` Your best: ${rec.best === 0 ? 'exactly on target' : rec.best + ' away'}.` : '');
     return gameCard({ c: '#FFD21F', attrs: 'data-act="g433"', label: 'Goal Rush', tag: 'GOAL RUSH', big: 'Score the exact number of goals', sub, mark: `<img src="${window.D2T_GOALRUSH_LOGO || ''}" alt="">` });

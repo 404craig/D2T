@@ -31,7 +31,6 @@
 .g4-track .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; background: linear-gradient(90deg, #FFB000, var(--g4)); width: 0; }
 .g4-track .ovr { position: absolute; top: 0; bottom: 0; border-radius: 0 5px 5px 0; background: repeating-linear-gradient(135deg, #8E8E99 0 4px, #6E6E78 4px 8px); width: 0; }
 .g4-track .mark { position: absolute; top: -4px; bottom: -4px; left: 100%; width: 2px; margin-left: -1px; background: #FFF; border-radius: 1px; }
-.g4-track .mark::after { content: none; position: absolute; bottom: -11px; right: 4px; font: 900 italic 9px/1 'Exo 2', sans-serif; color: #FFF; opacity: .7; }
 .g4-track .ghost { position: absolute; top: 0; bottom: 0; right: 0; border-radius: 0 5px 5px 0; background: rgba(255,255,255,.35); }
 .g4-track.glow .fill { box-shadow: 0 0 14px rgba(255,200,61,.9); background: linear-gradient(90deg, #FFB020, var(--g4-gold)); }
 
