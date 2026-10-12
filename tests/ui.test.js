@@ -320,7 +320,7 @@ fs.mkdirSync(OUT, { recursive: true });
   const LBL = { DEF: { 3: "CB CB CB", 4: "LB CB CB RB", 5: "LWB CB CB CB RWB" }, MID: { 2: "CM CM", 3: "CM CM CM", 4: "LM CM CM RM", 5: "LM CM CM CM RM" }, FWD: { 1: "ST", 2: "ST ST", 3: "LW ST RW", 4: "LW ST ST RW" } };
   const want = (f) => { const [d, m, a] = f.split("").map(Number); return ["GK", LBL.DEF[d], LBL.MID[m], LBL.FWD[a]].join(" "); };
   check(await page.evaluate((w) => [...document.querySelectorAll(".g4 .slotp")].length === 11 && [...document.querySelectorAll(".g4 .slotp text")].map((t) => t.textContent).join(" ") === w, want(form)), "Goal Rush: the pitch slots do not match " + form);
-  await page.click(".g4 .sp-main"); await wait(2900);
+  await page.click(".g4 .sp-main"); await wait(4800);
   const cands = await page.evaluate(() => window.D2T.state.g433.cands.map((p) => p.name).join());
   await page.reload(); await wait(6500); await page.evaluate(() => window.D2T.go("goals433")); await wait(900);
   check(await page.evaluate((c) => window.D2T.state.g433.cands.map((p) => p.name).join() === c, cands), "Goal Rush: a refresh changed the three shirts");
@@ -328,7 +328,7 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => document.querySelectorAll(".g4 .slotp.open .g4-shirt.next").length === 11), "Goal Rush: the open shirts are not all highlighted");
   check(await page.evaluate(() => { const s = window.D2T.state.g433; return s.cands.length === 3 && s.cands.every((c) => ["GK", "DEF", "MID", "FWD"].includes(c.pos)); }), "Goal Rush: a spin did not bring three players with positions");
   for (let i = 0; i < 11; i++) {
-    if (!(await page.$(".g4 [data-c]"))) { await page.click(".g4 .sp-main"); await wait(2900); }
+    if (!(await page.$(".g4 [data-c]"))) { await page.click(".g4 .sp-main"); await wait(4800); }
     await page.click('.g4 [data-c="0"]'); await wait(250);
     if (i === 0) {
       check(await page.evaluate(() => { const fit = [...document.querySelectorAll(".g4 .slotp.fit")]; return fit.length > 0 && document.querySelectorAll(".g4 .slotp.nofit").length + fit.length === 11; }), "Goal Rush: picking a player did not light his open shirts");
@@ -354,7 +354,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.click(".g4 .is-home"); await expectScreen("home"); await wait(600);
   check(await page.evaluate(() => !!window.D2T.state.g433 && window.D2T.state.g433.filled.length === 0) && !(await page.$(".sheet")), "Goal Rush: home before the first pick asked or lost the game");
   await page.click('[data-act="g433"]'); await expectScreen("goals433"); await wait(900);
-  await page.click(".g4 .sp-main"); await wait(2900); await page.click('.g4 [data-c="0"]'); await wait(250); await page.click(".g4 .slotp.fit >> nth=-1"); await wait(1800);
+  await page.click(".g4 .sp-main"); await wait(4800); await page.click('.g4 [data-c="0"]'); await wait(250); await page.click(".g4 .slotp.fit >> nth=-1"); await wait(1800);
   await page.click(".g4 .is-home"); await wait(500);
   check(!!(await page.$('.sheet [data-k="quit"]')) && /Leave the game/.test(await page.textContent(".sheet")), "Goal Rush: home with a game under way did not ask");
   await shot("52-goalrush-leave");
