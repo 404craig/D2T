@@ -1,0 +1,115 @@
+/* Unbeaten Run (screens/unbeaten.js): black, cyan #22D3EE as the mode colour, its mark faded behind. The header is laid out
+   like Goal Rush's (the stat on the left, the run's number on the right), two reels side by side, the D2T spin bar at the bottom. */
+.ub { --ub: #22D3EE; --ub-t: #8BE9F7; --ub-ink: #001A1F; --sp-btn: var(--ub); --sp-btn-ink: var(--ub-ink); }
+.ub-wrap { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+.ub-bgmark { position: absolute; right: -60px; top: 90px; width: 300px; height: 300px; color: var(--ub); opacity: .07; z-index: 0; pointer-events: none; }
+.ub-bgmark svg { width: 100%; height: 100%; }
+.ub-head, .ub-stage, .ub-hint, .ub-bar { position: relative; z-index: 1; }
+
+/* header: the stat, and the unbeaten run on the right */
+.ub-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 0 16px 6px; flex-shrink: 0; }
+.ub-h-l { min-width: 0; }
+.ub-kick { display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--ub-t); }
+.ub-title { margin: 4px 0 0; font: var(--display); font-size: 28px; text-transform: uppercase; letter-spacing: -0.01em; }
+.ub-sub { display: block; margin-top: 6px; font-size: 13px; font-weight: 600; color: var(--soft); line-height: 1.35; }
+.ub-sub em { font-style: normal; color: var(--ub-t); }
+.ub-streak { position: relative; flex: none; text-align: right; }
+.ub-streak b { display: block; font: 900 italic 50px/0.9 var(--font); font-variant-numeric: tabular-nums; color: var(--ub); }
+.ub-streak i { font-style: normal; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.ub-streak .ring { position: absolute; right: 6px; top: 0; width: 60px; height: 60px; border-radius: 50%; border: 3px solid var(--ub); opacity: 0; pointer-events: none; }
+.ub-streak.burst b { animation: ubBump .6s cubic-bezier(.3,1.6,.5,1); }
+.ub-streak.burst .ring { animation: ubRing .7s ease-out; }
+@keyframes ubBump { 35% { transform: scale(1.45); } }
+@keyframes ubRing { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(1.9); opacity: 0; } }
+.ub-fly { position: fixed; z-index: 60; font: 900 italic 34px/1 var(--font); color: var(--ub); pointer-events: none; text-shadow: 0 0 18px rgba(34,211,238,.6); }
+
+/* the stage */
+.ub-stage { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 16px; }
+.ub-stage::before { content: ''; position: absolute; left: 50%; top: 50%; width: 380px; height: 340px; transform: translate(-50%, -50%); pointer-events: none; background: radial-gradient(60% 50% at 50% 50%, rgba(255,255,255,0.045), rgba(255,255,255,0)); }
+
+/* stat spin */
+.ub-statwin { position: relative; height: 228px; overflow: hidden; border-radius: 22px; background: var(--ink); border: 1px solid var(--line);
+  -webkit-mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent); mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent); }
+.ub-statwin::before { content: ''; position: absolute; left: 12px; right: 12px; top: 50%; height: 76px; transform: translateY(-50%); border-radius: 16px; border: 2px solid var(--ub); z-index: 2; pointer-events: none; }
+.ub-statwin.is-hit::before { animation: ubHit .5s var(--ease-out); }
+@keyframes ubHit { 30% { box-shadow: 0 0 24px rgba(34,211,238,.7); transform: translateY(-50%) scale(1.03); } }
+.ub-statstrip { position: absolute; left: 0; right: 0; top: 76px; will-change: transform; }
+.ub-tile { height: 76px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 16px; }
+.ub-tile small { font-size: 10.5px; font-weight: 800; letter-spacing: .16em; color: var(--ub-t); margin-bottom: 5px; }
+.ub-tile span { font: 900 italic 23px/1 var(--font); text-transform: uppercase; }
+.ub-tile.dim span { color: #5A5A64; }
+.ub-bests-h { margin: 14px 2px 8px; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); transition: opacity .3s; }
+.ub-bests { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; transition: opacity .3s; }
+.ub-bests.gone, .ub-bests-h.gone { opacity: 0; }
+.ub-best { min-width: 0; display: flex; flex-direction: column; gap: 4px; padding: 9px 10px; border-radius: 14px; background: var(--ink); border: 1px solid var(--line); }
+.ub-best i { font-style: normal; font-size: 10px; font-weight: 700; color: var(--muted); line-height: 1.2; min-height: 24px; }
+.ub-best b { font: 900 italic 22px/1 var(--font); color: #fff; font-variant-numeric: tabular-nums; }
+.ub-best b.none { color: #3A3A42; }
+
+/* the two reels: shirts or club shields, the VS disc between them */
+.ub-cols { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: start; justify-items: center; gap: 8px; }
+.ub-clubs .ub-cols { gap: 12px; }
+.ub-col { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 0; width: 100%; }
+.ub-vs { position: absolute; left: 50%; top: calc(var(--ub-ph) * var(--ub-vs, 0.42)); transform: translate(-50%, -50%); z-index: 6; width: 38px; height: 38px; border-radius: 50%; background: #000; border: 1px solid var(--line); display: grid; place-items: center; font: 900 italic 13px/1 var(--font); color: var(--ub-t); }
+.ub-who { text-align: center; min-height: 34px; font-size: 11.5px; font-weight: 600; color: var(--muted); line-height: 1.25; max-width: 100%; overflow-wrap: anywhere; }
+.ub-who b { display: block; font: 900 italic 15px/1.05 var(--font); color: #fff; text-transform: uppercase; margin-bottom: 3px; }
+.ub-clubs .ub-who { display: none; }
+.ub-slot { position: relative; width: var(--ub-slw, calc(var(--ub-sw) + 10px)); height: var(--ub-ph); flex-shrink: 0; touch-action: none; }
+.ub-slot .sp-glow { width: 280px; height: 380px; }
+.ub-slot .sp-win { left: 0; top: -60px; width: 100%; height: calc(var(--ub-ph) + 120px); }
+.ub-slot .sp-strip { top: 60px; width: 100%; height: var(--ub-ph); }
+.ub-slot .sp-node { width: 100%; height: var(--ub-ph); display: grid; place-items: center; }
+.ub-slot.is-set .sp-win { -webkit-mask-image: none; mask-image: none; }
+.ub-slot.is-set .sp-glow { opacity: .55; }
+.ub-slot.is-set .sp-node.is-hit .d2c { filter: var(--glow, none); }
+.ub-slot.is-set .sp-node.is-hit .d2t-shine { display: block; }
+.ub-slot.ok .sp-node.is-hit > * { filter: drop-shadow(0 0 16px rgba(18,240,108,.8)); }
+.ub-slot.bad .sp-node.is-hit > * { filter: drop-shadow(0 0 16px rgba(255,77,94,.85)); }
+.ub-slot.bad { animation: ubShake .45s; }
+@keyframes ubShake { 20%, 60% { transform: translateX(-7px); } 40%, 80% { transform: translateX(7px); } }
+.ub-ph { display: grid; place-items: center; width: var(--ub-sw); height: calc(var(--ub-sw) * 1.02); font: 900 italic 64px/1 var(--font); color: #34343C; }
+
+/* a player: his shirt, then only the crest and his flag */
+.ub-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ub-shirt .ub-num { transform-box: fill-box; transform-origin: center; }
+.ub-num.q { animation: ubQ 1.6s ease-in-out infinite; }
+@keyframes ubQ { 50% { opacity: .5; } }
+.ub-pop { animation: ubPop .45s cubic-bezier(.3,1.6,.5,1); }
+@keyframes ubPop { 0% { transform: scale(.6); } 60% { transform: scale(1.18); } 100% { transform: scale(1); } }
+.ub-row { display: flex; align-items: center; gap: 7px; height: 36px; }
+.ub-crest { width: 36px; height: 36px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,.5)); }
+.ub-flag { width: 22px; height: 16.5px; aspect-ratio: auto; }
+
+/* a club: the Classic shield turned round (option A): name and season top left, crest top right, the number in the middle,
+   the stat's unit near the point in the club's text colour, where Classic says Real finish */
+.ub-cc.d2c-club .d2c-body { align-items: stretch; padding: 1.1em 0.9em 2.6em; }
+.ub-cc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: .3em; }
+.ub-cc-who { flex: 1 1 auto; display: flex; flex-direction: column; align-items: flex-start; gap: .45em; min-width: 0; padding-top: .2em; }
+/* the name wraps to two lines beside the crest; its longest word sets the size (Middlesbrough, Huddersfield) */
+.ub-cc-name { font-weight: 900; font-style: italic; font-size: 1.1em; line-height: 1.02; text-transform: uppercase; text-shadow: 0 .2em .6em rgba(0,0,0,.5); }
+.ub-cc.long .ub-cc-crest { width: 3em; height: 3em; }
+.ub-cc-season { font-size: 1em; font-weight: 800; padding: .2em .65em; border-radius: .6em; background: rgba(0,0,0,.35); white-space: nowrap; }
+.ub-cc-crest { width: 3.7em; height: 3.7em; flex: none; margin: -.2em -.2em 0 0; object-fit: contain; filter: drop-shadow(0 0 .06em rgba(255,255,255,.9)) drop-shadow(0 0 .25em rgba(255,255,255,.35)) drop-shadow(0 .3em .4em rgba(0,0,0,.45)); }
+.ub-cc-mid { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.ub-cc .ub-num { display: inline-block; font-weight: 900; font-style: italic; font-size: 5em; line-height: .9; letter-spacing: -0.02em; text-shadow: 0 .08em .3em rgba(0,0,0,.45); }
+.ub-cc .ub-num.w3 { font-size: 4.1em; }
+.ub-cc-foot { display: flex; flex-direction: column; align-items: center; }
+.ub-cc-hr { width: 60%; height: .1em; background: rgba(255,255,255,.25); margin-bottom: .5em; }
+.ub-cc-unit { font-size: .95em; font-weight: 800; letter-spacing: .14em; color: var(--club-text); }
+
+/* the bar: Lower and Higher during a run */
+.ub-ans { flex: 1 1 0; min-height: 56px; border-radius: 28px; border: 2px solid var(--ub); background: transparent; color: var(--ub); font: 900 italic 19px/1 var(--font); text-transform: uppercase; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: transform .15s var(--ease-snap), opacity .2s; }
+.ub-ans svg { width: 20px; height: 20px; }
+.ub-ans.ub-higher { background: var(--ub); color: var(--ub-ink); box-shadow: 0 6px 16px -6px var(--ub); }
+.ub-ans:active { transform: scale(.97); }
+.ub-ans[disabled] { opacity: .35; box-shadow: none; }
+
+/* the end (a sheet): the run big in cyan, then Share first and Spin again */
+.ub-endbig { text-align: center; padding: 4px 0 6px; }
+.ub-endbig b { display: block; font: 900 italic 84px/.9 var(--font); color: #22D3EE; text-shadow: 0 0 40px rgba(34,211,238,.35); }
+.ub-endbig span { display: block; margin-top: 6px; font: 900 italic 16px/1 var(--font); text-transform: uppercase; letter-spacing: .04em; }
+.ub-again { background: #22D3EE; color: #001A1F; }  /* the sheet sits outside .ub */
+
+/* home card mark */
+.fr-gm-mark .ub-mark { width: 112px; height: 112px; }
+@media (prefers-reduced-motion: reduce) { .ub-streak.burst b, .ub-streak.burst .ring, .ub-slot.bad, .ub-pop, .ub-statwin.is-hit::before, .ub-num.q { animation: none !important; } }

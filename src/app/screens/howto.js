@@ -38,6 +38,9 @@
         <h2 class="fr-h2">Goal Rush</h2>
         <p class="fr-lead">Each game picks a random formation, and its number is your target: line up 3-5-2 and score exactly 352. Fill the shirts in any order: each spin shows three real players for your open shirts, and you drag one onto a shirt of his position. His Premier League career goals go onto his shirt and into your total. Land exactly on the target. 3 respins a game.</p>
 
+        <h2 class="fr-h2">Unbeaten Run</h2>
+        <p class="fr-lead">Spin for a stat: career goals, points in a season, wins, assists and more, all real Premier League numbers. Two cards side by side: the left one shows its number, the right one hides it. Higher or lower? Get it right and the run goes on with the next card. One wrong answer ends it. Your best run per stat is kept.</p>
+
         <h2 class="fr-h2">Daily challenge</h2>
         <p class="fr-lead">One club a day, the same for everyone: one of the bottom 10 of a real season. If they really went down it plays as Classic; if they stayed up it plays as Dare2Dream. No respins, one go, then compare with your mates.</p>
 
