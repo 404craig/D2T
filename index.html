@@ -638,11 +638,13 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .sp-det-pos b.is-main { background: var(--sp-accent, #fff); border-color: transparent; color: #0A0A0A; }
 /* Club X (Craig, 12 Oct): one central reel, a little bigger; the crest bursts into the Club X badge */
 .sp-row.sp-one { transform: scale(1.3); transform-origin: 50% 50%; }
-.x-boom { position: absolute; inset: 0; z-index: 6; pointer-events: none; overflow: visible; }
+/* the swing-in: both cards fly as copies over the reel; the clash sits on top */
+.x-fly { position: absolute; left: 0; top: 0; width: 114px; height: 190px; z-index: 5; pointer-events: none; will-change: transform; filter: drop-shadow(0 10px 18px rgba(0,0,0,.6)); }
+.x-fly.x-new { z-index: 6; }
+.x-boom { position: absolute; inset: 0; z-index: 7; pointer-events: none; overflow: visible; }
 .x-boom i { position: absolute; border-radius: 2px; box-shadow: 0 0 6px rgba(255,255,255,.35); }
-.x-shard { position: absolute; background-repeat: no-repeat; filter: drop-shadow(0 2px 4px rgba(0,0,0,.6)); will-change: transform, opacity; }
 .x-boom-ring { position: absolute; width: 40px; height: 40px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 18px rgba(18,240,108,.9), inset 0 0 12px rgba(255,255,255,.6); }
-.x-flash { position: absolute; inset: 0; background: #fff; pointer-events: none; z-index: 5; }
+.x-boom-flash { position: absolute; width: 110px; height: 110px; border-radius: 50%; background: radial-gradient(circle, #fff 0%, rgba(255,255,255,.75) 30%, rgba(18,240,108,0) 70%); }
 /* the naming sheet */
 .x-name { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
 .x-name-in { width: 100%; box-sizing: border-box; height: 58px; padding: 0 16px; border-radius: 16px; border: 1px solid var(--line); background: #0E0E10; color: #fff; font: 900 italic 22px/1 'Exo 2', sans-serif; text-transform: uppercase; letter-spacing: .02em; outline: none; }
@@ -4279,7 +4281,10 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
       }
       if (x && !st.xName) later(askName, 450);
 
-      // ---------- Club X: the crest bursts and the badge takes its place ----------
+      // ---------- Club X: your card swings in and knocks the real club off (Craig, 12 Oct) ----------
+      // The real club lands and holds for 2 seconds; then your Club X card swings in from the right, hits the old card
+      // and knocks it spinning off the left, with a burst of both cards' colours where they meet, and comes to rest in
+      // the middle. Both cards fly as copies over the reel (its window would clip them); the reel takes the new card after.
       function reveal(reel, c) {
         return new Promise((resolve) => {
           const swap = () => {
@@ -4292,54 +4297,51 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
           if (reduced) { swap(); reel.hit('#12F06C'); resolve(); return; }
           later(() => {
             if (!root.isConnected) { resolve(); return; }
-            const card = reel.cardEl, crest = card && card.querySelector('.d2c-crest');
-            if (!crest) { swap(); resolve(); return; }
-            // a beat of strain, then the burst from the crest's middle
-            crest.animate([{ transform: 'scale(1) rotate(0)' }, { transform: 'scale(1.18) rotate(-7deg)', offset: 0.35 }, { transform: 'scale(1.1) rotate(6deg)', offset: 0.7 }, { transform: 'scale(1.32) rotate(0)' }], { duration: 300, easing: 'ease-in', fill: 'forwards' });
+            const card = reel.cardEl, node = card && card.closest('.sp-node');
+            if (!node) { swap(); resolve(); return; }
+            const slot = reel.slot, sr = slot.getBoundingClientRect(), k = sr.width / (slot.offsetWidth || sr.width), W = slot.offsetWidth, H = slot.offsetHeight;
+            const offR = (window.innerWidth - sr.left) / k + 30, offL = -(sr.right / k) - 60;
+            const oldC = D2T.h(`<div class="x-fly">${node.innerHTML}</div>`), newC = D2T.h(`<div class="x-fly x-new">${xCard(c, 114)}</div>`);
+            slot.append(oldC, newC); node.style.visibility = 'hidden';
+            const HIT = 300, T = 700;
+            newC.animate([
+              { transform: `translateX(${offR}px) rotate(14deg)`, easing: 'cubic-bezier(.55,0,1,.65)' },
+              { transform: `translateX(${W * 0.92}px) rotate(4deg)`, offset: HIT / T, easing: 'cubic-bezier(.12,.8,.3,1)' },
+              { transform: 'translateX(-12px) rotate(-3deg)', offset: 0.8 },
+              { transform: 'translateX(0) rotate(0)' }], { duration: T, fill: 'forwards' });
+            oldC.animate([{ transform: 'translate(0,0) rotate(0)', opacity: 1 }, { transform: `translate(${offL * 0.45}px, -26px) rotate(-22deg)`, opacity: 1, offset: 0.4 }, { transform: `translate(${offL}px, 70px) rotate(-48deg)`, opacity: 1 }],
+              { duration: 560, delay: HIT, easing: 'cubic-bezier(.2,.75,.35,1)', fill: 'forwards' });
             later(() => {
-              // the single reel is scaled up (.sp-one), so screen pixels are turned back into the slot's own
-              const sr = reel.slot.getBoundingClientRect(), cr = crest.getBoundingClientRect(), k = sr.width / (reel.slot.offsetWidth || sr.width);
-              const box = { x: (cr.left - sr.left) / k, y: (cr.top - sr.top) / k, w: cr.width / k, h: cr.height / k };
-              crest.style.visibility = 'hidden';
-              boom(reel.slot, box, crest.currentSrc || crest.src, [c.accent, '#FFFFFF', c.ink && c.ink !== c.accent ? c.ink : '#FFD21F', '#12F06C']);
+              clash(slot, W * 0.96, H * 0.42, [c.accent, '#12F06C', c.accent, '#FFFFFF', '#12F06C', c.ink && c.ink !== c.accent ? c.ink : c.accent]);
               SND.play('reveal');
-              const old = reel.cardEl && reel.cardEl.querySelector('.d2c-face');
-              if (old) { const fl = D2T.h('<span class="x-flash"></span>'); old.appendChild(fl); fl.animate([{ opacity: 0 }, { opacity: 0.9, offset: 0.25 }, { opacity: 0 }], { duration: 300, fill: 'forwards' }); }
-              // a beat with the shards in the air, then the badge drops into the gap
-              later(() => {
-                const node = swap();
-                const nc = node && node.querySelector('.d2c-crest');
-                if (nc) nc.animate([{ transform: 'scale(0) rotate(-40deg)', opacity: 0 }, { transform: 'scale(1.35) rotate(8deg)', opacity: 1, offset: 0.55 }, { transform: 'scale(.94) rotate(-2deg)', offset: 0.8 }, { transform: 'scale(1) rotate(0)', opacity: 1 }], { duration: 640, easing: 'cubic-bezier(.2,.9,.3,1.2)', fill: 'backwards' });
-                reel.hit('#12F06C'); SND.play('lockin');
-                later(resolve, 700);
-              }, 380);
-            }, 300);
-          }, 1000);
+              const stage = api && api.el.querySelector('.sp-stage');
+              if (stage) stage.animate([{ transform: 'translate(0,0)' }, { transform: 'translate(-7px,3px)' }, { transform: 'translate(6px,-2px)' }, { transform: 'translate(-3px,1px)' }, { transform: 'translate(0,0)' }], { duration: 300, easing: 'ease-out' });
+            }, HIT);
+            later(() => {
+              node.style.visibility = ''; swap(); newC.remove();
+              reel.hit('#12F06C'); SND.play('lockin');
+              later(() => oldC.remove(), 300);
+              later(resolve, 450);
+            }, T + 20);
+          }, 2000);
         });
       }
-      // the crest breaks into a 4 x 4 of its own pieces that fly apart and spin, with sparks and a ring from its middle
-      function boom(host, box, src, cols) {
+      // the clash: sparks in both clubs' colours, a ring and a flash from where the cards meet
+      function clash(host, x, y, cols) {
         const wrap = D2T.h('<div class="x-boom" aria-hidden="true"></div>'); host.appendChild(wrap);
-        const cx = box.x + box.w / 2, cy = box.y + box.h / 2, N = 4, pw = box.w / N, ph = box.h / N;
-        const ring = D2T.h('<span class="x-boom-ring"></span>'); ring.style.left = cx + 'px'; ring.style.top = cy + 'px'; wrap.appendChild(ring);
-        ring.animate([{ transform: 'translate(-50%,-50%) scale(.2)', opacity: 1 }, { transform: 'translate(-50%,-50%) scale(5)', opacity: 0 }], { duration: 650, easing: 'cubic-bezier(.1,.7,.3,1)', fill: 'forwards' });
-        for (let r = 0; r < N; r++) for (let q = 0; q < N; q++) {
-          const sh = D2T.h('<span class="x-shard"></span>'), x = box.x + q * pw, y = box.y + r * ph;
-          Object.assign(sh.style, { left: x + 'px', top: y + 'px', width: pw + 'px', height: ph + 'px', backgroundImage: `url("${src}")`, backgroundSize: `${box.w}px ${box.h}px`, backgroundPosition: `${-q * pw}px ${-r * ph}px` });
-          wrap.appendChild(sh);
-          const dx = x + pw / 2 - cx, dy = y + ph / 2 - cy, len = Math.hypot(dx, dy) || 1, d = 70 + Math.random() * 80;
-          sh.animate([{ transform: 'translate(0,0) rotate(0) scale(1)', opacity: 1 },
-            { transform: `translate(${dx / len * d * 0.55}px, ${dy / len * d * 0.55 - 10}px) rotate(${(Math.random() - 0.5) * 260}deg) scale(1.15)`, opacity: 1, offset: 0.4 },
-            { transform: `translate(${dx / len * d}px, ${dy / len * d + 40}px) rotate(${(Math.random() - 0.5) * 540}deg) scale(.6)`, opacity: 0 }], { duration: 900 + Math.random() * 300, easing: 'cubic-bezier(.15,.75,.35,1)', fill: 'forwards' });
-        }
-        for (let i = 0; i < 30; i++) {
-          const a = (i / 30) * Math.PI * 2 + Math.random() * 0.25, d = 60 + Math.random() * 90, sz = 4 + Math.random() * 6;
-          const bit = D2T.h('<i></i>'); Object.assign(bit.style, { left: cx + 'px', top: cy + 'px', width: sz + 'px', height: (sz * (0.5 + Math.random())) + 'px', background: cols[i % cols.length] });
+        const ring = D2T.h('<span class="x-boom-ring"></span>'), flash = D2T.h('<span class="x-boom-flash"></span>');
+        [ring, flash].forEach((e) => { e.style.left = x + 'px'; e.style.top = y + 'px'; wrap.appendChild(e); });
+        flash.animate([{ transform: 'translate(-50%,-50%) scale(.3)', opacity: 1 }, { transform: 'translate(-50%,-50%) scale(1.8)', opacity: 0 }], { duration: 380, easing: 'ease-out', fill: 'forwards' });
+        ring.animate([{ transform: 'translate(-50%,-50%) scale(.2)', opacity: 1 }, { transform: 'translate(-50%,-50%) scale(5)', opacity: 0 }], { duration: 620, easing: 'cubic-bezier(.1,.7,.3,1)', fill: 'forwards' });
+        for (let i = 0; i < 44; i++) {
+          // most fly out sideways and up, as if knocked off the impact; some go everywhere
+          const a = i % 3 === 0 ? Math.random() * Math.PI * 2 : (i % 2 ? Math.PI : 0) + (Math.random() - 0.5) * 1.6, d = 50 + Math.random() * 110, sz = 4 + Math.random() * 8;
+          const bit = D2T.h('<i></i>'); Object.assign(bit.style, { left: x + 'px', top: y + 'px', width: sz + 'px', height: (sz * (0.4 + Math.random())) + 'px', background: cols[i % cols.length] });
           wrap.appendChild(bit);
-          bit.animate([{ transform: 'translate(-50%,-50%) rotate(0)', opacity: 1 }, { transform: `translate(calc(-50% + ${Math.cos(a) * d * 0.7}px), calc(-50% + ${Math.sin(a) * d * 0.7}px)) rotate(${(Math.random() - 0.5) * 300}deg)`, opacity: 1, offset: 0.6 },
-            { transform: `translate(calc(-50% + ${Math.cos(a) * d}px), calc(-50% + ${Math.sin(a) * d + 26}px)) rotate(${(Math.random() - 0.5) * 540}deg)`, opacity: 0 }], { duration: 800 + Math.random() * 300, easing: 'cubic-bezier(.12,.8,.3,1)', fill: 'forwards' });
+          bit.animate([{ transform: 'translate(-50%,-50%) rotate(0)', opacity: 1 }, { transform: `translate(calc(-50% + ${Math.cos(a) * d * 0.7}px), calc(-50% + ${Math.sin(a) * d * 0.7 - 10}px)) rotate(${(Math.random() - 0.5) * 300}deg)`, opacity: 1, offset: 0.55 },
+            { transform: `translate(calc(-50% + ${Math.cos(a) * d}px), calc(-50% + ${Math.sin(a) * d + 34}px)) rotate(${(Math.random() - 0.5) * 600}deg)`, opacity: 0 }], { duration: 750 + Math.random() * 350, easing: 'cubic-bezier(.12,.8,.3,1)', fill: 'forwards' });
         }
-        later(() => wrap.remove(), 1400);
+        later(() => wrap.remove(), 1300);
       }
     },
     unmount() { xTimers.forEach(clearTimeout); xTimers = []; api && api.unmount(); api = null; }
