@@ -51,7 +51,7 @@
     const style = `--w:${w}px;--face:${L.face};--rim:${L.rim};--ink-c:${L.ink};--line-c:${L.line};--holo:${L.holo};--glow:${opts.glow || L.glow}`;
     const keys = c.pos === 'GK' ? GK_KEYS : KEYS;
     const stats = keys.map((k) => `<span class="d2c-stat"><b>${c.stats[k] == null ? '-' : c.stats[k]}</b><i>${k}</i></span>`).join('');
-    const shine = opts.shine === false ? '' : `<span class="d2t-shine" style="animation-delay:${opts.delay || 0}s"></span>`;
+    const shine = opts.shine === false ? '' : `<span class="d2t-shine${opts.slow ? ' slow' : ''}" style="animation-delay:${opts.delay || 0}s"></span>`;
     if (opts.mini) { // pitch card: position tab, big rating beside the crest, full name
       return `<div class="d2c d2c-player mini pos-${c.pos} ${opts.cls || ''}" style="${style}" data-level="${c.level}" aria-label="${esc(c.name)}, ${c.ovr} ${L.name}, ${c.pos}">
       <span class="d2c-tab">${c.pos}</span><div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2c-holo"></span>${shine}
@@ -68,7 +68,7 @@
   function club(c, opts = {}) {
     const w = opts.w || 114, P = clubPaint(c);
     const style = `--w:${w}px;--face:${P.face};--rim:${P.rim};--tex:${P.tex};--glow:${opts.glow || P.glow};--club-text:${c.text}`;
-    const shine = opts.shine === false ? '' : `<span class="d2t-shine" style="animation-delay:${opts.delay || 0}s"></span>`;
+    const shine = opts.shine === false ? '' : `<span class="d2t-shine${opts.slow ? ' slow' : ''}" style="animation-delay:${opts.delay || 0}s"></span>`;
     const foot = opts.foot || `${ordinal(c.pos)} · ${c.pts} pts`;
     return `<div class="d2c d2c-club ${opts.cls || ''}" style="${style}" aria-label="${esc(c.full || c.name)} ${c.season}">
       <div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span>${shine}
