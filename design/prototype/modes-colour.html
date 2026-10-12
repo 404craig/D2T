@@ -6,140 +6,100 @@
 <title>D2T Mode Colours</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
 <style>
-  /* Five ways to tell the other modes apart by colour. Each mode owns one colour; the rest of the card stays black like the game. */
-  :root { color-scheme: dark; --green: #12F06C; --d2d: #A66BFF; --clx: #3BA4FF; --g433: #FF7A1A; --line: #26262C; --ink: #0E0E10; --soft: #CFCFD6; --muted: #8E8E99; }
+  /* Option A (chosen): each mode's colour washes in from the right with a thin rim. Daily is blue (or white or silver), Club X green. */
+  :root { color-scheme: dark; --daily: #3BA4FF; --d2d: #A66BFF; --clx: #12F06C; --g433: #FF7A1A; --line: #26262C; --soft: #CFCFD6; --muted: #8E8E99; }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: #08080A; color: #fff; font-family: 'Exo 2', Arial, sans-serif; }
   button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
   .page { max-width: 1760px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 28px; }
   .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
-  .head p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 90ch; }
-  .key { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 14px; font-size: 13px; font-weight: 800; }
-  .key span { display: flex; align-items: center; gap: 7px; }
-  .key i { width: 14px; height: 14px; border-radius: 4px; display: block; }
+  .head p, .sec > p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 90ch; }
+  .sec { display: flex; flex-direction: column; gap: 16px; padding-top: 24px; border-top: 1px solid #1E1E22; }
+  .sec > h2 { font: 900 italic 30px/1 'Exo 2'; margin: 0; }
+  .pick { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pick button { font-size: 13px; font-weight: 800; padding: 9px 14px; border-radius: 18px; border: 1px solid #33333A; color: #DADAE0; display: flex; align-items: center; gap: 8px; }
+  .pick button i { width: 14px; height: 14px; border-radius: 4px; display: block; }
+  .pick button.on { background: #fff; color: #000; border-color: #fff; }
   .row { display: flex; gap: 26px; flex-wrap: wrap; justify-content: center; }
   .opt { width: 390px; max-width: 100%; display: flex; flex-direction: column; gap: 10px; }
-  .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: var(--green); }
+  .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: #12F06C; }
   .opt-h h3 { font: 900 italic 22px/1.05 'Exo 2'; margin: 3px 0; }
-  .opt-h p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; min-height: 76px; }
+  .opt-h p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; min-height: 57px; }
   .phone { width: 390px; max-width: 100%; border-radius: 26px; background: #000; box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,.6); padding: 18px 16px 22px; overflow: hidden; }
   .sect { font: 900 italic 26px/1 'Exo 2'; text-transform: uppercase; margin: 4px 2px 14px; }
   .soon { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 16px 2px 0; }
-  .crest { width: 54px; height: 54px; border-radius: 14px; background: #1A1A1F; display: grid; place-items: center; flex-shrink: 0; }
-  .crest img { width: 40px; height: 40px; object-fit: contain; }
   .emb { display: block; background: currentColor; -webkit-mask: url('assets/logo/emblem_line.png') center / contain no-repeat; mask: url('assets/logo/emblem_line.png') center / contain no-repeat; }
-  .go { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; color: #0A0A0A; }
-  .go svg { width: 20px; height: 20px; }
-  .t-tag { font-size: 11px; font-weight: 800; letter-spacing: .14em; }
-  .t-big { font: 900 italic 26px/.95 'Exo 2'; text-transform: uppercase; margin-top: 6px; }
-  .t-sub { font-size: 14px; font-weight: 600; color: var(--soft); margin-top: 7px; line-height: 1.35; }
   .n433 { font: 900 italic 1em/1 'Exo 2'; -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px currentColor; display: block; }
+  .go svg { width: 20px; height: 20px; }
 
-  /* A: colour sweep, like Continue but dark: the mode colour washes in from the right, with a thin rim in the colour */
-  .A .card { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; min-height: 112px; padding: 18px 70px 18px 18px; border-radius: 22px; overflow: hidden; margin-bottom: 12px; isolation: isolate;
+  /* every card the same: tag, two-line title, one-line description, the mark on the right, the button bottom right */
+  .card { position: relative; display: flex; flex-direction: column; justify-content: center; width: 100%; min-height: 146px; padding: 18px 70px 18px 18px; border-radius: 22px; overflow: hidden; margin-bottom: 12px; isolation: isolate;
     background: linear-gradient(100deg, #0E0E10 0%, #0E0E10 38%, color-mix(in srgb, var(--c) 30%, #0E0E10) 100%); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 45%, transparent); }
-  .A .card::after { content: ''; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, rgba(255,255,255,0) 2px 7px); }
-  .A .t-tag { color: var(--c); }
-  .A .go { position: absolute; right: 16px; bottom: 16px; background: var(--c); }
-  .A .mark { position: absolute; right: -14px; top: 50%; transform: translateY(-50%) rotate(-8deg); min-width: 120px; height: 120px; color: var(--c); opacity: .3; z-index: -1; display: grid; place-items: center; font-size: 84px; }
-  .A .mark img { width: 110px; opacity: .9; }
+  .card::after { content: ''; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, rgba(255,255,255,0) 2px 7px); }
+  .t-tag { display: block; font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--c); }
+  .t-big { display: block; font: 900 italic 26px/.95 'Exo 2'; text-transform: uppercase; margin-top: 6px; }
+  .t-sub { display: block; font-size: 14px; font-weight: 600; color: var(--soft); margin-top: 7px; line-height: 1.35; }
+  .go { position: absolute; right: 16px; bottom: 16px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #0A0A0A; }
+  .mark { position: absolute; right: -14px; top: 50%; transform: translateY(-50%) rotate(-8deg); min-width: 120px; height: 120px; color: var(--c); opacity: .3; z-index: -1; display: grid; place-items: center; font-size: 84px; }
+  .mark img { width: 110px; opacity: .9; }
+  /* silver: a brushed metal button and rim */
+  .card.silver .go { background: linear-gradient(160deg, #F4F6F8, #AEB4BC 55%, #E4E7EB); }
+  .card.silver { box-shadow: inset 0 0 0 1px rgba(214,219,226,.5); }
+  .card.silver .t-tag { background: linear-gradient(90deg, #F4F6F8, #AEB4BC); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-  /* B: colour spine: plain black cards, a solid bar of the mode colour down the left edge and the mode mark in colour */
-  .B .card { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; min-height: 104px; padding: 16px 70px 16px 24px; border-radius: 20px; overflow: hidden; margin-bottom: 10px; background: var(--ink); border: 1px solid var(--line); }
-  .B .card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 7px; background: var(--c); }
-  .B .t-tag { color: var(--c); }
-  .B .go { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: var(--c); }
-  .B .mark { position: absolute; right: 62px; top: 50%; transform: translateY(-50%); width: 58px; height: 58px; color: var(--c); opacity: .9; display: grid; place-items: center; font-size: 30px; }
-  .B .mark img { width: 52px; }
-  .B .t-big { font-size: 23px; }
-  .B .txt { padding-right: 56px; }
-
-  /* C: tiles: today's daily full width, the three modes as solid colour tiles below (black text, like EA's mode tiles) */
-  .C .daily { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; padding: 16px 64px 16px 14px; border-radius: 20px; background: var(--ink); border: 1px solid var(--line); margin-bottom: 10px; }
-  .C .daily .t-tag { color: var(--green); }
-  .C .daily .go { position: absolute; right: 14px; bottom: 14px; background: var(--green); }
-  .C .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .C .tile { position: relative; min-height: 172px; border-radius: 20px; padding: 14px; background: var(--c); color: #0A0A0A; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; isolation: isolate; }
-  .C .tile.wide { grid-column: span 2; min-height: 122px; }
-  .C .tile .t-tag { color: rgba(0,0,0,.65); }
-  .C .tile .t-big { font-size: 22px; }
-  .C .tile .t-sub { color: rgba(0,0,0,.72); font-size: 12.5px; }
-  .C .tile .mark { position: absolute; right: -14px; top: -10px; width: 110px; height: 110px; color: rgba(0,0,0,.16); z-index: -1; display: grid; place-items: center; font-size: 76px; }
-  .C .tile .mark img { width: 92px; filter: grayscale(1) brightness(0); opacity: .18; }
-  .C .tile .go { position: absolute; right: 12px; top: 12px; background: #0A0A0A; color: var(--c); width: 34px; height: 34px; }
-  .C .tile.wide .go { top: auto; bottom: 14px; right: 14px; }
-
-  /* D: header band: each card opens with a band in the mode colour carrying its name, then the black body */
-  .D .card { width: 100%; border-radius: 20px; overflow: hidden; margin-bottom: 12px; background: var(--ink); border: 1px solid var(--line); position: relative; }
-  .D .band { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; background: var(--c); color: #0A0A0A; font-size: 11.5px; font-weight: 900; letter-spacing: .14em; }
-  .D .band b { font-style: italic; }
-  .D .body { position: relative; display: flex; align-items: center; gap: 14px; padding: 14px 70px 16px 16px; min-height: 86px; }
-  .D .go { position: absolute; right: 14px; bottom: 14px; background: var(--c); }
-  .D .mark { width: 50px; height: 50px; flex-shrink: 0; color: var(--c); display: grid; place-items: center; font-size: 26px; }
-  .D .mark img { width: 46px; }
-  .D .t-big { font-size: 22px; margin-top: 0; }
-
-  /* E: card backs: the modes as a swipeable row of tall cards (the shape of the game's cards), each in its colour */
-  .E .daily { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; padding: 16px 64px 16px 14px; border-radius: 20px; background: var(--ink); border: 1px solid var(--line); margin-bottom: 14px; }
-  .E .daily .t-tag { color: var(--green); }
-  .E .daily .go { position: absolute; right: 14px; bottom: 14px; background: var(--green); }
-  .E .strip { display: flex; gap: 12px; overflow-x: auto; margin: 0 -16px; padding: 4px 16px 6px; scrollbar-width: none; }
-  .E .back { position: relative; flex: 0 0 158px; height: 238px; color: #0A0A0A; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 14px 30px; }
-  .E .back svg.shape { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
-  .E .back .mark { position: absolute; left: 50%; top: 27%; transform: translate(-50%, -50%); width: 80px; height: 80px; display: grid; place-items: center; color: rgba(0,0,0,.22); z-index: -1; font-size: 64px; }
-  .E .back .mark img { width: 64px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.35)); }
-  .E .back .t-tag { color: rgba(0,0,0,.62); font-size: 10px; }
-  .E .back .t-big { font-size: 19px; margin-top: 3px; }
-  .E .back .t-sub { color: rgba(0,0,0,.72); font-size: 11.5px; margin-top: 4px; }
-  .E .back.dark { color: #fff; }
-  .E .back.dark .t-tag { color: var(--c); }
-  .E .back.dark .t-sub { color: var(--soft); }
+  /* Daily layouts */
+  /* 1: the crest is the mark, faded like the other modes' marks */
+  .d1 .mark img { width: 104px; opacity: 1; }
+  .d1 .mark { opacity: .32; }
+  /* 2: the crest in full colour where the marks sit, smaller, tilted and tucked behind the button */
+  .d2 .mark { opacity: 1; right: 10px; top: 36%; min-width: 0; width: 86px; height: 86px; transform: translateY(-50%) rotate(-8deg); }
+  .d2 .mark img { width: 80px; filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
+  .d2 .mark::before { content: ''; position: absolute; inset: -18px; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--c) 35%, transparent), transparent); z-index: -1; }
+  /* 3: a faded crest plus a date chip, top right, in the mode colour */
+  .d3 .mark img { width: 104px; }
+  .d3 .mark { opacity: .32; }
+  .d3 .chip { position: absolute; right: 14px; top: 14px; display: flex; flex-direction: column; align-items: center; width: 44px; border-radius: 10px; overflow: hidden; background: #0A0A0A; box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 60%, transparent); }
+  .d3 .chip span { display: block; width: 100%; text-align: center; font-size: 9px; font-weight: 900; letter-spacing: .1em; color: #0A0A0A; background: var(--c); padding: 2px 0; }
+  .d3 .chip b { font: 900 italic 20px/1 'Exo 2'; padding: 4px 0 5px; }
+  .card.silver.d3 .chip span { background: linear-gradient(90deg, #F4F6F8, #AEB4BC); }
 </style>
 </head>
 <body>
 <div class="page">
   <div class="head">
-    <h1>Mode colours</h1>
-    <p>Each mode gets one colour of its own, used for its tag, its button and its mark, so the cards stop looking alike. Everything else stays black like the rest of the game. Daily keeps the D2T green (it is the game's own challenge), Dare2Dream is purple, Club X is blue, 433 Goals stays orange. Five ways to show it, with the real content from your screenshot.</p>
-    <div class="key"><span><i style="background:var(--green)"></i>Daily · green</span><span><i style="background:var(--d2d)"></i>Dare2Dream · purple</span><span><i style="background:var(--clx)"></i>Club X · blue</span><span><i style="background:var(--g433)"></i>433 Goals · orange</span></div>
+    <h1>Mode colours, option A</h1>
+    <p>Option A on its own now. Daily Challenge is blue and Club X green, so the Club X badge matches its colour. Below: three ways to make the daily card the same size and text as the others, with the club's crest where the other modes keep their mark. Then the same cards with the daily in white and in silver, which may sit better with every club's badge.</p>
   </div>
-  <div class="row" id="opts"></div>
+  <section class="sec"><h2>Daily: three layouts</h2><p>All four cards now share one shape and height: tag, two-line title (club, then season), one line of description, mark on the right, button bottom right. The daily's tag carries the date, the title is the club and season, and the line says the mode. Switch the daily's colour here:</p>
+    <div class="pick" id="pick"><button data-c="blue" class="on"><i style="background:#3BA4FF"></i>Blue</button><button data-c="white"><i style="background:#fff"></i>White</button><button data-c="silver"><i style="background:linear-gradient(160deg,#F4F6F8,#AEB4BC)"></i>Silver</button></div>
+    <div class="row" id="layouts"></div></section>
+  <section class="sec"><h2>Daily in white and silver</h2><p>Layout 2 side by side in the three colours, so you can compare.</p><div class="row" id="colours"></div></section>
 </div>
 <script>
 (function () {
   const GO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
-  const M = [
-    { k: 'daily', c: 'var(--green)', tag: 'DAILY CHALLENGE 12 OCT 2026', big: 'Watford 1999/00', sub: 'Classic: they went down. Rescue them.', short: 'Daily', mark: '<img src="assets/crests/watford.png" alt="">' },
-    { k: 'd2d', c: 'var(--d2d)', tag: 'DARE2DREAM', big: 'Any club, no players', sub: 'Draft your XI, then beat their real finish.', mark: '<span class="emb" style="width:100%;height:100%"></span>' },
-    { k: 'clx', c: 'var(--clx)', tag: 'CLUB X', big: 'Replace the bottom club', sub: 'Draft 11 from scratch, then win the league.', mark: '<img src="assets/brand/club_x.png" alt="">' },
-    { k: 'g433', c: 'var(--g433)', tag: '433 GOALS', big: 'Hit exactly 433', sub: 'Spin 11 real players. Their goals must add up to 433.', mark: '<span class="n433">433</span>' }
+  const DC = { blue: 'var(--daily)', white: '#FFFFFF', silver: '#C9CED6' };
+  const MODES = [
+    { c: 'var(--d2d)', tag: 'DARE2DREAM', big: 'Any club, no players', sub: 'Draft your XI, then beat their real finish.', mark: '<span class="emb" style="width:100%;height:100%"></span>' },
+    { c: 'var(--clx)', tag: 'CLUB X', big: 'Replace the bottom club', sub: 'Draft 11 from scratch, then win the league.', mark: '<img src="assets/brand/club_x.png" alt="">' },
+    { c: 'var(--g433)', tag: '433 GOALS', big: 'Hit exactly 433', sub: 'Spin 11 real players. Their goals must add up to 433.', mark: '<span class="n433">433</span>' }
   ];
-  const soon = '<div class="soon">Coming soon: Head to head · Steal</div>';
-  const go = (m) => `<span class="go">${GO}</span>`;
-  const daily = M[0], modes = M.slice(1);
-  const dailyRow = (cls) => `<button class="${cls}"><span class="crest">${daily.mark}</span><span><span class="t-tag" style="display:block">${daily.tag}</span><span class="t-big" style="display:block;font-size:24px">${daily.big}</span><span class="t-sub" style="display:block">${daily.sub}</span></span>${go(daily)}</button>`;
-
-  const A = () => `<div class="phone A"><div class="sect">Other modes</div>
-    ${M.map((m) => `<button class="card" style="--c:${m.c}">${m.k === 'daily' ? `<span class="crest">${m.mark}</span>` : `<span class="mark">${m.mark}</span>`}<span><span class="t-tag" style="display:block">${m.tag}</span><span class="t-big" style="display:block">${m.big}</span><span class="t-sub" style="display:block">${m.sub}</span></span>${go(m)}</button>`).join('')}${soon}</div>`;
-  const B = () => `<div class="phone B"><div class="sect">Other modes</div>
-    ${M.map((m) => `<button class="card" style="--c:${m.c}">${m.k === 'daily' ? `<span class="crest">${m.mark}</span>` : ''}<span class="txt"><span class="t-tag" style="display:block">${m.tag}</span><span class="t-big" style="display:block">${m.big}</span><span class="t-sub" style="display:block">${m.sub}</span></span>${m.k === 'daily' ? '' : `<span class="mark">${m.mark}</span>`}${go(m)}</button>`).join('')}${soon}</div>`;
-  const C = () => `<div class="phone C"><div class="sect">Other modes</div>${dailyRow('daily')}
-    <div class="grid">${modes.map((m, i) => `<button class="tile${i === 2 ? ' wide' : ''}" style="--c:${m.c}"><span class="mark">${m.mark}</span>${go(m)}<span class="t-tag" style="display:block">${m.tag}</span><span class="t-big" style="display:block">${m.big}</span><span class="t-sub" style="display:block">${m.sub}</span></button>`).join('')}</div>${soon}</div>`;
-  const D = () => `<div class="phone D"><div class="sect">Other modes</div>
-    ${M.map((m) => `<button class="card" style="--c:${m.c}"><span class="band"><b>${m.k === 'daily' ? 'DAILY CHALLENGE' : m.tag}</b><span>${m.k === 'daily' ? '12 OCT' : m.k === 'g433' ? 'NEW' : ''}</span></span><span class="body"><span class="mark${m.k === 'daily' ? ' crest' : ''}">${m.mark}</span><span><span class="t-big" style="display:block">${m.big}</span><span class="t-sub" style="display:block">${m.sub}</span></span>${go(m)}</span></button>`).join('')}${soon}</div>`;
-  const SHAPE = (fill, stroke) => `<svg class="shape" viewBox="0 0 100 150" preserveAspectRatio="none" aria-hidden="true"><polygon points="1.5,12 12,1.5 88,1.5 98.5,12 98.5,128 50,148.5 1.5,128" fill="${fill}" stroke="${stroke}" stroke-width="1.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>`;
-  const E = (dark) => `<div class="phone E"><div class="sect">Other modes</div>${dailyRow('daily')}
-    <div class="strip">${modes.map((m) => `<button class="back${dark ? ' dark' : ''}" style="--c:${m.c}">${dark ? SHAPE('#0E0E10', m.c) : SHAPE(m.c, 'rgba(255,255,255,.35)')}<span class="mark"${dark ? ` style="color:${m.c};opacity:.85"` : ''}>${m.mark}</span><span class="t-tag" style="display:block">${m.tag}</span><span class="t-big" style="display:block">${m.big}</span><span class="t-sub" style="display:block">${m.sub}</span></button>`).join('')}</div>${soon}</div>`;
-
-  const OPTS = [
-    ['A', 'Colour sweep', 'Same cards as now, but each one is washed in its own colour from the right, with a thin rim in that colour. Closest to today and to the Continue card. Quiet but clear.', A()],
-    ['B', 'Colour spine', 'Plain black cards with a solid bar of the mode colour down the left edge, the mark in colour beside the button. Very tidy, a bit like a settings list.', B()],
-    ['C', 'Colour tiles', 'Daily stays a full-width card; the three modes become solid colour tiles with black text, two side by side and 433 across the bottom. The boldest, most like EA FC mode tiles.', C()],
-    ['D', 'Header band', 'Each card opens with a band in its colour carrying the mode name, then the black body. Reads like a ticket or a fixture card.', D()],
-    ['E', 'Card backs', 'Daily on top, then the modes as a swipeable row of tall cards in the game\'s card shape, each in its colour. Ties the modes to the cards; they also have room to grow as more modes arrive.', E(false)],
-    ['E2', 'Card backs, dark', 'As E but black cards with a coloured outline and coloured mark, closer to the black design.', E(true)]
-  ];
-  document.getElementById('opts').innerHTML = OPTS.map(([t, n, d, h]) => `<div class="opt"><div class="opt-h"><span class="tag">OPTION ${t}</span><h3>${n}</h3><p>${d}</p></div>${h}</div>`).join('');
+  const card = (m, extra = '', cls = '') => `<button class="card ${cls}" style="--c:${m.c}"><span class="mark">${m.mark}</span>${extra}<span class="t-tag">${m.tag}</span><span class="t-big">${m.big}</span><span class="t-sub">${m.sub}</span><span class="go">${GO}</span></button>`;
+  const daily = (layout, colour) => {
+    const m = { c: DC[colour], tag: layout === 3 ? 'DAILY CHALLENGE' : 'DAILY CHALLENGE · 12 OCT', big: 'Watford<br>1999/00', sub: 'Classic: they went down. Rescue them.', mark: '<img src="assets/crests/watford.png" alt="">' };
+    const chip = layout === 3 ? '<span class="chip"><span>OCT</span><b>12</b></span>' : '';
+    return card(m, chip, `d${layout}${colour === 'silver' ? ' silver' : ''}`);
+  };
+  const phone = (layout, colour) => `<div class="phone"><div class="sect">Other modes</div>${daily(layout, colour)}${MODES.map((m) => card(m)).join('')}<div class="soon">Coming soon: Head to head · Steal</div></div>`;
+  const L = [[1, 'Crest as the mark', 'The club crest sits where the other modes keep their logo, big and faded the same way. The most consistent: four matching cards.'],
+    [2, 'Crest in full colour', 'Same place, but the crest is in its real colours, smaller and tilted, on a soft glow of the daily colour. Today\'s club stands out; the card still matches.'],
+    [3, 'Crest plus a date chip', 'As 1, with a small calendar chip (12 OCT) top right in the daily colour, so it reads as today\'s challenge at a glance. The tag drops the date.']];
+  let colour = 'blue';
+  const draw = () => { document.getElementById('layouts').innerHTML = L.map(([n, h, d]) => `<div class="opt"><div class="opt-h"><span class="tag">LAYOUT ${n}</span><h3>${h}</h3><p>${d}</p></div>${phone(n, colour)}</div>`).join(''); };
+  draw();
+  document.querySelectorAll('#pick button').forEach((b) => b.onclick = () => { colour = b.dataset.c; document.querySelectorAll('#pick button').forEach((x) => x.classList.toggle('on', x === b)); draw(); });
+  document.getElementById('colours').innerHTML = [['blue', 'Blue', 'Clear of every other mode colour. Many club badges are blue, so it can clash on blue clubs.'], ['white', 'White', 'Neutral: every badge sits well on it. The card reads quieter, a little like a plain black card with a white rim.'], ['silver', 'Silver', 'Brushed metal button, rim and tag. Neutral like white, with a touch of trophy; ties in with silver club badges.']]
+    .map(([c, h, d]) => `<div class="opt"><div class="opt-h"><span class="tag">${h.toUpperCase()}</span><h3>Daily in ${h.toLowerCase()}</h3><p>${d}</p></div>${phone(2, c)}</div>`).join('');
 })();
 </script>
 </body>
