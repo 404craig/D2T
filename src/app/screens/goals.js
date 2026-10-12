@@ -125,8 +125,8 @@
       root.classList.add('g4', 'g4-cs-' + CREST());
       root.appendChild(D2T.topbar({ mode: ['433', '#FF7A1A'] }));
       const wrap = D2T.h(`<div class="g4-wrap">${defs()}
-        <div class="g4-tally"><div class="top"><small>433 GOALS</small><span><b class="tnum">0</b><i class="taway"></i></span></div>
-          <div class="g4-track"><span class="ovr"></span><span class="fill"></span><span class="mark"></span></div><em class="placed"></em></div>
+        <div class="g4-tally"><div class="top"><span class="g4-info"><b class="g4-player"></b><i class="g4-left"></i></span><span><b class="tnum">0</b><i class="taway"></i></span></div>
+          <div class="g4-track"><span class="ovr"></span><span class="fill"></span><span class="mark"></span></div></div>
         <div class="g4-pitch"></div>
         <div class="g4-trio"></div>
         <div class="g4-hint"></div>
@@ -164,9 +164,15 @@
       };
       const trioMyst = () => `${[0, 1, 2].map(() => `<div class="cell"><span class="g4-ptag"></span><div class="reelwin"><div class="strip">${shirt({ w: TW, state: 'myst' })}</div></div><span class="cap"></span></div>`).join('')}`;
       const trioLanded = () => S.cands.map((c, i) => `<div class="cell"><span class="g4-ptag on">${c.pos}</span><div class="reelwin landed"><div class="strip">${shirt({ w: TW, player: c, attr: `data-c="${i}"` })}</div></div><span class="cap">${trioCap(c)}</span></div>`).join('');
-      const setCounts = () => { reload.querySelector('.sp-count').textContent = S.respins; reload.disabled = busy || S.respins <= 0 || !S.cands || !openSlots().length; reload.setAttribute('aria-label', `Spin again, ${S.respins} left`); };
+      // left of the tally (12 Oct): which player you are on, how many are still to pick after him, respins left
+      const setInfo = () => {
+        const n = S.filled.length, cur = Math.min(n + 1, 11), left = 11 - cur, r = S.respins;
+        wrap.querySelector('.g4-player').textContent = n >= 11 ? 'Full XI' : `Player ${cur} of 11`;
+        wrap.querySelector('.g4-left').innerHTML = `${n >= 11 ? '' : `${left} ${left === 1 ? 'player' : 'players'} to pick · `}<em>${r} ${r === 1 ? 'respin' : 'respins'}</em>`;
+      };
+      const setCounts = () => { setInfo(); reload.querySelector('.sp-count').textContent = S.respins; reload.disabled = busy || S.respins <= 0 || !S.cands || !openSlots().length; reload.setAttribute('aria-label', `Spin again, ${S.respins} left`); };
       const setUI = (label, hint, off) => { lbl.textContent = label; lbl.style.fontSize = label.length > 10 ? Math.max(13, Math.round(21 * 10 / label.length)) + 'px' : ''; hintEl.textContent = hint; main.disabled = !!off; setCounts(); };
-      const setTally = (t) => { paintBar(wrap, t); wrap.querySelector('.placed').textContent = `${S.filled.length} of 11`; };
+      const setTally = (t) => { paintBar(wrap, t); setInfo(); };
 
       function idleUI() {
         const left = openSlots().length;
@@ -269,7 +275,7 @@
         const after = () => {
           if (!root.isConnected) return;
           fly.remove(); drawPitch(); trioEl.innerHTML = trioMyst();
-          wrap.querySelector('.placed').textContent = `${S.filled.length} of 11`;
+          setInfo();
           setUI(done ? 'Play again' : 'Spin', '', true);
           const slotEl = pitchEl.querySelector(`[data-slot="${ni}"]`);
           rollNumber(slotEl, p, () => shoot(slotEl, p, () => tickTo(from, total(), () => { busy = false; idleUI(); if (done) ending(total(), result); })));

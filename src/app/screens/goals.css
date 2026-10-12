@@ -5,12 +5,15 @@
 /* the bar */
 .g4-tally { padding: 0 16px 16px; flex-shrink: 0; }
 .g4-tally .top { display: flex; justify-content: space-between; align-items: baseline; }
-.g4-tally small { font: 900 italic 28px/1 'Exo 2', sans-serif; color: var(--g4); letter-spacing: -.005em; }
+.g4-tally .top { align-items: flex-end; }
+.g4-info { display: flex; flex-direction: column; gap: 3px; }
+.g4-tally .g4-info b { font: 800 12px/1.1 var(--font); font-style: normal; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #FFF; }
+.g4-tally .g4-info i { font-style: normal; font-size: 11px; font-weight: 700; color: var(--muted); }
+.g4-tally .g4-info i em { font-style: normal; color: var(--g4-t); }
 .g4-tally { position: relative; }
-.g4-tally .placed { position: absolute; left: 16px; bottom: 1px; font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .g4-tally .tnum { display: inline-block; transform-origin: 100% 60%; }
 /* within 20 goals of 433 (either side) the total and the gap pulse gently */
-.g4-tally.near .tnum, .g4-tally.near i { animation: g4near 1.1s ease-in-out infinite; }
+.g4-tally.near .tnum, .g4-tally.near .taway { animation: g4near 1.1s ease-in-out infinite; }
 .g4-tally.near .fill { animation: g4glow 1.1s ease-in-out infinite; }
 @keyframes g4near { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 @keyframes g4glow { 0%, 100% { box-shadow: 0 0 0 rgba(255,122,26,0); } 50% { box-shadow: 0 0 12px rgba(255,122,26,.75); } }

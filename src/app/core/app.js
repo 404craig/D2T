@@ -92,8 +92,8 @@
 
   // In-game chrome: small white D2T logo top left (taps home), account circle top right.
   // Pages reached from home or the account circle (howto, league, stats, account) get a back arrow before the logo.
-  // In a game the white D2T is followed by the mode in its colour (chosen 12 Oct, option 1 in design/prototype/mode-logo.html):
-  // Classic in the club's colour, Daily grey, Dare2Dream blue, Club X green; 433 Goals passes its own (opts.mode).
+  // In a game the mode sits in a slanted tag in its colour, centred in the top bar (chosen 12 Oct, "tag, centred" in
+  // design/prototype/mode-logo.html): Classic in the club's colour, Daily grey, Dare2Dream blue, Club X green; 433 Goals passes its own.
   const modeWord = () => {
     const r = D2T.state.run; if (!r || !D2T.game) return null;
     if (r.daily) return ['Daily', '#A9A9B2'];
@@ -105,9 +105,9 @@
   };
   D2T.topbar = (opts = {}) => {
     const mw = opts.back || opts.mode === false ? null : (opts.mode || modeWord());
-    const word = mw ? `<span class="logo-mode" style="color:${mw[1]}">${D2T.esc(mw[0])}</span>` : '';
-    const el = D2T.h(`<header class="topbar"><span class="topbar-l">${opts.back ? `<button class="back-btn" aria-label="Back">${ICON.back}</button>` : ''}<button class="logo-home" aria-label="Home${mw ? ', ' + D2T.esc(mw[0]) : ''}" style="border:0;background:none;padding:0;color:#fff;height:26px;display:flex;align-items:center;gap:8px">${D2T.logo('short', { style: 'height:26px' })}${word}</button></span>
-      ${opts.middle || '<span></span>'}${opts.noAccount ? '<span></span>' : `<button class="acct-btn" aria-label="Account">${ICON.account}</button>`}</header>`);
+    const tag = mw ? `<span class="mode-tag" style="--c:${mw[1]}"><span>${D2T.esc(mw[0])}</span></span>` : '';
+    const el = D2T.h(`<header class="topbar${mw ? ' has-mode' : ''}"><span class="topbar-l">${opts.back ? `<button class="back-btn" aria-label="Back">${ICON.back}</button>` : ''}<button class="logo-home" aria-label="Home${mw ? ', ' + D2T.esc(mw[0]) : ''}" style="border:0;background:none;padding:0;color:#fff;height:26px;display:flex">${D2T.logo('short', { style: 'height:26px' })}</button></span>
+      ${tag || opts.middle || '<span></span>'}${opts.noAccount ? '<span></span>' : `<button class="acct-btn" aria-label="Account">${ICON.account}</button>`}</header>`);
     el.querySelector('.logo-home').onclick = () => D2T.go('home');
     const acct = el.querySelector('.acct-btn'); if (acct) acct.onclick = () => D2T.go('account');
     const back = el.querySelector('.back-btn'); if (back) back.onclick = D2T.back;
