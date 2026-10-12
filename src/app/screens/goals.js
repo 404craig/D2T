@@ -178,8 +178,17 @@
         const left = openSlots().length;
         markPitch();
         if (!left) { setUI('Play again', `Full XI: ${gapText(total())}`); return; }
-        if (S.cands) { attach(); setUI(sel != null ? 'Pick ' + S.cands[sel].sur : 'Pick one', sel != null ? `Tap again, or drag onto an orange ${POS1[S.cands[sel].pos]} shirt` : 'Tap a shirt to pick him', sel == null); return; }
+        if (S.cands) { attach(); if (sel == null) tipsFor433(); setUI(sel != null ? 'Pick ' + S.cands[sel].sur : 'Pick one', sel != null ? `Tap again, or drag onto an orange ${POS1[S.cands[sel].pos]} shirt` : 'Tap a shirt to pick him', sel == null); return; }
+        if (!S.filled.length) tipsFor433();
         setUI('Spin', left === 1 ? 'Last shot: spin for your final shirt' : `Spin for three players. ${left} shirts to fill`);
+      }
+      // first-time tips: what to aim for, then how to place a player, then the respins
+      function tipsFor433() {
+        later(() => { if (!root.isConnected || busy) return;
+          const mid = trioEl.querySelector('[data-c="1"]');
+          if (!S.cands) D2T.tip('g433-goal', wrap.querySelector('.tnum'), 'Get this to exactly 433', { place: 'below', side: 'right' });
+          else D2T.tips([['g433-pick', mid, 'Tap one, then an orange shirt'], ...(S.respins > 0 ? [['g433-respin', reload, 'Not keen? Spin again']] : [])]);
+        }, 700);
       }
       function render() {
         sizePitch(); drawPitch(); setTally(total());

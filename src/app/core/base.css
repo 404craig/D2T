@@ -156,3 +156,11 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .d2c.mini .d2c-side { display: flex; flex-direction: column; align-items: center; gap: 0.35em; }
 .d2c.mini .d2c-side .d2c-flag { width: 3em; }
 .d2c.mini .d2c-side .d2c-crest { width: 2.9em; height: 2.9em; }
+
+/* first-time tips (D2T.tip): a handwritten note with a curved arrow, like the respin tip on the spin screen */
+.d2t-tip { position: absolute; z-index: 60; color: #fff; pointer-events: none; opacity: .95; transition: opacity .4s; animation: d2tTipIn .5s .25s var(--ease-out) both; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.85)); }
+.d2t-tip svg { position: absolute; width: 34px; height: 46px; }
+.d2t-tip span { position: absolute; left: 0; top: 0; font-family: Caveat, 'Bradley Hand', 'Segoe Print', cursive; font-weight: 600; font-size: 23px; line-height: 1; white-space: nowrap; transform: rotate(-2.5deg); }
+.d2t-tip.gone { opacity: 0; }
+@keyframes d2tTipIn { from { opacity: 0; transform: translateY(6px); } to { opacity: .95; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .d2t-tip { animation: none; } }
