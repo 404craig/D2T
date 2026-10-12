@@ -45,6 +45,7 @@ A mobile web football game. The page is built: edit `src/` and `data/`, then run
 - Achievements are cumulative (a title also counts as top 3, top half and beating the drop) and count Classic runs only. Dare2Dream runs are recorded apart (`mode` on each run, `record.dreamClubs`, `GAME.dreamRecord`). The real result is never shown after a match.
 - Phone rules from Tenaball: tap targets 44px or more; safe-area padding; solid status bar strip (`.screen::before`); sound starts on the first tap; reduced motion respected; share image built ahead so Share opens at once; sheets drag closed.
 - Build order of CSS and JS is the list at the top of `scripts/build.py`; add new screens there.
+- Loading (12 Oct): the page streams in parts so the intro shows within a second on a phone: logos, the shell (`SHELL` in build.py: app.js and intro.js, which start the intro), the data (game data as a `JSON.parse` string), the rest of the game (boot.js calls `D2T.ready()`; the intro waits for it with `D2T.whenReady` before going home), then the sound clips (`D2TSound.clipsLoaded`). Nothing in the shell may need the data at load.
 
 ## Data
 

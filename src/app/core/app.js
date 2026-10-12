@@ -200,6 +200,11 @@
     render(n);
   });
   // Every fresh load opens with the intro, which hands over to home (where Continue picks up a run).
+  // The page streams in three parts (scripts/build.py): this shell and the intro first, so the intro starts while the
+  // data and the rest of the game are still arriving. The intro waits at its handover until boot.js calls D2T.ready().
+  let isReady = false; const readyQ = [];
+  D2T.ready = () => { if (isReady) return; isReady = true; readyQ.splice(0).forEach((f) => f()); };
+  D2T.whenReady = (f) => { if (isReady) f(); else readyQ.push(f); };
   D2T.start = () => {
     let n = routeName();
     if (!introPlayed) { introPlayed = true; n = 'intro'; }
