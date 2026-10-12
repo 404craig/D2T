@@ -366,6 +366,7 @@ fs.mkdirSync(OUT, { recursive: true });
     check(got.crest, "Unbeaten Run (" + st + "): no crest on the card");
     if (st === "pts") await shot("53-unbeaten-clubs");
     // answer: either the run goes on (+1) or it is over (the sheet); both record nothing until the end
+    const runsBefore = await page.evaluate(() => (window.D2T.state.ub || {}).runs || 0);
     await page.click(".ub-higher"); await wait(1600);
     const r1 = await page.evaluate(() => ({ ok: !!document.querySelector(".ub-r.ok"), bad: !!document.querySelector(".ub-r.bad"), n: document.querySelector(".ub-n").textContent }));
     check(r1.ok || r1.bad, "Unbeaten Run (" + st + "): the answer did not resolve");
@@ -376,15 +377,14 @@ fs.mkdirSync(OUT, { recursive: true });
       await page.click(".ub-bar .is-home"); await wait(500);
       check(!!(await page.$('.sheet [data-k="quit"]')), "Unbeaten Run (" + st + "): home mid-run did not ask");
       await page.click('.sheet [data-k="quit"]'); await expectScreen("home"); await wait(600);
-      check(await page.evaluate(() => !(window.D2T.state.ub && window.D2T.state.ub.runs)), "Unbeaten Run (" + st + "): quitting recorded a run");
+      check(await page.evaluate((n) => ((window.D2T.state.ub || {}).runs || 0) === n, runsBefore), "Unbeaten Run (" + st + "): quitting recorded a run");
       await page.click('[data-act="unbeaten"]'); await expectScreen("unbeaten"); await wait(700);
     } else {
       check(!!(await page.$(".sheet")) && /Beaten first time/i.test(await page.textContent(".sheet")), "Unbeaten Run (" + st + "): no end sheet after a wrong answer");
-      check(await page.evaluate(() => window.D2T.state.ub.runs === 1), "Unbeaten Run (" + st + "): a finished run was not recorded");
+      check(await page.evaluate((n) => ((window.D2T.state.ub || {}).runs || 0) === n + 1, runsBefore), "Unbeaten Run (" + st + "): a finished run was not recorded");
       await shot("54-unbeaten-end");
       await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(700);
       check(!!(await page.$(".ub-spin")), "Unbeaten Run (" + st + "): closing the end sheet did not go back to the stat spin");
-      await page.evaluate(() => { window.D2T.state.ub = null; window.D2T.save(); });
     }
   }
   check(await page.evaluate((b) => JSON.stringify([window.D2T.game.record(), window.D2T.game.g433.record()]) === b, ubRecBefore), "Unbeaten Run changed another game's record");
