@@ -288,6 +288,12 @@ def main():
             if os.path.exists(path):
                 crests.setdefault(c, {})[size] = "data:image/png;base64," + base64.b64encode(open(path, "rb").read()).decode()
             # a white version for dark backgrounds, where a club's own crest is too dark to see (Derby, Spurs)
+            # a white version for the club's own coloured card, where a one-colour crest in that colour vanishes
+            # (Nottingham Forest, Liverpool, Sheffield Wed on red, red and blue; Craig, 12 Oct)
+            if meta.get("crestCard"):
+                path = os.path.join(ROOT, "assets", "crests", size, meta["crestCard"])
+                if os.path.exists(path):
+                    crests.setdefault(c, {})[size + "c"] = "data:image/png;base64," + base64.b64encode(open(path, "rb").read()).decode()
             if meta.get("crestDark"):
                 path = os.path.join(ROOT, "assets", "crests", size, meta["crestDark"])
                 if os.path.exists(path):

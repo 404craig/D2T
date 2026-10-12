@@ -78,7 +78,7 @@
     const foot = opts.foot || `${ordinal(c.pos)} · ${c.pts} pts`;
     return `<div class="d2c d2c-club ${opts.cls || ''}" style="${style}" aria-label="${esc(c.full || c.name)} ${c.season}">
       <div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span>${shine}
-      <div class="d2c-body"><img class="d2c-crest" src="${c.crestLight || c.crest}" alt=""><span class="d2c-cname"${cnameSize(c.name)}>${esc(c.name)}</span><span class="d2c-season">${c.season}</span>
+      <div class="d2c-body"><img class="d2c-crest" src="${c.crestCard || c.crestLight || c.crest}" alt=""><span class="d2c-cname"${cnameSize(c.name)}>${esc(c.name)}</span><span class="d2c-season">${c.season}</span>
       <span class="d2c-grow"></span><span class="d2c-hr"></span><span class="d2c-flabel">${opts.footLabel || 'REAL FINISH'}</span><span class="d2c-foot">${foot}</span></div></div></div>`;
   }
 
