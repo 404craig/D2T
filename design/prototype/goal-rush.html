@@ -53,11 +53,39 @@
   .tot { display: flex; align-items: baseline; gap: 6px; }
   .tot b { font: 900 italic 28px/1 'Exo 2'; }
   .tot i { font-style: normal; font-size: 12px; font-weight: 800; color: var(--y-t); }
+  /* tally options for the right-hand side */
+  .tot1 { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+  .tot1 .n { display: flex; align-items: baseline; }
+  .tot1 .n b { font: 900 italic 28px/1 'Exo 2'; }
+  .tot1 .n small { font: 900 italic 17px/1 'Exo 2'; color: #8E8E99; margin-left: 1px; }
+  .tot1 .n em { font-style: normal; font-size: 11px; font-weight: 800; color: #8E8E99; margin-left: 5px; text-transform: uppercase; letter-spacing: .06em; }
+  .tot1 i { font-style: normal; font-size: 12px; font-weight: 800; color: var(--y-t); }
+  .tot2 { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+  .tot2 b { font: 900 italic 30px/1 'Exo 2'; color: var(--y); }
+  .tot2 b small { font-size: 13px; color: var(--y-t); margin-left: 4px; text-transform: uppercase; }
+  .tot2 i { font-style: normal; font-size: 11px; font-weight: 700; color: #8E8E99; }
+  .tot2 i strong { color: #fff; font-weight: 900; }
+  .tot3 { display: flex; align-items: center; gap: 8px; }
+  .tot3 .n { font: 900 italic 28px/1 'Exo 2'; }
+  .tot3 .n small { font-size: 16px; color: #8E8E99; }
+  .tot3 .pill { font: 900 italic 13px/1 'Exo 2'; text-transform: uppercase; color: #0A0A0A; background: var(--y); padding: 6px 9px 5px; border-radius: 8px; }
+  .tot4 { display: grid; grid-template-columns: auto auto; gap: 0 14px; text-align: right; }
+  .tot4 span { display: flex; flex-direction: column; align-items: flex-end; }
+  .tot4 b { font: 900 italic 26px/1 'Exo 2'; }
+  .tot4 span:last-child b { color: var(--y); }
+  .tot4 i { font-style: normal; font-size: 9.5px; font-weight: 800; letter-spacing: .12em; color: #8E8E99; margin-top: 3px; }
+  .bar5 .track { height: 18px; border-radius: 9px; margin-top: 10px; }
+  .bar5 .track .fill { border-radius: 9px; display: flex; align-items: center; justify-content: flex-end; padding-right: 7px; font: 900 italic 12px/1 'Exo 2'; color: #0A0A0A; min-width: 34px; }
+  .bar5 .track .left { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font: 900 italic 12px/1 'Exo 2'; color: #8E8E99; }
+  .bar5 .track .mark2 { top: -3px; bottom: -3px; }
+  .bar5 .track .mark2::after { display: none; }
+  .bar5 .tot5 { font: 900 italic 15px/1 'Exo 2'; text-transform: uppercase; color: var(--y); }
+  .mini { width: 390px; max-width: 100%; border-radius: 22px; background: #000; box-shadow: 0 0 0 1px #222228; overflow: hidden; padding-bottom: 6px; }
   .track { position: relative; height: 10px; border-radius: 5px; background: #1B1B21; margin-top: 8px; }
-  .track .fill { position: absolute; right: 0; transition: width .3s; top: 0; bottom: 0; border-radius: 5px; background: linear-gradient(90deg, #FFB000, var(--y)); }
-  .track .mark2 { position: absolute; right: auto; left: -1px; top: -4px; bottom: -4px; width: 2px; background: #fff; }
+  .track .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; background: linear-gradient(90deg, #FFB000, var(--y)); }
+  .track .mark2 { position: absolute; right: -1px; top: -4px; bottom: -4px; width: 2px; background: #fff; }
   .tally .sub { display: block; text-align: right; font-size: 10px; font-weight: 800; letter-spacing: .06em; color: var(--muted); margin-top: 5px; text-transform: uppercase; }
-  .track .mark2::after { content: attr(data-t); position: absolute; bottom: -12px; left: 4px; font: 900 italic 9px/1 'Exo 2'; opacity: .8; }
+  .track .mark2::after { content: attr(data-t); position: absolute; bottom: -12px; right: 4px; font: 900 italic 9px/1 'Exo 2'; opacity: .8; }
 
   .pitch { position: relative; margin: 0 12px; flex: 1 1 auto; border-radius: 18px; overflow: hidden; isolation: isolate;
     background: radial-gradient(90% 55% at 50% -10%, rgba(255,255,255,.22), rgba(255,255,255,0) 60%), repeating-linear-gradient(180deg, #0D3A24 0 9%, #0A311E 9% 18%); }
@@ -97,9 +125,12 @@
 <div class="page">
   <div class="head">
     <h1>Goal Rush</h1>
-    <p>433 Goals becomes Goal Rush, in yellow. Each game picks one of eight formations at random (442, 433, 451, 352, 343, 424, 532, 541): that number is the target and the pitch takes that shape. The top right now counts down from the target to 0, and the bar empties as you go. Your 433 record carries on. Players, clubs and career goals are real.</p>
+    <p>433 Goals becomes Goal Rush, in yellow. Each game picks one of eight formations at random (442, 433, 451, 352, 343, 424, 532, 541): that number is the target and the pitch takes that shape. The bar fills left to right; the tally shows scored over target and how many to go (five ways below). Your 433 record carries on. Players, clubs and career goals are real.</p>
   </div>
   <div class="row" id="row"></div>
+  <h2 style="font:900 italic 30px/1 'Exo 2';margin:10px 0 0">The goal tally: five ways</h2>
+  <p style="margin:0;color:#BDBDC6;font-size:15px;line-height:1.5;max-width:92ch">The bar fills left to right again, up to the target line. For the numbers on the right, each option shows the same moment twice: 52 of 352 early on, then 341 of 352 near the end. Option 1 is used in the phones above.</p>
+  <div class="row" id="tallies"></div>
 </div>
 <script src="data/data.js"></script>
 <script src="data/goals433.js"></script>
@@ -142,7 +173,7 @@
   const pitch = (f, filled, openFrom) => `<div class="pitch">${LINES}<span class="circle"></span><div class="paint">${f} GOALS</div><span class="shape">${f.split('').join('-')}</span>${slots(f).map(([lab, x, y], i) => {
     const p = filled[i];
     return `<div class="slot" style="left:${x}%;top:${y}%">${p ? shirt({ w: 50, p }) + `<span class="nm">${p.sur}</span>` : shirt({ w: 50, pos: lab, open: i >= openFrom || !p })}</div>`; }).join('')}</div>`;
-  const tally = (t, target, player, left, respins) => `<div class="tally"><div class="top"><span class="info"><b>Player ${player} of 11</b><i>${left} players to pick · <em>${respins} respins</em></i></span><span class="tot"><b>${target - t}</b><i>${t <= target ? 'to go' : 'over'}</i></span></div><div class="track"><span class="fill" style="width:${Math.max(0, 100 - t / target * 100)}%"></span><span class="mark2" data-t="0"></span></div><span class="sub">${t} scored of ${target}</span></div>`;
+  const tally = (t, target, player, left, respins) => `<div class="tally"><div class="top"><span class="info"><b>Player ${player} of 11</b><i>${left} players to pick · <em>${respins} respins</em></i></span><span class="tot1"><span class="n"><b>${t}</b><small>/${target}</small><em>goals</em></span><i>${t <= target ? (target - t) + ' to go' : (t - target) + ' over'}</i></span></div><div class="track"><span class="fill" style="width:${Math.min(100, t / target * 100)}%"></span><span class="mark2" data-t="${target}"></span></div></div>`;
   const top = () => `<div class="tb"><span class="logo"></span><span class="mtag"><span>Goal Rush</span></span><span class="acct">${ACCT}</span></div>`;
   const bar = (label, r) => `<div class="bar"><span class="circ">${RESPIN}<span class="n">${r}</span></span><span class="spin">${label}</span><span class="circ">${HOME}</span></div>`;
   const myst = () => `<div class="trio">${[0, 1, 2].map(() => `<div class="cell"><div class="sh" style="--w:92px"><svg viewBox="0 0 100 100"><path d="${SHIRT}" fill="#16161B" stroke="#3A3A44" stroke-width="2.4" stroke-linejoin="round"/><text x="50" y="70" font-size="44" fill="#4A4A56">?</text></svg></div><span class="cap">&nbsp;</span></div>`).join('')}</div>`;
@@ -175,8 +206,20 @@
 
   const O = [['HOME', 'Goal Rush on home', 'Yellow, in place of 433 Goals. Your ball, faded behind the card like the Club X badge.', home],
     ['START', 'The target reveal', 'A new game rolls through the eight formations and stops on one. That number is the target and the pitch behind takes its shape.', reveal],
-    ['3-5-2', 'A 3-5-2 game', `Three at the back, five in midfield, two up front. Six picked so far: the top right counts down from 352, now 38 to go, and the bar empties towards 0. The open shirts are yellow.`, game1],
+    ['3-5-2', 'A 3-5-2 game', `Three at the back, five in midfield, two up front. Six picked so far: the top right reads 314/352 goals with 38 to go, and the bar fills towards the target. The open shirts are yellow.`, game1],
     ['4-4-2', 'A 4-4-2 game', `The next game is a 4-4-2: target 442, the pitch in two banks of four. Four picked: ${442 - t2} to go.`, game2]];
+  const TOT = {
+    1: (t, T) => `<span class="tot1"><span class="n"><b>${t}</b><small>/${T}</small><em>goals</em></span><i>${T - t} to go</i></span>`,
+    2: (t, T) => `<span class="tot2"><b>${T - t}<small>to go</small></b><i><strong>${t}</strong> of ${T} goals</i></span>`,
+    3: (t, T) => `<span class="tot3"><span class="n">${t}<small>/${T}</small></span><span class="pill">${T - t} to go</span></span>`,
+    4: (t, T) => `<span class="tot4"><span><b>${t}</b><i>SCORED</i></span><span><b>${T - t}</b><i>TO GO</i></span></span>`,
+    5: (t, T) => `<span class="tot5">${T - t} to go</span>` };
+  const TN = [[1, 'Scored over target', '52/352 goals, with 300 to go underneath. Reads like a score; your idea.'], [2, 'To go first', 'The big number is what is left, in yellow; scored of target sits under it.'], [3, 'Score and a pill', '52/352 with a yellow pill: 300 TO GO. Compact, the pill draws the eye.'], [4, 'Two columns', 'SCORED and TO GO side by side, like a scoreboard.'], [5, 'Numbers on the bar', 'A thicker bar with the scored number riding on the fill and what is left at the end; only "300 to go" on the right.']];
+  const mini = (k, t) => { const T = 352, info = `<span class="info"><b>Player ${t < 100 ? 3 : 10} of 11</b><i>${t < 100 ? '8 players' : '1 player'} to pick · <em>3 respins</em></i></span>`;
+    const pct = Math.min(100, t / T * 100);
+    const track = k === 5 ? `<div class="track"><span class="fill" style="width:${pct}%">${t}</span>${pct < 82 ? `<span class="left">${T}</span>` : ''}<span class="mark2"></span></div>` : `<div class="track"><span class="fill" style="width:${pct}%"></span><span class="mark2" data-t="${T}"></span></div>`;
+    return `<div class="mini">${top()}<div class="tally${k === 5 ? ' bar5' : ''}"><div class="top">${info}${TOT[k](t, T)}</div>${track}</div></div>`; };
+  document.getElementById('tallies').innerHTML = TN.map(([k, h, d]) => `<div class="opt"><div class="opt-h"><span class="tag">OPTION ${k}</span><h3>${h}</h3><p>${d}</p></div>${mini(k, 52)}${mini(k, 341)}</div>`).join('');
   document.getElementById('row').innerHTML = O.map(([t, h, d, ph]) => `<div class="opt"><div class="opt-h"><span class="tag">${t}</span><h3>${h}</h3><p>${d}</p></div>${ph}</div>`).join('');
 })();
 </script>
