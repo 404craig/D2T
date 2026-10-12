@@ -47,6 +47,10 @@
   .card.silver { box-shadow: inset 0 0 0 1px rgba(214,219,226,.5); }
   .card.silver .t-tag { background: linear-gradient(90deg, #F4F6F8, #AEB4BC); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
+  /* the daily crest takes the Club X badge's box: the badge is 110 x 144; crests are often wider than tall, so the box is a little wider to give the same visual weight */
+  .mark img.crest { width: 124px; height: 144px; object-fit: contain; }
+  .dfull .mark { opacity: 1; }
+  .dfull .mark img.crest { filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
   /* Daily layouts */
   /* 1: the crest is the mark, faded like the other modes' marks */
   .d1 .mark img { width: 104px; opacity: 1; }
@@ -67,13 +71,10 @@
 <body>
 <div class="page">
   <div class="head">
-    <h1>Mode colours, option A</h1>
-    <p>Option A on its own now. Daily Challenge is blue and Club X green, so the Club X badge matches its colour. Below: three ways to make the daily card the same size and text as the others, with the club's crest where the other modes keep their mark. Then the same cards with the daily in white and in silver, which may sit better with every club's badge.</p>
+    <h1>Mode colours</h1>
+    <p>Option A: each mode's colour washes in from the right. Daily Challenge white, Dare2Dream purple, Club X green, 433 Goals orange. Every card has the same shape and height: tag, two-line title, one line of description, the mark behind on the right, the button bottom right.</p>
   </div>
-  <section class="sec"><h2>Daily: three layouts</h2><p>All four cards now share one shape and height: tag, two-line title (club, then season), one line of description, mark on the right, button bottom right. The daily's tag carries the date, the title is the club and season, and the line says the mode. Switch the daily's colour here:</p>
-    <div class="pick" id="pick"><button data-c="blue" class="on"><i style="background:#3BA4FF"></i>Blue</button><button data-c="white"><i style="background:#fff"></i>White</button><button data-c="silver"><i style="background:linear-gradient(160deg,#F4F6F8,#AEB4BC)"></i>Silver</button></div>
-    <div class="row" id="layouts"></div></section>
-  <section class="sec"><h2>Daily in white and silver</h2><p>Layout 2 side by side in the three colours, so you can compare.</p><div class="row" id="colours"></div></section>
+  <section class="sec"><h2>Chosen: daily in white</h2><p>The daily card in white, the date in the top row, and the club crest behind the card exactly where and how big the Club X badge sits: same box, same tilt, same fade. On the right, the same card with the crest in full colour at that size, if you want today's club to show more.</p><div class="row" id="final"></div></section>
 </div>
 <script>
 (function () {
@@ -94,12 +95,11 @@
   const L = [[1, 'Crest as the mark', 'The club crest sits where the other modes keep their logo, big and faded the same way. The most consistent: four matching cards.'],
     [2, 'Crest in full colour', 'Same place, but the crest is in its real colours, smaller and tilted, on a soft glow of the daily colour. Today\'s club stands out; the card still matches.'],
     [3, 'Crest plus a date chip', 'As 1, with a small calendar chip (12 OCT) top right in the daily colour, so it reads as today\'s challenge at a glance. The tag drops the date.']];
-  let colour = 'blue';
-  const draw = () => { document.getElementById('layouts').innerHTML = L.map(([n, h, d]) => `<div class="opt"><div class="opt-h"><span class="tag">LAYOUT ${n}</span><h3>${h}</h3><p>${d}</p></div>${phone(n, colour)}</div>`).join(''); };
-  draw();
-  document.querySelectorAll('#pick button').forEach((b) => b.onclick = () => { colour = b.dataset.c; document.querySelectorAll('#pick button').forEach((x) => x.classList.toggle('on', x === b)); draw(); });
-  document.getElementById('colours').innerHTML = [['blue', 'Blue', 'Clear of every other mode colour. Many club badges are blue, so it can clash on blue clubs.'], ['white', 'White', 'Neutral: every badge sits well on it. The card reads quieter, a little like a plain black card with a white rim.'], ['silver', 'Silver', 'Brushed metal button, rim and tag. Neutral like white, with a touch of trophy; ties in with silver club badges.']]
-    .map(([c, h, d]) => `<div class="opt"><div class="opt-h"><span class="tag">${h.toUpperCase()}</span><h3>Daily in ${h.toLowerCase()}</h3><p>${d}</p></div>${phone(2, c)}</div>`).join('');
+  const final = (full) => { const m = { c: DC.white, tag: 'DAILY CHALLENGE · 12 OCT', big: 'Watford<br>1999/00', sub: 'Classic: they went down. Rescue them.', mark: '<img class="crest" src="assets/crests/watford.png" alt="">' };
+    return `<div class="phone"><div class="sect">Other modes</div>${card(m, '', full ? 'dfull' : '')}${MODES.map((x) => card(x)).join('')}<div class="soon">Coming soon: Head to head · Steal</div></div>`; };
+  document.getElementById('final').innerHTML = [[false, 'CHOSEN', 'Crest faded, like Club X', 'White tag, rim and button. The crest is faded behind the text exactly like the Club X badge, so all four cards match.'],
+    [true, 'VARIANT', 'Crest in full colour, same size', 'The same card with the crest in its real colours at the Club X badge size. Louder, but today\'s club is obvious.']]
+    .map(([full, t, h, d]) => `<div class="opt"><div class="opt-h"><span class="tag">${t}</span><h3>${h}</h3><p>${d}</p></div>${final(full)}</div>`).join('');
 })();
 </script>
 </body>
