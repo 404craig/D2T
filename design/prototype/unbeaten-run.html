@@ -75,6 +75,18 @@
   .cardE .n { position: relative; font: 900 italic 60px/1 'Exo 2'; }
   .cardE .u { position: relative; font-size: 9.5px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
 
+  .C .chiprow img.cr { width: 36px; height: 36px; }
+  /* club stat cards */
+  .cardC { width: 160px; height: 224px; border-radius: 18px; position: relative; overflow: hidden; background: #0E0E10; box-shadow: inset 0 0 0 1px var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; isolation: isolate; }
+  .cardC::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(165deg, var(--acc) 0%, transparent 72%); opacity: .4; }
+  .cardC .wm { position: absolute; left: 50%; top: 50%; width: 190px; height: 190px; margin: -95px; object-fit: contain; opacity: .13; z-index: -1; }
+  .cardC .nm { position: absolute; top: 13px; left: 12px; font: 900 italic 13px/1 'Exo 2'; text-transform: uppercase; }
+  .cardC .n { font: 900 italic 66px/1 'Exo 2'; letter-spacing: -.01em; }
+  .cardC .n.q { animation: qp 1.6s ease-in-out infinite; }
+  .cardC .u { font-size: 10px; font-weight: 800; letter-spacing: .14em; color: var(--soft); margin-top: 2px; }
+  .cardC.below .crest { width: 56px; height: 56px; object-fit: contain; margin-top: 12px; filter: drop-shadow(0 3px 6px rgba(0,0,0,.6)); }
+  .cardC.below .nm { display: none; }
+  .cardC.corner .crest { position: absolute; top: 9px; right: 9px; width: 40px; height: 40px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,.6)); }
   /* start page */
   .body { padding: 6px 16px 0; flex: 1; display: flex; flex-direction: column; }
   .sect { font: 900 italic 30px/1 'Exo 2'; text-transform: uppercase; }
@@ -136,8 +148,9 @@
     <h1>Unbeaten Run</h1>
     <p>Higher or lower, one stat per run, one wrong answer ends it. Cyan (#22D3EE) is its colour, as on the prototype. First, five ways to show the club on the cards using only the 128px crests we already ship (no 2.4 MB of bigger crests). Then the start page, the game page and the end, in the same style as the other games. Players, clubs and numbers are real.</p>
   </div>
-  <section class="sec"><h2>Badges on the cards</h2><p>Each option shows the same moment: Shearer's 260 career Premier League goals against Rooney, higher or lower. The crest never draws bigger than it was made (128px, shown at 34 to 128px).</p><div class="row" id="badges"></div></section>
-  <section class="sec"><h2>The pages</h2><p>Home card, start page with the stat spin, the game page and the end. Same conventions as Goal Rush and the home cards: black, cyan the only accent, the mode tag centred, a faded mark behind, Black Italic numbers, Share at the end. Built with badge option A.</p><div class="row" id="pages"></div></section>
+  <section class="sec"><h2>Round 2</h2><p>Your picks: the shirt for player stats (crest and flag, no club code, three-digit numbers fixed) and two takes on a card for club stats. Real numbers: Shearer 260 and Rooney 208 career Premier League goals; Man City 100 points in 2017/18 and Liverpool 99 in 2019/20.</p><div class="row" id="v2"></div></section>
+  <section class="sec"><h2>Round 1: badges on the cards</h2><p>Each option shows the same moment: Shearer's 260 career Premier League goals against Rooney, higher or lower. The crest never draws bigger than it was made (128px, shown at 34 to 128px).</p><div class="row" id="badges"></div></section>
+  <section class="sec"><h2>The pages</h2><p>Home card, start page with the stat spin, the game page and the end. Same conventions as Goal Rush and the home cards: black, cyan the only accent, the mode tag centred, a faded mark behind, Black Italic numbers, Share at the end. Updated with the round 2 player shirt.</p><div class="row" id="pages"></div></section>
 </div>
 <script src="data/data.js"></script>
 <script>
@@ -158,7 +171,10 @@
   const FLAG = 'assets/flags/gb-eng.svg';
   // a shirt with the stat as its number (or ?) and the surname; extra = what goes on it for the option
   const shirt = (p, shown, extra = '') => { const k = K(p.club), S = p.sur.toUpperCase();
-    return `<div class="sh" style="--tr:${k.tr}">${extra}<svg viewBox="0 0 100 100"><path d="${SHIRT}" fill="${k.fill}" stroke="${k.tr}" stroke-width="2.4" stroke-linejoin="round"/><path d="M42 4 Q50 11 58 4" fill="none" stroke="${k.tr}" stroke-width="4" stroke-linecap="round"/><text x="50" y="28" font-size="12" fill="${k.ink}" textLength="${Math.min(46, S.length * 7.4)}" lengthAdjust="spacingAndGlyphs">${S}</text><text ${shown ? '' : 'class="q" '}x="50" y="72" font-size="36" fill="${k.ink}">${shown ? p.v : '?'}</text></svg></div>`; };
+    return `<div class="sh" style="--tr:${k.tr}">${extra}<svg viewBox="0 0 100 100"><path d="${SHIRT}" fill="${k.fill}" stroke="${k.tr}" stroke-width="2.4" stroke-linejoin="round"/><path d="M42 4 Q50 11 58 4" fill="none" stroke="${k.tr}" stroke-width="4" stroke-linecap="round"/><text x="50" y="28" font-size="12" fill="${k.ink}" textLength="${Math.min(46, S.length * 7.4)}" lengthAdjust="spacingAndGlyphs">${S}</text><text ${shown ? '' : 'class="q" '}x="50" y="${NY(shown ? p.v : '?')}" font-size="${NS(shown ? p.v : '?')}" fill="${k.ink}">${shown ? p.v : '?'}</text></svg></div>`; };
+  // the number fits the shirt body (x 26 to 74): 36 for one or two digits, 25 for three, 20 for four
+  const NS = (v) => ({ 1: 36, 2: 36, 3: 25, 4: 20 })[String(v).length] || 20;
+  const NY = (v) => 72 - (36 - NS(v)) * 0.35;
   const who = (p) => `<div class="who"><b>${p.name}</b><span>${D.clubs[p.club].name} · ${p.yrs}</span></div>`;
   const B = {
     A: (p, s) => `<div class="item A">${shirt(p, s, `<span class="disc"><img src="${D.clubs[p.club].crest}" alt=""></span>`)}${who(p)}</div>`,
@@ -167,6 +183,17 @@
     D: (p, s) => { const k = K(p.club); return `<div class="item"><div class="cardD" style="background:linear-gradient(165deg, ${k.fill}, color-mix(in srgb, ${k.fill} 45%, #000));color:${k.ink}"><span class="code">${D.clubs[p.club].code}</span><span class="n">${s ? p.v : '?'}</span><span class="u">PL GOALS</span><span class="stripe" style="background:${k.tr}"></span></div>${who(p)}</div>`; },
     E: (p, s) => { const k = K(p.club); return `<div class="item"><div class="cardE" style="--acc:${k.fill}"><img class="wm" src="${D.clubs[p.club].crest}" alt=""><img class="crest" src="${D.clubs[p.club].crest}" alt=""><span class="nm">${p.sur}</span><span class="n">${s ? p.v : '?'}</span><span class="u">PL GOALS</span></div>${who(p)}</div>`; }
   };
+  // chosen for player stats: the shirt, then only the crest and his flag under it
+  const PL = (p, s) => `<div class="item C">${shirt(p, s)}<div class="chiprow"><img class="cr" src="${D.clubs[p.club].crest}" alt=""><img class="flag" src="${FLAG}" alt=""></div>${who(p)}</div>`;
+  // club stats: a large faded crest behind, the stat big in the middle, the crest sharp below it (pos 'below') or top right ('corner')
+  const CL = [{ club: 'Man City', v: 100, yrs: '2017/18' }, { club: 'Liverpool', v: 99, yrs: '2019/20' }];
+  const clubCard = (c, s, pos) => { const k = K(c.club), cr = D.clubs[c.club].crest;
+    return `<div class="item"><div class="cardC ${pos}" style="--acc:${k.fill}"><img class="wm" src="${cr}" alt=""><span class="nm">${c.club}</span>${pos === 'corner' ? `<img class="crest" src="${cr}" alt="">` : ''}<span class="n${s ? '' : ' q'}" style="font-size:${String(s ? c.v : '?').length > 2 ? 54 : 66}px">${s ? c.v : '?'}</span><span class="u">POINTS</span>${pos === 'below' ? `<img class="crest" src="${cr}" alt="">` : ''}</div><div class="who"><b>${D.clubs[c.club].full}</b><span>${c.yrs}</span></div></div>`; };
+  const clubPair = (pos) => `<div class="pair">${clubCard(CL[0], true, pos)}${clubCard(CL[1], false, pos)}<span class="vs" style="top:112px">VS</span></div>`;
+  const N2 = [['PLAYER STATS', 'The shirt, then crest and flag', 'Your pick, with the club code gone: just the 128px crest (shown at 36px) and his flag under the shirt. Three-digit numbers now drop to a smaller size so they stay inside the shirt.', `<div class="pair">${PL(P[0], true)}${PL(P[1], false)}<span class="vs">VS</span></div>`],
+    ['CLUB STATS · 1', 'Faded crest, sharp crest below', 'A dark card washed in the club colour, the crest large and faded behind (fading hides the stretch), the stat big in the middle and the crest sharp at 56px under it.', clubPair('below')],
+    ['CLUB STATS · 2', 'Faded crest, sharp crest top right', 'The same card with the sharp crest top right at 40px and the club name top left, so the number has the middle to itself.', clubPair('corner')]];
+  document.getElementById('v2').innerHTML = N2.map(([t, h, d, x]) => `<div class="opt"><div class="opt-h"><span class="tag">${t}</span><h3>${h}</h3><p>${d}</p></div><div class="panel">${x}</div></div>`).join('');
   const BN = [['A', 'Crest on a white disc at the collar', 'The Goal Rush pitch-shirt treatment, bigger: a 34px crest on a 44px white disc ringed in the club colour. Every crest reads, including the line-drawn ones.'],
     ['B', 'Crest on a club-colour disc under the shirt', 'A 56px disc in the club colour holding a 44px crest, with his flag beside it. The shirt stays clean.'],
     ['C', 'Club code chip and small crest', 'A chip with the club code (NEW, MUN) in its colours, a 28px crest and his flag under the shirt. Most compact.'],
@@ -189,7 +216,7 @@
     <div class="bar"><span class="main"><span class="emb"></span>Spin</span><span class="circ">${HOME}</span></div></div>`;
   // 3: game page
   const game = `<div class="phone tall">${bg}${top()}<div class="ghead"><span class="l"><b>Career goals</b><i>Premier League · <em>one wrong and it is over</em></i></span><span class="r"><b>6</b><i>UNBEATEN</i></span></div>
-    <div style="padding:16px 14px 0">${pairOf('A')}</div><div class="ghint">Swipe his shirt up for higher, down for lower, or tap below</div>
+    <div style="padding:16px 14px 0"><div class="pair">${PL(P[0], true)}${PL(P[1], false)}<span class="vs">VS</span></div></div><div class="ghint">Swipe his card up for higher, down for lower, or tap below</div>
     <div class="bar"><span class="hl lo">${DOWN}Lower</span><span class="hl hi">${UP}Higher</span><span class="circ">${HOME}</span></div></div>`;
   // 4: the end
   const end = `<div class="phone tall">${bg}${top()}<div class="endbig"><small>CAREER GOALS · RUN OVER</small><b>14</b><span>Unbeaten · a new best</span><p>Your best on career goals was 12.</p></div>
@@ -197,7 +224,7 @@
     <div class="bar" style="flex-direction:column;gap:10px"><span class="main" style="width:100%;flex:none">Share</span><span class="main" style="width:100%;flex:none;background:transparent;color:var(--c);border:2px solid var(--c);box-shadow:none">Spin again</span></div></div>`;
   const PG = [['HOME', 'The home card', 'Cyan, in the same card as the other games, the up-down mark faded behind. Question line, then your best run.', home],
     ['START', 'Spin for a stat', 'The mode tag centred, the mark faded behind, the stat reel in a cyan-ringed window, your best run per stat in small cards, the Spin button as in the other games.', start],
-    ['GAME', 'Higher or lower', 'The stat top left, the run as a big cyan number top right (like the Goal Rush tally). Shirts with the crest on a white disc (option A), Lower and Higher at the bottom.', game],
+    ['GAME', 'Higher or lower', 'The stat top left, the run as a big cyan number top right (like the Goal Rush tally). Player stats on shirts with the crest and flag under them, Lower and Higher at the bottom.', game],
     ['END', 'Run over', 'The run big in cyan, how it ended, then Share first and Spin again, as every game ends.', end]];
   document.getElementById('pages').innerHTML = PG.map(([t, h, d, ph]) => `<div class="opt"><div class="opt-h"><span class="tag">${t}</span><h3>${h}</h3><p>${d}</p></div>${ph}</div>`).join('');
 })();
