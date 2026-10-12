@@ -74,6 +74,13 @@
     return gameCard({ c: '#FFD21F', attrs: 'data-act="g433"', label: 'Goal Rush', tag: 'GOAL RUSH', big: 'Score the exact number of goals', sub, mark: `<img src="${window.D2T_GOALRUSH_LOGO || ''}" alt="">` });
   }
 
+  // Unbeaten Run card (cyan; Craig's higher or lower game, 12 Oct): the question wording, then your best run.
+  function ubCard() {
+    const r = D2T.ubRecord ? D2T.ubRecord() : { runs: 0, top: 0 };
+    const sub = 'One stat, real Premier League numbers. How long can you stay unbeaten?' + (r.top ? ` Best: ${r.top}.` : '');
+    return gameCard({ c: '#22D3EE', attrs: 'data-act="unbeaten"', label: 'Unbeaten Run', tag: 'UNBEATEN RUN', big: 'Higher or lower?', sub, mark: D2T.ubMark || '' });
+  }
+
   // Daily challenge card: today's club for everyone, the mode it plays, and your result once played.
   function dailyCard() {
     const G = D2T.game, d = G.dailyEntry(G.today()), res = G.dailyResult(), streak = G.dailyStreak();
@@ -150,6 +157,7 @@
         ${dailyCard()}
         ${gameCard({ c: '#12F06C', attrs: 'data-act="pick" data-mode="clubx"', label: 'Club X', tag: 'CLUB X', big: 'From nowhere to champions', sub: `Replace the worst side in a real season and go for the title.${xr.runs ? ` ${xr.titles} ${xr.titles === 1 ? 'title' : 'titles'} from ${xr.runs} ${xr.runs === 1 ? 'go' : 'goes'}.` : ''}`, mark: `<img src="${D2T.game.club('Club X').crest}" alt="">` })}
         ${g433Card()}
+        ${ubCard()}
         ${gameCard({ c: '#3BA4FF', attrs: 'data-act="pick" data-mode="dare2dream"', label: 'Dare2Dream', tag: 'DARE2DREAM', big: 'Rewrite their season', sub: `Any club from any season. Draft 11 and beat their real finish.${dreams.runs ? ` ${dreams.dreams} of ${dreams.runs} dreams so far.` : ''}`, mark: D2T.logo('emblemLine') })}
         ${gameCard({ c: '#A66BFF', href: 'https://404craig.github.io/Tenaball/', label: 'Tenaball, opens in a new tab', tag: 'TENABALL', big: 'Name the top ten', sub: 'Our football quiz. Opens Tenaball.', mark: `<img src="${window.D2T_TENABALL_LOGO || ''}" alt="">` })}
           <div class="fr-sect-h fr-soon-h"><span>Coming soon</span></div>
@@ -235,6 +243,7 @@
         s.body.querySelector('[data-k="yes"]').onclick = () => { s.close(); startNew(from, mode); };
       });
       body.querySelector('[data-act="g433"]').onclick = (e) => D2T.toBlack('goals433', { from: e.currentTarget });
+      body.querySelector('[data-act="unbeaten"]').onclick = (e) => D2T.toBlack('unbeaten', { from: e.currentTarget });
       const cont = body.querySelector('[data-act="continue"]');
       if (cont) cont.onclick = (e) => D2T.toBlack(D2T.game.stepFor() || 'squad', { from: e.currentTarget });
       body.querySelector('.fr-home-logo').onclick = () => D2T.go('intro');

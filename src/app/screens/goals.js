@@ -78,6 +78,8 @@
   const CREST = () => D2T.g4crest || 'disc';
   // under each big shirt: the club's name, or its crest when the crest moves there
   const trioCap = (p) => (CREST() === 'caption' ? `<img class="capcrest" src="${kit(p.club).crest}" alt="${D2T.esc(p.club)}">` : D2T.esc(p.club));
+  // shared with Unbeaten Run (screens/unbeaten.js): the kits, their pattern defs and the shirt drawing
+  D2T.shirts = { kit, defs, shirt: (...a) => shirt(...a) };
   function shirt(o) {
     const w = o.w, big = w >= 70, cls = o.cls || '';
     if (!o.player) {
