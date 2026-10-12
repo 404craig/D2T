@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D2T Unbeaten Run</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<style>
+  /* Unbeaten Run: badge treatments for the higher or lower cards using only the 128px crests, then its start page, game page
+     and end, brought in line with the other games (black, cyan #22D3EE as the only accent, tag centred, faded mark, Share). */
+  :root { color-scheme: dark; --c: #22D3EE; --ct: #8BEAF7; --soft: #CFCFD6; --muted: #8E8E99; --line: #26262C; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #08080A; color: #fff; font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 1760px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 28px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
+  .head p, .sec > p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 96ch; }
+  .sec { display: flex; flex-direction: column; gap: 16px; padding-top: 24px; border-top: 1px solid #1E1E22; }
+  .sec > h2 { font: 900 italic 30px/1 'Exo 2'; margin: 0; }
+  .row { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .opt { width: 390px; max-width: 100%; display: flex; flex-direction: column; gap: 10px; }
+  .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: #12F06C; }
+  .opt-h h3 { font: 900 italic 21px/1.05 'Exo 2'; margin: 3px 0; }
+  .opt-h p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; min-height: 57px; }
+  .phone { position: relative; width: 390px; max-width: 100%; border-radius: 26px; background: #000; box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,.6); overflow: hidden; display: flex; flex-direction: column; isolation: isolate; }
+  .phone.tall { height: 760px; }
+  .panel { width: 390px; max-width: 100%; border-radius: 22px; background: #000; box-shadow: 0 0 0 1px #222228; padding: 22px 14px 18px; position: relative; }
+
+  /* top bar */
+  .tb { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 14px 16px 8px; }
+  .logo { display: block; height: 26px; aspect-ratio: 857 / 241; background: #fff; -webkit-mask: url('assets/logo/short.png') center / contain no-repeat; mask: url('assets/logo/short.png') center / contain no-repeat; }
+  .mtag { font: 900 italic 15px/1 'Exo 2'; letter-spacing: .04em; text-transform: uppercase; color: #0A0A0A; background: var(--c); padding: 5px 10px 4px; border-radius: 5px; transform: skewX(-10deg); white-space: nowrap; }
+  .mtag span { display: inline-block; transform: skewX(10deg); }
+  .acct { justify-self: end; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: #0E0E10; display: grid; place-items: center; }
+  .acct svg { width: 18px; height: 18px; }
+  .bgmark { position: absolute; right: -60px; top: 120px; width: 300px; height: 300px; color: var(--c); opacity: .07; z-index: -1; pointer-events: none; }
+
+  /* the pair */
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; position: relative; }
+  .vs { position: absolute; left: 50%; top: 92px; transform: translate(-50%, -50%); width: 36px; height: 36px; border-radius: 50%; background: #000; border: 1px solid var(--line); display: grid; place-items: center; font: 900 italic 13px/1 'Exo 2'; color: var(--ct); z-index: 3; }
+  .item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .who { text-align: center; line-height: 1.25; }
+  .who b { display: block; font: 900 italic 15px/1.05 'Exo 2'; text-transform: uppercase; }
+  .who span { display: block; font-size: 11.5px; font-weight: 600; color: var(--muted); margin-top: 3px; }
+  .flag { width: 22px; height: 16.5px; border-radius: 3px; object-fit: cover; box-shadow: 0 0 0 1px rgba(0,0,0,.4); }
+
+  /* shirts */
+  .sh { position: relative; width: 150px; aspect-ratio: 1 / 1.02; }
+  .sh svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .sh text { font-family: 'Exo 2'; font-style: italic; font-weight: 900; text-anchor: middle; }
+  .sh .q { animation: qp 1.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes qp { 50% { opacity: .55; } }
+
+  /* A: disc at the collar (as Goal Rush pitch shirts), 40px */
+  .A .disc { position: absolute; left: 50%; top: -14px; width: 44px; height: 44px; margin-left: -22px; border-radius: 50%; background: #F4F4F6; box-shadow: 0 0 0 2px var(--tr), 0 3px 8px rgba(0,0,0,.5); display: grid; place-items: center; z-index: 2; }
+  .A .disc img { width: 34px; height: 34px; object-fit: contain; }
+  /* C: club-colour disc beside the name row */
+  .C .chiprow { display: flex; align-items: center; gap: 7px; }
+  .C .code { font: 900 italic 13px/1 'Exo 2'; letter-spacing: .04em; padding: 5px 8px 4px; border-radius: 6px; }
+  .C .chiprow img { width: 28px; height: 28px; object-fit: contain; }
+
+  /* D: crest-free card, club colour and code, no shirt */
+  .cardD { width: 150px; height: 196px; border-radius: 18px; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
+  .cardD .code { position: absolute; top: 10px; left: 12px; font: 900 italic 14px/1 'Exo 2'; letter-spacing: .06em; opacity: .9; }
+  .cardD .n { font: 900 italic 64px/1 'Exo 2'; }
+  .cardD .u { font-size: 10px; font-weight: 800; letter-spacing: .12em; opacity: .8; }
+  .cardD .wm { position: absolute; right: -24px; bottom: -24px; width: 110px; height: 110px; object-fit: contain; opacity: .16; filter: grayscale(1) brightness(2); }
+  .cardD .stripe { position: absolute; left: 0; right: 0; bottom: 0; height: 8px; }
+
+  /* E: watermark behind the number plus a small sharp crest in the corner */
+  .cardE { width: 150px; height: 196px; border-radius: 18px; position: relative; overflow: hidden; background: #0E0E10; box-shadow: inset 0 0 0 1px var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .cardE::before { content: ''; position: absolute; inset: 0; background: linear-gradient(165deg, var(--acc) 0%, transparent 70%); opacity: .45; }
+  .cardE .wm { position: absolute; left: 50%; top: 50%; width: 128px; height: 128px; margin: -64px; object-fit: contain; opacity: .14; }
+  .cardE .crest { position: absolute; top: 9px; right: 9px; width: 30px; height: 30px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,.6)); }
+  .cardE .nm { position: absolute; top: 14px; left: 12px; font: 900 italic 13px/1 'Exo 2'; text-transform: uppercase; }
+  .cardE .n { position: relative; font: 900 italic 60px/1 'Exo 2'; }
+  .cardE .u { position: relative; font-size: 9.5px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
+
+  /* start page */
+  .body { padding: 6px 16px 0; flex: 1; display: flex; flex-direction: column; }
+  .sect { font: 900 italic 30px/1 'Exo 2'; text-transform: uppercase; }
+  .lead { color: var(--soft); font-size: 14px; font-weight: 600; margin: 6px 0 16px; line-height: 1.4; }
+  .gmcard { position: relative; display: flex; flex-direction: column; justify-content: center; width: 100%; min-height: 140px; padding: 18px 70px 18px 18px; border-radius: 22px; overflow: hidden; isolation: isolate;
+    background: linear-gradient(100deg, #0E0E10 0%, #0E0E10 38%, color-mix(in srgb, var(--c) 30%, #0E0E10) 100%); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 45%, transparent); }
+  .gmcard::after { content: ''; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, rgba(255,255,255,0) 2px 7px); }
+  .gmcard .t-tag { font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--c); }
+  .gmcard .t-big { font: 900 italic 26px/.95 'Exo 2'; text-transform: uppercase; margin-top: 6px; }
+  .gmcard .t-sub { font-size: 14px; font-weight: 600; color: var(--soft); margin-top: 7px; line-height: 1.35; }
+  .gmcard .mk { position: absolute; right: -10px; top: 50%; transform: translateY(-50%) rotate(-8deg); width: 120px; height: 120px; color: var(--c); opacity: .3; z-index: -1; }
+  .gmcard .go { position: absolute; right: 16px; bottom: 16px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #0A0A0A; }
+  .statwin { margin: 16px 0 10px; height: 110px; border-radius: 20px; border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); background: #0E0E10; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .statwin::before, .statwin::after { content: ''; position: absolute; left: 0; right: 0; height: 28px; z-index: 2; }
+  .statwin::before { top: 0; background: linear-gradient(#0E0E10, transparent); } .statwin::after { bottom: 0; background: linear-gradient(transparent, #0E0E10); }
+  .statwin small { font-size: 10.5px; font-weight: 800; letter-spacing: .14em; color: var(--ct); }
+  .statwin b { font: 900 italic 30px/1.05 'Exo 2'; text-transform: uppercase; }
+  .statwin i { position: absolute; font: 900 italic 22px/1 'Exo 2'; text-transform: uppercase; color: rgba(255,255,255,.18); font-style: italic; }
+  .bests { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .best { border: 1px solid var(--line); border-radius: 14px; padding: 9px 10px; background: #0A0A0B; }
+  .best i { display: block; font-style: normal; font-size: 10px; font-weight: 700; color: var(--muted); line-height: 1.2; min-height: 24px; }
+  .best b { font: 900 italic 22px/1 'Exo 2'; }
+  .best b.none { color: #3A3A42; }
+  .bar { margin-top: auto; display: flex; align-items: center; gap: 10px; padding: 12px 16px 16px; }
+  .circ { width: 54px; height: 54px; border-radius: 50%; border: 1px solid var(--line); background: #0E0E10; display: grid; place-items: center; flex: none; }
+  .circ svg { width: 22px; height: 22px; }
+  .main { flex: 1; height: 56px; border-radius: 28px; background: var(--c); color: #0A0A0A; display: flex; align-items: center; justify-content: center; gap: 10px; font: 900 italic 21px/1 'Exo 2'; text-transform: uppercase; box-shadow: 0 6px 16px -6px var(--c); }
+  .main .emb { width: 26px; height: 26px; background: #0A0A0A; -webkit-mask: url('assets/logo/emblem.png') center / contain no-repeat; mask: url('assets/logo/emblem.png') center / contain no-repeat; }
+  .hl { flex: 1; height: 56px; border-radius: 28px; display: flex; align-items: center; justify-content: center; gap: 8px; font: 900 italic 19px/1 'Exo 2'; text-transform: uppercase; }
+  .hl.lo { border: 2px solid var(--c); color: var(--c); } .hl.hi { background: var(--c); color: #0A0A0A; }
+  .hl svg { width: 20px; height: 20px; }
+
+  /* game page head */
+  .ghead { display: flex; justify-content: space-between; align-items: flex-end; padding: 2px 16px 14px; }
+  .ghead .l b { display: block; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+  .ghead .l i { font-style: normal; font-size: 11px; font-weight: 700; color: var(--muted); }
+  .ghead .l i em { font-style: normal; color: var(--ct); }
+  .ghead .r { text-align: right; }
+  .ghead .r b { font: 900 italic 40px/1 'Exo 2'; color: var(--c); }
+  .ghead .r i { display: block; font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
+  .stake { margin: 0 16px 14px; padding: 10px 14px; border-radius: 14px; background: #0E0E10; border: 1px solid var(--line); text-align: center; }
+  .stake small { display: block; font-size: 10px; font-weight: 800; letter-spacing: .14em; color: var(--ct); }
+  .stake b { font: 900 italic 20px/1.1 'Exo 2'; text-transform: uppercase; }
+  .ghint { text-align: center; font-size: 11.5px; color: var(--muted); margin-top: 14px; }
+
+  /* end */
+  .endbig { text-align: center; padding: 30px 16px 10px; }
+  .endbig small { font-size: 12px; font-weight: 800; letter-spacing: .16em; color: var(--ct); }
+  .endbig b { display: block; font: 900 italic 110px/.9 'Exo 2'; color: var(--c); margin: 8px 0; text-shadow: 0 0 40px rgba(34,211,238,.35); }
+  .endbig span { font: 900 italic 18px/1 'Exo 2'; text-transform: uppercase; letter-spacing: .04em; }
+  .endbig p { color: var(--soft); font-size: 14px; margin: 12px 0 0; }
+  .miss { margin: 18px 16px 0; padding: 14px; border-radius: 16px; border: 1px solid rgba(255,77,90,.5); background: rgba(255,77,90,.06); font-size: 13px; color: var(--soft); text-align: center; line-height: 1.45; }
+  .miss b { color: #fff; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <h1>Unbeaten Run</h1>
+    <p>Higher or lower, one stat per run, one wrong answer ends it. Cyan (#22D3EE) is its colour, as on the prototype. First, five ways to show the club on the cards using only the 128px crests we already ship (no 2.4 MB of bigger crests). Then the start page, the game page and the end, in the same style as the other games. Players, clubs and numbers are real.</p>
+  </div>
+  <section class="sec"><h2>Badges on the cards</h2><p>Each option shows the same moment: Shearer's 260 career Premier League goals against Rooney, higher or lower. The crest never draws bigger than it was made (128px, shown at 34 to 128px).</p><div class="row" id="badges"></div></section>
+  <section class="sec"><h2>The pages</h2><p>Home card, start page with the stat spin, the game page and the end. Same conventions as Goal Rush and the home cards: black, cyan the only accent, the mode tag centred, a faded mark behind, Black Italic numbers, Share at the end. Built with badge option A.</p><div class="row" id="pages"></div></section>
+</div>
+<script src="data/data.js"></script>
+<script>
+(function () {
+  const D = window.D2T_DATA;
+  const ACCT = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.6-3.6 4.6-5.2 8-5.2s6.4 1.6 8 5.2"/></svg>';
+  const HOME = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></svg>';
+  const UP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15l7-7 7 7"/></svg>';
+  const DOWN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg>';
+  const GO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
+  // the mark: two stacked chevrons in a ring (up and down), line art like the outline emblem
+  const MARK = '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="50" r="44"/><path d="M30 42 L50 22 L70 42"/><path d="M30 58 L50 78 L70 58"/></svg>';
+  const SHIRT = 'M31 9 L42 4 Q50 11 58 4 L69 9 L95 24 L85 44 L74 38 L74 96 L26 96 L26 38 L15 44 L5 24 Z';
+  const lum = (h) => { const n = parseInt(h.slice(1), 16); return (0.3 * (n >> 16) + 0.59 * ((n >> 8) & 255) + 0.11 * (n & 255)) / 255; };
+  const K = (club) => { const c = D.clubs[club]; const fill = c.accent, ink = lum(fill) > 0.55 ? '#111' : '#fff', tr = c.ink === fill ? '#333' : c.ink; return { c, fill, ink, tr }; };
+  const P = [{ name: 'Alan Shearer', sur: 'Shearer', club: 'Newcastle', v: 260, nat: 'England', yrs: '1992/93 to 2005/06' },
+    { name: 'Wayne Rooney', sur: 'Rooney', club: 'Man Utd', v: 208, nat: 'England', yrs: '2002/03 to 2017/18' }];
+  const FLAG = 'assets/flags/gb-eng.svg';
+  // a shirt with the stat as its number (or ?) and the surname; extra = what goes on it for the option
+  const shirt = (p, shown, extra = '') => { const k = K(p.club), S = p.sur.toUpperCase();
+    return `<div class="sh" style="--tr:${k.tr}">${extra}<svg viewBox="0 0 100 100"><path d="${SHIRT}" fill="${k.fill}" stroke="${k.tr}" stroke-width="2.4" stroke-linejoin="round"/><path d="M42 4 Q50 11 58 4" fill="none" stroke="${k.tr}" stroke-width="4" stroke-linecap="round"/><text x="50" y="28" font-size="12" fill="${k.ink}" textLength="${Math.min(46, S.length * 7.4)}" lengthAdjust="spacingAndGlyphs">${S}</text><text ${shown ? '' : 'class="q" '}x="50" y="72" font-size="36" fill="${k.ink}">${shown ? p.v : '?'}</text></svg></div>`; };
+  const who = (p) => `<div class="who"><b>${p.name}</b><span>${D.clubs[p.club].name} · ${p.yrs}</span></div>`;
+  const B = {
+    A: (p, s) => `<div class="item A">${shirt(p, s, `<span class="disc"><img src="${D.clubs[p.club].crest}" alt=""></span>`)}${who(p)}</div>`,
+    B: (p, s) => { const k = K(p.club); return `<div class="item">${shirt(p, s, `<svg viewBox="0 0 100 100" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"><circle cx="50" cy="52" r="0"/></svg>`).replace('</svg></div>', `<circle cx="50" cy="50" r="14" fill="${k.fill}" stroke="${k.ink}" stroke-width="1.5" opacity="0"/></svg></div>`)}<div style="display:flex;align-items:center;gap:8px;margin-top:-4px"><span style="width:56px;height:56px;border-radius:50%;background:${k.fill};box-shadow:0 0 0 2px ${k.tr},0 4px 10px rgba(0,0,0,.5);display:grid;place-items:center"><img src="${D.clubs[p.club].crest}" style="width:44px;height:44px;object-fit:contain" alt=""></span><img class="flag" src="${FLAG}" alt=""></div>${who(p)}</div>`; },
+    C: (p, s) => { const k = K(p.club); return `<div class="item C">${shirt(p, s)}<div class="chiprow"><span class="code" style="background:${k.fill};color:${k.ink};box-shadow:inset 0 0 0 1.5px ${k.tr}">${D.clubs[p.club].code}</span><img src="${D.clubs[p.club].crest}" alt=""><img class="flag" src="${FLAG}" alt=""></div>${who(p)}</div>`; },
+    D: (p, s) => { const k = K(p.club); return `<div class="item"><div class="cardD" style="background:linear-gradient(165deg, ${k.fill}, color-mix(in srgb, ${k.fill} 45%, #000));color:${k.ink}"><span class="code">${D.clubs[p.club].code}</span><span class="n">${s ? p.v : '?'}</span><span class="u">PL GOALS</span><span class="stripe" style="background:${k.tr}"></span></div>${who(p)}</div>`; },
+    E: (p, s) => { const k = K(p.club); return `<div class="item"><div class="cardE" style="--acc:${k.fill}"><img class="wm" src="${D.clubs[p.club].crest}" alt=""><img class="crest" src="${D.clubs[p.club].crest}" alt=""><span class="nm">${p.sur}</span><span class="n">${s ? p.v : '?'}</span><span class="u">PL GOALS</span></div>${who(p)}</div>`; }
+  };
+  const BN = [['A', 'Crest on a white disc at the collar', 'The Goal Rush pitch-shirt treatment, bigger: a 34px crest on a 44px white disc ringed in the club colour. Every crest reads, including the line-drawn ones.'],
+    ['B', 'Crest on a club-colour disc under the shirt', 'A 56px disc in the club colour holding a 44px crest, with his flag beside it. The shirt stays clean.'],
+    ['C', 'Club code chip and small crest', 'A chip with the club code (NEW, MUN) in its colours, a 28px crest and his flag under the shirt. Most compact.'],
+    ['D', 'No crest: club colour and code', 'A card in the club colour with its code and the number big. Nothing to scale; reads fast, but loses the badge.'],
+    ['E', 'Faded crest behind the number', 'A dark card washed in the club colour, the crest at its true 128px faded behind the number and a sharp 30px crest top right.']];
+  const pairOf = (k) => `<div class="pair">${B[k](P[0], true)}${B[k](P[1], false)}<span class="vs">VS</span></div>`;
+  document.getElementById('badges').innerHTML = BN.map(([k, h, d]) => `<div class="opt"><div class="opt-h"><span class="tag">OPTION ${k}</span><h3>${h}</h3><p>${d}</p></div><div class="panel">${pairOf(k)}</div></div>`).join('');
+
+  const top = () => `<div class="tb"><span class="logo"></span><span class="mtag"><span>Unbeaten Run</span></span><span class="acct">${ACCT}</span></div>`;
+  const bg = `<span class="bgmark">${MARK}</span>`;
+  // 1: home card
+  const home = `<div class="phone" style="padding:18px 16px 22px"><div style="font:900 italic 26px/1 'Exo 2';text-transform:uppercase;margin:4px 2px 14px">Other games</div>
+    <div class="gmcard"><span class="mk">${MARK}</span><span class="t-tag">UNBEATEN RUN</span><span class="t-big">Higher or lower?</span><span class="t-sub">One stat, real Premier League numbers. How long can you stay unbeaten? Best: 14.</span><span class="go">${GO}</span></div></div>`;
+  // 2: start page with the stat spin
+  const stats = [['Career goals', 12], ['Career appearances', 7], ['Career assists', null], ['Goals in a season', 9], ['Points in a season', 14], ['All-time points', 5]];
+  const start = `<div class="phone tall">${bg}${top()}<div class="body"><div class="sect">Spin for a stat</div><div class="lead">Each run is about one stat. Real Premier League numbers, higher or lower, one wrong answer ends it.</div>
+    <div class="statwin"><i style="top:-6px">Wins in a season</i><small>THIS RUN</small><b>Career goals</b><i style="bottom:-8px">Career assists</i></div>
+    <div style="font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--muted);margin:10px 2px 8px">YOUR BEST RUNS</div>
+    <div class="bests">${stats.map(([n, b]) => `<div class="best"><i>${n}</i><b class="${b ? '' : 'none'}">${b || '-'}</b></div>`).join('')}</div></div>
+    <div class="bar"><span class="main"><span class="emb"></span>Spin</span><span class="circ">${HOME}</span></div></div>`;
+  // 3: game page
+  const game = `<div class="phone tall">${bg}${top()}<div class="ghead"><span class="l"><b>Career goals</b><i>Premier League · <em>one wrong and it is over</em></i></span><span class="r"><b>6</b><i>UNBEATEN</i></span></div>
+    <div style="padding:16px 14px 0">${pairOf('A')}</div><div class="ghint">Swipe his shirt up for higher, down for lower, or tap below</div>
+    <div class="bar"><span class="hl lo">${DOWN}Lower</span><span class="hl hi">${UP}Higher</span><span class="circ">${HOME}</span></div></div>`;
+  // 4: the end
+  const end = `<div class="phone tall">${bg}${top()}<div class="endbig"><small>CAREER GOALS · RUN OVER</small><b>14</b><span>Unbeaten · a new best</span><p>Your best on career goals was 12.</p></div>
+    <div class="miss">It went: <b>Rooney 208</b> was lower than <b>Shearer 260</b>. You said higher.</div>
+    <div class="bar" style="flex-direction:column;gap:10px"><span class="main" style="width:100%;flex:none">Share</span><span class="main" style="width:100%;flex:none;background:transparent;color:var(--c);border:2px solid var(--c);box-shadow:none">Spin again</span></div></div>`;
+  const PG = [['HOME', 'The home card', 'Cyan, in the same card as the other games, the up-down mark faded behind. Question line, then your best run.', home],
+    ['START', 'Spin for a stat', 'The mode tag centred, the mark faded behind, the stat reel in a cyan-ringed window, your best run per stat in small cards, the Spin button as in the other games.', start],
+    ['GAME', 'Higher or lower', 'The stat top left, the run as a big cyan number top right (like the Goal Rush tally). Shirts with the crest on a white disc (option A), Lower and Higher at the bottom.', game],
+    ['END', 'Run over', 'The run big in cyan, how it ended, then Share first and Spin again, as every game ends.', end]];
+  document.getElementById('pages').innerHTML = PG.map(([t, h, d, ph]) => `<div class="opt"><div class="opt-h"><span class="tag">${t}</span><h3>${h}</h3><p>${d}</p></div>${ph}</div>`).join('');
+})();
+</script>
+</body>
+</html>
