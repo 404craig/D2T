@@ -34,11 +34,22 @@
   GAME.poolEntry = (key) => byKey.get(key);
   D2T.data = { clubs, relegatedPool: pool };
 
-  // ---------- 433 Goals: a game of its own on real Premier League career goals ----------
+  // ---------- Goal Rush (was 433 Goals): a game of its own on real Premier League career goals ----------
   // The game in progress is state.g433; finished games go to record.g433 (apart from Classic and Dare2Dream).
+  // Each game picks a formation at random (Craig, 12 Oct, UI_SPEC 8f): 352 means line up 3-5-2 and score exactly 352.
   const G4 = G.g433 || { GK: [], DEF: [], MID: [], FWD: [] }, g4lists = {};
   GAME.g433 = {
     TARGET: 433, RESPINS: 3, TOP: 220,
+    FORMATIONS: ['442', '433', '451', '352', '343', '424', '532', '541'],
+    // balance per formation (tests/sim-goalrush.js): how many top scorers per position each draws from, so a random XI
+    // lands near 77% of the target whatever the shape, and the last-shot gift chance; a casual player lands exactly
+    // about 1 game in 20 and within 10 about 1 in 5 (5-4-1 the hardest)
+    DEPTH: { 442: 180, 433: 220, 451: 145, 352: 310, 343: 355, 424: 260, 532: 105, 541: 75 },
+    GIFTS: { 442: 0.22, 433: 0.2, 451: 0.27, 352: 0.14, 343: 0.14, 424: 0.18, 532: 0.36, 541: 0.42 },
+    pickFormation: () => GAME.g433.FORMATIONS[Math.floor(Math.random() * GAME.g433.FORMATIONS.length)],
+    shape: (f) => { const [d, m, a] = String(f).split('').map(Number); return { GK: 1, DEF: d, MID: m, FWD: a }; },
+    depth: (f) => GAME.g433.DEPTH[f] || GAME.g433.TOP,
+    gift: (f) => (GAME.g433.GIFTS[f] != null ? GAME.g433.GIFTS[f] : GAME.g433.GIFT),
     list: (pos) => g4lists[pos] || (g4lists[pos] = G4[pos].map(([name, sur, club, goals]) => ({ name, sur, club, goals, pos }))),
     // three different players of a position from its 220 top scorers, never one already in your XI
     draw(pos, avoid = []) {
@@ -52,8 +63,8 @@
     // (GIFT, decided once per game, so respins keep it) puts him among the three. Balanced with a simulation of
     // 40,000 games: a player who roughly knows career goals is offered the exact one about 1 game in 7.
     GIFT: 0.2,
-    drawOpen(openPos, avoid = [], need = null) {
-      const slots = [], out = [], top = GAME.g433.TOP, pickFrom = (pos) => GAME.g433.list(pos).slice(0, top);
+    drawOpen(openPos, avoid = [], need = null, f) {
+      const slots = [], out = [], top = f ? GAME.g433.depth(f) : GAME.g433.TOP, pickFrom = (pos) => GAME.g433.list(pos).slice(0, top);
       Object.keys(openPos).forEach((pos) => { for (let i = 0; i < openPos[pos]; i++) slots.push(pos); });
       if (!slots.length) return out;
       if (need != null) { const hits = pickFrom(slots[0]).filter((p) => p.goals === need && !avoid.includes(p.name)); if (hits.length) out.push(hits[Math.floor(Math.random() * hits.length)]); }
@@ -62,13 +73,14 @@
       for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
       return out;
     },
-    canGift: (pos, need, avoid = []) => need >= 0 && GAME.g433.list(pos).slice(0, GAME.g433.TOP).some((p) => p.goals === need && !avoid.includes(p.name)),
+    canGift: (pos, need, avoid = [], f) => need >= 0 && GAME.g433.list(pos).slice(0, f ? GAME.g433.depth(f) : GAME.g433.TOP).some((p) => p.goals === need && !avoid.includes(p.name)),
     record: () => Object.assign({ games: 0, exact: 0, best: null, bestTotal: null, last: null }, D2T.state.record.g433 || {}),
-    finish(total) {
-      const r = GAME.g433.record(), gap = Math.abs(total - GAME.g433.TARGET), newBest = r.best == null || gap < r.best;
+    // the record carries on from 433 Goals: best is "N away" whatever the target
+    finish(total, target = GAME.g433.TARGET) {
+      const r = GAME.g433.record(), gap = Math.abs(total - target), newBest = r.best == null || gap < r.best;
       r.games += 1; if (gap === 0) r.exact += 1;
-      if (newBest) { r.best = gap; r.bestTotal = total; }
-      r.last = total; D2T.state.record.g433 = r; D2T.save();
+      if (newBest) { r.best = gap; r.bestTotal = total; r.bestTarget = target; }
+      r.last = total; r.lastTarget = target; D2T.state.record.g433 = r; D2T.save();
       return { rec: r, newBest };
     }
   };

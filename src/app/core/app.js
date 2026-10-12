@@ -93,7 +93,7 @@
   // In-game chrome: small white D2T logo top left (taps home), account circle top right.
   // Pages reached from home or the account circle (howto, league, stats, account) get a back arrow before the logo.
   // In a game the mode sits in a slanted tag in its colour, centred in the top bar (chosen 12 Oct, "tag, centred" in
-  // design/prototype/mode-logo.html): Classic in the club's colour, Daily white, Dare2Dream blue, Club X green; 433 Goals passes its own.
+  // design/prototype/mode-logo.html): Classic in the club's colour, Daily white, Dare2Dream blue, Club X green; Goal Rush passes its own (yellow).
   const modeWord = () => {
     const r = D2T.state.run; if (!r || !D2T.game) return null;
     if (r.daily) return ['Daily', '#FFFFFF'];
