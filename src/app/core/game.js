@@ -133,11 +133,13 @@
     const two = !legend && p.c2 != null ? S.clubs[shown === p.c2 ? p.c : p.c2].name : null;
     return {
       id: p.id, name: p.n, club: clubName, club2: two, crest: crestOf(clubName), crestLight: crestLightOf(clubName), pos: p.b, ovr: p.r, level: LV[p.lv || 0],
-      apps: p.a, goals: p.g, assists: p.as, cleanSheets: p.cs, nat: p.nat, season: legend ? p.sk : S.season,
+      apps: p.a, goals: p.g, assists: p.as, cleanSheets: p.cs, nat: p.nat, flag: GAME.flag(p.nat), season: legend ? p.sk : S.season,
       provisional: p.src === 'f', stats, career: p.k != null && G.careers ? G.careers[p.k] : null
     };
   };
   GAME.LV = LV;
+  // nationality flags (12 Oct): drawn pictures, never emoji (assets/flags, embedded by build.py as D2T_FLAGS and D2T_NATIONS)
+  GAME.flag = (nat) => { const code = (window.D2T_NATIONS || {})[nat]; return (code && (window.D2T_FLAGS || {})[code]) || ''; };
 
   // ---------- the run ----------
   // D2T.state.run = { step, eng (the engine's run, saved whole), tableSeen, pending (a signing waiting for a shirt), match (gw on show) }
