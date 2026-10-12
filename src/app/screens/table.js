@@ -23,7 +23,7 @@
         <p class="se-note se-fin">${x ? `Club X takes the place of ${D2T.esc(replaced)}, who finished ${D2T.ordinal(mine.pos)} on ${mine.pts} points. Your dream: win the league.` : ''}${x ? '' : `${D2T.esc(club.name)} finished ${D2T.ordinal(mine.pos)} on ${mine.pts} points${relegated ? ' and went down' : ''}. ${dream ? (mine.pos === 1 ? 'Your dream: win it again.' : `Your dream: ${D2T.ordinal(D2T.game.target(mine.pos))} or better.`) : 'Now it is your turn.'}`}</p>
         <div class="se-pad"></div>
       </div>`);
-      const flash = D2T.h('<div class="se-newseason" aria-hidden="true"><span>New season</span></div>');
+      const flash = D2T.h('<div class="se-newseason" aria-hidden="true"><span>Rewrite<br>history</span></div>');   // two lines (Craig, 12 Oct), not "New season"
       const bar = D2T.h('<footer class="actionbar"><button class="btn se-btn se-btn-ghost se-wide" type="button">Skip</button></footer>');
       root.append(body, flash, bar);
       const btn = bar.querySelector('button');
@@ -43,7 +43,7 @@
         });
         }
         body.classList.add('se-reset');
-        body.querySelector('.se-tl-a').textContent = `${data.season} · New season`;
+        body.querySelector('.se-tl-a').textContent = `${data.season} · Rewrite history`;
         body.querySelector('.se-tl-b').textContent = 'Everyone starts on 0.';
         body.querySelector('.se-fin').textContent = x ? `${replaced} finished ${D2T.ordinal(mine.pos)}. Club X starts from nothing and needs the title.` : dream && mine.pos === 1 ? `Real finish: champions on ${mine.pts} points. Do it again.` : `Real finish: ${D2T.ordinal(mine.pos)}, ${mine.pts} points. Beat it.`;
         btn.textContent = 'Continue'; btn.classList.remove('se-btn-ghost');
@@ -92,7 +92,7 @@
 
         // Reset: every number rolls down to 0 together, then the table flattens to alphabetical.
         flash.classList.add('se-go');
-        body.querySelector('.se-tl-a').textContent = `${data.season} · New season`;
+        body.querySelector('.se-tl-a').textContent = `${data.season} · Rewrite history`;
         const nums = [...tbl.querySelectorAll('.se-n')];
         const from = nums.map((n) => +n.dataset.v);
         const t0 = performance.now(), dur = 1300;
