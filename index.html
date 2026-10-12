@@ -1125,7 +1125,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 @keyframes ubShake { 20%, 60% { transform: translateX(-7px); } 40%, 80% { transform: translateX(7px); } }
 .ub-ph { display: grid; place-items: center; width: var(--ub-sw); height: calc(var(--ub-sw) * 1.02); font: 900 italic 64px/1 var(--font); color: #34343C; }
 
-/* a shirt and its row: the club badge beside his flag and nationality (or the season, for clubs) */
+/* a shirt and its row: the club badge beside his flag (or the season, for clubs) */
 .ub-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .ub-shirt .ub-num { transform-box: fill-box; transform-origin: center; }
 .ub-shirt .ub-num.q { opacity: .9; }
@@ -1135,7 +1135,9 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .ub-crest { width: 40px; height: 40px; border-radius: 12px; background: #16161B; border: 1px solid #2A2A31; display: grid; place-items: center; flex: none; }
 .ub-crest img { width: 30px; height: 30px; object-fit: contain; }
 .ub-chip { height: 40px; display: flex; align-items: center; gap: 6px; padding: 0 9px; border-radius: 12px; background: #16161B; border: 1px solid #2A2A31; font-size: 12px; font-weight: 800; line-height: 1.1; color: #E6E6EC; max-width: calc(var(--ub-sw) - 40px); }
-.ub-chip .d2c-flag { width: 20px; flex: none; }
+/* his nationality as a flag (never words or emoji), the badge tile's height */
+.ub-flag { height: 40px; display: grid; place-items: center; }
+.ub-flag .d2c-flag { height: 30px; width: auto; border-radius: 4px; }
 .ub-chip span { min-width: 0; overflow-wrap: anywhere; }
 .ub-chip-s { font: 900 italic 15px/1 var(--font); color: #fff; }
 
@@ -5868,7 +5870,7 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
     return DECKS;
   }
 
-  // ---------- a shirt with the stat as its number, and the badge and nationality row under it ----------
+  // ---------- a shirt with the stat as its number, and the club badge and his flag under it ----------
   const SHIRT = 'M31 9 L42 4 Q50 11 58 4 L69 9 L95 24 L85 44 L74 38 L74 96 L26 96 L26 38 L15 44 L5 24 Z';
   const SLEEVES = 'M31 9 L5 24 L15 44 L26 38 Z M69 9 L95 24 L85 44 L74 38 Z';
   function shirt(w, club, word, num) {
@@ -5886,7 +5888,7 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
     const G = D2T.game, c = G.club(r.club), v = shown ? stat.val(r) : null;
     const word = r.name ? r.name.split(' ').slice(-1)[0] : (c.name || r.club);
     const flag = r.nat ? G.flag(r.nat) : '';
-    const second = r.name ? `<span class="ub-chip">${flag ? `<img class="d2c-flag" src="${flag}" alt="">` : ''}<span>${D2T.esc(r.nat || '')}</span></span>`
+    const second = r.name ? (flag ? `<span class="ub-flag"><img class="d2c-flag" src="${flag}" alt="${D2T.esc(r.nat)}" title="${D2T.esc(r.nat)}"></span>` : `<span class="ub-chip">${D2T.esc(r.nat || '')}</span>`)
       : r.season ? `<span class="ub-chip ub-chip-s">${r.season}</span>` : `<span class="ub-chip ub-chip-s">${r.n} seasons</span>`;
     return `<div class="ub-item">${shirt(w, r.club, word, v)}<div class="ub-row"><span class="ub-crest"><img src="${G.crestHi(r.club) || c.crest}" alt="${D2T.esc(c.full || r.club)}"></span>${second}</div></div>`;
   }

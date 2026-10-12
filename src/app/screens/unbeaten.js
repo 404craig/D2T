@@ -56,7 +56,7 @@
     return DECKS;
   }
 
-  // ---------- a shirt with the stat as its number, and the badge and nationality row under it ----------
+  // ---------- a shirt with the stat as its number, and the club badge and his flag under it ----------
   const SHIRT = 'M31 9 L42 4 Q50 11 58 4 L69 9 L95 24 L85 44 L74 38 L74 96 L26 96 L26 38 L15 44 L5 24 Z';
   const SLEEVES = 'M31 9 L5 24 L15 44 L26 38 Z M69 9 L95 24 L85 44 L74 38 Z';
   function shirt(w, club, word, num) {
@@ -74,7 +74,7 @@
     const G = D2T.game, c = G.club(r.club), v = shown ? stat.val(r) : null;
     const word = r.name ? r.name.split(' ').slice(-1)[0] : (c.name || r.club);
     const flag = r.nat ? G.flag(r.nat) : '';
-    const second = r.name ? `<span class="ub-chip">${flag ? `<img class="d2c-flag" src="${flag}" alt="">` : ''}<span>${D2T.esc(r.nat || '')}</span></span>`
+    const second = r.name ? (flag ? `<span class="ub-flag"><img class="d2c-flag" src="${flag}" alt="${D2T.esc(r.nat)}" title="${D2T.esc(r.nat)}"></span>` : `<span class="ub-chip">${D2T.esc(r.nat || '')}</span>`)
       : r.season ? `<span class="ub-chip ub-chip-s">${r.season}</span>` : `<span class="ub-chip ub-chip-s">${r.n} seasons</span>`;
     return `<div class="ub-item">${shirt(w, r.club, word, v)}<div class="ub-row"><span class="ub-crest"><img src="${G.crestHi(r.club) || c.crest}" alt="${D2T.esc(c.full || r.club)}"></span>${second}</div></div>`;
   }

@@ -58,7 +58,7 @@
 @keyframes ubShake { 20%, 60% { transform: translateX(-7px); } 40%, 80% { transform: translateX(7px); } }
 .ub-ph { display: grid; place-items: center; width: var(--ub-sw); height: calc(var(--ub-sw) * 1.02); font: 900 italic 64px/1 var(--font); color: #34343C; }
 
-/* a shirt and its row: the club badge beside his flag and nationality (or the season, for clubs) */
+/* a shirt and its row: the club badge beside his flag (or the season, for clubs) */
 .ub-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .ub-shirt .ub-num { transform-box: fill-box; transform-origin: center; }
 .ub-shirt .ub-num.q { opacity: .9; }
@@ -68,7 +68,9 @@
 .ub-crest { width: 40px; height: 40px; border-radius: 12px; background: #16161B; border: 1px solid #2A2A31; display: grid; place-items: center; flex: none; }
 .ub-crest img { width: 30px; height: 30px; object-fit: contain; }
 .ub-chip { height: 40px; display: flex; align-items: center; gap: 6px; padding: 0 9px; border-radius: 12px; background: #16161B; border: 1px solid #2A2A31; font-size: 12px; font-weight: 800; line-height: 1.1; color: #E6E6EC; max-width: calc(var(--ub-sw) - 40px); }
-.ub-chip .d2c-flag { width: 20px; flex: none; }
+/* his nationality as a flag (never words or emoji), the badge tile's height */
+.ub-flag { height: 40px; display: grid; place-items: center; }
+.ub-flag .d2c-flag { height: 30px; width: auto; border-radius: 4px; }
 .ub-chip span { min-width: 0; overflow-wrap: anywhere; }
 .ub-chip-s { font: 900 italic 15px/1 var(--font); color: #fff; }
 
