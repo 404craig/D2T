@@ -137,7 +137,9 @@
 .sp-main.is-after { background: var(--ink); color: #fff; border: 1px solid var(--line); box-shadow: none; }
 .sp-main.is-after .logo-mask { display: none; }
 .sp-screen.is-placing .sp-row { transform: scale(.78); }
-.sp-screen.is-placing .sp-slot { touch-action: none; }
+/* the finger can land on a card before the tray is up (touch-action is fixed when the touch starts, so it is set
+   always, not only while placing), and a held press must not bring up iOS's image callout and cancel the touch */
+.sp-slot { touch-action: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
 .sp-slot.is-signed { opacity: 0; transform: translateY(-40px) scale(.7); transition: opacity .35s, transform .45s var(--ease-out); }
 .tr-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .tr-head-t { min-width: 0; }
