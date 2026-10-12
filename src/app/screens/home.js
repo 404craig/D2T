@@ -56,7 +56,7 @@
   }
 
   // Other games cards (chosen 12 Oct, option A): every card the same shape, its game's colour washing in from the right
-  // with a thin rim, the game's mark faded behind on the right. Daily white, Dare2Dream blue, Club X green, 433 orange, Tenaball purple.
+  // with a thin rim, the game's mark faded behind on the right. Daily white, Dare2Dream blue, Club X green, Goal Rush yellow, Tenaball purple.
   const gameCard = ({ c, attrs, tag, big, sub, mark, cls = '', label, href }) => {
     const inner = `<span class="fr-gm-mark" aria-hidden="true">${mark}</span>
       <span class="fr-gm-txt"><span class="fr-tag">${tag}</span><span class="fr-big">${big}</span><span class="fr-sub">${sub}</span></span>
@@ -65,13 +65,13 @@
       : `<button class="fr-card-btn fr-gm ${cls}" style="--c:${c}" ${attrs} aria-label="${label}">${inner}</button>`;
   };
 
-  // 433 Goals card (orange): carry on a game in progress, or your best so far.
+  // Goal Rush card (yellow, was 433 Goals; UI_SPEC 8f): carry on a game in progress, or your best so far.
   function g433Card() {
     const g = D2T.state.g433, n = g && g.filled ? g.filled.length : 0, rec = D2T.game.g433.record();
-    // card wording (12 Oct): the "question" line under each title, then a game in progress or your best
-    const sub = 'Pick 11 real players. Their career goals must total exactly 433.' + (n > 0 && n < 11 ? ` Carry on: ${n} of 11 picked.`
-      : rec.games ? ` Your best: ${rec.best === 0 ? 'exactly 433' : rec.best + ' away'}.` : '');
-    return gameCard({ c: '#FF7A1A', attrs: 'data-act="g433"', label: '433 Goals', tag: '433 GOALS', big: 'Score exactly<br>433 goals', sub, mark: '<span class="fr-gm-433">433</span>' });
+    const shape = g && g.formation ? D2T.game.g433.shapeText(g.formation) : '';
+    const sub = 'A random formation each game. Pick 11 real players whose career goals add up to it exactly.' + (n > 0 && n < 11 ? ` Carry on: ${shape ? shape + ', ' : ''}${n} of 11 picked.`
+      : rec.games ? ` Your best: ${rec.best === 0 ? 'exactly on target' : rec.best + ' away'}.` : '');
+    return gameCard({ c: '#FFD21F', attrs: 'data-act="g433"', label: 'Goal Rush', tag: 'GOAL RUSH', big: 'Score the exact number of goals', sub, mark: `<img src="${window.D2T_GOALRUSH_LOGO || ''}" alt="">` });
   }
 
   // Daily challenge card: today's club for everyone, the mode it plays, and your result once played.

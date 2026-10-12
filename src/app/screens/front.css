@@ -255,7 +255,6 @@
 .fr-gm-mark { position: absolute; right: -14px; top: 50%; transform: translateY(-50%) rotate(-8deg); min-width: 120px; height: 120px; color: var(--c); opacity: .3; z-index: -1; display: grid; place-items: center; pointer-events: none; }
 .fr-gm-mark .logo-mask { width: 120px; }
 .fr-gm-mark img { width: 110px; height: auto; opacity: .9; }
-.fr-gm-433 { font: 900 italic 84px/1 var(--font); -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px currentColor; }
 /* the daily's crest at the Club X badge's size (a little wider: most crests are wider than tall), in full colour */
 .fr-gm-daily .fr-gm-mark { opacity: 1; }
 .fr-gm-daily .fr-gm-mark img.fr-gm-crest { width: 124px; height: 144px; object-fit: contain; opacity: 1; filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }

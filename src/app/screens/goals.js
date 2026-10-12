@@ -1,12 +1,27 @@
-// 433 Goals (black, orange as the mode colour; prototype design/prototype/goals433.html, chosen 11 Oct).
-// Fill a 4-3-3 in any order (Craig, 12 Oct): each spin shows three real players for any of the shirts still open (they
-// show orange), as football shirts with the name and crest on the back. Pick one and place him on an open shirt of his
-// position; his Premier League career goals roll onto the shirt. On the last shot, one game in five offers a player with
-// exactly the goals needed (D2T.game.g433.GIFT). Get the XI's total as close to 433 as you can: exactly 433 is the dream. 3 respins a game.
-// The game in progress is D2T.state.g433 (saved after every step, so a refresh never re-rolls), results go to record.g433.
+// Goal Rush (was 433 Goals; black, yellow #FFD21F as the mode colour; UI_SPEC 8f, prototype design/prototype/goal-rush.html, chosen 12 Oct).
+// Each game picks a formation at random (442, 433, 451, 352, 343, 424, 532 or 541): the pitch takes that shape and its number is
+// the target, so 3-5-2 means score exactly 352. A target reveal opens each game. Fill the XI in any order: each spin shows three
+// real players for any open shirt (they show yellow), as shirts with the name and crest on the back. Place one on an open shirt
+// of his position; his Premier League career goals roll onto it and shoot up to the total. On the last shot, sometimes one of
+// the three has exactly the goals needed (D2T.game.g433.gift per formation). 3 respins a game.
+// The game in progress is D2T.state.g433 (saved after every step, so a refresh never re-rolls or replays the reveal), results go
+// to record.g433, carried on from 433 Goals.
 (function () {
-  const TARGET = 433, POS1 = { GK: 'goalkeeper', DEF: 'defender', MID: 'midfielder', FWD: 'forward' };
-  const SLOTS = [['GK', 'GK', 50, 87.5], ['LB', 'DEF', 12, 66], ['CB', 'DEF', 36, 68.5], ['CB', 'DEF', 64, 68.5], ['RB', 'DEF', 88, 66], ['CM', 'MID', 21, 43], ['CM', 'MID', 50, 45], ['CM', 'MID', 79, 43], ['LW', 'FWD', 17, 18], ['ST', 'FWD', 50, 16], ['RW', 'FWD', 83, 18]];
+  const POS1 = { GK: 'goalkeeper', DEF: 'defender', MID: 'midfielder', FWD: 'forward' };
+  // the pitch for a formation (UI_SPEC 8f): labels per line, spaced up to 25% apart, the outer pair of a 4 or 5 line 2% higher
+  const LABELS = { DEF: { 3: ['CB', 'CB', 'CB'], 4: ['LB', 'CB', 'CB', 'RB'], 5: ['LWB', 'CB', 'CB', 'CB', 'RWB'] }, MID: { 2: ['CM', 'CM'], 3: ['CM', 'CM', 'CM'], 4: ['LM', 'CM', 'CM', 'RM'], 5: ['LM', 'CM', 'CM', 'CM', 'RM'] }, FWD: { 1: ['ST'], 2: ['ST', 'ST'], 3: ['LW', 'ST', 'RW'], 4: ['LW', 'ST', 'ST', 'RW'] } };
+  const slotsFor = (f) => {
+    const sh = D2T.game.g433.shape(f), out = [['GK', 'GK', 50, 87.5]];
+    [[sh.DEF, 'DEF', 67], [sh.MID, 'MID', 43], [sh.FWD, 'FWD', 17]].forEach(([n, pos, y]) => {
+      const gap = n === 1 ? 0 : Math.min(25, 76 / (n - 1));
+      LABELS[pos][n].forEach((lab, i) => out.push([lab, pos, 50 + (i - (n - 1) / 2) * gap, y + (n >= 4 && (i === 0 || i === n - 1) ? -2 : 0)]));
+    });
+    return out;
+  };
+  const shapeText = (f) => D2T.game.g433.shapeText(f);
+  // this game's target and pitch (set from the saved formation on mount and for each new game)
+  let TARGET = 433, FORM = '433', SLOTS = slotsFor('433');
+  const setShape = (f) => { FORM = String(f); TARGET = +FORM; SLOTS = slotsFor(FORM); };
   const snd = (id) => { const S = window.D2TSound; if (S) S.play(id); };
 
   // ---------- colours and kits ----------
@@ -91,8 +106,10 @@
   }
   const glint = (el, reduced) => { const g = el && el.querySelector('.glint'); if (!g || reduced) return; g.animate([{ opacity: 0, transform: 'translateX(-60px)' }, { opacity: 1, transform: 'translateX(0)', offset: 0.5 }, { opacity: 0, transform: 'translateX(60px)' }], { duration: 650, easing: 'ease-in-out' }); };
 
-  // ---------- the bar: orange fills to the white 433 line; past it, the line moves in and the extra runs on in grey ----------
-  const gapText = (t) => (t === TARGET ? 'exactly 433' : t < TARGET ? (TARGET - t) + ' away' : (t - TARGET) + ' over');
+  // ---------- the bar: yellow fills to the white target line; past it, the line moves in and the extra runs on in grey ----------
+  const gapText = (t) => (t === TARGET ? 'exactly ' + TARGET : t < TARGET ? (TARGET - t) + ' away' : (t - TARGET) + ' over');
+  const goalsN = (n) => n + (n === 1 ? ' goal' : ' goals');
+  const toGo = (t) => (t === TARGET ? 'exactly ' + TARGET : t < TARGET ? goalsN(TARGET - t) + ' to go' : goalsN(t - TARGET) + ' over');
   const barState = (t) => { if (t <= TARGET) return { fill: t / TARGET, mark: 1, ovr: 0 }; const m = TARGET / t; return { fill: m, mark: m, ovr: 1 - m }; };
   function paintBar(host, t) {
     const tr = host.querySelector('.g4-track'), s = barState(t), o = tr.querySelector('.ovr');
@@ -100,9 +117,10 @@
     o.style.left = (s.mark * 100) + '%'; o.style.width = (s.ovr * 100) + '%';
     host.querySelector('.tnum').textContent = t; setGap(host, t);
   }
-  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = gapText(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v !== TARGET && Math.abs(v - TARGET) <= 20); }
+  // the tally (UI_SPEC 8f): "38 goals to go" in yellow under "Player 7 of 11", and the big scored number over "/352 GOALS"
+  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = toGo(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v !== TARGET && Math.abs(v - TARGET) <= 20); }
 
-  const COLORS = ['#FF7A1A', '#FFB020', '#FFFFFF', '#FF4D1A'];
+  const COLORS = ['#FFD21F', '#FFB000', '#FFFFFF', '#FFE375'];
   const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5"/></svg>';
   const LINES = '<svg class="lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect x="3" y="2.5" width="94" height="95" rx="1.5" stroke-width="0.5"/><line x1="3" y1="50" x2="97" y2="50" stroke-width="0.5"/><rect x="26" y="2.5" width="48" height="14" stroke-width="0.5"/><rect x="38" y="2.5" width="24" height="5" stroke-width="0.5"/><rect x="26" y="83.5" width="48" height="14" stroke-width="0.5"/><rect x="38" y="92.5" width="24" height="5" stroke-width="0.5"/></svg>';
 
@@ -110,11 +128,14 @@
   const later = (fn, ms) => { const t = setTimeout(fn, ms); timers.push(t); return t; };
 
   D2T.screen('goals433', {
-    title: '433 Goals', theme: 'black',
+    title: 'Goal Rush', theme: 'black',
     mount(root) {
       const reduced = D2T.reduced(), G4 = D2T.game.g433;
-      const fresh = () => ({ filled: [], respins: G4.RESPINS, cands: null, recorded: false, gift: null });
+      const fresh = () => ({ filled: [], respins: G4.RESPINS, cands: null, recorded: false, gift: null, formation: G4.pickFormation(), revealed: false });
       let S = D2T.state.g433 && Array.isArray(D2T.state.g433.filled) ? D2T.state.g433 : (D2T.state.g433 = fresh());
+      // a game saved by 433 Goals carries on as a 4-3-3 with no reveal
+      if (!S.formation) { S.formation = '433'; S.revealed = true; }
+      setShape(S.formation);
       // a game saved before any-order spins filled the shirts in order: give each its slot, drop three of one position
       S.filled.forEach((p, i) => { if (p.slot == null) p.slot = i; if (!p.pos) p.pos = SLOTS[p.slot][1]; });
       if (S.cands && S.cands.some((c) => !c.pos)) S.cands = null;
@@ -123,9 +144,9 @@
       let busy = false, sel = null;
 
       root.classList.add('g4', 'g4-cs-' + CREST());
-      root.appendChild(D2T.topbar({ mode: ['433', '#FF7A1A'] }));
+      root.appendChild(D2T.topbar({ mode: ['Goal Rush', '#FFD21F'] }));
       const wrap = D2T.h(`<div class="g4-wrap">${defs()}
-        <div class="g4-tally"><div class="top"><span class="g4-info"><b class="g4-player"></b><i class="g4-left"></i></span><span><b class="tnum">0</b><i class="taway"></i></span></div>
+        <div class="g4-tally"><div class="top"><span class="g4-info"><b class="g4-player"></b><i class="g4-left"><span class="g4-lefttxt"></span><em class="taway"></em></i></span><span class="g4-tot"><b class="tnum">0</b><small class="ttarget">/433</small><em>Goals</em></span></div>
           <div class="g4-track"><span class="ovr"></span><span class="fill"></span><span class="mark"></span></div></div>
         <div class="g4-pitch"></div>
         <div class="g4-trio"></div>
@@ -142,7 +163,9 @@
       const H = root.clientHeight || 700, TW = H < 620 ? 72 : H < 700 ? 84 : 96;
       wrap.style.setProperty('--tw', TW + 'px');
       let PW = 56;
-      const sizePitch = () => { const ph = pitchEl.clientHeight || 358; PW = Math.round(Math.max(32, Math.min(58, ph * 0.15))); };
+      // a shirt, its crest disc and its name must fit the tightest gap between two lines (defence to keeper, about 20% of the
+      // pitch), so short phones get smaller shirts rather than overlapping ones
+      const sizePitch = () => { const ph = pitchEl.clientHeight || 358; PW = Math.round(Math.max(30, Math.min(58, (ph * 0.205 - 16) / 1.19))); };
 
       const slotOf = (i) => S.filled.find((p) => p.slot === i);
       const openSlots = () => SLOTS.map((_, i) => i).filter((i) => !slotOf(i));
@@ -150,11 +173,23 @@
       const fitSlots = (pos) => openSlots().filter((i) => SLOTS[i][1] === pos);
       const selPos = () => (sel != null && S.cands && S.cands[sel] ? S.cands[sel].pos : null);
       const drawPitch = () => {
-        pitchEl.innerHTML = `${LINES}<span class="circle"></span><div class="modename">433 GOALS</div>${SLOTS.map(([lab, , x, y], i) => {
+        pitchEl.innerHTML = `${LINES}<span class="circle"></span><div class="modename">${TARGET} GOALS</div><span class="g4-shape">${shapeText(FORM)}</span>${SLOTS.map(([lab, , x, y], i) => {
           const f = slotOf(i);
           const inner = f ? shirt({ w: PW, player: f }) + `<span class="nm">${D2T.esc(f.sur)}</span>` : shirt({ w: PW, pos: lab, next: true });
           return `<div class="slotp${f ? '' : ' open'}" data-slot="${i}" style="left:${x}%;top:${y}%">${inner}</div>`; }).join('')}`;
-        markPitch();
+        fitNames(); markPitch();
+      };
+      // names under the pitch shirts never run into the next shirt: on a line of 4 or 5 (shirts closer together) a long
+      // surname shrinks until it fits the space to its neighbour
+      const fitNames = () => {
+        const pw = pitchEl.clientWidth || 360, count = {};
+        SLOTS.forEach(([, pos]) => { count[pos] = (count[pos] || 0) + 1; });
+        pitchEl.querySelectorAll('.slotp .nm').forEach((nm) => {
+          const n = count[SLOTS[+nm.parentElement.dataset.slot][1]];
+          if (n < 2) return;
+          const room = pw * Math.min(25, 76 / (n - 1)) / 100 - 6;
+          const w = nm.scrollWidth; if (w > room) nm.style.fontSize = Math.max(6.5, 9.5 * room / w).toFixed(1) + 'px';   // one read, one write
+        });
       };
       // with a player selected, the open shirts he fits pulse and the rest of the open ones step back
       const markPitch = () => {
@@ -164,11 +199,12 @@
       };
       const trioMyst = () => `${[0, 1, 2].map(() => `<div class="cell"><span class="g4-ptag"></span><div class="reelwin"><div class="strip">${shirt({ w: TW, state: 'myst' })}</div></div><span class="cap"></span></div>`).join('')}`;
       const trioLanded = () => S.cands.map((c, i) => `<div class="cell"><span class="g4-ptag on">${c.pos}</span><div class="reelwin landed"><div class="strip">${shirt({ w: TW, player: c, attr: `data-c="${i}"` })}</div></div><span class="cap">${trioCap(c)}</span></div>`).join('');
-      // left of the tally (12 Oct): which player you are on, how many are still to pick after him, respins left
+      // left of the tally (UI_SPEC 8f): which player you are on and how many after him; the goals to go sit after it (setGap),
+      // and the respins live only on the respin button's badge
       const setInfo = () => {
-        const n = S.filled.length, cur = Math.min(n + 1, 11), left = 11 - cur, r = S.respins;
+        const n = S.filled.length, cur = Math.min(n + 1, 11), left = 11 - cur;
         wrap.querySelector('.g4-player').textContent = n >= 11 ? 'Full XI' : `Player ${cur} of 11`;
-        wrap.querySelector('.g4-left').innerHTML = `${n >= 11 ? '' : `${left} ${left === 1 ? 'player' : 'players'} to pick · `}<em>${r} ${r === 1 ? 'respin' : 'respins'}</em>`;
+        wrap.querySelector('.g4-lefttxt').textContent = n >= 11 ? '' : `${left} ${left === 1 ? 'player' : 'players'} to pick · `;
       };
       const setCounts = () => { setInfo(); reload.querySelector('.sp-count').textContent = S.respins; reload.disabled = busy || S.respins <= 0 || !S.cands || !openSlots().length; reload.setAttribute('aria-label', `Spin again, ${S.respins} left`); };
       const setUI = (label, hint, off) => { lbl.textContent = label; lbl.style.fontSize = label.length > 10 ? Math.max(13, Math.round(21 * 10 / label.length)) + 'px' : ''; hintEl.textContent = hint; main.disabled = !!off; setCounts(); };
@@ -178,7 +214,7 @@
         const left = openSlots().length;
         markPitch();
         if (!left) { setUI('Play again', `Full XI: ${gapText(total())}`); return; }
-        if (S.cands) { attach(); if (sel == null) tipsFor433(); setUI(sel != null ? 'Pick ' + S.cands[sel].sur : 'Pick one', sel != null ? `Drag him onto an orange ${POS1[S.cands[sel].pos]} shirt, or tap again` : 'Drag a shirt onto an orange shirt, or tap to pick', sel == null); return; }
+        if (S.cands) { attach(); if (sel == null) tipsFor433(); setUI(sel != null ? 'Pick ' + S.cands[sel].sur : 'Pick one', sel != null ? `Drag him onto a yellow ${POS1[S.cands[sel].pos]} shirt, or tap again` : 'Drag a shirt onto a yellow shirt, or tap to pick', sel == null); return; }
         if (!S.filled.length) tipsFor433();
         setUI('Spin', left === 1 ? 'Last shot: spin for your final shirt' : `Spin for three players. ${left} shirts to fill`);
       }
@@ -186,13 +222,14 @@
       function tipsFor433() {
         later(() => { if (!root.isConnected || busy) return;
           const mid = trioEl.querySelector('[data-c="1"]');
-          if (!S.cands) D2T.tip('g433-goal', wrap.querySelector('.tnum'), 'Get this to exactly 433', { place: 'below', side: 'right' });
-          else D2T.tips([['g433-drag', mid, 'Drag one onto an orange shirt'], ...(S.respins > 0 ? [['g433-respin', reload, 'Not keen? Spin again']] : [])]);
+          if (!S.cands) D2T.tip('g433-goal', wrap.querySelector('.tnum'), `Get this to exactly ${TARGET}`, { place: 'below', side: 'right' });
+          else D2T.tips([['g433-drag', mid, 'Drag one onto a yellow shirt'], ...(S.respins > 0 ? [['g433-respin', reload, 'Not keen? Spin again']] : [])]);
         }, 700);
       }
       function render() {
+        trioEl.innerHTML = S.cands ? trioLanded() : trioMyst();   // the trio first: the pitch takes the height that is left
+        wrap.querySelector('.ttarget').textContent = '/' + TARGET;
         sizePitch(); drawPitch(); setTally(total());
-        trioEl.innerHTML = S.cands ? trioLanded() : trioMyst();
         idleUI();
       }
 
@@ -241,8 +278,8 @@
         busy = true; sel = null; markPitch();
         const avoid = S.filled.map((p) => p.name), need = TARGET - total();
         // the last shot: decide once per game whether one of the three is exactly what you need
-        if (open.length === 1 && S.gift == null) S.gift = G4.canGift(SLOTS[open[0]][1], need, avoid) && Math.random() < G4.GIFT;
-        S.cands = G4.drawOpen(openPos(), avoid, open.length === 1 && S.gift ? need : null); save();   // saved first: a refresh shows the same three
+        if (open.length === 1 && S.gift == null) S.gift = G4.canGift(SLOTS[open[0]][1], need, avoid, FORM) && Math.random() < G4.gift(FORM);
+        S.cands = G4.drawOpen(openPos(), avoid, open.length === 1 && S.gift ? need : null, FORM); save();   // saved first: a refresh shows the same three
         trioEl.innerHTML = trioMyst();
         setUI('Spinning', '', true); main.classList.add('is-spinning'); snd('roll3');
         await runReels(S.cands);
@@ -275,7 +312,7 @@
         S.filled.push(Object.assign({}, p, { slot: ni })); S.cands = null; sel = null;
         const done = !openSlots().length;
         let result = null;
-        if (done && !S.recorded) { S.recorded = true; result = G4.finish(total()); }
+        if (done && !S.recorded) { S.recorded = true; result = G4.finish(total(), TARGET); }
         save();
         snd('lockin');
         const fly = D2T.h(`<div class="g4-flyer">${shirt({ w: TW, player: p })}</div>`);
@@ -386,7 +423,7 @@
           burstAt(x1, y1, false); done(); };
         an.onfinish = land; later(land, 800);
       }
-      // blowing through 433: the line snaps in two and flies off, the 433 tumbles away, the tally shakes
+      // blowing through the target: the line snaps in two and flies off, the target number tumbles away, the tally shakes
       function gateBreak(tr) {
         const mark = tr.querySelector('.mark'), r = mark.getBoundingClientRect(), hr = wrap.getBoundingClientRect();
         const x = r.left - hr.left + r.width / 2, y = r.top - hr.top, h = r.height;
@@ -397,7 +434,7 @@
           piece.animate([{ transform: 'translate(0,0) rotate(0)', opacity: 1 }, { transform: `translate(${6 + Math.random() * 10}px, ${d * 58}px) rotate(${d * 80}deg)`, opacity: 0 }], { duration: 760, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'forwards' });
           later(() => piece.remove(), 800);
         });
-        const lab = D2T.h('<div class="g4-gatel">433</div>'); lab.style.left = (x - 24) + 'px'; lab.style.top = (y + h + 2) + 'px'; wrap.appendChild(lab);
+        const lab = D2T.h(`<div class="g4-gatel">${TARGET}</div>`); lab.style.left = (x - 24) + 'px'; lab.style.top = (y + h + 2) + 'px'; wrap.appendChild(lab);
         lab.animate([{ transform: 'translate(0,0) rotate(0)', opacity: 0.8 }, { transform: 'translate(-14px, 70px) rotate(38deg)', opacity: 0 }], { duration: 900, easing: 'cubic-bezier(.3,.6,.4,1)', fill: 'forwards' });
         later(() => lab.remove(), 950);
         burstAt(x, y + h / 2, true); burstAt(x + 10, y + h / 2, false);
@@ -405,7 +442,7 @@
         tr.querySelector('.fill').animate([{ filter: 'brightness(1)' }, { filter: 'brightness(2.2)' }, { filter: 'brightness(1)' }], { duration: 420 });
         snd('lockin');
       }
-      // the number and the bar count up together; crossing 433 = race past the line, burst on it, then the bar re-scales
+      // the number, the to-go text and the bar count up together; crossing the target = race past the line, burst on it, then the bar re-scales
       function tickTo(from, to, done) {
         const num = wrap.querySelector('.tnum'), tr = wrap.querySelector('.g4-track');
         if (reduced) { paintBar(wrap, to); done(); return; }
@@ -436,7 +473,7 @@
       function confetti(ms = 3200) {
         const cv = document.createElement('canvas'); cv.className = 'g4-confetti'; wrap.appendChild(cv);
         const W = cv.width = wrap.clientWidth * 2, Hh = cv.height = wrap.clientHeight * 2, ctx = cv.getContext('2d');
-        const cols = ['#FFC83D', '#FF7A1A', '#FFFFFF', '#12F06C', '#FF4D5A'];
+        const cols = ['#FFD21F', '#FFE375', '#FFFFFF', '#12F06C', '#FFB000'];
         const ps = Array.from({ length: 180 }, (_, i) => ({ x: W / 2 + (Math.random() - 0.5) * 120, y: Hh * 0.42, vx: (Math.random() - 0.5) * 34, vy: -18 - Math.random() * 26, r: Math.random() * 6.3, vr: (Math.random() - 0.5) * 0.4, w: 8 + Math.random() * 10, h: 5 + Math.random() * 6, c: cols[i % cols.length] }));
         const t0 = performance.now();
         const f = (now) => {
@@ -455,12 +492,12 @@
         const fade = (els, at) => later(() => { els.forEach((x) => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, fill: 'forwards' })); later(() => { els.forEach((x) => x.remove()); show(); }, 520); }, at);
         const dim = (ms) => { const d = D2T.h('<div class="g4-dim"></div>'); wrap.appendChild(d); d.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ms, fill: 'forwards' }); return d; };
         if (gap === 0) {
-          // EXACT: the bar turns gold, the shirts light up in a wave, confetti, a giant 433 slams onto the pitch
+          // EXACT: the bar turns gold, the shirts light up in a wave, confetti, the giant target slams onto the pitch
           snd('champions');
           wrap.querySelector('.g4-track').classList.add('glow');
           [...pitchEl.querySelectorAll('.slotp .g4-shirt')].forEach((s, i) => s.animate([{ transform: 'scale(1)', filter: 'brightness(1)' }, { transform: 'scale(1.25)', filter: 'brightness(1.8)' }, { transform: 'scale(1)', filter: 'brightness(1)' }], { duration: 500, delay: 80 * (10 - i) }));
           later(() => {
-            confetti(); const d = dim(300), m = msg('', '433', 'Perfect. Exactly 433.');
+            confetti(); const d = dim(300), m = msg('', String(TARGET), `Perfect. Exactly ${TARGET}.`);
             m.querySelector('b').animate([{ transform: 'scale(3) rotate(-8deg)', opacity: 0 }, { transform: 'scale(0.92) rotate(-3deg)', opacity: 1, offset: 0.55 }, { transform: 'scale(1) rotate(-3deg)', opacity: 1 }], { duration: 650, easing: 'cubic-bezier(.2,.9,.3,1.2)', fill: 'forwards' });
             pitchEl.animate([{ transform: 'translate(0,0)' }, { transform: 'translate(-6px,3px)' }, { transform: 'translate(5px,-2px)' }, { transform: 'translate(-3px,1px)' }, { transform: 'translate(0,0)' }], { duration: 380, delay: 360 });
             m.querySelector('span').animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: 400, delay: 700, fill: 'backwards' });
@@ -485,7 +522,7 @@
         } else {
           // BLOWN PAST: the bar has raced past and re-scaled; a grey stamp says how far over
           snd('buzzer');
-          const m = msg('over', '+' + (-gap), 'Blown past 433');
+          const m = msg('over', '+' + (-gap), `Blown past ${TARGET}`);
           m.animate([{ opacity: 0, transform: 'translateX(-60px) skewX(-12deg)' }, { opacity: 1, transform: 'translateX(8px) skewX(-6deg)', offset: 0.6 }, { opacity: 1, transform: 'none' }], { duration: 600, easing: 'ease-out', fill: 'backwards' });
           fade([m], 2800);
         }
@@ -493,10 +530,10 @@
       function resultSheet(t, result) {
         if (!root.isConnected) return;
         const rec = (result && result.rec) || G4.record(), gap = Math.abs(t - TARGET);
-        const head = gap === 0 ? 'Exactly 433' : t < TARGET ? `${gap} short of 433` : `${gap} over 433`;
-        const best = result && result.newBest && rec.games > 1 ? 'A new best.' : rec.best != null ? `Your best: ${rec.best === 0 ? 'exactly 433' : rec.best + ' away'} (${rec.bestTotal}).` : '';
-        const text = `DROP2TOP 433 Goals\nMy XI: ${t} Premier League goals (${gapText(t)})\n${S.filled.map((p) => `${p.sur} ${p.goals}`).join(', ')}`;
-        const sh = D2T.sheet({ title: head, body: `<p class="fr-lead">Your XI scored <b>${t}</b> Premier League goals. ${best}${rec.exact ? ` Exactly 433: ${rec.exact} ${rec.exact === 1 ? 'time' : 'times'}.` : ''}</p>
+        const head = gap === 0 ? `Exactly ${TARGET}` : t < TARGET ? `${gap} short of ${TARGET}` : `${gap} over ${TARGET}`;
+        const best = result && result.newBest && rec.games > 1 ? 'A new best.' : rec.best != null ? `Your best: ${rec.best === 0 ? 'exactly on target' : rec.best + ' away'}${rec.bestTarget ? ` (${rec.bestTotal}/${rec.bestTarget})` : ''}.` : '';
+        const text = `DROP2TOP Goal Rush (${shapeText(FORM)})\nMy XI: ${t}/${TARGET} goals (${gapText(t)})\n${S.filled.map((p) => `${p.sur} ${p.goals}`).join(', ')}\nCan you beat it? 404craig.github.io/D2T`;
+        const sh = D2T.sheet({ title: head, body: `<p class="fr-lead">Your XI scored <b>${t}</b> Premier League goals. ${best}${rec.exact ? ` Bang on target: ${rec.exact} ${rec.exact === 1 ? 'time' : 'times'}.` : ''}</p>
           <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="share">Share with your mates</button><button class="btn g4-again fr-btn-wide" data-k="again">Play again</button></div>` });
         sh.body.querySelector('[data-k="again"]').onclick = () => { sh.close(); newGame(); };
         sh.body.querySelector('[data-k="share"]').onclick = async () => {
@@ -504,7 +541,45 @@
           try { await navigator.clipboard.writeText(text); sh.body.querySelector('.fr-lead').textContent = 'Copied. Paste it into the group chat.'; } catch (e) { /* nothing to copy to */ }
         };
       }
-      function newGame() { S = D2T.state.g433 = fresh(); save(); sel = null; busy = false; wrap.querySelector('.g4-track').classList.remove('glow'); render(); }
+      function newGame() { S = D2T.state.g433 = fresh(); setShape(S.formation); save(); sel = null; busy = false; wrap.querySelector('.g4-track').classList.remove('glow'); render(); reveal(); }
+
+      // ---------- the target reveal (UI_SPEC 8f): once per game, never after a refresh; tap to skip, none with reduced motion ----------
+      // a dim layer, "THIS GAME'S TARGET", the eight formations rolling through the big number, slowing to stop on this one
+      function reveal() {
+        if (S.revealed) return;
+        if (reduced) { S.revealed = true; save(); return; }
+        busy = true;
+        const F = G4.FORMATIONS, end = Math.max(0, F.indexOf(FORM)), last = F.length * 2 + end;
+        const el = D2T.h(`<div class="g4-reveal" role="button" tabindex="0" aria-label="This game's target is ${TARGET}: line up ${shapeText(FORM)}. Tap to start"><small>THIS GAME'S TARGET</small><b>${F[0]}</b><span>Line up ${shapeText(FORM)} · score ${TARGET}</span><div class="roll">${F.map((f) => `<i data-f="${f}">${f}</i>`).join('')}</div></div>`);
+        wrap.appendChild(el);
+        const big = el.querySelector('b'), chips = [...el.querySelectorAll('.roll i')], line = el.querySelector('span');
+        line.style.opacity = 0;
+        el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 220, fill: 'backwards' });
+        let k = 0, over = false;
+        const finish = () => {
+          if (over) return; over = true;
+          S.revealed = true; save();                         // seen: leaving mid-roll shows it again next time
+          el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 320, fill: 'forwards' });
+          later(() => { el.remove(); if (!root.isConnected) return; busy = false; idleUI(); }, 330);
+        };
+        el.onclick = finish; el.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); finish(); } };
+        later(() => el.focus({ preventScroll: true }), 50);
+        const step = () => {
+          if (over || !root.isConnected) return;
+          const f = F[k % F.length];
+          big.textContent = f; chips.forEach((c) => c.classList.toggle('on', c.dataset.f === f));
+          if (k >= last) {
+            snd('lockin');
+            big.animate([{ transform: 'rotate(-3deg) scale(1.35)' }, { transform: 'rotate(-3deg) scale(.94)', offset: 0.55 }, { transform: 'rotate(-3deg) scale(1)' }], { duration: 480, easing: 'cubic-bezier(.3,1.4,.5,1)' });
+            line.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 200, fill: 'forwards' });
+            later(finish, 1700);
+            return;
+          }
+          if (k % 2 === 0) snd('tap');
+          later(step, 50 + Math.pow(k / last, 3) * 280); k++;
+        };
+        step();
+      }
 
       main.onclick = () => {
         if (busy) return;
@@ -514,6 +589,7 @@
       };
       reload.onclick = () => { if (busy || S.respins <= 0 || !S.cands || !openSlots().length) return; S.respins -= 1; save(); spin(); };
       render();
+      reveal();
     },
     unmount() { timers.forEach(clearTimeout); rafs.forEach(cancelAnimationFrame); timers = []; rafs = []; document.querySelectorAll('.g4-ghost').forEach((g) => g.remove()); }
   });
