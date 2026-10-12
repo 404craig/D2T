@@ -126,6 +126,14 @@ Today a bronze or silver card is rarely wanted. Options, best first:
 - Section title "Other games". Option A: each card washed in its game's colour from the right, thin rim, faded mark on the right, button bottom right; all the same shape and height.
 - Daily Challenge white (date in the tag, club over season as the title, today's crest in full colour at the Club X badge's size), Dare2Dream blue, Club X green, 433 Goals orange ("Score exactly 433 goals"), Tenaball purple (opens https://404craig.github.io/Tenaball/). Coming soon (build 31): Head to head ("Multiplayer online, challenge your friends.") and Steal as two grey squares side by side, grey sweep with a faded icon and a lock. Options page: `design/prototype/modes-colour.html`.
 
+## 8f. Goal Rush (chosen 12 Oct, replaces 433 Goals; to build)
+
+- Name Goal Rush, colour yellow `#FFD21F` (text `#FFE375`), mark: Craig's ball (`assets/brand/goal_rush.png`, cut out), faded behind the home card at the Club X badge's size. Home card: tag GOAL RUSH, title "Score the exact number of goals", line "A random formation each game. Pick 11 real players whose career goals add up to it exactly." In-game tag "Goal Rush" in yellow.
+- Each game picks one of 442, 433, 451, 352, 343, 424, 532, 541 at random (not daily). That number is the target and the pitch takes that shape (labels: 3 back CB CB CB; 4 back LB CB CB RB; 5 back LWB CB CB CB RWB; 2 mid CM CM; 3 mid CM CM CM; 4 mid LM CM CM RM; 5 mid LM CM CM CM RM; 1 up ST; 2 up ST ST; 3 up LW ST RW; 4 up LW ST ST RW). A target reveal opens each game: the eight formations, the chosen one lit, a big yellow number. "433 GOALS" painted on the pitch becomes "<target> GOALS" and a small shape chip sits bottom left.
+- Balance (`tests/sim-goalrush.js`): pool depth per formation (top N scorers per position) DEPTH = 442:180, 433:220, 451:145, 352:310, 343:355, 424:260, 532:105, 541:75; last-shot gift per formation GIFT = 442:0.22, 433:0.2, 451:0.27, 352:0.14, 343:0.14, 424:0.18, 532:0.36, 541:0.42. A casual player lands exactly about 1 game in 20 and within 10 about 1 in 5 (5-4-1 hardest).
+- Tally: top left "Player 7 of 11" over "4 players to pick · 38 to go" (to go in yellow; respins only on the respin button badge). Top right "314/352 GOALS" (big white scored, smaller grey /target and GOALS). The bar fills left to right to the white target line; nothing under the bar, so the pitch moves up.
+- The 433 record carries on into Goal Rush. Mockups: `design/prototype/goal-rush.html`, `goal-rush-logo.html`.
+
 ## 9. How the prototype behaves (built 11 Oct)
 
 - **Intro:** short black D2T, emblem spins as it opens into DROP2TOP at 75% width, then the slogan types in (DROP and TOP reversed out), then the logo glides up into the green home. About 5 seconds, tap to skip, first launch only.

@@ -44,7 +44,7 @@
   .mtag span { display: inline-block; transform: skewX(10deg); }
   .acct { justify-self: end; width: 40px; height: 40px; border-radius: 50%; border: 1px solid #26262C; background: #0E0E10; display: grid; place-items: center; }
   .acct svg { width: 18px; height: 18px; }
-  .tally { padding: 2px 16px 16px; position: relative; }
+  .tally { padding: 2px 16px 10px; position: relative; }
   .tally .top { display: flex; justify-content: space-between; align-items: flex-end; }
   .info { display: flex; flex-direction: column; gap: 3px; }
   .info b { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
@@ -174,7 +174,7 @@
   const pitch = (f, filled, openFrom) => `<div class="pitch">${LINES}<span class="circle"></span><div class="paint">${f} GOALS</div><span class="shape">${f.split('').join('-')}</span>${slots(f).map(([lab, x, y], i) => {
     const p = filled[i];
     return `<div class="slot" style="left:${x}%;top:${y}%">${p ? shirt({ w: 50, p }) + `<span class="nm">${p.sur}</span>` : shirt({ w: 50, pos: lab, open: i >= openFrom || !p })}</div>`; }).join('')}</div>`;
-  const tally = (t, target, player, left, respins) => `<div class="tally"><div class="top"><span class="info"><b>Player ${player} of 11</b><i>${left} players to pick · <em>${respins} respins</em></i></span><span class="tot1"><span class="n"><b>${t}</b><small>/${target}</small><em>goals</em></span></span></div><div class="track"><span class="fill" style="width:${Math.min(100, t / target * 100)}%"></span><span class="mark2" data-t=""></span></div><span class="togo">${t <= target ? (target - t) + ' to go' : (t - target) + ' over'}</span></div>`;
+  const tally = (t, target, player, left, respins) => `<div class="tally"><div class="top"><span class="info"><b>Player ${player} of 11</b><i>${left} players to pick · <em>${t <= target ? (target - t) + ' to go' : (t - target) + ' over'}</em></i></span><span class="tot1"><span class="n"><b>${t}</b><small>/${target}</small><em>goals</em></span></span></div><div class="track"><span class="fill" style="width:${Math.min(100, t / target * 100)}%"></span><span class="mark2" data-t=""></span></div></div>`;
   const top = () => `<div class="tb"><span class="logo"></span><span class="mtag"><span>Goal Rush</span></span><span class="acct">${ACCT}</span></div>`;
   const bar = (label, r) => `<div class="bar"><span class="circ">${RESPIN}<span class="n">${r}</span></span><span class="spin">${label}</span><span class="circ">${HOME}</span></div>`;
   const myst = () => `<div class="trio">${[0, 1, 2].map(() => `<div class="cell"><div class="sh" style="--w:92px"><svg viewBox="0 0 100 100"><path d="${SHIRT}" fill="#16161B" stroke="#3A3A44" stroke-width="2.4" stroke-linejoin="round"/><text x="50" y="70" font-size="44" fill="#4A4A56">?</text></svg></div><span class="cap">&nbsp;</span></div>`).join('')}</div>`;
@@ -207,7 +207,7 @@
 
   const O = [['HOME', 'Goal Rush on home', 'Yellow, in place of 433 Goals. Your ball, faded behind the card like the Club X badge.', home],
     ['START', 'The target reveal', 'A new game rolls through the eight formations and stops on one. That number is the target and the pitch behind takes its shape.', reveal],
-    ['3-5-2', 'A 3-5-2 game', `Three at the back, five in midfield, two up front. Six picked so far: 314/352 goals sits above the bar, 38 to go under it, and the bar fills towards the target. The open shirts are yellow.`, game1],
+    ['3-5-2', 'A 3-5-2 game', `Three at the back, five in midfield, two up front. Six picked so far: 314/352 goals sits above the bar and "38 to go" moves to the top left, in place of the respins (still on the respin button), so the pitch moves up. The open shirts are yellow.`, game1],
     ['4-4-2', 'A 4-4-2 game', `The next game is a 4-4-2: target 442, the pitch in two banks of four. Four picked: ${442 - t2} to go.`, game2]];
   const TOT = {
     1: (t, T) => `<span class="tot1"><span class="n"><b>${t}</b><small>/${T}</small><em>goals</em></span><i>${T - t} to go</i></span>`,
