@@ -412,8 +412,9 @@
 
   // ---------- Daily challenge ----------
   // The same club and seed for everyone each day (UK date): one of the bottom 10 of any season, picked from a hash of
-  // the date. A real bottom-3 side plays Classic; anyone above the drop plays Dare2Dream. No respins, so everyone sees
-  // the same cards and only their choices differ. One go a day; it has its own save, so another run is never lost.
+  // the date. It always plays by Classic's rules (Craig, 13 Oct): their real squad and XI, pre-season rolls and 5
+  // respins; the rolls and respins come from the day's seed, so the same choices see the same cards. One go a day; it
+  // has its own save, so another run is never lost.
   const DAILY_START = '2026-10-11';
   GAME.today = () => {
     try { return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); }
@@ -425,8 +426,8 @@
   const dailyPool = (G.clubSeasons || []).filter((c) => c.pos > G.seasons[c.season].clubs.length - 10);
   GAME.dailyEntry = (date) => {
     const c = dailyPool[E.hash32('d2t-daily|' + date) % dailyPool.length], S = G.seasons[c.season];
-    const mode = c.pos > S.clubs.length - (S.relegationPlaces || 3) ? 'classic' : 'dare2dream';
-    return Object.assign({}, GAME.poolEntry(c.key), { mode, n: GAME.dailyNumber(date), date });
+    const relegated = c.pos > S.clubs.length - (S.relegationPlaces || 3);
+    return Object.assign({}, GAME.poolEntry(c.key), { mode: 'classic', relegated, n: GAME.dailyNumber(date), date });
   };
   GAME.isDaily = () => !!(D2T.state.run && D2T.state.run.daily);
   GAME.dailyResult = (date) => ((D2T.state.record.daily || {})[date || GAME.today()] || null);
@@ -456,7 +457,6 @@
     if (st.dailyRun && st.dailyRun.daily === date) { swapIn(st.dailyRun); D2T.save(); return true; }
     const d = GAME.dailyEntry(date);
     const eng = E.newRun({ seed: 'daily-' + date, mode: d.mode, catalogue: [{ key: d.key }], fixedClub: d.key });
-    eng.respins = 0;
     swapIn({ step: 'table', eng, spun: true, daily: date });
     GAME.chooseClub(d.key);
     D2T.save();
