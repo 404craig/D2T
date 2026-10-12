@@ -38,6 +38,25 @@
   .t3 .word { font-size: 15px; letter-spacing: .04em; color: var(--ink, #0A0A0A); background: var(--c); padding: 5px 9px 4px; border-radius: 5px; transform: skewX(-10deg); }
   .t3 .word span { display: inline-block; transform: skewX(10deg); }
 
+  /* chosen: tag centred in the bar */
+  .tbc { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 16px 16px 10px; }
+  .tbc .acct { justify-self: end; }
+  .tbc .tagc { font: 900 italic 15px/1 'Exo 2'; letter-spacing: .04em; text-transform: uppercase; color: var(--ink, #0A0A0A); background: var(--c); padding: 5px 10px 4px; border-radius: 5px; transform: skewX(-10deg); white-space: nowrap; }
+  .tbc .tagc span { display: inline-block; transform: skewX(10deg); }
+  /* 433 tally with the left side reworked */
+  .tal { padding: 2px 16px 0; }
+  .tal .top { display: flex; justify-content: space-between; align-items: flex-end; }
+  .tal .info { display: flex; flex-direction: column; gap: 3px; }
+  .tal .info b { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+  .tal .info i { font-style: normal; font-size: 11px; font-weight: 700; color: #8E8E99; }
+  .tal .info i em { font-style: normal; color: #FFB27A; }
+  .tal .tot { display: flex; align-items: baseline; gap: 6px; }
+  .tal .tot b { font: 900 italic 28px/1 'Exo 2'; }
+  .tal .tot i { font-style: normal; font-size: 12px; font-weight: 800; color: #FFB27A; }
+  .tal .trk { position: relative; height: 10px; border-radius: 5px; background: #1B1B21; margin-top: 8px; }
+  .tal .trk span { position: absolute; left: 0; top: 0; bottom: 0; width: 95%; border-radius: 5px; background: linear-gradient(90deg, #FF4D1A, #FF7A1A); }
+  .tal .trk em { position: absolute; right: 0; top: -4px; bottom: -4px; width: 2px; background: #fff; }
+  .minipitch { margin: 18px 0 0; height: 120px; border-radius: 14px; background: repeating-linear-gradient(180deg, #0D3A24 0 18px, #0A311E 18px 36px); }
   /* a hint of the screen under the bar, so the lockup is seen in place */
   .scr { padding: 6px 16px 22px; }
   .kick { text-align: center; font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #8E8E99; }
@@ -57,6 +76,7 @@
     <h1>Mode in the logo</h1>
     <p>Inside a game the top-left logo stays the white D2T and the mode follows it in that mode's colour: Classic in your club's colour, Dare2Dream blue, Daily grey, Club X green, 433 orange. Three ways to set the word, each shown on every mode with a hint of the screen underneath. Tapping it still goes home.</p>
   </div>
+  <section class="sec"><h2><small>CHOSEN</small>Tag, centred</h2><p>Option 3's tag, moved to the middle of the top bar: plain white D2T on the left, the mode tag centred, the account button on the right. In 433 Goals the big "433 GOALS" title on the left of the tally is no longer needed, so it becomes the things you check mid-game: which player you are on, how many are still to pick after him, and respins left.</p><div class="row" id="chosen"></div></section>
   <div id="secs"></div>
 </div>
 <script>
@@ -80,6 +100,9 @@
   const T = [[1, 'Word after the logo', 'The mode straight after D2T in the same Black Italic, at the height of the logo\'s letters, in the mode colour. The simplest: it reads as one name, "D2T Classic".'],
     [2, 'With a slash', 'A slanted grey slash between D2T and the mode, like a breadcrumb: D2T / DAILY. Keeps the logo and the mode clearly apart.'],
     [3, 'Mode tag', 'The mode in a small slanted tag in its colour with dark text, beside the logo. The loudest; reads like a badge on a kit.']];
+  const chosen = (m) => { const scr = m.word === '433' ? '<div class="tal"><div class="top"><span class="info"><b>Player 8 of 11</b><i>3 players to pick · <em>2 respins</em></i></span><span class="tot"><b>412</b><i>21 away</i></span></div><div class="trk"><span></span><em></em></div><div class="minipitch"></div></div>' : `<div class="scr">${m.scr}</div>`;
+    return `<div><div class="phone" style="--c:${m.c}"><div class="tbc"><span class="logo" role="img" aria-label="D2T"></span><span class="tagc"><span>${m.word}</span></span><span class="acct">${ACCT}</span></div>${scr}</div><div class="cap">${m.note}</div></div>`; };
+  document.getElementById('chosen').innerHTML = MODES.map(chosen).join('');
   document.getElementById('secs').innerHTML = T.map(([t, h, d]) => `<section class="sec"><h2><small>OPTION ${t}</small>${h}</h2><p>${d}</p><div class="row">${MODES.map((m) => phone(t, m)).join('')}</div></section>`).join('');
 })();
 </script>

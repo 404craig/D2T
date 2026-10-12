@@ -43,7 +43,10 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .topbar { position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between; padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 10px; min-height: 44px; }
 .topbar .logo-mask { height: 26px; }
 .topbar-l { display: flex; align-items: center; gap: 6px; }
-.logo-mode { font: 900 italic 23px/1 var(--font); text-transform: uppercase; letter-spacing: -0.005em; white-space: nowrap; transform: translateY(1px); }
+.topbar.has-mode { display: grid; grid-template-columns: 1fr auto 1fr; }
+.topbar.has-mode .acct-btn { justify-self: end; }
+.mode-tag { font: 900 italic 15px/1 var(--font); letter-spacing: 0.04em; text-transform: uppercase; color: #0A0A0A; background: var(--c); padding: 5px 10px 4px; border-radius: 5px; transform: skewX(-10deg); white-space: nowrap; }
+.mode-tag > span { display: inline-block; transform: skewX(10deg); }
 .back-btn { width: 44px; height: 44px; margin-left: -10px; border: 0; background: none; padding: 0; display: grid; place-items: center; color: #fff; }
 .back-btn svg { width: 26px; height: 26px; }
 .acct-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--ink); display: grid; place-items: center; padding: 0; }

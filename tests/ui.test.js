@@ -317,7 +317,7 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => window.D2T.state.g433.filled.length === 11 && window.D2T.game.g433.record().games === 1), "433: the game did not fill 11 shirts and record a result");
   check(await page.evaluate(() => window.D2T.state.g433.filled.every((p) => window.D2T.state.g433.filled.filter((q) => q.name === p.name).length === 1)), "433: the same player appeared twice");
   check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, recBefore), "433 changed Classic's record");
-  check(!!(await page.$(".sheet")), "433: no result sheet at the end");
+  check(!!(await page.waitForSelector(".sheet", { timeout: 12000 }).catch(() => null)), "433: no result sheet at the end");   // the sheet opens after the ending animation, which runs longer when the bar breaks past 433
 
   await browser.close();
   if (errors.length) { console.log("FAIL\n" + errors.join("\n")); process.exit(1); }
