@@ -144,4 +144,4 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
    theme-color. D2T.chrome(top, bottom) keeps all of them, and the page background, in step with each screen. */
 .chrome-top, .chrome-bot { position: fixed; left: 0; right: 0; z-index: 90; pointer-events: none; background: #000; transition: background-color .9s ease; }
 .chrome-top { top: 0; height: max(12px, env(safe-area-inset-top, 0px)); }
-.chrome-bot { bottom: 0; height: max(12px, env(safe-area-inset-bottom, 0px)); }
+.chrome-bot { bottom: 0; height: max(12px, env(safe-area-inset-bottom, 0px)); z-index: 4; } /* under the button bars (z 5), sheets and overlays, so it never clips a button; still over scrolling content */
