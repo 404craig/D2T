@@ -152,3 +152,8 @@
 .sp-tip.gone { opacity: 0; }
 @keyframes spTipIn { from { opacity: 0; transform: translateY(6px); } to { opacity: .92; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .sp-tip { animation: none; } }
+/* preferred positions under the big card: main one filled, the others outlined */
+.sp-det-pos { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; font-size: 12px; color: var(--muted); }
+.sp-det-pos span { font-weight: 700; }
+.sp-det-pos b { font-size: 12px; font-weight: 800; color: #fff; padding: 4px 9px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.35); }
+.sp-det-pos b.is-main { background: var(--sp-accent, #fff); border-color: transparent; color: #0A0A0A; }

@@ -255,6 +255,10 @@
 .se-oopchip.se-delta { font-size: 10px; padding: 1px 6px; }
 .se-oopchip.se-fit-amber { background: #FFB020; color: #1A1000; }
 .se-oopchip.se-fit-red { background: #FF4D5E; color: #1A0004; }
+.se-oopchip.se-fit-green { background: #12F06C; color: #00170A; }
+/* while a card is selected or dragged, every shirt shows how well he fits it */
+.se-pfchip { z-index: 3; box-shadow: 0 0 0 2px #000; }
+.se-slot.se-pf-green .se-cardwrap, .se-slot.se-pf-green .se-empty { outline: 2px solid #12F06C; outline-offset: 2px; border-radius: 8px; }
 .se-sub.se-newsign .se-cardwrap { transform: translateY(-3px); }
 @media (prefers-reduced-motion: reduce) { .se-slot.se-best .se-cardwrap { animation: none; outline: 2px solid var(--se-acc); outline-offset: 3px; border-radius: 8px; } }
 
