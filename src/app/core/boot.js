@@ -7,5 +7,11 @@
     window.addEventListener('pointerdown', wake, true);
     window.addEventListener('touchend', wake, true);
   }
+  // a Daily left unfinished before midnight closes on the next load, and while the game is open
+  if (D2T.game && D2T.game.closeOldDaily) {
+    D2T.game.closeOldDaily();
+    const IN_RUN = ['spin', 'table', 'squad', 'transfer', 'fixtures', 'match'];
+    setInterval(() => { const onDaily = !!(D2T.state.run && D2T.state.run.daily); if (D2T.game.closeOldDaily() && onDaily && IN_RUN.includes(D2T.currentScreen())) D2T.go('home'); }, 30000);
+  }
   D2T.start();
 })();

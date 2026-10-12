@@ -78,7 +78,9 @@
   function dailyCard() {
     const G = D2T.game, d = G.dailyEntry(G.today()), res = G.dailyResult(), streak = G.dailyStreak();
     const goal = d.mode === 'classic' ? 'They went down for real. Can you keep them up?' : `They finished ${D2T.ordinal(d.pos)} for real. Can you beat it from zero?`;
-    const sub = res ? `Done: ${D2T.ordinal(res.finish)} (${res.rise > 0 ? '+' : ''}${res.rise}). Next one at midnight.` : goal;
+    const cmp = G.dailyCompare(), best = cmp.best;
+    const sub = res ? `Today: ${D2T.ordinal(res.finish)}, rise ${cmp.sg(res.rise)}. ${cmp.isBest ? 'Your best Daily yet.' : `Best: ${cmp.sg(best.rise)} (${D2T.esc(best.club)}).`} Tap to share.`
+      : best ? `${goal} Your best Daily: rise ${cmp.sg(best.rise)}.` : goal;
     // white, the date in the top row, today's crest in full colour where the other games keep their mark
     const tag = G.dailyName(d.date, true).toUpperCase().replace('CHALLENGE ', 'CHALLENGE · ') + (streak ? ` · ${streak} DAY STREAK` : '');
     return gameCard({ c: '#FFFFFF', cls: 'fr-gm-daily', attrs: 'data-act="daily"', label: `${G.dailyName(d.date)}, ${D2T.esc(d.full || d.name)} ${d.season}`,
@@ -86,8 +88,11 @@
   }
   function dailyDone() {
     const G = D2T.game, r = G.dailyResult(), d = G.dailyEntry(G.today());
-    const text = `DROP2TOP ${G.dailyName(G.today())}\n${d.full || d.name} ${d.season} (${G.modeName(r.mode)})\nHistory: ${D2T.ordinal(r.histFinish)}\nMine: ${D2T.ordinal(r.finish)}, ${r.pts} pts\nTHE RISE ${r.rise > 0 ? '+' : ''}${r.rise}`;
-    const sh = D2T.sheet({ title: `${G.dailyName(G.today())}: done`, body: `<p class="fr-lead">${D2T.esc(d.name)} ${d.season}: you finished ${D2T.ordinal(r.finish)} (history ${D2T.ordinal(r.histFinish)}). A new club for everyone at midnight.</p>
+    const cmp = G.dailyCompare();
+    const text = `DROP2TOP ${G.dailyName(G.today())}\n${d.full || d.name} ${d.season} (${G.modeName(r.mode)})\nHistory: ${D2T.ordinal(r.histFinish)}\nMine: ${D2T.ordinal(r.finish)}, ${r.pts} pts\nTHE RISE ${cmp.sg(r.rise)}${cmp.isBest ? '\nMy best Daily yet' : cmp.bestLine ? '\n' + cmp.bestLine : ''}\nCan you beat it? 404craig.github.io/D2T`;
+    const vs = cmp.best ? `<div class="fr-panel" style="margin:12px 0"><div class="fr-row"><span>Today</span><span class="fr-green">${D2T.ordinal(r.finish)}, rise ${cmp.sg(r.rise)}</span></div>
+      <div class="fr-row"><span>Your best Daily</span><span>${cmp.isBest ? 'Today' : `${D2T.esc(cmp.best.club)} ${cmp.best.season}, ${D2T.ordinal(cmp.best.finish)}, rise ${cmp.sg(cmp.best.rise)}`}</span></div></div>` : '';
+    const sh = D2T.sheet({ title: `${G.dailyName(G.today())}: done`, body: `<p class="fr-lead">${D2T.esc(d.name)} ${d.season}: you finished ${D2T.ordinal(r.finish)} (history ${D2T.ordinal(r.histFinish)}). ${cmp.isBest && cmp.best ? 'Your best Daily yet. ' : ''}A new club for everyone at midnight.</p>${vs}
       <div class="fr-stack"><button class="btn btn-green fr-btn-wide" data-k="share">Share with your mates</button></div>` });
     sh.body.querySelector('[data-k="share"]').onclick = async () => {
       try { if (navigator.share) { await navigator.share({ text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
@@ -128,6 +133,7 @@
   D2T.screen('home', {
     title: 'Home', theme: 'black',
     mount(root, params) {
+      D2T.game.closeOldDaily();                                  // yesterday's unfinished Daily closed at midnight
       const rec = D2T.game.record(), dreams = D2T.game.dreamRecord(), xr = D2T.game.xRecord();
       const body = D2T.h(`<div class="screen-body fr-home">
         <div class="fr-home-top"><button class="fr-home-logo" aria-label="DROP2TOP">${homeLogo()}</button></div>
@@ -205,6 +211,10 @@
         fanTimer = setTimeout(shuffle, 10000 + Math.random() * 5000);
       };
       fanTimer = setTimeout(shuffle, 10000 + Math.random() * 5000);
+      if (D2T.state.dailyClosed) {                               // say once that an unfinished Daily closed at midnight
+        const dc = D2T.state.dailyClosed; delete D2T.state.dailyClosed; D2T.save();
+        setTimeout(() => { if (root.isConnected) D2T.sheet({ title: 'That Daily has closed', body: `<p class="fr-lead">${D2T.esc(D2T.game.dailyName(dc))} closed at midnight before you finished it. Today's club is ready for everyone.</p>` }); }, 900);
+      }
       const startNew = (from, mode) => { D2T.game.newRun(mode); D2T.toBlack('spin', { from }); };
       const daily = body.querySelector('[data-act="daily"]');
       if (daily) daily.onclick = (e) => {
