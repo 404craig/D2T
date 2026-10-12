@@ -37,7 +37,7 @@
   const G4 = G.g433 || { GK: [], DEF: [], MID: [], FWD: [] }, g4lists = {};
   GAME.g433 = {
     TARGET: 433, RESPINS: 3, TOP: 220,
-    list: (pos) => g4lists[pos] || (g4lists[pos] = G4[pos].map(([name, sur, club, goals]) => ({ name, sur, club, goals }))),
+    list: (pos) => g4lists[pos] || (g4lists[pos] = G4[pos].map(([name, sur, club, goals]) => ({ name, sur, club, goals, pos }))),
     // three different players of a position from its 220 top scorers, never one already in your XI
     draw(pos, avoid = []) {
       const L = GAME.g433.list(pos), n = Math.min(L.length, GAME.g433.TOP), out = [];
@@ -45,6 +45,22 @@
       while (out.length < 3 && guard++ < 500) { const p = L[Math.floor(Math.random() * n)]; if (!out.includes(p) && !avoid.includes(p.name)) out.push(p); }
       return out;
     },
+    // Every spin (Craig, 12 Oct): three players from any position still open on the board, each position as likely as
+    // its open shirts. On the last shot, if a player of that position has exactly the goals needed, one game in five
+    // (GIFT, decided once per game, so respins keep it) puts him among the three. Balanced with a simulation of
+    // 40,000 games: a player who roughly knows career goals is offered the exact one about 1 game in 7.
+    GIFT: 0.2,
+    drawOpen(openPos, avoid = [], need = null) {
+      const slots = [], out = [], top = GAME.g433.TOP, pickFrom = (pos) => GAME.g433.list(pos).slice(0, top);
+      Object.keys(openPos).forEach((pos) => { for (let i = 0; i < openPos[pos]; i++) slots.push(pos); });
+      if (!slots.length) return out;
+      if (need != null) { const hits = pickFrom(slots[0]).filter((p) => p.goals === need && !avoid.includes(p.name)); if (hits.length) out.push(hits[Math.floor(Math.random() * hits.length)]); }
+      let guard = 0;
+      while (out.length < 3 && guard++ < 999) { const L = pickFrom(slots[Math.floor(Math.random() * slots.length)]), p = L[Math.floor(Math.random() * L.length)]; if (!out.includes(p) && !avoid.includes(p.name)) out.push(p); }
+      for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
+      return out;
+    },
+    canGift: (pos, need, avoid = []) => need >= 0 && GAME.g433.list(pos).slice(0, GAME.g433.TOP).some((p) => p.goals === need && !avoid.includes(p.name)),
     record: () => Object.assign({ games: 0, exact: 0, best: null, bestTotal: null, last: null }, D2T.state.record.g433 || {}),
     finish(total) {
       const r = GAME.g433.record(), gap = Math.abs(total - GAME.g433.TARGET), newBest = r.best == null || gap < r.best;

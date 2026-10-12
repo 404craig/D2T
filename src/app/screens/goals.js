@@ -1,10 +1,11 @@
 // 433 Goals (black, orange as the mode colour; prototype design/prototype/goals433.html, chosen 11 Oct).
-// Fill a 4-3-3, keeper first: each spin shows three real players of that position as football shirts (name on the back,
-// a ? where the number goes, the club crest printed below). Pick one; he flies to the pitch and his Premier League career
-// goals burst onto the shirt. Get the XI's total as close to 433 as you can: exactly 433 is the dream. 3 respins a game.
+// Fill a 4-3-3 in any order (Craig, 12 Oct): each spin shows three real players for any of the shirts still open (they
+// show orange), as football shirts with the name and crest on the back. Pick one and place him on an open shirt of his
+// position; his Premier League career goals roll onto the shirt. On the last shot, one game in five offers a player with
+// exactly the goals needed (D2T.game.g433.GIFT). Get the XI's total as close to 433 as you can: exactly 433 is the dream. 3 respins a game.
 // The game in progress is D2T.state.g433 (saved after every step, so a refresh never re-rolls), results go to record.g433.
 (function () {
-  const TARGET = 433, POSNAME = { GK: 'goalkeepers', DEF: 'defenders', MID: 'midfielders', FWD: 'forwards' };
+  const TARGET = 433, POS1 = { GK: 'goalkeeper', DEF: 'defender', MID: 'midfielder', FWD: 'forward' };
   const SLOTS = [['GK', 'GK', 50, 87.5], ['LB', 'DEF', 12, 66], ['CB', 'DEF', 36, 68.5], ['CB', 'DEF', 64, 68.5], ['RB', 'DEF', 88, 66], ['CM', 'MID', 21, 43], ['CM', 'MID', 50, 45], ['CM', 'MID', 79, 43], ['LW', 'FWD', 17, 18], ['ST', 'FWD', 50, 16], ['RW', 'FWD', 83, 18]];
   const snd = (id) => { const S = window.D2TSound; if (S) S.play(id); };
 
@@ -112,8 +113,11 @@
     title: '433 Goals', theme: 'black',
     mount(root) {
       const reduced = D2T.reduced(), G4 = D2T.game.g433;
-      const fresh = () => ({ filled: [], respins: G4.RESPINS, cands: null, recorded: false });
+      const fresh = () => ({ filled: [], respins: G4.RESPINS, cands: null, recorded: false, gift: null });
       let S = D2T.state.g433 && Array.isArray(D2T.state.g433.filled) ? D2T.state.g433 : (D2T.state.g433 = fresh());
+      // a game saved before any-order spins filled the shirts in order: give each its slot, drop three of one position
+      S.filled.forEach((p, i) => { if (p.slot == null) p.slot = i; if (!p.pos) p.pos = SLOTS[p.slot][1]; });
+      if (S.cands && S.cands.some((c) => !c.pos)) S.cands = null;
       const save = () => D2T.save();
       const total = () => S.filled.reduce((t, p) => t + p.goals, 0);
       let busy = false, sel = null;
@@ -140,25 +144,36 @@
       let PW = 56;
       const sizePitch = () => { const ph = pitchEl.clientHeight || 358; PW = Math.round(Math.max(32, Math.min(58, ph * 0.15))); };
 
-      const nextIdx = () => (S.filled.length < 11 ? S.filled.length : -1);
+      const slotOf = (i) => S.filled.find((p) => p.slot === i);
+      const openSlots = () => SLOTS.map((_, i) => i).filter((i) => !slotOf(i));
+      const openPos = () => openSlots().reduce((o, i) => { o[SLOTS[i][1]] = (o[SLOTS[i][1]] || 0) + 1; return o; }, {});
+      const fitSlots = (pos) => openSlots().filter((i) => SLOTS[i][1] === pos);
+      const selPos = () => (sel != null && S.cands && S.cands[sel] ? S.cands[sel].pos : null);
       const drawPitch = () => {
-        const ni = nextIdx();
         pitchEl.innerHTML = `${LINES}<span class="circle"></span><div class="modename">433 GOALS</div>${SLOTS.map(([lab, , x, y], i) => {
-          const f = S.filled[i];
-          const inner = f ? shirt({ w: PW, player: f }) + `<span class="nm">${D2T.esc(f.sur)}</span>` : shirt({ w: PW, pos: lab, next: i === ni });
-          return `<div class="slotp" data-slot="${i}" style="left:${x}%;top:${y}%">${inner}</div>`; }).join('')}`;
+          const f = slotOf(i);
+          const inner = f ? shirt({ w: PW, player: f }) + `<span class="nm">${D2T.esc(f.sur)}</span>` : shirt({ w: PW, pos: lab, next: true });
+          return `<div class="slotp${f ? '' : ' open'}" data-slot="${i}" style="left:${x}%;top:${y}%">${inner}</div>`; }).join('')}`;
+        markPitch();
       };
-      const trioMyst = () => `${[0, 1, 2].map(() => `<div class="cell"><div class="reelwin"><div class="strip">${shirt({ w: TW, state: 'myst' })}</div></div><span class="cap"></span></div>`).join('')}`;
-      const trioLanded = () => S.cands.map((c, i) => `<div class="cell"><div class="reelwin landed"><div class="strip">${shirt({ w: TW, player: c, attr: `data-c="${i}"` })}</div></div><span class="cap">${trioCap(c)}</span></div>`).join('');
-      const setCounts = () => { reload.querySelector('.sp-count').textContent = S.respins; reload.disabled = busy || S.respins <= 0 || !S.cands || nextIdx() < 0; reload.setAttribute('aria-label', `Spin again, ${S.respins} left`); };
-      const setUI = (label, hint, off) => { lbl.textContent = label; lbl.style.fontSize = label.length > 13 ? Math.max(14, Math.round(21 * 13 / label.length)) + 'px' : ''; hintEl.textContent = hint; main.disabled = !!off; setCounts(); };
+      // with a player selected, the open shirts he fits pulse and the rest of the open ones step back
+      const markPitch = () => {
+        const pos = selPos();
+        pitchEl.querySelectorAll('.slotp.open').forEach((el) => { const fit = pos && SLOTS[+el.dataset.slot][1] === pos; el.classList.toggle('fit', !!fit); el.classList.toggle('nofit', !!pos && !fit); });
+        pitchEl.querySelectorAll('.slotp.open').forEach((el) => { el.onclick = () => { const i = +el.dataset.slot; if (!busy && sel != null && SLOTS[i][1] === selPos()) place(sel, null, i); }; });
+      };
+      const trioMyst = () => `${[0, 1, 2].map(() => `<div class="cell"><span class="g4-ptag"></span><div class="reelwin"><div class="strip">${shirt({ w: TW, state: 'myst' })}</div></div><span class="cap"></span></div>`).join('')}`;
+      const trioLanded = () => S.cands.map((c, i) => `<div class="cell"><span class="g4-ptag on">${c.pos}</span><div class="reelwin landed"><div class="strip">${shirt({ w: TW, player: c, attr: `data-c="${i}"` })}</div></div><span class="cap">${trioCap(c)}</span></div>`).join('');
+      const setCounts = () => { reload.querySelector('.sp-count').textContent = S.respins; reload.disabled = busy || S.respins <= 0 || !S.cands || !openSlots().length; reload.setAttribute('aria-label', `Spin again, ${S.respins} left`); };
+      const setUI = (label, hint, off) => { lbl.textContent = label; lbl.style.fontSize = label.length > 10 ? Math.max(13, Math.round(21 * 10 / label.length)) + 'px' : ''; hintEl.textContent = hint; main.disabled = !!off; setCounts(); };
       const setTally = (t) => { paintBar(wrap, t); wrap.querySelector('.placed').textContent = `${S.filled.length} of 11`; };
 
       function idleUI() {
-        const ni = nextIdx();
-        if (ni < 0) { setUI('Play again', `Full XI: ${gapText(total())}`); return; }
-        if (S.cands) { attach(); setUI(sel != null ? 'Pick ' + S.cands[sel].sur : 'Pick one', sel != null ? `Tap again or drag onto ${SLOTS[ni][0]}` : 'Tap a shirt to pick him', sel == null); return; }
-        setUI('Spin', `Spin for three ${POSNAME[SLOTS[ni][1]]}`);
+        const left = openSlots().length;
+        markPitch();
+        if (!left) { setUI('Play again', `Full XI: ${gapText(total())}`); return; }
+        if (S.cands) { attach(); setUI(sel != null ? 'Pick ' + S.cands[sel].sur : 'Pick one', sel != null ? `Tap again, or drag onto an orange ${POS1[S.cands[sel].pos]} shirt` : 'Tap a shirt to pick him', sel == null); return; }
+        setUI('Spin', left === 1 ? 'Last shot: spin for your final shirt' : `Spin for three players. ${left} shirts to fill`);
       }
       function render() {
         sizePitch(); drawPitch(); setTally(total());
@@ -168,13 +183,14 @@
 
       // ---------- reels: transform-only, speed blur, smooth stop and a small spring; the landed shirt never jumps ----------
       let uid = 0;
-      function runReels(targets, pos) {
+      function runReels(targets) {
+        const opens = Object.keys(openPos());
         const wins = [...trioEl.querySelectorAll('.reelwin')];
         return new Promise((resolve) => {
           let landed = 0;
           wins.forEach((w, i) => {
-            const strip = w.querySelector('.strip'), L = G4.list(pos), n = Math.min(L.length, 260), filler = [];
-            while (filler.length < 16) { const c = L[Math.floor(Math.random() * n)]; if (c !== targets[i]) filler.push(c); }
+            const strip = w.querySelector('.strip'), filler = [];
+            while (filler.length < 16) { const L = G4.list(opens[Math.floor(Math.random() * opens.length)]), c = L[Math.floor(Math.random() * Math.min(L.length, 260))]; if (c !== targets[i]) filler.push(c); }
             strip.innerHTML = filler.concat([targets[i]]).map((p) => shirt({ w: TW, player: p })).join('');
             const D = strip.lastElementChild.getBoundingClientRect().top - strip.firstElementChild.getBoundingClientRect().top;
             const id = `g4b${++uid}`;
@@ -185,6 +201,7 @@
               strip.style.filter = ''; strip.innerHTML = shirt({ w: TW, player: targets[i], attr: `data-c="${i}"` }); strip.style.transform = 'none';
               w.classList.add('landed'); glint(strip.firstElementChild, reduced);
               w.parentElement.querySelector('.cap').innerHTML = trioCap(targets[i]);
+              const tag = w.parentElement.querySelector('.g4-ptag'); tag.textContent = targets[i].pos; tag.classList.add('on');
               if (++landed === wins.length) resolve();
             };
             if (reduced) { finish(); return; }
@@ -204,13 +221,16 @@
       }
 
       async function spin() {
-        if (busy || nextIdx() < 0) return;
-        busy = true; sel = null;
-        const pos = SLOTS[nextIdx()][1];
-        S.cands = G4.draw(pos, S.filled.map((p) => p.name)); save();       // saved first: a refresh shows the same three
+        const open = openSlots();
+        if (busy || !open.length) return;
+        busy = true; sel = null; markPitch();
+        const avoid = S.filled.map((p) => p.name), need = TARGET - total();
+        // the last shot: decide once per game whether one of the three is exactly what you need
+        if (open.length === 1 && S.gift == null) S.gift = G4.canGift(SLOTS[open[0]][1], need, avoid) && Math.random() < G4.GIFT;
+        S.cands = G4.drawOpen(openPos(), avoid, open.length === 1 && S.gift ? need : null); save();   // saved first: a refresh shows the same three
         trioEl.innerHTML = trioMyst();
         setUI('Spinning', '', true); main.classList.add('is-spinning'); snd('roll3');
-        await runReels(S.cands, pos);
+        await runReels(S.cands);
         if (!root.isConnected) return;
         main.classList.remove('is-spinning'); busy = false; idleUI();
       }
@@ -228,13 +248,15 @@
         if (sel === i) { place(i); return; }
         sel = i; snd('pick'); idleUI();
       }
-      function place(i, fromRect) {
+      function place(i, fromRect, slot) {
         if (busy || !S.cands) return;
+        const p = S.cands[i], ni = slot != null ? slot : fitSlots(p.pos)[0];
+        if (ni == null || slotOf(ni) || SLOTS[ni][1] !== p.pos) return;
         busy = true;
-        const ni = nextIdx(), p = S.cands[i], from = total(), src = trioEl.querySelector(`[data-c="${i}"]`);
+        const from = total(), src = trioEl.querySelector(`[data-c="${i}"]`);
         const hr = wrap.getBoundingClientRect(), a = fromRect || src.getBoundingClientRect(), b = pitchEl.querySelector(`[data-slot="${ni}"] .g4-shirt`).getBoundingClientRect();
-        S.filled.push(p); S.cands = null; sel = null;
-        const done = S.filled.length === 11;
+        S.filled.push(Object.assign({}, p, { slot: ni })); S.cands = null; sel = null;
+        const done = !openSlots().length;
         let result = null;
         if (done && !S.recorded) { S.recorded = true; result = G4.finish(total()); }
         save();
@@ -271,9 +293,15 @@
             if (!ghost) return;
             el.dataset.dragged = 1; setTimeout(() => { delete el.dataset.dragged; }, 50);
             const gr = ghost.getBoundingClientRect(); ghost.remove();
-            const slot = pitchEl.querySelector(`[data-slot="${nextIdx()}"]`); if (!slot) return;
-            const t = slot.getBoundingClientRect();
-            if (ev.clientX > t.left - 30 && ev.clientX < t.right + 30 && ev.clientY > t.top - 30 && ev.clientY < t.bottom + 30) place(i, gr);
+            // dropped on (or near) an open shirt of his position: the nearest one takes him
+            let best = null, bd = 1e9;
+            fitSlots(S.cands[i].pos).forEach((si) => {
+              const t = pitchEl.querySelector(`[data-slot="${si}"]`).getBoundingClientRect();
+              if (ev.clientX > t.left - 30 && ev.clientX < t.right + 30 && ev.clientY > t.top - 30 && ev.clientY < t.bottom + 30) {
+                const d = Math.hypot(ev.clientX - (t.left + t.width / 2), ev.clientY - (t.top + t.height / 2)); if (d < bd) { bd = d; best = si; }
+              }
+            });
+            if (best != null) place(i, gr, best);
           };
           window.addEventListener('pointermove', move, { passive: false }); window.addEventListener('pointerup', up); window.addEventListener('pointercancel', up);
         });
@@ -463,11 +491,11 @@
 
       main.onclick = () => {
         if (busy) return;
-        if (nextIdx() < 0) { newGame(); return; }
+        if (!openSlots().length) { newGame(); return; }
         if (!S.cands) { spin(); return; }
         if (sel != null) place(sel);
       };
-      reload.onclick = () => { if (busy || S.respins <= 0 || !S.cands || nextIdx() < 0) return; S.respins -= 1; save(); spin(); };
+      reload.onclick = () => { if (busy || S.respins <= 0 || !S.cands || !openSlots().length) return; S.respins -= 1; save(); spin(); };
       render();
     },
     unmount() { timers.forEach(clearTimeout); rafs.forEach(cancelAnimationFrame); timers = []; rafs = []; document.querySelectorAll('.g4-ghost').forEach((g) => g.remove()); }
