@@ -300,9 +300,11 @@ fs.mkdirSync(OUT, { recursive: true });
   // ---------- Daily challenge: today's club for everyone, its own save, one go ----------
   await page.evaluate(() => { const G = window.D2T.game; G.newRun("classic"); G.chooseClub(G.offer()[0].key); window.D2T.state.run.tableSeen = true; window.D2T.save(); window.D2T.go("home"); }); await wait(900);
   const dEntry = await page.evaluate(() => { const d = window.D2T.game.dailyEntry(window.D2T.game.today()); return { key: d.key, mode: d.mode }; });
+  // every day of a year is a bottom-10 side and plays Classic
+  check(await page.evaluate(() => { const G = window.D2T.game; for (let i = 0; i < 365; i++) { const t = new Date(Date.UTC(2026, 9, 11 + i)).toISOString().slice(0, 10), d = G.dailyEntry(t), n = window.D2T_GAME.seasons[d.season].clubs.length; if (d.mode !== "classic" || d.pos <= n - 10) return false; } return true; }), "a Daily was not a bottom-10 side playing Classic");
   await page.click('[data-act="daily"]'); await wait(1500);
   check((await screen()) === "table", "the daily did not open on the table, on " + (await screen()));
-  check(await page.evaluate((d) => { const r = window.D2T.state.run; return r.daily === window.D2T.game.today() && window.D2T.game.mode() === d.mode && r.eng.respins === 0; }, dEntry), "the daily did not start with today's club, its mode and no respins");
+  check(await page.evaluate((d) => { const r = window.D2T.state.run; return r.daily === window.D2T.game.today() && window.D2T.game.mode() === "classic" && d.mode === "classic" && r.eng.respins === window.D2TE.RULES.respins && r.eng.phase !== "draft" && r.eng.xi.every((id) => id != null); }, dEntry), "the daily did not start with today's club, its mode and no respins");
   check(await page.evaluate(() => !!window.D2T.state.parked), "the run in progress was not kept aside for the daily");
   await page.evaluate(() => { const G = window.D2T.game; window.D2T.state.run.tableSeen = true; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(900); await shot("40-daily-summary");
