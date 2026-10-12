@@ -113,6 +113,36 @@
     const back = el.querySelector('.back-btn'); if (back) back.onclick = D2T.back;
     return el;
   };
+  // First-time tips (12 Oct): a handwritten note with a curved arrow (the respin tip's style), each shown once ever
+  // (state.tips), one at a time, gone on the next tap. place: 'above' (default) or 'below' the target; side: 'right'
+  // puts the words more to the left of the arrow. D2T.tips([[key, el, text, opts], ...]) shows the first unseen.
+  let tipEl = null;
+  D2T.tip = (key, target, text, opts = {}) => {
+    const st = D2T.state; st.tips = st.tips || {};
+    const scr = document.querySelector('#app .screen');
+    if (!target || !scr || st.tips[key] || tipEl || !target.isConnected) return false;
+    st.tips[key] = true; D2T.save();
+    const below = opts.place === 'below';
+    const el = D2T.h(`<div class="d2t-tip${below ? ' below' : ''}" aria-hidden="true"><span>${text}</span><svg viewBox="0 0 44 60"><path d="M40 8 C20 6 8 22 14 52" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M6 43 L14 54 L22 45" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`);
+    el.style.visibility = 'hidden'; scr.appendChild(el);
+    // the words sit where they fit on screen; the arrow is placed on its own so its point lands on the target
+    const s = scr.getBoundingClientRect(), t = target.getBoundingClientRect(), sp = el.querySelector('span').getBoundingClientRect();
+    const cx = t.left - s.left + t.width / 2, w = sp.width, h = sp.height, AW = 34, AH = 46;
+    const left = Math.max(8, Math.min(s.width - w - 8, cx - w * (opts.side === 'right' ? 0.75 : 0.25)));
+    const ax = cx - left, flip = ax > w / 2, svg = el.querySelector('svg');
+    svg.style.left = (flip ? ax - AW + 11 : ax - 11) + 'px';
+    svg.style.transform = `scale(${flip ? -1 : 1}, ${below ? -1 : 1})`;
+    el.style.width = w + 'px'; el.style.height = (h + AH - 6) + 'px'; el.style.left = left + 'px';
+    if (below) { svg.style.top = '0px'; el.querySelector('span').style.top = (AH - 6) + 'px'; el.style.top = (t.bottom - s.top - 2) + 'px'; }
+    else { svg.style.top = (h - 6) + 'px'; el.style.top = (t.top - s.top - h - AH + 8) + 'px'; }
+    el.style.visibility = '';
+    tipEl = el;
+    const close = () => { if (tipEl !== el) return; tipEl = null; document.removeEventListener('pointerdown', close, true); el.classList.add('gone'); setTimeout(() => el.remove(), 400); };
+    setTimeout(() => document.addEventListener('pointerdown', close, true), 300);
+    setTimeout(close, opts.ms || 9000);
+    return true;
+  };
+  D2T.tips = (list) => { for (const [k, el, text, o] of list) { if (!(D2T.state.tips || {})[k]) return D2T.tip(k, el, text, o); } return false; };
   D2T.back = () => { const p = prevName; D2T.go(p && p !== 'intro' && p !== currentName ? p : 'home'); };
 
   // ---------- browser chrome: status bar, toolbars and page background follow each screen's top and bottom colours ----------
@@ -180,6 +210,7 @@
   }
   function render(name) {
     const app = document.getElementById('app');
+    if (tipEl) { tipEl.remove(); tipEl = null; }
     if (current && current.unmount) { try { current.unmount(); } catch (e) { console.error(e); } }
     app.querySelectorAll('.sheet, .sheet-scrim, .card-overlay').forEach((n) => n.remove());
     const def = D2T.screens[name];

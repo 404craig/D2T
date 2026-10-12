@@ -180,6 +180,14 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .d2c.mini .d2c-side .d2c-flag { width: 3em; }
 .d2c.mini .d2c-side .d2c-crest { width: 2.9em; height: 2.9em; }
 
+/* first-time tips (D2T.tip): a handwritten note with a curved arrow, like the respin tip on the spin screen */
+.d2t-tip { position: absolute; z-index: 60; color: #fff; pointer-events: none; opacity: .95; transition: opacity .4s; animation: d2tTipIn .5s .25s var(--ease-out) both; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.85)); }
+.d2t-tip svg { position: absolute; width: 34px; height: 46px; }
+.d2t-tip span { position: absolute; left: 0; top: 0; font-family: Caveat, 'Bradley Hand', 'Segoe Print', cursive; font-weight: 600; font-size: 23px; line-height: 1; white-space: nowrap; transform: rotate(-2.5deg); }
+.d2t-tip.gone { opacity: 0; }
+@keyframes d2tTipIn { from { opacity: 0; transform: translateY(6px); } to { opacity: .95; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .d2t-tip { animation: none; } }
+
 /* Front-of-app screens: intro, home, how to play, account, league, stats. Classes prefixed fr-. */
 
 .fr-hl { font-weight: 900; font-style: italic; line-height: 0.95; letter-spacing: 0.005em; }
@@ -1171,6 +1179,36 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
     const back = el.querySelector('.back-btn'); if (back) back.onclick = D2T.back;
     return el;
   };
+  // First-time tips (12 Oct): a handwritten note with a curved arrow (the respin tip's style), each shown once ever
+  // (state.tips), one at a time, gone on the next tap. place: 'above' (default) or 'below' the target; side: 'right'
+  // puts the words more to the left of the arrow. D2T.tips([[key, el, text, opts], ...]) shows the first unseen.
+  let tipEl = null;
+  D2T.tip = (key, target, text, opts = {}) => {
+    const st = D2T.state; st.tips = st.tips || {};
+    const scr = document.querySelector('#app .screen');
+    if (!target || !scr || st.tips[key] || tipEl || !target.isConnected) return false;
+    st.tips[key] = true; D2T.save();
+    const below = opts.place === 'below';
+    const el = D2T.h(`<div class="d2t-tip${below ? ' below' : ''}" aria-hidden="true"><span>${text}</span><svg viewBox="0 0 44 60"><path d="M40 8 C20 6 8 22 14 52" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M6 43 L14 54 L22 45" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`);
+    el.style.visibility = 'hidden'; scr.appendChild(el);
+    // the words sit where they fit on screen; the arrow is placed on its own so its point lands on the target
+    const s = scr.getBoundingClientRect(), t = target.getBoundingClientRect(), sp = el.querySelector('span').getBoundingClientRect();
+    const cx = t.left - s.left + t.width / 2, w = sp.width, h = sp.height, AW = 34, AH = 46;
+    const left = Math.max(8, Math.min(s.width - w - 8, cx - w * (opts.side === 'right' ? 0.75 : 0.25)));
+    const ax = cx - left, flip = ax > w / 2, svg = el.querySelector('svg');
+    svg.style.left = (flip ? ax - AW + 11 : ax - 11) + 'px';
+    svg.style.transform = `scale(${flip ? -1 : 1}, ${below ? -1 : 1})`;
+    el.style.width = w + 'px'; el.style.height = (h + AH - 6) + 'px'; el.style.left = left + 'px';
+    if (below) { svg.style.top = '0px'; el.querySelector('span').style.top = (AH - 6) + 'px'; el.style.top = (t.bottom - s.top - 2) + 'px'; }
+    else { svg.style.top = (h - 6) + 'px'; el.style.top = (t.top - s.top - h - AH + 8) + 'px'; }
+    el.style.visibility = '';
+    tipEl = el;
+    const close = () => { if (tipEl !== el) return; tipEl = null; document.removeEventListener('pointerdown', close, true); el.classList.add('gone'); setTimeout(() => el.remove(), 400); };
+    setTimeout(() => document.addEventListener('pointerdown', close, true), 300);
+    setTimeout(close, opts.ms || 9000);
+    return true;
+  };
+  D2T.tips = (list) => { for (const [k, el, text, o] of list) { if (!(D2T.state.tips || {})[k]) return D2T.tip(k, el, text, o); } return false; };
   D2T.back = () => { const p = prevName; D2T.go(p && p !== 'intro' && p !== currentName ? p : 'home'); };
 
   // ---------- browser chrome: status bar, toolbars and page background follow each screen's top and bottom colours ----------
@@ -1238,6 +1276,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
   }
   function render(name) {
     const app = document.getElementById('app');
+    if (tipEl) { tipEl.remove(); tipEl = null; }
     if (current && current.unmount) { try { current.unmount(); } catch (e) { console.error(e); } }
     app.querySelectorAll('.sheet, .sheet-scrim, .card-overlay').forEach((n) => n.remove());
     const def = D2T.screens[name];
@@ -4250,7 +4289,7 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
           baseBtn: { accent: club.accent, ink: club.ink },
           onRespinsChange: () => { GAME.respinCards(); st.spun = ''; D2T.save(); },
           beforeSpin: () => leavePlacing(),
-          onSelect: (i, p) => { if (placing) drawPitch(draft ? di.slot : GAME.bestSlot(p.id)); },
+          onSelect: (i, p) => { if (placing) drawPitch(draft ? di.slot : GAME.bestSlot(p.id)); timers.push(setTimeout(() => api && D2T.tip('card-again', api.el.querySelectorAll('.sp-slot')[i], 'Tap him again for his career'), 250)); },
           afterSettle: draft ? null : { label: 'Pass', onClick: pass },
           onConfirm: (p) => { if (draft) sign(api.results().indexOf(p), di.slot); }
         });
@@ -4672,6 +4711,10 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
       };
 
       render(null);
+      // first-time tips: the shape, then (another visit) swapping a sub in
+      const tipT = setTimeout(() => { if (!root.isConnected) return; const subs = subsEl.querySelectorAll('[data-card]'), sub = subs[Math.min(3, subs.length - 1)];   // a sub clear of the Formation button
+        D2T.tips([['formation', body.querySelector('.se-formlink'), 'Change your shape here'], ...(pre && !drafting && sub ? [['subs', sub, 'Drag a sub onto the pitch']] : [])]); }, 1100);
+      const offOld = this._off; this._off = () => { clearTimeout(tipT); offOld && offOld(); };
       // first load: cards deal onto the pitch
       if (!reduced) [...slotsEl.querySelectorAll('.se-cardwrap')].forEach((n, i) => n.animate([{ opacity: 0, transform: 'translateY(14px) scale(.85)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 60 + i * 40, easing: 'cubic-bezier(.3,1.3,.5,1)', fill: 'backwards' }));
     },
@@ -4825,6 +4868,7 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
         SND.play('kickoff'); SND.crowd(true);
         phase = 'live';
         btn.textContent = 'Skip to end'; btn.classList.add('se-btn-ghost');
+        setTimeout(() => alive && phase === 'live' && D2T.tip('match-skip', btn, 'Jump to the final score'), 1500);
         feed.innerHTML = ''; push({ type: 'ko' }, true);
         body.querySelector('.se-sb').classList.add('se-live');
         const msPerMin = MATCH_MS / 90; let t0 = performance.now(), paused = 0;
@@ -5281,8 +5325,17 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
         const left = openSlots().length;
         markPitch();
         if (!left) { setUI('Play again', `Full XI: ${gapText(total())}`); return; }
-        if (S.cands) { attach(); setUI(sel != null ? 'Pick ' + S.cands[sel].sur : 'Pick one', sel != null ? `Tap again, or drag onto an orange ${POS1[S.cands[sel].pos]} shirt` : 'Tap a shirt to pick him', sel == null); return; }
+        if (S.cands) { attach(); if (sel == null) tipsFor433(); setUI(sel != null ? 'Pick ' + S.cands[sel].sur : 'Pick one', sel != null ? `Tap again, or drag onto an orange ${POS1[S.cands[sel].pos]} shirt` : 'Tap a shirt to pick him', sel == null); return; }
+        if (!S.filled.length) tipsFor433();
         setUI('Spin', left === 1 ? 'Last shot: spin for your final shirt' : `Spin for three players. ${left} shirts to fill`);
+      }
+      // first-time tips: what to aim for, then how to place a player, then the respins
+      function tipsFor433() {
+        later(() => { if (!root.isConnected || busy) return;
+          const mid = trioEl.querySelector('[data-c="1"]');
+          if (!S.cands) D2T.tip('g433-goal', wrap.querySelector('.tnum'), 'Get this to exactly 433', { place: 'below', side: 'right' });
+          else D2T.tips([['g433-pick', mid, 'Tap one, then an orange shirt'], ...(S.respins > 0 ? [['g433-respin', reload, 'Not keen? Spin again']] : [])]);
+        }, 700);
       }
       function render() {
         sizePitch(); drawPitch(); setTally(total());
