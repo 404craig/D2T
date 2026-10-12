@@ -123,7 +123,7 @@
       let busy = false, sel = null;
 
       root.classList.add('g4', 'g4-cs-' + CREST());
-      root.appendChild(D2T.topbar());
+      root.appendChild(D2T.topbar({ mode: ['433', '#FF7A1A'] }));
       const wrap = D2T.h(`<div class="g4-wrap">${defs()}
         <div class="g4-tally"><div class="top"><small>433 GOALS</small><span><b class="tnum">0</b><i class="taway"></i></span></div>
           <div class="g4-track"><span class="ovr"></span><span class="fill"></span><span class="mark"></span></div><em class="placed"></em></div>
