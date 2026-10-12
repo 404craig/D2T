@@ -278,9 +278,19 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.evaluate(() => { const G = window.D2T.game; window.D2T.state.run.tableSeen = true; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(900); await shot("40-daily-summary");
   check(await page.evaluate(() => !!window.D2T.game.dailyResult()), "the daily result was not recorded");
+  check(!!(await page.$(".sm-daily .sm-dv")) && !!(await page.$('.actionbar [data-act="share"]')), "the daily summary has no today-against-best panel or Share button");
   await page.click('[data-act="again"]'); await expectScreen("home"); await wait(800);
-  check(/Done/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not show today's daily as done");
+  check(/Today: .*rise/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not show today's daily result");
   check(!!(await page.$('[data-act="continue-other"]')), "the parked run has no Continue card after the daily");
+  // the Daily closes at midnight: an unfinished one from yesterday is dropped (no result), the parked run comes back, home says so
+  await page.evaluate(() => {
+    const G = window.D2T.game, st = window.D2T.state, y = new Date(Date.parse(G.today() + "T12:00:00Z") - 864e5).toISOString().slice(0, 10);
+    const e = G.dailyEntry(y); st.parked = st.run; st.run = { step: "fixtures", eng: Object.assign({}, st.parked.eng, { phase: "prematch" }), spun: true, daily: y };
+    window.__y = y; window.D2T.save(); window.D2T.go("home");
+  }); await wait(1600);
+  check(await page.evaluate(() => { const st = window.D2T.state; return !(st.run && st.run.daily) && !st.dailyClosed && !(st.record.daily || {})[window.__y]; }), "yesterday's unfinished Daily did not close at midnight");
+  check(/closed/i.test((await page.textContent(".sheet").catch(() => "")) || ""), "home did not say yesterday's Daily closed");
+  await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(500);
 
   // ---------- 433 Goals: spin, pick, refresh keeps the three, 11 shirts, result recorded apart ----------
   const recBefore = await page.evaluate(() => JSON.stringify(window.D2T.game.record()));

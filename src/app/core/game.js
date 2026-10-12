@@ -429,6 +429,34 @@
     D2T.save();
     return true;
   };
+  // A Daily closes at midnight (UK date, Craig 12 Oct): an unfinished one from an earlier day is dropped (no result, so it
+  // never counts), a parked run comes back, and home says so once. Returns the closed date or null.
+  GAME.closeOldDaily = () => {
+    const st = D2T.state, today = GAME.today(), done = (d) => !!(st.record.daily || {})[d];
+    let closed = null;
+    if (st.run && st.run.daily && st.run.daily !== today && !done(st.run.daily)) {
+      closed = st.run.daily;
+      st.run = st.parked && live(st.parked) ? st.parked : null;
+      if (st.run === st.parked) st.parked = null;
+    }
+    if (st.dailyRun && st.dailyRun.daily !== today) { closed = closed || (done(st.dailyRun.daily) ? null : st.dailyRun.daily); st.dailyRun = null; }
+    if (closed) { st.dailyClosed = closed; D2T.save(); }
+    return closed;
+  };
+  // Your best Daily: the biggest rise, then the higher finish. `except` leaves a date out (to compare today with the rest).
+  GAME.dailyBest = (except) => {
+    const days = D2T.state.record.daily || {};
+    return Object.keys(days).filter((d) => d !== except).map((d) => Object.assign({ date: d }, days[d]))
+      .sort((a, b) => b.rise - a.rise || a.finish - b.finish)[0] || null;
+  };
+  // today's Daily against your best other one, for home, the summary and the share text
+  GAME.dailyCompare = (date) => {
+    date = date || GAME.today();
+    const today = GAME.dailyResult(date), best = GAME.dailyBest(date), sg = (n) => (n > 0 ? '+' : '') + n;
+    const isBest = !!today && (!best || today.rise > best.rise || (today.rise === best.rise && today.finish < best.finish));
+    const bestLine = best ? `Best Daily: ${best.club} ${best.season}, ${D2T.ordinal(best.finish)} (rise ${sg(best.rise)})` : '';
+    return { today, best, isBest, sg, bestLine };
+  };
   GAME.dailyStreak = () => {
     const days = D2T.state.record.daily || {};
     let n = 0, d = new Date(GAME.today() + 'T12:00:00Z');
