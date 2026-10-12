@@ -245,7 +245,7 @@
 .fr-gm { box-sizing: border-box; color: #fff; min-height: 140px; padding: 18px 70px 18px 18px; border: 0; isolation: isolate; margin-top: 12px; text-decoration: none;
   background: linear-gradient(100deg, var(--ink) 0%, var(--ink) 38%, color-mix(in srgb, var(--c) 30%, var(--ink)) 100%); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 45%, transparent); }
 .fr-gm::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, rgba(255,255,255,0) 2px 7px); }
-.fr-sect .fr-gm:first-of-type { margin-top: 2px; }
+.fr-sect .fr-sect-h + .fr-gm { margin-top: 2px; } /* only the first card under the heading (first-of-type also caught the Tenaball link) */
 .fr-gm-txt { display: block; position: relative; }
 .fr-gm-txt > span { display: block; }
 .fr-gm .fr-tag { font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--c); }
