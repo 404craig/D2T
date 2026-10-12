@@ -62,6 +62,8 @@ def main():
                 sounds[os.path.splitext(name)[0]] = f"data:audio/{kind};base64," + b64(os.path.join(sound_dir, name))
     badge_path = os.path.join(ROOT, "assets", "brand", "club_x.png")  # Craig's Club X badge (11 Oct)
     badge = "data:image/png;base64," + b64(badge_path) if os.path.exists(badge_path) else ""
+    flags = png_dir(os.path.join(ROOT, "assets", "flags"))   # nationality flags, small pictures (never emoji)
+    nations = json.loads(read(os.path.join(ROOT, "assets", "flags", "nations.json")))
     tena_path = os.path.join(ROOT, "assets", "brand", "tenaball.png")  # Tenaball's ball for its card on home (12 Oct)
     tena = "data:image/png;base64," + b64(tena_path) if os.path.exists(tena_path) else ""
     icon_path = os.path.join(ROOT, "assets", "icon-180.png")
@@ -72,7 +74,8 @@ def main():
     jstr = lambda text: json.dumps(text, ensure_ascii=False).replace("</", "<\\/")
     data = (f"window.D2T_GAME=JSON.parse({jstr(json.dumps(json.loads(game), separators=(',', ':'), ensure_ascii=False))});\nwindow.D2T_CRESTS={j(crests)};"
             + (f"\nwindow.D2T_CLUBX_BADGE={j(badge)};" if badge else "")
-            + (f"\nwindow.D2T_TENABALL_LOGO={j(tena)};" if tena else ""))
+            + (f"\nwindow.D2T_TENABALL_LOGO={j(tena)};" if tena else "")
+            + f"\nwindow.D2T_FLAGS={j(flags)};\nwindow.D2T_NATIONS={j(nations)};")
     logos_js = f"window.D2T_LOGOS={j(logos)};"
     sounds_js = f"window.D2T_SOUNDS={j(sounds)};\nwindow.D2TSound && window.D2TSound.clipsLoaded && window.D2TSound.clipsLoaded();"
     out = (html.replace("/*@CSS@*/", css).replace("/*@LOGOS@*/", logos_js).replace("/*@SHELL@*/", shell)

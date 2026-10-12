@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D2T Card Copy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<style>
+  /* Wording options for the Other games cards, shown on the live card style. Five tones, one phone each. */
+  :root { color-scheme: dark; --soft: #CFCFD6; --muted: #8E8E99; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #08080A; color: #fff; font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 2140px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 28px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
+  .head p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 96ch; }
+  .row { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
+  .opt { width: 390px; max-width: 100%; display: flex; flex-direction: column; gap: 10px; }
+  .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: #12F06C; }
+  .opt-h h3 { font: 900 italic 22px/1.05 'Exo 2'; margin: 3px 0; }
+  .opt-h p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; min-height: 57px; }
+  .phone { border-radius: 26px; background: #000; box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,.6); padding: 18px 16px 22px; }
+  .sect { font: 900 italic 26px/1 'Exo 2'; text-transform: uppercase; margin: 4px 2px 14px; }
+  .card { position: relative; display: flex; flex-direction: column; justify-content: center; width: 100%; min-height: 146px; padding: 18px 70px 18px 18px; border-radius: 22px; overflow: hidden; margin-bottom: 12px; isolation: isolate;
+    background: linear-gradient(100deg, #0E0E10 0%, #0E0E10 38%, color-mix(in srgb, var(--c) 30%, #0E0E10) 100%); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 45%, transparent); }
+  .card::after { content: ''; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, rgba(255,255,255,0) 2px 7px); }
+  .t-tag { display: block; font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--c); }
+  .t-big { display: block; font: 900 italic 26px/.95 'Exo 2'; text-transform: uppercase; margin-top: 6px; }
+  .t-sub { display: block; font-size: 14px; font-weight: 600; color: var(--soft); margin-top: 7px; line-height: 1.35; }
+  .t-stat { display: block; font-size: 12px; font-weight: 700; color: var(--c); margin-top: 6px; opacity: .9; }
+  .go { position: absolute; right: 16px; bottom: 16px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #0A0A0A; }
+  .go svg { width: 20px; height: 20px; }
+  .mark { position: absolute; right: -14px; top: 50%; transform: translateY(-50%) rotate(-8deg); min-width: 120px; height: 120px; color: var(--c); opacity: .3; z-index: -1; display: grid; place-items: center; font-size: 84px; }
+  .mark img { width: 110px; opacity: .9; }
+  .mark img.crest { width: 124px; height: 144px; object-fit: contain; }
+  .mark img.tb { width: 132px; height: 132px; object-fit: contain; }
+  .daily .mark { opacity: 1; }
+  .daily .mark img.crest { filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
+  .emb { display: block; width: 100%; height: 100%; background: currentColor; -webkit-mask: url('assets/logo/emblem_line.png') center / contain no-repeat; mask: url('assets/logo/emblem_line.png') center / contain no-repeat; }
+  .n433 { font: 900 italic 1em/1 'Exo 2'; -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px currentColor; display: block; }
+  .notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+  .note { background: #111114; border: 1px solid #222228; border-radius: 16px; padding: 14px 16px; font-size: 13.5px; line-height: 1.5; color: #CFCFD6; }
+  .note b { display: block; color: #12F06C; font-size: 11px; letter-spacing: .12em; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <h1>What the cards say</h1>
+    <p>Five tones for the main line and the line under it, on the real card style, one phone each. The daily's main line stays the club and season (it changes every day), so only its line under changes. Once you have played a mode, a small line in its colour adds your record (shown on 433 and Club X), so the description itself can stay a pitch.</p>
+  </div>
+  <div class="row" id="opts"></div>
+  <div class="notes">
+    <div class="note"><b>WHAT EACH ONE DOES BEST</b>Plain tells a first-timer exactly what to do. Dare and Question make people want to try. Short is the cleanest on a phone. Banter fits a 15 to 20 audience but wears thin if every card jokes, so it could be saved for one or two.</div>
+    <div class="note"><b>MIXING</b>Tones can be mixed per card: for example the Question for Dare2Dream ("Could you do better?"), the Banter for 433 ("433. Not 432. Not 434."), the Dare for Club X ("From nowhere to champions").</div>
+    <div class="note"><b>YOUR RECORD</b>Today the line under is replaced by your record once you have played (for example "Your best: 45 away."). With a separate small record line, the pitch stays and the record adds to it: "Best: 45 away" or "1 title from 4 goes".</div>
+  </div>
+</div>
+<script>
+(function () {
+  const GO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
+  const MARK = { daily: '<img class="crest" src="assets/crests/watford.png" alt="">', d2d: '<span class="emb"></span>', clx: '<img src="assets/brand/club_x.png" alt="">', g433: '<span class="n433">433</span>', tena: '<img class="tb" src="assets/brand/tenaball.png" alt="">' };
+  const COL = { daily: '#FFFFFF', d2d: '#3BA4FF', clx: '#12F06C', g433: '#FF7A1A', tena: '#A66BFF' };
+  const TAG = { daily: 'DAILY CHALLENGE · 12 OCT', d2d: 'DARE2DREAM', clx: 'CLUB X', g433: '433 GOALS', tena: 'TENABALL' };
+  const STAT = { clx: '1 title from 4 goes', g433: 'Your best: 45 away' };
+  // [tone, title, why, { mode: [main, under] }]; the daily's main line is always the club and season
+  const T = [
+    ['PLAIN', 'Say what you do', 'What it is and what you have to do, nothing else. Closest to now.', {
+      daily: ['Watford<br>1999/00', 'Classic: they went down. Rescue them.'],
+      d2d: ['Any club, no players', 'Draft your XI, then beat their real finish.'],
+      clx: ['Replace the bottom club', 'Draft 11 from scratch, then win the league.'],
+      g433: ['Score exactly 433 goals', 'Pick 11 real players. Their Premier League goals must add up to 433.'],
+      tena: ['Name the top ten', 'Our football quiz. Opens Tenaball.'] }],
+    ['DARE', 'Throw down the challenge', 'Every card is a dare. More energy, still says what to do.', {
+      daily: ['Watford<br>1999/00', 'One club for everyone today. Keep them up.'],
+      d2d: ['Rewrite their season', 'Any club, any year. Draft 11 and finish higher than they did.'],
+      clx: ['From nowhere to champions', 'A brand new club takes the bottom side\'s place. Win the league.'],
+      g433: ['Hit 433 on the nose', 'Eleven players, their career goals, one perfect total.'],
+      tena: ['Know your top tens?', 'Test yourself, or take on your mates. Opens Tenaball.'] }],
+    ['SHORT', 'Few words', 'Punchy main lines, one short line under. Clean at a glance.', {
+      daily: ['Watford<br>1999/00', 'Today\'s club. One go. Save them.'],
+      d2d: ['Dream bigger', 'Empty squad. Real season. Beat history.'],
+      clx: ['Title or bust', 'New club, eleven from nothing, top of the league.'],
+      g433: ['Exactly 433', 'Pick 11. Add up their goals. Not one more.'],
+      tena: ['Top ten or bust', 'The football quiz. Opens Tenaball.'] }],
+    ['QUESTION', 'Ask them', 'Each card asks if you could do it. Hard to ignore.', {
+      daily: ['Watford<br>1999/00', 'They went down for real. Can you keep them up?'],
+      d2d: ['Could you do better?', 'Any club from any season. Draft 11 and beat their real finish.'],
+      clx: ['Can a new club win it?', 'Replace the worst side in a real season and go for the title.'],
+      g433: ['Can your XI hit 433?', 'Pick 11 real players. Their career goals must total exactly 433.'],
+      tena: ['Can you name all ten?', 'Our football quiz. Opens Tenaball.'] }],
+    ['BANTER', 'Cheeky', 'A bit of attitude for a young crowd. Best used on one or two cards.', {
+      daily: ['Watford<br>1999/00', 'They went down. Everyone\'s having a go today. Don\'t be the one who doesn\'t.'],
+      d2d: ['Do it better than they did', 'Pick a club, bin the squad, show them how it\'s done.'],
+      clx: ['Bottom club? Binned.', 'Your new club takes their place. Only the title will do.'],
+      g433: ['433. Not 432. Not 434.', 'Eleven players whose Premier League goals add up to exactly 433.'],
+      tena: ['Think you know football?', 'Prove it in our quiz. Opens Tenaball.'] }]
+  ];
+  const card = (k, main, sub) => `<div class="card ${k}" style="--c:${COL[k]}"><span class="mark">${MARK[k]}</span><span class="t-tag">${TAG[k]}</span><span class="t-big">${main}</span><span class="t-sub">${sub}</span>${STAT[k] ? `<span class="t-stat">${STAT[k]}</span>` : ''}<span class="go">${GO}</span></div>`;
+  document.getElementById('opts').innerHTML = T.map(([t, h, d, c]) => `<div class="opt"><div class="opt-h"><span class="tag">${t}</span><h3>${h}</h3><p>${d}</p></div><div class="phone"><div class="sect">Other games</div>${['daily', 'd2d', 'clx', 'g433', 'tena'].map((k) => card(k, c[k][0], c[k][1])).join('')}</div></div>`).join('');
+})();
+</script>
+</body>
+</html>

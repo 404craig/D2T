@@ -53,15 +53,18 @@
     const pcrest = L.ink === '#FFFFFF' ? c.crest : (c.crestLight || c.crest); // dark faces take the white crest
     const stats = keys.map((k) => `<span class="d2c-stat"><b>${c.stats[k] == null ? '-' : c.stats[k]}</b><i>${k}</i></span>`).join('');
     const shine = opts.shine === false ? '' : `<span class="d2t-shine${opts.slow ? ' slow' : ''}" style="animation-delay:${opts.delay || 0}s"></span>`;
+    // nationality (12 Oct, option A): a flag under the position on bigger cards (in place of the level word, which the card's
+    // colour already shows), and under the crest beside the rating on pitch cards
+    const flag = c.flag ? `<img class="d2c-flag" src="${c.flag}" alt="${esc(c.nat || '')}">` : '';
     if (opts.mini) { // pitch card: position tab, big rating beside the crest, full name
-      return `<div class="d2c d2c-player mini pos-${c.pos} ${opts.cls || ''}" style="${style}" data-level="${c.level}" aria-label="${esc(c.name)}, ${c.ovr} ${L.name}, ${c.pos}">
+      return `<div class="d2c d2c-player mini pos-${c.pos} ${opts.cls || ''}" style="${style}" data-level="${c.level}" aria-label="${esc(c.name)}, ${c.ovr} ${L.name}, ${c.pos}${c.nat ? ', ' + esc(c.nat) : ''}">
       <span class="d2c-tab">${c.pos}</span><div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2c-holo"></span>${shine}
-      <div class="d2c-body"><div class="d2c-mid"><span class="d2c-ovr">${c.ovr}</span><img class="d2c-crest" src="${pcrest}" alt=""></div>
+      <div class="d2c-body"><div class="d2c-mid"><span class="d2c-ovr">${c.ovr}</span>${flag ? `<span class="d2c-side"><img class="d2c-crest" src="${pcrest}" alt="">${flag}</span>` : `<img class="d2c-crest" src="${pcrest}" alt="">`}</div>
       <span class="d2c-first d2c-fit">${esc(first)}</span><span class="d2c-last">${esc(last)}</span></div></div></div>`;
     }
-    return `<div class="d2c d2c-player${opts.mini ? ' mini' : ''} ${opts.cls || ''}" style="${style}" data-level="${c.level}" aria-label="${esc(c.name)}, ${c.ovr} ${L.name}, ${c.pos}">
+    return `<div class="d2c d2c-player${opts.mini ? ' mini' : ''} ${opts.cls || ''}" style="${style}" data-level="${c.level}" aria-label="${esc(c.name)}, ${c.ovr} ${L.name}, ${c.pos}${c.nat ? ', ' + esc(c.nat) : ''}">
       <div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2c-holo"></span>${shine}
-      <div class="d2c-body"><div class="d2c-top"><div class="d2c-left"><span class="d2c-ovr">${c.ovr}</span><span class="d2c-pos">${c.pos}</span><span class="d2c-rule"></span><span class="d2c-lvl">${L.label}</span></div>
+      <div class="d2c-body"><div class="d2c-top"><div class="d2c-left"><span class="d2c-ovr">${c.ovr}</span><span class="d2c-pos">${c.pos}</span><span class="d2c-rule"></span>${flag || `<span class="d2c-lvl">${L.label}</span>`}</div>
       <img class="d2c-crest" src="${pcrest}" alt=""></div>
       <span class="d2c-first">${esc(first)}</span><span class="d2c-last">${esc(last)}</span><span class="d2c-div"></span><div class="d2c-stats">${stats}</div></div></div></div>`;
   }
