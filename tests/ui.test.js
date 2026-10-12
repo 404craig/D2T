@@ -338,6 +338,19 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => window.D2T.state.g433.filled.length === 0 && !!window.D2T.state.g433.formation && window.D2T.state.g433.revealed === false) && !!(await page.$(".g4-reveal")), "Goal Rush: Play again did not start a new game with a reveal");
   await page.click(".g4-reveal"); await wait(600);   // the reveal counts as seen once it finishes or is skipped
   check(await page.evaluate(() => window.D2T.state.g433.revealed === true) && !(await page.$(".g4-reveal")), "Goal Rush: skipping the reveal did not mark it seen");
+  // the home button (Craig, 12 Oct): nothing picked goes straight home; a game under way asks, and Quit throws it away
+  await page.click(".g4 .is-home"); await expectScreen("home"); await wait(600);
+  check(await page.evaluate(() => !!window.D2T.state.g433 && window.D2T.state.g433.filled.length === 0) && !(await page.$(".sheet")), "Goal Rush: home before the first pick asked or lost the game");
+  await page.click('[data-act="g433"]'); await expectScreen("goals433"); await wait(900);
+  await page.click(".g4 .sp-main"); await wait(2900); await page.click('.g4 [data-c="0"]'); await wait(250); await page.click(".g4 .slotp.fit >> nth=-1"); await wait(1800);
+  await page.click(".g4 .is-home"); await wait(500);
+  check(!!(await page.$('.sheet [data-k="quit"]')) && /Leave the game/.test(await page.textContent(".sheet")), "Goal Rush: home with a game under way did not ask");
+  await shot("52-goalrush-leave");
+  await page.click('.sheet [data-k="home"]'); await expectScreen("home"); await wait(600);
+  check(await page.evaluate(() => window.D2T.state.g433 && window.D2T.state.g433.filled.length === 1), "Goal Rush: Home did not keep the game");
+  await page.click('[data-act="g433"]'); await expectScreen("goals433"); await wait(900);
+  await page.click(".g4 .is-home"); await wait(500); await page.click('.sheet [data-k="quit"]'); await expectScreen("home"); await wait(600);
+  check(await page.evaluate(() => !window.D2T.state.g433 && window.D2T.game.g433.record().games === 1), "Goal Rush: Quit did not throw the game away, or recorded it");
 
   await browser.close();
   if (errors.length) { console.log("FAIL\n" + errors.join("\n")); process.exit(1); }

@@ -157,7 +157,18 @@
       root.appendChild(wrap);
       const pitchEl = wrap.querySelector('.g4-pitch'), trioEl = wrap.querySelector('.g4-trio'), hintEl = wrap.querySelector('.g4-hint');
       const main = wrap.querySelector('.sp-main'), lbl = main.querySelector('.sp-lbl'), reload = wrap.querySelector('.is-reload');
-      wrap.querySelector('.is-home').onclick = () => D2T.go('home');
+      // the home button (Craig, 12 Oct): with a game under way it asks, since there was no way to quit one: Home keeps the
+      // game for later, Quit throws it away (nothing recorded). Before the first pick, or once the XI is in, it just goes home.
+      wrap.querySelector('.is-home').onclick = () => {
+        const started = S.filled.length > 0 || !!S.cands, over = !openSlots().length;
+        if (!started || over) { D2T.go('home'); return; }
+        const n = S.filled.length;
+        const sh = D2T.sheet({ title: 'Leave the game?', body: `<p class="fr-lead">${n ? `${n} of 11 picked, ${total()} goals so far.` : 'Three players are waiting.'} Home keeps this game for later. Quit throws it away and nothing is recorded.</p>
+          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="home">Home, save the game</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the game</button></div>` });
+        sh.body.querySelector('[data-k="keep"]').onclick = sh.close;
+        sh.body.querySelector('[data-k="home"]').onclick = () => { sh.close(); D2T.go('home'); };
+        sh.body.querySelector('[data-k="quit"]').onclick = () => { sh.close(); D2T.state.g433 = null; D2T.save(); D2T.go('home'); };
+      };
 
       // sizes from the phone: big shirts shrink on short screens, pitch shirts follow the pitch height
       const H = root.clientHeight || 700, TW = H < 620 ? 72 : H < 700 ? 84 : 96;
