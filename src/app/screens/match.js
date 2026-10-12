@@ -50,7 +50,7 @@
         </div>
         <div class="se-pad"></div>
       </div>`);
-      const bar = D2T.h('<footer class="actionbar"><button class="btn se-btn se-wide se-main" type="button">Kick off</button></footer>');
+      const bar = D2T.h('<footer class="actionbar"><button class="btn se-btn se-wide se-main" type="button">Kick off</button>' + SE.homeBtn() + '</footer>');
       root.append(body, bar);
       const btn = bar.querySelector('.se-main');
       const feed = body.querySelector('.se-feed'), clockEl = body.querySelector('.se-clock'), prog = body.querySelector('.se-prog span');

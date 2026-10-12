@@ -115,7 +115,7 @@
     const slots = Array.from(el.querySelectorAll('.sp-slot')), reels = slots.map((s) => new Reel(s));
     const main = el.querySelector('.sp-main'), lbl = main.querySelector('.sp-lbl'), reload = el.querySelector('.sp-round.is-reload');
     const count = reload.querySelector('.sp-count'), hintEl = el.querySelector('.sp-hint');
-    el.querySelector('.sp-round.is-home').onclick = () => D2T.go('home');
+    el.querySelector('.sp-round.is-home').onclick = () => (D2T.runMenu ? D2T.runMenu() : D2T.go('home'));   // the run menu (core/season.js)
 
     let state = 'idle', results = null, selected = -1, respins = cfg.respins == null ? null : cfg.respins, raf = 0, timers = [], tick = 0, open = null;
     const hint = (t) => { hintEl.textContent = t || ''; };

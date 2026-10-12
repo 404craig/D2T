@@ -37,9 +37,9 @@
       // ---------- the fixed bar: next fixture and the way on ----------
       const fx = SE.fixture(data, pre || drafting ? 1 : eng.gw);
       const oppC = fx ? SE.club(data, fx.opp) : null;
-      const nextHTML = fx ? `<div class="se-next"><img src="${oppC.crest}" alt=""><div class="se-next-t"><small>Next · GW${fx.gw} · ${SE.date(fx.date, false)}</small><b>${D2T.esc(oppC.name)}</b><span class="se-ha">${fx.ha === 'H' ? 'Home' : 'Away'}</span></div></div>` : '';
+      const nextHTML = fx ? `<div class="se-next"><img src="${oppC.crest}" alt=""><div class="se-next-t"><small>Next · ${fx.ha === 'H' ? 'Home' : 'Away'}</small><b class="d2c-fit">${D2T.esc(oppC.name)}</b></div></div>` : '';
       const label = drafting ? 'Start the draft' : pre ? (dream ? 'Start the season' : 'Pre-season') : 'Play';
-      const bar = D2T.h(`<footer class="actionbar se-nextbar">${nextHTML}<button class="btn se-btn se-play" type="button">${label}</button></footer>`);
+      const bar = D2T.h(`<footer class="actionbar se-nextbar">${nextHTML}<button class="btn se-btn se-play" type="button">${label}</button>${SE.homeBtn()}</footer>`);
       root.appendChild(bar);
       const playBtn = bar.querySelector('button');
       playBtn.onclick = () => {

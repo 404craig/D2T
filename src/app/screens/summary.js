@@ -136,13 +136,12 @@
           <div class="se-pad"></div>
         </div>
       </div>`);
-      const bar = D2T.h(`<footer class="actionbar"><button class="icon-btn" type="button" aria-label="Home">${D2T.ICON.home}</button><button class="btn se-btn se-wide" type="button" data-act="share">Share result</button></footer>`);
+      const bar = D2T.h(`<footer class="actionbar"><button class="btn se-btn se-wide" type="button" data-act="share">Share result</button>${SE.homeBtn()}</footer>`);
       root.append(body, bar);
 
       const tag = x ? (met ? 'Club X: champions' : 'Club X') : dream ? (met ? 'Dare2Dream: dream achieved' : 'Dare2Dream') : '';
       const sh = buildShare(F, club, S.season, line, daily ? `${GAME.dailyName(daily)}${tag ? ' · ' + tag : ''}` : tag);
       if (daily) { const cmp = GAME.dailyCompare(daily); sh.text += `${cmp.isBest ? '\nMy best Daily yet' : cmp.bestLine ? '\n' + cmp.bestLine : ''}\nCan you beat it? 404craig.github.io/D2T`; }
-      bar.querySelector('.icon-btn').onclick = () => D2T.go('home');
       bar.querySelector('[data-act="share"]').onclick = () => share(sh);
       body.querySelector('[data-act="again"]').onclick = () => { if (daily) { D2T.go('home'); return; } const m = GAME.mode(); D2T.state.run = null; D2T.save(); GAME.newRun(m); D2T.go('spin'); };
       body.querySelector('[data-act="table"]').onclick = () => {
