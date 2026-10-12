@@ -67,6 +67,8 @@ def main():
     nations = json.loads(read(os.path.join(ROOT, "assets", "flags", "nations.json")))
     tena_path = os.path.join(ROOT, "assets", "brand", "tenaball.png")  # Tenaball's ball for its card on home (12 Oct)
     tena = "data:image/png;base64," + b64(tena_path) if os.path.exists(tena_path) else ""
+    rush_path = os.path.join(ROOT, "assets", "brand", "goal_rush.png")  # Craig's ball for the Goal Rush card on home (12 Oct)
+    rush = "data:image/png;base64," + b64(rush_path) if os.path.exists(rush_path) else ""
     icon_path = os.path.join(ROOT, "assets", "icon-180.png")
     icon = "data:image/png;base64," + b64(icon_path) if os.path.exists(icon_path) else ""
 
@@ -76,6 +78,7 @@ def main():
     data = (f"window.D2T_GAME=JSON.parse({jstr(json.dumps(json.loads(game), separators=(',', ':'), ensure_ascii=False))});\nwindow.D2T_CRESTS={j(crests)};"
             + (f"\nwindow.D2T_CLUBX_BADGE={j(badge)};" if badge else "")
             + (f"\nwindow.D2T_TENABALL_LOGO={j(tena)};" if tena else "")
+            + (f"\nwindow.D2T_GOALRUSH_LOGO={j(rush)};" if rush else "")
             + f"\nwindow.D2T_FLAGS={j(flags)};\nwindow.D2T_NATIONS={j(nations)};")
     logos_js = f"window.D2T_LOGOS={j(logos)};"
     # the clips as plain JSON (not a script, so the phone does not stop to run it while the intro waits); read after the intro

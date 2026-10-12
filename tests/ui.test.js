@@ -293,34 +293,53 @@ fs.mkdirSync(OUT, { recursive: true });
   check(/closed/i.test((await page.textContent(".sheet").catch(() => "")) || ""), "home did not say yesterday's Daily closed");
   await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(500);
 
-  // ---------- 433 Goals: spin, pick, refresh keeps the three, 11 shirts, result recorded apart ----------
+  // ---------- Goal Rush (was 433 Goals): a random formation and target, the reveal, refresh keeps it, any-order shirts ----------
   const recBefore = await page.evaluate(() => JSON.stringify(window.D2T.game.record()));
   await page.evaluate(() => { delete window.D2T.state.g433; window.D2T.save(); window.D2T.go("home"); }); await wait(900);
-  await page.click('[data-act="g433"]'); await expectScreen("goals433"); await wait(900);
+  await page.click('[data-act="g433"]'); await expectScreen("goals433"); await wait(500);
+  const form = await page.evaluate(() => window.D2T.state.g433.formation);
+  check(["442", "433", "451", "352", "343", "424", "532", "541"].includes(form), "Goal Rush: no random formation, got " + form);
+  check(!!(await page.$(".g4-reveal")) && /THIS GAME'S TARGET/i.test(await page.textContent(".g4-reveal")), "Goal Rush: no target reveal at the start");
+  await shot("50-goalrush-reveal");
+  await page.click(".g4-reveal"); await wait(700);
+  check(!(await page.$(".g4-reveal")), "Goal Rush: tapping did not skip the reveal");
+  check(await page.evaluate((f) => document.querySelector(".g4 .modename").textContent === f + " GOALS" && document.querySelector(".g4 .g4-shape").textContent === f.split("").join("-") && document.querySelector(".g4 .ttarget").textContent === "/" + f, form), "Goal Rush: the pitch or tally does not show the target");
+  // the pitch takes the shape: 11 slots, the right labels per line
+  const LBL = { DEF: { 3: "CB CB CB", 4: "LB CB CB RB", 5: "LWB CB CB CB RWB" }, MID: { 2: "CM CM", 3: "CM CM CM", 4: "LM CM CM RM", 5: "LM CM CM CM RM" }, FWD: { 1: "ST", 2: "ST ST", 3: "LW ST RW", 4: "LW ST ST RW" } };
+  const want = (f) => { const [d, m, a] = f.split("").map(Number); return ["GK", LBL.DEF[d], LBL.MID[m], LBL.FWD[a]].join(" "); };
+  check(await page.evaluate((w) => [...document.querySelectorAll(".g4 .slotp")].length === 11 && [...document.querySelectorAll(".g4 .slotp text")].map((t) => t.textContent).join(" ") === w, want(form)), "Goal Rush: the pitch slots do not match " + form);
   await page.click(".g4 .sp-main"); await wait(2900);
   const cands = await page.evaluate(() => window.D2T.state.g433.cands.map((p) => p.name).join());
   await page.reload(); await wait(6500); await page.evaluate(() => window.D2T.go("goals433")); await wait(900);
-  check(await page.evaluate((c) => window.D2T.state.g433.cands.map((p) => p.name).join() === c, cands), "433: a refresh changed the three shirts");
-  check(await page.evaluate(() => document.querySelectorAll(".g4 .slotp.open .g4-shirt.next").length === 11), "433: the open shirts are not all orange");
-  check(await page.evaluate(() => { const s = window.D2T.state.g433; return s.cands.length === 3 && s.cands.every((c) => ["GK", "DEF", "MID", "FWD"].includes(c.pos)); }), "433: a spin did not bring three players with positions");
+  check(await page.evaluate((c) => window.D2T.state.g433.cands.map((p) => p.name).join() === c, cands), "Goal Rush: a refresh changed the three shirts");
+  check(await page.evaluate((f) => window.D2T.state.g433.formation === f, form) && !(await page.$(".g4-reveal")), "Goal Rush: a refresh changed the formation or replayed the reveal");
+  check(await page.evaluate(() => document.querySelectorAll(".g4 .slotp.open .g4-shirt.next").length === 11), "Goal Rush: the open shirts are not all highlighted");
+  check(await page.evaluate(() => { const s = window.D2T.state.g433; return s.cands.length === 3 && s.cands.every((c) => ["GK", "DEF", "MID", "FWD"].includes(c.pos)); }), "Goal Rush: a spin did not bring three players with positions");
   for (let i = 0; i < 11; i++) {
     if (!(await page.$(".g4 [data-c]"))) { await page.click(".g4 .sp-main"); await wait(2900); }
     await page.click('.g4 [data-c="0"]'); await wait(250);
     if (i === 0) {
-      check(await page.evaluate(() => { const pos = window.D2T.state.g433.cands[0].pos, fit = [...document.querySelectorAll(".g4 .slotp.fit")]; return fit.length > 0 && document.querySelectorAll(".g4 .slotp.nofit").length + fit.length === 11; }), "433: picking a player did not light his open shirts");
+      check(await page.evaluate(() => { const fit = [...document.querySelectorAll(".g4 .slotp.fit")]; return fit.length > 0 && document.querySelectorAll(".g4 .slotp.nofit").length + fit.length === 11; }), "Goal Rush: picking a player did not light his open shirts");
       await page.click(".g4 .slotp.fit >> nth=-1"); await wait(1800);   // place him by tapping one of his shirts
     } else { await page.click('.g4 [data-c="0"]'); await wait(1800); }
   }
-  check(await page.evaluate(() => { const S = window.D2T.state.g433, SL = ["GK", "DEF", "DEF", "DEF", "DEF", "MID", "MID", "MID", "FWD", "FWD", "FWD"]; return new Set(S.filled.map((p) => p.slot)).size === 11 && S.filled.every((p) => SL[p.slot] === p.pos); }), "433: a player sits in the wrong position or two share a shirt");
-  check(await page.evaluate(() => { const G4 = window.D2T.game.g433, need = G4.list("FWD")[40].goals; return G4.canGift("FWD", need) && [0, 1, 2, 3, 4].every(() => G4.drawOpen({ FWD: 1 }, [], need).some((p) => p.goals === need)); }), "433: the last-shot gift did not offer the exact player");
-  // the sheet opens only after the ending (longer when the total breaks through 433), so wait for it rather than a fixed time
-  await page.waitForSelector(".sheet", { timeout: 15000 }).catch(() => {}); await wait(400); await shot("50-433-end");
-  check(await page.evaluate(() => window.D2T.state.g433.filled.length === 11 && window.D2T.game.g433.record().games === 1), "433: the game did not fill 11 shirts and record a result");
-  check(await page.evaluate(() => window.D2T.state.g433.filled.every((p) => window.D2T.state.g433.filled.filter((q) => q.name === p.name).length === 1)), "433: the same player appeared twice");
-  check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, recBefore), "433 changed Classic's record");
-  check(!!(await page.waitForSelector(".sheet", { timeout: 12000 }).catch(() => null)), "433: no result sheet at the end");   // the sheet opens after the ending animation, which runs longer when the bar breaks past 433
+  check(await page.evaluate((f) => { const S = window.D2T.state.g433, [d, m, a] = f.split("").map(Number), SL = ["GK", ...Array(d).fill("DEF"), ...Array(m).fill("MID"), ...Array(a).fill("FWD")]; return new Set(S.filled.map((p) => p.slot)).size === 11 && S.filled.every((p) => SL[p.slot] === p.pos); }, form), "Goal Rush: a player sits in the wrong position or two share a shirt");
+  check(await page.evaluate(() => { const G4 = window.D2T.game.g433, need = G4.list("FWD")[40].goals; return ["433", "541"].every((f) => G4.canGift("FWD", need, [], f) && [0, 1, 2, 3, 4].every(() => G4.drawOpen({ FWD: 1 }, [], need, f).some((p) => p.goals === need))); }), "Goal Rush: the last-shot gift did not offer the exact player");
+  check(await page.evaluate(() => ["442", "433", "451", "352", "343", "424", "532", "541"].every((f) => { const G4 = window.D2T.game.g433, sh = G4.shape(f); return sh.GK + sh.DEF + sh.MID + sh.FWD === 11 && G4.depth(f) > 0 && G4.gift(f) > 0; })), "Goal Rush: a formation has no shape, depth or gift");
+  // the sheet opens only after the ending (longer when the total breaks through the target), so wait for it
+  await page.waitForSelector(".sheet", { timeout: 15000 }).catch(() => {}); await wait(400); await shot("51-goalrush-end");
+  check(await page.evaluate(() => window.D2T.state.g433.filled.length === 11 && window.D2T.game.g433.record().games === 1), "Goal Rush: the game did not fill 11 shirts and record a result");
+  check(await page.evaluate((f) => window.D2T.game.g433.record().lastTarget === +f, form), "Goal Rush: the result was not recorded against this game's target");
+  check(await page.evaluate(() => window.D2T.state.g433.filled.every((p) => window.D2T.state.g433.filled.filter((q) => q.name === p.name).length === 1)), "Goal Rush: the same player appeared twice");
+  check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, recBefore), "Goal Rush changed Classic's record");
+  check(!!(await page.waitForSelector(".sheet", { timeout: 12000 }).catch(() => null)), "Goal Rush: no result sheet at the end");
+  // Play again: a new game picks a formation again and opens with the reveal
+  await page.evaluate(() => { const b = document.querySelector('.sheet [data-k="again"]'); if (b) b.click(); }); await wait(700);
+  check(await page.evaluate(() => window.D2T.state.g433.filled.length === 0 && !!window.D2T.state.g433.formation && window.D2T.state.g433.revealed === false) && !!(await page.$(".g4-reveal")), "Goal Rush: Play again did not start a new game with a reveal");
+  await page.click(".g4-reveal"); await wait(600);   // the reveal counts as seen once it finishes or is skipped
+  check(await page.evaluate(() => window.D2T.state.g433.revealed === true) && !(await page.$(".g4-reveal")), "Goal Rush: skipping the reveal did not mark it seen");
 
   await browser.close();
   if (errors.length) { console.log("FAIL\n" + errors.join("\n")); process.exit(1); }
-  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls (tap, drag, pass), fixtures, live match, refresh, season, summary, record, back, account, other screens, Dare2Dream draft, Club X, Daily, 433 Goals");
+  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls (tap, drag, pass), fixtures, live match, refresh, season, summary, record, back, account, other screens, Dare2Dream draft, Club X, Daily, Goal Rush");
 })().catch((e) => { console.error(e); process.exit(1); });
