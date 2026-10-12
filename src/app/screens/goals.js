@@ -165,9 +165,11 @@
         const started = S.filled.length > 0 || !!S.cands, over = !openSlots().length;
         if (!started || over) { D2T.go('home'); return; }
         const n = S.filled.length;
-        const sh = D2T.sheet({ title: 'Leave the game?', body: `<p class="fr-lead">${n ? `${n} of 11 picked, ${total()} goals so far.` : 'Three players are waiting.'} Home keeps this game for later. Quit throws it away and nothing is recorded.</p>
-          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="home">Home, save the game</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the game</button></div>` });
+        const sh = D2T.sheet({ title: 'Leave the game?', body: `<p class="fr-lead">${n ? `${n} of 11 picked, ${total()} goals so far.` : 'Three players are waiting.'} Restart throws it away and starts a new game. Home keeps it for later. Quit throws it away. Nothing is recorded.</p>
+          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="restart">Restart the game</button><button class="btn btn-ghost fr-btn-wide" data-k="home">Home, save the game</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the game</button></div>` });
         sh.body.querySelector('[data-k="keep"]').onclick = sh.close;
+        // restart (Craig, 12 Oct): wipe this game and start again from the beginning, a new formation and its reveal
+        sh.body.querySelector('[data-k="restart"]').onclick = () => { sh.close(); rafs.forEach(cancelAnimationFrame); rafs = []; main.classList.remove('is-spinning'); document.querySelectorAll('.g4-ghost').forEach((g) => g.remove()); newGame(); };
         sh.body.querySelector('[data-k="home"]').onclick = () => { sh.close(); D2T.go('home'); };
         sh.body.querySelector('[data-k="quit"]').onclick = () => { sh.close(); D2T.state.g433 = null; D2T.save(); D2T.go('home'); };
       };

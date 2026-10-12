@@ -193,9 +193,11 @@
       // home during a run asks (as Goal Rush does): a run is sudden death, so leaving ends it with no result
       function leave() {
         if (!run) { D2T.go('home'); return; }   // during a run it always asks, even mid-animation
-        const sh = D2T.sheet({ title: 'Leave the run?', body: `<p class="fr-lead">Unbeaten in ${run.streak} so far. Leaving ends the run and nothing is recorded.</p>
-          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the run</button></div>` });
+        const sh = D2T.sheet({ title: 'Leave the run?', body: `<p class="fr-lead">Unbeaten in ${run.streak} so far. Restart or Quit ends the run and nothing is recorded.</p>
+          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="restart">Restart the game</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the run</button></div>` });
         sh.body.querySelector('[data-k="keep"]').onclick = sh.close;
+        // restart (Craig, 12 Oct): drop this run, nothing recorded, and go back to spinning for a stat
+        sh.body.querySelector('[data-k="restart"]').onclick = () => { sh.close(); timers.forEach(clearTimeout); rafs.forEach(cancelAnimationFrame); timers = []; rafs = []; document.querySelectorAll('.ub-fly, .ub-boom, .ub-tick').forEach((f) => f.remove()); stage.classList.remove('ub-clubs'); idle(); };
         sh.body.querySelector('[data-k="quit"]').onclick = () => { sh.close(); run = null; D2T.go('home'); };
       }
 

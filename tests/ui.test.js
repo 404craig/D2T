@@ -358,6 +358,13 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.click(".g4 .is-home"); await wait(500);
   check(!!(await page.$('.sheet [data-k="quit"]')) && /Leave the game/.test(await page.textContent(".sheet")), "Goal Rush: home with a game under way did not ask");
   await shot("52-goalrush-leave");
+  // Restart wipes the game and starts a new one from the beginning, nothing recorded
+  const g4Games = await page.evaluate(() => window.D2T.game.g433.record().games);
+  await page.click('.sheet [data-k="restart"]'); await wait(900);
+  check(await page.evaluate((n) => window.D2T.state.g433.filled.length === 0 && !window.D2T.state.g433.cands && window.D2T.state.g433.revealed === false && window.D2T.game.g433.record().games === n, g4Games) && !!(await page.$(".g4-reveal")), "Goal Rush: Restart did not start a new game from the beginning");
+  await page.click(".g4-reveal"); await wait(600);
+  await page.click(".g4 .sp-main"); await wait(4800); await page.click('.g4 [data-c="0"]'); await wait(250); await page.click(".g4 .slotp.fit >> nth=-1"); await wait(1800);
+  await page.click(".g4 .is-home"); await wait(500);
   await page.click('.sheet [data-k="home"]'); await expectScreen("home"); await wait(600);
   check(await page.evaluate(() => window.D2T.state.g433 && window.D2T.state.g433.filled.length === 1), "Goal Rush: Home did not keep the game");
   await page.click('[data-act="g433"]'); await expectScreen("goals433"); await wait(900);
@@ -385,6 +392,11 @@ fs.mkdirSync(OUT, { recursive: true });
     await wait(2500);
     if (r1.ok) {
       check(r1.n === "1" || await page.evaluate(() => document.querySelector(".ub-n").textContent === "1"), "Unbeaten Run (" + st + "): a right answer did not count 1");
+      // Restart ends the run with nothing recorded and goes back to the stat spin
+      await page.click(".ub-bar .is-home"); await wait(500);
+      await page.click('.sheet [data-k="restart"]'); await wait(800);
+      check(!!(await page.$(".ub-spin")) && await page.evaluate((n) => ((window.D2T.state.ub || {}).runs || 0) === n, runsBefore), "Unbeaten Run (" + st + "): Restart did not go back to the stat spin, or recorded a run");
+      await page.click(".ub-spin"); await wait(6500);
       // leaving mid-run asks, and quitting records nothing
       await page.click(".ub-bar .is-home"); await wait(500);
       check(!!(await page.$('.sheet [data-k="quit"]')), "Unbeaten Run (" + st + "): home mid-run did not ask");
