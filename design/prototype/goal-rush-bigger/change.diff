@@ -1,0 +1,44 @@
+diff --git a/src/app/screens/goals.css b/src/app/screens/goals.css
+index 9b686f4..9def6ab 100644
+--- a/src/app/screens/goals.css
++++ b/src/app/screens/goals.css
+@@ -41,7 +41,7 @@
+ .g4-pitch .circle { position: absolute; left: 50%; top: 50%; width: 84px; height: 84px; margin: -42px; border: 1.4px solid rgba(255,255,255,.25); border-radius: 50%; }
+ .g4-pitch .modename { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); z-index: 1; text-align: center; pointer-events: none; font: 900 italic 40px/1 'Exo 2', sans-serif; color: rgba(255,255,255,.10); }
+ .g4-pitch .slotp { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 2px; z-index: 2; }
+-.g4-pitch .nm { font: 900 italic 9.5px/1 'Exo 2', sans-serif; text-transform: uppercase; padding: 2px 5px; border-radius: 4px; background: rgba(0,0,0,.72); white-space: nowrap; }
++.g4-pitch .nm { font: 900 italic 10.45px/1 'Exo 2', sans-serif; text-transform: uppercase; padding: 2px 5px; border-radius: 4px; background: rgba(0,0,0,.72); white-space: nowrap; }
+ .g4-pitch .g4-shape { position: absolute; left: 12px; bottom: 10px; z-index: 3; font-size: 11px; font-weight: 800; letter-spacing: .08em; padding: 5px 9px; border-radius: 9px; background: rgba(0,0,0,.6); color: var(--g4-t); pointer-events: none; }
+ 
+ /* shirts */
+diff --git a/src/app/screens/goals.js b/src/app/screens/goals.js
+index ce25228..582a289 100644
+--- a/src/app/screens/goals.js
++++ b/src/app/screens/goals.js
+@@ -98,7 +98,7 @@
+       if (k.crest && cs === 'disc') over = `<circle cx="50" cy="61" r="17" fill="#F4F4F6" stroke="${k.trim}" stroke-width="1.6"/><image href="${k.crestLight}" x="38" y="49" width="24" height="24" preserveAspectRatio="xMidYMid meet"/>`;
+     } else {
+       const g = String(p.goals);
+-      mid = `<text class="gnum" x="50" y="65" font-size="30"${g.length > 2 ? ' textLength="46" lengthAdjust="spacingAndGlyphs"' : ''}${st}>${g}</text>`;
++      mid = `<text class="gnum" x="50" y="65" font-size="36"${g.length > 2 ? ' textLength="55" lengthAdjust="spacingAndGlyphs"' : ''}${st}>${g}</text>`;
+       if (k.crest) disc = `<span class="plate" style="--d:${Math.round(w * 0.4)}px"><img src="${k.crestLight}" alt=""></span>`;
+     }
+     const fill = k.pat ? `url(#g4p-${k.id})` : k.fill;
+@@ -179,7 +179,7 @@
+       // a shirt, its crest disc and its name must fit the tightest gap between two lines (defence to keeper, about 20% of the
+       // pitch), so short phones get smaller shirts rather than overlapping ones
+       // shirts grow with the pitch (taller since the club names under the reels went, Craig, 12 Oct), bounded so a line of five still has room
+-      const sizePitch = () => { const ph = pitchEl.clientHeight || 358, pw = pitchEl.clientWidth || 366; PW = Math.round(Math.max(30, Math.min(62, pw * 0.19 - 8, (ph * 0.205 - 16) / 1.19))); };
++      const sizePitch = () => { const ph = pitchEl.clientHeight || 358, pw = pitchEl.clientWidth || 366; PW = Math.round(1.1 * Math.max(30, Math.min(62, pw * 0.19 - 8, (ph * 0.205 - 16) / 1.19))); };
+ 
+       const slotOf = (i) => S.filled.find((p) => p.slot === i);
+       const openSlots = () => SLOTS.map((_, i) => i).filter((i) => !slotOf(i));
+@@ -202,7 +202,7 @@
+           const n = count[SLOTS[+nm.parentElement.dataset.slot][1]];
+           if (n < 2) return;
+           const room = pw * Math.min(25, 76 / (n - 1)) / 100 - 6;
+-          const w = nm.scrollWidth; if (w > room) nm.style.fontSize = Math.max(6.5, 9.5 * room / w).toFixed(1) + 'px';   // one read, one write
++          const w = nm.scrollWidth; if (w > room) nm.style.fontSize = Math.max(7.2, 10.45 * room / w).toFixed(1) + 'px';   // one read, one write
+         });
+       };
+       // with a player selected, the open shirts he fits pulse and the rest of the open ones step back
