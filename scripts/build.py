@@ -3,7 +3,8 @@
 
 The page streams in parts so a phone sees the intro within a second: logos, then the shell and the intro (which start
 at once), then the data (game data as a JSON.parse string, much quicker for a phone to read than a 5 MB object literal),
-then the rest of the game, which calls D2T.ready() so the intro can hand over to home, then the sound clips last.
+then the rest of the game, which calls D2T.ready() so the intro can hand over to home, then the sound clips last
+(as plain JSON, read once home is up).
 
 Run from the repo root:  python3 scripts/build.py
 Sources: src/app (screens and shell), src/engine.js and src/sound.js, data/game/*.json (made by scripts/build-data.py).
@@ -77,7 +78,8 @@ def main():
             + (f"\nwindow.D2T_TENABALL_LOGO={j(tena)};" if tena else "")
             + f"\nwindow.D2T_FLAGS={j(flags)};\nwindow.D2T_NATIONS={j(nations)};")
     logos_js = f"window.D2T_LOGOS={j(logos)};"
-    sounds_js = f"window.D2T_SOUNDS={j(sounds)};\nwindow.D2TSound && window.D2TSound.clipsLoaded && window.D2TSound.clipsLoaded();"
+    # the clips as plain JSON (not a script, so the phone does not stop to run it while the intro waits); read after the intro
+    sounds_js = j(sounds).replace("</", "<\\/")
     out = (html.replace("/*@CSS@*/", css).replace("/*@LOGOS@*/", logos_js).replace("/*@SHELL@*/", shell)
            .replace("/*@DATA@*/", data).replace("/*@JS@*/", js).replace("/*@SOUNDS@*/", sounds_js))
     out = out.replace("@BUILD@", version).replace("@ICON@", icon)

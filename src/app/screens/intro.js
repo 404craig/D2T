@@ -89,15 +89,24 @@
 
       const finish = (to) => {
         if (done) return; done = true;
-        D2T.whenReady(() => D2T.go('home', { fromIntro: to || true }));   // the rest of the game may still be arriving
+        D2T.whenReady(() => { D2T.go('home', { fromIntro: to || true }); setTimeout(() => D2T.loadClips && D2T.loadClips(), 1200); });   // the rest may still be arriving; the clips are read once home is up
       };
       wrap.addEventListener('click', () => finish(null));
 
       const centreOf = (box, img, L) => ({ x: box.x + L[0] * (box.w / img), y: box.y + L[1] * (box.w / img) });
 
+      // The intro shows as soon as this part of the page arrives, but the phone is still busy reading the rest (data, game,
+      // sounds) and draws nothing meanwhile: an animation started now would be half over before it was seen (Craig, 12 Oct).
+      // So the first frame (green, the short logo) holds still until the whole page is in and two frames have been drawn.
+      const pageIn = () => new Promise((r) => {
+        const go = () => D2T.whenReady(() => requestAnimationFrame(() => requestAnimationFrame(r)));
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go, { once: true }); else go();
+      });
       async function play() {
-        await preload();
+        const t0 = performance.now();
+        await preload(); await pageIn();
         if (done) return;
+        const held = performance.now() - t0 > 300;          // the logo has been on screen a while: no fade-in, just a short hold
         if (D2T.reduced()) {
           // keep the result, skip the motion: long logo plus slogan, then home
           shortWhole.style.opacity = 0; longWhole.style.opacity = 1;
@@ -106,9 +115,9 @@
           await sleep(2200);
           return finish(null);
         }
-        // 1. short logo arrives
-        const arrive = anim(shortWhole, [{ opacity: 0, transform: 'scale(.9)' }, { opacity: 1, transform: 'none' }], { duration: 520, easing: 'cubic-bezier(.2,.8,.2,1)' });
-        await sleep(950); if (done) return;
+        // 1. short logo arrives (or, if it has already been showing while the page loaded, holds a moment)
+        const arrive = held ? { cancel() {} } : anim(shortWhole, [{ opacity: 0, transform: 'scale(.9)' }, { opacity: 1, transform: 'none' }], { duration: 520, easing: 'cubic-bezier(.2,.8,.2,1)' });
+        await sleep(held ? 650 : 950); if (done) return;
 
         // 2. open up: emblem spins 360 and shrinks into place, D2T letters slide apart, ROP and OP appear
         arrive.cancel(); shortWhole.style.opacity = 0;

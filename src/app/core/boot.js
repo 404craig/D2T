@@ -3,7 +3,7 @@
   const D2T = window.D2T, SND = window.D2TSound;
   if (SND) {
     SND.setMuted(!!(D2T.state.settings && D2T.state.settings.muted));
-    const wake = () => { SND.unlock(); window.removeEventListener('pointerdown', wake, true); window.removeEventListener('touchend', wake, true); };
+    const wake = () => { if (D2T.loadClips) D2T.loadClips(); SND.unlock(); window.removeEventListener('pointerdown', wake, true); window.removeEventListener('touchend', wake, true); };
     window.addEventListener('pointerdown', wake, true);
     window.addEventListener('touchend', wake, true);
   }
@@ -15,4 +15,11 @@
   }
   if (!D2T.started) D2T.start();          // normally the shell started the intro already, before the data arrived
   D2T.ready();
+  // the sound clips sit at the end of the page as plain JSON: read them once the intro has handed over (or on the first tap)
+  let clipsRead = false;
+  D2T.loadClips = () => {
+    if (clipsRead) return; const el = document.getElementById('d2t-sounds'); if (!el) return; clipsRead = true;
+    try { window.D2T_SOUNDS = JSON.parse(el.textContent || '{}'); } catch (e) { window.D2T_SOUNDS = {}; }
+    el.remove(); if (SND && SND.clipsLoaded) SND.clipsLoaded();
+  };
 })();
