@@ -14,9 +14,12 @@
 
   // card outline (chamfered top corners, shallow point at the bottom), as in .d2c-rim
   const FRAME = '<svg viewBox="0 0 100 128" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,11 11,1 89,1 99,11 99,108 50,127 1,108" stroke-linejoin="round"/></svg>';
+  // Coming soon (chosen 12 Oct, "grey sweep"): two grey squares side by side, faded icon, a lock where the arrow would be
+  const STEAL_ICON = '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><path d="M30 14 H70 L80 24 V76 L50 90 L20 76 V24 Z"/><path d="M44 52 H92 M78 38 L92 52 L78 66"/></svg>';
+  const LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
   const MODES = [
-    { name: 'Head to head', sub: 'Online, up to 3 players' },
-    { name: 'Steal', sub: 'Every card comes from the club you play next' }
+    { name: 'Head to head', sub: 'Multiplayer online, challenge your friends.', icon: '<span class="fr-soon-vs">VS</span>' },
+    { name: 'Steal', sub: 'Every card comes from the club you play next.', icon: STEAL_ICON }
   ];
   D2T.frFrame = FRAME;
   D2T.frRecord = (rec, cls = '') => `<div class="fr-record ${cls}">
@@ -143,9 +146,9 @@
         ${g433Card()}
         ${gameCard({ c: '#A66BFF', href: 'https://404craig.github.io/Tenaball/', label: 'Tenaball, opens in a new tab', tag: 'TENABALL', big: 'Name the top ten', sub: 'Our football quiz. Opens Tenaball.', mark: `<img src="${window.D2T_TENABALL_LOGO || ''}" alt="">` })}
           <div class="fr-sect-h fr-soon-h"><span>Coming soon</span></div>
-          <div class="fr-modes">${MODES.map((m) => `<button class="fr-mode" aria-label="${m.name}, coming soon">
-            <span class="fr-back" style="display:block"><span class="fr-back-rim"></span><span class="fr-back-face"></span>${D2T.logo('emblemLine')}<span class="fr-stamp">COMING SOON</span></span>
-            <span class="fr-mode-name">${m.name}</span>${m.sub ? `<span class="fr-mode-sub">${m.sub}</span>` : ''}</button>`).join('')}</div></section>
+          <div class="fr-soon">${MODES.map((m) => `<button class="fr-soon-t" aria-label="${m.name}, coming soon">
+            <span class="fr-soon-ic" aria-hidden="true">${m.icon}</span><span class="fr-soon-lock" aria-hidden="true">${LOCK}</span>
+            <span class="fr-soon-tag">COMING SOON</span><span class="fr-soon-nm">${m.name}</span><span class="fr-soon-sb">${m.sub}</span></button>`).join('')}</div></section>
       </div>`);
       root.appendChild(body);
       const bar = D2T.h(`<nav class="fr-tabbar fr-in" aria-label="More">
@@ -224,7 +227,7 @@
       const cont = body.querySelector('[data-act="continue"]');
       if (cont) cont.onclick = (e) => D2T.toBlack(D2T.game.stepFor() || 'squad', { from: e.currentTarget });
       body.querySelector('.fr-home-logo').onclick = () => D2T.go('intro');
-      body.querySelectorAll('.fr-mode').forEach((m) => m.onclick = () => { m.classList.remove('nudge'); void m.offsetWidth; m.classList.add('nudge'); });
+      body.querySelectorAll('.fr-soon-t').forEach((m) => m.onclick = () => { m.classList.remove('nudge'); void m.offsetWidth; m.classList.add('nudge'); });
       bar.querySelectorAll('[data-go]').forEach((b) => b.onclick = () => D2T.go(b.dataset.go));
     },
     unmount() { clearTimeout(idleFirst); clearInterval(idleTimer); clearTimeout(fanTimer); }

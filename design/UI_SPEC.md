@@ -124,7 +124,7 @@ Today a bronze or silver card is rarely wanted. Options, best first:
 ## 8e. Other games (build 28, chosen 12 Oct)
 
 - Section title "Other games". Option A: each card washed in its game's colour from the right, thin rim, faded mark on the right, button bottom right; all the same shape and height.
-- Daily Challenge white (date in the tag, club over season as the title, today's crest in full colour at the Club X badge's size), Dare2Dream blue, Club X green, 433 Goals orange ("Score exactly 433 goals"), Tenaball purple (opens https://404craig.github.io/Tenaball/). Options page: `design/prototype/modes-colour.html`.
+- Daily Challenge white (date in the tag, club over season as the title, today's crest in full colour at the Club X badge's size), Dare2Dream blue, Club X green, 433 Goals orange ("Score exactly 433 goals"), Tenaball purple (opens https://404craig.github.io/Tenaball/). Coming soon (build 31): Head to head ("Multiplayer online, challenge your friends.") and Steal as two grey squares side by side, grey sweep with a faded icon and a lock. Options page: `design/prototype/modes-colour.html`.
 
 ## 9. How the prototype behaves (built 11 Oct)
 

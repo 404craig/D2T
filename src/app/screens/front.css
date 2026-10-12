@@ -259,3 +259,18 @@
 /* the daily's crest at the Club X badge's size (a little wider: most crests are wider than tall), in full colour */
 .fr-gm-daily .fr-gm-mark { opacity: 1; }
 .fr-gm-daily .fr-gm-mark img.fr-gm-crest { width: 124px; height: 144px; object-fit: contain; opacity: 1; filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
+
+/* Coming soon (chosen 12 Oct, grey sweep): two grey squares side by side in the live cards' style */
+.fr-soon { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+.fr-soon-t { position: relative; aspect-ratio: 1 / 1; border: 0; border-radius: 22px; overflow: hidden; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; padding: 14px; text-align: left; color: #fff;
+  background: linear-gradient(120deg, var(--ink) 0%, var(--ink) 40%, #26262B 100%); box-shadow: inset 0 0 0 1px rgba(142,142,153,.45); }
+.fr-soon-t::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 2px, rgba(255,255,255,0) 2px 7px); }
+.fr-soon-ic { position: absolute; right: -8px; top: -4px; width: 104px; height: 104px; display: grid; place-items: center; color: #8E8E99; opacity: .22; z-index: -1; transform: rotate(-8deg); }
+.fr-soon-ic svg { width: 100%; height: 100%; }
+.fr-soon-vs { font: 900 italic 64px/1 var(--font); -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px currentColor; }
+.fr-soon-lock { position: absolute; right: 12px; top: 12px; width: 32px; height: 32px; border-radius: 50%; background: #2A2A30; display: grid; place-items: center; color: #8E8E99; }
+.fr-soon-lock svg { width: 15px; height: 15px; }
+.fr-soon-tag { font-size: 10px; font-weight: 800; letter-spacing: .14em; color: #8E8E99; margin-bottom: 6px; }
+.fr-soon-nm { font: 900 italic 20px/.95 var(--font); text-transform: uppercase; }
+.fr-soon-sb { font-size: 12px; font-weight: 600; line-height: 1.3; margin-top: 5px; color: #A9A9B2; }
+.fr-soon-t.nudge { animation: frNudge .4s var(--ease-out); }
