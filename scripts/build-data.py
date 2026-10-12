@@ -8,7 +8,7 @@ Inputs
 - data/source/pl_players.csv   every player-season: club, broad position, apps, goals (from Tenaball, two sources)
 - data/ratings/*.csv           card ratings and detailed positions, when present (from the player data work)
 - data/source/clubs.json       club display names and accent colours
-- assets/crests/72, /128, /256  crest PNGs (256 for big displays)
+- assets/crests/72, /128       crest PNGs
 
 Ratings: where data/ratings has a row for a player-season it wins. Otherwise a fallback model rates
 each player against everyone in his broad position that season (goals for forwards, team defence for
@@ -287,7 +287,7 @@ def main():
     crests = {}
     for c, meta in clubs_meta.items():
         f = meta["crest"]
-        for size in ("72", "128", "256"):   # 256: high-resolution crests for big displays (tools/fetch_crests_hi.py, render_crests.js)
+        for size in ("72", "128"):
             path = os.path.join(ROOT, "assets", "crests", size, f)
             if os.path.exists(path):
                 crests.setdefault(c, {})[size] = "data:image/png;base64," + base64.b64encode(open(path, "rb").read()).decode()
