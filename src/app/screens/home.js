@@ -74,12 +74,11 @@
     return gameCard({ c: '#FFD21F', attrs: 'data-act="g433"', label: 'Goal Rush', tag: 'GOAL RUSH', big: 'Score the exact number of goals', sub, mark: `<img src="${window.D2T_GOALRUSH_LOGO || ''}" alt="">` });
   }
 
-  // Unbeaten Run card (cyan): higher or lower on real Premier League numbers, with your best run.
-  const UB_MARK = '<svg class="fr-gm-ub" viewBox="0 0 100 112" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round"><path d="M16 2 H84 L98 16 V76 L50 110 L2 76 V16 Z" stroke-width="3"/><path d="M26 46 L50 24 L74 46" stroke-width="7"/><path d="M32 70 L50 86 L68 70" stroke-width="5"/></svg>';
+  // Unbeaten Run card (cyan; Craig's higher or lower game, 12 Oct): the question wording, then your best run.
   function ubCard() {
     const r = D2T.ubRecord ? D2T.ubRecord() : { runs: 0, top: 0 };
-    const sub = 'Two real players, one hidden number. Higher or lower?' + (r.top ? ` Your best: unbeaten in ${r.top}.` : '');
-    return gameCard({ c: '#22D3EE', attrs: 'data-act="unbeaten"', label: 'Unbeaten Run', tag: 'UNBEATEN RUN', big: 'How long can<br>you go?', sub, mark: UB_MARK });
+    const sub = 'One stat, real Premier League numbers. How long can you stay unbeaten?' + (r.top ? ` Best: ${r.top}.` : '');
+    return gameCard({ c: '#22D3EE', attrs: 'data-act="unbeaten"', label: 'Unbeaten Run', tag: 'UNBEATEN RUN', big: 'Higher or lower?', sub, mark: D2T.ubMark || '' });
   }
 
   // Daily challenge card: today's club for everyone, the mode it plays, and your result once played.

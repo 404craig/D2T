@@ -338,8 +338,59 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => window.D2T.state.g433.filled.length === 0 && !!window.D2T.state.g433.formation && window.D2T.state.g433.revealed === false) && !!(await page.$(".g4-reveal")), "Goal Rush: Play again did not start a new game with a reveal");
   await page.click(".g4-reveal"); await wait(600);   // the reveal counts as seen once it finishes or is skipped
   check(await page.evaluate(() => window.D2T.state.g433.revealed === true) && !(await page.$(".g4-reveal")), "Goal Rush: skipping the reveal did not mark it seen");
+  // the home button (Craig, 12 Oct): nothing picked goes straight home; a game under way asks, and Quit throws it away
+  await page.click(".g4 .is-home"); await expectScreen("home"); await wait(600);
+  check(await page.evaluate(() => !!window.D2T.state.g433 && window.D2T.state.g433.filled.length === 0) && !(await page.$(".sheet")), "Goal Rush: home before the first pick asked or lost the game");
+  await page.click('[data-act="g433"]'); await expectScreen("goals433"); await wait(900);
+  await page.click(".g4 .sp-main"); await wait(2900); await page.click('.g4 [data-c="0"]'); await wait(250); await page.click(".g4 .slotp.fit >> nth=-1"); await wait(1800);
+  await page.click(".g4 .is-home"); await wait(500);
+  check(!!(await page.$('.sheet [data-k="quit"]')) && /Leave the game/.test(await page.textContent(".sheet")), "Goal Rush: home with a game under way did not ask");
+  await shot("52-goalrush-leave");
+  await page.click('.sheet [data-k="home"]'); await expectScreen("home"); await wait(600);
+  check(await page.evaluate(() => window.D2T.state.g433 && window.D2T.state.g433.filled.length === 1), "Goal Rush: Home did not keep the game");
+  await page.click('[data-act="g433"]'); await expectScreen("goals433"); await wait(900);
+  await page.click(".g4 .is-home"); await wait(500); await page.click('.sheet [data-k="quit"]'); await expectScreen("home"); await wait(600);
+  check(await page.evaluate(() => !window.D2T.state.g433 && window.D2T.game.g433.record().games === 1), "Goal Rush: Quit did not throw the game away, or recorded it");
+
+  // ---------- Unbeaten Run: spin for a stat, two cards reel in (left shows, right hides), answer, the run records apart ----------
+  const ubRecBefore = await page.evaluate(() => JSON.stringify([window.D2T.game.record(), window.D2T.game.g433.record()]));
+  await page.evaluate(() => { window.D2T.state.ub = null; window.D2T.save(); window.D2T.go("home"); }); await wait(900);
+  await page.click('[data-act="unbeaten"]'); await expectScreen("unbeaten"); await wait(700);
+  check(!!(await page.$(".ub-spin")) && /Spin for a stat/i.test(await page.textContent(".ub-title")), "Unbeaten Run: no stat spin to start");
+  for (const st of ["pts", "cg"]) {
+    await page.evaluate((st) => { window.D2T_UB_STAT = st; }, st);
+    await page.click(".ub-spin"); await wait(6500);
+    const got = await page.evaluate(() => { const l = document.querySelector(".ub-l .sp-node.is-hit .ub-num"), r = document.querySelector(".ub-r .sp-node.is-hit .ub-num"); return { l: l && l.textContent, r: r && r.textContent, title: document.querySelector(".ub-title").textContent, club: !!document.querySelector(".ub-l .ub-cc"), shirt: !!document.querySelector(".ub-l .ub-shirt"), crest: !!document.querySelector(".ub-l .ub-crest, .ub-l .ub-cc-crest"), btn: document.querySelectorAll(".ub-ans:not([disabled])").length }; });
+    check(got.l && /^\d+$/.test(got.l) && got.r === "?" && got.btn === 2, "Unbeaten Run (" + st + "): the cards did not land with a number on the left and ? on the right");
+    check(st === "pts" ? got.club && /Points in a season/i.test(got.title) : got.shirt && /Career goals/i.test(got.title), "Unbeaten Run (" + st + "): wrong card type or stat");
+    check(got.crest, "Unbeaten Run (" + st + "): no crest on the card");
+    if (st === "pts") await shot("53-unbeaten-clubs");
+    // answer: either the run goes on (+1) or it is over (the sheet); both record nothing until the end
+    await page.click(".ub-higher"); await wait(1600);
+    const r1 = await page.evaluate(() => ({ ok: !!document.querySelector(".ub-r.ok"), bad: !!document.querySelector(".ub-r.bad"), n: document.querySelector(".ub-n").textContent }));
+    check(r1.ok || r1.bad, "Unbeaten Run (" + st + "): the answer did not resolve");
+    await wait(2500);
+    if (r1.ok) {
+      check(r1.n === "1" || await page.evaluate(() => document.querySelector(".ub-n").textContent === "1"), "Unbeaten Run (" + st + "): a right answer did not count 1");
+      // leaving mid-run asks, and quitting records nothing
+      await page.click(".ub-bar .is-home"); await wait(500);
+      check(!!(await page.$('.sheet [data-k="quit"]')), "Unbeaten Run (" + st + "): home mid-run did not ask");
+      await page.click('.sheet [data-k="quit"]'); await expectScreen("home"); await wait(600);
+      check(await page.evaluate(() => !(window.D2T.state.ub && window.D2T.state.ub.runs)), "Unbeaten Run (" + st + "): quitting recorded a run");
+      await page.click('[data-act="unbeaten"]'); await expectScreen("unbeaten"); await wait(700);
+    } else {
+      check(!!(await page.$(".sheet")) && /Beaten first time/i.test(await page.textContent(".sheet")), "Unbeaten Run (" + st + "): no end sheet after a wrong answer");
+      check(await page.evaluate(() => window.D2T.state.ub.runs === 1), "Unbeaten Run (" + st + "): a finished run was not recorded");
+      await shot("54-unbeaten-end");
+      await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(700);
+      check(!!(await page.$(".ub-spin")), "Unbeaten Run (" + st + "): closing the end sheet did not go back to the stat spin");
+      await page.evaluate(() => { window.D2T.state.ub = null; window.D2T.save(); });
+    }
+  }
+  check(await page.evaluate((b) => JSON.stringify([window.D2T.game.record(), window.D2T.game.g433.record()]) === b, ubRecBefore), "Unbeaten Run changed another game's record");
+  await page.evaluate(() => { delete window.D2T_UB_STAT; });
 
   await browser.close();
   if (errors.length) { console.log("FAIL\n" + errors.join("\n")); process.exit(1); }
-  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls (tap, drag, pass), fixtures, live match, refresh, season, summary, record, back, account, other screens, Dare2Dream draft, Club X, Daily, Goal Rush");
+  console.log("ok: intro, home, spin, table, squad, formations, 3 rolls (tap, drag, pass), fixtures, live match, refresh, season, summary, record, back, account, other screens, Dare2Dream draft, Club X, Daily, Goal Rush, Unbeaten Run");
 })().catch((e) => { console.error(e); process.exit(1); });

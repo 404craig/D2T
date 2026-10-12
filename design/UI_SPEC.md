@@ -141,7 +141,7 @@ Today a bronze or silver card is rarely wanted. Options, best first:
 - **Spin engine (`screens/spin.js`, `D2T.roll`):** three masked reels, 5 recycled nodes each, cards addressed by index so the strip never loops. Speed up to 24 cards a second, vertical blur by SVG `feGaussianBlur` scaled to speed, decel curve landing exactly on the target, then a damped spring (one soft bounce). Lands at about 2.4s, 3.0s and 3.7s (the right reel teases longest). Each landing: scale pulse, light sweep, glow in the club colour. Measured 60fps in Chromium.
 - **Card open (`core/flip.js`):** one full turn around the vertical axis with a D2T card back, 800ms open, 640ms close, horizontal blur during the fastest part of the turn.
 - **Transfer roll:** the emblem spins and bursts into about 600 fragments to reveal the slots. Prototype odds: bronze 14, silver 34, gold 38, baller 11, legend about 4.
-- **Table reveal:** a club-colour highlight runs down from 1st, slowing into your row, then a "New season" banner and every number counts down to 0.
+- **Table reveal:** a club-colour highlight runs down from 1st, slowing into your row, then a "Rewrite history" banner (two lines) and every number counts down to 0.
 - **Matches:** seeded Poisson from XI rating against opponent strength (from their real finish), 90 minutes in about 24 seconds, Skip to end gives the same result. Other clubs use their real results for gameweeks 1 to 3. A transfer roll comes after gameweek 3, 6, 9...
 - **Prototype limits:** spins always land on the three clubs with full data (Wolves 2011/12, Norwich 2019/20, Southampton 2024/25); achievement numbers and friends are examples.
 

@@ -78,6 +78,8 @@
   const CREST = () => D2T.g4crest || 'disc';
   // under each big shirt: the club's name, or its crest when the crest moves there
   const trioCap = (p) => (CREST() === 'caption' ? `<img class="capcrest" src="${kit(p.club).crest}" alt="${D2T.esc(p.club)}">` : D2T.esc(p.club));
+  // shared with Unbeaten Run (screens/unbeaten.js): the kits, their pattern defs and the shirt drawing
+  D2T.shirts = { kit, defs, shirt: (...a) => shirt(...a) };
   function shirt(o) {
     const w = o.w, big = w >= 70, cls = o.cls || '';
     if (!o.player) {
@@ -158,7 +160,18 @@
       root.appendChild(wrap);
       const pitchEl = wrap.querySelector('.g4-pitch'), trioEl = wrap.querySelector('.g4-trio'), hintEl = wrap.querySelector('.g4-hint');
       const main = wrap.querySelector('.sp-main'), lbl = main.querySelector('.sp-lbl'), reload = wrap.querySelector('.is-reload');
-      wrap.querySelector('.is-home').onclick = () => D2T.go('home');
+      // the home button (Craig, 12 Oct): with a game under way it asks, since there was no way to quit one: Home keeps the
+      // game for later, Quit throws it away (nothing recorded). Before the first pick, or once the XI is in, it just goes home.
+      wrap.querySelector('.is-home').onclick = () => {
+        const started = S.filled.length > 0 || !!S.cands, over = !openSlots().length;
+        if (!started || over) { D2T.go('home'); return; }
+        const n = S.filled.length;
+        const sh = D2T.sheet({ title: 'Leave the game?', body: `<p class="fr-lead">${n ? `${n} of 11 picked, ${total()} goals so far.` : 'Three players are waiting.'} Home keeps this game for later. Quit throws it away and nothing is recorded.</p>
+          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="home">Home, save the game</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the game</button></div>` });
+        sh.body.querySelector('[data-k="keep"]').onclick = sh.close;
+        sh.body.querySelector('[data-k="home"]').onclick = () => { sh.close(); D2T.go('home'); };
+        sh.body.querySelector('[data-k="quit"]').onclick = () => { sh.close(); D2T.state.g433 = null; D2T.save(); D2T.go('home'); };
+      };
 
       // sizes from the phone: big shirts shrink on short screens, pitch shirts follow the pitch height
       const H = root.clientHeight || 700, TW = H < 620 ? 72 : H < 700 ? 84 : 96;
@@ -166,7 +179,8 @@
       let PW = 56;
       // a shirt, its crest disc and its name must fit the tightest gap between two lines (defence to keeper, about 20% of the
       // pitch), so short phones get smaller shirts rather than overlapping ones
-      const sizePitch = () => { const ph = pitchEl.clientHeight || 358; PW = Math.round(Math.max(30, Math.min(58, (ph * 0.205 - 16) / 1.19))); };
+      // shirts grow with the pitch (taller since the club names under the reels went, Craig, 12 Oct), bounded so a line of five still has room
+      const sizePitch = () => { const ph = pitchEl.clientHeight || 358, pw = pitchEl.clientWidth || 366; PW = Math.round(Math.max(30, Math.min(62, pw * 0.19 - 8, (ph * 0.205 - 16) / 1.19))); };
 
       const slotOf = (i) => S.filled.find((p) => p.slot === i);
       const openSlots = () => SLOTS.map((_, i) => i).filter((i) => !slotOf(i));
@@ -198,8 +212,11 @@
         pitchEl.querySelectorAll('.slotp.open').forEach((el) => { const fit = pos && SLOTS[+el.dataset.slot][1] === pos; el.classList.toggle('fit', !!fit); el.classList.toggle('nofit', !!pos && !fit); });
         pitchEl.querySelectorAll('.slotp.open').forEach((el) => { el.onclick = () => { const i = +el.dataset.slot; if (!busy && sel != null && SLOTS[i][1] === selPos()) place(sel, null, i); }; });
       };
-      const trioMyst = () => `${[0, 1, 2].map(() => `<div class="cell"><span class="g4-ptag"></span><div class="reelwin"><div class="strip">${shirt({ w: TW, state: 'myst' })}</div></div><span class="cap"></span></div>`).join('')}`;
-      const trioLanded = () => S.cands.map((c, i) => `<div class="cell"><span class="g4-ptag on">${c.pos}</span><div class="reelwin landed"><div class="strip">${shirt({ w: TW, player: c, attr: `data-c="${i}"` })}</div></div><span class="cap">${trioCap(c)}</span></div>`).join('');
+      // no club name under the reels (Craig, 12 Oct): the crest on the shirt says it and the pitch takes the room; only the
+      // caption crest mode (D2T.g4crest = 'caption', for trying things) keeps a line there
+      const cap = (c) => (CREST() === 'caption' ? `<span class="cap">${c ? trioCap(c) : ''}</span>` : '');
+      const trioMyst = () => `${[0, 1, 2].map(() => `<div class="cell"><span class="g4-ptag"></span><div class="reelwin"><div class="strip">${shirt({ w: TW, state: 'myst' })}</div></div>${cap()}</div>`).join('')}`;
+      const trioLanded = () => S.cands.map((c, i) => `<div class="cell"><span class="g4-ptag on">${c.pos}</span><div class="reelwin landed"><div class="strip">${shirt({ w: TW, player: c, attr: `data-c="${i}"` })}</div></div>${cap(c)}</div>`).join('');
       // left of the tally (UI_SPEC 8f): which player you are on and how many after him; the goals to go sit after it (setGap),
       // and the respins live only on the respin button's badge
       const setInfo = () => {
@@ -253,7 +270,7 @@
             const finish = () => {
               strip.style.filter = ''; strip.innerHTML = shirt({ w: TW, player: targets[i], attr: `data-c="${i}"` }); strip.style.transform = 'none';
               w.classList.add('landed'); glint(strip.firstElementChild, reduced);
-              w.parentElement.querySelector('.cap').innerHTML = trioCap(targets[i]);
+              const capEl = w.parentElement.querySelector('.cap'); if (capEl) capEl.innerHTML = trioCap(targets[i]);
               const tag = w.parentElement.querySelector('.g4-ptag'); tag.textContent = targets[i].pos; tag.classList.add('on');
               if (++landed === wins.length) resolve();
             };

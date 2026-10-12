@@ -1,16 +1,22 @@
-// Unbeaten Run (black, cyan #22D3EE as the mode colour; Craig's higher or lower game, 12 Oct, prototype on this branch).
-// A spin picks the stat for the run (Premier League numbers only, for now). Two real players (or clubs) side by side: the
-// left one's number shows on his shirt, the right one's is a ?. Swipe the right shirt up for higher, down for lower, or
-// tap Higher or Lower. Right: +1 to the unbeaten run, his shirt slides left and the reel spins in the next. Wrong: the run
-// is over. Sudden death, no skips, never an equal pair, never a zero, no repeats in a run. Cards are random from the whole
-// deck, with close calls (within 10%) mixed in: about 1 in 5 for cards 1 to 10, 1 in 3 for 11 to 20, then 1 in 2.
-// Best run per stat in D2T.state.ub, apart from every other mode's record.
+// Unbeaten Run (black, cyan #22D3EE as the mode colour; Craig's higher or lower game, 12 Oct; designs chosen 12 Oct from
+// design/prototype/unbeaten-run.html round 2 and unbeaten-club-cards.html option A).
+// A spin picks the stat for the run (Premier League numbers only, for now). Two cards side by side: the left one's number
+// shows, the right one's is a ? until you answer. Swipe the right card up for higher, down for lower, or tap Higher or Lower.
+// Right: +1 to the unbeaten run, the card slides left and the reel spins in the next. Wrong: the run is over. Sudden death,
+// no skips, never an equal pair, never a zero, no repeats in a run. Cards are random from the whole deck, with close calls
+// (within 10%) mixed in: about 1 in 5 for cards 1 to 10, 1 in 3 for 11 to 20, then 1 in 2.
+// Player stats: his shirt in the club's colours, the surname and the stat as his number (sized by its digits so 260 fits),
+// and under it only the crest (36px, from the 128px file) and his flag. Club stats: the Classic club shield, bigger (172 wide,
+// two to a row), name and season top left, the crest top right, the number in the middle and the stat's unit near the point.
+// Both reel in with the club spin's motion (D2T.roll.profile and sample), left first. Best run per stat in D2T.state.ub.
 (function () {
   const C = '#22D3EE';
   const snd = (id) => { const S = window.D2TSound; if (S) S.play(id); };
   const rand = (n) => Math.floor(Math.random() * n);
   const UP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15l7-7 7 7"/></svg>';
   const DOWN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg>';
+  // the mark: up and down chevrons in a ring, line art like the outline emblem (home card and faded behind the pages)
+  const MARK = '<svg class="ub-mark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="50" cy="50" r="44"/><path d="M30 42 L50 22 L70 42"/><path d="M30 58 L50 78 L70 58"/></svg>';
 
   // ---------- the stats (one per run) ----------
   const STATS = [
@@ -20,10 +26,11 @@
     { id: 'cga', big: 'Career goals + assists', unit: 'Premier League goals and assists', deck: 'career', val: (r) => r.g + r.as },
     { id: 'sg', big: 'Goals in a season', unit: 'Premier League goals', deck: 'season', val: (r) => r.g },
     { id: 'sga', big: 'Goals + assists in a season', unit: 'Premier League goals and assists', deck: 'season', val: (r) => r.g + r.as },
-    { id: 'pts', big: 'Points in a season', unit: 'points', deck: 'club', val: (r) => r.pts },
-    { id: 'w', big: 'Wins in a season', unit: 'wins', deck: 'club', val: (r) => r.w },
-    { id: 'atp', big: 'All-time points', unit: 'Premier League points', deck: 'alltime', val: (r) => r.pts }
+    { id: 'pts', big: 'Points in a season', unit: 'points', short: 'POINTS', deck: 'club', val: (r) => r.pts },
+    { id: 'w', big: 'Wins in a season', unit: 'wins', short: 'WINS', deck: 'club', val: (r) => r.w },
+    { id: 'atp', big: 'All-time points', unit: 'Premier League points', short: 'POINTS', deck: 'alltime', val: (r) => r.pts }
   ];
+  const isClub = (stat) => stat.deck === 'club' || stat.deck === 'alltime';
 
   // ---------- decks, built once from the game data ----------
   let DECKS = null;
@@ -56,9 +63,12 @@
     return DECKS;
   }
 
-  // ---------- a shirt with the stat as its number, and the club badge and his flag under it ----------
+  // ---------- a player's shirt with the stat as his number, and the crest and his flag under it ----------
   const SHIRT = 'M31 9 L42 4 Q50 11 58 4 L69 9 L95 24 L85 44 L74 38 L74 96 L26 96 L26 38 L15 44 L5 24 Z';
   const SLEEVES = 'M31 9 L5 24 L15 44 L26 38 Z M69 9 L95 24 L85 44 L74 38 Z';
+  // the number fits the shirt body (x 26 to 74): 36 for one or two digits, 25 for three, 20 for four
+  const NS = (v) => ({ 1: 36, 2: 36, 3: 25, 4: 20 })[String(v).length] || 20;
+  const NY = (v) => (72 - (36 - NS(v)) * 0.35).toFixed(1);
   function shirt(w, club, word, num) {
     const k = D2T.shirts.kit(club), st = k.stroke ? ` stroke="${k.stroke}" stroke-width="2.6" paint-order="stroke" stroke-linejoin="round"` : '';
     const W = word.toUpperCase(), fs = Math.max(8.5, Math.min(13, 104 / Math.max(6, W.length)));
@@ -68,24 +78,36 @@
     return `<div class="g4-shirt ub-shirt" style="--sw:${w}px;--trimc:${k.trim};--ink:${k.ink}"><svg viewBox="0 0 100 100" aria-hidden="true"><path class="body" d="${SHIRT}" style="fill:${fill}"/>${sleeves}
       <path d="${SHIRT}" fill="url(#g4sheen)"/><path class="body" d="${SHIRT}" style="fill:none"/><path class="trim" d="M42 4 Q50 11 58 4"/><path class="trim" d="M85 44 L95 24 M15 44 L5 24" stroke-width="3"/>
       <text x="50" y="27" font-size="${fs}" textLength="${Math.min(52, W.length * fs * 0.62)}" lengthAdjust="spacingAndGlyphs"${st}>${D2T.esc(W)}</text>
-      <text class="ub-num${num == null ? ' q' : ''}" x="50" y="70" font-size="34"${n.length > 2 ? ' textLength="44" lengthAdjust="spacingAndGlyphs"' : ''}${st}>${n}</text></svg></div>`;
+      <text class="ub-num${num == null ? ' q' : ''}" x="50" y="${NY(n)}" font-size="${NS(n)}"${st}>${n}</text></svg></div>`;
   }
-  function item(stat, r, shown, w) {
+  function playerItem(stat, r, shown, w) {
     const G = D2T.game, c = G.club(r.club), v = shown ? stat.val(r) : null;
-    const word = r.name ? r.name.split(' ').slice(-1)[0] : (c.name || r.club);
-    const flag = r.nat ? G.flag(r.nat) : '';
-    const second = r.name ? (flag ? `<span class="ub-flag"><img class="d2c-flag" src="${flag}" alt="${D2T.esc(r.nat)}" title="${D2T.esc(r.nat)}"></span>` : `<span class="ub-chip">${D2T.esc(r.nat || '')}</span>`)
-      : r.season ? `<span class="ub-chip ub-chip-s">${r.season}</span>` : `<span class="ub-chip ub-chip-s">${r.n} seasons</span>`;
-    return `<div class="ub-item">${shirt(w, r.club, word, v)}<div class="ub-row"><span class="ub-crest"><img src="${G.crestHi(r.club) || c.crest}" alt="${D2T.esc(c.full || r.club)}"></span>${second}</div></div>`;
+    const word = r.name.split(' ').slice(-1)[0], flag = r.nat ? G.flag(r.nat) : '';
+    return `<div class="ub-item">${shirt(w, r.club, word, v)}<div class="ub-row"><img class="ub-crest" src="${c.crest}" alt="${D2T.esc(c.full || r.club)}">${flag ? `<img class="d2c-flag ub-flag" src="${flag}" alt="${D2T.esc(r.nat)}" title="${D2T.esc(r.nat)}">` : ''}</div></div>`;
   }
+
+  // ---------- a club's card: the Classic club shield turned round (option A), the stat in the middle ----------
+  // the name sits beside the crest in about 5.4em (Black Italic runs about 0.66em a letter): its longest word sets the size,
+  // and a word over 10 letters (Middlesbrough, Huddersfield, Southampton) also shrinks the crest to make room
+  const nameFit = (n) => { const L = Math.max(...String(n).split(/\s+/).map((x) => x.length)), long = L > 10, f = Math.min(1.1, (long ? 8.8 : 8.0) / L); return { cls: long ? ' long' : '', style: f < 1.1 ? ` style="font-size:${f.toFixed(2)}em"` : '' }; };
+  function clubItem(stat, r, shown, w) {
+    const G = D2T.game, c = G.club(r.club), P = D2T.cards.clubPaint(c), v = shown ? String(stat.val(r)) : '?';
+    const when = r.season ? r.season : `${r.n} seasons`, nf = nameFit(c.name);
+    return `<div class="ub-item"><div class="d2c d2c-club ub-cc${nf.cls}" style="--w:${w}px;--face:${P.face};--rim:${P.rim};--tex:${P.tex};--glow:${P.glow};--club-text:${c.text}" aria-label="${D2T.esc(c.full || r.club)} ${when}">
+      <div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2t-shine slow"></span>
+      <div class="d2c-body"><div class="ub-cc-top"><div class="ub-cc-who"><span class="ub-cc-name"${nf.style}>${D2T.esc(c.name)}</span><span class="ub-cc-season">${when}</span></div><img class="ub-cc-crest" src="${c.crestLight || c.crest}" alt=""></div>
+      <div class="ub-cc-mid"><span class="ub-num${shown ? '' : ' q'}${v.length > 2 ? ' w3' : ''}">${v}</span></div>
+      <div class="ub-cc-foot"><span class="ub-cc-hr"></span><span class="ub-cc-unit">${stat.short || stat.unit}</span></div></div></div></div></div>`;
+  }
+  const item = (stat, r, shown, w) => (isClub(stat) ? clubItem(stat, r, shown, w) : playerItem(stat, r, shown, w));
   const whoLine = (stat, r) => {
+    if (isClub(stat)) return '';
     const c = D2T.game.club(r.club);
-    if (!r.name) return `<b>${D2T.esc(c.full || r.club)}</b>`;
     const where = stat.deck === 'career' ? `${D2T.esc(c.name || r.club)} · ${r.f === r.l ? r.f : r.f + ' to ' + r.l}` : `${D2T.esc(c.name || r.club)}${r.club2 ? ' / ' + D2T.esc(D2T.game.club(r.club2).name || r.club2) : ''} · ${r.season}`;
     return `<b>${D2T.esc(r.name)}</b><span>${where}</span>`;
   };
 
-  // ---------- one reel (D2T's fruit machine: the roll screen's motion, sized for a shirt) ----------
+  // ---------- one reel (the club spin's fruit machine, screens/spin.js, sized for these cards) ----------
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   let fid = 0;
   class Reel {
@@ -113,7 +135,7 @@
       this.streak.style.opacity = (k * k * 0.9).toFixed(3);
       this.win.style.transform = k > 0.02 ? `scaleY(${(1 + 0.05 * k).toFixed(4)})` : '';
     }
-    hit() { this.slot.style.setProperty('--sp-accent', C); this.slot.classList.remove('is-hit'); void this.slot.offsetWidth; this.slot.classList.add('is-hit'); }
+    hit(accent) { this.slot.style.setProperty('--sp-accent', accent || C); this.slot.classList.remove('is-hit'); void this.slot.offsetWidth; this.slot.classList.add('is-hit'); }
     settle(t) {
       this.landed = t;
       this.nodes.forEach((n) => { if (n.dataset.vi === String(t)) n.classList.add('is-hit'); else n.classList.add('is-gone'); });
@@ -133,9 +155,8 @@
       const save = () => D2T.save();
       root.classList.add('ub');
       root.appendChild(D2T.topbar({ mode: ['Unbeaten Run', C] }));
-      const H = root.clientHeight || 760, SW = H < 640 ? 118 : H < 720 ? 134 : 150, PITCH = Math.round(SW * 1.02 + 62);
-      const wrap = D2T.h(`<div class="ub-wrap" style="--ub-sw:${SW}px;--ub-ph:${PITCH - 10}px">${D2T.shirts.defs()}
-        <div class="ub-head"><div class="ub-h-l"><span class="ub-kick">Premier League</span><h1 class="ub-title">Spin for a stat</h1><span class="ub-sub">Premier League stats only, for now</span></div>
+      const wrap = D2T.h(`<div class="ub-wrap">${D2T.shirts.defs()}<span class="ub-bgmark" aria-hidden="true">${MARK}</span>
+        <div class="ub-head"><div class="ub-h-l"><span class="ub-kick">Premier League</span><h1 class="ub-title">Spin for a stat</h1><span class="ub-sub"></span></div>
           <div class="ub-streak" aria-live="polite"><span class="ring"></span><b class="ub-n">0</b><i>unbeaten</i></div></div>
         <div class="ub-stage"></div>
         <div class="sp-hint ub-hint"></div>
@@ -143,7 +164,18 @@
       root.appendChild(wrap);
       const stage = wrap.querySelector('.ub-stage'), bar = wrap.querySelector('.ub-bar'), hint = wrap.querySelector('.ub-hint');
       const title = wrap.querySelector('.ub-title'), sub = wrap.querySelector('.ub-sub'), streakEl = wrap.querySelector('.ub-streak'), nEl = wrap.querySelector('.ub-n');
-      let run = null, busy = false, reelL = null, reelR = null;
+      let run = null, busy = false, reelL = null, reelR = null, SIZE = null;
+
+      // card sizes for this run: shirts 150 (smaller on short phones); club shields 172 wide, two to a row with a 12px gap,
+      // narrower when the screen is (375px phones get 165), and never taller than the stage allows
+      function sizes(club) {
+        const H = root.clientHeight || 760, sw = (stage.clientWidth || 390) - 32;   // inside the stage's 16px sides
+        if (!club) { const SW = H < 640 ? 118 : H < 720 ? 134 : 150; return { w: SW, pitch: Math.round(SW * 1.02 + 62), slot: SW + 10, vs: 0.42 }; }
+        const avail = Math.max(220, (stage.clientHeight || 420) - 16);
+        const w = Math.max(120, Math.min(172, Math.floor((sw - 12) / 2), Math.floor(avail / 1.667)));
+        const h = Math.round(w * 1.667);
+        return { w, pitch: h + 8, slot: w, vs: 0.5 };
+      }
 
       // ---------- the bottom bar: Spin before a run, Lower and Higher during one ----------
       function spinBar() {
@@ -153,26 +185,35 @@
       }
       function answerBar() {
         bar.innerHTML = `<button class="ub-ans ub-lower" aria-label="Lower">${DOWN}<span>Lower</span></button><button class="ub-ans ub-higher" aria-label="Higher">${UP}<span>Higher</span></button><button class="sp-round is-home" aria-label="Home">${D2T.ICON.home}</button>`;
-        bar.querySelector('.is-home').onclick = () => D2T.go('home');
+        bar.querySelector('.is-home').onclick = leave;
         bar.querySelector('.ub-lower').onclick = () => answer(false);
         bar.querySelector('.ub-higher').onclick = () => answer(true);
       }
       const enable = (on) => bar.querySelectorAll('.ub-ans').forEach((b) => { b.disabled = !on; });
+      // home during a run asks (as Goal Rush does): a run is sudden death, so leaving ends it with no result
+      function leave() {
+        if (!run || busy) { if (!busy) D2T.go('home'); return; }
+        const sh = D2T.sheet({ title: 'Leave the run?', body: `<p class="fr-lead">Unbeaten in ${run.streak} so far. Leaving ends the run and nothing is recorded.</p>
+          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the run</button></div>` });
+        sh.body.querySelector('[data-k="keep"]').onclick = sh.close;
+        sh.body.querySelector('[data-k="quit"]').onclick = () => { sh.close(); run = null; D2T.go('home'); };
+      }
 
       // ---------- the stat spin: a reel of stats, never the same one twice in a row ----------
       function idle() {
-        run = null; busy = false; nEl.textContent = '0'; title.textContent = 'Spin for a stat'; sub.textContent = 'Premier League stats only, for now';
+        run = null; busy = false; nEl.textContent = '0'; title.textContent = 'Spin for a stat'; sub.textContent = 'Each run is about one stat. Real Premier League numbers, higher or lower, one wrong answer ends it.';
         stage.innerHTML = `<div class="ub-statwin"><div class="ub-statstrip">${statTile(STATS.find((s) => s.id === R.last) || STATS[0], true)}</div></div>
-          <div class="ub-bests">${STATS.map((s) => `<span class="ub-best"><i>${s.big}</i><b class="${R.best[s.id] ? '' : 'none'}">${R.best[s.id] || '-'}</b></span>`).join('')}</div>`;
+          <div class="ub-bests-h">Your best runs</div><div class="ub-bests">${STATS.map((s) => `<span class="ub-best"><i>${s.big}</i><b class="${R.best[s.id] ? '' : 'none'}">${R.best[s.id] || '-'}</b></span>`).join('')}</div>`;
         hint.textContent = 'Spin to see which stat this run is about';
         spinBar();
-        later(() => D2T.tip('ub-spin', bar.querySelector('.ub-spin'), 'A new stat every run'), 700);
+        later(() => { const b = bar.querySelector('.ub-spin'); if (b && !run && !busy && root.isConnected) D2T.tip('ub-spin', b, 'A new stat every run'); }, 700);
       }
       const statTile = (s, dim) => `<div class="ub-tile${dim ? ' dim' : ''}"><small>PREMIER LEAGUE</small><span>${s.big}</span></div>`;
       function statSpin() {
         if (busy) return;
         busy = true; snd('roll3');
-        const target = STATS.filter((s) => s.id !== R.last)[rand(STATS.length - 1)];
+        const forced = window.D2T_UB_STAT && STATS.find((s) => s.id === window.D2T_UB_STAT);   // tests pick the stat
+        const target = forced || STATS.filter((s) => s.id !== R.last)[rand(STATS.length - 1)];
         R.last = target.id; save();
         const other = (not) => { const o = STATS.filter((s) => !not.includes(s)); return o[rand(o.length)]; };
         const seq = [other([])];
@@ -180,7 +221,7 @@
         seq.push(target, other([target]));
         const strip = stage.querySelector('.ub-statstrip');
         strip.innerHTML = seq.map((s) => statTile(s)).join('');
-        stage.querySelector('.ub-bests').classList.add('gone');
+        stage.querySelector('.ub-bests').classList.add('gone'); stage.querySelector('.ub-bests-h').classList.add('gone');
         bar.querySelector('.ub-spin').disabled = true;
         const end = -(seq.length - 3) * 76;
         const done = () => { snd('lockin'); stage.querySelector('.ub-statwin').classList.add('is-hit'); later(() => startRun(target), reduced ? 200 : 650); };
@@ -196,17 +237,19 @@
         if (Math.random() < pClose) { const close = pool.filter((r) => Math.abs(run.stat.val(r) - cur) / cur <= 0.10); if (close.length) return close[rand(close.length)]; }
         return pool[rand(pool.length)];
       }
-      function spinTo(reel, html, opts, done) {
-        const P = D2T.roll.profile(opts), n = P.target;
-        const seq = [reel.current() || `<div class="ub-ph">?</div>`];
-        for (let i = 1; i < n + 4; i++) seq.push(i === n ? html : item(run.stat, run.deck[rand(run.deck.length)], false, SW));
+      const accentOf = (r) => (isClub(run.stat) ? (D2T.game.club(r.club).accent || C) : C);
+      const ph = () => `<div class="ub-ph">?</div>`;
+      function spinTo(reel, r, opts, done) {
+        const P = D2T.roll.profile(opts), n = P.target, html = item(run.stat, r, reel === reelL, SIZE.w);
+        const seq = [reel.current() || ph()];
+        for (let i = 1; i < n + 4; i++) seq.push(i === n ? html : item(run.stat, run.deck[rand(run.deck.length)], false, SIZE.w));   // fillers show ?, never made-up numbers
         reel.load(seq);
-        if (reduced) { reel.draw(n, 0); reel.settle(n); done && done(); return; }
+        if (reduced) { reel.draw(n, 0); reel.hit(accentOf(r)); reel.settle(n); done && done(); return; }
         const t0 = performance.now(); let landed = false;
         const step = (now) => {
           const s = D2T.roll.sample(P, (now - t0) / 1000);
           reel.draw(s.p, s.v);
-          if (!landed && (now - t0) / 1000 >= P.landAt) { landed = true; reel.hit(); reel.settle(n); done && done(); }
+          if (!landed && (now - t0) / 1000 >= P.landAt) { landed = true; reel.hit(accentOf(r)); reel.settle(n); done && done(); }
           if (s.phase !== 'done' && root.isConnected) rafs.push(requestAnimationFrame(step));
         };
         rafs.push(requestAnimationFrame(step));
@@ -216,33 +259,40 @@
         run = { stat, deck, used: new Set(), streak: 0 };
         run.cur = deck[rand(deck.length)]; run.used.add(run.cur);
         run.next = pickNext(); run.used.add(run.next);
-        title.textContent = stat.big; sub.textContent = "Premier League stats only, for now";
+        title.textContent = stat.big; sub.innerHTML = 'Premier League · <em>one wrong and it is over</em>';
+        SIZE = sizes(isClub(stat));
+        stage.style.setProperty('--ub-sw', SIZE.w + 'px'); stage.style.setProperty('--ub-ph', SIZE.pitch + 'px'); stage.style.setProperty('--ub-slw', SIZE.slot + 'px'); stage.style.setProperty('--ub-vs', SIZE.vs);
+        stage.classList.toggle('ub-clubs', isClub(stat));
         stage.innerHTML = `<div class="ub-cols"><div class="ub-col"><div class="ub-slot ub-l"></div><div class="ub-who ub-who-l"></div></div>
           <div class="ub-col"><div class="ub-slot ub-r"></div><div class="ub-who ub-who-r"></div></div><span class="ub-vs">VS</span></div>`;
         const sl = stage.querySelector('.ub-l'), sr = stage.querySelector('.ub-r');
-        reelL = new Reel(sl, PITCH); reelR = new Reel(sr, PITCH);
-        reelL.show(`<div class="ub-ph">?</div>`); reelR.show(`<div class="ub-ph">?</div>`);
+        reelL = new Reel(sl, SIZE.pitch); reelR = new Reel(sr, SIZE.pitch);
+        reelL.show(ph()); reelR.show(ph());
         answerBar(); enable(false); hint.textContent = '';
         bindSwipe(sr);
         snd('roll3');
-        spinTo(reelL, item(stat, run.cur, true, SW), { delay: 0, cruiseT: 0.9, decelT: 1.0, n: 2.2 }, () => { stage.querySelector('.ub-who-l').innerHTML = whoLine(stat, run.cur); });
-        spinTo(reelR, item(stat, run.next, false, SW), { delay: 0.12, cruiseT: 1.4, decelT: 1.4, n: 3.0, v1: 2.0 }, () => {
+        spinTo(reelL, run.cur, { delay: 0, cruiseT: 0.9, decelT: 1.0, n: 2.2 }, () => { stage.querySelector('.ub-who-l').innerHTML = whoLine(stat, run.cur); });
+        spinTo(reelR, run.next, { delay: 0.12, cruiseT: 1.4, decelT: 1.4, n: 3.0, v1: 2.0 }, () => {
           stage.querySelector('.ub-who-r').innerHTML = whoLine(stat, run.next);
           busy = false; enable(true);
-          hint.textContent = 'Swipe his shirt up for higher, down for lower, or tap below';
+          hint.textContent = `Swipe the ${isClub(stat) ? 'card' : 'shirt'} up for higher, down for lower, or tap below`;
           later(() => tips(), 450);
         });
       }
       // first-time tips, one at a time, each once ever (D2T.tips)
       const tips = () => D2T.tips([
         ['ub-guess', stage.querySelector('.ub-r .sp-node.is-hit') || stage.querySelector('.ub-r'), 'Higher or lower?'],
-        ['ub-swipe', stage.querySelector('.ub-r'), 'Swipe the shirt up or down', { place: 'below' }],
+        ['ub-swipe', stage.querySelector('.ub-r'), 'Swipe it up or down', { place: 'below' }],
         ['ub-run', streakEl, 'One wrong and the run is over', { place: 'below', side: 'right' }]
       ]);
       const numEl = () => stage.querySelector('.ub-r .sp-node.is-hit .ub-num') || stage.querySelector('.ub-r .ub-num');
+      // the hidden number rolls up to the real one; shirts resize it by its digits, club cards drop to the 3-digit size
       function countUp(el, to, ms, done) {
-        if (!el || reduced) { if (el) { el.textContent = to; el.classList.remove('q'); } done(); return; }
-        el.classList.remove('q'); const t0 = performance.now();
+        if (!el) { done(); return; }
+        el.classList.remove('q');
+        if (el.tagName.toLowerCase() === 'text') { el.setAttribute('font-size', NS(to)); el.setAttribute('y', NY(to)); } else if (String(to).length > 2) el.classList.add('w3');
+        if (reduced) { el.textContent = to; done(); return; }
+        const t0 = performance.now();
         const step = (t) => { const p = Math.min(1, (t - t0) / ms); el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))); if (p < 1) rafs.push(requestAnimationFrame(step)); else { el.classList.add('ub-pop'); done(); } };
         rafs.push(requestAnimationFrame(step));
       }
@@ -250,7 +300,7 @@
         if (!run || busy) return;
         busy = true; enable(false); snd('tap');
         const a = run.stat.val(run.cur), b = run.stat.val(run.next), right = higher ? b > a : b < a;
-        countUp(numEl(), b, 520, () => {
+        countUp(numEl(), b, 650, () => {
           stage.querySelector('.ub-r').classList.add(right ? 'ok' : 'bad');
           if (right) win(); else { snd('buzzer'); later(over, reduced ? 200 : 950); }
         });
@@ -269,25 +319,26 @@
         fly.animate([{ transform: 'translate(0,0) scale(1)', opacity: 1 }, { transform: `translate(${to.left - from.left - from.width / 2 + 24}px,${to.top - from.top - 30}px) scale(.6)`, opacity: .2 }], { duration: 520, easing: 'cubic-bezier(.5,0,.3,1)' }).onfinish = () => { fly.remove(); done(); };
       }
       function advance() {
+        if (!run) return;
         run.cur = run.next;
         const nxt = pickNext();
         if (!nxt) { over(true); return; }
         run.next = nxt; run.used.add(nxt);
         const sl = stage.querySelector('.ub-l'), sr = stage.querySelector('.ub-r');
         sr.classList.remove('ok');
-        // the shirt you got right slides across to the left, then the right reel spins in the next one
-        reelL.show(item(run.stat, run.cur, true, SW)); sl.classList.add('is-set');
+        // the card you got right slides across to the left, then the right reel spins in the next one
+        reelL.show(item(run.stat, run.cur, true, SIZE.w)); sl.classList.add('is-set'); sl.style.setProperty('--sp-accent', accentOf(run.cur));
         stage.querySelector('.ub-who-l').innerHTML = whoLine(run.stat, run.cur); stage.querySelector('.ub-who-r').innerHTML = '';
         if (!reduced) { const dx = sr.getBoundingClientRect().left - sl.getBoundingClientRect().left; sl.animate([{ transform: `translateX(${dx}px)` }, { transform: 'none' }], { duration: 380, easing: 'cubic-bezier(.5,0,.2,1)' }); }
-        reelR.show(`<div class="ub-ph">?</div>`); sr.classList.remove('is-set');
+        reelR.show(ph()); sr.classList.remove('is-set');
         snd('roll3');
-        spinTo(reelR, item(run.stat, run.next, false, SW), { delay: 0.15, cruiseT: 0.55, decelT: 1.0, n: 2.6, v1: 2.2 }, () => {
+        spinTo(reelR, run.next, { delay: 0.15, cruiseT: 0.55, decelT: 1.0, n: 2.6, v1: 2.2 }, () => {
           stage.querySelector('.ub-who-r').innerHTML = whoLine(run.stat, run.next);
           busy = false; enable(true); later(() => tips(), 300);
         });
       }
       function over(cleared) {
-        if (!root.isConnected) return;
+        if (!root.isConnected || !run) return;
         const s = run.stat, n = run.streak, prev = R.best[s.id] || 0, newBest = n > prev && n > 0;
         R.runs++; if (newBest) R.best[s.id] = n; save();
         if (newBest) snd('champions');
@@ -296,15 +347,15 @@
         const lead = cleared ? 'You got through every card in this deck.' : `<b>${D2T.esc(nm(b))}</b> had <b>${s.val(b)}</b>, <b>${D2T.esc(nm(a))}</b> had <b>${s.val(a)}</b>.`;
         const best = newBest ? ' A new best.' : prev ? ` Your best on ${s.big.toLowerCase()}: ${prev}.` : '';
         const text = `DROP2TOP Unbeaten Run\n${s.big} (Premier League): unbeaten in ${n}${newBest ? ', a new best' : ''}`;
-        const sh = D2T.sheet({ title: head, body: `<p class="fr-lead">${lead}${best}</p>
-          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="share">Share with your mates</button><button class="btn ub-again fr-btn-wide" data-k="again">Spin again</button></div>`, onClose: () => { if (root.isConnected && run) idle(); } });
+        const sh = D2T.sheet({ title: head, body: `<div class="ub-endbig"><b>${n}</b><span>Unbeaten${newBest ? ' · a new best' : ''}</span></div><p class="fr-lead">${lead}${best}</p>
+          <div class="fr-stack"><button class="btn ub-again fr-btn-wide" data-k="share">Share with your mates</button><button class="btn btn-ghost fr-btn-wide" data-k="again">Spin again</button></div>`, onClose: () => { if (root.isConnected && run) idle(); } });
         sh.body.querySelector('[data-k="again"]').onclick = () => { sh.close(); idle(); later(statSpin, 250); };
         sh.body.querySelector('[data-k="share"]').onclick = async () => {
           try { if (navigator.share) { await navigator.share({ text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
           try { await navigator.clipboard.writeText(text); sh.body.querySelector('.fr-lead').textContent = 'Copied. Paste it into the group chat.'; } catch (e) { /* nothing to copy to */ }
         };
       }
-      // swipe the right shirt up for higher, down for lower
+      // swipe the right card up for higher, down for lower
       function bindSwipe(el) {
         let y0 = null, id = null;
         el.onpointerdown = (e) => { if (!run || busy) return; y0 = e.clientY; id = e.pointerId; el.setPointerCapture(id); };
@@ -318,4 +369,5 @@
 
   // the home screen card (screens/home.js), in the same shape as the other games' cards
   D2T.ubRecord = () => { const R = D2T.state.ub || { best: {}, runs: 0 }; const top = Math.max(0, ...Object.values(R.best || {})); return { runs: R.runs || 0, top }; };
+  D2T.ubMark = MARK;
 })();

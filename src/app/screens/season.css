@@ -59,10 +59,10 @@
 .se-reset .se-tr:not(.se-th):not(.se-landed) > span.se-n { color: var(--muted); }
 .se-reset .se-tr:not(.se-th):not(.se-landed) > span.se-pts { color: var(--white); }
 
-/* "New season" sweep */
+/* "Rewrite history" sweep, two lines (Craig, 12 Oct) */
 .se-newseason { position: absolute; left: 0; right: 0; top: 38%; z-index: 8; pointer-events: none; display: grid; place-items: center; opacity: 0; }
-.se-newseason span { font: var(--display); font-size: 54px; text-transform: uppercase; color: var(--se-acc); text-shadow: 0 6px 30px rgba(0,0,0,.9); white-space: nowrap; transform: translateX(60%) skewX(-8deg); }
-.se-newseason::before { content: ''; position: absolute; left: -10%; right: -10%; top: 50%; height: 84px; margin-top: -42px; background: linear-gradient(90deg, transparent, rgba(0,0,0,.85) 20%, rgba(0,0,0,.85) 80%, transparent); }
+.se-newseason span { font: var(--display); font-size: 54px; line-height: .92; text-align: center; text-transform: uppercase; color: var(--se-acc); text-shadow: 0 6px 30px rgba(0,0,0,.9); white-space: nowrap; transform: translateX(60%) skewX(-8deg); }
+.se-newseason::before { content: ''; position: absolute; left: -10%; right: -10%; top: 50%; height: 136px; margin-top: -68px; background: linear-gradient(90deg, transparent, rgba(0,0,0,.85) 20%, rgba(0,0,0,.85) 80%, transparent); }
 .se-newseason span { position: relative; }
 .se-newseason.se-go { animation: seFlashBox 2.6s ease both; }
 .se-newseason.se-go span { animation: seFlashText 2.6s cubic-bezier(.2,.8,.2,1) both; }
