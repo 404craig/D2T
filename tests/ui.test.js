@@ -302,7 +302,8 @@ fs.mkdirSync(OUT, { recursive: true });
   }
   check(await page.evaluate(() => { const S = window.D2T.state.g433, SL = ["GK", "DEF", "DEF", "DEF", "DEF", "MID", "MID", "MID", "FWD", "FWD", "FWD"]; return new Set(S.filled.map((p) => p.slot)).size === 11 && S.filled.every((p) => SL[p.slot] === p.pos); }), "433: a player sits in the wrong position or two share a shirt");
   check(await page.evaluate(() => { const G4 = window.D2T.game.g433, need = G4.list("FWD")[40].goals; return G4.canGift("FWD", need) && [0, 1, 2, 3, 4].every(() => G4.drawOpen({ FWD: 1 }, [], need).some((p) => p.goals === need)); }), "433: the last-shot gift did not offer the exact player");
-  await wait(4500); await shot("50-433-end");
+  // the sheet opens only after the ending (longer when the total breaks through 433), so wait for it rather than a fixed time
+  await page.waitForSelector(".sheet", { timeout: 15000 }).catch(() => {}); await wait(400); await shot("50-433-end");
   check(await page.evaluate(() => window.D2T.state.g433.filled.length === 11 && window.D2T.game.g433.record().games === 1), "433: the game did not fill 11 shirts and record a result");
   check(await page.evaluate(() => window.D2T.state.g433.filled.every((p) => window.D2T.state.g433.filled.filter((q) => q.name === p.name).length === 1)), "433: the same player appeared twice");
   check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, recBefore), "433 changed Classic's record");
