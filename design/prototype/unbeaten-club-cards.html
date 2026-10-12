@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D2T Unbeaten Club Cards</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<style>
+  /* Unbeaten Run club-stat cards in the Classic club-pick shield, bigger and two to a row, landing with the same reel as the club spin.
+     Three layouts, each with the crest top right and the stat in the middle. */
+  :root { color-scheme: dark; --c: #22D3EE; --ct: #8BEAF7; --soft: #CFCFD6; --muted: #8E8E99; --line: #26262C; --ease-out: cubic-bezier(.2, .8, .2, 1); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #08080A; color: #fff; font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 1320px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 28px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
+  .head p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 96ch; }
+  .row { display: flex; gap: 26px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .opt { width: 390px; max-width: 100%; display: flex; flex-direction: column; gap: 10px; }
+  .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: #12F06C; }
+  .opt-h h3 { font: 900 italic 21px/1.05 'Exo 2'; margin: 3px 0; }
+  .opt-h p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; min-height: 76px; }
+  .phone { position: relative; width: 390px; max-width: 100%; height: 780px; border-radius: 26px; background: #000; box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,.6); overflow: hidden; display: flex; flex-direction: column; isolation: isolate; }
+
+  /* top bar and head, as the other Unbeaten Run pages */
+  .tb { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 14px 16px 8px; }
+  .logo { display: block; height: 26px; aspect-ratio: 857 / 241; background: #fff; -webkit-mask: url('assets/logo/short.png') center / contain no-repeat; mask: url('assets/logo/short.png') center / contain no-repeat; }
+  .mtag { font: 900 italic 15px/1 'Exo 2'; letter-spacing: .04em; text-transform: uppercase; color: #0A0A0A; background: var(--c); padding: 5px 10px 4px; border-radius: 5px; transform: skewX(-10deg); white-space: nowrap; }
+  .mtag span { display: inline-block; transform: skewX(10deg); }
+  .acct { justify-self: end; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: #0E0E10; display: grid; place-items: center; }
+  .acct svg { width: 18px; height: 18px; }
+  .ghead { display: flex; justify-content: space-between; align-items: flex-end; padding: 2px 16px 10px; }
+  .ghead .l b { display: block; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+  .ghead .l i { font-style: normal; font-size: 11px; font-weight: 700; color: var(--muted); }
+  .ghead .l i em { font-style: normal; color: var(--ct); }
+  .ghead .r { text-align: right; }
+  .ghead .r b { font: 900 italic 40px/1 'Exo 2'; color: var(--c); display: inline-block; }
+  .ghead .r b.bump { animation: bump .45s cubic-bezier(.3, 1.4, .5, 1); }
+  @keyframes bump { 40% { transform: scale(1.25); } }
+  .ghead .r i { display: block; font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
+
+  /* stage: two reels side by side */
+  .stage { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; }
+  .floor { position: absolute; left: 50%; top: 50%; width: 380px; height: 340px; transform: translate(-50%, -50%); pointer-events: none; background: radial-gradient(60% 50% at 50% 50%, rgba(255,255,255,.045) 0%, rgba(255,255,255,0) 100%); }
+  .pair { position: relative; display: flex; gap: 12px; }
+  .vs { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 38px; height: 38px; border-radius: 50%; background: #000; border: 1px solid var(--line); display: grid; place-items: center; font: 900 italic 13px/1 'Exo 2'; color: var(--ct); z-index: 6; }
+  .slot { --cw: 172px; --chh: 287px; position: relative; width: var(--cw); height: var(--chh); flex-shrink: 0; }
+  .glow { position: absolute; left: 50%; top: 50%; width: 280px; height: 380px; transform: translate(-50%, -50%); pointer-events: none; opacity: 0; z-index: 0;
+    background: radial-gradient(48% 44% at 50% 50%, var(--acc, #fff) 0%, rgba(0,0,0,0) 72%); filter: blur(8px); transition: opacity .4s var(--ease-out); }
+  .slot.is-set .glow { opacity: .55; }
+  .win { position: absolute; left: 0; top: -60px; width: var(--cw); height: calc(var(--chh) + 120px); overflow: hidden; z-index: 1;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 17%, #000 83%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 17%, #000 83%, transparent 100%); }
+  .slot.is-set .win { -webkit-mask-image: none; mask-image: none; }
+  .strip { position: absolute; left: 0; top: 60px; width: var(--cw); height: var(--chh); transform-origin: 50% 50%; will-change: transform, filter; }
+  .node { position: absolute; left: 0; top: 0; width: var(--cw); height: var(--chh); will-change: transform; transition: opacity .3s var(--ease-out); }
+  .node.is-gone { opacity: 0; }
+  .node .d2c { filter: none; }
+  .slot.is-set .node.is-hit .d2c { filter: var(--glow, none); }
+  .streak { position: absolute; inset: 0; pointer-events: none; opacity: 0; z-index: 2; mix-blend-mode: screen;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.14) 38%, rgba(255,255,255,.22) 50%, rgba(255,255,255,.14) 62%, rgba(255,255,255,0) 100%); }
+  .slot.is-hit .strip { animation: impact .46s cubic-bezier(.2, .9, .3, 1.3) both; }
+  @keyframes impact { 0% { transform: scale(1); } 28% { transform: scale(1.065); } 100% { transform: scale(1); } }
+  .sweep { position: absolute; top: -20%; left: -60%; width: 40%; height: 140%; pointer-events: none; z-index: 3; opacity: 0; transform: rotate(16deg); background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.75) 50%, rgba(255,255,255,0) 100%); }
+  .slot.is-hit .sweep { animation: sweep .55s cubic-bezier(.3, .7, .2, 1) .04s both; }
+  @keyframes sweep { 0% { left: -60%; opacity: 0; } 15% { opacity: 1; } 100% { left: 130%; opacity: 0; } }
+  .slot.is-hit .glow { animation: glowPop .6s var(--ease-out) both; }
+  @keyframes glowPop { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.6); } 35% { opacity: 1; } 100% { opacity: .55; transform: translate(-50%, -50%) scale(1); } }
+  /* the known card slides across from the right when a round moves on */
+  .slot.slide .strip { animation: slideIn .42s var(--ease-out) both; }
+  @keyframes slideIn { from { transform: translateX(calc(100% + 12px)); } to { transform: none; } }
+  .slot.right { cursor: pointer; }
+  .slot.win-ok .node.is-hit .d2c { filter: drop-shadow(0 0 14px rgba(18,240,108,.8)); }
+  .slot.win-no .node.is-hit .d2c { filter: drop-shadow(0 0 14px rgba(255,77,90,.9)); }
+
+  /* the shield, from the live cards (base.css) */
+  .d2c { --w: 114px; position: relative; width: var(--w); height: calc(var(--w) * 1.667); font-size: calc(var(--w) / 11.4); flex-shrink: 0; filter: var(--glow, none); -webkit-user-select: none; user-select: none; }
+  .d2c-rim { position: absolute; inset: 0; background: var(--rim); -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20114%20190'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M1.77%2010.23%20L10.23%201.77%20Q12%200%2014.5%200%20L99.5%200%20Q102%200%20103.77%201.77%20L112.23%2010.23%20Q114%2012%20114%2014.5%20L114%20167%20Q114%20170%20111.17%20170.99%20L60.77%20188.68%20Q57%20190%2053.23%20188.68%20L2.83%20170.99%20Q0%20170%200%20167%20L0%2014.5%20Q0%2012%201.77%2010.23Z'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20114%20190'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M1.77%2010.23%20L10.23%201.77%20Q12%200%2014.5%200%20L99.5%200%20Q102%200%20103.77%201.77%20L112.23%2010.23%20Q114%2012%20114%2014.5%20L114%20167%20Q114%20170%20111.17%20170.99%20L60.77%20188.68%20Q57%20190%2053.23%20188.68%20L2.83%20170.99%20Q0%20170%200%20167%20L0%2014.5%20Q0%2012%201.77%2010.23Z'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat; }
+  .d2c-face { position: absolute; inset: 0.2em; overflow: hidden; background: var(--face); color: var(--ink-c); -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20110%20186'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M0.92%2010.08%20L10.08%200.92%20Q11%200%2012.3%200%20L97.7%200%20Q99%200%2099.92%200.92%20L109.08%2010.08%20Q110%2011%20110%2012.3%20L110%20165.2%20Q110%20167%20108.3%20167.59%20L57.65%20185.09%20Q55%20186%2052.35%20185.09%20L1.7%20167.59%20Q0%20167%200%20165.2%20L0%2012.3%20Q0%2011%200.92%2010.08Z'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20110%20186'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M0.92%2010.08%20L10.08%200.92%20Q11%200%2012.3%200%20L97.7%200%20Q99%200%2099.92%200.92%20L109.08%2010.08%20Q110%2011%20110%2012.3%20L110%20165.2%20Q110%20167%20108.3%20167.59%20L57.65%20185.09%20Q55%20186%2052.35%20185.09%20L1.7%20167.59%20Q0%20167%200%20165.2%20L0%2012.3%20Q0%2011%200.92%2010.08Z'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat; }
+  .d2c-tex { position: absolute; inset: 0; background: repeating-linear-gradient(135deg, rgba(255,255,255,0.10) 0 0.2em, rgba(255,255,255,0) 0.2em 0.7em); }
+  .d2c-club .d2c-tex { background: var(--tex); -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 60%); mask-image: linear-gradient(180deg, #000 0%, transparent 60%); }
+  .d2c-hi { position: absolute; inset: 0; background: radial-gradient(120% 55% at 15% 0%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 60%); }
+  .d2c-holo { position: absolute; inset: 0; background: var(--holo, none); mix-blend-mode: screen; }
+  .d2t-shine { position: absolute; top: -30%; left: -70%; width: 45%; height: 160%; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%); transform: rotate(18deg); animation: d2tShine 4.5s ease-in-out infinite; pointer-events: none; }
+  @keyframes d2tShine { 0% { left: -70%; } 30% { left: 130%; } 100% { left: 130%; } }
+  /* a slower beat: the same sweep (about 1.4s), then a long rest (home's club fan and continue cards) */
+  .d2t-shine.slow { animation-name: d2tShineSlow; animation-duration: 10s; }
+  @keyframes d2tShineSlow { 0% { left: -70%; } 14% { left: 130%; } 100% { left: 130%; } }
+  .d2c-club .d2c-tex { background: var(--tex); -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 60%); mask-image: linear-gradient(180deg, #000 0%, transparent 60%); }
+  .d2c-club .d2c-face { color: #fff; }
+  .d2c-body { position: relative; display: flex; flex-direction: column; height: 100%; box-sizing: border-box; padding: 1.1em 0.9em 2.6em; }
+  .d2c-grow { flex-grow: 1; }
+  .num { font-weight: 900; font-style: italic; line-height: .9; letter-spacing: -0.02em; text-shadow: 0 .08em .3em rgba(0,0,0,.45); }
+  .num.q { animation: qp 1.6s ease-in-out infinite; }
+  @keyframes qp { 50% { opacity: .5; } }
+  .unit { font-size: .82em; font-weight: 800; letter-spacing: .14em; opacity: .8; }
+  .season { font-size: 1em; font-weight: 800; padding: .2em .65em; border-radius: .6em; background: rgba(0,0,0,.35); }
+  .cname { font-weight: 900; font-style: italic; line-height: 1.02; text-transform: uppercase; text-shadow: 0 .2em .6em rgba(0,0,0,.5); white-space: nowrap; }
+  .crest { object-fit: contain; filter: drop-shadow(0 0 .06em rgba(255,255,255,.9)) drop-shadow(0 0 .25em rgba(255,255,255,.35)) drop-shadow(0 .3em .4em rgba(0,0,0,.45)); }
+
+  /* A: name and season top left, crest top right, the number in the middle, the stat named near the point */
+  .A .top { display: flex; justify-content: space-between; align-items: flex-start; gap: .3em; }
+  .A .who { display: flex; flex-direction: column; align-items: flex-start; gap: .45em; min-width: 0; padding-top: .2em; }
+  .A .cname { font-size: 1.15em; }
+  .A .crest { width: 3.7em; height: 3.7em; flex: none; margin: -.2em -.2em 0 0; }
+  .A .mid { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .A .num { font-size: 5em; }
+  .A .num.w3 { font-size: 4.1em; }
+  .A .foot { display: flex; flex-direction: column; align-items: center; }
+  .A .hr { width: 60%; height: .1em; background: rgba(255,255,255,.25); margin-bottom: .5em; }
+  .A .unit { color: var(--club-text); opacity: 1; font-size: .95em; }
+
+  /* B: big faded crest behind, crest top right in a glass circle, season top left, the name across the bottom like Classic */
+  .B .wm { position: absolute; left: 50%; top: 52%; width: 13em; height: 13em; transform: translate(-50%, -50%); object-fit: contain; opacity: .13; pointer-events: none; }
+  .B .top { display: flex; justify-content: space-between; align-items: center; }
+  .B .disc { width: 3.6em; height: 3.6em; border-radius: 50%; background: rgba(0,0,0,.28); box-shadow: inset 0 0 0 .1em rgba(255,255,255,.25); display: grid; place-items: center; margin: -.3em -.3em 0 0; }
+  .B .disc .crest { width: 2.7em; height: 2.7em; }
+  .B .mid { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3em; }
+  .B .num { font-size: 5.6em; }
+  .B .num.w3 { font-size: 4.5em; }
+  .B .cname { font-size: 1.4em; text-align: center; }
+  .B .bot { display: flex; flex-direction: column; align-items: center; }
+
+  /* C: the crest bigger and tipped over the corner, the number in a dark band across the card, name and season low */
+  .C .d2c-body { padding-top: 1.3em; }
+  .C .crest { position: absolute; right: .55em; top: .55em; width: 4.3em; height: 4.3em; transform: rotate(8deg); z-index: 2; }
+  .C .season { align-self: flex-start; }
+  .C .band { margin: auto -0.9em 0; padding: .55em 0 .5em; background: linear-gradient(90deg, rgba(0,0,0,.15), rgba(0,0,0,.5) 50%, rgba(0,0,0,.15)); box-shadow: inset 0 .08em 0 rgba(255,255,255,.18), inset 0 -.08em 0 rgba(255,255,255,.12); display: flex; flex-direction: column; align-items: center; }
+  .C .num { font-size: 4.7em; }
+  .C .num.w3 { font-size: 3.9em; }
+  .C .unit { margin-top: .25em; }
+  .C .bot { margin-top: auto; padding-top: .9em; display: flex; flex-direction: column; align-items: center; }
+  .C .cname { font-size: 1.3em; }
+
+  /* bar */
+  .hint { text-align: center; font-size: 12px; color: var(--muted); padding: 0 16px 6px; min-height: 18px; }
+  .bar { display: flex; align-items: center; gap: 10px; padding: 8px 16px 18px; }
+  .hl { flex: 1; height: 56px; border-radius: 28px; display: flex; align-items: center; justify-content: center; gap: 8px; font: 900 italic 19px/1 'Exo 2'; text-transform: uppercase; border: 0; cursor: pointer; transition: opacity .2s, transform .15s; }
+  .hl:active { transform: scale(.97); }
+  .hl[disabled] { opacity: .35; }
+  .hl.lo { border: 2px solid var(--c); color: var(--c); background: transparent; } .hl.hi { background: var(--c); color: #0A0A0A; }
+  .hl svg { width: 20px; height: 20px; }
+  .circ { width: 54px; height: 54px; border-radius: 50%; border: 1px solid var(--line); background: #0E0E10; display: grid; place-items: center; flex: none; color: #fff; cursor: pointer; }
+  .circ svg { width: 22px; height: 22px; }
+  @media (prefers-reduced-motion: reduce) { .slot.is-hit .strip, .slot.is-hit .sweep, .slot.is-hit .glow, .slot.slide .strip, .num.q { animation: none; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <h1>Unbeaten Run club cards</h1>
+    <p>Club stats on the Classic club-pick shield, bigger and two to a row. Both cards reel in and land with the club spin's motion, impact, light sweep and glow. Tap Higher or Lower to play: the number rolls up, the known card slides across, the next club reels in. Crest top right and the stat in the middle on all three. The 128px crests are shown at 50 to 64px with a thin light edge so a red crest still reads on a red card, so they stay sharp. Points are real and come from every result in the data (Man City's 100 in 2017/18, Derby's 11 in 2007/08 and so on); a club that went down shows as plainly as one that won it.</p>
+  </div>
+  <div class="row" id="opts"></div>
+</div>
+<script src="data/data.js"></script>
+<script>
+(function () {
+  const D = window.D2T_DATA;
+  const ACCT = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.6-3.6 4.6-5.2 8-5.2s6.4 1.6 8 5.2"/></svg>';
+  const UP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15l7-7 7 7"/></svg>';
+  const DOWN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg>';
+  const REPLAY = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
+  // points in a season, counted from every result in data/source/pl_results.csv (no deductions in any of these seasons)
+  const RUN = [['Man City', '2017/18', 100], ['Liverpool', '2019/20', 99], ['Leicester', '2015/16', 81], ['Arsenal', '2003/04', 90], ['Derby', '2007/08', 11],
+    ['Chelsea', '2004/05', 95], ['Watford', '1999/00', 24], ['Spurs', '2016/17', 86], ['Sunderland', '2005/06', 15], ['Newcastle', '1995/96', 78],
+    ['Cardiff', '2018/19', 34], ['Middlesbrough', '1992/93', 44], ['Blackpool', '2010/11', 39]].map(([club, season, v]) => ({ club, season, v }));
+  const FILL = ['Arsenal', 'Aston Villa', 'Blackburn', 'Bolton', 'Brighton', 'Burnley', 'Charlton', 'Chelsea', 'Everton', 'Fulham', 'Ipswich', 'Leeds', 'Man Utd', 'Norwich', 'Southampton', 'Stoke', 'West Ham', 'Wolves', 'Wigan', 'Swansea', 'Hull', 'Reading', 'Portsmouth', 'QPR']
+    .filter((n) => D.clubs[n]);
+
+  // club paint, as the live club cards
+  const hex = (h) => { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255]; };
+  const toHex = (rgb) => '#' + rgb.map((v) => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0')).join('');
+  const mix = (a, b, t) => toHex(hex(a).map((v, i) => v + (hex(b)[i] - v) * t));
+  const paint = (a) => ({ face: `linear-gradient(170deg, ${mix(a, '#FFFFFF', .55)} 0%, ${a} 22%, ${mix(a, '#000000', .32)} 42%, ${mix(a, '#000000', .8)} 66%, ${mix(a, '#000000', .92)} 100%)`,
+    rim: `linear-gradient(170deg, ${mix(a, '#FFFFFF', .7)} 0%, ${a} 40%, ${mix(a, '#000000', .75)} 100%)`,
+    tex: 'repeating-linear-gradient(135deg, rgba(255,255,255,.12) 0 .2em, rgba(255,255,255,0) .2em .7em)', glow: `drop-shadow(0 0 10px ${a}55)` });
+  const fit = (n, max, base) => { const w = Math.max(...n.split(/\s+/).map((x) => x.length)); return w > max ? ` style="font-size:${(base * max / w).toFixed(2)}em"` : ''; };
+
+  const W = 172;
+  const card = (L, c, shown) => {
+    const k = D.clubs[c.club], P = paint(k.accent), v = shown ? String(c.v) : '?', name = k.name, cr = k.crest;
+    const num = `<span class="num${shown ? '' : ' q'}${v.length > 2 ? ' w3' : ''}">${v}</span>`;
+    const inner = {
+      A: `<div class="top"><div class="who"><span class="cname"${fit(name, 9, 1.15)}>${name}</span><span class="season">${c.season}</span></div><img class="crest" src="${cr}" alt=""></div>
+        <div class="mid">${num}</div><div class="foot"><span class="hr"></span><span class="unit">POINTS</span></div>`,
+      B: `<img class="wm" src="${cr}" alt=""><div class="top"><span class="season">${c.season}</span><span class="disc"><img class="crest" src="${cr}" alt=""></span></div>
+        <div class="mid"><span class="unit">POINTS</span>${num}</div><div class="bot"><span class="cname"${fit(name, 10, 1.4)}>${name}</span></div>`,
+      C: `<img class="crest" src="${cr}" alt=""><span class="season">${c.season}</span><div class="band">${num}<span class="unit">POINTS</span></div>
+        <div class="bot"><span class="cname"${fit(name, 10, 1.3)}>${name}</span></div>`
+    }[L];
+    return `<div class="d2c d2c-club ${L}" style="--w:${W}px;--face:${P.face};--rim:${P.rim};--tex:${P.tex};--glow:${P.glow};--club-text:${k.text}"><div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2t-shine slow"></span><div class="d2c-body">${inner}</div></div></div>`;
+  };
+  const filler = (L) => { const n = FILL[Math.floor(Math.random() * FILL.length)]; return card(L, { club: n, season: '', v: 0 }, false); };
+
+  // ---------- the reel, ported from the club spin (screens/spin.js), sized for the bigger card ----------
+  const H = Math.round(W * 1.667), PITCH = H + 8, NODES = 5;
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  function profile(o) {
+    const P = Object.assign({ accelT: .3, vmax: 18, decelT: 1.1, n: 2.2, v1: 2.4, z: 5.2, w: 15, delay: 0, settleT: .75, cruiseT: 1 }, o);
+    P.accelD = P.vmax * P.accelT / 2; P.decelD = P.decelT * (P.v1 + (P.vmax - P.v1) / (P.n + 1));
+    P.target = Math.ceil(P.accelD + P.vmax * P.cruiseT + P.decelD); P.cruiseT = (P.target - P.accelD - P.decelD) / P.vmax;
+    P.wd = Math.sqrt(P.w * P.w - P.z * P.z); P.landAt = P.delay + P.accelT + P.cruiseT + P.decelT; return P;
+  }
+  function sample(P, t) {
+    t -= P.delay; if (t <= 0) return { p: 0, v: 0, done: false };
+    if (t < P.accelT) return { p: P.vmax * t * t / (2 * P.accelT), v: P.vmax * t / P.accelT };
+    t -= P.accelT; if (t < P.cruiseT) return { p: P.accelD + P.vmax * t, v: P.vmax };
+    t -= P.cruiseT;
+    if (t < P.decelT) { const u = t / P.decelT; return { p: P.accelD + P.vmax * P.cruiseT + P.decelT * (P.v1 * u + (P.vmax - P.v1) * (1 - Math.pow(1 - u, P.n + 1)) / (P.n + 1)), v: P.v1 + (P.vmax - P.v1) * Math.pow(1 - u, P.n) }; }
+    t -= P.decelT; const e = Math.exp(-P.z * t);
+    return { p: P.target + (P.v1 / P.wd) * e * Math.sin(P.wd * t), v: (P.v1 / P.wd) * e * (P.wd * Math.cos(P.wd * t) - P.z * Math.sin(P.wd * t)), done: t > P.settleT };
+  }
+  let fid = 0;
+  class Reel {
+    constructor(slot) {
+      this.slot = slot; this.id = 'mb' + (++fid);
+      slot.innerHTML = `<svg width="0" height="0" style="position:absolute"><filter id="${this.id}" x="-20%" y="-40%" width="140%" height="180%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="0 0"/></filter></svg><div class="glow"></div><div class="win"><div class="strip">${'<div class="node"></div>'.repeat(NODES)}<div class="streak"></div></div><div class="sweep"></div></div>`;
+      this.win = slot.querySelector('.win'); this.strip = slot.querySelector('.strip'); this.streak = slot.querySelector('.streak');
+      this.nodes = [...slot.querySelectorAll('.node')]; this.gauss = slot.querySelector('feGaussianBlur'); this.seq = []; this.filtered = false;
+    }
+    load(seq) { this.seq = seq; this.nodes.forEach((n) => { n.dataset.vi = ''; n.classList.remove('is-hit', 'is-gone'); }); this.draw(0, 0); }
+    draw(p, v) {
+      const c = Math.round(p);
+      for (let k = -2; k <= 2; k++) { const vi = c + k, n = this.nodes[((vi % NODES) + NODES) % NODES];
+        if (n.dataset.vi !== String(vi)) { n.dataset.vi = String(vi); n.innerHTML = this.seq[vi] || ''; }
+        n.style.transform = `translate3d(0, ${((vi - p) * PITCH).toFixed(2)}px, 0)`; }
+      const pxf = Math.abs(v) * PITCH / 60, sd = clamp(pxf * .3 - 1.2, 0, 22);
+      if (sd < .4) { if (this.filtered) { this.strip.style.filter = ''; this.filtered = false; } }
+      else { this.gauss.setAttribute('stdDeviation', `0 ${sd.toFixed(1)}`); if (!this.filtered) { this.strip.style.filter = `url(#${this.id})`; this.filtered = true; } }
+      const k = clamp(pxf / 80, 0, 1); this.streak.style.opacity = (k * k * .9).toFixed(3);
+      this.win.style.transform = k > .02 ? `scaleY(${(1 + .05 * k).toFixed(4)})` : '';
+    }
+    hit(acc, target) {
+      this.slot.style.setProperty('--acc', acc);
+      this.slot.classList.remove('is-hit'); void this.slot.offsetWidth; this.slot.classList.add('is-hit');
+      this.nodes.forEach((n) => n.classList.add(n.dataset.vi === String(target) ? 'is-hit' : 'is-gone'));
+      setTimeout(() => { this.slot.classList.add('is-set'); this.slot.classList.remove('is-hit'); }, 320);
+    }
+    still(html) { this.load([html]); this.nodes.forEach((n) => { if (n.dataset.vi === '0') n.classList.add('is-hit'); }); this.slot.classList.add('is-set'); }
+    reset() { this.slot.classList.remove('is-set', 'is-hit', 'slide', 'win-ok', 'win-no'); }
+    spin(L, html, o, onLand) {
+      this.reset();
+      const P = profile(o), seq = [this.seq[0] || filler(L)];
+      for (let i = 1; i < P.target; i++) seq.push(filler(L));
+      seq.push(html); for (let i = 0; i < 3; i++) seq.push(filler(L));
+      this.load(seq);
+      const t0 = performance.now(); let landed = false;
+      const step = (now) => { const t = (now - t0) / 1000, s = sample(P, t); this.draw(s.p, s.v);
+        if (!landed && t >= P.landAt) { landed = true; this.hit(o.acc, P.target); onLand && onLand(); }
+        if (!s.done) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    }
+  }
+
+  // ---------- one option: a playable game page ----------
+  const OPTS = [['A', 'Classic, turned round', 'The club-pick card as it is, with the crest moved top right and the name and season top left. The number fills the middle; the stat is named near the point in the club\'s text colour, where Classic says Real finish.'],
+    ['B', 'Big faded crest, name low', 'The crest faded large behind the number (the earlier idea, on the shield), the sharp crest top right in a glass circle, the season top left and the club name across the bottom like the Classic card.'],
+    ['C', 'Crest tipped over the corner', 'A bigger crest tilted in the top right corner, the season top left, the number on a dark band across the card so it reads like a scoreboard, the name low on the card.']];
+  document.getElementById('opts').innerHTML = OPTS.map(([L, h, d]) => `<div class="opt"><div class="opt-h"><span class="tag">OPTION ${L}</span><h3>${h}</h3><p>${d}</p></div>
+    <div class="phone" data-l="${L}"><div class="tb"><span class="logo"></span><span class="mtag"><span>Unbeaten Run</span></span><span class="acct">${ACCT}</span></div>
+    <div class="ghead"><span class="l"><b>Points in a season</b><i>Premier League · <em>one wrong and it is over</em></i></span><span class="r"><b class="run">0</b><i>UNBEATEN</i></span></div>
+    <div class="stage"><div class="floor"></div><div class="pair"><div class="slot left"></div><div class="slot right"></div><span class="vs">VS</span></div></div>
+    <div class="hint">Higher or lower than ${'Man City'}?</div>
+    <div class="bar"><button class="hl lo">${DOWN}Lower</button><button class="hl hi">${UP}Higher</button><button class="circ" aria-label="Replay">${REPLAY}</button></div></div></div>`).join('');
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.phone').forEach((ph) => {
+    const L = ph.dataset.l, [ls, rs] = ph.querySelectorAll('.slot'), left = new Reel(ls), right = new Reel(rs);
+    const btns = ph.querySelectorAll('.hl'), runEl = ph.querySelector('.run'), hint = ph.querySelector('.hint');
+    let i = 0, run = 0, busy = true;
+    const acc = (c) => D.clubs[c.club].accent;
+    const ask = () => { hint.textContent = `Did ${D.clubs[RUN[(i + 1) % RUN.length].club].name} get more or fewer than ${RUN[i].v}?`; busy = false; btns.forEach((b) => { b.disabled = false; }); };
+    const lock = () => { busy = true; btns.forEach((b) => { b.disabled = true; }); };
+    const start = () => {
+      lock(); i = 0; run = 0; runEl.textContent = '0'; hint.textContent = '';
+      const a = RUN[0], b = RUN[1];
+      if (reduced) { left.still(card(L, a, true)); right.still(card(L, b, false)); ask(); return; }
+      left.spin(L, card(L, a, true), { cruiseT: .7, decelT: 1, acc: acc(a) });
+      right.spin(L, card(L, b, false), { delay: .1, cruiseT: 1.1, decelT: 1.4, n: 3, v1: 2, acc: acc(b) }, () => setTimeout(ask, 250));
+    };
+    const guess = (hi) => {
+      if (busy) return; lock();
+      const a = RUN[i], b = RUN[(i + 1) % RUN.length], ok = hi ? b.v >= a.v : b.v <= a.v;
+      // the number rolls up to his real total on the right card
+      const el = rs.querySelector('.node.is-hit .num'); el.classList.remove('q'); if (String(b.v).length > 2) el.classList.add('w3');
+      const t0 = performance.now(), T = reduced ? 0 : 650;
+      const roll = (now) => { const u = T ? Math.min(1, (now - t0) / T) : 1; el.textContent = Math.round(b.v * (1 - Math.pow(1 - u, 3)));
+        if (u < 1) return requestAnimationFrame(roll);
+        rs.classList.add(ok ? 'win-ok' : 'win-no');
+        if (ok) { run++; runEl.textContent = run; runEl.classList.remove('bump'); void runEl.offsetWidth; runEl.classList.add('bump'); hint.textContent = 'Unbeaten. Next club.'; }
+        else hint.textContent = `Run over at ${run}. Tap replay to go again.`;
+        if (!ok) return;
+        setTimeout(() => {
+          i = (i + 1) % RUN.length; const c = RUN[(i + 1) % RUN.length];
+          left.reset(); left.still(card(L, b, true)); ls.style.setProperty('--acc', acc(b)); ls.classList.add('slide');
+          if (reduced) { right.still(card(L, c, false)); ask(); return; }
+          right.spin(L, card(L, c, false), { delay: .15, cruiseT: .8, decelT: 1.2, n: 2.6, acc: acc(c) }, () => setTimeout(ask, 250));
+        }, 900);
+      };
+      requestAnimationFrame(roll);
+    };
+    btns[0].onclick = () => guess(false); btns[1].onclick = () => guess(true);
+    ph.querySelector('.circ').onclick = start;
+    setTimeout(start, 400 + 250 * 'ABC'.indexOf(L));
+  });
+})();
+</script>
+</body>
+</html>
