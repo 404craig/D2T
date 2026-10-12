@@ -287,6 +287,11 @@ def main():
             path = os.path.join(ROOT, "assets", "crests", size, f)
             if os.path.exists(path):
                 crests.setdefault(c, {})[size] = "data:image/png;base64," + base64.b64encode(open(path, "rb").read()).decode()
+            # a white version for dark backgrounds, where a club's own crest is too dark to see (Derby, Spurs)
+            if meta.get("crestDark"):
+                path = os.path.join(ROOT, "assets", "crests", size, meta["crestDark"])
+                if os.path.exists(path):
+                    crests.setdefault(c, {})[size + "w"] = "data:image/png;base64," + base64.b64encode(open(path, "rb").read()).decode()
     with open(os.path.join(OUT, "crests.json"), "w", encoding="utf-8") as f:
         json.dump(crests, f, separators=(",", ":"))
     size = os.path.getsize(os.path.join(OUT, "game.json")) / 1e6

@@ -159,7 +159,8 @@
   "accent": "#FFFFFF",
   "ink": "#000000",
   "text": "#FFFFFF",
-  "code": "DER"
+  "code": "DER",
+  "crestDark": "derby_white.png"
  },
  "Everton": {
   "name": "Everton",
@@ -366,7 +367,8 @@
   "accent": "#FFFFFF",
   "ink": "#132257",
   "text": "#FFFFFF",
-  "code": "TOT"
+  "code": "TOT",
+  "crestDark": "spurs_white.png"
  },
  "Stoke": {
   "name": "Stoke",

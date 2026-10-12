@@ -4,17 +4,20 @@
 (function () {
   const D2T = window.D2T, G = window.D2T_GAME, E = window.D2TE, CR = window.D2T_CRESTS || {};
   const LV = ['bronze', 'silver', 'gold', 'baller', 'legend'];
-  const crestOf = (name) => (CR[name] && (CR[name]['128'] || CR[name]['72'])) || '';
+  // crest: for dark backgrounds (a white version where the club's own is too dark to see, Derby and Spurs);
+  // crestLight: the club's own crest, for light faces (club cards, bronze, silver and gold player cards, white discs).
+  const crestOf = (name) => (CR[name] && (CR[name]['128w'] || CR[name]['72w'] || CR[name]['128'] || CR[name]['72'])) || '';
+  const crestLightOf = (name) => (CR[name] && (CR[name]['128'] || CR[name]['72'])) || '';
   const meta = (name) => G.clubs[name] || { name, full: name, code: name.slice(0, 3).toUpperCase(), accent: '#12F06C', ink: '#000000', text: '#12F06C' };
   const GAME = D2T.game = {};
 
   // ---------- clubs ----------
   const clubs = {};
-  Object.keys(G.clubs).forEach((n) => { const m = meta(n); clubs[n] = { name: n, full: m.full || n, code: m.code, crest: crestOf(n), accent: m.accent, ink: m.ink, text: m.text }; });
+  Object.keys(G.clubs).forEach((n) => { const m = meta(n); clubs[n] = { name: n, full: m.full || n, code: m.code, crest: crestOf(n), crestLight: crestLightOf(n), accent: m.accent, ink: m.ink, text: m.text }; });
   // Club X: Craig's badge (assets/brand/club_x.png, embedded by build.py; the drawn shield is only a fallback), D2T green as its colour.
   const X_BADGE = window.D2T_CLUBX_BADGE || 'data:image/svg+xml,' + encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 116'><path d='M50 3 L94 18 V60 C94 86 74 104 50 113 C26 104 6 86 6 60 V18 Z' fill='#0E0E10' stroke='#12F06C' stroke-width='5'/><path d='M32 36 L68 80 M68 36 L32 80' stroke='#12F06C' stroke-width='11' stroke-linecap='round'/></svg>");
   clubs['Club X'] = { name: 'Club X', full: 'Club X', code: 'CLX', crest: X_BADGE, accent: '#12F06C', ink: '#000000', text: '#12F06C' };
-  GAME.club = (name) => clubs[name] || Object.assign({ crest: crestOf(name) }, meta(name));
+  GAME.club = (name) => clubs[name] || Object.assign({ crest: crestOf(name), crestLight: crestLightOf(name) }, meta(name));
 
   // ---------- the club pool: every relegated club-season ----------
   const pool = G.catalogue.map((c) => {
@@ -113,7 +116,7 @@
     keys.forEach((k, i) => { stats[k] = p.s6 ? p.s6[i] : null; });
     const two = !legend && p.c2 != null ? S.clubs[shown === p.c2 ? p.c : p.c2].name : null;
     return {
-      id: p.id, name: p.n, club: clubName, club2: two, crest: crestOf(clubName), pos: p.b, ovr: p.r, level: LV[p.lv || 0],
+      id: p.id, name: p.n, club: clubName, club2: two, crest: crestOf(clubName), crestLight: crestLightOf(clubName), pos: p.b, ovr: p.r, level: LV[p.lv || 0],
       apps: p.a, goals: p.g, assists: p.as, cleanSheets: p.cs, nat: p.nat, season: legend ? p.sk : S.season,
       provisional: p.src === 'f', stats, career: p.k != null && G.careers ? G.careers[p.k] : null
     };
