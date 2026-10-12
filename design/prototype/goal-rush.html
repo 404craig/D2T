@@ -59,6 +59,7 @@
   .tot1 .n b { font: 900 italic 28px/1 'Exo 2'; }
   .tot1 .n small { font: 900 italic 17px/1 'Exo 2'; color: #8E8E99; margin-left: 1px; }
   .tot1 .n em { font-style: normal; font-size: 11px; font-weight: 800; color: #8E8E99; margin-left: 5px; text-transform: uppercase; letter-spacing: .06em; }
+  .togo { display: block; text-align: right; font: 800 12px/1 'Exo 2'; color: var(--y-t); margin-top: 6px; }
   .tot1 i { font-style: normal; font-size: 12px; font-weight: 800; color: var(--y-t); }
   .tot2 { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
   .tot2 b { font: 900 italic 30px/1 'Exo 2'; color: var(--y); }
@@ -129,7 +130,7 @@
   </div>
   <div class="row" id="row"></div>
   <h2 style="font:900 italic 30px/1 'Exo 2';margin:10px 0 0">The goal tally: five ways</h2>
-  <p style="margin:0;color:#BDBDC6;font-size:15px;line-height:1.5;max-width:92ch">The bar fills left to right again, up to the target line. For the numbers on the right, each option shows the same moment twice: 52 of 352 early on, then 341 of 352 near the end. Option 1 is used in the phones above.</p>
+  <p style="margin:0;color:#BDBDC6;font-size:15px;line-height:1.5;max-width:92ch">The bar fills left to right again, up to the target line. For the numbers on the right, each option shows the same moment twice: 52 of 352 early on, then 341 of 352 near the end. The phones above use the chosen layout: 314/352 GOALS above the bar, 38 to go under it.</p>
   <div class="row" id="tallies"></div>
 </div>
 <script src="data/data.js"></script>
@@ -173,7 +174,7 @@
   const pitch = (f, filled, openFrom) => `<div class="pitch">${LINES}<span class="circle"></span><div class="paint">${f} GOALS</div><span class="shape">${f.split('').join('-')}</span>${slots(f).map(([lab, x, y], i) => {
     const p = filled[i];
     return `<div class="slot" style="left:${x}%;top:${y}%">${p ? shirt({ w: 50, p }) + `<span class="nm">${p.sur}</span>` : shirt({ w: 50, pos: lab, open: i >= openFrom || !p })}</div>`; }).join('')}</div>`;
-  const tally = (t, target, player, left, respins) => `<div class="tally"><div class="top"><span class="info"><b>Player ${player} of 11</b><i>${left} players to pick · <em>${respins} respins</em></i></span><span class="tot1"><span class="n"><b>${t}</b><small>/${target}</small><em>goals</em></span><i>${t <= target ? (target - t) + ' to go' : (t - target) + ' over'}</i></span></div><div class="track"><span class="fill" style="width:${Math.min(100, t / target * 100)}%"></span><span class="mark2" data-t="${target}"></span></div></div>`;
+  const tally = (t, target, player, left, respins) => `<div class="tally"><div class="top"><span class="info"><b>Player ${player} of 11</b><i>${left} players to pick · <em>${respins} respins</em></i></span><span class="tot1"><span class="n"><b>${t}</b><small>/${target}</small><em>goals</em></span></span></div><div class="track"><span class="fill" style="width:${Math.min(100, t / target * 100)}%"></span><span class="mark2" data-t=""></span></div><span class="togo">${t <= target ? (target - t) + ' to go' : (t - target) + ' over'}</span></div>`;
   const top = () => `<div class="tb"><span class="logo"></span><span class="mtag"><span>Goal Rush</span></span><span class="acct">${ACCT}</span></div>`;
   const bar = (label, r) => `<div class="bar"><span class="circ">${RESPIN}<span class="n">${r}</span></span><span class="spin">${label}</span><span class="circ">${HOME}</span></div>`;
   const myst = () => `<div class="trio">${[0, 1, 2].map(() => `<div class="cell"><div class="sh" style="--w:92px"><svg viewBox="0 0 100 100"><path d="${SHIRT}" fill="#16161B" stroke="#3A3A44" stroke-width="2.4" stroke-linejoin="round"/><text x="50" y="70" font-size="44" fill="#4A4A56">?</text></svg></div><span class="cap">&nbsp;</span></div>`).join('')}</div>`;
@@ -206,7 +207,7 @@
 
   const O = [['HOME', 'Goal Rush on home', 'Yellow, in place of 433 Goals. Your ball, faded behind the card like the Club X badge.', home],
     ['START', 'The target reveal', 'A new game rolls through the eight formations and stops on one. That number is the target and the pitch behind takes its shape.', reveal],
-    ['3-5-2', 'A 3-5-2 game', `Three at the back, five in midfield, two up front. Six picked so far: the top right reads 314/352 goals with 38 to go, and the bar fills towards the target. The open shirts are yellow.`, game1],
+    ['3-5-2', 'A 3-5-2 game', `Three at the back, five in midfield, two up front. Six picked so far: 314/352 goals sits above the bar, 38 to go under it, and the bar fills towards the target. The open shirts are yellow.`, game1],
     ['4-4-2', 'A 4-4-2 game', `The next game is a 4-4-2: target 442, the pitch in two banks of four. Four picked: ${442 - t2} to go.`, game2]];
   const TOT = {
     1: (t, T) => `<span class="tot1"><span class="n"><b>${t}</b><small>/${T}</small><em>goals</em></span><i>${T - t} to go</i></span>`,
