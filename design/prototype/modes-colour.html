@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
 <style>
   /* Option A (chosen): each mode's colour washes in from the right with a thin rim. Daily is blue (or white or silver), Club X green. */
-  :root { color-scheme: dark; --daily: #3BA4FF; --d2d: #A66BFF; --clx: #12F06C; --g433: #FF7A1A; --line: #26262C; --soft: #CFCFD6; --muted: #8E8E99; }
+  :root { color-scheme: dark; --daily: #3BA4FF; --d2d: #3BA4FF; --tena: #A66BFF; --clx: #12F06C; --g433: #FF7A1A; --line: #26262C; --soft: #CFCFD6; --muted: #8E8E99; }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: #08080A; color: #fff; font-family: 'Exo 2', Arial, sans-serif; }
   button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
@@ -51,6 +51,7 @@
   .mark img.crest { width: 124px; height: 144px; object-fit: contain; }
   .dfull .mark { opacity: 1; }
   .dfull .mark img.crest { filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
+  .mark img.tb { width: 132px; height: 132px; object-fit: contain; }
   /* Daily layouts */
   /* 1: the crest is the mark, faded like the other modes' marks */
   .d1 .mark img { width: 104px; opacity: 1; }
@@ -72,7 +73,7 @@
 <div class="page">
   <div class="head">
     <h1>Mode colours</h1>
-    <p>Option A: each mode's colour washes in from the right. Daily Challenge white, Dare2Dream purple, Club X green, 433 Goals orange. Every card has the same shape and height: tag, two-line title, one line of description, the mark behind on the right, the button bottom right.</p>
+    <p>Option A: each game's colour washes in from the right. The section is now Other games. Daily Challenge white, Dare2Dream blue, Club X green, 433 Goals orange, and a new Tenaball card in purple that opens Tenaball, with its ball as the faded mark. Every card has the same shape and height.</p>
   </div>
   <section class="sec"><h2>Chosen: daily in white</h2><p>The daily card in white, the date in the top row, and the club crest behind the card exactly where and how big the Club X badge sits: same box, same tilt, same fade. On the right, the same card with the crest in full colour at that size, if you want today's club to show more.</p><div class="row" id="final"></div></section>
 </div>
@@ -83,7 +84,8 @@
   const MODES = [
     { c: 'var(--d2d)', tag: 'DARE2DREAM', big: 'Any club, no players', sub: 'Draft your XI, then beat their real finish.', mark: '<span class="emb" style="width:100%;height:100%"></span>' },
     { c: 'var(--clx)', tag: 'CLUB X', big: 'Replace the bottom club', sub: 'Draft 11 from scratch, then win the league.', mark: '<img src="assets/brand/club_x.png" alt="">' },
-    { c: 'var(--g433)', tag: '433 GOALS', big: 'Hit exactly 433', sub: 'Spin 11 real players. Their goals must add up to 433.', mark: '<span class="n433">433</span>' }
+    { c: 'var(--g433)', tag: '433 GOALS', big: 'Hit exactly 433', sub: 'Spin 11 real players. Their goals must add up to 433.', mark: '<span class="n433">433</span>' },
+    { c: 'var(--tena)', tag: 'TENABALL', big: 'Name the top ten', sub: 'Our football quiz. Opens Tenaball.', mark: '<img class="tb" src="assets/brand/tenaball.png" alt="">' }
   ];
   const card = (m, extra = '', cls = '') => `<button class="card ${cls}" style="--c:${m.c}"><span class="mark">${m.mark}</span>${extra}<span class="t-tag">${m.tag}</span><span class="t-big">${m.big}</span><span class="t-sub">${m.sub}</span><span class="go">${GO}</span></button>`;
   const daily = (layout, colour) => {
@@ -91,13 +93,13 @@
     const chip = layout === 3 ? '<span class="chip"><span>OCT</span><b>12</b></span>' : '';
     return card(m, chip, `d${layout}${colour === 'silver' ? ' silver' : ''}`);
   };
-  const phone = (layout, colour) => `<div class="phone"><div class="sect">Other modes</div>${daily(layout, colour)}${MODES.map((m) => card(m)).join('')}<div class="soon">Coming soon: Head to head · Steal</div></div>`;
+  const phone = (layout, colour) => `<div class="phone"><div class="sect">Other games</div>${daily(layout, colour)}${MODES.map((m) => card(m)).join('')}<div class="soon">Coming soon: Head to head · Steal</div></div>`;
   const L = [[1, 'Crest as the mark', 'The club crest sits where the other modes keep their logo, big and faded the same way. The most consistent: four matching cards.'],
     [2, 'Crest in full colour', 'Same place, but the crest is in its real colours, smaller and tilted, on a soft glow of the daily colour. Today\'s club stands out; the card still matches.'],
     [3, 'Crest plus a date chip', 'As 1, with a small calendar chip (12 OCT) top right in the daily colour, so it reads as today\'s challenge at a glance. The tag drops the date.']];
   const final = (full) => { const m = { c: DC.white, tag: 'DAILY CHALLENGE · 12 OCT', big: 'Watford<br>1999/00', sub: 'Classic: they went down. Rescue them.', mark: '<img class="crest" src="assets/crests/watford.png" alt="">' };
-    return `<div class="phone"><div class="sect">Other modes</div>${card(m, '', full ? 'dfull' : '')}${MODES.map((x) => card(x)).join('')}<div class="soon">Coming soon: Head to head · Steal</div></div>`; };
-  document.getElementById('final').innerHTML = [[false, 'CHOSEN', 'Crest faded, like Club X', 'White tag, rim and button. The crest is faded behind the text exactly like the Club X badge, so all four cards match.'],
+    return `<div class="phone"><div class="sect">Other games</div>${card(m, '', full ? 'dfull' : '')}${MODES.map((x) => card(x)).join('')}<div class="soon">Coming soon: Head to head · Steal</div></div>`; };
+  document.getElementById('final').innerHTML = [[false, 'CHOSEN', 'Crest faded, like Club X', 'White tag, rim and button. The crest is faded behind the text exactly like the Club X badge, so all the cards match.'],
     [true, 'VARIANT', 'Crest in full colour, same size', 'The same card with the crest in its real colours at the Club X badge size. Louder, but today\'s club is obvious.']]
     .map(([full, t, h, d]) => `<div class="opt"><div class="opt-h"><span class="tag">${t}</span><h3>${h}</h3><p>${d}</p></div>${final(full)}</div>`).join('');
 })();
