@@ -150,12 +150,12 @@
   const withPos = (n, pos) => Object.assign({}, by(n), { pos });
 
   // 1: home
-  const card = (c, tag, big, sub, mark, cls = '') => `<div class="card ${cls}" style="--c:${c}"><span class="mark${mark.startsWith('<') ? ' cycle' : ''}">${mark}</span><span class="t-tag">${tag}</span><span class="t-big">${big}</span><span class="t-sub">${sub}</span><span class="go">${GO}</span></div>`;
-  const cyc = ['442', '352', '433', '541'].map((f, i) => `<span style="animation-delay:${i * 3}s">${f}</span>`).join('');
+  const card = (c, tag, big, sub, mark, cls = '') => `<div class="card ${cls}" style="--c:${c}"><span class="mark">${mark}</span><span class="t-tag">${tag}</span><span class="t-big">${big}</span><span class="t-sub">${sub}</span><span class="go">${GO}</span></div>`;
+  const cyc = '<img src="assets/brand/goal_rush.png" alt="" style="width:124px;height:124px;object-fit:contain">';
   const home = `<div class="phone home"><div class="sect">Other games</div>
     ${card('#3BA4FF', 'DARE2DREAM', 'Rewrite their season', 'Any club from any season. Draft 11 and beat their real finish.', '', 'dim')}
     ${card('#12F06C', 'CLUB X', 'From nowhere to champions', 'Replace the worst side in a real season and go for the title.', '', 'dim')}
-    ${card('#FFD21F', 'GOAL RUSH', 'Hit the formation', 'A random formation each game. Pick 11 real players whose career goals add up to it exactly.', cyc)}
+    ${card('#FFD21F', 'GOAL RUSH', 'Score the exact number of goals', 'A random formation each game. Pick 11 real players whose career goals add up to it exactly.', cyc)}
     ${card('#A66BFF', 'TENABALL', 'Name the top ten', 'Our football quiz. Opens Tenaball.', '', 'dim')}</div>`;
 
   // 2: the target reveal: the formations roll, stop on 352, the pitch underneath takes that shape
@@ -173,7 +173,7 @@
   const t2 = Object.values(f2).reduce((t, p) => t + p.goals, 0);
   const game2 = `<div class="phone">${top()}${tally(t2, 442, 5, 6, 3)}${pitch('442', f2, 99)}${myst()}<div class="hint">Spin for three players. 7 shirts to fill</div>${bar('Spin', 3)}</div>`;
 
-  const O = [['HOME', 'Goal Rush on home', 'Yellow, in place of 433 Goals. The faded mark behind cycles through the formations; the line says today\'s target.', home],
+  const O = [['HOME', 'Goal Rush on home', 'Yellow, in place of 433 Goals. Your ball, faded behind the card like the Club X badge.', home],
     ['START', 'The target reveal', 'A new game rolls through the eight formations and stops on one. That number is the target and the pitch behind takes its shape.', reveal],
     ['3-5-2', 'A 3-5-2 game', `Three at the back, five in midfield, two up front. Six picked so far: the top right counts down from 352, now 38 to go, and the bar empties towards 0. The open shirts are yellow.`, game1],
     ['4-4-2', 'A 4-4-2 game', `The next game is a 4-4-2: target 442, the pitch in two banks of four. Four picked: ${442 - t2} to go.`, game2]];

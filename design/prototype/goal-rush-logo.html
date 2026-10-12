@@ -18,7 +18,7 @@
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 22px; }
   .o { display: flex; flex-direction: column; gap: 10px; }
   .tile { aspect-ratio: 1 / 1; border-radius: 26px; background: #0E0E10; border: 1px solid #222228; display: grid; place-items: center; }
-  .tile svg { width: 62%; height: 62%; color: var(--y); }
+  .tile svg, .tile img { width: 62%; height: 62%; color: var(--y); }
   .o .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: #12F06C; }
   .o h3 { font: 900 italic 21px/1.05 'Exo 2'; margin: 0; }
   .o p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
@@ -35,9 +35,11 @@
   .go svg { width: 20px; height: 20px; }
   .mark { position: absolute; right: -14px; top: 50%; transform: translateY(-50%) rotate(-8deg); width: 124px; height: 124px; color: var(--c); opacity: .3; z-index: -1; display: grid; place-items: center; }
   .mark svg, .mark img { width: 100%; height: 100%; object-fit: contain; }
+  .mark img { width: 112px; height: 112px; }
   .emb { display: block; width: 100%; height: 100%; background: currentColor; -webkit-mask: url('assets/logo/emblem_line.png') center / contain no-repeat; mask: url('assets/logo/emblem_line.png') center / contain no-repeat; }
   .tagbar { display: flex; justify-content: center; gap: 8px; align-items: center; margin-bottom: 14px; }
   .mtag { display: inline-flex; align-items: center; gap: 6px; font: 900 italic 15px/1 'Exo 2'; letter-spacing: .04em; text-transform: uppercase; color: #0A0A0A; background: var(--y); padding: 4px 10px 4px 6px; border-radius: 5px; transform: skewX(-10deg); }
+  .mtag img { width: 18px; height: 18px; transform: skewX(10deg); }
   .mtag svg { width: 18px; height: 18px; transform: skewX(10deg); color: #0A0A0A; }
   .mtag span { transform: skewX(10deg); }
 </style>
@@ -46,7 +48,7 @@
 <div class="page">
   <div class="head">
     <h1>Goal Rush mark</h1>
-    <p>Five ball marks for Goal Rush, drawn as line art in the same weight as the outline D2T emblem used for Dare2Dream, so the faded marks behind the home cards read as one family. Each is shown big, then behind its card next to the other games, then small (could sit in the in-game tag).</p>
+    <p>Your ball first (cut out), then the five line marks from before. The card title is now "Score the exact number of goals". Five ball marks for Goal Rush, drawn as line art in the same weight as the outline D2T emblem used for Dare2Dream, so the faded marks behind the home cards read as one family. Each is shown big, then behind its card next to the other games, then small (could sit in the in-game tag).</p>
   </div>
   <section class="sec"><h2>The marks</h2><div class="grid" id="marks"></div></section>
   <section class="sec"><h2>On home, with the other games</h2><p>Each mark faded behind the Goal Rush card at the Club X badge's size, between Club X and Tenaball.</p><div class="row" id="cards"></div></section>
@@ -61,6 +63,8 @@
     return `<circle cx="${cx}" cy="${cy}" r="${r}"/><path d="M${p.map((q) => q.join(' ')).join(' L')} Z"/>${p.map((q, i) => `<path d="M${q.join(' ')} L${(q[0] + (o[i][0] - q[0]) * 0.62).toFixed(1)} ${(q[1] + (o[i][1] - q[1]) * 0.62).toFixed(1)}"/>`).join('')}`;
   };
   const M = [
+    ['NEW', 'The ball', 'Your ball, cut out of its background. Faded behind the card like the Club X badge and the Tenaball ball, and in full colour in the in-game tag.',
+      '<img src="assets/brand/goal_rush.png" alt="" style="object-fit:contain">'],
     ['A', 'Rushing ball', 'A ball with three speed lines streaking off the back. Simple and quick to read, and it says "rush".',
       `<svg viewBox="0 0 120 120"><g ${S}>${BALL(72, 60, 34)}<path d="M8 44 H30 M2 60 H28 M8 76 H30"/></g></svg>`],
     ['B', 'Ball through the line', 'A ball smashing through a broken finish line, like the bar breaking past the target. Ties to the game\'s big moment.',
@@ -78,7 +82,7 @@
   document.getElementById('cards').innerHTML = M.map(([k, h, , svg]) => `<div><div class="phone">
     ${card('#3BA4FF', 'DARE2DREAM', 'Rewrite their season', 'Any club from any season. Draft 11 and beat their real finish.', '<span class="emb"></span>')}
     ${card('#12F06C', 'CLUB X', 'From nowhere to champions', 'Replace the worst side in a real season and go for the title.', '<img src="assets/brand/club_x.png" alt="">')}
-    ${card('#FFD21F', 'GOAL RUSH', 'Hit the formation', 'A random formation each game. Pick 11 real players whose career goals add up to it exactly.', svg)}
+    ${card('#FFD21F', 'GOAL RUSH', 'Score the exact number of goals', 'A random formation each game. Pick 11 real players whose career goals add up to it exactly.', svg)}
     ${card('#A66BFF', 'TENABALL', 'Name the top ten', 'Our football quiz. Opens Tenaball.', '<img src="assets/brand/tenaball.png" alt="">')}
     </div><div class="cap">OPTION ${k} · ${h.toUpperCase()}</div></div>`).join('');
 })();
