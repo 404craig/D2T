@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """Build index.html: one self-contained page (HTML, CSS, JS, data, crests, logos, audio).
 
+The page streams in parts so a phone sees the intro within a second: logos, then the shell and the intro (which start
+at once), then the data (game data as a JSON.parse string, much quicker for a phone to read than a 5 MB object literal),
+then the rest of the game, which calls D2T.ready() so the intro can hand over to home, then the sound clips last.
+
 Run from the repo root:  python3 scripts/build.py
 Sources: src/app (screens and shell), src/engine.js and src/sound.js, data/game/*.json (made by scripts/build-data.py).
 """
@@ -16,6 +20,7 @@ JS = ["../engine.js", "../sound.js", "core/app.js", "core/cards.js", "core/flip.
       "screens/intro.js", "screens/home.js", "screens/howto.js", "screens/account.js", "screens/league.js",
       "screens/spin.js", "screens/transfer.js", "screens/table.js", "screens/squad.js", "screens/fixtures.js",
       "screens/match.js", "screens/summary.js", "screens/goals.js", "core/boot.js"]
+SHELL = ["core/app.js", "screens/intro.js"]          # run first, while the rest of the page is still arriving
 
 
 def read(path, mode="r"):
@@ -41,7 +46,8 @@ def main():
         if label.endswith(".js") and "</script" in text.lower():
             sys.exit(f"{label} contains </script>, which would end the inline script early")
     css = "\n".join(parts[p] for p in CSS)
-    js = "\n;\n".join(f"/* ---- {p} ---- */\n" + parts[p] for p in JS)
+    js = "\n;\n".join(f"/* ---- {p} ---- */\n" + parts[p] for p in JS if p not in SHELL)
+    shell = "\n;\n".join(f"/* ---- {p} ---- */\n" + parts[p] for p in SHELL) + "\n;\nD2T.start(); D2T.started = true;"
     version = read(os.path.join(ROOT, "version.txt")).strip()
 
     game = read(os.path.join(DATA, "game.json"))
@@ -62,11 +68,15 @@ def main():
     icon = "data:image/png;base64," + b64(icon_path) if os.path.exists(icon_path) else ""
 
     j = lambda o: json.dumps(o, separators=(",", ":"))
-    data = (f"window.D2T_GAME={game};\nwindow.D2T_CRESTS={j(crests)};\n"
-            f"window.D2T_LOGOS={j(logos)};\nwindow.D2T_SOUNDS={j(sounds)};"
+    # a JSON string inside JS: "</" escaped so no </script> can end the tag early
+    jstr = lambda text: json.dumps(text, ensure_ascii=False).replace("</", "<\\/")
+    data = (f"window.D2T_GAME=JSON.parse({jstr(json.dumps(json.loads(game), separators=(',', ':'), ensure_ascii=False))});\nwindow.D2T_CRESTS={j(crests)};"
             + (f"\nwindow.D2T_CLUBX_BADGE={j(badge)};" if badge else "")
             + (f"\nwindow.D2T_TENABALL_LOGO={j(tena)};" if tena else ""))
-    out = html.replace("/*@CSS@*/", css).replace("/*@DATA@*/", data).replace("/*@JS@*/", js)
+    logos_js = f"window.D2T_LOGOS={j(logos)};"
+    sounds_js = f"window.D2T_SOUNDS={j(sounds)};\nwindow.D2TSound && window.D2TSound.clipsLoaded && window.D2TSound.clipsLoaded();"
+    out = (html.replace("/*@CSS@*/", css).replace("/*@LOGOS@*/", logos_js).replace("/*@SHELL@*/", shell)
+           .replace("/*@DATA@*/", data).replace("/*@JS@*/", js).replace("/*@SOUNDS@*/", sounds_js))
     out = out.replace("@BUILD@", version).replace("@ICON@", icon)
     left = re.findall(r"/\*@[A-Z]+@\*/", out)
     if left:

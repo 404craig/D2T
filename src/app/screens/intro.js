@@ -89,7 +89,7 @@
 
       const finish = (to) => {
         if (done) return; done = true;
-        D2T.go('home', { fromIntro: to || true });
+        D2T.whenReady(() => D2T.go('home', { fromIntro: to || true }));   // the rest of the game may still be arriving
       };
       wrap.addEventListener('click', () => finish(null));
 

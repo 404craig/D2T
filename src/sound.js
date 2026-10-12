@@ -5,7 +5,7 @@
 (function (root) {
 "use strict";
 const MIX = { master: 0.9, bed: 0.4, rec: 1, syn: 0.8, verb: 0.25 };
-let ctx = null, master, bus = {}, verbIn, noiseBuf, buffers = {}, muted = false, bed = null, decoding = null;
+let ctx = null, master, bus = {}, verbIn, noiseBuf, buffers = {}, muted = false, bed = null, started = {};
 
 function init() {
   if (ctx) return ctx;
@@ -31,16 +31,17 @@ function dataToBuf(uri) {
   for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
   return u.buffer;
 }
+// decodes every clip not started yet: the clips arrive at the end of the page, so this runs again when they land
 function decodeAll() {
-  if (decoding || !ctx) return decoding;
+  if (!ctx) return;
   const src = root.D2T_SOUNDS || {};
-  decoding = Promise.all(Object.keys(src).map(k => new Promise(res => {
+  Object.keys(src).forEach(k => {
+    if (started[k]) return; started[k] = 1;
     try {
-      const p = ctx.decodeAudioData(dataToBuf(src[k]), buf => { buffers[k] = buf; res(); }, () => res());
-      if (p && p.then) p.then(buf => { buffers[k] = buf; res(); }, () => res());
-    } catch (e) { res(); }
-  })));
-  return decoding;
+      const p = ctx.decodeAudioData(dataToBuf(src[k]), buf => { buffers[k] = buf; }, () => {});
+      if (p && p.then) p.then(buf => { buffers[k] = buf; }, () => {});
+    } catch (e) { /* that clip stays silent */ }
+  });
 }
 function unlock() {
   if (!init()) return;
@@ -145,5 +146,5 @@ function setMuted(m) {
   if (ctx) master.gain.setTargetAtTime(muted ? 0 : MIX.master, ctx.currentTime, 0.03);
   if (muted) crowd(false);
 }
-root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock };
+root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoaded: decodeAll };
 })(typeof window !== "undefined" ? window : globalThis);

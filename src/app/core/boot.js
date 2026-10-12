@@ -13,5 +13,6 @@
     const IN_RUN = ['spin', 'table', 'squad', 'transfer', 'fixtures', 'match'];
     setInterval(() => { const onDaily = !!(D2T.state.run && D2T.state.run.daily); if (D2T.game.closeOldDaily() && onDaily && IN_RUN.includes(D2T.currentScreen())) D2T.go('home'); }, 30000);
   }
-  D2T.start();
+  if (!D2T.started) D2T.start();          // normally the shell started the intro already, before the data arrived
+  D2T.ready();
 })();
