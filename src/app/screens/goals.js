@@ -50,6 +50,7 @@
     const sz = k.pat === 's' ? 'width="14" height="100" x="1"' : k.pat === 'h' ? 'width="100" height="16" y="2"' : 'width="100" height="100"';
     return `<pattern id="g4p-${k.id}" patternUnits="userSpaceOnUse" ${sz}>${inner}</pattern>`; }).join('')}
     <clipPath id="g4clip"><path d="${SHIRT}"/></clipPath>
+    <filter id="g4roll" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="0 2.6"/></filter>
     <linearGradient id="g4sheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.34"/><stop offset="0.32" stop-color="#fff" stop-opacity="0.08"/><stop offset="0.5" stop-color="#fff" stop-opacity="0"/><stop offset="0.78" stop-color="#000" stop-opacity="0.10"/><stop offset="1" stop-color="#000" stop-opacity="0.26"/></linearGradient>
     <linearGradient id="g4glint" x1="0" y1="0" x2="1" y2="0.4"><stop offset="0.35" stop-color="#fff" stop-opacity="0"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.55"/><stop offset="0.65" stop-color="#fff" stop-opacity="0"/></linearGradient></defs></svg>`;
 
@@ -58,6 +59,9 @@
   // below, a slight sheen. Pitch shirts: his goals as the number (always the three-figure size), the crest on a light disc.
   const SHIRT = 'M31 9 L42 4 Q50 11 58 4 L69 9 L95 24 L85 44 L74 38 L74 96 L26 96 L26 38 L15 44 L5 24 Z';
   const SLEEVES = 'M31 9 L5 24 L15 44 L26 38 Z M69 9 L95 24 L85 44 L74 38 Z';
+  const CREST = () => D2T.g4crest || 'disc';
+  // under each big shirt: the club's name, or its crest when the crest moves there
+  const trioCap = (p) => (CREST() === 'caption' ? `<img class="capcrest" src="${kit(p.club).crest}" alt="${D2T.esc(p.club)}">` : D2T.esc(p.club));
   function shirt(o) {
     const w = o.w, big = w >= 70, cls = o.cls || '';
     if (!o.player) {
@@ -68,9 +72,12 @@
     let top = '', mid = '', over = '', disc = '';
     if (big) {
       const sur = p.sur.toUpperCase(), fs = Math.min(13, 140 / Math.max(6, sur.length));
-      top = `<text x="50" y="27" font-size="${fs}" textLength="${Math.min(42, sur.length * fs * 0.62)}" lengthAdjust="spacingAndGlyphs"${st}>${D2T.esc(sur)}</text>`;
-      mid = `<text class="qm" x="50" y="62" font-size="30"${st}>?</text>`;
-      if (k.crest) over = (k.line ? '<rect x="40" y="70" width="20" height="21" rx="5" fill="#F4F4F6"/>' : '') + `<image href="${k.crest}" x="41" y="71" width="18" height="19" preserveAspectRatio="xMidYMid meet"/>`;
+      top = `<text x="50" y="${CREST() === 'collar' ? 35 : 27}" font-size="${fs}" textLength="${Math.min(42, sur.length * fs * 0.62)}" lengthAdjust="spacingAndGlyphs"${st}>${D2T.esc(sur)}</text>`;
+      // the crest (12 Oct, three ways to try): collar = on a white disc at the collar like the pitch shirts; disc = on a white
+      // circle in the middle of the back; caption = under the shirt in place of the club's name (see trioCap)
+      const cs = CREST();
+      if (k.crest && cs === 'collar') disc = `<span class="plate" style="--d:${Math.round(w * 0.36)}px"><img src="${k.crest}" alt=""></span>`;
+      if (k.crest && cs === 'disc') over = `<circle cx="50" cy="61" r="17" fill="#F4F4F6" stroke="${k.trim}" stroke-width="1.6"/><image href="${k.crest}" x="38" y="49" width="24" height="24" preserveAspectRatio="xMidYMid meet"/>`;
     } else {
       const g = String(p.goals);
       mid = `<text class="gnum" x="50" y="65" font-size="30"${g.length > 2 ? ' textLength="46" lengthAdjust="spacingAndGlyphs"' : ''}${st}>${g}</text>`;
@@ -92,7 +99,7 @@
     o.style.left = (s.mark * 100) + '%'; o.style.width = (s.ovr * 100) + '%';
     host.querySelector('.tnum').textContent = t; setGap(host, t);
   }
-  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = gapText(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); }
+  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = gapText(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v !== TARGET && Math.abs(v - TARGET) <= 20); }
 
   const COLORS = ['#FF7A1A', '#FFB020', '#FFFFFF', '#FF4D1A'];
   const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5"/></svg>';
@@ -111,11 +118,11 @@
       const total = () => S.filled.reduce((t, p) => t + p.goals, 0);
       let busy = false, sel = null;
 
-      root.classList.add('g4');
+      root.classList.add('g4', 'g4-cs-' + CREST());
       root.appendChild(D2T.topbar());
       const wrap = D2T.h(`<div class="g4-wrap">${defs()}
-        <div class="g4-tally"><div class="top"><small>433 GOALS<em class="placed"></em></small><span><b class="tnum">0</b><i class="taway"></i></span></div>
-          <div class="g4-track"><span class="ovr"></span><span class="fill"></span><span class="mark"></span></div></div>
+        <div class="g4-tally"><div class="top"><small>433 GOALS</small><span><b class="tnum">0</b><i class="taway"></i></span></div>
+          <div class="g4-track"><span class="ovr"></span><span class="fill"></span><span class="mark"></span></div><em class="placed"></em></div>
         <div class="g4-pitch"></div>
         <div class="g4-trio"></div>
         <div class="g4-hint"></div>
@@ -142,7 +149,7 @@
           return `<div class="slotp" data-slot="${i}" style="left:${x}%;top:${y}%">${inner}</div>`; }).join('')}`;
       };
       const trioMyst = () => `${[0, 1, 2].map(() => `<div class="cell"><div class="reelwin"><div class="strip">${shirt({ w: TW, state: 'myst' })}</div></div><span class="cap"></span></div>`).join('')}`;
-      const trioLanded = () => S.cands.map((c, i) => `<div class="cell"><div class="reelwin landed"><div class="strip">${shirt({ w: TW, player: c, attr: `data-c="${i}"` })}</div></div><span class="cap">${D2T.esc(c.club)}</span></div>`).join('');
+      const trioLanded = () => S.cands.map((c, i) => `<div class="cell"><div class="reelwin landed"><div class="strip">${shirt({ w: TW, player: c, attr: `data-c="${i}"` })}</div></div><span class="cap">${trioCap(c)}</span></div>`).join('');
       const setCounts = () => { reload.querySelector('.sp-count').textContent = S.respins; reload.disabled = busy || S.respins <= 0 || !S.cands || nextIdx() < 0; reload.setAttribute('aria-label', `Spin again, ${S.respins} left`); };
       const setUI = (label, hint, off) => { lbl.textContent = label; lbl.style.fontSize = label.length > 13 ? Math.max(14, Math.round(21 * 13 / label.length)) + 'px' : ''; hintEl.textContent = hint; main.disabled = !!off; setCounts(); };
       const setTally = (t) => { paintBar(wrap, t); wrap.querySelector('.placed').textContent = `${S.filled.length} of 11`; };
@@ -177,7 +184,7 @@
             const finish = () => {
               strip.style.filter = ''; strip.innerHTML = shirt({ w: TW, player: targets[i], attr: `data-c="${i}"` }); strip.style.transform = 'none';
               w.classList.add('landed'); glint(strip.firstElementChild, reduced);
-              w.parentElement.querySelector('.cap').textContent = targets[i].club;
+              w.parentElement.querySelector('.cap').innerHTML = trioCap(targets[i]);
               if (++landed === wins.length) resolve();
             };
             if (reduced) { finish(); return; }
@@ -242,8 +249,8 @@
           fly.remove(); drawPitch(); trioEl.innerHTML = trioMyst();
           wrap.querySelector('.placed').textContent = `${S.filled.length} of 11`;
           setUI(done ? 'Play again' : 'Spin', '', true);
-          revealShirt(pitchEl.querySelector(`[data-slot="${ni}"]`), p);
-          tickTo(from, total(), () => { busy = false; idleUI(); if (done) ending(total(), result); });
+          const slotEl = pitchEl.querySelector(`[data-slot="${ni}"]`);
+          rollNumber(slotEl, p, () => shoot(slotEl, p, () => tickTo(from, total(), () => { busy = false; idleUI(); if (done) ending(total(), result); })));
         };
         anim.onfinish = after;
         later(() => { if (fly.isConnected) after(); }, 900);          // in case the animation never reports back
@@ -285,16 +292,73 @@
         r.animate([{ transform: 'scale(.5)', opacity: 1 }, { transform: 'scale(5)', opacity: 0 }], { duration: 600, easing: 'ease-out', fill: 'forwards' });
         later(() => { b.remove(); r.remove(); }, 1000);
       }
-      function revealShirt(slotEl, p) {
+      function revealShirt(slotEl) {
         if (reduced || !slotEl) return;
         const num = slotEl.querySelector('.gnum'), sh = slotEl.querySelector('.g4-shirt');
         const hr = wrap.getBoundingClientRect(), r = sh.getBoundingClientRect(), cx = r.left - hr.left + r.width / 2, cy = r.top - hr.top + r.height / 2;
         burstAt(cx, cy, true);
         sh.animate([{ transform: 'scale(1.6)', filter: 'brightness(2.2)' }, { transform: 'scale(0.92)', offset: 0.5 }, { transform: 'scale(1)', filter: 'brightness(1)' }], { duration: 520, easing: 'cubic-bezier(.3,1.4,.5,1)' });
-        if (num) num.animate([{ opacity: 0, transform: 'scale(2.2)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 420, delay: 120, fill: 'backwards' });
-        const plus = D2T.h(`<div class="g4-plus">+${p.goals}</div>`); plus.style.left = (cx + 18) + 'px'; plus.style.top = (cy - 26) + 'px'; wrap.appendChild(plus);
-        plus.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0)', offset: 0.2 }, { opacity: 0, transform: 'translateY(-26px)' }], { duration: 1300, easing: 'ease-out', fill: 'forwards' });
-        later(() => plus.remove(), 1400);
+        if (num) num.animate([{ transform: 'scale(1.9)' }, { transform: 'scale(1)' }], { duration: 420, easing: 'cubic-bezier(.3,1.4,.5,1)' });
+      }
+      // fruit machine: the number on his back rolls with a motion blur, slows, then lands on his goals with the burst
+      function rollNumber(slotEl, p, done) {
+        const num = slotEl && slotEl.querySelector('.gnum');
+        if (reduced || !num) { done(); return; }
+        const steps = [38, 38, 40, 42, 46, 50, 56, 64, 74, 88, 108, 136], n = String(p.goals).length;
+        num.setAttribute('filter', 'url(#g4roll)');
+        let i = 0;
+        const tick = () => {
+          if (!root.isConnected) return;
+          if (i < steps.length) {
+            let v; do { v = n > 2 ? 100 + Math.floor(Math.random() * 181) : n > 1 ? 10 + Math.floor(Math.random() * 90) : Math.floor(Math.random() * 10); } while (v === p.goals);
+            num.textContent = v;
+            if (i >= steps.length - 3) num.removeAttribute('filter');
+            num.animate([{ transform: 'translateY(-14px)', opacity: 0.4 }, { transform: 'translateY(0)', opacity: 1 }], { duration: steps[i], easing: 'linear' });
+            if (i % 2 === 0) snd('tap');
+            later(tick, steps[i++]);
+            return;
+          }
+          num.textContent = p.goals; num.removeAttribute('filter');
+          revealShirt(slotEl);
+          later(done, 380);
+        };
+        tick();
+      }
+      // the goals fly off his shirt up to the total at the top right, which pulses as they land
+      function shoot(slotEl, p, done) {
+        const tnum = wrap.querySelector('.tnum'), sh = slotEl && slotEl.querySelector('.g4-shirt');
+        if (reduced || !sh) { done(); return; }
+        const hr = wrap.getBoundingClientRect(), a = sh.getBoundingClientRect(), b = tnum.getBoundingClientRect();
+        const x0 = a.left - hr.left + a.width / 2, y0 = a.top - hr.top + a.height / 2, x1 = b.left - hr.left + b.width / 2, y1 = b.top - hr.top + b.height / 2;
+        const shot = D2T.h(`<div class="g4-shot">+${p.goals}</div>`); shot.style.left = x0 + 'px'; shot.style.top = y0 + 'px'; wrap.appendChild(shot);
+        const dx = x1 - x0, dy = y1 - y0;
+        const an = shot.animate([{ transform: 'translate(-50%,-50%) scale(.6)', opacity: 0 },
+          { transform: `translate(calc(-50% + ${dx * 0.15}px), calc(-50% + ${dy * 0.1 + 18}px)) scale(1.5)`, opacity: 1, offset: 0.22 },
+          { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(.75)`, opacity: 0.9 }], { duration: 640, easing: 'cubic-bezier(.55,0,.75,.4)', fill: 'forwards' });
+        let ended = false;
+        const land = () => { if (ended) return; ended = true; shot.remove(); if (!root.isConnected) return;
+          tnum.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.35)' }, { transform: 'scale(1)' }], { duration: 360, easing: 'cubic-bezier(.3,1.4,.5,1)' });
+          burstAt(x1, y1, false); done(); };
+        an.onfinish = land; later(land, 800);
+      }
+      // blowing through 433: the line snaps in two and flies off, the 433 tumbles away, the tally shakes
+      function gateBreak(tr) {
+        const mark = tr.querySelector('.mark'), r = mark.getBoundingClientRect(), hr = wrap.getBoundingClientRect();
+        const x = r.left - hr.left + r.width / 2, y = r.top - hr.top, h = r.height;
+        mark.style.opacity = 0;
+        [-1, 1].forEach((d) => {
+          const piece = D2T.h('<div class="g4-gatep"></div>');
+          piece.style.left = (x - 1.5) + 'px'; piece.style.top = (d < 0 ? y : y + h / 2) + 'px'; piece.style.height = (h / 2) + 'px'; wrap.appendChild(piece);
+          piece.animate([{ transform: 'translate(0,0) rotate(0)', opacity: 1 }, { transform: `translate(${6 + Math.random() * 10}px, ${d * 58}px) rotate(${d * 80}deg)`, opacity: 0 }], { duration: 760, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'forwards' });
+          later(() => piece.remove(), 800);
+        });
+        const lab = D2T.h('<div class="g4-gatel">433</div>'); lab.style.left = (x - 24) + 'px'; lab.style.top = (y + h + 2) + 'px'; wrap.appendChild(lab);
+        lab.animate([{ transform: 'translate(0,0) rotate(0)', opacity: 0.8 }, { transform: 'translate(-14px, 70px) rotate(38deg)', opacity: 0 }], { duration: 900, easing: 'cubic-bezier(.3,.6,.4,1)', fill: 'forwards' });
+        later(() => lab.remove(), 950);
+        burstAt(x, y + h / 2, true); burstAt(x + 10, y + h / 2, false);
+        wrap.querySelector('.g4-tally').animate([{ transform: 'translate(0,0)' }, { transform: 'translate(-5px,2px)' }, { transform: 'translate(6px,-2px)' }, { transform: 'translate(-3px,1px)' }, { transform: 'translate(0,0)' }], { duration: 360 });
+        tr.querySelector('.fill').animate([{ filter: 'brightness(1)' }, { filter: 'brightness(2.2)' }, { filter: 'brightness(1)' }], { duration: 420 });
+        snd('lockin');
       }
       // the number and the bar count up together; crossing 433 = race past the line, burst on it, then the bar re-scales
       function tickTo(from, to, done) {
@@ -309,18 +373,18 @@
           num.textContent = v; setGap(wrap, v);
           if (!crosses) { const s = barState(v); fill.style.width = (s.fill * 100) + '%'; mark.style.left = (s.mark * 100) + '%'; ovr.style.left = mark.style.left; ovr.style.width = (s.ovr * 100) + '%'; }
           else {
-            const runEnd = Math.min(1.08, to / TARGET);
+            const runEnd = Math.min(1.16, to / TARGET);
             if (p < 0.55) {
               const q = p / 0.55, w = (from / TARGET) + (runEnd - from / TARGET) * (1 - Math.pow(1 - q, 2));
               fill.style.width = (w * 100) + '%'; mark.style.left = '100%'; ovr.style.width = '0%';
-              if (!burstDone && w >= 1) { burstDone = true; const r = tr.getBoundingClientRect(), hr = wrap.getBoundingClientRect(); burstAt(r.right - hr.left, r.top - hr.top + 5, true); tr.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(1.8)' }, { transform: 'scaleY(1)' }], { duration: 380 }); }
+              if (!burstDone && w >= 1) { burstDone = true; gateBreak(tr); tr.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(1.8)' }, { transform: 'scaleY(1)' }], { duration: 380 }); }
             } else {
               const q = (p - 0.55) / 0.45, k = 1 - Math.pow(1 - q, 3), s = barState(to);
               fill.style.width = ((runEnd + (s.fill - runEnd) * k) * 100) + '%'; mark.style.left = ((1 + (s.mark - 1) * k) * 100) + '%';
-              ovr.style.left = mark.style.left; ovr.style.width = (s.ovr * k * 100) + '%';
+              ovr.style.left = mark.style.left; ovr.style.width = (s.ovr * k * 100) + '%'; mark.style.opacity = Math.max(0, (q - 0.35) / 0.65);
             }
           }
-          if (p < 1) rafs.push(requestAnimationFrame(step)); else { paintBar(wrap, to); done(); }
+          if (p < 1) rafs.push(requestAnimationFrame(step)); else { mark.style.opacity = ''; paintBar(wrap, to); done(); }
         };
         rafs.push(requestAnimationFrame(step));
       }
