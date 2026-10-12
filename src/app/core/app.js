@@ -54,12 +54,34 @@
     <defs>
       <linearGradient id="gbBand" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".75"/><stop offset=".45" stop-color="#FFFFFF" stop-opacity=".25"/><stop offset="1" stop-color="#2CF57F" stop-opacity=".9"/></linearGradient>
       <linearGradient id="gbThin" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset=".55" stop-color="#FFFFFF" stop-opacity=".2"/><stop offset=".8" stop-color="#0A0A0A" stop-opacity=".6"/><stop offset="1" stop-color="#0A0A0A" stop-opacity=".9"/></linearGradient>
+      <linearGradient id="gbArw" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".5"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/></linearGradient>
       <linearGradient id="gbFoot" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#18F06F"/><stop offset=".55" stop-color="#18F06F"/><stop offset="1" stop-color="#0A0A0A"/></linearGradient>
     </defs>
     <polyline points="-40,30 210,690" fill="none" stroke="url(#gbBand)" stroke-width="46" stroke-linecap="butt"/>
     <polyline points="-20,-10 430,330" fill="none" stroke="url(#gbThin)" stroke-width="3"/>
+    ${gbArrows()}
     <polyline points="196,694 430,620" fill="none" stroke="url(#gbFoot)" stroke-width="20"/>
   </svg></div>`;
+  // The emblem's corner arrows, faded into the green (Craig, 12 Oct). Each is an up-right arrow with its tip at the
+  // origin (a: head arm length, t: arm thickness, c: shaft half-width x root 2, d: shaft length), then placed and
+  // turned; they drift a little along their own direction and breathe in and out (.gb-arw, off with reduced motion).
+  function arrowPath(a, t, c, d) {
+    const p = [[0, 0], [-a, 0], [-a + t, t], [-t - c, t], [-t - c - d, t + d], [-t - d, t + c + d], [-t, t + c], [-t, a - t], [0, a]];
+    return 'M' + p.map((q) => q.join(',')).join(' L') + ' Z';
+  }
+  function gbArrows() {
+    const big = [ // x, y of the tip, rotation (0 up-right, 180 down-left), size, delay
+      [368, 116, 0, [150, 40, 34, 170], 0],
+      [92, 289, 180, [42, 14, 12, 105], -2.2],
+      [207, 608, 180, [82, 24, 22, 165], -4.1]
+    ];
+    const thin = [[137, 179, 233, 94, -1], [300, 352, 367, 283, -3.4], [179, 534, 221, 489, -0.6], [266, 712, 331, 641, -2.8], [10, 330, 120, 230, -5]];
+    const head = (x2, y2, x1, y1) => { const ang = Math.atan2(y2 - y1, x2 - x1), h = 9; return `M${x2 - h * Math.cos(ang - 0.6)},${y2 - h * Math.sin(ang - 0.6)} L${x2},${y2} L${x2 - h * Math.cos(ang + 0.6)},${y2 - h * Math.sin(ang + 0.6)}`; };
+    return `<g class="gb-arrows">
+      ${big.map(([x, y, r, k, dl], i) => `<g transform="translate(${x},${y}) rotate(${r})"><path class="gb-arw gb-big" style="animation-delay:${dl}s" d="${arrowPath(...k)}" fill="url(#gbArw)"/></g>`).join('')}
+      ${thin.map(([x1, y1, x2, y2, dl]) => `<path class="gb-arw gb-thin" style="animation-delay:${dl}s" d="M${x1},${y1} L${x2},${y2} ${head(x2, y2, x1, y1)}" fill="none" stroke="#FFFFFF" stroke-opacity=".38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`).join('')}
+    </g>`;
+  }
 
   const ICON = {
     account: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.6-3.6 4.6-5.2 8-5.2s6.4 1.6 8 5.2"/></svg>',
@@ -70,14 +92,57 @@
 
   // In-game chrome: small white D2T logo top left (taps home), account circle top right.
   // Pages reached from home or the account circle (howto, league, stats, account) get a back arrow before the logo.
+  // In a game the mode sits in a slanted tag in its colour, centred in the top bar (chosen 12 Oct, "tag, centred" in
+  // design/prototype/mode-logo.html): Classic in the club's colour, Daily white, Dare2Dream blue, Club X green; 433 Goals passes its own.
+  const modeWord = () => {
+    const r = D2T.state.run; if (!r || !D2T.game) return null;
+    if (r.daily) return ['Daily', '#FFFFFF'];
+    const m = D2T.game.mode();
+    if (m === 'dare2dream') return ['Dare2Dream', '#3BA4FF'];
+    if (m === 'clubx') return ['Club X', '#12F06C'];
+    const d = D2T.run(), c = d && d.club;
+    return ['Classic', c ? (c.text || c.accent) : '#12F06C'];
+  };
   D2T.topbar = (opts = {}) => {
-    const el = D2T.h(`<header class="topbar"><span class="topbar-l">${opts.back ? `<button class="back-btn" aria-label="Back">${ICON.back}</button>` : ''}<button class="logo-home" aria-label="Home" style="border:0;background:none;padding:0;color:#fff;height:26px;display:flex">${D2T.logo('short', { style: 'height:26px' })}</button></span>
-      ${opts.middle || '<span></span>'}${opts.noAccount ? '<span></span>' : `<button class="acct-btn" aria-label="Account">${ICON.account}</button>`}</header>`);
+    const mw = opts.back || opts.mode === false ? null : (opts.mode || modeWord());
+    const tag = mw ? `<span class="mode-tag" style="--c:${mw[1]}"><span>${D2T.esc(mw[0])}</span></span>` : '';
+    const el = D2T.h(`<header class="topbar${mw ? ' has-mode' : ''}"><span class="topbar-l">${opts.back ? `<button class="back-btn" aria-label="Back">${ICON.back}</button>` : ''}<button class="logo-home" aria-label="Home${mw ? ', ' + D2T.esc(mw[0]) : ''}" style="border:0;background:none;padding:0;color:#fff;height:26px;display:flex">${D2T.logo('short', { style: 'height:26px' })}</button></span>
+      ${tag || opts.middle || '<span></span>'}${opts.noAccount ? '<span></span>' : `<button class="acct-btn" aria-label="Account">${ICON.account}</button>`}</header>`);
     el.querySelector('.logo-home').onclick = () => D2T.go('home');
     const acct = el.querySelector('.acct-btn'); if (acct) acct.onclick = () => D2T.go('account');
     const back = el.querySelector('.back-btn'); if (back) back.onclick = D2T.back;
     return el;
   };
+  // First-time tips (12 Oct): a handwritten note with a curved arrow (the respin tip's style), each shown once ever
+  // (state.tips), one at a time, gone on the next tap. place: 'above' (default) or 'below' the target; side: 'right'
+  // puts the words more to the left of the arrow. D2T.tips([[key, el, text, opts], ...]) shows the first unseen.
+  let tipEl = null;
+  D2T.tip = (key, target, text, opts = {}) => {
+    const st = D2T.state; st.tips = st.tips || {};
+    const scr = document.querySelector('#app .screen');
+    if (!target || !scr || st.tips[key] || tipEl || !target.isConnected) return false;
+    st.tips[key] = true; D2T.save();
+    const below = opts.place === 'below';
+    const el = D2T.h(`<div class="d2t-tip${below ? ' below' : ''}" aria-hidden="true"><span>${text}</span><svg viewBox="0 0 44 60"><path d="M40 8 C20 6 8 22 14 52" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M6 43 L14 54 L22 45" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`);
+    el.style.visibility = 'hidden'; scr.appendChild(el);
+    // the words sit where they fit on screen; the arrow is placed on its own so its point lands on the target
+    const s = scr.getBoundingClientRect(), t = target.getBoundingClientRect(), sp = el.querySelector('span').getBoundingClientRect();
+    const cx = t.left - s.left + t.width / 2, w = sp.width, h = sp.height, AW = 34, AH = 46;
+    const left = Math.max(8, Math.min(s.width - w - 8, cx - w * (opts.side === 'right' ? 0.75 : 0.25)));
+    const ax = cx - left, flip = ax > w / 2, svg = el.querySelector('svg');
+    svg.style.left = (flip ? ax - AW + 11 : ax - 11) + 'px';
+    svg.style.transform = `scale(${flip ? -1 : 1}, ${below ? -1 : 1})`;
+    el.style.width = w + 'px'; el.style.height = (h + AH - 6) + 'px'; el.style.left = left + 'px';
+    if (below) { svg.style.top = '0px'; el.querySelector('span').style.top = (AH - 6) + 'px'; el.style.top = (t.bottom - s.top - 2) + 'px'; }
+    else { svg.style.top = (h - 6) + 'px'; el.style.top = (t.top - s.top - h - AH + 8) + 'px'; }
+    el.style.visibility = '';
+    tipEl = el;
+    const close = () => { if (tipEl !== el) return; tipEl = null; document.removeEventListener('pointerdown', close, true); el.classList.add('gone'); setTimeout(() => el.remove(), 400); };
+    setTimeout(() => document.addEventListener('pointerdown', close, true), 300);
+    setTimeout(close, opts.ms || 9000);
+    return true;
+  };
+  D2T.tips = (list) => { for (const [k, el, text, o] of list) { if (!(D2T.state.tips || {})[k]) return D2T.tip(k, el, text, o); } return false; };
   D2T.back = () => { const p = prevName; D2T.go(p && p !== 'intro' && p !== currentName ? p : 'home'); };
 
   // ---------- browser chrome: status bar, toolbars and page background follow each screen's top and bottom colours ----------
@@ -145,6 +210,7 @@
   }
   function render(name) {
     const app = document.getElementById('app');
+    if (tipEl) { tipEl.remove(); tipEl = null; }
     if (current && current.unmount) { try { current.unmount(); } catch (e) { console.error(e); } }
     app.querySelectorAll('.sheet, .sheet-scrim, .card-overlay').forEach((n) => n.remove());
     const def = D2T.screens[name];
@@ -165,6 +231,11 @@
     render(n);
   });
   // Every fresh load opens with the intro, which hands over to home (where Continue picks up a run).
+  // The page streams in three parts (scripts/build.py): this shell and the intro first, so the intro starts while the
+  // data and the rest of the game are still arriving. The intro waits at its handover until boot.js calls D2T.ready().
+  let isReady = false; const readyQ = [];
+  D2T.ready = () => { if (isReady) return; isReady = true; readyQ.splice(0).forEach((f) => f()); };
+  D2T.whenReady = (f) => { if (isReady) f(); else readyQ.push(f); };
   D2T.start = () => {
     let n = routeName();
     if (!introPlayed) { introPlayed = true; n = 'intro'; }

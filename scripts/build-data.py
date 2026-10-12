@@ -8,7 +8,7 @@ Inputs
 - data/source/pl_players.csv   every player-season: club, broad position, apps, goals (from Tenaball, two sources)
 - data/ratings/*.csv           card ratings and detailed positions, when present (from the player data work)
 - data/source/clubs.json       club display names and accent colours
-- assets/crests/72, /128       crest PNGs
+- assets/crests/72, /128, /256  crest PNGs (256 for big displays)
 
 Ratings: where data/ratings has a row for a player-season it wins. Otherwise a fallback model rates
 each player against everyone in his broad position that season (goals for forwards, team defence for
@@ -287,10 +287,21 @@ def main():
     crests = {}
     for c, meta in clubs_meta.items():
         f = meta["crest"]
-        for size in ("72", "128"):
+        for size in ("72", "128", "256"):   # 256: high-resolution crests for big displays (tools/fetch_crests_hi.py, render_crests.js)
             path = os.path.join(ROOT, "assets", "crests", size, f)
             if os.path.exists(path):
                 crests.setdefault(c, {})[size] = "data:image/png;base64," + base64.b64encode(open(path, "rb").read()).decode()
+            # a white version for dark backgrounds, where a club's own crest is too dark to see (Derby, Spurs)
+            # a white version for the club's own coloured card, where a one-colour crest in that colour vanishes
+            # (Nottingham Forest, Liverpool, Sheffield Wed on red, red and blue; Craig, 12 Oct)
+            if meta.get("crestCard"):
+                path = os.path.join(ROOT, "assets", "crests", size, meta["crestCard"])
+                if os.path.exists(path):
+                    crests.setdefault(c, {})[size + "c"] = "data:image/png;base64," + base64.b64encode(open(path, "rb").read()).decode()
+            if meta.get("crestDark"):
+                path = os.path.join(ROOT, "assets", "crests", size, meta["crestDark"])
+                if os.path.exists(path):
+                    crests.setdefault(c, {})[size + "w"] = "data:image/png;base64," + base64.b64encode(open(path, "rb").read()).decode()
     with open(os.path.join(OUT, "crests.json"), "w", encoding="utf-8") as f:
         json.dump(crests, f, separators=(",", ":"))
     size = os.path.getsize(os.path.join(OUT, "game.json")) / 1e6

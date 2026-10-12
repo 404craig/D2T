@@ -284,7 +284,7 @@
           baseBtn: { accent: club.accent, ink: club.ink },
           onRespinsChange: () => { GAME.respinCards(); st.spun = ''; D2T.save(); },
           beforeSpin: () => leavePlacing(),
-          onSelect: (i, p) => { if (placing) drawPitch(draft ? di.slot : GAME.bestSlot(p.id)); },
+          onSelect: (i, p) => { if (placing) drawPitch(draft ? di.slot : GAME.bestSlot(p.id)); timers.push(setTimeout(() => api && D2T.tip('card-again', api.el.querySelectorAll('.sp-slot')[i], 'Tap him again for his career'), 250)); },
           afterSettle: draft ? null : { label: 'Pass', onClick: pass },
           onConfirm: (p) => { if (draft) sign(api.results().indexOf(p), di.slot); }
         });

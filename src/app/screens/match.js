@@ -90,6 +90,7 @@
         SND.play('kickoff'); SND.crowd(true);
         phase = 'live';
         btn.textContent = 'Skip to end'; btn.classList.add('se-btn-ghost');
+        setTimeout(() => alive && phase === 'live' && D2T.tip('match-skip', btn, 'Jump to the final score'), 1500);
         feed.innerHTML = ''; push({ type: 'ko' }, true);
         body.querySelector('.se-sb').classList.add('se-live');
         const msPerMin = MATCH_MS / 90; let t0 = performance.now(), paused = 0;

@@ -289,6 +289,10 @@
       };
 
       render(null);
+      // first-time tips: the shape, then (another visit) swapping a sub in
+      const tipT = setTimeout(() => { if (!root.isConnected) return; const subs = subsEl.querySelectorAll('[data-card]'), sub = subs[Math.min(3, subs.length - 1)];   // a sub clear of the Formation button
+        D2T.tips([['formation', body.querySelector('.se-formlink'), 'Change your shape here'], ...(pre && !drafting && sub ? [['subs', sub, 'Drag a sub onto the pitch']] : [])]); }, 1100);
+      const offOld = this._off; this._off = () => { clearTimeout(tipT); offOld && offOld(); };
       // first load: cards deal onto the pitch
       if (!reduced) [...slotsEl.querySelectorAll('.se-cardwrap')].forEach((n, i) => n.animate([{ opacity: 0, transform: 'translateY(14px) scale(.85)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 60 + i * 40, easing: 'cubic-bezier(.3,1.3,.5,1)', fill: 'backwards' }));
     },

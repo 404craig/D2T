@@ -4,17 +4,24 @@
 (function () {
   const D2T = window.D2T, G = window.D2T_GAME, E = window.D2TE, CR = window.D2T_CRESTS || {};
   const LV = ['bronze', 'silver', 'gold', 'baller', 'legend'];
-  const crestOf = (name) => (CR[name] && (CR[name]['128'] || CR[name]['72'])) || '';
+  // crest: for dark backgrounds (a white version where the club's own is too dark to see, Derby and Spurs);
+  // crestLight: the club's own crest, for light faces (club cards, bronze, silver and gold player cards, white discs).
+  const crestOf = (name) => (CR[name] && (CR[name]['128w'] || CR[name]['72w'] || CR[name]['128'] || CR[name]['72'])) || '';
+  const crestLightOf = (name) => (CR[name] && (CR[name]['128'] || CR[name]['72'])) || '';
+  // crestCard: on the club's own coloured card (a white version where the crest is all that colour, else crestLight)
+  const crestHiOf = (name) => (CR[name] && (CR[name]['256'] || CR[name]['128'])) || '';   // big displays (Unbeaten Run)
+  const crestCardOf = (name) => (CR[name] && (CR[name]['128c'] || CR[name]['72c'])) || crestLightOf(name);
   const meta = (name) => G.clubs[name] || { name, full: name, code: name.slice(0, 3).toUpperCase(), accent: '#12F06C', ink: '#000000', text: '#12F06C' };
   const GAME = D2T.game = {};
 
   // ---------- clubs ----------
   const clubs = {};
-  Object.keys(G.clubs).forEach((n) => { const m = meta(n); clubs[n] = { name: n, full: m.full || n, code: m.code, crest: crestOf(n), accent: m.accent, ink: m.ink, text: m.text }; });
+  Object.keys(G.clubs).forEach((n) => { const m = meta(n); clubs[n] = { name: n, full: m.full || n, code: m.code, crest: crestOf(n), crestLight: crestLightOf(n), crestCard: crestCardOf(n), accent: m.accent, ink: m.ink, text: m.text }; });
   // Club X: Craig's badge (assets/brand/club_x.png, embedded by build.py; the drawn shield is only a fallback), D2T green as its colour.
   const X_BADGE = window.D2T_CLUBX_BADGE || 'data:image/svg+xml,' + encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 116'><path d='M50 3 L94 18 V60 C94 86 74 104 50 113 C26 104 6 86 6 60 V18 Z' fill='#0E0E10' stroke='#12F06C' stroke-width='5'/><path d='M32 36 L68 80 M68 36 L32 80' stroke='#12F06C' stroke-width='11' stroke-linecap='round'/></svg>");
   clubs['Club X'] = { name: 'Club X', full: 'Club X', code: 'CLX', crest: X_BADGE, accent: '#12F06C', ink: '#000000', text: '#12F06C' };
-  GAME.club = (name) => clubs[name] || Object.assign({ crest: crestOf(name) }, meta(name));
+  GAME.crestHi = crestHiOf;
+  GAME.club = (name) => clubs[name] || Object.assign({ crest: crestOf(name), crestLight: crestLightOf(name), crestCard: crestCardOf(name) }, meta(name));
 
   // ---------- the club pool: every relegated club-season ----------
   const pool = G.catalogue.map((c) => {
@@ -34,7 +41,7 @@
   const G4 = G.g433 || { GK: [], DEF: [], MID: [], FWD: [] }, g4lists = {};
   GAME.g433 = {
     TARGET: 433, RESPINS: 3, TOP: 220,
-    list: (pos) => g4lists[pos] || (g4lists[pos] = G4[pos].map(([name, sur, club, goals]) => ({ name, sur, club, goals }))),
+    list: (pos) => g4lists[pos] || (g4lists[pos] = G4[pos].map(([name, sur, club, goals]) => ({ name, sur, club, goals, pos }))),
     // three different players of a position from its 220 top scorers, never one already in your XI
     draw(pos, avoid = []) {
       const L = GAME.g433.list(pos), n = Math.min(L.length, GAME.g433.TOP), out = [];
@@ -42,6 +49,22 @@
       while (out.length < 3 && guard++ < 500) { const p = L[Math.floor(Math.random() * n)]; if (!out.includes(p) && !avoid.includes(p.name)) out.push(p); }
       return out;
     },
+    // Every spin (Craig, 12 Oct): three players from any position still open on the board, each position as likely as
+    // its open shirts. On the last shot, if a player of that position has exactly the goals needed, one game in five
+    // (GIFT, decided once per game, so respins keep it) puts him among the three. Balanced with a simulation of
+    // 40,000 games: a player who roughly knows career goals is offered the exact one about 1 game in 7.
+    GIFT: 0.2,
+    drawOpen(openPos, avoid = [], need = null) {
+      const slots = [], out = [], top = GAME.g433.TOP, pickFrom = (pos) => GAME.g433.list(pos).slice(0, top);
+      Object.keys(openPos).forEach((pos) => { for (let i = 0; i < openPos[pos]; i++) slots.push(pos); });
+      if (!slots.length) return out;
+      if (need != null) { const hits = pickFrom(slots[0]).filter((p) => p.goals === need && !avoid.includes(p.name)); if (hits.length) out.push(hits[Math.floor(Math.random() * hits.length)]); }
+      let guard = 0;
+      while (out.length < 3 && guard++ < 999) { const L = pickFrom(slots[Math.floor(Math.random() * slots.length)]), p = L[Math.floor(Math.random() * L.length)]; if (!out.includes(p) && !avoid.includes(p.name)) out.push(p); }
+      for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
+      return out;
+    },
+    canGift: (pos, need, avoid = []) => need >= 0 && GAME.g433.list(pos).slice(0, GAME.g433.TOP).some((p) => p.goals === need && !avoid.includes(p.name)),
     record: () => Object.assign({ games: 0, exact: 0, best: null, bestTotal: null, last: null }, D2T.state.record.g433 || {}),
     finish(total) {
       const r = GAME.g433.record(), gap = Math.abs(total - GAME.g433.TARGET), newBest = r.best == null || gap < r.best;
@@ -113,8 +136,8 @@
     keys.forEach((k, i) => { stats[k] = p.s6 ? p.s6[i] : null; });
     const two = !legend && p.c2 != null ? S.clubs[shown === p.c2 ? p.c : p.c2].name : null;
     return {
-      id: p.id, name: p.n, club: clubName, club2: two, crest: crestOf(clubName), pos: p.b, ovr: p.r, level: LV[p.lv || 0],
-      apps: p.a, goals: p.g, assists: p.as, cleanSheets: p.cs, nat: p.nat, season: legend ? p.sk : S.season,
+      id: p.id, name: p.n, club: clubName, club2: two, crest: crestOf(clubName), crestLight: crestLightOf(clubName), pos: p.b, ovr: p.r, level: LV[p.lv || 0],
+      apps: p.a, goals: p.g, assists: p.as, cleanSheets: p.cs, nat: p.nat, flag: GAME.flag(p.nat), season: legend ? p.sk : S.season,
       provisional: p.src === 'f', stats, career: p.k != null && G.careers ? G.careers[p.k] : null,
       // detailed positions when known (main first); role is the broad colour of his main one
       main: E.SLOT_BROAD[(p.p || [])[0]] ? p.p[0] : null, alt: (p.p || []).slice(1).filter((x) => E.SLOT_BROAD[x]),
@@ -122,6 +145,8 @@
     };
   };
   GAME.LV = LV;
+  // nationality flags (12 Oct): drawn pictures, never emoji (assets/flags, embedded by build.py as D2T_FLAGS and D2T_NATIONS)
+  GAME.flag = (nat) => { const code = (window.D2T_NATIONS || {})[nat]; return (code && (window.D2T_FLAGS || {})[code]) || ''; };
 
   // ---------- the run ----------
   // D2T.state.run = { step, eng (the engine's run, saved whole), tableSeen, pending (a signing waiting for a shirt), match (gw on show) }
@@ -412,6 +437,34 @@
     GAME.chooseClub(d.key);
     D2T.save();
     return true;
+  };
+  // A Daily closes at midnight (UK date, Craig 12 Oct): an unfinished one from an earlier day is dropped (no result, so it
+  // never counts), a parked run comes back, and home says so once. Returns the closed date or null.
+  GAME.closeOldDaily = () => {
+    const st = D2T.state, today = GAME.today(), done = (d) => !!(st.record.daily || {})[d];
+    let closed = null;
+    if (st.run && st.run.daily && st.run.daily !== today && !done(st.run.daily)) {
+      closed = st.run.daily;
+      st.run = st.parked && live(st.parked) ? st.parked : null;
+      if (st.run === st.parked) st.parked = null;
+    }
+    if (st.dailyRun && st.dailyRun.daily !== today) { closed = closed || (done(st.dailyRun.daily) ? null : st.dailyRun.daily); st.dailyRun = null; }
+    if (closed) { st.dailyClosed = closed; D2T.save(); }
+    return closed;
+  };
+  // Your best Daily: the biggest rise, then the higher finish. `except` leaves a date out (to compare today with the rest).
+  GAME.dailyBest = (except) => {
+    const days = D2T.state.record.daily || {};
+    return Object.keys(days).filter((d) => d !== except).map((d) => Object.assign({ date: d }, days[d]))
+      .sort((a, b) => b.rise - a.rise || a.finish - b.finish)[0] || null;
+  };
+  // today's Daily against your best other one, for home, the summary and the share text
+  GAME.dailyCompare = (date) => {
+    date = date || GAME.today();
+    const today = GAME.dailyResult(date), best = GAME.dailyBest(date), sg = (n) => (n > 0 ? '+' : '') + n;
+    const isBest = !!today && (!best || today.rise > best.rise || (today.rise === best.rise && today.finish < best.finish));
+    const bestLine = best ? `Best Daily: ${best.club} ${best.season}, ${D2T.ordinal(best.finish)} (rise ${sg(best.rise)})` : '';
+    return { today, best, isBest, sg, bestLine };
   };
   GAME.dailyStreak = () => {
     const days = D2T.state.record.daily || {};

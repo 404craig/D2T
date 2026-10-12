@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D2T Goal Rush</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<style>
+  /* 433 Goals becomes Goal Rush: the target is a formation (442, 433, 451, 352, 343, 424, 532, 541) and the pitch takes that shape. Yellow is its colour. */
+  :root { color-scheme: dark; --y: #FFD21F; --y-t: #FFE375; --soft: #CFCFD6; --muted: #8E8E99; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #08080A; color: #fff; font-family: 'Exo 2', Arial, sans-serif; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; }
+  .page { max-width: 1760px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 28px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
+  .head p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 92ch; }
+  .row { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .opt { width: 390px; max-width: 100%; display: flex; flex-direction: column; gap: 10px; }
+  .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: #12F06C; }
+  .opt-h h3 { font: 900 italic 22px/1.05 'Exo 2'; margin: 3px 0; }
+  .opt-h p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; min-height: 57px; }
+  .phone { position: relative; width: 390px; max-width: 100%; height: 760px; border-radius: 26px; background: #000; box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,.6); overflow: hidden; display: flex; flex-direction: column; }
+  .phone.home { height: auto; padding: 18px 16px 22px; }
+
+  /* home cards (live style) */
+  .sect { font: 900 italic 26px/1 'Exo 2'; text-transform: uppercase; margin: 4px 2px 14px; }
+  .card { position: relative; display: flex; flex-direction: column; justify-content: center; width: 100%; min-height: 140px; padding: 18px 70px 18px 18px; border-radius: 22px; overflow: hidden; margin-bottom: 12px; isolation: isolate;
+    background: linear-gradient(100deg, #0E0E10 0%, #0E0E10 38%, color-mix(in srgb, var(--c) 30%, #0E0E10) 100%); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 45%, transparent); }
+  .card::after { content: ''; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, rgba(255,255,255,0) 2px 7px); }
+  .card.dim { opacity: .45; }
+  .t-tag { display: block; font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--c); }
+  .t-big { display: block; font: 900 italic 26px/.95 'Exo 2'; text-transform: uppercase; margin-top: 6px; }
+  .t-sub { display: block; font-size: 14px; font-weight: 600; color: var(--soft); margin-top: 7px; line-height: 1.35; }
+  .go { position: absolute; right: 16px; bottom: 16px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #0A0A0A; }
+  .go svg { width: 20px; height: 20px; }
+  .mark { position: absolute; right: -14px; top: 50%; transform: translateY(-50%) rotate(-8deg); color: var(--c); opacity: .3; z-index: -1; font: 900 italic 84px/1 'Exo 2'; -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px currentColor; }
+  .mark.cycle span { position: absolute; right: 0; top: 50%; transform: translateY(-50%); opacity: 0; animation: cyc 12s infinite; }
+  @keyframes cyc { 0% { opacity: 0; } 3% { opacity: 1; } 22% { opacity: 1; } 25% { opacity: 0; } 100% { opacity: 0; } }
+
+  /* game screen */
+  .tb { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 14px 16px 8px; }
+  .logo { display: block; height: 26px; aspect-ratio: 857 / 241; background: #fff; -webkit-mask: url('assets/logo/short.png') center / contain no-repeat; mask: url('assets/logo/short.png') center / contain no-repeat; }
+  .mtag { font: 900 italic 15px/1 'Exo 2'; letter-spacing: .04em; text-transform: uppercase; color: #0A0A0A; background: var(--y); padding: 5px 10px 4px; border-radius: 5px; transform: skewX(-10deg); white-space: nowrap; }
+  .mtag span { display: inline-block; transform: skewX(10deg); }
+  .acct { justify-self: end; width: 40px; height: 40px; border-radius: 50%; border: 1px solid #26262C; background: #0E0E10; display: grid; place-items: center; }
+  .acct svg { width: 18px; height: 18px; }
+  .tally { padding: 2px 16px 10px; position: relative; }
+  .tally .top { display: flex; justify-content: space-between; align-items: flex-end; }
+  .info { display: flex; flex-direction: column; gap: 3px; }
+  .info b { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+  .info i { font-style: normal; font-size: 11px; font-weight: 700; color: var(--muted); }
+  .info i em { font-style: normal; color: var(--y-t); }
+  .tot { display: flex; align-items: baseline; gap: 6px; }
+  .tot b { font: 900 italic 28px/1 'Exo 2'; }
+  .tot i { font-style: normal; font-size: 12px; font-weight: 800; color: var(--y-t); }
+  /* tally options for the right-hand side */
+  .tot1 { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+  .tot1 .n { display: flex; align-items: baseline; }
+  .tot1 .n b { font: 900 italic 28px/1 'Exo 2'; }
+  .tot1 .n small { font: 900 italic 17px/1 'Exo 2'; color: #8E8E99; margin-left: 1px; }
+  .tot1 .n em { font-style: normal; font-size: 11px; font-weight: 800; color: #8E8E99; margin-left: 5px; text-transform: uppercase; letter-spacing: .06em; }
+  .togo { display: block; text-align: right; font: 800 12px/1 'Exo 2'; color: var(--y-t); margin-top: 6px; }
+  .tot1 i { font-style: normal; font-size: 12px; font-weight: 800; color: var(--y-t); }
+  .tot2 { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+  .tot2 b { font: 900 italic 30px/1 'Exo 2'; color: var(--y); }
+  .tot2 b small { font-size: 13px; color: var(--y-t); margin-left: 4px; text-transform: uppercase; }
+  .tot2 i { font-style: normal; font-size: 11px; font-weight: 700; color: #8E8E99; }
+  .tot2 i strong { color: #fff; font-weight: 900; }
+  .tot3 { display: flex; align-items: center; gap: 8px; }
+  .tot3 .n { font: 900 italic 28px/1 'Exo 2'; }
+  .tot3 .n small { font-size: 16px; color: #8E8E99; }
+  .tot3 .pill { font: 900 italic 13px/1 'Exo 2'; text-transform: uppercase; color: #0A0A0A; background: var(--y); padding: 6px 9px 5px; border-radius: 8px; }
+  .tot4 { display: grid; grid-template-columns: auto auto; gap: 0 14px; text-align: right; }
+  .tot4 span { display: flex; flex-direction: column; align-items: flex-end; }
+  .tot4 b { font: 900 italic 26px/1 'Exo 2'; }
+  .tot4 span:last-child b { color: var(--y); }
+  .tot4 i { font-style: normal; font-size: 9.5px; font-weight: 800; letter-spacing: .12em; color: #8E8E99; margin-top: 3px; }
+  .bar5 .track { height: 18px; border-radius: 9px; margin-top: 10px; }
+  .bar5 .track .fill { border-radius: 9px; display: flex; align-items: center; justify-content: flex-end; padding-right: 7px; font: 900 italic 12px/1 'Exo 2'; color: #0A0A0A; min-width: 34px; }
+  .bar5 .track .left { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font: 900 italic 12px/1 'Exo 2'; color: #8E8E99; }
+  .bar5 .track .mark2 { top: -3px; bottom: -3px; }
+  .bar5 .track .mark2::after { display: none; }
+  .bar5 .tot5 { font: 900 italic 15px/1 'Exo 2'; text-transform: uppercase; color: var(--y); }
+  .mini { width: 390px; max-width: 100%; border-radius: 22px; background: #000; box-shadow: 0 0 0 1px #222228; overflow: hidden; padding-bottom: 6px; }
+  .track { position: relative; height: 10px; border-radius: 5px; background: #1B1B21; margin-top: 8px; }
+  .track .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; background: linear-gradient(90deg, #FFB000, var(--y)); }
+  .track .mark2 { position: absolute; right: -1px; top: -4px; bottom: -4px; width: 2px; background: #fff; }
+  .tally .sub { display: block; text-align: right; font-size: 10px; font-weight: 800; letter-spacing: .06em; color: var(--muted); margin-top: 5px; text-transform: uppercase; }
+  .track .mark2::after { content: attr(data-t); position: absolute; bottom: -12px; right: 4px; font: 900 italic 9px/1 'Exo 2'; opacity: .8; }
+
+  .pitch { position: relative; margin: 0 12px; flex: 1 1 auto; border-radius: 18px; overflow: hidden; isolation: isolate;
+    background: radial-gradient(90% 55% at 50% -10%, rgba(255,255,255,.22), rgba(255,255,255,0) 60%), repeating-linear-gradient(180deg, #0D3A24 0 9%, #0A311E 9% 18%); }
+  .pitch svg.lines { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: rgba(255,255,255,.28); }
+  .pitch .circle { position: absolute; left: 50%; top: 50%; width: 84px; height: 84px; margin: -42px; border: 1.4px solid rgba(255,255,255,.25); border-radius: 50%; }
+  .pitch .paint { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; font: 900 italic 40px/1 'Exo 2'; color: rgba(255,255,255,.10); z-index: 1; letter-spacing: .02em; }
+  .pitch .shape { position: absolute; left: 12px; bottom: 10px; z-index: 3; font-size: 11px; font-weight: 800; letter-spacing: .08em; padding: 5px 9px; border-radius: 9px; background: rgba(0,0,0,.6); color: var(--y-t); }
+  .slot { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 2px; z-index: 2; }
+  .slot .nm { font: 900 italic 9.5px/1 'Exo 2'; text-transform: uppercase; padding: 2px 5px; border-radius: 4px; background: rgba(0,0,0,.72); white-space: nowrap; }
+  .sh { position: relative; width: var(--w); aspect-ratio: 1 / 1.02; }
+  .sh svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .sh text { font-family: 'Exo 2'; font-style: italic; font-weight: 900; text-anchor: middle; }
+  .sh .plate { position: absolute; left: 50%; top: calc(var(--d) * -0.42); width: var(--d); height: var(--d); margin-left: calc(var(--d) / -2); border-radius: 50%; background: #F4F4F6; box-shadow: 0 0 0 1.5px var(--tr), 0 2px 5px rgba(0,0,0,.45); display: grid; place-items: center; }
+  .sh .plate img { width: 76%; height: 76%; object-fit: contain; }
+
+  .trio { display: flex; justify-content: center; gap: 12px; padding: 12px 16px 0; }
+  .cell { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .cell .cap { font-size: 10.5px; font-weight: 800; color: var(--muted); letter-spacing: .06em; }
+  .hint { text-align: center; font-size: 11.5px; color: var(--muted); padding-top: 6px; min-height: 22px; }
+  .bar { display: flex; align-items: center; gap: 10px; padding: 8px 16px 14px; }
+  .circ { width: 54px; height: 54px; border-radius: 50%; border: 1px solid #26262C; background: #0E0E10; display: grid; place-items: center; position: relative; flex: none; }
+  .circ svg { width: 22px; height: 22px; }
+  .circ .n { position: absolute; top: -3px; right: -3px; min-width: 18px; height: 18px; border-radius: 9px; background: var(--y); color: #000; font: 900 11px/18px 'Exo 2'; text-align: center; }
+  .spin { flex: 1; height: 56px; border-radius: 28px; background: var(--y); color: #0A0A0A; display: flex; align-items: center; justify-content: center; font: 900 italic 21px/1 'Exo 2'; text-transform: uppercase; box-shadow: 0 6px 16px -6px var(--y); }
+
+  /* the target reveal at the start of a game */
+  .reveal { position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: rgba(0,0,0,.62); }
+  .reveal small { font-size: 12px; font-weight: 800; letter-spacing: .16em; color: var(--y-t); }
+  .reveal b { font: 900 italic 120px/.9 'Exo 2'; color: var(--y); letter-spacing: -.02em; text-shadow: 0 6px 30px rgba(0,0,0,.6), 0 0 40px rgba(255,210,31,.45); transform: rotate(-3deg); }
+  .reveal span { font: 900 italic 18px/1 'Exo 2'; text-transform: uppercase; letter-spacing: .06em; padding: 6px 12px; border-radius: 10px; background: rgba(0,0,0,.75); }
+  .reveal .roll { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 6px; max-width: 300px; }
+  .reveal .roll i { font: 900 italic 15px/1 'Exo 2'; font-style: normal; color: rgba(255,255,255,.35); padding: 5px 8px; border-radius: 7px; border: 1px solid #333; }
+  .reveal .roll i.on { color: #0A0A0A; background: var(--y); border-color: var(--y); }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <h1>Goal Rush</h1>
+    <p>433 Goals becomes Goal Rush, in yellow. Each game picks one of eight formations at random (442, 433, 451, 352, 343, 424, 532, 541): that number is the target and the pitch takes that shape. The bar fills left to right; the tally shows scored over target and how many to go (five ways below). Your 433 record carries on. Players, clubs and career goals are real.</p>
+  </div>
+  <div class="row" id="row"></div>
+  <h2 style="font:900 italic 30px/1 'Exo 2';margin:10px 0 0">The goal tally: five ways</h2>
+  <p style="margin:0;color:#BDBDC6;font-size:15px;line-height:1.5;max-width:92ch">The bar fills left to right again, up to the target line. For the numbers on the right, each option shows the same moment twice: 52 of 352 early on, then 341 of 352 near the end. The phones above use the chosen layout: 314/352 GOALS above the bar, 38 to go under it.</p>
+  <div class="row" id="tallies"></div>
+</div>
+<script src="data/data.js"></script>
+<script src="data/goals433.js"></script>
+<script>
+(function () {
+  const D = window.D2T_DATA, P = window.D2T_433, ALL = [].concat(P.GK, P.DEF, P.MID, P.FWD), by = (n) => ALL.find((p) => p.name === n);
+  const GO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
+  const ACCT = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.6-3.6 4.6-5.2 8-5.2s6.4 1.6 8 5.2"/></svg>';
+  const HOME = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></svg>';
+  const RESPIN = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5"/></svg>';
+  const SHIRT = 'M31 9 L42 4 Q50 11 58 4 L69 9 L95 24 L85 44 L74 38 L74 96 L26 96 L26 38 L15 44 L5 24 Z';
+  const lum = (h) => { const n = parseInt(h.slice(1), 16); return (0.3 * (n >> 16) + 0.59 * ((n >> 8) & 255) + 0.11 * (n & 255)) / 255; };
+
+  // a shirt: open (yellow outline, the position), filled (club colours, his goals), or big for the trio (name, crest)
+  function shirt(o) {
+    if (!o.p) {
+      const open = o.open;
+      return `<div class="sh" style="--w:${o.w}px"><svg viewBox="0 0 100 100"><path d="${SHIRT}" fill="${open ? 'rgba(255,210,31,.12)' : 'rgba(255,255,255,.05)'}" stroke="${open ? '#FFD21F' : 'rgba(255,255,255,.45)'}" stroke-width="2.4" ${open ? '' : 'stroke-dasharray="5 4"'} stroke-linejoin="round"/><text x="50" y="64" font-size="24" fill="${open ? '#FFE375' : 'rgba(255,255,255,.8)'}" style="font-style:normal">${o.pos}</text></svg></div>`;
+    }
+    const c = D.clubs[o.p.club] || { accent: '#888888', ink: '#111111' }, fill = c.accent, ink = lum(fill) > 0.55 ? '#111111' : '#FFFFFF', tr = c.ink === fill ? '#333' : c.ink;
+    const crest = c.crest || '';
+    if (o.big) {
+      const sur = o.p.sur.toUpperCase(), fs = Math.min(13, 140 / Math.max(6, sur.length));
+      return `<div class="sh" style="--w:${o.w}px;--tr:${tr}"><svg viewBox="0 0 100 100"><path d="${SHIRT}" fill="${fill}" stroke="${tr}" stroke-width="2.4" stroke-linejoin="round"/><text x="50" y="27" font-size="${fs}" fill="${ink}" textLength="${Math.min(42, sur.length * fs * 0.62)}" lengthAdjust="spacingAndGlyphs">${sur}</text><circle cx="50" cy="61" r="17" fill="#F4F4F6" stroke="${tr}" stroke-width="1.6"/><image href="${crest}" x="38" y="49" width="24" height="24" preserveAspectRatio="xMidYMid meet"/></svg></div>`;
+    }
+    const g = String(o.p.goals);
+    return `<div class="sh" style="--w:${o.w}px;--tr:${tr}"><span class="plate" style="--d:${Math.round(o.w * 0.4)}px"><img src="${crest}" alt=""></span><svg viewBox="0 0 100 100"><path d="${SHIRT}" fill="${fill}" stroke="${tr}" stroke-width="2.4" stroke-linejoin="round"/><text x="50" y="65" font-size="30" fill="${ink}"${g.length > 2 ? ' textLength="46" lengthAdjust="spacingAndGlyphs"' : ''}>${g}</text></svg></div>`;
+  }
+  // the pitch for any of the eight shapes: keeper, then the three lines from the back
+  const LABELS = { DEF: { 3: ['CB', 'CB', 'CB'], 4: ['LB', 'CB', 'CB', 'RB'], 5: ['LWB', 'CB', 'CB', 'CB', 'RWB'] }, MID: { 2: ['CM', 'CM'], 3: ['CM', 'CM', 'CM'], 4: ['LM', 'CM', 'CM', 'RM'], 5: ['LM', 'CM', 'CM', 'CM', 'RM'] }, FWD: { 1: ['ST'], 2: ['ST', 'ST'], 3: ['LW', 'ST', 'RW'], 4: ['LW', 'ST', 'ST', 'RW'] } };
+  function slots(f) {
+    const [d, m, a] = f.split('').map(Number), out = [['GK', 50, 88]];
+    [[d, 'DEF', 67], [m, 'MID', 43], [a, 'FWD', 17]].forEach(([n, pos, y]) => {
+      const gap = n === 1 ? 0 : Math.min(25, 76 / (n - 1));
+      LABELS[pos][n].forEach((lab, i) => { const x = 50 + (i - (n - 1) / 2) * gap; out.push([lab, x, y + (n >= 4 && (i === 0 || i === n - 1) ? -2 : 0)]); });
+    });
+    return out;
+  }
+  const LINES = '<svg class="lines" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="3" y="2.5" width="94" height="95" rx="1.5" stroke-width="0.5"/><line x1="3" y1="50" x2="97" y2="50" stroke-width="0.5"/><rect x="26" y="2.5" width="48" height="14" stroke-width="0.5"/><rect x="38" y="2.5" width="24" height="5" stroke-width="0.5"/><rect x="26" y="83.5" width="48" height="14" stroke-width="0.5"/><rect x="38" y="92.5" width="24" height="5" stroke-width="0.5"/></svg>';
+  const pitch = (f, filled, openFrom) => `<div class="pitch">${LINES}<span class="circle"></span><div class="paint">${f} GOALS</div><span class="shape">${f.split('').join('-')}</span>${slots(f).map(([lab, x, y], i) => {
+    const p = filled[i];
+    return `<div class="slot" style="left:${x}%;top:${y}%">${p ? shirt({ w: 50, p }) + `<span class="nm">${p.sur}</span>` : shirt({ w: 50, pos: lab, open: i >= openFrom || !p })}</div>`; }).join('')}</div>`;
+  const tally = (t, target, player, left, respins) => `<div class="tally"><div class="top"><span class="info"><b>Player ${player} of 11</b><i>${left} players to pick · <em>${t <= target ? (target - t) + ' to go' : (t - target) + ' over'}</em></i></span><span class="tot1"><span class="n"><b>${t}</b><small>/${target}</small><em>goals</em></span></span></div><div class="track"><span class="fill" style="width:${Math.min(100, t / target * 100)}%"></span><span class="mark2" data-t=""></span></div></div>`;
+  const top = () => `<div class="tb"><span class="logo"></span><span class="mtag"><span>Goal Rush</span></span><span class="acct">${ACCT}</span></div>`;
+  const bar = (label, r) => `<div class="bar"><span class="circ">${RESPIN}<span class="n">${r}</span></span><span class="spin">${label}</span><span class="circ">${HOME}</span></div>`;
+  const myst = () => `<div class="trio">${[0, 1, 2].map(() => `<div class="cell"><div class="sh" style="--w:92px"><svg viewBox="0 0 100 100"><path d="${SHIRT}" fill="#16161B" stroke="#3A3A44" stroke-width="2.4" stroke-linejoin="round"/><text x="50" y="70" font-size="44" fill="#4A4A56">?</text></svg></div><span class="cap">&nbsp;</span></div>`).join('')}</div>`;
+  const trio = (ps) => `<div class="trio">${ps.map((p) => `<div class="cell"><span style="font:800 10px/1 'Exo 2';padding:3px 6px;border-radius:5px;background:${p.pos === 'DEF' ? '#3BA4FF' : p.pos === 'MID' ? '#12F06C' : p.pos === 'FWD' ? '#FF4D5A' : '#FFB020'};color:#0A0A0A">${p.pos}</span>${shirt({ w: 92, p, big: true })}<span class="cap">${p.club}</span></div>`).join('')}</div>`;
+  const withPos = (n, pos) => Object.assign({}, by(n), { pos });
+
+  // 1: home
+  const card = (c, tag, big, sub, mark, cls = '') => `<div class="card ${cls}" style="--c:${c}"><span class="mark">${mark}</span><span class="t-tag">${tag}</span><span class="t-big">${big}</span><span class="t-sub">${sub}</span><span class="go">${GO}</span></div>`;
+  const cyc = '<img src="assets/brand/goal_rush.png" alt="" style="width:124px;height:124px;object-fit:contain">';
+  const home = `<div class="phone home"><div class="sect">Other games</div>
+    ${card('#3BA4FF', 'DARE2DREAM', 'Rewrite their season', 'Any club from any season. Draft 11 and beat their real finish.', '', 'dim')}
+    ${card('#12F06C', 'CLUB X', 'From nowhere to champions', 'Replace the worst side in a real season and go for the title.', '', 'dim')}
+    ${card('#FFD21F', 'GOAL RUSH', 'Score the exact number of goals', 'A random formation each game. Pick 11 real players whose career goals add up to it exactly.', cyc)}
+    ${card('#A66BFF', 'TENABALL', 'Name the top ten', 'Our football quiz. Opens Tenaball.', '', 'dim')}</div>`;
+
+  // 2: the target reveal: the formations roll, stop on 352, the pitch underneath takes that shape
+  const reveal = `<div class="phone">${top()}${tally(0, 352, 1, 10, 3)}${pitch('352', {}, 0)}${myst()}<div class="hint">Spin for three players. 11 shirts to fill</div>${bar('Spin', 3)}
+    <div class="reveal"><small>THIS GAME'S TARGET</small><b>352</b><span>Line up 3-5-2 · score 352</span><div class="roll">${['442', '433', '451', '352', '343', '424', '532', '541'].map((f) => `<i class="${f === '352' ? 'on' : ''}">${f}</i>`).join('')}</div></div></div>`;
+
+  // 3: 3-5-2 in progress (real career goals)
+  const f1 = { 0: by('Peter Schmeichel'), 1: by('John Terry'), 2: by('Rio Ferdinand'), 3: by('Leighton Baines'), 4: by('Ryan Giggs'), 6: by('Steven Gerrard') };
+  const t1 = Object.values(f1).reduce((t, p) => t + p.goals, 0);
+  const cands1 = [withPos('Matt Le Tissier', 'MID'), withPos('Kevin Phillips', 'FWD'), withPos('Gary Neville', 'DEF')];
+  const game1 = `<div class="phone">${top()}${tally(t1, 352, 7, 4, 2)}${pitch('352', f1, 99)}${trio(cands1)}<div class="hint">Drag a shirt onto a yellow shirt, or tap to pick</div>${bar('Pick one', 2)}</div>`;
+
+  // 4: 4-4-2: same game, different target and shape
+  const f2 = { 0: by('Peter Schmeichel'), 2: by('John Terry'), 5: by('Ryan Giggs'), 9: by('Jamie Vardy') };
+  const t2 = Object.values(f2).reduce((t, p) => t + p.goals, 0);
+  const game2 = `<div class="phone">${top()}${tally(t2, 442, 5, 6, 3)}${pitch('442', f2, 99)}${myst()}<div class="hint">Spin for three players. 7 shirts to fill</div>${bar('Spin', 3)}</div>`;
+
+  const O = [['HOME', 'Goal Rush on home', 'Yellow, in place of 433 Goals. Your ball, faded behind the card like the Club X badge.', home],
+    ['START', 'The target reveal', 'A new game rolls through the eight formations and stops on one. That number is the target and the pitch behind takes its shape.', reveal],
+    ['3-5-2', 'A 3-5-2 game', `Three at the back, five in midfield, two up front. Six picked so far: 314/352 goals sits above the bar and "38 to go" moves to the top left, in place of the respins (still on the respin button), so the pitch moves up. The open shirts are yellow.`, game1],
+    ['4-4-2', 'A 4-4-2 game', `The next game is a 4-4-2: target 442, the pitch in two banks of four. Four picked: ${442 - t2} to go.`, game2]];
+  const TOT = {
+    1: (t, T) => `<span class="tot1"><span class="n"><b>${t}</b><small>/${T}</small><em>goals</em></span><i>${T - t} to go</i></span>`,
+    2: (t, T) => `<span class="tot2"><b>${T - t}<small>to go</small></b><i><strong>${t}</strong> of ${T} goals</i></span>`,
+    3: (t, T) => `<span class="tot3"><span class="n">${t}<small>/${T}</small></span><span class="pill">${T - t} to go</span></span>`,
+    4: (t, T) => `<span class="tot4"><span><b>${t}</b><i>SCORED</i></span><span><b>${T - t}</b><i>TO GO</i></span></span>`,
+    5: (t, T) => `<span class="tot5">${T - t} to go</span>` };
+  const TN = [[1, 'Scored over target', '52/352 goals, with 300 to go underneath. Reads like a score; your idea.'], [2, 'To go first', 'The big number is what is left, in yellow; scored of target sits under it.'], [3, 'Score and a pill', '52/352 with a yellow pill: 300 TO GO. Compact, the pill draws the eye.'], [4, 'Two columns', 'SCORED and TO GO side by side, like a scoreboard.'], [5, 'Numbers on the bar', 'A thicker bar with the scored number riding on the fill and what is left at the end; only "300 to go" on the right.']];
+  const mini = (k, t) => { const T = 352, info = `<span class="info"><b>Player ${t < 100 ? 3 : 10} of 11</b><i>${t < 100 ? '8 players' : '1 player'} to pick · <em>3 respins</em></i></span>`;
+    const pct = Math.min(100, t / T * 100);
+    const track = k === 5 ? `<div class="track"><span class="fill" style="width:${pct}%">${t}</span>${pct < 82 ? `<span class="left">${T}</span>` : ''}<span class="mark2"></span></div>` : `<div class="track"><span class="fill" style="width:${pct}%"></span><span class="mark2" data-t="${T}"></span></div>`;
+    return `<div class="mini">${top()}<div class="tally${k === 5 ? ' bar5' : ''}"><div class="top">${info}${TOT[k](t, T)}</div>${track}</div></div>`; };
+  document.getElementById('tallies').innerHTML = TN.map(([k, h, d]) => `<div class="opt"><div class="opt-h"><span class="tag">OPTION ${k}</span><h3>${h}</h3><p>${d}</p></div>${mini(k, 52)}${mini(k, 341)}</div>`).join('');
+  document.getElementById('row').innerHTML = O.map(([t, h, d, ph]) => `<div class="opt"><div class="opt-h"><span class="tag">${t}</span><h3>${h}</h3><p>${d}</p></div>${ph}</div>`).join('');
+})();
+</script>
+</body>
+</html>

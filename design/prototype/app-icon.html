@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D2T App Icon</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<style>
+  /* Home Screen icon options: bright green with a slight gradient and a black mark. Real 180px PNGs (what iOS uses), shown large and on a phone. */
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #08080A; color: #fff; font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 1500px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 30px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
+  .head p, .sec > p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 90ch; }
+  .sec { display: flex; flex-direction: column; gap: 18px; padding-top: 24px; border-top: 1px solid #1E1E22; }
+  .sec > h2 { font: 900 italic 30px/1 'Exo 2'; margin: 0; }
+  .opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 22px; }
+  .o { display: flex; flex-direction: column; gap: 10px; }
+  .o .big { width: 180px; height: 180px; border-radius: 40px; overflow: hidden; box-shadow: 0 14px 30px rgba(0,0,0,.5); }
+  .o .big img { width: 100%; height: 100%; display: block; }
+  .o .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: #12F06C; }
+  .o h3 { font: 900 italic 20px/1.05 'Exo 2'; margin: 0; }
+  .o p { margin: 0; color: #8E8E99; font-size: 13px; line-height: 1.45; }
+  .phones { display: flex; gap: 26px; flex-wrap: wrap; justify-content: center; }
+  .phone { width: 360px; border-radius: 44px; padding: 64px 22px 40px; box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,.6); position: relative; overflow: hidden; }
+  .phone.w1 { background: linear-gradient(160deg, #8DB6E6 0%, #8E8FB3 45%, #8C6A5C 100%); }
+  .phone.w2 { background: linear-gradient(170deg, #15151A 0%, #24242C 100%); }
+  .phone .lbl { position: absolute; top: 22px; left: 0; right: 0; text-align: center; font-size: 12px; font-weight: 800; letter-spacing: .12em; color: rgba(255,255,255,.75); }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px 0; justify-items: center; }
+  .app { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 76px; }
+  .app i { display: block; width: 62px; height: 62px; border-radius: 14px; overflow: hidden; background: rgba(255,255,255,.22); box-shadow: 0 2px 6px rgba(0,0,0,.18); }
+  .app i img { width: 100%; height: 100%; display: block; }
+  .app span { font: 500 12px/1 -apple-system, 'Helvetica Neue', Arial, sans-serif; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.35); }
+  .app.ghost span { opacity: .55; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <h1>Home Screen icon</h1>
+    <p>Now: the white mark on black, which disappears among dark icons and wallpapers. These are bright green with a slight gradient and a black mark, as you suggested. Each is the real 180 by 180 picture iPhone uses, shown big, then on a Home Screen with a light and a dark wallpaper.</p>
+  </div>
+  <section class="sec"><h2>The options</h2><div class="opts" id="opts"></div></section>
+  <section class="sec"><h2>On the Home Screen</h2><p>Every option in a row, next to the current icon (first), on the wallpaper from your screenshot and on a dark one. The grey squares stand in for other apps.</p><div class="phones" id="phones"></div></section>
+</div>
+<script>
+(function () {
+  const O = [
+    ['current', 'NOW', 'Current', 'White mark on black. Strong, but it vanishes in a dark folder or on a dark wallpaper.'],
+    ['i1', 'OPTION 1', 'Green, black mark', 'D2T green from light at the top to a deeper green at the bottom, with the solid black mark. The simplest and boldest.'],
+    ['i2', 'OPTION 2', 'Green, line mark', 'The same green with your outline emblem in black, lines thickened so they hold at icon size. Lighter and more modern.'],
+    ['i3', 'OPTION 3', 'Green with a light beam', 'A diagonal green with a soft light beam across the corner, like the opening screen, and the black mark.'],
+    ['i4', 'OPTION 4', 'Green to mint', 'The opening animation\'s colours, green at the top fading to mint, with a soft shine. Softer, matches the first thing people see.'],
+    ['i5', 'OPTION 5', 'Short D2T logo', 'The black short logo (mark and D2T) across the green. Spells the name, though small on the phone.']
+  ];
+  document.getElementById('opts').innerHTML = O.map(([f, t, h, d]) => `<div class="o"><span class="big"><img src="assets/icons/${f}.png" alt=""></span><span class="tag">${t}</span><h3>${h}</h3><p>${d}</p></div>`).join('');
+  const ghost = '<div class="app ghost"><i></i><span>App</span></div>';
+  const grid = () => `<div class="grid">${O.map(([f, , h]) => `<div class="app"><i><img src="assets/icons/${f}.png" alt=""></i><span>D2T</span></div>`).join('')}${ghost.repeat(6)}</div>`;
+  document.getElementById('phones').innerHTML = `<div class="phone w1"><span class="lbl">LIGHT WALLPAPER · NOW, THEN 1 TO 5</span>${grid()}</div><div class="phone w2"><span class="lbl">DARK WALLPAPER · NOW, THEN 1 TO 5</span>${grid()}</div>`;
+})();
+</script>
+</body>
+</html>

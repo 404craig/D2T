@@ -279,9 +279,19 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.evaluate(() => { const G = window.D2T.game; window.D2T.state.run.tableSeen = true; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(900); await shot("40-daily-summary");
   check(await page.evaluate(() => !!window.D2T.game.dailyResult()), "the daily result was not recorded");
+  check(!!(await page.$(".sm-daily .sm-dv")) && !!(await page.$('.actionbar [data-act="share"]')), "the daily summary has no today-against-best panel or Share button");
   await page.click('[data-act="again"]'); await expectScreen("home"); await wait(800);
-  check(/Done/.test(await page.textContent(".fr-daily .fr-sub")), "home does not show today's daily as done");
+  check(/Today: .*rise/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not show today's daily result");
   check(!!(await page.$('[data-act="continue-other"]')), "the parked run has no Continue card after the daily");
+  // the Daily closes at midnight: an unfinished one from yesterday is dropped (no result), the parked run comes back, home says so
+  await page.evaluate(() => {
+    const G = window.D2T.game, st = window.D2T.state, y = new Date(Date.parse(G.today() + "T12:00:00Z") - 864e5).toISOString().slice(0, 10);
+    const e = G.dailyEntry(y); st.parked = st.run; st.run = { step: "fixtures", eng: Object.assign({}, st.parked.eng, { phase: "prematch" }), spun: true, daily: y };
+    window.__y = y; window.D2T.save(); window.D2T.go("home");
+  }); await wait(1600);
+  check(await page.evaluate(() => { const st = window.D2T.state; return !(st.run && st.run.daily) && !st.dailyClosed && !(st.record.daily || {})[window.__y]; }), "yesterday's unfinished Daily did not close at midnight");
+  check(/closed/i.test((await page.textContent(".sheet").catch(() => "")) || ""), "home did not say yesterday's Daily closed");
+  await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(500);
 
   // ---------- 433 Goals: spin, pick, refresh keeps the three, 11 shirts, result recorded apart ----------
   const recBefore = await page.evaluate(() => JSON.stringify(window.D2T.game.record()));
@@ -291,15 +301,24 @@ fs.mkdirSync(OUT, { recursive: true });
   const cands = await page.evaluate(() => window.D2T.state.g433.cands.map((p) => p.name).join());
   await page.reload(); await wait(6500); await page.evaluate(() => window.D2T.go("goals433")); await wait(900);
   check(await page.evaluate((c) => window.D2T.state.g433.cands.map((p) => p.name).join() === c, cands), "433: a refresh changed the three shirts");
+  check(await page.evaluate(() => document.querySelectorAll(".g4 .slotp.open .g4-shirt.next").length === 11), "433: the open shirts are not all orange");
+  check(await page.evaluate(() => { const s = window.D2T.state.g433; return s.cands.length === 3 && s.cands.every((c) => ["GK", "DEF", "MID", "FWD"].includes(c.pos)); }), "433: a spin did not bring three players with positions");
   for (let i = 0; i < 11; i++) {
     if (!(await page.$(".g4 [data-c]"))) { await page.click(".g4 .sp-main"); await wait(2900); }
-    await page.click('.g4 [data-c="0"]'); await wait(200); await page.click('.g4 [data-c="0"]'); await wait(1800);
+    await page.click('.g4 [data-c="0"]'); await wait(250);
+    if (i === 0) {
+      check(await page.evaluate(() => { const pos = window.D2T.state.g433.cands[0].pos, fit = [...document.querySelectorAll(".g4 .slotp.fit")]; return fit.length > 0 && document.querySelectorAll(".g4 .slotp.nofit").length + fit.length === 11; }), "433: picking a player did not light his open shirts");
+      await page.click(".g4 .slotp.fit >> nth=-1"); await wait(1800);   // place him by tapping one of his shirts
+    } else { await page.click('.g4 [data-c="0"]'); await wait(1800); }
   }
-  await wait(4500); await shot("50-433-end");
+  check(await page.evaluate(() => { const S = window.D2T.state.g433, SL = ["GK", "DEF", "DEF", "DEF", "DEF", "MID", "MID", "MID", "FWD", "FWD", "FWD"]; return new Set(S.filled.map((p) => p.slot)).size === 11 && S.filled.every((p) => SL[p.slot] === p.pos); }), "433: a player sits in the wrong position or two share a shirt");
+  check(await page.evaluate(() => { const G4 = window.D2T.game.g433, need = G4.list("FWD")[40].goals; return G4.canGift("FWD", need) && [0, 1, 2, 3, 4].every(() => G4.drawOpen({ FWD: 1 }, [], need).some((p) => p.goals === need)); }), "433: the last-shot gift did not offer the exact player");
+  // the sheet opens only after the ending (longer when the total breaks through 433), so wait for it rather than a fixed time
+  await page.waitForSelector(".sheet", { timeout: 15000 }).catch(() => {}); await wait(400); await shot("50-433-end");
   check(await page.evaluate(() => window.D2T.state.g433.filled.length === 11 && window.D2T.game.g433.record().games === 1), "433: the game did not fill 11 shirts and record a result");
   check(await page.evaluate(() => window.D2T.state.g433.filled.every((p) => window.D2T.state.g433.filled.filter((q) => q.name === p.name).length === 1)), "433: the same player appeared twice");
   check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, recBefore), "433 changed Classic's record");
-  check(!!(await page.$(".sheet")), "433: no result sheet at the end");
+  check(!!(await page.waitForSelector(".sheet", { timeout: 12000 }).catch(() => null)), "433: no result sheet at the end");   // the sheet opens after the ending animation, which runs longer when the bar breaks past 433
 
   await browser.close();
   if (errors.length) { console.log("FAIL\n" + errors.join("\n")); process.exit(1); }
