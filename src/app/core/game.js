@@ -29,6 +29,29 @@
   GAME.poolEntry = (key) => byKey.get(key);
   D2T.data = { clubs, relegatedPool: pool };
 
+  // ---------- 433 Goals: a game of its own on real Premier League career goals ----------
+  // The game in progress is state.g433; finished games go to record.g433 (apart from Classic and Dare2Dream).
+  const G4 = G.g433 || { GK: [], DEF: [], MID: [], FWD: [] }, g4lists = {};
+  GAME.g433 = {
+    TARGET: 433, RESPINS: 3, TOP: 220,
+    list: (pos) => g4lists[pos] || (g4lists[pos] = G4[pos].map(([name, sur, club, goals]) => ({ name, sur, club, goals }))),
+    // three different players of a position from its 220 top scorers, never one already in your XI
+    draw(pos, avoid = []) {
+      const L = GAME.g433.list(pos), n = Math.min(L.length, GAME.g433.TOP), out = [];
+      let guard = 0;
+      while (out.length < 3 && guard++ < 500) { const p = L[Math.floor(Math.random() * n)]; if (!out.includes(p) && !avoid.includes(p.name)) out.push(p); }
+      return out;
+    },
+    record: () => Object.assign({ games: 0, exact: 0, best: null, bestTotal: null, last: null }, D2T.state.record.g433 || {}),
+    finish(total) {
+      const r = GAME.g433.record(), gap = Math.abs(total - GAME.g433.TARGET), newBest = r.best == null || gap < r.best;
+      r.games += 1; if (gap === 0) r.exact += 1;
+      if (newBest) { r.best = gap; r.bestTotal = total; }
+      r.last = total; D2T.state.record.g433 = r; D2T.save();
+      return { rec: r, newBest };
+    }
+  };
+
   // ---------- modes ----------
   // classic: a relegated club, achievements for how high you take them. dare2dream: any club, beat their real finish
   // (or win the league again if they won it).

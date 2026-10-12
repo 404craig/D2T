@@ -35,6 +35,9 @@
           <li><b>Finish high</b>Your final place earns achievements: beat the drop, top half, top 3, the title.</li>
         </ol>
 
+        <h2 class="fr-h2">433 Goals</h2>
+        <p class="fr-lead">Fill a 4-3-3, keeper first. Each spin shows three real players for the next shirt; pick one and his Premier League career goals appear on his shirt. Get the XI's total as close to 433 as you can: exactly 433 is perfect. 3 respins a game.</p>
+
         <h2 class="fr-h2">Daily challenge</h2>
         <p class="fr-lead">One club a day, the same for everyone: one of the bottom 10 of a real season. If they really went down it plays as Classic; if they stayed up it plays as Dare2Dream. No respins, one go, then compare with your mates.</p>
 

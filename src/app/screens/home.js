@@ -16,7 +16,6 @@
   const FRAME = '<svg viewBox="0 0 100 128" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,11 11,1 89,1 99,11 99,108 50,127 1,108" stroke-linejoin="round"/></svg>';
   const MODES = [
     { name: 'Head to head', sub: 'Online, up to 3 players' },
-    { name: '433 Goals', sub: "Get your XI's career goals close to 433" },
     { name: 'Steal', sub: 'Every card comes from the club you play next' }
   ];
   D2T.frFrame = FRAME;
@@ -50,6 +49,17 @@
       <span class="fr-cont-txt"><span class="fr-cont-lbl">CONTINUE · ${label}</span><span class="fr-cont-name" style="display:block">${D2T.esc(c.name)}</span>
       <span class="fr-cont-meta" style="display:block">${data.season} · ${where}</span>
       <span class="fr-cont-bar" style="display:block"><i style="transform:scaleX(${Math.max(0.03, played / games)})"></i></span></span>
+      <span class="fr-go">${ARROW}</span></button>`;
+  }
+
+  // 433 Goals card (orange): carry on a game in progress, or your best so far.
+  function g433Card() {
+    const g = D2T.state.g433, n = g && g.filled ? g.filled.length : 0, rec = D2T.game.g433.record();
+    const sub = n > 0 && n < 11 ? `Carry on: ${n} of 11 shirts, ${g.filled.reduce((t, p) => t + p.goals, 0)} goals so far.`
+      : rec.games ? `Your best: ${rec.best === 0 ? 'exactly 433' : rec.best + ' away'}.${rec.exact ? ` Hit 433 ${rec.exact} ${rec.exact === 1 ? 'time' : 'times'}.` : ''}` : 'Spin 11 real players. Their Premier League goals must add up to 433.';
+    return `<button class="fr-card-btn fr-pick fr-dream fr-g4" data-act="g433" aria-label="433 Goals">
+      <span class="fr-g4-mark" aria-hidden="true">433</span>
+      <span><span class="fr-tag" style="display:block">433 GOALS</span><span class="fr-big" style="display:block">Hit exactly 433</span><span class="fr-sub" style="display:block">${sub}</span></span>
       <span class="fr-go">${ARROW}</span></button>`;
   }
 
@@ -127,6 +137,7 @@
           <span class="fr-mark"><img src="${D2T.game.club('Club X').crest}" alt=""></span>
           <span><span class="fr-tag" style="display:block">CLUB X</span><span class="fr-big" style="display:block">Replace the bottom club</span><span class="fr-sub" style="display:block">Draft 11 from scratch, then win the league.${xr.runs ? ` ${xr.titles} ${xr.titles === 1 ? 'title' : 'titles'} from ${xr.runs} ${xr.runs === 1 ? 'go' : 'goes'}.` : ''}</span></span>
           <span class="fr-go">${ARROW}</span></button>
+        ${g433Card()}
           <div class="fr-sect-h fr-soon-h"><span>Coming soon</span></div>
           <div class="fr-modes">${MODES.map((m) => `<button class="fr-mode" aria-label="${m.name}, coming soon">
             <span class="fr-back" style="display:block"><span class="fr-back-rim"></span><span class="fr-back-face"></span>${D2T.logo('emblemLine')}<span class="fr-stamp">COMING SOON</span></span>
@@ -205,6 +216,7 @@
         s.body.querySelector('[data-k="no"]').onclick = s.close;
         s.body.querySelector('[data-k="yes"]').onclick = () => { s.close(); startNew(from, mode); };
       });
+      body.querySelector('[data-act="g433"]').onclick = (e) => D2T.toBlack('goals433', { from: e.currentTarget });
       const cont = body.querySelector('[data-act="continue"]');
       if (cont) cont.onclick = (e) => D2T.toBlack(D2T.game.stepFor() || 'squad', { from: e.currentTarget });
       body.querySelector('.fr-home-logo').onclick = () => D2T.go('intro');
