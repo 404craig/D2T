@@ -72,8 +72,8 @@
     const p = o.player, k = kit(p.club), st = k.stroke ? ` stroke="${k.stroke}" stroke-width="2.6" paint-order="stroke" stroke-linejoin="round"` : '';
     let top = '', mid = '', over = '', disc = '';
     if (big) {
-      const sur = p.sur.toUpperCase(), fs = Math.min(13, 140 / Math.max(6, sur.length));
-      top = `<text x="50" y="${CREST() === 'collar' ? 35 : 27}" font-size="${fs}" textLength="${Math.min(42, sur.length * fs * 0.62)}" lengthAdjust="spacingAndGlyphs"${st}>${D2T.esc(sur)}</text>`;
+      const sur = p.sur.toUpperCase(), fs = Math.max(8.5, Math.min(13, 104 / Math.max(6, sur.length)));
+      top = `<text x="50" y="${CREST() === 'collar' ? 35 : 27}" font-size="${fs}" textLength="${Math.min(52, sur.length * fs * 0.62)}" lengthAdjust="spacingAndGlyphs"${st}>${D2T.esc(sur)}</text>`;
       // the crest (12 Oct, three ways to try): collar = on a white disc at the collar like the pitch shirts; disc = on a white
       // circle in the middle of the back; caption = under the shirt in place of the club's name (see trioCap)
       const cs = CREST();
@@ -254,6 +254,8 @@
         if (ni == null || slotOf(ni) || SLOTS[ni][1] !== p.pos) return;
         busy = true;
         const from = total(), src = trioEl.querySelector(`[data-c="${i}"]`);
+        // measure the target shirt at rest (its pulse scales it), so the flyer lands exactly on top of it
+        pitchEl.querySelectorAll('.slotp.fit, .slotp.nofit').forEach((el) => el.classList.remove('fit', 'nofit'));
         const hr = wrap.getBoundingClientRect(), a = fromRect || src.getBoundingClientRect(), b = pitchEl.querySelector(`[data-slot="${ni}"] .g4-shirt`).getBoundingClientRect();
         S.filled.push(Object.assign({}, p, { slot: ni })); S.cands = null; sel = null;
         const done = !openSlots().length;
@@ -264,7 +266,7 @@
         const fly = D2T.h(`<div class="g4-flyer">${shirt({ w: TW, player: p })}</div>`);
         fly.style.left = (a.left - hr.left) + 'px'; fly.style.top = (a.top - hr.top) + 'px'; fly.firstElementChild.style.setProperty('--sw', a.width + 'px');
         wrap.appendChild(fly); src.style.visibility = 'hidden';
-        const s = b.width / a.width, dx = b.left - a.left + (b.width - a.width) / 2, dy = b.top - a.top + (b.height - a.height) / 2;
+        const s = b.width / a.width, dx = b.left - a.left, dy = b.top - a.top;   // the flyer scales from its top left (transform-origin 0 0)
         const anim = fly.animate([{ transform: 'translate(0,0) scale(1)' }, { transform: `translate(${dx * 0.5}px,${dy * 0.5 - 40}px) scale(${(1 + s) / 2 * 1.1})`, offset: 0.55 }, { transform: `translate(${dx}px,${dy}px) scale(${s})` }], { duration: reduced ? 1 : 520, easing: 'cubic-bezier(.5,0,.3,1)', fill: 'forwards' });
         const after = () => {
           if (!root.isConnected) return;
