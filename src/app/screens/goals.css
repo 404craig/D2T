@@ -35,7 +35,7 @@
 .g4-track.glow .fill { box-shadow: 0 0 14px rgba(255,200,61,.9); background: linear-gradient(90deg, #FFB020, var(--g4-gold)); }
 
 /* the night stadium pitch, "<target> GOALS" painted faintly across the middle, the shape in a chip bottom left */
-.g4-pitch { position: relative; margin: 0 12px; flex: 1 1 auto; min-height: 150px; max-height: 440px; border-radius: 18px; overflow: hidden; isolation: isolate;
+.g4-pitch { position: relative; margin: 0 12px; flex: 1 1 auto; min-height: 150px; max-height: 520px; border-radius: 18px; overflow: hidden; isolation: isolate;
   background: radial-gradient(90% 55% at 50% -10%, rgba(255,255,255,.22), rgba(255,255,255,0) 60%), repeating-linear-gradient(180deg, #0D3A24 0 9%, #0A311E 9% 18%); }
 .g4-pitch .lines { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: rgba(255,255,255,.28); }
 .g4-pitch .circle { position: absolute; left: 50%; top: 50%; width: 84px; height: 84px; margin: -42px; border: 1.4px solid rgba(255,255,255,.25); border-radius: 50%; }
@@ -67,7 +67,7 @@
 .g4-shirt .glint { transform-box: view-box; }
 
 /* the three reels */
-.g4-trio { display: flex; justify-content: center; gap: 12px; padding: 12px 16px 0; flex-shrink: 0; }
+.g4-trio { display: flex; justify-content: center; gap: 12px; padding: 10px 16px 0; flex-shrink: 0; }
 .g4-trio .cell { display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .g4-trio .cap img.capcrest { height: 32px; width: 40px; object-fit: contain; display: block; }
 .g4-cs-caption .g4-trio .cap { height: 34px; }

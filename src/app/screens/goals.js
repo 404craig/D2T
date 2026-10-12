@@ -165,7 +165,8 @@
       let PW = 56;
       // a shirt, its crest disc and its name must fit the tightest gap between two lines (defence to keeper, about 20% of the
       // pitch), so short phones get smaller shirts rather than overlapping ones
-      const sizePitch = () => { const ph = pitchEl.clientHeight || 358; PW = Math.round(Math.max(30, Math.min(58, (ph * 0.205 - 16) / 1.19))); };
+      // shirts grow with the pitch (taller since the club names under the reels went, Craig, 12 Oct), bounded so a line of five still has room
+      const sizePitch = () => { const ph = pitchEl.clientHeight || 358, pw = pitchEl.clientWidth || 366; PW = Math.round(Math.max(30, Math.min(62, pw * 0.19 - 8, (ph * 0.205 - 16) / 1.19))); };
 
       const slotOf = (i) => S.filled.find((p) => p.slot === i);
       const openSlots = () => SLOTS.map((_, i) => i).filter((i) => !slotOf(i));
@@ -197,8 +198,11 @@
         pitchEl.querySelectorAll('.slotp.open').forEach((el) => { const fit = pos && SLOTS[+el.dataset.slot][1] === pos; el.classList.toggle('fit', !!fit); el.classList.toggle('nofit', !!pos && !fit); });
         pitchEl.querySelectorAll('.slotp.open').forEach((el) => { el.onclick = () => { const i = +el.dataset.slot; if (!busy && sel != null && SLOTS[i][1] === selPos()) place(sel, null, i); }; });
       };
-      const trioMyst = () => `${[0, 1, 2].map(() => `<div class="cell"><span class="g4-ptag"></span><div class="reelwin"><div class="strip">${shirt({ w: TW, state: 'myst' })}</div></div><span class="cap"></span></div>`).join('')}`;
-      const trioLanded = () => S.cands.map((c, i) => `<div class="cell"><span class="g4-ptag on">${c.pos}</span><div class="reelwin landed"><div class="strip">${shirt({ w: TW, player: c, attr: `data-c="${i}"` })}</div></div><span class="cap">${trioCap(c)}</span></div>`).join('');
+      // no club name under the reels (Craig, 12 Oct): the crest on the shirt says it and the pitch takes the room; only the
+      // caption crest mode (D2T.g4crest = 'caption', for trying things) keeps a line there
+      const cap = (c) => (CREST() === 'caption' ? `<span class="cap">${c ? trioCap(c) : ''}</span>` : '');
+      const trioMyst = () => `${[0, 1, 2].map(() => `<div class="cell"><span class="g4-ptag"></span><div class="reelwin"><div class="strip">${shirt({ w: TW, state: 'myst' })}</div></div>${cap()}</div>`).join('')}`;
+      const trioLanded = () => S.cands.map((c, i) => `<div class="cell"><span class="g4-ptag on">${c.pos}</span><div class="reelwin landed"><div class="strip">${shirt({ w: TW, player: c, attr: `data-c="${i}"` })}</div></div>${cap(c)}</div>`).join('');
       // left of the tally (UI_SPEC 8f): which player you are on and how many after him; the goals to go sit after it (setGap),
       // and the respins live only on the respin button's badge
       const setInfo = () => {
@@ -252,7 +256,7 @@
             const finish = () => {
               strip.style.filter = ''; strip.innerHTML = shirt({ w: TW, player: targets[i], attr: `data-c="${i}"` }); strip.style.transform = 'none';
               w.classList.add('landed'); glint(strip.firstElementChild, reduced);
-              w.parentElement.querySelector('.cap').innerHTML = trioCap(targets[i]);
+              const capEl = w.parentElement.querySelector('.cap'); if (capEl) capEl.innerHTML = trioCap(targets[i]);
               const tag = w.parentElement.querySelector('.g4-ptag'); tag.textContent = targets[i].pos; tag.classList.add('on');
               if (++landed === wins.length) resolve();
             };
