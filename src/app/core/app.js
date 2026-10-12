@@ -54,12 +54,34 @@
     <defs>
       <linearGradient id="gbBand" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".75"/><stop offset=".45" stop-color="#FFFFFF" stop-opacity=".25"/><stop offset="1" stop-color="#2CF57F" stop-opacity=".9"/></linearGradient>
       <linearGradient id="gbThin" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset=".55" stop-color="#FFFFFF" stop-opacity=".2"/><stop offset=".8" stop-color="#0A0A0A" stop-opacity=".6"/><stop offset="1" stop-color="#0A0A0A" stop-opacity=".9"/></linearGradient>
+      <linearGradient id="gbArw" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".5"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/></linearGradient>
       <linearGradient id="gbFoot" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#18F06F"/><stop offset=".55" stop-color="#18F06F"/><stop offset="1" stop-color="#0A0A0A"/></linearGradient>
     </defs>
     <polyline points="-40,30 210,690" fill="none" stroke="url(#gbBand)" stroke-width="46" stroke-linecap="butt"/>
     <polyline points="-20,-10 430,330" fill="none" stroke="url(#gbThin)" stroke-width="3"/>
+    ${gbArrows()}
     <polyline points="196,694 430,620" fill="none" stroke="url(#gbFoot)" stroke-width="20"/>
   </svg></div>`;
+  // The emblem's corner arrows, faded into the green (Craig, 12 Oct). Each is an up-right arrow with its tip at the
+  // origin (a: head arm length, t: arm thickness, c: shaft half-width x root 2, d: shaft length), then placed and
+  // turned; they drift a little along their own direction and breathe in and out (.gb-arw, off with reduced motion).
+  function arrowPath(a, t, c, d) {
+    const p = [[0, 0], [-a, 0], [-a + t, t], [-t - c, t], [-t - c - d, t + d], [-t - d, t + c + d], [-t, t + c], [-t, a - t], [0, a]];
+    return 'M' + p.map((q) => q.join(',')).join(' L') + ' Z';
+  }
+  function gbArrows() {
+    const big = [ // x, y of the tip, rotation (0 up-right, 180 down-left), size, delay
+      [368, 116, 0, [150, 40, 34, 170], 0],
+      [92, 289, 180, [42, 14, 12, 105], -2.2],
+      [207, 608, 180, [82, 24, 22, 165], -4.1]
+    ];
+    const thin = [[137, 179, 233, 94, -1], [300, 352, 367, 283, -3.4], [179, 534, 221, 489, -0.6], [266, 712, 331, 641, -2.8], [10, 330, 120, 230, -5]];
+    const head = (x2, y2, x1, y1) => { const ang = Math.atan2(y2 - y1, x2 - x1), h = 9; return `M${x2 - h * Math.cos(ang - 0.6)},${y2 - h * Math.sin(ang - 0.6)} L${x2},${y2} L${x2 - h * Math.cos(ang + 0.6)},${y2 - h * Math.sin(ang + 0.6)}`; };
+    return `<g class="gb-arrows">
+      ${big.map(([x, y, r, k, dl], i) => `<g transform="translate(${x},${y}) rotate(${r})"><path class="gb-arw gb-big" style="animation-delay:${dl}s" d="${arrowPath(...k)}" fill="url(#gbArw)"/></g>`).join('')}
+      ${thin.map(([x1, y1, x2, y2, dl]) => `<path class="gb-arw gb-thin" style="animation-delay:${dl}s" d="M${x1},${y1} L${x2},${y2} ${head(x2, y2, x1, y1)}" fill="none" stroke="#FFFFFF" stroke-opacity=".38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`).join('')}
+    </g>`;
+  }
 
   const ICON = {
     account: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.6-3.6 4.6-5.2 8-5.2s6.4 1.6 8 5.2"/></svg>',
