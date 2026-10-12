@@ -54,9 +54,10 @@
   .tot b { font: 900 italic 28px/1 'Exo 2'; }
   .tot i { font-style: normal; font-size: 12px; font-weight: 800; color: var(--y-t); }
   .track { position: relative; height: 10px; border-radius: 5px; background: #1B1B21; margin-top: 8px; }
-  .track .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; background: linear-gradient(90deg, #FFB000, var(--y)); }
-  .track .mark2 { position: absolute; right: -1px; top: -4px; bottom: -4px; width: 2px; background: #fff; }
-  .track .mark2::after { content: attr(data-t); position: absolute; bottom: -12px; right: 4px; font: 900 italic 9px/1 'Exo 2'; opacity: .8; }
+  .track .fill { position: absolute; right: 0; transition: width .3s; top: 0; bottom: 0; border-radius: 5px; background: linear-gradient(90deg, #FFB000, var(--y)); }
+  .track .mark2 { position: absolute; right: auto; left: -1px; top: -4px; bottom: -4px; width: 2px; background: #fff; }
+  .tally .sub { display: block; text-align: right; font-size: 10px; font-weight: 800; letter-spacing: .06em; color: var(--muted); margin-top: 5px; text-transform: uppercase; }
+  .track .mark2::after { content: attr(data-t); position: absolute; bottom: -12px; left: 4px; font: 900 italic 9px/1 'Exo 2'; opacity: .8; }
 
   .pitch { position: relative; margin: 0 12px; flex: 1 1 auto; border-radius: 18px; overflow: hidden; isolation: isolate;
     background: radial-gradient(90% 55% at 50% -10%, rgba(255,255,255,.22), rgba(255,255,255,0) 60%), repeating-linear-gradient(180deg, #0D3A24 0 9%, #0A311E 9% 18%); }
@@ -96,7 +97,7 @@
 <div class="page">
   <div class="head">
     <h1>Goal Rush</h1>
-    <p>433 Goals becomes Goal Rush, in yellow. Each game picks a formation (442, 433, 451, 352, 343, 424, 532 or 541): that number is the target, and the pitch takes that shape. On home it sits where 433 Goals was. Then the game: the target reveal, a 3-5-2 game in progress, and a 4-4-2 to show the pitch changing shape. Players, clubs and career goals are real.</p>
+    <p>433 Goals becomes Goal Rush, in yellow. Each game picks one of eight formations at random (442, 433, 451, 352, 343, 424, 532, 541): that number is the target and the pitch takes that shape. The top right now counts down from the target to 0, and the bar empties as you go. Your 433 record carries on. Players, clubs and career goals are real.</p>
   </div>
   <div class="row" id="row"></div>
 </div>
@@ -141,7 +142,7 @@
   const pitch = (f, filled, openFrom) => `<div class="pitch">${LINES}<span class="circle"></span><div class="paint">${f} GOALS</div><span class="shape">${f.split('').join('-')}</span>${slots(f).map(([lab, x, y], i) => {
     const p = filled[i];
     return `<div class="slot" style="left:${x}%;top:${y}%">${p ? shirt({ w: 50, p }) + `<span class="nm">${p.sur}</span>` : shirt({ w: 50, pos: lab, open: i >= openFrom || !p })}</div>`; }).join('')}</div>`;
-  const tally = (t, target, player, left, respins) => `<div class="tally"><div class="top"><span class="info"><b>Player ${player} of 11</b><i>${left} players to pick · <em>${respins} respins</em></i></span><span class="tot"><b>${t}</b><i>${t <= target ? (target - t) + ' away' : (t - target) + ' over'}</i></span></div><div class="track"><span class="fill" style="width:${Math.min(100, t / target * 100)}%"></span><span class="mark2" data-t="${target}"></span></div></div>`;
+  const tally = (t, target, player, left, respins) => `<div class="tally"><div class="top"><span class="info"><b>Player ${player} of 11</b><i>${left} players to pick · <em>${respins} respins</em></i></span><span class="tot"><b>${target - t}</b><i>${t <= target ? 'to go' : 'over'}</i></span></div><div class="track"><span class="fill" style="width:${Math.max(0, 100 - t / target * 100)}%"></span><span class="mark2" data-t="0"></span></div><span class="sub">${t} scored of ${target}</span></div>`;
   const top = () => `<div class="tb"><span class="logo"></span><span class="mtag"><span>Goal Rush</span></span><span class="acct">${ACCT}</span></div>`;
   const bar = (label, r) => `<div class="bar"><span class="circ">${RESPIN}<span class="n">${r}</span></span><span class="spin">${label}</span><span class="circ">${HOME}</span></div>`;
   const myst = () => `<div class="trio">${[0, 1, 2].map(() => `<div class="cell"><div class="sh" style="--w:92px"><svg viewBox="0 0 100 100"><path d="${SHIRT}" fill="#16161B" stroke="#3A3A44" stroke-width="2.4" stroke-linejoin="round"/><text x="50" y="70" font-size="44" fill="#4A4A56">?</text></svg></div><span class="cap">&nbsp;</span></div>`).join('')}</div>`;
@@ -154,7 +155,7 @@
   const home = `<div class="phone home"><div class="sect">Other games</div>
     ${card('#3BA4FF', 'DARE2DREAM', 'Rewrite their season', 'Any club from any season. Draft 11 and beat their real finish.', '', 'dim')}
     ${card('#12F06C', 'CLUB X', 'From nowhere to champions', 'Replace the worst side in a real season and go for the title.', '', 'dim')}
-    ${card('#FFD21F', 'GOAL RUSH', 'Hit the formation', 'Today it is 3-5-2. Pick 11 real players whose career goals add up to exactly 352.', cyc)}
+    ${card('#FFD21F', 'GOAL RUSH', 'Hit the formation', 'A random formation each game. Pick 11 real players whose career goals add up to it exactly.', cyc)}
     ${card('#A66BFF', 'TENABALL', 'Name the top ten', 'Our football quiz. Opens Tenaball.', '', 'dim')}</div>`;
 
   // 2: the target reveal: the formations roll, stop on 352, the pitch underneath takes that shape
@@ -174,8 +175,8 @@
 
   const O = [['HOME', 'Goal Rush on home', 'Yellow, in place of 433 Goals. The faded mark behind cycles through the formations; the line says today\'s target.', home],
     ['START', 'The target reveal', 'A new game rolls through the eight formations and stops on one. That number is the target and the pitch behind takes its shape.', reveal],
-    ['3-5-2', 'A 3-5-2 game', `Three at the back, five in midfield, two up front. Six picked so far: ${t1} goals of 352. The open shirts are yellow.`, game1],
-    ['4-4-2', 'A 4-4-2 game', `The next game is a 4-4-2: target 442, the pitch in two banks of four. Four picked: ${t2} goals.`, game2]];
+    ['3-5-2', 'A 3-5-2 game', `Three at the back, five in midfield, two up front. Six picked so far: the top right counts down from 352, now 38 to go, and the bar empties towards 0. The open shirts are yellow.`, game1],
+    ['4-4-2', 'A 4-4-2 game', `The next game is a 4-4-2: target 442, the pitch in two banks of four. Four picked: ${442 - t2} to go.`, game2]];
   document.getElementById('row').innerHTML = O.map(([t, h, d, ph]) => `<div class="opt"><div class="opt-h"><span class="tag">${t}</span><h3>${h}</h3><p>${d}</p></div>${ph}</div>`).join('');
 })();
 </script>
