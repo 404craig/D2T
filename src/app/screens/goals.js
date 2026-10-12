@@ -165,9 +165,11 @@
         const started = S.filled.length > 0 || !!S.cands, over = !openSlots().length;
         if (!started || over) { D2T.go('home'); return; }
         const n = S.filled.length;
-        const sh = D2T.sheet({ title: 'Leave the game?', body: `<p class="fr-lead">${n ? `${n} of 11 picked, ${total()} goals so far.` : 'Three players are waiting.'} Home keeps this game for later. Quit throws it away and nothing is recorded.</p>
-          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="home">Home, save the game</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the game</button></div>` });
+        const sh = D2T.sheet({ title: 'Leave the game?', body: `<p class="fr-lead">${n ? `${n} of 11 picked, ${total()} goals so far.` : 'Three players are waiting.'} Restart throws it away and starts a new game. Home keeps it for later. Quit throws it away. Nothing is recorded.</p>
+          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="restart">Restart the game</button><button class="btn btn-ghost fr-btn-wide" data-k="home">Home, save the game</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the game</button></div>` });
         sh.body.querySelector('[data-k="keep"]').onclick = sh.close;
+        // restart (Craig, 12 Oct): wipe this game and start again from the beginning, a new formation and its reveal
+        sh.body.querySelector('[data-k="restart"]').onclick = () => { sh.close(); rafs.forEach(cancelAnimationFrame); rafs = []; main.classList.remove('is-spinning'); document.querySelectorAll('.g4-ghost').forEach((g) => g.remove()); newGame(); };
         sh.body.querySelector('[data-k="home"]').onclick = () => { sh.close(); D2T.go('home'); };
         sh.body.querySelector('[data-k="quit"]').onclick = () => { sh.close(); D2T.state.g433 = null; D2T.save(); D2T.go('home'); };
       };
@@ -250,39 +252,56 @@
         idleUI();
       }
 
-      // ---------- reels: transform-only, speed blur, smooth stop and a small spring; the landed shirt never jumps ----------
+      // ---------- reels: the Classic spin's own motion (Craig, 12 Oct; D2T.roll.profile and sample in screens/spin.js) ----------
+      // Each reel speeds up, runs flat out, slows onto its shirt still moving, overshoots a touch and springs back; the blur,
+      // streak and stretch follow the speed, and the landing gets the same impact and light sweep. Left first, right last.
       let uid = 0;
+      const PROFS = [{ delay: 0, cruiseT: 1.0, decelT: 1.1, n: 2.2 }, { delay: 0.07, cruiseT: 1.35, decelT: 1.2, n: 2.4 }, { delay: 0.14, cruiseT: 1.75, decelT: 1.5, n: 3.0, v1: 2.0 }];
       function runReels(targets) {
         const opens = Object.keys(openPos());
         const wins = [...trioEl.querySelectorAll('.reelwin')];
+        const R = D2T.roll, clamp = (v, a, b) => Math.max(a, Math.min(b, v));
         return new Promise((resolve) => {
           let landed = 0;
           wins.forEach((w, i) => {
-            const strip = w.querySelector('.strip'), filler = [];
-            while (filler.length < 16) { const L = G4.list(opens[Math.floor(Math.random() * opens.length)]), c = L[Math.floor(Math.random() * Math.min(L.length, 260))]; if (c !== targets[i]) filler.push(c); }
-            strip.innerHTML = filler.concat([targets[i]]).map((p) => shirt({ w: TW, player: p })).join('');
-            const D = strip.lastElementChild.getBoundingClientRect().top - strip.firstElementChild.getBoundingClientRect().top;
+            const strip = w.querySelector('.strip'), P = R.profile(PROFS[i] || PROFS[2]), n = P.target;
+            const pick = () => { for (;;) { const L = G4.list(opens[Math.floor(Math.random() * opens.length)]), c = L[Math.floor(Math.random() * Math.min(L.length, 260))]; if (c !== targets[i]) return c; } };
+            const first = strip.firstElementChild ? strip.firstElementChild.outerHTML : shirt({ w: TW, state: 'myst' });
+            const seq = [first];
+            for (let k = 1; k < n; k++) seq.push(shirt({ w: TW, player: pick() }));
+            seq.push(shirt({ w: TW, player: targets[i] }));
+            for (let k = 0; k < 3; k++) seq.push(shirt({ w: TW, player: pick() }));
+            strip.innerHTML = seq.join('');
+            const kids = strip.children, pitch = kids[1].getBoundingClientRect().top - kids[0].getBoundingClientRect().top;
             const id = `g4b${++uid}`;
-            w.insertAdjacentHTML('afterbegin', `<svg width="0" height="0" style="position:absolute"><filter id="${id}" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="0 0"/></filter></svg>`);
-            const blur = w.querySelector('feGaussianBlur'); strip.style.filter = `url(#${id})`;
-            const T = 1250 + i * 420, t0 = performance.now(); let lastY = 0, lastT = t0, hit = false;
+            w.insertAdjacentHTML('afterbegin', `<svg width="0" height="0" style="position:absolute"><filter id="${id}" x="-20%" y="-50%" width="140%" height="200%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="0 0"/></filter></svg>`);
+            const blur = w.querySelector('feGaussianBlur');
+            const streak = D2T.h('<span class="g4-streak"></span>'), sweep = D2T.h('<span class="g4-sweep"></span>'); w.append(streak, sweep);
+            let filtered = false, hit = false;
             const finish = () => {
               strip.style.filter = ''; strip.innerHTML = shirt({ w: TW, player: targets[i], attr: `data-c="${i}"` }); strip.style.transform = 'none';
+              streak.remove(); sweep.remove(); w.style.transform = '';
               w.classList.add('landed'); glint(strip.firstElementChild, reduced);
               const capEl = w.parentElement.querySelector('.cap'); if (capEl) capEl.innerHTML = trioCap(targets[i]);
               const tag = w.parentElement.querySelector('.g4-ptag'); tag.textContent = targets[i].pos; tag.classList.add('on');
               if (++landed === wins.length) resolve();
             };
             if (reduced) { finish(); return; }
+            const t0 = performance.now();
             const frame = (now) => {
               if (!root.isConnected) return;
-              const t = now - t0; let y;
-              if (t < T) { const u = t / T; y = D * (1 - Math.pow(1 - u, 4)); } else { const s = (t - T) / 1000; y = D + 9 * Math.exp(-9 * s) * Math.sin(16 * s); }
-              const v = Math.abs(y - lastY) / Math.max(1, now - lastT) * 16; lastY = y; lastT = now;
-              blur.setAttribute('stdDeviation', `0 ${Math.min(9, Math.max(0, v * 0.22 - 0.6)).toFixed(2)}`);
-              strip.style.transform = `translateY(${-y}px)`;
-              if (t >= T && !hit) { hit = true; w.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.06)' }, { transform: 'scale(1)' }], { duration: 300, easing: 'ease-out' }); snd('tap'); }
-              if (t < T + 520) rafs.push(requestAnimationFrame(frame)); else finish();
+              const t = (now - t0) / 1000, sm = R.sample(P, t);
+              strip.style.transform = `translate3d(0, ${(-sm.p * pitch).toFixed(2)}px, 0)`;
+              const pxf = Math.abs(sm.v) * pitch / 60, sd = clamp(pxf * 0.3 - 1.2, 0, 22), k = clamp(pxf / 80, 0, 1);
+              if (sd < 0.4) { if (filtered) { strip.style.filter = ''; filtered = false; } } else { blur.setAttribute('stdDeviation', `0 ${sd.toFixed(1)}`); if (!filtered) { strip.style.filter = `url(#${id})`; filtered = true; } }
+              streak.style.opacity = (k * k * 0.9).toFixed(3);
+              w.style.transform = k > 0.02 ? `scaleY(${(1 + 0.05 * k).toFixed(4)})` : '';
+              if (!hit && t >= P.landAt) {
+                hit = true; snd('tap');
+                strip.animate([{ scale: '1' }, { scale: '1.065', offset: 0.28 }, { scale: '1' }], { duration: 460, easing: 'cubic-bezier(.2,.9,.3,1.3)' });
+                sweep.animate([{ left: '-60%', opacity: 0 }, { opacity: 1, offset: 0.15 }, { left: '130%', opacity: 0 }], { duration: 550, delay: 40, easing: 'cubic-bezier(.3,.7,.2,1)', fill: 'both' });
+              }
+              if (sm.phase !== 'done') rafs.push(requestAnimationFrame(frame)); else finish();
             };
             rafs.push(requestAnimationFrame(frame));
           });

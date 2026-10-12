@@ -192,10 +192,12 @@
       const enable = (on) => bar.querySelectorAll('.ub-ans').forEach((b) => { b.disabled = !on; });
       // home during a run asks (as Goal Rush does): a run is sudden death, so leaving ends it with no result
       function leave() {
-        if (!run || busy) { if (!busy) D2T.go('home'); return; }
-        const sh = D2T.sheet({ title: 'Leave the run?', body: `<p class="fr-lead">Unbeaten in ${run.streak} so far. Leaving ends the run and nothing is recorded.</p>
-          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the run</button></div>` });
+        if (!run) { D2T.go('home'); return; }   // during a run it always asks, even mid-animation
+        const sh = D2T.sheet({ title: 'Leave the run?', body: `<p class="fr-lead">Unbeaten in ${run.streak} so far. Restart or Quit ends the run and nothing is recorded.</p>
+          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="restart">Restart the game</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the run</button></div>` });
         sh.body.querySelector('[data-k="keep"]').onclick = sh.close;
+        // restart (Craig, 12 Oct): drop this run, nothing recorded, and go back to spinning for a stat
+        sh.body.querySelector('[data-k="restart"]').onclick = () => { sh.close(); timers.forEach(clearTimeout); rafs.forEach(cancelAnimationFrame); timers = []; rafs = []; document.querySelectorAll('.ub-fly, .ub-boom, .ub-tick').forEach((f) => f.remove()); stage.classList.remove('ub-clubs'); idle(); };
         sh.body.querySelector('[data-k="quit"]').onclick = () => { sh.close(); run = null; D2T.go('home'); };
       }
 
@@ -223,7 +225,7 @@
         strip.innerHTML = seq.map((s) => statTile(s)).join('');
         stage.querySelector('.ub-bests').classList.add('gone'); stage.querySelector('.ub-bests-h').classList.add('gone');
         bar.querySelector('.ub-spin').disabled = true;
-        const end = -(seq.length - 3) * 76;
+        const end = -seq.lastIndexOf(target) * 76;   // the chosen stat stops in the frame (it was one tile short)
         const done = () => { snd('lockin'); stage.querySelector('.ub-statwin').classList.add('is-hit'); later(() => startRun(target), reduced ? 200 : 650); };
         if (reduced) { strip.style.transform = `translateY(${end}px)`; done(); return; }
         strip.animate([{ transform: 'translateY(0)' }, { transform: `translateY(${end}px)` }], { duration: 1800, easing: 'cubic-bezier(.15,.8,.25,1)', fill: 'forwards' }).onfinish = done;
@@ -286,37 +288,69 @@
         ['ub-run', streakEl, 'One wrong and the run is over', { place: 'below', side: 'right' }]
       ]);
       const numEl = () => stage.querySelector('.ub-r .sp-node.is-hit .ub-num') || stage.querySelector('.ub-r .ub-num');
-      // the hidden number rolls up to the real one; shirts resize it by its digits, club cards drop to the 3-digit size
-      function countUp(el, to, ms, done) {
-        if (!el) { done(); return; }
-        el.classList.remove('q');
-        if (el.tagName.toLowerCase() === 'text') { el.setAttribute('font-size', NS(to)); el.setAttribute('y', NY(to)); } else if (String(to).length > 2) el.classList.add('w3');
-        if (reduced) { el.textContent = to; done(); return; }
-        const t0 = performance.now();
-        const step = (t) => { const p = Math.min(1, (t - t0) / ms); el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))); if (p < 1) rafs.push(requestAnimationFrame(step)); else { el.classList.add('ub-pop'); done(); } };
-        rafs.push(requestAnimationFrame(step));
-      }
+      // the reveal (Craig, 12 Oct): the ? strains, then bursts in cyan, white and the club's colour, and the real number
+      // drops in; right puts a cyan tick where VS sits, which flies up to the run count top right
       function answer(higher) {
         if (!run || busy) return;
         busy = true; enable(false); snd('tap');
         const a = run.stat.val(run.cur), b = run.stat.val(run.next), right = higher ? b > a : b < a;
-        countUp(numEl(), b, 650, () => {
+        burstReveal(numEl(), b, () => {
           stage.querySelector('.ub-r').classList.add(right ? 'ok' : 'bad');
           if (right) win(); else { snd('buzzer'); later(over, reduced ? 200 : 950); }
         });
       }
+      function setNum(el, to) {
+        el.classList.remove('q'); el.textContent = to;
+        if (el.tagName.toLowerCase() === 'text') { el.setAttribute('font-size', NS(to)); el.setAttribute('y', NY(to)); } else if (String(to).length > 2) el.classList.add('w3');
+      }
+      function burstReveal(el, to, done) {
+        if (!el) { done(); return; }
+        if (reduced) { setNum(el, to); done(); return; }
+        el.animate([{ transform: 'scale(1) rotate(0)' }, { transform: 'scale(1.25) rotate(-8deg)', offset: 0.4 }, { transform: 'scale(1.15) rotate(7deg)', offset: 0.75 }, { transform: 'scale(1.45) rotate(0)', opacity: 0.6 }], { duration: 260, easing: 'ease-in' });
+        later(() => {
+          if (!root.isConnected) return;
+          const r = el.getBoundingClientRect(), c = D2T.game.club(run.next.club);
+          boom(r.left + r.width / 2, r.top + r.height / 2, ['#22D3EE', '#FFFFFF', c.accent || '#22D3EE', '#8BE9F7']);
+          snd('reveal');
+          setNum(el, to);
+          el.animate([{ transform: 'scale(.2)', opacity: 0 }, { transform: 'scale(1.3)', opacity: 1, offset: 0.55 }, { transform: 'scale(.95)', offset: 0.8 }, { transform: 'scale(1)', opacity: 1 }], { duration: 480, easing: 'cubic-bezier(.2,.9,.3,1.2)' });
+          later(done, 520);
+        }, 260);
+      }
+      // sparks, a ring and a flash from a point on screen (a fixed layer, so the card's window never clips it)
+      function boom(x0, y0, cols) {
+        const wrap = D2T.h('<div class="ub-boom" aria-hidden="true"></div>'); wrap.style.left = x0 + 'px'; wrap.style.top = y0 + 'px'; document.body.appendChild(wrap);
+        const ring = D2T.h('<span class="ub-boom-ring"></span>'), flash = D2T.h('<span class="ub-boom-flash"></span>'); wrap.append(flash, ring);
+        flash.animate([{ transform: 'translate(-50%,-50%) scale(.3)', opacity: 0.95 }, { transform: 'translate(-50%,-50%) scale(1.6)', opacity: 0 }], { duration: 360, easing: 'ease-out', fill: 'forwards' });
+        ring.animate([{ transform: 'translate(-50%,-50%) scale(.2)', opacity: 1 }, { transform: 'translate(-50%,-50%) scale(4.5)', opacity: 0 }], { duration: 600, easing: 'cubic-bezier(.1,.7,.3,1)', fill: 'forwards' });
+        for (let i = 0; i < 32; i++) {
+          const a = (i / 32) * Math.PI * 2 + Math.random() * 0.25, d = 50 + Math.random() * 80, sz = 4 + Math.random() * 6;
+          const bit = D2T.h('<i></i>'); Object.assign(bit.style, { width: sz + 'px', height: (sz * (0.5 + Math.random())) + 'px', background: cols[i % cols.length] });
+          wrap.appendChild(bit);
+          bit.animate([{ transform: 'translate(-50%,-50%) rotate(0)', opacity: 1 }, { transform: `translate(calc(-50% + ${Math.cos(a) * d * 0.7}px), calc(-50% + ${Math.sin(a) * d * 0.7}px)) rotate(${(Math.random() - 0.5) * 300}deg)`, opacity: 1, offset: 0.55 },
+            { transform: `translate(calc(-50% + ${Math.cos(a) * d}px), calc(-50% + ${Math.sin(a) * d + 24}px)) rotate(${(Math.random() - 0.5) * 540}deg)`, opacity: 0 }], { duration: 700 + Math.random() * 300, easing: 'cubic-bezier(.12,.8,.3,1)', fill: 'forwards' });
+        }
+        later(() => wrap.remove(), 1100);
+      }
       function win() {
         run.streak++; snd('lockin');
-        const from = stage.querySelector('.ub-r').getBoundingClientRect(), to = nEl.getBoundingClientRect();
         const done = () => {
           nEl.textContent = run.streak;
           streakEl.classList.remove('burst'); void streakEl.offsetWidth; streakEl.classList.add('burst');
-          later(advance, reduced ? 120 : 420);
+          later(advance, reduced ? 120 : 380);
         };
         if (reduced) { done(); return; }
-        const fly = D2T.h('<div class="ub-fly">+1</div>');
-        fly.style.left = from.left + from.width / 2 - 20 + 'px'; fly.style.top = from.top + 40 + 'px'; document.body.appendChild(fly);
-        fly.animate([{ transform: 'translate(0,0) scale(1)', opacity: 1 }, { transform: `translate(${to.left - from.left - from.width / 2 + 24}px,${to.top - from.top - 30}px) scale(.6)`, opacity: .2 }], { duration: 520, easing: 'cubic-bezier(.5,0,.3,1)' }).onfinish = () => { fly.remove(); done(); };
+        // a cyan tick pops where VS sits, then flies up to the run count, which ticks up as it lands
+        const vs = stage.querySelector('.ub-vs').getBoundingClientRect(), to = nEl.getBoundingClientRect();
+        const tick = D2T.h('<div class="ub-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>');
+        const cx = vs.left + vs.width / 2, cy = vs.top + vs.height / 2;
+        tick.style.left = cx + 'px'; tick.style.top = cy + 'px'; document.body.appendChild(tick);
+        const dx = to.left + to.width / 2 - cx, dy = to.top + to.height / 2 - cy;
+        tick.animate([{ transform: 'translate(-50%,-50%) scale(0) rotate(-30deg)', opacity: 0 }, { transform: 'translate(-50%,-50%) scale(1.3) rotate(6deg)', opacity: 1, offset: 0.6 }, { transform: 'translate(-50%,-50%) scale(1) rotate(0)', opacity: 1 }], { duration: 340, easing: 'cubic-bezier(.2,.9,.3,1.3)', fill: 'forwards' });
+        later(() => {
+          tick.animate([{ transform: 'translate(-50%,-50%) scale(1)', opacity: 1 }, { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(.45)`, opacity: 0.9 }], { duration: 520, easing: 'cubic-bezier(.55,0,.25,1)', fill: 'forwards' })
+            .onfinish = () => { tick.remove(); done(); };
+        }, 560);
       }
       function advance() {
         if (!run) return;
@@ -355,16 +389,33 @@
           try { await navigator.clipboard.writeText(text); sh.body.querySelector('.fr-lead').textContent = 'Copied. Paste it into the group chat.'; } catch (e) { /* nothing to copy to */ }
         };
       }
-      // swipe the right card up for higher, down for lower
+      // swipe the right card up for higher, down for lower (Craig, 12 Oct): it follows the finger on a rubber band, up to
+      // about three times the old reach, and on release springs back past its start and bounces quickly to rest before
+      // the answer counts (the rubber band iOS menus use)
+      const BAND = 160, rubber = (x) => Math.sign(x) * BAND * (1 - 1 / (Math.abs(x) * 0.75 / BAND + 1));
+      function springBack(el, from, done) {
+        if (reduced || !from) { el.style.transform = ''; done(); return; }
+        const frames = [], N = 32, T = 0.5;
+        for (let i = 0; i <= N; i++) { const t = (i / N) * T; frames.push({ transform: `translateY(${(from * Math.exp(-8.5 * t) * Math.cos(2 * Math.PI * 4.6 * t)).toFixed(2)}px)` }); }
+        frames[N] = { transform: 'translateY(0)' };
+        el.style.transform = '';
+        el.animate(frames, { duration: T * 1000, easing: 'linear' }).onfinish = done;
+      }
       function bindSwipe(el) {
-        let y0 = null, id = null;
-        el.onpointerdown = (e) => { if (!run || busy) return; y0 = e.clientY; id = e.pointerId; el.setPointerCapture(id); };
-        el.onpointermove = (e) => { if (y0 == null || e.pointerId !== id) return; el.style.transform = `translateY(${clamp(e.clientY - y0, -70, 70) * 0.5}px)`; };
-        el.onpointerup = el.onpointercancel = (e) => { if (y0 == null || e.pointerId !== id) return; const dy = e.clientY - y0; y0 = null; el.style.transform = ''; if (Math.abs(dy) > 50) answer(dy < 0); };
+        let y0 = null, id = null, off = 0;
+        el.onpointerdown = (e) => { if (!run || busy) return; y0 = e.clientY; id = e.pointerId; off = 0; el.setPointerCapture(id); el.getAnimations().forEach((a) => a.cancel()); };
+        el.onpointermove = (e) => { if (y0 == null || e.pointerId !== id) return; off = rubber(e.clientY - y0); el.style.transform = `translateY(${off.toFixed(1)}px)`; };
+        el.onpointerup = el.onpointercancel = (e) => {
+          if (y0 == null || e.pointerId !== id) return;
+          const dy = e.clientY - y0, go = e.type === 'pointerup' && Math.abs(dy) > 50 && run && !busy;
+          y0 = null;
+          if (go) { busy = true; enable(false); }
+          springBack(el, off, () => { if (go) { busy = false; answer(dy < 0); } });
+        };
       }
       idle();
     },
-    unmount() { timers.forEach(clearTimeout); rafs.forEach(cancelAnimationFrame); timers = []; rafs = []; document.querySelectorAll('.ub-fly').forEach((f) => f.remove()); }
+    unmount() { timers.forEach(clearTimeout); rafs.forEach(cancelAnimationFrame); timers = []; rafs = []; document.querySelectorAll('.ub-fly, .ub-boom, .ub-tick').forEach((f) => f.remove()); }
   });
 
   // the home screen card (screens/home.js), in the same shape as the other games' cards

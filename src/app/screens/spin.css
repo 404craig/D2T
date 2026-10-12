@@ -137,7 +137,9 @@
 .sp-main.is-after { background: var(--ink); color: #fff; border: 1px solid var(--line); box-shadow: none; }
 .sp-main.is-after .logo-mask { display: none; }
 .sp-screen.is-placing .sp-row { transform: scale(.78); }
-.sp-screen.is-placing .sp-slot { touch-action: none; }
+/* the finger can land on a card before the tray is up (touch-action is fixed when the touch starts, so it is set
+   always, not only while placing), and a held press must not bring up iOS's image callout and cancel the touch */
+.sp-slot { touch-action: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
 .sp-slot.is-signed { opacity: 0; transform: translateY(-40px) scale(.7); transition: opacity .35s, transform .45s var(--ease-out); }
 .tr-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .tr-head-t { min-width: 0; }
@@ -159,11 +161,13 @@
 .sp-det-pos b.is-main { background: var(--sp-accent, #fff); border-color: transparent; color: #0A0A0A; }
 /* Club X (Craig, 12 Oct): one central reel, a little bigger; the crest bursts into the Club X badge */
 .sp-row.sp-one { transform: scale(1.3); transform-origin: 50% 50%; }
-.x-boom { position: absolute; inset: 0; z-index: 6; pointer-events: none; overflow: visible; }
+/* the swing-in: both cards fly as copies over the reel; the clash sits on top */
+.x-fly { position: absolute; left: 0; top: 0; width: 114px; height: 190px; z-index: 5; pointer-events: none; will-change: transform; filter: drop-shadow(0 10px 18px rgba(0,0,0,.6)); }
+.x-fly.x-new { z-index: 6; }
+.x-boom { position: absolute; inset: 0; z-index: 7; pointer-events: none; overflow: visible; }
 .x-boom i { position: absolute; border-radius: 2px; box-shadow: 0 0 6px rgba(255,255,255,.35); }
-.x-shard { position: absolute; background-repeat: no-repeat; filter: drop-shadow(0 2px 4px rgba(0,0,0,.6)); will-change: transform, opacity; }
 .x-boom-ring { position: absolute; width: 40px; height: 40px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 18px rgba(18,240,108,.9), inset 0 0 12px rgba(255,255,255,.6); }
-.x-flash { position: absolute; inset: 0; background: #fff; pointer-events: none; z-index: 5; }
+.x-boom-flash { position: absolute; width: 110px; height: 110px; border-radius: 50%; background: radial-gradient(circle, #fff 0%, rgba(255,255,255,.75) 30%, rgba(18,240,108,0) 70%); }
 /* the naming sheet */
 .x-name { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
 .x-name-in { width: 100%; box-sizing: border-box; height: 58px; padding: 0 16px; border-radius: 16px; border: 1px solid var(--line); background: #0E0E10; color: #fff; font: 900 italic 22px/1 'Exo 2', sans-serif; text-transform: uppercase; letter-spacing: .02em; outline: none; }

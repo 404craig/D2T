@@ -126,3 +126,8 @@
 .g4-reveal .roll { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 6px; max-width: 300px; }
 .g4-reveal .roll i { font: 900 italic 15px/1 'Exo 2', sans-serif; font-style: italic; padding: 7px 10px; border-radius: 9px; background: rgba(255,255,255,.06); color: #8E8E99; border: 1px solid #2A2A30; }
 .g4-reveal .roll i.on { background: var(--g4); color: #0A0A0A; border-color: var(--g4); }
+/* the reels' speed streak and the light sweep on landing, as the Classic spin (Craig, 12 Oct) */
+.g4-trio .g4-streak { position: absolute; inset: 0; pointer-events: none; opacity: 0; z-index: 2; mix-blend-mode: screen;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.14) 38%, rgba(255,255,255,.22) 50%, rgba(255,255,255,.14) 62%, rgba(255,255,255,0) 100%); }
+.g4-trio .g4-sweep { position: absolute; top: -20%; left: -60%; width: 40%; height: 140%; pointer-events: none; z-index: 3; opacity: 0; transform: rotate(16deg);
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.75) 50%, rgba(255,255,255,0) 100%); }
