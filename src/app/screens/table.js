@@ -24,7 +24,7 @@
         <div class="se-pad"></div>
       </div>`);
       const flash = D2T.h('<div class="se-newseason" aria-hidden="true"><span>Rewrite<br>history</span></div>');   // two lines (Craig, 12 Oct), not "New season"
-      const bar = D2T.h('<footer class="actionbar"><button class="btn se-btn se-btn-ghost se-wide" type="button">Skip</button></footer>');
+      const bar = D2T.h(`<footer class="actionbar"><button class="btn se-btn se-btn-ghost se-wide" type="button">Skip</button>${SE.homeBtn()}</footer>`);
       root.append(body, flash, bar);
       const btn = bar.querySelector('button');
       const tbl = body.querySelector('.se-table');

@@ -74,6 +74,12 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.click(".actionbar button");
   await expectScreen("squad");
   await wait(800); await shot("07-squad-preseason"); await smallButtons("squad");
+  // the home button sits bottom right in a run and opens the run menu (Craig, 13 Oct)
+  check(await page.evaluate(() => { const b = document.querySelector(".actionbar"); return b && b.lastElementChild.classList.contains("se-home"); }), "squad: the home button is not bottom right");
+  await page.click(".actionbar .se-home"); await wait(500);
+  check(!!(await page.$('.sheet [data-k="restart"]')) && !!(await page.$('.sheet [data-k="quit"]')) && !!(await page.$('.sheet [data-k="home"]')), "the run menu does not offer Restart, Home and Quit");
+  await page.click('.sheet [data-k="keep"]'); await wait(500);
+  check((await screen()) === "squad" && !(await page.$(".sheet")), "Keep playing did not stay on the squad");
 
   // formation change before the season
   await page.click(".se-formlink"); await wait(500); await shot("08-formations");
@@ -306,6 +312,9 @@ fs.mkdirSync(OUT, { recursive: true });
   check((await screen()) === "table", "the daily did not open on the table, on " + (await screen()));
   check(await page.evaluate((d) => { const r = window.D2T.state.run; return r.daily === window.D2T.game.today() && window.D2T.game.mode() === "classic" && d.mode === "classic" && r.eng.respins === window.D2TE.RULES.respins && r.eng.phase !== "draft" && r.eng.xi.every((id) => id != null); }, dEntry), "the daily did not start with today's club, its mode and no respins");
   check(await page.evaluate(() => !!window.D2T.state.parked), "the run in progress was not kept aside for the daily");
+  await page.click(".actionbar .se-home"); await wait(500);
+  check(!!(await page.$('.sheet [data-k="home"]')) && !(await page.$('.sheet [data-k="restart"]')) && !(await page.$('.sheet [data-k="quit"]')), "the Daily's run menu should only offer Keep playing and Home");
+  await page.click('.sheet [data-k="keep"]'); await wait(500);
   await page.evaluate(() => { const G = window.D2T.game; window.D2T.state.run.tableSeen = true; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(900); await shot("40-daily-summary");
   check(await page.evaluate(() => !!window.D2T.game.dailyResult()), "the daily result was not recorded");
