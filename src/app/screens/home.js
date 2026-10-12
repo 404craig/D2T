@@ -67,7 +67,7 @@
     const g = D2T.state.g433, n = g && g.filled ? g.filled.length : 0, rec = D2T.game.g433.record();
     const sub = n > 0 && n < 11 ? `Carry on: ${n} of 11 shirts, ${g.filled.reduce((t, p) => t + p.goals, 0)} goals so far.`
       : rec.games ? `Your best: ${rec.best === 0 ? 'exactly 433' : rec.best + ' away'}.${rec.exact ? ` Hit 433 ${rec.exact} ${rec.exact === 1 ? 'time' : 'times'}.` : ''}` : 'Spin 11 real players. Their Premier League goals must add up to 433.';
-    return gameCard({ c: '#FF7A1A', attrs: 'data-act="g433"', label: '433 Goals', tag: '433 GOALS', big: 'Score exactly 433 goals', sub, mark: '<span class="fr-gm-433">433</span>' });
+    return gameCard({ c: '#FF7A1A', attrs: 'data-act="g433"', label: '433 Goals', tag: '433 GOALS', big: 'Score exactly<br>433 goals', sub, mark: '<span class="fr-gm-433">433</span>' });
   }
 
   // Daily challenge card: today's club for everyone, the mode it plays, and your result once played.
