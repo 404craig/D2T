@@ -75,6 +75,15 @@
     catch (e) { D2T.sheet({ title: 'Your result', body: `<p class="fr-lead" style="white-space:pre-line;user-select:text;-webkit-user-select:text">${D2T.esc(sh.text)}</p>` }); }
   }
 
+  // the Daily: today's result next to your best one, so you can see how today stacks up
+  function dailyVs(date) {
+    const G = D2T.game, cmp = G.dailyCompare(date), t = cmp.today, b = cmp.best;
+    if (!t) return '';
+    return `<div class="sm-panel sm-daily"><div class="sm-label">${D2T.esc(G.dailyName(date))}</div>
+      <div class="sm-dv"><span><small>Today</small><b>${sign(t.rise)}</b><i>${D2T.ordinal(t.finish)}</i></span>
+      <span><small>Your best Daily</small>${b && !cmp.isBest ? `<b>${sign(b.rise)}</b><i>${D2T.esc(b.club)} ${b.season}</i>` : `<b>${sign(t.rise)}</b><i>${b ? 'Today. A new best' : 'Your first Daily'}</i>`}</span></div></div>`;
+  }
+
   D2T.screen('summary', {
     title: 'Season over', theme: 'black',
     mount(root) {
@@ -111,6 +120,7 @@
           <div class="sm-head${dream && !met ? ' sm-miss' : ''}">${dream ? (met ? (x ? 'Champions' : 'Dream achieved') : 'Fell short') : headline(F)}</div>
           <div class="sm-finish"><span class="sm-pos">${D2T.ordinal(F.finish)}</span>
             <span class="sm-sub"><b>${F.pts} pts · W${F.w} D${F.d} L${F.l}</b><span>History: ${D2T.ordinal(F.histFinish)}, ${F.histPts} pts</span></span></div>
+          ${daily ? dailyVs(daily) : ''}
           <div class="sm-tiles">
             <div class="sm-tile sm-rise"><b>${sign(F.rise)}</b><span>The Rise</span></div>
             <div class="sm-tile"><b>${sign(F.gained)}</b><span>Points on history</span></div>
@@ -131,6 +141,7 @@
 
       const tag = x ? (met ? 'Club X: champions' : 'Club X') : dream ? (met ? 'Dare2Dream: dream achieved' : 'Dare2Dream') : '';
       const sh = buildShare(F, club, S.season, line, daily ? `${GAME.dailyName(daily)}${tag ? ' · ' + tag : ''}` : tag);
+      if (daily) { const cmp = GAME.dailyCompare(daily); sh.text += `${cmp.isBest ? '\nMy best Daily yet' : cmp.bestLine ? '\n' + cmp.bestLine : ''}\nCan you beat it? 404craig.github.io/D2T`; }
       bar.querySelector('.icon-btn').onclick = () => D2T.go('home');
       bar.querySelector('[data-act="share"]').onclick = () => share(sh);
       body.querySelector('[data-act="again"]').onclick = () => { if (daily) { D2T.go('home'); return; } const m = GAME.mode(); D2T.state.run = null; D2T.save(); GAME.newRun(m); D2T.go('spin'); };
