@@ -266,7 +266,7 @@
 
       const build = () => {
         api = D2T.roll.mount(body, {
-          kicker: draft ? `Dare2Dream draft · Shirt ${info.step} of ${info.of}` : `${info.name} · Roll ${info.step} of ${info.of}`,
+          kicker: draft ? `${GAME.modeName()} draft · Shirt ${info.step} of ${info.of}` : `${info.name} · Roll ${info.step} of ${info.of}`,
           title: draft ? `Pick your ${ROLE[di.broad]}` : 'Who comes in?',
           sub: draft ? `Three ${ROLES[di.broad]} from ${run.season} for your ${di.pos} shirt. No respins in the draft.` : `Roll ${info.overall} of ${info.total} this season${fx ? `, before GW${info.gw} against ${opp}` : ''}. Sign one or pass.`,
           pool: fillerCards(),
