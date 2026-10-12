@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D2T Nationality Flags</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<link rel="stylesheet" href="live/base.css">
+<style>
+  /* Three ways to show a player's nationality on the real cards (live/cards.js and live/base.css, copied from the game), at every size the game uses:
+     280 (big card), 128 (how to play), 96 (summary), 64 (subs) and 50 (pitch). Flags are drawn images, never emoji. */
+  :root { color-scheme: dark; }
+  html, body { height: auto; overflow: auto; background: #08080A; color: #fff; font-family: 'Exo 2', Arial, sans-serif; }
+  body { position: static; }
+  .page { max-width: 1760px; margin: 0 auto; padding: 40px 20px 80px; display: flex; flex-direction: column; gap: 30px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
+  .head p, .sec > p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 96ch; }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 16px; }
+  .fact { background: #111114; border: 1px solid #222228; border-radius: 16px; padding: 14px 16px; font-size: 13.5px; line-height: 1.45; color: #CFCFD6; }
+  .fact b { display: block; color: #12F06C; font-size: 11px; letter-spacing: .12em; margin-bottom: 4px; }
+  .sec { display: flex; flex-direction: column; gap: 16px; padding-top: 26px; border-top: 1px solid #1E1E22; }
+  .sec > h2 { font: 900 italic 30px/1 'Exo 2'; margin: 0; }
+  .sec > h2 small { font-size: 13px; font-style: normal; font-weight: 800; letter-spacing: .14em; color: #12F06C; display: block; margin-bottom: 6px; }
+  .sizes { display: flex; gap: 34px; align-items: flex-end; flex-wrap: wrap; }
+  .size { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .size > span { font-size: 11px; font-weight: 800; letter-spacing: .12em; color: #8E8E99; }
+  .stack { display: flex; gap: 14px; align-items: flex-end; }
+  .stack.minis { gap: 10px; padding-top: 14px; }
+  .pitchrow { display: flex; gap: 8px; padding: 20px 14px 12px; border-radius: 14px; background: repeating-linear-gradient(180deg, #0D3A24 0 16px, #0A311E 16px 32px); }
+
+  .d2c-flag { display: block; object-fit: cover; aspect-ratio: 4 / 3; border-radius: 0.22em; box-shadow: 0 0 0 0.08em rgba(0,0,0,.35), 0 0.12em 0.3em rgba(0,0,0,.35); }
+
+  /* A: with the rating, FIFA style. Big cards: the flag sits under the position in the left column (in place of the level word);
+     pitch cards: under the crest, beside the big rating. */
+  .optA .d2c:not(.mini) .d2c-flag { width: 1.7em; }
+  .optA .d2c:not(.mini) .d2c-rule { margin: 0.32em 0 0.3em; }
+  .optA .d2c.mini .d2c-mid { display: grid; grid-template-columns: auto auto; align-items: center; gap: 0 0.4em; }
+  .optA .d2c.mini .d2c-side { display: flex; flex-direction: column; align-items: center; gap: 0.35em; }
+  .optA .d2c.mini .d2c-flag { width: 3em; }
+  .optA .d2c.mini .d2c-crest { width: 2.9em; height: 2.9em; }
+
+  /* B: a corner badge, top right, overlapping the edge of the crest, same place at every size */
+  .optB .d2c-body { position: relative; }
+  .optB .d2c-flag { position: absolute; z-index: 3; }
+  .optB .d2c:not(.mini) .d2c-flag { width: 2.4em; right: 0.7em; top: 6.2em; }
+  .optB .d2c.mini .d2c-flag { width: 3em; right: 0.7em; top: 1.1em; }
+
+  /* C: by the name. A small flag before the first name (big cards); on pitch cards a flag beside the surname row would be too
+     cramped, so it leads the first name. */
+  .optC .d2c-first { display: flex; align-items: center; justify-content: center; gap: 0.35em; }
+  .optC .d2c:not(.mini) .d2c-flag { width: 1.5em; }
+  .optC .d2c.mini .d2c-first { display: flex; }
+  .optC .d2c.mini .d2c-flag { width: 2.2em; flex: none; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <h1>Nationality on the cards</h1>
+    <p>We already have every player's nationality in the checked player data, so this is a design job, not a data one. Below are three places for a flag, each on the real cards at every size the game uses. The players and their seasons are real; the flags are drawn images.</p>
+    <div class="facts">
+      <div class="fact"><b>THE DATA</b>Every one of the 18,652 player rows has a nationality, from the same two-source player file as the rest of the game: the country he played for (birth country if never capped), one per player across his whole career. 123 countries.</div>
+      <div class="fact"><b>THE FLAGS</b>Emoji flags break on Windows and many Android phones (England and Scotland especially, a Tenaball lesson), so flags are images: the open flag-icons set (MIT licence) covers 122 of the 123, including England, Scotland, Wales and Northern Ireland. Yugoslavia needs drawing (three stripes).</div>
+      <div class="fact"><b>THE WEIGHT</b>As drawn files the 122 flags are 850 KB (Spain, Mexico, Serbia carry detailed coats of arms). Shrunk to small pictures at card size they come to about 150 KB in the page, loaded once.</div>
+      <div class="fact"><b>TO TIDY</b>Two spellings of one country ("Saint Kitts and Nevis" and "St Kitts and Nevis") point to the same flag. At 50px the smallest flags are about 12 px wide: clear for most, but similar flags (Ireland and Ivory Coast, Romania and Chad) can look alike, so the name stays on the big card.</div>
+    </div>
+  </div>
+  <div id="opts"></div>
+</div>
+<script src="data/natcards.js"></script>
+<script src="live/cards.js"></script>
+<script>
+(function () {
+  const FLAG = { 'England': 'gb-eng', 'Wales': 'gb-wls', 'Ivory Coast': 'ci', 'Republic of Ireland': 'ie', 'France': 'fr', 'Scotland': 'gb-sct', 'South Korea': 'kr', 'Northern Ireland': 'gb-nir', 'Denmark': 'dk', 'Nigeria': 'ng' };
+  const C = window.NAT_CARDS, by = (n) => C.find((c) => c.name === n);
+  const flag = (c) => `<img class="d2c-flag" src="assets/flags/${FLAG[c.nat]}.svg" alt="${c.nat}" title="${c.nat}">`;
+  // put the flag into a card's HTML for an option
+  function withFlag(html, c, opt, mini) {
+    const f = flag(c);
+    if (opt === 'A') return mini ? html.replace(/(<img class="d2c-crest"[^>]*>)/, `<span class="d2c-side">$1${f}</span>`) : html.replace(/<span class="d2c-lvl">[^<]*<\/span>/, f);
+    if (opt === 'B') return html.replace('<div class="d2c-body">', `<div class="d2c-body">${f}`);
+    return html.replace(/<span class="d2c-first( d2c-fit)?">/, (m) => m + f);
+  }
+  const card = (n, w, opt, mini) => { const c = by(n); return withFlag(D2T.cards.player(c, { w, mini, shine: false }), c, opt, mini); };
+  const OPTS = [
+    ['A', 'With the rating', 'FIFA style. On the big cards the flag sits in the left column under the position, in place of the level word (BALLER, GOLD...), which the card colour already shows. On pitch cards it sits under the crest, next to the big rating. The flag reads as part of the player\'s "numbers".'],
+    ['B', 'Corner badge', 'A small flag in the top right corner, tucked under the crest on big cards and in the corner on pitch cards. Same place at every size, so it is easy to scan across a team; it never moves the layout.'],
+    ['C', 'By the name', 'A small flag in front of the first name. Feels like a sticker on the name, keeps the top of the card clean, and the bigger the card, the more it reads as part of who he is.']];
+  const big = ['Thierry Henry', 'Gareth Bale', 'Didier Drogba'], mids = ['Roy Keane', 'Andy Robertson', 'Son Heung-min', 'Jonny Evans'];
+  const team = ['Peter Schmeichel', 'Andy Robertson', 'Jonny Evans', 'Roy Keane', 'Wilfred Ndidi', 'Gareth Bale', 'Alan Shearer', 'Didier Drogba'];
+  document.getElementById('opts').innerHTML = OPTS.map(([k, n, d]) => `<section class="sec opt${k}"><h2><small>OPTION ${k}</small>${n}</h2><p>${d}</p>
+    <div class="sizes">
+      <div class="size"><div class="stack">${card(big[0], 280, k, false)}</div><span>280 · BIG CARD</span></div>
+      <div class="size"><div class="stack">${big.slice(1).map((n2) => card(n2, 128, k, false)).join('')}</div><span>128 · HOW TO PLAY</span></div>
+      <div class="size"><div class="stack">${mids.slice(0, 3).map((n2) => card(n2, 96, k, false)).join('')}</div><span>96 · SUMMARY</span></div>
+    </div>
+    <div class="sizes">
+      <div class="size"><div class="stack minis">${team.slice(0, 5).map((n2) => card(n2, 64, k, true)).join('')}</div><span>64 · SUBS</span></div>
+      <div class="size"><div class="pitchrow">${team.map((n2) => card(n2, 50, k, true)).join('')}</div><span>50 · PITCH</span></div>
+    </div></section>`).join('');
+})();
+</script>
+</body>
+</html>
