@@ -290,10 +290,18 @@ fs.mkdirSync(OUT, { recursive: true });
   const cands = await page.evaluate(() => window.D2T.state.g433.cands.map((p) => p.name).join());
   await page.reload(); await wait(6500); await page.evaluate(() => window.D2T.go("goals433")); await wait(900);
   check(await page.evaluate((c) => window.D2T.state.g433.cands.map((p) => p.name).join() === c, cands), "433: a refresh changed the three shirts");
+  check(await page.evaluate(() => document.querySelectorAll(".g4 .slotp.open .g4-shirt.next").length === 11), "433: the open shirts are not all orange");
+  check(await page.evaluate(() => { const s = window.D2T.state.g433; return s.cands.length === 3 && s.cands.every((c) => ["GK", "DEF", "MID", "FWD"].includes(c.pos)); }), "433: a spin did not bring three players with positions");
   for (let i = 0; i < 11; i++) {
     if (!(await page.$(".g4 [data-c]"))) { await page.click(".g4 .sp-main"); await wait(2900); }
-    await page.click('.g4 [data-c="0"]'); await wait(200); await page.click('.g4 [data-c="0"]'); await wait(1800);
+    await page.click('.g4 [data-c="0"]'); await wait(250);
+    if (i === 0) {
+      check(await page.evaluate(() => { const pos = window.D2T.state.g433.cands[0].pos, fit = [...document.querySelectorAll(".g4 .slotp.fit")]; return fit.length > 0 && document.querySelectorAll(".g4 .slotp.nofit").length + fit.length === 11; }), "433: picking a player did not light his open shirts");
+      await page.click(".g4 .slotp.fit >> nth=-1"); await wait(1800);   // place him by tapping one of his shirts
+    } else { await page.click('.g4 [data-c="0"]'); await wait(1800); }
   }
+  check(await page.evaluate(() => { const S = window.D2T.state.g433, SL = ["GK", "DEF", "DEF", "DEF", "DEF", "MID", "MID", "MID", "FWD", "FWD", "FWD"]; return new Set(S.filled.map((p) => p.slot)).size === 11 && S.filled.every((p) => SL[p.slot] === p.pos); }), "433: a player sits in the wrong position or two share a shirt");
+  check(await page.evaluate(() => { const G4 = window.D2T.game.g433, need = G4.list("FWD")[40].goals; return G4.canGift("FWD", need) && [0, 1, 2, 3, 4].every(() => G4.drawOpen({ FWD: 1 }, [], need).some((p) => p.goals === need)); }), "433: the last-shot gift did not offer the exact player");
   await wait(4500); await shot("50-433-end");
   check(await page.evaluate(() => window.D2T.state.g433.filled.length === 11 && window.D2T.game.g433.record().games === 1), "433: the game did not fill 11 shirts and record a result");
   check(await page.evaluate(() => window.D2T.state.g433.filled.every((p) => window.D2T.state.g433.filled.filter((q) => q.name === p.name).length === 1)), "433: the same player appeared twice");

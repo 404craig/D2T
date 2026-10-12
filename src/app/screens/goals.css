@@ -99,3 +99,13 @@
 .g4-msg.over b { font-size: 64px; color: #C4C4CC; }
 .btn.g4-again { background: #FF7A1A; color: #0A0A0A; }
 @media (prefers-reduced-motion: reduce) { .g4-shirt { transition: none; } }
+
+/* any-order board (12 Oct): every open shirt is orange; with a player selected, the shirts he fits pulse, the rest step back */
+.g4-pitch .slotp.open { cursor: pointer; }
+.g4-pitch .slotp.fit .g4-shirt { animation: g4fit .9s ease-in-out infinite alternate; }
+.g4-pitch .slotp.nofit { opacity: .32; }
+@keyframes g4fit { from { transform: scale(1); filter: drop-shadow(0 0 0 rgba(255,122,26,0)); } to { transform: scale(1.12); filter: drop-shadow(0 0 10px rgba(255,122,26,.75)); } }
+.g4-trio .cell { position: relative; }
+.g4-ptag { position: absolute; top: -6px; left: 50%; transform: translateX(-50%); z-index: 3; padding: 2px 7px; border-radius: 7px; background: var(--g4); color: #0A0A0A; font: 900 italic 10px/1.2 var(--font); letter-spacing: .06em; opacity: 0; transition: opacity .25s; pointer-events: none; }
+.g4-ptag.on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .g4-pitch .slotp.fit .g4-shirt { animation: none; filter: drop-shadow(0 0 8px rgba(255,122,26,.75)); } }
