@@ -85,7 +85,7 @@
       const beatShift = beatY - ly;
 
       const skipBtn = wrap.querySelector('.fr-skip');
-      timers.push(setTimeout(() => skipBtn.classList.add('on'), 900));
+      skipBtn.classList.add('on'); // Skip is there from the first frame, every load (Craig, 12 Oct)
 
       const finish = (to) => {
         if (done) return; done = true;

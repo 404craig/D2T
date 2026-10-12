@@ -8,7 +8,7 @@
 .fr-intro { position: absolute; inset: 0; overflow: hidden; cursor: pointer; }
 .fr-stage { position: absolute; inset: 0; will-change: transform, opacity; }
 .fr-piece { position: absolute; display: block; color: var(--on-green); background: currentColor; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; will-change: transform, opacity; }
-.fr-skip { position: absolute; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 18px); min-height: 44px; padding: 0 16px; border-radius: 22px; border: 1.5px solid rgba(10,10,10,.35); background: rgba(255,255,255,.18); color: var(--on-green); font-weight: 800; font-size: 14px; opacity: 0; transition: opacity .4s; z-index: 3; }
+.fr-skip { position: absolute; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 18px); min-height: 44px; padding: 0 16px; border-radius: 22px; border: 1.5px solid rgba(10,10,10,.35); background: rgba(255,255,255,.18); color: var(--on-green); font-weight: 800; font-size: 14px; z-index: 3; }
 .fr-skip.on { opacity: 1; }
 .fr-slogan { position: absolute; left: 20px; right: 20px; margin: 0; color: var(--on-green); font: 900 italic 31px/1.08 var(--font); text-transform: uppercase; letter-spacing: 0.005em; text-align: center; }
 .fr-sl2 { display: inline-block; white-space: nowrap; }
