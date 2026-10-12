@@ -23,7 +23,8 @@ function draw(open, used, need) {
   return out.sort(() => Math.random() - 0.5);
 }
 // strategies: how the player values a candidate (est = what they think his goals are)
-const est = { random: () => 0, rough: (x) => x.g * (0.6 + Math.random() * 0.8), exact: (x) => x.g };
+// casual: a typical fan, often out by half or more (a quarter of the time no idea, a guess for the position)
+const est = { random: () => 0, casual: (x) => (Math.random() < 0.25 ? MEAN[x.pos] * (0.4 + Math.random() * 1.2) : x.g * (0.4 + Math.random() * 1.2)), rough: (x) => x.g * (0.6 + Math.random() * 0.8), exact: (x) => x.g };
 function play(strategy, giftRate, lastRule) {
   const open = Object.assign({}, POS), used = new Set(); let total = 0, gift = false, giftShown = false, natural = false;
   for (let k = 0; k < 11; k++) {
@@ -48,6 +49,6 @@ const N = 20000, F = ['442', '433', '451', '352', '343', '424', '532', '541'], R
 for (const gr of RATES) { console.log(gr < 0 ? 'gift per formation (GIFT)' : `gift ${gr} when possible`);
   for (const f of F) { const [d, m, a] = f.split('').map(Number); POS = { GK: 1, DEF: d, MID: m, FWD: a }; T = +f; setPool(process.argv[3] === 'flat' ? TOP : DEPTH[f]);
     const row = [];
-    for (const s of ['random', 'rough', 'exact']) { let ex = 0, w10 = 0, sum = 0; for (let i = 0; i < N; i++) { const r = play(s, gr < 0 ? GIFT[f] : gr); if (r.gap === 0) ex++; if (r.gap <= 10) w10++; sum += r.total; }
+    for (const s of (process.argv[4] || 'random,casual,rough,exact').split(',')) { let ex = 0, w10 = 0, sum = 0; for (let i = 0; i < N; i++) { const r = play(s, gr < 0 ? GIFT[f] : gr); if (r.gap === 0) ex++; if (r.gap <= 10) w10++; sum += r.total; }
       row.push(`${s} exact ${(100 * ex / N).toFixed(1)}% w10 ${(100 * w10 / N).toFixed(0)}% avg ${(sum / N).toFixed(0)}`); }
     console.log(f, row.join(' | ')); } }
