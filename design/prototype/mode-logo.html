@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D2T Mode Logo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<style>
+  /* The in-game top-left logo: D2T stays white, the mode's name follows in the mode's colour. Three treatments x five modes. */
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #08080A; color: #fff; font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 1760px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 28px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
+  .head p, .sec > p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 92ch; }
+  .sec { display: flex; flex-direction: column; gap: 16px; padding-top: 24px; border-top: 1px solid #1E1E22; }
+  .sec > h2 { font: 900 italic 30px/1 'Exo 2'; margin: 0; }
+  .sec > h2 small { display: block; font-size: 12px; font-style: normal; font-weight: 800; letter-spacing: .14em; color: #12F06C; margin-bottom: 6px; }
+  .row { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
+  .phone { width: 390px; max-width: 100%; border-radius: 26px; background: #000; box-shadow: 0 0 0 1px #222228, 0 24px 50px rgba(0,0,0,.6); overflow: hidden; }
+  .cap { font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #8E8E99; text-align: center; margin-top: 10px; }
+
+  /* top bar as in the game: logo left, account circle right */
+  .tb { display: flex; align-items: center; justify-content: space-between; padding: 16px 16px 10px; }
+  .acct { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #26262C; background: #0E0E10; display: grid; place-items: center; flex: none; }
+  .acct svg { width: 18px; height: 18px; }
+  .lockup { display: flex; align-items: center; gap: 8px; height: 26px; color: #fff; min-width: 0; }
+  .logo { display: block; height: 26px; aspect-ratio: 857 / 241; background: #fff; -webkit-mask: url('assets/logo/short.png') center / contain no-repeat; mask: url('assets/logo/short.png') center / contain no-repeat; flex: none; }
+  .word { font: 900 italic 22px/1 'Exo 2'; text-transform: uppercase; letter-spacing: -.005em; color: var(--c); white-space: nowrap; }
+
+  /* 1: the word straight after the logo, same height as its letters */
+  .t1 .word { font-size: 23px; transform: translateY(1px); }
+  /* 2: a slanted slash between them, like the logo's own italic */
+  .t2 .lockup { gap: 7px; }
+  .t2 .slash { width: 2.5px; height: 22px; background: #5A5A64; transform: skewX(-18deg); border-radius: 1px; }
+  .t2 .word { font-size: 20px; }
+  /* 3: the word in a slanted tag in the mode colour, dark text on it */
+  .t3 .word { font-size: 15px; letter-spacing: .04em; color: var(--ink, #0A0A0A); background: var(--c); padding: 5px 9px 4px; border-radius: 5px; transform: skewX(-10deg); }
+  .t3 .word span { display: inline-block; transform: skewX(10deg); }
+
+  /* a hint of the screen under the bar, so the lockup is seen in place */
+  .scr { padding: 6px 16px 22px; }
+  .kick { text-align: center; font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #8E8E99; }
+  .pill { display: block; width: max-content; margin: 8px auto 12px; font: 900 italic 15px/1 'Exo 2'; padding: 7px 14px; border-radius: 10px; background: var(--c); color: var(--ink, #0A0A0A); }
+  .score { display: flex; align-items: center; justify-content: space-between; }
+  .score .t { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 84px; }
+  .score img { width: 52px; height: 52px; object-fit: contain; }
+  .score b { font: 900 italic 13px/1 'Exo 2'; text-transform: uppercase; }
+  .score .n { font: 900 italic 54px/1 'Exo 2'; }
+  .block { border: 1px solid #26262C; border-radius: 16px; background: #0E0E10; padding: 14px; font-size: 13px; color: #BDBDC6; line-height: 1.45; text-align: center; }
+  .block strong { display: block; font: 900 italic 22px/1.05 'Exo 2'; color: #fff; text-transform: uppercase; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <h1>Mode in the logo</h1>
+    <p>Inside a game the top-left logo stays the white D2T and the mode follows it in that mode's colour: Classic in your club's colour, Dare2Dream blue, Daily grey, Club X green, 433 orange. Three ways to set the word, each shown on every mode with a hint of the screen underneath. Tapping it still goes home.</p>
+  </div>
+  <div id="secs"></div>
+</div>
+<script>
+(function () {
+  const ACCT = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.6-3.6 4.6-5.2 8-5.2s6.4 1.6 8 5.2"/></svg>';
+  // Classic takes the club's colour (Wolves here, as in your screenshot); the rest are the mode colours from home (Daily in grey)
+  const MODES = [
+    { word: 'Classic', c: '#FDB913', note: 'Classic · in your club colour (Wolves)',
+      scr: '<div class="kick">GAMEWEEK 2 · FULL TIME</div><span class="pill">WIN · +3 POINTS</span><div class="score"><span class="t"><img src="assets/crests/wolves.png" alt=""><b style="color:#FDB913">Wolves</b></span><span class="n">3 - 1</span><span class="t"><img src="assets/crests/fulham.png" alt=""><b>Fulham</b></span></div>' },
+    { word: 'Dare2Dream', c: '#3BA4FF', note: 'Dare2Dream · blue',
+      scr: '<div class="block"><strong>Draft · shirt 4 of 11</strong>Three defenders from other clubs. Pick one for your back four.</div>' },
+    { word: 'Daily', c: '#A9A9B2', note: 'Daily · grey',
+      scr: '<div class="block"><strong>Watford 1999/00</strong>Daily Challenge 12 Oct. Classic: they went down. Rescue them.</div>' },
+    { word: 'Club X', c: '#12F06C', note: 'Club X · green',
+      scr: '<div class="block"><strong>Win the league</strong>Club X replaces the bottom club. Draft 11 from scratch.</div>' },
+    { word: '433', c: '#FF7A1A', note: '433 Goals · orange',
+      scr: '<div class="block"><strong style="color:#FF7A1A">412 · 21 away</strong>Seven shirts filled. Spin for the next.</div>' }
+  ];
+  const lockup = (t, m) => `<span class="lockup"><span class="logo" role="img" aria-label="D2T"></span>${t === 2 ? '<span class="slash"></span>' : ''}<span class="word">${t === 3 ? `<span>${m.word}</span>` : m.word}</span></span>`;
+  const phone = (t, m) => `<div><div class="phone t${t}" style="--c:${m.c}"><div class="tb">${lockup(t, m)}<span class="acct">${ACCT}</span></div><div class="scr">${m.scr}</div></div><div class="cap">${m.note}</div></div>`;
+  const T = [[1, 'Word after the logo', 'The mode straight after D2T in the same Black Italic, at the height of the logo\'s letters, in the mode colour. The simplest: it reads as one name, "D2T Classic".'],
+    [2, 'With a slash', 'A slanted grey slash between D2T and the mode, like a breadcrumb: D2T / DAILY. Keeps the logo and the mode clearly apart.'],
+    [3, 'Mode tag', 'The mode in a small slanted tag in its colour with dark text, beside the logo. The loudest; reads like a badge on a kit.']];
+  document.getElementById('secs').innerHTML = T.map(([t, h, d]) => `<section class="sec"><h2><small>OPTION ${t}</small>${h}</h2><p>${d}</p><div class="row">${MODES.map((m) => phone(t, m)).join('')}</div></section>`).join('');
+})();
+</script>
+</body>
+</html>
