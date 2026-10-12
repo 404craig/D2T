@@ -91,6 +91,7 @@ fs.mkdirSync(OUT, { recursive: true });
       // tap a card, then a shirt (the best one pulses)
       await page.click(".sp-slot >> nth=0"); await wait(400);
       await shot("10b-selected");
+      check((await page.$$(".tr-field .se-pfchip")).length === 11, "selecting a card did not colour all 11 shirts by fit");
       await page.click(".tr-field .se-slot.se-best .se-cardwrap", { force: true });
     } else {
       // drag a card onto a shirt

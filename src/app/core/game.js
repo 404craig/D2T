@@ -144,7 +144,10 @@
     return {
       id: p.id, name: p.n, club: clubName, club2: two, crest: crestOf(clubName), crestLight: crestLightOf(clubName), pos: p.b, ovr: p.r, level: LV[p.lv || 0],
       apps: p.a, goals: p.g, assists: p.as, cleanSheets: p.cs, nat: p.nat, flag: GAME.flag(p.nat), season: legend ? p.sk : S.season,
-      provisional: p.src === 'f', stats, career: p.k != null && G.careers ? G.careers[p.k] : null
+      provisional: p.src === 'f', stats, career: p.k != null && G.careers ? G.careers[p.k] : null,
+      // detailed positions when known (main first); role is the broad colour of his main one
+      main: E.SLOT_BROAD[(p.p || [])[0]] ? p.p[0] : null, alt: (p.p || []).slice(1).filter((x) => E.SLOT_BROAD[x]),
+      role: E.SLOT_BROAD[(p.p || [])[0]] || p.b
     };
   };
   GAME.LV = LV;

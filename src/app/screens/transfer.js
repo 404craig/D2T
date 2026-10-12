@@ -123,13 +123,19 @@
         if (!slotsEl) return;
         const L = GAME.lineup();
         if (draft) best = di.slot;
+        // the selected card in the tray: each shirt shows how he would fit it (green preferred, amber near, red not)
+        const si = placing && !draft && !signing && api ? api.selected() : -1, inc = si >= 0 ? api.results()[si] : null;
+        const pf = (i) => (inc ? GAME.fit(inc.id, i) : null);
+        const fitWord = { green: 'a preferred position', amber: 'close to his position', red: 'out of position' };
         slotsEl.innerHTML = GAME.slots().map((s, i) => {
-          const c = L.xi[i];
-          if (!c) return `<div class="se-slot${i === best ? ' se-best' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}"><div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="Empty ${s.pos} shirt${i === best ? ', the one you are picking for' : ''}">${SE.emptyShirt(s.pos, PITCH_W)}</div></div>`;
+          const c = L.xi[i], f = pf(i), cls = `se-slot${i === best ? ' se-best' : ''}${f ? ' se-pf-' + f : ''}`;
+          const chipFor = f ? `<span class="se-oopchip se-pfchip se-fit-${f}">${s.pos}</span>` : '';
+          const say = f ? `, ${fitWord[f]} for ${D2T.esc(inc.name)}` : '';
+          if (!c) return `<div class="${cls}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}"><div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="Empty ${s.pos} shirt${i === best ? ', the one you are picking for' : ''}${say}">${SE.emptyShirt(s.pos, PITCH_W)}${chipFor}</div></div>`;
           const fit = GAME.fit(c.id, i), oop = fit !== 'green';
-          return `<div class="se-slot${i === best ? ' se-best' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
-            <div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}. Sign the selected player here">
-              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: i === fresh })}${oop ? `<span class="se-oopchip se-fit-${fit}">${s.pos}</span>` : ''}</div></div>`;
+          return `<div class="${cls}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
+            <div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}. Sign the selected player here${say}">
+              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: i === fresh })}${chipFor || (oop ? `<span class="se-oopchip se-fit-${fit}">${s.pos}</span>` : '')}</div></div>`;
         }).join('');
         ratingEl.textContent = GAME.rating();
         if (fresh >= 0 && !reduced) {
@@ -269,7 +275,7 @@
           settled: st.spun === rollKey ? GAME.rollCards() : null,
           onSettled: () => { st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); timers.push(setTimeout(() => enterPlacing(true), reduced ? 0 : 450)); },
           accent: LV_ACCENT,
-          caption: (p) => `${p.pos} · ${lvName(p).toUpperCase()}`,
+          caption: (p) => `${p.main || p.pos} · ${lvName(p).toUpperCase()}`,
           details: (p) => D2T.cards.info(p, LV_ACCENT(p).accent),
           mainLabel: 'Spin', pickLabel: draft ? 'Pick one' : 'Pass', spinningLabel: 'Rolling',
           selectedLabel: (p) => (draft ? `Sign ${surname(p.name)}` : 'Pass'),
