@@ -77,7 +77,8 @@
 .sp-intro .sp-emblem { width: 128px; height: 128px; color: #fff; will-change: transform, opacity; }
 .sp-intro canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .sp-intro .sp-ring { position: absolute; left: 50%; top: 50%; width: 128px; height: 128px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.7); transform: translate(-50%, -50%) scale(.6); opacity: 0; pointer-events: none; }
-.sp-reveal .sp-slot { animation: spRise .5s var(--ease-out) both; }
+/* backwards, not both: once risen the card must be free to grow when picked and shrink when not (is-sel, is-other) */
+.sp-reveal .sp-slot { animation: spRise .5s var(--ease-out) backwards; }
 .sp-reveal .sp-slot:nth-child(2) { animation-delay: .06s; }
 .sp-reveal .sp-slot:nth-child(3) { animation-delay: .12s; }
 @keyframes spRise { 0% { opacity: 0; transform: translateY(18px) scale(.94); } 100% { opacity: 1; transform: none; } }
@@ -132,7 +133,7 @@
 .sp-screen.is-placing .tr-pitch { display: flex; flex-direction: column; gap: 8px; flex: 1 1 auto; min-height: 0; padding: 0 16px; }
 .sp-screen.is-placing .sp-stage { flex: 0 0 188px; }
 .sp-screen.is-placing .sp-slot.is-sel { transform: scale(1.14) translateY(-6px); }
-.sp-screen.is-placing .sp-slot.is-other { filter: brightness(.4); }
+.sp-screen.is-placing .sp-slot.is-other { transform: scale(.9); filter: brightness(.4); }
 .sp-main.is-after { background: var(--ink); color: #fff; border: 1px solid var(--line); box-shadow: none; }
 .sp-main.is-after .logo-mask { display: none; }
 .sp-screen.is-placing .sp-row { transform: scale(.78); }
