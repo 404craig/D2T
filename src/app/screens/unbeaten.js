@@ -202,7 +202,7 @@
       function refreshCard() {
         if (!run || busy || run.refreshes <= 0) return;
         const nxt = pickNext(); if (!nxt) return;
-        run.refreshes--; busy = true; enable(false); snd('roll3');
+        run.refreshes--; busy = true; enable(false); snd('respin');
         run.next = nxt; run.used.add(nxt);
         stage.querySelector('.ub-who-r').innerHTML = '';
         spinTo(reelR, run.next, { delay: 0, cruiseT: 0.5, decelT: 1.0, n: 2.6, v1: 2.2 }, () => {
@@ -258,7 +258,7 @@
         const btn = bar.querySelector('.ub-spin'); btn.disabled = true; btn.querySelector('.sp-lbl').textContent = 'Spinning';
         const end = -at * 76;
         const done = () => {
-          snd('lockin'); stage.querySelector('.ub-statwin').classList.add('is-hit');
+          snd('land'); stage.querySelector('.ub-statwin').classList.add('is-hit');
           const b = R.best[target.id]; stage.querySelector('.ub-thisbest').innerHTML = `Your best on this: <em>${b || 'none yet'}</em>`;
           later(() => startRun(target), reduced ? 200 : 900);
         };
@@ -330,7 +330,7 @@
         const a = run.stat.val(run.cur), b = run.stat.val(run.next), right = higher ? b > a : b < a;
         burstReveal(numEl(), b, () => {
           stage.querySelector('.ub-r').classList.add(right ? 'ok' : 'bad');
-          if (right) win(); else { snd('buzzer'); later(over, reduced ? 200 : 950); }
+          if (right) win(); else { snd('over'); later(over, reduced ? 200 : 950); }
         });
       }
       function setNum(el, to) {
@@ -367,7 +367,7 @@
         later(() => wrap.remove(), 1100);
       }
       function win() {
-        run.streak++; snd('lockin');
+        run.streak++; snd('correct');
         const done = () => {
           nEl.textContent = run.streak;
           streakEl.classList.remove('burst'); void streakEl.offsetWidth; streakEl.classList.add('burst');
@@ -398,8 +398,7 @@
         reelL.show(item(run.stat, run.cur, true, SIZE.w)); sl.classList.add('is-set'); sl.style.setProperty('--sp-accent', accentOf(run.cur));
         stage.querySelector('.ub-who-l').innerHTML = whoLine(run.stat, run.cur); stage.querySelector('.ub-who-r').innerHTML = '';
         if (!reduced) { const dx = sr.getBoundingClientRect().left - sl.getBoundingClientRect().left; sl.animate([{ transform: `translateX(${dx}px)` }, { transform: 'none' }], { duration: 380, easing: 'cubic-bezier(.5,0,.2,1)' }); }
-        reelR.show(ph()); sr.classList.remove('is-set');
-        snd('roll3');
+        reelR.show(ph()); sr.classList.remove('is-set');   // the next card spins in silently: the answer already had its sound
         spinTo(reelR, run.next, { delay: 0.15, cruiseT: 0.55, decelT: 1.0, n: 2.6, v1: 2.2 }, () => {
           stage.querySelector('.ub-who-r').innerHTML = whoLine(run.stat, run.next);
           busy = false; enable(true); later(() => tips(), 300);
@@ -409,7 +408,7 @@
         if (!root.isConnected || !run) return;
         const s = run.stat, n = run.streak, prev = R.best[s.id] || 0, newBest = n > prev && n > 0;
         R.runs++; if (newBest) R.best[s.id] = n; save();
-        if (newBest) snd('champions');
+        if (newBest) snd('newBest');
         const a = run.cur, b = run.next, nm = (r) => r.name || D2T.game.club(r.club).full || r.club;
         const head = cleared ? 'The whole deck, unbeaten' : n === 0 ? 'Beaten first time' : `Unbeaten in ${n}`;
         const lead = cleared ? 'You got through every card in this deck.' : `<b>${D2T.esc(nm(b))}</b> had <b>${s.val(b)}</b>, <b>${D2T.esc(nm(a))}</b> had <b>${s.val(a)}</b>.`;
