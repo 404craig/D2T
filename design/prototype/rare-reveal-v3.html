@@ -127,7 +127,7 @@
     <div class="steps"><ol>
       <li>The rare card's reel <b>rolls on and slows</b> for about a second before anything happens, then the screen darkens over it.</li>
       <li><b>Glass smashes out of the centre</b>: three times the pieces, twice as long, with long splinters and a spray of tiny bits. The shards turn in 3D, catch the light on their edges and carry the card's colours. Your <b>glass smash</b> plays at about half the level it was (as recorded, a little duller or duller: the buttons above; tap one to hear it). Half a second in, <b>the crowd cheers</b>, louder, with your <b>fireworks</b> louder too, and both carry on through the whole reveal until the card is back in its slot, then fade.</li>
-      <li>The <b>big card bursts from the very centre</b>. The labels (GOL, IMP and so on) are already on it.</li>
+      <li>Half a second after the glass smashes, the <b>big card fades in from small to large</b> in the very centre. The labels (GOL, IMP and so on) are already on it.</li>
       <li>The <b>six numbers pop in one after the other</b> under their labels, 120% then 100%, a little slower than v2. Each arrives with a <b>reverse swoosh</b> and lands with a <b>dull thud</b>.</li>
       <li>The <b>rating rolls</b> with the higher numbers above, dropping into place, <b>ticking like the reels</b> as each passes, then slows, ticks in and lands with a thud.  It fades out above and below.</li>
       <li>The <b>flag</b> bursts on, twice as long as v2.</li>
@@ -383,7 +383,11 @@
     ring.style.left = mx + 'px'; ring.style.top = my + 'px';
     flash.classList.remove('go'); ring.classList.remove('go'); void flash.offsetWidth; flash.classList.add('go'); ring.classList.add('go');
     shatter(mx, my, 3, cols); smash(); setTimeout(crowdOn, 500);   // the crowd and fireworks come in half a second into the smash
-    await tween(620, (u) => { const s = u < .65 ? (u / .65) * 1.15 : 1.15 - .15 * ((u - .65) / .35); const k = Math.max(.001, s); place(mx - W * k / 2, my - H * k / 2, k); });
+    big.style.opacity = 0; place(mx, my, .001);
+    await wait(500);                                            // half a second of glass first, then the card fades in from small to large
+    await tween(900, (u) => { const e = 1 - Math.pow(1 - u, 3), k = Math.max(.001, .15 + e * .85 + Math.sin(u * Math.PI) * .12);
+      big.style.opacity = Math.min(1, u * 1.6); place(mx - W * k / 2, my - H * k / 2, k); });
+    big.style.opacity = 1;
     place(fx, fy, 1);
     badge.textContent = c.level === 'legend' ? 'LEGEND' : 'PURPLE'; badge.style.top = (fy - 46) + 'px'; badge.classList.remove('go'); void badge.offsetWidth; badge.classList.add('go');
     await wait(500);
