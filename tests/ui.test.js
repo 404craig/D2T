@@ -412,6 +412,11 @@ fs.mkdirSync(OUT, { recursive: true });
     check(got.l && /^\d+$/.test(got.l) && got.r === "?" && got.btn === 2, "Unbeaten Run (" + st + "): the cards did not land with a number on the left and ? on the right");
     check(st === "pts" ? got.club && /Points in a season/i.test(got.title) : got.shirt && /Career goals/i.test(got.title), "Unbeaten Run (" + st + "): wrong card type or stat");
     check(got.crest, "Unbeaten Run (" + st + "): no crest on the card");
+    // 3 refreshes a run: one swaps the hidden card, the streak untouched (Craig, 13 Oct)
+    check(await page.textContent(".ub-reload .sp-count") === "3", "Unbeaten Run (" + st + "): no 3 refreshes on the left of the bar");
+    const whoBefore = await page.textContent(".ub-who-r"), keyBefore = await page.evaluate(() => document.querySelector(".ub-r .sp-node.is-hit").innerHTML.length);
+    await page.click(".ub-reload"); await wait(3200);
+    check(await page.textContent(".ub-reload .sp-count") === "2" && await page.textContent(".ub-n") === "0" && (await page.textContent(".ub-who-r") !== whoBefore || await page.evaluate((k) => document.querySelector(".ub-r .sp-node.is-hit").innerHTML.length !== k, keyBefore)), "Unbeaten Run (" + st + "): a refresh did not swap the hidden card");
     if (st === "pts") await shot("53-unbeaten-clubs");
     // answer: either the run goes on (+1) or it is over (the sheet); both record nothing until the end
     const runsBefore = await page.evaluate(() => (window.D2T.state.ub || {}).runs || 0);
@@ -434,6 +439,7 @@ fs.mkdirSync(OUT, { recursive: true });
       await page.click('[data-act="unbeaten"]'); await expectScreen("unbeaten"); await wait(700);
     } else {
       check(!!(await page.$(".sheet")) && /Beaten first time/i.test(await page.textContent(".sheet")), "Unbeaten Run (" + st + "): no end sheet after a wrong answer");
+      check(/New run/.test(await page.textContent('.sheet [data-k="again"]')), "Unbeaten Run (" + st + "): the end sheet's second button does not say New run");
       check(await page.evaluate((n) => ((window.D2T.state.ub || {}).runs || 0) === n + 1, runsBefore), "Unbeaten Run (" + st + "): a finished run was not recorded");
       await shot("54-unbeaten-end");
       await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(700);
