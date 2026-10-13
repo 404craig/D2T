@@ -170,7 +170,7 @@
 .x-boom-flash { position: absolute; width: 110px; height: 110px; border-radius: 50%; background: radial-gradient(circle, #fff 0%, rgba(255,255,255,.75) 30%, rgba(18,240,108,0) 70%); }
 /* the naming sheet */
 .x-name { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
-.x-name-in { width: 100%; box-sizing: border-box; height: 58px; padding: 0 16px; border-radius: 16px; border: 1px solid var(--line); background: #0E0E10; color: #fff; font: 900 italic 22px/1 'Exo 2', sans-serif; text-transform: uppercase; letter-spacing: .02em; outline: none; }
+.x-name-in { width: 100%; box-sizing: border-box; height: 58px; padding: 0 16px; border-radius: 16px; border: 1px solid var(--line); background: #0E0E10; color: #fff; font: 900 italic 22px/1 'Exo 2', sans-serif; letter-spacing: .01em; outline: none; }
 .x-name-in::placeholder { color: #4A4A52; text-transform: none; font-weight: 700; font-style: normal; font-size: 17px; }
 .x-name-in:focus { border-color: #12F06C; box-shadow: 0 0 0 3px rgba(18,240,108,.18); }
 .x-name-err { min-height: 18px; margin: 2px 2px 6px; font-size: 13px; font-weight: 700; color: #FF6B6B; }

@@ -21,7 +21,11 @@
   clubs['Club X'] = { name: 'Club X', full: 'Club X', code: 'CLX', crest: X_BADGE, accent: '#12F06C', ink: '#000000', text: '#12F06C' };
   // Club X (Craig, 12 Oct): you name your club first, and that name takes over from "Club X" everywhere in the run (the
   // badge and green stay). The name lives on the run (state.run.xName); the last one is offered again (state.xName).
-  GAME.xName = () => { const r = D2T.state.run; return (r && r.xName) || 'Club X'; };
+  // Proper capitals (Craig, 13 Oct): each word starts with a capital, small words inside stay small, and anything
+  // already in capitals (FC, AFC) is kept, so "kilsyth athletic" shows as "Kilsyth Athletic".
+  const SMALL = new Set(['of', 'the', 'and', 'de', 'la', 'le', 'in', 'on', 'at']);
+  GAME.tidyXName = (n) => String(n || '').split(' ').map((w, i) => (i > 0 && SMALL.has(w.toLowerCase()) ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1))).join(' ');
+  GAME.xName = () => { const r = D2T.state.run; return (r && r.xName && GAME.tidyXName(r.xName)) || 'Club X'; };
   const xCode = (n) => { const w = n.toUpperCase().replace(/[^A-Z0-9 ]/g, '').split(/\s+/).filter(Boolean); return (w.length >= 3 ? w.map((x) => x[0]).join('') : w.join('')).slice(0, 3) || 'CLX'; };
   const xClub = () => { const n = GAME.xName(); return n === 'Club X' ? clubs['Club X'] : Object.assign({}, clubs['Club X'], { name: n, full: n, code: xCode(n) }); };
   // a name of your own: 2 to 18 letters, numbers, spaces and ' . & -, and never a real club's name
@@ -32,7 +36,7 @@
     if (n.length > 18) return { error: 'Keep it to 18 letters or fewer.' };
     if (!/^[A-Za-z0-9 '.&-]+$/.test(n)) return { error: "Letters, numbers, spaces and ' . & - only." };
     if (realNames.has(n.toLowerCase().replace(/[^a-z0-9]/g, ''))) return { error: "That's a real club. Make up your own." };
-    return { name: n };
+    return { name: GAME.tidyXName(n) };
   };
   GAME.setXName = (raw) => { const r = GAME.checkXName(raw); if (r.name) { D2T.state.run.xName = r.name; D2T.state.xName = r.name; D2T.save(); } return r; };
   const inX = () => { const r = D2T.state.run; return !!(r && r.eng && r.eng.mode === 'clubx'); };   // read straight off the run: GAME.club runs while the adapter is still being set up
@@ -419,10 +423,11 @@
   };
 
   // ---------- Daily challenge ----------
-  // The same club and seed for everyone each day (UK date): one of the bottom 10 of any season, picked from a hash of
-  // the date. It always plays by Classic's rules (Craig, 13 Oct): their real squad and XI, pre-season rolls and 5
-  // respins; the rolls and respins come from the day's seed, so the same choices see the same cards. One go a day; it
-  // has its own save, so another run is never lost.
+  // The same club and seed for everyone each day (UK date). The clubs come round in a fixed cycle through every
+  // relegated club-season, the same list Classic spins from (Craig, 13 Oct): Daily #1 is the first in the cycle, each day
+  // the next, and after the last it starts again from the top. It is a Classic run (Craig, 13 Oct): their real squad and
+  // XI, Classic's rolls and 5 respins; the rolls and respins come from the day's seed, so the same choices see the same
+  // cards. One go a day; it has its own save, so another run is never lost.
   const DAILY_START = '2026-10-11';
   GAME.today = () => {
     try { return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); }
@@ -431,11 +436,12 @@
   // "Daily Challenge 11 Oct 2026": the name shown everywhere for a day's challenge
   GAME.dailyName = (date, short) => { const M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], [y, m, d] = date.split('-'); return `Daily Challenge ${+d} ${M[+m - 1]}${short ? '' : ' ' + y}`; };
   GAME.dailyNumber = (date) => Math.round((Date.parse(date + 'T12:00:00Z') - Date.parse(DAILY_START + 'T12:00:00Z')) / 864e5) + 1;
-  const dailyPool = (G.clubSeasons || []).filter((c) => c.pos > G.seasons[c.season].clubs.length - 10);
+  // the cycle: every relegated club-season in a fixed shuffled order (a hash of its key), so seasons and clubs mix
+  const dailyCycle = G.catalogue.map((c) => c.key).sort((a, b) => (E.hash32('d2t-daily-cycle|' + a) - E.hash32('d2t-daily-cycle|' + b)) || (a < b ? -1 : 1));
+  GAME.dailyCycle = dailyCycle;
   GAME.dailyEntry = (date) => {
-    const c = dailyPool[E.hash32('d2t-daily|' + date) % dailyPool.length], S = G.seasons[c.season];
-    const relegated = c.pos > S.clubs.length - (S.relegationPlaces || 3);
-    return Object.assign({}, GAME.poolEntry(c.key), { mode: 'classic', relegated, n: GAME.dailyNumber(date), date });
+    const n = GAME.dailyNumber(date), L = dailyCycle.length;
+    return Object.assign({}, GAME.poolEntry(dailyCycle[(((n - 1) % L) + L) % L]), { mode: 'classic', relegated: true, n, date });
   };
   GAME.isDaily = () => !!(D2T.state.run && D2T.state.run.daily);
   GAME.dailyResult = (date) => ((D2T.state.record.daily || {})[date || GAME.today()] || null);
@@ -459,6 +465,7 @@
   // Before a new Classic or Dare2Dream run: an unfinished daily keeps its own slot.
   GAME.stashDaily = () => { const st = D2T.state; if (st.run && st.run.daily && live(st.run)) { st.dailyRun = st.run; st.run = null; D2T.save(); } };
   GAME.startDaily = () => {
+    GAME.closeOldDaily();
     const st = D2T.state, date = GAME.today();
     if (GAME.dailyResult(date)) return false;                                   // one go a day
     if (st.run && st.run.daily === date) return true;
@@ -472,6 +479,7 @@
   };
   // A Daily closes at midnight (UK date, Craig 12 Oct): an unfinished one from an earlier day is dropped (no result, so it
   // never counts), a parked run comes back, and home says so once. Returns the closed date or null.
+  const runKey = (eng) => eng.seasonKey + ':' + G.seasons[eng.seasonKey].clubs[eng.club].name;
   GAME.closeOldDaily = () => {
     const st = D2T.state, today = GAME.today(), done = (d) => !!(st.record.daily || {})[d];
     let closed = null;
@@ -481,6 +489,10 @@
       if (st.run === st.parked) st.parked = null;
     }
     if (st.dailyRun && st.dailyRun.daily !== today) { closed = closed || (done(st.dailyRun.daily) ? null : st.dailyRun.daily); st.dailyRun = null; }
+    // a Daily for today begun before it became Classic's rotation (a draft, or another club) starts again as today's
+    const stale = (r) => r && r.daily === today && !done(today) && r.eng && (r.eng.mode !== 'classic' || (r.eng.seasonKey && runKey(r.eng) !== GAME.dailyEntry(today).key));
+    if (stale(st.run)) { st.run = st.parked && live(st.parked) ? st.parked : null; if (st.run === st.parked) st.parked = null; D2T.save(); }
+    if (stale(st.dailyRun)) { st.dailyRun = null; D2T.save(); }
     if (closed) { st.dailyClosed = closed; D2T.save(); }
     return closed;
   };
