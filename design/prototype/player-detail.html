@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Player Card Detail</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<link rel="stylesheet" href="main64/base.css">
+<style>
+  /* The big player card on a roll (tap a picked card again): three ways to set out what we know about him under a smaller card.
+     The card is the live one (core/cards.js and base.css from main at build 64). Every number is Stuart Pearce's, from the data. */
+  :root { color-scheme: dark; --acc: #DCE2E8; --soft: #CFCFD6; --muted: #8E8E99; --line: #26262C; --ink: #0E0E10; --g: #12F06C; }
+  html, body { background: #08080A; }
+  .page { max-width: 1320px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 26px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
+  .head p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 96ch; }
+  .row { display: flex; gap: 26px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .opt { width: 393px; max-width: 100%; display: flex; flex-direction: column; gap: 10px; }
+  .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: var(--g); }
+  .opt-h h3 { font: 900 italic 21px/1.05 'Exo 2'; margin: 3px 0; }
+  .opt-h p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; min-height: 76px; }
+
+  .phone { position: relative; width: 393px; max-width: 100%; height: 852px; border-radius: 30px; background: #000; box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,.6); overflow: hidden; display: flex; flex-direction: column; }
+  .scroll { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 18px 16px 10px; scrollbar-width: none; }
+  .scroll::-webkit-scrollbar { display: none; }
+  .putback { flex: none; text-align: center; font-size: 12px; color: var(--muted); padding: 10px 0 18px; border-top: 1px solid #141418; background: #000; }
+  .cardwrap { display: flex; justify-content: center; }
+
+  /* shared bits */
+  .nm { font: 900 italic 24px/1 'Exo 2'; text-transform: uppercase; }
+  .sec-h { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--muted); text-transform: uppercase; margin: 18px 0 8px; }
+  .sec-h::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  .sec-h img { width: 18px; height: 18px; object-fit: contain; }
+  .tiles { display: grid; gap: 8px; }
+  .tiles.c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .tiles.c4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .t { background: var(--ink); border: 1px solid var(--line); border-radius: 14px; padding: 10px 6px 8px; text-align: center; }
+  .t b { display: block; font: 900 italic 24px/1 'Exo 2'; }
+  .t i { display: block; font-style: normal; font-size: 9.5px; font-weight: 800; letter-spacing: .1em; color: var(--muted); margin-top: 5px; text-transform: uppercase; }
+  .t.wide b { font-size: 20px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 11px; border-radius: 15px; font-size: 13px; font-weight: 800; border: 1px solid #3A3A44; color: #fff; }
+  .pill.main { background: var(--acc); color: #111; border-color: var(--acc); }
+  .pill img { width: 20px; height: 15px; border-radius: 2px; object-fit: cover; }
+  .flagrow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .lbl { font-size: 12px; font-weight: 700; color: var(--muted); margin-right: 2px; }
+  .crest { object-fit: contain; }
+
+  /* club rows */
+  .club { display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center; padding: 9px 10px; border-radius: 14px; background: var(--ink); border: 1px solid var(--line); margin-bottom: 6px; position: relative; overflow: hidden; }
+  .club::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--cc); }
+  .club img { width: 30px; height: 30px; }
+  .club .cn b { display: block; font: 900 italic 15px/1.1 'Exo 2'; text-transform: uppercase; }
+  .club .cn span { font-size: 11.5px; font-weight: 600; color: var(--muted); }
+  .club .cs { text-align: right; font-size: 11px; font-weight: 700; color: var(--muted); line-height: 1.35; }
+  .club .cs b { color: #fff; font: 900 italic 15px/1 'Exo 2'; }
+  .club .bar { grid-column: 2 / 4; height: 5px; border-radius: 3px; background: #1A1A1F; overflow: hidden; margin-top: -2px; }
+  .club .bar span { display: block; height: 100%; background: var(--cc); border-radius: 3px; }
+  .club.now { border-color: color-mix(in srgb, var(--cc) 55%, transparent); }
+  .club .now-tag { font-size: 9px; font-weight: 800; letter-spacing: .1em; padding: 2px 6px; border-radius: 6px; background: var(--cc); color: #000; margin-left: 6px; vertical-align: 2px; font-style: normal; }
+
+  /* A: tabs */
+  .A .who { text-align: center; margin: 12px 0 2px; }
+  .A .who .sub { font-size: 12.5px; font-weight: 600; color: var(--muted); margin-top: 5px; }
+  .seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 4px; border-radius: 16px; background: var(--ink); border: 1px solid var(--line); margin: 14px 0 12px; }
+  .seg button { height: 38px; border: 0; border-radius: 12px; background: transparent; color: var(--muted); font: 800 13px/1 'Exo 2'; cursor: pointer; }
+  .seg button.on { background: var(--acc); color: #111; }
+  .pane { display: none; } .pane.on { display: block; }
+  .pane .ctx { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--soft); margin-bottom: 10px; }
+  .pane .ctx img { width: 24px; height: 24px; }
+  .wdl { display: flex; gap: 4px; justify-content: center; margin-top: 2px; }
+  .wdl span { font: 900 italic 17px/1 'Exo 2'; } .wdl .w { color: #12F06C; } .wdl .d { color: #C4C4CC; } .wdl .l { color: #FF4D5A; }
+
+  /* B: sections, with a little pitch for positions */
+  .B .who { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 12px; }
+  .B .who .sub { font-size: 12px; font-weight: 600; color: var(--muted); margin-top: 4px; }
+  .posbox { display: grid; grid-template-columns: 116px 1fr; gap: 12px; align-items: center; }
+  .mini-pitch { width: 116px; height: 82px; border-radius: 10px; background: linear-gradient(#123A22, #0E2E1B); border: 1px solid rgba(255,255,255,.18); position: relative; overflow: hidden; }
+  .mini-pitch::before { content: ''; position: absolute; left: 30%; right: 30%; bottom: -1px; height: 22%; border: 1px solid rgba(255,255,255,.25); border-bottom: 0; }
+  .mini-pitch::after { content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 1px; border-top: 1px solid rgba(255,255,255,.25); }
+  .pdot { position: absolute; transform: translate(-50%, -50%); width: 32px; height: 22px; border-radius: 7px; font-size: 11px; line-height: 1; font-weight: 900; display: grid; place-items: center; }
+  .pdot.main { background: var(--acc); color: #111; }
+  .pdot.alt { border: 1.5px solid var(--acc); color: var(--acc); background: rgba(0,0,0,.4); }
+  .posbox .txt { font-size: 13px; line-height: 1.5; color: var(--soft); }
+  .posbox .txt b { color: #fff; }
+
+  /* C: card beside the facts, then a season by season timeline */
+  .C .top { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; }
+  .C .facts { padding-top: 4px; display: flex; flex-direction: column; gap: 9px; }
+  .C .facts .nm { font-size: 21px; }
+  .C .fact { display: flex; flex-direction: column; gap: 4px; }
+  .C .fact > span { font-size: 10px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
+  .C .fact .flagrow .pill { height: 26px; font-size: 12px; padding: 0 9px; }
+  .tl { margin-top: 2px; }
+  .tl-row { display: grid; grid-template-columns: 52px 24px 30px 1fr 30px; gap: 8px; align-items: center; height: 34px; border-bottom: 1px solid #16161A; font-size: 12px; }
+  .tl-row .s { font-weight: 800; color: var(--soft); }
+  .tl-row img { width: 22px; height: 22px; }
+  .tl-row .r { font: 900 italic 13px/1 'Exo 2'; text-align: center; border-radius: 6px; padding: 4px 0; color: #111; }
+  .tl-row .g { height: 8px; border-radius: 4px; background: #1A1A1F; position: relative; }
+  .tl-row .g span { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; background: var(--cc); }
+  .tl-row .g em { position: absolute; right: 0; top: -15px; font-style: normal; font-size: 10px; color: var(--muted); }
+  .tl-row .gl { text-align: right; font: 900 italic 14px/1 'Exo 2'; }
+  .tl-row.gap { color: #4A4A54; font-style: italic; font-size: 11.5px; }
+  .tl-row.gap .s { color: #4A4A54; }
+  .tl-row.now { background: linear-gradient(90deg, rgba(220,226,232,.10), transparent); border-radius: 8px; }
+  .tl-head { display: grid; grid-template-columns: 52px 24px 30px 1fr 30px; gap: 8px; font-size: 9.5px; font-weight: 800; letter-spacing: .1em; color: var(--muted); padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+  .tl-head span:last-child { text-align: right; }
+  .tl-foot { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 12px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <h1>The big player card</h1>
+    <p>Three ways to set out everything we know about a player under a smaller card, tapped from a roll. All three use the live card (about two thirds of its size now) and Stuart Pearce's real numbers: his 2000/01 season with West Ham, his positions and nationality, his Premier League career and the clubs he played for, season by season. A splits it into tabs, B stacks it in labelled sections you scroll, C puts the card beside the key facts and lists his seasons.</p>
+  </div>
+  <div class="row" id="opts"></div>
+</div>
+<script src="main64/cards.js"></script>
+<script>
+(function () {
+  const CR = { 'Nottingham Forest': 'assets/crests/nottingham-forest.png', 'Newcastle': 'assets/crests/newcastle.png', 'West Ham': 'assets/crests/west-ham.png' };
+  const CC = { 'Nottingham Forest': '#FF4D4D', 'Newcastle': '#FFFFFF', 'West Ham': '#1BB1E7' };   // each club's text colour (clubs.json)
+  const FLAG = 'assets/flags/gb-eng.svg';
+  // the card as the roll shows it (build 64)
+  const P = { name: 'Stuart Pearce', ovr: 73, pos: 'DEF', main: 'CB', level: 'silver', crest: CR['West Ham'], flag: FLAG, nat: 'England',
+    stats: { GOL: 42, IMP: 39, FIT: 91, WIN: 41, DEF: 66, EXP: 89 } };
+  // season by season (pl_players.csv and the ratings files): rating, games, goals, assists, clean sheets, W-D-L with him, club finish
+  const S = [
+    ['1992/93', 'Nottingham Forest', 74, 23, 2, 2, 6, [5, 6, 12], 22],
+    ['1993/94', null],
+    ['1994/95', 'Nottingham Forest', 78, 36, 8, 0, 12, [21, 8, 7], 3],
+    ['1995/96', 'Nottingham Forest', 78, 31, 3, 3, 9, [12, 12, 7], 9],
+    ['1996/97', 'Nottingham Forest', 76, 33, 5, 0, 6, [6, 13, 14], 20],
+    ['1997/98', 'Newcastle', 72, 25, 0, 0, 6, [7, 8, 10], 13],
+    ['1998/99', 'Newcastle', 68, 12, 0, 1, 3, [4, 2, 6], 13],
+    ['1999/00', 'West Ham', 69, 8, 0, 0, 2, [6, 1, 1], 9],
+    ['2000/01', 'West Ham', 73, 34, 2, 1, 8, [9, 11, 14], 15]
+  ];
+  const played = S.filter((s) => s[1]);
+  const sum = (i) => played.reduce((t, s) => t + s[i], 0);
+  const TOT = { games: sum(3), goals: sum(4), assists: sum(5), cs: sum(6), seasons: played.length };   // 202, 20, 7, 52, 8
+  const clubs = [];
+  played.forEach((s) => { let c = clubs.find((x) => x.name === s[1]); if (!c) clubs.push(c = { name: s[1], f: s[0], l: s[0], games: 0, goals: 0, n: 0 }); c.l = s[0]; c.games += s[3]; c.goals += s[4]; c.n++; });
+  const NOW = S[S.length - 1];
+  const ord = (n) => window.D2T.ordinal(n);
+  const lvc = (r) => (r >= 80 ? '#FFD95A' : r >= 70 ? '#DCE2E8' : '#E3A577');
+  const yrs = (c) => (c.f === c.l ? c.f : `${c.f} to ${c.l}`);
+  const card = (w) => `<div class="cardwrap">${window.D2T.cards.player(P, { w })}</div>`;
+  const maxG = Math.max(...clubs.map((c) => c.games));
+  const clubRow = (c) => `<div class="club${c.name === NOW[1] ? ' now' : ''}" style="--cc:${CC[c.name]}"><img class="crest" src="${CR[c.name]}" alt=""><div class="cn"><b>${c.name}${c.name === NOW[1] ? '<i class="now-tag">NOW</i>' : ''}</b><span>${yrs(c)} · ${c.n} season${c.n > 1 ? 's' : ''}</span></div><div class="cs"><b>${c.games}</b> games<br><b>${c.goals}</b> goals</div><div class="bar"><span style="width:${(c.games / maxG * 100).toFixed(0)}%"></span></div></div>`;
+  const posPills = `<span class="lbl">Plays</span><span class="pill main">CB</span><span class="lbl">also</span><span class="pill">LB</span>`;
+  const natPill = `<span class="pill"><img src="${FLAG}" alt="">England</span>`;
+  const wdl = (r) => `<div class="wdl"><span class="w">${r[0]}</span><span class="d">${r[1]}</span><span class="l">${r[2]}</span></div>`;
+  const seasonTiles = `<div class="tiles c3"><div class="t"><b>${NOW[3]}</b><i>Games</i></div><div class="t"><b>${NOW[4]}</b><i>Goals</i></div><div class="t"><b>${NOW[5]}</b><i>Assists</i></div>
+    <div class="t"><b>${NOW[6]}</b><i>Clean sheets</i></div><div class="t">${wdl(NOW[7])}<i>Won drawn lost</i></div><div class="t"><b>${ord(NOW[8])}</b><i>${NOW[1]} finished</i></div></div>`;
+  const careerTiles = `<div class="tiles c3"><div class="t"><b>${TOT.games}</b><i>Games</i></div><div class="t"><b>${TOT.goals}</b><i>Goals</i></div><div class="t"><b>${TOT.assists}</b><i>Assists</i></div>
+    <div class="t"><b>${TOT.cs}</b><i>Clean sheets</i></div><div class="t"><b>${TOT.seasons}</b><i>Seasons</i></div><div class="t"><b>${clubs.length}</b><i>Clubs</i></div></div>`;
+
+  // A: tabs
+  const A = `<div class="phone A"><div class="scroll">${card(196)}
+    <div class="who"><div class="nm">Stuart Pearce</div><div class="sub">West Ham · 2000/01</div></div>
+    <div class="flagrow" style="justify-content:center;margin-top:10px">${posPills}${natPill}</div>
+    <div class="seg"><button class="on" data-p="0">This season</button><button data-p="1">Career</button><button data-p="2">Clubs</button></div>
+    <div class="pane on"><div class="ctx"><img class="crest" src="${CR[NOW[1]]}" alt="">With ${NOW[1]} in ${NOW[0]}</div>${seasonTiles}</div>
+    <div class="pane"><div class="ctx">Premier League · 1992/93 to 2000/01</div>${careerTiles}</div>
+    <div class="pane"><div class="ctx">Every Premier League club, first to last</div>${clubs.map(clubRow).join('')}</div>
+    </div><div class="putback">Tap the card to put it back</div></div>`;
+
+  // B: sections
+  const B = `<div class="phone B"><div class="scroll">${card(180)}
+    <div class="who"><div><div class="nm">Stuart Pearce</div><div class="sub">Defender · rated ${P.ovr} for 2000/01</div></div></div>
+    <div class="sec-h"><img class="crest" src="${CR[NOW[1]]}" alt="">${NOW[0]} with ${NOW[1]}</div>${seasonTiles}
+    <div class="sec-h">Position and nationality</div>
+    <div class="posbox"><div class="mini-pitch"><span class="pdot main" style="left:46%;top:70%">CB</span><span class="pdot alt" style="left:17%;top:36%">LB</span></div>
+      <div class="txt">Plays <b>centre-back</b>, also <b>left-back</b>.<div class="flagrow" style="margin-top:8px">${natPill}</div></div></div>
+    <div class="sec-h">Premier League career</div>
+    <div class="tiles c4"><div class="t"><b>${TOT.games}</b><i>Games</i></div><div class="t"><b>${TOT.goals}</b><i>Goals</i></div><div class="t"><b>${TOT.assists}</b><i>Assists</i></div><div class="t"><b>${TOT.seasons}</b><i>Seasons</i></div></div>
+    <div class="sec-h">Clubs</div>${clubs.map(clubRow).join('')}
+    </div><div class="putback">Scroll for more · tap the card to put it back</div></div>`;
+
+  // C: card beside the facts, then every season
+  const C = `<div class="phone C"><div class="scroll">
+    <div class="top">${window.D2T.cards.player(P, { w: 150 })}
+      <div class="facts"><div class="nm">Stuart<br>Pearce</div>
+        <div class="fact"><span>POSITION</span><div class="flagrow"><span class="pill main">CB</span><span class="pill">LB</span></div></div>
+        <div class="fact"><span>NATIONALITY</span><div class="flagrow">${natPill}</div></div>
+        <div class="fact"><span>THIS SEASON</span><div style="font-size:13px;font-weight:700;color:var(--soft);line-height:1.4">${NOW[3]} games, ${NOW[4]} goals, ${NOW[6]} clean sheets · ${NOW[1]} ${ord(NOW[8])}</div></div></div></div>
+    <div class="sec-h" style="margin-top:16px">Season by season</div>
+    <div class="tl-head"><span>SEASON</span><span></span><span>RTG</span><span>GAMES</span><span>GLS</span></div>
+    <div class="tl">${S.map((s) => !s[1] ? `<div class="tl-row gap"><span class="s">${s[0]}</span><span></span><span></span><span style="grid-column:4 / 6">Forest not in the Premier League</span></div>`
+      : `<div class="tl-row${s === NOW ? ' now' : ''}" style="--cc:${CC[s[1]]}"><span class="s">${s[0]}</span><img class="crest" src="${CR[s[1]]}" alt="${s[1]}"><span class="r" style="background:${lvc(s[2])}">${s[2]}</span><span class="g"><span style="width:${(s[3] / 42 * 100).toFixed(0)}%"></span><em>${s[3]}</em></span><span class="gl">${s[4]}</span></div>`).join('')}</div>
+    <div class="tl-foot"><div class="t"><b>${TOT.games}</b><i>Games</i></div><div class="t"><b>${TOT.goals}</b><i>Goals</i></div><div class="t"><b>${TOT.cs}</b><i>Clean sheets</i></div><div class="t"><b>${clubs.length}</b><i>Clubs</i></div></div>
+    </div><div class="putback">Tap the card to put it back</div></div>`;
+
+  const OPTS = [['A', 'Tabs', 'The card a little smaller, his name, positions and flag, then three tabs: this season, his whole Premier League career and his clubs. One tidy block at a time, nothing to scroll.', A],
+    ['B', 'Labelled sections', 'Everything in one scroll, each part under its own heading: this season with his club, where he plays on a little pitch, his career totals and his clubs with a bar for games at each.', B],
+    ['C', 'Card beside the facts', 'A smaller card with the key facts beside it, then every season in a list: club, rating (in its level colour), games and goals, with the gap year when his club was down.', C]];
+  document.getElementById('opts').innerHTML = OPTS.map(([k, h, d, x]) => `<div class="opt"><div class="opt-h"><span class="tag">OPTION ${k}</span><h3>${h}</h3><p>${d}</p></div>${x}</div>`).join('');
+  document.querySelectorAll('.A .seg button').forEach((b) => { b.onclick = () => { const A = b.closest('.A');
+    A.querySelectorAll('.seg button').forEach((x) => x.classList.toggle('on', x === b)); A.querySelectorAll('.pane').forEach((p, i) => p.classList.toggle('on', i === +b.dataset.p)); }; });
+})();
+</script>
+</body>
+</html>
