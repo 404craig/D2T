@@ -47,12 +47,12 @@
   .fr.none polygon { stroke: color-mix(in srgb, var(--c) 45%, transparent); fill: rgba(255,255,255,.03); }
   .fr b { position: relative; font: 900 italic 30px/1 'Exo 2'; color: #fff; }
   .fr.none b { color: #3A3A44; }
-  /* your best: a special card, cyan all over like a top-level player card, dark text, a gold star top right and a slow shine */
+  /* your best: a special card, cyan all over like a top-level player card, dark text, a black star top right and a slow shine */
   .fr.top { filter: drop-shadow(0 0 12px rgba(34,211,238,.45)); }
   .fr.top polygon { fill: url(#ubTop); stroke: #CFFAFF; stroke-width: 1.8; }
   .fr.top b, .fr.top span { color: #04262C; }
   .fr.top b { text-shadow: 0 1px 0 rgba(255,255,255,.35); }
-  .fr.top svg.star { position: absolute; inset: auto; left: auto; bottom: auto; right: 8%; top: 7%; width: 21%; height: auto; aspect-ratio: 1; z-index: 1; filter: drop-shadow(0 1px 2px rgba(0,0,0,.45)); }
+  .fr.top svg.star { position: absolute; inset: auto; left: auto; bottom: auto; right: 8%; top: 7%; width: 21%; height: auto; aspect-ratio: 1; z-index: 1; }
   .fr.top .shine { position: absolute; inset: 0; overflow: hidden; clip-path: polygon(1% 8.6%, 11% .8%, 89% .8%, 99% 8.6%, 99% 84.4%, 50% 99.2%, 1% 84.4%); pointer-events: none; }
   .fr.top .shine::after { content: ''; position: absolute; top: -20%; left: -70%; width: 45%; height: 140%; transform: rotate(18deg); background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0)); animation: shine 6s ease-in-out infinite; }
   @keyframes shine { 0% { left: -70%; } 22% { left: 130%; } 100% { left: 130%; } }
@@ -100,7 +100,7 @@
 <div class="page">
   <div class="head">
     <h1>Unbeaten Run start page</h1>
-    <p>Higher or lower as the title, the subtitle saying how it plays, your best run for each stat in the home page's card outline with a cyan rim, centred on the page. No stat window until you tap New run: then the best runs step back and the stat reel comes in, centred both ways, spins and lands on this run's stat. Tap New run to try it; home puts it back. Your highest best is a special card: cyan all over with a gold star and a slow shine (on a tie, the first in the list). The best runs sit in from the edges on every phone. The respin button sits greyed on the left, as in the other games, so New run stays centred.</p>
+    <p>Higher or lower as the title, the subtitle saying how it plays, your best run for each stat in the home page's card outline with a cyan rim, centred on the page. No stat window until you tap New run: then the best runs step back and the stat reel comes in, centred both ways, spins and lands on this run's stat. Tap New run to try it; home puts it back. Your highest best is a special card: cyan all over with a black star and a slow shine (on a tie, the first in the list). The best runs sit in from the edges on every phone. The respin button sits greyed on the left, as in the other games, so New run stays centred.</p>
   </div>
   <div class="row" id="phones"></div>
 </div>
@@ -117,7 +117,7 @@
   const STATS = [['Career goals', 4], ['Career appearances', 0], ['Career assists', 0], ['Career goals + assists', 0], ['Goals in a season', 2], ['Goals + assists in a season', 0], ['Points in a season', 7], ['Wins in a season', 0], ['All-time points', 1]];
   // the special card: your highest best; on a tie the first in the list keeps it
   const TOP = STATS.reduce((m, s, i) => (s[1] > STATS[m][1] ? i : m), 0);
-  const STAR = '<svg class="star" viewBox="0 0 24 24"><path d="M12 2.2l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" fill="#FFD21F" stroke="#8A6A00" stroke-width="1" stroke-linejoin="round"/></svg>';
+  const STAR = '<svg class="star" viewBox="0 0 24 24"><path d="M12 2.2l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" fill="#04262C"/></svg>';
   const TOPDEF = '<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="ubTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E6FDFF"/><stop offset=".3" stop-color="#5CE6F7"/><stop offset=".62" stop-color="#22D3EE"/><stop offset="1" stop-color="#0E8FA6"/></linearGradient></defs></svg>';
   const KICK = { 'Points in a season': 'Premier League clubs', 'Wins in a season': 'Premier League clubs', 'All-time points': 'Premier League clubs' };
   const phone = (cls, w, h, label) => `<div class="opt"><div class="phone ${cls}" style="--pw:${w}px;--ph:${h}px"><span class="bgmark">${MARK}</span>
