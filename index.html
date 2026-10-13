@@ -649,7 +649,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .x-boom-flash { position: absolute; width: 110px; height: 110px; border-radius: 50%; background: radial-gradient(circle, #fff 0%, rgba(255,255,255,.75) 30%, rgba(18,240,108,0) 70%); }
 /* the naming sheet */
 .x-name { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
-.x-name-in { width: 100%; box-sizing: border-box; height: 58px; padding: 0 16px; border-radius: 16px; border: 1px solid var(--line); background: #0E0E10; color: #fff; font: 900 italic 22px/1 'Exo 2', sans-serif; text-transform: uppercase; letter-spacing: .02em; outline: none; }
+.x-name-in { width: 100%; box-sizing: border-box; height: 58px; padding: 0 16px; border-radius: 16px; border: 1px solid var(--line); background: #0E0E10; color: #fff; font: 900 italic 22px/1 'Exo 2', sans-serif; letter-spacing: .01em; outline: none; }
 .x-name-in::placeholder { color: #4A4A52; text-transform: none; font-weight: 700; font-style: normal; font-size: 17px; }
 .x-name-in:focus { border-color: #12F06C; box-shadow: 0 0 0 3px rgba(18,240,108,.18); }
 .x-name-err { min-height: 18px; margin: 2px 2px 6px; font-size: 13px; font-weight: 700; color: #FF6B6B; }
@@ -2839,7 +2839,11 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
   clubs['Club X'] = { name: 'Club X', full: 'Club X', code: 'CLX', crest: X_BADGE, accent: '#12F06C', ink: '#000000', text: '#12F06C' };
   // Club X (Craig, 12 Oct): you name your club first, and that name takes over from "Club X" everywhere in the run (the
   // badge and green stay). The name lives on the run (state.run.xName); the last one is offered again (state.xName).
-  GAME.xName = () => { const r = D2T.state.run; return (r && r.xName) || 'Club X'; };
+  // Proper capitals (Craig, 13 Oct): each word starts with a capital, small words inside stay small, and anything
+  // already in capitals (FC, AFC) is kept, so "kilsyth athletic" shows as "Kilsyth Athletic".
+  const SMALL = new Set(['of', 'the', 'and', 'de', 'la', 'le', 'in', 'on', 'at']);
+  GAME.tidyXName = (n) => String(n || '').split(' ').map((w, i) => (i > 0 && SMALL.has(w.toLowerCase()) ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1))).join(' ');
+  GAME.xName = () => { const r = D2T.state.run; return (r && r.xName && GAME.tidyXName(r.xName)) || 'Club X'; };
   const xCode = (n) => { const w = n.toUpperCase().replace(/[^A-Z0-9 ]/g, '').split(/\s+/).filter(Boolean); return (w.length >= 3 ? w.map((x) => x[0]).join('') : w.join('')).slice(0, 3) || 'CLX'; };
   const xClub = () => { const n = GAME.xName(); return n === 'Club X' ? clubs['Club X'] : Object.assign({}, clubs['Club X'], { name: n, full: n, code: xCode(n) }); };
   // a name of your own: 2 to 18 letters, numbers, spaces and ' . & -, and never a real club's name
@@ -2850,7 +2854,7 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
     if (n.length > 18) return { error: 'Keep it to 18 letters or fewer.' };
     if (!/^[A-Za-z0-9 '.&-]+$/.test(n)) return { error: "Letters, numbers, spaces and ' . & - only." };
     if (realNames.has(n.toLowerCase().replace(/[^a-z0-9]/g, ''))) return { error: "That's a real club. Make up your own." };
-    return { name: n };
+    return { name: GAME.tidyXName(n) };
   };
   GAME.setXName = (raw) => { const r = GAME.checkXName(raw); if (r.name) { D2T.state.run.xName = r.name; D2T.state.xName = r.name; D2T.save(); } return r; };
   const inX = () => { const r = D2T.state.run; return !!(r && r.eng && r.eng.mode === 'clubx'); };   // read straight off the run: GAME.club runs while the adapter is still being set up
@@ -4329,7 +4333,7 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
       const later = (fn, ms) => { xTimers.push(setTimeout(fn, ms)); };
       // your club in that season: the Club X badge, green, your name, and who you replace at the foot
       const xCard = (c, w) => D2T.cards.club(Object.assign({}, GAME.club('Club X'), { season: c.season }), { w, footLabel: 'REPLACING', foot: D2T.esc(c.name) });
-      const xSub = () => `${st.xName ? D2T.esc(st.xName) : 'Your club'} takes the bottom club's place in one real season, drafts an XI from scratch and has to win the league.`;
+      const xSub = () => `${st.xName ? D2T.esc(GAME.tidyXName(st.xName)) : 'Your club'} takes the bottom club's place in one real season, drafts an XI from scratch and has to win the league.`;
       api = mount(root, {
         kicker: `New run · ${GAME.modeName()}`, title: x ? 'Spin your season' : 'Pick your club',
         sub: x ? xSub() : dream ? 'Three clubs from any season. You start with no players and draft your XI. Finish higher than they really did, or win the league again if they won it.' : 'Three clubs that went down. Pick one and take it from the drop to the top.',
@@ -4358,7 +4362,7 @@ root.D2TSound = { play, crowd, setMuted, isMuted: () => muted, unlock, clipsLoad
 
       // ---------- Club X: name your club ----------
       function askName() {
-        const cur = st.xName || D2T.state.xName || '';
+        const cur = GAME.tidyXName(st.xName || D2T.state.xName || '');
         const sh = D2T.sheet({ title: 'Name your club', body: `<p class="fr-lead">Your club takes the place of the bottom side in a real season. What's it called?</p>
           <form class="x-name" novalidate><input class="x-name-in" type="text" maxlength="18" autocomplete="off" autocapitalize="words" spellcheck="false" enterkeyhint="done" placeholder="e.g. Southside FC" aria-label="Club name" value="${D2T.esc(cur)}">
           <p class="x-name-err" role="alert"></p><button class="btn x-name-go fr-btn-wide" type="submit">That's us</button></form>` });
