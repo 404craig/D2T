@@ -259,12 +259,22 @@
         const btn = bar.querySelector('.ub-spin'); btn.disabled = true; btn.querySelector('.sp-lbl').textContent = 'Spinning';
         const end = -at * 76;
         const done = () => {
-          snd('land'); stage.querySelector('.ub-statwin').classList.add('is-hit');
+          snd('reelLand', 1); stage.querySelector('.ub-statwin').classList.add('is-hit');
           const b = R.best[target.id]; stage.querySelector('.ub-thisbest').innerHTML = `Your best on this: <em>${b || 'none yet'}</em>`;
           later(() => startRun(target), reduced ? 200 : 900);
         };
         if (reduced) { strip.style.transform = `translateY(${end}px)`; done(); return; }
-        strip.animate([{ transform: 'translateY(0)' }, { transform: `translateY(${end}px)` }], { duration: 2000, delay: 300, easing: 'cubic-bezier(.15,.8,.25,1)', fill: 'forwards' }).onfinish = done;
+        const anim = strip.animate([{ transform: 'translateY(0)' }, { transform: `translateY(${end}px)` }], { duration: 2000, delay: 300, easing: 'cubic-bezier(.15,.8,.25,1)', fill: 'forwards' });
+        // the same rolling ticks as the card reels: a muffled tap for each stat tile that passes, quieter at speed
+        let lastI = 0, lastY = 0, lastT = performance.now();
+        const watch = (now) => {
+          if (!root.isConnected || anim.playState === 'finished') return;
+          const y = -new DOMMatrixReadOnly(getComputedStyle(strip).transform).m42, idx = Math.floor(y / 76);
+          if (idx > lastI && window.D2TSound) window.D2TSound.tick(1, (y - lastY) / 76 / Math.max(0.001, (now - lastT) / 1000));
+          lastI = Math.max(lastI, idx); lastY = y; lastT = now; rafs.push(requestAnimationFrame(watch));
+        };
+        rafs.push(requestAnimationFrame(watch));
+        anim.onfinish = done;
       }
 
       // ---------- a run ----------
