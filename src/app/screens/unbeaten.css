@@ -131,7 +131,7 @@
 .ub-arrow .shaft { fill: #22D3EE; stroke: none; }
 .ub-arrow .head { fill: none; stroke: #22D3EE; stroke-linecap: round; stroke-linejoin: round; }
 /* the end sheet's second button */
-.ub-newrun { border: 2px solid #FFFFFF; }
+.ub-newrun { border: 2px solid #FFFFFF; font-style: italic; font-weight: 900; font-size: 19px; }  /* the same type as Share (Craig, 13 Oct) */
 /* Lower and Higher (Craig, 13 Oct): the word dead centre both ways, the down arrow under LOWER, the up arrow over HIGHER */
 .ub-bar .ub-ans { position: relative; display: grid; place-items: center; padding: 0 8px; line-height: 1; }
 .ub-bar .ub-ans span { display: block; text-align: center; padding-right: .06em; }
