@@ -278,7 +278,7 @@
     const nx = GAME.careerNext(); if (!nx) return false;
     GAME.finish();
     const run = D2T.state.run, e = GAME.eng(), S = GAME.S();
-    const c = run.career = run.career || { id: e.seed, n: 1, seasons: [] };
+    const c = run.career = run.career || { id: e.seed, n: 1, seasons: [], start: { season: S.season, replaced: S.clubs[e.club].name } };
     c.seasons.push({ season: S.season, finish: e.final.finish, pts: e.final.pts, sim: !!S.sim });
     c.n += 1;
     const carry = e.xi.map((id) => originOf(S, id));
