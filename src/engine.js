@@ -58,11 +58,18 @@ const LEVELS = ["bronze", "silver", "gold", "purple", "legend"];
 
 /* ---------- positions and formations ---------- */
 const POS = ["GK","RB","CB","LB","RWB","LWB","CDM","CM","CAM","RM","LM","RW","LW","ST"];
-const NEAR = {
-  GK: [], CB: ["RB","LB","CDM"], RB: ["RWB","CB","RM"], LB: ["LWB","CB","LM"],
-  RWB: ["RB","RM","RW"], LWB: ["LB","LM","LW"], CDM: ["CM","CB"], CM: ["CDM","CAM","RM","LM"],
-  CAM: ["CM","ST","RW","LW"], RM: ["RW","CM","RWB","RB"], LM: ["LW","CM","LWB","LB"],
-  RW: ["RM","ST","CAM"], LW: ["LM","ST","CAM"], ST: ["CAM","RW","LW"]
+// How a player fits each shirt, by the positions he plays (Craig, 13 Oct; set on the Position fit page,
+// claude.ai/artifact/Xod2g9hMPi9QHxqnkCtjWD). Stay in your lane: a player in the middle never goes amber out wide,
+// a wide player never goes amber in the middle or on the other side. Shirts not listed are red. A player with several
+// positions is green at all of them and takes the best colour any of them gives (Pearce, CB and LB: green CB, LB and
+// LWB; amber CDM, LM and LW; red on the right).
+const FIT = {
+  GK: {}, CB: { CDM: "amber" },
+  LB: { LWB: "green", LM: "amber", LW: "amber" }, RB: { RWB: "green", RM: "amber", RW: "amber" },
+  LWB: { LB: "green", LM: "amber", LW: "amber" }, RWB: { RB: "green", RM: "amber", RW: "amber" },
+  CDM: { CB: "amber", CM: "amber", CAM: "amber" }, CM: { CDM: "amber", CAM: "amber" }, CAM: { CDM: "amber", CM: "amber", ST: "amber" },
+  LM: { LWB: "amber", LW: "amber" }, RM: { RWB: "amber", RW: "amber" },
+  LW: { LM: "amber", ST: "amber" }, RW: { RM: "amber", ST: "amber" }, ST: { CAM: "amber", LW: "amber", RW: "amber" }
 };
 // Slot weights into Defence, Midfield, Attack.
 const SLOTW = {
@@ -94,8 +101,8 @@ function fitOf(player, slotPos) {
   const ps = player.p || [];
   if (ps.some(p => SLOT_BROAD[p]) ) {                 // detailed positions known
     if (ps.includes(slotPos)) return "green";
-    if (ps.some(p => (NEAR[slotPos] || []).includes(p))) return "amber";
-    return "red";
+    const got = ps.map(p => (FIT[p] || {})[slotPos]);
+    return got.includes("green") ? "green" : got.includes("amber") ? "amber" : "red";
   }
   const pb = broadOf(player), sb = SLOT_BROAD[slotPos];
   if (pb === sb) return "green";
@@ -640,7 +647,7 @@ function seasonSummary(S, st) {
 }
 
 const API = {
-  RULES, LEVELS, POS, NEAR, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
+  RULES, LEVELS, POS, FIT, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
   fitOf, effRating, indexSeason, playerOf, clubAt, xiStrength, userStrength, clubXI, clubStrength,
   schedule, fixturesOf, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
   draftOrder, draftSlot, draftFormation, draftPick, draftFits, listsPos, DRAFT_MODES,
