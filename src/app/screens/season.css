@@ -330,3 +330,8 @@
 .actionbar .se-off { width: 52px; height: 52px; opacity: .3; flex-shrink: 0; }
 .actionbar .se-off svg { width: 24px; height: 24px; }
 .se-nextbar.is-draft .se-play { flex: 1; }
+/* the roll's pitch is smaller: a compact shape chip in its bottom-left corner, still a 44px target (Craig, 13 Oct) */
+.tr-field .se-formlink { left: 4px; bottom: 4px; min-height: 28px; padding: 0 7px; gap: 2px; border-radius: 10px; font-size: 0; }
+.tr-field .se-formlink b { font-size: 12px; }
+.tr-field .se-formlink svg { width: 14px; height: 14px; }
+.tr-field .se-formlink::before { content: ''; position: absolute; inset: -8px; }

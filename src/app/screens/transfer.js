@@ -155,9 +155,30 @@
         field = D2T.h(`<div class="tr-pitch" aria-label="Your XI">
           <div class="tr-head"><div class="tr-head-t"><b>${draft ? `Draft · Shirt ${info.step} of ${info.of}` : `${D2T.esc(info.name)} · Roll ${info.step} of ${info.of}`}</b><span>${draft ? (di.open ? 'Drag one onto a lit shirt' : `Drag one onto the lit ${di.pos} shirt`) : 'Drag a player onto a shirt to sign him there'}</span></div>
             <div class="se-rating" aria-live="polite"><b class="tr-rating">0</b><i>Team<br>rating</i></div></div>
-          <div class="se-pitch tr-field">${SE.pitchLines}<div class="se-slots"></div></div></div>`);
+          <div class="se-pitch tr-field">${SE.pitchLines}<div class="se-slots"></div>${draft ? '' : `<button class="se-formlink" type="button">Formation <b class="se-fname">${GAME.eng().formation}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`}</div></div>`);
         api.el.insertBefore(field, api.el.querySelector('.sp-stage'));
         slotsEl = field.querySelector('.se-slots'); ratingEl = field.querySelector('.tr-rating');
+        // change the shape on a roll (Craig, 13 Oct): your 11 are re-seated, nobody comes in; some may land out of position
+        const fl = field.querySelector('.se-formlink');
+        if (fl) fl.onclick = (e) => {
+          e.stopPropagation();
+          let pending = GAME.eng().formation;
+          const tile = (k) => `<button class="se-formcard${k === pending ? ' is-on' : ''}" type="button" data-f="${k}" aria-pressed="${k === pending}">
+            <span class="se-fpitch"><span class="se-fline"></span>${GAME.formationDots(k).map((d) => `<i style="left:${d.x}%;top:${d.y}%"></i>`).join('')}</span><b>${k}</b></button>`;
+          const el = D2T.h(`<div><div class="se-formgrid">${GAME.formations().map(tile).join('')}</div><p class="se-note">Your 11 are moved into the new shape. Nobody comes in or goes out. Players out of their position play at 90% (near) or 70% (wrong).</p><button class="btn se-btn se-done" type="button">Done</button></div>`);
+          const sh = D2T.sheet({ title: 'Formation', body: el, onClose: () => {
+            if (pending === GAME.eng().formation || !alive) return;
+            GAME.setFormation(pending);
+            window.D2TSound && window.D2TSound.play('formation');
+            fl.querySelector('.se-fname').textContent = pending;
+            const si = api ? api.selected() : -1, p = si >= 0 ? api.results()[si] : null;
+            drawPitch(p ? GAME.bestSlot(p.id) : -1);
+          } });
+          sh.el.classList.add('se-run');
+          ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
+          el.querySelectorAll('.se-formcard').forEach((b) => { b.onclick = () => { pending = b.dataset.f; el.querySelectorAll('.se-formcard').forEach((x) => { const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); }); }; });
+          el.querySelector('.se-done').onclick = () => sh.close();
+        };
         slotsEl.addEventListener('click', (e) => {
           const w = e.target.closest('.se-cardwrap'); if (!w || !placing) return;
           const i = api.selected();
