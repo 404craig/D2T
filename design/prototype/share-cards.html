@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D2T Share Cards</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<style>
+  /* Share cards for every game: one image (1080 x 1350, drawn here in HTML and shown at a third) and one tidy message that
+     challenges whoever you send it to. Same frame for all six: the long logo, the game's tag, the faded crest or mark,
+     the result, then the challenge and the link. */
+  :root { color-scheme: dark; --soft: #BDBDC6; --muted: #8E8E99; --line: #222226; --g: #12F06C; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #08080A; color: #fff; font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 1260px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 26px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
+  .head p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 96ch; }
+  .row { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .opt { width: 360px; display: flex; flex-direction: column; gap: 10px; }
+  .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: var(--g); }
+  .opt-h h3 { font: 900 italic 21px/1.05 'Exo 2'; margin: 3px 0; }
+  /* the chat bubble: image on top, the text under it, as WhatsApp shows a shared image with text */
+  .bubble { border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 20px 50px rgba(0,0,0,.5); }
+  .frame { width: 360px; height: 450px; overflow: hidden; position: relative; }
+  .msg { color: #111; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.38; padding: 10px 14px 12px; white-space: pre-line; }
+  .msg a { color: #0A66C2; text-decoration: none; }
+
+  /* ---------- the image, at full size, scaled to a third ---------- */
+  .img { position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; transform: scale(.33333); transform-origin: 0 0; background: #000; overflow: hidden; isolation: isolate; text-align: center; color: #fff; }
+  .img .ghost { position: absolute; left: 50%; top: 170px; width: 1040px; height: 1040px; margin-left: -520px; object-fit: contain; opacity: .13; z-index: -1; }
+  .img .ghost.mask { background: var(--c); -webkit-mask: var(--m) center / contain no-repeat; mask: var(--m) center / contain no-repeat; opacity: .12; }
+  .img .glow { position: absolute; inset: 0; z-index: -2; background: radial-gradient(60% 40% at 50% 38%, color-mix(in srgb, var(--c) 22%, transparent), transparent 70%); }
+  .img .logo { position: absolute; left: 50%; top: 70px; width: 640px; height: 110px; margin-left: -320px; background: #fff; -webkit-mask: url('assets/logo/long.png') center / contain no-repeat; mask: url('assets/logo/long.png') center / contain no-repeat; }
+  .img .mtag { position: absolute; left: 50%; top: 212px; transform: translateX(-50%) skewX(-10deg); padding: 12px 30px 10px; border-radius: 12px; background: var(--c); color: #0A0A0A; font: 900 italic 40px/1 'Exo 2'; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+  .img .mtag span { display: inline-block; transform: skewX(10deg); }
+  .img .crest { position: absolute; left: 50%; top: 300px; width: 220px; height: 220px; margin-left: -110px; object-fit: contain; filter: drop-shadow(0 10px 24px rgba(0,0,0,.6)); }
+  .img .club { position: absolute; left: 0; right: 0; top: 540px; font: 900 italic 80px/1 'Exo 2'; text-transform: uppercase; }
+  .img .season { position: absolute; left: 0; right: 0; top: 632px; font: 600 42px/1 'Exo 2'; color: var(--soft); }
+  .img .duo { position: absolute; left: 90px; right: 90px; top: 708px; height: 290px; display: grid; grid-template-columns: 1fr 1fr; background: #0E0E10; border: 3px solid var(--line); border-radius: 26px; }
+  .img .duo > div { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+  .img .duo > div + div { border-left: 3px solid var(--line); }
+  .img .duo i { font-style: normal; font: 800 34px/1 'Exo 2'; letter-spacing: .1em; color: var(--muted); }
+  .img .duo b { font: 900 italic 128px/1 'Exo 2'; }
+  .img .duo small { font: 600 36px/1 'Exo 2'; color: var(--soft); }
+  .img .rise { position: absolute; left: 0; right: 0; top: 1050px; font: 900 italic 112px/1 'Exo 2'; color: var(--t); }
+  .img .line { position: absolute; left: 110px; right: 110px; top: 1180px; font: 500 34px/1.3 'Exo 2'; color: var(--soft); }
+  /* the challenge band at the foot of every card */
+  .img .dare { position: absolute; left: 0; right: 0; bottom: 0; height: 132px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: var(--c); color: #0A0A0A; }
+  .img .dare b { font: 900 italic 50px/1 'Exo 2'; text-transform: uppercase; letter-spacing: .01em; }
+  .img .dare span { font: 700 30px/1 'Exo 2'; opacity: .75; }
+  .img.has-dare .crest { top: 290px; width: 200px; height: 200px; margin-left: -100px; }
+  .img.has-dare .club { top: 510px; }
+  .img.has-dare .season { top: 598px; }
+  .img.has-dare .duo { top: 668px; height: 270px; }
+  .img.has-dare .rise { top: 975px; }
+  .img.has-dare .line { top: 1098px; font-size: 32px; }
+
+  /* Goal Rush: the XI as a list of names and goals */
+  .img .xi { position: absolute; left: 110px; right: 110px; top: 640px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 50px; text-align: left; }
+  .img .xi div { display: flex; justify-content: space-between; font: 700 36px/1.1 'Exo 2'; color: var(--soft); border-bottom: 2px solid #1C1C21; padding-bottom: 10px; }
+  .img .xi div b { font: 900 italic 38px/1 'Exo 2'; color: #fff; }
+  .img .total { position: absolute; left: 0; right: 0; top: 330px; }
+  .img .total b { display: block; font: 900 italic 220px/1 'Exo 2'; }
+  .img .total b em { font-style: normal; font-size: 110px; color: var(--muted); }
+  .img .total span { display: block; font: 800 46px/1 'Exo 2'; color: var(--t); margin-top: 6px; letter-spacing: .02em; }
+  /* Unbeaten Run: the run, big */
+  .img .run { position: absolute; left: 0; right: 0; top: 330px; }
+  .img .run b { display: block; font: 900 italic 420px/.9 'Exo 2'; color: var(--c); text-shadow: 0 0 80px color-mix(in srgb, var(--c) 40%, transparent); }
+  .img .run span { display: block; font: 900 italic 64px/1 'Exo 2'; text-transform: uppercase; margin-top: 10px; }
+  .img .run small { display: block; font: 600 40px/1.3 'Exo 2'; color: var(--soft); margin-top: 26px; }
+  .notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+  .note { background: #111114; border: 1px solid #222228; border-radius: 16px; padding: 14px 16px; font-size: 13.5px; line-height: 1.5; color: #CFCFD6; }
+  .note b { display: block; color: var(--g); font-size: 11px; letter-spacing: .12em; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <h1>Share cards for every game</h1>
+    <p>Your Burnley card kept as it is, plus one for each of the other games in the same frame: the long logo, the game's tag in its colour, the crest or mark faded behind, the result, and a new band at the foot that dares whoever you send it to. The message under each image is tidied to four or five short lines and ends with the challenge and the link. Each is shown as it lands in a chat.</p>
+  </div>
+  <div class="row" id="cards"></div>
+  <div class="notes">
+    <div class="note"><b>THE CHALLENGE</b>Each game dares the reader to beat the number that matters: your Rise in Classic (their club is different), your finish in the Daily (same club for everyone today), their club's real finish in Dare2Dream, the title in Club X, the exact target in Goal Rush, your run in Unbeaten Run.</div>
+    <div class="note"><b>THE MESSAGE</b>No banter line in the text any more (it stays on the image), no "History:" and "Mine:" labels: one sentence for what you did, one line for the number, one line to dare them, then the link.</div>
+    <div class="note"><b>WHAT IS REAL</b>Burnley 2021/22 is your real result. The clubs' real finishes are checked against the results (Watford 20th in 1999/00, Everton 4th in 2004/05, Bradford 20th in 2000/01) and the Goal Rush goals are each player's real career total. The other results are made up to show the layout.</div>
+  </div>
+</div>
+<script>
+(function () {
+  const CR = (c) => `assets/crests/${c}.png`;
+  const URL = '404craig.github.io/D2T';
+  const UBMARK = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='black' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='50' cy='50' r='44'/%3E%3Cpath d='M30 42 L50 22 L70 42'/%3E%3Cpath d='M30 58 L50 78 L70 58'/%3E%3C/svg%3E\")";
+  const frame = (o) => `<div class="img${o.dare ? ' has-dare' : ''}" style="--c:${o.c};--t:${o.t || o.c}"><span class="glow"></span>${o.ghost || ''}<span class="logo"></span>
+    ${o.tag ? `<span class="mtag"><span>${o.tag}</span></span>` : ''}${o.body}${o.dare ? `<div class="dare"><b>${o.dare}</b><span>${URL}</span></div>` : ''}</div>`;
+  const club = (crest, name, season) => `<img class="ghost" src="${crest}" alt=""><img class="crest" src="${crest}" alt=""><div class="club">${name}</div><div class="season">${season}</div>`;
+  const duo = (l, lv, ls, r, rv, rs, rc) => `<div class="duo"><div><i>${l}</i><b>${lv}</b><small>${ls}</small></div><div><i>${r}</i><b style="color:${rc}">${rv}</b><small>${rs}</small></div></div>`;
+
+  const CARDS = [
+    { k: 'CLASSIC', h: 'Classic', note: 'Your card, with the tag added and the dare band.', img: frame({ c: '#99D6EA', t: '#99D6EA', tag: 'Classic', dare: 'Beat my rise of +15',
+        body: club(CR('burnley'), 'Burnley', '2021/22') + duo('THEY FINISHED', '18th', '35 pts', 'I FINISHED', '3rd', '72 pts', '#99D6EA') + '<div class="rise">THE RISE +15</div><div class="line">Top four with a relegated squad. The pundits are furious.</div>' }),
+      msg: `DROP2TOP\nI took Burnley 2021/22 from 18th to 3rd.\nThe Rise: +15 (72 pts)\nThink you can do better with a side that went down?\n<a>${URL}</a>` },
+    { k: 'DAILY', h: 'Daily Challenge', img: frame({ c: '#FFFFFF', t: '#FFFFFF', tag: 'Daily #3 · 13 Oct', dare: 'Same club today. Beat 14th',
+        body: club(CR('watford'), 'Watford', '1999/00') + duo('THEY FINISHED', '20th', '24 pts', 'I FINISHED', '14th', '41 pts', '#FFFFFF') + '<div class="rise">THE RISE +6</div><div class="line">Survival. The Great Escape, director\'s cut.</div>' }),
+      msg: `DROP2TOP Daily #3 · 13 Oct\nWatford 1999/00 went down in 20th. I finished 14th.\nThe Rise: +6\nSame club for everyone today. Can you beat 14th?\n<a>${URL}</a>` },
+    { k: 'DARE2DREAM', h: 'Dare2Dream', img: frame({ c: '#3BA4FF', tag: 'Dare2Dream', dare: 'Draft 11. Beat their real finish',
+        body: club(CR('everton'), 'Everton', '2004/05 · drafted from nothing') + duo('THEY FINISHED', '4th', '61 pts', 'I FINISHED', '2nd', '79 pts', '#3BA4FF') + '<div class="rise">DREAM ACHIEVED</div>' }),
+      msg: `DROP2TOP Dare2Dream\nI drafted Everton 2004/05 from nothing and finished 2nd. They really finished 4th.\nDream achieved.\nPick any club and beat their real finish.\n<a>${URL}</a>` },
+    { k: 'CLUB X', h: 'Club X', img: frame({ c: '#12F06C', tag: 'Club X', dare: 'From nowhere to champions. Your go',
+        body: `<img class="ghost" src="assets/brand/club_x.png" alt=""><img class="crest" src="assets/brand/club_x.png" alt=""><div class="club">Club X</div><div class="season">2000/01 · in Bradford's place</div>` + duo('BRADFORD FINISHED', '20th', '26 pts', 'CLUB X FINISHED', '1st', '84 pts', '#12F06C') + '<div class="rise">CHAMPIONS</div>' }),
+      msg: `DROP2TOP Club X\nI replaced Bradford in 2000/01 and won the league with 84 pts.\nFrom nowhere to champions.\nYour turn.\n<a>${URL}</a>` },
+    { k: 'GOAL RUSH', h: 'Goal Rush', img: frame({ c: '#FFD21F', t: '#FFE375', tag: 'Goal Rush · 4-4-2', dare: 'Hit 442 exactly',
+        ghost: '<img class="ghost" src="assets/brand/goal_rush.png" alt="">',
+        body: `<div class="total"><b>453<em> / 442</em></b><span>11 OVER THE TARGET</span></div><div class="xi">${[['Seaman', 0], ['Beckham', 62], ['G. Neville', 5], ['Keane', 39], ['Terry', 41], ['Butt', 29], ['Ferdinand', 11], ['Barry', 53], ['A. Cole', 15], ['Phillips', 92], ['', ''], ['Bent', 106]].map(([n, g]) => n ? `<div>${n}<b>${g}</b></div>` : '<div style="border:0"></div>').join('')}</div>` }),
+      msg: `DROP2TOP Goal Rush · 4-4-2\nMy XI scored 453 Premier League goals. The target was 442: 11 over.\nCan you hit it exactly?\n<a>${URL}</a>` },
+    { k: 'UNBEATEN RUN', h: 'Unbeaten Run', img: frame({ c: '#22D3EE', tag: 'Unbeaten Run', dare: 'Go longer than 14',
+        ghost: `<svg class="ghost" viewBox="0 0 100 100" fill="none" stroke="#22D3EE" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.12"><circle cx="50" cy="50" r="44"/><path d="M30 42 L50 22 L70 42"/><path d="M30 58 L50 78 L70 58"/></svg>`,
+        body: `<div class="run"><b>14</b><span>Career goals</span><small>Unbeaten in 14 calls of higher or lower,<br>real Premier League numbers.</small></div>` }),
+      msg: `DROP2TOP Unbeaten Run · Career goals\nI went unbeaten in 14 calls of higher or lower.\nCan you go longer?\n<a>${URL}</a>` }
+  ];
+  document.getElementById('cards').innerHTML = CARDS.map((c) => `<div class="opt"><div class="opt-h"><span class="tag">${c.k}</span><h3>${c.h}</h3></div>
+    <div class="bubble"><div class="frame">${c.img}</div><div class="msg">${c.msg}</div></div></div>`).join('');
+})();
+</script>
+</body>
+</html>
