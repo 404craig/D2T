@@ -237,7 +237,7 @@
         // the game's own question, never the phone's confirm box
         const name = D2T.run().club.name;
         const s = D2T.sheet({ title: 'Start a new run?', body: `<p class="fr-lead">Your ${D2T.esc(name)} run will be lost.</p>
-          <div class="fr-two"><button class="btn btn-ghost" data-k="no">Keep playing</button><button class="btn btn-ghost fr-danger" data-k="yes">New run</button></div>` });
+          <div class="fr-two"><button class="btn btn-ghost" data-k="no">Keep playing</button><button class="btn btn-ghost" data-k="yes" style="color:#12F06C">New run</button></div>` });
         s.body.querySelector('[data-k="no"]').onclick = s.close;
         s.body.querySelector('[data-k="yes"]').onclick = () => { s.close(); startNew(from, mode); };
       });
