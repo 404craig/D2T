@@ -436,18 +436,34 @@
         el.animate(frames, { duration: T * 1000, easing: 'linear' }).onfinish = done;
       }
       // swipe anywhere between the stat header and the bottom bar (Craig, 13 Oct): the hidden card follows the finger up
-      // or down on its rubber band, and a cyan elastic arrow stretches from where the finger landed to where it is now
+      // or down on its rubber band, and a cyan hand-drawn marker arrow runs from where the finger landed to where it is
+      // now (Craig's reference, 13 Oct): one tapered shaft, thicker at its round tail and fine where it meets the head,
+      // and an open chevron of two round-capped barbs, the upper one straight, the lower one gently curved. It starts
+      // small and grows with the swipe: its weight follows the distance up to 360 px (tail 3 to 11 px wide, barbs 11 to
+      // 44 px long and 2.5 to 7.5 px thick), so a short drag is a fine line and a long one a bold stroke.
       let arrow = null;
       function drawArrow(x0, y0, x, y) {
         if (!arrow) { arrow = D2T.h('<svg class="ub-arrow" aria-hidden="true"><path class="shaft"/><path class="head"/></svg>'); document.body.appendChild(arrow); }
         const dx = x - x0, dy = y - y0, len = Math.hypot(dx, dy);
         if (len < 4) { arrow.style.opacity = 0; return; }
         arrow.style.opacity = 1;
-        const ux = dx / len, uy = dy / len, hl = Math.min(22, 10 + len * 0.08), bx = x - ux * hl * 0.8, by = y - uy * hl * 0.8;
-        const sw = Math.max(3, 11 - len / 28);                     // it thins as it stretches, like elastic
-        const sh = arrow.querySelector('.shaft'); sh.setAttribute('d', `M${x0},${y0} L${bx.toFixed(1)},${by.toFixed(1)}`); sh.style.strokeWidth = sw.toFixed(1);
-        const px = -uy * hl * 0.62, py = ux * hl * 0.62;
-        arrow.querySelector('.head').setAttribute('d', `M${x.toFixed(1)},${y.toFixed(1)} L${(x - ux * hl + px).toFixed(1)},${(y - uy * hl + py).toFixed(1)} L${(x - ux * hl - px).toFixed(1)},${(y - uy * hl - py).toFixed(1)} Z`);
+        const g = Math.min(1, len / 360), ux = dx / len, uy = dy / len, nx = -uy, ny = ux, f = (v) => v.toFixed(1);
+        const tail = 3 + 8 * g, tip = tail * 0.3, bl = Math.min(len * 0.6, 11 + 33 * g), bw = 2.5 + 5 * g;
+        // the shaft: a filled outline from a round tail to a fine round tip tucked under the head's join
+        const ex = x - ux * bw * 0.45, ey = y - uy * bw * 0.45, r0 = tail / 2, r1 = tip / 2;
+        const sh = arrow.querySelector('.shaft');
+        if (Math.hypot(ex - x0, ey - y0) > r0) {
+          sh.setAttribute('d', `M${f(x0 + nx * r0)},${f(y0 + ny * r0)} L${f(ex + nx * r1)},${f(ey + ny * r1)} A${f(r1)},${f(r1)} 0 0 0 ${f(ex - nx * r1)},${f(ey - ny * r1)} L${f(x0 - nx * r0)},${f(y0 - ny * r0)} A${f(r0)},${f(r0)} 0 0 0 ${f(x0 + nx * r0)},${f(y0 + ny * r0)} Z`);
+        } else sh.setAttribute('d', '');
+        // the head: the upper barb straight at 27 degrees, the lower one a touch shorter at 34 degrees and bowed outwards
+        // (a pen stroke, not a stamp), meeting at the tip with a round join
+        const a1 = 27 * Math.PI / 180, a2 = 34 * Math.PI / 180, l2 = bl * 0.94;
+        const u1x = x - (ux * Math.cos(a1) - nx * Math.sin(a1)) * bl, u1y = y - (uy * Math.cos(a1) - ny * Math.sin(a1)) * bl;
+        const u2x = x - (ux * Math.cos(a2) + nx * Math.sin(a2)) * l2, u2y = y - (uy * Math.cos(a2) + ny * Math.sin(a2)) * l2;
+        const cx = (x + u2x) / 2 + (ux * 0.45 - nx * 0.22) * l2 * 0.5, cy = (y + u2y) / 2 + (uy * 0.45 - ny * 0.22) * l2 * 0.5;
+        const hd = arrow.querySelector('.head');
+        hd.setAttribute('d', `M${f(u1x)},${f(u1y)} L${f(x)},${f(y)} Q${f(cx)},${f(cy)} ${f(u2x)},${f(u2y)}`);
+        hd.style.strokeWidth = f(bw);
       }
       // on release it snaps back to where the finger landed and is gone
       function dropArrow(x0, y0, x, y) {
