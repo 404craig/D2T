@@ -322,7 +322,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.evaluate(() => window.D2T.go("table")); await wait(800);
   check(/Forecast table/.test(await page.textContent(".se-tl-a")), "a forecast season's table should say it is a forecast");
 
-  // ---------- Daily challenge: today's club for everyone, its own save, one go ----------
+  // ---------- Daily challenge: today's club for everyone, its own save, as many goes as you like ----------
   await page.evaluate(() => { const G = window.D2T.game; G.newRun("classic"); G.chooseClub(G.offer()[0].key); window.D2T.state.run.tableSeen = true; window.D2T.save(); window.D2T.go("home"); }); await wait(900);
   const dEntry = await page.evaluate(() => { const d = window.D2T.game.dailyEntry(window.D2T.game.today()); return { key: d.key, mode: d.mode }; });
   // every day of a year is a bottom-10 side and plays Classic
@@ -332,19 +332,24 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate((d) => { const r = window.D2T.state.run; return r.daily === window.D2T.game.today() && window.D2T.game.mode() === "classic" && d.mode === "classic" && r.eng.respins === window.D2TE.RULES.respins && r.eng.phase !== "draft" && r.eng.xi.every((id) => id != null); }, dEntry), "the daily did not start with today's club, its mode and no respins");
   check(await page.evaluate(() => !!window.D2T.state.parked), "the run in progress was not kept aside for the daily");
   await page.click(".actionbar .se-home"); await wait(500);
-  check(!!(await page.$('.sheet [data-k="home"]')) && !(await page.$('.sheet [data-k="restart"]')) && !(await page.$('.sheet [data-k="quit"]')), "the Daily's run menu should only offer Keep playing and Home");
+  check(!!(await page.$('.sheet [data-k="home"]')) && !!(await page.$('.sheet [data-k="restart"]')) && !(await page.$('.sheet [data-k="quit"]')), "the Daily's run menu should offer Keep playing, Restart and Home");
   await page.click('.sheet [data-k="keep"]'); await wait(500);
   await page.evaluate(() => { const G = window.D2T.game; window.D2T.state.run.tableSeen = true; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(900); await shot("40-daily-summary");
   check(await page.evaluate(() => !!window.D2T.game.dailyResult()), "the daily result was not recorded");
   check(!!(await page.$(".sm-daily .sm-dv")) && !!(await page.$('.actionbar [data-act="share"]')), "the daily summary has no today-against-best panel or Share button");
-  await page.click('[data-act="again"]'); await expectScreen("home"); await wait(800);
-  check(/Done for today/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not say today's daily is done");
+  // as many goes as you like (Craig, 13 Oct): Go again starts a fresh go, and the day's best go stays recorded
+  await page.click('[data-act="again"]'); await expectScreen("table"); await wait(600);
+  check(await page.evaluate(() => { const G = window.D2T.game, r = window.D2T.state.run; return !!G.dailyResult() && r.daily === G.today() && !r.recorded && G.eng().phase !== "summary"; }), "Go again did not start a fresh go at today's Daily");
+  await page.evaluate(() => window.D2T.go("home")); await expectScreen("home"); await wait(800);
+  check(/Your best today/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not show today's best go");
   check(/TODAY'S DAILY/.test(await page.textContent(".fr-dtiles")) && (await page.$$(".fr-dtile")).length === 2, "home has no best and today tiles under the daily card");
   check(!!(await page.$('[data-act="continue-other"]')), "the parked run has no Continue card after the daily");
   // the Daily closes at midnight: an unfinished one from yesterday is dropped (no result), the parked run comes back, home says so
   await page.evaluate(() => {
-    const G = window.D2T.game, st = window.D2T.state, y = new Date(Date.parse(G.today() + "T12:00:00Z") - 864e5).toISOString().slice(0, 10);
+    const G = window.D2T.game, st = window.D2T.state;
+    if (st.run && st.run.daily) { st.run = st.parked; st.parked = null; }   // today's fresh go from Go again makes way
+    const y = new Date(Date.parse(G.today() + "T12:00:00Z") - 864e5).toISOString().slice(0, 10);
     const e = G.dailyEntry(y); st.parked = st.run; st.run = { step: "fixtures", eng: Object.assign({}, st.parked.eng, { phase: "prematch" }), spun: true, daily: y };
     window.__y = y; window.D2T.save(); window.D2T.go("home");
   }); await wait(1600);

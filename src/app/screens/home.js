@@ -85,7 +85,7 @@
   const UP = '<svg class="fr-up" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1 L11 8 H7.5 V11 H4.5 V8 H1 Z" fill="currentColor"/></svg>';
   function dailyCard() {
     const G = D2T.game, d = G.dailyEntry(G.today()), res = G.dailyResult(), streak = G.dailyStreak();
-    const sub = res ? 'Done for today. Tap to share it.' : 'They went down for real. Can you keep them up?';
+    const sub = res ? `Your best today: ${D2T.ordinal(res.finish)}. Tap to go again and beat it.` : 'They went down for real. Can you keep them up?';
     // white, the date in the top row, today's crest in full colour where the other games keep their mark
     const tag = G.dailyName(d.date, true).toUpperCase().replace('CHALLENGE ', 'CHALLENGE · ') + (streak ? ` · ${streak} DAY STREAK` : '');
     return gameCard({ c: '#FFFFFF', cls: 'fr-gm-daily', attrs: 'data-act="daily"', label: `${G.dailyName(d.date)}, ${D2T.esc(d.full || d.name)} ${d.season}`,
@@ -103,19 +103,7 @@
     else { const need = d.pos - best.rise; right = need < 1 ? `<b>${crest(d.name)}Win the league</b><small>to match your best</small>` : `<b>${crest(d.name)}Finish ${o(need)}</b><small>or higher to beat your best</small>`; }
     return `<div class="fr-dtiles"><div class="fr-dtile"><i>YOUR BEST DAILY</i>${left}</div><div class="fr-dtile${newBest ? ' is-best' : ''}"><i>TODAY'S DAILY</i>${right}</div></div>`;
   }
-  function dailyDone() {
-    const G = D2T.game, r = G.dailyResult(), d = G.dailyEntry(G.today());
-    const cmp = G.dailyCompare();
-    const text = `DROP2TOP ${G.dailyName(G.today())}\n${d.full || d.name} ${d.season} (${G.modeName(r.mode)})\nHistory: ${D2T.ordinal(r.histFinish)}\nMine: ${D2T.ordinal(r.finish)}, ${r.pts} pts\nTHE RISE ${cmp.sg(r.rise)}${cmp.isBest ? '\nMy best Daily yet' : cmp.bestLine ? '\n' + cmp.bestLine : ''}\nCan you beat it? 404craig.github.io/D2T`;
-    const vs = cmp.best ? `<div class="fr-panel" style="margin:12px 0"><div class="fr-row"><span>Today</span><span class="fr-green">${D2T.ordinal(r.finish)}, rise ${cmp.sg(r.rise)}</span></div>
-      <div class="fr-row"><span>Your best Daily</span><span>${cmp.isBest ? 'Today' : `${D2T.esc(cmp.best.club)} ${cmp.best.season}, ${D2T.ordinal(cmp.best.finish)}, rise ${cmp.sg(cmp.best.rise)}`}</span></div></div>` : '';
-    const sh = D2T.sheet({ title: `${G.dailyName(G.today())}: done`, body: `<p class="fr-lead">${D2T.esc(d.name)} ${d.season}: you finished ${D2T.ordinal(r.finish)} (history ${D2T.ordinal(r.histFinish)}). ${cmp.isBest && cmp.best ? 'Your best Daily yet. ' : ''}A new club for everyone at midnight.</p>${vs}
-      <div class="fr-stack"><button class="btn btn-green fr-btn-wide" data-k="share">Share with your mates</button></div>` });
-    sh.body.querySelector('[data-k="share"]').onclick = async () => {
-      try { if (navigator.share) { await navigator.share({ text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
-      try { await navigator.clipboard.writeText(text); sh.body.querySelector('.fr-lead').textContent = 'Copied. Paste it into the group chat.'; } catch (e) { /* nothing to copy to */ }
-    };
-  }
+
 
   // The long logo in two pieces (emblem and name, measured from long.png) so the emblem can turn on its own,
   // each with a glint layer sized to the whole logo so one sweep runs across both.
@@ -236,7 +224,6 @@
       const startNew = (from, mode) => { D2T.game.newRun(mode); D2T.toBlack('spin', { from }); };
       const daily = body.querySelector('[data-act="daily"]');
       if (daily) daily.onclick = (e) => {
-        if (D2T.game.dailyResult()) { dailyDone(); return; }
         D2T.game.startDaily(); D2T.toBlack(D2T.game.stepFor() || 'table', { from: e.currentTarget });
       };
       const other = body.querySelector('[data-act="continue-other"]');

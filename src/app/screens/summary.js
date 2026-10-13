@@ -138,7 +138,7 @@
           <p class="sm-banter">${D2T.esc(line)}</p>
           ${x && car.n > 1 ? `<p class="sm-banter">Season ${car.n} of your career${car.seasons.length ? `: ${car.seasons.filter((z) => z.finish === 1).length + (F.finish === 1 ? 1 : 0)} title${car.seasons.filter((z) => z.finish === 1).length + (F.finish === 1 ? 1 : 0) === 1 ? '' : 's'} so far` : ''}.</p>` : ''}
           ${nx ? `<button class="btn se-btn sm-next" type="button" data-act="next">Next season · ${D2T.esc(nx.key)}</button>` : x ? `<p class="sm-banter">Relegated. The career ends here.</p>` : ''}
-          <div class="sm-two"><button class="btn btn-ghost" data-act="table">Final table</button><button class="btn btn-ghost" data-act="again">${daily ? 'Home' : x ? 'Restart' : 'Play again'}</button></div>
+          <div class="sm-two"><button class="btn btn-ghost" data-act="table">Final table</button><button class="btn btn-ghost" data-act="again">${daily ? 'Go again' : x ? 'Restart' : 'Play again'}</button></div>
           <div class="se-pad"></div>
         </div>
       </div>`);
@@ -151,7 +151,7 @@
       bar.querySelector('[data-act="share"]').onclick = () => { window.D2TSound && window.D2TSound.play('share'); share(sh); };
       const nb = body.querySelector('[data-act="next"]');
       if (nb) nb.onclick = () => { if (GAME.nextSeason()) D2T.go('table'); };
-      body.querySelector('[data-act="again"]').onclick = () => { if (daily) { D2T.go('home'); return; } const m = GAME.mode(); D2T.state.run = null; D2T.save(); GAME.newRun(m); D2T.go('spin'); };
+      body.querySelector('[data-act="again"]').onclick = () => { if (daily) { GAME.restartDaily(); D2T.go(GAME.stepFor() || 'table'); return; } const m = GAME.mode(); D2T.state.run = null; D2T.save(); GAME.newRun(m); D2T.go('spin'); };
       body.querySelector('[data-act="table"]').onclick = () => {
         const rows = GAME.standings(null);
         D2T.sheet({ title: `Final table ${D2T.esc(S.season)}`, body: `<div class="se-run" style="--se-acc:${club.accent};--se-text:${club.text};--se-acc-b:${SE.rgba(club.accent, 0.55)}"><div class="se-table">${SE.tableHead()}${rows.map((r, i) => SE.rowHTML(r, club.name, i === n - rel - 1 ? 'se-zone' : '')).join('')}</div></div>` });

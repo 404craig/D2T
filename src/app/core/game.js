@@ -514,7 +514,10 @@
     if (run.daily) {
       entry.daily = run.daily;
       rec.daily = rec.daily || {};
-      if (!rec.daily[run.daily]) rec.daily[run.daily] = { n: GAME.dailyNumber(run.daily), club: name, season: S.season, mode, finish: F.finish, histFinish: F.histFinish, rise: F.rise, pts: F.pts, dream: entry.dream };
+      // the day's best go counts (biggest rise, then higher finish); goes counts them all
+      const was = rec.daily[run.daily], goes = (was && was.goes || (was ? 1 : 0)) + 1;
+      if (!was || F.rise > was.rise || (F.rise === was.rise && F.finish < was.finish)) rec.daily[run.daily] = { n: GAME.dailyNumber(run.daily), club: name, season: S.season, mode, finish: F.finish, histFinish: F.histFinish, rise: F.rise, pts: F.pts, dream: entry.dream, goes };
+      else was.goes = goes;
     }
     rec.runs.push(entry);
     const book = mode === 'dare2dream' ? (rec.dreamClubs = rec.dreamClubs || {}) : mode === 'clubx' ? (rec.xClubs = rec.xClubs || {}) : rec.clubs;
@@ -554,7 +557,7 @@
   // relegated club-season, the same list Classic spins from (Craig, 13 Oct): Daily #1 is the first in the cycle, each day
   // the next, and after the last it starts again from the top. It is a Classic run (Craig, 13 Oct): their real squad and
   // XI, Classic's rolls and 5 respins; the rolls and respins come from the day's seed, so the same choices see the same
-  // cards. One go a day; it has its own save, so another run is never lost.
+  // cards. As many goes as you like (Craig, 13 Oct), the best of the day counts; it has its own save, so another run is never lost.
   const DAILY_START = '2026-10-11';
   GAME.today = () => {
     try { return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); }
@@ -594,9 +597,10 @@
   GAME.startDaily = () => {
     GAME.closeOldDaily();
     const st = D2T.state, date = GAME.today();
-    if (GAME.dailyResult(date)) return false;                                   // one go a day
-    if (st.run && st.run.daily === date) return true;
-    if (st.dailyRun && st.dailyRun.daily === date) { swapIn(st.dailyRun); D2T.save(); return true; }
+    // as many goes as you like (Craig, 13 Oct): a go in progress carries on, a finished one makes way for a new go
+    const over = (r) => r && (r.recorded || (r.eng && r.eng.phase === 'summary'));
+    if (st.run && st.run.daily === date) { if (!over(st.run)) return true; st.run = null; }
+    if (st.dailyRun && st.dailyRun.daily === date) { if (!over(st.dailyRun)) { swapIn(st.dailyRun); D2T.save(); return true; } st.dailyRun = null; }
     const d = GAME.dailyEntry(date);
     const eng = E.newRun({ seed: 'daily-' + date, mode: d.mode, catalogue: [{ key: d.key }], fixedClub: d.key });
     swapIn({ step: 'table', eng, spun: true, daily: date });
@@ -604,6 +608,8 @@
     D2T.save();
     return true;
   };
+  // a fresh go at today's Daily, throwing away the one on (from the run menu or the summary)
+  GAME.restartDaily = () => { const st = D2T.state, date = GAME.today(); if (st.run && st.run.daily === date) st.run = null; if (st.dailyRun && st.dailyRun.daily === date) st.dailyRun = null; return GAME.startDaily(); };
   // A Daily closes at midnight (UK date, Craig 12 Oct): an unfinished one from an earlier day is dropped (no result, so it
   // never counts), a parked run comes back, and home says so once. Returns the closed date or null.
   const runKey = (eng) => eng.seasonKey + ':' + G.seasons[eng.seasonKey].clubs[eng.club].name;
