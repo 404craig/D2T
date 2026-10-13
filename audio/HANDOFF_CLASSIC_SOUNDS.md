@@ -40,3 +40,10 @@ Craig chose every Classic sound on the sound kit (claude.ai/artifact/5K8i5k3cEhW
 - Unbeaten Run (`screens/unbeaten.js`): a refresh is `respin`; the stat landing is `land`; a right answer is `correct` (was a cheer every time); wrong is `over`; a new best is `newBest` (was the champions fanfare); the next card spins in silently.
 - `CLAUDE.md`: three new rules under Craig's rules (soft sound, don't overload, reuse the cues for new modes).
 - Checked again: engine.test (15) and ui.test (every mode, Goal Rush and Unbeaten Run included) pass; the new cues play with no console errors.
+
+## Third pass (13 Oct, Craig: keep the games consistent)
+
+The second pass went too quiet. Craig wants the same sounds for the same moments in every game:
+- Goal Rush: its reels tick and land with the Classic spin sounds; exactly on target is a soft stadium roar and applause (`win`), falling short is a groan and grumbling (`short`), going over is boos (`bust`); the number roll ticks every second step again.
+- Unbeaten Run: every card spins in with the Classic spin sounds (`spinStart`, per-card `tick`, `reelLand`), the next card included; a right answer is a small cheer with a positive note (`right`); wrong is boos with a low thud (`wrong`); a new best is a cheer (`highScore`) and HIGH SCORE flashes across the middle in Classic's REWRITE HISTORY banner (`.se-newseason`, in cyan), with the end sheet waiting 2.5 s for it.
+- CLAUDE.md: the "don't overload" rule rewritten as "keep the games consistent" (silence only for ambient motion and visual extras).

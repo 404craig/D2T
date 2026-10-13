@@ -202,7 +202,7 @@
       function refreshCard() {
         if (!run || busy || run.refreshes <= 0) return;
         const nxt = pickNext(); if (!nxt) return;
-        run.refreshes--; busy = true; enable(false); snd('respin');
+        run.refreshes--; busy = true; enable(false); snd('respin'); snd('roll3');
         run.next = nxt; run.used.add(nxt);
         stage.querySelector('.ub-who-r').innerHTML = '';
         spinTo(reelR, run.next, { delay: 0, cruiseT: 0.5, decelT: 1.0, n: 2.6, v1: 2.2 }, () => {
@@ -282,11 +282,12 @@
         for (let i = 1; i < n + 4; i++) seq.push(i === n ? html : item(run.stat, run.deck[rand(run.deck.length)], false, SIZE.w));   // fillers show ?, never made-up numbers
         reel.load(seq);
         if (reduced) { reel.draw(n, 0); reel.hit(accentOf(r)); reel.settle(n); done && done(); return; }
-        const t0 = performance.now(); let landed = false;
+        const t0 = performance.now(), ri = reel === reelL ? 0 : 2; let landed = false, lastK = 0;
         const step = (now) => {
           const s = D2T.roll.sample(P, (now - t0) / 1000);
           reel.draw(s.p, s.v);
-          if (!landed && (now - t0) / 1000 >= P.landAt) { landed = true; reel.hit(accentOf(r)); reel.settle(n); done && done(); }
+          const k = Math.floor(s.p); if (k > lastK && !landed && window.D2TSound) window.D2TSound.tick(ri, s.v); lastK = k;   // the same reel ticks as Classic
+          if (!landed && (now - t0) / 1000 >= P.landAt) { landed = true; snd('reelLand'); reel.hit(accentOf(r)); reel.settle(n); done && done(); }
           if (s.phase !== 'done' && root.isConnected) rafs.push(requestAnimationFrame(step));
         };
         rafs.push(requestAnimationFrame(step));
@@ -330,7 +331,7 @@
         const a = run.stat.val(run.cur), b = run.stat.val(run.next), right = higher ? b > a : b < a;
         burstReveal(numEl(), b, () => {
           stage.querySelector('.ub-r').classList.add(right ? 'ok' : 'bad');
-          if (right) win(); else { snd('over'); later(over, reduced ? 200 : 950); }
+          if (right) win(); else { snd('wrong'); later(over, reduced ? 200 : 950); }
         });
       }
       function setNum(el, to) {
@@ -367,7 +368,7 @@
         later(() => wrap.remove(), 1100);
       }
       function win() {
-        run.streak++; snd('correct');
+        run.streak++; snd('right');
         const done = () => {
           nEl.textContent = run.streak;
           streakEl.classList.remove('burst'); void streakEl.offsetWidth; streakEl.classList.add('burst');
@@ -400,29 +401,43 @@
         reelL.show(item(run.stat, run.cur, true, SIZE.w)); sl.classList.add('is-set'); sl.style.setProperty('--sp-accent', accentOf(run.cur));
         stage.querySelector('.ub-who-l').innerHTML = whoLine(run.stat, run.cur); stage.querySelector('.ub-who-r').innerHTML = '';
         if (!reduced) { const dx = sr.getBoundingClientRect().left - sl.getBoundingClientRect().left; sl.animate([{ transform: `translateX(${dx}px)` }, { transform: 'none' }], { duration: 380, easing: 'cubic-bezier(.5,0,.2,1)' }); }
-        reelR.show(ph()); sr.classList.remove('is-set');   // the next card spins in silently: the answer already had its sound
+        reelR.show(ph()); sr.classList.remove('is-set');
+        snd('roll3');
         spinTo(reelR, run.next, { delay: 0.15, cruiseT: 0.55, decelT: 1.0, n: 2.6, v1: 2.2 }, () => {
           stage.querySelector('.ub-who-r').innerHTML = whoLine(run.stat, run.next);
           busy = false; enable(true); later(() => tips(), 300);
         });
       }
+      // a new best: HIGH SCORE flashes across the middle the way REWRITE HISTORY does on Classic's table (.se-newseason)
+      function highScore() {
+        if (reduced) return;
+        const f = D2T.h('<div class="se-newseason ub-high" aria-hidden="true"><span>High<br>score</span></div>');
+        f.style.setProperty('--se-acc', C); root.appendChild(f);
+        requestAnimationFrame(() => f.classList.add('se-go'));
+        later(() => f.remove(), 2800);
+      }
       function over(cleared) {
         if (!root.isConnected || !run) return;
         const s = run.stat, n = run.streak, prev = R.best[s.id] || 0, newBest = n > prev && n > 0;
         R.runs++; if (newBest) R.best[s.id] = n; save();
-        if (newBest) snd('newBest');
-        const a = run.cur, b = run.next, nm = (r) => r.name || D2T.game.club(r.club).full || r.club;
-        const head = cleared ? 'The whole deck, unbeaten' : n === 0 ? 'Beaten first time' : `Unbeaten in ${n}`;
-        const lead = cleared ? 'You got through every card in this deck.' : `<b>${D2T.esc(nm(b))}</b> had <b>${s.val(b)}</b>, <b>${D2T.esc(nm(a))}</b> had <b>${s.val(a)}</b>.`;
-        const best = newBest ? ' A new best.' : prev ? ` Your best on ${s.big.toLowerCase()}: ${prev}.` : '';
-        const text = `DROP2TOP Unbeaten Run\n${s.big} (Premier League): unbeaten in ${n}${newBest ? ', a new best' : ''}`;
-        const sh = D2T.sheet({ title: head, body: `<div class="ub-endbig"><b>${n}</b><span>Unbeaten${newBest ? ' · a new best' : ''}</span></div><p class="fr-lead">${lead}${best}</p>
-          <div class="fr-stack"><button class="btn ub-again fr-btn-wide" data-k="share">Share with your mates</button><button class="btn btn-ghost fr-btn-wide ub-newrun" data-k="again">New run</button></div>`, onClose: () => { if (root.isConnected && run) idle(); } });
-        sh.body.querySelector('[data-k="again"]').onclick = () => { sh.close(); idle(); later(statSpin, 250); };
-        sh.body.querySelector('[data-k="share"]').onclick = async () => {
-          try { if (navigator.share) { await navigator.share({ text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
-          try { await navigator.clipboard.writeText(text); sh.body.querySelector('.fr-lead').textContent = 'Copied. Paste it into the group chat.'; } catch (e) { /* nothing to copy to */ }
+        if (newBest) { snd('highScore'); highScore(); }
+        // the end sheet waits for the HIGH SCORE flash to pass
+        const show = () => {
+          if (!root.isConnected) return;
+          const a = run.cur, b = run.next, nm = (r) => r.name || D2T.game.club(r.club).full || r.club;
+          const head = cleared ? 'The whole deck, unbeaten' : n === 0 ? 'Beaten first time' : `Unbeaten in ${n}`;
+          const lead = cleared ? 'You got through every card in this deck.' : `<b>${D2T.esc(nm(b))}</b> had <b>${s.val(b)}</b>, <b>${D2T.esc(nm(a))}</b> had <b>${s.val(a)}</b>.`;
+          const best = newBest ? ' A new best.' : prev ? ` Your best on ${s.big.toLowerCase()}: ${prev}.` : '';
+          const text = `DROP2TOP Unbeaten Run\n${s.big} (Premier League): unbeaten in ${n}${newBest ? ', a new best' : ''}`;
+          const sh = D2T.sheet({ title: head, body: `<div class="ub-endbig"><b>${n}</b><span>Unbeaten${newBest ? ' · a new best' : ''}</span></div><p class="fr-lead">${lead}${best}</p>
+            <div class="fr-stack"><button class="btn ub-again fr-btn-wide" data-k="share">Share with your mates</button><button class="btn btn-ghost fr-btn-wide ub-newrun" data-k="again">New run</button></div>`, onClose: () => { if (root.isConnected && run) idle(); } });
+          sh.body.querySelector('[data-k="again"]').onclick = () => { sh.close(); idle(); later(statSpin, 250); };
+          sh.body.querySelector('[data-k="share"]').onclick = async () => {
+            try { if (navigator.share) { await navigator.share({ text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
+            try { await navigator.clipboard.writeText(text); sh.body.querySelector('.fr-lead').textContent = 'Copied. Paste it into the group chat.'; } catch (e) { /* nothing to copy to */ }
+          };
         };
+        if (newBest && !reduced) later(show, 2500); else show();
       }
       // swipe the right card up for higher, down for lower (Craig, 12 Oct): it follows the finger on a rubber band, up to
       // about three times the old reach, and on release springs back past its start and bounces quickly to rest before

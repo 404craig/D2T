@@ -317,7 +317,7 @@
             w.insertAdjacentHTML('afterbegin', `<svg width="0" height="0" style="position:absolute"><filter id="${id}" x="-20%" y="-50%" width="140%" height="200%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="0 0"/></filter></svg>`);
             const blur = w.querySelector('feGaussianBlur');
             const streak = D2T.h('<span class="g4-streak"></span>'), sweep = D2T.h('<span class="g4-sweep"></span>'); w.append(streak, sweep);
-            let filtered = false, hit = false;
+            let filtered = false, hit = false, lastK = 0;
             const finish = () => {
               strip.style.filter = ''; strip.innerHTML = shirt({ w: TW, player: targets[i], attr: `data-c="${i}"` }); strip.style.transform = 'none';
               streak.remove(); sweep.remove(); w.style.transform = '';
@@ -336,8 +336,9 @@
               if (sd < 0.4) { if (filtered) { strip.style.filter = ''; filtered = false; } } else { blur.setAttribute('stdDeviation', `0 ${sd.toFixed(1)}`); if (!filtered) { strip.style.filter = `url(#${id})`; filtered = true; } }
               streak.style.opacity = (k * k * 0.9).toFixed(3);
               w.style.transform = k > 0.02 ? `scaleY(${(1 + 0.05 * k).toFixed(4)})` : '';
+              const kk = Math.floor(sm.p); if (kk > lastK && !hit && window.D2TSound) window.D2TSound.tick(i, Math.abs(sm.v)); lastK = kk;   // the same reel ticks as Classic
               if (!hit && t >= P.landAt) {
-                hit = true; snd('land');
+                hit = true; if (window.D2TSound) window.D2TSound.play('reelLand', Math.min(i, 2));
                 strip.animate([{ scale: '1' }, { scale: '1.065', offset: 0.28 }, { scale: '1' }], { duration: 460, easing: 'cubic-bezier(.2,.9,.3,1.3)' });
                 sweep.animate([{ left: '-60%', opacity: 0 }, { opacity: 1, offset: 0.15 }, { left: '130%', opacity: 0 }], { duration: 550, delay: 40, easing: 'cubic-bezier(.3,.7,.2,1)', fill: 'both' });
               }
@@ -472,7 +473,7 @@
             num.textContent = v;
             if (i >= steps.length - 3) num.removeAttribute('filter');
             num.animate([{ transform: 'translateY(-14px)', opacity: 0.4 }, { transform: 'translateY(0)', opacity: 1 }], { duration: steps[i], easing: 'linear' });
-            if (i % 3 === 0) snd('numberTick');
+            if (i % 2 === 0) snd('numberTick');
             later(tick, steps[i++]);
             return;
           }
@@ -569,7 +570,7 @@
         const dim = (ms) => { const d = D2T.h('<div class="g4-dim"></div>'); wrap.appendChild(d); d.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ms, fill: 'forwards' }); return d; };
         if (gap === 0) {
           // EXACT: the bar turns gold, the shirts light up in a wave, confetti, the giant target slams onto the pitch
-          snd('perfect');
+          snd('win');
           wrap.querySelector('.g4-track').classList.add('glow');
           [...pitchEl.querySelectorAll('.slotp .g4-shirt')].forEach((s, i) => s.animate([{ transform: 'scale(1)', filter: 'brightness(1)' }, { transform: 'scale(1.25)', filter: 'brightness(1.8)' }, { transform: 'scale(1)', filter: 'brightness(1)' }], { duration: 500, delay: 80 * (10 - i) }));
           later(() => {
@@ -586,7 +587,7 @@
           fade([m], 2400);
         } else if (gap > 0) {
           // SO CLOSE: the screen dims, the gap beats like a heartbeat and the empty end of the bar flashes
-          snd('close');
+          snd('short');
           const d = dim(600), m = msg('close', gap === 1 ? '1 GOAL' : gap + ' GOALS', 'So close');
           m.animate([{ opacity: 0, transform: 'scale(0.9)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 500, easing: 'ease-out', fill: 'backwards' });
           m.querySelector('b').animate([{ transform: 'scale(1)' }, { transform: 'scale(1.08)' }, { transform: 'scale(1)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }], { duration: 1100, iterations: 2, delay: 500 });
@@ -597,7 +598,7 @@
           fade([m, d, ghost], 3300);
         } else {
           // BLOWN PAST: the bar has raced past and re-scaled; a grey stamp says how far over
-          snd('over');
+          snd('bust');
           const m = msg('over', '+' + (-gap), `Blown past ${TARGET}`);
           m.animate([{ opacity: 0, transform: 'translateX(-60px) skewX(-12deg)' }, { opacity: 1, transform: 'translateX(8px) skewX(-6deg)', offset: 0.6 }, { opacity: 1, transform: 'none' }], { duration: 600, easing: 'ease-out', fill: 'backwards' });
           fade([m], 2800);
@@ -651,7 +652,7 @@
             later(finish, 1700);
             return;
           }
-          if (k % 3 === 0) snd('numberTick');
+          if (k % 2 === 0) snd('numberTick');
           later(step, 50 + Math.pow(k / last, 3) * 280); k++;
         };
         step();
