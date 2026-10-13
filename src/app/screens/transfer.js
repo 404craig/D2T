@@ -282,7 +282,7 @@
           onSettled: () => { leaving = false; st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); timers.push(setTimeout(() => enterPlacing(true), reduced ? 0 : 450)); },
           accent: LV_ACCENT,
           caption: (p) => `${p.main || p.pos} · ${lvName(p).toUpperCase()}`,
-          details: (p) => D2T.cards.info(p, LV_ACCENT(p).accent),
+          details: (p) => D2T.cards.info(p), detailsBare: true,
           mainLabel: 'Spin', pickLabel: draft ? 'Pick one' : 'Pass', spinningLabel: 'Rolling',
           selectedLabel: (p) => (draft ? `Sign ${surname(p.name)}` : 'Pass'),
           hintIdle: 'Hit Spin to roll three players', hintSettled: '', hintSelected: 'Tap a shirt to sign him there, or tap him again for his card',

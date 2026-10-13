@@ -167,8 +167,10 @@
       const item = results[i], card = reels[i].cardEl;
       if (!card) return;
       const a = cfg.accent ? cfg.accent(item) : { accent: '#fff' };
-      const below = cfg.details ? `<div class="sp-det" style="--sp-accent:${a.accent}">${cfg.details(item)}</div>` : '';
-      open = D2T.cards.openLarge(card, (cfg.renderOpen || cfg.render)(item, 280), { below, onClose: () => { open = null; } });
+      // a player's details (detailsBare) bring their own panels, a smaller card and a column that scrolls
+      const bare = !!cfg.detailsBare, W = bare ? Math.min(236, Math.round(root.clientWidth * 0.6)) : 280;
+      const below = cfg.details ? (bare ? cfg.details(item) : `<div class="sp-det" style="--sp-accent:${a.accent}">${cfg.details(item)}</div>`) : '';
+      open = D2T.cards.openLarge(card, (cfg.renderOpen || cfg.render)(item, W), { w: W, below, scroll: bare, onClose: () => { open = null; } });
     };
     slots.forEach((s, i) => { s.addEventListener('click', () => select(i)); s.setAttribute('role', 'button'); s.tabIndex = 0; });
 
