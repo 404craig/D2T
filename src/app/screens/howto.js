@@ -48,7 +48,7 @@
         <p class="fr-lead">Spin any club from any season, but start with no players. Pick a formation, then draft your XI: 11 spins, one per shirt, three players each time, no respins. Then play the season with transfer rolls and 5 respins. Finish higher than they really did, or win the league again if they won it.</p>
 
         <h2 class="fr-h2">Club X</h2>
-        <p class="fr-lead">Name your club, then spin a season. Your club takes the place of that season's bottom side, with no players. Pick a formation and draft your XI: 11 spins, one per shirt in a random order, three players each time. Then play the season with transfer rolls and 5 respins. Only the title counts.</p>
+        <p class="fr-lead">Name your club, then spin a season. Your club takes the place of that season's bottom side, with no players. Pick a formation and draft your XI: 11 spins, three players each time for any of your open shirts, and each goes in a shirt he plays. Then play the season with transfer rolls and 5 respins. Only the title counts.</p>
 
         <h2 class="fr-h2">Card colours</h2>
         <p class="fr-lead" style="margin-bottom:6px">The big number is the rating. The colour tells you the level.</p>

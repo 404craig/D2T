@@ -280,13 +280,17 @@
 
   // ---------- Dare2Dream draft: one spin per shirt ----------
   GAME.inDraft = () => GAME.eng().phase === 'draft';
+  // Club X (Craig, 13 Oct) drafts any open shirt: slot is null (open) and each card goes on an open shirt he lists
   GAME.draftInfo = () => {
-    const eng = GAME.eng(), slot = E.draftSlot(eng), pos = E.FORMATIONS[eng.formation][slot][0];
+    const eng = GAME.eng(), slot = E.draftSlot(eng);
+    if (slot == null) return { step: eng.draft.step + 1, of: eng.xi.length, slot: -1, open: true, pos: '', broad: '' };
+    const pos = E.FORMATIONS[eng.formation][slot][0];
     return { step: eng.draft.step + 1, of: eng.xi.length, slot, pos, broad: E.SLOT_BROAD[pos] };
   };
-  GAME.draftPick = (cardId) => {
+  GAME.draftFits = (cardId) => E.draftFits(GAME.eng(), GAME.S(), cardId);
+  GAME.draftPick = (cardId, slot) => {
     const eng = GAME.eng();
-    if (!E.draftPick(eng, GAME.S(), cardId)) return false;
+    if (!E.draftPick(eng, GAME.S(), cardId, slot)) return false;
     D2T.state.run.step = eng.phase === 'draft' ? 'transfer' : 'squad';
     D2T.save(); return true;
   };
