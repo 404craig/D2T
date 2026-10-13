@@ -32,3 +32,11 @@ Craig chose every Classic sound on the sound kit (claude.ai/artifact/5K8i5k3cEhW
 
 - Sound is quieter overall and nothing rings or clinks. Reels tick softly; a Legend landing gets a soft swell before it and a warm chord with quiet applause.
 - Cues ready for later, not wired yet (no matching animation in the game): `finishCount`, `riseCount`, `achievement` (tiers 0 to 3), `denied`.
+
+## Second pass: the other games (13 Oct, Craig: same soft sounds everywhere, nothing loud, some things silent)
+
+- New shared cues in `src/sound.js`: `land`, `numberTick`, `correct`, `close`, `over`, `perfect`, `newBest`, all in the same soft family.
+- Goal Rush (`screens/goals.js`): reel landing and the total landing are a soft felt `land`; placing a player is `cardDrop` (was a cheer); the number roll and the formation reveal tick quietly every third step (was the button press every second); exactly on target is `perfect` (was the full champions fanfare, flares and horns); so close is two soft falling tones (was groan and boos); blown past is a soft thud (`over`).
+- Unbeaten Run (`screens/unbeaten.js`): a refresh is `respin`; the stat landing is `land`; a right answer is `correct` (was a cheer every time); wrong is `over`; a new best is `newBest` (was the champions fanfare); the next card spins in silently.
+- `CLAUDE.md`: three new rules under Craig's rules (soft sound, don't overload, reuse the cues for new modes).
+- Checked again: engine.test (15) and ui.test (every mode, Goal Rush and Unbeaten Run included) pass; the new cues play with no console errors.

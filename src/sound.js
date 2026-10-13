@@ -179,7 +179,15 @@ const CUES = {
   tophalf(t) { clip(O(1, 0.2), "applause", t, { gain: 0.9 }); },
   survived(t) { clip(O(1, 0.2), "applause", t, { gain: 0.7, dur: 2.5 }); },
   relegated(t) { const o = O(1, 0.2); clip(o, "stunned_silence", t); clip(o, "relegation_sting", t + 0.5, { gain: 0.9 }); clip(o, "boos", t + 2.8, { gain: 0.6 }); },
-  share(t) { swish(soft(O(1, 0.1), 2000), t, 0.25, 500, 2000, 0.16); }
+  share(t) { swish(soft(O(1, 0.1), 2000), t, 0.25, 500, 2000, 0.16); },
+  // shared by the other games (Goal Rush, Unbeaten Run and anything new): the same soft family, nothing louder
+  land(t) { const o = O(1, 0.08); felt(o, t, 160, 0.4, 0.1); tap(o, t, 0.06, 230); },
+  numberTick(t) { tap(O(1, 0.03), t, 0.045, 300); },
+  correct(t) { const o = O(1, 0.12); felt(o, t, 180, 0.3, 0.08); osc(soft(o, 1100), "triangle", D4, t, 0.4, 0.04, { a: 0.02 }); },
+  close(t) { const o = soft(O(1, 0.12), 1000); osc(o, "triangle", A3, t, 0.35, 0.05, { a: 0.03 }); osc(o, "triangle", F3, t + 0.3, 0.7, 0.05, { a: 0.03 }); },
+  over(t) { const o = O(1, 0.1); felt(o, t, 120, 0.4, 0.2); swish(soft(o, 1400), t, 0.4, 1400, 300, 0.08); },
+  perfect(t) { const o = O(1, 0.25); felt(o, t, 130, 0.45, 0.22); swish(soft(o, 1400), t, 0.9, 200, 1300, 0.12); [D3, Fs3, A3, D4, N(4)].forEach((n) => osc(soft(o, 1200), "triangle", n, t, 2.0, 0.035, { a: 0.12 })); clip(o, "applause", t + 0.3, { gain: 0.6, dur: 2.5 }); },
+  newBest(t) { const o = O(1, 0.2); felt(o, t, 140, 0.4, 0.18); [D3, Fs3, A3, D4].forEach((n) => osc(soft(o, 1100), "triangle", n, t, 1.4, 0.035, { a: 0.08 })); clip(o, "applause", t + 0.25, { gain: 0.5, dur: 2 }); }
 };
 // names the screens already used, kept so nothing breaks
 const ALIAS = { roll3: "spinStart", lockin: "clubConfirm", pick: "cardSelect", reveal: "clubReveal", subIn: "cardDrop", subOut: "dropCancel", buzzer: "denied", climb: "riseCount" };

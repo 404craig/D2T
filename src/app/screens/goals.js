@@ -337,7 +337,7 @@
               streak.style.opacity = (k * k * 0.9).toFixed(3);
               w.style.transform = k > 0.02 ? `scaleY(${(1 + 0.05 * k).toFixed(4)})` : '';
               if (!hit && t >= P.landAt) {
-                hit = true; snd('tap');
+                hit = true; snd('land');
                 strip.animate([{ scale: '1' }, { scale: '1.065', offset: 0.28 }, { scale: '1' }], { duration: 460, easing: 'cubic-bezier(.2,.9,.3,1.3)' });
                 sweep.animate([{ left: '-60%', opacity: 0 }, { opacity: 1, offset: 0.15 }, { left: '130%', opacity: 0 }], { duration: 550, delay: 40, easing: 'cubic-bezier(.3,.7,.2,1)', fill: 'both' });
               }
@@ -390,7 +390,7 @@
         let result = null;
         if (done && !S.recorded) { S.recorded = true; result = G4.finish(total(), TARGET); }
         save();
-        snd('lockin');
+        snd('cardDrop');
         const fly = D2T.h(`<div class="g4-flyer">${shirt({ w: TW, player: p })}</div>`);
         fly.style.left = (a.left - hr.left) + 'px'; fly.style.top = (a.top - hr.top) + 'px'; fly.firstElementChild.style.setProperty('--sw', a.width + 'px');
         wrap.appendChild(fly); src.style.visibility = 'hidden';
@@ -472,7 +472,7 @@
             num.textContent = v;
             if (i >= steps.length - 3) num.removeAttribute('filter');
             num.animate([{ transform: 'translateY(-14px)', opacity: 0.4 }, { transform: 'translateY(0)', opacity: 1 }], { duration: steps[i], easing: 'linear' });
-            if (i % 2 === 0) snd('tap');
+            if (i % 3 === 0) snd('numberTick');
             later(tick, steps[i++]);
             return;
           }
@@ -516,7 +516,7 @@
         burstAt(x, y + h / 2, true); burstAt(x + 10, y + h / 2, false);
         wrap.querySelector('.g4-tally').animate([{ transform: 'translate(0,0)' }, { transform: 'translate(-5px,2px)' }, { transform: 'translate(6px,-2px)' }, { transform: 'translate(-3px,1px)' }, { transform: 'translate(0,0)' }], { duration: 360 });
         tr.querySelector('.fill').animate([{ filter: 'brightness(1)' }, { filter: 'brightness(2.2)' }, { filter: 'brightness(1)' }], { duration: 420 });
-        snd('lockin');
+        snd('land');
       }
       // the number, the to-go text and the bar count up together; crossing the target = race past the line, burst on it, then the bar re-scales
       function tickTo(from, to, done) {
@@ -569,7 +569,7 @@
         const dim = (ms) => { const d = D2T.h('<div class="g4-dim"></div>'); wrap.appendChild(d); d.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ms, fill: 'forwards' }); return d; };
         if (gap === 0) {
           // EXACT: the bar turns gold, the shirts light up in a wave, confetti, the giant target slams onto the pitch
-          snd('champions');
+          snd('perfect');
           wrap.querySelector('.g4-track').classList.add('glow');
           [...pitchEl.querySelectorAll('.slotp .g4-shirt')].forEach((s, i) => s.animate([{ transform: 'scale(1)', filter: 'brightness(1)' }, { transform: 'scale(1.25)', filter: 'brightness(1.8)' }, { transform: 'scale(1)', filter: 'brightness(1)' }], { duration: 500, delay: 80 * (10 - i) }));
           later(() => {
@@ -586,7 +586,7 @@
           fade([m], 2400);
         } else if (gap > 0) {
           // SO CLOSE: the screen dims, the gap beats like a heartbeat and the empty end of the bar flashes
-          snd('conceded');
+          snd('close');
           const d = dim(600), m = msg('close', gap === 1 ? '1 GOAL' : gap + ' GOALS', 'So close');
           m.animate([{ opacity: 0, transform: 'scale(0.9)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 500, easing: 'ease-out', fill: 'backwards' });
           m.querySelector('b').animate([{ transform: 'scale(1)' }, { transform: 'scale(1.08)' }, { transform: 'scale(1)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }], { duration: 1100, iterations: 2, delay: 500 });
@@ -597,7 +597,7 @@
           fade([m, d, ghost], 3300);
         } else {
           // BLOWN PAST: the bar has raced past and re-scaled; a grey stamp says how far over
-          snd('buzzer');
+          snd('over');
           const m = msg('over', '+' + (-gap), `Blown past ${TARGET}`);
           m.animate([{ opacity: 0, transform: 'translateX(-60px) skewX(-12deg)' }, { opacity: 1, transform: 'translateX(8px) skewX(-6deg)', offset: 0.6 }, { opacity: 1, transform: 'none' }], { duration: 600, easing: 'ease-out', fill: 'backwards' });
           fade([m], 2800);
@@ -645,13 +645,13 @@
           const f = F[k % F.length];
           big.textContent = f; chips.forEach((c) => c.classList.toggle('on', c.dataset.f === f));
           if (k >= last) {
-            snd('lockin');
+            snd('land');
             big.animate([{ transform: 'rotate(-3deg) scale(1.35)' }, { transform: 'rotate(-3deg) scale(.94)', offset: 0.55 }, { transform: 'rotate(-3deg) scale(1)' }], { duration: 480, easing: 'cubic-bezier(.3,1.4,.5,1)' });
             line.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 200, fill: 'forwards' });
             later(finish, 1700);
             return;
           }
-          if (k % 2 === 0) snd('tap');
+          if (k % 3 === 0) snd('numberTick');
           later(step, 50 + Math.pow(k / last, 3) * 280); k++;
         };
         step();
