@@ -3,20 +3,21 @@
    Rules: soft, subtle and quiet; no glass or tin (no bells, chimes, pings or metal clinks); small actions are muted.
    Recorded clips (window.D2T_SOUNDS, softened ElevenLabs files from audio/game) plus small synth cues made here.
    The audio context starts on the first tap (iPhones refuse sound before one) and every call is safe to make before
-   then, when muted, or where Web Audio is missing. */
+   then, when muted, or where Web Audio is missing. Back from another app it is revived on the next tap (see revive). */
 (function (root) {
 "use strict";
 const MIX = { master: 0.85, bed: 0.9, verb: 0.25 };
-let ctx = null, master, fx, bedBus, verbIn, quietIn, noiseBuf, buffers = {}, muted = false, bed = null, started = {};
+let ctx = null, master, fx, bedBus, verbIn, quietIn, noiseBuf, buffers = {}, muted = false, bed = null, bedOn = false, started = {};
 
 function init() {
   if (ctx) return ctx;
   const AC = root.AudioContext || root.webkitAudioContext;
   if (!AC) return null;
   ctx = new AC();
+  const c = ctx; c.onstatechange = () => { if (c === ctx && c.state === "running" && bedOn && !bed) crowd(true); };
   const lim = ctx.createDynamicsCompressor();
   lim.threshold.value = -6; lim.knee.value = 4; lim.ratio.value = 12; lim.attack.value = 0.002; lim.release.value = 0.12;
-  master = ctx.createGain(); master.gain.value = muted ? 0 : MIX.master; master.connect(lim); lim.connect(ctx.destination);
+  master = ctx.createGain(); master.gain.value = muted || document.hidden ? 0 : MIX.master; master.connect(lim); lim.connect(ctx.destination);
   // everything passes a gentle top cut, so nothing is bright or tinny
   const tone = ctx.createBiquadFilter(); tone.type = "lowpass"; tone.frequency.value = 7000; tone.Q.value = 0.5; tone.connect(master);
   fx = ctx.createGain(); fx.connect(tone);
@@ -39,23 +40,48 @@ function dataToBuf(uri) {
   for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
   return u.buffer;
 }
+// a decoded clip lands in the map (only for the context that asked); the crowd bed starts as soon as its loop is in
+function decode(k, raw) {
+  const c = ctx, got = buf => { if (c !== ctx) return; buffers[k] = buf; if (k === "crowd_loop" && bedOn && !bed) crowd(true); };
+  try { const p = c.decodeAudioData(raw, got, () => {}); if (p && p.then) p.then(got, () => {}); } catch (e) { /* that clip stays silent */ }
+}
 // decodes every clip not started yet: the clips arrive at the end of the page, so this runs again when they land
 function decodeAll() {
   if (!ctx) return;
   const src = root.D2T_SOUNDS || {};
-  Object.keys(src).forEach(k => {
-    if (started[k]) return; started[k] = 1;
-    try {
-      const p = ctx.decodeAudioData(dataToBuf(src[k]), buf => { buffers[k] = buf; }, () => {});
-      if (p && p.then) p.then(buf => { buffers[k] = buf; }, () => {});
-    } catch (e) { /* that clip stays silent */ }
-  });
+  Object.keys(src).forEach(k => { if (started[k]) return; started[k] = 1; decode(k, dataToBuf(src[k])); });
 }
 function unlock() {
   if (!init()) return;
   if (ctx.state !== "running") ctx.resume().catch(() => {});
   decodeAll(); decodeReveal();
 }
+// a silent sample started inside a tap is what unlocks (and re-unlocks) sound on iPhones
+function blip() { try { const s = ctx.createBufferSource(); s.buffer = ctx.createBuffer(1, 1, ctx.sampleRate); s.connect(ctx.destination); s.start(0); } catch (e) { /* nothing to unlock */ } }
+// Back from another app, iPhones leave the context "interrupted" or "suspended" (resume() only works inside a tap, and
+// only the events that count as one: touchend, pointerup, click, keydown), or "running" with its clock stopped and no
+// sound. So on every such tap: resume and blip; if a tap 0.8 s or more later still finds it not running, or running
+// with the clock where it was, throw it away and build a new one (graph, clips and the crowd bed if it was on).
+let asked = 0, built = 0, seen = { t: -1, at: 0 };
+function revive() {
+  if (!init()) return; const now = Date.now();
+  if (ctx.state === "running") {
+    if (ctx.currentTime === seen.t && now - seen.at > 300 && now - built > 3000) rebuild(); else seen = { t: ctx.currentTime, at: now };
+    asked = 0;
+  } else if (asked && now - asked > 800 && now - built > 3000) rebuild();
+  else { asked = now; ctx.resume().catch(() => {}); blip(); }
+  decodeAll(); decodeReveal();
+}
+function rebuild() {
+  const old = ctx; ctx = null; bed = null; buffers = {}; started = {}; asked = 0; built = Date.now(); seen = { t: -1, at: 0 };
+  try { old.close().catch(() => {}); } catch (e) { /* already gone */ }
+  if (!init()) return;
+  ctx.resume().catch(() => {}); blip(); decodeAll(); decodeReveal();
+}
+// the master follows mute and the page being hidden: the context is never suspended by hand, since an iPhone will not
+// resume one that was, and this keeps the crowd quiet in the background on Android
+function level() { if (ctx) master.gain.setTargetAtTime(muted || document.hidden ? 0 : MIX.master, ctx.currentTime, 0.03); }
+function wake() { if (!ctx) return; if (!document.hidden && ctx.state !== "running") ctx.resume().catch(() => {}); level(); seen = { t: ctx.currentTime, at: Date.now() }; }
 // The rare card reveal's clips (Craig, 13 Oct; design/prototype/rare-reveal-v3.html): files in audio/reveal, never in
 // the page, fetched once home is up (core/boot.js) so they never slow the start. Until they are in, the reveal is silent.
 // The glass smash is Craig's one exception to the no glass rule, for the rare reveal only.
@@ -66,15 +92,10 @@ function loadReveal(base = "audio/reveal/") {
   if (revealAsked || typeof fetch !== "function" || (root.location && root.location.protocol === "file:")) return; revealAsked = true;
   REVEAL.forEach(k => fetch(base + k + ".mp3").then(r => (r.ok ? r.arrayBuffer() : null)).then(b => { if (b) { revealRaw[k] = b; decodeReveal(); } }).catch(() => {}));
 }
+// the raw files are kept (decoding takes a copy) so a rebuilt context can decode them again
 function decodeReveal() {
   if (!ctx) return;
-  Object.keys(revealRaw).forEach(k => {
-    const b = revealRaw[k]; delete revealRaw[k];
-    try {
-      const p = ctx.decodeAudioData(b, buf => { buffers["rv_" + k] = buf; }, () => {});
-      if (p && p.then) p.then(buf => { buffers["rv_" + k] = buf; }, () => {});
-    } catch (e) { /* that clip stays silent */ }
-  });
+  Object.keys(revealRaw).forEach(k => { if (started["rv_" + k]) return; started["rv_" + k] = 1; decode("rv_" + k, revealRaw[k].slice(0)); });
 }
 // one reveal clip: o.gain, o.rate, o.lp (a low-pass in Hz), o.fadeIn, and o.raw, which skips the top cut and goes
 // straight to the master (the glass, crowd and fireworks); the master volume and mute still apply. Returns { stop(fade) }.
@@ -91,11 +112,9 @@ function reveal(id, o = {}) {
   } catch (e) { return null; }
 }
 root.addEventListener("pointerdown", unlock, { capture: true, passive: true });
-root.addEventListener("keydown", unlock, { capture: true });
-document.addEventListener("visibilitychange", () => {
-  if (!ctx) return;
-  if (document.hidden) ctx.suspend().catch(() => {}); else if (!muted) ctx.resume().catch(() => {});
-});
+["touchend", "pointerup", "click", "keydown"].forEach(e => root.addEventListener(e, revive, { capture: true, passive: true }));
+document.addEventListener("visibilitychange", wake);
+root.addEventListener("pageshow", wake); root.addEventListener("focus", wake);
 
 /* ---------- building blocks ---------- */
 let QUIET = false;
@@ -148,8 +167,10 @@ function clip(d, id, t, o = {}) {
   return { stop(fade = 0.6) { const n = ctx.currentTime; g.gain.cancelScheduledValues(n); g.gain.setValueAtTime(g.gain.value, n); g.gain.linearRampToValueAtTime(0.0001, n + fade); try { src.stop(n + fade + 0.02); } catch (e) {} } };
 }
 function duck(t, dur = 1.6, depth = 0.35) { if (!bedBus) return; const g = bedBus.gain; g.cancelScheduledValues(t); g.setValueAtTime(g.value, t); g.linearRampToValueAtTime(MIX.bed * depth, t + 0.05); g.linearRampToValueAtTime(MIX.bed, t + dur); }
+// bedOn remembers that a match wants the bed, so it starts once the context and the loop are ready (or after a rebuild)
 function crowd(on) {
-  if (!ok() && on) return;
+  bedOn = !!on;
+  if (on && !ok()) return;
   if (on && !bed) bed = clip(bedBus, "crowd_loop", ctx.currentTime, { loop: true, fadeIn: 0.8, fixed: true });
   if (!on && bed) { bed.stop(0.8); bed = null; }
 }
@@ -251,9 +272,8 @@ function tease(landsIn = 2) {
   try { const dur = Math.min(2.4, Math.max(0.8, landsIn)), st = ctx.currentTime + landsIn - dur, q = O(0.7, 0.2); duck(st, dur + 0.4, 0.4); swell(soft(q, 1500), st, dur); } catch (e) {}
 }
 function setMuted(m) {
-  muted = !!m;
-  if (ctx) master.gain.setTargetAtTime(muted ? 0 : MIX.master, ctx.currentTime, 0.03);
-  if (muted) crowd(false);
+  muted = !!m; level();
+  if (muted) { if (bed) { bed.stop(0.8); bed = null; } } else if (bedOn && !bed) crowd(true);
 }
 root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlock, clipsLoaded: decodeAll, loadReveal, reveal };
 })(typeof window !== "undefined" ? window : globalThis);
