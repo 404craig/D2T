@@ -89,7 +89,7 @@
 
       const finish = (to) => {
         if (done) return; done = true;
-        D2T.whenReady(() => { D2T.go('home', { fromIntro: to || true }); setTimeout(() => D2T.loadClips && D2T.loadClips(), 1200); });   // the rest may still be arriving; the clips are read once home is up
+        D2T.whenReady(() => { D2T.go('home', { fromIntro: to || true }); setTimeout(() => D2T.loadClips && D2T.loadClips(), 1200); D2T.loadReveal && D2T.loadReveal(); });   // the rest may still be arriving; the clips are read once home is up
       };
       wrap.addEventListener('click', () => finish(null));
 

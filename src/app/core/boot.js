@@ -28,4 +28,10 @@
     try { window.D2T_SOUNDS = JSON.parse(el.textContent || '{}'); } catch (e) { window.D2T_SOUNDS = {}; }
     el.remove(); if (SND && SND.clipsLoaded) SND.clipsLoaded();
   };
+  // the rare reveal's clips are files (audio/reveal), fetched in the background a few seconds after home is up
+  let revealQueued = false;
+  D2T.loadReveal = () => {
+    if (revealQueued || !SND || !SND.loadReveal) return; revealQueued = true;
+    setTimeout(() => { if (window.requestIdleCallback) window.requestIdleCallback(() => SND.loadReveal(), { timeout: 4000 }); else SND.loadReveal(); }, 2500);
+  };
 })();
