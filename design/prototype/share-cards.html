@@ -55,6 +55,14 @@
   .img.has-dare .rise { top: 975px; }
   .img.has-dare .line { top: 1098px; font-size: 32px; }
 
+  /* Club X career: one box per season */
+  .img .seasons { position: absolute; left: 90px; right: 90px; top: 668px; height: 270px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .img .seasons div { background: #0E0E10; border: 3px solid var(--line); border-radius: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+  .img .seasons div.won { border-color: var(--c); background: color-mix(in srgb, var(--c) 10%, #0E0E10); }
+  .img .seasons i { font-style: normal; font: 800 32px/1 'Exo 2'; color: var(--muted); letter-spacing: .06em; }
+  .img .seasons b { font: 900 italic 104px/1 'Exo 2'; }
+  .img .seasons .won b { color: var(--c); }
+  .img .seasons small { font: 900 26px/1 'Exo 2'; letter-spacing: .12em; color: var(--c); }
   /* Goal Rush: the XI as a list of names and goals */
   .img .xi { position: absolute; left: 110px; right: 110px; top: 640px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 50px; text-align: left; }
   .img .xi div { display: flex; justify-content: space-between; font: 700 36px/1.1 'Exo 2'; color: var(--soft); border-bottom: 2px solid #1C1C21; padding-bottom: 10px; }
@@ -83,6 +91,7 @@
   <div class="notes">
     <div class="note"><b>THE CHALLENGE</b>Each game dares the reader to beat the number that matters: your Rise in Classic (their club is different), your finish in the Daily (same club for everyone today), their club's real finish in Dare2Dream, the title in Club X, the exact target in Goal Rush, your run in Unbeaten Run.</div>
     <div class="note"><b>THE MESSAGE</b>No banter line in the text any more (it stays on the image), no "History:" and "Mine:" labels: one sentence for what you did, one line for the number, one line to dare them, then the link.</div>
+    <div class="note"><b>CLUB X CAREERS</b>The card uses your club's name and counts your seasons. One season: what you did that season (champions, or your finish). Two or more: one box per season with its finish, titles in green, and the line "2 titles in 3 seasons"; from five seasons the boxes show the last five and the line adds the rest ("4 titles in 7 seasons"). A forecast season (after 2025/26) is marked Forecast. If you went down, the line ends with it: "Relegated in season 4, after 2 titles". The dare is to beat your titles.</div>
     <div class="note"><b>WHAT IS REAL</b>Burnley 2021/22 is your real result. The clubs' real finishes are checked against the results (Watford 20th in 1999/00, Everton 4th in 2004/05, Bradford 20th in 2000/01) and the Goal Rush goals are each player's real career total. The other results are made up to show the layout.</div>
   </div>
 </div>
@@ -106,9 +115,14 @@
     { k: 'DARE2DREAM', h: 'Dare2Dream', img: frame({ c: '#3BA4FF', tag: 'Dare2Dream', dare: 'Draft 11. Beat their real finish',
         body: club(CR('everton'), 'Everton', '2004/05 · drafted from nothing') + duo('THEY FINISHED', '4th', '61 pts', 'I FINISHED', '2nd', '79 pts', '#3BA4FF') + '<div class="rise">DREAM ACHIEVED</div>' }),
       msg: `DROP2TOP Dare2Dream\nI drafted Everton 2004/05 from nothing and finished 2nd. They really finished 4th.\nDream achieved.\nPick any club and beat their real finish.\n<a>${URL}</a>` },
-    { k: 'CLUB X', h: 'Club X', img: frame({ c: '#12F06C', tag: 'Club X', dare: 'From nowhere to champions. Your go',
-        body: `<img class="ghost" src="assets/brand/club_x.png" alt=""><img class="crest" src="assets/brand/club_x.png" alt=""><div class="club">Club X</div><div class="season">2000/01 · in Bradford's place</div>` + duo('BRADFORD FINISHED', '20th', '26 pts', 'CLUB X FINISHED', '1st', '84 pts', '#12F06C') + '<div class="rise">CHAMPIONS</div>' }),
-      msg: `DROP2TOP Club X\nI replaced Bradford in 2000/01 and won the league with 84 pts.\nFrom nowhere to champions.\nYour turn.\n<a>${URL}</a>` },
+    { k: 'CLUB X', h: 'Club X, one season', img: frame({ c: '#12F06C', tag: 'Club X', dare: 'From nowhere to champions. Your go',
+        body: `<img class="ghost" src="assets/brand/club_x.png" alt=""><img class="crest" src="assets/brand/club_x.png" alt=""><div class="club">Kilsyth Athletic</div><div class="season">2000/01 · in Bradford's place</div>` + duo('BRADFORD FINISHED', '20th', '26 pts', 'WE FINISHED', '1st', '84 pts', '#12F06C') + '<div class="rise">CHAMPIONS</div>' }),
+      msg: `DROP2TOP Club X\nI built Kilsyth Athletic from nothing, put them in Bradford's place in 2000/01 and won the league.\nFrom nowhere to champions.\nYour turn.\n<a>${URL}</a>` },
+    { k: 'CLUB X', h: 'Club X, a career', img: frame({ c: '#12F06C', tag: 'Club X · Season 3', dare: 'Build a dynasty. Beat 2 titles',
+        body: `<img class="ghost" src="assets/brand/club_x.png" alt=""><img class="crest" src="assets/brand/club_x.png" alt=""><div class="club">Kilsyth Athletic</div><div class="season">Career from 2000/01 · in Bradford's place</div>
+          <div class="seasons">${[['2000/01', '1st', 1], ['2001/02', '4th', 0], ['2002/03', '1st', 1]].map(([s, f, w]) => `<div class="${w ? 'won' : ''}"><i>${s}</i><b>${f}</b>${w ? '<small>CHAMPIONS</small>' : '<small>&nbsp;</small>'}</div>`).join('')}</div>
+          <div class="rise" style="font-size:84px;top:990px">2 TITLES IN 3 SEASONS</div>` }),
+      msg: `DROP2TOP Club X · Career\nKilsyth Athletic: 3 seasons, 2 titles.\n2000/01 1st · 2001/02 4th · 2002/03 1st\nStarted in Bradford's place. Can you build a dynasty?\n<a>${URL}</a>` },
     { k: 'GOAL RUSH', h: 'Goal Rush', img: frame({ c: '#FFD21F', t: '#FFE375', tag: 'Goal Rush · 4-4-2', dare: 'Hit 442 exactly',
         ghost: '<img class="ghost" src="assets/brand/goal_rush.png" alt="">',
         body: `<div class="total"><b>453<em> / 442</em></b><span>11 OVER THE TARGET</span></div><div class="xi">${[['Seaman', 0], ['Beckham', 62], ['G. Neville', 5], ['Keane', 39], ['Terry', 41], ['Butt', 29], ['Ferdinand', 11], ['Barry', 53], ['A. Cole', 15], ['Phillips', 92], ['', ''], ['Bent', 106]].map(([n, g]) => n ? `<div>${n}<b>${g}</b></div>` : '<div style="border:0"></div>').join('')}</div>` }),
