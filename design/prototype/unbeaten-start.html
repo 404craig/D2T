@@ -81,6 +81,9 @@
   @keyframes turn { to { transform: rotate(360deg); } }
   .circ { width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--line); background: var(--ink); display: grid; place-items: center; flex: none; color: #fff; cursor: pointer; }
   .circ svg { width: 22px; height: 22px; }
+  /* the respin button as in the other games, greyed: Unbeaten Run has no respins, it is there to keep New run centred */
+  .circ.off { opacity: .3; cursor: default; }
+  .circ.off svg { width: 24px; height: 24px; }
   @media (prefers-reduced-motion: reduce) { .bests, .reel, .win.hit::before, .main.spin .emb { transition: none; animation: none; } }
 </style>
 </head>
@@ -88,7 +91,7 @@
 <div class="page">
   <div class="head">
     <h1>Unbeaten Run start page</h1>
-    <p>Higher or lower as the title, the subtitle saying how it plays, your best run for each stat in the home page's card outline with a cyan rim, centred on the page. No stat window until you tap New run: then the best runs step back and the stat reel comes in, centred both ways, spins and lands on this run's stat. Tap New run to try it; home puts it back.</p>
+    <p>Higher or lower as the title, the subtitle saying how it plays, your best run for each stat in the home page's card outline with a cyan rim, centred on the page. No stat window until you tap New run: then the best runs step back and the stat reel comes in, centred both ways, spins and lands on this run's stat. Tap New run to try it; home puts it back. The respin button sits greyed on the left, as in the other games, so New run stays centred.</p>
   </div>
   <div class="row" id="phones"></div>
 </div>
@@ -96,6 +99,7 @@
 (function () {
   const ACCT = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.6-3.6 4.6-5.2 8-5.2s6.4 1.6 8 5.2"/></svg>';
   const HOME = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></svg>';
+  const REFRESH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
   const MARK = '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="50" r="44"/><path d="M30 42 L50 22 L70 42"/><path d="M30 58 L50 78 L70 58"/></svg>';
   // the home page record outline (home.js FRAME): chamfered top corners, shallow point at the bottom
   const FRAME = '<svg viewBox="0 0 100 128" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,11 11,1 89,1 99,11 99,108 50,127 1,108" stroke-linejoin="round"/></svg>';
@@ -110,7 +114,7 @@
       <div class="bests"><div class="bests-h">YOUR BEST RUNS</div><div class="grid">${STATS.map(([n, b]) => `<div class="fr${b ? '' : ' none'}">${FRAME}<b>${b || '-'}</b><span>${n}</span></div>`).join('')}</div></div>
       <div class="reel"><small>THIS RUN IS ABOUT</small><div class="win"><div class="strip"></div></div><p></p></div>
     </div>
-    <div class="bar"><button class="main"><span class="emb"></span><span class="lbl">New run</span></button><button class="circ" aria-label="Home">${HOME}</button></div></div>
+    <div class="bar"><button class="circ off" disabled aria-hidden="true" tabindex="-1">${REFRESH}</button><button class="main"><span class="emb"></span><span class="lbl">New run</span></button><button class="circ" aria-label="Home">${HOME}</button></div></div>
     <div class="cap">${label}</div></div>`;
   document.getElementById('phones').innerHTML = phone('', 393, 852, 'IPHONE 15 · 393 X 852') + phone('small', 375, 667, 'SMALL PHONE · 375 X 667');
 
@@ -137,7 +141,7 @@
       };
       requestAnimationFrame(step);
     };
-    ph.querySelector('.circ').onclick = reset;
+    ph.querySelector('.circ:not(.off)').onclick = reset;
   });
 })();
 </script>
