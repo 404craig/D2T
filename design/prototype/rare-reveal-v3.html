@@ -112,7 +112,7 @@
     <h1>Purple and legend cards: the reveal, v3</h1>
     <p>A mock-up of the roll with the live cards. Pick where the rare card lands and whether it is purple or a legend, then hit Spin on the phone. The cards are real 2003/04 cards from the game: Thierry Henry (legend, 99) and Frank Lampard (purple, 93), with real bronze, silver and gold cards in the other slots.</p>
   </div>
-  <div class="ctl"><button id="snd" class="on">Sound on</button><span style="margin-left:6px">GLASS SOUND</span><button class="on" data-d="full">As recorded</button><button data-d="bit">A little duller</button><button data-d="more">Duller</button><button id="hear">Hear it</button>
+  <div class="ctl"><button id="snd" class="on">Sound on</button><span style="margin-left:6px">GLASS SOUND</span><button data-d="full">As recorded</button><button data-d="bit">A little duller</button><button class="on" data-d="more">Duller (picked)</button><button id="hear">Hear it</button>
   </div><div class="ctl"><span style="margin-left:6px">RARE CARD</span><button class="on" data-lv="legend">Legend</button><button data-lv="baller">Purple</button>
     <span style="margin-left:14px">IN SLOT</span><button data-s="0">1</button><button class="on" data-s="1">2</button><button data-s="2">3</button></div>
   <div class="wrap">
@@ -285,8 +285,8 @@
       for (let i = 0; i < 50; i++) { const at = .05 + 1.3 * Math.pow(Math.random(), 1.2); hit(nb, o, t + at, .05 + Math.random() * .1, (.15 + Math.random() * .18) * (1 - at / 1.6), 2000 + Math.random() * 3500, 2); } } }
   };
   // Craig's glass smash (ElevenLabs, 13 Oct), played as it is or dulled a little: a top cut and a touch quieter
-  const DULL = { full: [20000, .5], bit: [5200, .43], more: [3000, .38] };   // about half v3's level
-  let dull = 'full';
+  const DULL = { full: [20000, .32], bit: [5200, .28], more: [3000, .25] };   // quieter again; Duller is the pick
+  let dull = 'more';
   const smash = () => { if (!soundOn || !AC || !BUF.glass_smash) return; const [hz, g] = DULL[dull];
     const s = AC.createBufferSource(), lp = AC.createBiquadFilter(), v = AC.createGain(); s.buffer = BUF.glass_smash; lp.type = 'lowpass'; lp.frequency.value = hz; v.gain.value = g;
     s.connect(lp); lp.connect(v); v.connect(AC.destination); s.start(); };
