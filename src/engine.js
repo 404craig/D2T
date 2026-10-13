@@ -46,13 +46,19 @@ const RULES = {
   januaryRolls: 3,
   rollEvery: 3,
   minApps: 10,
-  levelOdds: [0.53, 0.32, 0.125, 0.02, 0.005], // bronze silver gold purple (season's top 5) legend (top 3 of every season); greedy runs win the title 2.3% across all 103 club-seasons (tests/calibrate-all.js)
+  // bronze silver gold purple (season's top 5) legend (top 3 of every season). Nudged on 13 Oct with the match refit so the
+  // balance held: greedy runs across every relegated club-season (tests/calibrate-all.js 12) win the title 1.2%, finish top 4
+  // 12.5%, top half 63.7%, stay up 93.7%, 53 pts (before: 1.8%, 11.2%, 61.7%, 93.9%, 53).
+  levelOdds: [0.52, 0.32, 0.13, 0.025, 0.005],
   // green: his main position 100%, his other preferred positions 95% (alt); amber next to one of them; red elsewhere.
   fit: { green: 1, alt: 0.95, amber: 0.9, red: 0.7 },
   raidFactor: 3,           // chance a raided club's win/draw is downgraded = factor x strength lost
   raidCap: 0.6,
   raidBaseline: 60,        // strength lost is measured as a share of strength above this
-  match: { base: 1.449, att: 0.0402, mid: 0.007, home: 0.213, away: -0.092, cap: 6 }   // fitted to every PL result (tests/fit-match.js)
+  // Fitted to every PL result (tests/fit-match.js, 13 Oct: a converged fit; the old numbers gave 3.4 goals a game against 2.7
+  // real and twice the real share of 5-goal margins). On real fixtures the model gives 2.70 goals a game, 23.7% draws and 2.2%
+  // of matches won by 5 or more (real: 2.69, 25.6%, 2.0%).
+  match: { base: 1.23, att: 0.0381, mid: 0.0079, home: 0.138, away: -0.138, cap: 6 }
 };
 const LEVELS = ["bronze", "silver", "gold", "purple", "legend"];
 

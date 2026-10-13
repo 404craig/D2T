@@ -414,6 +414,8 @@ fs.mkdirSync(OUT, { recursive: true });
   // as many goes as you like (Craig, 13 Oct): Go again starts a fresh go, and the day's best go stays recorded
   await page.click('[data-act="again"]'); await expectScreen("table"); await wait(600);
   check(await page.evaluate(() => { const G = window.D2T.game, r = window.D2T.state.run; return !!G.dailyResult() && r.daily === G.today() && !r.recorded && G.eng().phase !== "summary"; }), "Go again did not start a fresh go at today's Daily");
+  // every go has a seed of its own (go 1 daily-<date>, go 2 daily-<date>#2), so the second go never replays the first
+  check(await page.evaluate(() => { const G = window.D2T.game, r = window.D2T.state.run, t = G.today(); return r.go === 2 && r.eng.seed === G.dailySeed(t, 2) && r.eng.seed === "daily-" + t + "#2" && window.D2T.state.dailyGoes[t] === 2; }), "the second go of the Daily did not get its own seed");
   await page.evaluate(() => window.D2T.go("home")); await expectScreen("home"); await wait(800);
   check(/Your best today/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not show today's best go");
   check(/TODAY'S DAILY/.test(await page.textContent(".fr-dtiles")) && (await page.$$(".fr-dtile")).length === 2, "home has no best and today tiles under the daily card");
