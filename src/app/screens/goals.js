@@ -609,14 +609,26 @@
         const rec = (result && result.rec) || G4.record(), gap = Math.abs(t - TARGET);
         const head = gap === 0 ? `Exactly ${TARGET}` : t < TARGET ? `${gap} short of ${TARGET}` : `${gap} over ${TARGET}`;
         const best = result && result.newBest && rec.games > 1 ? 'A new best.' : rec.best != null ? `Your best: ${rec.best === 0 ? 'exactly on target' : rec.best + ' away'}${rec.bestTarget ? ` (${rec.bestTotal}/${rec.bestTarget})` : ''}.` : '';
-        const text = `DROP2TOP Goal Rush (${shapeText(FORM)})\nMy XI: ${t}/${TARGET} goals (${gapText(t)})\n${S.filled.map((p) => `${p.sur} ${p.goals}`).join(', ')}\nCan you beat it? 404craig.github.io/D2T`;
+        // the share card (Craig, 13 Oct): the total big over the target, how far off, the XI and their goals, the dare
+        const shape = shapeText(FORM), xi = S.filled.slice().sort((a, b) => a.slot - b.slot);
+        const how = gap === 0 ? 'BANG ON' : t > TARGET ? `${gap} OVER THE TARGET` : `${gap} SHORT`;
+        const text = gap === 0 ? `DROP2TOP Goal Rush · ${shape}\nMy XI scored ${t} Premier League goals: hit ${TARGET} exactly. Bang on.\nCan you do it?\n${D2T.share.LINK}`
+          : `DROP2TOP Goal Rush · ${shape}\nMy XI scored ${t} Premier League goals. The target was ${TARGET}: ${gap} ${t > TARGET ? 'over' : 'short'}.\nCan you hit it exactly?\n${D2T.share.LINK}`;
+        const card = D2T.share.build({ text, c: '#FFD21F', tag: `Goal Rush · ${shape}`, dare: `Hit ${TARGET} exactly`, ghost: window.D2T_GOALRUSH_LOGO,
+          draw: (g, im, k) => {
+            g.font = "italic 900 220px 'Exo 2', sans-serif"; const w1 = g.measureText(String(t)).width; g.font = "italic 900 110px 'Exo 2', sans-serif"; const w2 = g.measureText(' / ' + TARGET).width;
+            const x0 = (k.W - w1 - w2) / 2; k.fit(String(t), x0, 330, 900, 900, 220, true, '#FFFFFF', 'left'); k.fit(' / ' + TARGET, x0 + w1, 420, 600, 900, 110, true, '#8E8E99', 'left');
+            k.fit(how, k.W / 2, 562, 960, 800, 46, false, '#FFE375');
+            xi.forEach((p, i) => {
+              const col = i % 2, row = Math.floor(i / 2), x = col ? 590 : 110, y = 650 + row * 72;
+              k.fit(p.sur, x, y, 280, 700, 36, false, '#BDBDC6', 'left'); k.fit(String(p.goals), x + 380, y, 120, 900, 38, true, '#FFFFFF', 'right');
+              g.fillStyle = '#1C1C21'; g.fillRect(x, y + 50, 380, 2);
+            });
+          } });
         const sh = D2T.sheet({ title: head, body: `<p class="fr-lead">Your XI scored <b>${t}</b> Premier League goals. ${best}${rec.exact ? ` Bang on target: ${rec.exact} ${rec.exact === 1 ? 'time' : 'times'}.` : ''}</p>
           <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="share">Share with your mates</button><button class="btn g4-again fr-btn-wide" data-k="again">Play again</button></div>` });
         sh.body.querySelector('[data-k="again"]').onclick = () => { sh.close(); newGame(); };
-        sh.body.querySelector('[data-k="share"]').onclick = async () => {
-          try { if (navigator.share) { await navigator.share({ text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
-          try { await navigator.clipboard.writeText(text); sh.body.querySelector('.fr-lead').textContent = 'Copied. Paste it into the group chat.'; } catch (e) { /* nothing to copy to */ }
-        };
+        sh.body.querySelector('[data-k="share"]').onclick = () => D2T.share.send(card);
       }
       function newGame() { S = D2T.state.g433 = fresh(); setShape(S.formation); save(); sel = null; busy = false; wrap.querySelector('.g4-track').classList.remove('glow'); render(); reveal(); }
 

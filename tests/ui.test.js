@@ -16,6 +16,13 @@ fs.mkdirSync(OUT, { recursive: true });
   page.on("console", (m) => { if (m.type() === "error" && !/fonts\.g|ERR_NAME|net::/.test(m.text())) errors.push("console: " + m.text()); });
   page.on("dialog", (d) => { errors.push("native dialog used: " + d.message()); d.dismiss(); });
   const shot = (n) => page.screenshot({ path: path.join(OUT, n + ".png") });
+  // every game's share card (Craig, 13 Oct): built ahead, its message starts as it should and ends with the link
+  const card = async (name, starts) => {
+    await page.waitForFunction(() => window.D2T.share && window.D2T.share.last && window.D2T.share.last.done, null, { timeout: 8000 }).catch(() => {});
+    const r = await page.evaluate(() => { const l = window.D2T.share.last; return { text: l.text, png: l.canvas ? l.canvas.toDataURL("image/png") : "", file: !!l.file }; });
+    check(r.file && r.text.startsWith(starts) && r.text.trim().endsWith("404craig.github.io/D2T"), `the ${name} share card is missing or its message is wrong: ${JSON.stringify(r.text)}`);
+    if (process.env.SHARE_DIR && r.png) fs.writeFileSync(path.join(process.env.SHARE_DIR, name + ".png"), Buffer.from(r.png.split(",")[1], "base64"));
+  };
   const wait = (ms) => page.waitForTimeout(ms);
   const screen = () => page.evaluate(() => window.D2T.currentScreen());
   const expectScreen = async (name, ms = 6000) => {
@@ -173,6 +180,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.evaluate(() => window.D2T.go("summary"));
   await expectScreen("summary");
   await wait(1600); await shot("16-summary"); await smallButtons("summary");
+  await card("classic", "DROP2TOP\nI took ");
   await page.evaluate(() => document.querySelector(".screen-body").scrollTo(0, 99999)); await wait(400); await shot("17-summary-bottom");
   const scored = await page.evaluate(() => window.D2T.game.eng().played.some((r) => r.us > 0));
   check(!scored || (await page.$$eval(".sm-award span", (els) => els.some((e) => /Top scorer/.test(e.textContent)))), "no top scorer award although the club scored");
@@ -266,6 +274,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.evaluate(() => { const G = window.D2T.game; for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(1200); await shot("32-d2d-summary");
   check(/Dream achieved|Fell short/.test(await page.textContent(".sm-head")), "Dare2Dream summary has no dream result");
+  await card("dare2dream", "DROP2TOP Dare2Dream\n");
   check(await page.evaluate(() => window.D2T.game.dreamRecord().runs === 1), "Dare2Dream run not recorded");
   check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, classicBefore), "Dare2Dream run changed Classic's record");
 
@@ -299,6 +308,7 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => { const G = window.D2T.game, i = G.draftInfo(); return i.open && G.rollCards().length === 3 && G.rollCards().every((c) => G.draftFits(c.id).length > 0); }), "Club X draft should serve three cards for its open shirts");
   await page.evaluate(() => { const G = window.D2T.game; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(1200); await shot("35-clx-summary");
+  await card("clubx", "DROP2TOP Club X\n");
   check(/Champions|Fell short/.test(await page.textContent(".sm-head")), "Club X summary has no result");
   check(await page.evaluate(() => window.D2T.game.xRecord().runs === 1), "Club X run not recorded");
   check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, classicBefore), "Club X run changed Classic's record");
@@ -336,6 +346,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.click('.sheet [data-k="keep"]'); await wait(500);
   await page.evaluate(() => { const G = window.D2T.game; window.D2T.state.run.tableSeen = true; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(900); await shot("40-daily-summary");
+  await card("daily", "DROP2TOP Daily #");
   check(await page.evaluate(() => !!window.D2T.game.dailyResult()), "the daily result was not recorded");
   check(!!(await page.$(".sm-daily .sm-dv")) && !!(await page.$('.actionbar [data-act="share"]')), "the daily summary has no today-against-best panel or Share button");
   // as many goes as you like (Craig, 13 Oct): Go again starts a fresh go, and the day's best go stays recorded
@@ -394,6 +405,7 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => { const n = {}, N = 14000; for (let i = 0; i < N; i++) { const f = window.D2T.game.g433.pickFormation(); n[f] = (n[f] || 0) + 1; } const back5 = (n["532"] + n["541"]) / 2, rest = ["442", "433", "451", "352", "343", "424"].reduce((t, f) => t + n[f], 0) / 6; return Object.keys(n).length === 8 && back5 / rest > 0.4 && back5 / rest < 0.6; }), "Goal Rush: 5-3-2 and 5-4-1 do not come up about half as often");
   // the sheet opens only after the ending (longer when the total breaks through the target), so wait for it
   await page.waitForSelector(".sheet", { timeout: 15000 }).catch(() => {}); await wait(400); await shot("51-goalrush-end");
+  await card("goalrush", "DROP2TOP Goal Rush · ");
   check(await page.evaluate(() => window.D2T.state.g433.filled.length === 11 && window.D2T.game.g433.record().games === 1), "Goal Rush: the game did not fill 11 shirts and record a result");
   check(await page.evaluate((f) => window.D2T.game.g433.record().lastTarget === +f, form), "Goal Rush: the result was not recorded against this game's target");
   check(await page.evaluate(() => window.D2T.state.g433.filled.every((p) => window.D2T.state.g433.filled.filter((q) => q.name === p.name).length === 1)), "Goal Rush: the same player appeared twice");
@@ -466,6 +478,7 @@ fs.mkdirSync(OUT, { recursive: true });
       await page.click('[data-act="unbeaten"]'); await expectScreen("unbeaten"); await wait(700);
     } else {
       check(!!(await page.$(".sheet")) && /Beaten first time/i.test(await page.textContent(".sheet")), "Unbeaten Run (" + st + "): no end sheet after a wrong answer");
+      await card("unbeaten", "DROP2TOP Unbeaten Run · ");
       check(/New run/.test(await page.textContent('.sheet [data-k="again"]')), "Unbeaten Run (" + st + "): the end sheet's second button does not say New run");
       check(await page.evaluate((n) => ((window.D2T.state.ub || {}).runs || 0) === n + 1, runsBefore), "Unbeaten Run (" + st + "): a finished run was not recorded");
       await shot("54-unbeaten-end");

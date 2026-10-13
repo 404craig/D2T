@@ -428,14 +428,19 @@
           const head = cleared ? 'The whole deck, unbeaten' : n === 0 ? 'Beaten first time' : `Unbeaten in ${n}`;
           const lead = cleared ? 'You got through every card in this deck.' : `<b>${D2T.esc(nm(b))}</b> had <b>${s.val(b)}</b>, <b>${D2T.esc(nm(a))}</b> had <b>${s.val(a)}</b>.`;
           const best = newBest ? ' A new best.' : prev ? ` Your best on ${s.big.toLowerCase()}: ${prev}.` : '';
-          const text = `DROP2TOP Unbeaten Run\n${s.big} (Premier League): unbeaten in ${n}${newBest ? ', a new best' : ''}`;
+          // the share card (Craig, 13 Oct): the run huge in cyan, the stat, the dare
+          const text = `DROP2TOP Unbeaten Run · ${s.big}\nI went unbeaten in ${n} call${n === 1 ? '' : 's'} of higher or lower.${newBest ? '\nA new best.' : ''}\nCan you go longer?\n${D2T.share.LINK}`;
+          const ring = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="#22D3EE" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="50" r="44"/><path d="M30 42 L50 22 L70 42"/><path d="M30 58 L50 78 L70 58"/></svg>';
+          const card = D2T.share.build({ text, c: '#22D3EE', tag: 'Unbeaten Run', dare: `Go longer than ${n}`, ghost: D2T.share.svgSrc(ring), ghostAlpha: 0.12,
+            draw: (g, im, k) => {
+              g.save(); g.shadowColor = 'rgba(34,211,238,.45)'; g.shadowBlur = 80; k.fit(String(n), k.W / 2, 330, 980, 900, 420, true, '#22D3EE'); g.restore();
+              k.fit(s.big.toUpperCase(), k.W / 2, 730, 960, 900, 64, true, '#FFFFFF');
+              k.wrap(`Unbeaten in ${n} call${n === 1 ? '' : 's'} of higher or lower, real Premier League numbers.`, k.W / 2, 830, 820, 600, 40, '#BDBDC6', 52);
+            } });
           const sh = D2T.sheet({ title: head, body: `<div class="ub-endbig"><b>${n}</b><span>Unbeaten${newBest ? ' · a new best' : ''}</span></div><p class="fr-lead">${lead}${best}</p>
             <div class="fr-stack"><button class="btn ub-again fr-btn-wide" data-k="share">Share with your mates</button><button class="btn btn-ghost fr-btn-wide ub-newrun" data-k="again">New run</button></div>`, onClose: () => { if (root.isConnected && run) idle(); } });
           sh.body.querySelector('[data-k="again"]').onclick = () => { sh.close(); idle(); later(statSpin, 250); };
-          sh.body.querySelector('[data-k="share"]').onclick = async () => {
-            try { if (navigator.share) { await navigator.share({ text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
-            try { await navigator.clipboard.writeText(text); sh.body.querySelector('.fr-lead').textContent = 'Copied. Paste it into the group chat.'; } catch (e) { /* nothing to copy to */ }
-          };
+          sh.body.querySelector('[data-k="share"]').onclick = () => D2T.share.send(card);
         };
         if (newBest && !reduced) later(show, 2500); else show();
       }
