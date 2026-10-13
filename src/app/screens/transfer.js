@@ -115,7 +115,7 @@
       root.appendChild(body);
       const fx = GAME.fixture(info.gw), opp = fx ? D2T.esc(fx.opp) + (fx.ha === 'H' ? ' (H)' : ' (A)') : '';
       const reduced = D2T.reduced();
-      let alive = true, placing = false, signing = false, field = null, slotsEl = null, ratingEl = null, timers = [];
+      let alive = true, placing = false, leaving = false, signing = false, field = null, slotsEl = null, ratingEl = null, timers = [];
       kill = () => { alive = false; timers.forEach(clearTimeout); endDrag(true); };
 
       // ---------- the pitch above the tray ----------
@@ -181,7 +181,7 @@
       }
       function leavePlacing() {
         if (!placing) return Promise.resolve();
-        placing = false; api.clear();
+        placing = false; leaving = true; api.clear();
         if (reduced) { api.el.classList.remove('is-placing'); return Promise.resolve(); }
         return new Promise((res) => {
           field.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: 'ease-in', fill: 'forwards' }).onfinish = () => {
@@ -214,6 +214,9 @@
       }
 
       // ---------- drag a card from the tray onto a shirt ----------
+      // A press on a card is remembered from the moment the finger goes down, even while the reels are still landing
+      // (a keen player grabs the left card before the right one stops, or the instant the last one lands, before the
+      // tray has dropped): the drag starts, and the tray comes up, as soon as the roll has settled.
       let drag = null, ghost = null, target = null, suppress = -1;
       const host = document.getElementById('app');
       function endDrag(cancel) {
@@ -222,7 +225,8 @@
         if (cancel) drag = null;
       }
       const onDown = (e) => {
-        if (!placing || signing || e.button) return;
+        suppress = -1;   // a new press: any click that follows belongs to it
+        if (signing || e.button || !api) return;
         const s = e.target.closest('.sp-slot'); if (!s || !api.el.contains(s)) return;
         drag = { i: api.slots.indexOf(s), x0: e.clientX, y0: e.clientY, pid: e.pointerId, moved: false };
       };
@@ -230,6 +234,8 @@
         if (!drag || e.pointerId !== drag.pid) return;
         if (!drag.moved) {
           if (Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 8) return;
+          if (!api.settled() || leaving || signing) return;
+          if (!placing) enterPlacing(true);
           drag.moved = true;
           if (api.selected() !== drag.i) api.select(drag.i);
           const p = api.results()[drag.i];
@@ -257,7 +263,7 @@
       window.addEventListener('pointerup', onUp);
       window.addEventListener('pointercancel', () => { drag = null; endDrag(false); });
       root.addEventListener('pointerdown', onDown);
-      // a drag is not a tap: swallow the click that follows it
+      // a drag is not a tap: swallow the click that follows it (a touch drag has none, so the next press clears it)
       root.addEventListener('click', (e) => { if (suppress >= 0 && e.target.closest('.sp-slot')) { e.stopPropagation(); e.preventDefault(); } suppress = -1; }, true);
       const blockTouch = (e) => { if (drag && drag.moved && e.cancelable) e.preventDefault(); };
       window.addEventListener('touchmove', blockTouch, { passive: false });
@@ -266,14 +272,14 @@
 
       const build = () => {
         api = D2T.roll.mount(body, {
-          kicker: draft ? `Dare2Dream draft · Shirt ${info.step} of ${info.of}` : `${info.name} · Roll ${info.step} of ${info.of}`,
+          kicker: draft ? `${GAME.modeName()} draft · Shirt ${info.step} of ${info.of}` : `${info.name} · Roll ${info.step} of ${info.of}`,
           title: draft ? `Pick your ${ROLE[di.broad]}` : 'Who comes in?',
           sub: draft ? `Three ${ROLES[di.broad]} from ${run.season} for your ${di.pos} shirt. No respins in the draft.` : `Roll ${info.overall} of ${info.total} this season${fx ? `, before GW${info.gw} against ${opp}` : ''}. Sign one or pass.`,
           pool: fillerCards(),
           render: (p, w) => D2T.cards.player(p, { w }),
           pick: () => { SND.play('roll3'); return GAME.rollCards(); },
           settled: st.spun === rollKey ? GAME.rollCards() : null,
-          onSettled: () => { st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); timers.push(setTimeout(() => enterPlacing(true), reduced ? 0 : 450)); },
+          onSettled: () => { leaving = false; st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); timers.push(setTimeout(() => enterPlacing(true), reduced ? 0 : 450)); },
           accent: LV_ACCENT,
           caption: (p) => `${p.main || p.pos} · ${lvName(p).toUpperCase()}`,
           details: (p) => D2T.cards.info(p, LV_ACCENT(p).accent),

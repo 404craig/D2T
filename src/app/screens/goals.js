@@ -98,7 +98,7 @@
       if (k.crest && cs === 'disc') over = `<circle cx="50" cy="61" r="17" fill="#F4F4F6" stroke="${k.trim}" stroke-width="1.6"/><image href="${k.crestLight}" x="38" y="49" width="24" height="24" preserveAspectRatio="xMidYMid meet"/>`;
     } else {
       const g = String(p.goals);
-      mid = `<text class="gnum" x="50" y="65" font-size="30"${g.length > 2 ? ' textLength="46" lengthAdjust="spacingAndGlyphs"' : ''}${st}>${g}</text>`;
+      mid = `<text class="gnum" x="50" y="65" font-size="36"${g.length > 2 ? ' textLength="55" lengthAdjust="spacingAndGlyphs"' : ''}${st}>${g}</text>`;
       if (k.crest) disc = `<span class="plate" style="--d:${Math.round(w * 0.4)}px"><img src="${k.crestLight}" alt=""></span>`;
     }
     const fill = k.pat ? `url(#g4p-${k.id})` : k.fill;
@@ -165,9 +165,11 @@
         const started = S.filled.length > 0 || !!S.cands, over = !openSlots().length;
         if (!started || over) { D2T.go('home'); return; }
         const n = S.filled.length;
-        const sh = D2T.sheet({ title: 'Leave the game?', body: `<p class="fr-lead">${n ? `${n} of 11 picked, ${total()} goals so far.` : 'Three players are waiting.'} Home keeps this game for later. Quit throws it away and nothing is recorded.</p>
-          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="home">Home, save the game</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the game</button></div>` });
+        const sh = D2T.sheet({ title: 'Leave the game?', body: `<p class="fr-lead">${n ? `${n} of 11 picked, ${total()} goals so far.` : 'Three players are waiting.'} Restart throws it away and starts a new game. Home keeps it for later. Quit throws it away. Nothing is recorded.</p>
+          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="restart">Restart the game</button><button class="btn btn-ghost fr-btn-wide" data-k="home">Home, save the game</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the game</button></div>` });
         sh.body.querySelector('[data-k="keep"]').onclick = sh.close;
+        // restart (Craig, 12 Oct): wipe this game and start again from the beginning, a new formation and its reveal
+        sh.body.querySelector('[data-k="restart"]').onclick = () => { sh.close(); rafs.forEach(cancelAnimationFrame); rafs = []; main.classList.remove('is-spinning'); document.querySelectorAll('.g4-ghost').forEach((g) => g.remove()); newGame(); };
         sh.body.querySelector('[data-k="home"]').onclick = () => { sh.close(); D2T.go('home'); };
         sh.body.querySelector('[data-k="quit"]').onclick = () => { sh.close(); D2T.state.g433 = null; D2T.save(); D2T.go('home'); };
       };
@@ -179,7 +181,7 @@
       // a shirt, its crest disc and its name must fit the tightest gap between two lines (defence to keeper, about 20% of the
       // pitch), so short phones get smaller shirts rather than overlapping ones
       // shirts grow with the pitch (taller since the club names under the reels went, Craig, 12 Oct), bounded so a line of five still has room
-      const sizePitch = () => { const ph = pitchEl.clientHeight || 358, pw = pitchEl.clientWidth || 366; PW = Math.round(Math.max(30, Math.min(62, pw * 0.19 - 8, (ph * 0.205 - 16) / 1.19))); };
+      const sizePitch = () => { const ph = pitchEl.clientHeight || 358, pw = pitchEl.clientWidth || 366; PW = Math.round(1.1 * Math.max(30, Math.min(62, pw * 0.19 - 8, (ph * 0.205 - 16) / 1.19))); };
 
       const slotOf = (i) => S.filled.find((p) => p.slot === i);
       const openSlots = () => SLOTS.map((_, i) => i).filter((i) => !slotOf(i));
@@ -202,8 +204,48 @@
           const n = count[SLOTS[+nm.parentElement.dataset.slot][1]];
           if (n < 2) return;
           const room = pw * Math.min(25, 76 / (n - 1)) / 100 - 6;
-          const w = nm.scrollWidth; if (w > room) nm.style.fontSize = Math.max(6.5, 9.5 * room / w).toFixed(1) + 'px';   // one read, one write
+          const w = nm.scrollWidth; if (w > room) nm.style.fontSize = Math.max(7.2, 10.45 * room / w).toFixed(1) + 'px';   // one read, one write
         });
+        // names still too long at the smallest size (ALEXANDER-ARNOLD beside VAN AANHOLT in a back five) ease apart along
+        // their line, sharing out the room between them and never past the pitch's edge, so two name tags never touch
+        const lines = {}, GAP = 3;
+        pitchEl.querySelectorAll('.slotp .nm').forEach((nm) => { nm.style.transform = ''; const s = SLOTS[+nm.parentElement.dataset.slot]; (lines[s[1]] = lines[s[1]] || []).push(nm); });
+        const pr = pitchEl.getBoundingClientRect(), lo = pr.left + 2, hi = pr.right - 2, moves = [];
+        Object.values(lines).forEach((L) => {
+          if (L.length < 4) return;
+          const R = L.map((nm) => { const r = nm.getBoundingClientRect(); return { nm, l: r.left, w: r.width, dx: 0 }; }).sort((a, b) => a.l - b.l);
+          for (let pass = 0; pass < 12; pass++) {
+            let moved = false;
+            for (let k = 0; k < R.length - 1; k++) {
+              const a = R[k], b = R[k + 1], o = (a.l + a.dx + a.w + GAP) - (b.l + b.dx);
+              if (o > 0.2) { a.dx -= o / 2; b.dx += o / 2; moved = true; }
+            }
+            R.forEach((r) => { r.dx = Math.max(lo - r.l, Math.min(hi - r.l - r.w, r.dx)); });
+            if (!moved) break;
+          }
+          // and clear of the shirts beside it (a raised wing-back's name sits level with the next shirt's hem)
+          const shirts = L.map((nm) => R.find((r) => r.nm === nm)).map((r) => ({ r, s: r.nm.parentElement.querySelector('.g4-shirt svg').getBoundingClientRect() }));
+          R.forEach((r) => {
+            const nr = r.nm.getBoundingClientRect();
+            shirts.forEach(({ r: o, s: sh }) => {
+              if (o === r || Math.min(nr.bottom, sh.bottom) - Math.max(nr.top, sh.top) <= 0) return;
+              const left = r.l + r.dx, right = left + r.w;
+              if (sh.left >= left && right + GAP > sh.left) { const want = right + GAP - sh.left, can = r.dx - (lo - r.l); r.dx -= Math.min(want, can); if (want - can > (r.short || 0)) { r.short = want - can; r.side = -1; } }
+              else if (sh.right <= right && sh.right + GAP > left) { const want = sh.right + GAP - left, can = (hi - r.l - r.w) - r.dx; r.dx += Math.min(want, can); if (want - can > (r.short || 0)) { r.short = want - can; r.side = 1; } }
+            });
+          });
+          // pinned against the pitch's edge with no room left: that name gets a touch smaller (6.5px at the least, as before)
+          // (it shrinks about its middle, so it slides by half what it lost to keep its outer edge where it was)
+          R.forEach((r) => {
+            if (!(r.short > 0.2)) return;
+            const fs = parseFloat(getComputedStyle(r.nm).fontSize), to = Math.max(6.5, fs * (r.w - r.short - 1) / r.w);
+            r.nm.style.fontSize = to.toFixed(2) + 'px';
+            const lost = r.w - r.nm.getBoundingClientRect().width;
+            r.dx += r.side < 0 ? -lost / 2 : lost / 2;
+          });
+          R.forEach((r) => { if (Math.abs(r.dx) > 0.2) moves.push([r.nm, r.dx]); });
+        });
+        moves.forEach(([nm, dx]) => { nm.style.transform = `translateX(${dx.toFixed(1)}px)`; });
       };
       // with a player selected, the open shirts he fits pulse and the rest of the open ones step back
       const markPitch = () => {
@@ -250,39 +292,56 @@
         idleUI();
       }
 
-      // ---------- reels: transform-only, speed blur, smooth stop and a small spring; the landed shirt never jumps ----------
+      // ---------- reels: the Classic spin's own motion (Craig, 12 Oct; D2T.roll.profile and sample in screens/spin.js) ----------
+      // Each reel speeds up, runs flat out, slows onto its shirt still moving, overshoots a touch and springs back; the blur,
+      // streak and stretch follow the speed, and the landing gets the same impact and light sweep. Left first, right last.
       let uid = 0;
+      const PROFS = [{ delay: 0, cruiseT: 1.0, decelT: 1.1, n: 2.2 }, { delay: 0.07, cruiseT: 1.35, decelT: 1.2, n: 2.4 }, { delay: 0.14, cruiseT: 1.75, decelT: 1.5, n: 3.0, v1: 2.0 }];
       function runReels(targets) {
         const opens = Object.keys(openPos());
         const wins = [...trioEl.querySelectorAll('.reelwin')];
+        const R = D2T.roll, clamp = (v, a, b) => Math.max(a, Math.min(b, v));
         return new Promise((resolve) => {
           let landed = 0;
           wins.forEach((w, i) => {
-            const strip = w.querySelector('.strip'), filler = [];
-            while (filler.length < 16) { const L = G4.list(opens[Math.floor(Math.random() * opens.length)]), c = L[Math.floor(Math.random() * Math.min(L.length, 260))]; if (c !== targets[i]) filler.push(c); }
-            strip.innerHTML = filler.concat([targets[i]]).map((p) => shirt({ w: TW, player: p })).join('');
-            const D = strip.lastElementChild.getBoundingClientRect().top - strip.firstElementChild.getBoundingClientRect().top;
+            const strip = w.querySelector('.strip'), P = R.profile(PROFS[i] || PROFS[2]), n = P.target;
+            const pick = () => { for (;;) { const L = G4.list(opens[Math.floor(Math.random() * opens.length)]), c = L[Math.floor(Math.random() * Math.min(L.length, 260))]; if (c !== targets[i]) return c; } };
+            const first = strip.firstElementChild ? strip.firstElementChild.outerHTML : shirt({ w: TW, state: 'myst' });
+            const seq = [first];
+            for (let k = 1; k < n; k++) seq.push(shirt({ w: TW, player: pick() }));
+            seq.push(shirt({ w: TW, player: targets[i] }));
+            for (let k = 0; k < 3; k++) seq.push(shirt({ w: TW, player: pick() }));
+            strip.innerHTML = seq.join('');
+            const kids = strip.children, pitch = kids[1].getBoundingClientRect().top - kids[0].getBoundingClientRect().top;
             const id = `g4b${++uid}`;
-            w.insertAdjacentHTML('afterbegin', `<svg width="0" height="0" style="position:absolute"><filter id="${id}" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="0 0"/></filter></svg>`);
-            const blur = w.querySelector('feGaussianBlur'); strip.style.filter = `url(#${id})`;
-            const T = 1250 + i * 420, t0 = performance.now(); let lastY = 0, lastT = t0, hit = false;
+            w.insertAdjacentHTML('afterbegin', `<svg width="0" height="0" style="position:absolute"><filter id="${id}" x="-20%" y="-50%" width="140%" height="200%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="0 0"/></filter></svg>`);
+            const blur = w.querySelector('feGaussianBlur');
+            const streak = D2T.h('<span class="g4-streak"></span>'), sweep = D2T.h('<span class="g4-sweep"></span>'); w.append(streak, sweep);
+            let filtered = false, hit = false;
             const finish = () => {
               strip.style.filter = ''; strip.innerHTML = shirt({ w: TW, player: targets[i], attr: `data-c="${i}"` }); strip.style.transform = 'none';
+              streak.remove(); sweep.remove(); w.style.transform = '';
               w.classList.add('landed'); glint(strip.firstElementChild, reduced);
               const capEl = w.parentElement.querySelector('.cap'); if (capEl) capEl.innerHTML = trioCap(targets[i]);
               const tag = w.parentElement.querySelector('.g4-ptag'); tag.textContent = targets[i].pos; tag.classList.add('on');
               if (++landed === wins.length) resolve();
             };
             if (reduced) { finish(); return; }
+            const t0 = performance.now();
             const frame = (now) => {
               if (!root.isConnected) return;
-              const t = now - t0; let y;
-              if (t < T) { const u = t / T; y = D * (1 - Math.pow(1 - u, 4)); } else { const s = (t - T) / 1000; y = D + 9 * Math.exp(-9 * s) * Math.sin(16 * s); }
-              const v = Math.abs(y - lastY) / Math.max(1, now - lastT) * 16; lastY = y; lastT = now;
-              blur.setAttribute('stdDeviation', `0 ${Math.min(9, Math.max(0, v * 0.22 - 0.6)).toFixed(2)}`);
-              strip.style.transform = `translateY(${-y}px)`;
-              if (t >= T && !hit) { hit = true; w.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.06)' }, { transform: 'scale(1)' }], { duration: 300, easing: 'ease-out' }); snd('tap'); }
-              if (t < T + 520) rafs.push(requestAnimationFrame(frame)); else finish();
+              const t = (now - t0) / 1000, sm = R.sample(P, t);
+              strip.style.transform = `translate3d(0, ${(-sm.p * pitch).toFixed(2)}px, 0)`;
+              const pxf = Math.abs(sm.v) * pitch / 60, sd = clamp(pxf * 0.3 - 1.2, 0, 22), k = clamp(pxf / 80, 0, 1);
+              if (sd < 0.4) { if (filtered) { strip.style.filter = ''; filtered = false; } } else { blur.setAttribute('stdDeviation', `0 ${sd.toFixed(1)}`); if (!filtered) { strip.style.filter = `url(#${id})`; filtered = true; } }
+              streak.style.opacity = (k * k * 0.9).toFixed(3);
+              w.style.transform = k > 0.02 ? `scaleY(${(1 + 0.05 * k).toFixed(4)})` : '';
+              if (!hit && t >= P.landAt) {
+                hit = true; snd('tap');
+                strip.animate([{ scale: '1' }, { scale: '1.065', offset: 0.28 }, { scale: '1' }], { duration: 460, easing: 'cubic-bezier(.2,.9,.3,1.3)' });
+                sweep.animate([{ left: '-60%', opacity: 0 }, { opacity: 1, offset: 0.15 }, { left: '130%', opacity: 0 }], { duration: 550, delay: 40, easing: 'cubic-bezier(.3,.7,.2,1)', fill: 'both' });
+              }
+              if (sm.phase !== 'done') rafs.push(requestAnimationFrame(frame)); else finish();
             };
             rafs.push(requestAnimationFrame(frame));
           });

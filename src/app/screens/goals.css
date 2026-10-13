@@ -41,7 +41,7 @@
 .g4-pitch .circle { position: absolute; left: 50%; top: 50%; width: 84px; height: 84px; margin: -42px; border: 1.4px solid rgba(255,255,255,.25); border-radius: 50%; }
 .g4-pitch .modename { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); z-index: 1; text-align: center; pointer-events: none; font: 900 italic 40px/1 'Exo 2', sans-serif; color: rgba(255,255,255,.10); }
 .g4-pitch .slotp { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 2px; z-index: 2; }
-.g4-pitch .nm { font: 900 italic 9.5px/1 'Exo 2', sans-serif; text-transform: uppercase; padding: 2px 5px; border-radius: 4px; background: rgba(0,0,0,.72); white-space: nowrap; }
+.g4-pitch .nm { font: 900 italic 10.45px/1 'Exo 2', sans-serif; text-transform: uppercase; padding: 2px 5px; border-radius: 4px; background: rgba(0,0,0,.72); white-space: nowrap; }
 .g4-pitch .g4-shape { position: absolute; left: 12px; bottom: 10px; z-index: 3; font-size: 11px; font-weight: 800; letter-spacing: .08em; padding: 5px 9px; border-radius: 9px; background: rgba(0,0,0,.6); color: var(--g4-t); pointer-events: none; }
 
 /* shirts */
@@ -126,3 +126,8 @@
 .g4-reveal .roll { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 6px; max-width: 300px; }
 .g4-reveal .roll i { font: 900 italic 15px/1 'Exo 2', sans-serif; font-style: italic; padding: 7px 10px; border-radius: 9px; background: rgba(255,255,255,.06); color: #8E8E99; border: 1px solid #2A2A30; }
 .g4-reveal .roll i.on { background: var(--g4); color: #0A0A0A; border-color: var(--g4); }
+/* the reels' speed streak and the light sweep on landing, as the Classic spin (Craig, 12 Oct) */
+.g4-trio .g4-streak { position: absolute; inset: 0; pointer-events: none; opacity: 0; z-index: 2; mix-blend-mode: screen;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.14) 38%, rgba(255,255,255,.22) 50%, rgba(255,255,255,.14) 62%, rgba(255,255,255,0) 100%); }
+.g4-trio .g4-sweep { position: absolute; top: -20%; left: -60%; width: 40%; height: 140%; pointer-events: none; z-index: 3; opacity: 0; transform: rotate(16deg);
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.75) 50%, rgba(255,255,255,0) 100%); }

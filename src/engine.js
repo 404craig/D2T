@@ -209,10 +209,11 @@ function newRun(opts) {
   else st.clubOffer = offerClubs(st, opts.catalogue);
   return st;
 }
+// Club X spins one season at a time (Craig, 12 Oct: one central spin); the other modes offer three.
 function offerClubs(st, catalogue) {
   const r = stream(st.seed, "club", st.clubSpin);
-  const pool = catalogue.slice(), out = [];
-  while (out.length < 3 && pool.length) out.push(pool.splice(Math.floor(r() * pool.length), 1)[0].key);
+  const pool = catalogue.slice(), out = [], n = st.mode === "clubx" ? 1 : 3;
+  while (out.length < n && pool.length) out.push(pool.splice(Math.floor(r() * pool.length), 1)[0].key);
   return out;
 }
 function respinClubs(st, catalogue) {
@@ -234,7 +235,8 @@ function chooseClub(st, S, rel) {
 /* ---------- Dare2Dream and Club X draft: start with no players, one spin per shirt ---------- */
 // Club X (Craig, 11 Oct): your own club replaces the season's bottom side, drafts 11 the same way and must win the league.
 const DRAFT_MODES = ["dare2dream", "clubx"];
-// Shirts fill keeper first, then defence, midfield and attack. Each spin is three players for that shirt's
+// Dare2Dream fills keeper first, then defence, midfield and attack. Club X (Craig, 12 Oct) fills them in a random order,
+// shuffled once from the run's seed (and again if the shape changes), so a refresh keeps it. Each spin is three players for that shirt's
 // position from the same season (never your club's own squad, never one seen before). No respins in the draft.
 // A drafted player leaves his real club for the whole season, like a signing (a raid dated before the season).
 const BROAD_ORDER = { GK: 0, DEF: 1, MID: 2, FWD: 3 };
@@ -242,14 +244,20 @@ function draftOrder(formation) {
   const f = FORMATIONS[formation];
   return f.map((_, i) => i).sort((a, b) => BROAD_ORDER[SLOT_BROAD[f[a][0]]] - BROAD_ORDER[SLOT_BROAD[f[b][0]]] || a - b);
 }
+function shuffledOrder(st) {
+  const r = stream(st.seed, "draftorder", st.formation), a = FORMATIONS[st.formation].map((_, i) => i);
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
 function startDraft(st, S) {
   st.xi = new Array(FORMATIONS[st.formation].length).fill(null);
   st.seen = squadOf(S, st.club).map(p => p.id);
   st.draft = { step: 0 };
+  if (st.mode === "clubx") st.draft.order = shuffledOrder(st);
   st.phase = "draft";
   newDraftRoll(st, S);
 }
-function draftSlot(st) { return draftOrder(st.formation)[st.draft.step]; }
+function draftSlot(st) { return (st.draft.order || draftOrder(st.formation))[st.draft.step]; }
 function newDraftRoll(st, S) {
   const slot = draftSlot(st), broad = SLOT_BROAD[FORMATIONS[st.formation][slot][0]];
   const r = stream(st.seed, "draft", st.draft.step);
@@ -257,10 +265,11 @@ function newDraftRoll(st, S) {
   for (let k = 0; k < 3; k++) { const id = drawCard(r, S, st, S.legends, taken, broad); if (id != null) { cards.push(id); taken.add(id); } }
   st.roll = { key: `d${st.draft.step}`, spin: 0, cards, window: "draft", slot, step: st.draft.step + 1, of: st.xi.length };
 }
-// The shape can change until the first pick (the keeper comes first in every formation).
+// The shape can change until the first pick.
 function draftFormation(st, S, f) {
   if (st.phase !== "draft" || st.draft.step > 0 || !FORMATIONS[f]) return false;
   st.formation = f; st.xi = new Array(FORMATIONS[f].length).fill(null);
+  if (st.draft.order) st.draft.order = shuffledOrder(st);
   newDraftRoll(st, S);
   return true;
 }

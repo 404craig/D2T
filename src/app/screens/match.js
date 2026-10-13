@@ -1,8 +1,8 @@
-// Season agent: match day. Kick off, a 90 minute clock in about 24 seconds with a live feed, Skip to end,
+// Season agent: match day. Kick off, a 90 minute clock in 10 seconds with a live feed, Skip to end,
 // then the final score and the league table after this gameweek. My result is simulated (seeded Poisson); nothing here is labelled real except other clubs' real results.
 (function () {
   const D2T = window.D2T, SE = D2T.se;
-  const MATCH_MS = 24000, HT_PAUSE = 900;
+  const MATCH_MS = 9400, HT_PAUSE = 600;   // 10 seconds kick-off to full time, half-time pause included (Craig, 12 Oct)
   const ICON = {
     goal: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="#fff"/><path d="M12 7.2l3.3 2.4-1.3 3.9h-4l-1.3-3.9z" fill="#111"/><path d="M12 3v4.2M20.6 9.2l-5.3.4M17.4 19.4l-3.4-5.9M6.6 19.4l3.4-5.9M3.4 9.2l5.3.4" stroke="#111" stroke-width="1.3"/></svg>',
     miss: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V5h16v15" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 9h16M8 5v15M12 5v15M16 5v15" stroke="currentColor" stroke-width=".8" opacity=".5"/></svg>',
@@ -50,7 +50,7 @@
         </div>
         <div class="se-pad"></div>
       </div>`);
-      const bar = D2T.h('<footer class="actionbar"><button class="btn se-btn se-wide se-main" type="button">Kick off</button></footer>');
+      const bar = D2T.h('<footer class="actionbar"><button class="btn se-btn se-wide se-main" type="button">Kick off</button>' + SE.homeBtn() + '</footer>');
       root.append(body, bar);
       const btn = bar.querySelector('.se-main');
       const feed = body.querySelector('.se-feed'), clockEl = body.querySelector('.se-clock'), prog = body.querySelector('.se-prog span');

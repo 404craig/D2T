@@ -104,7 +104,7 @@
     const reduced = D2T.reduced();
     const el = D2T.h(`<div class="sp-screen">
       <div class="sp-head"><span class="sp-kicker">${cfg.kicker || ''}</span><h1 class="sp-title">${cfg.title}</h1><p class="sp-sub">${cfg.sub || ''}</p></div>
-      <div class="sp-stage"><div class="sp-floor"></div><div class="sp-row"><div class="sp-slot"></div><div class="sp-slot"></div><div class="sp-slot"></div></div></div>
+      <div class="sp-stage"><div class="sp-floor"></div><div class="sp-row${cfg.count === 1 ? ' sp-one' : ''}">${'<div class="sp-slot"></div>'.repeat(cfg.count || 3)}</div></div>
       <div class="sp-hint"></div>
       <div class="sp-bar">
         <button class="sp-round is-reload" aria-label="Spin again">${REFRESH}<span class="sp-count"></span></button>
@@ -115,7 +115,7 @@
     const slots = Array.from(el.querySelectorAll('.sp-slot')), reels = slots.map((s) => new Reel(s));
     const main = el.querySelector('.sp-main'), lbl = main.querySelector('.sp-lbl'), reload = el.querySelector('.sp-round.is-reload');
     const count = reload.querySelector('.sp-count'), hintEl = el.querySelector('.sp-hint');
-    el.querySelector('.sp-round.is-home').onclick = () => D2T.go('home');
+    el.querySelector('.sp-round.is-home').onclick = () => (D2T.runMenu ? D2T.runMenu() : D2T.go('home'));   // the run menu (core/season.js)
 
     let state = 'idle', results = null, selected = -1, respins = cfg.respins == null ? null : cfg.respins, raf = 0, timers = [], tick = 0, open = null;
     const hint = (t) => { hintEl.textContent = t || ''; };
@@ -168,7 +168,7 @@
       if (!card) return;
       const a = cfg.accent ? cfg.accent(item) : { accent: '#fff' };
       const below = cfg.details ? `<div class="sp-det" style="--sp-accent:${a.accent}">${cfg.details(item)}</div>` : '';
-      open = D2T.cards.openLarge(card, cfg.render(item, 280), { below, onClose: () => { open = null; } });
+      open = D2T.cards.openLarge(card, (cfg.renderOpen || cfg.render)(item, 280), { below, onClose: () => { open = null; } });
     };
     slots.forEach((s, i) => { s.addEventListener('click', () => select(i)); s.setAttribute('role', 'button'); s.tabIndex = 0; });
 
@@ -195,8 +195,8 @@
       setRespins(); hint('');
       const firsts = reels.map((r) => r.seq[r.seq.length > 1 ? r.seq.length - 4 : 0] || '');
       reels.forEach((r) => r.reset());
-      // left lands first, middle shortly after, right last with a longer crawl at the end
-      const profs = [
+      // left lands first, middle shortly after, right last with a longer crawl at the end (a single reel takes that one)
+      const profs = reels.length === 1 ? [profile({ delay: 0, cruiseT: 1.6, decelT: 1.6, n: 3.0, v1: 2.0 })] : [
         profile({ delay: 0, cruiseT: 1.0, decelT: 1.1, n: 2.2 }),
         profile({ delay: 0.07, cruiseT: 1.35, decelT: 1.2, n: 2.4 }),
         profile({ delay: 0.14, cruiseT: 1.75, decelT: 1.5, n: 3.0, v1: 2.0 })
@@ -206,7 +206,7 @@
         reels.forEach((r, i) => { r.draw(profs[i].target, 0); r.hit(cfg.accent(results[i]).accent); r.settle(profs[i].target, cfg.caption && cfg.caption(results[i])); });
         done(); return;
       }
-      const t0 = performance.now(), landed = [false, false, false];
+      const t0 = performance.now(), landed = reels.map(() => false);
       let settledCalled = false;
       const step = (now) => {
         const t = (now - t0) / 1000;
@@ -229,7 +229,15 @@
       setRespins(); hint(cfg.hintSettled || 'Tap a card to pick it');
       afterSettle();
       cfg.onSettled && cfg.onSettled(results);
+      // cfg.afterLand(reel, item) -> Promise: a single reel's own reveal (Club X's crest bursts into its badge); the
+      // card is picked for you when it ends, and respins wait for it
+      if (cfg.afterLand) {
+        const lock = (on) => { landing = on; setRespins(); if (on) reload.disabled = true; };
+        lock(true);
+        Promise.resolve(cfg.afterLand(reels[0], results[0])).then(() => { lock(false); if (state === 'settled') select(0); });
+      }
     };
+    let landing = false;
 
     // cfg.afterSettle { label, onClick }: once the cards land the main button does something else (the transfer roll
     // makes it Pass, as signing is a drag onto the pitch), whatever is selected.
@@ -238,13 +246,13 @@
       main.classList.add('is-after'); setMain(cfg.afterSettle.label, null); main.disabled = false;
     }
     main.onclick = () => {
-      if (state === 'idle') { dropTip(); spin(); return; }
+      if (state === 'idle') { if (cfg.gate && !cfg.gate()) return; dropTip(); spin(); return; }
       if (state === 'settled' && cfg.afterSettle) { cfg.afterSettle.onClick(); return; }
       if (state === 'settled' && selected >= 0) cfg.onConfirm(results[selected], { respins });
     };
     let respinning = false;
     reload.onclick = async () => {
-      if (state === 'spinning' || respinning || respins == null || respins <= 0) return;
+      if (state === 'spinning' || landing || respinning || respins == null || respins <= 0) return;
       dropTip();
       respins -= 1; cfg.onRespinsChange && cfg.onRespinsChange(respins);
       main.classList.remove('is-after');
@@ -270,13 +278,14 @@
     if (cfg.settled && cfg.settled.length) {
       stopTick();
       results = cfg.settled;
-      reels.forEach((r, i) => { r.load([cfg.render(results[i], 114)]); r.draw(0, 0); r.settle(0, cfg.caption && cfg.caption(results[i])); r.slot.classList.add('is-set'); });
+      reels.forEach((r, i) => { r.load([(cfg.renderSettled || cfg.render)(results[i], 114)]); r.draw(0, 0); r.settle(0, cfg.caption && cfg.caption(results[i])); r.slot.classList.add('is-set'); });
       state = 'settled'; main.disabled = true; setMain(cfg.pickLabel || 'Pick one', null); setRespins(); hint(cfg.hintSettled || 'Tap a card to pick it');
       afterSettle();
+      if (cfg.afterLand) select(0);
     }
 
     return {
-      el, reels, slots, spin, select, openCard, hint,
+      el, reels, slots, spin, select, openCard, hint, setLabel: (t) => setMain(t, null),
       results: () => results, selected: () => selected, settled: () => state === 'settled', clear: clearSelection,
       unmount() { cancelAnimationFrame(raf); stopTick(); timers.forEach(clearTimeout); if (open) { try { open.el.remove(); } catch (e) { /* gone */ } } }
     };
@@ -285,38 +294,130 @@
   D2T.roll = { mount, Reel, profile, sample, PITCH };
 
   // ---------- route: spin (pick a club) ----------
-  // The three clubs and the respins come from the engine (seeded per run), so a refresh never re-rolls them.
-  let api = null;
+  // The clubs and the respins come from the engine (seeded per run), so a refresh never re-rolls them.
+  // Club X (Craig, 12 Oct): you name your club first, then one central reel spins a season; it lands on that season's
+  // bottom club, holds for a second, then its crest bursts and the Club X badge takes its place with your name.
+  let api = null, xTimers = [];
   D2T.screen('spin', {
     title: 'Pick your club', theme: 'black',
     mount(root) {
-      const GAME = D2T.game, SND = window.D2TSound || { play() {} };
+      const GAME = D2T.game, SND = window.D2TSound || { play() {} }, reduced = D2T.reduced();
       if (!D2T.state.run || !GAME.eng() || GAME.eng().phase !== 'clubroll') GAME.newRun();
       const st = D2T.state.run, eng = GAME.eng(), dream = GAME.mode() === 'dare2dream', x = GAME.mode() === 'clubx';
       root.appendChild(D2T.topbar());
       const goal = (c) => (c.pos === 1 ? 'Win the league again' : `Finish ${D2T.ordinal(GAME.target(c.pos))} or better`);
+      const later = (fn, ms) => { xTimers.push(setTimeout(fn, ms)); };
+      // your club in that season: the Club X badge, green, your name, and who you replace at the foot
+      const xCard = (c, w) => D2T.cards.club(Object.assign({}, GAME.club('Club X'), { season: c.season }), { w, footLabel: 'REPLACING', foot: D2T.esc(c.name) });
+      const xSub = () => `${st.xName ? D2T.esc(st.xName) : 'Your club'} takes the bottom club's place in one real season, drafts an XI from scratch and has to win the league.`;
       api = mount(root, {
-        kicker: `New run · ${GAME.modeName()}`, title: x ? 'Pick your season' : 'Pick your club',
-        sub: x ? "Three seasons. Club X takes the bottom club's place, drafts an XI from scratch and has to win the league." : dream ? 'Three clubs from any season. You start with no players and draft your XI. Finish higher than they really did, or win the league again if they won it.' : 'Three clubs that went down. Pick one and take it from the drop to the top.',
+        kicker: `New run · ${GAME.modeName()}`, title: x ? 'Spin your season' : 'Pick your club',
+        sub: x ? xSub() : dream ? 'Three clubs from any season. You start with no players and draft your XI. Finish higher than they really did, or win the league again if they won it.' : 'Three clubs that went down. Pick one and take it from the drop to the top.',
+        count: x ? 1 : 3,
         pool: GAME.spinPool(),
         render: (c, w) => D2T.cards.club(c, { w, footLabel: x ? 'YOU REPLACE' : dream ? 'TO BEAT' : undefined }),
+        renderSettled: x ? xCard : null, renderOpen: x ? xCard : null,
         pick: () => { SND.play('roll3'); return GAME.offer(); },
         settled: st.spun ? GAME.offer() : null,
         onSettled: () => { st.spun = true; D2T.save(); },
-        accent: (c) => ({ accent: c.accent, ink: c.ink }),
+        accent: (c) => (x && st.xShown ? { accent: '#12F06C', ink: '#000000' } : { accent: c.accent, ink: c.ink }),
         caption: (c) => (x ? 'TITLE ' + c.championPts + ' PTS' : c.code),
-        details: (c) => x ? `<div class="sp-det-name">${c.season}: Club X replaces ${D2T.esc(c.full)}</div><div class="sp-det-line">${D2T.esc(c.name)} finished bottom (${D2T.ordinal(c.pos)}, ${c.pts} pts). ${D2T.esc(c.champion)} won the league on ${c.championPts} points.</div>
+        details: (c) => x ? `<div class="sp-det-name">${c.season}: ${D2T.esc(GAME.xName())} replaces ${D2T.esc(c.full)}</div><div class="sp-det-line">${D2T.esc(c.name)} finished bottom (${D2T.ordinal(c.pos)}, ${c.pts} pts). ${D2T.esc(c.champion)} won the league on ${c.championPts} points.</div>
           <div class="sp-det-badges"><span>Target: win the league</span></div>` : `<div class="sp-det-name">${D2T.esc(c.full)}</div><div class="sp-det-line">${c.season} · Real finish ${D2T.ordinal(c.pos)} · ${c.gf} scored, ${c.ga} conceded</div>
           <div class="sp-det-grid"><span class="sp-det-stat"><b>${c.w}</b><i>WON</i></span><span class="sp-det-stat"><b>${c.d}</b><i>DRAWN</i></span><span class="sp-det-stat"><b>${c.l}</b><i>LOST</i></span><span class="sp-det-stat"><b>${c.pts}</b><i>POINTS</i></span></div>${dream ? `<div class="sp-det-badges"><span>Target: ${goal(c)}</span></div>` : ''}`,
-        mainLabel: 'Spin', pickLabel: x ? 'Pick a season' : 'Pick a club', spinningLabel: 'Spinning',
+        mainLabel: x && !st.xName ? 'Name your club' : 'Spin', pickLabel: x ? 'Play' : 'Pick a club', spinningLabel: 'Spinning',
         selectedLabel: () => 'Play',
-        hintIdle: x ? 'Hit Spin for three seasons' : 'Hit Spin to see who you get', hintSettled: x ? 'Tap a season to pick it' : 'Tap a club to pick it', hintSelected: 'Tap it again for the full card, or hit Play',
+        hintIdle: x ? 'Hit Spin for your season' : 'Hit Spin to see who you get', hintSettled: x ? 'Your season' : 'Tap a club to pick it', hintSelected: x ? 'Tap it for the full card, or hit Play' : 'Tap it again for the full card, or hit Play',
         respins: eng.respins,
         tip: st.tipDone || st.spun ? null : { text: `${eng.respins} respins, use them wisely!`, onDone: () => { st.tipDone = true; D2T.save(); } },
-        onRespinsChange: () => { GAME.respinClubs(); st.spun = false; D2T.save(); },
+        onRespinsChange: () => { GAME.respinClubs(); st.spun = false; st.xShown = false; D2T.save(); },
+        gate: x ? () => { if (st.xName) return true; askName(); return false; } : null,
+        afterLand: x ? (reel, c) => reveal(reel, c) : null,
         onConfirm: (c) => { SND.play('lockin'); GAME.chooseClub(c.key); D2T.go('table'); }
       });
+
+      // ---------- Club X: name your club ----------
+      function askName() {
+        const cur = st.xName || D2T.state.xName || '';
+        const sh = D2T.sheet({ title: 'Name your club', body: `<p class="fr-lead">Your club takes the place of the bottom side in a real season. What's it called?</p>
+          <form class="x-name" novalidate><input class="x-name-in" type="text" maxlength="18" autocomplete="off" autocapitalize="words" spellcheck="false" enterkeyhint="done" placeholder="e.g. Southside FC" aria-label="Club name" value="${D2T.esc(cur)}">
+          <p class="x-name-err" role="alert"></p><button class="btn x-name-go fr-btn-wide" type="submit">That's us</button></form>` });
+        const form = sh.body.querySelector('form'), input = form.querySelector('input'), err = form.querySelector('.x-name-err');
+        input.oninput = () => { err.textContent = ''; };
+        form.onsubmit = (e) => {
+          e.preventDefault();
+          const r = GAME.setXName(input.value);
+          if (r.error) { err.textContent = r.error; input.focus(); return; }
+          input.blur(); sh.close(); SND.play('pick');
+          api.setLabel('Spin'); const sub = api.el.querySelector('.sp-sub'); if (sub) sub.innerHTML = xSub();
+        };
+        later(() => { if (input.isConnected) input.focus(); }, 380);
+      }
+      if (x && !st.xName) later(askName, 450);
+
+      // ---------- Club X: your card swings in and knocks the real club off (Craig, 12 Oct) ----------
+      // The real club lands and holds for 2 seconds; then your Club X card swings in from the right, hits the old card
+      // and knocks it spinning off the left, with a burst of both cards' colours where they meet, and comes to rest in
+      // the middle. Both cards fly as copies over the reel (its window would clip them); the reel takes the new card after.
+      function reveal(reel, c) {
+        return new Promise((resolve) => {
+          const swap = () => {
+            const card = reel.cardEl, node = card && card.closest('.sp-node');
+            if (!node) return null;
+            const html = xCard(c, 114); reel.seq[+node.dataset.vi] = html; node.innerHTML = html;
+            st.xShown = true; D2T.save();
+            return node;
+          };
+          if (reduced) { swap(); reel.hit('#12F06C'); resolve(); return; }
+          later(() => {
+            if (!root.isConnected) { resolve(); return; }
+            const card = reel.cardEl, node = card && card.closest('.sp-node');
+            if (!node) { swap(); resolve(); return; }
+            const slot = reel.slot, sr = slot.getBoundingClientRect(), k = sr.width / (slot.offsetWidth || sr.width), W = slot.offsetWidth, H = slot.offsetHeight;
+            const offR = (window.innerWidth - sr.left) / k + 30, offL = -(sr.right / k) - 60;
+            const oldC = D2T.h(`<div class="x-fly">${node.innerHTML}</div>`), newC = D2T.h(`<div class="x-fly x-new">${xCard(c, 114)}</div>`);
+            slot.append(oldC, newC); node.style.visibility = 'hidden';
+            const HIT = 300, T = 700;
+            newC.animate([
+              { transform: `translateX(${offR}px) rotate(14deg)`, easing: 'cubic-bezier(.55,0,1,.65)' },
+              { transform: `translateX(${W * 0.92}px) rotate(4deg)`, offset: HIT / T, easing: 'cubic-bezier(.12,.8,.3,1)' },
+              { transform: 'translateX(-12px) rotate(-3deg)', offset: 0.8 },
+              { transform: 'translateX(0) rotate(0)' }], { duration: T, fill: 'forwards' });
+            oldC.animate([{ transform: 'translate(0,0) rotate(0)', opacity: 1 }, { transform: `translate(${offL * 0.45}px, -26px) rotate(-22deg)`, opacity: 1, offset: 0.4 }, { transform: `translate(${offL}px, 70px) rotate(-48deg)`, opacity: 1 }],
+              { duration: 560, delay: HIT, easing: 'cubic-bezier(.2,.75,.35,1)', fill: 'forwards' });
+            later(() => {
+              clash(slot, W * 0.96, H * 0.42, [c.accent, '#12F06C', c.accent, '#FFFFFF', '#12F06C', c.ink && c.ink !== c.accent ? c.ink : c.accent]);
+              SND.play('reveal');
+              const stage = api && api.el.querySelector('.sp-stage');
+              if (stage) stage.animate([{ transform: 'translate(0,0)' }, { transform: 'translate(-7px,3px)' }, { transform: 'translate(6px,-2px)' }, { transform: 'translate(-3px,1px)' }, { transform: 'translate(0,0)' }], { duration: 300, easing: 'ease-out' });
+            }, HIT);
+            later(() => {
+              node.style.visibility = ''; swap(); newC.remove();
+              reel.hit('#12F06C'); SND.play('lockin');
+              later(() => oldC.remove(), 300);
+              later(resolve, 450);
+            }, T + 20);
+          }, 2000);
+        });
+      }
+      // the clash: sparks in both clubs' colours, a ring and a flash from where the cards meet
+      function clash(host, x, y, cols) {
+        const wrap = D2T.h('<div class="x-boom" aria-hidden="true"></div>'); host.appendChild(wrap);
+        const ring = D2T.h('<span class="x-boom-ring"></span>'), flash = D2T.h('<span class="x-boom-flash"></span>');
+        [ring, flash].forEach((e) => { e.style.left = x + 'px'; e.style.top = y + 'px'; wrap.appendChild(e); });
+        flash.animate([{ transform: 'translate(-50%,-50%) scale(.3)', opacity: 1 }, { transform: 'translate(-50%,-50%) scale(1.8)', opacity: 0 }], { duration: 380, easing: 'ease-out', fill: 'forwards' });
+        ring.animate([{ transform: 'translate(-50%,-50%) scale(.2)', opacity: 1 }, { transform: 'translate(-50%,-50%) scale(5)', opacity: 0 }], { duration: 620, easing: 'cubic-bezier(.1,.7,.3,1)', fill: 'forwards' });
+        for (let i = 0; i < 44; i++) {
+          // most fly out sideways and up, as if knocked off the impact; some go everywhere
+          const a = i % 3 === 0 ? Math.random() * Math.PI * 2 : (i % 2 ? Math.PI : 0) + (Math.random() - 0.5) * 1.6, d = 50 + Math.random() * 110, sz = 4 + Math.random() * 8;
+          const bit = D2T.h('<i></i>'); Object.assign(bit.style, { left: x + 'px', top: y + 'px', width: sz + 'px', height: (sz * (0.4 + Math.random())) + 'px', background: cols[i % cols.length] });
+          wrap.appendChild(bit);
+          bit.animate([{ transform: 'translate(-50%,-50%) rotate(0)', opacity: 1 }, { transform: `translate(calc(-50% + ${Math.cos(a) * d * 0.7}px), calc(-50% + ${Math.sin(a) * d * 0.7 - 10}px)) rotate(${(Math.random() - 0.5) * 300}deg)`, opacity: 1, offset: 0.55 },
+            { transform: `translate(calc(-50% + ${Math.cos(a) * d}px), calc(-50% + ${Math.sin(a) * d + 34}px)) rotate(${(Math.random() - 0.5) * 600}deg)`, opacity: 0 }], { duration: 750 + Math.random() * 350, easing: 'cubic-bezier(.12,.8,.3,1)', fill: 'forwards' });
+        }
+        later(() => wrap.remove(), 1300);
+      }
     },
-    unmount() { api && api.unmount(); api = null; }
+    unmount() { xTimers.forEach(clearTimeout); xTimers = []; api && api.unmount(); api = null; }
   });
 })();

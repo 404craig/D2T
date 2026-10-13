@@ -24,6 +24,23 @@ fs.mkdirSync(OUT, { recursive: true });
     throw new Error(`expected screen ${name}, on ${await screen()}`);
   };
   const check = (ok, msg) => { if (!ok) errors.push(msg); };
+  // real touches through the devtools protocol (pointer events with touch-action and no click after a drag, as a phone)
+  const cdp = await page.context().newCDPSession(page);
+  const touch = (type, x, y) => cdp.send("Input.dispatchTouchEvent", { type, touchPoints: type === "touchEnd" ? [] : [{ x, y, id: 1 }] });
+  const centre = async (sel) => { const el = await page.$(sel), b = el && await el.boundingBox(); return b && b.width ? { x: b.x + b.width / 2, y: b.y + b.height / 2 } : null; };
+  // a finger drag from a point to a point, or to a selector that may only show up once the drag is under way
+  const touchDrag = async (from, to, { steps = 8, stepMs = 16 } = {}) => {
+    await touch("touchStart", from.x, from.y);
+    let cur = { x: from.x, y: from.y - 12 };
+    await touch("touchMove", cur.x, cur.y); await wait(stepMs);
+    for (let i = 1; i <= steps; i++) {
+      const dest = (typeof to === "string" ? await centre(to) : to) || { x: 195, y: 300 }, left = steps - i + 1;
+      cur = { x: cur.x + (dest.x - cur.x) / left, y: cur.y + (dest.y - cur.y) / left };
+      await touch("touchMove", cur.x, cur.y); await wait(stepMs);
+    }
+    await touch("touchEnd", cur.x, cur.y);
+  };
+  const spunNow = () => { const e = window.D2T.game.eng(); return e.roll && window.D2T.state.run.spun === `${e.roll.key}.${e.roll.spin}`; };
   const smallButtons = async (where) => {
     const small = await page.$$eval("button", (bs) => bs.filter((b) => b.offsetParent && getComputedStyle(b).visibility !== "hidden" && b.getBoundingClientRect().height < 40 && b.getBoundingClientRect().width < 40).map((b) => (b.getAttribute("aria-label") || b.textContent).trim().slice(0, 30)));
     if (small.length) errors.push(`tap targets under 40px on ${where}: ${small.join(", ")}`);
@@ -57,6 +74,12 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.click(".actionbar button");
   await expectScreen("squad");
   await wait(800); await shot("07-squad-preseason"); await smallButtons("squad");
+  // the home button sits bottom right in a run and opens the run menu (Craig, 13 Oct)
+  check(await page.evaluate(() => { const b = document.querySelector(".actionbar"); return b && b.lastElementChild.classList.contains("se-home"); }), "squad: the home button is not bottom right");
+  await page.click(".actionbar .se-home"); await wait(500);
+  check(!!(await page.$('.sheet [data-k="restart"]')) && !!(await page.$('.sheet [data-k="quit"]')) && !!(await page.$('.sheet [data-k="home"]')), "the run menu does not offer Restart, Home and Quit");
+  await page.click('.sheet [data-k="keep"]'); await wait(500);
+  check((await screen()) === "squad" && !(await page.$(".sheet")), "Keep playing did not stay on the squad");
 
   // formation change before the season
   await page.click(".se-formlink"); await wait(500); await shot("08-formations");
@@ -71,36 +94,35 @@ fs.mkdirSync(OUT, { recursive: true });
   for (let r = 0; r < 3; r++) {
     await page.waitForSelector(".sp-main:not([disabled])", { timeout: 6000 });
     await wait(300);
+    const before = await page.evaluate(() => window.D2T.game.eng().signed.length);
     await page.click(".sp-main");
-    await page.waitForFunction(() => { const e = window.D2T.game.eng(); return e.roll && window.D2T.state.run.spun === `${e.roll.key}.${e.roll.spin}`; }, null, { timeout: 8000 });
+    await page.waitForFunction(spunNow, null, { timeout: 8000 });
+    if (r === 1) {
+      // a finger on a card the instant the last reel lands, before the tray has dropped, must still pick him up
+      // and drag him onto a shirt once the pitch is up (Craig, 12 Oct: "at times dragging doesn't select the player")
+      check(!(await page.$(".sp-screen.is-placing")), "the tray was already up when the roll settled, so the early drag is not tested");
+      await touchDrag(await centre(".sp-slot >> nth=1"), '.tr-field .se-cardwrap[data-i="5"]', { steps: 30, stepMs: 40 });
+    }
     await wait(400);
     if (r === 0) await shot("09-roll-landed");
-    await page.waitForSelector(".sp-screen.is-placing", { timeout: 4000 });
-    await wait(700);
+    if (r !== 1) { await page.waitForSelector(".sp-screen.is-placing", { timeout: 4000 }); await wait(700); }
     if (r === 0) await shot("10-placing");
     if (r === 2) {
-      const before = await page.evaluate(() => window.D2T.game.eng().signed.length);
       check((await page.textContent(".sp-main")).trim() === "Pass", "main button is not Pass after the roll lands");
       await page.click(".sp-main");
       await wait(600);
       check(await page.evaluate((b) => window.D2T.game.eng().signed.length === b, before), "pass signed a player");
       break;
     }
-    const before = await page.evaluate(() => window.D2T.game.eng().signed.length);
     if (r === 0) {
+      // a touch drag dropped on nothing ends with no click, and must not eat the tap that follows
+      await touchDrag(await centre(".sp-slot >> nth=1"), { x: 40, y: 780 }); await wait(400);
       // tap a card, then a shirt (the best one pulses)
       await page.click(".sp-slot >> nth=0"); await wait(400);
+      check(await page.evaluate(() => document.querySelector(".sp-slot.is-sel") === document.querySelector(".sp-slot")), "a tap after a drag dropped on nothing did not select the card");
       await shot("10b-selected");
       check((await page.$$(".tr-field .se-pfchip")).length === 11, "selecting a card did not colour all 11 shirts by fit");
       await page.click(".tr-field .se-slot.se-best .se-cardwrap", { force: true });
-    } else {
-      // drag a card onto a shirt
-      const a = await (await page.$(".sp-slot >> nth=1")).boundingBox();
-      const t = await (await page.$('.tr-field .se-cardwrap[data-i="5"]')).boundingBox();
-      await page.mouse.move(a.x + a.width / 2, a.y + a.height / 2); await page.mouse.down();
-      await page.mouse.move(a.x + a.width / 2, a.y - 30, { steps: 4 });
-      await page.mouse.move(t.x + t.width / 2, t.y + t.height / 2, { steps: 8 });
-      await page.mouse.up();
     }
     await wait(500);
     if (r === 0) await shot("10c-signed");
@@ -226,13 +248,13 @@ fs.mkdirSync(OUT, { recursive: true });
   for (let k = 0; k < 2; k++) {
     await page.waitForSelector(".sp-main:not([disabled])", { timeout: 8000 }); await wait(250);
     await page.click(".sp-main");
-    await page.waitForSelector(".sp-screen.is-placing", { timeout: 9000 }); await wait(600);
-    if (k === 0) { await shot("31b-d2d-draft"); await page.click(".sp-slot >> nth=0"); await wait(300); await page.click(".sp-main"); }
-    else {
-      const a = await (await page.$(".sp-slot >> nth=1")).boundingBox(), t = await (await page.$(".tr-field .se-slot.se-best .se-cardwrap")).boundingBox();
-      await page.mouse.move(a.x + a.width / 2, a.y + a.height / 2); await page.mouse.down();
-      await page.mouse.move(a.x + 40, a.y - 30, { steps: 4 }); await page.mouse.move(t.x + t.width / 2, t.y + t.height / 2, { steps: 8 }); await page.mouse.up();
+    if (k === 1) {
+      // the draft too: a finger on a card as the roll settles, dragged onto the lit shirt once the pitch is up
+      await page.waitForFunction(spunNow, null, { timeout: 9000 });
+      await touchDrag(await centre(".sp-slot >> nth=1"), ".tr-field .se-slot.se-best .se-cardwrap", { steps: 30, stepMs: 40 });
     }
+    else { await page.waitForSelector(".sp-screen.is-placing", { timeout: 9000 }); await wait(600); }
+    if (k === 0) { await shot("31b-d2d-draft"); await page.click(".sp-slot >> nth=0"); await wait(300); await page.click(".sp-main"); }
     await wait(1200);
     check(await page.evaluate((n) => window.D2T.game.eng().xi.filter((x) => x != null).length === n, k + 1), `draft pick ${k + 1} did not land`);
   }
@@ -247,22 +269,34 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => window.D2T.game.dreamRecord().runs === 1), "Dare2Dream run not recorded");
   check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, classicBefore), "Dare2Dream run changed Classic's record");
 
-  // ---------- Club X: pick a season, replace its bottom club, draft 11, win the league ----------
+  // ---------- Club X: name your club, one season spins in, its crest bursts into the badge, draft 11 in a random order ----------
   await page.evaluate(() => window.D2T.go("home")); await wait(900);
   await page.click('[data-act="pick"][data-mode="clubx"]');
   await page.waitForSelector(".sheet [data-k='yes']", { timeout: 2000 }).then(() => page.click(".sheet [data-k='yes']")).catch(() => {});
   await expectScreen("spin");
   check(await page.evaluate(() => window.D2T.game.mode() === "clubx"), "Club X run did not start in its mode");
-  await wait(700); await page.click(".sp-main");
+  await page.waitForSelector(".x-name-in", { timeout: 3000 }).catch(() => {});
+  check(!!(await page.$(".x-name-in")), "Club X did not ask for your club's name first");
+  await shot("33a-clx-name");
+  await page.fill(".x-name-in", "Man Utd"); await page.click(".x-name-go"); await wait(300);
+  check(/real club/i.test(await page.textContent(".x-name-err")), "a real club's name was not refused");
+  await page.fill(".x-name-in", "Southside Rovers"); await page.click(".x-name-go"); await wait(700);
+  check(!(await page.$(".sheet")) && await page.evaluate(() => window.D2T.state.run.xName === "Southside Rovers"), "the name was not kept");
+  check((await page.$$(".sp-slot")).length === 1 && await page.evaluate(() => window.D2T.game.offer().length === 1), "Club X should spin one season in one central reel");
+  await page.click(".sp-main");
   await page.waitForFunction(() => window.D2T.state.run.spun === true, null, { timeout: 8000 });
-  await wait(400); await shot("33-clx-spin");
-  check(await page.evaluate(() => { const o = window.D2T.game.offer(), cs = window.D2T_GAME.clubSeasons; return new Set(o.map((c) => c.season)).size === 3 && o.every((c) => c.pos === Math.max(...cs.filter((x) => x.season === c.season).map((x) => x.pos))); }), "Club X offer is not three seasons' bottom clubs");
-  await page.click(".sp-slot >> nth=0"); await wait(300); await page.click(".sp-main");
+  check(await page.evaluate(() => { const c = window.D2T.game.offer()[0], cs = window.D2T_GAME.clubSeasons; return c.pos === Math.max(...cs.filter((x) => x.season === c.season).map((x) => x.pos)); }), "Club X did not land on a season's bottom club");
+  await page.waitForFunction(() => window.D2T.state.run.xShown === true, null, { timeout: 5000 }).catch(() => {});
+  await wait(900); await shot("33-clx-spin");
+  check(await page.evaluate(() => { const n = document.querySelector(".sp-node.is-hit .d2c-cname"); return n && n.textContent === "Southside Rovers"; }), "the landed card did not turn into your club");
+  check(await page.evaluate(() => /Play/.test(document.querySelector(".sp-main").textContent) && !document.querySelector(".sp-main").disabled), "Play was not ready after the badge");
+  await page.click(".sp-main");
   await expectScreen("table"); await page.click(".actionbar button"); await wait(400);
-  check(/Club X/.test(await page.textContent(".screen")), "table does not show Club X");
+  check(/Southside Rovers/.test(await page.textContent(".screen")), "table does not show your club's name");
   await shot("34-clx-table");
   await page.click(".actionbar button"); await expectScreen("squad"); await wait(600);
-  check(await page.evaluate(() => window.D2T.game.eng().phase === "draft" && window.D2T.game.clubName() === "Club X"), "Club X should start in the draft as Club X");
+  check(await page.evaluate(() => window.D2T.game.eng().phase === "draft" && window.D2T.game.clubName() === "Southside Rovers"), "Club X should start in the draft under your name");
+  check(await page.evaluate(() => Array.isArray(window.D2T.game.eng().draft.order) && window.D2T.game.eng().draft.order.length === 11), "Club X draft has no random shirt order");
   await page.evaluate(() => { const G = window.D2T.game; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(1200); await shot("35-clx-summary");
   check(/Champions|Fell short/.test(await page.textContent(".sm-head")), "Club X summary has no result");
@@ -272,10 +306,15 @@ fs.mkdirSync(OUT, { recursive: true });
   // ---------- Daily challenge: today's club for everyone, its own save, one go ----------
   await page.evaluate(() => { const G = window.D2T.game; G.newRun("classic"); G.chooseClub(G.offer()[0].key); window.D2T.state.run.tableSeen = true; window.D2T.save(); window.D2T.go("home"); }); await wait(900);
   const dEntry = await page.evaluate(() => { const d = window.D2T.game.dailyEntry(window.D2T.game.today()); return { key: d.key, mode: d.mode }; });
+  // every day of a year is a bottom-10 side and plays Classic
+  check(await page.evaluate(() => { const G = window.D2T.game; for (let i = 0; i < 365; i++) { const t = new Date(Date.UTC(2026, 9, 11 + i)).toISOString().slice(0, 10), d = G.dailyEntry(t), n = window.D2T_GAME.seasons[d.season].clubs.length; if (d.mode !== "classic" || d.pos <= n - 10) return false; } return true; }), "a Daily was not a bottom-10 side playing Classic");
   await page.click('[data-act="daily"]'); await wait(1500);
   check((await screen()) === "table", "the daily did not open on the table, on " + (await screen()));
-  check(await page.evaluate((d) => { const r = window.D2T.state.run; return r.daily === window.D2T.game.today() && window.D2T.game.mode() === d.mode && r.eng.respins === 0; }, dEntry), "the daily did not start with today's club, its mode and no respins");
+  check(await page.evaluate((d) => { const r = window.D2T.state.run; return r.daily === window.D2T.game.today() && window.D2T.game.mode() === "classic" && d.mode === "classic" && r.eng.respins === window.D2TE.RULES.respins && r.eng.phase !== "draft" && r.eng.xi.every((id) => id != null); }, dEntry), "the daily did not start with today's club, its mode and no respins");
   check(await page.evaluate(() => !!window.D2T.state.parked), "the run in progress was not kept aside for the daily");
+  await page.click(".actionbar .se-home"); await wait(500);
+  check(!!(await page.$('.sheet [data-k="home"]')) && !(await page.$('.sheet [data-k="restart"]')) && !(await page.$('.sheet [data-k="quit"]')), "the Daily's run menu should only offer Keep playing and Home");
+  await page.click('.sheet [data-k="keep"]'); await wait(500);
   await page.evaluate(() => { const G = window.D2T.game; window.D2T.state.run.tableSeen = true; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(900); await shot("40-daily-summary");
   check(await page.evaluate(() => !!window.D2T.game.dailyResult()), "the daily result was not recorded");
@@ -308,7 +347,7 @@ fs.mkdirSync(OUT, { recursive: true });
   const LBL = { DEF: { 3: "CB CB CB", 4: "LB CB CB RB", 5: "LWB CB CB CB RWB" }, MID: { 2: "CM CM", 3: "CM CM CM", 4: "LM CM CM RM", 5: "LM CM CM CM RM" }, FWD: { 1: "ST", 2: "ST ST", 3: "LW ST RW", 4: "LW ST ST RW" } };
   const want = (f) => { const [d, m, a] = f.split("").map(Number); return ["GK", LBL.DEF[d], LBL.MID[m], LBL.FWD[a]].join(" "); };
   check(await page.evaluate((w) => [...document.querySelectorAll(".g4 .slotp")].length === 11 && [...document.querySelectorAll(".g4 .slotp text")].map((t) => t.textContent).join(" ") === w, want(form)), "Goal Rush: the pitch slots do not match " + form);
-  await page.click(".g4 .sp-main"); await wait(2900);
+  await page.click(".g4 .sp-main"); await wait(4800);
   const cands = await page.evaluate(() => window.D2T.state.g433.cands.map((p) => p.name).join());
   await page.reload(); await wait(6500); await page.evaluate(() => window.D2T.go("goals433")); await wait(900);
   check(await page.evaluate((c) => window.D2T.state.g433.cands.map((p) => p.name).join() === c, cands), "Goal Rush: a refresh changed the three shirts");
@@ -316,7 +355,7 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => document.querySelectorAll(".g4 .slotp.open .g4-shirt.next").length === 11), "Goal Rush: the open shirts are not all highlighted");
   check(await page.evaluate(() => { const s = window.D2T.state.g433; return s.cands.length === 3 && s.cands.every((c) => ["GK", "DEF", "MID", "FWD"].includes(c.pos)); }), "Goal Rush: a spin did not bring three players with positions");
   for (let i = 0; i < 11; i++) {
-    if (!(await page.$(".g4 [data-c]"))) { await page.click(".g4 .sp-main"); await wait(2900); }
+    if (!(await page.$(".g4 [data-c]"))) { await page.click(".g4 .sp-main"); await wait(4800); }
     await page.click('.g4 [data-c="0"]'); await wait(250);
     if (i === 0) {
       check(await page.evaluate(() => { const fit = [...document.querySelectorAll(".g4 .slotp.fit")]; return fit.length > 0 && document.querySelectorAll(".g4 .slotp.nofit").length + fit.length === 11; }), "Goal Rush: picking a player did not light his open shirts");
@@ -326,6 +365,8 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate((f) => { const S = window.D2T.state.g433, [d, m, a] = f.split("").map(Number), SL = ["GK", ...Array(d).fill("DEF"), ...Array(m).fill("MID"), ...Array(a).fill("FWD")]; return new Set(S.filled.map((p) => p.slot)).size === 11 && S.filled.every((p) => SL[p.slot] === p.pos); }, form), "Goal Rush: a player sits in the wrong position or two share a shirt");
   check(await page.evaluate(() => { const G4 = window.D2T.game.g433, need = G4.list("FWD")[40].goals; return ["433", "541"].every((f) => G4.canGift("FWD", need, [], f) && [0, 1, 2, 3, 4].every(() => G4.drawOpen({ FWD: 1 }, [], need, f).some((p) => p.goals === need))); }), "Goal Rush: the last-shot gift did not offer the exact player");
   check(await page.evaluate(() => ["442", "433", "451", "352", "343", "424", "532", "541"].every((f) => { const G4 = window.D2T.game.g433, sh = G4.shape(f); return sh.GK + sh.DEF + sh.MID + sh.FWD === 11 && G4.depth(f) > 0 && G4.gift(f) > 0; })), "Goal Rush: a formation has no shape, depth or gift");
+  // the back fives come up about half as often as the other shapes (Craig, 13 Oct)
+  check(await page.evaluate(() => { const n = {}, N = 14000; for (let i = 0; i < N; i++) { const f = window.D2T.game.g433.pickFormation(); n[f] = (n[f] || 0) + 1; } const back5 = (n["532"] + n["541"]) / 2, rest = ["442", "433", "451", "352", "343", "424"].reduce((t, f) => t + n[f], 0) / 6; return Object.keys(n).length === 8 && back5 / rest > 0.4 && back5 / rest < 0.6; }), "Goal Rush: 5-3-2 and 5-4-1 do not come up about half as often");
   // the sheet opens only after the ending (longer when the total breaks through the target), so wait for it
   await page.waitForSelector(".sheet", { timeout: 15000 }).catch(() => {}); await wait(400); await shot("51-goalrush-end");
   check(await page.evaluate(() => window.D2T.state.g433.filled.length === 11 && window.D2T.game.g433.record().games === 1), "Goal Rush: the game did not fill 11 shirts and record a result");
@@ -342,10 +383,17 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.click(".g4 .is-home"); await expectScreen("home"); await wait(600);
   check(await page.evaluate(() => !!window.D2T.state.g433 && window.D2T.state.g433.filled.length === 0) && !(await page.$(".sheet")), "Goal Rush: home before the first pick asked or lost the game");
   await page.click('[data-act="g433"]'); await expectScreen("goals433"); await wait(900);
-  await page.click(".g4 .sp-main"); await wait(2900); await page.click('.g4 [data-c="0"]'); await wait(250); await page.click(".g4 .slotp.fit >> nth=-1"); await wait(1800);
+  await page.click(".g4 .sp-main"); await wait(4800); await page.click('.g4 [data-c="0"]'); await wait(250); await page.click(".g4 .slotp.fit >> nth=-1"); await wait(1800);
   await page.click(".g4 .is-home"); await wait(500);
   check(!!(await page.$('.sheet [data-k="quit"]')) && /Leave the game/.test(await page.textContent(".sheet")), "Goal Rush: home with a game under way did not ask");
   await shot("52-goalrush-leave");
+  // Restart wipes the game and starts a new one from the beginning, nothing recorded
+  const g4Games = await page.evaluate(() => window.D2T.game.g433.record().games);
+  await page.click('.sheet [data-k="restart"]'); await wait(900);
+  check(await page.evaluate((n) => window.D2T.state.g433.filled.length === 0 && !window.D2T.state.g433.cands && window.D2T.state.g433.revealed === false && window.D2T.game.g433.record().games === n, g4Games) && !!(await page.$(".g4-reveal")), "Goal Rush: Restart did not start a new game from the beginning");
+  await page.click(".g4-reveal"); await wait(600);
+  await page.click(".g4 .sp-main"); await wait(4800); await page.click('.g4 [data-c="0"]'); await wait(250); await page.click(".g4 .slotp.fit >> nth=-1"); await wait(1800);
+  await page.click(".g4 .is-home"); await wait(500);
   await page.click('.sheet [data-k="home"]'); await expectScreen("home"); await wait(600);
   check(await page.evaluate(() => window.D2T.state.g433 && window.D2T.state.g433.filled.length === 1), "Goal Rush: Home did not keep the game");
   await page.click('[data-act="g433"]'); await expectScreen("goals433"); await wait(900);
@@ -356,7 +404,7 @@ fs.mkdirSync(OUT, { recursive: true });
   const ubRecBefore = await page.evaluate(() => JSON.stringify([window.D2T.game.record(), window.D2T.game.g433.record()]));
   await page.evaluate(() => { window.D2T.state.ub = null; window.D2T.save(); window.D2T.go("home"); }); await wait(900);
   await page.click('[data-act="unbeaten"]'); await expectScreen("unbeaten"); await wait(700);
-  check(!!(await page.$(".ub-spin")) && /Spin for a stat/i.test(await page.textContent(".ub-title")), "Unbeaten Run: no stat spin to start");
+  check(!!(await page.$(".ub-spin")) && /Higher or lower/i.test(await page.textContent(".ub-title")) && /New run/.test(await page.textContent(".ub-spin")) && (await page.$$(".ub-grid .ub-fr")).length === 9, "Unbeaten Run: the start page is not Higher or lower with nine best runs and New run");
   for (const st of ["pts", "cg"]) {
     await page.evaluate((st) => { window.D2T_UB_STAT = st; }, st);
     await page.click(".ub-spin"); await wait(6500);
@@ -364,27 +412,38 @@ fs.mkdirSync(OUT, { recursive: true });
     check(got.l && /^\d+$/.test(got.l) && got.r === "?" && got.btn === 2, "Unbeaten Run (" + st + "): the cards did not land with a number on the left and ? on the right");
     check(st === "pts" ? got.club && /Points in a season/i.test(got.title) : got.shirt && /Career goals/i.test(got.title), "Unbeaten Run (" + st + "): wrong card type or stat");
     check(got.crest, "Unbeaten Run (" + st + "): no crest on the card");
+    // 3 refreshes a run: one swaps the hidden card, the streak untouched (Craig, 13 Oct)
+    check(await page.textContent(".ub-reload .sp-count") === "3", "Unbeaten Run (" + st + "): no 3 refreshes on the left of the bar");
+    const whoBefore = await page.textContent(".ub-who-r"), keyBefore = await page.evaluate(() => document.querySelector(".ub-r .sp-node.is-hit").innerHTML.length);
+    await page.click(".ub-reload"); await wait(3200);
+    check(await page.textContent(".ub-reload .sp-count") === "2" && await page.textContent(".ub-n") === "0" && (await page.textContent(".ub-who-r") !== whoBefore || await page.evaluate((k) => document.querySelector(".ub-r .sp-node.is-hit").innerHTML.length !== k, keyBefore)), "Unbeaten Run (" + st + "): a refresh did not swap the hidden card");
     if (st === "pts") await shot("53-unbeaten-clubs");
     // answer: either the run goes on (+1) or it is over (the sheet); both record nothing until the end
+    const runsBefore = await page.evaluate(() => (window.D2T.state.ub || {}).runs || 0);
     await page.click(".ub-higher"); await wait(1600);
     const r1 = await page.evaluate(() => ({ ok: !!document.querySelector(".ub-r.ok"), bad: !!document.querySelector(".ub-r.bad"), n: document.querySelector(".ub-n").textContent }));
     check(r1.ok || r1.bad, "Unbeaten Run (" + st + "): the answer did not resolve");
     await wait(2500);
     if (r1.ok) {
       check(r1.n === "1" || await page.evaluate(() => document.querySelector(".ub-n").textContent === "1"), "Unbeaten Run (" + st + "): a right answer did not count 1");
+      // Restart ends the run with nothing recorded and goes back to the stat spin
+      await page.click(".ub-bar .is-home"); await wait(500);
+      await page.click('.sheet [data-k="restart"]'); await wait(800);
+      check(!!(await page.$(".ub-spin")) && await page.evaluate((n) => ((window.D2T.state.ub || {}).runs || 0) === n, runsBefore), "Unbeaten Run (" + st + "): Restart did not go back to the stat spin, or recorded a run");
+      await page.click(".ub-spin"); await wait(6500);
       // leaving mid-run asks, and quitting records nothing
       await page.click(".ub-bar .is-home"); await wait(500);
       check(!!(await page.$('.sheet [data-k="quit"]')), "Unbeaten Run (" + st + "): home mid-run did not ask");
       await page.click('.sheet [data-k="quit"]'); await expectScreen("home"); await wait(600);
-      check(await page.evaluate(() => !(window.D2T.state.ub && window.D2T.state.ub.runs)), "Unbeaten Run (" + st + "): quitting recorded a run");
+      check(await page.evaluate((n) => ((window.D2T.state.ub || {}).runs || 0) === n, runsBefore), "Unbeaten Run (" + st + "): quitting recorded a run");
       await page.click('[data-act="unbeaten"]'); await expectScreen("unbeaten"); await wait(700);
     } else {
       check(!!(await page.$(".sheet")) && /Beaten first time/i.test(await page.textContent(".sheet")), "Unbeaten Run (" + st + "): no end sheet after a wrong answer");
-      check(await page.evaluate(() => window.D2T.state.ub.runs === 1), "Unbeaten Run (" + st + "): a finished run was not recorded");
+      check(/New run/.test(await page.textContent('.sheet [data-k="again"]')), "Unbeaten Run (" + st + "): the end sheet's second button does not say New run");
+      check(await page.evaluate((n) => ((window.D2T.state.ub || {}).runs || 0) === n + 1, runsBefore), "Unbeaten Run (" + st + "): a finished run was not recorded");
       await shot("54-unbeaten-end");
       await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(700);
       check(!!(await page.$(".ub-spin")), "Unbeaten Run (" + st + "): closing the end sheet did not go back to the stat spin");
-      await page.evaluate(() => { window.D2T.state.ub = null; window.D2T.save(); });
     }
   }
   check(await page.evaluate((b) => JSON.stringify([window.D2T.game.record(), window.D2T.game.g433.record()]) === b, ubRecBefore), "Unbeaten Run changed another game's record");

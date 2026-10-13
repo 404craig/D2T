@@ -14,6 +14,8 @@
   const snd = (id) => { const S = window.D2TSound; if (S) S.play(id); };
   const rand = (n) => Math.floor(Math.random() * n);
   const UP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15l7-7 7 7"/></svg>';
+  const REFRESH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
+  const REFRESHES = 3;   // per run (Craig, 13 Oct): swap the hidden card for another, the streak untouched
   const DOWN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg>';
   // the mark: up and down chevrons in a ring, line art like the outline emblem (home card and faded behind the pages)
   const MARK = '<svg class="ub-mark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="50" cy="50" r="44"/><path d="M30 42 L50 22 L70 42"/><path d="M30 58 L50 78 L70 58"/></svg>';
@@ -179,36 +181,67 @@
 
       // ---------- the bottom bar: Spin before a run, Lower and Higher during one ----------
       function spinBar() {
-        bar.innerHTML = `<button class="sp-main ub-spin">${D2T.logo('emblem', { label: '' })}<span class="sp-lbl">Spin</span></button><button class="sp-round is-home" aria-label="Home">${D2T.ICON.home}</button>`;
+        // the respin button as in the other games, greyed: Unbeaten Run has none, it keeps New run centred (Craig, 13 Oct)
+        bar.innerHTML = `<button class="sp-round is-reload ub-off" disabled aria-hidden="true" tabindex="-1">${REFRESH}</button><button class="sp-main ub-spin">${D2T.logo('emblem', { label: '' })}<span class="sp-lbl">New run</span></button><button class="sp-round is-home" aria-label="Home">${D2T.ICON.home}</button>`;
         bar.querySelector('.is-home').onclick = () => D2T.go('home');
         bar.querySelector('.ub-spin').onclick = statSpin;
       }
       function answerBar() {
-        bar.innerHTML = `<button class="ub-ans ub-lower" aria-label="Lower">${DOWN}<span>Lower</span></button><button class="ub-ans ub-higher" aria-label="Higher">${UP}<span>Higher</span></button><button class="sp-round is-home" aria-label="Home">${D2T.ICON.home}</button>`;
+        bar.innerHTML = `<button class="sp-round is-reload ub-reload" aria-label="New card">${REFRESH}<span class="sp-count"></span></button><button class="ub-ans ub-lower" aria-label="Lower">${DOWN}<span>Lower</span></button><button class="ub-ans ub-higher" aria-label="Higher">${UP}<span>Higher</span></button><button class="sp-round is-home" aria-label="Home">${D2T.ICON.home}</button>`;
         bar.querySelector('.is-home').onclick = leave;
+        bar.querySelector('.ub-reload').onclick = refreshCard;
         bar.querySelector('.ub-lower').onclick = () => answer(false);
         bar.querySelector('.ub-higher').onclick = () => answer(true);
       }
-      const enable = (on) => bar.querySelectorAll('.ub-ans').forEach((b) => { b.disabled = !on; });
+      const enable = (on) => {
+        bar.querySelectorAll('.ub-ans').forEach((b) => { b.disabled = !on; });
+        const r = bar.querySelector('.ub-reload'); if (!r || !run) return;
+        r.querySelector('.sp-count').textContent = run.refreshes; r.disabled = !on || run.refreshes <= 0; r.setAttribute('aria-label', `New card, ${run.refreshes} left`);
+      };
+      // a refresh swaps the hidden card for another from the deck and spins it in; the left card and the streak stay
+      function refreshCard() {
+        if (!run || busy || run.refreshes <= 0) return;
+        const nxt = pickNext(); if (!nxt) return;
+        run.refreshes--; busy = true; enable(false); snd('roll3');
+        run.next = nxt; run.used.add(nxt);
+        stage.querySelector('.ub-who-r').innerHTML = '';
+        spinTo(reelR, run.next, { delay: 0, cruiseT: 0.5, decelT: 1.0, n: 2.6, v1: 2.2 }, () => {
+          stage.querySelector('.ub-who-r').innerHTML = whoLine(run.stat, run.next);
+          busy = false; enable(true);
+        });
+      }
       // home during a run asks (as Goal Rush does): a run is sudden death, so leaving ends it with no result
       function leave() {
-        if (!run || busy) { if (!busy) D2T.go('home'); return; }
-        const sh = D2T.sheet({ title: 'Leave the run?', body: `<p class="fr-lead">Unbeaten in ${run.streak} so far. Leaving ends the run and nothing is recorded.</p>
-          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the run</button></div>` });
+        if (!run) { D2T.go('home'); return; }   // during a run it always asks, even mid-animation
+        const sh = D2T.sheet({ title: 'Leave the run?', body: `<p class="fr-lead">Unbeaten in ${run.streak} so far. Restart or Quit ends the run and nothing is recorded.</p>
+          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="restart">Restart the game</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the run</button></div>` });
         sh.body.querySelector('[data-k="keep"]').onclick = sh.close;
+        // restart (Craig, 12 Oct): drop this run, nothing recorded, and go back to spinning for a stat
+        sh.body.querySelector('[data-k="restart"]').onclick = () => { sh.close(); timers.forEach(clearTimeout); rafs.forEach(cancelAnimationFrame); timers = []; rafs = []; document.querySelectorAll('.ub-fly, .ub-boom, .ub-tick').forEach((f) => f.remove()); stage.classList.remove('ub-clubs'); idle(); };
         sh.body.querySelector('[data-k="quit"]').onclick = () => { sh.close(); run = null; D2T.go('home'); };
       }
 
       // ---------- the stat spin: a reel of stats, never the same one twice in a row ----------
+      // the start page (Craig, 13 Oct; design/prototype/unbeaten-start.html): Higher or lower, and your best run for each
+      // stat in the home page's record outline rimmed in cyan, 3 x 3 and centred; your highest best is a special cyan card
+      // with a black star and a slow shine. New run steps them back and brings the stat reel in at the same spot.
+      const STAR = '<svg class="ub-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" fill="#04262C"/></svg>';
+      const TOPDEF = '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="ubTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E6FDFF"/><stop offset=".3" stop-color="#5CE6F7"/><stop offset=".62" stop-color="#22D3EE"/><stop offset="1" stop-color="#0E8FA6"/></linearGradient></defs></svg>';
       function idle() {
-        run = null; busy = false; nEl.textContent = '0'; title.textContent = 'Spin for a stat'; sub.textContent = 'Each run is about one stat. Real Premier League numbers, higher or lower, one wrong answer ends it.';
-        stage.innerHTML = `<div class="ub-statwin"><div class="ub-statstrip">${statTile(STATS.find((s) => s.id === R.last) || STATS[0], true)}</div></div>
-          <div class="ub-bests-h">Your best runs</div><div class="ub-bests">${STATS.map((s) => `<span class="ub-best"><i>${s.big}</i><b class="${R.best[s.id] ? '' : 'none'}">${R.best[s.id] || '-'}</b></span>`).join('')}</div>`;
-        hint.textContent = 'Spin to see which stat this run is about';
+        run = null; busy = false; nEl.textContent = '0'; title.textContent = 'Higher or lower';
+        sub.textContent = 'One stat a run. Is the next real number higher or lower? Keep calling it right; one wrong answer ends your run.';
+        stage.classList.remove('ub-clubs', 'ub-go');
+        const top = STATS.reduce((m, st, i) => ((R.best[st.id] || 0) > (R.best[STATS[m].id] || 0) ? i : m), 0), hasTop = (R.best[STATS[top].id] || 0) > 0;
+        stage.innerHTML = `<div class="ub-start">${TOPDEF}<div class="ub-bests-h">Your best runs</div><div class="ub-grid">${STATS.map((st, i) => {
+          const b = R.best[st.id] || 0, isTop = hasTop && i === top;
+          return `<div class="ub-fr${b ? '' : ' none'}${isTop ? ' top' : ''}">${D2T.frFrame}${isTop ? '<span class="ub-shine"></span>' + STAR : ''}<b>${b || '-'}</b><span>${st.big}</span></div>`;
+        }).join('')}</div></div>
+          <div class="ub-reelin"><small>THIS RUN IS ABOUT</small><div class="ub-statwin"><div class="ub-statstrip"></div></div><p class="ub-thisbest"></p></div>`;
+        hint.textContent = '';
         spinBar();
         later(() => { const b = bar.querySelector('.ub-spin'); if (b && !run && !busy && root.isConnected) D2T.tip('ub-spin', b, 'A new stat every run'); }, 700);
       }
-      const statTile = (s, dim) => `<div class="ub-tile${dim ? ' dim' : ''}"><small>PREMIER LEAGUE</small><span>${s.big}</span></div>`;
+      const statTile = (s, on) => `<div class="ub-tile${on ? ' on' : ''}"><small>PREMIER LEAGUE</small><span>${s.big}</span></div>`;
       function statSpin() {
         if (busy) return;
         busy = true; snd('roll3');
@@ -219,14 +252,18 @@
         const seq = [other([])];
         for (let i = 0; i < 22; i++) seq.push(other([seq[seq.length - 1], i === 21 ? target : null]));
         seq.push(target, other([target]));
-        const strip = stage.querySelector('.ub-statstrip');
-        strip.innerHTML = seq.map((s) => statTile(s)).join('');
-        stage.querySelector('.ub-bests').classList.add('gone'); stage.querySelector('.ub-bests-h').classList.add('gone');
-        bar.querySelector('.ub-spin').disabled = true;
-        const end = -(seq.length - 3) * 76;
-        const done = () => { snd('lockin'); stage.querySelector('.ub-statwin').classList.add('is-hit'); later(() => startRun(target), reduced ? 200 : 650); };
+        const at = seq.lastIndexOf(target), strip = stage.querySelector('.ub-statstrip');
+        strip.innerHTML = seq.map((s, i) => statTile(s, i === at)).join('');
+        stage.classList.add('ub-go');                         // the best runs step back, the reel comes in
+        const btn = bar.querySelector('.ub-spin'); btn.disabled = true; btn.querySelector('.sp-lbl').textContent = 'Spinning';
+        const end = -at * 76;
+        const done = () => {
+          snd('lockin'); stage.querySelector('.ub-statwin').classList.add('is-hit');
+          const b = R.best[target.id]; stage.querySelector('.ub-thisbest').innerHTML = `Your best on this: <em>${b || 'none yet'}</em>`;
+          later(() => startRun(target), reduced ? 200 : 900);
+        };
         if (reduced) { strip.style.transform = `translateY(${end}px)`; done(); return; }
-        strip.animate([{ transform: 'translateY(0)' }, { transform: `translateY(${end}px)` }], { duration: 1800, easing: 'cubic-bezier(.15,.8,.25,1)', fill: 'forwards' }).onfinish = done;
+        strip.animate([{ transform: 'translateY(0)' }, { transform: `translateY(${end}px)` }], { duration: 2000, delay: 300, easing: 'cubic-bezier(.15,.8,.25,1)', fill: 'forwards' }).onfinish = done;
       }
 
       // ---------- a run ----------
@@ -256,7 +293,7 @@
       }
       function startRun(stat) {
         const deck = decks()[stat.deck].filter((r) => stat.val(r) > 0);
-        run = { stat, deck, used: new Set(), streak: 0 };
+        run = { stat, deck, used: new Set(), streak: 0, refreshes: REFRESHES };
         run.cur = deck[rand(deck.length)]; run.used.add(run.cur);
         run.next = pickNext(); run.used.add(run.next);
         title.textContent = stat.big; sub.innerHTML = 'Premier League · <em>one wrong and it is over</em>';
@@ -269,13 +306,12 @@
         reelL = new Reel(sl, SIZE.pitch); reelR = new Reel(sr, SIZE.pitch);
         reelL.show(ph()); reelR.show(ph());
         answerBar(); enable(false); hint.textContent = '';
-        bindSwipe(sr);
         snd('roll3');
         spinTo(reelL, run.cur, { delay: 0, cruiseT: 0.9, decelT: 1.0, n: 2.2 }, () => { stage.querySelector('.ub-who-l').innerHTML = whoLine(stat, run.cur); });
         spinTo(reelR, run.next, { delay: 0.12, cruiseT: 1.4, decelT: 1.4, n: 3.0, v1: 2.0 }, () => {
           stage.querySelector('.ub-who-r').innerHTML = whoLine(stat, run.next);
           busy = false; enable(true);
-          hint.textContent = `Swipe the ${isClub(stat) ? 'card' : 'shirt'} up for higher, down for lower, or tap below`;
+          hint.textContent = 'Swipe up for higher, down for lower, or tap below';
           later(() => tips(), 450);
         });
       }
@@ -286,37 +322,69 @@
         ['ub-run', streakEl, 'One wrong and the run is over', { place: 'below', side: 'right' }]
       ]);
       const numEl = () => stage.querySelector('.ub-r .sp-node.is-hit .ub-num') || stage.querySelector('.ub-r .ub-num');
-      // the hidden number rolls up to the real one; shirts resize it by its digits, club cards drop to the 3-digit size
-      function countUp(el, to, ms, done) {
-        if (!el) { done(); return; }
-        el.classList.remove('q');
-        if (el.tagName.toLowerCase() === 'text') { el.setAttribute('font-size', NS(to)); el.setAttribute('y', NY(to)); } else if (String(to).length > 2) el.classList.add('w3');
-        if (reduced) { el.textContent = to; done(); return; }
-        const t0 = performance.now();
-        const step = (t) => { const p = Math.min(1, (t - t0) / ms); el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))); if (p < 1) rafs.push(requestAnimationFrame(step)); else { el.classList.add('ub-pop'); done(); } };
-        rafs.push(requestAnimationFrame(step));
-      }
+      // the reveal (Craig, 12 Oct): the ? strains, then bursts in cyan, white and the club's colour, and the real number
+      // drops in; right puts a cyan tick where VS sits, which flies up to the run count top right
       function answer(higher) {
         if (!run || busy) return;
         busy = true; enable(false); snd('tap');
         const a = run.stat.val(run.cur), b = run.stat.val(run.next), right = higher ? b > a : b < a;
-        countUp(numEl(), b, 650, () => {
+        burstReveal(numEl(), b, () => {
           stage.querySelector('.ub-r').classList.add(right ? 'ok' : 'bad');
           if (right) win(); else { snd('buzzer'); later(over, reduced ? 200 : 950); }
         });
       }
+      function setNum(el, to) {
+        el.classList.remove('q'); el.textContent = to;
+        if (el.tagName.toLowerCase() === 'text') { el.setAttribute('font-size', NS(to)); el.setAttribute('y', NY(to)); } else if (String(to).length > 2) el.classList.add('w3');
+      }
+      function burstReveal(el, to, done) {
+        if (!el) { done(); return; }
+        if (reduced) { setNum(el, to); done(); return; }
+        el.animate([{ transform: 'scale(1) rotate(0)' }, { transform: 'scale(1.25) rotate(-8deg)', offset: 0.4 }, { transform: 'scale(1.15) rotate(7deg)', offset: 0.75 }, { transform: 'scale(1.45) rotate(0)', opacity: 0.6 }], { duration: 260, easing: 'ease-in' });
+        later(() => {
+          if (!root.isConnected) return;
+          const r = el.getBoundingClientRect(), c = D2T.game.club(run.next.club);
+          boom(r.left + r.width / 2, r.top + r.height / 2, ['#22D3EE', '#FFFFFF', c.accent || '#22D3EE', '#8BE9F7']);
+          snd('reveal');
+          setNum(el, to);
+          el.animate([{ transform: 'scale(.2)', opacity: 0 }, { transform: 'scale(1.3)', opacity: 1, offset: 0.55 }, { transform: 'scale(.95)', offset: 0.8 }, { transform: 'scale(1)', opacity: 1 }], { duration: 480, easing: 'cubic-bezier(.2,.9,.3,1.2)' });
+          later(done, 520);
+        }, 260);
+      }
+      // sparks, a ring and a flash from a point on screen (a fixed layer, so the card's window never clips it)
+      function boom(x0, y0, cols) {
+        const wrap = D2T.h('<div class="ub-boom" aria-hidden="true"></div>'); wrap.style.left = x0 + 'px'; wrap.style.top = y0 + 'px'; document.body.appendChild(wrap);
+        const ring = D2T.h('<span class="ub-boom-ring"></span>'), flash = D2T.h('<span class="ub-boom-flash"></span>'); wrap.append(flash, ring);
+        flash.animate([{ transform: 'translate(-50%,-50%) scale(.3)', opacity: 0.95 }, { transform: 'translate(-50%,-50%) scale(1.6)', opacity: 0 }], { duration: 360, easing: 'ease-out', fill: 'forwards' });
+        ring.animate([{ transform: 'translate(-50%,-50%) scale(.2)', opacity: 1 }, { transform: 'translate(-50%,-50%) scale(4.5)', opacity: 0 }], { duration: 600, easing: 'cubic-bezier(.1,.7,.3,1)', fill: 'forwards' });
+        for (let i = 0; i < 32; i++) {
+          const a = (i / 32) * Math.PI * 2 + Math.random() * 0.25, d = 50 + Math.random() * 80, sz = 4 + Math.random() * 6;
+          const bit = D2T.h('<i></i>'); Object.assign(bit.style, { width: sz + 'px', height: (sz * (0.5 + Math.random())) + 'px', background: cols[i % cols.length] });
+          wrap.appendChild(bit);
+          bit.animate([{ transform: 'translate(-50%,-50%) rotate(0)', opacity: 1 }, { transform: `translate(calc(-50% + ${Math.cos(a) * d * 0.7}px), calc(-50% + ${Math.sin(a) * d * 0.7}px)) rotate(${(Math.random() - 0.5) * 300}deg)`, opacity: 1, offset: 0.55 },
+            { transform: `translate(calc(-50% + ${Math.cos(a) * d}px), calc(-50% + ${Math.sin(a) * d + 24}px)) rotate(${(Math.random() - 0.5) * 540}deg)`, opacity: 0 }], { duration: 700 + Math.random() * 300, easing: 'cubic-bezier(.12,.8,.3,1)', fill: 'forwards' });
+        }
+        later(() => wrap.remove(), 1100);
+      }
       function win() {
         run.streak++; snd('lockin');
-        const from = stage.querySelector('.ub-r').getBoundingClientRect(), to = nEl.getBoundingClientRect();
         const done = () => {
           nEl.textContent = run.streak;
           streakEl.classList.remove('burst'); void streakEl.offsetWidth; streakEl.classList.add('burst');
-          later(advance, reduced ? 120 : 420);
+          later(advance, reduced ? 120 : 380);
         };
         if (reduced) { done(); return; }
-        const fly = D2T.h('<div class="ub-fly">+1</div>');
-        fly.style.left = from.left + from.width / 2 - 20 + 'px'; fly.style.top = from.top + 40 + 'px'; document.body.appendChild(fly);
-        fly.animate([{ transform: 'translate(0,0) scale(1)', opacity: 1 }, { transform: `translate(${to.left - from.left - from.width / 2 + 24}px,${to.top - from.top - 30}px) scale(.6)`, opacity: .2 }], { duration: 520, easing: 'cubic-bezier(.5,0,.3,1)' }).onfinish = () => { fly.remove(); done(); };
+        // a cyan tick pops where VS sits, then flies up to the run count, which ticks up as it lands
+        const vs = stage.querySelector('.ub-vs').getBoundingClientRect(), to = nEl.getBoundingClientRect();
+        const tick = D2T.h('<div class="ub-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>');
+        const cx = vs.left + vs.width / 2, cy = vs.top + vs.height / 2;
+        tick.style.left = cx + 'px'; tick.style.top = cy + 'px'; document.body.appendChild(tick);
+        const dx = to.left + to.width / 2 - cx, dy = to.top + to.height / 2 - cy;
+        tick.animate([{ transform: 'translate(-50%,-50%) scale(0) rotate(-30deg)', opacity: 0 }, { transform: 'translate(-50%,-50%) scale(1.3) rotate(6deg)', opacity: 1, offset: 0.6 }, { transform: 'translate(-50%,-50%) scale(1) rotate(0)', opacity: 1 }], { duration: 340, easing: 'cubic-bezier(.2,.9,.3,1.3)', fill: 'forwards' });
+        later(() => {
+          tick.animate([{ transform: 'translate(-50%,-50%) scale(1)', opacity: 1 }, { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(.45)`, opacity: 0.9 }], { duration: 520, easing: 'cubic-bezier(.55,0,.25,1)', fill: 'forwards' })
+            .onfinish = () => { tick.remove(); done(); };
+        }, 560);
       }
       function advance() {
         if (!run) return;
@@ -348,23 +416,82 @@
         const best = newBest ? ' A new best.' : prev ? ` Your best on ${s.big.toLowerCase()}: ${prev}.` : '';
         const text = `DROP2TOP Unbeaten Run\n${s.big} (Premier League): unbeaten in ${n}${newBest ? ', a new best' : ''}`;
         const sh = D2T.sheet({ title: head, body: `<div class="ub-endbig"><b>${n}</b><span>Unbeaten${newBest ? ' · a new best' : ''}</span></div><p class="fr-lead">${lead}${best}</p>
-          <div class="fr-stack"><button class="btn ub-again fr-btn-wide" data-k="share">Share with your mates</button><button class="btn btn-ghost fr-btn-wide" data-k="again">Spin again</button></div>`, onClose: () => { if (root.isConnected && run) idle(); } });
+          <div class="fr-stack"><button class="btn ub-again fr-btn-wide" data-k="share">Share with your mates</button><button class="btn btn-ghost fr-btn-wide ub-newrun" data-k="again">New run</button></div>`, onClose: () => { if (root.isConnected && run) idle(); } });
         sh.body.querySelector('[data-k="again"]').onclick = () => { sh.close(); idle(); later(statSpin, 250); };
         sh.body.querySelector('[data-k="share"]').onclick = async () => {
           try { if (navigator.share) { await navigator.share({ text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
           try { await navigator.clipboard.writeText(text); sh.body.querySelector('.fr-lead').textContent = 'Copied. Paste it into the group chat.'; } catch (e) { /* nothing to copy to */ }
         };
       }
-      // swipe the right card up for higher, down for lower
-      function bindSwipe(el) {
-        let y0 = null, id = null;
-        el.onpointerdown = (e) => { if (!run || busy) return; y0 = e.clientY; id = e.pointerId; el.setPointerCapture(id); };
-        el.onpointermove = (e) => { if (y0 == null || e.pointerId !== id) return; el.style.transform = `translateY(${clamp(e.clientY - y0, -70, 70) * 0.5}px)`; };
-        el.onpointerup = el.onpointercancel = (e) => { if (y0 == null || e.pointerId !== id) return; const dy = e.clientY - y0; y0 = null; el.style.transform = ''; if (Math.abs(dy) > 50) answer(dy < 0); };
+      // swipe the right card up for higher, down for lower (Craig, 12 Oct): it follows the finger on a rubber band, up to
+      // about three times the old reach, and on release springs back past its start and bounces quickly to rest before
+      // the answer counts (the rubber band iOS menus use)
+      const BAND = 160, rubber = (x) => Math.sign(x) * BAND * (1 - 1 / (Math.abs(x) * 0.75 / BAND + 1));
+      function springBack(el, from, done) {
+        if (reduced || !from) { el.style.transform = ''; done(); return; }
+        const frames = [], N = 32, T = 0.5;
+        for (let i = 0; i <= N; i++) { const t = (i / N) * T; frames.push({ transform: `translateY(${(from * Math.exp(-8.5 * t) * Math.cos(2 * Math.PI * 4.6 * t)).toFixed(2)}px)` }); }
+        frames[N] = { transform: 'translateY(0)' };
+        el.style.transform = '';
+        el.animate(frames, { duration: T * 1000, easing: 'linear' }).onfinish = done;
       }
+      // swipe anywhere between the stat header and the bottom bar (Craig, 13 Oct): the hidden card follows the finger up
+      // or down on its rubber band, and a cyan elastic arrow stretches from where the finger landed to where it is now
+      let arrow = null;
+      function drawArrow(x0, y0, x, y) {
+        if (!arrow) { arrow = D2T.h('<svg class="ub-arrow" aria-hidden="true"><path class="shaft"/><path class="head"/></svg>'); document.body.appendChild(arrow); }
+        const dx = x - x0, dy = y - y0, len = Math.hypot(dx, dy);
+        if (len < 4) { arrow.style.opacity = 0; return; }
+        arrow.style.opacity = 1;
+        const ux = dx / len, uy = dy / len, hl = Math.min(22, 10 + len * 0.08), bx = x - ux * hl * 0.8, by = y - uy * hl * 0.8;
+        const sw = Math.max(3, 11 - len / 28);                     // it thins as it stretches, like elastic
+        const sh = arrow.querySelector('.shaft'); sh.setAttribute('d', `M${x0},${y0} L${bx.toFixed(1)},${by.toFixed(1)}`); sh.style.strokeWidth = sw.toFixed(1);
+        const px = -uy * hl * 0.62, py = ux * hl * 0.62;
+        arrow.querySelector('.head').setAttribute('d', `M${x.toFixed(1)},${y.toFixed(1)} L${(x - ux * hl + px).toFixed(1)},${(y - uy * hl + py).toFixed(1)} L${(x - ux * hl - px).toFixed(1)},${(y - uy * hl - py).toFixed(1)} Z`);
+      }
+      // on release it snaps back to where the finger landed and is gone
+      function dropArrow(x0, y0, x, y) {
+        const a = arrow; arrow = null; if (!a) return;
+        if (reduced) { a.remove(); return; }
+        const t0 = performance.now(), T = 170;
+        const step = (now) => {
+          const u = Math.min(1, (now - t0) / T), k = 1 - u * u;
+          if (!a.isConnected) return;
+          const keep = arrow; arrow = a; drawArrow(x0, y0, x0 + (x - x0) * k, y0 + (y - y0) * k); arrow = keep;
+          a.style.opacity = (1 - u).toFixed(2);
+          if (u < 1) rafs.push(requestAnimationFrame(step)); else a.remove();
+        };
+        rafs.push(requestAnimationFrame(step));
+      }
+      (function bindSwipe() {
+        let p = null;
+        const card = () => stage.querySelector('.ub-r');
+        stage.addEventListener('pointerdown', (e) => {
+          if (!run || busy || p || e.button) return;
+          const el = card(); if (!el) return;
+          p = { id: e.pointerId, x0: e.clientX, y0: e.clientY, x: e.clientX, y: e.clientY, off: 0, el };
+          stage.setPointerCapture(e.pointerId); el.getAnimations().forEach((a) => a.cancel());
+          drawArrow(p.x0, p.y0, p.x0, p.y0);
+        });
+        stage.addEventListener('pointermove', (e) => {
+          if (!p || e.pointerId !== p.id) return;
+          p.x = e.clientX; p.y = e.clientY; p.off = rubber(p.y - p.y0);
+          p.el.style.transform = `translateY(${p.off.toFixed(1)}px)`;
+          drawArrow(p.x0, p.y0, p.x, p.y);
+        });
+        const up = (e) => {
+          if (!p || e.pointerId !== p.id) return;
+          const q = p; p = null;
+          const dy = e.clientY - q.y0, go = e.type === 'pointerup' && Math.abs(dy) > 50 && run && !busy;
+          dropArrow(q.x0, q.y0, q.x, q.y);
+          if (go) { busy = true; enable(false); }
+          springBack(q.el, q.off, () => { if (go) { busy = false; answer(dy < 0); } });
+        };
+        stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', up);
+      })();
       idle();
     },
-    unmount() { timers.forEach(clearTimeout); rafs.forEach(cancelAnimationFrame); timers = []; rafs = []; document.querySelectorAll('.ub-fly').forEach((f) => f.remove()); }
+    unmount() { timers.forEach(clearTimeout); rafs.forEach(cancelAnimationFrame); timers = []; rafs = []; document.querySelectorAll('.ub-fly, .ub-boom, .ub-tick, .ub-arrow').forEach((f) => f.remove()); }
   });
 
   // the home screen card (screens/home.js), in the same shape as the other games' cards

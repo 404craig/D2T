@@ -24,16 +24,17 @@
 .ub-fly { position: fixed; z-index: 60; font: 900 italic 34px/1 var(--font); color: var(--ub); pointer-events: none; text-shadow: 0 0 18px rgba(34,211,238,.6); }
 
 /* the stage */
-.ub-stage { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 16px; }
+.ub-stage { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 16px; touch-action: none; -webkit-user-select: none; user-select: none; }
 .ub-stage::before { content: ''; position: absolute; left: 50%; top: 50%; width: 380px; height: 340px; transform: translate(-50%, -50%); pointer-events: none; background: radial-gradient(60% 50% at 50% 50%, rgba(255,255,255,0.045), rgba(255,255,255,0)); }
 
 /* stat spin */
-.ub-statwin { position: relative; height: 228px; overflow: hidden; border-radius: 22px; background: var(--ink); border: 1px solid var(--line);
+.ub-statwin { position: relative; flex-shrink: 0; height: 228px; overflow: hidden; border-radius: 22px; background: var(--ink); border: 1px solid var(--line);
   -webkit-mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent); mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent); }
 .ub-statwin::before { content: ''; position: absolute; left: 12px; right: 12px; top: 50%; height: 76px; transform: translateY(-50%); border-radius: 16px; border: 2px solid var(--ub); z-index: 2; pointer-events: none; }
 .ub-statwin.is-hit::before { animation: ubHit .5s var(--ease-out); }
 @keyframes ubHit { 30% { box-shadow: 0 0 24px rgba(34,211,238,.7); transform: translateY(-50%) scale(1.03); } }
-.ub-statstrip { position: absolute; left: 0; right: 0; top: 76px; will-change: transform; }
+/* the strip's first tile sits in the frame's middle whatever height the window gets */
+.ub-statstrip { position: absolute; left: 0; right: 0; top: calc(50% - 38px); will-change: transform; }
 .ub-tile { height: 76px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 16px; }
 .ub-tile small { font-size: 10.5px; font-weight: 800; letter-spacing: .16em; color: var(--ub-t); margin-bottom: 5px; }
 .ub-tile span { font: 900 italic 23px/1 var(--font); text-transform: uppercase; }
@@ -113,3 +114,58 @@
 /* home card mark */
 .fr-gm-mark .ub-mark { width: 112px; height: 112px; }
 @media (prefers-reduced-motion: reduce) { .ub-streak.burst b, .ub-streak.burst .ring, .ub-slot.bad, .ub-pop, .ub-statwin.is-hit::before, .ub-num.q { animation: none !important; } }
+/* the reveal: a burst from the hidden number, then a cyan tick from the VS disc up to the run count (Craig, 12 Oct) */
+.ub-boom { position: fixed; width: 0; height: 0; z-index: 60; pointer-events: none; }
+.ub-boom i { position: absolute; left: 0; top: 0; border-radius: 2px; box-shadow: 0 0 6px rgba(34,211,238,.4); }
+.ub-boom-ring { position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%; border: 3px solid #22D3EE; box-shadow: 0 0 18px rgba(34,211,238,.9), inset 0 0 10px rgba(255,255,255,.5); }
+.ub-boom-flash { position: absolute; left: 0; top: 0; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle, #fff 0%, rgba(139,233,247,.8) 35%, rgba(34,211,238,0) 70%); }
+.ub-tick { position: fixed; z-index: 61; width: 66px; height: 66px; border-radius: 50%; background: #22D3EE; color: #001A1F; display: grid; place-items: center; box-shadow: 0 0 0 4px #000, 0 0 28px rgba(34,211,238,.85); pointer-events: none; }
+.ub-tick svg { width: 38px; height: 38px; }
+/* the answer bar: three refreshes on the left, Lower and Higher in the middle, home on the right (Craig, 13 Oct) */
+.ub-bar .ub-ans { min-width: 0; }
+.ub-ans svg { flex-shrink: 0; }
+.ub-bar .ub-reload[disabled] { opacity: .3; }
+/* the elastic arrow from where the finger landed to where it is */
+.ub-arrow { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 59; pointer-events: none; overflow: visible; filter: drop-shadow(0 0 8px rgba(34,211,238,.6)); }
+.ub-arrow .shaft { fill: none; stroke: #22D3EE; stroke-linecap: round; }
+.ub-arrow .head { fill: #22D3EE; stroke: #22D3EE; stroke-width: 2; stroke-linejoin: round; }
+/* the end sheet's second button */
+.ub-newrun { border: 2px solid #FFFFFF; }
+/* Lower and Higher (Craig, 13 Oct): the word dead centre both ways, the down arrow under LOWER, the up arrow over HIGHER */
+.ub-bar .ub-ans { position: relative; display: grid; place-items: center; padding: 0 8px; line-height: 1; }
+.ub-bar .ub-ans span { display: block; text-align: center; padding-right: .06em; }
+.ub-bar .ub-ans svg { position: absolute; left: 50%; width: 14px; height: 14px; margin-left: -7px; }
+.ub-bar .ub-ans.ub-lower svg { bottom: 4px; }
+.ub-bar .ub-ans.ub-higher svg { top: 4px; }
+/* the start page (Craig, 13 Oct): best runs 3 x 3 in the record outline, centred; New run swaps them for the stat reel */
+.ub-start, .ub-reelin { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 16px; transition: opacity .35s var(--ease-out), transform .45s var(--ease-out); }
+.ub-start .ub-bests-h { margin: 0 0 10px; align-self: stretch; text-align: center; }
+.ub-grid { width: 86%; max-width: 312px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.ub-fr { position: relative; aspect-ratio: 100 / 112; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 13%; text-align: center; }
+.ub-fr > svg:not(.ub-star) { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ub-fr polygon { fill: rgba(34,211,238,.05); stroke: #22D3EE; stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+.ub-fr.none polygon { stroke: rgba(34,211,238,.45); fill: rgba(255,255,255,.03); }
+.ub-fr b { position: relative; font: 900 italic 30px/1 var(--font); color: #fff; }
+.ub-fr.none b { color: #3A3A44; }
+.ub-fr span { position: relative; font-size: 10px; font-weight: 800; line-height: 1.15; margin-top: 6px; padding: 0 8px; text-transform: uppercase; letter-spacing: .04em; color: var(--soft); }
+.ub-fr.top { filter: drop-shadow(0 0 12px rgba(34,211,238,.45)); }
+.ub-fr.top polygon { fill: url(#ubTop); stroke: #CFFAFF; stroke-width: 1.8; }
+.ub-fr.top b, .ub-fr.top span { color: #04262C; }
+.ub-fr.top b { text-shadow: 0 1px 0 rgba(255,255,255,.35); }
+.ub-star { position: absolute; right: 8%; top: 7%; width: 21%; height: auto; aspect-ratio: 1; z-index: 1; }
+.ub-shine { position: absolute; inset: 0; overflow: hidden; clip-path: polygon(1% 8.6%, 11% .8%, 89% .8%, 99% 8.6%, 99% 84.4%, 50% 99.2%, 1% 84.4%); pointer-events: none; }
+.ub-shine::after { content: ''; position: absolute; top: -20%; left: -70%; width: 45%; height: 140%; transform: rotate(18deg); background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0)); animation: ubShine 6s ease-in-out infinite; }
+@keyframes ubShine { 0% { left: -70%; } 22% { left: 130%; } 100% { left: 130%; } }
+.ub-reelin { opacity: 0; transform: scale(.9); pointer-events: none; }
+.ub-reelin small { font-size: 11px; font-weight: 800; letter-spacing: .16em; color: var(--ub-t); margin-bottom: 12px; }
+.ub-reelin .ub-statwin { width: 100%; }
+.ub-thisbest { margin: 14px 0 0; text-align: center; font-size: 13px; color: var(--muted); min-height: 18px; }
+.ub-thisbest em { font-style: normal; color: var(--ub-t); }
+.ub-tile.on span { color: #fff; }
+.ub-stage.ub-go .ub-start { opacity: 0; transform: scale(.94); pointer-events: none; }
+.ub-stage.ub-go .ub-reelin { opacity: 1; transform: none; }
+.ub-bar .ub-off { opacity: .3; }
+@media (max-height: 700px) { .ub-fr b { font-size: 26px; } .ub-fr span { font-size: 9.5px; margin-top: 4px; } .ub-grid { gap: 7px 8px; max-width: 272px; } .ub-start .ub-bests-h { margin-bottom: 6px; } }
+@media (prefers-reduced-motion: reduce) { .ub-shine::after { animation: none; display: none; } .ub-start, .ub-reelin { transition: none; } }
+.ub-reelin .ub-tile span { color: #6A6A74; }
+.ub-reelin .ub-tile.on span { color: #fff; }

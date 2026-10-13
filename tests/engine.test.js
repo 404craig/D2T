@@ -140,6 +140,22 @@ t("Club X: each season's bottom club is replaced by a drafted XI that plays the 
     assert.strictEqual(st.phase, "summary", c.key);
   }
 });
+t("Club X spins one season and drafts its shirts in a random order that replays; Dare2Dream stays keeper first", () => {
+  const S = G.seasons["2007/08"], derby = S.clubs.find(x => x.name === "Derby").id;
+  const xr = D.newRun({ seed: "clx-one", mode: "clubx", catalogue: G.clubSeasons });
+  assert.strictEqual(xr.clubOffer.length, 1, "Club X should offer one season");
+  assert.ok(D.respinClubs(xr, G.clubSeasons) && xr.clubOffer.length === 1, "a Club X respin should offer one season");
+  assert.strictEqual(D.newRun({ seed: "d2d-three", mode: "dare2dream", catalogue: G.clubSeasons }).clubOffer.length, 3);
+  const orderOf = (seed, mode) => { const st = D.newRun({ seed, mode, catalogue: G.clubSeasons }); D.chooseClub(st, S, { c: derby, f: "4-4-2", xi: [] }); const out = []; while (st.phase === "draft") { const slot = D.draftSlot(st); out.push(slot); assert.ok(D.draftPick(st, S, st.roll.cards[0])); } return out; };
+  const orders = ["a", "b", "c", "d", "e", "f"].map((k) => orderOf("clx-order-" + k, "clubx"));
+  orders.forEach((o) => assert.deepStrictEqual(o.slice().sort((x, y) => x - y), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "every shirt once"));
+  assert.ok(new Set(orders.map((o) => o.join())).size > 1, "Club X draft orders should differ between runs");
+  assert.ok(orders.some((o) => o[0] !== 0), "Club X should not always start with the keeper");
+  assert.deepStrictEqual(orderOf("clx-order-a", "clubx"), orders[0], "the same seed replays the same order");
+  const d = orderOf("d2d-order", "dare2dream");
+  assert.strictEqual(d[0], 0, "Dare2Dream starts with the keeper");
+  assert.deepStrictEqual(d, D.draftOrder("4-4-2"));
+});
 t("Dare2Dream: a sample of drafted seasons plays to the end, and draft picks weaken their clubs", () => {
   for (const c of G.clubSeasons.filter((_, i) => i % 45 === 0)) {
     const { st, S } = draft("d2d-play-" + c.key, c);
