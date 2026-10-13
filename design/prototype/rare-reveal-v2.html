@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rare Card Reveal v2</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<link rel="stylesheet" href="main80/base.css">
+<style>
+  /* The rare card reveal on a roll: when a purple or legend card is coming, its reel keeps spinning without landing; when
+     its turn comes it bursts out as a big blank card, the six stats pop in one by one (big, then small onto the card) while
+     the rating rolls up with motion blur and slows onto its number, then the name prints as the crest and flag burst on.
+     It holds for 2 seconds and drops back into its slot, then the other reels carry on. Cards are the live ones (build 80). */
+  :root { color-scheme: dark; --muted: #8E8E99; --soft: #CFCFD6; --line: #26262C; --g: #12F06C; --ease-out: cubic-bezier(.2, .8, .2, 1); }
+  html, body { background: #08080A; }
+  .page { max-width: 1100px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 22px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
+  .head p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 96ch; }
+  .ctl { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .ctl span { font-size: 12px; font-weight: 800; letter-spacing: .12em; color: var(--muted); margin-right: 2px; }
+  .ctl button { height: 42px; padding: 0 16px; border-radius: 21px; border: 1px solid #3A3A44; background: #111114; color: #fff; font: 800 14px/1 'Exo 2'; cursor: pointer; }
+  .ctl button.on { background: var(--g); color: #000; border-color: var(--g); }
+  .wrap { display: flex; gap: 28px; flex-wrap: wrap; align-items: flex-start; justify-content: center; }
+  .steps { max-width: 420px; color: #CFCFD6; font-size: 14px; line-height: 1.55; }
+  .steps ol { padding-left: 20px; margin: 0; }
+  .steps li { margin-bottom: 8px; }
+  .steps b { color: #fff; }
+
+  /* the phone and the roll screen, as live (spin.css) */
+  .phone { position: relative; width: 393px; height: 852px; border-radius: 30px; background: #000; box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,.6); overflow: hidden; display: flex; flex-direction: column; }
+  .tb { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 50px 16px 8px; }
+  .logo { display: block; height: 26px; aspect-ratio: 857 / 241; background: #fff; -webkit-mask: url('assets/logo/short.png') center / contain no-repeat; mask: url('assets/logo/short.png') center / contain no-repeat; }
+  .mtag { font: 900 italic 15px/1 'Exo 2'; letter-spacing: .04em; text-transform: uppercase; color: #0A0A0A; background: #DB0007; color: #fff; padding: 5px 10px 4px; border-radius: 5px; transform: skewX(-10deg); }
+  .mtag span { display: inline-block; transform: skewX(10deg); }
+  .acct { justify-self: end; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: #0E0E10; }
+  .hd { padding: 6px 16px 0; }
+  .hd small { display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em; color: var(--muted); margin-bottom: 6px; }
+  .hd h1 { margin: 0; font: 900 italic 34px/.95 'Exo 2'; text-transform: uppercase; }
+  .hd p { margin: 8px 0 0; font-size: 15px; line-height: 1.35; color: var(--soft); }
+  .stage { flex: 1; display: flex; align-items: center; justify-content: center; position: relative; }
+  .rowr { display: flex; gap: 8px; }
+  .slot { position: relative; width: 114px; height: 190px; }
+  .glow { position: absolute; left: 50%; top: 50%; width: 220px; height: 300px; transform: translate(-50%, -50%); opacity: 0; pointer-events: none; background: radial-gradient(48% 44% at 50% 50%, var(--acc, #fff) 0%, rgba(0,0,0,0) 72%); filter: blur(8px); transition: opacity .4s var(--ease-out); }
+  .slot.set .glow { opacity: .6; }
+  .win { position: absolute; left: 0; top: -44px; width: 114px; height: 278px; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 17%, #000 83%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 17%, #000 83%, transparent 100%); }
+  .slot.set .win { -webkit-mask-image: none; mask-image: none; }
+  .strip { position: absolute; left: 0; top: 44px; width: 114px; height: 190px; will-change: transform, filter; }
+  .node { position: absolute; left: 0; top: 0; width: 114px; height: 190px; }
+  .node .d2c { filter: none; }
+  .slot.set .node.hit .d2c { filter: var(--glow, none); }
+  .node.gone { opacity: 0; transition: opacity .3s; }
+  .slot.hit .strip { animation: impact .46s cubic-bezier(.2, .9, .3, 1.3) both; }
+  @keyframes impact { 28% { transform: scale(1.065); } }
+  .sweep { position: absolute; top: -20%; left: -60%; width: 40%; height: 140%; opacity: 0; transform: rotate(16deg); pointer-events: none; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.75), rgba(255,255,255,0)); }
+  .slot.hit .sweep { animation: sweep .55s cubic-bezier(.3, .7, .2, 1) .04s both; }
+  @keyframes sweep { 0% { left: -60%; opacity: 0; } 15% { opacity: 1; } 100% { left: 130%; opacity: 0; } }
+  .slot.hidden .win, .slot.hidden .glow { visibility: hidden; }
+  .hint { text-align: center; font-size: 13px; color: var(--muted); min-height: 18px; }
+  .bar { display: flex; align-items: center; gap: 10px; padding: 10px 16px 30px; }
+  .main { flex: 1; height: 58px; border-radius: 29px; border: 0; background: #DB0007; color: #fff; font: 900 italic 21px/1 'Exo 2'; text-transform: uppercase; cursor: pointer; box-shadow: 0 6px 16px -6px #DB0007; }
+  .main[disabled] { opacity: .5; }
+  .round { width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--line); background: #0E0E10; flex: none; }
+
+  /* ---------- the reveal ---------- */
+  .ov { position: absolute; inset: 0; z-index: 30; pointer-events: none; }
+  .ov .dim { position: absolute; inset: 0; background: radial-gradient(60% 40% at 50% 48%, color-mix(in srgb, var(--lc) 16%, #000), #000 70%); opacity: 0; transition: opacity .28s; }
+  .roller { position: absolute; overflow: hidden; text-align: center; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 38%, #000 62%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 38%, #000 62%, transparent 100%); }
+  .roller .rs { will-change: transform, filter; }
+  .roller span { display: block; }
+  .ov.on .dim { opacity: 1; }
+  .ov canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .ov .ring { position: absolute; width: 60px; height: 60px; margin: -30px; border-radius: 50%; border: 4px solid var(--lc); opacity: 0; }
+  .ov .ring.go { animation: ring .7s var(--ease-out) forwards; }
+  @keyframes ring { 0% { opacity: .9; transform: scale(.3); } 100% { opacity: 0; transform: scale(7); } }
+  .ov .flash { position: absolute; inset: 0; background: #fff; opacity: 0; }
+  .ov .flash.go { animation: flash .35s ease-out; }
+  @keyframes flash { 0% { opacity: .55; } 100% { opacity: 0; } }
+  .big { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
+  .big .d2c { filter: var(--glow); }
+  .big.blank .d2c-ovr, .big.blank .d2c-pos, .big.blank .d2c-rule, .big.blank .d2c-flag, .big.blank .d2c-crest,
+  .big.blank .d2c-first, .big.blank .d2c-last, .big.blank .d2c-stat { visibility: hidden; }
+  .big .d2c-stat.in, .big .d2c-ovr.in, .big .d2c-pos.in, .big .d2c-rule.in, .big .d2c-flag.in, .big .d2c-crest.in, .big .d2c-first.in, .big .d2c-last.in { visibility: visible; }
+  .big .d2c-crest.in, .big .d2c-flag.in { animation: pop .5s cubic-bezier(.3, 1.6, .5, 1) both; }
+  @keyframes pop { 0% { transform: scale(0); } 60% { transform: scale(1.3); } 100% { transform: scale(1); } }
+  .big .d2c-stat.in { animation: land .22s ease-out both; }
+  @keyframes land { 0% { transform: scale(1.35); } 100% { transform: scale(1); } }
+  .big .ch { display: inline-block; animation: chIn .18s ease-out both; white-space: pre; }
+  @keyframes chIn { 0% { opacity: 0; transform: translateY(-.4em) scale(1.4); } 100% { opacity: 1; transform: none; } }
+  .fstat { position: absolute; z-index: 5; display: flex; flex-direction: column; align-items: center; line-height: 1; font-family: 'Exo 2'; color: #fff; transform-origin: 50% 50%; text-shadow: 0 4px 18px rgba(0,0,0,.5); will-change: transform; }
+  .fstat b { font: 900 italic 74px/1 'Exo 2'; }
+  .fstat i { font-style: normal; font: 800 24px/1 'Exo 2'; letter-spacing: .08em; opacity: .9; margin-top: 4px; }
+  .rollwin { display: inline-block; height: .92em; overflow: hidden; vertical-align: top; }
+  .rollstrip { display: block; will-change: transform, filter; }
+  .rollstrip span { display: block; height: .92em; line-height: .92; }
+  .badge { position: absolute; left: 50%; transform: translateX(-50%); font: 900 italic 18px/1 'Exo 2'; letter-spacing: .16em; color: var(--lc); text-shadow: 0 0 18px var(--lc); opacity: 0; white-space: nowrap; }
+  .badge.go { animation: bIn .5s var(--ease-out) forwards; }
+  @keyframes bIn { 0% { opacity: 0; transform: translateX(-50%) scale(1.6); letter-spacing: .5em; } 100% { opacity: 1; transform: translateX(-50%) scale(1); } }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <h1>Purple and legend cards: the reveal, v2</h1>
+    <p>A mock-up of the roll with the live cards. Pick where the rare card lands and whether it is purple or a legend, then hit Spin on the phone. The cards are real 2003/04 cards from the game: Thierry Henry (legend, 99) and Frank Lampard (purple, 93), with real bronze, silver and gold cards in the other slots.</p>
+  </div>
+  <div class="ctl"><span>RARE CARD</span><button class="on" data-lv="legend">Legend</button><button data-lv="baller">Purple</button>
+    <span style="margin-left:14px">IN SLOT</span><button data-s="0">1</button><button class="on" data-s="1">2</button><button data-s="2">3</button></div>
+  <div class="wrap">
+    <div class="phone" id="ph">
+      <div class="tb"><span class="logo"></span><span class="mtag"><span>Classic</span></span><span class="acct"></span></div>
+      <div class="hd"><small>SUMMER TRANSFER WINDOW · ROLL 1 OF 3</small><h1>Who comes in?</h1><p>Roll 1 of 17 this season, before GW1. Sign one or pass.</p></div>
+      <div class="stage"><div class="rowr"><div class="slot"></div><div class="slot"></div><div class="slot"></div></div></div>
+      <div class="hint" id="hint">Hit Spin to roll three players</div>
+      <div class="bar"><span class="round"></span><button class="main" id="spin">Spin</button><span class="round"></span></div>
+      <div class="ov" id="ov"><div class="dim"></div><canvas></canvas><div class="flash"></div><span class="ring"></span><div class="badge"></div></div>
+    </div>
+    <div class="steps"><ol>
+      <li>The reels spin as now; the rare card's reel keeps rolling, blurred, until its turn.</li>
+      <li>The <b>screen goes dark</b>. <b>Glass shards</b> in the card's colours explode from the centre of the screen in every direction.</li>
+      <li>The <b>big blank card bursts out of the very centre</b> of the screen, to 115% and back.</li>
+      <li>The <b>six stats pop in one after the other, each in its own place</b>: from nothing to 120% and back to 100%.</li>
+      <li>After the sixth, the <b>rating rolls upwards like a fruit machine</b>, blurred while fast, then <b>ticks in slowly</b> over the last five numbers. Its window fades out to nothing above and below, with no hard edges.</li>
+      <li>The <b>flag bursts on</b> in place (to 120%, back to 100%), then the <b>crest</b> the same way, each with a few shards.</li>
+      <li>The <b>name appears letter by letter</b>.</li>
+      <li>The card <b>holds for 3 seconds</b>, then shrinks from its full size down into its place in the reel. The other reels then carry on; if it was the last, the roll is done.</li>
+    </ol></div>
+  </div>
+</div>
+<script src="main80/cards.js"></script>
+<script>
+(function () {
+  const D2T = window.D2T;
+  const CR = (c) => 'assets/crests/' + ({ 'Arsenal': 'arsenal', 'Chelsea': 'chelsea', 'Man Utd': 'man-utd', 'Liverpool': 'liverpool', 'Newcastle': 'newcastle', 'Everton': 'everton', 'Fulham': 'fulham', 'Charlton': 'charlton', 'Middlesbrough': 'middlesbrough', 'Spurs': 'spurs', 'Wolves': 'wolves', 'Man City': 'man-city' })[c] + '.png';
+  const FL = { 'England': 'gb-eng', 'France': 'fr', 'Scotland': 'gb-sct', 'Wales': 'gb-wls', 'Republic of Ireland': 'ie', 'Spain': 'es', 'Germany': 'de', 'Portugal': 'pt', 'Jamaica': 'jm', 'South Africa': 'za', 'DR Congo': 'cd' };
+  const K = ['GOL', 'IMP', 'FIT', 'WIN', 'DEF', 'EXP'];
+  // real 2003/04 cards from data/game/game.json on main: name, rating, level, broad position, main position, club, nationality, six stats
+  const RAW = [['Francis Jeffers', 66, 'bronze', 'FWD', 'ST', 'Everton', 'England', [20, 20, 57, 38, 57, 78]],
+    ['Shaun Newton', 69, 'bronze', 'MID', 'RM', 'Wolves', 'England', [20, 20, 78, 31, 33, 72]],
+    ['Colin Cameron', 69, 'bronze', 'MID', 'CM', 'Wolves', 'Scotland', [53, 56, 82, 31, 33, 64]],
+    ['Barry Hayles', 69, 'bronze', 'FWD', 'ST', 'Fulham', 'Jamaica', [56, 48, 74, 52, 71, 76]],
+    ['Shaun Bartlett', 71, 'silver', 'FWD', 'ST', 'Charlton', 'South Africa', [67, 54, 60, 53, 65, 77]],
+    ['Robbie Fowler', 76, 'silver', 'FWD', 'ST', 'Man City', 'England', [63, 62, 84, 40, 61, 94]],
+    ['Jonathan Greening', 71, 'silver', 'MID', 'CM', 'Middlesbrough', 'England', [38, 31, 72, 48, 63, 81]],
+    ['Gaizka Mendieta', 74, 'silver', 'MID', 'RM', 'Middlesbrough', 'Spain', [43, 39, 84, 48, 63, 65]],
+    ['Gary Speed', 81, 'gold', 'MID', 'CM', 'Newcastle', 'Wales', [46, 43, 99, 56, 78, 98]],
+    ['Robbie Keane', 81, 'gold', 'FWD', 'ST', 'Spurs', 'Republic of Ireland', [79, 99, 91, 44, 57, 84]],
+    ['Dietmar Hamann', 80, 'gold', 'MID', 'CDM', 'Liverpool', 'Germany', [46, 36, 72, 61, 82, 86]],
+    ['Claude Makelele', 88, 'gold', 'MID', 'CDM', 'Chelsea', 'France', [20, 20, 82, 81, 90, 64]]];
+  const mk = ([name, ovr, level, pos, main, club, nat, s6]) => ({ name, ovr, level, pos, main, nat, crest: CR(club), flag: 'main80/' + FL[nat] + '.png', stats: Object.fromEntries(K.map((k, i) => [k, s6[i]])) });
+  const POOL = RAW.map(mk);
+  const RARE = { legend: mk(['Thierry Henry', 99, 'legend', 'FWD', 'ST', 'Arsenal', 'France', [99, 99, 97, 94, 95, 87]]), baller: mk(['Frank Lampard', 93, 'baller', 'MID', 'CM', 'Chelsea', 'England', [67, 67, 99, 81, 90, 92]]) };
+  const LVC = { legend: ['#FF6900', '#FFD36E', '#FF2882', '#EBFF00', '#ffffff'], baller: ['#B48CFF', '#6A2EE8', '#05F0FF', '#FF2882', '#ffffff'] };
+  const ACC = { bronze: '#E3A577', silver: '#DCE2E8', gold: '#FFD95A', baller: '#B48CFF', legend: '#FF8A4C' };
+  const card = (c, w) => D2T.cards.player(c, { w: w || 114, shine: false });
+  const hash = (i, s) => { let h = (i * 2654435761 + s * 97) >>> 0; h ^= h >>> 15; return h >>> 0; };
+
+  let lv = 'legend', slotIx = 1;
+  document.querySelectorAll('.ctl button').forEach((b) => { b.onclick = () => {
+    if (b.dataset.lv) { lv = b.dataset.lv; document.querySelectorAll('[data-lv]').forEach((x) => x.classList.toggle('on', x === b)); }
+    else { slotIx = +b.dataset.s; document.querySelectorAll('[data-s]').forEach((x) => x.classList.toggle('on', x === b)); }
+  }; });
+
+  // ---------- a reel: cruises, then lands on a target with the club spin's decel and spring (screens/spin.js) ----------
+  const PITCH = 198, NODES = 5, clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  let fid = 0;
+  class Reel {
+    constructor(slot, seed) {
+      this.slot = slot; this.seed = seed; this.id = 'mb' + (++fid);
+      slot.innerHTML = `<svg width="0" height="0" style="position:absolute"><filter id="${this.id}" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation="0 0"/></filter></svg><div class="glow"></div><div class="win"><div class="strip">${'<div class="node"></div>'.repeat(NODES)}</div><div class="sweep"></div></div>`;
+      this.strip = slot.querySelector('.strip'); this.nodes = [...slot.querySelectorAll('.node')]; this.gauss = slot.querySelector('feGaussianBlur'); this.win = slot.querySelector('.win');
+      this.p = 0; this.v = 0; this.phase = 'idle'; this.target = null; this.T = -1; this.f = false; this.cur = null;
+    }
+    html(i) { return i === this.T ? card(this.target) : i === 0 && this.cur ? card(this.cur) : card(POOL[hash(i, this.seed) % POOL.length]); }
+    draw() {
+      const c = Math.round(this.p);
+      for (let k = -2; k <= 2; k++) { const vi = c + k, n = this.nodes[((vi % NODES) + NODES) % NODES];
+        if (n.dataset.vi !== String(vi)) { n.dataset.vi = vi; n.innerHTML = this.html(vi); n.classList.remove('hit', 'gone'); }
+        n.style.transform = `translate3d(0,${((vi - this.p) * PITCH).toFixed(1)}px,0)`; }
+      const pxf = Math.abs(this.v) * PITCH / 60, sd = clamp(pxf * .3 - 1.2, 0, 22);
+      if (sd < .4) { if (this.f) { this.strip.style.filter = ''; this.f = false; } } else { this.gauss.setAttribute('stdDeviation', `0 ${sd.toFixed(1)}`); if (!this.f) { this.strip.style.filter = `url(#${this.id})`; this.f = true; } }
+    }
+    start() { this.slot.classList.remove('set', 'hit', 'hidden'); this.phase = 'accel'; this.t0 = null; this.T = -1; this.p = 0; this.v = 0; this.nodes.forEach((n) => { n.dataset.vi = ''; }); }
+    // plan a landing on `target` from the current cruise
+    land(target) {
+      const P = this.P = { vmax: 22, decelT: 1.1, n: 2.3, v1: 2.4, z: 5.2, w: 15 };
+      P.D = P.decelT * (P.v1 + (P.vmax - P.v1) / (P.n + 1));
+      this.target = target; this.T = Math.ceil(this.p + P.D + 0.5); this.decelFrom = this.T - P.D; this.phase = 'approach';
+    }
+    // drop straight onto a card (after the reveal)
+    set(target) { this.target = target; this.T = Math.round(this.p); this.p = this.T; this.v = 0; this.phase = 'done'; this.nodes.forEach((n) => { n.dataset.vi = ''; }); this.draw(); this.hit(); }
+    hit() {
+      this.slot.style.setProperty('--acc', ACC[this.target.level]);
+      this.nodes.forEach((n) => n.classList.toggle('hit', n.dataset.vi === String(this.T)));
+      this.nodes.forEach((n) => { if (n.dataset.vi !== String(this.T)) n.classList.add('gone'); });
+      this.slot.classList.remove('hit'); void this.slot.offsetWidth; this.slot.classList.add('hit', 'set');
+      this.onLand && this.onLand();
+    }
+    tick(dt, now) {
+      const P = this.P;
+      if (this.phase === 'accel') { this.v = Math.min(22, this.v + 22 / .3 * dt); if (this.v >= 22) this.phase = 'cruise'; this.p += this.v * dt; }
+      else if (this.phase === 'cruise') { this.p += this.v * dt; }
+      else if (this.phase === 'approach') { this.v = 22; this.p += this.v * dt; if (this.p >= this.decelFrom) { this.phase = 'decel'; this.dt0 = 0; this.p0 = this.decelFrom; } }
+      if (this.phase === 'decel') {
+        this.dt0 += dt; const u = Math.min(1, this.dt0 / P.decelT);
+        this.p = this.p0 + P.decelT * (P.v1 * u + (P.vmax - P.v1) * (1 - Math.pow(1 - u, P.n + 1)) / (P.n + 1));
+        this.v = P.v1 + (P.vmax - P.v1) * Math.pow(1 - u, P.n);
+        if (u >= 1) { this.phase = 'spring'; this.st = 0; this.p = this.T; this.hit(); }
+      } else if (this.phase === 'spring') {
+        this.st += dt; const wd = Math.sqrt(P.w * P.w - P.z * P.z), e = Math.exp(-P.z * this.st);
+        this.p = this.T + (P.v1 / wd) * e * Math.sin(wd * this.st); this.v = 0;
+        if (this.st > .75) { this.phase = 'done'; this.p = this.T; }
+      }
+      if (this.phase !== 'idle') this.draw();
+    }
+  }
+
+  const slots = [...document.querySelectorAll('.slot')];
+  let reels = slots.map((s, i) => new Reel(s, i + 1));
+  reels.forEach((r, i) => { r.cur = POOL[i * 4]; r.T = 0; r.target = r.cur; r.p = 0; r.draw(); r.slot.classList.add('set'); });
+  let raf = null, last = 0;
+  const loop = (now) => { const dt = Math.min(.05, (now - (last || now)) / 1000); last = now; reels.forEach((r) => r.tick(dt, now)); raf = requestAnimationFrame(loop); };
+  raf = requestAnimationFrame(loop);
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- glass shards, from the centre of the screen outwards ----------
+  const ov = document.getElementById('ov'), cv = ov.querySelector('canvas'), cx = cv.getContext('2d');
+  let shards = [];
+  const sizeCv = () => { const r = ov.getBoundingClientRect(); cv.width = r.width * 2; cv.height = r.height * 2; };
+  const shatter = (x, y, n, cols) => {
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2 + Math.random() * .4, v = 6 + Math.random() * 16, r = 8 + Math.random() * 30;
+      // a jagged 3 to 5 point shard around its own centre
+      const k = 3 + (Math.random() * 3 | 0), pts = [];
+      for (let j = 0; j < k; j++) { const t = (j / k) * Math.PI * 2 + Math.random() * .8; pts.push([Math.cos(t) * r * (.4 + Math.random() * .8), Math.sin(t) * r * (.4 + Math.random() * .8) * .6]); }
+      shards.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, rot: Math.random() * 6, vr: (Math.random() - .5) * .35, pts, c: cols[i % cols.length], life: 1, d: .008 + Math.random() * .01 });
+    }
+  };
+  const glassLoop = () => {
+    cx.clearRect(0, 0, cv.width, cv.height); shards = shards.filter((g) => g.life > 0);
+    shards.forEach((g) => {
+      g.x += g.vx; g.y += g.vy; g.vx *= .985; g.vy *= .985; g.rot += g.vr; g.life -= g.d;
+      cx.save(); cx.translate(g.x * 2, g.y * 2); cx.rotate(g.rot); cx.scale(2, 2); cx.globalAlpha = Math.max(0, g.life);
+      cx.beginPath(); g.pts.forEach(([px, py], j) => (j ? cx.lineTo(px, py) : cx.moveTo(px, py))); cx.closePath();
+      const gr = cx.createLinearGradient(-20, -20, 20, 20); gr.addColorStop(0, 'rgba(255,255,255,.85)'); gr.addColorStop(.35, g.c); gr.addColorStop(1, g.c + '55');
+      cx.fillStyle = gr; cx.fill(); cx.lineWidth = .8; cx.strokeStyle = 'rgba(255,255,255,.9)'; cx.stroke(); cx.restore();
+    });
+    cx.globalAlpha = 1; requestAnimationFrame(glassLoop);
+  };
+  glassLoop();
+
+  // pop an element in its own place: 0, up to 120%, back to 100%
+  const popIn = (el, ms = 380) => { el.classList.add('in'); el.animate([{ transform: 'scale(0)', opacity: 0 }, { transform: 'scale(1.2)', opacity: 1, offset: .6 }, { transform: 'scale(1)', opacity: 1 }], { duration: ms, easing: 'cubic-bezier(.3,1.2,.5,1)' }); return wait(ms); };
+
+  // ---------- the reveal ----------
+  async function reveal(reel, c) {
+    const ph = document.getElementById('ph').getBoundingClientRect(), sr = reel.slot.getBoundingClientRect();
+    sizeCv(); ov.style.setProperty('--lc', ACC[c.level]); ov.classList.add('on');
+    reel.slot.classList.add('hidden');
+    const W = 270, H = W * 1.667, fx = (ph.width - W) / 2, fy = (ph.height - H) / 2 + 10, mx = ph.width / 2, my = fy + H / 2;
+    await wait(260);                                            // the screen goes dark first
+    const big = document.createElement('div'); big.className = 'big blank'; big.innerHTML = card(c, W); ov.appendChild(big);
+    const L = D2T.LV[c.level]; big.style.setProperty('--glow', L.glow.replace(/\d+px/, '30px'));
+    const place = (x, y, s) => { big.style.transform = `translate(${x}px,${y}px) scale(${s})`; };
+    // glass explodes from the centre and the card bursts out of the very middle
+    const flash = ov.querySelector('.flash'), ring = ov.querySelector('.ring'), badge = ov.querySelector('.badge');
+    ring.style.left = mx + 'px'; ring.style.top = my + 'px';
+    flash.classList.remove('go'); ring.classList.remove('go'); void flash.offsetWidth; flash.classList.add('go'); ring.classList.add('go');
+    shatter(mx, my, 90, LVC[c.level]);
+    await tween(560, (u) => { const s = u < .65 ? (u / .65) * 1.15 : 1.15 - .15 * ((u - .65) / .35); const k = Math.max(.001, s);
+      place(mx - W * k / 2, my - H * k / 2, k); });
+    place(fx, fy, 1);
+    badge.textContent = c.level === 'legend' ? 'LEGEND' : 'PURPLE'; badge.style.top = (fy - 46) + 'px'; badge.classList.remove('go'); void badge.offsetWidth; badge.classList.add('go');
+    await wait(300);
+    // the six stats, one after the other, each in its own place
+    for (const st of big.querySelectorAll('.d2c-stat')) { popIn(st, 360); await wait(230); }
+    await wait(250);
+    // the rating rolls upwards like a fruit machine, slows and ticks in; faded top and bottom, no hard edges
+    const ovr = big.querySelector('.d2c-ovr'), br = big.getBoundingClientRect(), or = ovr.getBoundingClientRect(), cs = getComputedStyle(ovr);
+    const lh = or.height, start = Math.max(40, c.ovr - 40), nums = []; for (let n = start; n <= c.ovr + 2; n++) nums.push(n <= 99 ? n : '');   // nothing above 99
+    const roller = document.createElement('div'); roller.className = 'roller';
+    roller.style.cssText = `left:${or.left - br.left - 6}px;top:${or.top - br.top - lh}px;width:${or.width + 12}px;height:${lh * 3}px;font:${cs.font};color:${cs.color}`;
+    roller.innerHTML = `<div class="rs">${nums.map((n) => `<span style="height:${lh}px;line-height:${lh}px">${n}</span>`).join('')}</div>`;
+    big.querySelector('.d2c-body').appendChild(roller);
+    const rs = roller.firstElementChild, target = nums.indexOf(c.ovr), fast = target - 5;
+    const at = (pos) => { rs.style.transform = `translateY(${(-(pos - 1)) * lh}px)`; };
+    await tween(1500, (u) => { const e = u < .5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2, sp = Math.sin(u * Math.PI);
+      at(e * fast); rs.style.filter = sp > .15 ? `blur(${(sp * 3).toFixed(1)}px)` : ''; });
+    rs.style.filter = '';
+    for (let k = 1; k <= 5; k++) {                             // the last five tick in, each a little slower, with a small settle
+      const from = fast + k - 1, gap = [140, 180, 240, 320, 440][k - 1];
+      await tween(170, (u) => { const e = 1 - Math.pow(1 - u, 3) + Math.sin(u * Math.PI) * .08; at(from + e); });
+      await wait(gap);
+    }
+    roller.remove(); ovr.textContent = c.ovr; ovr.classList.add('in');
+    big.querySelector('.d2c-pos').classList.add('in'); big.querySelector('.d2c-rule').classList.add('in');
+    // the flag, then the crest, each in place to 120% and back
+    const flag = big.querySelector('.d2c-flag'), crest = big.querySelector('.d2c-crest');
+    const centre = (el) => { const r = el.getBoundingClientRect(); return [r.left - ph.left + r.width / 2, r.top - ph.top + r.height / 2]; };
+    if (flag) { shatter(...centre(flag), 18, LVC[c.level]); await popIn(flag, 420); }
+    shatter(...centre(crest), 26, LVC[c.level]); await popIn(crest, 460);
+    // the name, letter by letter
+    for (const el of [big.querySelector('.d2c-first'), big.querySelector('.d2c-last')]) {
+      const t = el.textContent; el.textContent = ''; el.classList.add('in');
+      for (const ch of t) { const s = document.createElement('span'); s.className = 'ch'; s.textContent = ch; el.appendChild(s); await wait(60); }
+    }
+    big.classList.remove('blank');
+    await wait(3000);
+    // from its full size down into its place in the reel
+    badge.classList.remove('go'); ov.classList.remove('on');
+    const to = { x: sr.left - ph.left, y: sr.top - ph.top, s: 114 / W };
+    await tween(480, (u) => { const e = u * u * (3 - 2 * u); place(fx + (to.x - fx) * e, fy + (to.y - fy) * e, 1 + (to.s - 1) * e); });
+    big.remove(); reel.slot.classList.remove('hidden'); reel.set(c);
+  }
+  const tween = (ms, f) => new Promise((res) => { const t0 = performance.now(); const st = (now) => { const u = Math.min(1, (now - t0) / ms); f(u); if (u < 1) requestAnimationFrame(st); else res(); }; requestAnimationFrame(st); });
+
+  // ---------- the spin ----------
+  const spinBtn = document.getElementById('spin'), hint = document.getElementById('hint');
+  spinBtn.onclick = async () => {
+    spinBtn.disabled = true; hint.textContent = '';
+    const picks = [POOL[1], POOL[6], POOL[9]]; picks[slotIx] = RARE[lv];
+    reels.forEach((r) => { r.cur = r.target; r.start(); });
+    await wait(1200);
+    for (let i = 0; i < 3; i++) {
+      const r = reels[i], c = picks[i];
+      if (c.level === 'legend' || c.level === 'baller') {
+        if (reduced) { r.land(c); await landed(r); continue; }
+        await reveal(r, c);                                     // the reels after it keep rolling meanwhile
+        await wait(350);
+      } else { r.land(c); await landed(r); await wait(120); }
+    }
+    hint.textContent = 'Tap a card to pick it'; spinBtn.disabled = false; spinBtn.textContent = 'Spin again';
+  };
+  const landed = (r) => new Promise((res) => { r.onLand = () => { r.onLand = null; res(); }; });
+})();
+</script>
+</body>
+</html>
