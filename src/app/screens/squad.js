@@ -39,9 +39,12 @@
       const oppC = fx ? SE.club(data, fx.opp) : null;
       const nextHTML = fx ? `<div class="se-next"><img src="${oppC.crest}" alt=""><div class="se-next-t"><small>Next · ${fx.ha === 'H' ? 'Home' : 'Away'}</small><b class="d2c-fit">${D2T.esc(oppC.name)}</b></div></div>` : '';
       const label = drafting ? 'Start the draft' : pre ? (dream ? 'Start the season' : 'Pre-season') : 'Play';
-      const bar = D2T.h(`<footer class="actionbar se-nextbar">${nextHTML}<button class="btn se-btn se-play" type="button">${label}</button>${SE.homeBtn()}</footer>`);
+      // before the draft (Craig, 13 Oct): no next fixture; a greyed respin on the left (the draft has none) keeps Start the draft centred
+      const REFRESH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
+      const left = drafting ? `<button class="icon-btn se-off" type="button" disabled aria-hidden="true" tabindex="-1">${REFRESH}</button>` : nextHTML;
+      const bar = D2T.h(`<footer class="actionbar se-nextbar${drafting ? ' is-draft' : ''}">${left}<button class="btn se-btn se-play" type="button">${label}</button>${SE.homeBtn()}</footer>`);
       root.appendChild(bar);
-      const playBtn = bar.querySelector('button');
+      const playBtn = bar.querySelector('.se-play');
       playBtn.onclick = () => {
         if (drafting) { st.step = 'transfer'; D2T.save(); D2T.go('transfer'); return; }
         if (pre) { GAME.startSeason(); D2T.go(GAME.eng().phase === 'window' ? 'transfer' : 'fixtures'); return; }
@@ -150,8 +153,8 @@
       function clearSel() { sel = null; applySel(); }
       function openBig(el, id) {
         const card = L.all.get(String(id)); if (!card) return;
-        const below = D2T.cards.info(card, club.text);
-        D2T.cards.openLarge(el.querySelector('.d2c') || el, D2T.cards.player(card, { w: 280 }), { below });
+        const W = Math.min(236, Math.round(root.clientWidth * 0.6));
+        D2T.cards.openLarge(el.querySelector('.d2c') || el, D2T.cards.player(card, { w: W }), { w: W, below: D2T.cards.info(card), scroll: true });
       }
 
       // ---------- swaps ----------
