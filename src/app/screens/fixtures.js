@@ -9,6 +9,7 @@
       const ctx = SE.ensure(), st = ctx.st, data = ctx.data, club = data.club, me = club.name, gw = D2T.game.eng().gw;
       SE.accent(root, club); SE.setStep(ctx, 'fixtures');
       root.appendChild(D2T.topbar());
+      if (!D2T.reduced() && window.D2TSound) window.D2TSound.play('fixtures', null, 0.15);
       const fx = SE.fixture(data, gw);
       if (!fx) {
         root.appendChild(D2T.h(`<div class="screen-body"><h1 class="se-h1" style="margin-top:20px">Season complete</h1><p class="se-note">Every gameweek is played.</p></div>`));

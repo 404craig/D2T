@@ -125,6 +125,7 @@
     const below = opts.place === 'below';
     const el = D2T.h(`<div class="d2t-tip${below ? ' below' : ''}" aria-hidden="true"><span>${text}</span><svg viewBox="0 0 44 60"><path d="M40 8 C20 6 8 22 14 52" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M6 43 L14 54 L22 45" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`);
     el.style.visibility = 'hidden'; scr.appendChild(el);
+    window.D2TSound && window.D2TSound.play('tip');
     // the words sit where they fit on screen; the arrow is placed on its own so its point lands on the target
     const s = scr.getBoundingClientRect(), t = target.getBoundingClientRect(), sp = el.querySelector('span').getBoundingClientRect();
     const cx = t.left - s.left + t.width / 2, w = sp.width, h = sp.height, AW = 34, AH = 46;
@@ -169,8 +170,9 @@
     if (typeof body === 'string') bodyEl.innerHTML = body; else bodyEl.appendChild(body);
     host.append(scrim, sh);
     requestAnimationFrame(() => { scrim.classList.add('open'); sh.classList.add('open'); });
+    window.D2TSound && window.D2TSound.play('sheet', 0);
     let closed = false;
-    const close = () => { if (closed) return; closed = true; scrim.classList.remove('open'); sh.style.transition = ''; sh.style.transform = ''; sh.classList.remove('open'); setTimeout(() => { scrim.remove(); sh.remove(); onClose && onClose(); }, 320); };
+    const close = () => { if (closed) return; closed = true; window.D2TSound && window.D2TSound.play('sheet', 1); scrim.classList.remove('open'); sh.style.transition = ''; sh.style.transform = ''; sh.classList.remove('open'); setTimeout(() => { scrim.remove(); sh.remove(); onClose && onClose(); }, 320); };
     scrim.onclick = close;
     const bar = sh.querySelector('.sheet-bar');
     bar.onclick = close;

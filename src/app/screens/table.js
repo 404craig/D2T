@@ -74,6 +74,7 @@
           els.forEach((e) => e.classList.remove('se-scan'));
           const el = els[i];
           el.classList.remove('se-hid'); el.classList.add('se-build', 'se-scan');
+          window.D2TSound && window.D2TSound.play('tableScan', i);
           cam.to(el);
           if (i === stopAt) break;
           const t = N > 1 ? i / (N - 1) : 1;
@@ -84,6 +85,7 @@
         await D2T.wait(900); if (!ok()) return;
         myEl.classList.remove('se-scan', 'se-stop');
         myEl.classList.add('se-landed', 'se-thump');
+        window.D2TSound && window.D2TSound.play('tableLand');
         tbl.classList.add('se-shake');
         els.slice(stopAt + 1).forEach((el, k) => { el.classList.remove('se-hid'); el.classList.add('se-build'); el.style.animationDelay = (k * 70) + 'ms'; });
         body.querySelector('.se-fin').classList.add('se-in');
@@ -92,6 +94,7 @@
 
         // Reset: every number rolls down to 0 together, then the table flattens to alphabetical.
         flash.classList.add('se-go');
+        window.D2TSound && window.D2TSound.play('tableReset');
         body.querySelector('.se-tl-a').textContent = `${data.season} · Rewrite history`;
         const nums = [...tbl.querySelectorAll('.se-n')];
         const from = nums.map((n) => +n.dataset.v);
