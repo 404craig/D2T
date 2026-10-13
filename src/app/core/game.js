@@ -64,7 +64,15 @@
     // about 1 game in 20 and within 10 about 1 in 5 (5-4-1 the hardest)
     DEPTH: { 442: 180, 433: 220, 451: 145, 352: 310, 343: 355, 424: 260, 532: 105, 541: 75 },
     GIFTS: { 442: 0.22, 433: 0.2, 451: 0.27, 352: 0.14, 343: 0.14, 424: 0.18, 532: 0.36, 541: 0.42 },
-    pickFormation: () => GAME.g433.FORMATIONS[Math.floor(Math.random() * GAME.g433.FORMATIONS.length)],
+    // how often each shape comes up (Craig, 13 Oct): the back fives, 5-3-2 and 5-4-1, half as often as the rest
+    // (about 1 game in 14 each, the other six about 1 in 7)
+    FORM_WEIGHT: { 532: 0.5, 541: 0.5 },
+    pickFormation: () => {
+      const F = GAME.g433.FORMATIONS, w = (f) => (GAME.g433.FORM_WEIGHT[f] != null ? GAME.g433.FORM_WEIGHT[f] : 1);
+      let x = Math.random() * F.reduce((t, f) => t + w(f), 0);
+      for (const f of F) { x -= w(f); if (x < 0) return f; }
+      return F[F.length - 1];
+    },
     shape: (f) => { const [d, m, a] = String(f).split('').map(Number); return { GK: 1, DEF: d, MID: m, FWD: a }; },
     depth: (f) => GAME.g433.DEPTH[f] || GAME.g433.TOP,
     gift: (f) => (GAME.g433.GIFTS[f] != null ? GAME.g433.GIFTS[f] : 0.2),
