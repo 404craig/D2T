@@ -192,7 +192,8 @@ const CUES = {
   short(t) { const o = O(1, 0.2); duck(t, 3); clip(o, "groan", t); clip(o, "crowd_moan", t + 1.3, { gain: 0.7 }); },
   bust(t) { const o = O(1, 0.2); duck(t, 3); clip(o, "boos", t, { gain: 1, dur: 3 }); clip(o, "groan", t + 0.1, { gain: 0.6 }); },
   right(t) { const o = O(1, 0.15); felt(o, t, 180, 0.3, 0.08); osc(soft(o, 1100), "triangle", D4, t, 0.4, 0.04, { a: 0.02 }); clip(o, "cheer_short", t + 0.05, { gain: 0.4 }); },
-  wrong(t) { const o = O(1, 0.15); felt(o, t, 120, 0.4, 0.2); swish(soft(o, 1400), t, 0.4, 1400, 300, 0.08); clip(o, "boos", t + 0.1, { gain: 0.75, dur: 2.2 }); },
+  // wrong: a clear "cross", two short low muffled buzzes stepping down (soft, never harsh), then boos
+  wrong(t) { const o = O(1, 0.12), lp = soft(o, 900); [[N(-14), 0], [N(-17), 0.19]].forEach(([f, x]) => { osc(lp, "sawtooth", f, t + x, 0.16, 0.07, { a: 0.008 }); osc(lp, "triangle", f, t + x, 0.18, 0.08, { a: 0.008 }); felt(o, t + x, 110, 0.25, 0.1); }); clip(o, "boos", t + 0.3, { gain: 0.95, dur: 2.4 }); },
   highScore(t) { const o = O(1, 0.2); duck(t, 3); felt(o, t, 150, 0.4, 0.15); clip(o, "cheer_short", t, { gain: 0.9 }); clip(o, "applause", t + 0.7, { gain: 0.8 }); },
   newBest(t) { const o = O(1, 0.2); felt(o, t, 140, 0.4, 0.18); [D3, Fs3, A3, D4].forEach((n) => osc(soft(o, 1100), "triangle", n, t, 1.4, 0.035, { a: 0.08 })); clip(o, "applause", t + 0.25, { gain: 0.5, dur: 2 }); }
 };
