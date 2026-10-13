@@ -112,7 +112,7 @@
     <h1>Purple and legend cards: the reveal, v3</h1>
     <p>A mock-up of the roll with the live cards. Pick where the rare card lands and whether it is purple or a legend, then hit Spin on the phone. The cards are real 2003/04 cards from the game: Thierry Henry (legend, 99) and Frank Lampard (purple, 93), with real bronze, silver and gold cards in the other slots.</p>
   </div>
-  <div class="ctl"><button id="snd" class="on">Sound on</button><span style="margin-left:6px">GLASS SOUND</span><button class="on" data-g="A">A Crack and rain</button><button data-g="B">B Window</button><button data-g="C">C Crystal</button><button data-g="D">D Heavy</button><button id="hear">Hear it</button>
+  <div class="ctl"><button id="snd" class="on">Sound on</button><span style="margin-left:6px">GLASS SOUND</span><button class="on" data-d="full">As recorded</button><button data-d="bit">A little duller</button><button data-d="more">Duller</button><button id="hear">Hear it</button>
   </div><div class="ctl"><span style="margin-left:6px">RARE CARD</span><button class="on" data-lv="legend">Legend</button><button data-lv="baller">Purple</button>
     <span style="margin-left:14px">IN SLOT</span><button data-s="0">1</button><button class="on" data-s="1">2</button><button data-s="2">3</button></div>
   <div class="wrap">
@@ -126,10 +126,10 @@
     </div>
     <div class="steps"><ol>
       <li>The rare card's reel <b>rolls on and slows</b> for about a second before anything happens, then the screen darkens over it.</li>
-      <li><b>Glass smashes out of the centre</b>: three times the pieces, twice as long, with long splinters and a spray of tiny bits. The shards turn in 3D, catch the light on their edges and carry the card's colours. A <b>glass smash</b> plays, about 1.4 seconds long: pick from four above and tap one to hear it.</li>
+      <li><b>Glass smashes out of the centre</b>: three times the pieces, twice as long, with long splinters and a spray of tiny bits. The shards turn in 3D, catch the light on their edges and carry the card's colours. Your <b>glass smash</b> plays: as recorded, a little duller or duller (the buttons above; tap one to hear it).</li>
       <li>The <b>big card bursts from the very centre</b>. The labels (GOL, IMP and so on) are already on it.</li>
       <li>The <b>six numbers pop in one after the other</b> under their labels, 120% then 100%, a little slower than v2. Each arrives with a <b>reverse swoosh</b> and lands with a <b>dull thud</b>.</li>
-      <li>The <b>rating rolls</b> with the higher numbers above, dropping into place, <b>ticking like the reels</b> as each passes, then slows, ticks in and lands with a thud. <b>The crowd starts cheering</b> as it rolls, with <b>fireworks</b> going off, and both carry on until the name has printed, then fade. It fades out above and below.</li>
+      <li>The <b>rating rolls</b> with the higher numbers above, dropping into place, <b>ticking like the reels</b> as each passes, then slows, ticks in and lands with a thud. <b>The crowd starts cheering</b> as it rolls, with your <b>fireworks</b> going off, and both carry on until the name has printed, then fade. It fades out above and below.</li>
       <li>The <b>flag</b> bursts on, twice as long as v2.</li>
       <li>The <b>crest explodes in</b>: light rays turning behind it, two shockwaves, its own glass, a spin and a flare, three times as long, with a <b>thud</b> as it lands.</li>
       <li>The <b>name</b> appears letter by letter, 1.5 times slower, a <b>dull tick</b> per letter.</li>
@@ -166,7 +166,7 @@
   const hash = (i, s) => { let h = (i * 2654435761 + s * 97) >>> 0; h ^= h >>> 15; return h >>> 0; };
 
   let lv = 'legend', slotIx = 1;
-  document.querySelectorAll('[data-g]').forEach((b) => { b.onclick = () => { SMASH = b.dataset.g; document.querySelectorAll('[data-g]').forEach((x) => x.classList.toggle('on', x === b)); audio(); AC.resume(); smash(); }; });
+  document.querySelectorAll('[data-d]').forEach((b) => { b.onclick = () => { dull = b.dataset.d; document.querySelectorAll('[data-d]').forEach((x) => x.classList.toggle('on', x === b)); audio(); AC.resume(); setTimeout(smash, BUF.glass_smash ? 0 : 400); }; });
   document.getElementById('hear').onclick = () => { audio(); AC.resume(); smash(); };
   document.querySelectorAll('[data-lv],[data-s]').forEach((b) => { b.onclick = () => {
     if (b.dataset.lv) { lv = b.dataset.lv; document.querySelectorAll('[data-lv]').forEach((x) => x.classList.toggle('on', x === b)); }
@@ -240,7 +240,7 @@
 
   // ---------- sound: the game's own clips (audio/ on main, build 84) and a muffled glass smash made here ----------
   let AC = null, OUT = null, BUF = {}, soundOn = true;
-  const CLIPS = ['swoosh_up', 'thud_low', 'tick_wood', 'tick_mech', 'celebration', 'impact_boom'];
+  const CLIPS = ['swoosh_up', 'thud_low', 'tick_wood', 'tick_mech', 'celebration', 'impact_boom', 'glass_smash', 'fireworks'];
   const audio = () => {
     if (AC) return AC; AC = new (window.AudioContext || window.webkitAudioContext)();
     const lp = AC.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 6500; OUT = AC.createGain(); OUT.gain.value = .8; OUT.connect(lp); lp.connect(AC.destination);
@@ -284,7 +284,12 @@
       for (let i = 0; i < 6; i++) hit(nb, o, t + .1 + i * .18 + Math.random() * .1, .25, .3 - i * .04, 1400 + Math.random() * 1200, .8);
       for (let i = 0; i < 50; i++) { const at = .05 + 1.3 * Math.pow(Math.random(), 1.2); hit(nb, o, t + at, .05 + Math.random() * .1, (.15 + Math.random() * .18) * (1 - at / 1.6), 2000 + Math.random() * 3500, 2); } } }
   };
-  const smash = () => { if (!soundOn || !AC) return; SMASHES[SMASH].run(noise(), AC.currentTime + .01); };
+  // Craig's glass smash (ElevenLabs, 13 Oct), played as it is or dulled a little: a top cut and a touch quieter
+  const DULL = { full: [20000, 1], bit: [5200, .85], more: [3000, .75] };
+  let dull = 'full';
+  const smash = () => { if (!soundOn || !AC || !BUF.glass_smash) return; const [hz, g] = DULL[dull];
+    const s = AC.createBufferSource(), lp = AC.createBiquadFilter(), v = AC.createGain(); s.buffer = BUF.glass_smash; lp.type = 'lowpass'; lp.frequency.value = hz; v.gain.value = g;
+    s.connect(lp); lp.connect(v); v.connect(AC.destination); s.start(); };
 
   // the crowd: the cheer loops from the rating to the end of the name, with fireworks over it the whole time
   let crowd = null, fwTimer = null;
@@ -299,9 +304,10 @@
   const crowdOn = () => { if (!soundOn || !AC || !BUF.celebration || crowd) return;
     const s = AC.createBufferSource(), v = AC.createGain(); s.buffer = BUF.celebration; s.loop = true; v.gain.setValueAtTime(0, AC.currentTime); v.gain.linearRampToValueAtTime(.7, AC.currentTime + .5);
     s.connect(v); v.connect(OUT); s.start(); crowd = { s, v };
-    const next = () => { firework(); fwTimer = setTimeout(next, 450 + Math.random() * 700); }; next(); };
+    if (BUF.fireworks) { const f = AC.createBufferSource(), fv = AC.createGain(); f.buffer = BUF.fireworks; f.loop = true; fv.gain.setValueAtTime(0, AC.currentTime); fv.gain.linearRampToValueAtTime(.8, AC.currentTime + .3);
+      f.connect(fv); fv.connect(OUT); f.start(); crowd.f = f; crowd.fv = fv; } };
   const crowdOff = (fade = 1.2) => { clearTimeout(fwTimer); fwTimer = null; if (!crowd) return; const { s, v } = crowd, t = AC.currentTime;
-    v.gain.cancelScheduledValues(t); v.gain.setValueAtTime(v.gain.value, t); v.gain.linearRampToValueAtTime(0, t + fade); s.stop(t + fade + .05); crowd = null; };
+    [[s, v], [crowd.f, crowd.fv]].forEach(([src, g]) => { if (!src) return; g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(0, t + fade); src.stop(t + fade + .05); }); crowd = null; };
   document.getElementById('snd').onclick = (e) => { soundOn = !soundOn; e.target.classList.toggle('on', soundOn); e.target.textContent = soundOn ? 'Sound on' : 'Sound off'; };
 
   // ---------- 3D glass: shards with the card's colours, long splinters and a spray of tiny bits ----------
