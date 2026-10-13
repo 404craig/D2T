@@ -98,7 +98,7 @@
       if (k.crest && cs === 'disc') over = `<circle cx="50" cy="61" r="17" fill="#F4F4F6" stroke="${k.trim}" stroke-width="1.6"/><image href="${k.crestLight}" x="38" y="49" width="24" height="24" preserveAspectRatio="xMidYMid meet"/>`;
     } else {
       const g = String(p.goals);
-      mid = `<text class="gnum" x="50" y="65" font-size="30"${g.length > 2 ? ' textLength="46" lengthAdjust="spacingAndGlyphs"' : ''}${st}>${g}</text>`;
+      mid = `<text class="gnum" x="50" y="65" font-size="36"${g.length > 2 ? ' textLength="55" lengthAdjust="spacingAndGlyphs"' : ''}${st}>${g}</text>`;
       if (k.crest) disc = `<span class="plate" style="--d:${Math.round(w * 0.4)}px"><img src="${k.crestLight}" alt=""></span>`;
     }
     const fill = k.pat ? `url(#g4p-${k.id})` : k.fill;
@@ -181,7 +181,7 @@
       // a shirt, its crest disc and its name must fit the tightest gap between two lines (defence to keeper, about 20% of the
       // pitch), so short phones get smaller shirts rather than overlapping ones
       // shirts grow with the pitch (taller since the club names under the reels went, Craig, 12 Oct), bounded so a line of five still has room
-      const sizePitch = () => { const ph = pitchEl.clientHeight || 358, pw = pitchEl.clientWidth || 366; PW = Math.round(Math.max(30, Math.min(62, pw * 0.19 - 8, (ph * 0.205 - 16) / 1.19))); };
+      const sizePitch = () => { const ph = pitchEl.clientHeight || 358, pw = pitchEl.clientWidth || 366; PW = Math.round(1.1 * Math.max(30, Math.min(62, pw * 0.19 - 8, (ph * 0.205 - 16) / 1.19))); };
 
       const slotOf = (i) => S.filled.find((p) => p.slot === i);
       const openSlots = () => SLOTS.map((_, i) => i).filter((i) => !slotOf(i));
@@ -204,8 +204,48 @@
           const n = count[SLOTS[+nm.parentElement.dataset.slot][1]];
           if (n < 2) return;
           const room = pw * Math.min(25, 76 / (n - 1)) / 100 - 6;
-          const w = nm.scrollWidth; if (w > room) nm.style.fontSize = Math.max(6.5, 9.5 * room / w).toFixed(1) + 'px';   // one read, one write
+          const w = nm.scrollWidth; if (w > room) nm.style.fontSize = Math.max(7.2, 10.45 * room / w).toFixed(1) + 'px';   // one read, one write
         });
+        // names still too long at the smallest size (ALEXANDER-ARNOLD beside VAN AANHOLT in a back five) ease apart along
+        // their line, sharing out the room between them and never past the pitch's edge, so two name tags never touch
+        const lines = {}, GAP = 3;
+        pitchEl.querySelectorAll('.slotp .nm').forEach((nm) => { nm.style.transform = ''; const s = SLOTS[+nm.parentElement.dataset.slot]; (lines[s[1]] = lines[s[1]] || []).push(nm); });
+        const pr = pitchEl.getBoundingClientRect(), lo = pr.left + 2, hi = pr.right - 2, moves = [];
+        Object.values(lines).forEach((L) => {
+          if (L.length < 4) return;
+          const R = L.map((nm) => { const r = nm.getBoundingClientRect(); return { nm, l: r.left, w: r.width, dx: 0 }; }).sort((a, b) => a.l - b.l);
+          for (let pass = 0; pass < 12; pass++) {
+            let moved = false;
+            for (let k = 0; k < R.length - 1; k++) {
+              const a = R[k], b = R[k + 1], o = (a.l + a.dx + a.w + GAP) - (b.l + b.dx);
+              if (o > 0.2) { a.dx -= o / 2; b.dx += o / 2; moved = true; }
+            }
+            R.forEach((r) => { r.dx = Math.max(lo - r.l, Math.min(hi - r.l - r.w, r.dx)); });
+            if (!moved) break;
+          }
+          // and clear of the shirts beside it (a raised wing-back's name sits level with the next shirt's hem)
+          const shirts = L.map((nm) => R.find((r) => r.nm === nm)).map((r) => ({ r, s: r.nm.parentElement.querySelector('.g4-shirt svg').getBoundingClientRect() }));
+          R.forEach((r) => {
+            const nr = r.nm.getBoundingClientRect();
+            shirts.forEach(({ r: o, s: sh }) => {
+              if (o === r || Math.min(nr.bottom, sh.bottom) - Math.max(nr.top, sh.top) <= 0) return;
+              const left = r.l + r.dx, right = left + r.w;
+              if (sh.left >= left && right + GAP > sh.left) { const want = right + GAP - sh.left, can = r.dx - (lo - r.l); r.dx -= Math.min(want, can); if (want - can > (r.short || 0)) { r.short = want - can; r.side = -1; } }
+              else if (sh.right <= right && sh.right + GAP > left) { const want = sh.right + GAP - left, can = (hi - r.l - r.w) - r.dx; r.dx += Math.min(want, can); if (want - can > (r.short || 0)) { r.short = want - can; r.side = 1; } }
+            });
+          });
+          // pinned against the pitch's edge with no room left: that name gets a touch smaller (6.5px at the least, as before)
+          // (it shrinks about its middle, so it slides by half what it lost to keep its outer edge where it was)
+          R.forEach((r) => {
+            if (!(r.short > 0.2)) return;
+            const fs = parseFloat(getComputedStyle(r.nm).fontSize), to = Math.max(6.5, fs * (r.w - r.short - 1) / r.w);
+            r.nm.style.fontSize = to.toFixed(2) + 'px';
+            const lost = r.w - r.nm.getBoundingClientRect().width;
+            r.dx += r.side < 0 ? -lost / 2 : lost / 2;
+          });
+          R.forEach((r) => { if (Math.abs(r.dx) > 0.2) moves.push([r.nm, r.dx]); });
+        });
+        moves.forEach(([nm, dx]) => { nm.style.transform = `translateX(${dx.toFixed(1)}px)`; });
       };
       // with a player selected, the open shirts he fits pulse and the rest of the open ones step back
       const markPitch = () => {
