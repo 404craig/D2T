@@ -383,7 +383,7 @@ fs.mkdirSync(OUT, { recursive: true });
   check(!!(await page.$('.sheet [data-k="no"]')) && /new career/i.test(await page.textContent(".sheet")), "the Club X card should ask before replacing a career waiting for its next season");
   await page.click('.sheet [data-k="no"]'); await wait(400);
   check(await page.evaluate(() => window.D2T.game.careerOpen(window.D2T.state.run) && window.D2T.game.eng().phase === "summary"), "Keep playing did not keep the career");
-  await page.reload(); await expectScreen("home"); await wait(900);
+  await page.reload(); await expectScreen("intro"); await page.click(".fr-skip", { force: true }); await expectScreen("home"); await wait(900);
   check(!!(await page.$('[data-act="continue"]')), "a refresh lost the finished Club X season's Continue card");
   await page.click('[data-act="continue"]'); await expectScreen("summary"); await wait(1200);
   check(!!(await page.$('[data-act="next"]')), "Club X summary has no Next season");
