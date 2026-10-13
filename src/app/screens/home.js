@@ -83,7 +83,7 @@
   // Daily challenge card: today's club for everyone, the mode it plays, and your result once played.
   function dailyCard() {
     const G = D2T.game, d = G.dailyEntry(G.today()), res = G.dailyResult(), streak = G.dailyStreak();
-    const goal = d.relegated ? 'They went down for real. Can you keep them up?' : `They finished ${D2T.ordinal(d.pos)} for real. Can you beat it?`;
+    const goal = 'They went down for real. Can you keep them up?';
     const cmp = G.dailyCompare(), best = cmp.best;
     const sub = res ? `Today: ${D2T.ordinal(res.finish)}, rise ${cmp.sg(res.rise)}. ${cmp.isBest ? 'Your best Daily yet.' : `Best: ${cmp.sg(best.rise)} (${D2T.esc(best.club)}).`} Tap to share.`
       : best ? `${goal} Your best Daily: rise ${cmp.sg(best.rise)}.` : goal;
