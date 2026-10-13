@@ -180,6 +180,20 @@ t("Club X spins one season and drafts from every open shirt, cards that list the
   assert.strictEqual(d[0], 0, "Dare2Dream starts with the keeper");
   assert.deepStrictEqual(d, D.draftOrder("4-4-2"));
 });
+t("Club X career: carried XI leaves its real clubs, later seasons get pre-season rolls, forecast results replay", () => {
+  const S = G.seasons["2024/25"], st = D.newRun({ seed: "car-1", mode: "clubx", catalogue: [] });
+  st.seasonKey = S.season; st.club = 19; st.formation = "4-4-2"; st.career = 2;
+  const ids = D.autoXI(S, 0, "4-4-2", []);
+  D.carryIn(st, S, ids);
+  assert.strictEqual(st.phase, "setup");
+  assert.ok(st.raids.length >= 1 && st.raids.every((r) => r.club === 0 && r.date === "0000-00-00"), "carried players leave their real club before the season");
+  assert.ok(D.startSeason(st, S) && st.rolls[0].kind === "pre", "a career's later season has pre-season rolls");
+  const T = G.seasons["2025/26"], copy = () => Object.assign({}, T, { matches: T.matches.map((m) => [m[0], m[1], m[2], 0, 0]), _ix: null, season: "2026/27" });
+  const a = D.simResults(copy(), "car-sim", 5, null), b = D.simResults(copy(), "car-sim", 5, null);
+  assert.deepStrictEqual(a.matches, b.matches, "the same career gets the same forecast");
+  const goals = a.matches.reduce((n, m) => n + m[3] + m[4], 0) / a.matches.length;
+  assert.ok(goals > 2 && goals < 3.5, "forecast goals per game look like football: " + goals.toFixed(2));
+});
 t("Dare2Dream: a sample of drafted seasons plays to the end, and draft picks weaken their clubs", () => {
   for (const c of G.clubSeasons.filter((_, i) => i % 45 === 0)) {
     const { st, S } = draft("d2d-play-" + c.key, c);

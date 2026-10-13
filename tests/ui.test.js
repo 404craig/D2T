@@ -302,6 +302,25 @@ fs.mkdirSync(OUT, { recursive: true });
   check(/Champions|Fell short/.test(await page.textContent(".sm-head")), "Club X summary has no result");
   check(await page.evaluate(() => window.D2T.game.xRecord().runs === 1), "Club X run not recorded");
   check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, classicBefore), "Club X run changed Classic's record");
+  // career mode (Craig, 13 Oct): Next season carries the XI on, with pre-season rolls; after 2025/26 the season is a forecast
+  await page.evaluate(() => { const G = window.D2T.game; if (!G.careerNext()) G.eng().final.finish = 1; window.D2T.go("home"); }); await wait(700);
+  await page.evaluate(() => window.D2T.go("summary")); await wait(1200);
+  check(!!(await page.$('[data-act="next"]')), "Club X summary has no Next season");
+  await page.click('[data-act="next"]'); await expectScreen("table"); await wait(600);
+  check(await page.evaluate(() => { const G = window.D2T.game, e = G.eng(); return e.career === 2 && e.phase === "setup" && G.lineup().xi.every(Boolean) && G.clubName() === "Southside Rovers"; }), "Next season did not carry the XI into season 2");
+  check(await page.evaluate(() => window.D2T.game.xRecord().runs === 1), "Next season recorded the first season twice");
+  check(await page.evaluate(() => { const G = window.D2T.game; G.startSeason(); return G.eng().rolls[0].kind === "pre" && G.eng().phase === "window"; }), "a career's second season should open with pre-season rolls");
+  check(await page.evaluate(() => {
+    const G = window.D2T.game; G.newRun("clubx"); G.setXName("Southside Rovers");
+    const k = G.xPool.find((x) => x.season === "2025/26").key; G.eng().clubOffer = [k]; G.chooseClub(k); window.D2T.state.run.tableSeen = true;
+    while (G.inDraft()) G.draftPick(G.rollCards()[0].id);
+    G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } }
+    G.finish(); if (!G.careerNext()) G.eng().final.finish = 1;
+    if (!G.nextSeason() || !G.isSim()) return false;
+    const S = G.S(); return S.season === "2026/27" && S.clubs.length === 20 && S.matches.length === 380 && G.lineup().xi.every(Boolean) && G.historyTable().length === 20;
+  }), "after 2025/26 the career should go on into a forecast 2026/27");
+  await page.evaluate(() => window.D2T.go("table")); await wait(800);
+  check(/Forecast table/.test(await page.textContent(".se-tl-a")), "a forecast season's table should say it is a forecast");
 
   // ---------- Daily challenge: today's club for everyone, its own save, one go ----------
   await page.evaluate(() => { const G = window.D2T.game; G.newRun("classic"); G.chooseClub(G.offer()[0].key); window.D2T.state.run.tableSeen = true; window.D2T.save(); window.D2T.go("home"); }); await wait(900);
