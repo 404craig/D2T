@@ -155,7 +155,7 @@
           <div class="se-pad"></div>
         </div>
       </div>`);
-      const bar = D2T.h(`<footer class="actionbar">${SE.backOff()}<button class="btn se-btn se-wide" type="button" data-act="share">Share result</button>${SE.homeBtn()}</footer>`);   // greyed back, Share in the middle, home (Craig, 13 Oct)
+      const bar = D2T.h(SE.bar({ main: SE.mainBtn('Share result', '', 'data-act="share"') }));   // home (the run is over, so straight home), greyed back, Share across the right (Craig, 13 Oct)
       root.append(body, bar);
 
       const sh = runShare({ F, club, S, line, daily, mode: GAME.mode(), met, car, x, n, rel });

@@ -40,11 +40,9 @@
       const nextHTML = fx ? `<div class="se-next"><img src="${oppC.crest}" alt=""><div class="se-next-t"><small>Next · ${fx.ha === 'H' ? 'Home' : 'Away'}</small><b class="d2c-fit">${D2T.esc(oppC.name)}</b></div></div>` : '';
       const carried = GAME.mode() === 'clubx' && GAME.career().n > 1;   // a Club X career's later seasons have pre-season rolls
       const label = drafting ? 'Start the draft' : pre ? (dream && !carried ? 'Start the season' : 'Pre-season') : 'Play';
-      // before the draft (Craig, 13 Oct): no next fixture; a greyed respin on the left (the draft has none) keeps Start the draft centred
-      const REFRESH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
-      // every squad bar (Craig, 13 Oct): no next fixture, a greyed back (nowhere to go back to before a match), Play in the middle
-      const left = drafting ? `<button class="icon-btn se-off" type="button" disabled aria-hidden="true" tabindex="-1">${REFRESH}</button>` : SE.backOff();
-      const bar = D2T.h(`<footer class="actionbar se-nextbar is-draft">${left}<button class="btn se-btn se-play" type="button">${label}</button>${SE.homeBtn()}</footer>`);
+      // every squad bar (Craig, 13 Oct): home, then a greyed middle button (nowhere to go back to and no respin here; before
+      // the draft it is the greyed respin the draft's own bar shows, as the draft has none), then Play across the right
+      const bar = D2T.h(SE.bar({ cls: 'se-nextbar', mid: drafting ? SE.respinOff() : SE.backOff(), main: SE.mainBtn(label, 'se-play') }));
       root.appendChild(bar);
       const playBtn = bar.querySelector('.se-play');
       playBtn.onclick = () => {
@@ -67,9 +65,9 @@
           const c = L.xi[i];
           if (!c) return `<div class="se-slot" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">${SE.emptyShirt(s.pos, PITCH_W)}</div>`;
           const fit = GAME.fit(c.id, i), oop = fit !== 'green';
-          return `<div class="se-slot${oop ? ' se-oop' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
+          return `<div class="se-slot se-pl-${fit}${oop ? ' se-oop' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
             <div class="se-cardwrap" data-card="${c.id}" data-kind="pitch" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}${oop ? ', out of position' : ''}">
-              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false })}${oop ? `<span class="se-oopchip se-fit-${fit}">${s.pos}</span>` : ''}</div></div>`;
+              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false })}</div></div>`;
         }).join('');
         const sl = subsEl.scrollLeft;
         subsEl.innerHTML = L.subs.map((c) => `<div class="se-sub" role="listitem"><div class="se-cardwrap" data-card="${c.id}" data-kind="sub" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, ${ROLE_NAME[c.pos]}, in the squad">${D2T.cards.player(c, { w: SUB_W, mini: true, shine: false })}</div></div>`).join('');
@@ -139,17 +137,14 @@
         if (!pre) bar.dataset.hint = sel ? `Tap a player to swap with ${nm}` : '';
         markFit(sel ? sel.id : null);
       }
-      // While a player is selected or dragged, every shirt shows how he would fit it (green preferred, amber near, red not).
+      // While a player is selected or dragged, every shirt is tinted inside with how he would fit it (green preferred, amber
+      // near, red not); a placed card glows in its own fit colour (Craig, 13 Oct: no pills, they clashed with position colours).
       function markFit(id) {
         const card = id == null ? null : L.all.get(String(id)), slots = GAME.slots();
         slotsEl.querySelectorAll('.se-slot').forEach((sl) => {
           sl.classList.remove('se-pf-green', 'se-pf-amber', 'se-pf-red');
-          sl.querySelectorAll('.se-pfchip').forEach((n) => n.remove());
-          sl.querySelectorAll('.se-oopchip').forEach((n) => { n.style.display = card ? 'none' : ''; });
           if (!card) return;
-          const i = +sl.dataset.i, f = GAME.fit(card.id, i);
-          sl.classList.add('se-pf-' + f);
-          (sl.querySelector('.se-cardwrap') || sl).insertAdjacentHTML('beforeend', `<span class="se-oopchip se-pfchip se-fit-${f}">${slots[i].pos}</span>`);
+          sl.classList.add('se-pf-' + GAME.fit(card.id, +sl.dataset.i));
         });
       }
       function select(kind, id) { sel = { kind, id }; applySel(); }

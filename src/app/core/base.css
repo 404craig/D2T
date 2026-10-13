@@ -64,6 +64,9 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 
 /* Bottom action bar (fixed play / continue bar) */
 .actionbar { position: relative; z-index: 5; display: flex; align-items: center; gap: 10px; padding: 10px 16px calc(env(safe-area-inset-bottom, 0px) + 14px); }
+/* every in-game bar (Craig, 13 Oct): home, the round middle button, then the main button 58px high across the right */
+.game-bar .bar-main { min-height: 58px; border-radius: 29px; }
+.game-bar .bar-home svg, .game-bar .bar-mid svg { width: 24px; height: 24px; }
 
 /* Slide-up sheet: always dismissable by dragging its bar or title down, or tapping the bar */
 .sheet-scrim { position: absolute; inset: 0; z-index: 50; background: rgba(0,0,0,0.6); opacity: 0; transition: opacity .25s; }

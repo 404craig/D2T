@@ -13,8 +13,8 @@
       const fx = SE.fixture(data, gw);
       if (!fx) {
         root.appendChild(D2T.h(`<div class="screen-body"><h1 class="se-h1" style="margin-top:20px">Season complete</h1><p class="se-note">Every gameweek is played.</p></div>`));
-        const bar = D2T.h('<footer class="actionbar"><button class="btn se-btn se-wide" type="button">Home</button></footer>');
-        bar.querySelector('button').onclick = () => D2T.go('home'); root.appendChild(bar); return;
+        const bar = D2T.h(SE.bar({ main: SE.mainBtn('Continue') }));
+        bar.querySelector('.bar-main').onclick = () => D2T.go(D2T.game.stepFor() || 'home'); root.appendChild(bar); return;
       }
       const meC = SE.club(data, me), oppC = SE.club(data, fx.opp);
       const [hC, aC] = fx.ha === 'H' ? [meC, oppC] : [oppC, meC];
@@ -41,10 +41,11 @@
           : ''}
         <div class="se-pad"></div>
       </div>`);
-      const bar = D2T.h('<footer class="actionbar"><button class="icon-btn se-back" type="button" aria-label="Back to squad">' + D2T.ICON.back + '</button><button class="btn se-btn se-wide" type="button">Play match</button>' + SE.homeBtn() + '</footer>');
+      // home, back to the squad, Play match (Craig, 13 Oct)
+      const bar = D2T.h(SE.bar({ mid: SE.backBtn('Back to squad'), main: SE.mainBtn('Play match') }));
       root.append(body, bar);
       bar.querySelector('.se-back').onclick = () => D2T.go('squad');
-      bar.querySelector('.se-btn').onclick = () => { st.step = 'match'; D2T.save(); D2T.go('match'); };
+      bar.querySelector('.bar-main').onclick = () => { st.step = 'match'; D2T.save(); D2T.go('match'); };
     }
   });
 })();
