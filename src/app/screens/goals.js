@@ -123,7 +123,7 @@
   function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = toGo(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v !== TARGET && Math.abs(v - TARGET) <= 20); }
 
   const COLORS = ['#FFD21F', '#FFB000', '#FFFFFF', '#FFE375'];
-  const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5"/></svg>';
+  const ARROW = D2T.ICON.respin;   // the respin arrow every bar uses
   const LINES = '<svg class="lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect x="3" y="2.5" width="94" height="95" rx="1.5" stroke-width="0.5"/><line x1="3" y1="50" x2="97" y2="50" stroke-width="0.5"/><rect x="26" y="2.5" width="48" height="14" stroke-width="0.5"/><rect x="38" y="2.5" width="24" height="5" stroke-width="0.5"/><rect x="26" y="83.5" width="48" height="14" stroke-width="0.5"/><rect x="38" y="92.5" width="24" height="5" stroke-width="0.5"/></svg>';
 
   let timers = [], rafs = [];
@@ -153,25 +153,25 @@
         <div class="g4-pitch"></div>
         <div class="g4-trio"></div>
         <div class="g4-hint"></div>
-        <div class="sp-bar g4-bar"><button class="sp-round is-reload" aria-label="Spin again">${ARROW}<span class="sp-count"></span></button>
-          <button class="sp-main">${D2T.logo('emblem', { label: '' })}<span class="sp-lbl">Spin</span></button>
-          <button class="sp-round is-home" aria-label="Home">${D2T.ICON.home}</button></div></div>`);
+        <div class="sp-bar g4-bar game-bar"><button class="sp-round is-home bar-home" aria-label="Home">${D2T.ICON.home}</button>
+          <button class="sp-round is-reload bar-mid" aria-label="Spin again">${ARROW}<span class="sp-count"></span></button>
+          <button class="sp-main bar-main">${D2T.logo('emblem', { label: '' })}<span class="sp-lbl">Spin</span></button></div></div>`);
       root.appendChild(wrap);
       const pitchEl = wrap.querySelector('.g4-pitch'), trioEl = wrap.querySelector('.g4-trio'), hintEl = wrap.querySelector('.g4-hint');
       const main = wrap.querySelector('.sp-main'), lbl = main.querySelector('.sp-lbl'), reload = wrap.querySelector('.is-reload');
-      // the home button (Craig, 12 Oct): with a game under way it asks, since there was no way to quit one: Home keeps the
-      // game for later, Quit throws it away (nothing recorded). It asks before the first spin too (Craig, 13 Oct), so a new
-      // game (and a new formation) is always one tap away; once the XI is in it just goes home.
+      // the home button (Craig, 12 and 13 Oct): before the first spin, or once the XI is in, it just goes home (the game
+      // is saved either way). With a game under way it opens the shared menu (D2T.leaveMenu, core/season.js): Keep
+      // playing, Restart (wipe this game and start again from the beginning, a new formation and its reveal), Home (the
+      // game is kept for later) or Quit (thrown away). Nothing is recorded.
       wrap.querySelector('.is-home').onclick = () => {
-        if (!openSlots().length) { D2T.go('home'); return; }
+        if (!openSlots().length || (!S.filled.length && !S.cands)) { D2T.go('home'); return; }
         const n = S.filled.length;
-        const sh = D2T.sheet({ title: 'Leave the game?', body: `<p class="fr-lead">${n ? `${n} of 11 picked, ${total()} goals so far.` : S.cands ? 'Three players are waiting.' : 'No players picked yet.'} Restart throws it away and starts a new game. Home keeps it for later. Quit throws it away. Nothing is recorded.</p>
-          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="restart">Restart the game</button><button class="btn btn-ghost fr-btn-wide" data-k="home">Home, save the game</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the game</button></div>` });
-        sh.body.querySelector('[data-k="keep"]').onclick = sh.close;
-        // restart (Craig, 12 Oct): wipe this game and start again from the beginning, a new formation and its reveal
-        sh.body.querySelector('[data-k="restart"]').onclick = () => { sh.close(); rafs.forEach(cancelAnimationFrame); rafs = []; main.classList.remove('is-spinning'); document.querySelectorAll('.g4-ghost').forEach((g) => g.remove()); newGame(); };
-        sh.body.querySelector('[data-k="home"]').onclick = () => { sh.close(); D2T.go('home'); };
-        sh.body.querySelector('[data-k="quit"]').onclick = () => { sh.close(); D2T.state.g433 = null; D2T.save(); D2T.go('home'); };
+        D2T.leaveMenu({
+          lead: `${n ? `${n} of 11 picked, ${total()} goals so far.` : 'Three players are waiting.'} Restart throws it away and starts a new game. Home keeps it for later. Quit throws it away. Nothing is recorded.`,
+          home: true,
+          restart: () => { rafs.forEach(cancelAnimationFrame); rafs = []; main.classList.remove('is-spinning'); document.querySelectorAll('.g4-ghost').forEach((g) => g.remove()); newGame(); },
+          quit: () => { D2T.state.g433 = null; D2T.save(); D2T.go('home'); }
+        });
       };
 
       // sizes from the phone: big shirts shrink on short screens, pitch shirts follow the pitch height

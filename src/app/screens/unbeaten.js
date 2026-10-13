@@ -14,7 +14,7 @@
   const snd = (id) => { const S = window.D2TSound; if (S) S.play(id); };
   const rand = (n) => Math.floor(Math.random() * n);
   const UP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15l7-7 7 7"/></svg>';
-  const REFRESH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
+  const REFRESH = D2T.ICON.respin;   // the respin arrow every bar uses
   const REFRESHES = 3;   // per run (Craig, 13 Oct): swap the hidden card for another, the streak untouched
   const DOWN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg>';
   // the mark: up and down chevrons in a ring, line art like the outline emblem (home card and faded behind the pages)
@@ -163,7 +163,7 @@
           <div class="ub-streak" aria-live="polite"><span class="ring"></span><b class="ub-n">0</b><i>unbeaten</i></div></div>
         <div class="ub-stage"></div>
         <div class="sp-hint ub-hint"></div>
-        <div class="sp-bar ub-bar"></div></div>`);
+        <div class="sp-bar ub-bar game-bar"></div></div>`);
       root.appendChild(wrap);
       const stage = wrap.querySelector('.ub-stage'), bar = wrap.querySelector('.ub-bar'), hint = wrap.querySelector('.ub-hint');
       const title = wrap.querySelector('.ub-title'), sub = wrap.querySelector('.ub-sub'), streakEl = wrap.querySelector('.ub-streak'), nEl = wrap.querySelector('.ub-n');
@@ -180,15 +180,16 @@
         return { w, pitch: h + 8, slot: w, vs: 0.5 };
       }
 
-      // ---------- the bottom bar: Spin before a run, Lower and Higher during one ----------
+      // ---------- the bottom bar (Craig, 13 Oct): home on the left, the round middle button, then the main buttons ----------
+      // Before a run: home (straight home), the respin greyed (the start page has none), New run across the right.
       function spinBar() {
-        // the respin button as in the other games, greyed: Unbeaten Run has none, it keeps New run centred (Craig, 13 Oct)
-        bar.innerHTML = `<button class="sp-round is-reload ub-off" disabled aria-hidden="true" tabindex="-1">${REFRESH}</button><button class="sp-main ub-spin">${D2T.logo('emblem', { label: '' })}<span class="sp-lbl">New run</span></button><button class="sp-round is-home" aria-label="Home">${D2T.ICON.home}</button>`;
-        bar.querySelector('.is-home').onclick = () => D2T.go('home');
+        bar.innerHTML = `<button class="sp-round is-home bar-home" aria-label="Home">${D2T.ICON.home}</button><button class="sp-round is-reload ub-off bar-mid" disabled aria-hidden="true" tabindex="-1">${REFRESH}</button><button class="sp-main ub-spin bar-main">${D2T.logo('emblem', { label: '' })}<span class="sp-lbl">New run</span></button>`;
+        bar.querySelector('.is-home').onclick = leave;
         bar.querySelector('.ub-spin').onclick = statSpin;
       }
+      // During a run: home (the menu), the three refreshes with their count, then Lower and Higher.
       function answerBar() {
-        bar.innerHTML = `<button class="sp-round is-reload ub-reload" aria-label="New card">${REFRESH}<span class="sp-count"></span></button><button class="ub-ans ub-lower" aria-label="Lower">${DOWN}<span>Lower</span></button><button class="ub-ans ub-higher" aria-label="Higher">${UP}<span>Higher</span></button><button class="sp-round is-home" aria-label="Home">${D2T.ICON.home}</button>`;
+        bar.innerHTML = `<button class="sp-round is-home bar-home" aria-label="Home">${D2T.ICON.home}</button><button class="sp-round is-reload ub-reload bar-mid" aria-label="New card">${REFRESH}<span class="sp-count"></span></button><button class="ub-ans ub-lower bar-main" aria-label="Lower">${DOWN}<span>Lower</span></button><button class="ub-ans ub-higher bar-main" aria-label="Higher">${UP}<span>Higher</span></button>`;
         bar.querySelector('.is-home').onclick = leave;
         bar.querySelector('.ub-reload').onclick = refreshCard;
         bar.querySelector('.ub-lower').onclick = () => answer(false);
@@ -211,15 +212,52 @@
           busy = false; enable(true);
         });
       }
-      // home during a run asks (as Goal Rush does): a run is sudden death, so leaving ends it with no result
+      // home (Craig, 13 Oct): on the start page it just goes home. During a run (always, even mid-animation) it opens the
+      // shared menu (D2T.leaveMenu, core/season.js): Keep playing, Restart (back to the stat spin, nothing recorded), Home
+      // (the run is kept in state.ub.run and picks up where it was next time) or Quit (thrown away, nothing recorded).
       function leave() {
-        if (!run) { D2T.go('home'); return; }   // during a run it always asks, even mid-animation
-        const sh = D2T.sheet({ title: 'Leave the run?', body: `<p class="fr-lead">Unbeaten in ${run.streak} so far. Restart or Quit ends the run and nothing is recorded.</p>
-          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="restart">Restart the game</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the run</button></div>` });
-        sh.body.querySelector('[data-k="keep"]').onclick = sh.close;
-        // restart (Craig, 12 Oct): drop this run, nothing recorded, and go back to spinning for a stat
-        sh.body.querySelector('[data-k="restart"]').onclick = () => { sh.close(); timers.forEach(clearTimeout); rafs.forEach(cancelAnimationFrame); timers = []; rafs = []; document.querySelectorAll('.ub-fly, .ub-boom, .ub-tick').forEach((f) => f.remove()); stage.classList.remove('ub-clubs'); idle(); };
-        sh.body.querySelector('[data-k="quit"]').onclick = () => { sh.close(); run = null; D2T.go('home'); };
+        if (!run) { D2T.go('home'); return; }
+        D2T.leaveMenu({ title: 'Leave the run?', lead: `Unbeaten in ${run.streak} so far. Home keeps this run for later. Restart or Quit ends it and nothing is recorded.`,
+          homeLabel: 'Home, save the run', quitLabel: 'Quit the run',
+          home: () => { stash(); D2T.go('home'); },
+          restart: () => { timers.forEach(clearTimeout); rafs.forEach(cancelAnimationFrame); timers = []; rafs = []; document.querySelectorAll('.ub-fly, .ub-boom, .ub-tick').forEach((f) => f.remove()); stage.classList.remove('ub-clubs'); idle(); },
+          quit: () => { run = null; R.run = null; save(); D2T.go('home'); } });
+      }
+      // a run in progress, kept for Home: the stat and the cards as places in its deck (the decks are built the same way
+      // every time), the cards used so far, the streak and the refreshes left
+      function stash() {
+        if (!run) return;
+        const at = (r) => run.deck.indexOf(r);
+        R.run = { stat: run.stat.id, cur: at(run.cur), next: at(run.next), used: [...run.used].map(at).filter((i) => i >= 0), streak: run.streak, refreshes: run.refreshes };
+        save();
+      }
+      // the stage for a run: two columns, the reels, the answer bar
+      function setStage(stat) {
+        title.textContent = stat.big; sub.innerHTML = 'Premier League · <em>one wrong and it is over</em>';
+        SIZE = sizes(isClub(stat));
+        stage.style.setProperty('--ub-sw', SIZE.w + 'px'); stage.style.setProperty('--ub-ph', SIZE.pitch + 'px'); stage.style.setProperty('--ub-slw', SIZE.slot + 'px'); stage.style.setProperty('--ub-vs', SIZE.vs);
+        stage.classList.toggle('ub-clubs', isClub(stat)); stage.classList.remove('ub-go');
+        stage.innerHTML = `<div class="ub-cols"><div class="ub-col"><div class="ub-slot ub-l"></div><div class="ub-who ub-who-l"></div></div>
+          <div class="ub-col"><div class="ub-slot ub-r"></div><div class="ub-who ub-who-r"></div></div><span class="ub-vs">VS</span></div>`;
+        const sl = stage.querySelector('.ub-l'), sr = stage.querySelector('.ub-r');
+        reelL = new Reel(sl, SIZE.pitch); reelR = new Reel(sr, SIZE.pitch);
+        answerBar(); enable(false); hint.textContent = '';
+        return { sl, sr };
+      }
+      // back from Home with a run kept: both cards sit where they were, the left shown, the right still hidden
+      function resume(sv) {
+        const stat = STATS.find((s) => s.id === sv.stat), deck = stat ? decks()[stat.deck].filter((r) => stat.val(r) > 0) : [];
+        R.run = null; save();
+        if (!stat || !deck[sv.cur] || !deck[sv.next]) { idle(); return; }
+        run = { stat, deck, used: new Set((sv.used || []).map((i) => deck[i]).filter(Boolean)), streak: sv.streak || 0, refreshes: sv.refreshes == null ? REFRESHES : sv.refreshes, cur: deck[sv.cur], next: deck[sv.next] };
+        run.used.add(run.cur); run.used.add(run.next);
+        const { sl, sr } = setStage(stat);
+        nEl.textContent = run.streak;
+        reelL.show(item(stat, run.cur, true, SIZE.w)); sl.classList.add('is-set'); sl.style.setProperty('--sp-accent', accentOf(run.cur));
+        reelR.show(item(stat, run.next, false, SIZE.w)); sr.classList.add('is-set'); sr.style.setProperty('--sp-accent', accentOf(run.next));
+        stage.querySelector('.ub-who-l').innerHTML = whoLine(stat, run.cur); stage.querySelector('.ub-who-r').innerHTML = whoLine(stat, run.next);
+        busy = false; enable(true);
+        hint.textContent = 'Swipe up for higher, down for lower, or tap below';
       }
 
       // ---------- the stat spin: a reel of stats, never the same one twice in a row ----------
@@ -231,7 +269,7 @@
       function idle() {
         run = null; busy = false; nEl.textContent = '0'; title.textContent = 'Higher or lower';
         sub.textContent = 'One stat a run. Is the next real number higher or lower? Keep calling it right; one wrong answer ends your run.';
-        stage.classList.remove('ub-clubs', 'ub-go');
+        stage.classList.remove('ub-clubs', 'ub-go'); R.run = null;
         const top = STATS.reduce((m, st, i) => ((R.best[st.id] || 0) > (R.best[STATS[m].id] || 0) ? i : m), 0), hasTop = (R.best[STATS[top].id] || 0) > 0;
         stage.innerHTML = `<div class="ub-start">${TOPDEF}<div class="ub-bests-h">Your best runs</div><div class="ub-grid">${STATS.map((st, i) => {
           const b = R.best[st.id] || 0, isTop = hasTop && i === top;
@@ -308,16 +346,8 @@
         run = { stat, deck, used: new Set(), streak: 0, refreshes: REFRESHES };
         run.cur = deck[rand(deck.length)]; run.used.add(run.cur);
         run.next = pickNext(); run.used.add(run.next);
-        title.textContent = stat.big; sub.innerHTML = 'Premier League · <em>one wrong and it is over</em>';
-        SIZE = sizes(isClub(stat));
-        stage.style.setProperty('--ub-sw', SIZE.w + 'px'); stage.style.setProperty('--ub-ph', SIZE.pitch + 'px'); stage.style.setProperty('--ub-slw', SIZE.slot + 'px'); stage.style.setProperty('--ub-vs', SIZE.vs);
-        stage.classList.toggle('ub-clubs', isClub(stat));
-        stage.innerHTML = `<div class="ub-cols"><div class="ub-col"><div class="ub-slot ub-l"></div><div class="ub-who ub-who-l"></div></div>
-          <div class="ub-col"><div class="ub-slot ub-r"></div><div class="ub-who ub-who-r"></div></div><span class="ub-vs">VS</span></div>`;
-        const sl = stage.querySelector('.ub-l'), sr = stage.querySelector('.ub-r');
-        reelL = new Reel(sl, SIZE.pitch); reelR = new Reel(sr, SIZE.pitch);
+        setStage(stat);
         reelL.show(ph()); reelR.show(ph());
-        answerBar(); enable(false); hint.textContent = '';
         snd('roll3');
         spinTo(reelL, run.cur, { delay: 0, cruiseT: 0.9, decelT: 1.0, n: 2.2 }, () => { stage.querySelector('.ub-who-l').innerHTML = whoLine(stat, run.cur); });
         spinTo(reelR, run.next, { delay: 0.12, cruiseT: 1.4, decelT: 1.4, n: 3.0, v1: 2.0 }, () => {
@@ -430,7 +460,7 @@
       function over(cleared) {
         if (!root.isConnected || !run) return;
         const s = run.stat, n = run.streak, prev = R.best[s.id] || 0, newBest = n > prev && n > 0;
-        R.runs++; if (newBest) R.best[s.id] = n; save();
+        R.runs++; if (newBest) R.best[s.id] = n; R.run = null; save();
         if (newBest) { snd('highScore'); highScore(); }
         // the end sheet waits for the HIGH SCORE flash to pass
         const show = () => {
@@ -537,7 +567,7 @@
         };
         stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', up);
       })();
-      idle();
+      if (R.run && R.run.stat) resume(R.run); else idle();   // a run kept by Home picks up where it was
     },
     unmount() { timers.forEach(clearTimeout); rafs.forEach(cancelAnimationFrame); timers = []; rafs = []; document.querySelectorAll('.ub-fly, .ub-boom, .ub-tick, .ub-arrow').forEach((f) => f.remove()); }
   });
