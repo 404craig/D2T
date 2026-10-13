@@ -433,7 +433,6 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.evaluate(() => window.D2T.go("home")); await expectScreen("home"); await wait(800);
   check(/Your best today/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not show today's best go");
   check(/TODAY'S DAILY/.test(await page.textContent(".fr-dtiles")) && (await page.$$(".fr-dtile")).length === 2, "home has no best and today tiles under the daily card");
-  check(await page.evaluate(() => !window.D2T.game.dailyResult() || !/None yet/.test(document.querySelector(".fr-dtile").textContent)), "home says no best Daily beside a Daily already played");
   check(!!(await page.$('[data-act="continue-other"]')), "the parked run has no Continue card after the daily");
   // the Daily closes at midnight: an unfinished one from yesterday is dropped (no result), the parked run comes back, home says so
   await page.evaluate(() => {

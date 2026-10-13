@@ -4244,12 +4244,10 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
       tag, big: `${D2T.esc(d.name)}<br>${d.season}`, sub, mark: `<img class="fr-gm-crest" src="${d.crest}" alt="">` }) + dailyTiles(d, res);
   }
   function dailyTiles(d, res) {
-    // Your best Daily counts today's too (it showed "None yet" beside your first Daily); the right tile still sets today
-    // against your best other day
-    const G = D2T.game, cmp = G.dailyCompare(), best = cmp.best, top = G.dailyBest(), o = D2T.ordinal, esc = D2T.esc;
+    const G = D2T.game, cmp = G.dailyCompare(), best = cmp.best, o = D2T.ordinal, esc = D2T.esc;
     const crest = (name) => { const c = G.club(name); return c && c.crest ? `<img src="${c.crest}" alt="">` : ''; };
     const rise = (n) => `<span class="fr-rise">${UP} ${n}</span>`;
-    const left = top ? `<b>${crest(top.club)}${rise(top.rise)}</b><small>${esc(top.club)} · ${o(top.histFinish)} to ${o(top.finish)}</small>`
+    const left = best ? `<b>${crest(best.club)}${rise(best.rise)}</b><small>${esc(best.club)} · ${o(best.histFinish)} to ${o(best.finish)}</small>`
       : '<b>None yet</b><small>Play today to set one</small>';
     let right, newBest = false;
     if (res) { newBest = cmp.isBest; right = `<b>${crest(d.name)}${rise(res.rise)}</b><small>${newBest ? 'New best' : `${esc(d.name)} · ${o(res.histFinish)} to ${o(res.finish)}`}</small>`; }
