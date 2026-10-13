@@ -115,7 +115,7 @@
       root.appendChild(body);
       const fx = GAME.fixture(info.gw), opp = fx ? D2T.esc(fx.opp) + (fx.ha === 'H' ? ' (H)' : ' (A)') : '';
       const reduced = D2T.reduced();
-      let alive = true, placing = false, signing = false, field = null, slotsEl = null, ratingEl = null, timers = [];
+      let alive = true, placing = false, leaving = false, signing = false, field = null, slotsEl = null, ratingEl = null, timers = [];
       kill = () => { alive = false; timers.forEach(clearTimeout); endDrag(true); };
 
       // ---------- the pitch above the tray ----------
@@ -123,13 +123,25 @@
         if (!slotsEl) return;
         const L = GAME.lineup();
         if (draft) best = di.slot;
+        // Club X's open draft: every open shirt is lit, or once a card is picked the open shirts he lists
+        let lit = new Set([best]);
+        if (draft && di.open) {
+          const ds = api ? api.selected() : -1, dc = ds >= 0 ? api.results()[ds] : null;
+          lit = new Set(dc ? GAME.draftFits(dc.id) : GAME.lineup().xi.map((c, i) => (c ? -1 : i)).filter((i) => i >= 0));
+        }
+        // the selected card in the tray: each shirt shows how he would fit it (green preferred, amber near, red not)
+        const si = placing && !draft && !signing && api ? api.selected() : -1, inc = si >= 0 ? api.results()[si] : null;
+        const pf = (i) => (inc ? GAME.fit(inc.id, i) : null);
+        const fitWord = { green: 'a preferred position', amber: 'close to his position', red: 'out of position' };
         slotsEl.innerHTML = GAME.slots().map((s, i) => {
-          const c = L.xi[i];
-          if (!c) return `<div class="se-slot${i === best ? ' se-best' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}"><div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="Empty ${s.pos} shirt${i === best ? ', the one you are picking for' : ''}">${SE.emptyShirt(s.pos, PITCH_W)}</div></div>`;
+          const c = L.xi[i], f = pf(i), cls = `se-slot${lit.has(i) ? ' se-best' : ''}${f ? ' se-pf-' + f : ''}`;
+          const chipFor = f ? `<span class="se-oopchip se-pfchip se-fit-${f}">${s.pos}</span>` : '';
+          const say = f ? `, ${fitWord[f]} for ${D2T.esc(inc.name)}` : '';
+          if (!c) return `<div class="${cls}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}"><div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="Empty ${s.pos} shirt${lit.has(i) ? ', open for this pick' : ''}${say}">${SE.emptyShirt(s.pos, PITCH_W)}${chipFor}</div></div>`;
           const fit = GAME.fit(c.id, i), oop = fit !== 'green';
-          return `<div class="se-slot${i === best ? ' se-best' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
-            <div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}. Sign the selected player here">
-              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: i === fresh })}${oop ? `<span class="se-oopchip se-fit-${fit}">${s.pos}</span>` : ''}</div></div>`;
+          return `<div class="${cls}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
+            <div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}. Sign the selected player here${say}">
+              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: i === fresh })}${chipFor || (oop ? `<span class="se-oopchip se-fit-${fit}">${s.pos}</span>` : '')}</div></div>`;
         }).join('');
         ratingEl.textContent = GAME.rating();
         if (fresh >= 0 && !reduced) {
@@ -139,7 +151,7 @@
       }
       function buildPitch() {
         field = D2T.h(`<div class="tr-pitch" aria-label="Your XI">
-          <div class="tr-head"><div class="tr-head-t"><b>${draft ? `Draft · Shirt ${info.step} of ${info.of}` : `${D2T.esc(info.name)} · Roll ${info.step} of ${info.of}`}</b><span>${draft ? `Drag one onto the lit ${di.pos} shirt` : 'Drag a player onto a shirt to sign him there'}</span></div>
+          <div class="tr-head"><div class="tr-head-t"><b>${draft ? `Draft · Shirt ${info.step} of ${info.of}` : `${D2T.esc(info.name)} · Roll ${info.step} of ${info.of}`}</b><span>${draft ? (di.open ? 'Drag one onto a lit shirt' : `Drag one onto the lit ${di.pos} shirt`) : 'Drag a player onto a shirt to sign him there'}</span></div>
             <div class="se-rating" aria-live="polite"><b class="tr-rating">0</b><i>Team<br>rating</i></div></div>
           <div class="se-pitch tr-field">${SE.pitchLines}<div class="se-slots"></div></div></div>`);
         api.el.insertBefore(field, api.el.querySelector('.sp-stage'));
@@ -175,7 +187,7 @@
       }
       function leavePlacing() {
         if (!placing) return Promise.resolve();
-        placing = false; api.clear();
+        placing = false; leaving = true; api.clear();
         if (reduced) { api.el.classList.remove('is-placing'); return Promise.resolve(); }
         return new Promise((res) => {
           field.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: 'ease-in', fill: 'forwards' }).onfinish = () => {
@@ -190,8 +202,9 @@
       function sign(i, slot) {
         if (signing || !placing) return;
         const p = api.results()[i];
-        if (draft && slot !== di.slot) { api.hint(`This pick goes in the lit ${di.pos} shirt`); return; }
-        if (!p || !(draft ? GAME.draftPick(p.id) : GAME.signAt(p.id, slot))) return;
+        if (draft && di.open && p && !GAME.draftFits(p.id).includes(slot)) { api.hint(`${surname(p.name)} can't play there. Pick a lit shirt.`); return; }
+        if (draft && !di.open && slot !== di.slot) { api.hint(`This pick goes in the lit ${di.pos} shirt`); return; }
+        if (!p || !(draft ? GAME.draftPick(p.id, slot) : GAME.signAt(p.id, slot))) return;
         signing = true;
         SND.play('subIn');
         drawPitch(-1, slot);
@@ -208,6 +221,9 @@
       }
 
       // ---------- drag a card from the tray onto a shirt ----------
+      // A press on a card is remembered from the moment the finger goes down, even while the reels are still landing
+      // (a keen player grabs the left card before the right one stops, or the instant the last one lands, before the
+      // tray has dropped): the drag starts, and the tray comes up, as soon as the roll has settled.
       let drag = null, ghost = null, target = null, suppress = -1;
       const host = document.getElementById('app');
       function endDrag(cancel) {
@@ -216,7 +232,8 @@
         if (cancel) drag = null;
       }
       const onDown = (e) => {
-        if (!placing || signing || e.button) return;
+        suppress = -1;   // a new press: any click that follows belongs to it
+        if (signing || e.button || !api) return;
         const s = e.target.closest('.sp-slot'); if (!s || !api.el.contains(s)) return;
         drag = { i: api.slots.indexOf(s), x0: e.clientX, y0: e.clientY, pid: e.pointerId, moved: false };
       };
@@ -224,6 +241,8 @@
         if (!drag || e.pointerId !== drag.pid) return;
         if (!drag.moved) {
           if (Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 8) return;
+          if (!api.settled() || leaving || signing) return;
+          if (!placing) enterPlacing(true);
           drag.moved = true;
           if (api.selected() !== drag.i) api.select(drag.i);
           const p = api.results()[drag.i];
@@ -251,7 +270,7 @@
       window.addEventListener('pointerup', onUp);
       window.addEventListener('pointercancel', () => { drag = null; endDrag(false); });
       root.addEventListener('pointerdown', onDown);
-      // a drag is not a tap: swallow the click that follows it
+      // a drag is not a tap: swallow the click that follows it (a touch drag has none, so the next press clears it)
       root.addEventListener('click', (e) => { if (suppress >= 0 && e.target.closest('.sp-slot')) { e.stopPropagation(); e.preventDefault(); } suppress = -1; }, true);
       const blockTouch = (e) => { if (drag && drag.moved && e.cancelable) e.preventDefault(); };
       window.addEventListener('touchmove', blockTouch, { passive: false });
@@ -260,17 +279,17 @@
 
       const build = () => {
         api = D2T.roll.mount(body, {
-          kicker: draft ? `Dare2Dream draft · Shirt ${info.step} of ${info.of}` : `${info.name} · Roll ${info.step} of ${info.of}`,
-          title: draft ? `Pick your ${ROLE[di.broad]}` : 'Who comes in?',
-          sub: draft ? `Three ${ROLES[di.broad]} from ${run.season} for your ${di.pos} shirt. No respins in the draft.` : `Roll ${info.overall} of ${info.total} this season${fx ? `, before GW${info.gw} against ${opp}` : ''}. Sign one or pass.`,
+          kicker: draft ? `${GAME.modeName()} draft · Shirt ${info.step} of ${info.of}` : `${info.name} · Roll ${info.step} of ${info.of}`,
+          title: draft ? (di.open ? 'Pick your next player' : `Pick your ${ROLE[di.broad]}`) : 'Who comes in?',
+          sub: draft ? (di.open ? `Three players from ${run.season} for your open shirts. Put him in any lit shirt he plays. No respins in the draft.` : `Three ${ROLES[di.broad]} from ${run.season} for your ${di.pos} shirt. No respins in the draft.`) : `Roll ${info.overall} of ${info.total} this season${fx ? `, before GW${info.gw} against ${opp}` : ''}. Sign one or pass.`,
           pool: fillerCards(),
           render: (p, w) => D2T.cards.player(p, { w }),
           pick: () => { SND.play('roll3'); return GAME.rollCards(); },
           settled: st.spun === rollKey ? GAME.rollCards() : null,
-          onSettled: () => { st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); timers.push(setTimeout(() => enterPlacing(true), reduced ? 0 : 450)); },
+          onSettled: () => { leaving = false; st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); timers.push(setTimeout(() => enterPlacing(true), reduced ? 0 : 450)); },
           accent: LV_ACCENT,
-          caption: (p) => `${p.pos} · ${lvName(p).toUpperCase()}`,
-          details: (p) => D2T.cards.info(p, LV_ACCENT(p).accent),
+          caption: (p) => `${p.main || p.pos} · ${lvName(p).toUpperCase()}`,
+          details: (p) => D2T.cards.info(p), detailsBare: true,
           mainLabel: 'Spin', pickLabel: draft ? 'Pick one' : 'Pass', spinningLabel: 'Rolling',
           selectedLabel: (p) => (draft ? `Sign ${surname(p.name)}` : 'Pass'),
           hintIdle: 'Hit Spin to roll three players', hintSettled: '', hintSelected: 'Tap a shirt to sign him there, or tap him again for his card',
@@ -278,9 +297,9 @@
           baseBtn: { accent: club.accent, ink: club.ink },
           onRespinsChange: () => { GAME.respinCards(); st.spun = ''; D2T.save(); },
           beforeSpin: () => leavePlacing(),
-          onSelect: (i, p) => { if (placing) drawPitch(draft ? di.slot : GAME.bestSlot(p.id)); },
+          onSelect: (i, p) => { if (placing) drawPitch(draft ? di.slot : GAME.bestSlot(p.id)); timers.push(setTimeout(() => api && D2T.tip('card-again', api.el.querySelectorAll('.sp-slot')[i], 'Tap him again for his career'), 250)); },
           afterSettle: draft ? null : { label: 'Pass', onClick: pass },
-          onConfirm: (p) => { if (draft) sign(api.results().indexOf(p), di.slot); }
+          onConfirm: (p) => { if (draft) sign(api.results().indexOf(p), di.open ? GAME.draftFits(p.id)[0] : di.slot); }
         });
         api.el.classList.add('sp-reveal');
         buildPitch();

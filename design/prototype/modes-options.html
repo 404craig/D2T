@@ -1,0 +1,204 @@
+<title>D2T Mode Buttons</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<link rel="stylesheet" href="core/base.css">
+<style>
+  /* Layout: two sections (Classic, then other modes); each option is shown at real phone width (358px) in a grid that wraps. */
+  :root { color-scheme: dark; --bg: #000000; --fg: #FFFFFF; --soft: #BDBDC6; --muted: #8E8E99; --rule: #1E1E22; --line: #26262C; --panel: #0E0E10; --green: #12F06C; --purple: #9B5CFF; }
+  html, body { height: auto; }
+  body { background: var(--bg); color: var(--fg); font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 1200px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 30px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2', sans-serif; margin: 0 0 8px; }
+  .head p { margin: 0; color: var(--soft); font-size: 15px; max-width: 80ch; line-height: 1.5; }
+  .sec { display: flex; flex-direction: column; gap: 18px; padding-top: 24px; border-top: 1px solid var(--rule); }
+  .sec > h2 { font: 900 italic 30px/1 'Exo 2', sans-serif; margin: 0; }
+  .sec > p { margin: -8px 0 0; color: var(--muted); font-size: 14px; max-width: 80ch; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 358px), 358px)); gap: 30px 32px; }
+  .opt { display: flex; flex-direction: column; gap: 10px; }
+  .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: var(--green); }
+  .opt-h h3 { font: 900 italic 21px/1.05 'Exo 2', sans-serif; margin: 3px 0; }
+  .opt-h p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
+  .k { font-size: 11.5px; font-weight: 800; letter-spacing: 0.15em; }
+  .t { font: 900 italic 31px/0.95 'Exo 2', sans-serif; text-transform: uppercase; margin: 0; }
+  .s { font-size: 14.5px; font-weight: 600; margin: 0; }
+  .go { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; }
+  .go svg { width: 22px; height: 22px; }
+  button { font-family: inherit; text-align: left; cursor: pointer; border: 0; background: none; color: inherit; padding: 0; }
+
+  /* ---------- CLASSIC ---------- */
+  .cl { position: relative; overflow: hidden; isolation: isolate; width: 100%; border-radius: 22px; color: #FFF; border: 0; }
+  /* 1 solid green */
+  .c1 { background: var(--green); color: #050505; padding: 22px 20px; min-height: 150px; display: flex; flex-direction: column; gap: 6px; justify-content: flex-end; }
+  .c1 .wm { position: absolute; right: -36px; top: -30px; width: 190px; color: rgba(0,0,0,0.12); transform: rotate(-10deg); z-index: -1; }
+  .c1 .go { position: absolute; right: 18px; top: 18px; background: #050505; color: var(--green); }
+  .c1 .s { color: rgba(0,0,0,0.75); }
+  /* 2 fanned club cards */
+  .c2 { background: #0E0E10; border: 1px solid var(--line); padding: 20px; min-height: 168px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+  .c2 .fan { position: absolute; right: -6px; top: 50%; width: 150px; height: 150px; transform: translateY(-50%); }
+  .c2 .fan > div { position: absolute; left: 50%; top: 50%; transform-origin: 50% 120%; }
+  .c2 .txt { position: relative; max-width: 58%; display: flex; flex-direction: column; gap: 6px; }
+  .c2 .k { color: var(--green); }
+  .c2 .s { color: var(--soft); }
+  .c2 .cta { margin-top: 8px; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 20px; background: var(--green); color: #000; font: 900 italic 15px/1 'Exo 2'; }
+  .c2 .cta svg { width: 16px; height: 16px; }
+  /* 3 reel window */
+  .c3 { background: #0E0E10; border: 1px solid var(--line); padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 12px; }
+  .c3 .row { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; }
+  .c3 .k { color: var(--green); }
+  .c3 .s { color: var(--soft); font-size: 13.5px; }
+  .c3 .slots { display: flex; gap: 8px; justify-content: center; padding: 12px 0 2px; border-radius: 14px; background: #060607; box-shadow: inset 0 0 0 1px #1E1E24; }
+  .c3 .spin { display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 24px; background: var(--green); color: #000; font: 900 italic 19px/1 'Exo 2'; }
+  .c3 .spin .logo-mask { width: 22px; color: #000; }
+  /* 4 crest wall */
+  .c4 { min-height: 168px; padding: 20px; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; background: #0A0A0C; border: 1px solid var(--line); }
+  .c4 .wall { position: absolute; inset: -10px; z-index: -2; display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; padding: 4px; transform: rotate(-8deg) scale(1.15); opacity: 0.5; animation: wall 30s linear infinite; }
+  .c4 .wall img { width: 100%; aspect-ratio: 1; object-fit: contain; filter: grayscale(0.2); }
+  @keyframes wall { to { transform: rotate(-8deg) scale(1.15) translateX(-12.5%); } }
+  .c4::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,10,12,0.25) 0%, rgba(10,10,12,0.92) 62%); }
+  .c4 .k { color: var(--green); }
+  .c4 .s { color: var(--soft); }
+  .c4 .go { position: absolute; right: 18px; bottom: 18px; background: var(--green); color: #000; }
+  /* 5 ladder: drop to top */
+  .c5 { background: #0E0E10; border: 1px solid var(--line); padding: 20px 76px 20px 86px; min-height: 168px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+  .c5 .lad { position: absolute; left: 18px; top: 16px; bottom: 16px; width: 48px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
+  .c5 .lad b { font: 900 italic 15px/1 'Exo 2'; }
+  .c5 .lad .top { color: var(--green); }
+  .c5 .lad .bot { color: #FF4D5A; }
+  .c5 .lad .line { flex: 1; width: 6px; border-radius: 3px; margin: 6px 0; background: linear-gradient(0deg, #FF4D5A 0%, #FFB020 45%, var(--green) 100%); position: relative; }
+  .c5 .lad .dot { position: absolute; left: 50%; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; background: #FFF; border: 3px solid #0E0E10; animation: climb 3.6s cubic-bezier(.6,0,.3,1) infinite; }
+  @keyframes climb { 0%, 10% { bottom: -6px; } 70%, 100% { bottom: calc(100% - 12px); } }
+  .c5 .k { color: var(--green); }
+  .c5 .s { color: var(--soft); }
+  .c5 .go { position: absolute; right: 18px; bottom: 18px; background: var(--green); color: #000; }
+
+  /* ---------- OTHER MODES ---------- */
+  .mh { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+  .mh b { font: 900 italic 20px/1 'Exo 2'; }
+  .mh span { font-size: 12px; color: var(--muted); }
+  /* A outline tiles in a row */
+  .ma { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .ma .tile { min-width: 0; width: 100%; aspect-ratio: 1 / 1.08; border-radius: 16px; border: 1.5px solid var(--line); background: transparent; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; color: #FFF; }
+  .ma .tile .logo-mask { width: 28px; color: #FFF; }
+  .ma .tile b { font: 900 italic 15px/1.05 'Exo 2'; text-transform: uppercase; }
+  .ma .tile small { font-size: 10.5px; font-weight: 800; letter-spacing: 0.1em; color: var(--muted); }
+  .ma .tile.on { border-color: var(--purple); }
+  .ma .tile.on small { color: var(--purple); }
+  .ma .tile.on .logo-mask { color: var(--purple); }
+  .ma .tile.soon { opacity: 0.5; }
+  /* B list rows */
+  .mb { display: flex; flex-direction: column; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); }
+  .mb .rw { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: #0B0B0D; color: #FFF; border-bottom: 1px solid var(--line); }
+  .mb .rw:last-child { border-bottom: 0; }
+  .mb .ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: #18181C; flex-shrink: 0; }
+  .mb .ic .logo-mask { width: 24px; color: #FFF; }
+  .mb .rw.on .ic { background: var(--purple); }
+  .mb .tx { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .mb .tx b { font: 900 italic 16px/1 'Exo 2'; text-transform: uppercase; }
+  .mb .tx span { font-size: 12.5px; color: var(--soft); }
+  .mb .end { font-size: 10.5px; font-weight: 900; letter-spacing: 0.08em; color: var(--muted); }
+  .mb .rw.on .end { color: #FFF; }
+  .mb .rw.soon { opacity: 0.55; }
+  .mb svg.chev { width: 18px; height: 18px; }
+  /* C match tickets */
+  .mc { display: flex; flex-direction: column; gap: 10px; }
+  .tk { position: relative; display: flex; color: #FFF; height: 86px; border-radius: 14px; background: #111114; border: 1px dashed #34343C; overflow: visible; }
+  .tk.on { background: linear-gradient(100deg, #2A1257, #170A33); border: 1px solid #6B3BD6; }
+  .tk .main { flex: 1; padding: 12px 14px; display: flex; flex-direction: column; justify-content: center; gap: 3px; }
+  .tk .main small { font-size: 10px; font-weight: 800; letter-spacing: 0.16em; color: var(--muted); }
+  .tk.on .main small { color: #C8A8FF; }
+  .tk .main b { font: 900 italic 19px/1 'Exo 2'; text-transform: uppercase; }
+  .tk .main span { font-size: 12px; color: var(--soft); }
+  .tk .stub { width: 78px; border-left: 2px dashed rgba(255,255,255,0.18); display: grid; place-items: center; font: 900 italic 14px/1 'Exo 2'; letter-spacing: 0.04em; }
+  .tk .stub em { font-style: normal; writing-mode: vertical-rl; transform: rotate(180deg); }
+  .tk::before, .tk::after { content: ''; position: absolute; right: 70px; width: 16px; height: 16px; border-radius: 50%; background: #000; }
+  .tk::before { top: -9px; } .tk::after { bottom: -9px; }
+  .tk.soon { opacity: 0.55; }
+  /* D face-down card fan */
+  .md { display: flex; gap: 10px; overflow: hidden; padding: 4px 0 2px; }
+  .md .cell { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; width: 108px; }
+  .md .cell b { font: 900 italic 13px/1.05 'Exo 2'; text-transform: uppercase; text-align: center; }
+  .md .cell small { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; color: var(--muted); }
+  .md .cell.on small { color: #C8A8FF; }
+  .back { position: relative; width: 100px; height: 140px; }
+  .back .r { position: absolute; inset: 0; background: linear-gradient(160deg, #3A3A42, #0A0A0C 60%); -webkit-mask: var(--mo) 0 0 / 100% 100% no-repeat; mask: var(--mo) 0 0 / 100% 100% no-repeat; }
+  .back .f { position: absolute; inset: 2px; background: radial-gradient(120% 70% at 20% 0%, #1E1E26 0%, #0A0A0C 60%); -webkit-mask: var(--mi) 0 0 / 100% 100% no-repeat; mask: var(--mi) 0 0 / 100% 100% no-repeat; display: grid; place-items: center; }
+  .back .f .logo-mask { width: 48px; color: rgba(255,255,255,0.22); }
+  .back.on .r { background: linear-gradient(160deg, #F1E6FF 0%, #9B5CFF 45%, #2A0C70 100%); }
+  .back.on .f { background: linear-gradient(155deg, #E4D2FF 0%, #A774FF 22%, #6A2EE8 50%, #2E0F7A 78%, #8F5CFF 100%); }
+  .back.on .f .logo-mask { color: rgba(255,255,255,0.9); }
+  /* E split grid */
+  .me { display: grid; grid-template-columns: 1.2fr 1fr; grid-template-rows: repeat(3, 1fr); gap: 8px; height: 220px; }
+  .me .big { grid-row: 1 / 4; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; color: #FFF; background: radial-gradient(120% 90% at 100% 0%, rgba(155,92,255,0.45), rgba(155,92,255,0) 60%), #120D1C; border: 1px solid #3B2A63; }
+  .me .big small { font-size: 10.5px; font-weight: 800; letter-spacing: 0.14em; color: #C8A8FF; }
+  .me .big b { font: 900 italic 22px/0.98 'Exo 2'; text-transform: uppercase; }
+  .me .big span { font-size: 12.5px; color: var(--soft); }
+  .me .big .pl { align-self: flex-start; height: 36px; padding: 0 14px; border-radius: 18px; background: var(--purple); color: #FFF; font: 900 italic 14px/36px 'Exo 2'; }
+  .me .sm { border-radius: 14px; border: 1px solid var(--line); background: transparent; padding: 0 12px; display: flex; align-items: center; justify-content: space-between; color: #FFF; opacity: 0.6; }
+  .me .sm b { font: 900 italic 13px/1 'Exo 2'; text-transform: uppercase; }
+  .me .sm small { font-size: 9.5px; font-weight: 800; letter-spacing: 0.1em; color: var(--muted); }
+</style>
+<div class="page">
+  <div class="head">
+    <h1>Mode buttons</h1>
+    <p>Five ways to show Classic, the main game, then five ways to show the other modes so they read as secondary and look nothing like Classic. Shown at real phone width. Mix any Classic with any other-modes option. Dare2Dream is playable; Daily challenge, Head to head and Legends are coming soon.</p>
+  </div>
+  <section class="sec"><h2>Classic</h2><p>The one big thing on home. Every option keeps "Pick a new club" and "Take them from the drop to the top."</p><div class="grid" id="classic"></div></section>
+  <section class="sec"><h2>Other modes</h2><p>Smaller and quieter than Classic. Dare2Dream gets purple (the Baller card colour) so it is clearly a different mode, not a second Classic button.</p><div class="grid" id="modes"></div></section>
+</div>
+<script src="data/data.js"></script>
+<script src="core/app.js"></script>
+<script src="core/cards.js"></script>
+<script>
+(function () {
+  const D = D2T.data, C = D2T.cards;
+  const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
+  const CHEV = '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
+  const pool = D.relegatedPool;
+  const pick = (n, s) => pool.find((p) => p.name === n && p.season === s);
+  const fan = [pick('Norwich', '1994/95'), pick('Wolves', '2011/12'), pick('Southampton', '2024/25')];
+  const crests = [...new Set(pool.map((p) => p.crest))].slice(0, 24);
+  const T = '<span class="k">CLASSIC</span><h4 class="t">Pick a new club</h4>';
+  // softened card outline for card backs
+  function roundedPath(pts, radii) { const n = pts.length, seg = []; for (let i = 0; i < n; i++) { const P = pts[i], A = pts[(i - 1 + n) % n], B = pts[(i + 1) % n]; const la = Math.hypot(A[0] - P[0], A[1] - P[1]), lb = Math.hypot(B[0] - P[0], B[1] - P[1]); const r = Math.min(radii[i], la / 2, lb / 2); seg.push({ t1: [P[0] + (A[0] - P[0]) / la * r, P[1] + (A[1] - P[1]) / la * r], P, t2: [P[0] + (B[0] - P[0]) / lb * r, P[1] + (B[1] - P[1]) / lb * r] }); } const f = (v) => +v.toFixed(2); let d = `M${f(seg[0].t2[0])} ${f(seg[0].t2[1])}`; for (let i = 1; i <= n; i++) { const s = seg[i % n]; d += ` L${f(s.t1[0])} ${f(s.t1[1])} Q${f(s.P[0])} ${f(s.P[1])} ${f(s.t2[0])} ${f(s.t2[1])}`; } return d + 'Z'; }
+  const sh = (w, h, c, p) => [[0, c], [c, 0], [w - c, 0], [w, c], [w, h - p], [w / 2, h], [0, h - p]], R = [2.5, 2.5, 2.5, 2.5, 3, 4, 3];
+  const uri = (w, h, d) => `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${w} ${h}' preserveAspectRatio='none'><path d='${d}' fill='black'/></svg>`)}")`;
+  const MO = uri(114, 160, roundedPath(sh(114, 160, 12, 18), R)), MI = uri(110, 156, roundedPath(sh(110, 156, 11, 17), R.map((x) => x - 1.2)));
+  const back = (on) => `<div class="back${on ? ' on' : ''}" style="--mo:${MO.replace(/"/g, '&quot;')};--mi:${MI.replace(/"/g, '&quot;')}"><div class="r"></div><div class="f">${D2T.logo('emblem')}</div></div>`;
+
+  const CLASSIC = [
+    { tag: 'CLASSIC 1', name: 'Solid green', note: 'The only solid green block on home, so it is unmistakably the main button. Black text, a big faded emblem, black arrow.',
+      html: `<button class="cl c1">${D2T.logo('emblem', { cls: 'wm' })}<span class="go">${ARROW}</span>${T}<p class="s">Take them from the drop to the top.</p></button>` },
+    { tag: 'CLASSIC 2', name: 'Fanned club cards', note: 'Three real relegated club cards fanned on the right hint at the spin before you tap. Green pill button.',
+      html: `<button class="cl c2"><div class="fan">${fan.map((c, i) => `<div style="transform:translate(-50%,-50%) rotate(${(i - 1) * 14}deg) translateY(${i === 1 ? -6 : 4}px);z-index:${i === 1 ? 3 : 1}">${C.club(c, { w: 70, delay: i * 0.7 })}</div>`).join('')}</div>
+        <div class="txt">${T}<p class="s">Take them from the drop to the top.</p><span class="cta">Spin for a club ${ARROW}</span></div></button>` },
+    { tag: 'CLASSIC 3', name: 'Reel window', note: 'Shows the game in the button: three empty slots waiting for a spin, and a green Spin bar with the emblem. Taps straight into the club spin.',
+      html: `<button class="cl c3"><div class="row"><div>${T}<p class="s">Take them from the drop to the top.</p></div></div>
+        <div class="slots">${[0, 1, 2].map(() => C.placeholder({ w: 70 })).join('')}</div><span class="spin">${D2T.logo('emblem')} Spin</span></button>` },
+    { tag: 'CLASSIC 4', name: 'Crest wall', note: 'A slow-moving wall of real relegated club crests behind the title: every one of them is a club you could get. Fades to black under the words.',
+      html: `<button class="cl c4"><div class="wall">${crests.concat(crests).map((c) => `<img src="${c}" alt="">`).join('')}</div>${T}<p class="s">Take them from the drop to the top.</p><span class="go">${ARROW}</span></button>` },
+    { tag: 'CLASSIC 5', name: 'Drop to top ladder', note: 'The name of the game as a picture: a league ladder from 20th (red) to 1st (green) with a marker that climbs to the top.',
+      html: `<button class="cl c5"><div class="lad"><b class="top">1st</b><div class="line"><span class="dot"></span></div><b class="bot">20th</b></div>${T}<p class="s">Take them from the drop to the top.</p><span class="go">${ARROW}</span></button>` }
+  ];
+  const MODES = [
+    { name: 'Dare2Dream', sub: 'Any club, no players. Draft your XI.', on: true, icon: 'emblemLine' },
+    { name: 'Daily challenge', sub: 'One club a day, same for everyone.', icon: 'emblem' },
+    { name: 'Head to head', sub: 'Online, up to 3 players.', icon: 'emblem' },
+    { name: 'Legends', sub: 'The greatest seasons only.', icon: 'emblem' }
+  ];
+  const OTHER = [
+    { tag: 'MODES A', name: 'Outline tiles', note: 'Three square tiles in a row, outline only, so they never compete with Classic. Dare2Dream has a purple edge; the rest are dimmed.',
+      html: `<div class="mh"><b>Other modes</b><span>More coming soon</span></div><div class="ma">${MODES.slice(0, 3).map((m) => `<button class="tile${m.on ? ' on' : ' soon'}">${D2T.logo(m.icon === 'emblemLine' ? 'emblemLine' : 'emblem')}<b>${m.name}</b><small>${m.on ? 'PLAY' : 'SOON'}</small></button>`).join('')}</div>` },
+    { tag: 'MODES B', name: 'Settings-style list', note: 'Slim rows with an icon, a name and one line each, like a menu. The quietest option and it scales to any number of modes.',
+      html: `<div class="mh"><b>Other modes</b></div><div class="mb">${MODES.map((m) => `<button class="rw${m.on ? ' on' : ' soon'}"><span class="ic">${D2T.logo(m.on ? 'emblemLine' : 'emblem')}</span><span class="tx"><b>${m.name}</b><span>${m.sub}</span></span>${m.on ? CHEV : '<span class="end">SOON</span>'}</button>`).join('')}</div>` },
+    { tag: 'MODES C', name: 'Match tickets', note: 'Each mode is a matchday ticket with a tear-off stub. Dare2Dream is a purple ticket with PLAY on the stub; the others are dashed outlines.',
+      html: `<div class="mh"><b>Other modes</b></div><div class="mc">${MODES.slice(0, 3).map((m) => `<button class="tk${m.on ? ' on' : ' soon'}"><span class="main"><small>${m.on ? 'NEW MODE' : 'COMING SOON'}</small><b>${m.name}</b><span>${m.sub}</span></span><span class="stub"><em>${m.on ? 'PLAY' : 'SOON'}</em></span></button>`).join('')}</div>` },
+    { tag: 'MODES D', name: 'Card backs', note: 'Modes as cards in a sideways row. Dare2Dream is turned face-up in shiny purple; coming soon modes stay face-down.',
+      html: `<div class="mh"><b>Other modes</b><span>Swipe</span></div><div class="md">${MODES.map((m) => `<button class="cell${m.on ? ' on' : ''}" style="border:0;background:none;color:#fff">${back(m.on)}<b>${m.name}</b><small>${m.on ? 'PLAY' : 'SOON'}</small></button>`).join('')}</div>` },
+    { tag: 'MODES E', name: 'Split grid', note: 'Dare2Dream takes the left half as a purple panel with a Play pill; the coming soon modes stack as slim outlined tiles on the right.',
+      html: `<div class="mh"><b>Other modes</b></div><div class="me"><button class="big"><small>DARE2DREAM</small><b>Any club,<br>no players</b><span>Draft your XI, then beat their real finish.</span><span class="pl">Play</span></button>${MODES.slice(1).map((m) => `<button class="sm"><b>${m.name}</b><small>SOON</small></button>`).join('')}</div>` }
+  ];
+  const card = (o) => `<div class="opt"><div class="opt-h"><span class="tag">${o.tag}</span><h3>${o.name}</h3><p>${o.note}</p></div>${o.html}</div>`;
+  document.getElementById('classic').innerHTML = CLASSIC.map(card).join('');
+  document.getElementById('modes').innerHTML = OTHER.map(card).join('');
+})();
+</script>

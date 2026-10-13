@@ -33,11 +33,20 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 /* Green backdrop lines (FC-style beams), drawn by D2T.greenBackdrop() */
 .green-backdrop { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 .green-backdrop svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.gb-arw { transform-box: fill-box; transform-origin: 50% 50%; animation: gbArw 7s ease-in-out infinite alternate; }
+.gb-thin { animation-name: gbThin; animation-duration: 5.5s; }
+@keyframes gbArw { from { transform: translate(-5px, 5px) scale(.94); } to { transform: translate(5px, -5px) scale(1.06); } }
+@keyframes gbThin { 0% { transform: translate(-8px, 8px); opacity: .35; } 100% { transform: translate(8px, -8px); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .gb-arw { animation: none; } }
 
 /* Top chrome on in-game screens: white short logo left, account right */
 .topbar { position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between; padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 10px; min-height: 44px; }
 .topbar .logo-mask { height: 26px; }
 .topbar-l { display: flex; align-items: center; gap: 6px; }
+.topbar.has-mode { display: grid; grid-template-columns: 1fr auto 1fr; }
+.topbar.has-mode .acct-btn { justify-self: end; }
+.mode-tag { font: 900 italic 15px/1 var(--font); letter-spacing: 0.04em; text-transform: uppercase; color: #0A0A0A; background: var(--c); padding: 5px 10px 4px; border-radius: 5px; transform: skewX(-10deg); white-space: nowrap; }
+.mode-tag > span { display: inline-block; transform: skewX(10deg); }
 .back-btn { width: 44px; height: 44px; margin-left: -10px; border: 0; background: none; padding: 0; display: grid; place-items: center; color: #fff; }
 .back-btn svg { width: 26px; height: 26px; }
 .acct-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--ink); display: grid; place-items: center; padding: 0; }
@@ -77,6 +86,9 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .d2c-holo { position: absolute; inset: 0; background: var(--holo, none); mix-blend-mode: screen; }
 .d2t-shine { position: absolute; top: -30%; left: -70%; width: 45%; height: 160%; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%); transform: rotate(18deg); animation: d2tShine 4.5s ease-in-out infinite; pointer-events: none; }
 @keyframes d2tShine { 0% { left: -70%; } 30% { left: 130%; } 100% { left: 130%; } }
+/* a slower beat: the same sweep (about 1.4s), then a long rest (home's club fan and continue cards) */
+.d2t-shine.slow { animation-name: d2tShineSlow; animation-duration: 10s; }
+@keyframes d2tShineSlow { 0% { left: -70%; } 14% { left: 130%; } 100% { left: 130%; } }
 .d2c-body { position: relative; display: flex; flex-direction: column; height: 100%; box-sizing: border-box; padding: 1em 0.8em 2.4em; }
 .d2c-top { display: flex; justify-content: space-between; align-items: flex-start; }
 .d2c-left { display: flex; flex-direction: column; align-items: center; width: 3.4em; }
@@ -135,4 +147,20 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
    theme-color. D2T.chrome(top, bottom) keeps all of them, and the page background, in step with each screen. */
 .chrome-top, .chrome-bot { position: fixed; left: 0; right: 0; z-index: 90; pointer-events: none; background: #000; transition: background-color .9s ease; }
 .chrome-top { top: 0; height: max(12px, env(safe-area-inset-top, 0px)); }
-.chrome-bot { bottom: 0; height: max(12px, env(safe-area-inset-bottom, 0px)); }
+.chrome-bot { bottom: 0; height: max(12px, env(safe-area-inset-bottom, 0px)); z-index: 4; } /* under the button bars (z 5), sheets and overlays, so it never clips a button; still over scrolling content */
+
+/* nationality flag (12 Oct, option A in design/prototype/nationality.html) */
+.d2c-flag { display: block; object-fit: cover; aspect-ratio: 4 / 3; border-radius: 0.22em; box-shadow: 0 0 0 0.08em rgba(0,0,0,0.35), 0 0.12em 0.3em rgba(0,0,0,0.35); }
+.d2c:not(.mini) .d2c-left .d2c-flag { width: 1.7em; }
+.d2c:not(.mini) .d2c-left:has(.d2c-flag) .d2c-rule { margin: 0.32em 0 0.3em; }
+.d2c.mini .d2c-side { display: flex; flex-direction: column; align-items: center; gap: 0.35em; }
+.d2c.mini .d2c-side .d2c-flag { width: 3em; }
+.d2c.mini .d2c-side .d2c-crest { width: 2.9em; height: 2.9em; }
+
+/* first-time tips (D2T.tip): a handwritten note with a curved arrow, like the respin tip on the spin screen */
+.d2t-tip { position: absolute; z-index: 60; color: #fff; pointer-events: none; opacity: .95; transition: opacity .4s; animation: d2tTipIn .5s .25s var(--ease-out) both; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.85)); }
+.d2t-tip svg { position: absolute; width: 34px; height: 46px; }
+.d2t-tip span { position: absolute; left: 0; top: 0; font-family: Caveat, 'Bradley Hand', 'Segoe Print', cursive; font-weight: 600; font-size: 23px; line-height: 1; white-space: nowrap; transform: rotate(-2.5deg); }
+.d2t-tip.gone { opacity: 0; }
+@keyframes d2tTipIn { from { opacity: 0; transform: translateY(6px); } to { opacity: .95; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .d2t-tip { animation: none; } }

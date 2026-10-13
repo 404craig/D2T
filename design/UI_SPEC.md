@@ -94,6 +94,46 @@ Today a bronze or silver card is rarely wanted. Options, best first:
 - `design/reference/`: the FC27 green reference image (EA key art, reference only), the logo animation video and its frames.
 - Design canvases (claude.ai, private to Craig): Cards https://claude.ai/artifact/CSgEHPpQSqtkG5PxwfPkvz, Club Themes https://claude.ai/artifact/DjFu7XBFz65kq5S7Aivdmy.
 
+## 8b. Home (build 14, chosen 11 Oct)
+
+- Order: logo, Classic (Pick a new club), Continue, Your record, Other modes (Dare2Dream card, then the coming soon row).
+- Continue is the club sweep: light club colour at the left, the true colour across the middle, a deeper shade at the right, with a metal rim, faint diagonal texture and the light sweep. Text and the arrow turn dark on light club colours. Options page: `design/prototype/continue-options.html` (idea 1).
+- Bottom bar icons are solid and slanted like the Black Italic type, all white, with one-line uppercase italic labels. Options page: `design/prototype/home-options.html`.
+
+## 8b2. Classic button (build 16, chosen 11 Oct)
+
+- "Shuffle": three real relegated club cards (random from the pool each visit) fanned on the right, running off the edge; the title, line and a green "Spin for a club" pill on the left.
+- Every 10 to 15 seconds (random) the back card slides round to the front; the card that ends up at the back is swapped for another club while it is behind, so new clubs keep appearing. The swap is a 0.9s cross-fade, never a snap (build 18). The three cards always show clearly different club colours (accents at least 110 apart in RGB). Paused when the page is hidden; off with reduced motion. Options page: `design/prototype/fan-options.html` (alt 1).
+- Still open: how the other mode blocks open (`design/prototype/home-full.html`, options X, Y, Z).
+
+## 8c. Squad screen (build 15, chosen 11 Oct)
+
+- Compact layout: header, pitch, subs and the bottom bar fit one screen with no scrolling, down to about 640px tall (Safari with its toolbars on a current iPhone is about 700).
+- One-line header (crest, club, season, team rating). The pitch flexes to the space left (300 to 470px tall). Formation is a chip on the bottom-left corner of the pitch.
+- Subs are a swipeable strip of pitch-style cards (60px). Pitch cards are 50px.
+- No glows on squad or pitch cards. Selected: the card lifts, its position tab turns white and a white marker sits under it. Targets scale up with an outline. Options page: `design/prototype/squad-fit.html` (option A).
+
+## 8d. 433 Goals (live in build 25, chosen 11 Oct)
+
+- Mode colour orange `#FF7A1A`. Tally is the progress bar: orange fills to the white 433 line; past 433 it bursts on the line, re-scales so 433 fits and the extra runs on in grey stripes. Endings: so close (within 25), exactly 433 (gold bar, shirt wave, confetti, giant 433), blown past (grey "+N" stamp), a long way short (calm "N short").
+- Big spinning shirts: surname across the shoulders, a ? where the number goes, the club crest printed full colour under it (line-drawn crests on a light patch), slight sheen and a light sweep as each lands. The ? bursts into his goals when he lands on the pitch.
+- Pitch shirts (56px): crest on a light disc at the collar, goals always at the three-figure size. Keeper wears the short-sleeved club shirt.
+- Kits: club stripes, hoops, halves and sleeves, darker outlines instead of white on most (patterns and second colours are design choices, not from a checked source).
+- Night stadium pitch, burst reveal, straight names, never a circle round a ?. Live as `src/app/screens/goals.js` (build 25). Options page: `design/prototype/goals433.html`.
+
+## 8e. Other games (build 28, chosen 12 Oct)
+
+- Section title "Other games". Option A: each card washed in its game's colour from the right, thin rim, faded mark on the right, button bottom right; all the same shape and height.
+- Daily Challenge white (date in the tag, club over season as the title, today's crest in full colour at the Club X badge's size), Dare2Dream blue, Club X green, 433 Goals orange ("Score exactly 433 goals"), Tenaball purple (opens https://404craig.github.io/Tenaball/). Coming soon (build 31): Head to head ("Multiplayer online, challenge your friends.") and Steal as two grey squares side by side, grey sweep with a faded icon and a lock. Options page: `design/prototype/modes-colour.html`.
+
+## 8f. Goal Rush (chosen 12 Oct, replaces 433 Goals; built 12 Oct)
+
+- Name Goal Rush, colour yellow `#FFD21F` (text `#FFE375`), mark: Craig's ball (`assets/brand/goal_rush.png`, cut out), faded behind the home card at the Club X badge's size. Home card: tag GOAL RUSH, title "Score the exact number of goals", line "A random formation each game. Pick 11 real players whose career goals add up to it exactly." In-game tag "Goal Rush" in yellow.
+- Each game picks one of 442, 433, 451, 352, 343, 424, 532, 541 at random (not daily). That number is the target and the pitch takes that shape (labels: 3 back CB CB CB; 4 back LB CB CB RB; 5 back LWB CB CB CB RWB; 2 mid CM CM; 3 mid CM CM CM; 4 mid LM CM CM RM; 5 mid LM CM CM CM RM; 1 up ST; 2 up ST ST; 3 up LW ST RW; 4 up LW ST ST RW). A target reveal opens each game: the eight formations, the chosen one lit, a big yellow number. "433 GOALS" painted on the pitch becomes "<target> GOALS" and a small shape chip sits bottom left.
+- Balance (`tests/sim-goalrush.js`): pool depth per formation (top N scorers per position) DEPTH = 442:180, 433:220, 451:145, 352:310, 343:355, 424:260, 532:105, 541:75; last-shot gift per formation GIFT = 442:0.22, 433:0.2, 451:0.27, 352:0.14, 343:0.14, 424:0.18, 532:0.36, 541:0.42. A casual player lands exactly about 1 game in 20 and within 10 about 1 in 5 (5-4-1 hardest).
+- Tally: top left "Player 7 of 11" over "4 players to pick · 38 goals to go" (goals to go in yellow, "N goals over" past the target; respins only on the respin button badge). Top right "314/352 GOALS" (big white scored, smaller grey /target and GOALS). The bar fills left to right to the white target line; nothing under the bar, so the pitch moves up.
+- The 433 record carries on into Goal Rush. Mockups: `design/prototype/goal-rush.html`, `goal-rush-logo.html`.
+
 ## 9. How the prototype behaves (built 11 Oct)
 
 - **Intro:** short black D2T, emblem spins as it opens into DROP2TOP at 75% width, then the slogan types in (DROP and TOP reversed out), then the logo glides up into the green home. About 5 seconds, tap to skip, first launch only.
@@ -101,7 +141,7 @@ Today a bronze or silver card is rarely wanted. Options, best first:
 - **Spin engine (`screens/spin.js`, `D2T.roll`):** three masked reels, 5 recycled nodes each, cards addressed by index so the strip never loops. Speed up to 24 cards a second, vertical blur by SVG `feGaussianBlur` scaled to speed, decel curve landing exactly on the target, then a damped spring (one soft bounce). Lands at about 2.4s, 3.0s and 3.7s (the right reel teases longest). Each landing: scale pulse, light sweep, glow in the club colour. Measured 60fps in Chromium.
 - **Card open (`core/flip.js`):** one full turn around the vertical axis with a D2T card back, 800ms open, 640ms close, horizontal blur during the fastest part of the turn.
 - **Transfer roll:** the emblem spins and bursts into about 600 fragments to reveal the slots. Prototype odds: bronze 14, silver 34, gold 38, baller 11, legend about 4.
-- **Table reveal:** a club-colour highlight runs down from 1st, slowing into your row, then a "New season" banner and every number counts down to 0.
+- **Table reveal:** a club-colour highlight runs down from 1st, slowing into your row, then a "Rewrite history" banner (two lines) and every number counts down to 0.
 - **Matches:** seeded Poisson from XI rating against opponent strength (from their real finish), 90 minutes in about 24 seconds, Skip to end gives the same result. Other clubs use their real results for gameweeks 1 to 3. A transfer roll comes after gameweek 3, 6, 9...
 - **Prototype limits:** spins always land on the three clubs with full data (Wolves 2011/12, Norwich 2019/20, Southampton 2024/25); achievement numbers and friends are examples.
 

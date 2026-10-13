@@ -40,7 +40,7 @@
           : ''}
         <div class="se-pad"></div>
       </div>`);
-      const bar = D2T.h('<footer class="actionbar"><button class="icon-btn se-back" type="button" aria-label="Back to squad">' + D2T.ICON.back + '</button><button class="btn se-btn se-wide" type="button">Play match</button></footer>');
+      const bar = D2T.h('<footer class="actionbar"><button class="icon-btn se-back" type="button" aria-label="Back to squad">' + D2T.ICON.back + '</button><button class="btn se-btn se-wide" type="button">Play match</button>' + SE.homeBtn() + '</footer>');
       root.append(body, bar);
       bar.querySelector('.se-back').onclick = () => D2T.go('squad');
       bar.querySelector('.se-btn').onclick = () => { st.step = 'match'; D2T.save(); D2T.go('match'); };

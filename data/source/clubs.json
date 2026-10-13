@@ -159,7 +159,8 @@
   "accent": "#FFFFFF",
   "ink": "#000000",
   "text": "#FFFFFF",
-  "code": "DER"
+  "code": "DER",
+  "crestDark": "derby_white.png"
  },
  "Everton": {
   "name": "Everton",
@@ -231,7 +232,8 @@
   "accent": "#C8102E",
   "ink": "#FFFFFF",
   "text": "#FF4D63",
-  "code": "LIV"
+  "code": "LIV",
+  "crestCard": "liverpool_white.png"
  },
  "Luton": {
   "name": "Luton",
@@ -294,7 +296,8 @@
   "accent": "#DD0000",
   "ink": "#FFFFFF",
   "text": "#FF4D4D",
-  "code": "NFO"
+  "code": "NFO",
+  "crestCard": "nottingham-forest_white.png"
  },
  "Oldham": {
   "name": "Oldham",
@@ -348,7 +351,8 @@
   "accent": "#1E5BC6",
   "ink": "#FFFFFF",
   "text": "#6A98F2",
-  "code": "SHW"
+  "code": "SHW",
+  "crestCard": "sheffield-wed_white.png"
  },
  "Southampton": {
   "name": "Southampton",
@@ -366,7 +370,8 @@
   "accent": "#FFFFFF",
   "ink": "#132257",
   "text": "#FFFFFF",
-  "code": "TOT"
+  "code": "TOT",
+  "crestDark": "spurs_white.png"
  },
  "Stoke": {
   "name": "Stoke",

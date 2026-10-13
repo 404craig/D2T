@@ -35,8 +35,20 @@
           <li><b>Finish high</b>Your final place earns achievements: beat the drop, top half, top 3, the title.</li>
         </ol>
 
+        <h2 class="fr-h2">Goal Rush</h2>
+        <p class="fr-lead">Each game picks a random formation, and its number is your target: line up 3-5-2 and score exactly 352. Fill the shirts in any order: each spin shows three real players for your open shirts, and you drag one onto a shirt of his position. His Premier League career goals go onto his shirt and into your total. Land exactly on the target. 3 respins a game.</p>
+
+        <h2 class="fr-h2">Unbeaten Run</h2>
+        <p class="fr-lead">Spin for a stat: career goals, points in a season, wins, assists and more, all real Premier League numbers. Two cards side by side: the left one shows its number, the right one hides it. Higher or lower? Get it right and the run goes on with the next card. One wrong answer ends it. Your best run per stat is kept.</p>
+
+        <h2 class="fr-h2">Daily challenge</h2>
+        <p class="fr-lead">One club a day, the same for everyone: one of the bottom 10 of a real season. It plays exactly like Classic: their real squad and XI, transfer rolls and 5 respins. Finish as high as you can. One go, then compare with your mates.</p>
+
         <h2 class="fr-h2">Dare2Dream</h2>
         <p class="fr-lead">Spin any club from any season, but start with no players. Pick a formation, then draft your XI: 11 spins, one per shirt, three players each time, no respins. Then play the season with transfer rolls and 5 respins. Finish higher than they really did, or win the league again if they won it.</p>
+
+        <h2 class="fr-h2">Club X</h2>
+        <p class="fr-lead">Name your club, then spin a season. Your club takes the place of that season's bottom side, with no players. Pick a formation and draft your XI: 11 spins, three players each time for any of your open shirts, and each goes in a shirt he plays. Then play the season with transfer rolls and 5 respins. Only the title counts.</p>
 
         <h2 class="fr-h2">Card colours</h2>
         <p class="fr-lead" style="margin-bottom:6px">The big number is the rating. The colour tells you the level.</p>

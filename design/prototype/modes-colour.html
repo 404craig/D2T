@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D2T Mode Colours</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<style>
+  /* Option A (chosen): each mode's colour washes in from the right with a thin rim. Daily is blue (or white or silver), Club X green. */
+  :root { color-scheme: dark; --daily: #3BA4FF; --d2d: #3BA4FF; --tena: #A66BFF; --clx: #12F06C; --g433: #FF7A1A; --line: #26262C; --soft: #CFCFD6; --muted: #8E8E99; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #08080A; color: #fff; font-family: 'Exo 2', Arial, sans-serif; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
+  .page { max-width: 1760px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 28px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
+  .head p, .sec > p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 90ch; }
+  .sec { display: flex; flex-direction: column; gap: 16px; padding-top: 24px; border-top: 1px solid #1E1E22; }
+  .sec > h2 { font: 900 italic 30px/1 'Exo 2'; margin: 0; }
+  .pick { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pick button { font-size: 13px; font-weight: 800; padding: 9px 14px; border-radius: 18px; border: 1px solid #33333A; color: #DADAE0; display: flex; align-items: center; gap: 8px; }
+  .pick button i { width: 14px; height: 14px; border-radius: 4px; display: block; }
+  .pick button.on { background: #fff; color: #000; border-color: #fff; }
+  .row { display: flex; gap: 26px; flex-wrap: wrap; justify-content: center; }
+  .opt { width: 390px; max-width: 100%; display: flex; flex-direction: column; gap: 10px; }
+  .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: #12F06C; }
+  .opt-h h3 { font: 900 italic 22px/1.05 'Exo 2'; margin: 3px 0; }
+  .opt-h p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; min-height: 57px; }
+  .phone { width: 390px; max-width: 100%; border-radius: 26px; background: #000; box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,.6); padding: 18px 16px 22px; overflow: hidden; }
+  .sect { font: 900 italic 26px/1 'Exo 2'; text-transform: uppercase; margin: 4px 2px 14px; }
+  .soon { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 16px 2px 0; }
+  .emb { display: block; background: currentColor; -webkit-mask: url('assets/logo/emblem_line.png') center / contain no-repeat; mask: url('assets/logo/emblem_line.png') center / contain no-repeat; }
+  .n433 { font: 900 italic 1em/1 'Exo 2'; -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px currentColor; display: block; }
+  .go svg { width: 20px; height: 20px; }
+
+  /* every card the same: tag, two-line title, one-line description, the mark on the right, the button bottom right */
+  .card { position: relative; display: flex; flex-direction: column; justify-content: center; width: 100%; min-height: 146px; padding: 18px 70px 18px 18px; border-radius: 22px; overflow: hidden; margin-bottom: 12px; isolation: isolate;
+    background: linear-gradient(100deg, #0E0E10 0%, #0E0E10 38%, color-mix(in srgb, var(--c) 30%, #0E0E10) 100%); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 45%, transparent); }
+  .card::after { content: ''; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, rgba(255,255,255,0) 2px 7px); }
+  .t-tag { display: block; font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--c); }
+  .t-big { display: block; font: 900 italic 26px/.95 'Exo 2'; text-transform: uppercase; margin-top: 6px; }
+  .t-sub { display: block; font-size: 14px; font-weight: 600; color: var(--soft); margin-top: 7px; line-height: 1.35; }
+  .go { position: absolute; right: 16px; bottom: 16px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #0A0A0A; }
+  .mark { position: absolute; right: -14px; top: 50%; transform: translateY(-50%) rotate(-8deg); min-width: 120px; height: 120px; color: var(--c); opacity: .3; z-index: -1; display: grid; place-items: center; font-size: 84px; }
+  .mark img { width: 110px; opacity: .9; }
+  /* silver: a brushed metal button and rim */
+  .card.silver .go { background: linear-gradient(160deg, #F4F6F8, #AEB4BC 55%, #E4E7EB); }
+  .card.silver { box-shadow: inset 0 0 0 1px rgba(214,219,226,.5); }
+  .card.silver .t-tag { background: linear-gradient(90deg, #F4F6F8, #AEB4BC); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* the daily crest takes the Club X badge's box: the badge is 110 x 144; crests are often wider than tall, so the box is a little wider to give the same visual weight */
+  .mark img.crest { width: 124px; height: 144px; object-fit: contain; }
+  .dfull .mark { opacity: 1; }
+  .dfull .mark img.crest { filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
+  .mark img.tb { width: 132px; height: 132px; object-fit: contain; }
+  /* Coming soon squares, all grey */
+  .soonh { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 18px 2px 10px; }
+  .sq { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .tile { position: relative; aspect-ratio: 1 / 1; border-radius: 22px; overflow: hidden; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; padding: 14px; text-align: left; }
+  .tile .nm { font: 900 italic 20px/.95 'Exo 2'; text-transform: uppercase; }
+  .tile .sb { font-size: 12px; font-weight: 600; line-height: 1.3; margin-top: 5px; color: #A9A9B2; }
+  .tile .ic { position: absolute; right: -8px; top: -4px; width: 104px; height: 104px; display: grid; place-items: center; color: #8E8E99; opacity: .22; z-index: -1; transform: rotate(-8deg); }
+  .tile .ic svg { width: 100%; height: 100%; }
+  .ico-vs { font: 900 italic 64px/1 'Exo 2'; -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px currentColor; }
+  /* S1 grey sweep: the live cards' style, square, in grey, with a small lock where the button would be */
+  .s1 .tile { background: linear-gradient(120deg, #0E0E10 0%, #0E0E10 40%, #26262B 100%); box-shadow: inset 0 0 0 1px rgba(142,142,153,.45); }
+  .s1 .tile::after { content: ''; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 2px, rgba(255,255,255,0) 2px 7px); }
+  .s1 .tag { font-size: 10px; font-weight: 800; letter-spacing: .14em; color: #8E8E99; margin-bottom: 6px; }
+  .s1 .lock { position: absolute; right: 12px; top: 12px; width: 32px; height: 32px; border-radius: 50%; background: #2A2A30; display: grid; place-items: center; color: #8E8E99; }
+  .s1 .lock svg { width: 15px; height: 15px; }
+  /* S2 brushed steel: a solid grey metal face, dark text, a diagonal COMING SOON ribbon across the corner */
+  .s2 .tile { background: linear-gradient(150deg, #6E6E78 0%, #4A4A52 45%, #2E2E34 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.25), inset 0 0 0 1px rgba(255,255,255,.08); }
+  .s2 .tile::after { content: ''; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, rgba(255,255,255,0) 1px 3px); }
+  .s2 .ic { color: #FFF; opacity: .14; }
+  .s2 .sb { color: #D6D6DC; }
+  .s2 .rib { position: absolute; right: -34px; top: 18px; width: 140px; transform: rotate(45deg); background: #0A0A0A; color: #C9C9D0; text-align: center; font-size: 9.5px; font-weight: 900; letter-spacing: .14em; padding: 4px 0; }
+  /* S3 outline: black tile, dashed grey outline (still being drawn), the icon in grey at the top, a COMING SOON chip */
+  .s3 .tile { background: #0A0A0B; border: 1.5px dashed #4A4A52; justify-content: space-between; }
+  .s3 .ic { position: static; width: 52px; height: 52px; opacity: .55; transform: none; z-index: 0; }
+  .s3 .ico-vs { font-size: 34px; }
+  .s3 .chip { position: absolute; right: 12px; top: 14px; font-size: 9px; font-weight: 900; letter-spacing: .12em; color: #8E8E99; border: 1px solid #3A3A42; border-radius: 10px; padding: 3px 7px; }
+  .s3 .nm { color: #DADAE0; }
+  /* Daily layouts */
+  /* 1: the crest is the mark, faded like the other modes' marks */
+  .d1 .mark img { width: 104px; opacity: 1; }
+  .d1 .mark { opacity: .32; }
+  /* 2: the crest in full colour where the marks sit, smaller, tilted and tucked behind the button */
+  .d2 .mark { opacity: 1; right: 10px; top: 36%; min-width: 0; width: 86px; height: 86px; transform: translateY(-50%) rotate(-8deg); }
+  .d2 .mark img { width: 80px; filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
+  .d2 .mark::before { content: ''; position: absolute; inset: -18px; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--c) 35%, transparent), transparent); z-index: -1; }
+  /* 3: a faded crest plus a date chip, top right, in the mode colour */
+  .d3 .mark img { width: 104px; }
+  .d3 .mark { opacity: .32; }
+  .d3 .chip { position: absolute; right: 14px; top: 14px; display: flex; flex-direction: column; align-items: center; width: 44px; border-radius: 10px; overflow: hidden; background: #0A0A0A; box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 60%, transparent); }
+  .d3 .chip span { display: block; width: 100%; text-align: center; font-size: 9px; font-weight: 900; letter-spacing: .1em; color: #0A0A0A; background: var(--c); padding: 2px 0; }
+  .d3 .chip b { font: 900 italic 20px/1 'Exo 2'; padding: 4px 0 5px; }
+  .card.silver.d3 .chip span { background: linear-gradient(90deg, #F4F6F8, #AEB4BC); }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <h1>Mode colours</h1>
+    <p>Option A: each game's colour washes in from the right. The section is now Other games. Daily Challenge white, Dare2Dream blue, Club X green, 433 Goals orange, and a new Tenaball card in purple that opens Tenaball, with its ball as the faded mark. Every card has the same shape and height.</p>
+  </div>
+  <section class="sec"><h2>Coming soon: two grey squares</h2><p>Head to head and Steal side by side as two square tiles in grey, so they sit quietly under the live games. Head to head now reads "Multiplayer online, challenge your friends." Three ways to present them, shown under the Tenaball card as on home.</p><div class="row" id="soon"></div></section>
+  <section class="sec"><h2>Chosen: daily in white</h2><p>The daily card in white, the date in the top row, and the club crest behind the card exactly where and how big the Club X badge sits: same box, same tilt, same fade. On the right, the same card with the crest in full colour at that size, if you want today's club to show more.</p><div class="row" id="final"></div></section>
+</div>
+<script>
+(function () {
+  const GO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
+  const DC = { blue: 'var(--daily)', white: '#FFFFFF', silver: '#C9CED6' };
+  const MODES = [
+    { c: 'var(--d2d)', tag: 'DARE2DREAM', big: 'Any club, no players', sub: 'Draft your XI, then beat their real finish.', mark: '<span class="emb" style="width:100%;height:100%"></span>' },
+    { c: 'var(--clx)', tag: 'CLUB X', big: 'Replace the bottom club', sub: 'Draft 11 from scratch, then win the league.', mark: '<img src="assets/brand/club_x.png" alt="">' },
+    { c: 'var(--g433)', tag: '433 GOALS', big: 'Hit exactly 433', sub: 'Spin 11 real players. Their goals must add up to 433.', mark: '<span class="n433">433</span>' },
+    { c: 'var(--tena)', tag: 'TENABALL', big: 'Name the top ten', sub: 'Our football quiz. Opens Tenaball.', mark: '<img class="tb" src="assets/brand/tenaball.png" alt="">' }
+  ];
+  const card = (m, extra = '', cls = '') => `<button class="card ${cls}" style="--c:${m.c}"><span class="mark">${m.mark}</span>${extra}<span class="t-tag">${m.tag}</span><span class="t-big">${m.big}</span><span class="t-sub">${m.sub}</span><span class="go">${GO}</span></button>`;
+  const daily = (layout, colour) => {
+    const m = { c: DC[colour], tag: layout === 3 ? 'DAILY CHALLENGE' : 'DAILY CHALLENGE · 12 OCT', big: 'Watford<br>1999/00', sub: 'Classic: they went down. Rescue them.', mark: '<img src="assets/crests/watford.png" alt="">' };
+    const chip = layout === 3 ? '<span class="chip"><span>OCT</span><b>12</b></span>' : '';
+    return card(m, chip, `d${layout}${colour === 'silver' ? ' silver' : ''}`);
+  };
+  const phone = (layout, colour) => `<div class="phone"><div class="sect">Other games</div>${daily(layout, colour)}${MODES.map((m) => card(m)).join('')}<div class="soon">Coming soon: Head to head · Steal</div></div>`;
+  const L = [[1, 'Crest as the mark', 'The club crest sits where the other modes keep their logo, big and faded the same way. The most consistent: four matching cards.'],
+    [2, 'Crest in full colour', 'Same place, but the crest is in its real colours, smaller and tilted, on a soft glow of the daily colour. Today\'s club stands out; the card still matches.'],
+    [3, 'Crest plus a date chip', 'As 1, with a small calendar chip (12 OCT) top right in the daily colour, so it reads as today\'s challenge at a glance. The tag drops the date.']];
+  const LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+  const STEAL = '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><path d="M30 14 H70 L80 24 V76 L50 90 L20 76 V24 Z"/><path d="M44 52 H92 M78 38 L92 52 L78 66"/></svg>';
+  const SOON = [{ nm: 'Head to head', sb: 'Multiplayer online, challenge your friends.', ic: '<span class="ico-vs">VS</span>' }, { nm: 'Steal', sb: 'Every card comes from the club you play next.', ic: STEAL }];
+  const tena = { c: 'var(--tena)', tag: 'TENABALL', big: 'Name the top ten', sub: 'Our football quiz. Opens Tenaball.', mark: '<img class="tb" src="assets/brand/tenaball.png" alt="">' };
+  const tiles = (k) => SOON.map((m) => k === 1 ? `<div class="tile"><span class="ic">${m.ic}</span><span class="lock">${LOCK}</span><span class="tag">COMING SOON</span><span class="nm">${m.nm}</span><span class="sb">${m.sb}</span></div>`
+    : k === 2 ? `<div class="tile"><span class="ic">${m.ic}</span><span class="rib">COMING SOON</span><span class="nm">${m.nm}</span><span class="sb">${m.sb}</span></div>`
+    : `<div class="tile"><span class="ic">${m.ic}</span><span class="chip">SOON</span><span><span class="nm" style="display:block">${m.nm}</span><span class="sb" style="display:block">${m.sb}</span></span></div>`).join('');
+  document.getElementById('soon').innerHTML = [[1, 'Grey sweep', 'The live cards\' style, squared off and all grey: faded icon top right, a small lock where the arrow would be, COMING SOON as the tag.'],
+    [2, 'Brushed steel', 'A solid grey metal face with a faint brushed grain and a black COMING SOON ribbon across the corner. Feels like a locked card.'],
+    [3, 'Dashed outline', 'Black tiles with a dashed grey outline, as if still being drawn, the icon in grey at the top and a small SOON chip.']]
+    .map(([k, h, d]) => `<div class="opt"><div class="opt-h"><span class="tag">OPTION ${k}</span><h3>${h}</h3><p>${d}</p></div><div class="phone">${card(tena)}<div class="soonh">Coming soon</div><div class="sq s${k}">${tiles(k)}</div></div></div>`).join('');
+  const final = (full) => { const m = { c: DC.white, tag: 'DAILY CHALLENGE · 12 OCT', big: 'Watford<br>1999/00', sub: 'Classic: they went down. Rescue them.', mark: '<img class="crest" src="assets/crests/watford.png" alt="">' };
+    return `<div class="phone"><div class="sect">Other games</div>${card(m, '', full ? 'dfull' : '')}${MODES.map((x) => card(x)).join('')}<div class="soon">Coming soon: Head to head · Steal</div></div>`; };
+  document.getElementById('final').innerHTML = [[false, 'CHOSEN', 'Crest faded, like Club X', 'White tag, rim and button. The crest is faded behind the text exactly like the Club X badge, so all the cards match.'],
+    [true, 'VARIANT', 'Crest in full colour, same size', 'The same card with the crest in its real colours at the Club X badge size. Louder, but today\'s club is obvious.']]
+    .map(([full, t, h, d]) => `<div class="opt"><div class="opt-h"><span class="tag">${t}</span><h3>${h}</h3><p>${d}</p></div>${final(full)}</div>`).join('');
+})();
+</script>
+</body>
+</html>

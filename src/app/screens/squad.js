@@ -3,7 +3,7 @@
 // are signed straight onto the pitch from the transfer roll (screens/transfer.js).
 (function () {
   const D2T = window.D2T, SE = D2T.se, GAME = D2T.game;
-  const PITCH_W = 56, SUB_W = 92;
+  const PITCH_W = 50, SUB_W = 60; // compact layout (chosen 11 Oct): header, pitch, subs and the bar fit one screen
   const ROLE_NAME = { GK: 'Goalkeeper', DEF: 'Defender', MID: 'Midfielder', FWD: 'Forward' };
   const last = (n) => n.split(' ').slice(-1)[0];
   const idOf = (s) => (/^\d+$/.test(String(s)) ? +s : s);   // player ids are numbers; legend ids are text
@@ -17,19 +17,18 @@
       const eng = GAME.eng();
       SE.accent(root, club); SE.setStep(ctx, 'squad');
       const reduced = D2T.reduced();
-      const pre = GAME.preseason(), drafting = GAME.inDraft(), dream = GAME.mode() === 'dare2dream';
+      const pre = GAME.preseason(), drafting = GAME.inDraft(), dream = GAME.isDraftMode();
       root.appendChild(D2T.topbar());
       const gwLabel = drafting ? 'Draft' : pre ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, data.fixtures.length)}`;
       const hist = data.table.find((r) => r.name === club.name);
-      const goalLabel = GAME.mode() === 'dare2dream' && hist ? ` · Target ${hist.pos === 1 ? 'champions' : D2T.ordinal(GAME.target(hist.pos))}` : '';
+      const goalLabel = GAME.mode() !== 'classic' && hist ? ` · Target ${hist.pos === 1 || GAME.mode() === 'clubx' ? 'champions' : D2T.ordinal(GAME.target(hist.pos))}` : '';
       const body = D2T.h(`<div class="screen-body se-squad">
         <div class="se-sqhead">
           <img class="se-sqcrest" src="${club.crest}" alt="">
           <div class="se-sqtext"><div class="se-sqname">${D2T.esc(club.name)}</div><div class="se-sqsub">${data.season} · ${gwLabel}${goalLabel}</div></div>
           <div class="se-rating" aria-live="polite"><b class="se-rating-n">0</b><i>Team<br>rating</i></div>
         </div>
-        <div class="se-pitch">${pitchLines}<div class="se-slots"></div></div>
-        <button class="se-formlink" type="button">Change formation · <b class="se-fname"></b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="se-pitch">${pitchLines}<div class="se-slots"></div><button class="se-formlink" type="button">Formation <b class="se-fname"></b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
         <div class="se-subshead"><span class="se-subs-t"></span><span class="se-hint" aria-live="polite"></span></div>
         <div class="se-subs" role="list" aria-label="Squad"></div>
       </div>`);
@@ -38,11 +37,14 @@
       // ---------- the fixed bar: next fixture and the way on ----------
       const fx = SE.fixture(data, pre || drafting ? 1 : eng.gw);
       const oppC = fx ? SE.club(data, fx.opp) : null;
-      const nextHTML = fx ? `<div class="se-next"><img src="${oppC.crest}" alt=""><div class="se-next-t"><small>Next · GW${fx.gw} · ${SE.date(fx.date, false)}</small><b>${D2T.esc(oppC.name)}</b><span class="se-ha">${fx.ha === 'H' ? 'Home' : 'Away'}</span></div></div>` : '';
+      const nextHTML = fx ? `<div class="se-next"><img src="${oppC.crest}" alt=""><div class="se-next-t"><small>Next · ${fx.ha === 'H' ? 'Home' : 'Away'}</small><b class="d2c-fit">${D2T.esc(oppC.name)}</b></div></div>` : '';
       const label = drafting ? 'Start the draft' : pre ? (dream ? 'Start the season' : 'Pre-season') : 'Play';
-      const bar = D2T.h(`<footer class="actionbar se-nextbar">${nextHTML}<button class="btn se-btn se-play" type="button">${label}</button></footer>`);
+      // before the draft (Craig, 13 Oct): no next fixture; a greyed respin on the left (the draft has none) keeps Start the draft centred
+      const REFRESH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
+      const left = drafting ? `<button class="icon-btn se-off" type="button" disabled aria-hidden="true" tabindex="-1">${REFRESH}</button>` : nextHTML;
+      const bar = D2T.h(`<footer class="actionbar se-nextbar${drafting ? ' is-draft' : ''}">${left}<button class="btn se-btn se-play" type="button">${label}</button>${SE.homeBtn()}</footer>`);
       root.appendChild(bar);
-      const playBtn = bar.querySelector('button');
+      const playBtn = bar.querySelector('.se-play');
       playBtn.onclick = () => {
         if (drafting) { st.step = 'transfer'; D2T.save(); D2T.go('transfer'); return; }
         if (pre) { GAME.startSeason(); D2T.go(GAME.eng().phase === 'window' ? 'transfer' : 'fixtures'); return; }
@@ -68,14 +70,14 @@
               ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false })}${oop ? `<span class="se-oopchip se-fit-${fit}">${s.pos}</span>` : ''}</div></div>`;
         }).join('');
         const sl = subsEl.scrollLeft;
-        subsEl.innerHTML = L.subs.map((c) => `<div class="se-sub" role="listitem"><div class="se-cardwrap" data-card="${c.id}" data-kind="sub" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, ${ROLE_NAME[c.pos]}, in the squad">${D2T.cards.player(c, { w: SUB_W, shine: false })}</div></div>`).join('');
+        subsEl.innerHTML = L.subs.map((c) => `<div class="se-sub" role="listitem"><div class="se-cardwrap" data-card="${c.id}" data-kind="sub" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, ${ROLE_NAME[c.pos]}, in the squad">${D2T.cards.player(c, { w: SUB_W, mini: true, shine: false })}</div></div>`).join('');
         subsEl.scrollLeft = sl;
         body.querySelector('.se-fname').textContent = GAME.eng().formation;
         const showSubs = L.subs.length > 0;
         body.querySelector('.se-subshead').style.display = showSubs || (pre && !dream) ? '' : 'none';
         subsEl.style.display = showSubs ? '' : 'none';
         let gone = body.querySelector('.se-gone');
-        const goneText = drafting ? 'Pick your shape, then start the draft: 11 spins, one per shirt (keeper first, then defence, midfield and attack). Three players each time, no respins.'
+        const goneText = drafting ? (GAME.mode() === 'clubx' ? 'Pick your shape, then start the draft: 11 spins, three players each time for any of your open shirts, in any order. Each goes in a shirt he plays. No respins.' : 'Pick your shape, then start the draft: 11 spins, one per shirt (keeper first, then defence, midfield and attack). Three players each time, no respins.')
           : dream && pre ? 'Your drafted XI. Swap shirts or change the shape, then start the season. Your 5 respins are for the transfer rolls during the season.'
           : 'The rest of the squad has gone. New faces only come through the transfer rolls, and each one takes a shirt from your XI.';
         if (!showSubs && (!pre || dream) && !gone) { gone = D2T.h(`<p class="se-note se-gone">${goneText}</p>`); subsEl.after(gone); }
@@ -132,13 +134,27 @@
         if (!sel) hintEl.textContent = pre ? 'Tap to select, drag onto the pitch' : '';
         else hintEl.textContent = sel.kind === 'sub' ? `Tap a player to bring on ${nm}` : `Tap a player to swap with ${nm}`;
         if (!pre) bar.dataset.hint = sel ? `Tap a player to swap with ${nm}` : '';
+        markFit(sel ? sel.id : null);
+      }
+      // While a player is selected or dragged, every shirt shows how he would fit it (green preferred, amber near, red not).
+      function markFit(id) {
+        const card = id == null ? null : L.all.get(String(id)), slots = GAME.slots();
+        slotsEl.querySelectorAll('.se-slot').forEach((sl) => {
+          sl.classList.remove('se-pf-green', 'se-pf-amber', 'se-pf-red');
+          sl.querySelectorAll('.se-pfchip').forEach((n) => n.remove());
+          sl.querySelectorAll('.se-oopchip').forEach((n) => { n.style.display = card ? 'none' : ''; });
+          if (!card) return;
+          const i = +sl.dataset.i, f = GAME.fit(card.id, i);
+          sl.classList.add('se-pf-' + f);
+          (sl.querySelector('.se-cardwrap') || sl).insertAdjacentHTML('beforeend', `<span class="se-oopchip se-pfchip se-fit-${f}">${slots[i].pos}</span>`);
+        });
       }
       function select(kind, id) { sel = { kind, id }; applySel(); }
       function clearSel() { sel = null; applySel(); }
       function openBig(el, id) {
         const card = L.all.get(String(id)); if (!card) return;
-        const below = D2T.cards.info(card, club.text);
-        D2T.cards.openLarge(el.querySelector('.d2c') || el, D2T.cards.player(card, { w: 280 }), { below });
+        const W = Math.min(236, Math.round(root.clientWidth * 0.6));
+        D2T.cards.openLarge(el.querySelector('.d2c') || el, D2T.cards.player(card, { w: W }), { w: W, below: D2T.cards.info(card), scroll: true });
       }
 
       // ---------- swaps ----------
@@ -201,7 +217,7 @@
         press.item.classList.add('se-dragsrc');
         root.classList.add('se-dragging');
         subsEl.style.overflowX = 'hidden';
-        sel = null; applySel();
+        sel = null; applySel(); markFit(press.id);
         moveGhost(e.clientX, e.clientY);
         hintEl.textContent = 'Drop on a player to swap';
       }
@@ -220,6 +236,7 @@
         subsEl.style.overflowX = '';
         p.item.classList.remove('se-dragsrc');
         t && t.classList.remove('se-target');
+        markFit(null);
         if (!g) return;
         const gr = g.querySelector('.d2c').getBoundingClientRect();
         if (t && x != null) {
@@ -275,6 +292,10 @@
       };
 
       render(null);
+      // first-time tips: the shape, then (another visit) swapping a sub in
+      const tipT = setTimeout(() => { if (!root.isConnected) return; const subs = subsEl.querySelectorAll('[data-card]'), sub = subs[Math.min(3, subs.length - 1)];   // a sub clear of the Formation button
+        D2T.tips([['formation', body.querySelector('.se-formlink'), 'Change your shape here'], ...(pre && !drafting && sub ? [['subs', sub, 'Drag a sub onto the pitch']] : [])]); }, 1100);
+      const offOld = this._off; this._off = () => { clearTimeout(tipT); offOld && offOld(); };
       // first load: cards deal onto the pitch
       if (!reduced) [...slotsEl.querySelectorAll('.se-cardwrap')].forEach((n, i) => n.animate([{ opacity: 0, transform: 'translateY(14px) scale(.85)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 60 + i * 40, easing: 'cubic-bezier(.3,1.3,.5,1)', fill: 'backwards' }));
     },

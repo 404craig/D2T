@@ -95,12 +95,17 @@ t("every relegated club-season can be played to the end", () => {
   }
 });
 // Dare2Dream: draft 11 (best effective rating each time), then play the season greedily.
-const draft = (seed, c, formation) => {
+const draft = (seed, c, formation, mode) => {
   const S = G.seasons[c.season], id = S.clubs.find(x => x.name === c.club).id;
-  const st = D.newRun({ seed, mode: "dare2dream", catalogue: G.clubSeasons });
+  const st = D.newRun({ seed, mode: mode || "dare2dream", catalogue: G.clubSeasons });
   D.chooseClub(st, S, { c: id, f: "4-4-2", xi: [] });
   if (formation) assert.ok(D.draftFormation(st, S, formation));
   while (st.phase === "draft") {
+    if (D.draftSlot(st) == null) {   // Club X: the best card on the shirt he fits best
+      const opts = st.roll.cards.map((cid) => { const s = D.draftFits(st, S, cid)[0]; return { cid, s, r: D.effRating(D.playerOf(S, cid, S.legends), D.FORMATIONS[st.formation][s][0]) }; });
+      const b = opts.sort((x, y) => y.r - x.r)[0];
+      assert.ok(D.draftPick(st, S, b.cid, b.s)); continue;
+    }
     const slot = D.draftSlot(st), pos = D.FORMATIONS[st.formation][slot][0];
     assert.strictEqual(st.roll.cards.length, 3, c.key);
     for (const cid of st.roll.cards) assert.strictEqual(D.broadOf(D.playerOf(S, cid)), D.SLOT_BROAD[pos], c.key + " card out of position");
@@ -124,6 +129,56 @@ t("Dare2Dream: the draft fills 11 shirts in position from other clubs, then the 
     assert.strictEqual(st.rolls.reduce((a, w) => a + w.n, 0), D.schedule(st.fixtures).reduce((a, w) => a + w.n, 0) - 3, c.key + " rolls");
     assert.strictEqual(st.phase, "prematch");
   }
+});
+t("Club X: each season's bottom club is replaced by a drafted XI that plays the season out", () => {
+  const bottom = Object.values(G.clubSeasons.reduce((m, c) => { if (!m[c.season] || c.pos > m[c.season].pos) m[c.season] = c; return m; }, {}));
+  assert.strictEqual(bottom.length, Object.keys(G.seasons).length);
+  assert.ok(D.DRAFT_MODES.includes("clubx"));
+  for (const c of bottom.filter((_, i) => i % 6 === 0)) {
+    const { st, S } = draft("clx-" + c.key, c, null, "clubx");
+    assert.strictEqual(st.mode, "clubx");
+    assert.strictEqual(st.xi.filter(x => x != null).length, 11, c.key);
+    D.startSeason(st, S);
+    assert.ok(st.rolls.every(w => w.kind !== "pre"));
+    let g = 0;
+    while (st.phase !== "summary" && g++ < 700) { if (st.phase === "window") D.pass(st, S); else D.playMatch(st, S); }
+    assert.strictEqual(st.phase, "summary", c.key);
+  }
+});
+t("Club X spins one season and drafts from every open shirt, cards that list the shirt's position; Dare2Dream stays keeper first", () => {
+  const S = G.seasons["2007/08"], derby = S.clubs.find(x => x.name === "Derby").id;
+  const xr = D.newRun({ seed: "clx-one", mode: "clubx", catalogue: G.clubSeasons });
+  assert.strictEqual(xr.clubOffer.length, 1, "Club X should offer one season");
+  assert.ok(D.respinClubs(xr, G.clubSeasons) && xr.clubOffer.length === 1, "a Club X respin should offer one season");
+  assert.strictEqual(D.newRun({ seed: "d2d-three", mode: "dare2dream", catalogue: G.clubSeasons }).clubOffer.length, 3);
+  const F = D.FORMATIONS["4-4-2"];
+  const play = (seed, mode, pickLast) => {
+    const st = D.newRun({ seed, mode, catalogue: G.clubSeasons }); D.chooseClub(st, S, { c: derby, f: "4-4-2", xi: [] });
+    const out = [], firstPos = [];
+    while (st.phase === "draft") {
+      assert.strictEqual(st.roll.cards.length, 3, "three cards every spin");
+      if (mode === "clubx") {
+        const open = st.xi.map((x, i) => (x == null ? F[i][0] : null)).filter(Boolean);
+        for (const id of st.roll.cards) {
+          const p = D.playerOf(S, id, S.legends), fits = D.draftFits(st, S, id);
+          assert.ok(fits.length && fits.every((i) => st.xi[i] == null && D.listsPos(p, F[i][0])), "every card lists an open shirt's position");
+          assert.ok(open.some((pos) => D.listsPos(p, pos)));
+        }
+        if (!out.length) st.roll.cards.forEach((id) => firstPos.push(F[D.draftFits(st, S, id)[0]][0]));
+        const id = st.roll.cards[pickLast ? 2 : 0], slot = D.draftFits(st, S, id)[0];
+        assert.ok(D.draftPick(st, S, id, slot)); out.push(slot);
+      } else { out.push(D.draftSlot(st)); assert.ok(D.draftPick(st, S, st.roll.cards[0])); }
+    }
+    assert.ok(st.xi.every((x) => x != null), "all 11 shirts filled");
+    return { out, firstPos };
+  };
+  const runs = ["a", "b", "c", "d", "e", "f"].map((k) => play("clx-open-" + k, "clubx"));
+  assert.ok(runs.some((r) => r.firstPos.some((pos) => pos !== "GK")), "Club X's first spin should not be all keepers");
+  assert.ok(runs.some((r) => new Set(r.firstPos).size > 1), "Club X's first spin mixes positions");
+  assert.deepStrictEqual(play("clx-open-a", "clubx").out, runs[0].out, "the same seed and picks replay");
+  const d = play("d2d-order", "dare2dream").out;
+  assert.strictEqual(d[0], 0, "Dare2Dream starts with the keeper");
+  assert.deepStrictEqual(d, D.draftOrder("4-4-2"));
 });
 t("Dare2Dream: a sample of drafted seasons plays to the end, and draft picks weaken their clubs", () => {
   for (const c of G.clubSeasons.filter((_, i) => i % 45 === 0)) {

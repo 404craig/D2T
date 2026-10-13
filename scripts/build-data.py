@@ -136,6 +136,10 @@ def from_quantile(qs, pct):
 TIER_LEVEL = {"bronze": 0, "silver": 1, "gold": 2, "best": 3}
 _mp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "source", "moves.json")
 MOVES = json.load(open(_mp, encoding="utf-8")) if os.path.exists(_mp) else {}
+# Preferred positions per player-season, main first (tools/build_positions.py, from the position
+# Transfermarkt lists for every Premier League game). Players without them keep the broad position.
+_pp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "source", "positions.json")
+POSITIONS = json.load(open(_pp, encoding="utf-8")) if os.path.exists(_pp) else {}
 
 
 def card_stats(q, team, games, career_apps):
@@ -184,6 +188,21 @@ def main():
         if r["season"] not in k["s"]: k["s"].append(r["season"])
         if r["club"] not in k["c"]: k["c"].append(r["club"])
     game["careers"] = [{"a": k["a"], "g": k["g"], "n": len(k["s"]), "f": k["s"][0], "l": k["s"][-1], "c": k["c"]} for k in careers]
+    # 433 Goals: every Premier League player with 60+ games, by broad position (the one he played most games in),
+    # as [name, surname, club, career goals], most goals first. Club = where he scored most (most games if none).
+    g4 = defaultdict(lambda: {"a": 0, "g": 0, "pos": defaultdict(int), "cg": defaultdict(int), "ca": defaultdict(int), "n": "", "s": ""})
+    for r in players:
+        k = g4[r["player_id"]]; a, g = int(r["apps"]), int(r["goals"])
+        k["a"] += a; k["g"] += g; k["pos"][r["position"]] += a; k["cg"][r["club"]] += g; k["ca"][r["club"]] += a
+        k["n"], k["s"] = r["player"], r["surname"]
+    g433 = {"GK": [], "DEF": [], "MID": [], "FWD": []}
+    for pid, k in sorted(g4.items()):
+        if k["a"] < 60: continue
+        pos = max(k["pos"].items(), key=lambda x: (x[1], x[0]))[0]
+        club = max((k["cg"] if k["g"] > 0 else k["ca"]).items(), key=lambda x: (x[1], k["ca"][x[0]], x[0]))[0]
+        g433[pos].append([k["n"], k["s"], club, k["g"]])
+    for pos in g433: g433[pos].sort(key=lambda x: (-x[3], x[0]))
+    game["g433"] = g433
     career = defaultdict(int)   # Premier League appearances before the current season, per person
     for season in sorted(by_season):
         table = tables[season]
@@ -208,7 +227,7 @@ def main():
                 pct, a = fb[(r["club"], pid)]
                 rating = from_quantile(qmap.get(r["position"]), pct)
                 if a < 10: rating = round(55 + (rating - 55) * (0.55 + 0.045 * a))
-            pos = [r["position"]]
+            pos = POSITIONS.get(season, {}).get(pid) or [r["position"]]
             if pid in people:
                 q = people[pid]
                 q["c2"] = cix[r["club"]]; q["a2"] = int(r["apps"]); q["g2"] = int(r["goals"])
@@ -262,6 +281,12 @@ def main():
             game["catalogue"].append({"key": f"{season}:{names[r['c']]}", "season": season, "club": names[r["c"]],
                                       "pos": r["pos"], "pts": r["pts"]})
 
+    # Career assists and clean sheets for the big card: summed over his seasons' rated numbers (as, cs).
+    for S in game["seasons"].values():
+        for q in S["players"]:
+            k = game["careers"][q["k"]]
+            k["as"] = k.get("as", 0) + int(q.get("as") or 0)
+            k["cs"] = k.get("cs", 0) + int(q.get("cs") or 0)
     os.makedirs(OUT, exist_ok=True)
     with open(os.path.join(OUT, "game.json"), "w", encoding="utf-8") as f:
         json.dump(game, f, separators=(",", ":"), ensure_ascii=False)
@@ -272,6 +297,17 @@ def main():
             path = os.path.join(ROOT, "assets", "crests", size, f)
             if os.path.exists(path):
                 crests.setdefault(c, {})[size] = "data:image/png;base64," + base64.b64encode(open(path, "rb").read()).decode()
+            # a white version for dark backgrounds, where a club's own crest is too dark to see (Derby, Spurs)
+            # a white version for the club's own coloured card, where a one-colour crest in that colour vanishes
+            # (Nottingham Forest, Liverpool, Sheffield Wed on red, red and blue; Craig, 12 Oct)
+            if meta.get("crestCard"):
+                path = os.path.join(ROOT, "assets", "crests", size, meta["crestCard"])
+                if os.path.exists(path):
+                    crests.setdefault(c, {})[size + "c"] = "data:image/png;base64," + base64.b64encode(open(path, "rb").read()).decode()
+            if meta.get("crestDark"):
+                path = os.path.join(ROOT, "assets", "crests", size, meta["crestDark"])
+                if os.path.exists(path):
+                    crests.setdefault(c, {})[size + "w"] = "data:image/png;base64," + base64.b64encode(open(path, "rb").read()).decode()
     with open(os.path.join(OUT, "crests.json"), "w", encoding="utf-8") as f:
         json.dump(crests, f, separators=(",", ":"))
     size = os.path.getsize(os.path.join(OUT, "game.json")) / 1e6

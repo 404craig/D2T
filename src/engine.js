@@ -47,7 +47,8 @@ const RULES = {
   rollEvery: 3,
   minApps: 10,
   levelOdds: [0.53, 0.32, 0.125, 0.02, 0.005], // bronze silver gold purple (season's top 5) legend (top 3 of every season); greedy runs win the title 2.3% across all 103 club-seasons (tests/calibrate-all.js)
-  fit: { green: 1, amber: 0.9, red: 0.7 },
+  // green: his main position 100%, his other preferred positions 95% (alt); amber next to one of them; red elsewhere.
+  fit: { green: 1, alt: 0.95, amber: 0.9, red: 0.7 },
   raidFactor: 3,           // chance a raided club's win/draw is downgraded = factor x strength lost
   raidCap: 0.6,
   raidBaseline: 60,        // strength lost is measured as a share of strength above this
@@ -57,11 +58,18 @@ const LEVELS = ["bronze", "silver", "gold", "purple", "legend"];
 
 /* ---------- positions and formations ---------- */
 const POS = ["GK","RB","CB","LB","RWB","LWB","CDM","CM","CAM","RM","LM","RW","LW","ST"];
-const NEAR = {
-  GK: [], CB: ["RB","LB","CDM"], RB: ["RWB","CB","RM"], LB: ["LWB","CB","LM"],
-  RWB: ["RB","RM","RW"], LWB: ["LB","LM","LW"], CDM: ["CM","CB"], CM: ["CDM","CAM","RM","LM"],
-  CAM: ["CM","ST","RW","LW"], RM: ["RW","CM","RWB","RB"], LM: ["LW","CM","LWB","LB"],
-  RW: ["RM","ST","CAM"], LW: ["LM","ST","CAM"], ST: ["CAM","RW","LW"]
+// How a player fits each shirt, by the positions he plays (Craig, 13 Oct; set on the Position fit page,
+// claude.ai/artifact/Xod2g9hMPi9QHxqnkCtjWD). Stay in your lane: a player in the middle never goes amber out wide,
+// a wide player never goes amber in the middle or on the other side. Shirts not listed are red. A player with several
+// positions is green at all of them and takes the best colour any of them gives (Pearce, CB and LB: green CB, LB and
+// LWB; amber CDM, LM and LW; red on the right).
+const FIT = {
+  GK: {}, CB: { CDM: "amber" },
+  LB: { LWB: "green", LM: "amber", LW: "amber" }, RB: { RWB: "green", RM: "amber", RW: "amber" },
+  LWB: { LB: "green", LM: "amber", LW: "amber" }, RWB: { RB: "green", RM: "amber", RW: "amber" },
+  CDM: { CB: "amber", CM: "amber", CAM: "amber" }, CM: { CDM: "amber", CAM: "amber" }, CAM: { CDM: "amber", CM: "amber", ST: "amber" },
+  LM: { LWB: "amber", LW: "amber", CM: "amber" }, RM: { RWB: "amber", RW: "amber", CM: "amber" },
+  LW: { LM: "amber", ST: "amber" }, RW: { RM: "amber", ST: "amber" }, ST: { CAM: "amber", LW: "amber", RW: "amber" }
 };
 // Slot weights into Defence, Midfield, Attack.
 const SLOTW = {
@@ -82,8 +90,8 @@ const FORMATIONS = {
 };
 const FORMATION_NAMES = Object.keys(FORMATIONS);
 
-// Slots carry a detailed label (RB, CDM) but the data only knows four broad positions,
-// so fit is judged on the broad position until detailed positions arrive.
+// p is his preferred positions for the season, main first (from the match line-ups, built by
+// tools/positions_rule.py). Without them, p holds the broad position and fit is judged on that.
 const SLOT_BROAD = { GK: "GK", RB: "DEF", CB: "DEF", LB: "DEF", RWB: "DEF", LWB: "DEF",
   CDM: "MID", CM: "MID", CAM: "MID", RM: "MID", LM: "MID", RW: "FWD", LW: "FWD", ST: "FWD" };
 const NEAR_BROAD = { GK: [], DEF: ["MID"], MID: ["DEF", "FWD"], FWD: ["MID"] };
@@ -93,15 +101,19 @@ function fitOf(player, slotPos) {
   const ps = player.p || [];
   if (ps.some(p => SLOT_BROAD[p]) ) {                 // detailed positions known
     if (ps.includes(slotPos)) return "green";
-    if (ps.some(p => (NEAR[slotPos] || []).includes(p))) return "amber";
-    return "red";
+    const got = ps.map(p => (FIT[p] || {})[slotPos]);
+    return got.includes("green") ? "green" : got.includes("amber") ? "amber" : "red";
   }
   const pb = broadOf(player), sb = SLOT_BROAD[slotPos];
   if (pb === sb) return "green";
   if ((NEAR_BROAD[sb] || []).includes(pb)) return "amber";
   return "red";
 }
-function effRating(player, slotPos) { return player ? player.r * RULES.fit[fitOf(player, slotPos)] : 40; }
+function effRating(player, slotPos) {
+  if (!player) return 40;
+  const f = fitOf(player, slotPos), main = (player.p || [])[0];
+  return player.r * (f === "green" && SLOT_BROAD[main] && main !== slotPos ? RULES.fit.alt : RULES.fit[f]);
+}
 
 /* ---------- season index ---------- */
 // A season bundle (built by scripts/build-data.py) looks like:
@@ -204,10 +216,11 @@ function newRun(opts) {
   else st.clubOffer = offerClubs(st, opts.catalogue);
   return st;
 }
+// Club X spins one season at a time (Craig, 12 Oct: one central spin); the other modes offer three.
 function offerClubs(st, catalogue) {
   const r = stream(st.seed, "club", st.clubSpin);
-  const pool = catalogue.slice(), out = [];
-  while (out.length < 3 && pool.length) out.push(pool.splice(Math.floor(r() * pool.length), 1)[0].key);
+  const pool = catalogue.slice(), out = [], n = st.mode === "clubx" ? 1 : 3;
+  while (out.length < n && pool.length) out.push(pool.splice(Math.floor(r() * pool.length), 1)[0].key);
   return out;
 }
 function respinClubs(st, catalogue) {
@@ -221,19 +234,43 @@ function chooseClub(st, S, rel) {
   st.seasonKey = S.season; st.club = rel.c;
   st.formation = FORMATIONS[rel.f] ? rel.f : "4-4-2";
   st.log.push(["club", S.season, rel.c]);
-  if (st.mode === "dare2dream") { startDraft(st, S); return; }
+  if (DRAFT_MODES.includes(st.mode)) { startDraft(st, S); return; }
   st.xi = autoXI(S, rel.c, st.formation, rel.xi);
   st.phase = "setup";
 }
 
-/* ---------- Dare2Dream draft: start with no players, one spin per shirt ---------- */
-// Shirts fill keeper first, then defence, midfield and attack. Each spin is three players for that shirt's
-// position from the same season (never your club's own squad, never one seen before). No respins in the draft.
+/* ---------- Dare2Dream and Club X draft: start with no players, one spin per shirt ---------- */
+// Club X (Craig, 11 Oct): your own club replaces the season's bottom side, drafts 11 the same way and must win the league.
+const DRAFT_MODES = ["dare2dream", "clubx"];
+// Dare2Dream fills keeper first, then defence, midfield and attack, each spin three players for that shirt's position.
+// Club X (Craig, 13 Oct) fills them in any order: each of the three cards is drawn for one of the open shirts (each open shirt
+// as likely as the next), from players who list that shirt's position among their preferred ones, and he goes on any open
+// shirt he lists. All from the same season, never your club's own squad, never one seen before. No respins in the draft.
 // A drafted player leaves his real club for the whole season, like a signing (a raid dated before the season).
 const BROAD_ORDER = { GK: 0, DEF: 1, MID: 2, FWD: 3 };
 function draftOrder(formation) {
   const f = FORMATIONS[formation];
   return f.map((_, i) => i).sort((a, b) => BROAD_ORDER[SLOT_BROAD[f[a][0]]] - BROAD_ORDER[SLOT_BROAD[f[b][0]]] || a - b);
+}
+function shuffledOrder(st) {
+  const r = stream(st.seed, "draftorder", st.formation), a = FORMATIONS[st.formation].map((_, i) => i);
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+// Does he list this position? Players without detailed positions fall back to the broad one.
+function listsPos(p, pos) {
+  const d = (p.p || []).filter(x => SLOT_BROAD[x]);
+  return d.length ? d.includes(pos) : broadOf(p) === SLOT_BROAD[pos];
+}
+const openDraft = (st) => st.mode === "clubx" && !st.draft.order;
+const openSlots = (st) => st.xi.map((id, i) => (id == null ? i : -1)).filter(i => i >= 0);
+// The open shirts a drafted card can go on: those whose position he lists (main first), or in an older run any open one.
+function draftFits(st, S, cardId) {
+  const p = playerOf(S, cardId, S.legends), open = openSlots(st), f = FORMATIONS[st.formation];
+  if (!p || !openDraft(st)) return open;
+  const fit = open.filter(i => listsPos(p, f[i][0]));
+  const main = (p.p || [])[0];
+  return fit.sort((a, b) => (f[b][0] === main) - (f[a][0] === main) || a - b);
 }
 function startDraft(st, S) {
   st.xi = new Array(FORMATIONS[st.formation].length).fill(null);
@@ -242,24 +279,41 @@ function startDraft(st, S) {
   st.phase = "draft";
   newDraftRoll(st, S);
 }
-function draftSlot(st) { return draftOrder(st.formation)[st.draft.step]; }
+function draftSlot(st) { return openDraft(st) ? null : (st.draft.order || draftOrder(st.formation))[st.draft.step]; }
 function newDraftRoll(st, S) {
-  const slot = draftSlot(st), broad = SLOT_BROAD[FORMATIONS[st.formation][slot][0]];
   const r = stream(st.seed, "draft", st.draft.step);
   const taken = new Set(), cards = [];
+  if (openDraft(st)) {
+    const open = openSlots(st), f = FORMATIONS[st.formation];
+    for (let k = 0; k < 3; k++) {
+      const pos = f[open[Math.floor(r() * open.length)]][0];
+      const id = drawCard(r, S, st, S.legends, taken, null, (p) => listsPos(p, pos));
+      if (id != null) { cards.push(id); taken.add(id); }
+    }
+    st.roll = { key: `d${st.draft.step}`, spin: 0, cards, window: "draft", slot: null, step: st.draft.step + 1, of: st.xi.length };
+    return;
+  }
+  const slot = draftSlot(st), broad = SLOT_BROAD[FORMATIONS[st.formation][slot][0]];
   for (let k = 0; k < 3; k++) { const id = drawCard(r, S, st, S.legends, taken, broad); if (id != null) { cards.push(id); taken.add(id); } }
   st.roll = { key: `d${st.draft.step}`, spin: 0, cards, window: "draft", slot, step: st.draft.step + 1, of: st.xi.length };
 }
-// The shape can change until the first pick (the keeper comes first in every formation).
+// The shape can change until the first pick.
 function draftFormation(st, S, f) {
   if (st.phase !== "draft" || st.draft.step > 0 || !FORMATIONS[f]) return false;
   st.formation = f; st.xi = new Array(FORMATIONS[f].length).fill(null);
+  if (st.draft.order) st.draft.order = shuffledOrder(st);
   newDraftRoll(st, S);
   return true;
 }
-function draftPick(st, S, cardId) {
+function draftPick(st, S, cardId, at) {
   if (st.phase !== "draft" || !st.roll || !st.roll.cards.includes(cardId)) return false;
-  const slot = draftSlot(st), p = playerOf(S, cardId, S.legends);
+  let slot = draftSlot(st);
+  if (slot == null) {   // Club X: any open shirt he lists, the one asked for or his best
+    const fits = draftFits(st, S, cardId);
+    slot = at == null ? fits[0] : (fits.includes(at) ? at : null);
+    if (slot == null) return false;
+  }
+  const p = playerOf(S, cardId, S.legends);
   st.xi[slot] = cardId;
   for (const id of st.roll.cards) if (!st.seen.includes(id)) st.seen.push(id);
   st.signed.push({ id: cardId, gw: 0, slot, out: null, from: p ? p.c : null, date: "0000-00-00", draft: true });
@@ -327,7 +381,7 @@ function startSeason(st, S) {
   st.fixtures = fixturesOf(S, st.club);
   st.rolls = schedule(st.fixtures);
   // Dare2Dream's draft is its pre-season: no pre-season rolls.
-  if (st.mode === "dare2dream") st.rolls = st.rolls.filter(w => w.kind !== "pre");
+  if (DRAFT_MODES.includes(st.mode)) st.rolls = st.rolls.filter(w => w.kind !== "pre");
   st.rollIx = 0; st.rollStep = 0; st.gw = 1;
   st.seen = [...new Set((st.seen || []).concat(st.xi))];
   // Your own club's real squad never turns up as a card.
@@ -346,11 +400,11 @@ function cardPool(S, st) {
   const seen = new Set(st.seen);
   return S.players.filter(p => (p.a || 0) >= RULES.minApps && !seen.has(p.id));
 }
-function drawCard(r, S, st, legends, taken, broad) {
+function drawCard(r, S, st, legends, taken, broad, fit) {
   const lv = (() => { let x = r(); for (let i = 0; i < 5; i++) { x -= RULES.levelOdds[i]; if (x <= 0) return i; } return 0; })();
-  const pool = cardPool(S, st).filter(p => !taken.has(p.id) && (!broad || broadOf(p) === broad));
+  const pool = cardPool(S, st).filter(p => !taken.has(p.id) && (!broad || broadOf(p) === broad) && (!fit || fit(p)));
   if (lv === 4 && legends && legends.length) {
-    const lp = legends.filter(l => !st.seen.includes(l.id) && !taken.has(l.id) && (!broad || broadOf(l) === broad));
+    const lp = legends.filter(l => !st.seen.includes(l.id) && !taken.has(l.id) && (!broad || broadOf(l) === broad) && (!fit || fit(l)));
     if (lp.length) return lp[Math.floor(r() * lp.length)].id;
   }
   // Best level at or below the one drawn that still has players; then above.
@@ -593,10 +647,10 @@ function seasonSummary(S, st) {
 }
 
 const API = {
-  RULES, LEVELS, POS, NEAR, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
+  RULES, LEVELS, POS, FIT, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
   fitOf, effRating, indexSeason, playerOf, clubAt, xiStrength, userStrength, clubXI, clubStrength,
   schedule, fixturesOf, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
-  draftOrder, draftSlot, draftFormation, draftPick,
+  draftOrder, draftSlot, draftFormation, draftPick, draftFits, listsPos, DRAFT_MODES,
   startSeason, inWindow, currentWindow, newRoll, respinCards, signPreview, sign, pass,
   otherResults, strengthLoss, expectedGoals, simMatch, playMatch, table, historyTable, historyPositions, positionsSoFar, seasonSummary
 };

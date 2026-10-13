@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D2T Goal Rush Logo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<style>
+  /* Goal Rush mark options: line drawings like the outline emblem (Dare2Dream), sized and faded like the Club X badge on the card. */
+  :root { color-scheme: dark; --y: #FFD21F; --soft: #CFCFD6; --muted: #8E8E99; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #08080A; color: #fff; font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 1760px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 28px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
+  .head p, .sec > p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 92ch; }
+  .sec { display: flex; flex-direction: column; gap: 16px; padding-top: 24px; border-top: 1px solid #1E1E22; }
+  .sec > h2 { font: 900 italic 30px/1 'Exo 2'; margin: 0; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 22px; }
+  .o { display: flex; flex-direction: column; gap: 10px; }
+  .tile { aspect-ratio: 1 / 1; border-radius: 26px; background: #0E0E10; border: 1px solid #222228; display: grid; place-items: center; }
+  .tile svg, .tile img { width: 62%; height: 62%; color: var(--y); }
+  .o .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: #12F06C; }
+  .o h3 { font: 900 italic 21px/1.05 'Exo 2'; margin: 0; }
+  .o p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
+  .row { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
+  .phone { width: 390px; max-width: 100%; border-radius: 26px; background: #000; box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,.6); padding: 18px 16px 22px; }
+  .cap { font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #8E8E99; text-align: center; margin-top: 10px; }
+  .card { position: relative; display: flex; flex-direction: column; justify-content: center; width: 100%; min-height: 140px; padding: 18px 70px 18px 18px; border-radius: 22px; overflow: hidden; margin-bottom: 12px; isolation: isolate;
+    background: linear-gradient(100deg, #0E0E10 0%, #0E0E10 38%, color-mix(in srgb, var(--c) 30%, #0E0E10) 100%); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 45%, transparent); }
+  .card::after { content: ''; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, rgba(255,255,255,0) 2px 7px); }
+  .t-tag { display: block; font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--c); }
+  .t-big { display: block; font: 900 italic 26px/.95 'Exo 2'; text-transform: uppercase; margin-top: 6px; }
+  .t-sub { display: block; font-size: 14px; font-weight: 600; color: var(--soft); margin-top: 7px; line-height: 1.35; }
+  .go { position: absolute; right: 16px; bottom: 16px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #0A0A0A; }
+  .go svg { width: 20px; height: 20px; }
+  .mark { position: absolute; right: -14px; top: 50%; transform: translateY(-50%) rotate(-8deg); width: 124px; height: 124px; color: var(--c); opacity: .3; z-index: -1; display: grid; place-items: center; }
+  .mark svg, .mark img { width: 100%; height: 100%; object-fit: contain; }
+  .mark img { width: 112px; height: 112px; }
+  .emb { display: block; width: 100%; height: 100%; background: currentColor; -webkit-mask: url('assets/logo/emblem_line.png') center / contain no-repeat; mask: url('assets/logo/emblem_line.png') center / contain no-repeat; }
+  .tagbar { display: flex; justify-content: center; gap: 8px; align-items: center; margin-bottom: 14px; }
+  .mtag { display: inline-flex; align-items: center; gap: 6px; font: 900 italic 15px/1 'Exo 2'; letter-spacing: .04em; text-transform: uppercase; color: #0A0A0A; background: var(--y); padding: 4px 10px 4px 6px; border-radius: 5px; transform: skewX(-10deg); }
+  .mtag img { width: 18px; height: 18px; transform: skewX(10deg); }
+  .mtag svg { width: 18px; height: 18px; transform: skewX(10deg); color: #0A0A0A; }
+  .mtag span { transform: skewX(10deg); }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <h1>Goal Rush mark</h1>
+    <p>Your ball first (cut out), then the five line marks from before. The card title is now "Score the exact number of goals". Five ball marks for Goal Rush, drawn as line art in the same weight as the outline D2T emblem used for Dare2Dream, so the faded marks behind the home cards read as one family. Each is shown big, then behind its card next to the other games, then small (could sit in the in-game tag).</p>
+  </div>
+  <section class="sec"><h2>The marks</h2><div class="grid" id="marks"></div></section>
+  <section class="sec"><h2>On home, with the other games</h2><p>Each mark faded behind the Goal Rush card at the Club X badge's size, between Club X and Tenaball.</p><div class="row" id="cards"></div></section>
+</div>
+<script>
+(function () {
+  const S = 'fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"';
+  // a classic ball: a centre pentagon, five seams out to the rim
+  const BALL = (cx, cy, r) => {
+    const p = [], o = [];
+    for (let i = 0; i < 5; i++) { const a = -Math.PI / 2 + i * 2 * Math.PI / 5; p.push([cx + r * 0.36 * Math.cos(a), cy + r * 0.36 * Math.sin(a)]); o.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]); }
+    return `<circle cx="${cx}" cy="${cy}" r="${r}"/><path d="M${p.map((q) => q.join(' ')).join(' L')} Z"/>${p.map((q, i) => `<path d="M${q.join(' ')} L${(q[0] + (o[i][0] - q[0]) * 0.62).toFixed(1)} ${(q[1] + (o[i][1] - q[1]) * 0.62).toFixed(1)}"/>`).join('')}`;
+  };
+  const M = [
+    ['NEW', 'The ball', 'Your ball, cut out of its background. Faded behind the card like the Club X badge and the Tenaball ball, and in full colour in the in-game tag.',
+      '<img src="assets/brand/goal_rush.png" alt="" style="object-fit:contain">'],
+    ['A', 'Rushing ball', 'A ball with three speed lines streaking off the back. Simple and quick to read, and it says "rush".',
+      `<svg viewBox="0 0 120 120"><g ${S}>${BALL(72, 60, 34)}<path d="M8 44 H30 M2 60 H28 M8 76 H30"/></g></svg>`],
+    ['B', 'Ball through the line', 'A ball smashing through a broken finish line, like the bar breaking past the target. Ties to the game\'s big moment.',
+      `<svg viewBox="0 0 120 120"><g ${S}>${BALL(70, 62, 32)}<path d="M28 10 V48 M28 76 V110"/><path d="M22 56 L14 52 M22 66 L12 68 M34 50 L38 44"/></g></svg>`],
+    ['C', 'Ball in the net', 'A ball hitting the back of a goal net, the goal frame around it. Most "goal" of the five.',
+      `<svg viewBox="0 0 120 120"><g ${S}><path d="M10 104 V22 H110 V104"/><path d="M10 22 L30 40 H90 L110 22 M30 40 V104 M90 40 V104" stroke-width="3"/><path d="M30 58 H90 M30 76 H90 M50 40 V104 M70 40 V104" stroke-width="2" opacity=".55"/></g><g ${S}>${BALL(60, 76, 22)}</g></svg>`],
+    ['D', 'Countdown ring', 'A ball inside a ring that is part full, like a timer counting down to the target. Matches the countdown in the top right.',
+      `<svg viewBox="0 0 120 120"><g ${S}><path d="M60 6 A54 54 0 1 1 13.2 87"/><path d="M60 6 V0" opacity="0"/><path d="M8 74 A54 54 0 0 1 22 22" stroke-dasharray="2 10" stroke-width="5" opacity=".7"/>${BALL(60, 60, 34)}</g></svg>`],
+    ['E', 'Ball with arrows', 'The ball with D2T\'s up arrow cutting through it: a rush upwards to the number. Closest to the D2T emblem.',
+      `<svg viewBox="0 0 120 120"><g ${S}>${BALL(56, 64, 40)}<path d="M74 46 L108 12 M84 12 H108 V36"/></g></svg>`]
+  ];
+  document.getElementById('marks').innerHTML = M.map(([k, h, d, svg]) => `<div class="o"><div class="tile">${svg}</div><span class="tag">OPTION ${k}</span><h3>${h}</h3><p>${d}</p><div class="tagbar"><span class="mtag">${svg}<span>Goal Rush</span></span></div></div>`).join('');
+  const GO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
+  const card = (c, tag, big, sub, mark) => `<div class="card" style="--c:${c}"><span class="mark">${mark}</span><span class="t-tag">${tag}</span><span class="t-big">${big}</span><span class="t-sub">${sub}</span><span class="go">${GO}</span></div>`;
+  document.getElementById('cards').innerHTML = M.map(([k, h, , svg]) => `<div><div class="phone">
+    ${card('#3BA4FF', 'DARE2DREAM', 'Rewrite their season', 'Any club from any season. Draft 11 and beat their real finish.', '<span class="emb"></span>')}
+    ${card('#12F06C', 'CLUB X', 'From nowhere to champions', 'Replace the worst side in a real season and go for the title.', '<img src="assets/brand/club_x.png" alt="">')}
+    ${card('#FFD21F', 'GOAL RUSH', 'Score the exact number of goals', 'A random formation each game. Pick 11 real players whose career goals add up to it exactly.', svg)}
+    ${card('#A66BFF', 'TENABALL', 'Name the top ten', 'Our football quiz. Opens Tenaball.', '<img src="assets/brand/tenaball.png" alt="">')}
+    </div><div class="cap">OPTION ${k} · ${h.toUpperCase()}</div></div>`).join('');
+})();
+</script>
+</body>
+</html>

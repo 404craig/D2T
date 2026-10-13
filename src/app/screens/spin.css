@@ -77,7 +77,8 @@
 .sp-intro .sp-emblem { width: 128px; height: 128px; color: #fff; will-change: transform, opacity; }
 .sp-intro canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .sp-intro .sp-ring { position: absolute; left: 50%; top: 50%; width: 128px; height: 128px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.7); transform: translate(-50%, -50%) scale(.6); opacity: 0; pointer-events: none; }
-.sp-reveal .sp-slot { animation: spRise .5s var(--ease-out) both; }
+/* backwards, not both: once risen the card must be free to grow when picked and shrink when not (is-sel, is-other) */
+.sp-reveal .sp-slot { animation: spRise .5s var(--ease-out) backwards; }
 .sp-reveal .sp-slot:nth-child(2) { animation-delay: .06s; }
 .sp-reveal .sp-slot:nth-child(3) { animation-delay: .12s; }
 @keyframes spRise { 0% { opacity: 0; transform: translateY(18px) scale(.94); } 100% { opacity: 1; transform: none; } }
@@ -132,11 +133,13 @@
 .sp-screen.is-placing .tr-pitch { display: flex; flex-direction: column; gap: 8px; flex: 1 1 auto; min-height: 0; padding: 0 16px; }
 .sp-screen.is-placing .sp-stage { flex: 0 0 188px; }
 .sp-screen.is-placing .sp-slot.is-sel { transform: scale(1.14) translateY(-6px); }
-.sp-screen.is-placing .sp-slot.is-other { filter: brightness(.4); }
+.sp-screen.is-placing .sp-slot.is-other { transform: scale(.9); filter: brightness(.4); }
 .sp-main.is-after { background: var(--ink); color: #fff; border: 1px solid var(--line); box-shadow: none; }
 .sp-main.is-after .logo-mask { display: none; }
 .sp-screen.is-placing .sp-row { transform: scale(.78); }
-.sp-screen.is-placing .sp-slot { touch-action: none; }
+/* the finger can land on a card before the tray is up (touch-action is fixed when the touch starts, so it is set
+   always, not only while placing), and a held press must not bring up iOS's image callout and cancel the touch */
+.sp-slot { touch-action: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
 .sp-slot.is-signed { opacity: 0; transform: translateY(-40px) scale(.7); transition: opacity .35s, transform .45s var(--ease-out); }
 .tr-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .tr-head-t { min-width: 0; }
@@ -151,3 +154,57 @@
 .sp-tip.gone { opacity: 0; }
 @keyframes spTipIn { from { opacity: 0; transform: translateY(6px); } to { opacity: .92; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .sp-tip { animation: none; } }
+/* preferred positions under the big card: main one filled, the others outlined */
+.sp-det-pos { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; font-size: 12px; color: var(--muted); }
+.sp-det-pos span { font-weight: 700; }
+.sp-det-pos b { font-size: 12px; font-weight: 800; color: #fff; padding: 4px 9px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.35); }
+.sp-det-pos b.is-main { background: var(--sp-accent, #fff); border-color: transparent; color: #0A0A0A; }
+/* Club X (Craig, 12 Oct): one central reel, a little bigger; the crest bursts into the Club X badge */
+.sp-row.sp-one { transform: scale(1.3); transform-origin: 50% 50%; }
+/* the swing-in: both cards fly as copies over the reel; the clash sits on top */
+.x-fly { position: absolute; left: 0; top: 0; width: 114px; height: 190px; z-index: 5; pointer-events: none; will-change: transform; filter: drop-shadow(0 10px 18px rgba(0,0,0,.6)); }
+.x-fly.x-new { z-index: 6; }
+/* once your card is in (`is-xset`): the window no longer clips its glow, and it keeps the shadow it flew in with */
+.sp-slot.is-xset .sp-win { overflow: visible; }
+.sp-slot.is-xset.is-set .sp-node.is-hit .d2c { filter: var(--glow, none) drop-shadow(0 10px 18px rgba(0,0,0,.6)); }
+.x-boom { position: absolute; inset: 0; z-index: 7; pointer-events: none; overflow: visible; }
+.x-boom i { position: absolute; border-radius: 2px; box-shadow: 0 0 6px rgba(255,255,255,.35); }
+.x-boom-ring { position: absolute; width: 40px; height: 40px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 18px rgba(18,240,108,.9), inset 0 0 12px rgba(255,255,255,.6); }
+.x-boom-flash { position: absolute; width: 110px; height: 110px; border-radius: 50%; background: radial-gradient(circle, #fff 0%, rgba(255,255,255,.75) 30%, rgba(18,240,108,0) 70%); }
+/* the naming sheet */
+.x-name { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
+.x-name-in { width: 100%; box-sizing: border-box; height: 58px; padding: 0 16px; border-radius: 16px; border: 1px solid var(--line); background: #0E0E10; color: #fff; font: 900 italic 22px/1 'Exo 2', sans-serif; letter-spacing: .01em; outline: none; }
+.x-name-in::placeholder { color: #4A4A52; text-transform: none; font-weight: 700; font-style: normal; font-size: 17px; }
+.x-name-in:focus { border-color: #12F06C; box-shadow: 0 0 0 3px rgba(18,240,108,.18); }
+.x-name-err { min-height: 18px; margin: 2px 2px 6px; font-size: 13px; font-weight: 700; color: #FF6B6B; }
+.x-name-go { background: #12F06C; color: #00170A; }
+/* the big card that scrolls (Craig, 13 Oct): the card and its panels in a column that scrolls when it doesn't fit */
+.sp-ov.is-scroll .sp-ov-scroll { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.sp-ov.is-scroll .sp-ov-content { position: relative; min-height: 100%; }
+.sp-ov.is-scroll .sp-ov-stage { top: 0; }
+.sp-ov.is-scroll .sp-ov-below { max-width: 420px; margin: 0 auto; }
+.sp-ov.is-scroll .sp-ov-hint { bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); font-size: 12px; }
+.sp-ov-x { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 10px); right: 10px; z-index: 2; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255,255,255,0.08); color: #fff; display: grid; place-items: center; opacity: 0; }
+.sp-ov-x svg { width: 20px; height: 20px; }
+/* under it, option B in design/prototype/player-detail.html: this season and his career side by side, then a strip */
+.pd { display: flex; flex-direction: column; gap: 10px; color: #fff; }
+.pd-lab { display: block; font-size: 10px; font-weight: 800; letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
+.pd-num { font: 900 italic 26px/1 'Exo 2', sans-serif; }
+.pd-pan { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pd-p { background: #0E0E10; border: 1px solid var(--line); border-radius: 18px; padding: 11px 12px 12px; min-width: 0; }
+.pd-p.is-now { border-color: color-mix(in srgb, var(--lvl) 45%, transparent); }
+.pd-ph { display: flex; align-items: center; gap: 7px; min-height: 28px; }
+.pd-ph > div { display: flex; flex-direction: column; min-width: 0; }
+.pd-ph small { font-size: 10.5px; font-weight: 700; color: #CFCFD6; }
+.pd-crest { width: 24px; height: 24px; object-fit: contain; flex: none; }
+.pd-g { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 6px; margin-top: 12px; }
+.pd-g > div { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.pd-g .pd-lab { font-size: 9px; letter-spacing: .1em; }
+.pd-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pd-strip > div { background: #0E0E10; border: 1px solid var(--line); border-radius: 14px; padding: 9px 12px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.pd-strip > div:only-child { grid-column: 1 / -1; }
+.pd-pos { display: inline-flex; flex-wrap: wrap; gap: 5px; }
+.pd-pos b { min-width: 34px; height: 26px; padding: 0 7px; box-sizing: border-box; border-radius: 13px; display: grid; place-items: center; font-size: 12px; font-weight: 900; border: 1px solid #3A3A44; color: #fff; }
+.pd-pos b.is-main { background: var(--lvl); color: #111; border-color: var(--lvl); }
+.pd-crests { display: inline-flex; gap: 4px; align-items: center; min-height: 26px; }
+.pd-crests em { font-style: normal; font-size: 11px; font-weight: 800; color: var(--muted); margin-left: 2px; }

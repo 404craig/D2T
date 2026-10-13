@@ -4,14 +4,44 @@
 (function () {
   const D2T = window.D2T, G = window.D2T_GAME, E = window.D2TE, CR = window.D2T_CRESTS || {};
   const LV = ['bronze', 'silver', 'gold', 'baller', 'legend'];
-  const crestOf = (name) => (CR[name] && (CR[name]['128'] || CR[name]['72'])) || '';
+  // crest: for dark backgrounds (a white version where the club's own is too dark to see, Derby and Spurs);
+  // crestLight: the club's own crest, for light faces (club cards, bronze, silver and gold player cards, white discs).
+  const crestOf = (name) => (CR[name] && (CR[name]['128w'] || CR[name]['72w'] || CR[name]['128'] || CR[name]['72'])) || '';
+  const crestLightOf = (name) => (CR[name] && (CR[name]['128'] || CR[name]['72'])) || '';
+  // crestCard: on the club's own coloured card (a white version where the crest is all that colour, else crestLight)
+  const crestCardOf = (name) => (CR[name] && (CR[name]['128c'] || CR[name]['72c'])) || crestLightOf(name);
   const meta = (name) => G.clubs[name] || { name, full: name, code: name.slice(0, 3).toUpperCase(), accent: '#12F06C', ink: '#000000', text: '#12F06C' };
   const GAME = D2T.game = {};
 
   // ---------- clubs ----------
   const clubs = {};
-  Object.keys(G.clubs).forEach((n) => { const m = meta(n); clubs[n] = { name: n, full: m.full || n, code: m.code, crest: crestOf(n), accent: m.accent, ink: m.ink, text: m.text }; });
-  GAME.club = (name) => clubs[name] || Object.assign({ crest: crestOf(name) }, meta(name));
+  Object.keys(G.clubs).forEach((n) => { const m = meta(n); clubs[n] = { name: n, full: m.full || n, code: m.code, crest: crestOf(n), crestLight: crestLightOf(n), crestCard: crestCardOf(n), accent: m.accent, ink: m.ink, text: m.text }; });
+  // Club X: Craig's badge (assets/brand/club_x.png, embedded by build.py; the drawn shield is only a fallback), D2T green as its colour.
+  const X_BADGE = window.D2T_CLUBX_BADGE || 'data:image/svg+xml,' + encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 116'><path d='M50 3 L94 18 V60 C94 86 74 104 50 113 C26 104 6 86 6 60 V18 Z' fill='#0E0E10' stroke='#12F06C' stroke-width='5'/><path d='M32 36 L68 80 M68 36 L32 80' stroke='#12F06C' stroke-width='11' stroke-linecap='round'/></svg>");
+  clubs['Club X'] = { name: 'Club X', full: 'Club X', code: 'CLX', crest: X_BADGE, accent: '#12F06C', ink: '#000000', text: '#12F06C' };
+  // Club X (Craig, 12 Oct): you name your club first, and that name takes over from "Club X" everywhere in the run (the
+  // badge and green stay). The name lives on the run (state.run.xName); the last one is offered again (state.xName).
+  // Proper capitals (Craig, 13 Oct): each word starts with a capital, small words inside stay small, and anything
+  // already in capitals (FC, AFC) is kept, so "kilsyth athletic" shows as "Kilsyth Athletic".
+  const SMALL = new Set(['of', 'the', 'and', 'de', 'la', 'le', 'in', 'on', 'at']);
+  GAME.tidyXName = (n) => String(n || '').split(' ').map((w, i) => (i > 0 && SMALL.has(w.toLowerCase()) ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1))).join(' ');
+  GAME.xName = () => { const r = D2T.state.run; return (r && r.xName && GAME.tidyXName(r.xName)) || 'Club X'; };
+  const xCode = (n) => { const w = n.toUpperCase().replace(/[^A-Z0-9 ]/g, '').split(/\s+/).filter(Boolean); return (w.length >= 3 ? w.map((x) => x[0]).join('') : w.join('')).slice(0, 3) || 'CLX'; };
+  const xClub = () => { const n = GAME.xName(); return n === 'Club X' ? clubs['Club X'] : Object.assign({}, clubs['Club X'], { name: n, full: n, code: xCode(n) }); };
+  // a name of your own: 2 to 18 letters, numbers, spaces and ' . & -, and never a real club's name
+  const realNames = new Set(Object.values(G.clubs || {}).flatMap((c) => [c.name, c.full]).filter(Boolean).map((x) => x.toLowerCase().replace(/[^a-z0-9]/g, '')));
+  GAME.checkXName = (raw) => {
+    const n = String(raw || '').replace(/\s+/g, ' ').trim();
+    if (n.length < 2) return { error: 'Give it at least 2 letters.' };
+    if (n.length > 18) return { error: 'Keep it to 18 letters or fewer.' };
+    if (!/^[A-Za-z0-9 '.&-]+$/.test(n)) return { error: "Letters, numbers, spaces and ' . & - only." };
+    if (realNames.has(n.toLowerCase().replace(/[^a-z0-9]/g, ''))) return { error: "That's a real club. Make up your own." };
+    return { name: GAME.tidyXName(n) };
+  };
+  GAME.setXName = (raw) => { const r = GAME.checkXName(raw); if (r.name) { D2T.state.run.xName = r.name; D2T.state.xName = r.name; D2T.save(); } return r; };
+  const inX = () => { const r = D2T.state.run; return !!(r && r.eng && r.eng.mode === 'clubx'); };   // read straight off the run: GAME.club runs while the adapter is still being set up
+  GAME.club = (name) => (name === 'Club X' || (name && inX() && name === GAME.xName()) ? xClub() : clubs[name])
+    || Object.assign({ crest: crestOf(name), crestLight: crestLightOf(name), crestCard: crestCardOf(name) }, meta(name));
 
   // ---------- the club pool: every relegated club-season ----------
   const pool = G.catalogue.map((c) => {
@@ -26,17 +56,78 @@
   GAME.poolEntry = (key) => byKey.get(key);
   D2T.data = { clubs, relegatedPool: pool };
 
+  // ---------- Goal Rush (was 433 Goals): a game of its own on real Premier League career goals ----------
+  // The game in progress is state.g433; finished games go to record.g433 (apart from Classic and Dare2Dream).
+  // Each game picks a formation at random (Craig, 12 Oct, UI_SPEC 8f): 352 means line up 3-5-2 and score exactly 352.
+  const G4 = G.g433 || { GK: [], DEF: [], MID: [], FWD: [] }, g4lists = {};
+  GAME.g433 = {
+    TARGET: 433, RESPINS: 3, TOP: 220,
+    FORMATIONS: ['442', '433', '451', '352', '343', '424', '532', '541'],
+    // balance per formation (tests/sim-goalrush.js): how many top scorers per position each draws from, so a random XI
+    // lands near 77% of the target whatever the shape, and the last-shot gift chance; a casual player lands exactly
+    // about 1 game in 20 and within 10 about 1 in 5 (5-4-1 the hardest)
+    DEPTH: { 442: 180, 433: 220, 451: 145, 352: 310, 343: 355, 424: 260, 532: 105, 541: 75 },
+    GIFTS: { 442: 0.22, 433: 0.2, 451: 0.27, 352: 0.14, 343: 0.14, 424: 0.18, 532: 0.36, 541: 0.42 },
+    // how often each shape comes up (Craig, 13 Oct): the back fives, 5-3-2 and 5-4-1, half as often as the rest
+    // (about 1 game in 14 each, the other six about 1 in 7)
+    FORM_WEIGHT: { 532: 0.5, 541: 0.5 },
+    pickFormation: () => {
+      const F = GAME.g433.FORMATIONS, w = (f) => (GAME.g433.FORM_WEIGHT[f] != null ? GAME.g433.FORM_WEIGHT[f] : 1);
+      let x = Math.random() * F.reduce((t, f) => t + w(f), 0);
+      for (const f of F) { x -= w(f); if (x < 0) return f; }
+      return F[F.length - 1];
+    },
+    shape: (f) => { const [d, m, a] = String(f).split('').map(Number); return { GK: 1, DEF: d, MID: m, FWD: a }; },
+    depth: (f) => GAME.g433.DEPTH[f] || GAME.g433.TOP,
+    gift: (f) => (GAME.g433.GIFTS[f] != null ? GAME.g433.GIFTS[f] : 0.2),
+    shapeText: (f) => String(f).split('').join('-'),
+    list: (pos) => g4lists[pos] || (g4lists[pos] = G4[pos].map(([name, sur, club, goals]) => ({ name, sur, club, goals, pos }))),
+    // Every spin (Craig, 12 Oct): three players from any position still open on the board, each position as likely as
+    // its open shirts. On the last shot, if a player of that position has exactly the goals needed, one game in five
+    // (GIFT, decided once per game, so respins keep it) puts him among the three. Balanced with a simulation of
+    // 20,000 games per shape (tests/sim-goalrush.js): a casual player lands exactly about 1 game in 20, one who roughly
+    // knows career goals about 1 in 10. The formation is required: it sets the pool depth and the gift chance.
+    drawOpen(openPos, avoid, need, f) {
+      avoid = avoid || [];
+      const slots = [], out = [], top = GAME.g433.depth(f), pickFrom = (pos) => GAME.g433.list(pos).slice(0, top);
+      Object.keys(openPos).forEach((pos) => { for (let i = 0; i < openPos[pos]; i++) slots.push(pos); });
+      if (!slots.length) return out;
+      if (need != null) { const hits = pickFrom(slots[0]).filter((p) => p.goals === need && !avoid.includes(p.name)); if (hits.length) out.push(hits[Math.floor(Math.random() * hits.length)]); }
+      let guard = 0;
+      while (out.length < 3 && guard++ < 999) { const L = pickFrom(slots[Math.floor(Math.random() * slots.length)]), p = L[Math.floor(Math.random() * L.length)]; if (!out.includes(p) && !avoid.includes(p.name)) out.push(p); }
+      for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
+      return out;
+    },
+    canGift: (pos, need, avoid, f) => need >= 0 && GAME.g433.list(pos).slice(0, GAME.g433.depth(f)).some((p) => p.goals === need && !avoid.includes(p.name)),
+    // a best or last from 433 Goals has no target saved: it was 433
+    record: () => { const r = Object.assign({ games: 0, exact: 0, best: null, bestTotal: null, last: null }, D2T.state.record.g433 || {}); if (r.best != null && !r.bestTarget) r.bestTarget = 433; if (r.last != null && !r.lastTarget) r.lastTarget = 433; return r; },
+    // the record carries on from 433 Goals: best is "N away" whatever the target
+    finish(total, target) {
+      const r = GAME.g433.record(), gap = Math.abs(total - target), newBest = r.best == null || gap < r.best;
+      r.games += 1; if (gap === 0) r.exact += 1;
+      if (newBest) { r.best = gap; r.bestTotal = total; r.bestTarget = target; }
+      r.last = total; r.lastTarget = target; D2T.state.record.g433 = r; D2T.save();
+      return { rec: r, newBest };
+    }
+  };
+
   // ---------- modes ----------
   // classic: a relegated club, achievements for how high you take them. dare2dream: any club, beat their real finish
   // (or win the league again if they won it).
   GAME.MODES = {
     classic: { name: 'Classic', catalogue: () => G.catalogue, pool: () => pool },
-    dare2dream: { name: 'Dare2Dream', catalogue: () => G.clubSeasons, pool: () => allPool }
+    dare2dream: { name: 'Dare2Dream', catalogue: () => G.clubSeasons, pool: () => allPool },
+    clubx: { name: 'Club X', catalogue: () => xCatalogue, pool: () => xPool }
   };
+  // Club X: each season's bottom side, which your own club replaces. The season card shows who you replace.
+  const xCatalogue = Object.keys(G.seasons).map((sk) => { const t = (G.clubSeasons || []).filter((c) => c.season === sk); return t.sort((a, b) => b.pos - a.pos)[0]; }).filter(Boolean);
+  const xPool = xCatalogue.map((c) => { const champ = (G.clubSeasons || []).find((x) => x.season === c.season && x.pos === 1); return Object.assign({}, byKey.get(c.key), { champion: champ ? champ.club : '', championPts: champ ? champ.pts : 0 }); });
+  GAME.xPool = xPool;
+  GAME.isDraftMode = (m) => E.DRAFT_MODES.includes(m || GAME.mode());
   GAME.mode = () => { const e = GAME.eng(); return (e && e.mode) || 'classic'; };
   GAME.modeName = (m) => (GAME.MODES[m || GAME.mode()] || GAME.MODES.classic).name;
   // The finish a Dare2Dream run must reach: better than history, or first again for real champions.
-  GAME.target = (histPos) => (histPos <= 1 ? 1 : histPos - 1);
+  GAME.target = (histPos) => (GAME.mode() === 'clubx' || histPos <= 1 ? 1 : histPos - 1);
   GAME.dreamMet = (finish, histPos) => finish <= GAME.target(histPos);
 
   // ---------- legends: the top 3 players of every season (Craig, 11 Oct 2026) ----------
@@ -81,12 +172,17 @@
     keys.forEach((k, i) => { stats[k] = p.s6 ? p.s6[i] : null; });
     const two = !legend && p.c2 != null ? S.clubs[shown === p.c2 ? p.c : p.c2].name : null;
     return {
-      id: p.id, name: p.n, club: clubName, club2: two, crest: crestOf(clubName), pos: p.b, ovr: p.r, level: LV[p.lv || 0],
-      apps: p.a, goals: p.g, assists: p.as, cleanSheets: p.cs, nat: p.nat, season: legend ? p.sk : S.season,
-      provisional: p.src === 'f', stats, career: p.k != null && G.careers ? G.careers[p.k] : null
+      id: p.id, name: p.n, club: clubName, club2: two, crest: crestOf(clubName), crestLight: crestLightOf(clubName), pos: p.b, ovr: p.r, level: LV[p.lv || 0],
+      apps: p.a, goals: p.g, assists: p.as, cleanSheets: p.cs, nat: p.nat, flag: GAME.flag(p.nat), season: legend ? p.sk : S.season,
+      provisional: p.src === 'f', stats, career: p.k != null && G.careers ? G.careers[p.k] : null,
+      // detailed positions when known (main first); role is the broad colour of his main one
+      main: E.SLOT_BROAD[(p.p || [])[0]] ? p.p[0] : null, alt: (p.p || []).slice(1).filter((x) => E.SLOT_BROAD[x]),
+      role: E.SLOT_BROAD[(p.p || [])[0]] || p.b
     };
   };
   GAME.LV = LV;
+  // nationality flags (12 Oct): drawn pictures, never emoji (assets/flags, embedded by build.py as D2T_FLAGS and D2T_NATIONS)
+  GAME.flag = (nat) => { const code = (window.D2T_NATIONS || {})[nat]; return (code && (window.D2T_FLAGS || {})[code]) || ''; };
 
   // ---------- the run ----------
   // D2T.state.run = { step, eng (the engine's run, saved whole), tableSeen, pending (a signing waiting for a shirt), match (gw on show) }
@@ -101,7 +197,7 @@
     D2T.save();
     return D2T.state.run;
   };
-  GAME.offer = () => GAME.eng().clubOffer.map(GAME.poolEntry);
+  GAME.offer = () => GAME.eng().clubOffer.map((k) => (GAME.mode() === 'clubx' ? xPool.find((x) => x.key === k) : null) || GAME.poolEntry(k));
   GAME.respinClubs = () => { const ok = E.respinClubs(GAME.eng(), (GAME.MODES[GAME.mode()] || GAME.MODES.classic).catalogue()); D2T.save(); return ok; };
   GAME.spinPool = () => (GAME.MODES[GAME.mode()] || GAME.MODES.classic).pool();
   GAME.chooseClub = (key) => {
@@ -112,9 +208,11 @@
     D2T.state.run.step = 'table'; D2T.state.run.tableSeen = false;
     D2T.save();
   };
-  GAME.clubName = () => { const S = GAME.S(); return S ? S.clubs[GAME.eng().club].name : null; };
+  // In a Club X run your club (the name you gave it) appears wherever the replaced side would.
+  const nameOf = (S, c) => { const e = GAME.eng(); return e && e.mode === 'clubx' && e.seasonKey === S.season && c === e.club ? GAME.xName() : S.clubs[c].name; };
+  GAME.clubName = () => { const S = GAME.S(); return S ? nameOf(S, GAME.eng().club) : null; };
 
-  const rowOf = (S, r, pos) => { const n = S.clubs[r.c].name, c = GAME.club(n); return { name: n, code: c.code, crest: c.crest, p: r.p, w: r.w, d: r.d, l: r.l, gf: r.gf, ga: r.ga, pts: r.pts, pos }; };
+  const rowOf = (S, r, pos) => { const n = nameOf(S, r.c), c = GAME.club(n); return { name: n, code: c.code, crest: c.crest, p: r.p, w: r.w, d: r.d, l: r.l, gf: r.gf, ga: r.ga, pts: r.pts, pos }; };
   GAME.historyTable = () => { const S = GAME.S(); return E.historyTable(S, S.deductions).map((r, i) => rowOf(S, r, i + 1)); };
   GAME.standings = (upto) => { const S = GAME.S(); return E.table(S, GAME.eng(), upto, S.deductions).map((r, i) => rowOf(S, r, i + 1)); };
   GAME.fixtures = () => {
@@ -146,7 +244,7 @@
     const S = GAME.S(), eng = GAME.eng();
     const xi = eng.xi.map((id) => (id == null ? null : GAME.card(S, id)));
     let subs = [];
-    if (GAME.preseason() && GAME.mode() !== 'dare2dream') subs = E.squadOf(S, eng.club).filter((p) => !eng.xi.includes(p.id)).map((p) => GAME.card(S, p.id));
+    if (GAME.preseason() && !GAME.isDraftMode()) subs = E.squadOf(S, eng.club).filter((p) => !eng.xi.includes(p.id)).map((p) => GAME.card(S, p.id));
     const all = new Map(); xi.concat(subs).forEach((c) => c && all.set(String(c.id), c));
     return { all, xi, subs };
   };
@@ -165,7 +263,7 @@
   GAME.setFormation = (f) => {
     const S = GAME.S(), eng = GAME.eng();
     if (eng.phase === 'draft') E.draftFormation(eng, S, f);                                 // the empty shirts, before the first pick
-    else if (GAME.preseason() && GAME.mode() !== 'dare2dream') { eng.formation = f; eng.xi = E.autoXI(S, eng.club, f, []); }   // a new best XI from the squad
+    else if (GAME.preseason() && !GAME.isDraftMode()) { eng.formation = f; eng.xi = E.autoXI(S, eng.club, f, []); }   // a new best XI from the squad
     else E.setFormation(eng, S, f);                                                         // your 11, re-seated
     D2T.save();
   };
@@ -182,13 +280,17 @@
 
   // ---------- Dare2Dream draft: one spin per shirt ----------
   GAME.inDraft = () => GAME.eng().phase === 'draft';
+  // Club X (Craig, 13 Oct) drafts any open shirt: slot is null (open) and each card goes on an open shirt he lists
   GAME.draftInfo = () => {
-    const eng = GAME.eng(), slot = E.draftSlot(eng), pos = E.FORMATIONS[eng.formation][slot][0];
+    const eng = GAME.eng(), slot = E.draftSlot(eng);
+    if (slot == null) return { step: eng.draft.step + 1, of: eng.xi.length, slot: -1, open: true, pos: '', broad: '' };
+    const pos = E.FORMATIONS[eng.formation][slot][0];
     return { step: eng.draft.step + 1, of: eng.xi.length, slot, pos, broad: E.SLOT_BROAD[pos] };
   };
-  GAME.draftPick = (cardId) => {
+  GAME.draftFits = (cardId) => E.draftFits(GAME.eng(), GAME.S(), cardId);
+  GAME.draftPick = (cardId, slot) => {
     const eng = GAME.eng();
-    if (!E.draftPick(eng, GAME.S(), cardId)) return false;
+    if (!E.draftPick(eng, GAME.S(), cardId, slot)) return false;
     D2T.state.run.step = eng.phase === 'draft' ? 'transfer' : 'squad';
     D2T.save(); return true;
   };
@@ -290,9 +392,14 @@
     const rec = D2T.state.record, k = `${S.season}:${name}`;
     const entry = { key: k, mode, season: S.season, club: name, finish: F.finish, rise: F.rise, pts: F.pts, histFinish: F.histFinish,
       drop: F.finish <= n - rel, half: F.finish <= n / 2, top3: F.finish <= 3, title: F.finish === 1, at: new Date().toISOString().slice(0, 10) };
-    if (mode === 'dare2dream') entry.dream = GAME.dreamMet(F.finish, F.histFinish);
+    if (mode !== 'classic') entry.dream = GAME.dreamMet(F.finish, F.histFinish);
+    if (run.daily) {
+      entry.daily = run.daily;
+      rec.daily = rec.daily || {};
+      if (!rec.daily[run.daily]) rec.daily[run.daily] = { n: GAME.dailyNumber(run.daily), club: name, season: S.season, mode, finish: F.finish, histFinish: F.histFinish, rise: F.rise, pts: F.pts, dream: entry.dream };
+    }
     rec.runs.push(entry);
-    const book = mode === 'dare2dream' ? (rec.dreamClubs = rec.dreamClubs || {}) : rec.clubs;
+    const book = mode === 'dare2dream' ? (rec.dreamClubs = rec.dreamClubs || {}) : mode === 'clubx' ? (rec.xClubs = rec.xClubs || {}) : rec.clubs;
     const c = book[k] || { runs: 0, finish: 99, rise: -99 };
     c.runs++; c.finish = Math.min(c.finish, F.finish); c.rise = Math.max(c.rise, F.rise);
     if (entry.dream) c.dream = true;
@@ -302,7 +409,7 @@
   };
   // Classic's record. Cumulative counts (Craig, 11 Oct): a title also counts as top 3, top half and beating the drop.
   // Dare2Dream runs are kept apart: rescuing a relegated club is what these counts are about.
-  const classicRuns = () => D2T.state.record.runs.filter((r) => !r.mode || r.mode === 'classic');
+  const classicRuns = () => D2T.state.record.runs.filter((r) => (!r.mode || r.mode === 'classic') && !r.daily);
   GAME.record = () => {
     const runs = classicRuns();
     return { runs: runs.length, drop: runs.filter((r) => r.drop).length, half: runs.filter((r) => r.half).length,
@@ -310,8 +417,108 @@
       bestRise: runs.length ? Math.max(...runs.map((r) => r.rise)) : null };
   };
   GAME.classicRuns = classicRuns;
+  GAME.xRecord = () => {
+    const runs = D2T.state.record.runs.filter((r) => r.mode === 'clubx' && !r.daily);
+    return { runs: runs.length, titles: runs.filter((r) => r.title).length, best: runs.length ? Math.min(...runs.map((r) => r.finish)) : null };
+  };
   GAME.dreamRecord = () => {
-    const runs = D2T.state.record.runs.filter((r) => r.mode === 'dare2dream');
+    const runs = D2T.state.record.runs.filter((r) => r.mode === 'dare2dream' && !r.daily);
     return { runs: runs.length, dreams: runs.filter((r) => r.dream).length, bestRise: runs.length ? Math.max(...runs.map((r) => r.rise)) : null };
+  };
+
+  // ---------- Daily challenge ----------
+  // The same club and seed for everyone each day (UK date). The clubs come round in a fixed cycle through every
+  // relegated club-season, the same list Classic spins from (Craig, 13 Oct): Daily #1 is the first in the cycle, each day
+  // the next, and after the last it starts again from the top. It is a Classic run (Craig, 13 Oct): their real squad and
+  // XI, Classic's rolls and 5 respins; the rolls and respins come from the day's seed, so the same choices see the same
+  // cards. One go a day; it has its own save, so another run is never lost.
+  const DAILY_START = '2026-10-11';
+  GAME.today = () => {
+    try { return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); }
+    catch (e) { return new Date().toISOString().slice(0, 10); }
+  };
+  // "Daily Challenge 11 Oct 2026": the name shown everywhere for a day's challenge
+  GAME.dailyName = (date, short) => { const M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], [y, m, d] = date.split('-'); return `Daily Challenge ${+d} ${M[+m - 1]}${short ? '' : ' ' + y}`; };
+  GAME.dailyNumber = (date) => Math.round((Date.parse(date + 'T12:00:00Z') - Date.parse(DAILY_START + 'T12:00:00Z')) / 864e5) + 1;
+  // the cycle: every relegated club-season in a fixed shuffled order (a hash of its key), so seasons and clubs mix
+  const dailyCycle = G.catalogue.map((c) => c.key).sort((a, b) => (E.hash32('d2t-daily-cycle|' + a) - E.hash32('d2t-daily-cycle|' + b)) || (a < b ? -1 : 1));
+  GAME.dailyCycle = dailyCycle;
+  GAME.dailyEntry = (date) => {
+    const n = GAME.dailyNumber(date), L = dailyCycle.length;
+    return Object.assign({}, GAME.poolEntry(dailyCycle[(((n - 1) % L) + L) % L]), { mode: 'classic', relegated: true, n, date });
+  };
+  GAME.isDaily = () => !!(D2T.state.run && D2T.state.run.daily);
+  GAME.dailyResult = (date) => ((D2T.state.record.daily || {})[date || GAME.today()] || null);
+  const live = (r) => !!(r && r.eng && r.eng.seasonKey && r.eng.phase !== 'summary');
+  // The run not on screen: a run parked while the daily is played, or a daily put aside for another run.
+  GAME.otherRun = () => {
+    const st = D2T.state;
+    if (st.parked && live(st.parked)) return st.parked;
+    if (st.dailyRun && live(st.dailyRun) && !(st.record.daily || {})[st.dailyRun.daily]) return st.dailyRun;
+    return null;
+  };
+  // Put the run on screen aside (a daily goes to its own slot, anything else is parked) and bring `next` in.
+  const swapIn = (next) => {
+    const st = D2T.state, cur = st.run;
+    if (cur && live(cur) && cur !== next) { if (cur.daily) st.dailyRun = cur; else st.parked = cur; }
+    if (st.parked === next) st.parked = null;
+    if (st.dailyRun === next) st.dailyRun = null;
+    st.run = next;
+  };
+  GAME.switchToOther = () => { const o = GAME.otherRun(); if (o) { swapIn(o); D2T.save(); } return o; };
+  // Before a new Classic or Dare2Dream run: an unfinished daily keeps its own slot.
+  GAME.stashDaily = () => { const st = D2T.state; if (st.run && st.run.daily && live(st.run)) { st.dailyRun = st.run; st.run = null; D2T.save(); } };
+  GAME.startDaily = () => {
+    GAME.closeOldDaily();
+    const st = D2T.state, date = GAME.today();
+    if (GAME.dailyResult(date)) return false;                                   // one go a day
+    if (st.run && st.run.daily === date) return true;
+    if (st.dailyRun && st.dailyRun.daily === date) { swapIn(st.dailyRun); D2T.save(); return true; }
+    const d = GAME.dailyEntry(date);
+    const eng = E.newRun({ seed: 'daily-' + date, mode: d.mode, catalogue: [{ key: d.key }], fixedClub: d.key });
+    swapIn({ step: 'table', eng, spun: true, daily: date });
+    GAME.chooseClub(d.key);
+    D2T.save();
+    return true;
+  };
+  // A Daily closes at midnight (UK date, Craig 12 Oct): an unfinished one from an earlier day is dropped (no result, so it
+  // never counts), a parked run comes back, and home says so once. Returns the closed date or null.
+  const runKey = (eng) => eng.seasonKey + ':' + G.seasons[eng.seasonKey].clubs[eng.club].name;
+  GAME.closeOldDaily = () => {
+    const st = D2T.state, today = GAME.today(), done = (d) => !!(st.record.daily || {})[d];
+    let closed = null;
+    if (st.run && st.run.daily && st.run.daily !== today && !done(st.run.daily)) {
+      closed = st.run.daily;
+      st.run = st.parked && live(st.parked) ? st.parked : null;
+      if (st.run === st.parked) st.parked = null;
+    }
+    if (st.dailyRun && st.dailyRun.daily !== today) { closed = closed || (done(st.dailyRun.daily) ? null : st.dailyRun.daily); st.dailyRun = null; }
+    // a Daily for today begun before it became Classic's rotation (a draft, or another club) starts again as today's
+    const stale = (r) => r && r.daily === today && !done(today) && r.eng && (r.eng.mode !== 'classic' || (r.eng.seasonKey && runKey(r.eng) !== GAME.dailyEntry(today).key));
+    if (stale(st.run)) { st.run = st.parked && live(st.parked) ? st.parked : null; if (st.run === st.parked) st.parked = null; D2T.save(); }
+    if (stale(st.dailyRun)) { st.dailyRun = null; D2T.save(); }
+    if (closed) { st.dailyClosed = closed; D2T.save(); }
+    return closed;
+  };
+  // Your best Daily: the biggest rise, then the higher finish. `except` leaves a date out (to compare today with the rest).
+  GAME.dailyBest = (except) => {
+    const days = D2T.state.record.daily || {};
+    return Object.keys(days).filter((d) => d !== except).map((d) => Object.assign({ date: d }, days[d]))
+      .sort((a, b) => b.rise - a.rise || a.finish - b.finish)[0] || null;
+  };
+  // today's Daily against your best other one, for home, the summary and the share text
+  GAME.dailyCompare = (date) => {
+    date = date || GAME.today();
+    const today = GAME.dailyResult(date), best = GAME.dailyBest(date), sg = (n) => (n > 0 ? '+' : '') + n;
+    const isBest = !!today && (!best || today.rise > best.rise || (today.rise === best.rise && today.finish < best.finish));
+    const bestLine = best ? `Best Daily: ${best.club} ${best.season}, ${D2T.ordinal(best.finish)} (rise ${sg(best.rise)})` : '';
+    return { today, best, isBest, sg, bestLine };
+  };
+  GAME.dailyStreak = () => {
+    const days = D2T.state.record.daily || {};
+    let n = 0, d = new Date(GAME.today() + 'T12:00:00Z');
+    if (!days[GAME.today()]) d = new Date(d.getTime() - 864e5);                  // today not played yet: count to yesterday
+    while (days[d.toISOString().slice(0, 10)]) { n++; d = new Date(d.getTime() - 864e5); }
+    return n;
   };
 })();

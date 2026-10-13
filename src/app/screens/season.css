@@ -59,10 +59,10 @@
 .se-reset .se-tr:not(.se-th):not(.se-landed) > span.se-n { color: var(--muted); }
 .se-reset .se-tr:not(.se-th):not(.se-landed) > span.se-pts { color: var(--white); }
 
-/* "New season" sweep */
+/* "Rewrite history" sweep, two lines (Craig, 12 Oct) */
 .se-newseason { position: absolute; left: 0; right: 0; top: 38%; z-index: 8; pointer-events: none; display: grid; place-items: center; opacity: 0; }
-.se-newseason span { font: var(--display); font-size: 54px; text-transform: uppercase; color: var(--se-acc); text-shadow: 0 6px 30px rgba(0,0,0,.9); white-space: nowrap; transform: translateX(60%) skewX(-8deg); }
-.se-newseason::before { content: ''; position: absolute; left: -10%; right: -10%; top: 50%; height: 84px; margin-top: -42px; background: linear-gradient(90deg, transparent, rgba(0,0,0,.85) 20%, rgba(0,0,0,.85) 80%, transparent); }
+.se-newseason span { font: var(--display); font-size: 54px; line-height: .92; text-align: center; text-transform: uppercase; color: var(--se-acc); text-shadow: 0 6px 30px rgba(0,0,0,.9); white-space: nowrap; transform: translateX(60%) skewX(-8deg); }
+.se-newseason::before { content: ''; position: absolute; left: -10%; right: -10%; top: 50%; height: 136px; margin-top: -68px; background: linear-gradient(90deg, transparent, rgba(0,0,0,.85) 20%, rgba(0,0,0,.85) 80%, transparent); }
 .se-newseason span { position: relative; }
 .se-newseason.se-go { animation: seFlashBox 2.6s ease both; }
 .se-newseason.se-go span { animation: seFlashText 2.6s cubic-bezier(.2,.8,.2,1) both; }
@@ -75,19 +75,19 @@
 }
 
 /* ---------- squad / tactics ---------- */
-.se-squad { display: flex; flex-direction: column; padding-bottom: 6px; }
-.se-sqhead { display: flex; align-items: center; gap: 10px; padding: 0 2px 10px; }
-.se-sqcrest { width: 34px; height: 34px; object-fit: contain; }
+.se-squad { display: flex; flex-direction: column; padding-bottom: 4px; }
+.se-sqhead { display: flex; align-items: center; gap: 10px; padding: 0 2px 8px; }
+.se-sqcrest { width: 30px; height: 30px; object-fit: contain; }
 .se-sqtext { flex: 1; min-width: 0; }
-.se-sqname { font: var(--display); font-size: 22px; text-transform: uppercase; }
+.se-sqname { font: var(--display); font-size: 20px; text-transform: uppercase; }
 .se-sqsub { font-size: 12px; font-weight: 700; color: var(--muted); margin-top: 2px; }
 .se-rating { display: flex; align-items: center; gap: 7px; padding: 4px 12px 4px 10px; border-radius: 14px; background: var(--ink-2); border: 1px solid var(--se-acc-b); }
-.se-rating b { font: var(--display); font-size: 28px; color: var(--se-text); font-variant-numeric: tabular-nums; min-width: 1.3em; text-align: center; }
+.se-rating b { font: var(--display); font-size: 24px; color: var(--se-text); font-variant-numeric: tabular-nums; min-width: 1.3em; text-align: center; }
 .se-rating i { font-style: normal; font-size: 9.5px; line-height: 1.15; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); }
 .se-rating.se-bump { animation: seBump .5s cubic-bezier(.3,1.5,.5,1); }
 @keyframes seBump { 30% { transform: scale(1.1); } }
 
-.se-pitch { position: relative; flex: 1 0 auto; min-height: 392px; max-height: 480px; border-radius: 18px; overflow: hidden; isolation: isolate;
+.se-pitch { position: relative; flex: 1 1 0; min-height: 300px; max-height: 470px; border-radius: 18px; overflow: hidden; isolation: isolate;
   background:
     radial-gradient(120% 60% at 50% 0%, rgba(120,255,170,.10), transparent 60%),
     radial-gradient(140% 90% at 50% 50%, transparent 55%, rgba(0,0,0,.55) 100%),
@@ -102,29 +102,33 @@
 .se-slot::after { content: ''; position: absolute; left: 12%; right: 12%; bottom: -5px; height: 9px; border-radius: 50%; background: rgba(0,0,0,.55); filter: blur(3px); z-index: -1; }
 .se-cardwrap { position: relative; cursor: pointer; touch-action: none; transition: transform .18s var(--ease-out), filter .18s, opacity .18s; -webkit-touch-callout: none; }
 .se-cardwrap .d2c { pointer-events: none; }
-.se-cardwrap.se-sel { transform: translateY(-7px) scale(1.07); filter: drop-shadow(0 0 9px var(--se-acc)) drop-shadow(0 0 2px var(--se-acc)); z-index: 3; }
+/* no glows on squad and pitch cards (11 Oct): selection lifts the card, turns its tab white and puts a white marker under it */
+.se-cardwrap .d2c { filter: none; }
+.se-cardwrap.se-sel { transform: translateY(-5px) scale(1.06); z-index: 3; }
+.se-cardwrap.se-sel .d2c-tab { background: #FFFFFF; }
+.se-cardwrap.se-sel::after { content: ''; position: absolute; left: 50%; bottom: -10px; margin-left: -5px; border: 5px solid transparent; border-top-color: #FFFFFF; }
 .se-armed .se-cardwrap:not(.se-sel) { animation: seArmed 1.4s ease-in-out infinite; }
-@keyframes seArmed { 50% { filter: drop-shadow(0 0 6px var(--se-acc-b)); } }
-.se-cardwrap.se-target { transform: scale(1.12); filter: drop-shadow(0 0 0 var(--se-acc)) drop-shadow(0 0 12px var(--se-acc)); }
+@keyframes seArmed { 50% { transform: translateY(-2px); } }
+.se-cardwrap.se-target { transform: scale(1.1); }
 .se-cardwrap.se-target::before { content: ''; position: absolute; inset: -6px; border-radius: 10px; border: 2px solid var(--se-acc); }
 .se-cardwrap.se-dragsrc { opacity: .3; }
 .se-oopchip { position: absolute; left: 50%; top: -7px; transform: translateX(-50%); font-size: 9px; font-weight: 900; letter-spacing: .06em; padding: 1px 5px; border-radius: 6px; background: #FF6B3D; color: #1A0A00; }
-.se-ghost { position: absolute; left: 0; top: 0; z-index: 45; pointer-events: none; filter: drop-shadow(0 14px 18px rgba(0,0,0,.7)) drop-shadow(0 0 10px var(--se-acc, #fff)); will-change: transform; }
+.se-ghost { position: absolute; left: 0; top: 0; z-index: 45; pointer-events: none; filter: drop-shadow(0 14px 18px rgba(0,0,0,.7)); will-change: transform; }
 .se-dragging { cursor: grabbing; }
 
-.se-formlink { align-self: center; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px; margin: 4px 0 0; border: 0; background: none; color: var(--soft); font-size: 14px; font-weight: 700; }
-.se-formlink b { color: var(--se-text); font-weight: 900; font-style: italic; font-size: 15px; }
-.se-formlink svg { width: 18px; height: 18px; color: var(--se-text); }
-.se-subshead { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin: 2px 2px 6px; }
+.se-formlink { position: absolute; left: 8px; bottom: 8px; z-index: 210; display: inline-flex; align-items: center; gap: 5px; min-height: 44px; padding: 0 9px; border-radius: 14px; border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.6); color: #FFFFFF; font-size: 11px; font-weight: 800; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.se-formlink b { color: var(--se-text); font-weight: 900; font-style: italic; font-size: 13px; }
+.se-formlink svg { width: 16px; height: 16px; color: var(--se-text); }
+.se-subshead { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin: 8px 2px 0; }
 .se-subs-t { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--soft); white-space: nowrap; }
 .se-hint { font-size: 12px; color: var(--muted); text-align: right; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-.se-subs { display: flex; gap: 10px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-padding: 0 16px; margin: 0 -16px; padding: 10px 16px 8px; scrollbar-width: none; overscroll-behavior-x: contain; flex-shrink: 0; }
+.se-subs { display: flex; gap: 8px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-padding: 0 16px; margin: 0 -16px; padding: 14px 16px 12px; scrollbar-width: none; overscroll-behavior-x: contain; flex-shrink: 0; }
 .se-subs::-webkit-scrollbar { display: none; }
 .se-sub { scroll-snap-align: start; flex-shrink: 0; }
 .se-sub .se-cardwrap { touch-action: pan-x; }
 
 /* next fixture bar */
-.se-nextbar { border-top: 1px solid var(--line); background: linear-gradient(180deg, rgba(14,14,16,.96), #000); }
+.se-nextbar { padding-top: 8px; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 8px); border-top: 1px solid var(--line); background: linear-gradient(180deg, rgba(14,14,16,.96), #000); }
 .se-next { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; }
 .se-next img { width: 36px; height: 36px; object-fit: contain; }
 .se-next-t { min-width: 0; display: grid; grid-template-columns: auto 1fr; column-gap: 8px; align-items: baseline; }
@@ -247,12 +251,16 @@
 
 /* ---------- placing a new signing (squad) ---------- */
 .se-slot.se-best .se-cardwrap { animation: seBest 1.4s ease-in-out infinite; }
-@keyframes seBest { 50% { filter: drop-shadow(0 0 10px var(--se-acc)); transform: translateY(-2px); } }
+@keyframes seBest { 50% { transform: translateY(-3px) scale(1.04); } }
 .se-oopchip.se-delta { font-size: 10px; padding: 1px 6px; }
 .se-oopchip.se-fit-amber { background: #FFB020; color: #1A1000; }
 .se-oopchip.se-fit-red { background: #FF4D5E; color: #1A0004; }
-.se-sub.se-newsign .se-cardwrap { filter: drop-shadow(0 0 12px var(--se-acc-b)); }
-@media (prefers-reduced-motion: reduce) { .se-slot.se-best .se-cardwrap { animation: none; filter: drop-shadow(0 0 10px var(--se-acc)); } }
+.se-oopchip.se-fit-green { background: #12F06C; color: #00170A; }
+/* while a card is selected or dragged, every shirt shows how well he fits it */
+.se-pfchip { z-index: 3; box-shadow: 0 0 0 2px #000; }
+.se-slot.se-pf-green .se-cardwrap, .se-slot.se-pf-green .se-empty { outline: 2px solid #12F06C; outline-offset: 2px; border-radius: 8px; }
+.se-sub.se-newsign .se-cardwrap { transform: translateY(-3px); }
+@media (prefers-reduced-motion: reduce) { .se-slot.se-best .se-cardwrap { animation: none; outline: 2px solid var(--se-acc); outline-offset: 3px; border-radius: 8px; } }
 
 /* ---------- season summary ---------- */
 .sm { position: relative; }
@@ -307,3 +315,17 @@
 .se-empty span { font-size: 11px; font-weight: 900; letter-spacing: .06em; color: rgba(255,255,255,.6); }
 .se-slot.se-best .se-empty { border-color: var(--se-acc); background: var(--se-acc-a); animation: seBest 1.4s ease-in-out infinite; }
 .se-slot.se-best .se-empty span { color: var(--se-text); }
+/* Daily summary: today next to your best Daily */
+.sm-daily { margin-top: 14px; }
+.sm-dv { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+.sm-dv span { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid var(--line); min-width: 0; }
+.sm-dv small { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.sm-dv b { font: var(--display); font-size: 30px; line-height: 1; color: var(--se-text, #fff); }
+.sm-dv i { font-style: normal; font-size: 13px; font-weight: 600; color: #CFCFD6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* the home button at the bottom right of every in-run screen (Craig, 13 Oct; opens the run menu, core/season.js) */
+.actionbar .se-home svg { width: 24px; height: 24px; }
+.se-nextbar .se-home { width: 52px; height: 52px; }
+.se-nextbar .se-play { min-width: 0; padding-left: 18px; padding-right: 18px; }
+.se-nextbar .se-off { width: 52px; height: 52px; opacity: .3; flex-shrink: 0; }
+.actionbar .se-off svg { width: 24px; height: 24px; }
+.se-nextbar.is-draft .se-play { flex: 1; }

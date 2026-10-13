@@ -1,0 +1,213 @@
+<title>D2T Squad Screen Fit</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<link rel="stylesheet" href="core/base.css">
+<style>
+  /* Layout: phone screens side by side, each the visible area of Safari on a current iPhone (390 x 700): header, pitch, subs and the bottom bar must all fit without scrolling. */
+  :root { color-scheme: dark; --bg: #000000; --fg: #FFFFFF; --soft: #BDBDC6; --muted: #8E8E99; --rule: #1E1E22; --line: #26262C; --panel: #0E0E10; --green: #12F06C;
+    --gk: #FFB020; --def: #3BA4FF; --mid: #12F06C; --fwd: #FF4D5A; --club: #FDB913; --club-ink: #1A1A1A; }
+  html, body { height: auto; }
+  body { background: #08080A; color: var(--fg); font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 1720px; margin: 0 auto; padding: 40px 16px 64px; display: flex; flex-direction: column; gap: 28px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2', sans-serif; margin: 0 0 8px; }
+  .head p { margin: 0; color: var(--soft); font-size: 15px; max-width: 86ch; line-height: 1.5; }
+  .phones { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
+  .opt { display: flex; flex-direction: column; gap: 10px; width: 390px; max-width: 100%; }
+  .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: var(--green); }
+  .opt-h h2 { font: 900 italic 22px/1.05 'Exo 2', sans-serif; margin: 4px 0; }
+  .opt-h p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; min-height: 76px; }
+  .phone { position: relative; width: 390px; max-width: 100%; height: 700px; border-radius: 26px; overflow: hidden; background: var(--bg); box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,0.6); display: flex; flex-direction: column; }
+  .fold { font-size: 11px; color: var(--muted); text-align: center; }
+
+  /* shared chrome */
+  .tb { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px 6px; }
+  .tb .lg { height: 22px; color: #FFF; }
+  .acct { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel); display: grid; place-items: center; }
+  .acct svg { width: 17px; height: 17px; }
+  .hdr { display: flex; align-items: center; gap: 10px; padding: 2px 16px 8px; }
+  .hdr img { width: 30px; height: 30px; object-fit: contain; }
+  .hdr .nm { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+  .hdr .nm b { font: 900 italic 20px/1 'Exo 2'; text-transform: uppercase; }
+  .hdr .nm span { font-size: 12px; color: var(--soft); font-weight: 600; margin-top: 2px; }
+  .rate { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 12px; border: 1.5px solid var(--club); }
+  .rate b { font: 900 italic 22px/1 'Exo 2'; color: var(--club); }
+  .rate span { font-size: 9px; font-weight: 800; letter-spacing: 0.08em; line-height: 1.1; }
+  .form { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 800; padding: 6px 10px; border-radius: 10px; background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.18); color: #FFF; }
+  .form b { color: var(--club); font-style: italic; }
+  .bar { margin-top: auto; display: flex; align-items: center; gap: 10px; padding: 8px 16px 12px; border-top: 1px solid var(--rule); background: #0B0B0D; }
+  .fx { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
+  .fx img { width: 28px; height: 28px; object-fit: contain; }
+  .fx div { display: flex; flex-direction: column; min-width: 0; }
+  .fx span { font-size: 11px; color: var(--muted); font-weight: 700; }
+  .fx b { font: 900 italic 17px/1.05 'Exo 2'; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .play { height: 50px; padding: 0 26px; border-radius: 25px; background: var(--club); color: var(--club-ink); font: 900 italic 19px/1 'Exo 2'; display: grid; place-items: center; flex-shrink: 0; }
+  .lbl { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 16px 4px; font-size: 11px; font-weight: 800; letter-spacing: 0.12em; color: var(--soft); text-transform: uppercase; }
+  .lbl span:last-child { letter-spacing: 0; text-transform: none; font-weight: 600; color: var(--muted); }
+
+  /* pitch */
+  .pitch { position: relative; margin: 0 12px; border-radius: 16px; overflow: hidden; background: repeating-linear-gradient(180deg, #0F3D22 0 9%, #0C3520 9% 18%); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12); }
+  .pitch .ln { position: absolute; inset: 8px; border: 1.5px solid rgba(255,255,255,0.22); border-radius: 6px; pointer-events: none; }
+  .pitch .ln::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1.5px; background: rgba(255,255,255,0.22); }
+  .pitch .ln::after { content: ''; position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border: 1.5px solid rgba(255,255,255,0.22); border-radius: 50%; }
+  .pitch .form { position: absolute; left: 10px; bottom: 10px; z-index: 3; }
+  .slot { position: absolute; transform: translate(-50%, -50%); }
+
+  /* pitch card (option C, live in build 12), no glow */
+  .pc { position: relative; width: var(--w); height: var(--h); font-size: calc(var(--w) / 5.6); margin-top: 0.75em; transition: transform .2s; }
+  .pc .d2c-rim, .pc .d2c-face { -webkit-mask: var(--mo) 0 0 / 100% 100% no-repeat; mask: var(--mo) 0 0 / 100% 100% no-repeat; clip-path: none; }
+  .pc .d2c-face { inset: 0.2em; -webkit-mask-image: var(--mi); mask-image: var(--mi); }
+  .pc .d2c-rim { inset: 0; }
+  .pc .d2c-tex { background: repeating-linear-gradient(135deg, rgba(255,255,255,0.08) 0 0.15em, rgba(255,255,255,0) 0.15em 0.6em); }
+  .pc-body { position: absolute; inset: 0.2em; display: flex; flex-direction: column; align-items: center; color: var(--ink-c); padding: 0.55em 0.3em 1.15em; }
+  .pc .tab { position: absolute; left: 50%; top: -0.78em; transform: translateX(-50%); z-index: 2; font-size: 0.78em; font-weight: 900; letter-spacing: 0.06em; line-height: 1; padding: 0.22em 0.55em 0.3em; border-radius: 0.4em 0.4em 0.2em 0.2em; background: var(--pos); color: #0A0A0A; }
+  .pc .mid { display: flex; align-items: center; justify-content: center; gap: 0.2em; width: 100%; }
+  .pc .ovr { font: 900 italic 2.3em/0.85 'Exo 2'; }
+  .pc .crest { width: 1.6em; height: 1.6em; object-fit: contain; }
+  .pc .grow { flex: 1; }
+  .pc-first, .pc-last { display: block; width: 100%; text-align: center; white-space: nowrap; overflow: hidden; line-height: 1.05; }
+  .pc-first { font-weight: 700; font-size: 0.72em; opacity: 0.85; }
+  .pc-last { font-weight: 900; font-style: italic; font-size: 1.05em; text-transform: uppercase; }
+  .pos-GK { --pos: var(--gk); } .pos-DEF { --pos: var(--def); } .pos-MID { --pos: var(--mid); } .pos-FWD { --pos: var(--fwd); }
+  /* selected: lifted, white tab and a white marker below. No glow. */
+  .pc.sel { transform: translateY(-5px) scale(1.06); }
+  .pc.sel .tab { background: #FFFFFF; }
+  .pc.sel::after { content: ''; position: absolute; left: 50%; bottom: -0.9em; width: 0; height: 0; margin-left: -0.45em; border: 0.45em solid transparent; border-top-color: #FFFFFF; }
+
+  /* subs: strip of pitch-style cards */
+  .subs { display: flex; gap: 8px; overflow-x: auto; padding: 4px 16px 10px; scrollbar-width: none; }
+  .subs::-webkit-scrollbar { display: none; }
+  .subs .pc { flex-shrink: 0; }
+  /* subs: compact rows (option B) */
+  .pills { display: flex; gap: 8px; overflow-x: auto; padding: 4px 16px 10px; scrollbar-width: none; }
+  .pill { flex-shrink: 0; width: 148px; height: 50px; border-radius: 12px; background: var(--panel); border: 1px solid var(--line); display: flex; align-items: center; gap: 8px; padding: 0 10px 0 0; overflow: hidden; position: relative; }
+  .pill::before { content: ''; width: 4px; align-self: stretch; background: var(--pos); }
+  .pill .r { font: 900 italic 22px/1 'Exo 2'; color: var(--lvl); width: 30px; text-align: center; }
+  .pill .n { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+  .pill .n span { font-size: 10px; color: var(--soft); font-weight: 700; white-space: nowrap; }
+  .pill .n b { font: 900 italic 13px/1.1 'Exo 2'; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pill .p { font-size: 9px; font-weight: 900; color: #0A0A0A; background: var(--pos); padding: 2px 4px; border-radius: 4px; }
+  .pill.sel { border-color: #FFFFFF; background: #18181C; }
+
+  /* perspective pitch (option B) */
+  .ppitch { position: relative; margin: 0 0; height: 410px; overflow: hidden; }
+  .ppitch svg.turf { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  /* bench drawer (option C) */
+  .drawer { margin: 8px 12px 0; border-radius: 16px; background: #111114; border: 1px solid var(--line); padding: 6px 10px 8px; }
+  .drawer .hd { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 800; letter-spacing: 0.12em; color: var(--soft); padding: 2px 2px 6px; }
+  .drawer .hd b { color: #FFF; letter-spacing: 0.04em; font-size: 12px; display: flex; align-items: center; gap: 6px; }
+  .drawer .hd .up { width: 22px; height: 5px; border-radius: 3px; background: #3A3A42; }
+  .chips { display: flex; gap: 6px; overflow: hidden; }
+  .chip { flex-shrink: 0; display: flex; align-items: center; gap: 5px; height: 34px; padding: 0 9px 0 3px; border-radius: 17px; background: #1B1B20; }
+  .chip i { font-style: normal; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font: 900 italic 13px/1 'Exo 2'; background: var(--lvl-face); color: var(--lvl-ink); }
+  .chip b { font: 900 italic 12px/1 'Exo 2'; text-transform: uppercase; }
+  .chip span { font-size: 9px; font-weight: 900; color: var(--pos); }
+  .sheet-mock { position: absolute; left: 0; right: 0; bottom: 0; height: 330px; background: #111114; border-top: 1px solid var(--line); border-radius: 22px 22px 0 0; padding: 8px 0 0; z-index: 5; box-shadow: 0 -20px 40px rgba(0,0,0,0.6); }
+  .sheet-mock .grab { width: 44px; height: 5px; border-radius: 3px; background: #3A3A42; margin: 0 auto 8px; }
+  .sheet-mock .tabs { display: flex; gap: 6px; padding: 0 16px 8px; }
+  .sheet-mock .tabs span { font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 10px; background: #1B1B20; color: var(--soft); }
+  .sheet-mock .tabs span.on { background: #FFFFFF; color: #000; }
+  .sheet-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px 4px; padding: 6px 12px; justify-items: center; }
+  .scrim { position: absolute; inset: 0; background: rgba(0,0,0,0.55); z-index: 4; }
+</style>
+<div class="page">
+  <div class="head">
+    <h1>Squad screen: everything on one screen</h1>
+    <p>Each phone is the area you actually see in Safari on a current iPhone (about 390 by 700), so the header, pitch, subs and the bottom button all have to fit with no scrolling. The glows are gone from every card; a selected card lifts, its tab turns white and a small marker sits under it. Example: Wolves 2011/12 in 4-2-3-1 with Karl Henry selected; ratings are the draft card engine.</p>
+  </div>
+  <div class="phones" id="phones"></div>
+</div>
+<script src="data/data.js"></script>
+<script src="core/app.js"></script>
+<script src="core/cards.js"></script>
+<script>
+(function () {
+  const D = D2T.data, run = D.runs['Wolves 2011/12'], esc = D2T.esc;
+  const by = (pos) => run.squad.filter((c) => c.pos === pos);
+  const gk = by('GK')[0], defs = by('DEF').slice(0, 4), mids = by('MID').slice(0, 5), fwd = by('FWD')[0];
+  const XI_IDS = new Set([gk, ...defs, ...mids, fwd]);
+  const subs = run.squad.filter((c) => !XI_IDS.has(c));
+  const SELECTED = subs.find((c) => c.name === 'Karl Henry') || subs[1];
+  // 4-2-3-1: [card, x%, depth 0 (attack) .. 1 (keeper)]
+  const XI = [[fwd, 50, 0], [mids[0], 16, 0.25], [mids[1], 50, 0.25], [mids[2], 84, 0.25], [mids[3], 33, 0.5], [mids[4], 67, 0.5],
+    [defs[0], 11, 0.75], [defs[1], 37, 0.75], [defs[2], 63, 0.75], [defs[3], 89, 0.75], [gk, 50, 1]];
+
+  function roundedPath(pts, radii) {
+    const n = pts.length, seg = [];
+    for (let i = 0; i < n; i++) {
+      const P = pts[i], A = pts[(i - 1 + n) % n], B = pts[(i + 1) % n];
+      const la = Math.hypot(A[0] - P[0], A[1] - P[1]), lb = Math.hypot(B[0] - P[0], B[1] - P[1]);
+      const r = Math.min(radii[i], la / 2, lb / 2);
+      seg.push({ t1: [P[0] + (A[0] - P[0]) / la * r, P[1] + (A[1] - P[1]) / la * r], P, t2: [P[0] + (B[0] - P[0]) / lb * r, P[1] + (B[1] - P[1]) / lb * r] });
+    }
+    const f = (v) => +v.toFixed(2);
+    let d = `M${f(seg[0].t2[0])} ${f(seg[0].t2[1])}`;
+    for (let i = 1; i <= n; i++) { const s = seg[i % n]; d += ` L${f(s.t1[0])} ${f(s.t1[1])} Q${f(s.P[0])} ${f(s.P[1])} ${f(s.t2[0])} ${f(s.t2[1])}`; }
+    return d + 'Z';
+  }
+  const shield = (w, h, c, p) => [[0, c], [c, 0], [w - c, 0], [w, c], [w, h - p], [w / 2, h], [0, h - p]];
+  const R = [2.5, 2.5, 2.5, 2.5, 3, 4, 3];
+  const uri = (w, h, d) => `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${w} ${h}' preserveAspectRatio='none'><path d='${d}' fill='black'/></svg>`)}")`;
+  const M = { o: uri(114, 148, roundedPath(shield(114, 148, 12, 18), R)), i: uri(110, 144, roundedPath(shield(110, 144, 11, 17), R.map((x) => Math.max(0, x - 1.2)))) };
+  const split = (n) => { const i = n.indexOf(' '); return i < 0 ? ['', n] : [n.slice(0, i), n.slice(i + 1)]; };
+  function pc(c, w, sel) {
+    const L = D2T.LV[c.level], [f, l] = split(c.name), h = Math.round(w * 1.3);
+    const st = `--w:${w}px;--h:${h}px;--face:${L.face};--rim:${L.rim};--ink-c:${L.ink};--holo:${L.holo};--mo:${M.o};--mi:${M.i}`.replace(/"/g, '&quot;');
+    return `<div class="pc pos-${c.pos}${sel ? ' sel' : ''}" style="${st}"><span class="tab">${c.pos}</span><div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2c-holo"></span></div>
+      <div class="pc-body"><div class="mid"><span class="ovr">${c.ovr}</span><img class="crest" src="${c.crest}" alt=""></div><span class="grow"></span><span class="pc-first">${esc(f)}</span><span class="pc-last">${esc(l)}</span></div></div>`;
+  }
+  const pill = (c, sel) => `<div class="pill pos-${c.pos}${sel ? ' sel' : ''}" style="--lvl:${D2T.LV[c.level].text}"><span class="r">${c.ovr}</span><div class="n"><span>${esc(split(c.name)[0])}</span><b>${esc(split(c.name)[1])}</b></div><span class="p">${c.pos}</span></div>`;
+  const chip = (c) => `<div class="chip pos-${c.pos}" style="--lvl-face:${D2T.LV[c.level].face};--lvl-ink:${D2T.LV[c.level].ink}"><i>${c.ovr}</i><b>${esc(split(c.name)[1])}</b><span>${c.pos}</span></div>`;
+
+  const ACCT = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.6-3.6 4.6-5.2 8-5.2s6.4 1.6 8 5.2"/></svg>';
+  const team = Math.round([...XI_IDS].reduce((t, c) => t + c.ovr, 0) / 11);
+  const opp = D.clubs['Blackburn'];
+  const top = `<div class="tb">${D2T.logo('short', { cls: 'lg', style: 'height:22px' })}<span class="acct">${ACCT}</span></div>`;
+  const hdr = (extra = '') => `<div class="hdr"><img src="${run.club.crest}" alt=""><div class="nm"><b>Wolves</b><span>2011/12 · Pre-season</span></div>${extra}<div class="rate"><b>${team}</b><span>TEAM<br>RATING</span></div></div>`;
+  const bar = `<div class="bar"><div class="fx"><img src="${opp.crest}" alt=""><div><span>Next · GW1 · Away</span><b>Blackburn</b></div></div><span class="play">Pre-season</span></div>`;
+  const flatPitch = (h, w) => `<div class="pitch" style="height:${h}px"><span class="ln"></span><span class="form">Formation <b>4-2-3-1</b></span>
+    ${XI.map(([c, x, d]) => `<div class="slot" style="left:${x}%;top:${13 + d * 76}%">${pc(c, w)}</div>`).join('')}</div>`;
+
+  // B: perspective pitch. Depth squeezes rows towards the back and shrinks cards a little, like EA's tilted pitch.
+  function perspPitch() {
+    const H = 410, W = 390, topY = 62, botY = 360;
+    const rowY = (d) => topY + (botY - topY) * Math.pow(d, 0.92);
+    const halfW = (y) => 120 + (y - 10) / (H - 10) * 85; // half width of the pitch at height y
+    const turf = `<svg class="turf" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">
+      <defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A2E19"/><stop offset="1" stop-color="#114A29"/></linearGradient></defs>
+      <polygon points="${W / 2 - 120},10 ${W / 2 + 120},10 ${W / 2 + 205},${H} ${W / 2 - 205},${H}" fill="url(#tg)"/>
+      ${[0, 1, 2, 3, 4, 5, 6, 7].map((i) => { const y0 = 10 + i * (H - 10) / 8, y1 = y0 + (H - 10) / 16; return i % 1 === 0 ? `<polygon points="${W / 2 - halfW(y0)},${y0} ${W / 2 + halfW(y0)},${y0} ${W / 2 + halfW(y1)},${y1} ${W / 2 - halfW(y1)},${y1}" fill="rgba(255,255,255,0.025)"/>` : ''; }).join('')}
+      <g fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5">
+        <polygon points="${W / 2 - 112},18 ${W / 2 + 112},18 ${W / 2 + 196},${H - 8} ${W / 2 - 196},${H - 8}"/>
+        <line x1="${W / 2 - halfW(150)}" y1="150" x2="${W / 2 + halfW(150)}" y2="150"/>
+        <ellipse cx="${W / 2}" cy="150" rx="46" ry="20"/>
+        <polygon points="${W / 2 - 50},18 ${W / 2 + 50},18 ${W / 2 + 56},48 ${W / 2 - 56},48"/>
+        <polygon points="${W / 2 - 78},${H - 8} ${W / 2 + 78},${H - 8} ${W / 2 + 70},${H - 58} ${W / 2 - 70},${H - 58}"/>
+      </g></svg>`;
+    const cards = XI.map(([c, x, d]) => { const y = rowY(d), hw = halfW(y), px = W / 2 + (x - 50) / 50 * hw * 0.88, w = Math.round(46 + d * 10);
+      return `<div class="slot" style="left:${px}px;top:${y}px;z-index:${Math.round(d * 10)}">${pc(c, w)}</div>`; }).join('');
+    return `<div class="ppitch">${turf}${cards}<span class="form" style="position:absolute;left:12px;bottom:10px;z-index:20">Formation <b>4-2-3-1</b></span></div>`;
+  }
+
+  const OPTS = [
+    { tag: 'OPTION A', name: 'Compact', note: 'Everything kept, just tighter: one-line header with the rating, formation moved onto the pitch corner, slightly smaller pitch cards, and the subs as a strip of the same pitch cards. Swipe the strip for more.',
+      html: () => `${top}${hdr()}${flatPitch(420, 50)}<div class="lbl"><span>Subs · ${subs.length}</span><span>Tap, then a shirt, or drag</span></div>
+        <div class="subs">${subs.slice(0, 7).map((c) => pc(c, 60, c === SELECTED)).join('')}</div>${bar}` },
+    { tag: 'OPTION B', name: 'Tilted pitch (EA style)', note: 'The pitch tilts away like EA FC, so back rows squeeze together and the whole team fits in less height. Subs become slim rows with rating, name and position, which saves the most space.',
+      html: () => `${top}${hdr()}${perspPitch()}<div class="lbl"><span>Subs · ${subs.length}</span><span>Tap, then a shirt, or drag</span></div>
+        <div class="pills">${subs.slice(0, 5).map((c) => pill(c, c === SELECTED)).join('')}</div>${bar}` },
+    { tag: 'OPTION C', name: 'Bench drawer', note: 'The pitch gets the room and bigger cards. The bench sits in a drawer above the button showing a peek row of chips; pull it up (or tap Bench) for the full cards.',
+      html: () => `${top}${hdr()}${flatPitch(426, 56)}<div class="drawer"><div class="hd"><b><span class="up"></span>BENCH · ${subs.length}</b><span>Pull up for cards</span></div><div class="chips">${subs.slice(0, 5).map(chip).join('')}</div></div>${bar}` },
+    { tag: 'OPTION C, OPEN', name: 'Bench drawer pulled up', note: 'Pulled up: the bench as small cards in a grid, split into Subs and Reserves like EA. Tap one, then a shirt behind, or drag it out onto the pitch. Drag the bar down to close.',
+      html: () => `${top}${hdr()}${flatPitch(426, 56)}<div class="drawer"><div class="hd"><b>BENCH</b></div></div>${bar}<div class="scrim"></div>
+        <div class="sheet-mock"><div class="grab"></div><div class="tabs"><span class="on">Subs · 7</span><span>Reserves · ${subs.length - 7}</span></div>
+        <div class="sheet-grid">${subs.slice(0, 7).map((c) => pc(c, 62, c === SELECTED)).join('')}</div></div>` }
+  ];
+  document.getElementById('phones').innerHTML = OPTS.map((o) => `<section class="opt"><div class="opt-h"><span class="tag">${o.tag}</span><h2>${o.name}</h2><p>${o.note}</p></div>
+    <div class="phone">${o.html()}</div><span class="fold">390 x 700: the visible area in Safari</span></section>`).join('');
+  document.fonts.ready.then(() => document.querySelectorAll('.pc-first, .pc-last').forEach((el) => {
+    const base = parseFloat(getComputedStyle(el).fontSize); let s = 1;
+    while (el.scrollWidth > el.clientWidth + 0.5 && s > 0.5) { s -= 0.03; el.style.fontSize = (base * s) + 'px'; }
+  }));
+})();
+</script>
