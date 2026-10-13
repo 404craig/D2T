@@ -125,10 +125,10 @@
 .ub-bar .ub-ans { min-width: 0; }
 .ub-ans svg { flex-shrink: 0; }
 .ub-bar .ub-reload[disabled] { opacity: .3; }
-/* the elastic arrow from where the finger landed to where it is */
+/* the marker arrow from where the finger landed to where it is: a filled tapered shaft and two stroked barbs */
 .ub-arrow { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 59; pointer-events: none; overflow: visible; filter: drop-shadow(0 0 8px rgba(34,211,238,.6)); }
-.ub-arrow .shaft { fill: none; stroke: #22D3EE; stroke-linecap: round; }
-.ub-arrow .head { fill: #22D3EE; stroke: #22D3EE; stroke-width: 2; stroke-linejoin: round; }
+.ub-arrow .shaft { fill: #22D3EE; stroke: none; }
+.ub-arrow .head { fill: none; stroke: #22D3EE; stroke-linecap: round; stroke-linejoin: round; }
 /* the end sheet's second button */
 .ub-newrun { border: 2px solid #FFFFFF; }
 /* Lower and Higher (Craig, 13 Oct): the word dead centre both ways, the down arrow under LOWER, the up arrow over HIGHER */
