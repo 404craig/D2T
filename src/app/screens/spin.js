@@ -309,7 +309,7 @@
       const later = (fn, ms) => { xTimers.push(setTimeout(fn, ms)); };
       // your club in that season: the Club X badge, green, your name, and who you replace at the foot
       const xCard = (c, w) => D2T.cards.club(Object.assign({}, GAME.club('Club X'), { season: c.season }), { w, footLabel: 'REPLACING', foot: D2T.esc(c.name) });
-      const xSub = () => `${st.xName ? D2T.esc(st.xName) : 'Your club'} takes the bottom club's place in one real season, drafts an XI from scratch and has to win the league.`;
+      const xSub = () => `${st.xName ? D2T.esc(GAME.tidyXName(st.xName)) : 'Your club'} takes the bottom club's place in one real season, drafts an XI from scratch and has to win the league.`;
       api = mount(root, {
         kicker: `New run · ${GAME.modeName()}`, title: x ? 'Spin your season' : 'Pick your club',
         sub: x ? xSub() : dream ? 'Three clubs from any season. You start with no players and draft your XI. Finish higher than they really did, or win the league again if they won it.' : 'Three clubs that went down. Pick one and take it from the drop to the top.',
@@ -338,7 +338,7 @@
 
       // ---------- Club X: name your club ----------
       function askName() {
-        const cur = st.xName || D2T.state.xName || '';
+        const cur = GAME.tidyXName(st.xName || D2T.state.xName || '');
         const sh = D2T.sheet({ title: 'Name your club', body: `<p class="fr-lead">Your club takes the place of the bottom side in a real season. What's it called?</p>
           <form class="x-name" novalidate><input class="x-name-in" type="text" maxlength="18" autocomplete="off" autocapitalize="words" spellcheck="false" enterkeyhint="done" placeholder="e.g. Southside FC" aria-label="Club name" value="${D2T.esc(cur)}">
           <p class="x-name-err" role="alert"></p><button class="btn x-name-go fr-btn-wide" type="submit">That's us</button></form>` });

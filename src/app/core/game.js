@@ -21,7 +21,11 @@
   clubs['Club X'] = { name: 'Club X', full: 'Club X', code: 'CLX', crest: X_BADGE, accent: '#12F06C', ink: '#000000', text: '#12F06C' };
   // Club X (Craig, 12 Oct): you name your club first, and that name takes over from "Club X" everywhere in the run (the
   // badge and green stay). The name lives on the run (state.run.xName); the last one is offered again (state.xName).
-  GAME.xName = () => { const r = D2T.state.run; return (r && r.xName) || 'Club X'; };
+  // Proper capitals (Craig, 13 Oct): each word starts with a capital, small words inside stay small, and anything
+  // already in capitals (FC, AFC) is kept, so "kilsyth athletic" shows as "Kilsyth Athletic".
+  const SMALL = new Set(['of', 'the', 'and', 'de', 'la', 'le', 'in', 'on', 'at']);
+  GAME.tidyXName = (n) => String(n || '').split(' ').map((w, i) => (i > 0 && SMALL.has(w.toLowerCase()) ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1))).join(' ');
+  GAME.xName = () => { const r = D2T.state.run; return (r && r.xName && GAME.tidyXName(r.xName)) || 'Club X'; };
   const xCode = (n) => { const w = n.toUpperCase().replace(/[^A-Z0-9 ]/g, '').split(/\s+/).filter(Boolean); return (w.length >= 3 ? w.map((x) => x[0]).join('') : w.join('')).slice(0, 3) || 'CLX'; };
   const xClub = () => { const n = GAME.xName(); return n === 'Club X' ? clubs['Club X'] : Object.assign({}, clubs['Club X'], { name: n, full: n, code: xCode(n) }); };
   // a name of your own: 2 to 18 letters, numbers, spaces and ' . & -, and never a real club's name
@@ -32,7 +36,7 @@
     if (n.length > 18) return { error: 'Keep it to 18 letters or fewer.' };
     if (!/^[A-Za-z0-9 '.&-]+$/.test(n)) return { error: "Letters, numbers, spaces and ' . & - only." };
     if (realNames.has(n.toLowerCase().replace(/[^a-z0-9]/g, ''))) return { error: "That's a real club. Make up your own." };
-    return { name: n };
+    return { name: GAME.tidyXName(n) };
   };
   GAME.setXName = (raw) => { const r = GAME.checkXName(raw); if (r.name) { D2T.state.run.xName = r.name; D2T.state.xName = r.name; D2T.save(); } return r; };
   const inX = () => { const r = D2T.state.run; return !!(r && r.eng && r.eng.mode === 'clubx'); };   // read straight off the run: GAME.club runs while the adapter is still being set up
