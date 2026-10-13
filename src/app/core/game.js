@@ -477,8 +477,12 @@
   };
 
   // ---------- where the run is: the screen it belongs on, and which screens it may show ----------
+  // Dare2Dream is locked for repair on home (Craig, 13 Oct): one flag. A saved Dare2Dream run is kept, but no screen of
+  // it opens (stepFor null, so the router goes home) until the flag is false again.
+  GAME.dreamLocked = true;
+  GAME.locked = (run) => !!(GAME.dreamLocked && run && run.eng && run.eng.mode === 'dare2dream');
   GAME.stepFor = () => {
-    const run = D2T.state.run; if (!run || !run.eng) return null;
+    const run = D2T.state.run; if (!run || !run.eng || GAME.locked(run)) return null;
     const ph = run.eng.phase;
     if (ph === 'clubroll') return 'spin';
     if (ph === 'setup') return run.tableSeen ? 'squad' : 'table';

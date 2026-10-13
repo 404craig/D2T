@@ -47,6 +47,12 @@
     const lum = (h) => { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }).reduce((t, v, i) => t + v * [0.2126, 0.7152, 0.0722][i], 0); };
     const dark = lum(a) > 0.33, txt = dark ? (lum(c.ink) < 0.08 ? c.ink : '#0A0A0A') : '#FFFFFF';
     const paint = `--face:linear-gradient(100deg, ${mix(a, '#FFFFFF', 0.4)} 0%, ${a} 30%, ${a} 55%, ${mix(a, '#000000', 0.45)} 100%);--rim:linear-gradient(170deg, ${mix(a, '#FFFFFF', 0.7)}, ${mix(a, '#000000', 0.4)});--txt:${txt};--glowc:${a}44;--track:${dark ? 'rgba(0,0,0,0.18)' : 'rgba(255,255,255,0.25)'};--tsh:${dark ? 'none' : '0 2px 8px rgba(0,0,0,0.4)'};--goBg:${dark ? '#0A0A0A' : '#FFFFFF'};--goFg:${dark ? '#FFFFFF' : '#0A0A0A'}`;
+    const locked = D2T.game.locked(run);   // Dare2Dream locked for repair: the save is kept, the card doesn't open
+    if (locked) return `<div class="fr-card-btn fr-cont fr-in fr-locked" style="${paint}" aria-disabled="true" aria-label="${D2T.esc(c.full)} ${data.season}, Dare2Dream is locked for repair">
+      <span class="fr-cont-tex"></span><span class="fr-cont-crest"><img src="${c.crestCard || c.crestLight || c.crest}" alt=""></span>
+      <span class="fr-cont-txt"><span class="fr-cont-lbl">DARE2DREAM · LOCKED FOR REPAIR</span><span class="fr-cont-name" style="display:block">${D2T.esc(c.name)}</span>
+      <span class="fr-cont-meta" style="display:block">${data.season} · ${where} · saved</span></span>
+      <span class="fr-soon-lock" aria-hidden="true">${LOCK}</span></div>`;
     return `<button class="fr-card-btn fr-cont fr-in" style="${paint}" data-act="${act}" aria-label="Continue with ${D2T.esc(c.full)} ${data.season}, ${where}">
       <span class="fr-cont-tex"></span><span class="fr-cont-hi"></span><span class="d2t-shine slow" style="${shineBeat()}"></span><span class="fr-cont-crest"><img src="${c.crestCard || c.crestLight || c.crest}" alt=""></span>
       <span class="fr-cont-txt"><span class="fr-cont-lbl">CONTINUE · ${label}</span><span class="fr-cont-name" style="display:block">${D2T.esc(c.name)}</span>
@@ -57,10 +63,11 @@
 
   // Other games cards (chosen 12 Oct, option A): every card the same shape, its game's colour washing in from the right
   // with a thin rim, the game's mark faded behind on the right. Daily white, Dare2Dream blue, Club X green, Goal Rush yellow, Tenaball purple.
-  const gameCard = ({ c, attrs, tag, big, sub, mark, cls = '', label, href }) => {
+  const gameCard = ({ c, attrs, tag, big, sub, mark, cls = '', label, href, locked }) => {
     const inner = `<span class="fr-gm-mark" aria-hidden="true">${mark}</span>
       <span class="fr-gm-txt"><span class="fr-tag">${tag}</span><span class="fr-big">${big}</span><span class="fr-sub">${sub}</span></span>
-      <span class="fr-go">${ARROW}</span>`;
+      ${locked ? `<span class="fr-soon-lock" aria-hidden="true">${LOCK}</span>` : `<span class="fr-go">${ARROW}</span>`}`;
+    if (locked) return `<div class="fr-card-btn fr-gm fr-locked ${cls}" style="--c:${c}" aria-disabled="true" aria-label="${label}, locked for repair">${inner}</div>`;
     return href ? `<a class="fr-card-btn fr-gm ${cls}" style="--c:${c}" href="${href}" target="_blank" rel="noopener" aria-label="${label}">${inner}</a>`
       : `<button class="fr-card-btn fr-gm ${cls}" style="--c:${c}" ${attrs} aria-label="${label}">${inner}</button>`;
   };
@@ -156,7 +163,7 @@
         ${gameCard({ c: '#12F06C', attrs: 'data-act="pick" data-mode="clubx"', label: 'Club X', tag: 'CLUB X', big: 'From nowhere to champions', sub: 'Career mode. Replace the worst side, win the league, go again.', mark: `<img src="${D2T.game.club('Club X').crest}" alt="">` })}
         ${g433Card()}
         ${ubCard()}
-        ${gameCard({ c: '#3BA4FF', attrs: 'data-act="pick" data-mode="dare2dream"', label: 'Dare2Dream', tag: 'DARE2DREAM', big: 'Rewrite their season', sub: `Any club from any season. Draft 11 and beat their real finish.${dreams.runs ? ` ${dreams.dreams} of ${dreams.runs} dreams so far.` : ''}`, mark: D2T.logo('emblemLine') })}
+        ${gameCard({ c: '#3BA4FF', attrs: 'data-act="pick" data-mode="dare2dream"', label: 'Dare2Dream', locked: D2T.game.dreamLocked, tag: D2T.game.dreamLocked ? 'DARE2DREAM<span class="fr-tag-off"> · LOCKED FOR REPAIR</span>' : 'DARE2DREAM', big: 'Rewrite their season', sub: `Any club from any season. Draft 11 and beat their real finish.${dreams.runs ? ` ${dreams.dreams} of ${dreams.runs} dreams so far.` : ''}`, mark: D2T.logo('emblemLine') })}
         ${gameCard({ c: '#A66BFF', href: 'https://404craig.github.io/Tenaball/', label: 'Tenaball, opens in a new tab', tag: 'TENABALL', big: 'Name the top ten', sub: 'Our football quiz. Opens Tenaball.', mark: `<img src="${window.D2T_TENABALL_LOGO || ''}" alt="">` })}
           <div class="fr-sect-h fr-soon-h"><span>Coming soon</span></div>
           <div class="fr-soon">${MODES.map((m) => `<button class="fr-soon-t" aria-label="${m.name}, coming soon">
