@@ -58,7 +58,7 @@
     const flag = c.flag ? `<img class="d2c-flag" src="${c.flag}" alt="${esc(c.nat || '')}">` : '';
     if (opts.mini) { // pitch card: position tab, big rating beside the crest, full name
       return `<div class="d2c d2c-player mini pos-${c.role || c.pos} ${opts.cls || ''}" style="${style}" data-level="${c.level}" aria-label="${esc(c.name)}, ${c.ovr} ${L.name}, ${c.main || c.pos}${c.nat ? ', ' + esc(c.nat) : ''}">
-      <span class="d2c-tab">${c.main || c.pos}</span><div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2c-holo"></span>${shine}
+      <span class="d2c-tab">${opts.tab || c.main || c.pos}</span><div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2c-holo"></span>${shine}
       <div class="d2c-body"><div class="d2c-mid"><span class="d2c-ovr">${c.ovr}</span>${flag ? `<span class="d2c-side"><img class="d2c-crest" src="${pcrest}" alt="">${flag}</span>` : `<img class="d2c-crest" src="${pcrest}" alt="">`}</div>
       <span class="d2c-first d2c-fit">${esc(first)}</span><span class="d2c-last">${esc(last)}</span></div></div></div>`;
     }
