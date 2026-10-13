@@ -560,9 +560,14 @@
   // The same club and seed for everyone each day (UK date). The clubs come round in a fixed cycle through every
   // relegated club-season, the same list Classic spins from (Craig, 13 Oct): Daily #1 is the first in the cycle, each day
   // the next, and after the last it starts again from the top. It is a Classic run (Craig, 13 Oct): their real squad and
-  // XI, Classic's rolls and 5 respins; the rolls and respins come from the day's seed, so the same choices see the same
-  // cards. As many goes as you like (Craig, 13 Oct), the best of the day counts; it has its own save, so another run is never lost.
+  // XI, Classic's rolls and 5 respins. As many goes as you like (Craig, 13 Oct), the best of the day counts; it has its
+  // own save, so another run is never lost. Each go has a seed of its own (Craig, 13 Oct: the same players and results
+  // every go was no fun): go 1 is `daily-YYYY-MM-DD`, go 2 `daily-YYYY-MM-DD#2` and so on (`dailySeed`), so everyone's
+  // first go is the same challenge, everyone's second go the same second challenge, and a go never replays the one
+  // before. The go count is state.dailyGoes[date] (only today's is kept) and the go sits on the run (run.go), so a
+  // refresh in the middle of a go keeps its seed.
   const DAILY_START = '2026-10-11';
+  GAME.dailySeed = (date, go) => 'daily-' + date + (go > 1 ? '#' + go : '');
   GAME.today = () => {
     try { return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); }
     catch (e) { return new Date().toISOString().slice(0, 10); }
@@ -606,8 +611,10 @@
     if (st.run && st.run.daily === date) { if (!over(st.run)) return true; st.run = null; }
     if (st.dailyRun && st.dailyRun.daily === date) { if (!over(st.dailyRun)) { swapIn(st.dailyRun); D2T.save(); return true; } st.dailyRun = null; }
     const d = GAME.dailyEntry(date);
-    const eng = E.newRun({ seed: 'daily-' + date, mode: d.mode, catalogue: [{ key: d.key }], fixedClub: d.key });
-    swapIn({ step: 'table', eng, spun: true, daily: date });
+    const go = ((st.dailyGoes || {})[date] || 0) + 1;
+    st.dailyGoes = { [date]: go };                                   // a fresh seed for every go, only today's count kept
+    const eng = E.newRun({ seed: GAME.dailySeed(date, go), mode: d.mode, catalogue: [{ key: d.key }], fixedClub: d.key });
+    swapIn({ step: 'table', eng, spun: true, daily: date, go });
     GAME.chooseClub(d.key);
     D2T.save();
     return true;
