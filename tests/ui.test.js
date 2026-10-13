@@ -47,7 +47,10 @@ fs.mkdirSync(OUT, { recursive: true });
     }
     await touch("touchEnd", cur.x, cur.y);
   };
-  const spunNow = () => { const e = window.D2T.game.eng(); return e.roll && window.D2T.state.run.spun === `${e.roll.key}.${e.roll.spin}`; };
+  // a roll has settled: a purple or legend card's reveal (screens/reveal.js) counts the roll as spun as it starts, so also
+  // wait for the reels to stop (is-rolling); a reveal takes about 16 s, two in one roll about 33 s
+  const spunNow = () => { const e = window.D2T.game.eng(); return e.roll && window.D2T.state.run.spun === `${e.roll.key}.${e.roll.spin}` && !document.querySelector(".sp-screen.is-rolling"); };
+  const ROLL_MS = 45000;
   const smallButtons = async (where) => {
     const small = await page.$$eval("button", (bs) => bs.filter((b) => b.offsetParent && getComputedStyle(b).visibility !== "hidden" && b.getBoundingClientRect().height < 40 && b.getBoundingClientRect().width < 40).map((b) => (b.getAttribute("aria-label") || b.textContent).trim().slice(0, 30)));
     if (small.length) errors.push(`tap targets under 40px on ${where}: ${small.join(", ")}`);
@@ -102,8 +105,16 @@ fs.mkdirSync(OUT, { recursive: true });
     await page.waitForSelector(".sp-main:not([disabled])", { timeout: 6000 });
     await wait(300);
     const before = await page.evaluate(() => window.D2T.game.eng().signed.length);
+    // the last roll carries a legend in the middle (the roll's own cards, swapped in the engine state for the test):
+    // his reel never lands on its own, the reveal plays over the screen, then he drops into his slot (Craig, 13 Oct)
+    if (r === 2) await page.evaluate(() => { const G = window.D2T.game, e = G.eng(), used = new Set([...e.seen, ...e.roll.cards, ...e.xi]); e.roll.cards[1] = G.legends.find((l) => !used.has(l.id)).id; });
     await page.click(".sp-main");
-    await page.waitForFunction(spunNow, null, { timeout: 8000 });
+    if (r === 2) {
+      check(!!(await page.waitForSelector(".rr-ov", { timeout: 6000 }).catch(() => null)), "no rare reveal for a legend in the roll");
+      await wait(9000); await shot("10d-rare-reveal");
+    }
+    await page.waitForFunction(spunNow, null, { timeout: ROLL_MS });
+    if (r === 2) check(await page.evaluate(() => !document.querySelector(".rr-ov") && document.querySelectorAll(".sp-slot")[1].querySelector(".sp-node.is-hit .d2c").dataset.level === "legend"), "the legend did not land in his slot after the reveal");
     if (r === 1) {
       // a finger on a card the instant the last reel lands, before the tray has dropped, must still pick him up
       // and drag him onto a shirt once the pitch is up (Craig, 12 Oct: "at times dragging doesn't select the player")
@@ -258,10 +269,10 @@ fs.mkdirSync(OUT, { recursive: true });
     await page.click(".sp-main");
     if (k === 1) {
       // the draft too: a finger on a card as the roll settles, dragged onto the lit shirt once the pitch is up
-      await page.waitForFunction(spunNow, null, { timeout: 9000 });
+      await page.waitForFunction(spunNow, null, { timeout: ROLL_MS });
       await touchDrag(await centre(".sp-slot >> nth=1"), ".tr-field .se-slot.se-best .se-cardwrap", { steps: 30, stepMs: 40 });
     }
-    else { await page.waitForSelector(".sp-screen.is-placing", { timeout: 9000 }); await wait(600); }
+    else { await page.waitForSelector(".sp-screen.is-placing", { timeout: ROLL_MS }); await wait(600); }
     if (k === 0) { await shot("31b-d2d-draft"); await page.click(".sp-slot >> nth=0"); await wait(300); await page.click(".sp-main"); }
     await wait(1200);
     check(await page.evaluate((n) => window.D2T.game.eng().xi.filter((x) => x != null).length === n, k + 1), `draft pick ${k + 1} did not land`);

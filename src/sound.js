@@ -54,7 +54,41 @@ function decodeAll() {
 function unlock() {
   if (!init()) return;
   if (ctx.state !== "running") ctx.resume().catch(() => {});
-  decodeAll();
+  decodeAll(); decodeReveal();
+}
+// The rare card reveal's clips (Craig, 13 Oct; design/prototype/rare-reveal-v3.html): files in audio/reveal, never in
+// the page, fetched once home is up (core/boot.js) so they never slow the start. Until they are in, the reveal is silent.
+// The glass smash is Craig's one exception to the no glass rule, for the rare reveal only.
+const REVEAL = ["glass_smash", "crowd_long", "fireworks_long", "swoosh_up", "thud_low", "tick_wood", "tick_mech"];
+let revealAsked = false; const revealRaw = {};
+function loadReveal(base = "audio/reveal/") {
+  // a copy opened from disk (file://) cannot fetch: the reveal plays silently there
+  if (revealAsked || typeof fetch !== "function" || (root.location && root.location.protocol === "file:")) return; revealAsked = true;
+  REVEAL.forEach(k => fetch(base + k + ".mp3").then(r => (r.ok ? r.arrayBuffer() : null)).then(b => { if (b) { revealRaw[k] = b; decodeReveal(); } }).catch(() => {}));
+}
+function decodeReveal() {
+  if (!ctx) return;
+  Object.keys(revealRaw).forEach(k => {
+    const b = revealRaw[k]; delete revealRaw[k];
+    try {
+      const p = ctx.decodeAudioData(b, buf => { buffers["rv_" + k] = buf; }, () => {});
+      if (p && p.then) p.then(buf => { buffers["rv_" + k] = buf; }, () => {});
+    } catch (e) { /* that clip stays silent */ }
+  });
+}
+// one reveal clip: o.gain, o.rate, o.lp (a low-pass in Hz), o.fadeIn, and o.raw, which skips the top cut and goes
+// straight to the master (the glass, crowd and fireworks); the master volume and mute still apply. Returns { stop(fade) }.
+function reveal(id, o = {}) {
+  if (!ok()) return null;
+  const buf = buffers["rv_" + id]; if (!buf) return null;
+  try {
+    const t = ctx.currentTime + 0.01, src = ctx.createBufferSource(), g = ctx.createGain(), gain = o.gain == null ? 1 : o.gain;
+    src.buffer = buf; src.playbackRate.value = o.rate || 1;
+    if (o.fadeIn) { g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(gain, t + o.fadeIn); } else g.gain.value = gain;
+    if (o.lp) { const f = ctx.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = o.lp; src.connect(f); f.connect(g); } else src.connect(g);
+    g.connect(o.raw ? master : fx); src.start(t);
+    return { stop(fade = 0.6) { try { const n = ctx.currentTime; g.gain.cancelScheduledValues(n); g.gain.setValueAtTime(g.gain.value, n); g.gain.linearRampToValueAtTime(0.0001, n + fade); src.stop(n + fade + 0.05); } catch (e) {} } };
+  } catch (e) { return null; }
 }
 root.addEventListener("pointerdown", unlock, { capture: true, passive: true });
 root.addEventListener("keydown", unlock, { capture: true });
@@ -221,5 +255,5 @@ function setMuted(m) {
   if (ctx) master.gain.setTargetAtTime(muted ? 0 : MIX.master, ctx.currentTime, 0.03);
   if (muted) crowd(false);
 }
-root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlock, clipsLoaded: decodeAll };
+root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlock, clipsLoaded: decodeAll, loadReveal, reveal };
 })(typeof window !== "undefined" ? window : globalThis);

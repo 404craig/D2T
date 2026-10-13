@@ -315,6 +315,9 @@
           render: (p, w) => D2T.cards.player(p, { w }),
           pick: () => { SND.play('roll3'); return GAME.rollCards(); },
           settled: st.spun === rollKey ? GAME.rollCards() : null,
+          // a purple or legend card gets the rare reveal (screens/reveal.js); the roll counts as spun as it starts
+          rare: (p) => D2T.rareReveal.isRare(p),
+          onCommit: () => { st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); },
           onSettled: () => { leaving = false; st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); timers.push(setTimeout(() => enterPlacing(true), reduced ? 0 : 450)); },
           accent: LV_ACCENT,
           landSound: (i, p) => SND.play('rarity', LV_IDX(p)),

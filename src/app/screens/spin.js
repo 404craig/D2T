@@ -60,14 +60,14 @@
     }
     // show one card html, still
     show(html, cap) { this.seq = [html]; this.draw(0, 0); this.cap.textContent = cap || ''; }
-    // sequence of html strings; target index is where it lands
+    // sequence of html strings; target index is where it lands (or this.gen(index) -> html, for a reel with no set end)
     load(seq) { this.seq = seq; this.nodes.forEach((n) => { n.dataset.vi = ''; n.classList.remove('is-hit', 'is-gone'); }); this.draw(0, 0); }
     draw(p, v) {
       this.p = p;
       const c = Math.round(p);
       for (let k = -2; k <= 2; k++) {
         const vi = c + k, node = this.nodes[((vi % NODES) + NODES) % NODES];
-        if (node.dataset.vi !== String(vi)) { node.dataset.vi = String(vi); node.innerHTML = this.seq[vi] || ''; }
+        if (node.dataset.vi !== String(vi)) { node.dataset.vi = String(vi); node.innerHTML = (this.gen ? this.gen(vi) : this.seq[vi]) || ''; }
         node.style.transform = `translate3d(0, ${((vi - p) * PITCH).toFixed(2)}px, 0)`;
       }
       // speed-dependent vertical blur, stretch and streak
@@ -99,7 +99,9 @@
   // ---------- the roll screen ----------
   // cfg: { kicker, title, sub, hint, pool: items, render(item) -> html, pick() -> [3 items], accent(item) -> {accent, ink},
   //        caption(item), details(item) -> html, mainLabel, selectedLabel(item), onConfirm(item), respins (number or null),
-  //        onRespinsChange(n), pass: {label, onPass}, placeholder() -> html }
+  //        onRespinsChange(n), pass: {label, onPass}, placeholder() -> html,
+  //        rare(item) -> true for a card that gets the rare reveal (screens/reveal.js; the player rolls only),
+  //        onCommit(items): a reveal is coming, so the roll counts as spun now (a refresh mid-reveal shows it settled) }
   function mount(root, cfg) {
     const reduced = D2T.reduced(), SND = window.D2TSound || { play() {}, tick() {}, tease() {} };
     const el = D2T.h(`<div class="sp-screen">
@@ -117,7 +119,7 @@
     const count = reload.querySelector('.sp-count'), hintEl = el.querySelector('.sp-hint');
     el.querySelector('.sp-round.is-home').onclick = () => (D2T.runMenu ? D2T.runMenu() : D2T.go('home'));   // the run menu (core/season.js)
 
-    let state = 'idle', results = null, selected = -1, respins = cfg.respins == null ? null : cfg.respins, raf = 0, timers = [], tick = 0, open = null;
+    let state = 'idle', results = null, selected = -1, respins = cfg.respins == null ? null : cfg.respins, raf = 0, timers = [], tick = 0, open = null, rr = null;
     const hint = (t) => { hintEl.textContent = t || ''; };
     const setMain = (text, item) => {
       lbl.textContent = text; main.classList.remove('is-swap'); void main.offsetWidth; main.classList.add('is-swap');
@@ -195,15 +197,19 @@
       state = 'spinning';
       main.disabled = true; main.classList.add('is-spinning'); setMain(cfg.spinningLabel || 'Spinning', null);
       setRespins(); hint('');
-      const firsts = reels.map((r) => r.seq[r.seq.length > 1 ? r.seq.length - 4 : 0] || '');
-      reels.forEach((r) => r.reset());
+      const firsts = reels.map((r) => r.landedHtml || r.seq[r.seq.length > 1 ? r.seq.length - 4 : 0] || '');
+      reels.forEach((r) => { r.reset(); r.gen = null; r.landedHtml = null; });
+      el.classList.add('is-rolling');
       // left lands first, middle shortly after, right last with a longer crawl at the end (a single reel takes that one)
-      const profs = reels.length === 1 ? [profile({ delay: 0, cruiseT: 1.6, decelT: 1.6, n: 3.0, v1: 2.0 })] : [
-        profile({ delay: 0, cruiseT: 1.0, decelT: 1.1, n: 2.2 }),
-        profile({ delay: 0.07, cruiseT: 1.35, decelT: 1.2, n: 2.4 }),
-        profile({ delay: 0.14, cruiseT: 1.75, decelT: 1.5, n: 3.0, v1: 2.0 })
-      ];
+      const opts = reels.length === 1 ? [{ delay: 0, cruiseT: 1.6, decelT: 1.6, n: 3.0, v1: 2.0 }] : [
+        { delay: 0, cruiseT: 1.0, decelT: 1.1, n: 2.2 },
+        { delay: 0.07, cruiseT: 1.35, decelT: 1.2, n: 2.4 },
+        { delay: 0.14, cruiseT: 1.75, decelT: 1.5, n: 3.0, v1: 2.0 }
+      ], profs = opts.map(profile);
       reels.forEach((r, i) => r.load(sequence(firsts[i], results[i], profs[i])));
+      // a purple or legend card gets its reveal (not with reduced motion): its reel never lands on its own
+      const rare = !reduced && cfg.rare && D2T.rareReveal ? results.map((x) => !!cfg.rare(x)) : [];
+      if (rare.some(Boolean)) { cfg.onCommit && cfg.onCommit(results); spinRare(opts, profs, firsts, rare); return; }
       if (reduced) {
         reels.forEach((r, i) => { r.draw(profs[i].target, 0); r.hit(cfg.accent(results[i]).accent); r.settle(profs[i].target, cfg.caption && cfg.caption(results[i])); });
         done(); return;
@@ -228,7 +234,92 @@
       };
       raf = requestAnimationFrame(step);
     };
+    // ---------- a roll with a rare card (Craig, 13 Oct; design/prototype/rare-reveal-v3.html) ----------
+    // Reels before the first rare one land as usual. From the rare one on they cruise with no set end (reel.gen draws
+    // their cards). When a rare reel's turn comes (straight away in slot 1, or as the reel before it lands) it slows to
+    // about 5 cards a second over 1.1 s and its reveal plays over the screen while the later reels keep cruising; the card
+    // drops into its slot at the end of the reveal, then the reels after it land in turn.
+    function spinRare(opts, profs, firsts, rare) {
+      const n = reels.length, first = rare.indexOf(true), t0 = performance.now();
+      const S = reels.map((r, i) => ({ mode: i < first ? 'prof' : 'run', P: profs[i], p: 0, v: 0, still: false }));
+      for (let i = first; i < n; i++) {
+        const s = S[i], item = results[i], same = (x) => x.name === item.name && x.season === item.season, bag = shuffle(cfg.pool.filter((x) => !same(x)));
+        s.Pc = profile(Object.assign({}, opts[i], { cruiseT: 600 }));    // the same start, then a cruise that never ends
+        s.T = null; s.html = cfg.render(item, 114);
+        reels[i].gen = (vi) => (vi === 0 ? firsts[i] : vi === s.T ? s.html : bag.length ? cfg.render(bag[((vi % bag.length) + bag.length) % bag.length], 114) : '');
+        reels[i].load([]);
+      }
+      const landed = reels.map(() => false), lastK = reels.map(() => 0);
+      let settledCalled = false;
+      const land = (i) => {
+        landed[i] = true; const r = reels[i];
+        r.hit(cfg.accent(results[i]).accent); r.settle(S[i].T == null ? S[i].P.target : S[i].T, cfg.caption && cfg.caption(results[i]));
+        if (S[i].html) r.landedHtml = S[i].html;
+      };
+      // the non-rare reels from j on (up to the next rare one) land in turn, each a little after the one before
+      const landRun = (j, t, prevLand) => {
+        for (; j < n && !rare[j]; j++) {
+          const s = S[j], P = s.P, q = sample(s.Pc, t);
+          const tsd0 = Math.max(t, prevLand + 0.3 - P.decelT), pd = q.p + P.vmax * (tsd0 - t);
+          s.T = Math.ceil(pd + P.decelD); s.tr = t; s.pr = q.p;
+          s.tsd = t + (s.T - P.decelD - q.p) / P.vmax; s.landT = s.tsd + P.decelT; s.mode = 'land';
+          prevLand = s.landT;
+        }
+      };
+      // after the reel before it: a rare reel slows, a run of others lands
+      const next = (j, t) => { if (j >= n || S[j].mode !== 'run') return; if (rare[j]) slowDown(j, t); else landRun(j, t, t); };
+      const slowDown = (i, t) => { const s = S[i], q = sample(s.Pc, t); s.mode = 'slow'; s.tr = t; s.pr = q.p; s.vFrom = q.v || s.P.vmax; s.dur = 1.1; s.vTo = 5; s.shown = false; };
+      const reveal = (i) => {
+        rr = D2T.rareReveal.play({ host: document.getElementById('app') || root, slot: reels[i].slot, card: results[i], land: () => {
+          const s = S[i], r = reels[i];
+          s.mode = 'held'; s.T = Math.round(s.p); s.still = true;
+          r.nodes.forEach((nd) => { nd.dataset.vi = ''; nd.classList.remove('is-hit', 'is-gone'); }); r.draw(s.T, 0);
+          land(i);
+        } });
+        rr.done.then(() => { rr = null; timers.push(setTimeout(() => { if (raf) next(i + 1, (performance.now() - t0) / 1000); }, 350)); });
+      };
+      const step = (now) => {
+        const t = (now - t0) / 1000;
+        reels.forEach((r, i) => {
+          const s = S[i];
+          if (s.mode === 'held') return;
+          let p, v;
+          if (s.mode === 'prof') {
+            const q = sample(s.P, t); p = q.p; v = q.v; if (q.phase === 'done') s.still = true;
+            if (!landed[i] && t >= s.P.landAt) { land(i); if (cfg.landSound) cfg.landSound(i, results[i]); else SND.play('reelLand', i); next(i + 1, t); }
+          } else if (s.mode === 'run') {
+            const q = sample(s.Pc, t); p = q.p; v = q.v;
+            if (i === 0 && rare[0] && t >= s.P.landAt - s.P.decelT) slowDown(0, t);
+          } else if (s.mode === 'slow') {
+            const tau = t - s.tr, u = Math.min(1, tau / s.dur), dv = s.vTo - s.vFrom;
+            p = s.pr + s.vFrom * Math.min(tau, s.dur) + dv * s.dur * (u - (1 - Math.pow(1 - u, 3)) / 3) + (tau > s.dur ? s.vTo * (tau - s.dur) : 0);
+            v = s.vFrom + dv * (1 - Math.pow(1 - u, 2));
+            if (u >= 1 && !s.shown) { s.shown = true; reveal(i); }
+          } else if (s.mode === 'land') {
+            const P = s.P;
+            if (t < s.tsd) { p = s.pr + P.vmax * (t - s.tr); v = P.vmax; }
+            else if (t < s.landT) {
+              const u = (t - s.tsd) / P.decelT;
+              p = s.T - P.decelD + P.decelT * (P.v1 * u + (P.vmax - P.v1) * (1 - Math.pow(1 - u, P.n + 1)) / (P.n + 1));
+              v = P.v1 + (P.vmax - P.v1) * Math.pow(1 - u, P.n);
+            } else {
+              const tt = t - s.landT, e = Math.exp(-P.z * tt);
+              p = s.T + (P.v1 / P.wd) * e * Math.sin(P.wd * tt); v = 0;
+              if (!landed[i]) { land(i); if (cfg.landSound) cfg.landSound(i, results[i]); else SND.play('reelLand', i); next(i + 1, t); }
+              if (tt >= P.settleT) { p = s.T; s.still = true; }
+            }
+          }
+          s.p = p; s.v = v;
+          r.draw(p, v);
+          const k = Math.floor(p); if (k > lastK[i] && !landed[i] && !rr) SND.tick(i, v); lastK[i] = k;   // quiet under a reveal
+        });
+        if (!settledCalled && landed.every(Boolean)) { settledCalled = true; done(); }
+        if (!(landed.every(Boolean) && S.every((s) => s.still))) raf = requestAnimationFrame(step); else raf = 0;
+      };
+      raf = requestAnimationFrame(step);
+    }
     const done = () => {
+      el.classList.remove('is-rolling');
       state = 'settled';
       main.classList.remove('is-spinning'); main.disabled = true; setMain(cfg.pickLabel || 'Pick one', null);
       setRespins(); hint(cfg.hintSettled || 'Tap a card to pick it');
@@ -292,7 +383,7 @@
     return {
       el, reels, slots, spin, select, openCard, hint, setLabel: (t) => setMain(t, null),
       results: () => results, selected: () => selected, settled: () => state === 'settled', clear: clearSelection,
-      unmount() { cancelAnimationFrame(raf); stopTick(); timers.forEach(clearTimeout); if (open) { try { open.el.remove(); } catch (e) { /* gone */ } } }
+      unmount() { cancelAnimationFrame(raf); raf = 0; if (rr) { rr.kill(); rr = null; } stopTick(); timers.forEach(clearTimeout); if (open) { try { open.el.remove(); } catch (e) { /* gone */ } } }
     };
   }
 
