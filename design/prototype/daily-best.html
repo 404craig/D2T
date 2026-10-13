@@ -38,52 +38,44 @@
   .up { color: var(--up); }
   .arrow { display: inline-block; width: .7em; height: .7em; vertical-align: -.02em; }
 
-  /* 1: a league ladder on the card: their real finish, your best, today */
-  .lad { margin-top: 12px; }
-  .lad .bar { position: relative; height: 26px; }
-  .lad .track { position: absolute; left: 0; right: 0; top: 11px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, rgba(18,240,108,.55), rgba(255,255,255,.18) 55%, rgba(255,77,90,.55)); }
-  .lad .drop { position: absolute; right: 0; top: 8px; height: 10px; width: 15%; border-radius: 3px; background: rgba(255,77,90,.25); }
-  .lad .pin { position: absolute; top: 0; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; }
-  .lad .pin span { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 900 italic 10px/1 'Exo 2'; }
-  .lad .pin.real span { background: #2A2A30; color: #C4C4CC; box-shadow: 0 0 0 1.5px #55555E; }
-  .lad .pin.best span { background: var(--g); color: #04140A; box-shadow: 0 0 10px rgba(18,240,108,.6); }
-  .lad .pin.today span { background: #fff; color: #0A0A0A; }
-  .lad .ends { display: flex; justify-content: space-between; font-size: 9.5px; font-weight: 800; letter-spacing: .1em; color: var(--muted); margin-top: 4px; }
-  .lad .key { display: flex; gap: 10px; flex-wrap: wrap; font-size: 11px; font-weight: 700; color: var(--soft); margin-top: 7px; }
-  .lad .key i { font-style: normal; display: inline-flex; align-items: center; gap: 5px; }
-  .lad .key i::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--k); }
+  /* the next card down (Dare2Dream), to show the gap */
+  .card.next { --c: #3BA4FF; margin-top: 12px; }
+  .card.next .mk { position: absolute; right: -10px; top: 50%; transform: translateY(-50%) rotate(-8deg); width: 120px; height: 120px; opacity: .3; z-index: -1; background: #3BA4FF; -webkit-mask: url('assets/logo/emblem_line.png') center / contain no-repeat; mask: url('assets/logo/emblem_line.png') center / contain no-repeat; }
+  .under { margin-top: 8px; }
 
-  /* 2: your last seven Dailies, best one crowned */
-  .week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 12px; }
-  .day { position: relative; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 0 5px; border-radius: 10px; background: rgba(255,255,255,.05); box-shadow: inset 0 0 0 1px rgba(255,255,255,.10); }
-  .day img { width: 18px; height: 18px; object-fit: contain; }
-  .day b { font: 900 italic 13px/1 'Exo 2'; }
-  .day b.dn { color: #FF4D5A; }
-  .day i { font-style: normal; font-size: 8.5px; font-weight: 800; letter-spacing: .06em; color: var(--muted); }
-  .day.best { background: rgba(18,240,108,.12); box-shadow: inset 0 0 0 1.5px var(--g); }
-  .day.best::before { content: ''; position: absolute; top: -7px; width: 14px; height: 9px; background: #FFD21F; clip-path: polygon(0 100%, 0 20%, 25% 60%, 50% 0, 75% 60%, 100% 20%, 100% 100%); }
-  .day.miss b { color: #3A3A44; }
-  .day.now { background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1.5px #fff; }
-  .day.now.empty b { color: #fff; }
-  .weekline { font-size: 11.5px; font-weight: 700; color: var(--soft); margin-top: 7px; }
+  /* 1: three small tiles in a row under the card */
+  .tiles3 { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 6px; }
+  .tl { border-radius: 12px; background: #0E0E10; border: 1px solid #26262C; padding: 7px 10px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .tl i { font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
+  .tl b { font: 900 italic 17px/1 'Exo 2'; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+  .tl b img { width: 18px; height: 18px; object-fit: contain; }
+  .tl small { font-size: 10px; font-weight: 700; color: var(--soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-  /* 3: the finish you need to beat your best */
-  .target { display: flex; align-items: stretch; margin-top: 12px; border-radius: 14px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); max-width: 290px; }
-  .target .need { background: #fff; color: #0A0A0A; padding: 7px 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 78px; }
-  .target .need i { font-style: normal; font-size: 8.5px; font-weight: 900; letter-spacing: .12em; }
-  .target .need b { font: 900 italic 24px/1 'Exo 2'; }
-  .target .why { padding: 7px 12px; display: flex; flex-direction: column; justify-content: center; gap: 3px; background: rgba(0,0,0,.35); }
-  .target .why small { font-size: 9.5px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
-  .target .why span { font-size: 12px; font-weight: 700; color: var(--soft); line-height: 1.3; display: flex; align-items: center; gap: 6px; }
-  .target .why img { width: 18px; height: 18px; object-fit: contain; }
-  .target.beat .need { background: var(--g); }
+  /* 2: one slim line under the card, like a caption */
+  .line { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 12px; background: #0E0E10; border: 1px solid #26262C; font-size: 12px; font-weight: 700; color: var(--soft); white-space: nowrap; overflow: hidden; }
+  .line img { width: 20px; height: 20px; object-fit: contain; flex: none; }
+  .line i { font-style: normal; font-size: 9.5px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
+  .line b { font: 900 italic 15px/1 'Exo 2'; color: #fff; }
+  .line .sep { width: 1px; height: 16px; background: #2A2A30; flex: none; }
+  .line .gap { flex: 1; }
+
+  /* 3: today and your best as two halves under the card */
+  .halves { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .half { border-radius: 12px; background: #0E0E10; border: 1px solid #26262C; padding: 7px 10px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 8px; }
+  .half img { width: 22px; height: 22px; object-fit: contain; }
+  .half div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .half i { font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
+  .half small { font-size: 10.5px; font-weight: 700; color: var(--soft); white-space: nowrap; }
+  .half b { font: 900 italic 19px/1 'Exo 2'; }
+  .half.best { border-color: rgba(18,240,108,.45); }
+  .half.wait b { color: #4A4A54; }
 </style>
 </head>
 <body>
 <div class="page">
   <div class="head">
-    <h1>Your best Daily, on home: my three</h1>
-    <p>Today the Daily card ends its line with "Your best Daily: rise +6.", which is easy to miss and says nothing about the club or the finish. My three suggestions, each before today's go and after it. Your best is the biggest rise (then the higher finish), as now. Today's club and its real finish are real (Watford finished 20th in 1999/00); your results here are made up to show the layout.</p>
+    <h1>Your best Daily, under the card</h1>
+    <p>The Daily card stays exactly the size and shape of the other game cards, with only its question on it (no record in the line). Your best goes in a small row just under it, before the next card. Three ways to set that row out, each before and after today's go. Today's club and both real finishes are checked (Watford 20th in 1999/00, Sunderland 20th in 2005/06); your results are made up to show the layout.</p>
   </div>
   <div class="row" id="opts"></div>
 </div>
@@ -101,33 +93,22 @@
     <span class="sub">${sub}</span>${extra}<span class="go">${GO}</span></div>`;
   const ASK = 'They went down for real. Can you keep them up?';
 
-  // 1: ladder. Positions 1 to 20 run left to right; the drop zone is the bottom three
-  const at = (pos) => ((pos - 1) / 19 * 100).toFixed(1) + '%';
-  const ladder = (today) => `<div class="lad"><div class="bar"><span class="track"></span><span class="drop"></span>
-      <span class="pin best" style="left:${at(BEST.finish)}"><span>${BEST.finish}</span></span>
-      ${today ? `<span class="pin today" style="left:${at(PLAYED.finish)}"><span>${PLAYED.finish}</span></span>` : ''}
-      <span class="pin real" style="left:${at(TODAY.hist)}"><span>${TODAY.hist}</span></span></div>
-    <div class="ends"><span>1ST</span><span>DROP</span></div>
-    <div class="key"><i style="--k:#55555E">Real ${ord(TODAY.hist)}</i><i style="--k:var(--g)">Your best ${ord(BEST.finish)} (${BEST.club})</i>${today ? `<i style="--k:#fff">Today ${ord(PLAYED.finish)}</i>` : ''}</div></div>`;
-  const L = { pre: card('L', 'They went down for real. Can you get past your best?', ladder(false), true), post: card('L', `Today: ${ord(PLAYED.finish)}, up ${PLAYED.rise}. Tap to share.`, ladder(true), true) };
+  // the card itself stays exactly as live; only the line under the title changes once played, as now
+  const NEXT = '<div class="card next"><span class="mk"></span><span class="tag" style="color:#3BA4FF">DARE2DREAM</span><span class="big">Rewrite their season</span><span class="sub">Any club from any season. Draft 11 and beat their real finish.</span><span class="go" style="background:#3BA4FF">' + GO + '</span></div>';
+  const PRE = 'They went down for real. Can you keep them up?', POST = 'Done for today. Tap to share it.';
+  const u = (x) => `<div class="under">${x}</div>`;
+  const up = (n) => `<span class="up">${UP} ${n}</span>`;
 
-  // 2: the week. Made-up rises for the six days before today; today empty until played
-  const WEEK = [['W', 'norwich', 3], ['T', 'bolton', -1], ['F', 'wigan', 5], ['S', null, null], ['S', 'sunderland', 9], ['M', 'qpr', 2]];
-  const week = (today) => `<div class="week">${WEEK.map(([d, c, r]) => c ? `<div class="day${r === BEST.rise ? ' best' : ''}"><img src="assets/crests/${c}.png" alt=""><b class="${r < 0 ? 'dn' : ''}">${r > 0 ? '+' : ''}${r}</b><i>${d}</i></div>` : `<div class="day miss"><b>-</b><i>${d}</i></div>`).join('')}
-      <div class="day now${today ? '' : ' empty'}"><img src="${TODAY.crest}" alt=""><b>${today ? '+' + PLAYED.rise : '?'}</b><i>TUE</i></div></div>
-    <div class="weekline">${today ? `Second best this week. Your best is still <span class="up">+${BEST.rise}</span> with ${BEST.club}.` : `Best this week: <span class="up">+${BEST.rise}</span> with ${BEST.club}.`}</div>`;
-  const W = { pre: card('W', 'They went down for real. Can you keep them up?', week(false), true), post: card('W', 'Tap to share today\'s.', week(true), true) };
-
-  // 3: the finish you need. Your best rise is 9, Watford really finished 20th, so 11th or higher beats it
-  const need = TODAY.hist - BEST.rise;
-  const target = (today) => today
-    ? `<div class="target"><div class="need"><i>TODAY</i><b>${ord(PLAYED.finish)}</b></div><div class="why"><small>NEEDED ${ord(need)} TO BEAT YOUR BEST</small><span><img src="${BEST.crest}" alt="">Still ${BEST.club}, <b class="up">+${BEST.rise}</b></span></div></div>`
-    : `<div class="target"><div class="need"><i>FINISH</i><b>${ord(need)}</b></div><div class="why"><small>OR HIGHER TO BEAT YOUR BEST</small><span><img src="${BEST.crest}" alt="">${BEST.club} ${BEST.season}, <b class="up">+${BEST.rise}</b></span></div></div>`;
-  const T = { pre: card('T', 'They went down for real. Can you keep them up?', target(false), true), post: card('T', `You finished ${ord(PLAYED.finish)}, up ${PLAYED.rise}. Tap to share.`, target(true), true) };
-
-  const OPTS = [['1', 'The ladder', 'A little league from 1st to the drop on the card: their real finish in grey, your best in green, today in white once played. You see at a glance how far you have to climb.', L],
-    ['2', 'Your week', 'Your last seven Dailies in a row, each with its club and rise, a gap for a day you missed, your best crowned. Today waits with a question mark. Shows your best and your streak in one.', W],
-    ['3', 'The finish to beat', 'Turns your best into today\'s target: your best rise was +9, Watford really finished 20th, so finish 11th or higher to beat it. Once played, it says how you did against it.', T]];
+  const t3 = (today) => u(`<div class="tiles3"><div class="tl"><i>YOUR BEST DAILY</i><b><img src="${BEST.crest}" alt="">${up(BEST.rise)}</b><small>${BEST.club} · ${ord(BEST.hist)} to ${ord(BEST.finish)}</small></div>
+    <div class="tl"><i>${today ? 'TODAY' : 'TO BEAT IT'}</i><b>${today ? up(PLAYED.rise) : ord(TODAY.hist - BEST.rise)}</b><small>${today ? ord(PLAYED.finish) + ' place' : 'or higher'}</small></div>
+    <div class="tl"><i>STREAK</i><b>${today ? 3 : 2}</b><small>days</small></div></div>`);
+  const ln = (today) => u(`<div class="line"><img src="${BEST.crest}" alt=""><i>BEST</i><b>${up(BEST.rise)}</b>${BEST.club} ${BEST.season}<span class="gap"></span><span class="sep"></span>${today ? `<i>TODAY</i><b>${up(PLAYED.rise)}</b>` : `<i>STREAK</i><b>2</b>`}</div>`);
+  const hv = (today) => u(`<div class="halves"><div class="half${today ? '' : ' wait'}"><img src="${TODAY.crest}" alt=""><div><i>TODAY</i><small>${today ? ord(PLAYED.finish) + ', real ' + ord(TODAY.hist) : 'Real ' + ord(TODAY.hist)}</small></div><b>${today ? up(PLAYED.rise) : '-'}</b></div>
+    <div class="half best"><img src="${BEST.crest}" alt=""><div><i>YOUR BEST</i><small>${ord(BEST.finish)}, real ${ord(BEST.hist)}</small></div><b>${up(BEST.rise)}</b></div></div>`);
+  const mk = (f) => ({ pre: card('X', PRE, '', true) + f(false) + NEXT, post: card('X', POST, '', true) + f(true) + NEXT });
+  const OPTS = [['1', 'Three small tiles', 'Under the card: your best Daily (crest, rise, their finish to yours), the finish you need today to beat it (today\'s rise once played) and your streak.', mk(t3)],
+    ['2', 'One slim line', 'A single caption line under the card: your best with its crest and club, and your streak on the right (today\'s rise once played). The quietest.', mk(ln)],
+    ['3', 'Today and your best', 'Two halves under the card: today (waiting, or your rise and finish) and your best, edged green. Each with its crest, the rise big on the right.', mk(hv)]];
   document.getElementById('opts').innerHTML = OPTS.map(([k, h, d, o]) => `<div class="opt"><div class="opt-h"><span class="tag">IDEA ${k}</span><h3>${h}</h3><p>${d}</p></div>
     <div class="phone"><div class="sect">Daily challenge</div><div class="state">BEFORE TODAY'S GO</div>${o.pre}<div class="state">AFTER TODAY'S GO</div>${o.post}</div></div>`).join('');
 })();
