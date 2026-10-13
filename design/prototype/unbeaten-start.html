@@ -39,7 +39,7 @@
   .stage { position: relative; flex: 1; min-height: 0; }
   .bests, .reel { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 16px; transition: opacity .35s var(--ease-out), transform .45s var(--ease-out); }
   .bests-h { font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--muted); margin-bottom: 10px; align-self: stretch; text-align: center; }
-  .grid { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 10px; }
+  .grid { width: 86%; max-width: 312px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 10px; }
   /* the home page record frame (.fr-frame), rimmed in cyan */
   .fr { position: relative; aspect-ratio: 100 / 112; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 13%; text-align: center; }
   .fr svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
@@ -47,13 +47,22 @@
   .fr.none polygon { stroke: color-mix(in srgb, var(--c) 45%, transparent); fill: rgba(255,255,255,.03); }
   .fr b { position: relative; font: 900 italic 30px/1 'Exo 2'; color: #fff; }
   .fr.none b { color: #3A3A44; }
+  /* your best: a special card, cyan all over like a top-level player card, dark text, a gold star top right and a slow shine */
+  .fr.top { filter: drop-shadow(0 0 12px rgba(34,211,238,.45)); }
+  .fr.top polygon { fill: url(#ubTop); stroke: #CFFAFF; stroke-width: 1.8; }
+  .fr.top b, .fr.top span { color: #04262C; }
+  .fr.top b { text-shadow: 0 1px 0 rgba(255,255,255,.35); }
+  .fr.top svg.star { position: absolute; inset: auto; left: auto; bottom: auto; right: 8%; top: 7%; width: 21%; height: auto; aspect-ratio: 1; z-index: 1; filter: drop-shadow(0 1px 2px rgba(0,0,0,.45)); }
+  .fr.top .shine { position: absolute; inset: 0; overflow: hidden; clip-path: polygon(1% 8.6%, 11% .8%, 89% .8%, 99% 8.6%, 99% 84.4%, 50% 99.2%, 1% 84.4%); pointer-events: none; }
+  .fr.top .shine::after { content: ''; position: absolute; top: -20%; left: -70%; width: 45%; height: 140%; transform: rotate(18deg); background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0)); animation: shine 6s ease-in-out infinite; }
+  @keyframes shine { 0% { left: -70%; } 22% { left: 130%; } 100% { left: 130%; } }
+  @media (prefers-reduced-motion: reduce) { .fr.top .shine::after { animation: none; display: none; } }
   .fr span { position: relative; font-size: 10px; font-weight: 800; line-height: 1.15; margin-top: 6px; padding: 0 8px; text-transform: uppercase; letter-spacing: .04em; color: var(--soft); }
   .phone.small .fr b { font-size: 26px; }
   .phone.small .fr span { font-size: 9.5px; margin-top: 4px; }
   .phone.small .title { font-size: 28px; }
   .phone.small .sub { font-size: 13px; }
   .phone.small .grid { gap: 7px 8px; }
-  .phone.small .stage .grid { width: 86%; }
 
   .phone.go .bests { opacity: 0; transform: scale(.94); pointer-events: none; }
   .reel { opacity: 0; transform: scale(.9); pointer-events: none; }
@@ -91,7 +100,7 @@
 <div class="page">
   <div class="head">
     <h1>Unbeaten Run start page</h1>
-    <p>Higher or lower as the title, the subtitle saying how it plays, your best run for each stat in the home page's card outline with a cyan rim, centred on the page. No stat window until you tap New run: then the best runs step back and the stat reel comes in, centred both ways, spins and lands on this run's stat. Tap New run to try it; home puts it back. The respin button sits greyed on the left, as in the other games, so New run stays centred.</p>
+    <p>Higher or lower as the title, the subtitle saying how it plays, your best run for each stat in the home page's card outline with a cyan rim, centred on the page. No stat window until you tap New run: then the best runs step back and the stat reel comes in, centred both ways, spins and lands on this run's stat. Tap New run to try it; home puts it back. Your highest best is a special card: cyan all over with a gold star and a slow shine (on a tie, the first in the list). The best runs sit in from the edges on every phone. The respin button sits greyed on the left, as in the other games, so New run stays centred.</p>
   </div>
   <div class="row" id="phones"></div>
 </div>
@@ -104,14 +113,19 @@
   // the home page record outline (home.js FRAME): chamfered top corners, shallow point at the bottom
   const FRAME = '<svg viewBox="0 0 100 128" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,11 11,1 89,1 99,11 99,108 50,127 1,108" stroke-linejoin="round"/></svg>';
   // the nine stats as live (unbeaten.js STATS); bests as in Craig's screenshot
-  const STATS = [['Career goals', 0], ['Career appearances', 0], ['Career assists', 0], ['Career goals + assists', 0], ['Goals in a season', 0], ['Goals + assists in a season', 0], ['Points in a season', 1], ['Wins in a season', 0], ['All-time points', 1]];
+  // bests made up for the mockup so one stands out (the live page reads them from the phone)
+  const STATS = [['Career goals', 4], ['Career appearances', 0], ['Career assists', 0], ['Career goals + assists', 0], ['Goals in a season', 2], ['Goals + assists in a season', 0], ['Points in a season', 7], ['Wins in a season', 0], ['All-time points', 1]];
+  // the special card: your highest best; on a tie the first in the list keeps it
+  const TOP = STATS.reduce((m, s, i) => (s[1] > STATS[m][1] ? i : m), 0);
+  const STAR = '<svg class="star" viewBox="0 0 24 24"><path d="M12 2.2l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" fill="#FFD21F" stroke="#8A6A00" stroke-width="1" stroke-linejoin="round"/></svg>';
+  const TOPDEF = '<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="ubTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E6FDFF"/><stop offset=".3" stop-color="#5CE6F7"/><stop offset=".62" stop-color="#22D3EE"/><stop offset="1" stop-color="#0E8FA6"/></linearGradient></defs></svg>';
   const KICK = { 'Points in a season': 'Premier League clubs', 'Wins in a season': 'Premier League clubs', 'All-time points': 'Premier League clubs' };
   const phone = (cls, w, h, label) => `<div class="opt"><div class="phone ${cls}" style="--pw:${w}px;--ph:${h}px"><span class="bgmark">${MARK}</span>
     <div class="tb"><span class="logo"></span><span class="mtag"><span>Unbeaten Run</span></span><span class="acct">${ACCT}</span></div>
     <div class="ghead"><div><span class="kick">Premier League</span><h1 class="title">Higher or lower</h1><span class="sub">One stat a run. Is the next real number higher or lower? Keep calling it right; one wrong answer ends your run.</span></div>
       <div class="runn"><b>0</b><i>UNBEATEN</i></div></div>
     <div class="stage">
-      <div class="bests"><div class="bests-h">YOUR BEST RUNS</div><div class="grid">${STATS.map(([n, b]) => `<div class="fr${b ? '' : ' none'}">${FRAME}<b>${b || '-'}</b><span>${n}</span></div>`).join('')}</div></div>
+      <div class="bests">${TOPDEF}<div class="bests-h">YOUR BEST RUNS</div><div class="grid">${STATS.map(([n, b], i) => `<div class="fr${b ? '' : ' none'}${i === TOP && b ? ' top' : ''}">${FRAME}${i === TOP && b ? '<span class="shine"></span>' + STAR : ''}<b>${b || '-'}</b><span>${n}</span></div>`).join('')}</div></div>
       <div class="reel"><small>THIS RUN IS ABOUT</small><div class="win"><div class="strip"></div></div><p></p></div>
     </div>
     <div class="bar"><button class="circ off" disabled aria-hidden="true" tabindex="-1">${REFRESH}</button><button class="main"><span class="emb"></span><span class="lbl">New run</span></button><button class="circ" aria-label="Home">${HOME}</button></div></div>
