@@ -11,6 +11,12 @@ const DEPTH = { 442: 180, 433: 220, 451: 145, 352: 310, 343: 355, 424: 260, 532:
 let L = {}, MEAN = {};
 const setPool = (k) => { L = {}; MEAN = {}; for (const p in G) L[p] = G[p].slice(0, k).map(([n, s, c, g]) => ({ n, g, pos: p })); for (const p in L) MEAN[p] = L[p].reduce((t, x) => t + x.g, 0) / L[p].length; };
 const rnd = (a) => a[Math.floor(Math.random() * a.length)];
+// HIST=1: the app's anti-repeat (GAME.g433.drawOpen): players the last three games offered come up at a tenth, a quarter
+// and half the chance of a fresh one. Games are chained so the memory builds as it does on a phone.
+const HIST = !!process.env.HIST, RECENT = [0.1, 0.25, 0.5]; let recent = [], rw = null, offered = null;
+const startGame = () => { if (!HIST) return; rw = {}; recent.slice(0, 3).forEach((ids, i) => { for (const n of ids) if (rw[n] == null || rw[n] > RECENT[i]) rw[n] = RECENT[i]; }); offered = new Set(); };
+const endGame = () => { if (!HIST) return; recent.unshift([...offered]); recent = recent.slice(0, 3); };
+const pick = (list) => { if (!rw) return rnd(list); let t = 0; for (const x of list) t += (rw[x.n] != null ? rw[x.n] : 1); let r = Math.random() * t; for (const x of list) { r -= (rw[x.n] != null ? rw[x.n] : 1); if (r <= 0) return x; } return list[list.length - 1]; };
 function draw(open, used, need) {
   const slots = []; for (const p in open) for (let i = 0; i < open[p]; i++) slots.push(p);
   const out = [];
@@ -19,7 +25,8 @@ function draw(open, used, need) {
     if (hits.length) out.push(rnd(hits));
   }
   let guard = 0;
-  while (out.length < 3 && guard++ < 999) { const x = rnd(L[rnd(slots)]); if (!used.has(x.n) && !out.includes(x)) out.push(x); }
+  while (out.length < 3 && guard++ < 999) { const x = pick(L[rnd(slots)]); if (!used.has(x.n) && !out.includes(x)) out.push(x); }
+  if (offered) for (const x of out) offered.add(x.n);
   return out.sort(() => Math.random() - 0.5);
 }
 // strategies: how the player values a candidate (est = what they think his goals are)
@@ -27,6 +34,7 @@ function draw(open, used, need) {
 const est = { random: () => 0, casual: (x) => (Math.random() < 0.25 ? MEAN[x.pos] * (0.4 + Math.random() * 1.2) : x.g * (0.4 + Math.random() * 1.2)), rough: (x) => x.g * (0.6 + Math.random() * 0.8), exact: (x) => x.g };
 function play(strategy, giftRate, lastRule) {
   const open = Object.assign({}, POS), used = new Set(); let total = 0, gift = false, giftShown = false, natural = false;
+  startGame();
   for (let k = 0; k < 11; k++) {
     const left = 11 - k, last = left === 1;
     const lastPos = last ? Object.keys(open).find((p) => open[p] > 0) : null;
@@ -43,6 +51,7 @@ function play(strategy, giftRate, lastRule) {
     }
     open[pick.pos]--; used.add(pick.n); total += pick.g;
   }
+  endGame();
   return { total, gap: Math.abs(total - T), giftShown, natural };
 }
 const N = 20000, F = ['442', '433', '451', '352', '343', '424', '532', '541'], RATES = (process.argv[2] || '-1').split(',').map(Number);

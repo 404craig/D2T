@@ -54,10 +54,10 @@ t("the same seed and choices give the same season", () => {
   assert.deepStrictEqual(again.st.final.table, run1.st.final.table);
   assert.deepStrictEqual(again.st.played.map(r => [r.us, r.them]), run1.st.played.map(r => [r.us, r.them]));
 });
-t("a Daily's goes have seeds of their own: go 2 differs from go 1 in rolls and results, and each go replays itself", () => {
-  // the app seeds go 1 `daily-<date>` and go 2 `daily-<date>#2` (GAME.dailySeed in core/game.js)
-  const date = "2026-10-13", go1 = play("daily-" + date, "2004/05", "Southampton", "pass"), go2 = play("daily-" + date + "#2", "2004/05", "Southampton", "pass");
-  const again = play("daily-" + date, "2004/05", "Southampton", "pass");
+t("a Daily's goes have random seeds of their own: two goes differ in rolls and results, and each go replays itself", () => {
+  // the app seeds every go `daily-<date>-r<random>` (GAME.dailySeed in core/game.js): only the club is shared
+  const date = "2026-10-13", go1 = play("daily-" + date + "-rabc123", "2004/05", "Southampton", "pass"), go2 = play("daily-" + date + "-rxyz789", "2004/05", "Southampton", "pass");
+  const again = play("daily-" + date + "-rabc123", "2004/05", "Southampton", "pass");
   assert.notDeepStrictEqual(go1.offered.slice(0, 3), go2.offered.slice(0, 3), "the first roll should differ between goes");
   const shared = go1.offered.filter(id => go2.offered.includes(id)).length;
   assert.ok(shared < go1.offered.length / 3, `goes share too many cards: ${shared} of ${go1.offered.length}`);
@@ -65,6 +65,26 @@ t("a Daily's goes have seeds of their own: go 2 differs from go 1 in rolls and r
   assert.ok(r1.filter((s, i) => s === r2[i]).length < 20, "the same XI should not get the same results in another go");
   assert.deepStrictEqual(again.offered, go1.offered, "the same go should offer the same cards");
   assert.deepStrictEqual(again.st.played.map(r => [r.us, r.them]), go1.st.played.map(r => [r.us, r.them]), "the same go should replay its results");
+});
+t("recent cards: a run told what the last run offered serves far fewer of them, and replays the same with the same history", () => {
+  const S = G.seasons["2007/08"], c = S.clubs.find(x => x.name === "Derby").id, rel = S.relegated.find(r => r.c === c);
+  const go = (seed, recent) => {
+    const st = D.newRun({ seed, catalogue: G.catalogue, fixedClub: "2007/08:Derby", recent });
+    D.chooseClub(st, S, rel); D.startSeason(st, S);
+    let g = 0; while (st.phase !== "summary" && g++ < 600) { if (st.phase === "window") D.pass(st, S); else D.playMatch(st, S); }
+    return st;
+  };
+  const first = go("recent-a", null);
+  assert.strictEqual(first.offered.length, 51, "17 rolls of 3 cards should all be noted as offered");
+  const w = D.recentWeights([first.offered]);
+  assert.strictEqual(w[first.offered[0]], D.RULES.recent[0]);
+  const plain = go("recent-b", null), aware = go("recent-b", w);
+  const shared = (st) => st.offered.filter(id => first.offered.includes(id)).length;
+  assert.ok(shared(aware) * 2 < shared(plain) || shared(aware) <= 2, `recent cards still came up: ${shared(aware)} against ${shared(plain)} without the history`);
+  assert.deepStrictEqual(go("recent-b", w).offered, aware.offered, "the same seed and history should offer the same cards");
+  // the weights follow the run's age: a card from the run before last is halfway between
+  const w3 = D.recentWeights([["x"], ["y", "x"], ["z"]]);
+  assert.deepStrictEqual(w3, { x: 0.1, y: 0.25, z: 0.5 });
 });
 t("match results look like football: about 2.7 goals a game, 5+ goal margins rare, 0-0 and 1-0 common", () => {
   let n = 0, goals = 0, big = 0, nil = 0, oneNil = 0;
