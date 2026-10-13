@@ -111,16 +111,23 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => document.querySelectorAll(FIT).forEach((e) => fitName(e, true)));
   }
 
-  // What sits under a big player card: the facts the small card can't show (no repeat of its six stats).
-  // Career numbers are every Premier League season in the data; clean sheets only where the rated data has them.
-  function info(c, accent) {
-    const k = c.career, yrs = k ? (k.f === k.l ? k.f : `${k.f} to ${k.l}`) : '';
-    const season = `${c.apps} game${c.apps === 1 ? '' : 's'}, ${c.goals} goal${c.goals === 1 ? '' : 's'}${c.cleanSheets != null && (c.pos === 'GK' || c.pos === 'DEF') ? `, ${c.cleanSheets} clean sheet${c.cleanSheets === 1 ? '' : 's'}` : ''}`;
-    return `<div class="sp-det" style="--sp-accent:${accent || '#fff'}"><div class="sp-det-name">${esc(c.name)}</div>
-      <div class="sp-det-line">${esc(c.club)}${c.club2 ? ' / ' + esc(c.club2) : ''} ${c.season}: ${season}${c.nat ? ' · ' + esc(c.nat) : ''}${c.provisional ? ' · provisional rating' : ''}</div>
-      ${c.main ? `<div class="sp-det-pos"><span>Position</span><b class="is-main">${c.main}</b>${c.alt.length ? `<span>also</span>${c.alt.map((x) => `<b>${x}</b>`).join('')}` : ''}</div>` : ''}
-      ${k ? `<div class="sp-det-grid cols-3"><span class="sp-det-stat"><b>${k.a}</b><i>PL GAMES</i></span><span class="sp-det-stat"><b>${k.g}</b><i>PL GOALS</i></span><span class="sp-det-stat"><b>${k.n}</b><i>SEASONS</i></span></div>
-      <div class="sp-det-clubs"><span>Premier League ${yrs}</span>${k.c.map((n) => `<b>${esc(n)}</b>`).join('')}</div>` : ''}</div>`;
+  // What sits under a big player card (Craig, 13 Oct; option B in design/prototype/player-detail.html): nothing the card
+  // already shows (name, flag, rating), then two panels with the same four numbers in the same spots for every player,
+  // this season (its border tinted in the card's level colour) and his whole Premier League career, then a strip with
+  // his positions and his clubs in career order. A number the data doesn't have shows as a dash, never a guess.
+  function info(c) {
+    const k = c.career, lvl = (LV[c.level] || LV.bronze).text;
+    const num = (v) => (v == null ? '\u2013' : v);
+    const cell = (v, l) => `<div><span class="pd-num">${num(v)}</span><span class="pd-lab">${l}</span></div>`;
+    const four = (g, a, as, cs) => `<div class="pd-g">${cell(g, 'Games')}${cell(a, 'Goals')}${cell(as, 'Assists')}${cell(cs, 'Clean sheets')}</div>`;
+    const crestOf = (n) => { const cl = D2T.game && D2T.game.club(n); return cl && cl.crest ? `<img class="pd-crest" src="${cl.crest}" alt="${esc(n)}" title="${esc(n)}">` : ''; };
+    const yrs = k ? (k.f === k.l ? k.f : `${k.f} to ${k.l}`) : '';
+    const pos = c.main ? `<span class="pd-pos"><b class="is-main">${c.main}</b>${c.alt.map((x) => `<b>${x}</b>`).join('')}</span>` : `<span class="pd-pos"><b class="is-main">${c.pos}</b></span>`;
+    const clubs = k ? `<span class="pd-crests">${k.c.slice(0, 4).map(crestOf).join('')}${k.c.length > 4 ? `<em>+${k.c.length - 4}</em>` : ''}</span>` : '';
+    return `<div class="pd" style="--lvl:${lvl}">
+      <div class="pd-pan"><div class="pd-p is-now"><div class="pd-ph">${crestOf(c.club)}<div><span class="pd-lab">This season</span><small>${c.season}${c.provisional ? ' · provisional' : ''}</small></div></div>${four(c.apps, c.goals, c.assists, c.cleanSheets)}</div>
+        <div class="pd-p"><div class="pd-ph"><div><span class="pd-lab">PL career</span><small>${yrs}</small></div></div>${k ? four(k.a, k.g, k.as, k.cs) : four()}</div></div>
+      <div class="pd-strip"><div><span class="pd-lab">Positions</span>${pos}</div>${k ? `<div><span class="pd-lab">${k.n} season${k.n === 1 ? '' : 's'} · clubs</span>${clubs}</div>` : ''}</div></div>`;
   }
 
   function ordinal(n) { const s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }

@@ -281,6 +281,12 @@ def main():
             game["catalogue"].append({"key": f"{season}:{names[r['c']]}", "season": season, "club": names[r["c"]],
                                       "pos": r["pos"], "pts": r["pts"]})
 
+    # Career assists and clean sheets for the big card: summed over his seasons' rated numbers (as, cs).
+    for S in game["seasons"].values():
+        for q in S["players"]:
+            k = game["careers"][q["k"]]
+            k["as"] = k.get("as", 0) + int(q.get("as") or 0)
+            k["cs"] = k.get("cs", 0) + int(q.get("cs") or 0)
     os.makedirs(OUT, exist_ok=True)
     with open(os.path.join(OUT, "game.json"), "w", encoding="utf-8") as f:
         json.dump(game, f, separators=(",", ":"), ensure_ascii=False)

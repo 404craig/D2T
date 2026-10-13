@@ -175,3 +175,33 @@
 .x-name-in:focus { border-color: #12F06C; box-shadow: 0 0 0 3px rgba(18,240,108,.18); }
 .x-name-err { min-height: 18px; margin: 2px 2px 6px; font-size: 13px; font-weight: 700; color: #FF6B6B; }
 .x-name-go { background: #12F06C; color: #00170A; }
+/* the big card that scrolls (Craig, 13 Oct): the card and its panels in a column that scrolls when it doesn't fit */
+.sp-ov.is-scroll .sp-ov-scroll { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.sp-ov.is-scroll .sp-ov-content { position: relative; min-height: 100%; }
+.sp-ov.is-scroll .sp-ov-stage { top: 0; }
+.sp-ov.is-scroll .sp-ov-below { max-width: 420px; margin: 0 auto; }
+.sp-ov.is-scroll .sp-ov-hint { bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); font-size: 12px; }
+.sp-ov-x { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 10px); right: 10px; z-index: 2; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255,255,255,0.08); color: #fff; display: grid; place-items: center; opacity: 0; }
+.sp-ov-x svg { width: 20px; height: 20px; }
+/* under it, option B in design/prototype/player-detail.html: this season and his career side by side, then a strip */
+.pd { display: flex; flex-direction: column; gap: 10px; color: #fff; }
+.pd-lab { display: block; font-size: 10px; font-weight: 800; letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
+.pd-num { font: 900 italic 26px/1 'Exo 2', sans-serif; }
+.pd-pan { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pd-p { background: #0E0E10; border: 1px solid var(--line); border-radius: 18px; padding: 11px 12px 12px; min-width: 0; }
+.pd-p.is-now { border-color: color-mix(in srgb, var(--lvl) 45%, transparent); }
+.pd-ph { display: flex; align-items: center; gap: 7px; min-height: 28px; }
+.pd-ph > div { display: flex; flex-direction: column; min-width: 0; }
+.pd-ph small { font-size: 10.5px; font-weight: 700; color: #CFCFD6; }
+.pd-crest { width: 24px; height: 24px; object-fit: contain; flex: none; }
+.pd-g { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 6px; margin-top: 12px; }
+.pd-g > div { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.pd-g .pd-lab { font-size: 9px; letter-spacing: .1em; }
+.pd-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pd-strip > div { background: #0E0E10; border: 1px solid var(--line); border-radius: 14px; padding: 9px 12px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.pd-strip > div:only-child { grid-column: 1 / -1; }
+.pd-pos { display: inline-flex; flex-wrap: wrap; gap: 5px; }
+.pd-pos b { min-width: 34px; height: 26px; padding: 0 7px; box-sizing: border-box; border-radius: 13px; display: grid; place-items: center; font-size: 12px; font-weight: 900; border: 1px solid #3A3A44; color: #fff; }
+.pd-pos b.is-main { background: var(--lvl); color: #111; border-color: var(--lvl); }
+.pd-crests { display: inline-flex; gap: 4px; align-items: center; min-height: 26px; }
+.pd-crests em { font-style: normal; font-size: 11px; font-weight: 800; color: var(--muted); margin-left: 2px; }

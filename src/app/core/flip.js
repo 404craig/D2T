@@ -1,7 +1,9 @@
 // D2T card flip: D2T.cards.openLarge(fromEl, html, opts) lifts a small card from its on-screen rect,
 // spins it one full turn around the Y axis (D2T back visible mid-turn) while it grows to a large card
 // front and centre, with a dark scrim behind. Tap anywhere to play the exact reverse back into the slot.
-// opts: { w (large width, default 280), below (html under the big card), onClose }
+// opts: { w (large width, default 280), below (html under the big card), scroll, onClose }
+// scroll (Craig, 13 Oct): the card and what's under it sit in a column that scrolls when it doesn't fit; scrolling never
+// closes it, only a tap on the card, the X or outside the content does.
 // Returns { close }.
 (function () {
   const D2T = window.D2T = window.D2T || {};
@@ -27,17 +29,20 @@
     const W = opts.w || 280, H = Math.round(W * 1.667);
     const id = 'spf' + (++uid);
     const reduced = D2T.reduced();
-    const ov = D2T.h(`<div class="card-overlay sp-ov" role="dialog" aria-label="Card">
-      <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="${id}" x="-40%" y="-20%" width="180%" height="140%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="0 0"/></filter></svg>
-      <div class="sp-ov-scrim"></div>
-      <div class="sp-ov-blur"><div class="sp-ov-stage"><div class="sp-flip" style="width:${W}px;height:${H}px;left:${-W / 2}px;top:${-H / 2}px">
+    const scroll = !!(opts.scroll && opts.below);
+    const inner = `<div class="sp-ov-blur"><div class="sp-ov-stage"><div class="sp-flip" style="width:${W}px;height:${H}px;left:${-W / 2}px;top:${-H / 2}px">
         <div class="sp-face is-front">${html}</div><div class="sp-face is-back">${backFace(W)}</div></div></div></div>
       ${opts.below ? `<div class="sp-ov-below">${opts.below}</div>` : ''}
-      <div class="sp-ov-hint">Tap to put it back</div></div>`);
+      <div class="sp-ov-hint">${scroll ? 'Tap the card to put it back' : 'Tap to put it back'}</div>`;
+    const ov = D2T.h(`<div class="card-overlay sp-ov${scroll ? ' is-scroll' : ''}" role="dialog" aria-label="Card">
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="${id}" x="-40%" y="-20%" width="180%" height="140%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="0 0"/></filter></svg>
+      <div class="sp-ov-scrim"></div>
+      ${scroll ? `<div class="sp-ov-scroll"><div class="sp-ov-content">${inner}</div></div><button class="sp-ov-x" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>` : inner}</div>`);
     host.appendChild(ov);
     const scrim = ov.querySelector('.sp-ov-scrim'), blurBox = ov.querySelector('.sp-ov-blur'), flip = ov.querySelector('.sp-flip');
     const below = ov.querySelector('.sp-ov-below'), hint = ov.querySelector('.sp-ov-hint');
     const gauss = ov.querySelector('feGaussianBlur');
+    const scroller = ov.querySelector('.sp-ov-scroll'), xBtn = ov.querySelector('.sp-ov-x');
 
     // geometry: where the small card is, where the big card ends up (both relative to the app frame centre)
     const appR = host.getBoundingClientRect();
@@ -45,13 +50,22 @@
       const bh = below ? below.offsetHeight + 22 : 0;
       return Math.round((appR.height - H - bh) / 2 + H / 2) - appR.height / 2 + (opts.yShift || 0);
     };
+    // in a scrolling overlay the stage sits at the card's centre in the column (stageY), so the card scrolls with it
+    let stageY = appR.height / 2;
+    if (scroll) {
+      const need = H + 18 + below.offsetHeight + 64, pad = Math.max(68, (appR.height - need) / 2);
+      stageY = pad + H / 2;
+      ov.querySelector('.sp-ov-stage').style.top = `${stageY}px`;
+      below.style.top = `${stageY + H / 2 + 18}px`;
+      ov.querySelector('.sp-ov-content').style.height = `${Math.max(appR.height, pad + need + 8)}px`;
+    }
     const measure = () => {
       const r = fromEl.getBoundingClientRect();
-      return { x: r.left + r.width / 2 - appR.left - appR.width / 2, y: r.top + r.height / 2 - appR.top - appR.height / 2, s: r.width / W };
+      return { x: r.left + r.width / 2 - appR.left - appR.width / 2, y: r.top + r.height / 2 - appR.top + (scroller ? scroller.scrollTop : 0) - stageY, s: r.width / W };
     };
     let from = measure();
-    const ey = endY();
-    if (below) below.style.top = `${appR.height / 2 + ey + H / 2 + 22}px`;
+    const ey = scroll ? 0 : endY();
+    if (below && !scroll) below.style.top = `${appR.height / 2 + ey + H / 2 + 22}px`;
     fromEl.style.visibility = 'hidden';
 
     let raf = 0, closed = false, busy = true, lastA = 0, lastT = 0;
@@ -62,6 +76,7 @@
       scrim.style.opacity = scrimEase(clamp01(t * 1.6));
       if (below) { const b = clamp01((t - 0.72) / 0.28); below.style.opacity = b; below.style.transform = `translateY(${(1 - b) * 10}px)`; }
       hint.style.opacity = clamp01((t - 0.85) / 0.15) * 0.9;
+      if (xBtn) xBtn.style.opacity = clamp01((t - 0.85) / 0.15);
     };
     const blurTo = (sd) => {
       if (sd < 0.35) { if (blurBox.style.filter) { blurBox.style.filter = ''; gauss.setAttribute('stdDeviation', '0 0'); } return; }
@@ -100,7 +115,8 @@
       from = measure(); // the slot may have moved or scaled while the big card was open
       run(1, 0, 640, finish);
     };
-    ov.addEventListener('click', close);
+    // a tap on the panels under a scrolling card leaves it open; anywhere else (the card, the X, outside) puts it back
+    ov.addEventListener('click', (e) => { if (scroll && e.target.closest('.sp-ov-below')) return; close(); });
     return { close, el: ov };
   }
 

@@ -153,8 +153,8 @@
       function clearSel() { sel = null; applySel(); }
       function openBig(el, id) {
         const card = L.all.get(String(id)); if (!card) return;
-        const below = D2T.cards.info(card, club.text);
-        D2T.cards.openLarge(el.querySelector('.d2c') || el, D2T.cards.player(card, { w: 280 }), { below });
+        const W = Math.min(236, Math.round(root.clientWidth * 0.6));
+        D2T.cards.openLarge(el.querySelector('.d2c') || el, D2T.cards.player(card, { w: W }), { w: W, below: D2T.cards.info(card), scroll: true });
       }
 
       // ---------- swaps ----------
