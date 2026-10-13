@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unbeaten Run Start</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<style>
+  /* Unbeaten Run start page: Higher or lower title, best runs in the home page's card outline with a cyan rim, centred on the page;
+     New run hides them and brings the stat reel in, centred, to spin and land. */
+  :root { color-scheme: dark; --c: #22D3EE; --ct: #8BEAF7; --soft: #CFCFD6; --muted: #8E8E99; --line: #26262C; --ink: #0E0E10; --ease-out: cubic-bezier(.2, .8, .2, 1); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #08080A; color: #fff; font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 1100px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 26px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
+  .head p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 90ch; }
+  .row { display: flex; gap: 26px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .opt { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+  .cap { font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--muted); }
+
+  .phone { position: relative; width: var(--pw); max-width: 100%; height: var(--ph); border-radius: 30px; background: #000; box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,.6); overflow: hidden; display: flex; flex-direction: column; isolation: isolate; }
+  .bgmark { position: absolute; right: -90px; top: 38%; width: 340px; height: 340px; color: var(--c); opacity: .07; z-index: -1; pointer-events: none; }
+  .tb { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 14px 16px 8px; }
+  .logo { display: block; height: 26px; aspect-ratio: 857 / 241; background: #fff; -webkit-mask: url('assets/logo/short.png') center / contain no-repeat; mask: url('assets/logo/short.png') center / contain no-repeat; }
+  .mtag { font: 900 italic 15px/1 'Exo 2'; letter-spacing: .04em; text-transform: uppercase; color: #0A0A0A; background: var(--c); padding: 5px 10px 4px; border-radius: 5px; transform: skewX(-10deg); white-space: nowrap; }
+  .mtag span { display: inline-block; transform: skewX(10deg); }
+  .acct { justify-self: end; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--ink); display: grid; place-items: center; }
+  .acct svg { width: 18px; height: 18px; }
+
+  .ghead { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; padding: 8px 16px 0; }
+  .kick { display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--c); }
+  .title { margin: 4px 0 0; font: 900 italic 32px/1 'Exo 2'; text-transform: uppercase; }
+  .sub { display: block; margin-top: 8px; font-size: 14px; line-height: 1.38; color: var(--soft); font-weight: 600; }
+  .runn { text-align: right; flex: none; }
+  .runn b { display: block; font: 900 italic 50px/.9 'Exo 2'; color: var(--c); }
+  .runn i { font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .14em; color: var(--muted); }
+
+  /* the middle: best runs or the stat reel, centred both ways */
+  .stage { position: relative; flex: 1; min-height: 0; }
+  .bests, .reel { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 16px; transition: opacity .35s var(--ease-out), transform .45s var(--ease-out); }
+  .bests-h { font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--muted); margin-bottom: 10px; align-self: stretch; text-align: center; }
+  .grid { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 10px; }
+  /* the home page record frame (.fr-frame), rimmed in cyan */
+  .fr { position: relative; aspect-ratio: 100 / 112; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 13%; text-align: center; }
+  .fr svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .fr polygon { fill: rgba(34,211,238,.05); stroke: var(--c); stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+  .fr.none polygon { stroke: color-mix(in srgb, var(--c) 45%, transparent); fill: rgba(255,255,255,.03); }
+  .fr b { position: relative; font: 900 italic 30px/1 'Exo 2'; color: #fff; }
+  .fr.none b { color: #3A3A44; }
+  .fr span { position: relative; font-size: 10px; font-weight: 800; line-height: 1.15; margin-top: 6px; padding: 0 8px; text-transform: uppercase; letter-spacing: .04em; color: var(--soft); }
+  .phone.small .fr b { font-size: 26px; }
+  .phone.small .fr span { font-size: 9.5px; margin-top: 4px; }
+  .phone.small .title { font-size: 28px; }
+  .phone.small .sub { font-size: 13px; }
+  .phone.small .grid { gap: 7px 8px; }
+  .phone.small .stage .grid { width: 86%; }
+
+  .phone.go .bests { opacity: 0; transform: scale(.94); pointer-events: none; }
+  .reel { opacity: 0; transform: scale(.9); pointer-events: none; }
+  .phone.go .reel { opacity: 1; transform: none; }
+  .reel small { font-size: 11px; font-weight: 800; letter-spacing: .16em; color: var(--ct); margin-bottom: 12px; }
+  .win { position: relative; width: 100%; height: 236px; overflow: hidden; border-radius: 22px; background: var(--ink); border: 1px solid var(--line);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%); }
+  .win::before { content: ''; position: absolute; left: 12px; right: 12px; top: 50%; height: 76px; transform: translateY(-50%); border-radius: 16px; border: 2px solid var(--c); z-index: 2; pointer-events: none; }
+  .win.hit::before { animation: hit .5s var(--ease-out); }
+  @keyframes hit { 30% { transform: translateY(-50%) scale(1.05); box-shadow: 0 0 28px rgba(34,211,238,.6); } }
+  .strip { position: absolute; left: 0; right: 0; top: calc(50% - 38px); will-change: transform; }
+  .tile { height: 76px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .tile i { font-style: normal; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; color: var(--ct); }
+  .tile b { font: 900 italic 26px/1.05 'Exo 2'; text-transform: uppercase; color: #6A6A74; }
+  .tile.on b { color: #fff; }
+  .reel p { margin: 14px 0 0; text-align: center; font-size: 13px; color: var(--muted); min-height: 18px; }
+  .reel p em { font-style: normal; color: var(--ct); }
+
+  .bar { display: flex; align-items: center; gap: 10px; padding: 10px 16px 22px; }
+  .main { flex: 1; height: 58px; border-radius: 29px; border: 0; background: var(--c); color: #0A0A0A; display: flex; align-items: center; justify-content: center; gap: 10px; font: 900 italic 21px/1 'Exo 2'; text-transform: uppercase; box-shadow: 0 6px 16px -6px var(--c); cursor: pointer; transition: opacity .2s, transform .15s; }
+  .main:active { transform: scale(.97); }
+  .main[disabled] { opacity: .85; cursor: default; }
+  .main .emb { width: 26px; height: 26px; background: #0A0A0A; -webkit-mask: url('assets/logo/emblem.png') center / contain no-repeat; mask: url('assets/logo/emblem.png') center / contain no-repeat; }
+  .main.spin .emb { animation: turn .9s linear infinite; }
+  @keyframes turn { to { transform: rotate(360deg); } }
+  .circ { width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--line); background: var(--ink); display: grid; place-items: center; flex: none; color: #fff; cursor: pointer; }
+  .circ svg { width: 22px; height: 22px; }
+  @media (prefers-reduced-motion: reduce) { .bests, .reel, .win.hit::before, .main.spin .emb { transition: none; animation: none; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <h1>Unbeaten Run start page</h1>
+    <p>Higher or lower as the title, the subtitle saying how it plays, your best run for each stat in the home page's card outline with a cyan rim, centred on the page. No stat window until you tap New run: then the best runs step back and the stat reel comes in, centred both ways, spins and lands on this run's stat. Tap New run to try it; home puts it back.</p>
+  </div>
+  <div class="row" id="phones"></div>
+</div>
+<script>
+(function () {
+  const ACCT = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.6-3.6 4.6-5.2 8-5.2s6.4 1.6 8 5.2"/></svg>';
+  const HOME = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></svg>';
+  const MARK = '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="50" r="44"/><path d="M30 42 L50 22 L70 42"/><path d="M30 58 L50 78 L70 58"/></svg>';
+  // the home page record outline (home.js FRAME): chamfered top corners, shallow point at the bottom
+  const FRAME = '<svg viewBox="0 0 100 128" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,11 11,1 89,1 99,11 99,108 50,127 1,108" stroke-linejoin="round"/></svg>';
+  // the nine stats as live (unbeaten.js STATS); bests as in Craig's screenshot
+  const STATS = [['Career goals', 0], ['Career appearances', 0], ['Career assists', 0], ['Career goals + assists', 0], ['Goals in a season', 0], ['Goals + assists in a season', 0], ['Points in a season', 1], ['Wins in a season', 0], ['All-time points', 1]];
+  const KICK = { 'Points in a season': 'Premier League clubs', 'Wins in a season': 'Premier League clubs', 'All-time points': 'Premier League clubs' };
+  const phone = (cls, w, h, label) => `<div class="opt"><div class="phone ${cls}" style="--pw:${w}px;--ph:${h}px"><span class="bgmark">${MARK}</span>
+    <div class="tb"><span class="logo"></span><span class="mtag"><span>Unbeaten Run</span></span><span class="acct">${ACCT}</span></div>
+    <div class="ghead"><div><span class="kick">Premier League</span><h1 class="title">Higher or lower</h1><span class="sub">One stat a run. Is the next real number higher or lower? Keep calling it right; one wrong answer ends your run.</span></div>
+      <div class="runn"><b>0</b><i>UNBEATEN</i></div></div>
+    <div class="stage">
+      <div class="bests"><div class="bests-h">YOUR BEST RUNS</div><div class="grid">${STATS.map(([n, b]) => `<div class="fr${b ? '' : ' none'}">${FRAME}<b>${b || '-'}</b><span>${n}</span></div>`).join('')}</div></div>
+      <div class="reel"><small>THIS RUN IS ABOUT</small><div class="win"><div class="strip"></div></div><p></p></div>
+    </div>
+    <div class="bar"><button class="main"><span class="emb"></span><span class="lbl">New run</span></button><button class="circ" aria-label="Home">${HOME}</button></div></div>
+    <div class="cap">${label}</div></div>`;
+  document.getElementById('phones').innerHTML = phone('', 393, 852, 'IPHONE 15 · 393 X 852') + phone('small', 375, 667, 'SMALL PHONE · 375 X 667');
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.phone').forEach((ph) => {
+    const main = ph.querySelector('.main'), lbl = ph.querySelector('.lbl'), strip = ph.querySelector('.strip'), win = ph.querySelector('.win'), note = ph.querySelector('.reel p');
+    let busy = false;
+    const reset = () => { ph.classList.remove('go'); main.disabled = false; main.classList.remove('spin'); lbl.textContent = 'New run'; strip.innerHTML = ''; strip.style.transform = ''; note.textContent = ''; busy = false; };
+    main.onclick = () => {
+      if (busy) return; busy = true;
+      const target = STATS[Math.floor(Math.random() * STATS.length)][0], n = 22;
+      const seq = Array.from({ length: n }, (_, i) => STATS[(i * 4 + 3) % STATS.length][0]); seq.push(target, STATS[0][0], STATS[1][0]);
+      strip.innerHTML = seq.map((s, i) => `<div class="tile${i === n ? ' on' : ''}" style="${i === n ? '' : ''}"><i>${KICK[s] || 'Premier League'}</i><b>${s}</b></div>`).join('');
+      ph.classList.add('go'); main.disabled = true; main.classList.add('spin'); lbl.textContent = 'Spinning';
+      const T = reduced ? 0 : 2300, t0 = performance.now() + (reduced ? 0 : 380), end = n * 76;
+      const ease = (u) => 1 - Math.pow(1 - u, 3.2);
+      const step = (now) => {
+        const u = T ? Math.max(0, Math.min(1, (now - t0) / T)) : 1;
+        strip.style.transform = `translateY(${-ease(u) * end}px)`;
+        if (u < 1) return requestAnimationFrame(step);
+        win.classList.remove('hit'); void win.offsetWidth; win.classList.add('hit');
+        main.classList.remove('spin'); lbl.textContent = 'Starting'; note.innerHTML = `Your best on this: <em>${(STATS.find((s) => s[0] === target)[1]) || 'none yet'}</em>`;
+        // in the game this goes straight into the first higher or lower; here it waits so you can see where it lands
+      };
+      requestAnimationFrame(step);
+    };
+    ph.querySelector('.circ').onclick = reset;
+  });
+})();
+</script>
+</body>
+</html>
