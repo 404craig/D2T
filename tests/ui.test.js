@@ -375,9 +375,19 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => window.D2T.game.xRecord().runs === 1), "Club X run not recorded");
   check(await page.evaluate((b) => window.D2T.game.record().runs === JSON.parse(b).runs + 1, classicBefore), "Club X season did not count in the home record");
   // career mode (Craig, 13 Oct): Next season carries the XI on, with pre-season rolls; after 2025/26 the season is a forecast
-  await page.evaluate(() => { const G = window.D2T.game; if (!G.careerNext()) G.eng().final.finish = 1; window.D2T.go("home"); }); await wait(700);
-  await page.evaluate(() => window.D2T.go("summary")); await wait(1200);
+  await page.evaluate(() => { const G = window.D2T.game; if (!G.careerNext()) { G.eng().final.finish = 1; window.D2T.save(); } window.D2T.go("home"); }); await wait(700);
+  // the career must go on (Craig, 13 Oct: Aiden's restarted): home keeps a Continue card for the finished season, the
+  // Club X card asks before replacing it, a refresh keeps it, and Continue leads back to the summary and Next season
+  check(!!(await page.$('[data-act="continue"]')) && /Next season waiting/.test(await page.textContent('[data-act="continue"]')), "home has no Continue card for a finished Club X season with the career open");
+  await page.click('[data-act="pick"][data-mode="clubx"]'); await wait(500);
+  check(!!(await page.$('.sheet [data-k="no"]')) && /new career/i.test(await page.textContent(".sheet")), "the Club X card should ask before replacing a career waiting for its next season");
+  await page.click('.sheet [data-k="no"]'); await wait(400);
+  check(await page.evaluate(() => window.D2T.game.careerOpen(window.D2T.state.run) && window.D2T.game.eng().phase === "summary"), "Keep playing did not keep the career");
+  await page.reload(); await expectScreen("intro"); await page.click(".fr-skip", { force: true }); await expectScreen("home"); await page.waitForSelector('[data-act="continue"]', { timeout: 5000 }).catch(() => {}); await wait(900);
+  check(!!(await page.$('[data-act="continue"]')), "a refresh lost the finished Club X season's Continue card");
+  await page.click('[data-act="continue"]'); await expectScreen("summary"); await wait(1200);
   check(!!(await page.$('[data-act="next"]')), "Club X summary has no Next season");
+  check(/New career/.test(await page.textContent('[data-act="again"]')), "the Club X summary's other button should read New career");
   await page.click('[data-act="next"]'); await expectScreen("table"); await wait(600);
   check(await page.evaluate(() => { const G = window.D2T.game, e = G.eng(); return e.career === 2 && e.phase === "setup" && G.lineup().xi.every(Boolean) && G.clubName() === "Southside Rovers"; }), "Next season did not carry the XI into season 2");
   check(await page.evaluate(() => window.D2T.game.xRecord().runs === 1), "Next season recorded the first season twice");
@@ -403,6 +413,9 @@ fs.mkdirSync(OUT, { recursive: true });
   check((await screen()) === "table", "the daily did not open on the table, on " + (await screen()));
   check(await page.evaluate((d) => { const r = window.D2T.state.run; return r.daily === window.D2T.game.today() && window.D2T.game.mode() === "classic" && d.mode === "classic" && r.eng.respins === window.D2TE.RULES.respins && r.eng.phase !== "draft" && r.eng.xi.every((id) => id != null); }, dEntry), "the daily did not start with today's club, its mode and no respins");
   check(await page.evaluate(() => !!window.D2T.state.parked), "the run in progress was not kept aside for the daily");
+  // only the club is shared (Craig, 13 Oct): every go gets a random seed of its own, prefixed daily-<date>-
+  const dailySeed1 = await page.evaluate(() => window.D2T.state.run.eng.seed);
+  check(dailySeed1.startsWith("daily-" + (await page.evaluate(() => window.D2T.game.today())) + "-r") && dailySeed1.length > 24, "the Daily's seed is not a random one prefixed with the date: " + dailySeed1);
   await page.click(".actionbar .se-home"); await wait(500);
   check(!!(await page.$('.sheet [data-k="home"]')) && !!(await page.$('.sheet [data-k="restart"]')) && !(await page.$('.sheet [data-k="quit"]')), "the Daily's run menu should offer Keep playing, Restart and Home");
   await page.click('.sheet [data-k="keep"]'); await wait(500);
@@ -414,8 +427,9 @@ fs.mkdirSync(OUT, { recursive: true });
   // as many goes as you like (Craig, 13 Oct): Go again starts a fresh go, and the day's best go stays recorded
   await page.click('[data-act="again"]'); await expectScreen("table"); await wait(600);
   check(await page.evaluate(() => { const G = window.D2T.game, r = window.D2T.state.run; return !!G.dailyResult() && r.daily === G.today() && !r.recorded && G.eng().phase !== "summary"; }), "Go again did not start a fresh go at today's Daily");
-  // every go has a seed of its own (go 1 daily-<date>, go 2 daily-<date>#2), so the second go never replays the first
-  check(await page.evaluate(() => { const G = window.D2T.game, r = window.D2T.state.run, t = G.today(); return r.go === 2 && r.eng.seed === G.dailySeed(t, 2) && r.eng.seed === "daily-" + t + "#2" && window.D2T.state.dailyGoes[t] === 2; }), "the second go of the Daily did not get its own seed");
+  // every go has a random seed of its own, so the second go never replays the first, and the first go's cards are remembered so they come up less
+  check(await page.evaluate((s1) => { const G = window.D2T.game, r = window.D2T.state.run, t = G.today(); return r.eng.seed !== s1 && r.eng.seed.startsWith("daily-" + t + "-r") && !window.D2T.state.dailyGoes; }, dailySeed1), "the second go of the Daily did not get its own random seed");
+  check(await page.evaluate(() => { const G = window.D2T.game, S = G.S(), e = G.eng(), key = S.season + ":" + S.clubs[e.club].name, rec = (window.D2T.state.recent || {})[key]; return !!(rec && rec.length === 1 && rec[0].length >= 40 && e.recent && rec[0].every((id) => e.recent[id] === window.D2TE.RULES.recent[0])); }), "the first go's cards were not remembered as recent for the second go");
   await page.evaluate(() => window.D2T.go("home")); await expectScreen("home"); await wait(800);
   check(/Your best today/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not show today's best go");
   check(/TODAY'S DAILY/.test(await page.textContent(".fr-dtiles")) && (await page.$$(".fr-dtile")).length === 2, "home has no best and today tiles under the daily card");
@@ -454,6 +468,7 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate((f) => window.D2T.state.g433.formation === f, form) && !(await page.$(".g4-reveal")), "Goal Rush: a refresh changed the formation or replayed the reveal");
   check(await page.evaluate(() => document.querySelectorAll(".g4 .slotp.open .g4-shirt.next").length === 11), "Goal Rush: the open shirts are not all highlighted");
   check(await page.evaluate(() => { const s = window.D2T.state.g433; return s.cands.length === 3 && s.cands.every((c) => ["GK", "DEF", "MID", "FWD"].includes(c.pos)); }), "Goal Rush: a spin did not bring three players with positions");
+  check(await page.evaluate(() => { const r = window.D2T.state.g4recent, s = window.D2T.state.g433; return Array.isArray(r) && r.length >= 1 && s.cands.every((c) => r[0].includes(c.name)); }), "Goal Rush: the players offered are not remembered for the next games");
   for (let i = 0; i < 11; i++) {
     if (!(await page.$(".g4 [data-c]"))) { await page.click(".g4 .sp-main"); await wait(4800); }
     await page.click('.g4 [data-c="0"]'); await wait(250);

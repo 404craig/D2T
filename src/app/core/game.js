@@ -87,15 +87,24 @@
     // (GIFT, decided once per game, so respins keep it) puts him among the three. Balanced with a simulation of
     // 20,000 games per shape (tests/sim-goalrush.js): a casual player lands exactly about 1 game in 20, one who roughly
     // knows career goals about 1 in 10. The formation is required: it sets the pool depth and the gift chance.
+    // Anti-repeat (Craig, 13 Oct): the players the last three games put on the table (state.g4recent, newest game first,
+    // this game at the front) come up at a tenth, a quarter and half the chance of a fresh one, the same weights as the
+    // Classic rolls (E.RULES.recent). The pools and the gift are untouched, so the balance in tests/sim-goalrush.js holds.
+    newGame: () => { const st = D2T.state; st.g4recent = [[]].concat(st.g4recent || []).slice(0, E.RULES.recent.length + 1); },
+    recentWeights: () => E.recentWeights((D2T.state.g4recent || []).slice(1)),
     drawOpen(openPos, avoid, need, f) {
       avoid = avoid || [];
       const slots = [], out = [], top = GAME.g433.depth(f), pickFrom = (pos) => GAME.g433.list(pos).slice(0, top);
       Object.keys(openPos).forEach((pos) => { for (let i = 0; i < openPos[pos]; i++) slots.push(pos); });
       if (!slots.length) return out;
       if (need != null) { const hits = pickFrom(slots[0]).filter((p) => p.goals === need && !avoid.includes(p.name)); if (hits.length) out.push(hits[Math.floor(Math.random() * hits.length)]); }
+      const rw = GAME.g433.recentWeights(), wOf = (p) => (rw && rw[p.name] != null ? rw[p.name] : 1);
+      const draw = (L) => { if (!rw) return L[Math.floor(Math.random() * L.length)]; let t = 0; for (const p of L) t += wOf(p); let x = Math.random() * t; for (const p of L) { x -= wOf(p); if (x <= 0) return p; } return L[L.length - 1]; };
       let guard = 0;
-      while (out.length < 3 && guard++ < 999) { const L = pickFrom(slots[Math.floor(Math.random() * slots.length)]), p = L[Math.floor(Math.random() * L.length)]; if (!out.includes(p) && !avoid.includes(p.name)) out.push(p); }
+      while (out.length < 3 && guard++ < 999) { const p = draw(pickFrom(slots[Math.floor(Math.random() * slots.length)])); if (!out.includes(p) && !avoid.includes(p.name)) out.push(p); }
       for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
+      const st = D2T.state; if (!Array.isArray(st.g4recent) || !st.g4recent.length) st.g4recent = [[]];
+      for (const p of out) if (!st.g4recent[0].includes(p.name)) st.g4recent[0].push(p.name);
       return out;
     },
     canGift: (pos, need, avoid, f) => need >= 0 && GAME.g433.list(pos).slice(0, GAME.g433.depth(f)).some((p) => p.goals === need && !avoid.includes(p.name)),
@@ -264,12 +273,18 @@
   }
   GAME.isSim = () => { const S = GAME.S(); return !!(S && S.sim); };
   GAME.career = () => { const r = D2T.state.run; return r && r.eng && r.eng.mode === 'clubx' ? (r.career || { n: 1, seasons: [] }) : null; };
+  // a Club X run whose season is over with the career still open (not relegated: bottom three, or four in 1994/95)
+  GAME.careerOpen = (run) => {
+    const e = run && run.eng;
+    if (!e || e.mode !== 'clubx' || e.phase !== 'summary' || !e.final || !e.seasonKey) return false;
+    const S = run === D2T.state.run ? GAME.S() : GAME.season(e.seasonKey), rel = (S && S.relegationPlaces) || 3, n = S ? S.clubs.length : 20;
+    return e.final.finish <= n - rel;
+  };
   // the season after this one, if the career can go on (Club X, the season over, not relegated)
   GAME.careerNext = () => {
     const run = D2T.state.run, e = GAME.eng();
-    if (!run || !e || e.mode !== 'clubx' || e.phase !== 'summary' || !e.final) return null;
-    const S = GAME.S(), rel = S.relegationPlaces || 3;
-    if (e.final.finish > S.clubs.length - rel) return null;
+    if (!GAME.careerOpen(run)) return null;
+    const S = GAME.S();
     const i = SEASON_KEYS.indexOf(S.season);
     const key = i >= 0 && i < SEASON_KEYS.length - 1 ? SEASON_KEYS[i + 1] : labelOf(yearOf(S.season) + 1);
     return { key, sim: !G.seasons[key] };
@@ -300,26 +315,48 @@
     }
     c.cur = spec;
     const S2 = careerSeason(spec);
-    const st = E.newRun({ seed: c.id + ':s' + c.n, mode: 'clubx', catalogue: [] });
+    const st = E.newRun({ seed: c.id + ':s' + c.n, mode: 'clubx', catalogue: [], recent: GAME.recentFor(S2, spec.me) });
     st.seasonKey = spec.key; st.club = spec.me; st.formation = e.formation; st.career = c.n;
     E.carryIn(st, S2, S2.xiIds);
     Object.assign(run, { eng: st, step: 'table', tableSeen: false, recorded: false, match: null, pending: null });
     D2T.save();
     return true;
   };
+  const randomSeed = () => 'r' + Date.now().toString(36) + Math.floor(Math.random() * 1e9).toString(36);
   GAME.newRun = (mode = 'classic') => {
     const M = GAME.MODES[mode] || GAME.MODES.classic;
-    const seed = 'r' + Date.now().toString(36) + Math.floor(Math.random() * 1e9).toString(36);
-    D2T.state.run = { step: 'spin', eng: E.newRun({ seed, mode, catalogue: M.catalogue() }), spun: false };
+    GAME.rememberOffered();                                          // the run this one replaces still counts as recent
+    D2T.state.run = { step: 'spin', eng: E.newRun({ seed: randomSeed(), mode, catalogue: M.catalogue() }), spun: false };
     D2T.save();
     return D2T.state.run;
   };
   GAME.offer = () => GAME.eng().clubOffer.map((k) => (GAME.mode() === 'clubx' ? xPool.find((x) => x.key === k) : null) || GAME.poolEntry(k));
   GAME.respinClubs = () => { const ok = E.respinClubs(GAME.eng(), (GAME.MODES[GAME.mode()] || GAME.MODES.classic).catalogue()); D2T.save(); return ok; };
   GAME.spinPool = () => (GAME.MODES[GAME.mode()] || GAME.MODES.classic).pool();
+  // ---------- anti-repeat (Craig, 13 Oct: a club-season must never serve the same players run after run) ----------
+  // The cards each of the last three runs of a club-season put on the table are kept per phone in state.recent
+  // (newest run first, 3 runs a key, the 40 most recent keys) and handed to the engine as weights when the club is chosen
+  // (E.recentWeights, st.recent: a tenth, a quarter and half the chance of a fresh card). The engine keeps them on the
+  // run, so a seed and its history replay the same. A run counts once it is recorded, or when it is dropped for another
+  // (newRun, Quit). The Daily (every go of the day's club), Club X (the replaced side's season) and a career's later
+  // seasons use the same memory, so a second go never serves the first go's cards either.
+  const RECENT_KEYS = 40;
+  const recentKey = (S, club) => `${S.season}:${S.clubs[club].name}`;
+  GAME.recentFor = (S, club) => E.recentWeights((D2T.state.recent || {})[recentKey(S, club)]);
+  GAME.rememberOffered = (run) => {
+    run = run || D2T.state.run;
+    const e = run && run.eng, S = e && e.seasonKey ? (run === D2T.state.run ? GAME.S() : GAME.season(e.seasonKey)) : null;
+    if (!S || !e.offered || !e.offered.length || run.remembered) return;
+    run.remembered = true;
+    const st = D2T.state, key = recentKey(S, e.club), rec = st.recent = st.recent || {};
+    const list = [e.offered.slice()].concat(rec[key] || []).slice(0, E.RULES.recent.length);
+    delete rec[key]; rec[key] = list;                                // newest key last, so the oldest is dropped first
+    const keys = Object.keys(rec); while (keys.length > RECENT_KEYS) delete rec[keys.shift()];
+  };
   GAME.chooseClub = (key) => {
     const eng = GAME.eng(), entry = GAME.poolEntry(key), S = GAME.season(entry.season);
     const club = S.clubs.findIndex((c) => c.name === entry.name);
+    eng.recent = GAME.recentFor(S, club);
     E.chooseClub(eng, S, S.relegated.find((r) => r.c === club) || { c: club, f: '4-4-2', xi: [] });
     eng.formation = eng.formation || '4-4-2';
     D2T.state.run.step = 'table'; D2T.state.run.tableSeen = false;
@@ -509,6 +546,7 @@
     const run = D2T.state.run, eng = GAME.eng(), S = GAME.S(), F = eng.final;
     if (!F || run.recorded) return F;
     run.recorded = true;
+    GAME.rememberOffered(run);
     const name = GAME.clubName(), n = S.clubs.length, rel = S.relegationPlaces || 3, mode = GAME.mode();
     const rec = D2T.state.record, k = `${S.season}:${name}`;
     const entry = { key: k, mode, season: S.season, club: name, finish: F.finish, rise: F.rise, pts: F.pts, histFinish: F.histFinish,
@@ -557,17 +595,16 @@
   };
 
   // ---------- Daily challenge ----------
-  // The same club and seed for everyone each day (UK date). The clubs come round in a fixed cycle through every
-  // relegated club-season, the same list Classic spins from (Craig, 13 Oct): Daily #1 is the first in the cycle, each day
-  // the next, and after the last it starts again from the top. It is a Classic run (Craig, 13 Oct): their real squad and
-  // XI, Classic's rolls and 5 respins. As many goes as you like (Craig, 13 Oct), the best of the day counts; it has its
-  // own save, so another run is never lost. Each go has a seed of its own (Craig, 13 Oct: the same players and results
-  // every go was no fun): go 1 is `daily-YYYY-MM-DD`, go 2 `daily-YYYY-MM-DD#2` and so on (`dailySeed`), so everyone's
-  // first go is the same challenge, everyone's second go the same second challenge, and a go never replays the one
-  // before. The go count is state.dailyGoes[date] (only today's is kept) and the go sits on the run (run.go), so a
-  // refresh in the middle of a go keeps its seed.
+  // The same club for everyone each day (UK date), and only the club (Craig, 13 Oct: a shared seed meant everyone saw
+  // the same cards, got the same results and shared the same scores). The clubs come round in a fixed cycle through
+  // every relegated club-season, the same list Classic spins from (Craig, 13 Oct): Daily #1 is the first in the cycle,
+  // each day the next, and after the last it starts again from the top. It is a Classic run (Craig, 13 Oct): their real
+  // squad and XI, Classic's rolls and 5 respins. As many goes as you like (Craig, 13 Oct), the best of the day counts; it
+  // has its own save, so another run is never lost. Every go, for every player, gets a random seed of its own, built
+  // like Classic's and prefixed `daily-YYYY-MM-DD-` so it is still recognisably a Daily (`dailySeed`); it sits on the run
+  // (run.eng.seed), so a refresh in the middle of a go keeps its cards and results.
   const DAILY_START = '2026-10-11';
-  GAME.dailySeed = (date, go) => 'daily-' + date + (go > 1 ? '#' + go : '');
+  GAME.dailySeed = (date) => 'daily-' + date + '-' + randomSeed();
   GAME.today = () => {
     try { return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); }
     catch (e) { return new Date().toISOString().slice(0, 10); }
@@ -584,7 +621,12 @@
   };
   GAME.isDaily = () => !!(D2T.state.run && D2T.state.run.daily);
   GAME.dailyResult = (date) => ((D2T.state.record.daily || {})[date || GAME.today()] || null);
-  const live = (r) => !!(r && r.eng && r.eng.seasonKey && r.eng.phase !== 'summary');
+  // A run is live until its summary, except a Club X career with its next season open (Craig, 13 Oct: Aiden's career
+  // restarted instead of going on; home took a finished season as no run, so Club X started afresh and a Daily or a new
+  // run dropped it). Such a run keeps its Continue card (to the summary and Next season), is parked for a Daily, and
+  // home asks before replacing it.
+  const live = (r) => !!(r && r.eng && r.eng.seasonKey && (r.eng.phase !== 'summary' || GAME.careerOpen(r)));
+  GAME.live = (r) => live(r === undefined ? D2T.state.run : r);
   // The run not on screen: a run parked while the daily is played, or a daily put aside for another run.
   GAME.otherRun = () => {
     const st = D2T.state;
@@ -611,10 +653,9 @@
     if (st.run && st.run.daily === date) { if (!over(st.run)) return true; st.run = null; }
     if (st.dailyRun && st.dailyRun.daily === date) { if (!over(st.dailyRun)) { swapIn(st.dailyRun); D2T.save(); return true; } st.dailyRun = null; }
     const d = GAME.dailyEntry(date);
-    const go = ((st.dailyGoes || {})[date] || 0) + 1;
-    st.dailyGoes = { [date]: go };                                   // a fresh seed for every go, only today's count kept
-    const eng = E.newRun({ seed: GAME.dailySeed(date, go), mode: d.mode, catalogue: [{ key: d.key }], fixedClub: d.key });
-    swapIn({ step: 'table', eng, spun: true, daily: date, go });
+    delete st.dailyGoes;                                             // the shared per-go seeds of build 95 are gone
+    const eng = E.newRun({ seed: GAME.dailySeed(date), mode: d.mode, catalogue: [{ key: d.key }], fixedClub: d.key });
+    swapIn({ step: 'table', eng, spun: true, daily: date });
     GAME.chooseClub(d.key);
     D2T.save();
     return true;

@@ -1,14 +1,17 @@
 // Balance across every relegated club-season: node tests/calibrate-all.js [runs per club] [game.json path]
 // Strategies: none (pass every roll) and greedy (sign the card and shirt with the biggest gain, no respins).
+// HIST=1 plays each club's runs one after another with the anti-repeat memory (the last three runs' cards drawn less,
+// as the app does per phone), to check the balance holds with it.
 const D = require("../src/engine.js");
 const G = require(process.argv[3] || "../data/game/game.json");
 const per = +(process.argv[2] || 6);
 if (process.env.ODDS) D.RULES.levelOdds = JSON.parse(process.env.ODDS);
+const HIST = !!process.env.HIST, recent = {};
 function run(entry, seed, strategy) {
   const S = G.seasons[entry.season];
   const club = S.clubs.find(c => c.name === entry.club).id;
   const rel = S.relegated.find(r => r.c === club) || { c: club, f: "4-4-2", xi: [] };
-  const st = D.newRun({ seed, catalogue: G.catalogue, fixedClub: entry.key });
+  const st = D.newRun({ seed, catalogue: G.catalogue, fixedClub: entry.key, recent: HIST ? D.recentWeights(recent[entry.key]) : null });
   D.chooseClub(st, S, rel); D.startSeason(st, S);
   let guard = 0;
   while (st.phase !== "summary" && guard++ < 500) {
@@ -21,6 +24,7 @@ function run(entry, seed, strategy) {
       }
     } else if (st.phase === "prematch") D.playMatch(st, S);
   }
+  if (HIST) recent[entry.key] = [st.offered].concat(recent[entry.key] || []).slice(0, D.RULES.recent.length);
   return { f: st.final, n: S.clubs.length };
 }
 for (const strat of ["none", "greedy"]) {
