@@ -221,7 +221,8 @@
     current = def; currentName = name;
     const ch = def.chrome || THEME_CHROME[def.theme || 'black'] || THEME_CHROME.black;
     D2T.chrome(ch[0], ch[1]);
-    document.title = 'DROP2TOP' + (def.title ? ' · ' + def.title : '');
+    // home (and the intro) read "Drop2Top Football" in the browser's tabs and history (Craig, 13 Oct); other screens add their name
+    document.title = def.title && def.title !== 'Home' ? 'DROP2TOP · ' + def.title : 'Drop2Top Football';
     try { def.mount(root, D2T.params || {}); } catch (e) { console.error(e); root.innerHTML = `<div style="padding:24px">Screen "${name}" failed to load: ${D2T.esc(e.message)}</div>`; }
     D2T.params = {};
   }
