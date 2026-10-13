@@ -50,6 +50,11 @@ const RULES = {
   // balance held: greedy runs across every relegated club-season (tests/calibrate-all.js 12) win the title 1.2%, finish top 4
   // 12.5%, top half 63.7%, stay up 93.7%, 53 pts (before: 1.8%, 11.2%, 61.7%, 93.9%, 53).
   levelOdds: [0.52, 0.32, 0.13, 0.025, 0.005],
+  // Anti-repeat (Craig, 13 Oct: a club-season must never serve the same players run after run). The app remembers the cards
+  // each of the last three runs of a club-season offered (per phone) and hands them in as `recent`: a card from the last run
+  // is drawn at a tenth of the weight of a fresh one, from the run before at a quarter, from the one before that at half.
+  // The level odds are untouched, so balance holds; only which faces come up within a level changes.
+  recent: [0.1, 0.25, 0.5],
   // green: his main position 100%, his other preferred positions 95% (alt); amber next to one of them; red elsewhere.
   fit: { green: 1, alt: 0.95, amber: 0.9, red: 0.7 },
   raidFactor: 3,           // chance a raided club's win/draw is downgraded = factor x strength lost
@@ -209,14 +214,24 @@ function fixturesOf(S, club) {
 }
 
 /* ---------- starting a run ---------- */
+// The weights for `recent`: runs is a list of the cards offered by recent runs of the club-season, newest first; a card in
+// more than one takes the lowest weight. Null when there is nothing to avoid.
+function recentWeights(runs) {
+  const w = {};
+  (runs || []).slice(0, RULES.recent.length).forEach((ids, i) => { for (const id of ids || []) if (w[id] == null || w[id] > RULES.recent[i]) w[id] = RULES.recent[i]; });
+  return Object.keys(w).length ? w : null;
+}
 function newRun(opts) {
-  // opts: { seed, catalogue:[{key, season, club, ...}], daily? }
+  // opts: { seed, catalogue:[{key, season, club, ...}], fixedClub?, recent? }
+  // recent: { cardId: weight } for cards offered in recent runs of the club-season (recentWeights), kept on the run so a
+  // seed and its history always replay the same; offered: every card every roll put on the table (for the next run's recent).
   const st = {
     v: 1, seed: String(opts.seed), mode: opts.mode || "classic",
     phase: "clubroll", respins: RULES.respins, clubSpin: 0,
     clubOffer: [], seasonKey: null, club: null,
     formation: null, xi: [], gw: 0, rolls: [], rollIx: 0, rollStep: 0,
-    roll: null, seen: [], signed: [], gone: [], raids: [], played: [], log: []
+    roll: null, seen: [], signed: [], gone: [], raids: [], played: [], log: [],
+    recent: opts.recent || null, offered: []
   };
   if (opts.fixedClub) { st.clubOffer = [opts.fixedClub]; }
   else st.clubOffer = offerClubs(st, opts.catalogue);
@@ -296,11 +311,13 @@ function newDraftRoll(st, S) {
       if (id != null) { cards.push(id); taken.add(id); }
     }
     st.roll = { key: `d${st.draft.step}`, spin: 0, cards, window: "draft", slot: null, step: st.draft.step + 1, of: st.xi.length };
+    noteOffered(st, cards);
     return;
   }
   const slot = draftSlot(st), broad = SLOT_BROAD[FORMATIONS[st.formation][slot][0]];
   for (let k = 0; k < 3; k++) { const id = drawCard(r, S, st, S.legends, taken, broad); if (id != null) { cards.push(id); taken.add(id); } }
   st.roll = { key: `d${st.draft.step}`, spin: 0, cards, window: "draft", slot, step: st.draft.step + 1, of: st.xi.length };
+  noteOffered(st, cards);
 }
 // The shape can change until the first pick; in Club X's open draft at any time, the players already in re-seated to the
 // shirts they fit best and the three cards on the table kept (no fresh cards from a change of shape).
@@ -443,20 +460,29 @@ function cardPool(S, st) {
   if (st.career > 1) { mine = new Set(); for (const id of st.xi) { const p = playerOf(S, id, S.legends); if (p && p.k != null) mine.add(p.k); } }
   return S.players.filter(p => (p.a || 0) >= RULES.minApps && !seen.has(p.id) && !(mine && p.k != null && mine.has(p.k)));
 }
+// One card from a level's pool: every player as likely as the next, except those offered in recent runs of this
+// club-season (st.recent), who come up at their recent weight. Without a history the draw is a plain uniform pick.
+function pickCard(r, st, pool) {
+  if (!st.recent) return pool[Math.floor(r() * pool.length)];
+  const rw = st.recent;
+  return pickWeighted(r, pool, p => (rw[p.id] != null ? rw[p.id] : 1));
+}
 function drawCard(r, S, st, legends, taken, broad, fit) {
   const lv = (() => { let x = r(); for (let i = 0; i < 5; i++) { x -= RULES.levelOdds[i]; if (x <= 0) return i; } return 0; })();
   const pool = cardPool(S, st).filter(p => !taken.has(p.id) && (!broad || broadOf(p) === broad) && (!fit || fit(p)));
   if (lv === 4 && legends && legends.length) {
     const lp = legends.filter(l => !st.seen.includes(l.id) && !taken.has(l.id) && (!broad || broadOf(l) === broad) && (!fit || fit(l)));
-    if (lp.length) return lp[Math.floor(r() * lp.length)].id;
+    if (lp.length) return pickCard(r, st, lp).id;
   }
   // Best level at or below the one drawn that still has players; then above.
   for (let want = Math.min(lv, 3); want >= 0; want--) {
     const at = pool.filter(p => p.lv === want);
-    if (at.length) return at[Math.floor(r() * at.length)].id;
+    if (at.length) return pickCard(r, st, at).id;
   }
-  return pool.length ? pool[Math.floor(r() * pool.length)].id : null;
+  return pool.length ? pickCard(r, st, pool).id : null;
 }
+// every card put on the table in this run, for the next run's `recent`
+function noteOffered(st, cards) { st.offered = st.offered || []; for (const id of cards) if (!st.offered.includes(id)) st.offered.push(id); }
 function newRoll(st, S) {
   const w = currentWindow(st);
   const spin = (st.roll && st.roll.key === `${st.rollIx}.${st.rollStep}`) ? st.roll.spin + 1 : 0;
@@ -464,6 +490,7 @@ function newRoll(st, S) {
   const taken = new Set(), cards = [];
   for (let k = 0; k < 3; k++) { const id = drawCard(r, S, st, S.legends, taken); if (id != null) { cards.push(id); taken.add(id); } }
   st.roll = { key: `${st.rollIx}.${st.rollStep}`, spin, cards, window: w ? w.kind : "reg", step: st.rollStep + 1, of: w ? w.n : 1 };
+  noteOffered(st, cards);
 }
 function respinCards(st, S) {
   if (st.phase !== "window" || st.respins < 1 || !st.roll) return false;
@@ -692,7 +719,7 @@ function seasonSummary(S, st) {
 const API = {
   RULES, LEVELS, POS, FIT, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
   fitOf, effRating, indexSeason, playerOf, clubAt, xiStrength, userStrength, clubXI, clubStrength,
-  schedule, fixturesOf, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
+  schedule, fixturesOf, recentWeights, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
   draftOrder, draftSlot, draftFormation, draftPick, draftFits, listsPos, DRAFT_MODES, carryIn, simResults,
   startSeason, inWindow, currentWindow, newRoll, respinCards, signPreview, sign, pass,
   otherResults, strengthLoss, expectedGoals, simMatch, playMatch, table, historyTable, historyPositions, positionsSoFar, seasonSummary

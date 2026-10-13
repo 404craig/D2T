@@ -28,7 +28,8 @@
       <div class="fr-frame">${FRAME}<b>${rec.top3}</b><span>Top 3</span></div>
       <div class="fr-frame">${FRAME}<b>${rec.titles}</b><span>League titles</span></div></div>`;
 
-  const inRun = () => { const r = D2T.state.run; return !!(r && r.eng && r.eng.seasonKey && r.eng.phase !== 'summary'); };
+  // a run in progress, or a Club X career whose season is over with the next one open (D2T.game.live; Craig, 13 Oct)
+  const inRun = () => D2T.game.live();
   // Continue cards: the run on screen, and the other one (a run parked for the daily, or a daily put aside),
   // drawn by viewing it as the run for a moment (nothing is saved).
   function continueCards() {
@@ -41,7 +42,7 @@
     const eng = D2T.game.eng(), data = D2T.run(), c = data.club, run = D2T.state.run;
     const label = run.daily ? D2T.game.dailyName(run.daily, true).replace('Daily Challenge', 'Daily').toUpperCase() : D2T.game.modeName().toUpperCase();   // one line: CONTINUE · DAILY 11 OCT
     const games = data.fixtures.length, played = eng.played.length;
-    const where = eng.phase === 'draft' ? `Draft · Shirt ${eng.draft.step + 1} of ${eng.xi.length}` : eng.phase === 'setup' ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, games)} · ${STEP_LABEL[D2T.game.stepFor()] || 'In progress'}`;
+    const where = eng.phase === 'summary' ? `Season ${run.career ? run.career.n : 1} over · Next season waiting` : eng.phase === 'draft' ? `Draft · Shirt ${eng.draft.step + 1} of ${eng.xi.length}` : eng.phase === 'setup' ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, games)} · ${STEP_LABEL[D2T.game.stepFor()] || 'In progress'}`;
     // Club sweep (chosen 11 Oct): light club colour at the left, the true colour across the middle, a deeper shade at the right.
     const mix = D2T.mix, a = c.accent;
     const lum = (h) => { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }).reduce((t, v, i) => t + v * [0.2126, 0.7152, 0.0722][i], 0); };
@@ -99,10 +100,12 @@
       tag, big: `${D2T.esc(d.name)}<br>${d.season}`, sub, mark: `<img class="fr-gm-crest" src="${d.crest}" alt="">` }) + dailyTiles(d, res);
   }
   function dailyTiles(d, res) {
-    const G = D2T.game, cmp = G.dailyCompare(), best = cmp.best, o = D2T.ordinal, esc = D2T.esc;
+    // Your best Daily counts today's too (it showed "None yet" beside your first Daily); the right tile still sets today
+    // against your best other day
+    const G = D2T.game, cmp = G.dailyCompare(), best = cmp.best, top = G.dailyBest(), o = D2T.ordinal, esc = D2T.esc;
     const crest = (name) => { const c = G.club(name); return c && c.crest ? `<img src="${c.crest}" alt="">` : ''; };
     const rise = (n) => `<span class="fr-rise">${UP} ${n}</span>`;
-    const left = best ? `<b>${crest(best.club)}${rise(best.rise)}</b><small>${esc(best.club)} · ${o(best.histFinish)} to ${o(best.finish)}</small>`
+    const left = top ? `<b>${crest(top.club)}${rise(top.rise)}</b><small>${esc(top.club)} · ${o(top.histFinish)} to ${o(top.finish)}</small>`
       : '<b>None yet</b><small>Play today to set one</small>';
     let right, newBest = false;
     if (res) { newBest = cmp.isBest; right = `<b>${crest(d.name)}${rise(res.rise)}</b><small>${newBest ? 'New best' : `${esc(d.name)} · ${o(res.histFinish)} to ${o(res.finish)}`}</small>`; }
@@ -240,8 +243,8 @@
         D2T.game.stashDaily();                                   // an unfinished daily keeps its own slot
         if (!inRun()) { startNew(from, mode); return; }
         // the game's own question, never the phone's confirm box
-        const name = D2T.run().club.name;
-        const s = D2T.sheet({ title: 'Start a new run?', body: `<p class="fr-lead">Your ${D2T.esc(name)} run will be lost.</p>
+        const name = D2T.run().club.name, career = D2T.game.careerOpen(D2T.state.run);
+        const s = D2T.sheet({ title: career ? 'Start a new career?' : 'Start a new run?', body: `<p class="fr-lead">${career ? `Your ${D2T.esc(name)} career is waiting for its next season. Starting again will lose it.` : `Your ${D2T.esc(name)} run will be lost.`}</p>
           <div class="fr-two"><button class="btn btn-ghost" data-k="no">Keep playing</button><button class="btn btn-ghost" data-k="yes" style="color:#12F06C">New run</button></div>` });
         s.body.querySelector('[data-k="no"]').onclick = s.close;
         s.body.querySelector('[data-k="yes"]').onclick = () => { s.close(); startNew(from, mode); };

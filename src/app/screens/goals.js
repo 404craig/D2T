@@ -133,7 +133,7 @@
     title: 'Goal Rush', theme: 'black',
     mount(root) {
       const reduced = D2T.reduced(), G4 = D2T.game.g433;
-      const fresh = () => ({ filled: [], respins: G4.RESPINS, cands: null, recorded: false, gift: null, formation: G4.pickFormation(), revealed: false });
+      const fresh = () => { G4.newGame(); return { filled: [], respins: G4.RESPINS, cands: null, recorded: false, gift: null, formation: G4.pickFormation(), revealed: false }; };
       let S = D2T.state.g433 && Array.isArray(D2T.state.g433.filled) ? D2T.state.g433 : (D2T.state.g433 = fresh());
       // a game saved by 433 Goals carries on as a 4-3-3 with no reveal
       if (!S.formation) { S.formation = '433'; S.revealed = true; }
