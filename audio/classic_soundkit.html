@@ -152,67 +152,44 @@ details.research summary { cursor: pointer; font-weight: 900; font-style: italic
 .pick-list span { color: var(--soft); }
 .toast { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--green); color: var(--green-ink); font-weight: 800; padding: 9px 14px; border-radius: 8px; z-index: 9; }
 textarea.copy { width: 100%; min-height: 140px; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 6px; font: 12px/1.4 ui-monospace, Menlo, monospace; }
+.pick { font-size: 14px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.pick b { font-weight: 800; }
+.change { font-size: 13px; color: var(--soft); border-left: 2px solid var(--green); padding-left: 10px; }
+.src.off { color: var(--soft); }
+.mute { min-height: 40px; border-radius: 8px; border: 1px solid var(--line); background: transparent; color: var(--fg); font-size: 13px; font-weight: 700; text-align: left; padding: 6px 12px; }
+.mute:hover { border-color: var(--soft); }
+.mute.on { border-color: var(--bad); color: var(--bad); background: #1A0909; }
+.cue.is-off h3 { color: var(--soft); }
+.cmt-l { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); }
+.cmt { width: 100%; min-height: 54px; resize: vertical; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font: 14px/1.4 var(--font); }
+.cmt:focus { border-color: var(--green); outline: none; }
+.sum { display: grid; gap: 0; font-size: 13px; }
+.sum div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.sum span { color: var(--soft); }
+.sum i { grid-column: 1 / -1; font-style: normal; color: var(--fg); border-left: 2px solid var(--green); padding-left: 8px; }
+.sum .off b { color: var(--bad); }
 @media (prefers-reduced-motion: reduce) { .emblem.go { animation: none; } * { transition: none !important; } }
 </style>
 
 <div class="wrap">
   <header class="top">
     <span class="eyebrow">DROP2TOP &middot; Classic</span>
-    <h1>Classic <em>sound kit</em></h1>
-    <p>Every action and animation in a Classic run, in the order you meet them, with five options each: <b>A, B and C are made in code</b> in three styles (A Soft, B Glass, C Punch; keep to one style if you want the game to sound of a piece), and <b>D and E are recorded with ElevenLabs</b>. Small actions are marked Muted: their sounds stay soft at any volume, and each has a Silent choice. Press &#9654; to listen, then <b>Choose</b>, or mark <b>None of these work</b>. Each section ends with a feedback box. The demo strips play whole moments at the game's real timings using your choices.</p>
+    <h1>Your <em>sound kit</em></h1>
+    <p>Your picks for every action in a Classic run. Anything that wasn't already soft has been redone softer and quieter, and your notes are applied. Press &#9654; to hear each one. Every sound has a <b>Make silent</b> button and its own comment box, and everything saves as you go. The demo strips play whole moments at the game's real timings.</p>
     <div class="savebar" id="savebar"><i></i><span id="saveText">Saving on this device for now.</span></div>
     <div class="mixer">
       <div class="fader"><label for="m_vol">Volume <output id="o_vol"></output></label><input type="range" id="m_vol" min="0" max="1.5" step="0.01"></div>
       <div class="fader"><label for="m_room">Stadium echo <output id="o_room"></output></label><input type="range" id="m_room" min="0" max="1" step="0.01"></div>
-      <label class="toggle" for="m_var">Small variation on repeats <input type="checkbox" id="m_var"></label>
       <label class="toggle" for="m_bed">Crowd bed under match sounds <input type="checkbox" id="m_bed"></label>
     </div>
   </header>
-
-  <details class="research" id="research">
-    <summary>How these were made: research and approach</summary>
-    <div class="research-grid">
-      <div>
-        <h3>What makes game sounds feel good</h3>
-        <ul>
-          <li><b>Instant and in time.</b> The sound starts on the frame the thing moves, with a tight front edge, so a tap feels like it caused it.</li>
-          <li><b>Layers with jobs.</b> A click for the instant, a body for the material (glass, wood, metal), a short tail for space. A single bare tone is what sounds cheap.</li>
-          <li><b>A hierarchy.</b> The more rewarding the moment, the bigger the sound. Taps stay quiet and short; signings, goals and season ends get the weight.</li>
-          <li><b>Vary the frequent, fix the signature.</b> Taps and ticks shift pitch a touch each time so repeats don't nag; signature cues stay identical so they're recognised.</li>
-          <li><b>One key.</b> Every tonal sound here sits in D major (D for D2T), so cues that overlap still sound like one game.</li>
-        </ul>
-      </div>
-      <div>
-        <h3>What EA FC and card games do</h3>
-        <ul>
-          <li><b>Rarity is felt before it's read.</b> FC signals a card's tier through the reveal itself, and walkouts build in stages (nation, position, club) before the player appears.</li>
-          <li><b>Tension then release.</b> A rising sound as the reels slow, a beat of quiet, then a distinct hit when the last one lands. Used lightly here: D2T is not a casino.</li>
-          <li><b>Real stadium under the graphics.</b> Crowd, whistles and nets carry the football; the slick swishes and hits belong to the menus.</li>
-          <li><b>Match the animation length.</b> A whoosh as long as the swipe, a counter sound as long as the count.</li>
-        </ul>
-      </div>
-      <div class="decision">
-        <h3>Decision: both, each where it is strongest</h3>
-        <ul>
-          <li><b>ElevenLabs</b> <span class="src el">REC</span> for real-world textures: crowd, whistles, impacts, fireworks, the tunnel, paper and stamps. It's good at these and poor at crisp clicks.</li>
-          <li><b>Own synthesis</b> <span class="src syn">SYN</span> for taps, ticks, notes and anything that must follow an animation frame by frame (reels, table scan, counters) or change by card level. These are generated live, cost nothing to load and can be tuned in code.</li>
-          <li><b>Mixed</b> <span class="src mix">MIX</span> for the big moments: a recorded hit under synth notes.</li>
-          <li>67 ElevenLabs clips made for this kit plus the game's 20, no voices. Each was trimmed so it starts on the first sample.</li>
-          <li><b>Muted actions</b> (back, tabs, lifting a card) play through their own channel, low-passed and capped, so they never get loud even at full volume.</li>
-        </ul>
-      </div>
-    </div>
-    <p class="soft" style="margin-top:12px;font-size:12px">Sources: <a href="https://violetrecording.com/how-to-design-sound-effects-for-games/" target="_blank" rel="noopener">Violet Recording, designing game sound effects</a> · <a href="https://www.asoundeffect.com/game-audio-immersion/" target="_blank" rel="noopener">A Sound Effect, game audio immersion</a> · <a href="https://www.audiokinetic.com/en/blog/approaching-ui-audio-ui-design-perspective-1" target="_blank" rel="noopener">Audiokinetic, UI audio from a UI design view</a> · <a href="https://schedule.gdconf.com/session/civilization-vii-impactful-ui-sound-design-at-scale/915690" target="_blank" rel="noopener">GDC, Civilization VII UI sound at scale</a> · <a href="https://videogames.si.com/guides/ea-fc-24-walkout-animations" target="_blank" rel="noopener">SI, EA FC 24 walkout animations</a> · <a href="https://mein-mmo.de/en/ea-fc-26-how-to-recognize-walkouts-during-pack-opening,1526086" target="_blank" rel="noopener">Mein-MMO, FC 26 walkouts</a> · <a href="https://www.heavenofhorror.com/movies/sound-design-horror-films/" target="_blank" rel="noopener">Reel slowdown and near-miss audio</a> · <a href="https://www.tomsguide.com/ai/i-just-got-early-access-to-elevenlabs-ai-sound-effect-generator-heres-what-it-can-do" target="_blank" rel="noopener">Tom's Guide on ElevenLabs sound effects</a></p>
-  </details>
-
   <nav class="nav" id="nav" aria-label="Stages"></nav>
   <div id="bays" style="display:grid;gap:34px"></div>
-
   <section class="picks" id="picks" aria-labelledby="h-picks">
-    <h2 id="h-picks">Your picks</h2>
-    <p class="soft" style="font-size:14px">Everything you've chosen and written, in one place. It saves as you go; Copy is there if you want to paste it anywhere.</p>
-    <div class="pick-list" id="pickList"></div><div class="pick-notes" id="pickNotes"></div>
-    <div class="demo-row"><button class="btn go" id="copyPicks" type="button">Copy my picks</button><button class="btn" id="resetPicks" type="button">Back to our picks</button></div>
+    <h2 id="h-picks">Summary</h2>
+    <p class="soft" style="font-size:14px">Every sound as it will go into the game, with anything you've silenced and your comments.</p>
+    <div class="sum" id="sum"></div>
+    <div class="demo-row"><button class="btn go" id="copyPicks" type="button">Copy the list</button></div>
     <div id="copyBox" hidden></div>
   </section>
 </div>
@@ -223,10 +200,9 @@ textarea.copy { width: 100%; min-height: 140px; background: var(--bg); color: va
 "use strict";
 const $ = (s, r = document) => r.querySelector(s);
 const PLAY_ICON = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3 1.5v13l11-6.5z"/></svg>';
-
 /* ================= saved settings ================= */
-const KEY = "d2t-classic-kit-v2";
-let S = { vol: 0.9, room: 0.3, vary: true, bed: true, picks: {} };
+const KEY = "d2t-classic-kit-final";
+let S = { vol: 0.85, room: 0.25, vary: true, bed: true, off: {}, comments: {} };
 try { Object.assign(S, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
 
@@ -236,8 +212,8 @@ const ctx = new AC();
 const limiter = ctx.createDynamicsCompressor();
 limiter.threshold.value = -6; limiter.knee.value = 4; limiter.ratio.value = 12; limiter.attack.value = 0.002; limiter.release.value = 0.12;
 const master = ctx.createGain(); master.connect(limiter); limiter.connect(ctx.destination);
-const fx = ctx.createGain(); fx.connect(master);
-const bedBus = ctx.createGain(); bedBus.gain.value = 0.32; bedBus.connect(master);
+const fx = ctx.createGain(), fxTone = ctx.createBiquadFilter(); fxTone.type = "lowpass"; fxTone.frequency.value = 7000; fxTone.Q.value = 0.5; fx.connect(fxTone); fxTone.connect(master);
+const bedBus = ctx.createGain(); bedBus.gain.value = 0.9; bedBus.connect(master);
 const verbIn = ctx.createGain(), verb = ctx.createConvolver(), verbOut = ctx.createGain();
 verb.buffer = (() => { // stadium-ish room: a few early reflections, then a darkening stereo tail
   const sr = ctx.sampleRate, len = Math.floor(sr * 1.8), b = ctx.createBuffer(2, len, sr);
@@ -318,6 +294,7 @@ const chord = (d, notes, t, dur, pk, ratio = 3.5, index = 1.2, spread = 0) => no
 
 /* recorded clips (ElevenLabs): the game's 20 plus 15 made for this kit */
 const CLIPS = {
+  soft: ["air_horn", "applause", "boos", "card_slide", "celebration", "cheer_short", "crowd_loop", "crowd_moan", "doom_boom", "flares", "goal_roar", "groan", "logo_deep", "net_ripple", "reel_clunk", "relegation_sting", "stamp", "stunned_silence", "trophy_fanfare", "whistle_three", "whistle_two"],
   game: ["applause", "boos", "card_deal", "card_pack", "card_shuffle", "card_slide", "celebration", "cheer_short", "crowd_loop", "crowd_moan", "crowd_ooh", "full_time", "goal_roar", "groan", "half_time", "net_ripple", "relegation_sting", "stunned_silence", "trophy_fanfare", "whistle"],
   classic: ["air_horn", "counter_roll", "crowd_swell", "flares", "glass_click", "impact_boom", "impact_boom_b", "reel_clunk", "riser", "scribble", "sparkle", "stamp", "tunnel", "whoosh_fast", "whoosh_heavy",
     "badge_unlock", "blip_bad", "blip_good", "btn_press", "card_flip", "card_lift", "card_pickup", "card_slap", "cards_drop3", "cards_fan", "cards_shuffle_table", "cards_sweep", "charge_burst", "chime_rise", "coin_slot", "doom_boom", "door_close", "drumroll", "ffwd", "knock_soft", "lock_ring", "logo_deep", "logo_sting", "lv_baller", "lv_bronze", "lv_gold", "lv_legend", "lv_silver", "note_pop", "reel_ratchet", "reel_start", "reel_thunk", "reel_whir", "rewind", "rewind_chime", "scoreboard_stop", "send_pop", "sign_stamp", "sting_draw", "sting_loss", "sting_win", "swish_cloth", "swoosh_down", "swoosh_up", "tap_felt", "tap_wood", "thud_low", "tick_mech", "tick_wood", "whistle_long", "whistle_three", "whistle_two"]
@@ -325,7 +302,7 @@ const CLIPS = {
 const BUF = {}, REV = {};
 function decode(ab) { return new Promise((res, rej) => { const p = ctx.decodeAudioData(ab, res, rej); if (p && p.then) p.then(res, rej); }); }
 let loaded = 0, total = 0;
-Object.entries(CLIPS).forEach(([dir, list]) => list.forEach((n) => { total++; fetch(`${dir}/${n}.mp3`).then((r) => r.arrayBuffer()).then(decode).then((b) => { BUF[n] = b; }).catch(() => {}).finally(() => { loaded++; }); }));
+Object.entries(CLIPS).forEach(([dir, list]) => list.forEach((n) => { total++; fetch(`${dir}/${n}.mp3`).then((r) => r.arrayBuffer()).then(decode).then((b) => { BUF[dir === "soft" ? "s_" + n : n] = b; }).catch(() => {}).finally(() => { loaded++; }); }));
 function rev(n) { if (REV[n]) return REV[n]; const s = BUF[n], b = ctx.createBuffer(s.numberOfChannels, s.length, s.sampleRate); for (let c = 0; c < s.numberOfChannels; c++) { const a = s.getChannelData(c), z = b.getChannelData(c); for (let i = 0, L = a.length; i < L; i++) z[i] = a[L - 1 - i]; } return (REV[n] = b); }
 function smp(d, n, t, o = {}) {
   const b = o.reverse ? (BUF[n] && rev(n)) : BUF[n]; if (!b) return null;
@@ -341,9 +318,9 @@ const len = (n) => (BUF[n] ? BUF[n].duration : 1);
 
 /* crowd bed with ducking */
 let bed = null;
-function bedOn() { if (bed || !S.bed || !BUF.crowd_loop) return; bed = smp(bedBus, "crowd_loop", ctx.currentTime, { loop: true, fadeIn: 0.8, fixed: true }); }
+function bedOn() { if (bed || !S.bed || !BUF.s_crowd_loop) return; bed = smp(bedBus, "s_crowd_loop", ctx.currentTime, { loop: true, fadeIn: 0.8, fixed: true }); }
 function bedOff() { if (bed) { bed.stop(0.8); bed = null; } }
-function duck(t, dur = 1.6, depth = 0.35) { const g = bedBus.gain; g.cancelScheduledValues(t); g.setValueAtTime(g.value, t); g.linearRampToValueAtTime(0.32 * depth, t + 0.05); g.linearRampToValueAtTime(0.32, t + dur); }
+function duck(t, dur = 1.6, depth = 0.35) { const g = bedBus.gain; g.cancelScheduledValues(t); g.setValueAtTime(g.value, t); g.linearRampToValueAtTime(0.9 * depth, t + 0.05); g.linearRampToValueAtTime(0.9, t + dur); }
 
 /* whistle (synth pea whistle, used by option B of the whistles) */
 function pea(d, t, blasts = 1, len1 = 0.32) { let st = t; for (let b = 0; b < blasts; b++) { const L = blasts === 3 && b === 2 ? len1 * 2.4 : len1;
@@ -377,373 +354,129 @@ function pulseRise(d, t, dur) { let x = 0, g = 0.38; while (x < dur - 0.05) { th
 function heartbeat(d, t, dur) { let x = 0, gap = 0.62; while (x < dur - 0.1) { thump(d, t + x, 95, 40, 0.14, 0.55); thump(d, t + x + 0.16, 85, 38, 0.12, 0.35); x += gap; gap = Math.max(0.36, gap * 0.9); } }
 
 /* the cues: A, B, C made in code (Soft, Glass, Punch); D, E from ElevenLabs; S silent where a sound isn't needed */
+/* ================= your picks, made softer and quieter =================
+   Every pick that wasn't already in the Soft style has been redone: code sounds are low-passed with gentler attacks
+   and lower peaks; recorded clips are the files in soft/ (top end cut, transients rounded, levels brought down). */
+const sclip = (n) => "s_" + n;
+const S_ = (d, n, t, o = {}) => smp(d, sclip(n), t, o);
 const CUES = [
-  /* ---------- around the game ---------- */
-  { id: "intro", st: "shell", n: "Opening logo", w: "Every fresh load: the emblem turns 360, D2T opens into DROP2TOP, then glides to the top.", rec: "B", prev: "B", opts: [
-    { k: "A", n: "Warm bloom", s: "syn", d: "A soft rising swell and a plucked D major chord. Gentle.", p(t) { const o = O(1, 0.4); swish(o, t, 0.75, 200, 1800, 0.12, { panFrom: -0.4, panTo: 0.4 }); [D.D4, D.A4, D.D5, D.Fs5].forEach((n, i) => pluck(o, n, t + 0.72 + i * 0.03, 0.22, { dur: 2 })); felt(o, t + 0.72, 120, 0.35, 0.2); } },
-    { k: "B", n: "Spin and lock", s: "syn", d: "Air rising with the turn, a glassy chord as the letters lock. Closest to your earlier pick.", p(t) { const o = O(1, 0.35); swish(o, t, 0.7, 300, 2600, 0.2, { panFrom: -0.5, panTo: 0.5 }); click(o, t + 0.74, 5200, 0.2); thump(o, t + 0.74, 120, 45, 0.25, 0.4); chord(o, [D.D5, D.A5, D.D6, D.Fs6], t + 0.74, 1.3, 0.08); [D.D7, D.A6].forEach((n, i) => fm(o, n, t + 0.8 + i * 0.06, 0.6, 0.025, { ratio: 3.5, index: 0.6 })); } },
-    { k: "C", n: "Broadcast hit", s: "syn", d: "A punchy TV-style hit with a short brass stab as it locks.", p(t) { const o = O(1, 0.3); swish(o, t, 0.6, 400, 4000, 0.18); snap(o, t + 0.72, 0.35); thump(o, t + 0.72, 160, 40, 0.3, 0.7); brass(o, [D.D4, D.A4, D.D5, D.Fs5], t + 0.73, 0.6, 0.05, 3200); } },
-    { k: "D", n: "Logo sting", s: "rec", d: "A sleek broadcast whoosh into a shimmering hit.", p(t) { smp(O(1, 0.25), "logo_sting", t + 0.1, { gain: 0.8 }); } },
-    { k: "E", n: "Deep reveal", s: "rec", d: "A rising swoosh into a soft deep hit, timed to the lock.", p(t) { smp(O(1, 0.25), "logo_deep", t, { gain: 0.8 }); } }
-  ] },
-  { id: "tapMain", st: "shell", n: "Main button", w: "Spin, Play, Continue, Kick off: the big button in the bar.", rec: "B", prev: "B", opts: [
-    { k: "A", n: "Felt press", s: "syn", d: "A soft, rounded press. Barely a click.", p(t) { felt(O(1, 0.05), t, 260, 0.55); } },
-    { k: "B", n: "Glass", s: "syn", d: "A small glassy ping on a crisp click. Your earlier pick.", p(t) { const o = O(1, 0.15); click(o, t, 5200, 0.2); fm(o, D.D6 * vr(), t, 0.2, 0.16, { ratio: 2.76, index: 1.2 }); } },
-    { k: "C", n: "Thock", s: "syn", d: "A solid console-pad press with real weight.", p(t) { const o = O(1, 0.1); thump(o, t, 230, 90, 0.07, 0.55); click(o, t, 2600, 0.16); nz(o, t, 0.03, { type: "lowpass", f: 900, peak: 0.12 }); } },
-    { k: "D", n: "Glass click", s: "rec", d: "A recorded glassy app click.", p(t) { smp(O(1, 0.1), "glass_click", t, { gain: 0.85 }); } },
-    { k: "E", n: "Console button", s: "rec", d: "A recorded tactile button press.", p(t) { smp(O(1, 0.1), "btn_press", t, { gain: 0.9 }); } }
-  ] },
-  { id: "tapSmall", st: "shell", n: "Small taps", w: "Back arrow, tabs, toggles, tapping a card to look at it.", quiet: true, rec: "S", prev: "S", opts: [
-    { k: "A", n: "Muted felt", s: "syn", d: "A dull, very soft touch.", p(t) { felt(O(1, 0), t, 200, 0.35, 0.06); } },
-    { k: "B", n: "Muted tick", s: "syn", d: "A tiny tick with the top taken off.", p(t) { const o = soft(O(1, 0), 1400); click(o, t, 2600, 0.12); } },
-    { k: "C", n: "Muted knock", s: "syn", d: "A small low knock.", p(t) { wood(soft(O(1, 0), 1200), t, 900, 0.25); } },
-    { k: "D", n: "Felt tap", s: "rec", d: "A recorded tap on felt.", p(t) { smp(O(1, 0), "tap_felt", t, { gain: 0.8, offset: 0.08 }); } },
-    { k: "E", n: "Wooden tick", s: "rec", d: "A recorded tiny wooden tick.", p(t) { smp(O(1, 0), "tap_wood", t, { gain: 0.8 }); } }
-  ] },
-  { id: "sheet", st: "shell", n: "Slide-up panel", w: "Formation picker, settings, confirm boxes: up, and dragged down to close.", quiet: true, vars: ["Open", "Close"], rec: "A", opts: [
-    { k: "A", n: "Soft air", s: "syn", d: "A muffled swish up, a softer one down.", p(t, v) { const o = soft(O(1, 0), 1800); v ? swish(o, t, 0.2, 1600, 400, 0.22) : swish(o, t, 0.22, 400, 1800, 0.25); } },
-    { k: "B", n: "Air and tick", s: "syn", d: "The swish with a small tick as it settles.", p(t, v) { const o = soft(O(1, 0), 2400); v ? swish(o, t, 0.2, 2400, 500, 0.18) : swish(o, t, 0.22, 500, 2600, 0.2); click(o, t + 0.2, 2200, 0.08); } },
-    { k: "C", n: "Low thump", s: "syn", d: "Just a soft low thump as it lands.", p(t, v) { felt(O(1, 0), t + (v ? 0.18 : 0.2), v ? 150 : 190, 0.35, 0.08); } },
-    { k: "D", n: "Whoosh", s: "rec", d: "A recorded whoosh, higher up, lower down.", p(t, v) { smp(soft(O(1, 0), 2400), "whoosh_fast", t, { gain: 0.5, rate: v ? 0.82 : 1.15 }); } },
-    { k: "E", n: "Cloth swish", s: "rec", d: "A recorded fabric swish.", p(t, v) { smp(O(1, 0), "swish_cloth", t, { gain: 0.6, rate: v ? 0.85 : 1.1, reverse: !!v }); } }
-  ] },
-  { id: "cardZoom", st: "shell", n: "Card opens big", w: "A selected card spins horizontally as it grows to the big card, and back.", vars: ["Open", "Close"], rec: "D", prev: "D", opts: [
-    { k: "A", n: "Soft turn", s: "syn", d: "A muffled flick as it turns and a warm low note.", p(t, v) { const o = O(1, 0.2); nz(soft(o, 2000), t, 0.05, { f: 1400, q: 1.5, peak: 0.3 }); pluck(o, v ? D.D4 : D.A4, t + 0.12, 0.16); } },
-    { k: "B", n: "Flip and shine", s: "syn", d: "Two flicks as it turns, a little shine when it faces you.", p(t, v) { const o = O(1, 0.2); [0, 0.07].forEach((x) => nz(o, t + x, 0.035, { f: 2600 * vr(0.05), q: 2, peak: 0.28 })); if (v === 1) swish(o, t, 0.28, 3000, 700, 0.12); else { swish(o, t, 0.3, 700, 3200, 0.14); fm(o, D.A6, t + 0.28, 0.5, 0.05, { ratio: 3.5, index: 0.8 }); } } },
-    { k: "C", n: "Snap turn", s: "syn", d: "A quick whip and a tight snap as it lands big.", p(t, v) { const o = O(1, 0.15); swish(o, t, 0.2, v ? 3500 : 800, v ? 800 : 3500, 0.2); snap(o, t + 0.22, 0.28); } },
-    { k: "D", n: "Card slide", s: "rec", d: "A recorded card slide, pitched for open and close. Your earlier pick.", p(t, v) { smp(O(1, 0.15), "card_slide", t, { gain: 0.6, rate: v ? 0.9 : 1.12 }); } },
-    { k: "E", n: "Card flip", s: "rec", d: "A recorded crisp card flip.", p(t, v) { smp(O(1, 0.15), "card_flip", t, { gain: 0.75, rate: v ? 0.88 : 1.05 }); } }
-  ] },
-  { id: "denied", st: "shell", n: "Not allowed", w: "A tap that can't happen: no respins left, a locked mode, a wrong drop.", rec: "A", opts: [
-    { k: "A", n: "Knock knock", s: "syn", d: "Two soft wooden knocks. Says no without scolding.", p(t) { const o = O(1, 0.1); [0, 0.11].forEach((x, i) => { nz(o, t + x, 0.05, { f: 760 - i * 120, q: 6, peak: 0.4 }); osc(o, "sine", 190 - i * 25, t + x, 0.07, 0.25); }); } },
-    { k: "B", n: "Low two-tone", s: "syn", d: "Two soft glassy notes, falling.", p(t) { const o = O(1, 0.1); fm(o, D.A4, t, 0.12, 0.08, { ratio: 2, index: 0.6 }); fm(o, D.F3 * 2, t + 0.11, 0.18, 0.08, { ratio: 2, index: 0.6 }); } },
-    { k: "C", n: "Muted buzz", s: "syn", d: "A short low buzz, filtered so it isn't harsh.", p(t) { const f = soft(O(1, 0.05), 700); osc(f, "sawtooth", 110, t, 0.18, 0.2, { hold: 0.08 }); osc(f, "sawtooth", 116, t, 0.18, 0.15, { hold: 0.08 }); } },
-    { k: "D", n: "Soft knocks", s: "rec", d: "Recorded gentle wooden knocks.", p(t) { smp(O(1, 0.1), "knock_soft", t, { gain: 0.8 }); } },
-    { k: "E", n: "Low thud", s: "rec", d: "A recorded dull thud.", p(t) { smp(O(1, 0.1), "thud_low", t, { gain: 0.8 }); } }
-  ] },
-  { id: "tip", st: "shell", n: "First-time tip", w: "The handwritten note with a curved arrow appears.", quiet: true, rec: "A", prev: "A", opts: [
-    { k: "A", n: "Pop", s: "syn", d: "A light bubble pop. Your earlier pick.", p(t) { const o = O(1, 0.1); osc(o, "sine", 600, t, 0.07, 0.25, { to: 1400, glide: 0.05 }); click(o, t, 3000, 0.08); } },
-    { k: "B", n: "Bell", s: "syn", d: "One small soft bell.", p(t) { fm(O(1, 0.15), D.A5, t, 0.5, 0.08, { ratio: 3.5, index: 0.7 }); } },
-    { k: "C", n: "Flick", s: "syn", d: "A paper flick.", p(t) { nz(O(1, 0.05), t, 0.05, { f: 2400, f2: 4800, q: 1.4, peak: 0.25 }); } },
-    { k: "D", n: "Pencil", s: "rec", d: "A recorded quick scribble.", p(t) { smp(O(1, 0.05), "scribble", t, { gain: 0.5, rate: 1.25, dur: 0.5 }); } },
-    { k: "E", n: "Note pop", s: "rec", d: "A recorded soft pop, like a sticky note.", p(t) { smp(O(1, 0.05), "note_pop", t, { gain: 0.8 }); } }
-  ] },
+  /* around the game */
+  { id: "intro", st: "shell", n: "Opening logo", w: "Every fresh load: the emblem turns 360, D2T opens into DROP2TOP, then glides to the top.", pick: "E. Deep reveal", s: "rec", ch: "Top end cut and brought down by about 9 dB, with a gentler start.",
+    p(t) { S_(O(1, 0.15), "logo_deep", t, { gain: 1 }); } },
+  { id: "tapMain", st: "shell", n: "Main button", w: "Spin, Play, Continue, Kick off: the big button in the bar.", pick: "A. Felt press", s: "syn", ch: "Already soft; a touch quieter.",
+    p(t) { felt(O(1, 0.04), t, 260, 0.42); } },
+  { id: "tapSmall", st: "shell", n: "Small taps", w: "Back arrow, tabs, toggles, tapping a card to look at it.", quiet: true, pick: "A. Muted felt", s: "syn", ch: "Already soft and muted; stays quiet at any volume.",
+    p(t) { felt(O(1, 0), t, 200, 0.35, 0.06); } },
+  { id: "sheet", st: "shell", n: "Slide-up panel", w: "Formation picker, settings, confirm boxes: up, and dragged down to close.", quiet: true, vars: ["Open", "Close"], pick: "A. Soft air", s: "syn", ch: "Already soft and muted.",
+    p(t, v) { const o = soft(O(1, 0), 1800); v ? swish(o, t, 0.2, 1600, 400, 0.22) : swish(o, t, 0.22, 400, 1800, 0.25); } },
+  { id: "cardZoom", st: "shell", n: "Card opens big", w: "A selected card spins horizontally as it grows to the big card, and back.", vars: ["Open", "Close"], pick: "D. Card slide", s: "rec", ch: "Your note: more subtle and softer. Shorter, quieter, top end cut.",
+    p(t, v) { S_(O(1, 0.08), "card_slide", t, { gain: 0.55, rate: v ? 0.9 : 1.1, dur: 0.35 }); } },
+  { id: "denied", st: "shell", n: "Not allowed", w: "A tap that can't happen: no respins left, a locked mode, a wrong drop.", pick: "A. Knock knock", s: "syn", ch: "Your note: softer and quieter. Muffled knocks at about half the level.",
+    p(t) { const o = soft(O(1, 0.05), 1100); [0, 0.11].forEach((x, i) => { nz(o, t + x, 0.05, { f: 640 - i * 100, q: 5, peak: 0.16 }); osc(o, "sine", 180 - i * 25, t + x, 0.07, 0.12); }); } },
+  { id: "tip", st: "shell", n: "First-time tip", w: "The handwritten note with a curved arrow appears.", quiet: true, pick: "A. Pop", s: "syn", ch: "Now muffled and muted like the other small sounds.",
+    p(t) { const o = soft(O(1, 0), 2200); osc(o, "sine", 600, t, 0.07, 0.22, { to: 1300, glide: 0.05 }); } },
 
-  /* ---------- club spin ---------- */
-  { id: "spinStart", st: "club", n: "Spin pressed", w: "The reels launch.", rec: "D", prev: "D", opts: [
-    { k: "A", n: "Soft launch", s: "syn", d: "A warm rising swell into the reels.", p(t) { const o = O(1, 0.2); swish(soft(o, 2000), t, 0.35, 300, 1800, 0.2); felt(o, t, 150, 0.4, 0.12); } },
-    { k: "B", n: "Glass launch", s: "syn", d: "A bright rising note and a click.", p(t) { const o = O(1, 0.2); click(o, t, 4500, 0.18); osc(o, "triangle", 330, t, 0.3, 0.08, { to: 1320 }); fm(o, D.D6, t + 0.25, 0.3, 0.05, { ratio: 3.5, index: 0.8 }); } },
-    { k: "C", n: "Punch launch", s: "syn", d: "A tight thump and a fast whip.", p(t) { const o = O(1, 0.15); thump(o, t, 200, 60, 0.12, 0.6); snap(o, t, 0.3); swish(o, t + 0.02, 0.25, 900, 4500, 0.2); } },
-    { k: "D", n: "Lever", s: "rec", d: "A recorded latch releasing. Your earlier pick.", p(t) { const o = O(1, 0.15); smp(o, "reel_clunk", t, { gain: 0.85, rate: 0.8 }); } },
-    { k: "E", n: "Reel spin-up", s: "rec", d: "A recorded slot reel ratcheting up to speed.", p(t) { smp(O(1, 0.15), "reel_start", t, { gain: 0.75, dur: 0.7 }); } }
-  ] },
-  { id: "reelRun", st: "club", n: "Reels spinning", w: "While the cards blur past. Follows each reel's real speed: play it from the demo above.", run: true, rec: "B", prev: "B", opts: [
-    { k: "A", n: "Soft whir", s: "syn", d: "Muffled air that rises and falls with the speed.", mode: { whir: true, cut: 1200 } },
-    { k: "B", n: "Ticks", s: "syn", d: "A tick for every card that passes. Your earlier pick.", mode: { tick: "glass" } },
-    { k: "C", n: "Ticks and whir", s: "syn", d: "Whir at full speed, punchy ticks you can count as it slows.", mode: { tick: "punch", whir: true } },
-    { k: "D", n: "Reel whir", s: "rec", d: "A recorded mechanical whir, sped up and slowed with each reel.", mode: { loop: "reel_whir" } },
-    { k: "E", n: "Prize wheel", s: "rec", d: "A recorded ratchet clicking, following each reel's speed.", mode: { loop: "reel_ratchet" } }
-  ] },
-  { id: "reelLand", st: "club", n: "Each reel lands", w: "Left, middle, right. The third finishes the set.", vars: ["Left", "Middle", "Right"], rec: "B", opts: [
-    { k: "A", n: "Plucked notes", s: "syn", d: "Plucked D, F sharp, A with a soft thud: the three build a chord.", p(t, v) { const o = O(1, 0.3); felt(o, t, 150, 0.35); pluck(o, [D.D5, D.Fs5, D.A5][v], t, 0.36, { pan: [-0.4, 0, 0.4][v] }); } },
-    { k: "B", n: "Glass notes", s: "syn", d: "Glassy D, F sharp, A; the third rings on.", p(t, v) { const o = O(1, 0.3); click(o, t, 4000, 0.14); fm(o, [D.D6, D.Fs6, D.A6][v], t, v === 2 ? 1.0 : 0.4, 0.1, { ratio: 3.5, index: 1.1, pan: [-0.4, 0, 0.4][v] }); } },
-    { k: "C", n: "Thump", s: "syn", d: "A tight thump, a little higher each reel.", p(t, v) { const o = O(1, 0.15); thump(o, t, [150, 175, 205][v], 50, 0.12, 0.6); snap(o, t, 0.25); } },
-    { k: "D", n: "Latch", s: "rec", d: "A recorded latch locking, higher each reel.", p(t, v) { smp(O(1, 0.15), "reel_clunk", t, { gain: 0.8, rate: [0.9, 1, 1.12][v] }); } },
-    { k: "E", n: "Reel thunk", s: "rec", d: "A recorded heavy reel stopping.", p(t, v) { smp(O(1, 0.15), "reel_thunk", t, { gain: 0.85, rate: [0.92, 1, 1.08][v] }); } }
-  ] },
-  { id: "tease", st: "club", n: "Last reel crawl", w: "The right reel slows longest. Something to lean in to. Play it from the demo above.", run: true, rec: "D", opts: [
-    { k: "A", n: "Heartbeat", s: "syn", d: "Low heartbeats that quicken into the landing.", mode: "heart" },
-    { k: "B", n: "Shimmer rise", s: "syn", d: "Glassy notes climbing and getting louder.", mode: "shimmer" },
-    { k: "C", n: "Pulse", s: "syn", d: "Thumps that speed up, like a drum.", mode: "pulse" },
-    { k: "D", n: "Riser", s: "rec", d: "A recorded rising swell timed to end as it lands.", mode: "riser" },
-    { k: "E", n: "Drum roll", s: "rec", d: "A recorded snare roll into the landing.", mode: "drumroll" },
-    { k: "S", n: "None", s: "syn", d: "Let the reels speak.", mode: "none" }
-  ] },
-  { id: "cardSelect", st: "club", n: "Pick a card", w: "Tapping a card: it grows 5% and the others shrink.", quiet: true, vars: ["Pick", "Unpick"], rec: "A", opts: [
-    { k: "A", n: "Soft lift", s: "syn", d: "A muffled lift up, the reverse to put it down.", p(t, v) { const o = soft(O(1, 0.05), 1600); osc(o, "sine", v ? 520 : 380, t, 0.08, 0.2, { to: v ? 380 : 520 }); } },
-    { k: "B", n: "Small bell", s: "syn", d: "A small soft bell, lower to put it down.", p(t, v) { fm(O(1, 0.1), v ? D.D5 : D.A5, t, 0.25, 0.06, { ratio: 3.5, index: 0.6 }); } },
-    { k: "C", n: "Tap", s: "syn", d: "A short muted tap.", p(t, v) { felt(O(1, 0), t, v ? 180 : 240, 0.35, 0.06); } },
-    { k: "D", n: "Card lift", s: "rec", d: "A recorded quick card swish.", p(t, v) { smp(O(1, 0.05), "card_lift", t, { gain: 0.6, rate: v ? 0.85 : 1 }); } },
-    { k: "E", n: "Pick up", s: "rec", d: "A recorded card picked up.", p(t, v) { smp(O(1, 0.05), "card_pickup", t, { gain: 0.7, rate: v ? 0.85 : 1 }); } }
-  ] },
-  { id: "respin", st: "club", n: "Respin used", w: "One of the five respins goes.", rec: "C", prev: "C", opts: [
-    { k: "A", n: "Soft token", s: "syn", d: "A muffled token and air pulling back.", p(t) { const o = O(1, 0.2); felt(o, t, 300, 0.4, 0.1); swish(soft(o, 1800), t, 0.3, 1800, 400, 0.15); } },
-    { k: "B", n: "Metal token", s: "syn", d: "A bright metal token spent.", p(t) { const o = O(1, 0.2); fm(o, 1320 * vr(), t, 0.4, 0.15, { ratio: 1.41, index: 3 }); swish(o, t, 0.28, 3200, 600, 0.12); click(o, t, 4000, 0.15); } },
-    { k: "C", n: "Rewind ticks", s: "syn", d: "A burst of ticks falling away, like winding back. Close to your earlier pick.", p(t) { const o = O(1, 0.15); for (let i = 0; i < 9; i++) click(o, t + i * 0.034 * (1 - i * 0.04), 4200 - i * 280, 0.15); swish(o, t, 0.35, 3000, 500, 0.12); } },
-    { k: "D", n: "Coin in slot", s: "rec", d: "A recorded coin dropping into a slot.", p(t) { smp(O(1, 0.15), "coin_slot", t, { gain: 0.8 }); } },
-    { k: "E", n: "Tape rewind", s: "rec", d: "A recorded quick tape rewind.", p(t) { smp(O(1, 0.15), "rewind", t, { gain: 0.6, dur: 0.6 }); } }
-  ] },
-  { id: "clubConfirm", st: "club", n: "Play: club locked in", w: "You choose your club and press Play.", rec: "C", opts: [
-    { k: "A", n: "Warm chord", s: "syn", d: "A soft thud and a plucked D major chord.", p(t) { const o = O(1, 0.3); felt(o, t, 160, 0.5, 0.14); [D.D4, D.A4, D.D5, D.Fs5].forEach((n, i) => pluck(o, n, t + 0.02 + i * 0.025, 0.26, { dur: 1.8 })); } },
-    { k: "B", n: "Glass lock", s: "syn", d: "A click and a bright glassy chord.", p(t) { const o = O(1, 0.3); click(o, t, 5000, 0.2); chord(o, [D.D5, D.Fs5, D.A5, D.D6], t, 1.3, 0.07, 3.5, 1.2, 0.02); } },
-    { k: "C", n: "Stamp hit", s: "syn", d: "A firm hit with a brass stab.", p(t) { const o = O(1, 0.3); thump(o, t, 170, 45, 0.2, 0.7); snap(o, t, 0.35); brass(o, [D.D4, D.Fs4, D.A4, D.D5], t + 0.01, 0.5, 0.05, 3000); } },
-    { k: "D", n: "Lock and ring", s: "rec", d: "A recorded heavy lock with a metallic ring.", p(t) { smp(O(1, 0.2), "lock_ring", t, { gain: 0.85 }); } },
-    { k: "E", n: "Stamp and cheer", s: "rec", d: "A recorded stamp and a short cheer.", p(t) { const o = O(1, 0.3); smp(o, "stamp", t, { gain: 0.8 }); smp(o, "cheer_short", t + 0.15, { gain: 0.45 }); } }
-  ] },
+  /* club spin */
+  { id: "spinStart", st: "club", n: "Spin pressed", w: "The reels launch.", pick: "D. Lever", s: "rec", ch: "Top end cut, rounder start, quieter.",
+    p(t) { S_(O(1, 0.1), "reel_clunk", t, { gain: 0.9, rate: 0.8 }); } },
+  { id: "reelRun", st: "club", n: "Reels spinning", w: "While the cards blur past. Follows each reel's real speed: play it from the demo above.", run: true, pick: "B. Ticks", s: "syn", ch: "Muffled ticks at about half the level, so a long spin doesn't nag.",
+    mode: { tick: "soft" } },
+  { id: "reelLand", st: "club", n: "Each reel lands", w: "Left, middle, right.", vars: ["Left", "Middle", "Right"], pick: "D. Latch", s: "rec", ch: "Softened latch, a little higher each reel.",
+    p(t, v) { S_(O(1, 0.1), "reel_clunk", t, { gain: 0.85, rate: [0.9, 1, 1.12][v] }); } },
+  { id: "tease", st: "club", n: "Last reel crawl", w: "The right reel slows longest.", run: true, pick: "Silent", s: "off", ch: "You chose no sound here.", mode: "none" },
+  { id: "cardSelect", st: "club", n: "Pick a card", w: "Tapping a card: it grows 5% and the others shrink.", quiet: true, vars: ["Pick", "Unpick"], pick: "A. Soft lift", s: "syn", ch: "Already soft and muted.",
+    p(t, v) { const o = soft(O(1, 0.05), 1600); osc(o, "sine", v ? 520 : 380, t, 0.08, 0.2, { to: v ? 380 : 520 }); } },
+  { id: "respin", st: "club", n: "Respin used", w: "One of the five respins goes.", pick: "C. Rewind ticks", s: "syn", ch: "Was Punch: now muffled ticks at a third of the level, softer air.",
+    p(t) { const o = soft(O(1, 0.08), 2200); for (let i = 0; i < 9; i++) click(o, t + i * 0.034 * (1 - i * 0.04), 3200 - i * 200, 0.07); swish(o, t, 0.35, 1800, 400, 0.06); } },
+  { id: "clubConfirm", st: "club", n: "Play: club locked in", w: "You choose your club and press Play.", pick: "E. Stamp and cheer", s: "mix", ch: "Your note: a soft lock and the cheer. The stamp is now a soft latch, under the softened cheer.",
+    p(t) { const o = O(1, 0.12); const lp = soft(o, 1500); click(lp, t, 1800, 0.12); felt(o, t + 0.01, 150, 0.4, 0.12); S_(o, "cheer_short", t + 0.12, { gain: 0.8 }); } },
 
-  /* ---------- table reveal ---------- */
-  { id: "tableScan", st: "table", n: "Scan down the table", w: "The highlight runs from 1st down to your club, fast then slowing. One sound per row.", row: true, rec: "B", opts: [
-    { k: "A", n: "Wood steps", s: "syn", d: "Soft wooden notes stepping down as you fall.", p(t, i) { wood(O(1, 0.1), t, 1800 - i * 55, 0.25); } },
-    { k: "B", n: "Falling glass", s: "syn", d: "Each row a soft glassy note, stepping down the scale.", p(t, i) { const sc = [D.D6, D.B5, D.A5, D.Fs5, D.E5, D.D5, D.B4, D.A4, D.Fs4, D.E4]; fm(O(1, 0.15), sc[i % 10] / (i >= 10 ? 2 : 1), t, 0.12, 0.08, { ratio: 2, index: 0.6 }); } },
-    { k: "C", n: "Tight ticks", s: "syn", d: "A crisp tick per row with a little weight.", p(t, i) { const o = O(1, 0.05); click(o, t, 3400, 0.16); thump(o, t, 160 - i * 3, 70, 0.04, 0.2); } },
-    { k: "D", n: "Wooden tick", s: "rec", d: "A recorded wooden tick, lower each row.", p(t, i) { smp(O(1, 0.05), "tick_wood", t, { gain: 0.6, rate: 1.25 - i * 0.025, dur: 0.15 }); } },
-    { k: "E", n: "Counter click", s: "rec", d: "A recorded counter click per row.", p(t, i) { smp(O(1, 0.05), "tick_mech", t, { gain: 0.7, rate: 1.1 - i * 0.01, dur: 0.12 }); } }
-  ] },
-  { id: "tableLand", st: "table", n: "Lands on your club", w: "It stops on your club: they went down. The table shakes.", rec: "A", opts: [
-    { k: "A", n: "Low minor", s: "syn", d: "A soft low thud and a D minor chord underneath.", p(t) { const o = O(1, 0.35); felt(o, t, 110, 0.6, 0.3); [D.D3, D.F3, D.A3, D.D4].forEach((n) => osc(soft(o, 1200), "triangle", n, t, 1.8, 0.07, { a: 0.04 })); } },
-    { k: "B", n: "Dark bell", s: "syn", d: "A deep bell tolling once.", p(t) { const o = O(1, 0.4); fm(o, D.D3, t, 2.2, 0.2, { ratio: 1.41, index: 2.5 }); fm(o, D.A3, t, 1.6, 0.08, { ratio: 3.5, index: 1 }); } },
-    { k: "C", n: "Shock hit", s: "syn", d: "A hard low hit with a falling tone.", p(t) { const o = O(1, 0.35); thump(o, t, 140, 32, 0.45, 0.8); snap(o, t, 0.3); osc(soft(o, 900), "sawtooth", D.D3, t, 0.9, 0.06, { to: D.D3 * 0.7 }); } },
-    { k: "D", n: "Doom boom", s: "rec", d: "A recorded low boom with a dark rumble.", p(t) { smp(O(1, 0.3), "doom_boom", t, { gain: 0.8 }); } },
-    { k: "E", n: "Stunned", s: "rec", d: "A recorded deep hit, then the stadium goes quiet.", p(t) { const o = O(1, 0.3); smp(o, "impact_boom", t, { gain: 0.6, lp: 1600, rate: 0.85 }); smp(o, "stunned_silence", t + 0.1, { gain: 0.55, dur: 2.2 }); } }
-  ] },
-  { id: "tableReset", st: "table", n: "Every number rolls to zero", w: "All points roll down together in 1.3 seconds: history wiped, your season starts.", rec: "B", opts: [
-    { k: "A", n: "Soft unwind", s: "syn", d: "A muffled falling sweep, then a warm chord.", p(t) { const o = O(1, 0.3); swish(soft(o, 2000), t, 1.3, 2000, 300, 0.16, { peakAt: 0.3 }); [D.D4, D.A4, D.D5].forEach((n, i) => pluck(o, n, t + 1.32 + i * 0.03, 0.22, { dur: 1.8 })); } },
-    { k: "B", n: "Rewind and chime", s: "syn", d: "Ticks easing out with the numbers, then a clean bright chime.", p(t) { const o = O(1, 0.2); for (let i = 0; i < 26; i++) { const x = 1 - Math.pow(1 - i / 26, 1 / 3); click(o, t + x * 1.3, 4400 - i * 90, 0.12); } chord(o, [D.D6, D.A6], t + 1.32, 1.1, 0.07); swish(o, t + 1.25, 0.3, 900, 3600, 0.1); } },
-    { k: "C", n: "Reset hit", s: "syn", d: "A whoosh down and a firm hit on zero.", p(t) { const o = O(1, 0.25); swish(o, t, 1.25, 4000, 500, 0.15, { peakAt: 0.4 }); thump(o, t + 1.3, 170, 50, 0.18, 0.6); snap(o, t + 1.3, 0.25); } },
-    { k: "D", n: "Split-flap", s: "rec", d: "A recorded old scoreboard flipping, then stopping.", p(t) { smp(O(1, 0.1), "counter_roll", t, { gain: 0.75 }); } },
-    { k: "E", n: "Rewind chime", s: "rec", d: "A recorded fast rewind ending in a chime.", p(t) { smp(O(1, 0.2), "rewind_chime", t + 0.55, { gain: 0.8 }); } }
-  ] },
+  /* table reveal */
+  { id: "tableScan", st: "table", n: "Scan down the table", w: "One sound per row as the highlight runs down to your club.", row: true, pick: "C. Tight ticks", s: "syn", ch: "Was Punch: now a muffled tick with a faint low touch.",
+    p(t, i) { const o = soft(O(1, 0.04), 2200); click(o, t, 2800, 0.09); felt(O(1, 0), t, 150 - i * 2, 0.1, 0.04); } },
+  { id: "tableLand", st: "table", n: "Lands on your club", w: "It stops on your club: they went down.", pick: "D. Doom boom", s: "rec", ch: "Top end cut, about 9 dB quieter.",
+    p(t) { S_(O(1, 0.2), "doom_boom", t, { gain: 1 }); } },
+  { id: "tableReset", st: "table", n: "Every number rolls to zero", w: "All points roll down together in 1.3 seconds.", pick: "A. Soft unwind", s: "syn", ch: "Your note: the chime at the end is gone. Just the soft sweep.",
+    p(t) { swish(soft(O(1, 0.2), 2000), t, 1.3, 2000, 300, 0.15, { peakAt: 0.3 }); } },
 
-  /* ---------- squad ---------- */
-  { id: "dealPitch", st: "squad", n: "Cards deal onto the pitch", w: "First visit: 11 cards fly onto their shirts.", rec: "B", opts: [
-    { k: "A", n: "Soft flicks", s: "syn", d: "Eleven muffled flicks and a soft landing.", p(t) { const o = soft(O(1, 0.15), 2200); for (let i = 0; i < 11; i++) nz(o, t + i * 0.055, 0.05, { f: 1200 * vr(0.08), f2: 2400, q: 1.4, peak: 0.35, pan: -0.6 + i * 0.12 }); } },
-    { k: "B", n: "Crisp flicks", s: "syn", d: "Eleven crisp card flicks, left to right.", p(t) { const o = O(1, 0.15); for (let i = 0; i < 11; i++) nz(o, t + i * 0.055, 0.05, { f: 1800 * vr(0.08), f2: 4200, q: 1.6, peak: 0.32, pan: -0.6 + i * 0.12 }); thump(o, t + 0.62, 140, 60, 0.08, 0.25); } },
-    { k: "C", n: "Rapid deal", s: "syn", d: "Faster, snappier, with a hit at the end.", p(t) { const o = O(1, 0.15); for (let i = 0; i < 11; i++) snap(o, t + i * 0.04, 0.18); thump(o, t + 0.45, 180, 50, 0.12, 0.45); } },
-    { k: "D", n: "Shuffle and deal", s: "rec", d: "A recorded deck shuffled and dealt.", p(t) { smp(O(1, 0.15), "card_shuffle", t, { gain: 0.6, rate: 1.15 }); } },
-    { k: "E", n: "Deal", s: "rec", d: "Recorded cards dealt onto a table.", p(t) { smp(O(1, 0.15), "card_deal", t, { gain: 0.75 }); } }
-  ] },
-  { id: "cardLift", st: "squad", n: "Pick a card up", w: "Press and drag: the card lifts off the pitch or out of the carousel.", quiet: true, rec: "S", opts: [
-    { k: "A", n: "Muted lift", s: "syn", d: "A muffled small rise.", p(t) { osc(soft(O(1, 0), 1200), "sine", 360, t, 0.07, 0.25, { to: 520 }); } },
-    { k: "B", n: "Air", s: "syn", d: "Soft air only.", p(t) { swish(soft(O(1, 0), 2000), t, 0.12, 700, 1800, 0.18); } },
-    { k: "C", n: "Tap", s: "syn", d: "A small muted tap.", p(t) { felt(O(1, 0), t, 230, 0.3, 0.05); } },
-    { k: "D", n: "Pick up", s: "rec", d: "A recorded card picked up.", p(t) { smp(O(1, 0), "card_pickup", t, { gain: 0.7 }); } },
-    { k: "E", n: "Card lift", s: "rec", d: "A recorded quick card swish.", p(t) { smp(O(1, 0), "card_lift", t, { gain: 0.55 }); } }
-  ] },
-  { id: "shirtFit", st: "squad", n: "Over a shirt", w: "While dragging, every shirt shows the fit: green, amber or red.", quiet: true, vars: ["Green", "Amber", "Red"], rec: "S", opts: [
-    { k: "A", n: "Soft tones", s: "syn", d: "Muffled: higher for green, middle for amber, low for red.", p(t, v) { osc(soft(O(1, 0), 1400), "sine", [D.D5, D.A4, D.D4 * 0.95][v], t, 0.08, 0.2); } },
-    { k: "B", n: "Glass tones", s: "syn", d: "Tiny glassy notes for green and amber, a dull one for red.", p(t, v) { const o = O(1, 0.05); if (v < 2) fm(o, v ? D.A5 : D.D6, t, 0.1, 0.05, { ratio: 3.5, index: 0.6 }); else osc(soft(o, 900), "triangle", D.D4 * 0.95, t, 0.1, 0.08); } },
-    { k: "C", n: "Taps", s: "syn", d: "A muted tap, lower for worse fits.", p(t, v) { felt(O(1, 0), t, [260, 210, 160][v], 0.3, 0.05); } },
-    { k: "D", n: "Blips", s: "rec", d: "Recorded soft blips: good for green and amber, low for red.", p(t, v) { smp(O(1, 0), v === 2 ? "blip_bad" : "blip_good", t, { gain: 0.6, rate: v === 1 ? 0.85 : 1 }); } },
-    { k: "E", n: "Ticks", s: "rec", d: "A recorded wooden tick, lower for worse fits.", p(t, v) { smp(O(1, 0), "tick_wood", t, { gain: 0.5, rate: [1.2, 1, 0.8][v], dur: 0.15 }); } }
-  ] },
-  { id: "cardDrop", st: "squad", n: "Drop and swap", w: "A card lands on a shirt and the two swap places.", rec: "B", opts: [
-    { k: "A", n: "Soft settle", s: "syn", d: "A soft thud and muffled air as they swap.", p(t) { const o = O(1, 0.15); felt(o, t, 190, 0.45, 0.08); swish(soft(o, 1800), t + 0.02, 0.18, 600, 1600, 0.12); } },
-    { k: "B", n: "Snap", s: "syn", d: "A click, a little weight and the swap's air.", p(t) { const o = O(1, 0.15); click(o, t, 3400, 0.2); thump(o, t, 190, 70, 0.08, 0.4); swish(o, t + 0.02, 0.18, 1200, 3600, 0.08); } },
-    { k: "C", n: "Slam", s: "syn", d: "A firmer slap down.", p(t) { const o = O(1, 0.12); snap(o, t, 0.35); thump(o, t, 210, 55, 0.1, 0.6); } },
-    { k: "D", n: "Card slide", s: "rec", d: "A recorded card sliding into place.", p(t) { smp(O(1, 0.1), "card_slide", t, { gain: 0.7, rate: 1.1 }); } },
-    { k: "E", n: "Card slap", s: "rec", d: "A recorded card slapped down.", p(t) { smp(O(1, 0.1), "card_slap", t, { gain: 0.8 }); } }
-  ] },
-  { id: "dropCancel", st: "squad", n: "Card goes back", w: "Dropped nowhere: the card floats back.", quiet: true, rec: "A", opts: [
-    { k: "A", n: "Float back", s: "syn", d: "Muffled air falling away.", p(t) { swish(soft(O(1, 0), 1800), t, 0.2, 1800, 500, 0.15); } },
-    { k: "B", n: "Low note", s: "syn", d: "A small soft note, falling.", p(t) { osc(soft(O(1, 0), 1200), "sine", 520, t, 0.12, 0.2, { to: 340 }); } },
-    { k: "C", n: "Tap", s: "syn", d: "A muted tap as it settles.", p(t) { felt(O(1, 0), t + 0.15, 180, 0.3, 0.05); } },
-    { k: "D", n: "Reverse slide", s: "rec", d: "The recorded card slide played backwards.", p(t) { smp(O(1, 0), "card_slide", t, { gain: 0.5, reverse: true }); } },
-    { k: "E", n: "Swoosh down", s: "rec", d: "A recorded short falling swoosh.", p(t) { smp(O(1, 0), "swoosh_down", t, { gain: 0.5 }); } }
-  ] },
-  { id: "formation", st: "squad", n: "Formation changed", w: "A new shape: cards fly to their new places.", rec: "B", opts: [
-    { k: "A", n: "Soft shuffle", s: "syn", d: "Muffled swishes and a warm note as it settles.", p(t) { const o = O(1, 0.15); for (let i = 0; i < 6; i++) swish(soft(o, 1800), t + i * 0.06, 0.16, 600, 1600, 0.1); pluck(o, D.A4, t + 0.45, 0.2); } },
-    { k: "B", n: "Crisp shuffle", s: "syn", d: "Quick swishes across the pitch, a click as it settles.", p(t) { const o = O(1, 0.15); for (let i = 0; i < 7; i++) swish(o, t + i * 0.05, 0.16, 900 * vr(0.1), 3200, 0.07, { panFrom: -0.6 + i * 0.2, panTo: -0.6 + i * 0.2 }); click(o, t + 0.45, 3000, 0.14); } },
-    { k: "C", n: "Whip and hit", s: "syn", d: "One fast whip and a firm landing.", p(t) { const o = O(1, 0.15); swish(o, t, 0.35, 700, 5000, 0.2); thump(o, t + 0.36, 180, 50, 0.12, 0.5); snap(o, t + 0.36, 0.2); } },
-    { k: "D", n: "Big whoosh", s: "rec", d: "One recorded whoosh.", p(t) { smp(O(1, 0.15), "whoosh_heavy", t, { gain: 0.45, rate: 1.2 }); } },
-    { k: "E", n: "Cards across", s: "rec", d: "Recorded cards slid across a table.", p(t) { smp(O(1, 0.15), "cards_shuffle_table", t, { gain: 0.8 }); } }
-  ] },
+  /* squad */
+  { id: "dealPitch", st: "squad", n: "Cards deal onto the pitch", w: "First visit: 11 cards fly onto their shirts.", pick: "C. Rapid deal", s: "syn", ch: "Was Punch: muffled flicks at a third of the level, a soft landing.",
+    p(t) { const o = soft(O(1, 0.08), 2600); for (let i = 0; i < 11; i++) nz(o, t + i * 0.04, 0.03, { f: 1500 * vr(0.08), q: 1.2, peak: 0.1, pan: -0.5 + i * 0.1 }); felt(O(1, 0.05), t + 0.45, 170, 0.3, 0.1); } },
+  { id: "cardLift", st: "squad", n: "Pick a card up", w: "Press and drag: the card lifts off.", quiet: true, pick: "Silent", s: "off", ch: "You chose no sound here." },
+  { id: "shirtFit", st: "squad", n: "Over a shirt", w: "While dragging, each shirt shows the fit: green, amber or red.", quiet: true, vars: ["Green", "Amber", "Red"], pick: "A. Soft tones", s: "syn", ch: "Already soft and muted.",
+    p(t, v) { osc(soft(O(1, 0), 1400), "sine", [D.D5, D.A4, D.D4 * 0.95][v], t, 0.08, 0.2); } },
+  { id: "cardDrop", st: "squad", n: "Drop and swap", w: "A card lands on a shirt and the two swap places.", pick: "A. Soft settle", s: "syn", ch: "Already soft.",
+    p(t) { const o = O(1, 0.1); felt(o, t, 190, 0.4, 0.08); swish(soft(o, 1800), t + 0.02, 0.18, 600, 1600, 0.1); } },
+  { id: "dropCancel", st: "squad", n: "Card goes back", w: "Dropped nowhere: the card floats back.", quiet: true, pick: "A. Float back", s: "syn", ch: "Already soft and muted.",
+    p(t) { swish(soft(O(1, 0), 1800), t, 0.2, 1800, 500, 0.15); } },
+  { id: "formation", st: "squad", n: "Formation changed", w: "A new shape: cards fly to their new places.", pick: "B. Crisp shuffle", s: "syn", ch: "Was Glass: now muffled swishes and a soft tick.",
+    p(t) { const o = soft(O(1, 0.08), 2200); for (let i = 0; i < 7; i++) swish(o, t + i * 0.05, 0.16, 700 * vr(0.1), 2000, 0.06, { panFrom: -0.5 + i * 0.16, panTo: -0.5 + i * 0.16 }); click(o, t + 0.45, 2200, 0.07); } },
 
-  /* ---------- match day ---------- */
-  { id: "fixtures", st: "match", n: "Gameweek fixtures", w: "This gameweek's fixtures appear, yours at the top.", rec: "A", opts: [
-    { k: "A", n: "Soft cascade", s: "syn", d: "Ten muffled ticks as the rows drop in.", p(t) { const o = soft(O(1, 0.05), 1800); for (let i = 0; i < 10; i++) click(o, t + i * 0.04, 2600 - i * 60, 0.12); } },
-    { k: "B", n: "Glass cascade", s: "syn", d: "Tiny glassy notes falling down the list.", p(t) { const o = O(1, 0.1); [D.A6, D.Fs6, D.E6, D.D6, D.B5].forEach((n, i) => fm(o, n, t + i * 0.06, 0.12, 0.035, { ratio: 3.5, index: 0.6 })); } },
-    { k: "C", n: "Board slam", s: "syn", d: "One whip and a firm landing.", p(t) { const o = O(1, 0.1); swish(o, t, 0.25, 800, 4000, 0.15); thump(o, t + 0.25, 170, 60, 0.1, 0.4); } },
-    { k: "D", n: "Whoosh", s: "rec", d: "One recorded whoosh.", p(t) { smp(O(1, 0.1), "whoosh_fast", t, { gain: 0.45 }); } },
-    { k: "E", n: "Cards fan", s: "rec", d: "Recorded cards fanned out.", p(t) { smp(O(1, 0.1), "cards_fan", t, { gain: 0.7 }); } }
-  ] },
-  { id: "kickoff", st: "match", n: "Kick off", w: "The whistle, and the crowd bed starts under the match.", rec: "D", opts: [
-    { k: "A", n: "Soft whistle", s: "syn", d: "A drawn, rounder whistle and the crowd coming in.", p(t) { const o = soft(O(1, 0.25), 3500); pea(o, t, 1); bedOn(); } },
-    { k: "B", n: "Sharp whistle", s: "syn", d: "A crisp drawn pea whistle.", p(t) { pea(O(1, 0.25), t, 1, 0.38); bedOn(); } },
-    { k: "C", n: "Whistle and drum", s: "syn", d: "The whistle with a stadium drum hit.", p(t) { const o = O(1, 0.25); pea(o, t, 1); thump(o, t + 0.42, 110, 45, 0.3, 0.6); bedOn(); } },
-    { k: "D", n: "Whistle and cheer", s: "rec", d: "A recorded whistle and a cheer.", p(t) { const o = O(1, 0.2); smp(o, "whistle", t, { gain: 0.9 }); smp(o, "cheer_short", t + 0.25, { gain: 0.5 }); bedOn(); } },
-    { k: "E", n: "Long whistle", s: "rec", d: "A recorded long whistle with the crowd rising.", p(t) { smp(O(1, 0.2), "whistle_long", t, { gain: 0.8 }); bedOn(); } }
-  ] },
-  { id: "goalFor", st: "match", n: "Goal for you", w: "Your side scores in the live feed.", rec: "D", opts: [
-    { k: "A", n: "Warm sting", s: "syn", d: "A thump and a plucked rising chord over the bed.", p(t) { const o = O(1, 0.3); duck(t, 2); thump(o, t, 300, 40, 0.14, 0.6); [D.D5, D.Fs5, D.A5, D.D6].forEach((n, i) => pluck(o, n, t + 0.15 + i * 0.06, 0.3, { dur: 1.6 })); } },
-    { k: "B", n: "Glass sting", s: "syn", d: "A strike, then a bright glassy rising run.", p(t) { const o = O(1, 0.3); duck(t, 2); thump(o, t, 300, 40, 0.14, 0.5); [D.D6, D.Fs6, D.A6, D.D7].forEach((n, i) => fm(o, n, t + 0.15 + i * 0.05, 0.9, 0.06, { ratio: 3.5, index: 1 })); } },
-    { k: "C", n: "Brass sting", s: "syn", d: "A big hit and a short brass fanfare.", p(t) { const o = O(1, 0.3); duck(t, 2.5); thump(o, t, 300, 40, 0.14, 0.6); thump(o, t + 0.3, 130, 40, 0.4, 0.7); [[0, 0.12], [0, 0.12], [7, 0.6]].reduce((tt, [n, d]) => { brass(o, [N(n), N(n + 4), N(n + 7)], tt, d, 0.055, 3000); return tt + d * 1.05; }, t + 0.3); } },
-    { k: "D", n: "Net and roar", s: "rec", d: "A recorded strike, net and goal roar.", p(t) { const o = O(1, 0.3); duck(t, 3); thump(o, t, 300, 40, 0.14, 0.5); smp(o, "net_ripple", t + 0.12, { gain: 0.8 }); smp(o, "goal_roar", t + 0.35, { gain: 0.9 }); } },
-    { k: "E", n: "Limbs", s: "rec", d: "The roar plus flares and an air horn. For a big one.", p(t) { const o = O(1, 0.3); duck(t, 4); smp(o, "net_ripple", t + 0.05, { gain: 0.8 }); smp(o, "goal_roar", t + 0.3, { gain: 0.9 }); smp(o, "flares", t + 0.4, { gain: 0.35 }); smp(o, "air_horn", t + 1.0, { gain: 0.3 }); } }
-  ] },
-  { id: "goalAgainst", st: "match", n: "Goal against", w: "The other side scores.", rec: "D", opts: [
-    { k: "A", n: "Soft fall", s: "syn", d: "Two soft falling notes.", p(t) { const o = O(1, 0.3); duck(t, 2); pluck(o, D.A4, t, 0.28); pluck(o, D.F3 * 2, t + 0.25, 0.28, { dur: 1.8 }); } },
-    { k: "B", n: "Low bell", s: "syn", d: "A low glassy note falling away.", p(t) { const o = O(1, 0.35); duck(t, 2); fm(o, D.A4, t, 0.3, 0.1, { ratio: 2, index: 1 }); fm(o, D.D4, t + 0.28, 1.2, 0.1, { ratio: 1.41, index: 1.6 }); } },
-    { k: "C", n: "Thud", s: "syn", d: "A heavy low thud.", p(t) { const o = O(1, 0.3); duck(t, 2); thump(o, t, 120, 35, 0.35, 0.75); osc(soft(o, 800), "sawtooth", D.D3, t + 0.05, 0.6, 0.05, { to: D.D3 * 0.8 }); } },
-    { k: "D", n: "Groan", s: "rec", d: "A recorded groan, then grumbling.", p(t) { const o = O(1, 0.3); duck(t, 2.5); smp(o, "groan", t, { gain: 0.9 }); smp(o, "crowd_moan", t + 1.3, { gain: 0.6 }); } },
-    { k: "E", n: "Groan and boos", s: "rec", d: "A recorded groan with boos underneath.", p(t) { const o = O(1, 0.3); duck(t, 3); smp(o, "groan", t, { gain: 0.85 }); smp(o, "boos", t + 0.9, { gain: 0.35, dur: 2.5 }); } }
-  ] },
-  { id: "chance", st: "match", n: "Big chance", w: "Not in the feed yet: a shot that just misses, if we add chances.", rec: "D", opts: [
-    { k: "A", n: "Soft swell", s: "syn", d: "A muffled rising swell that drops away.", p(t) { const o = O(1, 0.3); synthSwell(soft(o, 2000), t, 1.4); swish(soft(o, 1500), t + 1.4, 0.5, 1500, 300, 0.12); } },
-    { k: "B", n: "Glass rise", s: "syn", d: "Glassy notes climbing, then falling short.", p(t) { const o = O(1, 0.3); shimmerRise(o, t, 1.2); fm(o, D.A5, t + 1.25, 0.6, 0.06, { ratio: 2, index: 0.8 }); } },
-    { k: "C", n: "Strike", s: "syn", d: "A ball strike and a whoosh past the post.", p(t) { const o = O(1, 0.25); thump(o, t, 300, 40, 0.14, 0.6); swish(o, t + 0.08, 0.5, 4000, 800, 0.2, { panFrom: 0, panTo: 0.8 }); } },
-    { k: "D", n: "Swell and ooh", s: "rec", d: "The recorded crowd rises with the attack, then gasps.", p(t) { const o = O(1, 0.3); smp(o, "crowd_swell", t, { gain: 0.55, fadeIn: 1.2, dur: 1.9 }); smp(o, "crowd_ooh", t + 1.6, { gain: 0.9 }); } },
-    { k: "E", n: "Ooh", s: "rec", d: "Just the recorded gasp.", p(t) { smp(O(1, 0.3), "crowd_ooh", t, { gain: 0.9 }); } }
-  ] },
-  { id: "whistles", st: "match", n: "Half time and full time", w: "Two blasts at 45, three at 90.", vars: ["Half time", "Full time"], rec: "D", opts: [
-    { k: "A", n: "Soft whistles", s: "syn", d: "Rounder drawn whistles with a little applause.", p(t, v) { const o = soft(O(1, 0.25), 3500); pea(o, t, v ? 3 : 2); smp(O(1, 0.2), "applause", t + (v ? 1.9 : 1.1), { gain: 0.35 }); if (v) setTimeout(bedOff, 2000); } },
-    { k: "B", n: "Sharp whistles", s: "syn", d: "Crisp drawn whistles, short.", p(t, v) { pea(O(1, 0.25), t, v ? 3 : 2, 0.3); if (v) setTimeout(bedOff, 1800); } },
-    { k: "C", n: "Whistles and hit", s: "syn", d: "Drawn whistles with a drum hit on the last.", p(t, v) { const o = O(1, 0.25); pea(o, t, v ? 3 : 2); thump(o, t + (v ? 1.9 : 0.85), 110, 40, 0.35, 0.6); if (v) setTimeout(bedOff, 2200); } },
-    { k: "D", n: "Real whistles", s: "rec", d: "Recorded whistles with applause.", p(t, v) { const o = O(1, 0.2); smp(o, v ? "full_time" : "half_time", t, { gain: 0.9 }); smp(o, "applause", t + (v ? 2.8 : 2.2), { gain: 0.45 }); if (v) setTimeout(bedOff, 2500); } },
-    { k: "E", n: "Clean whistles", s: "rec", d: "Recorded sharp whistle blasts only.", p(t, v) { smp(O(1, 0.2), v ? "whistle_three" : "whistle_two", t, { gain: 0.85 }); if (v) setTimeout(bedOff, 2200); } }
-  ] },
-  { id: "skip", st: "match", n: "Skip to the end", w: "You skip the match: the clock races to 90.", rec: "B", opts: [
-    { k: "A", n: "Soft race", s: "syn", d: "A muffled rising sweep.", p(t) { swish(soft(O(1, 0.1), 2000), t, 0.5, 300, 2000, 0.2, { peakAt: 0.85 }); } },
-    { k: "B", n: "Fast forward", s: "syn", d: "Ticks speeding up with a whoosh to the final score.", p(t) { const o = O(1, 0.15); let x = 0; for (let i = 0; i < 14; i++) { click(o, t + x, 2800 + i * 120, 0.12); x += 0.06 * Math.pow(0.86, i); } swish(o, t + x - 0.1, 0.3, 800, 4000, 0.14); } },
-    { k: "C", n: "Tape", s: "syn", d: "A rising tape whizz.", p(t) { const f = soft(O(1, 0.1), 2200); osc(f, "sawtooth", 180, t, 0.4, 0.08, { to: 1800 }); nz(f, t, 0.4, { f: 1500, f2: 6000, peak: 0.1 }); } },
-    { k: "D", n: "Fast forward", s: "rec", d: "A recorded fast-forward whizz.", p(t) { smp(O(1, 0.1), "ffwd", t, { gain: 0.7 }); } },
-    { k: "E", n: "Whoosh", s: "rec", d: "A recorded heavy whoosh.", p(t) { smp(O(1, 0.1), "whoosh_heavy", t, { gain: 0.45, rate: 1.15 }); } }
-  ] },
-  { id: "result", st: "match", n: "Final score", w: "The result card: won, drew or lost.", vars: ["Win", "Draw", "Loss"], rec: "A", opts: [
-    { k: "A", n: "Plucked", s: "syn", d: "Win rises D F sharp A D. Draw hangs. Loss falls in D minor.", p(t, v) { const o = O(1, 0.3); if (v === 0) [D.D5, D.Fs5, D.A5, D.D6].forEach((n, i) => pluck(o, n, t + i * 0.08, 0.3)); else if (v === 1) [D.D5, D.G5, D.A5].forEach((n, i) => pluck(o, n, t + i * 0.05, 0.22)); else [D.A4, D.F3 * 2, D.D4].forEach((n, i) => pluck(o, n, t + i * 0.12, 0.25, { dur: 1.6, damp: 0.994 })); } },
-    { k: "B", n: "Glass", s: "syn", d: "The same shapes as glassy bells.", p(t, v) { const o = O(1, 0.35); const sets = [[D.D6, D.Fs6, D.A6, D.D7], [D.D6, D.G5 * 2, D.A6], [D.A5, D.F3 * 4, D.D5]]; sets[v].forEach((n, i) => fm(o, n, t + i * (v === 2 ? 0.14 : 0.08), v === 0 && i === 3 ? 1.2 : 0.5, 0.07, { ratio: 3.5, index: 1 })); } },
-    { k: "C", n: "Brass", s: "syn", d: "A short brass sting for each.", p(t, v) { const o = O(1, 0.3); if (v === 0) [[0, 0.12], [7, 0.5]].reduce((tt, [n, d]) => { brass(o, [N(n), N(n + 4), N(n + 7)], tt, d, 0.055, 3000); return tt + d * 1.05; }, t); else if (v === 1) brass(o, [N(0), N(5), N(7)], t, 0.6, 0.045, 2200); else [[7, 0.25], [3, 0.7]].reduce((tt, [n, d]) => { brass(o, [N(n - 12), N(n - 9), N(n - 5)], tt, d, 0.05, 1600); return tt + d * 1.05; }, t); } },
-    { k: "D", n: "Crowd", s: "rec", d: "Recorded cheers, polite applause or a moan.", p(t, v) { const o = O(1, 0.3); if (v === 0) { smp(o, "cheer_short", t, { gain: 0.8 }); smp(o, "applause", t + 0.6, { gain: 0.5 }); } else if (v === 1) smp(o, "applause", t, { gain: 0.45, dur: 2 }); else smp(o, "crowd_moan", t, { gain: 0.7 }); } },
-    { k: "E", n: "Stings", s: "rec", d: "Recorded short brass stings: triumphant, unresolved, sad.", p(t, v) { smp(O(1, 0.25), ["sting_win", "sting_draw", "sting_loss"][v], t, { gain: 0.7 }); } }
-  ] },
-  { id: "tableMove", st: "match", n: "Table after the match", w: "The table after this gameweek: your row moves up, down or stays.", vars: ["Up", "Down", "Same"], rec: "A", opts: [
-    { k: "A", n: "Plucked steps", s: "syn", d: "Two notes in the direction you moved.", p(t, v) { const o = O(1, 0.2); if (v === 2) return felt(o, t, 200, 0.3, 0.06); const ns = v === 0 ? [D.A5, D.D6] : [D.Fs5, D.D5]; ns.forEach((n, i) => pluck(o, n, t + 0.1 + i * 0.1, 0.22)); } },
-    { k: "B", n: "Glass climb", s: "syn", d: "A glassy note per place, rising or falling.", p(t, v) { const o = O(1, 0.15); if (v === 2) return click(o, t, 3000, 0.1); (v === 0 ? [D.D5, D.Fs5, D.A5] : [D.A5, D.Fs5, D.D5]).forEach((n, i) => fm(o, n, t + i * 0.09, 0.15, 0.08, { ratio: 2, index: 0.6 })); } },
-    { k: "C", n: "Swish", s: "syn", d: "A swish up or down with a tick.", p(t, v) { const o = O(1, 0.15); if (v === 2) return click(o, t, 3000, 0.12); v === 0 ? swish(o, t, 0.25, 700, 3500, 0.15) : swish(o, t, 0.25, 3500, 600, 0.15); click(o, t + 0.25, 3000, 0.1); } },
-    { k: "D", n: "Swooshes", s: "rec", d: "A recorded swoosh up or down.", p(t, v) { if (v === 2) return smp(O(1, 0.05), "tick_wood", t, { gain: 0.5, dur: 0.15 }); smp(O(1, 0.15), v ? "swoosh_down" : "swoosh_up", t, { gain: 0.6 }); } },
-    { k: "E", n: "Whoosh pitched", s: "rec", d: "The quick whoosh, pitched up or down.", p(t, v) { if (v === 2) return; smp(O(1, 0.15), "whoosh_fast", t, { gain: 0.45, rate: v ? 0.8 : 1.25 }); } }
-  ] },
+  /* match day */
+  { id: "fixtures", st: "match", n: "Gameweek fixtures", w: "This gameweek's fixtures appear.", pick: "A. Soft cascade", s: "syn", ch: "Already soft.",
+    p(t) { const o = soft(O(1, 0.05), 1800); for (let i = 0; i < 10; i++) click(o, t + i * 0.04, 2600 - i * 60, 0.1); } },
+  { id: "kickoff", st: "match", n: "Kick off", w: "The whistle, and the crowd bed starts under the match.", pick: "A. Soft whistle", s: "syn", ch: "Whistles are naturally sharp: this one is rounder and about 6 dB quieter.",
+    p(t) { pea(soft(O(0.55, 0.2), 2800), t, 1); bedOn(); } },
+  { id: "goalFor", st: "match", n: "Goal for you", w: "Your side scores in the live feed.", pick: "D. Net and roar", s: "rec", ch: "Strike, net and roar all softened and brought down.",
+    p(t) { const o = O(1, 0.2); duck(t, 3); felt(o, t, 240, 0.35, 0.1); S_(o, "net_ripple", t + 0.1, { gain: 0.9 }); S_(o, "goal_roar", t + 0.35, { gain: 1 }); } },
+  { id: "goalAgainst", st: "match", n: "Goal against", w: "The other side scores.", pick: "E. Groan and boos", s: "rec", ch: "Softened groan with quieter boos underneath.",
+    p(t) { const o = O(1, 0.2); duck(t, 3); S_(o, "groan", t, { gain: 1 }); S_(o, "boos", t + 0.9, { gain: 0.9, dur: 2.5 }); } },
+  { id: "chance", st: "match", n: "Big chance", w: "Not in the game yet: a shot that just misses.", pick: "Silent", s: "off", ch: "None of the five worked for you, and the game has no chances yet, so this stays silent." },
+  { id: "whistles", st: "match", n: "Half time and full time", w: "Two blasts at 45, three at 90.", vars: ["Half time", "Full time"], pick: "E. Clean whistles", s: "rec", ch: "Top end cut and about 8 dB quieter.",
+    p(t, v) { S_(O(1, 0.15), v ? "whistle_three" : "whistle_two", t, { gain: 1 }); if (v) setTimeout(bedOff, 2200); } },
+  { id: "skip", st: "match", n: "Skip to the end", w: "You skip the match: the clock races to 90.", pick: "B. Fast forward", s: "syn", ch: "Was Glass: muffled ticks and a soft swish.",
+    p(t) { const o = soft(O(1, 0.08), 2200); let x = 0; for (let i = 0; i < 14; i++) { click(o, t + x, 2400 + i * 60, 0.07); x += 0.06 * Math.pow(0.86, i); } swish(o, t + x - 0.1, 0.3, 600, 2200, 0.08); } },
+  { id: "result", st: "match", n: "Final score", w: "The result card: won, drew or lost.", vars: ["Win", "Draw", "Loss"], pick: "D. Crowd", s: "rec", ch: "Softened cheers, applause and moan.",
+    p(t, v) { const o = O(1, 0.2); if (v === 0) { S_(o, "cheer_short", t, { gain: 0.9 }); S_(o, "applause", t + 0.6, { gain: 0.8 }); } else if (v === 1) S_(o, "applause", t, { gain: 0.8, dur: 2 }); else S_(o, "crowd_moan", t, { gain: 1 }); } },
+  { id: "tableMove", st: "match", n: "Table after the match", w: "Your row moves up, down or stays.", vars: ["Up", "Down", "Same"], pick: "C. Swish", s: "syn", ch: "Was Punch: now a muffled swish and a soft tick.",
+    p(t, v) { const o = soft(O(1, 0.08), 2200); if (v === 2) return click(o, t, 2200, 0.07); v === 0 ? swish(o, t, 0.25, 600, 2200, 0.1) : swish(o, t, 0.25, 2200, 500, 0.1); click(o, t + 0.25, 2200, 0.06); } },
 
-  /* ---------- transfer window ---------- */
-  { id: "windowOpen", st: "transfer", n: "Window opens", w: "The emblem turns once (0.64s), charges (0.15s), then bursts into particles.", rec: "B", opts: [
-    { k: "A", n: "Soft bloom", s: "syn", d: "A muffled swell with the turn and a warm chord on the burst.", p(t) { const o = O(1, 0.35); swish(soft(o, 2200), t, 0.75, 250, 2000, 0.16, { peakAt: 0.95 }); felt(o, t + 0.79, 130, 0.5, 0.2); [D.D4, D.A4, D.D5, D.Fs5].forEach((n, i) => pluck(o, n, t + 0.79 + i * 0.02, 0.22, { dur: 1.8 })); } },
-    { k: "B", n: "Charge and burst", s: "syn", d: "Air rising with the turn, a swelling note on the charge, a glassy burst.", p(t) { const o = O(1, 0.35); swish(o, t, 0.64, 250, 3200, 0.18, { panFrom: -0.4, panTo: 0.4 }); osc(o, "triangle", 220, t, 0.64, 0.06, { to: 880 }); fm(o, D.D5, t + 0.64, 0.2, 0.08, { ratio: 2, index: 0.5, idxT: 0.01 }); thump(o, t + 0.79, 150, 40, 0.3, 0.6); chord(o, [D.D6, D.Fs6, D.A6], t + 0.79, 1.0, 0.05, 3.5, 1.2, 0.02); nz(o, t + 0.79, 0.5, { type: "highpass", f: 5000, peak: 0.1 }); } },
-    { k: "C", n: "Power burst", s: "syn", d: "A rising whip and a big low hit with a brass stab.", p(t) { const o = O(1, 0.35); swish(o, t, 0.78, 300, 5000, 0.22, { peakAt: 0.98 }); thump(o, t + 0.79, 150, 32, 0.45, 0.85); snap(o, t + 0.79, 0.35); brass(o, [D.D4, D.A4, D.D5], t + 0.8, 0.6, 0.05, 3200); } },
-    { k: "D", n: "Charge and sparkle", s: "rec", d: "A recorded charge that bursts into sparkles.", p(t) { smp(O(1, 0.3), "charge_burst", t, { gain: 0.75 }); } },
-    { k: "E", n: "Walkout", s: "rec", d: "The tail of a recorded riser into a punchy hit, like FC's tunnel.", p(t) { const o = O(1, 0.3); const L = len("riser"); smp(o, "riser", t, { gain: 0.45, offset: Math.max(0, L - 0.79) }); smp(o, "impact_boom_b", t + 0.79, { gain: 0.65 }); smp(o, "sparkle", t + 0.82, { gain: 0.3 }); } }
-  ] },
-  { id: "rarity", st: "transfer", n: "Card lands: its level", w: "Each reel's landing says the card's level before you read it. Roll chosen levels in the demo above.", vars: LVS.map((l) => LVN[l]), lv: true, rec: "B", opts: [
-    { k: "A", n: "Plucked ladder", s: "syn", d: "Each level adds notes: one, two, a chord, an arpeggio, then a full rising run.", p(t, v) { const o = O(1, 0.3); felt(o, t, 150, 0.3);
-      const sets = [[D.D5], [D.D5, D.A5], [D.D5, D.Fs5, D.A5], [D.D5, D.Fs5, D.A5, D.D6, D.Fs6], [D.D4, D.A4, D.D5, D.Fs5, D.A5, D.D6, D.Fs6, D.A6]];
-      sets[v].forEach((n, i) => pluck(o, n, t + i * 0.06, 0.28, { dur: 1.8 })); if (v === 4) { duck(t, 3, 0.25); thump(o, t, 120, 35, 0.5, 0.7); } } },
-    { k: "B", n: "Metals", s: "syn", d: "Bronze a dull knock, silver a ping, gold a chime, Baller a hit and shine, Legend a big brass hit.", p(t, v) { const o = O(1, 0.3);
-      if (v === 0) { thump(o, t, 160, 60, 0.1, 0.4); fm(o, 330, t, 0.16, 0.12, { ratio: 1.4, index: 1 }); }
-      else if (v === 1) { click(o, t, 4000, 0.12); fm(o, 1480 * vr(0.01), t, 0.55, 0.13, { ratio: 3.5, index: 1.4 }); }
-      else if (v === 2) { click(o, t, 4500, 0.14); chord(o, [D.D6, D.A6], t, 1.0, 0.09, 3.5, 1.2, 0.03); [D.D7, D.Fs6 * 2].forEach((n, i) => fm(o, n, t + 0.05 + i * 0.05, 0.5, 0.03, { ratio: 3.5, index: 0.6 })); }
-      else if (v === 3) { thump(o, t, 140, 35, 0.4, 0.7); chord(o, [D.D5, D.Fs5, D.A5, D.D6], t, 1.5, 0.07, 3.5, 1.4, 0.04); shimmerRise(o, t + 0.05, 0.6); }
-      else { duck(t, 3, 0.2); thump(o, t, 130, 30, 0.6, 0.9); snap(o, t, 0.35); brass(o, [D.D4, D.A4, D.D5, D.Fs5], t + 0.02, 1.3, 0.06); chord(o, [D.D6, D.A6, D.D7], t + 0.1, 1.6, 0.04); } } },
-    { k: "C", n: "Hits", s: "syn", d: "Punchy broadcast hits that get bigger and longer with each level.", p(t, v) { const o = O(1, 0.3); thump(o, t, 160 - v * 8, 40, 0.1 + v * 0.1, 0.4 + v * 0.1); snap(o, t, 0.2 + v * 0.04);
-      if (v >= 1) fm(o, [0, D.A5, D.D6, D.D6, D.D6][v], t, 0.3 + v * 0.2, 0.06, { ratio: 3.5, index: 1 });
-      if (v >= 3) brass(o, v === 4 ? [D.D4, D.A4, D.D5, D.Fs5] : [D.D4, D.A4, D.D5], t, v === 4 ? 1.2 : 0.6, 0.05, 3200); if (v === 4) duck(t, 3, 0.25); } },
-    { k: "D", n: "Recorded ladder", s: "rec", d: "Recorded: a dull thud, a ping, a golden chime, a deep shimmer hit, then a huge hit with fireworks.", p(t, v) { if (v === 4) duck(t, 3.5, 0.2); smp(O(1, 0.3), ["lv_bronze", "lv_silver", "lv_gold", "lv_baller", "lv_legend"][v], t, { gain: [0.8, 0.7, 0.75, 0.8, 0.85][v], offset: v === 0 ? 0.18 : 0 }); } },
-    { k: "E", n: "Crowd", s: "rec", d: "The recorded stadium reacts: polite claps, applause, a cheer, a roar, then flares and horn.", p(t, v) { const o = O(1, 0.3);
-      if (v === 0) smp(o, "applause", t, { gain: 0.25, dur: 0.9 });
-      else if (v === 1) smp(o, "applause", t, { gain: 0.45, dur: 1.6 });
-      else if (v === 2) smp(o, "cheer_short", t, { gain: 0.7 });
-      else if (v === 3) { smp(o, "goal_roar", t, { gain: 0.7, dur: 2.5 }); smp(o, "impact_boom_b", t, { gain: 0.4 }); }
-      else { duck(t, 4, 0.2); smp(o, "goal_roar", t, { gain: 0.9, dur: 3.5 }); smp(o, "flares", t + 0.1, { gain: 0.5 }); smp(o, "air_horn", t + 0.6, { gain: 0.35 }); smp(o, "impact_boom", t, { gain: 0.5 }); } } }
-  ] },
-  { id: "bigTease", st: "transfer", n: "Before a Baller or Legend", w: "When a Baller or Legend is about to land, the build-up starts before the reel stops. Play it from the demo above.", run: true, rec: "D", opts: [
-    { k: "A", n: "Heartbeat", s: "syn", d: "Low heartbeats quickening as the crowd drops away.", mode: "heart" },
-    { k: "B", n: "Shimmer rise", s: "syn", d: "Glassy notes climbing into the landing.", mode: "shimmer" },
-    { k: "C", n: "Pulse", s: "syn", d: "Drum-like thumps speeding up.", mode: "pulse" },
-    { k: "D", n: "Tunnel", s: "rec", d: "A recorded roar heard through the tunnel walls, swelling into the landing. FC's walkout feel.", mode: "tunnel" },
-    { k: "E", n: "Drum roll", s: "rec", d: "A recorded snare roll into the landing.", mode: "drumroll" }
-  ] },
-  { id: "trayDrop", st: "transfer", n: "Cards drop to the tray", w: "The three cards drop into the tray and your pitch appears above.", rec: "A", opts: [
-    { k: "A", n: "Soft thuds", s: "syn", d: "Three soft landings, left to right.", p(t) { const o = O(1, 0.15); [0, 0.06, 0.12].forEach((x, i) => felt(pan(o, -0.4 + i * 0.4), t + x, 170, 0.35, 0.07)); } },
-    { k: "B", n: "Ticks", s: "syn", d: "Three crisp ticks.", p(t) { const o = O(1, 0.1); [0, 0.06, 0.12].forEach((x, i) => click(pan(o, -0.4 + i * 0.4), t + x, 3600, 0.15)); } },
-    { k: "C", n: "Slaps", s: "syn", d: "Three firm card slaps.", p(t) { const o = O(1, 0.1); [0, 0.06, 0.12].forEach((x, i) => { snap(pan(o, -0.4 + i * 0.4), t + x, 0.22); thump(o, t + x, 180, 60, 0.06, 0.3); }); } },
-    { k: "D", n: "Cards drop", s: "rec", d: "Three recorded cards dropping onto a table.", p(t) { smp(O(1, 0.15), "cards_drop3", t, { gain: 0.8 }); } },
-    { k: "E", n: "Whoosh down", s: "rec", d: "A recorded whoosh, pitched down.", p(t) { smp(O(1, 0.15), "whoosh_fast", t, { gain: 0.4, rate: 0.8 }); } }
-  ] },
-  { id: "sign", st: "transfer", n: "Sign a player", w: "A card is dropped on a shirt: he's signed and his old club gets weaker.", vars: LVS.map((l) => LVN[l]), lv: true, rec: "C", opts: [
-    { k: "A", n: "Warm chord", s: "syn", d: "A soft thud and a plucked chord, fuller for better players.", p(t, v) { const o = O(1, 0.3); felt(o, t, 170, 0.5, 0.12); [D.D4, D.A4, D.D5, D.Fs5, D.A5, D.D6].slice(0, 2 + v).forEach((n, i) => pluck(o, n, t + 0.02 + i * 0.03, 0.24, { dur: 1.8 })); } },
-    { k: "B", n: "Glass seal", s: "syn", d: "A click and a bright note, a chord for gold and up.", p(t, v) { const o = O(1, 0.25); click(o, t, 3800, 0.2); thump(o, t, 200, 70, 0.08, 0.35); chord(o, [D.D6, D.Fs6, D.A6, D.D7].slice(0, v < 2 ? 1 : v), t, 0.6 + v * 0.2, 0.07, 3.5, 1, 0.03); } },
-    { k: "C", n: "Stamp, scaled", s: "syn", d: "A snap for bronze and silver; a stamp and brass for gold; bigger again for Baller and Legend.", p(t, v) { const o = O(1, 0.3); snap(o, t, 0.3); thump(o, t, 190, 55, 0.12 + v * 0.05, 0.45 + v * 0.08); if (v >= 2) brass(o, [D.D4, D.Fs4, D.A4, D.D5].slice(0, v), t + 0.02, 0.4 + v * 0.15, 0.05, 3000); } },
-    { k: "D", n: "Stamp and cheer", s: "rec", d: "A recorded stamp and cheer; applause added for Baller and Legend.", p(t, v) { const o = O(1, 0.3); smp(o, "stamp", t, { gain: 0.85 }); if (v >= 1) smp(o, "cheer_short", t + 0.15, { gain: 0.2 + v * 0.1 }); if (v >= 3) smp(o, "applause", t + 0.5, { gain: 0.45, dur: 2.2 }); } },
-    { k: "E", n: "Sign and stamp", s: "rec", d: "A recorded pen signature and stamp: the contract signed.", p(t, v) { smp(O(1, 0.2), "sign_stamp", t, { gain: 0.85, offset: 0.35 }); } }
-  ] },
-  { id: "playerOut", st: "transfer", n: "The replaced player leaves", w: "The player who loses his shirt leaves for good.", rec: "A", opts: [
-    { k: "A", n: "Fade away", s: "syn", d: "Muffled air and a low note falling away.", p(t) { const o = O(1, 0.15); swish(soft(o, 1800), t, 0.35, 1800, 300, 0.14); osc(soft(o, 1000), "triangle", D.A4, t, 0.35, 0.05, { to: D.D4 }); } },
-    { k: "B", n: "Glass fall", s: "syn", d: "Two glassy notes falling.", p(t) { const o = O(1, 0.2); fm(o, D.A5, t, 0.2, 0.06, { ratio: 2, index: 0.7 }); fm(o, D.D5, t + 0.15, 0.4, 0.06, { ratio: 2, index: 0.7 }); } },
-    { k: "C", n: "Whip off", s: "syn", d: "A quick whip away.", p(t) { swish(O(1, 0.15), t, 0.3, 3500, 500, 0.2, { panFrom: 0, panTo: -0.8 }); } },
-    { k: "D", n: "Reverse whoosh", s: "rec", d: "The recorded heavy whoosh backwards.", p(t) { smp(O(1, 0.15), "whoosh_heavy", t, { gain: 0.35, reverse: true }); } },
-    { k: "E", n: "Door closes", s: "rec", d: "A recorded soft door closing in a corridor.", p(t) { smp(O(1, 0.2), "door_close", t, { gain: 0.7 }); } }
-  ] },
-  { id: "pass", st: "transfer", n: "Pass", w: "You turn down all three.", rec: "A", opts: [
-    { k: "A", n: "Let go", s: "syn", d: "Two soft falling notes and air moving off.", p(t) { const o = O(1, 0.2); pluck(o, D.A5, t, 0.18); pluck(o, D.D5, t + 0.1, 0.18); swish(soft(o, 2000), t, 0.3, 1800, 600, 0.1); } },
-    { k: "B", n: "Glass fade", s: "syn", d: "A glassy note fading out.", p(t) { fm(O(1, 0.2), D.A5, t, 0.6, 0.06, { ratio: 3.5, index: 0.8 }); } },
-    { k: "C", n: "Swipe", s: "syn", d: "A quick swipe off screen.", p(t) { swish(O(1, 0.1), t, 0.25, 1200, 4500, 0.18, { panFrom: 0, panTo: 0.8 }); } },
-    { k: "D", n: "Whoosh", s: "rec", d: "The recorded cards whoosh away.", p(t) { smp(O(1, 0.15), "whoosh_fast", t, { gain: 0.4 }); } },
-    { k: "E", n: "Sweep", s: "rec", d: "Recorded cards swept off a table.", p(t) { smp(O(1, 0.15), "cards_sweep", t, { gain: 0.75 }); } }
-  ] },
+  /* transfer window */
+  { id: "windowOpen", st: "transfer", n: "Window opens", w: "The emblem turns once, charges, then bursts into particles.", pick: "B. Charge and burst", s: "syn", ch: "Was Glass: muffled rise, a soft thud on the burst and a quiet glassy chord. No hiss.",
+    p(t) { const o = O(1, 0.3); const lp = soft(o, 2400); swish(lp, t, 0.64, 250, 2200, 0.12, { panFrom: -0.3, panTo: 0.3 }); osc(lp, "triangle", 220, t, 0.64, 0.035, { to: 660 }); felt(o, t + 0.79, 140, 0.4, 0.2); chord(soft(o, 4000), [D.D6, D.Fs6, D.A6], t + 0.79, 1.0, 0.025, 3.5, 0.6, 0.03); } },
+  { id: "rarity", st: "transfer", n: "Card lands: its level", w: "Each reel's landing says the card's level. Roll chosen levels in the demo above.", vars: LVS.map((l) => LVN[l]), lv: true, pick: "New: soft ladder", s: "syn", ch: "None of the five worked, so this is new: soft and quiet, each level a little fuller than the last. Bronze a felt tap, silver one soft note, gold a plucked chord, Baller a soft run with shimmer, Legend a warm chord with soft applause.",
+    p(t, v) { const o = O(1, 0.25);
+      if (v === 0) felt(o, t, 180, 0.35, 0.08);
+      else if (v === 1) { felt(o, t, 180, 0.25, 0.06); fm(soft(o, 3500), D.A5, t, 0.5, 0.05, { ratio: 2, index: 0.5 }); }
+      else if (v === 2) { felt(o, t, 170, 0.3, 0.08); [D.D5, D.Fs5, D.A5].forEach((n, i) => pluck(o, n, t + i * 0.04, 0.16, { dur: 1.6 })); }
+      else if (v === 3) { felt(o, t, 150, 0.35, 0.12); [D.D5, D.Fs5, D.A5, D.D6, D.Fs6].forEach((n, i) => pluck(o, n, t + i * 0.06, 0.15, { dur: 1.8 })); shimmerRise(soft(o, 4000), t + 0.1, 0.5); }
+      else { duck(t, 3, 0.4); felt(o, t, 130, 0.4, 0.2); [D.D4, D.A4, D.D5, D.Fs5].forEach((n) => osc(soft(o, 1800), "triangle", n, t, 1.8, 0.035, { a: 0.15 })); [D.D5, D.Fs5, D.A5, D.D6, D.Fs6, D.A6].forEach((n, i) => pluck(o, n, t + 0.1 + i * 0.06, 0.14, { dur: 2 })); S_(o, "applause", t + 0.3, { gain: 0.6, dur: 2.5 }); } } },
+  { id: "bigTease", st: "transfer", n: "Before a Baller or Legend", w: "When a Baller or Legend is about to land, the build-up starts before the reel stops. Play it from the demo above.", run: true, pick: "B. Shimmer rise", s: "syn", ch: "Was Glass: muffled and about half as loud.", mode: "shimmerSoft" },
+  { id: "trayDrop", st: "transfer", n: "Cards drop to the tray", w: "The three cards drop into the tray.", pick: "A. Soft thuds", s: "syn", ch: "Already soft.",
+    p(t) { const o = O(1, 0.1); [0, 0.06, 0.12].forEach((x, i) => felt(pan(o, -0.4 + i * 0.4), t + x, 170, 0.3, 0.07)); } },
+  { id: "sign", st: "transfer", n: "Sign a player", w: "A card is dropped on a shirt: he's signed.", vars: LVS.map((l) => LVN[l]), lv: true, pick: "D. Stamp and cheer", s: "rec", ch: "Softened stamp; the cheer and applause grow with the level but stay quiet.",
+    p(t, v) { const o = O(1, 0.15); S_(o, "stamp", t, { gain: 0.9 }); if (v >= 1) S_(o, "cheer_short", t + 0.15, { gain: 0.35 + v * 0.12 }); if (v >= 3) S_(o, "applause", t + 0.5, { gain: 0.7, dur: 2.2 }); } },
+  { id: "playerOut", st: "transfer", n: "The replaced player leaves", w: "The player who loses his shirt leaves for good.", pick: "A. Fade away", s: "syn", ch: "Already soft.",
+    p(t) { const o = O(1, 0.1); swish(soft(o, 1800), t, 0.35, 1800, 300, 0.12); osc(soft(o, 1000), "triangle", D.A4, t, 0.35, 0.045, { to: D.D4 }); } },
+  { id: "pass", st: "transfer", n: "Pass", w: "You turn down all three.", pick: "C. Swipe", s: "syn", ch: "Was Punch: a muffled swipe at half the level.",
+    p(t) { swish(soft(O(1, 0.06), 2000), t, 0.25, 800, 2200, 0.12, { panFrom: 0, panTo: 0.7 }); } },
 
-  /* ---------- season end ---------- */
-  { id: "finishCount", st: "end", n: "Your finish rolls in", w: "The final position counts to where you finished.", rec: "B", opts: [
-    { k: "A", n: "Soft count", s: "syn", d: "Muffled ticks slowing into a warm note.", p(t) { const o = soft(O(1, 0.2), 1800); let x = 0; for (let i = 0; i < 12; i++) { click(o, t + x, 2600, 0.14); x += 0.04 + 0.4 * Math.pow(i / 11, 2.6); } felt(o, t + x, 160, 0.5, 0.15); pluck(O(1, 0.3), D.D5, t + x, 0.28, { dur: 1.8 }); } },
-    { k: "B", n: "Slowing ticks", s: "syn", d: "Crisp ticks slowing into a firm landing and a glassy note.", p(t) { const o = O(1, 0.2); let x = 0; for (let i = 0; i < 12; i++) { click(o, t + x, 3400, 0.14); x += 0.04 + 0.4 * Math.pow(i / 11, 2.6); } thump(o, t + x, 170, 50, 0.16, 0.55); fm(o, D.D5, t + x, 0.8, 0.07, { ratio: 2, index: 0.8 }); } },
-    { k: "C", n: "Drum count", s: "syn", d: "Drum hits slowing to a big one.", p(t) { const o = O(1, 0.2); let x = 0; for (let i = 0; i < 10; i++) { thump(o, t + x, 140, 60, 0.07, 0.35); x += 0.05 + 0.45 * Math.pow(i / 9, 2.6); } thump(o, t + x, 150, 35, 0.4, 0.8); snap(o, t + x, 0.3); } },
-    { k: "D", n: "Split-flap", s: "rec", d: "The recorded scoreboard flips to your place.", p(t) { const o = O(1, 0.15); smp(o, "counter_roll", t, { gain: 0.7 }); } },
-    { k: "E", n: "Scoreboard", s: "rec", d: "A recorded scoreboard ticking, then stopping with a clunk.", p(t) { smp(O(1, 0.15), "scoreboard_stop", t, { gain: 0.75 }); } }
-  ] },
-  { id: "riseCount", st: "end", n: "The Rise counts up", w: "The headline number: places climbed against history.", rec: "B", opts: [
-    { k: "A", n: "Plucked climb", s: "syn", d: "A plucked note per place, climbing.", p(t) { const o = O(1, 0.25); [0, 2, 4, 7, 9, 12, 14, 16, 19].forEach((n, i) => pluck(o, N(12 + n), t + i * 0.08, 0.24)); } },
-    { k: "B", n: "Glass climb", s: "syn", d: "A glassy note per place, a chime at the top.", p(t) { const o = O(1, 0.2); const sc = [0, 2, 4, 7, 9, 12, 14, 16, 19, 21, 24]; sc.forEach((n, i) => fm(o, N(12 + n), t + i * 0.07, 0.14, 0.07, { ratio: 2, index: 0.6 })); chord(o, [N(36), N(40), N(43)], t + sc.length * 0.07, 1.4, 0.05); } },
-    { k: "C", n: "Brass climb", s: "syn", d: "Rising brass steps to a held chord.", p(t) { const o = O(1, 0.25); [0, 4, 7, 12].forEach((n, i) => brass(o, [N(n), N(n + 4), N(n + 7)], t + i * 0.16, i === 3 ? 1 : 0.15, 0.045, 2800)); } },
-    { k: "D", n: "Rising chimes", s: "rec", d: "A recorded rising chime run.", p(t) { smp(O(1, 0.25), "chime_rise", t, { gain: 0.75 }); } },
-    { k: "E", n: "Sparkle", s: "rec", d: "A recorded sparkle shimmer.", p(t) { smp(O(1, 0.25), "sparkle", t, { gain: 0.6 }); } }
-  ] },
-  { id: "achievement", st: "end", n: "Achievements stamp in", w: "Beat the drop, top half, top 3, the title: each one earned stamps in, building.", vars: ["Beat the drop", "Top half", "Top 3", "Title"], rec: "A", opts: [
-    { k: "A", n: "Plucked tiers", s: "syn", d: "A thud and a plucked note, one more note each tier.", p(t, v) { const o = O(1, 0.3); felt(o, t, 160, 0.45, 0.12); [D.D5, D.Fs5, D.A5, D.D6].slice(0, v + 1).forEach((n, i) => pluck(o, n, t + 0.02 + i * 0.05, 0.26)); } },
-    { k: "B", n: "Glass tiers", s: "syn", d: "A chime that gets brighter and fuller with each tier.", p(t, v) { chord(O(1, 0.35), [D.D5, D.Fs5, D.A5, D.D6, D.Fs6].slice(0, v + 2), t, 1.2, 0.06, 3.5, 1.2, 0.04); } },
-    { k: "C", n: "Stamp tiers", s: "syn", d: "A hard stamp, with brass from top 3 up.", p(t, v) { const o = O(1, 0.3); snap(o, t, 0.3); thump(o, t, 170, 45, 0.18, 0.6); if (v >= 2) brass(o, [D.D4, D.A4, D.D5, D.Fs5].slice(0, v + 1), t + 0.02, 0.5 + v * 0.2, 0.05, 3000); } },
-    { k: "D", n: "Stamps", s: "rec", d: "A recorded stamp, with sparkle and horn on the title.", p(t, v) { const o = O(1, 0.3); smp(o, "stamp", t, { gain: 0.8 }); if (v >= 2) smp(o, "sparkle", t + 0.05, { gain: 0.25 + v * 0.1 }); if (v === 3) smp(o, "air_horn", t + 0.25, { gain: 0.25 }); } },
-    { k: "E", n: "Badge unlock", s: "rec", d: "A recorded badge unlock, higher each tier.", p(t, v) { smp(O(1, 0.3), "badge_unlock", t, { gain: 0.75, rate: [0.84, 0.94, 1.06, 1.19][v], fixed: true }); } }
-  ] },
-  { id: "outcome", st: "end", n: "The season's verdict", w: "The summary opens on how the season ended.", vars: ["Champions", "Top 3", "Top half", "Survived", "Relegated"], rec: "D", opts: [
-    { k: "A", n: "Plucked", s: "syn", d: "Warm plucked chords, fuller the better you did; a slow fall for relegation.", p(t, v) { const o = O(1, 0.35); const sets = [[D.D4, D.A4, D.D5, D.Fs5, D.A5, D.D6, D.Fs6], [D.D4, D.A4, D.D5, D.Fs5, D.A5], [D.D4, D.A4, D.D5, D.Fs5], [D.D4, D.G4, D.A4, D.D5]]; if (v < 4) sets[v].forEach((n, i) => pluck(o, n, t + i * 0.07, 0.26, { dur: 2 })); else [D.A4, D.F3 * 2, D.E4, D.D4].forEach((n, i) => pluck(o, n, t + i * 0.35, 0.24, { dur: 2, damp: 0.994 })); } },
-    { k: "B", n: "Glass", s: "syn", d: "Glassy bells and shimmer for the good ones; one low bell for relegation.", p(t, v) { const o = O(1, 0.4); if (v === 4) { fm(o, D.D3, t, 2.2, 0.2, { ratio: 1.41, index: 2.5 }); return; } chord(o, [D.D5, D.Fs5, D.A5, D.D6, D.Fs6, D.A6].slice(0, 6 - v), t, 1.8, 0.05, 3.5, 1.2, 0.06); if (v === 0) shimmerRise(o, t + 0.4, 1.2); } },
-    { k: "C", n: "Brass", s: "syn", d: "A fanfare for champions, shorter stings down the table, a falling brass line for relegation.", p(t, v) { const o = O(1, 0.35);
-      if (v === 0) { [[0, 0.14], [0, 0.14], [0, 0.14], [7, 0.4], [5, 0.14], [7, 0.14], [12, 1.4]].reduce((tt, [n, d]) => { brass(o, [N(n), N(n + 4), N(n + 7)], tt, d, 0.05, 2600); return tt + d * 1.08; }, t); thump(o, t, 110, 40, 0.5, 0.6); }
-      else if (v < 4) [[0, 0.15], [v === 3 ? 5 : 7, v === 1 ? 0.15 : 0.8], [12, 0.9]].slice(0, v === 1 ? 3 : 2).reduce((tt, [n, d]) => { brass(o, [N(n), N(n + 4), N(n + 7)], tt, d, 0.05, 2600); return tt + d * 1.08; }, t);
-      else [[7, 0.4], [5, 0.4], [3, 0.4], [0, 1.4]].reduce((tt, [n, d]) => { brass(o, [N(n - 12), N(n - 9)], tt, d, 0.05, 1400); return tt + d; }, t); } },
-    { k: "D", n: "Stadium", s: "rec", d: "Recorded stadium for each: fanfare, flares and horns down to a stunned silence and a sting.", p(t, v) { const o = O(1, 0.35);
-      if (v === 0) { smp(o, "trophy_fanfare", t, { gain: 0.9 }); smp(o, "goal_roar", t + 0.3, { gain: 0.65 }); smp(o, "flares", t + 0.4, { gain: 0.45 }); smp(o, "air_horn", t + 1.2, { gain: 0.3 }); smp(o, "celebration", t + 2.0, { gain: 0.7 }); }
-      else if (v === 1) { smp(o, "cheer_short", t, { gain: 0.8 }); smp(o, "applause", t + 0.6, { gain: 0.55 }); }
-      else if (v === 2) smp(o, "applause", t, { gain: 0.6 });
-      else if (v === 3) smp(o, "applause", t, { gain: 0.45, dur: 2.5 });
-      else { smp(o, "stunned_silence", t, { gain: 0.8 }); smp(o, "relegation_sting", t + 0.5, { gain: 0.8 }); smp(o, "boos", t + 2.8, { gain: 0.3 }); } } },
-    { k: "E", n: "Stings and crowd", s: "rec", d: "Recorded brass stings with the crowd: a party for champions, a sad sting and silence for relegation.", p(t, v) { const o = O(1, 0.35);
-      if (v === 0) { smp(o, "sting_win", t, { gain: 0.8 }); smp(o, "celebration", t + 0.5, { gain: 0.7 }); }
-      else if (v === 1) { smp(o, "sting_win", t, { gain: 0.65 }); smp(o, "applause", t + 0.4, { gain: 0.5 }); }
-      else if (v === 2) { smp(o, "chime_rise", t, { gain: 0.6 }); smp(o, "applause", t + 0.5, { gain: 0.45 }); }
-      else if (v === 3) { smp(o, "sting_draw", t, { gain: 0.6 }); smp(o, "applause", t + 0.6, { gain: 0.35, dur: 2 }); }
-      else { smp(o, "sting_loss", t, { gain: 0.75 }); smp(o, "stunned_silence", t + 0.8, { gain: 0.6, dur: 2.5 }); } } }
-  ] },
-  { id: "share", st: "end", n: "Share", w: "The share sheet opens with your result.", rec: "A", opts: [
-    { k: "A", n: "Soft send", s: "syn", d: "A muffled swish up.", p(t) { swish(soft(O(1, 0.15), 2000), t, 0.25, 500, 2000, 0.18); } },
-    { k: "B", n: "Glass send", s: "syn", d: "A rising swish and a small glassy pop.", p(t) { const o = O(1, 0.2); swish(o, t, 0.25, 800, 4000, 0.12); fm(o, D.D6, t + 0.22, 0.25, 0.06, { ratio: 3.5, index: 0.8 }); } },
-    { k: "C", n: "Whip", s: "syn", d: "A quick whip up and away.", p(t) { swish(O(1, 0.1), t, 0.22, 1200, 5000, 0.2); } },
-    { k: "D", n: "Whoosh", s: "rec", d: "A recorded quick whoosh up.", p(t) { smp(O(1, 0.15), "whoosh_fast", t, { gain: 0.45, rate: 1.3 }); } },
-    { k: "E", n: "Send pop", s: "rec", d: "A recorded soft whoosh and pop.", p(t) { smp(O(1, 0.15), "send_pop", t, { gain: 0.75 }); } }
-  ] }
+  /* season end */
+  { id: "finishCount", st: "end", n: "Your finish rolls in", w: "The final position counts to where you finished.", pick: "C. Drum count", s: "syn", ch: "Was Punch: softer, muffled drums and no snap on the last hit.",
+    p(t) { const o = soft(O(1, 0.12), 1200); let x = 0; for (let i = 0; i < 10; i++) { thump(o, t + x, 130, 60, 0.07, 0.18); x += 0.05 + 0.45 * Math.pow(i / 9, 2.6); } thump(o, t + x, 140, 40, 0.35, 0.45); } },
+  { id: "riseCount", st: "end", n: "The Rise counts up", w: "Places climbed against history.", pick: "B. Glass climb", s: "syn", ch: "Was Glass: rounder notes, about half as loud, a softer chime at the top.",
+    p(t) { const o = soft(O(1, 0.15), 4000); const sc = [0, 2, 4, 7, 9, 12, 14, 16, 19, 21, 24]; sc.forEach((n, i) => fm(o, N(12 + n), t + i * 0.07, 0.14, 0.04, { ratio: 2, index: 0.4 })); chord(o, [N(36), N(40), N(43)], t + sc.length * 0.07, 1.4, 0.025, 2, 0.6); } },
+  { id: "achievement", st: "end", n: "Achievements stamp in", w: "Beat the drop, top half, top 3, the title, building.", vars: ["Beat the drop", "Top half", "Top 3", "Title"], pick: "A. Plucked tiers", s: "syn", ch: "Already soft.",
+    p(t, v) { const o = O(1, 0.25); felt(o, t, 160, 0.4, 0.12); [D.D5, D.Fs5, D.A5, D.D6].slice(0, v + 1).forEach((n, i) => pluck(o, n, t + 0.02 + i * 0.05, 0.22)); } },
+  { id: "outcome", st: "end", n: "The season's verdict", w: "The summary opens on how the season ended.", vars: ["Champions", "Top 3", "Top half", "Survived", "Relegated"], pick: "D. Stadium", s: "rec", ch: "Every clip softened: fanfare, flares and horn for champions down to a quieter silence and sting for relegation.",
+    p(t, v) { const o = O(1, 0.2);
+      if (v === 0) { S_(o, "trophy_fanfare", t, { gain: 1 }); S_(o, "goal_roar", t + 0.3, { gain: 0.7 }); S_(o, "flares", t + 0.4, { gain: 0.7 }); S_(o, "air_horn", t + 1.2, { gain: 0.8 }); S_(o, "celebration", t + 2.0, { gain: 0.9 }); }
+      else if (v === 1) { S_(o, "cheer_short", t, { gain: 0.9 }); S_(o, "applause", t + 0.6, { gain: 0.8 }); }
+      else if (v === 2) S_(o, "applause", t, { gain: 0.9 });
+      else if (v === 3) S_(o, "applause", t, { gain: 0.7, dur: 2.5 });
+      else { S_(o, "stunned_silence", t, { gain: 1 }); S_(o, "relegation_sting", t + 0.5, { gain: 0.9 }); S_(o, "boos", t + 2.8, { gain: 0.6 }); } } },
+  { id: "share", st: "end", n: "Share", w: "The share sheet opens with your result.", pick: "A. Soft send", s: "syn", ch: "Already soft.",
+    p(t) { swish(soft(O(1, 0.1), 2000), t, 0.25, 500, 2000, 0.16); } }
 ];
-// quiet actions also get a Silent choice
-CUES.forEach((c) => { if (c.quiet && !c.opts.some((o) => o.k === "S")) c.opts.push({ k: "S", n: "Silent", s: "syn", d: "No sound for this.", p() {} }); });
 
 const C = Object.fromEntries(CUES.map((c) => [c.id, c]));
-S.notes = S.notes || {};
-if (!S.seeded) { CUES.forEach((c) => { if (c.prev && !S.picks[c.id]) S.picks[c.id] = c.prev; }); try { const old = JSON.parse(localStorage.getItem("d2t-classic-kit-v1") || "{}"); if (old.notes) S.notes = Object.assign({}, old.notes, S.notes); } catch (e) {} S.seeded = true; }
-let override = null;   // while listening to an option on a demo-driven cue, the demo uses that option
-const pickOf = (id) => S.picks[id] || C[id].rec;
-const optOf = (id) => { const k = override && override.id === id ? override.k : pickOf(id); return C[id].opts.find((o) => o.k === k) || C[id].opts.find((o) => o.k === C[id].rec) || C[id].opts[0]; };
+S.off = S.off || {}; S.comments = S.comments || {};
+const isOff = (id) => C[id].s === "off" || !!S.off[id];
+const optOf = (id) => isOff(id) ? { p() {}, mode: id === "reelRun" ? {} : "none" } : C[id];
 const varOf = {};
-function cue(id, v, at = 0) { const c = C[id], o = optOf(id); if (!o.p) return; unlock(); QUIET = !!c.quiet; try { o.p(ctx.currentTime + 0.02 + at, v == null ? (varOf[id] || 0) : v); } catch (e) { console.warn(e); } finally { QUIET = false; } }
-function audition(id, k, v) { const c = C[id], o = c.opts.find((x) => x.k === k); unlock();
-  if (c.run) { override = { id, k }; clearTimeout(audition.t); audition.t = setTimeout(() => { override = null; }, 8000); demoFor(c); return; }
-  if (c.row) { const t = ctx.currentTime + 0.02; for (let i = 0; i < 8; i++) o.p(t + i * 0.09 * (1 + i * 0.12), i); return; }
-  QUIET = !!c.quiet; try { o.p(ctx.currentTime + 0.02, v == null ? (varOf[id] || 0) : v); } catch (e) { console.warn(e); } finally { QUIET = false; } }
-
+function cue(id, v, at = 0, force) { const c = C[id]; if (!c.p || c.s === "off" || (!force && S.off[id])) return; unlock(); QUIET = !!c.quiet; try { c.p(ctx.currentTime + 0.02 + at, v == null ? (varOf[id] || 0) : v); } catch (e) { console.warn(e); } finally { QUIET = false; } }
+function audition(id) { const c = C[id]; if (c.s === "off") return; unlock(); if (c.run) { demoFor(c); return; }
+  if (c.row) { const t = ctx.currentTime + 0.02; QUIET = !!c.quiet; for (let i = 0; i < 8; i++) c.p(t + i * 0.09 * (1 + i * 0.12), i); QUIET = false; return; } cue(id, null, 0, true); }
 /* ================= reels: the game's motion profile ================= */
 function profile(o) {
   const P = Object.assign({ accelT: 0.3, vmax: 24, decelT: 1.1, n: 2.2, v1: 2.4, delay: 0, cruiseT: 1 }, o);
@@ -777,9 +510,9 @@ function runReels(box, labels, levels, onDone) {
   const big = levels ? levels.reduce((b, l, i) => (LVS.indexOf(l) >= 3 && (b < 0 || LVS.indexOf(l) >= LVS.indexOf(levels[b])) ? i : b), -1) : -1;
   const teaseIdx = levels ? big : 2, teaseMode = levels ? (big >= 0 ? optOf("bigTease").mode : "none") : optOf("tease").mode;
   if (teaseIdx >= 0 && teaseMode === "riser") { const L = len("riser"), at = profs[teaseIdx].landAt - L; smp(O(1, 0.2), "riser", t0c + Math.max(0, at), { gain: levels ? 0.5 : 0.3, offset: Math.max(0, -at) }); if (levels) duck(t0c + Math.max(0, at), L + 0.5, 0.2); }
-  if (teaseIdx >= 0 && ["heart", "shimmer", "pulse", "drumroll"].includes(teaseMode)) { const land = t0c + profs[teaseIdx].landAt, dur = levels ? 2.4 : 1.8, st = land - dur, o4 = O(1, 0.2);
-    if (levels) duck(st, dur + 0.4, 0.2);
-    if (teaseMode === "heart") heartbeat(o4, st, dur); else if (teaseMode === "shimmer") shimmerRise(o4, st, dur); else if (teaseMode === "pulse") pulseRise(o4, st, dur);
+  if (teaseIdx >= 0 && ["heart", "shimmer", "shimmerSoft", "pulse", "drumroll"].includes(teaseMode)) { const land = t0c + profs[teaseIdx].landAt, dur = levels ? 2.4 : 1.8, st = land - dur, o4 = O(1, 0.2);
+    if (levels) duck(st, dur + 0.4, 0.4);
+    if (teaseMode === "heart") heartbeat(o4, st, dur); else if (teaseMode === "shimmer") shimmerRise(o4, st, dur); else if (teaseMode === "shimmerSoft") { const q = ctx.createGain(); q.gain.value = 0.5; q.connect(o4); shimmerRise(soft(q, 3500), st, dur); } else if (teaseMode === "pulse") pulseRise(o4, st, dur);
     else { const L = len("drumroll"), off = Math.max(0, L - dur); smp(o4, "drumroll", st, { gain: 0.55, offset: off, dur: dur + 0.05 }); } }
   if (teaseIdx >= 0 && teaseMode === "tunnel") { const L = len("tunnel"), at = profs[teaseIdx].landAt - L + 0.05; smp(O(1, 0.25), "tunnel", t0c + Math.max(0, at), { gain: 0.6, offset: Math.max(0, -at), dur: L - Math.max(0, -at) + 0.05 }); }
   const last = profs.map(() => 0), landed = profs.map(() => false);
@@ -801,7 +534,7 @@ function runReels(box, labels, levels, onDone) {
         else { if (!mode.cut) whirs[i].f.frequency.setTargetAtTime(300 + s.v * 85, tc, 0.03); whirs[i].g.gain.setTargetAtTime(landed[i] ? 0 : sp * (mode.tick ? 0.09 : (mode.cut ? 0.3 : 0.16)), tc, 0.04); } }
       if (mode.tick && k > last[i] && !landed[i]) {
         const slow = s.v < 13;
-        if (slow || !mode.whir) { const o2 = O(1, 0.05); if (mode.tick === "punch") { click(o2, tc, 2600 + i * 200, slow ? 0.16 : 0.08); thump(o2, tc, 150, 70, 0.03, slow ? 0.2 : 0.08); } else click(o2, tc, 3200 + i * 300, slow ? 0.16 : 0.08); }
+        if (slow || !mode.whir) { const o2 = O(1, 0.05); if (mode.tick === "punch") { click(o2, tc, 2600 + i * 200, slow ? 0.16 : 0.08); thump(o2, tc, 150, 70, 0.03, slow ? 0.2 : 0.08); } else if (mode.tick === "soft") click(soft(o2, 2200), tc, 2800 + i * 200, slow ? 0.09 : 0.045); else click(o2, tc, 3200 + i * 300, slow ? 0.16 : 0.08); }
       }
       last[i] = k;
       if (!landed[i] && t >= P.landAt) {
@@ -871,92 +604,76 @@ function matchDemo(b, skip) {
 function demoFor(c) { const b = document.querySelector(`[data-stage-demo="${c.st}"]`); if (b) b.querySelector("[data-demo]").click(); }
 
 /* ================= render ================= */
-$("#nav").innerHTML = STAGES.map((s, i) => `<a href="#${s.id}">${i + 1}. ${s.name}</a>`).join("") + `<a href="#picks">Your picks</a>`;
+const SRC = { syn: ["syn", "CODE"], rec: ["el", "ELEVENLABS"], mix: ["mix", "CODE + ELEVENLABS"], off: ["off", "NO SOUND"] };
+$("#nav").innerHTML = STAGES.map((s, i) => `<a href="#${s.id}">${i + 1}. ${s.name}</a>`).join("") + `<a href="#picks">Summary</a>`;
 function cueCard(c) {
-  const ch = pickOf(c.id);
-  const vars = c.vars ? `<div class="vars" role="group" aria-label="Versions to hear">${c.vars.map((v, i) => `<button class="var${(varOf[c.id] || 0) === i ? " on" : ""}" type="button" data-var="${i}"${c.lv ? ` data-lv style="--lvc:var(--${LVS[i]})"` : ""}>${v}</button>`).join("")}</div>` : "";
-  return `<article class="cue${ch === "none" ? " nogo" : ""}" data-cue="${c.id}"><div class="cue-head"><div><h3>${c.n}${c.quiet ? '<span class="muted-tag">MUTED</span>' : ""}</h3><p class="when">${c.w}</p></div></div>${vars}
-    <div class="opts" role="radiogroup" aria-label="Sound for ${c.n}">${c.opts.map((o) => `<div class="opt${ch === o.k ? " on" : ""}" data-opt="${o.k}">
-      <button class="listen" type="button" data-act="listen" aria-label="Listen to ${o.n}">${PLAY_ICON}</button>
-      <div class="opt-txt" data-act="listen"><b>${o.k}. ${o.n}<span class="src ${o.s === "rec" ? "el" : "syn"}">${o.k === "S" ? "OFF" : o.s === "rec" ? "ELEVENLABS" : "CODE \u00b7 " + (FAM[o.k] || "")}</span>${c.prev === o.k ? '<i class="rec was">YOUR EARLIER PICK</i>' : c.rec === o.k ? '<i class="rec">OUR PICK</i>' : ""}</b><span>${o.d}</span></div>
-      <button class="choose" type="button" role="radio" aria-checked="${ch === o.k}" data-act="choose">${ch === o.k ? "Chosen" : "Choose"}</button></div>`).join("")}
-      <button class="none${ch === "none" ? " on" : ""}" type="button" data-act="none" aria-pressed="${ch === "none"}">${ch === "none" ? "Marked: none of these work. Say why in the box below." : "None of these work"}</button></div></article>`;
+  const fixedOff = c.s === "off", off = isOff(c.id), [cls, lab] = SRC[c.s];
+  const vars = c.vars && !fixedOff ? `<div class="vars" role="group" aria-label="Versions to hear">${c.vars.map((v, i) => `<button class="var${(varOf[c.id] || 0) === i ? " on" : ""}" type="button" data-var="${i}"${c.lv ? ` data-lv style="--lvc:var(--${LVS[i]})"` : ""}>${v}</button>`).join("")}</div>` : "";
+  return `<article class="cue${off ? " is-off" : ""}" data-cue="${c.id}">
+    <div class="cue-head"><div><h3>${c.n}${c.quiet ? '<span class="muted-tag">MUTED</span>' : ""}</h3><p class="when">${c.w}</p></div>${fixedOff ? "" : `<button class="play" type="button" data-act="play" aria-label="Play ${c.n}">${PLAY_ICON}</button>`}</div>
+    <p class="pick">Your pick: <b>${c.pick}</b><span class="src ${cls}">${lab}</span></p>
+    <p class="change">${c.ch}</p>${vars}
+    ${fixedOff ? "" : `<button class="mute${S.off[c.id] ? " on" : ""}" type="button" data-act="mute" aria-pressed="${!!S.off[c.id]}">${S.off[c.id] ? "Silent in the game. Tap to bring it back" : "Make silent"}</button>`}
+    <label class="cmt-l" for="cmt-${c.id}">Comment</label>
+    <textarea id="cmt-${c.id}" class="cmt" data-comment="${c.id}" rows="2" placeholder="Anything to change about this one?"></textarea>
+    <span class="note-status" data-status="${c.id}"></span></article>`;
 }
-const FAM = { A: "SOFT", B: "GLASS", C: "PUNCH" };
-function refreshCard(id) { const card = document.querySelector(`[data-cue="${id}"]`); if (card) card.outerHTML = cueCard(C[id]); }
-$("#bays").innerHTML = STAGES.map((s, i) => `<section class="bay" id="${s.id}" aria-labelledby="h-${s.id}"><div class="bay-head"><span class="eyebrow">Stage ${i + 1}</span><h2 id="h-${s.id}">${s.name}</h2><p>${s.sub}</p></div>
+function refreshCard(id) { const card = document.querySelector(`[data-cue="${id}"]`); if (!card) return; const ta = card.querySelector("textarea"), val = ta ? ta.value : ""; card.outerHTML = cueCard(C[id]); const nt = document.querySelector(`[data-comment="${id}"]`); if (nt) nt.value = val; }
+$("#bays").innerHTML = STAGES.map((s, i) => `<section class="bay" id="${s.id}" aria-labelledby="h-${s.id}"><div class="bay-head"><span class="eyebrow">Stage ${i + 1}</span><h2 id="h-${s.id}">${s.name}</h2></div>
   ${DEMOS[s.id] ? `<div class="demo" data-stage-demo="${s.id}">${DEMOS[s.id].html}</div>` : ""}
-  <div class="cues">${CUES.filter((c) => c.st === s.id).map(cueCard).join("")}</div>
-  <div class="notes"><label for="note-${s.id}"><b>Feedback on ${s.name}</b><span>What doesn't work, what you'd want instead, or which option is close but not right.</span></label>
-    <textarea id="note-${s.id}" data-note="${s.id}" rows="3" placeholder="For example: the reel ticks are too busy, and the Legend landing needs more build-up."></textarea><span class="note-status" data-status="${s.id}"></span></div></section>`).join("");
-document.querySelectorAll("[data-note]").forEach((ta) => { ta.value = S.notes[ta.dataset.note] || ""; });
+  <div class="cues">${CUES.filter((c) => c.st === s.id).map(cueCard).join("")}</div></section>`).join("");
+document.querySelectorAll("[data-comment]").forEach((ta) => { ta.value = S.comments[ta.dataset.comment] || ""; });
 renderTable($("[data-stage-demo='table']"));
 document.addEventListener("click", (e) => {
   const dm = e.target.closest("[data-demo]"); if (dm) { const box = dm.closest("[data-stage-demo]"); DEMOS[box.dataset.stageDemo].run(box, dm.dataset.demo); return; }
   const card = e.target.closest("[data-cue]"); if (!card) return; const id = card.dataset.cue;
-  const vb = e.target.closest("[data-var]"); if (vb) { varOf[id] = +vb.dataset.var; card.querySelectorAll(".var").forEach((x) => x.classList.toggle("on", x === vb)); audition(id, optOf(id).k); return; }
-  const act = e.target.closest("[data-act]"); if (!act) return; const a = act.dataset.act, row = e.target.closest("[data-opt]");
-  if (a === "listen" && row) { audition(id, row.dataset.opt); return; }
-  if (a === "choose" && row) { S.picks[id] = row.dataset.opt; refreshCard(id); persist("picks"); renderPicks(); audition(id, row.dataset.opt); return; }
-  if (a === "none") { if (S.picks[id] === "none") delete S.picks[id]; else S.picks[id] = "none"; refreshCard(id); persist("picks"); renderPicks();
-    if (S.picks[id] === "none") { const ta = document.querySelector(`[data-note="${C[id].st}"]`); if (ta) ta.scrollIntoView({ block: "center", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); } }
+  const vb = e.target.closest("[data-var]"); if (vb) { varOf[id] = +vb.dataset.var; card.querySelectorAll(".var").forEach((x) => x.classList.toggle("on", x === vb)); audition(id); return; }
+  const act = e.target.closest("[data-act]"); if (!act) return;
+  if (act.dataset.act === "play") audition(id);
+  if (act.dataset.act === "mute") { if (S.off[id]) delete S.off[id]; else S.off[id] = true; refreshCard(id); persist(); renderSum(); }
 });
-document.addEventListener("input", (e) => { const ta = e.target.closest("[data-note]"); if (!ta) return; S.notes[ta.dataset.note] = ta.value; noteStatus(ta.dataset.note, "Typing..."); persist("notes"); renderPicks(); });
+document.addEventListener("input", (e) => { const ta = e.target.closest("[data-comment]"); if (!ta) return; const id = ta.dataset.comment; if (ta.value.trim()) S.comments[id] = ta.value; else delete S.comments[id]; status(id, "Typing..."); persist(); renderSum(); });
 
 /* mixer */
 [["vol", "o_vol"], ["room", "o_room"]].forEach(([k, o]) => { const i = $("#m_" + k); i.value = S[k]; $("#" + o).textContent = Math.round(S[k] * 100); i.addEventListener("input", () => { S[k] = +i.value; $("#" + o).textContent = Math.round(S[k] * 100); applyMix(); save(); }); });
-$("#m_var").checked = S.vary; $("#m_var").addEventListener("change", (e) => { S.vary = e.target.checked; save(); });
+applyMix();
 $("#m_bed").checked = S.bed; $("#m_bed").addEventListener("change", (e) => { S.bed = e.target.checked; save(); if (!S.bed) bedOff(); });
 
-/* picks */
-const choiceText = (id) => pickOf(id) === "none" ? "None of these work" : (() => { const o = C[id].opts.find((x) => x.k === pickOf(id)) || C[id].opts[0]; return `${o.k}. ${o.n}${o.k === "S" ? "" : o.s === "rec" ? " (ElevenLabs)" : " (code, " + FAM[o.k].toLowerCase() + ")"}`; })();
+/* summary and copy */
 const escH = (t) => String(t).replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
-function renderPicks() {
-  $("#pickList").innerHTML = CUES.map((c) => `<div class="${pickOf(c.id) === "none" ? "nogo" : ""}"><span>${STAGES.findIndex((s) => s.id === c.st) + 1}. ${c.n}${S.picks[c.id] ? "" : " (our pick)"}</span><b>${choiceText(c.id)}</b></div>`).join("");
-  $("#pickNotes").innerHTML = STAGES.filter((s) => (S.notes[s.id] || "").trim()).map((s) => `<div><b>${s.name}</b>${escH(S.notes[s.id]).replace(/\n/g, "<br>")}</div>`).join("");
-}
-renderPicks();
+const finalText = (c) => isOff(c.id) ? "Silent" : c.pick;
+function renderSum() { $("#sum").innerHTML = CUES.map((c) => `<div class="${isOff(c.id) ? "off" : ""}"><span>${STAGES.findIndex((s) => s.id === c.st) + 1}. ${c.n}</span><b>${escH(finalText(c))}</b>${S.comments[c.id] ? `<i>${escH(S.comments[c.id]).replace(/\n/g, "<br>")}</i>` : ""}</div>`).join(""); }
+renderSum();
 function toast(m) { const t = $("#toast"); t.textContent = m; t.hidden = false; clearTimeout(t._h); t._h = setTimeout(() => (t.hidden = true), 2200); }
 $("#copyPicks").addEventListener("click", () => {
-  const text = "DROP2TOP Classic sound picks\n" + STAGES.map((s, i) => `\n${i + 1}. ${s.name}\n` + CUES.filter((c) => c.st === s.id).map((c) => `- ${c.n}: ${choiceText(c.id)}${S.picks[c.id] ? "" : " (our pick, not changed)"}`).join("\n") + ((S.notes[s.id] || "").trim() ? `\n  Feedback: ${S.notes[s.id].trim()}` : "")).join("\n")
-    + `\n\nSettings: echo ${Math.round(S.room * 100)}, variation ${S.vary ? "on" : "off"}, crowd bed ${S.bed ? "on" : "off"}\nKit: claude.ai artifact "D2T Classic Sound Kit"; files in audio/classic and audio/game on the claude/optimistic-maxwell-q6adtf branch.`;
+  const text = "DROP2TOP Classic sounds (final, softened)\n" + STAGES.map((s, i) => `\n${i + 1}. ${s.name}\n` + CUES.filter((c) => c.st === s.id).map((c) => `- ${c.n}: ${finalText(c)}${S.comments[c.id] ? `\n  Comment: ${S.comments[c.id].trim()}` : ""}`).join("\n")).join("\n");
   const fb = () => { const b = $("#copyBox"); b.hidden = false; b.innerHTML = '<p class="soft" style="font-size:13px">Copying is blocked here. Select this and copy it:</p><textarea class="copy" readonly></textarea>'; const ta = b.querySelector("textarea"); ta.value = text; ta.focus(); ta.select(); };
-  try { navigator.clipboard.writeText(text).then(() => toast("Picks copied"), fb); } catch (e) { fb(); }
+  try { navigator.clipboard.writeText(text).then(() => toast("List copied"), fb); } catch (e) { fb(); }
 });
-let resetArm = false;
-$("#resetPicks").addEventListener("click", (e) => { if (!resetArm) { resetArm = true; e.target.textContent = "Tap again to reset"; setTimeout(() => { resetArm = false; e.target.textContent = "Back to our picks"; }, 3000); return; }
-  S.picks = {}; persist("picks"); CUES.forEach((c) => refreshCard(c.id)); renderPicks(); e.target.textContent = "Back to our picks"; resetArm = false; toast("Back to our picks"); });
-let db = null; const chain = { picks: Promise.resolve(), notes: Promise.resolve() }, timers = {};
-function noteStatus(st, t) { const el = document.querySelector(`[data-status="${st}"]`); if (el) el.textContent = t; }
+
+/* saving: this device, plus the page's own store */
+let db = null, chain = Promise.resolve(), timer = 0;
+function status(id, t) { const el = document.querySelector(`[data-status="${id}"]`); if (el) el.textContent = t; }
 function setLive(on, msg) { $("#savebar").classList.toggle("live", on); $("#saveText").textContent = msg; }
-function persist(which) {
-  save(); if (!db) { if (which === "notes") STAGES.forEach((st) => noteStatus(st.id, (S.notes[st.id] || "").trim() ? "Saved on this device" : "")); return; }
-  clearTimeout(timers[which]);
-  timers[which] = setTimeout(() => {
-    const body = which === "picks"
-      ? { choices: Object.fromEntries(CUES.map((c) => [c.id, pickOf(c.id)])), changed: Object.keys(S.picks), updatedAt: new Date().toISOString() }
-      : { sections: Object.assign({}, S.notes), updatedAt: new Date().toISOString() };
-    chain[which] = chain[which].then(() => db.doc("feedback/" + (which === "picks" ? "picks2" : "notes")).set(body)).then(() => {
-      if (which === "notes") STAGES.forEach((st) => noteStatus(st.id, (S.notes[st.id] || "").trim() ? "Saved" : ""));
-      setLive(true, "Your choices and feedback save to this page as you go, so Claude can read them.");
-    }).catch((err) => {
-      const ro = err && err.code === "invalid_argument";
-      setLive(false, ro ? "This view can't save to the page. Saving on this device; use Copy at the bottom." : "Couldn't save to the page just now. It's kept on this device and will try again on your next change.");
-      if (which === "notes") STAGES.forEach((st) => noteStatus(st.id, (S.notes[st.id] || "").trim() ? "Saved on this device" : ""));
-    });
-  }, which === "notes" ? 900 : 250);
+function doneStatus(t) { Object.keys(C).forEach((id) => status(id, S.comments[id] ? t : "")); }
+function persist() {
+  save(); if (!db) { doneStatus("Saved on this device"); return; }
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    const body = { sounds: Object.fromEntries(CUES.map((c) => [c.id, isOff(c.id) ? "silent" : c.pick])), silenced: Object.keys(S.off), comments: Object.assign({}, S.comments), updatedAt: new Date().toISOString() };
+    chain = chain.then(() => db.doc("feedback/final").set(body)).then(() => { doneStatus("Saved"); setLive(true, "Everything saves to this page as you go, so Claude can read it."); })
+      .catch((err) => { doneStatus("Saved on this device"); setLive(false, err && err.code === "invalid_argument" ? "This view can't save to the page. Saving on this device; use Copy at the bottom." : "Couldn't save to the page just now. It's kept on this device and will try again on your next change."); });
+  }, 800);
 }
 (window.claude && window.claude.use ? window.claude.use("db") : Promise.resolve(null)).then(async (d) => {
-  if (!d) { setLive(false, "Saving on this device. Use Copy at the bottom to send your choices."); return; }
+  if (!d) { setLive(false, "Saving on this device. Use Copy at the bottom to send your comments."); return; }
   db = d;
   try {
-    const [p, n] = await Promise.all([db.doc("feedback/picks2").get(), db.doc("feedback/notes").get()]);
-    if (p.exists) { const v = p.data(); const picks = {}; (v.changed || []).forEach((id) => { if (C[id] && v.choices && v.choices[id]) picks[id] = v.choices[id]; }); S.picks = picks; }
-    if (n.exists) S.notes = Object.assign({}, (n.data() || {}).sections || {});
-    if (!p.exists) persist("picks");
-    save(); CUES.forEach((c) => refreshCard(c.id)); document.querySelectorAll("[data-note]").forEach((ta) => { if (document.activeElement !== ta) ta.value = S.notes[ta.dataset.note] || ""; }); renderPicks();
-    setLive(true, "Your choices and feedback save to this page as you go, so Claude can read them.");
-  } catch (err) { setLive(false, "Couldn't reach the page's saved choices. Saving on this device for now."); }
+    const f = await db.doc("feedback/final").get();
+    if (f.exists) { const v = f.data() || {}; S.off = Object.fromEntries((v.silenced || []).filter((id) => C[id]).map((id) => [id, true])); S.comments = Object.assign({}, v.comments || {}); save(); CUES.forEach((c) => refreshCard(c.id)); document.querySelectorAll("[data-comment]").forEach((ta) => { if (document.activeElement !== ta) ta.value = S.comments[ta.dataset.comment] || ""; }); renderSum(); }
+    else persist();
+    setLive(true, "Everything saves to this page as you go, so Claude can read it.");
+  } catch (err) { setLive(false, "Couldn't reach the page's saved comments. Saving on this device for now."); }
 });
 document.addEventListener("visibilitychange", () => { if (document.hidden) { if (running) running.cancel(); matchTimers.forEach(clearTimeout); clearTimeout(tableTimer); bedOff(); } });
 })();
