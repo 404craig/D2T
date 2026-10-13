@@ -231,9 +231,14 @@
         R.run = { stat: run.stat.id, cur: at(run.cur), next: at(run.next), used: [...run.used].map(at).filter((i) => i >= 0), streak: run.streak, refreshes: run.refreshes };
         save();
       }
+      // under the title in a run (Craig, 13 Oct): your best on this stat and your best on any
+      function bestLine(stat) {
+        const top = Math.max(0, ...Object.values(R.best || {}));
+        sub.innerHTML = `Your best on this: <em>${R.best[stat.id] || 0}</em> · Best overall: <em>${top}</em>`;
+      }
       // the stage for a run: two columns, the reels, the answer bar
       function setStage(stat) {
-        title.textContent = stat.big; sub.innerHTML = 'Premier League · <em>one wrong and it is over</em>';
+        title.textContent = stat.big; bestLine(stat);
         SIZE = sizes(isClub(stat));
         stage.style.setProperty('--ub-sw', SIZE.w + 'px'); stage.style.setProperty('--ub-ph', SIZE.pitch + 'px'); stage.style.setProperty('--ub-slw', SIZE.slot + 'px'); stage.style.setProperty('--ub-vs', SIZE.vs);
         stage.classList.toggle('ub-clubs', isClub(stat)); stage.classList.remove('ub-go');
@@ -460,7 +465,7 @@
       function over(cleared) {
         if (!root.isConnected || !run) return;
         const s = run.stat, n = run.streak, prev = R.best[s.id] || 0, newBest = n > prev && n > 0;
-        R.runs++; if (newBest) R.best[s.id] = n; R.run = null; save();
+        R.runs++; if (newBest) R.best[s.id] = n; R.run = null; save(); bestLine(s);
         if (newBest) { snd('highScore'); highScore(); }
         // the end sheet waits for the HIGH SCORE flash to pass
         const show = () => {

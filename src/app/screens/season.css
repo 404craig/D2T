@@ -61,8 +61,9 @@
 
 /* "Rewrite history" sweep, two lines (Craig, 12 Oct) */
 .se-newseason { position: absolute; left: 0; right: 0; top: 38%; z-index: 8; pointer-events: none; display: grid; place-items: center; opacity: 0; }
-.se-newseason span { font: var(--display); font-size: 54px; line-height: .92; text-align: center; text-transform: uppercase; color: var(--se-acc); text-shadow: 0 6px 30px rgba(0,0,0,.9); white-space: nowrap; transform: translateX(60%) skewX(-8deg); }
-.se-newseason::before { content: ''; position: absolute; left: -10%; right: -10%; top: 50%; height: 136px; margin-top: -68px; background: linear-gradient(90deg, transparent, rgba(0,0,0,.85) 20%, rgba(0,0,0,.85) 80%, transparent); }
+.se-newseason span { font: var(--display); font-size: 54px; line-height: .92; text-align: center; text-transform: uppercase; color: var(--se-acc); text-shadow: 0 0 26px color-mix(in srgb, var(--se-acc) 40%, transparent); white-space: nowrap; transform: translateX(60%) skewX(-8deg); }
+/* a soft dark cloud behind the words that fades out on every side, never a band with hard edges (Craig, 13 Oct) */
+.se-newseason::before { content: ''; position: absolute; left: -15%; right: -15%; top: 50%; height: 280px; margin-top: -140px; background: radial-gradient(closest-side, rgba(0,0,0,.8), rgba(0,0,0,.55) 50%, rgba(0,0,0,.2) 78%, transparent); }
 .se-newseason span { position: relative; }
 .se-newseason.se-go { animation: seFlashBox 2.6s ease both; }
 .se-newseason.se-go span { animation: seFlashText 2.6s cubic-bezier(.2,.8,.2,1) both; }
