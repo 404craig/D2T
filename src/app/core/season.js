@@ -113,7 +113,7 @@
       homeLabel: `Home, save the ${daily ? 'Daily' : 'run'}`, quitLabel: 'Quit the run',
       home: true,
       restart: () => { if (daily) { G.restartDaily(); D2T.go(G.stepFor() || 'table'); return; } G.newRun(mode); D2T.go('spin'); },
-      quit: daily ? null : () => { D2T.state.run = null; D2T.save(); D2T.go('home'); }
+      quit: daily ? null : () => { G.rememberOffered(); D2T.state.run = null; D2T.save(); D2T.go('home'); }
     });
   };
   document.addEventListener('click', (ev) => { if (ev.target.closest && ev.target.closest('.se-home')) D2T.runMenu(); });
