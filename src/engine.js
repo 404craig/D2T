@@ -244,8 +244,8 @@ function chooseClub(st, S, rel) {
 const DRAFT_MODES = ["dare2dream", "clubx"];
 // Dare2Dream fills keeper first, then defence, midfield and attack, each spin three players for that shirt's position.
 // Club X (Craig, 13 Oct) fills them in any order: each of the three cards is drawn for one of the open shirts (each open shirt
-// as likely as the next), from players who list that shirt's position among their preferred ones, and he goes on any open
-// shirt he lists. All from the same season, never your club's own squad, never one seen before. No respins in the draft.
+// as likely as the next), from players who are green there (they list it, or FIT makes it green), and he goes on any open
+// shirt, green, amber or red; the shape can change after every spin, the players already in are re-seated. All from the same season, never your club's own squad, never one seen before. No respins in the draft.
 // A drafted player leaves his real club for the whole season, like a signing (a raid dated before the season).
 const BROAD_ORDER = { GK: 0, DEF: 1, MID: 2, FWD: 3 };
 function draftOrder(formation) {
@@ -264,13 +264,12 @@ function listsPos(p, pos) {
 }
 const openDraft = (st) => st.mode === "clubx" && !st.draft.order;
 const openSlots = (st) => st.xi.map((id, i) => (id == null ? i : -1)).filter(i => i >= 0);
-// The open shirts a drafted card can go on: those whose position he lists (main first), or in an older run any open one.
+// The open shirts a drafted card can go on: every open one, best first (his main position, then green, amber, red).
 function draftFits(st, S, cardId) {
   const p = playerOf(S, cardId, S.legends), open = openSlots(st), f = FORMATIONS[st.formation];
   if (!p || !openDraft(st)) return open;
-  const fit = open.filter(i => listsPos(p, f[i][0]));
-  const main = (p.p || [])[0];
-  return fit.sort((a, b) => (f[b][0] === main) - (f[a][0] === main) || a - b);
+  const main = (p.p || [])[0], rank = (i) => (f[i][0] === main ? 0 : { green: 1, amber: 2, red: 3 }[fitOf(p, f[i][0])]);
+  return open.sort((a, b) => rank(a) - rank(b) || a - b);
 }
 function startDraft(st, S) {
   st.xi = new Array(FORMATIONS[st.formation].length).fill(null);
@@ -287,7 +286,7 @@ function newDraftRoll(st, S) {
     const open = openSlots(st), f = FORMATIONS[st.formation];
     for (let k = 0; k < 3; k++) {
       const pos = f[open[Math.floor(r() * open.length)]][0];
-      const id = drawCard(r, S, st, S.legends, taken, null, (p) => listsPos(p, pos));
+      const id = drawCard(r, S, st, S.legends, taken, null, (p) => fitOf(p, pos) === "green");
       if (id != null) { cards.push(id); taken.add(id); }
     }
     st.roll = { key: `d${st.draft.step}`, spin: 0, cards, window: "draft", slot: null, step: st.draft.step + 1, of: st.xi.length };
@@ -297,9 +296,12 @@ function newDraftRoll(st, S) {
   for (let k = 0; k < 3; k++) { const id = drawCard(r, S, st, S.legends, taken, broad); if (id != null) { cards.push(id); taken.add(id); } }
   st.roll = { key: `d${st.draft.step}`, spin: 0, cards, window: "draft", slot, step: st.draft.step + 1, of: st.xi.length };
 }
-// The shape can change until the first pick.
+// The shape can change until the first pick; in Club X's open draft at any time, the players already in re-seated to the
+// shirts they fit best and the three cards on the table kept (no fresh cards from a change of shape).
 function draftFormation(st, S, f) {
-  if (st.phase !== "draft" || st.draft.step > 0 || !FORMATIONS[f]) return false;
+  if (st.phase !== "draft" || !FORMATIONS[f]) return false;
+  if (openDraft(st) && st.draft.step > 0) { st.xi = reseat(st, S, f); st.formation = f; st.log.push(["formation", f]); return true; }
+  if (st.draft.step > 0) return false;
   st.formation = f; st.xi = new Array(FORMATIONS[f].length).fill(null);
   if (st.draft.order) st.draft.order = shuffledOrder(st);
   newDraftRoll(st, S);
@@ -310,7 +312,7 @@ function draftPick(st, S, cardId, at) {
   let slot = draftSlot(st);
   if (slot == null) {   // Club X: any open shirt he lists, the one asked for or his best
     const fits = draftFits(st, S, cardId);
-    slot = at == null ? fits[0] : (fits.includes(at) ? at : null);
+    slot = at == null ? fits[0] : (fits.includes(at) ? at : null);   // any open shirt
     if (slot == null) return false;
   }
   const p = playerOf(S, cardId, S.legends);
@@ -376,10 +378,8 @@ function autoXI(S, club, formation, preferred) {
   place(squad);
   return xi;
 }
-function setFormation(st, S, f) {
-  if (!["setup", "window", "prematch"].includes(st.phase)) return false;
-  if (!FORMATIONS[f]) return false;
-  // Keep the same players, re-seated to the slots they fit best.
+// Keep the same players, re-seated to the slots they fit best.
+function reseat(st, S, f) {
   const players = st.xi.filter(Boolean).map(id => playerOf(S, id, S.legends));
   const slots = FORMATIONS[f].map(s => s[0]);
   const xi = new Array(slots.length).fill(null), used = new Set();
@@ -390,7 +390,12 @@ function setFormation(st, S, f) {
       if (best) { xi[i] = best.id; used.add(best.id); }
     });
   }
-  st.formation = f; st.xi = xi;
+  return xi;
+}
+function setFormation(st, S, f) {
+  if (!["setup", "window", "prematch"].includes(st.phase)) return false;
+  if (!FORMATIONS[f]) return false;
+  st.xi = reseat(st, S, f); st.formation = f;
   st.log.push(["formation", f]);
   return true;
 }
