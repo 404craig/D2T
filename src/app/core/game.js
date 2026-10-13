@@ -420,7 +420,7 @@
     const total = eng.rolls.reduce((a, x) => a + x.n, 0);
     let done = 0; for (let i = 0; i < eng.rollIx; i++) done += eng.rolls[i].n;
     done += eng.rollStep;
-    const name = !w ? 'Transfer window' : w.kind === 'pre' ? 'Pre-season' : w.kind === 'jan' ? 'January window' : 'Transfer window';
+    const name = !w ? 'Transfer window' : w.kind === 'pre' ? 'Summer transfer window' : w.kind === 'jan' ? 'January window' : 'Transfer window';
     return { name, step: eng.rollStep + 1, of: w ? w.n : 1, overall: done + 1, total, gw: eng.gw };
   };
   GAME.preview = (cardId) => E.signPreview(GAME.eng(), GAME.S(), cardId);

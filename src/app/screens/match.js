@@ -3,8 +3,11 @@
 (function () {
   const D2T = window.D2T, SE = D2T.se;
   const MATCH_MS = 9400, HT_PAUSE = 600;   // 10 seconds kick-off to full time, half-time pause included (Craig, 12 Oct)
+  // the ball's patches are cut by its edge: one clip path for every ball on the page
+  if (!document.getElementById('d2t-ball-clip')) document.body.insertAdjacentHTML('beforeend', '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="d2t-ball-clip"><circle cx="12" cy="12" r="11"/></clipPath></defs></svg>');
   const ICON = {
-    goal: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="#fff"/><path d="M12 7.2l3.3 2.4-1.3 3.9h-4l-1.3-3.9z" fill="#111"/><path d="M12 3v4.2M20.6 9.2l-5.3.4M17.4 19.4l-3.4-5.9M6.6 19.4l3.4-5.9M3.4 9.2l5.3.4" stroke="#111" stroke-width="1.3"/></svg>',
+    // a flat football (Craig, 13 Oct; design/prototype/assets/icons/football-flat.svg): white, black pentagons, thin rim
+    goal: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#fff"/><g clip-path="url(#d2t-ball-clip)" fill="#0A0A0A" stroke="#0A0A0A" stroke-linejoin="round" stroke-width=".5"><polygon points="12.00,8.40 15.42,10.89 14.12,14.91 9.88,14.91 8.58,10.89"/><polygon points="12.00,5.00 9.24,3.00 10.30,-0.25 13.70,-0.25 14.76,3.00"/><polygon points="18.66,9.84 19.71,6.59 23.12,6.59 24.17,9.84 21.42,11.84"/><polygon points="16.11,17.66 19.52,17.66 20.58,20.91 17.82,22.91 15.06,20.91"/><polygon points="7.89,17.66 8.94,20.91 6.18,22.91 3.42,20.91 4.48,17.66"/><polygon points="5.34,9.84 2.58,11.84 -0.17,9.84 0.88,6.59 4.29,6.59"/></g><path d="M12.00 8.40L12.00 5.00M15.42 10.89L18.66 9.84M14.12 14.91L16.11 17.66M9.88 14.91L7.89 17.66M8.58 10.89L5.34 9.84" stroke="#0A0A0A" stroke-width=".8" stroke-linecap="round" fill="none"/><circle cx="12" cy="12" r="10.6" fill="none" stroke="#0A0A0A" stroke-width=".8"/></svg>',
     miss: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V5h16v15" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 9h16M8 5v15M12 5v15M16 5v15" stroke="currentColor" stroke-width=".8" opacity=".5"/></svg>',
     yellow: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="4" width="10" height="15" rx="1.6" fill="#FFD43B" transform="rotate(8 12 12)"/></svg>',
     whistle: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="14" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 10l8-3v4l-6 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>'
@@ -50,7 +53,7 @@
         </div>
         <div class="se-pad"></div>
       </div>`);
-      const bar = D2T.h('<footer class="actionbar"><button class="btn se-btn se-wide se-main" type="button">Kick off</button>' + SE.homeBtn() + '</footer>');
+      const bar = D2T.h('<footer class="actionbar">' + SE.backOff() + '<button class="btn se-btn se-wide se-main" type="button">Kick off</button>' + SE.homeBtn() + '</footer>');
       root.append(body, bar);
       const btn = bar.querySelector('.se-main');
       const feed = body.querySelector('.se-feed'), clockEl = body.querySelector('.se-clock'), prog = body.querySelector('.se-prog span');

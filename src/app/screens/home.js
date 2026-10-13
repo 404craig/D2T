@@ -80,17 +80,28 @@
     return gameCard({ c: '#22D3EE', attrs: 'data-act="unbeaten"', label: 'Unbeaten Run', tag: 'UNBEATEN RUN', big: 'Higher or lower?', sub, mark: D2T.ubMark || '' });
   }
 
-  // Daily challenge card: today's club for everyone, the mode it plays, and your result once played.
+  // Daily challenge card: today's club for everyone. The card keeps only its question (or "Done for today"); your best
+  // Daily and today's go sit in two tiles just under it (Craig, 13 Oct; design/prototype/daily-best.html).
+  const UP = '<svg class="fr-up" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1 L11 8 H7.5 V11 H4.5 V8 H1 Z" fill="currentColor"/></svg>';
   function dailyCard() {
     const G = D2T.game, d = G.dailyEntry(G.today()), res = G.dailyResult(), streak = G.dailyStreak();
-    const goal = 'They went down for real. Can you keep them up?';
-    const cmp = G.dailyCompare(), best = cmp.best;
-    const sub = res ? `Today: ${D2T.ordinal(res.finish)}, rise ${cmp.sg(res.rise)}. ${cmp.isBest ? 'Your best Daily yet.' : `Best: ${cmp.sg(best.rise)} (${D2T.esc(best.club)}).`} Tap to share.`
-      : best ? `${goal} Your best Daily: rise ${cmp.sg(best.rise)}.` : goal;
+    const sub = res ? 'Done for today. Tap to share it.' : 'They went down for real. Can you keep them up?';
     // white, the date in the top row, today's crest in full colour where the other games keep their mark
     const tag = G.dailyName(d.date, true).toUpperCase().replace('CHALLENGE ', 'CHALLENGE · ') + (streak ? ` · ${streak} DAY STREAK` : '');
     return gameCard({ c: '#FFFFFF', cls: 'fr-gm-daily', attrs: 'data-act="daily"', label: `${G.dailyName(d.date)}, ${D2T.esc(d.full || d.name)} ${d.season}`,
-      tag, big: `${D2T.esc(d.name)}<br>${d.season}`, sub, mark: `<img class="fr-gm-crest" src="${d.crest}" alt="">` });
+      tag, big: `${D2T.esc(d.name)}<br>${d.season}`, sub, mark: `<img class="fr-gm-crest" src="${d.crest}" alt="">` }) + dailyTiles(d, res);
+  }
+  function dailyTiles(d, res) {
+    const G = D2T.game, cmp = G.dailyCompare(), best = cmp.best, o = D2T.ordinal, esc = D2T.esc;
+    const crest = (name) => { const c = G.club(name); return c && c.crest ? `<img src="${c.crest}" alt="">` : ''; };
+    const rise = (n) => `<span class="fr-rise">${UP} ${n}</span>`;
+    const left = best ? `<b>${crest(best.club)}${rise(best.rise)}</b><small>${esc(best.club)} · ${o(best.histFinish)} to ${o(best.finish)}</small>`
+      : '<b>None yet</b><small>Play today to set one</small>';
+    let right, newBest = false;
+    if (res) { newBest = cmp.isBest; right = `<b>${crest(d.name)}${rise(res.rise)}</b><small>${newBest ? 'New best' : `${esc(d.name)} · ${o(res.histFinish)} to ${o(res.finish)}`}</small>`; }
+    else if (!best) right = `<b>${crest(d.name)}${esc(d.name)}</b><small>Their real finish: ${o(d.pos)}</small>`;
+    else { const need = d.pos - best.rise; right = need < 1 ? `<b>${crest(d.name)}Win the league</b><small>to match your best</small>` : `<b>${crest(d.name)}Finish ${o(need)}</b><small>or higher to beat your best</small>`; }
+    return `<div class="fr-dtiles"><div class="fr-dtile"><i>YOUR BEST DAILY</i>${left}</div><div class="fr-dtile${newBest ? ' is-best' : ''}"><i>TODAY'S DAILY</i>${right}</div></div>`;
   }
   function dailyDone() {
     const G = D2T.game, r = G.dailyResult(), d = G.dailyEntry(G.today());

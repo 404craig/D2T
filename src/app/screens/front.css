@@ -273,3 +273,13 @@
 .fr-soon-nm { font: 900 italic 20px/.95 var(--font); text-transform: uppercase; }
 .fr-soon-sb { font-size: 12px; font-weight: 600; line-height: 1.3; margin-top: 5px; color: #A9A9B2; }
 .fr-soon-t.nudge { animation: frNudge .4s var(--ease-out); }
+/* your best Daily and today's, in two tiles just under the Daily card (Craig, 13 Oct; design/prototype/daily-best.html) */
+.fr-dtiles { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+.fr-dtile { border-radius: 12px; background: #0E0E10; border: 1px solid #26262C; padding: 7px 10px; display: flex; flex-direction: column; gap: 3px; min-width: 0; color: #fff; }
+.fr-dtile.is-best { border-color: rgba(18,240,108,.6); }
+.fr-dtile i { font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: .12em; color: #8E8E99; }
+.fr-dtile b { font: 900 italic 17px/1 'Exo 2', sans-serif; display: flex; align-items: center; gap: 5px; white-space: nowrap; overflow: hidden; }
+.fr-dtile b img { width: 18px; height: 18px; object-fit: contain; flex: none; }
+.fr-dtile small { font-size: 10px; font-weight: 700; color: #CFCFD6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fr-rise { color: #12F06C; display: inline-flex; align-items: center; gap: 3px; }
+.fr-up { width: .7em; height: .7em; }

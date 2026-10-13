@@ -78,6 +78,8 @@
   // Keep playing, Restart the game (a new run of the same mode from the start), Home (the run is saved) or Quit (thrown
   // away). A Daily only offers Keep playing and Home (one go a day). Before a club is picked, or once the run is over,
   // it simply goes home.
+  // a greyed back button where there is nowhere to go back to (Craig, 13 Oct): it keeps the main button centred
+  SE.backOff = () => `<button class="icon-btn se-off" type="button" disabled aria-hidden="true" tabindex="-1">${D2T.ICON.back}</button>`;
   SE.homeBtn = () => `<button class="icon-btn se-home" type="button" aria-label="Home">${D2T.ICON.home}</button>`;
   D2T.runMenu = () => {
     const r = D2T.state.run, G = D2T.game, e = r && r.eng;
