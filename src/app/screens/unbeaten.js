@@ -374,17 +374,19 @@
           later(advance, reduced ? 120 : 380);
         };
         if (reduced) { done(); return; }
-        // a cyan tick pops where VS sits, then flies up to the run count, which ticks up as it lands
+        // a cyan tick where VS sits (Craig, 13 Oct: his brush tick): it comes in three times the size and faint, settles at
+        // one and a half times in full, gives a quick pulse, then flies up to the run count, which ticks up as it lands
         const vs = stage.querySelector('.ub-vs').getBoundingClientRect(), to = nEl.getBoundingClientRect();
-        const tick = D2T.h('<div class="ub-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>');
+        const tick = D2T.h('<div class="ub-tick" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M7 54 C3 45 9 37 18 37 C23 37 26 40 28 44 L37 62 C52 43 74 18 96 6 C98 5 100 7 98 9 C78 32 60 58 45 82 C41 88 35 92 28 93 C24 93 21 91 20 88 Z"/></svg></div>');
         const cx = vs.left + vs.width / 2, cy = vs.top + vs.height / 2;
         tick.style.left = cx + 'px'; tick.style.top = cy + 'px'; document.body.appendChild(tick);
-        const dx = to.left + to.width / 2 - cx, dy = to.top + to.height / 2 - cy;
-        tick.animate([{ transform: 'translate(-50%,-50%) scale(0) rotate(-30deg)', opacity: 0 }, { transform: 'translate(-50%,-50%) scale(1.3) rotate(6deg)', opacity: 1, offset: 0.6 }, { transform: 'translate(-50%,-50%) scale(1) rotate(0)', opacity: 1 }], { duration: 340, easing: 'cubic-bezier(.2,.9,.3,1.3)', fill: 'forwards' });
+        const dx = to.left + to.width / 2 - cx, dy = to.top + to.height / 2 - cy, C = 'translate(-50%,-50%)';
+        tick.animate([{ transform: `${C} scale(3)`, opacity: 0.1 }, { transform: `${C} scale(1.5)`, opacity: 1, offset: 0.62 }, { transform: `${C} scale(1.75)`, opacity: 1, offset: 0.8 }, { transform: `${C} scale(1.5)`, opacity: 1 }],
+          { duration: 600, easing: 'cubic-bezier(.25,.8,.3,1)', fill: 'forwards' });
         later(() => {
-          tick.animate([{ transform: 'translate(-50%,-50%) scale(1)', opacity: 1 }, { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(.45)`, opacity: 0.9 }], { duration: 520, easing: 'cubic-bezier(.55,0,.25,1)', fill: 'forwards' })
+          tick.animate([{ transform: `${C} scale(1.5)`, opacity: 1 }, { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(.45)`, opacity: 0.9 }], { duration: 520, easing: 'cubic-bezier(.55,0,.25,1)', fill: 'forwards' })
             .onfinish = () => { tick.remove(); done(); };
-        }, 560);
+        }, 680);
       }
       function advance() {
         if (!run) return;
