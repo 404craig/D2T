@@ -323,6 +323,18 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.click(".actionbar button"); await expectScreen("squad"); await wait(600);
   check(await page.evaluate(() => window.D2T.game.eng().phase === "draft" && window.D2T.game.clubName() === "Southside Rovers"), "Club X should start in the draft under your name");
   check(await page.evaluate(() => { const G = window.D2T.game, i = G.draftInfo(); return i.open && G.rollCards().length === 3 && G.rollCards().every((c) => G.draftFits(c.id).length > 0); }), "Club X draft should serve three cards for its open shirts");
+  // the open draft on the pitch: a picked card shows green, amber or red on every shirt; the shape can change mid-draft
+  await page.evaluate(() => { const G = window.D2T.game; for (let k = 0; k < 3; k++) G.draftPick(G.rollCards()[0].id); window.D2T.go("transfer"); });
+  await expectScreen("transfer");
+  await page.waitForSelector(".sp-main:not([disabled])", { timeout: 8000 }); await wait(250);
+  await page.click(".sp-main"); await page.waitForSelector(".sp-screen.is-placing", { timeout: ROLL_MS }); await wait(600);
+  await page.click(".sp-slot >> nth=0"); await wait(300);
+  check((await page.$$(".tr-field .se-pfchip")).length === 11, "a picked Club X draft card should show a fit chip on every shirt");
+  check(await page.evaluate(() => { const G = window.D2T.game, c = G.rollCards()[0]; return G.draftFits(c.id).some((i) => G.fit(c.id, i) === "green"); }), "a Club X draft card should be green in an open shirt");
+  check(!!(await page.$(".tr-field .se-formlink")), "the Club X draft has no Formation button");
+  await shot("34b-clx-draft-chips");
+  await page.evaluate(() => { const G = window.D2T.game, f = G.eng().formation === "3-5-2" ? "4-4-2" : "3-5-2"; G.setFormation(f); window.__f = f; });
+  check(await page.evaluate(() => { const e = window.D2T.game.eng(); return e.formation === window.__f && e.xi.filter((x) => x != null).length === 3 && e.phase === "draft"; }), "changing the shape mid-draft lost a drafted player");
   await page.evaluate(() => { const G = window.D2T.game; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(1200); await shot("35-clx-summary");
   await card("clubx", "DROP2TOP Club X\n");
