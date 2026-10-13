@@ -160,12 +160,12 @@
       const pitchEl = wrap.querySelector('.g4-pitch'), trioEl = wrap.querySelector('.g4-trio'), hintEl = wrap.querySelector('.g4-hint');
       const main = wrap.querySelector('.sp-main'), lbl = main.querySelector('.sp-lbl'), reload = wrap.querySelector('.is-reload');
       // the home button (Craig, 12 Oct): with a game under way it asks, since there was no way to quit one: Home keeps the
-      // game for later, Quit throws it away (nothing recorded). Before the first pick, or once the XI is in, it just goes home.
+      // game for later, Quit throws it away (nothing recorded). It asks before the first spin too (Craig, 13 Oct), so a new
+      // game (and a new formation) is always one tap away; once the XI is in it just goes home.
       wrap.querySelector('.is-home').onclick = () => {
-        const started = S.filled.length > 0 || !!S.cands, over = !openSlots().length;
-        if (!started || over) { D2T.go('home'); return; }
+        if (!openSlots().length) { D2T.go('home'); return; }
         const n = S.filled.length;
-        const sh = D2T.sheet({ title: 'Leave the game?', body: `<p class="fr-lead">${n ? `${n} of 11 picked, ${total()} goals so far.` : 'Three players are waiting.'} Restart throws it away and starts a new game. Home keeps it for later. Quit throws it away. Nothing is recorded.</p>
+        const sh = D2T.sheet({ title: 'Leave the game?', body: `<p class="fr-lead">${n ? `${n} of 11 picked, ${total()} goals so far.` : S.cands ? 'Three players are waiting.' : 'No players picked yet.'} Restart throws it away and starts a new game. Home keeps it for later. Quit throws it away. Nothing is recorded.</p>
           <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="restart">Restart the game</button><button class="btn btn-ghost fr-btn-wide" data-k="home">Home, save the game</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the game</button></div>` });
         sh.body.querySelector('[data-k="keep"]').onclick = sh.close;
         // restart (Craig, 12 Oct): wipe this game and start again from the beginning, a new formation and its reveal
