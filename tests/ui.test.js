@@ -375,7 +375,7 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => window.D2T.game.xRecord().runs === 1), "Club X run not recorded");
   check(await page.evaluate((b) => window.D2T.game.record().runs === JSON.parse(b).runs + 1, classicBefore), "Club X season did not count in the home record");
   // career mode (Craig, 13 Oct): Next season carries the XI on, with pre-season rolls; after 2025/26 the season is a forecast
-  await page.evaluate(() => { const G = window.D2T.game; if (!G.careerNext()) G.eng().final.finish = 1; window.D2T.go("home"); }); await wait(700);
+  await page.evaluate(() => { const G = window.D2T.game; if (!G.careerNext()) { G.eng().final.finish = 1; window.D2T.save(); } window.D2T.go("home"); }); await wait(700);
   // the career must go on (Craig, 13 Oct: Aiden's restarted): home keeps a Continue card for the finished season, the
   // Club X card asks before replacing it, a refresh keeps it, and Continue leads back to the summary and Next season
   check(!!(await page.$('[data-act="continue"]')) && /Next season waiting/.test(await page.textContent('[data-act="continue"]')), "home has no Continue card for a finished Club X season with the career open");
@@ -383,7 +383,7 @@ fs.mkdirSync(OUT, { recursive: true });
   check(!!(await page.$('.sheet [data-k="no"]')) && /new career/i.test(await page.textContent(".sheet")), "the Club X card should ask before replacing a career waiting for its next season");
   await page.click('.sheet [data-k="no"]'); await wait(400);
   check(await page.evaluate(() => window.D2T.game.careerOpen(window.D2T.state.run) && window.D2T.game.eng().phase === "summary"), "Keep playing did not keep the career");
-  await page.reload(); await expectScreen("intro"); await page.click(".fr-skip", { force: true }); await expectScreen("home"); await wait(900);
+  await page.reload(); await expectScreen("intro"); await page.click(".fr-skip", { force: true }); await expectScreen("home"); await page.waitForSelector('[data-act="continue"]', { timeout: 5000 }).catch(() => {}); await wait(900);
   check(!!(await page.$('[data-act="continue"]')), "a refresh lost the finished Club X season's Continue card");
   await page.click('[data-act="continue"]'); await expectScreen("summary"); await wait(1200);
   check(!!(await page.$('[data-act="next"]')), "Club X summary has no Next season");
