@@ -139,7 +139,7 @@
       const top = S.players.filter((p) => p.a >= 10).slice().sort((a, b) => b.r - a.r || b.a - a.a).slice(0, 3);
       for (const p of top) {
         const main = p.c2 != null && (p.a2 || 0) > (p.a1 || 0) ? p.c2 : p.c;
-        out.push({ id: 'L:' + p.n + ':' + sk, n: p.n, b: p.b, p: p.p, r: p.r, lv: 4, a: p.a, g: p.g, as: p.as, cs: p.cs, s6: p.s6, nat: p.nat, c: null, cn: S.clubs[main].name, sk });
+        out.push({ id: 'L:' + p.n + ':' + sk, k: p.k, n: p.n, b: p.b, p: p.p, r: p.r, lv: 4, a: p.a, g: p.g, as: p.as, cs: p.cs, s6: p.s6, nat: p.nat, c: null, cn: S.clubs[main].name, sk });
       }
     }
     out.sort((a, b) => b.r - a.r);
@@ -173,7 +173,7 @@
     const two = !legend && p.c2 != null ? S.clubs[shown === p.c2 ? p.c : p.c2].name : null;
     return {
       id: p.id, name: p.n, club: clubName, club2: two, crest: crestOf(clubName), crestLight: crestLightOf(clubName), pos: p.b, ovr: p.r, level: LV[p.lv || 0],
-      apps: p.a, goals: p.g, assists: p.as, cleanSheets: p.cs, nat: p.nat, flag: GAME.flag(p.nat), season: legend ? p.sk : S.season,
+      apps: p.a, goals: p.g, assists: p.as, cleanSheets: p.cs, nat: p.nat, flag: GAME.flag(p.nat), season: p.sk || S.season,
       provisional: p.src === 'f', stats, career: p.k != null && G.careers ? G.careers[p.k] : null,
       // detailed positions when known (main first); role is the broad colour of his main one
       main: E.SLOT_BROAD[(p.p || [])[0]] ? p.p[0] : null, alt: (p.p || []).slice(1).filter((x) => E.SLOT_BROAD[x]),
@@ -189,7 +189,124 @@
   GAME.eng = () => D2T.state.run && D2T.state.run.eng;
   // Build 3 held a signing on the squad screen; now you sign straight from the roll, so an open hold goes back to it.
   if (D2T.state.run && D2T.state.run.pending != null) { D2T.state.run.pending = null; D2T.state.run.step = 'transfer'; D2T.save(); }
-  GAME.S = () => { const e = GAME.eng(); return e && e.seasonKey ? GAME.season(e.seasonKey) : null; };
+  GAME.S = () => {
+    const run = D2T.state.run, e = run && run.eng; if (!e || !e.seasonKey) return null;
+    const cur = run.career && run.career.cur;
+    return cur && cur.key === e.seasonKey ? careerSeason(cur) : GAME.season(e.seasonKey);
+  };
+
+  // ---------- Club X career (Craig, 13 Oct) ----------
+  // After a season you can go on to the next one with the same club and XI, unless you went down. Up to 2025/26 it is
+  // the next real season: your club takes that season's bottom side's place and each of your players moves to his real
+  // card for it (a man with no Premier League season then keeps the card he had), leaving his real club like a draft
+  // pick. After 2025/26 there is no real data, so the season is simulated: the 2025/26 fixture list a year on for each
+  // season, the bottom three of your final table go down and three relegated club-seasons from the database come up,
+  // rivals keep the squads they came with (minus your players), the other results are played out by the match model
+  // (a forecast, never shown as real), and the rolls draw cards from any season. run.career = { id, n (this season's
+  // number), seasons: [{season, finish, pts, sim}], cur (how this season is built: key, me, carry, slots...) }.
+  const SEASON_KEYS = Object.keys(G.seasons).sort(), LAST_REAL = SEASON_KEYS[SEASON_KEYS.length - 1];
+  const yearOf = (key) => parseInt(key, 10);
+  const labelOf = (y) => `${y}/${String((y + 1) % 100).padStart(2, '0')}`;
+  const shiftDate = (d, n) => (parseInt(d.slice(0, 4), 10) + n) + d.slice(4);
+  const realPlayer = (sk, id) => { const S = GAME.season(sk); return S ? E.playerOf(S, id) : null; };
+  const mainClub = (S, p) => S.clubs[p.c2 != null && (p.a2 || 0) > (p.a1 || 0) ? p.c2 : p.c].name;
+  // a copy of a real player-season for a career season: at club c (a slot) or, with c null, under his real club's name
+  const copyOf = (sk, p, id, c) => Object.assign({}, p, { id, c, c2: null, m2: null, cn: c == null ? mainClub(G.seasons[sk], p) : undefined, sk, oid: p.id });
+  // where a card in a season came from: a legend id, or the real season and id of the player-season
+  const originOf = (S, id) => {
+    if (id == null) return null;
+    if (String(id).startsWith('L:')) return { L: id };
+    const p = E.playerOf(S, id); if (!p) return null;
+    return p.oid != null ? { s: p.sk, id: p.oid } : { s: S.season, id };
+  };
+  const built = new WeakMap();
+  function careerSeason(spec) {
+    if (built.has(spec)) return built.get(spec);
+    const ids = [];
+    let S;
+    if (!spec.sim) {
+      const S0 = GAME.season(spec.key), byK = new Map(), extras = [];
+      S0.players.forEach((p) => { if (p.k != null && !byK.has(p.k)) byK.set(p.k, p); });
+      let next = S0.players.length;
+      for (const o of spec.carry) {
+        if (!o) { ids.push(null); continue; }
+        if (o.L) { ids.push(o.L); continue; }
+        const src = realPlayer(o.s, o.id), now = src && src.k != null ? byK.get(src.k) : null;
+        if (now) { ids.push(now.id); continue; }
+        extras.push(copyOf(o.s, src, next, null)); ids.push(next++);
+      }
+      S = Object.assign({}, S0, { players: S0.players.concat(extras), _ix: null, legends: LEGENDS, career: true });
+    } else {
+      const T = GAME.season(LAST_REAL), players = [], used = new Set();
+      spec.carry.forEach((o) => { if (o && !o.L) used.add(o.s + '|' + o.id); });
+      // the league: each club with the squad of the season it came from, minus your players
+      spec.slots.forEach((sl, i) => {
+        if (i === spec.me) return;
+        const R = G.seasons[sl.src], ci = R.clubs.findIndex((c) => c.name === sl.name);
+        for (const p of R.players) if ((p.c === ci || p.c2 === ci) && !used.has(sl.src + '|' + p.id)) { players.push(copyOf(sl.src, p, players.length, i)); used.add(sl.src + '|' + p.id); }
+      });
+      // your XI, then everyone else from every season as cards for the rolls
+      for (const o of spec.carry) {
+        if (!o) { ids.push(null); continue; }
+        if (o.L) { ids.push(o.L); continue; }
+        const id = players.length; players.push(copyOf(o.s, realPlayer(o.s, o.id), id, null)); ids.push(id);
+      }
+      for (const sk of SEASON_KEYS) for (const p of G.seasons[sk].players) if ((p.a || 0) >= E.RULES.minApps && !used.has(sk + '|' + p.id)) players.push(copyOf(sk, p, players.length, null));
+      const shift = yearOf(spec.key) - yearOf(LAST_REAL);
+      S = { season: spec.key, clubs: spec.slots.map((sl, i) => ({ id: i, name: sl.name })), matches: T.matches.map((m) => [shiftDate(m[0], shift), m[1], m[2], 0, 0]),
+        players, relegated: [], deductions: {}, relegationPlaces: 3, legends: LEGENDS, career: true, sim: true };
+      const me = E.xiStrength(ids.map((id) => (id == null ? null : E.playerOf(S, id))), E.FORMATIONS[spec.f].map((x) => x[0]));
+      E.simResults(S, spec.seed, spec.me, me);
+    }
+    S.xiIds = ids;
+    built.set(spec, S);
+    return S;
+  }
+  GAME.isSim = () => { const S = GAME.S(); return !!(S && S.sim); };
+  GAME.career = () => { const r = D2T.state.run; return r && r.eng && r.eng.mode === 'clubx' ? (r.career || { n: 1, seasons: [] }) : null; };
+  // the season after this one, if the career can go on (Club X, the season over, not relegated)
+  GAME.careerNext = () => {
+    const run = D2T.state.run, e = GAME.eng();
+    if (!run || !e || e.mode !== 'clubx' || e.phase !== 'summary' || !e.final) return null;
+    const S = GAME.S(), rel = S.relegationPlaces || 3;
+    if (e.final.finish > S.clubs.length - rel) return null;
+    const i = SEASON_KEYS.indexOf(S.season);
+    const key = i >= 0 && i < SEASON_KEYS.length - 1 ? SEASON_KEYS[i + 1] : labelOf(yearOf(S.season) + 1);
+    return { key, sim: !G.seasons[key] };
+  };
+  GAME.nextSeason = () => {
+    const nx = GAME.careerNext(); if (!nx) return false;
+    GAME.finish();
+    const run = D2T.state.run, e = GAME.eng(), S = GAME.S();
+    const c = run.career = run.career || { id: e.seed, n: 1, seasons: [], start: { season: S.season, replaced: S.clubs[e.club].name } };
+    c.seasons.push({ season: S.season, finish: e.final.finish, pts: e.final.pts, sim: !!S.sim });
+    c.n += 1;
+    const carry = e.xi.map((id) => originOf(S, id));
+    let spec;
+    if (!nx.sim) {
+      const bottom = xCatalogue.find((x) => x.season === nx.key), S2 = GAME.season(nx.key);
+      spec = { key: nx.key, me: S2.clubs.findIndex((x) => x.name === bottom.club), carry, f: e.formation };
+    } else {
+      const slots = S.sim ? c.cur.slots.map((x) => Object.assign({}, x)) : S.clubs.map((x) => ({ name: x.name, src: S.season }));
+      const down = e.final.table.slice(-3).map((r) => r.c);
+      const r = E.stream(c.id, 'promoted', nx.key);
+      let cand = G.catalogue.filter((x) => !slots.some((sl) => sl.name === x.club));
+      for (const d of down) {
+        const pk = cand[Math.floor(r() * cand.length)];
+        slots[d] = { name: pk.club, src: pk.season };
+        cand = cand.filter((x) => x.club !== pk.club);
+      }
+      spec = { key: nx.key, sim: true, me: e.club, slots, carry, f: e.formation, seed: c.id + ':sim' };
+    }
+    c.cur = spec;
+    const S2 = careerSeason(spec);
+    const st = E.newRun({ seed: c.id + ':s' + c.n, mode: 'clubx', catalogue: [] });
+    st.seasonKey = spec.key; st.club = spec.me; st.formation = e.formation; st.career = c.n;
+    E.carryIn(st, S2, S2.xiIds);
+    Object.assign(run, { eng: st, step: 'table', tableSeen: false, recorded: false, match: null, pending: null });
+    D2T.save();
+    return true;
+  };
   GAME.newRun = (mode = 'classic') => {
     const M = GAME.MODES[mode] || GAME.MODES.classic;
     const seed = 'r' + Date.now().toString(36) + Math.floor(Math.random() * 1e9).toString(36);
@@ -303,7 +420,7 @@
     const total = eng.rolls.reduce((a, x) => a + x.n, 0);
     let done = 0; for (let i = 0; i < eng.rollIx; i++) done += eng.rolls[i].n;
     done += eng.rollStep;
-    const name = !w ? 'Transfer window' : w.kind === 'pre' ? 'Pre-season' : w.kind === 'jan' ? 'January window' : 'Transfer window';
+    const name = !w ? 'Transfer window' : w.kind === 'pre' ? 'Summer transfer window' : w.kind === 'jan' ? 'January window' : 'Transfer window';
     return { name, step: eng.rollStep + 1, of: w ? w.n : 1, overall: done + 1, total, gw: eng.gw };
   };
   GAME.preview = (cardId) => E.signPreview(GAME.eng(), GAME.S(), cardId);
@@ -360,8 +477,12 @@
   };
 
   // ---------- where the run is: the screen it belongs on, and which screens it may show ----------
+  // Dare2Dream is locked for repair on home (Craig, 13 Oct): one flag. A saved Dare2Dream run is kept, but no screen of
+  // it opens (stepFor null, so the router goes home) until the flag is false again.
+  GAME.dreamLocked = true;
+  GAME.locked = (run) => !!(GAME.dreamLocked && run && run.eng && run.eng.mode === 'dare2dream');
   GAME.stepFor = () => {
-    const run = D2T.state.run; if (!run || !run.eng) return null;
+    const run = D2T.state.run; if (!run || !run.eng || GAME.locked(run)) return null;
     const ph = run.eng.phase;
     if (ph === 'clubroll') return 'spin';
     if (ph === 'setup') return run.tableSeen ? 'squad' : 'table';
@@ -393,10 +514,14 @@
     const entry = { key: k, mode, season: S.season, club: name, finish: F.finish, rise: F.rise, pts: F.pts, histFinish: F.histFinish,
       drop: F.finish <= n - rel, half: F.finish <= n / 2, top3: F.finish <= 3, title: F.finish === 1, at: new Date().toISOString().slice(0, 10) };
     if (mode !== 'classic') entry.dream = GAME.dreamMet(F.finish, F.histFinish);
+    if (mode === 'clubx') { entry.career = run.career ? run.career.n : 1; entry.careerId = run.career ? run.career.id : eng.seed; if (S.sim) entry.sim = true; }
     if (run.daily) {
       entry.daily = run.daily;
       rec.daily = rec.daily || {};
-      if (!rec.daily[run.daily]) rec.daily[run.daily] = { n: GAME.dailyNumber(run.daily), club: name, season: S.season, mode, finish: F.finish, histFinish: F.histFinish, rise: F.rise, pts: F.pts, dream: entry.dream };
+      // the day's best go counts (biggest rise, then higher finish); goes counts them all
+      const was = rec.daily[run.daily], goes = (was && was.goes || (was ? 1 : 0)) + 1;
+      if (!was || F.rise > was.rise || (F.rise === was.rise && F.finish < was.finish)) rec.daily[run.daily] = { n: GAME.dailyNumber(run.daily), club: name, season: S.season, mode, finish: F.finish, histFinish: F.histFinish, rise: F.rise, pts: F.pts, dream: entry.dream, goes };
+      else was.goes = goes;
     }
     rec.runs.push(entry);
     const book = mode === 'dare2dream' ? (rec.dreamClubs = rec.dreamClubs || {}) : mode === 'clubx' ? (rec.xClubs = rec.xClubs || {}) : rec.clubs;
@@ -417,9 +542,14 @@
       bestRise: runs.length ? Math.max(...runs.map((r) => r.rise)) : null };
   };
   GAME.classicRuns = classicRuns;
+  // Club X: every season counts; seasons of one career share a careerId (a season before careers is a career of its own)
   GAME.xRecord = () => {
     const runs = D2T.state.record.runs.filter((r) => r.mode === 'clubx' && !r.daily);
-    return { runs: runs.length, titles: runs.filter((r) => r.title).length, best: runs.length ? Math.min(...runs.map((r) => r.finish)) : null };
+    const careers = new Map();
+    runs.forEach((r, i) => { const id = r.careerId || 'old' + i, c = careers.get(id) || { seasons: 0, titles: 0 }; c.seasons++; if (r.title) c.titles++; careers.set(id, c); });
+    const list = [...careers.values()], longest = list.sort((a, b) => b.seasons - a.seasons || b.titles - a.titles)[0] || null;
+    return { runs: runs.length, titles: runs.filter((r) => r.title).length, best: runs.length ? Math.min(...runs.map((r) => r.finish)) : null,
+      careers: careers.size, longest, mostTitles: list.length ? Math.max(...list.map((c) => c.titles)) : 0 };
   };
   GAME.dreamRecord = () => {
     const runs = D2T.state.record.runs.filter((r) => r.mode === 'dare2dream' && !r.daily);
@@ -431,7 +561,7 @@
   // relegated club-season, the same list Classic spins from (Craig, 13 Oct): Daily #1 is the first in the cycle, each day
   // the next, and after the last it starts again from the top. It is a Classic run (Craig, 13 Oct): their real squad and
   // XI, Classic's rolls and 5 respins; the rolls and respins come from the day's seed, so the same choices see the same
-  // cards. One go a day; it has its own save, so another run is never lost.
+  // cards. As many goes as you like (Craig, 13 Oct), the best of the day counts; it has its own save, so another run is never lost.
   const DAILY_START = '2026-10-11';
   GAME.today = () => {
     try { return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); }
@@ -471,9 +601,10 @@
   GAME.startDaily = () => {
     GAME.closeOldDaily();
     const st = D2T.state, date = GAME.today();
-    if (GAME.dailyResult(date)) return false;                                   // one go a day
-    if (st.run && st.run.daily === date) return true;
-    if (st.dailyRun && st.dailyRun.daily === date) { swapIn(st.dailyRun); D2T.save(); return true; }
+    // as many goes as you like (Craig, 13 Oct): a go in progress carries on, a finished one makes way for a new go
+    const over = (r) => r && (r.recorded || (r.eng && r.eng.phase === 'summary'));
+    if (st.run && st.run.daily === date) { if (!over(st.run)) return true; st.run = null; }
+    if (st.dailyRun && st.dailyRun.daily === date) { if (!over(st.dailyRun)) { swapIn(st.dailyRun); D2T.save(); return true; } st.dailyRun = null; }
     const d = GAME.dailyEntry(date);
     const eng = E.newRun({ seed: 'daily-' + date, mode: d.mode, catalogue: [{ key: d.key }], fixedClub: d.key });
     swapIn({ step: 'table', eng, spun: true, daily: date });
@@ -481,6 +612,8 @@
     D2T.save();
     return true;
   };
+  // a fresh go at today's Daily, throwing away the one on (from the run menu or the summary)
+  GAME.restartDaily = () => { const st = D2T.state, date = GAME.today(); if (st.run && st.run.daily === date) st.run = null; if (st.dailyRun && st.dailyRun.daily === date) st.dailyRun = null; return GAME.startDaily(); };
   // A Daily closes at midnight (UK date, Craig 12 Oct): an unfinished one from an earlier day is dropped (no result, so it
   // never counts), a parked run comes back, and home says so once. Returns the closed date or null.
   const runKey = (eng) => eng.seasonKey + ':' + G.seasons[eng.seasonKey].clubs[eng.club].name;

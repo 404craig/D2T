@@ -32,7 +32,7 @@
   // Home kits: the body colour from clubs.json, plus each club's pattern and second colour so fewer shirts are plain red with
   // a white outline (design choices, not checked data). pat: s stripes, h hoops, v halves; f body; sl sleeves; tr outline; ink number.
   const KITS = {
-    'Arsenal': { sl: '#FFFFFF', tr: '#8A0A10' }, 'Liverpool': { tr: '#7A0A1C' }, 'Man Utd': { tr: '#1A1A1A' }, 'Chelsea': { tr: '#FFFFFF' },
+    'Arsenal': { sl: '#FFFFFF', tr: '#8A0A10', st: '#DB0007', sw: 1.6 }, 'Liverpool': { tr: '#7A0A1C' }, 'Man Utd': { tr: '#1A1A1A' }, 'Chelsea': { tr: '#FFFFFF' },
     'Spurs': { tr: '#132257', ink: '#132257' }, 'Newcastle': { pat: 's', b: '#111111', tr: '#111111', ink: '#FFFFFF' }, 'Everton': { tr: '#FFFFFF' },
     'West Ham': { f: '#7A263A', sl: '#1BB1E7', tr: '#3E0F1D', ink: '#FFFFFF' }, 'Aston Villa': { f: '#670E36', sl: '#95BFE5', tr: '#3B0820', ink: '#FFFFFF' }, 'Man City': { tr: '#1C2C5B', ink: '#1C2C5B' },
     'Southampton': { pat: 's', b: '#FFFFFF', tr: '#111111', ink: '#111111' }, 'Blackburn': { pat: 'v', b: '#FFFFFF', tr: '#0B2A55', ink: '#0B2A55' },
@@ -57,7 +57,7 @@
     const c = D2T.game.club(name) || {}, x = KITS[name] || {}, fill = x.f || c.accent || '#888888', cink = c.ink || '#111111';
     const ink = x.ink || (contrast(fill, cink) >= 3 ? cink : (lum(fill) > 0.4 ? '#0A0A0A' : '#FFFFFF'));
     return { id: slug(name), fill, b: x.b, pat: x.pat, sl: x.sl, trim: x.tr || (cink === fill ? shade(fill, -0.45) : cink), ink,
-      stroke: x.pat ? (lum(ink) > 0.4 ? '#111111' : '#FFFFFF') : '', crest: c.crest || '', crestLight: c.crestLight || c.crest || '', line: LINE_CRESTS.has(name) };
+      stroke: x.st || (x.pat ? (lum(ink) > 0.4 ? '#111111' : '#FFFFFF') : ''), sw: x.sw || 2.6, crest: c.crest || '', crestLight: c.crestLight || c.crest || '', line: LINE_CRESTS.has(name) };
   })());
   // pattern defs for every patterned club and the sheen, once per screen
   const defs = () => `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>${Object.keys(KITS).filter((n) => KITS[n].pat).map((n) => {
@@ -86,7 +86,7 @@
       const mid = o.state === 'myst' ? '<text x="50" y="70" font-size="44">?</text>' : `<text x="50" y="64" font-size="24">${o.pos}</text>`;
       return `<div class="g4-shirt ${o.state === 'myst' ? 'myst' : 'empty'}${o.next ? ' next' : ''} ${cls}" style="--sw:${w}px"><svg viewBox="0 0 100 100" aria-hidden="true"><path class="body" d="${SHIRT}"/><path class="trim" d="M42 4 Q50 11 58 4"/>${mid}</svg></div>`;
     }
-    const p = o.player, k = kit(p.club), st = k.stroke ? ` stroke="${k.stroke}" stroke-width="2.6" paint-order="stroke" stroke-linejoin="round"` : '';
+    const p = o.player, k = kit(p.club), st = k.stroke ? ` stroke="${k.stroke}" stroke-width="${k.sw}" paint-order="stroke" stroke-linejoin="round"` : '';
     let top = '', mid = '', over = '', disc = '';
     if (big) {
       const sur = p.sur.toUpperCase(), fs = Math.max(8.5, Math.min(13, 104 / Math.max(6, sur.length)));
@@ -160,12 +160,12 @@
       const pitchEl = wrap.querySelector('.g4-pitch'), trioEl = wrap.querySelector('.g4-trio'), hintEl = wrap.querySelector('.g4-hint');
       const main = wrap.querySelector('.sp-main'), lbl = main.querySelector('.sp-lbl'), reload = wrap.querySelector('.is-reload');
       // the home button (Craig, 12 Oct): with a game under way it asks, since there was no way to quit one: Home keeps the
-      // game for later, Quit throws it away (nothing recorded). Before the first pick, or once the XI is in, it just goes home.
+      // game for later, Quit throws it away (nothing recorded). It asks before the first spin too (Craig, 13 Oct), so a new
+      // game (and a new formation) is always one tap away; once the XI is in it just goes home.
       wrap.querySelector('.is-home').onclick = () => {
-        const started = S.filled.length > 0 || !!S.cands, over = !openSlots().length;
-        if (!started || over) { D2T.go('home'); return; }
+        if (!openSlots().length) { D2T.go('home'); return; }
         const n = S.filled.length;
-        const sh = D2T.sheet({ title: 'Leave the game?', body: `<p class="fr-lead">${n ? `${n} of 11 picked, ${total()} goals so far.` : 'Three players are waiting.'} Restart throws it away and starts a new game. Home keeps it for later. Quit throws it away. Nothing is recorded.</p>
+        const sh = D2T.sheet({ title: 'Leave the game?', body: `<p class="fr-lead">${n ? `${n} of 11 picked, ${total()} goals so far.` : S.cands ? 'Three players are waiting.' : 'No players picked yet.'} Restart throws it away and starts a new game. Home keeps it for later. Quit throws it away. Nothing is recorded.</p>
           <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="restart">Restart the game</button><button class="btn btn-ghost fr-btn-wide" data-k="home">Home, save the game</button><button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the game</button></div>` });
         sh.body.querySelector('[data-k="keep"]').onclick = sh.close;
         // restart (Craig, 12 Oct): wipe this game and start again from the beginning, a new formation and its reveal
@@ -317,7 +317,7 @@
             w.insertAdjacentHTML('afterbegin', `<svg width="0" height="0" style="position:absolute"><filter id="${id}" x="-20%" y="-50%" width="140%" height="200%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="0 0"/></filter></svg>`);
             const blur = w.querySelector('feGaussianBlur');
             const streak = D2T.h('<span class="g4-streak"></span>'), sweep = D2T.h('<span class="g4-sweep"></span>'); w.append(streak, sweep);
-            let filtered = false, hit = false;
+            let filtered = false, hit = false, lastK = 0;
             const finish = () => {
               strip.style.filter = ''; strip.innerHTML = shirt({ w: TW, player: targets[i], attr: `data-c="${i}"` }); strip.style.transform = 'none';
               streak.remove(); sweep.remove(); w.style.transform = '';
@@ -336,8 +336,9 @@
               if (sd < 0.4) { if (filtered) { strip.style.filter = ''; filtered = false; } } else { blur.setAttribute('stdDeviation', `0 ${sd.toFixed(1)}`); if (!filtered) { strip.style.filter = `url(#${id})`; filtered = true; } }
               streak.style.opacity = (k * k * 0.9).toFixed(3);
               w.style.transform = k > 0.02 ? `scaleY(${(1 + 0.05 * k).toFixed(4)})` : '';
+              const kk = Math.floor(sm.p); if (kk > lastK && !hit && window.D2TSound) window.D2TSound.tick(i, Math.abs(sm.v)); lastK = kk;   // the same reel ticks as Classic
               if (!hit && t >= P.landAt) {
-                hit = true; snd('tap');
+                hit = true; if (window.D2TSound) window.D2TSound.play('reelLand', Math.min(i, 2));
                 strip.animate([{ scale: '1' }, { scale: '1.065', offset: 0.28 }, { scale: '1' }], { duration: 460, easing: 'cubic-bezier(.2,.9,.3,1.3)' });
                 sweep.animate([{ left: '-60%', opacity: 0 }, { opacity: 1, offset: 0.15 }, { left: '130%', opacity: 0 }], { duration: 550, delay: 40, easing: 'cubic-bezier(.3,.7,.2,1)', fill: 'both' });
               }
@@ -390,7 +391,7 @@
         let result = null;
         if (done && !S.recorded) { S.recorded = true; result = G4.finish(total(), TARGET); }
         save();
-        snd('lockin');
+        snd('cardDrop');
         const fly = D2T.h(`<div class="g4-flyer">${shirt({ w: TW, player: p })}</div>`);
         fly.style.left = (a.left - hr.left) + 'px'; fly.style.top = (a.top - hr.top) + 'px'; fly.firstElementChild.style.setProperty('--sw', a.width + 'px');
         wrap.appendChild(fly); src.style.visibility = 'hidden';
@@ -472,7 +473,7 @@
             num.textContent = v;
             if (i >= steps.length - 3) num.removeAttribute('filter');
             num.animate([{ transform: 'translateY(-14px)', opacity: 0.4 }, { transform: 'translateY(0)', opacity: 1 }], { duration: steps[i], easing: 'linear' });
-            if (i % 2 === 0) snd('tap');
+            if (i % 2 === 0) snd('numberTick');
             later(tick, steps[i++]);
             return;
           }
@@ -516,7 +517,7 @@
         burstAt(x, y + h / 2, true); burstAt(x + 10, y + h / 2, false);
         wrap.querySelector('.g4-tally').animate([{ transform: 'translate(0,0)' }, { transform: 'translate(-5px,2px)' }, { transform: 'translate(6px,-2px)' }, { transform: 'translate(-3px,1px)' }, { transform: 'translate(0,0)' }], { duration: 360 });
         tr.querySelector('.fill').animate([{ filter: 'brightness(1)' }, { filter: 'brightness(2.2)' }, { filter: 'brightness(1)' }], { duration: 420 });
-        snd('lockin');
+        snd('land');
       }
       // the number, the to-go text and the bar count up together; crossing the target = race past the line, burst on it, then the bar re-scales
       function tickTo(from, to, done) {
@@ -569,7 +570,7 @@
         const dim = (ms) => { const d = D2T.h('<div class="g4-dim"></div>'); wrap.appendChild(d); d.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ms, fill: 'forwards' }); return d; };
         if (gap === 0) {
           // EXACT: the bar turns gold, the shirts light up in a wave, confetti, the giant target slams onto the pitch
-          snd('champions');
+          snd('win');
           wrap.querySelector('.g4-track').classList.add('glow');
           [...pitchEl.querySelectorAll('.slotp .g4-shirt')].forEach((s, i) => s.animate([{ transform: 'scale(1)', filter: 'brightness(1)' }, { transform: 'scale(1.25)', filter: 'brightness(1.8)' }, { transform: 'scale(1)', filter: 'brightness(1)' }], { duration: 500, delay: 80 * (10 - i) }));
           later(() => {
@@ -586,7 +587,7 @@
           fade([m], 2400);
         } else if (gap > 0) {
           // SO CLOSE: the screen dims, the gap beats like a heartbeat and the empty end of the bar flashes
-          snd('conceded');
+          snd('short');
           const d = dim(600), m = msg('close', gap === 1 ? '1 GOAL' : gap + ' GOALS', 'So close');
           m.animate([{ opacity: 0, transform: 'scale(0.9)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 500, easing: 'ease-out', fill: 'backwards' });
           m.querySelector('b').animate([{ transform: 'scale(1)' }, { transform: 'scale(1.08)' }, { transform: 'scale(1)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }], { duration: 1100, iterations: 2, delay: 500 });
@@ -597,7 +598,7 @@
           fade([m, d, ghost], 3300);
         } else {
           // BLOWN PAST: the bar has raced past and re-scaled; a grey stamp says how far over
-          snd('buzzer');
+          snd('bust');
           const m = msg('over', '+' + (-gap), `Blown past ${TARGET}`);
           m.animate([{ opacity: 0, transform: 'translateX(-60px) skewX(-12deg)' }, { opacity: 1, transform: 'translateX(8px) skewX(-6deg)', offset: 0.6 }, { opacity: 1, transform: 'none' }], { duration: 600, easing: 'ease-out', fill: 'backwards' });
           fade([m], 2800);
@@ -608,14 +609,26 @@
         const rec = (result && result.rec) || G4.record(), gap = Math.abs(t - TARGET);
         const head = gap === 0 ? `Exactly ${TARGET}` : t < TARGET ? `${gap} short of ${TARGET}` : `${gap} over ${TARGET}`;
         const best = result && result.newBest && rec.games > 1 ? 'A new best.' : rec.best != null ? `Your best: ${rec.best === 0 ? 'exactly on target' : rec.best + ' away'}${rec.bestTarget ? ` (${rec.bestTotal}/${rec.bestTarget})` : ''}.` : '';
-        const text = `DROP2TOP Goal Rush (${shapeText(FORM)})\nMy XI: ${t}/${TARGET} goals (${gapText(t)})\n${S.filled.map((p) => `${p.sur} ${p.goals}`).join(', ')}\nCan you beat it? 404craig.github.io/D2T`;
+        // the share card (Craig, 13 Oct): the total big over the target, how far off, the XI and their goals, the dare
+        const shape = shapeText(FORM), xi = S.filled.slice().sort((a, b) => a.slot - b.slot);
+        const how = gap === 0 ? 'BANG ON' : t > TARGET ? `${gap} OVER THE TARGET` : `${gap} SHORT`;
+        const text = gap === 0 ? `DROP2TOP Goal Rush · ${shape}\nMy XI scored ${t} Premier League goals: hit ${TARGET} exactly. Bang on.\nCan you do it?\n${D2T.share.LINK}`
+          : `DROP2TOP Goal Rush · ${shape}\nMy XI scored ${t} Premier League goals. The target was ${TARGET}: ${gap} ${t > TARGET ? 'over' : 'short'}.\nCan you hit it exactly?\n${D2T.share.LINK}`;
+        const card = D2T.share.build({ text, c: '#FFD21F', tag: `Goal Rush · ${shape}`, dare: `Hit ${TARGET} exactly`, ghost: window.D2T_GOALRUSH_LOGO,
+          draw: (g, im, k) => {
+            g.font = "italic 900 220px 'Exo 2', sans-serif"; const w1 = g.measureText(String(t)).width; g.font = "italic 900 110px 'Exo 2', sans-serif"; const w2 = g.measureText(' / ' + TARGET).width;
+            const x0 = (k.W - w1 - w2) / 2; k.fit(String(t), x0, 330, 900, 900, 220, true, '#FFFFFF', 'left'); k.fit(' / ' + TARGET, x0 + w1, 420, 600, 900, 110, true, '#8E8E99', 'left');
+            k.fit(how, k.W / 2, 562, 960, 800, 46, false, '#FFE375');
+            xi.forEach((p, i) => {
+              const col = i % 2, row = Math.floor(i / 2), x = col ? 590 : 110, y = 650 + row * 72;
+              k.fit(p.sur, x, y, 280, 700, 36, false, '#BDBDC6', 'left'); k.fit(String(p.goals), x + 380, y, 120, 900, 38, true, '#FFFFFF', 'right');
+              g.fillStyle = '#1C1C21'; g.fillRect(x, y + 50, 380, 2);
+            });
+          } });
         const sh = D2T.sheet({ title: head, body: `<p class="fr-lead">Your XI scored <b>${t}</b> Premier League goals. ${best}${rec.exact ? ` Bang on target: ${rec.exact} ${rec.exact === 1 ? 'time' : 'times'}.` : ''}</p>
           <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="share">Share with your mates</button><button class="btn g4-again fr-btn-wide" data-k="again">Play again</button></div>` });
         sh.body.querySelector('[data-k="again"]').onclick = () => { sh.close(); newGame(); };
-        sh.body.querySelector('[data-k="share"]').onclick = async () => {
-          try { if (navigator.share) { await navigator.share({ text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
-          try { await navigator.clipboard.writeText(text); sh.body.querySelector('.fr-lead').textContent = 'Copied. Paste it into the group chat.'; } catch (e) { /* nothing to copy to */ }
-        };
+        sh.body.querySelector('[data-k="share"]').onclick = () => D2T.share.send(card);
       }
       function newGame() { S = D2T.state.g433 = fresh(); setShape(S.formation); save(); sel = null; busy = false; wrap.querySelector('.g4-track').classList.remove('glow'); render(); reveal(); }
 
@@ -645,13 +658,13 @@
           const f = F[k % F.length];
           big.textContent = f; chips.forEach((c) => c.classList.toggle('on', c.dataset.f === f));
           if (k >= last) {
-            snd('lockin');
+            snd('land');
             big.animate([{ transform: 'rotate(-3deg) scale(1.35)' }, { transform: 'rotate(-3deg) scale(.94)', offset: 0.55 }, { transform: 'rotate(-3deg) scale(1)' }], { duration: 480, easing: 'cubic-bezier(.3,1.4,.5,1)' });
             line.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 200, fill: 'forwards' });
             later(finish, 1700);
             return;
           }
-          if (k % 2 === 0) snd('tap');
+          if (k % 2 === 0) snd('numberTick');
           later(step, 50 + Math.pow(k / last, 3) * 280); k++;
         };
         step();

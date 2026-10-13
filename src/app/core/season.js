@@ -76,21 +76,23 @@
   // ---------- the home button in a run (Craig, 13 Oct) ----------
   // Every in-run screen keeps a home button at the bottom right (main buttons sit to its left). Mid-run it opens a menu:
   // Keep playing, Restart the game (a new run of the same mode from the start), Home (the run is saved) or Quit (thrown
-  // away). A Daily only offers Keep playing and Home (one go a day). Before a club is picked, or once the run is over,
+  // away). A Daily offers Keep playing, Restart (a fresh go at today's Daily) and Home. Before a club is picked, or once the run is over,
   // it simply goes home.
+  // a greyed back button where there is nowhere to go back to (Craig, 13 Oct): it keeps the main button centred
+  SE.backOff = () => `<button class="icon-btn se-off" type="button" disabled aria-hidden="true" tabindex="-1">${D2T.ICON.back}</button>`;
   SE.homeBtn = () => `<button class="icon-btn se-home" type="button" aria-label="Home">${D2T.ICON.home}</button>`;
   D2T.runMenu = () => {
     const r = D2T.state.run, G = D2T.game, e = r && r.eng;
     if (!e || !e.seasonKey || e.phase === 'summary' || r.recorded) { D2T.go('home'); return; }
     const daily = !!r.daily, mode = G.mode(), name = G.modeName(mode);
-    const lead = daily ? 'Your Daily is saved. Come back to it any time before midnight.'
+    const lead = daily ? 'Home keeps this go for later, any time before midnight. Restart throws it away and starts a fresh go. Your best go today is the one that counts.'
       : `Home keeps this run for later. Restart throws it away and starts a new ${name} run. Quit throws it away. Nothing is recorded.`;
     const sh = D2T.sheet({ title: 'Leave the game?', body: `<p class="fr-lead">${lead}</p>
-      <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button>${daily ? '' : '<button class="btn btn-ghost fr-btn-wide" data-k="restart">Restart the game</button>'}<button class="btn btn-ghost fr-btn-wide" data-k="home">Home, save the ${daily ? 'Daily' : 'run'}</button>${daily ? '' : '<button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the run</button>'}</div>` });
+      <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="restart">Restart the game</button><button class="btn btn-ghost fr-btn-wide" data-k="home">Home, save the ${daily ? 'Daily' : 'run'}</button>${daily ? '' : '<button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the run</button>'}</div>` });
     const on = (k, fn) => { const b = sh.body.querySelector(`[data-k="${k}"]`); if (b) b.onclick = () => { sh.close(); fn(); }; };
     on('keep', () => {});
     on('home', () => D2T.go('home'));
-    on('restart', () => { G.newRun(mode); D2T.go('spin'); });
+    on('restart', () => { if (daily) { G.restartDaily(); D2T.go(G.stepFor() || 'table'); return; } G.newRun(mode); D2T.go('spin'); });
     on('quit', () => { D2T.state.run = null; D2T.save(); D2T.go('home'); });
   };
   document.addEventListener('click', (ev) => { if (ev.target.closest && ev.target.closest('.se-home')) D2T.runMenu(); });

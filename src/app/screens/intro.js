@@ -89,7 +89,7 @@
 
       const finish = (to) => {
         if (done) return; done = true;
-        D2T.whenReady(() => { D2T.go('home', { fromIntro: to || true }); setTimeout(() => D2T.loadClips && D2T.loadClips(), 1200); });   // the rest may still be arriving; the clips are read once home is up
+        D2T.whenReady(() => { D2T.go('home', { fromIntro: to || true }); setTimeout(() => D2T.loadClips && D2T.loadClips(), 1200); D2T.loadReveal && D2T.loadReveal(); });   // the rest may still be arriving; the clips are read once home is up
       };
       wrap.addEventListener('click', () => finish(null));
 
@@ -120,6 +120,7 @@
         await sleep(held ? 650 : 950); if (done) return;
 
         // 2. open up: emblem spins 360 and shrinks into place, D2T letters slide apart, ROP and OP appear
+        window.D2TSound && window.D2TSound.play('intro');   // only heard if sound is already awake: phones refuse sound before the first tap
         arrive.cancel(); shortWhole.style.opacity = 0;
         [emb, sD, s2, sT].forEach((e) => { e.style.opacity = 1; });
         const D = 1150, ease = 'cubic-bezier(.65,0,.25,1)';

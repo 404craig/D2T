@@ -1,0 +1,681 @@
+<title>D2T Classic Sound Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,800;1,800;1,900&display=swap">
+<style>
+/* Layout: the game's own world. Pure black, Exo 2, D2T green as the only accent. A sticky run-order nav,
+   then one bay per stage of a Classic run, each with a live demo strip and a grid of cue cards. Single dark look by choice. */
+:root {
+  --bg: #000;
+  --panel: #0E0F10;
+  --panel-2: #16181A;
+  --line: #24272A;
+  --fg: #F4F6F5;
+  --soft: #9BA3A0;
+  --green: #12F06C;
+  --green-ink: #03140A;
+  --bronze: #E3A577; --silver: #DCE2E8; --gold: #FFD95A; --baller: #B48CFF; --legend: #FF8A4C;
+  --bad: #FF6159;
+  --font: "Exo 2", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body { color: var(--fg); font: 15px/1.5 var(--font); }
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 16px; padding-block: 18px 64px; display: grid; gap: 30px; }
+h1, h2, h3 { margin: 0; font-style: italic; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; text-wrap: balance; }
+h1 { font-size: clamp(32px, 7vw, 54px); line-height: .92; }
+h1 em { color: var(--green); font-style: italic; }
+h2 { font-size: 26px; line-height: 1; }
+h3 { font-size: 17px; line-height: 1.1; }
+p { margin: 0; }
+a { color: var(--green); }
+button, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.soft { color: var(--soft); }
+.eyebrow { font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--green); }
+
+/* header */
+.top { display: grid; gap: 14px; }
+.top p { max-width: 62ch; color: var(--soft); }
+.mixer { display: grid; gap: 12px 18px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px; align-items: end; }
+.fader { display: grid; gap: 2px; min-width: 0; }
+.fader label, .toggle { font-size: 13px; font-weight: 600; display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.fader output { font-variant-numeric: tabular-nums; color: var(--green); }
+input[type="range"] { width: 100%; accent-color: var(--green); }
+.toggle input { accent-color: var(--green); width: 18px; height: 18px; }
+.btn { background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; padding: 9px 14px; font-weight: 800; font-style: italic; text-transform: uppercase; letter-spacing: .02em; line-height: 1.1; min-height: 44px; }
+.btn:hover { border-color: var(--soft); }
+.btn.go { background: var(--green); color: var(--green-ink); border-color: var(--green); }
+.btn.small { min-height: 36px; padding: 6px 12px; font-size: 13px; }
+
+/* research */
+details.research { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+details.research summary { cursor: pointer; font-weight: 900; font-style: italic; text-transform: uppercase; }
+.research-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 14px; }
+.research-grid > div { min-width: 0; }
+.research h3 { font-size: 15px; color: var(--green); margin-bottom: 6px; }
+.research ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; color: var(--soft); }
+.research li b { color: var(--fg); }
+.decision { border-left: 3px solid var(--green); padding-left: 12px; }
+
+/* nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: rgba(0,0,0,.92); backdrop-filter: blur(6px); margin-inline: -16px; padding: 10px 16px; border-bottom: 1px solid var(--line); display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
+.nav a { flex: none; text-decoration: none; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 800; font-style: italic; text-transform: uppercase; }
+.nav a:hover { border-color: var(--green); }
+
+/* bays */
+.bay { display: grid; gap: 14px; scroll-margin-top: 64px; }
+.bay-head { display: grid; gap: 6px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.bay-head p { color: var(--soft); max-width: 70ch; font-size: 14px; }
+.demo { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px; display: grid; gap: 12px; }
+.demo-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.cues { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.cue { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px; display: grid; gap: 9px; align-content: start; min-width: 0; }
+.cue-head { display: flex; gap: 10px; align-items: flex-start; justify-content: space-between; }
+.cue-head > div { min-width: 0; }
+.cue .when { font-size: 13px; color: var(--soft); }
+.play { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--green); color: var(--green-ink); display: grid; place-items: center; }
+.play svg { width: 16px; height: 16px; margin-left: 2px; }
+.opts { display: grid; gap: 6px; }
+.opt { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 6px; display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 8px; align-items: center; }
+.opt-txt { display: grid; gap: 1px; cursor: pointer; min-width: 0; }
+.opt-txt b { font-size: 14px; font-weight: 800; }
+.opt-txt > span { font-size: 12px; color: var(--soft); }
+.opt.on { border-color: var(--green); box-shadow: inset 0 0 0 1px var(--green); }
+.muted-tag { display: inline-block; margin-left: 8px; font-size: 10px; font-weight: 800; font-style: normal; letter-spacing: .1em; color: var(--soft); border: 1px solid var(--line); border-radius: 3px; padding: 1px 5px; vertical-align: 3px; }
+.opt .rec.was { color: var(--gold); }
+.opt .rec { display: inline-block; margin-left: 6px; font-size: 10px; font-weight: 800; font-style: normal; letter-spacing: .1em; color: var(--soft); vertical-align: 1px; }
+.listen { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel-2); color: var(--fg); display: grid; place-items: center; }
+.listen svg { width: 13px; height: 13px; margin-left: 2px; }
+.listen:hover { border-color: var(--fg); }
+.choose { min-height: 40px; min-width: 84px; border-radius: 999px; border: 1px solid var(--line); background: transparent; font-weight: 800; font-style: italic; text-transform: uppercase; font-size: 12px; letter-spacing: .04em; padding: 0 12px; }
+.choose:hover { border-color: var(--green); }
+.opt.on .choose { background: var(--green); color: var(--green-ink); border-color: var(--green); }
+.none { min-height: 40px; border-radius: 8px; border: 1px dashed var(--line); background: transparent; color: var(--soft); font-size: 13px; font-weight: 600; text-align: left; padding: 6px 12px; }
+.none:hover { border-color: var(--bad); color: var(--fg); }
+.none.on { border: 1px solid var(--bad); color: var(--bad); background: #1A0909; }
+.cue.nogo { border-color: color-mix(in srgb, var(--bad) 45%, var(--line)); }
+.notes { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; gap: 8px; }
+.notes label { display: grid; gap: 2px; }
+.notes label b { font-weight: 900; font-style: italic; text-transform: uppercase; font-size: 15px; }
+.notes label span { font-size: 13px; color: var(--soft); }
+.notes textarea { width: 100%; min-height: 84px; resize: vertical; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 10px; font: 14px/1.45 var(--font); }
+.notes textarea:focus { border-color: var(--green); outline: none; }
+.note-status { font-size: 12px; color: var(--soft); min-height: 1.2em; }
+.savebar { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--soft); }
+.savebar i { width: 8px; height: 8px; border-radius: 50%; background: var(--soft); flex: none; }
+.savebar.live i { background: var(--green); box-shadow: 0 0 8px var(--green); }
+.pick-list .nogo b { color: var(--bad); }
+.pick-notes { display: grid; gap: 6px; font-size: 13px; }
+.pick-notes div { border-left: 2px solid var(--green); padding-left: 10px; }
+.pick-notes b { display: block; font-style: italic; text-transform: uppercase; font-size: 12px; }
+.src { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .08em; padding: 1px 5px; border-radius: 3px; margin-left: 6px; vertical-align: 1px; border: 1px solid currentColor; }
+.src.el { color: #7FD1FF; } .src.syn { color: var(--green); } .src.mix { color: #FFD95A; }
+.vars { display: flex; flex-wrap: wrap; gap: 4px; }
+.var { background: var(--panel-2); border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; font-size: 12px; font-weight: 600; min-height: 32px; }
+.var.on { border-color: var(--fg); }
+.var[data-lv] { color: var(--lvc); }
+
+/* reels demo */
+.reels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.reel { position: relative; height: 92px; border-radius: 8px; background: #050606; border: 1px solid var(--line); overflow: hidden; }
+.reel .strip { position: absolute; inset: 0; display: grid; place-items: center; }
+.reel .lbl { position: absolute; left: 6px; right: 6px; top: 50%; margin-top: -0.6em; text-align: center; font-weight: 900; font-style: italic; text-transform: uppercase; font-size: clamp(12px, 3.6vw, 17px); line-height: 1.05; }
+.reel.landed { border-color: var(--lvc, var(--green)); box-shadow: 0 0 0 1px var(--lvc, var(--green)), 0 0 24px color-mix(in srgb, var(--lvc, var(--green)) 30%, transparent); }
+.reel .lv { position: absolute; bottom: 6px; left: 0; right: 0; text-align: center; font-size: 11px; font-weight: 800; letter-spacing: .12em; color: var(--lvc); }
+.lvsel { display: flex; gap: 6px; flex-wrap: wrap; }
+.lvsel select { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; min-height: 36px; }
+.emblem { width: 60px; height: 60px; border-radius: 50%; border: 3px solid var(--fg); position: relative; margin: 0 auto; }
+.emblem::after { content: ""; position: absolute; left: 50%; top: -9px; width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 12px solid var(--fg); transform: translateX(-50%); }
+.emblem.go { animation: emb 1.51s linear forwards; }
+@keyframes emb { 0% { transform: rotate(0) scale(1); opacity: 1; } 42% { transform: rotate(360deg) scale(1); } 52% { transform: rotate(360deg) scale(1.18); filter: brightness(1.8); opacity: 1; } 100% { transform: rotate(360deg) scale(2.6); opacity: 0; } }
+
+/* table demo */
+.tbl { display: grid; gap: 2px; max-height: 260px; overflow: hidden; position: relative; font-variant-numeric: tabular-nums; }
+.tr { display: grid; grid-template-columns: 28px 1fr 40px; gap: 8px; padding: 3px 8px; border-radius: 4px; font-size: 13px; font-weight: 600; opacity: .25; transition: opacity .15s; }
+.tr.seen { opacity: 1; }
+.tr.scan { background: var(--panel-2); }
+.tr.me { color: var(--fg); }
+.tr.me.landed { background: #2A0F10; box-shadow: inset 3px 0 0 var(--bad); }
+.tr b { text-align: right; }
+.match-board { display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; font-weight: 900; font-style: italic; text-transform: uppercase; }
+.match-board .score { font-size: 30px; font-variant-numeric: tabular-nums; }
+.match-board .clock { color: var(--green); font-size: 20px; font-variant-numeric: tabular-nums; }
+.feed { font-size: 13px; color: var(--soft); min-height: 1.5em; }
+
+/* picks */
+.picks { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px; display: grid; gap: 10px; }
+.pick-list { columns: 2 260px; column-gap: 24px; font-size: 13px; }
+.pick-list div { break-inside: avoid; padding: 3px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 10px; }
+.pick-list span { color: var(--soft); }
+.toast { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--green); color: var(--green-ink); font-weight: 800; padding: 9px 14px; border-radius: 8px; z-index: 9; }
+textarea.copy { width: 100%; min-height: 140px; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 6px; font: 12px/1.4 ui-monospace, Menlo, monospace; }
+.pick { font-size: 14px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.pick b { font-weight: 800; }
+.change { font-size: 13px; color: var(--soft); border-left: 2px solid var(--green); padding-left: 10px; }
+.src.off { color: var(--soft); }
+.mute { min-height: 40px; border-radius: 8px; border: 1px solid var(--line); background: transparent; color: var(--fg); font-size: 13px; font-weight: 700; text-align: left; padding: 6px 12px; }
+.mute:hover { border-color: var(--soft); }
+.mute.on { border-color: var(--bad); color: var(--bad); background: #1A0909; }
+.cue.is-off h3 { color: var(--soft); }
+.cmt-l { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); }
+.cmt { width: 100%; min-height: 54px; resize: vertical; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font: 14px/1.4 var(--font); }
+.cmt:focus { border-color: var(--green); outline: none; }
+.sum { display: grid; gap: 0; font-size: 13px; }
+.sum div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.sum span { color: var(--soft); }
+.sum i { grid-column: 1 / -1; font-style: normal; color: var(--fg); border-left: 2px solid var(--green); padding-left: 8px; }
+.sum .off b { color: var(--bad); }
+@media (prefers-reduced-motion: reduce) { .emblem.go { animation: none; } * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">DROP2TOP &middot; Classic</span>
+    <h1>Your <em>sound kit</em></h1>
+    <p>Your picks for every action in a Classic run. Anything that wasn't already soft has been redone softer and quieter, with no glass, bell or metal sounds anywhere, and your notes are applied. Press &#9654; to hear each one. Every sound has a <b>Make silent</b> button and its own comment box, and everything saves as you go. The demo strips play whole moments at the game's real timings.</p>
+    <div class="savebar" id="savebar"><i></i><span id="saveText">Saving on this device for now.</span></div>
+    <div class="mixer">
+      <div class="fader"><label for="m_vol">Volume <output id="o_vol"></output></label><input type="range" id="m_vol" min="0" max="1.5" step="0.01"></div>
+      <div class="fader"><label for="m_room">Stadium echo <output id="o_room"></output></label><input type="range" id="m_room" min="0" max="1" step="0.01"></div>
+      <label class="toggle" for="m_bed">Crowd bed under match sounds <input type="checkbox" id="m_bed"></label>
+    </div>
+  </header>
+  <nav class="nav" id="nav" aria-label="Stages"></nav>
+  <div id="bays" style="display:grid;gap:34px"></div>
+  <section class="picks" id="picks" aria-labelledby="h-picks">
+    <h2 id="h-picks">Summary</h2>
+    <p class="soft" style="font-size:14px">Every sound as it will go into the game, with anything you've silenced and your comments.</p>
+    <div class="sum" id="sum"></div>
+    <div class="demo-row"><button class="btn go" id="copyPicks" type="button">Copy the list</button></div>
+    <div id="copyBox" hidden></div>
+  </section>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(() => {
+"use strict";
+const $ = (s, r = document) => r.querySelector(s);
+const PLAY_ICON = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3 1.5v13l11-6.5z"/></svg>';
+/* ================= saved settings ================= */
+const KEY = "d2t-classic-kit-final";
+let S = { vol: 0.85, room: 0.25, vary: true, bed: true, off: {}, comments: {} };
+try { Object.assign(S, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+
+/* ================= audio engine ================= */
+const AC = window.AudioContext || window.webkitAudioContext;
+const ctx = new AC();
+const limiter = ctx.createDynamicsCompressor();
+limiter.threshold.value = -6; limiter.knee.value = 4; limiter.ratio.value = 12; limiter.attack.value = 0.002; limiter.release.value = 0.12;
+const master = ctx.createGain(); master.connect(limiter); limiter.connect(ctx.destination);
+const fx = ctx.createGain(), fxTone = ctx.createBiquadFilter(); fxTone.type = "lowpass"; fxTone.frequency.value = 7000; fxTone.Q.value = 0.5; fx.connect(fxTone); fxTone.connect(master);
+const bedBus = ctx.createGain(); bedBus.gain.value = 0.9; bedBus.connect(master);
+const verbIn = ctx.createGain(), verb = ctx.createConvolver(), verbOut = ctx.createGain();
+verb.buffer = (() => { // stadium-ish room: a few early reflections, then a darkening stereo tail
+  const sr = ctx.sampleRate, len = Math.floor(sr * 1.8), b = ctx.createBuffer(2, len, sr);
+  for (let c = 0; c < 2; c++) {
+    const d = b.getChannelData(c); let lp = 0;
+    for (let i = 0; i < len; i++) { const t = i / sr, k = 0.35 + 0.6 * Math.exp(-t * 2.2); lp += k * ((Math.random() * 2 - 1) - lp); d[i] = lp * Math.exp(-t * 3.4); }
+    [0.011, 0.019, 0.027, 0.041, 0.053].forEach((r, j) => { const i = Math.floor((r + c * 0.003) * sr); d[i] += (j % 2 ? -0.5 : 0.6) * (1 - j * 0.12); });
+  }
+  return b;
+})();
+verbIn.connect(verb); verb.connect(verbOut); verbOut.connect(master);
+// Muted actions (back buttons, tabs, lifts) go through their own channel: low-passed and capped, so they stay soft at any volume
+let QUIET = false;
+const quietIn = ctx.createGain(), quietLp = ctx.createBiquadFilter(), quietOut = ctx.createGain();
+quietLp.type = "lowpass"; quietLp.frequency.value = 1800; quietIn.connect(quietLp); quietLp.connect(quietOut); quietOut.connect(ctx.destination);
+const applyMix = () => { const n = ctx.currentTime; master.gain.setTargetAtTime(S.vol, n, 0.02); quietOut.gain.setTargetAtTime(0.32 * Math.min(S.vol, 0.6), n, 0.02); verbOut.gain.setTargetAtTime(S.room * 1.1, n, 0.02); };
+applyMix();
+const unlock = () => { if (ctx.state !== "running") ctx.resume(); };
+addEventListener("pointerdown", unlock, { capture: true }); addEventListener("keydown", unlock, { capture: true });
+
+const noiseBuf = (() => { const b = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; return b; })();
+const rnd = (a, b) => a + Math.random() * (b - a);
+const vr = (amt = 0.025) => S.vary ? 1 + rnd(-amt, amt) : 1;   // small pitch variation
+const N = (n) => 293.66 * Math.pow(2, n / 12);                   // semitones from D4 (D major home)
+const D = { D3: N(-12), F3: N(-9), A3: N(-5), D4: N(0), E4: N(2), Fs4: N(4), G4: N(5), A4: N(7), B4: N(9), D5: N(12), E5: N(14), Fs5: N(16), G5: N(17), A5: N(19), B5: N(21), D6: N(24), E6: N(26), Fs6: N(28), A6: N(31), D7: N(36) };
+
+// one output per sound: dry to fx, a share to the room
+function O(gain = 1, send = 0.25) { const o = ctx.createGain(); o.gain.value = gain; if (QUIET) { o.connect(quietIn); return o; } o.connect(fx); const s = ctx.createGain(); s.gain.value = send; o.connect(s); s.connect(verbIn); return o; }
+function pan(dest, p) { if (!ctx.createStereoPanner || !p) return dest; const n = ctx.createStereoPanner(); n.pan.value = p; n.connect(dest); return n; }
+function env(dest, t, a, d, peak, hold = 0) { const g = ctx.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(peak, t + a); if (hold) g.gain.setValueAtTime(peak, t + a + hold); g.gain.exponentialRampToValueAtTime(0.0001, t + a + hold + d); g.connect(dest); return g; }
+function osc(dest, type, f, t, dur, peak, o = {}) {
+  const s = ctx.createOscillator(); s.type = type; s.frequency.setValueAtTime(Math.min(f, 18000), t);
+  if (o.to) s.frequency.exponentialRampToValueAtTime(Math.min(o.to, 18000), t + (o.glide || dur));
+  if (o.detune) s.detune.value = o.detune;
+  s.connect(env(pan(dest, o.pan), t, o.a || 0.003, dur, peak, o.hold || 0)); s.start(t); s.stop(t + (o.a || 0.003) + (o.hold || 0) + dur + 0.05); return s;
+}
+function fm(dest, f, t, dur, peak, o = {}) { // FM: glass, bells and metal from two sines
+  const r = o.ratio || 2, idx = o.index || 1.5, a = o.a || 0.002;
+  const c = ctx.createOscillator(), m = ctx.createOscillator(), mg = ctx.createGain();
+  c.frequency.value = Math.min(f, 16000); m.frequency.value = Math.min(f * r, 18000);
+  mg.gain.setValueAtTime(f * idx, t); mg.gain.exponentialRampToValueAtTime(Math.max(0.5, f * idx * 0.04), t + (o.idxT || dur * 0.8));
+  m.connect(mg); mg.connect(c.frequency); c.connect(env(pan(dest, o.pan), t, a, dur, peak));
+  c.start(t); m.start(t); c.stop(t + a + dur + 0.05); m.stop(t + a + dur + 0.05);
+}
+function nz(dest, t, dur, o = {}) { // filtered noise burst, optional sweep
+  const s = ctx.createBufferSource(); s.buffer = noiseBuf; s.loop = true;
+  const f = ctx.createBiquadFilter(); f.type = o.type || "bandpass"; f.Q.value = o.q || 1; f.frequency.setValueAtTime(o.f || 2000, t);
+  if (o.f2) f.frequency.exponentialRampToValueAtTime(o.f2, t + dur);
+  s.connect(f); f.connect(env(pan(dest, o.pan), t, o.a || 0.002, dur, o.peak || 0.4, o.hold || 0)); s.start(t, Math.random()); s.stop(t + (o.a || 0.002) + (o.hold || 0) + dur + 0.05);
+}
+const click = (d, t, f = 4200, pk = 0.22) => { nz(d, t, 0.006, { type: "highpass", f, peak: pk }); osc(d, "sine", f * 0.55 * vr(), t, 0.012, pk * 0.35); };
+const thump = (d, t, f0 = 170, f1 = 50, dur = 0.12, pk = 0.6) => osc(d, "sine", f0 * vr(0.02), t, dur, pk, { to: f1, a: 0.002 });
+function swish(d, t, dur, from, to, pk = 0.25, o = {}) { // whoosh shape: swell to the middle, then away
+  const s = ctx.createBufferSource(); s.buffer = noiseBuf; s.loop = true;
+  const f = ctx.createBiquadFilter(); f.type = "bandpass"; f.Q.value = o.q || 1.1; f.frequency.setValueAtTime(from, t); f.frequency.exponentialRampToValueAtTime(to, t + dur);
+  const g = ctx.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(pk, t + dur * (o.peakAt || 0.55)); g.gain.linearRampToValueAtTime(0.0001, t + dur);
+  let out = d; if (o.panFrom != null && ctx.createStereoPanner) { const p = ctx.createStereoPanner(); p.pan.setValueAtTime(o.panFrom, t); p.pan.linearRampToValueAtTime(o.panTo, t + dur); p.connect(d); out = p; }
+  s.connect(f); f.connect(g); g.connect(out); s.start(t, Math.random()); s.stop(t + dur + 0.05);
+}
+const pluckCache = {};
+function pluck(d, f, t, pk = 0.35, o = {}) { // Karplus-Strong string: warm and real, never a bare beep
+  const sr = ctx.sampleRate, dur = o.dur || 1.4, k = Math.round(f) + "_" + dur;
+  if (!pluckCache[k]) {
+    const n = Math.floor(sr * dur), b = ctx.createBuffer(1, n, sr), x = b.getChannelData(0), P = Math.max(2, Math.round(sr / f)), ring = new Float32Array(P);
+    let lp = 0; for (let i = 0; i < P; i++) { lp += 0.5 * ((Math.random() * 2 - 1) - lp); ring[i] = lp; }
+    let j = 0, damp = o.damp || 0.996; for (let i = 0; i < n; i++) { const nx = (j + 1) % P; const v = 0.5 * (ring[j] + ring[nx]) * damp; x[i] = ring[j]; ring[j] = v; j = nx; }
+    let m = 0; for (let i = 0; i < n; i++) m = Math.max(m, Math.abs(x[i])); for (let i = 0; i < n; i++) x[i] /= m || 1;
+    pluckCache[k] = b;
+  }
+  const s = ctx.createBufferSource(); s.buffer = pluckCache[k]; s.playbackRate.value = vr(0.006);
+  const g = ctx.createGain(); g.gain.value = pk; s.connect(g); g.connect(pan(d, o.pan)); s.start(t);
+}
+function brass(d, notes, t, dur, pk = 0.1, bright = 2400) { // saw stack through an opening filter
+  const f = ctx.createBiquadFilter(); f.type = "lowpass"; f.Q.value = 1.5; f.frequency.setValueAtTime(bright * 0.3, t); f.frequency.linearRampToValueAtTime(bright, t + 0.06); f.frequency.exponentialRampToValueAtTime(bright * 0.5, t + dur); f.connect(d);
+  notes.forEach((n) => [-7, 7].forEach((dt) => osc(f, "sawtooth", n, t, dur, pk, { a: 0.025, detune: dt, hold: dur * 0.4 })));
+}
+const chord = (d, notes, t, dur, pk, ratio = 3.5, index = 1.2, spread = 0) => notes.forEach((n, i) => fm(d, n * vr(0.004), t + i * spread, dur, pk, { ratio, index, pan: (i - (notes.length - 1) / 2) * 0.25 }));
+
+/* recorded clips (ElevenLabs): the game's 20 plus 15 made for this kit */
+const CLIPS = {
+  soft: ["air_horn", "applause", "boos", "card_slide", "celebration", "cheer_short", "crowd_loop", "crowd_moan", "doom_boom", "flares", "goal_roar", "groan", "logo_deep", "net_ripple", "reel_clunk", "relegation_sting", "stamp", "stunned_silence", "trophy_fanfare", "whistle_three", "whistle_two"],
+  game: ["applause", "boos", "card_deal", "card_pack", "card_shuffle", "card_slide", "celebration", "cheer_short", "crowd_loop", "crowd_moan", "crowd_ooh", "full_time", "goal_roar", "groan", "half_time", "net_ripple", "relegation_sting", "stunned_silence", "trophy_fanfare", "whistle"],
+  classic: ["air_horn", "counter_roll", "crowd_swell", "flares", "glass_click", "impact_boom", "impact_boom_b", "reel_clunk", "riser", "scribble", "sparkle", "stamp", "tunnel", "whoosh_fast", "whoosh_heavy",
+    "badge_unlock", "blip_bad", "blip_good", "btn_press", "card_flip", "card_lift", "card_pickup", "card_slap", "cards_drop3", "cards_fan", "cards_shuffle_table", "cards_sweep", "charge_burst", "chime_rise", "coin_slot", "doom_boom", "door_close", "drumroll", "ffwd", "knock_soft", "lock_ring", "logo_deep", "logo_sting", "lv_baller", "lv_bronze", "lv_gold", "lv_legend", "lv_silver", "note_pop", "reel_ratchet", "reel_start", "reel_thunk", "reel_whir", "rewind", "rewind_chime", "scoreboard_stop", "send_pop", "sign_stamp", "sting_draw", "sting_loss", "sting_win", "swish_cloth", "swoosh_down", "swoosh_up", "tap_felt", "tap_wood", "thud_low", "tick_mech", "tick_wood", "whistle_long", "whistle_three", "whistle_two"]
+};
+const BUF = {}, REV = {};
+function decode(ab) { return new Promise((res, rej) => { const p = ctx.decodeAudioData(ab, res, rej); if (p && p.then) p.then(res, rej); }); }
+let loaded = 0, total = 0;
+Object.entries(CLIPS).forEach(([dir, list]) => list.forEach((n) => { total++; fetch(`${dir}/${n}.mp3`).then((r) => r.arrayBuffer()).then(decode).then((b) => { BUF[dir === "soft" ? "s_" + n : n] = b; }).catch(() => {}).finally(() => { loaded++; }); }));
+function rev(n) { if (REV[n]) return REV[n]; const s = BUF[n], b = ctx.createBuffer(s.numberOfChannels, s.length, s.sampleRate); for (let c = 0; c < s.numberOfChannels; c++) { const a = s.getChannelData(c), z = b.getChannelData(c); for (let i = 0, L = a.length; i < L; i++) z[i] = a[L - 1 - i]; } return (REV[n] = b); }
+function smp(d, n, t, o = {}) {
+  const b = o.reverse ? (BUF[n] && rev(n)) : BUF[n]; if (!b) return null;
+  const s = ctx.createBufferSource(); s.buffer = b; s.playbackRate.value = (o.rate || 1) * (o.fixed ? 1 : vr(0.012)); s.loop = !!o.loop;
+  const g = ctx.createGain(); const gain = o.gain == null ? 1 : o.gain;
+  if (o.fadeIn) { g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(gain, t + o.fadeIn); } else g.gain.value = gain;
+  if (o.dur) { g.gain.setValueAtTime(gain, t + Math.max(0.01, o.dur - 0.12)); g.gain.linearRampToValueAtTime(0.0001, t + o.dur); }
+  let node = g; if (o.lp) { const f = ctx.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = o.lp; g.connect(f); node = f; }
+  s.connect(g); node.connect(pan(d, o.pan)); s.start(t, o.offset || 0); if (o.dur) s.stop(t + o.dur + 0.02);
+  return { src: s, g, stop(fd = 0.3) { const n2 = ctx.currentTime; g.gain.cancelScheduledValues(n2); g.gain.setValueAtTime(g.gain.value, n2); g.gain.linearRampToValueAtTime(0.0001, n2 + fd); try { s.stop(n2 + fd + 0.02); } catch (e) {} } };
+}
+const len = (n) => (BUF[n] ? BUF[n].duration : 1);
+
+/* crowd bed with ducking */
+let bed = null;
+function bedOn() { if (bed || !S.bed || !BUF.s_crowd_loop) return; bed = smp(bedBus, "s_crowd_loop", ctx.currentTime, { loop: true, fadeIn: 0.8, fixed: true }); }
+function bedOff() { if (bed) { bed.stop(0.8); bed = null; } }
+function duck(t, dur = 1.6, depth = 0.35) { const g = bedBus.gain; g.cancelScheduledValues(t); g.setValueAtTime(g.value, t); g.linearRampToValueAtTime(0.9 * depth, t + 0.05); g.linearRampToValueAtTime(0.9, t + dur); }
+
+/* whistle (synth pea whistle, used by option B of the whistles) */
+function pea(d, t, blasts = 1, len1 = 0.32) { let st = t; for (let b = 0; b < blasts; b++) { const L = blasts === 3 && b === 2 ? len1 * 2.4 : len1;
+  const s = ctx.createOscillator(); s.frequency.value = 2900 * vr(0.01); const l = ctx.createOscillator(); l.frequency.value = 38; const lg = ctx.createGain(); lg.gain.value = 230; l.connect(lg); lg.connect(s.frequency);
+  const g = ctx.createGain(); g.gain.setValueAtTime(0, st); g.gain.linearRampToValueAtTime(0.22, st + 0.015); g.gain.setValueAtTime(0.22, st + L - 0.03); g.gain.linearRampToValueAtTime(0, st + L); s.connect(g); g.connect(d);
+  s.start(st); l.start(st); s.stop(st + L + 0.02); l.stop(st + L + 0.02); nz(d, st, L, { f: 2900, q: 1, peak: 0.04 }); st += L + 0.22; } }
+
+/* ================= the cues ================= */
+// opt: k (letter), n (name), d (what it is), s (source), p(t, variant, arg)
+const STAGES = [
+  { id: "shell", name: "Around the game", sub: "Sounds that turn up on every screen. These fire most often, so they stay quiet and short." },
+  { id: "club", name: "Club spin", sub: "The fruit-machine moment that opens a run. The reels, the three landings, picking a club and locking it in." },
+  { id: "table", name: "Table reveal", sub: "The real final table scans down to your club, lands on the drop, then every number rolls back to zero." },
+  { id: "squad", name: "Squad", sub: "Cards dealing onto the pitch, picking players up, dropping them on shirts and changing shape." },
+  { id: "match", name: "Match day", sub: "Fixtures, kick off, goals, the whistles, skipping to the end, the result and the table moving." },
+  { id: "transfer", name: "Transfer window", sub: "The emblem burst, the reels, a landing that tells you the card's level before you read it, then signing or passing." },
+  { id: "end", name: "Season end", sub: "Your finish and The Rise count in, achievements stamp in, then the season's verdict." }
+];
+const LVS = ["bronze", "silver", "gold", "baller", "legend"];
+const LVN = { bronze: "Bronze", silver: "Silver", gold: "Gold", baller: "Baller", legend: "Legend" };
+
+/* extra building blocks for the three code-made families */
+const felt = (d, t, f = 220, pk = 0.4, dur = 0.09) => { const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 900; lp.connect(d); osc(lp, "sine", f * vr(0.03), t, dur, pk, { to: f * 0.7, a: 0.004 }); nz(lp, t, 0.02, { type: "lowpass", f: 700, peak: pk * 0.25 }); };
+const wood = (d, t, f = 1400, pk = 0.3) => { nz(d, t, 0.035, { f: f * vr(0.05), q: 5, peak: pk }); osc(d, "sine", f * 0.36 * vr(), t, 0.04, pk * 0.45); };
+const soft = (d, cut = 1600) => { const f = ctx.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = cut; f.connect(d); return f; };
+const tap = (d, t, pk = 0.1, f = 260) => { const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 1100; lp.connect(d); nz(lp, t, 0.018, { type: "lowpass", f: 900, peak: pk }); osc(lp, "sine", f * vr(0.04), t, 0.03, pk * 0.8); };
+const snap = (d, t, pk = 0.3) => { nz(d, t, 0.012, { type: "highpass", f: 3000, peak: pk }); nz(d, t, 0.03, { f: 1200, q: 1.2, peak: pk * 0.5 }); };
+// tease builders (also used live by the reels): end exactly at t + dur
+function synthSwell(d, t, dur) { swish(d, t, dur, 200, 3200, 0.16, { peakAt: 0.97 }); osc(soft(d, 2200), "triangle", D.D4, t, dur, 0.05, { to: D.D5, a: dur * 0.9 }); }
+function shimmerRise(d, t, dur) { const n = Math.floor(dur / 0.07); for (let i = 0; i < n; i++) fm(d, D.D5 * Math.pow(2, (i / n) * 1.0), t + i * 0.07, 0.12, 0.012 + 0.04 * (i / n), { ratio: 3.5, index: 0.8 }); }
+function pulseRise(d, t, dur) { let x = 0, g = 0.38; while (x < dur - 0.05) { thump(d, t + x, 120, 45, 0.1, 0.25 + 0.35 * (x / dur)); x += g; g = Math.max(0.07, g * 0.82); } }
+function heartbeat(d, t, dur) { let x = 0, gap = 0.62; while (x < dur - 0.1) { thump(d, t + x, 95, 40, 0.14, 0.55); thump(d, t + x + 0.16, 85, 38, 0.12, 0.35); x += gap; gap = Math.max(0.36, gap * 0.9); } }
+
+/* the cues: A, B, C made in code (Soft, Glass, Punch); D, E from ElevenLabs; S silent where a sound isn't needed */
+/* ================= your picks, made softer and quieter =================
+   Every pick that wasn't already in the Soft style has been redone: code sounds are low-passed with gentler attacks
+   and lower peaks; recorded clips are the files in soft/ (top end cut, transients rounded, levels brought down). */
+const sclip = (n) => "s_" + n;
+const S_ = (d, n, t, o = {}) => smp(d, sclip(n), t, o);
+const CUES = [
+  /* around the game */
+  { id: "intro", st: "shell", n: "Opening logo", w: "Every fresh load: the emblem turns 360, D2T opens into DROP2TOP, then glides to the top.", pick: "E. Deep reveal", s: "rec", ch: "Top end cut and brought down by about 9 dB, with a gentler start.",
+    p(t) { S_(O(1, 0.15), "logo_deep", t, { gain: 1 }); } },
+  { id: "tapMain", st: "shell", n: "Main button", w: "Spin, Play, Continue, Kick off: the big button in the bar.", pick: "A. Felt press", s: "syn", ch: "Already soft; a touch quieter.",
+    p(t) { felt(O(1, 0.04), t, 260, 0.42); } },
+  { id: "tapSmall", st: "shell", n: "Small taps", w: "Back arrow, tabs, toggles, tapping a card to look at it.", quiet: true, pick: "A. Muted felt", s: "syn", ch: "Already soft and muted; stays quiet at any volume.",
+    p(t) { felt(O(1, 0), t, 200, 0.35, 0.06); } },
+  { id: "sheet", st: "shell", n: "Slide-up panel", w: "Formation picker, settings, confirm boxes: up, and dragged down to close.", quiet: true, vars: ["Open", "Close"], pick: "A. Soft air", s: "syn", ch: "Already soft and muted.",
+    p(t, v) { const o = soft(O(1, 0), 1800); v ? swish(o, t, 0.2, 1600, 400, 0.22) : swish(o, t, 0.22, 400, 1800, 0.25); } },
+  { id: "cardZoom", st: "shell", n: "Card opens big", w: "A selected card spins horizontally as it grows to the big card, and back.", vars: ["Open", "Close"], pick: "D. Card slide", s: "rec", ch: "Your note: more subtle and softer. Shorter, quieter, top end cut.",
+    p(t, v) { S_(O(1, 0.08), "card_slide", t, { gain: 0.55, rate: v ? 0.9 : 1.1, dur: 0.35 }); } },
+  { id: "denied", st: "shell", n: "Not allowed", w: "A tap that can't happen: no respins left, a locked mode, a wrong drop.", pick: "A. Knock knock", s: "syn", ch: "Your note: softer and quieter. Muffled knocks at about half the level.",
+    p(t) { const o = soft(O(1, 0.05), 1100); [0, 0.11].forEach((x, i) => { nz(o, t + x, 0.05, { f: 640 - i * 100, q: 5, peak: 0.16 }); osc(o, "sine", 180 - i * 25, t + x, 0.07, 0.12); }); } },
+  { id: "tip", st: "shell", n: "First-time tip", w: "The handwritten note with a curved arrow appears.", quiet: true, pick: "A. Pop", s: "syn", ch: "A lower, rounder pop, muffled and muted like the other small sounds.",
+    p(t) { const o = soft(O(1, 0), 2200); osc(o, "sine", 420, t, 0.07, 0.2, { to: 760, glide: 0.05 }); } },
+
+  /* club spin */
+  { id: "spinStart", st: "club", n: "Spin pressed", w: "The reels launch.", pick: "D. Lever", s: "syn", ch: "No metal now: a soft low thud with a little air as the reels go.",
+    p(t) { const o = O(1, 0.08); felt(o, t, 150, 0.4, 0.12); swish(soft(o, 1500), t, 0.3, 300, 1200, 0.12); } },
+  { id: "reelRun", st: "club", n: "Reels spinning", w: "While the cards blur past. Follows each reel's real speed: play it from the demo above.", run: true, pick: "B. Ticks", s: "syn", ch: "No bright ticks: a muffled tap for each card, quiet so a long spin doesn't nag.",
+    mode: { tick: "soft" } },
+  { id: "reelLand", st: "club", n: "Each reel lands", w: "Left, middle, right.", vars: ["Left", "Middle", "Right"], pick: "D. Latch", s: "syn", ch: "No metal now: a soft felt thud, a little higher each reel.",
+    p(t, v) { const o = O(1, 0.08); felt(o, t, [145, 160, 178][v], 0.45, 0.1); tap(o, t, 0.08, [200, 220, 245][v]); } },
+  { id: "tease", st: "club", n: "Last reel crawl", w: "The right reel slows longest.", run: true, pick: "Silent", s: "off", ch: "You chose no sound here.", mode: "none" },
+  { id: "cardSelect", st: "club", n: "Pick a card", w: "Tapping a card: it grows 5% and the others shrink.", quiet: true, vars: ["Pick", "Unpick"], pick: "A. Soft lift", s: "syn", ch: "Already soft and muted.",
+    p(t, v) { const o = soft(O(1, 0.05), 1600); osc(o, "sine", v ? 520 : 380, t, 0.08, 0.2, { to: v ? 380 : 520 }); } },
+  { id: "respin", st: "club", n: "Respin used", w: "One of the five respins goes.", pick: "C. Rewind ticks", s: "syn", ch: "Was Punch: now muffled taps falling away and soft air. No ticks.",
+    p(t) { const o = O(1, 0.06); for (let i = 0; i < 9; i++) tap(o, t + i * 0.034 * (1 - i * 0.04), 0.07, 300 - i * 12); swish(soft(o, 1600), t, 0.35, 1500, 350, 0.06); } },
+  { id: "clubConfirm", st: "club", n: "Play: club locked in", w: "You choose your club and press Play.", pick: "E. Stamp and cheer", s: "mix", ch: "Your notes: a soft lock and the cheer, now at a lower volume (about half).",
+    p(t) { const o = O(1, 0.08); tap(o, t, 0.07, 220); felt(o, t + 0.01, 150, 0.25, 0.1); S_(o, "cheer_short", t + 0.12, { gain: 0.45 }); } },
+
+  /* table reveal */
+  { id: "tableScan", st: "table", n: "Scan down the table", w: "One sound per row as the highlight runs down to your club.", row: true, pick: "C. Tight ticks", s: "syn", ch: "Was Punch: now a muffled tap per row, a little lower as you fall.",
+    p(t, i) { tap(O(1, 0.04), t, 0.09, 280 - i * 5); } },
+  { id: "tableLand", st: "table", n: "Lands on your club", w: "It stops on your club: they went down.", pick: "D. Doom boom", s: "rec", ch: "Top end cut, about 9 dB quieter.",
+    p(t) { S_(O(1, 0.2), "doom_boom", t, { gain: 1 }); } },
+  { id: "tableReset", st: "table", n: "Every number rolls to zero", w: "All points roll down together in 1.3 seconds.", pick: "A. Soft unwind", s: "syn", ch: "Your comment: muffled taps like the table scan, quick at first and settling as the table rejigs, over a quiet muffled swoosh. No chime.",
+    p(t) { const o = O(1, 0.1); for (let i = 0; i < 18; i++) { const x = 1 - Math.pow(1 - i / 18, 1 / 2.4); tap(o, t + x * 1.25, 0.075 * (1 - i / 30), 300 - i * 6); } swish(soft(o, 1400), t, 1.3, 1200, 300, 0.07, { peakAt: 0.3 }); } },
+
+  /* squad */
+  { id: "dealPitch", st: "squad", n: "Cards deal onto the pitch", w: "First visit: 11 cards fly onto their shirts.", pick: "C. Rapid deal", s: "syn", ch: "Was Punch: muffled flicks at a third of the level, a soft landing.",
+    p(t) { const o = soft(O(1, 0.08), 2600); for (let i = 0; i < 11; i++) nz(o, t + i * 0.04, 0.03, { f: 1500 * vr(0.08), q: 1.2, peak: 0.1, pan: -0.5 + i * 0.1 }); felt(O(1, 0.05), t + 0.45, 170, 0.3, 0.1); } },
+  { id: "cardLift", st: "squad", n: "Pick a card up", w: "Press and drag: the card lifts off.", quiet: true, pick: "Silent", s: "off", ch: "You chose no sound here." },
+  { id: "shirtFit", st: "squad", n: "Over a shirt", w: "While dragging, each shirt shows the fit: green, amber or red.", quiet: true, vars: ["Green", "Amber", "Red"], pick: "A. Soft tones", s: "syn", ch: "Already soft and muted.",
+    p(t, v) { osc(soft(O(1, 0), 1400), "sine", [D.D5, D.A4, D.D4 * 0.95][v], t, 0.08, 0.2); } },
+  { id: "cardDrop", st: "squad", n: "Drop and swap", w: "A card lands on a shirt and the two swap places.", pick: "A. Soft settle", s: "syn", ch: "Already soft.",
+    p(t) { const o = O(1, 0.1); felt(o, t, 190, 0.4, 0.08); swish(soft(o, 1800), t + 0.02, 0.18, 600, 1600, 0.1); } },
+  { id: "dropCancel", st: "squad", n: "Card goes back", w: "Dropped nowhere: the card floats back.", quiet: true, pick: "A. Float back", s: "syn", ch: "Already soft and muted.",
+    p(t) { swish(soft(O(1, 0), 1800), t, 0.2, 1800, 500, 0.15); } },
+  { id: "formation", st: "squad", n: "Formation changed", w: "A new shape: cards fly to their new places.", pick: "B. Crisp shuffle", s: "syn", ch: "Was Glass: now muffled swishes and a soft tap.",
+    p(t) { const o = soft(O(1, 0.08), 2200); for (let i = 0; i < 7; i++) swish(o, t + i * 0.05, 0.16, 700 * vr(0.1), 2000, 0.06, { panFrom: -0.5 + i * 0.16, panTo: -0.5 + i * 0.16 }); tap(O(1, 0.04), t + 0.45, 0.08); } },
+
+  /* match day */
+  { id: "fixtures", st: "match", n: "Gameweek fixtures", w: "This gameweek's fixtures appear.", pick: "A. Soft cascade", s: "syn", ch: "Muffled taps now, no ticks.",
+    p(t) { const o = O(1, 0.04); for (let i = 0; i < 10; i++) tap(o, t + i * 0.04, 0.07, 300 - i * 8); } },
+  { id: "kickoff", st: "match", n: "Kick off", w: "The whistle, and the crowd bed starts under the match.", pick: "A. Soft whistle", s: "syn", ch: "Whistles are naturally sharp: this one is rounder and about 6 dB quieter.",
+    p(t) { pea(soft(O(0.55, 0.2), 2800), t, 1); bedOn(); } },
+  { id: "goalFor", st: "match", n: "Goal for you", w: "Your side scores in the live feed.", pick: "D. Net and roar", s: "rec", ch: "Strike, net and roar all softened and brought down.",
+    p(t) { const o = O(1, 0.2); duck(t, 3); felt(o, t, 240, 0.35, 0.1); S_(o, "net_ripple", t + 0.1, { gain: 0.9 }); S_(o, "goal_roar", t + 0.35, { gain: 1 }); } },
+  { id: "goalAgainst", st: "match", n: "Goal against", w: "The other side scores.", pick: "E. Groan and boos", s: "rec", ch: "Softened groan with quieter boos underneath.",
+    p(t) { const o = O(1, 0.2); duck(t, 3); S_(o, "groan", t, { gain: 1 }); S_(o, "boos", t + 0.9, { gain: 0.9, dur: 2.5 }); } },
+  { id: "chance", st: "match", n: "Big chance", w: "Not in the game yet: a shot that just misses.", pick: "Silent", s: "off", ch: "None of the five worked for you, and the game has no chances yet, so this stays silent." },
+  { id: "whistles", st: "match", n: "Half time and full time", w: "Two blasts at 45, three at 90.", vars: ["Half time", "Full time"], pick: "E. Clean whistles", s: "rec", ch: "Top end cut and about 8 dB quieter.",
+    p(t, v) { S_(O(1, 0.15), v ? "whistle_three" : "whistle_two", t, { gain: 1 }); if (v) setTimeout(bedOff, 2200); } },
+  { id: "skip", st: "match", n: "Skip to the end", w: "You skip the match: the clock races to 90.", pick: "B. Fast forward", s: "syn", ch: "Was Glass: muffled taps speeding up and a soft swish.",
+    p(t) { const o = O(1, 0.06); let x = 0; for (let i = 0; i < 14; i++) { tap(o, t + x, 0.06, 220 + i * 8); x += 0.06 * Math.pow(0.86, i); } swish(soft(o, 1800), t + x - 0.1, 0.3, 500, 1800, 0.08); } },
+  { id: "result", st: "match", n: "Final score", w: "The result card: won, drew or lost.", vars: ["Win", "Draw", "Loss"], pick: "D. Crowd", s: "rec", ch: "Softened cheers, applause and moan.",
+    p(t, v) { const o = O(1, 0.2); if (v === 0) { S_(o, "cheer_short", t, { gain: 0.9 }); S_(o, "applause", t + 0.6, { gain: 0.8 }); } else if (v === 1) S_(o, "applause", t, { gain: 0.8, dur: 2 }); else S_(o, "crowd_moan", t, { gain: 1 }); } },
+  { id: "tableMove", st: "match", n: "Table after the match", w: "Your row moves up, down or stays.", vars: ["Up", "Down", "Same"], pick: "C. Swish", s: "syn", ch: "Was Punch: now a muffled swish and a soft tap.",
+    p(t, v) { const o = O(1, 0.06); if (v === 2) return tap(o, t, 0.07); v === 0 ? swish(soft(o, 1800), t, 0.25, 500, 1800, 0.1) : swish(soft(o, 1800), t, 0.25, 1800, 400, 0.1); tap(o, t + 0.25, 0.06); } },
+
+  /* transfer window */
+  { id: "windowOpen", st: "transfer", n: "Window opens", w: "The emblem turns once, charges, then bursts into particles.", pick: "B. Charge and burst", s: "syn", ch: "Was Glass: muffled rise, a soft thud on the burst and a low warm hum. No glass, no hiss.",
+    p(t) { const o = O(1, 0.3); const lp = soft(o, 2400); swish(lp, t, 0.64, 250, 2200, 0.12, { panFrom: -0.3, panTo: 0.3 }); osc(lp, "triangle", 220, t, 0.64, 0.035, { to: 660 }); felt(o, t + 0.79, 140, 0.4, 0.2); [D.D3, D.A3, D.D4].forEach((n) => osc(soft(o, 1100), "triangle", n, t + 0.79, 1.1, 0.035, { a: 0.06 })); } },
+  { id: "rarity", st: "transfer", n: "Card lands: its level", w: "Each reel's landing says the card's level. Roll chosen levels in the demo above.", vars: LVS.map((l) => LVN[l]), lv: true, pick: "New: soft ladder", s: "syn", ch: "New, with no glass or bells: each level a little fuller than the last. Bronze a felt tap, silver a low warm note, gold a low warm chord, Baller the chord with soft air, Legend a fuller chord, soft air and quiet applause.",
+    p(t, v) { const o = O(1, 0.25);
+      if (v === 0) felt(o, t, 180, 0.35, 0.08);
+      else if (v === 1) { felt(o, t, 180, 0.3, 0.07); osc(soft(o, 1100), "triangle", D.A3, t, 0.5, 0.05, { a: 0.02 }); }
+      else if (v === 2) { felt(o, t, 170, 0.35, 0.09); [D.D3, D.Fs3 || N(-8), D.A3].forEach((n) => osc(soft(o, 1100), "triangle", n, t, 0.9, 0.035, { a: 0.03 })); }
+      else if (v === 3) { felt(o, t, 150, 0.4, 0.14); swish(soft(o, 1400), t, 0.6, 250, 1200, 0.1); [D.D3, N(-8), D.A3, D.D4].forEach((n) => osc(soft(o, 1100), "triangle", n, t, 1.4, 0.035, { a: 0.05 })); }
+      else { duck(t, 3, 0.4); felt(o, t, 130, 0.45, 0.22); swish(soft(o, 1400), t, 0.9, 200, 1300, 0.12); [D.D3, N(-8), D.A3, D.D4, N(4)].forEach((n) => osc(soft(o, 1200), "triangle", n, t, 2.0, 0.035, { a: 0.12 })); S_(o, "applause", t + 0.3, { gain: 0.6, dur: 2.5 }); } } },
+  { id: "bigTease", st: "transfer", n: "Before a Baller or Legend", w: "When a Baller or Legend is about to land, the build-up starts before the reel stops. Play it from the demo above.", run: true, pick: "B. Shimmer rise", s: "syn", ch: "Was Glass: now a soft, muffled swell of air and a low tone rising into the landing. No glassy notes.", mode: "shimmerSoft" },
+  { id: "trayDrop", st: "transfer", n: "Cards drop to the tray", w: "The three cards drop into the tray.", pick: "A. Soft thuds", s: "syn", ch: "Already soft.",
+    p(t) { const o = O(1, 0.1); [0, 0.06, 0.12].forEach((x, i) => felt(pan(o, -0.4 + i * 0.4), t + x, 170, 0.3, 0.07)); } },
+  { id: "sign", st: "transfer", n: "Sign a player", w: "A card is dropped on a shirt: he's signed.", vars: LVS.map((l) => LVN[l]), lv: true, pick: "D. Stamp and cheer", s: "rec", ch: "Softened stamp; the cheer and applause grow with the level but stay quiet.",
+    p(t, v) { const o = O(1, 0.15); S_(o, "stamp", t, { gain: 0.9 }); if (v >= 1) S_(o, "cheer_short", t + 0.15, { gain: 0.35 + v * 0.12 }); if (v >= 3) S_(o, "applause", t + 0.5, { gain: 0.7, dur: 2.2 }); } },
+  { id: "playerOut", st: "transfer", n: "The replaced player leaves", w: "The player who loses his shirt leaves for good.", pick: "A. Fade away", s: "syn", ch: "Already soft.",
+    p(t) { const o = O(1, 0.1); swish(soft(o, 1800), t, 0.35, 1800, 300, 0.12); osc(soft(o, 1000), "triangle", D.A4, t, 0.35, 0.045, { to: D.D4 }); } },
+  { id: "pass", st: "transfer", n: "Pass", w: "You turn down all three.", pick: "C. Swipe", s: "syn", ch: "Was Punch: a muffled swipe at half the level.",
+    p(t) { swish(soft(O(1, 0.06), 2000), t, 0.25, 800, 2200, 0.12, { panFrom: 0, panTo: 0.7 }); } },
+
+  /* season end */
+  { id: "finishCount", st: "end", n: "Your finish rolls in", w: "The final position counts to where you finished.", pick: "C. Drum count", s: "syn", ch: "Was Punch: softer, muffled drums and no snap on the last hit.",
+    p(t) { const o = soft(O(1, 0.12), 1200); let x = 0; for (let i = 0; i < 10; i++) { thump(o, t + x, 130, 60, 0.07, 0.18); x += 0.05 + 0.45 * Math.pow(i / 9, 2.6); } thump(o, t + x, 140, 40, 0.35, 0.45); } },
+  { id: "riseCount", st: "end", n: "The Rise counts up", w: "Places climbed against history.", pick: "B. Glass climb", s: "syn", ch: "Was Glass: now low, muffled notes climbing and a soft thud at the top. No chime.",
+    p(t) { const o = soft(O(1, 0.12), 1200); const sc = [0, 2, 4, 7, 9, 12, 14, 16, 19]; sc.forEach((n, i) => osc(o, "triangle", N(n - 12), t + i * 0.07, 0.12, 0.05, { a: 0.01 })); felt(O(1, 0.1), t + sc.length * 0.07, 170, 0.4, 0.15); } },
+  { id: "achievement", st: "end", n: "Achievements stamp in", w: "Beat the drop, top half, top 3, the title, building.", vars: ["Beat the drop", "Top half", "Top 3", "Title"], pick: "A. Plucked tiers", s: "syn", ch: "Your comment: dulled right down. No strings now: a quiet felt thud and low muffled tones, one more for each tier.",
+    p(t, v) { const o = O(1, 0.1); felt(o, t, 150, 0.22, 0.1); [D.D3, N(-8), D.A3, D.D4].slice(0, v + 1).forEach((n, i) => osc(soft(o, 700), "triangle", n, t + 0.03 + i * 0.06, 0.5, 0.025, { a: 0.03 })); } },
+  { id: "outcome", st: "end", n: "The season's verdict", w: "The summary opens on how the season ended.", vars: ["Champions", "Top 3", "Top half", "Survived", "Relegated"], pick: "D. Stadium", s: "rec", ch: "Every clip softened: fanfare, flares and horn for champions down to a quieter silence and sting for relegation.",
+    p(t, v) { const o = O(1, 0.2);
+      if (v === 0) { S_(o, "trophy_fanfare", t, { gain: 1 }); S_(o, "goal_roar", t + 0.3, { gain: 0.7 }); S_(o, "flares", t + 0.4, { gain: 0.7 }); S_(o, "air_horn", t + 1.2, { gain: 0.8 }); S_(o, "celebration", t + 2.0, { gain: 0.9 }); }
+      else if (v === 1) { S_(o, "cheer_short", t, { gain: 0.9 }); S_(o, "applause", t + 0.6, { gain: 0.8 }); }
+      else if (v === 2) S_(o, "applause", t, { gain: 0.9 });
+      else if (v === 3) S_(o, "applause", t, { gain: 0.7, dur: 2.5 });
+      else { S_(o, "stunned_silence", t, { gain: 1 }); S_(o, "relegation_sting", t + 0.5, { gain: 0.9 }); S_(o, "boos", t + 2.8, { gain: 0.6 }); } } },
+  { id: "share", st: "end", n: "Share", w: "The share sheet opens with your result.", pick: "A. Soft send", s: "syn", ch: "Already soft.",
+    p(t) { swish(soft(O(1, 0.1), 2000), t, 0.25, 500, 2000, 0.16); } }
+];
+
+const C = Object.fromEntries(CUES.map((c) => [c.id, c]));
+S.off = S.off || {}; S.comments = S.comments || {};
+const isOff = (id) => C[id].s === "off" || !!S.off[id];
+const optOf = (id) => isOff(id) ? { p() {}, mode: id === "reelRun" ? {} : "none" } : C[id];
+const varOf = {};
+function cue(id, v, at = 0, force) { const c = C[id]; if (!c.p || c.s === "off" || (!force && S.off[id])) return; unlock(); QUIET = !!c.quiet; try { c.p(ctx.currentTime + 0.02 + at, v == null ? (varOf[id] || 0) : v); } catch (e) { console.warn(e); } finally { QUIET = false; } }
+function audition(id) { const c = C[id]; if (c.s === "off") return; unlock(); if (c.run) { demoFor(c); return; }
+  if (c.row) { const t = ctx.currentTime + 0.02; QUIET = !!c.quiet; for (let i = 0; i < 8; i++) c.p(t + i * 0.09 * (1 + i * 0.12), i); QUIET = false; return; } cue(id, null, 0, true); }
+/* ================= reels: the game's motion profile ================= */
+function profile(o) {
+  const P = Object.assign({ accelT: 0.3, vmax: 24, decelT: 1.1, n: 2.2, v1: 2.4, delay: 0, cruiseT: 1 }, o);
+  P.accelD = P.vmax * P.accelT / 2; P.decelD = P.decelT * (P.v1 + (P.vmax - P.v1) / (P.n + 1));
+  P.target = Math.ceil(P.accelD + P.vmax * P.cruiseT + P.decelD); P.cruiseT = (P.target - P.accelD - P.decelD) / P.vmax;
+  P.landAt = P.delay + P.accelT + P.cruiseT + P.decelT; return P;
+}
+function sample(P, t) {
+  t -= P.delay; if (t <= 0) return { p: 0, v: 0 };
+  if (t < P.accelT) return { p: P.vmax * t * t / (2 * P.accelT), v: P.vmax * t / P.accelT };
+  t -= P.accelT; if (t < P.cruiseT) return { p: P.accelD + P.vmax * t, v: P.vmax };
+  t -= P.cruiseT; if (t < P.decelT) { const u = t / P.decelT, d = P.decelT * (P.v1 * u + (P.vmax - P.v1) * (1 - Math.pow(1 - u, P.n + 1)) / (P.n + 1)); return { p: P.accelD + P.vmax * P.cruiseT + d, v: P.v1 + (P.vmax - P.v1) * Math.pow(1 - u, P.n) }; }
+  return { p: P.target, v: 0, done: true };
+}
+const CLUBS = ["Derby 07/08", "Norwich 19/20", "Blackpool 10/11", "Sunderland 05/06", "Bradford 00/01", "Huddersfield 18/19", "Burnley 09/10", "Hull 14/15", "Fulham 20/21", "Watford 21/22", "Cardiff 13/14", "QPR 12/13", "Swindon 93/94", "Leicester 03/04", "Wolves 11/12", "Sheffield Utd 20/21"];
+const PLAYERS = ["Kevin Phillips", "Matt Le Tissier", "Dion Dublin", "Ashley Young", "Jermain Defoe", "Scott Parker", "Shay Given", "Kevin Nolan", "Peter Crouch", "Gareth Barry", "Tim Cahill", "Rory Delap", "Darren Bent", "Charlie Adam", "Steed Malbranque", "Robbie Keane"];
+
+let running = null;
+function runReels(box, labels, levels, onDone) {
+  if (running) running.cancel();
+  unlock(); const t0c = ctx.currentTime + 0.03, t0 = performance.now() + 30;
+  const profs = [profile({ delay: 0, cruiseT: 1.0, decelT: 1.1, n: 2.2 }), profile({ delay: 0.07, cruiseT: 1.35, decelT: 1.2, n: 2.4 }), profile({ delay: 0.14, cruiseT: 1.75, decelT: 1.5, n: 3.0, v1: 2.0 })];
+  const reels = [...box.querySelectorAll(".reel")]; reels.forEach((r) => { r.classList.remove("landed"); r.style.removeProperty("--lvc"); r.querySelector(".lv").textContent = ""; });
+  const mode = optOf("reelRun").mode; const out = O(1, 0.08);
+  // whir: one filtered noise per reel, steered by speed
+  const whirs = (mode.whir || mode.loop) ? profs.map((_, i) => { const s = ctx.createBufferSource(); s.loop = true; const f = ctx.createBiquadFilter(); const g = ctx.createGain(); g.gain.value = 0;
+    if (mode.loop) { s.buffer = BUF[mode.loop] || noiseBuf; s.loopStart = 0; f.type = "lowpass"; f.frequency.value = 9000; s.playbackRate.value = 0.5; }
+    else { s.buffer = noiseBuf; f.type = mode.cut ? "lowpass" : "bandpass"; f.Q.value = mode.cut ? 0.7 : 2; f.frequency.value = mode.cut || 400; }
+    s.connect(f); f.connect(g); g.connect(pan(out, [-0.45, 0, 0.45][i])); s.start(ctx.currentTime, Math.random() * 0.5); return { s, f, g }; }) : [];
+  // the build-up before the last (or biggest) landing
+  const big = levels ? levels.reduce((b, l, i) => (LVS.indexOf(l) >= 3 && (b < 0 || LVS.indexOf(l) >= LVS.indexOf(levels[b])) ? i : b), -1) : -1;
+  const teaseIdx = levels ? big : 2, teaseMode = levels ? (big >= 0 ? optOf("bigTease").mode : "none") : optOf("tease").mode;
+  if (teaseIdx >= 0 && teaseMode === "riser") { const L = len("riser"), at = profs[teaseIdx].landAt - L; smp(O(1, 0.2), "riser", t0c + Math.max(0, at), { gain: levels ? 0.5 : 0.3, offset: Math.max(0, -at) }); if (levels) duck(t0c + Math.max(0, at), L + 0.5, 0.2); }
+  if (teaseIdx >= 0 && ["heart", "shimmer", "shimmerSoft", "pulse", "drumroll"].includes(teaseMode)) { const land = t0c + profs[teaseIdx].landAt, dur = levels ? 2.4 : 1.8, st = land - dur, o4 = O(1, 0.2);
+    if (levels) duck(st, dur + 0.4, 0.4);
+    if (teaseMode === "heart") heartbeat(o4, st, dur); else if (teaseMode === "shimmer") shimmerRise(o4, st, dur); else if (teaseMode === "shimmerSoft") { const q = ctx.createGain(); q.gain.value = 0.7; q.connect(o4); synthSwell(soft(q, 1500), st, dur); } else if (teaseMode === "pulse") pulseRise(o4, st, dur);
+    else { const L = len("drumroll"), off = Math.max(0, L - dur); smp(o4, "drumroll", st, { gain: 0.55, offset: off, dur: dur + 0.05 }); } }
+  if (teaseIdx >= 0 && teaseMode === "tunnel") { const L = len("tunnel"), at = profs[teaseIdx].landAt - L + 0.05; smp(O(1, 0.25), "tunnel", t0c + Math.max(0, at), { gain: 0.6, offset: Math.max(0, -at), dur: L - Math.max(0, -at) + 0.05 }); }
+  const last = profs.map(() => 0), landed = profs.map(() => false);
+  let raf = 0, cancelled = false;
+  const step = () => {
+    if (cancelled) return;
+    const t = (performance.now() - t0) / 1000, tc = ctx.currentTime;
+    profs.forEach((P, i) => {
+      const s = sample(P, t), r = reels[i], src = labels[i];
+      const k = Math.floor(s.p), frac = s.p - k;
+      const lbl = r.querySelectorAll(".lbl");
+      const pool = levels ? PLAYERS : CLUBS;
+      const at = (j) => (j >= P.target ? src : pool[(j * 7 + i * 5) % pool.length]);
+      lbl[0].textContent = at(k); lbl[1].textContent = at(k + 1);
+      lbl[0].style.transform = `translateY(${frac * 92}px)`; lbl[1].style.transform = `translateY(${(frac - 1) * 92}px)`;
+      const blur = Math.min(6, s.v / 4); lbl[0].style.filter = lbl[1].style.filter = blur > 0.4 ? `blur(${blur}px)` : "none";
+      if (whirs[i]) { const sp = Math.min(1, s.v / 24);
+        if (mode.loop) { whirs[i].s.playbackRate.setTargetAtTime(0.35 + sp * 1.0, tc, 0.04); whirs[i].g.gain.setTargetAtTime(landed[i] ? 0 : (0.15 + sp * 0.45), tc, 0.04); }
+        else { if (!mode.cut) whirs[i].f.frequency.setTargetAtTime(300 + s.v * 85, tc, 0.03); whirs[i].g.gain.setTargetAtTime(landed[i] ? 0 : sp * (mode.tick ? 0.09 : (mode.cut ? 0.3 : 0.16)), tc, 0.04); } }
+      if (mode.tick && k > last[i] && !landed[i]) {
+        const slow = s.v < 13;
+        if (slow || !mode.whir) { const o2 = O(1, 0.05); if (mode.tick === "punch") { click(o2, tc, 2600 + i * 200, slow ? 0.16 : 0.08); thump(o2, tc, 150, 70, 0.03, slow ? 0.2 : 0.08); } else if (mode.tick === "soft") tap(o2, tc, slow ? 0.09 : 0.04, 240 + i * 20); else click(o2, tc, 3200 + i * 300, slow ? 0.16 : 0.08); }
+      }
+      last[i] = k;
+      if (!landed[i] && t >= P.landAt) {
+        landed[i] = true; lbl[0].textContent = src; lbl[0].style.transform = "translateY(0)"; lbl[1].textContent = ""; lbl[0].style.filter = "none";
+        r.classList.add("landed");
+        if (levels) { const L = levels[i]; r.style.setProperty("--lvc", `var(--${L})`); r.querySelector(".lv").textContent = LVN[L].toUpperCase(); cue("rarity", LVS.indexOf(L)); }
+        else cue("reelLand", i);
+      }
+    });
+    if (landed.every(Boolean)) { whirs.forEach((w) => { try { w.s.stop(ctx.currentTime + 0.2); } catch (e) {} }); running = null; onDone && onDone(); return; }
+    raf = requestAnimationFrame(step);
+  };
+  raf = requestAnimationFrame(step);
+  running = { cancel() { cancelled = true; cancelAnimationFrame(raf); whirs.forEach((w) => { try { w.s.stop(); } catch (e) {} }); running = null; } };
+}
+
+/* ================= demos ================= */
+const reelBox = () => `<div class="reels">${[0, 1, 2].map(() => `<div class="reel"><div class="strip"><div class="lbl">?</div><div class="lbl"></div></div><div class="lv"></div></div>`).join("")}</div>`;
+const DEMOS = {
+  club: { html: `${reelBox()}<div class="demo-row"><button class="btn go" data-demo="spin" type="button">Spin</button><button class="btn" data-demo="pickplay" type="button">Pick and Play</button><span class="soft" style="font-size:13px">Uses your picks for spin pressed, reels spinning, each reel lands and last reel crawl. The game's real reel timings.</span></div>`,
+    run(b, act) { if (act === "spin") { cue("tapMain"); cue("spinStart"); const pool = [...CLUBS].sort(() => Math.random() - 0.5); runReels(b, pool.slice(0, 3), null); } else { cue("cardSelect", 0); cue("clubConfirm", 0, 0.6); } } },
+  table: { html: `<div class="tbl" id="tbl"></div><div class="demo-row"><button class="btn go" data-demo="table" type="button">Reveal 2007/08</button><span class="soft" style="font-size:13px">The real final table, scanning to Derby at the game's own speed, then the reset.</span></div>`,
+    run(b) { tableDemo(b); } },
+  squad: { html: `<div class="demo-row"><button class="btn go" data-demo="squad" type="button">Play a squad visit</button><span class="soft" style="font-size:13px">Deal, lift, hover over a green shirt, drop, then a formation change.</span></div>`,
+    run() { cue("dealPitch"); cue("cardLift", 0, 1.2); cue("shirtFit", 1, 1.5); cue("shirtFit", 0, 1.75); cue("cardDrop", 0, 2.0); cue("sheet", 0, 2.8); cue("tapSmall", 0, 3.5); cue("formation", 0, 3.6); cue("sheet", 1, 4.3); } },
+  match: { html: `<div class="match-board"><span class="score" id="mScore">DER 0-0 MAN</span><span class="clock" id="mClock">0'</span></div><div class="feed" id="mFeed">Ten seconds of match, as in the game.</div><div class="demo-row"><button class="btn go" data-demo="match" type="button">Kick off</button><button class="btn" data-demo="skipm" type="button">Skip to end</button></div>`,
+    run(b, act) { matchDemo(b, act === "skipm"); } },
+  transfer: { html: `<div class="emblem" id="emb" aria-hidden="true"></div>${reelBox()}<div class="lvsel">${[0, 1, 2].map((i) => `<label class="soft" style="font-size:13px">Card ${i + 1} <select id="lv${i}">${LVS.map((l) => `<option value="${l}"${(["silver", "bronze", "legend"][i]) === l ? " selected" : ""}>${LVN[l]}</option>`).join("")}</select></label>`).join("")}</div><div class="demo-row"><button class="btn go" data-demo="window" type="button">Open the window</button><button class="btn" data-demo="roll" type="button">Roll again</button><button class="btn" data-demo="signit" type="button">Sign the best</button><button class="btn" data-demo="passit" type="button">Pass</button></div>`,
+    run(b, act) { const lv = [0, 1, 2].map((i) => $(`#lv${i}`, b).value), names = [...PLAYERS].sort(() => Math.random() - 0.5).slice(0, 3);
+      if (act === "window") { const e = $("#emb", b); e.classList.remove("go"); void e.offsetWidth; e.classList.add("go"); e.onanimationend = () => e.classList.remove("go"); cue("windowOpen"); setTimeout(() => { cue("spinStart"); runReels(b, names, lv, () => setTimeout(() => cue("trayDrop"), 500)); }, 1300); }
+      if (act === "roll") { cue("respin"); setTimeout(() => runReels(b, names, lv, () => setTimeout(() => cue("trayDrop"), 500)), 350); }
+      if (act === "signit") { const best = lv.reduce((a, l) => Math.max(a, LVS.indexOf(l)), 0); cue("cardLift"); cue("shirtFit", 0, 0.3); cue("sign", best, 0.6); cue("playerOut", 0, 1.1); }
+      if (act === "passit") cue("pass"); } },
+  end: { html: `<div class="demo-row"><label class="soft" style="font-size:13px">Finish <select id="endPos">${["Champions", "Top 3", "Top half", "Survived", "Relegated"].map((x, i) => `<option value="${i}"${i === 2 ? " selected" : ""}>${x}</option>`).join("")}</select></label><button class="btn go" data-demo="end" type="button">Play the season end</button></div>`,
+    run(b) { const v = +$("#endPos", b).value; const tiers = [4, 3, 2, 1, 0][v]; cue("finishCount"); let t = 2.4; if (v < 4) { cue("riseCount", 0, t); t += 2.2; } for (let i = 0; i < tiers; i++) { cue("achievement", i, t); t += 0.7; } cue("outcome", v, t + 0.4); } }
+};
+const TABLE = [["Man Utd", 87], ["Chelsea", 85], ["Arsenal", 83], ["Liverpool", 76], ["Everton", 65], ["Aston Villa", 60], ["Blackburn", 58], ["Portsmouth", 57], ["Man City", 55], ["West Ham", 49], ["Spurs", 46], ["Newcastle", 43], ["Middlesbrough", 42], ["Wigan", 40], ["Sunderland", 39], ["Bolton", 37], ["Fulham", 36], ["Reading", 36], ["Birmingham", 35], ["Derby", 11]];
+function renderTable(b) { $("#tbl", b).innerHTML = TABLE.map(([n, p], i) => `<div class="tr${n === "Derby" ? " me" : ""}"><span>${i + 1}</span><span>${n}</span><b class="pts">${p}</b></div>`).join(""); }
+let tableTimer = 0;
+async function tableDemo(b) {
+  clearTimeout(tableTimer); renderTable(b); unlock();
+  const rows = [...b.querySelectorAll(".tr")], tbl = $("#tbl", b), N2 = rows.length, stopAt = N2 - 1, wait = (ms) => new Promise((r) => (tableTimer = setTimeout(r, ms)));
+  await wait(450);
+  for (let i = 0; i < N2; i++) { rows.forEach((r) => r.classList.remove("scan")); rows[i].classList.add("seen", "scan"); tbl.scrollTop = Math.max(0, rows[i].offsetTop - 120);
+    cue("tableScan", i); if (i === stopAt) break; await wait(38 + 520 * Math.pow(i / (N2 - 1), 2.8)); }
+  await wait(900); rows[stopAt].classList.remove("scan"); rows[stopAt].classList.add("landed"); cue("tableLand");
+  await wait(1700); cue("tableReset");
+  const pts = rows.map((r) => r.querySelector(".pts")), from = TABLE.map((x) => x[1]), t0 = performance.now();
+  await new Promise((res) => { const st = (now) => { const p = Math.min(1, (now - t0) / 1300), e = 1 - Math.pow(1 - p, 3); pts.forEach((el, i) => (el.textContent = Math.round(from[i] * (1 - e)))); p < 1 ? requestAnimationFrame(st) : res(); }; requestAnimationFrame(st); });
+}
+let matchTimers = [];
+function matchDemo(b, skip) {
+  matchTimers.forEach(clearTimeout); matchTimers = []; unlock();
+  const sc = $("#mScore", b), ck = $("#mClock", b), fd = $("#mFeed", b); let us = 0, them = 0;
+  const at = (s, fn) => matchTimers.push(setTimeout(fn, s * 1000));
+  const end = () => { cue("whistles", 1); ck.textContent = "90'"; fd.textContent = "Full time. Won 2-1."; at(3.2, () => cue("result", 0)); at(4.6, () => cue("tableMove", 0)); };
+  if (skip) { cue("skip"); sc.textContent = "DER 2-1 MAN"; at(0.7, end); return; }
+  sc.textContent = "DER 0-0 MAN"; cue("fixtures"); at(0.9, () => cue("kickoff"));
+  const t0 = performance.now() + 1100; const tick = () => { const m = Math.min(90, Math.max(0, Math.floor((performance.now() - t0) / 1000 * 9))); ck.textContent = m + "'"; if (m < 90) matchTimers.push(setTimeout(tick, 100)); }; at(1.1, tick);
+  at(3.1, () => { us++; sc.textContent = `DER ${us}-${them} MAN`; fd.textContent = "21' Goal! Derby lead."; cue("goalFor"); });
+  at(5.0, () => { ck.textContent = "45'"; fd.textContent = "Half time."; cue("whistles", 0); });
+  at(7.4, () => { them++; sc.textContent = `DER ${us}-${them} MAN`; fd.textContent = "62' Man Utd level it."; cue("goalAgainst"); });
+  at(9.4, () => { fd.textContent = "79' Chance! Just wide."; cue("chance"); });
+  at(10.6, () => { us++; sc.textContent = `DER ${us}-${them} MAN`; fd.textContent = "88' Derby win it late!"; cue("goalFor"); });
+  at(12.6, end);
+}
+function demoFor(c) { const b = document.querySelector(`[data-stage-demo="${c.st}"]`); if (b) b.querySelector("[data-demo]").click(); }
+
+/* ================= render ================= */
+const SRC = { syn: ["syn", "CODE"], rec: ["el", "ELEVENLABS"], mix: ["mix", "CODE + ELEVENLABS"], off: ["off", "NO SOUND"] };
+$("#nav").innerHTML = STAGES.map((s, i) => `<a href="#${s.id}">${i + 1}. ${s.name}</a>`).join("") + `<a href="#picks">Summary</a>`;
+function cueCard(c) {
+  const fixedOff = c.s === "off", off = isOff(c.id), [cls, lab] = SRC[c.s];
+  const vars = c.vars && !fixedOff ? `<div class="vars" role="group" aria-label="Versions to hear">${c.vars.map((v, i) => `<button class="var${(varOf[c.id] || 0) === i ? " on" : ""}" type="button" data-var="${i}"${c.lv ? ` data-lv style="--lvc:var(--${LVS[i]})"` : ""}>${v}</button>`).join("")}</div>` : "";
+  return `<article class="cue${off ? " is-off" : ""}" data-cue="${c.id}">
+    <div class="cue-head"><div><h3>${c.n}${c.quiet ? '<span class="muted-tag">MUTED</span>' : ""}</h3><p class="when">${c.w}</p></div>${fixedOff ? "" : `<button class="play" type="button" data-act="play" aria-label="Play ${c.n}">${PLAY_ICON}</button>`}</div>
+    <p class="pick">Your pick: <b>${c.pick}</b><span class="src ${cls}">${lab}</span></p>
+    <p class="change">${c.ch}</p>${vars}
+    ${fixedOff ? "" : `<button class="mute${S.off[c.id] ? " on" : ""}" type="button" data-act="mute" aria-pressed="${!!S.off[c.id]}">${S.off[c.id] ? "Silent in the game. Tap to bring it back" : "Make silent"}</button>`}
+    <label class="cmt-l" for="cmt-${c.id}">Comment</label>
+    <textarea id="cmt-${c.id}" class="cmt" data-comment="${c.id}" rows="2" placeholder="Anything to change about this one?"></textarea>
+    <span class="note-status" data-status="${c.id}"></span></article>`;
+}
+function refreshCard(id) { const card = document.querySelector(`[data-cue="${id}"]`); if (!card) return; const ta = card.querySelector("textarea"), val = ta ? ta.value : ""; card.outerHTML = cueCard(C[id]); const nt = document.querySelector(`[data-comment="${id}"]`); if (nt) nt.value = val; }
+$("#bays").innerHTML = STAGES.map((s, i) => `<section class="bay" id="${s.id}" aria-labelledby="h-${s.id}"><div class="bay-head"><span class="eyebrow">Stage ${i + 1}</span><h2 id="h-${s.id}">${s.name}</h2></div>
+  ${DEMOS[s.id] ? `<div class="demo" data-stage-demo="${s.id}">${DEMOS[s.id].html}</div>` : ""}
+  <div class="cues">${CUES.filter((c) => c.st === s.id).map(cueCard).join("")}</div></section>`).join("");
+document.querySelectorAll("[data-comment]").forEach((ta) => { ta.value = S.comments[ta.dataset.comment] || ""; });
+renderTable($("[data-stage-demo='table']"));
+document.addEventListener("click", (e) => {
+  const dm = e.target.closest("[data-demo]"); if (dm) { const box = dm.closest("[data-stage-demo]"); DEMOS[box.dataset.stageDemo].run(box, dm.dataset.demo); return; }
+  const card = e.target.closest("[data-cue]"); if (!card) return; const id = card.dataset.cue;
+  const vb = e.target.closest("[data-var]"); if (vb) { varOf[id] = +vb.dataset.var; card.querySelectorAll(".var").forEach((x) => x.classList.toggle("on", x === vb)); audition(id); return; }
+  const act = e.target.closest("[data-act]"); if (!act) return;
+  if (act.dataset.act === "play") audition(id);
+  if (act.dataset.act === "mute") { if (S.off[id]) delete S.off[id]; else S.off[id] = true; refreshCard(id); persist(); renderSum(); }
+});
+document.addEventListener("input", (e) => { const ta = e.target.closest("[data-comment]"); if (!ta) return; const id = ta.dataset.comment; if (ta.value.trim()) S.comments[id] = ta.value; else delete S.comments[id]; status(id, "Typing..."); persist(); renderSum(); });
+
+/* mixer */
+[["vol", "o_vol"], ["room", "o_room"]].forEach(([k, o]) => { const i = $("#m_" + k); i.value = S[k]; $("#" + o).textContent = Math.round(S[k] * 100); i.addEventListener("input", () => { S[k] = +i.value; $("#" + o).textContent = Math.round(S[k] * 100); applyMix(); save(); }); });
+applyMix();
+$("#m_bed").checked = S.bed; $("#m_bed").addEventListener("change", (e) => { S.bed = e.target.checked; save(); if (!S.bed) bedOff(); });
+
+/* summary and copy */
+const escH = (t) => String(t).replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+const finalText = (c) => isOff(c.id) ? "Silent" : c.pick;
+function renderSum() { $("#sum").innerHTML = CUES.map((c) => `<div class="${isOff(c.id) ? "off" : ""}"><span>${STAGES.findIndex((s) => s.id === c.st) + 1}. ${c.n}</span><b>${escH(finalText(c))}</b>${S.comments[c.id] ? `<i>${escH(S.comments[c.id]).replace(/\n/g, "<br>")}</i>` : ""}</div>`).join(""); }
+renderSum();
+function toast(m) { const t = $("#toast"); t.textContent = m; t.hidden = false; clearTimeout(t._h); t._h = setTimeout(() => (t.hidden = true), 2200); }
+$("#copyPicks").addEventListener("click", () => {
+  const text = "DROP2TOP Classic sounds (final, softened)\n" + STAGES.map((s, i) => `\n${i + 1}. ${s.name}\n` + CUES.filter((c) => c.st === s.id).map((c) => `- ${c.n}: ${finalText(c)}${S.comments[c.id] ? `\n  Comment: ${S.comments[c.id].trim()}` : ""}`).join("\n")).join("\n");
+  const fb = () => { const b = $("#copyBox"); b.hidden = false; b.innerHTML = '<p class="soft" style="font-size:13px">Copying is blocked here. Select this and copy it:</p><textarea class="copy" readonly></textarea>'; const ta = b.querySelector("textarea"); ta.value = text; ta.focus(); ta.select(); };
+  try { navigator.clipboard.writeText(text).then(() => toast("List copied"), fb); } catch (e) { fb(); }
+});
+
+/* saving: this device, plus the page's own store */
+let db = null, chain = Promise.resolve(), timer = 0;
+function status(id, t) { const el = document.querySelector(`[data-status="${id}"]`); if (el) el.textContent = t; }
+function setLive(on, msg) { $("#savebar").classList.toggle("live", on); $("#saveText").textContent = msg; }
+function doneStatus(t) { Object.keys(C).forEach((id) => status(id, S.comments[id] ? t : "")); }
+function persist() {
+  save(); if (!db) { doneStatus("Saved on this device"); return; }
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    const body = { sounds: Object.fromEntries(CUES.map((c) => [c.id, isOff(c.id) ? "silent" : c.pick])), silenced: Object.keys(S.off), comments: Object.assign({}, S.comments), updatedAt: new Date().toISOString() };
+    chain = chain.then(() => db.doc("feedback/final").set(body)).then(() => { doneStatus("Saved"); setLive(true, "Everything saves to this page as you go, so Claude can read it."); })
+      .catch((err) => { doneStatus("Saved on this device"); setLive(false, err && err.code === "invalid_argument" ? "This view can't save to the page. Saving on this device; use Copy at the bottom." : "Couldn't save to the page just now. It's kept on this device and will try again on your next change."); });
+  }, 800);
+}
+(window.claude && window.claude.use ? window.claude.use("db") : Promise.resolve(null)).then(async (d) => {
+  if (!d) { setLive(false, "Saving on this device. Use Copy at the bottom to send your comments."); return; }
+  db = d;
+  try {
+    const f = await db.doc("feedback/final").get();
+    if (f.exists) { const v = f.data() || {}; S.off = Object.fromEntries((v.silenced || []).filter((id) => C[id]).map((id) => [id, true])); S.comments = Object.assign({}, v.comments || {}); save(); CUES.forEach((c) => refreshCard(c.id)); document.querySelectorAll("[data-comment]").forEach((ta) => { if (document.activeElement !== ta) ta.value = S.comments[ta.dataset.comment] || ""; }); renderSum(); }
+    else persist();
+    setLive(true, "Everything saves to this page as you go, so Claude can read it.");
+  } catch (err) { setLive(false, "Couldn't reach the page's saved comments. Saving on this device for now."); }
+});
+document.addEventListener("visibilitychange", () => { if (document.hidden) { if (running) running.cancel(); matchTimers.forEach(clearTimeout); clearTimeout(tableTimer); bedOff(); } });
+})();
+</script>

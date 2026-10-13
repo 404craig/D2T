@@ -94,7 +94,8 @@
   const nameFit = (n) => { const L = Math.max(...String(n).split(/\s+/).map((x) => x.length)), long = L > 10, f = Math.min(1.1, (long ? 8.8 : 8.0) / L); return { cls: long ? ' long' : '', style: f < 1.1 ? ` style="font-size:${f.toFixed(2)}em"` : '' }; };
   function clubItem(stat, r, shown, w) {
     const G = D2T.game, c = G.club(r.club), P = D2T.cards.clubPaint(c), v = shown ? String(stat.val(r)) : '?';
-    const when = r.season ? r.season : `${r.n} seasons`, nf = nameFit(c.name);
+    // all-time cards say "All-time", never how many seasons (Craig, 13 Oct: that gave the answer away)
+    const when = r.season ? r.season : 'All-time', nf = nameFit(c.name);
     return `<div class="ub-item"><div class="d2c d2c-club ub-cc${nf.cls}" style="--w:${w}px;--face:${P.face};--rim:${P.rim};--tex:${P.tex};--glow:${P.glow};--club-text:${c.text}" aria-label="${D2T.esc(c.full || r.club)} ${when}">
       <div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2t-shine slow"></span>
       <div class="d2c-body"><div class="ub-cc-top"><div class="ub-cc-who"><span class="ub-cc-name"${nf.style}>${D2T.esc(c.name)}</span><span class="ub-cc-season">${when}</span></div><img class="ub-cc-crest" src="${c.crestLight || c.crest}" alt=""></div>
@@ -202,7 +203,7 @@
       function refreshCard() {
         if (!run || busy || run.refreshes <= 0) return;
         const nxt = pickNext(); if (!nxt) return;
-        run.refreshes--; busy = true; enable(false); snd('roll3');
+        run.refreshes--; busy = true; enable(false); snd('respin'); snd('roll3');
         run.next = nxt; run.used.add(nxt);
         stage.querySelector('.ub-who-r').innerHTML = '';
         spinTo(reelR, run.next, { delay: 0, cruiseT: 0.5, decelT: 1.0, n: 2.6, v1: 2.2 }, () => {
@@ -258,12 +259,22 @@
         const btn = bar.querySelector('.ub-spin'); btn.disabled = true; btn.querySelector('.sp-lbl').textContent = 'Spinning';
         const end = -at * 76;
         const done = () => {
-          snd('lockin'); stage.querySelector('.ub-statwin').classList.add('is-hit');
+          snd('reelLand', 1); stage.querySelector('.ub-statwin').classList.add('is-hit');
           const b = R.best[target.id]; stage.querySelector('.ub-thisbest').innerHTML = `Your best on this: <em>${b || 'none yet'}</em>`;
           later(() => startRun(target), reduced ? 200 : 900);
         };
         if (reduced) { strip.style.transform = `translateY(${end}px)`; done(); return; }
-        strip.animate([{ transform: 'translateY(0)' }, { transform: `translateY(${end}px)` }], { duration: 2000, delay: 300, easing: 'cubic-bezier(.15,.8,.25,1)', fill: 'forwards' }).onfinish = done;
+        const anim = strip.animate([{ transform: 'translateY(0)' }, { transform: `translateY(${end}px)` }], { duration: 2000, delay: 300, easing: 'cubic-bezier(.15,.8,.25,1)', fill: 'forwards' });
+        // the same rolling ticks as the card reels: a muffled tap for each stat tile that passes, quieter at speed
+        let lastI = 0, lastY = 0, lastT = performance.now();
+        const watch = (now) => {
+          if (!root.isConnected || anim.playState === 'finished') return;
+          const y = -new DOMMatrixReadOnly(getComputedStyle(strip).transform).m42, idx = Math.floor(y / 76);
+          if (idx > lastI && window.D2TSound) window.D2TSound.tick(1, (y - lastY) / 76 / Math.max(0.001, (now - lastT) / 1000));
+          lastI = Math.max(lastI, idx); lastY = y; lastT = now; rafs.push(requestAnimationFrame(watch));
+        };
+        rafs.push(requestAnimationFrame(watch));
+        anim.onfinish = done;
       }
 
       // ---------- a run ----------
@@ -282,11 +293,12 @@
         for (let i = 1; i < n + 4; i++) seq.push(i === n ? html : item(run.stat, run.deck[rand(run.deck.length)], false, SIZE.w));   // fillers show ?, never made-up numbers
         reel.load(seq);
         if (reduced) { reel.draw(n, 0); reel.hit(accentOf(r)); reel.settle(n); done && done(); return; }
-        const t0 = performance.now(); let landed = false;
+        const t0 = performance.now(), ri = reel === reelL ? 0 : 2; let landed = false, lastK = 0;
         const step = (now) => {
           const s = D2T.roll.sample(P, (now - t0) / 1000);
           reel.draw(s.p, s.v);
-          if (!landed && (now - t0) / 1000 >= P.landAt) { landed = true; reel.hit(accentOf(r)); reel.settle(n); done && done(); }
+          const k = Math.floor(s.p); if (k > lastK && !landed && window.D2TSound) window.D2TSound.tick(ri, s.v); lastK = k;   // the same reel ticks as Classic
+          if (!landed && (now - t0) / 1000 >= P.landAt) { landed = true; snd('reelLand'); reel.hit(accentOf(r)); reel.settle(n); done && done(); }
           if (s.phase !== 'done' && root.isConnected) rafs.push(requestAnimationFrame(step));
         };
         rafs.push(requestAnimationFrame(step));
@@ -330,7 +342,7 @@
         const a = run.stat.val(run.cur), b = run.stat.val(run.next), right = higher ? b > a : b < a;
         burstReveal(numEl(), b, () => {
           stage.querySelector('.ub-r').classList.add(right ? 'ok' : 'bad');
-          if (right) win(); else { snd('buzzer'); later(over, reduced ? 200 : 950); }
+          if (right) win(); else { snd('wrong'); later(over, reduced ? 200 : 950); }
         });
       }
       function setNum(el, to) {
@@ -367,24 +379,26 @@
         later(() => wrap.remove(), 1100);
       }
       function win() {
-        run.streak++; snd('lockin');
+        run.streak++; snd('right');
         const done = () => {
           nEl.textContent = run.streak;
           streakEl.classList.remove('burst'); void streakEl.offsetWidth; streakEl.classList.add('burst');
           later(advance, reduced ? 120 : 380);
         };
         if (reduced) { done(); return; }
-        // a cyan tick pops where VS sits, then flies up to the run count, which ticks up as it lands
+        // a cyan tick where VS sits (Craig, 13 Oct: his brush tick): it comes in three times the size and faint, settles at
+        // one and a half times in full, gives a quick pulse, then flies up to the run count, which ticks up as it lands
         const vs = stage.querySelector('.ub-vs').getBoundingClientRect(), to = nEl.getBoundingClientRect();
-        const tick = D2T.h('<div class="ub-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>');
+        const tick = D2T.h('<div class="ub-tick" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M7 54 C3 45 9 37 18 37 C23 37 26 40 28 44 L37 62 C52 43 74 18 96 6 C98 5 100 7 98 9 C78 32 60 58 45 82 C41 88 35 92 28 93 C24 93 21 91 20 88 Z"/></svg></div>');
         const cx = vs.left + vs.width / 2, cy = vs.top + vs.height / 2;
         tick.style.left = cx + 'px'; tick.style.top = cy + 'px'; document.body.appendChild(tick);
-        const dx = to.left + to.width / 2 - cx, dy = to.top + to.height / 2 - cy;
-        tick.animate([{ transform: 'translate(-50%,-50%) scale(0) rotate(-30deg)', opacity: 0 }, { transform: 'translate(-50%,-50%) scale(1.3) rotate(6deg)', opacity: 1, offset: 0.6 }, { transform: 'translate(-50%,-50%) scale(1) rotate(0)', opacity: 1 }], { duration: 340, easing: 'cubic-bezier(.2,.9,.3,1.3)', fill: 'forwards' });
+        const dx = to.left + to.width / 2 - cx, dy = to.top + to.height / 2 - cy, C = 'translate(-50%,-50%)';
+        tick.animate([{ transform: `${C} scale(3)`, opacity: 0.1 }, { transform: `${C} scale(1.5)`, opacity: 1, offset: 0.62 }, { transform: `${C} scale(1.75)`, opacity: 1, offset: 0.8 }, { transform: `${C} scale(1.5)`, opacity: 1 }],
+          { duration: 600, easing: 'cubic-bezier(.25,.8,.3,1)', fill: 'forwards' });
         later(() => {
-          tick.animate([{ transform: 'translate(-50%,-50%) scale(1)', opacity: 1 }, { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(.45)`, opacity: 0.9 }], { duration: 520, easing: 'cubic-bezier(.55,0,.25,1)', fill: 'forwards' })
+          tick.animate([{ transform: `${C} scale(1.5)`, opacity: 1 }, { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(.45)`, opacity: 0.9 }], { duration: 520, easing: 'cubic-bezier(.55,0,.25,1)', fill: 'forwards' })
             .onfinish = () => { tick.remove(); done(); };
-        }, 560);
+        }, 680);
       }
       function advance() {
         if (!run) return;
@@ -405,23 +419,41 @@
           busy = false; enable(true); later(() => tips(), 300);
         });
       }
+      // a new best: HIGH SCORE flashes across the middle the way REWRITE HISTORY does on Classic's table (.se-newseason)
+      function highScore() {
+        if (reduced) return;
+        const f = D2T.h('<div class="se-newseason ub-high" aria-hidden="true"><span>High<br>score</span></div>');
+        f.style.setProperty('--se-acc', C); root.appendChild(f);
+        requestAnimationFrame(() => f.classList.add('se-go'));
+        later(() => f.remove(), 2800);
+      }
       function over(cleared) {
         if (!root.isConnected || !run) return;
         const s = run.stat, n = run.streak, prev = R.best[s.id] || 0, newBest = n > prev && n > 0;
         R.runs++; if (newBest) R.best[s.id] = n; save();
-        if (newBest) snd('champions');
-        const a = run.cur, b = run.next, nm = (r) => r.name || D2T.game.club(r.club).full || r.club;
-        const head = cleared ? 'The whole deck, unbeaten' : n === 0 ? 'Beaten first time' : `Unbeaten in ${n}`;
-        const lead = cleared ? 'You got through every card in this deck.' : `<b>${D2T.esc(nm(b))}</b> had <b>${s.val(b)}</b>, <b>${D2T.esc(nm(a))}</b> had <b>${s.val(a)}</b>.`;
-        const best = newBest ? ' A new best.' : prev ? ` Your best on ${s.big.toLowerCase()}: ${prev}.` : '';
-        const text = `DROP2TOP Unbeaten Run\n${s.big} (Premier League): unbeaten in ${n}${newBest ? ', a new best' : ''}`;
-        const sh = D2T.sheet({ title: head, body: `<div class="ub-endbig"><b>${n}</b><span>Unbeaten${newBest ? ' · a new best' : ''}</span></div><p class="fr-lead">${lead}${best}</p>
-          <div class="fr-stack"><button class="btn ub-again fr-btn-wide" data-k="share">Share with your mates</button><button class="btn btn-ghost fr-btn-wide ub-newrun" data-k="again">New run</button></div>`, onClose: () => { if (root.isConnected && run) idle(); } });
-        sh.body.querySelector('[data-k="again"]').onclick = () => { sh.close(); idle(); later(statSpin, 250); };
-        sh.body.querySelector('[data-k="share"]').onclick = async () => {
-          try { if (navigator.share) { await navigator.share({ text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
-          try { await navigator.clipboard.writeText(text); sh.body.querySelector('.fr-lead').textContent = 'Copied. Paste it into the group chat.'; } catch (e) { /* nothing to copy to */ }
+        if (newBest) { snd('highScore'); highScore(); }
+        // the end sheet waits for the HIGH SCORE flash to pass
+        const show = () => {
+          if (!root.isConnected) return;
+          const a = run.cur, b = run.next, nm = (r) => r.name || D2T.game.club(r.club).full || r.club;
+          const head = cleared ? 'The whole deck, unbeaten' : n === 0 ? 'Beaten first time' : `Unbeaten in ${n}`;
+          const lead = cleared ? 'You got through every card in this deck.' : `<b>${D2T.esc(nm(b))}</b> had <b>${s.val(b)}</b>, <b>${D2T.esc(nm(a))}</b> had <b>${s.val(a)}</b>.`;
+          const best = newBest ? ' A new best.' : prev ? ` Your best on ${s.big.toLowerCase()}: ${prev}.` : '';
+          // the share card (Craig, 13 Oct): the run huge in cyan, the stat, the dare
+          const text = `DROP2TOP Unbeaten Run · ${s.big}\nI went unbeaten in ${n} call${n === 1 ? '' : 's'} of higher or lower.${newBest ? '\nA new best.' : ''}\nCan you go longer?\n${D2T.share.LINK}`;
+          const ring = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="#22D3EE" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="50" r="44"/><path d="M30 42 L50 22 L70 42"/><path d="M30 58 L50 78 L70 58"/></svg>';
+          const card = D2T.share.build({ text, c: '#22D3EE', tag: 'Unbeaten Run', dare: `Go longer than ${n}`, ghost: D2T.share.svgSrc(ring), ghostAlpha: 0.12,
+            draw: (g, im, k) => {
+              g.save(); g.shadowColor = 'rgba(34,211,238,.45)'; g.shadowBlur = 80; k.fit(String(n), k.W / 2, 330, 980, 900, 420, true, '#22D3EE'); g.restore();
+              k.fit(s.big.toUpperCase(), k.W / 2, 730, 960, 900, 64, true, '#FFFFFF');
+              k.wrap(`Unbeaten in ${n} call${n === 1 ? '' : 's'} of higher or lower, real Premier League numbers.`, k.W / 2, 830, 820, 600, 40, '#BDBDC6', 52);
+            } });
+          const sh = D2T.sheet({ title: head, body: `<div class="ub-endbig"><b>${n}</b><span>Unbeaten${newBest ? ' · a new best' : ''}</span></div><p class="fr-lead">${lead}${best}</p>
+            <div class="fr-stack"><button class="btn ub-again fr-btn-wide" data-k="share">Share with your mates</button><button class="btn btn-ghost fr-btn-wide ub-newrun" data-k="again">New run</button></div>`, onClose: () => { if (root.isConnected && run) idle(); } });
+          sh.body.querySelector('[data-k="again"]').onclick = () => { sh.close(); idle(); later(statSpin, 250); };
+          sh.body.querySelector('[data-k="share"]').onclick = () => D2T.share.send(card);
         };
+        if (newBest && !reduced) later(show, 2500); else show();
       }
       // swipe the right card up for higher, down for lower (Craig, 12 Oct): it follows the finger on a rubber band, up to
       // about three times the old reach, and on release springs back past its start and bounces quickly to rest before

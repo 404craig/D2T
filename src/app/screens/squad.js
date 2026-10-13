@@ -38,11 +38,13 @@
       const fx = SE.fixture(data, pre || drafting ? 1 : eng.gw);
       const oppC = fx ? SE.club(data, fx.opp) : null;
       const nextHTML = fx ? `<div class="se-next"><img src="${oppC.crest}" alt=""><div class="se-next-t"><small>Next · ${fx.ha === 'H' ? 'Home' : 'Away'}</small><b class="d2c-fit">${D2T.esc(oppC.name)}</b></div></div>` : '';
-      const label = drafting ? 'Start the draft' : pre ? (dream ? 'Start the season' : 'Pre-season') : 'Play';
+      const carried = GAME.mode() === 'clubx' && GAME.career().n > 1;   // a Club X career's later seasons have pre-season rolls
+      const label = drafting ? 'Start the draft' : pre ? (dream && !carried ? 'Start the season' : 'Pre-season') : 'Play';
       // before the draft (Craig, 13 Oct): no next fixture; a greyed respin on the left (the draft has none) keeps Start the draft centred
       const REFRESH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
-      const left = drafting ? `<button class="icon-btn se-off" type="button" disabled aria-hidden="true" tabindex="-1">${REFRESH}</button>` : nextHTML;
-      const bar = D2T.h(`<footer class="actionbar se-nextbar${drafting ? ' is-draft' : ''}">${left}<button class="btn se-btn se-play" type="button">${label}</button>${SE.homeBtn()}</footer>`);
+      // every squad bar (Craig, 13 Oct): no next fixture, a greyed back (nowhere to go back to before a match), Play in the middle
+      const left = drafting ? `<button class="icon-btn se-off" type="button" disabled aria-hidden="true" tabindex="-1">${REFRESH}</button>` : SE.backOff();
+      const bar = D2T.h(`<footer class="actionbar se-nextbar is-draft">${left}<button class="btn se-btn se-play" type="button">${label}</button>${SE.homeBtn()}</footer>`);
       root.appendChild(bar);
       const playBtn = bar.querySelector('.se-play');
       playBtn.onclick = () => {
@@ -78,6 +80,7 @@
         subsEl.style.display = showSubs ? '' : 'none';
         let gone = body.querySelector('.se-gone');
         const goneText = drafting ? (GAME.mode() === 'clubx' ? 'Pick your shape, then start the draft: 11 spins, three players each time for any of your open shirts, in any order. Each goes in a shirt he plays. No respins.' : 'Pick your shape, then start the draft: 11 spins, one per shirt (keeper first, then defence, midfield and attack). Three players each time, no respins.')
+          : carried && pre ? `${GAME.isSim() ? "Last season's XI comes with you, on the same cards." : "Last season's XI, each on his card for this season (a man with no Premier League season now keeps his old one)."} Swap shirts or change the shape, then pre-season: 3 rolls before the first game, and 5 respins for the season.`
           : dream && pre ? 'Your drafted XI. Swap shirts or change the shape, then start the season. Your 5 respins are for the transfer rolls during the season.'
           : 'The rest of the squad has gone. New faces only come through the transfer rolls, and each one takes a shirt from your XI.';
         if (!showSubs && (!pre || dream) && !gone) { gone = D2T.h(`<p class="se-note se-gone">${goneText}</p>`); subsEl.after(gone); }
@@ -163,7 +166,7 @@
         const before = new Map(allItems().map((el) => [el.dataset.card, el.getBoundingClientRect()]));
         if (ghostRect) before.set(String(a.id), ghostRect);
         if (!GAME.swap(idOf(a.id), idOf(b.id))) return;
-        window.D2TSound && window.D2TSound.play(a.kind === 'sub' || b.kind === 'sub' ? 'subIn' : 'tap');
+        window.D2TSound && window.D2TSound.play('cardDrop');
         sel = null;
         render(before);
       }
@@ -228,7 +231,11 @@
         let t = under && under.closest('[data-card]');
         if (t && (!root.contains(t) || t.dataset.card === press.id || (press.kind === 'sub' && t.dataset.kind === 'sub'))) t = null;
         if (!t && under && press.kind === 'sub') { const slot = under.closest('.se-slot'); t = slot && slot.querySelector('[data-card]'); }
-        if (t !== target) { target && target.classList.remove('se-target'); target = t; target && target.classList.add('se-target'); }
+        if (t !== target) {
+          target && target.classList.remove('se-target'); target = t; target && target.classList.add('se-target');
+          const sl = t && t.closest('.se-slot'), card = L.all.get(String(press.id));
+          if (sl && card && window.D2TSound) { try { window.D2TSound.play('shirtFit', { green: 0, amber: 1, red: 2 }[GAME.fit(card.id, +sl.dataset.i)]); } catch (e) { /* no fit, no sound */ } }
+        }
       }
       function drop(p, x, y) {
         const g = ghost, t = target; ghost = null; target = null;
@@ -245,6 +252,7 @@
           return;
         }
         // no target: the card drops back to where it came from
+        window.D2TSound && window.D2TSound.play('dropCancel');
         const back = p.item.getBoundingClientRect(), hr = g._hr;
         if (reduced || !p.item.isConnected) { g.remove(); applySel(); return; }
         const anim = g.animate([{ transform: g.style.transform }, { transform: `translate(${back.left - hr.left}px,${back.top - hr.top}px) scale(${back.width / g._w})` }], { duration: 320, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
@@ -276,6 +284,7 @@
             if (pending === GAME.eng().formation) return;
             const before = new Map(allItems().map((n) => [n.dataset.card, n.getBoundingClientRect()]));
             GAME.setFormation(pending);
+            window.D2TSound && window.D2TSound.play('formation');
             sel = null;
             render(before);
           }
@@ -297,6 +306,7 @@
         D2T.tips([['formation', body.querySelector('.se-formlink'), 'Change your shape here'], ...(pre && !drafting && sub ? [['subs', sub, 'Drag a sub onto the pitch']] : [])]); }, 1100);
       const offOld = this._off; this._off = () => { clearTimeout(tipT); offOld && offOld(); };
       // first load: cards deal onto the pitch
+      if (!reduced && window.D2TSound) window.D2TSound.play('dealPitch');
       if (!reduced) [...slotsEl.querySelectorAll('.se-cardwrap')].forEach((n, i) => n.animate([{ opacity: 0, transform: 'translateY(14px) scale(.85)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 60 + i * 40, easing: 'cubic-bezier(.3,1.3,.5,1)', fill: 'backwards' }));
     },
     unmount() { this._off && this._off(); }

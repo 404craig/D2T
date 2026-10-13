@@ -119,8 +119,9 @@
 .ub-boom i { position: absolute; left: 0; top: 0; border-radius: 2px; box-shadow: 0 0 6px rgba(34,211,238,.4); }
 .ub-boom-ring { position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%; border: 3px solid #22D3EE; box-shadow: 0 0 18px rgba(34,211,238,.9), inset 0 0 10px rgba(255,255,255,.5); }
 .ub-boom-flash { position: absolute; left: 0; top: 0; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle, #fff 0%, rgba(139,233,247,.8) 35%, rgba(34,211,238,0) 70%); }
-.ub-tick { position: fixed; z-index: 61; width: 66px; height: 66px; border-radius: 50%; background: #22D3EE; color: #001A1F; display: grid; place-items: center; box-shadow: 0 0 0 4px #000, 0 0 28px rgba(34,211,238,.85); pointer-events: none; }
-.ub-tick svg { width: 38px; height: 38px; }
+.ub-tick { position: fixed; z-index: 61; width: 66px; height: 66px; pointer-events: none; filter: drop-shadow(0 0 10px rgba(34,211,238,.7)); }
+.ub-tick svg { width: 100%; height: 100%; display: block; }
+.ub-tick path { fill: #22D3EE; }
 /* the answer bar: three refreshes on the left, Lower and Higher in the middle, home on the right (Craig, 13 Oct) */
 .ub-bar .ub-ans { min-width: 0; }
 .ub-ans svg { flex-shrink: 0; }

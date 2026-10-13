@@ -47,6 +47,12 @@
     const lum = (h) => { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }).reduce((t, v, i) => t + v * [0.2126, 0.7152, 0.0722][i], 0); };
     const dark = lum(a) > 0.33, txt = dark ? (lum(c.ink) < 0.08 ? c.ink : '#0A0A0A') : '#FFFFFF';
     const paint = `--face:linear-gradient(100deg, ${mix(a, '#FFFFFF', 0.4)} 0%, ${a} 30%, ${a} 55%, ${mix(a, '#000000', 0.45)} 100%);--rim:linear-gradient(170deg, ${mix(a, '#FFFFFF', 0.7)}, ${mix(a, '#000000', 0.4)});--txt:${txt};--glowc:${a}44;--track:${dark ? 'rgba(0,0,0,0.18)' : 'rgba(255,255,255,0.25)'};--tsh:${dark ? 'none' : '0 2px 8px rgba(0,0,0,0.4)'};--goBg:${dark ? '#0A0A0A' : '#FFFFFF'};--goFg:${dark ? '#FFFFFF' : '#0A0A0A'}`;
+    const locked = D2T.game.locked(run);   // Dare2Dream locked for repair: the save is kept, the card doesn't open
+    if (locked) return `<div class="fr-card-btn fr-cont fr-in fr-locked" style="${paint}" aria-disabled="true" aria-label="${D2T.esc(c.full)} ${data.season}, Dare2Dream is locked for repair">
+      <span class="fr-cont-tex"></span><span class="fr-cont-crest"><img src="${c.crestCard || c.crestLight || c.crest}" alt=""></span>
+      <span class="fr-cont-txt"><span class="fr-cont-lbl">DARE2DREAM · LOCKED FOR REPAIR</span><span class="fr-cont-name" style="display:block">${D2T.esc(c.name)}</span>
+      <span class="fr-cont-meta" style="display:block">${data.season} · ${where} · saved</span></span>
+      <span class="fr-soon-lock" aria-hidden="true">${LOCK}</span></div>`;
     return `<button class="fr-card-btn fr-cont fr-in" style="${paint}" data-act="${act}" aria-label="Continue with ${D2T.esc(c.full)} ${data.season}, ${where}">
       <span class="fr-cont-tex"></span><span class="fr-cont-hi"></span><span class="d2t-shine slow" style="${shineBeat()}"></span><span class="fr-cont-crest"><img src="${c.crestCard || c.crestLight || c.crest}" alt=""></span>
       <span class="fr-cont-txt"><span class="fr-cont-lbl">CONTINUE · ${label}</span><span class="fr-cont-name" style="display:block">${D2T.esc(c.name)}</span>
@@ -57,10 +63,11 @@
 
   // Other games cards (chosen 12 Oct, option A): every card the same shape, its game's colour washing in from the right
   // with a thin rim, the game's mark faded behind on the right. Daily white, Dare2Dream blue, Club X green, Goal Rush yellow, Tenaball purple.
-  const gameCard = ({ c, attrs, tag, big, sub, mark, cls = '', label, href }) => {
+  const gameCard = ({ c, attrs, tag, big, sub, mark, cls = '', label, href, locked }) => {
     const inner = `<span class="fr-gm-mark" aria-hidden="true">${mark}</span>
       <span class="fr-gm-txt"><span class="fr-tag">${tag}</span><span class="fr-big">${big}</span><span class="fr-sub">${sub}</span></span>
-      <span class="fr-go">${ARROW}</span>`;
+      ${locked ? `<span class="fr-soon-lock" aria-hidden="true">${LOCK}</span>` : `<span class="fr-go">${ARROW}</span>`}`;
+    if (locked) return `<div class="fr-card-btn fr-gm fr-locked ${cls}" style="--c:${c}" aria-disabled="true" aria-label="${label}, locked for repair">${inner}</div>`;
     return href ? `<a class="fr-card-btn fr-gm ${cls}" style="--c:${c}" href="${href}" target="_blank" rel="noopener" aria-label="${label}">${inner}</a>`
       : `<button class="fr-card-btn fr-gm ${cls}" style="--c:${c}" ${attrs} aria-label="${label}">${inner}</button>`;
   };
@@ -80,31 +87,30 @@
     return gameCard({ c: '#22D3EE', attrs: 'data-act="unbeaten"', label: 'Unbeaten Run', tag: 'UNBEATEN RUN', big: 'Higher or lower?', sub, mark: D2T.ubMark || '' });
   }
 
-  // Daily challenge card: today's club for everyone, the mode it plays, and your result once played.
+  // Daily challenge card: today's club for everyone. The card keeps only its question (or "Done for today"); your best
+  // Daily and today's go sit in two tiles just under it (Craig, 13 Oct; design/prototype/daily-best.html).
+  const UP = '<svg class="fr-up" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1 L11 8 H7.5 V11 H4.5 V8 H1 Z" fill="currentColor"/></svg>';
   function dailyCard() {
     const G = D2T.game, d = G.dailyEntry(G.today()), res = G.dailyResult(), streak = G.dailyStreak();
-    const goal = 'They went down for real. Can you keep them up?';
-    const cmp = G.dailyCompare(), best = cmp.best;
-    const sub = res ? `Today: ${D2T.ordinal(res.finish)}, rise ${cmp.sg(res.rise)}. ${cmp.isBest ? 'Your best Daily yet.' : `Best: ${cmp.sg(best.rise)} (${D2T.esc(best.club)}).`} Tap to share.`
-      : best ? `${goal} Your best Daily: rise ${cmp.sg(best.rise)}.` : goal;
+    const sub = res ? `Your best today: ${D2T.ordinal(res.finish)}. Tap to go again and beat it.` : 'They went down for real. Can you keep them up?';
     // white, the date in the top row, today's crest in full colour where the other games keep their mark
     const tag = G.dailyName(d.date, true).toUpperCase().replace('CHALLENGE ', 'CHALLENGE · ') + (streak ? ` · ${streak} DAY STREAK` : '');
     return gameCard({ c: '#FFFFFF', cls: 'fr-gm-daily', attrs: 'data-act="daily"', label: `${G.dailyName(d.date)}, ${D2T.esc(d.full || d.name)} ${d.season}`,
-      tag, big: `${D2T.esc(d.name)}<br>${d.season}`, sub, mark: `<img class="fr-gm-crest" src="${d.crest}" alt="">` });
+      tag, big: `${D2T.esc(d.name)}<br>${d.season}`, sub, mark: `<img class="fr-gm-crest" src="${d.crest}" alt="">` }) + dailyTiles(d, res);
   }
-  function dailyDone() {
-    const G = D2T.game, r = G.dailyResult(), d = G.dailyEntry(G.today());
-    const cmp = G.dailyCompare();
-    const text = `DROP2TOP ${G.dailyName(G.today())}\n${d.full || d.name} ${d.season} (${G.modeName(r.mode)})\nHistory: ${D2T.ordinal(r.histFinish)}\nMine: ${D2T.ordinal(r.finish)}, ${r.pts} pts\nTHE RISE ${cmp.sg(r.rise)}${cmp.isBest ? '\nMy best Daily yet' : cmp.bestLine ? '\n' + cmp.bestLine : ''}\nCan you beat it? 404craig.github.io/D2T`;
-    const vs = cmp.best ? `<div class="fr-panel" style="margin:12px 0"><div class="fr-row"><span>Today</span><span class="fr-green">${D2T.ordinal(r.finish)}, rise ${cmp.sg(r.rise)}</span></div>
-      <div class="fr-row"><span>Your best Daily</span><span>${cmp.isBest ? 'Today' : `${D2T.esc(cmp.best.club)} ${cmp.best.season}, ${D2T.ordinal(cmp.best.finish)}, rise ${cmp.sg(cmp.best.rise)}`}</span></div></div>` : '';
-    const sh = D2T.sheet({ title: `${G.dailyName(G.today())}: done`, body: `<p class="fr-lead">${D2T.esc(d.name)} ${d.season}: you finished ${D2T.ordinal(r.finish)} (history ${D2T.ordinal(r.histFinish)}). ${cmp.isBest && cmp.best ? 'Your best Daily yet. ' : ''}A new club for everyone at midnight.</p>${vs}
-      <div class="fr-stack"><button class="btn btn-green fr-btn-wide" data-k="share">Share with your mates</button></div>` });
-    sh.body.querySelector('[data-k="share"]').onclick = async () => {
-      try { if (navigator.share) { await navigator.share({ text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
-      try { await navigator.clipboard.writeText(text); sh.body.querySelector('.fr-lead').textContent = 'Copied. Paste it into the group chat.'; } catch (e) { /* nothing to copy to */ }
-    };
+  function dailyTiles(d, res) {
+    const G = D2T.game, cmp = G.dailyCompare(), best = cmp.best, o = D2T.ordinal, esc = D2T.esc;
+    const crest = (name) => { const c = G.club(name); return c && c.crest ? `<img src="${c.crest}" alt="">` : ''; };
+    const rise = (n) => `<span class="fr-rise">${UP} ${n}</span>`;
+    const left = best ? `<b>${crest(best.club)}${rise(best.rise)}</b><small>${esc(best.club)} · ${o(best.histFinish)} to ${o(best.finish)}</small>`
+      : '<b>None yet</b><small>Play today to set one</small>';
+    let right, newBest = false;
+    if (res) { newBest = cmp.isBest; right = `<b>${crest(d.name)}${rise(res.rise)}</b><small>${newBest ? 'New best' : `${esc(d.name)} · ${o(res.histFinish)} to ${o(res.finish)}`}</small>`; }
+    else if (!best) right = `<b>${crest(d.name)}${esc(d.name)}</b><small>Their real finish: ${o(d.pos)}</small>`;
+    else { const need = d.pos - best.rise; right = need < 1 ? `<b>${crest(d.name)}Win the league</b><small>to match your best</small>` : `<b>${crest(d.name)}Finish ${o(need)}</b><small>or higher to beat your best</small>`; }
+    return `<div class="fr-dtiles"><div class="fr-dtile"><i>YOUR BEST DAILY</i>${left}</div><div class="fr-dtile${newBest ? ' is-best' : ''}"><i>TODAY'S DAILY</i>${right}</div></div>`;
   }
+
 
   // The long logo in two pieces (emblem and name, measured from long.png) so the emblem can turn on its own,
   // each with a glint layer sized to the whole logo so one sweep runs across both.
@@ -154,10 +160,10 @@
         <section class="fr-sect fr-in" aria-label="Other games">
           <div class="fr-sect-h"><h2>Other games</h2></div>
         ${dailyCard()}
-        ${gameCard({ c: '#12F06C', attrs: 'data-act="pick" data-mode="clubx"', label: 'Club X', tag: 'CLUB X', big: 'From nowhere to champions', sub: `Replace the worst side in a real season and go for the title.${xr.runs ? ` ${xr.titles} ${xr.titles === 1 ? 'title' : 'titles'} from ${xr.runs} ${xr.runs === 1 ? 'go' : 'goes'}.` : ''}`, mark: `<img src="${D2T.game.club('Club X').crest}" alt="">` })}
+        ${gameCard({ c: '#12F06C', attrs: 'data-act="pick" data-mode="clubx"', label: 'Club X', tag: 'CLUB X', big: 'From nowhere to champions', sub: 'Career mode. Replace the worst side, win the league, go again.', mark: `<img src="${D2T.game.club('Club X').crest}" alt="">` })}
         ${g433Card()}
         ${ubCard()}
-        ${gameCard({ c: '#3BA4FF', attrs: 'data-act="pick" data-mode="dare2dream"', label: 'Dare2Dream', tag: 'DARE2DREAM', big: 'Rewrite their season', sub: `Any club from any season. Draft 11 and beat their real finish.${dreams.runs ? ` ${dreams.dreams} of ${dreams.runs} dreams so far.` : ''}`, mark: D2T.logo('emblemLine') })}
+        ${gameCard({ c: '#3BA4FF', attrs: 'data-act="pick" data-mode="dare2dream"', label: 'Dare2Dream', locked: D2T.game.dreamLocked, tag: D2T.game.dreamLocked ? 'DARE2DREAM<span class="fr-tag-off"> · LOCKED FOR REPAIR</span>' : 'DARE2DREAM', big: 'Rewrite their season', sub: `Any club from any season. Draft 11 and beat their real finish.${dreams.runs ? ` ${dreams.dreams} of ${dreams.runs} dreams so far.` : ''}`, mark: D2T.logo('emblemLine') })}
         ${gameCard({ c: '#A66BFF', href: 'https://404craig.github.io/Tenaball/', label: 'Tenaball, opens in a new tab', tag: 'TENABALL', big: 'Name the top ten', sub: 'Our football quiz. Opens Tenaball.', mark: `<img src="${window.D2T_TENABALL_LOGO || ''}" alt="">` })}
           <div class="fr-sect-h fr-soon-h"><span>Coming soon</span></div>
           <div class="fr-soon">${MODES.map((m) => `<button class="fr-soon-t" aria-label="${m.name}, coming soon">
@@ -225,7 +231,6 @@
       const startNew = (from, mode) => { D2T.game.newRun(mode); D2T.toBlack('spin', { from }); };
       const daily = body.querySelector('[data-act="daily"]');
       if (daily) daily.onclick = (e) => {
-        if (D2T.game.dailyResult()) { dailyDone(); return; }
         D2T.game.startDaily(); D2T.toBlack(D2T.game.stepFor() || 'table', { from: e.currentTarget });
       };
       const other = body.querySelector('[data-act="continue-other"]');
@@ -237,7 +242,7 @@
         // the game's own question, never the phone's confirm box
         const name = D2T.run().club.name;
         const s = D2T.sheet({ title: 'Start a new run?', body: `<p class="fr-lead">Your ${D2T.esc(name)} run will be lost.</p>
-          <div class="fr-two"><button class="btn btn-ghost" data-k="no">Keep playing</button><button class="btn btn-ghost fr-danger" data-k="yes">New run</button></div>` });
+          <div class="fr-two"><button class="btn btn-ghost" data-k="no">Keep playing</button><button class="btn btn-ghost" data-k="yes" style="color:#12F06C">New run</button></div>` });
         s.body.querySelector('[data-k="no"]').onclick = s.close;
         s.body.querySelector('[data-k="yes"]').onclick = () => { s.close(); startNew(from, mode); };
       });

@@ -16,6 +16,13 @@ fs.mkdirSync(OUT, { recursive: true });
   page.on("console", (m) => { if (m.type() === "error" && !/fonts\.g|ERR_NAME|net::/.test(m.text())) errors.push("console: " + m.text()); });
   page.on("dialog", (d) => { errors.push("native dialog used: " + d.message()); d.dismiss(); });
   const shot = (n) => page.screenshot({ path: path.join(OUT, n + ".png") });
+  // every game's share card (Craig, 13 Oct): built ahead, its message starts as it should and ends with the link
+  const card = async (name, starts) => {
+    await page.waitForFunction(() => window.D2T.share && window.D2T.share.last && window.D2T.share.last.done, null, { timeout: 8000 }).catch(() => {});
+    const r = await page.evaluate(() => { const l = window.D2T.share.last; return { text: l.text, png: l.canvas ? l.canvas.toDataURL("image/png") : "", file: !!l.file }; });
+    check(r.file && r.text.startsWith(starts) && r.text.trim().endsWith("404craig.github.io/D2T"), `the ${name} share card is missing or its message is wrong: ${JSON.stringify(r.text)}`);
+    if (process.env.SHARE_DIR && r.png) fs.writeFileSync(path.join(process.env.SHARE_DIR, name + ".png"), Buffer.from(r.png.split(",")[1], "base64"));
+  };
   const wait = (ms) => page.waitForTimeout(ms);
   const screen = () => page.evaluate(() => window.D2T.currentScreen());
   const expectScreen = async (name, ms = 6000) => {
@@ -40,7 +47,10 @@ fs.mkdirSync(OUT, { recursive: true });
     }
     await touch("touchEnd", cur.x, cur.y);
   };
-  const spunNow = () => { const e = window.D2T.game.eng(); return e.roll && window.D2T.state.run.spun === `${e.roll.key}.${e.roll.spin}`; };
+  // a roll has settled: a purple or legend card's reveal (screens/reveal.js) counts the roll as spun as it starts, so also
+  // wait for the reels to stop (is-rolling); a reveal takes about 16 s, two in one roll about 33 s
+  const spunNow = () => { const e = window.D2T.game.eng(); return e.roll && window.D2T.state.run.spun === `${e.roll.key}.${e.roll.spin}` && !document.querySelector(".sp-screen.is-rolling"); };
+  const ROLL_MS = 45000;
   const smallButtons = async (where) => {
     const small = await page.$$eval("button", (bs) => bs.filter((b) => b.offsetParent && getComputedStyle(b).visibility !== "hidden" && b.getBoundingClientRect().height < 40 && b.getBoundingClientRect().width < 40).map((b) => (b.getAttribute("aria-label") || b.textContent).trim().slice(0, 30)));
     if (small.length) errors.push(`tap targets under 40px on ${where}: ${small.join(", ")}`);
@@ -95,8 +105,16 @@ fs.mkdirSync(OUT, { recursive: true });
     await page.waitForSelector(".sp-main:not([disabled])", { timeout: 6000 });
     await wait(300);
     const before = await page.evaluate(() => window.D2T.game.eng().signed.length);
+    // the last roll carries a legend in the middle (the roll's own cards, swapped in the engine state for the test):
+    // his reel never lands on its own, the reveal plays over the screen, then he drops into his slot (Craig, 13 Oct)
+    if (r === 2) await page.evaluate(() => { const G = window.D2T.game, e = G.eng(), used = new Set([...e.seen, ...e.roll.cards, ...e.xi]); e.roll.cards[1] = G.legends.find((l) => !used.has(l.id)).id; });
     await page.click(".sp-main");
-    await page.waitForFunction(spunNow, null, { timeout: 8000 });
+    if (r === 2) {
+      check(!!(await page.waitForSelector(".rr-ov", { timeout: 6000 }).catch(() => null)), "no rare reveal for a legend in the roll");
+      await wait(9000); await shot("10d-rare-reveal");
+    }
+    await page.waitForFunction(spunNow, null, { timeout: ROLL_MS });
+    if (r === 2) check(await page.evaluate(() => !document.querySelector(".rr-ov") && document.querySelectorAll(".sp-slot")[1].querySelector(".sp-node.is-hit .d2c").dataset.level === "legend"), "the legend did not land in his slot after the reveal");
     if (r === 1) {
       // a finger on a card the instant the last reel lands, before the tray has dropped, must still pick him up
       // and drag him onto a shirt once the pitch is up (Craig, 12 Oct: "at times dragging doesn't select the player")
@@ -173,6 +191,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.evaluate(() => window.D2T.go("summary"));
   await expectScreen("summary");
   await wait(1600); await shot("16-summary"); await smallButtons("summary");
+  await card("classic", "DROP2TOP\nI took ");
   await page.evaluate(() => document.querySelector(".screen-body").scrollTo(0, 99999)); await wait(400); await shot("17-summary-bottom");
   const scored = await page.evaluate(() => window.D2T.game.eng().played.some((r) => r.us > 0));
   check(!scored || (await page.$$eval(".sm-award span", (els) => els.some((e) => /Top scorer/.test(e.textContent)))), "no top scorer award although the club scored");
@@ -226,6 +245,10 @@ fs.mkdirSync(OUT, { recursive: true });
 
   // ---------- Dare2Dream: any club, beat their real finish ----------
   const classicBefore = await page.evaluate(() => JSON.stringify(window.D2T.game.record()));
+  // Dare2Dream is locked for repair (Craig, 13 Oct): its card on home doesn't open; unlocked here to keep testing the mode
+  await page.evaluate(() => window.D2T.go("home")); await wait(900);
+  check(!!(await page.$('.fr-gm.fr-locked[aria-disabled="true"]')) && !(await page.$('[data-act="pick"][data-mode="dare2dream"]')) && /LOCKED FOR REPAIR/.test(await page.textContent(".fr-gm.fr-locked")), "the Dare2Dream card should be locked for repair");
+  await page.evaluate(() => { window.D2T.game.dreamLocked = false; window.D2T.go("league"); }); await wait(400);
   await page.evaluate(() => window.D2T.go("home")); await wait(900);
   await page.click('[data-act="pick"][data-mode="dare2dream"]');
   await page.waitForSelector(".sheet [data-k='yes']", { timeout: 2000 }).then(() => page.click(".sheet [data-k='yes']")).catch(() => {});
@@ -250,10 +273,10 @@ fs.mkdirSync(OUT, { recursive: true });
     await page.click(".sp-main");
     if (k === 1) {
       // the draft too: a finger on a card as the roll settles, dragged onto the lit shirt once the pitch is up
-      await page.waitForFunction(spunNow, null, { timeout: 9000 });
+      await page.waitForFunction(spunNow, null, { timeout: ROLL_MS });
       await touchDrag(await centre(".sp-slot >> nth=1"), ".tr-field .se-slot.se-best .se-cardwrap", { steps: 30, stepMs: 40 });
     }
-    else { await page.waitForSelector(".sp-screen.is-placing", { timeout: 9000 }); await wait(600); }
+    else { await page.waitForSelector(".sp-screen.is-placing", { timeout: ROLL_MS }); await wait(600); }
     if (k === 0) { await shot("31b-d2d-draft"); await page.click(".sp-slot >> nth=0"); await wait(300); await page.click(".sp-main"); }
     await wait(1200);
     check(await page.evaluate((n) => window.D2T.game.eng().xi.filter((x) => x != null).length === n, k + 1), `draft pick ${k + 1} did not land`);
@@ -266,9 +289,12 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.evaluate(() => { const G = window.D2T.game; for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(1200); await shot("32-d2d-summary");
   check(/Dream achieved|Fell short/.test(await page.textContent(".sm-head")), "Dare2Dream summary has no dream result");
+  await card("dare2dream", "DROP2TOP Dare2Dream\n");
   check(await page.evaluate(() => window.D2T.game.dreamRecord().runs === 1), "Dare2Dream run not recorded");
   check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, classicBefore), "Dare2Dream run changed Classic's record");
 
+  // locked again: a saved Dare2Dream run is kept, and its screens send you home
+  check(await page.evaluate(() => { const G = window.D2T.game; G.dreamLocked = true; const r = { eng: { mode: "dare2dream", seasonKey: "2004/05", phase: "prematch" } }; return G.locked(r) && G.stepFor() !== undefined; }), "the Dare2Dream lock should cover a saved run");
   // ---------- Club X: name your club, one season spins in, its crest bursts into the badge, draft 11 in a random order ----------
   await page.evaluate(() => window.D2T.go("home")); await wait(900);
   await page.click('[data-act="pick"][data-mode="clubx"]');
@@ -299,11 +325,31 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => { const G = window.D2T.game, i = G.draftInfo(); return i.open && G.rollCards().length === 3 && G.rollCards().every((c) => G.draftFits(c.id).length > 0); }), "Club X draft should serve three cards for its open shirts");
   await page.evaluate(() => { const G = window.D2T.game; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(1200); await shot("35-clx-summary");
+  await card("clubx", "DROP2TOP Club X\n");
   check(/Champions|Fell short/.test(await page.textContent(".sm-head")), "Club X summary has no result");
   check(await page.evaluate(() => window.D2T.game.xRecord().runs === 1), "Club X run not recorded");
   check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, classicBefore), "Club X run changed Classic's record");
+  // career mode (Craig, 13 Oct): Next season carries the XI on, with pre-season rolls; after 2025/26 the season is a forecast
+  await page.evaluate(() => { const G = window.D2T.game; if (!G.careerNext()) G.eng().final.finish = 1; window.D2T.go("home"); }); await wait(700);
+  await page.evaluate(() => window.D2T.go("summary")); await wait(1200);
+  check(!!(await page.$('[data-act="next"]')), "Club X summary has no Next season");
+  await page.click('[data-act="next"]'); await expectScreen("table"); await wait(600);
+  check(await page.evaluate(() => { const G = window.D2T.game, e = G.eng(); return e.career === 2 && e.phase === "setup" && G.lineup().xi.every(Boolean) && G.clubName() === "Southside Rovers"; }), "Next season did not carry the XI into season 2");
+  check(await page.evaluate(() => window.D2T.game.xRecord().runs === 1), "Next season recorded the first season twice");
+  check(await page.evaluate(() => { const G = window.D2T.game; G.startSeason(); return G.eng().rolls[0].kind === "pre" && G.eng().phase === "window"; }), "a career's second season should open with pre-season rolls");
+  check(await page.evaluate(() => {
+    const G = window.D2T.game; G.newRun("clubx"); G.setXName("Southside Rovers");
+    const k = G.xPool.find((x) => x.season === "2025/26").key; G.eng().clubOffer = [k]; G.chooseClub(k); window.D2T.state.run.tableSeen = true;
+    while (G.inDraft()) G.draftPick(G.rollCards()[0].id);
+    G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } }
+    G.finish(); if (!G.careerNext()) G.eng().final.finish = 1;
+    if (!G.nextSeason() || !G.isSim()) return false;
+    const S = G.S(); return S.season === "2026/27" && S.clubs.length === 20 && S.matches.length === 380 && G.lineup().xi.every(Boolean) && G.historyTable().length === 20;
+  }), "after 2025/26 the career should go on into a forecast 2026/27");
+  await page.evaluate(() => window.D2T.go("table")); await wait(800);
+  check(/Forecast table/.test(await page.textContent(".se-tl-a")), "a forecast season's table should say it is a forecast");
 
-  // ---------- Daily challenge: today's club for everyone, its own save, one go ----------
+  // ---------- Daily challenge: today's club for everyone, its own save, as many goes as you like ----------
   await page.evaluate(() => { const G = window.D2T.game; G.newRun("classic"); G.chooseClub(G.offer()[0].key); window.D2T.state.run.tableSeen = true; window.D2T.save(); window.D2T.go("home"); }); await wait(900);
   const dEntry = await page.evaluate(() => { const d = window.D2T.game.dailyEntry(window.D2T.game.today()); return { key: d.key, mode: d.mode }; });
   // every day of a year is a bottom-10 side and plays Classic
@@ -313,18 +359,25 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate((d) => { const r = window.D2T.state.run; return r.daily === window.D2T.game.today() && window.D2T.game.mode() === "classic" && d.mode === "classic" && r.eng.respins === window.D2TE.RULES.respins && r.eng.phase !== "draft" && r.eng.xi.every((id) => id != null); }, dEntry), "the daily did not start with today's club, its mode and no respins");
   check(await page.evaluate(() => !!window.D2T.state.parked), "the run in progress was not kept aside for the daily");
   await page.click(".actionbar .se-home"); await wait(500);
-  check(!!(await page.$('.sheet [data-k="home"]')) && !(await page.$('.sheet [data-k="restart"]')) && !(await page.$('.sheet [data-k="quit"]')), "the Daily's run menu should only offer Keep playing and Home");
+  check(!!(await page.$('.sheet [data-k="home"]')) && !!(await page.$('.sheet [data-k="restart"]')) && !(await page.$('.sheet [data-k="quit"]')), "the Daily's run menu should offer Keep playing, Restart and Home");
   await page.click('.sheet [data-k="keep"]'); await wait(500);
   await page.evaluate(() => { const G = window.D2T.game; window.D2T.state.run.tableSeen = true; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(900); await shot("40-daily-summary");
+  await card("daily", "DROP2TOP Daily #");
   check(await page.evaluate(() => !!window.D2T.game.dailyResult()), "the daily result was not recorded");
   check(!!(await page.$(".sm-daily .sm-dv")) && !!(await page.$('.actionbar [data-act="share"]')), "the daily summary has no today-against-best panel or Share button");
-  await page.click('[data-act="again"]'); await expectScreen("home"); await wait(800);
-  check(/Today: .*rise/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not show today's daily result");
+  // as many goes as you like (Craig, 13 Oct): Go again starts a fresh go, and the day's best go stays recorded
+  await page.click('[data-act="again"]'); await expectScreen("table"); await wait(600);
+  check(await page.evaluate(() => { const G = window.D2T.game, r = window.D2T.state.run; return !!G.dailyResult() && r.daily === G.today() && !r.recorded && G.eng().phase !== "summary"; }), "Go again did not start a fresh go at today's Daily");
+  await page.evaluate(() => window.D2T.go("home")); await expectScreen("home"); await wait(800);
+  check(/Your best today/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not show today's best go");
+  check(/TODAY'S DAILY/.test(await page.textContent(".fr-dtiles")) && (await page.$$(".fr-dtile")).length === 2, "home has no best and today tiles under the daily card");
   check(!!(await page.$('[data-act="continue-other"]')), "the parked run has no Continue card after the daily");
   // the Daily closes at midnight: an unfinished one from yesterday is dropped (no result), the parked run comes back, home says so
   await page.evaluate(() => {
-    const G = window.D2T.game, st = window.D2T.state, y = new Date(Date.parse(G.today() + "T12:00:00Z") - 864e5).toISOString().slice(0, 10);
+    const G = window.D2T.game, st = window.D2T.state;
+    if (st.run && st.run.daily) { st.run = st.parked; st.parked = null; }   // today's fresh go from Go again makes way
+    const y = new Date(Date.parse(G.today() + "T12:00:00Z") - 864e5).toISOString().slice(0, 10);
     const e = G.dailyEntry(y); st.parked = st.run; st.run = { step: "fixtures", eng: Object.assign({}, st.parked.eng, { phase: "prematch" }), spun: true, daily: y };
     window.__y = y; window.D2T.save(); window.D2T.go("home");
   }); await wait(1600);
@@ -369,6 +422,7 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => { const n = {}, N = 14000; for (let i = 0; i < N; i++) { const f = window.D2T.game.g433.pickFormation(); n[f] = (n[f] || 0) + 1; } const back5 = (n["532"] + n["541"]) / 2, rest = ["442", "433", "451", "352", "343", "424"].reduce((t, f) => t + n[f], 0) / 6; return Object.keys(n).length === 8 && back5 / rest > 0.4 && back5 / rest < 0.6; }), "Goal Rush: 5-3-2 and 5-4-1 do not come up about half as often");
   // the sheet opens only after the ending (longer when the total breaks through the target), so wait for it
   await page.waitForSelector(".sheet", { timeout: 15000 }).catch(() => {}); await wait(400); await shot("51-goalrush-end");
+  await card("goalrush", "DROP2TOP Goal Rush · ");
   check(await page.evaluate(() => window.D2T.state.g433.filled.length === 11 && window.D2T.game.g433.record().games === 1), "Goal Rush: the game did not fill 11 shirts and record a result");
   check(await page.evaluate((f) => window.D2T.game.g433.record().lastTarget === +f, form), "Goal Rush: the result was not recorded against this game's target");
   check(await page.evaluate(() => window.D2T.state.g433.filled.every((p) => window.D2T.state.g433.filled.filter((q) => q.name === p.name).length === 1)), "Goal Rush: the same player appeared twice");
@@ -379,9 +433,11 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => window.D2T.state.g433.filled.length === 0 && !!window.D2T.state.g433.formation && window.D2T.state.g433.revealed === false) && !!(await page.$(".g4-reveal")), "Goal Rush: Play again did not start a new game with a reveal");
   await page.click(".g4-reveal"); await wait(600);   // the reveal counts as seen once it finishes or is skipped
   check(await page.evaluate(() => window.D2T.state.g433.revealed === true) && !(await page.$(".g4-reveal")), "Goal Rush: skipping the reveal did not mark it seen");
-  // the home button (Craig, 12 Oct): nothing picked goes straight home; a game under way asks, and Quit throws it away
-  await page.click(".g4 .is-home"); await expectScreen("home"); await wait(600);
-  check(await page.evaluate(() => !!window.D2T.state.g433 && window.D2T.state.g433.filled.length === 0) && !(await page.$(".sheet")), "Goal Rush: home before the first pick asked or lost the game");
+  // the home button (Craig, 12 and 13 Oct): it asks even before the first pick, Home keeps the game, Quit throws it away
+  await page.click(".g4 .is-home"); await wait(500);
+  check(!!(await page.$('.sheet [data-k="restart"]')), "Goal Rush: home before the first pick should offer Restart");
+  await page.click('.sheet [data-k="home"]'); await expectScreen("home"); await wait(600);
+  check(await page.evaluate(() => !!window.D2T.state.g433 && window.D2T.state.g433.filled.length === 0), "Goal Rush: Home before the first pick lost the game");
   await page.click('[data-act="g433"]'); await expectScreen("goals433"); await wait(900);
   await page.click(".g4 .sp-main"); await wait(4800); await page.click('.g4 [data-c="0"]'); await wait(250); await page.click(".g4 .slotp.fit >> nth=-1"); await wait(1800);
   await page.click(".g4 .is-home"); await wait(500);
@@ -439,6 +495,7 @@ fs.mkdirSync(OUT, { recursive: true });
       await page.click('[data-act="unbeaten"]'); await expectScreen("unbeaten"); await wait(700);
     } else {
       check(!!(await page.$(".sheet")) && /Beaten first time/i.test(await page.textContent(".sheet")), "Unbeaten Run (" + st + "): no end sheet after a wrong answer");
+      await card("unbeaten", "DROP2TOP Unbeaten Run · ");
       check(/New run/.test(await page.textContent('.sheet [data-k="again"]')), "Unbeaten Run (" + st + "): the end sheet's second button does not say New run");
       check(await page.evaluate((n) => ((window.D2T.state.ub || {}).runs || 0) === n + 1, runsBefore), "Unbeaten Run (" + st + "): a finished run was not recorded");
       await shot("54-unbeaten-end");
