@@ -164,3 +164,6 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .d2t-tip.gone { opacity: 0; }
 @keyframes d2tTipIn { from { opacity: 0; transform: translateY(6px); } to { opacity: .95; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .d2t-tip { animation: none; } }
+/* On a phone the frame always fills the screen, even when Safari's page zoom is below 100% and gives it more than 430px
+   (Craig, 13 Oct: side strips appeared); the 430px column stays for desktops and tablets. */
+@media (pointer: coarse) and (max-width: 600px) { #app { max-width: none; } }
