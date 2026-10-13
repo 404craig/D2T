@@ -26,9 +26,10 @@
         <div class="se-pad"></div>
       </div>`);
       const flash = D2T.h(`<div class="se-newseason" aria-hidden="true"><span>${sim ? 'Beat the<br>forecast' : 'Rewrite<br>history'}</span></div>`);   // two lines (Craig, 12 Oct), not "New season"
-      const bar = D2T.h(`<footer class="actionbar"><button class="btn se-btn se-btn-ghost se-wide" type="button">Skip</button>${SE.homeBtn()}</footer>`);
+      // home, a greyed back (nothing to go back to), Skip then Continue (Craig, 13 Oct)
+      const bar = D2T.h(SE.bar({ main: SE.mainBtn('Skip', 'se-btn-ghost') }));
       root.append(body, flash, bar);
-      const btn = bar.querySelector('button');
+      const btn = bar.querySelector('.bar-main');
       const tbl = body.querySelector('.se-table');
       const rowsEl = () => [...tbl.querySelectorAll('.se-tr:not(.se-th)')];
       let gen = 0, done = false, cam = null, alive = true;

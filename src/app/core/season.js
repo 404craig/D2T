@@ -73,27 +73,47 @@
   };
 
 
-  // ---------- the home button in a run (Craig, 13 Oct) ----------
-  // Every in-run screen keeps a home button at the bottom right (main buttons sit to its left). Mid-run it opens a menu:
-  // Keep playing, Restart the game (a new run of the same mode from the start), Home (the run is saved) or Quit (thrown
-  // away). A Daily offers Keep playing, Restart (a fresh go at today's Daily) and Home. Before a club is picked, or once the run is over,
-  // it simply goes home.
-  // a greyed back button where there is nowhere to go back to (Craig, 13 Oct): it keeps the main button centred
-  SE.backOff = () => `<button class="icon-btn se-off" type="button" disabled aria-hidden="true" tabindex="-1">${D2T.ICON.back}</button>`;
-  SE.homeBtn = () => `<button class="icon-btn se-home" type="button" aria-label="Home">${D2T.ICON.home}</button>`;
+  // ---------- the bottom bar in a game (Craig, 13 Oct; design bottom-bar.html) ----------
+  // One order on every in-game bar, left to right: the home button (round, the menu once a game is under way), a round
+  // middle button (a respin with its count where a respin applies, a back arrow where going back applies, otherwise the
+  // same button greyed out so the bar never jumps about), then the main button filling the rest in the mode's colour.
+  // Every bar carries `game-bar`, its buttons `bar-home`, `bar-mid` and `bar-main` (the ui test checks the order).
+  SE.homeBtn = () => `<button class="icon-btn se-home bar-home" type="button" aria-label="Home">${D2T.ICON.home}</button>`;
+  SE.backBtn = (label = 'Back') => `<button class="icon-btn se-back bar-mid" type="button" aria-label="${D2T.esc(label)}">${D2T.ICON.back}</button>`;
+  // greyed: disabled, hidden from assistive tech, keeps the main button in place
+  SE.backOff = () => `<button class="icon-btn se-off bar-mid" type="button" disabled aria-hidden="true" tabindex="-1">${D2T.ICON.back}</button>`;
+  SE.respinOff = () => `<button class="icon-btn se-off bar-mid" type="button" disabled aria-hidden="true" tabindex="-1">${D2T.ICON.respin}</button>`;
+  // the main button: `cls` adds classes (se-btn-ghost, se-play), `attrs` other attributes (data-act), `label` is its text
+  SE.mainBtn = (label, cls = '', attrs = '') => `<button class="btn se-btn se-wide bar-main${cls ? ' ' + cls : ''}" type="button"${attrs ? ' ' + attrs : ''}>${label}</button>`;
+  SE.bar = ({ mid, main, cls = '' } = {}) => `<footer class="actionbar game-bar${cls ? ' ' + cls : ''}">${SE.homeBtn()}${mid || SE.backOff()}${main || ''}</footer>`;
+
+  // ---------- the home button's menu (Craig, 13 Oct) ----------
+  // One sheet for every game: Keep playing, Restart (a new game from the start), Home (the game is saved) and Quit
+  // (thrown away), nothing recorded. Each game passes what applies: `restart`, `quit` and `home` are functions (home may be
+  // `true` for a plain trip home); a key left out is not offered. Before the first interaction, or once a game is over,
+  // the games skip the menu and go straight home.
+  D2T.leaveMenu = (o) => {
+    const rows = [['keep', o.keepLabel || 'Keep playing', ''], o.restart && ['restart', o.restartLabel || 'Restart the game', ''], o.home && ['home', o.homeLabel || 'Home, save the game', ''],
+      o.quit && ['quit', o.quitLabel || 'Quit the game', ' fr-danger']].filter(Boolean);
+    const sh = D2T.sheet({ title: o.title || 'Leave the game?', body: `<p class="fr-lead">${o.lead || ''}</p>
+      <div class="fr-stack">${rows.map(([k, t, c]) => `<button class="btn btn-ghost fr-btn-wide${c}" data-k="${k}">${t}</button>`).join('')}</div>` });
+    rows.forEach(([k]) => { sh.body.querySelector(`[data-k="${k}"]`).onclick = () => { sh.close(); const fn = o[k]; if (typeof fn === 'function') fn(); else if (k === 'home') D2T.go('home'); }; });
+    return sh;
+  };
+  // a run (Classic, Daily, Dare2Dream, Club X): before a club is picked, or once the run is over, straight home; mid-run
+  // the menu. A Daily offers Keep playing, Restart (a fresh go at today's Daily) and Home, no Quit (Craig, 13 Oct).
   D2T.runMenu = () => {
     const r = D2T.state.run, G = D2T.game, e = r && r.eng;
     if (!e || !e.seasonKey || e.phase === 'summary' || r.recorded) { D2T.go('home'); return; }
     const daily = !!r.daily, mode = G.mode(), name = G.modeName(mode);
-    const lead = daily ? 'Home keeps this go for later, any time before midnight. Restart throws it away and starts a fresh go. Your best go today is the one that counts.'
-      : `Home keeps this run for later. Restart throws it away and starts a new ${name} run. Quit throws it away. Nothing is recorded.`;
-    const sh = D2T.sheet({ title: 'Leave the game?', body: `<p class="fr-lead">${lead}</p>
-      <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="keep">Keep playing</button><button class="btn btn-ghost fr-btn-wide" data-k="restart">Restart the game</button><button class="btn btn-ghost fr-btn-wide" data-k="home">Home, save the ${daily ? 'Daily' : 'run'}</button>${daily ? '' : '<button class="btn btn-ghost fr-danger fr-btn-wide" data-k="quit">Quit the run</button>'}</div>` });
-    const on = (k, fn) => { const b = sh.body.querySelector(`[data-k="${k}"]`); if (b) b.onclick = () => { sh.close(); fn(); }; };
-    on('keep', () => {});
-    on('home', () => D2T.go('home'));
-    on('restart', () => { if (daily) { G.restartDaily(); D2T.go(G.stepFor() || 'table'); return; } G.newRun(mode); D2T.go('spin'); });
-    on('quit', () => { D2T.state.run = null; D2T.save(); D2T.go('home'); });
+    D2T.leaveMenu({
+      lead: daily ? 'Home keeps this go for later, any time before midnight. Restart throws it away and starts a fresh go. Your best go today is the one that counts.'
+        : `Home keeps this run for later. Restart throws it away and starts a new ${name} run. Quit throws it away. Nothing is recorded.`,
+      homeLabel: `Home, save the ${daily ? 'Daily' : 'run'}`, quitLabel: 'Quit the run',
+      home: true,
+      restart: () => { if (daily) { G.restartDaily(); D2T.go(G.stepFor() || 'table'); return; } G.newRun(mode); D2T.go('spin'); },
+      quit: daily ? null : () => { D2T.state.run = null; D2T.save(); D2T.go('home'); }
+    });
   };
   document.addEventListener('click', (ev) => { if (ev.target.closest && ev.target.closest('.se-home')) D2T.runMenu(); });
 })();
