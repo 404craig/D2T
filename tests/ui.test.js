@@ -245,6 +245,10 @@ fs.mkdirSync(OUT, { recursive: true });
 
   // ---------- Dare2Dream: any club, beat their real finish ----------
   const classicBefore = await page.evaluate(() => JSON.stringify(window.D2T.game.record()));
+  // Dare2Dream is locked for repair (Craig, 13 Oct): its card on home doesn't open; unlocked here to keep testing the mode
+  await page.evaluate(() => window.D2T.go("home")); await wait(900);
+  check(!!(await page.$('.fr-gm.fr-locked[aria-disabled="true"]')) && !(await page.$('[data-act="pick"][data-mode="dare2dream"]')) && /LOCKED FOR REPAIR/.test(await page.textContent(".fr-gm.fr-locked")), "the Dare2Dream card should be locked for repair");
+  await page.evaluate(() => { window.D2T.game.dreamLocked = false; window.D2T.go("league"); }); await wait(400);
   await page.evaluate(() => window.D2T.go("home")); await wait(900);
   await page.click('[data-act="pick"][data-mode="dare2dream"]');
   await page.waitForSelector(".sheet [data-k='yes']", { timeout: 2000 }).then(() => page.click(".sheet [data-k='yes']")).catch(() => {});
@@ -289,6 +293,8 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => window.D2T.game.dreamRecord().runs === 1), "Dare2Dream run not recorded");
   check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, classicBefore), "Dare2Dream run changed Classic's record");
 
+  // locked again: a saved Dare2Dream run is kept, and its screens send you home
+  check(await page.evaluate(() => { const G = window.D2T.game; G.dreamLocked = true; const r = { eng: { mode: "dare2dream", seasonKey: "2004/05", phase: "prematch" } }; return G.locked(r) && G.stepFor() !== undefined; }), "the Dare2Dream lock should cover a saved run");
   // ---------- Club X: name your club, one season spins in, its crest bursts into the badge, draft 11 in a random order ----------
   await page.evaluate(() => window.D2T.go("home")); await wait(900);
   await page.click('[data-act="pick"][data-mode="clubx"]');
