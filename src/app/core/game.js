@@ -570,9 +570,9 @@
     D2T.save();
     return F;
   };
-  // Classic's record. Cumulative counts (Craig, 11 Oct): a title also counts as top 3, top half and beating the drop.
-  // Dare2Dream runs are kept apart: rescuing a relegated club is what these counts are about.
-  const classicRuns = () => D2T.state.record.runs.filter((r) => (!r.mode || r.mode === 'classic') && !r.daily);
+  // The home record. Cumulative counts (Craig, 11 Oct): a title also counts as top 3, top half and beating the drop.
+  // Every full season counts (Craig, 13 Oct): Classic, every Daily go and every Club X season; Dare2Dream stays apart.
+  const classicRuns = () => D2T.state.record.runs.filter((r) => r.mode !== 'dare2dream');
   GAME.record = () => {
     const runs = classicRuns();
     return { runs: runs.length, drop: runs.filter((r) => r.drop).length, half: runs.filter((r) => r.half).length,

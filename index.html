@@ -3767,9 +3767,9 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
     D2T.save();
     return F;
   };
-  // Classic's record. Cumulative counts (Craig, 11 Oct): a title also counts as top 3, top half and beating the drop.
-  // Dare2Dream runs are kept apart: rescuing a relegated club is what these counts are about.
-  const classicRuns = () => D2T.state.record.runs.filter((r) => (!r.mode || r.mode === 'classic') && !r.daily);
+  // The home record. Cumulative counts (Craig, 11 Oct): a title also counts as top 3, top half and beating the drop.
+  // Every full season counts (Craig, 13 Oct): Classic, every Daily go and every Club X season; Dare2Dream stays apart.
+  const classicRuns = () => D2T.state.record.runs.filter((r) => r.mode !== 'dare2dream');
   GAME.record = () => {
     const runs = classicRuns();
     return { runs: runs.length, drop: runs.filter((r) => r.drop).length, half: runs.filter((r) => r.half).length,
@@ -4692,7 +4692,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
       const run = D2T.state.run && D2T.state.run.eng && D2T.state.run.eng.seasonKey && D2T.state.run.eng.phase !== 'summary' ? D2T.run() : null;
       const body = D2T.h(`<div class="screen-body fr-page">
         <h1 class="fr-title">My stats</h1>
-        <p class="fr-lead" style="margin-bottom:14px">Your Classic record across every run, then Dare2Dream and Club X.</p>
+        <p class="fr-lead" style="margin-bottom:14px">Your record across every full season of Classic, the Daily and Club X, then Dare2Dream and Club X on their own.</p>
         ${D2T.frRecord(rec, 'dark')}
         <h2 class="fr-h2">Runs</h2>
         <div class="fr-panel">
