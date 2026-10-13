@@ -164,6 +164,9 @@
 /* the swing-in: both cards fly as copies over the reel; the clash sits on top */
 .x-fly { position: absolute; left: 0; top: 0; width: 114px; height: 190px; z-index: 5; pointer-events: none; will-change: transform; filter: drop-shadow(0 10px 18px rgba(0,0,0,.6)); }
 .x-fly.x-new { z-index: 6; }
+/* once your card is in (`is-xset`): the window no longer clips its glow, and it keeps the shadow it flew in with */
+.sp-slot.is-xset .sp-win { overflow: visible; }
+.sp-slot.is-xset.is-set .sp-node.is-hit .d2c { filter: var(--glow, none) drop-shadow(0 10px 18px rgba(0,0,0,.6)); }
 .x-boom { position: absolute; inset: 0; z-index: 7; pointer-events: none; overflow: visible; }
 .x-boom i { position: absolute; border-radius: 2px; box-shadow: 0 0 6px rgba(255,255,255,.35); }
 .x-boom-ring { position: absolute; width: 40px; height: 40px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 18px rgba(18,240,108,.9), inset 0 0 12px rgba(255,255,255,.6); }

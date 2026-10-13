@@ -77,7 +77,7 @@
         body.querySelector('.se-subshead').style.display = showSubs || (pre && !dream) ? '' : 'none';
         subsEl.style.display = showSubs ? '' : 'none';
         let gone = body.querySelector('.se-gone');
-        const goneText = drafting ? 'Pick your shape, then start the draft: 11 spins, one per shirt (keeper first, then defence, midfield and attack). Three players each time, no respins.'
+        const goneText = drafting ? (GAME.mode() === 'clubx' ? 'Pick your shape, then start the draft: 11 spins, three players each time for any of your open shirts, in any order. Each goes in a shirt he plays. No respins.' : 'Pick your shape, then start the draft: 11 spins, one per shirt (keeper first, then defence, midfield and attack). Three players each time, no respins.')
           : dream && pre ? 'Your drafted XI. Swap shirts or change the shape, then start the season. Your 5 respins are for the transfer rolls during the season.'
           : 'The rest of the squad has gone. New faces only come through the transfer rolls, and each one takes a shirt from your XI.';
         if (!showSubs && (!pre || dream) && !gone) { gone = D2T.h(`<p class="se-note se-gone">${goneText}</p>`); subsEl.after(gone); }

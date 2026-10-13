@@ -90,7 +90,7 @@
       this.cap.textContent = cap || '';
       setTimeout(() => { this.slot.classList.add('is-set'); this.slot.classList.remove('is-hit'); }, 320);
     }
-    reset() { this.slot.classList.remove('is-set', 'is-hit', 'is-sel', 'is-other'); this.cap.textContent = ''; }
+    reset() { this.slot.classList.remove('is-set', 'is-hit', 'is-sel', 'is-other', 'is-xset'); this.cap.textContent = ''; }
     get cardEl() { return this.slot.querySelector('.sp-node.is-hit .d2c') || this.slot.querySelector('.sp-node .d2c'); }
   }
 
@@ -280,7 +280,7 @@
     if (cfg.settled && cfg.settled.length) {
       stopTick();
       results = cfg.settled;
-      reels.forEach((r, i) => { r.load([(cfg.renderSettled || cfg.render)(results[i], 114)]); r.draw(0, 0); r.settle(0, cfg.caption && cfg.caption(results[i])); r.slot.classList.add('is-set'); });
+      reels.forEach((r, i) => { r.load([(cfg.renderSettled || cfg.render)(results[i], 114)]); r.draw(0, 0); r.settle(0, cfg.caption && cfg.caption(results[i])); r.slot.classList.add('is-set'); if (cfg.accent) r.slot.style.setProperty('--sp-accent', cfg.accent(results[i]).accent); });
       state = 'settled'; main.disabled = true; setMain(cfg.pickLabel || 'Pick one', null); setRespins(); hint(cfg.hintSettled || 'Tap a card to pick it');
       afterSettle();
       if (cfg.afterLand) select(0);
@@ -356,17 +356,23 @@
         later(() => { if (input.isConnected) input.focus(); }, 380);
       }
       if (x && !st.xName) later(askName, 450);
+      if (x && st.xShown && api.reels[0]) api.reels[0].slot.classList.add('is-xset');   // back or a refresh: the end state as it was
 
       // ---------- Club X: your card swings in and knocks the real club off (Craig, 12 Oct) ----------
       // The real club lands and holds for 2 seconds; then your Club X card swings in from the right, hits the old card
       // and knocks it spinning off the left, with a burst of both cards' colours where they meet, and comes to rest in
       // the middle. Both cards fly as copies over the reel (its window would clip them); the reel takes the new card after.
+      // The ending (Craig, 13 Oct): the reel takes the new card only once it is still and the slot has grown to its
+      // picked size, with no settle flash, the shine carried on from the flying copy, the same shadow as in flight and
+      // the reel window opened out (`is-xset`) so nothing cuts the glow off; the glow behind turns green under the clash.
       function reveal(reel, c) {
         return new Promise((resolve) => {
-          const swap = () => {
+          const swap = (shineAt) => {
             const card = reel.cardEl, node = card && card.closest('.sp-node');
             if (!node) return null;
             const html = xCard(c, 114); reel.seq[+node.dataset.vi] = html; node.innerHTML = html;
+            const shine = node.querySelector('.d2t-shine'); if (shine && shineAt) shine.style.animationDelay = `-${Math.round(shineAt)}ms`;
+            reel.slot.classList.add('is-xset'); reel.slot.style.setProperty('--sp-accent', '#12F06C');
             st.xShown = true; D2T.save();
             return node;
           };
@@ -390,15 +396,20 @@
             later(() => {
               clash(slot, W * 0.96, H * 0.42, [c.accent, '#12F06C', c.accent, '#FFFFFF', '#12F06C', c.ink && c.ink !== c.accent ? c.ink : c.accent]);
               SND.play('reveal');
+              slot.style.setProperty('--sp-accent', '#12F06C');   // the glow behind goes green under the burst
               const stage = api && api.el.querySelector('.sp-stage');
               if (stage) stage.animate([{ transform: 'translate(0,0)' }, { transform: 'translate(-7px,3px)' }, { transform: 'translate(6px,-2px)' }, { transform: 'translate(-3px,1px)' }, { transform: 'translate(0,0)' }], { duration: 300, easing: 'ease-out' });
             }, HIT);
+            // the slot grows to its picked size as the card settles, so nothing moves again once it has come to rest
+            later(() => slot.classList.add('is-sel'), T - 150);
+            later(() => SND.play('lockin'), T + 20);
+            later(() => oldC.remove(), T + 320);
+            // once everything is still the reel takes the card: the same card, shadow and shine, so nothing shows
             later(() => {
-              node.style.visibility = ''; swap(); newC.remove();
-              reel.hit('#12F06C'); SND.play('lockin');
-              later(() => oldC.remove(), 300);
-              later(resolve, 450);
-            }, T + 20);
+              const shine = newC.querySelector('.d2t-shine'), anim = shine && shine.getAnimations()[0];
+              node.style.visibility = ''; swap(anim ? anim.currentTime : 0); newC.remove();
+              later(resolve, 150);
+            }, T + 300);
           }, 2000);
         });
       }
