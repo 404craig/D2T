@@ -160,7 +160,7 @@
           <div class="se-table" role="table" aria-label="Table after gameweek ${gw}">${SE.tableHead()}
             ${prev.map((r) => SE.rowHTML(r, me, r.name === me ? 'se-landed' : '')).join('')}
           </div>
-          <p class="se-note">Other clubs keep their real ${data.season} results on their real dates${eng.signed.length ? ', but clubs you have signed players from are weaker and can drop points' : ''}. Yours is the one you just played.</p>
+          <p class="se-note">${D2T.game.isSim() ? `Other clubs play out the ${data.season} forecast` : `Other clubs keep their real ${data.season} results on their real dates`}${eng.signed.length ? ', but clubs you have signed players from are weaker and can drop points' : ''}. Yours is the one you just played.</p>
           <div class="se-pad"></div></div>`;
         const tbl = body.querySelector('.se-table');
         const rows = [...tbl.querySelectorAll('.se-tr:not(.se-th)')];

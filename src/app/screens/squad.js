@@ -38,7 +38,8 @@
       const fx = SE.fixture(data, pre || drafting ? 1 : eng.gw);
       const oppC = fx ? SE.club(data, fx.opp) : null;
       const nextHTML = fx ? `<div class="se-next"><img src="${oppC.crest}" alt=""><div class="se-next-t"><small>Next · ${fx.ha === 'H' ? 'Home' : 'Away'}</small><b class="d2c-fit">${D2T.esc(oppC.name)}</b></div></div>` : '';
-      const label = drafting ? 'Start the draft' : pre ? (dream ? 'Start the season' : 'Pre-season') : 'Play';
+      const carried = GAME.mode() === 'clubx' && GAME.career().n > 1;   // a Club X career's later seasons have pre-season rolls
+      const label = drafting ? 'Start the draft' : pre ? (dream && !carried ? 'Start the season' : 'Pre-season') : 'Play';
       // before the draft (Craig, 13 Oct): no next fixture; a greyed respin on the left (the draft has none) keeps Start the draft centred
       const REFRESH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
       const left = drafting ? `<button class="icon-btn se-off" type="button" disabled aria-hidden="true" tabindex="-1">${REFRESH}</button>` : nextHTML;
@@ -78,6 +79,7 @@
         subsEl.style.display = showSubs ? '' : 'none';
         let gone = body.querySelector('.se-gone');
         const goneText = drafting ? (GAME.mode() === 'clubx' ? 'Pick your shape, then start the draft: 11 spins, three players each time for any of your open shirts, in any order. Each goes in a shirt he plays. No respins.' : 'Pick your shape, then start the draft: 11 spins, one per shirt (keeper first, then defence, midfield and attack). Three players each time, no respins.')
+          : carried && pre ? `${GAME.isSim() ? "Last season's XI comes with you, on the same cards." : "Last season's XI, each on his card for this season (a man with no Premier League season now keeps his old one)."} Swap shirts or change the shape, then pre-season: 3 rolls before the first game, and 5 respins for the season.`
           : dream && pre ? 'Your drafted XI. Swap shirts or change the shape, then start the season. Your 5 respins are for the transfer rolls during the season.'
           : 'The rest of the squad has gone. New faces only come through the transfer rolls, and each one takes a shirt from your XI.';
         if (!showSubs && (!pre || dream) && !gone) { gone = D2T.h(`<p class="se-note se-gone">${goneText}</p>`); subsEl.after(gone); }

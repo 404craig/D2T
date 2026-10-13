@@ -49,6 +49,7 @@
 
         <h2 class="fr-h2">Club X</h2>
         <p class="fr-lead">Name your club, then spin a season. Your club takes the place of that season's bottom side, with no players. Pick a formation and draft your XI: 11 spins, three players each time for any of your open shirts, and each goes in a shirt he plays. Then play the season with transfer rolls and 5 respins. Only the title counts.</p>
+        <p class="fr-lead">Career mode: unless you go down, carry on into the next season with the same club and XI. Up to 2025/26 it is the next real season, your club takes the bottom side's place and each player moves to his real card for that season, with 3 pre-season rolls. After 2025/26 the seasons are a forecast: the bottom three go down, three clubs come up from the database, the other results are played out by the match model, and the rolls can bring players from any season.</p>
 
         <h2 class="fr-h2">Card colours</h2>
         <p class="fr-lead" style="margin-bottom:6px">The big number is the rating. The colour tells you the level.</p>

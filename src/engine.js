@@ -327,6 +327,33 @@ function draftPick(st, S, cardId, at) {
   newDraftRoll(st, S);
   return true;
 }
+// A Club X career's next season (Craig, 13 Oct): your XI comes with you. Anyone who belongs to another club this
+// season leaves it before the season, like a draft pick (a raid dated before the season).
+function carryIn(st, S, ids) {
+  st.xi = ids.slice();
+  for (let slot = 0; slot < ids.length; slot++) {
+    const id = ids[slot], p = playerOf(S, id, S.legends);
+    st.signed.push({ id, gw: 0, slot, out: null, from: p ? p.c : null, date: "0000-00-00", draft: true });
+    if (p && p.c != null && p.c !== st.club && !String(id).startsWith("L:")) {
+      st.gone.push(id);
+      st.raids.push({ club: p.c, date: "0000-00-00", gw: 0 });
+    }
+  }
+  st.phase = "setup";
+  st.log.push(["carry"]);
+}
+// Seasons after 2025/26 have no real results: every other match is played out by the match model, from the clubs'
+// squads (seeded, so the same career always gets the same season). Your club plays at the strength of your XI.
+function simResults(S, seed, meClub, meStrength) {
+  const cache = new Map(), none = new Set();
+  const str = (c) => { if (c === meClub && meStrength) return meStrength; if (!cache.has(c)) cache.set(c, clubStrength(S, c, none)); return cache.get(c); };
+  S.matches = S.matches.map((m, i) => {
+    const r = stream(seed, "simseason", S.season, i), h = str(m[1]), a = str(m[2]);
+    return [m[0], m[1], m[2], poisson(r, expectedGoals(h, a, true)), poisson(r, expectedGoals(a, h, false))];
+  });
+  S._ix = null;
+  return S;
+}
 // Fill a formation from the club's real squad: the given XI first where it fits,
 // then the best-fitting regular for each empty slot.
 function autoXI(S, club, formation, preferred) {
@@ -380,8 +407,9 @@ function startSeason(st, S) {
   if (st.phase !== "setup") return false;
   st.fixtures = fixturesOf(S, st.club);
   st.rolls = schedule(st.fixtures);
-  // Dare2Dream's draft is its pre-season: no pre-season rolls.
-  if (DRAFT_MODES.includes(st.mode)) st.rolls = st.rolls.filter(w => w.kind !== "pre");
+  // Dare2Dream's draft is its pre-season: no pre-season rolls. A Club X career's later seasons (st.career > 1) have
+  // no draft, so they get Classic's pre-season rolls back.
+  if (DRAFT_MODES.includes(st.mode) && !(st.career > 1)) st.rolls = st.rolls.filter(w => w.kind !== "pre");
   st.rollIx = 0; st.rollStep = 0; st.gw = 1;
   st.seen = [...new Set((st.seen || []).concat(st.xi))];
   // Your own club's real squad never turns up as a card.
@@ -398,7 +426,11 @@ function currentWindow(st) { return st.rolls[st.rollIx] || null; }
 function inWindow(st) { const w = currentWindow(st); return !!(w && w.gw === st.gw && st.rollStep < w.n); }
 function cardPool(S, st) {
   const seen = new Set(st.seen);
-  return S.players.filter(p => (p.a || 0) >= RULES.minApps && !seen.has(p.id));
+  // In a Club X career a season can hold more than one card of the same man (cards from any season after 2025/26):
+  // never offer another card of someone already in your XI.
+  let mine = null;
+  if (st.career > 1) { mine = new Set(); for (const id of st.xi) { const p = playerOf(S, id, S.legends); if (p && p.k != null) mine.add(p.k); } }
+  return S.players.filter(p => (p.a || 0) >= RULES.minApps && !seen.has(p.id) && !(mine && p.k != null && mine.has(p.k)));
 }
 function drawCard(r, S, st, legends, taken, broad, fit) {
   const lv = (() => { let x = r(); for (let i = 0; i < 5; i++) { x -= RULES.levelOdds[i]; if (x <= 0) return i; } return 0; })();
@@ -650,7 +682,7 @@ const API = {
   RULES, LEVELS, POS, FIT, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
   fitOf, effRating, indexSeason, playerOf, clubAt, xiStrength, userStrength, clubXI, clubStrength,
   schedule, fixturesOf, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
-  draftOrder, draftSlot, draftFormation, draftPick, draftFits, listsPos, DRAFT_MODES,
+  draftOrder, draftSlot, draftFormation, draftPick, draftFits, listsPos, DRAFT_MODES, carryIn, simResults,
   startSeason, inWindow, currentWindow, newRoll, respinCards, signPreview, sign, pass,
   otherResults, strengthLoss, expectedGoals, simMatch, playMatch, table, historyTable, historyPositions, positionsSoFar, seasonSummary
 };
