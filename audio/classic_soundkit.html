@@ -389,16 +389,16 @@ const CUES = [
     p(t, v) { const o = soft(O(1, 0.05), 1600); osc(o, "sine", v ? 520 : 380, t, 0.08, 0.2, { to: v ? 380 : 520 }); } },
   { id: "respin", st: "club", n: "Respin used", w: "One of the five respins goes.", pick: "C. Rewind ticks", s: "syn", ch: "Was Punch: now muffled taps falling away and soft air. No ticks.",
     p(t) { const o = O(1, 0.06); for (let i = 0; i < 9; i++) tap(o, t + i * 0.034 * (1 - i * 0.04), 0.07, 300 - i * 12); swish(soft(o, 1600), t, 0.35, 1500, 350, 0.06); } },
-  { id: "clubConfirm", st: "club", n: "Play: club locked in", w: "You choose your club and press Play.", pick: "E. Stamp and cheer", s: "mix", ch: "Your note: a soft lock and the cheer. The stamp is now a soft latch, under the softened cheer.",
-    p(t) { const o = O(1, 0.12); tap(o, t, 0.12, 220); felt(o, t + 0.01, 150, 0.4, 0.12); S_(o, "cheer_short", t + 0.12, { gain: 0.8 }); } },
+  { id: "clubConfirm", st: "club", n: "Play: club locked in", w: "You choose your club and press Play.", pick: "E. Stamp and cheer", s: "mix", ch: "Your notes: a soft lock and the cheer, now at a lower volume (about half).",
+    p(t) { const o = O(1, 0.08); tap(o, t, 0.07, 220); felt(o, t + 0.01, 150, 0.25, 0.1); S_(o, "cheer_short", t + 0.12, { gain: 0.45 }); } },
 
   /* table reveal */
   { id: "tableScan", st: "table", n: "Scan down the table", w: "One sound per row as the highlight runs down to your club.", row: true, pick: "C. Tight ticks", s: "syn", ch: "Was Punch: now a muffled tap per row, a little lower as you fall.",
     p(t, i) { tap(O(1, 0.04), t, 0.09, 280 - i * 5); } },
   { id: "tableLand", st: "table", n: "Lands on your club", w: "It stops on your club: they went down.", pick: "D. Doom boom", s: "rec", ch: "Top end cut, about 9 dB quieter.",
     p(t) { S_(O(1, 0.2), "doom_boom", t, { gain: 1 }); } },
-  { id: "tableReset", st: "table", n: "Every number rolls to zero", w: "All points roll down together in 1.3 seconds.", pick: "A. Soft unwind", s: "syn", ch: "Your note: the chime at the end is gone. Just the soft sweep.",
-    p(t) { swish(soft(O(1, 0.2), 2000), t, 1.3, 2000, 300, 0.15, { peakAt: 0.3 }); } },
+  { id: "tableReset", st: "table", n: "Every number rolls to zero", w: "All points roll down together in 1.3 seconds.", pick: "A. Soft unwind", s: "syn", ch: "Your comment: muffled taps like the table scan, quick at first and settling as the table rejigs, over a quiet muffled swoosh. No chime.",
+    p(t) { const o = O(1, 0.1); for (let i = 0; i < 18; i++) { const x = 1 - Math.pow(1 - i / 18, 1 / 2.4); tap(o, t + x * 1.25, 0.075 * (1 - i / 30), 300 - i * 6); } swish(soft(o, 1400), t, 1.3, 1200, 300, 0.07, { peakAt: 0.3 }); } },
 
   /* squad */
   { id: "dealPitch", st: "squad", n: "Cards deal onto the pitch", w: "First visit: 11 cards fly onto their shirts.", pick: "C. Rapid deal", s: "syn", ch: "Was Punch: muffled flicks at a third of the level, a soft landing.",
@@ -457,8 +457,8 @@ const CUES = [
     p(t) { const o = soft(O(1, 0.12), 1200); let x = 0; for (let i = 0; i < 10; i++) { thump(o, t + x, 130, 60, 0.07, 0.18); x += 0.05 + 0.45 * Math.pow(i / 9, 2.6); } thump(o, t + x, 140, 40, 0.35, 0.45); } },
   { id: "riseCount", st: "end", n: "The Rise counts up", w: "Places climbed against history.", pick: "B. Glass climb", s: "syn", ch: "Was Glass: now low, muffled notes climbing and a soft thud at the top. No chime.",
     p(t) { const o = soft(O(1, 0.12), 1200); const sc = [0, 2, 4, 7, 9, 12, 14, 16, 19]; sc.forEach((n, i) => osc(o, "triangle", N(n - 12), t + i * 0.07, 0.12, 0.05, { a: 0.01 })); felt(O(1, 0.1), t + sc.length * 0.07, 170, 0.4, 0.15); } },
-  { id: "achievement", st: "end", n: "Achievements stamp in", w: "Beat the drop, top half, top 3, the title, building.", vars: ["Beat the drop", "Top half", "Top 3", "Title"], pick: "A. Plucked tiers", s: "syn", ch: "Plucks moved lower and muffled so nothing rings.",
-    p(t, v) { const o = O(1, 0.2); felt(o, t, 160, 0.4, 0.12); [D.D4, D.Fs4, D.A4, D.D5].slice(0, v + 1).forEach((n, i) => pluck(soft(o, 1600), n, t + 0.02 + i * 0.05, 0.3)); } },
+  { id: "achievement", st: "end", n: "Achievements stamp in", w: "Beat the drop, top half, top 3, the title, building.", vars: ["Beat the drop", "Top half", "Top 3", "Title"], pick: "A. Plucked tiers", s: "syn", ch: "Your comment: dulled right down. No strings now: a quiet felt thud and low muffled tones, one more for each tier.",
+    p(t, v) { const o = O(1, 0.1); felt(o, t, 150, 0.22, 0.1); [D.D3, N(-8), D.A3, D.D4].slice(0, v + 1).forEach((n, i) => osc(soft(o, 700), "triangle", n, t + 0.03 + i * 0.06, 0.5, 0.025, { a: 0.03 })); } },
   { id: "outcome", st: "end", n: "The season's verdict", w: "The summary opens on how the season ended.", vars: ["Champions", "Top 3", "Top half", "Survived", "Relegated"], pick: "D. Stadium", s: "rec", ch: "Every clip softened: fanfare, flares and horn for champions down to a quieter silence and sting for relegation.",
     p(t, v) { const o = O(1, 0.2);
       if (v === 0) { S_(o, "trophy_fanfare", t, { gain: 1 }); S_(o, "goal_roar", t + 0.3, { gain: 0.7 }); S_(o, "flares", t + 0.4, { gain: 0.7 }); S_(o, "air_horn", t + 1.2, { gain: 0.8 }); S_(o, "celebration", t + 2.0, { gain: 0.9 }); }
