@@ -175,7 +175,7 @@ textarea.copy { width: 100%; min-height: 140px; background: var(--bg); color: va
   <header class="top">
     <span class="eyebrow">DROP2TOP &middot; Classic</span>
     <h1>Your <em>sound kit</em></h1>
-    <p>Your picks for every action in a Classic run. Anything that wasn't already soft has been redone softer and quieter, and your notes are applied. Press &#9654; to hear each one. Every sound has a <b>Make silent</b> button and its own comment box, and everything saves as you go. The demo strips play whole moments at the game's real timings.</p>
+    <p>Your picks for every action in a Classic run. Anything that wasn't already soft has been redone softer and quieter, with no glass, bell or metal sounds anywhere, and your notes are applied. Press &#9654; to hear each one. Every sound has a <b>Make silent</b> button and its own comment box, and everything saves as you go. The demo strips play whole moments at the game's real timings.</p>
     <div class="savebar" id="savebar"><i></i><span id="saveText">Saving on this device for now.</span></div>
     <div class="mixer">
       <div class="fader"><label for="m_vol">Volume <output id="o_vol"></output></label><input type="range" id="m_vol" min="0" max="1.5" step="0.01"></div>
@@ -346,6 +346,7 @@ const LVN = { bronze: "Bronze", silver: "Silver", gold: "Gold", baller: "Baller"
 const felt = (d, t, f = 220, pk = 0.4, dur = 0.09) => { const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 900; lp.connect(d); osc(lp, "sine", f * vr(0.03), t, dur, pk, { to: f * 0.7, a: 0.004 }); nz(lp, t, 0.02, { type: "lowpass", f: 700, peak: pk * 0.25 }); };
 const wood = (d, t, f = 1400, pk = 0.3) => { nz(d, t, 0.035, { f: f * vr(0.05), q: 5, peak: pk }); osc(d, "sine", f * 0.36 * vr(), t, 0.04, pk * 0.45); };
 const soft = (d, cut = 1600) => { const f = ctx.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = cut; f.connect(d); return f; };
+const tap = (d, t, pk = 0.1, f = 260) => { const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 1100; lp.connect(d); nz(lp, t, 0.018, { type: "lowpass", f: 900, peak: pk }); osc(lp, "sine", f * vr(0.04), t, 0.03, pk * 0.8); };
 const snap = (d, t, pk = 0.3) => { nz(d, t, 0.012, { type: "highpass", f: 3000, peak: pk }); nz(d, t, 0.03, { f: 1200, q: 1.2, peak: pk * 0.5 }); };
 // tease builders (also used live by the reels): end exactly at t + dur
 function synthSwell(d, t, dur) { swish(d, t, dur, 200, 3200, 0.16, { peakAt: 0.97 }); osc(soft(d, 2200), "triangle", D.D4, t, dur, 0.05, { to: D.D5, a: dur * 0.9 }); }
@@ -373,27 +374,27 @@ const CUES = [
     p(t, v) { S_(O(1, 0.08), "card_slide", t, { gain: 0.55, rate: v ? 0.9 : 1.1, dur: 0.35 }); } },
   { id: "denied", st: "shell", n: "Not allowed", w: "A tap that can't happen: no respins left, a locked mode, a wrong drop.", pick: "A. Knock knock", s: "syn", ch: "Your note: softer and quieter. Muffled knocks at about half the level.",
     p(t) { const o = soft(O(1, 0.05), 1100); [0, 0.11].forEach((x, i) => { nz(o, t + x, 0.05, { f: 640 - i * 100, q: 5, peak: 0.16 }); osc(o, "sine", 180 - i * 25, t + x, 0.07, 0.12); }); } },
-  { id: "tip", st: "shell", n: "First-time tip", w: "The handwritten note with a curved arrow appears.", quiet: true, pick: "A. Pop", s: "syn", ch: "Now muffled and muted like the other small sounds.",
-    p(t) { const o = soft(O(1, 0), 2200); osc(o, "sine", 600, t, 0.07, 0.22, { to: 1300, glide: 0.05 }); } },
+  { id: "tip", st: "shell", n: "First-time tip", w: "The handwritten note with a curved arrow appears.", quiet: true, pick: "A. Pop", s: "syn", ch: "A lower, rounder pop, muffled and muted like the other small sounds.",
+    p(t) { const o = soft(O(1, 0), 2200); osc(o, "sine", 420, t, 0.07, 0.2, { to: 760, glide: 0.05 }); } },
 
   /* club spin */
-  { id: "spinStart", st: "club", n: "Spin pressed", w: "The reels launch.", pick: "D. Lever", s: "rec", ch: "Top end cut, rounder start, quieter.",
-    p(t) { S_(O(1, 0.1), "reel_clunk", t, { gain: 0.9, rate: 0.8 }); } },
-  { id: "reelRun", st: "club", n: "Reels spinning", w: "While the cards blur past. Follows each reel's real speed: play it from the demo above.", run: true, pick: "B. Ticks", s: "syn", ch: "Muffled ticks at about half the level, so a long spin doesn't nag.",
+  { id: "spinStart", st: "club", n: "Spin pressed", w: "The reels launch.", pick: "D. Lever", s: "syn", ch: "No metal now: a soft low thud with a little air as the reels go.",
+    p(t) { const o = O(1, 0.08); felt(o, t, 150, 0.4, 0.12); swish(soft(o, 1500), t, 0.3, 300, 1200, 0.12); } },
+  { id: "reelRun", st: "club", n: "Reels spinning", w: "While the cards blur past. Follows each reel's real speed: play it from the demo above.", run: true, pick: "B. Ticks", s: "syn", ch: "No bright ticks: a muffled tap for each card, quiet so a long spin doesn't nag.",
     mode: { tick: "soft" } },
-  { id: "reelLand", st: "club", n: "Each reel lands", w: "Left, middle, right.", vars: ["Left", "Middle", "Right"], pick: "D. Latch", s: "rec", ch: "Softened latch, a little higher each reel.",
-    p(t, v) { S_(O(1, 0.1), "reel_clunk", t, { gain: 0.85, rate: [0.9, 1, 1.12][v] }); } },
+  { id: "reelLand", st: "club", n: "Each reel lands", w: "Left, middle, right.", vars: ["Left", "Middle", "Right"], pick: "D. Latch", s: "syn", ch: "No metal now: a soft felt thud, a little higher each reel.",
+    p(t, v) { const o = O(1, 0.08); felt(o, t, [145, 160, 178][v], 0.45, 0.1); tap(o, t, 0.08, [200, 220, 245][v]); } },
   { id: "tease", st: "club", n: "Last reel crawl", w: "The right reel slows longest.", run: true, pick: "Silent", s: "off", ch: "You chose no sound here.", mode: "none" },
   { id: "cardSelect", st: "club", n: "Pick a card", w: "Tapping a card: it grows 5% and the others shrink.", quiet: true, vars: ["Pick", "Unpick"], pick: "A. Soft lift", s: "syn", ch: "Already soft and muted.",
     p(t, v) { const o = soft(O(1, 0.05), 1600); osc(o, "sine", v ? 520 : 380, t, 0.08, 0.2, { to: v ? 380 : 520 }); } },
-  { id: "respin", st: "club", n: "Respin used", w: "One of the five respins goes.", pick: "C. Rewind ticks", s: "syn", ch: "Was Punch: now muffled ticks at a third of the level, softer air.",
-    p(t) { const o = soft(O(1, 0.08), 2200); for (let i = 0; i < 9; i++) click(o, t + i * 0.034 * (1 - i * 0.04), 3200 - i * 200, 0.07); swish(o, t, 0.35, 1800, 400, 0.06); } },
+  { id: "respin", st: "club", n: "Respin used", w: "One of the five respins goes.", pick: "C. Rewind ticks", s: "syn", ch: "Was Punch: now muffled taps falling away and soft air. No ticks.",
+    p(t) { const o = O(1, 0.06); for (let i = 0; i < 9; i++) tap(o, t + i * 0.034 * (1 - i * 0.04), 0.07, 300 - i * 12); swish(soft(o, 1600), t, 0.35, 1500, 350, 0.06); } },
   { id: "clubConfirm", st: "club", n: "Play: club locked in", w: "You choose your club and press Play.", pick: "E. Stamp and cheer", s: "mix", ch: "Your note: a soft lock and the cheer. The stamp is now a soft latch, under the softened cheer.",
-    p(t) { const o = O(1, 0.12); const lp = soft(o, 1500); click(lp, t, 1800, 0.12); felt(o, t + 0.01, 150, 0.4, 0.12); S_(o, "cheer_short", t + 0.12, { gain: 0.8 }); } },
+    p(t) { const o = O(1, 0.12); tap(o, t, 0.12, 220); felt(o, t + 0.01, 150, 0.4, 0.12); S_(o, "cheer_short", t + 0.12, { gain: 0.8 }); } },
 
   /* table reveal */
-  { id: "tableScan", st: "table", n: "Scan down the table", w: "One sound per row as the highlight runs down to your club.", row: true, pick: "C. Tight ticks", s: "syn", ch: "Was Punch: now a muffled tick with a faint low touch.",
-    p(t, i) { const o = soft(O(1, 0.04), 2200); click(o, t, 2800, 0.09); felt(O(1, 0), t, 150 - i * 2, 0.1, 0.04); } },
+  { id: "tableScan", st: "table", n: "Scan down the table", w: "One sound per row as the highlight runs down to your club.", row: true, pick: "C. Tight ticks", s: "syn", ch: "Was Punch: now a muffled tap per row, a little lower as you fall.",
+    p(t, i) { tap(O(1, 0.04), t, 0.09, 280 - i * 5); } },
   { id: "tableLand", st: "table", n: "Lands on your club", w: "It stops on your club: they went down.", pick: "D. Doom boom", s: "rec", ch: "Top end cut, about 9 dB quieter.",
     p(t) { S_(O(1, 0.2), "doom_boom", t, { gain: 1 }); } },
   { id: "tableReset", st: "table", n: "Every number rolls to zero", w: "All points roll down together in 1.3 seconds.", pick: "A. Soft unwind", s: "syn", ch: "Your note: the chime at the end is gone. Just the soft sweep.",
@@ -409,12 +410,12 @@ const CUES = [
     p(t) { const o = O(1, 0.1); felt(o, t, 190, 0.4, 0.08); swish(soft(o, 1800), t + 0.02, 0.18, 600, 1600, 0.1); } },
   { id: "dropCancel", st: "squad", n: "Card goes back", w: "Dropped nowhere: the card floats back.", quiet: true, pick: "A. Float back", s: "syn", ch: "Already soft and muted.",
     p(t) { swish(soft(O(1, 0), 1800), t, 0.2, 1800, 500, 0.15); } },
-  { id: "formation", st: "squad", n: "Formation changed", w: "A new shape: cards fly to their new places.", pick: "B. Crisp shuffle", s: "syn", ch: "Was Glass: now muffled swishes and a soft tick.",
-    p(t) { const o = soft(O(1, 0.08), 2200); for (let i = 0; i < 7; i++) swish(o, t + i * 0.05, 0.16, 700 * vr(0.1), 2000, 0.06, { panFrom: -0.5 + i * 0.16, panTo: -0.5 + i * 0.16 }); click(o, t + 0.45, 2200, 0.07); } },
+  { id: "formation", st: "squad", n: "Formation changed", w: "A new shape: cards fly to their new places.", pick: "B. Crisp shuffle", s: "syn", ch: "Was Glass: now muffled swishes and a soft tap.",
+    p(t) { const o = soft(O(1, 0.08), 2200); for (let i = 0; i < 7; i++) swish(o, t + i * 0.05, 0.16, 700 * vr(0.1), 2000, 0.06, { panFrom: -0.5 + i * 0.16, panTo: -0.5 + i * 0.16 }); tap(O(1, 0.04), t + 0.45, 0.08); } },
 
   /* match day */
-  { id: "fixtures", st: "match", n: "Gameweek fixtures", w: "This gameweek's fixtures appear.", pick: "A. Soft cascade", s: "syn", ch: "Already soft.",
-    p(t) { const o = soft(O(1, 0.05), 1800); for (let i = 0; i < 10; i++) click(o, t + i * 0.04, 2600 - i * 60, 0.1); } },
+  { id: "fixtures", st: "match", n: "Gameweek fixtures", w: "This gameweek's fixtures appear.", pick: "A. Soft cascade", s: "syn", ch: "Muffled taps now, no ticks.",
+    p(t) { const o = O(1, 0.04); for (let i = 0; i < 10; i++) tap(o, t + i * 0.04, 0.07, 300 - i * 8); } },
   { id: "kickoff", st: "match", n: "Kick off", w: "The whistle, and the crowd bed starts under the match.", pick: "A. Soft whistle", s: "syn", ch: "Whistles are naturally sharp: this one is rounder and about 6 dB quieter.",
     p(t) { pea(soft(O(0.55, 0.2), 2800), t, 1); bedOn(); } },
   { id: "goalFor", st: "match", n: "Goal for you", w: "Your side scores in the live feed.", pick: "D. Net and roar", s: "rec", ch: "Strike, net and roar all softened and brought down.",
@@ -424,24 +425,24 @@ const CUES = [
   { id: "chance", st: "match", n: "Big chance", w: "Not in the game yet: a shot that just misses.", pick: "Silent", s: "off", ch: "None of the five worked for you, and the game has no chances yet, so this stays silent." },
   { id: "whistles", st: "match", n: "Half time and full time", w: "Two blasts at 45, three at 90.", vars: ["Half time", "Full time"], pick: "E. Clean whistles", s: "rec", ch: "Top end cut and about 8 dB quieter.",
     p(t, v) { S_(O(1, 0.15), v ? "whistle_three" : "whistle_two", t, { gain: 1 }); if (v) setTimeout(bedOff, 2200); } },
-  { id: "skip", st: "match", n: "Skip to the end", w: "You skip the match: the clock races to 90.", pick: "B. Fast forward", s: "syn", ch: "Was Glass: muffled ticks and a soft swish.",
-    p(t) { const o = soft(O(1, 0.08), 2200); let x = 0; for (let i = 0; i < 14; i++) { click(o, t + x, 2400 + i * 60, 0.07); x += 0.06 * Math.pow(0.86, i); } swish(o, t + x - 0.1, 0.3, 600, 2200, 0.08); } },
+  { id: "skip", st: "match", n: "Skip to the end", w: "You skip the match: the clock races to 90.", pick: "B. Fast forward", s: "syn", ch: "Was Glass: muffled taps speeding up and a soft swish.",
+    p(t) { const o = O(1, 0.06); let x = 0; for (let i = 0; i < 14; i++) { tap(o, t + x, 0.06, 220 + i * 8); x += 0.06 * Math.pow(0.86, i); } swish(soft(o, 1800), t + x - 0.1, 0.3, 500, 1800, 0.08); } },
   { id: "result", st: "match", n: "Final score", w: "The result card: won, drew or lost.", vars: ["Win", "Draw", "Loss"], pick: "D. Crowd", s: "rec", ch: "Softened cheers, applause and moan.",
     p(t, v) { const o = O(1, 0.2); if (v === 0) { S_(o, "cheer_short", t, { gain: 0.9 }); S_(o, "applause", t + 0.6, { gain: 0.8 }); } else if (v === 1) S_(o, "applause", t, { gain: 0.8, dur: 2 }); else S_(o, "crowd_moan", t, { gain: 1 }); } },
-  { id: "tableMove", st: "match", n: "Table after the match", w: "Your row moves up, down or stays.", vars: ["Up", "Down", "Same"], pick: "C. Swish", s: "syn", ch: "Was Punch: now a muffled swish and a soft tick.",
-    p(t, v) { const o = soft(O(1, 0.08), 2200); if (v === 2) return click(o, t, 2200, 0.07); v === 0 ? swish(o, t, 0.25, 600, 2200, 0.1) : swish(o, t, 0.25, 2200, 500, 0.1); click(o, t + 0.25, 2200, 0.06); } },
+  { id: "tableMove", st: "match", n: "Table after the match", w: "Your row moves up, down or stays.", vars: ["Up", "Down", "Same"], pick: "C. Swish", s: "syn", ch: "Was Punch: now a muffled swish and a soft tap.",
+    p(t, v) { const o = O(1, 0.06); if (v === 2) return tap(o, t, 0.07); v === 0 ? swish(soft(o, 1800), t, 0.25, 500, 1800, 0.1) : swish(soft(o, 1800), t, 0.25, 1800, 400, 0.1); tap(o, t + 0.25, 0.06); } },
 
   /* transfer window */
-  { id: "windowOpen", st: "transfer", n: "Window opens", w: "The emblem turns once, charges, then bursts into particles.", pick: "B. Charge and burst", s: "syn", ch: "Was Glass: muffled rise, a soft thud on the burst and a quiet glassy chord. No hiss.",
-    p(t) { const o = O(1, 0.3); const lp = soft(o, 2400); swish(lp, t, 0.64, 250, 2200, 0.12, { panFrom: -0.3, panTo: 0.3 }); osc(lp, "triangle", 220, t, 0.64, 0.035, { to: 660 }); felt(o, t + 0.79, 140, 0.4, 0.2); chord(soft(o, 4000), [D.D6, D.Fs6, D.A6], t + 0.79, 1.0, 0.025, 3.5, 0.6, 0.03); } },
-  { id: "rarity", st: "transfer", n: "Card lands: its level", w: "Each reel's landing says the card's level. Roll chosen levels in the demo above.", vars: LVS.map((l) => LVN[l]), lv: true, pick: "New: soft ladder", s: "syn", ch: "None of the five worked, so this is new: soft and quiet, each level a little fuller than the last. Bronze a felt tap, silver one soft note, gold a plucked chord, Baller a soft run with shimmer, Legend a warm chord with soft applause.",
+  { id: "windowOpen", st: "transfer", n: "Window opens", w: "The emblem turns once, charges, then bursts into particles.", pick: "B. Charge and burst", s: "syn", ch: "Was Glass: muffled rise, a soft thud on the burst and a low warm hum. No glass, no hiss.",
+    p(t) { const o = O(1, 0.3); const lp = soft(o, 2400); swish(lp, t, 0.64, 250, 2200, 0.12, { panFrom: -0.3, panTo: 0.3 }); osc(lp, "triangle", 220, t, 0.64, 0.035, { to: 660 }); felt(o, t + 0.79, 140, 0.4, 0.2); [D.D3, D.A3, D.D4].forEach((n) => osc(soft(o, 1100), "triangle", n, t + 0.79, 1.1, 0.035, { a: 0.06 })); } },
+  { id: "rarity", st: "transfer", n: "Card lands: its level", w: "Each reel's landing says the card's level. Roll chosen levels in the demo above.", vars: LVS.map((l) => LVN[l]), lv: true, pick: "New: soft ladder", s: "syn", ch: "New, with no glass or bells: each level a little fuller than the last. Bronze a felt tap, silver a low warm note, gold a low warm chord, Baller the chord with soft air, Legend a fuller chord, soft air and quiet applause.",
     p(t, v) { const o = O(1, 0.25);
       if (v === 0) felt(o, t, 180, 0.35, 0.08);
-      else if (v === 1) { felt(o, t, 180, 0.25, 0.06); fm(soft(o, 3500), D.A5, t, 0.5, 0.05, { ratio: 2, index: 0.5 }); }
-      else if (v === 2) { felt(o, t, 170, 0.3, 0.08); [D.D5, D.Fs5, D.A5].forEach((n, i) => pluck(o, n, t + i * 0.04, 0.16, { dur: 1.6 })); }
-      else if (v === 3) { felt(o, t, 150, 0.35, 0.12); [D.D5, D.Fs5, D.A5, D.D6, D.Fs6].forEach((n, i) => pluck(o, n, t + i * 0.06, 0.15, { dur: 1.8 })); shimmerRise(soft(o, 4000), t + 0.1, 0.5); }
-      else { duck(t, 3, 0.4); felt(o, t, 130, 0.4, 0.2); [D.D4, D.A4, D.D5, D.Fs5].forEach((n) => osc(soft(o, 1800), "triangle", n, t, 1.8, 0.035, { a: 0.15 })); [D.D5, D.Fs5, D.A5, D.D6, D.Fs6, D.A6].forEach((n, i) => pluck(o, n, t + 0.1 + i * 0.06, 0.14, { dur: 2 })); S_(o, "applause", t + 0.3, { gain: 0.6, dur: 2.5 }); } } },
-  { id: "bigTease", st: "transfer", n: "Before a Baller or Legend", w: "When a Baller or Legend is about to land, the build-up starts before the reel stops. Play it from the demo above.", run: true, pick: "B. Shimmer rise", s: "syn", ch: "Was Glass: muffled and about half as loud.", mode: "shimmerSoft" },
+      else if (v === 1) { felt(o, t, 180, 0.3, 0.07); osc(soft(o, 1100), "triangle", D.A3, t, 0.5, 0.05, { a: 0.02 }); }
+      else if (v === 2) { felt(o, t, 170, 0.35, 0.09); [D.D3, D.Fs3 || N(-8), D.A3].forEach((n) => osc(soft(o, 1100), "triangle", n, t, 0.9, 0.035, { a: 0.03 })); }
+      else if (v === 3) { felt(o, t, 150, 0.4, 0.14); swish(soft(o, 1400), t, 0.6, 250, 1200, 0.1); [D.D3, N(-8), D.A3, D.D4].forEach((n) => osc(soft(o, 1100), "triangle", n, t, 1.4, 0.035, { a: 0.05 })); }
+      else { duck(t, 3, 0.4); felt(o, t, 130, 0.45, 0.22); swish(soft(o, 1400), t, 0.9, 200, 1300, 0.12); [D.D3, N(-8), D.A3, D.D4, N(4)].forEach((n) => osc(soft(o, 1200), "triangle", n, t, 2.0, 0.035, { a: 0.12 })); S_(o, "applause", t + 0.3, { gain: 0.6, dur: 2.5 }); } } },
+  { id: "bigTease", st: "transfer", n: "Before a Baller or Legend", w: "When a Baller or Legend is about to land, the build-up starts before the reel stops. Play it from the demo above.", run: true, pick: "B. Shimmer rise", s: "syn", ch: "Was Glass: now a soft, muffled swell of air and a low tone rising into the landing. No glassy notes.", mode: "shimmerSoft" },
   { id: "trayDrop", st: "transfer", n: "Cards drop to the tray", w: "The three cards drop into the tray.", pick: "A. Soft thuds", s: "syn", ch: "Already soft.",
     p(t) { const o = O(1, 0.1); [0, 0.06, 0.12].forEach((x, i) => felt(pan(o, -0.4 + i * 0.4), t + x, 170, 0.3, 0.07)); } },
   { id: "sign", st: "transfer", n: "Sign a player", w: "A card is dropped on a shirt: he's signed.", vars: LVS.map((l) => LVN[l]), lv: true, pick: "D. Stamp and cheer", s: "rec", ch: "Softened stamp; the cheer and applause grow with the level but stay quiet.",
@@ -454,10 +455,10 @@ const CUES = [
   /* season end */
   { id: "finishCount", st: "end", n: "Your finish rolls in", w: "The final position counts to where you finished.", pick: "C. Drum count", s: "syn", ch: "Was Punch: softer, muffled drums and no snap on the last hit.",
     p(t) { const o = soft(O(1, 0.12), 1200); let x = 0; for (let i = 0; i < 10; i++) { thump(o, t + x, 130, 60, 0.07, 0.18); x += 0.05 + 0.45 * Math.pow(i / 9, 2.6); } thump(o, t + x, 140, 40, 0.35, 0.45); } },
-  { id: "riseCount", st: "end", n: "The Rise counts up", w: "Places climbed against history.", pick: "B. Glass climb", s: "syn", ch: "Was Glass: rounder notes, about half as loud, a softer chime at the top.",
-    p(t) { const o = soft(O(1, 0.15), 4000); const sc = [0, 2, 4, 7, 9, 12, 14, 16, 19, 21, 24]; sc.forEach((n, i) => fm(o, N(12 + n), t + i * 0.07, 0.14, 0.04, { ratio: 2, index: 0.4 })); chord(o, [N(36), N(40), N(43)], t + sc.length * 0.07, 1.4, 0.025, 2, 0.6); } },
-  { id: "achievement", st: "end", n: "Achievements stamp in", w: "Beat the drop, top half, top 3, the title, building.", vars: ["Beat the drop", "Top half", "Top 3", "Title"], pick: "A. Plucked tiers", s: "syn", ch: "Already soft.",
-    p(t, v) { const o = O(1, 0.25); felt(o, t, 160, 0.4, 0.12); [D.D5, D.Fs5, D.A5, D.D6].slice(0, v + 1).forEach((n, i) => pluck(o, n, t + 0.02 + i * 0.05, 0.22)); } },
+  { id: "riseCount", st: "end", n: "The Rise counts up", w: "Places climbed against history.", pick: "B. Glass climb", s: "syn", ch: "Was Glass: now low, muffled notes climbing and a soft thud at the top. No chime.",
+    p(t) { const o = soft(O(1, 0.12), 1200); const sc = [0, 2, 4, 7, 9, 12, 14, 16, 19]; sc.forEach((n, i) => osc(o, "triangle", N(n - 12), t + i * 0.07, 0.12, 0.05, { a: 0.01 })); felt(O(1, 0.1), t + sc.length * 0.07, 170, 0.4, 0.15); } },
+  { id: "achievement", st: "end", n: "Achievements stamp in", w: "Beat the drop, top half, top 3, the title, building.", vars: ["Beat the drop", "Top half", "Top 3", "Title"], pick: "A. Plucked tiers", s: "syn", ch: "Plucks moved lower and muffled so nothing rings.",
+    p(t, v) { const o = O(1, 0.2); felt(o, t, 160, 0.4, 0.12); [D.D4, D.Fs4, D.A4, D.D5].slice(0, v + 1).forEach((n, i) => pluck(soft(o, 1600), n, t + 0.02 + i * 0.05, 0.3)); } },
   { id: "outcome", st: "end", n: "The season's verdict", w: "The summary opens on how the season ended.", vars: ["Champions", "Top 3", "Top half", "Survived", "Relegated"], pick: "D. Stadium", s: "rec", ch: "Every clip softened: fanfare, flares and horn for champions down to a quieter silence and sting for relegation.",
     p(t, v) { const o = O(1, 0.2);
       if (v === 0) { S_(o, "trophy_fanfare", t, { gain: 1 }); S_(o, "goal_roar", t + 0.3, { gain: 0.7 }); S_(o, "flares", t + 0.4, { gain: 0.7 }); S_(o, "air_horn", t + 1.2, { gain: 0.8 }); S_(o, "celebration", t + 2.0, { gain: 0.9 }); }
@@ -512,7 +513,7 @@ function runReels(box, labels, levels, onDone) {
   if (teaseIdx >= 0 && teaseMode === "riser") { const L = len("riser"), at = profs[teaseIdx].landAt - L; smp(O(1, 0.2), "riser", t0c + Math.max(0, at), { gain: levels ? 0.5 : 0.3, offset: Math.max(0, -at) }); if (levels) duck(t0c + Math.max(0, at), L + 0.5, 0.2); }
   if (teaseIdx >= 0 && ["heart", "shimmer", "shimmerSoft", "pulse", "drumroll"].includes(teaseMode)) { const land = t0c + profs[teaseIdx].landAt, dur = levels ? 2.4 : 1.8, st = land - dur, o4 = O(1, 0.2);
     if (levels) duck(st, dur + 0.4, 0.4);
-    if (teaseMode === "heart") heartbeat(o4, st, dur); else if (teaseMode === "shimmer") shimmerRise(o4, st, dur); else if (teaseMode === "shimmerSoft") { const q = ctx.createGain(); q.gain.value = 0.5; q.connect(o4); shimmerRise(soft(q, 3500), st, dur); } else if (teaseMode === "pulse") pulseRise(o4, st, dur);
+    if (teaseMode === "heart") heartbeat(o4, st, dur); else if (teaseMode === "shimmer") shimmerRise(o4, st, dur); else if (teaseMode === "shimmerSoft") { const q = ctx.createGain(); q.gain.value = 0.7; q.connect(o4); synthSwell(soft(q, 1500), st, dur); } else if (teaseMode === "pulse") pulseRise(o4, st, dur);
     else { const L = len("drumroll"), off = Math.max(0, L - dur); smp(o4, "drumroll", st, { gain: 0.55, offset: off, dur: dur + 0.05 }); } }
   if (teaseIdx >= 0 && teaseMode === "tunnel") { const L = len("tunnel"), at = profs[teaseIdx].landAt - L + 0.05; smp(O(1, 0.25), "tunnel", t0c + Math.max(0, at), { gain: 0.6, offset: Math.max(0, -at), dur: L - Math.max(0, -at) + 0.05 }); }
   const last = profs.map(() => 0), landed = profs.map(() => false);
@@ -534,7 +535,7 @@ function runReels(box, labels, levels, onDone) {
         else { if (!mode.cut) whirs[i].f.frequency.setTargetAtTime(300 + s.v * 85, tc, 0.03); whirs[i].g.gain.setTargetAtTime(landed[i] ? 0 : sp * (mode.tick ? 0.09 : (mode.cut ? 0.3 : 0.16)), tc, 0.04); } }
       if (mode.tick && k > last[i] && !landed[i]) {
         const slow = s.v < 13;
-        if (slow || !mode.whir) { const o2 = O(1, 0.05); if (mode.tick === "punch") { click(o2, tc, 2600 + i * 200, slow ? 0.16 : 0.08); thump(o2, tc, 150, 70, 0.03, slow ? 0.2 : 0.08); } else if (mode.tick === "soft") click(soft(o2, 2200), tc, 2800 + i * 200, slow ? 0.09 : 0.045); else click(o2, tc, 3200 + i * 300, slow ? 0.16 : 0.08); }
+        if (slow || !mode.whir) { const o2 = O(1, 0.05); if (mode.tick === "punch") { click(o2, tc, 2600 + i * 200, slow ? 0.16 : 0.08); thump(o2, tc, 150, 70, 0.03, slow ? 0.2 : 0.08); } else if (mode.tick === "soft") tap(o2, tc, slow ? 0.09 : 0.04, 240 + i * 20); else click(o2, tc, 3200 + i * 300, slow ? 0.16 : 0.08); }
       }
       last[i] = k;
       if (!landed[i] && t >= P.landAt) {
