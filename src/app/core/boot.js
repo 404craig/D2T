@@ -6,6 +6,12 @@
     const wake = () => { if (D2T.loadClips) D2T.loadClips(); SND.unlock(); window.removeEventListener('pointerdown', wake, true); window.removeEventListener('touchend', wake, true); };
     window.addEventListener('pointerdown', wake, true);
     window.addEventListener('touchend', wake, true);
+    // button sounds (Craig's picks, 13 Oct): a soft felt press for the big buttons, a muted one for the small ones
+    document.addEventListener('click', (e) => {
+      const b = e.target.closest && e.target.closest('button'); if (!b || b.disabled) return;
+      if (b.closest('.sp-main, .se-btn, .fr-card-btn, .fr-gm, .x-name-go') || (b.classList.contains('btn') && !b.classList.contains('btn-ghost'))) SND.play('tap');
+      else if (b.closest('.topbar, .fr-tabbar, .sp-round, .sheet, .btn-ghost, .fr-soon-t')) SND.play('tapSmall');
+    }, true);
   }
   // a Daily left unfinished before midnight closes on the next load, and while the game is open
   if (D2T.game && D2T.game.closeOldDaily) {

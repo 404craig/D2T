@@ -1,0 +1,631 @@
+<title>D2T Sound Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Barlow:wght@400;500;600&family=Doto:wght@700;900&display=swap">
+<style>
+/* Layout: a floodlit stadium control desk. Scoreboard display on top, mixer strip, then
+   match moments, recordings and the synth lab as stacked bays. Single night look. */
+:root {
+  --bg: #0b171c;
+  --panel: #12232a;
+  --panel-2: #183039;
+  --line: #24424d;
+  --fg: #e7eee9;
+  --muted: #8aa39f;
+  --amber: #ffb43a;      /* scoreboard LEDs and sodium floodlights */
+  --amber-dim: #6b4a17;
+  --grass: #3cc47c;      /* recordings */
+  --rose: #ff6b5e;       /* stop, losses */
+  --violet: #c59bff;     /* synth */
+  --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --led: "Doto", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); font: 15px/1.5 var(--body); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 56px; display: grid; gap: 28px; }
+h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; letter-spacing: .01em; }
+h1 { font-size: clamp(34px, 7vw, 60px); font-weight: 900; line-height: .9; text-transform: uppercase; }
+h1 span { color: var(--amber); }
+h2 { font-size: 26px; font-weight: 900; text-transform: uppercase; line-height: 1; }
+h3 { font-size: 20px; font-weight: 700; line-height: 1.1; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.eyebrow { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+button, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+/* Header */
+.top { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 860px) { .top { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: end; } }
+.intro { display: grid; gap: 12px; }
+.intro p { max-width: 52ch; color: var(--muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; border: 1px solid currentColor; line-height: 1.3; }
+.tag.rec { color: var(--grass); }
+.tag.syn { color: var(--violet); }
+
+/* Scoreboard */
+.board { background: #050c0f; border: 3px solid #1d2f36; border-radius: 6px; padding: 14px 16px; display: grid; gap: 10px;
+  background-image: radial-gradient(rgba(255,180,58,.07) 1px, transparent 1.4px); background-size: 6px 6px; }
+.board-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.led { font-family: var(--led); color: var(--amber); text-shadow: 0 0 8px rgba(255,180,58,.55); text-transform: uppercase; font-weight: 900; }
+.score { font-size: clamp(30px, 6vw, 46px); line-height: 1; font-variant-numeric: tabular-nums; }
+.clock { font-size: 26px; font-variant-numeric: tabular-nums; }
+.ticker { font-size: 17px; min-height: 1.5em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.board-ctl { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn { background: var(--panel-2); border: 1px solid var(--line); border-radius: 4px; padding: 8px 14px; font-weight: 600; line-height: 1.2; }
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--amber); color: #1b1203; border-color: var(--amber); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn.stop { color: var(--rose); border-color: color-mix(in srgb, var(--rose) 50%, transparent); }
+.btn.small { padding: 5px 10px; font-size: 13px; }
+.seed { font-family: var(--led); color: var(--muted); font-size: 14px; }
+
+/* Mixer */
+.mixer { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px; display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); }
+.fader { display: grid; gap: 4px; min-width: 0; }
+.fader label { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; font-weight: 600; }
+.fader output { font-family: var(--led); color: var(--amber); font-weight: 700; font-variant-numeric: tabular-nums; }
+input[type="range"] { width: 100%; accent-color: var(--amber); margin: 4px 0; }
+.toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.toggle input { accent-color: var(--amber); width: 16px; height: 16px; }
+
+/* Bays */
+.bay { display: grid; gap: 14px; }
+.bay-head { display: flex; justify-content: space-between; align-items: end; gap: 12px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.bay-head p { color: var(--muted); max-width: 60ch; font-size: 14px; }
+
+/* Match moments */
+.scene-groups { display: grid; gap: 22px; }
+.scene-group { display: grid; gap: 10px; }
+.scene-group > h3 { font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); font-family: var(--body); font-weight: 600; }
+.scenes { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+.scene { text-align: left; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 14px; display: grid; gap: 8px; align-content: start; position: relative; }
+.scene:hover { border-color: var(--amber); }
+.scene.playing { border-color: var(--amber); box-shadow: 0 0 0 1px var(--amber), 0 0 22px rgba(255,180,58,.18); }
+.scene h3 { font-size: 22px; text-transform: uppercase; }
+.scene .when { font-size: 13px; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { font-size: 11px; padding: 2px 6px; border-radius: 3px; background: var(--bg); border-left: 3px solid; line-height: 1.4; }
+.chip.rec { border-color: var(--grass); }
+.chip.syn { border-color: var(--violet); }
+
+/* Recording pads */
+.pads { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+.pad { text-align: left; background: var(--panel); border: 1px solid var(--line); border-top: 4px solid var(--grass); border-radius: 6px; padding: 12px; display: grid; gap: 2px; min-height: 88px; align-content: space-between; position: relative; }
+.pad:hover { background: var(--panel-2); }
+.pad.sel { outline: 2px solid var(--grass); outline-offset: -1px; }
+.pad.playing::after { content: ""; position: absolute; inset: 8px 8px auto auto; width: 8px; height: 8px; border-radius: 50%; background: var(--grass); box-shadow: 0 0 8px var(--grass); }
+.pad-group { grid-column: 1 / -1; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-top: 6px; }
+.pad b { font-family: var(--display); font-size: 19px; font-weight: 700; line-height: 1.05; }
+.pad small { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.pad .tuned { color: var(--amber); }
+.inspector { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); align-items: end; }
+.inspector .ins-title { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; }
+.ins-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* Synth lab */
+.synths { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.synth { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 14px; display: grid; gap: 10px; align-content: start; }
+.synth-head { display: flex; justify-content: space-between; gap: 10px; align-items: start; }
+.synth-head p { color: var(--muted); font-size: 13px; }
+.play-btn { flex: none; width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--violet); color: #1a0f2b; display: grid; place-items: center; }
+.play-btn:hover { filter: brightness(1.1); }
+.play-btn svg { width: 18px; height: 18px; margin-left: 3px; }
+.params { display: grid; gap: 6px; }
+.params .fader output { color: var(--violet); }
+.params input[type="range"] { accent-color: var(--violet); }
+.params select { background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 4px 6px; width: 100%; }
+.synth-foot { display: flex; flex-wrap: wrap; gap: 6px; }
+
+footer { border-top: 1px solid var(--line); padding-top: 16px; display: grid; gap: 10px; color: var(--muted); font-size: 13px; }
+footer details summary { cursor: pointer; color: var(--fg); font-weight: 600; }
+footer ul { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+.toast { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--amber); color: #1b1203; font-weight: 600; padding: 8px 14px; border-radius: 4px; z-index: 9; }
+textarea.copy-fallback { width: 100%; min-height: 120px; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 4px; font: 12px/1.4 ui-monospace, Menlo, monospace; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="intro">
+      <span class="eyebrow">DROP2TOP audio</span>
+      <h1>Sound <span>Desk</span></h1>
+      <p>Every sound for the game in one place. Whistles, crowd and card recordings were made with ElevenLabs. Game sounds are synthesised live in your browser, so every slider changes the sound. Your tweaks are saved on this device.</p>
+      <div class="legend"><span class="tag rec">Recording</span><span class="tag syn">Synth</span></div>
+    </div>
+    <div class="board" aria-live="polite">
+      <div class="board-row">
+        <span class="led score" id="score">D2T 0-0 OPP</span>
+        <span class="led clock" id="clock">00'</span>
+      </div>
+      <div class="led ticker" id="ticker">Tap anything to start the sound</div>
+      <div class="board-ctl">
+        <button class="btn primary" id="simBtn" type="button">Play a 45 second match</button>
+        <button class="btn" id="seedBtn" type="button">New seed</button>
+        <span class="seed" id="seedLabel">SEED 0000</span>
+        <button class="btn stop" id="stopAll" type="button">Stop all</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="mixer" aria-label="Mixer">
+    <div class="fader"><label for="m_master">Master <output id="o_master"></output></label><input type="range" id="m_master" min="0" max="1.5" step="0.01"></div>
+    <div class="fader"><label for="m_bed"><span class="toggle"><input type="checkbox" id="m_bedOn"> Crowd bed</span> <output id="o_bed"></output></label><input type="range" id="m_bed" min="0" max="1.5" step="0.01"></div>
+    <div class="fader"><label for="m_rec">Recordings <output id="o_rec"></output></label><input type="range" id="m_rec" min="0" max="1.5" step="0.01"></div>
+    <div class="fader"><label for="m_syn">Synth <output id="o_syn"></output></label><input type="range" id="m_syn" min="0" max="1.5" step="0.01"></div>
+    <div class="fader"><label for="m_verb">Stadium echo <output id="o_verb"></output></label><input type="range" id="m_verb" min="0" max="1" step="0.01"></div>
+  </section>
+
+  <section class="bay" aria-labelledby="h-scenes">
+    <div class="bay-head">
+      <div><span class="eyebrow">Layered cues</span><h2 id="h-scenes">Match moments</h2></div>
+      <p>Each moment layers recordings and synth sounds the way the game would, and picks up every tweak you make further down.</p>
+    </div>
+    <div class="scene-groups" id="scenes"></div>
+  </section>
+
+  <section class="bay" aria-labelledby="h-rec">
+    <div class="bay-head">
+      <div><span class="eyebrow">ElevenLabs sound effects</span><h2 id="h-rec">Recordings</h2></div>
+      <p>Tap a pad to play it and open its settings. Speed changes pitch too, like a record. Reverse is worth a go on the roar.</p>
+    </div>
+    <div class="pads" id="pads"></div>
+    <div class="inspector" id="inspector"></div>
+  </section>
+
+  <section class="bay" aria-labelledby="h-syn">
+    <div class="bay-head">
+      <div><span class="eyebrow">Made in the browser</span><h2 id="h-syn">Synth lab</h2></div>
+      <p>Tiny, instant game sounds with no files to load. Shape one you like, then Copy settings and paste them to Claude to build it into the game.</p>
+    </div>
+    <div class="synths" id="synths"></div>
+  </section>
+
+  <footer>
+    <div class="board-ctl">
+      <button class="btn" id="copyAll" type="button">Copy all my settings</button>
+      <button class="btn" id="resetAll" type="button">Reset everything</button>
+    </div>
+    <div id="copyFallback" hidden></div>
+    <details>
+      <summary>What the recordings were asked for</summary>
+      <ul id="prompts"></ul>
+    </details>
+    <p>Audio files live in the D2T repo under <code>audio/sfx</code>. Levels are normalised so nothing jumps out.</p>
+  </footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(() => {
+"use strict";
+
+/* ---------- Content ---------- */
+const CLIPS = [
+  { id: "whistle", group: "Whistles", label: "Whistle", prompt: "Referee blows a single sharp short whistle blast on a football pitch" },
+  { id: "half_time", group: "Whistles", label: "Half-time whistle", prompt: "Referee blows two short whistle blasts for half time, crowd applause rising" },
+  { id: "full_time", group: "Whistles", label: "Full-time whistle", prompt: "Referee blows three long whistle blasts for full time, crowd reacting" },
+  { id: "crowd_loop", group: "Crowd", label: "Crowd bed", note: "Seamless loop", prompt: "Large English football stadium crowd ambience, constant murmur and distant chanting, steady loopable background" },
+  { id: "goal_roar", group: "Crowd", label: "Goal roar", prompt: "Huge football stadium crowd erupts in a massive goal celebration roar, then sustained applause" },
+  { id: "cheer_short", group: "Crowd", label: "Quick cheer", prompt: "Football stadium crowd short burst of cheering and clapping for a crunching tackle" },
+  { id: "crowd_ooh", group: "Crowd", label: "Ooh", prompt: "Large football crowd gasps in rising anticipation as a shot flies just over the bar, collective ooh" },
+  { id: "groan", group: "Crowd", label: "Groan", prompt: "Football stadium crowd groans in disappointment after a near miss" },
+  { id: "crowd_moan", group: "Crowd", label: "Moan", prompt: "Frustrated home football crowd moans and grumbles after a misplaced pass" },
+  { id: "boos", group: "Crowd", label: "Boos", prompt: "Football stadium crowd booing loudly and whistling in anger at the referee" },
+  { id: "applause", group: "Crowd", label: "Applause", prompt: "Football crowd warm applause and clapping, appreciative, some cheers" },
+  { id: "chant", group: "Crowd", label: "Terrace chant", prompt: "English football fans singing a rousing terrace chant together in a stadium, clapping rhythm" },
+  { id: "net_ripple", group: "Crowd", label: "Ball in the net", prompt: "Football hits the back of the net, sharp thud of a kick then a swish of the net" },
+  { id: "card_shuffle", group: "Cards", label: "Shuffle", prompt: "Deck of playing cards riffle shuffled then bridged, close up, crisp" },
+  { id: "card_deal", group: "Cards", label: "Deal three", prompt: "Three playing cards dealt quickly one after another onto a felt table, three crisp distinct card snaps" },
+  { id: "card_slide", group: "Cards", label: "Card slide", prompt: "A single playing card slid across a wooden table and tapped down, close up" },
+  { id: "card_pack", group: "Cards", label: "Pack rip", prompt: "Tearing open a foil trading card pack, crinkly foil rip, then cards sliding out" },
+  { id: "celebration", group: "Season end", label: "Promotion party", prompt: "Football stadium promotion party, crowd cheering wildly, fireworks bangs and air horns" },
+  { id: "trophy_fanfare", group: "Season end", label: "Trophy fanfare", prompt: "Triumphant short brass fanfare for winning a trophy, celebratory, stadium echo" },
+  { id: "stunned_silence", group: "Season end", label: "Stunned silence", prompt: "Football stadium falls into stunned near silence, a few scattered claps and disappointed murmurs, wind" },
+  { id: "relegation_sting", group: "Season end", label: "Relegation sting", prompt: "Sad descending trombone wah wah wah fail sound, comedic" },
+];
+
+/* ---------- Saved state ---------- */
+const KEY = "d2t-sound-desk-v2";
+const DEFAULT_MASTER = { master: 0.9, bedOn: false, bed: 0.55, rec: 1, syn: 0.8, verb: 0.25 };
+const DEFAULT_CLIP = { gain: 1, rate: 1, pan: 0, loop: false, reverse: false };
+let state = { master: { ...DEFAULT_MASTER }, clips: {}, synth: {}, seed: 0 };
+try { const s = JSON.parse(localStorage.getItem(KEY) || "null"); if (s) state = { ...state, ...s, master: { ...DEFAULT_MASTER, ...(s.master || {}) } }; } catch (e) {}
+if (!state.seed) state.seed = 1000 + Math.floor(Math.random() * 9000);
+let saveT = 0;
+function save() { clearTimeout(saveT); saveT = setTimeout(() => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }, 200); }
+const clipCfg = id => ({ ...DEFAULT_CLIP, ...(state.clips[id] || {}) });
+
+/* ---------- Audio graph ---------- */
+const AC = window.AudioContext || window.webkitAudioContext;
+const ctx = new AC();
+const comp = ctx.createDynamicsCompressor();
+comp.threshold.value = -10; comp.ratio.value = 4; comp.attack.value = 0.005; comp.release.value = 0.2;
+const master = ctx.createGain(); master.connect(comp); comp.connect(ctx.destination);
+const bus = {};
+for (const k of ["bed", "rec", "syn"]) { bus[k] = ctx.createGain(); bus[k].connect(master); }
+const verbIn = ctx.createGain(), verb = ctx.createConvolver(), verbOut = ctx.createGain();
+verb.buffer = (() => {
+  const len = Math.floor(ctx.sampleRate * 2.4), b = ctx.createBuffer(2, len, ctx.sampleRate);
+  for (let c = 0; c < 2; c++) { const d = b.getChannelData(c); for (let i = 0; i < len; i++) { const t = i / len; d[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 3.2) * (i < 900 ? i / 900 : 1); } }
+  return b;
+})();
+verbIn.connect(verb); verb.connect(verbOut); verbOut.connect(master);
+const noiseBuf = (() => { const b = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; return b; })();
+
+function applyMaster() {
+  const m = state.master, now = ctx.currentTime;
+  master.gain.setTargetAtTime(m.master, now, 0.02);
+  bus.bed.gain.setTargetAtTime(m.bed, now, 0.05);
+  bus.rec.gain.setTargetAtTime(m.rec, now, 0.02);
+  bus.syn.gain.setTargetAtTime(m.syn, now, 0.02);
+  verbOut.gain.setTargetAtTime(m.verb * 1.4, now, 0.02);
+}
+applyMaster();
+function unlock() { if (ctx.state !== "running") ctx.resume(); }
+window.addEventListener("pointerdown", unlock, { capture: true });
+window.addEventListener("keydown", unlock, { capture: true });
+
+/* Loading */
+const buffers = {}, reversed = {};
+let loaded = 0; const total = CLIPS.length;
+function decode(ab) { return new Promise((res, rej) => { const p = ctx.decodeAudioData(ab, res, rej); if (p && p.then) p.then(res, rej); }); }
+async function load(key, url) {
+  try { const r = await fetch(url); if (!r.ok) throw new Error(r.status); buffers[key] = await decode(await r.arrayBuffer()); }
+  catch (e) { console.warn("Could not load", url, e); }
+  loaded++; if (!busyTicker) ticker(loaded < total ? `Loading sounds ${loaded} of ${total}` : "Tap anything to start the sound");
+  if (key === "crowd_loop" && state.master.bedOn) startBed();
+}
+CLIPS.forEach(c => load(c.id, `sfx/${c.id}.mp3`));
+function reversedOf(id) {
+  if (reversed[id]) return reversed[id];
+  const s = buffers[id], b = ctx.createBuffer(s.numberOfChannels, s.length, s.sampleRate);
+  for (let c = 0; c < s.numberOfChannels; c++) { const a = s.getChannelData(c), d = b.getChannelData(c); for (let i = 0, n = a.length; i < n; i++) d[i] = a[n - 1 - i]; }
+  return (reversed[id] = b);
+}
+
+/* Playback */
+const active = new Set();
+function track(h, life) { active.add(h); if (life) setTimeout(() => active.delete(h), life * 1000); return h; }
+function playBuffer(buf, { out, gain = 1, rate = 1, pan = 0, loop = false, at = 0, send = 0.6, onend } = {}) {
+  const src = ctx.createBufferSource(); src.buffer = buf; src.playbackRate.value = rate; src.loop = loop;
+  const g = ctx.createGain(); g.gain.value = gain; src.connect(g);
+  let n = g; if (ctx.createStereoPanner) { const p = ctx.createStereoPanner(); p.pan.value = pan; g.connect(p); n = p; }
+  n.connect(out); const s = ctx.createGain(); s.gain.value = send; n.connect(s); s.connect(verbIn);
+  src.start(ctx.currentTime + at);
+  const h = { stop(fade = 0.05) { const t = ctx.currentTime; g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(0, t + fade); try { src.stop(t + fade + 0.01); } catch (e) {} } };
+  src.onended = () => { active.delete(h); onend && onend(); };
+  return track(h);
+}
+function playClip(id, { at = 0, gain = 1, onend } = {}) {
+  if (!buffers[id]) return null;
+  const c = clipCfg(id);
+  return playBuffer(c.reverse ? reversedOf(id) : buffers[id], { out: bus.rec, gain: c.gain * gain, rate: c.rate, pan: c.pan, loop: c.loop, at, onend });
+}
+let bed = null;
+function startBed() { if (bed || !buffers.crowd_loop) return; bed = playBuffer(buffers.crowd_loop, { out: bus.bed, loop: true, send: 0.3 }); active.delete(bed); }
+function stopBed() { if (bed) { bed.stop(0.6); bed = null; } }
+
+/* ---------- Synth engine ---------- */
+function synthOut(at) { const o = ctx.createGain(); o.connect(bus.syn); const s = ctx.createGain(); s.gain.value = 0.5; o.connect(s); s.connect(verbIn); return o; }
+function envGain(dest, t, attack, decay, peak) {
+  const g = ctx.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(peak, t + attack); g.gain.exponentialRampToValueAtTime(0.0001, t + attack + decay); g.connect(dest); return g;
+}
+function tone(dest, type, f, t, dur, peak, attack = 0.004) {
+  const o = ctx.createOscillator(); o.type = type; o.frequency.setValueAtTime(Math.min(f, 18000), t);
+  o.connect(envGain(dest, t, attack, dur, peak)); o.start(t); o.stop(t + attack + dur + 0.05); return o;
+}
+function noise(dest, t, dur, { type = "bandpass", f = 2000, f2, q = 1, peak = 0.5, attack = 0.003 } = {}) {
+  const s = ctx.createBufferSource(); s.buffer = noiseBuf; s.loop = true;
+  const fl = ctx.createBiquadFilter(); fl.type = type; fl.Q.value = q; fl.frequency.setValueAtTime(f, t);
+  if (f2) fl.frequency.exponentialRampToValueAtTime(f2, t + dur);
+  s.connect(fl); fl.connect(envGain(dest, t, attack, dur, peak)); s.start(t, Math.random()); s.stop(t + attack + dur + 0.05); return fl;
+}
+const semi = n => Math.pow(2, n / 12);
+const R = (key, label, min, max, step, def, unit = "") => ({ key, label, min, max, step, def, unit });
+const C = (key, label, options, def) => ({ key, label, options, def });
+
+const SYNTHS = [
+  { id: "tap", name: "Button tap", use: "Every menu button and toggle",
+    params: [R("pitch", "Pitch", 300, 2000, 10, 880, "Hz"), R("decay", "Length", 0.02, 0.3, 0.01, 0.07, "s"), R("drop", "Pitch drop", 0, 1, 0.05, 0.4), R("click", "Click", 0, 1, 0.05, 0.3), C("wave", "Tone", ["triangle", "sine", "square"], "triangle")],
+    play(o, p, t) { const s = tone(o, p.wave, p.pitch, t, p.decay, p.wave === "square" ? 0.25 : 0.6); s.frequency.exponentialRampToValueAtTime(p.pitch * (1 - p.drop * 0.6), t + p.decay); if (p.click) noise(o, t, 0.012, { type: "highpass", f: 4000, peak: p.click * 0.5 }); return p.decay; } },
+  { id: "cardFlip", name: "Card flip", use: "Turning a player card over",
+    params: [R("dur", "Length", 0.04, 0.5, 0.01, 0.14, "s"), R("from", "Swoosh from", 300, 8000, 50, 1200, "Hz"), R("to", "Swoosh to", 300, 10000, 50, 5200, "Hz"), R("q", "Focus", 0.3, 12, 0.1, 1.6), R("flicks", "Cards", 1, 5, 1, 1)],
+    play(o, p, t) { for (let i = 0; i < p.flicks; i++) noise(o, t + i * p.dur * 0.75, p.dur, { f: p.from, f2: p.to, q: p.q, peak: 0.9 }); return p.flicks * p.dur; } },
+  { id: "ratingScan", name: "Rating reveal", use: "Card rating counts up, slows, then lands",
+    params: [R("steps", "Ticks", 4, 30, 1, 14), R("gap", "First gap", 0.02, 0.15, 0.005, 0.045, "s"), R("slow", "Slow down", 1, 1.25, 0.01, 1.12, "x"), R("base", "Start pitch", 200, 1200, 10, 520, "Hz"), R("rise", "Rise per tick", 0, 3, 0.25, 1, "st"), C("land", "Landing", ["chord", "ding", "none"], "chord")],
+    play(o, p, t) { let tt = t, g = p.gap; for (let i = 0; i < p.steps; i++) { tone(o, "square", p.base * semi(i * p.rise), tt, 0.025, 0.14); tt += g; g = Math.min(g * p.slow, 0.5); }
+      const top = p.base * semi(p.steps * p.rise); if (p.land === "chord") [1, 1.26, 1.5, 2].forEach(r => tone(o, "sine", top * r, tt, 1.1, 0.18)); if (p.land === "ding") { tone(o, "sine", top * 2, tt, 1.2, 0.35); tone(o, "sine", top * 5.4, tt, 0.4, 0.06); } return tt - t + 1.2; } },
+  { id: "cash", name: "Transfer fee", use: "Money spent or received",
+    params: [R("pitch", "Pitch", 500, 2000, 10, 988, "Hz"), R("gap", "Gap", 0.03, 0.2, 0.005, 0.08, "s"), R("ring", "Ring", 0.1, 1.2, 0.05, 0.4, "s"), R("shimmer", "Coins", 0, 1, 0.05, 0.5)],
+    play(o, p, t) { tone(o, "square", p.pitch, t, 0.08, 0.16); tone(o, "square", p.pitch * semi(5), t + p.gap, p.ring, 0.16); if (p.shimmer) noise(o, t + p.gap, p.ring, { type: "highpass", f: 7000, peak: p.shimmer * 0.25 }); return p.gap + p.ring; } },
+  { id: "whistle", name: "Ref whistle", use: "Kick off, fouls, half time",
+    params: [R("pitch", "Pitch", 2000, 4000, 10, 2900, "Hz"), R("trill", "Pea rattle", 10, 70, 1, 38, "Hz"), R("depth", "Rattle depth", 0, 600, 10, 220, "Hz"), R("len", "Blast length", 0.08, 1.5, 0.01, 0.32, "s"), R("blasts", "Blasts", 1, 3, 1, 1), R("gap", "Gap", 0.08, 0.6, 0.01, 0.22, "s"), R("breath", "Breath", 0, 1, 0.05, 0.3)],
+    play(o, p, t) { let st = t; for (let b = 0; b < p.blasts; b++) { const len = (p.blasts === 3 && b === 2) ? p.len * 2.2 : p.len;
+        const s = ctx.createOscillator(); s.type = "sine"; s.frequency.value = p.pitch; const l = ctx.createOscillator(); l.frequency.value = p.trill; const lg = ctx.createGain(); lg.gain.value = p.depth; l.connect(lg); lg.connect(s.frequency);
+        const g = ctx.createGain(); g.gain.setValueAtTime(0, st); g.gain.linearRampToValueAtTime(0.3, st + 0.015); g.gain.setValueAtTime(0.3, st + len - 0.03); g.gain.linearRampToValueAtTime(0, st + len); s.connect(g); g.connect(o);
+        s.start(st); l.start(st); s.stop(st + len + 0.02); l.stop(st + len + 0.02); if (p.breath) noise(o, st, len, { f: p.pitch, q: 1, peak: p.breath * 0.12 }); st += len + p.gap; } return st - t; } },
+  { id: "kick", name: "Ball strike", use: "Shots, passes, the ball hitting the net",
+    params: [R("punch", "Punch", 60, 250, 1, 140, "Hz"), R("body", "Body", 0.05, 0.4, 0.01, 0.14, "s"), R("snap", "Leather snap", 0, 1, 0.05, 0.5)],
+    play(o, p, t) { const s = tone(o, "sine", p.punch * 2.2, t, p.body, 0.95, 0.002); s.frequency.exponentialRampToValueAtTime(40, t + p.body); if (p.snap) noise(o, t, 0.025, { type: "highpass", f: 2500, peak: p.snap * 0.6 }); return p.body; } },
+  { id: "promotion", name: "Promotion jingle", use: "Going up a division",
+    params: [R("root", "Key", 200, 600, 1, 392, "Hz"), R("tempo", "Speed", 4, 20, 0.5, 11, "/s"), R("octaves", "Octaves", 1, 3, 1, 2), C("wave", "Tone", ["triangle", "square", "sawtooth"], "square"), R("sparkle", "Sparkle", 0, 1, 0.05, 0.5)],
+    play(o, p, t) { const notes = []; for (let k = 0; k < p.octaves; k++) [0, 4, 7].forEach(n => notes.push(n + 12 * k)); notes.push(12 * p.octaves);
+      const step = 1 / p.tempo, pk = p.wave === "triangle" ? 0.3 : 0.12; notes.forEach((n, i) => tone(o, p.wave, p.root * semi(n), t + i * step, step * 1.4, pk));
+      const end = t + notes.length * step; [0, 4, 7, 12].forEach(n => tone(o, p.wave, p.root * semi(n + 12 * (p.octaves - 1)), end, 0.9, pk * 0.6));
+      if (p.sparkle) for (let i = 0; i < 6; i++) tone(o, "sine", p.root * semi(24 + 12 * (p.octaves - 1)) * semi([0, 7, 12, 4, 16, 19][i]), end + i * 0.06, 0.25, 0.05 * p.sparkle); return end - t + 1; } },
+  { id: "relegation", name: "Relegation slide", use: "Dropping a division",
+    params: [R("root", "Start note", 150, 500, 1, 311, "Hz"), R("steps", "Notes", 2, 6, 1, 4), R("len", "Note length", 0.15, 0.6, 0.01, 0.34, "s"), R("wobble", "Wobble", 0, 1, 0.05, 0.5), R("tone", "Brightness", 300, 4000, 10, 1400, "Hz")],
+    play(o, p, t) { let tt = t; for (let i = 0; i < p.steps; i++) { const last = i === p.steps - 1, len = last ? p.len * 3 : p.len, f = p.root * semi(-i);
+        const s = ctx.createOscillator(); s.type = "sawtooth"; s.frequency.setValueAtTime(f, tt); if (last) s.frequency.linearRampToValueAtTime(f * semi(-1), tt + len);
+        const fl = ctx.createBiquadFilter(); fl.type = "lowpass"; fl.Q.value = 6; fl.frequency.setValueAtTime(p.tone * 0.3, tt); fl.frequency.linearRampToValueAtTime(p.tone, tt + 0.08); fl.frequency.exponentialRampToValueAtTime(p.tone * 0.25, tt + len);
+        if (last && p.wobble) { const l = ctx.createOscillator(); l.frequency.value = 6; const lg = ctx.createGain(); lg.gain.value = f * 0.03 * p.wobble; l.connect(lg); lg.connect(s.frequency); l.start(tt); l.stop(tt + len); }
+        const g = ctx.createGain(); g.gain.setValueAtTime(0, tt); g.gain.linearRampToValueAtTime(0.28, tt + 0.03); g.gain.setValueAtTime(0.28, tt + len * 0.75); g.gain.linearRampToValueAtTime(0, tt + len);
+        s.connect(fl); fl.connect(g); g.connect(o); s.start(tt); s.stop(tt + len + 0.02); tt += len + 0.04; } return tt - t; } },
+  { id: "climb", name: "Table climb", use: "Club moves up the league table",
+    params: [R("places", "Places", 1, 23, 1, 8), R("speed", "Speed", 3, 25, 0.5, 11, "/s"), R("base", "Start pitch", 250, 900, 10, 420, "Hz"), R("step", "Rise per place", 0.5, 3, 0.25, 1, "st"), R("ease", "Ease in", 1, 1.2, 0.01, 1.05, "x")],
+    play(o, p, t) { let tt = t, g = 1 / p.speed; for (let i = 0; i < p.places; i++) { const f = p.base * semi(i * p.step), s = tone(o, "sine", f, tt, 0.07, 0.35); s.frequency.exponentialRampToValueAtTime(f * 1.5, tt + 0.05); tt += g; g = Math.min(g * p.ease, 0.4); }
+      const f = p.base * semi(p.places * p.step); tone(o, "triangle", f, tt, 0.5, 0.3); tone(o, "triangle", f * 1.5, tt, 0.5, 0.2); return tt - t + 0.5; } },
+  { id: "buzzer", name: "Wrong buzzer", use: "Not allowed, can't afford, invalid move",
+    params: [R("pitch", "Pitch", 60, 300, 1, 120, "Hz"), R("len", "Length", 0.1, 0.8, 0.01, 0.32, "s"), R("pulses", "Pulses", 1, 4, 1, 2), R("grit", "Grit", 0, 1, 0.05, 0.4)],
+    play(o, p, t) { const each = p.len / p.pulses; for (let i = 0; i < p.pulses; i++) { const st = t + i * each * 1.25; const fl = ctx.createBiquadFilter(); fl.type = "lowpass"; fl.frequency.value = 600 + p.grit * 3000; fl.connect(o);
+        tone(fl, "sawtooth", p.pitch, st, each, 0.35, 0.005); tone(fl, "square", p.pitch * 1.012, st, each, 0.2, 0.005); } return p.len * 1.25; } },
+  { id: "heartbeat", name: "Penalty heartbeat", use: "Tension before a spot kick",
+    params: [R("bpm", "Heart rate", 50, 160, 1, 92, "bpm"), R("beats", "Beats", 1, 12, 1, 6), R("depth", "Depth", 35, 120, 1, 55, "Hz"), R("build", "Speeds up", 0, 1, 0.05, 0.4)],
+    play(o, p, t) { let tt = t, gap = 60 / p.bpm; for (let i = 0; i < p.beats; i++) { [0, 0.17].forEach((d, j) => { const s = tone(o, "sine", p.depth * (j ? 0.9 : 1.2), tt + d, 0.13, j ? 0.6 : 0.95, 0.004); s.frequency.exponentialRampToValueAtTime(p.depth * 0.6, tt + d + 0.12); }); tt += gap; gap *= 1 - p.build * 0.06; } return tt - t; } },
+  { id: "stamp", name: "Lock in", use: "Confirm your starting XI or a signing",
+    params: [R("weight", "Weight", 40, 200, 1, 85, "Hz"), R("thud", "Thud", 0.05, 0.5, 0.01, 0.18, "s"), R("paper", "Paper", 0, 1, 0.05, 0.5)],
+    play(o, p, t) { const s = tone(o, "sine", p.weight * 2, t, p.thud, 0.9, 0.002); s.frequency.exponentialRampToValueAtTime(p.weight * 0.6, t + p.thud); noise(o, t, p.thud * 0.6, { type: "lowpass", f: 1200, peak: 0.5 }); if (p.paper) noise(o, t + 0.01, 0.08, { f: 3200, q: 0.8, peak: p.paper * 0.35 }); return p.thud; } },
+  { id: "deal3", name: "Roll 3 cards", use: "Three new player cards land, one ping each",
+    params: [R("cards", "Cards", 1, 5, 1, 3), R("gap", "Gap", 0.06, 0.5, 0.01, 0.2, "s"), R("pitch", "First ping", 300, 1600, 10, 660, "Hz"), R("rise", "Rise per card", 0, 7, 1, 4, "st"), R("whoosh", "Whoosh", 0, 1, 0.05, 0.7), R("sparkle", "Sparkle", 0, 1, 0.05, 0.5)],
+    play(o, p, t) { let tt = t; for (let i = 0; i < p.cards; i++) { tt = t + i * p.gap; if (p.whoosh) noise(o, tt, 0.09, { f: 1400, f2: 6500, q: 1.4, peak: p.whoosh * 0.8 }); tone(o, "triangle", p.pitch * semi(i * p.rise), tt + 0.06, 0.28, 0.26); }
+      const top = p.pitch * semi((p.cards - 1) * p.rise) * 2; if (p.sparkle) [0, 4, 7, 12].forEach((n, i) => tone(o, "sine", top * semi(n), tt + 0.25 + i * 0.05, 0.3, 0.06 * p.sparkle)); return tt - t + 0.6; } },
+  { id: "pick", name: "Pick a player", use: "Tapping a card to choose it",
+    params: [R("pitch", "Pitch", 300, 1500, 10, 700, "Hz"), R("lift", "Lift", 0, 12, 1, 7, "st"), R("len", "Length", 0.04, 0.3, 0.01, 0.09, "s"), R("thump", "Thump", 0, 1, 0.05, 0.5), C("wave", "Tone", ["sine", "triangle", "square"], "triangle")],
+    play(o, p, t) { const pk = p.wave === "square" ? 0.15 : 0.35; tone(o, p.wave, p.pitch, t, p.len, pk); tone(o, p.wave, p.pitch * semi(p.lift), t + p.len * 0.7, p.len * 1.8, pk);
+      if (p.thump) { const s = tone(o, "sine", 180, t, 0.1, p.thump * 0.7, 0.002); s.frequency.exponentialRampToValueAtTime(70, t + 0.1); } return p.len * 2.6; } },
+  { id: "subIn", name: "Player on", use: "Swapping a player into the team",
+    params: [R("len", "Length", 0.1, 0.8, 0.01, 0.3, "s"), R("low", "Start pitch", 150, 800, 10, 300, "Hz"), R("high", "End pitch", 600, 3000, 10, 1300, "Hz"), R("air", "Whoosh", 0, 1, 0.05, 0.6), R("pop", "Pop", 0, 1, 0.05, 0.6)],
+    play(o, p, t) { const s = tone(o, "triangle", p.low, t, p.len, 0.25, p.len * 0.6); s.frequency.exponentialRampToValueAtTime(p.high, t + p.len); if (p.air) noise(o, t, p.len, { f: 500, f2: 6000, q: 1.2, peak: p.air * 0.5, attack: p.len * 0.6 });
+      if (p.pop) tone(o, "sine", p.high * 1.5, t + p.len * 0.9, 0.12, p.pop * 0.35, 0.002); return p.len + 0.15; } },
+  { id: "subOut", name: "Player off", use: "Swapping a player out of the team",
+    params: [R("len", "Length", 0.1, 0.8, 0.01, 0.32, "s"), R("high", "Start pitch", 600, 3000, 10, 1100, "Hz"), R("low", "End pitch", 100, 600, 10, 220, "Hz"), R("air", "Whoosh", 0, 1, 0.05, 0.6), R("thud", "Thud", 0, 1, 0.05, 0.5)],
+    play(o, p, t) { const s = tone(o, "triangle", p.high, t, p.len, 0.25, 0.01); s.frequency.exponentialRampToValueAtTime(p.low, t + p.len); if (p.air) noise(o, t, p.len, { f: 6000, f2: 500, q: 1.2, peak: p.air * 0.5 });
+      if (p.thud) { const k = tone(o, "sine", 140, t + p.len * 0.85, 0.14, p.thud * 0.7, 0.002); k.frequency.exponentialRampToValueAtTime(55, t + p.len + 0.12); } return p.len + 0.2; } },
+  { id: "survived", name: "Season over", use: "Survived or finished mid-table",
+    params: [R("root", "Key", 150, 500, 1, 262, "Hz"), R("len", "Chord length", 0.2, 1, 0.01, 0.42, "s"), C("wave", "Tone", ["triangle", "sine", "square"], "triangle"), R("bell", "Bell", 0, 1, 0.05, 0.4)],
+    play(o, p, t) { const pk = p.wave === "square" ? 0.07 : 0.14; const chords = [[5, 9, 12], [7, 11, 14], [0, 4, 7, 12]];
+      chords.forEach((c, i) => c.forEach(n => tone(o, p.wave, p.root * semi(n), t + i * p.len, i === 2 ? p.len * 3 : p.len * 1.1, pk, 0.02)));
+      if (p.bell) tone(o, "sine", p.root * 4, t + 2 * p.len, 1.4, 0.12 * p.bell); return p.len * 5.5; } },
+  { id: "champions", name: "Champions fanfare", use: "Winning the league",
+    params: [R("root", "Key", 150, 450, 1, 233, "Hz"), R("speed", "Speed", 0.08, 0.3, 0.005, 0.14, "s"), R("brass", "Brassiness", 400, 5000, 10, 2200, "Hz"), R("hold", "Last note", 0.4, 2.5, 0.05, 1.3, "s"), R("drums", "Timpani", 0, 1, 0.05, 0.6)],
+    play(o, p, t) { const seq = [[0, 1], [0, 1], [0, 1], [7, 3], [5, 1], [7, 1], [12, 0]]; let tt = t;
+      seq.forEach(([n, d], i) => { const last = i === seq.length - 1, len = last ? p.hold : p.speed * d; const fl = ctx.createBiquadFilter(); fl.type = "lowpass"; fl.Q.value = 2; fl.frequency.setValueAtTime(p.brass * 0.35, tt); fl.frequency.linearRampToValueAtTime(p.brass, tt + 0.05); fl.connect(o);
+        [1, 1.006].forEach(dt => tone(fl, "sawtooth", p.root * semi(n) * dt, tt, len * 0.95, 0.12, 0.02)); if (last) [4, 7].forEach(x => tone(fl, "sawtooth", p.root * semi(x), tt, len, 0.08, 0.03));
+        if (p.drums && (i === 0 || i === 3 || last)) { const k = tone(o, "sine", 110, tt, 0.4, p.drums * 0.8, 0.003); k.frequency.exponentialRampToValueAtTime(60, tt + 0.4); }
+        tt += last ? len : p.speed * d * 1.15; }); return tt - t; } },
+];
+const synthById = Object.fromEntries(SYNTHS.map(s => [s.id, s]));
+const synthDefaults = s => Object.fromEntries(s.params.map(p => [p.key, p.def]));
+const synthCfg = id => ({ ...synthDefaults(synthById[id]), ...(state.synth[id] || {}) });
+function playSynth(id, at = 0, gain = 1) {
+  const s = synthById[id], t = ctx.currentTime + at + 0.01, o = synthOut(); o.gain.value = gain;
+  let dur = 1; try { dur = s.play(o, synthCfg(id), t) || 1; } catch (e) { console.warn(e); }
+  const h = { stop() { const n = ctx.currentTime; o.gain.cancelScheduledValues(n); o.gain.setTargetAtTime(0, n, 0.01); setTimeout(() => o.disconnect(), 200); } };
+  return track(h, at + dur + 1.5);
+}
+
+/* ---------- Match moments ---------- */
+const SCENES = [
+  { id: "kickoff", group: "Match", name: "Kick off", when: "First whistle", steps: [{ rec: "whistle", at: 0 }, { rec: "cheer_short", at: 0.25, gain: 0.6 }] },
+  { id: "goal", group: "Match", name: "Goal", when: "You score", steps: [{ syn: "kick", at: 0 }, { rec: "net_ripple", at: 0.12 }, { rec: "goal_roar", at: 0.35 }] },
+  { id: "miss", group: "Match", name: "Near miss", when: "Shot just over", steps: [{ syn: "kick", at: 0 }, { rec: "crowd_ooh", at: 0.12 }, { rec: "groan", at: 1.5, gain: 0.6 }] },
+  { id: "conceded", group: "Match", name: "Conceded", when: "They score", steps: [{ rec: "groan", at: 0 }, { rec: "crowd_moan", at: 1.4, gain: 0.8 }] },
+  { id: "tackle", group: "Match", name: "Big tackle", when: "Won the ball back", steps: [{ syn: "kick", at: 0, gain: 0.7 }, { rec: "cheer_short", at: 0.08 }] },
+  { id: "decision", group: "Match", name: "Bad call", when: "Ref gives it against you", steps: [{ syn: "whistle", at: 0 }, { rec: "boos", at: 0.4 }] },
+  { id: "penalty", group: "Match", name: "Penalty", when: "Spot kick awarded", steps: [{ rec: "whistle", at: 0 }, { rec: "crowd_ooh", at: 0.4, gain: 0.6 }, { syn: "heartbeat", at: 1.6 }] },
+  { id: "halftime", group: "Match", name: "Half time", when: "Break at 45", steps: [{ rec: "half_time", at: 0 }, { rec: "applause", at: 2.2, gain: 0.5 }] },
+  { id: "fulltime", group: "Match", name: "Full time", when: "Match over", steps: [{ rec: "full_time", at: 0 }, { rec: "applause", at: 2.8, gain: 0.6 }] },
+  { id: "roll3", group: "Cards and squad", name: "Roll 3 cards", when: "Three new players to choose from", steps: [{ rec: "card_shuffle", at: 0 }, { syn: "deal3", at: 1.0 }] },
+  { id: "roll3rec", group: "Cards and squad", name: "Roll 3 (real cards)", when: "Same moment, all recorded", steps: [{ rec: "card_shuffle", at: 0 }, { rec: "card_deal", at: 0.95 }] },
+  { id: "reveal", group: "Cards and squad", name: "Card reveal", when: "Rating counts up", steps: [{ rec: "card_slide", at: 0 }, { syn: "cardFlip", at: 0.3 }, { syn: "ratingScan", at: 0.45 }] },
+  { id: "pick", group: "Cards and squad", name: "Pick a player", when: "Choose one of the three", steps: [{ syn: "pick", at: 0 }, { rec: "card_slide", at: 0.05, gain: 0.7 }] },
+  { id: "subIn", group: "Cards and squad", name: "Swap in", when: "Player goes into the XI", steps: [{ syn: "subIn", at: 0 }, { rec: "cheer_short", at: 0.25, gain: 0.35 }] },
+  { id: "subOut", group: "Cards and squad", name: "Swap out", when: "Player drops to the bench", steps: [{ syn: "subOut", at: 0 }, { rec: "applause", at: 0.3, gain: 0.3 }] },
+  { id: "lockin", group: "Cards and squad", name: "Lock in XI", when: "Team confirmed", steps: [{ syn: "stamp", at: 0 }, { syn: "tap", at: 0.2 }] },
+  { id: "promoted", group: "Season end", name: "Promoted", when: "Up a division", steps: [{ syn: "climb", at: 0 }, { rec: "celebration", at: 0.6 }, { syn: "promotion", at: 1.4 }] },
+  { id: "champions", group: "Season end", name: "Champions", when: "Top of the league", steps: [{ rec: "trophy_fanfare", at: 0 }, { syn: "champions", at: 0.1, gain: 0.6 }, { rec: "goal_roar", at: 0.3, gain: 0.7 }, { rec: "celebration", at: 2.2, gain: 0.8 }] },
+  { id: "survived", group: "Season end", name: "Survived", when: "Mid-table, job done", steps: [{ syn: "survived", at: 0 }, { rec: "applause", at: 0.4, gain: 0.7 }] },
+  { id: "relegated", group: "Season end", name: "Relegated", when: "Down you go", steps: [{ rec: "stunned_silence", at: 0 }, { rec: "relegation_sting", at: 0.5 }, { rec: "boos", at: 2.8, gain: 0.4 }] },
+];
+const sceneLen = sc => Math.max(...sc.steps.map(s => s.at + (s.rec && buffers[s.rec] ? buffers[s.rec].duration : 3)));
+function playScene(id, { label } = {}) {
+  const sc = SCENES.find(s => s.id === id); if (!sc) return 0;
+  sc.steps.forEach(s => {
+    if (s.rec) playClip(s.rec, { at: s.at, gain: s.gain || 1 });
+    if (s.syn) playSynth(s.syn, s.at, s.gain || 1);
+  });
+  const el = document.querySelector(`[data-scene="${id}"]`);
+  if (el) { el.classList.add("playing"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("playing"), sceneLen(sc) * 1000); }
+  if (!label) flash(sc.name);
+  return sceneLen(sc);
+}
+
+/* ---------- Display ---------- */
+const $ = id => document.getElementById(id);
+let busyTicker = false;
+function ticker(t) { $("ticker").textContent = t; }
+let flashT = 0;
+function flash(t) { if (sim) return; ticker(t); busyTicker = true; clearTimeout(flashT); flashT = setTimeout(() => { busyTicker = false; if (sim) return; ticker(loaded < total ? `Loading sounds ${loaded} of ${total}` : "Ready"); }, 3500); }
+
+/* ---------- UI: mixer ---------- */
+const pct = v => Math.round(v * 100);
+["master", "bed", "rec", "syn", "verb"].forEach(k => {
+  const inp = $("m_" + k), out = $("o_" + k);
+  inp.value = state.master[k]; out.textContent = pct(state.master[k]);
+  inp.addEventListener("input", () => { state.master[k] = +inp.value; out.textContent = pct(+inp.value); applyMaster(); save(); });
+});
+$("m_bedOn").checked = state.master.bedOn;
+$("m_bedOn").addEventListener("change", e => { state.master.bedOn = e.target.checked; save(); unlock(); e.target.checked ? startBed() : stopBed(); });
+
+/* ---------- UI: scenes ---------- */
+const chipLabel = s => s.rec ? (CLIPS.find(c => c.id === s.rec) || {}).label : synthById[s.syn].name;
+const groupsOf = list => [...new Set(list.map(x => x.group))];
+$("scenes").innerHTML = groupsOf(SCENES).map(g => `<div class="scene-group"><h3>${g}</h3><div class="scenes">${SCENES.filter(sc => sc.group === g).map(sc =>
+  `<button class="scene" type="button" data-scene="${sc.id}"><h3>${sc.name}</h3><span class="when">${sc.when}</span><span class="chips">${sc.steps.map(s => `<span class="chip ${s.rec ? "rec" : "syn"}">${chipLabel(s)}</span>`).join("")}</span></button>`).join("")}</div></div>`).join("");
+$("scenes").addEventListener("click", e => { const b = e.target.closest("[data-scene]"); if (b) { unlock(); playScene(b.dataset.scene); } });
+
+/* ---------- UI: pads + inspector ---------- */
+let selected = "goal_roar";
+const playingPads = {};
+function isTuned(id) { const c = clipCfg(id); return Object.keys(DEFAULT_CLIP).some(k => c[k] !== DEFAULT_CLIP[k]); }
+function renderPads() {
+  $("pads").innerHTML = CLIPS.map((c, i) => {
+    const d = buffers[c.id] ? buffers[c.id].duration.toFixed(1) + "s" : "";
+    const head = i === 0 || CLIPS[i - 1].group !== c.group ? `<div class="pad-group">${c.group}</div>` : "";
+    return head + `<button class="pad${c.id === selected ? " sel" : ""}${playingPads[c.id] ? " playing" : ""}" type="button" data-clip="${c.id}"><b>${c.label}</b><small>${c.note ? c.note + " · " : ""}${d}${isTuned(c.id) ? ' · <span class="tuned">tuned</span>' : ""}</small></button>`;
+  }).join("");
+}
+function renderInspector() {
+  const c = CLIPS.find(x => x.id === selected), cfg = clipCfg(selected);
+  $("inspector").innerHTML = `
+    <div class="ins-title"><div><span class="eyebrow">Settings for</span><h3>${c.label}</h3></div>
+      <div class="ins-actions"><button class="btn primary small" type="button" data-act="play">Play</button><button class="btn stop small" type="button" data-act="stop">Stop</button><button class="btn small" type="button" data-act="reset">Reset</button></div></div>
+    <div class="fader"><label for="ci_gain">Volume <output>${pct(cfg.gain)}</output></label><input type="range" id="ci_gain" data-k="gain" min="0" max="2" step="0.01" value="${cfg.gain}"></div>
+    <div class="fader"><label for="ci_rate">Speed and pitch <output>${cfg.rate.toFixed(2)}x</output></label><input type="range" id="ci_rate" data-k="rate" min="0.4" max="2" step="0.01" value="${cfg.rate}"></div>
+    <div class="fader"><label for="ci_pan">Left / right <output>${cfg.pan === 0 ? "C" : (cfg.pan < 0 ? "L" : "R") + Math.abs(Math.round(cfg.pan * 100))}</output></label><input type="range" id="ci_pan" data-k="pan" min="-1" max="1" step="0.05" value="${cfg.pan}"></div>
+    <div class="ins-actions"><label class="toggle"><input type="checkbox" id="ci_loop" data-k="loop" ${cfg.loop ? "checked" : ""}> Loop</label><label class="toggle"><input type="checkbox" id="ci_rev" data-k="reverse" ${cfg.reverse ? "checked" : ""}> Reverse</label></div>`;
+}
+function playPad(id) {
+  const h = playClip(id, { onend: () => { if (playingPads[id] === h) { delete playingPads[id]; renderPads(); } } });
+  if (h) { playingPads[id] = h; renderPads(); flash((CLIPS.find(c => c.id === id) || {}).label); }
+}
+$("pads").addEventListener("click", e => { const b = e.target.closest("[data-clip]"); if (!b) return; unlock(); selected = b.dataset.clip; renderInspector(); playPad(selected); });
+$("inspector").addEventListener("input", e => {
+  const k = e.target.dataset.k; if (!k) return;
+  const v = e.target.type === "checkbox" ? e.target.checked : +e.target.value;
+  state.clips[selected] = { ...clipCfg(selected), [k]: v }; save();
+  const o = e.target.closest(".fader")?.querySelector("output");
+  if (o) o.textContent = k === "rate" ? v.toFixed(2) + "x" : k === "pan" ? (v === 0 ? "C" : (v < 0 ? "L" : "R") + Math.abs(Math.round(v * 100))) : pct(v);
+  renderPads();
+});
+$("inspector").addEventListener("click", e => {
+  const a = e.target.closest("[data-act]")?.dataset.act; if (!a) return; unlock();
+  if (a === "play") playPad(selected);
+  if (a === "stop" && playingPads[selected]) { playingPads[selected].stop(); delete playingPads[selected]; renderPads(); }
+  if (a === "reset") { delete state.clips[selected]; save(); renderInspector(); renderPads(); }
+});
+
+/* ---------- UI: synth lab ---------- */
+const fmt = (p, v) => p.options ? v : (p.step < 0.01 ? v.toFixed(3) : p.step < 1 ? (+v).toFixed(2) : Math.round(v)) + (p.unit ? " " + p.unit : "");
+function synthCard(s) {
+  const cfg = synthCfg(s.id);
+  return `<article class="synth" data-synth="${s.id}">
+    <div class="synth-head"><div><h3>${s.name}</h3><p>${s.use}</p></div>
+      <button class="play-btn" type="button" data-act="play" aria-label="Play ${s.name}"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3 1.5v13l11-6.5z"/></svg></button></div>
+    <div class="params">${s.params.map(p => p.options
+      ? `<div class="fader"><label for="sy_${s.id}_${p.key}">${p.label}</label><select id="sy_${s.id}_${p.key}" data-k="${p.key}">${p.options.map(o => `<option${o === cfg[p.key] ? " selected" : ""}>${o}</option>`).join("")}</select></div>`
+      : `<div class="fader"><label for="sy_${s.id}_${p.key}">${p.label} <output>${fmt(p, cfg[p.key])}</output></label><input type="range" id="sy_${s.id}_${p.key}" data-k="${p.key}" min="${p.min}" max="${p.max}" step="${p.step}" value="${cfg[p.key]}"></div>`).join("")}</div>
+    <div class="synth-foot"><button class="btn small" type="button" data-act="rand">Randomise</button><button class="btn small" type="button" data-act="reset">Reset</button><button class="btn small" type="button" data-act="copy">Copy settings</button></div>
+  </article>`;
+}
+$("synths").innerHTML = SYNTHS.map(synthCard).join("");
+let auditionT = 0;
+$("synths").addEventListener("input", e => {
+  const card = e.target.closest("[data-synth]"), k = e.target.dataset.k; if (!card || !k) return;
+  const s = synthById[card.dataset.synth], p = s.params.find(x => x.key === k), v = p.options ? e.target.value : +e.target.value;
+  state.synth[s.id] = { ...synthCfg(s.id), [k]: v }; save();
+  const o = e.target.closest(".fader").querySelector("output"); if (o) o.textContent = fmt(p, v);
+  clearTimeout(auditionT); auditionT = setTimeout(() => { unlock(); playSynth(s.id); }, 260);
+});
+$("synths").addEventListener("click", e => {
+  const card = e.target.closest("[data-synth]"), a = e.target.closest("[data-act]")?.dataset.act; if (!card || !a) return;
+  const s = synthById[card.dataset.synth]; unlock();
+  if (a === "play") { playSynth(s.id); flash(s.name); }
+  if (a === "rand" || a === "reset") {
+    if (a === "reset") delete state.synth[s.id];
+    else state.synth[s.id] = Object.fromEntries(s.params.map(p => [p.key, p.options ? p.options[Math.floor(Math.random() * p.options.length)] : +(p.min + Math.round(Math.random() * (p.max - p.min) / p.step) * p.step).toFixed(4)]));
+    save(); card.outerHTML = synthCard(s); playSynth(s.id);
+  }
+  if (a === "copy") copy(JSON.stringify({ sound: s.id, name: s.name, settings: synthCfg(s.id) }, null, 2), `${s.name} settings copied`);
+});
+
+/* ---------- Copy / reset ---------- */
+function toast(t) { const el = $("toast"); el.textContent = t; el.hidden = false; clearTimeout(el._t); el._t = setTimeout(() => (el.hidden = true), 2200); }
+function copy(text, msg) {
+  const fallback = () => { const f = $("copyFallback"); f.hidden = false; f.innerHTML = `<p>Copying is blocked here. Select this text and copy it yourself:</p><textarea class="copy-fallback" readonly></textarea>`; const ta = f.querySelector("textarea"); ta.value = text; ta.focus(); ta.select(); };
+  try { navigator.clipboard.writeText(text).then(() => toast(msg), fallback); } catch (e) { fallback(); }
+}
+$("copyAll").addEventListener("click", () => {
+  const tuned = Object.fromEntries(Object.keys(state.clips).map(id => [id, clipCfg(id)]));
+  const synth = Object.fromEntries(SYNTHS.map(s => [s.id, synthCfg(s.id)]));
+  copy(JSON.stringify({ mixer: state.master, recordings: tuned, synth }, null, 2), "All settings copied");
+});
+let resetArmed = false;
+$("resetAll").addEventListener("click", e => {
+  if (!resetArmed) { resetArmed = true; e.target.textContent = "Tap again to reset"; setTimeout(() => { resetArmed = false; e.target.textContent = "Reset everything"; }, 3000); return; }
+  state = { master: { ...DEFAULT_MASTER }, clips: {}, synth: {}, seed: state.seed }; save(); location.reload();
+});
+
+/* ---------- Match simulator ---------- */
+let sim = null;
+function rng(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const OPP = ["BUR", "LUT", "SHU", "NOR", "WAT", "MID", "HUL", "QPR", "BLA", "CAR", "SWA", "STO"];
+function setSeedLabel() { $("seedLabel").textContent = `SEED ${state.seed}`; }
+setSeedLabel();
+function setScore(us, them, opp) { $("score").textContent = `D2T ${us}-${them} ${opp}`; }
+function stopSim(msg) {
+  if (!sim) return; clearInterval(sim.iv); sim.timers.forEach(clearTimeout); sim = null;
+  $("simBtn").textContent = "Play a 45 second match"; if (!state.master.bedOn) stopBed(); if (msg) ticker(msg);
+}
+function startSim() {
+  stopSim(); unlock(); clearTimeout(flashT); busyTicker = false;
+  const r = rng(state.seed), opp = OPP[Math.floor(r() * OPP.length)];
+  sim = { min: 0, us: 0, them: 0, cool: 6, iv: 0, timers: [], opp };
+  $("simBtn").textContent = "Stop match"; setScore(0, 0, opp); $("clock").textContent = "00'";
+  startBed(); ticker(`D2T v ${opp}. Kick off`); playScene("kickoff", { label: true });
+  sim.iv = setInterval(() => {
+    const s = sim; if (!s) return; s.min++; $("clock").textContent = String(s.min).padStart(2, "0") + "'"; s.cool--;
+    const say = t => ticker(`${s.min}' ${t}`);
+    if (s.min === 45) { playScene("halftime", { label: true }); say(`Half time. D2T ${s.us}-${s.them} ${opp}`); s.cool = 6; return; }
+    if (s.min >= 90) {
+      clearInterval(s.iv); playScene("fulltime", { label: true }); say(`Full time. D2T ${s.us}-${s.them} ${opp}`);
+      const outcome = s.us > s.them ? "promoted" : s.us < s.them ? "relegated" : "survived";
+      s.timers.push(setTimeout(() => { if (sim !== s) return;
+        playScene(outcome, { label: true }); ticker({ promoted: "Won it. Going up", relegated: "Beaten. Going down", survived: "A point. Safe for another year" }[outcome]);
+        s.timers.push(setTimeout(() => sim === s && stopSim(), 7000));
+      }, 5000));
+      return;
+    }
+    if (s.cool > 0) return;
+    const x = r();
+    if (x < 0.05) { s.us++; setScore(s.us, s.them, opp); playScene("goal", { label: true }); say("GOAL! D2T score"); s.cool = 9; }
+    else if (x < 0.11) { playScene("miss", { label: true }); say("Chance! Just wide"); s.cool = 7; }
+    else if (x < 0.14) { s.them++; setScore(s.us, s.them, opp); playScene("conceded", { label: true }); say(`${opp} score`); s.cool = 7; }
+    else if (x < 0.16) { playScene("decision", { label: true }); say("Free kick given against D2T"); s.cool = 5; }
+    else if (x < 0.18) { playClip("chant", { gain: 0.7 }); say("The away end in full voice"); s.cool = 7; }
+    else if (x < 0.2) { playScene("tackle", { label: true }); say("Huge tackle"); s.cool = 4; }
+    else if (x < 0.21) { playClip("crowd_moan"); say("Sloppy pass. The crowd let them know"); s.cool = 5; }
+    else if (x < 0.215) { playScene("penalty", { label: true }); say("Penalty to D2T"); const ok = r() < 0.75;
+      s.timers.push(setTimeout(() => { if (sim !== s) return; if (ok) { s.us++; setScore(s.us, s.them, opp); playScene("goal", { label: true }); say("Penalty scored"); } else { playScene("miss", { label: true }); say("Penalty missed"); } }, 5200)); s.cool = 14; }
+  }, 500);
+}
+$("simBtn").addEventListener("click", () => sim ? stopSim("Match stopped") : startSim());
+$("seedBtn").addEventListener("click", () => { state.seed = 1000 + Math.floor(Math.random() * 9000); save(); setSeedLabel(); toast(`Seed ${state.seed}: same seed, same match`); });
+$("stopAll").addEventListener("click", () => {
+  stopSim(); active.forEach(h => h.stop()); active.clear(); Object.keys(playingPads).forEach(k => delete playingPads[k]);
+  if (!state.master.bedOn) stopBed(); renderPads(); document.querySelectorAll(".playing").forEach(el => el.classList.remove("playing")); ticker("All stopped");
+});
+document.addEventListener("visibilitychange", () => { if (document.hidden && sim) stopSim("Match paused when you left the page"); });
+
+/* ---------- Footer + first render ---------- */
+$("prompts").innerHTML = CLIPS.map(c => `<li><b>${c.label}:</b> ${c.prompt}</li>`).join("") ;
+renderPads(); renderInspector();
+const padTimer = setInterval(() => { renderPads(); if (loaded >= total) clearInterval(padTimer); }, 600);
+})();
+</script>

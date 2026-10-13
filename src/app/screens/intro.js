@@ -120,6 +120,7 @@
         await sleep(held ? 650 : 950); if (done) return;
 
         // 2. open up: emblem spins 360 and shrinks into place, D2T letters slide apart, ROP and OP appear
+        window.D2TSound && window.D2TSound.play('intro');   // only heard if sound is already awake: phones refuse sound before the first tap
         arrive.cancel(); shortWhole.style.opacity = 0;
         [emb, sD, s2, sT].forEach((e) => { e.style.opacity = 1; });
         const D = 1150, ease = 'cubic-bezier(.65,0,.25,1)';

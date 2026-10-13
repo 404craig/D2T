@@ -163,7 +163,7 @@
         const before = new Map(allItems().map((el) => [el.dataset.card, el.getBoundingClientRect()]));
         if (ghostRect) before.set(String(a.id), ghostRect);
         if (!GAME.swap(idOf(a.id), idOf(b.id))) return;
-        window.D2TSound && window.D2TSound.play(a.kind === 'sub' || b.kind === 'sub' ? 'subIn' : 'tap');
+        window.D2TSound && window.D2TSound.play('cardDrop');
         sel = null;
         render(before);
       }
@@ -228,7 +228,11 @@
         let t = under && under.closest('[data-card]');
         if (t && (!root.contains(t) || t.dataset.card === press.id || (press.kind === 'sub' && t.dataset.kind === 'sub'))) t = null;
         if (!t && under && press.kind === 'sub') { const slot = under.closest('.se-slot'); t = slot && slot.querySelector('[data-card]'); }
-        if (t !== target) { target && target.classList.remove('se-target'); target = t; target && target.classList.add('se-target'); }
+        if (t !== target) {
+          target && target.classList.remove('se-target'); target = t; target && target.classList.add('se-target');
+          const sl = t && t.closest('.se-slot'), card = L.all.get(String(press.id));
+          if (sl && card && window.D2TSound) { try { window.D2TSound.play('shirtFit', { green: 0, amber: 1, red: 2 }[GAME.fit(card.id, +sl.dataset.i)]); } catch (e) { /* no fit, no sound */ } }
+        }
       }
       function drop(p, x, y) {
         const g = ghost, t = target; ghost = null; target = null;
@@ -245,6 +249,7 @@
           return;
         }
         // no target: the card drops back to where it came from
+        window.D2TSound && window.D2TSound.play('dropCancel');
         const back = p.item.getBoundingClientRect(), hr = g._hr;
         if (reduced || !p.item.isConnected) { g.remove(); applySel(); return; }
         const anim = g.animate([{ transform: g.style.transform }, { transform: `translate(${back.left - hr.left}px,${back.top - hr.top}px) scale(${back.width / g._w})` }], { duration: 320, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
@@ -276,6 +281,7 @@
             if (pending === GAME.eng().formation) return;
             const before = new Map(allItems().map((n) => [n.dataset.card, n.getBoundingClientRect()]));
             GAME.setFormation(pending);
+            window.D2TSound && window.D2TSound.play('formation');
             sel = null;
             render(before);
           }
@@ -297,6 +303,7 @@
         D2T.tips([['formation', body.querySelector('.se-formlink'), 'Change your shape here'], ...(pre && !drafting && sub ? [['subs', sub, 'Drag a sub onto the pitch']] : [])]); }, 1100);
       const offOld = this._off; this._off = () => { clearTimeout(tipT); offOld && offOld(); };
       // first load: cards deal onto the pitch
+      if (!reduced && window.D2TSound) window.D2TSound.play('dealPitch');
       if (!reduced) [...slotsEl.querySelectorAll('.se-cardwrap')].forEach((n, i) => n.animate([{ opacity: 0, transform: 'translateY(14px) scale(.85)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 60 + i * 40, easing: 'cubic-bezier(.3,1.3,.5,1)', fill: 'backwards' }));
     },
     unmount() { this._off && this._off(); }

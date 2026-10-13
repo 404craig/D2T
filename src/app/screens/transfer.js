@@ -23,6 +23,7 @@
     // phase 1: one full turn (0 .. 700ms); phase 2: a 150ms charge (it swells and brightens); phase 3: the burst (720ms)
     const T1 = 640, TC = 150, T2 = 720;
     const t0 = performance.now();
+    window.D2TSound && window.D2TSound.play('windowOpen');
     let particles = null;
     const img = new Image(); img.src = D2T.ASSET.emblem;
     const buildParticles = () => {
@@ -94,6 +95,7 @@
     filler = { season: S.season, cards };
     return cards;
   };
+  const LV_IDX = (p) => Math.max(0, ['bronze', 'silver', 'gold', 'baller', 'legend'].indexOf(p && p.level));
   const LV_ACCENT = (p) => { const L = D2T.LV[p.level] || D2T.LV.bronze; return { accent: p.level === 'silver' ? '#DCE2E8' : p.level === 'bronze' ? '#D99A66' : L.text, ink: p.level === 'silver' || p.level === 'bronze' || p.level === 'gold' ? '#000' : '#fff' }; };
   const PITCH_W = 50;
   const ROLE = { GK: 'goalkeeper', DEF: 'defender', MID: 'midfielder', FWD: 'forward' };
@@ -180,6 +182,7 @@
         placing = true;
         drawPitch();
         if (animate && !reduced) {
+          SND.play('trayDrop');
           flip(true);
           field.animate([{ opacity: 0, transform: 'translateY(-14px)' }, { opacity: 1, transform: 'none' }], { duration: 420, delay: 160, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
         } else api.el.classList.add('is-placing');
@@ -204,9 +207,10 @@
         const p = api.results()[i];
         if (draft && di.open && p && !GAME.draftFits(p.id).includes(slot)) { api.hint(`${surname(p.name)} can't play there. Pick a lit shirt.`); return; }
         if (draft && !di.open && slot !== di.slot) { api.hint(`This pick goes in the lit ${di.pos} shirt`); return; }
+        const replaced = !draft && p && GAME.lineup().xi[slot];
         if (!p || !(draft ? GAME.draftPick(p.id, slot) : GAME.signAt(p.id, slot))) return;
         signing = true;
-        SND.play('subIn');
+        SND.play('sign', LV_IDX(p)); if (replaced) SND.play('playerOut', null, 0.35);
         drawPitch(-1, slot);
         const s = api.slots[i];
         s.classList.add('is-signed');
@@ -216,6 +220,7 @@
       }
       function pass() {
         if (signing) return;
+        SND.play('pass');
         GAME.pass();
         D2T.go(GAME.eng().phase === 'window' ? 'transfer' : 'squad');
       }
@@ -256,7 +261,10 @@
         const under = document.elementFromPoint(e.clientX, e.clientY);
         let t = under && under.closest('.tr-field .se-cardwrap');
         if (!t && under) { const sl = under.closest('.tr-field .se-slot'); t = sl && sl.querySelector('.se-cardwrap'); }
-        if (t !== target) { target && target.classList.remove('se-target'); target = t; target && target.classList.add('se-target'); }
+        if (t !== target) {
+          target && target.classList.remove('se-target'); target = t; target && target.classList.add('se-target');
+          if (t) { try { const f = GAME.fit(api.results()[drag.i].id, +t.dataset.i); SND.play('shirtFit', { green: 0, amber: 1, red: 2 }[f]); } catch (e) { /* no fit, no sound */ } }
+        }
       };
       const onUp = (e) => {
         if (!drag || e.pointerId !== drag.pid) return;
@@ -264,7 +272,7 @@
         if (!d.moved) return;
         suppress = d.i;
         const t = target; endDrag(false);
-        if (t) sign(d.i, +t.dataset.i);
+        if (t) sign(d.i, +t.dataset.i); else SND.play('dropCancel');
       };
       window.addEventListener('pointermove', onMove, { passive: false });
       window.addEventListener('pointerup', onUp);
@@ -288,6 +296,8 @@
           settled: st.spun === rollKey ? GAME.rollCards() : null,
           onSettled: () => { leaving = false; st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); timers.push(setTimeout(() => enterPlacing(true), reduced ? 0 : 450)); },
           accent: LV_ACCENT,
+          landSound: (i, p) => SND.play('rarity', LV_IDX(p)),
+          bigIndex: (rs) => { let b = -1; (rs || []).forEach((p, i) => { if (LV_IDX(p) >= 3 && (b < 0 || LV_IDX(p) >= LV_IDX(rs[b]))) b = i; }); return b; },
           caption: (p) => `${p.main || p.pos} · ${lvName(p).toUpperCase()}`,
           details: (p) => D2T.cards.info(p), detailsBare: true,
           mainLabel: 'Spin', pickLabel: draft ? 'Pick one' : 'Pass', spinningLabel: 'Rolling',

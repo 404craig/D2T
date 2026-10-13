@@ -111,7 +111,7 @@
         raf = requestAnimationFrame(tick);
       };
       const skip = () => {
-        cancelAnimationFrame(raf);
+        cancelAnimationFrame(raf); SND.play('skip');
         while (nextEv < sim.events.length) push(sim.events[nextEv++], false);
         setClock(90, 'FT'); end();
       };
@@ -143,6 +143,7 @@
           <p class="se-note" style="text-align:center">Played out by the game from your XI and the opposition's strength.</p>
         </div>`;
         body.scrollTop = 0;
+        if (animate) SND.play('result', res === 'win' ? 0 : res === 'draw' ? 1 : 2, 0.2);
         btn.textContent = 'League table'; btn.classList.remove('se-btn-ghost');
       };
 
@@ -183,6 +184,7 @@
             });
           });
           SE.flip(rows, before, { duration: 800, stagger: 12, easing: 'cubic-bezier(.65,0,.25,1)' });
+          { const mv = gw > 1 ? prevPos.get(me) - (now.find((r) => r.name === me) || {}).pos : 0; SND.play('tableMove', mv > 0 ? 0 : mv < 0 ? 1 : 2); }
           const mine = byName.get(me);
           setTimeout(() => { if (!alive) return; mine.classList.add('se-thump'); const sr = body.getBoundingClientRect(), rr = mine.getBoundingClientRect(); body.scrollTo({ top: body.scrollTop + rr.top - sr.top - body.clientHeight * 0.45, behavior: reduced ? 'auto' : 'smooth' }); }, reduced ? 0 : 850);
         };

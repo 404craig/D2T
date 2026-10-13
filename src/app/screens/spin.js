@@ -101,7 +101,7 @@
   //        caption(item), details(item) -> html, mainLabel, selectedLabel(item), onConfirm(item), respins (number or null),
   //        onRespinsChange(n), pass: {label, onPass}, placeholder() -> html }
   function mount(root, cfg) {
-    const reduced = D2T.reduced();
+    const reduced = D2T.reduced(), SND = window.D2TSound || { play() {}, tick() {}, tease() {} };
     const el = D2T.h(`<div class="sp-screen">
       <div class="sp-head"><span class="sp-kicker">${cfg.kicker || ''}</span><h1 class="sp-title">${cfg.title}</h1><p class="sp-sub">${cfg.sub || ''}</p></div>
       <div class="sp-stage"><div class="sp-floor"></div><div class="sp-row${cfg.count === 1 ? ' sp-one' : ''}">${'<div class="sp-slot"></div>'.repeat(cfg.count || 3)}</div></div>
@@ -156,7 +156,7 @@
     const select = (i) => {
       if (state !== 'settled') return;
       if (selected === i) { openCard(i); return; }
-      selected = i;
+      selected = i; SND.play('cardSelect', 0);
       slots.forEach((s, j) => { s.classList.toggle('is-sel', j === i); s.classList.toggle('is-other', j !== i); });
       if (!cfg.afterSettle) { setMain(cfg.selectedLabel(results[i]), results[i]); main.disabled = false; }
       hint(cfg.hintSelected || 'Tap it again to take a closer look');
@@ -208,7 +208,9 @@
         reels.forEach((r, i) => { r.draw(profs[i].target, 0); r.hit(cfg.accent(results[i]).accent); r.settle(profs[i].target, cfg.caption && cfg.caption(results[i])); });
         done(); return;
       }
-      const t0 = performance.now(), landed = reels.map(() => false);
+      // a Baller or Legend gets a soft build-up that ends as its reel stops (cfg.bigIndex)
+      if (cfg.bigIndex) { const bi = cfg.bigIndex(results); if (bi >= 0 && profs[bi]) SND.tease(profs[bi].landAt); }
+      const t0 = performance.now(), landed = reels.map(() => false), lastK = reels.map(() => 0);
       let settledCalled = false;
       const step = (now) => {
         const t = (now - t0) / 1000;
@@ -216,7 +218,8 @@
         reels.forEach((r, i) => {
           const P = profs[i], s = sample(P, t);
           r.draw(s.p, s.v);
-          if (!landed[i] && t >= P.landAt) { landed[i] = true; r.hit(cfg.accent(results[i]).accent); r.settle(P.target, cfg.caption && cfg.caption(results[i])); }
+          const k = Math.floor(s.p); if (k > lastK[i] && !landed[i]) SND.tick(i, s.v); lastK[i] = k;   // a muffled tap per card passing
+          if (!landed[i] && t >= P.landAt) { landed[i] = true; r.hit(cfg.accent(results[i]).accent); r.settle(P.target, cfg.caption && cfg.caption(results[i])); if (cfg.landSound) cfg.landSound(i, results[i]); else SND.play('reelLand', i); }
           if (s.phase !== 'done') allDone = false;
         });
         // the moment the last reel lands the result is final: taps count while the bounce plays out
@@ -256,7 +259,7 @@
     reload.onclick = async () => {
       if (state === 'spinning' || landing || respinning || respins == null || respins <= 0) return;
       dropTip();
-      respins -= 1; cfg.onRespinsChange && cfg.onRespinsChange(respins);
+      respins -= 1; SND.play('respin'); cfg.onRespinsChange && cfg.onRespinsChange(respins);
       main.classList.remove('is-after');
       respinning = true;
       try { if (cfg.beforeSpin) await cfg.beforeSpin(); } finally { respinning = false; }
@@ -402,7 +405,7 @@
             }, HIT);
             // the slot grows to its picked size as the card settles, so nothing moves again once it has come to rest
             later(() => slot.classList.add('is-sel'), T - 150);
-            later(() => SND.play('lockin'), T + 20);
+            later(() => SND.play('cardDrop'), T + 20);
             later(() => oldC.remove(), T + 320);
             // once everything is still the reel takes the card: the same card, shadow and shine, so nothing shows
             later(() => {
