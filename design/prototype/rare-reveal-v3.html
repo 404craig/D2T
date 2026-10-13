@@ -240,7 +240,7 @@
 
   // ---------- sound: the game's own clips (audio/ on main, build 84) and a muffled glass smash made here ----------
   let AC = null, OUT = null, BUF = {}, soundOn = true;
-  const CLIPS = ['swoosh_up', 'thud_low', 'tick_wood', 'tick_mech', 'celebration', 'impact_boom', 'glass_smash', 'fireworks'];
+  const CLIPS = ['swoosh_up', 'thud_low', 'tick_wood', 'tick_mech', 'celebration', 'impact_boom', 'glass_smash', 'fireworks', 'crowd_long', 'fireworks_long'];
   const audio = () => {
     if (AC) return AC; AC = new (window.AudioContext || window.webkitAudioContext)();
     const lp = AC.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 6500; OUT = AC.createGain(); OUT.gain.value = .8; OUT.connect(lp); lp.connect(AC.destination);
@@ -301,12 +301,13 @@
     hit(nb, o, t + at, .5, .35, 160, .7, 'lowpass'); hit(nb, o, t + at, .25, .25, 900, .6);                   // the bang
     for (let i = 0; i < 22; i++) hit(nb, o, t + at + .08 + Math.random() * .9, .02 + Math.random() * .03, .05 + Math.random() * .06, 3000 + Math.random() * 4000, 3);   // the crackle
   };
-  const crowdOn = () => { if (!soundOn || !AC || !BUF.celebration || crowd) return;
-    const s = AC.createBufferSource(), v = AC.createGain(); s.buffer = BUF.celebration; s.loop = true; v.gain.setValueAtTime(0, AC.currentTime); v.gain.linearRampToValueAtTime(1.25, AC.currentTime + .4);
-    s.connect(v); v.connect(AC.destination); s.start(); crowd = { s, v };
-    if (BUF.fireworks) { const f = AC.createBufferSource(), fv = AC.createGain(); f.buffer = BUF.fireworks; f.loop = true; fv.gain.setValueAtTime(0, AC.currentTime); fv.gain.linearRampToValueAtTime(1.6, AC.currentTime + .3);
-      f.connect(fv); fv.connect(AC.destination); f.start(); crowd.f = f; crowd.fv = fv; } };
-  const crowdOff = (fade = 1.2) => { clearTimeout(fwTimer); fwTimer = null; if (!crowd) return; const { s, v } = crowd, t = AC.currentTime;
+  // one long crowd track (a celebration that settles into steady cheering and fades near its end) and one long run of
+  // your fireworks, both about 22 s, built from the clips so nothing stops or repeats; each plays once
+  const crowdOn = () => { if (!soundOn || !AC || crowd) return; (window.__t = window.__t || []).push(['on', performance.now()]); crowd = {};
+    [['crowd_long', 1.25, 's', 'v'], ['fireworks_long', 1.6, 'f', 'fv']].forEach(([k, g, a, b]) => { if (!BUF[k]) return;
+      const src = AC.createBufferSource(), v = AC.createGain(); src.buffer = BUF[k]; v.gain.setValueAtTime(0, AC.currentTime); v.gain.linearRampToValueAtTime(g, AC.currentTime + .3);
+      src.connect(v); v.connect(AC.destination); src.start(); crowd[a] = src; crowd[b] = v; }); };
+  const crowdOff = (fade = 1.2) => { (window.__t = window.__t || []).push(['off', performance.now()]); if (!crowd) return; const { s, v } = crowd, t = AC.currentTime;
     [[s, v], [crowd.f, crowd.fv]].forEach(([src, g]) => { if (!src) return; g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(0, t + fade); src.stop(t + fade + .05); }); crowd = null; };
   document.getElementById('snd').onclick = (e) => { soundOn = !soundOn; e.target.classList.toggle('on', soundOn); e.target.textContent = soundOn ? 'Sound on' : 'Sound off'; };
 
