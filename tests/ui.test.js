@@ -139,7 +139,7 @@ fs.mkdirSync(OUT, { recursive: true });
       await page.click(".sp-slot >> nth=0"); await wait(400);
       check(await page.evaluate(() => document.querySelector(".sp-slot.is-sel") === document.querySelector(".sp-slot")), "a tap after a drag dropped on nothing did not select the card");
       await shot("10b-selected");
-      check((await page.$$(".tr-field .se-pfchip")).length === 11, "selecting a card did not colour all 11 shirts by fit");
+      check((await page.$$('.tr-field .se-slot[class*="se-pf-"]')).length === 11, "selecting a card did not colour all 11 shirts by fit");
       await page.click(".tr-field .se-slot.se-best .se-cardwrap", { force: true });
     }
     await wait(500);
@@ -329,7 +329,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.waitForSelector(".sp-main:not([disabled])", { timeout: 8000 }); await wait(250);
   await page.click(".sp-main"); await page.waitForSelector(".sp-screen.is-placing", { timeout: ROLL_MS }); await wait(600);
   await page.click(".sp-slot >> nth=0"); await wait(300);
-  check((await page.$$(".tr-field .se-pfchip")).length === 11, "a picked Club X draft card should show a fit chip on every shirt");
+  check((await page.$$('.tr-field .se-slot[class*="se-pf-"]')).length === 11, "a picked Club X draft card should tint every shirt by fit");
   check(await page.evaluate(() => { const G = window.D2T.game, c = G.rollCards()[0]; return G.draftFits(c.id).some((i) => G.fit(c.id, i) === "green"); }), "a Club X draft card should be green in an open shirt");
   check(!!(await page.$(".tr-field .se-formlink")), "the Club X draft has no Formation button");
   await shot("34b-clx-draft-chips");
