@@ -65,9 +65,9 @@
           const c = L.xi[i];
           if (!c) return `<div class="se-slot" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">${SE.emptyShirt(s.pos, PITCH_W)}</div>`;
           const fit = GAME.fit(c.id, i), oop = fit !== 'green';
-          return `<div class="se-slot se-pl-${fit}${oop ? ' se-oop' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
+          return `<div class="se-slot${oop ? ' se-oop' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
             <div class="se-cardwrap" data-card="${c.id}" data-kind="pitch" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}${oop ? ', out of position' : ''}">
-              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false })}</div></div>`;
+              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false, tab: s.pos, cls: 'fit-' + fit })}</div></div>`;
         }).join('');
         const sl = subsEl.scrollLeft;
         subsEl.innerHTML = L.subs.map((c) => `<div class="se-sub" role="listitem"><div class="se-cardwrap" data-card="${c.id}" data-kind="sub" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, ${ROLE_NAME[c.pos]}, in the squad">${D2T.cards.player(c, { w: SUB_W, mini: true, shine: false })}</div></div>`).join('');
@@ -137,8 +137,8 @@
         if (!pre) bar.dataset.hint = sel ? `Tap a player to swap with ${nm}` : '';
         markFit(sel ? sel.id : null);
       }
-      // While a player is selected or dragged, every shirt is tinted inside with how he would fit it (green preferred, amber
-      // near, red not); a placed card glows in its own fit colour (Craig, 13 Oct: no pills, they clashed with position colours).
+      // A card on the pitch shows the shirt it is in on its tab, coloured by fit (green preferred, amber near, red out of
+      // position). While a player is selected or dragged, every shirt gets a ring in how he would fit it (Craig, 13 Oct).
       function markFit(id) {
         const card = id == null ? null : L.all.get(String(id)), slots = GAME.slots();
         slotsEl.querySelectorAll('.se-slot').forEach((sl) => {

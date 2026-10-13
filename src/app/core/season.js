@@ -32,7 +32,8 @@
   </svg><span class="se-circle" aria-hidden="true"></span><span class="se-spot" aria-hidden="true"></span>`;
 
   // An empty shirt on the pitch (Dare2Dream draft): the shape of a mini card with the position on it.
-  SE.emptyShirt = (pos, w) => `<div class="se-empty" style="width:${w}px;height:${Math.round(w * 1.3)}px" aria-label="Empty ${pos} shirt"><span>${pos}</span></div>`;
+  // the wrap carries the fit ring round the shirt (the shirt itself is clipped to its shield shape)
+  SE.emptyShirt = (pos, w) => `<span class="se-emptywrap"><div class="se-empty" style="width:${w}px;height:${Math.round(w * 1.3)}px" aria-label="Empty ${pos} shirt"><span>${pos}</span></div></span>`;
 
   // ---------- league table ----------
   SE.sortRows = (rows) => rows.sort((a, b) => b.pts - a.pts || (b.gf - b.ga) - (a.gf - a.ga) || b.gf - a.gf || a.name.localeCompare(b.name));
