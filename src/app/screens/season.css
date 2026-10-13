@@ -256,9 +256,19 @@
 .se-oopchip.se-fit-amber { background: #FFB020; color: #1A1000; }
 .se-oopchip.se-fit-red { background: #FF4D5E; color: #1A0004; }
 .se-oopchip.se-fit-green { background: #12F06C; color: #00170A; }
-/* while a card is selected or dragged, every shirt shows how well he fits it */
-.se-pfchip { z-index: 3; box-shadow: 0 0 0 2px #000; }
-.se-slot.se-pf-green .se-cardwrap, .se-slot.se-pf-green .se-empty { outline: 2px solid #12F06C; outline-offset: 2px; border-radius: 8px; }
+/* fit (Craig, 13 Oct): while a card is selected or dragged, every shirt is tinted inside with how well he fits it, empty
+   shirts and the cards already there alike; a card in place glows round its edge in his own fit colour. No pills. */
+.se-slots .se-slot.se-pf-green .se-empty { background: rgba(18,240,108,.30); border-color: #12F06C; }
+.se-slots .se-slot.se-pf-amber .se-empty { background: rgba(255,176,32,.30); border-color: #FFB020; }
+.se-slots .se-slot.se-pf-red .se-empty { background: rgba(255,77,94,.30); border-color: #FF4D5E; }
+.se-slot.se-pf-green .se-empty span { color: #B9FFD6; } .se-slot.se-pf-amber .se-empty span { color: #FFE0A3; } .se-slot.se-pf-red .se-empty span { color: #FFC2C9; }
+.se-slot[class*="se-pf-"] .d2c-face::after { content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+.se-slot.se-pf-green .d2c-face::after { background: rgba(18,240,108,.42); }
+.se-slot.se-pf-amber .d2c-face::after { background: rgba(255,176,32,.42); }
+.se-slot.se-pf-red .d2c-face::after { background: rgba(255,77,94,.42); }
+.se-slot.se-pl-green:not([class*="se-pf-"]) .se-cardwrap .d2c { filter: drop-shadow(0 0 5px rgba(18,240,108,.9)) drop-shadow(0 0 1.5px #12F06C); }
+.se-slot.se-pl-amber:not([class*="se-pf-"]) .se-cardwrap .d2c { filter: drop-shadow(0 0 6px rgba(255,176,32,.95)) drop-shadow(0 0 1.5px #FFB020); }
+.se-slot.se-pl-red:not([class*="se-pf-"]) .se-cardwrap .d2c { filter: drop-shadow(0 0 6px rgba(255,77,94,.95)) drop-shadow(0 0 1.5px #FF4D5E); }
 .se-sub.se-newsign .se-cardwrap { transform: translateY(-3px); }
 @media (prefers-reduced-motion: reduce) { .se-slot.se-best .se-cardwrap { animation: none; outline: 2px solid var(--se-acc); outline-offset: 3px; border-radius: 8px; } }
 
