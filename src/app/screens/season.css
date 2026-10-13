@@ -327,6 +327,6 @@
 .actionbar .se-home svg { width: 24px; height: 24px; }
 .se-nextbar .se-home { width: 52px; height: 52px; }
 .se-nextbar .se-play { min-width: 0; padding-left: 18px; padding-right: 18px; }
-.se-nextbar .se-off { width: 52px; height: 52px; opacity: .3; flex-shrink: 0; }
+.actionbar .se-off { width: 52px; height: 52px; opacity: .3; flex-shrink: 0; }
 .actionbar .se-off svg { width: 24px; height: 24px; }
 .se-nextbar.is-draft .se-play { flex: 1; }

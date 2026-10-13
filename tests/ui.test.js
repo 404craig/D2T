@@ -339,7 +339,8 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => !!window.D2T.game.dailyResult()), "the daily result was not recorded");
   check(!!(await page.$(".sm-daily .sm-dv")) && !!(await page.$('.actionbar [data-act="share"]')), "the daily summary has no today-against-best panel or Share button");
   await page.click('[data-act="again"]'); await expectScreen("home"); await wait(800);
-  check(/Today: .*rise/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not show today's daily result");
+  check(/Done for today/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not say today's daily is done");
+  check(/TODAY'S DAILY/.test(await page.textContent(".fr-dtiles")) && (await page.$$(".fr-dtile")).length === 2, "home has no best and today tiles under the daily card");
   check(!!(await page.$('[data-act="continue-other"]')), "the parked run has no Continue card after the daily");
   // the Daily closes at midnight: an unfinished one from yesterday is dropped (no result), the parked run comes back, home says so
   await page.evaluate(() => {
