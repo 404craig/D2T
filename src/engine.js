@@ -235,9 +235,10 @@ function chooseClub(st, S, rel) {
 /* ---------- Dare2Dream and Club X draft: start with no players, one spin per shirt ---------- */
 // Club X (Craig, 11 Oct): your own club replaces the season's bottom side, drafts 11 the same way and must win the league.
 const DRAFT_MODES = ["dare2dream", "clubx"];
-// Dare2Dream fills keeper first, then defence, midfield and attack. Club X (Craig, 12 Oct) fills them in a random order,
-// shuffled once from the run's seed (and again if the shape changes), so a refresh keeps it. Each spin is three players for that shirt's
-// position from the same season (never your club's own squad, never one seen before). No respins in the draft.
+// Dare2Dream fills keeper first, then defence, midfield and attack, each spin three players for that shirt's position.
+// Club X (Craig, 13 Oct) fills them in any order: each of the three cards is drawn for one of the open shirts (each open shirt
+// as likely as the next), from players who list that shirt's position among their preferred ones, and he goes on any open
+// shirt he lists. All from the same season, never your club's own squad, never one seen before. No respins in the draft.
 // A drafted player leaves his real club for the whole season, like a signing (a raid dated before the season).
 const BROAD_ORDER = { GK: 0, DEF: 1, MID: 2, FWD: 3 };
 function draftOrder(formation) {
@@ -249,19 +250,43 @@ function shuffledOrder(st) {
   for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
   return a;
 }
+// Does he list this position? Players without detailed positions fall back to the broad one.
+function listsPos(p, pos) {
+  const d = (p.p || []).filter(x => SLOT_BROAD[x]);
+  return d.length ? d.includes(pos) : broadOf(p) === SLOT_BROAD[pos];
+}
+const openDraft = (st) => st.mode === "clubx" && !st.draft.order;
+const openSlots = (st) => st.xi.map((id, i) => (id == null ? i : -1)).filter(i => i >= 0);
+// The open shirts a drafted card can go on: those whose position he lists (main first), or in an older run any open one.
+function draftFits(st, S, cardId) {
+  const p = playerOf(S, cardId, S.legends), open = openSlots(st), f = FORMATIONS[st.formation];
+  if (!p || !openDraft(st)) return open;
+  const fit = open.filter(i => listsPos(p, f[i][0]));
+  const main = (p.p || [])[0];
+  return fit.sort((a, b) => (f[b][0] === main) - (f[a][0] === main) || a - b);
+}
 function startDraft(st, S) {
   st.xi = new Array(FORMATIONS[st.formation].length).fill(null);
   st.seen = squadOf(S, st.club).map(p => p.id);
   st.draft = { step: 0 };
-  if (st.mode === "clubx") st.draft.order = shuffledOrder(st);
   st.phase = "draft";
   newDraftRoll(st, S);
 }
-function draftSlot(st) { return (st.draft.order || draftOrder(st.formation))[st.draft.step]; }
+function draftSlot(st) { return openDraft(st) ? null : (st.draft.order || draftOrder(st.formation))[st.draft.step]; }
 function newDraftRoll(st, S) {
-  const slot = draftSlot(st), broad = SLOT_BROAD[FORMATIONS[st.formation][slot][0]];
   const r = stream(st.seed, "draft", st.draft.step);
   const taken = new Set(), cards = [];
+  if (openDraft(st)) {
+    const open = openSlots(st), f = FORMATIONS[st.formation];
+    for (let k = 0; k < 3; k++) {
+      const pos = f[open[Math.floor(r() * open.length)]][0];
+      const id = drawCard(r, S, st, S.legends, taken, null, (p) => listsPos(p, pos));
+      if (id != null) { cards.push(id); taken.add(id); }
+    }
+    st.roll = { key: `d${st.draft.step}`, spin: 0, cards, window: "draft", slot: null, step: st.draft.step + 1, of: st.xi.length };
+    return;
+  }
+  const slot = draftSlot(st), broad = SLOT_BROAD[FORMATIONS[st.formation][slot][0]];
   for (let k = 0; k < 3; k++) { const id = drawCard(r, S, st, S.legends, taken, broad); if (id != null) { cards.push(id); taken.add(id); } }
   st.roll = { key: `d${st.draft.step}`, spin: 0, cards, window: "draft", slot, step: st.draft.step + 1, of: st.xi.length };
 }
@@ -273,9 +298,15 @@ function draftFormation(st, S, f) {
   newDraftRoll(st, S);
   return true;
 }
-function draftPick(st, S, cardId) {
+function draftPick(st, S, cardId, at) {
   if (st.phase !== "draft" || !st.roll || !st.roll.cards.includes(cardId)) return false;
-  const slot = draftSlot(st), p = playerOf(S, cardId, S.legends);
+  let slot = draftSlot(st);
+  if (slot == null) {   // Club X: any open shirt he lists, the one asked for or his best
+    const fits = draftFits(st, S, cardId);
+    slot = at == null ? fits[0] : (fits.includes(at) ? at : null);
+    if (slot == null) return false;
+  }
+  const p = playerOf(S, cardId, S.legends);
   st.xi[slot] = cardId;
   for (const id of st.roll.cards) if (!st.seen.includes(id)) st.seen.push(id);
   st.signed.push({ id: cardId, gw: 0, slot, out: null, from: p ? p.c : null, date: "0000-00-00", draft: true });
@@ -362,11 +393,11 @@ function cardPool(S, st) {
   const seen = new Set(st.seen);
   return S.players.filter(p => (p.a || 0) >= RULES.minApps && !seen.has(p.id));
 }
-function drawCard(r, S, st, legends, taken, broad) {
+function drawCard(r, S, st, legends, taken, broad, fit) {
   const lv = (() => { let x = r(); for (let i = 0; i < 5; i++) { x -= RULES.levelOdds[i]; if (x <= 0) return i; } return 0; })();
-  const pool = cardPool(S, st).filter(p => !taken.has(p.id) && (!broad || broadOf(p) === broad));
+  const pool = cardPool(S, st).filter(p => !taken.has(p.id) && (!broad || broadOf(p) === broad) && (!fit || fit(p)));
   if (lv === 4 && legends && legends.length) {
-    const lp = legends.filter(l => !st.seen.includes(l.id) && !taken.has(l.id) && (!broad || broadOf(l) === broad));
+    const lp = legends.filter(l => !st.seen.includes(l.id) && !taken.has(l.id) && (!broad || broadOf(l) === broad) && (!fit || fit(l)));
     if (lp.length) return lp[Math.floor(r() * lp.length)].id;
   }
   // Best level at or below the one drawn that still has players; then above.
@@ -612,7 +643,7 @@ const API = {
   RULES, LEVELS, POS, NEAR, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
   fitOf, effRating, indexSeason, playerOf, clubAt, xiStrength, userStrength, clubXI, clubStrength,
   schedule, fixturesOf, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
-  draftOrder, draftSlot, draftFormation, draftPick, DRAFT_MODES,
+  draftOrder, draftSlot, draftFormation, draftPick, draftFits, listsPos, DRAFT_MODES,
   startSeason, inWindow, currentWindow, newRoll, respinCards, signPreview, sign, pass,
   otherResults, strengthLoss, expectedGoals, simMatch, playMatch, table, historyTable, historyPositions, positionsSoFar, seasonSummary
 };

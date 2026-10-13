@@ -296,7 +296,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await shot("34-clx-table");
   await page.click(".actionbar button"); await expectScreen("squad"); await wait(600);
   check(await page.evaluate(() => window.D2T.game.eng().phase === "draft" && window.D2T.game.clubName() === "Southside Rovers"), "Club X should start in the draft under your name");
-  check(await page.evaluate(() => Array.isArray(window.D2T.game.eng().draft.order) && window.D2T.game.eng().draft.order.length === 11), "Club X draft has no random shirt order");
+  check(await page.evaluate(() => { const G = window.D2T.game, i = G.draftInfo(); return i.open && G.rollCards().length === 3 && G.rollCards().every((c) => G.draftFits(c.id).length > 0); }), "Club X draft should serve three cards for its open shirts");
   await page.evaluate(() => { const G = window.D2T.game; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(1200); await shot("35-clx-summary");
   check(/Champions|Fell short/.test(await page.textContent(".sm-head")), "Club X summary has no result");
