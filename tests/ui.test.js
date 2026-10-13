@@ -373,7 +373,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await card("clubx", "DROP2TOP Club X\n");
   check(/Champions|Fell short/.test(await page.textContent(".sm-head")), "Club X summary has no result");
   check(await page.evaluate(() => window.D2T.game.xRecord().runs === 1), "Club X run not recorded");
-  check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, classicBefore), "Club X run changed Classic's record");
+  check(await page.evaluate((b) => window.D2T.game.record().runs === JSON.parse(b).runs + 1, classicBefore), "Club X season did not count in the home record");
   // career mode (Craig, 13 Oct): Next season carries the XI on, with pre-season rolls; after 2025/26 the season is a forecast
   await page.evaluate(() => { const G = window.D2T.game; if (!G.careerNext()) G.eng().final.finish = 1; window.D2T.go("home"); }); await wait(700);
   await page.evaluate(() => window.D2T.go("summary")); await wait(1200);

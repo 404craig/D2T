@@ -35,7 +35,7 @@
       const run = D2T.state.run && D2T.state.run.eng && D2T.state.run.eng.seasonKey && D2T.state.run.eng.phase !== 'summary' ? D2T.run() : null;
       const body = D2T.h(`<div class="screen-body fr-page">
         <h1 class="fr-title">My stats</h1>
-        <p class="fr-lead" style="margin-bottom:14px">Your Classic record across every run, then Dare2Dream and Club X.</p>
+        <p class="fr-lead" style="margin-bottom:14px">Your record across every full season of Classic, the Daily and Club X, then Dare2Dream and Club X on their own.</p>
         ${D2T.frRecord(rec, 'dark')}
         <h2 class="fr-h2">Runs</h2>
         <div class="fr-panel">
