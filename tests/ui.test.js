@@ -66,7 +66,8 @@ fs.mkdirSync(OUT, { recursive: true });
       if (!bs[1].classList.contains("bar-mid") || getComputedStyle(bs[1]).borderRadius !== "50%" && !/^(28|29|30)px$/.test(getComputedStyle(bs[1]).borderRadius)) return "the middle button is not the round one";
       if (!bs[bs.length - 1].classList.contains("bar-main")) return "the main button is not last";
       const r = bs[0].getBoundingClientRect(), m = bs[bs.length - 1].getBoundingClientRect();
-      if (Math.round(r.width) !== 56 || Math.round(r.height) !== 56 || m.height < 57 || m.width < r.width * 2) return `sizes off: home ${Math.round(r.width)}x${Math.round(r.height)}, main ${Math.round(m.width)}x${Math.round(m.height)}`;
+      const mainW = bs.filter((x) => x.classList.contains("bar-main")).reduce((t, x) => t + x.getBoundingClientRect().width, 0);   // Unbeaten splits it between Lower and Higher
+      if (Math.round(r.width) !== 56 || Math.round(r.height) !== 56 || m.height < 56 || mainW < r.width * 2) return `sizes off: home ${Math.round(r.width)}x${Math.round(r.height)}, main ${Math.round(mainW)}x${Math.round(m.height)}`;
       return "";
     }).filter(Boolean));
     if (bad.length) errors.push(`bar order on ${where}: ${bad.join("; ")}`);
@@ -362,6 +363,8 @@ fs.mkdirSync(OUT, { recursive: true });
   check((await page.$$(".tr-field .se-pfchip")).length === 11, "a picked Club X draft card should show a fit chip on every shirt");
   check(await page.evaluate(() => { const G = window.D2T.game, c = G.rollCards()[0]; return G.draftFits(c.id).some((i) => G.fit(c.id, i) === "green"); }), "a Club X draft card should be green in an open shirt");
   check(!!(await page.$(".tr-field .se-formlink")), "the Club X draft has no Formation button");
+  await barOrder("Club X draft");
+  check(!!(await page.$(".sp-round.is-reload[disabled][aria-hidden='true']")), "the Club X draft's respin should be greyed");
   await shot("34b-clx-draft-chips");
   await page.evaluate(() => { const G = window.D2T.game, f = G.eng().formation === "3-5-2" ? "4-4-2" : "3-5-2"; G.setFormation(f); window.__f = f; });
   check(await page.evaluate(() => { const e = window.D2T.game.eng(); return e.formation === window.__f && e.xi.filter((x) => x != null).length === 3 && e.phase === "draft"; }), "changing the shape mid-draft lost a drafted player");
