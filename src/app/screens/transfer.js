@@ -139,13 +139,12 @@
         const fitWord = { green: 'a preferred position', amber: 'close to his position', red: 'out of position' };
         slotsEl.innerHTML = GAME.slots().map((s, i) => {
           const c = L.xi[i], f = pf(i), cls = `se-slot${lit.has(i) ? ' se-best' : ''}${f ? ' se-pf-' + f : ''}`;
-          const chipFor = f ? `<span class="se-oopchip se-pfchip se-fit-${f}">${s.pos}</span>` : '';
           const say = f ? `, ${fitWord[f]} for ${D2T.esc(inc.name)}` : '';
-          if (!c) return `<div class="${cls}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}"><div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="Empty ${s.pos} shirt${lit.has(i) ? ', open for this pick' : ''}${say}">${SE.emptyShirt(s.pos, PITCH_W)}${chipFor}</div></div>`;
+          if (!c) return `<div class="${cls}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}"><div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="Empty ${s.pos} shirt${lit.has(i) ? ', open for this pick' : ''}${say}">${SE.emptyShirt(s.pos, PITCH_W)}</div></div>`;
           const fit = GAME.fit(c.id, i), oop = fit !== 'green';
-          return `<div class="${cls}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
+          return `<div class="${cls} se-pl-${fit}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
             <div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}. Sign the selected player here${say}">
-              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: i === fresh })}${chipFor || (oop ? `<span class="se-oopchip se-fit-${fit}">${s.pos}</span>` : '')}</div></div>`;
+              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: i === fresh })}</div></div>`;
         }).join('');
         ratingEl.textContent = GAME.rating();
         if (fresh >= 0 && !reduced) {
