@@ -131,3 +131,9 @@
 .ub-arrow .head { fill: #22D3EE; stroke: #22D3EE; stroke-width: 2; stroke-linejoin: round; }
 /* the end sheet's second button */
 .ub-newrun { border: 2px solid #FFFFFF; }
+/* Lower and Higher (Craig, 13 Oct): the word dead centre both ways, the down arrow under LOWER, the up arrow over HIGHER */
+.ub-bar .ub-ans { position: relative; display: grid; place-items: center; padding: 0 8px; line-height: 1; }
+.ub-bar .ub-ans span { display: block; text-align: center; padding-right: .06em; }
+.ub-bar .ub-ans svg { position: absolute; left: 50%; width: 14px; height: 14px; margin-left: -7px; }
+.ub-bar .ub-ans.ub-lower svg { bottom: 4px; }
+.ub-bar .ub-ans.ub-higher svg { top: 4px; }
