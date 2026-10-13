@@ -137,3 +137,35 @@
 .ub-bar .ub-ans svg { position: absolute; left: 50%; width: 14px; height: 14px; margin-left: -7px; }
 .ub-bar .ub-ans.ub-lower svg { bottom: 4px; }
 .ub-bar .ub-ans.ub-higher svg { top: 4px; }
+/* the start page (Craig, 13 Oct): best runs 3 x 3 in the record outline, centred; New run swaps them for the stat reel */
+.ub-start, .ub-reelin { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 16px; transition: opacity .35s var(--ease-out), transform .45s var(--ease-out); }
+.ub-start .ub-bests-h { margin: 0 0 10px; align-self: stretch; text-align: center; }
+.ub-grid { width: 86%; max-width: 312px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.ub-fr { position: relative; aspect-ratio: 100 / 112; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 13%; text-align: center; }
+.ub-fr > svg:not(.ub-star) { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ub-fr polygon { fill: rgba(34,211,238,.05); stroke: #22D3EE; stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+.ub-fr.none polygon { stroke: rgba(34,211,238,.45); fill: rgba(255,255,255,.03); }
+.ub-fr b { position: relative; font: 900 italic 30px/1 var(--font); color: #fff; }
+.ub-fr.none b { color: #3A3A44; }
+.ub-fr span { position: relative; font-size: 10px; font-weight: 800; line-height: 1.15; margin-top: 6px; padding: 0 8px; text-transform: uppercase; letter-spacing: .04em; color: var(--soft); }
+.ub-fr.top { filter: drop-shadow(0 0 12px rgba(34,211,238,.45)); }
+.ub-fr.top polygon { fill: url(#ubTop); stroke: #CFFAFF; stroke-width: 1.8; }
+.ub-fr.top b, .ub-fr.top span { color: #04262C; }
+.ub-fr.top b { text-shadow: 0 1px 0 rgba(255,255,255,.35); }
+.ub-star { position: absolute; right: 8%; top: 7%; width: 21%; height: auto; aspect-ratio: 1; z-index: 1; }
+.ub-shine { position: absolute; inset: 0; overflow: hidden; clip-path: polygon(1% 8.6%, 11% .8%, 89% .8%, 99% 8.6%, 99% 84.4%, 50% 99.2%, 1% 84.4%); pointer-events: none; }
+.ub-shine::after { content: ''; position: absolute; top: -20%; left: -70%; width: 45%; height: 140%; transform: rotate(18deg); background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0)); animation: ubShine 6s ease-in-out infinite; }
+@keyframes ubShine { 0% { left: -70%; } 22% { left: 130%; } 100% { left: 130%; } }
+.ub-reelin { opacity: 0; transform: scale(.9); pointer-events: none; }
+.ub-reelin small { font-size: 11px; font-weight: 800; letter-spacing: .16em; color: var(--ub-t); margin-bottom: 12px; }
+.ub-reelin .ub-statwin { width: 100%; }
+.ub-thisbest { margin: 14px 0 0; text-align: center; font-size: 13px; color: var(--muted); min-height: 18px; }
+.ub-thisbest em { font-style: normal; color: var(--ub-t); }
+.ub-tile.on span { color: #fff; }
+.ub-stage.ub-go .ub-start { opacity: 0; transform: scale(.94); pointer-events: none; }
+.ub-stage.ub-go .ub-reelin { opacity: 1; transform: none; }
+.ub-bar .ub-off { opacity: .3; }
+@media (max-height: 700px) { .ub-fr b { font-size: 26px; } .ub-fr span { font-size: 9.5px; margin-top: 4px; } .ub-grid { gap: 7px 8px; max-width: 272px; } .ub-start .ub-bests-h { margin-bottom: 6px; } }
+@media (prefers-reduced-motion: reduce) { .ub-shine::after { animation: none; display: none; } .ub-start, .ub-reelin { transition: none; } }
+.ub-reelin .ub-tile span { color: #6A6A74; }
+.ub-reelin .ub-tile.on span { color: #fff; }
