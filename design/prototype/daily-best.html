@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Best Finish</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<style>
+  /* The Daily Challenge card on home: four ways to show your best Daily so far, each before and after today's go.
+     The card is the live .fr-gm-daily (front.css at build 75): white, date in the top row, today's crest in full colour. */
+  :root { color-scheme: dark; --ink: #0E0E10; --soft: #CFCFD6; --muted: #8E8E99; --line: #26262C; --g: #12F06C; --up: #12F06C; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #08080A; color: #fff; font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 1760px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 26px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
+  .head p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 96ch; }
+  .row { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .opt { width: 393px; max-width: 100%; display: flex; flex-direction: column; gap: 10px; }
+  .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: var(--g); }
+  .opt-h h3 { font: 900 italic 21px/1.05 'Exo 2'; margin: 3px 0; }
+  .opt-h p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; min-height: 76px; }
+  .phone { border-radius: 26px; background: #000; box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,.6); padding: 18px 16px 20px; }
+  .sect { font: 900 italic 26px/1 'Exo 2'; text-transform: uppercase; margin: 4px 2px 12px; }
+  .state { font-size: 10.5px; font-weight: 800; letter-spacing: .14em; color: var(--muted); margin: 14px 2px 6px; }
+  .state:first-of-type { margin-top: 0; }
+
+  /* the live card (.fr-gm, .fr-gm-daily) */
+  .card { --c: #FFFFFF; position: relative; display: block; width: 100%; min-height: 140px; padding: 18px 70px 18px 18px; border-radius: 22px; overflow: hidden; isolation: isolate;
+    background: linear-gradient(100deg, var(--ink) 0%, var(--ink) 38%, color-mix(in srgb, var(--c) 30%, var(--ink)) 100%); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 45%, transparent); }
+  .card::after { content: ''; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, rgba(255,255,255,0) 2px 7px); }
+  .tag { display: block; font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--c); }
+  .big { display: block; font: 900 italic 26px/.95 'Exo 2'; text-transform: uppercase; margin-top: 6px; }
+  .sub { display: block; font-size: 14px; font-weight: 600; color: var(--soft); margin-top: 7px; line-height: 1.35; }
+  .go { position: absolute; right: 16px; bottom: 16px; width: 40px; height: 40px; border-radius: 50%; background: var(--c); color: #0A0A0A; display: grid; place-items: center; }
+  .go svg { width: 20px; height: 20px; }
+  .mark { position: absolute; right: -14px; top: 50%; transform: translateY(-50%) rotate(-8deg); width: 124px; height: 144px; z-index: -1; display: grid; place-items: center; }
+  .mark img { width: 124px; height: 144px; object-fit: contain; filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
+  .up { color: var(--up); }
+  .arrow { display: inline-block; width: .7em; height: .7em; vertical-align: -.02em; }
+
+  /* A: one best line, a chip with the club's crest */
+  .chip { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; height: 32px; padding: 0 12px 0 5px; border-radius: 16px; background: rgba(255,255,255,.08); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22); font-size: 12.5px; font-weight: 700; color: var(--soft); white-space: nowrap; }
+  .chip img { width: 22px; height: 22px; object-fit: contain; }
+  .chip b { font: 900 italic 15px/1 'Exo 2'; color: #fff; }
+  .chip i { font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
+  .chip.today { background: rgba(18,240,108,.10); box-shadow: inset 0 0 0 1px rgba(18,240,108,.45); }
+
+  /* B: a stat strip along the bottom of the card */
+  .card.B { padding-bottom: 0; }
+  .strip { display: grid; grid-template-columns: 1.35fr 1fr 1fr; margin: 14px -70px 0 -18px; border-top: 1px solid rgba(255,255,255,.14); background: rgba(0,0,0,.35); }
+  .strip > div { padding: 9px 12px 11px 18px; display: flex; flex-direction: column; gap: 3px; }
+  .strip > div + div { border-left: 1px solid rgba(255,255,255,.10); padding-left: 12px; }
+  .strip i { font-style: normal; font-size: 9.5px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
+  .strip b { font: 900 italic 20px/1 'Exo 2'; display: flex; align-items: center; gap: 6px; }
+  .strip b img { width: 20px; height: 20px; object-fit: contain; }
+  .strip small { font-size: 10.5px; font-weight: 700; color: var(--soft); }
+  .card.B .go { bottom: auto; top: 86px; }
+
+  /* C: the story of your best: their real finish to yours */
+  .story { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+  .story .badge { width: 54px; height: 54px; border-radius: 14px; background: #fff; color: #0A0A0A; display: flex; flex-direction: column; align-items: center; justify-content: center; flex: none; }
+  .story .badge b { font: 900 italic 22px/1 'Exo 2'; }
+  .story .badge i { font-style: normal; font-size: 8.5px; font-weight: 900; letter-spacing: .1em; }
+  .story .path { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .story .path small { font-size: 10px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
+  .story .path span { display: flex; align-items: center; gap: 6px; font: 900 italic 17px/1 'Exo 2'; white-space: nowrap; }
+  .story .path span s { text-decoration: none; color: #6A6A74; }
+  .story .path span img { width: 20px; height: 20px; object-fit: contain; }
+  .story .path em { font-style: normal; font-size: 11.5px; font-weight: 600; color: var(--soft); }
+  .story .badge.today { background: var(--g); }
+
+  /* D: today against your best, two columns */
+  .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .vs > div { border-radius: 14px; padding: 8px 10px; background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); display: flex; flex-direction: column; gap: 4px; }
+  .vs > div.win { background: rgba(18,240,108,.10); box-shadow: inset 0 0 0 1px rgba(18,240,108,.5); }
+  .vs i { font-style: normal; font-size: 9.5px; font-weight: 800; letter-spacing: .12em; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+  .vs i img { width: 16px; height: 16px; object-fit: contain; }
+  .vs b { font: 900 italic 20px/1 'Exo 2'; }
+  .vs small { font-size: 10.5px; font-weight: 700; color: var(--soft); }
+  .vs .empty b { color: #4A4A54; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <h1>Your best Daily, on home</h1>
+    <p>Today the Daily card ends its line with "Your best Daily: rise +6.", which is easy to miss and says nothing about the club or the finish. Four ways to show it, each before today's go and after it. Your best is the biggest rise (then the higher finish), as now. Today's club and its real finish are real (Watford finished 20th in 1999/00); your results here are made up to show the layout.</p>
+  </div>
+  <div class="row" id="opts"></div>
+</div>
+<script>
+(function () {
+  const GO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
+  const UP = '<svg class="arrow" viewBox="0 0 12 12"><path d="M6 1 L11 8 H7.5 V11 H4.5 V8 H1 Z" fill="currentColor"/></svg>';
+  const TODAY = { club: 'Watford', season: '1999/00', crest: 'assets/crests/watford.png', hist: 20 };
+  // made up for the mockup: your best Daily so far, and how today went
+  const BEST = { club: 'Sunderland', season: '2005/06', crest: 'assets/crests/sunderland.png', hist: 20, finish: 11, rise: 9 };
+  const PLAYED = { finish: 14, rise: 6 };
+  const ord = (n) => n + (['th', 'st', 'nd', 'rd'][(n % 100 - 20) % 10] || ['th', 'st', 'nd', 'rd'][n % 100] || 'th');
+  const card = (cls, sub, extra, streak) => `<div class="card ${cls}"><span class="mark"><img src="${TODAY.crest}" alt=""></span>
+    <span class="tag">DAILY CHALLENGE · #3 · 13 OCT${streak ? ' · 3 DAY STREAK' : ''}</span><span class="big">${TODAY.club}<br>${TODAY.season}</span>
+    <span class="sub">${sub}</span>${extra}<span class="go">${GO}</span></div>`;
+  const ASK = 'They went down for real. Can you keep them up?';
+
+  const A = {
+    pre: card('A', ASK, `<span class="chip"><img src="${BEST.crest}" alt=""><i>BEST</i><b class="up">${UP} ${BEST.rise}</b>${BEST.club} ${BEST.season}, ${ord(BEST.finish)}</span>`, true),
+    post: card('A', `Today: you finished ${ord(PLAYED.finish)}, up ${PLAYED.rise} on their real ${ord(TODAY.hist)}. Tap to share.`, `<span class="chip"><img src="${BEST.crest}" alt=""><i>BEST</i><b class="up">${UP} ${BEST.rise}</b>${BEST.club} ${BEST.season}, ${ord(BEST.finish)}</span>`, true)
+  };
+  const strip = (today) => `<div class="strip"><div><i>YOUR BEST DAILY</i><b><img src="${BEST.crest}" alt=""><span class="up">${UP} ${BEST.rise}</span></b><small>${BEST.club} · ${ord(BEST.finish)}</small></div>
+    <div><i>${today ? 'TODAY' : 'STREAK'}</i><b>${today ? `<span class="up">${UP} ${PLAYED.rise}</span>` : '3 days'}</b><small>${today ? ord(PLAYED.finish) : 'keep it going'}</small></div>
+    <div><i>PLAYED</i><b>${today ? 9 : 8}</b><small>Dailies</small></div></div>`;
+  const B = { pre: card('B', ASK, strip(false), false), post: card('B', 'Done for today. Tap to share it.', strip(true), false) };
+  const story = (today) => `<div class="story"><div class="badge${today ? ' today' : ''}"><b>${UP} ${today ? PLAYED.rise : BEST.rise}</b><i>${today ? 'TODAY' : 'BEST'}</i></div>
+    <div class="path"><small>${today ? 'TODAY · WATFORD' : 'YOUR BEST DAILY · ' + BEST.club.toUpperCase() + ' ' + BEST.season}</small>
+      <span><s>${ord(today ? TODAY.hist : BEST.hist)}</s> → ${ord(today ? PLAYED.finish : BEST.finish)}${today ? '' : ''}</span>
+      <em>${today ? `Your best is still ${UP} ${BEST.rise} with ${BEST.club}` : 'Their real finish, then yours'}</em></div></div>`;
+  const C = { pre: card('C', ASK, story(false), true), post: card('C', 'Tap to share today\'s.', story(true), true) };
+  const vs = (today) => `<div class="vs"><div class="${today ? '' : 'empty'}"><i><img src="${TODAY.crest}" alt="">TODAY</i><b>${today ? `<span class="up">${UP} ${PLAYED.rise}</span>` : 'Not played'}</b><small>${today ? `${ord(PLAYED.finish)}, real ${ord(TODAY.hist)}` : `Real finish ${ord(TODAY.hist)}`}</small></div>
+    <div class="win"><i><img src="${BEST.crest}" alt="">YOUR BEST</i><b class="up">${UP} ${BEST.rise}</b><small>${ord(BEST.finish)}, real ${ord(BEST.hist)}</small></div></div>`;
+  const D = { pre: card('D', ASK, vs(false), true), post: card('D', 'Tap to share. Beat your best tomorrow.', vs(true), true) };
+
+  const OPTS = [['A', 'A best chip', 'One small chip under the line with your best club\'s crest, the rise and the finish. The least change to the card.', A],
+    ['B', 'A stat strip', 'A strip along the bottom of the card: your best (crest, rise, finish), your streak (or today\'s rise once played) and how many Dailies you have played.', B],
+    ['C', 'The story of your best', 'A white badge with the rise, then their real finish struck through and yours beside it: 20th to 11th. Once played, the badge turns green and tells today\'s story.', C],
+    ['D', 'Today against your best', 'Two boxes side by side: today (not played, or your rise and finish) and your best. Your best is green so the one to beat is clear.', D]];
+  document.getElementById('opts').innerHTML = OPTS.map(([k, h, d, o]) => `<div class="opt"><div class="opt-h"><span class="tag">OPTION ${k}</span><h3>${h}</h3><p>${d}</p></div>
+    <div class="phone"><div class="sect">Daily challenge</div><div class="state">BEFORE TODAY'S GO</div>${o.pre}<div class="state">AFTER TODAY'S GO</div>${o.post}</div></div>`).join('');
+})();
+</script>
+</body>
+</html>
