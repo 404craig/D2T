@@ -44,7 +44,7 @@
   .under { margin-top: 8px; }
 
   /* 1: three small tiles in a row under the card */
-  .tiles3 { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 6px; }
+  .tiles3 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
   .tl { border-radius: 12px; background: #0E0E10; border: 1px solid #26262C; padding: 7px 10px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
   .tl i { font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
   .tl b { font: 900 italic 17px/1 'Exo 2'; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
@@ -75,7 +75,7 @@
 <div class="page">
   <div class="head">
     <h1>Your best Daily, under the card</h1>
-    <p>The Daily card stays exactly the size and shape of the other game cards, with only its question on it (no record in the line). Your best goes in a small row just under it, before the next card. Three ways to set that row out, each before and after today's go. Today's club and both real finishes are checked (Watford 20th in 1999/00, Sunderland 20th in 2005/06); your results are made up to show the layout.</p>
+    <p>The Daily card stays exactly the size and shape of the other game cards, with only its question on it (no record in the line). Your best goes in a small row just under it, before the next card. Idea 1 with the streak dropped: your best Daily and today's, before and after today's go. Today's club and both real finishes are checked (Watford 20th in 1999/00, Sunderland 20th in 2005/06); your results are made up to show the layout.</p>
   </div>
   <div class="row" id="opts"></div>
 </div>
@@ -100,15 +100,12 @@
   const up = (n) => `<span class="up">${UP} ${n}</span>`;
 
   const t3 = (today) => u(`<div class="tiles3"><div class="tl"><i>YOUR BEST DAILY</i><b><img src="${BEST.crest}" alt="">${up(BEST.rise)}</b><small>${BEST.club} · ${ord(BEST.hist)} to ${ord(BEST.finish)}</small></div>
-    <div class="tl"><i>${today ? 'TODAY' : 'TO BEAT IT'}</i><b>${today ? up(PLAYED.rise) : ord(TODAY.hist - BEST.rise)}</b><small>${today ? ord(PLAYED.finish) + ' place' : 'or higher'}</small></div>
-    <div class="tl"><i>STREAK</i><b>${today ? 3 : 2}</b><small>days</small></div></div>`);
+    <div class="tl"><i>TODAY'S DAILY</i><b><img src="${TODAY.crest}" alt="">${today ? up(PLAYED.rise) : 'Finish ' + ord(TODAY.hist - BEST.rise)}</b><small>${today ? TODAY.club + ' · ' + ord(TODAY.hist) + ' to ' + ord(PLAYED.finish) : 'or higher to beat your best'}</small></div></div>`);
   const ln = (today) => u(`<div class="line"><img src="${BEST.crest}" alt=""><i>BEST</i><b>${up(BEST.rise)}</b>${BEST.club} ${BEST.season}<span class="gap"></span><span class="sep"></span>${today ? `<i>TODAY</i><b>${up(PLAYED.rise)}</b>` : `<i>STREAK</i><b>2</b>`}</div>`);
   const hv = (today) => u(`<div class="halves"><div class="half${today ? '' : ' wait'}"><img src="${TODAY.crest}" alt=""><div><i>TODAY</i><small>${today ? ord(PLAYED.finish) + ', real ' + ord(TODAY.hist) : 'Real ' + ord(TODAY.hist)}</small></div><b>${today ? up(PLAYED.rise) : '-'}</b></div>
     <div class="half best"><img src="${BEST.crest}" alt=""><div><i>YOUR BEST</i><small>${ord(BEST.finish)}, real ${ord(BEST.hist)}</small></div><b>${up(BEST.rise)}</b></div></div>`);
   const mk = (f) => ({ pre: card('X', PRE, '', true) + f(false) + NEXT, post: card('X', POST, '', true) + f(true) + NEXT });
-  const OPTS = [['1', 'Three small tiles', 'Under the card: your best Daily (crest, rise, their finish to yours), the finish you need today to beat it (today\'s rise once played) and your streak.', mk(t3)],
-    ['2', 'One slim line', 'A single caption line under the card: your best with its crest and club, and your streak on the right (today\'s rise once played). The quietest.', mk(ln)],
-    ['3', 'Today and your best', 'Two halves under the card: today (waiting, or your rise and finish) and your best, edged green. Each with its crest, the rise big on the right.', mk(hv)]];
+  const OPTS = [['1', 'Your best and today', "Two tiles under the card. Your best Daily: crest, rise, their real finish to yours. Today's Daily: before you play, the finish you need to beat your best; after, your rise and their real finish to yours.", mk(t3)]];
   document.getElementById('opts').innerHTML = OPTS.map(([k, h, d, o]) => `<div class="opt"><div class="opt-h"><span class="tag">IDEA ${k}</span><h3>${h}</h3><p>${d}</p></div>
     <div class="phone"><div class="sect">Daily challenge</div><div class="state">BEFORE TODAY'S GO</div>${o.pre}<div class="state">AFTER TODAY'S GO</div>${o.post}</div></div>`).join('');
 })();
