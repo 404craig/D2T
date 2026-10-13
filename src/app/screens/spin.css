@@ -148,7 +148,7 @@
 .se-pitch.tr-field { flex: 1 1 auto; min-height: 0; max-height: none; }
 
 /* handwritten note pointing at the respin button (as Tenaball's "stats" note) */
-.sp-tip { position: absolute; left: 30px; bottom: calc(100% - 4px); display: flex; align-items: flex-start; gap: 2px; color: #fff; pointer-events: none; opacity: .92; transition: opacity .4s; animation: spTipIn .5s .6s var(--ease-out) both; }
+.sp-tip { position: absolute; left: 96px; bottom: calc(100% - 4px); display: flex; align-items: flex-start; gap: 2px; color: #fff; pointer-events: none; opacity: .92; transition: opacity .4s; animation: spTipIn .5s .6s var(--ease-out) both; }
 .sp-tip svg { width: 34px; height: 46px; flex: none; }
 .sp-tip span { font-family: Caveat, 'Bradley Hand', 'Segoe Print', cursive; font-weight: 600; font-size: 23px; line-height: 1; white-space: nowrap; transform: rotate(-2.5deg); transform-origin: left bottom; margin-top: -2px; }
 .sp-tip.gone { opacity: 0; }
