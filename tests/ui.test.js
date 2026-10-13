@@ -404,7 +404,7 @@ fs.mkdirSync(OUT, { recursive: true });
   const ubRecBefore = await page.evaluate(() => JSON.stringify([window.D2T.game.record(), window.D2T.game.g433.record()]));
   await page.evaluate(() => { window.D2T.state.ub = null; window.D2T.save(); window.D2T.go("home"); }); await wait(900);
   await page.click('[data-act="unbeaten"]'); await expectScreen("unbeaten"); await wait(700);
-  check(!!(await page.$(".ub-spin")) && /Spin for a stat/i.test(await page.textContent(".ub-title")), "Unbeaten Run: no stat spin to start");
+  check(!!(await page.$(".ub-spin")) && /Higher or lower/i.test(await page.textContent(".ub-title")) && /New run/.test(await page.textContent(".ub-spin")) && (await page.$$(".ub-grid .ub-fr")).length === 9, "Unbeaten Run: the start page is not Higher or lower with nine best runs and New run");
   for (const st of ["pts", "cg"]) {
     await page.evaluate((st) => { window.D2T_UB_STAT = st; }, st);
     await page.click(".ub-spin"); await wait(6500);

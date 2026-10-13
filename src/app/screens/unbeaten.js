@@ -181,7 +181,8 @@
 
       // ---------- the bottom bar: Spin before a run, Lower and Higher during one ----------
       function spinBar() {
-        bar.innerHTML = `<button class="sp-main ub-spin">${D2T.logo('emblem', { label: '' })}<span class="sp-lbl">Spin</span></button><button class="sp-round is-home" aria-label="Home">${D2T.ICON.home}</button>`;
+        // the respin button as in the other games, greyed: Unbeaten Run has none, it keeps New run centred (Craig, 13 Oct)
+        bar.innerHTML = `<button class="sp-round is-reload ub-off" disabled aria-hidden="true" tabindex="-1">${REFRESH}</button><button class="sp-main ub-spin">${D2T.logo('emblem', { label: '' })}<span class="sp-lbl">New run</span></button><button class="sp-round is-home" aria-label="Home">${D2T.ICON.home}</button>`;
         bar.querySelector('.is-home').onclick = () => D2T.go('home');
         bar.querySelector('.ub-spin').onclick = statSpin;
       }
@@ -221,15 +222,26 @@
       }
 
       // ---------- the stat spin: a reel of stats, never the same one twice in a row ----------
+      // the start page (Craig, 13 Oct; design/prototype/unbeaten-start.html): Higher or lower, and your best run for each
+      // stat in the home page's record outline rimmed in cyan, 3 x 3 and centred; your highest best is a special cyan card
+      // with a black star and a slow shine. New run steps them back and brings the stat reel in at the same spot.
+      const STAR = '<svg class="ub-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" fill="#04262C"/></svg>';
+      const TOPDEF = '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="ubTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E6FDFF"/><stop offset=".3" stop-color="#5CE6F7"/><stop offset=".62" stop-color="#22D3EE"/><stop offset="1" stop-color="#0E8FA6"/></linearGradient></defs></svg>';
       function idle() {
-        run = null; busy = false; nEl.textContent = '0'; title.textContent = 'Spin for a stat'; sub.textContent = 'Each run is about one stat. Real Premier League numbers, higher or lower, one wrong answer ends it.';
-        stage.innerHTML = `<div class="ub-statwin"><div class="ub-statstrip">${statTile(STATS.find((s) => s.id === R.last) || STATS[0], true)}</div></div>
-          <div class="ub-bests-h">Your best runs</div><div class="ub-bests">${STATS.map((s) => `<span class="ub-best"><i>${s.big}</i><b class="${R.best[s.id] ? '' : 'none'}">${R.best[s.id] || '-'}</b></span>`).join('')}</div>`;
-        hint.textContent = 'Spin to see which stat this run is about';
+        run = null; busy = false; nEl.textContent = '0'; title.textContent = 'Higher or lower';
+        sub.textContent = 'One stat a run. Is the next real number higher or lower? Keep calling it right; one wrong answer ends your run.';
+        stage.classList.remove('ub-clubs', 'ub-go');
+        const top = STATS.reduce((m, st, i) => ((R.best[st.id] || 0) > (R.best[STATS[m].id] || 0) ? i : m), 0), hasTop = (R.best[STATS[top].id] || 0) > 0;
+        stage.innerHTML = `<div class="ub-start">${TOPDEF}<div class="ub-bests-h">Your best runs</div><div class="ub-grid">${STATS.map((st, i) => {
+          const b = R.best[st.id] || 0, isTop = hasTop && i === top;
+          return `<div class="ub-fr${b ? '' : ' none'}${isTop ? ' top' : ''}">${D2T.frFrame}${isTop ? '<span class="ub-shine"></span>' + STAR : ''}<b>${b || '-'}</b><span>${st.big}</span></div>`;
+        }).join('')}</div></div>
+          <div class="ub-reelin"><small>THIS RUN IS ABOUT</small><div class="ub-statwin"><div class="ub-statstrip"></div></div><p class="ub-thisbest"></p></div>`;
+        hint.textContent = '';
         spinBar();
         later(() => { const b = bar.querySelector('.ub-spin'); if (b && !run && !busy && root.isConnected) D2T.tip('ub-spin', b, 'A new stat every run'); }, 700);
       }
-      const statTile = (s, dim) => `<div class="ub-tile${dim ? ' dim' : ''}"><small>PREMIER LEAGUE</small><span>${s.big}</span></div>`;
+      const statTile = (s, on) => `<div class="ub-tile${on ? ' on' : ''}"><small>PREMIER LEAGUE</small><span>${s.big}</span></div>`;
       function statSpin() {
         if (busy) return;
         busy = true; snd('roll3');
@@ -240,14 +252,18 @@
         const seq = [other([])];
         for (let i = 0; i < 22; i++) seq.push(other([seq[seq.length - 1], i === 21 ? target : null]));
         seq.push(target, other([target]));
-        const strip = stage.querySelector('.ub-statstrip');
-        strip.innerHTML = seq.map((s) => statTile(s)).join('');
-        stage.querySelector('.ub-bests').classList.add('gone'); stage.querySelector('.ub-bests-h').classList.add('gone');
-        bar.querySelector('.ub-spin').disabled = true;
-        const end = -seq.lastIndexOf(target) * 76;   // the chosen stat stops in the frame (it was one tile short)
-        const done = () => { snd('lockin'); stage.querySelector('.ub-statwin').classList.add('is-hit'); later(() => startRun(target), reduced ? 200 : 650); };
+        const at = seq.lastIndexOf(target), strip = stage.querySelector('.ub-statstrip');
+        strip.innerHTML = seq.map((s, i) => statTile(s, i === at)).join('');
+        stage.classList.add('ub-go');                         // the best runs step back, the reel comes in
+        const btn = bar.querySelector('.ub-spin'); btn.disabled = true; btn.querySelector('.sp-lbl').textContent = 'Spinning';
+        const end = -at * 76;
+        const done = () => {
+          snd('lockin'); stage.querySelector('.ub-statwin').classList.add('is-hit');
+          const b = R.best[target.id]; stage.querySelector('.ub-thisbest').innerHTML = `Your best on this: <em>${b || 'none yet'}</em>`;
+          later(() => startRun(target), reduced ? 200 : 900);
+        };
         if (reduced) { strip.style.transform = `translateY(${end}px)`; done(); return; }
-        strip.animate([{ transform: 'translateY(0)' }, { transform: `translateY(${end}px)` }], { duration: 1800, easing: 'cubic-bezier(.15,.8,.25,1)', fill: 'forwards' }).onfinish = done;
+        strip.animate([{ transform: 'translateY(0)' }, { transform: `translateY(${end}px)` }], { duration: 2000, delay: 300, easing: 'cubic-bezier(.15,.8,.25,1)', fill: 'forwards' }).onfinish = done;
       }
 
       // ---------- a run ----------
