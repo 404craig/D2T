@@ -2132,8 +2132,8 @@ function chooseClub(st, S, rel) {
 const DRAFT_MODES = ["dare2dream", "clubx"];
 // Dare2Dream fills keeper first, then defence, midfield and attack, each spin three players for that shirt's position.
 // Club X (Craig, 13 Oct) fills them in any order: each of the three cards is drawn for one of the open shirts (each open shirt
-// as likely as the next), from players who list that shirt's position among their preferred ones, and he goes on any open
-// shirt he lists. All from the same season, never your club's own squad, never one seen before. No respins in the draft.
+// as likely as the next), from players who are green there (they list it, or FIT makes it green), and he goes on any open
+// shirt, green, amber or red; the shape can change after every spin, the players already in are re-seated. All from the same season, never your club's own squad, never one seen before. No respins in the draft.
 // A drafted player leaves his real club for the whole season, like a signing (a raid dated before the season).
 const BROAD_ORDER = { GK: 0, DEF: 1, MID: 2, FWD: 3 };
 function draftOrder(formation) {
@@ -2152,13 +2152,12 @@ function listsPos(p, pos) {
 }
 const openDraft = (st) => st.mode === "clubx" && !st.draft.order;
 const openSlots = (st) => st.xi.map((id, i) => (id == null ? i : -1)).filter(i => i >= 0);
-// The open shirts a drafted card can go on: those whose position he lists (main first), or in an older run any open one.
+// The open shirts a drafted card can go on: every open one, best first (his main position, then green, amber, red).
 function draftFits(st, S, cardId) {
   const p = playerOf(S, cardId, S.legends), open = openSlots(st), f = FORMATIONS[st.formation];
   if (!p || !openDraft(st)) return open;
-  const fit = open.filter(i => listsPos(p, f[i][0]));
-  const main = (p.p || [])[0];
-  return fit.sort((a, b) => (f[b][0] === main) - (f[a][0] === main) || a - b);
+  const main = (p.p || [])[0], rank = (i) => (f[i][0] === main ? 0 : { green: 1, amber: 2, red: 3 }[fitOf(p, f[i][0])]);
+  return open.sort((a, b) => rank(a) - rank(b) || a - b);
 }
 function startDraft(st, S) {
   st.xi = new Array(FORMATIONS[st.formation].length).fill(null);
@@ -2175,7 +2174,7 @@ function newDraftRoll(st, S) {
     const open = openSlots(st), f = FORMATIONS[st.formation];
     for (let k = 0; k < 3; k++) {
       const pos = f[open[Math.floor(r() * open.length)]][0];
-      const id = drawCard(r, S, st, S.legends, taken, null, (p) => listsPos(p, pos));
+      const id = drawCard(r, S, st, S.legends, taken, null, (p) => fitOf(p, pos) === "green");
       if (id != null) { cards.push(id); taken.add(id); }
     }
     st.roll = { key: `d${st.draft.step}`, spin: 0, cards, window: "draft", slot: null, step: st.draft.step + 1, of: st.xi.length };
@@ -2185,9 +2184,12 @@ function newDraftRoll(st, S) {
   for (let k = 0; k < 3; k++) { const id = drawCard(r, S, st, S.legends, taken, broad); if (id != null) { cards.push(id); taken.add(id); } }
   st.roll = { key: `d${st.draft.step}`, spin: 0, cards, window: "draft", slot, step: st.draft.step + 1, of: st.xi.length };
 }
-// The shape can change until the first pick.
+// The shape can change until the first pick; in Club X's open draft at any time, the players already in re-seated to the
+// shirts they fit best and the three cards on the table kept (no fresh cards from a change of shape).
 function draftFormation(st, S, f) {
-  if (st.phase !== "draft" || st.draft.step > 0 || !FORMATIONS[f]) return false;
+  if (st.phase !== "draft" || !FORMATIONS[f]) return false;
+  if (openDraft(st) && st.draft.step > 0) { st.xi = reseat(st, S, f); st.formation = f; st.log.push(["formation", f]); return true; }
+  if (st.draft.step > 0) return false;
   st.formation = f; st.xi = new Array(FORMATIONS[f].length).fill(null);
   if (st.draft.order) st.draft.order = shuffledOrder(st);
   newDraftRoll(st, S);
@@ -2198,7 +2200,7 @@ function draftPick(st, S, cardId, at) {
   let slot = draftSlot(st);
   if (slot == null) {   // Club X: any open shirt he lists, the one asked for or his best
     const fits = draftFits(st, S, cardId);
-    slot = at == null ? fits[0] : (fits.includes(at) ? at : null);
+    slot = at == null ? fits[0] : (fits.includes(at) ? at : null);   // any open shirt
     if (slot == null) return false;
   }
   const p = playerOf(S, cardId, S.legends);
@@ -2264,10 +2266,8 @@ function autoXI(S, club, formation, preferred) {
   place(squad);
   return xi;
 }
-function setFormation(st, S, f) {
-  if (!["setup", "window", "prematch"].includes(st.phase)) return false;
-  if (!FORMATIONS[f]) return false;
-  // Keep the same players, re-seated to the slots they fit best.
+// Keep the same players, re-seated to the slots they fit best.
+function reseat(st, S, f) {
   const players = st.xi.filter(Boolean).map(id => playerOf(S, id, S.legends));
   const slots = FORMATIONS[f].map(s => s[0]);
   const xi = new Array(slots.length).fill(null), used = new Set();
@@ -2278,7 +2278,12 @@ function setFormation(st, S, f) {
       if (best) { xi[i] = best.id; used.add(best.id); }
     });
   }
-  st.formation = f; st.xi = xi;
+  return xi;
+}
+function setFormation(st, S, f) {
+  if (!["setup", "window", "prematch"].includes(st.phase)) return false;
+  if (!FORMATIONS[f]) return false;
+  st.xi = reseat(st, S, f); st.formation = f;
   st.log.push(["formation", f]);
   return true;
 }
@@ -5447,14 +5452,16 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
         if (!slotsEl) return;
         const L = GAME.lineup();
         if (draft) best = di.slot;
-        // Club X's open draft: every open shirt is lit, or once a card is picked the open shirts he lists
+        // Club X's open draft (Craig, 13 Oct): every open shirt is lit; once a card is picked, his green open shirts
+        // (or his best one) and every shirt shows his green, amber or red chip. He can go on any open shirt.
         let lit = new Set([best]);
         if (draft && di.open) {
           const ds = api ? api.selected() : -1, dc = ds >= 0 ? api.results()[ds] : null;
-          lit = new Set(dc ? GAME.draftFits(dc.id) : GAME.lineup().xi.map((c, i) => (c ? -1 : i)).filter((i) => i >= 0));
+          if (dc) { const fits = GAME.draftFits(dc.id), green = fits.filter((i) => GAME.fit(dc.id, i) === 'green'); lit = new Set(green.length ? green : fits.slice(0, 1)); }
+          else lit = new Set(GAME.lineup().xi.map((c, i) => (c ? -1 : i)).filter((i) => i >= 0));
         }
         // the selected card in the tray: each shirt shows how he would fit it (green preferred, amber near, red not)
-        const si = placing && !draft && !signing && api ? api.selected() : -1, inc = si >= 0 ? api.results()[si] : null;
+        const si = placing && (!draft || di.open) && !signing && api ? api.selected() : -1, inc = si >= 0 ? api.results()[si] : null;
         const pf = (i) => (inc ? GAME.fit(inc.id, i) : null);
         const fitWord = { green: 'a preferred position', amber: 'close to his position', red: 'out of position' };
         slotsEl.innerHTML = GAME.slots().map((s, i) => {
@@ -5475,9 +5482,9 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
       }
       function buildPitch() {
         field = D2T.h(`<div class="tr-pitch" aria-label="Your XI">
-          <div class="tr-head"><div class="tr-head-t"><b>${draft ? `Draft · Shirt ${info.step} of ${info.of}` : `${D2T.esc(info.name)} · Roll ${info.step} of ${info.of}`}</b><span>${draft ? (di.open ? 'Drag one onto a lit shirt' : `Drag one onto the lit ${di.pos} shirt`) : 'Drag a player onto a shirt to sign him there'}</span></div>
+          <div class="tr-head"><div class="tr-head-t"><b>${draft ? `Draft · Shirt ${info.step} of ${info.of}` : `${D2T.esc(info.name)} · Roll ${info.step} of ${info.of}`}</b><span>${draft ? (di.open ? 'Drag one onto an open shirt' : `Drag one onto the lit ${di.pos} shirt`) : 'Drag a player onto a shirt to sign him there'}</span></div>
             <div class="se-rating" aria-live="polite"><b class="tr-rating">0</b><i>Team<br>rating</i></div></div>
-          <div class="se-pitch tr-field">${SE.pitchLines}<div class="se-slots"></div>${draft ? '' : `<button class="se-formlink" type="button">Formation <b class="se-fname">${GAME.eng().formation}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`}</div></div>`);
+          <div class="se-pitch tr-field">${SE.pitchLines}<div class="se-slots"></div>${draft && !di.open ? '' : `<button class="se-formlink" type="button">Formation <b class="se-fname">${GAME.eng().formation}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`}</div></div>`);
         api.el.insertBefore(field, api.el.querySelector('.sp-stage'));
         slotsEl = field.querySelector('.se-slots'); ratingEl = field.querySelector('.tr-rating');
         // change the shape on a roll (Craig, 13 Oct): your 11 are re-seated, nobody comes in; some may land out of position
@@ -5487,14 +5494,14 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
           let pending = GAME.eng().formation;
           const tile = (k) => `<button class="se-formcard${k === pending ? ' is-on' : ''}" type="button" data-f="${k}" aria-pressed="${k === pending}">
             <span class="se-fpitch"><span class="se-fline"></span>${GAME.formationDots(k).map((d) => `<i style="left:${d.x}%;top:${d.y}%"></i>`).join('')}</span><b>${k}</b></button>`;
-          const el = D2T.h(`<div><div class="se-formgrid">${GAME.formations().map(tile).join('')}</div><p class="se-note">Your 11 are moved into the new shape. Nobody comes in or goes out. Players out of their position play at 90% (near) or 70% (wrong).</p><button class="btn se-btn se-done" type="button">Done</button></div>`);
+          const el = D2T.h(`<div><div class="se-formgrid">${GAME.formations().map(tile).join('')}</div><p class="se-note">${draft ? 'The players you have drafted are moved into the new shape. The three on the table stay.' : 'Your 11 are moved into the new shape. Nobody comes in or goes out.'} Players out of their position play at 90% (near) or 70% (wrong).</p><button class="btn se-btn se-done" type="button">Done</button></div>`);
           const sh = D2T.sheet({ title: 'Formation', body: el, onClose: () => {
             if (pending === GAME.eng().formation || !alive) return;
             GAME.setFormation(pending);
             window.D2TSound && window.D2TSound.play('formation');
             fl.querySelector('.se-fname').textContent = pending;
             const si = api ? api.selected() : -1, p = si >= 0 ? api.results()[si] : null;
-            drawPitch(p ? GAME.bestSlot(p.id) : -1);
+            drawPitch(p && !draft ? GAME.bestSlot(p.id) : -1);
           } });
           sh.el.classList.add('se-run');
           ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
@@ -5529,7 +5536,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
           flip(true);
           field.animate([{ opacity: 0, transform: 'translateY(-14px)' }, { opacity: 1, transform: 'none' }], { duration: 420, delay: 160, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
         } else api.el.classList.add('is-placing');
-        api.hint(draft ? 'Drag one onto the lit shirt, or tap him then Sign' : 'Drag a player onto the pitch, or tap him then a shirt');
+        api.hint(draft ? (di.open ? 'Drag one onto an open shirt, or tap him then a shirt' : 'Drag one onto the lit shirt, or tap him then Sign') : 'Drag a player onto the pitch, or tap him then a shirt');
       }
       function leavePlacing() {
         if (!placing) return Promise.resolve();
@@ -5548,7 +5555,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
       function sign(i, slot) {
         if (signing || !placing) return;
         const p = api.results()[i];
-        if (draft && di.open && p && !GAME.draftFits(p.id).includes(slot)) { api.hint(`${surname(p.name)} can't play there. Pick a lit shirt.`); return; }
+        if (draft && di.open && p && !GAME.draftFits(p.id).includes(slot)) { api.hint('That shirt is taken. Pick an open one.'); return; }
         if (draft && !di.open && slot !== di.slot) { api.hint(`This pick goes in the lit ${di.pos} shirt`); return; }
         const replaced = !draft && p && GAME.lineup().xi[slot];
         if (!p || !(draft ? GAME.draftPick(p.id, slot) : GAME.signAt(p.id, slot))) return;
@@ -5632,7 +5639,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
         api = D2T.roll.mount(body, {
           kicker: draft ? `${GAME.modeName()} draft · Shirt ${info.step} of ${info.of}` : `${info.name} · Roll ${info.step} of ${info.of}`,
           title: draft ? (di.open ? 'Pick your next player' : `Pick your ${ROLE[di.broad]}`) : 'Who comes in?',
-          sub: draft ? (di.open ? `Three players from ${run.season} for your open shirts. Put him in any lit shirt he plays. No respins in the draft.` : `Three ${ROLES[di.broad]} from ${run.season} for your ${di.pos} shirt. No respins in the draft.`) : `Roll ${info.overall} of ${info.total} this season${fx ? `, before GW${info.gw} against ${opp}` : ''}. Sign one or pass.`,
+          sub: draft ? (di.open ? `Three players from ${run.season} for your open shirts. Each one is green in at least one of them. Put him in any open shirt, and change the shape whenever you like. No respins in the draft.` : `Three ${ROLES[di.broad]} from ${run.season} for your ${di.pos} shirt. No respins in the draft.`) : `Roll ${info.overall} of ${info.total} this season${fx ? `, before GW${info.gw} against ${opp}` : ''}. Sign one or pass.`,
           pool: fillerCards(),
           render: (p, w) => D2T.cards.player(p, { w }),
           pick: () => { SND.play('roll3'); return GAME.rollCards(); },
