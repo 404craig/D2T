@@ -187,6 +187,13 @@ const CUES = {
   close(t) { const o = soft(O(1, 0.12), 1000); osc(o, "triangle", A3, t, 0.35, 0.05, { a: 0.03 }); osc(o, "triangle", F3, t + 0.3, 0.7, 0.05, { a: 0.03 }); },
   over(t) { const o = O(1, 0.1); felt(o, t, 120, 0.4, 0.2); swish(soft(o, 1400), t, 0.4, 1400, 300, 0.08); },
   perfect(t) { const o = O(1, 0.25); felt(o, t, 130, 0.45, 0.22); swish(soft(o, 1400), t, 0.9, 200, 1300, 0.12); [D3, Fs3, A3, D4, N(4)].forEach((n) => osc(soft(o, 1200), "triangle", n, t, 2.0, 0.035, { a: 0.12 })); clip(o, "applause", t + 0.3, { gain: 0.6, dur: 2.5 }); },
+  // game results, the same crowd as Classic: a cheer for a win or a right answer, a groan for falling short, boos for over or wrong
+  win(t) { const o = O(1, 0.2); duck(t, 3); felt(o, t, 240, 0.35, 0.1); clip(o, "goal_roar", t + 0.1, { gain: 0.9 }); clip(o, "applause", t + 1.2, { gain: 0.7 }); },
+  short(t) { const o = O(1, 0.2); duck(t, 3); clip(o, "groan", t); clip(o, "crowd_moan", t + 1.3, { gain: 0.7 }); },
+  bust(t) { const o = O(1, 0.2); duck(t, 3); clip(o, "boos", t, { gain: 1, dur: 3 }); clip(o, "groan", t + 0.1, { gain: 0.6 }); },
+  right(t) { const o = O(1, 0.15); felt(o, t, 180, 0.3, 0.08); osc(soft(o, 1100), "triangle", D4, t, 0.4, 0.04, { a: 0.02 }); clip(o, "cheer_short", t + 0.05, { gain: 0.4 }); },
+  wrong(t) { const o = O(1, 0.15); felt(o, t, 120, 0.4, 0.2); swish(soft(o, 1400), t, 0.4, 1400, 300, 0.08); clip(o, "boos", t + 0.1, { gain: 0.75, dur: 2.2 }); },
+  highScore(t) { const o = O(1, 0.2); duck(t, 3); felt(o, t, 150, 0.4, 0.15); clip(o, "cheer_short", t, { gain: 0.9 }); clip(o, "applause", t + 0.7, { gain: 0.8 }); },
   newBest(t) { const o = O(1, 0.2); felt(o, t, 140, 0.4, 0.18); [D3, Fs3, A3, D4].forEach((n) => osc(soft(o, 1100), "triangle", n, t, 1.4, 0.035, { a: 0.08 })); clip(o, "applause", t + 0.25, { gain: 0.5, dur: 2 }); }
 };
 // names the screens already used, kept so nothing breaks
