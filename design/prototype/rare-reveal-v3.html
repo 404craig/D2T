@@ -112,7 +112,8 @@
     <h1>Purple and legend cards: the reveal, v3</h1>
     <p>A mock-up of the roll with the live cards. Pick where the rare card lands and whether it is purple or a legend, then hit Spin on the phone. The cards are real 2003/04 cards from the game: Thierry Henry (legend, 99) and Frank Lampard (purple, 93), with real bronze, silver and gold cards in the other slots.</p>
   </div>
-  <div class="ctl"><button id="snd" class="on">Sound on</button><span style="margin-left:6px">RARE CARD</span><button class="on" data-lv="legend">Legend</button><button data-lv="baller">Purple</button>
+  <div class="ctl"><button id="snd" class="on">Sound on</button><span style="margin-left:6px">GLASS SOUND</span><button class="on" data-g="A">A Crack and rain</button><button data-g="B">B Window</button><button data-g="C">C Crystal</button><button data-g="D">D Heavy</button><button id="hear">Hear it</button>
+  </div><div class="ctl"><span style="margin-left:6px">RARE CARD</span><button class="on" data-lv="legend">Legend</button><button data-lv="baller">Purple</button>
     <span style="margin-left:14px">IN SLOT</span><button data-s="0">1</button><button class="on" data-s="1">2</button><button data-s="2">3</button></div>
   <div class="wrap">
     <div class="phone" id="ph">
@@ -125,10 +126,10 @@
     </div>
     <div class="steps"><ol>
       <li>The rare card's reel <b>rolls on and slows</b> for about a second before anything happens, then the screen darkens over it.</li>
-      <li><b>Glass smashes out of the centre</b>: three times the pieces, twice as long, with long splinters and a spray of tiny bits. The shards turn in 3D, catch the light on their edges and carry the card's colours. A <b>muted glass smash</b> plays, and <b>the crowd cheers</b> just before it ends.</li>
+      <li><b>Glass smashes out of the centre</b>: three times the pieces, twice as long, with long splinters and a spray of tiny bits. The shards turn in 3D, catch the light on their edges and carry the card's colours. A <b>glass smash</b> plays, about 1.4 seconds long: pick from four above and tap one to hear it.</li>
       <li>The <b>big card bursts from the very centre</b>. The labels (GOL, IMP and so on) are already on it.</li>
       <li>The <b>six numbers pop in one after the other</b> under their labels, 120% then 100%, a little slower than v2. Each arrives with a <b>reverse swoosh</b> and lands with a <b>dull thud</b>.</li>
-      <li>The <b>rating rolls</b> with the higher numbers above, dropping into place, <b>ticking like the reels</b> as each passes, then slows, ticks in and lands with a thud. It fades out above and below.</li>
+      <li>The <b>rating rolls</b> with the higher numbers above, dropping into place, <b>ticking like the reels</b> as each passes, then slows, ticks in and lands with a thud. <b>The crowd starts cheering</b> as it rolls, with <b>fireworks</b> going off, and both carry on until the name has printed, then fade. It fades out above and below.</li>
       <li>The <b>flag</b> bursts on, twice as long as v2.</li>
       <li>The <b>crest explodes in</b>: light rays turning behind it, two shockwaves, its own glass, a spin and a flare, three times as long, with a <b>thud</b> as it lands.</li>
       <li>The <b>name</b> appears letter by letter, 1.5 times slower, a <b>dull tick</b> per letter.</li>
@@ -165,7 +166,9 @@
   const hash = (i, s) => { let h = (i * 2654435761 + s * 97) >>> 0; h ^= h >>> 15; return h >>> 0; };
 
   let lv = 'legend', slotIx = 1;
-  document.querySelectorAll('.ctl button').forEach((b) => { b.onclick = () => {
+  document.querySelectorAll('[data-g]').forEach((b) => { b.onclick = () => { SMASH = b.dataset.g; document.querySelectorAll('[data-g]').forEach((x) => x.classList.toggle('on', x === b)); audio(); AC.resume(); smash(); }; });
+  document.getElementById('hear').onclick = () => { audio(); AC.resume(); smash(); };
+  document.querySelectorAll('[data-lv],[data-s]').forEach((b) => { b.onclick = () => {
     if (b.dataset.lv) { lv = b.dataset.lv; document.querySelectorAll('[data-lv]').forEach((x) => x.classList.toggle('on', x === b)); }
     else { slotIx = +b.dataset.s; document.querySelectorAll('[data-s]').forEach((x) => x.classList.toggle('on', x === b)); }
   }; });
@@ -247,16 +250,58 @@
   const play = (k, g = 1, at = 0, rate = 1, lpHz = 0) => { if (!soundOn || !AC || !BUF[k]) return; const s = AC.createBufferSource(), v = AC.createGain(); s.buffer = BUF[k]; s.playbackRate.value = rate; v.gain.value = g;
     if (lpHz) { const f = AC.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = lpHz; s.connect(f); f.connect(v); } else s.connect(v); v.connect(OUT); s.start(AC.currentTime + at); };
   // a subtle, muted glass smash: a soft low crack, then a fall of small muffled shards over half a second
-  const smash = () => {
-    if (!soundOn || !AC) return; const t = AC.currentTime, sr = AC.sampleRate, nb = AC.createBuffer(1, sr, sr), d = nb.getChannelData(0);
-    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-    const hit = (at, dur, g, f) => { const s = AC.createBufferSource(), bp = AC.createBiquadFilter(), lp = AC.createBiquadFilter(), v = AC.createGain(); s.buffer = nb;
-      bp.type = 'bandpass'; bp.frequency.value = f; bp.Q.value = 1.4; lp.type = 'lowpass'; lp.frequency.value = 3200; v.gain.setValueAtTime(0, t + at); v.gain.linearRampToValueAtTime(g, t + at + .004); v.gain.exponentialRampToValueAtTime(.0005, t + at + dur);
-      s.connect(bp); bp.connect(lp); lp.connect(v); v.connect(OUT); s.start(t + at, Math.random() * .5, dur + .05); };
-    hit(0, .35, .32, 1400); hit(.01, .5, .14, 2600);
-    for (let i = 0; i < 26; i++) hit(.04 + Math.random() * .6 * Math.pow(Math.random(), .7), .05 + Math.random() * .08, .03 + Math.random() * .05, 2200 + Math.random() * 2600);
-    play('impact_boom', .25, 0, 1, 900);
+  // four glass smashes to choose from, each about 1.4 s (twice v3's), clearer than v3's muffled one. They skip the
+  // master's top cut so the glass keeps its sparkle; each has its own ceiling instead.
+  let SMASH = 'A';
+  const noise = () => { const sr = AC.sampleRate, nb = AC.createBuffer(1, sr * 2, sr), d = nb.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; return nb; };
+  const glassBus = (top) => { const lp = AC.createBiquadFilter(), g = AC.createGain(); lp.type = 'lowpass'; lp.frequency.value = top; g.gain.value = .9; lp.connect(g); g.connect(AC.destination); return lp; };
+  // one burst of filtered noise: a crack, a shard, a scrape
+  const hit = (nb, out, t, dur, g, f, q = 1.4, type = 'bandpass') => { const s = AC.createBufferSource(), bp = AC.createBiquadFilter(), v = AC.createGain(); s.buffer = nb;
+    bp.type = type; bp.frequency.value = f; bp.Q.value = q; v.gain.setValueAtTime(0, t); v.gain.linearRampToValueAtTime(g, t + .003); v.gain.exponentialRampToValueAtTime(.0005, t + dur);
+    s.connect(bp); bp.connect(v); v.connect(out); s.start(t, Math.random() * 1.2, dur + .05); };
+  // a tiny ringing piece of glass: a short sine pair that dies fast
+  const ting = (out, t, f, g) => { [1, 2.76].forEach((m, i) => { const o = AC.createOscillator(), v = AC.createGain(); o.type = 'sine'; o.frequency.value = f * m;
+    v.gain.setValueAtTime(0, t); v.gain.linearRampToValueAtTime(g / (i + 1), t + .002); v.gain.exponentialRampToValueAtTime(.0003, t + .09 + Math.random() * .1); o.connect(v); v.connect(out); o.start(t); o.stop(t + .25); }); };
+  const SMASHES = {
+    // A: a clean crack and a long rain of shards falling away
+    A: { name: 'Crack and rain', run(nb, t) { const o = glassBus(11000);
+      hit(nb, o, t, .45, .55, 2600, .9); hit(nb, o, t + .005, .3, .35, 5200, 1.2); hit(nb, o, t, .25, .3, 900, .8, 'lowpass');
+      for (let i = 0; i < 70; i++) { const at = .03 + 1.35 * Math.pow(Math.random(), 1.6); hit(nb, o, t + at, .03 + Math.random() * .07, (.18 + Math.random() * .2) * (1 - at / 1.6), 3000 + Math.random() * 5500, 3); }
+      for (let i = 0; i < 18; i++) ting(o, t + .05 + 1.2 * Math.pow(Math.random(), 1.4), 2400 + Math.random() * 3200, .05); } },
+    // B: a bigger window: a deep thump under the crack, then shards and a scatter across the floor
+    B: { name: 'Window', run(nb, t) { const o = glassBus(9000);
+      play('impact_boom', .45, 0, .9, 1400); hit(nb, o, t, .6, .6, 1800, .7); hit(nb, o, t + .01, .4, .4, 4200, 1);
+      for (let i = 0; i < 55; i++) { const at = .05 + 1.3 * Math.pow(Math.random(), 1.3); hit(nb, o, t + at, .04 + Math.random() * .1, (.2 + Math.random() * .2) * (1 - at / 1.6), 1800 + Math.random() * 4500, 2.5); }
+      for (let i = 0; i < 10; i++) ting(o, t + .2 + Math.random() * 1.1, 1800 + Math.random() * 2400, .04); } },
+    // C: crystal: a bright snap with lots of tiny ringing pieces, the most sparkly
+    C: { name: 'Crystal', run(nb, t) { const o = glassBus(13000);
+      hit(nb, o, t, .3, .5, 4500, 1); hit(nb, o, t, .2, .3, 7000, 1.5);
+      for (let i = 0; i < 45; i++) { const at = .02 + 1.4 * Math.pow(Math.random(), 1.5); hit(nb, o, t + at, .02 + Math.random() * .05, (.12 + Math.random() * .14) * (1 - at / 1.6), 5000 + Math.random() * 5000, 4); }
+      for (let i = 0; i < 40; i++) ting(o, t + .02 + 1.35 * Math.pow(Math.random(), 1.3), 2800 + Math.random() * 4500, .06); } },
+    // D: a heavy smash: a low crunch that tumbles on, darker but not muffled
+    D: { name: 'Heavy smash', run(nb, t) { const o = glassBus(7500);
+      play('impact_boom', .6, 0, .8, 1100); hit(nb, o, t, .8, .7, 1200, .6); hit(nb, o, t + .02, .5, .45, 3000, .8);
+      for (let i = 0; i < 6; i++) hit(nb, o, t + .1 + i * .18 + Math.random() * .1, .25, .3 - i * .04, 1400 + Math.random() * 1200, .8);
+      for (let i = 0; i < 50; i++) { const at = .05 + 1.3 * Math.pow(Math.random(), 1.2); hit(nb, o, t + at, .05 + Math.random() * .1, (.15 + Math.random() * .18) * (1 - at / 1.6), 2000 + Math.random() * 3500, 2); } } }
   };
+  const smash = () => { if (!soundOn || !AC) return; SMASHES[SMASH].run(noise(), AC.currentTime + .01); };
+
+  // the crowd: the cheer loops from the rating to the end of the name, with fireworks over it the whole time
+  let crowd = null, fwTimer = null;
+  const firework = () => { if (!soundOn || !AC) return; const t = AC.currentTime, nb = noise(), o = glassBus(8000);
+    const up = Math.random() < .6; let at = 0;
+    if (up) { const s = AC.createBufferSource(), bp = AC.createBiquadFilter(), v = AC.createGain(); s.buffer = nb; bp.type = 'bandpass'; bp.Q.value = 6;   // the launch: a rising hiss
+      bp.frequency.setValueAtTime(900, t); bp.frequency.exponentialRampToValueAtTime(3200, t + .55); v.gain.setValueAtTime(0, t); v.gain.linearRampToValueAtTime(.08, t + .1); v.gain.linearRampToValueAtTime(0, t + .55);
+      s.connect(bp); bp.connect(v); v.connect(o); s.start(t, Math.random(), .6); at = .55; }
+    hit(nb, o, t + at, .5, .35, 160, .7, 'lowpass'); hit(nb, o, t + at, .25, .25, 900, .6);                   // the bang
+    for (let i = 0; i < 22; i++) hit(nb, o, t + at + .08 + Math.random() * .9, .02 + Math.random() * .03, .05 + Math.random() * .06, 3000 + Math.random() * 4000, 3);   // the crackle
+  };
+  const crowdOn = () => { if (!soundOn || !AC || !BUF.celebration || crowd) return;
+    const s = AC.createBufferSource(), v = AC.createGain(); s.buffer = BUF.celebration; s.loop = true; v.gain.setValueAtTime(0, AC.currentTime); v.gain.linearRampToValueAtTime(.7, AC.currentTime + .5);
+    s.connect(v); v.connect(OUT); s.start(); crowd = { s, v };
+    const next = () => { firework(); fwTimer = setTimeout(next, 450 + Math.random() * 700); }; next(); };
+  const crowdOff = (fade = 1.2) => { clearTimeout(fwTimer); fwTimer = null; if (!crowd) return; const { s, v } = crowd, t = AC.currentTime;
+    v.gain.cancelScheduledValues(t); v.gain.setValueAtTime(v.gain.value, t); v.gain.linearRampToValueAtTime(0, t + fade); s.stop(t + fade + .05); crowd = null; };
   document.getElementById('snd').onclick = (e) => { soundOn = !soundOn; e.target.classList.toggle('on', soundOn); e.target.textContent = soundOn ? 'Sound on' : 'Sound off'; };
 
   // ---------- 3D glass: shards with the card's colours, long splinters and a spray of tiny bits ----------
@@ -331,7 +376,7 @@
     const flash = ov.querySelector('.flash'), ring = ov.querySelector('.ring'), badge = ov.querySelector('.badge');
     ring.style.left = mx + 'px'; ring.style.top = my + 'px';
     flash.classList.remove('go'); ring.classList.remove('go'); void flash.offsetWidth; flash.classList.add('go'); ring.classList.add('go');
-    shatter(mx, my, 3, cols); smash(); play('celebration', .55, .5);
+    shatter(mx, my, 3, cols); smash();
     await tween(620, (u) => { const s = u < .65 ? (u / .65) * 1.15 : 1.15 - .15 * ((u - .65) / .35); const k = Math.max(.001, s); place(mx - W * k / 2, my - H * k / 2, k); });
     place(fx, fy, 1);
     badge.textContent = c.level === 'legend' ? 'LEGEND' : 'PURPLE'; badge.style.top = (fy - 46) + 'px'; badge.classList.remove('go'); void badge.offsetWidth; badge.classList.add('go');
@@ -349,6 +394,7 @@
     big.querySelector('.d2c-body').appendChild(roller);
     const rs = roller.firstElementChild, last = nums.length - 1, target = nums.indexOf(c.ovr), steps = last - target, fast = steps - 5;
     // pos counts numbers passed from the start (the bottom of the list); the strip moves down so each new number drops in from above
+    crowdOn();                                                  // the crowd and the fireworks start with the rating
     const at = (pos) => { rs.style.transform = `translateY(${(-(last - pos) + 1) * lh}px)`; };
     let lastTick = -1;
     await tween(1600, (u) => { const e = u < .5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2, sp = Math.sin(u * Math.PI), pos = e * fast; at(pos);
@@ -373,6 +419,7 @@
       const t = el.textContent; el.textContent = ''; el.classList.add('in');
       for (const ch of t) { const s = document.createElement('span'); s.className = 'ch'; s.textContent = ch; el.appendChild(s); if (ch.trim()) play('tick_mech', .5, 0, .8, 900); await wait(90); }
     }
+    crowdOff();                                                 // and fade once the name is in
     big.classList.remove('blank');
     await wait(3000);
     // from its full size down into its place in the reel
