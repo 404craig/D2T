@@ -54,6 +54,35 @@ t("the same seed and choices give the same season", () => {
   assert.deepStrictEqual(again.st.final.table, run1.st.final.table);
   assert.deepStrictEqual(again.st.played.map(r => [r.us, r.them]), run1.st.played.map(r => [r.us, r.them]));
 });
+t("a Daily's goes have seeds of their own: go 2 differs from go 1 in rolls and results, and each go replays itself", () => {
+  // the app seeds go 1 `daily-<date>` and go 2 `daily-<date>#2` (GAME.dailySeed in core/game.js)
+  const date = "2026-10-13", go1 = play("daily-" + date, "2004/05", "Southampton", "pass"), go2 = play("daily-" + date + "#2", "2004/05", "Southampton", "pass");
+  const again = play("daily-" + date, "2004/05", "Southampton", "pass");
+  assert.notDeepStrictEqual(go1.offered.slice(0, 3), go2.offered.slice(0, 3), "the first roll should differ between goes");
+  const shared = go1.offered.filter(id => go2.offered.includes(id)).length;
+  assert.ok(shared < go1.offered.length / 3, `goes share too many cards: ${shared} of ${go1.offered.length}`);
+  const r1 = go1.st.played.map(r => `${r.us}-${r.them}`), r2 = go2.st.played.map(r => `${r.us}-${r.them}`);
+  assert.ok(r1.filter((s, i) => s === r2[i]).length < 20, "the same XI should not get the same results in another go");
+  assert.deepStrictEqual(again.offered, go1.offered, "the same go should offer the same cards");
+  assert.deepStrictEqual(again.st.played.map(r => [r.us, r.them]), go1.st.played.map(r => [r.us, r.them]), "the same go should replay its results");
+});
+t("match results look like football: about 2.7 goals a game, 5+ goal margins rare, 0-0 and 1-0 common", () => {
+  let n = 0, goals = 0, big = 0, nil = 0, oneNil = 0;
+  for (const S of Object.values(G.seasons)) {
+    const ix = D.indexSeason(S), str = {};
+    for (let c = 0; c < ix.nClubs; c++) str[c] = D.clubStrength(S, c, new Set());
+    for (const m of ix.matches) {
+      const r = D.stream("football", S.season, m.i), po = (l) => { const L = Math.exp(-l); let k = 0, p = 1; do { k++; p *= r(); } while (p > L && k < 12); return k - 1; };
+      const hg = po(D.expectedGoals(str[m.h], str[m.a], true)), ag = po(D.expectedGoals(str[m.a], str[m.h], false));
+      n++; goals += hg + ag; if (Math.abs(hg - ag) >= 5) big++; if (hg === 0 && ag === 0) nil++; if (hg + ag === 1) oneNil++;
+    }
+  }
+  // real Premier League, 1992/93 to 2025/26: 2.69 goals a game, 2.0% of matches by 5 or more, 7.8% 0-0, 17.6% 1-0 or 0-1
+  assert.ok(Math.abs(goals / n - 2.69) < 0.15, "goals a game " + (goals / n).toFixed(2));
+  assert.ok(big / n < 0.03, "5+ goal margins " + (100 * big / n).toFixed(2) + "%");
+  assert.ok(nil / n > 0.055, "0-0 " + (100 * nil / n).toFixed(1) + "%");
+  assert.ok(oneNil / n > 0.15, "1-0 or 0-1 " + (100 * oneNil / n).toFixed(1) + "%");
+});
 t("no player is offered twice in a run, and never one of your own squad", () => {
   assert.strictEqual(new Set(run1.offered).size, run1.offered.length);
   const own = new Set(D.squadOf(run1.S, run1.st.club).map(p => p.id));
