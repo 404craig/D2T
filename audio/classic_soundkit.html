@@ -79,11 +79,36 @@ details.research summary { cursor: pointer; font-weight: 900; font-style: italic
 .play { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--green); color: var(--green-ink); display: grid; place-items: center; }
 .play svg { width: 16px; height: 16px; margin-left: 2px; }
 .opts { display: grid; gap: 6px; }
-.opt { text-align: left; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; display: grid; gap: 1px; position: relative; min-height: 44px; }
-.opt b { font-size: 14px; font-weight: 800; }
-.opt span { font-size: 12px; color: var(--soft); }
+.opt { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 6px; display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 8px; align-items: center; }
+.opt-txt { display: grid; gap: 1px; cursor: pointer; min-width: 0; }
+.opt-txt b { font-size: 14px; font-weight: 800; }
+.opt-txt > span { font-size: 12px; color: var(--soft); }
 .opt.on { border-color: var(--green); box-shadow: inset 0 0 0 1px var(--green); }
-.opt .rec { position: absolute; top: 8px; right: 10px; font-size: 10px; font-weight: 800; letter-spacing: .1em; color: var(--green); }
+.opt .rec { display: inline-block; margin-left: 6px; font-size: 10px; font-weight: 800; font-style: normal; letter-spacing: .1em; color: var(--soft); vertical-align: 1px; }
+.listen { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel-2); color: var(--fg); display: grid; place-items: center; }
+.listen svg { width: 13px; height: 13px; margin-left: 2px; }
+.listen:hover { border-color: var(--fg); }
+.choose { min-height: 40px; min-width: 84px; border-radius: 999px; border: 1px solid var(--line); background: transparent; font-weight: 800; font-style: italic; text-transform: uppercase; font-size: 12px; letter-spacing: .04em; padding: 0 12px; }
+.choose:hover { border-color: var(--green); }
+.opt.on .choose { background: var(--green); color: var(--green-ink); border-color: var(--green); }
+.none { min-height: 40px; border-radius: 8px; border: 1px dashed var(--line); background: transparent; color: var(--soft); font-size: 13px; font-weight: 600; text-align: left; padding: 6px 12px; }
+.none:hover { border-color: var(--bad); color: var(--fg); }
+.none.on { border: 1px solid var(--bad); color: var(--bad); background: #1A0909; }
+.cue.nogo { border-color: color-mix(in srgb, var(--bad) 45%, var(--line)); }
+.notes { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; gap: 8px; }
+.notes label { display: grid; gap: 2px; }
+.notes label b { font-weight: 900; font-style: italic; text-transform: uppercase; font-size: 15px; }
+.notes label span { font-size: 13px; color: var(--soft); }
+.notes textarea { width: 100%; min-height: 84px; resize: vertical; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 10px; font: 14px/1.45 var(--font); }
+.notes textarea:focus { border-color: var(--green); outline: none; }
+.note-status { font-size: 12px; color: var(--soft); min-height: 1.2em; }
+.savebar { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--soft); }
+.savebar i { width: 8px; height: 8px; border-radius: 50%; background: var(--soft); flex: none; }
+.savebar.live i { background: var(--green); box-shadow: 0 0 8px var(--green); }
+.pick-list .nogo b { color: var(--bad); }
+.pick-notes { display: grid; gap: 6px; font-size: 13px; }
+.pick-notes div { border-left: 2px solid var(--green); padding-left: 10px; }
+.pick-notes b { display: block; font-style: italic; text-transform: uppercase; font-size: 12px; }
 .src { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .08em; padding: 1px 5px; border-radius: 3px; margin-left: 6px; vertical-align: 1px; border: 1px solid currentColor; }
 .src.el { color: #7FD1FF; } .src.syn { color: var(--green); } .src.mix { color: #FFD95A; }
 .vars { display: flex; flex-wrap: wrap; gap: 4px; }
@@ -132,7 +157,8 @@ textarea.copy { width: 100%; min-height: 140px; background: var(--bg); color: va
   <header class="top">
     <span class="eyebrow">DROP2TOP &middot; Classic</span>
     <h1>Classic <em>sound kit</em></h1>
-    <p>Every action and animation in a Classic run, in the order you meet them, with two or three sound options each. Tap an option to hear it and make it your pick. The demo strips play whole moments in time with the game's real timings. Your picks are saved on this device; copy them at the bottom to hand over.</p>
+    <p>Every action and animation in a Classic run, in the order you meet them, with two or three sound options each. Press &#9654; to listen, then <b>Choose</b> the one you want for that action, or mark <b>None of these work</b>. Each section ends with a box for your feedback. The demo strips play whole moments at the game's real timings, using your choices.</p>
+    <div class="savebar" id="savebar"><i></i><span id="saveText">Saving on this device for now.</span></div>
     <div class="mixer">
       <div class="fader"><label for="m_vol">Volume <output id="o_vol"></output></label><input type="range" id="m_vol" min="0" max="1.5" step="0.01"></div>
       <div class="fader"><label for="m_room">Stadium echo <output id="o_room"></output></label><input type="range" id="m_room" min="0" max="1" step="0.01"></div>
@@ -181,8 +207,8 @@ textarea.copy { width: 100%; min-height: 140px; background: var(--bg); color: va
 
   <section class="picks" id="picks" aria-labelledby="h-picks">
     <h2 id="h-picks">Your picks</h2>
-    <p class="soft" style="font-size:14px">Tap an option on any card to change it. Copy the list and paste it to Claude to build these into the game.</p>
-    <div class="pick-list" id="pickList"></div>
+    <p class="soft" style="font-size:14px">Everything you've chosen and written, in one place. It saves as you go; Copy is there if you want to paste it anywhere.</p>
+    <div class="pick-list" id="pickList"></div><div class="pick-notes" id="pickNotes"></div>
     <div class="demo-row"><button class="btn go" id="copyPicks" type="button">Copy my picks</button><button class="btn" id="resetPicks" type="button">Back to our picks</button></div>
     <div id="copyBox" hidden></div>
   </section>
@@ -563,12 +589,14 @@ const CUES = [
   ] }
 ];
 const C = Object.fromEntries(CUES.map((c) => [c.id, c]));
+S.notes = S.notes || {};
+let override = null;   // while listening to an option on a demo-driven cue, the demo uses that option
 const pickOf = (id) => S.picks[id] || C[id].rec;
-const optOf = (id) => C[id].opts.find((o) => o.k === pickOf(id)) || C[id].opts[0];
+const optOf = (id) => { const k = override && override.id === id ? override.k : pickOf(id); return C[id].opts.find((o) => o.k === k) || C[id].opts.find((o) => o.k === C[id].rec) || C[id].opts[0]; };
 const varOf = {};
 function cue(id, v, at = 0) { const c = C[id], o = optOf(id); if (!o.p) return; unlock(); try { o.p(ctx.currentTime + 0.02 + at, v == null ? (varOf[id] || 0) : v); } catch (e) { console.warn(e); } }
 function audition(id, k, v) { const c = C[id], o = c.opts.find((x) => x.k === k); unlock();
-  if (c.run) { demoFor(c); return; }
+  if (c.run) { override = { id, k }; clearTimeout(audition.t); audition.t = setTimeout(() => { override = null; }, 8000); demoFor(c); return; }
   if (c.row) { const t = ctx.currentTime + 0.02; for (let i = 0; i < 8; i++) o.p(t + i * 0.09 * (1 + i * 0.12), i); return; }
   try { o.p(ctx.currentTime + 0.02, v == null ? (varOf[id] || 0) : v); } catch (e) { console.warn(e); } }
 
@@ -693,21 +721,34 @@ function demoFor(c) { const b = document.querySelector(`[data-stage-demo="${c.st
 /* ================= render ================= */
 $("#nav").innerHTML = STAGES.map((s, i) => `<a href="#${s.id}">${i + 1}. ${s.name}</a>`).join("") + `<a href="#picks">Your picks</a>`;
 function cueCard(c) {
-  const vars = c.vars ? `<div class="vars" role="group" aria-label="Versions">${c.vars.map((v, i) => `<button class="var${(varOf[c.id] || 0) === i ? " on" : ""}" type="button" data-var="${i}"${c.lv ? ` data-lv style="--lvc:var(--${LVS[i]})"` : ""}>${v}</button>`).join("")}</div>` : "";
-  return `<article class="cue" data-cue="${c.id}"><div class="cue-head"><div><h3>${c.n}</h3><p class="when">${c.w}</p></div><button class="play" type="button" data-act="play" aria-label="Play ${c.n} with your pick">${PLAY_ICON}</button></div>${vars}
-    <div class="opts">${c.opts.map((o) => `<button class="opt${pickOf(c.id) === o.k ? " on" : ""}" type="button" data-opt="${o.k}" aria-pressed="${pickOf(c.id) === o.k}"><b>${o.k}. ${o.n}<span class="src ${o.s === "rec" ? "el" : o.s}">${o.s === "rec" ? "REC" : o.s.toUpperCase()}</span></b><span>${o.d}</span>${c.rec === o.k ? '<i class="rec">OUR PICK</i>' : ""}</button>`).join("")}</div></article>`;
+  const ch = pickOf(c.id);
+  const vars = c.vars ? `<div class="vars" role="group" aria-label="Versions to hear">${c.vars.map((v, i) => `<button class="var${(varOf[c.id] || 0) === i ? " on" : ""}" type="button" data-var="${i}"${c.lv ? ` data-lv style="--lvc:var(--${LVS[i]})"` : ""}>${v}</button>`).join("")}</div>` : "";
+  return `<article class="cue${ch === "none" ? " nogo" : ""}" data-cue="${c.id}"><div class="cue-head"><div><h3>${c.n}</h3><p class="when">${c.w}</p></div></div>${vars}
+    <div class="opts" role="radiogroup" aria-label="Sound for ${c.n}">${c.opts.map((o) => `<div class="opt${ch === o.k ? " on" : ""}" data-opt="${o.k}">
+      <button class="listen" type="button" data-act="listen" aria-label="Listen to ${o.n}">${PLAY_ICON}</button>
+      <div class="opt-txt" data-act="listen"><b>${o.k}. ${o.n}<span class="src ${o.s === "rec" ? "el" : o.s}">${o.s === "rec" ? "REC" : o.s.toUpperCase()}</span>${c.rec === o.k ? '<i class="rec">OUR PICK</i>' : ""}</b><span>${o.d}</span></div>
+      <button class="choose" type="button" role="radio" aria-checked="${ch === o.k}" data-act="choose">${ch === o.k ? "Chosen" : "Choose"}</button></div>`).join("")}
+      <button class="none${ch === "none" ? " on" : ""}" type="button" data-act="none" aria-pressed="${ch === "none"}">${ch === "none" ? "Marked: none of these work. Say why in the box below." : "None of these work"}</button></div></article>`;
 }
+function refreshCard(id) { const card = document.querySelector(`[data-cue="${id}"]`); if (card) card.outerHTML = cueCard(C[id]); }
 $("#bays").innerHTML = STAGES.map((s, i) => `<section class="bay" id="${s.id}" aria-labelledby="h-${s.id}"><div class="bay-head"><span class="eyebrow">Stage ${i + 1}</span><h2 id="h-${s.id}">${s.name}</h2><p>${s.sub}</p></div>
   ${DEMOS[s.id] ? `<div class="demo" data-stage-demo="${s.id}">${DEMOS[s.id].html}</div>` : ""}
-  <div class="cues">${CUES.filter((c) => c.st === s.id).map(cueCard).join("")}</div></section>`).join("");
+  <div class="cues">${CUES.filter((c) => c.st === s.id).map(cueCard).join("")}</div>
+  <div class="notes"><label for="note-${s.id}"><b>Feedback on ${s.name}</b><span>What doesn't work, what you'd want instead, or which option is close but not right.</span></label>
+    <textarea id="note-${s.id}" data-note="${s.id}" rows="3" placeholder="For example: the reel ticks are too busy, and the Legend landing needs more build-up."></textarea><span class="note-status" data-status="${s.id}"></span></div></section>`).join("");
+document.querySelectorAll("[data-note]").forEach((ta) => { ta.value = S.notes[ta.dataset.note] || ""; });
 renderTable($("[data-stage-demo='table']"));
 document.addEventListener("click", (e) => {
   const dm = e.target.closest("[data-demo]"); if (dm) { const box = dm.closest("[data-stage-demo]"); DEMOS[box.dataset.stageDemo].run(box, dm.dataset.demo); return; }
-  const card = e.target.closest("[data-cue]"); if (!card) return; const id = card.dataset.cue, c = C[id];
-  const vb = e.target.closest("[data-var]"); if (vb) { varOf[id] = +vb.dataset.var; card.querySelectorAll(".var").forEach((x) => x.classList.toggle("on", x === vb)); audition(id, pickOf(id)); return; }
-  const ob = e.target.closest("[data-opt]"); if (ob) { S.picks[id] = ob.dataset.opt; save(); card.querySelectorAll(".opt").forEach((x) => { const on = x === ob; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); }); audition(id, ob.dataset.opt); renderPicks(); return; }
-  if (e.target.closest("[data-act='play']")) audition(id, pickOf(id));
+  const card = e.target.closest("[data-cue]"); if (!card) return; const id = card.dataset.cue;
+  const vb = e.target.closest("[data-var]"); if (vb) { varOf[id] = +vb.dataset.var; card.querySelectorAll(".var").forEach((x) => x.classList.toggle("on", x === vb)); audition(id, optOf(id).k); return; }
+  const act = e.target.closest("[data-act]"); if (!act) return; const a = act.dataset.act, row = e.target.closest("[data-opt]");
+  if (a === "listen" && row) { audition(id, row.dataset.opt); return; }
+  if (a === "choose" && row) { S.picks[id] = row.dataset.opt; refreshCard(id); persist("picks"); renderPicks(); audition(id, row.dataset.opt); return; }
+  if (a === "none") { if (S.picks[id] === "none") delete S.picks[id]; else S.picks[id] = "none"; refreshCard(id); persist("picks"); renderPicks();
+    if (S.picks[id] === "none") { const ta = document.querySelector(`[data-note="${C[id].st}"]`); if (ta) ta.scrollIntoView({ block: "center", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); } }
 });
+document.addEventListener("input", (e) => { const ta = e.target.closest("[data-note]"); if (!ta) return; S.notes[ta.dataset.note] = ta.value; noteStatus(ta.dataset.note, "Typing..."); persist("notes"); renderPicks(); });
 
 /* mixer */
 [["vol", "o_vol"], ["room", "o_room"]].forEach(([k, o]) => { const i = $("#m_" + k); i.value = S[k]; $("#" + o).textContent = Math.round(S[k] * 100); i.addEventListener("input", () => { S[k] = +i.value; $("#" + o).textContent = Math.round(S[k] * 100); applyMix(); save(); }); });
@@ -715,18 +756,54 @@ $("#m_var").checked = S.vary; $("#m_var").addEventListener("change", (e) => { S.
 $("#m_bed").checked = S.bed; $("#m_bed").addEventListener("change", (e) => { S.bed = e.target.checked; save(); if (!S.bed) bedOff(); });
 
 /* picks */
-function renderPicks() { $("#pickList").innerHTML = CUES.map((c) => { const o = optOf(c.id); return `<div><span>${STAGES.findIndex((s) => s.id === c.st) + 1}. ${c.n}</span><b>${o.k}. ${o.n}</b></div>`; }).join(""); }
+const choiceText = (id) => pickOf(id) === "none" ? "None of these work" : (() => { const o = C[id].opts.find((x) => x.k === pickOf(id)) || C[id].opts[0]; return `${o.k}. ${o.n}`; })();
+const escH = (t) => String(t).replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+function renderPicks() {
+  $("#pickList").innerHTML = CUES.map((c) => `<div class="${pickOf(c.id) === "none" ? "nogo" : ""}"><span>${STAGES.findIndex((s) => s.id === c.st) + 1}. ${c.n}${S.picks[c.id] ? "" : " (our pick)"}</span><b>${choiceText(c.id)}</b></div>`).join("");
+  $("#pickNotes").innerHTML = STAGES.filter((s) => (S.notes[s.id] || "").trim()).map((s) => `<div><b>${s.name}</b>${escH(S.notes[s.id]).replace(/\n/g, "<br>")}</div>`).join("");
+}
 renderPicks();
 function toast(m) { const t = $("#toast"); t.textContent = m; t.hidden = false; clearTimeout(t._h); t._h = setTimeout(() => (t.hidden = true), 2200); }
 $("#copyPicks").addEventListener("click", () => {
-  const text = "DROP2TOP Classic sound picks\n" + STAGES.map((s, i) => `\n${i + 1}. ${s.name}\n` + CUES.filter((c) => c.st === s.id).map((c) => { const o = optOf(c.id); return `- ${c.n}: ${o.k}. ${o.n} (${o.s === "rec" ? "recorded" : o.s === "syn" ? "synth" : "mixed"})`; }).join("\n")).join("\n")
+  const text = "DROP2TOP Classic sound picks\n" + STAGES.map((s, i) => `\n${i + 1}. ${s.name}\n` + CUES.filter((c) => c.st === s.id).map((c) => `- ${c.n}: ${choiceText(c.id)}${S.picks[c.id] ? "" : " (our pick, not changed)"}`).join("\n") + ((S.notes[s.id] || "").trim() ? `\n  Feedback: ${S.notes[s.id].trim()}` : "")).join("\n")
     + `\n\nSettings: echo ${Math.round(S.room * 100)}, variation ${S.vary ? "on" : "off"}, crowd bed ${S.bed ? "on" : "off"}\nKit: claude.ai artifact "D2T Classic Sound Kit"; files in audio/classic and audio/game on the claude/optimistic-maxwell-q6adtf branch.`;
   const fb = () => { const b = $("#copyBox"); b.hidden = false; b.innerHTML = '<p class="soft" style="font-size:13px">Copying is blocked here. Select this and copy it:</p><textarea class="copy" readonly></textarea>'; const ta = b.querySelector("textarea"); ta.value = text; ta.focus(); ta.select(); };
   try { navigator.clipboard.writeText(text).then(() => toast("Picks copied"), fb); } catch (e) { fb(); }
 });
 let resetArm = false;
 $("#resetPicks").addEventListener("click", (e) => { if (!resetArm) { resetArm = true; e.target.textContent = "Tap again to reset"; setTimeout(() => { resetArm = false; e.target.textContent = "Back to our picks"; }, 3000); return; }
-  S.picks = {}; save(); document.querySelectorAll(".cue").forEach((card) => { const id = card.dataset.cue; card.querySelectorAll(".opt").forEach((x) => { const on = x.dataset.opt === pickOf(id); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); }); }); renderPicks(); e.target.textContent = "Back to our picks"; resetArm = false; toast("Back to our picks"); });
+  S.picks = {}; persist("picks"); CUES.forEach((c) => refreshCard(c.id)); renderPicks(); e.target.textContent = "Back to our picks"; resetArm = false; toast("Back to our picks"); });
+let db = null; const chain = { picks: Promise.resolve(), notes: Promise.resolve() }, timers = {};
+function noteStatus(st, t) { const el = document.querySelector(`[data-status="${st}"]`); if (el) el.textContent = t; }
+function setLive(on, msg) { $("#savebar").classList.toggle("live", on); $("#saveText").textContent = msg; }
+function persist(which) {
+  save(); if (!db) { if (which === "notes") STAGES.forEach((st) => noteStatus(st.id, (S.notes[st.id] || "").trim() ? "Saved on this device" : "")); return; }
+  clearTimeout(timers[which]);
+  timers[which] = setTimeout(() => {
+    const body = which === "picks"
+      ? { choices: Object.fromEntries(CUES.map((c) => [c.id, pickOf(c.id)])), changed: Object.keys(S.picks), updatedAt: new Date().toISOString() }
+      : { sections: Object.assign({}, S.notes), updatedAt: new Date().toISOString() };
+    chain[which] = chain[which].then(() => db.doc("feedback/" + which).set(body)).then(() => {
+      if (which === "notes") STAGES.forEach((st) => noteStatus(st.id, (S.notes[st.id] || "").trim() ? "Saved" : ""));
+      setLive(true, "Your choices and feedback save to this page as you go, so Claude can read them.");
+    }).catch((err) => {
+      const ro = err && err.code === "invalid_argument";
+      setLive(false, ro ? "This view can't save to the page. Saving on this device; use Copy at the bottom." : "Couldn't save to the page just now. It's kept on this device and will try again on your next change.");
+      if (which === "notes") STAGES.forEach((st) => noteStatus(st.id, (S.notes[st.id] || "").trim() ? "Saved on this device" : ""));
+    });
+  }, which === "notes" ? 900 : 250);
+}
+(window.claude && window.claude.use ? window.claude.use("db") : Promise.resolve(null)).then(async (d) => {
+  if (!d) { setLive(false, "Saving on this device. Use Copy at the bottom to send your choices."); return; }
+  db = d;
+  try {
+    const [p, n] = await Promise.all([db.doc("feedback/picks").get(), db.doc("feedback/notes").get()]);
+    if (p.exists) { const v = p.data(); const picks = {}; (v.changed || []).forEach((id) => { if (C[id] && v.choices && v.choices[id]) picks[id] = v.choices[id]; }); S.picks = picks; }
+    if (n.exists) S.notes = Object.assign({}, (n.data() || {}).sections || {});
+    save(); CUES.forEach((c) => refreshCard(c.id)); document.querySelectorAll("[data-note]").forEach((ta) => { if (document.activeElement !== ta) ta.value = S.notes[ta.dataset.note] || ""; }); renderPicks();
+    setLive(true, "Your choices and feedback save to this page as you go, so Claude can read them.");
+  } catch (err) { setLive(false, "Couldn't reach the page's saved choices. Saving on this device for now."); }
+});
 document.addEventListener("visibilitychange", () => { if (document.hidden) { if (running) running.cancel(); matchTimers.forEach(clearTimeout); clearTimeout(tableTimer); bedOff(); } });
 })();
 </script>
