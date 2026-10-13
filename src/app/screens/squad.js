@@ -40,11 +40,9 @@
       const nextHTML = fx ? `<div class="se-next"><img src="${oppC.crest}" alt=""><div class="se-next-t"><small>Next · ${fx.ha === 'H' ? 'Home' : 'Away'}</small><b class="d2c-fit">${D2T.esc(oppC.name)}</b></div></div>` : '';
       const carried = GAME.mode() === 'clubx' && GAME.career().n > 1;   // a Club X career's later seasons have pre-season rolls
       const label = drafting ? 'Start the draft' : pre ? (dream && !carried ? 'Start the season' : 'Pre-season') : 'Play';
-      // before the draft (Craig, 13 Oct): no next fixture; a greyed respin on the left (the draft has none) keeps Start the draft centred
-      const REFRESH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
-      // every squad bar (Craig, 13 Oct): no next fixture, a greyed back (nowhere to go back to before a match), Play in the middle
-      const left = drafting ? `<button class="icon-btn se-off" type="button" disabled aria-hidden="true" tabindex="-1">${REFRESH}</button>` : SE.backOff();
-      const bar = D2T.h(`<footer class="actionbar se-nextbar is-draft">${left}<button class="btn se-btn se-play" type="button">${label}</button>${SE.homeBtn()}</footer>`);
+      // every squad bar (Craig, 13 Oct): home, then a greyed middle button (nowhere to go back to and no respin here; before
+      // the draft it is the greyed respin the draft's own bar shows, as the draft has none), then Play across the right
+      const bar = D2T.h(SE.bar({ cls: 'se-nextbar', mid: drafting ? SE.respinOff() : SE.backOff(), main: SE.mainBtn(label, 'se-play') }));
       root.appendChild(bar);
       const playBtn = bar.querySelector('.se-play');
       playBtn.onclick = () => {

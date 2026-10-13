@@ -94,7 +94,7 @@
     get cardEl() { return this.slot.querySelector('.sp-node.is-hit .d2c') || this.slot.querySelector('.sp-node .d2c'); }
   }
 
-  const REFRESH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
+  const REFRESH = D2T.ICON.respin;
 
   // ---------- the roll screen ----------
   // cfg: { kicker, title, sub, hint, pool: items, render(item) -> html, pick() -> [3 items], accent(item) -> {accent, ink},
@@ -108,16 +108,18 @@
       <div class="sp-head"><span class="sp-kicker">${cfg.kicker || ''}</span><h1 class="sp-title">${cfg.title}</h1><p class="sp-sub">${cfg.sub || ''}</p></div>
       <div class="sp-stage"><div class="sp-floor"></div><div class="sp-row${cfg.count === 1 ? ' sp-one' : ''}">${'<div class="sp-slot"></div>'.repeat(cfg.count || 3)}</div></div>
       <div class="sp-hint"></div>
-      <div class="sp-bar">
-        <button class="sp-round is-reload" aria-label="Spin again">${REFRESH}<span class="sp-count"></span></button>
-        <button class="sp-main">${D2T.logo('emblem', { label: '' })}<span class="sp-lbl">${cfg.mainLabel || 'Spin'}</span></button>
-        <button class="sp-round is-home" aria-label="Home">${D2T.ICON.home}</button>
+      <div class="sp-bar game-bar">
+        <button class="sp-round is-home bar-home" aria-label="Home">${D2T.ICON.home}</button>
+        <button class="sp-round is-reload bar-mid" aria-label="Spin again">${REFRESH}<span class="sp-count"></span></button>
+        <button class="sp-main bar-main">${D2T.logo('emblem', { label: '' })}<span class="sp-lbl">${cfg.mainLabel || 'Spin'}</span></button>
       </div></div>`);
     root.appendChild(el);
     const slots = Array.from(el.querySelectorAll('.sp-slot')), reels = slots.map((s) => new Reel(s));
     const main = el.querySelector('.sp-main'), lbl = main.querySelector('.sp-lbl'), reload = el.querySelector('.sp-round.is-reload');
     const count = reload.querySelector('.sp-count'), hintEl = el.querySelector('.sp-hint');
-    el.querySelector('.sp-round.is-home').onclick = () => (D2T.runMenu ? D2T.runMenu() : D2T.go('home'));   // the run menu (core/season.js)
+    // the bar (Craig, 13 Oct): home on the left (the run menu, core/season.js), the respin with its count in the middle
+    // (greyed where a roll has none, as in the draft, so the bar keeps its shape), the main button across the right
+    el.querySelector('.sp-round.is-home').onclick = () => (D2T.runMenu ? D2T.runMenu() : D2T.go('home'));
 
     let state = 'idle', results = null, selected = -1, respins = cfg.respins == null ? null : cfg.respins, raf = 0, timers = [], tick = 0, open = null, rr = null;
     const hint = (t) => { hintEl.textContent = t || ''; };
@@ -128,7 +130,7 @@
       else { el.style.removeProperty('--sp-btn'); el.style.removeProperty('--sp-btn-ink'); }
     };
     const setRespins = () => {
-      if (respins == null) { reload.style.display = 'none'; return; }
+      if (respins == null) { reload.disabled = true; reload.classList.add('is-off'); reload.setAttribute('aria-hidden', 'true'); reload.tabIndex = -1; count.style.display = 'none'; return; }
       count.textContent = respins; reload.disabled = respins <= 0 || state === 'spinning';
       reload.setAttribute('aria-label', `Spin again, ${respins} left`);
     };

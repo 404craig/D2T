@@ -323,13 +323,12 @@
 .sm-dv small { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .sm-dv b { font: var(--display); font-size: 30px; line-height: 1; color: var(--se-text, #fff); }
 .sm-dv i { font-style: normal; font-size: 13px; font-weight: 600; color: #CFCFD6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-/* the home button at the bottom right of every in-run screen (Craig, 13 Oct; opens the run menu, core/season.js) */
+/* the in-run bar (Craig, 13 Oct; design bottom-bar.html): home on the left (the run menu, core/season.js), the round
+   middle button (back, or greyed), the main button across the right; the round buttons 56px, the main 58px */
 .actionbar .se-home svg { width: 24px; height: 24px; }
-.se-nextbar .se-home { width: 52px; height: 52px; }
 .se-nextbar .se-play { min-width: 0; padding-left: 18px; padding-right: 18px; }
-.actionbar .se-off { width: 52px; height: 52px; opacity: .3; flex-shrink: 0; }
+.actionbar .se-off { opacity: .3; flex-shrink: 0; pointer-events: none; }
 .actionbar .se-off svg { width: 24px; height: 24px; }
-.se-nextbar.is-draft .se-play { flex: 1; }
 /* the roll's pitch is smaller: a compact shape chip in its bottom-left corner, still a 44px target (Craig, 13 Oct) */
 .tr-field .se-formlink { left: 4px; bottom: 4px; min-height: 28px; padding: 0 7px; gap: 2px; border-radius: 10px; font-size: 0; }
 .tr-field .se-formlink b { font-size: 12px; }

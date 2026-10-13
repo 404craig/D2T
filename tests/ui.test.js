@@ -56,6 +56,23 @@ fs.mkdirSync(OUT, { recursive: true });
     if (small.length) errors.push(`tap targets under 40px on ${where}: ${small.join(", ")}`);
   };
 
+  // every in-game bar (Craig, 13 Oct): home first, the round middle button, the main button last; every bar is a game-bar
+  const barOrder = async (where) => {
+    const bad = await page.$$eval(".actionbar, .sp-bar", (bars) => bars.filter((b) => b.offsetParent).map((b) => {
+      const bs = [...b.children].filter((el) => el.tagName === "BUTTON");
+      if (!b.classList.contains("game-bar")) return "not a game-bar";
+      if (bs.length < 3) return "fewer than 3 buttons";
+      if (!bs[0].classList.contains("bar-home") || !/home/i.test(bs[0].getAttribute("aria-label") || "")) return "home is not first";
+      if (!bs[1].classList.contains("bar-mid") || getComputedStyle(bs[1]).borderRadius !== "50%" && !/^(28|29|30)px$/.test(getComputedStyle(bs[1]).borderRadius)) return "the middle button is not the round one";
+      if (!bs[bs.length - 1].classList.contains("bar-main")) return "the main button is not last";
+      const r = bs[0].getBoundingClientRect(), m = bs[bs.length - 1].getBoundingClientRect();
+      if (Math.round(r.width) !== 56 || Math.round(r.height) !== 56 || m.height < 57 || m.width < r.width * 2) return `sizes off: home ${Math.round(r.width)}x${Math.round(r.height)}, main ${Math.round(m.width)}x${Math.round(m.height)}`;
+      return "";
+    }).filter(Boolean));
+    if (bad.length) errors.push(`bar order on ${where}: ${bad.join("; ")}`);
+    if (!(await page.$(".actionbar, .sp-bar"))) errors.push(`no bottom bar on ${where}`);
+  };
+
   await page.goto(process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index.html"));
   await page.evaluate(() => { localStorage.clear(); localStorage.setItem("d2t-v2", JSON.stringify({ settings: { muted: true } })); });
   await page.reload();
@@ -68,7 +85,7 @@ fs.mkdirSync(OUT, { recursive: true });
   // ---------- new run: the club spin ----------
   await page.click('[data-act="pick"]');
   await expectScreen("spin");
-  await wait(900); await shot("03-spin");
+  await wait(900); await shot("03-spin"); await barOrder("club spin");
   check(!!(await page.$(".sp-tip")), "no respins note on a new run's club spin");
   await page.click(".sp-main");
   await wait(600);
@@ -78,14 +95,15 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.click(".sp-slot >> nth=1"); await wait(300);
   await page.click(".sp-main");
   await expectScreen("table");
-  await wait(1200); await shot("05-table-reveal");
-  await page.click(".actionbar button"); await wait(500);
+  await wait(1200); await shot("05-table-reveal"); await barOrder("table");
+  await page.click(".actionbar .bar-main"); await wait(500);
   await shot("06-table-reset");
-  await page.click(".actionbar button");
+  await page.click(".actionbar .bar-main");
   await expectScreen("squad");
   await wait(800); await shot("07-squad-preseason"); await smallButtons("squad");
-  // the home button sits bottom right in a run and opens the run menu (Craig, 13 Oct)
-  check(await page.evaluate(() => { const b = document.querySelector(".actionbar"); return b && b.lastElementChild.classList.contains("se-home"); }), "squad: the home button is not bottom right");
+  // the home button sits bottom left in a run and opens the run menu (Craig, 13 Oct)
+  check(await page.evaluate(() => { const b = document.querySelector(".actionbar"); return b && b.firstElementChild.classList.contains("se-home") && b.lastElementChild.classList.contains("bar-main"); }), "squad: the home button is not bottom left with the main button last");
+  await barOrder("squad");
   await page.click(".actionbar .se-home"); await wait(500);
   check(!!(await page.$('.sheet [data-k="restart"]')) && !!(await page.$('.sheet [data-k="quit"]')) && !!(await page.$('.sheet [data-k="home"]')), "the run menu does not offer Restart, Home and Quit");
   await page.click('.sheet [data-k="keep"]'); await wait(500);
@@ -122,7 +140,7 @@ fs.mkdirSync(OUT, { recursive: true });
       await touchDrag(await centre(".sp-slot >> nth=1"), '.tr-field .se-cardwrap[data-i="5"]', { steps: 30, stepMs: 40 });
     }
     await wait(400);
-    if (r === 0) await shot("09-roll-landed");
+    if (r === 0) { await shot("09-roll-landed"); await barOrder("transfer roll"); }
     if (r !== 1) { await page.waitForSelector(".sp-screen.is-placing", { timeout: 4000 }); await wait(700); }
     if (r === 0) await shot("10-placing");
     if (r === 2) {
@@ -155,11 +173,17 @@ fs.mkdirSync(OUT, { recursive: true });
   // ---------- gameweek 1: fixtures and the live match ----------
   await page.click(".se-play");
   await expectScreen("fixtures");
-  await wait(700); await shot("12-fixtures");
+  await wait(700); await shot("12-fixtures"); await barOrder("fixtures");
+  check(!!(await page.$(".actionbar .se-back:not([disabled])")), "fixtures: no live back button in the middle of the bar");
   await page.click(".actionbar .se-btn");
   await expectScreen("match");
-  await wait(500); await shot("13-match-preview");
-  await page.click(".se-main"); await wait(2500); await shot("14-match-live");
+  await wait(500); await shot("13-match-preview"); await barOrder("match preview");
+  // back to the fixtures before kick off, greyed once the match is on
+  check(!!(await page.$(".actionbar .se-back:not([disabled])")), "match preview: no live back button");
+  await page.click(".actionbar .se-back"); await expectScreen("fixtures"); await wait(400);
+  await page.click(".actionbar .se-btn"); await expectScreen("match"); await wait(400);
+  await page.click(".se-main"); await wait(2500); await shot("14-match-live"); await barOrder("match live");
+  check(!!(await page.$(".actionbar .se-back[disabled]")), "match live: the back button should be greyed");
   // refresh mid-match: the result is already decided and must not replay or change
   const res1 = await page.evaluate(() => JSON.stringify(window.D2T.game.eng().played[0]));
   await page.click(".se-main"); await wait(1800);
@@ -190,7 +214,11 @@ fs.mkdirSync(OUT, { recursive: true });
   check(seasonOver, "season did not finish");
   await page.evaluate(() => window.D2T.go("summary"));
   await expectScreen("summary");
-  await wait(1600); await shot("16-summary"); await smallButtons("summary");
+  await wait(1600); await shot("16-summary"); await smallButtons("summary"); await barOrder("summary");
+  // the run is over: home goes straight home
+  await page.click(".actionbar .se-home"); await expectScreen("home"); await wait(500);
+  check(!(await page.$(".sheet")), "summary: home should go straight home once the run is over");
+  await page.evaluate(() => window.D2T.go("summary")); await expectScreen("summary"); await wait(800);
   await card("classic", "DROP2TOP\nI took ");
   await page.evaluate(() => document.querySelector(".screen-body").scrollTo(0, 99999)); await wait(400); await shot("17-summary-bottom");
   const scored = await page.evaluate(() => window.D2T.game.eng().played.some((r) => r.us > 0));
@@ -259,15 +287,17 @@ fs.mkdirSync(OUT, { recursive: true });
   await wait(400); await shot("30-d2d-spin");
   check(await page.evaluate(() => window.D2T.game.offer().every((c) => c && c.key && window.D2T_GAME.clubSeasons.some((x) => x.key === c.key))), "Dare2Dream offer not from every club-season");
   await page.click(".sp-slot >> nth=0"); await wait(300); await page.click(".sp-main");
-  await expectScreen("table"); await page.click(".actionbar button"); await wait(400);
+  await expectScreen("table"); await page.click(".actionbar .bar-main"); await wait(400);
   check(/dream|Beat it|Do it again/i.test(await page.textContent(".se-fin")), "table does not show the Dare2Dream target");
-  await page.click(".actionbar button"); await expectScreen("squad"); await wait(600);
+  await page.click(".actionbar .bar-main"); await expectScreen("squad"); await wait(600);
   check(/Target/.test(await page.textContent(".se-sqsub")), "squad does not show the target");
   check(await page.evaluate(() => window.D2T.game.eng().phase === "draft" && window.D2T.game.eng().xi.every((x) => x == null)), "Dare2Dream should start with no players");
   await shot("31-d2d-empty");
   // the draft: one spin per shirt, tap then Sign for the first, drag for the second, the rest through the adapter
   await page.click(".se-play"); await expectScreen("transfer");
-  check(!(await page.$(".sp-round.is-reload:not([style*='none'])")), "the draft should have no respin button");
+  await page.waitForSelector(".sp-bar", { timeout: 8000 }).catch(() => {});   // the window's emblem burst comes first
+  check(!!(await page.$(".sp-round.is-reload[disabled][aria-hidden='true']")), "the draft's respin should be greyed (disabled, hidden from assistive tech)");
+  await barOrder("draft");
   for (let k = 0; k < 2; k++) {
     await page.waitForSelector(".sp-main:not([disabled])", { timeout: 8000 }); await wait(250);
     await page.click(".sp-main");
@@ -317,10 +347,10 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => { const n = document.querySelector(".sp-node.is-hit .d2c-cname"); return n && n.textContent === "Southside Rovers"; }), "the landed card did not turn into your club");
   check(await page.evaluate(() => /Play/.test(document.querySelector(".sp-main").textContent) && !document.querySelector(".sp-main").disabled), "Play was not ready after the badge");
   await page.click(".sp-main");
-  await expectScreen("table"); await page.click(".actionbar button"); await wait(400);
+  await expectScreen("table"); await page.click(".actionbar .bar-main"); await wait(400);
   check(/Southside Rovers/.test(await page.textContent(".screen")), "table does not show your club's name");
-  await shot("34-clx-table");
-  await page.click(".actionbar button"); await expectScreen("squad"); await wait(600);
+  await shot("34-clx-table"); await barOrder("Club X table");
+  await page.click(".actionbar .bar-main"); await expectScreen("squad"); await wait(600);
   check(await page.evaluate(() => window.D2T.game.eng().phase === "draft" && window.D2T.game.clubName() === "Southside Rovers"), "Club X should start in the draft under your name");
   check(await page.evaluate(() => { const G = window.D2T.game, i = G.draftInfo(); return i.open && G.rollCards().length === 3 && G.rollCards().every((c) => G.draftFits(c.id).length > 0); }), "Club X draft should serve three cards for its open shirts");
   await page.evaluate(() => { const G = window.D2T.game; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
@@ -433,11 +463,11 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => window.D2T.state.g433.filled.length === 0 && !!window.D2T.state.g433.formation && window.D2T.state.g433.revealed === false) && !!(await page.$(".g4-reveal")), "Goal Rush: Play again did not start a new game with a reveal");
   await page.click(".g4-reveal"); await wait(600);   // the reveal counts as seen once it finishes or is skipped
   check(await page.evaluate(() => window.D2T.state.g433.revealed === true) && !(await page.$(".g4-reveal")), "Goal Rush: skipping the reveal did not mark it seen");
-  // the home button (Craig, 12 and 13 Oct): it asks even before the first pick, Home keeps the game, Quit throws it away
-  await page.click(".g4 .is-home"); await wait(500);
-  check(!!(await page.$('.sheet [data-k="restart"]')), "Goal Rush: home before the first pick should offer Restart");
-  await page.click('.sheet [data-k="home"]'); await expectScreen("home"); await wait(600);
-  check(await page.evaluate(() => !!window.D2T.state.g433 && window.D2T.state.g433.filled.length === 0), "Goal Rush: Home before the first pick lost the game");
+  // the home button (Craig, 13 Oct): before the first spin it goes straight home (the game is kept); with a game under
+  // way it opens the shared menu, Home keeps the game, Quit throws it away
+  await barOrder("Goal Rush");
+  await page.click(".g4 .is-home"); await expectScreen("home"); await wait(600);
+  check(!(await page.$(".sheet")) && await page.evaluate(() => !!window.D2T.state.g433 && window.D2T.state.g433.filled.length === 0), "Goal Rush: home before the first spin should go straight home and keep the game");
   await page.click('[data-act="g433"]'); await expectScreen("goals433"); await wait(900);
   await page.click(".g4 .sp-main"); await wait(4800); await page.click('.g4 [data-c="0"]'); await wait(250); await page.click(".g4 .slotp.fit >> nth=-1"); await wait(1800);
   await page.click(".g4 .is-home"); await wait(500);
@@ -459,7 +489,7 @@ fs.mkdirSync(OUT, { recursive: true });
   // ---------- Unbeaten Run: spin for a stat, two cards reel in (left shows, right hides), answer, the run records apart ----------
   const ubRecBefore = await page.evaluate(() => JSON.stringify([window.D2T.game.record(), window.D2T.game.g433.record()]));
   await page.evaluate(() => { window.D2T.state.ub = null; window.D2T.save(); window.D2T.go("home"); }); await wait(900);
-  await page.click('[data-act="unbeaten"]'); await expectScreen("unbeaten"); await wait(700);
+  await page.click('[data-act="unbeaten"]'); await expectScreen("unbeaten"); await wait(700); await barOrder("Unbeaten start");
   check(!!(await page.$(".ub-spin")) && /Higher or lower/i.test(await page.textContent(".ub-title")) && /New run/.test(await page.textContent(".ub-spin")) && (await page.$$(".ub-grid .ub-fr")).length === 9, "Unbeaten Run: the start page is not Higher or lower with nine best runs and New run");
   for (const st of ["pts", "cg"]) {
     await page.evaluate((st) => { window.D2T_UB_STAT = st; }, st);
@@ -473,7 +503,7 @@ fs.mkdirSync(OUT, { recursive: true });
     const whoBefore = await page.textContent(".ub-who-r"), keyBefore = await page.evaluate(() => document.querySelector(".ub-r .sp-node.is-hit").innerHTML.length);
     await page.click(".ub-reload"); await wait(3200);
     check(await page.textContent(".ub-reload .sp-count") === "2" && await page.textContent(".ub-n") === "0" && (await page.textContent(".ub-who-r") !== whoBefore || await page.evaluate((k) => document.querySelector(".ub-r .sp-node.is-hit").innerHTML.length !== k, keyBefore)), "Unbeaten Run (" + st + "): a refresh did not swap the hidden card");
-    if (st === "pts") await shot("53-unbeaten-clubs");
+    if (st === "pts") { await shot("53-unbeaten-clubs"); await barOrder("Unbeaten round"); }
     // answer: either the run goes on (+1) or it is over (the sheet); both record nothing until the end
     const runsBefore = await page.evaluate(() => (window.D2T.state.ub || {}).runs || 0);
     await page.click(".ub-higher"); await wait(1600);
@@ -487,6 +517,13 @@ fs.mkdirSync(OUT, { recursive: true });
       await page.click('.sheet [data-k="restart"]'); await wait(800);
       check(!!(await page.$(".ub-spin")) && await page.evaluate((n) => ((window.D2T.state.ub || {}).runs || 0) === n, runsBefore), "Unbeaten Run (" + st + "): Restart did not go back to the stat spin, or recorded a run");
       await page.click(".ub-spin"); await wait(6500);
+      // Home keeps the run (Craig, 13 Oct): back from home it picks up where it was, the same cards and streak
+      const kept = await page.evaluate(() => ({ l: document.querySelector(".ub-l .sp-node.is-hit").innerHTML, n: document.querySelector(".ub-n").textContent }));
+      await page.click(".ub-bar .is-home"); await wait(500);
+      await page.click('.sheet [data-k="home"]'); await expectScreen("home"); await wait(600);
+      check(await page.evaluate(() => !!(window.D2T.state.ub.run && window.D2T.state.ub.run.stat)), "Unbeaten Run (" + st + "): Home did not keep the run");
+      await page.click('[data-act="unbeaten"]'); await expectScreen("unbeaten"); await wait(900);
+      check(await page.evaluate((k) => { const l = document.querySelector(".ub-l .sp-node.is-hit"), r = document.querySelector(".ub-r .sp-node.is-hit .ub-num"); return !!l && l.innerHTML === k.l && document.querySelector(".ub-n").textContent === k.n && r && r.textContent === "?" && document.querySelectorAll(".ub-ans:not([disabled])").length === 2 && !window.D2T.state.ub.run; }, kept), "Unbeaten Run (" + st + "): the kept run did not pick up where it was");
       // leaving mid-run asks, and quitting records nothing
       await page.click(".ub-bar .is-home"); await wait(500);
       check(!!(await page.$('.sheet [data-k="quit"]')), "Unbeaten Run (" + st + "): home mid-run did not ask");

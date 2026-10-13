@@ -53,9 +53,13 @@
         </div>
         <div class="se-pad"></div>
       </div>`);
-      const bar = D2T.h('<footer class="actionbar">' + SE.backOff() + '<button class="btn se-btn se-wide se-main" type="button">Kick off</button>' + SE.homeBtn() + '</footer>');
+      // home, back to the fixtures until kick off (then greyed: the result is decided), Kick off across the right (Craig, 13 Oct)
+      const bar = D2T.h(SE.bar({ mid: sim ? SE.backOff() : SE.backBtn('Back to fixtures'), main: SE.mainBtn('Kick off', 'se-main') }));
       root.append(body, bar);
       const btn = bar.querySelector('.se-main');
+      const backBtn = bar.querySelector('.se-back');
+      if (backBtn) backBtn.onclick = () => { if (phase !== 'pre') return; st.step = 'fixtures'; D2T.save(); D2T.go('fixtures'); };
+      const backOff = () => { if (!backBtn) return; backBtn.disabled = true; backBtn.classList.add('se-off'); backBtn.setAttribute('aria-hidden', 'true'); backBtn.tabIndex = -1; };
       const feed = body.querySelector('.se-feed'), clockEl = body.querySelector('.se-clock'), prog = body.querySelector('.se-prog span');
       const sh = body.querySelector('.se-sh'), sa = body.querySelector('.se-sa');
       let phase = 'pre', alive = true, raf = 0, score = { me: 0, opp: 0 }, nextEv = 0;
@@ -91,7 +95,7 @@
         sim = GAME.play();
         if (!sim) { D2T.go(GAME.stepFor() || 'home'); return; }
         SND.play('kickoff'); SND.crowd(true);
-        phase = 'live';
+        phase = 'live'; backOff();
         btn.textContent = 'Skip to end'; btn.classList.add('se-btn-ghost');
         setTimeout(() => alive && phase === 'live' && D2T.tip('match-skip', btn, 'Jump to the final score'), 1500);
         feed.innerHTML = ''; push({ type: 'ko' }, true);
