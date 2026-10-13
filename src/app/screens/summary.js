@@ -93,7 +93,7 @@
       const club = GAME.club(GAME.clubName()), n = S.clubs.length, rel = S.relegationPlaces || 3;
       SE.accent(root, club);
       root.appendChild(D2T.topbar());
-      if (!run.summarySound) { run.summarySound = true; D2T.save(); window.D2TSound && window.D2TSound.play(F.stars.champions ? 'champions' : F.stars.survive ? 'survived' : 'relegated'); }
+      if (!run.summarySound) { run.summarySound = true; D2T.save(); window.D2TSound && window.D2TSound.play(F.stars.champions ? 'champions' : F.finish <= 3 ? 'top3' : F.stars.tophalf ? 'tophalf' : F.stars.survive ? 'survived' : 'relegated'); }
 
       const line = banter(F, eng.seed);
       const name = (c) => S.clubs[c].name;
@@ -142,7 +142,7 @@
       const tag = x ? (met ? 'Club X: champions' : 'Club X') : dream ? (met ? 'Dare2Dream: dream achieved' : 'Dare2Dream') : '';
       const sh = buildShare(F, club, S.season, line, daily ? `${GAME.dailyName(daily)}${tag ? ' · ' + tag : ''}` : tag);
       if (daily) { const cmp = GAME.dailyCompare(daily); sh.text += `${cmp.isBest ? '\nMy best Daily yet' : cmp.bestLine ? '\n' + cmp.bestLine : ''}\nCan you beat it? 404craig.github.io/D2T`; }
-      bar.querySelector('[data-act="share"]').onclick = () => share(sh);
+      bar.querySelector('[data-act="share"]').onclick = () => { window.D2TSound && window.D2TSound.play('share'); share(sh); };
       body.querySelector('[data-act="again"]').onclick = () => { if (daily) { D2T.go('home'); return; } const m = GAME.mode(); D2T.state.run = null; D2T.save(); GAME.newRun(m); D2T.go('spin'); };
       body.querySelector('[data-act="table"]').onclick = () => {
         const rows = GAME.standings(null);

@@ -30,6 +30,7 @@
     const id = 'spf' + (++uid);
     const reduced = D2T.reduced();
     const scroll = !!(opts.scroll && opts.below);
+    window.D2TSound && window.D2TSound.play('cardZoom', 0);
     const inner = `<div class="sp-ov-blur"><div class="sp-ov-stage"><div class="sp-flip" style="width:${W}px;height:${H}px;left:${-W / 2}px;top:${-H / 2}px">
         <div class="sp-face is-front">${html}</div><div class="sp-face is-back">${backFace(W)}</div></div></div></div>
       ${opts.below ? `<div class="sp-ov-below">${opts.below}</div>` : ''}
@@ -109,6 +110,7 @@
     const close = () => {
       if (closed || busy) return;
       closed = true; busy = true;
+      window.D2TSound && window.D2TSound.play('cardZoom', 1);
       cancelAnimationFrame(raf);
       const finish = () => { ov.remove(); fromEl.style.visibility = ''; opts.onClose && opts.onClose(); };
       if (reduced) { ov.style.opacity = '0'; setTimeout(finish, 200); return; }
