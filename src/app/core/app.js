@@ -201,7 +201,7 @@
     D2T.params = params;
     if (location.hash.slice(1) === name) render(name); else location.hash = name;
   };
-  const RUN_SCREENS = ['spin', 'table', 'squad', 'fixtures', 'match', 'transfer', 'summary'];
+  const RUN_SCREENS = ['spin', 'table', 'squad', 'fixtures', 'match', 'results', 'standings', 'transfer', 'summary'];
   // In-run screens only open when the saved run has reached them; anything else goes to where the run is.
   function routeName() {
     let n = location.hash.slice(1);

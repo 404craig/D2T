@@ -635,12 +635,16 @@
               g.fillStyle = '#1C1C21'; g.fillRect(x, y + 50, 380, 2);
             });
           } });
-        const sh = D2T.sheet({ title: head, body: `<p class="fr-lead">Your XI scored <b>${t}</b> Premier League goals. ${best}${rec.exact ? ` Bang on target: ${rec.exact} ${rec.exact === 1 ? 'time' : 'times'}.` : ''}</p>
-          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="share">Share with your mates</button><button class="btn g4-again fr-btn-wide" data-k="again">Play again</button></div>` });
-        sh.body.querySelector('[data-k="again"]').onclick = () => { sh.close(); newGame(); };
-        sh.body.querySelector('[data-k="share"]').onclick = () => D2T.share.send(card);
+        // the shared end sheet (Craig, 14 Oct; D2T.endSheet): Share, Play again, Home; dragged closed, a slim "Game over"
+        // peek bar above the bottom bar brings it back
+        if (endSheet) endSheet.close();
+        endSheet = D2T.endSheet({ title: head, lead: `Your XI scored <b>${t}</b> Premier League goals. ${best}${rec.exact ? ` Bang on target: ${rec.exact} ${rec.exact === 1 ? 'time' : 'times'}.` : ''}`,
+          colour: '#FFD21F', ink: '#0A0A0A', peek: 'Game over', host: wrap, before: wrap.querySelector('.g4-bar'), slim: true,
+          buttons: [{ k: 'share', label: 'Share with your mates', fn: () => D2T.share.send(card) }, { k: 'again', label: 'Play again', primary: true, fn: () => newGame() }, { k: 'home', label: 'Home', fn: () => D2T.go('home') }] });
+        endSheet.open();
       }
-      function newGame() { S = D2T.state.g433 = fresh(); setShape(S.formation); save(); sel = null; busy = false; wrap.querySelector('.g4-track').classList.remove('glow'); render(); reveal(); }
+      let endSheet = null;
+      function newGame() { if (endSheet) { endSheet.close(); endSheet = null; } S = D2T.state.g433 = fresh(); setShape(S.formation); save(); sel = null; busy = false; wrap.querySelector('.g4-track').classList.remove('glow'); render(); reveal(); }
 
       // ---------- the target reveal (UI_SPEC 8f): once per game, never after a refresh; tap to skip, none with reduced motion ----------
       // a dim layer, "THIS GAME'S TARGET", the eight formations rolling through the big number, slowing to stop on this one

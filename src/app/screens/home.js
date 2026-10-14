@@ -1,7 +1,7 @@
 // Home (black, the new green as its accent). Also defines D2T.toBlack(next): the move into the game screens,
 // where green light glints through the white logo as it shrinks into the small top-left logo.
 (function () {
-  const STEP_LABEL = { spin: 'Pick a club', table: 'Preview', squad: 'Squad', fixtures: 'Fixtures', match: 'Match day', transfer: 'Transfer' };
+  const STEP_LABEL = { spin: 'Pick a club', table: 'Preview', squad: 'Squad', fixtures: 'Fixtures', match: 'Match day', results: 'Results', standings: 'League table', transfer: 'Transfer' };
   const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
   // Bottom bar icons: solid and slanted like the Black Italic type, all white (chosen 11 Oct)
   const SK = (d) => `<svg viewBox="0 0 24 24" aria-hidden="true"><g transform="skewX(-10) translate(2 0)">${d}</g></svg>`;

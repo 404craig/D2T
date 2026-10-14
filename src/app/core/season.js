@@ -88,6 +88,49 @@
   SE.mainBtn = (label, cls = '', attrs = '') => `<button class="btn se-btn se-wide bar-main${cls ? ' ' + cls : ''}" type="button"${attrs ? ' ' + attrs : ''}>${label}</button>`;
   SE.bar = ({ mid, main, cls = '' } = {}) => `<footer class="actionbar game-bar${cls ? ' ' + cls : ''}">${SE.homeBtn()}${mid || SE.backOff()}${main || ''}</footer>`;
 
+  // the flat football (Craig, 13 Oct; design/prototype/assets/icons/football-flat.svg): the scorers panel on the match
+  // and results screens. The patches are cut by the ball's edge with one clip path shared by every ball on the page.
+  if (!document.getElementById('d2t-ball-clip')) document.body.insertAdjacentHTML('beforeend', '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="d2t-ball-clip"><circle cx="12" cy="12" r="11"/></clipPath></defs></svg>');
+  SE.ball = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#fff"/><g clip-path="url(#d2t-ball-clip)" fill="#0A0A0A" stroke="#0A0A0A" stroke-linejoin="round" stroke-width=".5"><polygon points="12.00,8.40 15.42,10.89 14.12,14.91 9.88,14.91 8.58,10.89"/><polygon points="12.00,5.00 9.24,3.00 10.30,-0.25 13.70,-0.25 14.76,3.00"/><polygon points="18.66,9.84 19.71,6.59 23.12,6.59 24.17,9.84 21.42,11.84"/><polygon points="16.11,17.66 19.52,17.66 20.58,20.91 17.82,22.91 15.06,20.91"/><polygon points="7.89,17.66 8.94,20.91 6.18,22.91 3.42,20.91 4.48,17.66"/><polygon points="5.34,9.84 2.58,11.84 -0.17,9.84 0.88,6.59 4.29,6.59"/></g><path d="M12.00 8.40L12.00 5.00M15.42 10.89L18.66 9.84M14.12 14.91L16.11 17.66M9.88 14.91L7.89 17.66M8.58 10.89L5.34 9.84" stroke="#0A0A0A" stroke-width=".8" stroke-linecap="round" fill="none"/><circle cx="12" cy="12" r="10.6" fill="none" stroke="#0A0A0A" stroke-width=".8"/></svg>';
+  // the scorers panel (the full-time look, Craig 14 Oct): home scorers right-aligned on the left, the ball, away scorers
+  // on the right, each with his minute. `hg` and `ag` are lists of { who, min }; an empty side reads "No goals".
+  SE.surname = (n) => String(n || '').split(' ').slice(-1)[0];
+  SE.scorers = (hg, ag) => {
+    const side = (L) => L.length ? L.map((s) => `<li>${D2T.esc(SE.surname(s.who))} <span>${s.min}'</span></li>`).join('') : '<li class="se-none">No goals</li>';
+    return `<div class="se-scorers" aria-label="Scorers"><ul>${side(hg)}</ul><span class="se-ball">${SE.ball}</span><ul>${side(ag)}</ul></div>`;
+  };
+
+  // ---------- the end-of-game sheet (Craig, 14 Oct) ----------
+  // One slide-up sheet for every game once it is over: a headline, a line or two, then Share, Play again (whatever the
+  // game calls it) and Home. It is a D2T.sheet, so it drags closed; a peek bar ("Season over", in the game's colour)
+  // then sits at the bottom of the screen and brings it back. `buttons`: [{ k, label, fn, primary }] in order, each fn
+  // called after the sheet closes; `peek`: the peek bar's words (none means no peek bar); `host` the element it goes in
+  // (before `before`); `colour` and `ink` paint the primary button and the peek bar; `onClose` runs when the sheet closes
+  // without a button (a drag or a tap on the scrim). Returns { open, close, el }.
+  D2T.endSheet = (o) => {
+    let sh = null, peek = null, chosen = false;
+    const colour = o.colour || '#12F06C', ink = o.ink || '#0A0A0A';
+    const removePeek = () => { if (peek) { peek.remove(); peek = null; } };
+    const showPeek = () => {
+      if (!o.peek || !o.host || !o.host.isConnected || peek) return;
+      peek = D2T.h(`<button class="end-peek${o.slim ? ' end-peek-slim' : ''}" type="button" style="--c:${colour};--ink:${ink}"><span>${D2T.esc(o.peek)}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`);
+      peek.onclick = () => { window.D2TSound && window.D2TSound.play('tapSmall'); open(); };
+      if (o.before && o.before.parentNode === o.host) o.host.insertBefore(peek, o.before); else o.host.appendChild(peek);
+    };
+    const open = () => {
+      if (sh) return sh;
+      chosen = false; removePeek();
+      const rows = (o.buttons || []).map((b) => `<button class="btn ${b.primary ? 'end-primary' : 'btn-ghost'} fr-btn-wide" type="button" data-k="${D2T.esc(b.k)}"${b.primary ? ` style="background:${colour};color:${ink}"` : ''}>${b.label}</button>`).join('');
+      sh = D2T.sheet({ title: o.title || '', body: `${o.lead ? `<div class="end-lead">${o.lead}</div>` : ''}<div class="fr-stack end-stack">${rows}</div>`,
+        onClose: () => { sh = null; if (chosen) return; showPeek(); o.onClose && o.onClose(); } });
+      sh.el.classList.add('end-sheet');
+      (o.buttons || []).forEach((b) => { const el = sh.body.querySelector(`[data-k="${b.k}"]`); if (el) el.onclick = () => { chosen = true; const s = sh; sh = null; s.close(); b.fn && b.fn(); }; });
+      return sh;
+    };
+    const close = () => { if (sh) { const s = sh; sh = null; chosen = true; s.close(); } removePeek(); };
+    return { open, close, get el() { return sh && sh.el; } };
+  };
+
   // ---------- the home button's menu (Craig, 13 Oct) ----------
   // One sheet for every game: Keep playing, Restart (a new game from the start), Home (the game is saved) and Quit
   // (thrown away), nothing recorded. Each game passes what applies: `restart`, `quit` and `home` are functions (home may be

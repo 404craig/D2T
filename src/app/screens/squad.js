@@ -39,11 +39,15 @@
       const oppC = fx ? SE.club(data, fx.opp) : null;
       const nextHTML = fx ? `<div class="se-next"><img src="${oppC.crest}" alt=""><div class="se-next-t"><small>Next · ${fx.ha === 'H' ? 'Home' : 'Away'}</small><b class="d2c-fit">${D2T.esc(oppC.name)}</b></div></div>` : '';
       const carried = GAME.mode() === 'clubx' && GAME.career().n > 1;   // a Club X career's later seasons have pre-season rolls
-      const label = drafting ? 'Start the draft' : pre ? (dream && !carried ? 'Start the season' : 'Transfer window') : 'Play';
+      // mid-season the squad is only reached from the fixtures' back arrow (Craig, 14 Oct), so its way on is the fixtures
+      const label = drafting ? 'Start the draft' : pre ? (dream && !carried ? 'Start the season' : 'Transfer window') : 'Fixtures';
       // every squad bar (Craig, 13 Oct): home, then a greyed middle button (nowhere to go back to and no respin here; before
       // the draft it is the greyed respin the draft's own bar shows, as the draft has none), then Play across the right
-      const bar = D2T.h(SE.bar({ cls: 'se-nextbar', mid: drafting ? SE.respinOff() : SE.backOff(), main: SE.mainBtn(label, 'se-play') }));
+      // mid-season (reached by the fixtures' back arrow) the middle button is a back arrow to the fixtures
+      const mid = !pre && !drafting;
+      const bar = D2T.h(SE.bar({ cls: 'se-nextbar', mid: drafting ? SE.respinOff() : mid ? SE.backBtn('Back to fixtures') : SE.backOff(), main: SE.mainBtn(label, 'se-play') }));
       root.appendChild(bar);
+      if (mid) bar.querySelector('.se-back').onclick = () => { st.step = 'fixtures'; D2T.save(); D2T.go('fixtures'); };
       const playBtn = bar.querySelector('.se-play');
       playBtn.onclick = () => {
         if (drafting) { st.step = 'transfer'; D2T.save(); D2T.go('transfer'); return; }

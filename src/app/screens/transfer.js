@@ -238,13 +238,14 @@
         s.classList.add('is-signed');
         api.hint(`${surname(p.name)} is in. Welcome to ${club.name}.`);
         const ph = GAME.eng().phase;
-        timers.push(setTimeout(() => { if (alive) D2T.go(ph === 'window' || ph === 'draft' ? 'transfer' : 'squad'); }, reduced ? 300 : (draft ? 800 : 1100)));
+        // the window over (Craig, 14 Oct): straight to the fixtures; the draft over: the pre-season squad
+        timers.push(setTimeout(() => { if (alive) D2T.go(ph === 'window' || ph === 'draft' ? 'transfer' : draft ? 'squad' : 'fixtures'); }, reduced ? 300 : (draft ? 800 : 1100)));
       }
       function pass() {
         if (signing) return;
         SND.play('pass');
         GAME.pass();
-        D2T.go(GAME.eng().phase === 'window' ? 'transfer' : 'squad');
+        D2T.go(GAME.eng().phase === 'window' ? 'transfer' : 'fixtures');
       }
 
       // ---------- drag a card from the tray onto a shirt ----------
