@@ -1899,9 +1899,9 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .mock.shield .rival img{position:relative;width:40px;height:40px;margin-top:-6px}
 .mock{--shield:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20114%20148'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M1.77%2010.23%20L10.23%201.77%20Q12%200%2014.5%200%20L99.5%200%20Q102%200%20103.77%201.77%20L112.23%2010.23%20Q114%2012%20114%2014.5%20L114%20127%20Q114%20130%20111.14%20130.9%20L60.81%20146.8%20Q57%20148%2053.19%20146.8%20L2.86%20130.9%20Q0%20130%200%20127%20L0%2014.5%20Q0%2012%201.77%2010.23Z'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E")}
 .news{position:absolute;left:0;right:0;bottom:112px;height:34px;background:#12F06C;color:#00170A;display:flex;align-items:center;overflow:hidden;font:900 italic 14px/1 'Exo 2';text-transform:uppercase;white-space:nowrap}
-.news b{position:relative;z-index:2;flex:none;margin-left:10px;background:#00170A;color:#12F06C;padding:5px 8px 4px;border-radius:4px;font-size:11px;letter-spacing:.06em;box-shadow:10px 0 10px #12F06C}
+.news b{position:relative;z-index:2;flex:none;margin-left:10px;background:#00170A;color:#12F06C;padding:5px 8px 4px;border-radius:4px;font-size:11px;letter-spacing:.06em;}
 .news .tk{position:relative;flex:1;overflow:hidden;height:100%}
-.news .tk span{position:absolute;left:0;top:0;height:100%;display:flex;align-items:center;gap:0;padding-left:14px}
+.news .tk span{position:absolute;left:0;top:0;height:100%;display:flex;align-items:center;padding-left:10px;white-space:nowrap}
 .news .tk i{font-style:normal;padding:0 12px;opacity:.55}
 @media (max-width:440px){.mock{transform:scale(.88);transform-origin:top left;margin-bottom:-102px}}
 </style>
@@ -2077,10 +2077,10 @@ async function runB(mock){
     anim(th, [{ transform:'scaleY(1)' }, { transform:'scaleY(0)' }], { duration:380, easing:'ease-in' });
     await anim(c.w, [{ transform:'none', opacity:1 }, { transform:`translateY(${cy - c.y}px) scale(.3)`, opacity:0 }], { duration:420, easing:'cubic-bezier(.6,0,.9,.4)' });
     th.remove();
+    news(fx, `${c.name} joins ${r[0]}`);
     emptyShirt(fx, c, `<div><img src="${r[1]}" alt="">TO ${r[0].toUpperCase()}</div>`);
     await anim(rv, [{ transform:'none', opacity:1 }, { transform:'translateY(-300px) scale(.7)', opacity:0 }], { duration:450, easing:'ease-in' });
     rv.remove(); taken.push({ c, r });
-    news(fx, `${c.name} joins ${r[0]}`);
     await wait(700);
   }
   await wait(200); await summary(fx, taken, true);
@@ -2088,15 +2088,21 @@ async function runB(mock){
 
 function news(fx, headline){
   let bar = fx.querySelector('.news');
-  if (!bar) { bar = el(fx, 'news', {}, '<b>TRANSFER NEWS</b><div class="tk"><span></span></div>'); bar.dataset.items = '[]'; anim(bar, [{ transform:'translateY(100%)', opacity:0 }, { transform:'none', opacity:1 }], { duration:300, easing:'ease-out' }); }
+  if (!bar) {
+    // centred in the empty space between the pitch and the bottom bar
+    const mock = fx.parentElement, m = mock.getBoundingClientRect(), sc = m.width / 393, pitch = mock.querySelector('.se-pitch').getBoundingClientRect(), barEl = mock.querySelector('.actionbar').getBoundingClientRect();
+    const mid = ((pitch.bottom + barEl.top) / 2 - m.top) / sc;
+    bar = el(fx, 'news', { top:(mid - 17)+'px', bottom:'auto' }, '<b>TRANSFER NEWS</b><div class="tk"><span></span></div>');
+    anim(bar, [{ opacity:0 }, { opacity:1 }], { duration:300, easing:'ease-out' });
+  }
   if (!headline) return;
-  const items = JSON.parse(bar.dataset.items); items.push(headline); bar.dataset.items = JSON.stringify(items);
-  const sp = bar.querySelector('.tk span'), one = items.map((h) => `<em style="font-style:inherit">${h}</em>`).join('<i>&#9679;</i>') + '<i>&#9679;</i>';
+  // one headline at a time, starting right after the pill; it only scrolls if it is too long to fit
+  const sp = bar.querySelector('.tk span'), box = bar.querySelector('.tk');
   sp.getAnimations().forEach((a) => a.cancel());
-  sp.innerHTML = one + one;
-  if (reduced) return;
-  const w = sp.scrollWidth / 2, box = bar.querySelector('.tk').clientWidth;
-  sp.animate([{ transform:`translateX(${box}px)` }, { transform:`translateX(${-w}px)` }], { duration:(box + w) * 14, iterations:Infinity, easing:'linear' });
+  sp.innerHTML = headline; sp.style.transform = '';
+  anim(sp, [{ opacity:0, transform:'translateY(8px)' }, { opacity:1, transform:'none' }], { duration:220, easing:'ease-out', fill:'none' });
+  const over = sp.scrollWidth - box.clientWidth + 14;
+  if (over > 0 && !reduced) setTimeout(() => sp.animate([{ transform:'none' }, { transform:'none', offset:.2 }, { transform:`translateX(${-over}px)`, offset:.8 }, { transform:`translateX(${-over}px)` }], { duration:2500 + over * 25, iterations:Infinity, direction:'alternate', easing:'ease-in-out' }), 250);
 }
 const RUN = { B: runB };
 document.querySelectorAll('.replay').forEach((b) => b.onclick = () => RUN[b.dataset.k](document.getElementById('m' + b.dataset.k)));
