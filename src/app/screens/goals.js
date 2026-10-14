@@ -493,7 +493,7 @@
       }
       // the goals fly off his shirt up to the total at the top right, which pulses as they land
       function shoot(slotEl, p, done) {
-        snd('explodeShort');                                       // Craig, 14 Oct: a boom as his goals set off for the tally
+        snd('countIn');                                            // Craig, 14 Oct: taps counting his goals into the tally
         const tnum = wrap.querySelector('.tnum'), sh = slotEl && slotEl.querySelector('.g4-shirt');
         if (reduced || !sh) { done(); return; }
         const hr = wrap.getBoundingClientRect(), a = sh.getBoundingClientRect(), b = tnum.getBoundingClientRect();

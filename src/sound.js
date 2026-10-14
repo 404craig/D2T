@@ -255,7 +255,9 @@ const CUES = {
   // Club X's card smashing the real club's off the screen: a boom and a rumble fading over about 2 s
   explode(t) { const o = O(1, 0.3); duck(t, 2.4, 0.4); boom(o, t, 0.22, 2.2); },
   // Goal Rush, as a placed player's number finishes rolling up to his goals: the same boom, short and punchy, no rumble
-  explodeShort(t) { boom(O(1, 0.15), t, 0.2, 0.2); },
+  // Goal Rush, as a placed player's goals fly up to the tally (Craig, 14 Oct, option 9 on the launch sound board): muffled taps
+  // speeding up over the 0.64 s flight, like counting them in, and a soft felt tap as they land in the total
+  countIn(t) { const o = O(1, 0.05); let x = 0, g = 0.085; for (let i = 0; i < 12 && x < 0.6; i++) { tap(o, t + x, 0.05, 260 + i * 12); x += g; g *= 0.86; } felt(o, t + 0.64, 190, 0.3, 0.08); },
   land(t) { const o = O(1, 0.08); felt(o, t, 160, 0.4, 0.1); tap(o, t, 0.06, 230); },
   numberTick(t) { tap(O(1, 0.03), t, 0.045, 300); },
   correct(t) { const o = O(1, 0.12); felt(o, t, 180, 0.3, 0.08); osc(soft(o, 1100), "triangle", D4, t, 0.4, 0.04, { a: 0.02 }); },
