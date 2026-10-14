@@ -19,6 +19,9 @@
     const IN_RUN = ['spin', 'table', 'squad', 'transfer', 'fixtures', 'match'];
     setInterval(() => { const onDaily = !!(D2T.state.run && D2T.state.run.daily); if (D2T.game.closeOldDaily() && onDaily && IN_RUN.includes(D2T.currentScreen())) D2T.go('home'); }, 30000);
   }
+  // iOS ignores user-scalable=no, so stop its pinch gestures here too (Craig, 14 Oct: the page must stay at 100%)
+  ['gesturestart', 'gesturechange', 'gestureend'].forEach((t) => document.addEventListener(t, (e) => e.preventDefault(), { passive: false }));
+  document.addEventListener('touchmove', (e) => { if (e.touches && e.touches.length > 1) e.preventDefault(); }, { passive: false });
   if (!D2T.started) D2T.start();          // normally the shell started the intro already, before the data arrived
   D2T.ready();
   // the sound clips sit at the end of the page as plain JSON: read them once the intro has handed over (or on the first tap)

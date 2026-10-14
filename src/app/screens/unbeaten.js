@@ -106,7 +106,7 @@
   const whoLine = (stat, r) => {
     if (isClub(stat)) return '';
     const c = D2T.game.club(r.club);
-    const where = stat.deck === 'career' ? `${D2T.esc(c.name || r.club)} · ${r.f === r.l ? r.f : r.f + ' to ' + r.l}` : `${D2T.esc(c.name || r.club)}${r.club2 ? ' / ' + D2T.esc(D2T.game.club(r.club2).name || r.club2) : ''} · ${r.season}`;
+    const where = stat.deck === 'career' ? `${D2T.esc(c.name || r.club)}` : `${D2T.esc(c.name || r.club)}${r.club2 ? ' / ' + D2T.esc(D2T.game.club(r.club2).name || r.club2) : ''} · ${r.season}`;
     return `<b>${D2T.esc(r.name)}</b><span>${where}</span>`;
   };
 
