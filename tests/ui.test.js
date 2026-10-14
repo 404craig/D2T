@@ -237,7 +237,7 @@ fs.mkdirSync(OUT, { recursive: true });
   // gameweek 2 played live: Skip to end, then the finished match moves on to the results by itself (Craig, 14 Oct)
   if (after === "transfer") { await page.evaluate(() => { const G = window.D2T.game; while (G.eng().phase === "window") G.pass(); window.D2T.go("fixtures"); }); await expectScreen("fixtures"); await wait(500); }
   await page.click(".actionbar .bar-main"); await expectScreen("match"); await wait(1200);
-  await page.click(".se-main"); await wait(600);
+  await page.click(".se-main"); await wait(150);
   check((await screen()) === "match" && (await page.textContent(".se-clock")).trim() === "FT", "Skip to end did not show full time first");
   await page.waitForFunction(() => window.D2T.currentScreen() === "results", null, { timeout: 6000 }).catch(() => {});
   check((await screen()) === "results", "the finished match did not move on to the results by itself, on " + (await screen()));
@@ -433,7 +433,7 @@ fs.mkdirSync(OUT, { recursive: true });
   // the club history page (Craig, 14 Oct): the career's record, big numbers and every season
   await page.evaluate(() => { const el = document.querySelector('.sm [data-act="history"], [data-act="history"]'); el.click(); }); await expectScreen("history"); await wait(600); await shot("35b-clx-history");
   check((await page.$$(".hs .fr-frame")).length === 4 && (await page.$$(".hs-table tbody tr")).length >= 1 && (await page.$$(".hs-tile")).length >= 2, "the club history page has no record, big numbers or seasons");
-  check(await page.evaluate(() => { const r = window.D2T.game.careerHistory().seasons.slice(-1)[0]; return r && r.w + r.d + r.l === 38 && Array.isArray(r.goals); }), "the Club X season did not save its wins, draws, losses and scorers");
+  check(await page.evaluate(() => { const r = window.D2T.game.careerHistory().seasons.slice(-1)[0]; const n = window.D2T.game.S().clubs.length; return r && r.w + r.d + r.l === 2 * (n - 1) && Array.isArray(r.goals); }), "the Club X season did not save its wins, draws, losses and scorers");
   await page.evaluate(() => window.D2T.go("summary")); await expectScreen("summary"); await wait(900);
   check(await page.evaluate(() => window.D2T.game.xRecord().runs === 1), "Club X run not recorded");
   check(await page.evaluate((b) => window.D2T.game.record().runs === JSON.parse(b).runs + 1, classicBefore), "Club X season did not count in the home record");
@@ -454,7 +454,35 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.click('.end-sheet [data-k="next"]'); await expectScreen("table"); await wait(600);
   check(await page.evaluate(() => { const G = window.D2T.game, e = G.eng(); return e.career === 2 && e.phase === "setup" && G.lineup().xi.every(Boolean) && G.clubName() === "Southside Rovers"; }), "Next season did not carry the XI into season 2");
   check(await page.evaluate(() => window.D2T.game.xRecord().runs === 1), "Next season recorded the first season twice");
-  check(await page.evaluate(() => { const G = window.D2T.game; G.startSeason(); return G.eng().rolls[0].kind === "pre" && G.eng().phase === "window"; }), "a career's second season should open with pre-season rolls");
+  // Poached (Craig, 14 Oct): season 2's pre-season squad loses three of the XI to other sides, played out once; a refresh
+  // never replays it (the summary comes back until it is closed), and Continue goes on to the Summer window
+  await page.evaluate(() => { window.D2T.state.run.tableSeen = true; window.D2T.save(); window.D2T.go("squad"); }); await expectScreen("squad");
+  await wait(2150);
+  check(!!(await page.$(".se-poach-fx .se-pc-rival")) && !!(await page.$(".se-poach-fx .se-pc-line")), "the poach should drop a rival crest with a line down to the card");
+  check(!!(await page.$(".se-ticker .se-tk-tag")) && /transfer news/i.test(await page.textContent(".se-ticker .se-tk-tag")), "the poach should open a Transfer news ticker");
+  await shot("35b-clx-poach-mid");
+  const poached = await page.evaluate(() => JSON.stringify(window.D2T.game.eng().poached));
+  check(await page.evaluate(() => { const G = window.D2T.game, e = G.eng(), f = window.D2TE.FORMATIONS[e.formation]; return e.poached.length === 3 && new Set(e.poached.map((x) => x.club)).size === 3 && e.poached.every((x) => f[x.slot][0] !== "GK" && x.club !== e.club && e.xi[x.slot] == null); }), "the poach should take 3 outfield players to 3 different clubs, leaving their shirts empty");
+  await page.waitForSelector(".se-poach-sheet.open", { timeout: 15000 }).catch(() => {});
+  await wait(500);
+  check(await page.$$eval(".se-slots .se-empty-to", (n) => n.length) === 3 && /^To /i.test(await page.textContent(".se-slots .se-empty-to .se-to")), "three empty shirts should read TO {CLUB}");
+  check(await page.evaluate(() => { const e = window.D2T.game.eng(), t = document.querySelector(".se-ticker .se-tk-item"), last = e.poached[2]; return !!t && t.textContent === `${last.name} joins ${window.D2T.game.S().clubs[last.club].name}`; }), "the ticker should carry the latest move");
+  check(await page.evaluate(() => { const t = document.querySelector(".se-ticker").getBoundingClientRect(), p = document.querySelector(".se-pitch").getBoundingClientRect(), b = document.querySelector(".actionbar").getBoundingClientRect(); return t.top >= p.bottom && t.bottom <= b.top && Math.abs((t.top + t.bottom) / 2 - (p.bottom + b.top) / 2) < 3; }), "the ticker should sit centred between the pitch and the bar");
+  check(/Three players gone/.test(await page.textContent(".se-poach-sheet")) && await page.$$eval(".se-poach-sheet li", (n) => n.length) === 3, "the poach summary should list the three players");
+  await shot("35c-clx-poach-summary");
+  await page.reload(); await expectScreen("intro"); await page.click(".fr-skip", { force: true }); await expectScreen("home"); await wait(600);
+  await page.evaluate(() => window.D2T.go("squad")); await expectScreen("squad"); await wait(2400);
+  check(!(await page.$(".se-pc-rival")) && await page.evaluate((p) => JSON.stringify(window.D2T.game.eng().poached) === p, poached), "a refresh replayed or rerolled the poach");
+  check(await page.$$eval(".se-slots .se-empty-to", (n) => n.length) === 3 && /joins/i.test(await page.textContent(".se-ticker .se-tk-item")), "after a refresh the empty shirts and the ticker should stay");
+  check(!!(await page.$(".se-poach-sheet.open")), "after a refresh the unseen summary should come back");
+  await page.click(".se-poach-go"); await expectScreen("transfer");
+  check(await page.evaluate(() => { const e = window.D2T.game.eng(); return e.phase === "window" && e.rolls[0].kind === "pre" && e.xi.filter((x) => x == null).length === 3; }), "Continue should go on to the Summer window with three empty shirts");
+  await page.waitForSelector(".sp-main:not([disabled])", { timeout: 6000 }).catch(() => {}); await page.click(".sp-main");
+  await page.waitForSelector(".tr-field .se-empty-to", { timeout: ROLL_MS }).catch(() => {});
+  check(await page.$$eval(".tr-field .se-empty-to", (n) => n.length) === 3, "the transfer pitch should show the three TO {CLUB} shirts");
+  await page.evaluate(() => { const G = window.D2T.game; while (G.eng().phase === "window") G.pass(); });
+  check(await page.evaluate(() => { const G = window.D2T.game; return G.eng().xi.every((x) => x != null) && G.freeFill().length === 3; }), "shirts still empty when the Summer window closes should get free agents");
+  check(await page.evaluate(() => { const G = window.D2T.game; G.startSeason(); return G.eng().rolls[0].kind === "pre" && G.eng().phase !== "setup"; }), "a career's second season should open with pre-season rolls");
   check(await page.evaluate(() => {
     const G = window.D2T.game; G.newRun("clubx"); G.setXName("Southside Rovers");
     const k = G.xPool.find((x) => x.season === "2025/26").key; G.eng().clubOffer = [k]; G.chooseClub(k); window.D2T.state.run.tableSeen = true;
@@ -560,6 +588,16 @@ fs.mkdirSync(OUT, { recursive: true });
   check(!!(await page.waitForSelector(".sheet", { timeout: 12000 }).catch(() => null)), "Goal Rush: no result sheet at the end");
   // the shared end sheet (Craig, 14 Oct): Share, Play again, Home; closed, a Game over peek bar above the bar brings it back
   check((await page.$$eval(".end-sheet [data-k]", (bs) => bs.map((b) => b.dataset.k).join("|"))) === "share|again|home", "Goal Rush: the end sheet should offer Share, Play again and Home");
+  // the result as the target bar (Craig, 14 Oct): Overshot / Fell short / Exactly N, the bar with its flag at the target and
+  // your total under it, the gap ("4 OVER", "21 SHORT", "SPOT ON") and YOUR XI · TARGET; no sentence
+  { const r = await page.evaluate(() => { const S = window.D2T.state.g433, T = +S.formation, t = S.filled.reduce((a, p) => a + p.goals, 0), e = document.querySelector(".end-sheet");
+      const want = t === T ? ["Exactly " + T, "SPOT ON"] : t > T ? ["Overshot", (t - T) + " OVER"] : ["Fell short", (T - t) + " SHORT"];
+      const gap = e && e.querySelector(".g4-end .gap"), goal = e && e.querySelector(".g4-end .goal i"), you = e && e.querySelector(".g4-end .you");
+      return !!e && !!e.querySelector(".g4-end .track .fill") && e.textContent.includes(want[0]) && !!gap && gap.innerText.replace(/\s+/g, " ").startsWith(want[1]) && gap.innerText.includes(`YOUR XI ${t} · TARGET ${T}`)
+        && goal && goal.textContent === String(T) && you && you.textContent === String(t) && (t > T) === !!e.querySelector(".g4-end .ovr") && !/Premier League goals/.test(e.textContent); });
+    check(r, "Goal Rush: the end sheet does not show the target bar, the gap and YOUR XI · TARGET"); }
+  // the end sheet's three buttons share one font size (Craig, 14 Oct)
+  check(await page.$$eval(".end-sheet [data-k]", (bs) => new Set(bs.map((b) => getComputedStyle(b).fontSize)).size === 1), "Goal Rush: the end sheet's buttons are not all the same font size");
   await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(600);
   check(!(await page.$(".end-sheet")) && !!(await page.$(".g4 .end-peek")) && /Game over/.test(await page.textContent(".g4 .end-peek")), "Goal Rush: closing the end sheet should leave a Game over peek bar");
   await barOrder("Goal Rush over");

@@ -148,7 +148,7 @@
         setTimeout(() => { if (!alive) return; showChip(true); SND.play('result', res === 'win' ? 0 : res === 'draw' ? 1 : 2, 0.2); }, reduced ? 300 : 1100);
         // then on to the results by itself after a moment on the final score (Craig, 14 Oct); See results goes sooner
         st.step = 'results'; D2T.save();
-        setTimeout(() => { if (alive && phase === 'ft') D2T.go('results'); }, reduced ? 1500 : 3200);
+        setTimeout(() => { if (alive && phase === 'ft') D2T.go('results'); }, 500);
       };
       // settled (a refresh, or back from the results): the whole match as it finished, no replay
       const settle = () => {

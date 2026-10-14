@@ -171,9 +171,10 @@ function userStrength(S, st, legends) {
 }
 // A historical club's best XI from its real squad, minus anyone the user has signed.
 // Broad shape: 1 GK, 4 DEF, 4 MID, 2 FWD by rating, weighting regular starters.
-function clubXI(S, club, gone) {
+// join: players who joined the club from outside its real squad (a Club X career's poached players, poach below).
+function clubXI(S, club, gone, join) {
   const ix = indexSeason(S);
-  const pool = (ix.byClub.get(club) || []).filter(p => !gone.has(p.id));
+  const pool = (ix.byClub.get(club) || []).filter(p => !gone.has(p.id)).concat(join || []);
   const broad = p => broadOf(p);
   const score = p => p.r + Math.min(p.a || 0, 30) * 0.15;
   const take = (cond, n) => pool.filter(cond).sort((x, y) => score(y) - score(x)).slice(0, n);
@@ -188,8 +189,8 @@ function clubXI(S, club, gone) {
   }
   return xi;
 }
-function clubStrength(S, club, gone) {
-  const xi = clubXI(S, club, gone);
+function clubStrength(S, club, gone, join) {
+  const xi = clubXI(S, club, gone, join);
   const slots = ["GK","RB","CB","CB","LB","RM","CM","CM","LM","ST","ST"];
   // Club squads are judged on their own broad roles, so every player plays at full rating.
   const flat = xi.map((p, i) => p ? Object.assign({}, p, { p: [slots[i]] }) : null);
@@ -444,7 +445,7 @@ function startSeason(st, S) {
   for (const p of squadOf(S, st.club)) if (!st.seen.includes(p.id)) st.seen.push(p.id);
   st.history = historyPositions(S, st.club);
   if (inWindow(st)) { st.phase = "window"; newRoll(st, S); }
-  else st.phase = "prematch";
+  else { st.phase = "prematch"; fillHoles(st, S); }
   st.log.push(["start"]);
   return true;
 }
@@ -457,7 +458,7 @@ function cardPool(S, st) {
   // In a Club X career a season can hold more than one card of the same man (cards from any season after 2025/26):
   // never offer another card of someone already in your XI.
   let mine = null;
-  if (st.career > 1) { mine = new Set(); for (const id of st.xi) { const p = playerOf(S, id, S.legends); if (p && p.k != null) mine.add(p.k); } }
+  if (st.career > 1) { mine = new Set(); for (const id of st.xi.concat((st.poached || []).map(x => x.id))) { const p = playerOf(S, id, S.legends); if (p && p.k != null) mine.add(p.k); } }
   return S.players.filter(p => (p.a || 0) >= RULES.minApps && !seen.has(p.id) && !(mine && p.k != null && mine.has(p.k)));
 }
 // One card from a level's pool: every player as likely as the next, except those offered in recent runs of this
@@ -539,6 +540,66 @@ function finishRoll(st, S) {
   if (w && st.rollStep < w.n) { newRoll(st, S); return; }
   st.rollIx++; st.rollStep = 0; st.roll = null;
   st.phase = "prematch";
+  fillHoles(st, S);
+}
+
+/* ---------- Poached: a Club X career's later seasons (Craig, 14 Oct) ---------- */
+// Before the Summer window of every season after the first, three of your XI are taken by other sides: never the
+// keeper, each to a different club in the league (never yours, never his own real club that season). Victims are drawn
+// weighted by their rating against the XI's outfield average to the 4th power, so stars are about three times as likely
+// to go as the weakest man but anyone can; clubs by their final position that season (the real one, or the forecast's):
+// weight 21 - position, so the champions are 20 times as likely as the bottom side. Seeded by stream(seed, "poach", n),
+// done once (st.poached). Their shirts are left empty for the Summer rolls; a poached player joins his new club for the
+// season (joinersOf: he plays for it against you and strengthens it, so some of its results improve, the inverse of a
+// raid) and never comes back in your rolls this season.
+function poach(st, S) {
+  if (st.phase !== "setup" || !(st.career > 1) || st.poached) return null;
+  const r = stream(st.seed, "poach", st.career), slots = FORMATIONS[st.formation].map(s => s[0]);
+  const cand = st.xi.map((id, i) => ({ id, i, p: id == null ? null : playerOf(S, id, S.legends) })).filter(c => c.p && slots[c.i] !== "GK");
+  const avg = cand.reduce((a, c) => a + c.p.r, 0) / Math.max(1, cand.length);
+  const hist = historyTable(S, S.deductions), out = [], usedClubs = new Set([st.club]);
+  for (let k = 0; k < 3 && cand.length; k++) {
+    const v = pickWeighted(r, cand, c => Math.pow(c.p.r / avg, 4));
+    cand.splice(cand.indexOf(v), 1);
+    const clubs = hist.map((row, pos) => ({ c: row.c, w: hist.length + 1 - (pos + 1) }))
+      .filter(x => !usedClubs.has(x.c) && x.c !== v.p.c && x.c !== v.p.c2);
+    if (!clubs.length) break;
+    const to = pickWeighted(r, clubs, x => x.w).c;
+    usedClubs.add(to);
+    out.push({ id: v.id, name: v.p.n, club: to, slot: v.i });
+  }
+  for (const x of out) { st.xi[x.slot] = null; if (!st.seen.includes(x.id)) st.seen.push(x.id); }
+  st.poached = out;
+  st.log.push(["poach", out.map(x => x.id)]);
+  return out;
+}
+// the players poached to a club this season, as player-seasons it can pick
+function joinersOf(S, st, club) {
+  if (!st.poached || !st.poached.length) return null;
+  const out = st.poached.filter(x => x.club === club).map(x => playerOf(S, x.id, S.legends)).filter(Boolean);
+  return out.length ? out : null;
+}
+// Shirts still empty when the Summer window closes (you passed, or signed over someone else) are filled before the
+// first game with free agents: for each empty shirt a bronze player (rating under 70) who is green there, drawn at
+// random from the season's cards (stream(seed, "poachfill", n, slot)); failing that any bronze, then anyone. He is
+// signed like a roll's pick (his club is raided from the first game). Listed in st.freeFill for the screens.
+function fillHoles(st, S) {
+  if (!st.xi.some(id => id == null) || !st.fixtures) return;
+  const slots = FORMATIONS[st.formation].map(s => s[0]), date = st.fixtures[Math.max(0, st.gw - 1)].date;
+  st.freeFill = st.freeFill || [];
+  st.xi.forEach((id, slot) => {
+    if (id != null) return;
+    const r = stream(st.seed, "poachfill", st.career || 1, slot), pool = cardPool(S, st), bronze = pool.filter(p => p.lv === 0);
+    const green = bronze.filter(p => fitOf(p, slots[slot]) === "green");
+    const from = green.length ? green : bronze.length ? bronze : pool;
+    if (!from.length) return;
+    const p = from[Math.floor(r() * from.length)];
+    st.xi[slot] = p.id; st.seen.push(p.id);
+    st.signed.push({ id: p.id, gw: st.gw, slot, out: null, from: clubAt(p, date), date, free: true });
+    if (p.c != null) { st.gone.push(p.id); st.raids.push({ club: clubAt(p, date), date, gw: st.gw }); }
+    st.freeFill.push({ id: p.id, slot });
+    st.log.push(["free", p.id, slot]);
+  });
 }
 
 /* ---------- raids: weakening other clubs ---------- */
@@ -547,11 +608,12 @@ function goneBefore(st, date) {
   st.signed.forEach(x => { if (x.date <= date && !String(x.id).startsWith("L:")) s.add(x.id); });
   return s;
 }
-function strengthLoss(S, club, gone, cache) {
-  const key = club + ":" + [...gone].filter(id => { const p = indexSeason(S).byId.get(id); return p && (p.c === club || p.c2 === club); }).sort().join(",");
+// Negative when the club is stronger than its real squad: players poached from a Club X career joined it (join).
+function strengthLoss(S, club, gone, cache, join) {
+  const key = club + ":" + [...gone].filter(id => { const p = indexSeason(S).byId.get(id); return p && (p.c === club || p.c2 === club); }).sort().join(",") + "+" + (join || []).map(p => p.id).join(",");
   if (cache && cache.has(key)) return cache.get(key);
-  const full = clubStrength(S, club, new Set()).ovr, now = clubStrength(S, club, gone).ovr;
-  const L = Math.max(0, (full - now) / Math.max(5, full - RULES.raidBaseline));
+  const full = clubStrength(S, club, new Set()).ovr, now = clubStrength(S, club, gone, join).ovr;
+  const L = join && join.length ? (full - now) / Math.max(5, full - RULES.raidBaseline) : Math.max(0, (full - now) / Math.max(5, full - RULES.raidBaseline));
   if (cache) cache.set(key, L);
   return L;
 }
@@ -561,18 +623,23 @@ function otherResults(S, st) {
   for (const m of ix.matches) {
     if (m.h === st.club || m.a === st.club) continue;
     let hg = m.hg, ag = m.ag, changed = false;
-    if (st.signed.length) {
+    if (st.signed.length || (st.poached && st.poached.length)) {
       const gone = goneBefore(st, m.date);
       for (const side of ["h", "a"]) {
         const club = side === "h" ? m.h : m.a;
-        const L = strengthLoss(S, club, gone, cache);
-        if (L <= 0) continue;
-        const chance = Math.min(RULES.raidCap, RULES.raidFactor * L);
+        const L = strengthLoss(S, club, gone, cache, joinersOf(S, st, club));
+        if (L === 0) continue;
+        const chance = Math.min(RULES.raidCap, RULES.raidFactor * Math.abs(L));
         const u = unit(st.seed, "raid", m.i, side);
         if (u >= chance) continue;
         const mine = side === "h" ? hg : ag, theirs = side === "h" ? ag : hg;
-        if (mine > theirs) { if (side === "h") hg = ag; else ag = hg; changed = true; }          // win becomes a draw
-        else if (mine === theirs) { if (side === "h") ag++; else hg++; changed = true; }         // draw becomes a defeat
+        if (L > 0) {
+          if (mine > theirs) { if (side === "h") hg = ag; else ag = hg; changed = true; }        // win becomes a draw
+          else if (mine === theirs) { if (side === "h") ag++; else hg++; changed = true; }       // draw becomes a defeat
+        } else {                                                                                 // strengthened by a poached player
+          if (mine < theirs) { if (side === "h") hg = ag; else ag = hg; changed = true; }        // defeat becomes a draw
+          else if (mine === theirs) { if (side === "h") hg++; else ag++; changed = true; }       // draw becomes a win
+        }
       }
     }
     out.push({ i: m.i, date: m.date, h: m.h, a: m.a, hg, ag, changed });
@@ -599,13 +666,14 @@ function simMatch(S, st, gw) {
   const legends = S.legends;
   const us = userStrength(S, st, legends);
   const gone = goneBefore(st, fx.date);
-  const them = clubStrength(S, fx.opp, gone);
+  const join = joinersOf(S, st, fx.opp);
+  const them = clubStrength(S, fx.opp, gone, join);
   const r = stream(st.seed, "match", gw);
   const lu = expectedGoals(us, them, fx.home), lt = expectedGoals(them, us, !fx.home);
   const gu = poisson(r, lu), gt = poisson(r, lt);
   const slots = FORMATIONS[st.formation].map(s => s[0]);
   const ours = scorerWeights(st.xi.map(id => playerOf(S, id, legends)), slots);
-  const theirsXI = clubXI(S, fx.opp, gone);
+  const theirsXI = clubXI(S, fx.opp, gone, join);
   const theirs = scorerWeights(theirsXI.map(p => Object.assign({}, p, { b: p.b || "MID" })), null);
   const events = [];
   for (let k = 0; k < gu; k++) events.push({ us: true, min: 1 + Math.floor(r() * 90), who: pickWeighted(r, ours, o => o.w).p });
@@ -699,7 +767,7 @@ function seasonSummary(S, st) {
   // Best signing: biggest rating gain over the player he replaced, weighted by games played for you.
   let best = null;
   for (const s of st.signed) {
-    if (s.draft) continue;
+    if (s.draft || s.free) continue;
     const p = playerOf(S, s.id, S.legends), o = s.out != null ? playerOf(S, s.out, S.legends) : null;
     const games = st.fixtures.length - s.gw + 1;
     const gain = ((p ? p.r : 0) - (o ? o.r : 50)) * games;
@@ -720,7 +788,7 @@ const API = {
   RULES, LEVELS, POS, FIT, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
   fitOf, effRating, indexSeason, playerOf, clubAt, xiStrength, userStrength, clubXI, clubStrength,
   schedule, fixturesOf, recentWeights, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
-  draftOrder, draftSlot, draftFormation, draftPick, draftFits, listsPos, DRAFT_MODES, carryIn, simResults,
+  poach, joinersOf, fillHoles, draftOrder, draftSlot, draftFormation, draftPick, draftFits, listsPos, DRAFT_MODES, carryIn, simResults,
   startSeason, inWindow, currentWindow, newRoll, respinCards, signPreview, sign, pass,
   otherResults, strengthLoss, expectedGoals, simMatch, playMatch, table, historyTable, historyPositions, positionsSoFar, seasonSummary
 };

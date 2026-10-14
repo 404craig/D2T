@@ -161,7 +161,7 @@
 .end-lead { font-size: 15px; line-height: 1.45; color: var(--soft); }
 .end-lead b { color: var(--white); }
 .end-stack { margin-top: 16px; }
-.end-stack .btn { min-height: 52px; }
+.end-stack .btn { min-height: 52px; font-size: 19px; }   /* all three buttons the same size (Craig, 14 Oct): the ghosts were 15px beside the 19px main one */
 .end-peek { position: relative; z-index: 5; flex-shrink: 0; display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0 16px; margin-bottom: calc(env(safe-area-inset-bottom, 0px) + 14px); min-height: 50px; padding: 0 16px; border: 0; border-radius: 16px; background: var(--c, #12F06C); color: var(--ink, #0A0A0A); font: 900 italic 16px/1 var(--font); text-transform: uppercase; letter-spacing: .04em; cursor: pointer; animation: endPeek .35s var(--ease-out) both; }
 .end-peek svg { width: 20px; height: 20px; }
 .end-peek-slim { min-height: 38px; margin: 6px 16px 0; font-size: 14px; border-radius: 12px; }   /* above a bottom bar (Goal Rush) */
