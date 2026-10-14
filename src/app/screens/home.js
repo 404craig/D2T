@@ -110,7 +110,9 @@
     let right, newBest = false;
     if (res) { newBest = cmp.isBest; right = `<b>${crest(d.name)}${rise(res.rise)}</b><small>${newBest ? 'New best' : `${esc(d.name)} · ${o(res.histFinish)} to ${o(res.finish)}`}</small>`; }
     else if (!best) right = `<b>${crest(d.name)}${esc(d.name)}</b><small>Their real finish: ${o(d.pos)}</small>`;
-    else { const need = d.pos - best.rise; right = need < 1 ? `<b>${crest(d.name)}Win the league</b><small>to match your best</small>` : `<b>${crest(d.name)}Finish ${o(need)}</b><small>or higher to beat your best</small>`; }
+    else { const need = d.pos - best.rise; right = need < 1 ? `<b>${crest(d.name)}Still to play</b><small>Their real finish: ${o(d.pos)}</small>`
+      : need === 1 ? `<b>${crest(d.name)}Win the league</b><small>${best.finish > 1 ? 'to beat your best' : 'to match your best'}</small>`
+      : `<b>${crest(d.name)}Finish ${o(need)}</b><small>or higher to beat your best</small>`; }
     return `<div class="fr-dtiles"><div class="fr-dtile"><i>YOUR BEST DAILY</i>${left}</div><div class="fr-dtile${newBest ? ' is-best' : ''}"><i>TODAY'S DAILY</i>${right}</div></div>`;
   }
 
