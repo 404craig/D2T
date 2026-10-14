@@ -120,7 +120,15 @@
     host.querySelector('.tnum').textContent = t; setGap(host, t);
   }
   // the tally (UI_SPEC 8f): "38 goals to go" in yellow under "Player 7 of 11", and the big scored number over "/352 GOALS"
-  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = toGo(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v !== TARGET && Math.abs(v - TARGET) <= 20); }
+  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = toGo(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v !== TARGET && Math.abs(v - TARGET) <= 20); heat(host, v); }
+  // the bar warms from yellow towards an orangey-red as the total nears the target, and turns red once past it (Craig, 14 Oct)
+  function heat(host, v) {
+    const tr = host.querySelector('.g4-track'), fill = tr && tr.querySelector('.fill'); if (!fill) return;
+    tr.classList.toggle('over', v > TARGET);
+    if (v > TARGET) { fill.style.background = ''; return; }
+    const x = Math.max(0, Math.min(1, (v / TARGET - 0.6) / 0.4));
+    fill.style.background = x ? `linear-gradient(90deg, ${D2T.mix('#FFB000', '#FF8A1F', x)}, ${D2T.mix('#FFD21F', '#FF4D2E', x)})` : '';
+  }
 
   const COLORS = ['#FFD21F', '#FFB000', '#FFFFFF', '#FFE375'];
   const ARROW = D2T.ICON.respin;   // the respin arrow every bar uses
@@ -485,6 +493,7 @@
       }
       // the goals fly off his shirt up to the total at the top right, which pulses as they land
       function shoot(slotEl, p, done) {
+        snd('explodeShort');                                       // Craig, 14 Oct: a boom as his goals set off for the tally
         const tnum = wrap.querySelector('.tnum'), sh = slotEl && slotEl.querySelector('.g4-shirt');
         if (reduced || !sh) { done(); return; }
         const hr = wrap.getBoundingClientRect(), a = sh.getBoundingClientRect(), b = tnum.getBoundingClientRect();
@@ -517,6 +526,7 @@
         burstAt(x, y + h / 2, true); burstAt(x + 10, y + h / 2, false);
         wrap.querySelector('.g4-tally').animate([{ transform: 'translate(0,0)' }, { transform: 'translate(-5px,2px)' }, { transform: 'translate(6px,-2px)' }, { transform: 'translate(-3px,1px)' }, { transform: 'translate(0,0)' }], { duration: 360 });
         tr.querySelector('.fill').animate([{ filter: 'brightness(1)' }, { filter: 'brightness(2.2)' }, { filter: 'brightness(1)' }], { duration: 420 });
+        if (!reduced) tr.querySelector('.fill').animate([{ opacity: 1 }, { opacity: .25 }, { opacity: 1 }, { opacity: .4 }, { opacity: .9 }, { opacity: .55 }, { opacity: 1 }], { duration: 700, delay: 420 });   // the fizzle as it turns red
         snd('land');
       }
       // the number, the to-go text and the bar count up together; crossing the target = race past the line, burst on it, then the bar re-scales
@@ -625,12 +635,16 @@
               g.fillStyle = '#1C1C21'; g.fillRect(x, y + 50, 380, 2);
             });
           } });
-        const sh = D2T.sheet({ title: head, body: `<p class="fr-lead">Your XI scored <b>${t}</b> Premier League goals. ${best}${rec.exact ? ` Bang on target: ${rec.exact} ${rec.exact === 1 ? 'time' : 'times'}.` : ''}</p>
-          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-k="share">Share with your mates</button><button class="btn g4-again fr-btn-wide" data-k="again">Play again</button></div>` });
-        sh.body.querySelector('[data-k="again"]').onclick = () => { sh.close(); newGame(); };
-        sh.body.querySelector('[data-k="share"]').onclick = () => D2T.share.send(card);
+        // the shared end sheet (Craig, 14 Oct; D2T.endSheet): Share, Play again, Home; dragged closed, a slim "Game over"
+        // peek bar above the bottom bar brings it back
+        if (endSheet) endSheet.close();
+        endSheet = D2T.endSheet({ title: head, lead: `Your XI scored <b>${t}</b> Premier League goals. ${best}${rec.exact ? ` Bang on target: ${rec.exact} ${rec.exact === 1 ? 'time' : 'times'}.` : ''}`,
+          colour: '#FFD21F', ink: '#0A0A0A', peek: 'Game over', host: wrap, before: wrap.querySelector('.g4-bar'), slim: true,
+          buttons: [{ k: 'share', label: 'Share with your mates', fn: () => D2T.share.send(card) }, { k: 'again', label: 'Play again', primary: true, fn: () => newGame() }, { k: 'home', label: 'Home', fn: () => D2T.go('home') }] });
+        endSheet.open();
       }
-      function newGame() { S = D2T.state.g433 = fresh(); setShape(S.formation); save(); sel = null; busy = false; wrap.querySelector('.g4-track').classList.remove('glow'); render(); reveal(); }
+      let endSheet = null;
+      function newGame() { if (endSheet) { endSheet.close(); endSheet = null; } S = D2T.state.g433 = fresh(); setShape(S.formation); save(); sel = null; busy = false; wrap.querySelector('.g4-track').classList.remove('glow'); render(); reveal(); }
 
       // ---------- the target reveal (UI_SPEC 8f): once per game, never after a refresh; tap to skip, none with reduced motion ----------
       // a dim layer, "THIS GAME'S TARGET", the eight formations rolling through the big number, slowing to stop on this one

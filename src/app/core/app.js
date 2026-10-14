@@ -105,6 +105,7 @@
     const d = D2T.run(), c = d && d.club;
     return ['Classic', c ? (c.text || c.accent) : '#12F06C'];
   };
+  D2T.modeWord = modeWord;
   D2T.topbar = (opts = {}) => {
     const mw = opts.back || opts.mode === false ? null : (opts.mode || modeWord());
     const tag = mw ? `<span class="mode-tag" style="--c:${mw[1]}"><span>${D2T.esc(mw[0])}</span></span>` : '';
@@ -201,7 +202,7 @@
     D2T.params = params;
     if (location.hash.slice(1) === name) render(name); else location.hash = name;
   };
-  const RUN_SCREENS = ['spin', 'table', 'squad', 'fixtures', 'match', 'transfer', 'summary'];
+  const RUN_SCREENS = ['spin', 'table', 'squad', 'fixtures', 'match', 'results', 'standings', 'transfer', 'summary'];
   // In-run screens only open when the saved run has reached them; anything else goes to where the run is.
   function routeName() {
     let n = location.hash.slice(1);

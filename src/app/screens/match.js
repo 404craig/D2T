@@ -1,13 +1,13 @@
-// Season agent: match day. Kick off, a 90 minute clock in 10 seconds with a live feed, Skip to end,
-// then the final score and the league table after this gameweek. My result is simulated (seeded Poisson); nothing here is labelled real except other clubs' real results.
+// Season agent: match day. The fixtures screen's Kick off decides the match in the engine (GAME.play) and opens this
+// screen, which plays it out: a 90 minute clock in 10 seconds with a live feed, the scorers panel filling in as each
+// goal goes in, the ratings panel under it, Skip to end, then full time and See results (the results screen, then the
+// table after this gameweek). Nothing here is labelled real except other clubs' real results.
+// A refresh mid-match shows the match settled (run.watch is taken as the screen mounts; the result was decided at Kick off).
 (function () {
   const D2T = window.D2T, SE = D2T.se;
   const MATCH_MS = 9400, HT_PAUSE = 600;   // 10 seconds kick-off to full time, half-time pause included (Craig, 12 Oct)
-  // the ball's patches are cut by its edge: one clip path for every ball on the page
-  if (!document.getElementById('d2t-ball-clip')) document.body.insertAdjacentHTML('beforeend', '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="d2t-ball-clip"><circle cx="12" cy="12" r="11"/></clipPath></defs></svg>');
   const ICON = {
-    // a flat football (Craig, 13 Oct; design/prototype/assets/icons/football-flat.svg): white, black pentagons, thin rim
-    goal: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#fff"/><g clip-path="url(#d2t-ball-clip)" fill="#0A0A0A" stroke="#0A0A0A" stroke-linejoin="round" stroke-width=".5"><polygon points="12.00,8.40 15.42,10.89 14.12,14.91 9.88,14.91 8.58,10.89"/><polygon points="12.00,5.00 9.24,3.00 10.30,-0.25 13.70,-0.25 14.76,3.00"/><polygon points="18.66,9.84 19.71,6.59 23.12,6.59 24.17,9.84 21.42,11.84"/><polygon points="16.11,17.66 19.52,17.66 20.58,20.91 17.82,22.91 15.06,20.91"/><polygon points="7.89,17.66 8.94,20.91 6.18,22.91 3.42,20.91 4.48,17.66"/><polygon points="5.34,9.84 2.58,11.84 -0.17,9.84 0.88,6.59 4.29,6.59"/></g><path d="M12.00 8.40L12.00 5.00M15.42 10.89L18.66 9.84M14.12 14.91L16.11 17.66M9.88 14.91L7.89 17.66M8.58 10.89L5.34 9.84" stroke="#0A0A0A" stroke-width=".8" stroke-linecap="round" fill="none"/><circle cx="12" cy="12" r="10.6" fill="none" stroke="#0A0A0A" stroke-width=".8"/></svg>',
+    goal: SE.ball,
     miss: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V5h16v15" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 9h16M8 5v15M12 5v15M16 5v15" stroke="currentColor" stroke-width=".8" opacity=".5"/></svg>',
     yellow: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="4" width="10" height="15" rx="1.6" fill="#FFD43B" transform="rotate(8 12 12)"/></svg>',
     whistle: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="14" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 10l8-3v4l-6 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>'
@@ -21,16 +21,16 @@
       const reduced = D2T.reduced();
       root.appendChild(D2T.topbar());
       const GAME = D2T.game, eng = GAME.eng(), SND = window.D2TSound || { play() {}, crowd() {} };
-      const gw = st.match || eng.gw, fx = SE.fixture(data, gw);
-      if (!fx) { D2T.go('fixtures'); return; }
+      const gw = st.match, fx = gw ? SE.fixture(data, gw) : null;
+      const sim = gw ? GAME.result(gw) : null;
+      if (!fx || !sim) { D2T.go(GAME.stepFor() || 'home'); return; }
+      // fresh from Kick off: play it out; otherwise (a refresh, or back from the results) it is settled
+      const fresh = !!st.watch; if (fresh) { st.watch = false; D2T.save(); }
       const meC = SE.club(data, me), oppC = SE.club(data, fx.opp);
       const home = fx.ha === 'H';
       const [hC, aC] = home ? [meC, oppC] : [oppC, meC];
-      // Already played (a refresh, or back from another screen): the engine has the result, so show it.
-      let sim = st.match ? GAME.result(gw) : null;
-      const preRating = sim ? sim.me : GAME.rating(), preOpp = sim ? sim.oppStrength : GAME.oppStrength(gw);
       const oppRow = data.table.find((r) => r.name === fx.opp);
-      const last = (n) => n.split(' ').slice(-1)[0];
+      const last = SE.surname;
 
       const body = D2T.h(`<div class="screen-body se-match">
         <div class="se-sb">
@@ -40,29 +40,27 @@
             <div class="se-sb-score" aria-live="polite"><span class="se-sh">0</span><i></i><span class="se-sa">0</span></div>
             <div class="se-sb-team${home ? '' : ' se-mine'}"><img src="${aC.crest}" alt=""><b>${D2T.esc(aC.name)}</b></div>
           </div>
-          <div class="se-clockrow"><span class="se-clock">0'</span></div>
+          <div class="se-clockrow"><span class="se-clock">0'</span><span class="se-result se-result-live" hidden></span></div>
           <div class="se-prog"><span></span><i class="se-prog-ht"></i></div>
         </div>
-        <div class="se-feed" aria-live="polite">
-          <div class="se-preview">
-            <div class="se-pv"><span>Your XI rating</span><b>${preRating}</b></div>
-            <div class="se-pv"><span>${D2T.esc(oppC.name)} rating</span><b>${preOpp}</b></div>
-            <div class="se-pv"><span>${D2T.esc(oppC.name)} finished</span><b>${D2T.ordinal(oppRow ? oppRow.pos : 0)}</b></div>
-            <p class="se-note">Your result is played out by the game from your XI's defence, midfield and attack against ${D2T.esc(oppC.name)}'s real squad${eng.signed.length ? ', minus anyone you have signed from them' : ''}.</p>
-          </div>
+        ${SE.scorers([], [])}
+        <div class="se-preview">
+          <div class="se-pv"><span>Your XI rating</span><b>${sim.me}</b></div>
+          <div class="se-pv"><span>${D2T.esc(oppC.name)} rating</span><b>${sim.oppStrength}</b></div>
+          <div class="se-pv"><span>${D2T.esc(oppC.name)} finished</span><b>${D2T.ordinal(oppRow ? oppRow.pos : 0)}</b></div>
+          <p class="se-note">Your result is played out by the game from your XI's defence, midfield and attack against ${D2T.esc(oppC.name)}'s real squad${eng.signed.length ? ', minus anyone you have signed from them' : ''}.</p>
         </div>
+        <div class="se-feed" aria-live="polite"></div>
         <div class="se-pad"></div>
       </div>`);
-      // home, back to the fixtures until kick off (then greyed: the result is decided), Kick off across the right (Craig, 13 Oct)
-      const bar = D2T.h(SE.bar({ mid: sim ? SE.backOff() : SE.backBtn('Back to fixtures'), main: SE.mainBtn('Kick off', 'se-main') }));
+      // home (the menu), a greyed back (the result is decided), Skip to end then See results (Craig, 14 Oct)
+      const bar = D2T.h(SE.bar({ main: SE.mainBtn(fresh ? 'Skip to end' : 'See results', 'se-main' + (fresh ? ' se-btn-ghost' : '')) }));
       root.append(body, bar);
       const btn = bar.querySelector('.se-main');
-      const backBtn = bar.querySelector('.se-back');
-      if (backBtn) backBtn.onclick = () => { if (phase !== 'pre') return; st.step = 'fixtures'; D2T.save(); D2T.go('fixtures'); };
-      const backOff = () => { if (!backBtn) return; backBtn.disabled = true; backBtn.classList.add('se-off'); backBtn.setAttribute('aria-hidden', 'true'); backBtn.tabIndex = -1; };
       const feed = body.querySelector('.se-feed'), clockEl = body.querySelector('.se-clock'), prog = body.querySelector('.se-prog span');
-      const sh = body.querySelector('.se-sh'), sa = body.querySelector('.se-sa');
-      let phase = 'pre', alive = true, raf = 0, score = { me: 0, opp: 0 }, nextEv = 0;
+      const sh = body.querySelector('.se-sh'), sa = body.querySelector('.se-sa'), chip = body.querySelector('.se-result');
+      const scorers = body.querySelector('.se-scorers'), lists = scorers.querySelectorAll('ul');
+      let phase = 'live', alive = true, raf = 0, score = { me: 0, opp: 0 }, nextEv = 0;
       this._kill = () => { alive = false; cancelAnimationFrame(raf); };
 
       const evHTML = (e) => {
@@ -83,22 +81,36 @@
         else if (e.type === 'ko') { cls = 'se-ev-break'; text = `<b>Kick off.</b> ${D2T.esc(hC.name)} v ${D2T.esc(aC.name)}.`; }
         return `<div class="se-ev ${cls}"><span class="se-ev-min">${e.type === 'ko' ? "0'" : e.type === 'ht' ? 'HT' : e.type === 'ft' ? 'FT' : e.min + "'"}</span><span class="se-ev-ic">${icon}</span><span class="se-ev-t">${text}</span></div>`;
       };
+      // a goal goes onto the scorers panel as it goes in: the home side's list on the left, the away side's on the right
+      const addScorer = (e, animate) => {
+        const ul = lists[(e.side === 'me') === home ? 0 : 1], none = ul.querySelector('.se-none');
+        if (none) none.remove();
+        const li = D2T.h(`<li>${D2T.esc(last(e.who || (e.side === 'me' ? meC.name : oppC.name)))} <span>${e.min}'</span></li>`);
+        if (animate && !reduced) li.classList.add('se-ev-in');
+        ul.appendChild(li);
+      };
       const push = (e, animate) => {
-        if (e.type === 'goal') { score[e.side]++; const el = (e.side === 'me') === home ? sh : sa; el.textContent = score[e.side]; if (animate && !reduced) { el.classList.remove('se-pop'); void el.offsetWidth; el.classList.add('se-pop'); body.querySelector('.se-sb').classList.remove('se-goalflash'); void feed.offsetWidth; body.querySelector('.se-sb').classList.add('se-goalflash'); } }
+        if (e.type === 'goal') {
+          score[e.side]++; const el = (e.side === 'me') === home ? sh : sa; el.textContent = score[e.side];
+          addScorer(e, animate);
+          if (animate && !reduced) { el.classList.remove('se-pop'); void el.offsetWidth; el.classList.add('se-pop'); body.querySelector('.se-sb').classList.remove('se-goalflash'); void feed.offsetWidth; body.querySelector('.se-sb').classList.add('se-goalflash'); }
+        }
         const n = D2T.h(evHTML(e));
         if (animate && !reduced) n.classList.add('se-ev-in');
         feed.prepend(n);
       };
       const setClock = (m, label) => { clockEl.textContent = label || `${m}'`; prog.style.transform = `scaleX(${Math.min(1, m / 90)})`; };
+      const res = sim.gf > sim.ga ? 'win' : sim.gf < sim.ga ? 'loss' : 'draw';
+      const showChip = (animate) => {
+        chip.hidden = false; chip.classList.add('se-res-' + res);
+        chip.textContent = `${res === 'win' ? 'Win' : res === 'draw' ? 'Draw' : 'Defeat'} · ${res === 'win' ? '+3 points' : res === 'draw' ? '+1 point' : '0 points'}`;
+        if (animate && !reduced) chip.classList.add('se-ev-in');
+      };
 
       const kickOff = () => {
-        sim = GAME.play();
-        if (!sim) { D2T.go(GAME.stepFor() || 'home'); return; }
         SND.play('kickoff'); SND.crowd(true);
-        phase = 'live'; backOff();
-        btn.textContent = 'Skip to end'; btn.classList.add('se-btn-ghost');
         setTimeout(() => alive && phase === 'live' && D2T.tip('match-skip', btn, 'Jump to the final score'), 1500);
-        feed.innerHTML = ''; push({ type: 'ko' }, true);
+        push({ type: 'ko' }, true);
         body.querySelector('.se-sb').classList.add('se-live');
         const msPerMin = MATCH_MS / 90; let t0 = performance.now(), paused = 0;
         const tick = (now) => {
@@ -122,95 +134,27 @@
         while (nextEv < sim.events.length) push(sim.events[nextEv++], false);
         setClock(90, 'FT'); end();
       };
+      // full time: the whistle, then the result chip and the crowd's verdict (the old full-time screen's cheer or groan)
       const end = () => {
         phase = 'ft';
         SND.crowd(false); SND.play('fulltime');
         body.querySelector('.se-sb').classList.remove('se-live');
-        btn.textContent = 'Final score'; btn.classList.remove('se-btn-ghost');
-        setTimeout(() => { if (alive && phase === 'ft') showFinal(true); }, reduced ? 300 : 1100);
+        btn.textContent = 'See results'; btn.classList.remove('se-btn-ghost');
+        setTimeout(() => { if (!alive) return; showChip(true); SND.play('result', res === 'win' ? 0 : res === 'draw' ? 1 : 2, 0.2); }, reduced ? 300 : 1100);
       };
-
-      // ---------- final score ----------
-      const showFinal = (animate) => {
-        phase = 'final';
-        const r = { gf: sim.gf, ga: sim.ga, scorers: sim.events.filter((e) => e.type === 'goal').map((e) => ({ side: e.side, who: e.who, min: e.min })) };
-        const res = r.gf > r.ga ? 'win' : r.gf < r.ga ? 'loss' : 'draw';
-        const goals = (side) => r.scorers.filter((s) => s.side === side).map((s) => `<li>${D2T.esc(s.who ? last(s.who) : (side === 'me' ? meC.name : oppC.name))} <span>${s.min}'</span></li>`).join('') || '<li class="se-none">No goals</li>';
-        const [hs, as] = home ? [r.gf, r.ga] : [r.ga, r.gf];
-        const [hg, ag] = home ? [goals('me'), goals('opp')] : [goals('opp'), goals('me')];
-        body.innerHTML = `<div class="se-final${animate && !reduced ? ' se-final-in' : ''}">
-          <div class="se-sb-k">Gameweek ${gw} · Full time</div>
-          <div class="se-result se-res-${res}">${res === 'win' ? 'Win' : res === 'draw' ? 'Draw' : 'Defeat'} · ${res === 'win' ? '+3 points' : res === 'draw' ? '+1 point' : '0 points'}</div>
-          <div class="se-fs">
-            <div class="se-fs-team${home ? ' se-mine' : ''}"><img src="${hC.crest}" alt=""><b>${D2T.esc(hC.name)}</b></div>
-            <div class="se-fs-score"><span>${hs}</span><i></i><span>${as}</span></div>
-            <div class="se-fs-team${home ? '' : ' se-mine'}"><img src="${aC.crest}" alt=""><b>${D2T.esc(aC.name)}</b></div>
-          </div>
-          <div class="se-scorers"><ul>${hg}</ul><span class="se-ball">${ICON.goal}</span><ul>${ag}</ul></div>
-          <p class="se-note" style="text-align:center">Played out by the game from your XI and the opposition's strength.</p>
-        </div>`;
-        body.scrollTop = 0;
-        if (animate) SND.play('result', res === 'win' ? 0 : res === 'draw' ? 1 : 2, 0.2);
-        btn.textContent = 'League table'; btn.classList.remove('se-btn-ghost');
-      };
-
-      // ---------- league table after this gameweek ----------
-      const showTable = () => {
-        phase = 'table';
-        const prev = SE.standings(ctx, gw - 1), now = SE.standings(ctx, gw);
-        const prevPos = new Map(prev.map((r) => [r.name, r.pos]));
-        const prevByName = new Map(prev.map((r) => [r.name, r]));
-        const realOthers = true;
-        body.innerHTML = `<div class="se-aftertable">
-          <div class="se-kicker">Premier League ${data.season}</div>
-          <h1 class="se-h1 se-gw">After gameweek ${gw}</h1>
-          <div class="se-table" role="table" aria-label="Table after gameweek ${gw}">${SE.tableHead()}
-            ${prev.map((r) => SE.rowHTML(r, me, r.name === me ? 'se-landed' : '')).join('')}
-          </div>
-          <p class="se-note">${D2T.game.isSim() ? `Other clubs play out the ${data.season} forecast` : `Other clubs keep their real ${data.season} results on their real dates`}${eng.signed.length ? ', but clubs you have signed players from are weaker and can drop points' : ''}. Yours is the one you just played.</p>
-          <div class="se-pad"></div></div>`;
-        const tbl = body.querySelector('.se-table');
-        const rows = [...tbl.querySelectorAll('.se-tr:not(.se-th)')];
-        const go = () => {
-          const before = SE.rects(rows);
-          const byName = new Map(rows.map((el) => [el.dataset.name, el]));
-          now.forEach((r) => {
-            const el = byName.get(r.name); tbl.appendChild(el);
-            el.querySelector('.se-pos').textContent = r.pos;
-            const mv = prevPos.get(r.name) - r.pos;
-            const team = el.querySelector('.se-team');
-            if (mv && gw > 1) team.insertAdjacentHTML('beforeend', `<span class="se-mv ${mv > 0 ? 'se-up' : 'se-down'}" aria-label="${mv > 0 ? 'up' : 'down'} ${Math.abs(mv)}">${mv > 0 ? '▲' : '▼'}</span>`);
-            SE.COLS.forEach((k) => {
-              const n = el.querySelector(`[data-k="${k}"]`), from = prevByName.get(r.name)[k], to = r[k];
-              if (from === to) return;
-              if (reduced) { n.textContent = to; return; }
-              const t0 = performance.now();
-              const step = (t) => { const p = Math.min(1, (t - t0) / 700); n.textContent = Math.round(from + (to - from) * p); if (p < 1 && alive) requestAnimationFrame(step); };
-              requestAnimationFrame(step);
-              n.classList.add('se-changed');
-            });
-          });
-          SE.flip(rows, before, { duration: 800, stagger: 12, easing: 'cubic-bezier(.65,0,.25,1)' });
-          { const mv = gw > 1 ? prevPos.get(me) - (now.find((r) => r.name === me) || {}).pos : 0; SND.play('tableMove', mv > 0 ? 0 : mv < 0 ? 1 : 2); }
-          const mine = byName.get(me);
-          setTimeout(() => { if (!alive) return; mine.classList.add('se-thump'); const sr = body.getBoundingClientRect(), rr = mine.getBoundingClientRect(); body.scrollTo({ top: body.scrollTop + rr.top - sr.top - body.clientHeight * 0.45, behavior: reduced ? 'auto' : 'smooth' }); }, reduced ? 0 : 850);
-        };
-        if (reduced) go(); else setTimeout(() => alive && go(), 500);
-        btn.textContent = 'Continue';
+      // settled (a refresh, or back from the results): the whole match as it finished, no replay
+      const settle = () => {
+        phase = 'ft';
+        push({ type: 'ko' }, false);
+        while (nextEv < sim.events.length) push(sim.events[nextEv++], false);
+        setClock(90, 'FT'); showChip(false);
       };
 
       btn.onclick = () => {
-        if (phase === 'pre') kickOff();
-        else if (phase === 'live') skip();
-        else if (phase === 'ft') showFinal(true);
-        else if (phase === 'final') showTable();
-        else if (phase === 'table') {
-          const next = GAME.afterMatch();
-          D2T.go(next);
-        }
+        if (phase === 'live') { skip(); return; }
+        st.step = 'results'; D2T.save(); D2T.go('results');
       };
-      // already played this gameweek (for example after a reload): straight to the final score
-      if (sim) showFinal(false);
+      if (fresh) kickOff(); else settle();
     },
     unmount() { this._kill && this._kill(); }
   });

@@ -97,7 +97,33 @@
   };
   const LV_IDX = (p) => Math.max(0, ['bronze', 'silver', 'gold', 'baller', 'legend'].indexOf(p && p.level));
   const LV_ACCENT = (p) => { const L = D2T.LV[p.level] || D2T.LV.bronze; return { accent: p.level === 'silver' ? '#DCE2E8' : p.level === 'bronze' ? '#D99A66' : L.text, ink: p.level === 'silver' || p.level === 'bronze' || p.level === 'gold' ? '#000' : '#fff' }; };
-  const PITCH_W = 50;
+  // the transfer pitch's cards are 15% bigger than the squad's (Craig, 14 Oct): 57.5 x 75, each line nudged up or
+  // down the pitch (px, minus is up) on top of its formation position so the bigger cards stay clear of each other.
+  // A pitch too short for them (under BIG_MIN px tall, as on 375 x 667 and 375 x 812 phones) keeps the squad's 50 x 65 cards.
+  const PITCH_W = 57.5, SMALL_W = 50, BIG_MIN = 400;
+  const BACK = new Set(['CB', 'LB', 'RB', 'LWB', 'RWB']), MIDS = new Set(['CM', 'LM', 'RM', 'CAM']), FWDS = new Set(['ST', 'LW', 'RW']);
+  const nudge = (f, s) => {
+    if (s.pos === 'GK') return { x: 0, y: 8 };
+    if (f === '4-2-3-1') {
+      if (s.pos === 'CDM') return { x: s.x > 50 ? 6 : -6, y: -2 };
+      if (s.pos === 'ST') return { x: 0, y: -6 };
+      if (s.pos === 'CAM' || s.pos === 'LW' || s.pos === 'RW') return { x: 0, y: -4 };
+      return { x: 0, y: 0 };
+    }
+    if (f === '5-3-2' && s.pos === 'CB') return { x: 0, y: -10 };
+    if (BACK.has(s.pos)) return { x: 0, y: -4 };
+    if (s.pos === 'CDM') return { x: 0, y: -8 };
+    if (MIDS.has(s.pos)) return { x: 0, y: -4 };
+    if (FWDS.has(s.pos)) return { x: 0, y: -2 };
+    return { x: 0, y: 0 };
+  };
+  // left and top stay the formation's %, plus the nudge; with the big cards the keeper never comes closer than 4px to the goal line
+  // (98% down, SE.pitchLines) and no card's ring (3.5px out) touches a touchline (3% in from each side)
+  const place = (f, s, w) => {
+    const n = w === PITCH_W ? nudge(f, s) : { x: 0, y: 0 }, hw = w / 2 + 4.5, hh = Math.round(w * 1.3) / 2;
+    const top = s.pos === 'GK' && w === PITCH_W ? `min(calc(${s.y}% + ${n.y}px), calc(98% - ${4 + hh}px))` : `calc(${s.y}% + ${n.y}px)`;
+    return `left:clamp(calc(3% + ${hw}px), calc(${s.x}% + ${n.x}px), calc(97% - ${hw}px));top:${top}`;
+  };
   const ROLE = { GK: 'goalkeeper', DEF: 'defender', MID: 'midfielder', FWD: 'forward' };
   const ROLES = { GK: 'goalkeepers', DEF: 'defenders', MID: 'midfielders', FWD: 'forwards' };
 
@@ -117,8 +143,8 @@
       root.appendChild(body);
       const fx = GAME.fixture(info.gw), opp = fx ? D2T.esc(fx.opp) + (fx.ha === 'H' ? ' (H)' : ' (A)') : '';
       const reduced = D2T.reduced();
-      let alive = true, placing = false, leaving = false, signing = false, field = null, slotsEl = null, ratingEl = null, timers = [];
-      kill = () => { alive = false; timers.forEach(clearTimeout); endDrag(true); };
+      let alive = true, big = true, lastBest = -1, sizeObs = null, placing = false, leaving = false, signing = false, field = null, slotsEl = null, ratingEl = null, timers = [];
+      kill = () => { alive = false; timers.forEach(clearTimeout); endDrag(true); sizeObs && sizeObs.disconnect(); };
 
       // ---------- the pitch above the tray ----------
       function drawPitch(best = -1, fresh = -1) {
@@ -137,14 +163,16 @@
         const si = placing && (!draft || di.open) && !signing && api ? api.selected() : -1, inc = si >= 0 ? api.results()[si] : null;
         const pf = (i) => (inc ? GAME.fit(inc.id, i) : null);
         const fitWord = { green: 'a preferred position', amber: 'close to his position', red: 'out of position' };
+        const fm = GAME.eng().formation, pw = big ? PITCH_W : SMALL_W;
+        lastBest = best;
         slotsEl.innerHTML = GAME.slots().map((s, i) => {
           const c = L.xi[i], f = pf(i), cls = `se-slot${lit.has(i) ? ' se-best' : ''}${f ? ' se-pf-' + f : ''}`;
           const say = f ? `, ${fitWord[f]} for ${D2T.esc(inc.name)}` : '';
-          if (!c) return `<div class="${cls}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}"><div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="Empty ${s.pos} shirt${lit.has(i) ? ', open for this pick' : ''}${say}">${SE.emptyShirt(s.pos, PITCH_W)}</div></div>`;
+          if (!c) return `<div class="${cls}" style="${place(fm, s, pw)};z-index:${Math.round(s.y)}" data-i="${i}"><div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="Empty ${s.pos} shirt${lit.has(i) ? ', open for this pick' : ''}${say}">${SE.emptyShirt(s.pos, pw)}</div></div>`;
           const fit = GAME.fit(c.id, i), oop = fit !== 'green';
-          return `<div class="${cls}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
+          return `<div class="${cls}" style="${place(fm, s, pw)};z-index:${Math.round(s.y)}" data-i="${i}">
             <div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}. Sign the selected player here${say}">
-              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: i === fresh, tab: s.pos, cls: 'fit-' + fit })}</div></div>`;
+              ${D2T.cards.player(c, { w: pw, mini: true, shine: i === fresh, tab: s.pos, cls: 'fit-' + fit })}</div></div>`;
         }).join('');
         ratingEl.textContent = GAME.rating();
         if (fresh >= 0 && !reduced) {
@@ -156,9 +184,13 @@
         field = D2T.h(`<div class="tr-pitch" aria-label="Your XI">
           <div class="tr-head"><div class="tr-head-t"><b>${draft ? `Draft · Shirt ${info.step} of ${info.of}` : `${D2T.esc(info.name)} · Roll ${info.step} of ${info.of}`}</b><span>${draft ? (di.open ? 'Drag one onto an open shirt' : `Drag one onto the lit ${di.pos} shirt`) : 'Drag a player onto a shirt to sign him there'}</span></div>
             <div class="se-rating" aria-live="polite"><b class="tr-rating">0</b><i>Team<br>rating</i></div></div>
-          <div class="se-pitch tr-field">${SE.pitchLines}<div class="se-slots"></div>${draft && !di.open ? '' : `<button class="se-formlink" type="button">Formation <b class="se-fname">${GAME.eng().formation}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`}</div></div>`);
+          <div class="se-pitch tr-field tr-big">${SE.pitchLines}<div class="se-slots"></div>${draft && !di.open ? '' : `<button class="se-formlink" type="button"><b class="se-fname">${GAME.eng().formation}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`}</div></div>`);
         api.el.insertBefore(field, api.el.querySelector('.sp-stage'));
         slotsEl = field.querySelector('.se-slots'); ratingEl = field.querySelector('.tr-rating');
+        // big cards only where the pitch has the height for them; redrawn when that changes
+        const fieldEl = field.querySelector('.tr-field');
+        const sizeUp = () => { const h = fieldEl.clientHeight; if (!h) return; const b = h >= BIG_MIN; if (b === big) return; big = b; fieldEl.classList.toggle('tr-big', b); if (placing) drawPitch(lastBest); };
+        if (window.ResizeObserver) { sizeObs = new ResizeObserver(sizeUp); sizeObs.observe(fieldEl); }
         // change the shape on a roll (Craig, 13 Oct): your 11 are re-seated, nobody comes in; some may land out of position
         const fl = field.querySelector('.se-formlink');
         if (fl) fl.onclick = (e) => {
@@ -232,19 +264,20 @@
         const replaced = !draft && p && GAME.lineup().xi[slot];
         if (!p || !(draft ? GAME.draftPick(p.id, slot) : GAME.signAt(p.id, slot))) return;
         signing = true;
-        SND.play('sign', LV_IDX(p)); if (replaced) SND.play('playerOut', null, 0.35);
+        SND.play('cardDrop'); if (replaced) SND.play('playerOut', null, 0.35);
         drawPitch(-1, slot);
         const s = api.slots[i];
         s.classList.add('is-signed');
         api.hint(`${surname(p.name)} is in. Welcome to ${club.name}.`);
         const ph = GAME.eng().phase;
-        timers.push(setTimeout(() => { if (alive) D2T.go(ph === 'window' || ph === 'draft' ? 'transfer' : 'squad'); }, reduced ? 300 : (draft ? 800 : 1100)));
+        // the window over (Craig, 14 Oct): straight to the fixtures; the draft over: the pre-season squad
+        timers.push(setTimeout(() => { if (alive) D2T.go(ph === 'window' || ph === 'draft' ? 'transfer' : draft ? 'squad' : 'fixtures'); }, reduced ? 300 : (draft ? 800 : 1100)));
       }
       function pass() {
         if (signing) return;
         SND.play('pass');
         GAME.pass();
-        D2T.go(GAME.eng().phase === 'window' ? 'transfer' : 'squad');
+        D2T.go(GAME.eng().phase === 'window' ? 'transfer' : 'fixtures');
       }
 
       // ---------- drag a card from the tray onto a shirt ----------
@@ -307,11 +340,28 @@
       const prevKill = kill;
       kill = () => { prevKill(); window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); window.removeEventListener('touchmove', blockTouch); };
 
+      // the roll header before the spin (Craig, 14 Oct): the season's track of rolls, "Transfer 7 of 17", and in the
+      // Summer and January windows a banner with the window's three rolls. The accent is the mode's colour.
+      const head = draft ? null : (() => {
+        const track = GAME.rollTrack(), w = GAME.eng().rolls[GAME.eng().rollIx], kind = w && w.kind;
+        const acc = (D2T.modeWord() || [0, '#12F06C'])[1];
+        const segs = track.map((t) => `<i class="tr-seg is-${t.state}${t.kind === 'pre' || t.kind === 'jan' ? ' is-win' : ''}"></i>`).join('');
+        const labels = [];
+        let at = 0;
+        GAME.eng().rolls.forEach((r) => { if (r.kind === 'pre' || r.kind === 'jan') labels.push(`<span style="grid-column:${at + 1} / span ${r.n}">${r.kind === 'pre' ? 'Summer' : 'January'}</span>`); at += r.n; });
+        const cols = `grid-template-columns:repeat(${track.length},minmax(0,1fr))`;
+        const top = `<div class="tr-track" aria-hidden="true"><div class="tr-segs" style="${cols}">${segs}</div>${labels.length ? `<div class="tr-wins" style="${cols}">${labels.join('')}</div>` : ''}</div>`;
+        const win = kind === 'pre' ? 'Summer' : kind === 'jan' ? 'January' : '';
+        const banner = win ? `<div class="tr-banner"><span class="tr-banner-t"><small>The ${win} window is open</small><b>${win} window</b></span>
+          <span class="tr-banner-r"><span class="tr-dots">${Array.from({ length: info.of }, (_, k) => `<i${k < info.step ? ' class="is-on"' : ''}></i>`).join('')}</span><span>${info.step} of ${info.of}</span></span></div>` : '';
+        return { top, banner, style: `--tr-acc:${acc}` };
+      })();
       const build = () => {
         api = D2T.roll.mount(body, {
-          kicker: draft ? `${GAME.modeName()} draft · Shirt ${info.step} of ${info.of}` : `${info.name} · Roll ${info.step} of ${info.of}`,
+          kicker: draft ? `${GAME.modeName()} draft · Shirt ${info.step} of ${info.of}` : `Transfer <b>${info.overall}</b> of ${info.total}`,
+          headTop: head ? head.top : '', headBanner: head ? head.banner : '', headCls: head ? 'tr-rollhead' : '', headStyle: head ? head.style : '',
           title: draft ? (di.open ? 'Pick your next player' : `Pick your ${ROLE[di.broad]}`) : 'Who comes in?',
-          sub: draft ? (di.open ? `Three players from ${run.season} for your open shirts. Each one is green in at least one of them. Put him in any open shirt, and change the shape whenever you like. No respins in the draft.` : `Three ${ROLES[di.broad]} from ${run.season} for your ${di.pos} shirt. No respins in the draft.`) : `Roll ${info.overall} of ${info.total} this season${fx ? `, before GW${info.gw} against ${opp}` : ''}. Sign one or pass.`,
+          sub: draft ? (di.open ? `Three players from ${run.season} for your open shirts. Each one is green in at least one of them. Put him in any open shirt, and change the shape whenever you like. No respins in the draft.` : `Three ${ROLES[di.broad]} from ${run.season} for your ${di.pos} shirt. No respins in the draft.`) : `${fx ? `Before GW${info.gw} against ${opp}. ` : ''}Sign one or pass.`,
           pool: fillerCards(),
           render: (p, w) => D2T.cards.player(p, { w }),
           pick: () => { SND.play('roll3'); return GAME.rollCards(); },
@@ -323,7 +373,6 @@
           accent: LV_ACCENT,
           landSound: (i, p) => SND.play('rarity', LV_IDX(p)),
           bigIndex: (rs) => { let b = -1; (rs || []).forEach((p, i) => { if (LV_IDX(p) >= 3 && (b < 0 || LV_IDX(p) >= LV_IDX(rs[b]))) b = i; }); return b; },
-          caption: (p) => `${p.main || p.pos} · ${lvName(p).toUpperCase()}`,
           details: (p) => D2T.cards.info(p), detailsBare: true,
           mainLabel: 'Spin', pickLabel: draft ? 'Pick one' : 'Pass', spinningLabel: 'Rolling',
           selectedLabel: (p) => (draft ? `Sign ${surname(p.name)}` : 'Pass'),

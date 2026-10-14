@@ -48,7 +48,7 @@
   function player(c, opts = {}) {
     const w = opts.w || 114, L = LV[c.level] || LV.bronze;
     const [first, last] = splitName(c.name);
-    const style = `--w:${w}px;--face:${L.face};--rim:${L.rim};--ink-c:${L.ink};--line-c:${L.line};--holo:${L.holo};--glow:${opts.glow || L.glow}`;
+    const style = `--w:${w}px;${opts.mini ? `--h:${Math.round(w * 1.3)}px;` : ''}--face:${L.face};--rim:${L.rim};--ink-c:${L.ink};--line-c:${L.line};--holo:${L.holo};--glow:${opts.glow || L.glow}`;
     const keys = c.pos === 'GK' ? GK_KEYS : KEYS;
     const pcrest = L.ink === '#FFFFFF' ? c.crest : (c.crestLight || c.crest); // dark faces take the white crest
     const stats = keys.map((k) => `<span class="d2c-stat"><b>${c.stats[k] == null ? '-' : c.stats[k]}</b><i>${k}</i></span>`).join('');

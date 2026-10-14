@@ -88,7 +88,7 @@
         await D2T.wait(900); if (!ok()) return;
         myEl.classList.remove('se-scan', 'se-stop');
         myEl.classList.add('se-landed', 'se-thump');
-        window.D2TSound && window.D2TSound.play('tableLand');
+        if (!x) window.D2TSound && window.D2TSound.play('tableLand');   // Club X: no cheer here
         tbl.classList.add('se-shake');
         els.slice(stopAt + 1).forEach((el, k) => { el.classList.remove('se-hid'); el.classList.add('se-build'); el.style.animationDelay = (k * 70) + 'ms'; });
         body.querySelector('.se-fin').classList.add('se-in');

@@ -460,26 +460,45 @@
     const name = !w ? 'Transfer window' : w.kind === 'pre' ? 'Summer transfer window' : w.kind === 'jan' ? 'January window' : 'Transfer window';
     return { name, step: eng.rollStep + 1, of: w ? w.n : 1, overall: done + 1, total, gw: eng.gw };
   };
+  // The season's transfer track (Craig, 14 Oct): one segment per roll, each with its window's kind ('pre' for the
+  // Summer window, 'jan' for January, 'reg' otherwise) and whether it is done, the current roll or still to come.
+  GAME.rollTrack = () => {
+    const eng = GAME.eng(), cur = GAME.windowInfo().overall - 1, out = [];
+    eng.rolls.forEach((w) => { for (let k = 0; k < w.n; k++) { const i = out.length; out.push({ kind: w.kind || 'reg', state: i < cur ? 'done' : i === cur ? 'current' : 'todo' }); } });
+    return out;
+  };
   GAME.preview = (cardId) => E.signPreview(GAME.eng(), GAME.S(), cardId);
   GAME.bestSlot = (cardId) => { let b = 0, bd = -1e9; GAME.preview(cardId).forEach((o) => { if (o.delta > bd) { bd = o.delta; b = o.slot; } }); return b; };
   // Sign a rolled player into a shirt: the player there leaves for good.
   GAME.signAt = (cardId, slot) => {
     const run = D2T.state.run, eng = GAME.eng();
     if (!E.sign(eng, GAME.S(), cardId, slot)) return false;
-    run.step = eng.phase === 'window' ? 'transfer' : 'squad';
+    run.step = eng.phase === 'window' ? 'transfer' : 'fixtures';   // the window over: straight to the fixtures (Craig, 14 Oct)
     D2T.save(); return true;
   };
-  GAME.pass = () => { const eng = GAME.eng(); E.pass(eng, GAME.S()); D2T.state.run.step = eng.phase === 'window' ? 'transfer' : 'squad'; D2T.save(); };
+  GAME.pass = () => { const eng = GAME.eng(); E.pass(eng, GAME.S()); D2T.state.run.step = eng.phase === 'window' ? 'transfer' : 'fixtures'; D2T.save(); };
 
   // ---------- matches ----------
   // Plays the gameweek in the engine at once (so a refresh can never replay it) and returns what the screen shows.
+  // Kick off is the fixtures screen's main button (Craig, 14 Oct): the match screen then plays the result out. run.match
+  // holds the gameweek on show until afterMatch; run.watch is set here and taken by the match screen as it mounts, so a
+  // refresh mid-match shows the match settled rather than playing it again.
   GAME.play = () => {
     const eng = GAME.eng(), S = GAME.S(), gw = eng.gw;
     const res = E.playMatch(eng, S);
     if (!res) return null;
-    D2T.state.run.match = gw; D2T.state.run.step = 'match';
+    D2T.state.run.match = gw; D2T.state.run.step = 'match'; D2T.state.run.watch = true;
     D2T.save();
     return GAME.result(gw);
+  };
+  // the gameweek's other matches with their scores (raids applied, E.otherResults), the same window as gwFixtures
+  GAME.gwResults = (gw) => {
+    const S = GAME.S(), eng = GAME.eng(), fx = GAME.fixtures(), me = eng.club;
+    const f = fx[gw - 1]; if (!f) return [];
+    const prev = fx[gw - 2] ? fx[gw - 2].date : '0000', next = fx[gw] ? fx[gw].date : '9999';
+    const day = (d) => Date.parse(d + 'T12:00:00Z') / 864e5, at = day(f.date);
+    return E.otherResults(S, eng).filter((m) => m.h !== me && m.a !== me && m.date > prev && m.date < next && Math.abs(day(m.date) - at) <= 3)
+      .map((m) => ({ date: m.date, home: S.clubs[m.h].name, away: S.clubs[m.a].name, hg: m.hg, ag: m.ag, changed: !!m.changed }));
   };
   GAME.result = (gw) => {
     const eng = GAME.eng(), S = GAME.S(), r = eng.played[gw - 1]; if (!r) return null;
@@ -518,6 +537,7 @@
   // it opens (stepFor null, so the router goes home) until the flag is false again.
   GAME.dreamLocked = true;
   GAME.locked = (run) => !!(GAME.dreamLocked && run && run.eng && run.eng.mode === 'dare2dream');
+  const MATCH_STEPS = ['match', 'results', 'standings'];
   GAME.stepFor = () => {
     const run = D2T.state.run; if (!run || !run.eng || GAME.locked(run)) return null;
     const ph = run.eng.phase;
@@ -525,19 +545,22 @@
     if (ph === 'setup') return run.tableSeen ? 'squad' : 'table';
     // Dare2Dream: pick the shape on the squad screen, then the draft runs on the transfer screen
     if (ph === 'draft') return !run.tableSeen ? 'table' : (run.eng.draft.step === 0 && run.step !== 'transfer' ? 'squad' : 'transfer');
-    if (run.match) return 'match';
+    // a match on show (Craig, 14 Oct): the match, then its results screen, then the table after the gameweek
+    if (run.match) return MATCH_STEPS.includes(run.step) ? run.step : 'match';
     if (ph === 'window') return 'transfer';
     if (ph === 'summary') return 'summary';
-    return ['squad', 'fixtures', 'match'].includes(run.step) ? run.step : 'fixtures';
+    // between matches the run sits on the fixtures (Kick off); the squad is kept only when you went back to it
+    return ['squad', 'fixtures'].includes(run.step) ? run.step : 'fixtures';
   };
   GAME.allowed = (screen) => {
     const run = D2T.state.run, step = GAME.stepFor();
     if (!step) return false;
     const ph = run.eng.phase;
     if (screen === step) return true;
-    if (screen === 'squad') return ph === 'setup' || ph === 'prematch' || (ph === 'draft' && run.eng.draft.step === 0 && run.tableSeen);
+    if (screen === 'squad') return ph === 'setup' || (ph === 'prematch' && !run.match) || (ph === 'draft' && run.eng.draft.step === 0 && run.tableSeen);
     if (screen === 'transfer') return ph === 'draft' && run.tableSeen;
-    if (screen === 'fixtures' || screen === 'match') return ph === 'prematch' && !run.match;
+    if (screen === 'fixtures') return ph === 'prematch' && !run.match;
+    if (MATCH_STEPS.includes(screen)) return !!run.match;                 // the match, its results and the table can be stepped back through
     return false;
   };
 
