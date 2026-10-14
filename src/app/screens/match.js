@@ -24,8 +24,11 @@
       const gw = st.match, fx = gw ? SE.fixture(data, gw) : null;
       const sim = gw ? GAME.result(gw) : null;
       if (!fx || !sim) { D2T.go(GAME.stepFor() || 'home'); return; }
-      // fresh from Kick off: play it out; otherwise (a refresh, or back from the results) it is settled
+      // fresh from Kick off: play it out; back from the results: settled; a refresh mid-match goes on to the results
+      // (Craig, 14 Oct: the finished match moves on by itself, so its settled screen is only for looking back)
       const fresh = !!st.watch; if (fresh) { st.watch = false; D2T.save(); }
+      const review = !fresh && !!st.review; if (review) { st.review = false; D2T.save(); }
+      if (!fresh && !review) { st.step = 'results'; D2T.save(); D2T.go('results'); return; }
       const meC = SE.club(data, me), oppC = SE.club(data, fx.opp);
       const home = fx.ha === 'H';
       const [hC, aC] = home ? [meC, oppC] : [oppC, meC];
@@ -44,13 +47,15 @@
           <div class="se-prog"><span></span><i class="se-prog-ht"></i></div>
         </div>
         ${SE.scorers([], [])}
-        <div class="se-preview">
-          <div class="se-pv"><span>Your XI rating</span><b>${sim.me}</b></div>
-          <div class="se-pv"><span>${D2T.esc(oppC.name)} rating</span><b>${sim.oppStrength}</b></div>
-          <div class="se-pv"><span>${D2T.esc(oppC.name)} finished</span><b>${D2T.ordinal(oppRow ? oppRow.pos : 0)}</b></div>
-          <p class="se-note">Your result is played out by the game from your XI's defence, midfield and attack against ${D2T.esc(oppC.name)}'s real squad${eng.signed.length ? ', minus anyone you have signed from them' : ''}.</p>
+        <div class="se-feed" aria-live="polite">
+          <!-- the ratings panel is the commentary's first line (Craig, 14 Oct): each new line goes in above it, so it moves down as the match runs -->
+          <div class="se-preview">
+            <div class="se-pv"><span>Your XI rating</span><b>${sim.me}</b></div>
+            <div class="se-pv"><span>${D2T.esc(oppC.name)} rating</span><b>${sim.oppStrength}</b></div>
+            <div class="se-pv"><span>${D2T.esc(oppC.name)} finished</span><b>${D2T.ordinal(oppRow ? oppRow.pos : 0)}</b></div>
+            <p class="se-note">Your result is played out by the game from your XI's defence, midfield and attack against ${D2T.esc(oppC.name)}'s real squad${eng.signed.length ? ', minus anyone you have signed from them' : ''}.</p>
+          </div>
         </div>
-        <div class="se-feed" aria-live="polite"></div>
         <div class="se-pad"></div>
       </div>`);
       // home (the menu), a greyed back (the result is decided), Skip to end then See results (Craig, 14 Oct)
@@ -141,6 +146,9 @@
         body.querySelector('.se-sb').classList.remove('se-live');
         btn.textContent = 'See results'; btn.classList.remove('se-btn-ghost');
         setTimeout(() => { if (!alive) return; showChip(true); SND.play('result', res === 'win' ? 0 : res === 'draw' ? 1 : 2, 0.2); }, reduced ? 300 : 1100);
+        // then on to the results by itself after a moment on the final score (Craig, 14 Oct); See results goes sooner
+        st.step = 'results'; D2T.save();
+        setTimeout(() => { if (alive && phase === 'ft') D2T.go('results'); }, reduced ? 1500 : 3200);
       };
       // settled (a refresh, or back from the results): the whole match as it finished, no replay
       const settle = () => {
