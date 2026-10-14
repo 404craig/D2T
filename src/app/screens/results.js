@@ -50,7 +50,7 @@
       // home (the menu), back to the match as it finished, League table across the right (Craig, 14 Oct)
       const bar = D2T.h(SE.bar({ mid: SE.backBtn('Back to the match'), main: SE.mainBtn('League table', 'se-main') }));
       root.append(body, bar);
-      bar.querySelector('.se-back').onclick = () => { st.step = 'match'; D2T.save(); D2T.go('match'); };
+      bar.querySelector('.se-back').onclick = () => { st.step = 'match'; st.review = true; D2T.save(); D2T.go('match'); };
       bar.querySelector('.bar-main').onclick = () => { st.step = 'standings'; D2T.save(); D2T.go('standings'); };
       if (!reduced && window.D2TSound) window.D2TSound.play('fixtures', null, 0.15);
     }

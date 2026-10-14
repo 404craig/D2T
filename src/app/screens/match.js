@@ -24,8 +24,11 @@
       const gw = st.match, fx = gw ? SE.fixture(data, gw) : null;
       const sim = gw ? GAME.result(gw) : null;
       if (!fx || !sim) { D2T.go(GAME.stepFor() || 'home'); return; }
-      // fresh from Kick off: play it out; otherwise (a refresh, or back from the results) it is settled
+      // fresh from Kick off: play it out; back from the results: settled; a refresh mid-match goes on to the results
+      // (Craig, 14 Oct: the finished match moves on by itself, so its settled screen is only for looking back)
       const fresh = !!st.watch; if (fresh) { st.watch = false; D2T.save(); }
+      const review = !fresh && !!st.review; if (review) { st.review = false; D2T.save(); }
+      if (!fresh && !review) { st.step = 'results'; D2T.save(); D2T.go('results'); return; }
       const meC = SE.club(data, me), oppC = SE.club(data, fx.opp);
       const home = fx.ha === 'H';
       const [hC, aC] = home ? [meC, oppC] : [oppC, meC];
@@ -143,6 +146,9 @@
         body.querySelector('.se-sb').classList.remove('se-live');
         btn.textContent = 'See results'; btn.classList.remove('se-btn-ghost');
         setTimeout(() => { if (!alive) return; showChip(true); SND.play('result', res === 'win' ? 0 : res === 'draw' ? 1 : 2, 0.2); }, reduced ? 300 : 1100);
+        // then on to the results by itself after a moment on the final score (Craig, 14 Oct); See results goes sooner
+        st.step = 'results'; D2T.save();
+        setTimeout(() => { if (alive && phase === 'ft') D2T.go('results'); }, reduced ? 1500 : 3200);
       };
       // settled (a refresh, or back from the results): the whole match as it finished, no replay
       const settle = () => {

@@ -198,17 +198,21 @@ fs.mkdirSync(OUT, { recursive: true });
   // the info panel and the scorers panel sit under the score while the match plays out (Craig, 14 Oct)
   check((await page.$$(".se-match .se-pv")).length === 3 && /played out by the game/.test(await page.textContent(".se-match .se-preview")), "the ratings panel is not on the match screen");
   check(!!(await page.$(".se-match .se-scorers")) && (await page.$$(".se-match .se-scorers ul")).length === 2 && !!(await page.$(".se-match .se-scorers .se-ball")), "the scorers panel is not on the match screen");
-  // refresh mid-match: the result is already decided and must not replay or change; the match shows settled
+  // refresh mid-match: the result is already decided and must not replay or change; Continue goes on to the results
   const res1 = await page.evaluate(() => JSON.stringify(window.D2T.game.eng().played[0]));
   await page.reload(); await expectScreen("intro");
   await page.click(".fr-skip", { force: true }); await expectScreen("home"); await wait(700);
   check(await page.evaluate((r) => JSON.stringify(window.D2T.game.eng().played[0]) === r, res1), "refresh changed the GW1 result");
   await page.click('[data-act="continue"]'); await wait(1600);
-  check((await screen()) === "match", "Continue after a refresh did not return to the match screen, on " + (await screen()));
-  check((await page.textContent(".se-main")).trim() === "See results" && (await page.textContent(".se-clock")).trim() === "FT", "a refresh mid-match should show the match settled at full time with See results");
+  check((await screen()) === "results", "Continue after a refresh mid-match should go on to the results, on " + (await screen()));
+  // back shows the match settled at full time with every goal and the chip
+  await page.click(".actionbar .se-back"); await expectScreen("match"); await wait(600);
+  check((await page.textContent(".se-main")).trim() === "See results" && (await page.textContent(".se-clock")).trim() === "FT", "back from the results should show the match settled at full time with See results");
   const goals1 = await page.evaluate(() => { const r = window.D2T.game.eng().played[0]; return r.us + r.them; });
   check((await page.$$(".se-match .se-scorers li:not(.se-none)")).length === goals1, "the settled match's scorers panel does not list every goal");
   check(!!(await page.$(".se-match .se-result:not([hidden])")), "no result chip at full time");
+  await wait(3600);
+  check((await screen()) === "match", "the settled match (back from the results) should not move on by itself");
   await shot("14-match-ft");
   // See results: the gameweek's scores, mine on top, then the table after the gameweek, then on
   await page.click(".se-main"); await expectScreen("results"); await wait(800); await shot("15-results"); await barOrder("results");
@@ -230,6 +234,15 @@ fs.mkdirSync(OUT, { recursive: true });
   const after = await screen();
   check(["fixtures", "transfer"].includes(after), "after GW1 expected fixtures or transfer, got " + after);
   check(await page.evaluate(() => window.D2T.state.run.match == null), "run.match was not cleared after the table");
+  // gameweek 2 played live: Skip to end, then the finished match moves on to the results by itself (Craig, 14 Oct)
+  if (after === "transfer") { await page.evaluate(() => { const G = window.D2T.game; while (G.eng().phase === "window") G.pass(); window.D2T.go("fixtures"); }); await expectScreen("fixtures"); await wait(500); }
+  await page.click(".actionbar .bar-main"); await expectScreen("match"); await wait(1200);
+  await page.click(".se-main"); await wait(600);
+  check((await screen()) === "match" && (await page.textContent(".se-clock")).trim() === "FT", "Skip to end did not show full time first");
+  await page.waitForFunction(() => window.D2T.currentScreen() === "results", null, { timeout: 6000 }).catch(() => {});
+  check((await screen()) === "results", "the finished match did not move on to the results by itself, on " + (await screen()));
+  await page.click(".actionbar .bar-main"); await expectScreen("standings"); await wait(600);
+  await page.click(".actionbar .bar-main"); await wait(800);
 
   // ---------- the rest of the season through the adapter ----------
   const seasonOver = await page.evaluate(() => {
