@@ -7,7 +7,7 @@
 // (within 10%) mixed in: about 1 in 5 for cards 1 to 10, 1 in 3 for 11 to 20, then 1 in 2.
 // Player stats: his shirt in the club's colours, the surname and the stat as his number (sized by its digits so 260 fits),
 // and under it only the crest (36px, from the 128px file) and his flag. Club stats: the Classic club shield, bigger (172 wide,
-// two to a row), name and season top left, the crest top right, the number in the middle and the stat's unit near the point.
+// two to a row), everything centred (layout N, 14 Oct): crest, name, the number in the middle, season pill, line, stat word.
 // Both reel in with the club spin's motion (D2T.roll.profile and sample), left first. Best run per stat in D2T.state.ub.
 (function () {
   const C = '#22D3EE';
@@ -19,6 +19,189 @@
   const DOWN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg>';
   // the mark: up and down chevrons in a ring, line art like the outline emblem (home card and faded behind the pages)
   const MARK = '<svg class="ub-mark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="50" cy="50" r="44"/><path d="M30 42 L50 22 L70 42"/><path d="M30 58 L50 78 L70 58"/></svg>';
+
+  // ---------- the end sheet's banter (Craig, 14 Oct; design/prototype/unbeaten-banter-approved.json, kept as he wrote it) ----------
+  // One bucket per run, first match wins: deck (every card cleared), best (a new best on the stat), equal (level with it),
+  // close (1 or 2 short of a best of 3 or more), then by size: zero, low (1 to 3), mid (4 to 9), good (10 to 19), great (20+).
+  // {n} is the run, {best} the best on the stat before this run.
+  const BANTER = {
+    "zero": {
+      "when": "A run of 0.",
+      "titles": [
+        "Beaten first time",
+        "Out first ball",
+        "Done in one",
+        "Fell at the first"
+      ],
+      "lines": [
+        "Not one. You couldn't call higher or lower on a lift.",
+        "Zero. A coin would have beaten you half the time.",
+        "Done in one. Was your phone upside down?",
+        "That's not a run. That's tripping over your own laces.",
+        "Beaten first go. Bold strategy, being shit straight away.",
+        "Fifty-fifty, and you still found the wrong fifty.",
+        "Straight back to the dressing room. The showers aren't even warm.",
+        "One guess. Wrong. Fucking magnificent."
+      ]
+    },
+    "low": {
+      "when": "A run of 1 to 3.",
+      "titles": [
+        "Gone early",
+        "Unbeaten in {n}",
+        "Short and not sweet",
+        "Over already"
+      ],
+      "lines": [
+        "{n}. A run so short it barely counts as a jog.",
+        "Over before the pies were warm.",
+        "A promising start, followed immediately by the end.",
+        "Short, sharp and shit.",
+        "You peaked early. Like scoring in the first minute and getting subbed at half time.",
+        "Warm-up over. Shame the match was too."
+      ]
+    },
+    "mid": {
+      "when": "A run of 4 to 9.",
+      "titles": [
+        "Unbeaten in {n}",
+        "Decent run",
+        "Not bad",
+        "Mid-table"
+      ],
+      "lines": [
+        "{n}. Respectable, like a 0-0 at home to Burnley is respectable.",
+        "Decent. Not good. Decent.",
+        "A mid-table run. Nobody will remember it, including you.",
+        "{n} in a row. Your mates will be mildly unimpressed.",
+        "Solid enough. Like a centre-back with no pace and a lot of shouting.",
+        "Not bad. Not good either, mind.",
+        "{n}. The kind of form that gets a new contract in October and the sack by Christmas.",
+        "You know a bit. Calm down."
+      ]
+    },
+    "good": {
+      "when": "A run of 10 to 19.",
+      "titles": [
+        "Unbeaten in {n}",
+        "Double figures",
+        "Proper run",
+        "On a roll"
+      ],
+      "lines": [
+        "{n}. Alright, smart arse.",
+        "Double figures. Go and tell someone who cares.",
+        "{n} unbeaten. Your group chat is about to become unbearable.",
+        "Proper form. Is someone feeding you the answers?",
+        "Double figures. Pundit-level smugness unlocked.",
+        "That's a title-chasing run. Don't bottle it next time.",
+        "{n}. Impressive. Mildly sickening, but impressive.",
+        "You clearly spend too much time on football stats. Respect, though."
+      ]
+    },
+    "great": {
+      "when": "A run of 20 or more.",
+      "titles": [
+        "Unstoppable",
+        "Unbeaten in {n}",
+        "What a run",
+        "On fire"
+      ],
+      "lines": [
+        "{n}. What the fuck. Who are you?",
+        "That's not a run, that's a dynasty.",
+        "{n} on the bounce. Invincibles energy.",
+        "Please go outside. Touch some grass. Any grass.",
+        "Absolutely disgusting knowledge. We're reporting you.",
+        "{n}. Your brain is a stats database with legs.",
+        "Unbelievable. Literally. We're checking the replay.",
+        "A record-book run. Shame the record book is your phone."
+      ]
+    },
+    "close": {
+      "when": "1 or 2 short of your best on that stat (best of 3 or more).",
+      "titles": [
+        "So close to your best",
+        "Nearly",
+        "Agonisingly close",
+        "One short"
+      ],
+      "lines": [
+        "{n}. One more and you'd have matched it. Fucking typical.",
+        "So close to your best you could smell it.",
+        "Inches away. Like a shot off the post in the 94th minute.",
+        "Your best is {best}. You were right there and you bottled it.",
+        "Agonising. Absolutely agonising. Go again.",
+        "Within touching distance and you fell over the ball.",
+        "That's a title race collapse, that.",
+        "{n}. Your best is {best}. Do the maths and weep."
+      ]
+    },
+    "equal": {
+      "when": "The same as your best on that stat.",
+      "titles": [
+        "Equalled your best",
+        "Level with your best",
+        "Same again"
+      ],
+      "lines": [
+        "Level with your best. Not better. Level.",
+        "{n} again. Consistent, we'll give you that.",
+        "Matched it. Couldn't beat it. Very you.",
+        "A draw with yourself, which is somehow a loss.",
+        "Your ceiling is officially {n}. Prove us wrong.",
+        "Joint top. Share the trophy with your past self.",
+        "A tie with your own record. Rematch. Now."
+      ]
+    },
+    "best": {
+      "when": "Beat your best on that stat.",
+      "titles": [
+        "High score",
+        "New best",
+        "Personal best",
+        "Record broken"
+      ],
+      "lines": [
+        "New best. Nobody saw that coming, least of all you.",
+        "{n}. A personal best. Frame it.",
+        "High score. Go on then, show everyone.",
+        "You've beaten your best. The old you is gutted.",
+        "Record broken. Your past self wants a word.",
+        "New best. Your mum would be proud. Probably.",
+        "{n}! Screenshot it before you do something stupid.",
+        "A new high. Don't let it go to your head. Too late."
+      ]
+    },
+    "deck": {
+      "when": "Every card in the deck, unbeaten.",
+      "titles": [
+        "The whole deck, unbeaten",
+        "Invincible",
+        "Deck cleared"
+      ],
+      "lines": [
+        "Invincible. We literally ran out of stats to beat you with.",
+        "Deck cleared. Go and do something with your life."
+      ]
+    }
+  };
+  function bucketFor(n, prev, cleared) {
+    if (cleared) return 'deck';
+    if (n > prev && n > 0) return 'best';
+    if (prev > 0 && n === prev) return 'equal';
+    if (prev >= 3 && prev - n >= 1 && prev - n <= 2) return 'close';
+    return n === 0 ? 'zero' : n <= 3 ? 'low' : n <= 9 ? 'mid' : n <= 19 ? 'good' : 'great';
+  }
+  // one title and one line at random, never the line (or title) last shown in that bucket (kept in D2T.state.ub.banter)
+  function banter(R, key, n, prev) {
+    const B = BANTER[key], mem = R.banter || (R.banter = {}), last = mem[key] || {};
+    const pick = (list, not) => { const ok = list.map((_, i) => i).filter((i) => i !== not || list.length < 2); return ok[rand(ok.length)]; };
+    const t = pick(B.titles, last.t), l = pick(B.lines, last.l);
+    mem[key] = { t, l };
+    const fill = (x) => x.replace(/\{n\}/g, n).replace(/\{best\}/g, prev);
+    return { title: fill(B.titles[t]), line: fill(B.lines[l]) };
+  }
 
   // ---------- the stats (one per run) ----------
   const STATS = [
@@ -88,25 +271,28 @@
     return `<div class="ub-item">${shirt(w, r.club, word, v)}<div class="ub-row"><img class="ub-crest" src="${c.crest}" alt="${D2T.esc(c.full || r.club)}">${flag ? `<img class="d2c-flag ub-flag" src="${flag}" alt="${D2T.esc(r.nat)}" title="${D2T.esc(r.nat)}">` : ''}</div></div>`;
   }
 
-  // ---------- a club's card: the Classic club shield turned round (option A), the stat in the middle ----------
-  // the name sits beside the crest in about 5.4em (Black Italic runs about 0.66em a letter): its longest word sets the size,
-  // and a word over 10 letters (Middlesbrough, Huddersfield, Southampton) also shrinks the crest to make room
-  const nameFit = (n) => { const L = Math.max(...String(n).split(/\s+/).map((x) => x.length)), long = L > 10, f = Math.min(1.1, (long ? 8.8 : 8.0) / L); return { cls: long ? ' long' : '', style: f < 1.1 ? ` style="font-size:${f.toFixed(2)}em"` : '' }; };
+  // ---------- a club's card (Craig, 14 Oct; layout N in design/prototype/unbeaten-club-cards-v2.html) ----------
+  // The Classic club shield, everything centred: the crest at the top, the club name under it with the card's width to
+  // itself (two lines if it needs them), the number in the middle, the season pill just above the line and the stat named
+  // under it in the club's text colour. The name only shrinks when one word is too long for the line (over 13 letters).
+  const nameFit = (n) => { const L = Math.max(...String(n).split(/\s+/).map((x) => x.length)); return L > 13 ? ` style="font-size:${(1.12 * 13 / L).toFixed(2)}em"` : ''; };
+  const numCls = (v) => (v.length > 3 ? ' w4' : v.length > 2 ? ' w3' : '');
   function clubItem(stat, r, shown, w) {
     const G = D2T.game, c = G.club(r.club), P = D2T.cards.clubPaint(c), v = shown ? String(stat.val(r)) : '?';
     // all-time cards say "All-time", never how many seasons (Craig, 13 Oct: that gave the answer away)
-    const when = r.season ? r.season : 'All-time', nf = nameFit(c.name);
-    return `<div class="ub-item"><div class="d2c d2c-club ub-cc${nf.cls}" style="--w:${w}px;--face:${P.face};--rim:${P.rim};--tex:${P.tex};--glow:${P.glow};--club-text:${c.text}" aria-label="${D2T.esc(c.full || r.club)} ${when}">
+    const when = r.season ? r.season : 'All-time';
+    // crestCard: white where the club's crest is all the card's colour (Nottingham Forest and the rest, data/source/clubs.json)
+    return `<div class="ub-item"><div class="d2c d2c-club ub-cc" style="--w:${w}px;--face:${P.face};--rim:${P.rim};--tex:${P.tex};--glow:${P.glow};--club-text:${c.text}" aria-label="${D2T.esc(c.full || r.club)} ${when}">
       <div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2t-shine slow"></span>
-      <div class="d2c-body"><div class="ub-cc-top"><div class="ub-cc-who"><span class="ub-cc-name"${nf.style}>${D2T.esc(c.name)}</span><span class="ub-cc-season">${when}</span></div><img class="ub-cc-crest" src="${c.crestLight || c.crest}" alt=""></div>
-      <div class="ub-cc-mid"><span class="ub-num${shown ? '' : ' q'}${v.length > 2 ? ' w3' : ''}">${v}</span></div>
-      <div class="ub-cc-foot"><span class="ub-cc-hr"></span><span class="ub-cc-unit">${stat.short || stat.unit}</span></div></div></div></div></div>`;
+      <div class="d2c-body"><img class="ub-cc-crest" src="${c.crestCard || c.crestLight || c.crest}" alt=""><span class="ub-cc-name"${nameFit(c.name)}>${D2T.esc(c.name)}</span>
+      <div class="ub-cc-mid"><span class="ub-num${shown ? '' : ' q'}${numCls(v)}">${v}</span></div>
+      <span class="ub-cc-season">${when}</span><span class="ub-cc-hr"></span><span class="ub-cc-unit">${stat.short || stat.unit}</span></div></div></div></div>`;
   }
   const item = (stat, r, shown, w) => (isClub(stat) ? clubItem(stat, r, shown, w) : playerItem(stat, r, shown, w));
   const whoLine = (stat, r) => {
     if (isClub(stat)) return '';
     const c = D2T.game.club(r.club);
-    const where = stat.deck === 'career' ? `${D2T.esc(c.name || r.club)} · ${r.f === r.l ? r.f : r.f + ' to ' + r.l}` : `${D2T.esc(c.name || r.club)}${r.club2 ? ' / ' + D2T.esc(D2T.game.club(r.club2).name || r.club2) : ''} · ${r.season}`;
+    const where = stat.deck === 'career' ? `${D2T.esc(c.name || r.club)}` : `${D2T.esc(c.name || r.club)}${r.club2 ? ' / ' + D2T.esc(D2T.game.club(r.club2).name || r.club2) : ''} · ${r.season}`;
     return `<b>${D2T.esc(r.name)}</b><span>${where}</span>`;
   };
 
@@ -382,7 +568,7 @@
       }
       function setNum(el, to) {
         el.classList.remove('q'); el.textContent = to;
-        if (el.tagName.toLowerCase() === 'text') { el.setAttribute('font-size', NS(to)); el.setAttribute('y', NY(to)); } else if (String(to).length > 2) el.classList.add('w3');
+        if (el.tagName.toLowerCase() === 'text') { el.setAttribute('font-size', NS(to)); el.setAttribute('y', NY(to)); } else { const k = numCls(String(to)).trim(); if (k) el.classList.add(k); }
       }
       function burstReveal(el, to, done) {
         if (!el) { done(); return; }
@@ -465,15 +651,13 @@
       function over(cleared) {
         if (!root.isConnected || !run) return;
         const s = run.stat, n = run.streak, prev = R.best[s.id] || 0, newBest = n > prev && n > 0;
+        // the banter is picked against the best before this run (prev) and remembered, so the next sheet avoids it
+        const said = banter(R, bucketFor(n, prev, cleared), n, prev);
         R.runs++; if (newBest) R.best[s.id] = n; R.run = null; save(); bestLine(s);
         if (newBest) { snd('highScore'); highScore(); }
         // the end sheet waits for the HIGH SCORE flash to pass
         const show = () => {
           if (!root.isConnected) return;
-          const a = run.cur, b = run.next, nm = (r) => r.name || D2T.game.club(r.club).full || r.club;
-          const head = cleared ? 'The whole deck, unbeaten' : n === 0 ? 'Beaten first time' : `Unbeaten in ${n}`;
-          const lead = cleared ? 'You got through every card in this deck.' : `<b>${D2T.esc(nm(b))}</b> had <b>${s.val(b)}</b>, <b>${D2T.esc(nm(a))}</b> had <b>${s.val(a)}</b>.`;
-          const best = newBest ? ' A new best.' : prev ? ` Your best on ${s.big.toLowerCase()}: ${prev}.` : '';
           // the share card (Craig, 13 Oct): the run huge in cyan, the stat, the dare
           const text = `DROP2TOP Unbeaten Run · ${s.big}\nI went unbeaten in ${n} call${n === 1 ? '' : 's'} of higher or lower.${newBest ? '\nA new best.' : ''}\nCan you go longer?\n${D2T.share.LINK}`;
           const ring = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="#22D3EE" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="50" r="44"/><path d="M30 42 L50 22 L70 42"/><path d="M30 58 L50 78 L70 58"/></svg>';
@@ -485,7 +669,7 @@
             } });
           // the shared end sheet (Craig, 14 Oct; D2T.endSheet): Share, New run, Home. Closing it goes back to the start page,
           // which has New run and Home of its own, so there is no peek bar here.
-          D2T.endSheet({ title: head, lead: `<div class="ub-endbig"><b>${n}</b><span>Unbeaten${newBest ? ' · a new best' : ''}</span></div><p class="fr-lead">${lead}${best}</p>`,
+          D2T.endSheet({ title: said.title, lead: `<div class="ub-endbig"><b>${n}</b><span>Unbeaten${newBest ? ' · a new best' : ''}</span></div><p class="fr-lead ub-banter">${D2T.esc(said.line)}</p>`,
             colour: '#22D3EE', ink: '#001A1F', onClose: () => { if (root.isConnected && run) idle(); },
             buttons: [{ k: 'share', label: 'Share with your mates', primary: true, fn: () => D2T.share.send(card) }, { k: 'again', label: 'New run', fn: () => { idle(); later(statSpin, 250); } }, { k: 'home', label: 'Home', fn: () => D2T.go('home') }] }).open();
         };

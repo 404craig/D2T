@@ -113,7 +113,7 @@
     else { const need = d.pos - best.rise; right = need < 1 ? `<b>${crest(d.name)}Still to play</b><small>Their real finish: ${o(d.pos)}</small>`
       : need === 1 ? `<b>${crest(d.name)}Win the league</b><small>${best.finish > 1 ? 'to beat your best' : 'to match your best'}</small>`
       : `<b>${crest(d.name)}Finish ${o(need)}</b><small>or higher to beat your best</small>`; }
-    return `<div class="fr-dtiles"><div class="fr-dtile"><i>YOUR BEST DAILY</i>${left}</div><div class="fr-dtile${newBest ? ' is-best' : ''}"><i>TODAY'S DAILY</i>${right}</div></div>`;
+    return `<div class="fr-dtiles"><div class="fr-dtile"><i>YOUR BEST DAILY</i>${left}</div><${res ? 'button type="button" data-act="daily-share" aria-label="Share today\'s Daily"' : 'div'} class="fr-dtile${newBest ? ' is-best' : ''}"><i>TODAY'S DAILY</i>${right}</${res ? 'button' : 'div'}></div>`;
   }
 
 
@@ -234,6 +234,16 @@
         setTimeout(() => { if (root.isConnected) D2T.sheet({ title: 'That Daily has closed', body: `<p class="fr-lead">${D2T.esc(D2T.game.dailyName(dc))} closed at midnight before you finished it. Today's club is ready for everyone.</p>` }); }, 900);
       }
       const startNew = (from, mode) => { D2T.game.newRun(mode); D2T.toBlack('spin', { from }); };
+      // played today's Daily at least once: its tile brings back a slide-up to share it (Craig, 14 Oct)
+      const dshare = body.querySelector('[data-act="daily-share"]');
+      if (dshare) dshare.onclick = () => {
+        const G = D2T.game, t = G.today(), r = G.dailyResult(t), sh = D2T.dailyShare && D2T.dailyShare(t); if (!r || !sh) return;
+        const sign = (v) => (v > 0 ? '+' : '') + v;
+        D2T.endSheet({ title: G.dailyName(t), colour: '#FFFFFF', ink: '#0A0A0A',
+          lead: `Your best go today: <b>${D2T.esc(r.club)}</b> ${D2T.ordinal(r.histFinish)} to ${D2T.ordinal(r.finish)}, a rise of ${sign(r.rise)}.`,
+          buttons: [{ k: 'share', label: 'Share result', primary: true, fn: () => { window.D2TSound && window.D2TSound.play('share'); D2T.share.send(sh); } },
+            { k: 'again', label: 'Go again', fn: () => { G.startDaily(); D2T.toBlack(G.stepFor() || 'table', { from: dshare }); } }] }).open();
+      };
       const daily = body.querySelector('[data-act="daily"]');
       if (daily) daily.onclick = (e) => {
         D2T.game.startDaily(); D2T.toBlack(D2T.game.stepFor() || 'table', { from: e.currentTarget });
