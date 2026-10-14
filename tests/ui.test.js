@@ -602,6 +602,8 @@ fs.mkdirSync(OUT, { recursive: true });
     await page.click(".ub-higher"); await wait(1600);
     const r1 = await page.evaluate(() => ({ ok: !!document.querySelector(".ub-r.ok"), bad: !!document.querySelector(".ub-r.bad"), n: document.querySelector(".ub-n").textContent }));
     check(r1.ok || r1.bad, "Unbeaten Run (" + st + "): the answer did not resolve");
+    // the club cards have no right or wrong glow (Craig, 14 Oct); the shirts keep theirs
+    if (st === "pts") check(await page.evaluate(() => getComputedStyle(document.querySelector(".ub-r .sp-node.is-hit > *")).filter === "none"), "Unbeaten Run (pts): a club card glowed for a right or wrong answer");
     await wait(2500);
     if (r1.ok) {
       check(r1.n === "1" || await page.evaluate(() => document.querySelector(".ub-n").textContent === "1"), "Unbeaten Run (" + st + "): a right answer did not count 1");
@@ -627,7 +629,9 @@ fs.mkdirSync(OUT, { recursive: true });
       check(await page.evaluate((n) => ((window.D2T.state.ub || {}).runs || 0) === n, runsBefore), "Unbeaten Run (" + st + "): quitting recorded a run");
       await page.click('[data-act="unbeaten"]'); await expectScreen("unbeaten"); await wait(700);
     } else {
-      check(!!(await page.$(".sheet")) && /Beaten first time/i.test(await page.textContent(".sheet")), "Unbeaten Run (" + st + "): no end sheet after a wrong answer");
+      // the end sheet's banter (Craig, 14 Oct): a run of 0 with no best yet takes a title and a line from the zero bucket
+      const zero = await page.evaluate(() => ({ title: (document.querySelector(".sheet .sheet-title, .sheet h2, .sheet h3") || {}).textContent || document.querySelector(".sheet").textContent, line: (document.querySelector(".sheet .ub-banter") || {}).textContent || "" }));
+      check(!!(await page.$(".sheet")) && /Beaten first time|Out first ball|Done in one|Fell at the first/.test(zero.title) && zero.line.length > 10 && !/ had /.test(zero.line), "Unbeaten Run (" + st + "): no end sheet with the zero banter after a wrong answer");
       await card("unbeaten", "DROP2TOP Unbeaten Run · ");
       check(/New run/.test(await page.textContent('.sheet [data-k="again"]')) && !!(await page.$('.end-sheet [data-k="home"]')) && !!(await page.$('.end-sheet [data-k="share"]')), "Unbeaten Run (" + st + "): the end sheet should offer Share, New run and Home");
       check(await page.evaluate((n) => ((window.D2T.state.ub || {}).runs || 0) === n + 1, runsBefore), "Unbeaten Run (" + st + "): a finished run was not recorded");
