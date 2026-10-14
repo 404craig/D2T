@@ -24,6 +24,10 @@
     const tween = (ms, f) => new Promise((res) => { const t0 = performance.now(); const st = (now) => { const u = Math.min(1, (now - t0) / ms); f(u); if (u < 1) frame(st); else res(); }; frame(st); });
 
     const ov = D2T.h('<div class="rr-ov" aria-hidden="true"><div class="rr-dim"></div><canvas></canvas><div class="rr-flash"></div><span class="rr-ring"></span><div class="rr-badge"></div></div>');
+    // Skip (Craig, 14 Oct): bottom right like the intro's; it lands the card in its slot at once
+    const skipBtn = D2T.h('<button class="rr-skip" type="button">Skip</button>');
+    ov.appendChild(skipBtn);
+    skipBtn.addEventListener('click', (e) => { e.stopPropagation(); skip(); });
     host.appendChild(ov);
     const cv = ov.querySelector('canvas'), cx = cv.getContext('2d'), K = Math.min(2, window.devicePixelRatio || 1);
     const crowdOff = (fade) => { if (!crowd) return; crowd.forEach((h) => h && h.stop(fade)); crowd = null; };
@@ -150,13 +154,15 @@
       snd('swoosh_up', 0.3, 0.8, 2000);
       await tween(500, (u) => { const e = u * u * (3 - 2 * u); place(fx + (to.x - fx) * e, fy + (to.y - fy) * e, 1 + (to.s - 1) * e); });
       big.remove(); slot.classList.remove('rr-hidden');
-      o.land && o.land(); snd('thud_low', 0.6, 1.1);
+      landNow(); snd('thud_low', 0.6, 1.1);
       crowdOff(1.5);                                              // the crowd and fireworks run to the very end, then fade
       await wait(300);
       kill(true);
     }
-    let resolve;
+    let resolve, landed = false;
     const done = new Promise((r) => { resolve = r; });
+    const landNow = () => { if (landed) return; landed = true; o.land && o.land(); };
+    function skip() { if (dead) return; landNow(); kill(true); }
     function kill(finished) {
       if (dead) return; dead = true;
       timers.forEach(clearTimeout); timers.clear(); rafs.forEach(cancelAnimationFrame); rafs.clear();
