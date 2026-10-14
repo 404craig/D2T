@@ -221,10 +221,11 @@ const CUES = {
   // match day
   fixtures(t) { const o = O(1, 0.04); for (let i = 0; i < 10; i++) tap(o, t + i * 0.04, 0.07, 300 - i * 8); },
   kickoff(t) { pea(soft(O(0.55, 0.2), 2800), t, 1); crowd(true); },
-  goal(t) { const o = O(1, 0.2); duck(t, 3); felt(o, t, 240, 0.35, 0.1); clip(o, "net_ripple", t + 0.1, { gain: 0.9 }); clip(o, "goal_roar", t + 0.35); },
-  conceded(t) { const o = O(1, 0.2); duck(t, 3); clip(o, "groan", t); clip(o, "boos", t + 0.9, { gain: 0.9, dur: 2.5 }); },
+  goal(t) { const o = O(1, 0.2); duck(t, 3); felt(o, t, 240, 0.35, 0.1); clip(o, "net_ripple", t + 0.1, { gain: 0.9 }); react(clip(o, "goal_roar", t + 0.35)); },
+  conceded(t) { const o = O(1, 0.2); duck(t, 3); react(clip(o, "groan", t)); react(clip(o, "boos", t + 0.9, { gain: 0.9, dur: 2.5 })); },
   halftime(t) { clip(O(1, 0.15), "whistle_two", t); },
-  fulltime(t) { clip(O(1, 0.15), "whistle_three", t); },
+  // the final whistle fades out any goal reaction still going (Craig, 14 Oct: a late goal's boos carried over the win's cheer)
+  fulltime(t) { hush(0.5); clip(O(1, 0.15), "whistle_three", t); },
   skip(t) { const o = O(1, 0.06); let x = 0; for (let i = 0; i < 14; i++) { tap(o, t + x, 0.06, 220 + i * 8); x += 0.06 * Math.pow(0.86, i); } swish(soft(o, 1800), t + x - 0.1, 0.3, 500, 1800, 0.08); },
   result(t, v = 0) { const o = O(1, 0.2); if (v === 0) { clip(o, "cheer_short", t, { gain: 0.9 }); clip(o, "applause", t + 0.6, { gain: 0.8 }); } else if (v === 1) clip(o, "applause", t, { gain: 0.8, dur: 2 }); else clip(o, "crowd_moan", t); },
   tableMove(t, v = 2) { const o = O(1, 0.06); if (v === 2) return tap(o, t, 0.07); v === 0 ? swish(soft(o, 1800), t, 0.25, 500, 1800, 0.1) : swish(soft(o, 1800), t, 0.25, 1800, 400, 0.1); tap(o, t + 0.25, 0.06); },
@@ -274,6 +275,10 @@ const CUES = {
 // names the screens already used, kept so nothing breaks
 const ALIAS = { roll3: "spinStart", lockin: "clubConfirm", pick: "cardSelect", reveal: "clubReveal", subIn: "cardDrop", subOut: "dropCancel", buzzer: "denied", climb: "riseCount" };
 
+// the crowd's reactions to goals, kept so the final whistle can fade out any still going before the result
+let reactions = [];
+function react(c) { if (c) { reactions.push(c); if (reactions.length > 8) reactions.shift(); } return c; }
+function hush(fade = 0.5) { for (const c of reactions) c.stop(fade); reactions = []; }
 function play(id, arg, at = 0) {
   if (!ok()) return;
   const name = ALIAS[id] || id, fn = CUES[name]; if (!fn) return;

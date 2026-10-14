@@ -261,7 +261,7 @@
 .se-fx-sc i { width: 8px; height: 3px; border-radius: 2px; background: var(--muted); }
 /* a dot per player signed from a club this season, in your club's colour, at the far edge of its side (Craig, 14 Oct) */
 .se-fx-res { position: relative; }
-.se-fx-res .se-fx-dots { position: absolute; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 3px; }
+.se-fx-res .se-fx-dots { position: absolute; top: 50%; transform: translateY(-50%); display: flex; flex-direction: row; gap: 3px; }
 .se-fx-res .se-fx-dots.se-h { left: 4px; }
 .se-fx-res .se-fx-dots.se-a { right: 4px; }
 .se-fx-dots i { display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--se-acc); }
