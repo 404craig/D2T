@@ -250,7 +250,7 @@
 .se-tr.se-landed .se-mv { color: var(--se-ink); }
 .se-aftertable .se-gw { font-size: 30px; }
 /* the results screen (Craig, 14 Oct): your match card carries the score, the scorers and the result chip; the other
-   scores sit in the fixtures' rows with the score in the middle; a raided club's row (it dropped points) is marked */
+   scores sit in the fixtures' rows with the score in the middle */
 .se-results .se-gw { font-size: 30px; }
 .se-myfx-score { display: flex; align-items: center; justify-content: center; gap: 8px; font: var(--display); font-size: 44px; font-variant-numeric: tabular-nums; }
 .se-myfx-score i { width: 12px; height: 4px; border-radius: 2px; background: var(--white); opacity: .6; }
@@ -259,7 +259,14 @@
 .se-fx-res { grid-template-columns: 1fr 58px 1fr; }
 .se-fx-sc { display: flex; align-items: center; justify-content: center; gap: 5px; font: var(--display); font-size: 18px; font-variant-numeric: tabular-nums; }
 .se-fx-sc i { width: 8px; height: 3px; border-radius: 2px; background: var(--muted); }
-.se-fx-raided { border-color: var(--se-acc-b); }
+/* a dot per player signed from a club this season, in your club's colour, at the far edge of its side (Craig, 14 Oct) */
+.se-fx-res { position: relative; }
+.se-fx-res .se-fx-dots { position: absolute; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 3px; }
+.se-fx-res .se-fx-dots.se-h { left: 4px; }
+.se-fx-res .se-fx-dots.se-a { right: 4px; }
+.se-fx-dots i { display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--se-acc); }
+.se-fx-key { display: flex; align-items: center; gap: 6px; }
+.se-fx-key .se-fx-dots { display: inline-flex; flex-shrink: 0; }
 .se-fs-score { font-size: 76px; gap: 10px; }
 .se-fs-team b { font-size: 15px; white-space: normal; line-height: 1; overflow-wrap: anywhere; text-align: center; }
 .se-sb-team b { font-size: 15px; white-space: normal; line-height: 1; text-align: center; }

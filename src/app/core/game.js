@@ -500,6 +500,13 @@
     return E.otherResults(S, eng).filter((m) => m.h !== me && m.a !== me && m.date > prev && m.date < next && Math.abs(day(m.date) - at) <= 3)
       .map((m) => ({ date: m.date, home: S.clubs[m.h].name, away: S.clubs[m.a].name, hg: m.hg, ag: m.ag, changed: !!m.changed }));
   };
+  // Players you have signed from each club this season, by club name (Craig, 14 Oct: dots on the results rows). A Club X
+  // career's later seasons leave out the XI carried in from last season (gw 0), so only this season's signings count.
+  GAME.signedFrom = () => {
+    const S = GAME.S(), eng = GAME.eng(), out = {};
+    for (const r of eng.raids || []) { if (eng.career > 1 && !r.gw) continue; const c = S.clubs[r.club]; if (c) out[c.name] = (out[c.name] || 0) + 1; }
+    return out;
+  };
   GAME.result = (gw) => {
     const eng = GAME.eng(), S = GAME.S(), r = eng.played[gw - 1]; if (!r) return null;
     const oppName = S.clubs[r.opp].name;

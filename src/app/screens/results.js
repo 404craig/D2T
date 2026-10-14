@@ -25,7 +25,9 @@
       const others = GAME.gwResults(gw), byDate = [];
       others.forEach((f) => { let g = byDate.find((x) => x.date === f.date); if (!g) byDate.push(g = { date: f.date, list: [] }); g.list.push(f); });
       byDate.sort((a, b) => a.date.localeCompare(b.date));
-      const raided = others.some((f) => f.changed);
+      // a dot for every player you signed from a club this season, at the far left for the home side, far right for the away
+      const from = GAME.signedFrom(), dots = (name, cls) => from[name] ? `<span class="se-fx-dots ${cls}" aria-label="${from[name]} signed from ${D2T.esc(name)}">${'<i></i>'.repeat(from[name])}</span>` : '';
+      const anyDots = others.some((f) => from[f.home] || from[f.away]);
       const body = D2T.h(`<div class="screen-body se-fixtures se-results">
         <div class="se-kicker">Premier League ${data.season}</div>
         <h1 class="se-h1 se-gw">Gameweek ${gw} results</h1>
@@ -39,9 +41,10 @@
           ${SE.scorers(home ? mine : theirs, home ? theirs : mine)}
           <div class="se-myfx-foot"><span class="se-result se-res-${res}">${res === 'win' ? 'Win' : res === 'draw' ? 'Draw' : 'Defeat'} · ${res === 'win' ? '+3 points' : res === 'draw' ? '+1 point' : '0 points'}</span></div>
         </div>
-        ${byDate.length ? byDate.map((g, gi) => `<div class="se-fx-date">${SE.date(g.date)}</div><div class="se-fx-list">${g.list.map((f, i) => `<div class="se-fx se-fx-res${f.changed ? ' se-fx-raided' : ''}" style="--d:${120 + (gi * 4 + i) * 45}ms">${side(SE.club(data, f.home), 'se-h')}<span class="se-fx-sc">${f.hg}<i></i>${f.ag}</span>${side(SE.club(data, f.away), 'se-a')}</div>`).join('')}</div>`).join('')
+        ${byDate.length ? byDate.map((g, gi) => `<div class="se-fx-date">${SE.date(g.date)}</div><div class="se-fx-list">${g.list.map((f, i) => `<div class="se-fx se-fx-res" style="--d:${120 + (gi * 4 + i) * 45}ms">${dots(f.home, 'se-h')}${dots(f.away, 'se-a')}${side(SE.club(data, f.home), 'se-h')}<span class="se-fx-sc">${f.hg}<i></i>${f.ag}</span>${side(SE.club(data, f.away), 'se-a')}</div>`).join('')}</div>`).join('')
           : `<p class="se-note">No other matches around this date.</p>`}
-        <p class="se-note">${GAME.isSim() ? `Other clubs' results are the ${data.season} forecast, played out by the match model.` : `Other clubs' results are their real ${data.season} results.`}${raided ? ' Clubs you have signed players from are weaker, and dropped points here.' : ''}</p>
+        <p class="se-note">${GAME.isSim() ? `Other clubs' results are the ${data.season} forecast, played out by the match model.` : `Other clubs' results are their real ${data.season} results.`}${anyDots ? ' Clubs you sign players from are weaker and can drop points.' : ''}</p>
+        ${anyDots ? `<p class="se-note se-fx-key"><span class="se-fx-dots"><i></i></span> = a player you signed from that club</p>` : ''}
         <div class="se-pad"></div>
       </div>`);
       // home (the menu), back to the match as it finished, League table across the right (Craig, 14 Oct)
