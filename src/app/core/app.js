@@ -105,6 +105,7 @@
     const d = D2T.run(), c = d && d.club;
     return ['Classic', c ? (c.text || c.accent) : '#12F06C'];
   };
+  D2T.modeWord = modeWord;
   D2T.topbar = (opts = {}) => {
     const mw = opts.back || opts.mode === false ? null : (opts.mode || modeWord());
     const tag = mw ? `<span class="mode-tag" style="--c:${mw[1]}"><span>${D2T.esc(mw[0])}</span></span>` : '';

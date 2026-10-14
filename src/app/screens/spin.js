@@ -101,11 +101,12 @@
   //        caption(item), details(item) -> html, mainLabel, selectedLabel(item), onConfirm(item), respins (number or null),
   //        onRespinsChange(n), pass: {label, onPass}, placeholder() -> html,
   //        rare(item) -> true for a card that gets the rare reveal (screens/reveal.js; the player rolls only),
-  //        onCommit(items): a reveal is coming, so the roll counts as spun now (a refresh mid-reveal shows it settled) }
+  //        onCommit(items): a reveal is coming, so the roll counts as spun now (a refresh mid-reveal shows it settled),
+  //        headTop / headBanner: optional html above the kicker and under the title, headCls / headStyle: a class and inline style on the header }
   function mount(root, cfg) {
     const reduced = D2T.reduced(), SND = window.D2TSound || { play() {}, tick() {}, tease() {} };
     const el = D2T.h(`<div class="sp-screen">
-      <div class="sp-head"><span class="sp-kicker">${cfg.kicker || ''}</span><h1 class="sp-title">${cfg.title}</h1><p class="sp-sub">${cfg.sub || ''}</p></div>
+      <div class="sp-head${cfg.headCls ? ' ' + cfg.headCls : ''}"${cfg.headStyle ? ` style="${cfg.headStyle}"` : ''}>${cfg.headTop || ''}<span class="sp-kicker">${cfg.kicker || ''}</span><h1 class="sp-title">${cfg.title}</h1>${cfg.headBanner || ''}<p class="sp-sub">${cfg.sub || ''}</p></div>
       <div class="sp-stage"><div class="sp-floor"></div><div class="sp-row${cfg.count === 1 ? ' sp-one' : ''}">${'<div class="sp-slot"></div>'.repeat(cfg.count || 3)}</div></div>
       <div class="sp-hint"></div>
       <div class="sp-bar game-bar">

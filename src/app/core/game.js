@@ -460,6 +460,13 @@
     const name = !w ? 'Transfer window' : w.kind === 'pre' ? 'Summer transfer window' : w.kind === 'jan' ? 'January window' : 'Transfer window';
     return { name, step: eng.rollStep + 1, of: w ? w.n : 1, overall: done + 1, total, gw: eng.gw };
   };
+  // The season's transfer track (Craig, 14 Oct): one segment per roll, each with its window's kind ('pre' for the
+  // Summer window, 'jan' for January, 'reg' otherwise) and whether it is done, the current roll or still to come.
+  GAME.rollTrack = () => {
+    const eng = GAME.eng(), cur = GAME.windowInfo().overall - 1, out = [];
+    eng.rolls.forEach((w) => { for (let k = 0; k < w.n; k++) { const i = out.length; out.push({ kind: w.kind || 'reg', state: i < cur ? 'done' : i === cur ? 'current' : 'todo' }); } });
+    return out;
+  };
   GAME.preview = (cardId) => E.signPreview(GAME.eng(), GAME.S(), cardId);
   GAME.bestSlot = (cardId) => { let b = 0, bd = -1e9; GAME.preview(cardId).forEach((o) => { if (o.delta > bd) { bd = o.delta; b = o.slot; } }); return b; };
   // Sign a rolled player into a shirt: the player there leaves for good.
