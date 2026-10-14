@@ -41,11 +41,13 @@
           : ''}
         <div class="se-pad"></div>
       </div>`);
-      // home, back to the squad, Play match (Craig, 13 Oct)
-      const bar = D2T.h(SE.bar({ mid: SE.backBtn('Back to squad'), main: SE.mainBtn('Play match') }));
+      // home, back to the squad (to rearrange or change shape), Kick off (Craig, 14 Oct): the match is decided in the
+      // engine here and now (GAME.play), then the match screen plays it out; the preview screen is gone
+      const bar = D2T.h(SE.bar({ mid: SE.backBtn('Back to squad'), main: SE.mainBtn('Kick off', 'se-main') }));
       root.append(body, bar);
-      bar.querySelector('.se-back').onclick = () => D2T.go('squad');
-      bar.querySelector('.bar-main').onclick = () => { st.step = 'match'; D2T.save(); D2T.go('match'); };
+      bar.querySelector('.se-back').onclick = () => { st.step = 'squad'; D2T.save(); D2T.go('squad'); };
+      let kicked = false;
+      bar.querySelector('.bar-main').onclick = () => { if (kicked) return; kicked = true; if (!D2T.game.play()) { D2T.go(D2T.game.stepFor() || 'home'); return; } D2T.go('match'); };
     }
   });
 })();
