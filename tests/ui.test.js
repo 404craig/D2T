@@ -218,7 +218,9 @@ fs.mkdirSync(OUT, { recursive: true });
   check((await page.textContent(".se-main")).trim() === "See results", "back from the results should show the settled match");
   await page.click(".se-main"); await expectScreen("results"); await wait(400);
   await page.click(".actionbar .bar-main"); await expectScreen("standings"); await wait(1800); await shot("15b-standings"); await barOrder("standings");
-  check((await page.$$(".se-aftertable .se-tr:not(.se-th)")).length === 20, "the table after the gameweek has no 20 rows");
+  // the season's own club count: 22 up to 1994/95, and the club-season is random now
+  const nClubs = await page.evaluate(() => window.D2T.game.S().clubs.length), nRows = (await page.$$(".se-aftertable .se-tr:not(.se-th)")).length;
+  check(nRows === nClubs, "the table after the gameweek has " + nRows + " rows, not " + nClubs);
   await page.click(".actionbar .bar-main"); await wait(800);
   const after = await screen();
   check(["fixtures", "transfer"].includes(after), "after GW1 expected fixtures or transfer, got " + after);
