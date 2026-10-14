@@ -288,6 +288,8 @@
 .fr-dtiles { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
 .fr-dtile { border-radius: 12px; background: #0E0E10; border: 1px solid #26262C; padding: 7px 10px; display: flex; flex-direction: column; gap: 3px; min-width: 0; color: #fff; }
 .fr-dtile.is-best { border-color: rgba(18,240,108,.6); }
+button.fr-dtile { font: inherit; text-align: left; cursor: pointer; min-height: 44px; -webkit-tap-highlight-color: transparent; }
+button.fr-dtile:active { transform: scale(.98); }
 .fr-dtile i { font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: .12em; color: #8E8E99; }
 .fr-dtile b { font: 900 italic 17px/1 'Exo 2', sans-serif; display: flex; align-items: center; gap: 5px; white-space: nowrap; overflow: hidden; }
 .fr-dtile b img { width: 18px; height: 18px; object-fit: contain; flex: none; }

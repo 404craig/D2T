@@ -581,7 +581,7 @@
       rec.daily = rec.daily || {};
       // the day's best go counts (biggest rise, then higher finish); goes counts them all
       const was = rec.daily[run.daily], goes = (was && was.goes || (was ? 1 : 0)) + 1;
-      if (!was || F.rise > was.rise || (F.rise === was.rise && F.finish < was.finish)) rec.daily[run.daily] = { n: GAME.dailyNumber(run.daily), club: name, season: S.season, mode, finish: F.finish, histFinish: F.histFinish, rise: F.rise, pts: F.pts, dream: entry.dream, goes };
+      if (!was || F.rise > was.rise || (F.rise === was.rise && F.finish < was.finish)) rec.daily[run.daily] = { n: GAME.dailyNumber(run.daily), club: name, season: S.season, mode, finish: F.finish, histFinish: F.histFinish, rise: F.rise, pts: F.pts, histPts: F.histPts, dream: entry.dream, goes };
       else was.goes = goes;
     }
     rec.runs.push(entry);
