@@ -1,0 +1,77 @@
+<title>Goal Rush Result</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;1,800;1,900&display=swap">
+<style>
+/* Three ways to show your total against the target on Goal Rush's end slide-up, each in three results: over, short, exact.
+   Dark only, as the game. */
+:root { color-scheme: dark; --bg:#000; --sheet:#121214; --line:#26262C; --mut:#8E8E99; --soft:#CFCFD6; --y:#FFD21F; --o:#FF8A1F; --r:#FF4D2E; --gold:#FFC83D; --g:#12F06C; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:#fff; font:15px/1.5 'Exo 2', Arial, sans-serif; }
+.page { max-width:1320px; margin:0 auto; padding-inline:16px; padding-block:32px 72px; display:flex; flex-direction:column; gap:26px; }
+h1 { font:900 italic 34px/1 'Exo 2'; text-transform:uppercase; margin:0 0 8px; }
+.lead { color:#BDBDC6; margin:0; max-width:90ch; }
+.opt { margin-top:14px; }
+.opt h2 { font:900 italic 22px/1.1 'Exo 2'; text-transform:uppercase; margin:0 0 4px; }
+.opt p { color:var(--mut); margin:0 0 12px; max-width:90ch; }
+.row { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+@media (max-width:900px) { .row { grid-template-columns:minmax(0,1fr); max-width:400px; } }
+.state { font-size:11px; font-weight:800; letter-spacing:.14em; color:var(--mut); margin-bottom:6px; }
+.sh { background:var(--sheet); border-radius:24px; padding:12px 18px 18px; box-shadow:0 0 0 1px #1E1E22; }
+.grab { width:44px; height:5px; border-radius:3px; background:#3A3A44; margin:0 auto 12px; }
+.sh h3 { font:900 italic 24px/1.05 'Exo 2'; margin:0 0 12px; }
+.q { color:var(--soft); font-size:14px; margin:12px 0 4px; text-align:center; }
+.btn { height:44px; border-radius:22px; display:grid; place-items:center; font-weight:800; font-size:14px; margin-top:8px; border:1px solid var(--line); }
+.btn.p { background:var(--y); color:#1a1400; border-color:var(--y); font:900 italic 16px/1 'Exo 2'; }
+.best { display:inline-flex; gap:6px; align-items:center; font-size:12px; font-weight:800; padding:3px 9px; border-radius:99px; background:rgba(18,240,108,.12); color:var(--g); }
+/* A: scoreboard */
+.sb { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:8px; text-align:center; }
+.sb b { display:block; font:900 italic 46px/1 'Exo 2'; }
+.sb small { font-size:10.5px; font-weight:800; letter-spacing:.14em; color:var(--mut); }
+.sb .mid { font:900 italic 13px/1 'Exo 2'; color:var(--mut); }
+.chip { display:block; width:max-content; margin:12px auto 0; font:900 italic 18px/1 'Exo 2'; text-transform:uppercase; padding:7px 14px 6px; border-radius:6px; transform:skewX(-10deg); }
+.chip span { display:inline-block; transform:skewX(10deg); }
+.c-over { background:var(--r); color:#fff; } .c-short { background:var(--y); color:#1a1400; } .c-exact { background:var(--gold); color:#1a1000; box-shadow:0 0 18px rgba(255,200,61,.6); }
+/* B: the target bar */
+.tb { position:relative; margin:26px 2px 6px; }
+.tb .track { height:12px; border-radius:6px; background:#26262C; position:relative; }
+.tb .fill { position:absolute; left:0; top:0; bottom:0; border-radius:6px; background:linear-gradient(90deg, var(--y) 0%, var(--y) 50%, #FFB000 65%, var(--o) 82%, var(--r) 100%) no-repeat; }
+.tb .ovr { position:absolute; top:0; bottom:0; border-radius:0 6px 6px 0; background:repeating-linear-gradient(135deg, #FF3B3B 0 4px, #B3222B 4px 8px); }
+.tb .goal { position:absolute; top:-8px; bottom:-8px; width:2px; background:#fff; }
+.tb .goal i { position:absolute; bottom:calc(100% + 2px); left:50%; transform:translateX(-50%); font:900 italic 12px/1 'Exo 2'; color:#fff; white-space:nowrap; font-style:normal; }
+.tb .you { position:absolute; top:calc(100% + 10px); transform:translateX(-50%); font:900 italic 20px/1 'Exo 2'; white-space:nowrap; }
+.tb .you::before { content:""; position:absolute; left:50%; top:-8px; transform:translateX(-50%); border:5px solid transparent; border-bottom-color:currentColor; border-top:0; }
+.gap { text-align:center; margin-top:40px; font:900 italic 30px/1 'Exo 2'; text-transform:uppercase; }
+.gap small { display:block; font:800 11px/1.4 'Exo 2'; letter-spacing:.14em; color:var(--mut); margin-top:4px; }
+/* C: one big number, like Unbeaten Run */
+.bigc { text-align:center; }
+.bigc .n { font:900 italic 80px/1 'Exo 2'; text-shadow:0 0 30px rgba(255,210,31,.3); }
+.bigc .n.over { color:var(--r); text-shadow:0 0 30px rgba(255,77,46,.35); } .bigc .n.short { color:var(--y); } .bigc .n.exact { color:var(--gold); text-shadow:0 0 34px rgba(255,200,61,.6); }
+.bigc .lab { font:900 italic 15px/1 'Exo 2'; letter-spacing:.06em; color:#BDBDC6; text-transform:uppercase; margin-top:4px; }
+.bigc .sum { margin-top:12px; font-size:14.5px; color:var(--soft); }
+.bigc .sum b { color:#fff; }
+.notes { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; }
+.note { background:#0E0E10; border:1px solid var(--line); border-radius:14px; padding:14px 16px; font-size:14px; color:var(--soft); }
+.note b { display:block; color:var(--g); font-size:11px; letter-spacing:.12em; margin-bottom:4px; }
+</style>
+<div class="page">
+  <div><h1>Goal Rush: the result</h1><p class="lead">Three ways to show your XI's total against the target on the end slide-up, each in the three results: over, short, and exactly on it. Today it says "4 over 352" with the total in a sentence underneath. The best-run pill, buttons and order stay as they are.</p></div>
+  <div id="opts"></div>
+  <div class="notes">
+    <div class="note"><b>MY PICK</b>C. One big number, how far off you were, reads instantly. It matches the Unbeaten Run slide-up, and the colour does the work: red over, yellow short, gold glowing when it's exact. The total against the target sits right under it, so nothing is lost.</div>
+    <div class="note"><b>B IF YOU WANT THE PICTURE</b>The same bar as the game, with the target flag and your total marked on it. You see at a glance whether you overshot or fell short, but it takes more room.</div>
+  </div>
+</div>
+<script>
+const S = [{ k:'over', v:356, t:352, best:'A new best' }, { k:'short', v:331, t:352, best:'' }, { k:'exact', v:352, t:352, best:'A new best' }];
+const gapTxt = (s) => s.v === s.t ? 'Spot on' : s.v > s.t ? `${s.v - s.t} over` : `${s.t - s.v} short`;
+const title = (s) => s.v === s.t ? 'Exactly 352' : s.v > s.t ? 'Overshot' : 'Fell short';
+const tail = (s) => `<div class="q">${s.best ? `<span class="best">&#9733; ${s.best}</span>` : ''}</div><div class="btn">Share with your mates</div><div class="btn p">Play again</div><div class="btn">Home</div>`;
+const A = (s) => `<h3>${title(s)}</h3><div class="sb"><div><b style="color:${s.k === 'over' ? 'var(--r)' : s.k === 'exact' ? 'var(--gold)' : 'var(--y)'}">${s.v}</b><small>YOUR XI</small></div><span class="mid">VS</span><div><b>${s.t}</b><small>TARGET</small></div></div><span class="chip c-${s.k}"><span>${gapTxt(s)}</span></span>${tail(s)}`;
+const B = (s) => { const max = Math.max(s.v, s.t) * 1.04, pv = Math.min(s.v, s.t) / max * 100, pt = s.t / max * 100, po = s.v > s.t ? (s.v - s.t) / max * 100 : 0, px = s.v / max * 100;
+  const col = s.k === 'over' ? 'var(--r)' : s.k === 'exact' ? 'var(--gold)' : 'var(--y)';
+  return `<h3>${title(s)}</h3><div class="tb"><div class="track"><div class="fill" style="width:${pv}%;background-size:${100 / (pv / pt)}% 100%"></div>${po ? `<div class="ovr" style="left:${pt}%;width:${po}%"></div>` : ''}</div><div class="goal" style="left:${pt}%"><i>${s.t}</i></div><span class="you" style="left:${px}%;color:${col}">${s.v}</span></div><div class="gap" style="color:${col}">${gapTxt(s)}<small>YOUR XI ${s.v} · TARGET ${s.t}</small></div>${tail(s)}`; };
+const C = (s) => `<h3>${title(s)}</h3><div class="bigc"><div class="n ${s.k}">${s.v === s.t ? '0' : Math.abs(s.v - s.t)}</div><div class="lab">${s.v === s.t ? 'Goals off · perfect' : s.v > s.t ? 'Goals over' : 'Goals short'}</div><div class="sum">Your XI scored <b>${s.v}</b> of <b>${s.t}</b>.</div></div>${tail(s)}`;
+const O = [['A', 'Scoreboard', 'Your total against the target like a score, the gap in a slanted tag under it in red, yellow or glowing gold.', A],
+  ['B', 'The target bar', 'The game’s own bar, with a flag at the target and your total marked under it. The striped red bit is how far you overshot. The gap is spelt out underneath.', B],
+  ['C', 'One big number', 'How far off you were, big, in the Unbeaten Run style: red over, yellow short, glowing gold when it’s exact. Your total against the target sits under it.', C]];
+document.getElementById('opts').innerHTML = O.map(([l, h, d, f]) => `<section class="opt"><h2>${l}. ${h}</h2><p>${d}</p><div class="row">${S.map((s) => `<div><div class="state">${s.k === 'over' ? 'OVER' : s.k === 'short' ? 'SHORT' : 'EXACT'}</div><div class="sh"><div class="grab"></div>${f(s)}</div></div>`).join('')}</div></section>`).join('');
+</script>
