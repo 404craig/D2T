@@ -1,6 +1,6 @@
 # DROP2TOP: notes for Claude Code
 
-A mobile web football game. The page is built: edit `src/` and `data/`, then run `python3 scripts/build-data.py` (if data changed) and `python3 scripts/build.py`. Never edit `index.html` by hand. Bump `version.txt` for every change people will notice; Home Screen copies compare `version.txt` with `D2T_BUILD` and reload themselves (only on screens where nothing is lost).
+A mobile web football game. The page is built: edit `src/` and `data/`, then run `python3 scripts/build-data.py` (if data changed) and `python3 scripts/build.py`. Never edit `index.html` by hand. Bump `version.txt` for every change people will notice; Home Screen copies compare `version.txt` with `D2T_BUILD` and reload themselves (only on screens where nothing is lost), once per build (`sessionStorage` `d2t-reloaded`) to `?v=<build>` past the cache, so a host still serving the old page for a few minutes after a release can never loop the intro (14 Oct; Safari was stuck reloading).
 
 ## Rules set by Craig (keep these)
 
