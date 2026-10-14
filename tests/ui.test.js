@@ -126,13 +126,15 @@ fs.mkdirSync(OUT, { recursive: true });
     const before = await page.evaluate(() => window.D2T.game.eng().signed.length);
     // the last roll carries a legend in the middle (the roll's own cards, swapped in the engine state for the test):
     // his reel never lands on its own, the reveal plays over the screen, then he drops into his slot (Craig, 13 Oct)
-    if (r === 2) await page.evaluate(() => { const G = window.D2T.game, e = G.eng(), used = new Set([...e.seen, ...e.roll.cards, ...e.xi]); e.roll.cards[1] = G.legends.find((l) => !used.has(l.id)).id; });
+    // the other two slots are made plain cards too, so a purple drawn by the seed can't add a second reveal
+    if (r === 2) await page.evaluate(() => { const G = window.D2T.game, S = G.S(), e = G.eng(), used = new Set([...e.seen, ...e.roll.cards, ...e.xi]); e.roll.cards[1] = G.legends.find((l) => !used.has(l.id)).id; for (const i of [0, 2]) { if (!/purple|legend/.test(G.card(S, e.roll.cards[i]).level)) continue; const p = S.players.find((q) => !used.has(q.id) && !/purple|legend/.test(G.card(S, q.id).level)); used.add(p.id); e.roll.cards[i] = p.id; } });
     await page.click(".sp-main");
     if (r === 2) {
       check(!!(await page.waitForSelector(".rr-ov", { timeout: 6000 }).catch(() => null)), "no rare reveal for a legend in the roll");
       await wait(9000); await shot("10d-rare-reveal");
     }
     await page.waitForFunction(spunNow, null, { timeout: ROLL_MS });
+    if (r === 2) await page.waitForFunction(() => !document.querySelector(".rr-ov"), null, { timeout: 15000 }).catch(() => {});
     if (r === 2) check(await page.evaluate(() => !document.querySelector(".rr-ov") && document.querySelectorAll(".sp-slot")[1].querySelector(".sp-node.is-hit .d2c").dataset.level === "legend"), "the legend did not land in his slot after the reveal");
     if (r === 1) {
       // a finger on a card the instant the last reel lands, before the tray has dropped, must still pick him up
@@ -463,11 +465,13 @@ fs.mkdirSync(OUT, { recursive: true });
   check(!!(await page.$(".sm-daily .sm-dv")) && !!(await page.$('.end-sheet [data-k="share"]')), "the daily summary has no today-against-best panel or Share button");
   check(/Go again/.test(await page.textContent('.end-sheet [data-k="again"]')) && !!(await page.$('.end-sheet [data-k="home"]')), "the Daily end sheet should offer Go again and Home");
   // as many goes as you like (Craig, 13 Oct): Go again starts a fresh go, and the day's best go stays recorded
+  const firstOffered = await page.evaluate(() => window.D2T.game.eng().offered.slice());
   await page.click('.end-sheet [data-k="again"]'); await expectScreen("table"); await wait(600);
   check(await page.evaluate(() => { const G = window.D2T.game, r = window.D2T.state.run; return !!G.dailyResult() && r.daily === G.today() && !r.recorded && G.eng().phase !== "summary"; }), "Go again did not start a fresh go at today's Daily");
   // every go has a random seed of its own, so the second go never replays the first, and the first go's cards are remembered so they come up less
   check(await page.evaluate((s1) => { const G = window.D2T.game, r = window.D2T.state.run, t = G.today(); return r.eng.seed !== s1 && r.eng.seed.startsWith("daily-" + t + "-r") && !window.D2T.state.dailyGoes; }, dailySeed1), "the second go of the Daily did not get its own random seed");
-  check(await page.evaluate(() => { const G = window.D2T.game, S = G.S(), e = G.eng(), key = S.season + ":" + S.clubs[e.club].name, rec = (window.D2T.state.recent || {})[key]; return !!(rec && rec.length === 1 && rec[0].length >= 40 && e.recent && rec[0].every((id) => e.recent[id] === window.D2TE.RULES.recent[0])); }), "the first go's cards were not remembered as recent for the second go");
+  // compared with the first go's own cards, so an earlier run of the same club-season (random seeds) can't upset it
+  check(await page.evaluate((first) => { const G = window.D2T.game, S = G.S(), e = G.eng(), key = S.season + ":" + S.clubs[e.club].name, rec = (window.D2T.state.recent || {})[key]; return !!(first.length && rec && rec[0] && rec[0].length === first.length && first.every((id) => rec[0].includes(id)) && e.recent && first.every((id) => e.recent[id] === window.D2TE.RULES.recent[0])); }, firstOffered), "the first go's cards were not remembered as recent for the second go");
   await page.evaluate(() => window.D2T.go("home")); await expectScreen("home"); await wait(800);
   check(/Your best today/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not show today's best go");
   check(/TODAY'S DAILY/.test(await page.textContent(".fr-dtiles")) && (await page.$$(".fr-dtile")).length === 2, "home has no best and today tiles under the daily card");
@@ -572,7 +576,10 @@ fs.mkdirSync(OUT, { recursive: true });
   check(!!(await page.$(".ub-spin")) && /Higher or lower/i.test(await page.textContent(".ub-title")) && /New run/.test(await page.textContent(".ub-spin")) && (await page.$$(".ub-grid .ub-fr")).length === 9, "Unbeaten Run: the start page is not Higher or lower with nine best runs and New run");
   for (const st of ["pts", "cg"]) {
     await page.evaluate((st) => { window.D2T_UB_STAT = st; }, st);
-    await page.click(".ub-spin"); await wait(6500);
+    await page.click(".ub-spin");
+    // wait until both cards have landed and the answers are live, not a fixed time (the reels' length varies)
+    await page.waitForFunction(() => { const l = document.querySelector(".ub-l .sp-node.is-hit .ub-num"), r = document.querySelector(".ub-r .sp-node.is-hit .ub-num"); return l && /^\d+$/.test(l.textContent) && r && r.textContent === "?" && document.querySelectorAll(".ub-ans:not([disabled])").length === 2; }, null, { timeout: 15000 }).catch(() => {});
+    await wait(300);
     const got = await page.evaluate(() => { const l = document.querySelector(".ub-l .sp-node.is-hit .ub-num"), r = document.querySelector(".ub-r .sp-node.is-hit .ub-num"); return { l: l && l.textContent, r: r && r.textContent, title: document.querySelector(".ub-title").textContent, club: !!document.querySelector(".ub-l .ub-cc"), shirt: !!document.querySelector(".ub-l .ub-shirt"), crest: !!document.querySelector(".ub-l .ub-crest, .ub-l .ub-cc-crest"), btn: document.querySelectorAll(".ub-ans:not([disabled])").length }; });
     check(got.l && /^\d+$/.test(got.l) && got.r === "?" && got.btn === 2, "Unbeaten Run (" + st + "): the cards did not land with a number on the left and ? on the right");
     check(st === "pts" ? got.club && /Points in a season/i.test(got.title) : got.shirt && /Career goals/i.test(got.title), "Unbeaten Run (" + st + "): wrong card type or stat");
@@ -595,7 +602,10 @@ fs.mkdirSync(OUT, { recursive: true });
       await page.click(".ub-bar .is-home"); await wait(500);
       await page.click('.sheet [data-k="restart"]'); await wait(800);
       check(!!(await page.$(".ub-spin")) && await page.evaluate((n) => ((window.D2T.state.ub || {}).runs || 0) === n, runsBefore), "Unbeaten Run (" + st + "): Restart did not go back to the stat spin, or recorded a run");
-      await page.click(".ub-spin"); await wait(6500);
+      await page.click(".ub-spin");
+    // wait until both cards have landed and the answers are live, not a fixed time (the reels' length varies)
+    await page.waitForFunction(() => { const l = document.querySelector(".ub-l .sp-node.is-hit .ub-num"), r = document.querySelector(".ub-r .sp-node.is-hit .ub-num"); return l && /^\d+$/.test(l.textContent) && r && r.textContent === "?" && document.querySelectorAll(".ub-ans:not([disabled])").length === 2; }, null, { timeout: 15000 }).catch(() => {});
+    await wait(300);
       // Home keeps the run (Craig, 13 Oct): back from home it picks up where it was, the same cards and streak
       const kept = await page.evaluate(() => ({ l: document.querySelector(".ub-l .sp-node.is-hit").innerHTML, n: document.querySelector(".ub-n").textContent }));
       await page.click(".ub-bar .is-home"); await wait(500);
