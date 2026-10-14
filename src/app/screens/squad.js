@@ -383,7 +383,8 @@
           const rv = D2T.h(`<div class="se-pc-rival" style="left:${cx}px;top:${cy}px">${x.crest ? `<img src="${x.crest}" alt="">` : ''}</div>`);
           fxl.appendChild(rv);
           SND.play('dropCancel');
-          timers.push(setTimeout(() => alive && SND.play('land'), 380));
+          // his headline replaces the last one as the crest lands (Craig, 14 Oct)
+          timers.push(setTimeout(() => { if (!alive) return; SND.play('land'); ticker.add(x); }, 380));
           await anim(rv, [{ transform: 'translateY(-260px) scale(.6)', opacity: 0 }, { transform: 'translateY(8px) scale(1.05)', opacity: 1, offset: 0.75 }, { transform: 'none', opacity: 1 }], { duration: 500, easing: 'cubic-bezier(.3,1.3,.5,1)' });
           if (!alive) return;
           // 2. a line shoots down to the card
@@ -397,10 +398,9 @@
           fxl.appendChild(clone); w.style.visibility = 'hidden';
           await anim(clone, [{ transform: 'none' }, { transform: 'rotate(-6deg)', offset: 0.3 }, { transform: 'rotate(5deg)', offset: 0.6 }, { transform: 'none' }], { duration: 380 });
           if (!alive) return;
-          // 4. reeled up into the crest; his headline joins the ticker
+          // 4. reeled up into the crest
           SND.play('playerOut');
           anim(th, [{ transform: 'scaleY(1)' }, { transform: 'scaleY(0)' }], { duration: 380, easing: 'ease-in' });
-          ticker.add(x);
           await anim(clone, [{ transform: 'none', opacity: 1 }, { transform: `translateY(${cy - cyCard}px) scale(.3)`, opacity: 0 }], { duration: 420, easing: 'cubic-bezier(.6,0,.9,.4)' });
           if (!alive) return;
           th.remove(); clone.remove();
