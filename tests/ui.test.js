@@ -237,7 +237,7 @@ fs.mkdirSync(OUT, { recursive: true });
   // gameweek 2 played live: Skip to end, then the finished match moves on to the results by itself (Craig, 14 Oct)
   if (after === "transfer") { await page.evaluate(() => { const G = window.D2T.game; while (G.eng().phase === "window") G.pass(); window.D2T.go("fixtures"); }); await expectScreen("fixtures"); await wait(500); }
   await page.click(".actionbar .bar-main"); await expectScreen("match"); await wait(1200);
-  await page.click(".se-main"); await wait(600);
+  await page.click(".se-main"); await wait(150);
   check((await screen()) === "match" && (await page.textContent(".se-clock")).trim() === "FT", "Skip to end did not show full time first");
   await page.waitForFunction(() => window.D2T.currentScreen() === "results", null, { timeout: 6000 }).catch(() => {});
   check((await screen()) === "results", "the finished match did not move on to the results by itself, on " + (await screen()));
