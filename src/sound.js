@@ -152,6 +152,21 @@ function swish(d, t, dur, from, to, pk = 0.25, o = {}) {       // air: swells to
 const thump = (d, t, f0 = 170, f1 = 50, dur = 0.12, pk = 0.6) => osc(d, "sine", f0 * vr(0.02), t, dur, pk, { to: f1, a: 0.002 });
 const felt = (d, t, f = 220, pk = 0.4, dur = 0.09) => { const lp = soft(d, 900); osc(lp, "sine", f * vr(0.03), t, dur, pk, { to: f * 0.7, a: 0.004 }); nz(lp, t, 0.02, { type: "lowpass", f: 700, peak: pk * 0.25 }); };
 const tap = (d, t, pk = 0.1, f = 260) => { const lp = soft(d, 1100); nz(lp, t, 0.018, { type: "lowpass", f: 900, peak: pk }); osc(lp, "sine", f * vr(0.04), t, 0.03, pk * 0.8); };
+// a soft explosion (Craig, 14 Oct): a sub thump, a dark burst of air and a muffled crack, then a low rumble of tail
+// seconds that dies away; everything under 1.2 kHz so it is felt more than heard, never bright
+function boom(d, t, pk, tail) {
+  const lp = soft(d, 1200);
+  osc(lp, "sine", 110 * vr(0.03), t, 0.55, pk, { to: 32, glide: 0.5, a: 0.004 });
+  nz(lp, t, 0.4, { type: "lowpass", f: 900, f2: 140, peak: pk * 0.55 });
+  nz(lp, t, 0.035, { type: "lowpass", f: 1800, peak: pk * 0.22 });
+  if (tail > 0.3) {   // the rumble swells in and dies on a slow curve, so it is still there near the end of the tail
+    const g = ctx.createGain(), f = ctx.createBiquadFilter(), n = ctx.createBufferSource(), s = ctx.createOscillator(), sg = ctx.createGain(), end = t + tail + 0.3;
+    f.type = "lowpass"; f.frequency.setValueAtTime(260, t); f.frequency.exponentialRampToValueAtTime(70, end); n.buffer = noiseBuf; n.loop = true;
+    g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(pk * 0.9, t + 0.14); g.gain.setTargetAtTime(0.0001, t + 0.3, tail / 5);
+    s.frequency.setValueAtTime(46 * vr(0.04), t); s.frequency.exponentialRampToValueAtTime(30, end); sg.gain.value = 0.5;
+    n.connect(f); s.connect(sg); sg.connect(f); f.connect(g); g.connect(d); n.start(t, Math.random()); s.start(t); n.stop(end); s.stop(end);
+  }
+}
 function swell(d, t, dur) { swish(d, t, dur, 200, 3200, 0.16, { peakAt: 0.97 }); osc(soft(d, 2200), "triangle", D4, t, dur, 0.05, { to: D5, a: dur * 0.9 }); }
 function pea(d, t, blasts = 1, len1 = 0.32) { let st = t; for (let b = 0; b < blasts; b++) { const L = blasts === 3 && b === 2 ? len1 * 2.4 : len1;
   const s = ctx.createOscillator(); s.frequency.value = 2900 * vr(0.01); const l = ctx.createOscillator(); l.frequency.value = 38; const lg = ctx.createGain(); lg.gain.value = 230; l.connect(lg); lg.connect(s.frequency);
@@ -236,6 +251,10 @@ const CUES = {
   relegated(t) { const o = O(1, 0.2); clip(o, "stunned_silence", t); clip(o, "relegation_sting", t + 0.5, { gain: 0.9 }); clip(o, "boos", t + 2.8, { gain: 0.6 }); },
   share(t) { swish(soft(O(1, 0.1), 2000), t, 0.25, 500, 2000, 0.16); },
   // shared by the other games (Goal Rush, Unbeaten Run and anything new): the same soft family, nothing louder
+  // Club X's card smashing the real club's off the screen: a boom and a rumble fading over about 2 s
+  explode(t) { const o = O(1, 0.3); duck(t, 2.4, 0.4); boom(o, t, 0.22, 2.2); },
+  // Goal Rush, as a placed player's number finishes rolling up to his goals: the same boom, short and punchy, no rumble
+  explodeShort(t) { boom(O(1, 0.15), t, 0.2, 0.2); },
   land(t) { const o = O(1, 0.08); felt(o, t, 160, 0.4, 0.1); tap(o, t, 0.06, 230); },
   numberTick(t) { tap(O(1, 0.03), t, 0.045, 300); },
   correct(t) { const o = O(1, 0.12); felt(o, t, 180, 0.3, 0.08); osc(soft(o, 1100), "triangle", D4, t, 0.4, 0.04, { a: 0.02 }); },
