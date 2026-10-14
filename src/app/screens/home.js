@@ -93,7 +93,7 @@
   const UP = '<svg class="fr-up" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1 L11 8 H7.5 V11 H4.5 V8 H1 Z" fill="currentColor"/></svg>';
   function dailyCard() {
     const G = D2T.game, d = G.dailyEntry(G.today()), res = G.dailyResult(), streak = G.dailyStreak();
-    const sub = res ? `Your best today: ${D2T.ordinal(res.finish)}. Tap to go again and beat it.` : 'They went down for real. Can you keep them up?';
+    const sub = res ? `Your best today: ${D2T.ordinal(res.finish)}. Tap to go again and beat it.` : 'They went down for real. How high can you finish?';
     // white, the date in the top row, today's crest in full colour where the other games keep their mark
     const tag = G.dailyName(d.date, true).toUpperCase().replace('CHALLENGE ', 'CHALLENGE · ') + (streak ? ` · ${streak} DAY STREAK` : '');
     return gameCard({ c: '#FFFFFF', cls: 'fr-gm-daily', attrs: 'data-act="daily"', label: `${G.dailyName(d.date)}, ${D2T.esc(d.full || d.name)} ${d.season}`,
