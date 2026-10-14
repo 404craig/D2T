@@ -303,3 +303,25 @@ button.fr-dtile:active { transform: scale(.98); }
 .fr-gm.fr-locked .fr-gm-mark { opacity: .21; }
 .fr-cont.fr-locked { filter: saturate(.7) brightness(.85); padding-right: 54px; }
 .fr-tag-off { color: #8E8E99; }
+
+/* ---------- Club history (Craig, 14 Oct; history.js): a Club X career on one page ---------- */
+.hs { display: flex; flex-direction: column; gap: 18px; }
+.hs-club { display: flex; align-items: center; gap: 14px; margin-top: 6px; }
+.hs-club img { width: 60px; height: auto; flex-shrink: 0; }
+.hs-club .kick { font-size: 12px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #12F06C; }
+.hs-club .fr-title { margin: 4px 0 2px; overflow-wrap: anywhere; }
+.hs-sub { font-size: 13px; opacity: 0.7; }
+.hs .fr-sect { margin: 0; }
+.hs-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.hs-tile { padding: 12px 14px; border-radius: 14px; background: #0E0E10; border: 1px solid #26262C; min-width: 0; }
+.hs-tile b { display: block; font: 900 italic 28px/1 var(--font); }
+.hs-tile b.g { color: #12F06C; }
+.hs-tile span { display: block; font-size: 12px; font-weight: 700; opacity: 0.7; margin-top: 4px; }
+.hs-tile em { display: block; font-style: normal; font-size: 12px; font-weight: 600; margin-top: 2px; overflow-wrap: anywhere; }
+.hs-table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.hs-table th { text-align: left; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 800; opacity: 0.6; padding: 0 6px 8px; }
+.hs-table td { padding: 11px 6px; border-top: 1px solid #26262C; font-weight: 600; }
+.hs-table .r { text-align: right; }
+.hs-table .p { font: 900 italic 17px/1 var(--font); }
+.hs-table tr.champ td:first-child, .hs-table tr.champ .p { color: #12F06C; font-weight: 800; }
+.hs-fc { font-size: 9.5px; font-weight: 800; letter-spacing: 0.1em; padding: 2px 5px; border-radius: 4px; border: 1px solid #26262C; opacity: 0.8; text-transform: uppercase; }
