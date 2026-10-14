@@ -1,0 +1,163 @@
+<title>Unbeaten Run Banter</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;1,800;1,900&display=swap">
+<style>
+/* Board left, live slide-up preview pinned on the right (on phones it sits on top). Dark only: the game is pure black. */
+:root { color-scheme: dark; --bg:#000; --panel:#0E0E10; --sheet:#121214; --line:#26262C; --fg:#fff; --soft:#CFCFD6; --mut:#8E8E99; --cy:#22D3EE; --g:#12F06C; --red:#FF4D5E;
+  --disp: 900 italic 1em/1 'Exo 2', Arial, sans-serif; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.5 'Exo 2', Arial, sans-serif; }
+.wrap { max-width:1240px; margin:0 auto; padding-inline:16px; padding-block:32px 80px; display:grid; grid-template-columns:minmax(0,1fr) 380px; gap:28px; align-items:start; }
+h1 { font:900 italic 34px/1 'Exo 2'; text-transform:uppercase; margin:0 0 8px; }
+.lead { color:#BDBDC6; margin:0 0 14px; max-width:70ch; }
+.tally { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:6px; font-weight:800; font-size:13px; }
+.tally span { padding:4px 10px; border-radius:99px; border:1px solid var(--line); color:var(--soft); }
+.tally .y { color:var(--g); } .tally .n { color:var(--red); }
+.save { font-size:12.5px; color:var(--mut); min-height:18px; }
+section { margin-top:26px; }
+section h2 { font:900 italic 21px/1.1 'Exo 2'; text-transform:uppercase; margin:0 0 2px; }
+section .when { color:var(--mut); font-size:13px; margin:0 0 10px; }
+.sub { font-size:11px; font-weight:800; letter-spacing:.14em; color:var(--cy); margin:12px 0 6px; }
+.item { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:center; padding:9px 10px 9px 14px; border:1px solid var(--line); border-radius:12px; background:var(--panel); margin-bottom:6px; cursor:pointer; }
+.item.on { border-color:var(--cy); }
+.item p { margin:0; font-size:14.5px; color:#fff; min-width:0; }
+.item.t p { font:900 italic 17px/1.15 'Exo 2'; }
+.item .ph { color:var(--cy); font-weight:800; }
+.yn { display:flex; gap:6px; }
+.yn button { all:unset; cursor:pointer; min-width:44px; height:36px; padding:0 10px; border-radius:10px; border:1px solid var(--line); color:var(--soft); font-weight:800; font-size:13px; text-align:center; line-height:36px; }
+.yn button:focus-visible { outline:2px solid var(--cy); outline-offset:2px; }
+.item[data-v="yes"] .yn .by { background:var(--g); color:#00170A; border-color:var(--g); }
+.item[data-v="no"] .yn .bn { background:var(--red); color:#1A0004; border-color:var(--red); }
+.item[data-v="no"] p { color:var(--mut); text-decoration:line-through; }
+/* the preview */
+.pv { position:sticky; top:calc(env(safe-area-inset-top,0px) + 16px); }
+.pv small { display:block; color:var(--mut); font-size:12px; margin:0 0 8px; }
+.phone { width:100%; max-width:380px; aspect-ratio:393/600; border-radius:28px; background:#1a0306; position:relative; overflow:hidden; box-shadow:0 0 0 1px #222228; }
+.phone::before { content:""; position:absolute; inset:0; background:linear-gradient(#3a0a0e, #120204 60%); opacity:.9; }
+.sh { position:absolute; left:0; right:0; bottom:0; background:var(--sheet); border-radius:24px 24px 0 0; padding:12px 18px 22px; box-shadow:0 -10px 30px rgba(0,0,0,.6); }
+.sh .grab { width:44px; height:5px; border-radius:3px; background:#3A3A44; margin:0 auto 12px; }
+.sh h3 { font:900 italic 25px/1.05 'Exo 2'; margin:0 0 10px; }
+.big { text-align:center; position:relative; }
+.big b { display:block; font:900 italic 74px/1 'Exo 2'; color:var(--cy); text-shadow:0 0 30px rgba(34,211,238,.35); }
+.big span { font:900 italic 15px/1 'Exo 2'; letter-spacing:.06em; color:#BDBDC6; text-transform:uppercase; }
+.q { text-align:center; font-size:15.5px; line-height:1.4; color:#fff; margin:12px 4px 14px; min-height:44px; font-weight:600; }
+.btn { height:46px; border-radius:23px; display:grid; place-items:center; font-weight:800; font-size:15px; margin-top:8px; border:1px solid var(--line); }
+.btn.p { background:var(--cy); color:#062a33; border-color:var(--cy); font:900 italic 17px/1 'Exo 2'; }
+.ctl { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+.ctl button { all:unset; cursor:pointer; font-size:12px; font-weight:800; padding:6px 10px; border-radius:99px; border:1px solid var(--line); color:var(--soft); }
+.ctl button.on { background:var(--cy); color:#062a33; border-color:var(--cy); }
+@media (max-width:860px) { .wrap { grid-template-columns:minmax(0,1fr); } .pv { position:relative; top:0; order:-1; } }
+@media (prefers-reduced-motion: no-preference) { .q { transition:opacity .2s; } }
+</style>
+
+<div class="wrap">
+  <main>
+    <h1>Unbeaten Run: end of run lines</h1>
+    <p class="lead">The slide-up at the end of a run loses the "Stoke City had 457" line. The title changes with how it went, and under the big number goes a random line in the Tenaball tone. Tap a line to see it on the slide-up, then Yes or No. Your picks save as you go. {n} is the run, {best} your best on that stat.</p>
+    <div class="tally"><span class="y" id="ty">0 yes</span><span class="n" id="tn">0 no</span><span id="tl">0 left</span></div>
+    <div class="save" id="save" role="status"></div>
+    <div id="board"></div>
+  </main>
+  <aside class="pv" aria-label="Slide-up preview">
+    <small>Preview, tap any line or title</small>
+    <div class="phone"><div class="sh"><div class="grab"></div><h3 id="pt">Beaten first time</h3>
+      <div class="big"><b id="pn">0</b><span id="pu">Unbeaten</span></div>
+      <p class="q" id="pq"></p>
+      <div class="btn p">Share with your mates</div><div class="btn">New run</div><div class="btn">Home</div></div></div>
+    <div class="ctl" id="ctl"></div>
+  </aside>
+</div>
+
+<script>
+// Which bucket a run falls in, first match wins: cleared deck, new best, equalled best, close to best (1 or 2 short of a
+// best of 3+), then by size: 0, 1 to 3, 4 to 9, 10 to 19, 20+.
+const B = [
+ { id:'zero', name:'Beaten first time', when:'A run of 0.', n:0, best:6,
+   titles:['Beaten first time','Out first ball','Done in one','Fell at the first'],
+   lines:["Not one. You couldn't call higher or lower on a lift.","Zero. A coin would have beaten you half the time.","Done in one. Was your phone upside down?","That's not a run. That's tripping over your own laces.","Beaten first go. Bold strategy, being shit straight away.","Fifty-fifty, and you still found the wrong fifty.","Nil. Somewhere a pub quiz team just breathed a sigh of relief.","You lost a coin toss to a spreadsheet. Let that sink in.","Straight back to the dressing room. The showers aren't even warm.","One guess. Wrong. Fucking magnificent.","Higher or lower? Apparently neither.","Sent off before the anthem finished."] },
+ { id:'low', name:'Gone early', when:'A run of 1 to 3.', n:2, best:9,
+   titles:['Gone early','Unbeaten in {n}','Short and not sweet','Over already'],
+   lines:["{n}. A run so short it barely counts as a jog.","Over before the pies were warm.","{n} and out. The groundsman hadn't even sat down.","A promising start, followed immediately by the end.","Short, sharp and shit.","You peaked early. Like scoring in the first minute and getting subbed at half time.","{n}. Barely enough to fill a bench.","That run had the shelf life of a manager at a newly promoted club.","Warm-up over. Shame the match was too.","{n}. Your nan does better, and she thinks VAR is a supermarket."] },
+ { id:'mid', name:'Decent run', when:'A run of 4 to 9.', n:6, best:15,
+   titles:['Unbeaten in {n}','Decent run','Not bad','Mid-table'],
+   lines:["{n}. Respectable, like a 0-0 at home to Burnley is respectable.","Decent. Not good. Decent.","A mid-table run. Nobody will remember it, including you.","{n} in a row. Your mates will be mildly unimpressed.","Solid enough. Like a centre-back with no pace and a lot of shouting.","Not bad. Not good either, mind.","{n}. The kind of form that gets a new contract in October and the sack by Christmas.","You know a bit. Calm down.","A proper little run, ended by a proper little mistake.","{n}. Good enough for the Conference League. Barely."] },
+ { id:'good', name:'Double figures', when:'A run of 10 to 19.', n:13, best:22,
+   titles:['Unbeaten in {n}','Double figures','Proper run','On a roll'],
+   lines:["{n}. Alright, smart arse.","Double figures. Go and tell someone who cares.","That's a genuinely good run. We're as annoyed as you'd expect.","{n} unbeaten. Your group chat is about to become unbearable.","Proper form. Is someone feeding you the answers?","Double figures. Pundit-level smugness unlocked.","That's a title-chasing run. Don't bottle it next time.","{n}. Impressive. Mildly sickening, but impressive.","You clearly spend too much time on football stats. Respect, though.","A run like that deserves a parade. You're getting a sentence."] },
+ { id:'great', name:'Huge run', when:'A run of 20 or more.', n:24, best:31,
+   titles:['Unstoppable','Unbeaten in {n}','What a run','On fire'],
+   lines:["{n}. What the fuck. Who are you?","That's not a run, that's a dynasty.","{n} on the bounce. Invincibles energy.","Please go outside. Touch some grass. Any grass.","Absolutely disgusting knowledge. We're reporting you.","{n}. Your brain is a stats database with legs.","Unbelievable. Literally. We're checking the replay.","A record-book run. Shame the record book is your phone.","{n} unbeaten and you're still not happy. A manager's dream.","Mental. Absolutely mental. Do you sleep?"] },
+ { id:'close', name:'Close to your best', when:'1 or 2 short of your best on that stat (best of 3 or more).', n:8, best:9,
+   titles:['So close to your best','Nearly','Agonisingly close','One short'],
+   lines:["{n}. One more and you'd have matched it. Fucking typical.","So close to your best you could smell it.","Inches away. Like a shot off the post in the 94th minute.","Your best is {best}. You were right there and you bottled it.","Agonising. Absolutely agonising. Go again.","Close only counts in horseshoes, and you're not a horse.","Within touching distance and you fell over the ball.","Nearly. The most painful word in football.","That's a title race collapse, that.","{n}. Your best is {best}. Do the maths and weep."] },
+ { id:'equal', name:'Equalled your best', when:'The same as your best on that stat.', n:9, best:9,
+   titles:['Equalled your best','Level with your best','Same again'],
+   lines:["Level with your best. Not better. Level.","{n} again. Consistent, we'll give you that.","Matched it. Couldn't beat it. Very you.","A draw with yourself, which is somehow a loss.","Same as last time. Groundhog Day in football boots.","Your ceiling is officially {n}. Prove us wrong.","Joint top. Share the trophy with your past self.","A tie with your own record. Rematch. Now."] },
+ { id:'best', name:'New best', when:'Beat your best on that stat.', n:12, best:9, newBest:true,
+   titles:['High score','New best','Personal best','Record broken'],
+   lines:["New best. Nobody saw that coming, least of all you.","{n}. A personal best. Frame it.","High score. Go on then, show everyone.","You've beaten your best. The old you is gutted.","Record broken. Your past self wants a word.","New best. Your mum would be proud. Probably.","{n}! Screenshot it before you do something stupid.","A new high. Don't let it go to your head. Too late.","Best ever. Somewhere a stats nerd just felt a disturbance.","New record. Ring the papers. Actually, don't."] },
+ { id:'deck', name:'The whole deck', when:'Every card in the deck, unbeaten.', n:40, best:22, newBest:true,
+   titles:['The whole deck, unbeaten','Invincible','Deck cleared'],
+   lines:["The whole deck. Unbeaten. Are you okay?","Every single one. We've got nothing left to show you.","You've completed it. Mate, it's a Tuesday.","Invincible. We literally ran out of stats to beat you with.","Deck cleared. Go and do something with your life."] }
+];
+const picks = {};                       // id -> 'yes' | 'no', from the shared store
+let db = null, cur = { b: B[0], title: B[0].titles[0], line: B[0].lines[0] };
+const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
+const fill = (s, b) => s.replace(/\{n\}/g, b.n).replace(/\{best\}/g, b.best);
+const show = (s, b) => esc(s).replace(/\{n\}/g, '<span class="ph">{n}</span>').replace(/\{best\}/g, '<span class="ph">{best}</span>');
+function render() {
+  const el = document.getElementById('board'); let h = '';
+  B.forEach((b) => {
+    h += `<section><h2>${esc(b.name)}</h2><p class="when">${esc(b.when)} Shown with n = ${b.n}${b.id === 'close' || b.id === 'equal' ? `, best = ${b.best}` : ''}.</p><div class="sub">TITLE</div>`;
+    b.titles.forEach((t, i) => { const id = `${b.id}-t${i}`; h += row(id, b, t, true); });
+    h += '<div class="sub">LINE UNDER THE NUMBER</div>';
+    b.lines.forEach((t, i) => { const id = `${b.id}-l${i}`; h += row(id, b, t, false); });
+    h += '</section>';
+  });
+  el.innerHTML = h; tally();
+}
+function row(id, b, t, isTitle) {
+  return `<div class="item${isTitle ? ' t' : ''}" data-id="${id}" data-b="${b.id}" data-v="${picks[id] || ''}" tabindex="0"><p>${show(t, b)}</p><div class="yn"><button class="by" data-pick="yes" aria-label="Yes">Yes</button><button class="bn" data-pick="no" aria-label="No">No</button></div></div>`;
+}
+function tally() {
+  const total = B.reduce((a, b) => a + b.titles.length + b.lines.length, 0);
+  const y = Object.values(picks).filter((v) => v === 'yes').length, n = Object.values(picks).filter((v) => v === 'no').length;
+  document.getElementById('ty').textContent = `${y} yes`; document.getElementById('tn').textContent = `${n} no`; document.getElementById('tl').textContent = `${total - y - n} left`;
+}
+function preview() {
+  const b = cur.b;
+  document.getElementById('pt').textContent = fill(cur.title, b);
+  document.getElementById('pn').textContent = b.n;
+  document.getElementById('pu').textContent = b.newBest ? 'Unbeaten · a new best' : 'Unbeaten';
+  document.getElementById('pq').textContent = fill(cur.line, b);
+  document.querySelectorAll('#ctl button').forEach((x) => x.classList.toggle('on', x.dataset.b === b.id));
+}
+document.getElementById('ctl').innerHTML = B.map((b) => `<button type="button" data-b="${b.id}">${esc(b.name)}</button>`).join('');
+document.getElementById('ctl').addEventListener('click', (e) => {
+  const x = e.target.closest('button'); if (!x) return; const b = B.find((y) => y.id === x.dataset.b);
+  const firstYes = (arr, k) => arr.find((_, i) => picks[`${b.id}-${k}${i}`] === 'yes') || arr[0];
+  cur = { b, title: firstYes(b.titles, 't'), line: b.lines[Math.floor(Math.random() * b.lines.length)] }; preview();
+});
+document.getElementById('board').addEventListener('click', async (e) => {
+  const item = e.target.closest('.item'); if (!item) return;
+  const b = B.find((y) => y.id === item.dataset.b), id = item.dataset.id, [, kind] = id.match(/-(t|l)\d+$/) || [];
+  const idx = +id.replace(/^.*-(t|l)/, ''), text = kind === 't' ? b.titles[idx] : b.lines[idx];
+  if (kind === 't') cur = { b, title: text, line: cur.b === b ? cur.line : b.lines[0] }; else cur = { b, title: cur.b === b ? cur.title : b.titles[0], line: text };
+  preview();
+  document.querySelectorAll('.item.on').forEach((x) => x.classList.remove('on')); item.classList.add('on');
+  const btn = e.target.closest('[data-pick]'); if (!btn) return;
+  const v = picks[id] === btn.dataset.pick ? '' : btn.dataset.pick;
+  if (v) picks[id] = v; else delete picks[id];
+  item.dataset.v = v; tally();
+  const st = document.getElementById('save');
+  if (!db) { st.textContent = 'Picks aren’t saving here. Open the page signed in to keep them.'; return; }
+  try { if (v) await db.doc(`picks/${id}`).set({ v, text, bucket: b.id, kind: kind === 't' ? 'title' : 'line' }); else await db.doc(`picks/${id}`).delete(); st.textContent = 'Saved'; }
+  catch (err) { st.textContent = 'Couldn’t save that one. Try again.'; }
+});
+render(); preview();
+(async () => {
+  try { db = await window.claude?.use?.('db'); } catch (e) { db = null; }
+  if (!db) return;
+  try { const snap = await db.collection('picks').get(); (snap.docs || snap).forEach((d) => { const x = d.data ? d.data() : d; const id = d.id; if (x && x.v) picks[id] = x.v; }); render(); }
+  catch (e) {}
+})();
+</script>
