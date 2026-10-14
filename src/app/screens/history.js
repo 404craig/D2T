@@ -21,7 +21,7 @@
         ${h.seasons.length ? `
         <section class="fr-sect" aria-label="Your record">
           <div class="fr-sect-h"><h2>Your record</h2><span>${h.seasons.length} season${h.seasons.length === 1 ? '' : 's'}</span></div>
-          ${D2T.frRecord(h.record)}
+          ${D2T.frRecord(h.record, 'dark')}
         </section>
         ${tiles.length ? `<div class="hs-tiles">${tiles.map(([c, v, l, s]) => `<div class="hs-tile"><b class="${c}">${v}</b><span>${l}</span><em>${s}</em></div>`).join('')}</div>` : ''}
         <table class="hs-table"><thead><tr><th>Season</th><th>Finish</th><th class="r">W-D-L</th><th class="r">Pts</th></tr></thead><tbody>${rows}</tbody></table>
