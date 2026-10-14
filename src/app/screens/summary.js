@@ -77,7 +77,7 @@
       const cmp = G.dailyCompare(daily), num = G.dailyNumber(daily);
       spec = { c: '#FFFFFF', tag: `Daily #${num} · ${mon(daily)}`, dare: `Same club today. Beat ${ord(F.finish)}`,
         text: `DROP2TOP Daily #${num} · ${mon(daily)}\n${nm} ${S.season} went down in ${ord(F.histFinish)}. I finished ${ord(F.finish)}.\nThe Rise: ${sign(F.rise)}\n${cmp.isBest && cmp.best ? 'My best Daily yet\n' : ''}Same club for everyone today. Can you beat ${ord(F.finish)}?\n${L}`,
-        draw: (g, im, k) => { k.club(im.crest, nm, S.season); k.duo('THEY FINISHED', ord(F.histFinish), `${F.histPts} pts`, 'I FINISHED', ord(F.finish), `${F.pts} pts`, '#FFFFFF');
+        draw: (g, im, k) => { k.club(im.crest, nm, S.season); k.duo('THEY FINISHED', ord(F.histFinish), F.histPts != null ? `${F.histPts} pts` : '', 'I FINISHED', ord(F.finish), `${F.pts} pts`, '#FFFFFF');
           k.fit('THE RISE ' + sign(F.rise), k.W / 2, 975, 960, 900, 112, true, '#FFFFFF'); k.wrap(line, k.W / 2, 1098, 860, 500, 32, '#BDBDC6', 42); } };
     } else {
       spec = { c: club.text, tag: 'Classic', dare: `Beat my rise of ${sign(F.rise)}`,
@@ -88,6 +88,13 @@
     spec.imgs = spec.imgs || { crest: club.crest }; spec.ghost = spec.ghost || club.crest;
     return D2T.share.build(spec);
   }
+
+  // Share a Daily again from home (Craig, 14 Oct): the same share as its summary, built from the day's best go in the record
+  D2T.dailyShare = (date) => {
+    const G = D2T.game, r = G.dailyResult(date); if (!r) return null;
+    const club = G.club(r.club) || { name: r.club, text: '#FFFFFF' };
+    return runShare({ F: { finish: r.finish, histFinish: r.histFinish, rise: r.rise, pts: r.pts, histPts: r.histPts }, club, S: { season: r.season }, line: '', daily: date, mode: 'classic' });
+  };
 
   // the Daily: today's result next to your best one, so you can see how today stacks up
   function dailyVs(date) {
