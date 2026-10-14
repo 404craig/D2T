@@ -1,5 +1,6 @@
 /* Goal Rush (screens/goals.js, was 433 Goals): black, yellow #FFD21F as the mode colour (text #FFE375), night stadium pitch, shirts. */
-.g4 { --g4: #FFD21F; --g4-t: #FFE375; --g4-gold: #FFF2A8; --sp-btn: var(--g4); --sp-btn-ink: #0A0A0A; }
+.g4, .g4-end { --g4: #FFD21F; --g4-t: #FFE375; --g4-gold: #FFF2A8; --g4-red: #FF4D2E; }
+.g4 { --sp-btn: var(--g4); --sp-btn-ink: #0A0A0A; }
 .g4-wrap { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
 
 /* the bar */
@@ -141,3 +142,25 @@
   background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.14) 38%, rgba(255,255,255,.22) 50%, rgba(255,255,255,.14) 62%, rgba(255,255,255,0) 100%); }
 .g4-trio .g4-sweep { position: absolute; top: -20%; left: -60%; width: 40%; height: 140%; pointer-events: none; z-index: 3; opacity: 0; transform: rotate(16deg);
   background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.75) 50%, rgba(255,255,255,0) 100%); }
+
+/* the end sheet's result (Craig, 14 Oct; option B "The target bar" in design/prototype/goal-rush-end.html): the game's bar
+   scaled to max(total, target) x 1.04, the fill in the in-game gradient sized so its red end lands on the white flag at the
+   target, an overshoot striped red past it, your total marked under it; then the gap big in the result colour (red over,
+   yellow short, gold exact) and the best as a pill */
+.g4-end { --rc: var(--g4); }
+.g4-end.over { --rc: var(--g4-red); }
+.g4-end.exact { --rc: var(--g4-gold); }
+.g4-end .tb { position: relative; margin: 26px 2px 6px; }
+.g4-end .track { position: relative; height: 12px; border-radius: 6px; background: #26262C; }
+.g4-end .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px; background: linear-gradient(90deg, #FFD21F 0%, #FFD21F 50%, #FFB000 65%, #FF8A1F 82%, #FF4D2E 100%) no-repeat; }
+.g4-end .ovr { position: absolute; top: 0; bottom: 0; border-radius: 0 6px 6px 0; background: repeating-linear-gradient(135deg, #FF3B3B 0 4px, #B3222B 4px 8px); }
+.g4-end .goal { position: absolute; top: -8px; bottom: -8px; width: 2px; margin-left: -1px; background: #FFF; }
+.g4-end .goal i { position: absolute; bottom: calc(100% + 2px); left: 50%; transform: translateX(-50%); font: 900 12px/1 'Exo 2', sans-serif; font-style: normal; color: #FFF; white-space: nowrap; }
+.g4-end .you { position: absolute; top: calc(100% + 10px); transform: translateX(-50%); font: 900 italic 20px/1 'Exo 2', sans-serif; color: var(--rc); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.g4-end .you::before { content: ""; position: absolute; left: 50%; top: -8px; transform: translateX(-50%); border: 5px solid transparent; border-bottom-color: currentColor; border-top: 0; }
+.g4-end .gap { margin-top: 40px; text-align: center; font: 900 italic 30px/1 'Exo 2', sans-serif; text-transform: uppercase; color: var(--rc); }
+.g4-end.exact .gap { text-shadow: 0 0 18px rgba(255,200,61,.6); }
+.g4-end .gap small { display: block; margin-top: 4px; font: 800 11px/1.4 'Exo 2', sans-serif; letter-spacing: .14em; color: #8E8E99; text-shadow: none; }
+.g4-end .q { margin: 12px 0 4px; text-align: center; }
+.g4-end .best { display: inline-flex; gap: 6px; align-items: center; font-size: 12px; font-weight: 800; line-height: 1.5; padding: 3px 9px; border-radius: 99px; background: rgba(18,240,108,.12); color: #12F06C; }
+.g4-end .best.was { background: #1C1C21; color: #CFCFD6; }

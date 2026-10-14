@@ -617,8 +617,16 @@
       function resultSheet(t, result) {
         if (!root.isConnected) return;
         const rec = (result && result.rec) || G4.record(), gap = Math.abs(t - TARGET);
-        const head = gap === 0 ? `Exactly ${TARGET}` : t < TARGET ? `${gap} short of ${TARGET}` : `${gap} over ${TARGET}`;
-        const best = result && result.newBest && rec.games > 1 ? 'A new best.' : rec.best != null ? `Your best: ${rec.best === 0 ? 'exactly on target' : rec.best + ' away'}${rec.bestTarget ? ` (${rec.bestTotal}/${rec.bestTarget})` : ''}.` : '';
+        const head = gap === 0 ? `Exactly ${TARGET}` : t > TARGET ? 'Overshot' : 'Fell short';
+        // the result (Craig, 14 Oct; option B, "The target bar"): the bar runs to max(total, target) x 1.04, the fill's
+        // gradient sized so its red end sits on the target flag, an overshoot striped red past it, the total marked under it
+        const k = gap === 0 ? 'exact' : t > TARGET ? 'over' : 'short', max = Math.max(t, TARGET) * 1.04, pc = (v) => (v / max * 100).toFixed(2) + '%';
+        const pv = Math.min(t, TARGET), size = (TARGET / pv * 100).toFixed(2) + '% 100%';
+        const best = result && result.newBest && rec.games > 1 ? '<span class="best">&#9733; A new best</span>'
+          : rec.best != null ? `<span class="best was">Your best: ${rec.best === 0 ? 'spot on' : rec.best + ' away'}</span>` : '';
+        const lead = `<div class="g4-end ${k}"><div class="tb" role="img" aria-label="Your XI ${t}, target ${TARGET}"><div class="track"><div class="fill" style="width:${pc(pv)};background-size:${size}"></div>`
+          + `${t > TARGET ? `<div class="ovr" style="left:${pc(TARGET)};width:${pc(t - TARGET)}"></div>` : ''}</div><div class="goal" style="left:${pc(TARGET)}"><i>${TARGET}</i></div><span class="you" style="left:${pc(t)}">${t}</span></div>`
+          + `<div class="gap">${gap === 0 ? 'Spot on' : `${gap} ${t > TARGET ? 'over' : 'short'}`}<small>YOUR XI ${t} · TARGET ${TARGET}</small></div>${best ? `<div class="q">${best}</div>` : ''}</div>`;
         // the share card (Craig, 13 Oct): the total big over the target, how far off, the XI and their goals, the dare
         const shape = shapeText(FORM), xi = S.filled.slice().sort((a, b) => a.slot - b.slot);
         const how = gap === 0 ? 'BANG ON' : t > TARGET ? `${gap} OVER THE TARGET` : `${gap} SHORT`;
@@ -638,7 +646,7 @@
         // the shared end sheet (Craig, 14 Oct; D2T.endSheet): Share, Play again, Home; dragged closed, a slim "Game over"
         // peek bar above the bottom bar brings it back
         if (endSheet) endSheet.close();
-        endSheet = D2T.endSheet({ title: head, lead: `Your XI scored <b>${t}</b> Premier League goals. ${best}${rec.exact ? ` Bang on target: ${rec.exact} ${rec.exact === 1 ? 'time' : 'times'}.` : ''}`,
+        endSheet = D2T.endSheet({ title: head, lead,
           colour: '#FFD21F', ink: '#0A0A0A', peek: 'Game over', host: wrap, before: wrap.querySelector('.g4-bar'), slim: true,
           buttons: [{ k: 'share', label: 'Share with your mates', fn: () => D2T.share.send(card) }, { k: 'again', label: 'Play again', primary: true, fn: () => newGame() }, { k: 'home', label: 'Home', fn: () => D2T.go('home') }] });
         endSheet.open();
