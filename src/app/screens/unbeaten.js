@@ -483,10 +483,11 @@
               k.fit(s.big.toUpperCase(), k.W / 2, 730, 960, 900, 64, true, '#FFFFFF');
               k.wrap(`Unbeaten in ${n} call${n === 1 ? '' : 's'} of higher or lower, real Premier League numbers.`, k.W / 2, 830, 820, 600, 40, '#BDBDC6', 52);
             } });
-          const sh = D2T.sheet({ title: head, body: `<div class="ub-endbig"><b>${n}</b><span>Unbeaten${newBest ? ' · a new best' : ''}</span></div><p class="fr-lead">${lead}${best}</p>
-            <div class="fr-stack"><button class="btn ub-again fr-btn-wide" data-k="share">Share with your mates</button><button class="btn btn-ghost fr-btn-wide ub-newrun" data-k="again">New run</button></div>`, onClose: () => { if (root.isConnected && run) idle(); } });
-          sh.body.querySelector('[data-k="again"]').onclick = () => { sh.close(); idle(); later(statSpin, 250); };
-          sh.body.querySelector('[data-k="share"]').onclick = () => D2T.share.send(card);
+          // the shared end sheet (Craig, 14 Oct; D2T.endSheet): Share, New run, Home. Closing it goes back to the start page,
+          // which has New run and Home of its own, so there is no peek bar here.
+          D2T.endSheet({ title: head, lead: `<div class="ub-endbig"><b>${n}</b><span>Unbeaten${newBest ? ' · a new best' : ''}</span></div><p class="fr-lead">${lead}${best}</p>`,
+            colour: '#22D3EE', ink: '#001A1F', onClose: () => { if (root.isConnected && run) idle(); },
+            buttons: [{ k: 'share', label: 'Share with your mates', primary: true, fn: () => D2T.share.send(card) }, { k: 'again', label: 'New run', fn: () => { idle(); later(statSpin, 250); } }, { k: 'home', label: 'Home', fn: () => D2T.go('home') }] }).open();
         };
         if (newBest && !reduced) later(show, 2500); else show();
       }

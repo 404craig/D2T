@@ -150,24 +150,37 @@
           ${changes ? `<div class="sm-label">How you changed ${D2T.esc(S.season)}</div><div class="sm-list">${changes}</div>` : ''}
           <p class="sm-banter">${D2T.esc(line)}</p>
           ${x && car.n > 1 ? `<p class="sm-banter">Season ${car.n} of your career${car.seasons.length ? `: ${car.seasons.filter((z) => z.finish === 1).length + (F.finish === 1 ? 1 : 0)} title${car.seasons.filter((z) => z.finish === 1).length + (F.finish === 1 ? 1 : 0) === 1 ? '' : 's'} so far` : ''}.</p>` : ''}
-          ${nx ? `<button class="btn se-btn sm-next" type="button" data-act="next">Next season · ${D2T.esc(nx.key)}</button>` : x ? `<p class="sm-banter">Relegated. The career ends here.</p>` : ''}
-          <div class="sm-two"><button class="btn btn-ghost" data-act="table">Final table</button><button class="btn btn-ghost" data-act="again">${daily ? 'Go again' : x ? 'New career' : 'Play again'}</button></div>
+          ${x && !nx ? `<p class="sm-banter">Relegated. The career ends here.</p>` : ''}
+          <button class="btn btn-ghost fr-btn-wide" data-act="table">Final table</button>
+          <div class="se-pad"></div>
           <div class="se-pad"></div>
         </div>
       </div>`);
-      const bar = D2T.h(SE.bar({ main: SE.mainBtn('Share result', '', 'data-act="share"') }));   // home (the run is over, so straight home), greyed back, Share across the right (Craig, 13 Oct)
-      root.append(body, bar);
+      root.appendChild(body);
 
+      // the end sheet (Craig, 14 Oct; D2T.endSheet): no bottom bar here. Share, then Play again (the Daily: Go again; Club X:
+      // Next season while the career is open, and New career), then Home. Dragged closed, a "Season over" peek bar
+      // brings it back; the summary scrolls behind it.
       const sh = runShare({ F, club, S, line, daily, mode: GAME.mode(), met, car, x, n, rel });
-      bar.querySelector('[data-act="share"]').onclick = () => { window.D2TSound && window.D2TSound.play('share'); D2T.share.send(sh); };
-      const nb = body.querySelector('[data-act="next"]');
-      if (nb) nb.onclick = () => { if (GAME.nextSeason()) D2T.go('table'); };
-      body.querySelector('[data-act="again"]').onclick = () => { if (daily) { GAME.restartDaily(); D2T.go(GAME.stepFor() || 'table'); return; } const m = GAME.mode(); GAME.newRun(m); D2T.go('spin'); };
+      const colour = daily ? '#FFFFFF' : x ? '#12F06C' : GAME.mode() === 'dare2dream' ? '#3BA4FF' : club.text, ink = daily || x || GAME.mode() === 'dare2dream' ? '#0A0A0A' : club.ink;
+      const again = () => { if (daily) { GAME.restartDaily(); D2T.go(GAME.stepFor() || 'table'); return; } const m = GAME.mode(); GAME.newRun(m); D2T.go('spin'); };
+      const buttons = [{ k: 'share', label: 'Share result', fn: () => { window.D2TSound && window.D2TSound.play('share'); D2T.share.send(sh); } }];
+      if (nx) buttons.push({ k: 'next', label: `Next season · ${D2T.esc(nx.key)}`, primary: true, fn: () => { if (GAME.nextSeason()) D2T.go('table'); } });
+      buttons.push({ k: 'again', label: daily ? 'Go again' : x ? 'New career' : 'Play again', primary: !nx, fn: again });
+      buttons.push({ k: 'home', label: 'Home', fn: () => D2T.go('home') });
+      const lead = x ? `<b>${D2T.esc(GAME.xName())}</b> finished ${D2T.ordinal(F.finish)} in ${D2T.esc(S.season)}${nx ? `. The career goes on to ${D2T.esc(nx.key)}.` : '.'}`
+        : dream ? `<b>${D2T.esc(club.name)}</b> finished ${D2T.ordinal(F.finish)}. The dream was ${goal.toLowerCase()}.`
+        : `<b>${D2T.esc(club.name)}</b> finished ${D2T.ordinal(F.finish)}, ${F.rise > 0 ? `${F.rise} place${F.rise === 1 ? '' : 's'} above` : F.rise < 0 ? `${-F.rise} place${F.rise === -1 ? '' : 's'} below` : 'level with'} ${hw.toLowerCase()}.`;
+      const end = D2T.endSheet({ title: `Season over · ${dream ? (met ? (x ? 'Champions' : 'Dream achieved') : 'Fell short') : headline(F)}`, lead, colour, ink, buttons, peek: 'Season over', host: root });
+      this._end = end;
+      const openT = setTimeout(() => { if (root.isConnected) end.open(); }, D2T.reduced() ? 200 : 900);
+      this._kill = () => clearTimeout(openT);
       body.querySelector('[data-act="table"]').onclick = () => {
         const rows = GAME.standings(null);
         D2T.sheet({ title: `Final table ${D2T.esc(S.season)}`, body: `<div class="se-run" style="--se-acc:${club.accent};--se-text:${club.text};--se-acc-b:${SE.rgba(club.accent, 0.55)}"><div class="se-table">${SE.tableHead()}${rows.map((r, i) => SE.rowHTML(r, club.name, i === n - rel - 1 ? 'se-zone' : '')).join('')}</div></div>` });
       };
       body.querySelectorAll('.sm-award').forEach((b) => { b.onclick = () => { const c = awards.find(([, x]) => String(x.id) === b.dataset.id); if (c) D2T.cards.openLarge(b.querySelector('.d2c') || b, D2T.cards.player(c[1], { w: 280 }), {}); }; });
-    }
+    },
+    unmount() { this._kill && this._kill(); }
   });
 })();
