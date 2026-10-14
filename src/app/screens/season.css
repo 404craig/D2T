@@ -199,7 +199,7 @@
 .se-clockrow { position: relative; display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 8px; }
 .se-clockrow .se-result { margin-top: 0; }   /* the result chip beside the clock at full time (Craig, 14 Oct) */
 .se-match .se-scorers { margin: 10px 0 0; }
-.se-match .se-preview { margin-top: 10px; }
+.se-match .se-preview { margin-top: 4px; }
 .se-clock { min-width: 64px; text-align: center; padding: 4px 12px; border-radius: 10px; background: #000; border: 1px solid var(--line); font: var(--display); font-size: 18px; font-variant-numeric: tabular-nums; }
 .se-live .se-clock { border-color: var(--se-acc-b); color: var(--se-text); }
 .se-prog { position: relative; height: 3px; margin: 12px 6px 0; border-radius: 2px; background: #22222A; overflow: hidden; }

@@ -983,7 +983,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .se-clockrow { position: relative; display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 8px; }
 .se-clockrow .se-result { margin-top: 0; }   /* the result chip beside the clock at full time (Craig, 14 Oct) */
 .se-match .se-scorers { margin: 10px 0 0; }
-.se-match .se-preview { margin-top: 10px; }
+.se-match .se-preview { margin-top: 4px; }
 .se-clock { min-width: 64px; text-align: center; padding: 4px 12px; border-radius: 10px; background: #000; border: 1px solid var(--line); font: var(--display); font-size: 18px; font-variant-numeric: tabular-nums; }
 .se-live .se-clock { border-color: var(--se-acc-b); color: var(--se-text); }
 .se-prog { position: relative; height: 3px; margin: 12px 6px 0; border-radius: 2px; background: #22222A; overflow: hidden; }
@@ -6572,13 +6572,15 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
           <div class="se-prog"><span></span><i class="se-prog-ht"></i></div>
         </div>
         ${SE.scorers([], [])}
-        <div class="se-preview">
-          <div class="se-pv"><span>Your XI rating</span><b>${sim.me}</b></div>
-          <div class="se-pv"><span>${D2T.esc(oppC.name)} rating</span><b>${sim.oppStrength}</b></div>
-          <div class="se-pv"><span>${D2T.esc(oppC.name)} finished</span><b>${D2T.ordinal(oppRow ? oppRow.pos : 0)}</b></div>
-          <p class="se-note">Your result is played out by the game from your XI's defence, midfield and attack against ${D2T.esc(oppC.name)}'s real squad${eng.signed.length ? ', minus anyone you have signed from them' : ''}.</p>
+        <div class="se-feed" aria-live="polite">
+          <!-- the ratings panel is the commentary's first line (Craig, 14 Oct): each new line goes in above it, so it moves down as the match runs -->
+          <div class="se-preview">
+            <div class="se-pv"><span>Your XI rating</span><b>${sim.me}</b></div>
+            <div class="se-pv"><span>${D2T.esc(oppC.name)} rating</span><b>${sim.oppStrength}</b></div>
+            <div class="se-pv"><span>${D2T.esc(oppC.name)} finished</span><b>${D2T.ordinal(oppRow ? oppRow.pos : 0)}</b></div>
+            <p class="se-note">Your result is played out by the game from your XI's defence, midfield and attack against ${D2T.esc(oppC.name)}'s real squad${eng.signed.length ? ', minus anyone you have signed from them' : ''}.</p>
+          </div>
         </div>
-        <div class="se-feed" aria-live="polite"></div>
         <div class="se-pad"></div>
       </div>`);
       // home (the menu), a greyed back (the result is decided), Skip to end then See results (Craig, 14 Oct)

@@ -44,13 +44,15 @@
           <div class="se-prog"><span></span><i class="se-prog-ht"></i></div>
         </div>
         ${SE.scorers([], [])}
-        <div class="se-preview">
-          <div class="se-pv"><span>Your XI rating</span><b>${sim.me}</b></div>
-          <div class="se-pv"><span>${D2T.esc(oppC.name)} rating</span><b>${sim.oppStrength}</b></div>
-          <div class="se-pv"><span>${D2T.esc(oppC.name)} finished</span><b>${D2T.ordinal(oppRow ? oppRow.pos : 0)}</b></div>
-          <p class="se-note">Your result is played out by the game from your XI's defence, midfield and attack against ${D2T.esc(oppC.name)}'s real squad${eng.signed.length ? ', minus anyone you have signed from them' : ''}.</p>
+        <div class="se-feed" aria-live="polite">
+          <!-- the ratings panel is the commentary's first line (Craig, 14 Oct): each new line goes in above it, so it moves down as the match runs -->
+          <div class="se-preview">
+            <div class="se-pv"><span>Your XI rating</span><b>${sim.me}</b></div>
+            <div class="se-pv"><span>${D2T.esc(oppC.name)} rating</span><b>${sim.oppStrength}</b></div>
+            <div class="se-pv"><span>${D2T.esc(oppC.name)} finished</span><b>${D2T.ordinal(oppRow ? oppRow.pos : 0)}</b></div>
+            <p class="se-note">Your result is played out by the game from your XI's defence, midfield and attack against ${D2T.esc(oppC.name)}'s real squad${eng.signed.length ? ', minus anyone you have signed from them' : ''}.</p>
+          </div>
         </div>
-        <div class="se-feed" aria-live="polite"></div>
         <div class="se-pad"></div>
       </div>`);
       // home (the menu), a greyed back (the result is decided), Skip to end then See results (Craig, 14 Oct)
