@@ -259,6 +259,40 @@ t("Club X career: carried XI leaves its real clubs, later seasons get pre-season
   const goals = a.matches.reduce((n, m) => n + m[3] + m[4], 0) / a.matches.length;
   assert.ok(goals > 2 && goals < 3.5, "forecast goals per game look like football: " + goals.toFixed(2));
 });
+t("Club X career: Poached takes 3 outfield players to 3 different league clubs, once, from the seed, and the season plays out", () => {
+  const S = G.seasons["2024/25"];
+  const setup = (seed) => { const st = D.newRun({ seed, mode: "clubx", catalogue: [] }); st.seasonKey = S.season; st.club = 19; st.formation = "4-4-2"; st.career = 2; D.carryIn(st, S, D.autoXI(S, 0, "4-4-2", [])); return st; };
+  const slots = D.FORMATIONS["4-4-2"].map((x) => x[0]);
+  const first = setup("poach-1"), xi0 = first.xi.slice(), out = D.poach(first, S);
+  assert.strictEqual(out.length, 3, "three players go");
+  assert.ok(out.every((x) => slots[x.slot] !== "GK"), "never the keeper");
+  assert.strictEqual(new Set(out.map((x) => x.club)).size, 3, "each to a different club");
+  assert.ok(out.every((x) => x.club !== first.club && x.club >= 0 && x.club < S.clubs.length), "a league club, never yours");
+  assert.ok(out.every((x) => { const p = D.playerOf(S, x.id); return x.club !== p.c && x.club !== p.c2 && xi0[x.slot] === x.id; }), "never back to his own club; his own shirt");
+  assert.ok(out.every((x) => first.xi[x.slot] == null) && first.xi.filter((id) => id == null).length === 3, "their shirts are left empty");
+  assert.strictEqual(D.poach(first, S), null, "once a season");
+  assert.deepStrictEqual(D.poach(setup("poach-1"), S), out, "the same seed takes the same players to the same clubs");
+  const two = new Set(); for (let i = 0; i < 12; i++) two.add(JSON.stringify(D.poach(setup("poach-v" + i), S)));
+  assert.ok(two.size > 6, "different seeds poach differently");
+  assert.strictEqual(D.poach(Object.assign(setup("poach-2"), { career: 1 }), S), null, "not in a career's first season");
+  // a poached player joins his new club: it picks him, and is stronger for it
+  assert.ok(out.every((x) => D.clubXI(S, x.club, new Set(), D.joinersOf(S, first, x.club)).length === 11));
+  assert.ok(out.some((x) => D.strengthLoss(S, x.club, new Set(), null, D.joinersOf(S, first, x.club)) < 0), "at least one rival is strengthened");
+  // the Summer window: sign into an empty shirt, pass the rest; any shirt still empty gets a free agent before GW1
+  D.startSeason(first, S);
+  assert.strictEqual(first.phase, "window");
+  const hole = first.xi.indexOf(null), card = first.roll.cards[0];
+  assert.ok(D.sign(first, S, card, hole) && first.xi[hole] === card, "a roll signs into an empty shirt");
+  while (first.phase === "window") D.pass(first, S);
+  assert.ok(first.xi.every((id) => id != null), "no empty shirts at kick-off");
+  assert.strictEqual(first.freeFill.length, 2, "the two shirts left empty were filled with free agents");
+  assert.ok(first.freeFill.every((f) => { const p = D.playerOf(S, f.id); return p.lv === 0 && D.fitOf(p, slots[f.slot]) === "green"; }), "bronze, and green in the shirt");
+  assert.ok(out.every((x) => !first.offered.includes(x.id)), "a poached player never comes back in the rolls");
+  let g = 0;
+  while (first.phase !== "summary" && g++ < 700) { if (first.phase === "window") D.pass(first, S); else D.playMatch(first, S); }
+  assert.strictEqual(first.phase, "summary", "the season plays to the end");
+  assert.ok(!first.final.bestSigning || !first.freeFill.some((f) => f.id === first.final.bestSigning.id), "a free agent is not the best signing");
+});
 t("Dare2Dream: a sample of drafted seasons plays to the end, and draft picks weaken their clubs", () => {
   for (const c of G.clubSeasons.filter((_, i) => i % 45 === 0)) {
     const { st, S } = draft("d2d-play-" + c.key, c);

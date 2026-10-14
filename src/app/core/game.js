@@ -318,7 +318,7 @@
     const st = E.newRun({ seed: c.id + ':s' + c.n, mode: 'clubx', catalogue: [], recent: GAME.recentFor(S2, spec.me) });
     st.seasonKey = spec.key; st.club = spec.me; st.formation = e.formation; st.career = c.n;
     E.carryIn(st, S2, S2.xiIds);
-    Object.assign(run, { eng: st, step: 'table', tableSeen: false, recorded: false, match: null, pending: null });
+    Object.assign(run, { eng: st, step: 'table', tableSeen: false, recorded: false, match: null, pending: null, poachSeen: false, freeSeen: false });
     D2T.save();
     return true;
   };
@@ -430,7 +430,26 @@
     if (pitch < 0) return false;
     E.swapSetup(eng, pitch, sub); D2T.save(); return true;
   };
-  GAME.startSeason = () => { const ok = E.startSeason(GAME.eng(), GAME.S()); D2T.state.run.step = GAME.eng().phase === 'window' ? 'transfer' : 'fixtures'; D2T.save(); return ok; };
+  // ---------- Poached (Craig, 14 Oct): a Club X career's later seasons lose three of the XI before the Summer window ----------
+  // E.poach decides it once (eng.poached, seeded); the squad screen plays it out the first time (the engine state is set as
+  // the animation starts, so a refresh shows the end state). Each empty shirt keeps the crest of where its man went.
+  GAME.poachDue = () => { const eng = GAME.eng(); return !!(eng && eng.mode === 'clubx' && eng.phase === 'setup' && eng.career > 1 && !eng.poached); };
+  GAME.poached = () => {
+    const eng = GAME.eng(), S = GAME.S(); if (!eng || !eng.poached) return [];
+    return eng.poached.map((x) => { const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { id: x.id, name: x.name, slot: x.slot, club: name, crest: c.crest, code: c.code }; });
+  };
+  GAME.poach = () => { const eng = GAME.eng(); if (!GAME.poachDue()) return []; E.poach(eng, GAME.S()); D2T.save(); return GAME.poached(); };
+  // the empty shirts and who left each (by his old shirt first; a shirt emptied by a change of shape takes the next one)
+  GAME.poachedSlots = () => {
+    const eng = GAME.eng(), list = GAME.poached(), out = {}; if (!list.length) return out;
+    const empty = eng.xi.map((id, i) => (id == null ? i : -1)).filter((i) => i >= 0), left = [];
+    list.forEach((x) => { if (empty.includes(x.slot) && !out[x.slot]) out[x.slot] = x; else left.push(x); });
+    empty.forEach((i) => { if (!out[i] && left.length) out[i] = left.shift(); });
+    return out;
+  };
+  // free agents who filled shirts still empty when the Summer window closed (E.fillHoles), shown once on the fixtures
+  GAME.freeFill = () => { const eng = GAME.eng(), S = GAME.S(); return ((eng && eng.freeFill) || []).map((x) => GAME.card(S, x.id)).filter(Boolean); };
+  GAME.startSeason = () => { if (GAME.poachDue()) E.poach(GAME.eng(), GAME.S()); const ok = E.startSeason(GAME.eng(), GAME.S()); D2T.state.run.step = GAME.eng().phase === 'window' ? 'transfer' : 'fixtures'; D2T.save(); return ok; };
 
   // ---------- Dare2Dream draft: one spin per shirt ----------
   GAME.inDraft = () => GAME.eng().phase === 'draft';
@@ -514,7 +533,7 @@
     // Colour only (near misses and bookings): seeded from the run, never changes a result.
     const rnd = E.stream(eng.seed, 'flavour', gw);
     const mine = eng.xi.map((id) => GAME.card(S, id)).filter((c) => c && c.pos !== 'GK');
-    const theirs = E.clubXI(S, r.opp, new Set()).filter((p) => p.b !== 'GK').map((p) => p.n);
+    const theirs = E.clubXI(S, r.opp, new Set(), E.joinersOf(S, eng, r.opp)).filter((p) => p.b !== 'GK').map((p) => p.n);
     const pick = (arr) => arr.length ? arr[Math.floor(rnd() * arr.length)] : '';
     const misses = 2 + Math.floor(rnd() * 4);
     for (let i = 0; i < misses; i++) {
@@ -526,10 +545,10 @@
     ev.push({ min: 45, type: 'ht' }, { min: 90, type: 'ft' });
     const order = { goal: 1, miss: 0, yellow: 2, ht: 3, ft: 4 };
     ev.sort((a, b) => a.min - b.min || order[a.type] - order[b.type]);
-    const opp = E.clubStrength(S, r.opp, new Set(eng.signed.filter((x) => x.date <= r.date).map((x) => x.id)));
+    const opp = E.clubStrength(S, r.opp, new Set(eng.signed.filter((x) => x.date <= r.date).map((x) => x.id)), E.joinersOf(S, eng, r.opp));
     return { gw, opp: oppName, ha: r.home ? 'H' : 'A', gf: r.us, ga: r.them, events: ev, me: Math.round(E.userStrength(S, eng).ovr), oppStrength: Math.round(opp.ovr), date: r.date };
   };
-  GAME.oppStrength = (gw) => { const eng = GAME.eng(), S = GAME.S(), f = eng.fixtures[gw - 1]; return Math.round(E.clubStrength(S, f.opp, new Set(eng.signed.filter((x) => x.date <= f.date).map((x) => x.id))).ovr); };
+  GAME.oppStrength = (gw) => { const eng = GAME.eng(), S = GAME.S(), f = eng.fixtures[gw - 1]; return Math.round(E.clubStrength(S, f.opp, new Set(eng.signed.filter((x) => x.date <= f.date).map((x) => x.id)), E.joinersOf(S, eng, f.opp)).ovr); };
   // After the final whistle: where to next (a transfer window, the next gameweek or the season summary).
   GAME.afterMatch = () => {
     const run = D2T.state.run, eng = GAME.eng();

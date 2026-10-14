@@ -33,7 +33,10 @@
 
   // An empty shirt on the pitch (Dare2Dream draft): the shape of a mini card with the position on it.
   // the wrap carries the fit ring round the shirt (the shirt itself is clipped to its shield shape)
-  SE.emptyShirt = (pos, w) => `<span class="se-emptywrap"><div class="se-empty" style="width:${w}px;height:${Math.round(w * 1.3)}px" aria-label="Empty ${pos} shirt"><span>${pos}</span></div></span>`;
+  // `to` (a Club X career's poached player, Craig 14 Oct): the shirt shows the crest of the club he went to and "TO {CLUB}"
+  // (the club's name sized so its longest word fits the shirt, never broken inside a word)
+  const toSize = (club, w) => { const L = Math.max(...String(club).split(/\s+/).map((x) => x.length)); return Math.max(5, Math.min(w * 0.18, (w - 6) / (L * 0.66 + 0.4))).toFixed(1); };
+  SE.emptyShirt = (pos, w, to) => `<span class="se-emptywrap"><div class="se-empty${to ? ' se-empty-to' : ''}" style="width:${w}px;height:${Math.round(w * 1.3)}px" aria-label="Empty ${pos} shirt${to ? `, ${D2T.esc(to.name)} left for ${D2T.esc(to.club)}` : ''}">${to ? `<span class="se-to">${to.crest ? `<img src="${to.crest}" alt="">` : ''}<i>To</i> <b style="font-size:${toSize(to.club, w)}px">${D2T.esc(to.club)}</b></span>` : `<span>${pos}</span>`}</div></span>`;
 
   // ---------- league table ----------
   SE.sortRows = (rows) => rows.sort((a, b) => b.pts - a.pts || (b.gf - b.ga) - (a.gf - a.ga) || b.gf - a.gf || a.name.localeCompare(b.name));
