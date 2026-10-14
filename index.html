@@ -988,7 +988,7 @@ button.fr-dtile:active { transform: scale(.98); }
 .se-clockrow { position: relative; display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 8px; }
 .se-clockrow .se-result { margin-top: 0; }   /* the result chip beside the clock at full time (Craig, 14 Oct) */
 .se-match .se-scorers { margin: 10px 0 0; }
-.se-match .se-preview { margin-top: 10px; }
+.se-match .se-preview { margin-top: 4px; }
 .se-clock { min-width: 64px; text-align: center; padding: 4px 12px; border-radius: 10px; background: #000; border: 1px solid var(--line); font: var(--display); font-size: 18px; font-variant-numeric: tabular-nums; }
 .se-live .se-clock { border-color: var(--se-acc-b); color: var(--se-text); }
 .se-prog { position: relative; height: 3px; margin: 12px 6px 0; border-radius: 2px; background: #22222A; overflow: hidden; }
@@ -1039,7 +1039,7 @@ button.fr-dtile:active { transform: scale(.98); }
 .se-tr.se-landed .se-mv { color: var(--se-ink); }
 .se-aftertable .se-gw { font-size: 30px; }
 /* the results screen (Craig, 14 Oct): your match card carries the score, the scorers and the result chip; the other
-   scores sit in the fixtures' rows with the score in the middle; a raided club's row (it dropped points) is marked */
+   scores sit in the fixtures' rows with the score in the middle */
 .se-results .se-gw { font-size: 30px; }
 .se-myfx-score { display: flex; align-items: center; justify-content: center; gap: 8px; font: var(--display); font-size: 44px; font-variant-numeric: tabular-nums; }
 .se-myfx-score i { width: 12px; height: 4px; border-radius: 2px; background: var(--white); opacity: .6; }
@@ -1048,7 +1048,14 @@ button.fr-dtile:active { transform: scale(.98); }
 .se-fx-res { grid-template-columns: 1fr 58px 1fr; }
 .se-fx-sc { display: flex; align-items: center; justify-content: center; gap: 5px; font: var(--display); font-size: 18px; font-variant-numeric: tabular-nums; }
 .se-fx-sc i { width: 8px; height: 3px; border-radius: 2px; background: var(--muted); }
-.se-fx-raided { border-color: var(--se-acc-b); }
+/* a dot per player signed from a club this season, in your club's colour, at the far edge of its side (Craig, 14 Oct) */
+.se-fx-res { position: relative; }
+.se-fx-res .se-fx-dots { position: absolute; top: 50%; transform: translateY(-50%); display: flex; flex-direction: row; gap: 3px; }
+.se-fx-res .se-fx-dots.se-h { left: 4px; }
+.se-fx-res .se-fx-dots.se-a { right: 4px; }
+.se-fx-dots i { display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--se-acc); }
+.se-fx-key { display: flex; align-items: center; gap: 6px; }
+.se-fx-key .se-fx-dots { display: inline-flex; flex-shrink: 0; }
 .se-fs-score { font-size: 76px; gap: 10px; }
 .se-fs-team b { font-size: 15px; white-space: normal; line-height: 1; overflow-wrap: anywhere; text-align: center; }
 .se-sb-team b { font-size: 15px; white-space: normal; line-height: 1; text-align: center; }
@@ -2955,10 +2962,11 @@ const CUES = {
   // match day
   fixtures(t) { const o = O(1, 0.04); for (let i = 0; i < 10; i++) tap(o, t + i * 0.04, 0.07, 300 - i * 8); },
   kickoff(t) { pea(soft(O(0.55, 0.2), 2800), t, 1); crowd(true); },
-  goal(t) { const o = O(1, 0.2); duck(t, 3); felt(o, t, 240, 0.35, 0.1); clip(o, "net_ripple", t + 0.1, { gain: 0.9 }); clip(o, "goal_roar", t + 0.35); },
-  conceded(t) { const o = O(1, 0.2); duck(t, 4.5); clip(o, "groan", t); clip(o, "boos", t + 0.9, { gain: 0.9, dur: 4.2 }); },
+  goal(t) { const o = O(1, 0.2); duck(t, 3); felt(o, t, 240, 0.35, 0.1); clip(o, "net_ripple", t + 0.1, { gain: 0.9 }); react(clip(o, "goal_roar", t + 0.35)); },
+  conceded(t) { const o = O(1, 0.2); duck(t, 4.5); react(clip(o, "groan", t)); react(clip(o, "boos", t + 0.9, { gain: 0.9, dur: 4.2 })); },
   halftime(t) { clip(O(1, 0.15), "whistle_two", t); },
-  fulltime(t) { clip(O(1, 0.15), "whistle_three", t); },
+  // the final whistle fades out any goal reaction still going (Craig, 14 Oct: a late goal's boos carried over the win's cheer)
+  fulltime(t) { hush(0.5); clip(O(1, 0.15), "whistle_three", t); },
   skip(t) { const o = O(1, 0.06); let x = 0; for (let i = 0; i < 14; i++) { tap(o, t + x, 0.06, 220 + i * 8); x += 0.06 * Math.pow(0.86, i); } swish(soft(o, 1800), t + x - 0.1, 0.3, 500, 1800, 0.08); },
   result(t, v = 0) { const o = O(1, 0.2); if (v === 0) { clip(o, "cheer_short", t, { gain: 0.9 }); clip(o, "applause", t + 0.6, { gain: 0.8 }); } else if (v === 1) clip(o, "applause", t, { gain: 0.8, dur: 2 }); else clip(o, "crowd_moan", t); },
   tableMove(t, v = 2) { const o = O(1, 0.06); if (v === 2) return tap(o, t, 0.07); v === 0 ? swish(soft(o, 1800), t, 0.25, 500, 1800, 0.1) : swish(soft(o, 1800), t, 0.25, 1800, 400, 0.1); tap(o, t + 0.25, 0.06); },
@@ -3009,6 +3017,10 @@ const CUES = {
 // names the screens already used, kept so nothing breaks
 const ALIAS = { roll3: "spinStart", lockin: "clubConfirm", pick: "cardSelect", reveal: "clubReveal", subIn: "cardDrop", subOut: "dropCancel", buzzer: "denied", climb: "riseCount" };
 
+// the crowd's reactions to goals, kept so the final whistle can fade out any still going before the result
+let reactions = [];
+function react(c) { if (c) { reactions.push(c); if (reactions.length > 8) reactions.shift(); } return c; }
+function hush(fade = 0.5) { for (const c of reactions) c.stop(fade); reactions = []; }
 function play(id, arg, at = 0) {
   if (!ok()) return;
   const name = ALIAS[id] || id, fn = CUES[name]; if (!fn) return;
@@ -3817,6 +3829,13 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
     const day = (d) => Date.parse(d + 'T12:00:00Z') / 864e5, at = day(f.date);
     return E.otherResults(S, eng).filter((m) => m.h !== me && m.a !== me && m.date > prev && m.date < next && Math.abs(day(m.date) - at) <= 3)
       .map((m) => ({ date: m.date, home: S.clubs[m.h].name, away: S.clubs[m.a].name, hg: m.hg, ag: m.ag, changed: !!m.changed }));
+  };
+  // Players you have signed from each club this season, by club name (Craig, 14 Oct: dots on the results rows). A Club X
+  // career's later seasons leave out the XI carried in from last season (gw 0), so only this season's signings count.
+  GAME.signedFrom = () => {
+    const S = GAME.S(), eng = GAME.eng(), out = {};
+    for (const r of eng.raids || []) { if (eng.career > 1 && !r.gw) continue; const c = S.clubs[r.club]; if (c) out[c.name] = (out[c.name] || 0) + 1; }
+    return out;
   };
   GAME.result = (gw) => {
     const eng = GAME.eng(), S = GAME.S(), r = eng.played[gw - 1]; if (!r) return null;
@@ -6583,8 +6602,11 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
       const gw = st.match, fx = gw ? SE.fixture(data, gw) : null;
       const sim = gw ? GAME.result(gw) : null;
       if (!fx || !sim) { D2T.go(GAME.stepFor() || 'home'); return; }
-      // fresh from Kick off: play it out; otherwise (a refresh, or back from the results) it is settled
+      // fresh from Kick off: play it out; back from the results: settled; a refresh mid-match goes on to the results
+      // (Craig, 14 Oct: the finished match moves on by itself, so its settled screen is only for looking back)
       const fresh = !!st.watch; if (fresh) { st.watch = false; D2T.save(); }
+      const review = !fresh && !!st.review; if (review) { st.review = false; D2T.save(); }
+      if (!fresh && !review) { st.step = 'results'; D2T.save(); D2T.go('results'); return; }
       const meC = SE.club(data, me), oppC = SE.club(data, fx.opp);
       const home = fx.ha === 'H';
       const [hC, aC] = home ? [meC, oppC] : [oppC, meC];
@@ -6603,13 +6625,15 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
           <div class="se-prog"><span></span><i class="se-prog-ht"></i></div>
         </div>
         ${SE.scorers([], [])}
-        <div class="se-preview">
-          <div class="se-pv"><span>Your XI rating</span><b>${sim.me}</b></div>
-          <div class="se-pv"><span>${D2T.esc(oppC.name)} rating</span><b>${sim.oppStrength}</b></div>
-          <div class="se-pv"><span>${D2T.esc(oppC.name)} finished</span><b>${D2T.ordinal(oppRow ? oppRow.pos : 0)}</b></div>
-          <p class="se-note">Your result is played out by the game from your XI's defence, midfield and attack against ${D2T.esc(oppC.name)}'s real squad${eng.signed.length ? ', minus anyone you have signed from them' : ''}.</p>
+        <div class="se-feed" aria-live="polite">
+          <!-- the ratings panel is the commentary's first line (Craig, 14 Oct): each new line goes in above it, so it moves down as the match runs -->
+          <div class="se-preview">
+            <div class="se-pv"><span>Your XI rating</span><b>${sim.me}</b></div>
+            <div class="se-pv"><span>${D2T.esc(oppC.name)} rating</span><b>${sim.oppStrength}</b></div>
+            <div class="se-pv"><span>${D2T.esc(oppC.name)} finished</span><b>${D2T.ordinal(oppRow ? oppRow.pos : 0)}</b></div>
+            <p class="se-note">Your result is played out by the game from your XI's defence, midfield and attack against ${D2T.esc(oppC.name)}'s real squad${eng.signed.length ? ', minus anyone you have signed from them' : ''}.</p>
+          </div>
         </div>
-        <div class="se-feed" aria-live="polite"></div>
         <div class="se-pad"></div>
       </div>`);
       // home (the menu), a greyed back (the result is decided), Skip to end then See results (Craig, 14 Oct)
@@ -6700,6 +6724,9 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
         body.querySelector('.se-sb').classList.remove('se-live');
         btn.textContent = 'See results'; btn.classList.remove('se-btn-ghost');
         setTimeout(() => { if (!alive) return; showChip(true); SND.play('result', res === 'win' ? 0 : res === 'draw' ? 1 : 2, 0.2); }, reduced ? 300 : 1100);
+        // then on to the results by itself after a moment on the final score (Craig, 14 Oct); See results goes sooner
+        st.step = 'results'; D2T.save();
+        setTimeout(() => { if (alive && phase === 'ft') D2T.go('results'); }, reduced ? 1500 : 3200);
       };
       // settled (a refresh, or back from the results): the whole match as it finished, no replay
       const settle = () => {
@@ -6748,7 +6775,9 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
       const others = GAME.gwResults(gw), byDate = [];
       others.forEach((f) => { let g = byDate.find((x) => x.date === f.date); if (!g) byDate.push(g = { date: f.date, list: [] }); g.list.push(f); });
       byDate.sort((a, b) => a.date.localeCompare(b.date));
-      const raided = others.some((f) => f.changed);
+      // a dot for every player you signed from a club this season, at the far left for the home side, far right for the away
+      const from = GAME.signedFrom(), dots = (name, cls) => from[name] ? `<span class="se-fx-dots ${cls}" aria-label="${from[name]} signed from ${D2T.esc(name)}">${'<i></i>'.repeat(from[name])}</span>` : '';
+      const anyDots = others.some((f) => from[f.home] || from[f.away]);
       const body = D2T.h(`<div class="screen-body se-fixtures se-results">
         <div class="se-kicker">Premier League ${data.season}</div>
         <h1 class="se-h1 se-gw">Gameweek ${gw} results</h1>
@@ -6762,15 +6791,16 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
           ${SE.scorers(home ? mine : theirs, home ? theirs : mine)}
           <div class="se-myfx-foot"><span class="se-result se-res-${res}">${res === 'win' ? 'Win' : res === 'draw' ? 'Draw' : 'Defeat'} · ${res === 'win' ? '+3 points' : res === 'draw' ? '+1 point' : '0 points'}</span></div>
         </div>
-        ${byDate.length ? byDate.map((g, gi) => `<div class="se-fx-date">${SE.date(g.date)}</div><div class="se-fx-list">${g.list.map((f, i) => `<div class="se-fx se-fx-res${f.changed ? ' se-fx-raided' : ''}" style="--d:${120 + (gi * 4 + i) * 45}ms">${side(SE.club(data, f.home), 'se-h')}<span class="se-fx-sc">${f.hg}<i></i>${f.ag}</span>${side(SE.club(data, f.away), 'se-a')}</div>`).join('')}</div>`).join('')
+        ${byDate.length ? byDate.map((g, gi) => `<div class="se-fx-date">${SE.date(g.date)}</div><div class="se-fx-list">${g.list.map((f, i) => `<div class="se-fx se-fx-res" style="--d:${120 + (gi * 4 + i) * 45}ms">${dots(f.home, 'se-h')}${dots(f.away, 'se-a')}${side(SE.club(data, f.home), 'se-h')}<span class="se-fx-sc">${f.hg}<i></i>${f.ag}</span>${side(SE.club(data, f.away), 'se-a')}</div>`).join('')}</div>`).join('')
           : `<p class="se-note">No other matches around this date.</p>`}
-        <p class="se-note">${GAME.isSim() ? `Other clubs' results are the ${data.season} forecast, played out by the match model.` : `Other clubs' results are their real ${data.season} results.`}${raided ? ' Clubs you have signed players from are weaker, and dropped points here.' : ''}</p>
+        <p class="se-note">${GAME.isSim() ? `Other clubs' results are the ${data.season} forecast, played out by the match model.` : `Other clubs' results are their real ${data.season} results.`}${anyDots ? ' Clubs you sign players from are weaker and can drop points.' : ''}</p>
+        ${anyDots ? `<p class="se-note se-fx-key"><span class="se-fx-dots"><i></i></span> = a player you signed from that club</p>` : ''}
         <div class="se-pad"></div>
       </div>`);
       // home (the menu), back to the match as it finished, League table across the right (Craig, 14 Oct)
       const bar = D2T.h(SE.bar({ mid: SE.backBtn('Back to the match'), main: SE.mainBtn('League table', 'se-main') }));
       root.append(body, bar);
-      bar.querySelector('.se-back').onclick = () => { st.step = 'match'; D2T.save(); D2T.go('match'); };
+      bar.querySelector('.se-back').onclick = () => { st.step = 'match'; st.review = true; D2T.save(); D2T.go('match'); };
       bar.querySelector('.bar-main').onclick = () => { st.step = 'standings'; D2T.save(); D2T.go('standings'); };
       if (!reduced && window.D2TSound) window.D2TSound.play('fixtures', null, 0.15);
     }
