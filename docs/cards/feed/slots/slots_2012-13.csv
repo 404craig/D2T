@@ -1,0 +1,431 @@
+season,club_feed,feed_id,name,profile_position,starts_with_slot,slots
+2012/13,Arsenal,4477,Santi Cazorla,Left/Centre/Right Attacking Midfielder,37,CAM:24 LW:13
+2012/13,Arsenal,2704,Mikel Arteta,Left/Centre/Right Central Midfielder,34,CDM:34
+2012/13,Arsenal,4246,Per Mertesacker,Centre Central Defender,33,CB:33
+2012/13,Arsenal,3543,Wojciech Szczesny,Goalkeeper,25,GK:25
+2012/13,Arsenal,3796,Thomas Vermaelen,Left/Centre Central Defender,25,CB:22 LB:3
+2012/13,Arsenal,4480,Lukas Podolski,Left/Centre Striker,25,LW:20 ST:5
+2012/13,Arsenal,3311,Bacary Sagna,Right Full Back,25,RB:24 CB:1
+2012/13,Arsenal,2839,Theo Walcott,Centre/Right Second Striker,24,RW:19 ST:5
+2012/13,Arsenal,4481,Olivier Giroud,Centre Striker,24,ST:24
+2012/13,Arsenal,3046,Kieran Gibbs,Left Full Back,23,LB:23
+2012/13,Arsenal,3548,Aaron Ramsey,Centre Central Midfielder,21,CDM:16 RW:4 LW:1
+2012/13,Arsenal,4030,Laurent Koscielny,Centre Central Defender,20,CB:20
+2012/13,Arsenal,3547,Jack Wilshere,Centre Central Midfielder,20,CDM:13 CAM:7
+2012/13,Arsenal,4248,Carl Jenkinson,Right Full Back,14,RB:14
+2012/13,Arsenal,4255,Gervinho,Left/Centre Second Striker,12,RW:6 ST:4 LW:2
+2012/13,Arsenal,4252,Alex Oxlade-Chamberlain,Right Winger,11,RW:9 LW:2
+2012/13,Arsenal,2840,Abou Diaby,Left/Centre Central Midfielder,10,CDM:10
+2012/13,Arsenal,2834,Vito Mannone,Goalkeeper,9,GK:9
+2012/13,Arsenal,4472,Nacho Monreal,Left Full Back,9,LB:9
+2012/13,Arsenal,3052,Tomás Rosicky,Left/Centre/Right Attacking Midfielder,7,CAM:7
+2012/13,Arsenal,3309,Lukasz Fabianski,Goalkeeper,4,GK:4
+2012/13,Arsenal,3549,Francis Coquelin,Centre Defensive Midfielder,3,CDM:3
+2012/13,Arsenal,4247,André Santos,Left Full Back,3,LB:3
+2012/13,Aston Villa,4487,Matthew Lowton,Right Full Back,8,RB:6 RWB:1 CB:1
+2012/13,Aston Villa,3558,Brad Guzan,Goalkeeper,7,GK:7
+2012/13,Aston Villa,4492,Christian Benteke,Centre Striker,7,ST:7
+2012/13,Aston Villa,3562,Ciaran Clark,Centre Central Defender,6,CB:6
+2012/13,Aston Villa,3561,Nathan Baker,Centre Central Defender,6,CB:5 LB:1
+2012/13,Aston Villa,4489,Ashley Westwood,Centre Central Midfielder,6,CDM:4 CM:2
+2012/13,Aston Villa,3803,Andreas Weimann,Centre Striker,6,RW:3 ST:2 CAM:1
+2012/13,Aston Villa,3565,Barry Bannan,Left/Centre Central Midfielder,5,CM:4 CAM:1
+2012/13,Aston Villa,2622,Gabriel Agbonlahor,Centre Striker,5,LW:4 CAM:1
+2012/13,Aston Villa,4486,Ron Vlaar,Centre Central Defender,4,CB:4
+2012/13,Aston Villa,4491,Brett Holman,Left/Right Second Striker,4,CM:2 LW:1 CAM:1
+2012/13,Aston Villa,3672,Joe Bennett,Left Full Back,4,LB:3 LWB:1
+2012/13,Aston Villa,3799,Fabian Delph,Left/Centre Central Midfielder,3,CDM:3
+2012/13,Aston Villa,3324,Eric Lichaj,Left/Right Full Back,3,LB:1 LWB:1 RWB:1
+2012/13,Aston Villa,3327,Chris Herd,Centre/Right Central Midfielder,3,CB:2 CM:1
+2012/13,Aston Villa,4488,Karim El Ahmadi,Centre Defensive Midfielder,2,CDM:2
+2012/13,Aston Villa,2755,Charles N'Zogbia,Left Winger,2,RW:1 CAM:1
+2012/13,Aston Villa,2928,Stephen Ireland,Centre Central Midfielder,2,CAM:1 CM:1
+2012/13,Aston Villa,851,Shay Given,Goalkeeper,1,GK:1
+2012/13,Aston Villa,2098,Darren Bent,Centre Striker,1,ST:1
+2012/13,Aston Villa,4258,Enda Stevens,Left Full Back,1,LB:1
+2012/13,Aston Villa,4490,Yacouba Sylla,Centre Central Midfielder,1,CM:1
+2012/13,Aston Villa,4493,Jordan Bowery,Centre Striker,1,RW:1
+2012/13,Chelsea,3360,Branislav Ivanovic,Centre/Right Central Defender,8,CB:5 RB:3
+2012/13,Chelsea,3420,Fernando Torres,Centre Striker,8,ST:7 LW:1
+2012/13,Chelsea,2651,Petr Cech,Goalkeeper,7,GK:7
+2012/13,Chelsea,4501,Oscar,Centre Attacking Midfielder,7,CAM:4 RW:3
+2012/13,Chelsea,4100,David Luiz,Centre Central Defender,6,CB:4 CDM:2
+2012/13,Chelsea,4287,Juan Mata,Left/Centre/Right Attacking Midfielder,6,RW:3 CAM:3
+2012/13,Chelsea,4503,Eden Hazard,Left/Centre/Right Second Striker,6,LW:5 CAM:1
+2012/13,Chelsea,1494,Ashley Cole,Left Full Back,5,LB:5
+2012/13,Chelsea,800,Frank Lampard,Centre Central Midfielder,5,CDM:5
+2012/13,Chelsea,4103,Ramires,Centre/Right Central Midfielder,5,CDM:4 RW:1
+2012/13,Chelsea,4496,César Azpilicueta,Left/Right Full Back,5,RB:5
+2012/13,Chelsea,3102,John Obi Mikel,Centre Defensive Midfielder,4,CDM:4
+2012/13,Chelsea,2886,Ryan Bertrand,Left Full Back,4,LB:3 LW:1
+2012/13,Chelsea,2620,Gary Cahill,Centre Central Defender,4,CB:4
+2012/13,Chelsea,1353,John Terry,Centre Central Defender,3,CB:3
+2012/13,Chelsea,2309,Ross Turnbull,Goalkeeper,1,GK:1
+2012/13,Chelsea,4502,Marko Marin,Left/Centre/Right Attacking Midfielder,1,RW:1
+2012/13,Chelsea,3983,Victor Moses,Right Wing Back,1,LW:1
+2012/13,Chelsea,4499,Nathan Aké,Centre/Right Central Defender,1,CDM:1
+2012/13,Chelsea,4213,Demba Ba,Centre Striker,1,ST:1
+2012/13,Everton,2516,Tim Howard,Goalkeeper,7,GK:7
+2012/13,Everton,3222,Phil Jagielka,Centre Central Defender,7,CB:7
+2012/13,Everton,3030,Leighton Baines,Left Full Back,7,LB:7
+2012/13,Everton,3388,Steven Pienaar,Left/Centre/Right Attacking Midfielder,6,LM:5 CAM:1
+2012/13,Everton,3604,Marouane Fellaini,Centre Attacking Midfielder,6,CAM:4 CM:2
+2012/13,Everton,2125,Sylvain Distin,Left/Centre Central Defender,6,CB:6
+2012/13,Everton,3600,Séamus Coleman,Right Full Back,5,RB:5
+2012/13,Everton,4507,Kevin Mirallas,Left/Right Winger,5,RM:2 CAM:2 LM:1
+2012/13,Everton,1887,Leon Osman,Centre/Right Attacking Midfielder,5,CM:4 RM:1
+2012/13,Everton,2942,Darron Gibson,Centre Central Midfielder,5,CM:5
+2012/13,Everton,4296,Nikica Jelavic,Centre Striker,4,ST:4
+2012/13,Everton,2905,Victor Anichebe,Centre Striker,4,ST:4
+2012/13,Everton,921,Phil Neville,Centre Defensive Midfielder,3,CM:2 RB:1
+2012/13,Everton,4510,Steven Naismith,Centre Striker,3,RM:3
+2012/13,Everton,3867,John Heitinga,Centre/Right Central Defender,1,CB:1
+2012/13,Everton,1881,Tony Hibbert,Right Full Back,1,RB:1
+2012/13,Everton,1840,Thomas Hitzlsperger,Left/Centre Central Midfielder,1,CM:1
+2012/13,Everton,4115,Ross Barkley,Left/Centre/Right Attacking Midfielder,1,CM:1
+2012/13,Fulham,1218,Mark Schwarzer,Goalkeeper,6,GK:6
+2012/13,Fulham,3394,Brede Hangeland,Centre Central Defender,6,CB:6
+2012/13,Fulham,4514,Sascha Riether,Right Full Back,5,RB:5
+2012/13,Fulham,1230,Aaron Hughes,Centre Central Defender,5,CB:5
+2012/13,Fulham,3408,Alexander Kacaniklic,Left Winger,5,LM:4 CAM:1
+2012/13,Fulham,3247,Dimitar Berbatov,Centre Striker,5,ST:4 CAM:1
+2012/13,Fulham,4308,Bryan Ruiz,Centre Second Striker,4,CAM:3 CM:1
+2012/13,Fulham,1982,Kieran Richardson,Left/Centre Central Midfielder,4,LB:2 LM:1 CM:1
+2012/13,Fulham,1004,Damien Duff,Left Winger,3,RM:3
+2012/13,Fulham,2110,John Arne Riise,Left Full Back,3,LB:3
+2012/13,Fulham,2007,Steve Sidwell,Centre Central Midfielder,3,CM:3
+2012/13,Fulham,2129,Chris Baird,Centre/Right Central Defender,3,CM:3
+2012/13,Fulham,4521,Mladen Petric,Centre Striker,2,ST:2
+2012/13,Fulham,4516,Ashkan Dejagah,Left/Centre/Right Attacking Midfielder,2,RM:1 CAM:1
+2012/13,Fulham,4515,Giorgos Karagounis,Centre/Right Attacking Midfielder,2,CM:2
+2012/13,Fulham,3116,Matthew Briggs,Right Full Back,1,LB:1
+2012/13,Fulham,4304,Mahamadou Diarra,Centre Central Midfielder,1,CM:1
+2012/13,Fulham,4123,Mousa Dembélé,Left/Centre Central Midfielder,1,CM:1
+2012/13,Fulham,3780,Hugo Rodallega,Centre Striker,1,ST:1
+2012/13,Fulham,4513,Stanislav Manolev,Right Full Back,1,RB:1
+2012/13,Fulham,2412,Philippe Senderos,Centre Central Defender,1,CB:1
+2012/13,Fulham,4517,Urby Emanuelson,Left Winger,1,RM:1
+2012/13,Fulham,4519,Eyong Enoh,Centre Defensive Midfielder,1,CM:1
+2012/13,Liverpool,1575,Steven Gerrard,Centre Defensive Midfielder,36,CM:20 CDM:14 CAM:2
+2012/13,Liverpool,2916,Daniel Agger,Centre Central Defender,35,CB:35
+2012/13,Liverpool,2148,Glen Johnson,Left/Right Full Back,35,RB:22 LB:12 RWB:1
+2012/13,Liverpool,4138,Luis Suárez,Left/Centre/Right Second Striker,33,ST:26 CAM:5 LW:2
+2012/13,Liverpool,2911,Pepe Reina,Goalkeeper,30,GK:30
+2012/13,Liverpool,3462,José Enrique,Left Full Back,25,LB:21 LW:3 LWB:1
+2012/13,Liverpool,2122,Stewart Downing,Left Winger,24,RW:17 LB:3 RM:3 LW:1
+2012/13,Liverpool,3404,Martin Skrtel,Centre Central Defender,23,CB:23
+2012/13,Liverpool,3137,Lucas Leiva,Centre Central Midfielder,23,CDM:21 CM:2
+2012/13,Liverpool,4413,Joe Allen,Centre Central Midfielder,21,CDM:13 CM:8
+2012/13,Liverpool,4316,Raheem Sterling,Left/Centre/Right Attacking Midfielder,19,LW:9 RW:9 ST:1
+2012/13,Liverpool,915,Jamie Carragher,Centre/Right Central Defender,15,CB:15
+2012/13,Liverpool,3712,Jordan Henderson,Centre Central Midfielder,15,CM:6 LW:4 CAM:3 LM:1 CDM:1
+2012/13,Liverpool,4130,Andre Wisdom,Centre/Right Full Back,11,RB:10 CB:1
+2012/13,Liverpool,4525,Philippe Coutinho,Left/Centre Attacking Midfielder,11,LW:6 CAM:3 LM:2
+2012/13,Liverpool,3154,Daniel Sturridge,Centre Striker,10,ST:9 RW:1
+2012/13,Liverpool,4135,Jonjo Shelvey,Left/Centre/Right Attacking Midfielder,8,CAM:4 LW:2 ST:1 CM:1
+2012/13,Liverpool,4315,Suso,Left/Centre/Right Attacking Midfielder,8,RW:4 LW:3 CAM:1
+2012/13,Liverpool,4705,Nuri Sahin,Centre Central Midfielder,7,CM:5 CAM:2
+2012/13,Liverpool,1947,Bradley Jones,Goalkeeper,7,GK:7
+2012/13,Liverpool,3863,Fabio Borini,Left/Centre/Right Striker,5,LW:2 RW:2 ST:1
+2012/13,Liverpool,3644,Martin Kelly,Right Full Back,4,RB:4
+2012/13,Liverpool,4313,Sebastián Coates,Centre Central Defender,1,CB:1
+2012/13,Liverpool,4527,Jordon Ibe,Left/Right Winger,1,LW:1
+2012/13,Manchester City,3143,Joe Hart,Goalkeeper,6,GK:6
+2012/13,Manchester City,3654,Pablo Zabaleta,Right Full Back,5,RB:4 CB:1
+2012/13,Manchester City,2413,Gaël Clichy,Left Full Back,5,LB:5
+2012/13,Manchester City,4534,Javi García,Centre Defensive Midfielder,5,CM:4 CB:1
+2012/13,Manchester City,3653,Vincent Kompany,Centre Central Defender,4,CB:4
+2012/13,Manchester City,2100,James Milner,Left/Centre/Right Attacking Midfielder,4,RM:2 RWB:1 CM:1
+2012/13,Manchester City,3281,Carlos Tevez,Centre Second Striker,4,CAM:3 ST:1
+2012/13,Manchester City,2574,Joleon Lescott,Centre Central Defender,4,CB:4
+2012/13,Manchester City,4145,David Silva,Left/Centre/Right Attacking Midfielder,4,LM:3 RM:1
+2012/13,Manchester City,3546,Samir Nasri,Left/Centre/Right Attacking Midfielder,3,RM:2 CM:1
+2012/13,Manchester City,4148,Yaya Touré,Centre Central Midfielder,3,CM:3
+2012/13,Manchester City,4328,Sergio Agüero,Centre Striker,3,CAM:2 ST:1
+2012/13,Manchester City,4151,Edin Dzeko,Centre Striker,3,ST:3
+2012/13,Manchester City,1308,Gareth Barry,Left/Centre Central Midfielder,3,CM:3
+2012/13,Manchester City,4152,Mario Balotelli,Left/Centre/Right Second Striker,2,ST:2
+2012/13,Manchester City,2892,Scott Sinclair,Left/Right Winger,2,LM:2
+2012/13,Manchester City,4532,Matija Nastasic,Centre Central Defender,2,CB:2
+2012/13,Manchester City,2002,Kolo Touré,Centre Central Defender,1,CB:1
+2012/13,Manchester City,3659,Nigel de Jong,Centre Defensive Midfielder,1,CM:1
+2012/13,Manchester City,4141,Aleksandar Kolarov,Left Full Back,1,LWB:1
+2012/13,Manchester City,4531,Maicon,Right Full Back,1,RB:1
+2012/13,Manchester United,3664,Rafael,Right Full Back,8,RB:8
+2012/13,Manchester United,1634,Michael Carrick,Centre Central Midfielder,8,CDM:4 CM:3 CB:1
+2012/13,Manchester United,2616,Robin van Persie,Centre Striker,8,ST:8
+2012/13,Manchester United,2934,Patrice Evra,Left Full Back,7,LB:7
+2012/13,Manchester United,1111,Rio Ferdinand,Centre Central Defender,7,CB:7
+2012/13,Manchester United,3156,Jonny Evans,Centre Central Defender,6,CB:6
+2012/13,Manchester United,4330,David de Gea,Goalkeeper,5,GK:5
+2012/13,Manchester United,3448,Tom Cleverley,Left/Right Winger,5,CDM:3 CM:1 RW:1
+2012/13,Manchester United,3285,Antonio Valencia,Right Full Back,5,RW:3 RM:1 RB:1
+2012/13,Manchester United,3062,Ashley Young,Left/Right Wing Back,5,LW:2 RW:2 RM:1
+2012/13,Manchester United,4538,Shinji Kagawa,Centre Attacking Midfielder,4,CAM:2 LW:2
+2012/13,Manchester United,4154,Anders Lindegaard,Goalkeeper,4,GK:4
+2012/13,Manchester United,2935,Nemanja Vidic,Centre Central Defender,3,CB:3
+2012/13,Manchester United,3447,Nani,Left/Right Winger,3,RM:1 LW:1 LM:1
+2012/13,Manchester United,335,Ryan Giggs,Left/Centre Central Midfielder,3,LM:2 CDM:1
+2012/13,Manchester United,3452,Danny Welbeck,Centre Striker,3,CAM:2 LW:1
+2012/13,Manchester United,4161,Chicharito,Centre Striker,3,ST:2 CAM:1
+2012/13,Manchester United,2064,Wayne Rooney,Centre Second Striker,3,CAM:2 ST:1
+2012/13,Manchester United,3446,Anderson,Centre Central Midfielder,2,CDM:2
+2012/13,Manchester United,4537,Alexander Büttner,Left Full Back,2,LB:2
+2012/13,Manchester United,336,Paul Scholes,Centre Central Midfielder,2,CM:1 CDM:1
+2012/13,Manchester United,3820,Phil Jones,Centre Central Defender,2,CM:1 CB:1
+2012/13,Manchester United,1943,Darren Fletcher,Centre/Right Central Midfielder,1,CDM:1
+2012/13,Newcastle United,4346,Papiss Cissé,Centre Striker,7,ST:3 CAM:2 RW:2
+2012/13,Newcastle United,3680,Fabricio Coloccini,Centre Central Defender,6,CB:6
+2012/13,Newcastle United,3683,Jonás Gutiérrez,Left/Right Attacking Midfielder,6,LW:3 LM:2 CM:1
+2012/13,Newcastle United,4172,Cheick Tioté,Centre Defensive Midfielder,6,CM:4 CDM:2
+2012/13,Newcastle United,3169,Tim Krul,Goalkeeper,4,GK:4
+2012/13,Newcastle United,4339,Davide Santon,Left/Right Full Back,4,LB:4
+2012/13,Newcastle United,4166,James Perch,Left/Centre/Right Central Defender,4,CM:2 CDM:1 CB:1
+2012/13,Newcastle United,4341,Yohan Cabaye,Centre Central Midfielder,4,CM:2 CAM:1 CDM:1
+2012/13,Newcastle United,4213,Demba Ba,Centre Striker,4,ST:4
+2012/13,Newcastle United,4550,Vurnon Anita,Left/Centre/Right Defensive Midfielder,3,CM:2 RB:1
+2012/13,Newcastle United,2323,Steven Taylor,Centre Central Defender,3,CB:3
+2012/13,Newcastle United,4171,Hatem Ben Arfa,Left/Centre/Right Attacking Midfielder,3,CAM:1 RW:1 RM:1
+2012/13,Newcastle United,3157,Danny Simpson,Right Full Back,3,RB:3
+2012/13,Newcastle United,4024,Mike Williamson,Centre Central Defender,3,CB:3
+2012/13,Newcastle United,4546,Mathieu Debuchy,Right Full Back,3,RB:3
+2012/13,Newcastle United,4544,Mapou Yanga-Mbiwa,Centre/Right Central Defender,3,LB:2 CB:1
+2012/13,Newcastle United,4342,Sylvain Marveaux,Left/Right Winger,2,CM:2
+2012/13,Newcastle United,2214,Robert Elliot,Goalkeeper,2,GK:2
+2012/13,Newcastle United,4554,Yoan Gouffran,Left/Right Winger,2,CAM:2
+2012/13,Newcastle United,4552,Gaël Bigirimana,Centre Central Midfielder,1,CM:1
+2012/13,Newcastle United,3919,Gabriel Obertan,Left/Right Winger,1,CAM:1
+2012/13,Newcastle United,4545,Massadio Haïdara,Left Full Back,1,LB:1
+2012/13,Newcastle United,4549,Moussa Sissoko,Left/Centre/Right Attacking Midfielder,1,RM:1
+2012/13,Newcastle United,709,Steve Harper,Goalkeeper,1,GK:1
+2012/13,Norwich City,4349,Russell Martin,Centre/Right Central Defender,7,RB:7
+2012/13,Norwich City,4353,Bradley Johnson,Centre Central Midfielder,7,CM:7
+2012/13,Norwich City,3427,Javier Garrido,Left Full Back,6,LB:6
+2012/13,Norwich City,4558,Robert Snodgrass,Left/Right Attacking Midfielder,6,RM:5 LM:1
+2012/13,Norwich City,4363,Grant Holt,Centre Striker,6,ST:6
+2012/13,Norwich City,3681,Sebastien Bassong,Centre Central Defender,5,CB:5
+2012/13,Norwich City,4355,Jonny Howson,Centre Central Midfielder,5,CM:4 CAM:1
+2012/13,Norwich City,2217,Michael Turner,Centre Central Defender,5,CB:5
+2012/13,Norwich City,2896,John Ruddy,Goalkeeper,4,GK:4
+2012/13,Norwich City,4560,Alexander Tettey,Centre Defensive Midfielder,4,CM:3 CDM:1
+2012/13,Norwich City,3739,Leon Barnett,Centre Central Defender,3,CB:3
+2012/13,Norwich City,4356,Anthony Pilkington,Left/Right Winger,3,LM:3
+2012/13,Norwich City,4364,Simeon Jackson,Centre Striker,3,ST:2 CAM:1
+2012/13,Norwich City,3567,Mark Bunn,Goalkeeper,3,GK:3
+2012/13,Norwich City,2338,Andrew Surman,Centre Attacking Midfielder,2,LM:2
+2012/13,Norwich City,4029,Elliott Bennett,Right Winger,2,RM:1 LM:1
+2012/13,Norwich City,4357,Wes Hoolahan,Left Central Midfielder,2,CAM:2
+2012/13,Norwich City,4365,Steve Morison,Centre Striker,1,ST:1
+2012/13,Norwich City,4351,Ryan Bennett,Centre Central Defender,1,CB:1
+2012/13,Norwich City,4557,Steven Whittaker,Right Full Back,1,LB:1
+2012/13,Norwich City,4707,Kei Kamara,Left/Right Second Striker,1,RM:1
+2012/13,Queens Park Rangers,4371,Clint Hill,Left/Centre Central Defender,17,CB:17
+2012/13,Queens Park Rangers,4569,Stéphane Mbia,Centre Central Defender,16,CM:8 CDM:6 CB:1 RB:1
+2012/13,Queens Park Rangers,3241,Adel Taarabt,Centre Attacking Midfielder,15,CAM:6 LM:4 ST:3 LW:2
+2012/13,Queens Park Rangers,2835,Armand Traore,Left Full Back,13,LB:13
+2012/13,Queens Park Rangers,4381,Jamie Mackie,Right Winger,12,RW:4 RM:3 ST:3 CAM:1 LW:1
+2012/13,Queens Park Rangers,2634,Ryan Nelsen,Centre Central Defender,11,CB:11
+2012/13,Queens Park Rangers,2728,Nedum Onuoha,Centre Central Defender,10,RB:7 CB:3
+2012/13,Queens Park Rangers,4566,Julio César,Goalkeeper,10,GK:10
+2012/13,Queens Park Rangers,2823,Shaun Derry,Centre Central Midfielder,10,CDM:8 CM:2
+2012/13,Queens Park Rangers,2758,Robert Green,Goalkeeper,9,GK:9
+2012/13,Queens Park Rangers,3665,Fábio,Left/Right Full Back,8,LB:5 RB:2 RW:1
+2012/13,Queens Park Rangers,4377,Samba Diakité,Centre Defensive Midfielder,7,CM:5 CDM:2
+2012/13,Queens Park Rangers,3823,Junior Hoilett,Left/Right Winger,7,LW:4 LM:2 CAM:1
+2012/13,Queens Park Rangers,1934,Shaun Wright-Phillips,Right Winger,7,RM:4 LW:2 LM:1
+2012/13,Queens Park Rangers,2723,Djibril Cissé,Centre Striker,6,ST:6
+2012/13,Queens Park Rangers,3587,José Bosingwa,Right Full Back,6,RB:6
+2012/13,Queens Park Rangers,4570,Esteban Granero,Centre/Right Central Midfielder,6,CM:4 RW:1 CAM:1
+2012/13,Queens Park Rangers,4572,Loïc Rémy,Centre Striker,6,ST:6
+2012/13,Queens Park Rangers,3724,Andros Townsend,Left Winger,6,RM:3 RW:2 LM:1
+2012/13,Queens Park Rangers,2940,Park Ji-Sung,Left/Right Winger,5,CM:2 LM:2 CDM:1
+2012/13,Queens Park Rangers,2603,Bobby Zamora,Centre Striker,5,ST:5
+2012/13,Queens Park Rangers,2393,Anton Ferdinand,Centre Central Defender,4,CB:3 RB:1
+2012/13,Queens Park Rangers,4383,Alejandro Faurlin,Left/Centre Attacking Midfielder,3,CDM:2 CM:1
+2012/13,Queens Park Rangers,3070,Christopher Samba,Centre Central Defender,3,CB:3
+2012/13,Queens Park Rangers,2127,Jermaine Jenas,Centre Central Midfielder,3,CM:2 CAM:1
+2012/13,Queens Park Rangers,2645,Tal Ben Haim,Centre Central Defender,2,LB:1 RB:1
+2012/13,Queens Park Rangers,1740,Kieron Dyer,Centre/Right Attacking Midfielder,1,RW:1
+2012/13,Queens Park Rangers,4373,Michael Harriman,Right Full Back,1,RB:1
+2012/13,Reading,4585,Jobi McAnuff,Left/Right Winger,6,LM:3 RM:1 CAM:1 LW:1
+2012/13,Reading,4306,Pavel Pogrebnyak,Centre Striker,6,ST:6
+2012/13,Reading,2668,Mikele Leigertwood,Centre Defensive Midfielder,5,CM:3 CDM:2
+2012/13,Reading,3251,Adrian Mariappa,Centre Central Defender,5,CB:5
+2012/13,Reading,3131,Danny Guthrie,Centre Central Midfielder,4,CM:3 CDM:1
+2012/13,Reading,3481,Jem Karacan,Centre/Right Central Midfielder,4,CM:3 CDM:1
+2012/13,Reading,3182,Adam Federici,Goalkeeper,3,GK:3
+2012/13,Reading,4468,Kaspars Gorkss,Left/Centre Central Defender,3,CB:3
+2012/13,Reading,3186,Nicky Shorey,Left Full Back,3,LB:3
+2012/13,Reading,3483,Jimmy Kébé,Left/Right Winger,3,RM:2 CAM:1
+2012/13,Reading,1974,Stephen Kelly,Left/Right Full Back,3,RB:2 LB:1
+2012/13,Reading,3510,Chris Gunter,Right Full Back,2,RB:2
+2012/13,Reading,3187,Alex Pearce,Centre Central Defender,2,CB:2
+2012/13,Reading,1045,Ian Harte,Left Full Back,2,LB:2
+2012/13,Reading,3484,Hal Robson-Kanu,Left/Centre/Right Winger,2,LM:1 RM:1
+2012/13,Reading,4573,Alex McCarthy,Goalkeeper,2,GK:2
+2012/13,Reading,3358,Shaun Cummings,Right Full Back,2,RB:2
+2012/13,Reading,4593,Noel Hunt,Centre Striker,2,ST:1 CAM:1
+2012/13,Reading,4577,Sean Morrison,Centre Central Defender,2,CB:2
+2012/13,Reading,4592,Adam Le Fondre,Centre Striker,1,ST:1
+2012/13,Reading,4587,Jay Tabb,Centre Central Midfielder,1,CM:1
+2012/13,Reading,3878,Hope Akpan,Centre Central Midfielder,1,CM:1
+2012/13,Reading,1295,Stuart Taylor,Goalkeeper,1,GK:1
+2012/13,Reading,4586,Garath McCleary,Left/Right Winger,1,RW:1
+2012/13,Southampton,4615,Morgan Schneiderlin,Centre Defensive Midfielder,7,CDM:7
+2012/13,Southampton,4627,Rickie Lambert,Centre Striker,7,ST:7
+2012/13,Southampton,4604,Nathaniel Clyne,Right Full Back,6,RB:6
+2012/13,Southampton,4606,José Fonte,Centre Central Defender,5,CB:5
+2012/13,Southampton,4618,Adam Lallana,Left/Centre Attacking Midfielder,5,LM:2 LW:2 CM:1
+2012/13,Southampton,4084,Jason Puncheon,Left/Centre/Right Attacking Midfielder,5,RW:3 RM:2
+2012/13,Southampton,4605,Maya Yoshida,Centre Central Defender,5,CB:5
+2012/13,Southampton,4608,Luke Shaw,Left Full Back,5,LB:5
+2012/13,Southampton,4616,Gastón Ramírez,Left/Centre/Right Attacking Midfielder,5,CAM:4 CM:1
+2012/13,Southampton,2889,Jack Cork,Centre Central Midfielder,5,CDM:3 CM:1 RB:1
+2012/13,Southampton,4610,Jos Hooiveld,Centre Central Defender,4,CB:4
+2012/13,Southampton,2423,Steven Davis,Centre/Right Central Midfielder,3,CM:2 CDM:1
+2012/13,Southampton,3851,Jay Rodriguez,Left/Centre/Right Second Striker,3,LM:1 LW:1 RW:1
+2012/13,Southampton,4601,Artur Boruc,Goalkeeper,3,GK:3
+2012/13,Southampton,2971,Kelvin Davis,Goalkeeper,2,GK:2
+2012/13,Southampton,2701,Daniel Fox,Left Full Back,2,LB:2
+2012/13,Southampton,4619,Guly do Prado,Left/Centre/Right Attacking Midfielder,2,RM:1 LW:1
+2012/13,Southampton,4600,Paulo Gazzaniga,Goalkeeper,2,GK:2
+2012/13,Southampton,4617,James Ward-Prowse,Centre Central Midfielder,1,CM:1
+2012/13,Stoke City,2537,Asmir Begovic,Goalkeeper,10,GK:10
+2012/13,Stoke City,3158,Ryan Shawcross,Centre Central Defender,10,CB:10
+2012/13,Stoke City,2053,Robert Huth,Centre/Right Central Defender,10,CB:9 LB:1
+2012/13,Stoke City,2047,Jonathan Walters,Left/Centre/Right Second Striker,10,CAM:7 CM:2 RW:1
+2012/13,Stoke City,2299,Glenn Whelan,Centre Central Midfielder,9,CM:9
+2012/13,Stoke City,1629,Peter Crouch,Centre Striker,8,ST:8
+2012/13,Stoke City,3471,Marc Wilson,Left/Centre/Right Central Defender,7,LB:7
+2012/13,Stoke City,4636,Geoff Cameron,Centre/Right Full Back,7,RB:3 CM:2 CB:1 CDM:1
+2012/13,Stoke City,3821,Steven Nzonzi,Centre Defensive Midfielder,7,CM:7
+2012/13,Stoke City,3702,Andy Wilkinson,Right Full Back,6,RB:4 LB:2
+2012/13,Stoke City,2579,Michael Kightly,Left/Right Winger,6,CAM:3 LM:2 RM:1
+2012/13,Stoke City,1772,Matthew Etherington,Left Winger,5,CAM:3 LM:1 LW:1
+2012/13,Stoke City,2980,Dean Whitehead,Centre/Right Central Midfielder,4,CM:2 RM:1 RB:1
+2012/13,Stoke City,4081,Charlie Adam,Left/Centre Central Midfielder,4,CM:3 CAM:1
+2012/13,Stoke City,3703,Ryan Shotton,Centre Central Defender,3,RB:2 CAM:1
+2012/13,Stoke City,2796,Kenwyne Jones,Centre Striker,2,ST:2
+2012/13,Stoke City,1495,Jermaine Pennant,Right Winger,1,RM:1
+2012/13,Stoke City,2530,Cameron Jerome,Centre Striker,1,CM:1
+2012/13,Sunderland,4179,Simon Mignolet,Goalkeeper,7,GK:7
+2012/13,Sunderland,3713,Jack Colback,Centre Central Midfielder,7,CM:5 LB:2
+2012/13,Sunderland,2847,Craig Gardner,Centre Central Midfielder,6,RB:6
+2012/13,Sunderland,1717,John O'Shea,Left/Centre/Right Central Defender,6,CB:6
+2012/13,Sunderland,2613,Sebastian Larsson,Centre/Right Central Midfielder,6,CM:4 RM:1 RB:1
+2012/13,Sunderland,4185,Stéphane Sessègnon,Centre/Right Attacking Midfielder,6,CAM:3 RM:2 ST:1
+2012/13,Sunderland,4395,James McClean,Left Winger,5,LM:4 CAM:1
+2012/13,Sunderland,3850,Steven Fletcher,Centre Striker,5,ST:5
+2012/13,Sunderland,2274,Adam Johnson,Left/Right Winger,5,RM:3 LM:2
+2012/13,Sunderland,3563,Carlos Cuellar,Centre Central Defender,4,CB:4
+2012/13,Sunderland,3507,Danny Rose,Wing Back,4,LB:4
+2012/13,Sunderland,2949,Lee Cattermole,Centre Defensive Midfielder,3,CM:2 CDM:1
+2012/13,Sunderland,1890,Titus Bramble,Centre Central Defender,3,CB:3
+2012/13,Sunderland,4645,Alfred N'Diaye,Centre Defensive Midfielder,3,CM:2 CDM:1
+2012/13,Sunderland,4077,David Vaughan,Left/Centre Central Midfielder,2,CM:2
+2012/13,Sunderland,1982,Kieran Richardson,Left/Centre Central Midfielder,1,LB:1
+2012/13,Sunderland,2945,Fraizer Campbell,Centre Second Striker,1,CAM:1
+2012/13,Sunderland,2260,Matthew Kilgallon,Centre Central Defender,1,CB:1
+2012/13,Sunderland,4396,Connor Wickham,Centre Striker,1,CAM:1
+2012/13,Sunderland,2531,Danny Graham,Centre Striker,1,ST:1
+2012/13,Swansea City,4657,Jonathan de Guzmán,Centre Attacking Midfielder,9,CDM:4 CM:2 CAM:2 LW:1
+2012/13,Swansea City,4405,Angel Rangel,Right Full Back,8,RB:7 RW:1
+2012/13,Swansea City,4403,Ashley Williams,Centre Central Defender,8,CB:8
+2012/13,Swansea City,2152,Leon Britton,Centre Central Midfielder,8,CDM:6 CM:2
+2012/13,Swansea City,4398,Michel Vorm,Goalkeeper,7,GK:7
+2012/13,Swansea City,4659,Michu,Centre Second Striker,7,CAM:3 ST:3 CDM:1
+2012/13,Swansea City,4408,Ben Davies,Left Full Back,7,LB:7
+2012/13,Swansea City,4651,Chico Flores,Centre/Right Central Defender,6,CB:6
+2012/13,Swansea City,2681,Wayne Routledge,Right Winger,6,LW:4 CAM:2
+2012/13,Swansea City,4654,Pablo Hernández,Left/Right Winger,6,RW:3 LW:3
+2012/13,Swansea City,2341,Nathan Dyer,Right Winger,5,RW:5
+2012/13,Swansea City,4656,Ki Sung-Yueng,Centre Central Midfielder,4,CDM:4
+2012/13,Swansea City,4660,Itay Shechter,Centre Striker,4,ST:4
+2012/13,Swansea City,1620,Garry Monk,Centre Central Defender,3,CB:3
+2012/13,Swansea City,4402,Neil Taylor,Left Full Back,2,LB:2
+2012/13,Swansea City,2531,Danny Graham,Centre Striker,2,ST:2
+2012/13,Swansea City,4401,Gerhard Tremmel,Goalkeeper,2,GK:2
+2012/13,Swansea City,4652,Dwight Tiendalli,Left Full Back,2,RB:2
+2012/13,Swansea City,3312,Kyle Bartley,Centre Central Defender,1,CB:1
+2012/13,Swansea City,4414,Kemy Agustien,Centre Central Midfielder,1,CDM:1
+2012/13,Swansea City,4655,Roland Lamah,Left Winger,1,LW:1
+2012/13,Tottenham Hotspur,3955,Kyle Walker,Right Full Back,7,RB:7
+2012/13,Tottenham Hotspur,4666,Jan Vertonghen,Centre Central Defender,7,CB:5 LB:2
+2012/13,Tottenham Hotspur,3513,Gareth Bale,Left/Centre/Right Attacking Midfielder,7,CAM:3 LW:2 LM:2
+2012/13,Tottenham Hotspur,2270,Aaron Lennon,Left/Right Winger,6,RW:3 RM:3
+2012/13,Tottenham Hotspur,4664,Hugo Lloris,Goalkeeper,6,GK:6
+2012/13,Tottenham Hotspur,1526,Jermain Defoe,Forward,5,ST:5
+2012/13,Tottenham Hotspur,2805,Michael Dawson,Centre Central Defender,5,CB:5
+2012/13,Tottenham Hotspur,4193,Sandro,Centre Defensive Midfielder,4,CDM:2 CM:2
+2012/13,Tottenham Hotspur,2845,Emmanuel Adebayor,Centre Striker,4,ST:4
+2012/13,Tottenham Hotspur,4123,Mousa Dembélé,Left/Centre Central Midfielder,4,CM:2 CDM:1 RM:1
+2012/13,Tottenham Hotspur,2054,William Gallas,Centre Central Defender,3,CB:3
+2012/13,Tottenham Hotspur,2991,Tom Huddlestone,Centre Central Midfielder,3,CDM:2 CM:1
+2012/13,Tottenham Hotspur,3121,Clint Dempsey,Centre Second Striker,3,CAM:2 LW:1
+2012/13,Tottenham Hotspur,3239,Benoit Assou-Ekotto,Left Full Back,3,LB:3
+2012/13,Tottenham Hotspur,1518,Scott Parker,Centre Central Midfielder,3,CM:2 CDM:1
+2012/13,Tottenham Hotspur,3956,Kyle Naughton,Left/Right Full Back,2,LB:2
+2012/13,Tottenham Hotspur,4421,Gylfi Sigurdsson,Left/Centre/Right Attacking Midfielder,2,LM:2
+2012/13,Tottenham Hotspur,1420,Brad Friedel,Goalkeeper,1,GK:1
+2012/13,Tottenham Hotspur,3957,Steven Caulker,Centre Central Defender,1,CB:1
+2012/13,Tottenham Hotspur,3244,Jake Livermore,Centre Central Midfielder,1,CM:1
+2012/13,West Bromwich Albion,4437,Gareth McAuley,Centre Central Defender,6,CB:6
+2012/13,West Bromwich Albion,3734,Jonas Olsson,Centre Central Defender,6,CB:6
+2012/13,West Bromwich Albion,2013,Liam Ridgewell,Left/Centre Central Defender,6,LB:6
+2012/13,West Bromwich Albion,2529,James Morrison,Right Winger,6,CAM:4 RM:1 CDM:1
+2012/13,West Bromwich Albion,3206,Shane Long,Centre Striker,6,ST:6
+2012/13,West Bromwich Albion,3751,Youssouf Mulumbu,Centre Defensive Midfielder,5,CDM:4 CM:1
+2012/13,West Bromwich Albion,4673,Claudio Yacob,Centre Defensive Midfielder,5,CDM:4 CM:1
+2012/13,West Bromwich Albion,3744,Chris Brunt,Left Attacking Midfielder,5,LW:3 LM:1 CDM:1
+2012/13,West Bromwich Albion,2932,Ben Foster,Goalkeeper,4,GK:4
+2012/13,West Bromwich Albion,2435,Steven Reid,Right Full Back,3,RB:3
+2012/13,West Bromwich Albion,4438,Billy Jones,Right Full Back,3,RB:3
+2012/13,West Bromwich Albion,3746,Graham Dorrans,Centre Central Midfielder,3,RW:3
+2012/13,West Bromwich Albion,2390,Zoltán Gera,Left/Right Winger,2,RW:2
+2012/13,West Bromwich Albion,4204,Peter Odemwingie,Centre Striker,2,LW:1 CAM:1
+2012/13,West Bromwich Albion,2011,Boaz Myhill,Goalkeeper,2,GK:2
+2012/13,West Bromwich Albion,4290,Romelu Lukaku,Centre Striker,1,ST:1
+2012/13,West Bromwich Albion,2008,Jerome Thomas,Left/Right Winger,1,LW:1
+2012/13,West Ham United,1342,Jussi Jääskeläinen,Goalkeeper,10,GK:10
+2012/13,West Ham United,2040,Kevin Nolan,Centre Attacking Midfielder,10,CAM:6 CM:2 RW:1 CDM:1
+2012/13,West Ham United,4680,Guy Demel,Right Full Back,9,RB:9
+2012/13,West Ham United,4209,Winston Reid,Centre/Right Central Defender,9,CB:9
+2012/13,West Ham United,3982,Mohamed Diamé,Centre Defensive Midfielder,9,CDM:8 CM:1
+2012/13,West Ham United,3010,James Collins,Centre Central Defender,8,CB:8
+2012/13,West Ham United,3014,Mark Noble,Centre Central Midfielder,8,CDM:5 CM:3
+2012/13,West Ham United,4000,Matthew Jarvis,Left/Right Winger,7,LW:7
+2012/13,West Ham United,2447,Ricardo Vaz Tê,Left/Centre/Right Second Striker,6,RW:5 LW:1
+2012/13,West Ham United,2058,Carlton Cole,Centre Striker,6,ST:6
+2012/13,West Ham United,2647,Joseph O'Brien,Right Full Back,6,LB:6
+2012/13,West Ham United,3517,James Tomkins,Centre Central Defender,5,CB:3 CDM:1 RB:1
+2012/13,West Ham United,1756,George McCartney,Defender,4,LB:4
+2012/13,West Ham United,2542,Matthew Taylor,Left Winger,4,LW:2 RW:1 CAM:1
+2012/13,West Ham United,3175,Andy Carroll,Centre Striker,3,ST:3
+2012/13,West Ham United,2550,Gary O'Neil,Centre/Right Central Midfielder,2,CDM:2
+2012/13,West Ham United,3013,Yossi Benayoun,,1,RW:1
+2012/13,West Ham United,1632,Joe Cole,Left/Centre/Right Attacking Midfielder,1,RW:1
+2012/13,West Ham United,4039,Marouane Chamakh,Centre Striker,1,ST:1
+2012/13,West Ham United,3520,Jack Collison,Left/Centre/Right Central Midfielder,1,RW:1
+2012/13,Wigan Athletic,3979,James McCarthy,Centre Central Midfielder,28,CM:27 CB:1
+2012/13,Wigan Athletic,2669,Emmerson Boyce,Left/Centre/Right Central Defender,26,RWB:19 CB:6 RB:1
+2012/13,Wigan Athletic,3066,Shaun Maloney,Left/Centre/Right Attacking Midfielder,26,LW:18 LM:3 RW:3 CAM:2
+2012/13,Wigan Athletic,2871,Ali Al Habsi,Goalkeeper,25,GK:25
+2012/13,Wigan Athletic,1732,Gary Caldwell,Centre Central Defender,25,CB:25
+2012/13,Wigan Athletic,3524,Maynor Figueroa,Left Full Back,25,CB:22 LWB:3
+2012/13,Wigan Athletic,4048,Jean Beausejour,Left Winger,23,LWB:23
+2012/13,Wigan Athletic,3366,Franco Di Santo,Centre Striker,22,ST:18 LW:2 CAM:1 RW:1
+2012/13,Wigan Athletic,4701,Arouna Koné,Centre Striker,22,ST:10 RW:8 RM:2 LW:2
+2012/13,Wigan Athletic,4224,James McArthur,Centre Central Midfielder,21,CM:19 RW:1 RWB:1
+2012/13,Wigan Athletic,4697,Iván Ramis,Centre Central Defender,15,CB:15
+2012/13,Wigan Athletic,3981,Jordi Gómez,Centre Attacking Midfielder,7,RW:4 CM:2 LW:1
+2012/13,Wigan Athletic,4219,Ronnie Stam,Right Full Back,7,RWB:7
+2012/13,Wigan Athletic,3029,Paul Scharner,Centre Central Defender,7,CB:7
+2012/13,Wigan Athletic,2523,David Jones,Centre Central Midfielder,6,CM:5 CB:1
+2012/13,Wigan Athletic,2686,Ben Watson,Centre Central Midfielder,5,CM:4 CDM:1
+2012/13,Wigan Athletic,4699,Roger Espinoza,Left/Centre Defensive Midfielder,5,RW:3 LB:1 LWB:1
+2012/13,Wigan Athletic,4218,Antolín Alcáraz,Centre Central Defender,4,CB:4
+2012/13,Wigan Athletic,4696,Joel Robles,Goalkeeper,3,GK:3
+2012/13,Wigan Athletic,3779,Callum McManaman,Right Winger,3,RW:3
+2012/13,Wigan Athletic,3983,Victor Moses,Right Wing Back,1,RM:1
+2012/13,Wigan Athletic,4220,Piscu,Centre Central Defender,1,CB:1
+2012/13,Wigan Athletic,3977,Román Golobart,Centre Central Defender,1,CB:1

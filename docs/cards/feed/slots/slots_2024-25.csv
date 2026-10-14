@@ -1,0 +1,501 @@
+season,club_feed,feed_id,name,profile_position,starts_with_slot,slots
+2024/25,Arsenal,7975,David Raya,Goalkeeper,38,GK:38
+2024/25,Arsenal,66204,William Saliba,Centre Central Defender,35,CB:35
+2024/25,Arsenal,15202,Declan Rice,Centre Central Midfielder,33,CM:27 CDM:6
+2024/25,Arsenal,4936,Thomas Partey,Centre Defensive Midfielder,31,CDM:21 RB:7 CM:3
+2024/25,Arsenal,50234,Gabriel Magalhães,Centre Central Defender,28,CB:28
+2024/25,Arsenal,20486,Leandro Trossard,Left Winger,28,LW:15 ST:13
+2024/25,Arsenal,67776,Jurriën Timber,Central Defender,27,RB:19 LB:7 CB:1
+2024/25,Arsenal,11419,Martin Ødegaard,Left/Centre/Right Attacking Midfielder,26,CM:26
+2024/25,Arsenal,66104,Gabriel Martinelli,Left Winger,25,LW:15 LM:5 RW:5
+2024/25,Arsenal,20810,Kai Havertz,Left/Centre/Right Second Striker,21,ST:19 CM:2
+2024/25,Arsenal,49481,Bukayo Saka,Left Winger,20,RW:14 RM:6
+2024/25,Arsenal,19778,Mikel Merino,Centre Central Midfielder,17,CM:10 ST:6 CAM:1
+2024/25,Arsenal,114564,Myles Lewis-Skelly,Left Full Back,15,LB:15
+2024/25,Arsenal,14548,Ben White,Centre/Right Central Defender,13,RB:12 CB:1
+2024/25,Arsenal,69914,Riccardo Calafiori,Left Full Back,11,LB:11
+2024/25,Arsenal,114566,Ethan Nwaneri,Left/Centre Attacking Midfielder,11,RW:9 CM:1 CAM:1
+2024/25,Arsenal,109478,Jakub Kiwior,Centre Central Defender,10,CB:10
+2024/25,Arsenal,5682,Jorginho,Centre Central Midfielder,9,CDM:7 CM:2
+2024/25,Arsenal,4316,Raheem Sterling,Left/Centre/Right Second Striker,7,RW:4 LW:2 LM:1
+2024/25,Arsenal,19680,Gabriel Jesus,Second Striker,6,ST:6
+2024/25,Arsenal,19620,Oleksandr Zinchenko,Left Full Back,5,LB:4 CM:1
+2024/25,Arsenal,12185,Kieran Tierney,Left Full Back,2,LB:1 CB:1
+2024/25,Aston Villa,4245,Emiliano Martínez,Goalkeeper,37,GK:37
+2024/25,Aston Villa,23968,Morgan Rogers,Left Winger,37,CAM:15 RW:13 LW:7 ST:2
+2024/25,Aston Villa,5865,Youri Tielemans,Centre Central Midfielder,35,CDM:25 CAM:6 CM:4
+2024/25,Aston Villa,13274,Ezri Konsa,Centre Central Defender,33,CB:27 RB:6
+2024/25,Aston Villa,8658,Ollie Watkins,Left/Centre/Right Second Striker,31,ST:31
+2024/25,Aston Villa,5758,Lucas Digne,Left Full Back,28,LB:27 LWB:1
+2024/25,Aston Villa,51423,John McGinn,Centre Central Midfielder,27,LW:8 RW:6 CAM:5 CDM:4 LM:2 RM:1 CM:1
+2024/25,Aston Villa,13344,Matty Cash,Right Full Back,24,RB:23 RW:1
+2024/25,Aston Villa,21529,Pau Torres,Central Defender,23,CB:23
+2024/25,Aston Villa,108096,Amadou Onana,Centre Defensive Midfielder,20,CDM:17 CM:3
+2024/25,Aston Villa,25067,Boubacar Kamara,Centre Defensive Midfielder,20,CDM:18 CB:2
+2024/25,Aston Villa,19888,Jacob Ramsey,Centre Central Midfielder,19,LW:18 LM:1
+2024/25,Aston Villa,20489,Leon Bailey,Left Winger,14,RW:12 RM:2
+2024/25,Aston Villa,8900,Tyrone Mings,Centre Central Defender,12,CB:12
+2024/25,Aston Villa,51223,Ian Maatsen,Left Full Back,10,LB:10
+2024/25,Aston Villa,11428,Marco Asensio,Right Winger,9,CAM:9
+2024/25,Aston Villa,12994,Diego Carlos,Centre Central Defender,8,CB:8
+2024/25,Aston Villa,107846,Lamare Bogarde,Centre Central Defender,5,RB:3 CDM:1 CB:1
+2024/25,Aston Villa,133169,Andrés García,Right Full Back,5,RB:4 RWB:1
+2024/25,Aston Villa,54893,Axel Disasi,Central Defender,5,CB:4 RB:1
+2024/25,Aston Villa,134048,Jhon Durán,Striker,4,ST:4
+2024/25,Aston Villa,13565,Marcus Rashford,Left Winger,4,ST:3 LW:1
+2024/25,Aston Villa,4115,Ross Barkley,Centre Central Midfielder,3,CDM:3
+2024/25,Aston Villa,64519,Jaden Philogene,Left Winger,2,LW:1 RW:1
+2024/25,Aston Villa,14456,Donyell Malen,Left/Centre Striker,2,RW:2
+2024/25,Aston Villa,11224,Robin Olsen,Goalkeeper,1,GK:1
+2024/25,Bournemouth,116665,Milos Kerkez,Left Full Back,38,LB:38
+2024/25,Bournemouth,25474,Antoine Semenyo,Centre Striker,36,RW:18 LW:17 ST:1
+2024/25,Bournemouth,67546,Illia Zabarnyi,Central Defender,35,CB:35
+2024/25,Bournemouth,10766,Lewis Cook,Centre Central Midfielder,32,CDM:24 RB:7 CAM:1
+2024/25,Bournemouth,11373,Kepa Arrizabalaga,Goalkeeper,31,GK:31
+2024/25,Bournemouth,21519,Justin Kluivert,Left/Right Winger,29,CAM:28 LW:1
+2024/25,Bournemouth,33032,Evanilson,Centre Striker,28,ST:28
+2024/25,Bournemouth,15572,Ryan Christie,Left/Centre/Right Attacking Midfielder,27,CDM:25 CAM:2
+2024/25,Bournemouth,123585,Dean Huijsen,Centre Central Defender,26,CB:26
+2024/25,Bournemouth,133890,Dango Ouattara,Forward,21,LW:10 ST:7 RW:4
+2024/25,Bournemouth,42894,Tyler Adams,Defensive Midfielder,21,CDM:21
+2024/25,Bournemouth,14846,Marcus Tavernier,Left Winger,20,LW:9 RW:7 CAM:3 CDM:1
+2024/25,Bournemouth,3512,Adam Smith,Right Full Back,19,RB:19
+2024/25,Bournemouth,54989,Marcos Senesi,Centre Central Defender,13,CB:13
+2024/25,Bournemouth,13706,David Brooks,Left/Centre/Right Attacking Midfielder,9,RW:9
+2024/25,Bournemouth,74976,Alex Scott,Central Midfielder,8,CDM:5 CAM:3
+2024/25,Bournemouth,64370,Julián Araujo,Right Full Back,7,RB:7
+2024/25,Bournemouth,51942,James Hill,Centre Central Defender,6,RB:4 CB:2
+2024/25,Bournemouth,50453,Mark Travers,Goalkeeper,5,GK:5
+2024/25,Bournemouth,6593,Neto,Goalkeeper,2,GK:2
+2024/25,Bournemouth,16582,Enes Ünal,Centre Striker,2,ST:2
+2024/25,Bournemouth,50498,Luis Sinisterra,Right Winger,1,LW:1
+2024/25,Bournemouth,19970,Max Aarons,Right Full Back,1,RB:1
+2024/25,Bournemouth,8882,Philip Billing,Centre Defensive Midfielder,1,CAM:1
+2024/25,Brentford,24659,Nathan Collins,Centre Central Defender,38,CB:38
+2024/25,Brentford,66360,Bryan Mbeumo,Left Winger,38,RW:29 ST:6 CAM:1 RWB:1 RM:1
+2024/25,Brentford,33280,Mark Flekken,Goalkeeper,37,GK:37
+2024/25,Brentford,24369,Keane Lewis-Potter,Striker,36,LB:26 LWB:4 LW:4 LM:2
+2024/25,Brentford,42331,Christian Nørgaard,Centre Central Midfielder,34,CDM:25 CM:9
+2024/25,Brentford,117497,Yoane Wissa,Left Winger,34,ST:33 CAM:1
+2024/25,Brentford,49731,Mikkel Damsgaard,Left/Centre Attacking Midfielder,34,CAM:21 CM:8 LW:3 RW:1 LM:1
+2024/25,Brentford,65987,Sepp van den Berg,Centre Central Defender,29,CB:19 RB:8 LB:2
+2024/25,Brentford,23194,Vitaly Janelt,Centre Defensive Midfielder,27,CDM:17 CM:9 LB:1
+2024/25,Brentford,127594,Kevin Schade,Left/Right Winger,26,LW:22 ST:3 RM:1
+2024/25,Brentford,22043,Ethan Pinnock,Left/Centre Central Defender,21,CB:21
+2024/25,Brentford,20113,Kristoffer Ajer,Centre Central Defender,17,RB:10 LB:5 RWB:2
+2024/25,Brentford,128891,Yehor Yarmoliuk,Centre Attacking Midfielder,15,CDM:8 CM:5 LW:1 CAM:1
+2024/25,Brentford,21297,Mads Roerslev,Right Full Back,11,RB:10 RWB:1
+2024/25,Brentford,49726,Mathias Jensen,Centre Central Midfielder,8,CM:5 CDM:2 RM:1
+2024/25,Brentford,133460,Michael Kayode,Right Full Back,6,RB:6
+2024/25,Brentford,32289,Fábio Carvalho,Left/Centre/Right Attacking Midfielder,3,ST:2 CAM:1
+2024/25,Brentford,3909,Ben Mee,Centre Central Defender,2,CB:2
+2024/25,Brentford,124052,Igor Thiago,Striker,1,ST:1
+2024/25,Brentford,144788,Hákon Valdimarsson,Goalkeeper,1,GK:1
+2024/25,Brighton & Hove Albion,75709,Bart Verbruggen,Goalkeeper,36,GK:36
+2024/25,Brighton & Hove Albion,76090,Jan Paul van Hecke,Centre Central Defender,33,CB:33
+2024/25,Brighton & Hove Albion,124396,Carlos Baleba,Centre Central Midfielder,31,CDM:21 CM:8 CB:2
+2024/25,Brighton & Hove Albion,117732,Kaoru Mitoma,Left Winger,28,LW:18 LM:9 CAM:1
+2024/25,Brighton & Hove Albion,31904,Pervis Estupiñán,Left Full Back,26,LB:25 LWB:1
+2024/25,Brighton & Hove Albion,3452,Danny Welbeck,Centre Striker,24,ST:24
+2024/25,Brighton & Hove Albion,8163,Lewis Dunk,Centre Central Defender,23,CB:23
+2024/25,Brighton & Hove Albion,72371,João Pedro,Centre Striker,23,ST:13 CAM:7 CM:2 LW:1
+2024/25,Brighton & Hove Albion,112739,Jack Hinshelwood,Centre Defensive Midfielder,22,CDM:6 RB:6 CM:5 LB:4 ST:1
+2024/25,Brighton & Hove Albion,134333,Yasin Ayari,Left/Centre/Right Central Midfielder,22,CDM:13 CM:8 LM:1
+2024/25,Brighton & Hove Albion,136175,Yankuba Minteh,Left/Centre/Right Winger,20,RW:13 RM:4 RWB:1 LW:1 LM:1
+2024/25,Brighton & Hove Albion,4874,Joël Veltman,Centre/Right Full Back,19,RB:18 CB:1
+2024/25,Brighton & Hove Albion,51830,Georginio Rutter,Centre Striker,19,CAM:7 ST:5 RW:3 RM:3 CM:1
+2024/25,Brighton & Hove Albion,126317,Simon Adingra,Left/Right Winger,12,LW:5 RM:3 RW:2 RWB:1 LM:1
+2024/25,Brighton & Hove Albion,9426,Adam Webster,Centre Central Defender,11,CB:11
+2024/25,Brighton & Hove Albion,14671,Matt O'Riley,Centre Central Midfielder,11,CAM:7 CM:3 CDM:1
+2024/25,Brighton & Hove Albion,72239,Mats Wieffer,Centre Defensive Midfielder,10,RB:6 CDM:3 CM:1
+2024/25,Brighton & Hove Albion,21912,Igor Julio,Centre Central Defender,10,CB:8 LB:2
+2024/25,Brighton & Hove Albion,23704,Tariq Lamptey,Right Full Back,10,RB:5 LB:3 LWB:1 RW:1
+2024/25,Brighton & Hove Albion,134176,Brajan Gruda,Centre/Right Attacking Midfielder,8,RW:5 CAM:2 ST:1
+2024/25,Brighton & Hove Albion,50727,Ferdi Kadioglu,Left Full Back,5,LB:2 RM:2 RB:1
+2024/25,Brighton & Hove Albion,143240,Diego Gómez,Central Midfielder,4,CDM:4
+2024/25,Brighton & Hove Albion,2100,James Milner,Left/Centre/Right Central Midfielder,3,CDM:3
+2024/25,Brighton & Hove Albion,3457,Jason Steele,Goalkeeper,2,GK:2
+2024/25,Brighton & Hove Albion,71590,Evan Ferguson,Striker,2,ST:2
+2024/25,Brighton & Hove Albion,125827,Julio Enciso,Left/Centre Attacking Midfielder,2,CAM:2
+2024/25,Brighton & Hove Albion,24221,Billy Gilmour,Central Midfielder,1,CDM:1
+2024/25,Brighton & Hove Albion,8171,Solly March,Left/Centre/Right Attacking Midfielder,1,RW:1
+2024/25,Chelsea,112203,Moisés Caicedo,Centre Defensive Midfielder,38,CDM:32 RB:6
+2024/25,Chelsea,49293,Cole Palmer,Attacking Midfielder,36,CAM:34 RW:2
+2024/25,Chelsea,51229,Levi Colwill,Centre Central Defender,35,CB:35
+2024/25,Chelsea,27277,Marc Cucurella,Left Wing Back,33,LB:33
+2024/25,Chelsea,14538,Robert Sánchez,Goalkeeper,32,GK:32
+2024/25,Chelsea,63741,Enzo Fernández,Centre Central Midfielder,32,CDM:29 CAM:3
+2024/25,Chelsea,110526,Nicolas Jackson,Centre Second Striker,28,ST:28
+2024/25,Chelsea,67407,Noni Madueke,Right Winger,27,RW:23 LW:4
+2024/25,Chelsea,21998,Pedro Neto,Left/Right Winger,24,RW:10 LW:9 ST:5
+2024/25,Chelsea,68827,Malo Gusto,Right Full Back,19,RB:17 LB:2
+2024/25,Chelsea,14801,Jadon Sancho,Left Winger,19,LW:16 RW:3
+2024/25,Chelsea,13549,Tosin Adarabioyo,Centre Central Defender,15,CB:15
+2024/25,Chelsea,66284,Wesley Fofana,Centre Central Defender,14,CB:10 RB:4
+2024/25,Chelsea,14571,Reece James,Right Full Back,12,RB:7 LB:3 CDM:2
+2024/25,Chelsea,99282,Roméo Lavia,Centre Defensive Midfielder,11,CDM:11
+2024/25,Chelsea,14575,Trevoh Chalobah,Centre Central Defender,11,CB:10 RB:1
+2024/25,Chelsea,16784,Christopher Nkunku,Left/Centre Second Striker,9,LW:5 ST:4
+2024/25,Chelsea,75989,Filip Jörgensen,Goalkeeper,6,GK:6
+2024/25,Chelsea,54893,Axel Disasi,Central Defender,4,RB:3 CB:1
+2024/25,Chelsea,53612,Benoît Badiashile,Centre Central Defender,3,CB:3
+2024/25,Chelsea,50856,João Félix,Left/Centre/Right Second Striker,3,LW:3
+2024/25,Chelsea,125075,Josh Acheampong,Right Full Back,2,CB:2
+2024/25,Chelsea,14706,Kiernan Dewsbury-Hall,Central Midfielder,2,CDM:1 CAM:1
+2024/25,Chelsea,53991,Mykhailo Mudryk,Left Winger,1,LW:1
+2024/25,Chelsea,119078,Renato Veiga,Centre Defensive Midfielder,1,CDM:1
+2024/25,Chelsea,118442,Tyrique George,Left/Centre/Right Winger,1,ST:1
+2024/25,Crystal Palace,13988,Dean Henderson,Goalkeeper,38,GK:38
+2024/25,Crystal Palace,76353,Daniel Muñoz,Right Full Back,37,RWB:37
+2024/25,Crystal Palace,24334,Tyrick Mitchell,Left Full Back,37,LWB:37
+2024/25,Crystal Palace,76104,Maxence Lacroix,Centre Central Defender,35,CB:35
+2024/25,Crystal Palace,14569,Marc Guéhi,Centre Central Defender,34,CB:33 CM:1
+2024/25,Crystal Palace,20874,Jean-Philippe Mateta,Centre Striker,33,ST:33
+2024/25,Crystal Palace,21584,Eberechi Eze,Centre Attacking Midfielder,31,CAM:28 LW:2 ST:1
+2024/25,Crystal Palace,49796,Ismaïla Sarr,Right Winger,30,CAM:29 RW:1
+2024/25,Crystal Palace,37776,Jefferson Lerma,Centre Central Midfielder,26,CM:20 CB:5 CDM:1
+2024/25,Crystal Palace,8589,Will Hughes,Centre Central Midfielder,24,CM:24
+2024/25,Crystal Palace,50842,Chris Richards,Centre Central Defender,22,CB:22
+2024/25,Crystal Palace,69595,Adam Wharton,Central Midfielder,16,CM:16
+2024/25,Crystal Palace,49759,Daichi Kamada,Centre Attacking Midfielder,15,CM:10 CAM:5
+2024/25,Crystal Palace,14575,Trevoh Chalobah,Centre Central Defender,12,CB:12
+2024/25,Crystal Palace,14451,Eddie Nketiah,Centre Striker,9,ST:5 CAM:3 RW:1
+2024/25,Crystal Palace,4604,Nathaniel Clyne,Right Full Back,5,CB:4 RWB:1
+2024/25,Crystal Palace,126670,Cheick Doucouré,Centre Defensive Midfielder,4,CM:4
+2024/25,Crystal Palace,138981,Justin Devenny,Left Winger,4,CAM:3 CM:1
+2024/25,Crystal Palace,26151,Joachim Andersen,Centre Central Defender,1,CB:1
+2024/25,Crystal Palace,110549,Chadi Riad,Centre Central Defender,1,CB:1
+2024/25,Crystal Palace,16788,Odsonne Édouard,Centre Striker,1,CAM:1
+2024/25,Crystal Palace,3929,Joel Ward,Right Full Back,1,CB:1
+2024/25,Crystal Palace,13491,Ben Chilwell,Left Full Back,1,LWB:1
+2024/25,Crystal Palace,133297,Romain Esse,Centre/Right Attacking Midfielder,1,CAM:1
+2024/25,Everton,4640,Jordan Pickford,Goalkeeper,38,GK:38
+2024/25,Everton,24983,Vitalii Mykolenko,Left Full Back,35,LB:35
+2024/25,Everton,12582,Idrissa Gueye,Centre Defensive Midfielder,35,CDM:35
+2024/25,Everton,8143,James Tarkowski,Centre Central Defender,33,CB:33
+2024/25,Everton,13823,Abdoulaye Doucouré,Centre Central Midfielder,31,CAM:20 CDM:7 CM:4
+2024/25,Everton,31936,Iliman Ndiaye,Left/Right Winger,29,LW:27 RW:1 CAM:1
+2024/25,Everton,66318,Jarrad Branthwaite,Centre Central Defender,28,CB:28
+2024/25,Everton,33135,Jack Harrison,Left Winger,24,RW:20 LW:4
+2024/25,Everton,3062,Ashley Young,Defender,19,RB:17 LB:2
+2024/25,Everton,9576,Dominic Calvert-Lewin,Centre Striker,19,ST:19
+2024/25,Everton,23841,James Garner,Centre Central Midfielder,17,CDM:15 RB:2
+2024/25,Everton,112589,Jake O'Brien,Centre Central Defender,17,RB:13 CB:4
+2024/25,Everton,24797,Dwight McNeil,Left Winger,15,CAM:10 LW:3 RW:2
+2024/25,Everton,118112,Jesper Lindstrøm,Midfielder,15,RW:15
+2024/25,Everton,126789,Beto,Centre Striker,15,ST:15
+2024/25,Everton,49738,Orel Mangala,Centre Central Midfielder,14,CDM:10 CM:4
+2024/25,Everton,4333,Michael Keane,Centre Central Defender,11,CB:11
+2024/25,Everton,133612,Charly Alcaraz,Central Midfielder,7,LW:4 CAM:3
+2024/25,Everton,66538,Tim Iroegbunam,Centre Central Midfielder,5,CDM:5
+2024/25,Everton,31442,Armando Broja,Centre Striker,4,ST:4
+2024/25,Everton,3600,Séamus Coleman,Right Full Back,3,RB:3
+2024/25,Everton,74585,Nathan Patterson,Right Full Back,3,RB:2 LB:1
+2024/25,Everton,112267,Roman Dixon,Right Full Back,1,RB:1
+2024/25,Fulham,4985,Bernd Leno,Goalkeeper,38,GK:38
+2024/25,Fulham,14624,Antonee Robinson,Left Full Back,35,LB:29 LWB:4 CAM:2
+2024/25,Fulham,4717,Alex Iwobi,Left/Centre/Right Second Striker,35,LW:22 RW:7 CM:3 RWB:1 CDM:1 CAM:1
+2024/25,Fulham,23793,Calvin Bassey,Left Full Back,34,CB:32 LB:2
+2024/25,Fulham,11071,Raúl Jiménez,Striker,30,ST:30
+2024/25,Fulham,26151,Joachim Andersen,Centre Central Defender,29,CB:29
+2024/25,Fulham,16044,Sasa Lukic,Central Midfielder,28,CDM:22 CM:6
+2024/25,Fulham,21614,Sander Berge,Centre Central Midfielder,26,CDM:22 CM:4
+2024/25,Fulham,10476,Andreas Pereira,Attacking Midfielder,25,CDM:13 CAM:6 CM:5 RM:1
+2024/25,Fulham,14445,Emile Smith Rowe,Centre Attacking Midfielder,25,CAM:24 CM:1
+2024/25,Fulham,4880,Kenny Tete,Right Full Back,21,RB:20 CB:1
+2024/25,Fulham,4979,Adama Traoré,Right Winger,18,RW:12 CAM:3 LW:2 LM:1
+2024/25,Fulham,6712,Timothy Castagne,Right Full Back,17,RB:13 RWB:4
+2024/25,Fulham,49884,Issa Diop,Centre Central Defender,15,CB:15
+2024/25,Fulham,13961,Harry Wilson,Left/Right Winger,12,RW:9 CAM:2 LW:1
+2024/25,Fulham,117763,Rodrigo Muniz,Centre Striker,8,ST:8
+2024/25,Fulham,14656,Ryan Sessegnon,Left/Right Winger,7,RW:4 LB:2 LWB:1
+2024/25,Fulham,14450,Reiss Nelson,Forward,5,LW:5
+2024/25,Fulham,35752,Jorge Cuenca,Centre Central Defender,4,CB:4
+2024/25,Fulham,3894,Tom Cairney,Left/Centre/Right Attacking Midfielder,3,CDM:2 CM:1
+2024/25,Fulham,4748,Willian,Left/Right Winger,2,LW:2
+2024/25,Fulham,128976,Josh King,Centre Central Midfielder,1,CAM:1
+2024/25,Ipswich Town,15154,Dara O'Shea,Centre Central Defender,35,CB:29 RB:6
+2024/25,Ipswich Town,51454,Leif Davis,Left Full Back,32,LB:26 LWB:6
+2024/25,Ipswich Town,51813,Liam Delap,Centre Striker,32,ST:32
+2024/25,Ipswich Town,8388,Sam Morsy,Centre Central Midfielder,31,CDM:24 CM:7
+2024/25,Ipswich Town,98300,Omari Hutchinson,Right Winger,30,CAM:16 RW:8 RM:4 LW:2
+2024/25,Ipswich Town,49254,Jacob Greaves,Central Defender,25,CB:22 LB:3
+2024/25,Ipswich Town,108613,Jens Cajuste,Centre Central Midfielder,25,CDM:19 CM:6
+2024/25,Ipswich Town,13559,Axel Tuanzebe,Centre Central Defender,20,RB:18 CB:2
+2024/25,Ipswich Town,19911,Arijanet Muric,Goalkeeper,18,GK:18
+2024/25,Ipswich Town,11000,Cameron Burgess,Centre Central Defender,16,CB:16
+2024/25,Ipswich Town,15212,Ben Johnson,Right Full Back,14,RW:5 RWB:4 RB:3 RM:2
+2024/25,Ipswich Town,10768,Kalvin Phillips,Centre Defensive Midfielder,14,CDM:13 CM:1
+2024/25,Ipswich Town,8417,Sam Szmodics,Centre Attacking Midfielder,13,LW:10 LM:2 RM:1
+2024/25,Ipswich Town,10525,Alex Palmer,Goalkeeper,13,GK:13
+2024/25,Ipswich Town,14203,Luke Woolfenden,Centre Central Defender,12,CB:12
+2024/25,Ipswich Town,8201,Wes Burns,Right Winger,12,RW:11 RWB:1
+2024/25,Ipswich Town,32715,Jack Clarke,Left Winger,12,LW:8 LM:3 CAM:1
+2024/25,Ipswich Town,125827,Julio Enciso,Left/Centre Attacking Midfielder,12,CAM:6 LW:6
+2024/25,Ipswich Town,10874,Conor Chaplin,Centre Striker,10,CAM:9 ST:1
+2024/25,Ipswich Town,8159,Christian Walton,Goalkeeper,7,GK:7
+2024/25,Ipswich Town,14636,Nathan Broadhead,Centre Striker,7,LW:3 LM:2 CAM:2
+2024/25,Ipswich Town,14283,George Hirst,Centre Striker,5,ST:5
+2024/25,Ipswich Town,64519,Jaden Philogene,Left Winger,5,RW:3 LW:1 RWB:1
+2024/25,Ipswich Town,19877,Harry Clarke,Right Full Back,4,RB:4
+2024/25,Ipswich Town,19723,Jack Taylor,Centre Central Midfielder,4,CDM:3 CM:1
+2024/25,Ipswich Town,33128,Chiedozie Ogbene,Right Winger,3,RW:3
+2024/25,Ipswich Town,4864,Conor Townsend,Left Full Back,3,LB:3
+2024/25,Ipswich Town,4432,Massimo Luongo,Centre Central Midfielder,2,CDM:1 CM:1
+2024/25,Ipswich Town,10968,Ben Godfrey,Centre Central Defender,2,CB:1 RB:1
+2024/25,Leicester City,8979,Jamie Vardy,Centre Striker,35,ST:35
+2024/25,Leicester City,13515,James Justin,Right Full Back,34,RB:28 RWB:5 LB:1
+2024/25,Leicester City,20566,Wout Faes,Central Defender,30,CB:30
+2024/25,Leicester City,123722,Victor Kristiansen,Left Full Back,29,LB:24 LWB:4 LW:1
+2024/25,Leicester City,20479,Wilfred Ndidi,Centre Central Midfielder,28,CDM:18 CM:6 CAM:4
+2024/25,Leicester City,118083,Mads Hermansen,Goalkeeper,27,GK:27
+2024/25,Leicester City,123333,Bilal El Khannouss,Centre Attacking Midfielder,27,CAM:22 LW:4 LM:1
+2024/25,Leicester City,50247,Boubakary Soumaré,Centre Central Midfielder,25,CDM:18 CM:7
+2024/25,Leicester City,5595,Jordan Ayew,Striker,19,RW:8 CAM:6 LW:4 ST:1
+2024/25,Leicester City,4136,Conor Coady,Centre Central Defender,19,CB:19
+2024/25,Leicester City,7488,Harry Winks,Centre Central Midfielder,17,CDM:16 CM:1
+2024/25,Leicester City,20109,Jannik Vestergaard,Centre Central Defender,16,CB:16
+2024/25,Leicester City,14458,Stephy Mavididi,Centre Striker,16,LW:16
+2024/25,Leicester City,133430,Facundo Buonanotte,Centre Attacking Midfielder,14,RW:8 CAM:6
+2024/25,Leicester City,23796,Luke Thomas,Left Full Back,13,LB:8 CB:4 LWB:1
+2024/25,Leicester City,66011,Caleb Okoli,Central Defender,12,CB:12
+2024/25,Leicester City,21413,Oliver Skipp,Centre Central Midfielder,10,CDM:10
+2024/25,Leicester City,25444,Jakub Stolarczyk,Goalkeeper,10,GK:10
+2024/25,Leicester City,8192,Bobby De Cordova-Reid,Forward,9,LW:6 RW:3
+2024/25,Leicester City,51553,Kasey McAteer,Centre/Right Attacking Midfielder,9,RW:8 RM:1
+2024/25,Leicester City,127644,Abdul Fatawu,Right Winger,6,RW:5 LW:1
+2024/25,Leicester City,24994,Patson Daka,Centre Striker,6,CAM:4 ST:2
+2024/25,Leicester City,5343,Ricardo Pereira,Right Full Back,4,RB:4
+2024/25,Leicester City,13248,Hamza Choudhury,Centre Central Midfielder,1,CDM:1
+2024/25,Leicester City,4522,Danny Ward,Goalkeeper,1,GK:1
+2024/25,Leicester City,75678,Woyo Coulibaly,Right Full Back,1,RB:1
+2024/25,Liverpool,5178,Mohamed Salah,Left/Centre/Right Winger,38,RW:37 CAM:1
+2024/25,Liverpool,5140,Virgil van Dijk,Centre Central Defender,37,CB:37
+2024/25,Liverpool,49909,Ryan Gravenberch,Centre Central Midfielder,37,CDM:37
+2024/25,Liverpool,63633,Alexis Mac Allister,Left/Centre/Right Attacking Midfielder,30,CDM:30
+2024/25,Liverpool,23593,Ibrahima Konaté,Centre Central Defender,30,CB:30
+2024/25,Liverpool,10458,Andy Robertson,Left Full Back,29,LB:29
+2024/25,Liverpool,33231,Dominik Szoboszlai,Left/Centre/Right Attacking Midfielder,29,CAM:25 CM:2 ST:1 CDM:1
+2024/25,Liverpool,20559,Alisson Becker,Goalkeeper,28,GK:28
+2024/25,Liverpool,14732,Trent Alexander-Arnold,Right Full Back,28,RB:28
+2024/25,Liverpool,66669,Luis Díaz,Left/Right Winger,28,ST:14 LW:13 CAM:1
+2024/25,Liverpool,32894,Cody Gakpo,Centre Striker,23,LW:23
+2024/25,Liverpool,23815,Curtis Jones,Centre Central Midfielder,19,CAM:8 CDM:5 CM:2 RB:2 LW:1 ST:1
+2024/25,Liverpool,19758,Diogo Jota,Left/Centre/Right Striker,14,ST:14
+2024/25,Liverpool,14723,Caoimhín Kelleher,Goalkeeper,10,GK:10
+2024/25,Liverpool,16006,Kostas Tsimikas,Left Full Back,9,LB:9
+2024/25,Liverpool,70287,Darwin Núñez,Centre Striker,8,ST:8
+2024/25,Liverpool,68582,Conor Bradley,Right Full Back,7,RB:7
+2024/25,Liverpool,10651,Joe Gomez,Left/Centre/Right Central Defender,6,CB:6
+2024/25,Liverpool,51557,Jarell Quansah,Centre Central Defender,4,CB:3 RB:1
+2024/25,Liverpool,33185,Harvey Elliott,Centre/Right Attacking Midfielder,2,CAM:2
+2024/25,Liverpool,43586,Wataru Endo,Centre Defensive Midfielder,1,CDM:1
+2024/25,Liverpool,15802,Federico Chiesa,Left/Centre/Right Winger,1,ST:1
+2024/25,Manchester City,67178,Josko Gvardiol,Left/Centre Central Defender,36,LB:24 CB:12
+2024/25,Manchester City,65970,Erling Haaland,Centre Striker,31,ST:31
+2024/25,Manchester City,5067,Bernardo Silva,Left/Centre Attacking Midfielder,29,CM:15 CDM:7 RW:5 RM:2
+2024/25,Manchester City,12707,Ederson,Goalkeeper,26,GK:26
+2024/25,Manchester City,16431,Rúben Dias,Centre Central Defender,25,CB:25
+2024/25,Manchester City,12520,Mateo Kovacic,Centre Central Midfielder,25,CDM:25
+2024/25,Manchester City,5101,Ilkay Gündogan,Centre Central Midfielder,25,CDM:13 CM:8 CAM:4
+2024/25,Manchester City,15656,Manuel Akanji,Centre Central Defender,23,CB:22 RB:1
+2024/25,Manchester City,99281,Rico Lewis,Right Full Back,21,RB:12 CDM:4 LB:3 CM:1 RW:1
+2024/25,Manchester City,126943,Sávio,Right Winger,21,RW:7 RM:6 LW:4 LM:2 LWB:1 RWB:1
+2024/25,Manchester City,14805,Phil Foden,Centre/Right Attacking Midfielder,20,CM:6 RW:5 RM:3 CAM:3 ST:2 LW:1
+2024/25,Manchester City,4288,Kevin De Bruyne,Left/Centre/Right Attacking Midfielder,19,CAM:9 CM:7 ST:3
+2024/25,Manchester City,76204,Matheus Nunes,Centre Central Midfielder,19,RB:13 LM:3 LW:2 LB:1
+2024/25,Manchester City,54156,Jérémy Doku,Left/Right Winger,16,LW:8 LM:5 RWB:2 LWB:1
+2024/25,Manchester City,76216,Omar Marmoush,Left/Centre/Right Striker,14,LW:4 CAM:3 ST:3 RW:2 CM:1 LM:1
+2024/25,Manchester City,47133,Stefan Ortega,Goalkeeper,12,GK:12
+2024/25,Manchester City,3955,Kyle Walker,Right Full Back,9,RB:9
+2024/25,Manchester City,67849,Nico González,Central Midfielder,9,CDM:9
+2024/25,Manchester City,4499,Nathan Aké,Left/Centre Central Defender,8,CB:7 LB:1
+2024/25,Manchester City,4260,Jack Grealish,Left/Centre/Right Attacking Midfielder,7,LW:3 LWB:1 LM:1 CDM:1 CAM:1
+2024/25,Manchester City,4505,John Stones,Centre Central Defender,6,CB:6
+2024/25,Manchester City,137371,Abdukodir Khusanov,Central Defender,6,CB:6
+2024/25,Manchester City,112948,Nico O'Reilly,Midfielder,6,LB:6
+2024/25,Manchester City,49270,James McAtee,Centre Central Midfielder,3,RW:2 RM:1
+2024/25,Manchester City,16286,Rodri,Centre Central Midfielder,1,CDM:1
+2024/25,Manchester City,119611,Jahmai Simpson-Pusey,Centre Central Defender,1,CB:1
+2024/25,Manchester United,23396,Bruno Fernandes,Left/Centre/Right Attacking Midfielder,35,CAM:22 CM:11 ST:2
+2024/25,Manchester United,11026,André Onana,Goalkeeper,34,GK:34
+2024/25,Manchester United,33245,Noussair Mazraoui,Right Full Back,34,CB:11 RWB:11 RB:7 LB:3 LWB:2
+2024/25,Manchester United,24252,Diogo Dalot,Right Full Back,31,LWB:11 RWB:9 LB:7 RB:4
+2024/25,Manchester United,20226,Matthijs de Ligt,Centre Central Defender,25,CB:25
+2024/25,Manchester United,68987,Alejandro Garnacho,Left/Right Winger,23,CAM:15 RW:4 LW:4
+2024/25,Manchester United,122934,Rasmus Højlund,Centre Striker,23,ST:23
+2024/25,Manchester United,118031,Manuel Ugarte,Centre Defensive Midfielder,22,CM:19 CDM:3
+2024/25,Manchester United,67191,Lisandro Martínez,Central Defender,20,CB:19 LB:1
+2024/25,Manchester United,69176,Amad Diallo,Right Winger,20,CAM:8 RW:7 RWB:5
+2024/25,Manchester United,9566,Harry Maguire,Centre Central Defender,19,CB:19
+2024/25,Manchester United,108936,Kobbie Mainoo,Centre Central Midfielder,19,CM:9 CDM:7 CAM:2 ST:1
+2024/25,Manchester United,5793,Casemiro,Centre Central Midfielder,18,CM:11 CDM:7
+2024/25,Manchester United,50848,Joshua Zirkzee,Centre Striker,14,ST:10 CAM:4
+2024/25,Manchester United,13565,Marcus Rashford,Left Winger,12,LW:8 RW:2 ST:1 CAM:1
+2024/25,Manchester United,118591,Leny Yoro,Centre Central Defender,12,CB:12
+2024/25,Manchester United,4845,Christian Eriksen,Centre Attacking Midfielder,11,CDM:5 CM:4 CAM:2
+2024/25,Manchester United,146567,Patrick Dorgu,Left Full Back,10,LWB:8 RWB:2
+2024/25,Manchester United,14580,Mason Mount,Centre Attacking Midfielder,8,CAM:7 LW:1
+2024/25,Manchester United,5066,Victor Lindelöf,Centre/Right Central Defender,6,CB:6
+2024/25,Manchester United,71744,Altay Bayindir,Goalkeeper,4,GK:4
+2024/25,Manchester United,133503,Harry Amass,Left Full Back,4,LWB:4
+2024/25,Manchester United,4608,Luke Shaw,Left Full Back,4,CB:4
+2024/25,Manchester United,3156,Jonny Evans,Centre Central Defender,3,CB:3
+2024/25,Manchester United,23581,Tyrell Malacia,Left Full Back,2,LWB:2
+2024/25,Manchester United,133114,Ayden Heaven,Left Full Back,2,CB:2
+2024/25,Manchester United,117564,Tyler Fredricson,Centre Central Defender,2,CB:2
+2024/25,Manchester United,129833,Chido Obi,Centre Striker,1,ST:1
+2024/25,Newcastle United,74761,Bruno Guimarães,Centre Defensive Midfielder,38,CM:20 CDM:18
+2024/25,Newcastle United,8707,Dan Burn,Centre Central Defender,37,CB:37
+2024/25,Newcastle United,21737,Alexander Isak,Centre Striker,34,ST:34
+2024/25,Newcastle United,5220,Fabian Schär,Centre Central Defender,33,CB:33
+2024/25,Newcastle United,49495,Tino Livramento,Right Full Back,32,RB:21 LB:8 LWB:3
+2024/25,Newcastle United,9662,Jacob Murphy,Left/Right Winger,31,RW:28 RWB:3
+2024/25,Newcastle United,20607,Joelinton,Left Central Midfielder,29,CM:25 LW:3 RW:1
+2024/25,Newcastle United,10079,Nick Pope,Goalkeeper,28,GK:28
+2024/25,Newcastle United,23747,Anthony Gordon,Winger,28,LW:18 RW:5 CAM:3 ST:2
+2024/25,Newcastle United,71623,Sandro Tonali,Centre Defensive Midfielder,28,CDM:18 CM:10
+2024/25,Newcastle United,108922,Lewis Hall,Left Full Back,24,LB:24
+2024/25,Newcastle United,14716,Harvey Barnes,Left/Right Winger,17,LW:14 CAM:2 RW:1
+2024/25,Newcastle United,3905,Kieran Trippier,Right Full Back,14,RB:14
+2024/25,Newcastle United,14446,Joe Willock,Centre Attacking Midfielder,11,CM:10 LW:1
+2024/25,Newcastle United,6451,Martin Dúbravka,Goalkeeper,10,GK:10
+2024/25,Newcastle United,14897,Sean Longstaff,Centre Central Midfielder,8,CM:8
+2024/25,Newcastle United,49908,Sven Botman,Central Defender,6,CB:6
+2024/25,Newcastle United,21585,Lloyd Kelly,Central Defender,4,LB:3 CB:1
+2024/25,Newcastle United,66494,Emil Krafth,Right Full Back,2,CB:2
+2024/25,Newcastle United,8454,Callum Wilson,Centre Striker,2,ST:2
+2024/25,Newcastle United,54312,Miguel Almirón,Left/Centre/Right Second Striker,1,RW:1
+2024/25,Newcastle United,117647,Lewis Miley,Centre Central Midfielder,1,CM:1
+2024/25,Nottingham Forest,16723,Matz Sels,Goalkeeper,38,GK:38
+2024/25,Nottingham Forest,16035,Nikola Milenkovic,Centre Central Defender,37,CB:37
+2024/25,Nottingham Forest,139648,Murillo,Left/Centre Central Defender,36,CB:36
+2024/25,Nottingham Forest,10439,Ola Aina,Right Full Back,35,RB:29 LB:3 RWB:3
+2024/25,Nottingham Forest,3756,Chris Wood,Centre Striker,35,ST:35
+2024/25,Nottingham Forest,15259,Morgan Gibbs-White,Centre Central Midfielder,34,CAM:31 CM:3
+2024/25,Nottingham Forest,51593,Elliot Anderson,Centre Central Midfielder,33,CDM:21 CM:6 CAM:3 LW:2 RM:1
+2024/25,Nottingham Forest,49259,Anthony Elanga,Left Winger,31,RW:21 ST:6 LW:3 CAM:1
+2024/25,Nottingham Forest,23811,Neco Williams,Right Full Back,28,LB:19 RB:5 LWB:4
+2024/25,Nottingham Forest,23702,Callum Hudson-Odoi,Left Winger,25,LW:21 RW:2 CAM:1 ST:1
+2024/25,Nottingham Forest,115172,Nicolás Domínguez,Centre Central Midfielder,23,CDM:15 RW:3 CM:2 LM:1 RWB:1 LW:1
+2024/25,Nottingham Forest,14238,Ryan Yates,Left/Centre/Right Attacking Midfielder,18,CDM:15 CM:2 CAM:1
+2024/25,Nottingham Forest,37221,Álex Moreno,Left Full Back,11,LB:11
+2024/25,Nottingham Forest,108816,Ibrahim Sangaré,Centre Central Midfielder,7,CDM:5 CM:2
+2024/25,Nottingham Forest,67510,Morato,Centre Central Defender,6,CB:6
+2024/25,Nottingham Forest,112510,Danilo,Midfielder,5,CDM:2 CM:2 LW:1
+2024/25,Nottingham Forest,4617,James Ward-Prowse,Central Midfielder,5,CDM:4 CM:1
+2024/25,Nottingham Forest,133025,Jota Silva,Left/Right Winger,5,RW:4 LW:1
+2024/25,Nottingham Forest,15340,Taiwo Awoniyi,Centre Striker,3,ST:3
+2024/25,Nottingham Forest,16204,Willy Boly,Centre Central Defender,1,CB:1
+2024/25,Nottingham Forest,144693,Ramón Sosa,Winger,1,LW:1
+2024/25,Nottingham Forest,10933,Harry Toffolo,Left Full Back,1,LB:1
+2024/25,Southampton,119072,Mateus Fernandes,Centre Central Midfielder,34,CAM:18 CM:10 LM:4 RM:1 ST:1
+2024/25,Southampton,13815,Kyle Walker-Peters,Right Full Back,33,RWB:13 LWB:10 CB:5 RB:3 LB:2
+2024/25,Southampton,25447,Taylor Harwood-Bellis,Centre Central Defender,32,CB:32
+2024/25,Southampton,19589,Jan Bednarek,Centre Central Defender,30,CB:30
+2024/25,Southampton,13703,Aaron Ramsdale,Goalkeeper,30,GK:30
+2024/25,Southampton,14383,Flynn Downes,Midfielder,25,CM:20 CDM:3 CB:2
+2024/25,Southampton,13956,Joe Aribo,Central Midfielder,21,CM:18 CB:2 CDM:1
+2024/25,Southampton,112917,Tyler Dibling,Left/Centre/Right Attacking Midfielder,20,RW:7 CAM:5 RM:4 ST:3 CM:1
+2024/25,Southampton,74960,Lesley Ugochukwu,Centre Defensive Midfielder,18,CM:14 CDM:4
+2024/25,Southampton,14252,Ryan Manning,Left Full Back,18,LWB:14 LB:3 CAM:1
+2024/25,Southampton,4612,Jack Stephens,Centre/Right Full Back,17,CB:17
+2024/25,Southampton,123910,Kamaldeen Sulemana,Left Winger,17,LW:6 ST:5 CAM:4 LM:2
+2024/25,Southampton,67238,Yukinari Sugawara,Right Full Back,16,RWB:12 RB:4
+2024/25,Southampton,9199,Adam Armstrong,Centre Striker,15,ST:10 RM:2 LM:2 CAM:1
+2024/25,Southampton,25281,Cameron Archer,Forward,13,ST:12 RW:1
+2024/25,Southampton,10565,James Bree,Right Full Back,13,CB:7 RWB:6
+2024/25,Southampton,15713,Paul Onuachu,Forward,11,ST:11
+2024/25,Southampton,24716,Nathan Wood,Central Defender,9,CB:9
+2024/25,Southampton,14997,Will Smallbone,Centre Central Midfielder,6,CM:5 CDM:1
+2024/25,Southampton,301829,Welington,Left Full Back,6,LWB:6
+2024/25,Southampton,4573,Alex McCarthy,Goalkeeper,5,GK:5
+2024/25,Southampton,4618,Adam Lallana,Left/Centre Attacking Midfielder,5,CM:4 CDM:1
+2024/25,Southampton,14242,Ben Brereton,Left Winger,4,ST:3 LW:1
+2024/25,Southampton,8052,Ryan Fraser,Left/Right Winger,4,LW:2 LWB:1 CM:1
+2024/25,Southampton,112549,Ross Stewart,Centre Striker,4,ST:4
+2024/25,Southampton,8691,Charlie Taylor,Left Full Back,3,LB:2 CB:1
+2024/25,Southampton,9462,Joe Lumley,Goalkeeper,3,GK:3
+2024/25,Southampton,128389,Albert Grønbæk,Central Midfielder,2,CAM:1 ST:1
+2024/25,Southampton,108325,Armel Bella-Kotchap,Centre Central Defender,2,CB:2
+2024/25,Southampton,16758,Maxwel Cornet,Forward,1,RW:1
+2024/25,Southampton,122173,Jay Robinson,Centre Striker,1,RM:1
+2024/25,Tottenham Hotspur,32229,Pedro Porro,Right Full Back,28,RB:27 RWB:1
+2024/25,Tottenham Hotspur,49316,Dejan Kulusevski,Right Winger,27,CM:13 RW:7 CAM:5 ST:2
+2024/25,Tottenham Hotspur,10443,Dominic Solanke,Striker,25,ST:25
+2024/25,Tottenham Hotspur,71923,Guglielmo Vicario,Goalkeeper,24,GK:24
+2024/25,Tottenham Hotspur,126824,Destiny Udogie,Left Full Back,24,LB:24
+2024/25,Tottenham Hotspur,49374,Brennan Johnson,Centre Striker,24,RW:23 LW:1
+2024/25,Tottenham Hotspur,4999,Son Heung-Min,Left/Centre/Right Winger,24,LW:21 ST:3
+2024/25,Tottenham Hotspur,117318,Pape Matar Sarr,Centre Central Midfielder,22,CM:16 CDM:6
+2024/25,Tottenham Hotspur,22802,Rodrigo Bentancur,Centre Central Midfielder,21,CDM:19 CM:2
+2024/25,Tottenham Hotspur,8456,James Maddison,Left/Centre/Right Attacking Midfielder,21,CM:17 CAM:4
+2024/25,Tottenham Hotspur,117596,Archie Gray,Central Midfielder,19,CB:10 RB:3 CDM:3 CM:2 LB:1
+2024/25,Tottenham Hotspur,23764,Djed Spence,Right Full Back,19,LB:11 RB:7 LWB:1
+2024/25,Tottenham Hotspur,66635,Cristian Romero,Centre Central Defender,18,CB:18
+2024/25,Tottenham Hotspur,50245,Yves Bissouma,Centre Central Midfielder,16,CDM:15 CM:1
+2024/25,Tottenham Hotspur,69070,Radu Dragusin,Left/Centre/Right Central Defender,14,CB:14
+2024/25,Tottenham Hotspur,4408,Ben Davies,Left Full Back,14,CB:14
+2024/25,Tottenham Hotspur,75582,Micky van de Ven,Central Defender,12,CB:12
+2024/25,Tottenham Hotspur,133603,Lucas Bergvall,Central Midfielder,11,CM:9 CDM:2
+2024/25,Tottenham Hotspur,76614,Mathys Tel,Forward,11,LW:7 ST:4
+2024/25,Tottenham Hotspur,118579,Wilson Odobert,Left Winger,9,RW:5 LW:3 CAM:1
+2024/25,Tottenham Hotspur,25892,Kevin Danso,Central Defender,9,CB:9
+2024/25,Tottenham Hotspur,3170,Fraser Forster,Goalkeeper,7,GK:7
+2024/25,Tottenham Hotspur,123998,Antonín Kinsky,Goalkeeper,6,GK:6
+2024/25,Tottenham Hotspur,23599,Timo Werner,Centre Striker,4,LW:4
+2024/25,Tottenham Hotspur,24630,Richarlison,Left/Centre/Right Second Striker,4,ST:4
+2024/25,Tottenham Hotspur,127853,Mikey Moore,Left/Centre Winger,3,RW:2 LW:1
+2024/25,Tottenham Hotspur,15114,Brandon Austin,Goalkeeper,1,GK:1
+2024/25,Tottenham Hotspur,39606,Sergio Reguilón,Left Full Back,1,LB:1
+2024/25,West Ham United,13522,Maximilian Kilman,Left/Centre Central Defender,38,CB:38
+2024/25,West Ham United,14164,Aaron Wan-Bissaka,Right Full Back,35,RB:15 RWB:14 LB:4 LWB:2
+2024/25,West Ham United,8868,Jarrod Bowen,Centre Striker,34,ST:16 RM:8 RW:8 CAM:2
+2024/25,West Ham United,51364,Mohammed Kudus,Midfielder,31,ST:9 LM:8 RW:6 CAM:5 LW:3
+2024/25,West Ham United,25183,Tomás Soucek,Centre Defensive Midfielder,30,CM:18 CAM:7 CDM:5
+2024/25,West Ham United,55776,Lucas Paquetá,Centre Attacking Midfielder,27,CM:13 CAM:5 CDM:3 ST:3 LW:2 RM:1
+2024/25,West Ham United,16803,Emerson,Left Full Back,26,LB:17 LWB:8 LW:1
+2024/25,West Ham United,5748,Alphonse Areola,Goalkeeper,25,GK:25
+2024/25,West Ham United,32638,Konstantinos Mavropanos,Centre Central Defender,21,CB:21
+2024/25,West Ham United,40211,Edson Álvarez,Defensive Midfielder,20,CDM:13 CM:6 CB:1
+2024/25,West Ham United,63656,Jean-Clair Todibo,Central Defender,20,CB:20
+2024/25,West Ham United,40159,Guido Rodríguez,Centre Defensive Midfielder,16,CDM:11 CM:5
+2024/25,West Ham United,16268,Carlos Soler,Centre Central Midfielder,14,CAM:6 LW:3 CM:3 CDM:2
+2024/25,West Ham United,3309,Lukasz Fabianski,Goalkeeper,13,GK:13
+2024/25,West Ham United,4617,James Ward-Prowse,Central Midfielder,12,CM:10 CDM:2
+2024/25,West Ham United,7336,Vladimír Coufal,Right Full Back,11,RB:7 CB:2 RWB:2
+2024/25,West Ham United,9595,Michail Antonio,Left/Centre/Right Striker,11,ST:11
+2024/25,West Ham United,8897,Aaron Cresswell,Left Full Back,10,CB:10
+2024/25,West Ham United,65961,Crysencio Summerville,Left Winger,7,LW:5 CAM:1 LM:1
+2024/25,West Ham United,117579,Ollie Scarles,Left Full Back,7,LWB:6 LB:1
+2024/25,West Ham United,42569,Niclas Füllkrug,Centre Striker,6,ST:6
+2024/25,West Ham United,8245,Danny Ings,Striker,1,ST:1
+2024/25,West Ham United,136505,Andy Irving,Central Midfielder,1,CM:1
+2024/25,West Ham United,146354,Luís Guilherme,Left/Right Winger,1,CAM:1
+2024/25,West Ham United,71590,Evan Ferguson,Striker,1,ST:1
+2024/25,Wolverhampton Wanderers,71432,Rayan Aït-Nouri,Left Full Back,37,LWB:26 LB:7 CB:2 LM:1 LW:1
+2024/25,Wolverhampton Wanderers,133679,João Gomes,Centre Central Midfielder,35,CM:28 CDM:4 CAM:3
+2024/25,Wolverhampton Wanderers,16642,Nélson Semedo,Right Full Back,32,RWB:23 RB:7 CB:2
+2024/25,Wolverhampton Wanderers,143214,André,Centre Defensive Midfielder,31,CM:27 CDM:4
+2024/25,Wolverhampton Wanderers,92635,Toti Gomes,Centre Central Defender,30,CB:28 LB:2
+2024/25,Wolverhampton Wanderers,35670,Jørgen Strand Larsen,Centre Striker,30,ST:30
+2024/25,Wolverhampton Wanderers,15715,José Sá,Goalkeeper,29,GK:29
+2024/25,Wolverhampton Wanderers,51202,Matheus Cunha,Striker,29,CAM:24 LM:2 ST:2 RM:1
+2024/25,Wolverhampton Wanderers,4229,Matt Doherty,Right Full Back,25,CB:20 RWB:3 RB:2
+2024/25,Wolverhampton Wanderers,126108,Jean-Ricner Bellegarde,Centre Central Midfielder,20,CAM:11 CM:3 RM:2 LM:2 LW:1 RW:1
+2024/25,Wolverhampton Wanderers,43010,Santiago Bueno,Centre Central Defender,18,CB:18
+2024/25,Wolverhampton Wanderers,110203,Emmanuel Agbadou,Centre Central Defender,16,CB:16
+2024/25,Wolverhampton Wanderers,5583,Mario Lemina,Centre Central Midfielder,15,CM:8 CDM:3 CB:3 RM:1
+2024/25,Wolverhampton Wanderers,76310,Marshall Munetsi,Central Midfielder,12,CAM:10 ST:2
+2024/25,Wolverhampton Wanderers,4198,Craig Dawson,Centre Central Defender,10,CB:10
+2024/25,Wolverhampton Wanderers,11130,Gonçalo Guedes,Left/Centre/Right Second Striker,10,CAM:6 ST:4
+2024/25,Wolverhampton Wanderers,108947,Rodrigo Gomes,Left/Right Wing Back,7,LWB:3 LW:2 RWB:2
+2024/25,Wolverhampton Wanderers,4331,Sam Johnstone,Goalkeeper,7,GK:7
+2024/25,Wolverhampton Wanderers,19814,Pablo Sarabia,Left/Centre/Right Attacking Midfielder,7,CAM:6 RW:1
+2024/25,Wolverhampton Wanderers,115114,Yerson Mosquera,Centre Central Defender,5,CB:5
+2024/25,Wolverhampton Wanderers,20337,Hwang Hee-Chan,Centre Striker,5,RW:2 CAM:2 ST:1
+2024/25,Wolverhampton Wanderers,24637,Tommy Doyle,Centre Central Midfielder,3,CM:3
+2024/25,Wolverhampton Wanderers,9651,Dan Bentley,Goalkeeper,2,GK:2
+2024/25,Wolverhampton Wanderers,74608,Carlos Forbs,Forward,1,RM:1
+2024/25,Wolverhampton Wanderers,147032,Pedro Lima,Right Full Back,1,RWB:1
+2024/25,Wolverhampton Wanderers,123672,Nasser Djiga,Central Defender,1,CB:1
