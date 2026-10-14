@@ -123,6 +123,8 @@ fs.mkdirSync(OUT, { recursive: true });
   for (let r = 0; r < 3; r++) {
     await page.waitForSelector(".sp-main:not([disabled])", { timeout: 6000 });
     await wait(300);
+    // the roll header (Craig, 14 Oct): one track segment per roll, "Transfer N of M", the Summer window banner
+    if (r === 0) check(await page.evaluate(() => { const t = window.D2T.game.rollTrack(), segs = document.querySelectorAll(".tr-track .tr-seg"); return segs.length === t.length && t.length === window.D2T.game.eng().rolls.reduce((a, x) => a + x.n, 0) && document.querySelectorAll(".tr-seg.is-current").length === 1 && /^Transfer 1 of \d+$/.test(document.querySelector(".sp-kicker").textContent) && /Summer window/i.test(document.querySelector(".tr-banner").textContent) && document.querySelectorAll(".tr-dots i.is-on").length === 1 && /Sign one or pass\.$/.test(document.querySelector(".sp-sub").textContent) && !/Roll/.test(document.querySelector(".sp-sub").textContent); }), "the transfer roll header (track, kicker, Summer banner, sub) is wrong");
     const before = await page.evaluate(() => window.D2T.game.eng().signed.length);
     // the last roll carries a legend in the middle (the roll's own cards, swapped in the engine state for the test):
     // his reel never lands on its own, the reveal plays over the screen, then he drops into his slot (Craig, 13 Oct)
@@ -159,6 +161,9 @@ fs.mkdirSync(OUT, { recursive: true });
       check(await page.evaluate(() => document.querySelector(".sp-slot.is-sel") === document.querySelector(".sp-slot")), "a tap after a drag dropped on nothing did not select the card");
       await shot("10b-selected");
       check((await page.$$('.tr-field .se-slot[class*="se-pf-"]')).length === 11, "selecting a card did not colour all 11 shirts by fit");
+      // the transfer pitch's cards are 57.5 x 75 where the pitch has the height (Craig, 14 Oct), 50 x 65 where it has not
+      const trSize = await page.evaluate(() => { const f = document.querySelector(".tr-field"), c = getComputedStyle(f.querySelector(".se-slot .d2c")); return { h: f.clientHeight, big: f.classList.contains("tr-big"), w: parseFloat(c.width), ch: parseFloat(c.height) }; });
+      check(trSize.big === trSize.h >= 400 && (trSize.big ? trSize.w === 57.5 && trSize.ch === 75 : trSize.w === 50 && trSize.ch === 65), "transfer pitch cards are the wrong size: " + JSON.stringify(trSize));
       await page.click(".tr-field .se-slot.se-best .se-cardwrap", { force: true });
     }
     await wait(500);
