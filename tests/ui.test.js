@@ -237,7 +237,7 @@ fs.mkdirSync(OUT, { recursive: true });
   // gameweek 2 played live: Skip to end, then the finished match moves on to the results by itself (Craig, 14 Oct)
   if (after === "transfer") { await page.evaluate(() => { const G = window.D2T.game; while (G.eng().phase === "window") G.pass(); window.D2T.go("fixtures"); }); await expectScreen("fixtures"); await wait(500); }
   await page.click(".actionbar .bar-main"); await expectScreen("match"); await wait(1200);
-  await page.click(".se-main"); await wait(600);
+  await page.click(".se-main"); await wait(150);
   check((await screen()) === "match" && (await page.textContent(".se-clock")).trim() === "FT", "Skip to end did not show full time first");
   await page.waitForFunction(() => window.D2T.currentScreen() === "results", null, { timeout: 6000 }).catch(() => {});
   check((await screen()) === "results", "the finished match did not move on to the results by itself, on " + (await screen()));
@@ -555,6 +555,16 @@ fs.mkdirSync(OUT, { recursive: true });
   check(!!(await page.waitForSelector(".sheet", { timeout: 12000 }).catch(() => null)), "Goal Rush: no result sheet at the end");
   // the shared end sheet (Craig, 14 Oct): Share, Play again, Home; closed, a Game over peek bar above the bar brings it back
   check((await page.$$eval(".end-sheet [data-k]", (bs) => bs.map((b) => b.dataset.k).join("|"))) === "share|again|home", "Goal Rush: the end sheet should offer Share, Play again and Home");
+  // the result as the target bar (Craig, 14 Oct): Overshot / Fell short / Exactly N, the bar with its flag at the target and
+  // your total under it, the gap ("4 OVER", "21 SHORT", "SPOT ON") and YOUR XI · TARGET; no sentence
+  { const r = await page.evaluate(() => { const S = window.D2T.state.g433, T = +S.formation, t = S.filled.reduce((a, p) => a + p.goals, 0), e = document.querySelector(".end-sheet");
+      const want = t === T ? ["Exactly " + T, "SPOT ON"] : t > T ? ["Overshot", (t - T) + " OVER"] : ["Fell short", (T - t) + " SHORT"];
+      const gap = e && e.querySelector(".g4-end .gap"), goal = e && e.querySelector(".g4-end .goal i"), you = e && e.querySelector(".g4-end .you");
+      return !!e && !!e.querySelector(".g4-end .track .fill") && e.textContent.includes(want[0]) && !!gap && gap.innerText.replace(/\s+/g, " ").startsWith(want[1]) && gap.innerText.includes(`YOUR XI ${t} · TARGET ${T}`)
+        && goal && goal.textContent === String(T) && you && you.textContent === String(t) && (t > T) === !!e.querySelector(".g4-end .ovr") && !/Premier League goals/.test(e.textContent); });
+    check(r, "Goal Rush: the end sheet does not show the target bar, the gap and YOUR XI · TARGET"); }
+  // the end sheet's three buttons share one font size (Craig, 14 Oct)
+  check(await page.$$eval(".end-sheet [data-k]", (bs) => new Set(bs.map((b) => getComputedStyle(b).fontSize)).size === 1), "Goal Rush: the end sheet's buttons are not all the same font size");
   await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(600);
   check(!(await page.$(".end-sheet")) && !!(await page.$(".g4 .end-peek")) && /Game over/.test(await page.textContent(".g4 .end-peek")), "Goal Rush: closing the end sheet should leave a Game over peek bar");
   await barOrder("Goal Rush over");
