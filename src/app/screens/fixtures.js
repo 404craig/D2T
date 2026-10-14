@@ -46,8 +46,26 @@
       const bar = D2T.h(SE.bar({ mid: SE.backBtn('Back to squad'), main: SE.mainBtn('Kick off', 'se-main') }));
       root.append(body, bar);
       bar.querySelector('.se-back').onclick = () => { st.step = 'squad'; D2T.save(); D2T.go('squad'); };
+      // a Club X career (Craig, 14 Oct): shirts still empty after the poach when the Summer window closed were filled with
+      // free agents (E.fillHoles); say so once
+      const free = D2T.game.freeFill();
+      if (free.length && !st.freeSeen) {
+        st.freeSeen = true; D2T.save();
+        const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">Your empty ${free.length === 1 ? 'shirt was' : 'shirts were'} filled before the first game with ${free.length === 1 ? 'a free agent who plays' : 'free agents who play'} there.</p>
+          <ul>${free.map((c) => `<li>${c.crest ? `<img src="${c.crest}" alt="">` : ''}<b>${D2T.esc(c.name)}</b><span>${c.ovr} · ${D2T.esc(c.main || c.pos)}</span></li>`).join('')}</ul>
+          <button class="btn se-btn se-poach-go" type="button">OK</button></div>`);
+        const t = setTimeout(() => {
+          if (!root.isConnected) return;
+          const sh = D2T.sheet({ title: free.length === 1 ? 'Free signing' : 'Free signings', body: el });
+          sh.el.classList.add('se-run', 'se-poach-sheet');
+          ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
+          el.querySelector('.se-poach-go').onclick = () => sh.close();
+        }, 500);
+        this._off = () => clearTimeout(t);
+      }
       let kicked = false;
       bar.querySelector('.bar-main').onclick = () => { if (kicked) return; kicked = true; if (!D2T.game.play()) { D2T.go(D2T.game.stepFor() || 'home'); return; } D2T.go('match'); };
-    }
+    },
+    unmount() { this._off && this._off(); this._off = null; }
   });
 })();
