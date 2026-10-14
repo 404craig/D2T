@@ -491,7 +491,7 @@
               { duration: 560, delay: HIT, easing: 'cubic-bezier(.2,.75,.35,1)', fill: 'forwards' });
             later(() => {
               clash(slot, W * 0.96, H * 0.42, [c.accent, '#12F06C', c.accent, '#FFFFFF', '#12F06C', c.ink && c.ink !== c.accent ? c.ink : c.accent]);
-              SND.play('reveal');
+              SND.play('explode');                                  // Craig, 14 Oct: a boom as your badge smashes theirs, then a rumble
               slot.style.setProperty('--sp-accent', '#12F06C');   // the glow behind goes green under the burst
               const stage = api && api.el.querySelector('.sp-stage');
               if (stage) stage.animate([{ transform: 'translate(0,0)' }, { transform: 'translate(-7px,3px)' }, { transform: 'translate(6px,-2px)' }, { transform: 'translate(-3px,1px)' }, { transform: 'translate(0,0)' }], { duration: 300, easing: 'ease-out' });
