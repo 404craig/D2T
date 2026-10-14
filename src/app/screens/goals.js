@@ -121,13 +121,13 @@
   }
   // the tally (UI_SPEC 8f): "38 goals to go" in yellow under "Player 7 of 11", and the big scored number over "/352 GOALS"
   function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = toGo(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v !== TARGET && Math.abs(v - TARGET) <= 20); heat(host, v); }
-  // the bar warms from yellow towards an orangey-red as the total nears the target, and turns red once past it (Craig, 14 Oct)
+  // the bar is yellow to half the target, then warms to red at the target, its colour tied to the whole track; red once past it (Craig, 14 Oct)
   function heat(host, v) {
     const tr = host.querySelector('.g4-track'), fill = tr && tr.querySelector('.fill'); if (!fill) return;
     tr.classList.toggle('over', v > TARGET);
-    if (v > TARGET) { fill.style.background = ''; return; }
-    const x = Math.max(0, Math.min(1, (v / TARGET - 0.6) / 0.4));
-    fill.style.background = x ? `linear-gradient(90deg, ${D2T.mix('#FFB000', '#FF8A1F', x)}, ${D2T.mix('#FFD21F', '#FF4D2E', x)})` : '';
+    fill.style.background = '';
+    // the gradient spans the whole track: the fill is v/TARGET of it, so the gradient is TARGET/v of the fill
+    fill.style.setProperty('--hs', v > 0 && v <= TARGET ? (TARGET / v * 100) + '%' : '100%');
   }
 
   const COLORS = ['#FFD21F', '#FFB000', '#FFFFFF', '#FFE375'];
