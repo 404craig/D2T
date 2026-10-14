@@ -64,8 +64,9 @@
 .ub-slot.is-set .sp-glow { opacity: .55; }
 .ub-slot.is-set .sp-node.is-hit .d2c { filter: var(--glow, none); }
 .ub-slot.is-set .sp-node.is-hit .d2t-shine { display: block; }
-.ub-slot.ok .sp-node.is-hit > * { filter: drop-shadow(0 0 16px rgba(18,240,108,.8)); }
-.ub-slot.bad .sp-node.is-hit > * { filter: drop-shadow(0 0 16px rgba(255,77,94,.85)); }
+/* right and wrong glow green and red round a shirt; the club cards have no glow (Craig, 14 Oct). A loss shakes either. */
+.ub-stage:not(.ub-clubs) .ub-slot.ok .sp-node.is-hit > * { filter: drop-shadow(0 0 16px rgba(18,240,108,.8)); }
+.ub-stage:not(.ub-clubs) .ub-slot.bad .sp-node.is-hit > * { filter: drop-shadow(0 0 16px rgba(255,77,94,.85)); }
 .ub-slot.bad { animation: ubShake .45s; }
 @keyframes ubShake { 20%, 60% { transform: translateX(-7px); } 40%, 80% { transform: translateX(7px); } }
 .ub-ph { display: grid; place-items: center; width: var(--ub-sw); height: calc(var(--ub-sw) * 1.02); font: 900 italic 64px/1 var(--font); color: #34343C; }
@@ -81,21 +82,18 @@
 .ub-crest { width: 36px; height: 36px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,.5)); }
 .ub-flag { width: 22px; height: 16.5px; aspect-ratio: auto; }
 
-/* a club: the Classic shield turned round (option A): name and season top left, crest top right, the number in the middle,
-   the stat's unit near the point in the club's text colour, where Classic says Real finish */
-.ub-cc.d2c-club .d2c-body { align-items: stretch; padding: 1.1em 0.9em 2.6em; }
-.ub-cc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: .3em; }
-.ub-cc-who { flex: 1 1 auto; display: flex; flex-direction: column; align-items: flex-start; gap: .45em; min-width: 0; padding-top: .2em; }
-/* the name wraps to two lines beside the crest; its longest word sets the size (Middlesbrough, Huddersfield) */
-.ub-cc-name { font-weight: 900; font-style: italic; font-size: 1.1em; line-height: 1.02; text-transform: uppercase; text-shadow: 0 .2em .6em rgba(0,0,0,.5); }
-.ub-cc.long .ub-cc-crest { width: 3em; height: 3em; }
-.ub-cc-season { font-size: 1em; font-weight: 800; padding: .2em .65em; border-radius: .6em; background: rgba(0,0,0,.35); white-space: nowrap; }
-.ub-cc-crest { width: 3.7em; height: 3.7em; flex: none; margin: -.2em -.2em 0 0; object-fit: contain; filter: drop-shadow(0 0 .06em rgba(255,255,255,.9)) drop-shadow(0 0 .25em rgba(255,255,255,.35)) drop-shadow(0 .3em .4em rgba(0,0,0,.45)); }
-.ub-cc-mid { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+/* a club (Craig, 14 Oct; layout N in design/prototype/unbeaten-club-cards-v2.html): everything centred, top to bottom the
+   crest, the club name (two lines if it needs them), the number in the middle, the season pill, the line and the stat word
+   in the club's text colour */
+.ub-cc.d2c-club .d2c-body { align-items: center; text-align: center; padding: .95em .8em 2.5em; }
+.ub-cc-crest { width: 3.4em; height: 3.4em; flex: none; object-fit: contain; filter: drop-shadow(0 0 .06em rgba(255,255,255,.9)) drop-shadow(0 0 .25em rgba(255,255,255,.35)) drop-shadow(0 .3em .4em rgba(0,0,0,.45)); }
+.ub-cc-name { font-weight: 900; font-style: italic; font-size: 1.12em; line-height: 1.02; margin-top: .35em; max-width: 100%; text-transform: uppercase; text-shadow: 0 .2em .6em rgba(0,0,0,.5); }
+.ub-cc-mid { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; }
 .ub-cc .ub-num { display: inline-block; font-weight: 900; font-style: italic; font-size: 5em; line-height: .9; letter-spacing: -0.02em; text-shadow: 0 .08em .3em rgba(0,0,0,.45); }
 .ub-cc .ub-num.w3 { font-size: 4.1em; }
-.ub-cc-foot { display: flex; flex-direction: column; align-items: center; }
-.ub-cc-hr { width: 60%; height: .1em; background: rgba(255,255,255,.25); margin-bottom: .5em; }
+.ub-cc .ub-num.w4 { font-size: 3.2em; }
+.ub-cc-season { font-size: 1em; font-weight: 800; padding: .2em .65em; border-radius: .6em; background: rgba(0,0,0,.35); white-space: nowrap; margin-bottom: .6em; }
+.ub-cc-hr { width: 60%; height: .1em; background: rgba(255,255,255,.25); margin-bottom: .5em; flex: none; }
 .ub-cc-unit { font-size: .95em; font-weight: 800; letter-spacing: .14em; color: var(--club-text); }
 
 /* the bar: Lower and Higher during a run */
@@ -109,6 +107,7 @@
 .ub-endbig { text-align: center; padding: 4px 0 6px; }
 .ub-endbig b { display: block; font: 900 italic 84px/.9 var(--font); color: #22D3EE; text-shadow: 0 0 40px rgba(34,211,238,.35); }
 .ub-endbig span { display: block; margin-top: 6px; font: 900 italic 16px/1 var(--font); text-transform: uppercase; letter-spacing: .04em; }
+.ub-banter { text-align: center; }  /* the banter line under the number (Craig, 14 Oct) */
 .ub-again { background: #22D3EE; color: #001A1F; }  /* the sheet sits outside .ub */
 
 /* home card mark */
