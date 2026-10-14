@@ -430,6 +430,11 @@ fs.mkdirSync(OUT, { recursive: true });
   await expectScreen("summary"); await wait(1200); await shot("35-clx-summary");
   await card("clubx", "DROP2TOP Club X\n");
   check(/Champions|Fell short/.test(await page.textContent(".sm-head")), "Club X summary has no result");
+  // the club history page (Craig, 14 Oct): the career's record, big numbers and every season
+  await page.evaluate(() => { const el = document.querySelector('.sm [data-act="history"], [data-act="history"]'); el.click(); }); await expectScreen("history"); await wait(600); await shot("35b-clx-history");
+  check((await page.$$(".hs .fr-frame")).length === 4 && (await page.$$(".hs-table tbody tr")).length >= 1 && (await page.$$(".hs-tile")).length >= 2, "the club history page has no record, big numbers or seasons");
+  check(await page.evaluate(() => { const r = window.D2T.game.careerHistory().seasons.slice(-1)[0]; const n = window.D2T.game.S().clubs.length; return r && r.w + r.d + r.l === 2 * (n - 1) && Array.isArray(r.goals); }), "the Club X season did not save its wins, draws, losses and scorers");
+  await page.evaluate(() => window.D2T.go("summary")); await expectScreen("summary"); await wait(900);
   check(await page.evaluate(() => window.D2T.game.xRecord().runs === 1), "Club X run not recorded");
   check(await page.evaluate((b) => window.D2T.game.record().runs === JSON.parse(b).runs + 1, classicBefore), "Club X season did not count in the home record");
   // career mode (Craig, 13 Oct): Next season carries the XI on, with pre-season rolls; after 2025/26 the season is a forecast
