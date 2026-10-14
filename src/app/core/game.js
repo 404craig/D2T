@@ -601,7 +601,17 @@
     const entry = { key: k, mode, season: S.season, club: name, finish: F.finish, rise: F.rise, pts: F.pts, histFinish: F.histFinish,
       drop: F.finish <= n - rel, half: F.finish <= n / 2, top3: F.finish <= 3, title: F.finish === 1, at: new Date().toISOString().slice(0, 10) };
     if (mode !== 'classic') entry.dream = GAME.dreamMet(F.finish, F.histFinish);
-    if (mode === 'clubx') { entry.career = run.career ? run.career.n : 1; entry.careerId = run.career ? run.career.id : eng.seed; if (S.sim) entry.sim = true; }
+    if (mode === 'clubx') {
+      entry.career = run.career ? run.career.n : 1; entry.careerId = run.career ? run.career.id : eng.seed; if (S.sim) entry.sim = true;
+      // for the club history page (Craig, 14 Oct): the season's record, its scorers and its biggest win
+      const P = eng.played || [], goals = {};
+      entry.w = P.filter((m) => m.us > m.them).length; entry.d = P.filter((m) => m.us === m.them).length; entry.l = P.length - entry.w - entry.d;
+      entry.gf = P.reduce((a, m) => a + m.us, 0); entry.ga = P.reduce((a, m) => a + m.them, 0);
+      P.forEach((m) => m.events.forEach((e) => { if (e.us && e.name) goals[e.name] = (goals[e.name] || 0) + 1; }));
+      entry.goals = Object.entries(goals).sort((a, b) => b[1] - a[1]);
+      const big = P.filter((m) => m.us > m.them).sort((a, b) => (b.us - b.them) - (a.us - a.them) || b.us - a.us)[0];
+      if (big) entry.big = { us: big.us, them: big.them, opp: S.clubs[big.opp].name };
+    }
     if (run.daily) {
       entry.daily = run.daily;
       rec.daily = rec.daily || {};
@@ -637,6 +647,23 @@
     const list = [...careers.values()], longest = list.sort((a, b) => b.seasons - a.seasons || b.titles - a.titles)[0] || null;
     return { runs: runs.length, titles: runs.filter((r) => r.title).length, best: runs.length ? Math.min(...runs.map((r) => r.finish)) : null,
       careers: careers.size, longest, mostTitles: list.length ? Math.max(...list.map((c) => c.titles)) : 0 };
+  };
+  // One Club X career's seasons, oldest first, and its record (Craig, 14 Oct: the club history page). Seasons played
+  // before the history page have only finish and points, so the counts that need more skip them.
+  GAME.careerHistory = (id) => {
+    const run = D2T.state.run;
+    id = id || (run && run.eng && run.eng.mode === 'clubx' ? (run.career ? run.career.id : run.eng.seed) : null);
+    const seasons = D2T.state.record.runs.filter((r) => r.mode === 'clubx' && !r.daily && r.careerId === id).sort((a, b) => (a.career || 1) - (b.career || 1));
+    const full = seasons.filter((r) => r.w != null), goals = {};
+    full.forEach((r) => (r.goals || []).forEach(([n, g]) => { goals[n] = (goals[n] || 0) + g; }));
+    const top = Object.entries(goals).sort((a, b) => b[1] - a[1])[0] || null;
+    const best = seasons.slice().sort((a, b) => b.pts - a.pts)[0] || null;
+    const big = full.filter((r) => r.big).sort((a, b) => (b.big.us - b.big.them) - (a.big.us - a.big.them) || b.big.us - a.big.us)[0] || null;
+    return { id, club: seasons.length ? seasons[seasons.length - 1].club : null, seasons,
+      record: { runs: seasons.length, drop: seasons.filter((r) => r.drop).length, half: seasons.filter((r) => r.half).length, top3: seasons.filter((r) => r.top3).length, titles: seasons.filter((r) => r.title).length },
+      best, wins: full.reduce((a, r) => a + r.w, 0), games: full.reduce((a, r) => a + r.w + r.d + r.l, 0), full: full.length,
+      top: top ? { name: top[0], goals: top[1], seasons: full.filter((r) => (r.goals || []).some(([n]) => n === top[0])).length } : null,
+      big: big ? Object.assign({ season: big.season }, big.big) : null };
   };
   GAME.dreamRecord = () => {
     const runs = D2T.state.record.runs.filter((r) => r.mode === 'dare2dream' && !r.daily);

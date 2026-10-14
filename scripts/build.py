@@ -20,7 +20,7 @@ CSS = ["core/base.css", "screens/front.css", "screens/spin.css", "screens/season
 JS = ["../engine.js", "../sound.js", "core/app.js", "core/cards.js", "core/flip.js", "core/game.js", "core/season.js", "core/share.js",
       "screens/intro.js", "screens/home.js", "screens/howto.js", "screens/account.js", "screens/league.js",
       "screens/spin.js", "screens/reveal.js", "screens/transfer.js", "screens/table.js", "screens/squad.js", "screens/fixtures.js",
-      "screens/match.js", "screens/results.js", "screens/summary.js", "screens/goals.js", "screens/unbeaten.js", "core/boot.js"]
+      "screens/match.js", "screens/results.js", "screens/summary.js", "screens/history.js", "screens/goals.js", "screens/unbeaten.js", "core/boot.js"]
 SHELL = ["core/app.js", "screens/intro.js"]          # run first, while the rest of the page is still arriving
 
 
