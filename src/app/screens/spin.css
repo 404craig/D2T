@@ -243,3 +243,27 @@
 .rr-badge { position: absolute; left: 50%; transform: translateX(-50%); font: 900 italic 18px/1 'Exo 2', sans-serif; letter-spacing: .16em; color: var(--lc); text-shadow: 0 0 18px var(--lc); opacity: 0; white-space: nowrap; }
 .rr-badge.go { animation: rrBadge .5s var(--ease-out) forwards; }
 @keyframes rrBadge { 0% { opacity: 0; transform: translateX(-50%) scale(1.6); letter-spacing: .5em; } 100% { opacity: 1; transform: translateX(-50%) scale(1); } }
+
+/* ---------- transfer roll header before the spin (Craig, 14 Oct): the season's track, "Transfer 7 of 17", the window banner ---------- */
+.tr-rollhead { --tr-acc: #12F06C; }
+.tr-track { margin: 0 0 10px; }
+.tr-segs, .tr-wins { display: grid; column-gap: 3px; }
+.tr-seg { display: block; height: 8px; border-radius: 3px; background: #26262C; }
+.tr-seg.is-win.is-todo { background: #3A3A44; }
+.tr-seg.is-done { background: color-mix(in srgb, var(--tr-acc) 45%, transparent); }
+.tr-seg.is-current { background: var(--tr-acc); box-shadow: 0 0 10px var(--tr-acc); }
+.tr-wins { margin-top: 4px; }
+.tr-wins span { font-weight: 800; font-size: 8.5px; letter-spacing: .14em; text-transform: uppercase; color: #8E8E99; text-align: center; white-space: nowrap; line-height: 1.1; }
+.tr-rollhead .sp-kicker b { font-size: 15px; font-weight: 900; color: var(--tr-acc); letter-spacing: .04em; }
+.tr-rollhead .sp-kicker { margin-bottom: 4px; }
+.tr-banner { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; padding: 12px 14px; border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--tr-acc) 50%, transparent);
+  background: linear-gradient(100deg, #0E0E10 30%, color-mix(in srgb, var(--tr-acc) 35%, transparent)); }
+.tr-banner-t { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.tr-banner-t small { font-weight: 800; font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: #CFCFD6; }
+.tr-banner-t b { font-weight: 900; font-style: italic; font-size: 22px; line-height: 1; text-transform: uppercase; color: #fff; white-space: nowrap; }
+.tr-banner-r { display: flex; align-items: center; gap: 8px; flex-shrink: 0; font-weight: 800; font-size: 12px; color: #fff; white-space: nowrap; }
+.tr-dots { display: flex; gap: 5px; }
+.tr-dots i { width: 10px; height: 10px; box-sizing: border-box; border-radius: 50%; border: 1.5px solid var(--tr-acc); }
+.tr-dots i.is-on { background: var(--tr-acc); }
+.tr-rollhead .sp-sub { margin-top: 8px; }
