@@ -182,7 +182,7 @@
       }
       function buildPitch() {
         field = D2T.h(`<div class="tr-pitch" aria-label="Your XI">
-          <div class="tr-head"><div class="tr-head-t"><b>${draft ? `Draft · Shirt ${info.step} of ${info.of}` : `${D2T.esc(info.name)} · Roll ${info.step} of ${info.of}`}</b><span>${draft ? (di.open ? 'Drag one onto an open shirt' : `Drag one onto the lit ${di.pos} shirt`) : 'Drag a player onto a shirt to sign him there'}</span></div>
+          <div class="tr-head"><div class="tr-head-t"><b>${draft ? `Draft · Shirt ${info.step} of ${info.of}` : `Transfer ${info.overall} of ${info.total}${/^Summer/.test(info.name) ? ' · Summer window' : /^January/.test(info.name) ? ' · January window' : ''}`}</b><span>${draft ? (di.open ? 'Drag one onto an open shirt' : `Drag one onto the lit ${di.pos} shirt`) : 'Drag a player onto a shirt to sign him there'}</span></div>
             <div class="se-rating" aria-live="polite"><b class="tr-rating">0</b><i>Team<br>rating</i></div></div>
           <div class="se-pitch tr-field tr-big">${SE.pitchLines}<div class="se-slots"></div>${draft && !di.open ? '' : `<button class="se-formlink" type="button"><b class="se-fname">${GAME.eng().formation}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`}</div></div>`);
         api.el.insertBefore(field, api.el.querySelector('.sp-stage'));
