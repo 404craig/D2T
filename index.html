@@ -146,8 +146,9 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 /* Pitch cards (option C, chosen 11 Oct; pitch only, the bigger cards keep their layout): the position is a coloured tab
    on top of the card, a big rating beside the crest, and the full name on two lines. 1.3 tall, softened corners. */
 .d2c.mini { height: calc(var(--w) * 1.3); }
-.d2c.mini.pos-GK { --pos: #FFB020; } .d2c.mini.pos-DEF { --pos: #3BA4FF; } .d2c.mini.pos-MID { --pos: #12F06C; } .d2c.mini.pos-FWD { --pos: #FF4D5A; }
-.d2c.mini .d2c-tab { position: absolute; left: 50%; top: -1em; transform: translateX(-50%); z-index: 2; font-size: 1.59em; font-weight: 900; letter-spacing: 0.06em; line-height: 1; padding: 0.22em 0.55em 0.3em; border-radius: 0.4em 0.4em 0.2em 0.2em; background: var(--pos); color: #0A0A0A; box-shadow: 0 0.1em 0.3em rgba(0,0,0,0.5); }
+/* tabs off the pitch (bench, drag ghost) are neutral; only pitch cards with a fit- class take a fit colour (season.css) */
+.d2c.mini { --pos: #26262C; --tabink: #FFFFFF; }
+.d2c.mini .d2c-tab { position: absolute; left: 50%; top: -1em; transform: translateX(-50%); z-index: 2; font-size: 1.59em; font-weight: 900; letter-spacing: 0.06em; line-height: 1; padding: 0.22em 0.55em 0.3em; border-radius: 0.4em 0.4em 0.2em 0.2em; background: var(--pos); color: var(--tabink, #FFFFFF); box-shadow: 0 0.1em 0.3em rgba(0,0,0,0.5); }
 .d2c.mini .d2c-body { padding: 1.12em 0.61em 2.34em; align-items: center; }
 .d2c.mini .d2c-mid { display: flex; align-items: center; justify-content: center; gap: 0.4em; width: 100%; }
 .d2c.mini .d2c-ovr { font-size: 4.68em; line-height: 0.85; }
@@ -263,7 +264,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .fr-sect-h h2 { margin: 0; font: 900 italic 20px/1 var(--font); text-transform: uppercase; }
 .fr-sect-h span { font-size: 12px; font-weight: 700; opacity: 0.7; }
 .fr-record { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-.fr-frame { position: relative; aspect-ratio: 100 / 128; display: flex; flex-direction: column; align-items: center; padding-top: 14%; text-align: center; }
+.fr-frame { position: relative; aspect-ratio: 100 / 128; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 12%; text-align: center; }
 .fr-frame svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .fr-frame polygon { fill: rgba(255,255,255,0.04); stroke: #3A3A42; stroke-width: 1.6; vector-effect: non-scaling-stroke; }
 .fr-frame b { position: relative; font: 900 italic 34px/1 var(--font); }
@@ -856,7 +857,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .se-cardwrap.se-sel { transform: translateY(-5px) scale(1.06); z-index: 3; }
 .se-cardwrap.se-sel .d2c-tab { background: #FFFFFF; }
 .se-cardwrap.se-sel::after { content: ''; position: absolute; left: 50%; bottom: -10px; margin-left: -5px; border: 5px solid transparent; border-top-color: #FFFFFF; }
-.se-armed .se-cardwrap:not(.se-sel) { animation: seArmed 1.4s ease-in-out infinite; }
+.se-armed .se-slot.se-pf-green .se-cardwrap:not(.se-sel) { animation: seArmed 1.4s ease-in-out infinite; }
 @keyframes seArmed { 50% { transform: translateY(-2px); } }
 .se-cardwrap.se-target { transform: scale(1.1); }
 .se-cardwrap.se-target::before { content: ''; position: absolute; inset: -6px; border-radius: 10px; border: 2px solid var(--se-acc); }
@@ -1000,6 +1001,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 
 /* ---------- placing a new signing (squad) ---------- */
 .se-slot.se-best .se-cardwrap { animation: seBest 1.4s ease-in-out infinite; }
+.se-slot.se-pf-amber .se-cardwrap, .se-slot.se-pf-red .se-cardwrap, .se-slot.se-best.se-pf-amber .se-empty, .se-slot.se-best.se-pf-red .se-empty { animation: none; }   /* only green shirts bounce (Craig, 14 Oct) */
 @keyframes seBest { 50% { transform: translateY(-3px) scale(1.04); } }
 .se-oopchip.se-delta { font-size: 10px; padding: 1px 6px; }
 .se-oopchip.se-fit-amber { background: #FFB020; color: #1A1000; }
@@ -1009,7 +1011,10 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
    position next to them) or red (out of position). While a card is selected or dragged, every shirt gets a ring in how
    well he would fit it, a little way out from it: shield-shaped round a card (nothing over the card itself), a rounded
    outline round an empty shirt, which is also filled faintly. */
-.se-slots .d2c.mini.fit-green { --pos: #12F06C; } .se-slots .d2c.mini.fit-amber { --pos: #FFB020; } .se-slots .d2c.mini.fit-red { --pos: #FF4D5E; }
+.se-slots .d2c.mini.fit-green { --pos: #12F06C; --tabink: #0A0A0A; } .se-slots .d2c.mini.fit-amber { --pos: #FFB020; --tabink: #0A0A0A; } .se-slots .d2c.mini.fit-red { --pos: #FF4D5E; --tabink: #0A0A0A; }
+/* a soft patch of light on the grass under each placed card, in its fit colour, where the dark shadow sits */
+.se-slot:has(.d2c.fit-green)::after { background: rgba(18,240,108,.55); } .se-slot:has(.d2c.fit-amber)::after { background: rgba(255,176,32,.55); } .se-slot:has(.d2c.fit-red)::after { background: rgba(255,77,94,.55); }
+.se-slot:has(.d2c.fit-green)::after, .se-slot:has(.d2c.fit-amber)::after, .se-slot:has(.d2c.fit-red)::after { filter: blur(5px); }
 .se-slot.se-pf-green { --ring: #12F06C; --ring-a: rgba(18,240,108,.18); }
 .se-slot.se-pf-amber { --ring: #FFB020; --ring-a: rgba(255,176,32,.18); }
 .se-slot.se-pf-red { --ring: #FF4D5E; --ring-a: rgba(255,77,94,.18); }
@@ -1132,6 +1137,15 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .g4-tally .g4-info i .taway { display: inline-block; }
 .g4-track { position: relative; height: 10px; border-radius: 5px; background: #1B1B21; margin-top: 8px; }
 .g4-track .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; background: linear-gradient(90deg, #FFB000, var(--g4)); width: 0; }
+/* the end of the bar pulses within 20 of the target, as the total does; past it the bar is red */
+.g4-track .fill::after { content: ''; position: absolute; right: 0; top: -3px; bottom: -3px; width: 18px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,255,255,.85), rgba(255,200,61,0)); opacity: 0; pointer-events: none; }
+.g4-tally.near .fill::after { animation: g4end 1.1s ease-in-out infinite; }
+@keyframes g4end { 0%, 100% { opacity: 0; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.25); } }
+.g4-track.over .fill { background: linear-gradient(90deg, #FF8A1F, #FF3B3B); }
+.g4-track.over .ovr { background: repeating-linear-gradient(135deg, #FF3B3B 0 4px, #B3222B 4px 8px); }
+.g4-tally:has(.g4-track.over) .fill { animation-name: g4glowred; }
+@keyframes g4glowred { 0%, 100% { box-shadow: 0 0 0 rgba(255,59,59,0); } 50% { box-shadow: 0 0 12px rgba(255,59,59,.75); } }
+@media (prefers-reduced-motion: reduce) { .g4-tally.near .fill::after { animation: none; opacity: .8; } }
 .g4-track .ovr { position: absolute; top: 0; bottom: 0; border-radius: 0 5px 5px 0; background: repeating-linear-gradient(135deg, #8E8E99 0 4px, #6E6E78 4px 8px); width: 0; }
 .g4-track .mark { position: absolute; top: -4px; bottom: -4px; left: 100%; width: 2px; margin-left: -1px; background: #FFF; border-radius: 1px; }
 .g4-track .ghost { position: absolute; top: 0; bottom: 0; right: 0; border-radius: 0 5px 5px 0; background: rgba(255,255,255,.35); }
@@ -4308,7 +4322,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
           <span class="fr-spin">Spin for a club ${ARROW}</span></span></button>
         ${continueCards()}
         <section class="fr-sect fr-in" aria-label="Your record">
-          <div class="fr-sect-h"><h2>Your record</h2><span>${rec.runs} runs</span></div>
+          <div class="fr-sect-h"><h2>Your record</h2><span>${rec.runs} run${rec.runs === 1 ? '' : 's'}</span></div>
           ${D2T.frRecord(rec, 'dark')}</section>
         <section class="fr-sect fr-in" aria-label="Other games">
           <div class="fr-sect-h"><h2>Other games</h2></div>
@@ -5608,7 +5622,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
         field = D2T.h(`<div class="tr-pitch" aria-label="Your XI">
           <div class="tr-head"><div class="tr-head-t"><b>${draft ? `Draft · Shirt ${info.step} of ${info.of}` : `${D2T.esc(info.name)} · Roll ${info.step} of ${info.of}`}</b><span>${draft ? (di.open ? 'Drag one onto an open shirt' : `Drag one onto the lit ${di.pos} shirt`) : 'Drag a player onto a shirt to sign him there'}</span></div>
             <div class="se-rating" aria-live="polite"><b class="tr-rating">0</b><i>Team<br>rating</i></div></div>
-          <div class="se-pitch tr-field">${SE.pitchLines}<div class="se-slots"></div>${draft && !di.open ? '' : `<button class="se-formlink" type="button">Formation <b class="se-fname">${GAME.eng().formation}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`}</div></div>`);
+          <div class="se-pitch tr-field">${SE.pitchLines}<div class="se-slots"></div>${draft && !di.open ? '' : `<button class="se-formlink" type="button"><b class="se-fname">${GAME.eng().formation}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`}</div></div>`);
         api.el.insertBefore(field, api.el.querySelector('.sp-stage'));
         slotsEl = field.querySelector('.se-slots'); ratingEl = field.querySelector('.tr-rating');
         // change the shape on a roll (Craig, 13 Oct): your 11 are re-seated, nobody comes in; some may land out of position
@@ -5684,7 +5698,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
         const replaced = !draft && p && GAME.lineup().xi[slot];
         if (!p || !(draft ? GAME.draftPick(p.id, slot) : GAME.signAt(p.id, slot))) return;
         signing = true;
-        SND.play('sign', LV_IDX(p)); if (replaced) SND.play('playerOut', null, 0.35);
+        SND.play('cardDrop'); if (replaced) SND.play('playerOut', null, 0.35);
         drawPitch(-1, slot);
         const s = api.slots[i];
         s.classList.add('is-signed');
@@ -5775,7 +5789,6 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
           accent: LV_ACCENT,
           landSound: (i, p) => SND.play('rarity', LV_IDX(p)),
           bigIndex: (rs) => { let b = -1; (rs || []).forEach((p, i) => { if (LV_IDX(p) >= 3 && (b < 0 || LV_IDX(p) >= LV_IDX(rs[b]))) b = i; }); return b; },
-          caption: (p) => `${p.main || p.pos} · ${lvName(p).toUpperCase()}`,
           details: (p) => D2T.cards.info(p), detailsBare: true,
           mainLabel: 'Spin', pickLabel: draft ? 'Pick one' : 'Pass', spinningLabel: 'Rolling',
           selectedLabel: (p) => (draft ? `Sign ${surname(p.name)}` : 'Pass'),
@@ -5892,7 +5905,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
         await D2T.wait(900); if (!ok()) return;
         myEl.classList.remove('se-scan', 'se-stop');
         myEl.classList.add('se-landed', 'se-thump');
-        window.D2TSound && window.D2TSound.play('tableLand');
+        if (!x) window.D2TSound && window.D2TSound.play('tableLand');   // Club X: no cheer here
         tbl.classList.add('se-shake');
         els.slice(stopAt + 1).forEach((el, k) => { el.classList.remove('se-hid'); el.classList.add('se-build'); el.style.animationDelay = (k * 70) + 'ms'; });
         body.querySelector('.se-fin').classList.add('se-in');
@@ -5957,16 +5970,16 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
       const reduced = D2T.reduced();
       const pre = GAME.preseason(), drafting = GAME.inDraft(), dream = GAME.isDraftMode();
       root.appendChild(D2T.topbar());
-      const gwLabel = drafting ? 'Draft' : pre ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, data.fixtures.length)}`;
+      const gwLabel = drafting ? 'Draft your XI' : pre ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, data.fixtures.length)}`;
       const hist = data.table.find((r) => r.name === club.name);
-      const goalLabel = GAME.mode() !== 'classic' && hist ? ` · Target ${hist.pos === 1 || GAME.mode() === 'clubx' ? 'champions' : D2T.ordinal(GAME.target(hist.pos))}` : '';
+      const goalLabel = drafting ? '' : GAME.mode() !== 'classic' && hist ? ` · Target ${hist.pos === 1 || GAME.mode() === 'clubx' ? 'champions' : D2T.ordinal(GAME.target(hist.pos))}` : '';
       const body = D2T.h(`<div class="screen-body se-squad">
         <div class="se-sqhead">
           <img class="se-sqcrest" src="${club.crest}" alt="">
           <div class="se-sqtext"><div class="se-sqname">${D2T.esc(club.name)}</div><div class="se-sqsub">${data.season} · ${gwLabel}${goalLabel}</div></div>
           <div class="se-rating" aria-live="polite"><b class="se-rating-n">0</b><i>Team<br>rating</i></div>
         </div>
-        <div class="se-pitch">${pitchLines}<div class="se-slots"></div><button class="se-formlink" type="button">Formation <b class="se-fname"></b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+        <div class="se-pitch">${pitchLines}<div class="se-slots"></div><button class="se-formlink" type="button"><b class="se-fname"></b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
         <div class="se-subshead"><span class="se-subs-t"></span><span class="se-hint" aria-live="polite"></span></div>
         <div class="se-subs" role="list" aria-label="Squad"></div>
       </div>`);
@@ -5977,7 +5990,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
       const oppC = fx ? SE.club(data, fx.opp) : null;
       const nextHTML = fx ? `<div class="se-next"><img src="${oppC.crest}" alt=""><div class="se-next-t"><small>Next · ${fx.ha === 'H' ? 'Home' : 'Away'}</small><b class="d2c-fit">${D2T.esc(oppC.name)}</b></div></div>` : '';
       const carried = GAME.mode() === 'clubx' && GAME.career().n > 1;   // a Club X career's later seasons have pre-season rolls
-      const label = drafting ? 'Start the draft' : pre ? (dream && !carried ? 'Start the season' : 'Pre-season') : 'Play';
+      const label = drafting ? 'Start the draft' : pre ? (dream && !carried ? 'Start the season' : 'Transfer window') : 'Play';
       // every squad bar (Craig, 13 Oct): home, then a greyed middle button (nowhere to go back to and no respin here; before
       // the draft it is the greyed respin the draft's own bar shows, as the draft has none), then Play across the right
       const bar = D2T.h(SE.bar({ cls: 'se-nextbar', mid: drafting ? SE.respinOff() : SE.backOff(), main: SE.mainBtn(label, 'se-play') }));
@@ -6239,7 +6252,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
         D2T.tips([['formation', body.querySelector('.se-formlink'), 'Change your shape here'], ...(pre && !drafting && sub ? [['subs', sub, 'Drag a sub onto the pitch']] : [])]); }, 1100);
       const offOld = this._off; this._off = () => { clearTimeout(tipT); offOld && offOld(); };
       // first load: cards deal onto the pitch
-      if (!reduced && window.D2TSound) window.D2TSound.play('dealPitch');
+      if (!reduced && window.D2TSound && L.xi.some(Boolean)) window.D2TSound.play('dealPitch');   // empty shirts before the draft: no cards land, so no sound
       if (!reduced) [...slotsEl.querySelectorAll('.se-cardwrap')].forEach((n, i) => n.animate([{ opacity: 0, transform: 'translateY(14px) scale(.85)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 60 + i * 40, easing: 'cubic-bezier(.3,1.3,.5,1)', fill: 'backwards' }));
     },
     unmount() { this._off && this._off(); }
@@ -6820,7 +6833,15 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
     host.querySelector('.tnum').textContent = t; setGap(host, t);
   }
   // the tally (UI_SPEC 8f): "38 goals to go" in yellow under "Player 7 of 11", and the big scored number over "/352 GOALS"
-  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = toGo(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v !== TARGET && Math.abs(v - TARGET) <= 20); }
+  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = toGo(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v !== TARGET && Math.abs(v - TARGET) <= 20); heat(host, v); }
+  // the bar warms from yellow towards an orangey-red as the total nears the target, and turns red once past it (Craig, 14 Oct)
+  function heat(host, v) {
+    const tr = host.querySelector('.g4-track'), fill = tr && tr.querySelector('.fill'); if (!fill) return;
+    tr.classList.toggle('over', v > TARGET);
+    if (v > TARGET) { fill.style.background = ''; return; }
+    const x = Math.max(0, Math.min(1, (v / TARGET - 0.6) / 0.4));
+    fill.style.background = x ? `linear-gradient(90deg, ${D2T.mix('#FFB000', '#FF8A1F', x)}, ${D2T.mix('#FFD21F', '#FF4D2E', x)})` : '';
+  }
 
   const COLORS = ['#FFD21F', '#FFB000', '#FFFFFF', '#FFE375'];
   const ARROW = D2T.ICON.respin;   // the respin arrow every bar uses
@@ -7217,6 +7238,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
         burstAt(x, y + h / 2, true); burstAt(x + 10, y + h / 2, false);
         wrap.querySelector('.g4-tally').animate([{ transform: 'translate(0,0)' }, { transform: 'translate(-5px,2px)' }, { transform: 'translate(6px,-2px)' }, { transform: 'translate(-3px,1px)' }, { transform: 'translate(0,0)' }], { duration: 360 });
         tr.querySelector('.fill').animate([{ filter: 'brightness(1)' }, { filter: 'brightness(2.2)' }, { filter: 'brightness(1)' }], { duration: 420 });
+        if (!reduced) tr.querySelector('.fill').animate([{ opacity: 1 }, { opacity: .25 }, { opacity: 1 }, { opacity: .4 }, { opacity: .9 }, { opacity: .55 }, { opacity: 1 }], { duration: 700, delay: 420 });   // the fizzle as it turns red
         snd('land');
       }
       // the number, the to-go text and the bar count up together; crossing the target = race past the line, burst on it, then the bar re-scales

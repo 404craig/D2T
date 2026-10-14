@@ -108,7 +108,7 @@
 .se-cardwrap.se-sel { transform: translateY(-5px) scale(1.06); z-index: 3; }
 .se-cardwrap.se-sel .d2c-tab { background: #FFFFFF; }
 .se-cardwrap.se-sel::after { content: ''; position: absolute; left: 50%; bottom: -10px; margin-left: -5px; border: 5px solid transparent; border-top-color: #FFFFFF; }
-.se-armed .se-cardwrap:not(.se-sel) { animation: seArmed 1.4s ease-in-out infinite; }
+.se-armed .se-slot.se-pf-green .se-cardwrap:not(.se-sel) { animation: seArmed 1.4s ease-in-out infinite; }
 @keyframes seArmed { 50% { transform: translateY(-2px); } }
 .se-cardwrap.se-target { transform: scale(1.1); }
 .se-cardwrap.se-target::before { content: ''; position: absolute; inset: -6px; border-radius: 10px; border: 2px solid var(--se-acc); }
@@ -252,6 +252,7 @@
 
 /* ---------- placing a new signing (squad) ---------- */
 .se-slot.se-best .se-cardwrap { animation: seBest 1.4s ease-in-out infinite; }
+.se-slot.se-pf-amber .se-cardwrap, .se-slot.se-pf-red .se-cardwrap, .se-slot.se-best.se-pf-amber .se-empty, .se-slot.se-best.se-pf-red .se-empty { animation: none; }   /* only green shirts bounce (Craig, 14 Oct) */
 @keyframes seBest { 50% { transform: translateY(-3px) scale(1.04); } }
 .se-oopchip.se-delta { font-size: 10px; padding: 1px 6px; }
 .se-oopchip.se-fit-amber { background: #FFB020; color: #1A1000; }
@@ -261,7 +262,10 @@
    position next to them) or red (out of position). While a card is selected or dragged, every shirt gets a ring in how
    well he would fit it, a little way out from it: shield-shaped round a card (nothing over the card itself), a rounded
    outline round an empty shirt, which is also filled faintly. */
-.se-slots .d2c.mini.fit-green { --pos: #12F06C; } .se-slots .d2c.mini.fit-amber { --pos: #FFB020; } .se-slots .d2c.mini.fit-red { --pos: #FF4D5E; }
+.se-slots .d2c.mini.fit-green { --pos: #12F06C; --tabink: #0A0A0A; } .se-slots .d2c.mini.fit-amber { --pos: #FFB020; --tabink: #0A0A0A; } .se-slots .d2c.mini.fit-red { --pos: #FF4D5E; --tabink: #0A0A0A; }
+/* a soft patch of light on the grass under each placed card, in its fit colour, where the dark shadow sits */
+.se-slot:has(.d2c.fit-green)::after { background: rgba(18,240,108,.55); } .se-slot:has(.d2c.fit-amber)::after { background: rgba(255,176,32,.55); } .se-slot:has(.d2c.fit-red)::after { background: rgba(255,77,94,.55); }
+.se-slot:has(.d2c.fit-green)::after, .se-slot:has(.d2c.fit-amber)::after, .se-slot:has(.d2c.fit-red)::after { filter: blur(5px); }
 .se-slot.se-pf-green { --ring: #12F06C; --ring-a: rgba(18,240,108,.18); }
 .se-slot.se-pf-amber { --ring: #FFB020; --ring-a: rgba(255,176,32,.18); }
 .se-slot.se-pf-red { --ring: #FF4D5E; --ring-a: rgba(255,77,94,.18); }

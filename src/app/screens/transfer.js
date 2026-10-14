@@ -156,7 +156,7 @@
         field = D2T.h(`<div class="tr-pitch" aria-label="Your XI">
           <div class="tr-head"><div class="tr-head-t"><b>${draft ? `Draft · Shirt ${info.step} of ${info.of}` : `${D2T.esc(info.name)} · Roll ${info.step} of ${info.of}`}</b><span>${draft ? (di.open ? 'Drag one onto an open shirt' : `Drag one onto the lit ${di.pos} shirt`) : 'Drag a player onto a shirt to sign him there'}</span></div>
             <div class="se-rating" aria-live="polite"><b class="tr-rating">0</b><i>Team<br>rating</i></div></div>
-          <div class="se-pitch tr-field">${SE.pitchLines}<div class="se-slots"></div>${draft && !di.open ? '' : `<button class="se-formlink" type="button">Formation <b class="se-fname">${GAME.eng().formation}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`}</div></div>`);
+          <div class="se-pitch tr-field">${SE.pitchLines}<div class="se-slots"></div>${draft && !di.open ? '' : `<button class="se-formlink" type="button"><b class="se-fname">${GAME.eng().formation}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`}</div></div>`);
         api.el.insertBefore(field, api.el.querySelector('.sp-stage'));
         slotsEl = field.querySelector('.se-slots'); ratingEl = field.querySelector('.tr-rating');
         // change the shape on a roll (Craig, 13 Oct): your 11 are re-seated, nobody comes in; some may land out of position
@@ -232,7 +232,7 @@
         const replaced = !draft && p && GAME.lineup().xi[slot];
         if (!p || !(draft ? GAME.draftPick(p.id, slot) : GAME.signAt(p.id, slot))) return;
         signing = true;
-        SND.play('sign', LV_IDX(p)); if (replaced) SND.play('playerOut', null, 0.35);
+        SND.play('cardDrop'); if (replaced) SND.play('playerOut', null, 0.35);
         drawPitch(-1, slot);
         const s = api.slots[i];
         s.classList.add('is-signed');
@@ -323,7 +323,6 @@
           accent: LV_ACCENT,
           landSound: (i, p) => SND.play('rarity', LV_IDX(p)),
           bigIndex: (rs) => { let b = -1; (rs || []).forEach((p, i) => { if (LV_IDX(p) >= 3 && (b < 0 || LV_IDX(p) >= LV_IDX(rs[b]))) b = i; }); return b; },
-          caption: (p) => `${p.main || p.pos} · ${lvName(p).toUpperCase()}`,
           details: (p) => D2T.cards.info(p), detailsBare: true,
           mainLabel: 'Spin', pickLabel: draft ? 'Pick one' : 'Pass', spinningLabel: 'Rolling',
           selectedLabel: (p) => (draft ? `Sign ${surname(p.name)}` : 'Pass'),

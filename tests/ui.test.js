@@ -291,7 +291,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await expectScreen("table"); await page.click(".actionbar .bar-main"); await wait(400);
   check(/dream|Beat it|Do it again/i.test(await page.textContent(".se-fin")), "table does not show the Dare2Dream target");
   await page.click(".actionbar .bar-main"); await expectScreen("squad"); await wait(600);
-  check(/Target/.test(await page.textContent(".se-sqsub")), "squad does not show the target");
+  check(/Draft your XI/.test(await page.textContent(".se-sqsub")), "squad shows Draft your XI before the draft");
   check(await page.evaluate(() => window.D2T.game.eng().phase === "draft" && window.D2T.game.eng().xi.every((x) => x == null)), "Dare2Dream should start with no players");
   await shot("31-d2d-empty");
   // the draft: one spin per shirt, tap then Sign for the first, drag for the second, the rest through the adapter

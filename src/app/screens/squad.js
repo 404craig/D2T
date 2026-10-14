@@ -19,16 +19,16 @@
       const reduced = D2T.reduced();
       const pre = GAME.preseason(), drafting = GAME.inDraft(), dream = GAME.isDraftMode();
       root.appendChild(D2T.topbar());
-      const gwLabel = drafting ? 'Draft' : pre ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, data.fixtures.length)}`;
+      const gwLabel = drafting ? 'Draft your XI' : pre ? 'Pre-season' : `Gameweek ${Math.min(eng.gw, data.fixtures.length)}`;
       const hist = data.table.find((r) => r.name === club.name);
-      const goalLabel = GAME.mode() !== 'classic' && hist ? ` · Target ${hist.pos === 1 || GAME.mode() === 'clubx' ? 'champions' : D2T.ordinal(GAME.target(hist.pos))}` : '';
+      const goalLabel = drafting ? '' : GAME.mode() !== 'classic' && hist ? ` · Target ${hist.pos === 1 || GAME.mode() === 'clubx' ? 'champions' : D2T.ordinal(GAME.target(hist.pos))}` : '';
       const body = D2T.h(`<div class="screen-body se-squad">
         <div class="se-sqhead">
           <img class="se-sqcrest" src="${club.crest}" alt="">
           <div class="se-sqtext"><div class="se-sqname">${D2T.esc(club.name)}</div><div class="se-sqsub">${data.season} · ${gwLabel}${goalLabel}</div></div>
           <div class="se-rating" aria-live="polite"><b class="se-rating-n">0</b><i>Team<br>rating</i></div>
         </div>
-        <div class="se-pitch">${pitchLines}<div class="se-slots"></div><button class="se-formlink" type="button">Formation <b class="se-fname"></b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+        <div class="se-pitch">${pitchLines}<div class="se-slots"></div><button class="se-formlink" type="button"><b class="se-fname"></b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
         <div class="se-subshead"><span class="se-subs-t"></span><span class="se-hint" aria-live="polite"></span></div>
         <div class="se-subs" role="list" aria-label="Squad"></div>
       </div>`);
@@ -39,7 +39,7 @@
       const oppC = fx ? SE.club(data, fx.opp) : null;
       const nextHTML = fx ? `<div class="se-next"><img src="${oppC.crest}" alt=""><div class="se-next-t"><small>Next · ${fx.ha === 'H' ? 'Home' : 'Away'}</small><b class="d2c-fit">${D2T.esc(oppC.name)}</b></div></div>` : '';
       const carried = GAME.mode() === 'clubx' && GAME.career().n > 1;   // a Club X career's later seasons have pre-season rolls
-      const label = drafting ? 'Start the draft' : pre ? (dream && !carried ? 'Start the season' : 'Pre-season') : 'Play';
+      const label = drafting ? 'Start the draft' : pre ? (dream && !carried ? 'Start the season' : 'Transfer window') : 'Play';
       // every squad bar (Craig, 13 Oct): home, then a greyed middle button (nowhere to go back to and no respin here; before
       // the draft it is the greyed respin the draft's own bar shows, as the draft has none), then Play across the right
       const bar = D2T.h(SE.bar({ cls: 'se-nextbar', mid: drafting ? SE.respinOff() : SE.backOff(), main: SE.mainBtn(label, 'se-play') }));
@@ -301,7 +301,7 @@
         D2T.tips([['formation', body.querySelector('.se-formlink'), 'Change your shape here'], ...(pre && !drafting && sub ? [['subs', sub, 'Drag a sub onto the pitch']] : [])]); }, 1100);
       const offOld = this._off; this._off = () => { clearTimeout(tipT); offOld && offOld(); };
       // first load: cards deal onto the pitch
-      if (!reduced && window.D2TSound) window.D2TSound.play('dealPitch');
+      if (!reduced && window.D2TSound && L.xi.some(Boolean)) window.D2TSound.play('dealPitch');   // empty shirts before the draft: no cards land, so no sound
       if (!reduced) [...slotsEl.querySelectorAll('.se-cardwrap')].forEach((n, i) => n.animate([{ opacity: 0, transform: 'translateY(14px) scale(.85)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 60 + i * 40, easing: 'cubic-bezier(.3,1.3,.5,1)', fill: 'backwards' }));
     },
     unmount() { this._off && this._off(); }

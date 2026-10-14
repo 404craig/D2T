@@ -54,7 +54,7 @@
 .fr-sect-h h2 { margin: 0; font: 900 italic 20px/1 var(--font); text-transform: uppercase; }
 .fr-sect-h span { font-size: 12px; font-weight: 700; opacity: 0.7; }
 .fr-record { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-.fr-frame { position: relative; aspect-ratio: 100 / 128; display: flex; flex-direction: column; align-items: center; padding-top: 14%; text-align: center; }
+.fr-frame { position: relative; aspect-ratio: 100 / 128; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 12%; text-align: center; }
 .fr-frame svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .fr-frame polygon { fill: rgba(255,255,255,0.04); stroke: #3A3A42; stroke-width: 1.6; vector-effect: non-scaling-stroke; }
 .fr-frame b { position: relative; font: 900 italic 34px/1 var(--font); }

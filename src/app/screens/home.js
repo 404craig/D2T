@@ -160,7 +160,7 @@
           <span class="fr-spin">Spin for a club ${ARROW}</span></span></button>
         ${continueCards()}
         <section class="fr-sect fr-in" aria-label="Your record">
-          <div class="fr-sect-h"><h2>Your record</h2><span>${rec.runs} runs</span></div>
+          <div class="fr-sect-h"><h2>Your record</h2><span>${rec.runs} run${rec.runs === 1 ? '' : 's'}</span></div>
           ${D2T.frRecord(rec, 'dark')}</section>
         <section class="fr-sect fr-in" aria-label="Other games">
           <div class="fr-sect-h"><h2>Other games</h2></div>
