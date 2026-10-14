@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unbeaten Club Cards v2</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap">
+<style>
+  /* Unbeaten Run club-stat cards in the Classic club-pick shield, bigger and two to a row, landing with the same reel as the club spin.
+     Three layouts, each with the crest top right and the stat in the middle. */
+  :root { color-scheme: dark; --c: #22D3EE; --ct: #8BEAF7; --soft: #CFCFD6; --muted: #8E8E99; --line: #26262C; --ease-out: cubic-bezier(.2, .8, .2, 1); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #08080A; color: #fff; font-family: 'Exo 2', Arial, sans-serif; }
+  .page { max-width: 1320px; margin: 0 auto; padding: 40px 16px 72px; display: flex; flex-direction: column; gap: 28px; }
+  .head h1 { font: 900 italic 38px/1 'Exo 2'; margin: 0 0 10px; }
+  .head p { margin: 0; color: #BDBDC6; font-size: 15px; line-height: 1.5; max-width: 96ch; }
+  .row { display: flex; gap: 26px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .opt { width: 390px; max-width: 100%; display: flex; flex-direction: column; gap: 10px; }
+  .opt-h .tag { font-size: 12px; font-weight: 800; letter-spacing: 1.4px; color: #12F06C; }
+  .opt-h h3 { font: 900 italic 21px/1.05 'Exo 2'; margin: 3px 0; }
+  .opt-h p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; min-height: 76px; }
+  .phone { position: relative; width: 390px; max-width: 100%; height: 780px; border-radius: 26px; background: #000; box-shadow: 0 0 0 1px #222228, 0 30px 60px rgba(0,0,0,.6); overflow: hidden; display: flex; flex-direction: column; isolation: isolate; }
+
+  /* top bar and head, as the other Unbeaten Run pages */
+  .tb { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 14px 16px 8px; }
+  .logo { display: block; height: 26px; aspect-ratio: 857 / 241; background: #fff; -webkit-mask: url('assets/logo/short.png') center / contain no-repeat; mask: url('assets/logo/short.png') center / contain no-repeat; }
+  .mtag { font: 900 italic 15px/1 'Exo 2'; letter-spacing: .04em; text-transform: uppercase; color: #0A0A0A; background: var(--c); padding: 5px 10px 4px; border-radius: 5px; transform: skewX(-10deg); white-space: nowrap; }
+  .mtag span { display: inline-block; transform: skewX(10deg); }
+  .acct { justify-self: end; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: #0E0E10; display: grid; place-items: center; }
+  .acct svg { width: 18px; height: 18px; }
+  .ghead { display: flex; justify-content: space-between; align-items: flex-end; padding: 2px 16px 10px; }
+  .ghead .l b { display: block; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+  .ghead .l i { font-style: normal; font-size: 11px; font-weight: 700; color: var(--muted); }
+  .ghead .l i em { font-style: normal; color: var(--ct); }
+  .ghead .r { text-align: right; }
+  .ghead .r b { font: 900 italic 40px/1 'Exo 2'; color: var(--c); display: inline-block; }
+  .ghead .r b.bump { animation: bump .45s cubic-bezier(.3, 1.4, .5, 1); }
+  @keyframes bump { 40% { transform: scale(1.25); } }
+  .ghead .r i { display: block; font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
+
+  /* stage: two reels side by side */
+  .stage { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; }
+  .floor { position: absolute; left: 50%; top: 50%; width: 380px; height: 340px; transform: translate(-50%, -50%); pointer-events: none; background: radial-gradient(60% 50% at 50% 50%, rgba(255,255,255,.045) 0%, rgba(255,255,255,0) 100%); }
+  .pair { position: relative; display: flex; gap: 12px; }
+  .vs { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 38px; height: 38px; border-radius: 50%; background: #000; border: 1px solid var(--line); display: grid; place-items: center; font: 900 italic 13px/1 'Exo 2'; color: var(--ct); z-index: 6; }
+  .slot { --cw: 172px; --chh: 287px; position: relative; width: var(--cw); height: var(--chh); flex-shrink: 0; }
+  .glow { position: absolute; left: 50%; top: 50%; width: 280px; height: 380px; transform: translate(-50%, -50%); pointer-events: none; opacity: 0; z-index: 0;
+    background: radial-gradient(48% 44% at 50% 50%, var(--acc, #fff) 0%, rgba(0,0,0,0) 72%); filter: blur(8px); transition: opacity .4s var(--ease-out); }
+  .slot.is-set .glow { opacity: .55; }
+  .win { position: absolute; left: 0; top: -60px; width: var(--cw); height: calc(var(--chh) + 120px); overflow: hidden; z-index: 1;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 17%, #000 83%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 17%, #000 83%, transparent 100%); }
+  .slot.is-set .win { -webkit-mask-image: none; mask-image: none; }
+  .strip { position: absolute; left: 0; top: 60px; width: var(--cw); height: var(--chh); transform-origin: 50% 50%; will-change: transform, filter; }
+  .node { position: absolute; left: 0; top: 0; width: var(--cw); height: var(--chh); will-change: transform; transition: opacity .3s var(--ease-out); }
+  .node.is-gone { opacity: 0; }
+  .node .d2c { filter: none; }
+  .slot.is-set .node.is-hit .d2c { filter: var(--glow, none); }
+  .streak { position: absolute; inset: 0; pointer-events: none; opacity: 0; z-index: 2; mix-blend-mode: screen;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.14) 38%, rgba(255,255,255,.22) 50%, rgba(255,255,255,.14) 62%, rgba(255,255,255,0) 100%); }
+  .slot.is-hit .strip { animation: impact .46s cubic-bezier(.2, .9, .3, 1.3) both; }
+  @keyframes impact { 0% { transform: scale(1); } 28% { transform: scale(1.065); } 100% { transform: scale(1); } }
+  .sweep { position: absolute; top: -20%; left: -60%; width: 40%; height: 140%; pointer-events: none; z-index: 3; opacity: 0; transform: rotate(16deg); background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.75) 50%, rgba(255,255,255,0) 100%); }
+  .slot.is-hit .sweep { animation: sweep .55s cubic-bezier(.3, .7, .2, 1) .04s both; }
+  @keyframes sweep { 0% { left: -60%; opacity: 0; } 15% { opacity: 1; } 100% { left: 130%; opacity: 0; } }
+  .slot.is-hit .glow { animation: glowPop .6s var(--ease-out) both; }
+  @keyframes glowPop { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.6); } 35% { opacity: 1; } 100% { opacity: .55; transform: translate(-50%, -50%) scale(1); } }
+  /* the known card slides across from the right when a round moves on */
+  .slot.slide .strip { animation: slideIn .42s var(--ease-out) both; }
+  @keyframes slideIn { from { transform: translateX(calc(100% + 12px)); } to { transform: none; } }
+  .slot.right { cursor: pointer; }
+  .slot.win-ok .node.is-hit .d2c { filter: drop-shadow(0 0 14px rgba(18,240,108,.8)); }
+  .slot.win-no .node.is-hit .d2c { filter: drop-shadow(0 0 14px rgba(255,77,90,.9)); }
+
+  /* the shield, from the live cards (base.css) */
+  .d2c { --w: 114px; position: relative; width: var(--w); height: calc(var(--w) * 1.667); font-size: calc(var(--w) / 11.4); flex-shrink: 0; filter: var(--glow, none); -webkit-user-select: none; user-select: none; }
+  .d2c-rim { position: absolute; inset: 0; background: var(--rim); -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20114%20190'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M1.77%2010.23%20L10.23%201.77%20Q12%200%2014.5%200%20L99.5%200%20Q102%200%20103.77%201.77%20L112.23%2010.23%20Q114%2012%20114%2014.5%20L114%20167%20Q114%20170%20111.17%20170.99%20L60.77%20188.68%20Q57%20190%2053.23%20188.68%20L2.83%20170.99%20Q0%20170%200%20167%20L0%2014.5%20Q0%2012%201.77%2010.23Z'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20114%20190'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M1.77%2010.23%20L10.23%201.77%20Q12%200%2014.5%200%20L99.5%200%20Q102%200%20103.77%201.77%20L112.23%2010.23%20Q114%2012%20114%2014.5%20L114%20167%20Q114%20170%20111.17%20170.99%20L60.77%20188.68%20Q57%20190%2053.23%20188.68%20L2.83%20170.99%20Q0%20170%200%20167%20L0%2014.5%20Q0%2012%201.77%2010.23Z'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat; }
+  .d2c-face { position: absolute; inset: 0.2em; overflow: hidden; background: var(--face); color: var(--ink-c); -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20110%20186'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M0.92%2010.08%20L10.08%200.92%20Q11%200%2012.3%200%20L97.7%200%20Q99%200%2099.92%200.92%20L109.08%2010.08%20Q110%2011%20110%2012.3%20L110%20165.2%20Q110%20167%20108.3%20167.59%20L57.65%20185.09%20Q55%20186%2052.35%20185.09%20L1.7%20167.59%20Q0%20167%200%20165.2%20L0%2012.3%20Q0%2011%200.92%2010.08Z'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20110%20186'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M0.92%2010.08%20L10.08%200.92%20Q11%200%2012.3%200%20L97.7%200%20Q99%200%2099.92%200.92%20L109.08%2010.08%20Q110%2011%20110%2012.3%20L110%20165.2%20Q110%20167%20108.3%20167.59%20L57.65%20185.09%20Q55%20186%2052.35%20185.09%20L1.7%20167.59%20Q0%20167%200%20165.2%20L0%2012.3%20Q0%2011%200.92%2010.08Z'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat; }
+  .d2c-tex { position: absolute; inset: 0; background: repeating-linear-gradient(135deg, rgba(255,255,255,0.10) 0 0.2em, rgba(255,255,255,0) 0.2em 0.7em); }
+  .d2c-club .d2c-tex { background: var(--tex); -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 60%); mask-image: linear-gradient(180deg, #000 0%, transparent 60%); }
+  .d2c-hi { position: absolute; inset: 0; background: radial-gradient(120% 55% at 15% 0%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 60%); }
+  .d2c-holo { position: absolute; inset: 0; background: var(--holo, none); mix-blend-mode: screen; }
+  .d2t-shine { position: absolute; top: -30%; left: -70%; width: 45%; height: 160%; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%); transform: rotate(18deg); animation: d2tShine 4.5s ease-in-out infinite; pointer-events: none; }
+  @keyframes d2tShine { 0% { left: -70%; } 30% { left: 130%; } 100% { left: 130%; } }
+  /* a slower beat: the same sweep (about 1.4s), then a long rest (home's club fan and continue cards) */
+  .d2t-shine.slow { animation-name: d2tShineSlow; animation-duration: 10s; }
+  @keyframes d2tShineSlow { 0% { left: -70%; } 14% { left: 130%; } 100% { left: 130%; } }
+  .d2c-club .d2c-tex { background: var(--tex); -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 60%); mask-image: linear-gradient(180deg, #000 0%, transparent 60%); }
+  .d2c-club .d2c-face { color: #fff; }
+  .d2c-body { position: relative; display: flex; flex-direction: column; height: 100%; box-sizing: border-box; padding: 1.1em 0.9em 2.6em; }
+  .d2c-grow { flex-grow: 1; }
+  .num { font-weight: 900; font-style: italic; line-height: .9; letter-spacing: -0.02em; text-shadow: 0 .08em .3em rgba(0,0,0,.45); }
+  .num.q { animation: qp 1.6s ease-in-out infinite; }
+  @keyframes qp { 50% { opacity: .5; } }
+  .unit { font-size: .82em; font-weight: 800; letter-spacing: .14em; opacity: .8; }
+  .season { font-size: 1em; font-weight: 800; padding: .2em .65em; border-radius: .6em; background: rgba(0,0,0,.35); }
+  .cname { font-weight: 900; font-style: italic; line-height: 1.02; text-transform: uppercase; text-shadow: 0 .2em .6em rgba(0,0,0,.5); white-space: nowrap; }
+  .crest { object-fit: contain; filter: drop-shadow(0 0 .06em rgba(255,255,255,.9)) drop-shadow(0 0 .25em rgba(255,255,255,.35)) drop-shadow(0 .3em .4em rgba(0,0,0,.45)); }
+
+  /* New layout: crest centred at the top, the club name under it with the full width to itself, the number in the middle
+     of the card, the season pill just above the line, the stat named under the line */
+  .N .d2c-body { align-items: center; text-align: center; padding: .95em .8em 2.5em; }
+  .N .crest { width: 3.4em; height: 3.4em; flex: none; }
+  .N .cname { font-size: 1.12em; margin-top: .35em; white-space: normal; max-width: 100%; }
+  .N .mid { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .N .num { font-size: 5em; }
+  .N .num.w3 { font-size: 4.1em; }
+  .N .season { margin-bottom: .6em; }
+  .N .hr { width: 60%; height: .1em; background: rgba(255,255,255,.25); margin-bottom: .5em; }
+  .N .unit { color: var(--club-text); opacity: 1; font-size: .95em; }
+  .pair { position: relative; display: flex; gap: 12px; }
+  .note { max-width: 860px; background: #111114; border: 1px solid #222228; border-radius: 16px; padding: 14px 16px; font-size: 14px; color: #CFCFD6; line-height: 1.5; }
+  .note b { display: block; color: #12F06C; font-size: 11px; letter-spacing: .12em; margin-bottom: 4px; }
+  .cap { text-align: center; color: var(--muted); font-size: 13px; margin-top: 10px; }
+  .shake { animation: shake .5s cubic-bezier(.36,.07,.19,.97) both; }
+  @keyframes shake { 10%, 90% { transform: translateX(-2px); } 20%, 80% { transform: translateX(4px); } 30%, 50%, 70% { transform: translateX(-7px); } 40%, 60% { transform: translateX(7px); } }
+  .btn { margin-top: 12px; background: #22D3EE; color: #062a33; border: 0; border-radius: 22px; height: 44px; padding: 0 18px; font: 900 italic 15px/1 'Exo 2'; cursor: pointer; }
+  /* bar */
+  .hint { text-align: center; font-size: 12px; color: var(--muted); padding: 0 16px 6px; min-height: 18px; }
+  .bar { display: flex; align-items: center; gap: 10px; padding: 8px 16px 18px; }
+  .hl { flex: 1; height: 56px; border-radius: 28px; display: flex; align-items: center; justify-content: center; gap: 8px; font: 900 italic 19px/1 'Exo 2'; text-transform: uppercase; border: 0; cursor: pointer; transition: opacity .2s, transform .15s; }
+  .hl:active { transform: scale(.97); }
+  .hl[disabled] { opacity: .35; }
+  .hl.lo { border: 2px solid var(--c); color: var(--c); background: transparent; } .hl.hi { background: var(--c); color: #0A0A0A; }
+  .hl svg { width: 20px; height: 20px; }
+  .circ { width: 54px; height: 54px; border-radius: 50%; border: 1px solid var(--line); background: #0E0E10; display: grid; place-items: center; flex: none; color: #fff; cursor: pointer; }
+  .circ svg { width: 22px; height: 22px; }
+  @media (prefers-reduced-motion: reduce) { .slot.is-hit .strip, .slot.is-hit .sweep, .slot.is-hit .glow, .slot.slide .strip, .num.q { animation: none; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <h1>Unbeaten Run club cards, round 2</h1>
+    <p>Crest centred at the top, the club name under it with the whole width, so Middlesbrough and Nottingham Forest fit at a decent size. The number stays in the middle of the card. The season pill moves down to sit just above the line, and the stat is named under it. Wins are counted from every result in the data.</p>
+  </div>
+  <div class="row" id="pairs"></div>
+  <div class="note"><b>NOTE FOR MAIN WHEN THIS GOES LIVE</b>Drop the green and red glows on the club cards when you get it right or wrong. When you lose, the club card shakes and plays the same sound the player shirt does now. Tap "Lose" under the last pair to see the shake.</div>
+</div>
+<script src="data/data.js"></script>
+<script>
+(function () {
+  const D = window.D2T_DATA;
+  // club paint, as the live club cards
+  const hex = (h) => { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255]; };
+  const toHex = (rgb) => '#' + rgb.map((v) => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0')).join('');
+  const mix = (a, b, t) => toHex(hex(a).map((v, i) => v + (hex(b)[i] - v) * t));
+  const paint = (a) => ({ face: `linear-gradient(170deg, ${mix(a, '#FFFFFF', .55)} 0%, ${a} 22%, ${mix(a, '#000000', .32)} 42%, ${mix(a, '#000000', .8)} 66%, ${mix(a, '#000000', .92)} 100%)`,
+    rim: `linear-gradient(170deg, ${mix(a, '#FFFFFF', .7)} 0%, ${a} 40%, ${mix(a, '#000000', .75)} 100%)`,
+    tex: 'repeating-linear-gradient(135deg, rgba(255,255,255,.12) 0 .2em, rgba(255,255,255,0) .2em .7em)', glow: `drop-shadow(0 0 10px ${a}55)` });
+  const fit = (n, max, base) => { const w = Math.max(...n.split(/\s+/).map((x) => x.length)); return w > max ? ` style="font-size:${(base * max / w).toFixed(2)}em"` : ''; };
+
+  const W = 172;
+  const card = (L, c, shown) => {
+    const k = D.clubs[c.club], P = paint(k.accent), v = shown ? String(c.v) : '?', name = k.name, cr = k.crest;
+    const num = `<span class="num${shown ? '' : ' q'}${v.length > 2 ? ' w3' : ''}">${v}</span>`;
+    const inner = {
+      N: `<img class="crest" src="${cr}" alt=""><span class="cname"${fit(name, 13, 1.12)}>${name}</span><div class="mid">${num}</div><span class="season">${c.season}</span><span class="hr"></span><span class="unit">WINS</span>`,
+      A: `<div class="top"><div class="who"><span class="cname"${fit(name, 9, 1.15)}>${name}</span><span class="season">${c.season}</span></div><img class="crest" src="${cr}" alt=""></div>
+        <div class="mid">${num}</div><div class="foot"><span class="hr"></span><span class="unit">POINTS</span></div>`,
+      B: `<img class="wm" src="${cr}" alt=""><div class="top"><span class="season">${c.season}</span><span class="disc"><img class="crest" src="${cr}" alt=""></span></div>
+        <div class="mid"><span class="unit">POINTS</span>${num}</div><div class="bot"><span class="cname"${fit(name, 10, 1.4)}>${name}</span></div>`,
+      C: `<img class="crest" src="${cr}" alt=""><span class="season">${c.season}</span><div class="band">${num}<span class="unit">POINTS</span></div>
+        <div class="bot"><span class="cname"${fit(name, 10, 1.3)}>${name}</span></div>`
+    }[L];
+    return `<div class="d2c d2c-club ${L}" style="--w:${W}px;--face:${P.face};--rim:${P.rim};--tex:${P.tex};--glow:${P.glow};--club-text:${k.text}"><div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2t-shine slow"></span><div class="d2c-body">${inner}</div></div></div>`;
+  };
+
+  // wins in a season, counted from data/source/pl_results.csv
+  const P = [[['Aston Villa','1997/98',17],['Leicester','2019/20',18],false],[['Middlesbrough','2004/05',14],['Nottingham Forest','1994/95',22],false],
+    [['Sheffield Wed','1992/93',15],['Crystal Palace','2018/19',14],true],[['Huddersfield','2017/18',9],['Middlesbrough','2004/05',14],true]];
+  document.getElementById('pairs').innerHTML = P.map(([a, b, shown], i) => `<div><div class="pair">${card('N', { club: a[0], season: a[1], v: a[2] }, true)}${card('N', { club: b[0], season: b[1], v: b[2] }, shown)}<span class="vs">VS</span></div>
+    <div class="cap">${shown ? 'Right card revealed' : 'Before the guess'}</div>${i === P.length - 1 ? '<div style="text-align:center"><button class="btn" id="lose">Lose</button></div>' : ''}</div>`).join('');
+  document.getElementById('lose').onclick = () => { const el = document.querySelectorAll('.pair')[P.length - 1].children[1]; el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); };
+})();
+</script>
+</body>
+</html>
