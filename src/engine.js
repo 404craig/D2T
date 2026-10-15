@@ -626,29 +626,27 @@ function strengthLoss(S, club, gone, cache, join) {
   if (cache) cache.set(key, L);
   return L;
 }
-// The other clubs' results, with raided clubs' wins and draws downgraded by chance.
+// The other clubs' results (Craig, 15 Oct: a raided Man Utd still beat Arsenal 6-1 with four of its players gone): a match
+// stays its real result unless one of the two clubs is not its real self, because players you signed would have started
+// for it or a poached player of yours has joined it. Then the match is played out by the match model, both sides at
+// their strength on the day (your signings out, any joiners in), from the run's own seed, so it replays the same.
 function otherResults(S, st) {
   const ix = indexSeason(S), cache = new Map(), out = [];
+  const touched = st.signed.length || (st.poached && st.poached.length);
   for (const m of ix.matches) {
     if (m.h === st.club || m.a === st.club) continue;
     let hg = m.hg, ag = m.ag, changed = false;
-    if (st.signed.length || (st.poached && st.poached.length)) {
-      const gone = goneBefore(st, m.date);
-      for (const side of ["h", "a"]) {
-        const club = side === "h" ? m.h : m.a;
-        const L = strengthLoss(S, club, gone, cache, joinersOf(S, st, club));
-        if (L === 0) continue;
-        const chance = Math.min(RULES.raidCap, RULES.raidFactor * Math.abs(L));
-        const u = unit(st.seed, "raid", m.i, side);
-        if (u >= chance) continue;
-        const mine = side === "h" ? hg : ag, theirs = side === "h" ? ag : hg;
-        if (L > 0) {
-          if (mine > theirs) { if (side === "h") hg = ag; else ag = hg; changed = true; }        // win becomes a draw
-          else if (mine === theirs) { if (side === "h") ag++; else hg++; changed = true; }       // draw becomes a defeat
-        } else {                                                                                 // strengthened by a poached player
-          if (mine < theirs) { if (side === "h") hg = ag; else ag = hg; changed = true; }        // defeat becomes a draw
-          else if (mine === theirs) { if (side === "h") hg++; else ag++; changed = true; }       // draw becomes a win
-        }
+    if (touched) {
+      const gone = goneBefore(st, m.date), jh = joinersOf(S, st, m.h), ja = joinersOf(S, st, m.a);
+      const Lh = strengthLoss(S, m.h, gone, cache, jh), La = strengthLoss(S, m.a, gone, cache, ja);
+      if (Lh !== 0 || La !== 0) {
+        const h = clubStrength(S, m.h, gone, jh), a = clubStrength(S, m.a, gone, ja), r = stream(st.seed, "raidsim", m.i);
+        const sh = poisson(r, expectedGoals(h, a, true)), sa = poisson(r, expectedGoals(a, h, false));
+        // the played-out result only stands where it moves the touched club the right way: never better than its real
+        // result for a club you weakened, never worse for one a poached player strengthened
+        const pts = (x, y) => (x > y ? 3 : x === y ? 1 : 0), dh = pts(sh, sa) - pts(m.hg, m.ag), da = pts(sa, sh) - pts(m.ag, m.hg);
+        const ok = (L, d) => L === 0 || (L > 0 ? d <= 0 : d >= 0);
+        if (ok(Lh, dh) && ok(La, da)) { hg = sh; ag = sa; changed = true; }
       }
     }
     out.push({ i: m.i, date: m.date, h: m.h, a: m.a, hg, ag, changed });
