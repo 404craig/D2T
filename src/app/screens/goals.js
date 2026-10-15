@@ -120,8 +120,8 @@
     host.querySelector('.tnum').textContent = t; setGap(host, t);
   }
   // the tally (UI_SPEC 8f): "38 goals to go" in yellow under "Player 7 of 11", and the big scored number over "/352 GOALS"
-  // the tally pulses within 20 under the target only, while it can still be hit: over is over (Craig, 15 Oct)
-  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = toGo(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v < TARGET && TARGET - v <= 20); heat(host, v); }
+  // the tally pulses within 20 under the target and on it, never once over: over is over (Craig, 15 Oct)
+  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = toGo(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v <= TARGET && TARGET - v <= 20); heat(host, v); }
   // the bar is yellow to half the target, then warms to red at the target, its colour tied to the whole track; red once past it (Craig, 14 Oct)
   function heat(host, v) {
     const tr = host.querySelector('.g4-track'), fill = tr && tr.querySelector('.fill'); if (!fill) return;
