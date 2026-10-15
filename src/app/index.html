@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#12F06C">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -28,13 +28,18 @@
 <meta name="twitter:title" content="DROP2TOP">
 <meta name="twitter:description" content="Take a relegated club. Rewrite the season.">
 <meta name="twitter:image" content="https://404craig.github.io/D2T/assets/share.jpg">
-<link rel="apple-touch-icon" href="@ICON@">
-<link rel="icon" href="@ICON@">
+<!-- the head is kept small so the first frame (the intro, green) is drawn after the first few kilobytes (scripts/build.py) -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="icon" href="assets/icon-180.png">
+@SPLASH@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Caveat:wght@600&display=swap">
+<!-- the fonts never hold up the first frame: the intro draws its logo from pictures and home comes seconds later -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Caveat:wght@600&display=swap" media="print" onload="this.media='all'">
 <style>
 /*@CSS@*/
+html, body { background: #12F06C; }
 </style>
 </head>
 <body>
@@ -45,6 +50,10 @@
 <script>
 /*@SHELL@*/
 </script>
+<script>/*@LOGOS2@*/</script>
+<style>
+/*@CSS2@*/
+</style>
 <script>/*@DATA@*/</script>
 <script>
 /*@JS@*/
