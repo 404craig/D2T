@@ -1,0 +1,2025 @@
+{
+ "_about": "Premier League honours per season, parsed from the Wikipedia pages below on 15 Oct 2026 (tools/build_icons.py reads it; the raw wikitext parser is kept in the session scratchpad). toty = PFA Premier League Team of the Year [position, name]; pfa = PFA Players' Player of the Year; fwa = FWA Footballer of the Year; pots = Premier League Player of the Season; glove = Premier League Golden Glove (from 2004/05). The Golden Boot is not listed here: the game data's own top scorer(s) stand for it. Names as Wikipedia spells them; aliases to the game data are in tools/build_icons.py.",
+ "sources": {
+  "toty": [
+   "https://en.wikipedia.org/wiki/PFA_Team_of_the_Year_(1990s)",
+   "https://en.wikipedia.org/wiki/PFA_Team_of_the_Year_(2000s)",
+   "https://en.wikipedia.org/wiki/PFA_Team_of_the_Year_(2010s)",
+   "https://en.wikipedia.org/wiki/PFA_Team_of_the_Year_(2020s)"
+  ],
+  "pfa": "https://en.wikipedia.org/wiki/PFA_Players%27_Player_of_the_Year",
+  "fwa": "https://en.wikipedia.org/wiki/FWA_Footballer_of_the_Year",
+  "pots": "https://en.wikipedia.org/wiki/Premier_League_Player_of_the_Season",
+  "glove": "https://en.wikipedia.org/wiki/Premier_League_Golden_Glove"
+ },
+ "seasons": {
+  "1992/93": {
+   "toty": [
+    [
+     "GK",
+     "Peter Schmeichel"
+    ],
+    [
+     "DF",
+     "David Bardsley"
+    ],
+    [
+     "DF",
+     "Paul McGrath"
+    ],
+    [
+     "DF",
+     "Gary Pallister"
+    ],
+    [
+     "DF",
+     "Tony Dorigo"
+    ],
+    [
+     "MF",
+     "Roy Keane"
+    ],
+    [
+     "MF",
+     "Gary Speed"
+    ],
+    [
+     "MF",
+     "Paul Ince"
+    ],
+    [
+     "MF",
+     "Ryan Giggs"
+    ],
+    [
+     "FW",
+     "Alan Shearer"
+    ],
+    [
+     "FW",
+     "Ian Wright"
+    ]
+   ],
+   "pfa": [
+    "Paul McGrath"
+   ],
+   "fwa": [
+    "Chris Waddle"
+   ],
+   "pots": [],
+   "glove": []
+  },
+  "1993/94": {
+   "toty": [
+    [
+     "GK",
+     "Tim Flowers"
+    ],
+    [
+     "DF",
+     "Gary Kelly"
+    ],
+    [
+     "DF",
+     "Gary Pallister"
+    ],
+    [
+     "DF",
+     "Tony Adams"
+    ],
+    [
+     "DF",
+     "Denis Irwin"
+    ],
+    [
+     "MF",
+     "Paul Ince"
+    ],
+    [
+     "MF",
+     "Gary McAllister"
+    ],
+    [
+     "MF",
+     "David Batty"
+    ],
+    [
+     "FW",
+     "Alan Shearer"
+    ],
+    [
+     "FW",
+     "Eric Cantona"
+    ],
+    [
+     "FW",
+     "Peter Beardsley"
+    ]
+   ],
+   "pfa": [
+    "Eric Cantona"
+   ],
+   "fwa": [
+    "Alan Shearer"
+   ],
+   "pots": [],
+   "glove": []
+  },
+  "1994/95": {
+   "toty": [
+    [
+     "GK",
+     "Tim Flowers"
+    ],
+    [
+     "DF",
+     "Rob Jones"
+    ],
+    [
+     "DF",
+     "Gary Pallister"
+    ],
+    [
+     "DF",
+     "Colin Hendry"
+    ],
+    [
+     "DF",
+     "Graeme Le Saux"
+    ],
+    [
+     "MF",
+     "Tim Sherwood"
+    ],
+    [
+     "MF",
+     "Matt Le Tissier"
+    ],
+    [
+     "MF",
+     "Paul Ince"
+    ],
+    [
+     "FW",
+     "Jürgen Klinsmann"
+    ],
+    [
+     "FW",
+     "Chris Sutton"
+    ],
+    [
+     "FW",
+     "Alan Shearer"
+    ]
+   ],
+   "pfa": [
+    "Alan Shearer"
+   ],
+   "fwa": [
+    "Jürgen Klinsmann"
+   ],
+   "pots": [
+    "Alan Shearer"
+   ],
+   "glove": []
+  },
+  "1995/96": {
+   "toty": [
+    [
+     "GK",
+     "David James"
+    ],
+    [
+     "DF",
+     "Gary Neville"
+    ],
+    [
+     "DF",
+     "Tony Adams"
+    ],
+    [
+     "DF",
+     "Ugo Ehiogu"
+    ],
+    [
+     "DF",
+     "Alan Wright"
+    ],
+    [
+     "MF",
+     "Steve Stone"
+    ],
+    [
+     "MF",
+     "Rob Lee"
+    ],
+    [
+     "MF",
+     "Ruud Gullit"
+    ],
+    [
+     "MF",
+     "David Ginola"
+    ],
+    [
+     "FW",
+     "Les Ferdinand"
+    ],
+    [
+     "FW",
+     "Alan Shearer"
+    ]
+   ],
+   "pfa": [
+    "Les Ferdinand"
+   ],
+   "fwa": [
+    "Eric Cantona"
+   ],
+   "pots": [
+    "Peter Schmeichel"
+   ],
+   "glove": []
+  },
+  "1996/97": {
+   "toty": [
+    [
+     "GK",
+     "David Seaman"
+    ],
+    [
+     "DF",
+     "Gary Neville"
+    ],
+    [
+     "DF",
+     "Tony Adams"
+    ],
+    [
+     "DF",
+     "Mark Wright"
+    ],
+    [
+     "DF",
+     "Stig Inge Bjørnebye"
+    ],
+    [
+     "MF",
+     "David Beckham"
+    ],
+    [
+     "MF",
+     "Roy Keane"
+    ],
+    [
+     "MF",
+     "David Batty"
+    ],
+    [
+     "MF",
+     "Steve McManaman"
+    ],
+    [
+     "FW",
+     "Alan Shearer"
+    ],
+    [
+     "FW",
+     "Ian Wright"
+    ]
+   ],
+   "pfa": [
+    "Alan Shearer"
+   ],
+   "fwa": [
+    "Gianfranco Zola"
+   ],
+   "pots": [
+    "Juninho Paulista"
+   ],
+   "glove": []
+  },
+  "1997/98": {
+   "toty": [
+    [
+     "GK",
+     "Nigel Martyn"
+    ],
+    [
+     "DF",
+     "Gary Neville"
+    ],
+    [
+     "DF",
+     "Gary Pallister"
+    ],
+    [
+     "DF",
+     "Colin Hendry"
+    ],
+    [
+     "DF",
+     "Graeme Le Saux"
+    ],
+    [
+     "MF",
+     "David Beckham"
+    ],
+    [
+     "MF",
+     "Nicky Butt"
+    ],
+    [
+     "MF",
+     "David Batty"
+    ],
+    [
+     "MF",
+     "Ryan Giggs"
+    ],
+    [
+     "FW",
+     "Michael Owen"
+    ],
+    [
+     "FW",
+     "Dennis Bergkamp"
+    ]
+   ],
+   "pfa": [
+    "Dennis Bergkamp"
+   ],
+   "fwa": [
+    "Dennis Bergkamp"
+   ],
+   "pots": [
+    "Michael Owen"
+   ],
+   "glove": []
+  },
+  "1998/99": {
+   "toty": [
+    [
+     "GK",
+     "Nigel Martyn"
+    ],
+    [
+     "DF",
+     "Gary Neville"
+    ],
+    [
+     "DF",
+     "Sol Campbell"
+    ],
+    [
+     "DF",
+     "Jaap Stam"
+    ],
+    [
+     "DF",
+     "Denis Irwin"
+    ],
+    [
+     "MF",
+     "David Beckham"
+    ],
+    [
+     "MF",
+     "Emmanuel Petit"
+    ],
+    [
+     "MF",
+     "Patrick Vieira"
+    ],
+    [
+     "MF",
+     "David Ginola"
+    ],
+    [
+     "FW",
+     "Dwight Yorke"
+    ],
+    [
+     "FW",
+     "Nicolas Anelka"
+    ]
+   ],
+   "pfa": [
+    "David Ginola"
+   ],
+   "fwa": [
+    "David Ginola"
+   ],
+   "pots": [
+    "Dwight Yorke"
+   ],
+   "glove": []
+  },
+  "1999/00": {
+   "toty": [
+    [
+     "GK",
+     "Nigel Martyn"
+    ],
+    [
+     "DF",
+     "Gary Kelly"
+    ],
+    [
+     "DF",
+     "Jaap Stam"
+    ],
+    [
+     "DF",
+     "Sami Hyypiä"
+    ],
+    [
+     "DF",
+     "Ian Harte"
+    ],
+    [
+     "MF",
+     "David Beckham"
+    ],
+    [
+     "MF",
+     "Roy Keane"
+    ],
+    [
+     "MF",
+     "Patrick Vieira"
+    ],
+    [
+     "MF",
+     "Harry Kewell"
+    ],
+    [
+     "FW",
+     "Andy Cole"
+    ],
+    [
+     "FW",
+     "Kevin Phillips"
+    ]
+   ],
+   "pfa": [
+    "Roy Keane"
+   ],
+   "fwa": [
+    "Roy Keane"
+   ],
+   "pots": [
+    "Kevin Phillips"
+   ],
+   "glove": []
+  },
+  "2000/01": {
+   "toty": [
+    [
+     "GK",
+     "Fabien Barthez"
+    ],
+    [
+     "DF",
+     "Stephen Carr"
+    ],
+    [
+     "DF",
+     "Jaap Stam"
+    ],
+    [
+     "DF",
+     "Wes Brown"
+    ],
+    [
+     "DF",
+     "Sylvinho"
+    ],
+    [
+     "MF",
+     "Steven Gerrard"
+    ],
+    [
+     "MF",
+     "Roy Keane"
+    ],
+    [
+     "MF",
+     "Patrick Vieira"
+    ],
+    [
+     "MF",
+     "Ryan Giggs"
+    ],
+    [
+     "FW",
+     "Teddy Sheringham"
+    ],
+    [
+     "FW",
+     "Thierry Henry"
+    ]
+   ],
+   "pfa": [
+    "Teddy Sheringham"
+   ],
+   "fwa": [
+    "Teddy Sheringham"
+   ],
+   "pots": [
+    "Patrick Vieira"
+   ],
+   "glove": []
+  },
+  "2001/02": {
+   "toty": [
+    [
+     "GK",
+     "Shay Given"
+    ],
+    [
+     "DF",
+     "Steve Finnan"
+    ],
+    [
+     "DF",
+     "Rio Ferdinand"
+    ],
+    [
+     "DF",
+     "Sami Hyypiä"
+    ],
+    [
+     "DF",
+     "Wayne Bridge"
+    ],
+    [
+     "MF",
+     "Robert Pires"
+    ],
+    [
+     "MF",
+     "Roy Keane"
+    ],
+    [
+     "MF",
+     "Patrick Vieira"
+    ],
+    [
+     "MF",
+     "Ryan Giggs"
+    ],
+    [
+     "FW",
+     "Ruud van Nistelrooy"
+    ],
+    [
+     "FW",
+     "Thierry Henry"
+    ]
+   ],
+   "pfa": [
+    "Ruud van Nistelrooy"
+   ],
+   "fwa": [
+    "Robert Pires"
+   ],
+   "pots": [
+    "Freddie Ljungberg"
+   ],
+   "glove": []
+  },
+  "2002/03": {
+   "toty": [
+    [
+     "GK",
+     "Brad Friedel"
+    ],
+    [
+     "DF",
+     "Stephen Carr"
+    ],
+    [
+     "DF",
+     "Sol Campbell"
+    ],
+    [
+     "DF",
+     "William Gallas"
+    ],
+    [
+     "DF",
+     "Ashley Cole"
+    ],
+    [
+     "MF",
+     "Robert Pires"
+    ],
+    [
+     "MF",
+     "Patrick Vieira"
+    ],
+    [
+     "MF",
+     "Paul Scholes"
+    ],
+    [
+     "MF",
+     "Kieron Dyer"
+    ],
+    [
+     "FW",
+     "Thierry Henry"
+    ],
+    [
+     "FW",
+     "Alan Shearer"
+    ]
+   ],
+   "pfa": [
+    "Thierry Henry"
+   ],
+   "fwa": [
+    "Thierry Henry"
+   ],
+   "pots": [
+    "Ruud van Nistelrooy"
+   ],
+   "glove": []
+  },
+  "2003/04": {
+   "toty": [
+    [
+     "GK",
+     "Tim Howard"
+    ],
+    [
+     "DF",
+     "Lauren"
+    ],
+    [
+     "DF",
+     "Sol Campbell"
+    ],
+    [
+     "DF",
+     "John Terry"
+    ],
+    [
+     "DF",
+     "Ashley Cole"
+    ],
+    [
+     "MF",
+     "Steven Gerrard"
+    ],
+    [
+     "MF",
+     "Frank Lampard"
+    ],
+    [
+     "MF",
+     "Patrick Vieira"
+    ],
+    [
+     "MF",
+     "Robert Pires"
+    ],
+    [
+     "FW",
+     "Thierry Henry"
+    ],
+    [
+     "FW",
+     "Ruud van Nistelrooy"
+    ]
+   ],
+   "pfa": [
+    "Thierry Henry"
+   ],
+   "fwa": [
+    "Thierry Henry"
+   ],
+   "pots": [
+    "Thierry Henry"
+   ],
+   "glove": []
+  },
+  "2004/05": {
+   "toty": [
+    [
+     "GK",
+     "Petr Čech"
+    ],
+    [
+     "DF",
+     "Gary Neville"
+    ],
+    [
+     "DF",
+     "John Terry"
+    ],
+    [
+     "DF",
+     "Rio Ferdinand"
+    ],
+    [
+     "DF",
+     "Ashley Cole"
+    ],
+    [
+     "MF",
+     "Shaun Wright-Phillips"
+    ],
+    [
+     "MF",
+     "Steven Gerrard"
+    ],
+    [
+     "MF",
+     "Frank Lampard"
+    ],
+    [
+     "MF",
+     "Arjen Robben"
+    ],
+    [
+     "FW",
+     "Andrew Johnson"
+    ],
+    [
+     "FW",
+     "Thierry Henry"
+    ]
+   ],
+   "pfa": [
+    "John Terry"
+   ],
+   "fwa": [
+    "Frank Lampard"
+   ],
+   "pots": [
+    "Frank Lampard"
+   ],
+   "glove": [
+    "Petr Čech"
+   ]
+  },
+  "2005/06": {
+   "toty": [
+    [
+     "GK",
+     "Shay Given"
+    ],
+    [
+     "DF",
+     "Pascal Chimbonda"
+    ],
+    [
+     "DF",
+     "John Terry"
+    ],
+    [
+     "DF",
+     "Jamie Carragher"
+    ],
+    [
+     "DF",
+     "William Gallas"
+    ],
+    [
+     "MF",
+     "Cristiano Ronaldo"
+    ],
+    [
+     "MF",
+     "Steven Gerrard"
+    ],
+    [
+     "MF",
+     "Frank Lampard"
+    ],
+    [
+     "MF",
+     "Joe Cole"
+    ],
+    [
+     "FW",
+     "Thierry Henry"
+    ],
+    [
+     "FW",
+     "Wayne Rooney"
+    ]
+   ],
+   "pfa": [
+    "Steven Gerrard"
+   ],
+   "fwa": [
+    "Thierry Henry"
+   ],
+   "pots": [
+    "Thierry Henry"
+   ],
+   "glove": [
+    "Pepe Reina"
+   ]
+  },
+  "2006/07": {
+   "toty": [
+    [
+     "GK",
+     "Edwin van der Sar"
+    ],
+    [
+     "DF",
+     "Gary Neville"
+    ],
+    [
+     "DF",
+     "Rio Ferdinand"
+    ],
+    [
+     "DF",
+     "Nemanja Vidić"
+    ],
+    [
+     "DF",
+     "Patrice Evra"
+    ],
+    [
+     "MF",
+     "Cristiano Ronaldo"
+    ],
+    [
+     "MF",
+     "Steven Gerrard"
+    ],
+    [
+     "MF",
+     "Paul Scholes"
+    ],
+    [
+     "MF",
+     "Ryan Giggs"
+    ],
+    [
+     "FW",
+     "Didier Drogba"
+    ],
+    [
+     "FW",
+     "Dimitar Berbatov"
+    ]
+   ],
+   "pfa": [
+    "Cristiano Ronaldo"
+   ],
+   "fwa": [
+    "Cristiano Ronaldo"
+   ],
+   "pots": [
+    "Cristiano Ronaldo"
+   ],
+   "glove": [
+    "Pepe Reina"
+   ]
+  },
+  "2007/08": {
+   "toty": [
+    [
+     "GK",
+     "David James"
+    ],
+    [
+     "DF",
+     "Bacary Sagna"
+    ],
+    [
+     "DF",
+     "Rio Ferdinand"
+    ],
+    [
+     "DF",
+     "Nemanja Vidić"
+    ],
+    [
+     "DF",
+     "Gaël Clichy"
+    ],
+    [
+     "MF",
+     "Cristiano Ronaldo"
+    ],
+    [
+     "MF",
+     "Steven Gerrard"
+    ],
+    [
+     "MF",
+     "Cesc Fàbregas"
+    ],
+    [
+     "MF",
+     "Ashley Young"
+    ],
+    [
+     "FW",
+     "Emmanuel Adebayor"
+    ],
+    [
+     "FW",
+     "Fernando Torres"
+    ]
+   ],
+   "pfa": [
+    "Cristiano Ronaldo"
+   ],
+   "fwa": [
+    "Cristiano Ronaldo"
+   ],
+   "pots": [
+    "Cristiano Ronaldo"
+   ],
+   "glove": [
+    "Pepe Reina"
+   ]
+  },
+  "2008/09": {
+   "toty": [
+    [
+     "GK",
+     "Edwin van der Sar"
+    ],
+    [
+     "DF",
+     "Glen Johnson"
+    ],
+    [
+     "DF",
+     "Rio Ferdinand"
+    ],
+    [
+     "DF",
+     "Nemanja Vidić"
+    ],
+    [
+     "DF",
+     "Patrice Evra"
+    ],
+    [
+     "MF",
+     "Cristiano Ronaldo"
+    ],
+    [
+     "MF",
+     "Steven Gerrard"
+    ],
+    [
+     "MF",
+     "Ryan Giggs"
+    ],
+    [
+     "MF",
+     "Ashley Young"
+    ],
+    [
+     "FW",
+     "Nicolas Anelka"
+    ],
+    [
+     "FW",
+     "Fernando Torres"
+    ]
+   ],
+   "pfa": [
+    "Ryan Giggs"
+   ],
+   "fwa": [
+    "Steven Gerrard"
+   ],
+   "pots": [
+    "Nemanja Vidić"
+   ],
+   "glove": [
+    "Edwin van der Sar"
+   ]
+  },
+  "2009/10": {
+   "toty": [
+    [
+     "GK",
+     "Joe Hart"
+    ],
+    [
+     "DF",
+     "Branislav Ivanović"
+    ],
+    [
+     "DF",
+     "Thomas Vermaelen"
+    ],
+    [
+     "DF",
+     "Richard Dunne"
+    ],
+    [
+     "DF",
+     "Patrice Evra"
+    ],
+    [
+     "MF",
+     "Antonio Valencia"
+    ],
+    [
+     "MF",
+     "Cesc Fàbregas"
+    ],
+    [
+     "MF",
+     "Darren Fletcher"
+    ],
+    [
+     "MF",
+     "James Milner"
+    ],
+    [
+     "FW",
+     "Wayne Rooney"
+    ],
+    [
+     "FW",
+     "Didier Drogba"
+    ]
+   ],
+   "pfa": [
+    "Wayne Rooney"
+   ],
+   "fwa": [
+    "Wayne Rooney"
+   ],
+   "pots": [
+    "Wayne Rooney"
+   ],
+   "glove": [
+    "Petr Čech"
+   ]
+  },
+  "2010/11": {
+   "toty": [
+    [
+     "GK",
+     "Edwin van der Sar"
+    ],
+    [
+     "DF",
+     "Bacary Sagna"
+    ],
+    [
+     "DF",
+     "Nemanja Vidić"
+    ],
+    [
+     "DF",
+     "Vincent Kompany"
+    ],
+    [
+     "DF",
+     "Ashley Cole"
+    ],
+    [
+     "MF",
+     "Nani"
+    ],
+    [
+     "MF",
+     "Samir Nasri"
+    ],
+    [
+     "MF",
+     "Jack Wilshere"
+    ],
+    [
+     "MF",
+     "Gareth Bale"
+    ],
+    [
+     "FW",
+     "Carlos Tevez"
+    ],
+    [
+     "FW",
+     "Dimitar Berbatov"
+    ]
+   ],
+   "pfa": [
+    "Gareth Bale"
+   ],
+   "fwa": [
+    "Scott Parker"
+   ],
+   "pots": [
+    "Nemanja Vidić"
+   ],
+   "glove": [
+    "Joe Hart"
+   ]
+  },
+  "2011/12": {
+   "toty": [
+    [
+     "GK",
+     "Joe Hart"
+    ],
+    [
+     "DF",
+     "Kyle Walker"
+    ],
+    [
+     "DF",
+     "Vincent Kompany"
+    ],
+    [
+     "DF",
+     "Fabricio Coloccini"
+    ],
+    [
+     "DF",
+     "Leighton Baines"
+    ],
+    [
+     "MF",
+     "David Silva"
+    ],
+    [
+     "MF",
+     "Yaya Touré"
+    ],
+    [
+     "MF",
+     "Scott Parker"
+    ],
+    [
+     "MF",
+     "Gareth Bale"
+    ],
+    [
+     "FW",
+     "Robin van Persie"
+    ],
+    [
+     "FW",
+     "Wayne Rooney"
+    ]
+   ],
+   "pfa": [
+    "Robin van Persie"
+   ],
+   "fwa": [
+    "Robin van Persie"
+   ],
+   "pots": [
+    "Vincent Kompany"
+   ],
+   "glove": [
+    "Joe Hart"
+   ]
+  },
+  "2012/13": {
+   "toty": [
+    [
+     "GK",
+     "David de Gea"
+    ],
+    [
+     "DF",
+     "Pablo Zabaleta"
+    ],
+    [
+     "DF",
+     "Jan Vertonghen"
+    ],
+    [
+     "DF",
+     "Rio Ferdinand"
+    ],
+    [
+     "DF",
+     "Leighton Baines"
+    ],
+    [
+     "MF",
+     "Gareth Bale"
+    ],
+    [
+     "MF",
+     "Juan Mata"
+    ],
+    [
+     "MF",
+     "Michael Carrick"
+    ],
+    [
+     "MF",
+     "Eden Hazard"
+    ],
+    [
+     "FW",
+     "Robin van Persie"
+    ],
+    [
+     "FW",
+     "Luis Suárez"
+    ]
+   ],
+   "pfa": [
+    "Gareth Bale"
+   ],
+   "fwa": [
+    "Gareth Bale"
+   ],
+   "pots": [
+    "Gareth Bale"
+   ],
+   "glove": [
+    "Joe Hart"
+   ]
+  },
+  "2013/14": {
+   "toty": [
+    [
+     "GK",
+     "Petr Čech"
+    ],
+    [
+     "DF",
+     "Séamus Coleman"
+    ],
+    [
+     "DF",
+     "Gary Cahill"
+    ],
+    [
+     "DF",
+     "Vincent Kompany"
+    ],
+    [
+     "DF",
+     "Luke Shaw"
+    ],
+    [
+     "MF",
+     "Adam Lallana"
+    ],
+    [
+     "MF",
+     "Steven Gerrard"
+    ],
+    [
+     "MF",
+     "Yaya Touré"
+    ],
+    [
+     "MF",
+     "Eden Hazard"
+    ],
+    [
+     "FW",
+     "Daniel Sturridge"
+    ],
+    [
+     "FW",
+     "Luis Suárez"
+    ]
+   ],
+   "pfa": [
+    "Luis Suárez"
+   ],
+   "fwa": [
+    "Luis Suárez"
+   ],
+   "pots": [
+    "Luis Suárez"
+   ],
+   "glove": [
+    "Petr Čech"
+   ]
+  },
+  "2014/15": {
+   "toty": [
+    [
+     "GK",
+     "David de Gea"
+    ],
+    [
+     "DF",
+     "Branislav Ivanović"
+    ],
+    [
+     "DF",
+     "John Terry"
+    ],
+    [
+     "DF",
+     "Gary Cahill"
+    ],
+    [
+     "DF",
+     "Ryan Bertrand"
+    ],
+    [
+     "MF",
+     "Alexis Sánchez"
+    ],
+    [
+     "MF",
+     "Nemanja Matić"
+    ],
+    [
+     "MF",
+     "Philippe Coutinho"
+    ],
+    [
+     "MF",
+     "Eden Hazard"
+    ],
+    [
+     "FW",
+     "Diego Costa"
+    ],
+    [
+     "FW",
+     "Harry Kane"
+    ]
+   ],
+   "pfa": [
+    "Eden Hazard"
+   ],
+   "fwa": [
+    "Eden Hazard"
+   ],
+   "pots": [
+    "Eden Hazard"
+   ],
+   "glove": [
+    "Joe Hart"
+   ]
+  },
+  "2015/16": {
+   "toty": [
+    [
+     "GK",
+     "David de Gea"
+    ],
+    [
+     "DF",
+     "Héctor Bellerín"
+    ],
+    [
+     "DF",
+     "Toby Alderweireld"
+    ],
+    [
+     "DF",
+     "Wes Morgan"
+    ],
+    [
+     "DF",
+     "Danny Rose"
+    ],
+    [
+     "MF",
+     "Riyad Mahrez"
+    ],
+    [
+     "MF",
+     "Dele Alli"
+    ],
+    [
+     "MF",
+     "N'Golo Kanté"
+    ],
+    [
+     "MF",
+     "Dimitri Payet"
+    ],
+    [
+     "FW",
+     "Jamie Vardy"
+    ],
+    [
+     "FW",
+     "Harry Kane"
+    ]
+   ],
+   "pfa": [
+    "Riyad Mahrez"
+   ],
+   "fwa": [
+    "Jamie Vardy"
+   ],
+   "pots": [
+    "Jamie Vardy"
+   ],
+   "glove": [
+    "Petr Čech"
+   ]
+  },
+  "2016/17": {
+   "toty": [
+    [
+     "GK",
+     "David de Gea"
+    ],
+    [
+     "DF",
+     "Kyle Walker"
+    ],
+    [
+     "DF",
+     "Gary Cahill"
+    ],
+    [
+     "DF",
+     "David Luiz"
+    ],
+    [
+     "DF",
+     "Danny Rose"
+    ],
+    [
+     "MF",
+     "Eden Hazard"
+    ],
+    [
+     "MF",
+     "Dele Alli"
+    ],
+    [
+     "MF",
+     "N'Golo Kanté"
+    ],
+    [
+     "MF",
+     "Sadio Mané"
+    ],
+    [
+     "FW",
+     "Harry Kane"
+    ],
+    [
+     "FW",
+     "Romelu Lukaku"
+    ]
+   ],
+   "pfa": [
+    "N'Golo Kanté"
+   ],
+   "fwa": [
+    "N'Golo Kanté"
+   ],
+   "pots": [
+    "N'Golo Kanté"
+   ],
+   "glove": [
+    "Thibaut Courtois"
+   ]
+  },
+  "2017/18": {
+   "toty": [
+    [
+     "GK",
+     "David de Gea"
+    ],
+    [
+     "DF",
+     "Kyle Walker"
+    ],
+    [
+     "DF",
+     "Nicolás Otamendi"
+    ],
+    [
+     "DF",
+     "Jan Vertonghen"
+    ],
+    [
+     "DF",
+     "Marcos Alonso"
+    ],
+    [
+     "MF",
+     "David Silva"
+    ],
+    [
+     "MF",
+     "Christian Eriksen"
+    ],
+    [
+     "MF",
+     "Kevin De Bruyne"
+    ],
+    [
+     "FW",
+     "Mohamed Salah"
+    ],
+    [
+     "FW",
+     "Harry Kane"
+    ],
+    [
+     "FW",
+     "Sergio Agüero"
+    ]
+   ],
+   "pfa": [
+    "Mohamed Salah"
+   ],
+   "fwa": [
+    "Mohamed Salah"
+   ],
+   "pots": [
+    "Mohamed Salah"
+   ],
+   "glove": [
+    "David de Gea"
+   ]
+  },
+  "2018/19": {
+   "toty": [
+    [
+     "GK",
+     "Ederson"
+    ],
+    [
+     "DF",
+     "Trent Alexander-Arnold"
+    ],
+    [
+     "DF",
+     "Virgil van Dijk"
+    ],
+    [
+     "DF",
+     "Aymeric Laporte"
+    ],
+    [
+     "DF",
+     "Andy Robertson"
+    ],
+    [
+     "MF",
+     "Bernardo Silva"
+    ],
+    [
+     "MF",
+     "Fernandinho"
+    ],
+    [
+     "MF",
+     "Paul Pogba"
+    ],
+    [
+     "FW",
+     "Raheem Sterling"
+    ],
+    [
+     "FW",
+     "Sergio Agüero"
+    ],
+    [
+     "FW",
+     "Sadio Mané"
+    ]
+   ],
+   "pfa": [
+    "Virgil van Dijk"
+   ],
+   "fwa": [
+    "Raheem Sterling"
+   ],
+   "pots": [
+    "Virgil van Dijk"
+   ],
+   "glove": [
+    "Alisson"
+   ]
+  },
+  "2019/20": {
+   "toty": [
+    [
+     "GK",
+     "Nick Pope"
+    ],
+    [
+     "DF",
+     "Trent Alexander-Arnold"
+    ],
+    [
+     "DF",
+     "Virgil van Dijk"
+    ],
+    [
+     "DF",
+     "Çağlar Söyüncü"
+    ],
+    [
+     "DF",
+     "Andy Robertson"
+    ],
+    [
+     "MF",
+     "Kevin De Bruyne"
+    ],
+    [
+     "MF",
+     "David Silva"
+    ],
+    [
+     "MF",
+     "Jordan Henderson"
+    ],
+    [
+     "FW",
+     "Jamie Vardy"
+    ],
+    [
+     "FW",
+     "Pierre-Emerick Aubameyang"
+    ],
+    [
+     "FW",
+     "Sadio Mané"
+    ]
+   ],
+   "pfa": [
+    "Kevin De Bruyne"
+   ],
+   "fwa": [
+    "Jordan Henderson"
+   ],
+   "pots": [
+    "Kevin De Bruyne"
+   ],
+   "glove": [
+    "Ederson"
+   ]
+  },
+  "2020/21": {
+   "toty": [
+    [
+     "GK",
+     "Ederson"
+    ],
+    [
+     "DF",
+     "João Cancelo"
+    ],
+    [
+     "DF",
+     "John Stones"
+    ],
+    [
+     "DF",
+     "Rúben Dias"
+    ],
+    [
+     "DF",
+     "Luke Shaw"
+    ],
+    [
+     "MF",
+     "Kevin De Bruyne"
+    ],
+    [
+     "MF",
+     "İlkay Gündoğan"
+    ],
+    [
+     "MF",
+     "Bruno Fernandes"
+    ],
+    [
+     "FW",
+     "Harry Kane"
+    ],
+    [
+     "FW",
+     "Mohamed Salah"
+    ],
+    [
+     "FW",
+     "Son Heung-min"
+    ]
+   ],
+   "pfa": [
+    "Kevin De Bruyne"
+   ],
+   "fwa": [
+    "Rúben Dias"
+   ],
+   "pots": [
+    "Rúben Dias"
+   ],
+   "glove": [
+    "Ederson"
+   ]
+  },
+  "2021/22": {
+   "toty": [
+    [
+     "GK",
+     "Alisson Becker"
+    ],
+    [
+     "DF",
+     "Trent Alexander-Arnold"
+    ],
+    [
+     "DF",
+     "Virgil van Dijk"
+    ],
+    [
+     "DF",
+     "Antonio Rüdiger"
+    ],
+    [
+     "DF",
+     "João Cancelo"
+    ],
+    [
+     "MF",
+     "Bernardo Silva"
+    ],
+    [
+     "MF",
+     "Thiago"
+    ],
+    [
+     "MF",
+     "Kevin De Bruyne"
+    ],
+    [
+     "FW",
+     "Sadio Mané"
+    ],
+    [
+     "FW",
+     "Cristiano Ronaldo"
+    ],
+    [
+     "FW",
+     "Mohamed Salah"
+    ]
+   ],
+   "pfa": [
+    "Mohamed Salah"
+   ],
+   "fwa": [
+    "Mohamed Salah"
+   ],
+   "pots": [
+    "Kevin De Bruyne"
+   ],
+   "glove": [
+    "Alisson"
+   ]
+  },
+  "2022/23": {
+   "toty": [
+    [
+     "GK",
+     "Aaron Ramsdale"
+    ],
+    [
+     "DF",
+     "William Saliba"
+    ],
+    [
+     "DF",
+     "Rúben Dias"
+    ],
+    [
+     "DF",
+     "John Stones"
+    ],
+    [
+     "DF",
+     "Kieran Trippier"
+    ],
+    [
+     "MF",
+     "Martin Ødegaard"
+    ],
+    [
+     "MF",
+     "Rodri"
+    ],
+    [
+     "MF",
+     "Kevin De Bruyne"
+    ],
+    [
+     "FW",
+     "Harry Kane"
+    ],
+    [
+     "FW",
+     "Erling Haaland"
+    ],
+    [
+     "FW",
+     "Bukayo Saka"
+    ]
+   ],
+   "pfa": [
+    "Erling Haaland"
+   ],
+   "fwa": [
+    "Erling Haaland"
+   ],
+   "pots": [
+    "Erling Haaland"
+   ],
+   "glove": [
+    "David de Gea"
+   ]
+  },
+  "2023/24": {
+   "toty": [
+    [
+     "GK",
+     "David Raya"
+    ],
+    [
+     "DF",
+     "Kyle Walker"
+    ],
+    [
+     "DF",
+     "Gabriel"
+    ],
+    [
+     "DF",
+     "Virgil van Dijk"
+    ],
+    [
+     "DF",
+     "William Saliba"
+    ],
+    [
+     "MF",
+     "Martin Ødegaard"
+    ],
+    [
+     "MF",
+     "Declan Rice"
+    ],
+    [
+     "MF",
+     "Rodri"
+    ],
+    [
+     "FW",
+     "Ollie Watkins"
+    ],
+    [
+     "FW",
+     "Phil Foden"
+    ],
+    [
+     "FW",
+     "Erling Haaland"
+    ]
+   ],
+   "pfa": [
+    "Phil Foden"
+   ],
+   "fwa": [
+    "Phil Foden"
+   ],
+   "pots": [
+    "Phil Foden"
+   ],
+   "glove": [
+    "David Raya"
+   ]
+  },
+  "2024/25": {
+   "toty": [
+    [
+     "GK",
+     "Matz Sels"
+    ],
+    [
+     "DF",
+     "William Saliba"
+    ],
+    [
+     "DF",
+     "Gabriel"
+    ],
+    [
+     "DF",
+     "Virgil van Dijk"
+    ],
+    [
+     "DF",
+     "Milos Kerkez"
+    ],
+    [
+     "MF",
+     "Alexis Mac Allister"
+    ],
+    [
+     "MF",
+     "Ryan Gravenberch"
+    ],
+    [
+     "MF",
+     "Declan Rice"
+    ],
+    [
+     "FW",
+     "Mohamed Salah"
+    ],
+    [
+     "FW",
+     "Alexander Isak"
+    ],
+    [
+     "FW",
+     "Chris Wood"
+    ]
+   ],
+   "pfa": [
+    "Mohamed Salah"
+   ],
+   "fwa": [
+    "Mohamed Salah"
+   ],
+   "pots": [
+    "Mohamed Salah"
+   ],
+   "glove": [
+    "David Raya"
+   ]
+  },
+  "2025/26": {
+   "toty": [
+    [
+     "GK",
+     "David Raya"
+    ],
+    [
+     "DF",
+     "William Saliba"
+    ],
+    [
+     "DF",
+     "Gabriel"
+    ],
+    [
+     "DF",
+     "Jurriën Timber"
+    ],
+    [
+     "DF",
+     "Nico O'Reilly"
+    ],
+    [
+     "MF",
+     "Bruno Fernandes"
+    ],
+    [
+     "MF",
+     "Rayan Cherki"
+    ],
+    [
+     "MF",
+     "Declan Rice"
+    ],
+    [
+     "FW",
+     "Erling Haaland"
+    ],
+    [
+     "FW",
+     "Antoine Semenyo"
+    ],
+    [
+     "FW",
+     "Igor Thiago"
+    ]
+   ],
+   "pfa": [],
+   "fwa": [],
+   "pots": [
+    "Bruno Fernandes"
+   ],
+   "glove": [
+    "David Raya"
+   ]
+  }
+ }
+}

@@ -1,0 +1,341 @@
+{
+ "group": "FWD",
+ "sources": [
+  {
+   "outlet": "90min",
+   "title": "Best Premier League forwards of all time (25)",
+   "url": "https://www.90min.com/features/best-premier-league-forwards-of-all-time"
+  },
+  {
+   "outlet": "Sports Illustrated",
+   "title": "Best Premier League forwards of all time, ranked (20)",
+   "url": "https://www.si.com/soccer/best-premier-league-forwards-all-time-ranked"
+  },
+  {
+   "outlet": "90min",
+   "title": "The 50 Greatest Premier League Strikers of All Time",
+   "url": "https://www.90min.com/posts/the-50-greatest-premier-league-strikers-of-all-time"
+  },
+  {
+   "outlet": "Goal.com",
+   "title": "Best Premier League strikers ever ranked (top 10 read)",
+   "url": "https://www.goal.com/en-za/lists/erling-haaland-mohamed-salah-alan-shearer-wayne-rooney-harry-kane-thierry-henry-best-premier-league-strikers-ever-ranked/blta8cf1aa4a0fcdad3"
+  },
+  {
+   "outlet": "SportsKhabri",
+   "title": "Premier League: The 10 best Forwards of all-time",
+   "url": "https://sportskhabri.com/premier-league-the-10-best-forwards-of-all-time/"
+  },
+  {
+   "outlet": "FourFourTwo (via Yahoo Sports UK)",
+   "title": "The best strikers in Premier League history (30)",
+   "url": "https://uk.sports.yahoo.com/news/ranked-30-best-strikers-premier-084156247.html"
+  },
+  {
+   "outlet": "Football FanCast",
+   "title": "20 Best Strikers in Premier League History Ranked",
+   "url": "https://www.footballfancast.com/best-players-top-strikers-most-goals-in-premier-league-history/"
+  },
+  {
+   "outlet": "Bleacher Report",
+   "title": "20 Best Premier League Strikers of All Time",
+   "url": "https://bleacherreport.com/articles/1487182-20-best-premier-league-strikers-of-all-time"
+  }
+ ],
+ "players": [
+  {
+   "name": "Thierry Henry",
+   "lists": 9,
+   "avg_rank": 1.0,
+   "peak": [
+    "2002/03",
+    "2003/04",
+    "2005/06"
+   ],
+   "peak_evidence": "Golden Boot 2003/04 (30 goals, unbeaten title), 2004/05, 2005/06; PFA and FWA Player of the Year 2003/04; 24 goals and 20 assists 2002/03"
+  },
+  {
+   "name": "Alan Shearer",
+   "lists": 9,
+   "avg_rank": 2.6,
+   "peak": [
+    "1994/95",
+    "1995/96"
+   ],
+   "peak_evidence": "Golden Boot 1994/95 (34 goals, Blackburn title, PFA Player of the Year), 1995/96 (31) and 1996/97"
+  },
+  {
+   "name": "Wayne Rooney",
+   "lists": 9,
+   "avg_rank": 3.9,
+   "peak": [
+    "2009/10",
+    "2011/12"
+   ],
+   "peak_evidence": "PFA and FWA Player of the Year 2009/10 (26 league goals); 27 league goals 2011/12"
+  },
+  {
+   "name": "Eric Cantona",
+   "lists": 9,
+   "avg_rank": 7.2,
+   "peak": [
+    "1993/94",
+    "1995/96"
+   ],
+   "peak_evidence": "Title winner 1993/94, 1995/96 (decisive goals after return, FWA Footballer of the Year 1996)"
+  },
+  {
+   "name": "Andrew Cole",
+   "lists": 9,
+   "avg_rank": 10.3,
+   "peak": [
+    "1993/94",
+    "1998/99"
+   ],
+   "peak_evidence": "34 league goals for Newcastle 1993/94; 1998/99 treble-winning striker (17 league goals)"
+  },
+  {
+   "name": "Sergio Aguero",
+   "lists": 8,
+   "avg_rank": 5.4,
+   "peak": [
+    "2011/12",
+    "2014/15"
+   ],
+   "peak_evidence": "2011/12 title-winning 93:20 goal, 23 league goals; Golden Boot 2014/15 (26 goals)"
+  },
+  {
+   "name": "Dennis Bergkamp",
+   "lists": 8,
+   "avg_rank": 8.1,
+   "peak": [
+    "1997/98"
+   ],
+   "peak_evidence": "1997/98 Double winner, PFA Team of the Year, PFA Player of the Year runner-up"
+  },
+  {
+   "name": "Harry Kane",
+   "lists": 7,
+   "avg_rank": 7.0,
+   "peak": [
+    "2015/16",
+    "2016/17",
+    "2020/21"
+   ],
+   "peak_evidence": "Golden Boot 2015/16 (25), 2016/17 (29) and 2020/21 (23 goals, 14 assists)"
+  },
+  {
+   "name": "Didier Drogba",
+   "lists": 7,
+   "avg_rank": 10.6,
+   "peak": [
+    "2006/07",
+    "2009/10"
+   ],
+   "peak_evidence": "Golden Boot 2006/07 (20) and 2009/10 (29 goals, title)"
+  },
+  {
+   "name": "Michael Owen",
+   "lists": 7,
+   "avg_rank": 10.6,
+   "peak": [
+    "1997/98",
+    "1998/99"
+   ],
+   "peak_evidence": "Joint Golden Boot 1997/98 (18, PFA Young Player of the Year) and 1998/99 (18)"
+  },
+  {
+   "name": "Ruud van Nistelrooy",
+   "lists": 7,
+   "avg_rank": 13.4,
+   "peak": [
+    "2001/02",
+    "2002/03"
+   ],
+   "peak_evidence": "Golden Boot 2002/03 (25); 23 league goals 2001/02"
+  },
+  {
+   "name": "Robbie Fowler",
+   "lists": 7,
+   "avg_rank": 13.6,
+   "peak": [
+    "1994/95",
+    "1995/96"
+   ],
+   "peak_evidence": "PFA Young Player of the Year 1994/95 and 1995/96; 25 and 28 league goals"
+  },
+  {
+   "name": "Robin van Persie",
+   "lists": 7,
+   "avg_rank": 13.9,
+   "peak": [
+    "2011/12",
+    "2012/13"
+   ],
+   "peak_evidence": "Golden Boot 2011/12 (30 goals, PFA and FWA Player of the Year), 2012/13 (26, title with Man United)"
+  },
+  {
+   "name": "Ian Wright",
+   "lists": 7,
+   "avg_rank": 15.0,
+   "peak": [
+    "1996/97"
+   ],
+   "peak_evidence": "23 league goals 1996/97, Arsenal top scorer"
+  },
+  {
+   "name": "Luis Suarez",
+   "lists": 6,
+   "avg_rank": 13.2,
+   "peak": [
+    "2012/13",
+    "2013/14"
+   ],
+   "peak_evidence": "Golden Boot 2013/14 (31 goals, PFA and FWA Player of the Year); 23 goals 2012/13"
+  },
+  {
+   "name": "Teddy Sheringham",
+   "lists": 6,
+   "avg_rank": 15.0,
+   "peak": [
+    "2000/01"
+   ],
+   "peak_evidence": "PFA and FWA Player of the Year 2000/01"
+  },
+  {
+   "name": "Gianfranco Zola",
+   "lists": 6,
+   "avg_rank": 17.0,
+   "peak": [
+    "1996/97"
+   ],
+   "peak_evidence": "FWA Footballer of the Year 1996/97, Chelsea FA Cup"
+  },
+  {
+   "name": "Erling Haaland",
+   "lists": 5,
+   "avg_rank": 13.8,
+   "peak": [
+    "2022/23",
+    "2023/24"
+   ],
+   "peak_evidence": "Golden Boot 2022/23 (36 goals, record, title, PFA and FWA Player of the Year) and 2023/24 (27)"
+  },
+  {
+   "name": "Les Ferdinand",
+   "lists": 5,
+   "avg_rank": 21.2,
+   "peak": [
+    "1994/95",
+    "1995/96"
+   ],
+   "peak_evidence": "24 league goals 1994/95 (QPR), 25 in 1995/96 (Newcastle)"
+  },
+  {
+   "name": "Mohamed Salah",
+   "lists": 4,
+   "avg_rank": 4.5,
+   "peak": [
+    "2017/18",
+    "2021/22",
+    "2024/25"
+   ],
+   "peak_evidence": "32 goals 2017/18 (38-game record, PFA and FWA); Golden Boot 2018/19 and 2021/22; 2024/25 title with Golden Boot and Player of the Year awards"
+  },
+  {
+   "name": "Jimmy Floyd Hasselbaink",
+   "lists": 4,
+   "avg_rank": 21.8,
+   "peak": [
+    "1998/99",
+    "2000/01"
+   ],
+   "peak_evidence": "Joint Golden Boot 1998/99 (18, Leeds) and 2000/01 (23, Chelsea)"
+  },
+  {
+   "name": "Jermain Defoe",
+   "lists": 4,
+   "avg_rank": 23.0,
+   "peak": [
+    "2009/10"
+   ],
+   "peak_evidence": "18 league goals 2009/10, Tottenham top-four"
+  },
+  {
+   "name": "Cristiano Ronaldo",
+   "lists": 3,
+   "avg_rank": 3.7,
+   "peak": [
+    "2006/07",
+    "2007/08"
+   ],
+   "peak_evidence": "PFA and FWA Player of the Year 2006/07 and 2007/08; Golden Boot 2007/08 (31); titles"
+  },
+  {
+   "name": "Fernando Torres",
+   "lists": 3,
+   "avg_rank": 17.7,
+   "peak": [
+    "2007/08"
+   ],
+   "peak_evidence": "24 league goals in debut season 2007/08"
+  },
+  {
+   "name": "Dwight Yorke",
+   "lists": 3,
+   "avg_rank": 19.0,
+   "peak": [
+    "1998/99"
+   ],
+   "peak_evidence": "Joint Golden Boot 1998/99 (18), treble winner"
+  },
+  {
+   "name": "Sadio Mane",
+   "lists": 3,
+   "avg_rank": 19.3,
+   "peak": [
+    "2018/19",
+    "2019/20"
+   ],
+   "peak_evidence": "Joint Golden Boot 2018/19 (22); 2019/20 title"
+  },
+  {
+   "name": "Jamie Vardy",
+   "lists": 3,
+   "avg_rank": 19.7,
+   "peak": [
+    "2015/16",
+    "2019/20"
+   ],
+   "peak_evidence": "24 goals and title 2015/16; Golden Boot 2019/20 (23)"
+  },
+  {
+   "name": "Dimitar Berbatov",
+   "lists": 3,
+   "avg_rank": 22.0,
+   "peak": [
+    "2010/11"
+   ],
+   "peak_evidence": "Joint Golden Boot 2010/11 (20), PFA Team of the Year"
+  },
+  {
+   "name": "Eden Hazard",
+   "lists": 2,
+   "avg_rank": 12.5,
+   "peak": [
+    "2014/15",
+    "2016/17"
+   ],
+   "peak_evidence": "PFA and FWA Player of the Year 2014/15 (title); 2016/17 title"
+  },
+  {
+   "name": "Gareth Bale",
+   "lists": 2,
+   "avg_rank": 14.0,
+   "peak": [
+    "2012/13"
+   ],
+   "peak_evidence": "PFA and FWA Player of the Year 2012/13"
+  }
+ ]
+}

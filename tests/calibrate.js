@@ -1,6 +1,9 @@
 // Calibration: how the engine plays out with no signings, and how champions fare.
-// node tests/calibrate.js [season] [club] [runs]
+// node tests/calibrate.js [season] [club] [runs]   (ODDS='[b,s,g,p,l]' overrides RULES.levelOdds; POLICIES=average,greedy)
 const D = require("../src/engine.js");
+const { decide, POLICIES } = require("./policy.js");
+if (process.env.ODDS) D.RULES.levelOdds = JSON.parse(process.env.ODDS);
+if (process.env.ELITE) D.RULES.elite = JSON.parse(process.env.ELITE);
 const G = require("../data/game/game.json");
 const [season = "2007/08", clubName = "Derby", runsArg = "200"] = process.argv.slice(2);
 const S = G.seasons[season];
@@ -10,20 +13,14 @@ function run(seed, strategy) {
   const st = D.newRun({ seed, catalogue: G.catalogue, fixedClub: `${season}:${clubName}` });
   D.chooseClub(st, S, rel); D.startSeason(st, S);
   let guard = 0;
+  const r = D.stream(seed, "policy");
   while (st.phase !== "summary" && guard++ < 500) {
-    if (st.phase === "window") {
-      if (strategy === "none") D.pass(st, S);
-      else {
-        // greedy: sign the card + slot with the biggest overall gain
-        let best = null;
-        for (const id of st.roll.cards) for (const o of D.signPreview(st, S, id)) if (!best || o.delta > best.delta) best = { id, slot: o.slot, delta: o.delta };
-        if (best && best.delta > 0) D.sign(st, S, best.id, best.slot); else D.pass(st, S);
-      }
-    } else if (st.phase === "prematch") D.playMatch(st, S);
+    if (st.phase === "window") decide(st, S, strategy, r);
+    else if (st.phase === "prematch") D.playMatch(st, S);
   }
   return st.final;
 }
-for (const strat of ["none", "greedy"]) {
+for (const strat of (process.env.POLICIES ? process.env.POLICIES.split(",") : POLICIES)) {
   const n = +runsArg, fin = [], pts = [], gf = [], ga = [];
   const t0 = Date.now();
   for (let i = 0; i < n; i++) { const f = run("cal" + i, strat); fin.push(f.finish); pts.push(f.pts); gf.push(f.gf); ga.push(f.ga); }

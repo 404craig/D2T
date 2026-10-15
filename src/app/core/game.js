@@ -139,13 +139,14 @@
   GAME.target = (histPos) => (GAME.mode() === 'clubx' || histPos <= 1 ? 1 : histPos - 1);
   GAME.dreamMet = (finish, histPos) => finish <= GAME.target(histPos);
 
-  // ---------- legends: the top 3 players of every season (Craig, 11 Oct 2026) ----------
-  // One card per player-season, so a great can be a legend from more than one season.
+  // ---------- legends: the top 3 players of every season and the icons at their peaks (Craig, 11 and 15 Oct 2026) ----------
+  // One card per player-season, so a great can be a legend from more than one season. The build flags each legend
+  // player-season (`lg`, scripts/build-data.py, docs/cards/ICONS.md), so the list here follows the data.
   // id "L:<name>:<season>"; his best legend card also answers to "L:<name>" for runs saved before.
   const LEGENDS = (() => {
     const out = [];
     for (const [sk, S] of Object.entries(G.seasons)) {
-      const top = S.players.filter((p) => p.a >= 10).slice().sort((a, b) => b.r - a.r || b.a - a.a).slice(0, 3);
+      const top = S.players.filter((p) => p.lg).slice().sort((a, b) => b.r - a.r || b.a - a.a);
       for (const p of top) {
         const main = p.c2 != null && (p.a2 || 0) > (p.a1 || 0) ? p.c2 : p.c;
         out.push({ id: 'L:' + p.n + ':' + sk, k: p.k, n: p.n, b: p.b, p: p.p, r: p.r, lv: 4, a: p.a, g: p.g, as: p.as, cs: p.cs, s6: p.s6, nat: p.nat, c: null, cn: S.clubs[main].name, sk });
@@ -429,6 +430,14 @@
     const pitch = i >= 0 ? i : j, sub = i >= 0 ? bId : aId;
     if (pitch < 0) return false;
     E.swapSetup(eng, pitch, sub); D2T.save(); return true;
+  };
+  // Swap two shirts on a roll's pitch (Craig, 15 Oct: you can still move your players around while a roll is up); an empty
+  // shirt moves too, so a player can go into a gap. Not in the draft, where shirts are filled one by one.
+  GAME.swapSlots = (i, j) => {
+    const eng = GAME.eng();
+    if (i === j || eng.phase === 'draft' || !['setup', 'window', 'prematch'].includes(eng.phase)) return false;
+    if (i < 0 || j < 0 || i >= eng.xi.length || j >= eng.xi.length) return false;
+    const a = eng.xi[i]; eng.xi[i] = eng.xi[j]; eng.xi[j] = a; D2T.save(); return true;
   };
   // ---------- Poached (Craig, 14 Oct): a Club X career's later seasons lose three of the XI before the Summer window ----------
   // E.poach decides it once (eng.poached, seeded); the squad screen plays it out the first time (the engine state is set as

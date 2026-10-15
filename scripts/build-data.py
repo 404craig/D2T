@@ -140,6 +140,119 @@ MOVES = json.load(open(_mp, encoding="utf-8")) if os.path.exists(_mp) else {}
 # Transfermarkt lists for every Premier League game). Players without them keep the broad position.
 _pp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "source", "positions.json")
 POSITIONS = json.load(open(_pp, encoding="utf-8")) if os.path.exists(_pp) else {}
+# Craig's own calls (15 Oct: Zola's main position is CAM, whatever the data says), every season of the player
+_po = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "source", "positions_overrides.json")
+for _name, _pos in (json.load(open(_po, encoding="utf-8")) if os.path.exists(_po) else {}).items():
+    if _name.startswith("_"): continue
+    for _season in POSITIONS.values():
+        if _name in _season: _season[_name] = list(_pos)
+
+
+# Icons and honours (Craig, 15 Oct 2026; docs/cards/ICONS.md): the popular all-time players from published lists plus
+# Craig's own, with their verified peak seasons (tools/build_icons.py), and every season's honours (PFA Team of the
+# Year, PFA and FWA Player of the Year, PL Player of the Season, Golden Glove) parsed from Wikipedia.
+_ic = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "source", "icons.json")
+_hn = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "source", "honours.json")
+ICON_ALIASES = {"andrew cole": "andy cole", "alisson becker": "alisson", "gabriel": "gabriel magalhaes", "juninho paulista": "juninho",
+                "andrew johnson": "andy johnson"}   # the same map as tools/build_icons.py
+
+
+def icon_name(s):
+    import unicodedata, re
+    s = s.replace("Ø", "O").replace("ø", "o").replace("ł", "l").replace("Ł", "L").replace("ð", "d").replace("Đ", "D").replace("đ", "d")
+    s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().lower().replace("'", "")
+    s = re.sub(r"[^a-z ]", "", s).strip()
+    return ICON_ALIASES.get(s, s)
+
+
+ICONS = {}
+if os.path.exists(_ic):
+    for _p in json.load(open(_ic, encoding="utf-8"))["players"]:
+        ICONS[icon_name(_p["name"])] = {"consensus": _p["consensus"], "craig": _p["craig"],
+                                        "peak": {x["season"]: x["honour"] for x in _p["peak"]},
+                                        "primary": {x["season"] for x in _p["peak"] if x.get("primary")}}
+HONOURS = defaultdict(set)   # season -> names with a verified honour that season
+if os.path.exists(_hn):
+    for _s, _d in json.load(open(_hn, encoding="utf-8"))["seasons"].items():
+        for _pos, _n in _d["toty"]: HONOURS[_s].add(icon_name(_n))
+        for _k in ("pfa", "fwa", "pots", "glove"):
+            for _n in _d[_k]: HONOURS[_s].add(icon_name(_n))
+# Purple and legend (Craig, 15 Oct 2026; docs/cards/ICONS.md). Baseline purple per season: the top 3 forwards by goals,
+# the top 3 midfielders, top 3 defenders and top 2 keepers by standing (rating, icons lifted by up to 4 for the
+# ranking only), 10+ games. Added where the evidence supports it: a verified honour that season rated 80+, an icon
+# rated 90+, and every icon in a verified peak season (legend too). Legends: the season's top 3 by rating and the
+# icons at their peaks; every legend is purple in his season. Boost: a card of one of Craig's icons in a peak season
+# with a real honour (an award, Team of the Year, top scorer or Golden Glove; not a title alone), rated 75 to 89 (other
+# icons 80 to 89) and below the baseline's last purple of his position, is lifted to it, 2 to 5 points, on the card as `bst`.
+PURPLE_QUOTA = {"FWD": 3, "MID": 3, "DEF": 3, "GK": 2}
+# an icon rated this or more is purple in that season too (forwards tighter, Craig 15 Oct: their baseline by goals
+# and their icons' peaks already carry them, so their extras are held back)
+PURPLE_BAND = {"FWD": 95, "MID": 90, "DEF": 90, "GK": 90}
+# an honour that season makes a card purple when it is rated this or more
+HONOUR_FLOOR = {"FWD": 90, "MID": 80, "DEF": 80, "GK": 80}
+ICON_LIFT = 4           # ranking lift for the most popular icon (consensus 100), none for a non-icon
+# Pool sizes per season (Craig, 15 Oct): 10 to 15 purple and 3 to 6 legends, a few more for all-time great teams.
+PURPLE_CAP, LEGEND_CAP = 15, 6
+GREAT_CAP = (18, 8)
+# The all-time great teams' seasons (Craig, 15 Oct: Arsenal's Invincibles, Man Utd's title sides, Chelsea under
+# Mourinho). Man Utd's are the titles with 89+ points or a double or treble in the record: 1993/94 (92, double),
+# 1998/99 (treble), 1999/00 (91), 2006/07 (89), 2007/08 (87, Champions League double), 2008/09 (90), 2012/13 (89).
+GREAT_SEASONS = {"2003/04", "2004/05", "2005/06", "1993/94", "1998/99", "1999/00", "2006/07", "2007/08", "2008/09", "2012/13"}
+BOOST = (2, 5)          # min and max boost on an icon's peak card below the cut
+BOOST_FLOOR = {"craig": 75, "other": 80}   # a peak card rated from here up to 89 can be boosted (Craig's list from 75)
+MIN_APPS = 10
+# Craig's own ratings for named players' peak-season cards (data/source/rating_overrides.json), applied before the
+# boosts; the card keeps the change in `bst` and `ovd` (15 Oct: Tony Adams 87).
+_ro = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "source", "rating_overrides.json")
+RATING_OVERRIDES = {icon_name(k): v for k, v in (json.load(open(_ro, encoding="utf-8")) if os.path.exists(_ro) else {}).items()
+                    if not k.startswith("_")}
+
+
+def icon_levels(season, people):
+    """Set lv (0 bronze, 1 silver, 2 gold, 3 purple), lg (legend) and bst (boost) on every card of a season."""
+    hon = HONOURS.get(season, set())
+    top_goals = max((q["g"] for q in people if q["a"] >= MIN_APPS), default=0)
+    elig = [q for q in people if q["a"] >= MIN_APPS]
+    for q in people:
+        n = icon_name(q["n"]); ic = ICONS.get(n)
+        q["_icon"] = ic
+        q["_peak"] = bool(ic and season in ic["peak"])
+        q["_lift"] = bool(ic and ic["peak"].get(season))
+        ov = RATING_OVERRIDES.get(n)
+        if ov and (ov["seasons"] == "peak" and q["_peak"] or season in ov["seasons"]) and q["r"] != ov["rating"]:
+            q["ovd"] = q["r"]; q["r"] = ov["rating"]
+        q["_hon"] = n in hon or (q["g"] == top_goals and top_goals > 0 and q["a"] >= MIN_APPS)
+    # the baseline cut per position before any boost: where an icon's peak card is lifted to
+    def standing(q): return q["r"] + (round(ICON_LIFT * q["_icon"]["consensus"] / 100) if q["_icon"] else 0)
+    def key(q): return (-q["g"], -standing(q), -q["a"], q["n"]) if q["b"] == "FWD" else (-standing(q), -q["a"], q["n"])
+    floor = {}
+    for b, k in PURPLE_QUOTA.items():
+        top = sorted([q for q in elig if q["b"] == b], key=key)[:k]
+        floor[b] = top[-1]["r"] if top else 0
+    for q in people:
+        q["bst"] = q["r"] - q["ovd"] if "ovd" in q else 0
+        if q["_lift"] and not q["bst"] and BOOST_FLOOR["craig" if q["_icon"]["craig"] else "other"] <= q["r"] <= 89 and q["r"] < floor[q["b"]]:
+            q["bst"] = max(BOOST[0], min(BOOST[1], floor[q["b"]] - q["r"]))
+            q["r"] += q["bst"]
+    pcap, lcap = GREAT_CAP if season in GREAT_SEASONS else (PURPLE_CAP, LEGEND_CAP)
+    by_rating = sorted(elig, key=lambda q: (-q["r"], -q["a"], q["n"]))
+    # legends: the season's top 3 by rating and every icon's primary peak always; his other peaks while there is room
+    legend = {id(q) for q in by_rating[:3]} | {id(q) for q in elig if q["_icon"] and season in q["_icon"]["primary"]}
+    for q in by_rating:
+        if len(legend) >= lcap: break
+        if q["_peak"]: legend.add(id(q))
+    # purple: the baseline and the legends always; honoured, 90+ icon and other peak cards by rating while there is room
+    purple = set(legend)
+    for b, k in PURPLE_QUOTA.items():
+        purple.update(id(q) for q in sorted([q for q in elig if q["b"] == b], key=key)[:k])
+    for q in by_rating:
+        if len(purple) >= pcap: break
+        if q["_peak"] or (q["_icon"] and q["r"] >= PURPLE_BAND[q["b"]]) or (q["_hon"] and q["r"] >= HONOUR_FLOOR[q["b"]]): purple.add(id(q))
+    for q in people:
+        q["lv"] = 3 if id(q) in purple else 2 if q["r"] >= 80 else 1 if q["r"] >= 70 else 0
+        if id(q) in legend: q["lg"] = 1
+        if not q["bst"]: del q["bst"]
+        for k in ("_icon", "_peak", "_hon", "_lift"): del q[k]
 
 
 def card_stats(q, team, games, career_apps):
@@ -243,11 +356,7 @@ def main():
                 people[pid]["lv"] = TIER_LEVEL.get(e.get("tier"), 0)
                 for k_in, k_out in (("assists", "as"), ("cleanSheets", "cs"), ("minutes", "mi"), ("stats", "st")):
                     if e.get(k_in) is not None: people[pid][k_out] = e[k_in]
-        # Purple (Craig, 11 Oct 2026): the season's top 5 players league-wide. Gold 80+, silver 70 to 79, bronze below.
-        ranked = sorted(people.values(), key=lambda q: (-q["r"], -q["a"], q["n"]))
-        top5 = {id(q) for q in ranked[:5]}
-        for q in people.values():
-            q["lv"] = 3 if id(q) in top5 else 2 if q["r"] >= 80 else 1 if q["r"] >= 70 else 0
+        icon_levels(season, people.values())
         plist = []
         tmap = {c: t for c, t in table}
         games = 2 * (len(table) - 1)
