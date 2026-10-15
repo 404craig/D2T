@@ -107,7 +107,7 @@
       await tween(900, (u) => { const e = 1 - Math.pow(1 - u, 3), k = Math.max(0.001, 0.15 + e * 0.85 + Math.sin(u * Math.PI) * 0.12);
         big.style.opacity = Math.min(1, u * 1.6); place(mx - W * k / 2, my - H * k / 2, k); });
       big.style.opacity = 1; place(fx, fy, 1);
-      badge.textContent = c.level === 'legend' ? 'LEGEND' : 'PURPLE'; badge.style.top = (fy - 46) + 'px'; badge.classList.add('go');
+      badge.textContent = c.level === 'legend' ? 'LEGEND' : `SEASON TOP ${(D2T.game.purpleTop && D2T.game.purpleTop(c.season)) || 10}`;   // Craig, 15 Oct badge.style.top = (fy - 46) + 'px'; badge.classList.add('go');
       await wait(500);
       // the six numbers, one after the other under their labels: a swoosh in, a dull thud down
       for (const st of big.querySelectorAll('.d2c-stat b')) { snd('swoosh_up', 0.45, 1.15, 3000); popIn(st, 520); later(() => snd('thud_low', 0.55, 1.2, 1200), 300); await wait(400); }
