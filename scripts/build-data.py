@@ -140,6 +140,12 @@ MOVES = json.load(open(_mp, encoding="utf-8")) if os.path.exists(_mp) else {}
 # Transfermarkt lists for every Premier League game). Players without them keep the broad position.
 _pp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "source", "positions.json")
 POSITIONS = json.load(open(_pp, encoding="utf-8")) if os.path.exists(_pp) else {}
+# Craig's own calls (15 Oct: Zola's main position is CAM, whatever the data says), every season of the player
+_po = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "source", "positions_overrides.json")
+for _name, _pos in (json.load(open(_po, encoding="utf-8")) if os.path.exists(_po) else {}).items():
+    if _name.startswith("_"): continue
+    for _season in POSITIONS.values():
+        if _name in _season: _season[_name] = list(_pos)
 
 
 def card_stats(q, team, games, career_apps):
