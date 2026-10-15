@@ -38,12 +38,16 @@
   D2T.h = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
   D2T.wait = (ms) => new Promise((r) => setTimeout(r, ms));
   D2T.reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const LOGOS = window.D2T_LOGOS || {};
-  D2T.ASSET = {
-    emblem: LOGOS.emblem || 'assets/logo/emblem.png', emblemLine: LOGOS.emblem_line || 'assets/logo/emblem_line.png',
-    short: LOGOS.short || 'assets/logo/short.png', long: LOGOS.long || 'assets/logo/long.png',
-    shortText: LOGOS.short_text || 'assets/logo/short_text.png', longText: LOGOS.long_text || 'assets/logo/long_text.png'
+  // the logos come in two parts (scripts/build.py): the short logo ahead of the shell, the rest just after it
+  D2T.setLogos = () => {
+    const LOGOS = window.D2T_LOGOS || {};
+    D2T.ASSET = {
+      emblem: LOGOS.emblem || 'assets/logo/emblem.png', emblemLine: LOGOS.emblem_line || 'assets/logo/emblem_line.png',
+      short: LOGOS.short || 'assets/logo/short.png', long: LOGOS.long || 'assets/logo/long.png',
+      shortText: LOGOS.short_text || 'assets/logo/short_text.png', longText: LOGOS.long_text || 'assets/logo/long_text.png'
+    };
   };
+  D2T.setLogos();
   // Logo as a mask so it can be any colour or carry an animated fill. kind: emblem | short | long | shortText | longText | emblemLine
   D2T.logo = (kind, opts = {}) => `<span class="logo-mask ${opts.cls || ''}" role="img" aria-label="${opts.label || (kind === 'long' ? 'DROP2TOP' : 'D2T')}" style="--src:url('${new URL(D2T.ASSET[kind], document.baseURI).href}');aspect-ratio:${LOGO_RATIO[kind]};${opts.style || ''}"></span>`;
   const LOGO_RATIO = { emblem: '234/237', emblemLine: '520/513', short: '857/241', long: '1301/237', shortText: '617/160', longText: '1068/143' };
