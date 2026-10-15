@@ -93,13 +93,13 @@ Craig's players are a legend in at least one season and purple there. Per-season
 
 ## Balance (src/engine.js, retuned 15 Oct)
 
-Craig's rules: a Classic game shows about 66 cards (17 rolls and 5 respins of 3); a purple should turn up about
-once a season and a legend once every 2.5 seasons, so purple 1.5% and legend 0.6% of draws, random (3 or 4 one
-season, none for 2 or 3 is fine); an average player wins the league about 1 in 20 overall, a good player clearly more,
-no signings about as today; Derby 2007/08 reported.
+Craig's rules: a Classic game shows about 66 cards (17 rolls and 5 respins of 3); purple and legend rare and random;
+an average player wins the league about 1 in 20 overall, a good player clearly more, no signings about as today;
+Derby 2007/08 reported. His pick after the trade-off below: **purple 3% and legend 1%** of draws (a purple about every
+half season, a legend about every 1.5 seasons), gold 40%.
 
-- `RULES.levelOdds` = [0.297, 0.182, 0.5, 0.015, 0.006]: bronze 29.7%, silver 18.2%, gold 50%, purple 1.5%, legend
-  0.6% (was [0.52, 0.32, 0.13, 0.025, 0.005]). One purple a season on average and a legend every 2.5 seasons.
+- `RULES.levelOdds` = [0.347, 0.213, 0.4, 0.03, 0.01]: bronze 34.7%, silver 21.3%, gold 40%, purple 3%, legend 1%
+  (was [0.52, 0.32, 0.13, 0.025, 0.005]; bronze and silver keep their old ratio).
 - `RULES.elite` = {from: 2, mid: 90, step: 3}: from gold up a card's chance within its level doubles every 3 rating
   points (a 93 twice a 90, an 87 half, a 99 eight times a 90). Bronze and silver stay uniform. The anti-repeat weights
   multiply in; one draw per pick, so determinism and the memory are untouched.
@@ -111,34 +111,31 @@ no signings about as today; Derby 2007/08 reported.
 | Policy | Before (13 Oct odds, old purple) | After |
 |---|---|---|
 | none | title 0.1%, top 4 0.2%, top half 5.7%, stay up 29.0%, 33 pts | the same |
-| average | (no such policy) | title 2.8%, top 4 30.8%, top half 84.8%, stay up 98.6%, 59 pts |
-| greedy | title 1.1%, top 4 11.9%, top half 63.1%, stay up 93.4%, 53 pts | title 6.7%, top 4 51.5%, top half 95.1%, stay up 99.9%, 64 pts |
-| Derby 2007/08 average (400 runs) | | title 0%, top 4 5.0%, top half 75.0%, 53 pts |
-| Derby 2007/08 greedy (400 runs) | title 0%, top 4 2.0% (200 runs) | title 2.3%, top 4 37.3%, top half 95.3%, 62 pts |
+| average | (no such policy) | title 3.3%, top 4 31.5%, top half 83.7%, stay up 98.5%, 59 pts |
+| greedy | title 1.1%, top 4 11.9%, top half 63.1%, stay up 93.4%, 53 pts | title 8.2%, top 4 50.7%, top half 94.3%, stay up 99.9%, 64 pts |
+| Derby 2007/08 average (400 runs) | | title 0%, top 4 8.5%, top half 71.5%, 53 pts |
+| Derby 2007/08 greedy (400 runs) | title 0%, top 4 2.0% (200 runs) | title 1.8%, top 4 33.5%, top half 94.5%, 62 pts |
 
 (`HIST=1 node tests/calibrate-all.js 12`, 1236 runs a policy; Derby `node tests/calibrate.js 2007/08 Derby 400`.)
 
-**The 5% average title is not reachable under the draw-rate and pool rules without the game repeating itself.**
-With purple and legend at 2.1% of draws the lift has to come from gold, a pool of about 55 cards a season, and
-every step that lifts the title rate makes two goes share more of their cards (measured on 4 club-seasons, 8 seeds
-each, pass policy, different phones):
+**The trade-off.** Craig first asked for purple 1.5% and legend 0.6% (a purple a season, a legend every 2.5). With
+them at 2.1% of draws the lift has to come from gold, a pool of about 55 cards a season, and every step that lifts the
+title rate makes two goes share more of their cards (measured on 4 club-seasons, 8 seeds each, pass policy, different
+phones):
 
-| Gold share, weighting | Average title (618 runs) | Cards two goes share |
+| Odds | Average title (618 runs) | Cards two goes share |
 |---|---|---|
 | 13 Oct odds (purple 2.5%, legend 0.5%, uniform) | greedy 1.1% | 19% |
-| 40%, uniform | 1.5% | 28% |
-| 45%, step 4 | 1.9% | 34% |
-| **50%, step 3 (chosen)** | **2.8%** | **40%** |
-| 55%, step 4 | 2.6% | 44% |
-| 60%, step 2 | 3.1% | 51% |
-| 60%, step 1 | 4.0% | 54% |
-| purple 3%, legend 1%, gold 40%, step 3 (rule 1 relaxed) | 2.9% | 31% |
+| purple 1.5%, legend 0.6%, gold 40%, uniform | 1.5% | 28% |
+| purple 1.5%, legend 0.6%, gold 45%, step 4 | 1.9% | 34% |
+| purple 1.5%, legend 0.6%, gold 50%, step 3 | 2.8% | 40% |
+| purple 1.5%, legend 0.6%, gold 55%, step 4 | 2.6% | 44% |
+| purple 1.5%, legend 0.6%, gold 60%, step 2 | 3.1% | 51% |
+| purple 1.5%, legend 0.6%, gold 60%, step 1 | 4.0% | 54% |
+| **purple 3%, legend 1%, gold 40%, step 3 (Craig's pick)** | **3.3% (1236 runs)** | **31%** |
 
-The chosen odds take the title rate as far as it goes before sharing passes 40%; top 4, top half and staying up are
-far more reachable than before. On one phone the anti-repeat memory brings consecutive runs of a club-season from
-41% shared to 26%. If Craig would rather have the variety back, purple 3% and legend 1% with gold 40% give the same
-title rate at 31% shared (a purple every half season); the 5% target needs either purple and legend drawn more
-often than rule 1 allows or a gold pool that repeats itself.
+The 5% target needs either purple and legend drawn more often still or a gold pool that repeats itself; Craig chose
+the variety. On one phone the anti-repeat memory brings consecutive runs of a club-season from 32% shared to 14%.
 
 ## Changing it
 
