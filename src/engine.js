@@ -46,15 +46,20 @@ const RULES = {
   januaryRolls: 3,
   rollEvery: 3,
   minApps: 10,
-  // bronze silver gold purple (season's top 5) legend (top 3 of every season). Nudged on 13 Oct with the match refit so the
-  // balance held: greedy runs across every relegated club-season (tests/calibrate-all.js 12) win the title 1.2%, finish top 4
-  // 12.5%, top half 63.7%, stay up 93.7%, 53 pts (before: 1.8%, 11.2%, 61.7%, 93.9%, 53).
-  levelOdds: [0.52, 0.32, 0.13, 0.025, 0.005],
+  // bronze silver gold purple legend (docs/cards/ICONS.md for who is purple and legend). Craig, 15 Oct: a Classic game shows
+  // about 66 cards (17 rolls and 5 respins, 3 each); purple 3% and legend 1% of draws, so a purple about every half season
+  // and a legend about every 1.5 seasons, gold 40% with the rating-weighted draws (elite, below) carrying the title lift.
+  // His pick over purple 1.5% and legend 0.6%, which needed gold at 50% and left two goes sharing 40% of their cards for
+  // the same title rate. Balance and the trade-off table are in ICONS.md and CLAUDE.md.
+  levelOdds: [0.347, 0.213, 0.4, 0.03, 0.01],
   // Anti-repeat (Craig, 13 Oct: a club-season must never serve the same players run after run). The app remembers the cards
   // each of the last three runs of a club-season offered (per phone) and hands them in as `recent`: a card from the last run
   // is drawn at a tenth of the weight of a fresh one, from the run before at a quarter, from the one before that at half.
   // The level odds are untouched, so balance holds; only which faces come up within a level changes.
   recent: [0.1, 0.25, 0.5],
+  // From gold up (`from`: level 2) a card's draw weight within its level doubles every `step` rating points above `mid`
+  // (pickCard; mid only sets the scale, the step sets the slope: a 93 is drawn twice as often as a 90, an 87 half).
+  elite: { from: 2, mid: 90, step: 3 },
   // green: his main position 100%, his other preferred positions 95% (alt); amber next to one of them; red elsewhere.
   fit: { green: 1, alt: 0.95, amber: 0.9, red: 0.7 },
   raidFactor: 3,           // chance a raided club's win/draw is downgraded = factor x strength lost
@@ -462,11 +467,15 @@ function cardPool(S, st) {
   return S.players.filter(p => (p.a || 0) >= RULES.minApps && !seen.has(p.id) && !(mine && p.k != null && mine.has(p.k)));
 }
 // One card from a level's pool: every player as likely as the next, except those offered in recent runs of this
-// club-season (st.recent), who come up at their recent weight. Without a history the draw is a plain uniform pick.
+// club-season (st.recent), who come up at their recent weight, and gold, purple and legend cards, which come up by
+// rating (RULES.elite: doubling every `step` points, so with step 3 a 99 is drawn 8 times as often as a 90 and an 81 an
+// eighth as often; the purple and legend pools hold honoured and iconic cards from the high 70s up, Craig 15 Oct).
+// Without a history or a weighted pool the draw is a plain uniform pick.
+function eliteWeight(p) { return p.lv >= RULES.elite.from ? Math.pow(2, (p.r - RULES.elite.mid) / RULES.elite.step) : 1; }
 function pickCard(r, st, pool) {
-  if (!st.recent) return pool[Math.floor(r() * pool.length)];
-  const rw = st.recent;
-  return pickWeighted(r, pool, p => (rw[p.id] != null ? rw[p.id] : 1));
+  const rw = st.recent, elite = pool.length && pool[0].lv >= RULES.elite.from;
+  if (!rw && !elite) return pool[Math.floor(r() * pool.length)];
+  return pickWeighted(r, pool, p => (rw && rw[p.id] != null ? rw[p.id] : 1) * (elite ? eliteWeight(p) : 1));
 }
 function drawCard(r, S, st, legends, taken, broad, fit) {
   const lv = (() => { let x = r(); for (let i = 0; i < 5; i++) { x -= RULES.levelOdds[i]; if (x <= 0) return i; } return 0; })();

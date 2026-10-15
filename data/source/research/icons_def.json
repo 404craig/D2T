@@ -1,0 +1,337 @@
+{
+ "group": "DEF",
+ "sources": [
+  {
+   "outlet": "90min",
+   "title": "Top 30 Premier League Centre-Backs of All Time - Ranked",
+   "url": "https://www.90min.com/posts/top-30-premier-league-centre-backs-of-all-time-ranked"
+  },
+  {
+   "outlet": "Planet Football",
+   "title": "Ranking best centre backs Premier League history",
+   "url": "https://www.planetfootball.com/premier-league/ranking-best-centre-backs-premier-league-history"
+  },
+  {
+   "outlet": "Football365",
+   "title": "Ranked: The 10 best Premier League centre backs of all-time",
+   "url": "https://www.football365.com/news/ranked-10-best-premier-league-centre-backs-of-all-time-van-dijk"
+  },
+  {
+   "outlet": "Squawka (via Yahoo)",
+   "title": "From 15 to 1: The greatest centre-backs in Premier League history",
+   "url": "https://ca.sports.yahoo.com/news/15-1-greatest-centre-backs-123000911.html"
+  },
+  {
+   "outlet": "Planet Football",
+   "title": "Best full backs Premier League history (Alan Shearer)",
+   "url": "https://www.planetfootball.com/premier-league/best-full-backs-premier-league-history-alan-shearer-opinion"
+  },
+  {
+   "outlet": "Sports Illustrated",
+   "title": "The 10 Best Premier League Right Backs of All Time",
+   "url": "https://www.si.com/soccer/best-premier-league-right-backs-all-time"
+  },
+  {
+   "outlet": "HITC",
+   "title": "Best Premier League right backs of all time",
+   "url": "https://www.hitc.com/best-premier-league-right-backs-of-all-time/"
+  },
+  {
+   "outlet": "90min",
+   "title": "The best Premier League left-backs of all time",
+   "url": "https://www.90min.com/best-premier-league-left-backs-all-time"
+  },
+  {
+   "outlet": "theScore",
+   "title": "Premier League turns 25: All-time best XI (defenders only)",
+   "url": "https://www.thescore.com/news/1345879"
+  },
+  {
+   "outlet": "Owner-supplied",
+   "title": "Game owner list",
+   "url": ""
+  }
+ ],
+ "players": [
+  {
+   "name": "John Terry",
+   "lists": 6,
+   "avg_rank": 1.8,
+   "peak": [
+    "2004/05",
+    "2005/06",
+    "2014/15"
+   ],
+   "peak_evidence": "PFA Player of the Year 2004/05; Chelsea titles 2004/05, 2005/06 with record defences; ever-present 2014/15 title (from memory, not re-verified)"
+  },
+  {
+   "name": "Rio Ferdinand",
+   "lists": 6,
+   "avg_rank": 2.8,
+   "peak": [
+    "2006/07",
+    "2007/08",
+    "2008/09"
+   ],
+   "peak_evidence": "Man Utd titles 2006/07 to 2008/09, 2008/09 record 14 straight clean sheets, PFA Team of the Year (from memory)"
+  },
+  {
+   "name": "Tony Adams",
+   "lists": 6,
+   "avg_rank": 4.3,
+   "peak": [
+    "1997/98",
+    "1998/99"
+   ],
+   "peak_evidence": "Arsenal captain in 1997/98 title and double (from memory)"
+  },
+  {
+   "name": "Nemanja Vidic",
+   "lists": 6,
+   "avg_rank": 5.8,
+   "peak": [
+    "2007/08",
+    "2008/09",
+    "2010/11"
+   ],
+   "peak_evidence": "PFA Player of the Year 2008/09 and PL Player of the Season 2008/09; titles 2006/07 to 2010/11 (from memory)"
+  },
+  {
+   "name": "Virgil van Dijk",
+   "lists": 5,
+   "avg_rank": 2.6,
+   "peak": [
+    "2018/19",
+    "2019/20",
+    "2024/25"
+   ],
+   "peak_evidence": "PFA Player of the Year 2018/19; Liverpool titles 2019/20 and 2024/25 (from memory)"
+  },
+  {
+   "name": "Gary Neville",
+   "lists": 5,
+   "avg_rank": 3.4,
+   "peak": [
+    "1999/00",
+    "2000/01"
+   ],
+   "peak_evidence": "Man Utd titles 1999/00 and 2000/01 (from memory)"
+  },
+  {
+   "name": "Sol Campbell",
+   "lists": 5,
+   "avg_rank": 6.4,
+   "peak": [
+    "2001/02",
+    "2003/04"
+   ],
+   "peak_evidence": "Arsenal double 2001/02, unbeaten title 2003/04 (from memory)"
+  },
+  {
+   "name": "Vincent Kompany",
+   "lists": 5,
+   "avg_rank": 6.6,
+   "peak": [
+    "2011/12",
+    "2013/14",
+    "2017/18"
+   ],
+   "peak_evidence": "Man City titles 2011/12, 2013/14, 2017/18 as captain; PFA Team of the Year (from memory)"
+  },
+  {
+   "name": "Jaap Stam",
+   "lists": 5,
+   "avg_rank": 10.4,
+   "peak": [
+    "1998/99",
+    "1999/00"
+   ],
+   "peak_evidence": "Man Utd treble 1998/99 and title 1999/00 (from memory)"
+  },
+  {
+   "name": "Ashley Cole",
+   "lists": 4,
+   "avg_rank": 2.2,
+   "peak": [
+    "2003/04",
+    "2004/05",
+    "2009/10"
+   ],
+   "peak_evidence": "Invincibles 2003/04; Chelsea titles 2004/05 and 2009/10; PFA Team of the Year (from memory)"
+  },
+  {
+   "name": "Kyle Walker",
+   "lists": 4,
+   "avg_rank": 5.2,
+   "peak": [
+    "2017/18",
+    "2018/19",
+    "2020/21"
+   ],
+   "peak_evidence": "Man City titles incl. 100 points 2017/18; PFA Team of the Year 2017/18 (from memory)"
+  },
+  {
+   "name": "Lee Dixon",
+   "lists": 4,
+   "avg_rank": 8.8,
+   "peak": [
+    "1997/98"
+   ],
+   "peak_evidence": "Arsenal title and double 1997/98 (from memory)"
+  },
+  {
+   "name": "Steve Bruce",
+   "lists": 4,
+   "avg_rank": 9.8,
+   "peak": [
+    "1992/93",
+    "1993/94"
+   ],
+   "peak_evidence": "Man Utd captain, first two PL titles (from memory)"
+  },
+  {
+   "name": "Ricardo Carvalho",
+   "lists": 4,
+   "avg_rank": 10.8,
+   "peak": [
+    "2004/05",
+    "2005/06"
+   ],
+   "peak_evidence": "Chelsea back-to-back titles with record defence (from memory)"
+  },
+  {
+   "name": "Jamie Carragher",
+   "lists": 4,
+   "avg_rank": 11.0,
+   "peak": [
+    "2005/06",
+    "2008/09"
+   ],
+   "peak_evidence": "Liverpool 2008/09 second with 25 goals conceded (from memory)"
+  },
+  {
+   "name": "Trent Alexander-Arnold",
+   "lists": 3,
+   "avg_rank": 3.7,
+   "peak": [
+    "2018/19",
+    "2019/20",
+    "2021/22"
+   ],
+   "peak_evidence": "PFA Team of the Year, record defender assists, 2019/20 title (from memory)"
+  },
+  {
+   "name": "Andy Robertson",
+   "lists": 3,
+   "avg_rank": 7.7,
+   "peak": [
+    "2018/19",
+    "2019/20"
+   ],
+   "peak_evidence": "PFA Team of the Year 2018/19 and 2019/20; Liverpool title 2019/20 (from memory)"
+  },
+  {
+   "name": "Denis Irwin",
+   "lists": 3,
+   "avg_rank": 8.0,
+   "peak": [
+    "1993/94",
+    "1998/99"
+   ],
+   "peak_evidence": "Man Utd titles and treble 1998/99 (from memory)"
+  },
+  {
+   "name": "Gary Pallister",
+   "lists": 3,
+   "avg_rank": 9.7,
+   "peak": [
+    "1992/93",
+    "1993/94"
+   ],
+   "peak_evidence": "Man Utd first two PL titles (from memory)"
+  },
+  {
+   "name": "Ledley King",
+   "lists": 3,
+   "avg_rank": 14.7,
+   "peak": [
+    "2002/03",
+    "2004/05"
+   ],
+   "peak_evidence": "Tottenham, limited evidence; not verified"
+  },
+  {
+   "name": "Sami Hyypia",
+   "lists": 3,
+   "avg_rank": 15.3,
+   "peak": [
+    "2001/02"
+   ],
+   "peak_evidence": "Liverpool second 2001/02; not verified"
+  },
+  {
+   "name": "Pablo Zabaleta",
+   "lists": 2,
+   "avg_rank": 6.0,
+   "peak": [],
+   "peak_evidence": "not researched"
+  },
+  {
+   "name": "Cesar Azpilicueta",
+   "lists": 2,
+   "avg_rank": 6.0,
+   "peak": [],
+   "peak_evidence": "not researched"
+  },
+  {
+   "name": "Lauren",
+   "lists": 2,
+   "avg_rank": 6.0,
+   "peak": [],
+   "peak_evidence": "not researched"
+  },
+  {
+   "name": "Patrice Evra",
+   "lists": 2,
+   "avg_rank": 6.5,
+   "peak": [],
+   "peak_evidence": "not researched"
+  },
+  {
+   "name": "Stuart Pearce",
+   "lists": 2,
+   "avg_rank": 8.0,
+   "peak": [],
+   "peak_evidence": "not researched"
+  },
+  {
+   "name": "John Stones",
+   "lists": 2,
+   "avg_rank": 14.5,
+   "peak": [],
+   "peak_evidence": "not researched"
+  },
+  {
+   "name": "Kolo Toure",
+   "lists": 2,
+   "avg_rank": 17.0,
+   "peak": [],
+   "peak_evidence": "not researched"
+  },
+  {
+   "name": "Nigel Winterburn",
+   "lists": 1,
+   "avg_rank": 5.0,
+   "peak": [],
+   "peak_evidence": "not researched"
+  },
+  {
+   "name": "Graeme Le Saux",
+   "lists": 1,
+   "avg_rank": 6.0,
+   "peak": [],
+   "peak_evidence": "not researched"
+  }
+ ],
+ "note": "Lists are position-specific mixes (CB, RB, LB), so full-backs are only compared on full-back lists. Peak seasons come from memory, not re-verified online."
+}
