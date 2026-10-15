@@ -247,10 +247,25 @@
           flip(true);
           field.animate([{ opacity: 0, transform: 'translateY(-14px)' }, { opacity: 1, transform: 'none' }], { duration: 420, delay: 160, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
         } else api.el.classList.add('is-placing');
+        showChips(animate && !reduced);
         api.hint(draft ? (di.open ? 'Drag one onto an open shirt, or tap him then a shirt' : 'Drag one onto the lit shirt, or tap him then Sign') : 'Drag a player onto the pitch, or tap him then a shirt');
+      }
+      // the positions each tray card is green in, under it (Craig, 15 Oct; design/prototype/green-positions.html,
+      // corrected the same day to plain text): "LB/RB/LM/RM", main first, one line; they pop in card by card once the tray has landed
+      function showChips(animate) {
+        api.slots.forEach((s, i) => {
+          s.querySelectorAll('.sp-gp').forEach((x) => x.remove());
+          const p = api.results()[i]; if (!p) return;
+          const list = p.main ? [p.main, ...(p.alt || [])] : [p.pos];
+          const row = D2T.h(`<div class="sp-gp" aria-label="Green in ${list.join(', ')}">${list.join('<i>/</i>')}</div>`);
+          s.appendChild(row);
+          if (animate) row.animate([{ opacity: 0, translate: '0 6px' }, { opacity: 1, translate: '0 -1px', offset: 0.7 }, { opacity: 1, translate: '0 0' }],
+            { duration: 350, delay: 560 + i * 300, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
+        });
       }
       function leavePlacing() {
         if (!placing) return Promise.resolve();
+        api.slots.forEach((s) => s.querySelectorAll('.sp-gp').forEach((x) => x.remove()));
         placing = false; leaving = true; api.clear();
         if (reduced) { api.el.classList.remove('is-placing'); return Promise.resolve(); }
         return new Promise((res) => {
