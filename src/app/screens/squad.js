@@ -3,7 +3,9 @@
 // are signed straight onto the pitch from the transfer roll (screens/transfer.js).
 (function () {
   const D2T = window.D2T, SE = D2T.se, GAME = D2T.game;
-  const PITCH_W = 50, SUB_W = 60; // compact layout (chosen 11 Oct): header, pitch, subs and the bar fit one screen
+  const PITCH_W = 50; // the bench cards are the roll's full cards (Craig, 15 Oct), positions in grey under each: as they
+  // roll in (114 wide) on taller phones, smaller (80) on short ones such as 375 x 667 so the bench and its positions fit
+  const subW = () => (window.innerHeight < 760 ? 80 : 114);
   const ROLE_NAME = { GK: 'Goalkeeper', DEF: 'Defender', MID: 'Midfielder', FWD: 'Forward' };
   const last = (n) => n.split(' ').slice(-1)[0];
   const idOf = (s) => (/^\d+$/.test(String(s)) ? +s : s);   // player ids are numbers; legend ids are text
@@ -74,7 +76,7 @@
               ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false, tab: s.pos, cls: 'fit-' + fit })}</div></div>`;
         }).join('');
         const sl = subsEl.scrollLeft;
-        subsEl.innerHTML = L.subs.map((c) => `<div class="se-sub" role="listitem"><div class="se-cardwrap" data-card="${c.id}" data-kind="sub" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, ${ROLE_NAME[c.pos]}, in the squad">${D2T.cards.player(c, { w: SUB_W, mini: true, shine: false })}</div></div>`).join('');
+        subsEl.innerHTML = L.subs.map((c) => `<div class="se-sub" role="listitem"><div class="se-cardwrap" data-card="${c.id}" data-kind="sub" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, ${ROLE_NAME[c.pos]}, in the squad">${D2T.cards.player(c, { w: subW(), shine: false })}</div><div class="se-sub-pos" aria-hidden="true">${(c.main ? [c.main, ...(c.alt || [])] : [c.pos]).join('<i>/</i>')}</div></div>`).join('');
         subsEl.scrollLeft = sl;
         body.querySelector('.se-fname').textContent = GAME.eng().formation;
         const showSubs = L.subs.length > 0;

@@ -106,7 +106,7 @@
 /* no glows on squad and pitch cards (11 Oct): selection lifts the card, turns its tab white and puts a white marker under it */
 .se-cardwrap .d2c { filter: none; }
 .se-cardwrap.se-sel { transform: translateY(-5px) scale(1.06); z-index: 3; }
-.se-cardwrap.se-sel .d2c-tab { background: #FFFFFF; }
+.se-cardwrap.se-sel .d2c-tab { background: #FFFFFF; color: #0A0A0A; }
 .se-cardwrap.se-sel::after { content: ''; position: absolute; left: 50%; bottom: -10px; margin-left: -5px; border: 5px solid transparent; border-top-color: #FFFFFF; }
 .se-armed .se-slot.se-pf-green .se-cardwrap:not(.se-sel) { animation: seArmed 1.4s ease-in-out infinite; }
 @keyframes seArmed { 50% { transform: translateY(-2px); } }
@@ -125,7 +125,12 @@
 .se-hint { font-size: 12px; color: var(--muted); text-align: right; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .se-subs { display: flex; gap: 8px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-padding: 0 16px; margin: 0 -16px; padding: 14px 16px 12px; scrollbar-width: none; overscroll-behavior-x: contain; flex-shrink: 0; }
 .se-subs::-webkit-scrollbar { display: none; }
-.se-sub { scroll-snap-align: start; flex-shrink: 0; }
+.se-sub { scroll-snap-align: start; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+/* his green positions under each bench card, as under the roll's tray cards (Craig, 15 Oct) */
+.se-sub-pos { margin-top: 7px; color: #8E8E99; font: 800 9px/1 var(--font); font-style: normal; letter-spacing: .03em; white-space: nowrap; }
+.se-sub-pos i { font-style: normal; opacity: .5; }
+.se-sub .se-cardwrap.se-sel::after { display: none; }   /* the positions sit there; the white tab and the lift show it is picked */
+@media (max-height: 759px) { .se-squad .se-pitch { min-height: 280px; } .se-subs { padding-top: 13px; padding-bottom: 3px; } .se-sub-pos { margin-top: 5px; } }
 .se-sub .se-cardwrap { touch-action: pan-x; }
 
 /* next fixture bar */
