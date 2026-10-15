@@ -1,0 +1,4 @@
+{
+ "_about": "Craig's own ratings for named players' cards, applied by scripts/build-data.py before the icon boosts (docs/cards/ICONS.md). seasons is \"peak\" (every verified peak season in data/source/icons.json) or a list of seasons. The card keeps its model rating in ovd and the change in bst. Add a player as a new entry with who decided it and when.",
+ "Tony Adams": {"rating": 87, "seasons": "peak", "by": "Craig's call, 15 Oct 2026: his peak cards should be about 87 or 88; the model rates them 77 to 79"}
+}

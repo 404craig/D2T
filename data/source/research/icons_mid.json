@@ -1,0 +1,328 @@
+{
+ "group": "MID",
+ "sources": [
+  {
+   "outlet": "Sports Illustrated",
+   "title": "The 20 Best Premier League Midfielders of All Time - Ranked",
+   "url": "https://www.si.com/soccer/best-premier-league-midfielders-all-time-ranked/app/"
+  },
+  {
+   "outlet": "90min",
+   "title": "Best Premier League midfielders of all time",
+   "url": "https://www.90min.com/features/best-premier-league-midfielders-of-all-time"
+  },
+  {
+   "outlet": "Sports Illustrated",
+   "title": "The 20 best Premier League defensive midfielders of all time ranked",
+   "url": "https://www.si.com/soccer/the-20-best-premier-league-defensive-midfielders-of-all-time-ranked"
+  },
+  {
+   "outlet": "The Football Faithful",
+   "title": "Ranking the eight best attacking midfielders in Premier League history",
+   "url": "https://thefootballfaithful.com/ranking-the-eight-best-attacking-midfielders-in-premier-league-history/"
+  },
+  {
+   "outlet": "Planet Football",
+   "title": "Best wingers in Premier League history (Alan Shearer's picks)",
+   "url": "https://www.planetfootball.com/premier-league/best-wingers-premier-league-history-alan-shearer"
+  },
+  {
+   "outlet": "Sportskhabri",
+   "title": "10 Greatest Premier League midfielders of all time",
+   "url": "https://sportskhabri.com/top-10-greatest-premier-league-midfielders-of-all-time/"
+  },
+  {
+   "outlet": "Sportsdunia",
+   "title": "Top 10 best attacking midfielders in Premier League history",
+   "url": "https://www.sportsdunia.com/football-analysis/top-10-best-attacking-midfielders-in-premier-league-history"
+  },
+  {
+   "outlet": "Sports Illustrated",
+   "title": "Best Premier League right wingers all time ranked",
+   "url": "https://www.si.com/soccer/best-premier-league-right-wingers-all-time-ranked"
+  }
+ ],
+ "players": [
+  {
+   "name": "Steven Gerrard",
+   "lists": 6,
+   "avg_rank": 2.8,
+   "peak": [
+    "2008/09",
+    "2013/14"
+   ],
+   "peak_evidence": "PFA and FWA Player of the Year 2008/09 (16 league goals); Liverpool runners-up 2013/14, PFA TOTY"
+  },
+  {
+   "name": "Frank Lampard",
+   "lists": 6,
+   "avg_rank": 3.0,
+   "peak": [
+    "2004/05",
+    "2009/10"
+   ],
+   "peak_evidence": "FWA Player of the Year 2004/05, title with Chelsea; 22 league goals and title 2009/10"
+  },
+  {
+   "name": "Paul Scholes",
+   "lists": 6,
+   "avg_rank": 3.4,
+   "peak": [
+    "2002/03"
+   ],
+   "peak_evidence": "Title-winning season with Manchester United 2002/03; PFA Team of the Year"
+  },
+  {
+   "name": "David Silva",
+   "lists": 6,
+   "avg_rank": 6.4,
+   "peak": [
+    "2011/12",
+    "2017/18"
+   ],
+   "peak_evidence": "Key creator in City title seasons 2011/12 and 2017/18 (100 points)"
+  },
+  {
+   "name": "David Beckham",
+   "lists": 6,
+   "avg_rank": 7.4,
+   "peak": [
+    "1996/97",
+    "1998/99"
+   ],
+   "peak_evidence": "Title-winning seasons with Manchester United 1996/97 and 1998/99 (treble)"
+  },
+  {
+   "name": "Yaya Toure",
+   "lists": 6,
+   "avg_rank": 8.2,
+   "peak": [
+    "2011/12",
+    "2013/14"
+   ],
+   "peak_evidence": "Title seasons with City; 20 league goals 2013/14, PFA Team of the Year"
+  },
+  {
+   "name": "Cesc Fabregas",
+   "lists": 6,
+   "avg_rank": 8.8,
+   "peak": [
+    "2014/15"
+   ],
+   "peak_evidence": "Title with Chelsea 2014/15, 18 league assists, PFA Team of the Year"
+  },
+  {
+   "name": "Kevin De Bruyne",
+   "lists": 5,
+   "avg_rank": 1.5,
+   "peak": [
+    "2019/20",
+    "2020/21"
+   ],
+   "peak_evidence": "PFA Players' Player of the Year 2019/20 and 2020/21; 20 assists in 2019/20 equalled the league record"
+  },
+  {
+   "name": "Ryan Giggs",
+   "lists": 5,
+   "avg_rank": 4.2,
+   "peak": [
+    "1993/94",
+    "2008/09"
+   ],
+   "peak_evidence": "Title/double 1993/94; PFA Players' Player of the Year 2008/09"
+  },
+  {
+   "name": "Roy Keane",
+   "lists": 5,
+   "avg_rank": 4.5,
+   "peak": [
+    "1999/00"
+   ],
+   "peak_evidence": "PFA and FWA Player of the Year 1999/00, Manchester United title"
+  },
+  {
+   "name": "Patrick Vieira",
+   "lists": 5,
+   "avg_rank": 4.8,
+   "peak": [
+    "2001/02",
+    "2003/04"
+   ],
+   "peak_evidence": "Title-winning seasons with Arsenal 2001/02 and the unbeaten 2003/04, PFA Team of the Year"
+  },
+  {
+   "name": "Claude Makelele",
+   "lists": 5,
+   "avg_rank": 11.2,
+   "peak": [
+    "2004/05",
+    "2005/06"
+   ],
+   "peak_evidence": "Anchor of Chelsea's back-to-back title sides; record 15 goals conceded 2004/05"
+  },
+  {
+   "name": "N'Golo Kante",
+   "lists": 4,
+   "avg_rank": 8.3,
+   "peak": [
+    "2015/16",
+    "2016/17"
+   ],
+   "peak_evidence": "Title with Leicester 2015/16 and Chelsea 2016/17; PFA and FWA Player of the Year 2016/17"
+  },
+  {
+   "name": "Michael Carrick",
+   "lists": 4,
+   "avg_rank": 12.7,
+   "peak": [
+    "2007/08",
+    "2012/13"
+   ],
+   "peak_evidence": "Title seasons with Manchester United 2007/08 and 2012/13"
+  },
+  {
+   "name": "Gareth Bale",
+   "lists": 3,
+   "avg_rank": 6.0,
+   "peak": [
+    "2012/13"
+   ],
+   "peak_evidence": "PFA Players' and Young Player of the Year and FWA 2012/13"
+  },
+  {
+   "name": "Rodri",
+   "lists": 3,
+   "avg_rank": 7.3,
+   "peak": [
+    "2023/24"
+   ],
+   "peak_evidence": "Title-winning season with City 2023/24 (Ballon d'Or 2024)"
+  },
+  {
+   "name": "Robert Pires",
+   "lists": 3,
+   "avg_rank": 11.0,
+   "peak": [
+    "2001/02",
+    "2003/04"
+   ],
+   "peak_evidence": "FWA Player of the Year 2001/02; title 2001/02 and unbeaten 2003/04"
+  },
+  {
+   "name": "Michael Essien",
+   "lists": 3,
+   "avg_rank": 14.3,
+   "peak": [
+    "2005/06"
+   ],
+   "peak_evidence": "Title-winning season with Chelsea 2005/06"
+  },
+  {
+   "name": "Fernandinho",
+   "lists": 3,
+   "avg_rank": 14.7,
+   "peak": [
+    "2017/18",
+    "2018/19"
+   ],
+   "peak_evidence": "Title seasons with City 2017/18 and 2018/19"
+  },
+  {
+   "name": "Gareth Barry",
+   "lists": 3,
+   "avg_rank": 18.5,
+   "peak": [
+    "2011/12"
+   ],
+   "peak_evidence": "Title with Manchester City 2011/12 (653 league appearances overall)"
+  },
+  {
+   "name": "Mohamed Salah",
+   "lists": 2,
+   "avg_rank": 1.5,
+   "peak": [
+    "2017/18",
+    "2021/22"
+   ],
+   "peak_evidence": "32 league goals record 2017/18, PFA and FWA Player of the Year"
+  },
+  {
+   "name": "Eden Hazard",
+   "lists": 2,
+   "avg_rank": 3.0,
+   "peak": [
+    "2014/15"
+   ],
+   "peak_evidence": "PFA and FWA Player of the Year 2014/15, title with Chelsea"
+  },
+  {
+   "name": "Cristiano Ronaldo",
+   "lists": 2,
+   "avg_rank": 3.5,
+   "peak": [
+    "2007/08",
+    "2008/09"
+   ],
+   "peak_evidence": "31 league goals and PFA and FWA Player of the Year 2007/08; titles 2007/08 and 2008/09"
+  },
+  {
+   "name": "Riyad Mahrez",
+   "lists": 2,
+   "avg_rank": 6.5,
+   "peak": [
+    "2015/16"
+   ],
+   "peak_evidence": "PFA Players' Player of the Year 2015/16, Leicester champions"
+  },
+  {
+   "name": "Juan Mata",
+   "lists": 2,
+   "avg_rank": 8.5,
+   "peak": [],
+   "peak_evidence": "No season confirmed"
+  },
+  {
+   "name": "Xabi Alonso",
+   "lists": 2,
+   "avg_rank": 14.5,
+   "peak": [],
+   "peak_evidence": "No season confirmed"
+  },
+  {
+   "name": "Bruno Fernandes",
+   "lists": 2,
+   "avg_rank": 15.0,
+   "peak": [
+    "2020/21"
+   ],
+   "peak_evidence": "PFA Team of the Year 2020/21 (18 league goals)"
+  },
+  {
+   "name": "Sadio Mane",
+   "lists": 1,
+   "avg_rank": 6.0,
+   "peak": [
+    "2018/19"
+   ],
+   "peak_evidence": "Shared Golden Boot 2018/19 (22 goals)"
+  },
+  {
+   "name": "Raheem Sterling",
+   "lists": 1,
+   "avg_rank": 6.0,
+   "peak": [
+    "2018/19"
+   ],
+   "peak_evidence": "Title with City 2018/19, PFA Team of the Year"
+  },
+  {
+   "name": "Freddie Ljungberg",
+   "lists": 1,
+   "avg_rank": 7.0,
+   "peak": [
+    "2001/02"
+   ],
+   "peak_evidence": "Title with Arsenal 2001/02"
+  }
+ ]
+}

@@ -60,7 +60,9 @@ t("a Daily's goes have random seeds of their own: two goes differ in rolls and r
   const again = play("daily-" + date + "-rabc123", "2004/05", "Southampton", "pass");
   assert.notDeepStrictEqual(go1.offered.slice(0, 3), go2.offered.slice(0, 3), "the first roll should differ between goes");
   const shared = go1.offered.filter(id => go2.offered.includes(id)).length;
-  assert.ok(shared < go1.offered.length / 3, `goes share too many cards: ${shared} of ${go1.offered.length}`);
+  // two goes on different phones share about 40% of their cards on average (15 Oct: half the draws are gold, weighted by
+  // rating, from a pool of about 55 a season; 19% on the 13 Oct odds; the anti-repeat memory covers the same phone)
+  assert.ok(shared < go1.offered.length / 2, `goes share too many cards: ${shared} of ${go1.offered.length}`);
   const r1 = go1.st.played.map(r => `${r.us}-${r.them}`), r2 = go2.st.played.map(r => `${r.us}-${r.them}`);
   assert.ok(r1.filter((s, i) => s === r2[i]).length < 20, "the same XI should not get the same results in another go");
   assert.deepStrictEqual(again.offered, go1.offered, "the same go should offer the same cards");

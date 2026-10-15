@@ -671,7 +671,7 @@
           // which has New run and Home of its own, so there is no peek bar here.
           D2T.endSheet({ title: said.title, lead: `<div class="ub-endbig"><b>${n}</b><span>Unbeaten${newBest ? ' · a new best' : ''}</span></div><p class="fr-lead ub-banter">${D2T.esc(said.line)}</p>`,
             colour: '#22D3EE', ink: '#001A1F', onClose: () => { if (root.isConnected && run) idle(); },
-            buttons: [{ k: 'share', label: 'Share with your mates', primary: true, fn: () => D2T.share.send(card) }, { k: 'again', label: 'New run', fn: () => { idle(); later(statSpin, 250); } }, { k: 'home', label: 'Home', fn: () => D2T.go('home') }] }).open();
+            buttons: [{ k: 'share', label: 'Share with your mates', outline: true, fn: () => D2T.share.send(card) }, { k: 'again', label: 'New run', primary: true, fn: () => { idle(); later(statSpin, 250); } }, { k: 'home', label: 'Home', fn: () => D2T.go('home') }] }).open();
         };
         if (newBest && !reduced) later(show, 2500); else show();
       }

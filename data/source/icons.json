@@ -1,0 +1,3553 @@
+{
+ "_about": "Premier League icons: the popular all-time players, from published all-time lists per position (data/source/research, sources below) plus Craig's own list (craig: true). consensus is 0 to 100 from how many lists name him and his average rank. peak is his verified peak seasons (evidence from data/source/honours.json and the game data: awards, Team of the Year, top scorer, Golden Glove, a title with half the games); peakSource rating means no honour was found and his best-rated season stands. honour is false where the only evidence is a title or the rating; primary marks his best peak, always a legend card, the others only where the season has room (docs/cards/ICONS.md). Built by tools/build_icons.py; scripts/build-data.py makes every peak card purple and a legend (docs/cards/ICONS.md).",
+ "sources": {
+  "FWD": [
+   {
+    "outlet": "90min",
+    "title": "Best Premier League forwards of all time (25)",
+    "url": "https://www.90min.com/features/best-premier-league-forwards-of-all-time"
+   },
+   {
+    "outlet": "Sports Illustrated",
+    "title": "Best Premier League forwards of all time, ranked (20)",
+    "url": "https://www.si.com/soccer/best-premier-league-forwards-all-time-ranked"
+   },
+   {
+    "outlet": "90min",
+    "title": "The 50 Greatest Premier League Strikers of All Time",
+    "url": "https://www.90min.com/posts/the-50-greatest-premier-league-strikers-of-all-time"
+   },
+   {
+    "outlet": "Goal.com",
+    "title": "Best Premier League strikers ever ranked (top 10 read)",
+    "url": "https://www.goal.com/en-za/lists/erling-haaland-mohamed-salah-alan-shearer-wayne-rooney-harry-kane-thierry-henry-best-premier-league-strikers-ever-ranked/blta8cf1aa4a0fcdad3"
+   },
+   {
+    "outlet": "SportsKhabri",
+    "title": "Premier League: The 10 best Forwards of all-time",
+    "url": "https://sportskhabri.com/premier-league-the-10-best-forwards-of-all-time/"
+   },
+   {
+    "outlet": "FourFourTwo (via Yahoo Sports UK)",
+    "title": "The best strikers in Premier League history (30)",
+    "url": "https://uk.sports.yahoo.com/news/ranked-30-best-strikers-premier-084156247.html"
+   },
+   {
+    "outlet": "Football FanCast",
+    "title": "20 Best Strikers in Premier League History Ranked",
+    "url": "https://www.footballfancast.com/best-players-top-strikers-most-goals-in-premier-league-history/"
+   },
+   {
+    "outlet": "Bleacher Report",
+    "title": "20 Best Premier League Strikers of All Time",
+    "url": "https://bleacherreport.com/articles/1487182-20-best-premier-league-strikers-of-all-time"
+   }
+  ],
+  "MID": [
+   {
+    "outlet": "Sports Illustrated",
+    "title": "The 20 Best Premier League Midfielders of All Time - Ranked",
+    "url": "https://www.si.com/soccer/best-premier-league-midfielders-all-time-ranked/app/"
+   },
+   {
+    "outlet": "90min",
+    "title": "Best Premier League midfielders of all time",
+    "url": "https://www.90min.com/features/best-premier-league-midfielders-of-all-time"
+   },
+   {
+    "outlet": "Sports Illustrated",
+    "title": "The 20 best Premier League defensive midfielders of all time ranked",
+    "url": "https://www.si.com/soccer/the-20-best-premier-league-defensive-midfielders-of-all-time-ranked"
+   },
+   {
+    "outlet": "The Football Faithful",
+    "title": "Ranking the eight best attacking midfielders in Premier League history",
+    "url": "https://thefootballfaithful.com/ranking-the-eight-best-attacking-midfielders-in-premier-league-history/"
+   },
+   {
+    "outlet": "Planet Football",
+    "title": "Best wingers in Premier League history (Alan Shearer's picks)",
+    "url": "https://www.planetfootball.com/premier-league/best-wingers-premier-league-history-alan-shearer"
+   },
+   {
+    "outlet": "Sportskhabri",
+    "title": "10 Greatest Premier League midfielders of all time",
+    "url": "https://sportskhabri.com/top-10-greatest-premier-league-midfielders-of-all-time/"
+   },
+   {
+    "outlet": "Sportsdunia",
+    "title": "Top 10 best attacking midfielders in Premier League history",
+    "url": "https://www.sportsdunia.com/football-analysis/top-10-best-attacking-midfielders-in-premier-league-history"
+   },
+   {
+    "outlet": "Sports Illustrated",
+    "title": "Best Premier League right wingers all time ranked",
+    "url": "https://www.si.com/soccer/best-premier-league-right-wingers-all-time-ranked"
+   }
+  ],
+  "DEF": [
+   {
+    "outlet": "90min",
+    "title": "Top 30 Premier League Centre-Backs of All Time - Ranked",
+    "url": "https://www.90min.com/posts/top-30-premier-league-centre-backs-of-all-time-ranked"
+   },
+   {
+    "outlet": "Planet Football",
+    "title": "Ranking best centre backs Premier League history",
+    "url": "https://www.planetfootball.com/premier-league/ranking-best-centre-backs-premier-league-history"
+   },
+   {
+    "outlet": "Football365",
+    "title": "Ranked: The 10 best Premier League centre backs of all-time",
+    "url": "https://www.football365.com/news/ranked-10-best-premier-league-centre-backs-of-all-time-van-dijk"
+   },
+   {
+    "outlet": "Squawka (via Yahoo)",
+    "title": "From 15 to 1: The greatest centre-backs in Premier League history",
+    "url": "https://ca.sports.yahoo.com/news/15-1-greatest-centre-backs-123000911.html"
+   },
+   {
+    "outlet": "Planet Football",
+    "title": "Best full backs Premier League history (Alan Shearer)",
+    "url": "https://www.planetfootball.com/premier-league/best-full-backs-premier-league-history-alan-shearer-opinion"
+   },
+   {
+    "outlet": "Sports Illustrated",
+    "title": "The 10 Best Premier League Right Backs of All Time",
+    "url": "https://www.si.com/soccer/best-premier-league-right-backs-all-time"
+   },
+   {
+    "outlet": "HITC",
+    "title": "Best Premier League right backs of all time",
+    "url": "https://www.hitc.com/best-premier-league-right-backs-of-all-time/"
+   },
+   {
+    "outlet": "90min",
+    "title": "The best Premier League left-backs of all time",
+    "url": "https://www.90min.com/best-premier-league-left-backs-all-time"
+   },
+   {
+    "outlet": "theScore",
+    "title": "Premier League turns 25: All-time best XI (defenders only)",
+    "url": "https://www.thescore.com/news/1345879"
+   }
+  ],
+  "GK": [
+   {
+    "outlet": "FourFourTwo (via Yahoo Sports UK)",
+    "title": "Ranked! The 10 best Premier League goalkeepers of all time",
+    "url": "https://uk.sports.yahoo.com/news/ranked-10-best-premier-league-110337106.html"
+   },
+   {
+    "outlet": "Between the Sticks",
+    "title": "Top 10 goalkeepers in Premier League history",
+    "url": "https://btsgoalies.com/2021/05/06/top-10-goalkeepers-in-premier-league-history/"
+   },
+   {
+    "outlet": "World Soccer Talk",
+    "title": "Top 10 goalkeepers in Premier League history",
+    "url": "https://worldsoccertalk.com/amp/news/top-10-goalkeepers-in-premier-league-history-20130312-CMS-51556.html"
+   },
+   {
+    "outlet": "Sports Illustrated",
+    "title": "The 20 Best Premier League Goalkeepers of All Time - Ranked",
+    "url": "https://www.si.com/soccer/best-premier-league-goalkeepers-all-time-ranked"
+   },
+   {
+    "outlet": "GiveMeSport (ranks 14-23 only readable)",
+    "title": "The 23 greatest goalkeepers in Premier League history have been ranked",
+    "url": "https://www.givemesport.com/football-soccer-premier-league-greatest-goalkeepers/"
+   },
+   {
+    "outlet": "Betway blog",
+    "title": "The best Premier League goalkeepers of all time",
+    "url": "https://blog.betway.com/football/premier-league/the-best-premier-league-goalkeepers-of-all-time/"
+   },
+   {
+    "outlet": "Sportsdunia",
+    "title": "Best Premier League Goalkeepers of all Time: Top 10 Ranked",
+    "url": "https://www.sportsdunia.com/football-analysis/top-10-premier-league-goalkeepers-of-all-time"
+   },
+   {
+    "outlet": "Vocal",
+    "title": "EPL's Best Goalkeepers: Ranking the All-Time Greats",
+    "url": "https://vocal.media/cleats/epl-s-best-goalkeepers-ranking-the-all-time-greats"
+   },
+   {
+    "outlet": "Wikipedia (evidence only)",
+    "title": "Premier League Golden Glove",
+    "url": "https://en.wikipedia.org/wiki/Premier_League_Golden_Glove"
+   }
+  ]
+ },
+ "players": [
+  {
+   "name": "John Terry",
+   "group": "DEF",
+   "lists": 6,
+   "avg_rank": 1.8,
+   "craig": true,
+   "consensus": 99,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2003/04",
+     "rating": 90,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2004/05",
+     "rating": 92,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "title with Chelsea, 36 games"
+     ]
+    },
+    {
+     "season": "2005/06",
+     "rating": 90,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Chelsea, 36 games"
+     ]
+    }
+   ],
+   "seasons": 19
+  },
+  {
+   "name": "Rio Ferdinand",
+   "group": "DEF",
+   "lists": 6,
+   "avg_rank": 2.8,
+   "craig": true,
+   "consensus": 97,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2004/05",
+     "rating": 86,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2006/07",
+     "rating": 89,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 33 games"
+     ]
+    },
+    {
+     "season": "2007/08",
+     "rating": 88,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 35 games"
+     ]
+    }
+   ],
+   "seasons": 20
+  },
+  {
+   "name": "Tony Adams",
+   "group": "DEF",
+   "lists": 6,
+   "avg_rank": 4.3,
+   "craig": true,
+   "consensus": 94,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1993/94",
+     "rating": 77,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "1995/96",
+     "rating": 77,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "1996/97",
+     "rating": 79,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 10
+  },
+  {
+   "name": "Nemanja Vidic",
+   "group": "DEF",
+   "lists": 6,
+   "avg_rank": 5.8,
+   "craig": true,
+   "consensus": 92,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2007/08",
+     "rating": 87,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 32 games"
+     ]
+    },
+    {
+     "season": "2008/09",
+     "rating": 90,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "Premier League Player of the Season",
+      "title with Man Utd, 34 games"
+     ]
+    },
+    {
+     "season": "2010/11",
+     "rating": 90,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "Premier League Player of the Season",
+      "title with Man Utd, 35 games"
+     ]
+    }
+   ],
+   "seasons": 9
+  },
+  {
+   "name": "Virgil van Dijk",
+   "group": "DEF",
+   "lists": 5,
+   "avg_rank": 2.6,
+   "craig": true,
+   "consensus": 87,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2018/19",
+     "rating": 91,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "Premier League Player of the Season"
+     ]
+    },
+    {
+     "season": "2019/20",
+     "rating": 89,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Liverpool, 38 games"
+     ]
+    },
+    {
+     "season": "2024/25",
+     "rating": 88,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Liverpool, 37 games"
+     ]
+    }
+   ],
+   "seasons": 11
+  },
+  {
+   "name": "Gary Neville",
+   "group": "DEF",
+   "lists": 5,
+   "avg_rank": 3.4,
+   "craig": true,
+   "consensus": 86,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1996/97",
+     "rating": 85,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 31 games"
+     ]
+    },
+    {
+     "season": "1998/99",
+     "rating": 88,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 34 games"
+     ]
+    },
+    {
+     "season": "2000/01",
+     "rating": 87,
+     "club": "Man Utd",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "title with Man Utd, 32 games"
+     ]
+    }
+   ],
+   "seasons": 17
+  },
+  {
+   "name": "Sol Campbell",
+   "group": "DEF",
+   "lists": 5,
+   "avg_rank": 6.4,
+   "craig": true,
+   "consensus": 81,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2001/02",
+     "rating": 80,
+     "club": "Arsenal",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Arsenal, 31 games"
+     ]
+    },
+    {
+     "season": "2002/03",
+     "rating": 87,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2003/04",
+     "rating": 88,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Arsenal, 35 games"
+     ]
+    }
+   ],
+   "seasons": 19
+  },
+  {
+   "name": "Vincent Kompany",
+   "group": "DEF",
+   "lists": 5,
+   "avg_rank": 6.6,
+   "craig": true,
+   "consensus": 81,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2010/11",
+     "rating": 83,
+     "club": "Man City",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2011/12",
+     "rating": 88,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "Premier League Player of the Season",
+      "title with Man City, 31 games"
+     ]
+    },
+    {
+     "season": "2013/14",
+     "rating": 84,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man City, 28 games"
+     ]
+    }
+   ],
+   "seasons": 11
+  },
+  {
+   "name": "Jaap Stam",
+   "group": "DEF",
+   "lists": 5,
+   "avg_rank": 10.4,
+   "craig": true,
+   "consensus": 74,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1998/99",
+     "rating": 86,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 30 games"
+     ]
+    },
+    {
+     "season": "1999/00",
+     "rating": 85,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 33 games"
+     ]
+    },
+    {
+     "season": "2000/01",
+     "rating": 80,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 4
+  },
+  {
+   "name": "Ashley Cole",
+   "group": "DEF",
+   "lists": 4,
+   "avg_rank": 2.2,
+   "craig": true,
+   "consensus": 78,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2002/03",
+     "rating": 86,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2003/04",
+     "rating": 89,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Arsenal, 32 games"
+     ]
+    }
+   ],
+   "seasons": 15
+  },
+  {
+   "name": "Kyle Walker",
+   "group": "DEF",
+   "lists": 4,
+   "avg_rank": 5.2,
+   "craig": true,
+   "consensus": 73,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2016/17",
+     "rating": 84,
+     "club": "Spurs",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2017/18",
+     "rating": 88,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man City, 32 games"
+     ]
+    }
+   ],
+   "seasons": 17
+  },
+  {
+   "name": "Lee Dixon",
+   "group": "DEF",
+   "lists": 4,
+   "avg_rank": 8.8,
+   "craig": true,
+   "consensus": 67,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1997/98",
+     "rating": 78,
+     "club": "Arsenal",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "title with Arsenal, 28 games"
+     ]
+    }
+   ],
+   "seasons": 10
+  },
+  {
+   "name": "Steve Bruce",
+   "group": "DEF",
+   "lists": 4,
+   "avg_rank": 9.8,
+   "craig": true,
+   "consensus": 65,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1993/94",
+     "rating": 85,
+     "club": "Man Utd",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "title with Man Utd, 41 games"
+     ]
+    },
+    {
+     "season": "1995/96",
+     "rating": 84,
+     "club": "Man Utd",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Man Utd, 30 games"
+     ]
+    }
+   ],
+   "seasons": 4
+  },
+  {
+   "name": "Ricardo Carvalho",
+   "group": "DEF",
+   "lists": 4,
+   "avg_rank": 10.8,
+   "craig": true,
+   "consensus": 64,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2004/05",
+     "rating": 82,
+     "club": "Chelsea",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "title with Chelsea, 25 games"
+     ]
+    },
+    {
+     "season": "2005/06",
+     "rating": 82,
+     "club": "Chelsea",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Chelsea, 24 games"
+     ]
+    }
+   ],
+   "seasons": 6
+  },
+  {
+   "name": "Jamie Carragher",
+   "group": "DEF",
+   "lists": 4,
+   "avg_rank": 11.0,
+   "craig": true,
+   "consensus": 63,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2005/06",
+     "rating": 86,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 17
+  },
+  {
+   "name": "Trent Alexander-Arnold",
+   "group": "DEF",
+   "lists": 3,
+   "avg_rank": 3.7,
+   "craig": false,
+   "consensus": 66,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2018/19",
+     "rating": 88,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2019/20",
+     "rating": 90,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Liverpool, 38 games"
+     ]
+    }
+   ],
+   "seasons": 9
+  },
+  {
+   "name": "Andy Robertson",
+   "group": "DEF",
+   "lists": 3,
+   "avg_rank": 7.7,
+   "craig": true,
+   "consensus": 59,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2018/19",
+     "rating": 88,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2019/20",
+     "rating": 91,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Liverpool, 36 games"
+     ]
+    }
+   ],
+   "seasons": 11
+  },
+  {
+   "name": "Denis Irwin",
+   "group": "DEF",
+   "lists": 3,
+   "avg_rank": 8.0,
+   "craig": true,
+   "consensus": 58,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1993/94",
+     "rating": 90,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 42 games"
+     ]
+    },
+    {
+     "season": "1995/96",
+     "rating": 88,
+     "club": "Man Utd",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Man Utd, 31 games"
+     ]
+    }
+   ],
+   "seasons": 11
+  },
+  {
+   "name": "Gary Pallister",
+   "group": "DEF",
+   "lists": 3,
+   "avg_rank": 9.7,
+   "craig": true,
+   "consensus": 55,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1993/94",
+     "rating": 88,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 41 games"
+     ]
+    },
+    {
+     "season": "1994/95",
+     "rating": 88,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 9
+  },
+  {
+   "name": "Ledley King",
+   "group": "DEF",
+   "lists": 3,
+   "avg_rank": 14.7,
+   "craig": true,
+   "consensus": 47,
+   "peakSource": "rating",
+   "peak": [
+    {
+     "season": "2005/06",
+     "rating": 78,
+     "club": "Spurs",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "his best-rated season (78), no honour in the data"
+     ]
+    }
+   ],
+   "seasons": 14
+  },
+  {
+   "name": "Sami Hyypia",
+   "group": "DEF",
+   "lists": 3,
+   "avg_rank": 15.3,
+   "craig": true,
+   "consensus": 46,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1999/00",
+     "rating": 83,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2001/02",
+     "rating": 89,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 10
+  },
+  {
+   "name": "Thierry Henry",
+   "group": "FWD",
+   "lists": 9,
+   "avg_rank": 1.0,
+   "craig": true,
+   "consensus": 100,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2002/03",
+     "rating": 98,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year"
+     ]
+    },
+    {
+     "season": "2003/04",
+     "rating": 99,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "Premier League Player of the Season",
+      "top scorer (30 goals)",
+      "title with Arsenal, 37 games"
+     ]
+    },
+    {
+     "season": "2005/06",
+     "rating": 97,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "FWA Footballer of the Year",
+      "Premier League Player of the Season",
+      "top scorer (27 goals)"
+     ]
+    }
+   ],
+   "seasons": 9
+  },
+  {
+   "name": "Alan Shearer",
+   "group": "FWD",
+   "lists": 9,
+   "avg_rank": 2.6,
+   "craig": true,
+   "consensus": 97,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1993/94",
+     "rating": 94,
+     "club": "Blackburn",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "FWA Footballer of the Year"
+     ]
+    },
+    {
+     "season": "1994/95",
+     "rating": 97,
+     "club": "Blackburn",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "Premier League Player of the Season",
+      "top scorer (34 goals)",
+      "title with Blackburn, 42 games"
+     ]
+    },
+    {
+     "season": "1996/97",
+     "rating": 95,
+     "club": "Newcastle",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "top scorer (25 goals)"
+     ]
+    }
+   ],
+   "seasons": 14
+  },
+  {
+   "name": "Wayne Rooney",
+   "group": "FWD",
+   "lists": 9,
+   "avg_rank": 3.9,
+   "craig": true,
+   "consensus": 95,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2006/07",
+     "rating": 94,
+     "club": "Man Utd",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Man Utd, 35 games"
+     ]
+    },
+    {
+     "season": "2009/10",
+     "rating": 96,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "Premier League Player of the Season"
+     ]
+    },
+    {
+     "season": "2011/12",
+     "rating": 93,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 16
+  },
+  {
+   "name": "Eric Cantona",
+   "group": "FWD",
+   "lists": 9,
+   "avg_rank": 7.2,
+   "craig": true,
+   "consensus": 90,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1993/94",
+     "rating": 91,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "title with Man Utd, 34 games"
+     ]
+    },
+    {
+     "season": "1995/96",
+     "rating": 92,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "FWA Footballer of the Year",
+      "title with Man Utd, 30 games"
+     ]
+    },
+    {
+     "season": "1996/97",
+     "rating": 91,
+     "club": "Man Utd",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Man Utd, 36 games"
+     ]
+    }
+   ],
+   "seasons": 5
+  },
+  {
+   "name": "Andy Cole",
+   "group": "FWD",
+   "lists": 9,
+   "avg_rank": 10.3,
+   "craig": true,
+   "consensus": 84,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1993/94",
+     "rating": 93,
+     "club": "Newcastle",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "top scorer (34 goals)"
+     ]
+    },
+    {
+     "season": "1998/99",
+     "rating": 91,
+     "club": "Man Utd",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Man Utd, 32 games"
+     ]
+    },
+    {
+     "season": "1999/00",
+     "rating": 91,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 28 games"
+     ]
+    }
+   ],
+   "seasons": 15
+  },
+  {
+   "name": "Sergio Aguero",
+   "group": "FWD",
+   "lists": 8,
+   "avg_rank": 5.4,
+   "craig": true,
+   "consensus": 93,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2014/15",
+     "rating": 95,
+     "club": "Man City",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "top scorer (26 goals)"
+     ]
+    },
+    {
+     "season": "2017/18",
+     "rating": 94,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man City, 25 games"
+     ]
+    },
+    {
+     "season": "2018/19",
+     "rating": 93,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man City, 33 games"
+     ]
+    }
+   ],
+   "seasons": 10
+  },
+  {
+   "name": "Dennis Bergkamp",
+   "group": "FWD",
+   "lists": 8,
+   "avg_rank": 8.1,
+   "craig": true,
+   "consensus": 88,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1997/98",
+     "rating": 93,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "title with Arsenal, 28 games"
+     ]
+    },
+    {
+     "season": "2001/02",
+     "rating": 82,
+     "club": "Arsenal",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "title with Arsenal, 33 games"
+     ]
+    },
+    {
+     "season": "2003/04",
+     "rating": 83,
+     "club": "Arsenal",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Arsenal, 28 games"
+     ]
+    }
+   ],
+   "seasons": 11
+  },
+  {
+   "name": "Harry Kane",
+   "group": "FWD",
+   "lists": 7,
+   "avg_rank": 7.0,
+   "craig": true,
+   "consensus": 90,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2016/17",
+     "rating": 96,
+     "club": "Spurs",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "top scorer (29 goals)"
+     ]
+    },
+    {
+     "season": "2017/18",
+     "rating": 95,
+     "club": "Spurs",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2022/23",
+     "rating": 94,
+     "club": "Spurs",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 11
+  },
+  {
+   "name": "Didier Drogba",
+   "group": "FWD",
+   "lists": 7,
+   "avg_rank": 10.6,
+   "craig": true,
+   "consensus": 84,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2005/06",
+     "rating": 91,
+     "club": "Chelsea",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Chelsea, 29 games"
+     ]
+    },
+    {
+     "season": "2006/07",
+     "rating": 94,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "top scorer (20 goals)"
+     ]
+    },
+    {
+     "season": "2009/10",
+     "rating": 94,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "top scorer (29 goals)",
+      "title with Chelsea, 32 games"
+     ]
+    }
+   ],
+   "seasons": 9
+  },
+  {
+   "name": "Michael Owen",
+   "group": "FWD",
+   "lists": 7,
+   "avg_rank": 10.6,
+   "craig": true,
+   "consensus": 84,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1997/98",
+     "rating": 90,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "Premier League Player of the Season",
+      "top scorer (18 goals)"
+     ]
+    },
+    {
+     "season": "1998/99",
+     "rating": 88,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "top scorer (18 goals)"
+     ]
+    }
+   ],
+   "seasons": 16
+  },
+  {
+   "name": "Ruud van Nistelrooy",
+   "group": "FWD",
+   "lists": 7,
+   "avg_rank": 13.4,
+   "craig": true,
+   "consensus": 79,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2001/02",
+     "rating": 93,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year"
+     ]
+    },
+    {
+     "season": "2002/03",
+     "rating": 96,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "Premier League Player of the Season",
+      "top scorer (25 goals)",
+      "title with Man Utd, 34 games"
+     ]
+    },
+    {
+     "season": "2003/04",
+     "rating": 93,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 5
+  },
+  {
+   "name": "Robbie Fowler",
+   "group": "FWD",
+   "lists": 7,
+   "avg_rank": 13.6,
+   "craig": true,
+   "consensus": 79,
+   "peakSource": "rating",
+   "peak": [
+    {
+     "season": "1995/96",
+     "rating": 92,
+     "club": "Liverpool",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "his best-rated season (92), no honour in the data"
+     ]
+    }
+   ],
+   "seasons": 15
+  },
+  {
+   "name": "Robin van Persie",
+   "group": "FWD",
+   "lists": 7,
+   "avg_rank": 13.9,
+   "craig": true,
+   "consensus": 78,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2011/12",
+     "rating": 96,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "top scorer (30 goals)"
+     ]
+    },
+    {
+     "season": "2012/13",
+     "rating": 95,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "top scorer (26 goals)",
+      "title with Man Utd, 38 games"
+     ]
+    }
+   ],
+   "seasons": 11
+  },
+  {
+   "name": "Ian Wright",
+   "group": "FWD",
+   "lists": 7,
+   "avg_rank": 15.0,
+   "craig": true,
+   "consensus": 77,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1992/93",
+     "rating": 80,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "1996/97",
+     "rating": 88,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "1997/98",
+     "rating": 87,
+     "club": "Arsenal",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Arsenal, 24 games"
+     ]
+    }
+   ],
+   "seasons": 7
+  },
+  {
+   "name": "Mohamed Salah",
+   "group": "FWD",
+   "lists": 6,
+   "avg_rank": 3.5,
+   "craig": true,
+   "consensus": 96,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2017/18",
+     "rating": 97,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "Premier League Player of the Season",
+      "top scorer (32 goals)"
+     ]
+    },
+    {
+     "season": "2021/22",
+     "rating": 97,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "top scorer (23 goals)"
+     ]
+    },
+    {
+     "season": "2024/25",
+     "rating": 97,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "Premier League Player of the Season",
+      "top scorer (29 goals)",
+      "title with Liverpool, 38 games"
+     ]
+    }
+   ],
+   "seasons": 11
+  },
+  {
+   "name": "Luis Suarez",
+   "group": "FWD",
+   "lists": 6,
+   "avg_rank": 13.2,
+   "craig": true,
+   "consensus": 80,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2012/13",
+     "rating": 88,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2013/14",
+     "rating": 95,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "Premier League Player of the Season",
+      "top scorer (31 goals)"
+     ]
+    }
+   ],
+   "seasons": 4
+  },
+  {
+   "name": "Teddy Sheringham",
+   "group": "FWD",
+   "lists": 6,
+   "avg_rank": 15.0,
+   "craig": true,
+   "consensus": 77,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1992/93",
+     "rating": 87,
+     "club": "Spurs",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "top scorer (22 goals)"
+     ]
+    },
+    {
+     "season": "1999/00",
+     "rating": 81,
+     "club": "Man Utd",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Man Utd, 27 games"
+     ]
+    },
+    {
+     "season": "2000/01",
+     "rating": 90,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "title with Man Utd, 29 games"
+     ]
+    }
+   ],
+   "seasons": 14
+  },
+  {
+   "name": "Gianfranco Zola",
+   "group": "FWD",
+   "lists": 6,
+   "avg_rank": 17.0,
+   "craig": true,
+   "consensus": 73,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1996/97",
+     "rating": 81,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "FWA Footballer of the Year"
+     ]
+    }
+   ],
+   "seasons": 7
+  },
+  {
+   "name": "Cristiano Ronaldo",
+   "group": "FWD",
+   "lists": 5,
+   "avg_rank": 3.6,
+   "craig": true,
+   "consensus": 86,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2006/07",
+     "rating": 96,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "Premier League Player of the Season",
+      "title with Man Utd, 34 games"
+     ]
+    },
+    {
+     "season": "2007/08",
+     "rating": 97,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "Premier League Player of the Season",
+      "top scorer (31 goals)",
+      "title with Man Utd, 34 games"
+     ]
+    },
+    {
+     "season": "2008/09",
+     "rating": 96,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 33 games"
+     ]
+    }
+   ],
+   "seasons": 8
+  },
+  {
+   "name": "Erling Haaland",
+   "group": "FWD",
+   "lists": 5,
+   "avg_rank": 13.8,
+   "craig": true,
+   "consensus": 69,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2022/23",
+     "rating": 98,
+     "club": "Man City",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "Premier League Player of the Season",
+      "top scorer (36 goals)",
+      "title with Man City, 35 games"
+     ]
+    },
+    {
+     "season": "2023/24",
+     "rating": 96,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "top scorer (27 goals)",
+      "title with Man City, 31 games"
+     ]
+    },
+    {
+     "season": "2025/26",
+     "rating": 97,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "top scorer (27 goals)"
+     ]
+    }
+   ],
+   "seasons": 4
+  },
+  {
+   "name": "Les Ferdinand",
+   "group": "FWD",
+   "lists": 5,
+   "avg_rank": 21.2,
+   "craig": false,
+   "consensus": 56,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1995/96",
+     "rating": 92,
+     "club": "Newcastle",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year"
+     ]
+    }
+   ],
+   "seasons": 13
+  },
+  {
+   "name": "Eden Hazard",
+   "group": "FWD",
+   "lists": 4,
+   "avg_rank": 7.8,
+   "craig": true,
+   "consensus": 69,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2013/14",
+     "rating": 93,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2014/15",
+     "rating": 95,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "Premier League Player of the Season",
+      "title with Chelsea, 38 games"
+     ]
+    }
+   ],
+   "seasons": 7
+  },
+  {
+   "name": "Sadio Mane",
+   "group": "FWD",
+   "lists": 4,
+   "avg_rank": 16.0,
+   "craig": true,
+   "consensus": 55,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2018/19",
+     "rating": 94,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "top scorer (22 goals)"
+     ]
+    },
+    {
+     "season": "2019/20",
+     "rating": 91,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Liverpool, 35 games"
+     ]
+    }
+   ],
+   "seasons": 8
+  },
+  {
+   "name": "Jimmy Floyd Hasselbaink",
+   "group": "FWD",
+   "lists": 4,
+   "avg_rank": 21.8,
+   "craig": true,
+   "consensus": 45,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1998/99",
+     "rating": 90,
+     "club": "Leeds",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "top scorer (18 goals)"
+     ]
+    },
+    {
+     "season": "2000/01",
+     "rating": 90,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "top scorer (23 goals)"
+     ]
+    }
+   ],
+   "seasons": 9
+  },
+  {
+   "name": "Jermain Defoe",
+   "group": "FWD",
+   "lists": 4,
+   "avg_rank": 23.0,
+   "craig": true,
+   "consensus": 43,
+   "peakSource": "rating",
+   "peak": [
+    {
+     "season": "2009/10",
+     "rating": 82,
+     "club": "Spurs",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "his best-rated season (82), no honour in the data"
+     ]
+    }
+   ],
+   "seasons": 19
+  },
+  {
+   "name": "Fernando Torres",
+   "group": "FWD",
+   "lists": 3,
+   "avg_rank": 17.7,
+   "craig": false,
+   "consensus": 42,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2007/08",
+     "rating": 91,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2008/09",
+     "rating": 91,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 7
+  },
+  {
+   "name": "Dwight Yorke",
+   "group": "FWD",
+   "lists": 3,
+   "avg_rank": 19.0,
+   "craig": true,
+   "consensus": 40,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1998/99",
+     "rating": 95,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "Premier League Player of the Season",
+      "top scorer (18 goals)",
+      "title with Man Utd, 33 games"
+     ]
+    },
+    {
+     "season": "1999/00",
+     "rating": 91,
+     "club": "Man Utd",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "title with Man Utd, 32 games"
+     ]
+    }
+   ],
+   "seasons": 15
+  },
+  {
+   "name": "Jamie Vardy",
+   "group": "FWD",
+   "lists": 3,
+   "avg_rank": 19.7,
+   "craig": true,
+   "consensus": 39,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2015/16",
+     "rating": 91,
+     "club": "Leicester",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "FWA Footballer of the Year",
+      "Premier League Player of the Season",
+      "title with Leicester, 36 games"
+     ]
+    },
+    {
+     "season": "2019/20",
+     "rating": 87,
+     "club": "Leicester",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "top scorer (23 goals)"
+     ]
+    }
+   ],
+   "seasons": 10
+  },
+  {
+   "name": "Dimitar Berbatov",
+   "group": "FWD",
+   "lists": 3,
+   "avg_rank": 22.0,
+   "craig": false,
+   "consensus": 35,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2008/09",
+     "rating": 89,
+     "club": "Man Utd",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Man Utd, 32 games"
+     ]
+    },
+    {
+     "season": "2010/11",
+     "rating": 91,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "top scorer (20 goals)",
+      "title with Man Utd, 32 games"
+     ]
+    }
+   ],
+   "seasons": 8
+  },
+  {
+   "name": "Peter Schmeichel",
+   "group": "GK",
+   "lists": 8,
+   "avg_rank": 1.43,
+   "craig": true,
+   "consensus": 99,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1992/93",
+     "rating": 88,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 42 games"
+     ]
+    },
+    {
+     "season": "1993/94",
+     "rating": 90,
+     "club": "Man Utd",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Man Utd, 40 games"
+     ]
+    },
+    {
+     "season": "1995/96",
+     "rating": 91,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "Premier League Player of the Season",
+      "title with Man Utd, 36 games"
+     ]
+    }
+   ],
+   "seasons": 9
+  },
+  {
+   "name": "Petr Cech",
+   "group": "GK",
+   "lists": 8,
+   "avg_rank": 1.86,
+   "craig": true,
+   "consensus": 99,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2004/05",
+     "rating": 92,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "Golden Glove",
+      "title with Chelsea, 35 games"
+     ]
+    },
+    {
+     "season": "2009/10",
+     "rating": 90,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "Golden Glove",
+      "title with Chelsea, 34 games"
+     ]
+    },
+    {
+     "season": "2013/14",
+     "rating": 90,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "Golden Glove"
+     ]
+    }
+   ],
+   "seasons": 15
+  },
+  {
+   "name": "David Seaman",
+   "group": "GK",
+   "lists": 7,
+   "avg_rank": 3.83,
+   "craig": true,
+   "consensus": 95,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1996/97",
+     "rating": 82,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "1997/98",
+     "rating": 81,
+     "club": "Arsenal",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Arsenal, 31 games"
+     ]
+    }
+   ],
+   "seasons": 12
+  },
+  {
+   "name": "Edwin van der Sar",
+   "group": "GK",
+   "lists": 7,
+   "avg_rank": 4.67,
+   "craig": true,
+   "consensus": 94,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2006/07",
+     "rating": 87,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 32 games"
+     ]
+    },
+    {
+     "season": "2008/09",
+     "rating": 89,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "Golden Glove",
+      "title with Man Utd, 33 games"
+     ]
+    },
+    {
+     "season": "2010/11",
+     "rating": 87,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 33 games"
+     ]
+    }
+   ],
+   "seasons": 10
+  },
+  {
+   "name": "David de Gea",
+   "group": "GK",
+   "lists": 7,
+   "avg_rank": 5.33,
+   "craig": true,
+   "consensus": 93,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2012/13",
+     "rating": 85,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 28 games"
+     ]
+    },
+    {
+     "season": "2015/16",
+     "rating": 86,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2017/18",
+     "rating": 88,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "Golden Glove"
+     ]
+    }
+   ],
+   "seasons": 12
+  },
+  {
+   "name": "Shay Given",
+   "group": "GK",
+   "lists": 7,
+   "avg_rank": 8.67,
+   "craig": true,
+   "consensus": 87,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2001/02",
+     "rating": 81,
+     "club": "Newcastle",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2005/06",
+     "rating": 79,
+     "club": "Newcastle",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 19
+  },
+  {
+   "name": "Joe Hart",
+   "group": "GK",
+   "lists": 6,
+   "avg_rank": 8.6,
+   "craig": true,
+   "consensus": 87,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2011/12",
+     "rating": 91,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "Golden Glove",
+      "title with Man City, 38 games"
+     ]
+    },
+    {
+     "season": "2012/13",
+     "rating": 91,
+     "club": "Man City",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "Golden Glove"
+     ]
+    },
+    {
+     "season": "2014/15",
+     "rating": 90,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "Golden Glove"
+     ]
+    }
+   ],
+   "seasons": 12
+  },
+  {
+   "name": "Brad Friedel",
+   "group": "GK",
+   "lists": 6,
+   "avg_rank": 9.8,
+   "craig": true,
+   "consensus": 85,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2002/03",
+     "rating": 79,
+     "club": "Blackburn",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 16
+  },
+  {
+   "name": "Alisson",
+   "group": "GK",
+   "lists": 5,
+   "avg_rank": 4.25,
+   "craig": true,
+   "consensus": 85,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2018/19",
+     "rating": 89,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "Golden Glove"
+     ]
+    },
+    {
+     "season": "2019/20",
+     "rating": 86,
+     "club": "Liverpool",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Liverpool, 29 games"
+     ]
+    },
+    {
+     "season": "2021/22",
+     "rating": 87,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "Golden Glove"
+     ]
+    }
+   ],
+   "seasons": 8
+  },
+  {
+   "name": "Ederson",
+   "group": "GK",
+   "lists": 5,
+   "avg_rank": 5.5,
+   "craig": true,
+   "consensus": 82,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2018/19",
+     "rating": 89,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man City, 38 games"
+     ]
+    },
+    {
+     "season": "2019/20",
+     "rating": 90,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "Golden Glove"
+     ]
+    },
+    {
+     "season": "2020/21",
+     "rating": 92,
+     "club": "Man City",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "Golden Glove",
+      "title with Man City, 36 games"
+     ]
+    }
+   ],
+   "seasons": 8
+  },
+  {
+   "name": "Pepe Reina",
+   "group": "GK",
+   "lists": 4,
+   "avg_rank": 9.0,
+   "craig": false,
+   "consensus": 67,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2006/07",
+     "rating": 91,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "Golden Glove"
+     ]
+    },
+    {
+     "season": "2007/08",
+     "rating": 91,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "Golden Glove"
+     ]
+    }
+   ],
+   "seasons": 9
+  },
+  {
+   "name": "David James",
+   "group": "GK",
+   "lists": 4,
+   "avg_rank": 9.75,
+   "craig": false,
+   "consensus": 65,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1995/96",
+     "rating": 86,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2007/08",
+     "rating": 80,
+     "club": "Portsmouth",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 18
+  },
+  {
+   "name": "Jens Lehmann",
+   "group": "GK",
+   "lists": 4,
+   "avg_rank": 11.33,
+   "craig": true,
+   "consensus": 63,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2003/04",
+     "rating": 89,
+     "club": "Arsenal",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "title with Arsenal, 38 games"
+     ]
+    }
+   ],
+   "seasons": 6
+  },
+  {
+   "name": "Mark Schwarzer",
+   "group": "GK",
+   "lists": 4,
+   "avg_rank": 14.5,
+   "craig": false,
+   "consensus": 57,
+   "peakSource": "rating",
+   "peak": [
+    {
+     "season": "2012/13",
+     "rating": 81,
+     "club": "Fulham",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "his best-rated season (81), no honour in the data"
+     ]
+    }
+   ],
+   "seasons": 18
+  },
+  {
+   "name": "Nigel Martyn",
+   "group": "GK",
+   "lists": 4,
+   "avg_rank": 14.5,
+   "craig": false,
+   "consensus": 57,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1998/99",
+     "rating": 84,
+     "club": "Leeds",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "1999/00",
+     "rating": 85,
+     "club": "Leeds",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 11
+  },
+  {
+   "name": "Neville Southall",
+   "group": "GK",
+   "lists": 4,
+   "avg_rank": 15.75,
+   "craig": false,
+   "consensus": 55,
+   "peakSource": "rating",
+   "peak": [
+    {
+     "season": "1993/94",
+     "rating": 80,
+     "club": "Everton",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "his best-rated season (80), no honour in the data"
+     ]
+    }
+   ],
+   "seasons": 7
+  },
+  {
+   "name": "Hugo Lloris",
+   "group": "GK",
+   "lists": 3,
+   "avg_rank": 14.0,
+   "craig": true,
+   "consensus": 48,
+   "peakSource": "rating",
+   "peak": [
+    {
+     "season": "2017/18",
+     "rating": 88,
+     "club": "Spurs",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "his best-rated season (88), no honour in the data"
+     ]
+    }
+   ],
+   "seasons": 11
+  },
+  {
+   "name": "Jussi Jaaskelainen",
+   "group": "GK",
+   "lists": 3,
+   "avg_rank": 17.3,
+   "craig": false,
+   "consensus": 43,
+   "peakSource": "rating",
+   "peak": [
+    {
+     "season": "2005/06",
+     "rating": 82,
+     "club": "Bolton",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "his best-rated season (82), no honour in the data"
+     ]
+    }
+   ],
+   "seasons": 14
+  },
+  {
+   "name": "Tim Howard",
+   "group": "GK",
+   "lists": 3,
+   "avg_rank": 17.67,
+   "craig": false,
+   "consensus": 42,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2003/04",
+     "rating": 77,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 13
+  },
+  {
+   "name": "Thibaut Courtois",
+   "group": "GK",
+   "lists": 3,
+   "avg_rank": 18.0,
+   "craig": false,
+   "consensus": 42,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2014/15",
+     "rating": 82,
+     "club": "Chelsea",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Chelsea, 32 games"
+     ]
+    },
+    {
+     "season": "2016/17",
+     "rating": 85,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "Golden Glove",
+      "title with Chelsea, 36 games"
+     ]
+    }
+   ],
+   "seasons": 4
+  },
+  {
+   "name": "Steven Gerrard",
+   "group": "MID",
+   "lists": 6,
+   "avg_rank": 2.8,
+   "craig": true,
+   "consensus": 97,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2005/06",
+     "rating": 91,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year"
+     ]
+    },
+    {
+     "season": "2007/08",
+     "rating": 92,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2008/09",
+     "rating": 94,
+     "club": "Liverpool",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "FWA Footballer of the Year"
+     ]
+    }
+   ],
+   "seasons": 17
+  },
+  {
+   "name": "Frank Lampard",
+   "group": "MID",
+   "lists": 6,
+   "avg_rank": 3.0,
+   "craig": true,
+   "consensus": 97,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2003/04",
+     "rating": 93,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2004/05",
+     "rating": 97,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "FWA Footballer of the Year",
+      "Premier League Player of the Season",
+      "title with Chelsea, 38 games"
+     ]
+    },
+    {
+     "season": "2005/06",
+     "rating": 96,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Chelsea, 35 games"
+     ]
+    }
+   ],
+   "seasons": 20
+  },
+  {
+   "name": "Paul Scholes",
+   "group": "MID",
+   "lists": 6,
+   "avg_rank": 3.4,
+   "craig": true,
+   "consensus": 96,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1998/99",
+     "rating": 90,
+     "club": "Man Utd",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "title with Man Utd, 31 games"
+     ]
+    },
+    {
+     "season": "1999/00",
+     "rating": 90,
+     "club": "Man Utd",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Man Utd, 31 games"
+     ]
+    },
+    {
+     "season": "2002/03",
+     "rating": 90,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 33 games"
+     ]
+    }
+   ],
+   "seasons": 19
+  },
+  {
+   "name": "David Silva",
+   "group": "MID",
+   "lists": 6,
+   "avg_rank": 6.4,
+   "craig": true,
+   "consensus": 91,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2011/12",
+     "rating": 90,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man City, 36 games"
+     ]
+    },
+    {
+     "season": "2017/18",
+     "rating": 89,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man City, 29 games"
+     ]
+    },
+    {
+     "season": "2019/20",
+     "rating": 88,
+     "club": "Man City",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 10
+  },
+  {
+   "name": "David Beckham",
+   "group": "MID",
+   "lists": 6,
+   "avg_rank": 7.4,
+   "craig": true,
+   "consensus": 89,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1996/97",
+     "rating": 92,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 36 games"
+     ]
+    },
+    {
+     "season": "1997/98",
+     "rating": 95,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "1998/99",
+     "rating": 93,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 34 games"
+     ]
+    }
+   ],
+   "seasons": 9
+  },
+  {
+   "name": "Yaya Toure",
+   "group": "MID",
+   "lists": 6,
+   "avg_rank": 8.2,
+   "craig": true,
+   "consensus": 88,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2011/12",
+     "rating": 89,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man City, 32 games"
+     ]
+    },
+    {
+     "season": "2013/14",
+     "rating": 93,
+     "club": "Man City",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man City, 35 games"
+     ]
+    }
+   ],
+   "seasons": 8
+  },
+  {
+   "name": "Cesc Fabregas",
+   "group": "MID",
+   "lists": 6,
+   "avg_rank": 8.8,
+   "craig": true,
+   "consensus": 87,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2007/08",
+     "rating": 91,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2009/10",
+     "rating": 91,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2014/15",
+     "rating": 86,
+     "club": "Chelsea",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Chelsea, 34 games"
+     ]
+    }
+   ],
+   "seasons": 12
+  },
+  {
+   "name": "Kevin De Bruyne",
+   "group": "MID",
+   "lists": 5,
+   "avg_rank": 1.5,
+   "craig": true,
+   "consensus": 89,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2019/20",
+     "rating": 96,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "Premier League Player of the Season"
+     ]
+    },
+    {
+     "season": "2020/21",
+     "rating": 93,
+     "club": "Man City",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "title with Man City, 25 games"
+     ]
+    },
+    {
+     "season": "2021/22",
+     "rating": 94,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "Premier League Player of the Season",
+      "title with Man City, 30 games"
+     ]
+    }
+   ],
+   "seasons": 11
+  },
+  {
+   "name": "Ryan Giggs",
+   "group": "MID",
+   "lists": 5,
+   "avg_rank": 4.2,
+   "craig": true,
+   "consensus": 85,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1992/93",
+     "rating": 92,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 41 games"
+     ]
+    },
+    {
+     "season": "1997/98",
+     "rating": 92,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2001/02",
+     "rating": 90,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 22
+  },
+  {
+   "name": "Roy Keane",
+   "group": "MID",
+   "lists": 5,
+   "avg_rank": 4.5,
+   "craig": true,
+   "consensus": 84,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1999/00",
+     "rating": 91,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "title with Man Utd, 29 games"
+     ]
+    },
+    {
+     "season": "2000/01",
+     "rating": 89,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man Utd, 28 games"
+     ]
+    },
+    {
+     "season": "2001/02",
+     "rating": 86,
+     "club": "Man Utd",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    }
+   ],
+   "seasons": 14
+  },
+  {
+   "name": "Patrick Vieira",
+   "group": "MID",
+   "lists": 5,
+   "avg_rank": 4.8,
+   "craig": true,
+   "consensus": 84,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "1998/99",
+     "rating": 85,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2000/01",
+     "rating": 90,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "Premier League Player of the Season"
+     ]
+    },
+    {
+     "season": "2003/04",
+     "rating": 86,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Arsenal, 29 games"
+     ]
+    }
+   ],
+   "seasons": 11
+  },
+  {
+   "name": "Gareth Bale",
+   "group": "MID",
+   "lists": 5,
+   "avg_rank": 9.2,
+   "craig": true,
+   "consensus": 76,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2010/11",
+     "rating": 85,
+     "club": "Spurs",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year"
+     ]
+    },
+    {
+     "season": "2011/12",
+     "rating": 85,
+     "club": "Spurs",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year"
+     ]
+    },
+    {
+     "season": "2012/13",
+     "rating": 92,
+     "club": "Spurs",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "Premier League Player of the Season"
+     ]
+    }
+   ],
+   "seasons": 7
+  },
+  {
+   "name": "Claude Makelele",
+   "group": "MID",
+   "lists": 5,
+   "avg_rank": 11.2,
+   "craig": true,
+   "consensus": 73,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2004/05",
+     "rating": 89,
+     "club": "Chelsea",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "title with Chelsea, 36 games"
+     ]
+    },
+    {
+     "season": "2005/06",
+     "rating": 86,
+     "club": "Chelsea",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Chelsea, 31 games"
+     ]
+    }
+   ],
+   "seasons": 5
+  },
+  {
+   "name": "N'Golo Kante",
+   "group": "MID",
+   "lists": 4,
+   "avg_rank": 8.3,
+   "craig": true,
+   "consensus": 68,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2015/16",
+     "rating": 84,
+     "club": "Leicester",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Leicester, 37 games"
+     ]
+    },
+    {
+     "season": "2016/17",
+     "rating": 88,
+     "club": "Chelsea",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "PFA Players' Player of the Year",
+      "FWA Footballer of the Year",
+      "Premier League Player of the Season",
+      "title with Chelsea, 35 games"
+     ]
+    }
+   ],
+   "seasons": 8
+  },
+  {
+   "name": "Michael Carrick",
+   "group": "MID",
+   "lists": 4,
+   "avg_rank": 12.7,
+   "craig": true,
+   "consensus": 60,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2007/08",
+     "rating": 86,
+     "club": "Man Utd",
+     "honour": false,
+     "primary": false,
+     "evidence": [
+      "title with Man Utd, 31 games"
+     ]
+    },
+    {
+     "season": "2008/09",
+     "rating": 86,
+     "club": "Man Utd",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "title with Man Utd, 28 games"
+     ]
+    }
+   ],
+   "seasons": 18
+  },
+  {
+   "name": "Rodri",
+   "group": "MID",
+   "lists": 3,
+   "avg_rank": 7.3,
+   "craig": false,
+   "consensus": 60,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2022/23",
+     "rating": 90,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man City, 36 games"
+     ]
+    },
+    {
+     "season": "2023/24",
+     "rating": 91,
+     "club": "Man City",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man City, 34 games"
+     ]
+    }
+   ],
+   "seasons": 7
+  },
+  {
+   "name": "Robert Pires",
+   "group": "MID",
+   "lists": 3,
+   "avg_rank": 11.0,
+   "craig": true,
+   "consensus": 53,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2001/02",
+     "rating": 92,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": true,
+     "evidence": [
+      "PFA Team of the Year",
+      "FWA Footballer of the Year",
+      "title with Arsenal, 28 games"
+     ]
+    },
+    {
+     "season": "2003/04",
+     "rating": 93,
+     "club": "Arsenal",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Arsenal, 36 games"
+     ]
+    }
+   ],
+   "seasons": 7
+  },
+  {
+   "name": "Michael Essien",
+   "group": "MID",
+   "lists": 3,
+   "avg_rank": 14.3,
+   "craig": false,
+   "consensus": 48,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2005/06",
+     "rating": 85,
+     "club": "Chelsea",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "title with Chelsea, 31 games"
+     ]
+    }
+   ],
+   "seasons": 8
+  },
+  {
+   "name": "Fernandinho",
+   "group": "MID",
+   "lists": 3,
+   "avg_rank": 14.7,
+   "craig": false,
+   "consensus": 47,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2017/18",
+     "rating": 86,
+     "club": "Man City",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "title with Man City, 34 games"
+     ]
+    },
+    {
+     "season": "2018/19",
+     "rating": 84,
+     "club": "Man City",
+     "honour": true,
+     "primary": false,
+     "evidence": [
+      "PFA Team of the Year",
+      "title with Man City, 29 games"
+     ]
+    }
+   ],
+   "seasons": 9
+  },
+  {
+   "name": "Gareth Barry",
+   "group": "MID",
+   "lists": 3,
+   "avg_rank": 18.5,
+   "craig": true,
+   "consensus": 41,
+   "peakSource": "honours",
+   "peak": [
+    {
+     "season": "2011/12",
+     "rating": 84,
+     "club": "Man City",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "title with Man City, 34 games"
+     ]
+    }
+   ],
+   "seasons": 21
+  },
+  {
+   "name": "Mesut Ozil",
+   "group": "MID",
+   "lists": 1,
+   "avg_rank": null,
+   "craig": true,
+   "consensus": 30,
+   "peakSource": "rating",
+   "peak": [
+    {
+     "season": "2015/16",
+     "rating": 90,
+     "club": "Arsenal",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "his best-rated season (90), no honour in the data"
+     ]
+    }
+   ],
+   "seasons": 7
+  },
+  {
+   "name": "Luka Modric",
+   "group": "MID",
+   "lists": 1,
+   "avg_rank": null,
+   "craig": true,
+   "consensus": 30,
+   "peakSource": "rating",
+   "peak": [
+    {
+     "season": "2011/12",
+     "rating": 81,
+     "club": "Spurs",
+     "honour": false,
+     "primary": true,
+     "evidence": [
+      "his best-rated season (81), no honour in the data"
+     ]
+    }
+   ],
+   "seasons": 4
+  }
+ ]
+}
