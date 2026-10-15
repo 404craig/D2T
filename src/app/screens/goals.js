@@ -120,7 +120,8 @@
     host.querySelector('.tnum').textContent = t; setGap(host, t);
   }
   // the tally (UI_SPEC 8f): "38 goals to go" in yellow under "Player 7 of 11", and the big scored number over "/352 GOALS"
-  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = toGo(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v !== TARGET && Math.abs(v - TARGET) <= 20); heat(host, v); }
+  // the tally pulses within 20 under the target only, while it can still be hit: over is over (Craig, 15 Oct)
+  function setGap(host, v) { const g = host.querySelector('.taway'); g.textContent = toGo(v); g.className = 'taway' + (v > TARGET ? ' overt' : v === TARGET ? ' exact' : ''); host.querySelector('.g4-tally').classList.toggle('near', v < TARGET && TARGET - v <= 20); heat(host, v); }
   // the bar is yellow to half the target, then warms to red at the target, its colour tied to the whole track; red once past it (Craig, 14 Oct)
   function heat(host, v) {
     const tr = host.querySelector('.g4-track'), fill = tr && tr.querySelector('.fill'); if (!fill) return;
@@ -134,13 +135,14 @@
   const ARROW = D2T.ICON.respin;   // the respin arrow every bar uses
   const LINES = '<svg class="lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect x="3" y="2.5" width="94" height="95" rx="1.5" stroke-width="0.5"/><line x1="3" y1="50" x2="97" y2="50" stroke-width="0.5"/><rect x="26" y="2.5" width="48" height="14" stroke-width="0.5"/><rect x="38" y="2.5" width="24" height="5" stroke-width="0.5"/><rect x="26" y="83.5" width="48" height="14" stroke-width="0.5"/><rect x="38" y="92.5" width="24" height="5" stroke-width="0.5"/></svg>';
 
-  let timers = [], rafs = [];
+  let timers = [], rafs = [], booed = false;   // booed: the crowd has already booed going over this game
   const later = (fn, ms) => { const t = setTimeout(fn, ms); timers.push(t); return t; };
 
   D2T.screen('goals433', {
     title: 'Goal Rush', theme: 'black',
     mount(root) {
       const reduced = D2T.reduced(), G4 = D2T.game.g433;
+      booed = false;
       const fresh = () => { G4.newGame(); return { filled: [], respins: G4.RESPINS, cands: null, recorded: false, gift: null, formation: G4.pickFormation(), revealed: false }; };
       let S = D2T.state.g433 && Array.isArray(D2T.state.g433.filled) ? D2T.state.g433 : (D2T.state.g433 = fresh());
       // a game saved by 433 Goals carries on as a 4-3-3 with no reveal
@@ -532,6 +534,8 @@
       // the number, the to-go text and the bar count up together; crossing the target = race past the line, burst on it, then the bar re-scales
       function tickTo(from, to, done) {
         const num = wrap.querySelector('.tnum'), tr = wrap.querySelector('.g4-track');
+        // going over boos at once (Craig, 15 Oct), not at the end of the game
+        if (from <= TARGET && to > TARGET && !booed) { booed = true; snd('bust'); }
         if (reduced) { paintBar(wrap, to); done(); return; }
         const crosses = from <= TARGET && to > TARGET, dur = crosses ? 1500 : 950, t0 = performance.now();
         const fill = tr.querySelector('.fill'), mark = tr.querySelector('.mark'), ovr = tr.querySelector('.ovr');
@@ -607,8 +611,8 @@
           wrap.querySelector('.taway').animate([{ transform: 'scale(1)' }, { transform: 'scale(1.3)' }, { transform: 'scale(1)' }], { duration: 700, iterations: 4 });
           fade([m, d, ghost], 3300);
         } else {
-          // BLOWN PAST: the bar has raced past and re-scaled; a grey stamp says how far over
-          snd('bust');
+          // BLOWN PAST: the bar has raced past and re-scaled; a grey stamp says how far over (the boo came as it went over)
+          if (!booed) { booed = true; snd('bust'); }
           const m = msg('over', '+' + (-gap), `Blown past ${TARGET}`);
           m.animate([{ opacity: 0, transform: 'translateX(-60px) skewX(-12deg)' }, { opacity: 1, transform: 'translateX(8px) skewX(-6deg)', offset: 0.6 }, { opacity: 1, transform: 'none' }], { duration: 600, easing: 'ease-out', fill: 'backwards' });
           fade([m], 2800);
@@ -652,7 +656,7 @@
         endSheet.open();
       }
       let endSheet = null;
-      function newGame() { if (endSheet) { endSheet.close(); endSheet = null; } S = D2T.state.g433 = fresh(); setShape(S.formation); save(); sel = null; busy = false; wrap.querySelector('.g4-track').classList.remove('glow'); render(); reveal(); }
+      function newGame() { if (endSheet) { endSheet.close(); endSheet = null; } booed = false; S = D2T.state.g433 = fresh(); setShape(S.formation); save(); sel = null; busy = false; wrap.querySelector('.g4-track').classList.remove('glow'); render(); reveal(); }
 
       // ---------- the target reveal (UI_SPEC 8f): once per game, never after a refresh; tap to skip, none with reduced motion ----------
       // a dim layer, "THIS GAME'S TARGET", the eight formations rolling through the big number, slowing to stop on this one
