@@ -192,12 +192,6 @@
   };
   GAME.LV = LV;
   // nationality flags (12 Oct): drawn pictures, never emoji (assets/flags, embedded by build.py as D2T_FLAGS and D2T_NATIONS)
-  // how many purple cards a real season has (the season's top N; the rare reveal says SEASON TOP N, Craig 15 Oct)
-  const purpleCount = {};
-  GAME.purpleTop = (season) => {
-    if (!(season in purpleCount)) { const S0 = G.seasons[season]; purpleCount[season] = S0 ? S0.players.filter((p) => p.lv === 3).length : 0; }
-    return purpleCount[season];
-  };
   GAME.flag = (nat) => { const code = (window.D2T_NATIONS || {})[nat]; return (code && (window.D2T_FLAGS || {})[code]) || ''; };
 
   // ---------- the run ----------
