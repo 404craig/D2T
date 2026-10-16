@@ -1,0 +1,151 @@
+DROP2TOP: GAME RULES, ALGORITHMS AND DATA
+Taken from the code and the project notes on the current build, 16 Oct 2026.
+
+
+==============================================================
+THE ENGINE BEHIND CLASSIC, THE DAILY AND CLUB X
+==============================================================
+
+Seeded randomness
+- Every random draw comes from the run's seed, so the same seed and the same
+  choices always replay identically. A refresh can never change a card or a result.
+
+The run
+- A club spin, then 17 transfer rolls of three cards each: 3 in the Summer window,
+  1 every 3 games, 3 before January, then 1 every 3 games again.
+- 5 respins.
+
+Cards
+- All three cards in a roll come from the same season.
+- Each player had 10+ league games that season, isn't in your squad and hasn't
+  already been offered in the run.
+
+Levels
+- Bronze is under 70, silver 70 to 79, gold 80+.
+- Purple is about the season's top 10 to 15: the top 3 forwards by goals, top 3
+  midfielders, top 3 defenders and top 2 keepers, plus honours winners and icons.
+- Legend is the season's top 3 plus all-time icons in their peak seasons.
+- Draw odds: bronze 34.7%, silver 21.3%, gold 40%, purple 3%, legend 1%.
+- From gold up, higher ratings come up more often: a 93 twice as often as a 90.
+
+Anti-repeat
+- The phone remembers the last three runs at each club-season. Cards from those
+  runs are drawn at a tenth, a quarter and half the usual chance.
+
+Fit
+- A player is 100% at his main position and 95% at his other preferred ones,
+  both green.
+- Amber shirts next to his positions play at 90%, and anywhere else is red at 70%.
+- Team rating is the average of the 11.
+
+Matches
+- Goals are drawn at random around an expected score built from attack against
+  defence, the midfield gap and home advantage.
+- The model is fitted to every real Premier League result. It gives 2.70 goals a
+  game and 23.7% draws, against 2.69 and 25.6% in reality.
+- Opponents field their real best XI, minus anyone you've signed.
+
+Raids
+- Signing a player weakens his club from that date. Each of its later real wins
+  or draws can be downgraded, with a chance of 3 x the strength lost.
+
+Table
+- Every other match is the real result on its real date. Only your 38 games are
+  simulated.
+
+Balance
+- With careful play: title 3.3%, top 4 31.5%, top half 83.7%, stay up 98.5%.
+- With the best picks every time: title 8.2%.
+- Your 5% average-title target is still open.
+
+
+==============================================================
+THE GAMES
+==============================================================
+
+CLASSIC
+- Take a club that really went down, keep its real squad and real XI, and finish
+  as high as you can.
+
+DAILY
+- One relegated club a day, the same for everyone, taken in turn from a fixed
+  shuffled list.
+- Every go has its own random seed, so the cards and results differ between goes
+  and players.
+- Classic rules exactly. Your best go of the day counts, and the Daily closes at
+  midnight.
+
+CLUB X
+- You name your club, and it replaces a season's bottom side with no players.
+- You draft 11. Every card fits an open shirt, and you can change shape between
+  spins.
+- You must win the league.
+- Unless you go down, there's a next season. Up to 2025/26 it's the real next
+  season, with your players on their real cards for it.
+- From season 2, three of your XI are poached by rivals; stars are about three
+  times as likely to go. Empty shirts are filled from the Summer rolls, or by a
+  free agent if any are still empty when the window closes.
+- After 2025/26 the seasons are a forecast. Three teams go down, three relegated
+  club-seasons come up, and every other result is played by the match model.
+
+DARE2DREAM
+- Still locked for repair. It's built: any club from any season, a draft of 11,
+  and you must beat their real finish.
+
+GOAL RUSH
+- The formation is the target, so 3-5-2 means exactly 352 career goals from 11
+  players.
+- Formations are random, with the back fives half as likely.
+- Each spin shows three players for open positions. They come from that
+  position's top Premier League scorers with 60+ games, 1,833 players in all.
+- On the last pick, one player with exactly the goals needed is sometimes among
+  the three.
+- 3 respins. Players from your last three games come up less often.
+- Balance: a casual player lands exactly about 1 game in 20, and within 10 about
+  1 in 5.
+
+UNBEATEN RUN
+- Higher or lower on one random stat per run, from 9: career goals, appearances,
+  assists, goals + assists, season goals, season goals + assists, club points in a
+  season, club wins in a season, and all-time points.
+- Cards are drawn at random from the whole deck, never equal and never repeated.
+- Close calls (within 10%) come up more often as the run grows.
+- 3 refreshes, and one wrong answer ends the run.
+
+
+==============================================================
+THE DATA
+==============================================================
+
+Coverage: 34 seasons, 1992/93 to 2025/26
+- 13,166 real results: date, teams and score only. We hold no real scorers or
+  goal times; the scorers on the match screen are generated.
+- 686 club-seasons: final position, points, W/D/L, goals for and against, and
+  points deductions.
+- 51 clubs and 103 relegated club-seasons, which are the Classic and Daily pool.
+
+Players: 5,113 people across 18,125 player-seasons, 502 to 570 a season.
+Every player-season holds all of these:
+- name, club, and both clubs with the date of his first game for the second for
+  the 525 January movers
+- broad position plus up to four preferred positions (94% have the detailed
+  positions)
+- rating (56 to 99), level, and the six card numbers
+- appearances, goals, assists, clean sheets and minutes
+- the rating's building blocks (reputation, difficulty, appearances, and goals,
+  assists, clean sheets or throws where they apply)
+- nationality (123 countries, none missing)
+
+Career totals per person
+- appearances, goals, assists, clean sheets, seasons, first and last season, and
+  clubs
+
+Other data
+- 528 purple cards and 203 legend cards across 101 people.
+- 92 all-time icons, each with a consensus score and verified peak seasons.
+- Honours for every season: PFA Team of the Year, the player of the year awards
+  and the Golden Glove.
+
+Per club
+- name, full name, 3-letter code, crest (plus a white version for 3 clubs), and
+  the card, ink and text colours.
