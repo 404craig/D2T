@@ -143,7 +143,7 @@
       root.appendChild(body);
       const fx = GAME.fixture(info.gw), opp = fx ? D2T.esc(fx.opp) + (fx.ha === 'H' ? ' (H)' : ' (A)') : '';
       const reduced = D2T.reduced();
-      let alive = true, big = true, lastBest = -1, sizeObs = null, placing = false, leaving = false, signing = false, field = null, slotsEl = null, ratingEl = null, timers = [];
+      let alive = true, big = true, lastBest = -1, mover = -1, sizeObs = null, placing = false, leaving = false, signing = false, field = null, slotsEl = null, ratingEl = null, timers = [];
       kill = () => { alive = false; timers.forEach(clearTimeout); endDrag(true); sizeObs && sizeObs.disconnect(); };
 
       // ---------- the pitch above the tray ----------
@@ -160,15 +160,18 @@
           else lit = new Set(GAME.lineup().xi.map((c, i) => (c ? -1 : i)).filter((i) => i >= 0));
         }
         // the selected card in the tray: each shirt shows how he would fit it (green preferred, amber near, red not)
-        const si = placing && (!draft || di.open) && !signing && api ? api.selected() : -1, inc = si >= 0 ? api.results()[si] : null;
+        const si = placing && (!draft || di.open) && !signing && api ? api.selected() : -1;
+        // a player of yours being moved on the pitch (Craig, 15 Oct) rings the shirts for himself, like a tray card
+        const inc = si >= 0 ? api.results()[si] : mover >= 0 ? L.xi[mover] : null;
         const pf = (i) => (inc ? GAME.fit(inc.id, i) : null);
         const fitWord = { green: 'a preferred position', amber: 'close to his position', red: 'out of position' };
         const fm = GAME.eng().formation, pw = big ? PITCH_W : SMALL_W;
         lastBest = best;
+        const gone = GAME.poachedSlots();   // a Club X career's poached players: their empty shirts keep where they went
         slotsEl.innerHTML = GAME.slots().map((s, i) => {
-          const c = L.xi[i], f = pf(i), cls = `se-slot${lit.has(i) ? ' se-best' : ''}${f ? ' se-pf-' + f : ''}`;
+          const c = L.xi[i], f = pf(i), cls = `se-slot${lit.has(i) ? ' se-best' : ''}${f ? ' se-pf-' + f : ''}${i === mover ? ' se-sel' : ''}`;
           const say = f ? `, ${fitWord[f]} for ${D2T.esc(inc.name)}` : '';
-          if (!c) return `<div class="${cls}" style="${place(fm, s, pw)};z-index:${Math.round(s.y)}" data-i="${i}"><div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="Empty ${s.pos} shirt${lit.has(i) ? ', open for this pick' : ''}${say}">${SE.emptyShirt(s.pos, pw)}</div></div>`;
+          if (!c) return `<div class="${cls}" style="${place(fm, s, pw)};z-index:${Math.round(s.y)}" data-i="${i}"><div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="Empty ${s.pos} shirt${lit.has(i) ? ', open for this pick' : ''}${say}">${SE.emptyShirt(s.pos, pw, gone[i])}</div></div>`;
           const fit = GAME.fit(c.id, i), oop = fit !== 'green';
           return `<div class="${cls}" style="${place(fm, s, pw)};z-index:${Math.round(s.y)}" data-i="${i}">
             <div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}. Sign the selected player here${say}">
@@ -214,9 +217,13 @@
         };
         slotsEl.addEventListener('click', (e) => {
           const w = e.target.closest('.se-cardwrap'); if (!w || !placing) return;
-          const i = api.selected();
-          if (i < 0) { api.hint('Pick one of the three first, then tap a shirt'); return; }
-          sign(i, +w.dataset.i);
+          const i = api.selected(), slot = +w.dataset.i;
+          if (i >= 0) { mover = -1; sign(i, slot); return; }
+          // nothing picked from the tray: tap one of yours, then another shirt, to swap them (Craig, 15 Oct)
+          if (draft) { api.hint('Pick one of the three first, then tap a shirt'); return; }
+          if (mover < 0) { if (!GAME.lineup().xi[slot]) { api.hint('Pick one of the three first, or tap one of yours to move him'); return; } mover = slot; drawPitch(); api.hint('Tap another shirt to swap him there'); return; }
+          if (mover === slot) { mover = -1; drawPitch(); api.hint('Drag a player onto the pitch, or tap him then a shirt'); return; }
+          moveTo(mover, slot);
         });
       }
 
@@ -273,6 +280,14 @@
         // the window over (Craig, 14 Oct): straight to the fixtures; the draft over: the pre-season squad
         timers.push(setTimeout(() => { if (alive) D2T.go(ph === 'window' || ph === 'draft' ? 'transfer' : draft ? 'squad' : 'fixtures'); }, reduced ? 300 : (draft ? 800 : 1100)));
       }
+      // move one of your players to another shirt on the pitch (a swap; an empty shirt moves the other way)
+      function moveTo(from, to) {
+        mover = -1;
+        if (!GAME.swapSlots(from, to)) { drawPitch(); return; }
+        SND.play('cardDrop');
+        drawPitch(-1, to);
+        api.hint('Drag a player onto the pitch, or tap him then a shirt');
+      }
       function pass() {
         if (signing) return;
         SND.play('pass');
@@ -284,7 +299,7 @@
       // A press on a card is remembered from the moment the finger goes down, even while the reels are still landing
       // (a keen player grabs the left card before the right one stops, or the instant the last one lands, before the
       // tray has dropped): the drag starts, and the tray comes up, as soon as the roll has settled.
-      let drag = null, ghost = null, target = null, suppress = -1;
+      let drag = null, ghost = null, target = null, suppress = -1, suppressPitch = false;
       const host = document.getElementById('app');
       function endDrag(cancel) {
         if (ghost) ghost.remove(); ghost = null;
@@ -292,9 +307,15 @@
         if (cancel) drag = null;
       }
       const onDown = (e) => {
-        suppress = -1;   // a new press: any click that follows belongs to it
+        suppress = -1; suppressPitch = false;   // a new press: any click that follows belongs to it
         if (signing || e.button || !api) return;
-        const s = e.target.closest('.sp-slot'); if (!s || !api.el.contains(s)) return;
+        const s = e.target.closest('.sp-slot');
+        if (!s || !api.el.contains(s)) {
+          // a card of yours on the pitch can be dragged onto another shirt (not in the draft, not with a tray card picked)
+          const w = placing && !draft && e.target.closest('.tr-field .se-cardwrap');
+          if (w && GAME.lineup().xi[+w.dataset.i] && api.selected() < 0) drag = { pitch: +w.dataset.i, x0: e.clientX, y0: e.clientY, pid: e.pointerId, moved: false };
+          return;
+        }
         drag = { i: api.slots.indexOf(s), x0: e.clientX, y0: e.clientY, pid: e.pointerId, moved: false };
       };
       const onMove = (e) => {
@@ -302,6 +323,13 @@
         if (!drag.moved) {
           if (Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 8) return;
           if (!api.settled() || leaving || signing) return;
+          if (drag.pitch != null) {
+            drag.moved = true; mover = drag.pitch;
+            const p = GAME.lineup().xi[drag.pitch];
+            ghost = D2T.h(`<div class="se-ghost" aria-hidden="true">${D2T.cards.player(p, { w: 64, mini: true, shine: false })}</div>`);
+            host.appendChild(ghost);
+            drawPitch();
+          } else {
           if (!placing) enterPlacing(true);
           drag.moved = true;
           if (api.selected() !== drag.i) api.select(drag.i);
@@ -309,6 +337,7 @@
           ghost = D2T.h(`<div class="se-ghost" aria-hidden="true">${D2T.cards.player(p, { w: 64, mini: true, shine: false })}</div>`);
           host.appendChild(ghost);
           drawPitch(draft ? di.slot : GAME.bestSlot(p.id));
+          }
         }
         if (e.cancelable) e.preventDefault();
         const hr = host.getBoundingClientRect();
@@ -318,23 +347,32 @@
         if (!t && under) { const sl = under.closest('.tr-field .se-slot'); t = sl && sl.querySelector('.se-cardwrap'); }
         if (t !== target) {
           target && target.classList.remove('se-target'); target = t; target && target.classList.add('se-target');
-          if (t) { try { const f = GAME.fit(api.results()[drag.i].id, +t.dataset.i); SND.play('shirtFit', { green: 0, amber: 1, red: 2 }[f]); } catch (e) { /* no fit, no sound */ } }
+          if (t) { try { const who = drag.pitch != null ? GAME.lineup().xi[drag.pitch] : api.results()[drag.i]; const f = GAME.fit(who.id, +t.dataset.i); SND.play('shirtFit', { green: 0, amber: 1, red: 2 }[f]); } catch (e) { /* no fit, no sound */ } }
         }
       };
       const onUp = (e) => {
         if (!drag || e.pointerId !== drag.pid) return;
         const d = drag; drag = null;
         if (!d.moved) return;
+        if (d.pitch != null) {
+          suppressPitch = true;
+          const t = target; endDrag(false);
+          if (t && +t.dataset.i !== d.pitch) moveTo(d.pitch, +t.dataset.i); else { mover = -1; drawPitch(); SND.play('dropCancel'); }
+          return;
+        }
         suppress = d.i;
         const t = target; endDrag(false);
         if (t) sign(d.i, +t.dataset.i); else SND.play('dropCancel');
       };
       window.addEventListener('pointermove', onMove, { passive: false });
       window.addEventListener('pointerup', onUp);
-      window.addEventListener('pointercancel', () => { drag = null; endDrag(false); });
+      window.addEventListener('pointercancel', () => { if (drag && drag.pitch != null && drag.moved) { mover = -1; drawPitch(); } drag = null; endDrag(false); });
       root.addEventListener('pointerdown', onDown);
       // a drag is not a tap: swallow the click that follows it (a touch drag has none, so the next press clears it)
-      root.addEventListener('click', (e) => { if (suppress >= 0 && e.target.closest('.sp-slot')) { e.stopPropagation(); e.preventDefault(); } suppress = -1; }, true);
+      root.addEventListener('click', (e) => {
+        if ((suppress >= 0 && e.target.closest('.sp-slot')) || (suppressPitch && e.target.closest('.tr-field'))) { e.stopPropagation(); e.preventDefault(); }
+        suppress = -1; suppressPitch = false;
+      }, true);
       const blockTouch = (e) => { if (drag && drag.moved && e.cancelable) e.preventDefault(); };
       window.addEventListener('touchmove', blockTouch, { passive: false });
       const prevKill = kill;
@@ -368,6 +406,8 @@
           settled: st.spun === rollKey ? GAME.rollCards() : null,
           // a purple or legend card gets the rare reveal (screens/reveal.js); the roll counts as spun as it starts
           rare: (p) => D2T.rareReveal.isRare(p),
+          // the positions he is green in, under each card, revealed with it as its reel lands (Craig, 15 and 16 Oct)
+          below: (p) => { const list = p.main ? [p.main, ...(p.alt || [])] : [p.pos]; return `<div class="sp-gp sp-below" aria-label="Green in ${list.join(', ')}">${list.join('<i>/</i>')}</div>`; },
           onCommit: () => { st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); },
           onSettled: () => { leaving = false; st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); timers.push(setTimeout(() => enterPlacing(true), reduced ? 0 : 450)); },
           accent: LV_ACCENT,
@@ -381,7 +421,7 @@
           baseBtn: { accent: club.accent, ink: club.ink },
           onRespinsChange: () => { GAME.respinCards(); st.spun = ''; D2T.save(); },
           beforeSpin: () => leavePlacing(),
-          onSelect: (i, p) => { if (placing) drawPitch(draft ? di.slot : GAME.bestSlot(p.id)); timers.push(setTimeout(() => api && D2T.tip('card-again', api.el.querySelectorAll('.sp-slot')[i], 'Tap him again for his career'), 250)); },
+          onSelect: (i, p) => { mover = -1; if (placing) drawPitch(draft ? di.slot : GAME.bestSlot(p.id)); timers.push(setTimeout(() => api && D2T.tip('card-again', api.el.querySelectorAll('.sp-slot')[i], 'Tap him again for his career'), 250)); },
           afterSettle: draft ? null : { label: 'Pass', onClick: pass },
           onConfirm: (p) => { if (draft) sign(api.results().indexOf(p), di.open ? GAME.draftFits(p.id)[0] : di.slot); }
         });

@@ -17,10 +17,12 @@ APP = os.path.join(SRC, "app")
 DATA = os.path.join(ROOT, "data", "game")
 
 CSS = ["core/base.css", "screens/front.css", "screens/spin.css", "screens/season.css", "screens/goals.css", "screens/unbeaten.css"]
+CSS_FIRST = ["core/base.css", "screens/front.css"]   # in the head: all the intro and home need; the rest follows the shell
+LOGOS_FIRST = ["short"]   # the intro's first second; the rest of its pictures follow the shell (D2T.introArt)
 JS = ["../engine.js", "../sound.js", "core/app.js", "core/cards.js", "core/flip.js", "core/game.js", "core/season.js", "core/share.js",
       "screens/intro.js", "screens/home.js", "screens/howto.js", "screens/account.js", "screens/league.js",
       "screens/spin.js", "screens/reveal.js", "screens/transfer.js", "screens/table.js", "screens/squad.js", "screens/fixtures.js",
-      "screens/match.js", "screens/results.js", "screens/summary.js", "screens/goals.js", "screens/unbeaten.js", "core/boot.js"]
+      "screens/match.js", "screens/results.js", "screens/summary.js", "screens/history.js", "screens/goals.js", "screens/unbeaten.js", "core/boot.js"]
 SHELL = ["core/app.js", "screens/intro.js"]          # run first, while the rest of the page is still arriving
 
 
@@ -46,7 +48,8 @@ def main():
             sys.exit(f"{label} contains an em dash; the house style forbids them")
         if label.endswith(".js") and "</script" in text.lower():
             sys.exit(f"{label} contains </script>, which would end the inline script early")
-    css = "\n".join(parts[p] for p in CSS)
+    css = "\n".join(parts[p] for p in CSS if p in CSS_FIRST)
+    css2 = "\n".join(parts[p] for p in CSS if p not in CSS_FIRST)
     js = "\n;\n".join(f"/* ---- {p} ---- */\n" + parts[p] for p in JS if p not in SHELL)
     shell = "\n;\n".join(f"/* ---- {p} ---- */\n" + parts[p] for p in SHELL) + "\n;\nD2T.start(); D2T.started = true;"
     version = read(os.path.join(ROOT, "version.txt")).strip()
@@ -69,8 +72,12 @@ def main():
     tena = "data:image/png;base64," + b64(tena_path) if os.path.exists(tena_path) else ""
     rush_path = os.path.join(ROOT, "assets", "brand", "goal_rush.png")  # Craig's ball for the Goal Rush card on home (12 Oct)
     rush = "data:image/png;base64," + b64(rush_path) if os.path.exists(rush_path) else ""
-    icon_path = os.path.join(ROOT, "assets", "icon-180.png")
-    icon = "data:image/png;base64," + b64(icon_path) if os.path.exists(icon_path) else ""
+    # iOS Home Screen launch pictures, the intro's first frame per phone size (tools/render_splash.js), so the green is
+    # there the instant the game is opened from the Home Screen and the intro carries straight on from it
+    splash_list = os.path.join(ROOT, "assets", "splash", "splash.json")
+    splash = "\n".join(
+        f'<link rel="apple-touch-startup-image" media="screen and (device-width: {s["w"]}px) and (device-height: {s["h"]}px) and (-webkit-device-pixel-ratio: {s["dpr"]}) and (orientation: portrait)" href="assets/splash/{s["file"]}">'
+        for s in json.loads(read(splash_list))) if os.path.exists(splash_list) else ""
 
     j = lambda o: json.dumps(o, separators=(",", ":"))
     # a JSON string inside JS: "</" escaped so no </script> can end the tag early
@@ -80,12 +87,14 @@ def main():
             + (f"\nwindow.D2T_TENABALL_LOGO={j(tena)};" if tena else "")
             + (f"\nwindow.D2T_GOALRUSH_LOGO={j(rush)};" if rush else "")
             + f"\nwindow.D2T_FLAGS={j(flags)};\nwindow.D2T_NATIONS={j(nations)};")
-    logos_js = f"window.D2T_LOGOS={j(logos)};"
+    logos_js = f"window.D2T_LOGOS={j({k: v for k, v in logos.items() if k in LOGOS_FIRST})};"
+    rest = {k: v for k, v in logos.items() if k not in LOGOS_FIRST}
+    logos2_js = f"Object.assign(window.D2T_LOGOS,{j(rest)});D2T.setLogos();if(D2T.introArt)D2T.introArt();"
     # the clips as plain JSON (not a script, so the phone does not stop to run it while the intro waits); read after the intro
     sounds_js = j(sounds).replace("</", "<\\/")
-    out = (html.replace("/*@CSS@*/", css).replace("/*@LOGOS@*/", logos_js).replace("/*@SHELL@*/", shell)
+    out = (html.replace("/*@CSS2@*/", css2).replace("/*@CSS@*/", css).replace("/*@LOGOS2@*/", logos2_js).replace("/*@LOGOS@*/", logos_js).replace("/*@SHELL@*/", shell)
            .replace("/*@DATA@*/", data).replace("/*@JS@*/", js).replace("/*@SOUNDS@*/", sounds_js))
-    out = out.replace("@BUILD@", version).replace("@ICON@", icon)
+    out = out.replace("@BUILD@", version).replace("@SPLASH@", splash)
     left = re.findall(r"/\*@[A-Z]+@\*/", out)
     if left:
         sys.exit("unfilled placeholders: " + ", ".join(left))

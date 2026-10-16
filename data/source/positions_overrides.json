@@ -1,0 +1,4 @@
+{
+  "_note": "Craig's own calls on a player's preferred positions, main first, applied to every season of his over data/source/positions.json by scripts/build-data.py. Keyed by the player name as in positions.json.",
+  "Gianfranco Zola": ["CAM", "ST"]
+}

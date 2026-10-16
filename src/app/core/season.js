@@ -33,7 +33,10 @@
 
   // An empty shirt on the pitch (Dare2Dream draft): the shape of a mini card with the position on it.
   // the wrap carries the fit ring round the shirt (the shirt itself is clipped to its shield shape)
-  SE.emptyShirt = (pos, w) => `<span class="se-emptywrap"><div class="se-empty" style="width:${w}px;height:${Math.round(w * 1.3)}px" aria-label="Empty ${pos} shirt"><span>${pos}</span></div></span>`;
+  // `to` (a Club X career's poached player, Craig 14 Oct): the shirt shows the crest of the club he went to and "TO {CLUB}"
+  // (the club's name sized so its longest word fits the shirt, never broken inside a word)
+  const toSize = (club, w) => { const L = Math.max(...String(club).split(/\s+/).map((x) => x.length)); return Math.max(5, Math.min(w * 0.18, (w - 6) / (L * 0.66 + 0.4))).toFixed(1); };
+  SE.emptyShirt = (pos, w, to) => `<span class="se-emptywrap"><div class="se-empty${to ? ' se-empty-to' : ''}" style="width:${w}px;height:${Math.round(w * 1.3)}px" aria-label="Empty ${pos} shirt${to ? `, ${D2T.esc(to.name)} left for ${D2T.esc(to.club)}` : ''}">${to ? `<span class="se-to">${to.crest ? `<img src="${to.crest}" alt="">` : ''}<i>To</i> <b style="font-size:${toSize(to.club, w)}px">${D2T.esc(to.club)}</b></span>` : `<span>${pos}</span>`}</div></span>`;
 
   // ---------- league table ----------
   SE.sortRows = (rows) => rows.sort((a, b) => b.pts - a.pts || (b.gf - b.ga) - (a.gf - a.ga) || b.gf - a.gf || a.name.localeCompare(b.name));
@@ -103,7 +106,7 @@
   // ---------- the end-of-game sheet (Craig, 14 Oct) ----------
   // One slide-up sheet for every game once it is over: a headline, a line or two, then Share, Play again (whatever the
   // game calls it) and Home. It is a D2T.sheet, so it drags closed; a peek bar ("Season over", in the game's colour)
-  // then sits at the bottom of the screen and brings it back. `buttons`: [{ k, label, fn, primary }] in order, each fn
+  // then sits at the bottom of the screen and brings it back. `buttons`: [{ k, label, fn, primary, outline (a ghost button with a white border) }] in order, each fn
   // called after the sheet closes; `peek`: the peek bar's words (none means no peek bar); `host` the element it goes in
   // (before `before`); `colour` and `ink` paint the primary button and the peek bar; `onClose` runs when the sheet closes
   // without a button (a drag or a tap on the scrim). Returns { open, close, el }.
@@ -120,7 +123,7 @@
     const open = () => {
       if (sh) return sh;
       chosen = false; removePeek();
-      const rows = (o.buttons || []).map((b) => `<button class="btn ${b.primary ? 'end-primary' : 'btn-ghost'} fr-btn-wide" type="button" data-k="${D2T.esc(b.k)}"${b.primary ? ` style="background:${colour};color:${ink}"` : ''}>${b.label}</button>`).join('');
+      const rows = (o.buttons || []).map((b) => `<button class="btn ${b.primary ? 'end-primary' : 'btn-ghost'} fr-btn-wide" type="button" data-k="${D2T.esc(b.k)}"${b.primary ? ` style="background:${colour};color:${ink}"` : b.outline ? ' style="border-color:#fff"' : ''}>${b.label}</button>`).join('');
       sh = D2T.sheet({ title: o.title || '', body: `${o.lead ? `<div class="end-lead">${o.lead}</div>` : ''}<div class="fr-stack end-stack">${rows}</div>`,
         onClose: () => { sh = null; if (chosen) return; showPeek(); o.onClose && o.onClose(); } });
       sh.el.classList.add('end-sheet');

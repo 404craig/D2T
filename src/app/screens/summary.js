@@ -159,6 +159,7 @@
           ${x && car.n > 1 ? `<p class="sm-banter">Season ${car.n} of your career${car.seasons.length ? `: ${car.seasons.filter((z) => z.finish === 1).length + (F.finish === 1 ? 1 : 0)} title${car.seasons.filter((z) => z.finish === 1).length + (F.finish === 1 ? 1 : 0) === 1 ? '' : 's'} so far` : ''}.</p>` : ''}
           ${x && !nx ? `<p class="sm-banter">Relegated. The career ends here.</p>` : ''}
           <button class="btn btn-ghost fr-btn-wide" data-act="table">Final table</button>
+          ${x ? '<button class="btn btn-ghost fr-btn-wide" data-act="history">Club history</button>' : ''}
           <div class="se-pad"></div>
           <div class="se-pad"></div>
         </div>
@@ -182,6 +183,7 @@
       this._end = end;
       const openT = setTimeout(() => { if (root.isConnected) end.open(); }, D2T.reduced() ? 200 : 900);
       this._kill = () => clearTimeout(openT);
+      const hist = body.querySelector('[data-act="history"]'); if (hist) hist.onclick = () => D2T.go('history');
       body.querySelector('[data-act="table"]').onclick = () => {
         const rows = GAME.standings(null);
         D2T.sheet({ title: `Final table ${D2T.esc(S.season)}`, body: `<div class="se-run" style="--se-acc:${club.accent};--se-text:${club.text};--se-acc-b:${SE.rgba(club.accent, 0.55)}"><div class="se-table">${SE.tableHead()}${rows.map((r, i) => SE.rowHTML(r, club.name, i === n - rel - 1 ? 'se-zone' : '')).join('')}</div></div>` });

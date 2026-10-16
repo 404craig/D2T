@@ -3,7 +3,9 @@
 // are signed straight onto the pitch from the transfer roll (screens/transfer.js).
 (function () {
   const D2T = window.D2T, SE = D2T.se, GAME = D2T.game;
-  const PITCH_W = 50, SUB_W = 60; // compact layout (chosen 11 Oct): header, pitch, subs and the bar fit one screen
+  const PITCH_W = 50; // the bench cards are the roll's full cards (Craig, 15 Oct), positions in grey under each: as they
+  // roll in (114 wide) on taller phones, smaller (80) on short ones such as 375 x 667 so the bench and its positions fit
+  const subW = () => (window.innerHeight < 760 ? 80 : 114);
   const ROLE_NAME = { GK: 'Goalkeeper', DEF: 'Defender', MID: 'Midfielder', FWD: 'Forward' };
   const last = (n) => n.split(' ').slice(-1)[0];
   const idOf = (s) => (/^\d+$/.test(String(s)) ? +s : s);   // player ids are numbers; legend ids are text
@@ -64,17 +66,17 @@
       const allItems = () => [...root.querySelectorAll('[data-card]')];
       function render(before) {
         L = GAME.lineup();
-        const slots = GAME.slots();
+        const slots = GAME.slots(), away = GAME.poachedSlots();
         slotsEl.innerHTML = slots.map((s, i) => {
           const c = L.xi[i];
-          if (!c) return `<div class="se-slot" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">${SE.emptyShirt(s.pos, PITCH_W)}</div>`;
+          if (!c) return `<div class="se-slot" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">${SE.emptyShirt(s.pos, PITCH_W, away[i])}</div>`;
           const fit = GAME.fit(c.id, i), oop = fit !== 'green';
           return `<div class="se-slot${oop ? ' se-oop' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
             <div class="se-cardwrap" data-card="${c.id}" data-kind="pitch" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}${oop ? ', out of position' : ''}">
               ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false, tab: s.pos, cls: 'fit-' + fit })}</div></div>`;
         }).join('');
         const sl = subsEl.scrollLeft;
-        subsEl.innerHTML = L.subs.map((c) => `<div class="se-sub" role="listitem"><div class="se-cardwrap" data-card="${c.id}" data-kind="sub" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, ${ROLE_NAME[c.pos]}, in the squad">${D2T.cards.player(c, { w: SUB_W, mini: true, shine: false })}</div></div>`).join('');
+        subsEl.innerHTML = L.subs.map((c) => `<div class="se-sub" role="listitem"><div class="se-cardwrap" data-card="${c.id}" data-kind="sub" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, ${ROLE_NAME[c.pos]}, in the squad">${D2T.cards.player(c, { w: subW(), shine: false })}</div><div class="se-sub-pos" aria-hidden="true">${(c.main ? [c.main, ...(c.alt || [])] : [c.pos]).join('<i>/</i>')}</div></div>`).join('');
         subsEl.scrollLeft = sl;
         body.querySelector('.se-fname').textContent = GAME.eng().formation;
         const showSubs = L.subs.length > 0;
@@ -300,10 +302,130 @@
       };
 
       render(null);
+
+      // ---------- Poached (Craig, 14 Oct; option B in design/prototype/clubx-raid.html) ----------
+      // A Club X career's later seasons: three of the XI are taken by other sides before the Summer window. The first time
+      // (GAME.poachDue) each one in turn: the rival's crest drops in above him, a line shoots down, he wobbles and is reeled
+      // up into the crest, which flies off with him; his shirt is left empty with the crest and "TO {CLUB}". A news ticker
+      // across the bottom carries each move as it happens and stays until you go on to the Summer window; then a summary
+      // sheet. The engine decides it as the sequence starts, so a refresh shows the end state. Reduced motion: the end
+      // state, the headlines standing still, and the summary at once.
+      let ticker = null, poachKill = null;
+      const poachDue = pre && carried && GAME.poachDue();
+      if (pre && carried && (poachDue || GAME.poached().length)) {
+        ticker = makeTicker();
+        const list = poachDue ? GAME.poach() : GAME.poached();
+        if (poachDue) render(null);
+        if (poachDue && !reduced) runPoach(list);
+        else {                                                    // reduced motion, or a refresh before the summary was seen
+          if (list.length) ticker.add(list[list.length - 1]);
+          if (!st.poachSeen) { const t = setTimeout(() => root.isConnected && poachSummary(list), 300); poachKill = () => clearTimeout(t); }
+        }
+      }
+      // the Transfer News bar (Craig, 14 Oct; news() in design/prototype/clubx-poached.html): centred in the empty space
+      // between the pitch and the bottom bar, one headline at a time right after the pill; a new one replaces the last at
+      // once (a quick fade up); it only scrolls, slowly left and back, if it is too long to fit (never with reduced motion)
+      function makeTicker() {
+        const el = D2T.h('<div class="se-ticker" role="status" aria-label="Transfer news"><b class="se-tk-tag">Transfer news</b><div class="se-tk-view"><span class="se-tk-item"></span></div></div>');
+        root.appendChild(el); root.classList.add('se-has-ticker');
+        const view = el.querySelector('.se-tk-view'), sp = el.querySelector('.se-tk-item'), pitch = body.querySelector('.se-pitch');
+        const place = () => {
+          if (!el.isConnected) return;
+          const rr = root.getBoundingClientRect(), pb = pitch.getBoundingClientRect().bottom, bt = bar.getBoundingClientRect().top;
+          el.style.top = `${Math.round((pb + bt) / 2 - rr.top - 17)}px`;
+        };
+        place();
+        const ro = window.ResizeObserver ? new ResizeObserver(place) : null; ro && ro.observe(root);
+        let timer = 0;
+        return {
+          el,
+          add(p) {
+            sp.getAnimations().forEach((a) => a.cancel()); clearTimeout(timer);
+            sp.textContent = `${p.name} joins ${p.club}`; sp.style.transform = '';
+            if (reduced) return;
+            sp.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'ease-out' });
+            const over = sp.scrollWidth - view.clientWidth + 14;
+            if (over > 0) timer = setTimeout(() => { if (sp.isConnected) sp.animate([{ transform: 'none' }, { transform: 'none', offset: 0.2 }, { transform: `translateX(${-over}px)`, offset: 0.8 }, { transform: `translateX(${-over}px)` }], { duration: 2500 + over * 25, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' }); }, 250);
+          },
+          stop() { clearTimeout(timer); ro && ro.disconnect(); }
+        };
+      }
+      function poachSummary(list) {
+        const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">Other sides came in over the summer. Fill the gaps with your rolls.</p>
+          <ul>${list.map((x) => `<li>${x.crest ? `<img src="${x.crest}" alt="">` : ''}<b>${D2T.esc(x.name)}</b><span>to ${D2T.esc(x.club)}</span></li>`).join('')}</ul>
+          <button class="btn se-btn se-poach-go" type="button">Continue</button></div>`);
+        // seen once it is closed (Continue, a drag or a tap outside); a refresh before then shows it again, never the show
+        const sh = D2T.sheet({ title: list.length === 3 ? 'Three players gone' : `${list.length} players gone`, body: el, onClose: () => { st.poachSeen = true; D2T.save(); } });
+        sh.el.classList.add('se-run', 'se-poach-sheet');
+        ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
+        el.querySelector('.se-poach-go').onclick = () => { sh.close(); if (root.isConnected) playBtn.onclick(); };
+      }
+      async function runPoach(list) {
+        let alive = true; const anims = [], timers = [];
+        const host = document.getElementById('app'), fxl = D2T.h('<div class="se-poach-fx" aria-hidden="true"></div>');
+        poachKill = () => { alive = false; timers.forEach(clearTimeout); anims.forEach((a) => { try { a.cancel(); } catch (e) { /* gone */ } }); fxl.remove(); root.classList.remove('se-poaching'); };
+        const wait = (ms) => new Promise((r) => timers.push(setTimeout(r, ms)));
+        const anim = (el, k, o) => { const a = el.animate(k, Object.assign({ fill: 'forwards' }, o)); anims.push(a); return a.finished.catch(() => {}); };
+        const SND = window.D2TSound || { play() {} }, S = GAME.S(), pitchSlots = GAME.slots();
+        // the three go back on the pitch for the show (the engine has already emptied their shirts)
+        list.forEach((x) => {
+          const sl = slotsEl.querySelector(`.se-slot[data-i="${x.slot}"]`), c = GAME.card(S, x.id); if (!sl || !c) return;
+          sl.innerHTML = `<div class="se-cardwrap" data-i="${x.slot}">${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false, tab: pitchSlots[x.slot].pos, cls: 'fit-' + GAME.fit(c.id, x.slot) })}</div>`;
+        });
+        root.classList.add('se-poaching');
+        host.appendChild(fxl);
+        await wait(1300);
+        for (const x of list) {
+          if (!alive) return;
+          const sl = slotsEl.querySelector(`.se-slot[data-i="${x.slot}"]`), w = sl && sl.querySelector('.se-cardwrap'); if (!w) continue;
+          const hr = host.getBoundingClientRect(), r = w.getBoundingClientRect();
+          const cx = r.left - hr.left + r.width / 2, cyCard = r.top - hr.top + r.height / 2, top = r.top - hr.top;
+          const cy = Math.max(70, cyCard - 120);
+          // 1. the rival's crest drops in above him
+          const rv = D2T.h(`<div class="se-pc-rival" style="left:${cx}px;top:${cy}px">${x.crest ? `<img src="${x.crest}" alt="">` : ''}</div>`);
+          fxl.appendChild(rv);
+          SND.play('dropCancel');
+          // his headline replaces the last one as the crest lands (Craig, 14 Oct)
+          timers.push(setTimeout(() => { if (!alive) return; SND.play('land'); ticker.add(x); }, 380));
+          await anim(rv, [{ transform: 'translateY(-260px) scale(.6)', opacity: 0 }, { transform: 'translateY(8px) scale(1.05)', opacity: 1, offset: 0.75 }, { transform: 'none', opacity: 1 }], { duration: 500, easing: 'cubic-bezier(.3,1.3,.5,1)' });
+          if (!alive) return;
+          // 2. a line shoots down to the card
+          const th = D2T.h(`<div class="se-pc-line" style="left:${cx - 1.5}px;top:${cy + 31}px;height:${Math.max(8, top - cy - 31)}px"></div>`);
+          fxl.appendChild(th);
+          await anim(th, [{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }], { duration: 220, easing: 'ease-out' });
+          if (!alive) return;
+          // 3. he wobbles (lifted into the overlay so nothing clips him on the way up)
+          const clone = w.cloneNode(true);
+          clone.style.cssText = `position:absolute;left:${r.left - hr.left}px;top:${top}px;width:${r.width}px;height:${r.height}px;margin:0`;
+          fxl.appendChild(clone); w.style.visibility = 'hidden';
+          await anim(clone, [{ transform: 'none' }, { transform: 'rotate(-6deg)', offset: 0.3 }, { transform: 'rotate(5deg)', offset: 0.6 }, { transform: 'none' }], { duration: 380 });
+          if (!alive) return;
+          // 4. reeled up into the crest
+          SND.play('playerOut');
+          anim(th, [{ transform: 'scaleY(1)' }, { transform: 'scaleY(0)' }], { duration: 380, easing: 'ease-in' });
+          await anim(clone, [{ transform: 'none', opacity: 1 }, { transform: `translateY(${cy - cyCard}px) scale(.3)`, opacity: 0 }], { duration: 420, easing: 'cubic-bezier(.6,0,.9,.4)' });
+          if (!alive) return;
+          th.remove(); clone.remove();
+          // 5. his shirt is left empty with the crest of where he went; the crest flies off with him
+          sl.innerHTML = SE.emptyShirt(pitchSlots[x.slot].pos, PITCH_W, x);
+          anim(sl.firstElementChild, [{ opacity: 0, transform: 'scale(.85)' }, { opacity: 1, transform: 'none' }], { duration: 300, easing: 'ease-out' });
+          setRating(GAME.rating());
+          SND.play('pass');
+          await anim(rv, [{ transform: 'none', opacity: 1 }, { transform: 'translateY(-300px) scale(.7)', opacity: 0 }], { duration: 450, easing: 'ease-in' });
+          if (!alive) return;
+          rv.remove();
+          await wait(700);
+        }
+        if (!alive) return;
+        poachKill(); poachKill = null;
+        render(null);
+        await new Promise((res) => setTimeout(res, 200));
+        if (root.isConnected) poachSummary(list);
+      }
       // first-time tips: the shape, then (another visit) swapping a sub in
       const tipT = setTimeout(() => { if (!root.isConnected) return; const subs = subsEl.querySelectorAll('[data-card]'), sub = subs[Math.min(3, subs.length - 1)];   // a sub clear of the Formation button
         D2T.tips([['formation', body.querySelector('.se-formlink'), 'Change your shape here'], ...(pre && !drafting && sub ? [['subs', sub, 'Drag a sub onto the pitch']] : [])]); }, 1100);
-      const offOld = this._off; this._off = () => { clearTimeout(tipT); offOld && offOld(); };
+      const offOld = this._off; this._off = () => { clearTimeout(tipT); poachKill && poachKill(); ticker && ticker.stop(); offOld && offOld(); };
       // first load: cards deal onto the pitch
       if (!reduced && window.D2TSound && L.xi.some(Boolean)) window.D2TSound.play('dealPitch');   // empty shirts before the draft: no cards land, so no sound
       if (!reduced) [...slotsEl.querySelectorAll('.se-cardwrap')].forEach((n, i) => n.animate([{ opacity: 0, transform: 'translateY(14px) scale(.85)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 60 + i * 40, easing: 'cubic-bezier(.3,1.3,.5,1)', fill: 'backwards' }));

@@ -139,13 +139,14 @@
   GAME.target = (histPos) => (GAME.mode() === 'clubx' || histPos <= 1 ? 1 : histPos - 1);
   GAME.dreamMet = (finish, histPos) => finish <= GAME.target(histPos);
 
-  // ---------- legends: the top 3 players of every season (Craig, 11 Oct 2026) ----------
-  // One card per player-season, so a great can be a legend from more than one season.
+  // ---------- legends: the top 3 players of every season and the icons at their peaks (Craig, 11 and 15 Oct 2026) ----------
+  // One card per player-season, so a great can be a legend from more than one season. The build flags each legend
+  // player-season (`lg`, scripts/build-data.py, docs/cards/ICONS.md), so the list here follows the data.
   // id "L:<name>:<season>"; his best legend card also answers to "L:<name>" for runs saved before.
   const LEGENDS = (() => {
     const out = [];
     for (const [sk, S] of Object.entries(G.seasons)) {
-      const top = S.players.filter((p) => p.a >= 10).slice().sort((a, b) => b.r - a.r || b.a - a.a).slice(0, 3);
+      const top = S.players.filter((p) => p.lg).slice().sort((a, b) => b.r - a.r || b.a - a.a);
       for (const p of top) {
         const main = p.c2 != null && (p.a2 || 0) > (p.a1 || 0) ? p.c2 : p.c;
         out.push({ id: 'L:' + p.n + ':' + sk, k: p.k, n: p.n, b: p.b, p: p.p, r: p.r, lv: 4, a: p.a, g: p.g, as: p.as, cs: p.cs, s6: p.s6, nat: p.nat, c: null, cn: S.clubs[main].name, sk });
@@ -318,7 +319,7 @@
     const st = E.newRun({ seed: c.id + ':s' + c.n, mode: 'clubx', catalogue: [], recent: GAME.recentFor(S2, spec.me) });
     st.seasonKey = spec.key; st.club = spec.me; st.formation = e.formation; st.career = c.n;
     E.carryIn(st, S2, S2.xiIds);
-    Object.assign(run, { eng: st, step: 'table', tableSeen: false, recorded: false, match: null, pending: null });
+    Object.assign(run, { eng: st, step: 'table', tableSeen: false, recorded: false, match: null, pending: null, poachSeen: false, freeSeen: false });
     D2T.save();
     return true;
   };
@@ -430,7 +431,34 @@
     if (pitch < 0) return false;
     E.swapSetup(eng, pitch, sub); D2T.save(); return true;
   };
-  GAME.startSeason = () => { const ok = E.startSeason(GAME.eng(), GAME.S()); D2T.state.run.step = GAME.eng().phase === 'window' ? 'transfer' : 'fixtures'; D2T.save(); return ok; };
+  // Swap two shirts on a roll's pitch (Craig, 15 Oct: you can still move your players around while a roll is up); an empty
+  // shirt moves too, so a player can go into a gap. Not in the draft, where shirts are filled one by one.
+  GAME.swapSlots = (i, j) => {
+    const eng = GAME.eng();
+    if (i === j || eng.phase === 'draft' || !['setup', 'window', 'prematch'].includes(eng.phase)) return false;
+    if (i < 0 || j < 0 || i >= eng.xi.length || j >= eng.xi.length) return false;
+    const a = eng.xi[i]; eng.xi[i] = eng.xi[j]; eng.xi[j] = a; D2T.save(); return true;
+  };
+  // ---------- Poached (Craig, 14 Oct): a Club X career's later seasons lose three of the XI before the Summer window ----------
+  // E.poach decides it once (eng.poached, seeded); the squad screen plays it out the first time (the engine state is set as
+  // the animation starts, so a refresh shows the end state). Each empty shirt keeps the crest of where its man went.
+  GAME.poachDue = () => { const eng = GAME.eng(); return !!(eng && eng.mode === 'clubx' && eng.phase === 'setup' && eng.career > 1 && !eng.poached); };
+  GAME.poached = () => {
+    const eng = GAME.eng(), S = GAME.S(); if (!eng || !eng.poached) return [];
+    return eng.poached.map((x) => { const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { id: x.id, name: x.name, slot: x.slot, club: name, crest: c.crest, code: c.code }; });
+  };
+  GAME.poach = () => { const eng = GAME.eng(); if (!GAME.poachDue()) return []; E.poach(eng, GAME.S()); D2T.save(); return GAME.poached(); };
+  // the empty shirts and who left each (by his old shirt first; a shirt emptied by a change of shape takes the next one)
+  GAME.poachedSlots = () => {
+    const eng = GAME.eng(), list = GAME.poached(), out = {}; if (!list.length) return out;
+    const empty = eng.xi.map((id, i) => (id == null ? i : -1)).filter((i) => i >= 0), left = [];
+    list.forEach((x) => { if (empty.includes(x.slot) && !out[x.slot]) out[x.slot] = x; else left.push(x); });
+    empty.forEach((i) => { if (!out[i] && left.length) out[i] = left.shift(); });
+    return out;
+  };
+  // free agents who filled shirts still empty when the Summer window closed (E.fillHoles), shown once on the fixtures
+  GAME.freeFill = () => { const eng = GAME.eng(), S = GAME.S(); return ((eng && eng.freeFill) || []).map((x) => GAME.card(S, x.id)).filter(Boolean); };
+  GAME.startSeason = () => { if (GAME.poachDue()) E.poach(GAME.eng(), GAME.S()); const ok = E.startSeason(GAME.eng(), GAME.S()); D2T.state.run.step = GAME.eng().phase === 'window' ? 'transfer' : 'fixtures'; D2T.save(); return ok; };
 
   // ---------- Dare2Dream draft: one spin per shirt ----------
   GAME.inDraft = () => GAME.eng().phase === 'draft';
@@ -514,7 +542,7 @@
     // Colour only (near misses and bookings): seeded from the run, never changes a result.
     const rnd = E.stream(eng.seed, 'flavour', gw);
     const mine = eng.xi.map((id) => GAME.card(S, id)).filter((c) => c && c.pos !== 'GK');
-    const theirs = E.clubXI(S, r.opp, new Set()).filter((p) => p.b !== 'GK').map((p) => p.n);
+    const theirs = E.clubXI(S, r.opp, new Set(), E.joinersOf(S, eng, r.opp)).filter((p) => p.b !== 'GK').map((p) => p.n);
     const pick = (arr) => arr.length ? arr[Math.floor(rnd() * arr.length)] : '';
     const misses = 2 + Math.floor(rnd() * 4);
     for (let i = 0; i < misses; i++) {
@@ -526,10 +554,10 @@
     ev.push({ min: 45, type: 'ht' }, { min: 90, type: 'ft' });
     const order = { goal: 1, miss: 0, yellow: 2, ht: 3, ft: 4 };
     ev.sort((a, b) => a.min - b.min || order[a.type] - order[b.type]);
-    const opp = E.clubStrength(S, r.opp, new Set(eng.signed.filter((x) => x.date <= r.date).map((x) => x.id)));
+    const opp = E.clubStrength(S, r.opp, new Set(eng.signed.filter((x) => x.date <= r.date).map((x) => x.id)), E.joinersOf(S, eng, r.opp));
     return { gw, opp: oppName, ha: r.home ? 'H' : 'A', gf: r.us, ga: r.them, events: ev, me: Math.round(E.userStrength(S, eng).ovr), oppStrength: Math.round(opp.ovr), date: r.date };
   };
-  GAME.oppStrength = (gw) => { const eng = GAME.eng(), S = GAME.S(), f = eng.fixtures[gw - 1]; return Math.round(E.clubStrength(S, f.opp, new Set(eng.signed.filter((x) => x.date <= f.date).map((x) => x.id))).ovr); };
+  GAME.oppStrength = (gw) => { const eng = GAME.eng(), S = GAME.S(), f = eng.fixtures[gw - 1]; return Math.round(E.clubStrength(S, f.opp, new Set(eng.signed.filter((x) => x.date <= f.date).map((x) => x.id)), E.joinersOf(S, eng, f.opp)).ovr); };
   // After the final whistle: where to next (a transfer window, the next gameweek or the season summary).
   GAME.afterMatch = () => {
     const run = D2T.state.run, eng = GAME.eng();
@@ -582,7 +610,17 @@
     const entry = { key: k, mode, season: S.season, club: name, finish: F.finish, rise: F.rise, pts: F.pts, histFinish: F.histFinish,
       drop: F.finish <= n - rel, half: F.finish <= n / 2, top3: F.finish <= 3, title: F.finish === 1, at: new Date().toISOString().slice(0, 10) };
     if (mode !== 'classic') entry.dream = GAME.dreamMet(F.finish, F.histFinish);
-    if (mode === 'clubx') { entry.career = run.career ? run.career.n : 1; entry.careerId = run.career ? run.career.id : eng.seed; if (S.sim) entry.sim = true; }
+    if (mode === 'clubx') {
+      entry.career = run.career ? run.career.n : 1; entry.careerId = run.career ? run.career.id : eng.seed; if (S.sim) entry.sim = true;
+      // for the club history page (Craig, 14 Oct): the season's record, its scorers and its biggest win
+      const P = eng.played || [], goals = {};
+      entry.w = P.filter((m) => m.us > m.them).length; entry.d = P.filter((m) => m.us === m.them).length; entry.l = P.length - entry.w - entry.d;
+      entry.gf = P.reduce((a, m) => a + m.us, 0); entry.ga = P.reduce((a, m) => a + m.them, 0);
+      P.forEach((m) => m.events.forEach((e) => { if (e.us && e.name) goals[e.name] = (goals[e.name] || 0) + 1; }));
+      entry.goals = Object.entries(goals).sort((a, b) => b[1] - a[1]);
+      const big = P.filter((m) => m.us > m.them).sort((a, b) => (b.us - b.them) - (a.us - a.them) || b.us - a.us)[0];
+      if (big) entry.big = { us: big.us, them: big.them, opp: S.clubs[big.opp].name };
+    }
     if (run.daily) {
       entry.daily = run.daily;
       rec.daily = rec.daily || {};
@@ -618,6 +656,23 @@
     const list = [...careers.values()], longest = list.sort((a, b) => b.seasons - a.seasons || b.titles - a.titles)[0] || null;
     return { runs: runs.length, titles: runs.filter((r) => r.title).length, best: runs.length ? Math.min(...runs.map((r) => r.finish)) : null,
       careers: careers.size, longest, mostTitles: list.length ? Math.max(...list.map((c) => c.titles)) : 0 };
+  };
+  // One Club X career's seasons, oldest first, and its record (Craig, 14 Oct: the club history page). Seasons played
+  // before the history page have only finish and points, so the counts that need more skip them.
+  GAME.careerHistory = (id) => {
+    const run = D2T.state.run;
+    id = id || (run && run.eng && run.eng.mode === 'clubx' ? (run.career ? run.career.id : run.eng.seed) : null);
+    const seasons = D2T.state.record.runs.filter((r) => r.mode === 'clubx' && !r.daily && r.careerId === id).sort((a, b) => (a.career || 1) - (b.career || 1));
+    const full = seasons.filter((r) => r.w != null), goals = {};
+    full.forEach((r) => (r.goals || []).forEach(([n, g]) => { goals[n] = (goals[n] || 0) + g; }));
+    const top = Object.entries(goals).sort((a, b) => b[1] - a[1])[0] || null;
+    const best = seasons.slice().sort((a, b) => b.pts - a.pts)[0] || null;
+    const big = full.filter((r) => r.big).sort((a, b) => (b.big.us - b.big.them) - (a.big.us - a.big.them) || b.big.us - a.big.us)[0] || null;
+    return { id, club: seasons.length ? seasons[seasons.length - 1].club : null, seasons,
+      record: { runs: seasons.length, drop: seasons.filter((r) => r.drop).length, half: seasons.filter((r) => r.half).length, top3: seasons.filter((r) => r.top3).length, titles: seasons.filter((r) => r.title).length },
+      best, wins: full.reduce((a, r) => a + r.w, 0), games: full.reduce((a, r) => a + r.w + r.d + r.l, 0), full: full.length,
+      top: top ? { name: top[0], goals: top[1], seasons: full.filter((r) => (r.goals || []).some(([n]) => n === top[0])).length } : null,
+      big: big ? Object.assign({ season: big.season }, big.big) : null };
   };
   GAME.dreamRecord = () => {
     const runs = D2T.state.record.runs.filter((r) => r.mode === 'dare2dream' && !r.daily);
