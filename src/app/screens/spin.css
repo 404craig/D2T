@@ -133,10 +133,11 @@
 .sp-screen.is-placing .tr-pitch { display: flex; flex-direction: column; gap: 8px; flex: 1 1 auto; min-height: 0; padding: 0 16px; }
 .sp-screen.is-placing .sp-stage { flex: 0 0 206px; }
 /* green positions under each tray card (Craig, 15 Oct): plain grey text, real 9px on screen, so the row undoes the tray's .78 */
-.sp-gp { position: absolute; left: 50%; top: calc(100% + 8px); transform: translateX(-50%) scale(1.2821); transform-origin: 50% 0; pointer-events: none; white-space: nowrap;
+.sp-gp { position: absolute; left: 50%; top: calc(100% + 8px); transform: translateX(-50%); transform-origin: 50% 0; pointer-events: none; white-space: nowrap;
+  transition: transform .52s cubic-bezier(.5,0,.2,1), top .52s cubic-bezier(.5,0,.2,1);
   color: #8E8E99; font: 800 9px/1 var(--font); font-style: normal; letter-spacing: .03em; }
 .sp-gp i { font-style: normal; opacity: .5; }
-.sp-screen:not(.is-placing) .sp-gp { display: none; }
+.sp-screen.is-placing .sp-gp { transform: translateX(-50%) scale(1.2821); }   /* the tray row is at .78: the text keeps its real 9px */
 /* the same size on a picked or stepped-back card (the card scales, its text does not) */
 .sp-screen.is-placing .sp-slot.is-sel .sp-gp { top: calc(100% + 6px); transform: translateX(-50%) scale(1.1247); }
 .sp-screen.is-placing .sp-slot.is-other .sp-gp { transform: translateX(-50%) scale(1.4245); }
