@@ -407,7 +407,54 @@
   GAME.formations = () => E.FORMATION_NAMES;
   GAME.formationDots = (f) => E.FORMATIONS[f].map(([pos, x, y]) => ({ x, y: 89 - y * 0.86 }));
   GAME.fit = (cardId, slot) => { if (cardId == null) return 'green'; const S = GAME.S(), p = E.playerOf(S, cardId); return E.fitOf(p, E.FORMATIONS[GAME.eng().formation][slot][0]); };
-  GAME.strength = () => E.userStrength(GAME.S(), GAME.eng());
+  // the team rating is the squad as the card numbers say (plainStrength); the matches use E.userStrength (stars above their
+  // number, the tactic's lean, settling signings), which the screens never show as a number (18 Oct, docs/SCOPE_ENGINE.md)
+  GAME.strength = () => E.plainStrength(GAME.S(), GAME.eng());
+  // your three lines, as the squad header's bars show them (the plain numbers)
+  GAME.lines = () => { const L = GAME.strength(); return { def: Math.round(L.def), mid: Math.round(L.mid), att: Math.round(L.att) }; };
+  // ---------- tactics (Craig, 18 Oct): which of your lines settles matches ----------
+  GAME.TACTICS = [
+    { k: 'mid', name: 'Mid block', line: 'Balanced. Plays your XI as it is.', any: true },
+    { k: 'low', name: 'Low block', line: 'Sit deep and let your back line win it. Leans on your defence: fewer goals at both ends.' },
+    { k: 'poss', name: 'Possession', line: 'Keep the ball. Your midfield feeds the defence and the attack.' },
+    { k: 'counter', name: 'Counter attack', line: 'Defend, then break. Built round your best forward.' },
+    { k: 'press', name: 'High press', line: 'Win it high and attack. Leans on your forwards.' }
+  ];
+  GAME.tactic = () => E.tacticOf(GAME.eng());
+  GAME.tacticName = (k) => (GAME.TACTICS.find((t) => t.k === (k || GAME.tactic())) || GAME.TACTICS[0]).name;
+  GAME.tacticShapes = (k) => (E.RULES.tactics[k] || {}).shapes || [];
+  GAME.setTactic = (k) => { const ok = E.setTactic(GAME.eng(), k); if (ok) D2T.save(); return ok; };
+  // the one nudge (once per run, after six games, only if the tactic was never touched and the evidence is strong):
+  // "Your defence is your best line. A low block would lean on it."
+  GAME.tacticHint = () => {
+    const run = D2T.state.run, eng = GAME.eng(), S = GAME.S();
+    if (!run || !eng || run.tacticHinted || eng.gw < 7 || (eng.log || []).some((x) => x[0] === 'tactic')) return null;
+    const score = (L) => L.att + L.def + 0.2 * L.mid;
+    const base = score(E.userStrength(S, eng));
+    let best = null;
+    for (const k of E.TACTIC_NAMES) { if (k === 'mid') continue; const v = score(E.userStrength(S, Object.assign({}, eng, { tactic: k }))) - base; if (!best || v > best.v) best = { k, v }; }
+    if (!best || best.v < 1.6) return null;   // under about 0.75 of a rating point on the lines that count: not worth a word
+    run.tacticHinted = true; D2T.save();
+    const L = GAME.lines(), top = L.def >= L.mid && L.def >= L.att ? 'defence' : L.att >= L.mid ? 'attack' : 'midfield';
+    const art = { low: 'A low block', poss: 'Possession', counter: 'A counter attack', press: 'A high press' }[best.k];
+    return `Your ${top} is your best line. ${art} would lean on it.`;
+  };
+  // ---------- settling in (Craig, 18 Oct): games a signing still has before he plays at his number ----------
+  GAME.settling = (id) => {
+    const eng = GAME.eng(); if (!eng || !eng.signed) return null;
+    const s = eng.signed.find((x) => String(x.id) === String(id) && x.settle && x.settle.games);
+    if (!s) return null;
+    const left = s.settle.games - (eng.gw - s.gw);
+    return left > 0 && left <= s.settle.games ? { left, games: s.settle.games } : null;
+  };
+  // the words for a signing just made: how he will settle
+  GAME.settleWord = (id) => { const s = GAME.settling(id); return !s ? 'hits the ground running' : s.games === 2 ? 'will take a couple of games to settle' : 'will take three games to settle'; };
+  // ---------- scouting (Craig, 18 Oct): 2 respins for three cards green in one shirt and better than the man in it ----------
+  GAME.canScout = () => { const eng = GAME.eng(); return !!(eng && eng.phase === 'window' && eng.roll && eng.roll.window !== 'draft' && eng.respins >= E.RULES.scoutCost); };
+  GAME.scoutCost = () => E.RULES.scoutCost;
+  GAME.scoutInfo = () => { const S = GAME.S(); return E.scoutInfo(GAME.eng(), S).map((x) => Object.assign(x, { bestCard: x.best != null ? GAME.card(S, x.best) : null })); };
+  GAME.scout = (slot) => { const eng = GAME.eng(), ok = E.scout(eng, GAME.S(), slot); if (ok) { D2T.state.run.spun = ''; D2T.save(); } return ok; };
+  GAME.rollTags = () => { const r = GAME.eng().roll; return r && r.tags ? r.tags : null; };
   // During a Dare2Dream draft some shirts are empty: the rating is the average of the shirts filled so far.
   GAME.rating = () => {
     const eng = GAME.eng(), S = GAME.S();
@@ -555,7 +602,7 @@
     const order = { goal: 1, miss: 0, yellow: 2, ht: 3, ft: 4 };
     ev.sort((a, b) => a.min - b.min || order[a.type] - order[b.type]);
     const opp = E.clubStrength(S, r.opp, new Set(eng.signed.filter((x) => x.date <= r.date).map((x) => x.id)), E.joinersOf(S, eng, r.opp));
-    return { gw, opp: oppName, ha: r.home ? 'H' : 'A', gf: r.us, ga: r.them, events: ev, me: Math.round(E.userStrength(S, eng).ovr), oppStrength: Math.round(opp.ovr), date: r.date };
+    return { gw, opp: oppName, ha: r.home ? 'H' : 'A', gf: r.us, ga: r.them, events: ev, me: Math.round(E.plainStrength(S, eng).ovr), oppStrength: Math.round(opp.ovr), date: r.date };
   };
   GAME.oppStrength = (gw) => { const eng = GAME.eng(), S = GAME.S(), f = eng.fixtures[gw - 1]; return Math.round(E.clubStrength(S, f.opp, new Set(eng.signed.filter((x) => x.date <= f.date).map((x) => x.id)), E.joinersOf(S, eng, f.opp)).ovr); };
   // After the final whistle: where to next (a transfer window, the next gameweek or the season summary).

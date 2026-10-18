@@ -103,6 +103,34 @@
     return `<div class="se-scorers" aria-label="Scorers"><ul>${side(hg)}</ul><span class="se-ball">${SE.ball}</span><ul>${side(ag)}</ul></div>`;
   };
 
+  // ---------- tactics (Craig, 18 Oct; docs/SCOPE_ENGINE.md) ----------
+  // The tactics chip sits bottom right of the pitch, the twin of the shape chip bottom left: the tactic's name and a chevron.
+  SE.tacticChip = () => `<button class="se-formlink se-taclink" type="button" aria-label="Tactic"><b class="se-tname">${D2T.esc(GAME.tacticName())}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+  // your three lines as short bars (Defence, Midfield, Attack, the engine's own numbers), the best in the accent colour;
+  // no judgement beyond that: reading the bars and the boards is the game
+  SE.lineBars = () => {
+    const L = GAME.lines(), top = Math.max(L.def, L.mid, L.att), lo = 55, hi = 95;
+    const bar = (k, label, v) => `<span class="se-line${v === top ? ' is-top' : ''}" aria-label="${label} ${v}"><i>${k}</i><b><u style="width:${Math.max(4, Math.min(100, (v - lo) / (hi - lo) * 100)).toFixed(0)}%"></u></b><em>${v}</em></span>`;
+    return `<div class="se-linebars">${bar('DEF', 'Defence', L.def)}${bar('MID', 'Midfield', L.mid)}${bar('ATT', 'Attack', L.att)}</div>`;
+  };
+  // the tactics sheet: five boards, each a small pitch in your current shape that moves the way the tactic does (reduced
+  // motion: still), the tactic's name, one line on what it leans on, and the shapes it is built for. Done applies it.
+  // `onApply(k)` runs when the sheet closes on a change.
+  SE.tacticSheet = (root, onApply) => {
+    const f = GAME.eng().formation, dots = GAME.formationDots(f);
+    let pending = GAME.tactic();
+    const tile = (t) => `<button class="se-taccard${t.k === pending ? ' is-on' : ''}" type="button" data-t="${t.k}" aria-pressed="${t.k === pending}">
+      <span class="se-fpitch se-tacpitch is-${t.k}"><span class="se-fline"></span>${dots.map((d, i) => `<i style="left:${d.x}%;top:${d.y}%;--i:${i}"></i>`).join('')}${t.k === 'poss' ? '<s class="se-tacball"></s>' : ''}</span>
+      <span class="se-tactext"><b>${t.name}</b><span>${t.line}</span><small>${t.any ? 'Any shape' : 'Built for ' + GAME.tacticShapes(t.k).join(', ').replace(/, ([^,]*)$/, ' and $1')}${!t.any && GAME.tacticShapes(t.k).includes(f) ? ' · your shape' : ''}</small></span></button>`;
+    const el = D2T.h(`<div><div class="se-tacgrid">${GAME.TACTICS.map(tile).join('')}</div><p class="se-note">A tactic leans on one of your lines: it pays when that line is your strength and costs when it is your weakness. In a shape it is built for it bites in full; in any other, half. Change it whenever your squad is up.</p><button class="btn se-btn se-done" type="button">Done</button></div>`);
+    const sh = D2T.sheet({ title: 'Tactics', body: el, onClose: () => { if (pending === GAME.tactic()) return; GAME.setTactic(pending); window.D2TSound && window.D2TSound.play('formation'); onApply && onApply(pending); } });
+    sh.el.classList.add('se-run', 'se-tacsheet');
+    ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
+    el.querySelectorAll('.se-taccard').forEach((b) => { b.onclick = () => { pending = b.dataset.t; el.querySelectorAll('.se-taccard').forEach((x) => { const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); }); }; });
+    el.querySelector('.se-done').onclick = () => sh.close();
+    return sh;
+  };
+
   // ---------- the end-of-game sheet (Craig, 14 Oct) ----------
   // One slide-up sheet for every game once it is over: a headline, a line or two, then Share, Play again (whatever the
   // game calls it) and Home. It is a D2T.sheet, so it drags closed; a peek bar ("Season over", in the game's colour)

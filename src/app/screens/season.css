@@ -415,3 +415,68 @@
 .se-poach-sum li img { width: 26px; height: 26px; object-fit: contain; }
 .se-poach-sum li span { margin-left: auto; color: #8E8E99; font-weight: 600; font-size: 13px; }
 .se-poach-sum .se-poach-go { width: 100%; min-height: 52px; }
+
+/* ---------- tactics (Craig, 18 Oct; docs/SCOPE_ENGINE.md) ---------- */
+/* the tactics chip, bottom right of the pitch, the twin of the shape chip */
+.se-taclink { left: auto; right: 8px; }
+.tr-field .se-taclink { left: auto; right: 4px; font-size: 0; }
+.tr-field .se-taclink b { font-size: 13px; }
+/* your three lines under the squad header: DEF MID ATT bars, the best in the accent colour */
+.se-linebars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 2px 2px 8px; }
+.se-line { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 5px; min-width: 0; }
+.se-line i { font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: .08em; color: var(--muted); }
+.se-line b { display: block; height: 5px; border-radius: 3px; background: rgba(255,255,255,.1); overflow: hidden; }
+.se-line b u { display: block; height: 100%; border-radius: 3px; background: rgba(255,255,255,.45); transition: width .5s cubic-bezier(.2,.8,.2,1); }
+.se-line em { font: var(--display); font-size: 13px; color: var(--soft); font-variant-numeric: tabular-nums; }
+.se-line.is-top b u { background: var(--se-acc); }
+.se-line.is-top em, .se-line.is-top i { color: var(--se-text); }
+/* the five boards */
+.se-tacgrid { display: grid; gap: 8px; }
+.se-taccard { display: grid; grid-template-columns: 64px 1fr; gap: 12px; align-items: center; text-align: left; padding: 8px 10px 8px 8px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--ink); min-height: 44px; transition: border-color .15s, transform .15s, background-color .15s; }
+.se-taccard:active { transform: scale(.98); }
+.se-taccard .se-fpitch { aspect-ratio: 3 / 3.4; }
+.se-tactext { display: grid; gap: 2px; min-width: 0; }
+.se-tactext b { font: var(--display); font-size: 17px; color: var(--soft); }
+.se-tactext span { font-size: 12.5px; line-height: 1.3; color: var(--muted); }
+.se-tactext small { font-size: 11px; font-weight: 800; letter-spacing: .04em; color: var(--muted); }
+.se-taccard.is-on { border-color: var(--se-acc); background: var(--ink-2); box-shadow: 0 0 0 1px var(--se-acc), 0 8px 22px -10px var(--se-acc-b); }
+.se-taccard.is-on .se-tactext b, .se-taccard.is-on .se-tactext small { color: var(--se-text); }
+.se-taccard.is-on .se-fpitch i { background: var(--se-acc); }
+/* how each board moves (transform only; reduced motion: still) */
+.se-tacpitch i { width: 7px; height: 7px; margin: -3.5px; }
+.se-tacpitch.is-low i { transform: translateY(14%) scaleX(.9); animation: seTacLow 3.2s ease-in-out infinite; }
+.se-tacpitch.is-press i { transform: translateY(-16%); animation: seTacPress 2.4s ease-in-out infinite; }
+.se-tacpitch.is-counter i { animation: seTacCounter 3s cubic-bezier(.4,0,.3,1) infinite; animation-delay: calc(var(--i) * -.04s); }
+.se-tacball { position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px; border-radius: 50%; background: #fff; box-shadow: 0 0 6px #fff; animation: seTacBall 3.6s linear infinite; }
+@keyframes seTacLow { 0%, 100% { transform: translateY(14%) scaleX(.9); } 50% { transform: translateY(18%) scaleX(.86); } }
+@keyframes seTacPress { 0%, 100% { transform: translateY(-16%) scaleX(.92); } 50% { transform: translateY(-22%) scaleX(.9); } }
+@keyframes seTacCounter { 0%, 25% { transform: translateY(14%); opacity: 1; } 65% { transform: translateY(-40%); opacity: 1; } 72% { transform: translateY(-46%); opacity: 0; } 73% { transform: translateY(20%); opacity: 0; } 85%, 100% { transform: translateY(14%); opacity: 1; } }
+@keyframes seTacBall { 0% { transform: translate(-70%, 40%); } 33% { transform: translate(120%, 10%); } 66% { transform: translate(-30%, -120%); } 100% { transform: translate(-70%, 40%); } }
+@media (prefers-reduced-motion: reduce) { .se-tacpitch i, .se-tacball { animation: none !important; } }
+/* the tactic hint on the fixtures (once per run) */
+.se-tachint { margin: 10px 0 0; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--se-acc-b); background: var(--ink-2); font-size: 13px; color: var(--soft); }
+.se-tachint b { color: var(--se-text); }
+/* ---------- settling in: dots under the rating on a pitch card, one per game to go ---------- */
+.d2c.mini .d2c-dots { position: absolute; left: 50%; bottom: 7%; transform: translateX(-50%); display: flex; gap: 2px; pointer-events: none; }
+.d2c.mini .d2c-dots i { width: 4px; height: 4px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.5); opacity: .9; }
+/* ---------- scouting: Respin or Scout, then the pitch of shirts ---------- */
+.se-scoutrows { display: grid; gap: 8px; }
+.se-scoutrow { display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 12px; text-align: left; padding: 10px 12px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--ink); min-height: 60px; }
+.se-scoutrow[disabled] { opacity: .45; }
+.se-scoutrow svg { width: 26px; height: 26px; justify-self: center; color: #fff; }
+.se-scoutrow b { font: var(--display); font-size: 17px; color: #fff; display: block; }
+.se-scoutrow span { font-size: 12px; color: var(--muted); line-height: 1.3; }
+.se-scoutrow em { font: var(--display); font-size: 15px; color: var(--se-text); white-space: nowrap; }
+.se-scoutpitch { position: relative; width: 100%; aspect-ratio: 3 / 3.4; border-radius: 12px; background: repeating-linear-gradient(180deg, #0F2E1B 0 12.5%, #0C2716 12.5% 25%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); overflow: hidden; margin: 2px 0 10px; }
+.se-scoutpitch .se-fline { top: 50%; }
+.se-scoutshirt { position: absolute; width: 52px; height: 44px; margin: -22px -26px; border-radius: 10px; border: 1.5px solid rgba(255,255,255,.35); background: rgba(0,0,0,.55); color: #fff; display: grid; place-items: center; gap: 0; font-size: 11px; font-weight: 900; font-style: italic; padding: 0; transition: transform .15s; }
+.se-scoutshirt:active { transform: scale(.95); }
+.se-scoutshirt small { font-size: 10px; font-weight: 800; font-style: normal; color: var(--se-text); }
+.se-scoutshirt.is-none { border-color: #E5484D; background: rgba(229,72,77,.28); color: #FFB4B6; }
+.se-scoutshirt.is-none small { color: #FFB4B6; }
+.se-scoutkey { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); margin: 0 0 8px; }
+.se-scoutkey i { width: 14px; height: 12px; border-radius: 4px; border: 1.5px solid #E5484D; background: rgba(229,72,77,.28); }
+.se-scoutnone { font-size: 13px; color: var(--soft); margin: 0 0 8px; min-height: 1.3em; }
+/* the tag under a scouted card: better than the man in the shirt, or the next best */
+.sp-gp .sp-tag { display: block; margin-top: 4px; font-size: 8px; letter-spacing: .08em; text-transform: uppercase; color: var(--se-text, #12F06C); }
+.sp-gp .sp-tag.is-next { color: #8E8E99; }

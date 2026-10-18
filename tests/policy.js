@@ -16,8 +16,19 @@ function options(st, S) {
   }
   return out.sort((a, b) => b.delta - a.delta);
 }
+// The build step (18 Oct): which tactic suits the XI, by the lines the match uses. A greedy player re-checks at every
+// window; an average player picks once, in pre-season, 7 times in 10 (otherwise plays the default mid block all season).
+const lineScore = (L) => L.att + L.def + 0.2 * L.mid;
+function bestTactic(st, S) {
+  let best = null;
+  for (const t of D.TACTIC_NAMES) { const v = lineScore(D.userStrength(S, Object.assign({}, st, { tactic: t }))); if (!best || v > best.v) best = { t, v }; }
+  return best.t;
+}
 function decide(st, S, strategy, r) {
   if (strategy === "none") return D.pass(st, S);
+  if (process.env.NOTACT) { /* the mid block all season */ }
+  else if (strategy === "greedy") D.setTactic(st, bestTactic(st, S));
+  else if (st.gw === 1 && !st.tactic && r() < 0.7) D.setTactic(st, bestTactic(st, S));
   const opts = options(st, S);
   const best = opts.length ? opts[0].delta : 0;
   if (best < (strategy === "greedy" ? RESPIN_UNDER.greedy : RESPIN_UNDER.average) && st.respins > 0 && D.respinCards(st, S)) return;

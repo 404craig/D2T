@@ -229,3 +229,25 @@ Order matters because each step moves the fit:
 Step 0 and the defender and weight work half a day plus the refit; the star curve an hour plus a refit; tactics,
 shapes, roles, bars and boards 4 days; settling 1 day; raids half a day; scouting 2 days; retune and How to play 1
 day. About 10 days. The player data session's defender anchoring runs alongside and lands whenever its sources do.
+
+## Built, 18 Oct 2026 (build 128)
+
+Craig: "Think about that and build it all out." Everything above is in, with these decisions taken in the build:
+
+- **Stars are user-only** (Craig, 18 Oct): history's clubs play as they did, less what you took. The slopes are gold 1,
+  purple 1.5, legend 2 above 80: with gold at 1.2 to 1.5 the whole XI lifted and an average player won the title 8.5% to
+  15.7% of the time (greedy 30% to 48%); with gold at 1 the levels do the work, which is what Craig asked for.
+- **Purple 3%, legend 1%, and one legend guaranteed per season** (`legendRoll`: if none has come up by a seeded roll
+  between the 3rd and the 3rd-last, that roll's first card is one). A player who plays three games meets three legends;
+  whether he takes them and builds round them is the game. Purple at 4% made two purples and a legend the common case.
+- **Tactics** measure each line's edge against the real clubs' average offsets (`RULES.lineOffset`; keepers rate high,
+  so a defence reads a shade above its XI) and the counter attack costs 3 for up to +4 round the best forward (+6 made
+  it everyone's pick). Settling's slow type is three games (Craig).
+- **Raids** at m 2.5, opponent weight 1.6 minus 0.06 a place (Craig's 29 / 25 / 20 of 32, measured 29 / 24 / 19).
+- **Scouting**: red shirts with a key (Craig); a red shirt names the best man there and costs nothing.
+- **Measured** (`HIST=1 node tests/calibrate-all.js 12`, legend cards in for the first time): average player title 5.7%,
+  top 4 36.9%, 62 points; greedy 25.5%, 76.6%, 73 points; Derby 2007/08 average 1.7%, greedy 23.3%. By what a season
+  landed (`node tests/landed.js 8`, average player): nothing above gold 53 points, a legend 62, a purple and a legend 65,
+  two purples and a legend 68 and the title 15% of the time; the greedy player's two purples and a legend 77 points and
+  the title 43%. Tactics picked: the average player (once, pre-season) a low block 63% of the time (a relegated side's
+  defence is usually its best line), the greedy player (re-picked every window, having bought forwards) a high press 80%.

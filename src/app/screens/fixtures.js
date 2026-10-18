@@ -40,6 +40,7 @@
           </div>
           <div class="se-myfx-foot">${fx.ha === 'H' ? 'Home' : 'Away'} · ${D2T.esc(oppC.name)} finished ${D2T.ordinal((data.table.find((r) => r.name === fx.opp) || {}).pos || 0)} that season</div>
         </div>
+        ${(() => { const h = D2T.game.tacticHint(); return h ? `<p class="se-tachint"><b>Tactics.</b> ${D2T.esc(h)} Change it from the squad, back arrow.</p>` : ''; })()}
         ${all.length ? byDate.map((g, gi) => `<div class="se-fx-date">${SE.date(g.date)}</div><div class="se-fx-list">${g.list.map((f, i) => `<div class="se-fx" style="--d:${120 + (gi * 4 + i) * 45}ms">${dots(f.home, 'se-h')}${dots(f.away, 'se-a')}${side(SE.club(data, f.home), 'se-h')}<span class="se-v">v</span>${side(SE.club(data, f.away), 'se-a')}</div>`).join('')}</div>`).join('')
           : ''}
         ${anyDots ? `<p class="se-note se-fx-key"><span class="se-fx-dots"><i></i></span> = a player you signed from that club</p>` : ''}

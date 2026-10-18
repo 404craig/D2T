@@ -200,6 +200,7 @@ GREAT_CAP = (18, 8)
 GREAT_SEASONS = {"2003/04", "2004/05", "2005/06", "1993/94", "1998/99", "1999/00", "2006/07", "2007/08", "2008/09", "2012/13"}
 BOOST = (2, 5)          # min and max boost on an icon's peak card below the cut
 BOOST_FLOOR = {"craig": 75, "other": 80}   # a peak card rated from here up to 89 can be boosted (Craig's list from 75)
+DEF_LIFT = 2
 MIN_APPS = 10
 # Craig's own ratings for named players' peak-season cards (data/source/rating_overrides.json), applied before the
 # boosts; the card keeps the change in `bst` and `ovd` (15 Oct: Tony Adams 87).
@@ -356,6 +357,10 @@ def main():
                 people[pid]["lv"] = TIER_LEVEL.get(e.get("tier"), 0)
                 for k_in, k_out in (("assists", "as"), ("cleanSheets", "cs"), ("minutes", "mi"), ("stats", "st")):
                     if e.get(k_in) is not None: people[pid][k_out] = e[k_in]
+        # Craig, 18 Oct 2026: +2 on every defender card so defenders look as valued as they are in the game (the match
+        # model is refitted to the real results with it, tests/fit-match.js, so the league's scorelines stay real)
+        for q in people.values():
+            if q["b"] == "DEF": q["r"] = min(99, q["r"] + DEF_LIFT)
         icon_levels(season, people.values())
         plist = []
         tmap = {c: t for c, t in table}

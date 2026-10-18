@@ -6,9 +6,15 @@
 const D = require("../src/engine.js");
 const { decide, POLICIES } = require("./policy.js");
 const G = require(process.argv[3] || "../data/game/game.json");
+require("./legends.js")(G);   // the legend cards, as the phone plays them
 const per = +(process.argv[2] || 6);
 if (process.env.ODDS) D.RULES.levelOdds = JSON.parse(process.env.ODDS);
 if (process.env.ELITE) D.RULES.elite = JSON.parse(process.env.ELITE);
+// tuning knobs for the 18 Oct rethink: STAR='[1,1,1.5,1.75,2]' the star slopes, TACT='{"low":{...}}' merged into the tactics,
+// HALF=0.5 the half-shape factor, NOTACT=1 leaves every test player on the mid block
+if (process.env.STAR) D.RULES.star.slope = JSON.parse(process.env.STAR);
+if (process.env.TACT) { const t = JSON.parse(process.env.TACT); for (const k of Object.keys(t)) Object.assign(D.RULES.tactics[k], t[k]); }
+if (process.env.HALF) D.RULES.halfShape = +process.env.HALF;
 const HIST = !!process.env.HIST, recent = {};
 function run(entry, seed, strategy) {
   const S = G.seasons[entry.season];

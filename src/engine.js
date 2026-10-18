@@ -51,7 +51,38 @@ const RULES = {
   // and a legend about every 1.5 seasons, gold 40% with the rating-weighted draws (elite, below) carrying the title lift.
   // His pick over purple 1.5% and legend 0.6%, which needed gold at 50% and left two goes sharing 40% of their cards for
   // the same title rate. Balance and the trade-off table are in ICONS.md and CLAUDE.md.
-  levelOdds: [0.347, 0.213, 0.4, 0.03, 0.01],
+  // 18 Oct (the engine rethink, docs/SCOPE_ENGINE.md): purple 3%, legend 1%, and every season puts one legend on the table
+  // (legendRoll below) so a player who only plays a few games always meets one; whether he takes him is the game.
+  levelOdds: [0.34, 0.21, 0.41, 0.03, 0.01],
+  // Stars play above their number, for the user's XI only (Craig, 18 Oct: history's clubs play as they did; your built side
+  // is where the stars count): above `from` each rating point counts `slope` for his level (purple 1.5, legend 2; a gold
+  // plays at his number, so the levels matter, not just the rating), so an 89 purple plays as 93.5 and a 93 legend as 106.
+  // The card shows his real rating. Tuned 18 Oct (tests/calibrate-all.js, tests/landed.js): with gold at 1.2 to 1.5 the
+  // whole XI lifted and an average player won the title 8.5% to 15.7% of the time; at 1 / 1.5 / 2 it is 5.7% (Craig's 5%).
+  star: { from: 80, slope: [1, 1, 1, 1.5, 2] },
+  // Tactics (user only): which of your lines settles matches, measured against your own XI's average (O). k is 1 in a shape
+  // the tactic is built for and 0.5 in any other, so the shape decides how hard the tactic bites and never pays on its own.
+  tactics: {
+    mid: {},
+    low: { shapes: ["5-3-2", "4-5-1"], defUp: 0.9, attDown: 0.35 },
+    press: { shapes: ["4-3-3", "3-4-3", "4-2-3-1"], attUp: 0.9, defDown: 0.35 },
+    poss: { shapes: ["4-3-3", "4-2-3-1", "3-5-2"], midInto: 0.5 },
+    counter: { shapes: ["4-4-2", "3-5-2", "5-3-2"], fwd: 0.5, fwdCap: 4, attCost: 3, defUp: 0.5 }
+  },
+  halfShape: 0.5,
+  // the lines are not on quite the same scale (keepers rate high, so a defence reads a shade above its XI): a tactic
+  // measures each line's edge against the real clubs' average offsets, so no tactic is the right pick for everyone
+  lineOffset: { def: 0.26, mid: -0.54, att: 0.11 },
+  // Settling in (Craig, 18 Oct): a new signing hits the ground running, settles in over two games at halfway, or takes
+  // three games climbing from a quarter of the way up; seeded per card. He never plays below the shirt's rating before.
+  settle: { run: [0.3, 0.3, 0.3, 0.5, 0.7], slow: [0.2, 0.2, 0.2, 0.1, 0], floor: 60 },
+  // Scouting: 2 respins for three cards green in one shirt and better than the man in it (never a legend card).
+  scoutCost: 2,
+  // Raids: a raided club's real scorelines shrink by what its XI lost, through the match model's own sensitivity (m), and
+  // harder the better the opponent (amp = a - b x the opponent's real final position, never under min): losing Keane,
+  // Beckham and Scholes costs Man Utd 2000/01 about 19 of their 32 points against the top half and 10 of 48 against the
+  // bottom half (Craig, 18 Oct: 29 / 25 / 20 of 32 with one, two, three of them gone; measured 29 / 24 / 19).
+  raid: { m: 2.5, amp: [1.6, 0.06], min: 0.3 },
   // Anti-repeat (Craig, 13 Oct: a club-season must never serve the same players run after run). The app remembers the cards
   // each of the last three runs of a club-season offered (per phone) and hands them in as `recent`: a card from the last run
   // is drawn at a tenth of the weight of a fresh one, from the run before at a quarter, from the one before that at half.
@@ -62,13 +93,12 @@ const RULES = {
   elite: { from: 2, mid: 90, step: 3 },
   // green: his main position 100%, his other preferred positions 95% (alt); amber next to one of them; red elsewhere.
   fit: { green: 1, alt: 0.95, amber: 0.9, red: 0.7 },
-  raidFactor: 3,           // chance a raided club's win/draw is downgraded = factor x strength lost
-  raidCap: 0.6,
-  raidBaseline: 60,        // strength lost is measured as a share of strength above this
+  raidBaseline: 60,        // strengthLoss: strength lost as a share of strength above this (the tests and screens read it)
   // Fitted to every PL result (tests/fit-match.js, 13 Oct: a converged fit; the old numbers gave 3.4 goals a game against 2.7
   // real and twice the real share of 5-goal margins). On real fixtures the model gives 2.70 goals a game, 23.7% draws and 2.2%
   // of matches won by 5 or more (real: 2.69, 25.6%, 2.0%).
-  match: { base: 1.23, att: 0.0381, mid: 0.0079, home: 0.138, away: -0.138, cap: 6 }
+  // Refitted 18 Oct with the new slot weights and the defender lift (model 2.695 goals a game, real 2.695).
+  match: { base: 1.279, att: 0.0408, mid: 0.0055, home: 0.138, away: -0.138, cap: 6 }
 };
 const LEVELS = ["bronze", "silver", "gold", "purple", "legend"];
 
@@ -87,13 +117,16 @@ const FIT = {
   LM: { LWB: "amber", LW: "amber", CM: "amber" }, RM: { RWB: "amber", RW: "amber", CM: "amber" },
   LW: { LM: "amber", ST: "amber" }, RW: { RM: "amber", ST: "amber" }, ST: { CAM: "amber", LW: "amber", RW: "amber" }
 };
-// Slot weights into Defence, Midfield, Attack.
+// Slot weights into Defence, Midfield, Attack. 18 Oct: a centre back was a sixth of the defence and a striker over a
+// quarter of the attack (a rating point on a CB worth 0.17 points a season, on a ST 0.40); now GK 1.8, CB 1.6, ST 1.0,
+// measured 0.24 and 0.36: a striker still matters most, by 1.5 times rather than 2.4 (docs/SCOPE_ENGINE.md).
 const SLOTW = {
-  GK: [2.2, 0, 0], CB: [1, 0.1, 0], RB: [0.8, 0.3, 0.15], LB: [0.8, 0.3, 0.15],
-  RWB: [0.6, 0.5, 0.25], LWB: [0.6, 0.5, 0.25], CDM: [0.5, 1, 0.1], CM: [0.2, 1, 0.3],
+  GK: [1.8, 0, 0], CB: [1.6, 0.15, 0], RB: [0.9, 0.3, 0.15], LB: [0.9, 0.3, 0.15],
+  RWB: [0.7, 0.5, 0.25], LWB: [0.7, 0.5, 0.25], CDM: [0.5, 1, 0.1], CM: [0.2, 1, 0.3],
   CAM: [0, 0.6, 0.8], RM: [0.1, 0.8, 0.5], LM: [0.1, 0.8, 0.5],
-  RW: [0, 0.3, 1], LW: [0, 0.3, 1], ST: [0, 0.1, 1.25]
+  RW: [0, 0.3, 0.85], LW: [0, 0.3, 0.85], ST: [0, 0.1, 1.0]
 };
+const TACTIC_NAMES = ["mid", "low", "poss", "counter", "press"];
 // x across (0 left, 100 right) and y up the pitch (0 own goal, 100 opponent goal).
 const FORMATIONS = {
   "4-4-2":   [["GK",50,2],["RB",88,22],["CB",63,22],["CB",37,22],["LB",12,22],["RM",88,52],["CM",63,52],["CM",37,52],["LM",12,52],["ST",63,84],["ST",37,84]],
@@ -170,9 +203,69 @@ function xiStrength(players, slots) {
   });
   return { def: sum[0] / w[0], mid: sum[1] / w[1], att: sum[2] / w[2], ovr: all / slots.length };
 }
-function userStrength(S, st, legends) {
+// A star's rating as the match sees it (user's XI only): above RULES.star.from each point counts his level's slope.
+function starRating(p) {
+  const S = RULES.star; if (!p || p.r <= S.from) return p ? p.r : 40;
+  return S.from + (p.r - S.from) * (S.slope[p.lv || 0] || 1);
+}
+// How a signing plays in his gw-th game for you while he settles (the signed entry's `settle`): null when settled.
+function settledRating(p, s, gw) {
+  if (!s || !s.settle || !s.settle.games || gw == null) return null;
+  const played = gw - s.gw; if (played < 0 || played >= s.settle.games) return null;
+  const progress = s.settle.games === 2 ? 0.5 : (played + 1) / (s.settle.games + 1);
+  const from = Math.min(s.settle.from, p.r);
+  return from + (p.r - from) * progress;
+}
+// Your XI as the match plays it: settling signings at their settling rating (opts.gw), stars above their number
+// (opts.star, default on), then the tactic's lean on your lines (opts.tactic, default on; the shape sets how hard).
+// plainStrength is the squad as the card numbers say, for the team rating on the screens.
+function userStrength(S, st, legends, opts) {
+  opts = opts || {};
   const slots = FORMATIONS[st.formation].map(s => s[0]);
-  return xiStrength(st.xi.map(id => playerOf(S, id, legends)), slots);
+  const bySigned = opts.gw != null ? new Map((st.signed || []).map(s => [String(s.id), s])) : null;
+  const players = st.xi.map(id => {
+    const p = playerOf(S, id, legends); if (!p) return p;
+    let r = p.r;
+    if (bySigned) { const sr = settledRating(p, bySigned.get(String(id)), opts.gw); if (sr != null) r = sr; }
+    if (opts.star !== false) r = starRating(Object.assign({}, p, { r }));
+    return r === p.r ? p : Object.assign({}, p, { r });
+  });
+  const lines = xiStrength(players, slots);
+  if (opts.tactic === false) return lines;
+  return tacticLines(st, lines, players, slots);
+}
+function plainStrength(S, st, legends) { return userStrength(S, st, legends, { star: false, tactic: false }); }
+// The tactic's effect on your lines (RULES.tactics): everything is measured against your own XI's average, so a
+// tactic pays when the line it leans on is your strength and costs when it is your weakness; in a shape it is built
+// for it bites in full, in any other at half (RULES.halfShape). Mid block changes nothing.
+function tacticOf(st) { return RULES.tactics[st.tactic] ? st.tactic : "mid"; }
+function tacticLines(st, L, players, slots) {
+  const name = tacticOf(st), T = RULES.tactics[name];
+  if (name === "mid") return L;
+  const k = (T.shapes || []).includes(st.formation) ? 1 : RULES.halfShape, O = L.ovr, X = RULES.lineOffset;
+  const eD = L.def - X.def - O, eM = L.mid - X.mid - O, eA = L.att - X.att - O;   // each line's edge over the XI
+  const out = Object.assign({}, L);
+  if (name === "low") { out.def = L.def + T.defUp * k * eD; out.att = L.att - T.attDown * k * eA; }
+  else if (name === "press") { out.att = L.att + T.attUp * k * eA; out.def = L.def - T.defDown * k * eD; }
+  else if (name === "poss") { out.def = L.def + T.midInto * k * (eM - eD); out.att = L.att + T.midInto * k * (eM - eA); }
+  else if (name === "counter") {
+    let F = 0; slots.forEach((pos, i) => { if (SLOT_BROAD[pos] === "FWD") F = Math.max(F, effRating(players[i], pos)); });
+    out.att = L.att + k * (Math.min(T.fwdCap, T.fwd * (F - L.att)) - T.attCost); out.def = L.def + T.defUp * k;
+  }
+  return out;
+}
+function setTactic(st, name) {
+  if (!RULES.tactics[name] || !["setup", "window", "prematch", "draft"].includes(st.phase)) return false;
+  if (tacticOf(st) === name) return true;
+  st.tactic = name; st.log.push(["tactic", name]);
+  return true;
+}
+// what a signing's settling will be, seeded per card (never for a card already in the XI, a draft pick or a free agent)
+function settleOf(st, p, outRating) {
+  const u = unit(st.seed, "settle", p.id), lv = p.lv || 0, R = RULES.settle;
+  if (u < R.run[lv]) return null;
+  const from = Math.max(R.floor, outRating == null ? R.floor : outRating);
+  return u < R.run[lv] + R.slow[lv] ? { games: 3, from } : { games: 2, from };
 }
 // A historical club's best XI from its real squad, minus anyone the user has signed.
 // Broad shape: 1 GK, 4 DEF, 4 MID, 2 FWD by rating, weighting regular starters.
@@ -477,8 +570,9 @@ function pickCard(r, st, pool) {
   if (!rw && !elite) return pool[Math.floor(r() * pool.length)];
   return pickWeighted(r, pool, p => (rw && rw[p.id] != null ? rw[p.id] : 1) * (elite ? eliteWeight(p) : 1));
 }
-function drawCard(r, S, st, legends, taken, broad, fit) {
-  const lv = (() => { let x = r(); for (let i = 0; i < 5; i++) { x -= RULES.levelOdds[i]; if (x <= 0) return i; } return 0; })();
+function drawCard(r, S, st, legends, taken, broad, fit, force) {
+  const drawn = (() => { let x = r(); for (let i = 0; i < 5; i++) { x -= RULES.levelOdds[i]; if (x <= 0) return i; } return 0; })();
+  const lv = force != null ? force : drawn;
   const pool = cardPool(S, st).filter(p => !taken.has(p.id) && (!broad || broadOf(p) === broad) && (!fit || fit(p)));
   if (lv === 4 && legends && legends.length) {
     const lp = legends.filter(l => !st.seen.includes(l.id) && !taken.has(l.id) && (!broad || broadOf(l) === broad) && (!fit || fit(l)));
@@ -493,12 +587,21 @@ function drawCard(r, S, st, legends, taken, broad, fit) {
 }
 // every card put on the table in this run, for the next run's `recent`
 function noteOffered(st, cards) { st.offered = st.offered || []; for (const id of cards) if (!st.offered.includes(id)) st.offered.push(id); }
+// Every season puts one legend on the table (Craig, 18 Oct: players play a few games, not a hundred, and every one of
+// them should meet a legend): if none has come up by a roll chosen for the season (seeded, the 3rd to the 3rd-last roll),
+// that roll's first card is a legend. Rolls that bring one by the odds make it moot.
+function legendRoll(st) {
+  const total = st.rolls.reduce((a, w) => a + w.n, 0); if (total < 7) return -1;
+  return 2 + Math.floor(unit(st.seed, "legendroll", st.career || 1) * (total - 4));
+}
+function rollIndex(st) { let n = 0; for (let i = 0; i < st.rollIx; i++) n += st.rolls[i].n; return n + st.rollStep; }
 function newRoll(st, S) {
   const w = currentWindow(st);
   const spin = (st.roll && st.roll.key === `${st.rollIx}.${st.rollStep}`) ? st.roll.spin + 1 : 0;
   const r = stream(st.seed, "roll", st.rollIx, st.rollStep, spin);
   const taken = new Set(), cards = [];
-  for (let k = 0; k < 3; k++) { const id = drawCard(r, S, st, S.legends, taken); if (id != null) { cards.push(id); taken.add(id); } }
+  const due = spin === 0 && rollIndex(st) === legendRoll(st) && !(st.offered || []).some(id => String(id).startsWith("L:"));
+  for (let k = 0; k < 3; k++) { const id = drawCard(r, S, st, S.legends, taken, null, null, due && k === 0 ? 4 : null); if (id != null) { cards.push(id); taken.add(id); } }
   st.roll = { key: `${st.rollIx}.${st.rollStep}`, spin, cards, window: w ? w.kind : "reg", step: st.rollStep + 1, of: w ? w.n : 1 };
   noteOffered(st, cards);
 }
@@ -511,23 +614,53 @@ function respinCards(st, S) {
   return true;
 }
 function signPreview(st, S, cardId, legends) {
-  // Rating change for each shirt if this card took it.
+  // The change in each shirt if this card took it, as the matches would feel it (stars and the tactic count, so a gold
+  // centre back under a low block shows a bigger gain than a gold striker); `delta` is the change in the lines the match
+  // uses (attack and defence, with a fifth of the midfield), `ovr` the plain team rating's.
   const p = playerOf(S, cardId, legends);
   const slots = FORMATIONS[st.formation].map(s => s[0]);
-  const base = userStrength(S, st, legends);
+  const base = userStrength(S, st, legends), pb = plainStrength(S, st, legends);
+  const score = (L) => (L.att + L.def + 0.2 * L.mid) / 2.2;
   return slots.map((pos, i) => {
     const xi = st.xi.slice(); xi[i] = cardId;
-    const s = userStrength(S, Object.assign({}, st, { xi }), legends);
-    return { slot: i, pos, fit: fitOf(p, pos), delta: s.ovr - base.ovr, def: s.def - base.def, mid: s.mid - base.mid, att: s.att - base.att };
+    const st2 = Object.assign({}, st, { xi }), s = userStrength(S, st2, legends), ps = plainStrength(S, st2, legends);
+    return { slot: i, pos, fit: fitOf(p, pos), delta: score(s) - score(base), ovr: ps.ovr - pb.ovr, def: s.def - base.def, mid: s.mid - base.mid, att: s.att - base.att };
   });
+}
+// ---------- scouting (Craig, 18 Oct) ----------
+// For each shirt, how many cards the scouts could bring: this season's cards (never legend cards) green in the shirt and
+// rated above the man in it, not seen this run. Zero means nobody better (the shirt is red on the sheet).
+function scoutPool(st, S, slot) {
+  const pos = FORMATIONS[st.formation][slot][0], holder = st.xi[slot] != null ? playerOf(S, st.xi[slot], S.legends) : null, hr = holder ? holder.r : 0;
+  const pool = cardPool(S, st).filter(p => fitOf(p, pos) === "green");
+  return { pos, hr, better: pool.filter(p => p.r > hr), below: pool.filter(p => p.r <= hr).sort((a, b) => b.r - a.r || b.a - a.a) };
+}
+function scoutInfo(st, S) {
+  return FORMATIONS[st.formation].map((_, slot) => { const q = scoutPool(st, S, slot); return { slot, pos: q.pos, better: q.better.length, best: q.better.length ? null : (q.below[0] ? q.below[0].id : null) }; });
+}
+// Spend 2 respins on a shirt: three cards, as many as there are better than the man in it (drawn as a roll draws, so a
+// higher-rated card comes up more often), the rest filled with the best below him, each tagged. Refused with nobody better.
+function scout(st, S, slot) {
+  if (st.phase !== "window" || !st.roll || st.roll.window === "draft" || st.respins < RULES.scoutCost) return false;
+  const q = scoutPool(st, S, slot); if (!q.better.length) return false;
+  st.respins -= RULES.scoutCost;
+  for (const id of st.roll.cards) if (!st.seen.includes(id)) st.seen.push(id);
+  const spin = st.roll.spin + 1, r = stream(st.seed, "scout", st.rollIx, st.rollStep, spin), cards = [], tags = [], taken = new Set();
+  const w = (p) => Math.pow(2, (p.r - RULES.elite.mid) / RULES.elite.step) * (st.recent && st.recent[p.id] != null ? st.recent[p.id] : 1);
+  while (cards.length < 3 && taken.size < q.better.length) { const p = pickWeighted(r, q.better.filter(x => !taken.has(x.id)), w); taken.add(p.id); cards.push(p.id); tags.push("better"); }
+  for (const p of q.below) { if (cards.length >= 3) break; cards.push(p.id); tags.push("next"); }
+  st.roll = Object.assign({}, st.roll, { spin, cards, scout: slot, tags });
+  noteOffered(st, cards);
+  st.log.push(["scout", slot]);
+  return true;
 }
 function sign(st, S, cardId, slot) {
   if (st.phase !== "window" || !st.roll || !st.roll.cards.includes(cardId)) return false;
   const out = st.xi[slot];
   st.xi[slot] = cardId;
   const p = playerOf(S, cardId, S.legends);
-  const sdate = st.fixtures[st.gw - 1].date;
-  st.signed.push({ id: cardId, gw: st.gw, slot, out, from: p ? clubAt(p, sdate) : null, date: sdate });
+  const sdate = st.fixtures[st.gw - 1].date, outP = out != null ? playerOf(S, out, S.legends) : null;
+  st.signed.push({ id: cardId, gw: st.gw, slot, out, from: p ? clubAt(p, sdate) : null, date: sdate, settle: p ? settleOf(st, p, outP ? outP.r : null) : null });
   if (p && p.c != null && !String(cardId).startsWith("L:")) {
     st.gone.push(cardId);
     st.raids.push({ club: clubAt(p, sdate), date: sdate, gw: st.gw });
@@ -626,32 +759,45 @@ function strengthLoss(S, club, gone, cache, join) {
   if (cache) cache.set(key, L);
   return L;
 }
-// The other clubs' results, with raided clubs' wins and draws downgraded by chance.
+// What a raided club's lines lost (negative) or, strengthened by a poached player, gained, against its full real XI.
+function lineLoss(S, club, gone, cache, join) {
+  const key = club + ":" + [...gone].filter(id => { const p = indexSeason(S).byId.get(id); return p && (p.c === club || p.c2 === club); }).sort().join(",") + "+" + (join || []).map(p => p.id).join(",");
+  if (cache.has(key)) return cache.get(key);
+  const full = clubStrength(S, club, new Set()), now = clubStrength(S, club, gone, join);
+  const d = { att: now.att - full.att, def: now.def - full.def, mid: now.mid - full.mid };
+  const out = Math.abs(d.att) + Math.abs(d.def) + Math.abs(d.mid) < 1e-9 ? null : d;
+  cache.set(key, out);
+  return out;
+}
+// The other clubs' results: history, bent by your signings (18 Oct, docs/SCOPE_ENGINE.md). A raided club's real scoreline
+// shrinks by what its XI lost, through the match model's own sensitivity: its goals by the attack and midfield lost, the
+// goals it let in up by the defence and midfield lost, each value rounded up or down by one seeded draw (so 2.3 goals is 2
+// seven times in ten and 3 three times). The bite is harder the better the opponent (RULES.raid.amp by his real final
+// position: losing your best players shows in the big games, less so against the bottom half). A club a poached player
+// joined (Club X) gets the same with the signs reversed. With nobody taken every result is history, untouched.
 function otherResults(S, st) {
-  const ix = indexSeason(S), cache = new Map(), out = [];
+  const ix = indexSeason(S), cache = new Map(), out = [], R = RULES.raid, M = RULES.match;
+  const any = st.signed.length || (st.poached && st.poached.length);
+  let rank = null;
+  if (any) { rank = {}; historyTable(S, S.deductions).forEach((row, i) => { rank[row.c] = i + 1; }); }
+  const round = (x, u) => { x = Math.max(0, x); const f = Math.floor(x); return f + (u < x - f ? 1 : 0); };
   for (const m of ix.matches) {
     if (m.h === st.club || m.a === st.club) continue;
-    let hg = m.hg, ag = m.ag, changed = false;
-    if (st.signed.length || (st.poached && st.poached.length)) {
+    let hg = m.hg, ag = m.ag;
+    if (any) {
       const gone = goneBefore(st, m.date);
       for (const side of ["h", "a"]) {
-        const club = side === "h" ? m.h : m.a;
-        const L = strengthLoss(S, club, gone, cache, joinersOf(S, st, club));
-        if (L === 0) continue;
-        const chance = Math.min(RULES.raidCap, RULES.raidFactor * Math.abs(L));
-        const u = unit(st.seed, "raid", m.i, side);
-        if (u >= chance) continue;
+        const club = side === "h" ? m.h : m.a, opp = side === "h" ? m.a : m.h;
+        const d = lineLoss(S, club, gone, cache, joinersOf(S, st, club));
+        if (!d) continue;
+        const amp = R.m * Math.max(R.min, R.amp[0] - R.amp[1] * (rank[opp] || 10));
         const mine = side === "h" ? hg : ag, theirs = side === "h" ? ag : hg;
-        if (L > 0) {
-          if (mine > theirs) { if (side === "h") hg = ag; else ag = hg; changed = true; }        // win becomes a draw
-          else if (mine === theirs) { if (side === "h") ag++; else hg++; changed = true; }       // draw becomes a defeat
-        } else {                                                                                 // strengthened by a poached player
-          if (mine < theirs) { if (side === "h") hg = ag; else ag = hg; changed = true; }        // defeat becomes a draw
-          else if (mine === theirs) { if (side === "h") hg++; else ag++; changed = true; }       // draw becomes a win
-        }
+        const gf = round((mine + 0.25) * Math.exp(amp * (M.att * d.att + M.mid * d.mid)) - 0.25, unit(st.seed, "raid", m.i, side, "f"));
+        const ga = round((theirs + 0.25) * Math.exp(-amp * (M.att * d.def + M.mid * d.mid)) - 0.25, unit(st.seed, "raid", m.i, side, "a"));
+        if (side === "h") { hg = gf; ag = ga; } else { ag = gf; hg = ga; }
       }
     }
-    out.push({ i: m.i, date: m.date, h: m.h, a: m.a, hg, ag, changed });
+    out.push({ i: m.i, date: m.date, h: m.h, a: m.a, hg, ag, changed: hg !== m.hg || ag !== m.ag });
   }
   return out;
 }
@@ -673,7 +819,7 @@ function scorerWeights(players, slots) {
 function simMatch(S, st, gw) {
   const fx = st.fixtures[gw - 1];
   const legends = S.legends;
-  const us = userStrength(S, st, legends);
+  const us = userStrength(S, st, legends, { gw });   // settling signings, stars above their number, the tactic's lean
   const gone = goneBefore(st, fx.date);
   const join = joinersOf(S, st, fx.opp);
   const them = clubStrength(S, fx.opp, gone, join);
@@ -795,7 +941,8 @@ function seasonSummary(S, st) {
 
 const API = {
   RULES, LEVELS, POS, FIT, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
-  fitOf, effRating, indexSeason, playerOf, clubAt, xiStrength, userStrength, clubXI, clubStrength,
+  fitOf, effRating, indexSeason, playerOf, clubAt, xiStrength, userStrength, plainStrength, starRating, settledRating, clubXI, clubStrength,
+  TACTIC_NAMES, tacticOf, tacticLines, setTactic, scoutInfo, scout, legendRoll,
   schedule, fixturesOf, recentWeights, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
   poach, joinersOf, fillHoles, draftOrder, draftSlot, draftFormation, draftPick, draftFits, listsPos, DRAFT_MODES, carryIn, simResults,
   startSeason, inWindow, currentWindow, newRoll, respinCards, signPreview, sign, pass,
