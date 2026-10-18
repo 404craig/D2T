@@ -1,293 +1,217 @@
-# Scope: a more authentic match engine (Classic, Daily, Club X)
+# The game mechanics, rethought (Classic, Daily, Club X)
 
-Craig, 18 Oct 2026, after the tactics, scouting and raids scope (`docs/SCOPE_TACTICS_SCOUTING_RAIDS.md`): look at the
-whole engine and make it play out more like real football. Nothing here is built or live. Dare2Dream is left out (it
-may be dropped or reinvented). Every number below comes from the scratch harness run against the real engine and
-data; where a number is an estimate rather than a measurement it says so.
+Craig, 18 Oct 2026: rethink the full game mechanics so the game plays like real football and rewards building a
+good side. Nothing here is built or live. Dare2Dream is left out. Every number is measured on the real engine and
+data unless it says estimate. This replaces the first draft of this file and the tactics, scouting and raids scope
+where they differ.
 
-## The short version
+## What is actually wrong, measured
 
-The engine is sound at its core (the goals model is fitted to every real result: 2.70 goals a game against 2.69 real,
-draws 23.7% against 25.6%). What makes it feel less than real is in the layers around it. Seven changes, in the order
-I would build them:
+I ran 320 full seasons per test player (16 relegated club-seasons, 20 seeds, legend cards included) and grouped the
+runs by what they landed:
 
-1. **Defenders count for too little.** The real cause is not their ratings, it is the weights. One rating point on a
-   centre back is worth 0.17 points a season; on a striker 0.40, a keeper 0.36. A legend centre back adds 1.5 points
-   a season, a legend striker 4.5. A flat +2 for every defender would not change this (the men already in your
-   shirts go up too, so a defender card is no better a signing than before). Fix the weights instead (section 1).
-2. **Raids: scaled scorelines, hitting harder against good sides.** The scaled-scoreline rule from the last scope,
-   plus a weight by the opponent's real final position: losing Keane, Beckham and Scholes costs Man Utd about a
-   quarter of their points against the top half and an eighth against the bottom half. The type of player taken is
-   already in it (each line's loss moves goals for or against). Section 2.
-3. **Stars feel like stars.** Ratings above 85 count a little extra in matches, for everyone, so a legend striker is
-   worth about 6 points a season instead of 4.5, and the great sides of history are a touch harder to beat. Section 3.
-4. **Tactics with shapes.** A tactic that suits your shape gives a small lift to every line; a tactic that leans on
-   your best line gives more. Get both right and an 80-rated XI plays like an 82; get both wrong and it plays like a
-   78 or 79. Guidance by plain text and your three line bars, no "Suits your XI" label. Section 4.
-5. **New signings settle in.** Each signing gets a seeded settling time: some hit the ground running with a debut
-   lift, most take two games, a few take four. It never makes him worse than the man he replaced. Section 5.
-6. **Scouting.** 2 respins, 3 cards all green in one shirt and all better than the man in it, the trade-off spelt
-   out on the sheet. Section 6.
-7. **Opponents' real form.** A club on a real winning run at the time you meet it is a little stronger, one in a
-   slump a little weaker, so a match against 2003/04 Leeds in March feels different from August. Section 7.
-
-Then one retune of the whole thing against Craig's targets: a relegated side wins the league about 5% of the time,
-Derby 2007/08 about 2% (section 8).
-
-## Where the engine stands
-
-- An XI becomes three numbers, defence, midfield and attack, from the slot weights (`SLOTW`): each shirt feeds the
-  lines in fixed shares. Goals are Poisson from `exp(0.0381 x (our attack - their defence) + 0.0079 x (midfield gap)
-  + home)`. Opponents field their real squad's best XI minus anyone you have taken. Other clubs' results are history,
-  bent by raids.
-- What an XI is worth over a season (expected points against the real clubs, 4-4-2, every man green):
-
-| Your XI | 2007/08 | 2000/01 | 2018/19 |
-|---|---|---|---|
-| All 72 (bronze and silver) | 40 | 41 | 41 |
-| All 76 (silver) | 52 | 53 | 53 |
-| All 80 (low gold) | 64 | 65 | 65 |
-| All 82 (gold) | 70 | 71 | 71 |
-| All 84 | 76 | 78 | 77 |
-| Gold with a purple striker (89) | 73 | 75 | 74 |
-| Gold with two purples (striker, midfielder) | 75 | 76 | 76 |
-| Gold with a legend striker (93) | 75 | 76 | 76 |
-| Gold with a legend centre back (91) | 72 | 73 | 73 |
-| Gold with two purples and a legend | 80 | 81 | 81 |
-
-  The top real XIs those seasons are 87.5 (Man Utd 2007/08 and 2000/01, Liverpool 2018/19). So one rating point
-  across the XI is worth about 3 points a season, an all-gold side finishes about fourth, and a gold side that also
-  lands two purples and a legend is a title contender. That is the right shape for Craig's "a team of mostly gold, or
-  with a couple of purples or a legend, should perform well". What is wrong is where the value sits (section 1) and how
-  little a single star moves it (section 3).
-
-## 1. Defenders and the slot weights
-
-### What is wrong
-
-Points a season for +1 rating point in one shirt, everyone else 80 (2007/08):
-
-| Shape | GK | Full backs | CB | CM/CDM | Wide mid | Wingers/CAM | ST |
-|---|---|---|---|---|---|---|---|
-| 4-4-2 now | 0.36 | 0.21 | 0.18 | 0.24 | 0.26 | | 0.40 |
-| 4-3-3 now | 0.35 | 0.21 | 0.17 | 0.22 to 0.24 | | 0.36 | 0.41 |
-| 5-3-2 now | 0.33 | 0.23 | 0.16 | 0.25 | | | 0.45 |
-
-The keeper carries 2.2 of the defence's weight and each centre back 1, so a centre back is a sixth of the defence
-while a striker is over a quarter of the attack. That is why every test player ends up buying forwards and why the
-low block lost on average in the last scope.
-
-The card supply leans the same way (players with 10+ games, all seasons):
-
-| | p50 | p90 | p97 | p99 | best |
-|---|---|---|---|---|---|
-| GK | 76 | 84 | 89 | 91 | 92 |
-| DEF | 73 | 80 | 84 | 88 | 92 |
-| MID | 73 | 82 | 88 | 91 | 97 |
-| FWD | 72 | 83 | 90 | 95 | 99 |
-
-The middle is level; the top end of defenders is squashed by 4 to 7 points.
-
-### Craig's +2 idea, and what I would do instead
-
-A flat +2 for all defenders mostly changes how cards look (more defenders turn gold): the men in your shirts and in
-every opponent's XI go up by the same 2, so signing a defender gains you exactly what it did before. It would also
-lower every scoreline unless the goals model is refitted.
-
-Instead:
-
-- **New slot weights** (draft: keeper 1.8 from 2.2, centre back 1.6 from 1.0, full backs 0.9 from 0.8, wing backs 0.7,
-  striker 1.0 from 1.25, wingers 0.85 from 1.0). Measured, per rating point: keeper 0.26, centre back 0.24, full back
-  0.21, midfield 0.24 to 0.28, wingers 0.33 to 0.35, striker 0.36 (5-3-2: 0.42). A striker still matters most, which is
-  real (they cost the most for a reason), but by 1.5 times rather than 2.4. A legend centre back becomes a signing
-  worth celebrating. Refit the goals model after (`tests/fit-match.js`), since opponents' strengths move too.
-- **Ask the player data session** whether the top 3% of defenders should be stretched to match the other outfield
-  positions (a 92 centre back's season is as rare as a 97 midfielder's). Only with a source behind each rating, as
-  always; if it cannot be verified, leave the ratings alone and let the weights do the work.
-
-## 2. Raids by player type and opponent
-
-### Measured
-
-The scaled-scoreline rule (last scope, m = 1.5) on Man Utd 2000/01 (real: 32 points from the top half, 48 from the
-bottom half) and Leeds 2000/01:
-
-| Taken | Line lost (att / def / mid) | Plain scaling: v top half, v bottom half, total | Weighted by opponent |
-|---|---|---|---|
-| Keane, Beckham, Scholes | -4.5 / -1.2 / -10.1 | 25, 38, 63 | 24, 42, 66 |
-| Stam, Barthez, G. Neville | -0.2 / -7.3 / -0.4 | 26, 42, 68 | 26, 45, 70 |
-| Sheringham, Cole, Yorke | -8.5 / 0 / -0.7 | 25, 38, 63 | 24, 43, 67 |
-| Leeds: Viduka, Ferdinand, Bowyer (real 35 + 33) | -3.7 / -0.3 / -3.3 | 27, 26, 53 | 26, 28, 54 |
-
-The type of player is already in the rule: midfielders shrink both ends of the scoreline (the midfield term moves
-goals for and against), forwards shrink their goals, defenders and keepers raise the goals they let in. Plain scaling
-costs the same share of points in every match (about 22%). Weighting by opponent makes it what Craig describes.
-
-### The rule
-
-Scaled scorelines as in the last scope, with the bite multiplied by the opponent's real final position:
-`1.45 - 0.05 x position` (1.4 against the champions, 1.0 against 9th, 0.45 against the bottom side). Against the top
-half Man Utd lose about 24% of their points without the midfield three, against the bottom half about 12%. A 1-0 win
-over Arsenal becomes 0-0 or 0-1 most of the time; a 3-0 over Bradford is usually 2-0 or 2-1. In a Club X forecast
-season the forecast's final table gives the positions. The defenders row moves up once section 1's weights are in
-(a raided back line will matter more), so measure again after.
-
-## 3. Stars
-
-Today a rating point is a rating point. In matches, ratings above 85 would count half again
-(`r + 0.5 x (r - 85)`: an 89 plays as 91, a 93 as 97), for every player, yours and opponents'. Measured (gold XI,
-2007/08):
-
-| | Now | With the star curve |
+| Landed by the end | Average player: XI, points, titles | Greedy player: XI, points, titles |
 |---|---|---|
-| Purple striker (89) | +2.9 pts a season | +3.6 |
-| Legend striker (93) | +4.5 | +6.1 |
-| Legend centre back (91) | +1.5 | +2.0 (more with section 1) |
-| Two purples and a legend | +9.0 | +11.9 |
-| Best real XI (Man Utd) | 87.5 | 88.9 |
+| Nothing above gold | 81.0, 57 pts, 5% | 81.9, 64 pts, 6% |
+| One legend, no purple | 81.9, 57 pts, 3% | 83.2, 65 pts, 2% |
+| One purple | 81.7, 60 pts, 6% | 82.7, 63 pts, 6% |
+| Two purples | 82.7, 65 pts, 18% | 83.3, 69 pts, 19% |
+| Two purples and a legend | 82.8, 67 pts, 18% | 84.0, 69 pts, 15% |
 
-It is honest (the best players do decide matches) and not a hidden bonus for the user: the great sides become a touch
-harder to beat too. Missing out on purples and legends costs you exactly what Craig expects: a few points, not the
-season. The card shows his real rating; nothing on screen changes.
+That is the problem in one table. **Landing a legend is worth about nothing** (57 points with one, 57 without) and the
+best run the game can give, nine golds, two purples and a legend, ends on 67 to 69 points and wins the title less than
+one time in five. Craig is right: that run should be 85 points and the title more often than not.
 
-## 4. Tactics and shapes
+Three causes, in order of size:
 
-Craig asked for the right formation and tactic together to lift a squad so that an 80 can beat an 82, but not as a
-flat percentage. A flat boost would be automatic (everyone finds it once and the feature is solved). My version has
-two parts, both visible, neither automatic:
+1. **Every rating point is worth the same.** A 91 legend replacing an 82 gold in one shirt adds 0.8 to the XI
+   average, which the match model turns into about 2.5 points a season if he plays every game, and he usually arrives
+   in January. A 93 is just "a bit more 82". Real football is not like that: the best player on the pitch decides
+   matches out of proportion to his number.
+2. **Building the team counts for nothing beyond the sum of ratings.** Shape, tactic and who plays where (beyond the
+   fit colour) make no difference. History's giants field their real XI at full rating all season; the user's only
+   edge is the cards he lands, and the cards cannot beat Man Utd's 87.5 average on their own.
+3. **Defenders are worth half a forward** in the match model (a rating point on a centre back is worth 0.17 points a
+   season, on a striker 0.40), and in several seasons the data rates the best defenders far below the best forwards
+   (below).
 
-### Part 1: the shape suits the tactic (small, shown up front)
+There is also a measurement fault to own up to: `tests/calibrate.js`, `calibrate-all.js` and `policy.js` never attach
+the legend cards (`core/game.js` builds them and hands them to the engine as `S.legends`; the tests do not), so
+every balance figure quoted since 11 Oct, including the 3.3% and 8.2% titles in CLAUDE.md, was measured in a game
+with no legends. With them the figures are average 6.9%, greedy 9.7% (the legends barely move points, which is
+cause 1 again). Step 0 of the build is a shared `tests/legends.js` so every test plays the same game as the phone.
 
-Each tactic lists the shapes it is built for; using one of them lifts all three lines by 1.
+## The design
 
-| Tactic | Built for |
-|---|---|
-| Low block | 5-3-2, 4-5-1 |
-| Mid block (default) | 4-4-2, 4-5-1, 4-2-3-1 |
-| Possession | 4-3-3, 4-2-3-1, 3-5-2 |
-| Counter attack | 4-4-2, 3-5-2, 5-3-2 |
-| High press | 4-3-3, 3-4-3, 4-2-3-1 |
+The season should read like this: your cards decide your ceiling, your building decides whether you reach it, and
+history's clubs are exactly as good as they were, less what you took from them.
 
-+1 on every line is worth about 3 points a season. It is shown openly on each board ("Built for 5-3-2 and 4-5-1"),
-so it teaches real football rather than hiding a trick.
+### 1. Stars play above their number
 
-### Part 2: the tactic suits your squad (bigger, read from your XI)
+In matches a card counts for more than its rating the higher it is: **above 80 each rating point counts 1.5**, so an
+85 plays as 87.5, a 90 as 95, a 93 as 99.5, and nothing changes below 80. It applies to every player on the pitch,
+yours and theirs, so it is not a bonus for the user: Man Utd 2007/08 go from 87.5 to about 90.5 too. The card shows
+his real rating; the big card gets one line, "Plays above his rating in matches", on gold and up.
 
-The line amplifiers from the last scope: the low block makes your defence count for more and your attack for less, the
-high press the reverse, possession feeds your midfield into both ends, counter attack builds round your best forward.
-With section 1's weights the low block stops being a loser on average, because defenders are now worth buying for it.
-Tuned so that, for a squad whose best line matches the tactic, part 2 is worth +2 to +4 points a season, and against
-its weak line -2 to -4.
+Why this and not a flat bonus per level: it is continuous (an 89 purple and a 90 gold play alike, as they should),
+it is the same rule for everyone, and the match model is refitted to the real results afterwards
+(`tests/fit-match.js`) so the league's scorelines stay real. Measured on the harness: a legend striker in a gold XI
+goes from +4.5 to about +7 points a season, two purples and a legend from +9 to about +14.
 
-### Together
+### 2. Building the team: your edge over history
 
-Right shape and right tactic: about +5 to +7 points a season, which is two rating points across the XI: an 80 plays
-like an 82, and wins that head-to-head about as often as it loses it. Wrong on both: about -4. Neutral (mid block in
-4-4-2): today's game exactly, so a player who never touches it loses nothing. These are the targets for the build's
-tuning, from the measured sizes of each part; the combined figure is an estimate until it is measured.
+This is the user-only part, and it is open, not hidden: every piece is on the screen and explained. Combined it is
+worth about **+2.5 rating points across the XI when you get it right (about +7 points a season) and about -2 when
+you get it wrong**. History's clubs get none of it (they are what they were), so this is how a built side of 84s
+beats a real side of 87s, which is what Craig asked for.
 
-### Guiding the player (no "Suits your XI")
+**a. Tactic.** Five tactics, picked on a board with a line of plain text each (the sheet from the earlier scope).
+A tactic decides which of your lines settles matches, measured against your own XI:
 
-- **Your three lines.** The squad screen's header shows Defence, Midfield and Attack as three short bars from your XI
-  (the numbers the engine already works out), with your best line in the accent colour. Nothing else is judged for you.
-- **Each board says what it needs, in one line,** naming the line, the shapes and the cost:
-  - Low block: "Sit deep and let your back line win it. Strong defence, 5-3-2 or 4-5-1. Fewer goals at both ends."
-  - Mid block: "Balanced. Plays your XI as it is."
-  - Possession: "Keep the ball. Needs your best players in midfield. 4-3-3, 4-2-3-1 or 3-5-2."
-  - Counter attack: "Defend, then break. Built round one quick, top-class forward. 4-4-2, 3-5-2 or 5-3-2."
-  - High press: "Win it high and attack. Needs your strongest players up front. 4-3-3, 3-4-3 or 4-2-3-1."
-- **After a run of games**, one line on the fixtures screen, only when the evidence is strong: "Your defence is your
-  best line. A low block would lean on it." Once per run, and only if the player has never changed tactic. That is the
-  nudge; reading the bars and picking is still the player's job.
-- Changing tactic is free whenever the squad or roll pitch is up. No per-match switching (opponent-independent, so
-  one or two changes a season is right).
+| Tactic | What it does to your lines | Suits | Costs |
+|---|---|---|---|
+| Mid block (default) | nothing | any side | nothing |
+| Low block | defence counts 1.9x its edge over your average, attack 0.65x | a side built on its back line | a side that bought forwards |
+| Possession | half your midfield's edge flows into defence and attack | a side with its best players in midfield | a weak midfield |
+| Counter attack | attack built round your best forward (+ half his edge over the attack), defence +1 | one top-class forward | an even or weak attack |
+| High press | attack counts 1.25x its edge, defence 0.75x | a side built on its forwards | a weak attack |
 
-## 5. New signings settle in
+Measured in the earlier scope: the right tactic for a squad is worth +2 to +4 points a season, the wrong one -2 to
+-4; re-picking at every window gains only about 1 point over picking once or twice, so nobody needs to fiddle 38
+times. Pick it on the squad screen or the roll's pitch, free, any time.
 
-Each signing gets a settling type from his own seeded draw (`stream(seed, "settle", card id)`), so a refresh never
-changes it:
+**b. Shape.** Each tactic names the shapes it is built for (low block 5-3-2 and 4-5-1; possession 4-3-3, 4-2-3-1 and
+3-5-2; counter 4-4-2, 3-5-2 and 5-3-2; high press 4-3-3, 3-4-3 and 4-2-3-1; mid block every shape). In one of them the
+tactic's effect is at full strength; in any other shape it is at **half strength**, both the gain and the cost. So
+the shape never pays on its own (no free +3 for reading the board), it decides how hard your tactic bites, and mid
+block in any shape is today's game exactly.
 
-| Type | Chance | What happens |
+**c. Stars in the right role.** A gold or better player in his main position, in the line his tactic leans on, is
+"in his role": the amplifier is applied to him in full. Out of his main position (amber or red), or in a line the
+tactic plays down, he is an ordinary player. This is what makes "a legend striker under a counter attack" feel
+different from "a legend striker in a low block", and it is shown on his pitch card as a small filled star on the
+tab.
+
+**d. Settling in.** A new signing takes time, or doesn't, seeded per card so a refresh never changes it:
+
+| Type | Chance | Effect |
 |---|---|---|
-| Hits the ground running | 30% (purples 50%, legends 70%) | Full rating at once, plus 2 for his first two games (the debut lift) |
-| Settles in | 50% | Two games at the halfway point between the man he replaced and his own rating |
-| Takes time | 20% (purples 10%, legends 0%) | Four games, from a quarter of the way up to full |
+| Hits the ground running | 30% (purple 50%, legend 70%) | full rating from his first game |
+| Settles in | 50% | two games halfway between the man he replaced and himself |
+| Takes time | 20% (purple 10%, legend 0%) | four games, climbing from a quarter of the way up to full |
 
-Rules:
+Floor: he never plays below the shirt's rating before the roll (an empty shirt counts 40), so a signing can only delay
+a gain, never cost you. Players already in your XI who swap shirts or are re-seated by a shape change do not settle.
+A Club X carried-in XI does not settle; poach replacements and free agents do. Shown as dots under his rating on the
+pitch card, one per game left, and "Settling in: 2 games" on the big card. Costs a typical season about half a point
+(estimate from the 3 points a season per XI rating point): felt on the pitch, invisible on the table.
 
-- **Never worse than not signing:** while settling he plays at least at the rating of the man he replaced in that shirt
-  (or the empty shirt's free agent). A settling signing can only delay a gain, never cost you.
-- Shown on his pitch card: a small ring of dots under the rating, one per game left, and on the big card "Settling in:
-  2 games". A hit-the-ground-running signing flashes "Up and running" on his first fixture. One first-time tip.
-- Club X: your carried-in XI does not settle (they are your players already). Poached replacements and free agents do.
-- Size (estimate from the 3 points a season per XI rating point above): a typical season's settling costs about 0.3 to 0.6
-  points and the debut lifts give about 0.2 back. Small on the table, large in feel: the right amount.
+**Guidance, without doing it for them.** The squad header shows your three lines as short bars (Defence, Midfield,
+Attack, the engine's own numbers) with your best line in the accent colour. Each tactic board says in one line what it
+leans on and which shapes it is built for. Once per run, after six games with the tactic never changed and the
+evidence strong, one line on the fixtures screen: "Your defence is your best line. A low block would lean on it."
+No "Suits your XI" label, no points preview: reading the bars and the boards is the game.
 
-## 6. Scouting
+### 3. Defenders
 
-As Craig set it: costs 2 respins and guarantees a better player. Pick a shirt; three cards reel in, every one green
-in that shirt and every one rated higher than the man in it, at least a level up where he is bronze or silver:
+Three changes, all needed:
 
-| Man in the shirt | Scouted cards |
-|---|---|
-| Empty, bronze | Silver or better (55% silver, 36% gold, 7% purple, 2% legend) |
-| Silver | Gold or better (84% gold, 12% purple, 4% legend) |
-| Gold | Gold rated higher than him, or better (75% gold, 19% purple, 6% legend) |
-| Purple or legend | Not scoutable ("Already elite here") |
+- **Slot weights** (`SLOTW`): keeper 1.8 (from 2.2), centre back 1.6 (from 1.0), full back 0.9 (from 0.8), wing
+  back 0.7 (from 0.6), striker 1.0 (from 1.25), wingers 0.85 (from 1.0). Measured per rating point a season: keeper
+  0.26, centre back 0.24, full back 0.21, midfield 0.24 to 0.28, wingers 0.33 to 0.35, striker 0.36. A striker still
+  matters most, by 1.5 times rather than 2.4, and a legend centre back becomes a signing worth having.
+- **+2 on every defender card**, as Craig asked, so they look as valued as they are: done in `build-data.py` with the
+  level cuts unchanged (more defenders turn gold and purple), and the match model refitted after, so scorelines stay
+  real. This is presentation and the card economy, not the match model, and that is fine: it is what he asked for.
+- **The data at the top end is wrong in some seasons, and that is for the player data session.** The best defender of
+  1992/93 is rated 82 (Hendry, May); Paul McGrath, the PFA Player of the Year that season and in the PFA Team of the
+  Year, is 80 and gold, not purple, though `honours.json` has him. 1997/98 (Arsenal's double) tops out at 83;
+  1999/00, 2015/16 and 2016/17 at 85; other seasons reach 88 to 92. Pallister is 80 in 1992/93 and 88 the next season;
+  Irwin 81 then 90. Forwards and midfielders top 90 to 99 every season. The rating model is compressing defenders
+  where team results or clean sheets were poor, and the honours rule ("a verified honour that season rated 80+ is
+  purple") has not caught McGrath. Ask: anchor each season's top defenders to the honours as the other positions
+  are, with a source behind every change, and make McGrath 1992/93 purple and 86 or better. Not guessed in this
+  session: the player data session has the sources.
 
-Measured in the last scope: balance-neutral (a scout's best card gains about 1.5 rating points against 1.2 for a plain
-respin, at twice the cost). Gold to guaranteed purple was not chosen: two scouts a season would mean six purple cards
-seen against the 3% odds, and landing a purple would stop being special.
+### 4. Raids: history bent by what you took, hardest where it mattered
 
-The slide-up (British English, no dashes):
+Scaled scorelines (earlier scope): each real match of a club you took players from is replaced by its real score
+scaled by what its XI lost (its goals down by the attack and midfield lost, its goals conceded up by the defence and
+midfield lost, through the match model's own sensitivity, seeded rounding). The type of player taken is in the rule
+by construction: midfielders shrink both ends, forwards their goals, defenders and keepers the goals they let in.
+Then, as Craig asked, **the bite depends on the opponent's real final position**: multiplied by `1.45 - 0.05 x
+position` (1.4 against the champions, 1.0 against 9th, 0.45 against the bottom club). Measured, Man Utd 2000/01
+without Keane, Beckham and Scholes: 32 points from the top half becomes 24, 48 from the bottom half becomes 42. A 1-0
+over Arsenal is 0-0 or 0-1 more often than not; a 3-0 over Bradford is usually still a win. No cap, so a fourth and
+fifth player keep hurting. Club X forecast seasons use the forecast's table. **No real form** anywhere: the only
+thing that moves history is your signings (Craig, 18 Oct).
 
-> **Scout a position**
-> Uses 2 of your respins.
-> Pick a shirt. Your scouts bring back three players who play there and are better than the man in it now. A bronze or
-> silver shirt gets at least the next level up.
-> The catch: a normal respin costs 1 and could bring anyone. Scouting costs 2, so you will have fewer respins for a
-> bad roll later.
+### 5. Scouting
 
-With one respin left the Scout row is greyed: "Needs 2 respins".
+On a transfer roll the respin button offers Respin (1) or Scout a position (2). Scout opens your pitch; every shirt is
+tagged before you commit: "3 better", "1 better" or "Nobody better". The pool is that season's cards green in the
+shirt, rated above the man in it, never seen this run, never your own, **never a legend card** (purples can be
+scouted; they are the season's top ten). Measured across every season and shirt: above a 76 holder there are always
+three or more; above an 82, 54 of 238 season-shirts have fewer than three and 4 have none; above an 86, 171 and 48.
 
-## 7. Opponents' real form
+- Three or more: 2 respins, three cards reel in, an ordinary roll from there (sign, pass, respin again).
+- One or two: the scout brings what there is and fills to three with the best below him, each tagged "better" or
+  "next best". Still 2 respins; you knew before you tapped.
+- Nobody better: tapping the shirt costs nothing. The sheet says "Nobody better than Hendry at CB in 1992/93" and
+  shows the next best man there as one card; take him for the 2 respins, or pick another shirt, or close.
 
-Today an opponent is its whole-season squad on every date. Real seasons have runs: 2003/04 Leeds were a different side
-in spring. The rule: an opponent's strength on a match date moves by up to 1.5 rating points with its real points per
-game over its previous six real matches against its season average (no form before game four). Only history, never
-your results. Small (it never turns a bottom side into a top one), but the fixture screen can say it in one line
-("Leeds: won 4 of their last 6"), which makes the calendar feel alive. Optional: build last, and only if the retune
-holds.
+The sheet copy: "Scout a position. Uses 2 of your respins. Pick a shirt and your scouts bring back three players
+who play there and are better than the man in it now. Never legends: they find you. A normal respin costs 1 and could
+bring anyone; scouting costs 2, so you will have fewer left for a bad roll later." With one respin left the row is
+greyed, "Needs 2 respins". Balance-neutral in the earlier scope's measurement (a scout's best card gains about 1.5
+rating points against 1.2 for a respin, at twice the cost); it is how a low-block side finds defenders.
 
-## 8. What stays, and the retune
+### 6. Modes
 
-Kept as is: the Poisson goals model and its fit, home advantage, fit percentages (green, amber, red), the roll schedule
-and odds, other clubs' results being history, the real result never shown, Club X's forecast seasons and poaching
-(they pick up sections 1 to 3 through the same model).
+- **Classic and Daily:** everything above. The Daily is a Classic run, so a day's club plays by the same rules for
+  everyone; the seed stays per go.
+- **Club X:** the same engine. Carried-in players do not settle, poach replacements and free agents do; the tactic
+  and shape carry over between seasons; poached players joining a rival get the star curve like anyone else; raids
+  and poaches in forecast seasons use the forecast table. Stars matter more now, so poaching your legend hurts more
+  and reads right.
+- **Goal Rush and Unbeaten Run:** untouched.
 
-Not proposed, on purpose: injuries and suspensions (frustrating with a fixed XI and no squad), fatigue, a hidden
-bonus for weak sides (Craig ruled that out), per-match tactic changes.
+## What a season should look like after this
 
-The retune, once sections 1 to 5 are in (each moves balance):
+Estimates from the measured parts (stars measured, building measured per part, combined to be measured in the build):
 
-- Expected direction: weights roughly neutral; raids by opponent slightly harder for the user (the raided giants keep
-  more points against the bottom half); stars slightly harder (great sides stronger) but bigger rewards for landing
-  them; tactics +2 to +5 points for a player who reads their squad; settling about neutral.
-- Measure with tactic-aware test players (`tests/policy.js` gains a tactic step: pick the tactic and shape that fit
-  the XI at each window) on `HIST=1 node tests/calibrate-all.js 12` and `node tests/calibrate.js 2007/08 Derby 400`.
-- Targets (Craig, 15 Oct): average player about 5% titles, Derby 2007/08 about 2%, higher finishes generally more
-  reachable, weaker squads still harder. Tune with the goals model's attack term and the level odds, not with any
-  per-club handicap.
-- New engine tests: no raids means history untouched; a settling signing never plays below the man he replaced;
-  mid block in 4-4-2 equals today's numbers before the refit; same seed and choices replay the same season.
+| Run | Today | After |
+|---|---|---|
+| Nine golds, two purples, a legend, built right | 67 to 69 pts, title 15 to 18% | about 85 pts, title more often than not |
+| Two purples, built right | 65 to 69 | about 76, top 4 nearly always |
+| One purple, mid block in 4-4-2 | 60 to 63 | about 63 |
+| Nothing above gold, built wrong | 57 to 64 | about 55 |
+| Never signs anyone | 33 | 33 |
+| Derby 2007/08, any of the above | 5 to 8 lower | 5 to 8 lower |
+
+The spread between a lucky, well-built season and an unlucky, careless one grows from about 10 points to about 30,
+which is the difference between a game of dice and a game of management. Weak squads stay harder (no evening out).
+
+## The retune
+
+Order matters because each step moves the fit:
+
+0. `tests/legends.js`, used by every test, so balance is measured with legend cards. Re-baseline today's numbers.
+1. Defender +2 and slot weights, then refit the match model to the real results (`tests/fit-match.js`: goals a game,
+   draws and 5-goal margins back within 0.1 of real).
+2. Star curve, refit again.
+3. Tactics, shapes, roles; the test players in `tests/policy.js` gain a build step (pick the tactic and shape that
+   fit the XI at each window, the greedy player always, the average player 70% of the time).
+4. Settling, raids by opponent, scouting.
+5. Measure `HIST=1 node tests/calibrate-all.js 12` and `node tests/calibrate.js 2007/08 Derby 400`. Targets
+   (Craig, 15 Oct): average player about 5% titles, Derby about 2%, the table above within 3 points per row. The
+   knobs, in order: the size of the build effect (the amplifiers), then the star slope (1.5), then `levelOdds`
+   only as a last resort (landing stars is the fun; do not make them rarer to balance the engine).
+6. New engine tests: no raids means history untouched; a settling signing never plays below the shirt's floor; mid
+   block in any shape equals the plain model; same seed and choices replay the same season.
 
 ## Build order and size
 
-1. Slot weights and refit (half a day, then the retune).
-2. Raids, scaled and weighted by opponent (half a day).
-3. Star curve (an hour, measured with 1).
-4. Tactics with shapes, the boards, bars and copy (3 to 4 days).
-5. Settling in (1 day with the card dots).
-6. Scouting (1 to 2 days).
-7. Opponents' form (half a day, optional).
-8. Retune and the How to play page (1 day).
+Step 0 and the defender and weight work half a day plus the refit; the star curve an hour plus a refit; tactics,
+shapes, roles, bars and boards 4 days; settling 1 day; raids half a day; scouting 2 days; retune and How to play 1
+day. About 10 days. The player data session's defender anchoring runs alongside and lands whenever its sources do.
