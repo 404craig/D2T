@@ -75,7 +75,8 @@ const RULES = {
   lineOffset: { def: 0.26, mid: -0.54, att: 0.11 },
   // Settling in (Craig, 18 Oct): a new signing hits the ground running, settles in over two games at halfway, or takes
   // three games climbing from a quarter of the way up; seeded per card. He never plays below the shirt's rating before.
-  settle: { run: [0.3, 0.3, 0.3, 0.5, 0.7], slow: [0.2, 0.2, 0.2, 0.1, 0], floor: 60 },
+  // Purples and legends always hit the ground running (Craig, 18 Oct).
+  settle: { run: [0.3, 0.3, 0.3, 1, 1], slow: [0.2, 0.2, 0.2, 0, 0], floor: 60 },
   // Scouting: 2 respins for three cards green in one shirt and better than the man in it (never a legend card).
   scoutCost: 2,
   // Raids: a raided club's real scorelines shrink by what its XI lost, through the match model's own sensitivity (m), and

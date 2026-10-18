@@ -355,7 +355,7 @@ t("settling: a signing never plays below the shirt's floor, and is himself once 
   assert.ok(signs.length > 3);
   for (const s of signs) {
     const p = D.playerOf(S, s.id, S.legends);
-    if ((p.lv || 0) === 4) assert.ok(!s.settle, "a legend settles");
+    if ((p.lv || 0) >= 3) assert.ok(!s.settle, "a purple or legend settles");
     if (!s.settle) continue;
     for (let g = s.gw; g < s.gw + s.settle.games + 1; g++) {
       const r = D.settledRating(p, s, g);
