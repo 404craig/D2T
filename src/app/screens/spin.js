@@ -363,6 +363,14 @@
     reload.onclick = async () => {
       if (state === 'spinning' || landing || respinning || respins == null || respins <= 0) return;
       dropTip();
+      // cfg.respinChoice(respins) -> 'respin' | a number (the respins left after the caller spent some another way, a scout)
+      // | null (nothing): the transfer roll asks Respin or Scout a position before spending anything (Craig, 18 Oct)
+      if (cfg.respinChoice) {
+        respinning = true; let c = null;
+        try { c = await cfg.respinChoice(respins); } finally { respinning = false; }
+        if (c == null) return;
+        if (typeof c === 'number') { respins = c; setRespins(); main.classList.remove('is-after'); respinning = true; try { if (cfg.beforeSpin) await cfg.beforeSpin(); } finally { respinning = false; } spin(); return; }
+      }
       respins -= 1; SND.play('respin'); cfg.onRespinsChange && cfg.onRespinsChange(respins);
       main.classList.remove('is-after');
       respinning = true;
@@ -396,6 +404,7 @@
     return {
       el, reels, slots, spin, select, openCard, hint, setLabel: (t) => setMain(t, null),
       results: () => results, selected: () => selected, settled: () => state === 'settled', clear: clearSelection,
+      setRespins: (n) => { respins = n; setRespins(); }, redrawBelow: () => { if (results) results.forEach((_, i) => below(i)); },
       unmount() { cancelAnimationFrame(raf); raf = 0; if (rr) { rr.kill(); rr = null; } stopTick(); timers.forEach(clearTimeout); if (open) { try { open.el.remove(); } catch (e) { /* gone */ } } }
     };
   }

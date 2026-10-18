@@ -31,9 +31,14 @@
           <li><b>Pick a club</b>Spin for 3 real clubs that were relegated. Choose one.</li>
           <li><b>Set your XI</b>Pick a formation and your best eleven from that season's squad.</li>
           <li><b>Play 38 games</b>Kick off each match or skip to the score. Everyone else plays their real results.</li>
-          <li><b>Transfer rolls</b>Through the season you get a roll: 3 cards appear and you sign one.</li>
+          <li><b>Transfer rolls</b>Through the season you get a roll: 3 cards appear and you sign one. A new signing may hit the ground running or take two or three games to settle.</li>
+          <li><b>Tactics</b>Pick how you play: low block, possession, counter attack, high press, or a balanced mid block. A tactic leans on one of your lines, so it pays when that line is your strength. Each is built for certain shapes.</li>
+          <li><b>Scouting</b>Spend 2 respins to scout one shirt: three players who play there and are better than the man in it. Shirts with nobody better show red.</li>
           <li><b>Finish high</b>Your final place earns achievements: beat the drop, top half, top 3, the title.</li>
         </ol>
+
+        <h2 class="fr-h2">Stars and signings</h2>
+        <p class="fr-lead">Your team rating is the plain average of your cards. In the matches the best players count for more: above 80 every point counts half again on a gold card, more on a purple, double on a legend. History's clubs play as they really did, less what you have taken from them: sign a club's best players and their scorelines shrink, most of all in their big games. Every season puts one legend on the table.</p>
 
         <h2 class="fr-h2">Goal Rush</h2>
         <p class="fr-lead">Each game picks a random formation, and its number is your target: line up 3-5-2 and score exactly 352. Fill the shirts in any order: each spin shows three real players for your open shirts, and you drag one onto a shirt of his position. His Premier League career goals go onto his shirt and into your total. Land exactly on the target. 3 respins a game.</p>

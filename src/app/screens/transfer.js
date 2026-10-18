@@ -175,9 +175,10 @@
           const fit = GAME.fit(c.id, i), oop = fit !== 'green';
           return `<div class="${cls}" style="${place(fm, s, pw)};z-index:${Math.round(s.y)}" data-i="${i}">
             <div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}. Sign the selected player here${say}">
-              ${D2T.cards.player(c, { w: pw, mini: true, shine: i === fresh, tab: s.pos, cls: 'fit-' + fit })}</div></div>`;
+              ${D2T.cards.player(c, { w: pw, mini: true, shine: i === fresh, tab: s.pos, cls: 'fit-' + fit, dots: (GAME.settling(c.id) || {}).left })}</div></div>`;
         }).join('');
         ratingEl.textContent = GAME.rating();
+        const tn = field && field.querySelector('.se-tname'); if (tn) tn.textContent = GAME.tacticName();
         if (fresh >= 0 && !reduced) {
           const el = slotsEl.querySelector(`.se-cardwrap[data-i="${fresh}"]`);
           el && el.animate([{ transform: 'scale(1.5)', filter: 'brightness(1.8)' }, { transform: 'scale(.95)' }, { transform: 'none', filter: 'none' }], { duration: 650, easing: 'cubic-bezier(.3,1.4,.5,1)' });
@@ -187,7 +188,7 @@
         field = D2T.h(`<div class="tr-pitch" aria-label="Your XI">
           <div class="tr-head"><div class="tr-head-t"><b>${draft ? `Draft · Shirt ${info.step} of ${info.of}` : `Transfer ${info.overall} of ${info.total}${/^Summer/.test(info.name) ? ' · Summer window' : /^January/.test(info.name) ? ' · January window' : ''}`}</b><span>${draft ? (di.open ? 'Drag one onto an open shirt' : `Drag one onto the lit ${di.pos} shirt`) : 'Drag a player onto a shirt to sign him there'}</span></div>
             <div class="se-rating" aria-live="polite"><b class="tr-rating">0</b><i>Team<br>rating</i></div></div>
-          <div class="se-pitch tr-field tr-big">${SE.pitchLines}<div class="se-slots"></div>${draft && !di.open ? '' : `<button class="se-formlink" type="button"><b class="se-fname">${GAME.eng().formation}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`}</div></div>`);
+          <div class="se-pitch tr-field tr-big">${SE.pitchLines}<div class="se-slots"></div>${draft && !di.open ? '' : `<button class="se-formlink" type="button"><b class="se-fname">${GAME.eng().formation}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>${SE.tacticChip()}`}</div></div>`);
         api.el.insertBefore(field, api.el.querySelector('.sp-stage'));
         slotsEl = field.querySelector('.se-slots'); ratingEl = field.querySelector('.tr-rating');
         // big cards only where the pitch has the height for them; redrawn when that changes
@@ -215,6 +216,9 @@
           el.querySelectorAll('.se-formcard').forEach((b) => { b.onclick = () => { pending = b.dataset.f; el.querySelectorAll('.se-formcard').forEach((x) => { const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); }); }; });
           el.querySelector('.se-done').onclick = () => sh.close();
         };
+        // the tactic (Craig, 18 Oct): its chip bottom right, the twin of the shape chip; a change redraws the best shirt
+        const tl = field.querySelector('.se-taclink');
+        if (tl) tl.onclick = (e) => { e.stopPropagation(); SE.tacticSheet(root, () => { if (!alive) return; const si = api ? api.selected() : -1, p = si >= 0 ? api.results()[si] : null; drawPitch(p && !draft ? GAME.bestSlot(p.id) : -1); }); };
         slotsEl.addEventListener('click', (e) => {
           const w = e.target.closest('.se-cardwrap'); if (!w || !placing) return;
           const i = api.selected(), slot = +w.dataset.i;
@@ -275,7 +279,9 @@
         drawPitch(-1, slot);
         const s = api.slots[i];
         s.classList.add('is-signed');
-        api.hint(`${surname(p.name)} is in. Welcome to ${club.name}.`);
+        // how he settles (Craig, 18 Oct): at once, a couple of games, or three
+        const stl = draft ? null : GAME.settling(p.id);
+        api.hint(`${surname(p.name)} is in. ${draft ? `Welcome to ${club.name}.` : !stl ? 'He hits the ground running.' : stl.games === 2 ? 'A couple of games to settle.' : 'Three games to settle.'}`);
         const ph = GAME.eng().phase;
         // the window over (Craig, 14 Oct): straight to the fixtures; the draft over: the pre-season squad
         timers.push(setTimeout(() => { if (alive) D2T.go(ph === 'window' || ph === 'draft' ? 'transfer' : draft ? 'squad' : 'fixtures'); }, reduced ? 300 : (draft ? 800 : 1100)));
@@ -287,6 +293,44 @@
         SND.play('cardDrop');
         drawPitch(-1, to);
         api.hint('Drag a player onto the pitch, or tap him then a shirt');
+      }
+      // Respin or Scout (Craig, 18 Oct): the respin button asks first. Scout costs 2 respins: a sheet with your shirts, red
+      // where nobody this season is better than the man in it (a key says so), a count on the rest; tap one and the scouts'
+      // three cards roll in (the engine draws them, GAME.scout). A red shirt costs nothing and names the best man there.
+      function respinChoice(n) {
+        return new Promise((resolve) => {
+          let done = false; const fin = (v) => { if (!done) { done = true; resolve(v); } };
+          const can = GAME.canScout(), cost = GAME.scoutCost();
+          const el = D2T.h(`<div class="se-scoutrows">
+            <button class="se-scoutrow" type="button" data-k="respin">${D2T.ICON.respin}<span><b>Respin</b><span>Three fresh cards, any position.</span></span><em>1 respin</em></button>
+            <button class="se-scoutrow" type="button" data-k="scout"${can ? '' : ' disabled'}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 16l5 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span><b>Scout a position</b><span>Pick a shirt: three players who play there and are better than the man in it. Never legends.</span></span><em>${can ? `${cost} respins` : `Needs ${cost}`}</em></button>
+            <p class="se-note" style="margin:4px 2px 0">A respin costs 1 and could bring anyone. Scouting costs ${cost}, so you will have fewer left for a bad roll later.</p></div>`);
+          const sh = D2T.sheet({ title: 'Spin again?', body: el, onClose: () => fin(null) });
+          sh.el.classList.add('se-run'); ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
+          el.querySelector('[data-k="respin"]').onclick = () => { done = true; sh.close(); resolve('respin'); };
+          el.querySelector('[data-k="scout"]').onclick = () => { if (!can) return; done = true; sh.close(); timers.push(setTimeout(() => scoutSheet().then(resolve), 260)); };
+        });
+      }
+      function scoutSheet() {
+        return new Promise((resolve) => {
+          let done = false; const fin = (v) => { if (!done) { done = true; resolve(v); } };
+          const info = GAME.scoutInfo(), slots = GAME.slots(), L = GAME.lineup();
+          const shirt = (s, i) => { const q = info[i], none = !q.better; return `<button class="se-scoutshirt${none ? ' is-none' : ''}" type="button" data-i="${i}" style="left:${s.x}%;top:${s.y}%" aria-label="${s.pos}, ${none ? 'nobody better this season' : q.better + ' better'}">${s.pos}<small>${none ? 'none' : q.better > 9 ? '9+' : q.better}</small></button>`; };
+          const el = D2T.h(`<div><p class="se-note" style="margin:0 0 8px">Tap a shirt. ${GAME.scoutCost()} respins for three players who play there and are better than the man in it now.</p>
+            <div class="se-scoutpitch"><span class="se-fline"></span>${slots.map(shirt).join('')}</div>
+            <p class="se-scoutkey"><i></i> Red: nobody better this season</p><p class="se-scoutnone" aria-live="polite"></p></div>`);
+          const sh = D2T.sheet({ title: 'Scout a position', body: el, onClose: () => fin(null) });
+          sh.el.classList.add('se-run'); ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
+          const none = el.querySelector('.se-scoutnone');
+          el.querySelectorAll('.se-scoutshirt').forEach((b) => {
+            b.onclick = () => {
+              const i = +b.dataset.i, q = info[i], mine = L.xi[i];
+              if (!q.better) { SND.play('tapSmall'); none.textContent = `Nobody better than ${mine ? surname(mine.name) : 'nobody'} at ${q.pos} in ${run.season}.${q.bestCard ? ` Best there: ${q.bestCard.name} (${q.bestCard.ovr}).` : ''}`; return; }
+              if (!GAME.scout(i)) { none.textContent = 'The scouts need 2 respins.'; return; }
+              SND.play('respin'); done = true; sh.close(); resolve(GAME.eng().respins);
+            };
+          });
+        });
       }
       function pass() {
         if (signing) return;
@@ -407,7 +451,7 @@
           // a purple or legend card gets the rare reveal (screens/reveal.js); the roll counts as spun as it starts
           rare: (p) => D2T.rareReveal.isRare(p),
           // the positions he is green in, under each card, revealed with it as its reel lands (Craig, 15 and 16 Oct)
-          below: (p) => { const list = p.main ? [p.main, ...(p.alt || [])] : [p.pos]; return `<div class="sp-gp sp-below" aria-label="Green in ${list.join(', ')}">${list.join('<i>/</i>')}</div>`; },
+          below: (p) => { const list = p.main ? [p.main, ...(p.alt || [])] : [p.pos]; const tags = GAME.rollTags(), ti = tags ? GAME.rollCards().findIndex((c) => c.id === p.id) : -1, tag = ti >= 0 ? tags[ti] : null; return `<div class="sp-gp sp-below" aria-label="Green in ${list.join(', ')}${tag ? tag === 'better' ? ', better than the man in the shirt' : ', the next best there' : ''}">${list.join('<i>/</i>')}${tag ? `<span class="sp-tag${tag === 'next' ? ' is-next' : ''}">${tag === 'better' ? 'Better' : 'Next best'}</span>` : ''}</div>`; },
           onCommit: () => { st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); },
           onSettled: () => { leaving = false; st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); timers.push(setTimeout(() => enterPlacing(true), reduced ? 0 : 450)); },
           accent: LV_ACCENT,
@@ -420,6 +464,7 @@
           respins: draft ? null : eng.respins,
           baseBtn: { accent: club.accent, ink: club.ink },
           onRespinsChange: () => { GAME.respinCards(); st.spun = ''; D2T.save(); },
+          respinChoice: draft ? null : respinChoice,
           beforeSpin: () => leavePlacing(),
           onSelect: (i, p) => { mover = -1; if (placing) drawPitch(draft ? di.slot : GAME.bestSlot(p.id)); timers.push(setTimeout(() => api && D2T.tip('card-again', api.el.querySelectorAll('.sp-slot')[i], 'Tap him again for his career'), 250)); },
           afterSettle: draft ? null : { label: 'Pass', onClick: pass },

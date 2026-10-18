@@ -5,6 +5,7 @@ const { decide, POLICIES } = require("./policy.js");
 if (process.env.ODDS) D.RULES.levelOdds = JSON.parse(process.env.ODDS);
 if (process.env.ELITE) D.RULES.elite = JSON.parse(process.env.ELITE);
 const G = require("../data/game/game.json");
+require("./legends.js")(G);   // the legend cards, as the phone plays them
 const [season = "2007/08", clubName = "Derby", runsArg = "200"] = process.argv.slice(2);
 const S = G.seasons[season];
 const club = S.clubs.find(c => c.name === clubName).id;

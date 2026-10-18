@@ -30,7 +30,8 @@
           <div class="se-sqtext"><div class="se-sqname">${D2T.esc(club.name)}</div><div class="se-sqsub">${data.season} · ${gwLabel}${goalLabel}</div></div>
           <div class="se-rating" aria-live="polite"><b class="se-rating-n">0</b><i>Team<br>rating</i></div>
         </div>
-        <div class="se-pitch">${pitchLines}<div class="se-slots"></div><button class="se-formlink" type="button"><b class="se-fname"></b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+        <div class="se-lines-host"></div>
+        <div class="se-pitch">${pitchLines}<div class="se-slots"></div><button class="se-formlink" type="button"><b class="se-fname"></b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>${SE.tacticChip()}</div>
         <div class="se-subshead"><span class="se-subs-t"></span><span class="se-hint" aria-live="polite"></span></div>
         <div class="se-subs" role="list" aria-label="Squad"></div>
       </div>`);
@@ -73,8 +74,11 @@
           const fit = GAME.fit(c.id, i), oop = fit !== 'green';
           return `<div class="se-slot${oop ? ' se-oop' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
             <div class="se-cardwrap" data-card="${c.id}" data-kind="pitch" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}${oop ? ', out of position' : ''}">
-              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false, tab: s.pos, cls: 'fit-' + fit })}</div></div>`;
+              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false, tab: s.pos, cls: 'fit-' + fit, dots: (GAME.settling(c.id) || {}).left })}</div></div>`;
         }).join('');
+        // your three lines (Craig, 18 Oct) and the tactic on its chip; neither in the draft before a shirt is filled
+        body.querySelector('.se-lines-host').innerHTML = L.xi.some(Boolean) ? SE.lineBars() : '';
+        body.querySelector('.se-tname').textContent = GAME.tacticName();
         const sl = subsEl.scrollLeft;
         subsEl.innerHTML = L.subs.map((c) => `<div class="se-sub" role="listitem"><div class="se-cardwrap" data-card="${c.id}" data-kind="sub" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, ${ROLE_NAME[c.pos]}, in the squad">${D2T.cards.player(c, { w: subW(), shine: false })}</div><div class="se-sub-pos" aria-hidden="true">${(c.main ? [c.main, ...(c.alt || [])] : [c.pos]).join('<i>/</i>')}</div></div>`).join('');
         subsEl.scrollLeft = sl;
@@ -300,6 +304,9 @@
         });
         el.querySelector('.se-done').onclick = () => sh.close();
       };
+
+      // ---------- tactics sheet (Craig, 18 Oct) ----------
+      body.querySelector('.se-taclink').onclick = () => { SE.tacticSheet(root, () => { sel = null; render(null); }); };
 
       render(null);
 

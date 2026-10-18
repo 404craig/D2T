@@ -2,6 +2,7 @@
 const assert = require("assert");
 const D = require("../src/engine.js");
 const G = require("../data/game/game.json");
+require("./legends.js")(G);   // the legend cards, as the phone plays them
 let n = 0; const t = (name, fn) => { fn(); n++; console.log("ok", name); };
 const play = (seed, season, club, strategy = "greedy") => {
   const S = G.seasons[season]; const c = S.clubs.find(x => x.name === club).id;
@@ -308,5 +309,83 @@ t("Dare2Dream: a sample of drafted seasons plays to the end, and draft picks wea
     const gone = new Set(st.signed.map(x => x.id)), clubs = [...new Set(st.signed.map(x => x.from).filter(x => x != null))];
     assert.ok(clubs.some(cl => D.strengthLoss(S, cl, gone) > 0), c.key + ": no drafted player weakened his club");
   }
+});
+
+// ---------- the 18 Oct rethink (docs/SCOPE_ENGINE.md) ----------
+t("raids: with nobody taken every other result is history; taking Man Utd's midfield three costs them 15 to 30 points", () => {
+  const S = G.seasons["2000/01"], d = S.clubs.find(c => c.name === "Derby").id, mu = S.clubs.find(c => c.name === "Man Utd").id;
+  const st = D.newRun({ seed: "raid0", catalogue: G.catalogue, fixedClub: "2000/01:Derby" });
+  D.chooseClub(st, S, S.relegated.find(r => r.c === d) || { c: d, f: "4-4-2", xi: [] }); D.startSeason(st, S);
+  const ix = D.indexSeason(S);
+  for (const m of D.otherResults(S, st)) { const r = ix.matches[m.i]; assert.strictEqual(m.hg, r.hg); assert.strictEqual(m.ag, r.ag); assert.ok(!m.changed); }
+  // pretend the three were signed before the season
+  const trio = S.players.filter(p => p.c === mu && ["Roy Keane", "David Beckham", "Paul Scholes"].includes(p.n));
+  assert.strictEqual(trio.length, 3);
+  for (const p of trio) st.signed.push({ id: p.id, gw: 1, slot: 0, out: null, from: mu, date: "0000-00-00" });
+  const pts = (rows) => rows.filter(m => m.h === mu || m.a === mu).reduce((a, m) => a + (m.h === mu ? (m.hg > m.ag ? 3 : m.hg === m.ag ? 1 : 0) : (m.ag > m.hg ? 3 : m.hg === m.ag ? 1 : 0)), 0);
+  const real = pts(ix.matches), now = pts(D.otherResults(S, st));
+  assert.ok(real - now >= 15 && real - now <= 30, `Man Utd ${real} -> ${now}`);
+});
+t("stars count for the user's XI only, above 80 by level; the plain rating is untouched", () => {
+  assert.strictEqual(D.starRating({ r: 80, lv: 4 }), 80);
+  assert.strictEqual(D.starRating({ r: 90, lv: 2 }), 90);     // a gold plays at his number: the levels matter
+  assert.strictEqual(D.starRating({ r: 89, lv: 3 }), 93.5);
+  assert.strictEqual(D.starRating({ r: 93, lv: 4 }), 106);
+  const { st, S } = run1;
+  const plain = D.plainStrength(S, st), match = D.userStrength(S, st, S.legends, { tactic: false });
+  assert.ok(match.ovr >= plain.ovr);
+  const full = D.clubStrength(S, st.club, new Set());   // a real club's strength never takes the curve
+  assert.ok(Math.abs(full.ovr - D.xiStrength(D.clubXI(S, st.club, new Set()).map((p, i) => Object.assign({}, p, { p: [["GK","RB","CB","CB","LB","RM","CM","CM","LM","ST","ST"][i]] })), ["GK","RB","CB","CB","LB","RM","CM","CM","LM","ST","ST"]).ovr) < 1e-9);
+});
+t("tactics: mid block is the plain model, the others lean on a line, half as hard outside their shapes", () => {
+  const { st, S } = run1;
+  const base = D.userStrength(S, st, S.legends, { tactic: false });
+  assert.deepStrictEqual(D.userStrength(S, Object.assign({}, st, { tactic: "mid" })), D.tacticLines(Object.assign({}, st, { tactic: "mid" }), base, [], []));
+  const low = D.userStrength(S, Object.assign({}, st, { tactic: "low" }));
+  assert.ok(Math.abs((low.def - base.def) - 0.9 * (D.RULES.tactics.low.shapes.includes(st.formation) ? 1 : 0.5) * (base.def - D.RULES.lineOffset.def - base.ovr)) < 1e-9);
+  const S2 = G.seasons["2007/08"], d2 = S2.clubs.find(c => c.name === "Derby").id, fresh = D.newRun({ seed: "tac", catalogue: G.catalogue, fixedClub: "2007/08:Derby" });
+  D.chooseClub(fresh, S2, S2.relegated.find(r => r.c === d2));
+  assert.ok(D.setTactic(fresh, "press") && fresh.tactic === "press"); assert.ok(!D.setTactic(fresh, "nothing"));
+  assert.ok(!D.setTactic(st, "low"), "a finished season took a tactic");
+  for (const k of D.TACTIC_NAMES) { const L = D.userStrength(S, Object.assign({}, st, { tactic: k })); assert.ok(isFinite(L.att) && isFinite(L.def)); }
+});
+t("settling: a signing never plays below the shirt's floor, and is himself once settled; legends always run", () => {
+  const { st, S } = run1;
+  const signs = st.signed.filter(s => !s.draft && !s.free);
+  assert.ok(signs.length > 3);
+  for (const s of signs) {
+    const p = D.playerOf(S, s.id, S.legends);
+    if ((p.lv || 0) === 4) assert.ok(!s.settle, "a legend settles");
+    if (!s.settle) continue;
+    for (let g = s.gw; g < s.gw + s.settle.games + 1; g++) {
+      const r = D.settledRating(p, s, g);
+      if (g >= s.gw + s.settle.games) { assert.strictEqual(r, null); continue; }
+      assert.ok(r >= Math.min(s.settle.from, p.r) - 1e-9 && r <= p.r + 1e-9, `gw ${g}: ${r} vs ${p.r} from ${s.settle.from}`);
+    }
+  }
+  const types = new Set(signs.map(s => (s.settle ? s.settle.games : 0)));
+  assert.ok(types.size >= 2, "one kind of settling only: " + [...types]);
+});
+t("scouting: 2 respins, three cards green in the shirt and better than its man (or the next best, tagged); refused with nobody better", () => {
+  const S = G.seasons["2007/08"], d = S.clubs.find(c => c.name === "Derby").id;
+  const st = D.newRun({ seed: "scout1", catalogue: G.catalogue, fixedClub: "2007/08:Derby" });
+  D.chooseClub(st, S, S.relegated.find(r => r.c === d)); D.startSeason(st, S);
+  const info = D.scoutInfo(st, S);
+  assert.strictEqual(info.length, 11);
+  const slot = info.find(x => x.better >= 3).slot, pos = D.FORMATIONS[st.formation][slot][0], holder = D.playerOf(S, st.xi[slot]);
+  assert.ok(D.scout(st, S, slot)); assert.strictEqual(st.respins, 3); assert.strictEqual(st.roll.scout, slot);
+  assert.strictEqual(st.roll.cards.length, 3);
+  for (const id of st.roll.cards) { const p = D.playerOf(S, id, S.legends); assert.ok(!String(id).startsWith("L:")); assert.strictEqual(D.fitOf(p, pos), "green"); assert.ok(p.r > holder.r); }
+  assert.deepStrictEqual(st.roll.tags, ["better", "better", "better"]);
+  assert.ok(D.scout(st, S, slot)); assert.strictEqual(st.respins, 1);
+  assert.ok(!D.scout(st, S, slot), "scouted on one respin");
+  // nobody better: put a 99 in the shirt
+  const st2 = D.newRun({ seed: "scout2", catalogue: G.catalogue, fixedClub: "2007/08:Derby" });
+  D.chooseClub(st2, S, S.relegated.find(r => r.c === d)); D.startSeason(st2, S);
+  const top = S.players.slice().sort((a, b) => b.r - a.r)[0]; st2.xi[9] = top.id;
+  assert.strictEqual(D.scoutInfo(st2, S)[9].better, 0); assert.ok(!D.scout(st2, S, 9));
+});
+t("every season puts a legend on the table", () => {
+  for (let i = 0; i < 12; i++) { const { offered } = play("leg" + i, "2007/08", "Derby", "pass"); assert.ok(offered.some(id => String(id).startsWith("L:")), "no legend in run " + i); }
 });
 console.log(`${n} checks passed`);
