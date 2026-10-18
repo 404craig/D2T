@@ -99,9 +99,9 @@ tab.
 
 | Type | Chance | Effect |
 |---|---|---|
-| Hits the ground running | 30% (purple 50%, legend 70%) | full rating from his first game |
+| Hits the ground running | 30% (purples and legends always, Craig 18 Oct) | full rating from his first game |
 | Settles in | 50% | two games halfway between the man he replaced and himself |
-| Takes time | 20% (purple 10%, legend 0%) | three games, climbing from a quarter of the way up to full (Craig, 18 Oct: three, not four) |
+| Takes time | 20% (purples and legends never) | three games, climbing from a quarter of the way up to full (Craig, 18 Oct: three, not four) |
 
 Floor: he never plays below the shirt's rating before the roll (an empty shirt counts 40), so a signing can only delay
 a gain, never cost you. Players already in your XI who swap shirts or are re-seated by a shape change do not settle.
