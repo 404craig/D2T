@@ -48,15 +48,18 @@ history's clubs are exactly as good as they were, less what you took from them.
 
 ### 1. Stars play above their number
 
-In matches a card counts for more than its rating the higher it is: **above 80 each rating point counts 1.5**, so an
-85 plays as 87.5, a 90 as 95, a 93 as 99.5, and nothing changes below 80. It applies to every player on the pitch,
-yours and theirs, so it is not a bonus for the user: Man Utd 2007/08 go from 87.5 to about 90.5 too. The card shows
-his real rating; the big card gets one line, "Plays above his rating in matches", on gold and up.
+In matches a card counts for more than its rating the higher it is, and the better the card, the steeper (Craig, 18
+Oct: purples should move the game more than golds, legends more again): **above 80 each rating point counts 1.5 on a
+gold, 1.75 on a purple and 2 on a legend.** An 89 gold plays as 93.5, an 89 purple as 95.75, a 93 legend as 106;
+nothing changes below 80. It applies to every player on the pitch, yours and theirs, so it is not a bonus for the
+user: the great sides are made of purples and legends, and Man Utd 2007/08 go from 87.5 to 92.5, Chelsea from 85.2
+to 88.1. The card shows his real rating; the big card gets one line, "Plays above his rating in matches", on gold and
+up, "well above" on purple and legend.
 
-Why this and not a flat bonus per level: it is continuous (an 89 purple and a 90 gold play alike, as they should),
-it is the same rule for everyone, and the match model is refitted to the real results afterwards
-(`tests/fit-match.js`) so the league's scorelines stay real. Measured on the harness: a legend striker in a gold XI
-goes from +4.5 to about +7 points a season, two purples and a legend from +9 to about +14.
+The match model is refitted to the real results afterwards (`tests/fit-match.js`) so the league's scorelines stay
+real. Measured on the harness (gold XI of 82s, 2007/08 clubs): a purple striker (89) goes from +3 to +5 points a
+season, a legend striker (93) from +4 to +9, a legend centre back (91) from +1 to +3 (more again with the weights in
+section 3), and two purples and a legend from +9 to **+17** (67 to 84 points) before any of the building below.
 
 ### 2. Building the team: your edge over history
 
@@ -98,7 +101,7 @@ tab.
 |---|---|---|
 | Hits the ground running | 30% (purple 50%, legend 70%) | full rating from his first game |
 | Settles in | 50% | two games halfway between the man he replaced and himself |
-| Takes time | 20% (purple 10%, legend 0%) | four games, climbing from a quarter of the way up to full |
+| Takes time | 20% (purple 10%, legend 0%) | three games, climbing from a quarter of the way up to full (Craig, 18 Oct: three, not four) |
 
 Floor: he never plays below the shirt's rating before the roll (an empty shirt counts 40), so a signing can only delay
 a gain, never cost you. Players already in your XI who swap shirts or are re-seated by a shape change do not settle.
@@ -139,26 +142,37 @@ Scaled scorelines (earlier scope): each real match of a club you took players fr
 scaled by what its XI lost (its goals down by the attack and midfield lost, its goals conceded up by the defence and
 midfield lost, through the match model's own sensitivity, seeded rounding). The type of player taken is in the rule
 by construction: midfielders shrink both ends, forwards their goals, defenders and keepers the goals they let in.
-Then, as Craig asked, **the bite depends on the opponent's real final position**: multiplied by `1.45 - 0.05 x
-position` (1.4 against the champions, 1.0 against 9th, 0.45 against the bottom club). Measured, Man Utd 2000/01
-without Keane, Beckham and Scholes: 32 points from the top half becomes 24, 48 from the bottom half becomes 42. A 1-0
-over Arsenal is 0-0 or 0-1 more often than not; a 3-0 over Bradford is usually still a win. No cap, so a fourth and
-fifth player keep hurting. Club X forecast seasons use the forecast's table. **No real form** anywhere: the only
+Then, as Craig asked, **the bite depends on the opponent's real final position**: the sensitivity is `m = 2.5`
+multiplied by `1.6 - 0.06 x position` (1.54 against the champions, 1.0 against 10th, 0.4 against the bottom club,
+never under 0.3). Sized to Craig's own numbers (18 Oct: without one of Keane, Beckham and Scholes, Man Utd keep 29 of
+their 32 points against the top half, without two 25, without three 20, compounding). Measured, Man Utd 2000/01,
+real 32 from the top half and 48 from the bottom half:
+
+| Taken | Against the top half | Against the bottom half | Season |
+|---|---|---|---|
+| Keane | 29 of 32 | 47 of 48 | 76 (real 80) |
+| Keane, Beckham | 24 | 42 | 66 |
+| Keane, Beckham, Scholes | 19 | 38 | 57 |
+| Keane, Beckham, Scholes, Giggs | 14 | 32 | 46 |
+
+A 1-0 over Arsenal is 0-0 or 0-1 more often than not; a 3-0 over Bradford is usually still a win. No cap, so a fourth
+and fifth player keep hurting. Club X forecast seasons use the forecast's table. **No real form** anywhere: the only
 thing that moves history is your signings (Craig, 18 Oct).
 
 ### 5. Scouting
 
-On a transfer roll the respin button offers Respin (1) or Scout a position (2). Scout opens your pitch; every shirt is
-tagged before you commit: "3 better", "1 better" or "Nobody better". The pool is that season's cards green in the
+On a transfer roll the respin button offers Respin (1) or Scout a position (2). Scout opens your pitch in a slide-up;
+**a shirt with nobody better is shown red, with a key under the pitch: "Red: nobody better this season"** (Craig, 18
+Oct); the rest are as they are. The pool is that season's cards green in the
 shirt, rated above the man in it, never seen this run, never your own, **never a legend card** (purples can be
 scouted; they are the season's top ten). Measured across every season and shirt: above a 76 holder there are always
 three or more; above an 82, 54 of 238 season-shirts have fewer than three and 4 have none; above an 86, 171 and 48.
 
 - Three or more: 2 respins, three cards reel in, an ordinary roll from there (sign, pass, respin again).
 - One or two: the scout brings what there is and fills to three with the best below him, each tagged "better" or
-  "next best". Still 2 respins; you knew before you tapped.
-- Nobody better: tapping the shirt costs nothing. The sheet says "Nobody better than Hendry at CB in 1992/93" and
-  shows the next best man there as one card; take him for the 2 respins, or pick another shirt, or close.
+  "next best". Still 2 respins.
+- Red shirt: tapping it costs nothing. A line names the best man there this season ("Nobody better than Hendry at CB
+  in 1992/93"); pick another shirt or close.
 
 The sheet copy: "Scout a position. Uses 2 of your respins. Pick a shirt and your scouts bring back three players
 who play there and are better than the man in it now. Never legends: they find you. A normal respin costs 1 and could
@@ -182,8 +196,8 @@ Estimates from the measured parts (stars measured, building measured per part, c
 
 | Run | Today | After |
 |---|---|---|
-| Nine golds, two purples, a legend, built right | 67 to 69 pts, title 15 to 18% | about 85 pts, title more often than not |
-| Two purples, built right | 65 to 69 | about 76, top 4 nearly always |
+| Nine golds, two purples, a legend, built right | 67 to 69 pts, title 15 to 18% | about 88 pts, the title most of the time |
+| Two purples, built right | 65 to 69 | about 78, top 4 nearly always |
 | One purple, mid block in 4-4-2 | 60 to 63 | about 63 |
 | Nothing above gold, built wrong | 57 to 64 | about 55 |
 | Never signs anyone | 33 | 33 |
@@ -205,7 +219,7 @@ Order matters because each step moves the fit:
 4. Settling, raids by opponent, scouting.
 5. Measure `HIST=1 node tests/calibrate-all.js 12` and `node tests/calibrate.js 2007/08 Derby 400`. Targets
    (Craig, 15 Oct): average player about 5% titles, Derby about 2%, the table above within 3 points per row. The
-   knobs, in order: the size of the build effect (the amplifiers), then the star slope (1.5), then `levelOdds`
+   knobs, in order: the size of the build effect (the amplifiers), then the star slopes (1.5, 1.75, 2), then `levelOdds`
    only as a last resort (landing stars is the fun; do not make them rarer to balance the engine).
 6. New engine tests: no raids means history untouched; a settling signing never plays below the shirt's floor; mid
    block in any shape equals the plain model; same seed and choices replay the same season.
