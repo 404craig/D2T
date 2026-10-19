@@ -130,7 +130,27 @@
 .se-sub-pos { margin-top: 7px; color: #8E8E99; font: 800 9px/1 var(--font); font-style: normal; letter-spacing: .03em; white-space: nowrap; }
 .se-sub-pos i { font-style: normal; opacity: .5; }
 .se-sub .se-cardwrap.se-sel::after { display: none; }   /* the positions sit there; the white tab and the lift show it is picked */
-@media (max-height: 759px) { .se-squad .se-pitch { min-height: 280px; } .se-subs { padding-top: 13px; padding-bottom: 3px; } .se-sub-pos { margin-top: 5px; } }
+/* compact mode (design session, Craig 19 Oct; base.css has the bars): the squad a step smaller, the bench cards 52px */
+@media (max-height: 759px) {
+  .se-sqhead { padding-bottom: 6px; gap: 8px; }
+  .se-sqcrest { width: 28px; height: 28px; }
+  .se-sqname { font-size: 18px; }
+  .se-sqsub { font-size: 11px; }
+  .se-rating { padding: 3px 10px 3px 8px; } .se-rating b { font-size: 20px; }
+  .se-linebars { margin: 0 2px 6px; }
+  .se-squad .se-pitch { min-height: 250px; }
+  .se-subshead { margin-top: 6px; }
+  .se-subs { padding: 10px 16px 4px; gap: 6px; }
+  .se-sub .d2c { --w: 52px !important; }
+  .se-sub-pos { margin-top: 5px; }
+}
+@media (max-width: 374px) { .se-hint { font-size: 11px; } }
+/* Samsung's screen zoom a step up (about 320 x 600): one more step down */
+@media (max-height: 620px) {
+  .se-squad .se-pitch { min-height: 212px; }
+  .se-sub .d2c { --w: 46px !important; }
+  .se-linebars { display: none; }
+}
 .se-sub .se-cardwrap { touch-action: pan-x; }
 
 /* next fixture bar */
