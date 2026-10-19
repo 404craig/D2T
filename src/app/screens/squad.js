@@ -88,7 +88,7 @@
         subsEl.style.display = showSubs ? '' : 'none';
         let gone = body.querySelector('.se-gone');
         const goneText = drafting ? (GAME.mode() === 'clubx' ? 'Pick your shape, then start the draft: 11 spins, three players each time for any of your open shirts, in any order. Each goes in a shirt he plays. No respins.' : 'Pick your shape, then start the draft: 11 spins, one per shirt (keeper first, then defence, midfield and attack). Three players each time, no respins.')
-          : carried && pre ? `${GAME.isSim() ? "Last season's XI comes with you, on the same cards." : "Last season's XI, each on his card for this season (a man with no Premier League season now keeps his old one)."} Swap shirts or change the shape, then pre-season: 3 rolls before the first game, and 5 respins for the season.`
+          : carried && pre ? `${GAME.isSim() ? "Last season's XI comes with you, on the same cards, which age: 3 a season after the first." : "Last season's XI, each on his card for this season (a man with no Premier League season now keeps his old one, and it ages: 3 a season after the first)."} Swap shirts or change the shape, then pre-season: 3 rolls before the first game, and 5 respins for the season.`
           : dream && pre ? 'Your drafted XI. Swap shirts or change the shape, then start the season. Your 5 respins are for the transfer rolls during the season.'
           : 'The rest of the squad has gone. New faces only come through the transfer rolls, and each one takes a shirt from your XI.';
         if (!showSubs && (!pre || dream) && !gone) { gone = D2T.h(`<p class="se-note se-gone">${goneText}</p>`); subsEl.after(gone); }

@@ -477,6 +477,21 @@
       // the emblem burst opens each window and the draft, not every one of the 11 draft spins
       if (st.spun === rollKey || (draft && di.step > 1)) build();
       else intr = intro(body, () => { intr = null; build(); });
+      // the January raid (Craig, 19 Oct): as the window opens a top-half club has taken one of yours; say so once
+      const jr = !draft && GAME.janRaid();
+      if (jr && jr.gw === eng.gw && !st.janSeen) {
+        const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">${D2T.esc(jr.club)} came in for ${D2T.esc(jr.name)} as the window opened. His shirt is empty for your January rolls; if it is still empty when the window closes, a free agent fills it.</p>
+          <ul><li>${jr.crest ? `<img src="${jr.crest}" alt="">` : ''}<b>${D2T.esc(jr.name)}</b><span>to ${D2T.esc(jr.club)}</span></li></ul>
+          <button class="btn se-btn se-poach-go" type="button">Continue</button></div>`);
+        timers.push(setTimeout(() => {
+          if (!alive) return;
+          SND.play('playerOut');
+          const sh = D2T.sheet({ title: 'January raid', body: el, onClose: () => { st.janSeen = true; D2T.save(); } });
+          sh.el.classList.add('se-run', 'se-poach-sheet');
+          ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
+          el.querySelector('.se-poach-go').onclick = () => sh.close();
+        }, 600));
+      }
     },
     unmount() { kill && kill(); kill = null; intr && intr.cancel(); intr = null; api && api.unmount(); api = null; }
   });

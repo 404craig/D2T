@@ -34,6 +34,7 @@
           <li><b>Transfer rolls</b>Through the season you get a roll: 3 cards appear and you sign one. A new signing may hit the ground running or take two or three games to settle.</li>
           <li><b>Tactics</b>Pick how you play: low block, possession, counter attack, high press, or a balanced mid block. A tactic leans on one of your lines, so it pays when that line is your strength. Each is built for certain shapes.</li>
           <li><b>Scouting</b>Spend 2 respins to scout one shirt: three players who play there and are better than the man in it. Shirts with nobody better show red.</li>
+          <li><b>The January raid</b>As the January window opens, a top-half club comes in for one of your players, most likely a star. His shirt is empty for your January rolls; a free agent fills it if you leave it.</li>
           <li><b>Finish high</b>Your final place earns achievements: beat the drop, top half, top 3, the title.</li>
         </ol>
 
@@ -54,7 +55,7 @@
 
         <h2 class="fr-h2">Club X</h2>
         <p class="fr-lead">Name your club, then spin a season. Your club takes the place of that season's bottom side, with no players. Pick a formation and draft your XI: 11 spins, three players each time for any of your open shirts, and each goes in a shirt he plays. Then play the season with transfer rolls and 5 respins. Only the title counts.</p>
-        <p class="fr-lead">Career mode: unless you go down, carry on into the next season with the same club and XI. Up to 2025/26 it is the next real season, your club takes the bottom side's place and each player moves to his real card for that season, with 3 pre-season rolls. After 2025/26 the seasons are a forecast: the bottom three go down, three clubs come up from the database, the other results are played out by the match model, and the rolls can bring players from any season.</p>
+        <p class="fr-lead">Career mode: unless you go down, carry on into the next season with the same club and XI. Up to 2025/26 it is the next real season, your club takes the bottom side's place and each player moves to his real card for that season, with 3 pre-season rolls; before them, three of your XI are taken by other clubs, your best for certain. A player with no real card for the new season keeps his old one, which ages: 3 a season after the first. After 2025/26 the seasons are a forecast: the bottom three go down, three clubs come up from the database, the other results are played out by the match model, and the rolls can bring players from any season.</p>
 
         <h2 class="fr-h2">Card colours</h2>
         <p class="fr-lead" style="margin-bottom:6px">The big number is the rating. The colour tells you the level.</p>

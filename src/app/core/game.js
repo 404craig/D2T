@@ -187,7 +187,8 @@
       provisional: p.src === 'f', stats, career: p.k != null && G.careers ? G.careers[p.k] : null,
       // detailed positions when known (main first); role is the broad colour of his main one
       main: E.SLOT_BROAD[(p.p || [])[0]] ? p.p[0] : null, alt: (p.p || []).slice(1).filter((x) => E.SLOT_BROAD[x]),
-      role: E.SLOT_BROAD[(p.p || [])[0]] || p.b
+      role: E.SLOT_BROAD[(p.p || [])[0]] || p.b,
+      aged: p.aged || 0, r0: p.r0
     };
   };
   GAME.LV = LV;
@@ -222,11 +223,22 @@
   const mainClub = (S, p) => S.clubs[p.c2 != null && (p.a2 || 0) > (p.a1 || 0) ? p.c2 : p.c].name;
   // a copy of a real player-season for a career season: at club c (a slot) or, with c null, under his real club's name
   const copyOf = (sk, p, id, c) => Object.assign({}, p, { id, c, c2: null, m2: null, cn: c == null ? mainClub(G.seasons[sk], p) : undefined, sk, oid: p.id });
+  // Carried cards age (19 Oct, RULES.aging): a card from an earlier season keeps its number for one carried season, then loses
+  // 3 a season (`aged` on the copy, the rating it had in `r0`). A carried legend past that becomes an aged copy of his card
+  // (lv 4 kept, `oid` his legend id so the next season carries him on); within it he stays the legend card itself.
+  const ageOf = (key, sk) => yearOf(key) - yearOf(sk);
+  const aged = (q, key) => { const a = ageOf(key, q.sk), r = E.agedRating(q.r, a); return r === q.r ? q : Object.assign(q, { r0: q.r, r, aged: q.r - r }); };
+  const legendCopy = (lid, key, id) => {
+    const l = LEGENDS.find((x) => x.id === lid); if (!l) return null;
+    const r = E.agedRating(l.r, ageOf(key, l.sk)); if (r === l.r) return null;
+    return Object.assign({}, l, { id, r0: l.r, r, aged: l.r - r, oid: lid, alias: undefined });
+  };
   // where a card in a season came from: a legend id, or the real season and id of the player-season
   const originOf = (S, id) => {
     if (id == null) return null;
     if (String(id).startsWith('L:')) return { L: id };
     const p = E.playerOf(S, id); if (!p) return null;
+    if (p.oid != null && String(p.oid).startsWith('L:')) return { L: p.oid };
     return p.oid != null ? { s: p.sk, id: p.oid } : { s: S.season, id };
   };
   const built = new WeakMap();
@@ -240,10 +252,10 @@
       let next = S0.players.length;
       for (const o of spec.carry) {
         if (!o) { ids.push(null); continue; }
-        if (o.L) { ids.push(o.L); continue; }
+        if (o.L) { const lc = legendCopy(o.L, spec.key, next); if (lc) { extras.push(lc); ids.push(next++); } else ids.push(o.L); continue; }
         const src = realPlayer(o.s, o.id), now = src && src.k != null ? byK.get(src.k) : null;
         if (now) { ids.push(now.id); continue; }
-        extras.push(copyOf(o.s, src, next, null)); ids.push(next++);
+        extras.push(aged(copyOf(o.s, src, next, null), spec.key)); ids.push(next++);
       }
       S = Object.assign({}, S0, { players: S0.players.concat(extras), _ix: null, legends: LEGENDS, career: true });
     } else {
@@ -258,8 +270,8 @@
       // your XI, then everyone else from every season as cards for the rolls
       for (const o of spec.carry) {
         if (!o) { ids.push(null); continue; }
-        if (o.L) { ids.push(o.L); continue; }
-        const id = players.length; players.push(copyOf(o.s, realPlayer(o.s, o.id), id, null)); ids.push(id);
+        if (o.L) { const lc = legendCopy(o.L, spec.key, players.length); if (lc) { players.push(lc); ids.push(lc.id); } else ids.push(o.L); continue; }
+        const id = players.length; players.push(aged(copyOf(o.s, realPlayer(o.s, o.id), id, null), spec.key)); ids.push(id);
       }
       for (const sk of SEASON_KEYS) for (const p of G.seasons[sk].players) if ((p.a || 0) >= E.RULES.minApps && !used.has(sk + '|' + p.id)) players.push(copyOf(sk, p, players.length, null));
       const shift = yearOf(spec.key) - yearOf(LAST_REAL);
@@ -319,7 +331,7 @@
     const st = E.newRun({ seed: c.id + ':s' + c.n, mode: 'clubx', catalogue: [], recent: GAME.recentFor(S2, spec.me) });
     st.seasonKey = spec.key; st.club = spec.me; st.formation = e.formation; st.career = c.n;
     E.carryIn(st, S2, S2.xiIds);
-    Object.assign(run, { eng: st, step: 'table', tableSeen: false, recorded: false, match: null, pending: null, poachSeen: false, freeSeen: false });
+    Object.assign(run, { eng: st, step: 'table', tableSeen: false, recorded: false, match: null, pending: null, poachSeen: false, freeSeen: false, janSeen: false, tacticHinted: false });
     D2T.save();
     return true;
   };
@@ -589,7 +601,7 @@
     // Colour only (near misses and bookings): seeded from the run, never changes a result.
     const rnd = E.stream(eng.seed, 'flavour', gw);
     const mine = eng.xi.map((id) => GAME.card(S, id)).filter((c) => c && c.pos !== 'GK');
-    const theirs = E.clubXI(S, r.opp, new Set(), E.joinersOf(S, eng, r.opp)).filter((p) => p.b !== 'GK').map((p) => p.n);
+    const theirs = E.clubXI(S, r.opp, new Set(), E.joinersOf(S, eng, r.opp, r.date)).filter((p) => p.b !== 'GK').map((p) => p.n);
     const pick = (arr) => arr.length ? arr[Math.floor(rnd() * arr.length)] : '';
     const misses = 2 + Math.floor(rnd() * 4);
     for (let i = 0; i < misses; i++) {
@@ -601,10 +613,12 @@
     ev.push({ min: 45, type: 'ht' }, { min: 90, type: 'ft' });
     const order = { goal: 1, miss: 0, yellow: 2, ht: 3, ft: 4 };
     ev.sort((a, b) => a.min - b.min || order[a.type] - order[b.type]);
-    const opp = E.clubStrength(S, r.opp, new Set(eng.signed.filter((x) => x.date <= r.date).map((x) => x.id)), E.joinersOf(S, eng, r.opp));
+    const opp = E.clubStrength(S, r.opp, new Set(eng.signed.filter((x) => x.date <= r.date).map((x) => x.id)), E.joinersOf(S, eng, r.opp, r.date));
     return { gw, opp: oppName, ha: r.home ? 'H' : 'A', gf: r.us, ga: r.them, events: ev, me: Math.round(E.plainStrength(S, eng).ovr), oppStrength: Math.round(opp.ovr), date: r.date };
   };
-  GAME.oppStrength = (gw) => { const eng = GAME.eng(), S = GAME.S(), f = eng.fixtures[gw - 1]; return Math.round(E.clubStrength(S, f.opp, new Set(eng.signed.filter((x) => x.date <= f.date).map((x) => x.id)), E.joinersOf(S, eng, f.opp)).ovr); };
+  GAME.oppStrength = (gw) => { const eng = GAME.eng(), S = GAME.S(), f = eng.fixtures[gw - 1]; return Math.round(E.clubStrength(S, f.opp, new Set(eng.signed.filter((x) => x.date <= f.date).map((x) => x.id)), E.joinersOf(S, eng, f.opp, f.date)).ovr); };
+  // the January raid (Craig, 19 Oct): who was taken as the window opened, for the transfer screen's news sheet
+  GAME.janRaid = () => { const eng = GAME.eng(), S = GAME.S(), x = eng && eng.janRaid; if (!x) return null; const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { id: x.id, name: x.name, slot: x.slot, club: name, crest: c.crest, gw: x.gw, card: GAME.card(S, x.id) }; };
   // After the final whistle: where to next (a transfer window, the next gameweek or the season summary).
   GAME.afterMatch = () => {
     const run = D2T.state.run, eng = GAME.eng();
