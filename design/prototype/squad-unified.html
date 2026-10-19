@@ -2555,13 +2555,65 @@ sup.up{color:#3DDC84}sup.dn{color:#FF5A5A}
 
 .u-B .se-slots{left:18px}
 .se-rating b sup{font-size:12px}
+
+.u-dock.nodrag .u-grab{display:none}.u-dock.nodrag .u-chev{display:none}.u-dock.nodrag .u-dh{cursor:default;min-height:44px;padding-top:12px}
+.u-dock.nodrag .u-dt{grid-column:1/3}
+/* touchline variants */
+.u-touch{width:32px}
+.u-touch.r{left:auto;right:0}
+.t-1 .se-slots,.t-2 .se-slots,.t-4 .se-slots,.t-5 .se-slots{left:30px}
+.t-3 .se-slots{left:22px;right:30px}
+.u-touch em{font-style:normal}
+.u-touch sup{margin:0;vertical-align:baseline;font-size:11px}
+/* 1 tabs */
+.t1{position:absolute;left:3px;width:28px;transform:translateY(-50%);display:grid;justify-items:center;gap:1px;padding:5px 0 4px;border-radius:9px;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2)}
+.t1 i{font-style:normal;font:800 11px/1 'Exo 2';letter-spacing:0;color:#BDBDC6}
+.t1 b{font:900 italic 15px/1 'Exo 2';color:#fff}
+.t1.top{border-color:var(--se-acc);background:rgba(0,0,0,.7)}.t1.top b,.t1.top i{color:var(--se-text)}
+.t1.ch{border-color:#3DDC84}
+/* 2 heat strip */
+.t2z{position:absolute;left:4px;width:5px;border-radius:3px;background:#fff;opacity:var(--o)}
+.t2z.top{background:var(--se-acc);opacity:1}
+.t2{position:absolute;left:0;width:32px;transform:translateY(-50%);display:grid;justify-items:center;gap:3px}
+.t2 b{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#0B0B0E;border:2px solid rgba(255,255,255,.35);font:900 italic 13px/1 'Exo 2';color:#fff;box-sizing:border-box}
+.t2 i{font-style:normal;font:800 11px/1 'Exo 2';color:#BDBDC6;text-shadow:0 1px 2px #000}
+.t2.top b{border-color:var(--se-acc);color:var(--se-text)}.t2.top i{color:var(--se-text)}
+.t2.ch b{border-color:#3DDC84;box-shadow:0 0 10px rgba(61,220,132,.6)}
+/* 3 both touchlines */
+.t3l{position:absolute;left:0;width:22px;display:flex;align-items:center;justify-content:center;border-left:2px solid rgba(255,255,255,.25)}
+.t3l i{font-style:normal;transform:rotate(-90deg);white-space:nowrap;font:800 11px/1 'Exo 2';letter-spacing:.16em;text-transform:uppercase;color:#BDBDC6}
+.t3l.top{border-color:var(--se-acc)}.t3l.top i{color:var(--se-text)}
+.t3r{position:absolute;right:2px;width:28px;transform:translateY(-50%);display:grid;justify-items:center;gap:2px}
+.t3r b{font:900 italic 18px/1 'Exo 2';color:#fff;text-shadow:0 1px 3px #000}
+.t3r.top b{color:var(--se-text)}
+/* 4 gauges */
+.t4{position:absolute;left:0;width:32px}
+.t4 u{isolation:isolate;position:absolute;left:5px;top:4px;bottom:4px;width:6px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden}
+.t4 s{position:absolute;left:0;right:0;bottom:0;background:rgba(255,255,255,.55);text-decoration:none;border-radius:3px}
+.t4 s.pv{background:#3DDC84;z-index:-1}
+.t4.top s:not(.pv){background:var(--se-acc)}
+.t4>span{position:absolute;left:13px;top:50%;transform:translateY(-50%);display:grid;justify-items:start;gap:1px}
+.t4 b{font:900 italic 14px/1 'Exo 2';color:#fff;text-shadow:0 1px 3px #000}
+.t4 i{font-style:normal;font:800 11px/1 'Exo 2';color:#BDBDC6;letter-spacing:-.02em;text-shadow:0 1px 2px #000}
+.t4.top b,.t4.top i{color:var(--se-text)}
+/* 5 shaded thirds */
+.t-5 .u-touch{width:100%}
+.t5z{position:absolute;left:0;right:0;background:rgba(255,255,255,var(--o))}
+.t5z.top{background:var(--se-acc-a)}
+.t5z.ch{box-shadow:inset 0 0 0 1px rgba(61,220,132,.7)}
+.t5z+.t5z{border-top:1px dashed rgba(255,255,255,.12)}
+.t5{position:absolute;left:4px;width:26px;transform:translateY(-50%);display:grid;justify-items:center;gap:2px}
+.t5 b{font:900 italic 16px/1 'Exo 2';color:#fff;text-shadow:0 1px 3px #000}
+.t5 i{font-style:normal;font:800 11px/1 'Exo 2';color:#BDBDC6;text-shadow:0 1px 2px #000}
+.t5.top b,.t5.top i{color:var(--se-text)}
+.t1 em,.t2 em,.t3r em,.t4 em,.t5 em{line-height:1}
 </style></head><body class="pg">
 <div class="wrap">
 <h1>One frame for squad and transfers</h1>
-<p class="lead">Option 1 rebuilt as a working page. The squad screen and the transfer window now share one frame: header with the strength numbers, the pitch with shape and tactic in its corners, and a dock of large cards at the bottom. On the squad screen the dock is a drawer you can drag; in the transfer window it holds the three players you rolled. Everything uses Portsmouth 2009/10 and the game's own fit and line maths.</p>
+<p class="lead">Option 1 rebuilt as a working page, now with five ways to show defence, midfield and attack on the touchline, and no drawer. The squad screen and the transfer window now share one frame: header with the strength numbers, the pitch with shape and tactic in its corners, and a dock of large cards at the bottom. On the squad screen the dock is your squad, swiped left and right; in the transfer window it holds the three players you rolled. Everything uses Portsmouth 2009/10 and the game's own fit and line maths.</p>
 <div class="ctl">
  <div><label>Screen</label><div class="seg" id="scr"><button data-v="squad" class="on">Squad, pre-season</button><button data-v="transfer">Transfer window</button></div></div>
- <div><label>Defence, midfield, attack</label><div class="seg" id="sty"><button data-v="A" class="on">A Strength card</button><button data-v="B">B Touchline</button><button data-v="C">C Scoreboard</button></div></div>
+ <div><label>Defence, midfield, attack on the touchline</label><div class="seg" id="sty"><button data-v="1" class="on">1 Tabs</button><button data-v="2">2 Heat strip</button><button data-v="3">3 Both touchlines</button><button data-v="4">4 Gauges</button><button data-v="5">5 Shaded thirds</button></div></div>
  <div><label>&nbsp;</label><button class="replay" id="reset">Reset</button></div>
 </div>
 <div class="row">
@@ -2575,7 +2627,7 @@ sup.up{color:#3DDC84}sup.dn{color:#FF5A5A}
     <rect x="3" y="2" width="94" height="96" rx=".6"></rect><line x1="3" y1="50" x2="97" y2="50"></line>
     <rect x="24" y="2" width="52" height="15"></rect><rect x="38" y="2" width="24" height="5.5"></rect>
     <rect x="24" y="83" width="52" height="15"></rect><rect x="38" y="92.5" width="24" height="5.5"></rect>
-  </svg><span class="se-circle"></span><span class="se-spot"></span><div class="u-touch" id="touch"></div><div class="se-slots" id="slots"></div>
+  </svg><span class="se-circle"></span><span class="se-spot"></span><div class="u-touch" id="touch"></div><div class="u-touch r" id="touchR"></div><div class="se-slots" id="slots"></div>
     <button class="se-formlink" type="button" data-chip="shape"><b class="se-fname">4-3-3</b><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="se-formlink se-taclink" type="button" data-chip="tactic"><b class="se-tname">Mid block</b><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
    </div>
@@ -2609,9 +2661,9 @@ const lines=(xi)=>{const s=[0,0,0],w=[0,0,0];let all=0;xi.forEach((id,i)=>{const
 const R=Math.round, $=(id)=>document.getElementById(id);
 const BROAD=(p)=>{const f=p.p[0];return f==='GK'?'GK':['CB','LB','RB','LWB','RWB'].includes(f)?'DEF':['ST','LW','RW'].includes(f)?'FWD':'MID';};
 let S;
-function reset(){S={scr:S?S.scr:'squad',sty:S?S.sty:'A',xi:D.xi.slice(),bench:D.subs.slice(),tray:D.roll.slice(),sel:null,dock:'strip',signed:null};}
+function reset(){S={scr:S?S.scr:'squad',sty:S?S.sty:'1',xi:D.xi.slice(),bench:D.subs.slice(),tray:D.roll.slice(),sel:null,dock:'strip',signed:null};}
 reset();
-const H={closed:62,strip:244};
+const H={closed:62,strip:234};
 function stageH(){return $('stage').clientHeight;}
 function dockH(){return S.scr==='transfer'?H.strip:S.dock==='full'?stageH():H[S.dock];}
 // best shirt for a candidate: the one that lifts the team most
@@ -2624,16 +2676,24 @@ function strength(){
  const L=lines(S.xi),pv=preview(),Lp=pv?pv.L:null,top=Math.max(R(L.def),R(L.mid),R(L.att));
  const items=[['DEF','def'],['MID','mid'],['ATT','att']];
  const bar=(v)=>Math.max(4,Math.min(100,(v-55)/40*100)).toFixed(0);
- $('board').innerHTML='';$('touch').innerHTML='';$('hR').innerHTML='';
- if(S.sty==='A'){
-  $('hR').innerHTML=`<div class="u-str"><div class="u-big"><b>${R(L.ovr)}${Lp?delta(L.ovr,Lp.ovr):''}</b><i>Team</i></div><div class="u-rows">${items.map(([k,f])=>`<span class="${R(L[f])===top?'top':''}"><i>${k}</i><b>${R(L[f])}</b><em>${Lp?delta(L[f],Lp[f]):''}</em></span>`).join('')}</div></div>`;
- } else if(S.sty==='B'){
-  $('hR').innerHTML=`<div class="se-rating"><b class="se-rating-n">${R(L.ovr)}${Lp?delta(L.ovr,Lp.ovr):''}</b><i>Team<br>rating</i></div>`;
-  const Z={att:[2,28],mid:[30,56],def:[58,84]};
-  $('touch').innerHTML=items.map(([k,f])=>`<span class="u-tz ${R(L[f])===top?'top':''}${Lp&&R(Lp[f])!==R(L[f])?' ch':''}" style="top:${Z[f][0]}%;height:${Z[f][1]-Z[f][0]}%"><s style="height:${bar(L[f])}%"></s><em>${k} <b>${R(L[f])}</b>${Lp?delta(L[f],Lp[f]):''}</em></span>`).join('');
- } else {
-  $('board').innerHTML=`<span class="tm"><i>Team</i><b>${R(L.ovr)}${Lp?delta(L.ovr,Lp.ovr):''}</b></span>`+items.map(([k,f])=>`<span class="${R(L[f])===top?'top':''}"><i>${k}</i><b>${R(L[f])}${Lp?delta(L[f],Lp[f]):''}</b><u><s style="width:${bar(L[f])}%"></s></u></span>`).join('');
+ $('hR').innerHTML=`<div class="se-rating"><b class="se-rating-n">${R(L.ovr)}${Lp?delta(L.ovr,Lp.ovr):''}</b><i>Team<br>rating</i></div>`;
+ const Z={att:[18,4,30],mid:[46,32,57],def:[70,59,86]}; // centre, top, bottom (% of the pitch)
+ const ch=(f)=>Lp&&R(Lp[f])!==R(L[f]), dl=(f)=>Lp?delta(L[f],Lp[f]):'', tp=(f)=>R(L[f])===top;
+ const pct=(v)=>Math.max(6,Math.min(100,(v-55)/40*100));
+ let l='',r='';
+ if(S.sty==='1'){ // tabs: an upright tab on the touchline, level with each line
+  l=items.map(([k,f])=>`<span class="t1${tp(f)?' top':''}${ch(f)?' ch':''}" style="top:${Z[f][0]}%"><i>${k}</i><b>${R(L[f])}</b>${ch(f)?`<em>${dl(f)}</em>`:''}</span>`).join('');
+ } else if(S.sty==='2'){ // heat strip with badges
+  l=items.map(([k,f])=>`<span class="t2z${tp(f)?' top':''}" style="top:${Z[f][1]}%;height:${Z[f][2]-Z[f][1]}%;--o:${(pct(L[f])/100*.8+.2).toFixed(2)}"></span><span class="t2${tp(f)?' top':''}${ch(f)?' ch':''}" style="top:${Z[f][0]}%"><b>${R(L[f])}</b><i>${k}</i>${ch(f)?`<em>${dl(f)}</em>`:''}</span>`).join('');
+ } else if(S.sty==='3'){ // both touchlines: name on the left, number on the right
+  l=items.map(([k,f])=>`<span class="t3l${tp(f)?' top':''}" style="top:${Z[f][1]}%;height:${Z[f][2]-Z[f][1]}%"><i>${({def:'Defence',mid:'Midfield',att:'Attack'})[f]}</i></span>`).join('');
+  r=items.map(([k,f])=>`<span class="t3r${tp(f)?' top':''}${ch(f)?' ch':''}" style="top:${Z[f][0]}%"><b>${R(L[f])}</b>${ch(f)?`<em>${dl(f)}</em>`:''}</span>`).join('');
+ } else if(S.sty==='4'){ // gauges: a bar the height of each line's third, filled to its strength
+  l=items.map(([k,f])=>`<span class="t4${tp(f)?' top':''}${ch(f)?' ch':''}" style="top:${Z[f][1]}%;height:${Z[f][2]-Z[f][1]}%"><u><s style="height:${pct(L[f])}%"></s>${Lp&&ch(f)?`<s class="pv" style="height:${pct(Lp[f])}%"></s>`:''}</u><span><b>${R(L[f])}</b><i>${k}</i>${ch(f)?`<em>${dl(f)}</em>`:''}</span></span>`).join('');
+ } else { // zone shading: each third tinted by its strength, number on the edge
+  l=items.map(([k,f])=>`<span class="t5z${tp(f)?' top':''}${ch(f)?' ch':''}" style="top:${Z[f][1]}%;height:${Z[f][2]-Z[f][1]}%;--o:${(pct(L[f])/100*.16).toFixed(3)}"></span><span class="t5${tp(f)?' top':''}${ch(f)?' ch':''}" style="top:${Z[f][0]}%"><b>${R(L[f])}</b><i>${k}</i>${ch(f)?`<em>${dl(f)}</em>`:''}</span>`).join('');
  }
+ $('touch').innerHTML=l; $('touchR').innerHTML=r;
 }
 function pitch(){
  const pv=preview(),sel=S.sel!=null?D.P[S.sel]:null;
@@ -2644,9 +2704,9 @@ function pitch(){
 function dockCard(id){const p=D.P[id];return `<div class="u-dc${S.sel===id?' sel':''}${S.sel!=null&&S.sel!==id?' dim':''}" data-id="${id}"><div class="se-cardwrap">${p.big}</div><span class="u-pos">${pos3(p)}</span></div>`;}
 function dock(){
  const tr=S.scr==='transfer',list=tr?S.tray:S.bench.slice().sort((a,b)=>D.P[b].r-D.P[a].r);
- $('dock').classList.toggle('tr',tr);$('dock').dataset.state=tr?'strip':S.dock;
+ $('dock').classList.toggle('tr',tr);$('dock').classList.add('nodrag');$('dock').dataset.state=tr?'strip':S.dock;
  $('dT').textContent=tr?(S.tray.length===3?'Pick one':'Signed'):'Squad · '+S.bench.length;
- let sub=tr?'Tap a player, then a shirt':'Tap a player, then a shirt';
+ let sub=tr?'Tap a player, then a shirt':'Swipe for more, tap one, then a shirt';
  if(S.sel!=null){const pv=preview(),p=D.P[S.sel];sub=`Best at ${POS[pv.i]}: team ${R(lines(S.xi).ovr)} to ${R(pv.L.ovr)}`;}
  if(tr&&S.tray.length<3)sub='Pass to move on, or keep picking in the real game';
  $('dS').textContent=sub;
@@ -2662,17 +2722,21 @@ function setDock(h,anim){const d=$('dock'),pt=$('pitch');d.classList.toggle('ani
  d.classList.toggle('full',h>H.strip+40);}
 function head(){const tr=S.scr==='transfer';$('hT').textContent=tr?'Summer window':'Portsmouth';$('hS').textContent=tr?'Transfer 1 of 17 · Portsmouth':'2009/10 · Pre-season';
  $('foot').innerHTML=tr?FOOT_TR:FOOT_SQ;}
-function notes(){const N={A:['<b>A Strength card.</b> The team rating pill grows into a small card: the rating, then defence, midfield and attack as three readable rows beside it. Best line in the club colour. Nothing new above the pitch, so the pitch keeps its height.'],
- B:['<b>B Touchline.</b> Each line\'s number runs up the left touchline beside the players it describes: attack by the forwards, midfield by the midfield, defence by the back four. A bar on the edge shows its strength. Takes no space at all.'],
- C:['<b>C Scoreboard.</b> One row of four tiles under the header: team, defence, midfield, attack, at 22px. The clearest to read and compare, at the cost of about 50px of pitch.']};
+function notes(){const N={
+ '1':'<b>1 Tabs.</b> A small upright tab on the left touchline, level with each line of players: DEF beside the back four, MID beside the midfield, ATT beside the forwards. The label sits over the number, both upright. Best line in the club colour.',
+ '2':'<b>2 Heat strip.</b> The left touchline is painted in three sections that glow brighter the stronger the line. A round badge on each section holds the number, with its label underneath.',
+ '3':'<b>3 Both touchlines.</b> The line names run up the left touchline (Defence, Midfield, Attack) and the numbers stand on the right touchline, level with each line. Reads across the pitch like a scoreboard.',
+ '4':'<b>4 Gauges.</b> Each third of the left touchline is a gauge filled to its strength, with the number and label beside it. Pick a player and the gauge shows the gain in green.',
+ '5':'<b>5 Shaded thirds.</b> Each third of the pitch is tinted by its strength, faint for weak and stronger for strong (best in the club colour), with the number and label on the left edge. You see where the team is strong at a glance.'};
  $('notes').innerHTML=`<h2>${S.scr==='transfer'?'Transfer window':'Squad, pre-season'}</h2>
- <ul>${S.scr==='squad'?'<li><b>Try it:</b> drag the dock up by its top bar (or tap the bar) to open the whole squad, grouped by position. Drag it down to tuck it away and give the pitch the room.</li><li>Tap a player, in the strip or the open drawer: the drawer settles, every shirt shows how he would fit (green, amber, red) and the best one pulses. The numbers show what changes if he plays there. Tap a shirt to bring him on.</li>':'<li><b>Try it:</b> tap one of the three players: the shirts light up, the best pulses and the numbers preview the signing. Tap a shirt to sign him.</li><li>Same frame as the squad screen: same header, same pitch size and chips, same dock in the same place, cards the same size.</li>'}
- <li>Shape and tactic stay in the pitch corners, as now.</li><li>${N[S.sty][0]}</li><li>Smallest text on the screen is now 11px (was 9px).</li></ul>`;}
+ <ul><li>${N[S.sty]}</li>
+ ${S.scr==='squad'?'<li><b>Try it:</b> swipe the squad strip left and right, tap a player, then tap a shirt. Every shirt shows how he would fit and the best one pulses, and the touchline shows what each line would gain.</li><li>No drawer: the squad is one row of large cards you swipe through, the same size and place as the transfer tray.</li>':'<li><b>Try it:</b> tap one of the three players, then a shirt. Same frame as the squad screen: same header, same pitch, same touchline, cards in the same place and size.</li>'}
+ <li>Shape and tactic stay in the pitch corners. The team rating stays in the header.</li><li>All text on the touchline is 11px or more.</li></ul>`;}
 function fitNames(root){root.querySelectorAll('.d2c-last,.d2c-first').forEach((el)=>{el.style.fontSize='';const f=parseFloat(getComputedStyle(el).fontSize);let s=f;while(el.scrollWidth>el.clientWidth+.5&&s>f*.55){s-=.2;el.style.fontSize=s+'px';}});}
 function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2200);}
-function draw(){$('pitch').classList.toggle('u-B',S.sty==='B');head();strength();pitch();dock();notes();}
+function draw(){$('pitch').className='se-pitch u-pitch t-'+S.sty;head();strength();pitch();dock();notes();}
 // taps
-$('dock').addEventListener('click',(e)=>{const c=e.target.closest('.u-dc');if(!c)return;const id=+c.dataset.id;S.sel=S.sel===id?null:id;if(S.dock==='full'||S.dock==='closed')S.dock='strip';S.signed=null;draw();});
+$('dock').addEventListener('click',(e)=>{const c=e.target.closest('.u-dc');if(!c)return;const id=+c.dataset.id;S.sel=S.sel===id?null:id;S.signed=null;draw();});
 $('slots').addEventListener('click',(e)=>{const s=e.target.closest('.se-slot');if(!s)return;const i=+s.dataset.i;
  if(S.sel==null){toast('Tap a player in the dock first');return;}
  const before=lines(S.xi),out=S.xi[i],inn=S.sel,p=D.P[inn];S.xi[i]=inn;
@@ -2682,7 +2746,7 @@ $('slots').addEventListener('click',(e)=>{const s=e.target.closest('.se-slot');i
 document.querySelector('.mock').addEventListener('click',(e)=>{const c=e.target.closest('[data-chip]');if(c)toast(c.dataset.chip==='shape'?'Opens the shape sheet, as now':'Opens the tactics sheet, as now');});
 // drawer drag
 (()=>{const dh=$('dh');let y0=0,h0=0,drag=false,moved=false;
- dh.addEventListener('pointerdown',(e)=>{if(S.scr==='transfer')return;drag=true;moved=false;y0=e.clientY;h0=$('dock').offsetHeight;dh.setPointerCapture(e.pointerId);});
+ dh.addEventListener('pointerdown',(e)=>{return;drag=true;moved=false;y0=e.clientY;h0=$('dock').offsetHeight;dh.setPointerCapture(e.pointerId);});
  dh.addEventListener('pointermove',(e)=>{if(!drag)return;const dy=y0-e.clientY;if(Math.abs(dy)>4)moved=true;setDock(Math.max(H.closed,Math.min(stageH(),h0+dy)),false);});
  const end=(e)=>{if(!drag)return;drag=false;const h=$('dock').offsetHeight,full=stageH();
   if(!moved){S.dock=S.dock==='full'?'strip':S.dock==='strip'?'full':'strip';}
