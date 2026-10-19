@@ -1,0 +1,48 @@
+/* Compact mode: phones whose browser chrome leaves under 720px (Galaxy S25 in Chrome with the URL bar and the
+   3-button nav bar: 360 x 676). Everything shrinks a step so the pitch keeps its share; nothing is hidden that matters. */
+@media (max-height: 759px) {
+  .topbar { padding-top: calc(env(safe-area-inset-top, 0px) + 8px); padding-bottom: 6px; min-height: 40px; }
+  .topbar .logo-mask { height: 22px !important; }
+  .actionbar { padding-top: 8px; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px); }
+  .game-bar .bar-main, .sp-main { min-height: 52px; border-radius: 26px; font-size: 18px; }
+  .actionbar .icon-btn, .sp-round { width: 50px; height: 50px; }
+  /* squad */
+  .se-sqhead { padding-bottom: 6px; gap: 8px; }
+  .se-sqcrest { width: 28px; height: 28px; }
+  .se-sqname { font-size: 18px; }
+  .se-sqsub { font-size: 11px; }
+  .se-rating { padding: 3px 10px 3px 8px; } .se-rating b { font-size: 20px; }
+  .se-linebars { margin: 0 2px 6px; }
+  .se-squad .se-pitch { min-height: 250px; }
+  .se-subshead { margin-top: 6px; }
+  .se-subs { padding: 10px 16px 4px; gap: 6px; }
+  .se-sub .d2c { --w: 52px !important; }
+  .se-sub-pos { margin-top: 5px; }
+  /* transfer: one-line header, smaller tray, the hint in one line */
+  .tr-head-t b { font-size: 11px; letter-spacing: .08em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tr-head-t span { display: none; }
+  .sp-screen.is-placing .tr-pitch { gap: 6px; }
+  .sp-screen.is-placing .sp-stage { flex: 0 0 168px; }
+  .sp-screen.is-placing .sp-row { transform: scale(.64); }
+  .sp-screen.is-placing .sp-gp { transform: translateX(-50%) scale(1.5625); }
+  .sp-screen.is-placing .sp-slot.is-sel .sp-gp { transform: translateX(-50%) scale(1.3706); }
+  .sp-screen.is-placing .sp-slot.is-other .sp-gp { transform: translateX(-50%) scale(1.7361); }
+  .sp-hint { font-size: 12px; min-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sp-bar { padding-top: 8px; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); }
+}
+/* narrow (360 and under): the main button's label must fit on one line beside two round buttons */
+@media (max-width: 374px) {
+  .game-bar .bar-main, .sp-main { font-size: 17px; padding: 0 12px; }
+  .se-hint { font-size: 11px; }
+}
+/* Samsung's screen zoom a step up (about 320 x 600): one more step down */
+@media (max-height: 620px) {
+  .se-squad .se-pitch { min-height: 212px; }
+  .se-sub .d2c { --w: 46px !important; }
+  .sp-screen.is-placing .sp-stage { flex: 0 0 150px; }
+  .sp-screen.is-placing .sp-row { transform: scale(.56); }
+  .sp-screen.is-placing .sp-gp { transform: translateX(-50%) scale(1.7857); }
+  .sp-screen.is-placing .sp-slot.is-sel .sp-gp { transform: translateX(-50%) scale(1.5664); }
+  .sp-screen.is-placing .sp-slot.is-other .sp-gp { transform: translateX(-50%) scale(1.9841); }
+  .se-linebars { display: none; }
+}
