@@ -388,4 +388,35 @@ t("scouting: 2 respins, three cards green in the shirt and better than its man (
 t("every season puts a legend on the table", () => {
   for (let i = 0; i < 12; i++) { const { offered } = play("leg" + i, "2007/08", "Derby", "pass"); assert.ok(offered.some(id => String(id).startsWith("L:")), "no legend in run " + i); }
 });
+t("the January raid: one outfield player goes to a top-half club as the window opens, once a season, and his club is stronger from that date", () => {
+  const S = G.seasons["2007/08"], d = S.clubs.find(c => c.name === "Derby").id;
+  const st = D.newRun({ seed: "jan1", catalogue: G.catalogue, fixedClub: "2007/08:Derby" });
+  D.chooseClub(st, S, S.relegated.find(r => r.c === d)); D.startSeason(st, S);
+  let g = 0; const before = st.xi.slice();
+  while (st.phase !== "summary" && g++ < 600) { if (st.phase === "window") D.pass(st, S); else D.playMatch(st, S); }
+  const x = st.janRaid; assert.ok(x, "no raid");
+  const jan = st.rolls.find(w => w.kind === "jan"); assert.strictEqual(x.gw, jan.gw);
+  assert.ok(before.includes(x.id) && D.FORMATIONS[st.formation][x.slot][0] !== "GK");
+  const H = D.historyTable(S, S.deductions); assert.ok(H.findIndex(r => r.c === x.club) < 10, "not a top-half club");
+  assert.strictEqual(st.poached.filter(p => p.jan).length, 1);
+  assert.ok(D.joinersOf(S, st, x.club, "2007-08-01") == null && D.joinersOf(S, st, x.club, x.date).length === 1, "joins only from the raid date");
+  assert.ok((st.freeFill || []).some(f => f.slot === x.slot), "the empty shirt was filled at the window's close");
+});
+t("aging: a carried card keeps its number for a season, then loses 3 a season; the dressing room caps the XI's star lift", () => {
+  assert.strictEqual(D.agedRating(93, 0), 93); assert.strictEqual(D.agedRating(93, 1), 93); assert.strictEqual(D.agedRating(93, 2), 90); assert.strictEqual(D.agedRating(93, 5), 81); assert.strictEqual(D.agedRating(60, 9), 55);
+  const slots = D.FORMATIONS["4-4-2"].map(s => s[0]);
+  const legends = slots.map((pos, i) => ({ id: i, r: 93, lv: 4, p: [pos] }));
+  const S = { season: "x", clubs: [], matches: [], players: legends, relegated: [] };
+  const st = { formation: "4-4-2", xi: legends.map(l => l.id), signed: [], tactic: "mid" };
+  const L = D.userStrength(S, st, []);
+  assert.ok(Math.abs(L.ovr - (93 + D.RULES.star.cap / 11)) < 1e-6, "cap not applied: " + L.ovr);
+});
+t("Club X Summer poach takes your best outfield player for certain", () => {
+  const S = G.seasons["2013/14"]; S.legends = S.legends || [];
+  const st = D.newRun({ seed: "pb", mode: "clubx", catalogue: [] });
+  st.seasonKey = S.season; st.club = D.historyTable(S, S.deductions).slice(-1)[0].c; st.formation = "4-4-2"; st.career = 2;
+  const best = S.players.filter(p => (p.a || 0) >= 10 && p.b !== "GK").sort((a, b) => b.r - a.r).slice(0, 10).map(p => p.id), gk = S.players.filter(p => p.b === "GK" && (p.a || 0) >= 10)[0].id;
+  D.carryIn(st, S, [gk].concat(best));
+  const out = D.poach(st, S); assert.strictEqual(out.length, 3); assert.strictEqual(out[0].id, best[0]);
+});
 console.log(`${n} checks passed`);

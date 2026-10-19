@@ -53,13 +53,24 @@ const RULES = {
   // the same title rate. Balance and the trade-off table are in ICONS.md and CLAUDE.md.
   // 18 Oct (the engine rethink, docs/SCOPE_ENGINE.md): purple 3%, legend 1%, and every season puts one legend on the table
   // (legendRoll below) so a player who only plays a few games always meets one; whether he takes him is the game.
-  levelOdds: [0.34, 0.21, 0.41, 0.03, 0.01],
+  // 19 Oct: gold 36% (was 41%; the game was too easy, and more silver and bronze in the rolls makes a gold count for more).
+  levelOdds: [0.37, 0.23, 0.36, 0.03, 0.01],
   // Stars play above their number, for the user's XI only (Craig, 18 Oct: history's clubs play as they did; your built side
   // is where the stars count): above `from` each rating point counts `slope` for his level (purple 1.5, legend 2; a gold
   // plays at his number, so the levels matter, not just the rating), so an 89 purple plays as 93.5 and a 93 legend as 106.
   // The card shows his real rating. Tuned 18 Oct (tests/calibrate-all.js, tests/landed.js): with gold at 1.2 to 1.5 the
   // whole XI lifted and an average player won the title 8.5% to 15.7% of the time; at 1 / 1.5 / 2 it is 5.7% (Craig's 5%).
-  star: { from: 80, slope: [1, 1, 1, 1.5, 2] },
+  // cap: the whole XI's lift above its numbers is capped (19 Oct: a side of legends played at 100+ and a Club X career won
+  // nine titles in nine seasons); about two legends' worth, so the third star adds his number, not his aura.
+  star: { from: 80, slope: [1, 1, 1, 1.5, 2], cap: 24 },
+  // Transfers out (Craig, 19 Oct): one of your players is taken at the start of the January window in every run (never the
+  // keeper, weighted to your stars by (rating / the outfield average) to this power, to a top-half club by its real final
+  // position, never his own real club); a Club X career's Summer poach takes your best outfield player for certain and two
+  // more by the same weight. The club he joins is stronger for it from that date (joinersOf), as a raid is in reverse.
+  raidOut: { janPower: 6, poachPower: 6, janTopHalf: true },
+  // A Club X career's carried cards age (19 Oct): a player with no real card for the new season keeps his old one for a
+  // season, then loses `perSeason` a season (a 1998/99 legend cannot play on at 93 in 2018/19). agedRating.
+  aging: { free: 1, perSeason: 3, floor: 55 },
   // Tactics (user only): which of your lines settles matches, measured against your own XI's average (O). k is 1 in a shape
   // the tactic is built for and 0.5 in any other, so the shape decides how hard the tactic bites and never pays on its own.
   tactics: {
@@ -229,8 +240,13 @@ function userStrength(S, st, legends, opts) {
     let r = p.r;
     if (bySigned) { const sr = settledRating(p, bySigned.get(String(id)), opts.gw); if (sr != null) r = sr; }
     if (opts.star !== false) r = starRating(Object.assign({}, p, { r }));
-    return r === p.r ? p : Object.assign({}, p, { r });
+    return r === p.r ? p : Object.assign({}, p, { r, base: p.r });
   });
+  // the dressing room: the XI's lift above its numbers is capped (RULES.star.cap), every star scaled alike
+  if (opts.star !== false && RULES.star.cap) {
+    const lift = players.reduce((a, p) => a + (p && p.base != null ? Math.max(0, p.r - p.base) : 0), 0);
+    if (lift > RULES.star.cap) { const f = RULES.star.cap / lift; players.forEach((p, i) => { if (p && p.base != null && p.r > p.base) players[i] = Object.assign({}, p, { r: p.base + (p.r - p.base) * f }); }); }
+  }
   const lines = xiStrength(players, slots);
   if (opts.tactic === false) return lines;
   return tacticLines(st, lines, players, slots);
@@ -262,6 +278,7 @@ function setTactic(st, name) {
   return true;
 }
 // what a signing's settling will be, seeded per card (never for a card already in the XI, a draft pick or a free agent)
+function agedRating(r, age) { const A = RULES.aging; return Math.max(A.floor, Math.min(r, r - A.perSeason * Math.max(0, (age || 0) - A.free))); }
 function settleOf(st, p, outRating) {
   const u = unit(st.seed, "settle", p.id), lv = p.lv || 0, R = RULES.settle;
   if (u < R.run[lv]) return null;
@@ -599,6 +616,7 @@ function rollIndex(st) { let n = 0; for (let i = 0; i < st.rollIx; i++) n += st.
 function newRoll(st, S) {
   const w = currentWindow(st);
   const spin = (st.roll && st.roll.key === `${st.rollIx}.${st.rollStep}`) ? st.roll.spin + 1 : 0;
+  if (spin === 0 && st.fixtures) januaryRaid(st, S);
   const r = stream(st.seed, "roll", st.rollIx, st.rollStep, spin);
   const taken = new Set(), cards = [];
   const due = spin === 0 && rollIndex(st) === legendRoll(st) && !(st.offered || []).some(id => String(id).startsWith("L:"));
@@ -702,7 +720,8 @@ function poach(st, S) {
   const avg = cand.reduce((a, c) => a + c.p.r, 0) / Math.max(1, cand.length);
   const hist = historyTable(S, S.deductions), out = [], usedClubs = new Set([st.club]);
   for (let k = 0; k < 3 && cand.length; k++) {
-    const v = pickWeighted(r, cand, c => Math.pow(c.p.r / avg, 4));
+    // your best outfield player goes for certain (Craig, 19 Oct: a career kept its legends), the other two by weight
+    const v = k === 0 ? cand.slice().sort((a, b) => b.p.r - a.p.r)[0] : pickWeighted(r, cand, c => Math.pow(c.p.r / avg, RULES.raidOut.poachPower));
     cand.splice(cand.indexOf(v), 1);
     const clubs = hist.map((row, pos) => ({ c: row.c, w: hist.length + 1 - (pos + 1) }))
       .filter(x => !usedClubs.has(x.c) && x.c !== v.p.c && x.c !== v.p.c2);
@@ -717,10 +736,31 @@ function poach(st, S) {
   return out;
 }
 // the players poached to a club this season, as player-seasons it can pick
-function joinersOf(S, st, club) {
+function joinersOf(S, st, club, date) {
   if (!st.poached || !st.poached.length) return null;
-  const out = st.poached.filter(x => x.club === club).map(x => playerOf(S, x.id, S.legends)).filter(Boolean);
+  const out = st.poached.filter(x => x.club === club && (!x.date || !date || x.date <= date)).map(x => playerOf(S, x.id, S.legends)).filter(Boolean);
   return out.length ? out : null;
+}
+// The January raid (Craig, 19 Oct): as the January window opens, one of your outfield players is taken by a top-half club
+// (by its real final position; never his own real club, never yours). Seeded, once a season (st.janRaid). His shirt is
+// left empty for the January rolls; fillHoles fills it with a free agent if it is still empty when the window closes.
+function januaryRaid(st, S) {
+  if (st.janRaid) return null;
+  const w = currentWindow(st); if (!w || w.kind !== "jan" || st.rollStep !== 0) return null;
+  const r = stream(st.seed, "janraid", st.career || 1), slots = FORMATIONS[st.formation].map(s => s[0]);
+  const cand = st.xi.map((id, i) => ({ id, i, p: id == null ? null : playerOf(S, id, S.legends) })).filter(c => c.p && slots[c.i] !== "GK");
+  if (!cand.length) return null;
+  const avg = cand.reduce((a, c) => a + c.p.r, 0) / cand.length;
+  const v = pickWeighted(r, cand, c => Math.pow(c.p.r / avg, RULES.raidOut.janPower));
+  const hist = historyTable(S, S.deductions), half = RULES.raidOut.janTopHalf ? Math.ceil(hist.length / 2) : hist.length;
+  const clubs = hist.slice(0, half).map((row, pos) => ({ c: row.c, w: hist.length + 1 - (pos + 1) })).filter(x => x.c !== st.club && x.c !== v.p.c && x.c !== v.p.c2);
+  if (!clubs.length) return null;
+  const to = pickWeighted(r, clubs, x => x.w).c, date = st.fixtures[st.gw - 1].date;
+  const out = { id: v.id, name: v.p.n, club: to, slot: v.i, gw: st.gw, date, jan: true };
+  st.xi[v.i] = null; if (!st.seen.includes(v.id)) st.seen.push(v.id);
+  st.poached = (st.poached || []).concat([out]); st.janRaid = out;
+  st.log.push(["janraid", v.id, to]);
+  return out;
 }
 // Shirts still empty when the Summer window closes (you passed, or signed over someone else) are filled before the
 // first game with free agents: for each empty shirt a bronze player (rating under 70) who is green there, drawn at
@@ -789,7 +829,7 @@ function otherResults(S, st) {
       const gone = goneBefore(st, m.date);
       for (const side of ["h", "a"]) {
         const club = side === "h" ? m.h : m.a, opp = side === "h" ? m.a : m.h;
-        const d = lineLoss(S, club, gone, cache, joinersOf(S, st, club));
+        const d = lineLoss(S, club, gone, cache, joinersOf(S, st, club, m.date));
         if (!d) continue;
         const amp = R.m * Math.max(R.min, R.amp[0] - R.amp[1] * (rank[opp] || 10));
         const mine = side === "h" ? hg : ag, theirs = side === "h" ? ag : hg;
@@ -822,7 +862,7 @@ function simMatch(S, st, gw) {
   const legends = S.legends;
   const us = userStrength(S, st, legends, { gw });   // settling signings, stars above their number, the tactic's lean
   const gone = goneBefore(st, fx.date);
-  const join = joinersOf(S, st, fx.opp);
+  const join = joinersOf(S, st, fx.opp, fx.date);
   const them = clubStrength(S, fx.opp, gone, join);
   const r = stream(st.seed, "match", gw);
   const lu = expectedGoals(us, them, fx.home), lt = expectedGoals(them, us, !fx.home);
@@ -943,7 +983,7 @@ function seasonSummary(S, st) {
 const API = {
   RULES, LEVELS, POS, FIT, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
   fitOf, effRating, indexSeason, playerOf, clubAt, xiStrength, userStrength, plainStrength, starRating, settledRating, clubXI, clubStrength,
-  TACTIC_NAMES, tacticOf, tacticLines, setTactic, scoutInfo, scout, legendRoll,
+  TACTIC_NAMES, tacticOf, tacticLines, setTactic, scoutInfo, scout, legendRoll, januaryRaid, agedRating,
   schedule, fixturesOf, recentWeights, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
   poach, joinersOf, fillHoles, draftOrder, draftSlot, draftFormation, draftPick, draftFits, listsPos, DRAFT_MODES, carryIn, simResults,
   startSeason, inWindow, currentWindow, newRoll, respinCards, signPreview, sign, pass,

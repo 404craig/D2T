@@ -251,3 +251,14 @@ Craig: "Think about that and build it all out." Everything above is in, with the
   two purples and a legend 68 and the title 15% of the time; the greedy player's two purples and a legend 77 points and
   the title 43%. Tactics picked: the average player (once, pre-season) a low block 63% of the time (a relegated side's
   defence is usually its best line), the greedy player (re-picked every window, having bought forwards) a high press 80%.
+
+## Too easy (Craig, 19 Oct; build 130)
+
+A Club X career of nine titles in nine seasons. `tests/career.js` plays a career in the engine: the greedy player won 80% to
+100% of seasons from season 2 with an XI of 86 to 87 and 92 to 95 points, because a career compounds (17 signings a season,
+three taken by a weight too soft to take the stars, and a carried legend playing at 93 for ever). Built: the January raid in
+every run (one outfield player, weighted to the stars, to a top-half club as the window opens; Craig's idea), the Summer
+poach taking your best for certain, carried cards ageing 3 a season after the first (legends too), a cap on the XI's star
+lift (about two legends' worth), and gold at 36%. Measured after: Classic average player 4.3% titles (59 points), greedy
+16.6% (70); Derby 2007/08 average 0%, greedy 2.7%; the Club X career's greedy XI stays 83 to 85 and wins 13% to 88% of
+seasons by the season, the average player 0% to 63%.
