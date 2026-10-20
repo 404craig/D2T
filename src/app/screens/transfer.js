@@ -144,7 +144,8 @@
       const fx = GAME.fixture(info.gw), opp = fx ? D2T.esc(fx.opp) + (fx.ha === 'H' ? ' (H)' : ' (A)') : '';
       const reduced = D2T.reduced();
       let alive = true, big = true, lastBest = -1, mover = -1, sizeObs = null, placing = false, leaving = false, signing = false, field = null, slotsEl = null, ratingEl = null, timers = [];
-      kill = () => { alive = false; timers.forEach(clearTimeout); endDrag(true); sizeObs && sizeObs.disconnect(); };
+      let janTake = null, janBack = null;   // the January raid's show: { slot, card } keeps the taken player on the pitch until the badge takes him
+      kill = () => { alive = false; timers.forEach(clearTimeout); endDrag(true); sizeObs && sizeObs.disconnect(); janTake && janTake.cancel(); janTake = null; janBack = null; root.classList.remove('rd-busy'); };
 
       // ---------- the pitch above the tray ----------
       function drawPitch(best = -1, fresh = -1) {
@@ -169,7 +170,7 @@
         lastBest = best;
         const gone = GAME.poachedSlots();   // a Club X career's poached players: their empty shirts keep where they went
         slotsEl.innerHTML = GAME.slots().map((s, i) => {
-          const c = L.xi[i], f = pf(i), cls = `se-slot${lit.has(i) ? ' se-best' : ''}${f ? ' se-pf-' + f : ''}${i === mover ? ' se-sel' : ''}`;
+          const c = L.xi[i] || (janBack && janBack.slot === i ? janBack.card : null), f = pf(i), cls = `se-slot${lit.has(i) ? ' se-best' : ''}${f ? ' se-pf-' + f : ''}${i === mover ? ' se-sel' : ''}`;
           const say = f ? `, ${fitWord[f]} for ${D2T.esc(inc.name)}` : '';
           if (!c) return `<div class="${cls}" style="${place(fm, s, pw)};z-index:${Math.round(s.y)}" data-i="${i}"><div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="Empty ${s.pos} shirt${lit.has(i) ? ', open for this pick' : ''}${say}">${SE.emptyShirt(s.pos, pw, gone[i])}</div></div>`;
           const fit = GAME.fit(c.id, i), oop = fit !== 'green';
@@ -252,6 +253,25 @@
           field.animate([{ opacity: 0, transform: 'translateY(-14px)' }, { opacity: 1, transform: 'none' }], { duration: 420, delay: 160, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
         } else api.el.classList.add('is-placing');
         api.hint(draft ? (di.open ? 'Drag one onto an open shirt, or tap him then a shirt' : 'Drag one onto the lit shirt, or tap him then Sign') : 'Drag a player onto the pitch, or tap him then a shirt');
+        if (janShow && !janShown) { janShown = true; playJanRaid(animate ? 760 : 400); }
+      }
+      // the January raid's show (Craig, 20 Oct; Sweep and strike, SE.raidTake): the taken player is put back in his shirt
+      // as the pitch appears, the crosshair hunts him down and the rival's badge takes him; then the sheet
+      async function playJanRaid(delay) {
+        const sl = slotsEl.querySelector(`.se-slot[data-i="${jr.slot}"]`), pitchEl = field && field.querySelector('.se-pitch');
+        if (!sl || !pitchEl) return janSheet(600);
+        janBack = { slot: jr.slot, card: jr.card }; drawPitch(lastBest);
+        root.classList.add('rd-busy');
+        await new Promise((r) => timers.push(setTimeout(r, delay)));
+        if (!alive) return;
+        janTake = SE.raidTake({
+          pitch: pitchEl, slotsEl, slot: jr.slot, crest: jr.crest,
+          onLanded: () => api && api.hint(`${jr.name} joins ${jr.club}`),
+          onEmpty: () => { janBack = null; drawPitch(lastBest); }
+        });
+        await janTake.done; janTake = null; janBack = null;
+        root.classList.remove('rd-busy');
+        if (alive) janSheet(200);
       }
       function leavePlacing() {
         if (!placing) return Promise.resolve();
@@ -476,24 +496,28 @@
         buildPitch();
         if (st.spun === rollKey) enterPlacing(false);
       };
+      // the January raid (Craig, 19 Oct): as the window opens a top-half club has taken one of yours; say so once
+      const jr = !draft && GAME.janRaid(), janDue = !!(jr && jr.gw === eng.gw && !st.janSeen);
+      // the show plays on the pitch first (not with reduced motion, and only while his shirt is still empty)
+      const janShow = janDue && !reduced && !!jr.card && eng.xi[jr.slot] == null;
+      let janShown = false;
       // the emblem burst opens each window and the draft, not every one of the 11 draft spins
       if (st.spun === rollKey || (draft && di.step > 1)) build();
       else intr = intro(body, () => { intr = null; build(); });
-      // the January raid (Craig, 19 Oct): as the window opens a top-half club has taken one of yours; say so once
-      const jr = !draft && GAME.janRaid();
-      if (jr && jr.gw === eng.gw && !st.janSeen) {
+      function janSheet(delay) {
         const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">${D2T.esc(jr.club)} came in for ${D2T.esc(jr.name)} as the window opened. His shirt is empty for your January rolls; if it is still empty when the window closes, a free agent fills it.</p>
           <ul><li>${jr.crest ? `<img src="${jr.crest}" alt="">` : ''}<b>${D2T.esc(jr.name)}</b><span>to ${D2T.esc(jr.club)}</span></li></ul>
           <button class="btn se-btn se-poach-go" type="button">Continue</button></div>`);
         timers.push(setTimeout(() => {
           if (!alive) return;
-          SND.play('playerOut');
+          if (!janShow) SND.play('playerOut');
           const sh = D2T.sheet({ title: 'January raid', body: el, onClose: () => { st.janSeen = true; D2T.save(); } });
           sh.el.classList.add('se-run', 'se-poach-sheet');
           ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
           el.querySelector('.se-poach-go').onclick = () => sh.close();
-        }, 600));
+        }, delay));
       }
+      if (janDue && !janShow) janSheet(600);
     },
     unmount() { kill && kill(); kill = null; intr && intr.cancel(); intr = null; api && api.unmount(); api = null; }
   });

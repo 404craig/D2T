@@ -500,3 +500,21 @@
 /* the tag under a scouted card: better than the man in the shirt, or the next best */
 .sp-gp .sp-tag { display: block; margin-top: 4px; font-size: 8px; letter-spacing: .08em; text-transform: uppercase; color: var(--se-text, #12F06C); }
 .sp-gp .sp-tag.is-next { color: #8E8E99; }
+
+/* Sweep and strike (Craig, 20 Oct; animation B in design/prototype/raid-crosshair.html; SE.raidTake): the raid's crosshair,
+   scan beam and shock rings in a layer inside the pitch, a wash under the players while the hunt is on */
+.se-pitch.rd-on .se-slots { z-index: 1; }
+.rd-wash { position: absolute; inset: 0; background: rgba(0,0,0,.35); opacity: 0; z-index: 2; pointer-events: none; }
+.rd-fx { position: absolute; inset: 0; z-index: 50; pointer-events: none; overflow: visible; }
+.rd-x { position: absolute; left: 0; top: 0; width: 96px; height: 96px; margin: -48px 0 0 -48px; opacity: 0; will-change: transform; }
+.rd-x svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.rd-x .ring { fill: none; stroke: #FF3B4A; stroke-width: 2.2; stroke-dasharray: 6 6; filter: drop-shadow(0 0 4px rgba(255,59,74,.8)); }
+.rd-x .tick { stroke: #FF3B4A; stroke-width: 2.4; stroke-linecap: round; filter: drop-shadow(0 0 4px rgba(255,59,74,.8)); }
+.rd-x .dot { fill: #FF3B4A; }
+.rd-x .brk { fill: none; stroke: #FF3B4A; stroke-width: 2.6; stroke-linecap: round; opacity: 0; }
+.rd-pulse { position: absolute; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; border: 2px solid #FF3B4A; opacity: 0; }
+.rd-pulse.rd-white { border-color: #fff; }
+.rd-tint .se-cardwrap .d2c { filter: drop-shadow(0 0 2px #FF3B4A) drop-shadow(0 0 8px rgba(255,59,74,.7)); }
+.rd-dim .se-slot:not(.rd-tint) { transition: filter .3s; }
+.rd-beam { position: absolute; left: -10%; top: 0; width: 120%; height: 100%; opacity: 0; background: linear-gradient(90deg, transparent 0%, rgba(255,59,74,0) 47%, rgba(255,59,74,.14) 50%, rgba(255,59,74,0) 53%, transparent 100%); filter: blur(6px); }
+.rd-busy .tr-pitch, .rd-busy .sp-stage { pointer-events: none; }
