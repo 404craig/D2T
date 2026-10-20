@@ -420,4 +420,24 @@ t("Club X Summer poach takes your best outfield player for certain", () => {
   D.carryIn(st, S, [gk].concat(best));
   const out = D.poach(st, S); assert.strictEqual(out.length, 3); assert.strictEqual(out[0].id, best[0]);
 });
+t("Scout a club: 2 respins for three of one club's cards, never your own club, never legends", () => {
+  const S = G.seasons["2007/08"]; S.legends = S.legends || [];
+  const st = D.newRun({ seed: "sc", mode: "classic", catalogue: [] });
+  const me = D.historyTable(S, S.deductions).slice(-1)[0].c; st.clubOffer = ["2007/08"]; D.chooseClub(st, S, { c: me, f: "4-4-2", xi: [] }); D.startSeason(st, S);
+  const clubs = D.scoutClubs(st, S); assert.ok(clubs.length >= 15 && clubs.every(x => x.club !== me && x.n > 0));
+  const before = st.respins, pick = clubs[0].club;
+  assert.ok(D.scoutClub(st, S, pick)); assert.strictEqual(st.respins, before - D.RULES.scoutCost); assert.strictEqual(st.roll.scoutClub, pick);
+  assert.strictEqual(st.roll.cards.length, 3);
+  for (const id of st.roll.cards) { const p = D.playerOf(S, id); assert.strictEqual(p.c, pick); assert.ok(p.lv < 4 && !String(id).startsWith("L:")); }
+  assert.strictEqual(D.scoutClub(st, S, me), false);
+});
+t("Club X's draft never offers a purple or legend card", () => {
+  const S = G.seasons["2012/13"], L = S.legends;
+  for (const seed of ["d1", "d2", "d3"]) {
+    const st = D.newRun({ seed, mode: "clubx", catalogue: [] }); st.clubOffer = ["2012/13"];
+    D.chooseClub(st, S, { c: D.historyTable(S, S.deductions).slice(-1)[0].c, f: "4-3-3", xi: [] });
+    let guard = 0;
+    while (st.phase === "draft" && guard++ < 12) { for (const id of st.roll.cards) assert.ok(D.playerOf(S, id, L).lv < 3, "a purple or legend in the draft"); D.draftPick(st, S, st.roll.cards[0], D.draftFits(st, S, st.roll.cards[0])[0]); }
+  }
+});
 console.log(`${n} checks passed`);

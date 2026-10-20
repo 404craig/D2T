@@ -341,7 +341,7 @@
     const st = E.newRun({ seed: c.id + ':s' + c.n, mode: 'clubx', catalogue: [], recent: GAME.recentFor(S2, spec.me) });
     st.seasonKey = spec.key; st.club = spec.me; st.formation = e.formation; st.career = c.n;
     E.carryIn(st, S2, S2.xiIds);
-    Object.assign(run, { eng: st, step: 'table', tableSeen: false, recorded: false, match: null, pending: null, poachSeen: false, freeSeen: false, janSeen: false, tacticHinted: false });
+    Object.assign(run, { eng: st, step: 'table', tableSeen: false, recorded: false, match: null, pending: null, poachSeen: false, freeSeen: false, janSeen: false, janIntro: false, tacticHinted: false });
     D2T.save();
     return true;
   };
@@ -480,6 +480,10 @@
   GAME.scoutInfo = () => { const S = GAME.S(); return E.scoutInfo(GAME.eng(), S).map((x) => Object.assign(x, { bestCard: x.best != null ? GAME.card(S, x.best) : null })); };
   GAME.scout = (slot) => { const eng = GAME.eng(), ok = E.scout(eng, GAME.S(), slot); if (ok) { D2T.state.run.spun = ''; D2T.save(); } return ok; };
   GAME.rollTags = () => { const r = GAME.eng().roll; return r && r.tags ? r.tags : null; };
+  // scout a club (Craig, 20 Oct): the season's clubs with cards to come, by final position, and the spend on one
+  GAME.scoutClubs = () => { const S = GAME.S(); return E.scoutClubs(GAME.eng(), S).map((x) => { const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { club: x.club, n: x.n, name, crest: c.crest, code: c.code }; }); };
+  GAME.scoutClub = (c) => { const eng = GAME.eng(), ok = E.scoutClub(eng, GAME.S(), c); if (ok) { D2T.state.run.spun = ''; D2T.save(); } return ok; };
+  GAME.scoutedClub = () => { const r = GAME.eng().roll; if (!r || r.scoutClub == null) return null; return GAME.S().clubs[r.scoutClub].name; };
   // During a Dare2Dream draft some shirts are empty: the rating is the average of the shirts filled so far.
   GAME.rating = () => {
     const eng = GAME.eng(), S = GAME.S();
@@ -518,7 +522,7 @@
   GAME.poachDue = () => { const eng = GAME.eng(); return !!(eng && eng.mode === 'clubx' && eng.phase === 'setup' && eng.career > 1 && !eng.poached); };
   GAME.poached = () => {
     const eng = GAME.eng(), S = GAME.S(); if (!eng || !eng.poached) return [];
-    return eng.poached.map((x) => { const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { id: x.id, name: x.name, slot: x.slot, club: name, crest: c.crest, code: c.code }; });
+    return eng.poached.map((x) => { const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { id: x.id, name: x.name, slot: x.slot, club: name, crest: c.crest, crestLight: c.crestLight, code: c.code }; });
   };
   GAME.poach = () => { const eng = GAME.eng(); if (!GAME.poachDue()) return []; E.poach(eng, GAME.S()); D2T.save(); return GAME.poached(); };
   // the empty shirts and who left each (by his old shirt first; a shirt emptied by a change of shape takes the next one)
@@ -632,7 +636,7 @@
   };
   GAME.oppStrength = (gw) => { const eng = GAME.eng(), S = GAME.S(), f = eng.fixtures[gw - 1]; return Math.round(E.clubStrength(S, f.opp, new Set(eng.signed.filter((x) => x.date <= f.date).map((x) => x.id)), E.joinersOf(S, eng, f.opp, f.date)).ovr); };
   // the January raid (Craig, 19 Oct): who was taken as the window opened, for the transfer screen's news sheet
-  GAME.janRaid = () => { const eng = GAME.eng(), S = GAME.S(), x = eng && eng.janRaid; if (!x) return null; const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { id: x.id, name: x.name, slot: x.slot, club: name, crest: c.crest, gw: x.gw, card: GAME.card(S, x.id) }; };
+  GAME.janRaid = () => { const eng = GAME.eng(), S = GAME.S(), x = eng && eng.janRaid; if (!x) return null; const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { id: x.id, name: x.name, slot: x.slot, club: name, crest: c.crest, crestLight: c.crestLight, gw: x.gw, card: GAME.card(S, x.id) }; };
   // After the final whistle: where to next (a transfer window, the next gameweek or the season summary).
   GAME.afterMatch = () => {
     const run = D2T.state.run, eng = GAME.eng();
