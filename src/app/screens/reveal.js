@@ -149,6 +149,10 @@
         for (const ch of t) { const s = document.createElement('span'); s.className = 'rr-ch'; s.textContent = ch; e.appendChild(s); if (ch.trim()) snd('tick_mech', 0.5, 0.8, 900); await wait(90); }
       }
       big.classList.remove('rr-blank');
+      // then, under the card, the club and the season the card is from (Craig, 20 Oct: a legend card must say its season),
+      // the same letter-by-letter print in the level's colour
+      const sea = D2T.h('<div class="rr-season"></div>'); sea.style.top = (fy + H + 16) + 'px'; ov.appendChild(sea);
+      for (const ch of `${c.club} \u00b7 ${c.season}`) { const s = document.createElement('span'); s.className = 'rr-ch'; s.textContent = ch; sea.appendChild(s); if (ch.trim() && ch !== '\u00b7') snd('tick_mech', 0.4, 0.8, 900); await wait(70); }
       await wait(3000);
       // from its full size down into its place in the reel
       badge.classList.remove('go'); ov.classList.remove('on');

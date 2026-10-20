@@ -252,6 +252,8 @@
 @keyframes rrSw { 0% { opacity: 1; transform: scale(.2); } 100% { opacity: 0; transform: scale(4.5); } }
 .rr-badge { position: absolute; left: 50%; transform: translateX(-50%); font: 900 italic 18px/1 'Exo 2', sans-serif; letter-spacing: .16em; color: var(--lc); text-shadow: 0 0 18px var(--lc); opacity: 0; white-space: nowrap; }
 .rr-badge.go { animation: rrBadge .5s var(--ease-out) forwards; }
+/* the club and season under the revealed card (Craig, 20 Oct), printed letter by letter like the name */
+.rr-season { position: absolute; left: 0; right: 0; text-align: center; font: 800 italic 15px/1 'Exo 2', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--lc); text-shadow: 0 0 14px var(--lc); white-space: nowrap; pointer-events: none; }
 @keyframes rrBadge { 0% { opacity: 0; transform: translateX(-50%) scale(1.6); letter-spacing: .5em; } 100% { opacity: 1; transform: translateX(-50%) scale(1); } }
 
 /* ---------- transfer roll header before the spin (Craig, 14 Oct): the season's track, "Transfer 7 of 17", the window banner ---------- */
