@@ -34,12 +34,35 @@
         return `<h2 class="fr-h2" style="margin-top:26px">Settings</h2>
           <div class="fr-panel"><button class="fr-row" data-act="sound"><span>Sound</span><span>${set.muted ? 'Off' : 'On'} ›</span></button>
           <div class="fr-row"><span>Runs saved on this phone</span><span>${D2T.state.record.runs.length}</span></div></div>
-          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide fr-danger" data-act="del">Delete my data on this phone</button></div>`;
+          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide fr-danger" data-act="del">Delete my data on this phone</button></div>
+          ${diagnostics()}`;
+      };
+      // Diagnostics (20 Oct): the build, and the last errors this phone saw (D2T.errors), with Copy so a player can send them
+      const diagnostics = () => {
+        const errs = D2T.errors();
+        return `<h2 class="fr-h2" style="margin-top:26px">Diagnostics</h2>
+          <p class="fr-small">Build ${D2T.esc(String(window.D2T_BUILD || ''))}. ${errs.length ? 'The last errors this phone saw:' : 'No errors recorded on this phone.'}</p>
+          ${errs.length ? `<div class="fr-panel">${errs.map((e) => `<div class="fr-row" style="display:block;white-space:normal"><b style="font-size:13px">${D2T.esc(e.m)}</b><br><small style="color:var(--muted)">${D2T.esc(String(e.t).slice(0, 16).replace('T', ' '))} · build ${D2T.esc(String(e.b))} · ${D2T.esc(e.s || '')} ${D2T.esc(e.w || '')}</small></div>`).join('')}</div>` : ''}
+          <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-act="copyerr">Copy diagnostics</button>${errs.length ? '<button class="btn btn-ghost fr-btn-wide" data-act="clrerr">Clear the errors</button>' : ''}</div>`;
+      };
+      const diagText = () => {
+        const r = D2T.state.run, e = r && r.eng;
+        const run = e ? { mode: e.mode, season: e.seasonKey, gw: e.gw, phase: e.phase, step: r.step, career: r.career ? r.career.n : 1, formation: e.formation, tactic: e.tactic || 'mid', xi: e.xi, respins: e.respins, rolls: e.rollIx + '.' + e.rollStep, poached: (e.poached || []).length, carry: r.career && r.career.cur ? r.career.cur.carry : null } : null;
+        return JSON.stringify({ build: window.D2T_BUILD, ua: navigator.userAgent, when: new Date().toISOString(), errors: D2T.errors(), run }, null, 1);
       };
       const wireSettings = () => {
         body.querySelector('[data-act="sound"]').onclick = () => {
           const set = D2T.state.settings; set.muted = !set.muted; D2T.save(); window.D2TSound && window.D2TSound.setMuted(set.muted); draw();
         };
+        const cp = body.querySelector('[data-act="copyerr"]');
+        if (cp) cp.onclick = async () => {
+          const t = diagText(); let ok = false;
+          try { await navigator.clipboard.writeText(t); ok = true; } catch (e) { /* fall back to a sheet */ }
+          if (ok) { cp.textContent = 'Copied'; setTimeout(() => { if (cp.isConnected) cp.textContent = 'Copy diagnostics'; }, 1500); return; }
+          D2T.sheet({ title: 'Diagnostics', body: `<textarea class="fr-input" readonly style="width:100%;height:220px;font:12px/1.4 ui-monospace,monospace">${D2T.esc(t)}</textarea>` });
+        };
+        const cl = body.querySelector('[data-act="clrerr"]');
+        if (cl) cl.onclick = () => { try { localStorage.removeItem('d2t-errors'); } catch (e) { /* blocked */ } draw(); };
         body.querySelector('[data-act="del"]').onclick = () => {
           const s = D2T.sheet({ title: 'Delete your data?', body: `<p class="fr-lead">This clears your saved run and your achievements on this phone. It can't be undone.</p>
             <div class="fr-two"><button class="btn btn-ghost" data-k="no">Keep it</button><button class="btn btn-ghost fr-danger" data-k="yes">Delete</button></div>` });
