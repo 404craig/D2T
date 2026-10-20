@@ -226,6 +226,8 @@
   // Carried cards age (19 Oct, RULES.aging): a card from an earlier season keeps its number for one carried season, then loses
   // 3 a season (`aged` on the copy, the rating it had in `r0`). A carried legend past that becomes an aged copy of his card
   // (lv 4 kept, `oid` his legend id so the next season carries him on); within it he stays the legend card itself.
+  // a carry origin saved by builds 130 and 131 could point at a legend copy as { s, id: "L:..." }: it is a legend origin
+  const legacyOrigin = (o) => (o && o.L == null && typeof o.id === 'string' && o.id.startsWith('L:') ? { L: o.id, j: o.j } : o);
   // age = seasons since he joined you (o.j; a carry saved before 20 Oct has none and counts as joined last season)
   const ageOf = (key, o) => yearOf(key) - yearOf(o.j || labelOf(yearOf(key) - 1));
   const aged = (q, key, o) => { const a = ageOf(key, o), r = E.agedRating(q.r, a); q.j = o.j || labelOf(yearOf(key) - 1); return r === q.r ? q : Object.assign(q, { r0: q.r, r, aged: q.r - r }); };
@@ -254,10 +256,12 @@
       const S0 = GAME.season(spec.key), byK = new Map(), extras = [];
       S0.players.forEach((p) => { if (p.k != null && !byK.has(p.k)) byK.set(p.k, p); });
       let next = S0.players.length;
-      for (const o of spec.carry) {
+      for (const o0 of spec.carry) {
+        const o = legacyOrigin(o0);
         if (!o) { ids.push(null); continue; }
         if (o.L) { const lc = legendCopy(o, spec.key, next); if (lc) { extras.push(lc); ids.push(next++); } else ids.push(o.L); continue; }
         const src = realPlayer(o.s, o.id), now = src && src.k != null ? byK.get(src.k) : null;
+        if (!src) { ids.push(null); continue; }                       // a card the data no longer has: the shirt is empty
         if (now) { ids.push(now.id); continue; }
         extras.push(aged(copyOf(o.s, src, next, null), spec.key, o)); ids.push(next++);
       }
@@ -272,10 +276,12 @@
         for (const p of R.players) if ((p.c === ci || p.c2 === ci) && !used.has(sl.src + '|' + p.id)) { players.push(copyOf(sl.src, p, players.length, i)); used.add(sl.src + '|' + p.id); }
       });
       // your XI, then everyone else from every season as cards for the rolls
-      for (const o of spec.carry) {
+      for (const o0 of spec.carry) {
+        const o = legacyOrigin(o0);
         if (!o) { ids.push(null); continue; }
         if (o.L) { const lc = legendCopy(o, spec.key, players.length); if (lc) { players.push(lc); ids.push(lc.id); } else ids.push(o.L); continue; }
-        const id = players.length; players.push(aged(copyOf(o.s, realPlayer(o.s, o.id), id, null), spec.key, o)); ids.push(id);
+        const src = realPlayer(o.s, o.id); if (!src) { ids.push(null); continue; }
+        const id = players.length; players.push(aged(copyOf(o.s, src, id, null), spec.key, o)); ids.push(id);
       }
       for (const sk of SEASON_KEYS) for (const p of G.seasons[sk].players) if ((p.a || 0) >= E.RULES.minApps && !used.has(sk + '|' + p.id)) players.push(copyOf(sk, p, players.length, null));
       const shift = yearOf(spec.key) - yearOf(LAST_REAL);

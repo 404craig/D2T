@@ -69,7 +69,14 @@
         this._off = () => clearTimeout(t);
       }
       let kicked = false;
-      bar.querySelector('.bar-main').onclick = () => { if (kicked) return; kicked = true; if (!D2T.game.play()) { D2T.go(D2T.game.stepFor() || 'home'); return; } D2T.go('match'); };
+      bar.querySelector('.bar-main').onclick = () => {
+        if (kicked) return; kicked = true;
+        let res = null;
+        try { res = D2T.game.play(); }
+        catch (err) { kicked = false; D2T.reportError && D2T.reportError(err, 'kick off'); return; }   // never a dead button: the error is shown and kept (20 Oct, Phil)
+        if (!res) { D2T.go(D2T.game.stepFor() || 'home'); return; }
+        D2T.go('match');
+      };
     },
     unmount() { this._off && this._off(); this._off = null; }
   });
