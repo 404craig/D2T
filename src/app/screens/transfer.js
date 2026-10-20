@@ -265,7 +265,7 @@
         await new Promise((r) => timers.push(setTimeout(r, delay)));
         if (!alive) return;
         janTake = SE.raidTake({
-          pitch: pitchEl, slotsEl, slot: jr.slot, crest: jr.crest,
+          pitch: pitchEl, slotsEl, slot: jr.slot, crest: jr.crestLight || jr.crest,
           onLanded: () => api && api.hint(`${jr.name} joins ${jr.club}`),
           onEmpty: () => { janBack = null; drawPitch(lastBest); }
         });
@@ -316,41 +316,62 @@
         drawPitch(-1, to);
         api.hint('Drag a player onto the pitch, or tap him then a shirt');
       }
-      // Respin or Scout (Craig, 18 Oct): the respin button asks first. Scout costs 2 respins: a sheet with your shirts, red
-      // where nobody this season is better than the man in it (a key says so), a count on the rest; tap one and the scouts'
-      // three cards roll in (the engine draws them, GAME.scout). A red shirt costs nothing and names the best man there.
+      // Respin or scout (Craig, 18 and 20 Oct): the respin button opens one sheet in the game's style, "N respins left",
+      // three option cards: Respin (1), Scout a position (2) and Scout a club (2). A position: your shirts drawn as the
+      // pitch's own shirts, red where nobody this season is better than the man in it, a count on the rest; tap one and
+      // the scouts' three cards roll in (GAME.scout). A club: the season's clubs by final position, tap one for three of
+      // its players (GAME.scoutClub). Neither ever brings a legend card.
+      const ICON_SHIRT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h2.2a1.8 1.8 0 0 0 3.6 0H16l5 3.5-2 3.8-2.3-1.2V21H7.3V9.1L5 10.3 3 6.5Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>';
+      const ICON_SHIELD = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 20 5.5v6c0 4.6-3.3 8.1-8 10-4.7-1.9-8-5.4-8-10v-6Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M12 6.5v12M7 11h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".55"/></svg>';
+      const tint = (sh) => { sh.el.classList.add('se-run'); ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v))); };
       function respinChoice(n) {
         return new Promise((resolve) => {
           let done = false; const fin = (v) => { if (!done) { done = true; resolve(v); } };
-          const can = GAME.canScout(), cost = GAME.scoutCost();
-          const el = D2T.h(`<div class="se-scoutrows">
-            <button class="se-scoutrow" type="button" data-k="respin">${D2T.ICON.respin}<span><b>Respin</b><span>Three fresh cards, any position.</span></span><em>1 respin</em></button>
-            <button class="se-scoutrow" type="button" data-k="scout"${can ? '' : ' disabled'}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 16l5 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span><b>Scout a position</b><span>Pick a shirt: three players who play there and are better than the man in it. Never legends.</span></span><em>${can ? `${cost} respins` : `Needs ${cost}`}</em></button>
-            <p class="se-note" style="margin:4px 2px 0">A respin costs 1 and could bring anyone. Scouting costs ${cost}, so you will have fewer left for a bad roll later.</p></div>`);
-          const sh = D2T.sheet({ title: 'Spin again?', body: el, onClose: () => fin(null) });
-          sh.el.classList.add('se-run'); ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
+          const can = GAME.canScout(), cost = GAME.scoutCost(), clubs = can ? GAME.scoutClubs() : [];
+          const card = (k, icon, name, line, c, ok) => `<button class="se-optcard" type="button" data-k="${k}"${ok ? '' : ' disabled'}><span class="se-opticon">${icon}</span><span class="se-tactext"><b>${name}</b><span>${line}</span></span><em class="se-optcost">${ok ? `<b>${c}</b>respin${c === 1 ? '' : 's'}` : `<b>${c}</b>needed`}</em></button>`;
+          const el = D2T.h(`<div class="se-optgrid">
+            ${card('respin', D2T.ICON.respin, 'Respin', 'Three fresh cards: any position, anyone this season.', 1, true)}
+            ${card('scout', ICON_SHIRT, 'Scout a position', 'Pick one of your shirts for three players who play there and are better than the man in it.', cost, can)}
+            ${card('club', ICON_SHIELD, 'Scout a club', 'Pick a club for three of its players this season, drawn like a roll.', cost, can && clubs.length > 0)}
+            <p class="se-note">Scouting costs ${cost} of your respins, so a bad roll later has fewer to fall back on. The scouts never bring a legend card.</p></div>`);
+          const sh = D2T.sheet({ title: `${n} respin${n === 1 ? '' : 's'} left`, body: el, onClose: () => fin(null) });
+          tint(sh); sh.el.classList.add('se-optsheet');
           el.querySelector('[data-k="respin"]').onclick = () => { done = true; sh.close(); resolve('respin'); };
           el.querySelector('[data-k="scout"]').onclick = () => { if (!can) return; done = true; sh.close(); timers.push(setTimeout(() => scoutSheet().then(resolve), 260)); };
+          el.querySelector('[data-k="club"]').onclick = () => { if (!can || !clubs.length) return; done = true; sh.close(); timers.push(setTimeout(() => scoutClubSheet(clubs).then(resolve), 260)); };
         });
       }
       function scoutSheet() {
         return new Promise((resolve) => {
           let done = false; const fin = (v) => { if (!done) { done = true; resolve(v); } };
-          const info = GAME.scoutInfo(), slots = GAME.slots(), L = GAME.lineup();
-          const shirt = (s, i) => { const q = info[i], none = !q.better; return `<button class="se-scoutshirt${none ? ' is-none' : ''}" type="button" data-i="${i}" style="left:${s.x}%;top:${s.y}%" aria-label="${s.pos}, ${none ? 'nobody better this season' : q.better + ' better'}">${s.pos}<small>${none ? 'none' : q.better > 9 ? '9+' : q.better}</small></button>`; };
-          const el = D2T.h(`<div><p class="se-note" style="margin:0 0 8px">Tap a shirt. ${GAME.scoutCost()} respins for three players who play there and are better than the man in it now.</p>
-            <div class="se-scoutpitch"><span class="se-fline"></span>${slots.map(shirt).join('')}</div>
+          const info = GAME.scoutInfo(), slots = GAME.slots(), L = GAME.lineup(), SW = 46;
+          const shirt = (s, i) => { const q = info[i], none = !q.better; return `<button class="se-scoutshirt${none ? ' is-none' : ''}" type="button" data-i="${i}" style="left:${s.x}%;top:${s.y}%" aria-label="${s.pos}, ${none ? 'nobody better this season' : q.better + ' better'}"><span class="se-empty se-scoutempty" style="width:${SW}px;height:${Math.round(SW * 1.3)}px"><span>${s.pos}</span><small>${none ? 'none' : q.better > 9 ? '9+' : q.better}</small></span></button>`; };
+          const el = D2T.h(`<div><p class="se-note" style="margin:0 0 10px">Tap a shirt: ${GAME.scoutCost()} respins for three players who play there and are better than the man in it now. The number is how many the scouts have.</p>
+            <div class="se-scoutpitch">${SE.pitchLines}${slots.map(shirt).join('')}</div>
             <p class="se-scoutkey"><i></i> Red: nobody better this season</p><p class="se-scoutnone" aria-live="polite"></p></div>`);
           const sh = D2T.sheet({ title: 'Scout a position', body: el, onClose: () => fin(null) });
-          sh.el.classList.add('se-run'); ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
+          tint(sh); sh.el.classList.add('se-scoutsheet');
           const none = el.querySelector('.se-scoutnone');
           el.querySelectorAll('.se-scoutshirt').forEach((b) => {
             b.onclick = () => {
               const i = +b.dataset.i, q = info[i], mine = L.xi[i];
               if (!q.better) { SND.play('tapSmall'); none.textContent = `Nobody better than ${mine ? surname(mine.name) : 'nobody'} at ${q.pos} in ${run.season}.${q.bestCard ? ` Best there: ${q.bestCard.name} (${q.bestCard.ovr}).` : ''}`; return; }
-              if (!GAME.scout(i)) { none.textContent = 'The scouts need 2 respins.'; return; }
+              if (!GAME.scout(i)) { none.textContent = `The scouts need ${GAME.scoutCost()} respins.`; return; }
               SND.play('respin'); done = true; sh.close(); resolve(GAME.eng().respins);
             };
+          });
+        });
+      }
+      function scoutClubSheet(clubs) {
+        return new Promise((resolve) => {
+          let done = false; const fin = (v) => { if (!done) { done = true; resolve(v); } };
+          const tile = (c) => `<button class="se-clubtile" type="button" data-c="${c.club}" aria-label="${D2T.esc(c.name)}, ${c.n} players">${c.crest ? `<img src="${c.crest}" alt="">` : ''}<b>${D2T.esc(c.name)}</b><small>${c.n} player${c.n === 1 ? '' : 's'}</small></button>`;
+          const el = D2T.h(`<div><p class="se-note" style="margin:0 0 10px">Tap a club: ${GAME.scoutCost()} respins for three of its players this season, the better rated the more likely. Clubs in table order.</p>
+            <div class="se-clubgrid">${clubs.map(tile).join('')}</div></div>`);
+          const sh = D2T.sheet({ title: 'Scout a club', body: el, onClose: () => fin(null) });
+          tint(sh); sh.el.classList.add('se-scoutsheet');
+          el.querySelectorAll('.se-clubtile').forEach((b) => {
+            b.onclick = () => { if (!GAME.scoutClub(+b.dataset.c)) { SND.play('tapSmall'); return; } SND.play('respin'); done = true; sh.close(); resolve(GAME.eng().respins); };
           });
         });
       }
@@ -518,6 +539,17 @@
         }, delay));
       }
       if (janDue && !janShow) janSheet(600);
+      // the window opens (Craig, 20 Oct): before the first January roll is spun, a sheet says players go out as well as in
+      if (janDue && !st.janIntro && st.spun !== rollKey) {
+        timers.push(setTimeout(() => {
+          if (!alive) return;
+          const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">The January window is open. Players go out as well as come in: a top-half side comes in for one of yours as it opens, then you have three January rolls to put things right.</p>
+            <button class="btn se-btn se-poach-go" type="button">Continue</button></div>`);
+          const sh = D2T.sheet({ title: 'January window', body: el, onClose: () => { st.janIntro = true; D2T.save(); } });
+          tint(sh);
+          el.querySelector('.se-poach-go').onclick = () => sh.close();
+        }, 600));
+      }
     },
     unmount() { kill && kill(); kill = null; intr && intr.cancel(); intr = null; api && api.unmount(); api = null; }
   });

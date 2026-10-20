@@ -427,7 +427,8 @@ function newDraftRoll(st, S) {
     const open = openSlots(st), f = FORMATIONS[st.formation];
     for (let k = 0; k < 3; k++) {
       const pos = f[open[Math.floor(r() * open.length)]][0];
-      const id = drawCard(r, S, st, S.legends, taken, null, (p) => fitOf(p, pos) === "green");
+      // Club X's first 11 are never purple or legend cards (Craig, 20 Oct): a purple drawn comes down to gold
+      const id = drawCard(r, S, st, S.legends, taken, null, (p) => fitOf(p, pos) === "green" && p.lv < 3);
       if (id != null) { cards.push(id); taken.add(id); }
     }
     st.roll = { key: `d${st.draft.step}`, spin: 0, cards, window: "draft", slot: null, step: st.draft.step + 1, of: st.xi.length };
@@ -686,6 +687,30 @@ function scout(st, S, slot) {
   st.roll = Object.assign({}, st.roll, { spin, cards, scout: slot, tags });
   noteOffered(st, cards);
   st.log.push(["scout", slot]);
+  return true;
+}
+// Scout a club (Craig, 20 Oct): the clubs of the season with cards still to come (never your own), by their final
+// position, and the spend of 2 respins on one of them: three of its cards drawn by rating like a roll (never legend cards).
+function scoutDate(st) { return st.fixtures && st.gw > 0 && st.fixtures[st.gw - 1] ? st.fixtures[st.gw - 1].date : "0000-00-00"; }
+function scoutClubPool(st, S, c) { const d = scoutDate(st); return cardPool(S, st).filter(p => clubAt(p, d) === c && p.c != null); }
+function scoutClubs(st, S) {
+  const d = scoutDate(st), count = new Map();
+  for (const p of cardPool(S, st)) { const c = clubAt(p, d); if (c == null || c === st.club) continue; count.set(c, (count.get(c) || 0) + 1); }
+  let order = S.clubs.map((_, i) => i);
+  try { order = historyTable(S, S.deductions).map(row => row.c); } catch (e) { /* no table: club order */ }
+  return order.filter(c => count.has(c)).map(c => ({ club: c, n: count.get(c) }));
+}
+function scoutClub(st, S, c) {
+  if (st.phase !== "window" || !st.roll || st.roll.window === "draft" || st.respins < RULES.scoutCost || c === st.club) return false;
+  const pool = scoutClubPool(st, S, c); if (!pool.length) return false;
+  st.respins -= RULES.scoutCost;
+  for (const id of st.roll.cards) if (!st.seen.includes(id)) st.seen.push(id);
+  const spin = st.roll.spin + 1, r = stream(st.seed, "scoutclub", st.rollIx, st.rollStep, spin), cards = [], taken = new Set();
+  const w = (p) => eliteWeight(p) * (st.recent && st.recent[p.id] != null ? st.recent[p.id] : 1);
+  while (cards.length < 3 && taken.size < pool.length) { const p = pickWeighted(r, pool.filter(x => !taken.has(x.id)), w); taken.add(p.id); cards.push(p.id); }
+  st.roll = Object.assign({}, st.roll, { spin, cards, scout: null, scoutClub: c, tags: null });
+  noteOffered(st, cards);
+  st.log.push(["scoutclub", c]);
   return true;
 }
 function sign(st, S, cardId, slot) {
@@ -999,7 +1024,7 @@ function seasonSummary(S, st) {
 const API = {
   RULES, LEVELS, POS, FIT, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
   fitOf, effRating, isGK, canPlay, indexSeason, playerOf, clubAt, xiStrength, userStrength, plainStrength, starRating, settledRating, clubXI, clubStrength,
-  TACTIC_NAMES, tacticOf, tacticLines, setTactic, scoutInfo, scout, legendRoll, januaryRaid, agedRating,
+  TACTIC_NAMES, tacticOf, tacticLines, setTactic, scoutInfo, scout, scoutClubs, scoutClub, legendRoll, januaryRaid, agedRating,
   schedule, fixturesOf, recentWeights, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
   poach, joinersOf, fillHoles, draftOrder, draftSlot, draftFormation, draftPick, draftFits, listsPos, DRAFT_MODES, carryIn, simResults,
   startSeason, inWindow, currentWindow, newRoll, respinCards, signPreview, sign, pass,

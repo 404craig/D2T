@@ -321,13 +321,31 @@
       const poachDue = pre && carried && GAME.poachDue();
       if (pre && carried && (poachDue || GAME.poached().length)) {
         ticker = makeTicker();
-        const list = poachDue ? GAME.poach() : GAME.poached();
-        if (poachDue) render(null);
-        if (poachDue && !reduced) runPoach(list);
-        else {                                                    // reduced motion, or a refresh before the summary was seen
+        if (poachDue) {                                           // the window sheet first (Craig, 20 Oct), then the raid
+          const t = setTimeout(() => root.isConnected && windowSheet(), 700); poachKill = () => clearTimeout(t);
+        } else {                                                  // a refresh before the summary was seen
+          const list = GAME.poached();
           if (list.length) ticker.add(list[list.length - 1]);
           if (!st.poachSeen) { const t = setTimeout(() => root.isConnected && poachSummary(list), 300); poachKill = () => clearTimeout(t); }
         }
+      }
+      // Before any raid (Craig, 20 Oct): a sheet says the Summer window is open and players go out as well as come in.
+      // The poach is decided as it closes (Continue, a drag or a tap outside), so a refresh before then starts it again.
+      function windowSheet() {
+        const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">The Summer window is open. Players go out as well as come in: other sides are circling your XI and three of them will go before your own three signings.</p>
+          <button class="btn se-btn se-poach-go" type="button">Continue</button></div>`);
+        let went = false;
+        const go = () => {
+          if (went || !root.isConnected || !GAME.poachDue()) return; went = true;
+          const list = GAME.poach(); if (!list.length) return;
+          if (!reduced) { runPoach(list); return; }
+          render(null); ticker.add(list[list.length - 1]);        // reduced motion: the end state and the summary at once
+          if (!st.poachSeen) { const t = setTimeout(() => root.isConnected && poachSummary(list), 300); poachKill = () => clearTimeout(t); }
+        };
+        const sh = D2T.sheet({ title: 'Summer window', body: el, onClose: go });
+        sh.el.classList.add('se-run', 'se-poach-sheet');
+        ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
+        el.querySelector('.se-poach-go').onclick = () => sh.close();
       }
       // the Transfer News bar (Craig, 14 Oct; news() in design/prototype/clubx-poached.html): centred in the empty space
       // between the pitch and the bottom bar, one headline at a time right after the pill; a new one replaces the last at
@@ -385,7 +403,7 @@
           if (!alive) return;
           const sl = slotsEl.querySelector(`.se-slot[data-i="${x.slot}"]`); if (!sl || !sl.querySelector('.se-cardwrap')) continue;
           take = SE.raidTake({
-            pitch, slotsEl, slot: x.slot, crest: x.crest,
+            pitch, slotsEl, slot: x.slot, crest: x.crestLight || x.crest,   // the club's own crest on the white disc
             onLanded: () => ticker.add(x),                       // his headline replaces the last one as the badge lands
             onEmpty: () => { sl.innerHTML = SE.emptyShirt(pitchSlots[x.slot].pos, PITCH_W, x); setRating(GAME.rating()); }
           });

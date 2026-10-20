@@ -457,7 +457,10 @@ fs.mkdirSync(OUT, { recursive: true });
   // Poached (Craig, 14 Oct): season 2's pre-season squad loses three of the XI to other sides, played out once; a refresh
   // never replays it (the summary comes back until it is closed), and Continue goes on to the Summer window
   await page.evaluate(() => { window.D2T.state.run.tableSeen = true; window.D2T.save(); window.D2T.go("squad"); }); await expectScreen("squad");
-  await wait(2150);
+  // the Summer window sheet comes first (Craig, 20 Oct): players go out as well as in; the poach is decided as it closes
+  await page.waitForSelector(".se-poach-sheet.open", { timeout: 5000 }).catch(() => {});
+  check(/Summer window/.test(await page.textContent(".se-poach-sheet .sheet-title").catch(() => "")) && await page.evaluate(() => !window.D2T.game.eng().poached), "the Summer window sheet should open before the raid, the poach not yet decided");
+  await page.click(".se-poach-sheet .se-poach-go"); await wait(2150);
   // Sweep and strike (Craig, 20 Oct): the crosshair hunts across the pitch in a layer inside it, the scan beam with it
   check(!!(await page.$(".se-pitch.rd-on .rd-fx .rd-x")) && !!(await page.$(".se-pitch .rd-fx .rd-beam")) && !!(await page.$(".se-pitch .rd-wash")), "the poach should hunt with the crosshair and the scan beam inside the pitch");
   check(!!(await page.$(".se-ticker .se-tk-tag")) && /transfer news/i.test(await page.textContent(".se-ticker .se-tk-tag")), "the poach should open a Transfer news ticker");
