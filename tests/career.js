@@ -20,20 +20,20 @@ function carrySeason(prevS, carry, key, aging) {
   let next = S0.players.length; const ids = [];
   for (const o of carry) {
     if (!o) { ids.push(null); continue; }
-    const age = parseInt(key, 10) - parseInt(o.sk, 10);
+    const age = parseInt(key, 10) - parseInt(o.j || prevS.season, 10);
     if (o.L) {
       if (!aging) { ids.push(o.L); continue; }
       const l = L.find((x) => x.id === o.L), r = D.agedRating ? D.agedRating(l.r, age) : l.r;
-      extras.push(Object.assign({}, l, { id: next, r, c: null, oid: o.L })); ids.push(next++); continue;
+      extras.push(Object.assign({}, l, { id: next, r, c: null, oid: o.L, j: o.j || prevS.season })); ids.push(next++); continue;
     }
     const src = G.seasons[o.sk].players.find((p) => p.id === o.id), now = src && src.k != null ? byK.get(src.k) : null;
     if (now) { ids.push(now.id); continue; }
     const r = aging && D.agedRating ? D.agedRating(src.r, age) : src.r;
-    extras.push(Object.assign({}, src, { id: next, c: null, c2: null, m2: null, cn: mainClub(G.seasons[o.sk], src), sk: o.sk, oid: o.id, r })); ids.push(next++);
+    extras.push(Object.assign({}, src, { id: next, c: null, c2: null, m2: null, cn: mainClub(G.seasons[o.sk], src), sk: o.sk, oid: o.id, r, j: o.j || prevS.season })); ids.push(next++);
   }
   return { S: Object.assign({}, S0, { players: S0.players.concat(extras), _ix: null, legends: L, career: true }), ids };
 }
-const originOf = (S, id) => { if (id == null) return null; if (String(id).startsWith("L:")) return { L: id, sk: id.split(":").pop() }; const p = D.playerOf(S, id); if (p.oid != null && String(p.oid).startsWith("L:")) return { L: p.oid, sk: p.sk }; return p.oid != null ? { sk: p.sk, id: p.oid } : { sk: S.season, id }; };
+const originOf = (S, id) => { if (id == null) return null; if (String(id).startsWith("L:")) return { L: id, sk: id.split(":").pop(), j: S.season }; const p = D.playerOf(S, id), j = p.j || S.season; if (p.oid != null && String(p.oid).startsWith("L:")) return { L: p.oid, sk: p.sk, j }; return p.oid != null ? { sk: p.sk, id: p.oid, j } : { sk: S.season, id, j }; };
 function playSeason(st, S, strategy, seed) {
   let guard = 0; const r = D.stream(seed, "policy");
   while (st.phase !== "summary" && guard++ < 600) { if (st.phase === "setup") { D.poach(st, S); D.startSeason(st, S); } else if (st.phase === "window") decide(st, S, strategy, r); else if (st.phase === "draft") { const id = st.roll.cards[0]; D.draftPick(st, S, id, D.draftFits(st, S, id)[0]); } else if (st.phase === "prematch") D.playMatch(st, S); }
