@@ -213,7 +213,8 @@ t("Club X spins one season and drafts from every open shirt, each card green in 
         const open = st.xi.map((x, i) => (x == null ? F[i][0] : null)).filter(Boolean);
         for (const id of st.roll.cards) {
           const p = D.playerOf(S, id, S.legends), fits = D.draftFits(st, S, id);
-          assert.ok(fits.length === open.length && fits.every((i) => st.xi[i] == null), "a card can go on any open shirt");
+          const canOpen = st.xi.map((x, i) => (x == null && D.canPlay(p, F[i][0]) ? i : -1)).filter((i) => i >= 0);   // a keeper only in goal (20 Oct)
+          assert.ok(fits.length === canOpen.length && fits.every((i) => st.xi[i] == null && D.canPlay(p, F[i][0])), "a card can go on any open shirt he can play");
           assert.ok(open.some((pos) => D.fitOf(p, pos) === "green"), "every card is green in at least one open shirt");
         }
         if (!out.length) st.roll.cards.forEach((id) => firstPos.push(F[D.draftFits(st, S, id)[0]][0]));

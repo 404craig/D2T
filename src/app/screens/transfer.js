@@ -272,6 +272,7 @@
         const p = api.results()[i];
         if (draft && di.open && p && !GAME.draftFits(p.id).includes(slot)) { api.hint('That shirt is taken. Pick an open one.'); return; }
         if (draft && !di.open && slot !== di.slot) { api.hint(`This pick goes in the lit ${di.pos} shirt`); return; }
+        if (p && !GAME.canPlay(p.id, slot)) { api.hint(GAME.noPlayWord(p.id)); SND.play('dropCancel'); return; }
         const replaced = !draft && p && GAME.lineup().xi[slot];
         if (!p || !(draft ? GAME.draftPick(p.id, slot) : GAME.signAt(p.id, slot))) return;
         signing = true;
@@ -289,7 +290,8 @@
       // move one of your players to another shirt on the pitch (a swap; an empty shirt moves the other way)
       function moveTo(from, to) {
         mover = -1;
-        if (!GAME.swapSlots(from, to)) { drawPitch(); return; }
+        const mv = GAME.lineup().xi[from];
+        if (!GAME.swapSlots(from, to)) { drawPitch(); if (mv && !GAME.canPlay(mv.id, to)) { api.hint(GAME.noPlayWord(mv.id)); SND.play('dropCancel'); } return; }
         SND.play('cardDrop');
         drawPitch(-1, to);
         api.hint('Drag a player onto the pitch, or tap him then a shirt');
