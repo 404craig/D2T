@@ -226,20 +226,24 @@
   // Carried cards age (19 Oct, RULES.aging): a card from an earlier season keeps its number for one carried season, then loses
   // 3 a season (`aged` on the copy, the rating it had in `r0`). A carried legend past that becomes an aged copy of his card
   // (lv 4 kept, `oid` his legend id so the next season carries him on); within it he stays the legend card itself.
-  const ageOf = (key, sk) => yearOf(key) - yearOf(sk);
-  const aged = (q, key) => { const a = ageOf(key, q.sk), r = E.agedRating(q.r, a); return r === q.r ? q : Object.assign(q, { r0: q.r, r, aged: q.r - r }); };
-  const legendCopy = (lid, key, id) => {
-    const l = LEGENDS.find((x) => x.id === lid); if (!l) return null;
-    const r = E.agedRating(l.r, ageOf(key, l.sk)); if (r === l.r) return null;
-    return Object.assign({}, l, { id, r0: l.r, r, aged: l.r - r, oid: lid, alias: undefined });
+  // age = seasons since he joined you (o.j; a carry saved before 20 Oct has none and counts as joined last season)
+  const ageOf = (key, o) => yearOf(key) - yearOf(o.j || labelOf(yearOf(key) - 1));
+  const aged = (q, key, o) => { const a = ageOf(key, o), r = E.agedRating(q.r, a); q.j = o.j || labelOf(yearOf(key) - 1); return r === q.r ? q : Object.assign(q, { r0: q.r, r, aged: q.r - r }); };
+  const legendCopy = (o, key, id) => {
+    const l = LEGENDS.find((x) => x.id === o.L); if (!l) return null;
+    const r = E.agedRating(l.r, ageOf(key, o)); if (r === l.r) return null;
+    return Object.assign({}, l, { id, r0: l.r, r, aged: l.r - r, oid: o.L, j: o.j || labelOf(yearOf(key) - 1), alias: undefined });
   };
   // where a card in a season came from: a legend id, or the real season and id of the player-season
+  // `j` is the season he joined you (20 Oct): ageing counts from there, never from the season the card is from (a 1995/96
+  // card signed in a forecast season aged 30 years at the next carry and every card turned 55: Michael's and Phil's careers)
   const originOf = (S, id) => {
     if (id == null) return null;
-    if (String(id).startsWith('L:')) return { L: id };
+    if (String(id).startsWith('L:')) return { L: id, j: S.season };
     const p = E.playerOf(S, id); if (!p) return null;
-    if (p.oid != null && String(p.oid).startsWith('L:')) return { L: p.oid };
-    return p.oid != null ? { s: p.sk, id: p.oid } : { s: S.season, id };
+    const j = p.j || S.season;
+    if (p.oid != null && String(p.oid).startsWith('L:')) return { L: p.oid, j };
+    return p.oid != null ? { s: p.sk, id: p.oid, j } : { s: S.season, id, j };
   };
   const built = new WeakMap();
   function careerSeason(spec) {
@@ -252,10 +256,10 @@
       let next = S0.players.length;
       for (const o of spec.carry) {
         if (!o) { ids.push(null); continue; }
-        if (o.L) { const lc = legendCopy(o.L, spec.key, next); if (lc) { extras.push(lc); ids.push(next++); } else ids.push(o.L); continue; }
+        if (o.L) { const lc = legendCopy(o, spec.key, next); if (lc) { extras.push(lc); ids.push(next++); } else ids.push(o.L); continue; }
         const src = realPlayer(o.s, o.id), now = src && src.k != null ? byK.get(src.k) : null;
         if (now) { ids.push(now.id); continue; }
-        extras.push(aged(copyOf(o.s, src, next, null), spec.key)); ids.push(next++);
+        extras.push(aged(copyOf(o.s, src, next, null), spec.key, o)); ids.push(next++);
       }
       S = Object.assign({}, S0, { players: S0.players.concat(extras), _ix: null, legends: LEGENDS, career: true });
     } else {
@@ -270,8 +274,8 @@
       // your XI, then everyone else from every season as cards for the rolls
       for (const o of spec.carry) {
         if (!o) { ids.push(null); continue; }
-        if (o.L) { const lc = legendCopy(o.L, spec.key, players.length); if (lc) { players.push(lc); ids.push(lc.id); } else ids.push(o.L); continue; }
-        const id = players.length; players.push(aged(copyOf(o.s, realPlayer(o.s, o.id), id, null), spec.key)); ids.push(id);
+        if (o.L) { const lc = legendCopy(o, spec.key, players.length); if (lc) { players.push(lc); ids.push(lc.id); } else ids.push(o.L); continue; }
+        const id = players.length; players.push(aged(copyOf(o.s, realPlayer(o.s, o.id), id, null), spec.key, o)); ids.push(id);
       }
       for (const sk of SEASON_KEYS) for (const p of G.seasons[sk].players) if ((p.a || 0) >= E.RULES.minApps && !used.has(sk + '|' + p.id)) players.push(copyOf(sk, p, players.length, null));
       const shift = yearOf(spec.key) - yearOf(LAST_REAL);
