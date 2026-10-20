@@ -312,8 +312,8 @@
 
       // ---------- Poached (Craig, 14 Oct; option B in design/prototype/clubx-raid.html) ----------
       // A Club X career's later seasons: three of the XI are taken by other sides before the Summer window. The first time
-      // (GAME.poachDue) each one in turn: the rival's crest drops in above him, a line shoots down, he wobbles and is reeled
-      // up into the crest, which flies off with him; his shirt is left empty with the crest and "TO {CLUB}". A news ticker
+      // (GAME.poachDue) each one in turn is hunted down by the crosshair and taken by the rival's badge (Sweep and strike,
+      // Craig 20 Oct, SE.raidTake); his shirt is left empty with the crest and "TO {CLUB}". A news ticker
       // across the bottom carries each move as it happens and stays until you go on to the Summer window; then a summary
       // sheet. The engine decides it as the sequence starts, so a refresh shows the end state. Reduced motion: the end
       // state, the headlines standing still, and the summary at once.
@@ -368,60 +368,30 @@
         el.querySelector('.se-poach-go').onclick = () => { sh.close(); if (root.isConnected) playBtn.onclick(); };
       }
       async function runPoach(list) {
-        let alive = true; const anims = [], timers = [];
-        const host = document.getElementById('app'), fxl = D2T.h('<div class="se-poach-fx" aria-hidden="true"></div>');
-        poachKill = () => { alive = false; timers.forEach(clearTimeout); anims.forEach((a) => { try { a.cancel(); } catch (e) { /* gone */ } }); fxl.remove(); root.classList.remove('se-poaching'); };
+        // Sweep and strike (Craig, 20 Oct; animation B in design/prototype/raid-crosshair.html): per player, the crosshair
+        // hunts across the pitch and locks on him, then the rival's badge stamps down and takes him (SE.raidTake)
+        let alive = true, take = null; const timers = [];
+        poachKill = () => { alive = false; timers.forEach(clearTimeout); take && take.cancel(); root.classList.remove('se-poaching'); };
         const wait = (ms) => new Promise((r) => timers.push(setTimeout(r, ms)));
-        const anim = (el, k, o) => { const a = el.animate(k, Object.assign({ fill: 'forwards' }, o)); anims.push(a); return a.finished.catch(() => {}); };
-        const SND = window.D2TSound || { play() {} }, S = GAME.S(), pitchSlots = GAME.slots();
+        const S = GAME.S(), pitchSlots = GAME.slots(), pitch = body.querySelector('.se-pitch');
         // the three go back on the pitch for the show (the engine has already emptied their shirts)
         list.forEach((x) => {
           const sl = slotsEl.querySelector(`.se-slot[data-i="${x.slot}"]`), c = GAME.card(S, x.id); if (!sl || !c) return;
           sl.innerHTML = `<div class="se-cardwrap" data-i="${x.slot}">${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false, tab: pitchSlots[x.slot].pos, cls: 'fit-' + GAME.fit(c.id, x.slot) })}</div>`;
         });
         root.classList.add('se-poaching');
-        host.appendChild(fxl);
         await wait(1300);
         for (const x of list) {
           if (!alive) return;
-          const sl = slotsEl.querySelector(`.se-slot[data-i="${x.slot}"]`), w = sl && sl.querySelector('.se-cardwrap'); if (!w) continue;
-          const hr = host.getBoundingClientRect(), r = w.getBoundingClientRect();
-          const cx = r.left - hr.left + r.width / 2, cyCard = r.top - hr.top + r.height / 2, top = r.top - hr.top;
-          const cy = Math.max(70, cyCard - 120);
-          // 1. the rival's crest drops in above him
-          const rv = D2T.h(`<div class="se-pc-rival" style="left:${cx}px;top:${cy}px">${x.crest ? `<img src="${x.crest}" alt="">` : ''}</div>`);
-          fxl.appendChild(rv);
-          SND.play('dropCancel');
-          // his headline replaces the last one as the crest lands (Craig, 14 Oct)
-          timers.push(setTimeout(() => { if (!alive) return; SND.play('land'); ticker.add(x); }, 380));
-          await anim(rv, [{ transform: 'translateY(-260px) scale(.6)', opacity: 0 }, { transform: 'translateY(8px) scale(1.05)', opacity: 1, offset: 0.75 }, { transform: 'none', opacity: 1 }], { duration: 500, easing: 'cubic-bezier(.3,1.3,.5,1)' });
+          const sl = slotsEl.querySelector(`.se-slot[data-i="${x.slot}"]`); if (!sl || !sl.querySelector('.se-cardwrap')) continue;
+          take = SE.raidTake({
+            pitch, slotsEl, slot: x.slot, crest: x.crest,
+            onLanded: () => ticker.add(x),                       // his headline replaces the last one as the badge lands
+            onEmpty: () => { sl.innerHTML = SE.emptyShirt(pitchSlots[x.slot].pos, PITCH_W, x); setRating(GAME.rating()); }
+          });
+          await take.done; take = null;
           if (!alive) return;
-          // 2. a line shoots down to the card
-          const th = D2T.h(`<div class="se-pc-line" style="left:${cx - 1.5}px;top:${cy + 31}px;height:${Math.max(8, top - cy - 31)}px"></div>`);
-          fxl.appendChild(th);
-          await anim(th, [{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }], { duration: 220, easing: 'ease-out' });
-          if (!alive) return;
-          // 3. he wobbles (lifted into the overlay so nothing clips him on the way up)
-          const clone = w.cloneNode(true);
-          clone.style.cssText = `position:absolute;left:${r.left - hr.left}px;top:${top}px;width:${r.width}px;height:${r.height}px;margin:0`;
-          fxl.appendChild(clone); w.style.visibility = 'hidden';
-          await anim(clone, [{ transform: 'none' }, { transform: 'rotate(-6deg)', offset: 0.3 }, { transform: 'rotate(5deg)', offset: 0.6 }, { transform: 'none' }], { duration: 380 });
-          if (!alive) return;
-          // 4. reeled up into the crest
-          SND.play('playerOut');
-          anim(th, [{ transform: 'scaleY(1)' }, { transform: 'scaleY(0)' }], { duration: 380, easing: 'ease-in' });
-          await anim(clone, [{ transform: 'none', opacity: 1 }, { transform: `translateY(${cy - cyCard}px) scale(.3)`, opacity: 0 }], { duration: 420, easing: 'cubic-bezier(.6,0,.9,.4)' });
-          if (!alive) return;
-          th.remove(); clone.remove();
-          // 5. his shirt is left empty with the crest of where he went; the crest flies off with him
-          sl.innerHTML = SE.emptyShirt(pitchSlots[x.slot].pos, PITCH_W, x);
-          anim(sl.firstElementChild, [{ opacity: 0, transform: 'scale(.85)' }, { opacity: 1, transform: 'none' }], { duration: 300, easing: 'ease-out' });
-          setRating(GAME.rating());
-          SND.play('pass');
-          await anim(rv, [{ transform: 'none', opacity: 1 }, { transform: 'translateY(-300px) scale(.7)', opacity: 0 }], { duration: 450, easing: 'ease-in' });
-          if (!alive) return;
-          rv.remove();
-          await wait(700);
+          await wait(500);
         }
         if (!alive) return;
         poachKill(); poachKill = null;

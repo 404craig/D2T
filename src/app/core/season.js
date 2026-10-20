@@ -190,5 +190,95 @@
       quit: daily ? null : () => { G.rememberOffered(); D2T.state.run = null; D2T.save(); D2T.go('home'); }
     });
   };
+
+  // ---------- Sweep and strike (Craig, 20 Oct; animation B in design/prototype/raid-crosshair.html) ----------
+  // The take when another side comes in for one of yours: the Club X Summer poach (squad.js, one per player) and the
+  // January raid (transfer.js). A red scan line sweeps the pitch and a crosshair rides it, wide and turning, dropping
+  // onto each player on its path (each flashes red and is passed over); it dives onto the target, spins tight and locks
+  // with a double pulse; he shakes; the rival's badge comes in fast from the far touchline and stamps down on him (a white
+  // shock ring, the pitch kicks); he is pulled into the badge, which lifts and flies off, leaving his shirt empty. Drawn in
+  // a layer inside the pitch (`.rd-fx`, a `.rd-wash` under the players), every position measured against the pitch's box.
+  // opts: pitch (.se-pitch), slotsEl (.se-slots), slot (the target's index), crest (the rival's), onLanded() as the badge
+  // lands (the headline), onEmpty() when the shirt is to be emptied (the caller draws the empty shirt and the rating; the
+  // helper fades it in). Returns { done, cancel }: cancel stops it at once and clears the layer.
+  const RD_X = '<svg viewBox="0 0 96 96" aria-hidden="true"><circle class="ring" cx="48" cy="48" r="40"/><circle class="ring" cx="48" cy="48" r="22"/><line class="tick" x1="48" y1="2" x2="48" y2="18"/><line class="tick" x1="48" y1="78" x2="48" y2="94"/><line class="tick" x1="2" y1="48" x2="18" y2="48"/><line class="tick" x1="78" y1="48" x2="94" y2="48"/><circle class="dot" cx="48" cy="48" r="2.6"/><path class="brk" d="M14 30 V14 H30"/><path class="brk" d="M66 14 H82 V30"/><path class="brk" d="M82 66 V82 H66"/><path class="brk" d="M30 82 H14 V66"/></svg>';
+  // the four players nearest the target's line, never the target, left to right (the sweep's order)
+  SE.raidPath = (slotsEl, target, n = 4) => {
+    const at = (sl) => { const w = sl.querySelector('.se-cardwrap'); if (!w || !w.querySelector('.d2c')) return null; const r = w.getBoundingClientRect(); return { i: +sl.dataset.i, x: r.left + r.width / 2, y: r.top + r.height / 2 }; };
+    const all = [...slotsEl.querySelectorAll('.se-slot[data-i]')].map(at).filter(Boolean), t = all.find((s) => s.i === target);
+    if (!t) return [];
+    return all.filter((s) => s.i !== target).sort((a, b) => Math.abs(a.y - t.y) - Math.abs(b.y - t.y)).slice(0, n).sort((a, b) => a.x - b.x).map((s) => s.i);
+  };
+  SE.raidTake = (opts) => {
+    const { pitch, slotsEl, slot, crest } = opts, SND = window.D2TSound || { play() {} };
+    let alive = true; const anims = [], timers = [];
+    const fx = D2T.h('<div class="rd-fx" aria-hidden="true"></div>'), wash = D2T.h('<div class="rd-wash" aria-hidden="true"></div>'), beam = D2T.h('<div class="rd-beam"></div>');
+    const cancel = () => { if (!alive) return; alive = false; timers.forEach(clearTimeout); anims.forEach((a) => { try { a.cancel(); } catch (e) { /* gone */ } }); fx.remove(); wash.remove(); pitch.classList.remove('rd-on', 'rd-dim'); pitch.querySelectorAll('.rd-tint').forEach((e) => e.classList.remove('rd-tint')); const w = slotsEl.querySelector(`.se-slot[data-i="${slot}"] .se-cardwrap`); if (w) w.style.visibility = ''; };
+    const wait = (ms) => new Promise((r) => timers.push(setTimeout(r, ms)));
+    const anim = (el, k, o) => { const a = el.animate(k, Object.assign({ fill: 'forwards' }, o)); anims.push(a); return a.finished.catch(() => {}); };
+    const centre = (i) => { const w = slotsEl.querySelector(`.se-slot[data-i="${i}"] .se-cardwrap`), pr = pitch.getBoundingClientRect(), r = w.getBoundingClientRect(); return { x: r.left - pr.left + r.width / 2, y: r.top - pr.top + r.height / 2, r, pr, w }; };
+    const slotOf = (i) => slotsEl.querySelector(`.se-slot[data-i="${i}"]`);
+    const done = (async () => {
+      const tw = slotsEl.querySelector(`.se-slot[data-i="${slot}"] .se-cardwrap`); if (!tw) return;
+      const path = (opts.path || SE.raidPath(slotsEl, slot)).filter((i) => i !== slot && slotOf(i) && slotOf(i).querySelector('.se-cardwrap .d2c'));
+      pitch.classList.add('rd-on'); pitch.insertBefore(wash, slotsEl); pitch.appendChild(fx); fx.appendChild(beam);
+      const x = D2T.h(`<div class="rd-x">${RD_X}</div>`); fx.appendChild(x);
+      // 1. the sweep: the wash comes up, the beam runs left to right and back, the crosshair rides it over each player on the path
+      anim(wash, [{ opacity: 0 }, { opacity: 1 }], { duration: 400 }); pitch.classList.add('rd-dim');
+      SND.play('dropCancel');
+      const T = centre(slot), P = path.map(centre), Hh = T.pr.height;
+      anim(beam, [{ opacity: 0, transform: 'translateX(-50%)' }, { opacity: 1, transform: 'translateX(-40%)', offset: 0.1 }, { opacity: 1, transform: 'translateX(40%)', offset: 0.55 }, { opacity: 1, transform: 'translateX(-10%)', offset: 0.9 }, { opacity: 0, transform: 'translateX(-15%)' }], { duration: 2400, easing: 'ease-in-out' });
+      const kf = [{ transform: `translate(-60px,${Hh * 0.35}px) scale(1.9) rotate(0deg)`, opacity: 1, offset: 0, easing: 'cubic-bezier(.4,0,.2,1)' }];
+      P.forEach((p, k) => { const o = 0.12 + k * 0.22; kf.push({ transform: `translate(${p.x}px,${p.y}px) scale(${1.6 - k * 0.15}) rotate(${(k + 1) * 45}deg)`, opacity: 1, offset: o, easing: 'cubic-bezier(.4,0,.2,1)' }); kf.push({ transform: `translate(${p.x}px,${p.y}px) scale(${1.45 - k * 0.15}) rotate(${(k + 1) * 45}deg)`, opacity: 1, offset: Math.min(0.99, o + 0.08), easing: 'cubic-bezier(.4,0,.2,1)' }); });
+      const rotEnd = (P.length + 1) * 45 + 45;
+      kf.push({ transform: `translate(${T.x}px,${T.y}px) scale(1) rotate(${rotEnd}deg)`, opacity: 1, offset: 1 });
+      const mv = anim(x, kf, { duration: 2400 });
+      P.forEach((p, k) => { timers.push(setTimeout(() => { if (!alive) return; const sl = slotOf(path[k]); if (!sl) return; sl.classList.add('rd-tint'); timers.push(setTimeout(() => sl.classList.remove('rd-tint'), 300)); }, 2400 * (0.12 + k * 0.22) + 60)); });
+      await mv; if (!alive) return;
+      // 2. the lock: the rings snap tight, the brackets come in, two pulses, he shakes
+      const tsl = slotOf(slot); tsl && tsl.classList.add('rd-tint');
+      anim(x, [{ transform: `translate(${T.x}px,${T.y}px) scale(1) rotate(${rotEnd}deg)` }, { transform: `translate(${T.x}px,${T.y}px) scale(.78) rotate(${(P.length + 2) * 45}deg)` }], { duration: 240, easing: 'cubic-bezier(.2,.9,.3,1.35)' });
+      x.querySelectorAll('.brk').forEach((b) => anim(b, [{ opacity: 0 }, { opacity: 1 }], { duration: 160 }));
+      for (let k = 0; k < 2; k++) {
+        const pulse = D2T.h(`<div class="rd-pulse" style="left:${T.x}px;top:${T.y}px"></div>`); fx.appendChild(pulse);
+        anim(pulse, [{ transform: 'scale(.6)', opacity: 1 }, { transform: 'scale(2.2)', opacity: 0 }], { duration: 520, easing: 'ease-out' }).then(() => pulse.remove());
+        await wait(180); if (!alive) return;
+      }
+      await anim(T.w, [{ transform: 'none' }, { transform: 'translateX(-3px)', offset: 0.2 }, { transform: 'translateX(3px)', offset: 0.4 }, { transform: 'translateX(-2px)', offset: 0.6 }, { transform: 'translateX(2px)', offset: 0.8 }, { transform: 'none' }], { duration: 360, fill: 'none' });
+      if (!alive) return;
+      await wait(200); if (!alive) return;
+      anim(x, [{ opacity: 1, transform: `translate(${T.x}px,${T.y}px) scale(.78) rotate(${(P.length + 2) * 45}deg)` }, { opacity: 0, transform: `translate(${T.x}px,${T.y}px) scale(1.6) rotate(${(P.length + 2) * 45}deg)` }], { duration: 260 }).then(() => x.remove());
+      beam.remove();
+      // 3. the strike: the badge comes in fast from the far touchline and stamps down on him
+      const top = T.r.top - T.pr.top, fromX = T.x < T.pr.width / 2 ? T.pr.width + 80 : -80;
+      const rv = D2T.h(`<div class="se-pc-rival" style="left:${T.x}px;top:${T.y}px;z-index:3">${crest ? `<img src="${crest}" alt="">` : ''}</div>`);
+      const clone = T.w.cloneNode(true);
+      clone.style.cssText = `position:absolute;left:${T.r.left - T.pr.left}px;top:${top}px;width:${T.r.width}px;height:${T.r.height}px;margin:0`;
+      fx.appendChild(clone); fx.appendChild(rv); T.w.style.visibility = 'hidden';
+      await anim(rv, [{ transform: `translate(${fromX - T.x}px,-40px) scale(2.2) rotate(-30deg)`, opacity: 0 }, { transform: `translate(${(fromX - T.x) * 0.35}px,-30px) scale(1.8) rotate(-10deg)`, opacity: 1, offset: 0.45 }, { transform: 'translate(0,-6px) scale(1.15)', opacity: 1, offset: 0.85 }, { transform: 'none', opacity: 1 }], { duration: 620, easing: 'cubic-bezier(.2,.8,.2,1)' });
+      if (!alive) return;
+      SND.play('land'); opts.onLanded && opts.onLanded();
+      const shock = D2T.h(`<div class="rd-pulse rd-white" style="left:${T.x}px;top:${T.y}px"></div>`); fx.appendChild(shock);
+      anim(shock, [{ transform: 'scale(.5)', opacity: 1 }, { transform: 'scale(2.4)', opacity: 0 }], { duration: 450, easing: 'ease-out' }).then(() => shock.remove());
+      anim(pitch, [{ transform: 'none' }, { transform: 'translateY(3px)', offset: 0.3 }, { transform: 'none' }], { duration: 260, fill: 'none' });
+      // 4. he is pulled into the badge
+      SND.play('playerOut');
+      await anim(clone, [{ transform: 'none', opacity: 1 }, { transform: 'scale(1.08)', opacity: 1, offset: 0.25 }, { transform: 'scale(.1) rotate(25deg)', opacity: 0 }], { duration: 460, easing: 'cubic-bezier(.6,0,.9,.4)' });
+      if (!alive) return;
+      clone.remove();
+      // 5. his shirt is left empty; the badge lifts and flies off with him
+      tsl && tsl.classList.remove('rd-tint');
+      opts.onEmpty && opts.onEmpty();
+      const nsl = slotOf(slot), fresh = nsl && nsl.firstElementChild; if (fresh) anim(fresh, [{ opacity: 0, transform: 'scale(.85)' }, { opacity: 1, transform: 'none' }], { duration: 300, easing: 'ease-out' });
+      SND.play('pass');
+      await anim(rv, [{ transform: 'none' }, { transform: 'translateY(-14px) scale(1.1)', offset: 0.3 }, { transform: `translate(${fromX > 0 ? 90 : -90}px,-200px) scale(.4) rotate(${fromX > 0 ? 25 : -25}deg)`, opacity: 0 }], { duration: 600, easing: 'cubic-bezier(.5,0,.8,.3)' });
+      if (!alive) return;
+      rv.remove();
+      await anim(wash, [{ opacity: 1 }, { opacity: 0 }], { duration: 400 });
+      if (!alive) return;
+      alive = false; fx.remove(); wash.remove(); pitch.classList.remove('rd-on', 'rd-dim');
+    })();
+    return { done, cancel };
+  };
   document.addEventListener('click', (ev) => { if (ev.target.closest && ev.target.closest('.se-home')) D2T.runMenu(); });
 })();

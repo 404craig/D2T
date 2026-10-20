@@ -458,12 +458,13 @@ fs.mkdirSync(OUT, { recursive: true });
   // never replays it (the summary comes back until it is closed), and Continue goes on to the Summer window
   await page.evaluate(() => { window.D2T.state.run.tableSeen = true; window.D2T.save(); window.D2T.go("squad"); }); await expectScreen("squad");
   await wait(2150);
-  check(!!(await page.$(".se-poach-fx .se-pc-rival")) && !!(await page.$(".se-poach-fx .se-pc-line")), "the poach should drop a rival crest with a line down to the card");
+  // Sweep and strike (Craig, 20 Oct): the crosshair hunts across the pitch in a layer inside it, the scan beam with it
+  check(!!(await page.$(".se-pitch.rd-on .rd-fx .rd-x")) && !!(await page.$(".se-pitch .rd-fx .rd-beam")) && !!(await page.$(".se-pitch .rd-wash")), "the poach should hunt with the crosshair and the scan beam inside the pitch");
   check(!!(await page.$(".se-ticker .se-tk-tag")) && /transfer news/i.test(await page.textContent(".se-ticker .se-tk-tag")), "the poach should open a Transfer news ticker");
   await shot("35b-clx-poach-mid");
   const poached = await page.evaluate(() => JSON.stringify(window.D2T.game.eng().poached));
   check(await page.evaluate(() => { const G = window.D2T.game, e = G.eng(), f = window.D2TE.FORMATIONS[e.formation]; return e.poached.length === 3 && new Set(e.poached.map((x) => x.club)).size === 3 && e.poached.every((x) => f[x.slot][0] !== "GK" && x.club !== e.club && e.xi[x.slot] == null); }), "the poach should take 3 outfield players to 3 different clubs, leaving their shirts empty");
-  await page.waitForSelector(".se-poach-sheet.open", { timeout: 15000 }).catch(() => {});
+  await page.waitForSelector(".se-poach-sheet.open", { timeout: 30000 }).catch(() => {});   // three takes of about 6.5 s each
   await wait(500);
   check(await page.$$eval(".se-slots .se-empty-to", (n) => n.length) === 3 && /^To /i.test(await page.textContent(".se-slots .se-empty-to .se-to")), "three empty shirts should read TO {CLUB}");
   check(await page.evaluate(() => { const e = window.D2T.game.eng(), t = document.querySelector(".se-ticker .se-tk-item"), last = e.poached[2]; return !!t && t.textContent === `${last.name} joins ${window.D2T.game.S().clubs[last.club].name}`; }), "the ticker should carry the latest move");
@@ -472,7 +473,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await shot("35c-clx-poach-summary");
   await page.reload(); await expectScreen("intro"); await page.click(".fr-skip", { force: true }); await expectScreen("home"); await wait(600);
   await page.evaluate(() => window.D2T.go("squad")); await expectScreen("squad"); await wait(2400);
-  check(!(await page.$(".se-pc-rival")) && await page.evaluate((p) => JSON.stringify(window.D2T.game.eng().poached) === p, poached), "a refresh replayed or rerolled the poach");
+  check(!(await page.$(".se-pc-rival")) && !(await page.$(".rd-fx")) && await page.evaluate((p) => JSON.stringify(window.D2T.game.eng().poached) === p, poached), "a refresh replayed or rerolled the poach");
   check(await page.$$eval(".se-slots .se-empty-to", (n) => n.length) === 3 && /joins/i.test(await page.textContent(".se-ticker .se-tk-item")), "after a refresh the empty shirts and the ticker should stay");
   check(!!(await page.$(".se-poach-sheet.open")), "after a refresh the unseen summary should come back");
   await page.click(".se-poach-go"); await expectScreen("transfer");
