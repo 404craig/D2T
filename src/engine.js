@@ -170,6 +170,9 @@ function fitOf(player, slotPos) {
   if ((NEAR_BROAD[sb] || []).includes(pb)) return "amber";
   return "red";
 }
+// Keepers only ever play in goal and outfield players never do (Craig, 20 Oct): no shirt, swap, sign, draft or re-seat crosses that line.
+function isGK(p) { return !!p && broadOf(p) === "GK"; }
+function canPlay(p, slotPos) { return !!p && isGK(p) === (slotPos === "GK"); }
 function effRating(player, slotPos) {
   if (!player) return 40;
   const f = fitOf(player, slotPos), main = (player.p || [])[0];
@@ -407,7 +410,7 @@ function draftFits(st, S, cardId) {
   const p = playerOf(S, cardId, S.legends), open = openSlots(st), f = FORMATIONS[st.formation];
   if (!p || !openDraft(st)) return open;
   const main = (p.p || [])[0], rank = (i) => (f[i][0] === main ? 0 : { green: 1, amber: 2, red: 3 }[fitOf(p, f[i][0])]);
-  return open.sort((a, b) => rank(a) - rank(b) || a - b);
+  return open.filter(i => canPlay(p, f[i][0])).sort((a, b) => rank(a) - rank(b) || a - b);
 }
 function startDraft(st, S) {
   st.xi = new Array(FORMATIONS[st.formation].length).fill(null);
@@ -509,7 +512,7 @@ function autoXI(S, club, formation, preferred) {
     for (const tier of ["green", "amber", "red"]) {
       slots.forEach((pos, i) => {
         if (xi[i]) return;
-        const best = cands.filter(p => !used.has(p.id) && fitOf(p, pos) === tier).sort((x, y) => val(y, pos) - val(x, pos))[0];
+        const best = cands.filter(p => !used.has(p.id) && canPlay(p, pos) && fitOf(p, pos) === tier).sort((x, y) => val(y, pos) - val(x, pos))[0];
         if (best) { xi[i] = best.id; used.add(best.id); }
       });
     }
@@ -526,10 +529,13 @@ function reseat(st, S, f) {
   for (const tier of ["green", "amber", "red"]) {
     slots.forEach((pos, i) => {
       if (xi[i]) return;
-      const best = players.filter(p => !used.has(p.id) && fitOf(p, pos) === tier).sort((x, y) => y.r - x.r)[0];
+      const best = players.filter(p => !used.has(p.id) && canPlay(p, pos) && fitOf(p, pos) === tier).sort((x, y) => y.r - x.r)[0];
       if (best) { xi[i] = best.id; used.add(best.id); }
     });
   }
+  // nobody is ever lost by a change of shape: a second keeper, say, takes an empty shirt rather than vanishing
+  const left = players.filter(p => !used.has(p.id));
+  slots.forEach((pos, i) => { if (xi[i] == null && left.length) { xi[i] = left.shift().id; } });
   return xi;
 }
 function setFormation(st, S, f) {
@@ -539,9 +545,14 @@ function setFormation(st, S, f) {
   st.log.push(["formation", f]);
   return true;
 }
-function swapSetup(st, slot, playerId) {
+function swapSetup(st, slot, playerId, S) {
   if (st.phase !== "setup") return false;
   const other = st.xi.indexOf(playerId);
+  if (S) {   // a keeper only in goal, an outfield player never (both ways round)
+    const f = FORMATIONS[st.formation], pin = playerOf(S, playerId, S.legends), pout = st.xi[slot] != null ? playerOf(S, st.xi[slot], S.legends) : null;
+    if (!canPlay(pin, f[slot][0])) return false;
+    if (other >= 0 && pout && !canPlay(pout, f[other][0])) return false;
+  }
   if (other >= 0) st.xi[other] = st.xi[slot];
   st.xi[slot] = playerId;
   return true;
@@ -620,7 +631,10 @@ function newRoll(st, S) {
   const r = stream(st.seed, "roll", st.rollIx, st.rollStep, spin);
   const taken = new Set(), cards = [];
   const due = spin === 0 && rollIndex(st) === legendRoll(st) && !(st.offered || []).some(id => String(id).startsWith("L:"));
-  for (let k = 0; k < 3; k++) { const id = drawCard(r, S, st, S.legends, taken, null, null, due && k === 0 ? 4 : null); if (id != null) { cards.push(id); taken.add(id); } }
+  // with outfield shirts empty and the keeper's filled, no keeper comes up (Craig, 20 Oct)
+  const fslots = FORMATIONS[st.formation], empty = st.xi.map((id, i) => (id == null ? fslots[i][0] : null)).filter(Boolean);
+  const fit = empty.length && !empty.includes("GK") ? (p) => !isGK(p) : null;
+  for (let k = 0; k < 3; k++) { const id = drawCard(r, S, st, S.legends, taken, null, fit, due && k === 0 ? 4 : null); if (id != null) { cards.push(id); taken.add(id); } }
   st.roll = { key: `${st.rollIx}.${st.rollStep}`, spin, cards, window: w ? w.kind : "reg", step: st.rollStep + 1, of: w ? w.n : 1 };
   noteOffered(st, cards);
 }
@@ -643,6 +657,7 @@ function signPreview(st, S, cardId, legends) {
   return slots.map((pos, i) => {
     const xi = st.xi.slice(); xi[i] = cardId;
     const st2 = Object.assign({}, st, { xi }), s = userStrength(S, st2, legends), ps = plainStrength(S, st2, legends);
+    if (!canPlay(p, pos)) return { slot: i, pos, fit: "never", delta: -999, ovr: -999, def: 0, mid: 0, att: 0 };
     return { slot: i, pos, fit: fitOf(p, pos), delta: score(s) - score(base), ovr: ps.ovr - pb.ovr, def: s.def - base.def, mid: s.mid - base.mid, att: s.att - base.att };
   });
 }
@@ -675,9 +690,10 @@ function scout(st, S, slot) {
 }
 function sign(st, S, cardId, slot) {
   if (st.phase !== "window" || !st.roll || !st.roll.cards.includes(cardId)) return false;
+  const p = playerOf(S, cardId, S.legends);
+  if (!canPlay(p, FORMATIONS[st.formation][slot][0])) return false;
   const out = st.xi[slot];
   st.xi[slot] = cardId;
-  const p = playerOf(S, cardId, S.legends);
   const sdate = st.fixtures[st.gw - 1].date, outP = out != null ? playerOf(S, out, S.legends) : null;
   st.signed.push({ id: cardId, gw: st.gw, slot, out, from: p ? clubAt(p, sdate) : null, date: sdate, settle: p ? settleOf(st, p, outP ? outP.r : null) : null });
   if (p && p.c != null && !String(cardId).startsWith("L:")) {
@@ -982,7 +998,7 @@ function seasonSummary(S, st) {
 
 const API = {
   RULES, LEVELS, POS, FIT, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
-  fitOf, effRating, indexSeason, playerOf, clubAt, xiStrength, userStrength, plainStrength, starRating, settledRating, clubXI, clubStrength,
+  fitOf, effRating, isGK, canPlay, indexSeason, playerOf, clubAt, xiStrength, userStrength, plainStrength, starRating, settledRating, clubXI, clubStrength,
   TACTIC_NAMES, tacticOf, tacticLines, setTactic, scoutInfo, scout, legendRoll, januaryRaid, agedRating,
   schedule, fixturesOf, recentWeights, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
   poach, joinersOf, fillHoles, draftOrder, draftSlot, draftFormation, draftPick, draftFits, listsPos, DRAFT_MODES, carryIn, simResults,

@@ -170,7 +170,7 @@
         if (a.kind === 'sub' && b.kind === 'sub') return;
         const before = new Map(allItems().map((el) => [el.dataset.card, el.getBoundingClientRect()]));
         if (ghostRect) before.set(String(a.id), ghostRect);
-        if (!GAME.swap(idOf(a.id), idOf(b.id))) return;
+        if (!GAME.swap(idOf(a.id), idOf(b.id))) { const slotOf = (x) => { const el = root.querySelector(`[data-kind="pitch"][data-card="${x.id}"]`); return el ? +el.dataset.i : -1; }; const sb = slotOf(b), sa = slotOf(a); const bad = sb >= 0 && !GAME.canPlay(idOf(a.id), sb) ? a.id : sa >= 0 && !GAME.canPlay(idOf(b.id), sa) ? b.id : null; if (bad != null) { hintEl.textContent = GAME.noPlayWord(idOf(bad)); window.D2TSound && window.D2TSound.play('dropCancel'); } return; }
         window.D2TSound && window.D2TSound.play('cardDrop');
         sel = null;
         render(before);

@@ -395,6 +395,15 @@ def main():
             game["catalogue"].append({"key": f"{season}:{names[r['c']]}", "season": season, "club": names[r["c"]],
                                       "pos": r["pos"], "pts": r["pts"]})
 
+    # Legends: one card per player (Craig, 20 Oct: Salah had eight legend cards): his best-rated legend season keeps `lg`,
+    # his other legend seasons stay purple.
+    best = {}
+    for sk, S in game["seasons"].items():
+        for q in S["players"]:
+            if q.get("lg") and (q["k"] not in best or (q["r"], q["a"]) > (best[q["k"]]["r"], best[q["k"]]["a"])): best[q["k"]] = q
+    for S in game["seasons"].values():
+        for q in S["players"]:
+            if q.get("lg") and best[q["k"]] is not q: del q["lg"]
     # Career assists and clean sheets for the big card: summed over his seasons' rated numbers (as, cs).
     for S in game["seasons"].values():
         for q in S["players"]:

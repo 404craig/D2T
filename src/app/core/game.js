@@ -422,6 +422,9 @@
   GAME.slots = () => E.FORMATIONS[GAME.eng().formation].map(([pos, x, y]) => ({ pos, role: E.SLOT_BROAD[pos], x, y: 89 - y * 0.86 }));
   GAME.formations = () => E.FORMATION_NAMES;
   GAME.formationDots = (f) => E.FORMATIONS[f].map(([pos, x, y]) => ({ x, y: 89 - y * 0.86 }));
+  // a keeper only in goal, an outfield player never (Craig, 20 Oct); the screens say so when a drop is refused
+  GAME.canPlay = (cardId, slot) => { if (cardId == null) return true; const S = GAME.S(), p = E.playerOf(S, cardId); return E.canPlay(p, E.FORMATIONS[GAME.eng().formation][slot][0]); };
+  GAME.noPlayWord = (cardId) => { const S = GAME.S(), p = E.playerOf(S, cardId); return E.isGK(p) ? 'Keepers only play in goal' : 'Only a keeper goes in goal'; };
   GAME.fit = (cardId, slot) => { if (cardId == null) return 'green'; const S = GAME.S(), p = E.playerOf(S, cardId); return E.fitOf(p, E.FORMATIONS[GAME.eng().formation][slot][0]); };
   // the team rating is the squad as the card numbers say (plainStrength); the matches use E.userStrength (stars above their
   // number, the tactic's lean, settling signings), which the screens never show as a number (18 Oct, docs/SCOPE_ENGINE.md)
@@ -488,11 +491,11 @@
   // Swap two shirts, or bring a squad player in before the season.
   GAME.swap = (aId, bId) => {
     const eng = GAME.eng(), i = eng.xi.indexOf(aId), j = eng.xi.indexOf(bId);
-    if (i >= 0 && j >= 0) { eng.xi[i] = bId; eng.xi[j] = aId; D2T.save(); return true; }
+    if (i >= 0 && j >= 0) { if (!GAME.canPlay(aId, j) || !GAME.canPlay(bId, i)) return false; eng.xi[i] = bId; eng.xi[j] = aId; D2T.save(); return true; }
     if (!GAME.preseason()) return false;
     const pitch = i >= 0 ? i : j, sub = i >= 0 ? bId : aId;
     if (pitch < 0) return false;
-    E.swapSetup(eng, pitch, sub); D2T.save(); return true;
+    if (!E.swapSetup(eng, pitch, sub, GAME.S())) return false; D2T.save(); return true;
   };
   // Swap two shirts on a roll's pitch (Craig, 15 Oct: you can still move your players around while a roll is up); an empty
   // shirt moves too, so a player can go into a gap. Not in the draft, where shirts are filled one by one.
@@ -500,6 +503,7 @@
     const eng = GAME.eng();
     if (i === j || eng.phase === 'draft' || !['setup', 'window', 'prematch'].includes(eng.phase)) return false;
     if (i < 0 || j < 0 || i >= eng.xi.length || j >= eng.xi.length) return false;
+    if (!GAME.canPlay(eng.xi[i], j) || !GAME.canPlay(eng.xi[j], i)) return false;
     const a = eng.xi[i]; eng.xi[i] = eng.xi[j]; eng.xi[j] = a; D2T.save(); return true;
   };
   // ---------- Poached (Craig, 14 Oct): a Club X career's later seasons lose three of the XI before the Summer window ----------
