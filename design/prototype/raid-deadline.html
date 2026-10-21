@@ -2352,7 +2352,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .mock .se-gap{margin:0 -16px}
 .nb{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);opacity:0;transition:opacity .25s}
 .nb.on{opacity:1}
-.nA{height:42px;background:var(--dd);color:var(--ddk);display:flex;align-items:stretch;overflow:hidden}
+.nA{height:50px;background:var(--dd);color:var(--ddk);display:flex;align-items:stretch;overflow:hidden}
 .nA .tag{flex:none;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:2px;padding:0 20px 0 14px;background:var(--ddk);color:var(--dd);font:900 italic 11px/1 'Exo 2';letter-spacing:.12em;text-transform:uppercase;clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%)}
 .nA .tag b{font-weight:900;display:block}
 .nA .v{flex:1;min-width:0;display:flex;align-items:center;padding-left:6px;overflow:hidden}
@@ -2363,6 +2363,13 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .nA .tw.sc{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px);mask-image:linear-gradient(90deg,transparent 0,#000 14px)}
 .nA .ct{flex:none;display:flex;align-items:center;padding:0 10px;font:900 italic 13px 'Exo 2'}
 .nA .ct.dim{opacity:.35}
+
+.nA .tw{flex-direction:column;align-items:stretch;justify-content:center;gap:3px}
+.nA .ln{display:block;overflow:hidden;white-space:nowrap;line-height:1.1}
+.nA .l1 .tx{font:900 italic 14px/1.1 'Exo 2';text-transform:uppercase}
+.nA .l2 .tx{font:700 12px/1.1 'Exo 2';text-transform:none;letter-spacing:0}
+.nA .ln.sc{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px);mask-image:linear-gradient(90deg,transparent 0,#000 14px)}
+.nA .tw.sc{-webkit-mask-image:none;mask-image:none}
 </style></head><body class="pg">
 <div class="wrap">
 <h1>Raid: deadline day</h1>
@@ -2438,7 +2445,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
       <span class="d2c-tab">LW</span><div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2c-holo"></span>
       <div class="d2c-body"><div class="d2c-mid"><span class="d2c-ovr">67</span><span class="d2c-side"><img class="d2c-crest" src="raid2-fx/de262a9eb6d9.png" alt=""><img class="d2c-flag" src="raid2-fx/8418cfd4a835.png" alt="Nigeria"></span></div>
       <span class="d2c-first d2c-fit" data-fit="1">John</span><span class="d2c-last" data-fit="1">Utaka</span></div></div></div></div></div></div><button class="se-formlink"</div></div></div>
-  <div class="se-gap"><div class="nb" id="bar"><div class="nA"><span class="tag"><b>Transfer</b><b>News</b></span><span class="v"><span class="hl"><img id="bcrest" alt=""><span class="tw"><span class="tx" id="btx"></span></span></span></span><span class="ct" id="bct">0/3</span></div></div></div>
+  <div class="se-gap"><div class="nb" id="bar"><div class="nA"><span class="tag"><b>Transfer</b><b>News</b></span><span class="v"><span class="hl"><img id="bcrest" alt=""><span class="tw"><span class="ln l1"><span class="tx" id="btx"></span></span><span class="ln l2"><span class="tx" id="btx2"></span></span></span></span></span><span class="ct" id="bct">0/3</span></div></div></div>
  </div>
  <footer class="actionbar game-bar se-nextbar"><button class="icon-btn se-home bar-home" type="button" aria-label="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"></path></svg></button><button class="icon-btn se-off bar-mid" type="button" disabled="" aria-hidden="true" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg></button><button class="btn se-btn se-wide bar-main se-play" type="button">Summer window</button></footer>
 </main></div></div>
@@ -2456,30 +2463,35 @@ const ORIG=pitch.querySelector('.se-slots').innerHTML;
 let sty='A', busy=false, reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const wait=(ms)=>new Promise((r)=>setTimeout(r,ms));
 const anim=(el,k,o)=>{const a=el.animate(k,Object.assign({fill:'forwards'},o));return a.finished.catch(()=>{});};
-function centre(i){const w=pitch.querySelector(`.se-slot[data-i="${i}"] .se-cardwrap`),pr=pitch.getBoundingClientRect(),r=w.getBoundingClientRect();return {x:r.left-pr.left+r.width/2,y:r.top-pr.top+r.height/2,r,pr,w};}
+function centre(i){const w=pitch.querySelector(`.se-slot[data-i="${i}"] .se-cardwrap`),pr=pitch.getBoundingClientRect(),r=w.getBoundingClientRect(),k=pr.width/pitch.offsetWidth||1;
+ const l=(r.left-pr.left)/k,tp=(r.top-pr.top)/k,wd=r.width/k,ht=r.height/k;return {x:l+wd/2,y:tp+ht/2,l,t:tp,wd,ht,pw:pitch.offsetWidth,ph:pitch.offsetHeight,w};}
 function reset(){bt.forEach(clearTimeout);bt=[];$('#bar').classList.remove('on');pitch.querySelector('.se-slots').innerHTML=ORIG;fx.innerHTML='';wash.style.opacity=0;pitch.classList.remove('rd-dim','rd-b');$('#rate').textContent='70';pitch.querySelectorAll('.rd-tint').forEach((e)=>e.classList.remove('rd-tint'));}
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let bt=[];const BT=(f,ms)=>bt.push(setTimeout(f,ms));
 // the bar: the crest stays put, the words print left to right and, if long, scroll left with the newest letter, fading out beside the crest
-function say(text,club,count,dim){bt.forEach(clearTimeout);bt=[];const bar=$('#bar'),v=bar.querySelector('.v'),tw=bar.querySelector('.tw'),tx=$('#btx'),img=$('#bcrest');
+// the bar: the crest stays put; the top line prints, then the second; a line too long scrolls left from its words, fading beside the crest
+function say(top,bot,club,count,dim){bt.forEach(clearTimeout);bt=[];const bar=$('#bar'),img=$('#bcrest');
  bar.classList.add('on');img.src=D.crests[club];$('#bct').textContent=count+'/3';$('#bct').classList.toggle('dim',!!dim);
- const set=(x,tr)=>{tx.style.transition=tr||'none';tx.style.transform=x?`translateX(${-x}px)`:'none';tw.classList.toggle('sc',x>0);};
- const over=()=>Math.max(0,tx.scrollWidth-tw.clientWidth+6);set(0);tx.style.opacity=1;
- if(RM){tx.textContent=text;return;}
- tx.textContent='';img.animate([{opacity:0,transform:'scale(.3)'},{opacity:1,transform:'scale(1.15)',offset:.7},{opacity:1,transform:'none'}],{duration:260,easing:'ease-out'});
- let i=0;const type=()=>{tx.textContent=text.slice(0,++i);set(over(),'transform .12s linear');if(i<text.length)BT(type,text[i]===' '?60:34);else if(over()>0)BT(loop,1800);};
- const loop=()=>{const o=over();tx.style.transition='opacity .2s';tx.style.opacity=0;BT(()=>{set(0);void tx.offsetWidth;tx.style.transition='opacity .2s';tx.style.opacity=1;BT(()=>{set(o,`transform ${Math.max(.8,o/60)}s linear`);BT(loop,Math.max(800,o/60*1000)+1800);},1200);},220);};
- BT(type,200);}
+ const L=[[bar.querySelector('.l1'),$('#btx'),top],[bar.querySelector('.l2'),$('#btx2'),bot]];
+ const set=(ln,tx,x,tr)=>{tx.style.transition=tr||'none';tx.style.transform=x?`translateX(${-x}px)`:'none';ln.classList.toggle('sc',x>0);};
+ const over=(ln,tx)=>Math.max(0,tx.scrollWidth-ln.clientWidth+6);
+ L.forEach(([ln,tx])=>{set(ln,tx,0);tx.style.opacity=1;tx.textContent='';});
+ if(RM){L.forEach(([ln,tx,s])=>tx.textContent=s);return;}
+ img.animate([{opacity:0,transform:'scale(.3)'},{opacity:1,transform:'scale(1.15)',offset:.7},{opacity:1,transform:'none'}],{duration:260,easing:'ease-out'});
+ const loop=(ln,tx)=>{const o=over(ln,tx);tx.style.transition='opacity .2s';tx.style.opacity=0;BT(()=>{set(ln,tx,0);void tx.offsetWidth;tx.style.transition='opacity .2s';tx.style.opacity=1;BT(()=>{set(ln,tx,o,`transform ${Math.max(.8,o/60)}s linear`);BT(()=>loop(ln,tx),Math.max(800,o/60*1000)+2200);},1200);},220);};
+ const print=(n)=>{if(n>1)return;const [ln,tx,s]=L[n];let i=0;const type=()=>{tx.textContent=s.slice(0,++i);set(ln,tx,over(ln,tx),'transform .12s linear');
+  if(i<s.length)BT(type,s[i]===' '?50:28);else{if(over(ln,tx)>0)BT(()=>loop(ln,tx),2200);BT(()=>print(n+1),120);}};type();};
+ BT(()=>print(0),200);}
 function headline(p){}
 // the take as it is now: crest drops in above him, a line shoots down, he wobbles, he is reeled up, empty shirt with the crest
 async function takeDrop(i,club){
- const c=centre(i),cx=c.x,top=c.r.top-c.pr.top,cy=Math.max(40,c.y-110);
+ const c=centre(i),cx=c.x,top=c.t,cy=Math.max(40,c.y-110);
  const rv=document.createElement('div');rv.className='se-pc-rival';rv.style.cssText=`left:${cx}px;top:${cy}px`;rv.innerHTML=`<img src="${D.crests[club]}" alt="">`;fx.appendChild(rv);
  setTimeout(()=>headline(`${NAME[i]} joins ${club}`),380);
  await anim(rv,[{transform:'translateY(-260px) scale(.6)',opacity:0},{transform:'translateY(8px) scale(1.05)',opacity:1,offset:.75},{transform:'none',opacity:1}],{duration:500,easing:'cubic-bezier(.3,1.3,.5,1)'});
  const th=document.createElement('div');th.className='se-pc-line';th.style.cssText=`left:${cx-1.5}px;top:${cy+31}px;height:${Math.max(8,top-cy-31)}px`;fx.appendChild(th);
  await anim(th,[{transform:'scaleY(0)'},{transform:'scaleY(1)'}],{duration:220,easing:'ease-out'});
- const clone=c.w.cloneNode(true);clone.style.cssText=`position:absolute;left:${c.r.left-c.pr.left}px;top:${top}px;width:${c.r.width}px;height:${c.r.height}px;margin:0`;fx.appendChild(clone);c.w.style.visibility='hidden';
+ const clone=c.w.cloneNode(true);clone.style.cssText=`position:absolute;left:${c.l}px;top:${top}px;width:${c.wd}px;height:${c.ht}px;margin:0`;fx.appendChild(clone);c.w.style.visibility='hidden';
  await anim(clone,[{transform:'none'},{transform:'rotate(-6deg)',offset:.3},{transform:'rotate(5deg)',offset:.6},{transform:'none'}],{duration:380});
  anim(th,[{transform:'scaleY(1)'},{transform:'scaleY(0)'}],{duration:380,easing:'ease-in'});
  await anim(clone,[{transform:'none',opacity:1},{transform:`translateY(${cy-c.y}px) scale(.3)`,opacity:0}],{duration:420,easing:'cubic-bezier(.6,0,.9,.4)'});
@@ -2488,13 +2500,13 @@ async function takeDrop(i,club){
  await anim(rv,[{transform:'none',opacity:1},{transform:'translate(60px,-220px) scale(.5) rotate(20deg)',opacity:0}],{duration:520,easing:'cubic-bezier(.5,0,.8,.3)'});rv.remove();
 }
 // B's take: the badge flies in from the touchline, stamps on him, swallows him and flies off
-async function takeStamp(i,club,hit){
- const c=centre(i),cx=c.x,top=c.r.top-c.pr.top;
+async function takeStamp(i,club,who){
+ const c=centre(i),cx=c.x,top=c.t;
  const rv=document.createElement('div');rv.className='se-pc-rival';rv.style.cssText=`left:${cx}px;top:${c.y}px;z-index:3`;rv.innerHTML=`<img src="${D.crests[club]}" alt="">`;fx.appendChild(rv);
- const clone=c.w.cloneNode(true);clone.style.cssText=`position:absolute;left:${c.r.left-c.pr.left}px;top:${top}px;width:${c.r.width}px;height:${c.r.height}px;margin:0`;fx.insertBefore(clone,rv);c.w.style.visibility='hidden';
- const fromX=cx<c.pr.width/2?c.pr.width+80:-80;
+ const clone=c.w.cloneNode(true);clone.style.cssText=`position:absolute;left:${c.l}px;top:${top}px;width:${c.wd}px;height:${c.ht}px;margin:0`;fx.insertBefore(clone,rv);c.w.style.visibility='hidden';
+ const fromX=cx<c.pw/2?c.pw+80:-80;
  await anim(rv,[{transform:`translate(${fromX-cx}px,-40px) scale(2.2) rotate(-30deg)`,opacity:0},{transform:`translate(${(fromX-cx)*.35}px,-30px) scale(1.8) rotate(-10deg)`,opacity:1,offset:.45},{transform:'translate(0,-6px) scale(1.15)',opacity:1,offset:.85},{transform:'none',opacity:1}],{duration:620,easing:'cubic-bezier(.2,.8,.2,1)'});
- DONE++; say(hit,club,DONE,false);
+ DONE++; {const [a,b]=DEAL[RI%DEAL.length](club,who);say(a,b,club,DONE,false);}
  // the stamp: a shock ring and the pitch kicks
  const pulse=document.createElement('div');pulse.className='rd-pulse';pulse.style.cssText=`left:${cx}px;top:${c.y}px;border-color:#fff`;fx.appendChild(pulse);
  anim(pulse,[{transform:'scale(.5)',opacity:1},{transform:'scale(2.4)',opacity:0}],{duration:450,easing:'ease-out'});
@@ -2540,13 +2552,14 @@ async function runA(target,path,club){
 // each player the line reaches (they flash red and are passed over), swinging back once, then it dives onto the target,
 // spins tight and locks with a double pulse. The badge flies in from the touchline, stamps on him and swallows him.
 let DONE=0;
-async function runB(target,path,club,hit){
+let RI=0;
+async function runB(target,path,club,who){
  pitch.classList.add('rd-b');
- say(`${club} are looking for a new signing`,club,DONE,true);
+ {const [a,b]=RUMOUR[RI%RUMOUR.length](club);say(a,b,club,DONE,true);}
  const beam=document.createElement('div');beam.className='rd-beam';fx.appendChild(beam);
  wash.animate([{opacity:0},{opacity:1}],{duration:400,fill:'forwards'}); pitch.classList.add('rd-dim');
  const x=crosshair(); x.style.opacity=1;
- const T=centre(target); const P=path.map(centre); const Hh=T.pr.height, HUNT=3600, n=P.length;
+ const T=centre(target); const P=path.map(centre); const Hh=T.ph, HUNT=3600, n=P.length;
  beam.animate([{opacity:0,transform:'translateX(-50%)'},{opacity:1,transform:'translateX(-40%)',offset:.08},{opacity:1,transform:'translateX(40%)',offset:.5},{opacity:1,transform:'translateX(-20%)',offset:.85},{opacity:0,transform:'translateX(-25%)'}],{duration:HUNT,fill:'forwards',easing:'ease-in-out'});
  const kf=[{transform:`translate(${-60}px,${Hh*.35}px) scale(1.9) rotate(0deg)`,offset:0,easing:'cubic-bezier(.4,0,.2,1)'}];
  const step=.84/n;
@@ -2563,17 +2576,23 @@ async function runB(target,path,club,hit){
  await wait(650);
  x.animate([{opacity:1,transform:`translate(${T.x}px,${T.y}px) scale(.78) rotate(${(n+2)*45}deg)`},{opacity:0,transform:`translate(${T.x}px,${T.y}px) scale(1.6) rotate(${(n+2)*45}deg)`}],{duration:260,fill:'forwards'}); setTimeout(()=>x.remove(),270);
  beam.remove();
- await takeStamp(target,club,hit);
+ await takeStamp(target,club,who);
  wash.animate([{opacity:1},{opacity:0}],{duration:400,fill:'forwards'}); pitch.classList.remove('rd-dim','rd-b');
 }
-const RAIDS=[{t:2,path:[4,7,9,1],club:'Chelsea',hit:'Distin to Chelsea'},{t:1,path:[3,6,5,8],club:'Aston Villa',hit:'Finnan to Aston Villa'},{t:8,path:[10,7,9,5],club:'Liverpool',hit:'Nugent to Liverpool'}];
+const X='Club X';
+const RAIDS=[{t:2,path:[4,7,9,1],club:'Chelsea',who:'Sylvain Distin'},{t:1,path:[3,6,5,8],club:'Aston Villa',who:'Steve Finnan'},{t:8,path:[10,7,9,5],club:'Liverpool',who:'David Nugent'}];
+// while the crosshair hunts: the rumour (top line, second line); one of these each raid, never the same twice in a row
+const RUMOUR=[(c)=>[`${c} are rumoured`,`to be interested in one of ${X}'s players`],(c)=>[`${c} are circling`,`${X} with an eye on one of their stars`],(c)=>[`${c} make an enquiry`,`about a ${X} player`],(c)=>[`${c} scouts spotted`,`watching ${X} in pre-season`]];
+// when the badge lands: the deal
+const DEAL=[(c,p)=>[`${c} sign ${p}`,`from ${X} for an undisclosed fee`],(c,p)=>[`${p} joins ${c}`,`leaving ${X} on a permanent deal`],(c,p)=>[`${c} snap up ${p}`,`from ${X} in a late swoop`]];
 async function play(k){if(busy)return;busy=true;$('#play').disabled=true;$('#play3').disabled=true;reset();DONE=0;await wait(500);
  const list=k===3?RAIDS:[RAIDS[0]];
- for(const r of list){if(RM){DONE++;leaveEmpty(r.t,r.club);say(r.hit,r.club,DONE);continue;}await runB(r.t,r.path,r.club,r.hit);await wait(500);}
+ RI=0;for(const r of list){if(RM){DONE++;leaveEmpty(r.t,r.club);const [a,b]=DEAL[RI%DEAL.length](r.club,r.who);say(a,b,r.club,DONE);RI++;continue;}await runB(r.t,r.path,r.club,r.who);await wait(1800);RI++;}
  busy=false;$('#play').disabled=false;$('#play3').disabled=false;}
 function notes(){$('#notes').innerHTML=`<h2>What changed</h2><ol>
 <li><b>Yellow and black.</b> The crosshair is yellow with a thin black edge, so it stays sharp over gold cards and never looks like the amber fit ring. The sweep, the flashes on each player, the lock pulses and the target's glow are yellow to match.</li>
-<li><b>The bar talks through the hunt.</b> As the sweep starts, the Transfer News bar prints "Chelsea are looking for a new signing" with Chelsea's crest, the count dimmed. When the badge stamps down it swaps to "Distin to Chelsea" and the count goes to 1/3. A long line scrolls left from the words, the crest stays put.</li>
+<li><b>The bar talks through the hunt, on two lines.</b> As the sweep starts it prints a rumour with the buying club's crest, e.g. "CHELSEA ARE RUMOURED / to be interested in one of Club X's players", the count dimmed. When the badge stamps down it prints the deal, e.g. "CHELSEA SIGN SYLVAIN DISTIN / from Club X for an undisclosed fee", and the count goes up. The top line prints first, then the second; a line too long for the bar scrolls left from its words while the crest stays put.</li>
+<li><b>Variants.</b> Rumours: "are rumoured / to be interested in one of Club X's players", "are circling / Club X with an eye on one of their stars", "make an enquiry / about a Club X player", "scouts spotted / watching Club X in pre-season". Deals: "sign {player} / from Club X for an undisclosed fee", "{player} joins {club} / leaving Club X on a permanent deal", "snap up {player} / from Club X in a late swoop". Club X is whatever you named your club. Play the summer poach to see three different pairs.</li>
 <li><b>Longer.</b> The hunt runs 3.6 s instead of 2.4 s, the crosshair lingers a little longer on each player, and it holds on the target for 0.65 s after the lock instead of 0.2 s. About 7 s a player instead of 5.</li>
 <li>Everything else as live: the badge from the far touchline, the shock ring and the pitch kick, him pulled in, the empty TO shirt, the rating drop.</li></ol>
 <p>The same would play for the January raid on the transfer screen, with the bar instead of the hint line under the cards.</p>`;}
