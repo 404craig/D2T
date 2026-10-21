@@ -463,21 +463,21 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.click(".se-poach-sheet .se-poach-go"); await wait(2150);
   // Sweep and strike (Craig, 20 Oct): the crosshair hunts across the pitch in a layer inside it, the scan beam with it
   check(!!(await page.$(".se-pitch.rd-on .rd-fx .rd-x")) && !!(await page.$(".se-pitch .rd-fx .rd-beam")) && !!(await page.$(".se-pitch .rd-wash")), "the poach should hunt with the crosshair and the scan beam inside the pitch");
-  check(!!(await page.$(".se-ticker .se-tk-tag")) && /transfer news/i.test(await page.textContent(".se-ticker .se-tk-tag")), "the poach should open a Transfer news ticker");
+  check(!!(await page.$(".se-news .se-nb-tag")) && /transfer\s*news/i.test(await page.textContent(".se-news .se-nb-tag")), "the poach should open the Transfer News bar");
   await shot("35b-clx-poach-mid");
   const poached = await page.evaluate(() => JSON.stringify(window.D2T.game.eng().poached));
   check(await page.evaluate(() => { const G = window.D2T.game, e = G.eng(), f = window.D2TE.FORMATIONS[e.formation]; return e.poached.length === 3 && new Set(e.poached.map((x) => x.club)).size === 3 && e.poached.every((x) => f[x.slot][0] !== "GK" && x.club !== e.club && e.xi[x.slot] == null); }), "the poach should take 3 outfield players to 3 different clubs, leaving their shirts empty");
-  await page.waitForSelector(".se-poach-sheet.open", { timeout: 30000 }).catch(() => {});   // three takes of about 6.5 s each
+  await page.waitForSelector(".se-poach-sheet.open", { timeout: 45000 }).catch(() => {});   // three takes of about 7.5 s each, 1.8 s between
   await wait(500);
   check(await page.$$eval(".se-slots .se-empty-to", (n) => n.length) === 3 && /^To /i.test(await page.textContent(".se-slots .se-empty-to .se-to")), "three empty shirts should read TO {CLUB}");
-  check(await page.evaluate(() => { const e = window.D2T.game.eng(), t = document.querySelector(".se-ticker .se-tk-item"), last = e.poached[2]; return !!t && t.textContent === `${last.name} joins ${window.D2T.game.S().clubs[last.club].name}`; }), "the ticker should carry the latest move");
-  check(await page.evaluate(() => { const t = document.querySelector(".se-ticker").getBoundingClientRect(), p = document.querySelector(".se-pitch").getBoundingClientRect(), b = document.querySelector(".actionbar").getBoundingClientRect(); return t.top >= p.bottom && t.bottom <= b.top && Math.abs((t.top + t.bottom) / 2 - (p.bottom + b.top) / 2) < 3; }), "the ticker should sit centred between the pitch and the bar");
+  check(await page.evaluate(() => { const e = window.D2T.game.eng(), t = document.querySelector(".se-news .se-nb-text"), last = e.poached[2], txt = t ? t.textContent.replace(/\u00a0/g, " ").toLowerCase() : ""; const sur = last.name.split(" ").slice(1).join(" ") || last.name; return txt.includes(window.D2T.game.S().clubs[last.club].name.toLowerCase()) && txt.includes(sur.toLowerCase()) && /3\/3/.test(document.querySelector(".se-nb-count").textContent); }), "the news bar should carry the last deal and the count 3/3");
+  check(await page.evaluate(() => { const t = document.querySelector(".se-news").getBoundingClientRect(), p = document.querySelector(".se-pitch").getBoundingClientRect(), b = document.querySelector(".actionbar").getBoundingClientRect(); return t.top >= p.bottom && t.bottom <= b.top && Math.abs((t.top + t.bottom) / 2 - (p.bottom + b.top) / 2) < 3; }), "the news bar should sit centred between the pitch and the bar");
   check(/Three players gone/.test(await page.textContent(".se-poach-sheet")) && await page.$$eval(".se-poach-sheet li", (n) => n.length) === 3, "the poach summary should list the three players");
   await shot("35c-clx-poach-summary");
   await page.reload(); await expectScreen("intro"); await page.click(".fr-skip", { force: true }); await expectScreen("home"); await wait(600);
   await page.evaluate(() => window.D2T.go("squad")); await expectScreen("squad"); await wait(2400);
   check(!(await page.$(".se-pc-rival")) && !(await page.$(".rd-fx")) && await page.evaluate((p) => JSON.stringify(window.D2T.game.eng().poached) === p, poached), "a refresh replayed or rerolled the poach");
-  check(await page.$$eval(".se-slots .se-empty-to", (n) => n.length) === 3 && /joins/i.test(await page.textContent(".se-ticker .se-tk-item")), "after a refresh the empty shirts and the ticker should stay");
+  check(await page.$$eval(".se-slots .se-empty-to", (n) => n.length) === 3 && (await page.textContent(".se-news .se-nb-text")).trim().length > 0, "after a refresh the empty shirts and the news bar should stay");
   check(!!(await page.$(".se-poach-sheet.open")), "after a refresh the unseen summary should come back");
   await page.click(".se-poach-go"); await expectScreen("transfer");
   check(await page.evaluate(() => { const e = window.D2T.game.eng(); return e.phase === "window" && e.rolls[0].kind === "pre" && e.xi.filter((x) => x == null).length === 3; }), "Continue should go on to the Summer window with three empty shirts");

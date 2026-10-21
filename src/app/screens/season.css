@@ -417,16 +417,24 @@
 .se-slot.se-best .se-empty-to .se-to { color: var(--se-text); }
 .se-poaching .se-slots, .se-poaching .se-formlink { pointer-events: none; }
 .se-poach-fx { position: absolute; inset: 0; z-index: 40; pointer-events: none; }
-.se-pc-rival { position: absolute; width: 62px; height: 62px; margin: -31px 0 0 -31px; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(0,0,0,.6), 0 0 0 3px rgba(255,255,255,.25); }
+.se-pc-rival { position: absolute; width: 62px; height: 62px; margin: -31px 0 0 -31px; border-radius: 50%; background: #FFD500; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(0,0,0,.6), 0 0 0 3px #0A0A0A, 0 0 0 5px rgba(255,213,0,.35); }
+.se-pc-rival.rd-dark { background: #0A0A0A; box-shadow: 0 8px 24px rgba(0,0,0,.6), 0 0 0 3px #FFD500; }   /* a mostly yellow crest (clubs.json darkDisc) */
 .se-pc-rival img { width: 44px; height: 44px; object-fit: contain; }
 .se-pc-line { position: absolute; width: 3px; border-radius: 2px; background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.3)); transform-origin: 50% 0; }
 /* the Transfer News bar, centred in the space between the pitch and the bottom bar: the pill, then one headline */
-.se-ticker { position: absolute; left: 0; right: 0; top: 0; z-index: 6; height: 34px; display: flex; align-items: center; background: #12F06C; color: #00170A; overflow: hidden;
-  font: 900 italic 14px/1 'Exo 2', sans-serif; text-transform: uppercase; white-space: nowrap; }
-.se-tk-tag { position: relative; z-index: 2; flex: none; margin-left: 10px; padding: 5px 8px 4px; border-radius: 4px; background: #00170A; color: #12F06C; font-size: 11px; letter-spacing: .06em; }
-.se-tk-view { position: relative; flex: 1 1 auto; min-width: 0; height: 100%; overflow: hidden; }
-.se-tk-item { position: absolute; left: 0; top: 0; height: 100%; display: flex; align-items: center; padding-left: 10px; white-space: nowrap; }
-.se-has-ticker .se-gone { visibility: hidden; }
+/* the Transfer News bar (Craig, 21 Oct; deadline-day yellow and black, SE.newsBar): centred between the pitch and the
+   bottom bar on the squad (placed by squad.js), in the hint line's place on the transfer screen */
+.se-news { position: absolute; left: 0; right: 0; top: 0; z-index: 6; height: 50px; display: flex; align-items: stretch; background: #FFD500; color: #0A0A0A; overflow: hidden; }
+.se-nb-tag { flex: none; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 2px; padding: 0 20px 0 14px; background: #0A0A0A; color: #FFD500; font: 900 italic 11px/1 var(--font); letter-spacing: .12em; text-transform: uppercase; clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%); }
+.se-nb-view { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; padding-left: 8px; overflow: hidden; }
+.se-nb-text { display: block; white-space: nowrap; font: 900 italic 11px/1.25 var(--font); text-transform: uppercase; letter-spacing: .08em; max-width: 100%; }
+.se-nb-text .w { white-space: nowrap; }
+.se-nb-text i { font-style: inherit; opacity: 0; }
+.se-nb-text i.on { opacity: 1; }
+.se-nb-count { flex: none; display: flex; align-items: center; padding: 0 10px; font: 900 italic 13px/1 var(--font); }
+.se-nb-count.is-dim { opacity: .35; }
+.se-news.se-news-flow { position: relative; z-index: 2; margin: 6px 0 4px; }
+.se-has-news .se-gone { visibility: hidden; }
 /* the summary sheet */
 .se-poach-sum .se-note { margin: 0 0 10px; }
 .se-poach-sum ul { margin: 0 0 14px; padding: 0; list-style: none; }
@@ -521,13 +529,17 @@
 .rd-fx { position: absolute; inset: 0; z-index: 50; pointer-events: none; overflow: visible; }
 .rd-x { position: absolute; left: 0; top: 0; width: 96px; height: 96px; margin: -48px 0 0 -48px; opacity: 0; will-change: transform; }
 .rd-x svg { width: 100%; height: 100%; display: block; overflow: visible; }
-.rd-x .ring { fill: none; stroke: #FF3B4A; stroke-width: 2.2; stroke-dasharray: 6 6; filter: drop-shadow(0 0 4px rgba(255,59,74,.8)); }
-.rd-x .tick { stroke: #FF3B4A; stroke-width: 2.4; stroke-linecap: round; filter: drop-shadow(0 0 4px rgba(255,59,74,.8)); }
-.rd-x .dot { fill: #FF3B4A; }
-.rd-x .brk { fill: none; stroke: #FF3B4A; stroke-width: 2.6; stroke-linecap: round; opacity: 0; }
-.rd-pulse { position: absolute; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; border: 2px solid #FF3B4A; opacity: 0; }
-.rd-pulse.rd-white { border-color: #fff; }
-.rd-tint .se-cardwrap .d2c { filter: drop-shadow(0 0 2px #FF3B4A) drop-shadow(0 0 8px rgba(255,59,74,.7)); }
+.rd-x .ring { fill: none; stroke-dasharray: 6 6; }
+.rd-x .rd-edge .ring, .rd-x .rd-edge .tick, .rd-x .rd-edge .brk { stroke: #0A0A0A; stroke-width: 4.8; stroke-linecap: round; fill: none; }
+.rd-x .rd-edge .dot { fill: #0A0A0A; }
+.rd-x .rd-fg .ring { stroke: #FFD500; stroke-width: 2.2; filter: drop-shadow(0 0 3px rgba(255,213,0,.55)); }
+.rd-x .rd-fg .tick { stroke: #FFD500; stroke-width: 2.4; stroke-linecap: round; filter: drop-shadow(0 0 3px rgba(255,213,0,.55)); }
+.rd-x .rd-fg .dot { fill: #FFD500; }
+.rd-x .brk { fill: none; stroke-width: 2.6; stroke-linecap: round; opacity: 0; }
+.rd-x .rd-fg .brk { stroke: #FFD500; filter: drop-shadow(0 0 3px rgba(255,213,0,.55)); }
+.rd-pulse { position: absolute; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; border: 2px solid #FFD500; box-shadow: 0 0 0 1.5px #0A0A0A, inset 0 0 0 1.5px #0A0A0A; opacity: 0; }
+.rd-pulse.rd-white { border-color: #fff; box-shadow: none; }
+.rd-tint .se-cardwrap .d2c { filter: drop-shadow(0 0 1px #0A0A0A) drop-shadow(0 0 2px #FFD500) drop-shadow(0 0 9px rgba(255,213,0,.75)); }
 .rd-dim .se-slot:not(.rd-tint) { transition: filter .3s; }
-.rd-beam { position: absolute; left: -10%; top: 0; width: 120%; height: 100%; opacity: 0; background: linear-gradient(90deg, transparent 0%, rgba(255,59,74,0) 47%, rgba(255,59,74,.14) 50%, rgba(255,59,74,0) 53%, transparent 100%); filter: blur(6px); }
+.rd-beam { position: absolute; left: -10%; top: 0; width: 120%; height: 100%; opacity: 0; background: linear-gradient(90deg, transparent 0%, rgba(255,213,0,0) 47%, rgba(255,213,0,.16) 50%, rgba(255,213,0,0) 53%, transparent 100%); filter: blur(6px); }
 .rd-busy .tr-pitch, .rd-busy .sp-stage { pointer-events: none; }
