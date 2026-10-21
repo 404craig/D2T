@@ -693,8 +693,11 @@ function signPreview(st, S, cardId, legends) {
 // rated above the man in it, not seen this run. Zero means nobody better (the shirt is red on the sheet).
 function scoutPool(st, S, slot) {
   const pos = FORMATIONS[st.formation][slot][0], holder = st.xi[slot] != null ? playerOf(S, st.xi[slot], S.legends) : null, hr = holder ? holder.r : 0;
-  const pool = cardPool(S, st).filter(p => fitOf(p, pos) === "green" && p.lv < 3);   // gold at most: no purple or legend (21 Oct)
-  return { pos, hr, better: pool.filter(p => p.r > hr), below: pool.filter(p => p.r <= hr).sort((a, b) => b.r - a.r || b.a - a.a) };
+  // gold at most (21 Oct); a purple only when no gold or lower is better than the man in the shirt (Craig, 21 Oct); never a legend
+  const all = cardPool(S, st).filter(p => fitOf(p, pos) === "green"), pool = all.filter(p => p.lv < 3);
+  let better = pool.filter(p => p.r > hr);
+  if (!better.length) better = all.filter(p => p.lv === 3 && p.r > hr);
+  return { pos, hr, better, below: pool.filter(p => p.r <= hr).sort((a, b) => b.r - a.r || b.a - a.a) };
 }
 function scoutInfo(st, S) {
   return FORMATIONS[st.formation].map((_, slot) => { const q = scoutPool(st, S, slot); return { slot, pos: q.pos, better: q.better.length, best: q.better.length ? null : (q.below[0] ? q.below[0].id : null) }; });
@@ -719,7 +722,7 @@ function scout(st, S, slot) {
 // Scout a club (Craig, 20 Oct): the clubs of the season with cards still to come (never your own), by their final
 // position, and the spend of 2 respins on one of them: three of its cards drawn by rating like a roll (never legend cards).
 function scoutDate(st) { return st.fixtures && st.gw > 0 && st.fixtures[st.gw - 1] ? st.fixtures[st.gw - 1].date : "0000-00-00"; }
-function scoutClubPool(st, S, c) { const d = scoutDate(st); return cardPool(S, st).filter(p => clubAt(p, d) === c && p.c != null && p.lv < 3); }
+function scoutClubPool(st, S, c) { const d = scoutDate(st), all = cardPool(S, st).filter(p => clubAt(p, d) === c && p.c != null), gold = all.filter(p => p.lv < 3); return gold.length ? gold : all.filter(p => p.lv === 3); }   // purples only once the club's golds and lower are gone
 function scoutClubs(st, S) {
   const d = scoutDate(st), count = new Map();
   for (const p of cardPool(S, st)) { const c = clubAt(p, d); if (c == null || c === st.club) continue; count.set(c, (count.get(c) || 0) + 1); }
