@@ -584,13 +584,30 @@ function startSeason(st, S) {
 /* ---------- the roll ---------- */
 function currentWindow(st) { return st.rolls[st.rollIx] || null; }
 function inWindow(st) { const w = currentWindow(st); return !!(w && w.gw === st.gw && st.rollStep < w.n); }
-function cardPool(S, st) {
+// Never two of the same player (Craig, 21 Oct): a card is never served if a player with the exact same name is already
+// yours, whatever the season or level (the legend Mo Salah bars every Mo Salah season card and the other way round),
+// and no roll holds two cards of one name. Names compared trimmed with spaces collapsed, case kept.
+function nameKey(p) { return String((p && p.n) || "").trim().replace(/\s+/g, " "); }
+// "yours": the XI, your club's real squad (the bench while it exists; its ids are barred anyway), everyone poached or
+// raided from you this season (so he can't come straight back), and anyone you signed this run
+function yourNames(st, S) {
+  const names = new Set();
+  const add = (id) => { if (id == null) return; const p = playerOf(S, id, S.legends); if (p) names.add(nameKey(p)); };
+  for (const id of st.xi || []) add(id);
+  for (const p of squadOf(S, st.club)) names.add(nameKey(p));
+  for (const x of st.poached || []) add(x.id);
+  for (const x of st.signed || []) add(x.id);
+  return names;
+}
+const NAME_TAG = "n:";
+function cardPool(S, st, names) {
   const seen = new Set(st.seen);
+  names = names || yourNames(st, S);
   // In a Club X career a season can hold more than one card of the same man (cards from any season after 2025/26):
   // never offer another card of someone already in your XI.
   let mine = null;
   if (st.career > 1) { mine = new Set(); for (const id of st.xi.concat((st.poached || []).map(x => x.id))) { const p = playerOf(S, id, S.legends); if (p && p.k != null) mine.add(p.k); } }
-  return S.players.filter(p => (p.a || 0) >= RULES.minApps && !seen.has(p.id) && !(mine && p.k != null && mine.has(p.k)));
+  return S.players.filter(p => (p.a || 0) >= RULES.minApps && !seen.has(p.id) && !(mine && p.k != null && mine.has(p.k)) && !names.has(nameKey(p)));
 }
 // One card from a level's pool: every player as likely as the next, except those offered in recent runs of this
 // club-season (st.recent), who come up at their recent weight, and gold, purple and legend cards, which come up by
@@ -607,17 +624,19 @@ function drawCard(r, S, st, legends, taken, broad, fit, force) {
   const odds = st.career > 1 ? RULES.levelOddsCareer : RULES.levelOdds;
   const drawn = (() => { let x = r(); for (let i = 0; i < 5; i++) { x -= odds[i]; if (x <= 0) return i; } return 0; })();
   const lv = force != null ? force : drawn;
-  const pool = cardPool(S, st).filter(p => !taken.has(p.id) && (!broad || broadOf(p) === broad) && (!fit || fit(p)));
+  const names = yourNames(st, S), fresh = (p) => !taken.has(p.id) && !taken.has(NAME_TAG + nameKey(p));
+  const pool = cardPool(S, st, names).filter(p => fresh(p) && (!broad || broadOf(p) === broad) && (!fit || fit(p)));
+  const took = (p) => { taken.add(NAME_TAG + nameKey(p)); return p.id; };   // the roll's other cards never repeat his name
   if (lv === 4 && legends && legends.length) {
-    const lp = legends.filter(l => !st.seen.includes(l.id) && !taken.has(l.id) && (!broad || broadOf(l) === broad) && (!fit || fit(l)));
-    if (lp.length) return pickCard(r, st, lp).id;
+    const lp = legends.filter(l => !st.seen.includes(l.id) && fresh(l) && !names.has(nameKey(l)) && (!broad || broadOf(l) === broad) && (!fit || fit(l)));
+    if (lp.length) return took(pickCard(r, st, lp));
   }
   // Best level at or below the one drawn that still has players; then above.
   for (let want = Math.min(lv, 3); want >= 0; want--) {
     const at = pool.filter(p => p.lv === want);
-    if (at.length) return pickCard(r, st, at).id;
+    if (at.length) return took(pickCard(r, st, at));
   }
-  return pool.length ? pickCard(r, st, pool).id : null;
+  return pool.length ? took(pickCard(r, st, pool)) : null;
 }
 // every card put on the table in this run, for the next run's `recent`
 function noteOffered(st, cards) { st.offered = st.offered || []; for (const id of cards) if (!st.offered.includes(id)) st.offered.push(id); }
@@ -686,8 +705,9 @@ function scout(st, S, slot) {
   for (const id of st.roll.cards) if (!st.seen.includes(id)) st.seen.push(id);
   const spin = st.roll.spin + 1, r = stream(st.seed, "scout", st.rollIx, st.rollStep, spin), cards = [], tags = [], taken = new Set();
   const w = (p) => Math.pow(2, (p.r - RULES.elite.mid) / RULES.elite.step) * (st.recent && st.recent[p.id] != null ? st.recent[p.id] : 1);
-  while (cards.length < 3 && taken.size < q.better.length) { const p = pickWeighted(r, q.better.filter(x => !taken.has(x.id)), w); taken.add(p.id); cards.push(p.id); tags.push("better"); }
-  for (const p of q.below) { if (cards.length >= 3) break; cards.push(p.id); tags.push("next"); }
+  const names = new Set();
+  while (cards.length < 3) { const left = q.better.filter(x => !taken.has(x.id) && !names.has(nameKey(x))); if (!left.length) break; const p = pickWeighted(r, left, w); taken.add(p.id); names.add(nameKey(p)); cards.push(p.id); tags.push("better"); }
+  for (const p of q.below) { if (cards.length >= 3) break; if (names.has(nameKey(p))) continue; names.add(nameKey(p)); cards.push(p.id); tags.push("next"); }
   st.roll = Object.assign({}, st.roll, { spin, cards, scout: slot, tags });
   noteOffered(st, cards);
   st.log.push(["scout", slot]);
@@ -711,7 +731,8 @@ function scoutClub(st, S, c) {
   for (const id of st.roll.cards) if (!st.seen.includes(id)) st.seen.push(id);
   const spin = st.roll.spin + 1, r = stream(st.seed, "scoutclub", st.rollIx, st.rollStep, spin), cards = [], taken = new Set();
   const w = (p) => eliteWeight(p) * (st.recent && st.recent[p.id] != null ? st.recent[p.id] : 1);
-  while (cards.length < 3 && taken.size < pool.length) { const p = pickWeighted(r, pool.filter(x => !taken.has(x.id)), w); taken.add(p.id); cards.push(p.id); }
+  const names = new Set();
+  while (cards.length < 3) { const left = pool.filter(x => !taken.has(x.id) && !names.has(nameKey(x))); if (!left.length) break; const p = pickWeighted(r, left, w); taken.add(p.id); names.add(nameKey(p)); cards.push(p.id); }
   st.roll = Object.assign({}, st.roll, { spin, cards, scout: null, scoutClub: c, tags: null });
   noteOffered(st, cards);
   st.log.push(["scoutclub", c]);
@@ -1027,7 +1048,7 @@ function seasonSummary(S, st) {
 
 const API = {
   RULES, LEVELS, POS, FIT, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
-  fitOf, effRating, isGK, canPlay, indexSeason, playerOf, clubAt, xiStrength, userStrength, plainStrength, starRating, settledRating, clubXI, clubStrength,
+  fitOf, effRating, isGK, canPlay, indexSeason, playerOf, clubAt, nameKey, yourNames, xiStrength, userStrength, plainStrength, starRating, settledRating, clubXI, clubStrength,
   TACTIC_NAMES, tacticOf, tacticLines, setTactic, scoutInfo, scout, scoutClubs, scoutClub, legendRoll, januaryRaid, agedRating,
   schedule, fixturesOf, recentWeights, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
   poach, joinersOf, fillHoles, draftOrder, draftSlot, draftFormation, draftPick, draftFits, listsPos, DRAFT_MODES, carryIn, simResults,

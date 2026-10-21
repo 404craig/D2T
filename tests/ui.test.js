@@ -497,7 +497,8 @@ fs.mkdirSync(OUT, { recursive: true });
     const S = G.S(); return S.season === "2026/27" && S.clubs.length === 20 && S.matches.length === 380 && G.lineup().xi.every(Boolean) && G.historyTable().length === 20;
   }), "after 2025/26 the career should go on into a forecast 2026/27");
   await page.evaluate(() => window.D2T.go("table")); await wait(800);
-  check(/Forecast table/.test(await page.textContent(".se-tl-a")), "a forecast season's table should say it is a forecast");
+  // season 2 on (Craig, 21 Oct): last season's table as you finished it first, the note saying this one is a forecast
+  check(/Final table 2025\/26/.test(await page.textContent(".se-tl-a")) && /forecast/i.test(await page.textContent(".se-fin")) && await page.evaluate(() => document.querySelectorAll(".se-tr:not(.se-th)").length === 20 && !!document.querySelector(".se-tr.se-me")), "a forecast season's table should open on last season's final table and say this one is a forecast");
 
   // ---------- Daily challenge: today's club for everyone, its own save, as many goes as you like ----------
   await page.evaluate(() => { const G = window.D2T.game; G.newRun("classic"); G.chooseClub(G.offer()[0].key); window.D2T.state.run.tableSeen = true; window.D2T.save(); window.D2T.go("home"); }); await wait(900);

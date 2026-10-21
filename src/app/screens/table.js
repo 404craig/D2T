@@ -12,20 +12,24 @@
       const relegated = mine.pos > zone, dream = D2T.game.mode() !== 'classic', x = D2T.game.mode() === 'clubx', replaced = x ? D2T.game.S().clubs[D2T.game.eng().club].name : '';
       // a Club X career (Craig, 13 Oct): later seasons bring last season's XI; after 2025/26 the table is a forecast
       const cn = x ? D2T.game.career().n : 1, sim = D2T.game.isSim(), xn = D2T.esc(D2T.game.xName());
+      // Club X from season 2 (Craig, 21 Oct): last season's final table as you finished it, then NEW SEASON and the
+      // table rearranges to the new season's clubs on 0 (a career saved before build 139 has no lastTable: the old reveal)
+      const last = x && cn > 1 && D2T.game.career().lastTable && D2T.game.career().lastTable.rows ? D2T.game.career().lastTable : null;
+      const lastRows = last ? last.rows.map((r) => Object.assign({}, r, { name: r.me ? me : r.name, crest: (D2T.game.club(r.me ? me : r.name) || {}).crest })) : null;
       root.appendChild(D2T.topbar());
       const body = D2T.h(`<div class="screen-body se-table-screen">
         <div class="se-clubhead">
           <img class="se-clubcrest" src="${club.crest}" alt="">
           <div class="se-clubtext"><div class="se-kicker">Your club</div><h1 class="se-h1">${D2T.esc(club.name)}</h1><div class="se-season">${data.season}</div></div>
         </div>
-        <div class="se-tablelabel"><span class="se-tl-a">${sim ? 'Forecast table' : 'Real final table'} ${data.season}</span><span class="se-tl-b" aria-live="polite"></span></div>
-        <div class="se-table" role="table" aria-label="Premier League ${data.season}">${SE.tableHead()}
-          ${data.table.map((r) => SE.rowHTML(r, me, 'se-hid' + (r.pos === zone ? ' se-zone' : ''))).join('')}
+        <div class="se-tablelabel"><span class="se-tl-a">${last ? `Final table ${D2T.esc(last.season)}` : `${sim ? 'Forecast table' : 'Real final table'} ${data.season}`}</span><span class="se-tl-b" aria-live="polite"></span></div>
+        <div class="se-table" role="table" aria-label="Premier League ${last ? last.season : data.season}">${SE.tableHead()}
+          ${last ? lastRows.map((r) => SE.rowHTML(r, me, r.pos === zone ? 'se-zone' : '')).join('') : data.table.map((r) => SE.rowHTML(r, me, 'se-hid' + (r.pos === zone ? ' se-zone' : ''))).join('')}
         </div>
         <p class="se-note se-fin">${x ? (sim ? `No real results exist after 2025/26, so this is a forecast: the match model plays out everyone else's games. Season ${cn} of your career. Win the league.` : cn > 1 ? `Season ${cn} of your career. ${xn} takes the place of ${D2T.esc(replaced)}, who finished ${D2T.ordinal(mine.pos)} on ${mine.pts} points, with last season's XI. Win the league.` : `${xn} takes the place of ${D2T.esc(replaced)}, who finished ${D2T.ordinal(mine.pos)} on ${mine.pts} points. Your dream: win the league.`) : ''}${x ? '' : `${D2T.esc(club.name)} finished ${D2T.ordinal(mine.pos)} on ${mine.pts} points${relegated ? ' and went down' : ''}. ${dream ? (mine.pos === 1 ? 'Your dream: win it again.' : `Your dream: ${D2T.ordinal(D2T.game.target(mine.pos))} or better.`) : 'Now it is your turn.'}`}</p>
         <div class="se-pad"></div>
       </div>`);
-      const flash = D2T.h(`<div class="se-newseason" aria-hidden="true"><span>${sim ? 'Beat the<br>forecast' : 'Rewrite<br>history'}</span></div>`);   // two lines (Craig, 12 Oct), not "New season"
+      const flash = D2T.h(`<div class="se-newseason" aria-hidden="true"><span>${last ? 'New<br>season' : sim ? 'Beat the<br>forecast' : 'Rewrite<br>history'}</span></div>`);   // two lines (Craig, 12 Oct)
       // home, a greyed back (nothing to go back to), Skip then Continue (Craig, 13 Oct)
       const bar = D2T.h(SE.bar({ main: SE.mainBtn('Skip', 'se-btn-ghost') }));
       root.append(body, flash, bar);
@@ -46,9 +50,9 @@
         });
         }
         body.classList.add('se-reset');
-        body.querySelector('.se-tl-a').textContent = `${data.season} · ${sim ? 'Beat the forecast' : 'Rewrite history'}`;
+        body.querySelector('.se-tl-a').textContent = last ? `${data.season} · New season` : `${data.season} · ${sim ? 'Beat the forecast' : 'Rewrite history'}`;
         body.querySelector('.se-tl-b').textContent = 'Everyone starts on 0.';
-        body.querySelector('.se-fin').textContent = x ? (sim ? `The forecast had ${D2T.game.xName()} ${D2T.ordinal(mine.pos)}. Everyone starts on 0. Win the league.` : cn > 1 ? `${replaced} finished ${D2T.ordinal(mine.pos)}. ${D2T.game.xName()} brings last season's XI and needs the title.` : `${replaced} finished ${D2T.ordinal(mine.pos)}. ${D2T.game.xName()} starts from nothing and needs the title.`) : dream && mine.pos === 1 ? `Real finish: champions on ${mine.pts} points. Do it again.` : `Real finish: ${D2T.ordinal(mine.pos)}, ${mine.pts} points. Beat it.`;
+        body.querySelector('.se-fin').textContent = last ? (sim ? `No real results exist after 2025/26, so this is a forecast. Season ${cn} of your career. ${D2T.game.xName()} brings last season's XI and needs the title.` : `Season ${cn} of your career. ${D2T.game.xName()} brings last season's XI and needs the title.`) : x ? (sim ? `The forecast had ${D2T.game.xName()} ${D2T.ordinal(mine.pos)}. Everyone starts on 0. Win the league.` : cn > 1 ? `${replaced} finished ${D2T.ordinal(mine.pos)}. ${D2T.game.xName()} brings last season's XI and needs the title.` : `${replaced} finished ${D2T.ordinal(mine.pos)}. ${D2T.game.xName()} starts from nothing and needs the title.`) : dream && mine.pos === 1 ? `Real finish: champions on ${mine.pts} points. Do it again.` : `Real finish: ${D2T.ordinal(mine.pos)}, ${mine.pts} points. Beat it.`;
         btn.textContent = 'Continue'; btn.classList.remove('se-btn-ghost');
         const myEl = tbl.querySelector('.se-me');
         if (myEl && rebuild) { const sr = body.getBoundingClientRect(), r = myEl.getBoundingClientRect(); body.scrollTop += r.top - sr.top - body.clientHeight * 0.45; }
@@ -63,6 +67,7 @@
         const g = ++gen, ok = () => alive && g === gen;
         const els = rowsEl();
         const stopAt = els.findIndex((el) => el.dataset.name === me);
+        if (last) { await runLast(ok); return; }
         if (D2T.reduced()) {
           els.forEach((el) => el.classList.remove('se-hid'));
           els[stopAt].classList.add('se-landed');
@@ -119,6 +124,52 @@
         sorted.forEach((el, i) => { tbl.appendChild(el); el.classList.remove('se-zone', 'se-build', 'se-thump'); el.style.animationDelay = ''; el.querySelector('.se-pos').textContent = i + 1; if (i === zone - 1) el.classList.add('se-zone'); });
         SE.flip(sorted, before, { duration: 900, stagger: 18, easing: 'cubic-bezier(.65,0,.25,1)' });
         cam.to(myEl);
+        body.querySelector('.se-tl-b').textContent = 'Everyone starts on 0.';
+        await D2T.wait(1300); if (!ok()) return;
+        flash.classList.remove('se-go');
+        finish(false);
+      };
+      // Season 2 on: last season's table stands (the camera on your row, 1.5 s), NEW SEASON, every number rolls to 0,
+      // then the clubs that went down fade out, the new season's come in from the bottom and all 20 settle in
+      // alphabetical order (rows slide to their places, about 600 ms)
+      const runLast = async (ok) => {
+        if (D2T.reduced()) { finish(true); return; }
+        const els = rowsEl(), myEl = els.find((el) => el.dataset.name === me);
+        body.querySelector('.se-fin').classList.add('se-in');
+        await D2T.wait(300); if (!ok()) return;
+        cam = SE.follow(body); if (myEl) cam.to(myEl);
+        await D2T.wait(1500); if (!ok()) return;
+        flash.classList.add('se-go');
+        window.D2TSound && window.D2TSound.play('tableReset');
+        body.querySelector('.se-tl-a').textContent = `${data.season} · New season`;
+        const nums = [...tbl.querySelectorAll('.se-n')], from = nums.map((n) => +n.dataset.v);
+        const t0 = performance.now(), dur = 1300;
+        await new Promise((res) => {
+          const step = (now) => {
+            if (!ok()) return res();
+            const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+            nums.forEach((n, i) => { const v = Math.round(from[i] * (1 - e)); if (n.textContent !== String(v)) n.textContent = v; });
+            if (p < 1) requestAnimationFrame(step); else res();
+          };
+          requestAnimationFrame(step);
+        });
+        if (!ok()) return;
+        body.classList.add('se-reset');
+        await D2T.wait(350); if (!ok()) return;
+        // who goes, who comes
+        const now = new Set(data.table.map((r) => r.name)), was = new Set(els.map((el) => el.dataset.name));
+        const leaving = els.filter((el) => !now.has(el.dataset.name)), arriving = data.table.filter((r) => !was.has(r.name));
+        leaving.forEach((el) => el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 320, easing: 'ease-in', fill: 'forwards' }));
+        await D2T.wait(340); if (!ok()) return;
+        const before = SE.rects(els);
+        leaving.forEach((el) => el.remove());
+        const staying = els.filter((el) => now.has(el.dataset.name));
+        const fresh = arriving.map((r) => D2T.h(SE.rowHTML(Object.assign({}, r, { p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, pts: 0 }), me, '')));
+        const all = staying.concat(fresh).sort((a, b) => a.dataset.name.localeCompare(b.dataset.name));
+        all.forEach((el, i) => { tbl.appendChild(el); el.classList.remove('se-zone', 'se-build', 'se-thump'); el.style.animationDelay = ''; el.querySelector('.se-pos').textContent = i + 1; if (i === zone - 1) el.classList.add('se-zone'); if (el.dataset.name === me) el.classList.add('se-landed'); });
+        SE.flip(staying, before, { duration: 600, stagger: 12, easing: 'cubic-bezier(.2,.8,.2,1)' });
+        fresh.forEach((el, k) => el.animate([{ opacity: 0, transform: 'translateY(40px)' }, { opacity: 1, transform: 'none' }], { duration: 520, delay: 120 + k * 60, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' }));
+        const mine2 = tbl.querySelector('.se-me'); if (mine2) cam.to(mine2);
         body.querySelector('.se-tl-b').textContent = 'Everyone starts on 0.';
         await D2T.wait(1300); if (!ok()) return;
         flash.classList.remove('se-go');
