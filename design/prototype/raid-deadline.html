@@ -2373,6 +2373,16 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 
 .nA .hl img{display:none}
 .nA .v{padding-left:8px}
+
+.nA .tw{display:flex;align-items:center;overflow:visible}
+.nA .tw .tx{display:block;white-space:normal;text-wrap:balance;font:900 italic 11px/1.25 'Exo 2';text-transform:uppercase;letter-spacing:.08em;transform:none!important;max-width:100%}
+.nA .tw .tx .w{white-space:nowrap}
+.nA .tw .tx i{font-style:inherit;opacity:0}
+.nA .tw .tx i.on{opacity:1}
+
+.nA .tw{justify-content:flex-start!important}
+.nA .tw .tx{text-wrap:wrap;white-space:nowrap}
+.nA .tw{flex-direction:column!important;align-items:flex-start!important;justify-content:center!important}
 </style></head><body class="pg">
 <div class="wrap">
 <h1>Raid: deadline day</h1>
@@ -2448,7 +2458,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
       <span class="d2c-tab">LW</span><div class="d2c-rim"></div><div class="d2c-face"><span class="d2c-tex"></span><span class="d2c-hi"></span><span class="d2c-holo"></span>
       <div class="d2c-body"><div class="d2c-mid"><span class="d2c-ovr">67</span><span class="d2c-side"><img class="d2c-crest" src="raid2-fx/de262a9eb6d9.png" alt=""><img class="d2c-flag" src="raid2-fx/8418cfd4a835.png" alt="Nigeria"></span></div>
       <span class="d2c-first d2c-fit" data-fit="1">John</span><span class="d2c-last" data-fit="1">Utaka</span></div></div></div></div></div></div><button class="se-formlink"</div></div></div>
-  <div class="se-gap"><div class="nb" id="bar"><div class="nA"><span class="tag"><b>Transfer</b><b>News</b></span><span class="v"><span class="hl"><img id="bcrest" alt=""><span class="tw"><span class="ln l1"><span class="tx" id="btx"></span></span><span class="ln l2"><span class="tx" id="btx2"></span></span></span></span></span><span class="ct" id="bct">0/3</span></div></div></div>
+  <div class="se-gap"><div class="nb" id="bar"><div class="nA"><span class="tag"><b>Transfer</b><b>News</b></span><span class="v"><span class="hl"><img id="bcrest" alt=""><span class="tw"><span class="tx" id="btx"></span></span></span></span><span class="ct" id="bct">0/3</span></div></div></div>
  </div>
  <footer class="actionbar game-bar se-nextbar"><button class="icon-btn se-home bar-home" type="button" aria-label="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"></path></svg></button><button class="icon-btn se-off bar-mid" type="button" disabled="" aria-hidden="true" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg></button><button class="btn se-btn se-wide bar-main se-play" type="button">Summer window</button></footer>
 </main></div></div>
@@ -2472,18 +2482,20 @@ function reset(){bt.forEach(clearTimeout);bt=[];$('#bar').classList.remove('on')
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let bt=[];const BT=(f,ms)=>bt.push(setTimeout(f,ms));
 // the bar: the crest stays put, the words print left to right and, if long, scroll left with the newest letter, fading out beside the crest
-// the bar: the crest stays put; the top line prints, then the second; a line too long scrolls left from its words, fading beside the crest
-function say(top,bot,club,count,dim){bt.forEach(clearTimeout);bt=[];const bar=$('#bar'),img=$('#bcrest');
- bar.classList.add('on');img.src=D.crests[club];$('#bct').textContent=count+'/3';$('#bct').classList.toggle('dim',!!dim);
- const L=[[bar.querySelector('.l1'),$('#btx'),top],[bar.querySelector('.l2'),$('#btx2'),bot]];
- const set=(ln,tx,x,tr)=>{tx.style.transition=tr||'none';tx.style.transform=x?`translateX(${-x}px)`:'none';ln.classList.toggle('sc',x>0);};
- const over=(ln,tx)=>Math.max(0,tx.scrollWidth-ln.clientWidth+6);
- L.forEach(([ln,tx])=>{set(ln,tx,0);tx.style.opacity=1;tx.textContent='';});
- if(RM){L.forEach(([ln,tx,s])=>tx.textContent=s);return;}
- const loop=(ln,tx)=>{const o=over(ln,tx);tx.style.transition='opacity .2s';tx.style.opacity=0;BT(()=>{set(ln,tx,0);void tx.offsetWidth;tx.style.transition='opacity .2s';tx.style.opacity=1;BT(()=>{set(ln,tx,o,`transform ${Math.max(.8,o/60)}s linear`);BT(()=>loop(ln,tx),Math.max(800,o/60*1000)+2200);},1200);},220);};
- const print=(n)=>{if(n>1)return;const [ln,tx,s]=L[n];let i=0;const type=()=>{tx.textContent=s.slice(0,++i);set(ln,tx,over(ln,tx),'transform .12s linear');
-  if(i<s.length)BT(type,s[i]===' '?50:28);else{if(over(ln,tx)>0)BT(()=>loop(ln,tx),2200);BT(()=>print(n+1),120);}};type();};
- BT(()=>print(0),200);}
+// the bar: one line of news that wraps naturally (and balanced) over two lines; the final layout is set first, then the
+// letters appear left to right, so nothing jumps as it prints. Too long for two lines at 11px: it steps down to 10px.
+function say(text,club,count,dim){bt.forEach(clearTimeout);bt=[];const bar=$('#bar'),tx=$('#btx');
+ bar.classList.add('on');$('#bct').textContent=count+'/3';$('#bct').classList.toggle('dim',!!dim);
+ tx.style.fontSize='';tx.innerHTML=text.split(' ').map((w)=>`<span class="w">${[...w].map((ch)=>`<i>${ch}</i>`).join('')}</span>`).join(' ');
+ // always two lines, broken at the word gap that makes them most even (so 3 or 4 words each), never mid-word
+ const fitLines=()=>{tx.querySelectorAll('br').forEach((b)=>b.remove());const ws=[...tx.querySelectorAll('.w')],wd=ws.map((w)=>w.getBoundingClientRect().width),sp=4,tot=wd.reduce((a,b)=>a+b,0)+sp*(ws.length-1);
+  let best=1,bd=1e9,acc=0;for(let i=1;i<ws.length;i++){acc+=wd[i-1]+(i>1?sp:0);const d=Math.abs(acc-(tot-acc-sp));if(d<bd){bd=d;best=i;}}
+  ws[best].before(document.createElement('br'));return Math.max(...[...tx.querySelectorAll('.w')].map((w)=>w.getBoundingClientRect().right))-tx.parentNode.getBoundingClientRect().right;};
+ if(fitLines()>0){tx.style.fontSize='10px';fitLines();}
+ const cs=[...tx.querySelectorAll('i')];
+ if(RM){cs.forEach((c)=>c.classList.add('on'));return;}
+ let k=0;const type=()=>{if(k>=cs.length)return;cs[k].classList.add('on');const nx=cs[k].parentNode!==(cs[k+1]&&cs[k+1].parentNode);k++;BT(type,nx?60:28);};
+ BT(type,200);}
 function headline(p){}
 // the take as it is now: crest drops in above him, a line shoots down, he wobbles, he is reeled up, empty shirt with the crest
 async function takeDrop(i,club){
@@ -2508,7 +2520,7 @@ async function takeStamp(i,club,who){
  const clone=c.w.cloneNode(true);clone.style.cssText=`position:absolute;left:${c.l}px;top:${top}px;width:${c.wd}px;height:${c.ht}px;margin:0`;fx.insertBefore(clone,rv);c.w.style.visibility='hidden';
  const fromX=cx<c.pw/2?c.pw+80:-80;
  await anim(rv,[{transform:`translate(${fromX-cx}px,-40px) scale(2.2) rotate(-30deg)`,opacity:0},{transform:`translate(${(fromX-cx)*.35}px,-30px) scale(1.8) rotate(-10deg)`,opacity:1,offset:.45},{transform:'translate(0,-6px) scale(1.15)',opacity:1,offset:.85},{transform:'none',opacity:1}],{duration:620,easing:'cubic-bezier(.2,.8,.2,1)'});
- DONE++; {const [a,b]=DEAL[RI%DEAL.length](club,who);say(a,b,club,DONE,false);}
+ DONE++; say(DEAL[RI%DEAL.length](club,SUR(who)),club,DONE,false);
  // the stamp: a shock ring and the pitch kicks
  const pulse=document.createElement('div');pulse.className='rd-pulse';pulse.style.cssText=`left:${cx}px;top:${c.y}px;border-color:#fff`;fx.appendChild(pulse);
  anim(pulse,[{transform:'scale(.5)',opacity:1},{transform:'scale(2.4)',opacity:0}],{duration:450,easing:'ease-out'});
@@ -2557,7 +2569,7 @@ let DONE=0;
 let RI=0;
 async function runB(target,path,club,who){
  pitch.classList.add('rd-b');
- {const [a,b]=RUMOUR[RI%RUMOUR.length](club);say(a,b,club,DONE,true);}
+ say(RUMOUR[RI%RUMOUR.length](club),club,DONE,true);
  const beam=document.createElement('div');beam.className='rd-beam';fx.appendChild(beam);
  wash.animate([{opacity:0},{opacity:1}],{duration:400,fill:'forwards'}); pitch.classList.add('rd-dim');
  const x=crosshair(); x.style.opacity=1;
@@ -2583,18 +2595,20 @@ async function runB(target,path,club,who){
 }
 const X='Club X';
 const RAIDS=[{t:2,path:[4,7,9,1],club:'Chelsea',who:'Sylvain Distin'},{t:1,path:[3,6,5,8],club:'Aston Villa',who:'Steve Finnan'},{t:8,path:[10,7,9,5],club:'Liverpool',who:'David Nugent'}];
-// while the crosshair hunts: the rumour (top line, second line); one of these each raid, never the same twice in a row
-const RUMOUR=[(c)=>[`${c} are rumoured`,`to be interested in one of ${X}'s players`],(c)=>[`${c} are circling`,`${X} with an eye on one of their stars`],(c)=>[`${c} make an enquiry`,`about a ${X} player`],(c)=>[`${c} scouts spotted`,`watching ${X} in pre-season`]];
-// when the badge lands: the deal
-const DEAL=[(c,p)=>[`${c} sign ${p}`,`from ${X} for an undisclosed fee`],(c,p)=>[`${p} joins ${c}`,`leaving ${X} on a permanent deal`],(c,p)=>[`${c} snap up ${p}`,`from ${X} in a late swoop`]];
+// while the crosshair hunts: the rumour; when the badge lands: the deal. Short, 6 to 8 words, so they fall 3 or 4 a line.
+const N=(s)=>s.replace(/ /g,'\u00a0'), XN=N(X);   // names never break across the two lines
+const RUMOUR=[(c)=>`${N(c)} are eyeing a ${XN} star`,(c)=>`${N(c)} scouts watching ${XN} closely`,(c)=>`${N(c)} plot a raid on ${XN}`,(c)=>`${N(c)} make an enquiry to ${XN}`];
+const DEAL=[(c,p)=>`${N(c)} sign ${N(p)} for an undisclosed fee`,(c,p)=>`${N(p)} leaves ${XN} for ${N(c)}`,(c,p)=>`${N(c)} snap up ${XN}'s ${N(p)}`];
+const SUR=(n)=>n.split(' ').slice(1).join(' ')||n;
 async function play(k){if(busy)return;busy=true;$('#play').disabled=true;$('#play3').disabled=true;reset();DONE=0;await wait(500);
  const list=k===3?RAIDS:[RAIDS[0]];
- RI=0;for(const r of list){if(RM){DONE++;leaveEmpty(r.t,r.club);const [a,b]=DEAL[RI%DEAL.length](r.club,r.who);say(a,b,r.club,DONE);RI++;continue;}await runB(r.t,r.path,r.club,r.who);await wait(1800);RI++;}
+ RI=0;for(const r of list){if(RM){DONE++;leaveEmpty(r.t,r.club);say(DEAL[RI%DEAL.length](r.club,SUR(r.who)),r.club,DONE);RI++;continue;}await runB(r.t,r.path,r.club,r.who);await wait(1800);RI++;}
  busy=false;$('#play').disabled=false;$('#play3').disabled=false;}
 function notes(){$('#notes').innerHTML=`<h2>What changed</h2><ol>
 <li><b>Yellow and black.</b> The crosshair is yellow with a thin black edge, so it stays sharp over gold cards and never looks like the amber fit ring. The sweep, the flashes on each player, the lock pulses and the target's glow are yellow to match.</li>
-<li><b>The bar talks through the hunt, on two lines.</b> As the sweep starts it prints a rumour, e.g. "CHELSEA ARE RUMOURED / TO BE INTERESTED IN ONE OF CLUB X'S PLAYERS", the count dimmed. When the badge stamps down it prints the deal, e.g. "CHELSEA SIGN SYLVAIN DISTIN / FROM CLUB X FOR AN UNDISCLOSED FEE", and the count goes up. The top line prints first, then the second; both lines in capitals at the same size as TRANSFER NEWS; a line too long for the bar scrolls left, fading at its left edge. No badge in the bar: the badge is the one stamping on the pitch.</li>
-<li><b>Variants.</b> Rumours: "are rumoured / to be interested in one of Club X's players", "are circling / Club X with an eye on one of their stars", "make an enquiry / about a Club X player", "scouts spotted / watching Club X in pre-season". Deals: "sign {player} / from Club X for an undisclosed fee", "{player} joins {club} / leaving Club X on a permanent deal", "snap up {player} / from Club X in a late swoop". Club X is whatever you named your club. Play the summer poach to see three different pairs.</li>
+<li><b>The bar talks through the hunt.</b> As the sweep starts it prints a rumour, e.g. "CHELSEA ARE EYEING A CLUB X STAR", the count dimmed. When the badge stamps down it prints the deal, e.g. "CHELSEA SIGN DISTIN FOR AN UNDISCLOSED FEE", and the count goes up. Capitals at the TRANSFER NEWS size, no badge.</li>
+<li><b>Natural two lines.</b> Every line of news is short (6 to 8 words) and always sits on two lines, broken at the word gap that makes the two most even, so 3 or 4 words each, never mid-word, never inside a club's or a player's name, and never at a fixed point. The wrap is worked out first and the letters then appear left to right, so nothing jumps while it prints. A rare one too long for two lines steps down a size.</li>
+<li><b>Variants.</b> Rumours: "{club} are eyeing a Club X star", "{club} scouts watching Club X closely", "{club} plot a raid on Club X", "{club} make an enquiry to Club X". Deals: "{club} sign {surname} for an undisclosed fee", "{surname} leaves Club X for {club}", "{club} snap up Club X's {surname}". Club X is whatever you named your club.</li>
 <li><b>Longer.</b> The hunt runs 3.6 s instead of 2.4 s, the crosshair lingers a little longer on each player, and it holds on the target for 0.65 s after the lock instead of 0.2 s. About 7 s a player instead of 5.</li>
 <li>Everything else as live: the badge from the far touchline, the shock ring and the pitch kick, him pulled in, the empty TO shirt, the rating drop.</li></ol>
 <p>The same would play for the January raid on the transfer screen, with the bar instead of the hint line under the cards.</p>`;}
