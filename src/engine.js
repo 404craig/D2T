@@ -57,8 +57,8 @@ const RULES = {
   // 21 Oct (Craig): purple 2%, legend 1%, and no guaranteed legend any more (legendRoll is off, legendGuarantee false).
   levelOdds: [0.38, 0.23, 0.36, 0.02, 0.01],
   legendGuarantee: false,
-  // a Club X career from season 2 (Craig, 21 Oct: Greg's two titles in a row, five purples in a season): purple 1.5%,
-  // legend 0.5%; Classic, the Daily and a career's first season keep the odds above
+  // Club X, every season (Craig, 21 Oct: Greg's two titles in a row, five purples in a season; "run from the lower odds
+  // always"): purple 1.5%, legend 0.5%; Classic and the Daily keep the odds above
   levelOddsCareer: [0.38, 0.24, 0.36, 0.015, 0.005],
   // Stars play above their number, for the user's XI only (Craig, 18 Oct: history's clubs play as they did; your built side
   // is where the stars count): above `from` each rating point counts `slope` for his level (purple 1.5, legend 2; a gold
@@ -623,7 +623,7 @@ function pickCard(r, st, pool) {
   return pickWeighted(r, pool, p => (rw && rw[p.id] != null ? rw[p.id] : 1) * (elite ? eliteWeight(p) : 1));
 }
 function drawCard(r, S, st, legends, taken, broad, fit, force) {
-  const odds = st.career > 1 ? RULES.levelOddsCareer : RULES.levelOdds;
+  const odds = st.mode === "clubx" || st.career > 1 ? RULES.levelOddsCareer : RULES.levelOdds;   // Club X always the lower odds (Craig, 21 Oct)
   const drawn = (() => { let x = r(); for (let i = 0; i < 5; i++) { x -= odds[i]; if (x <= 0) return i; } return 0; })();
   const lv = force != null ? force : drawn;
   const names = yourNames(st, S), fresh = (p) => !taken.has(p.id) && !taken.has(NAME_TAG + nameKey(p));
