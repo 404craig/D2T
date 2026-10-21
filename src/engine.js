@@ -54,9 +54,11 @@ const RULES = {
   // 18 Oct (the engine rethink, docs/SCOPE_ENGINE.md): purple 3%, legend 1%, and every season puts one legend on the table
   // (legendRoll below) so a player who only plays a few games always meets one; whether he takes him is the game.
   // 19 Oct: gold 36% (was 41%; the game was too easy, and more silver and bronze in the rolls makes a gold count for more).
-  levelOdds: [0.37, 0.23, 0.36, 0.03, 0.01],
+  // 21 Oct (Craig): purple 2%, legend 1%, and no guaranteed legend any more (legendRoll is off, legendGuarantee false).
+  levelOdds: [0.38, 0.23, 0.36, 0.02, 0.01],
+  legendGuarantee: false,
   // a Club X career from season 2 (Craig, 21 Oct: Greg's two titles in a row, five purples in a season): purple 1.5%,
-  // legend 0.5%, the guaranteed legend kept; Classic, the Daily and a career's first season keep the odds above
+  // legend 0.5%; Classic, the Daily and a career's first season keep the odds above
   levelOddsCareer: [0.38, 0.24, 0.36, 0.015, 0.005],
   // Stars play above their number, for the user's XI only (Craig, 18 Oct: history's clubs play as they did; your built side
   // is where the stars count): above `from` each rating point counts `slope` for his level (purple 1.5, legend 2; a gold
@@ -644,6 +646,7 @@ function noteOffered(st, cards) { st.offered = st.offered || []; for (const id o
 // them should meet a legend): if none has come up by a roll chosen for the season (seeded, the 3rd to the 3rd-last roll),
 // that roll's first card is a legend. Rolls that bring one by the odds make it moot.
 function legendRoll(st) {
+  if (!RULES.legendGuarantee) return -1;   // off since 21 Oct (Craig): no guaranteed legend in any mode
   const total = st.rolls.reduce((a, w) => a + w.n, 0); if (total < 7) return -1;
   return 2 + Math.floor(unit(st.seed, "legendroll", st.career || 1) * (total - 4));
 }
