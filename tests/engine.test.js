@@ -430,7 +430,7 @@ t("Scout a club: 2 respins for three of one club's cards, never your own club, n
   const before = st.respins, pick = clubs[0].club;
   assert.ok(D.scoutClub(st, S, pick)); assert.strictEqual(st.respins, before - D.RULES.scoutCost); assert.strictEqual(st.roll.scoutClub, pick);
   assert.strictEqual(st.roll.cards.length, 3);
-  for (const id of st.roll.cards) { const p = D.playerOf(S, id); assert.strictEqual(p.c, pick); assert.ok(p.lv < 3 && !String(id).startsWith("L:"), "a scout brought a purple or legend"); }
+  for (const id of st.roll.cards) { const p = D.playerOf(S, id); assert.strictEqual(p.c, pick); assert.ok(p.lv < 3 && !String(id).startsWith("L:"), "a scout brought a purple with golds left, or a legend"); }
   assert.strictEqual(D.scoutClub(st, S, me), false);
 });
 t("Club X's draft never offers a purple or legend card", () => {
@@ -448,7 +448,11 @@ t("Scouts never bring purple or legend cards; a career from season 2 draws purpl
   const me = D.historyTable(S, S.deductions).slice(-1)[0].c; st.clubOffer = ["2007/08"]; D.chooseClub(st, S, { c: me, f: "4-4-2", xi: [] }); D.startSeason(st, S);
   for (const q of D.scoutInfo(st, S)) { const pos = D.FORMATIONS[st.formation][q.slot][0]; const better = S.players.filter(p => p.lv >= 3 && D.fitOf(p, pos) === "green" && !st.seen.includes(p.id)); assert.ok(better.length === 0 || q.better < better.length + 1000); }
   assert.ok(D.scout(st, S, D.scoutInfo(st, S).find(q => q.better > 0).slot));
-  for (const id of st.roll.cards) assert.ok(D.playerOf(S, id).lv < 3, "a position scout brought a purple or legend");
+  for (const id of st.roll.cards) assert.ok(D.playerOf(S, id).lv < 3, "a position scout brought a purple with golds left");
+  // a purple only when no gold or lower is better than the man in the shirt (Craig, 21 Oct): a 90 holder leaves only purples above him
+  const stG = Object.assign({}, st, { xi: st.xi.slice(), seen: st.seen.slice() }); const strong = S.players.filter(p => p.lv === 3 && p.b === "FWD").sort((a, b) => b.r - a.r)[1]; stG.xi[10] = strong.id;
+  const qi = D.scoutInfo(stG, S)[10]; const goldAbove = S.players.filter(p => p.lv < 3 && p.r > strong.r && D.fitOf(p, D.FORMATIONS[stG.formation][10][0]) === "green");
+  if (!goldAbove.length && qi.better > 0) { assert.ok(D.scout(stG, S, 10)); stG.roll.cards.forEach((id, k) => { const p = D.playerOf(S, id); if (stG.roll.tags[k] === "better") assert.ok(p.lv === 3 && p.r > strong.r, "the purple fall-back should bring purples better than him"); else assert.ok(p.lv < 3, "the next-best fill stays gold or lower"); }); assert.ok(stG.roll.tags.includes("better")); }
   const share = (career) => { const s2 = Object.assign({}, st, { career, seen: [] }); let pur = 0; const N = 4000; for (let i = 0; i < N; i++) { const r = D.stream("odds" + career, i); const id = D.drawCard(r, S, s2, S.legends, new Set(), null, null); const p = D.playerOf(S, id, S.legends); if (p && p.lv >= 3) pur++; } return pur / N; };
   const a = share(1), b = share(2);
   assert.ok(a > 0.018 && a < 0.042, "season 1 odds off: " + a); assert.ok(b > 0.008 && b < 0.028 && b < a, "career odds off: " + b);   // 3% and 2% nominal since 21 Oct
