@@ -424,14 +424,14 @@
 /* the Transfer News bar, centred in the space between the pitch and the bottom bar: the pill, then one headline */
 /* the Transfer News bar (Craig, 21 Oct; deadline-day yellow and black, SE.newsBar): centred between the pitch and the
    bottom bar on the squad (placed by squad.js), in the hint line's place on the transfer screen */
-.se-news { position: absolute; left: 0; right: 0; top: 0; z-index: 6; height: 50px; display: flex; align-items: stretch; background: #FFD500; color: #0A0A0A; overflow: hidden; }
-.se-nb-tag { flex: none; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 2px; padding: 0 20px 0 14px; background: #0A0A0A; color: #FFD500; font: 900 italic 11px/1 var(--font); letter-spacing: .12em; text-transform: uppercase; clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%); }
+.se-news { position: absolute; left: 0; right: 0; top: 0; z-index: 6; height: clamp(50px, 15vw, 66px);   /* scales with the phone (Craig, 21 Oct: too small on an iPhone 16 Pro) */ display: flex; align-items: stretch; background: #FFD500; color: #0A0A0A; overflow: hidden; }
+.se-nb-tag { flex: none; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 2px; padding: 0 20px 0 14px; background: #0A0A0A; color: #FFD500; font: 900 italic clamp(11px, 3.4vw, 14px)/1 var(--font); letter-spacing: .12em; text-transform: uppercase; clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%); }
 .se-nb-view { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; padding-left: 8px; overflow: hidden; }
-.se-nb-text { display: block; white-space: nowrap; font: 900 italic 11px/1.25 var(--font); text-transform: uppercase; letter-spacing: .08em; max-width: 100%; }
+.se-nb-text { display: block; white-space: nowrap; font: 900 italic clamp(11px, 3.7vw, 15.5px)/1.25 var(--font); text-transform: uppercase; letter-spacing: .08em; max-width: 100%; }
 .se-nb-text .w { white-space: nowrap; }
 .se-nb-text i { font-style: inherit; opacity: 0; }
 .se-nb-text i.on { opacity: 1; }
-.se-nb-count { flex: none; display: flex; align-items: center; padding: 0 10px; font: 900 italic 13px/1 var(--font); }
+.se-nb-count { flex: none; display: flex; align-items: center; padding: 0 12px; font: 900 italic clamp(13px, 4vw, 17px)/1 var(--font); }
 .se-nb-count.is-dim { opacity: .35; }
 .se-news.se-news-flow { position: relative; z-index: 2; margin: 6px 0 4px; }
 .se-has-news .se-gone { visibility: hidden; }

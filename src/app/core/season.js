@@ -311,7 +311,9 @@
         return Math.max(...ws.map((w) => w.getBoundingClientRect().right)) - tx.parentNode.getBoundingClientRect().right;
       };
       // too wide for two lines at 11px: 10px, then 9px with the letter-spacing eased (320px phones)
-      if (fit() > 0) { tx.style.fontSize = '10px'; if (fit() > 0) { tx.style.fontSize = '9px'; tx.style.letterSpacing = '.04em'; fit(); } } else tx.style.letterSpacing = '';
+      // the size follows the phone (CSS clamp); too wide for two lines: 90% of it, then 80% with the letter-spacing eased
+      const base = parseFloat(getComputedStyle(tx).fontSize) || 11;
+      if (fit() > 0) { tx.style.fontSize = `${(base * 0.9).toFixed(1)}px`; if (fit() > 0) { tx.style.fontSize = `${(base * 0.8).toFixed(1)}px`; tx.style.letterSpacing = '.04em'; fit(); } } else tx.style.letterSpacing = '';
       const cs = [...tx.querySelectorAll('i')];
       if (D2T.reduced()) { cs.forEach((c) => c.classList.add('on')); return; }
       let k = 0;
