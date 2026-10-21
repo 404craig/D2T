@@ -386,8 +386,10 @@ t("scouting: 2 respins, three cards green in the shirt and better than its man (
   const top = S.players.slice().sort((a, b) => b.r - a.r)[0]; st2.xi[9] = top.id;
   assert.strictEqual(D.scoutInfo(st2, S)[9].better, 0); assert.ok(!D.scout(st2, S, 9));
 });
-t("every season puts a legend on the table", () => {
-  for (let i = 0; i < 12; i++) { const { offered } = play("leg" + i, "2007/08", "Derby", "pass"); assert.ok(offered.some(id => String(id).startsWith("L:")), "no legend in run " + i); }
+t("no guaranteed legend any more (Craig, 21 Oct): legends come by the 1% odds alone, so some runs see none", () => {
+  assert.strictEqual(D.RULES.legendGuarantee, false); assert.strictEqual(D.RULES.levelOdds[3], 0.02); assert.strictEqual(D.RULES.levelOdds[4], 0.01);
+  let none = 0; for (let i = 0; i < 12; i++) { const { offered } = play("leg" + i, "2007/08", "Derby", "pass"); if (!offered.some(id => String(id).startsWith("L:"))) none++; }
+  assert.ok(none > 0, "every one of 12 runs met a legend: the guarantee looks to be back");
 });
 t("the January raid: one outfield player goes to a top-half club as the window opens, once a season, and his club is stronger from that date", () => {
   const S = G.seasons["2007/08"], d = S.clubs.find(c => c.name === "Derby").id;
@@ -449,7 +451,7 @@ t("Scouts never bring purple or legend cards; a career from season 2 draws purpl
   for (const id of st.roll.cards) assert.ok(D.playerOf(S, id).lv < 3, "a position scout brought a purple or legend");
   const share = (career) => { const s2 = Object.assign({}, st, { career, seen: [] }); let pur = 0; const N = 4000; for (let i = 0; i < N; i++) { const r = D.stream("odds" + career, i); const id = D.drawCard(r, S, s2, S.legends, new Set(), null, null); const p = D.playerOf(S, id, S.legends); if (p && p.lv >= 3) pur++; } return pur / N; };
   const a = share(1), b = share(2);
-  assert.ok(a > 0.028 && a < 0.052, "season 1 odds off: " + a); assert.ok(b > 0.01 && b < 0.03 && b < a * 0.7, "career odds off: " + b);
+  assert.ok(a > 0.018 && a < 0.042, "season 1 odds off: " + a); assert.ok(b > 0.008 && b < 0.028 && b < a, "career odds off: " + b);   // 3% and 2% nominal since 21 Oct
 });
 t("Never two of the same player: no card of a name already yours, no name twice in a roll (Classic, Dare2Dream, Club X)", () => {
   const checkRoll = (st, S, where) => {
