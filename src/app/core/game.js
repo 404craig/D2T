@@ -318,6 +318,9 @@
     const run = D2T.state.run, e = GAME.eng(), S = GAME.S();
     const c = run.career = run.career || { id: e.seed, n: 1, seasons: [], start: { season: S.season, replaced: S.clubs[e.club].name } };
     c.seasons.push({ season: S.season, finish: e.final.finish, pts: e.final.pts, sim: !!S.sim });
+    // last season's final table as you finished it, for the next season's table screen (Craig, 21 Oct); the Club X row
+    // carries `me` so the screen finds it whatever the club is called by then
+    c.lastTable = { season: S.season, sim: !!S.sim, rows: e.final.table.map((r, i) => ({ name: nameOf(S, r.c), me: r.c === e.club, pos: i + 1, p: r.p, w: r.w, d: r.d, l: r.l, gf: r.gf, ga: r.ga, pts: r.pts })) };
     c.n += 1;
     const carry = e.xi.map((id) => originOf(S, id));
     let spec;

@@ -451,4 +451,30 @@ t("Scouts never bring purple or legend cards; a career from season 2 draws purpl
   const a = share(1), b = share(2);
   assert.ok(a > 0.028 && a < 0.052, "season 1 odds off: " + a); assert.ok(b > 0.01 && b < 0.03 && b < a * 0.7, "career odds off: " + b);
 });
+t("Never two of the same player: no card of a name already yours, no name twice in a roll (Classic, Dare2Dream, Club X)", () => {
+  const checkRoll = (st, S, where) => {
+    const mine = D.yourNames(st, S), seen = new Set();
+    for (const id of st.roll.cards) { const p = D.playerOf(S, id, S.legends); const k = D.nameKey(p); assert.ok(!mine.has(k), `${where}: ${k} offered while already yours`); assert.ok(!seen.has(k), `${where}: ${k} twice in one roll`); seen.add(k); }
+  };
+  const playSeason = (st, S, where) => { let g = 0; while (st.phase !== "summary" && g++ < 500) {
+    if (st.phase === "draft") { checkRoll(st, S, where); D.draftPick(st, S, st.roll.cards[0], D.draftFits(st, S, st.roll.cards[0])[0]); }
+    else if (st.phase === "setup") D.startSeason(st, S);
+    else if (st.phase === "window") { checkRoll(st, S, where); const best = st.roll.cards.map(id => D.playerOf(S, id, S.legends)).sort((a, b) => b.r - a.r)[0]; const pv = D.signPreview(st, S, best.id, S.legends).filter(x => x.fit === "green").sort((a, b) => b.delta - a.delta)[0]; if (pv && pv.delta > 0) D.sign(st, S, best.id, pv.slot); else if (st.respins > 0 && g % 3 === 0) D.respinCards(st, S); else D.pass(st, S); }
+    else if (st.phase === "prematch") D.playMatch(st, S); } };
+  const keys = ["1995/96", "2003/04", "2012/13", "2019/20"];
+  keys.forEach((key, k) => { const S = G.seasons[key]; for (let i = 0; i < 6; i++) { const st = D.newRun({ seed: "nm" + k + i, mode: "classic", catalogue: [] }); st.clubOffer = [key]; D.chooseClub(st, S, { c: D.historyTable(S, S.deductions).slice(-1)[0].c, f: "4-4-2", xi: [] }); playSeason(st, S, "classic " + key); } });
+  keys.forEach((key, k) => { const S = G.seasons[key]; for (let i = 0; i < 4; i++) { const st = D.newRun({ seed: "nd" + k + i, mode: "dare2dream", catalogue: [] }); st.clubOffer = [key]; D.chooseClub(st, S, { c: 3, f: "4-3-3", xi: [] }); playSeason(st, S, "dare2dream " + key); } });
+  keys.forEach((key, k) => { const S = G.seasons[key]; for (let i = 0; i < 4; i++) { const st = D.newRun({ seed: "nx" + k + i, mode: "clubx", catalogue: [] }); st.clubOffer = [key]; D.chooseClub(st, S, { c: D.historyTable(S, S.deductions).slice(-1)[0].c, f: "4-4-2", xi: [] }); playSeason(st, S, "clubx " + key); } });
+  // the direct case: the legend Mo Salah in the XI bars every Mo Salah season card, and a season card bars the legend
+  const S = G.seasons["2017/18"], salah = S.players.find(p => p.n === "Mohamed Salah"), leg = S.legends.find(l => l.n === "Mohamed Salah");
+  assert.ok(salah && leg && salah.lv === 3);
+  const st = D.newRun({ seed: "sal", mode: "classic", catalogue: [] }); st.clubOffer = ["2017/18"]; D.chooseClub(st, S, { c: D.historyTable(S, S.deductions).slice(-1)[0].c, f: "4-4-2", xi: [] }); D.startSeason(st, S);
+  const stL = Object.assign({}, st, { xi: st.xi.slice(), seen: st.seen.slice() }); stL.xi[10] = leg.id;
+  for (let i = 0; i < 300; i++) { const id = D.drawCard(D.stream("salahP", i), S, stL, S.legends, new Set(), null, (p) => p.lv === 3, 3); assert.notStrictEqual(id, salah.id, "Salah's purple came up beside his legend"); }
+  const stP = Object.assign({}, st, { xi: st.xi.slice(), seen: st.seen.slice() }); stP.xi[10] = salah.id;
+  for (let i = 0; i < 300; i++) { const id = D.drawCard(D.stream("salahL", i), S, stP, S.legends, new Set(), null, null, 4); assert.notStrictEqual(id, leg.id, "the legend Salah came up beside his season card"); }
+  // and never both in one roll: force the purple pool, draw three
+  const taken = new Set(), st3 = Object.assign({}, st, { xi: st.xi.slice(), seen: st.seen.slice() });
+  for (let i = 0; i < 200; i++) { taken.clear(); const ids = [3, 4, 4].map((lv, k) => D.drawCard(D.stream("both" + i, k), S, st3, S.legends, taken, null, (p) => p.n === "Mohamed Salah" || k > 0, lv)); taken.clear(); const names = ids.filter(id => id != null).map(id => D.nameKey(D.playerOf(S, id, S.legends))); assert.strictEqual(new Set(names).size, names.length, "a roll held two cards of one name: " + names.join(", ")); }
+});
 console.log(`${n} checks passed`);
