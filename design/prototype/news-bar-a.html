@@ -2348,13 +2348,18 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 
 .strips{display:grid;gap:18px;width:393px;max-width:100%}.strip{position:relative;height:42px;background:#000}
 .strip .nb{top:0;transform:none}
+
+.nA .hl{min-width:0;width:100%}
+.nA .tw{flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;height:100%}
+.nA .tx{display:inline-block;white-space:nowrap;will-change:transform}
+.nA .tw.sc{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px);mask-image:linear-gradient(90deg,transparent 0,#000 14px)}
 </style></head><body class="pg">
 <div class="wrap">
 <h1>Transfer News bar: option A</h1>
 <p class="lead">The bar that names the players leaving, on the Club X pre-season screen from the live build after three are taken (Distin to Chelsea, Vanden Borre to Aston Villa, Nugent to Liverpool). Option A, refined. Press Play to see the headlines arrive one by one as each player goes.</p>
 <div class="ctl"><button class="play" id="play">Play</button></div>
 <div class="phones">
- <div class="opt"><h2>A · Breaking strip, refined</h2><p>TRANSFER over NEWS in the black tag, left aligned and centred top to bottom, so the tag is narrower and the yellow comes in further. The second move is a long one (Anthony Vanden Borre to Aston Villa): each headline prints from left to right (the crest, then the letters), and a long one scrolls left as it prints so the newest letter stays in view, holds at the end, then starts again from the front.</p><div class="mock" data-o="A"><div id="app"><main class="screen theme-black se-run" data-screen="squad" style="--se-acc: #12F06C; --se-ink: #00170A; --se-text: #12F06C; --se-acc-a: rgba(18,240,108,0.22); --se-acc-b: rgba(18,240,108,0.55);"><header class="topbar has-mode"><span class="topbar-l"><button class="logo-home" aria-label="Home, Club X" style="border:0;background:none;padding:0;color:#fff;height:26px;display:flex"><span class="logo-mask " role="img" aria-label="D2T" style="--src:url('news-fx/b98c15c59683.png');aspect-ratio:857/241;height:26px"></span></button></span>
+ <div class="opt"><h2>A · Breaking strip, refined</h2><p>TRANSFER over NEWS in the black tag, left aligned and centred top to bottom, so the tag is narrower and the yellow comes in further. The second move is a long one (Anthony Vanden Borre to Aston Villa): each headline prints from left to right (the crest, then the letters), and a long one scrolls left as it prints so the newest letter stays in view; only the words move, sliding away under a fade just right of the crest, which stays put, holds at the end, then starts again from the front.</p><div class="mock" data-o="A"><div id="app"><main class="screen theme-black se-run" data-screen="squad" style="--se-acc: #12F06C; --se-ink: #00170A; --se-text: #12F06C; --se-acc-a: rgba(18,240,108,0.22); --se-acc-b: rgba(18,240,108,0.55);"><header class="topbar has-mode"><span class="topbar-l"><button class="logo-home" aria-label="Home, Club X" style="border:0;background:none;padding:0;color:#fff;height:26px;display:flex"><span class="logo-mask " role="img" aria-label="D2T" style="--src:url('news-fx/b98c15c59683.png');aspect-ratio:857/241;height:26px"></span></button></span>
       <span class="mode-tag" style="--c:#12F06C"><span>Club X</span></span><button class="acct-btn" aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4"></circle><path d="M4 20.5c1.6-3.6 4.6-5.2 8-5.2s6.4 1.6 8 5.2"></path></svg></button></header>
  <div class="screen-body se-squad"><div class="se-sqhead"><img class="se-sqcrest" src="news-fx/club_x.png" alt=""><div class="se-sqtext"><div class="se-sqname">Club X</div><div class="se-sqsub">Season 2 · Pre-season</div></div><div class="se-rating"><b class="se-rating-n" id="rate">66</b><i>Team<br>rating</i></div></div>
  <div class="se-lines-host"><div class="se-linebars"><span class="se-line is-top" aria-label="Defence 73"><i>DEF</i><b><u style="width:45%"></u></b><em>73</em></span><span class="se-line" aria-label="Midfield 69"><i>MID</i><b><u style="width:35%"></u></b><em>69</em></span><span class="se-line" aria-label="Attack 67"><i>ATT</i><b><u style="width:30%"></u></b><em>67</em></span></div></div><div class="se-pitch"><svg class="se-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
@@ -2424,7 +2429,7 @@ const D={"empty": "<span class=\"se-emptywrap\"><div class=\"se-empty se-empty-t
 const MOVES=[{n:'Sylvain Distin',s:'Distin',c:'Chelsea',i:2},{n:'Anthony Vanden Borre',s:'Vanden Borre',c:'Aston Villa',i:1},{n:'David Nugent',s:'Nugent',c:'Liverpool',i:8}];
 const crest=(c)=>`<img src="${D.crests[c]}" alt="">`;
 const BAR={
- A:(k,fresh)=>{const m=MOVES[k];return `<div class="nb nA"><span class="tag"><b>Transfer</b><b>News</b></span><span class="v"><span class="hl">${crest(m.c)}<span class="tx" data-t="${m.s} to ${m.c}">${m.s} to ${m.c}</span></span></span><span class="ct">${k+1}/3</span></div>`;},
+ A:(k,fresh)=>{const m=MOVES[k];return `<div class="nb nA"><span class="tag"><b>Transfer</b><b>News</b></span><span class="v"><span class="hl">${crest(m.c)}<span class="tw"><span class="tx" data-t="${m.s} to ${m.c}">${m.s} to ${m.c}</span></span></span></span><span class="ct">${k+1}/3</span></div>`;},
  B:(k,fresh)=>{const m=MOVES[k],all=MOVES.slice(0,k+1).map((x)=>`${x.s} to ${x.c}`);return `<div class="nb nB"><div class="top"><span class="lab">Breaking</span><span class="hl${fresh?' in':''}">${m.n} <em>to ${m.c}</em></span></div><div class="tk"><span>Transfer news<i>●</i>${all.join('<i>●</i>')}<i>●</i>Transfer news<i>●</i>${all.join('<i>●</i>')}<i>●</i></span></div></div>`;},
  C:(k,fresh)=>{const m=MOVES[k];return `<div class="nb nC"><span class="lab">Transfer news</span><span class="hl${fresh?' in':''}">${crest(m.c)}${m.s} to ${m.c}</span><span class="stamp${fresh?' in':''}">Done deal</span></div>`;}
 };
@@ -2439,15 +2444,16 @@ const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 // each headline prints left to right (the crest first, then the letters); if it runs past the bar it scrolls left with the
 // letters so the newest one is always in view, holds at the end, then starts again from the front while it is the latest
 function run(root){root.querySelectorAll('.nA .v').forEach((v)=>{(v._t||[]).forEach(clearTimeout);v._t=[];const T=(f,ms)=>v._t.push(setTimeout(f,ms));
- const hl=v.querySelector('.hl'),img=hl.querySelector('img'),tx=hl.querySelector('.tx'),full=tx.dataset.t;
- hl.style.transition='none';hl.style.transform='none';hl.style.opacity=1;hl.style.fontSize='';
- const over=()=>Math.max(0,hl.scrollWidth-v.clientWidth+10);
+ const hl=v.querySelector('.hl'),img=hl.querySelector('img'),tw=hl.querySelector('.tw'),tx=hl.querySelector('.tx'),full=tx.dataset.t;
+ const set=(x,tr)=>{tx.style.transition=tr||'none';tx.style.transform=x?`translateX(${-x}px)`:'none';tw.classList.toggle('sc',x>0);};
+ set(0);tx.style.opacity=1;hl.style.fontSize='';
+ const over=()=>Math.max(0,tx.scrollWidth-tw.clientWidth+6);
  if(RM){tx.textContent=full;let s=14;while(over()>0&&s>11){s-=.5;hl.style.fontSize=s+'px';}return;}
  tx.textContent='';img.animate([{opacity:0,transform:'scale(.3)'},{opacity:1,transform:'scale(1.15)',offset:.7},{opacity:1,transform:'none'}],{duration:260,easing:'ease-out',fill:'backwards'});
- let i=0;const type=()=>{tx.textContent=full.slice(0,++i);hl.style.transition='transform .12s linear';hl.style.transform=`translateX(${-over()}px)`;if(i<full.length)T(type,full[i]===' '?60:34);else if(over()>0)T(loop,1800);};
- const loop=()=>{const o=over();hl.style.transition='opacity .2s';hl.style.opacity=0;
-  T(()=>{hl.style.transition='none';hl.style.transform='none';void hl.offsetWidth;hl.style.transition='opacity .2s';hl.style.opacity=1;
-   T(()=>{hl.style.transition=`transform ${Math.max(.8,o/60)}s linear`;hl.style.transform=`translateX(${-o}px)`;T(loop,Math.max(800,o/60*1000)+1800);},1200);},220);};
+ let i=0;const type=()=>{tx.textContent=full.slice(0,++i);set(over(),'transform .12s linear');if(i<full.length)T(type,full[i]===' '?60:34);else if(over()>0)T(loop,1800);};
+ const loop=()=>{const o=over();tx.style.transition='opacity .2s';tx.style.opacity=0;
+  T(()=>{set(0);void tx.offsetWidth;tx.style.transition='opacity .2s';tx.style.opacity=1;
+   T(()=>{set(o,`transform ${Math.max(.8,o/60)}s linear`);T(loop,Math.max(800,o/60*1000)+1800);},1200);},220);};
  T(type,300);});}
 function fit(root){run(root);}
 function strips(){document.getElementById('strips').innerHTML=MOVES.map((m,k)=>`<div class="strip">${BAR.A(k,false)}</div>`).join('');fit(document.getElementById('strips'));}
