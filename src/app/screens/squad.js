@@ -320,12 +320,12 @@
       let ticker = null, poachKill = null;
       const poachDue = pre && carried && GAME.poachDue();
       if (pre && carried && (poachDue || GAME.poached().length)) {
-        ticker = makeTicker();
+        ticker = makeNews();
         if (poachDue) {                                           // the window sheet first (Craig, 20 Oct), then the raid
           const t = setTimeout(() => root.isConnected && windowSheet(), 700); poachKill = () => clearTimeout(t);
         } else {                                                  // a refresh before the summary was seen
           const list = GAME.poached();
-          if (list.length) ticker.add(list[list.length - 1]);
+          if (list.length) lastDeal(list);
           if (!st.poachSeen) { const t = setTimeout(() => root.isConnected && poachSummary(list), 300); poachKill = () => clearTimeout(t); }
         }
       }
@@ -339,7 +339,7 @@
           if (went || !root.isConnected || !GAME.poachDue()) return; went = true;
           const list = GAME.poach(); if (!list.length) return;
           if (!reduced) { runPoach(list); return; }
-          render(null); ticker.add(list[list.length - 1]);        // reduced motion: the end state and the summary at once
+          render(null); lastDeal(list);                           // reduced motion: the end state and the summary at once
           if (!st.poachSeen) { const t = setTimeout(() => root.isConnected && poachSummary(list), 300); poachKill = () => clearTimeout(t); }
         };
         const sh = D2T.sheet({ title: 'Summer window', body: el, onClose: go });
@@ -350,31 +350,22 @@
       // the Transfer News bar (Craig, 14 Oct; news() in design/prototype/clubx-poached.html): centred in the empty space
       // between the pitch and the bottom bar, one headline at a time right after the pill; a new one replaces the last at
       // once (a quick fade up); it only scrolls, slowly left and back, if it is too long to fit (never with reduced motion)
-      function makeTicker() {
-        const el = D2T.h('<div class="se-ticker" role="status" aria-label="Transfer news"><b class="se-tk-tag">Transfer news</b><div class="se-tk-view"><span class="se-tk-item"></span></div></div>');
-        root.appendChild(el); root.classList.add('se-has-ticker');
-        const view = el.querySelector('.se-tk-view'), sp = el.querySelector('.se-tk-item'), pitch = body.querySelector('.se-pitch');
+      // the Transfer News bar (Craig, 21 Oct; SE.newsBar): centred in the space between the pitch and the bottom bar,
+      // the rumour as each hunt starts, the deal as the badge lands, the count going up; it stays until you go on
+      function makeNews() {
+        const nb = SE.newsBar({ count: true }), el = nb.el, pitch = body.querySelector('.se-pitch');
+        root.appendChild(el); root.classList.add('se-has-news');
         const place = () => {
           if (!el.isConnected) return;
           const rr = root.getBoundingClientRect(), pb = pitch.getBoundingClientRect().bottom, bt = bar.getBoundingClientRect().top;
-          el.style.top = `${Math.round((pb + bt) / 2 - rr.top - 17)}px`;
+          el.style.top = `${Math.round((pb + bt) / 2 - rr.top - 25)}px`;
         };
         place();
         const ro = window.ResizeObserver ? new ResizeObserver(place) : null; ro && ro.observe(root);
-        let timer = 0;
-        return {
-          el,
-          add(p) {
-            sp.getAnimations().forEach((a) => a.cancel()); clearTimeout(timer);
-            sp.textContent = `${p.name} joins ${p.club}`; sp.style.transform = '';
-            if (reduced) return;
-            sp.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'ease-out' });
-            const over = sp.scrollWidth - view.clientWidth + 14;
-            if (over > 0) timer = setTimeout(() => { if (sp.isConnected) sp.animate([{ transform: 'none' }, { transform: 'none', offset: 0.2 }, { transform: `translateX(${-over}px)`, offset: 0.8 }, { transform: `translateX(${-over}px)` }], { duration: 2500 + over * 25, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' }); }, 250);
-          },
-          stop() { clearTimeout(timer); ro && ro.disconnect(); }
-        };
+        return { el, say: nb.say, stop() { nb.stop(); ro && ro.disconnect(); } };
       }
+      // the end state after a refresh or with reduced motion: the last deal, all three counted
+      function lastDeal(list) { const x = list[list.length - 1]; ticker.say(SE.raidWords(list.length - 1).deal(x.club, x.name), { n: list.length }); }   // hoisted: called from the refresh branch above
       function poachSummary(list) {
         const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">Other sides came in over the summer. Fill the gaps with your rolls.</p>
           <ul>${list.map((x) => `<li>${x.crest ? `<img src="${x.crest}" alt="">` : ''}<b>${D2T.esc(x.name)}</b><span>to ${D2T.esc(x.club)}</span></li>`).join('')}</ul>
@@ -399,17 +390,20 @@
         });
         root.classList.add('se-poaching');
         await wait(1300);
-        for (const x of list) {
+        let done = 0;
+        for (const [k, x] of list.entries()) {
           if (!alive) return;
           const sl = slotsEl.querySelector(`.se-slot[data-i="${x.slot}"]`); if (!sl || !sl.querySelector('.se-cardwrap')) continue;
+          const words = SE.raidWords(k);
           take = SE.raidTake({
-            pitch, slotsEl, slot: x.slot, crest: x.crestLight || x.crest,   // the club's own crest on the white disc
-            onLanded: () => ticker.add(x),                       // his headline replaces the last one as the badge lands
+            pitch, slotsEl, slot: x.slot, crest: x.crestLight || x.crest, dark: x.dark,   // the club's own crest on the yellow disc (black for a yellow crest)
+            onStart: () => ticker.say(words.rumour(x.club), { n: done, dim: true }),    // the rumour as the sweep starts
+            onLanded: () => { done++; ticker.say(words.deal(x.club, x.name), { n: done }); },   // the deal as the badge lands
             onEmpty: () => { sl.innerHTML = SE.emptyShirt(pitchSlots[x.slot].pos, PITCH_W, x); setRating(GAME.rating()); }
           });
           await take.done; take = null;
           if (!alive) return;
-          await wait(500);
+          await wait(1800);                                      // time to read the deal line (Craig, 21 Oct)
         }
         if (!alive) return;
         poachKill(); poachKill = null;

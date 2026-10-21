@@ -72,6 +72,7 @@
   "code": "BOU"
  },
  "Bradford": {
+  "darkDisc": true,
   "name": "Bradford",
   "full": "Bradford City",
   "crest": "bradford.png",
@@ -208,6 +209,7 @@
   "code": "IPS"
  },
  "Leeds": {
+  "darkDisc": true,
   "name": "Leeds",
   "full": "Leeds United",
   "crest": "leeds.png",
@@ -281,6 +283,7 @@
   "code": "NEW"
  },
  "Norwich": {
+  "darkDisc": true,
   "name": "Norwich",
   "full": "Norwich City",
   "crest": "norwich.png",
@@ -410,6 +413,7 @@
   "code": "SWI"
  },
  "Watford": {
+  "darkDisc": true,
   "name": "Watford",
   "full": "Watford",
   "crest": "watford.png",
@@ -446,6 +450,7 @@
   "code": "WIG"
  },
  "Wimbledon": {
+  "darkDisc": true,
   "name": "Wimbledon",
   "full": "Wimbledon FC",
   "crest": "wimbledon.png",
@@ -455,6 +460,7 @@
   "code": "WIM"
  },
  "Wolves": {
+  "darkDisc": true,
   "name": "Wolves",
   "full": "Wolverhampton Wanderers",
   "crest": "wolves.png",

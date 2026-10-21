@@ -15,7 +15,7 @@
 
   // ---------- clubs ----------
   const clubs = {};
-  Object.keys(G.clubs).forEach((n) => { const m = meta(n); clubs[n] = { name: n, full: m.full || n, code: m.code, crest: crestOf(n), crestLight: crestLightOf(n), crestCard: crestCardOf(n), accent: m.accent, ink: m.ink, text: m.text }; });
+  Object.keys(G.clubs).forEach((n) => { const m = meta(n); clubs[n] = { name: n, full: m.full || n, code: m.code, crest: crestOf(n), crestLight: crestLightOf(n), crestCard: crestCardOf(n), accent: m.accent, ink: m.ink, text: m.text, darkDisc: !!m.darkDisc }; });
   // Club X: Craig's badge (assets/brand/club_x.png, embedded by build.py; the drawn shield is only a fallback), D2T green as its colour.
   const X_BADGE = window.D2T_CLUBX_BADGE || 'data:image/svg+xml,' + encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 116'><path d='M50 3 L94 18 V60 C94 86 74 104 50 113 C26 104 6 86 6 60 V18 Z' fill='#0E0E10' stroke='#12F06C' stroke-width='5'/><path d='M32 36 L68 80 M68 36 L32 80' stroke='#12F06C' stroke-width='11' stroke-linecap='round'/></svg>");
   clubs['Club X'] = { name: 'Club X', full: 'Club X', code: 'CLX', crest: X_BADGE, accent: '#12F06C', ink: '#000000', text: '#12F06C' };
@@ -525,7 +525,7 @@
   GAME.poachDue = () => { const eng = GAME.eng(); return !!(eng && eng.mode === 'clubx' && eng.phase === 'setup' && eng.career > 1 && !eng.poached); };
   GAME.poached = () => {
     const eng = GAME.eng(), S = GAME.S(); if (!eng || !eng.poached) return [];
-    return eng.poached.map((x) => { const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { id: x.id, name: x.name, slot: x.slot, club: name, crest: c.crest, crestLight: c.crestLight, code: c.code }; });
+    return eng.poached.map((x) => { const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { id: x.id, name: x.name, slot: x.slot, club: name, crest: c.crest, crestLight: c.crestLight, dark: !!c.darkDisc, code: c.code }; });
   };
   GAME.poach = () => { const eng = GAME.eng(); if (!GAME.poachDue()) return []; E.poach(eng, GAME.S()); D2T.save(); return GAME.poached(); };
   // the empty shirts and who left each (by his old shirt first; a shirt emptied by a change of shape takes the next one)
@@ -639,7 +639,7 @@
   };
   GAME.oppStrength = (gw) => { const eng = GAME.eng(), S = GAME.S(), f = eng.fixtures[gw - 1]; return Math.round(E.clubStrength(S, f.opp, new Set(eng.signed.filter((x) => x.date <= f.date).map((x) => x.id)), E.joinersOf(S, eng, f.opp, f.date)).ovr); };
   // the January raid (Craig, 19 Oct): who was taken as the window opened, for the transfer screen's news sheet
-  GAME.janRaid = () => { const eng = GAME.eng(), S = GAME.S(), x = eng && eng.janRaid; if (!x) return null; const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { id: x.id, name: x.name, slot: x.slot, club: name, crest: c.crest, crestLight: c.crestLight, gw: x.gw, card: GAME.card(S, x.id) }; };
+  GAME.janRaid = () => { const eng = GAME.eng(), S = GAME.S(), x = eng && eng.janRaid; if (!x) return null; const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { id: x.id, name: x.name, slot: x.slot, club: name, crest: c.crest, crestLight: c.crestLight, dark: !!c.darkDisc, gw: x.gw, card: GAME.card(S, x.id) }; };
   // After the final whistle: where to next (a transfer window, the next gameweek or the season summary).
   GAME.afterMatch = () => {
     const run = D2T.state.run, eng = GAME.eng();

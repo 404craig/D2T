@@ -144,8 +144,8 @@
       const fx = GAME.fixture(info.gw), opp = fx ? D2T.esc(fx.opp) + (fx.ha === 'H' ? ' (H)' : ' (A)') : '';
       const reduced = D2T.reduced();
       let alive = true, big = true, lastBest = -1, mover = -1, sizeObs = null, placing = false, leaving = false, signing = false, field = null, slotsEl = null, ratingEl = null, timers = [];
-      let janTake = null, janBack = null;   // the January raid's show: { slot, card } keeps the taken player on the pitch until the badge takes him
-      kill = () => { alive = false; timers.forEach(clearTimeout); endDrag(true); sizeObs && sizeObs.disconnect(); janTake && janTake.cancel(); janTake = null; janBack = null; root.classList.remove('rd-busy'); };
+      let janTake = null, janBack = null, janNews = null;   // the January raid's show: { slot, card } keeps the taken player on the pitch until the badge takes him
+      kill = () => { alive = false; timers.forEach(clearTimeout); endDrag(true); sizeObs && sizeObs.disconnect(); janTake && janTake.cancel(); janTake = null; janBack = null; janNews && janNews.stop(); root.classList.remove('rd-busy'); };
 
       // ---------- the pitch above the tray ----------
       function drawPitch(best = -1, fresh = -1) {
@@ -262,11 +262,17 @@
         if (!sl || !pitchEl) return janSheet(600);
         janBack = { slot: jr.slot, card: jr.card }; drawPitch(lastBest);
         root.classList.add('rd-busy');
+        // the Transfer News bar takes the hint line's place (Craig, 21 Oct): the rumour as the sweep starts, the deal as
+        // the badge lands, no count (one raid); it stays until you move on
+        const hint = api.el.querySelector('.sp-hint');
+        if (hint && !janNews) { janNews = SE.newsBar({ count: false }); janNews.el.classList.add('se-news-flow'); hint.style.display = 'none'; hint.after(janNews.el); }
+        const words = SE.raidWords(0);
         await new Promise((r) => timers.push(setTimeout(r, delay)));
         if (!alive) return;
         janTake = SE.raidTake({
-          pitch: pitchEl, slotsEl, slot: jr.slot, crest: jr.crestLight || jr.crest,
-          onLanded: () => api && api.hint(`${jr.name} joins ${jr.club}`),
+          pitch: pitchEl, slotsEl, slot: jr.slot, crest: jr.crestLight || jr.crest, dark: jr.dark,
+          onStart: () => janNews && janNews.say(words.rumour(jr.club)),
+          onLanded: () => janNews && janNews.say(words.deal(jr.club, jr.name)),
           onEmpty: () => { janBack = null; drawPitch(lastBest); }
         });
         await janTake.done; janTake = null; janBack = null;
