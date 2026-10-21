@@ -60,6 +60,9 @@ const RULES = {
   // Club X, every season (Craig, 21 Oct: Greg's two titles in a row, five purples in a season; "run from the lower odds
   // always"): purple 1.5%, legend 0.5%; Classic and the Daily keep the odds above
   levelOddsCareer: [0.38, 0.24, 0.36, 0.015, 0.005],
+  // the Club X draft's three cards a spin (purple and legend never; a sensible player takes the best of three, so these
+  // are set for a mix of bronze, silver and gold in the drafted XI, not the roll's shares)
+  draftOdds: [0.55, 0.33, 0.12, 0, 0],
   // Stars play above their number, for the user's XI only (Craig, 18 Oct: history's clubs play as they did; your built side
   // is where the stars count): above `from` each rating point counts `slope` for his level (purple 1.5, legend 2; a gold
   // plays at his number, so the levels matter, not just the rating), so an 89 purple plays as 93.5 and a 93 legend as 106.
@@ -623,7 +626,8 @@ function pickCard(r, st, pool) {
   return pickWeighted(r, pool, p => (rw && rw[p.id] != null ? rw[p.id] : 1) * (elite ? eliteWeight(p) : 1));
 }
 function drawCard(r, S, st, legends, taken, broad, fit, force) {
-  const odds = st.mode === "clubx" || st.career > 1 ? RULES.levelOddsCareer : RULES.levelOdds;   // Club X always the lower odds (Craig, 21 Oct)
+  // Club X always the lower odds (Craig, 21 Oct); its draft (the first 11) its own, mostly bronze and silver (Craig, 21 Oct: a drafted XI of nine golds)
+  const odds = st.phase === "draft" && st.mode === "clubx" ? RULES.draftOdds : st.mode === "clubx" || st.career > 1 ? RULES.levelOddsCareer : RULES.levelOdds;
   const drawn = (() => { let x = r(); for (let i = 0; i < 5; i++) { x -= odds[i]; if (x <= 0) return i; } return 0; })();
   const lv = force != null ? force : drawn;
   const names = yourNames(st, S), fresh = (p) => !taken.has(p.id) && !taken.has(NAME_TAG + nameKey(p));

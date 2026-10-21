@@ -433,14 +433,16 @@ t("Scout a club: 2 respins for three of one club's cards, never your own club, n
   for (const id of st.roll.cards) { const p = D.playerOf(S, id); assert.strictEqual(p.c, pick); assert.ok(p.lv < 3 && !String(id).startsWith("L:"), "a scout brought a purple with golds left, or a legend"); }
   assert.strictEqual(D.scoutClub(st, S, me), false);
 });
-t("Club X's draft never offers a purple or legend card", () => {
-  const S = G.seasons["2012/13"], L = S.legends;
-  for (const seed of ["d1", "d2", "d3"]) {
+t("Club X's draft never offers a purple or legend card, and a greedy drafter ends with a mix, not a gold XI", () => {
+  const S = G.seasons["2012/13"], L = S.legends; let gold = 0, n = 0;
+  for (const seed of ["d1", "d2", "d3", "d4", "d5", "d6"]) {
     const st = D.newRun({ seed, mode: "clubx", catalogue: [] }); st.clubOffer = ["2012/13"];
     D.chooseClub(st, S, { c: D.historyTable(S, S.deductions).slice(-1)[0].c, f: "4-3-3", xi: [] });
     let guard = 0;
-    while (st.phase === "draft" && guard++ < 12) { for (const id of st.roll.cards) assert.ok(D.playerOf(S, id, L).lv < 3, "a purple or legend in the draft"); D.draftPick(st, S, st.roll.cards[0], D.draftFits(st, S, st.roll.cards[0])[0]); }
+    while (st.phase === "draft" && guard++ < 12) { const cards = st.roll.cards.map(id => D.playerOf(S, id, L)); for (const p of cards) assert.ok(p.lv < 3, "a purple or legend in the draft"); const best = cards.slice().sort((a, b) => b.r - a.r)[0]; D.draftPick(st, S, best.id, D.draftFits(st, S, best.id)[0]); }
+    for (const id of st.xi) { n++; if (D.playerOf(S, id, L).lv === 2) gold++; }
   }
+  assert.ok(gold / (n / 11) < 6, "the draft hands out too many golds: " + (gold / (n / 11)).toFixed(1) + " per XI");   // 55 / 33 / 12 (21 Oct): about 3.5
 });
 t("Scouts never bring purple or legend cards; a career from season 2 draws purples at half the odds", () => {
   const S = G.seasons["2007/08"]; S.legends = S.legends || [];
