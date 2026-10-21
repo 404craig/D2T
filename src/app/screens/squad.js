@@ -358,7 +358,7 @@
         const place = () => {
           if (!el.isConnected) return;
           const rr = root.getBoundingClientRect(), pb = pitch.getBoundingClientRect().bottom, bt = bar.getBoundingClientRect().top;
-          el.style.top = `${Math.round((pb + bt) / 2 - rr.top - 25)}px`;
+          el.style.top = `${Math.round((pb + bt) / 2 - rr.top - (el.offsetHeight || 50) / 2)}px`;
         };
         place();
         const ro = window.ResizeObserver ? new ResizeObserver(place) : null; ro && ro.observe(root);
