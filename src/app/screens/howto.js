@@ -33,7 +33,7 @@
           <li><b>Play 38 games</b>Kick off each match or skip to the score. Everyone else plays their real results.</li>
           <li><b>Transfer rolls</b>Through the season you get a roll: 3 cards appear and you sign one. A new signing may hit the ground running or take two or three games to settle.</li>
           <li><b>Tactics</b>Pick how you play: low block, possession, counter attack, high press, or a balanced mid block. A tactic leans on one of your lines, so it pays when that line is your strength. Each is built for certain shapes.</li>
-          <li><b>Scouting</b>Spend 2 respins to scout one shirt: three players who play there and are better than the man in it. Shirts with nobody better show red.</li>
+          <li><b>Scouting</b>Spend 2 respins to scout one of your shirts (three players who play there and are better than the man in it, gold at most; shirts with nobody better show red) or a club (three of its players this season). Scouts never bring a purple or legend card.</li>
           <li><b>The January raid</b>As the January window opens, a top-half club comes in for one of your players, most likely a star. His shirt is empty for your January rolls; a free agent fills it if you leave it.</li>
           <li><b>Finish high</b>Your final place earns achievements: beat the drop, top half, top 3, the title.</li>
         </ol>

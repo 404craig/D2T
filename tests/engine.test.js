@@ -428,7 +428,7 @@ t("Scout a club: 2 respins for three of one club's cards, never your own club, n
   const before = st.respins, pick = clubs[0].club;
   assert.ok(D.scoutClub(st, S, pick)); assert.strictEqual(st.respins, before - D.RULES.scoutCost); assert.strictEqual(st.roll.scoutClub, pick);
   assert.strictEqual(st.roll.cards.length, 3);
-  for (const id of st.roll.cards) { const p = D.playerOf(S, id); assert.strictEqual(p.c, pick); assert.ok(p.lv < 4 && !String(id).startsWith("L:")); }
+  for (const id of st.roll.cards) { const p = D.playerOf(S, id); assert.strictEqual(p.c, pick); assert.ok(p.lv < 3 && !String(id).startsWith("L:"), "a scout brought a purple or legend"); }
   assert.strictEqual(D.scoutClub(st, S, me), false);
 });
 t("Club X's draft never offers a purple or legend card", () => {
@@ -439,5 +439,16 @@ t("Club X's draft never offers a purple or legend card", () => {
     let guard = 0;
     while (st.phase === "draft" && guard++ < 12) { for (const id of st.roll.cards) assert.ok(D.playerOf(S, id, L).lv < 3, "a purple or legend in the draft"); D.draftPick(st, S, st.roll.cards[0], D.draftFits(st, S, st.roll.cards[0])[0]); }
   }
+});
+t("Scouts never bring purple or legend cards; a career from season 2 draws purples at half the odds", () => {
+  const S = G.seasons["2007/08"]; S.legends = S.legends || [];
+  const st = D.newRun({ seed: "sp", mode: "classic", catalogue: [] });
+  const me = D.historyTable(S, S.deductions).slice(-1)[0].c; st.clubOffer = ["2007/08"]; D.chooseClub(st, S, { c: me, f: "4-4-2", xi: [] }); D.startSeason(st, S);
+  for (const q of D.scoutInfo(st, S)) { const pos = D.FORMATIONS[st.formation][q.slot][0]; const better = S.players.filter(p => p.lv >= 3 && D.fitOf(p, pos) === "green" && !st.seen.includes(p.id)); assert.ok(better.length === 0 || q.better < better.length + 1000); }
+  assert.ok(D.scout(st, S, D.scoutInfo(st, S).find(q => q.better > 0).slot));
+  for (const id of st.roll.cards) assert.ok(D.playerOf(S, id).lv < 3, "a position scout brought a purple or legend");
+  const share = (career) => { const s2 = Object.assign({}, st, { career, seen: [] }); let pur = 0; const N = 4000; for (let i = 0; i < N; i++) { const r = D.stream("odds" + career, i); const id = D.drawCard(r, S, s2, S.legends, new Set(), null, null); const p = D.playerOf(S, id, S.legends); if (p && p.lv >= 3) pur++; } return pur / N; };
+  const a = share(1), b = share(2);
+  assert.ok(a > 0.028 && a < 0.052, "season 1 odds off: " + a); assert.ok(b > 0.01 && b < 0.03 && b < a * 0.7, "career odds off: " + b);
 });
 console.log(`${n} checks passed`);

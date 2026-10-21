@@ -55,6 +55,9 @@ const RULES = {
   // (legendRoll below) so a player who only plays a few games always meets one; whether he takes him is the game.
   // 19 Oct: gold 36% (was 41%; the game was too easy, and more silver and bronze in the rolls makes a gold count for more).
   levelOdds: [0.37, 0.23, 0.36, 0.03, 0.01],
+  // a Club X career from season 2 (Craig, 21 Oct: Greg's two titles in a row, five purples in a season): purple 1.5%,
+  // legend 0.5%, the guaranteed legend kept; Classic, the Daily and a career's first season keep the odds above
+  levelOddsCareer: [0.38, 0.24, 0.36, 0.015, 0.005],
   // Stars play above their number, for the user's XI only (Craig, 18 Oct: history's clubs play as they did; your built side
   // is where the stars count): above `from` each rating point counts `slope` for his level (purple 1.5, legend 2; a gold
   // plays at his number, so the levels matter, not just the rating), so an 89 purple plays as 93.5 and a 93 legend as 106.
@@ -601,7 +604,8 @@ function pickCard(r, st, pool) {
   return pickWeighted(r, pool, p => (rw && rw[p.id] != null ? rw[p.id] : 1) * (elite ? eliteWeight(p) : 1));
 }
 function drawCard(r, S, st, legends, taken, broad, fit, force) {
-  const drawn = (() => { let x = r(); for (let i = 0; i < 5; i++) { x -= RULES.levelOdds[i]; if (x <= 0) return i; } return 0; })();
+  const odds = st.career > 1 ? RULES.levelOddsCareer : RULES.levelOdds;
+  const drawn = (() => { let x = r(); for (let i = 0; i < 5; i++) { x -= odds[i]; if (x <= 0) return i; } return 0; })();
   const lv = force != null ? force : drawn;
   const pool = cardPool(S, st).filter(p => !taken.has(p.id) && (!broad || broadOf(p) === broad) && (!fit || fit(p)));
   if (lv === 4 && legends && legends.length) {
@@ -667,7 +671,7 @@ function signPreview(st, S, cardId, legends) {
 // rated above the man in it, not seen this run. Zero means nobody better (the shirt is red on the sheet).
 function scoutPool(st, S, slot) {
   const pos = FORMATIONS[st.formation][slot][0], holder = st.xi[slot] != null ? playerOf(S, st.xi[slot], S.legends) : null, hr = holder ? holder.r : 0;
-  const pool = cardPool(S, st).filter(p => fitOf(p, pos) === "green");
+  const pool = cardPool(S, st).filter(p => fitOf(p, pos) === "green" && p.lv < 3);   // gold at most: no purple or legend (21 Oct)
   return { pos, hr, better: pool.filter(p => p.r > hr), below: pool.filter(p => p.r <= hr).sort((a, b) => b.r - a.r || b.a - a.a) };
 }
 function scoutInfo(st, S) {
@@ -692,7 +696,7 @@ function scout(st, S, slot) {
 // Scout a club (Craig, 20 Oct): the clubs of the season with cards still to come (never your own), by their final
 // position, and the spend of 2 respins on one of them: three of its cards drawn by rating like a roll (never legend cards).
 function scoutDate(st) { return st.fixtures && st.gw > 0 && st.fixtures[st.gw - 1] ? st.fixtures[st.gw - 1].date : "0000-00-00"; }
-function scoutClubPool(st, S, c) { const d = scoutDate(st); return cardPool(S, st).filter(p => clubAt(p, d) === c && p.c != null); }
+function scoutClubPool(st, S, c) { const d = scoutDate(st); return cardPool(S, st).filter(p => clubAt(p, d) === c && p.c != null && p.lv < 3); }
 function scoutClubs(st, S) {
   const d = scoutDate(st), count = new Map();
   for (const p of cardPool(S, st)) { const c = clubAt(p, d); if (c == null || c === st.club) continue; count.set(c, (count.get(c) || 0) + 1); }
@@ -1027,7 +1031,7 @@ const API = {
   TACTIC_NAMES, tacticOf, tacticLines, setTactic, scoutInfo, scout, scoutClubs, scoutClub, legendRoll, januaryRaid, agedRating,
   schedule, fixturesOf, recentWeights, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
   poach, joinersOf, fillHoles, draftOrder, draftSlot, draftFormation, draftPick, draftFits, listsPos, DRAFT_MODES, carryIn, simResults,
-  startSeason, inWindow, currentWindow, newRoll, respinCards, signPreview, sign, pass,
+  startSeason, inWindow, currentWindow, newRoll, drawCard, respinCards, signPreview, sign, pass,
   otherResults, strengthLoss, expectedGoals, simMatch, playMatch, table, historyTable, historyPositions, positionsSoFar, seasonSummary
 };
 if (typeof module !== "undefined" && module.exports) module.exports = API; else root.D2TE = API;
