@@ -2366,10 +2366,13 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 
 .nA .tw{flex-direction:column;align-items:stretch;justify-content:center;gap:3px}
 .nA .ln{display:block;overflow:hidden;white-space:nowrap;line-height:1.1}
-.nA .l1 .tx{font:900 italic 14px/1.1 'Exo 2';text-transform:uppercase}
-.nA .l2 .tx{font:700 12px/1.1 'Exo 2';text-transform:none;letter-spacing:0}
+.nA .l1 .tx,.nA .l2 .tx{font:900 italic 11px/1.15 'Exo 2';text-transform:uppercase;letter-spacing:.08em}
+
 .nA .ln.sc{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px);mask-image:linear-gradient(90deg,transparent 0,#000 14px)}
 .nA .tw.sc{-webkit-mask-image:none;mask-image:none}
+
+.nA .hl img{display:none}
+.nA .v{padding-left:8px}
 </style></head><body class="pg">
 <div class="wrap">
 <h1>Raid: deadline day</h1>
@@ -2477,7 +2480,6 @@ function say(top,bot,club,count,dim){bt.forEach(clearTimeout);bt=[];const bar=$(
  const over=(ln,tx)=>Math.max(0,tx.scrollWidth-ln.clientWidth+6);
  L.forEach(([ln,tx])=>{set(ln,tx,0);tx.style.opacity=1;tx.textContent='';});
  if(RM){L.forEach(([ln,tx,s])=>tx.textContent=s);return;}
- img.animate([{opacity:0,transform:'scale(.3)'},{opacity:1,transform:'scale(1.15)',offset:.7},{opacity:1,transform:'none'}],{duration:260,easing:'ease-out'});
  const loop=(ln,tx)=>{const o=over(ln,tx);tx.style.transition='opacity .2s';tx.style.opacity=0;BT(()=>{set(ln,tx,0);void tx.offsetWidth;tx.style.transition='opacity .2s';tx.style.opacity=1;BT(()=>{set(ln,tx,o,`transform ${Math.max(.8,o/60)}s linear`);BT(()=>loop(ln,tx),Math.max(800,o/60*1000)+2200);},1200);},220);};
  const print=(n)=>{if(n>1)return;const [ln,tx,s]=L[n];let i=0;const type=()=>{tx.textContent=s.slice(0,++i);set(ln,tx,over(ln,tx),'transform .12s linear');
   if(i<s.length)BT(type,s[i]===' '?50:28);else{if(over(ln,tx)>0)BT(()=>loop(ln,tx),2200);BT(()=>print(n+1),120);}};type();};
@@ -2591,7 +2593,7 @@ async function play(k){if(busy)return;busy=true;$('#play').disabled=true;$('#pla
  busy=false;$('#play').disabled=false;$('#play3').disabled=false;}
 function notes(){$('#notes').innerHTML=`<h2>What changed</h2><ol>
 <li><b>Yellow and black.</b> The crosshair is yellow with a thin black edge, so it stays sharp over gold cards and never looks like the amber fit ring. The sweep, the flashes on each player, the lock pulses and the target's glow are yellow to match.</li>
-<li><b>The bar talks through the hunt, on two lines.</b> As the sweep starts it prints a rumour with the buying club's crest, e.g. "CHELSEA ARE RUMOURED / to be interested in one of Club X's players", the count dimmed. When the badge stamps down it prints the deal, e.g. "CHELSEA SIGN SYLVAIN DISTIN / from Club X for an undisclosed fee", and the count goes up. The top line prints first, then the second; a line too long for the bar scrolls left from its words while the crest stays put.</li>
+<li><b>The bar talks through the hunt, on two lines.</b> As the sweep starts it prints a rumour, e.g. "CHELSEA ARE RUMOURED / TO BE INTERESTED IN ONE OF CLUB X'S PLAYERS", the count dimmed. When the badge stamps down it prints the deal, e.g. "CHELSEA SIGN SYLVAIN DISTIN / FROM CLUB X FOR AN UNDISCLOSED FEE", and the count goes up. The top line prints first, then the second; both lines in capitals at the same size as TRANSFER NEWS; a line too long for the bar scrolls left, fading at its left edge. No badge in the bar: the badge is the one stamping on the pitch.</li>
 <li><b>Variants.</b> Rumours: "are rumoured / to be interested in one of Club X's players", "are circling / Club X with an eye on one of their stars", "make an enquiry / about a Club X player", "scouts spotted / watching Club X in pre-season". Deals: "sign {player} / from Club X for an undisclosed fee", "{player} joins {club} / leaving Club X on a permanent deal", "snap up {player} / from Club X in a late swoop". Club X is whatever you named your club. Play the summer poach to see three different pairs.</li>
 <li><b>Longer.</b> The hunt runs 3.6 s instead of 2.4 s, the crosshair lingers a little longer on each player, and it holds on the target for 0.65 s after the lock instead of 0.2 s. About 7 s a player instead of 5.</li>
 <li>Everything else as live: the badge from the far touchline, the shock ring and the pitch kick, him pulled in, the empty TO shirt, the rating drop.</li></ol>
