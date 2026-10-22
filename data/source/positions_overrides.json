@@ -1,4 +1,5 @@
 {
-  "_note": "Craig's own calls on a player's preferred positions, main first, applied to every season of his over data/source/positions.json by scripts/build-data.py. Keyed by the player name as in positions.json.",
-  "Gianfranco Zola": ["CAM", "ST"]
+  "_note": "Craig's own calls on a player's preferred positions, main first, applied to every season of his over data/source/positions.json by scripts/build-data.py: a list replaces his positions, {\"add\": [...]} adds these as preferred positions after his main one in every season. Keyed by the player name as in positions.json.",
+  "Gianfranco Zola": ["CAM", "ST"],
+  "Gareth Bale": {"add": ["LW"]}
 }
