@@ -511,10 +511,11 @@
     if (!E.swapSetup(eng, pitch, sub, GAME.S())) return false; D2T.save(); return true;
   };
   // Swap two shirts on a roll's pitch (Craig, 15 Oct: you can still move your players around while a roll is up); an empty
-  // shirt moves too, so a player can go into a gap. Not in the draft, where shirts are filled one by one.
+  // shirt moves too, so a player can go into a gap. In Club X's open draft too (Craig, 22 Oct: Salah from RW to ST mid-draft),
+  // never in Dare2Dream's draft, where the shirts are filled in a fixed order.
   GAME.swapSlots = (i, j) => {
-    const eng = GAME.eng();
-    if (i === j || eng.phase === 'draft' || !['setup', 'window', 'prematch'].includes(eng.phase)) return false;
+    const eng = GAME.eng(), openDraft = eng.phase === 'draft' && E.draftSlot(eng) == null;
+    if (i === j || (eng.phase === 'draft' && !openDraft) || !['setup', 'window', 'prematch', 'draft'].includes(eng.phase)) return false;
     if (i < 0 || j < 0 || i >= eng.xi.length || j >= eng.xi.length) return false;
     if (!GAME.canPlay(eng.xi[i], j) || !GAME.canPlay(eng.xi[j], i)) return false;
     const a = eng.xi[i]; eng.xi[i] = eng.xi[j]; eng.xi[j] = a; D2T.save(); return true;

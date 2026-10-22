@@ -227,7 +227,7 @@
           // nothing picked from the tray: tap one of yours, then another shirt, to swap them (Craig, 15 Oct); tap him
           // again for his big card, to see where else he can play before you sign anyone (Craig, 22 Oct)
           const mine = GAME.lineup().xi[slot];
-          if (draft) { if (mine) { openMine(slot); return; } api.hint('Pick one of the three first, then tap a shirt'); return; }
+          if (draft && !di.open) { if (mine) { openMine(slot); return; } api.hint('Pick one of the three first, then tap a shirt'); return; }
           if (mover < 0) { if (!mine) { api.hint('Pick one of the three first, or tap one of yours to move him'); return; } mover = slot; drawPitch(); api.hint('Tap another shirt to swap him, or tap him again for his card'); return; }
           if (mover === slot) { openMine(slot); return; }
           moveTo(mover, slot);
@@ -322,7 +322,7 @@
         if (!GAME.swapSlots(from, to)) { drawPitch(); if (mv && !GAME.canPlay(mv.id, to)) { api.hint(GAME.noPlayWord(mv.id)); SND.play('dropCancel'); } return; }
         SND.play('cardDrop');
         drawPitch(-1, to);
-        api.hint('Drag a player onto the pitch, or tap him then a shirt');
+        api.hint(draft ? 'Drag one onto an open shirt, or tap him then a shirt' : 'Drag a player onto the pitch, or tap him then a shirt');
       }
       // Respin or scout (Craig, 18 and 20 Oct): the respin button opens one sheet in the game's style, "N respins left",
       // three option cards: Respin (1), Scout a position (2) and Scout a club (2). A position: your shirts drawn as the
@@ -424,8 +424,8 @@
         if (signing || e.button || !api) return;
         const s = e.target.closest('.sp-slot');
         if (!s || !api.el.contains(s)) {
-          // a card of yours on the pitch can be dragged onto another shirt (not in the draft, not with a tray card picked)
-          const w = placing && !draft && e.target.closest('.tr-field .se-cardwrap');
+          // a card of yours on the pitch can be dragged onto another shirt (not in Dare2Dream's draft, not with a tray card picked)
+          const w = placing && (!draft || di.open) && e.target.closest('.tr-field .se-cardwrap');
           if (w && GAME.lineup().xi[+w.dataset.i] && api.selected() < 0) drag = { pitch: +w.dataset.i, x0: e.clientX, y0: e.clientY, pid: e.pointerId, moved: false };
           return;
         }
