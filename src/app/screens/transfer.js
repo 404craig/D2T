@@ -528,7 +528,7 @@
           // a purple or legend card gets the rare reveal (screens/reveal.js); the roll counts as spun as it starts
           rare: (p) => D2T.rareReveal.isRare(p),
           // the positions he is green in, under each card, revealed with it as its reel lands (Craig, 15 and 16 Oct)
-          below: (p) => { const list = p.main ? [p.main, ...(p.alt || [])] : [p.pos]; const tags = GAME.rollTags(), ti = tags ? GAME.rollCards().findIndex((c) => c.id === p.id) : -1, tag = ti >= 0 ? tags[ti] : null; return `<div class="sp-gp sp-below" aria-label="Green in ${list.join(', ')}${tag ? tag === 'better' ? ', better than the man in the shirt' : ', the next best there' : ''}">${list.join('<i>/</i>')}${tag ? `<span class="sp-tag${tag === 'next' ? ' is-next' : ''}">${tag === 'better' ? 'Better' : 'Next best'}</span>` : ''}</div>`; },
+          below: (p) => { const list = p.main ? [p.main, ...(p.alt || [])] : [p.pos]; const tags = GAME.rollTags(), ti = tags ? GAME.rollCards().findIndex((c) => c.id === p.id) : -1, tag = ti >= 0 ? tags[ti] : null; return `<div class="sp-gp sp-below" aria-label="Green in ${list.join(', ')}${tag ? tag === 'better' ? ', better than the man in the shirt' : ', the next best there' : ''}">${list.join('<i>/</i>')}${tag === 'next' ? '<span class="sp-tag is-next">Next best</span>' : ''}</div>`; },
           onCommit: () => { st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); },
           onSettled: () => { leaving = false; st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); timers.push(setTimeout(() => enterPlacing(true), reduced ? 0 : 450)); },
           accent: LV_ACCENT,
