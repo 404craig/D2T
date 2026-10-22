@@ -59,7 +59,8 @@ const RULES = {
   legendGuarantee: false,
   // Club X, every season (Craig, 21 Oct: Greg's two titles in a row, five purples in a season; "run from the lower odds
   // always"): purple 1.5%, legend 0.5%; Classic and the Daily keep the odds above
-  levelOddsCareer: [0.38, 0.24, 0.36, 0.015, 0.005],
+  // 22 Oct (Craig): 35 / 40 / 23 / 1.5 / 0.5, more silver and less gold so the side is built up over time
+  levelOddsCareer: [0.35, 0.40, 0.23, 0.015, 0.005],
   // the Club X draft's three cards a spin (purple and legend never; a sensible player takes the best of three, so these
   // are set for a mix of bronze, silver and gold in the drafted XI, not the roll's shares)
   draftOdds: [0.55, 0.33, 0.12, 0, 0],
