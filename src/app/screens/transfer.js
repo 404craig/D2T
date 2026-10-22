@@ -224,10 +224,12 @@
           const w = e.target.closest('.se-cardwrap'); if (!w || !placing) return;
           const i = api.selected(), slot = +w.dataset.i;
           if (i >= 0) { mover = -1; sign(i, slot); return; }
-          // nothing picked from the tray: tap one of yours, then another shirt, to swap them (Craig, 15 Oct)
-          if (draft) { api.hint('Pick one of the three first, then tap a shirt'); return; }
-          if (mover < 0) { if (!GAME.lineup().xi[slot]) { api.hint('Pick one of the three first, or tap one of yours to move him'); return; } mover = slot; drawPitch(); api.hint('Tap another shirt to swap him there'); return; }
-          if (mover === slot) { mover = -1; drawPitch(); api.hint('Drag a player onto the pitch, or tap him then a shirt'); return; }
+          // nothing picked from the tray: tap one of yours, then another shirt, to swap them (Craig, 15 Oct); tap him
+          // again for his big card, to see where else he can play before you sign anyone (Craig, 22 Oct)
+          const mine = GAME.lineup().xi[slot];
+          if (draft) { if (mine) { openMine(slot); return; } api.hint('Pick one of the three first, then tap a shirt'); return; }
+          if (mover < 0) { if (!mine) { api.hint('Pick one of the three first, or tap one of yours to move him'); return; } mover = slot; drawPitch(); api.hint('Tap another shirt to swap him, or tap him again for his card'); return; }
+          if (mover === slot) { openMine(slot); return; }
           moveTo(mover, slot);
         });
       }
@@ -381,6 +383,24 @@
           });
         });
       }
+      // the big card of one of your own players on the pitch (the squad screen's, D2T.cards.info under it)
+      function openMine(slot) {
+        const card = GAME.lineup().xi[slot], w = slotsEl.querySelector(`.se-cardwrap[data-i="${slot}"]`);
+        if (!card || !w) return;
+        const W = Math.min(236, Math.round(root.clientWidth * 0.6));
+        SND.play('cardSelect', 0);
+        D2T.cards.openLarge(w.querySelector('.d2c') || w, D2T.cards.player(card, { w: W }), { w: W, below: D2T.cards.info(card), scroll: true });
+      }
+      // a tap on the grass or beside the tray's cards lets go of whatever is picked (Craig, 22 Oct): a tray card or one
+      // of your own players; the pitch goes back to plain and the main button to its resting label
+      function deselect() {
+        if (!api || (api.selected() < 0 && mover < 0)) return;
+        api.clear(); mover = -1;
+        if (draft) api.setLabel('Pick one');
+        drawPitch(draft ? di.slot : -1);
+        api.hint(draft ? (di.open ? 'Drag one onto an open shirt, or tap him then a shirt' : 'Drag one onto the lit shirt, or tap him then Sign') : 'Pick one of the three, or tap one of yours to move him');
+        SND.play('tapSmall');
+      }
       function pass() {
         if (signing) return;
         SND.play('pass');
@@ -466,6 +486,14 @@
         if ((suppress >= 0 && e.target.closest('.sp-slot')) || (suppressPitch && e.target.closest('.tr-field'))) { e.stopPropagation(); e.preventDefault(); }
         suppress = -1; suppressPitch = false;
       }, true);
+      // tap off the cards to let go (after the drag guard above, so a drag's own click never lands here)
+      root.addEventListener('click', (e) => {
+        if (!placing || signing) return;
+        const t = e.target;
+        if (t.closest('.se-cardwrap, .sp-slot, .se-formlink, button, .game-bar, .sheet, .topbar, .se-news')) return;
+        if (!t.closest('.tr-pitch, .sp-stage, .sp-hint')) return;
+        deselect();
+      });
       const blockTouch = (e) => { if (drag && drag.moved && e.cancelable) e.preventDefault(); };
       window.addEventListener('touchmove', blockTouch, { passive: false });
       const prevKill = kill;
