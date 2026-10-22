@@ -10,6 +10,7 @@ const L = require("./legends.js")(G);
 const [start = "2012/13", nSeasons = "8", nSeeds = "6"] = process.argv.slice(2);
 if (process.env.STAR) D.RULES.star.slope = JSON.parse(process.env.STAR);
 if (process.env.STARCAP) D.RULES.star.cap = +process.env.STARCAP;
+if (process.env.ODDS) D.RULES.levelOddsCareer = JSON.parse(process.env.ODDS);   // e.g. ODDS=[0.35,0.40,0.23,0.015,0.005]
 const KEYS = Object.keys(G.seasons).sort();
 const bottomOf = (S) => D.historyTable(S, S.deductions).slice(-1)[0].c;
 const mainClub = (S, p) => S.clubs[p.c2 != null && (p.a2 || 0) > (p.a1 || 0) ? p.c2 : p.c].name;
@@ -36,7 +37,7 @@ function carrySeason(prevS, carry, key, aging) {
 const originOf = (S, id) => { if (id == null) return null; if (String(id).startsWith("L:")) return { L: id, sk: id.split(":").pop(), j: S.season }; const p = D.playerOf(S, id), j = p.j || S.season; if (p.oid != null && String(p.oid).startsWith("L:")) return { L: p.oid, sk: p.sk, j }; return p.oid != null ? { sk: p.sk, id: p.oid, j } : { sk: S.season, id, j }; };
 function playSeason(st, S, strategy, seed) {
   let guard = 0; const r = D.stream(seed, "policy");
-  while (st.phase !== "summary" && guard++ < 600) { if (st.phase === "setup") { D.poach(st, S); D.startSeason(st, S); } else if (st.phase === "window") decide(st, S, strategy, r); else if (st.phase === "draft") { const id = st.roll.cards[0]; D.draftPick(st, S, id, D.draftFits(st, S, id)[0]); } else if (st.phase === "prematch") D.playMatch(st, S); }
+  while (st.phase !== "summary" && guard++ < 600) { if (st.phase === "setup") { D.poach(st, S); D.startSeason(st, S); } else if (st.phase === "window") decide(st, S, strategy, r); else if (st.phase === "draft") { const id = st.roll.cards.map(x => D.playerOf(S, x, S.legends)).sort((a, b) => b.r - a.r)[0].id; D.draftPick(st, S, id, D.draftFits(st, S, id)[0]); } else if (st.phase === "prematch") D.playMatch(st, S); }
 }
 for (const strategy of ["average", "greedy"]) {
   const rows = [];
@@ -49,7 +50,7 @@ for (const strategy of ["average", "greedy"]) {
       playSeason(st, S, strategy, "career" + s + key);
       const xi = st.xi.map((id) => D.playerOf(S, id, L)), P = D.plainStrength(S, st);
       titles += st.final.finish === 1;
-      rows.push({ n, key, ovr: P.ovr, pur: xi.filter((p) => p && p.lv === 3).length, leg: xi.filter((p) => p && p.lv === 4).length, pts: st.final.pts, fin: st.final.finish, titles });
+      rows.push({ n, key, ovr: P.ovr, br: xi.filter((p) => p && p.lv === 0).length, sv: xi.filter((p) => p && p.lv === 1).length, gd: xi.filter((p) => p && p.lv === 2).length, pur: xi.filter((p) => p && p.lv === 3).length, leg: xi.filter((p) => p && p.lv === 4).length, pts: st.final.pts, fin: st.final.finish, titles });
       const i = KEYS.indexOf(key); if (i < 0 || i >= KEYS.length - 1 || st.final.finish > S.clubs.length - 3) break;
       const carry = st.xi.map((id) => originOf(S, id)), nextKey = KEYS[i + 1];
       const built = carrySeason(S, carry, nextKey, !!process.env.AGING); S = built.S; key = nextKey;
@@ -62,6 +63,6 @@ for (const strategy of ["average", "greedy"]) {
   for (let n = 1; n <= +nSeasons; n++) {
     const a = rows.filter((x) => x.n === n); if (!a.length) break;
     const avg = (f) => (a.reduce((t, x) => t + f(x), 0) / a.length);
-    console.log(`  season ${n} (${a.length} careers): XI ${avg((x) => x.ovr).toFixed(1)}, purples ${avg((x) => x.pur).toFixed(1)}, legends ${avg((x) => x.leg).toFixed(1)}, pts ${avg((x) => x.pts).toFixed(0)}, finish ${avg((x) => x.fin).toFixed(1)}, titles ${(100 * a.filter((x) => x.fin === 1).length / a.length).toFixed(0)}%`);
+    console.log(`  season ${n} (${a.length}): XI ${avg((x) => x.ovr).toFixed(1)}, B/S/G/P/L ${['br','sv','gd','pur','leg'].map((k) => avg((x) => x[k]).toFixed(1)).join('/')}, pts ${avg((x) => x.pts).toFixed(0)}, finish ${avg((x) => x.fin).toFixed(1)}, titles ${(100 * a.filter((x) => x.fin === 1).length / a.length).toFixed(0)}%`);
   }
 }
