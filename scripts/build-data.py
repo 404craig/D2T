@@ -142,10 +142,19 @@ _pp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "so
 POSITIONS = json.load(open(_pp, encoding="utf-8")) if os.path.exists(_pp) else {}
 # Craig's own calls (15 Oct: Zola's main position is CAM, whatever the data says), every season of the player
 _po = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "source", "positions_overrides.json")
+# A list replaces his positions; {"add": [...]} keeps each season's own and adds these as preferred (green) positions
+# straight after his main one (Craig, 22 Oct: Gareth Bale on the left wing)
 for _name, _pos in (json.load(open(_po, encoding="utf-8")) if os.path.exists(_po) else {}).items():
     if _name.startswith("_"): continue
     for _season in POSITIONS.values():
-        if _name in _season: _season[_name] = list(_pos)
+        if _name not in _season: continue
+        if isinstance(_pos, dict):
+            cur = list(_season[_name])
+            for k, extra in enumerate(_pos.get("add", [])):
+                if extra not in cur: cur.insert(min(1 + k, len(cur)), extra)
+            _season[_name] = cur
+        else:
+            _season[_name] = list(_pos)
 
 
 # Icons and honours (Craig, 15 Oct 2026; docs/cards/ICONS.md): the popular all-time players from published lists plus
