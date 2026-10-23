@@ -255,13 +255,13 @@
           field.animate([{ opacity: 0, transform: 'translateY(-14px)' }, { opacity: 1, transform: 'none' }], { duration: 420, delay: 160, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
         } else api.el.classList.add('is-placing');
         api.hint(draft ? (di.open ? 'Drag one onto an open shirt, or tap him then a shirt' : 'Drag one onto the lit shirt, or tap him then Sign') : 'Drag a player onto the pitch, or tap him then a shirt');
-        if (janShow && !janShown) { janShown = true; playJanRaid(animate ? 760 : 400); }
+        if (janShow && !janShown && !preRaid) { janShown = true; playJanRaid(animate ? 760 : 400); }
       }
       // the January raid's show (Craig, 20 Oct; Sweep and strike, SE.raidTake): the taken player is put back in his shirt
       // as the pitch appears, the crosshair hunts him down and the rival's badge takes him; then the sheet
       async function playJanRaid(delay) {
         const sl = slotsEl.querySelector(`.se-slot[data-i="${jr.slot}"]`), pitchEl = field && field.querySelector('.se-pitch');
-        if (!sl || !pitchEl) return janSheet(600);
+        if (!sl || !pitchEl) { root.classList.remove('rd-busy'); return janSheet(600); }
         janBack = { slot: jr.slot, card: jr.card }; drawPitch(lastBest);
         root.classList.add('rd-busy');
         // the Transfer News bar takes the hint line's place (Craig, 21 Oct): the rumour as the sweep starts, the deal as
@@ -556,6 +556,29 @@
       // the show plays on the pitch first (not with reduced motion, and only while his shirt is still empty)
       const janShow = janDue && !reduced && !!jr.card && eng.xi[jr.slot] == null;
       let janShown = false;
+      // the raid comes before the window's first spin (Craig, 23 Oct: the sheet, then the raid, then the spin): the pitch
+      // shows on its own, the badge takes him, the "January raid" sheet, and closing it goes back to Spin
+      const preRaid = janShow && st.spun !== rollKey;
+      function raidFirst() {
+        if (!alive || janShown) return;
+        if (!api || !slotsEl) { timers.push(setTimeout(raidFirst, 120)); return; }
+        janShown = true;
+        root.classList.add('rd-busy');
+        api.el.classList.add('is-placing', 'tr-preraid');
+        const sub = field.querySelector('.tr-head-t span'); if (sub) { sub.dataset.was = sub.textContent; sub.textContent = 'A top-half side is coming in for one of yours'; }
+        drawPitch();
+        if (!reduced) field.animate([{ opacity: 0, transform: 'translateY(-14px)' }, { opacity: 1, transform: 'none' }], { duration: 420, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
+        playJanRaid(900);
+      }
+      function raidDone() {
+        if (!preRaid || !alive || !api) return;
+        const hint = api.el.querySelector('.sp-hint');
+        if (janNews) { janNews.stop(); janNews.el.remove(); janNews = null; }
+        if (hint) hint.style.display = '';
+        const go = () => { api.el.classList.remove('is-placing', 'tr-preraid'); api.hint('Hit Spin to roll three players'); const sub = field.querySelector('.tr-head-t span'); if (sub && sub.dataset.was) sub.textContent = sub.dataset.was; };
+        if (reduced) return go();
+        field.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: 'ease-in', fill: 'forwards' }).onfinish = () => { go(); field.getAnimations().forEach((x) => x.cancel()); };
+      }
       // the emblem burst opens each window and the draft, not every one of the 11 draft spins
       if (st.spun === rollKey || (draft && di.step > 1)) build();
       else intr = intro(body, () => { intr = null; build(); });
@@ -566,7 +589,7 @@
         timers.push(setTimeout(() => {
           if (!alive) return;
           if (!janShow) SND.play('playerOut');
-          const sh = D2T.sheet({ title: 'January raid', body: el, onClose: () => { st.janSeen = true; D2T.save(); } });
+          const sh = D2T.sheet({ title: 'January raid', body: el, onClose: () => { st.janSeen = true; D2T.save(); raidDone(); } });
           sh.el.classList.add('se-run', 'se-poach-sheet');
           ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
           el.querySelector('.se-poach-go').onclick = () => sh.close();
@@ -579,11 +602,11 @@
           if (!alive) return;
           const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">The January window is open. Players go out as well as come in: a top-half side comes in for one of yours as it opens, then you have three January rolls to put things right.</p>
             <button class="btn se-btn se-poach-go" type="button">Continue</button></div>`);
-          const sh = D2T.sheet({ title: 'January window', body: el, onClose: () => { st.janIntro = true; D2T.save(); } });
+          const sh = D2T.sheet({ title: 'January window', body: el, onClose: () => { st.janIntro = true; D2T.save(); if (preRaid) timers.push(setTimeout(raidFirst, 300)); } });
           tint(sh);
           el.querySelector('.se-poach-go').onclick = () => sh.close();
         }, 600));
-      }
+      } else if (preRaid) timers.push(setTimeout(raidFirst, 600));
     },
     unmount() { kill && kill(); kill = null; intr && intr.cancel(); intr = null; api && api.unmount(); api = null; }
   });
