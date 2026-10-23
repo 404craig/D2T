@@ -105,10 +105,11 @@
     const G = D2T.game, cmp = G.dailyCompare(), best = cmp.best, top = G.dailyBest(), o = D2T.ordinal, esc = D2T.esc;
     const crest = (name) => { const c = G.club(name); return c && c.crest ? `<img src="${c.crest}" alt="">` : ''; };
     const rise = (n) => `<span class="fr-rise">${UP} ${n}</span>`;
-    const left = top ? `<b>${crest(top.club)}${rise(top.rise)}</b><small>${esc(top.club)} · ${o(top.histFinish)} to ${o(top.finish)}</small>`
+    // the finish first, then the rise (Craig, 23 Oct: "1st" then the up arrow and 17)
+    const left = top ? `<b>${crest(top.club)}${o(top.finish)}${rise(top.rise)}</b><small>${esc(top.club)} · ${o(top.histFinish)} to ${o(top.finish)}</small>`
       : '<b>None yet</b><small>Play today to set one</small>';
     let right, newBest = false;
-    if (res) { newBest = cmp.isBest; right = `<b>${crest(d.name)}${rise(res.rise)}</b><small>${newBest ? 'New best' : `${esc(d.name)} · ${o(res.histFinish)} to ${o(res.finish)}`}</small>`; }
+    if (res) { newBest = cmp.isBest; right = `<b>${crest(d.name)}${o(res.finish)}${rise(res.rise)}</b><small>${newBest ? 'New best' : `${esc(d.name)} · ${o(res.histFinish)} to ${o(res.finish)}`}</small>`; }
     else if (!best) right = `<b>${crest(d.name)}${esc(d.name)}</b><small>Their real finish: ${o(d.pos)}</small>`;
     else { const need = d.pos - best.rise; right = need < 1 ? `<b>${crest(d.name)}Still to play</b><small>Their real finish: ${o(d.pos)}</small>`
       : need === 1 ? `<b>${crest(d.name)}Win the league</b><small>${best.finish > 1 ? 'to beat your best' : 'to match your best'}</small>`
