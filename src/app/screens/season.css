@@ -547,3 +547,4 @@
 .rd-dim .se-slot:not(.rd-tint) { transition: filter .3s; }
 .rd-beam { position: absolute; left: -10%; top: 0; width: 120%; height: 100%; opacity: 0; background: linear-gradient(90deg, transparent 0%, rgba(255,213,0,0) 47%, rgba(255,213,0,.16) 50%, rgba(255,213,0,0) 53%, transparent 100%); filter: blur(6px); }
 .rd-busy .tr-pitch, .rd-busy .sp-stage { pointer-events: none; }
+.rd-busy .game-bar .bar-main, .rd-busy .game-bar .bar-mid { pointer-events: none; }
