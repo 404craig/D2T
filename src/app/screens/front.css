@@ -296,7 +296,7 @@ button.fr-dtile:active { transform: scale(.98); }
 .fr-dtile b { font: 900 italic 17px/1 'Exo 2', sans-serif; display: flex; align-items: center; gap: 5px; white-space: nowrap; overflow: hidden; }
 .fr-dtile b img { width: 18px; height: 18px; object-fit: contain; flex: none; }
 .fr-dtile small { font-size: 10px; font-weight: 700; color: #CFCFD6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.fr-rise { color: #12F06C; display: inline-flex; align-items: center; gap: 3px; }
+.fr-rise { color: #12F06C; display: inline-flex; align-items: center; gap: 3px; margin-left: 2px; }
 .fr-up { width: .7em; height: .7em; }
 /* a game locked for repair (Dare2Dream, Craig 13 Oct): no tap, a grey lock badge top right, the wash and mark dimmed */
 .fr-locked { cursor: default; box-sizing: border-box; }
