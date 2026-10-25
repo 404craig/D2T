@@ -365,7 +365,7 @@
         return { el, say: nb.say, stop() { nb.stop(); ro && ro.disconnect(); } };
       }
       // the end state after a refresh or with reduced motion: the last deal, all three counted
-      function lastDeal(list) { const x = list[list.length - 1]; ticker.say(SE.raidWords(list.length - 1).deal(x.club, x.name), { n: list.length }); }   // hoisted: called from the refresh branch above
+      function lastDeal(list) { const x = list[list.length - 1]; ticker.say(SE.raidWords(list.length - 1).deal(x.club, x.name), { n: list.length, still: true }); }   // hoisted: called from the refresh branch above
       function poachSummary(list) {
         const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">Other sides came in over the summer. Fill the gaps with your rolls.</p>
           <ul>${list.map((x) => `<li>${x.crest ? `<img src="${x.crest}" alt="">` : ''}<b>${D2T.esc(x.name)}</b><span>to ${D2T.esc(x.club)}</span></li>`).join('')}</ul>
