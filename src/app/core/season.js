@@ -292,9 +292,12 @@
   // change; reduced motion: at once), stepping down to 10px if a line still overflows; on the right the count "n/3"
   // (dimmed while the hunt is on), none when `count` is false. say(text, { n, dim }).
   SE.newsBar = ({ count = true } = {}) => {
-    const el = D2T.h(`<div class="se-news" role="status" aria-label="Transfer news"><b class="se-nb-tag"><span>Transfer</span><span>News</span></b><div class="se-nb-view"><span class="se-nb-text"></span></div>${count ? '<b class="se-nb-count"></b>' : ''}</div>`);
+    // hidden until its first headline; then it wipes in left to right over a second (Craig, 25 Oct), the black tag
+    // first, and that headline prints once the wipe is done; later headlines never wipe; `still` (a refresh's last deal)
+    // and reduced motion show it at once
+    const el = D2T.h(`<div class="se-news se-nb-wait" role="status" aria-label="Transfer news"><b class="se-nb-tag"><span>Transfer</span><span>News</span></b><div class="se-nb-view"><span class="se-nb-text"></span></div>${count ? '<b class="se-nb-count"></b>' : ''}</div>`);
     const tx = el.querySelector('.se-nb-text'), ct = el.querySelector('.se-nb-count');
-    let timers = [];
+    let timers = [], shown = false;
     const clear = () => { timers.forEach(clearTimeout); timers = []; };
     const say = (text, o = {}) => {
       clear();
@@ -315,10 +318,15 @@
       const base = parseFloat(getComputedStyle(tx).fontSize) || 11;
       if (fit() > 0) { tx.style.fontSize = `${(base * 0.9).toFixed(1)}px`; if (fit() > 0) { tx.style.fontSize = `${(base * 0.8).toFixed(1)}px`; tx.style.letterSpacing = '.04em'; fit(); } } else tx.style.letterSpacing = '';
       const cs = [...tx.querySelectorAll('i')];
-      if (D2T.reduced()) { cs.forEach((c) => c.classList.add('on')); return; }
+      let wait = 200;
+      if (!shown) {
+        shown = true; el.classList.remove('se-nb-wait');
+        if (!o.still && !D2T.reduced()) { el.animate([{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 1000, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' }); wait = 1000; }
+      }
+      if (D2T.reduced() || o.still) { cs.forEach((c) => c.classList.add('on')); return; }
       let k = 0;
       const type = () => { if (k >= cs.length || !el.isConnected) return; cs[k].classList.add('on'); const gap = cs[k + 1] && cs[k + 1].parentNode !== cs[k].parentNode; k++; timers.push(setTimeout(type, gap ? 60 : 28)); };
-      timers.push(setTimeout(type, 200));
+      timers.push(setTimeout(type, wait));
     };
     return { el, say, stop: clear };
   };
