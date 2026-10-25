@@ -155,6 +155,10 @@
 .tr-head-t b { display: block; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .tr-head-t span { display: block; font-size: 14px; color: var(--soft); margin-top: 3px; }
 .se-pitch.tr-field { flex: 1 1 auto; min-height: 0; max-height: none; }
+/* the January raid before the window's first spin (Craig, 25 Oct): no empty tray, the pitch takes the room, as tall as
+   the pre-season squad's (its 470px cap) */
+.sp-screen.tr-preraid .sp-stage { display: none; }
+.sp-screen.tr-preraid .se-pitch.tr-field { max-height: 470px; }
 
 /* handwritten note pointing at the respin button (as Tenaball's "stats" note) */
 .sp-tip { position: absolute; left: 96px; bottom: calc(100% - 4px); display: flex; align-items: flex-start; gap: 2px; color: #fff; pointer-events: none; opacity: .92; transition: opacity .4s; animation: spTipIn .5s .6s var(--ease-out) both; }

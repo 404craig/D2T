@@ -194,7 +194,7 @@
         slotsEl = field.querySelector('.se-slots'); ratingEl = field.querySelector('.tr-rating');
         // big cards only where the pitch has the height for them; redrawn when that changes
         const fieldEl = field.querySelector('.tr-field');
-        const sizeUp = () => { const h = fieldEl.clientHeight; if (!h) return; const b = h >= BIG_MIN; if (b === big) return; big = b; fieldEl.classList.toggle('tr-big', b); if (placing) drawPitch(lastBest); };
+        const sizeUp = () => { const h = fieldEl.clientHeight; if (!h) return; const b = h >= BIG_MIN; if (b === big) return; big = b; fieldEl.classList.toggle('tr-big', b); if (placing || api.el.classList.contains('tr-preraid')) drawPitch(lastBest); };
         if (window.ResizeObserver) { sizeObs = new ResizeObserver(sizeUp); sizeObs.observe(fieldEl); }
         // change the shape on a roll (Craig, 13 Oct): your 11 are re-seated, nobody comes in; some may land out of position
         const fl = field.querySelector('.se-formlink');
@@ -565,7 +565,7 @@
         janShown = true;
         root.classList.add('rd-busy');
         api.el.classList.add('is-placing', 'tr-preraid');
-        const sub = field.querySelector('.tr-head-t span'); if (sub) { sub.dataset.was = sub.textContent; sub.textContent = 'A top-half side is coming in for one of yours'; }
+        const sub = field.querySelector('.tr-head-t > span'); if (sub) { sub.dataset.was = sub.textContent; sub.textContent = 'A top-half side is coming in for one of yours'; }
         drawPitch();
         if (!reduced) field.animate([{ opacity: 0, transform: 'translateY(-14px)' }, { opacity: 1, transform: 'none' }], { duration: 420, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
         playJanRaid(900);
@@ -575,7 +575,7 @@
         const hint = api.el.querySelector('.sp-hint');
         if (janNews) { janNews.stop(); janNews.el.remove(); janNews = null; }
         if (hint) hint.style.display = '';
-        const go = () => { api.el.classList.remove('is-placing', 'tr-preraid'); api.hint('Hit Spin to roll three players'); const sub = field.querySelector('.tr-head-t span'); if (sub && sub.dataset.was) sub.textContent = sub.dataset.was; };
+        const go = () => { api.el.classList.remove('is-placing', 'tr-preraid'); api.hint('Hit Spin to roll three players'); const sub = field.querySelector('.tr-head-t > span'); if (sub && sub.dataset.was) sub.textContent = sub.dataset.was; };
         if (reduced) return go();
         field.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: 'ease-in', fill: 'forwards' }).onfinish = () => { go(); field.getAnimations().forEach((x) => x.cancel()); };
       }
