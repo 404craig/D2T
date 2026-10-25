@@ -656,7 +656,13 @@
         endSheet.open();
       }
       let endSheet = null;
-      function newGame() { if (endSheet) { endSheet.close(); endSheet = null; } booed = false; S = D2T.state.g433 = fresh(); setShape(S.formation); save(); sel = null; busy = false; wrap.querySelector('.g4-track').classList.remove('glow'); render(); reveal(); }
+      // Play again can come while the ending still plays (Craig, 25 Oct: the old game's message and end sheet then landed on
+      // the new game): stop its timers and frames and clear what it left on the screen first
+      function newGame() {
+        timers.forEach(clearTimeout); rafs.forEach(cancelAnimationFrame); timers = []; rafs = [];
+        wrap.querySelectorAll('.g4-msg, .g4-dim, .g4-confetti, .g4-track .ghost').forEach((x) => x.remove());
+        pitchEl.getAnimations({ subtree: true }).forEach((a) => a.cancel());
+        if (endSheet) { endSheet.close(); endSheet = null; } booed = false; S = D2T.state.g433 = fresh(); setShape(S.formation); save(); sel = null; busy = false; wrap.querySelector('.g4-track').classList.remove('glow'); render(); reveal(); }
 
       // ---------- the target reveal (UI_SPEC 8f): once per game, never after a refresh; tap to skip, none with reduced motion ----------
       // a dim layer, "THIS GAME'S TARGET", the eight formations rolling through the big number, slowing to stop on this one
