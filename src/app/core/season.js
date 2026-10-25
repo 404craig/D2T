@@ -155,11 +155,13 @@
       sh = D2T.sheet({ title: o.title || '', body: `${o.lead ? `<div class="end-lead">${o.lead}</div>` : ''}<div class="fr-stack end-stack">${rows}</div>`,
         onClose: () => { sh = null; if (chosen) return; showPeek(); o.onClose && o.onClose(); } });
       sh.el.classList.add('end-sheet');
-      (o.buttons || []).forEach((b) => { const el = sh.body.querySelector(`[data-k="${b.k}"]`); if (el) el.onclick = () => { chosen = true; const s = sh; sh = null; s.close(); b.fn && b.fn(); }; });
+      (o.buttons || []).forEach((b) => { const el = sh.body.querySelector(`[data-k="${b.k}"]`); if (el) el.onclick = () => { chosen = true; const s = sh; sh = null; s.close(); if (b.peek) showPeek(); b.fn && b.fn(); }; });
       return sh;
     };
     const close = () => { if (sh) { const s = sh; sh = null; chosen = true; s.close(); } removePeek(); };
-    return { open, close, get el() { return sh && sh.el; } };
+    // peek(): start collapsed, the peek bar only (the season summary, Craig 25 Oct: the stats first); a button with
+    // `peek: true` (Final table) leaves the peek bar behind it
+    return { open, close, peek: showPeek, get el() { return sh && sh.el; } };
   };
 
   // ---------- the home button's menu (Craig, 13 Oct) ----------

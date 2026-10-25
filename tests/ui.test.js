@@ -24,6 +24,8 @@ fs.mkdirSync(OUT, { recursive: true });
     if (process.env.SHARE_DIR && r.png) fs.writeFileSync(path.join(process.env.SHARE_DIR, name + ".png"), Buffer.from(r.png.split(",")[1], "base64"));
   };
   const wait = (ms) => page.waitForTimeout(ms);
+  // the season summary starts collapsed (Craig, 25 Oct): the end sheet comes up from its peek bar
+  const openEnd = async () => { await page.waitForSelector(".end-peek", { timeout: 4000 }).catch(() => {}); const p = await page.$(".end-peek"); if (p) { await p.click(); await page.waitForTimeout(500); } };
   const screen = () => page.evaluate(() => window.D2T.currentScreen());
   const expectScreen = async (name, ms = 6000) => {
     const t0 = Date.now();
@@ -261,8 +263,10 @@ fs.mkdirSync(OUT, { recursive: true });
   await wait(1600); await shot("16-summary"); await smallButtons("summary");
   // the end sheet (Craig, 14 Oct): no bottom bar; Share, Play again and Home on one sheet, the summary behind it
   check(!(await page.$(".actionbar")), "the summary should have no bottom bar");
+  check(!(await page.$(".end-sheet")) && !!(await page.$(".end-peek")), "the summary should start with the end sheet collapsed to its peek bar");
+  await openEnd();
   const endKeys = async () => page.$$eval(".end-sheet [data-k]", (bs) => bs.map((b) => b.dataset.k + ":" + b.textContent.trim()));
-  check((await endKeys()).join("|") === "share:Share result|again:Play again|home:Home", "the Classic end sheet should offer Share, Play again and Home, got " + (await endKeys()).join("|"));
+  check((await endKeys()).join("|") === "share:Share result|again:Play again|table:Final table|home:Home", "the Classic end sheet should offer Share, Play again, Final table and Home, got " + (await endKeys()).join("|"));
   // dragged closed: a peek bar brings it back, and the summary scrolls behind
   { const bar = await page.$(".end-sheet .sheet-bar"); const bb = await bar.boundingBox();
     await page.mouse.move(bb.x + bb.width / 2, bb.y + bb.height / 2); await page.mouse.down();
@@ -274,6 +278,10 @@ fs.mkdirSync(OUT, { recursive: true });
   // the run is over: Home goes straight home, no menu
   await page.click('.end-sheet [data-k="home"]'); await expectScreen("home"); await wait(500);
   check(!(await page.$(".sheet")), "summary: Home should go straight home once the run is over");
+  await page.evaluate(() => window.D2T.go("summary")); await expectScreen("summary"); await openEnd();
+  await page.click('.end-sheet [data-k="table"]'); await wait(600);
+  check(!(await page.$(".end-sheet")) && !!(await page.$(".sheet .se-table")) && !!(await page.$(".end-peek")), "Final table on the end sheet should open the table and leave the peek bar");
+  await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(500);
   await page.evaluate(() => window.D2T.go("summary")); await expectScreen("summary"); await wait(1200);
   await card("classic", "DROP2TOP\nI took ");
   await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(500);
@@ -294,7 +302,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.evaluate(() => window.D2T.go("summary")); await wait(800);
   check((await screen()) === "summary", "the finished season's summary did not reopen after a refresh");
   check((await page.evaluate(() => window.D2T.state.record.runs.length)) === 1, "refresh recorded the run twice");
-  await wait(1000); check(!!(await page.$(".end-sheet")), "the end sheet did not reopen with the summary after a refresh");
+  await wait(1000); check(!!(await page.$(".end-peek")), "the end sheet's peek bar did not come back with the summary after a refresh");
 
   // ---------- other screens ----------
   for (const s of ["home", "howto", "league", "account", "stats"]) {
@@ -325,7 +333,7 @@ fs.mkdirSync(OUT, { recursive: true });
 
   // play again from the summary's end sheet
   await page.evaluate(() => window.D2T.go("summary")); await wait(600);
-  await page.waitForSelector('.end-sheet [data-k="again"]', { timeout: 4000 }); await page.click('.end-sheet [data-k="again"]');
+  await openEnd(); await page.waitForSelector('.end-sheet [data-k="again"]', { timeout: 4000 }); await page.click('.end-sheet [data-k="again"]');
   await expectScreen("spin");
   check(await page.evaluate(() => window.D2T.game.eng().phase === "clubroll"), "play again did not start a new run");
 
@@ -377,6 +385,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.evaluate(() => { const G = window.D2T.game; for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(1200); await shot("32-d2d-summary");
   check(/Dream achieved|Fell short/.test(await page.textContent(".sm-head")), "Dare2Dream summary has no dream result");
+  await openEnd();
   check(!!(await page.$('.end-sheet [data-k="again"]')) && !!(await page.$('.end-sheet [data-k="home"]')), "the Dare2Dream end sheet should offer Play again and Home");
   await card("dare2dream", "DROP2TOP Dare2Dream\n");
   check(await page.evaluate(() => window.D2T.game.dreamRecord().runs === 1), "Dare2Dream run not recorded");
@@ -448,8 +457,9 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => window.D2T.game.careerOpen(window.D2T.state.run) && window.D2T.game.eng().phase === "summary"), "Keep playing did not keep the career");
   await page.reload(); await expectScreen("intro"); await page.click(".fr-skip", { force: true }); await expectScreen("home"); await page.waitForSelector('[data-act="continue"]', { timeout: 5000 }).catch(() => {}); await wait(900);
   check(!!(await page.$('[data-act="continue"]')), "a refresh lost the finished Club X season's Continue card");
-  await page.click('[data-act="continue"]'); await expectScreen("summary"); await wait(1500);
+  await page.click('[data-act="continue"]'); await expectScreen("summary"); await wait(1500); await openEnd();
   check(!!(await page.$('.end-sheet [data-k="next"]')), "Club X end sheet has no Next season");
+  check((await page.$$eval(".end-sheet [data-k]", (bs) => bs.map((b) => b.dataset.k).join("|"))) === "share|next|table|history|again|home", "the Club X end sheet should go Share, Next season, Final table, Club history, New career, Home");
   check(/New career/.test(await page.textContent('.end-sheet [data-k="again"]')) && !!(await page.$('.end-sheet [data-k="home"]')) && !!(await page.$('.end-sheet [data-k="share"]')), "the Club X end sheet should offer Share, Next season, New career and Home");
   await page.click('.end-sheet [data-k="next"]'); await expectScreen("table"); await wait(600);
   check(await page.evaluate(() => { const G = window.D2T.game, e = G.eng(); return e.career === 2 && e.phase === "setup" && G.lineup().xi.every(Boolean) && G.clubName() === "Southside Rovers"; }), "Next season did not carry the XI into season 2");
@@ -519,7 +529,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await expectScreen("summary"); await wait(900); await shot("40-daily-summary");
   await card("daily", "DROP2TOP Daily #");
   check(await page.evaluate(() => !!window.D2T.game.dailyResult()), "the daily result was not recorded");
-  await page.waitForSelector('.end-sheet [data-k="share"]', { timeout: 4000 }).catch(() => {});
+  await openEnd(); await page.waitForSelector('.end-sheet [data-k="share"]', { timeout: 4000 }).catch(() => {});
   check(!!(await page.$(".sm-daily .sm-dv")) && !!(await page.$('.end-sheet [data-k="share"]')), "the daily summary has no today-against-best panel or Share button");
   check(/Go again/.test(await page.textContent('.end-sheet [data-k="again"]')) && !!(await page.$('.end-sheet [data-k="home"]')), "the Daily end sheet should offer Go again and Home");
   // as many goes as you like (Craig, 13 Oct): Go again starts a fresh go, and the day's best go stays recorded
