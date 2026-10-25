@@ -279,7 +279,7 @@
         });
         await janTake.done; janTake = null; janBack = null;
         root.classList.remove('rd-busy');
-        if (alive) janSheet(200);
+        if (alive) janSheet(preRaid ? 1000 : 200);
       }
       function leavePlacing() {
         if (!placing) return Promise.resolve();
@@ -559,17 +559,22 @@
       // the raid comes before the window's first spin (Craig, 23 Oct: the sheet, then the raid, then the spin): the pitch
       // shows on its own, the badge takes him, the "January raid" sheet, and closing it goes back to Spin
       const preRaid = janShow && st.spun !== rollKey;
-      function raidFirst() {
-        if (!alive || janShown) return;
-        if (!api || !slotsEl) { timers.push(setTimeout(raidFirst, 120)); return; }
-        janShown = true;
+      // Craig, 25 Oct: straight to the pitch (no emblem burst, no empty cards), the "January window" sheet over it, then a
+      // second after it closes the raid; a second after the badge takes him, the "January raid" sheet
+      let raidPitch = false;
+      function raidFirst(then) {
+        if (!alive || raidPitch) return;
+        if (!api || !slotsEl) { timers.push(setTimeout(() => raidFirst(then), 60)); return; }
+        raidPitch = true;
+        janBack = { slot: jr.slot, card: jr.card };   // he is still yours until the badge takes him
         root.classList.add('rd-busy');
         api.el.classList.add('is-placing', 'tr-preraid');
         const sub = field.querySelector('.tr-head-t > span'); if (sub) { sub.dataset.was = sub.textContent; sub.textContent = 'A top-half side is coming in for one of yours'; }
         drawPitch();
         if (!reduced) field.animate([{ opacity: 0, transform: 'translateY(-14px)' }, { opacity: 1, transform: 'none' }], { duration: 420, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
-        playJanRaid(900);
+        then && then();
       }
+      function raidGo() { if (!alive || janShown) return; janShown = true; playJanRaid(1000); }
       function raidDone() {
         if (!preRaid || !alive || !api) return;
         const hint = api.el.querySelector('.sp-hint');
@@ -580,7 +585,7 @@
         field.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: 'ease-in', fill: 'forwards' }).onfinish = () => { go(); field.getAnimations().forEach((x) => x.cancel()); };
       }
       // the emblem burst opens each window and the draft, not every one of the 11 draft spins
-      if (st.spun === rollKey || (draft && di.step > 1)) build();
+      if (st.spun === rollKey || (draft && di.step > 1) || preRaid) build();
       else intr = intro(body, () => { intr = null; build(); });
       function janSheet(delay) {
         const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">${D2T.esc(jr.club)} came in for ${D2T.esc(jr.name)} as the window opened. His shirt is empty for your January rolls; if it is still empty when the window closes, a free agent fills it.</p>
@@ -597,16 +602,16 @@
       }
       if (janDue && !janShow) janSheet(600);
       // the window opens (Craig, 20 Oct): before the first January roll is spun, a sheet says players go out as well as in
-      if (janDue && !st.janIntro && st.spun !== rollKey) {
-        timers.push(setTimeout(() => {
-          if (!alive) return;
-          const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">The January window is open. Players go out as well as come in: a top-half side comes in for one of yours as it opens, then you have three January rolls to put things right.</p>
-            <button class="btn se-btn se-poach-go" type="button">Continue</button></div>`);
-          const sh = D2T.sheet({ title: 'January window', body: el, onClose: () => { st.janIntro = true; D2T.save(); if (preRaid) timers.push(setTimeout(raidFirst, 300)); } });
-          tint(sh);
-          el.querySelector('.se-poach-go').onclick = () => sh.close();
-        }, 600));
-      } else if (preRaid) timers.push(setTimeout(raidFirst, 600));
+      const windowSheet = () => {
+        if (!alive) return;
+        const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">The January window is open. Players go out as well as come in: a top-half side comes in for one of yours as it opens, then you have three January rolls to put things right.</p>
+          <button class="btn se-btn se-poach-go" type="button">Continue</button></div>`);
+        const sh = D2T.sheet({ title: 'January window', body: el, onClose: () => { st.janIntro = true; D2T.save(); if (preRaid) raidGo(); } });
+        tint(sh);
+        el.querySelector('.se-poach-go').onclick = () => sh.close();
+      };
+      if (preRaid) raidFirst(() => timers.push(setTimeout(() => { if (st.janIntro) raidGo(); else windowSheet(); }, st.janIntro ? 0 : 450)));
+      else if (janDue && !st.janIntro && st.spun !== rollKey) timers.push(setTimeout(windowSheet, 600));
     },
     unmount() { kill && kill(); kill = null; intr && intr.cancel(); intr = null; api && api.unmount(); api = null; }
   });

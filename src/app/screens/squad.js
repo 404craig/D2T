@@ -408,7 +408,7 @@
         if (!alive) return;
         poachKill(); poachKill = null;
         render(null);
-        await new Promise((res) => setTimeout(res, 200));
+        await new Promise((res) => setTimeout(res, 1000));   // a second on the empty shirts before the sheet (Craig, 25 Oct)
         if (root.isConnected) poachSummary(list);
       }
       // first-time tips: the shape, then (another visit) swapping a sub in
