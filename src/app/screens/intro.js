@@ -30,6 +30,11 @@
       root.appendChild(wrap);
       const stage = wrap.querySelector('.fr-stage');
       const vw = root.clientWidth, vh = root.clientHeight;
+      // Every piece is placed in px from this first measurement, taken on the first frame while the page is still
+      // streaming in; iOS can report a different size at that moment (Craig, 26 Oct: the logo sat off to the left).
+      // So the stage is a vw x vh box centred by CSS: if the real screen turns out wider, narrower or taller, the
+      // whole intro stays in the middle of it.
+      Object.assign(stage.style, { right: 'auto', bottom: 'auto', width: vw + 'px', height: vh + 'px', left: `calc(50% - ${vw / 2}px)`, top: `calc(50% - ${vh / 2}px)` });
 
       // layouts in screen px
       const WS = Math.min(vw * 0.8, 340), kS = WS / SHORT.w, HS = SHORT.h * kS;
@@ -80,7 +85,7 @@
       // the slogan sits exactly in the middle of the screen; the logo waits just above it
       const slH = slogan.getBoundingClientRect().height;
       const slTop = (vh - slH) / 2;
-      slogan.style.top = slTop + 'px';
+      slogan.style.top = `calc(50% - ${(vh / 2 - slTop).toFixed(1)}px)`;   // centred like the stage
       const beatY = Math.max(24, slTop - 34 - HL);
       const beatShift = beatY - ly;
 
@@ -105,10 +110,12 @@
       const probe = D2T.h(`<div class="fr-home" aria-hidden="true" style="position:absolute;left:0;right:0;top:0;visibility:hidden;pointer-events:none"><div class="fr-home-top"><span class="fr-home-logo" style="display:block">${D2T.logo('long')}</span></div></div>`);
       probe.querySelector('.logo-mask').style.removeProperty('--src');   // only its size is wanted, and the picture may not be in yet
       wrap.appendChild(probe);
-      const target = () => { const r = probe.querySelector('.logo-mask').getBoundingClientRect(), rr = root.getBoundingClientRect(); return { left: r.left - rr.left, top: r.top - rr.top, width: r.width }; };
+      // in the stage's own px (the hand-over piece lives in the stage)
+      const target = () => { const r = probe.querySelector('.logo-mask').getBoundingClientRect(), rr = stage.getBoundingClientRect(); return { left: r.left - rr.left, top: r.top - rr.top, width: r.width }; };
       // the fonts load alongside: fit the slogan again once they are in
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (done) return; slogan.style.fontSize = ''; for (let fs = 31; fs > 18 && line2.getBoundingClientRect().width > slogan.clientWidth; fs--) slogan.style.fontSize = fs - 1 + 'px'; });
 
+      const t0 = document.timeline ? document.timeline.currentTime : 0;
       function play() {
         if (D2T.reduced()) {
           // keep the result, skip the motion: long logo plus slogan, then home
@@ -189,11 +196,16 @@
         at(fx, 'opacity', 1, T6);
         later(() => D2T.chrome('#000000', '#000000'), T6);
         anim(black, [{ opacity: 0 }, { opacity: 1 }], { duration: 900, delay: T6, easing: 'cubic-bezier(.5,0,.3,1)' });
-        anim(fx, [{ transform: 'none' }, { transform: `translate(${to.left - from.x}px,${to.top - from.y}px) scale(${to.width / from.w})` }], { duration: 1000, delay: T6, easing: 'cubic-bezier(.6,0,.2,1)' });
+        const glide = (t) => anim(fx, [{ transform: 'none' }, { transform: `translate(${t.left - from.x}px,${t.top - from.y}px) scale(${t.width / from.w})` }], { duration: 1000, delay: T6, easing: 'cubic-bezier(.6,0,.2,1)' });
+        let toAnim = glide(to);
+        // the home header sits by the real screen, the stage by the first measurement: just before the glide, aim it
+        // again if the screen has changed since (still scheduled ahead, so it stays on the compositor)
+        later(() => { const t2 = target(); if (Math.abs(t2.left - to.left) > 0.5 || Math.abs(t2.top - to.top) > 0.5 || Math.abs(t2.width - to.width) > 0.5) { toAnim.cancel(); Object.assign(to, t2); toAnim = glide(t2); toAnim.effect.updateTiming({ delay: Math.max(0, T6 - (document.timeline.currentTime - t0)) }); } }, T6 - 120);
         anim(fx.querySelector('.k'), [{ opacity: 1 }, { opacity: 0 }], { duration: 620, delay: T6 + 220, easing: 'ease-in-out' });
         anim(fx.querySelector('.s'), [{ transform: 'translateX(-60%)' }, { transform: 'translateX(40%)' }], { duration: 1100, delay: T6 + 120, easing: 'cubic-bezier(.4,0,.3,1)' });
         // home takes over once the hand-over has landed and the game is ready, whichever is later
-        later(() => finish(to), T6 + 1150);
+        // home takes the logo from where it really landed, in its own (root) px
+        later(() => { const r = fx.getBoundingClientRect(), rr = root.getBoundingClientRect(); finish({ left: r.left - rr.left, top: r.top - rr.top, width: r.width }); }, T6 + 1150);
       }
       play();
       cleanup = () => { done = true; anims.forEach((a) => { try { a.cancel(); } catch (e) {} }); timers.forEach(clearTimeout); };
