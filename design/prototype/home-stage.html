@@ -77,9 +77,11 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 /* Goal Rush: the ball, with formations and real players' shirts floating round it */
 .gr{position:relative;width:340px;height:300px;display:grid;place-items:center}
 .gr .ball{position:relative;width:150px;height:150px;z-index:2;perspective:500px;filter:drop-shadow(0 16px 26px rgba(0,0,0,.6))}
-.gr .ball img{width:100%;display:block;border-radius:50%;animation:roll 12.5s linear infinite}
+.gr .ball img{width:100%;display:block;border-radius:50%;animation:roll 48s linear infinite}
+.gr .ball{animation:bob 6s ease-in-out infinite}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -4px}}
 .gr .ball::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.55),transparent 32%),radial-gradient(circle at 70% 78%,rgba(0,0,0,.45),transparent 55%);pointer-events:none}
-@keyframes roll{0%{transform:rotateX(14deg) rotateY(-22deg) rotate(0deg)}25%{transform:rotateX(4deg) rotateY(0deg) rotate(90deg)}50%{transform:rotateX(-14deg) rotateY(22deg) rotate(180deg)}75%{transform:rotateX(-4deg) rotateY(0deg) rotate(270deg)}100%{transform:rotateX(14deg) rotateY(-22deg) rotate(360deg)}}
+@keyframes roll{to{transform:rotate(360deg)}}
 .gr .fl{position:absolute;animation:float 11s ease-in-out infinite;opacity:0;text-align:center;z-index:1}
 .gr .fl.over{z-index:3}
 .gr .fm{font:900 italic 16px var(--f);color:#FFD21F;padding:4px 10px;border-radius:9px;background:rgba(255,210,31,.12);border:1px solid rgba(255,210,31,.4);transform:skewX(-8deg);display:inline-block}
@@ -118,12 +120,35 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 .tr .an i{flex:none;width:20px;height:20px;border-radius:50%;background:#2B6FE0;border:1.5px solid #fff;display:grid;place-items:center;font:800 8px 'Outfit',sans-serif;font-style:normal;color:#fff}
 .tr .an b{flex:1;font:700 14px 'Outfit','Exo 2',sans-serif;color:#0A0A2A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tr .an em{flex:none;font:700 10px 'Outfit',sans-serif;font-style:normal;color:#fff;background:#0A0A2A;border-radius:10px;padding:3px 7px}
-.tr.on{background:linear-gradient(90deg,#FF4D8D 0%,#FF9A3C 28%,#FFE14D 52%,#7CF06C 76%,#22D3EE 100%);border-color:transparent}
+.tr.on{background:linear-gradient(90deg,#00FF85 0%,#04F5FF 100%);border-color:transparent}
 .tr.on .no{color:#fff;background:rgba(0,0,0,.12);border-right-color:rgba(255,255,255,.35)}
 .tr.on .an{opacity:1;transform:none}
 .clx img{width:200px;filter:drop-shadow(0 18px 30px rgba(0,0,0,.6));animation:hover 4s ease-in-out infinite}
 @keyframes hover{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
+/* split: New game left, Continue right */
+.bbar2,.stackc{display:none}
+.ph.split .bbar{display:none}
+.ph.split .bbar2{position:absolute;left:18px;right:18px;bottom:30px;display:flex;gap:10px;z-index:20}
+.bbar2 button{min-height:58px;border-radius:29px;font:900 italic 18px var(--f);text-transform:uppercase;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:0 12px;white-space:nowrap}
+.bbar2 .newg{flex:1;background:#0E0E10;border:1.5px solid rgba(255,255,255,.28);color:#fff}
+.bbar2 .contg{flex:1.35;border:0;background:var(--k);color:var(--ink,#0A0A0A);box-shadow:0 6px 16px -6px var(--k)}
+.bbar2 .cl1{display:flex;align-items:center;gap:7px;line-height:1}.bbar2 .cl1 img{display:none;width:22px;height:22px;object-fit:contain}
+.bbar2 .cl2{font:800 9.5px var(--f);letter-spacing:.1em;opacity:.8;font-style:normal;line-height:1}
+.ph.split-club .bbar2 .contg{background:linear-gradient(135deg,#7A263A 0%,#7A263A 55%,#1BB1E7 55%,#1BB1E7 100%);color:#fff;box-shadow:0 6px 16px -6px #1BB1E7}
+.ph.split-club .bbar2 .cl1 img{display:block}
+.ph.split-club .bbar2 .cl2{opacity:.95}
+/* stacked: a full Continue in the club's colours above the main button, everything squeezed up */
+.ph.stack .stackc{position:absolute;left:18px;right:18px;bottom:98px;z-index:20;display:flex;align-items:center;gap:12px;min-height:58px;padding:0 18px 0 12px;border-radius:29px;border:0;cursor:pointer;color:#fff;background:linear-gradient(90deg,#7A263A,#5A1A2A);box-shadow:0 0 0 1.5px #1BB1E7 inset,0 6px 16px -6px #1BB1E7;text-align:left}
+.stackc img{width:36px;height:36px;object-fit:contain}
+.stackc span{flex:1;min-width:0}.stackc b{display:block;font:900 italic 20px/1 var(--f);text-transform:uppercase}.stackc small{display:block;font:700 11px var(--f);color:#CFE9F6;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stackc svg{width:20px;height:20px}
+.ph.stack .art{top:108px;transform:scale(.86);transform-origin:50% 0}
+.ph.stack .floor{top:352px}
+.ph.stack .nm{top:388px}
+.ph.stack .st{top:520px;left:13%;right:13%}
+.ph.stack .dots{top:636px}
+.ph.stack .sw{top:226px}
 /* ===== continue states ===== */
 .cont-line{position:absolute;left:18px;right:18px;bottom:98px;text-align:center;font:800 11px var(--f);letter-spacing:.12em;color:var(--soft);z-index:20}
 .cont-line b{color:#fff;font:900 italic 13px var(--f);letter-spacing:.02em}
@@ -151,7 +176,7 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 .sheet p{font:600 15px/1.5 var(--f);color:#CFCFD6;margin:0 0 10px}
 .sheet .sbtn{display:flex;align-items:center;justify-content:center;width:100%;min-height:58px;border-radius:29px;background:#12F06C;color:#0A0A0A;font:900 italic 19px var(--f);text-transform:uppercase;border:0;margin-top:8px}
 .scrim{position:absolute;inset:0;z-index:45;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .3s}.scrim.on{opacity:1;pointer-events:auto}
-@media (prefers-reduced-motion:reduce){.tb img,.gr .mb,.gr .mb img,.gr .ball img,.gr .fl,.ub .ar svg,.clx img,.dcard::after{animation:none}.gr .fl{opacity:1}.cfan .s{transition:none}}
+@media (prefers-reduced-motion:reduce){.gr .ball,.tb img,.gr .mb,.gr .mb img,.gr .ball img,.gr .fl,.ub .ar svg,.clx img,.dcard::after{animation:none}.gr .fl{opacity:1}.cfan .s{transition:none}}
 </style></head><body><div class="wrap">
 <div class="intro"><div id="main"></div>
 <div class="side">
@@ -172,7 +197,7 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 <li><b>Unbeaten:</b> no emblem. <b>two club cards</b>, as the game shows its club stats: <b>Man Utd 1999/00, 91 points</b> on the left, and on the right a card that <b>spins in every 10 seconds</b> (Arsenal, Chelsea, Liverpool, Spurs) and lands on <b>Man City 2017/18, ?</b>. Real points from the game's data.</li>
 </ul></div></div>
 <h2 class="sec">Carry on where you left off</h2>
-<p class="lead">Five ways the stage could show a game you're part way through, here a Classic run with West Ham 2010/11, matchday 14, 6th. In every one the button says <b>Continue</b>, with the game's <b>respin arrow</b> to its left to start over (it asks first). A small green dot on the page dots marks any game with a run waiting.</p>
+<p class="lead">Ways the stage could show a game you're part way through, here a Classic run with West Ham 2010/11, matchday 14, 6th. <b>F, G and H are new</b>: a split New game / Continue, and a stacked Continue. A to E are the earlier ideas. A small green dot on the page dots marks any game with a run waiting.</p>
 <div class="cols" id="conts"></div>
 <h2 class="sec">Classic's colour</h2>
 <p class="lead">Green is Club X's, so Classic moves off it. Three options, each a working phone. The switch beside the main phone tries them all.</p>
@@ -198,7 +223,7 @@ const shields=(st,k)=>st.map(([n,l,cr,c])=>`<div class="sh${dark(c||k)?' wh':''}
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 // the all-time Premier League top ten, from the game's own data (career goals in the Goal Rush lists)
 const TOP10=[['Alan Shearer',260],['Harry Kane',213],['Wayne Rooney',208],['Mohamed Salah',193],['Andy Cole',187],['Sergio Agüero',184],['Frank Lampard',177],['Thierry Henry',175],['Robbie Fowler',163],['Jermain Defoe',162]];
-const RUN={crest:'home-new/west-ham.png',card:'home-new/cwhu.png',club:'West Ham',season:'2010/11',md:14,pos:'6th',pts:21};
+const RUN={accent:'#1BB1E7',ink:'#3B0F1E',crest:'home-new/west-ham.png',card:'home-new/cwhu.png',club:'West Ham',season:'2010/11',md:14,pos:'6th',pts:21};
 
 function games(cont){
  const G=[
@@ -225,6 +250,9 @@ function games(cont){
  if(!cont)return G;
  const c=G[1];c.live=true;
  const line=`${RUN.club} ${RUN.season} · Matchday ${RUN.md} · ${RUN.pos}`;
+ if(cont==='F'){c.split='line';}
+ if(cont==='G'){c.split='club';}
+ if(cont==='H'){c.stack=true;}
  if(cont==='A'){c.play=`Continue`;c.round=true;c.contLine=`<b>${RUN.club} ${RUN.season}</b> · MATCHDAY ${RUN.md} · ${RUN.pos.toUpperCase()}`;}
  if(cont==='B'){c.hl=`${RUN.club} ${RUN.season}`;c.sb=`Matchday ${RUN.md} of 38 · ${RUN.pos} · ${RUN.pts} pts`;c.art=()=>`<div class="dcard" style="--m:url(${RUN.card})"><img src="${RUN.card}" alt=""></div>`;c.st=[[RUN.pos,'Position'],[String(RUN.pts),'Points'],[String(RUN.md),'Played'],['78','Team rating']];c.play='Continue';c.round=true;c.gnExtra=' · IN PROGRESS';}
  if(cont==='C'){c.banner=true;c.play='Continue';c.round=true;}
@@ -241,10 +269,12 @@ function stage(host,cont,start,opt={}){
 <div class="wheel">${G.map((g,i)=>`<section class="sl" style="--k:${g.k};${g.kt?`--kt:${g.kt}`:''}"><div class="floor"></div><div class="art">${g.art()}</div>
 ${g.banner?`<div class="banner"><img src="${RUN.crest}" alt=""><span class="t"><small>CARRY ON</small><b>${RUN.club} ${RUN.season}</b><span>Matchday ${RUN.md} of 38 · ${RUN.pos} · ${RUN.pts} pts</span></span><span class="go">${UPI}</span></div>`:''}
 <div class="nm"><div class="gn">${g.name}${g.gnExtra||''}</div><div class="hl">${g.hl}</div><p class="sb">${g.sb}</p></div>
-${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.board?`<div class="tbb"><div class="tbq">PREMIER LEAGUE ALL-TIME TOP SCORERS</div><div class="tbw"><div class="tbl">${TOP10.map(([n,g],i)=>`<div class="tr" data-r="${i+1}"><span class="no">${i+1}</span><span class="an"><i>${n.split(' ').map((w)=>w[0]).join('')}</i><b>${n}</b><em>${g} goals</em></span></div>`).join('')}</div></div></div>`:''}${g.share==='shields'?`<button class="shs" aria-label="Share your ${g.name} record">SHARE ${SHARE}</button>`:''}</section>`).join('')}</div>
+${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.board?`<div class="tbb"><div class="tbq">PREMIER LEAGUE ALL-TIME TOP SCORERS</div><div class="tbw"><div class="tbl">${TOP10.slice(0,4).map(([n,g],i)=>`<div class="tr" data-r="${i+1}"><span class="no">${i+1}</span><span class="an"><i>${n.split(' ').map((w)=>w[0]).join('')}</i><b>${n}</b><em>${g} goals</em></span></div>`).join('')}</div></div></div>`:''}${g.share==='shields'?`<button class="shs" aria-label="Share your ${g.name} record">SHARE ${SHARE}</button>`:''}</section>`).join('')}</div>
 <button class="sw l" aria-label="Previous game">${CHL}</button><button class="sw r" aria-label="Next game">${CHR}</button>
 <div class="dots">${G.map((g)=>`<i class="${g.live?'live':''}"></i>`).join('')}</div>
 <div class="cont-line"></div>
+<div class="bbar2"><button class="newg">New game</button><button class="contg"><span class="cl1"><img src="${RUN.crest}" alt="">Continue</span><span class="cl2">${RUN.club} ${RUN.season.replace('20','')} · ${RUN.pos}</span></button></div>
+<button class="stackc"><img src="${RUN.crest}" alt=""><span><b>Continue</b><small>${RUN.club} ${RUN.season} · Matchday ${RUN.md} · ${RUN.pos}</small></span>${UPI}</button>
 <div class="bbar${SH==='bar'?' three':''}"><button class="round" aria-label="Start over" style="display:none">${RESPIN}</button><button class="main"><span class="plbl"></span></button>${SH==='bar'?`<button class="round shr" aria-label="Share">${SHARE}</button>`:''}</div>
 <div class="scrim"></div><div class="sheet"><div class="bar"><i></i></div><div class="sb2"></div></div>`;
  host.appendChild(ph);
@@ -256,7 +286,7 @@ ${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.board?`<div cl
   const f=Math.floor(pos),i0=((f%N)+N)%N,i1=(i0+1)%N,t=pos-f,k=mix(G[i0].k,G[i1].k,t);
   ph.style.setProperty('--k',k);bg.style.background=`radial-gradient(70% 42% at 50% 36%,${k}55,transparent 70%),radial-gradient(120% 55% at 50% 112%,${k}30,#000 70%)`;
   const n=((Math.round(pos)%N)+N)%N;DT.forEach((d,i)=>d.classList.toggle('on',i===n));
-  if(n!==shown){shown=n;const g=G[n];if(g.board&&ph.boardStart)ph.boardStart();ph.style.setProperty('--ink',g.ink||'#0A0A0A');$('.plbl').innerHTML=(g.playImg?`<img src="${g.playImg}" alt=""> `:'')+g.play+(g.playImg?'':` ${UPI}`);$('.round').style.display=g.round?'':'none';$('.round').classList.toggle('off',!g.round);ph.querySelectorAll('.shr').forEach((b)=>{b.style.visibility=g.st.length?'visible':'hidden';});$('.cont-line').innerHTML=g.contLine||'';}
+  if(n!==shown){shown=n;const g=G[n];ph.classList.toggle('split',!!g.split);ph.classList.toggle('split-club',g.split==='club');ph.classList.toggle('stack',!!g.stack);if(g.board&&ph.boardStart)ph.boardStart();ph.style.setProperty('--ink',g.ink||'#0A0A0A');$('.plbl').innerHTML=(g.playImg?`<img src="${g.playImg}" alt=""> `:'')+g.play+(g.playImg?'':` ${UPI}`);$('.round').style.display=g.round?'':'none';$('.round').classList.toggle('off',!g.round);ph.querySelectorAll('.shr').forEach((b)=>{b.style.visibility=g.st.length?'visible':'hidden';});$('.cont-line').innerHTML=g.contLine||'';}
  }
  // a spring with a little overshoot: the bounce as it snaps
  function settle(){cancelAnimationFrame(anim);let last=performance.now();
@@ -304,10 +334,10 @@ ${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.board?`<div cl
    if(at>=R.length*7){setTimeout(()=>{at=4;strip.getAnimations().forEach((a)=>a.cancel());strip.style.transform=`translateY(${-at*H}px)`;},1600);}};
   if(!reduced)setInterval(spin,10000);}
  const tbl=ph.querySelector('.tbl');
- if(tbl){const rows=[...tbl.children],RH=41,VIS=3;let r=10;
+ if(tbl){const rows=[...tbl.children],RH=41,VIS=3,TOP=rows.length;let r=TOP;
   const show=()=>{const top=Math.max(0,r-VIS);tbl.style.transform=`translateY(${-top*RH+4}px)`;rows[r-1].classList.add('on');};
-  const reset=()=>{rows.forEach((x)=>x.classList.remove('on'));r=10;tbl.style.transition='none';tbl.style.transform=`translateY(${-(10-VIS)*RH+4}px)`;void tbl.offsetHeight;tbl.style.transition='';};
-  let tm=0;const tick=()=>{if(r<1){tm=setTimeout(()=>{reset();tm=setTimeout(tick,900);},2600);return;}show();r--;tm=setTimeout(tick,1100);};
+  const reset=()=>{rows.forEach((x)=>x.classList.remove('on'));r=TOP;tbl.style.transition='none';tbl.style.transform=`translateY(${-(TOP-VIS)*RH+4}px)`;void tbl.offsetHeight;tbl.style.transition='';};
+  let tm=0;const tick=()=>{if(r<1){tm=setTimeout(()=>{reset();tm=setTimeout(tick,900);},2600);return;}show();r--;tm=setTimeout(tick,1300);};
   // starts again from 10th each time you land on Tenaball
   ph.boardStart=()=>{clearTimeout(tm);reset();if(reduced){rows.forEach((x)=>x.classList.add('on'));tbl.style.transform='translateY(4px)';}else tm=setTimeout(tick,700);};reset();}
  // sheets: the ? (rules for the game you're on) and the account; tap the bar or drag it down to close
@@ -325,7 +355,7 @@ ${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.board?`<div cl
  bar.addEventListener('pointerup',(e)=>{if(!sd)return;sheet.style.transition='';if(!sd.m||e.clientY-sd.y>80)close();else sheet.style.transform='';sd=null;});
  render();return ph;}
 
-let main,SHV='bar';const MH=document.getElementById('main');
+let main,SHV='top';const MH=document.getElementById('main');
 const build=()=>{MH.innerHTML='';main=stage(MH,null,1,{share:SHV});};build();
 const sw=document.getElementById('switch');
 const KS=[['#C9D0D9','Silver'],['#FFFFFF','White'],['#FF3EA5','Pink'],['#12F06C','Green (now)']],SV=[['top','Share by the ?'],['shields','Share above the shields'],['bar','Share in the bottom bar']];
@@ -335,16 +365,19 @@ sw.querySelectorAll('[data-k]').forEach((b)=>b.onclick=()=>{CLASSIC_K=b.dataset.
 CLASSIC_K='#C9D0D9';build();mark();
 // arrow keys drive the main phone
 document.addEventListener('keydown',(e)=>{if(e.key==='ArrowRight')main.step(1);if(e.key==='ArrowLeft')main.step(-1);});
-const C=[['A','The button','The stage stays as it is; <b>Continue</b>, a line above it says where you are, and the <b>respin arrow</b> beside it starts over (it asks first).'],
+const C=[['F','Split, with a line','After a game has started, the bottom splits: <b>New game</b> on the left, <b>Continue</b> on the right in the game\'s colour, with <b>a line on the button</b> saying which team and where you are.'],
+ ['G','Split, in the club\'s colours','The same split, with <b>Continue in the club\'s colours</b> (West Ham\'s claret and blue) and its crest, so you can see whose run it is at a glance.'],
+ ['H','Stacked','Everything on the stage <b>squeezes up</b> a little and a <b>full-width Continue</b> sits above the main button, in the club\'s colours with its badge, the club, matchday and position. The main button below starts a new game.'],
+ ['A','The button','The stage stays as it is; <b>Continue</b>, a line above it says where you are, and the <b>respin arrow</b> beside it starts over (it asks first).'],
  ['B','Your club on stage','<b>Your club takes the stage</b>: its card where the fan was, its name as the headline, and the four shields switch to <b>this run</b>: position, points, played, team rating. Continue, with the respin arrow to start over.'],
  ['C','A banner','Nothing on the stage changes: a <b>Carry on banner</b> sits across the top with the club, matchday, position and points, and a round go button. Continue below, with the respin arrow to start over.'],
  ['D','The ring','The club\'s crest inside a <b>ring that fills as the season goes</b> (14 of 38), your position in a green badge on its edge. Continue, with the respin arrow to start over.'],
  ['E','The table','A slice of <b>the league table</b> around you, your row lit green, so you see the race before you carry on. Continue, with the respin arrow to start over.']];
 const cw=document.getElementById('conts');
-C.forEach(([k,n,w])=>{const col=document.createElement('div');col.className='col';col.innerHTML=`<h3>${k} · <span>${n}</span></h3><p>${w}</p>`;cw.appendChild(col);stage(col,k,1);});
+C.forEach(([k,n,w])=>{const col=document.createElement('div');col.className='col';col.innerHTML=`<h3>${k} · <span>${n}</span></h3><p>${w}</p>`;cw.appendChild(col);stage(col,k,1,{share:'top'});});
 const KC=[['#C9D0D9','Silver','Silver like a trophy, and the metallic shields look like real silverware. Black words, a cool glow, and nothing else in the game is grey. It sits well between the Daily\'s club colour and Club X\'s green.'],['#FF3EA5','Pink','The most different from every other game, and loud. Black words on the button read poorly, so it takes white words.'],['#FFFFFF','White','Clean and classic, like the D2T logo itself, with black words. The Daily used white before it took on the club\'s colours, so it\'s free now.']];
 const kc=document.getElementById('colours');
-KC.forEach(([k,n,w])=>{const col=document.createElement('div');col.className='col';col.innerHTML=`<h3><span style="color:${k}">${n}</span></h3><p>${w}</p>`;kc.appendChild(col);CLASSIC_K=k;stage(col,null,1);});
+KC.forEach(([k,n,w])=>{const col=document.createElement('div');col.className='col';col.innerHTML=`<h3><span style="color:${k}">${n}</span></h3><p>${w}</p>`;kc.appendChild(col);CLASSIC_K=k;stage(col,null,1,{share:'top'});});
 const SC=[['top','By the ?','A <b>round share button</b> beside the ? and the account, the same style, top right. Always in reach, never in the way. It shares the record of the game you\'re on.',null],['shields','Above the shields','A small <b>SHARE</b> with the arrow, in the game\'s colour, <b>just above the shields on the right</b>, so it sits with the numbers it shares.',null],['bar','In the bottom bar','<b>Play in the middle</b>, the respin arrow left (when a game has started) and <b>share right</b>: the thumb finds all three. Shown here with a Classic run going, so all three show.','A']];
 const sc=document.getElementById('shares');
 SC.forEach(([v,n,w,c])=>{const col=document.createElement('div');col.className='col';col.innerHTML=`<h3>${n}</h3><p>${w}</p>`;sc.appendChild(col);CLASSIC_K='#C9D0D9';stage(col,c,1,{share:v});});
