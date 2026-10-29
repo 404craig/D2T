@@ -231,7 +231,7 @@
           if (draft && !di.open) { if (mine) { openMine(slot); return; } api.hint('Pick one of the three first, then tap a shirt'); return; }
           if (mover < 0) { if (!mine) { api.hint('Pick one of the three first, or tap one of yours to see where he plays'); return; } mover = slot; drawPitch(); api.hint('Drag him onto another shirt to swap, or tap him again for his card'); return; }
           if (mover === slot) { openMine(slot); return; }
-          // Option 2: tapping another of your players picks him instead of swapping (swaps are drags); an empty shirt still
+          // tap to look, drag to swap (Craig, 29 Oct, build 167): tapping another of your players picks him instead of swapping (swaps are drags); an empty shirt still
           // takes the picked player
           if (mine) { mover = slot; SND.play('cardSelect'); drawPitch(); api.hint('Drag him onto another shirt to swap, or tap him again for his card'); return; }
           moveTo(mover, slot);

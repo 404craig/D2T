@@ -142,7 +142,7 @@
           if (el) el.classList.add('se-sel'); else sel = null;
         }
         const nm = sel ? last(nameOf(sel.id)) : '';
-        // Option 2 (tap to look, drag to swap): a tap only picks a player, his shirts ring and his positions show under him;
+        // tap to look, drag to swap (Craig, 29 Oct, build 167): a tap only picks a player, his shirts ring and his positions show under him;
         // another tap on him opens his card; swaps are drags only, so looking can never swap anyone
         if (!sel) hintEl.textContent = pre ? 'Tap a player to see where he plays, drag to swap' : '';
         else hintEl.textContent = sel.kind === 'sub' ? `Drag ${nm} on to bring him in · tap again for his card` : `Drag ${nm} to swap · tap again for his card`;
@@ -188,7 +188,7 @@
       function tap(item) {
         const kind = item.dataset.kind, id = item.dataset.card;
         if (sel && sel.kind === kind && sel.id === id) { openBig(item, id); return; }
-        select(kind, id);   // Option 2: another player is picked instead, never swapped (swaps are drags)
+        select(kind, id);   // another player is picked instead, never swapped (swaps are drags)
       }
       root.addEventListener('keydown', (e) => { const it = e.target.closest && e.target.closest('[data-card]'); if (it && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); tap(it); } });
 
