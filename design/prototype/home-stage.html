@@ -67,9 +67,8 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 
 /* ===== Classic: the game's fan, turning, then the back card cross-fades to a new club ===== */
 .cfan{position:relative;width:300px;height:300px}
-.cfan .s{position:absolute;left:50%;top:50%;width:150px;transform-origin:50% 130%;transition:transform .7s cubic-bezier(.5,0,.2,1)}
-.cfan .s img{display:block;width:100%;filter:drop-shadow(0 14px 22px rgba(0,0,0,.6))}
-.cfan .s img.in{position:absolute;left:0;top:0}
+.cfan .s{position:absolute;left:50%;top:50%;width:150px;aspect-ratio:428/660;transform-origin:50% 130%;transition:transform .7s cubic-bezier(.5,0,.2,1)}
+.cfan .s img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 14px 22px rgba(0,0,0,.6))}
 /* Daily: one club card, a little larger, with a shine */
 .dcard{position:relative;width:186px;filter:drop-shadow(0 18px 30px rgba(0,0,0,.6));animation:hover 4s ease-in-out infinite}
 .dcard img{width:100%;display:block}
@@ -155,7 +154,7 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 <li><b>The ? and the account</b> sit together top right, the same round buttons. The ? opens the rules for the game you're on.</li>
 <li><b>Arrows</b> back on both sides so people know to swipe; each hides at the end of the row.</li>
 <li><b>The Play button</b> is the game's own: round ends, uppercase black italic, the soft glow.</li>
-<li><b>Classic:</b> the fan works like home does now: the three cards turn round, and <b>as they start to move</b>, the card heading to the back fades into a new club, as if a new card is shuffled in. Nothing snaps. (Here every 4 seconds; on home it's every 10 to 15.)</li>
+<li><b>Classic:</b> the fan works like home does now: the three cards turn round, and <b>as they start to move</b>, the card heading to the back fades into a new club, as if a new card is shuffled in. Every card is now exactly the same size, so nothing jumps. (Here every 4 seconds; on home it's every 10 to 15.)</li>
 <li><b>Goal Rush:</b> seven floating things (three formations, four real players' shirts in mixed kits), coming in and out slowly, some in front of the ball and some behind. Each shirt's <b>goals roll up and land</b> as it appears, and a few <b>smaller balls</b> drift round too. The ball turns in 3D.</li>
 <li><b>Unbeaten:</b> no emblem. <b>two club cards</b>, as the game shows its club stats: <b>Man Utd 1999/00, 91 points</b> on the left, and on the right a card that <b>spins in every 10 seconds</b> (Arsenal, Chelsea, Liverpool, Spurs) and lands on <b>Man City 2017/18, ?</b>. Real points from the game's data.</li>
 </ul></div></div>
@@ -259,7 +258,7 @@ ${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.share==='shiel
  $('.sw.l').onclick=()=>go(Math.round(target)-1);$('.sw.r').onclick=()=>go(Math.round(target)+1);
  ph.goTo=goIdx;ph.step=(d)=>go(Math.round(target)+d);
  // Classic's fan: the game's FAN_POS, turning round; the card now at the back cross-fades to a new club
- const CARDS=['home-new/cc0.png','home-new/cc1.png','home-new/cc2.png','home-new/cc3.png','home-new/cc4.png','home-new/cd1.png','home-new/cd2.png'];
+ const CARDS=[0,1,2,3,4,5,6].map((i)=>`home-new/fan${i}.png`);CARDS.forEach((src)=>{const im=new Image();im.src=src;});
  const POS=[{t:'translate(-50%,-50%) rotate(-13deg) translateY(6px)',z:1},{t:'translate(-50%,-50%) rotate(0deg) translateY(-6px)',z:3},{t:'translate(-50%,-50%) rotate(13deg) translateY(6px)',z:2}];
  const fan=ph.querySelector('.cfan');
  if(fan){let nx=3,turn=0;const slots=[0,1,2].map((i)=>{const s=document.createElement('span');s.className='s';s.style.transform=POS[i].t;s.style.zIndex=POS[i].z;s.innerHTML=`<img src="${CARDS[i]}" alt="">`;fan.appendChild(s);return s;});
