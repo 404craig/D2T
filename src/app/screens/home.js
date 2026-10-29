@@ -106,7 +106,7 @@
     } catch (err) { return 'In progress'; } finally { st.run = keep; }
   }
   function dailyStrip() {
-    const G = D2T.game, o = D2T.ordinal, esc = D2T.esc, d = G.dailyEntry(G.today()), res = G.dailyResult(), streak = G.dailyStreak();
+    const G = D2T.game, o = D2T.ordinal, esc = D2T.esc, d = G.dailyEntry(G.today()), res = G.dailyResult();
     const date = G.dailyName(d.date, true).replace('Daily Challenge ', '').toUpperCase(), go = dailyLive(d.date);
     let state, small, plain, on = false;
     if (go) { state = 'IN PROGRESS'; on = true; small = plain = `${go} · Tap to carry on`; }
@@ -126,9 +126,9 @@
         else { small = `Finish <b>${o(need)}</b> or higher to beat your best`; plain = `Finish ${o(need)} or higher to beat your best`; }
       }
     }
-    const label = `DAILY CHALLENGE · ${state}${streak ? ` · ${streak} DAY STREAK` : ''}`;
+    const label = `DAILY CHALLENGE · ${state}`;
     const big = `${d.name} ${d.season}`;
-    return `<button class="fr-dstrip fr-in" data-act="daily"${res && !go ? ' data-done="1"' : ''} aria-label="${esc(`Daily Challenge, ${go ? 'in progress' : res ? 'completed' : G.dailyName(d.date, true).replace('Daily Challenge ', '')}${streak ? `, ${streak} day streak` : ''}: ${big}. ${plain}`)}">
+    return `<button class="fr-dstrip fr-in" data-act="daily"${res && !go ? ' data-done="1"' : ''} aria-label="${esc(`Daily Challenge, ${go ? 'in progress' : res ? 'completed' : G.dailyName(d.date, true).replace('Daily Challenge ', '')}: ${big}. ${plain}`)}">
       <img class="fr-dstrip-crest" src="${d.crest}" alt=""><span class="fr-dstrip-txt"><span class="fr-dstrip-lbl${on ? ' on' : ''}">${label}</span>
       <span class="fr-dstrip-big">${esc(big)}</span><span class="fr-dstrip-sub">${small}</span></span><span class="fr-go">${ARROW}</span></button>`;
   }
@@ -260,11 +260,6 @@
         setTimeout(() => { if (root.isConnected) D2T.sheet({ title: 'That Daily has closed', body: `<p class="fr-lead">${D2T.esc(D2T.game.dailyName(dc))} closed at midnight before you finished it. Today's club is ready for everyone.</p>` }); }, 900);
       }
       const startNew = (from, mode) => { D2T.game.newRun(mode); D2T.toBlack('spin', { from }); };
-      // the strip's label and club line shrink to fit rather than trail off (a long club, a streak on the label)
-      body.querySelectorAll('.fr-dstrip-lbl, .fr-dstrip-big').forEach((el) => {
-        const px = parseFloat(getComputedStyle(el).fontSize); let f = px;
-        while (el.scrollWidth > el.clientWidth + 0.5 && f > px * 0.7) { f -= 0.5; el.style.fontSize = f + 'px'; if (el.classList.contains('fr-dstrip-lbl')) el.style.letterSpacing = Math.max(1, 2 * f / px) + 'px'; }
-      });
       // the Daily strip: play or carry on; once today's is played, a slide-up to share it or go again (Craig, 14 Oct)
       const daily = body.querySelector('[data-act="daily"]');
       if (daily) daily.onclick = (e) => {
