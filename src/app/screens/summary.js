@@ -35,7 +35,7 @@
   // ---------- share (Craig, 13 Oct; design/prototype/share-cards.html): image and a short message ending in a dare ----------
   // Built ahead so Share opens at once (core/share.js draws the frame: logo, tag, faded crest, dare band).
   function runShare(o) {
-    const { F, club, S, line, daily, mode, met, car, x, n, rel } = o;
+    const { F, club, S, line, daily, mode, met, car, x, n, rel, rows } = o;
     const G = D2T.game, ord = D2T.ordinal, nm = club.full || club.name, L = D2T.share.LINK, sim = G.isSim();
     const mon = (d) => { const M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], [, m, dd] = d.split('-'); return `${+dd} ${M[+m - 1]}`; };
     const they = sim ? 'FORECAST' : 'THEY FINISHED';
@@ -74,11 +74,48 @@
         draw: (g, im, k) => { k.club(im.crest, nm, `${S.season} · drafted from nothing`); k.duo('THEY FINISHED', ord(F.histFinish), `${F.histPts} pts`, 'I FINISHED', ord(F.finish), `${F.pts} pts`, '#3BA4FF');
           k.fit(met ? 'DREAM ACHIEVED' : 'FELL SHORT', k.W / 2, 975, 960, 900, 112, true, '#3BA4FF'); } };
     } else if (daily) {
-      const cmp = G.dailyCompare(daily), num = G.dailyNumber(daily);
-      spec = { c: '#FFFFFF', tag: `Daily #${num} · ${mon(daily)}`, dare: `Same club today. Beat ${ord(F.finish)}`,
-        text: `DROP2TOP Daily #${num} · ${mon(daily)}\n${nm} ${S.season} went down in ${ord(F.histFinish)}. I finished ${ord(F.finish)}.\nThe Rise: ${sign(F.rise)}\n${cmp.isBest && cmp.best ? 'My best Daily yet\n' : ''}Same club for everyone today. Can you beat ${ord(F.finish)}?\n${L}`,
-        draw: (g, im, k) => { k.club(im.crest, nm, S.season); k.duo('THEY FINISHED', ord(F.histFinish), F.histPts != null ? `${F.histPts} pts` : '', 'I FINISHED', ord(F.finish), `${F.pts} pts`, '#FFFFFF');
-          k.fit('THE RISE ' + sign(F.rise), k.W / 2, 975, 960, 900, 112, true, '#FFFFFF'); k.wrap(line, k.W / 2, 1098, 860, 500, 32, '#BDBDC6', 42); } };
+      // the Daily (Craig, 29 Oct; "3 · Team sheet" in design/prototype/daily-share.html): the club's wash, the white tag,
+      // their finish to yours, The Rise in places, then a team sheet of the top scorer and the best card
+      const num = G.dailyNumber(daily), M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], [, mm, dd] = daily.split('-');
+      const day = `${ord(+dd)} ${M[+mm - 1]}`, won = F.finish === 1, acc = club.accent || '#FFFFFF', txt = club.text || '#FFFFFF';
+      const places = `${sign(F.rise)} ${Math.abs(F.rise) === 1 ? 'place' : 'places'}`;
+      const ts = rows && rows.topScorer, bc = rows && rows.best;
+      const lines = [`DROP2TOP Daily #${num} · ${day}`, '', `${nm} ${S.season}`, `They went down in ${ord(F.histFinish)}.`,
+        won ? `I won the league on ${F.pts} pts.` : `I finished ${ord(F.finish)} on ${F.pts} pts.`, `The Rise: ${places}`];
+      if (ts || bc) lines.push('');
+      if (ts) lines.push(`Top scorer: ${ts.name}, ${ts.goals} goal${ts.goals === 1 ? '' : 's'}`);
+      if (bc) lines.push(`Best card: ${bc.name}, ${bc.r}`);
+      lines.push('', '_Your turn. Beat that!_', L);
+      const bestClub = bc && G.club(bc.crest);
+      spec = { c: '#FFFFFF', wash: acc, band: acc, ink: club.ink || '#0A0A0A', tag: `Daily #${num} · ${day}`, dare: `Same club today. Beat ${ord(F.finish)}`,
+        text: lines.join('\n'), imgs: { crest: club.crest, best: bestClub && bestClub.crest },
+        draw: (g, im, k) => {
+          const W = k.W;
+          k.pic(im.crest, W / 2, 252, 236);
+          k.fit(String(nm).toUpperCase(), W / 2, 500, 960, 900, 74, true, '#FFFFFF');
+          k.fit(S.season, W / 2, 580, 960, 600, 38, false, '#E6E6EA');
+          // 21st -> 1st, the arrow on the figures' middle
+          const a = ord(F.histFinish), b = ord(F.finish), C = 712, gap = 140, wa = k.width(a, 900, 136, true), wb = k.width(b, 900, 136, true), x0 = W / 2 - (wa + gap + wb) / 2;
+          k.mid(a, x0, C, 999, 900, 136, true, '#8E8E99', 'left'); k.mid(b, x0 + wa + gap, C, 999, 900, 136, true, txt, 'left');
+          g.strokeStyle = '#FFFFFF'; g.lineWidth = 9; g.lineCap = 'round'; g.lineJoin = 'round';
+          const ax = x0 + wa + 26, bx = x0 + wa + gap - 26;
+          g.beginPath(); g.moveTo(ax, C); g.lineTo(bx, C); g.moveTo(bx - 24, C - 22); g.lineTo(bx, C); g.lineTo(bx - 24, C + 22); g.stroke();
+          k.fit(`WENT DOWN${F.histPts != null ? ` · ${F.histPts} PTS` : ''}`, x0 + wa / 2, 790, 440, 800, 26, false, '#8E8E99', 'center', '2px');
+          k.fit(`${F.pts} PTS${won ? ' · CHAMPIONS' : ''}`, x0 + wa + gap + wb / 2, 790, 460, 800, 26, false, txt, 'center', '2px');
+          // THE RISE: +20 PLACES
+          const t1 = 'THE RISE: ', t2 = places.toUpperCase(), w1 = k.width(t1, 900, 54, true), w2 = k.width(t2, 900, 54, true), rx = W / 2 - (w1 + w2) / 2;
+          k.fit(t1, rx, 846, 999, 900, 54, true, '#FFFFFF', 'left'); k.fit(t2, rx + w1, 846, 999, 900, 54, true, txt, 'left');
+          // the team sheet: numbers right-aligned in one column, their words after them
+          const row = (y, icon, label, name, num, word, col) => {
+            k.box(90, y, 900, 100, 22); const c = y + 50;
+            icon();
+            k.fit(label, 206, y + 18, 560, 800, 22, false, '#8E8E99', 'left', '3px');
+            k.fit(String(name).toUpperCase(), 206, y + 46, 560, 900, 40, true, '#FFFFFF', 'left');
+            k.mid(num, 826, c, 220, 900, 64, true, col, 'right'); k.mid(word, 840, c, 140, 800, 22, false, col, 'left', '2px');
+          };
+          if (ts) row(930, () => k.ball(150, 980, 28), 'TOP SCORER', ts.name, String(ts.goals), ts.goals === 1 ? 'GOAL' : 'GOALS', txt);
+          if (bc) { const Lc = k.LVC[bc.lv] || k.LVC.bronze; row(1044, () => k.card(126, 1056, 58, bc, im.best), 'BEST CARD', bc.name, String(bc.r), Lc[6], Lc[5]); }
+        } };
     } else {
       spec = { c: club.text, tag: 'Classic', dare: `Beat my rise of ${sign(F.rise)}`,
         text: `DROP2TOP\nI took ${nm} ${S.season} from ${ord(F.histFinish)} to ${ord(F.finish)}.\nThe Rise: ${sign(F.rise)} (${F.pts} pts)\nThink you can do better with a side that went down?\n${L}`,
@@ -91,9 +128,10 @@
 
   // Share a Daily again from home (Craig, 14 Oct): the same share as its summary, built from the day's best go in the record
   D2T.dailyShare = (date) => {
-    const G = D2T.game, r = G.dailyResult(date); if (!r) return null;
+    const G = D2T.game; date = date || G.today();
+    const r = G.dailyResult(date); if (!r) return null;
     const club = G.club(r.club) || { name: r.club, text: '#FFFFFF' };
-    return runShare({ F: { finish: r.finish, histFinish: r.histFinish, rise: r.rise, pts: r.pts, histPts: r.histPts }, club, S: { season: r.season }, line: '', daily: date, mode: 'classic' });
+    return runShare({ F: { finish: r.finish, histFinish: r.histFinish, rise: r.rise, pts: r.pts, histPts: r.histPts }, club, S: { season: r.season }, line: '', daily: date, mode: 'classic', rows: { topScorer: r.topScorer || null, best: r.best || null } });
   };
 
   // the Daily: today's result next to your best one, so you can see how today stacks up
@@ -169,7 +207,11 @@
       // the end sheet (Craig, 14 Oct; D2T.endSheet): no bottom bar here. Share, then Play again (the Daily: Go again; Club X:
       // Next season while the career is open, and New career), then Home. Dragged closed, a "Season over" peek bar
       // brings it back; the summary scrolls behind it.
-      const sh = runShare({ F, club, S, line, daily, mode: GAME.mode(), met, car, x, n, rel });
+      // the Daily card's team sheet (Craig, 29 Oct): the top scorer and the best card (highest-rated in the XI, the next
+      // highest when he is also the top scorer)
+      const tsC = F.topScorer && GAME.card(S, F.topScorer.id), bcC = F.bestCard != null && GAME.card(S, F.bestCard);
+      const rows = { topScorer: tsC ? { name: tsC.name, goals: F.topScorer.goals } : null, best: bcC ? { name: bcC.name, r: bcC.ovr, lv: bcC.level, p: bcC.pos, crest: bcC.club } : null };
+      const sh = runShare({ F, club, S, line, daily, mode: GAME.mode(), met, car, x, n, rel, rows });
       const colour = daily ? '#FFFFFF' : x ? '#12F06C' : GAME.mode() === 'dare2dream' ? '#3BA4FF' : club.text, ink = daily || x || GAME.mode() === 'dare2dream' ? '#0A0A0A' : club.ink;
       const again = () => { if (daily) { GAME.restartDaily(); D2T.go(GAME.stepFor() || 'table'); return; } const m = GAME.mode(); GAME.newRun(m); D2T.go('spin'); };
       const buttons = [{ k: 'share', label: 'Share result', fn: () => { window.D2TSound && window.D2TSound.play('share'); D2T.share.send(sh); } }];

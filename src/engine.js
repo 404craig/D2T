@@ -1046,14 +1046,17 @@ function seasonSummary(S, st) {
     const gain = ((p ? p.r : 0) - (o ? o.r : 50)) * games;
     if (!best || gain > best.gain) best = { id: s.id, gain, gw: s.gw };
   }
-  const potw = st.xi.map(id => playerOf(S, id, S.legends)).filter(Boolean)
-    .map(p => ({ id: p.id, score: p.r + (goals[p.id] || 0) * 1.5 })).sort((a, b) => b.score - a.score)[0];
+  // Player of the season and the share card's best card (Craig, 29 Oct: mix the awards up): the highest-rated card in the
+  // final XI, or the next highest when he is also the top scorer; the same man only when nobody else is left
+  const byRating = st.xi.map(id => playerOf(S, id, S.legends)).filter(Boolean)
+    .sort((a, b) => b.r - a.r || (goals[b.id] || 0) - (goals[a.id] || 0));
+  const potw = (topScorer && byRating[0] && byRating[0].id === topScorer[0] && byRating[1]) || byRating[0];
   const stars = { survive: finish <= nC - relN, tophalf: finish <= nC / 2, champions: finish === 1 };
   return {
     finish, histFinish, rise: histFinish - finish, pts: row.pts, histPts: hrow.pts, gained: row.pts - hrow.pts,
     w: row.w, d: row.d, l: row.l, gf: row.gf, ga: row.ga, table: mine, histTable: hist,
     changes, topScorer: topScorer ? { id: topScorer[0], goals: topScorer[1] } : null,
-    bestSigning: best, playerOfSeason: potw ? potw.id : null, positions: positionsSoFar(S, st), history: st.history, stars
+    bestSigning: best, playerOfSeason: potw ? potw.id : null, bestCard: potw ? potw.id : null, positions: positionsSoFar(S, st), history: st.history, stars
   };
 }
 
