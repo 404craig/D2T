@@ -106,7 +106,7 @@
 /* no glows on squad and pitch cards (11 Oct): selection lifts the card, turns its tab white and puts a white marker under it */
 .se-cardwrap .d2c { filter: none; }
 .se-cardwrap.se-sel { transform: translateY(-5px) scale(1.06); z-index: 3; }
-.se-cardwrap.se-sel .d2c-tab { background: #FFFFFF; }
+.se-cardwrap.se-sel .d2c-tab { background: #FFFFFF; color: #0A0A0A; }
 .se-cardwrap.se-sel::after { content: ''; position: absolute; left: 50%; bottom: -10px; margin-left: -5px; border: 5px solid transparent; border-top-color: #FFFFFF; }
 .se-armed .se-slot.se-pf-green .se-cardwrap:not(.se-sel) { animation: seArmed 1.4s ease-in-out infinite; }
 @keyframes seArmed { 50% { transform: translateY(-2px); } }
@@ -125,7 +125,32 @@
 .se-hint { font-size: 12px; color: var(--muted); text-align: right; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .se-subs { display: flex; gap: 8px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-padding: 0 16px; margin: 0 -16px; padding: 14px 16px 12px; scrollbar-width: none; overscroll-behavior-x: contain; flex-shrink: 0; }
 .se-subs::-webkit-scrollbar { display: none; }
-.se-sub { scroll-snap-align: start; flex-shrink: 0; }
+.se-sub { scroll-snap-align: start; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+/* his green positions under each bench card, as under the roll's tray cards (Craig, 15 Oct) */
+.se-sub-pos { margin-top: 7px; color: #8E8E99; font: 800 9px/1 var(--font); font-style: normal; letter-spacing: .03em; white-space: nowrap; }
+.se-sub-pos i { font-style: normal; opacity: .5; }
+.se-sub .se-cardwrap.se-sel::after { display: none; }   /* the positions sit there; the white tab and the lift show it is picked */
+/* compact mode (design session, Craig 19 Oct; base.css has the bars): the squad a step smaller, the bench cards 52px */
+@media (max-height: 759px) {
+  .se-sqhead { padding-bottom: 6px; gap: 8px; }
+  .se-sqcrest { width: 28px; height: 28px; }
+  .se-sqname { font-size: 18px; }
+  .se-sqsub { font-size: 11px; }
+  .se-rating { padding: 3px 10px 3px 8px; } .se-rating b { font-size: 20px; }
+  .se-linebars { margin: 0 2px 6px; }
+  .se-squad .se-pitch { min-height: 250px; }
+  .se-subshead { margin-top: 6px; }
+  .se-subs { padding: 10px 16px 4px; gap: 6px; }
+  .se-sub .d2c { --w: 52px !important; }
+  .se-sub-pos { margin-top: 5px; }
+}
+@media (max-width: 374px) { .se-hint { font-size: 11px; } }
+/* Samsung's screen zoom a step up (about 320 x 600): one more step down */
+@media (max-height: 620px) {
+  .se-squad .se-pitch { min-height: 212px; }
+  .se-sub .d2c { --w: 46px !important; }
+  .se-linebars { display: none; }
+}
 .se-sub .se-cardwrap { touch-action: pan-x; }
 
 /* next fixture bar */
@@ -260,10 +285,10 @@
 .se-fx-sc { display: flex; align-items: center; justify-content: center; gap: 5px; font: var(--display); font-size: 18px; font-variant-numeric: tabular-nums; }
 .se-fx-sc i { width: 8px; height: 3px; border-radius: 2px; background: var(--muted); }
 /* a dot per player signed from a club this season, in your club's colour, at the far edge of its side (Craig, 14 Oct) */
-.se-fx-res { position: relative; }
-.se-fx-res .se-fx-dots { position: absolute; top: 50%; transform: translateY(-50%); display: flex; flex-direction: row; gap: 3px; }
-.se-fx-res .se-fx-dots.se-h { left: 4px; }
-.se-fx-res .se-fx-dots.se-a { right: 4px; }
+.se-fx-res, .se-fx { position: relative; }
+.se-fx .se-fx-dots { position: absolute; top: 50%; transform: translateY(-50%); display: flex; flex-direction: row; gap: 3px; }
+.se-fx .se-fx-dots.se-h { left: 4px; }
+.se-fx .se-fx-dots.se-a { right: 4px; }
 .se-fx-dots i { display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--se-acc); }
 .se-fx-key { display: flex; align-items: center; gap: 6px; }
 .se-fx-key .se-fx-dots { display: inline-flex; flex-shrink: 0; }
@@ -287,11 +312,15 @@
 /* a soft patch of light on the grass under each placed card, in its fit colour, where the dark shadow sits */
 .se-slot:has(.d2c.fit-green)::after { background: rgba(18,240,108,.55); } .se-slot:has(.d2c.fit-amber)::after { background: rgba(255,176,32,.55); } .se-slot:has(.d2c.fit-red)::after { background: rgba(255,77,94,.55); }
 .se-slot:has(.d2c.fit-green)::after, .se-slot:has(.d2c.fit-amber)::after, .se-slot:has(.d2c.fit-red)::after { filter: blur(5px); }
-.se-slot.se-pf-green { --ring: #12F06C; --ring-a: rgba(18,240,108,.18); }
-.se-slot.se-pf-amber { --ring: #FFB020; --ring-a: rgba(255,176,32,.18); }
-.se-slot.se-pf-red { --ring: #FF4D5E; --ring-a: rgba(255,77,94,.18); }
+.se-slot.se-pf-green { --ring: #12F06C; --ring-a: rgba(18,240,108,.18); --ring-e: rgba(18,240,108,.10); }
+.se-slot.se-pf-amber { --ring: #FFB020; --ring-a: rgba(255,176,32,.18); --ring-e: rgba(255,176,32,.10); }
+.se-slot.se-pf-red { --ring: #FF4D5E; --ring-a: rgba(255,77,94,.18); --ring-e: rgba(255,77,94,.10); }
 .se-emptywrap { position: relative; display: block; }
-.se-slots .se-slot[class*="se-pf-"] .se-empty { background: var(--ring-a); }
+/* an empty shirt in a card's fit (Craig, 21 Oct: the overlaid ring and fill were garish): no ring laid over it, the shirt's
+   own dashed edge and label take the fit colour and its fill is a faint tint, as quiet as an open shirt */
+.se-slots .se-slot[class*="se-pf-"] .se-empty { background: var(--ring-e); border-color: var(--ring); }
+.se-slots .se-slot[class*="se-pf-"] .se-empty span { color: var(--ring); }
+.se-slot[class*="se-pf-"] .se-emptywrap::before, .se-slot[class*="se-pf-"] .se-cardwrap:has(.se-emptywrap)::before { display: none; }   /* the card glow never sits behind an empty shirt (the transfer pitch wraps empties in a cardwrap) */
 /* fit rings (Craig, 13 Oct; design/prototype/fit-ring-glow.css): a 1px rounded ring 3.5px out from the 50 x 65 pitch card or empty shirt, and a glow in the fit colour behind the card inside the ring */
 .se-slot[class*="se-pf-"] .se-cardwrap .d2c::after, .se-slot[class*="se-pf-"] .se-emptywrap::before { content: ""; position: absolute; background: var(--ring); pointer-events: none; }
 /* 1px fit ring with rounder corners, drawn inside its box so the point at the bottom is never cut off */
@@ -301,7 +330,7 @@
 .se-slot[class*="se-pf-"] .se-cardwrap{position:relative;isolation:isolate}
 .se-slot[class*="se-pf-"] .se-cardwrap::before{content:"";position:absolute;z-index:-1;pointer-events:none;background:var(--ring);opacity:.7;
   left:50%;top:-3.5px;transform:translateX(-50%);width:57px;height:72px;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 57 72'%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Cpath d='M8.50 1.00 L48.50 1.00 Q56.00 1.00 56.00 8.50 L56.00 54.56 Q56.00 61.06 49.89 63.27 L34.61 68.79 Q28.50 71.00 22.39 68.79 L7.11 63.27 Q1.00 61.06 1.00 54.56 L1.00 8.50 Q1.00 1.00 8.50 1.00Z'/%3E%3C/clipPath%3E%3Cfilter id='b' x='-30%25' y='-30%25' width='160%25' height='160%25'%3E%3CfeGaussianBlur stdDeviation='2.6'/%3E%3C/filter%3E%3C/defs%3E%3Cg clip-path='url%28%23c%29'%3E%3Cpath d='M8.50 3.50 L48.50 3.50 Q53.50 3.50 53.50 8.50 L53.50 55.27 Q53.50 59.27 49.75 60.66 L32.25 67.11 Q28.50 68.50 24.75 67.11 L7.25 60.66 Q3.50 59.27 3.50 55.27 L3.50 8.50 Q3.50 3.50 8.50 3.50Z' fill='black' filter='url%28%23b%29' transform='translate%2828.5 36%29 scale%281.06%29 translate%28-28.5 -36%29'/%3E%3C/g%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 57 72'%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Cpath d='M8.50 1.00 L48.50 1.00 Q56.00 1.00 56.00 8.50 L56.00 54.56 Q56.00 61.06 49.89 63.27 L34.61 68.79 Q28.50 71.00 22.39 68.79 L7.11 63.27 Q1.00 61.06 1.00 54.56 L1.00 8.50 Q1.00 1.00 8.50 1.00Z'/%3E%3C/clipPath%3E%3Cfilter id='b' x='-30%25' y='-30%25' width='160%25' height='160%25'%3E%3CfeGaussianBlur stdDeviation='2.6'/%3E%3C/filter%3E%3C/defs%3E%3Cg clip-path='url%28%23c%29'%3E%3Cpath d='M8.50 3.50 L48.50 3.50 Q53.50 3.50 53.50 8.50 L53.50 55.27 Q53.50 59.27 49.75 60.66 L32.25 67.11 Q28.50 68.50 24.75 67.11 L7.25 60.66 Q3.50 59.27 3.50 55.27 L3.50 8.50 Q3.50 3.50 8.50 3.50Z' fill='black' filter='url%28%23b%29' transform='translate%2828.5 36%29 scale%281.06%29 translate%28-28.5 -36%29'/%3E%3C/g%3E%3C/svg%3E") center/100% 100% no-repeat}
-.se-slots .se-slot.se-best[class*="se-pf-"] .se-empty { background: var(--ring-a); border-color: rgba(255,255,255,.5); }
+.se-slots .se-slot.se-best[class*="se-pf-"] .se-empty { background: var(--ring-e); border-color: var(--ring); }
 .se-sub.se-newsign .se-cardwrap { transform: translateY(-3px); }
 @media (prefers-reduced-motion: reduce) { .se-slot.se-best .se-cardwrap { animation: none; outline: 2px solid var(--se-acc); outline-offset: 3px; border-radius: 8px; } }
 
@@ -392,16 +421,24 @@
 .se-slot.se-best .se-empty-to .se-to { color: var(--se-text); }
 .se-poaching .se-slots, .se-poaching .se-formlink { pointer-events: none; }
 .se-poach-fx { position: absolute; inset: 0; z-index: 40; pointer-events: none; }
-.se-pc-rival { position: absolute; width: 62px; height: 62px; margin: -31px 0 0 -31px; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(0,0,0,.6), 0 0 0 3px rgba(255,255,255,.25); }
+.se-pc-rival { position: absolute; width: 62px; height: 62px; margin: -31px 0 0 -31px; border-radius: 50%; background: #FFD500; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(0,0,0,.6), 0 0 0 3px #0A0A0A, 0 0 0 5px rgba(255,213,0,.35); }
+.se-pc-rival.rd-dark { background: #0A0A0A; box-shadow: 0 8px 24px rgba(0,0,0,.6), 0 0 0 3px #FFD500; }   /* a mostly yellow crest (clubs.json darkDisc) */
 .se-pc-rival img { width: 44px; height: 44px; object-fit: contain; }
 .se-pc-line { position: absolute; width: 3px; border-radius: 2px; background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.3)); transform-origin: 50% 0; }
 /* the Transfer News bar, centred in the space between the pitch and the bottom bar: the pill, then one headline */
-.se-ticker { position: absolute; left: 0; right: 0; top: 0; z-index: 6; height: 34px; display: flex; align-items: center; background: #12F06C; color: #00170A; overflow: hidden;
-  font: 900 italic 14px/1 'Exo 2', sans-serif; text-transform: uppercase; white-space: nowrap; }
-.se-tk-tag { position: relative; z-index: 2; flex: none; margin-left: 10px; padding: 5px 8px 4px; border-radius: 4px; background: #00170A; color: #12F06C; font-size: 11px; letter-spacing: .06em; }
-.se-tk-view { position: relative; flex: 1 1 auto; min-width: 0; height: 100%; overflow: hidden; }
-.se-tk-item { position: absolute; left: 0; top: 0; height: 100%; display: flex; align-items: center; padding-left: 10px; white-space: nowrap; }
-.se-has-ticker .se-gone { visibility: hidden; }
+/* the Transfer News bar (Craig, 21 Oct; deadline-day yellow and black, SE.newsBar): centred between the pitch and the
+   bottom bar on the squad (placed by squad.js), in the hint line's place on the transfer screen */
+.se-news { position: absolute; left: 0; right: 0; top: 0; z-index: 6; height: clamp(50px, 15vw, 66px);   /* scales with the phone (Craig, 21 Oct: too small on an iPhone 16 Pro) */ display: flex; align-items: stretch; background: #FFD500; color: #0A0A0A; overflow: hidden; }
+.se-nb-tag { flex: none; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 2px; padding: 0 20px 0 14px; background: #0A0A0A; color: #FFD500; font: 900 italic clamp(11px, 3.4vw, 14px)/1 var(--font); letter-spacing: .12em; text-transform: uppercase; clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%); }
+.se-nb-view { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; padding-left: 8px; overflow: hidden; }
+.se-nb-text { display: block; white-space: nowrap; font: 900 italic clamp(11px, 3.7vw, 15.5px)/1.25 var(--font); text-transform: uppercase; letter-spacing: .08em; max-width: 100%; }
+.se-nb-text .w { white-space: nowrap; }
+.se-nb-text i { font-style: inherit; opacity: 0; }
+.se-nb-text i.on { opacity: 1; }
+.se-nb-count { flex: none; display: flex; align-items: center; padding: 0 12px; font: 900 italic clamp(13px, 4vw, 17px)/1 var(--font); }
+.se-nb-count.is-dim { opacity: .35; }
+.se-news.se-news-flow { position: relative; z-index: 2; margin: 6px 0 4px; }
+.se-has-news .se-gone { visibility: hidden; }
 /* the summary sheet */
 .se-poach-sum .se-note { margin: 0 0 10px; }
 .se-poach-sum ul { margin: 0 0 14px; padding: 0; list-style: none; }
@@ -410,3 +447,105 @@
 .se-poach-sum li img { width: 26px; height: 26px; object-fit: contain; }
 .se-poach-sum li span { margin-left: auto; color: #8E8E99; font-weight: 600; font-size: 13px; }
 .se-poach-sum .se-poach-go { width: 100%; min-height: 52px; }
+
+/* ---------- tactics (Craig, 18 Oct; docs/SCOPE_ENGINE.md) ---------- */
+/* the tactics chip, bottom right of the pitch, the twin of the shape chip */
+.se-taclink { left: auto; right: 8px; }
+.tr-field .se-taclink { left: auto; right: 4px; font-size: 0; }
+.tr-field .se-taclink b { font-size: 13px; }
+/* your three lines under the squad header: DEF MID ATT bars, the best in the accent colour */
+.se-linebars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 2px 2px 8px; }
+.se-line { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 5px; min-width: 0; }
+.se-line i { font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: .08em; color: var(--muted); }
+.se-line b { display: block; height: 5px; border-radius: 3px; background: rgba(255,255,255,.1); overflow: hidden; }
+.se-line b u { display: block; height: 100%; border-radius: 3px; background: rgba(255,255,255,.45); transition: width .5s cubic-bezier(.2,.8,.2,1); }
+.se-line em { font: var(--display); font-size: 13px; color: var(--soft); font-variant-numeric: tabular-nums; }
+.se-line.is-top b u { background: var(--se-acc); }
+.se-line.is-top em, .se-line.is-top i { color: var(--se-text); }
+/* the five boards */
+.se-tacgrid { display: grid; gap: 8px; }
+.se-taccard { display: grid; grid-template-columns: 64px 1fr; gap: 12px; align-items: center; text-align: left; padding: 8px 10px 8px 8px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--ink); min-height: 44px; transition: border-color .15s, transform .15s, background-color .15s; }
+.se-taccard:active { transform: scale(.98); }
+.se-taccard .se-fpitch { aspect-ratio: 3 / 3.4; }
+.se-tactext { display: grid; gap: 2px; min-width: 0; }
+.se-tactext b { font: var(--display); font-size: 17px; color: var(--soft); }
+.se-tactext span { font-size: 12.5px; line-height: 1.3; color: var(--muted); }
+.se-tactext small { font-size: 11px; font-weight: 800; letter-spacing: .04em; color: var(--muted); }
+.se-taccard.is-on { border-color: var(--se-acc); background: var(--ink-2); box-shadow: 0 0 0 1px var(--se-acc), 0 8px 22px -10px var(--se-acc-b); }
+.se-taccard.is-on .se-tactext b, .se-taccard.is-on .se-tactext small { color: var(--se-text); }
+.se-taccard.is-on .se-fpitch i { background: var(--se-acc); }
+/* how each board moves (transform only; reduced motion: still) */
+.se-tacpitch i { width: 7px; height: 7px; margin: -3.5px; }
+.se-tacpitch.is-low i { transform: translateY(14%) scaleX(.9); animation: seTacLow 3.2s ease-in-out infinite; }
+.se-tacpitch.is-press i { transform: translateY(-16%); animation: seTacPress 2.4s ease-in-out infinite; }
+.se-tacpitch.is-counter i { animation: seTacCounter 3s cubic-bezier(.4,0,.3,1) infinite; animation-delay: calc(var(--i) * -.04s); }
+.se-tacball { position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px; border-radius: 50%; background: #fff; box-shadow: 0 0 6px #fff; animation: seTacBall 3.6s linear infinite; }
+@keyframes seTacLow { 0%, 100% { transform: translateY(14%) scaleX(.9); } 50% { transform: translateY(18%) scaleX(.86); } }
+@keyframes seTacPress { 0%, 100% { transform: translateY(-16%) scaleX(.92); } 50% { transform: translateY(-22%) scaleX(.9); } }
+@keyframes seTacCounter { 0%, 25% { transform: translateY(14%); opacity: 1; } 65% { transform: translateY(-40%); opacity: 1; } 72% { transform: translateY(-46%); opacity: 0; } 73% { transform: translateY(20%); opacity: 0; } 85%, 100% { transform: translateY(14%); opacity: 1; } }
+@keyframes seTacBall { 0% { transform: translate(-70%, 40%); } 33% { transform: translate(120%, 10%); } 66% { transform: translate(-30%, -120%); } 100% { transform: translate(-70%, 40%); } }
+@media (prefers-reduced-motion: reduce) { .se-tacpitch i, .se-tacball { animation: none !important; } }
+/* the tactic hint on the fixtures (once per run) */
+.se-tachint { margin: 10px 0 0; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--se-acc-b); background: var(--ink-2); font-size: 13px; color: var(--soft); }
+.se-tachint b { color: var(--se-text); }
+/* ---------- settling in: dots under the rating on a pitch card, one per game to go ---------- */
+.d2c.mini .d2c-dots { position: absolute; left: 50%; bottom: 7%; transform: translateX(-50%); display: flex; gap: 2px; pointer-events: none; }
+.d2c.mini .d2c-dots i { width: 4px; height: 4px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.5); opacity: .9; }
+/* ---------- scouting: Respin or Scout, then the pitch of shirts ---------- */
+/* Respin or scout (Craig, 20 Oct): one sheet in the tactic sheet's style, three option cards with a cost pill */
+.se-optgrid { display: grid; gap: 8px; }
+.se-optcard { display: grid; grid-template-columns: 52px 1fr auto; gap: 12px; align-items: center; text-align: left; padding: 12px 12px 12px 8px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--ink); min-height: 76px; transition: border-color .15s, transform .15s; }
+.se-optcard:active { transform: scale(.98); }
+.se-optcard[disabled] { opacity: .45; }
+.se-opticon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 50%; background: var(--se-acc-a); color: var(--se-text); }
+.se-opticon svg { width: 26px; height: 26px; }
+.se-optcard .se-tactext b { color: #fff; font-size: 18px; }
+.se-optcost { display: grid; justify-items: center; min-width: 54px; padding: 6px 8px; border-radius: 10px; border: 1.5px solid var(--se-acc); color: var(--se-text); font-size: 10px; font-weight: 800; font-style: normal; letter-spacing: .06em; text-transform: uppercase; line-height: 1; }
+.se-optcost b { font: var(--display); font-size: 22px; color: var(--se-text); margin-bottom: 2px; }
+.se-optcard[disabled] .se-optcost { border-color: var(--line); color: var(--muted); } .se-optcard[disabled] .se-optcost b { color: var(--muted); }
+/* scout a position: the pitch's own shirts on a small pitch */
+.se-scoutpitch { position: relative; width: 100%; aspect-ratio: 3 / 3.4; border-radius: 12px; overflow: hidden; background: repeating-linear-gradient(180deg, #0F2E1B 0 12.5%, #0C2716 12.5% 25%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.06); margin: 0 0 10px; }
+.se-scoutshirt { position: absolute; transform: translate(-50%, -50%); padding: 0; border: 0; background: none; -webkit-tap-highlight-color: transparent; }
+.se-scoutshirt:active .se-empty { transform: scale(.95); }
+.se-scoutempty { display: grid; place-items: center; align-content: center; gap: 2px; border-color: var(--se-acc); background: var(--se-acc-a); }
+.se-scoutempty span { font-size: 11px; font-weight: 900; letter-spacing: .06em; color: #fff; }
+.se-scoutempty small { font: var(--display); font-size: 15px; color: var(--se-text); }
+.se-scoutshirt.is-none .se-empty { border-color: #E5484D; background: rgba(229,72,77,.3); }
+.se-scoutshirt.is-none .se-empty span { color: #FFB4B6; } .se-scoutshirt.is-none .se-empty small { font-size: 9px; font-weight: 800; letter-spacing: .04em; color: #FFB4B6; text-transform: uppercase; }
+/* scout a club: the season's clubs, table order */
+.se-clubgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.se-clubtile { display: grid; justify-items: center; gap: 4px; padding: 10px 4px 8px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--ink); min-height: 44px; transition: transform .15s; }
+.se-clubtile:active { transform: scale(.96); }
+.se-clubtile img { width: 34px; height: 34px; object-fit: contain; }
+.se-clubtile b { font-size: 11px; font-weight: 800; color: #fff; text-align: center; line-height: 1.15; }
+.se-clubtile small { font-size: 10px; color: var(--muted); }
+.se-scoutkey { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); margin: 0 0 8px; }
+.se-scoutkey i { width: 14px; height: 12px; border-radius: 4px; border: 1.5px dashed #E5484D; background: rgba(229,72,77,.3); }
+.se-scoutnone { font-size: 13px; color: var(--soft); margin: 0 0 8px; min-height: 1.3em; }
+/* the tag under a scouted card: better than the man in the shirt, or the next best */
+.sp-gp .sp-tag { display: block; margin-top: 4px; font-size: 8px; letter-spacing: .08em; text-transform: uppercase; color: var(--se-text, #12F06C); }
+.sp-gp .sp-tag.is-next { color: #8E8E99; }
+
+/* Sweep and strike (Craig, 20 Oct; animation B in design/prototype/raid-crosshair.html; SE.raidTake): the raid's crosshair,
+   scan beam and shock rings in a layer inside the pitch, a wash under the players while the hunt is on */
+.se-pitch.rd-on .se-slots { z-index: 1; }
+.rd-wash { position: absolute; inset: 0; background: rgba(0,0,0,.35); opacity: 0; z-index: 2; pointer-events: none; }
+.rd-fx { position: absolute; inset: 0; z-index: 50; pointer-events: none; overflow: visible; }
+.rd-x { position: absolute; left: 0; top: 0; width: 96px; height: 96px; margin: -48px 0 0 -48px; opacity: 0; will-change: transform; }
+.rd-x svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.rd-x .ring { fill: none; stroke-dasharray: 6 6; }
+.rd-x .rd-edge .ring, .rd-x .rd-edge .tick, .rd-x .rd-edge .brk { stroke: #0A0A0A; stroke-width: 4.8; stroke-linecap: round; fill: none; }
+.rd-x .rd-edge .dot { fill: #0A0A0A; }
+.rd-x .rd-fg .ring { stroke: #FFD500; stroke-width: 2.2; filter: drop-shadow(0 0 3px rgba(255,213,0,.55)); }
+.rd-x .rd-fg .tick { stroke: #FFD500; stroke-width: 2.4; stroke-linecap: round; filter: drop-shadow(0 0 3px rgba(255,213,0,.55)); }
+.rd-x .rd-fg .dot { fill: #FFD500; }
+.rd-x .brk { fill: none; stroke-width: 2.6; stroke-linecap: round; opacity: 0; }
+.rd-x .rd-fg .brk { stroke: #FFD500; filter: drop-shadow(0 0 3px rgba(255,213,0,.55)); }
+.rd-pulse { position: absolute; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; border: 2px solid #FFD500; box-shadow: 0 0 0 1.5px #0A0A0A, inset 0 0 0 1.5px #0A0A0A; opacity: 0; }
+.rd-pulse.rd-white { border-color: #fff; box-shadow: none; }
+.rd-tint .se-cardwrap .d2c { filter: drop-shadow(0 0 1px #0A0A0A) drop-shadow(0 0 2px #FFD500) drop-shadow(0 0 9px rgba(255,213,0,.75)); }
+.rd-dim .se-slot:not(.rd-tint) { transition: filter .3s; }
+.rd-beam { position: absolute; left: -10%; top: 0; width: 120%; height: 100%; opacity: 0; background: linear-gradient(90deg, transparent 0%, rgba(255,213,0,0) 47%, rgba(255,213,0,.16) 50%, rgba(255,213,0,0) 53%, transparent 100%); filter: blur(6px); }
+.rd-busy .tr-pitch, .rd-busy .sp-stage { pointer-events: none; }
+.se-news.se-nb-wait { visibility: hidden; }
+.rd-busy .game-bar .bar-main, .rd-busy .game-bar .bar-mid { pointer-events: none; }

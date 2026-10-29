@@ -169,6 +169,29 @@
   };
 
   // ---------- slide-up sheet with drag-to-close ----------
+  // ---------- errors (20 Oct; Phil's Kick off died with nothing to go on) ----------
+  // Every uncaught error and every error a screen reports is kept, the last five, in localStorage 'd2t-errors' (build, screen,
+  // time, message, the top of the stack); the Account page shows them with a Copy button. D2T.reportError also tells the
+  // player in a sheet, so a button that fails never looks dead.
+  const ERR_KEY = 'd2t-errors';
+  D2T.errors = () => { try { return JSON.parse(localStorage.getItem(ERR_KEY) || '[]'); } catch (e) { return []; } };
+  D2T.keepError = (err, where) => {
+    try {
+      const e = err || {}, list = D2T.errors();
+      list.unshift({ t: new Date().toISOString(), b: window.D2T_BUILD || '', s: currentName || '', w: where || '', m: String(e.message || e), k: String(e.stack || '').split('\n').slice(0, 4).join(' | ').slice(0, 600) });
+      localStorage.setItem(ERR_KEY, JSON.stringify(list.slice(0, 5)));
+    } catch (x) { /* storage blocked */ }
+  };
+  D2T.reportError = (err, where) => {
+    D2T.keepError(err, where);
+    const m = String((err && err.message) || err || 'Something went wrong');
+    try {
+      D2T.sheet({ title: 'Something went wrong', body: `<p class="fr-lead">${D2T.esc ? D2T.esc(m) : m}</p><p class="fr-small">It has been noted on the Account page under Diagnostics. Tap again to retry, or go home and back.</p>` });
+    } catch (x) { /* no sheet yet */ }
+  };
+  window.addEventListener('error', (ev) => { D2T.keepError(ev.error || { message: ev.message }, 'window'); });
+  window.addEventListener('unhandledrejection', (ev) => { D2T.keepError(ev.reason || {}, 'promise'); });
+
   D2T.sheet = ({ title = '', body = '', onClose } = {}) => {
     const host = document.getElementById('app');
     const scrim = D2T.h('<div class="sheet-scrim"></div>');

@@ -24,6 +24,8 @@ fs.mkdirSync(OUT, { recursive: true });
     if (process.env.SHARE_DIR && r.png) fs.writeFileSync(path.join(process.env.SHARE_DIR, name + ".png"), Buffer.from(r.png.split(",")[1], "base64"));
   };
   const wait = (ms) => page.waitForTimeout(ms);
+  // the season summary starts collapsed (Craig, 25 Oct): the end sheet comes up from its peek bar
+  const openEnd = async () => { await page.waitForSelector(".end-peek", { timeout: 4000 }).catch(() => {}); const p = await page.$(".end-peek"); if (p) { await p.click(); await page.waitForTimeout(500); } };
   const screen = () => page.evaluate(() => window.D2T.currentScreen());
   const expectScreen = async (name, ms = 6000) => {
     const t0 = Date.now();
@@ -261,8 +263,10 @@ fs.mkdirSync(OUT, { recursive: true });
   await wait(1600); await shot("16-summary"); await smallButtons("summary");
   // the end sheet (Craig, 14 Oct): no bottom bar; Share, Play again and Home on one sheet, the summary behind it
   check(!(await page.$(".actionbar")), "the summary should have no bottom bar");
+  check(!(await page.$(".end-sheet")) && !!(await page.$(".end-peek")), "the summary should start with the end sheet collapsed to its peek bar");
+  await openEnd();
   const endKeys = async () => page.$$eval(".end-sheet [data-k]", (bs) => bs.map((b) => b.dataset.k + ":" + b.textContent.trim()));
-  check((await endKeys()).join("|") === "share:Share result|again:Play again|home:Home", "the Classic end sheet should offer Share, Play again and Home, got " + (await endKeys()).join("|"));
+  check((await endKeys()).join("|") === "share:Share result|again:Play again|table:Final table|home:Home", "the Classic end sheet should offer Share, Play again, Final table and Home, got " + (await endKeys()).join("|"));
   // dragged closed: a peek bar brings it back, and the summary scrolls behind
   { const bar = await page.$(".end-sheet .sheet-bar"); const bb = await bar.boundingBox();
     await page.mouse.move(bb.x + bb.width / 2, bb.y + bb.height / 2); await page.mouse.down();
@@ -274,6 +278,10 @@ fs.mkdirSync(OUT, { recursive: true });
   // the run is over: Home goes straight home, no menu
   await page.click('.end-sheet [data-k="home"]'); await expectScreen("home"); await wait(500);
   check(!(await page.$(".sheet")), "summary: Home should go straight home once the run is over");
+  await page.evaluate(() => window.D2T.go("summary")); await expectScreen("summary"); await openEnd();
+  await page.click('.end-sheet [data-k="table"]'); await wait(600);
+  check(!(await page.$(".end-sheet")) && !!(await page.$(".sheet .se-table")) && !!(await page.$(".end-peek")), "Final table on the end sheet should open the table and leave the peek bar");
+  await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(500);
   await page.evaluate(() => window.D2T.go("summary")); await expectScreen("summary"); await wait(1200);
   await card("classic", "DROP2TOP\nI took ");
   await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(500);
@@ -294,7 +302,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.evaluate(() => window.D2T.go("summary")); await wait(800);
   check((await screen()) === "summary", "the finished season's summary did not reopen after a refresh");
   check((await page.evaluate(() => window.D2T.state.record.runs.length)) === 1, "refresh recorded the run twice");
-  await wait(1000); check(!!(await page.$(".end-sheet")), "the end sheet did not reopen with the summary after a refresh");
+  await wait(1000); check(!!(await page.$(".end-peek")), "the end sheet's peek bar did not come back with the summary after a refresh");
 
   // ---------- other screens ----------
   for (const s of ["home", "howto", "league", "account", "stats"]) {
@@ -325,7 +333,7 @@ fs.mkdirSync(OUT, { recursive: true });
 
   // play again from the summary's end sheet
   await page.evaluate(() => window.D2T.go("summary")); await wait(600);
-  await page.waitForSelector('.end-sheet [data-k="again"]', { timeout: 4000 }); await page.click('.end-sheet [data-k="again"]');
+  await openEnd(); await page.waitForSelector('.end-sheet [data-k="again"]', { timeout: 4000 }); await page.click('.end-sheet [data-k="again"]');
   await expectScreen("spin");
   check(await page.evaluate(() => window.D2T.game.eng().phase === "clubroll"), "play again did not start a new run");
 
@@ -377,6 +385,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.evaluate(() => { const G = window.D2T.game; for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(1200); await shot("32-d2d-summary");
   check(/Dream achieved|Fell short/.test(await page.textContent(".sm-head")), "Dare2Dream summary has no dream result");
+  await openEnd();
   check(!!(await page.$('.end-sheet [data-k="again"]')) && !!(await page.$('.end-sheet [data-k="home"]')), "the Dare2Dream end sheet should offer Play again and Home");
   await card("dare2dream", "DROP2TOP Dare2Dream\n");
   check(await page.evaluate(() => window.D2T.game.dreamRecord().runs === 1), "Dare2Dream run not recorded");
@@ -448,8 +457,9 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => window.D2T.game.careerOpen(window.D2T.state.run) && window.D2T.game.eng().phase === "summary"), "Keep playing did not keep the career");
   await page.reload(); await expectScreen("intro"); await page.click(".fr-skip", { force: true }); await expectScreen("home"); await page.waitForSelector('[data-act="continue"]', { timeout: 5000 }).catch(() => {}); await wait(900);
   check(!!(await page.$('[data-act="continue"]')), "a refresh lost the finished Club X season's Continue card");
-  await page.click('[data-act="continue"]'); await expectScreen("summary"); await wait(1500);
+  await page.click('[data-act="continue"]'); await expectScreen("summary"); await wait(1500); await openEnd();
   check(!!(await page.$('.end-sheet [data-k="next"]')), "Club X end sheet has no Next season");
+  check((await page.$$eval(".end-sheet [data-k]", (bs) => bs.map((b) => b.dataset.k).join("|"))) === "share|next|table|history|again|home", "the Club X end sheet should go Share, Next season, Final table, Club history, New career, Home");
   check(/New career/.test(await page.textContent('.end-sheet [data-k="again"]')) && !!(await page.$('.end-sheet [data-k="home"]')) && !!(await page.$('.end-sheet [data-k="share"]')), "the Club X end sheet should offer Share, Next season, New career and Home");
   await page.click('.end-sheet [data-k="next"]'); await expectScreen("table"); await wait(600);
   check(await page.evaluate(() => { const G = window.D2T.game, e = G.eng(); return e.career === 2 && e.phase === "setup" && G.lineup().xi.every(Boolean) && G.clubName() === "Southside Rovers"; }), "Next season did not carry the XI into season 2");
@@ -457,23 +467,27 @@ fs.mkdirSync(OUT, { recursive: true });
   // Poached (Craig, 14 Oct): season 2's pre-season squad loses three of the XI to other sides, played out once; a refresh
   // never replays it (the summary comes back until it is closed), and Continue goes on to the Summer window
   await page.evaluate(() => { window.D2T.state.run.tableSeen = true; window.D2T.save(); window.D2T.go("squad"); }); await expectScreen("squad");
-  await wait(2150);
-  check(!!(await page.$(".se-poach-fx .se-pc-rival")) && !!(await page.$(".se-poach-fx .se-pc-line")), "the poach should drop a rival crest with a line down to the card");
-  check(!!(await page.$(".se-ticker .se-tk-tag")) && /transfer news/i.test(await page.textContent(".se-ticker .se-tk-tag")), "the poach should open a Transfer news ticker");
+  // the Summer window sheet comes first (Craig, 20 Oct): players go out as well as in; the poach is decided as it closes
+  await page.waitForSelector(".se-poach-sheet.open", { timeout: 5000 }).catch(() => {});
+  check(/Summer window/.test(await page.textContent(".se-poach-sheet .sheet-title").catch(() => "")) && await page.evaluate(() => !window.D2T.game.eng().poached), "the Summer window sheet should open before the raid, the poach not yet decided");
+  await page.click(".se-poach-sheet .se-poach-go"); await wait(2150);
+  // Sweep and strike (Craig, 20 Oct): the crosshair hunts across the pitch in a layer inside it, the scan beam with it
+  check(!!(await page.$(".se-pitch.rd-on .rd-fx .rd-x")) && !!(await page.$(".se-pitch .rd-fx .rd-beam")) && !!(await page.$(".se-pitch .rd-wash")), "the poach should hunt with the crosshair and the scan beam inside the pitch");
+  check(!!(await page.$(".se-news .se-nb-tag")) && /transfer\s*news/i.test(await page.textContent(".se-news .se-nb-tag")), "the poach should open the Transfer News bar");
   await shot("35b-clx-poach-mid");
   const poached = await page.evaluate(() => JSON.stringify(window.D2T.game.eng().poached));
   check(await page.evaluate(() => { const G = window.D2T.game, e = G.eng(), f = window.D2TE.FORMATIONS[e.formation]; return e.poached.length === 3 && new Set(e.poached.map((x) => x.club)).size === 3 && e.poached.every((x) => f[x.slot][0] !== "GK" && x.club !== e.club && e.xi[x.slot] == null); }), "the poach should take 3 outfield players to 3 different clubs, leaving their shirts empty");
-  await page.waitForSelector(".se-poach-sheet.open", { timeout: 15000 }).catch(() => {});
+  await page.waitForSelector(".se-poach-sheet.open", { timeout: 45000 }).catch(() => {});   // three takes of about 7.5 s each, 1.8 s between
   await wait(500);
   check(await page.$$eval(".se-slots .se-empty-to", (n) => n.length) === 3 && /^To /i.test(await page.textContent(".se-slots .se-empty-to .se-to")), "three empty shirts should read TO {CLUB}");
-  check(await page.evaluate(() => { const e = window.D2T.game.eng(), t = document.querySelector(".se-ticker .se-tk-item"), last = e.poached[2]; return !!t && t.textContent === `${last.name} joins ${window.D2T.game.S().clubs[last.club].name}`; }), "the ticker should carry the latest move");
-  check(await page.evaluate(() => { const t = document.querySelector(".se-ticker").getBoundingClientRect(), p = document.querySelector(".se-pitch").getBoundingClientRect(), b = document.querySelector(".actionbar").getBoundingClientRect(); return t.top >= p.bottom && t.bottom <= b.top && Math.abs((t.top + t.bottom) / 2 - (p.bottom + b.top) / 2) < 3; }), "the ticker should sit centred between the pitch and the bar");
+  check(await page.evaluate(() => { const e = window.D2T.game.eng(), t = document.querySelector(".se-news .se-nb-text"), last = e.poached[2], txt = t ? t.textContent.replace(/\u00a0/g, " ").toLowerCase() : ""; const sur = last.name.split(" ").slice(1).join(" ") || last.name; return txt.includes(window.D2T.game.S().clubs[last.club].name.toLowerCase()) && txt.includes(sur.toLowerCase()) && /3\/3/.test(document.querySelector(".se-nb-count").textContent); }), "the news bar should carry the last deal and the count 3/3");
+  check(await page.evaluate(() => { const t = document.querySelector(".se-news").getBoundingClientRect(), p = document.querySelector(".se-pitch").getBoundingClientRect(), b = document.querySelector(".actionbar").getBoundingClientRect(); return t.top >= p.bottom && t.bottom <= b.top && Math.abs((t.top + t.bottom) / 2 - (p.bottom + b.top) / 2) < 3; }), "the news bar should sit centred between the pitch and the bar");
   check(/Three players gone/.test(await page.textContent(".se-poach-sheet")) && await page.$$eval(".se-poach-sheet li", (n) => n.length) === 3, "the poach summary should list the three players");
   await shot("35c-clx-poach-summary");
   await page.reload(); await expectScreen("intro"); await page.click(".fr-skip", { force: true }); await expectScreen("home"); await wait(600);
   await page.evaluate(() => window.D2T.go("squad")); await expectScreen("squad"); await wait(2400);
-  check(!(await page.$(".se-pc-rival")) && await page.evaluate((p) => JSON.stringify(window.D2T.game.eng().poached) === p, poached), "a refresh replayed or rerolled the poach");
-  check(await page.$$eval(".se-slots .se-empty-to", (n) => n.length) === 3 && /joins/i.test(await page.textContent(".se-ticker .se-tk-item")), "after a refresh the empty shirts and the ticker should stay");
+  check(!(await page.$(".se-pc-rival")) && !(await page.$(".rd-fx")) && await page.evaluate((p) => JSON.stringify(window.D2T.game.eng().poached) === p, poached), "a refresh replayed or rerolled the poach");
+  check(await page.$$eval(".se-slots .se-empty-to", (n) => n.length) === 3 && (await page.textContent(".se-news .se-nb-text")).trim().length > 0, "after a refresh the empty shirts and the news bar should stay");
   check(!!(await page.$(".se-poach-sheet.open")), "after a refresh the unseen summary should come back");
   await page.click(".se-poach-go"); await expectScreen("transfer");
   check(await page.evaluate(() => { const e = window.D2T.game.eng(); return e.phase === "window" && e.rolls[0].kind === "pre" && e.xi.filter((x) => x == null).length === 3; }), "Continue should go on to the Summer window with three empty shirts");
@@ -493,7 +507,8 @@ fs.mkdirSync(OUT, { recursive: true });
     const S = G.S(); return S.season === "2026/27" && S.clubs.length === 20 && S.matches.length === 380 && G.lineup().xi.every(Boolean) && G.historyTable().length === 20;
   }), "after 2025/26 the career should go on into a forecast 2026/27");
   await page.evaluate(() => window.D2T.go("table")); await wait(800);
-  check(/Forecast table/.test(await page.textContent(".se-tl-a")), "a forecast season's table should say it is a forecast");
+  // season 2 on (Craig, 21 Oct): last season's table as you finished it first, the note saying this one is a forecast
+  check(/Final table 2025\/26/.test(await page.textContent(".se-tl-a")) && /forecast/i.test(await page.textContent(".se-fin")) && await page.evaluate(() => document.querySelectorAll(".se-tr:not(.se-th)").length === 20 && !!document.querySelector(".se-tr.se-me")), "a forecast season's table should open on last season's final table and say this one is a forecast");
 
   // ---------- Daily challenge: today's club for everyone, its own save, as many goes as you like ----------
   await page.evaluate(() => { const G = window.D2T.game; G.newRun("classic"); G.chooseClub(G.offer()[0].key); window.D2T.state.run.tableSeen = true; window.D2T.save(); window.D2T.go("home"); }); await wait(900);
@@ -512,9 +527,9 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.click('.sheet [data-k="keep"]'); await wait(500);
   await page.evaluate(() => { const G = window.D2T.game; window.D2T.state.run.tableSeen = true; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(900); await shot("40-daily-summary");
-  await card("daily", "DROP2TOP Daily #");
+  await card("daily", "*DROP2TOP Daily Challenge*\n\n");
   check(await page.evaluate(() => !!window.D2T.game.dailyResult()), "the daily result was not recorded");
-  await page.waitForSelector('.end-sheet [data-k="share"]', { timeout: 4000 }).catch(() => {});
+  await openEnd(); await page.waitForSelector('.end-sheet [data-k="share"]', { timeout: 4000 }).catch(() => {});
   check(!!(await page.$(".sm-daily .sm-dv")) && !!(await page.$('.end-sheet [data-k="share"]')), "the daily summary has no today-against-best panel or Share button");
   check(/Go again/.test(await page.textContent('.end-sheet [data-k="again"]')) && !!(await page.$('.end-sheet [data-k="home"]')), "the Daily end sheet should offer Go again and Home");
   // as many goes as you like (Craig, 13 Oct): Go again starts a fresh go, and the day's best go stays recorded
@@ -580,7 +595,7 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => { const n = {}, N = 14000; for (let i = 0; i < N; i++) { const f = window.D2T.game.g433.pickFormation(); n[f] = (n[f] || 0) + 1; } const back5 = (n["532"] + n["541"]) / 2, rest = ["442", "433", "451", "352", "343", "424"].reduce((t, f) => t + n[f], 0) / 6; return Object.keys(n).length === 8 && back5 / rest > 0.4 && back5 / rest < 0.6; }), "Goal Rush: 5-3-2 and 5-4-1 do not come up about half as often");
   // the sheet opens only after the ending (longer when the total breaks through the target), so wait for it
   await page.waitForSelector(".sheet", { timeout: 15000 }).catch(() => {}); await wait(400); await shot("51-goalrush-end");
-  await card("goalrush", "DROP2TOP Goal Rush · ");
+  await card("goalrush", "*DROP2TOP Goal Rush · ");
   check(await page.evaluate(() => window.D2T.state.g433.filled.length === 11 && window.D2T.game.g433.record().games === 1), "Goal Rush: the game did not fill 11 shirts and record a result");
   check(await page.evaluate((f) => window.D2T.game.g433.record().lastTarget === +f, form), "Goal Rush: the result was not recorded against this game's target");
   check(await page.evaluate(() => window.D2T.state.g433.filled.every((p) => window.D2T.state.g433.filled.filter((q) => q.name === p.name).length === 1)), "Goal Rush: the same player appeared twice");

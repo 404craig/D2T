@@ -3,7 +3,9 @@
 // are signed straight onto the pitch from the transfer roll (screens/transfer.js).
 (function () {
   const D2T = window.D2T, SE = D2T.se, GAME = D2T.game;
-  const PITCH_W = 50, SUB_W = 60; // compact layout (chosen 11 Oct): header, pitch, subs and the bar fit one screen
+  const PITCH_W = 50; // the bench cards are the roll's full cards (Craig, 15 Oct), positions in grey under each: as they
+  // roll in (114 wide) on taller phones, smaller (80) on short ones such as 375 x 667 so the bench and its positions fit
+  const subW = () => (window.innerHeight < 760 ? 80 : 114);
   const ROLE_NAME = { GK: 'Goalkeeper', DEF: 'Defender', MID: 'Midfielder', FWD: 'Forward' };
   const last = (n) => n.split(' ').slice(-1)[0];
   const idOf = (s) => (/^\d+$/.test(String(s)) ? +s : s);   // player ids are numbers; legend ids are text
@@ -28,7 +30,8 @@
           <div class="se-sqtext"><div class="se-sqname">${D2T.esc(club.name)}</div><div class="se-sqsub">${data.season} · ${gwLabel}${goalLabel}</div></div>
           <div class="se-rating" aria-live="polite"><b class="se-rating-n">0</b><i>Team<br>rating</i></div>
         </div>
-        <div class="se-pitch">${pitchLines}<div class="se-slots"></div><button class="se-formlink" type="button"><b class="se-fname"></b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+        <div class="se-lines-host"></div>
+        <div class="se-pitch">${pitchLines}<div class="se-slots"></div><button class="se-formlink" type="button"><b class="se-fname"></b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>${SE.tacticChip()}</div>
         <div class="se-subshead"><span class="se-subs-t"></span><span class="se-hint" aria-live="polite"></span></div>
         <div class="se-subs" role="list" aria-label="Squad"></div>
       </div>`);
@@ -71,10 +74,13 @@
           const fit = GAME.fit(c.id, i), oop = fit !== 'green';
           return `<div class="se-slot${oop ? ' se-oop' : ''}" style="left:${s.x}%;top:${s.y}%;z-index:${Math.round(s.y)}" data-i="${i}">
             <div class="se-cardwrap" data-card="${c.id}" data-kind="pitch" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}${oop ? ', out of position' : ''}">
-              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false, tab: s.pos, cls: 'fit-' + fit })}</div></div>`;
+              ${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false, tab: s.pos, cls: 'fit-' + fit, dots: (GAME.settling(c.id) || {}).left })}</div></div>`;
         }).join('');
+        // your three lines (Craig, 18 Oct) and the tactic on its chip; neither in the draft before a shirt is filled
+        body.querySelector('.se-lines-host').innerHTML = L.xi.some(Boolean) ? SE.lineBars() : '';
+        body.querySelector('.se-tname').textContent = GAME.tacticName();
         const sl = subsEl.scrollLeft;
-        subsEl.innerHTML = L.subs.map((c) => `<div class="se-sub" role="listitem"><div class="se-cardwrap" data-card="${c.id}" data-kind="sub" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, ${ROLE_NAME[c.pos]}, in the squad">${D2T.cards.player(c, { w: SUB_W, mini: true, shine: false })}</div></div>`).join('');
+        subsEl.innerHTML = L.subs.map((c) => `<div class="se-sub" role="listitem"><div class="se-cardwrap" data-card="${c.id}" data-kind="sub" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, ${ROLE_NAME[c.pos]}, in the squad">${D2T.cards.player(c, { w: subW(), shine: false })}</div><div class="se-sub-pos" aria-hidden="true">${(c.main ? [c.main, ...(c.alt || [])] : [c.pos]).join('<i>/</i>')}</div></div>`).join('');
         subsEl.scrollLeft = sl;
         body.querySelector('.se-fname').textContent = GAME.eng().formation;
         const showSubs = L.subs.length > 0;
@@ -82,7 +88,7 @@
         subsEl.style.display = showSubs ? '' : 'none';
         let gone = body.querySelector('.se-gone');
         const goneText = drafting ? (GAME.mode() === 'clubx' ? 'Pick your shape, then start the draft: 11 spins, three players each time for any of your open shirts, in any order. Each goes in a shirt he plays. No respins.' : 'Pick your shape, then start the draft: 11 spins, one per shirt (keeper first, then defence, midfield and attack). Three players each time, no respins.')
-          : carried && pre ? `${GAME.isSim() ? "Last season's XI comes with you, on the same cards." : "Last season's XI, each on his card for this season (a man with no Premier League season now keeps his old one)."} Swap shirts or change the shape, then pre-season: 3 rolls before the first game, and 5 respins for the season.`
+          : carried && pre ? `${GAME.isSim() ? "Last season's XI comes with you, on the same cards, which age: 3 a season after the first." : "Last season's XI, each on his card for this season (a man with no Premier League season now keeps his old one, and it ages: 3 a season after the first)."} Swap shirts or change the shape, then pre-season: 3 rolls before the first game, and 5 respins for the season.`
           : dream && pre ? 'Your drafted XI. Swap shirts or change the shape, then start the season. Your 5 respins are for the transfer rolls during the season.'
           : 'The rest of the squad has gone. New faces only come through the transfer rolls, and each one takes a shirt from your XI.';
         if (!showSubs && (!pre || dream) && !gone) { gone = D2T.h(`<p class="se-note se-gone">${goneText}</p>`); subsEl.after(gone); }
@@ -164,7 +170,7 @@
         if (a.kind === 'sub' && b.kind === 'sub') return;
         const before = new Map(allItems().map((el) => [el.dataset.card, el.getBoundingClientRect()]));
         if (ghostRect) before.set(String(a.id), ghostRect);
-        if (!GAME.swap(idOf(a.id), idOf(b.id))) return;
+        if (!GAME.swap(idOf(a.id), idOf(b.id))) { const slotOf = (x) => { const el = root.querySelector(`[data-kind="pitch"][data-card="${x.id}"]`); return el ? +el.dataset.i : -1; }; const sb = slotOf(b), sa = slotOf(a); const bad = sb >= 0 && !GAME.canPlay(idOf(a.id), sb) ? a.id : sa >= 0 && !GAME.canPlay(idOf(b.id), sa) ? b.id : null; if (bad != null) { hintEl.textContent = GAME.noPlayWord(idOf(bad)); window.D2TSound && window.D2TSound.play('dropCancel'); } return; }
         window.D2TSound && window.D2TSound.play('cardDrop');
         sel = null;
         render(before);
@@ -299,55 +305,67 @@
         el.querySelector('.se-done').onclick = () => sh.close();
       };
 
+      // ---------- tactics sheet (Craig, 18 Oct) ----------
+      body.querySelector('.se-taclink').onclick = () => { SE.tacticSheet(root, () => { sel = null; render(null); }); };
+
       render(null);
 
       // ---------- Poached (Craig, 14 Oct; option B in design/prototype/clubx-raid.html) ----------
       // A Club X career's later seasons: three of the XI are taken by other sides before the Summer window. The first time
-      // (GAME.poachDue) each one in turn: the rival's crest drops in above him, a line shoots down, he wobbles and is reeled
-      // up into the crest, which flies off with him; his shirt is left empty with the crest and "TO {CLUB}". A news ticker
+      // (GAME.poachDue) each one in turn is hunted down by the crosshair and taken by the rival's badge (Sweep and strike,
+      // Craig 20 Oct, SE.raidTake); his shirt is left empty with the crest and "TO {CLUB}". A news ticker
       // across the bottom carries each move as it happens and stays until you go on to the Summer window; then a summary
       // sheet. The engine decides it as the sequence starts, so a refresh shows the end state. Reduced motion: the end
       // state, the headlines standing still, and the summary at once.
       let ticker = null, poachKill = null;
       const poachDue = pre && carried && GAME.poachDue();
       if (pre && carried && (poachDue || GAME.poached().length)) {
-        ticker = makeTicker();
-        const list = poachDue ? GAME.poach() : GAME.poached();
-        if (poachDue) render(null);
-        if (poachDue && !reduced) runPoach(list);
-        else {                                                    // reduced motion, or a refresh before the summary was seen
-          if (list.length) ticker.add(list[list.length - 1]);
+        ticker = makeNews();
+        if (poachDue) {                                           // the window sheet first (Craig, 20 Oct), then the raid
+          const t = setTimeout(() => root.isConnected && windowSheet(), 700); poachKill = () => clearTimeout(t);
+        } else {                                                  // a refresh before the summary was seen
+          const list = GAME.poached();
+          if (list.length) lastDeal(list);
           if (!st.poachSeen) { const t = setTimeout(() => root.isConnected && poachSummary(list), 300); poachKill = () => clearTimeout(t); }
         }
+      }
+      // Before any raid (Craig, 20 Oct): a sheet says the Summer window is open and players go out as well as come in.
+      // The poach is decided as it closes (Continue, a drag or a tap outside), so a refresh before then starts it again.
+      function windowSheet() {
+        const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">The Summer window is open. Players go out as well as come in: other sides are circling your XI and three of them will go before your own three signings.</p>
+          <button class="btn se-btn se-poach-go" type="button">Continue</button></div>`);
+        let went = false;
+        const go = () => {
+          if (went || !root.isConnected || !GAME.poachDue()) return; went = true;
+          const list = GAME.poach(); if (!list.length) return;
+          if (!reduced) { runPoach(list); return; }
+          render(null); lastDeal(list);                           // reduced motion: the end state and the summary at once
+          if (!st.poachSeen) { const t = setTimeout(() => root.isConnected && poachSummary(list), 300); poachKill = () => clearTimeout(t); }
+        };
+        const sh = D2T.sheet({ title: 'Summer window', body: el, onClose: go });
+        sh.el.classList.add('se-run', 'se-poach-sheet');
+        ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
+        el.querySelector('.se-poach-go').onclick = () => sh.close();
       }
       // the Transfer News bar (Craig, 14 Oct; news() in design/prototype/clubx-poached.html): centred in the empty space
       // between the pitch and the bottom bar, one headline at a time right after the pill; a new one replaces the last at
       // once (a quick fade up); it only scrolls, slowly left and back, if it is too long to fit (never with reduced motion)
-      function makeTicker() {
-        const el = D2T.h('<div class="se-ticker" role="status" aria-label="Transfer news"><b class="se-tk-tag">Transfer news</b><div class="se-tk-view"><span class="se-tk-item"></span></div></div>');
-        root.appendChild(el); root.classList.add('se-has-ticker');
-        const view = el.querySelector('.se-tk-view'), sp = el.querySelector('.se-tk-item'), pitch = body.querySelector('.se-pitch');
+      // the Transfer News bar (Craig, 21 Oct; SE.newsBar): centred in the space between the pitch and the bottom bar,
+      // the rumour as each hunt starts, the deal as the badge lands, the count going up; it stays until you go on
+      function makeNews() {
+        const nb = SE.newsBar({ count: true }), el = nb.el, pitch = body.querySelector('.se-pitch');
+        root.appendChild(el); root.classList.add('se-has-news');
         const place = () => {
           if (!el.isConnected) return;
           const rr = root.getBoundingClientRect(), pb = pitch.getBoundingClientRect().bottom, bt = bar.getBoundingClientRect().top;
-          el.style.top = `${Math.round((pb + bt) / 2 - rr.top - 17)}px`;
+          el.style.top = `${Math.round((pb + bt) / 2 - rr.top - (el.offsetHeight || 50) / 2)}px`;
         };
         place();
         const ro = window.ResizeObserver ? new ResizeObserver(place) : null; ro && ro.observe(root);
-        let timer = 0;
-        return {
-          el,
-          add(p) {
-            sp.getAnimations().forEach((a) => a.cancel()); clearTimeout(timer);
-            sp.textContent = `${p.name} joins ${p.club}`; sp.style.transform = '';
-            if (reduced) return;
-            sp.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'ease-out' });
-            const over = sp.scrollWidth - view.clientWidth + 14;
-            if (over > 0) timer = setTimeout(() => { if (sp.isConnected) sp.animate([{ transform: 'none' }, { transform: 'none', offset: 0.2 }, { transform: `translateX(${-over}px)`, offset: 0.8 }, { transform: `translateX(${-over}px)` }], { duration: 2500 + over * 25, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' }); }, 250);
-          },
-          stop() { clearTimeout(timer); ro && ro.disconnect(); }
-        };
+        return { el, say: nb.say, stop() { nb.stop(); ro && ro.disconnect(); } };
       }
+      // the end state after a refresh or with reduced motion: the last deal, all three counted
+      function lastDeal(list) { const x = list[list.length - 1]; ticker.say(SE.raidWords(list.length - 1).deal(x.club, x.name), { n: list.length, still: true }); }   // hoisted: called from the refresh branch above
       function poachSummary(list) {
         const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">Other sides came in over the summer. Fill the gaps with your rolls.</p>
           <ul>${list.map((x) => `<li>${x.crest ? `<img src="${x.crest}" alt="">` : ''}<b>${D2T.esc(x.name)}</b><span>to ${D2T.esc(x.club)}</span></li>`).join('')}</ul>
@@ -359,65 +377,38 @@
         el.querySelector('.se-poach-go').onclick = () => { sh.close(); if (root.isConnected) playBtn.onclick(); };
       }
       async function runPoach(list) {
-        let alive = true; const anims = [], timers = [];
-        const host = document.getElementById('app'), fxl = D2T.h('<div class="se-poach-fx" aria-hidden="true"></div>');
-        poachKill = () => { alive = false; timers.forEach(clearTimeout); anims.forEach((a) => { try { a.cancel(); } catch (e) { /* gone */ } }); fxl.remove(); root.classList.remove('se-poaching'); };
+        // Sweep and strike (Craig, 20 Oct; animation B in design/prototype/raid-crosshair.html): per player, the crosshair
+        // hunts across the pitch and locks on him, then the rival's badge stamps down and takes him (SE.raidTake)
+        let alive = true, take = null; const timers = [];
+        poachKill = () => { alive = false; timers.forEach(clearTimeout); take && take.cancel(); root.classList.remove('se-poaching'); };
         const wait = (ms) => new Promise((r) => timers.push(setTimeout(r, ms)));
-        const anim = (el, k, o) => { const a = el.animate(k, Object.assign({ fill: 'forwards' }, o)); anims.push(a); return a.finished.catch(() => {}); };
-        const SND = window.D2TSound || { play() {} }, S = GAME.S(), pitchSlots = GAME.slots();
+        const S = GAME.S(), pitchSlots = GAME.slots(), pitch = body.querySelector('.se-pitch');
         // the three go back on the pitch for the show (the engine has already emptied their shirts)
         list.forEach((x) => {
           const sl = slotsEl.querySelector(`.se-slot[data-i="${x.slot}"]`), c = GAME.card(S, x.id); if (!sl || !c) return;
           sl.innerHTML = `<div class="se-cardwrap" data-i="${x.slot}">${D2T.cards.player(c, { w: PITCH_W, mini: true, shine: false, tab: pitchSlots[x.slot].pos, cls: 'fit-' + GAME.fit(c.id, x.slot) })}</div>`;
         });
         root.classList.add('se-poaching');
-        host.appendChild(fxl);
         await wait(1300);
-        for (const x of list) {
+        let done = 0;
+        for (const [k, x] of list.entries()) {
           if (!alive) return;
-          const sl = slotsEl.querySelector(`.se-slot[data-i="${x.slot}"]`), w = sl && sl.querySelector('.se-cardwrap'); if (!w) continue;
-          const hr = host.getBoundingClientRect(), r = w.getBoundingClientRect();
-          const cx = r.left - hr.left + r.width / 2, cyCard = r.top - hr.top + r.height / 2, top = r.top - hr.top;
-          const cy = Math.max(70, cyCard - 120);
-          // 1. the rival's crest drops in above him
-          const rv = D2T.h(`<div class="se-pc-rival" style="left:${cx}px;top:${cy}px">${x.crest ? `<img src="${x.crest}" alt="">` : ''}</div>`);
-          fxl.appendChild(rv);
-          SND.play('dropCancel');
-          // his headline replaces the last one as the crest lands (Craig, 14 Oct)
-          timers.push(setTimeout(() => { if (!alive) return; SND.play('land'); ticker.add(x); }, 380));
-          await anim(rv, [{ transform: 'translateY(-260px) scale(.6)', opacity: 0 }, { transform: 'translateY(8px) scale(1.05)', opacity: 1, offset: 0.75 }, { transform: 'none', opacity: 1 }], { duration: 500, easing: 'cubic-bezier(.3,1.3,.5,1)' });
+          const sl = slotsEl.querySelector(`.se-slot[data-i="${x.slot}"]`); if (!sl || !sl.querySelector('.se-cardwrap')) continue;
+          const words = SE.raidWords(k);
+          take = SE.raidTake({
+            pitch, slotsEl, slot: x.slot, crest: x.crestLight || x.crest, dark: x.dark,   // the club's own crest on the yellow disc (black for a yellow crest)
+            onStart: () => ticker.say(words.rumour(x.club), { n: done, dim: true }),    // the rumour as the sweep starts
+            onLanded: () => { done++; ticker.say(words.deal(x.club, x.name), { n: done }); },   // the deal as the badge lands
+            onEmpty: () => { sl.innerHTML = SE.emptyShirt(pitchSlots[x.slot].pos, PITCH_W, x); setRating(GAME.rating()); }
+          });
+          await take.done; take = null;
           if (!alive) return;
-          // 2. a line shoots down to the card
-          const th = D2T.h(`<div class="se-pc-line" style="left:${cx - 1.5}px;top:${cy + 31}px;height:${Math.max(8, top - cy - 31)}px"></div>`);
-          fxl.appendChild(th);
-          await anim(th, [{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }], { duration: 220, easing: 'ease-out' });
-          if (!alive) return;
-          // 3. he wobbles (lifted into the overlay so nothing clips him on the way up)
-          const clone = w.cloneNode(true);
-          clone.style.cssText = `position:absolute;left:${r.left - hr.left}px;top:${top}px;width:${r.width}px;height:${r.height}px;margin:0`;
-          fxl.appendChild(clone); w.style.visibility = 'hidden';
-          await anim(clone, [{ transform: 'none' }, { transform: 'rotate(-6deg)', offset: 0.3 }, { transform: 'rotate(5deg)', offset: 0.6 }, { transform: 'none' }], { duration: 380 });
-          if (!alive) return;
-          // 4. reeled up into the crest
-          SND.play('playerOut');
-          anim(th, [{ transform: 'scaleY(1)' }, { transform: 'scaleY(0)' }], { duration: 380, easing: 'ease-in' });
-          await anim(clone, [{ transform: 'none', opacity: 1 }, { transform: `translateY(${cy - cyCard}px) scale(.3)`, opacity: 0 }], { duration: 420, easing: 'cubic-bezier(.6,0,.9,.4)' });
-          if (!alive) return;
-          th.remove(); clone.remove();
-          // 5. his shirt is left empty with the crest of where he went; the crest flies off with him
-          sl.innerHTML = SE.emptyShirt(pitchSlots[x.slot].pos, PITCH_W, x);
-          anim(sl.firstElementChild, [{ opacity: 0, transform: 'scale(.85)' }, { opacity: 1, transform: 'none' }], { duration: 300, easing: 'ease-out' });
-          setRating(GAME.rating());
-          SND.play('pass');
-          await anim(rv, [{ transform: 'none', opacity: 1 }, { transform: 'translateY(-300px) scale(.7)', opacity: 0 }], { duration: 450, easing: 'ease-in' });
-          if (!alive) return;
-          rv.remove();
-          await wait(700);
+          await wait(1800);                                      // time to read the deal line (Craig, 21 Oct)
         }
         if (!alive) return;
         poachKill(); poachKill = null;
         render(null);
-        await new Promise((res) => setTimeout(res, 200));
+        await new Promise((res) => setTimeout(res, 1000));   // a second on the empty shirts before the sheet (Craig, 25 Oct)
         if (root.isConnected) poachSummary(list);
       }
       // first-time tips: the shape, then (another visit) swapping a sub in

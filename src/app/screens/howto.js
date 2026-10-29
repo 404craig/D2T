@@ -31,9 +31,15 @@
           <li><b>Pick a club</b>Spin for 3 real clubs that were relegated. Choose one.</li>
           <li><b>Set your XI</b>Pick a formation and your best eleven from that season's squad.</li>
           <li><b>Play 38 games</b>Kick off each match or skip to the score. Everyone else plays their real results.</li>
-          <li><b>Transfer rolls</b>Through the season you get a roll: 3 cards appear and you sign one.</li>
+          <li><b>Transfer rolls</b>Through the season you get a roll: 3 cards appear and you sign one. A new signing may hit the ground running or take two or three games to settle.</li>
+          <li><b>Tactics</b>Pick how you play: low block, possession, counter attack, high press, or a balanced mid block. A tactic leans on one of your lines, so it pays when that line is your strength. Each is built for certain shapes.</li>
+          <li><b>Scouting</b>Spend 2 respins to scout one of your shirts (three players who play there and are better than the man in it, gold at most, a purple only when no gold is left; shirts with nobody better show red) or a club (three of its players this season). Scouts never bring a legend card.</li>
+          <li><b>The January raid</b>As the January window opens, a top-half club comes in for one of your players, most likely a star. His shirt is empty for your January rolls; a free agent fills it if you leave it.</li>
           <li><b>Finish high</b>Your final place earns achievements: beat the drop, top half, top 3, the title.</li>
         </ol>
+
+        <h2 class="fr-h2">Stars and signings</h2>
+        <p class="fr-lead">Your team rating is the plain average of your cards. In the matches the best players count for more: above 80 every point counts half again on a gold card, more on a purple, double on a legend. History's clubs play as they really did, less what you have taken from them: sign a club's best players and their scorelines shrink, most of all in their big games.</p>
 
         <h2 class="fr-h2">Goal Rush</h2>
         <p class="fr-lead">Each game picks a random formation, and its number is your target: line up 3-5-2 and score exactly 352. Fill the shirts in any order: each spin shows three real players for your open shirts, and you drag one onto a shirt of his position. His Premier League career goals go onto his shirt and into your total. Land exactly on the target. 3 respins a game.</p>
@@ -49,7 +55,7 @@
 
         <h2 class="fr-h2">Club X</h2>
         <p class="fr-lead">Name your club, then spin a season. Your club takes the place of that season's bottom side, with no players. Pick a formation and draft your XI: 11 spins, three players each time for any of your open shirts, and each goes in a shirt he plays. Then play the season with transfer rolls and 5 respins. Only the title counts.</p>
-        <p class="fr-lead">Career mode: unless you go down, carry on into the next season with the same club and XI. Up to 2025/26 it is the next real season, your club takes the bottom side's place and each player moves to his real card for that season, with 3 pre-season rolls. After 2025/26 the seasons are a forecast: the bottom three go down, three clubs come up from the database, the other results are played out by the match model, and the rolls can bring players from any season.</p>
+        <p class="fr-lead">Career mode: unless you go down, carry on into the next season with the same club and XI. Up to 2025/26 it is the next real season, your club takes the bottom side's place and each player moves to his real card for that season, with 3 pre-season rolls; before them, three of your XI are taken by other clubs, your best for certain. A player with no real card for the new season keeps his old one, which ages: 3 a season after the first. After 2025/26 the seasons are a forecast: the bottom three go down, three clubs come up from the database, the other results are played out by the match model, and the rolls can bring players from any season.</p>
 
         <h2 class="fr-h2">Card colours</h2>
         <p class="fr-lead" style="margin-bottom:6px">The big number is the rating. The colour tells you the level.</p>

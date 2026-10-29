@@ -101,6 +101,7 @@
   //        caption(item), details(item) -> html, mainLabel, selectedLabel(item), onConfirm(item), respins (number or null),
   //        onRespinsChange(n), pass: {label, onPass}, placeholder() -> html,
   //        rare(item) -> true for a card that gets the rare reveal (screens/reveal.js; the player rolls only),
+  //        below(item) -> html under a card once its reel lands,
   //        onCommit(items): a reveal is coming, so the roll counts as spun now (a refresh mid-reveal shows it settled),
   //        headTop / headBanner: optional html above the kicker and under the title, headCls / headStyle: a class and inline style on the header }
   function mount(root, cfg) {
@@ -116,6 +117,14 @@
       </div></div>`);
     root.appendChild(el);
     const slots = Array.from(el.querySelectorAll('.sp-slot')), reels = slots.map((s) => new Reel(s));
+    // cfg.below(item) -> html under a card, put in its slot the moment its reel lands, so it is revealed with the card
+    // (Craig, 16 Oct: the tray's positions trailed the card and looked like a slow connection)
+    const below = (i) => {
+      const sl = slots[i]; if (!sl) return;
+      sl.querySelectorAll('.sp-below').forEach((x) => x.remove());
+      const h = cfg.below && results && results[i] ? cfg.below(results[i]) : '';
+      if (h) sl.insertAdjacentHTML('beforeend', h);
+    };
     const main = el.querySelector('.sp-main'), lbl = main.querySelector('.sp-lbl'), reload = el.querySelector('.sp-round.is-reload');
     const count = reload.querySelector('.sp-count'), hintEl = el.querySelector('.sp-hint');
     // the bar (Craig, 13 Oct): home on the left (the run menu, core/season.js), the respin with its count in the middle
@@ -202,6 +211,7 @@
       setRespins(); hint('');
       const firsts = reels.map((r) => r.landedHtml || r.seq[r.seq.length > 1 ? r.seq.length - 4 : 0] || '');
       reels.forEach((r) => { r.reset(); r.gen = null; r.landedHtml = null; });
+      slots.forEach((sl) => sl.querySelectorAll('.sp-below').forEach((x) => x.remove()));
       el.classList.add('is-rolling');
       // left lands first, middle shortly after, right last with a longer crawl at the end (a single reel takes that one)
       const opts = reels.length === 1 ? [{ delay: 0, cruiseT: 1.6, decelT: 1.6, n: 3.0, v1: 2.0 }] : [
@@ -214,7 +224,7 @@
       const rare = !reduced && cfg.rare && D2T.rareReveal ? results.map((x) => !!cfg.rare(x)) : [];
       if (rare.some(Boolean)) { cfg.onCommit && cfg.onCommit(results); spinRare(opts, profs, firsts, rare); return; }
       if (reduced) {
-        reels.forEach((r, i) => { r.draw(profs[i].target, 0); r.hit(cfg.accent(results[i]).accent); r.settle(profs[i].target, cfg.caption && cfg.caption(results[i])); });
+        reels.forEach((r, i) => { r.draw(profs[i].target, 0); r.hit(cfg.accent(results[i]).accent); r.settle(profs[i].target, cfg.caption && cfg.caption(results[i])); below(i); });
         done(); return;
       }
       // a Baller or Legend gets a soft build-up that ends as its reel stops (cfg.bigIndex)
@@ -228,7 +238,7 @@
           const P = profs[i], s = sample(P, t);
           r.draw(s.p, s.v);
           const k = Math.floor(s.p); if (k > lastK[i] && !landed[i]) SND.tick(i, s.v); lastK[i] = k;   // a muffled tap per card passing
-          if (!landed[i] && t >= P.landAt) { landed[i] = true; r.hit(cfg.accent(results[i]).accent); r.settle(P.target, cfg.caption && cfg.caption(results[i])); if (cfg.landSound) cfg.landSound(i, results[i]); else SND.play('reelLand', i); }
+          if (!landed[i] && t >= P.landAt) { landed[i] = true; r.hit(cfg.accent(results[i]).accent); r.settle(P.target, cfg.caption && cfg.caption(results[i])); below(i); if (cfg.landSound) cfg.landSound(i, results[i]); else SND.play('reelLand', i); }
           if (s.phase !== 'done') allDone = false;
         });
         // the moment the last reel lands the result is final: taps count while the bounce plays out
@@ -256,7 +266,7 @@
       let settledCalled = false;
       const land = (i) => {
         landed[i] = true; const r = reels[i];
-        r.hit(cfg.accent(results[i]).accent); r.settle(S[i].T == null ? S[i].P.target : S[i].T, cfg.caption && cfg.caption(results[i]));
+        r.hit(cfg.accent(results[i]).accent); r.settle(S[i].T == null ? S[i].P.target : S[i].T, cfg.caption && cfg.caption(results[i])); below(i);
         if (S[i].html) r.landedHtml = S[i].html;
       };
       // the non-rare reels from j on (up to the next rare one) land in turn, each a little after the one before
@@ -353,6 +363,14 @@
     reload.onclick = async () => {
       if (state === 'spinning' || landing || respinning || respins == null || respins <= 0) return;
       dropTip();
+      // cfg.respinChoice(respins) -> 'respin' | a number (the respins left after the caller spent some another way, a scout)
+      // | null (nothing): the transfer roll asks Respin or Scout a position before spending anything (Craig, 18 Oct)
+      if (cfg.respinChoice) {
+        respinning = true; let c = null;
+        try { c = await cfg.respinChoice(respins); } finally { respinning = false; }
+        if (c == null) return;
+        if (typeof c === 'number') { respins = c; setRespins(); main.classList.remove('is-after'); respinning = true; try { if (cfg.beforeSpin) await cfg.beforeSpin(); } finally { respinning = false; } spin(); return; }
+      }
       respins -= 1; SND.play('respin'); cfg.onRespinsChange && cfg.onRespinsChange(respins);
       main.classList.remove('is-after');
       respinning = true;
@@ -377,7 +395,7 @@
     if (cfg.settled && cfg.settled.length) {
       stopTick();
       results = cfg.settled;
-      reels.forEach((r, i) => { r.load([(cfg.renderSettled || cfg.render)(results[i], 114)]); r.draw(0, 0); r.settle(0, cfg.caption && cfg.caption(results[i])); r.slot.classList.add('is-set'); if (cfg.accent) r.slot.style.setProperty('--sp-accent', cfg.accent(results[i]).accent); });
+      reels.forEach((r, i) => { r.load([(cfg.renderSettled || cfg.render)(results[i], 114)]); r.draw(0, 0); r.settle(0, cfg.caption && cfg.caption(results[i])); r.slot.classList.add('is-set'); if (cfg.accent) r.slot.style.setProperty('--sp-accent', cfg.accent(results[i]).accent); below(i); });
       state = 'settled'; main.disabled = true; setMain(cfg.pickLabel || 'Pick one', null); setRespins(); hint(cfg.hintSettled || 'Tap a card to pick it');
       afterSettle();
       if (cfg.afterLand) select(0);
@@ -386,6 +404,7 @@
     return {
       el, reels, slots, spin, select, openCard, hint, setLabel: (t) => setMain(t, null),
       results: () => results, selected: () => selected, settled: () => state === 'settled', clear: clearSelection,
+      setRespins: (n) => { respins = n; setRespins(); }, redrawBelow: () => { if (results) results.forEach((_, i) => below(i)); },
       unmount() { cancelAnimationFrame(raf); raf = 0; if (rr) { rr.kill(); rr = null; } stopTick(); timers.forEach(clearTimeout); if (open) { try { open.el.remove(); } catch (e) { /* gone */ } } }
     };
   }

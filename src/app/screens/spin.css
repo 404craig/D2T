@@ -131,7 +131,16 @@
 .sp-screen .tr-pitch { display: none; }
 .sp-screen.is-placing .sp-head, .sp-screen.is-placing .sp-floor { display: none; }
 .sp-screen.is-placing .tr-pitch { display: flex; flex-direction: column; gap: 8px; flex: 1 1 auto; min-height: 0; padding: 0 16px; }
-.sp-screen.is-placing .sp-stage { flex: 0 0 188px; }
+.sp-screen.is-placing .sp-stage { flex: 0 0 206px; }
+/* green positions under each tray card (Craig, 15 Oct): plain grey text, real 9px on screen, so the row undoes the tray's .78 */
+.sp-gp { position: absolute; left: 50%; top: calc(100% + 8px); transform: translateX(-50%); transform-origin: 50% 0; pointer-events: none; white-space: nowrap;
+  transition: transform .52s cubic-bezier(.5,0,.2,1), top .52s cubic-bezier(.5,0,.2,1);
+  color: #8E8E99; font: 800 9px/1 var(--font); font-style: normal; letter-spacing: .03em; }
+.sp-gp i { font-style: normal; opacity: .5; }
+.sp-screen.is-placing .sp-gp { transform: translateX(-50%) scale(1.2821); }   /* the tray row is at .78: the text keeps its real 9px */
+/* the same size on a picked or stepped-back card (the card scales, its text does not) */
+.sp-screen.is-placing .sp-slot.is-sel .sp-gp { top: calc(100% + 6px); transform: translateX(-50%) scale(1.1247); }
+.sp-screen.is-placing .sp-slot.is-other .sp-gp { transform: translateX(-50%) scale(1.4245); }
 .sp-screen.is-placing .sp-slot.is-sel { transform: scale(1.14) translateY(-6px); }
 .sp-screen.is-placing .sp-slot.is-other { transform: scale(.9); filter: brightness(.4); }
 .sp-main.is-after { background: var(--ink); color: #fff; border: 1px solid var(--line); box-shadow: none; }
@@ -146,6 +155,10 @@
 .tr-head-t b { display: block; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .tr-head-t span { display: block; font-size: 14px; color: var(--soft); margin-top: 3px; }
 .se-pitch.tr-field { flex: 1 1 auto; min-height: 0; max-height: none; }
+/* the January raid before the window's first spin (Craig, 25 Oct): no empty tray, the pitch takes the room, as tall as
+   the pre-season squad's (its 470px cap) */
+.sp-screen.tr-preraid .sp-stage { display: none; }
+.sp-screen.tr-preraid .se-pitch.tr-field { max-height: 470px; }
 
 /* handwritten note pointing at the respin button (as Tenaball's "stats" note) */
 .sp-tip { position: absolute; left: 96px; bottom: calc(100% - 4px); display: flex; align-items: flex-start; gap: 2px; color: #fff; pointer-events: none; opacity: .92; transition: opacity .4s; animation: spTipIn .5s .6s var(--ease-out) both; }
@@ -243,6 +256,8 @@
 @keyframes rrSw { 0% { opacity: 1; transform: scale(.2); } 100% { opacity: 0; transform: scale(4.5); } }
 .rr-badge { position: absolute; left: 50%; transform: translateX(-50%); font: 900 italic 18px/1 'Exo 2', sans-serif; letter-spacing: .16em; color: var(--lc); text-shadow: 0 0 18px var(--lc); opacity: 0; white-space: nowrap; }
 .rr-badge.go { animation: rrBadge .5s var(--ease-out) forwards; }
+/* the club and season under the revealed card (Craig, 20 Oct), printed letter by letter like the name */
+.rr-season { position: absolute; left: 0; right: 0; text-align: center; font: 800 italic 15px/1 'Exo 2', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--lc); text-shadow: 0 0 14px var(--lc); white-space: nowrap; pointer-events: none; }
 @keyframes rrBadge { 0% { opacity: 0; transform: translateX(-50%) scale(1.6); letter-spacing: .5em; } 100% { opacity: 1; transform: translateX(-50%) scale(1); } }
 
 /* ---------- transfer roll header before the spin (Craig, 14 Oct): the season's track, "Transfer 7 of 17", the window banner ---------- */
@@ -268,3 +283,28 @@
 .tr-dots i { width: 10px; height: 10px; box-sizing: border-box; border-radius: 50%; border: 1.5px solid var(--tr-acc); }
 .tr-dots i.is-on { background: var(--tr-acc); }
 .tr-rollhead .sp-sub { margin-top: 8px; }
+
+/* compact mode (design session, Craig 19 Oct; base.css has the bars): the tray state's header on one line (the window's
+   name hidden, the banner named it before the spin), a smaller tray (the .sp-gp counter-scales keep its real 9px), the
+   hint on one line */
+@media (max-height: 759px) {
+  .tr-head-t b { font-size: 11px; letter-spacing: .08em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tr-head-t span { display: none; }
+  .tr-head-t .tr-win { display: none; }
+  .sp-screen.is-placing .tr-pitch { gap: 6px; }
+  .sp-screen.is-placing .sp-stage { flex: 0 0 168px; }
+  .sp-screen.is-placing .sp-row { transform: scale(.64); }
+  .sp-screen.is-placing .sp-gp { transform: translateX(-50%) scale(1.5625); }
+  .sp-screen.is-placing .sp-slot.is-sel .sp-gp { transform: translateX(-50%) scale(1.3706); }
+  .sp-screen.is-placing .sp-slot.is-other .sp-gp { transform: translateX(-50%) scale(1.7361); }
+  .sp-hint { font-size: 12px; min-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sp-bar { padding-top: 8px; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); }
+}
+@media (max-width: 374px) { .tr-head-t .tr-win { display: none; } }
+@media (max-height: 620px) {
+  .sp-screen.is-placing .sp-stage { flex: 0 0 150px; }
+  .sp-screen.is-placing .sp-row { transform: scale(.56); }
+  .sp-screen.is-placing .sp-gp { transform: translateX(-50%) scale(1.7857); }
+  .sp-screen.is-placing .sp-slot.is-sel .sp-gp { transform: translateX(-50%) scale(1.5664); }
+  .sp-screen.is-placing .sp-slot.is-other .sp-gp { transform: translateX(-50%) scale(1.9841); }
+}

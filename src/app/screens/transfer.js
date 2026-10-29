@@ -144,7 +144,8 @@
       const fx = GAME.fixture(info.gw), opp = fx ? D2T.esc(fx.opp) + (fx.ha === 'H' ? ' (H)' : ' (A)') : '';
       const reduced = D2T.reduced();
       let alive = true, big = true, lastBest = -1, mover = -1, sizeObs = null, placing = false, leaving = false, signing = false, field = null, slotsEl = null, ratingEl = null, timers = [];
-      kill = () => { alive = false; timers.forEach(clearTimeout); endDrag(true); sizeObs && sizeObs.disconnect(); };
+      let janTake = null, janBack = null, janNews = null;   // the January raid's show: { slot, card } keeps the taken player on the pitch until the badge takes him
+      kill = () => { alive = false; timers.forEach(clearTimeout); endDrag(true); sizeObs && sizeObs.disconnect(); janTake && janTake.cancel(); janTake = null; janBack = null; janNews && janNews.stop(); root.classList.remove('rd-busy'); };
 
       // ---------- the pitch above the tray ----------
       function drawPitch(best = -1, fresh = -1) {
@@ -169,15 +170,16 @@
         lastBest = best;
         const gone = GAME.poachedSlots();   // a Club X career's poached players: their empty shirts keep where they went
         slotsEl.innerHTML = GAME.slots().map((s, i) => {
-          const c = L.xi[i], f = pf(i), cls = `se-slot${lit.has(i) ? ' se-best' : ''}${f ? ' se-pf-' + f : ''}${i === mover ? ' se-sel' : ''}`;
+          const c = L.xi[i] || (janBack && janBack.slot === i ? janBack.card : null), f = pf(i), cls = `se-slot${lit.has(i) ? ' se-best' : ''}${f ? ' se-pf-' + f : ''}${i === mover ? ' se-sel' : ''}`;
           const say = f ? `, ${fitWord[f]} for ${D2T.esc(inc.name)}` : '';
           if (!c) return `<div class="${cls}" style="${place(fm, s, pw)};z-index:${Math.round(s.y)}" data-i="${i}"><div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="Empty ${s.pos} shirt${lit.has(i) ? ', open for this pick' : ''}${say}">${SE.emptyShirt(s.pos, pw, gone[i])}</div></div>`;
           const fit = GAME.fit(c.id, i), oop = fit !== 'green';
           return `<div class="${cls}" style="${place(fm, s, pw)};z-index:${Math.round(s.y)}" data-i="${i}">
             <div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}. Sign the selected player here${say}">
-              ${D2T.cards.player(c, { w: pw, mini: true, shine: i === fresh, tab: s.pos, cls: 'fit-' + fit })}</div></div>`;
+              ${D2T.cards.player(c, { w: pw, mini: true, shine: i === fresh, tab: s.pos, cls: 'fit-' + fit, dots: (GAME.settling(c.id) || {}).left })}</div></div>`;
         }).join('');
         ratingEl.textContent = GAME.rating();
+        const tn = field && field.querySelector('.se-tname'); if (tn) tn.textContent = GAME.tacticName();
         if (fresh >= 0 && !reduced) {
           const el = slotsEl.querySelector(`.se-cardwrap[data-i="${fresh}"]`);
           el && el.animate([{ transform: 'scale(1.5)', filter: 'brightness(1.8)' }, { transform: 'scale(.95)' }, { transform: 'none', filter: 'none' }], { duration: 650, easing: 'cubic-bezier(.3,1.4,.5,1)' });
@@ -185,14 +187,14 @@
       }
       function buildPitch() {
         field = D2T.h(`<div class="tr-pitch" aria-label="Your XI">
-          <div class="tr-head"><div class="tr-head-t"><b>${draft ? `Draft · Shirt ${info.step} of ${info.of}` : `Transfer ${info.overall} of ${info.total}${/^Summer/.test(info.name) ? ' · Summer window' : /^January/.test(info.name) ? ' · January window' : ''}`}</b><span>${draft ? (di.open ? 'Drag one onto an open shirt' : `Drag one onto the lit ${di.pos} shirt`) : 'Drag a player onto a shirt to sign him there'}</span></div>
+          <div class="tr-head"><div class="tr-head-t"><b>${draft ? `Draft · Shirt ${info.step} of ${info.of}` : `Transfer ${info.overall} of ${info.total}${/^Summer/.test(info.name) ? '<span class="tr-win"> · Summer window</span>' : /^January/.test(info.name) ? '<span class="tr-win"> · January window</span>' : ''}`}</b><span>${draft ? (di.open ? 'Drag one onto an open shirt' : `Drag one onto the lit ${di.pos} shirt`) : 'Drag a player onto a shirt to sign him there'}</span></div>
             <div class="se-rating" aria-live="polite"><b class="tr-rating">0</b><i>Team<br>rating</i></div></div>
-          <div class="se-pitch tr-field tr-big">${SE.pitchLines}<div class="se-slots"></div>${draft && !di.open ? '' : `<button class="se-formlink" type="button"><b class="se-fname">${GAME.eng().formation}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`}</div></div>`);
+          <div class="se-pitch tr-field tr-big">${SE.pitchLines}<div class="se-slots"></div>${draft && !di.open ? '' : `<button class="se-formlink" type="button"><b class="se-fname">${GAME.eng().formation}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>${SE.tacticChip()}`}</div></div>`);
         api.el.insertBefore(field, api.el.querySelector('.sp-stage'));
         slotsEl = field.querySelector('.se-slots'); ratingEl = field.querySelector('.tr-rating');
         // big cards only where the pitch has the height for them; redrawn when that changes
         const fieldEl = field.querySelector('.tr-field');
-        const sizeUp = () => { const h = fieldEl.clientHeight; if (!h) return; const b = h >= BIG_MIN; if (b === big) return; big = b; fieldEl.classList.toggle('tr-big', b); if (placing) drawPitch(lastBest); };
+        const sizeUp = () => { const h = fieldEl.clientHeight; if (!h) return; const b = h >= BIG_MIN; if (b === big) return; big = b; fieldEl.classList.toggle('tr-big', b); if (placing || api.el.classList.contains('tr-preraid')) drawPitch(lastBest); };
         if (window.ResizeObserver) { sizeObs = new ResizeObserver(sizeUp); sizeObs.observe(fieldEl); }
         // change the shape on a roll (Craig, 13 Oct): your 11 are re-seated, nobody comes in; some may land out of position
         const fl = field.querySelector('.se-formlink');
@@ -215,14 +217,19 @@
           el.querySelectorAll('.se-formcard').forEach((b) => { b.onclick = () => { pending = b.dataset.f; el.querySelectorAll('.se-formcard').forEach((x) => { const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); }); }; });
           el.querySelector('.se-done').onclick = () => sh.close();
         };
+        // the tactic (Craig, 18 Oct): its chip bottom right, the twin of the shape chip; a change redraws the best shirt
+        const tl = field.querySelector('.se-taclink');
+        if (tl) tl.onclick = (e) => { e.stopPropagation(); SE.tacticSheet(root, () => { if (!alive) return; const si = api ? api.selected() : -1, p = si >= 0 ? api.results()[si] : null; drawPitch(p && !draft ? GAME.bestSlot(p.id) : -1); }); };
         slotsEl.addEventListener('click', (e) => {
           const w = e.target.closest('.se-cardwrap'); if (!w || !placing) return;
           const i = api.selected(), slot = +w.dataset.i;
           if (i >= 0) { mover = -1; sign(i, slot); return; }
-          // nothing picked from the tray: tap one of yours, then another shirt, to swap them (Craig, 15 Oct)
-          if (draft) { api.hint('Pick one of the three first, then tap a shirt'); return; }
-          if (mover < 0) { if (!GAME.lineup().xi[slot]) { api.hint('Pick one of the three first, or tap one of yours to move him'); return; } mover = slot; drawPitch(); api.hint('Tap another shirt to swap him there'); return; }
-          if (mover === slot) { mover = -1; drawPitch(); api.hint('Drag a player onto the pitch, or tap him then a shirt'); return; }
+          // nothing picked from the tray: tap one of yours, then another shirt, to swap them (Craig, 15 Oct); tap him
+          // again for his big card, to see where else he can play before you sign anyone (Craig, 22 Oct)
+          const mine = GAME.lineup().xi[slot];
+          if (draft && !di.open) { if (mine) { openMine(slot); return; } api.hint('Pick one of the three first, then tap a shirt'); return; }
+          if (mover < 0) { if (!mine) { api.hint('Pick one of the three first, or tap one of yours to move him'); return; } mover = slot; drawPitch(); api.hint('Tap another shirt to swap him, or tap him again for his card'); return; }
+          if (mover === slot) { openMine(slot); return; }
           moveTo(mover, slot);
         });
       }
@@ -248,6 +255,31 @@
           field.animate([{ opacity: 0, transform: 'translateY(-14px)' }, { opacity: 1, transform: 'none' }], { duration: 420, delay: 160, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
         } else api.el.classList.add('is-placing');
         api.hint(draft ? (di.open ? 'Drag one onto an open shirt, or tap him then a shirt' : 'Drag one onto the lit shirt, or tap him then Sign') : 'Drag a player onto the pitch, or tap him then a shirt');
+        if (janShow && !janShown && !preRaid) { janShown = true; playJanRaid(animate ? 760 : 400); }
+      }
+      // the January raid's show (Craig, 20 Oct; Sweep and strike, SE.raidTake): the taken player is put back in his shirt
+      // as the pitch appears, the crosshair hunts him down and the rival's badge takes him; then the sheet
+      async function playJanRaid(delay) {
+        const sl = slotsEl.querySelector(`.se-slot[data-i="${jr.slot}"]`), pitchEl = field && field.querySelector('.se-pitch');
+        if (!sl || !pitchEl) { root.classList.remove('rd-busy'); return janSheet(600); }
+        janBack = { slot: jr.slot, card: jr.card }; drawPitch(lastBest);
+        root.classList.add('rd-busy');
+        // the Transfer News bar takes the hint line's place (Craig, 21 Oct): the rumour as the sweep starts, the deal as
+        // the badge lands, no count (one raid); it stays until you move on
+        const hint = api.el.querySelector('.sp-hint');
+        if (hint && !janNews) { janNews = SE.newsBar({ count: false }); janNews.el.classList.add('se-news-flow'); hint.style.display = 'none'; hint.after(janNews.el); }
+        const words = SE.raidWords(0);
+        await new Promise((r) => timers.push(setTimeout(r, delay)));
+        if (!alive) return;
+        janTake = SE.raidTake({
+          pitch: pitchEl, slotsEl, slot: jr.slot, crest: jr.crestLight || jr.crest, dark: jr.dark,
+          onStart: () => janNews && janNews.say(words.rumour(jr.club)),
+          onLanded: () => janNews && janNews.say(words.deal(jr.club, jr.name)),
+          onEmpty: () => { janBack = null; drawPitch(lastBest); }
+        });
+        await janTake.done; janTake = null; janBack = null;
+        root.classList.remove('rd-busy');
+        if (alive) janSheet(preRaid ? 1000 : 200);
       }
       function leavePlacing() {
         if (!placing) return Promise.resolve();
@@ -268,6 +300,7 @@
         const p = api.results()[i];
         if (draft && di.open && p && !GAME.draftFits(p.id).includes(slot)) { api.hint('That shirt is taken. Pick an open one.'); return; }
         if (draft && !di.open && slot !== di.slot) { api.hint(`This pick goes in the lit ${di.pos} shirt`); return; }
+        if (p && !GAME.canPlay(p.id, slot)) { api.hint(GAME.noPlayWord(p.id)); SND.play('dropCancel'); return; }
         const replaced = !draft && p && GAME.lineup().xi[slot];
         if (!p || !(draft ? GAME.draftPick(p.id, slot) : GAME.signAt(p.id, slot))) return;
         signing = true;
@@ -275,7 +308,9 @@
         drawPitch(-1, slot);
         const s = api.slots[i];
         s.classList.add('is-signed');
-        api.hint(`${surname(p.name)} is in. Welcome to ${club.name}.`);
+        // how he settles (Craig, 18 Oct): at once, a couple of games, or three
+        const stl = draft ? null : GAME.settling(p.id);
+        api.hint(`${surname(p.name)} is in. ${draft ? `Welcome to ${club.name}.` : !stl ? 'He hits the ground running.' : stl.games === 2 ? 'A couple of games to settle.' : 'Three games to settle.'}`);
         const ph = GAME.eng().phase;
         // the window over (Craig, 14 Oct): straight to the fixtures; the draft over: the pre-season squad
         timers.push(setTimeout(() => { if (alive) D2T.go(ph === 'window' || ph === 'draft' ? 'transfer' : draft ? 'squad' : 'fixtures'); }, reduced ? 300 : (draft ? 800 : 1100)));
@@ -283,10 +318,88 @@
       // move one of your players to another shirt on the pitch (a swap; an empty shirt moves the other way)
       function moveTo(from, to) {
         mover = -1;
-        if (!GAME.swapSlots(from, to)) { drawPitch(); return; }
+        const mv = GAME.lineup().xi[from];
+        if (!GAME.swapSlots(from, to)) { drawPitch(); if (mv && !GAME.canPlay(mv.id, to)) { api.hint(GAME.noPlayWord(mv.id)); SND.play('dropCancel'); } return; }
         SND.play('cardDrop');
         drawPitch(-1, to);
-        api.hint('Drag a player onto the pitch, or tap him then a shirt');
+        api.hint(draft ? 'Drag one onto an open shirt, or tap him then a shirt' : 'Drag a player onto the pitch, or tap him then a shirt');
+      }
+      // Respin or scout (Craig, 18 and 20 Oct): the respin button opens one sheet in the game's style, "N respins left",
+      // three option cards: Respin (1), Scout a position (2) and Scout a club (2). A position: your shirts drawn as the
+      // pitch's own shirts, red where nobody this season is better than the man in it, a count on the rest; tap one and
+      // the scouts' three cards roll in (GAME.scout). A club: the season's clubs by final position, tap one for three of
+      // its players (GAME.scoutClub). Neither ever brings a legend card.
+      const ICON_SHIRT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h2.2a1.8 1.8 0 0 0 3.6 0H16l5 3.5-2 3.8-2.3-1.2V21H7.3V9.1L5 10.3 3 6.5Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>';
+      const ICON_SHIELD = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 20 5.5v6c0 4.6-3.3 8.1-8 10-4.7-1.9-8-5.4-8-10v-6Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M12 6.5v12M7 11h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".55"/></svg>';
+      const tint = (sh) => { sh.el.classList.add('se-run'); ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v))); };
+      function respinChoice(n) {
+        return new Promise((resolve) => {
+          let done = false; const fin = (v) => { if (!done) { done = true; resolve(v); } };
+          const can = GAME.canScout(), cost = GAME.scoutCost(), clubs = can ? GAME.scoutClubs() : [];
+          const card = (k, icon, name, line, c, ok) => `<button class="se-optcard" type="button" data-k="${k}"${ok ? '' : ' disabled'}><span class="se-opticon">${icon}</span><span class="se-tactext"><b>${name}</b><span>${line}</span></span><em class="se-optcost">${ok ? `<b>${c}</b>respin${c === 1 ? '' : 's'}` : `<b>${c}</b>needed`}</em></button>`;
+          const el = D2T.h(`<div class="se-optgrid">
+            ${card('respin', D2T.ICON.respin, 'Respin', 'Three fresh cards: any position, anyone this season.', 1, true)}
+            ${card('scout', ICON_SHIRT, 'Scout a position', 'Pick one of your shirts for three players who play there and are better than the man in it. Gold at most.', cost, can)}
+            ${card('club', ICON_SHIELD, 'Scout a club', 'Pick a club for three of its players this season, drawn like a roll.', cost, can && clubs.length > 0)}
+            <p class="se-note">Scouting costs ${cost} of your respins, so a bad roll later has fewer to fall back on. The scouts bring gold at most, a purple only when no gold is left, never a legend.</p></div>`);
+          const sh = D2T.sheet({ title: `${n} respin${n === 1 ? '' : 's'} left`, body: el, onClose: () => fin(null) });
+          tint(sh); sh.el.classList.add('se-optsheet');
+          el.querySelector('[data-k="respin"]').onclick = () => { done = true; sh.close(); resolve('respin'); };
+          el.querySelector('[data-k="scout"]').onclick = () => { if (!can) return; done = true; sh.close(); timers.push(setTimeout(() => scoutSheet().then(resolve), 260)); };
+          el.querySelector('[data-k="club"]').onclick = () => { if (!can || !clubs.length) return; done = true; sh.close(); timers.push(setTimeout(() => scoutClubSheet(clubs).then(resolve), 260)); };
+        });
+      }
+      function scoutSheet() {
+        return new Promise((resolve) => {
+          let done = false; const fin = (v) => { if (!done) { done = true; resolve(v); } };
+          const info = GAME.scoutInfo(), slots = GAME.slots(), L = GAME.lineup(), SW = 46;
+          const shirt = (s, i) => { const q = info[i], none = !q.better; return `<button class="se-scoutshirt${none ? ' is-none' : ''}" type="button" data-i="${i}" style="left:${s.x}%;top:${s.y}%" aria-label="${s.pos}, ${none ? 'nobody better this season' : q.better + ' better'}"><span class="se-empty se-scoutempty" style="width:${SW}px;height:${Math.round(SW * 1.3)}px"><span>${s.pos}</span><small>${none ? 'none' : q.better > 9 ? '9+' : q.better}</small></span></button>`; };
+          const el = D2T.h(`<div><p class="se-note" style="margin:0 0 10px">Tap a shirt: ${GAME.scoutCost()} respins for three players who play there and are better than the man in it now, gold at most (a purple only when no gold is left). The number is how many the scouts have.</p>
+            <div class="se-scoutpitch">${SE.pitchLines}${slots.map(shirt).join('')}</div>
+            <p class="se-scoutkey"><i></i> Red: nobody better this season</p><p class="se-scoutnone" aria-live="polite"></p></div>`);
+          const sh = D2T.sheet({ title: 'Scout a position', body: el, onClose: () => fin(null) });
+          tint(sh); sh.el.classList.add('se-scoutsheet');
+          const none = el.querySelector('.se-scoutnone');
+          el.querySelectorAll('.se-scoutshirt').forEach((b) => {
+            b.onclick = () => {
+              const i = +b.dataset.i, q = info[i], mine = L.xi[i];
+              if (!q.better) { SND.play('tapSmall'); none.textContent = `Nobody better than ${mine ? surname(mine.name) : 'nobody'} at ${q.pos} in ${run.season}.${q.bestCard ? ` Best there: ${q.bestCard.name} (${q.bestCard.ovr}).` : ''}`; return; }
+              if (!GAME.scout(i)) { none.textContent = `The scouts need ${GAME.scoutCost()} respins.`; return; }
+              SND.play('respin'); done = true; sh.close(); resolve(GAME.eng().respins);
+            };
+          });
+        });
+      }
+      function scoutClubSheet(clubs) {
+        return new Promise((resolve) => {
+          let done = false; const fin = (v) => { if (!done) { done = true; resolve(v); } };
+          const tile = (c) => `<button class="se-clubtile" type="button" data-c="${c.club}" aria-label="${D2T.esc(c.name)}, ${c.n} players">${c.crest ? `<img src="${c.crest}" alt="">` : ''}<b>${D2T.esc(c.name)}</b><small>${c.n} player${c.n === 1 ? '' : 's'}</small></button>`;
+          const el = D2T.h(`<div><p class="se-note" style="margin:0 0 10px">Tap a club: ${GAME.scoutCost()} respins for three of its players this season, the better rated the more likely, gold at most (purples only once its golds are gone). Clubs in table order.</p>
+            <div class="se-clubgrid">${clubs.map(tile).join('')}</div></div>`);
+          const sh = D2T.sheet({ title: 'Scout a club', body: el, onClose: () => fin(null) });
+          tint(sh); sh.el.classList.add('se-scoutsheet');
+          el.querySelectorAll('.se-clubtile').forEach((b) => {
+            b.onclick = () => { if (!GAME.scoutClub(+b.dataset.c)) { SND.play('tapSmall'); return; } SND.play('respin'); done = true; sh.close(); resolve(GAME.eng().respins); };
+          });
+        });
+      }
+      // the big card of one of your own players on the pitch (the squad screen's, D2T.cards.info under it)
+      function openMine(slot) {
+        const card = GAME.lineup().xi[slot], w = slotsEl.querySelector(`.se-cardwrap[data-i="${slot}"]`);
+        if (!card || !w) return;
+        const W = Math.min(236, Math.round(root.clientWidth * 0.6));
+        SND.play('cardSelect', 0);
+        D2T.cards.openLarge(w.querySelector('.d2c') || w, D2T.cards.player(card, { w: W }), { w: W, below: D2T.cards.info(card), scroll: true });
+      }
+      // a tap on the grass or beside the tray's cards lets go of whatever is picked (Craig, 22 Oct): a tray card or one
+      // of your own players; the pitch goes back to plain and the main button to its resting label
+      function deselect() {
+        if (!api || (api.selected() < 0 && mover < 0)) return;
+        api.clear(); mover = -1;
+        if (draft) api.setLabel('Pick one');
+        drawPitch(draft ? di.slot : -1);
+        api.hint(draft ? (di.open ? 'Drag one onto an open shirt, or tap him then a shirt' : 'Drag one onto the lit shirt, or tap him then Sign') : 'Pick one of the three, or tap one of yours to move him');
+        SND.play('tapSmall');
       }
       function pass() {
         if (signing) return;
@@ -311,8 +424,8 @@
         if (signing || e.button || !api) return;
         const s = e.target.closest('.sp-slot');
         if (!s || !api.el.contains(s)) {
-          // a card of yours on the pitch can be dragged onto another shirt (not in the draft, not with a tray card picked)
-          const w = placing && !draft && e.target.closest('.tr-field .se-cardwrap');
+          // a card of yours on the pitch can be dragged onto another shirt (not in Dare2Dream's draft, not with a tray card picked)
+          const w = placing && (!draft || di.open) && e.target.closest('.tr-field .se-cardwrap');
           if (w && GAME.lineup().xi[+w.dataset.i] && api.selected() < 0) drag = { pitch: +w.dataset.i, x0: e.clientX, y0: e.clientY, pid: e.pointerId, moved: false };
           return;
         }
@@ -373,6 +486,14 @@
         if ((suppress >= 0 && e.target.closest('.sp-slot')) || (suppressPitch && e.target.closest('.tr-field'))) { e.stopPropagation(); e.preventDefault(); }
         suppress = -1; suppressPitch = false;
       }, true);
+      // tap off the cards to let go (after the drag guard above, so a drag's own click never lands here)
+      root.addEventListener('click', (e) => {
+        if (!placing || signing) return;
+        const t = e.target;
+        if (t.closest('.se-cardwrap, .sp-slot, .se-formlink, button, .game-bar, .sheet, .topbar, .se-news')) return;
+        if (!t.closest('.tr-pitch, .sp-stage, .sp-hint')) return;
+        deselect();
+      });
       const blockTouch = (e) => { if (drag && drag.moved && e.cancelable) e.preventDefault(); };
       window.addEventListener('touchmove', blockTouch, { passive: false });
       const prevKill = kill;
@@ -406,6 +527,8 @@
           settled: st.spun === rollKey ? GAME.rollCards() : null,
           // a purple or legend card gets the rare reveal (screens/reveal.js); the roll counts as spun as it starts
           rare: (p) => D2T.rareReveal.isRare(p),
+          // the positions he is green in, under each card, revealed with it as its reel lands (Craig, 15 and 16 Oct)
+          below: (p) => { const list = p.main ? [p.main, ...(p.alt || [])] : [p.pos]; const tags = GAME.rollTags(), ti = tags ? GAME.rollCards().findIndex((c) => c.id === p.id) : -1, tag = ti >= 0 ? tags[ti] : null; return `<div class="sp-gp sp-below" aria-label="Green in ${list.join(', ')}${tag ? tag === 'better' ? ', better than the man in the shirt' : ', the next best there' : ''}">${list.join('<i>/</i>')}${tag === 'next' ? '<span class="sp-tag is-next">Next best</span>' : ''}</div>`; },
           onCommit: () => { st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); },
           onSettled: () => { leaving = false; st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); timers.push(setTimeout(() => enterPlacing(true), reduced ? 0 : 450)); },
           accent: LV_ACCENT,
@@ -418,6 +541,7 @@
           respins: draft ? null : eng.respins,
           baseBtn: { accent: club.accent, ink: club.ink },
           onRespinsChange: () => { GAME.respinCards(); st.spun = ''; D2T.save(); },
+          respinChoice: draft ? null : respinChoice,
           beforeSpin: () => leavePlacing(),
           onSelect: (i, p) => { mover = -1; if (placing) drawPitch(draft ? di.slot : GAME.bestSlot(p.id)); timers.push(setTimeout(() => api && D2T.tip('card-again', api.el.querySelectorAll('.sp-slot')[i], 'Tap him again for his career'), 250)); },
           afterSettle: draft ? null : { label: 'Pass', onClick: pass },
@@ -427,9 +551,67 @@
         buildPitch();
         if (st.spun === rollKey) enterPlacing(false);
       };
+      // the January raid (Craig, 19 Oct): as the window opens a top-half club has taken one of yours; say so once
+      const jr = !draft && GAME.janRaid(), janDue = !!(jr && jr.gw === eng.gw && !st.janSeen);
+      // the show plays on the pitch first (not with reduced motion, and only while his shirt is still empty)
+      const janShow = janDue && !reduced && !!jr.card && eng.xi[jr.slot] == null;
+      let janShown = false;
+      // the raid comes before the window's first spin (Craig, 23 Oct: the sheet, then the raid, then the spin): the pitch
+      // shows on its own, the badge takes him, the "January raid" sheet, and closing it goes back to Spin
+      const preRaid = janShow && st.spun !== rollKey;
+      // Craig, 25 Oct: straight to the pitch (no emblem burst, no empty cards), the "January window" sheet over it, then a
+      // second after it closes the raid; a second after the badge takes him, the "January raid" sheet
+      let raidPitch = false;
+      function raidFirst(then) {
+        if (!alive || raidPitch) return;
+        if (!api || !slotsEl) { timers.push(setTimeout(() => raidFirst(then), 60)); return; }
+        raidPitch = true;
+        janBack = { slot: jr.slot, card: jr.card };   // he is still yours until the badge takes him
+        root.classList.add('rd-busy');
+        api.el.classList.add('is-placing', 'tr-preraid');
+        const sub = field.querySelector('.tr-head-t > span'); if (sub) { sub.dataset.was = sub.textContent; sub.textContent = 'A top-half side is coming in for one of yours'; }
+        drawPitch();
+        if (!reduced) field.animate([{ opacity: 0, transform: 'translateY(-14px)' }, { opacity: 1, transform: 'none' }], { duration: 420, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
+        then && then();
+      }
+      function raidGo() { if (!alive || janShown) return; janShown = true; playJanRaid(1000); }
+      function raidDone() {
+        if (!preRaid || !alive || !api) return;
+        const hint = api.el.querySelector('.sp-hint');
+        if (janNews) { janNews.stop(); janNews.el.remove(); janNews = null; }
+        if (hint) hint.style.display = '';
+        const go = () => { api.el.classList.remove('is-placing', 'tr-preraid'); api.hint('Hit Spin to roll three players'); const sub = field.querySelector('.tr-head-t > span'); if (sub && sub.dataset.was) sub.textContent = sub.dataset.was; };
+        if (reduced) return go();
+        field.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: 'ease-in', fill: 'forwards' }).onfinish = () => { go(); field.getAnimations().forEach((x) => x.cancel()); };
+      }
       // the emblem burst opens each window and the draft, not every one of the 11 draft spins
-      if (st.spun === rollKey || (draft && di.step > 1)) build();
+      if (st.spun === rollKey || (draft && di.step > 1) || preRaid) build();
       else intr = intro(body, () => { intr = null; build(); });
+      function janSheet(delay) {
+        const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">${D2T.esc(jr.club)} came in for ${D2T.esc(jr.name)} as the window opened. His shirt is empty for your January rolls; if it is still empty when the window closes, a free agent fills it.</p>
+          <ul><li>${jr.crest ? `<img src="${jr.crest}" alt="">` : ''}<b>${D2T.esc(jr.name)}</b><span>to ${D2T.esc(jr.club)}</span></li></ul>
+          <button class="btn se-btn se-poach-go" type="button">Continue</button></div>`);
+        timers.push(setTimeout(() => {
+          if (!alive) return;
+          if (!janShow) SND.play('playerOut');
+          const sh = D2T.sheet({ title: 'January raid', body: el, onClose: () => { st.janSeen = true; D2T.save(); raidDone(); } });
+          sh.el.classList.add('se-run', 'se-poach-sheet');
+          ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
+          el.querySelector('.se-poach-go').onclick = () => sh.close();
+        }, delay));
+      }
+      if (janDue && !janShow) janSheet(600);
+      // the window opens (Craig, 20 Oct): before the first January roll is spun, a sheet says players go out as well as in
+      const windowSheet = () => {
+        if (!alive) return;
+        const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">The January window is open. Players go out as well as come in: a top-half side comes in for one of yours as it opens, then you have three January rolls to put things right.</p>
+          <button class="btn se-btn se-poach-go" type="button">Continue</button></div>`);
+        const sh = D2T.sheet({ title: 'January window', body: el, onClose: () => { st.janIntro = true; D2T.save(); if (preRaid) raidGo(); } });
+        tint(sh);
+        el.querySelector('.se-poach-go').onclick = () => sh.close();
+      };
+      if (preRaid) raidFirst(() => timers.push(setTimeout(() => { if (st.janIntro) raidGo(); else windowSheet(); }, st.janIntro ? 0 : 450)));
+      else if (janDue && !st.janIntro && st.spun !== rollKey) timers.push(setTimeout(windowSheet, 600));
     },
     unmount() { kill && kill(); kill = null; intr && intr.cancel(); intr = null; api && api.unmount(); api = null; }
   });

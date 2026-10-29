@@ -5,6 +5,7 @@
 // The result is reported in the engine's shape, with base the geometric mean of the two intercepts.
 const D = require("../src/engine.js");
 const G = require("../data/game/game.json");
+require("./legends.js")(G);   // the legend cards, as the phone plays them
 const rows = [];
 for (const S of Object.values(G.seasons)) {
   const ix = D.indexSeason(S), str = {};

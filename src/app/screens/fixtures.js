@@ -24,6 +24,9 @@
       const byDate = [];
       others.forEach((f) => { let g = byDate.find((x) => x.date === f.date); if (!g) byDate.push(g = { date: f.date, list: [] }); g.list.push(f); });
       byDate.sort((a, b) => a.date.localeCompare(b.date));
+      // a dot for every player you signed from a club this season, as on the results (Craig, 15 Oct: before the game too)
+      const from = D2T.game.signedFrom(), dots = (name, cls) => from[name] ? `<span class="se-fx-dots ${cls}" aria-label="${from[name]} signed from ${D2T.esc(name)}">${'<i></i>'.repeat(from[name])}</span>` : '';
+      const anyDots = all.some((f) => from[f.home] || from[f.away]);
 
       const body = D2T.h(`<div class="screen-body se-fixtures">
         <div class="se-kicker">Premier League ${data.season}</div>
@@ -37,8 +40,10 @@
           </div>
           <div class="se-myfx-foot">${fx.ha === 'H' ? 'Home' : 'Away'} · ${D2T.esc(oppC.name)} finished ${D2T.ordinal((data.table.find((r) => r.name === fx.opp) || {}).pos || 0)} that season</div>
         </div>
-        ${all.length ? byDate.map((g, gi) => `<div class="se-fx-date">${SE.date(g.date)}</div><div class="se-fx-list">${g.list.map((f, i) => `<div class="se-fx" style="--d:${120 + (gi * 4 + i) * 45}ms">${side(SE.club(data, f.home), 'se-h')}<span class="se-v">v</span>${side(SE.club(data, f.away), 'se-a')}</div>`).join('')}</div>`).join('')
+        ${(() => { const h = D2T.game.tacticHint(); return h ? `<p class="se-tachint"><b>Tactics.</b> ${D2T.esc(h)} Change it from the squad, back arrow.</p>` : ''; })()}
+        ${all.length ? byDate.map((g, gi) => `<div class="se-fx-date">${SE.date(g.date)}</div><div class="se-fx-list">${g.list.map((f, i) => `<div class="se-fx" style="--d:${120 + (gi * 4 + i) * 45}ms">${dots(f.home, 'se-h')}${dots(f.away, 'se-a')}${side(SE.club(data, f.home), 'se-h')}<span class="se-v">v</span>${side(SE.club(data, f.away), 'se-a')}</div>`).join('')}</div>`).join('')
           : ''}
+        ${anyDots ? `<p class="se-note se-fx-key"><span class="se-fx-dots"><i></i></span> = a player you signed from that club</p>` : ''}
         <div class="se-pad"></div>
       </div>`);
       // home, back to the squad (to rearrange or change shape), Kick off (Craig, 14 Oct): the match is decided in the
@@ -64,7 +69,14 @@
         this._off = () => clearTimeout(t);
       }
       let kicked = false;
-      bar.querySelector('.bar-main').onclick = () => { if (kicked) return; kicked = true; if (!D2T.game.play()) { D2T.go(D2T.game.stepFor() || 'home'); return; } D2T.go('match'); };
+      bar.querySelector('.bar-main').onclick = () => {
+        if (kicked) return; kicked = true;
+        let res = null;
+        try { res = D2T.game.play(); }
+        catch (err) { kicked = false; D2T.reportError && D2T.reportError(err, 'kick off'); return; }   // never a dead button: the error is shown and kept (20 Oct, Phil)
+        if (!res) { D2T.go(D2T.game.stepFor() || 'home'); return; }
+        D2T.go('match');
+      };
     },
     unmount() { this._off && this._off(); this._off = null; }
   });

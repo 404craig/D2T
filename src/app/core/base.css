@@ -173,3 +173,18 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 /* On a phone the frame always fills the screen, even when Safari's page zoom is below 100% and gives it more than 430px
    (Craig, 13 Oct: side strips appeared); the 430px column stays for desktops and tablets. */
 @media (pointer: coarse) and (max-width: 600px) { #app { max-width: none; } }
+
+/* Compact mode (design session, Craig 19 Oct; design/prototype/compact-s25.css): phones whose browser chrome leaves under
+   760px (a Galaxy S25 in Chrome with the URL bar and the 3-button nav bar is 360 x 676). Everything shrinks a step so the
+   pitch keeps its share; nothing that matters is hidden. The squad and roll rules sit in season.css and spin.css. */
+@media (max-height: 759px) {
+  .topbar { padding-top: calc(env(safe-area-inset-top, 0px) + 8px); padding-bottom: 6px; min-height: 40px; }
+  .topbar .logo-mask { height: 22px !important; }
+  .actionbar { padding-top: 8px; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px); }
+  .game-bar .bar-main, .sp-main { min-height: 52px; border-radius: 26px; font-size: 18px; }
+  .actionbar .icon-btn, .sp-round { width: 50px; height: 50px; }
+}
+/* narrow (360 and under): the main button's label must fit on one line beside two round buttons */
+@media (max-width: 374px) {
+  .game-bar .bar-main, .sp-main { font-size: 17px; padding: 0 12px; }
+}

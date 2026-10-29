@@ -11,18 +11,36 @@
   const FONT = (w, px, italic) => `${italic ? 'italic ' : ''}${w} ${px}px 'Exo 2', sans-serif`;
   const load = (src) => new Promise((r) => { if (!src) { r(null); return; } const i = new Image(); i.onload = () => r(i); i.onerror = () => r(null); i.src = src; });
   const svgSrc = (svg) => 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  const rgba = (hex, a) => { const h = String(hex || '#FFFFFF').replace('#', ''), f = h.length === 3 ? h.split('').map((x) => x + x).join('') : h, n = parseInt(f.slice(0, 6), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; };
+  // a small card's face stops, ink, text colour and word by level (core/cards.js)
+  const LVC = { bronze: ['#F6D2AE', '#D99A66', '#A9653A', '#C8875A', '#2B1608', '#E3A577', 'BRONZE'], silver: ['#FFFFFF', '#DCE2E8', '#A8B2BD', '#D3D9DF', '#16202A', '#DCE2E8', 'SILVER'],
+    gold: ['#FFF6C8', '#FFD95A', '#E3A814', '#F7CE4A', '#2A1B00', '#FFD95A', 'GOLD'], baller: ['#E4D2FF', '#A774FF', '#6A2EE8', '#8F5CFF', '#FFFFFF', '#B48CFF', 'BALLER'],
+    legend: ['#FFD36E', '#FF6900', '#FF2882', '#FF6900', '#FFFFFF', '#FF8A4C', 'LEGEND'] };
+  const SHIELD = 'M1.77 10.23 L10.23 1.77 Q12 0 14.5 0 L99.5 0 Q102 0 103.77 1.77 L112.23 10.23 Q114 12 114 14.5 L114 127 Q114 130 111.14 130.9 L60.81 146.8 Q57 148 53.19 146.8 L2.86 130.9 Q0 130 0 127 L0 14.5 Q0 12 1.77 10.23Z';
 
   // ---------- drawing helpers, all centred unless given an x ----------
   function kit(g) {
     const spaced = (on) => { if ('letterSpacing' in g) g.letterSpacing = on || '0px'; };
     // text at the largest size up to px that fits maxW
-    const fit = (text, x, y, maxW, w, px, italic, color, align = 'center', ls) => {
+    const size = (text, maxW, w, px, italic, ls) => {
       spaced(ls);
       let s = px; g.font = FONT(w, s, italic);
       while (s > 12 && g.measureText(text).width > maxW) { s -= 2; g.font = FONT(w, s, italic); }
+      return s;
+    };
+    const fit = (text, x, y, maxW, w, px, italic, color, align = 'center', ls) => {
+      const s = size(text, maxW, w, px, italic, ls);
       g.textAlign = align; g.fillStyle = color; g.fillText(text, x, y);
       spaced(); return s;
     };
+    // the capitals centred on cy (design session, 29 Oct: 'top' at a fixed offset left them low in the tag)
+    const mid = (text, x, cy, maxW, w, px, italic, color, align = 'center', ls) => {
+      size(text, maxW, w, px, italic, ls);
+      g.textBaseline = 'alphabetic'; const m = g.measureText(text);
+      g.textAlign = align; g.fillStyle = color; g.fillText(text, x, cy + (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2);
+      g.textBaseline = 'top'; spaced(); return m.width;
+    };
+    const width = (text, w, px, italic, ls) => { spaced(ls); g.font = FONT(w, px, italic); const v = g.measureText(text).width; spaced(); return v; };
     const rr = (x, y, w, h, r) => { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); };
     const box = (x, y, w, h, r, edge, fill) => { rr(x, y, w, h, r); g.fillStyle = fill || '#0E0E10'; g.fill(); g.lineWidth = 3; g.strokeStyle = edge || '#222226'; g.stroke(); };
     const wrap = (text, x, y, maxW, w, px, color, lh) => {
@@ -53,7 +71,36 @@
         fit(c, x, 874, 400, 600, 36, false, '#BDBDC6');
       });
     };
-    return { fit, rr, box, wrap, pic, club, duo, W, H };
+    // the game's tag: a slanted pill in its colour, the label centred on it
+    const tag = (label, y, colour) => {
+      label = String(label).toUpperCase();
+      const pw = Math.min(900, width(label, 900, 40, true, '2px')) + 60, ph = 62, x = (W - pw) / 2;
+      g.save(); g.translate(W / 2, y + ph / 2); g.transform(1, 0, -0.176, 1, 0, 0); g.translate(-W / 2, -(y + ph / 2));
+      rr(x, y, pw, ph, 12); g.fillStyle = colour; g.fill(); g.restore();
+      mid(label, W / 2, y + ph / 2, 900, 900, 40, true, '#0A0A0A', 'center', '2px');
+    };
+    // a small card in its level's colours: rating, broad position, crest, surname (p: { r, lv, p, name }, im: its crest)
+    const card = (x, y, w, p, im) => {
+      const L = LVC[p.lv] || LVC.bronze, s = w / 114;
+      g.save(); g.translate(x, y); g.scale(s, s);
+      const gr = g.createLinearGradient(0, 0, 114, 148); gr.addColorStop(0, L[0]); gr.addColorStop(0.35, L[1]); gr.addColorStop(0.7, L[2]); gr.addColorStop(1, L[3]);
+      g.fillStyle = gr; g.fill(new Path2D(SHIELD)); g.restore();
+      const sur = String(p.name || '').trim().split(' ').slice(1).join(' ') || String(p.name || '');
+      fit(String(p.r), x + w * 0.29, y + w * 0.13, w * 0.4, 900, w * 0.32, true, L[4]);
+      fit(String(p.p || ''), x + w * 0.29, y + w * 0.50, w * 0.4, 800, w * 0.13, false, L[4]);
+      pic(im, x + w * 0.73, y + w * 0.14, w * 0.32);
+      fit(sur.toUpperCase(), x + w / 2, y + w * 0.80, w * 0.86, 900, w * 0.16, true, L[4]);
+    };
+    // a football, drawn (no emoji)
+    const ball = (cx, cy, r) => {
+      g.beginPath(); g.arc(cx, cy, r, 0, 7); g.fillStyle = '#FFFFFF'; g.fill(); g.lineWidth = r * 0.09; g.strokeStyle = '#0A0A0A'; g.stroke();
+      const pent = (px, py, pr, rot) => { g.beginPath(); for (let i = 0; i < 5; i++) { const a = rot + i * 2 * Math.PI / 5; g.lineTo(px + pr * Math.cos(a), py + pr * Math.sin(a)); } g.closePath(); g.fillStyle = '#0A0A0A'; g.fill(); };
+      pent(cx, cy, r * 0.36, -Math.PI / 2);
+      g.save(); g.beginPath(); g.arc(cx, cy, r * 0.96, 0, 7); g.clip();
+      for (let i = 0; i < 5; i++) { const a = -Math.PI / 2 + i * 2 * Math.PI / 5; pent(cx + r * 0.95 * Math.cos(a), cy + r * 0.95 * Math.sin(a), r * 0.3, a + Math.PI / 2); }
+      g.restore();
+    };
+    return { fit, mid, width, rr, box, wrap, pic, club, duo, tag, card, ball, LVC, W, H };
   }
 
   function build(o) {
@@ -67,28 +114,24 @@
       const ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
       Promise.all([ready].concat(keys.map((k) => load(srcs[k])))).then(([, ...ims]) => {
         const img = {}; keys.forEach((k, i) => { img[k] = ims[i]; });
-        const k = kit(g);
+        const k = kit(g), v2 = !!o.wash;
         g.fillStyle = '#000'; g.fillRect(0, 0, W, H);
-        if (img.ghost) k.pic(img.ghost, W / 2, 170, 1040, o.ghostAlpha || 0.13);
+        // the new frame (the Daily since build 161, design/prototype/daily-share.html): a wash of the club's colour at the top
+        if (v2) { const lg = g.createLinearGradient(0, 0, 0, 720); lg.addColorStop(0, rgba(o.wash, 0x55 / 255)); lg.addColorStop(0.45, rgba(o.wash, 0x1A / 255)); lg.addColorStop(1, rgba(o.wash, 0)); g.fillStyle = lg; g.fillRect(0, 0, W, 720); }
+        if (img.ghost) k.pic(img.ghost, W / 2, v2 ? 150 : 170, 1040, o.ghostAlpha || (v2 ? 0.09 : 0.13));
         // the long logo in white
         if (img.logo) {
           const lw = 640, lh = lw * img.logo.naturalHeight / img.logo.naturalWidth, t = document.createElement('canvas'); t.width = lw; t.height = lh;
           const tg = t.getContext('2d'); tg.drawImage(img.logo, 0, 0, lw, lh); tg.globalCompositeOperation = 'source-in'; tg.fillStyle = '#fff'; tg.fillRect(0, 0, lw, lh);
-          g.drawImage(t, (W - lw) / 2, 70 + (110 - lh) / 2);
+          g.drawImage(t, (W - lw) / 2, (v2 ? 40 : 70) + (110 - lh) / 2);
         }
-        // the game's tag: a slanted pill in its colour
-        if (o.tag) {
-          const label = o.tag.toUpperCase();
-          g.font = FONT(900, 40, true); if ('letterSpacing' in g) g.letterSpacing = '2px';
-          const tw = Math.min(900, g.measureText(label).width), pw = tw + 60, ph = 62, x = (W - pw) / 2, y = 212;
-          g.save(); g.translate(W / 2, y + ph / 2); g.transform(1, 0, -0.176, 1, 0, 0); g.translate(-W / 2, -(y + ph / 2));
-          k.rr(x, y, pw, ph, 12); g.fillStyle = o.c; g.fill(); g.restore();
-          g.fillStyle = '#0A0A0A'; g.textAlign = 'center'; g.fillText(label, W / 2, y + 13, 900);
-          if ('letterSpacing' in g) g.letterSpacing = '0px';
-        }
+        // the game's tag: a slanted pill in its colour, the label centred on it
+        if (o.tag) k.tag(o.tag, v2 ? 168 : 212, o.c);
         o.draw(g, img, k);
-        // the dare band
-        if (o.dare) {
+        // the dare band; the new frame has no link on the picture and leaves black under the band (WhatsApp's caption
+        // covers the foot)
+        if (o.dare && v2) { const B = 1176, BH = 110; g.fillStyle = o.band || o.c; g.fillRect(0, B, W, BH); k.mid(o.dare.toUpperCase(), W / 2, B + BH / 2, 980, 900, 50, true, o.ink || '#0A0A0A'); }
+        else if (o.dare) {
           g.fillStyle = o.c; g.fillRect(0, H - BAND, W, BAND);
           k.fit(o.dare.toUpperCase(), W / 2, H - BAND + 22, 1000, 900, 50, true, '#0A0A0A');
           g.globalAlpha = 0.75; k.fit(LINK, W / 2, H - BAND + 82, 1000, 700, 30, false, '#0A0A0A'); g.globalAlpha = 1;
