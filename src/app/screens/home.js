@@ -88,35 +88,60 @@
     return gameCard({ c: '#22D3EE', attrs: 'data-act="unbeaten"', label: 'Unbeaten Run', tag: 'UNBEATEN RUN', big: 'Higher or lower?', sub, mark: D2T.ubMark || '' });
   }
 
-  // Daily challenge card: today's club for everyone. The card keeps only its question (or "Done for today"); your best
-  // Daily and today's go sit in two tiles just under it (Craig, 13 Oct; design/prototype/daily-best.html).
+  // The Daily strip (Craig, 29 Oct; "C, the strip, through the day" in design/prototype/home-daily.html): a slim strip
+  // between the logo and Classic, today's crest, club and season, and a line that follows your day: the question, the
+  // finish that beats your best, where a go in progress is, or how today went. Classic stays the big card under it.
   const UP = '<svg class="fr-up" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1 L11 8 H7.5 V11 H4.5 V8 H1 Z" fill="currentColor"/></svg>';
-  function dailyCard() {
-    const G = D2T.game, d = G.dailyEntry(G.today()), res = G.dailyResult(), streak = G.dailyStreak();
-    const sub = res ? `Your best today: ${D2T.ordinal(res.finish)}. Tap to go again and beat it.` : 'They went down for real. How high can you finish?';
-    // white, the date in the top row, today's crest in full colour where the other games keep their mark
-    const tag = G.dailyName(d.date, true).toUpperCase().replace('CHALLENGE ', 'CHALLENGE · ') + (streak ? ` · ${streak} DAY STREAK` : '');
-    return gameCard({ c: '#FFFFFF', cls: 'fr-gm-daily', attrs: 'data-act="daily"', label: `${G.dailyName(d.date)}, ${D2T.esc(d.full || d.name)} ${d.season}`,
-      tag, big: `${D2T.esc(d.name)}<br>${d.season}`, sub, mark: `<img class="fr-gm-crest" src="${d.crest}" alt="">` }) + dailyTiles(d, res);
+  // today's Daily go in progress, if there is one (on screen or in its own slot), with where it stands
+  function dailyLive(date) {
+    const G = D2T.game, st = D2T.state, ok = (r) => r && r.daily === date && !r.recorded && G.live(r) && r.eng.phase !== 'summary';
+    const r = ok(st.run) ? st.run : ok(st.dailyRun) ? st.dailyRun : null;
+    if (!r) return null;
+    const keep = st.run; st.run = r;
+    try {
+      const e = G.eng(), games = G.fixtures().length;
+      if (!e.played || !e.played.length || e.phase === 'setup') return 'Building your squad';
+      const me = G.clubName(), row = G.standings(null).find((x) => x.name === me);
+      return `Matchday ${Math.min(e.played.length, games)} of ${games}${row ? ' · ' + D2T.ordinal(row.pos) : ''}`;
+    } catch (err) { return 'In progress'; } finally { st.run = keep; }
   }
-  function dailyTiles(d, res) {
-    // Your best Daily counts today's too (it showed "None yet" beside your first Daily); the right tile still sets today
-    // against your best other day
-    const G = D2T.game, cmp = G.dailyCompare(), best = cmp.best, top = G.dailyBest(), o = D2T.ordinal, esc = D2T.esc;
-    const crest = (name) => { const c = G.club(name); return c && c.crest ? `<img src="${c.crest}" alt="">` : ''; };
-    const rise = (n) => `<span class="fr-rise">${UP} ${n}</span>`;
-    // the finish first, then the rise (Craig, 23 Oct: "1st" then the up arrow and 17)
-    const left = top ? `<b>${crest(top.club)}${o(top.finish)}${rise(top.rise)}</b><small>${esc(top.club)} · ${o(top.histFinish)} to ${o(top.finish)}</small>`
-      : '<b>None yet</b><small>Play today to set one</small>';
-    let right, newBest = false;
-    if (res) { newBest = cmp.isBest; right = `<b>${crest(d.name)}${o(res.finish)}${rise(res.rise)}</b><small>${newBest ? 'New best' : `${esc(d.name)} · ${o(res.histFinish)} to ${o(res.finish)}`}</small>`; }
-    else if (!best) right = `<b>${crest(d.name)}${esc(d.name)}</b><small>Their real finish: ${o(d.pos)}</small>`;
-    else { const need = d.pos - best.rise; right = need < 1 ? `<b>${crest(d.name)}Still to play</b><small>Their real finish: ${o(d.pos)}</small>`
-      : need === 1 ? `<b>${crest(d.name)}Win the league</b><small>${best.finish > 1 ? 'to beat your best' : 'to match your best'}</small>`
-      : `<b>${crest(d.name)}Finish ${o(need)}</b><small>or higher to beat your best</small>`; }
-    return `<div class="fr-dtiles"><div class="fr-dtile"><i>YOUR BEST DAILY</i>${left}</div><${res ? 'button type="button" data-act="daily-share" aria-label="Share today\'s Daily"' : 'div'} class="fr-dtile${newBest ? ' is-best' : ''}"><i>TODAY'S DAILY</i>${right}</${res ? 'button' : 'div'}></div>`;
+  function dailyStrip() {
+    const G = D2T.game, o = D2T.ordinal, esc = D2T.esc, d = G.dailyEntry(G.today()), res = G.dailyResult(), streak = G.dailyStreak();
+    const date = G.dailyName(d.date, true).replace('Daily Challenge ', '').toUpperCase(), go = dailyLive(d.date);
+    let state, small, plain, on = false;
+    if (go) { state = 'IN PROGRESS'; on = true; small = plain = `${go} · Tap to carry on`; }
+    else if (res) {
+      state = 'COMPLETED'; on = true;
+      const cmp = G.dailyCompare(), how = res.rise > 0 ? `up ${res.rise}` : res.rise < 0 ? `down ${-res.rise}` : 'level';
+      small = `Finished <b>${o(res.finish)}</b>, ${how}${cmp.isBest ? ' · <em>New best</em>' : ''}`;
+      plain = `Finished ${o(res.finish)}, ${how}${cmp.isBest ? ', new best' : ''}`;
+    } else {
+      state = date;
+      const best = G.dailyBest();
+      if (!best) small = plain = `They went down in ${o(d.pos)}. How high can you finish?`;
+      else {
+        const need = d.pos - best.rise;   // the finish that beats your best rise (as the old Today's Daily tile)
+        if (need < 1) small = plain = `Their real finish: ${o(d.pos)}`;
+        else if (need === 1) small = plain = `Win the league to ${best.finish > 1 ? 'beat' : 'match'} your best`;
+        else { small = `Finish <b>${o(need)}</b> or higher to beat your best`; plain = `Finish ${o(need)} or higher to beat your best`; }
+      }
+    }
+    const label = `DAILY CHALLENGE · ${state}${streak ? ` · ${streak} DAY STREAK` : ''}`;
+    const big = `${d.name} ${d.season}`;
+    return `<button class="fr-dstrip fr-in" data-act="daily"${res && !go ? ' data-done="1"' : ''} aria-label="${esc(`Daily Challenge, ${go ? 'in progress' : res ? 'completed' : G.dailyName(d.date, true).replace('Daily Challenge ', '')}${streak ? `, ${streak} day streak` : ''}: ${big}. ${plain}`)}">
+      <img class="fr-dstrip-crest" src="${d.crest}" alt=""><span class="fr-dstrip-txt"><span class="fr-dstrip-lbl${on ? ' on' : ''}">${label}</span>
+      <span class="fr-dstrip-big">${esc(big)}</span><span class="fr-dstrip-sub">${small}</span></span><span class="fr-go">${ARROW}</span></button>`;
   }
-
+  // Your best Daily, a slim row under Your record's four frames once a Daily has been played (Craig, 29 Oct): the finish
+  // and the rise, the club and season, and how many Dailies you have played; tap to share that Daily again
+  function bestDailyRow() {
+    const G = D2T.game, o = D2T.ordinal, esc = D2T.esc, top = G.dailyBest(), n = Object.keys(D2T.state.record.daily || {}).length;
+    if (!top) return '';
+    const c = G.club(top.club), crest = c && c.crest ? `<img src="${c.crest}" alt="">` : '';
+    return `<button type="button" class="fr-dbest" data-act="daily-best" data-date="${esc(top.date)}" aria-label="Your best Daily: ${esc(top.club)} ${esc(top.season || '')}, ${o(top.histFinish)} to ${o(top.finish)}. ${n} Dailies played. Tap to share it">
+      <span class="fr-dbest-l"><i>YOUR BEST DAILY</i><b>${crest}${o(top.finish)}<span class="fr-rise">${UP} ${top.rise}</span></b><small>${esc(top.club)}${top.season ? ' ' + esc(top.season) : ''} · ${o(top.histFinish)} to ${o(top.finish)}</small></span>
+      <span class="fr-dbest-r"><i>DAILIES</i><b>${n}</b></span></button>`;
+  }
 
   // The long logo in two pieces (emblem and name, measured from long.png) so the emblem can turn on its own,
   // each with a glint layer sized to the whole logo so one sweep runs across both.
@@ -155,6 +180,7 @@
       const rec = D2T.game.record(), dreams = D2T.game.dreamRecord(), xr = D2T.game.xRecord();
       const body = D2T.h(`<div class="screen-body fr-home">
         <div class="fr-home-top"><button class="fr-home-logo" aria-label="DROP2TOP">${homeLogo()}</button></div>
+        ${dailyStrip()}
         <button class="fr-card-btn fr-pick fr-classic fr-in" data-act="pick" data-mode="classic">
           <span class="fr-fan" aria-hidden="true">${fanStart().map((c, i) => `<span class="fr-fan-s" style="transform:${FAN_POS[i].t};z-index:${FAN_POS[i].z}">${fanCard(c)}</span>`).join('')}</span>
           <span class="fr-classic-txt"><span class="fr-tag" style="display:block">CLASSIC</span><span class="fr-big" style="display:block">Pick a new club</span><span class="fr-sub" style="display:block">Take them from the drop to the top.</span>
@@ -162,10 +188,9 @@
         ${continueCards()}
         <section class="fr-sect fr-in" aria-label="Your record">
           <div class="fr-sect-h"><h2>Your record</h2><span>${rec.runs} run${rec.runs === 1 ? '' : 's'}</span></div>
-          ${D2T.frRecord(rec, 'dark')}</section>
+          ${D2T.frRecord(rec, 'dark')}${bestDailyRow()}</section>
         <section class="fr-sect fr-in" aria-label="Other games">
           <div class="fr-sect-h"><h2>Other games</h2></div>
-        ${dailyCard()}
         ${gameCard({ c: '#12F06C', attrs: 'data-act="pick" data-mode="clubx"', label: 'Club X', tag: 'CLUB X', big: 'From nowhere to champions', sub: 'Career mode. Replace the worst side, win the league, go again.', mark: `<img src="${D2T.game.club('Club X').crest}" alt="">` })}
         ${g433Card()}
         ${ubCard()}
@@ -235,20 +260,25 @@
         setTimeout(() => { if (root.isConnected) D2T.sheet({ title: 'That Daily has closed', body: `<p class="fr-lead">${D2T.esc(D2T.game.dailyName(dc))} closed at midnight before you finished it. Today's club is ready for everyone.</p>` }); }, 900);
       }
       const startNew = (from, mode) => { D2T.game.newRun(mode); D2T.toBlack('spin', { from }); };
-      // played today's Daily at least once: its tile brings back a slide-up to share it (Craig, 14 Oct)
-      const dshare = body.querySelector('[data-act="daily-share"]');
-      if (dshare) dshare.onclick = () => {
-        const G = D2T.game, t = G.today(), r = G.dailyResult(t), sh = D2T.dailyShare && D2T.dailyShare(t); if (!r || !sh) return;
+      // the strip's label and club line shrink to fit rather than trail off (a long club, a streak on the label)
+      body.querySelectorAll('.fr-dstrip-lbl, .fr-dstrip-big').forEach((el) => {
+        const px = parseFloat(getComputedStyle(el).fontSize); let f = px;
+        while (el.scrollWidth > el.clientWidth + 0.5 && f > px * 0.7) { f -= 0.5; el.style.fontSize = f + 'px'; if (el.classList.contains('fr-dstrip-lbl')) el.style.letterSpacing = Math.max(1, 2 * f / px) + 'px'; }
+      });
+      // the Daily strip: play or carry on; once today's is played, a slide-up to share it or go again (Craig, 14 Oct)
+      const daily = body.querySelector('[data-act="daily"]');
+      if (daily) daily.onclick = (e) => {
+        const G = D2T.game, t = G.today(), from = e.currentTarget, r = G.dailyResult(t), sh = daily.dataset.done && r && D2T.dailyShare && D2T.dailyShare(t);
+        if (!sh) { G.startDaily(); D2T.toBlack(G.stepFor() || 'table', { from }); return; }
         const sign = (v) => (v > 0 ? '+' : '') + v;
         D2T.endSheet({ title: G.dailyName(t), colour: '#FFFFFF', ink: '#0A0A0A',
           lead: `Your best go today: <b>${D2T.esc(r.club)}</b> ${D2T.ordinal(r.histFinish)} to ${D2T.ordinal(r.finish)}, a rise of ${sign(r.rise)}.`,
           buttons: [{ k: 'share', label: 'Share result', primary: true, fn: () => { window.D2TSound && window.D2TSound.play('share'); D2T.share.send(sh); } },
-            { k: 'again', label: 'Go again', fn: () => { G.startDaily(); D2T.toBlack(G.stepFor() || 'table', { from: dshare }); } }] }).open();
+            { k: 'again', label: 'Go again', fn: () => { G.startDaily(); D2T.toBlack(G.stepFor() || 'table', { from }); } }] }).open();
       };
-      const daily = body.querySelector('[data-act="daily"]');
-      if (daily) daily.onclick = (e) => {
-        D2T.game.startDaily(); D2T.toBlack(D2T.game.stepFor() || 'table', { from: e.currentTarget });
-      };
+      // your best Daily in Your record: share that Daily again
+      const dbest = body.querySelector('[data-act="daily-best"]');
+      if (dbest) dbest.onclick = () => { const sh = D2T.dailyShare && D2T.dailyShare(dbest.dataset.date); if (!sh) return; window.D2TSound && window.D2TSound.play('share'); const go = () => (sh.done ? D2T.share.send(sh) : setTimeout(go, 80)); go(); };
       const other = body.querySelector('[data-act="continue-other"]');
       if (other) other.onclick = (e) => { D2T.game.switchToOther(); D2T.toBlack(D2T.game.stepFor() || 'squad', { from: e.currentTarget }); };
       body.querySelectorAll('[data-act="pick"]').forEach((btn) => btn.onclick = (e) => {

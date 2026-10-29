@@ -541,9 +541,11 @@ fs.mkdirSync(OUT, { recursive: true });
   // compared with the first go's own cards, so an earlier run of the same club-season (random seeds) can't upset it
   check(await page.evaluate((first) => { const G = window.D2T.game, S = G.S(), e = G.eng(), key = S.season + ":" + S.clubs[e.club].name, rec = (window.D2T.state.recent || {})[key]; return !!(first.length && rec && rec[0] && rec[0].length === first.length && first.every((id) => rec[0].includes(id)) && e.recent && first.every((id) => e.recent[id] === window.D2TE.RULES.recent[0])); }, firstOffered), "the first go's cards were not remembered as recent for the second go");
   await page.evaluate(() => window.D2T.go("home")); await expectScreen("home"); await wait(800);
-  check(/Your best today/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not show today's best go");
-  check(/TODAY'S DAILY/.test(await page.textContent(".fr-dtiles")) && (await page.$$(".fr-dtile")).length === 2, "home has no best and today tiles under the daily card");
-  check(await page.evaluate(() => !window.D2T.game.dailyResult() || !/None yet/.test(document.querySelector(".fr-dtile").textContent)), "home says no best Daily beside a Daily already played");
+  // the Daily strip (Craig, 29 Oct): a go in progress says so; your best Daily sits under Your record; the Daily left Other games
+  check(/DAILY CHALLENGE · IN PROGRESS/.test(await page.textContent(".fr-dstrip")) && /Tap to carry on/.test(await page.textContent(".fr-dstrip-sub")), "the Daily strip does not show the go in progress");
+  check(/YOUR BEST DAILY/.test(await page.textContent(".fr-dbest")) && /DAILIES\s*1/.test(await page.textContent(".fr-dbest-r")), "Your record has no best Daily row with the Dailies played");
+  check(!(await page.$(".fr-gm-daily")) && !(await page.$(".fr-dtiles")), "the old Daily card is still in Other games");
+  check(await page.evaluate(() => { const s = document.querySelector(".fr-dstrip"), c = document.querySelector(".fr-classic"); return s && c && (s.compareDocumentPosition(c) & Node.DOCUMENT_POSITION_FOLLOWING); }), "the Daily strip is not above Classic");
   check(!!(await page.$('[data-act="continue-other"]')), "the parked run has no Continue card after the daily");
   // the Daily closes at midnight: an unfinished one from yesterday is dropped (no result), the parked run comes back, home says so
   await page.evaluate(() => {
