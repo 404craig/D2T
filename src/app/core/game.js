@@ -683,6 +683,34 @@
   };
 
   // ---------- end of season and the record ----------
+  // The Daily share card's two rows from a finished run (Craig, 29 Oct): the top scorer, and the best card, the highest-rated
+  // card in the final XI or the next highest when he is also the top scorer. Worked out here rather than read from the
+  // engine's bestCard, so a run finished before build 161 gives them too.
+  function dailyRows(run) {
+    const e = run && run.eng, F = e && e.final, S = e && e.seasonKey && GAME.season(e.seasonKey);
+    if (!F || !S) return null;
+    const card = (id) => { try { return GAME.card(S, id); } catch (err) { return null; } };
+    const goals = {}; (e.played || []).forEach((m) => (m.events || []).forEach((ev) => { if (ev.us) goals[ev.id] = (goals[ev.id] || 0) + 1; }));
+    const tsId = F.topScorer ? F.topScorer.id : null, ts = tsId != null && card(tsId);
+    const xi = (e.xi || []).filter((id) => id != null).map(card).filter(Boolean).sort((a, b) => b.ovr - a.ovr || (goals[b.id] || 0) - (goals[a.id] || 0));
+    const bc = F.bestCard != null ? card(F.bestCard) : ((xi[0] && xi[0].id === tsId && xi[1]) || xi[0]);
+    return { topScorer: ts ? { name: ts.name, goals: F.topScorer.goals } : null, best: bc ? { name: bc.name, r: bc.ovr, lv: bc.level, p: bc.pos, crest: bc.club } : null };
+  }
+  // A Daily recorded before build 161 has no rows: fill them in from its finished run if that run is still on the phone
+  // (the run on screen, or the Daily's own slot) and it is the go the record holds (same finish, rise and points).
+  GAME.fillDailyRows = (date) => {
+    const st = D2T.state, days = (st.record && st.record.daily) || {}, ds = date ? [date] : Object.keys(days);
+    let changed = false;
+    ds.forEach((d) => {
+      const r = days[d]; if (!r || r.topScorer || r.best) return;
+      const run = [st.run, st.dailyRun].find((x) => x && x.daily === d && x.eng && x.eng.final && x.eng.final.finish === r.finish && x.eng.final.rise === r.rise && x.eng.final.pts === r.pts);
+      const rows = run && dailyRows(run); if (!rows || (!rows.topScorer && !rows.best)) return;
+      Object.assign(r, rows); changed = true;
+    });
+    if (changed) D2T.save();
+    return changed;
+  };
+  GAME.fillDailyRows();
   GAME.finish = () => {
     const run = D2T.state.run, eng = GAME.eng(), S = GAME.S(), F = eng.final;
     if (!F || run.recorded) return F;
@@ -710,8 +738,7 @@
       // the day's best go counts (biggest rise, then higher finish); goes counts them all
       const was = rec.daily[run.daily], goes = (was && was.goes || (was ? 1 : 0)) + 1;
       // the share card's two rows (Craig, 29 Oct), kept so it can be drawn again from home: the top scorer and the best card
-      const ts = F.topScorer && GAME.card(S, F.topScorer.id), bc = F.bestCard != null && GAME.card(S, F.bestCard);
-      const rows = { topScorer: ts ? { name: ts.name, goals: F.topScorer.goals } : null, best: bc ? { name: bc.name, r: bc.ovr, lv: bc.level, p: bc.pos, crest: bc.club } : null };
+      const rows = dailyRows(run) || {};
       if (!was || F.rise > was.rise || (F.rise === was.rise && F.finish < was.finish)) rec.daily[run.daily] = Object.assign({ n: GAME.dailyNumber(run.daily), club: name, season: S.season, mode, finish: F.finish, histFinish: F.histFinish, rise: F.rise, pts: F.pts, histPts: F.histPts, dream: entry.dream, goes }, rows);
       else was.goes = goes;
     }
