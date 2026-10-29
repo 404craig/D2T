@@ -125,14 +125,33 @@ h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10p
 .shr.solid{background:var(--c,#fff);color:#0A0A0A;border-radius:10px;padding:0 14px;min-height:36px;margin:-6px 0;transform:skewX(-10deg)}
 .shr.solid>*{transform:skewX(10deg)}
 .shr.round{width:44px;justify-content:center;padding:0;border-radius:50%;border:1.5px solid var(--c,#fff);min-height:44px;height:44px;margin:-12px 0}
+
+.tog2{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tog2 button{flex:1 1 auto;min-height:40px;padding:0 10px;border-radius:10px;border:1px solid var(--line);background:#0E0E10;color:#fff;font:800 11.5px var(--font);letter-spacing:.06em;cursor:pointer}
+.tog2 button.on{border-color:var(--g);color:var(--g)}
+/* filled looks: the shield shape as a clip so it can take a gradient */
+.sty-solid .al,.sty-metal .al,.sty-gold .al,.sty-best .al.key{--sp:polygon(1% 8.6%,11% .8%,89% .8%,99% 8.6%,99% 84.4%,50% 99.2%,1% 84.4%);background:none}
+.sty-solid .al::before,.sty-metal .al::before,.sty-gold .al::before,.sty-best .al.key::before{content:"";position:absolute;inset:0;clip-path:var(--sp)}
+.sty-solid .al polygon,.sty-metal .al polygon,.sty-gold .al polygon,.sty-best .al.key polygon{fill:none;stroke:rgba(255,255,255,.35)}
+.sty-solid .al::before,.sty-best .al.key::before{background:var(--c)}
+.sty-metal .al::before{background:linear-gradient(155deg,color-mix(in srgb,var(--c) 55%,#fff) 0%,var(--c) 32%,color-mix(in srgb,var(--c) 62%,#000) 70%,color-mix(in srgb,var(--c) 85%,#fff) 100%)}
+.sty-gold .al::before{background:linear-gradient(155deg,#FFF6C8 0%,#FFD95A 25%,#E3A814 52%,#A87406 74%,#F7CE4A 100%)}
+.sty-solid .al b,.sty-solid .al span,.sty-metal .al b,.sty-metal .al span,.sty-gold .al b,.sty-gold .al span,.sty-best .al.key b,.sty-best .al.key span{color:#0A0A0A}
+/* dark colours (blue) keep white words */
+.sty-solid .al.lt b,.sty-solid .al.lt span,.sty-metal .al.lt b,.sty-metal .al.lt span,.sty-best .al.key.lt b,.sty-best .al.key.lt span{color:#fff}
+.sg{flex:0 0 390px;max-width:100%}.sg h4{font:900 italic 16px var(--font);text-transform:uppercase;margin:0 0 6px}.sg h4 span{color:var(--g)}.sg p{color:var(--soft);font-size:13px;line-height:1.4;margin:0 0 8px;min-height:36px}
+.sg .phone{padding:14px 16px 16px;margin-bottom:8px}
 .notes{max-width:880px;margin-top:34px;color:#CFCFD6;font-size:15px;line-height:1.5}
 .notes h2{font:900 italic 22px var(--font);text-transform:uppercase;color:#fff;margin:0 0 8px}.notes li{margin:0 0 8px}.notes b{color:#fff}
 </style></head><body><div class="wrap">
 <h1>Your record: cards to swipe</h1>
 <h2 class="sec2" style="margin-top:8px">B, refined</h2>
 <p class="lead">Your pick, tidied. <b>Daily first</b>, then Classic and the rest. Every number sits <b>on one line at the same height</b> in every shield, with its label under it (so Goal Rush's last game is just <b>8+</b>). Each page starts with <b>how many you've played</b>. The Daily crest sits <b>in the shield's top corner</b>, so it never pushes the number down.</p>
-<div class="cols"><div class="col"><div class="phone"><div class="sh"><h3>Your record</h3><button class="shr" id="pgSubR" aria-label="Share your Daily record"><span>Share</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7.5 7.5 12 3l4.5 4.5"/><path d="M8 10H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-2"/></svg></button></div><div class="ptabs" id="tabsR"></div><div class="pages" id="pagesR"></div><div class="hint" id="hintR"></div></div></div>
+<div class="cols"><div class="col"><div class="phone"><div class="sh"><h3>Your record</h3><button class="shr" id="pgSubR" aria-label="Share your Daily record"><span>Share</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7.5 7.5 12 3l4.5 4.5"/><path d="M8 10H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-2"/></svg></button></div><div class="ptabs" id="tabsR"></div><div class="pages" id="pagesR"></div><div class="hint" id="hintR"></div></div><div class="tog2" id="styR"></div></div>
 <div class="col"><p class="why" style="min-height:0"><b>Daily:</b> played, best finish, best rise, wins.<br><b>Classic:</b> as now.<br><b>Goal Rush:</b> games, bang on, hit rate, last game (8+ over, 8- short, 0 bang on).<br><b>Unbeaten:</b> runs, best run, topics tried, last run.<br><b>Club X:</b> seasons, titles, top 3, best finish.<br><b>Dare2Dream:</b> runs, dreams, best rise, titles.<br><br>Swipe the shields or tap a tag. <b>Share</b> in the top right, in the page's colour, shares that game's record (the counts it used to show are already on the shields).</p></div></div>
+<h2 class="sec2">Filled shields</h2>
+<p class="lead">The same record with the shields <b>filled</b> instead of dark, the wording in black or white to suit. Each shows the Daily page and the Goal Rush page. Use the buttons under the mock at the top to try them while swiping.</p>
+<div class="cols" id="styGrid" style="gap:16px"></div>
 <h2 class="sec2">The share button</h2>
 <p class="lead">Options for the top right, each shown on the Daily page (white) and the Goal Rush page (yellow). <b>Tap any of them</b> to make it the one on the swipeable mock above.</p>
 <div class="cols" id="shopts" style="gap:16px"></div>
@@ -275,4 +294,19 @@ const btn=(o,c)=>`<button class="shr ${o[3]}" style="--c:${c}">${o[3]==='round'?
 const so=document.getElementById('shopts');
 so.innerHTML=SO.map((o)=>`<div class="so" data-k="${o[0]}"><h4>${o[0]} · <span>${o[1]}</span></h4><p>${o[2]}</p><div class="phone"><div class="sh" style="margin:0"><h3>Your record</h3>${btn(o,C.w)}</div></div><div class="phone"><div class="sh" style="margin:0"><h3>Your record</h3>${btn(o,C.y)}</div></div></div>`).join('');
 [...so.children].forEach((el,i)=>el.onclick=()=>{[...so.children].forEach((x)=>x.classList.toggle('on',x===el));const o=SO[i],b=document.getElementById('pgSubR');b.className='shr '+o[3];b.innerHTML=(o[3]==='round'?'':'<span>Share</span>')+o[4];});
+
+// ---------- filled shield looks ----------
+const STY=[['','Dark','As now: dark shields, numbers in the game\'s colour.'],['sty-solid','Solid','The shield filled with the game\'s colour, black words. Blue (Dare2Dream) keeps white words.'],['sty-metal','Metallic','The game\'s colour with a sheen across it, like the faces of the game\'s cards.'],['sty-gold','Gold','Every shield a gold card face, black words, whatever the game. A trophy cabinet.'],['sty-best','Best lit','Dark shields, with only the one that matters most filled: best finish, bang on, best run, titles.']];
+// which shield is the key one on each page, and which colours need white words
+const KEY=[1,3,1,1,1,1];
+const markKeys=(root)=>root.querySelectorAll('.page').forEach((pg,i)=>pg.querySelectorAll('.al').forEach((sh,j)=>{sh.classList.toggle('key',j===KEY[i]);sh.classList.toggle('lt',sh.style.getPropertyValue('--c').trim()===C.b);}));
+markKeys(document);
+const phR=document.getElementById('pagesR').closest('.phone'),sty=document.getElementById('styR');
+sty.innerHTML=STY.map(([k,n],i)=>`<button class="${i?'':'on'}">${n}</button>`).join('');
+[...sty.children].forEach((b,i)=>b.onclick=()=>{[...sty.children].forEach((x)=>x.classList.toggle('on',x===b));STY.forEach(([k])=>k&&phR.classList.remove(k));if(STY[i][0])phR.classList.add(STY[i][0]);});
+// the grid: Daily and Goal Rush pages in each look
+const page=(k)=>`<div class="quad">${PR[k][3].join('')}</div>`;
+const sg=document.getElementById('styGrid');
+sg.innerHTML=STY.map(([k,n,w])=>`<div class="sg"><h4><span>${n}</span></h4><p>${w}</p><div class="phone ${k}"><div class="pages" style="overflow:visible"><div class="page" style="padding:0">${page(0)}</div></div></div><div class="phone ${k}"><div class="pages" style="overflow:visible"><div class="page" style="padding:0">${page(2)}</div></div></div></div>`).join('');
+sg.querySelectorAll('.phone').forEach((ph,i)=>ph.querySelectorAll('.al').forEach((sh,j)=>{const pg=i%2?2:0;sh.classList.toggle('key',j===KEY[pg]);}));
 </script></body></html>
