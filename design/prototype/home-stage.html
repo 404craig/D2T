@@ -41,7 +41,7 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 .sh svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .sh polygon{fill:none;stroke:rgba(255,255,255,.35);stroke-width:1.4;vector-effect:non-scaling-stroke}
 .sh b{position:relative;font:900 italic 21px/26px var(--f);height:26px;color:#0A0A0A;white-space:nowrap}
-.sh span{position:relative;font:800 8px/1.15 var(--f);letter-spacing:.04em;text-transform:uppercase;color:#0A0A0A;margin-top:5px;padding:0 4px;min-height:2.3em}
+.sh span{position:relative;font:800 9.5px/1.12 var(--f);letter-spacing:.04em;text-transform:uppercase;color:#0A0A0A;margin-top:5px;padding:0 4px;min-height:2.3em}
 .sh.wh b,.sh.wh span{color:#fff}
 .sh .cr{position:absolute;top:7%;right:9%;width:17px;height:17px;object-fit:contain}
 .dots{position:absolute;top:708px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:20}
@@ -54,6 +54,9 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 .bbar{position:absolute;left:18px;right:18px;bottom:30px;display:flex;gap:10px;z-index:20}
 .main{flex:1;min-height:58px;border-radius:29px;border:0;background:var(--k);color:var(--ink,#0A0A0A);font:900 italic 21px var(--f);text-transform:uppercase;letter-spacing:.01em;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:0 18px;cursor:pointer;box-shadow:0 6px 16px -6px var(--k);transition:background .25s,box-shadow .25s,transform .15s}
 .main:active{transform:scale(.97)}
+.main{position:relative;padding:0 46px}
+.parw{position:absolute;right:20px;top:50%;width:20px;height:20px;margin-top:-10px;display:block}
+.parw svg{width:20px;height:20px;display:block}
 .main svg{width:20px;height:20px}.main img{width:26px;height:26px;object-fit:contain}
 .round{flex:none;width:58px;height:58px;border-radius:50%;background:#0E0E10;border:1px solid #26262C;display:grid;place-items:center;color:#fff;cursor:pointer;padding:0}
 .round svg{width:24px;height:24px}
@@ -76,6 +79,11 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 @keyframes shine{0%,40%{background-position:120% 0}70%,100%{background-position:-60% 0}}
 /* Goal Rush: the ball, with formations and real players' shirts floating round it */
 .gr{position:relative;width:340px;height:300px;display:grid;place-items:center}
+.fx{white-space:nowrap;display:inline-flex;align-items:flex-start;vertical-align:top}
+.hy{display:inline-block;height:1.02em;line-height:1.02em}
+.dg{position:relative;display:inline-block;height:1.02em;width:.66em;overflow:hidden;text-align:center}
+.dr{position:absolute;left:0;right:0;top:0;display:flex;flex-direction:column;align-items:center}
+.dr i{display:block;height:1.02em;line-height:1.02em;font-style:inherit}
 .gr .ball{position:relative;width:150px;height:150px;z-index:2;perspective:500px;filter:drop-shadow(0 16px 26px rgba(0,0,0,.6))}
 .gr .ball img{width:100%;display:block;border-radius:50%;animation:roll 48s linear infinite}
 .gr .ball{animation:bob 6s ease-in-out infinite}
@@ -126,18 +134,18 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 .clx img{width:200px;filter:drop-shadow(0 18px 30px rgba(0,0,0,.6));animation:hover 4s ease-in-out infinite}
 @keyframes hover{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
-/* split: New game left, Continue right */
+/* split: New game left in the game's colour, Continue right in the club's colours, equal widths */
 .bbar2,.stackc{display:none}
 .ph.split .bbar{display:none}
-.ph.split .bbar2{position:absolute;left:18px;right:18px;bottom:30px;display:flex;gap:10px;z-index:20}
-.bbar2 button{min-height:58px;border-radius:29px;font:900 italic 18px var(--f);text-transform:uppercase;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:0 12px;white-space:nowrap}
-.bbar2 .newg{flex:1;background:#0E0E10;border:1.5px solid rgba(255,255,255,.28);color:#fff}
-.bbar2 .contg{flex:1.35;border:0;background:var(--k);color:var(--ink,#0A0A0A);box-shadow:0 6px 16px -6px var(--k)}
-.bbar2 .cl1{display:flex;align-items:center;gap:7px;line-height:1}.bbar2 .cl1 img{display:none;width:22px;height:22px;object-fit:contain}
-.bbar2 .cl2{font:800 9.5px var(--f);letter-spacing:.1em;opacity:.8;font-style:normal;line-height:1}
-.ph.split-club .bbar2 .contg{background:linear-gradient(135deg,#7A263A 0%,#7A263A 55%,#1BB1E7 55%,#1BB1E7 100%);color:#fff;box-shadow:0 6px 16px -6px #1BB1E7}
-.ph.split-club .bbar2 .cl1 img{display:block}
-.ph.split-club .bbar2 .cl2{opacity:.95}
+.ph.split .bbar2{position:absolute;left:18px;right:18px;bottom:30px;display:grid;grid-template-columns:1fr 1fr;gap:10px;z-index:20}
+.bbar2 .parw{right:14px}
+.bbar2 button{position:relative;min-height:58px;border-radius:29px;border:0;font:900 italic 16.5px var(--f);text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 34px 0 16px;white-space:nowrap;overflow:hidden}
+.bbar2 .newg{background:var(--k);color:var(--ink,#0A0A0A);box-shadow:0 6px 16px -6px var(--k)}
+/* the club sweep from the home screen's continue card: light at the left, the true colour across the middle, deeper at the right */
+.bbar2 .contg{color:#fff;isolation:isolate;padding:0 36px 0 42px;background:linear-gradient(100deg,var(--c0) 0%,var(--c1) 30%,var(--c1) 55%,var(--c2) 100%);box-shadow:0 6px 16px -6px var(--c1),inset 0 0 0 2px rgba(255,255,255,.18);text-shadow:0 1px 3px rgba(0,0,0,.35)}
+.bbar2 .contg::before{content:"";position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(135deg,rgba(255,255,255,.09) 0 2px,rgba(255,255,255,0) 2px 7px)}
+.bbar2 .contg::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(255,255,255,.32) 0%,rgba(255,255,255,0) 46%)}
+.bbar2 .contg img{position:absolute;left:12px;top:50%;width:26px;height:26px;margin-top:-13px;object-fit:contain;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
 /* stacked: a full Continue in the club's colours above the main button, everything squeezed up */
 .ph.stack .stackc{position:absolute;left:18px;right:18px;bottom:98px;z-index:20;display:flex;align-items:center;gap:12px;min-height:58px;padding:0 18px 0 12px;border-radius:29px;border:0;cursor:pointer;color:#fff;background:linear-gradient(90deg,#7A263A,#5A1A2A);box-shadow:0 0 0 1.5px #1BB1E7 inset,0 6px 16px -6px #1BB1E7;text-align:left}
 .stackc img{width:36px;height:36px;object-fit:contain}
@@ -180,31 +188,17 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 </style></head><body><div class="wrap">
 <div class="intro"><div id="main"></div>
 <div class="side">
-<h1>Home: the stage, round two</h1>
-<p class="lead"><b>Swipe left and right</b>, use the arrows, or the arrow keys. Each game turns in on a big wheel and <b>snaps in with a small bounce</b>.</p>
-<div id="switch"></div>
+<h1>Home: the stage</h1>
+<p class="lead">Settled: <b>share up top</b> beside the ? and the account, <b>Classic in silver</b>. <b>Swipe left and right</b> (or use the arrows or arrow keys); the wheel goes round and round, and each game snaps in with a small bounce.</p>
 <ul>
-<li><b>Round and round:</b> the wheel never ends. Swipe past Tenaball and you're back at the Daily.</li>
-<li><b>Tenaball:</b> its logo big and slowly breathing, and where the shields would be, <b>a Tenaball board filling from 10th up to 1st</b>, each answer lighting up in Tenaball's rainbow, the list climbing as it goes: the Premier League's all-time top ten scorers, from the game's own data.</li>
-<li><b>Daily:</b> in the club's colours, Boro red: the label, the button (white words) and all four shields. The card floats like Club X's badge.</li>
-<li><b>Shields:</b> 80% of the screen's width, no crests on them.</li>
-<li><b>Titles:</b> the game's name a little bigger than before, in its colour, over the headline.</li>
-<li><b>The ? and the account</b> sit together top right, the same round buttons. The ? opens the rules for the game you're on.</li>
-<li><b>Arrows</b> back on both sides so people know to swipe; each hides at the end of the row.</li>
-<li><b>The Play button</b> is the game's own: round ends, uppercase black italic, the soft glow.</li>
-<li><b>Classic:</b> the fan works like home does now: the three cards turn round, and <b>as they start to move</b>, the card heading to the back fades into a new club, as if a new card is shuffled in. Every card is now exactly the same size, so nothing jumps. (Here every 4 seconds; on home it's every 10 to 15.)</li>
-<li><b>Goal Rush:</b> seven floating things (two formations, three real players' shirts in mixed kits, and two of the game's <b>empty shirts</b>: a DEF and a ?), coming in and out slowly, some in front of the ball and some behind. Each shirt's <b>goals roll up and land</b> as it appears, and a few <b>smaller balls</b> drift round too. The ball turns in 3D.</li>
-<li><b>Unbeaten:</b> no emblem. <b>two club cards</b>, as the game shows its club stats: <b>Man Utd 1999/00, 91 points</b> on the left, and on the right a card that <b>spins in every 10 seconds</b> (Arsenal, Chelsea, Liverpool, Spurs) and lands on <b>Man City 2017/18, ?</b>. Real points from the game's data.</li>
+<li><b>Buttons:</b> the arrow now sits at the right-hand end of the button, near the curve, and is centred top to bottom.</li>
+<li><b>Shields:</b> labels a touch bigger, the longer ones over two lines (League / titles).</li>
+<li><b>Goal Rush:</b> the <b>?-?-?</b> rolls up like the game's fruit machine numbers to a formation (4-3-3), holds, rolls back to ?-?-?, then on to the next. The ball keeps its shape and turns slowly.</li>
+<li><b>Tenaball:</b> the board fills 4th, 3rd, 2nd, 1st, in the Premier League's green to teal.</li>
 </ul></div></div>
-<h2 class="sec">Carry on where you left off</h2>
-<p class="lead">Ways the stage could show a game you're part way through, here a Classic run with West Ham 2010/11, matchday 14, 6th. <b>F, G and H are new</b>: a split New game / Continue, and a stacked Continue. A to E are the earlier ideas. A small green dot on the page dots marks any game with a run waiting.</p>
-<div class="cols" id="conts"></div>
-<h2 class="sec">Classic's colour</h2>
-<p class="lead">Green is Club X's, so Classic moves off it. Three options, each a working phone. The switch beside the main phone tries them all.</p>
-<div class="cols" id="colours"></div>
-<h2 class="sec">Share</h2>
-<p class="lead">Three places for share. It shares the record of the game on screen, with the arrow you picked. Tenaball has none (its scores live in Tenaball).</p>
-<div class="cols" id="shares"></div>
+<h2 class="sec">With a game going</h2>
+<p class="lead">Once a game has started, the bottom splits into two equal buttons: <b>New game</b> in the game's own colour (silver for Classic) and <b>Continue</b> in the club's colours with the home screen's club sweep, its badge on the left and the arrow on the right. Here a Classic run with West Ham 2010/11.</p>
+<div class="cols" id="going"></div>
 </div>
 <script>
 const UPI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
@@ -219,11 +213,11 @@ const hex=(h)=>[1,3,5].map((i)=>parseInt(h.slice(i,i+2),16));
 const mix=(a,b,t)=>{const A=hex(a),B=hex(b);return '#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join('');};
 const metal=(c)=>`--k2:${c};--m1:${mix(c,'#ffffff',.45)};--m2:${mix(c,'#000000',.38)};--m3:${mix(c,'#ffffff',.15)}`;
 const dark=(c)=>{const [r,g,b]=hex(c);return (.299*r+.587*g+.114*b)<150;};
-const shields=(st,k)=>st.map(([n,l,cr,c])=>`<div class="sh${dark(c||k)?' wh':''}" style="${metal(c||k)}">${FR}${cr?`<img class="cr" src="${cr}" alt="">`:''}<b>${n}</b><span>${l}</span></div>`).join('');
+const shields=(st,k)=>st.map(([n,l,cr,c])=>`<div class="sh${dark(c||k)?' wh':''}" style="${metal(c||k)}">${FR}${cr?`<img class="cr" src="${cr}" alt="">`:''}<b>${n}</b><span>${l.length>7&&l.includes(' ')?l.replace(/ (?=[^ ]*$)/,'<br>'):l}</span></div>`).join('');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 // the all-time Premier League top ten, from the game's own data (career goals in the Goal Rush lists)
 const TOP10=[['Alan Shearer',260],['Harry Kane',213],['Wayne Rooney',208],['Mohamed Salah',193],['Andy Cole',187],['Sergio Agüero',184],['Frank Lampard',177],['Thierry Henry',175],['Robbie Fowler',163],['Jermain Defoe',162]];
-const RUN={accent:'#1BB1E7',ink:'#3B0F1E',crest:'home-new/west-ham.png',card:'home-new/cwhu.png',club:'West Ham',season:'2010/11',md:14,pos:'6th',pts:21};
+const RUN={club2:'#7A263A',accent:'#1BB1E7',ink:'#3B0F1E',crest:'home-new/west-ham.png',card:'home-new/cwhu.png',club:'West Ham',season:'2010/11',md:14,pos:'6th',pts:21};
 
 function games(cont){
  const G=[
@@ -237,7 +231,7 @@ function games(cont){
   {id:'clubx',k:'#12F06C',name:'Club X',hl:'Career mode',sb:'Draft 11, replace the worst side, win the league. Then go again.',play:'Play Club X',
    art:()=>`<div class="clx"><img src="share-fx/club_x.png" alt="Club X"></div>`,st:[['4','Seasons'],['2','Titles'],['3','Top 3'],['1st','Best finish']],
    rules:'Spin three seasons and pick one. Club X takes the bottom club\'s place. Draft 11 one shirt at a time, keeper first, then play the season and win the league. Your career carries on, season after season.'},
-  {id:'goal',k:'#FFD21F',name:'Goal Rush',hl:'Score exactly <span style="white-space:nowrap">?-?-?</span>',sb:'Pick 11 real players. Their career goals must hit the target.',play:'Play Goal Rush',
+  {id:'goal',k:'#FFD21F',name:'Goal Rush',hl:'Score exactly <span class="fx"><span class="dg"><span class="dr">?</span></span><span class="hy">-</span><span class="dg"><span class="dr">?</span></span><span class="hy">-</span><span class="dg"><span class="dr">?</span></span></span>',sb:'Pick 11 real players. Their career goals must hit the target.',play:'Play Goal Rush',
    art:()=>`<div class="gr"><div class="ball"><img src="share-fx/goal_rush.png" alt=""></div></div>`,st:[['12','Games'],['3','Bang on'],['25%','Hit rate'],['8+','Last game']],
    rules:'Each game picks a formation, and its number is your target: 3-5-2 means score exactly 352. Spin three real players for an open shirt and pick one. Get your XI\'s career Premier League goals to the number exactly.'},
   {id:'ub',k:'#22D3EE',name:'Unbeaten Run',hl:'Higher or lower?',sb:'One stat, real Premier League numbers. How long can you go?',play:'Start a run',
@@ -273,7 +267,7 @@ ${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.board?`<div cl
 <button class="sw l" aria-label="Previous game">${CHL}</button><button class="sw r" aria-label="Next game">${CHR}</button>
 <div class="dots">${G.map((g)=>`<i class="${g.live?'live':''}"></i>`).join('')}</div>
 <div class="cont-line"></div>
-<div class="bbar2"><button class="newg">New game</button><button class="contg"><span class="cl1"><img src="${RUN.crest}" alt="">Continue</span><span class="cl2">${RUN.club} ${RUN.season.replace('20','')} · ${RUN.pos}</span></button></div>
+<div class="bbar2"><button class="newg">New game<span class="parw">${UPI}</span></button><button class="contg" style="--c0:${mix(RUN.club2,'#FFFFFF',.4)};--c1:${RUN.club2};--c2:${mix(RUN.club2,'#000000',.45)}"><img src="${RUN.crest}" alt="">Continue<span class="parw">${UPI}</span></button></div>
 <button class="stackc"><img src="${RUN.crest}" alt=""><span><b>Continue</b><small>${RUN.club} ${RUN.season} · Matchday ${RUN.md} · ${RUN.pos}</small></span>${UPI}</button>
 <div class="bbar${SH==='bar'?' three':''}"><button class="round" aria-label="Start over" style="display:none">${RESPIN}</button><button class="main"><span class="plbl"></span></button>${SH==='bar'?`<button class="round shr" aria-label="Share">${SHARE}</button>`:''}</div>
 <div class="scrim"></div><div class="sheet"><div class="bar"><i></i></div><div class="sb2"></div></div>`;
@@ -286,7 +280,7 @@ ${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.board?`<div cl
   const f=Math.floor(pos),i0=((f%N)+N)%N,i1=(i0+1)%N,t=pos-f,k=mix(G[i0].k,G[i1].k,t);
   ph.style.setProperty('--k',k);bg.style.background=`radial-gradient(70% 42% at 50% 36%,${k}55,transparent 70%),radial-gradient(120% 55% at 50% 112%,${k}30,#000 70%)`;
   const n=((Math.round(pos)%N)+N)%N;DT.forEach((d,i)=>d.classList.toggle('on',i===n));
-  if(n!==shown){shown=n;const g=G[n];ph.classList.toggle('split',!!g.split);ph.classList.toggle('split-club',g.split==='club');ph.classList.toggle('stack',!!g.stack);if(g.board&&ph.boardStart)ph.boardStart();ph.style.setProperty('--ink',g.ink||'#0A0A0A');$('.plbl').innerHTML=(g.playImg?`<img src="${g.playImg}" alt=""> `:'')+g.play+(g.playImg?'':` ${UPI}`);$('.round').style.display=g.round?'':'none';$('.round').classList.toggle('off',!g.round);ph.querySelectorAll('.shr').forEach((b)=>{b.style.visibility=g.st.length?'visible':'hidden';});$('.cont-line').innerHTML=g.contLine||'';}
+  if(n!==shown){shown=n;const g=G[n];ph.classList.toggle('split',!!g.split);ph.classList.toggle('split-club',g.split==='club');ph.classList.toggle('stack',!!g.stack);if(g.board&&ph.boardStart)ph.boardStart();ph.style.setProperty('--ink',g.ink||'#0A0A0A');$('.plbl').innerHTML=g.play+`<span class="parw">${UPI}</span>`;$('.round').style.display=g.round?'':'none';$('.round').classList.toggle('off',!g.round);ph.querySelectorAll('.shr').forEach((b)=>{b.style.visibility=g.st.length?'visible':'hidden';});$('.cont-line').innerHTML=g.contLine||'';}
  }
  // a spring with a little overshoot: the bounce as it snaps
  function settle(){cancelAnimationFrame(anim);let last=performance.now();
@@ -333,6 +327,14 @@ ${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.board?`<div cl
   const spin=()=>{at+=R.length;strip.animate([{transform:`translateY(${-(at-R.length)*H}px)`},{transform:`translateY(${-at*H-10}px)`,offset:.86},{transform:`translateY(${-at*H}px)`}],{duration:1400,easing:'cubic-bezier(.3,.05,.2,1)',fill:'forwards'});
    if(at>=R.length*7){setTimeout(()=>{at=4;strip.getAnimations().forEach((a)=>a.cancel());strip.style.transform=`translateY(${-at*H}px)`;},1600);}};
   if(!reduced)setInterval(spin,10000);}
+ // Goal Rush's ?-?-?: each figure rolls up like a reel to a formation, holds, rolls on to ?, then the next formation
+ const fx=ph.querySelector('.fx');
+ if(fx&&!reduced){const DR=[...fx.querySelectorAll('.dr')],FS=['433','442','352','451','343','532','424','541'];let fi=0;
+  const roll=(el,to,delay)=>{const pool='0123456789';let seq=[];for(let k=0;k<7;k++)seq.push(pool[Math.floor(Math.random()*10)]);seq.push(to);
+   const cur=el.lastElementChild?el.lastElementChild.textContent:'?';el.innerHTML=[cur,...seq].map((c)=>`<i>${c}</i>`).join('');el.style.transition='none';el.style.transform='translateY(0)';void el.offsetHeight;
+   setTimeout(()=>{el.style.transition='transform 1.1s cubic-bezier(.2,.75,.25,1.12)';el.style.transform=`translateY(-${seq.length*1.02}em)`;},delay);};
+  const cyc=()=>{const f=FS[fi++%FS.length];DR.forEach((el,i)=>roll(el,f[i],i*160));setTimeout(()=>{DR.forEach((el,i)=>roll(el,'?',i*160));},3600);};
+  DR.forEach((el)=>{el.innerHTML='<i>?</i>';});setTimeout(cyc,900);setInterval(cyc,6400);}
  const tbl=ph.querySelector('.tbl');
  if(tbl){const rows=[...tbl.children],RH=41,VIS=3,TOP=rows.length;let r=TOP;
   const show=()=>{const top=Math.max(0,r-VIS);tbl.style.transform=`translateY(${-top*RH+4}px)`;rows[r-1].classList.add('on');};
@@ -355,31 +357,9 @@ ${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.board?`<div cl
  bar.addEventListener('pointerup',(e)=>{if(!sd)return;sheet.style.transition='';if(!sd.m||e.clientY-sd.y>80)close();else sheet.style.transform='';sd=null;});
  render();return ph;}
 
-let main,SHV='top';const MH=document.getElementById('main');
-const build=()=>{MH.innerHTML='';main=stage(MH,null,1,{share:SHV});};build();
-const sw=document.getElementById('switch');
-const KS=[['#C9D0D9','Silver'],['#FFFFFF','White'],['#FF3EA5','Pink'],['#12F06C','Green (now)']],SV=[['top','Share by the ?'],['shields','Share above the shields'],['bar','Share in the bottom bar']];
-sw.innerHTML=`<div class="sgrp"><b>Classic's colour</b>${KS.map(([k,n])=>`<button data-k="${k}"><i style="background:${k}"></i>${n}</button>`).join('')}</div><div class="sgrp"><b>Share</b>${SV.map(([v,n])=>`<button data-v="${v}">${n}</button>`).join('')}</div>`;
-const mark=()=>{sw.querySelectorAll('[data-k]').forEach((b)=>b.classList.toggle('on',b.dataset.k===CLASSIC_K));sw.querySelectorAll('[data-v]').forEach((b)=>b.classList.toggle('on',b.dataset.v===SHV));};
-sw.querySelectorAll('[data-k]').forEach((b)=>b.onclick=()=>{CLASSIC_K=b.dataset.k;build();mark();});sw.querySelectorAll('[data-v]').forEach((b)=>b.onclick=()=>{SHV=b.dataset.v;build();mark();});
-CLASSIC_K='#C9D0D9';build();mark();
+CLASSIC_K='#C9D0D9';
+const main=stage(document.getElementById('main'),null,1,{share:'top'});
 // arrow keys drive the main phone
 document.addEventListener('keydown',(e)=>{if(e.key==='ArrowRight')main.step(1);if(e.key==='ArrowLeft')main.step(-1);});
-const C=[['F','Split, with a line','After a game has started, the bottom splits: <b>New game</b> on the left, <b>Continue</b> on the right in the game\'s colour, with <b>a line on the button</b> saying which team and where you are.'],
- ['G','Split, in the club\'s colours','The same split, with <b>Continue in the club\'s colours</b> (West Ham\'s claret and blue) and its crest, so you can see whose run it is at a glance.'],
- ['H','Stacked','Everything on the stage <b>squeezes up</b> a little and a <b>full-width Continue</b> sits above the main button, in the club\'s colours with its badge, the club, matchday and position. The main button below starts a new game.'],
- ['A','The button','The stage stays as it is; <b>Continue</b>, a line above it says where you are, and the <b>respin arrow</b> beside it starts over (it asks first).'],
- ['B','Your club on stage','<b>Your club takes the stage</b>: its card where the fan was, its name as the headline, and the four shields switch to <b>this run</b>: position, points, played, team rating. Continue, with the respin arrow to start over.'],
- ['C','A banner','Nothing on the stage changes: a <b>Carry on banner</b> sits across the top with the club, matchday, position and points, and a round go button. Continue below, with the respin arrow to start over.'],
- ['D','The ring','The club\'s crest inside a <b>ring that fills as the season goes</b> (14 of 38), your position in a green badge on its edge. Continue, with the respin arrow to start over.'],
- ['E','The table','A slice of <b>the league table</b> around you, your row lit green, so you see the race before you carry on. Continue, with the respin arrow to start over.']];
-const cw=document.getElementById('conts');
-C.forEach(([k,n,w])=>{const col=document.createElement('div');col.className='col';col.innerHTML=`<h3>${k} · <span>${n}</span></h3><p>${w}</p>`;cw.appendChild(col);stage(col,k,1,{share:'top'});});
-const KC=[['#C9D0D9','Silver','Silver like a trophy, and the metallic shields look like real silverware. Black words, a cool glow, and nothing else in the game is grey. It sits well between the Daily\'s club colour and Club X\'s green.'],['#FF3EA5','Pink','The most different from every other game, and loud. Black words on the button read poorly, so it takes white words.'],['#FFFFFF','White','Clean and classic, like the D2T logo itself, with black words. The Daily used white before it took on the club\'s colours, so it\'s free now.']];
-const kc=document.getElementById('colours');
-KC.forEach(([k,n,w])=>{const col=document.createElement('div');col.className='col';col.innerHTML=`<h3><span style="color:${k}">${n}</span></h3><p>${w}</p>`;kc.appendChild(col);CLASSIC_K=k;stage(col,null,1,{share:'top'});});
-const SC=[['top','By the ?','A <b>round share button</b> beside the ? and the account, the same style, top right. Always in reach, never in the way. It shares the record of the game you\'re on.',null],['shields','Above the shields','A small <b>SHARE</b> with the arrow, in the game\'s colour, <b>just above the shields on the right</b>, so it sits with the numbers it shares.',null],['bar','In the bottom bar','<b>Play in the middle</b>, the respin arrow left (when a game has started) and <b>share right</b>: the thumb finds all three. Shown here with a Classic run going, so all three show.','A']];
-const sc=document.getElementById('shares');
-SC.forEach(([v,n,w,c])=>{const col=document.createElement('div');col.className='col';col.innerHTML=`<h3>${n}</h3><p>${w}</p>`;sc.appendChild(col);CLASSIC_K='#C9D0D9';stage(col,c,1,{share:v});});
-CLASSIC_K='#C9D0D9';
+const gc=document.createElement('div');gc.className='col';document.getElementById('going').appendChild(gc);stage(gc,'F',1,{share:'top'});
 </script></body></html>
