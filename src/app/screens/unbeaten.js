@@ -745,7 +745,7 @@
         const lastCall = cleared ? null : { a: run.cur, b: run.next, higher: !!run.said };
         // the banter is picked against the best before this run (prev) and remembered, so the next sheet avoids it
         const said = banter(R, bucketFor(n, prev, cleared), n, prev);
-        R.runs++; if (newBest) R.best[s.id] = n; R.run = null; save(); bestLine(s);
+        R.runs++; R.lastRun = n; if (newBest) R.best[s.id] = n; R.run = null; save(); bestLine(s);
         if (newBest) { snd('highScore'); highScore(); }
         // the end sheet waits for the HIGH SCORE flash to pass
         const show = () => {
