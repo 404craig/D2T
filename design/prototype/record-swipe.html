@@ -145,7 +145,7 @@ h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10p
 .notes h2{font:900 italic 22px var(--font);text-transform:uppercase;color:#fff;margin:0 0 8px}.notes li{margin:0 0 8px}.notes b{color:#fff}
 </style></head><body><div class="wrap">
 <h1>Your record: cards to swipe</h1>
-<h2 class="sec2" style="margin-top:8px">B, refined</h2>
+<h2 class="sec2" style="margin-top:8px">B, refined: metallic, paper plane</h2>
 <p class="lead">Your pick, tidied. <b>Daily first</b>, then Classic and the rest. Every number sits <b>on one line at the same height</b> in every shield, with its label under it (so Goal Rush's last game is just <b>8+</b>). Each page starts with <b>how many you've played</b>. The Daily crest sits <b>in the shield's top corner</b>, so it never pushes the number down.</p>
 <div class="cols"><div class="col"><div class="phone"><div class="sh"><h3>Your record</h3><button class="shr" id="pgSubR" aria-label="Share your Daily record"><span>Share</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7.5 7.5 12 3l4.5 4.5"/><path d="M8 10H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-2"/></svg></button></div><div class="ptabs" id="tabsR"></div><div class="pages" id="pagesR"></div><div class="hint" id="hintR"></div></div><div class="tog2" id="styR"></div></div>
 <div class="col"><p class="why" style="min-height:0"><b>Daily:</b> played, best finish, best rise, wins.<br><b>Classic:</b> as now.<br><b>Goal Rush:</b> games, bang on, hit rate, last game (8+ over, 8- short, 0 bang on).<br><b>Unbeaten:</b> runs, best run, topics tried, last run.<br><b>Club X:</b> seasons, titles, top 3, best finish.<br><b>Dare2Dream:</b> runs, dreams, best rise, titles.<br><br>Swipe the shields or tap a tag. <b>Share</b> in the top right, in the page's colour, shares that game's record (the counts it used to show are already on the shields).</p></div></div>
@@ -293,6 +293,7 @@ const SO=[['1','Send','A paper plane after the word. Reads as "send it to your m
 const btn=(o,c)=>`<button class="shr ${o[3]}" style="--c:${c}">${o[3]==='round'?'':'<span>Share</span>'}${o[4]}</button>`;
 const so=document.getElementById('shopts');
 so.innerHTML=SO.map((o)=>`<div class="so" data-k="${o[0]}"><h4>${o[0]} · <span>${o[1]}</span></h4><p>${o[2]}</p><div class="phone"><div class="sh" style="margin:0"><h3>Your record</h3>${btn(o,C.w)}</div></div><div class="phone"><div class="sh" style="margin:0"><h3>Your record</h3>${btn(o,C.y)}</div></div></div>`).join('');
+{const b=document.getElementById('pgSubR');b.className='shr';b.innerHTML='<span>Share</span>'+I.send;so.children[0].classList.add('on');}
 [...so.children].forEach((el,i)=>el.onclick=()=>{[...so.children].forEach((x)=>x.classList.toggle('on',x===el));const o=SO[i],b=document.getElementById('pgSubR');b.className='shr '+o[3];b.innerHTML=(o[3]==='round'?'':'<span>Share</span>')+o[4];});
 
 // ---------- filled shield looks ----------
@@ -302,8 +303,8 @@ const KEY=[1,3,1,1,1,1];
 const markKeys=(root)=>root.querySelectorAll('.page').forEach((pg,i)=>pg.querySelectorAll('.al').forEach((sh,j)=>{sh.classList.toggle('key',j===KEY[i]);sh.classList.toggle('lt',sh.style.getPropertyValue('--c').trim()===C.b);}));
 markKeys(document);
 const phR=document.getElementById('pagesR').closest('.phone'),sty=document.getElementById('styR');
-sty.innerHTML=STY.map(([k,n],i)=>`<button class="${i?'':'on'}">${n}</button>`).join('');
-[...sty.children].forEach((b,i)=>b.onclick=()=>{[...sty.children].forEach((x)=>x.classList.toggle('on',x===b));STY.forEach(([k])=>k&&phR.classList.remove(k));if(STY[i][0])phR.classList.add(STY[i][0]);});
+sty.innerHTML=STY.map(([k,n],i)=>`<button class="${i===2?'on':''}">${n}</button>`).join('');phR.classList.add('sty-metal');
+[...sty.children].forEach((b,i)=>b.onclick=()=>{phR.classList.remove('sty-metal');[...sty.children].forEach((x)=>x.classList.toggle('on',x===b));STY.forEach(([k])=>k&&phR.classList.remove(k));if(STY[i][0])phR.classList.add(STY[i][0]);});
 // the grid: Daily and Goal Rush pages in each look
 const page=(k)=>`<div class="quad">${PR[k][3].join('')}</div>`;
 const sg=document.getElementById('styGrid');
