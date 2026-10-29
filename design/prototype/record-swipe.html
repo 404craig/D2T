@@ -109,6 +109,7 @@ h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10p
 .tk .lb{margin-top:4px;font-size:10px}
 
 /* B refined: the number always at the same height, the label under it */
+.shr{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin:-10px -6px -10px 0;padding:0 6px;background:none;border:0;color:var(--c,#fff);font:800 14px var(--font);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
 .al{justify-content:flex-start;padding:30% 0 0}
 .al b{font-size:30px;line-height:34px;height:34px;white-space:nowrap}
 .al span{margin-top:7px}
@@ -119,8 +120,8 @@ h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10p
 <h1>Your record: cards to swipe</h1>
 <h2 class="sec2" style="margin-top:8px">B, refined</h2>
 <p class="lead">Your pick, tidied. <b>Daily first</b>, then Classic and the rest. Every number sits <b>on one line at the same height</b> in every shield, with its label under it (so Goal Rush's last game is just <b>8+</b>). Each page starts with <b>how many you've played</b>. The Daily crest sits <b>in the shield's top corner</b>, so it never pushes the number down.</p>
-<div class="cols"><div class="col"><div class="phone"><div class="sh"><h3>Your record</h3><small id="pgSubR">9 Dailies</small></div><div class="ptabs" id="tabsR"></div><div class="pages" id="pagesR"></div><div class="hint" id="hintR"></div></div></div>
-<div class="col"><p class="why" style="min-height:0"><b>Daily:</b> played, best finish, best rise, wins.<br><b>Classic:</b> as now.<br><b>Goal Rush:</b> games, bang on, hit rate, last game (8+ over, 8- short, 0 bang on).<br><b>Unbeaten:</b> runs, best run, topics tried, last run.<br><b>Club X:</b> seasons, titles, top 3, best finish.<br><b>Dare2Dream:</b> runs, dreams, best rise, titles.<br><br>Swipe the shields or tap a tag. The count in the top right changes with the page.</p></div></div>
+<div class="cols"><div class="col"><div class="phone"><div class="sh"><h3>Your record</h3><button class="shr" id="pgSubR" aria-label="Share your Daily record"><span>Share</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7.5 7.5 12 3l4.5 4.5"/><path d="M8 10H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-2"/></svg></button></div><div class="ptabs" id="tabsR"></div><div class="pages" id="pagesR"></div><div class="hint" id="hintR"></div></div></div>
+<div class="col"><p class="why" style="min-height:0"><b>Daily:</b> played, best finish, best rise, wins.<br><b>Classic:</b> as now.<br><b>Goal Rush:</b> games, bang on, hit rate, last game (8+ over, 8- short, 0 bang on).<br><b>Unbeaten:</b> runs, best run, topics tried, last run.<br><b>Club X:</b> seasons, titles, top 3, best finish.<br><b>Dare2Dream:</b> runs, dreams, best rise, titles.<br><br>Swipe the shields or tap a tag. <b>Share</b> in the top right, in the page's colour, shares that game's record (the counts it used to show are already on the shields).</p></div></div>
 <h2 class="sec2">Earlier ideas</h2>
 <p class="lead"><b>Five more</b>, from your note on B: one set of cards you swipe left and right, <b>no second menu</b>, one card per game, and only the number that matters (Unbeaten is just your best run). Not all shields. Swipe them.</p>
 <div class="cols" id="nv"></div>
@@ -238,7 +239,7 @@ const tR=document.getElementById('tabsR'),pR=document.getElementById('pagesR'),s
 tR.innerHTML=PR.map(([t,c],i)=>`<button style="--c:${c}" class="${i?'':'on'}"><span>${t}</span></button>`).join('');
 pR.innerHTML=PR.map(([, , ,q])=>`<div class="page"><div class="quad">${q.join('')}</div></div>`).join('');
 const dR=dots(document.getElementById('hintR'),PR.length);
-const setR=(k)=>{[...tR.children].forEach((b,i)=>b.classList.toggle('on',i===k));dR.forEach((d,i)=>{d.classList.toggle('on',i===k);d.style.background=i===k?PR[k][1]:'';});sR.textContent=PR[k][2];tR.children[k].scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'});};
+const setR=(k)=>{[...tR.children].forEach((b,i)=>b.classList.toggle('on',i===k));dR.forEach((d,i)=>{d.classList.toggle('on',i===k);d.style.background=i===k?PR[k][1]:'';});sR.style.setProperty('--c',PR[k][1]);sR.setAttribute('aria-label','Share your '+PR[k][0].toLowerCase()+' record');tR.children[k].scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'});};
 pR.addEventListener('scroll',()=>setR(Math.round(pR.scrollLeft/pR.clientWidth)),{passive:true});
 [...tR.children].forEach((b,i)=>b.onclick=()=>pR.scrollTo({left:i*pR.clientWidth,behavior:'smooth'}));setR(0);
 </script></body></html>
