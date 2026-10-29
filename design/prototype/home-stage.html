@@ -78,6 +78,11 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 .gr .pl img{width:50px;display:block;margin:0 auto;filter:drop-shadow(0 6px 10px rgba(0,0,0,.6))}
 .gr .pl b{display:block;font:900 italic 10.5px var(--f);text-transform:uppercase;margin-top:1px;text-shadow:0 1px 4px #000}
 @keyframes float{0%{opacity:0;translate:0 12px}20%,70%{opacity:1}50%{translate:0 -10px}100%{opacity:0;translate:0 -20px}}
+.gr .mb{position:absolute;opacity:0;animation:drift 13s ease-in-out infinite;z-index:1}
+.gr .mb.over{z-index:3}
+.gr .mb img{display:block;width:100%;filter:drop-shadow(0 5px 8px rgba(0,0,0,.6));animation:spin 9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes drift{0%{opacity:0;translate:0 14px}18%,74%{opacity:1}50%{translate:6px -12px}100%{opacity:0;translate:0 -22px}}
 .gr .pl .sh2{position:relative;width:50px;margin:0 auto}
 .gr .pl .sh2 img{width:100%;display:block;filter:drop-shadow(0 6px 10px rgba(0,0,0,.6))}
 .gr .pl .num{position:absolute;left:0;right:0;top:56%;text-align:center;font:900 italic 17px/1 var(--f);transform:translateY(-50%);paint-order:stroke;-webkit-text-stroke:0 transparent}
@@ -123,7 +128,7 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 .sheet p{font:600 15px/1.5 var(--f);color:#CFCFD6;margin:0 0 10px}
 .sheet .sbtn{display:flex;align-items:center;justify-content:center;width:100%;min-height:58px;border-radius:29px;background:#12F06C;color:#0A0A0A;font:900 italic 19px var(--f);text-transform:uppercase;border:0;margin-top:8px}
 .scrim{position:absolute;inset:0;z-index:45;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .3s}.scrim.on{opacity:1;pointer-events:auto}
-@media (prefers-reduced-motion:reduce){.gr .ball img,.gr .fl,.ub .ar svg,.clx img,.dcard::after{animation:none}.gr .fl{opacity:1}.cfan .s{transition:none}}
+@media (prefers-reduced-motion:reduce){.gr .mb,.gr .mb img,.gr .ball img,.gr .fl,.ub .ar svg,.clx img,.dcard::after{animation:none}.gr .fl{opacity:1}.cfan .s{transition:none}}
 </style></head><body><div class="wrap">
 <div class="intro"><div id="main"></div>
 <div class="side">
@@ -137,7 +142,7 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 <li><b>Arrows</b> back on both sides so people know to swipe; each hides at the end of the row.</li>
 <li><b>The Play button</b> is the game's own: round ends, uppercase black italic, the soft glow.</li>
 <li><b>Classic:</b> the fan works like home does now: the three cards turn round, and <b>as they start to move</b>, the card heading to the back fades into a new club, as if a new card is shuffled in. Nothing snaps. (Here every 4 seconds; on home it's every 10 to 15.)</li>
-<li><b>Goal Rush:</b> seven floating things (three formations, four real players' shirts in mixed kits), coming in and out slowly, some in front of the ball and some behind. Each shirt's <b>goals roll up and land</b> as it appears. The ball turns in 3D.</li>
+<li><b>Goal Rush:</b> seven floating things (three formations, four real players' shirts in mixed kits), coming in and out slowly, some in front of the ball and some behind. Each shirt's <b>goals roll up and land</b> as it appears, and a few <b>smaller balls</b> drift round too. The ball turns in 3D.</li>
 <li><b>Unbeaten:</b> no emblem. <b>two club cards</b>, as the game shows its club stats: <b>Man Utd 1999/00, 91 points</b> on the left, and on the right a card that <b>spins in every 10 seconds</b> (Arsenal, Chelsea, Liverpool, Spurs) and lands on <b>Man City 2017/18, ?</b>. Real points from the game's data.</li>
 </ul></div></div>
 <h2 class="sec">Carry on where you left off</h2>
@@ -247,7 +252,9 @@ ${g.banner?`<div class="banner"><img src="${RUN.crest}" alt=""><span class="t"><
    if(t==='f')e.innerHTML=`<span class="fm">${v}</span>`;
    else{const [g,ink,st]=GL[v];e.innerHTML=`<div class="sh2"><img src="home-new/grb-${v}.png" alt=""><span class="num" style="color:${ink};${st?`-webkit-text-stroke:2px ${st};`:''}">${g}</span></div><b>${v}</b>`;
     const num=e.querySelector('.num');const go=()=>roll(num,g);e.addEventListener('animationstart',go);e.addEventListener('animationiteration',go);}
-   e.style.left=spots[i][0]+'px';e.style.top=spots[i][1]+'px';if(spots[i][2])e.classList.add('over');e.style.animationDelay=(i*1.57)+'s';gr.appendChild(e);});}
+   e.style.left=spots[i][0]+'px';e.style.top=spots[i][1]+'px';if(spots[i][2])e.classList.add('over');e.style.animationDelay=(i*1.57)+'s';gr.appendChild(e);});
+  // a few smaller balls drifting round too, some in front, some behind
+  [[96,40,30,1,.8],[262,92,24,0,3.6],[78,250,34,1,6.2],[240,250,22,0,9.4]].forEach(([x,y,w,o,d])=>{const b=document.createElement('div');b.className='mb'+(o?' over':'');b.style.cssText=`left:${x}px;top:${y}px;width:${w}px;animation-delay:${d}s`;b.innerHTML='<img src="share-fx/goal_rush.png" alt="">';gr.appendChild(b);});}
  // Unbeaten: the right shirt spins in like a reel and lands on Salah's "?" with a little bounce
  const strip=ph.querySelector('.ub .strip');
  if(strip){const R=['ucc2','ucc3','ucc4','ucc5','ucc1'],H=221;strip.innerHTML=Array.from({length:8},()=>R).flat().map((r)=>`<img src="home-new/${r}.png" alt="">`).join('');
