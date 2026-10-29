@@ -709,7 +709,10 @@
       rec.daily = rec.daily || {};
       // the day's best go counts (biggest rise, then higher finish); goes counts them all
       const was = rec.daily[run.daily], goes = (was && was.goes || (was ? 1 : 0)) + 1;
-      if (!was || F.rise > was.rise || (F.rise === was.rise && F.finish < was.finish)) rec.daily[run.daily] = { n: GAME.dailyNumber(run.daily), club: name, season: S.season, mode, finish: F.finish, histFinish: F.histFinish, rise: F.rise, pts: F.pts, histPts: F.histPts, dream: entry.dream, goes };
+      // the share card's two rows (Craig, 29 Oct), kept so it can be drawn again from home: the top scorer and the best card
+      const ts = F.topScorer && GAME.card(S, F.topScorer.id), bc = F.bestCard != null && GAME.card(S, F.bestCard);
+      const rows = { topScorer: ts ? { name: ts.name, goals: F.topScorer.goals } : null, best: bc ? { name: bc.name, r: bc.ovr, lv: bc.level, p: bc.pos, crest: bc.club } : null };
+      if (!was || F.rise > was.rise || (F.rise === was.rise && F.finish < was.finish)) rec.daily[run.daily] = Object.assign({ n: GAME.dailyNumber(run.daily), club: name, season: S.season, mode, finish: F.finish, histFinish: F.histFinish, rise: F.rise, pts: F.pts, histPts: F.histPts, dream: entry.dream, goes }, rows);
       else was.goes = goes;
     }
     rec.runs.push(entry);
