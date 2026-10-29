@@ -675,9 +675,7 @@
               const a = String(TARGET), b = ' GOALS', o = `${gap} ${over ? 'OVER' : 'SHORT'}`;
               const wa = k.width(a, 900, 110, true), wb = k.width(b, 900, 110, true), wo = k.width(o, 900, 64, true), x0 = W / 2 - (wa + 12 + wb + 34 + wo) / 2;
               k.mid(a, x0, 300, 999, 900, 110, true, '#FFFFFF', 'left'); k.mid(b, x0 + wa + 12, 300, 999, 900, 110, true, '#FFFFFF', 'left');
-              g.save(); g.strokeStyle = RED; g.lineCap = 'round'; g.lineJoin = 'round';
-              g.lineWidth = 9; g.beginPath(); g.moveTo(x0 - 12, 318); g.quadraticCurveTo(x0 + wa * 0.5, 300, x0 + wa + 10, 282); g.stroke();
-              g.lineWidth = 5; g.beginPath(); g.moveTo(x0 - 2, 330); g.quadraticCurveTo(x0 + wa * 0.55, 314, x0 + wa + 16, 296); g.stroke(); g.restore();
+              k.cross(x0 + wa / 2, 300, wa + 40, 84);
               k.mid(o, x0 + wa + 12 + wb + 34, 300, 999, 900, 64, true, RED, 'left');
             }
             // the pitch

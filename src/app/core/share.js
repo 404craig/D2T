@@ -100,7 +100,27 @@
       for (let i = 0; i < 5; i++) { const a = -Math.PI / 2 + i * 2 * Math.PI / 5; pent(cx + r * 0.95 * Math.cos(a), cy + r * 0.95 * Math.sin(a), r * 0.3, a + Math.PI / 2); }
       g.restore();
     };
-    return { fit, mid, width, rr, box, wrap, pic, club, duo, tag, card, ball, LVC, W, H };
+    // a hand-drawn red cross (Craig, 29 Oct; design/prototype/daily-share.html): a quadratic stroke drawn as a filled
+    // shape tapering to fine ends, T its widest; cross() lays a long flat stroke over a steeper doubled one, edge = a black
+    // outline for light backgrounds
+    const tstroke = (x0, y0, cx, cy, x1, y1, T, col) => {
+      const n = 48, L = [], R = [];
+      for (let i = 0; i <= n; i++) {
+        const t = i / n, u = 1 - t, x = u * u * x0 + 2 * u * t * cx + t * t * x1, y = u * u * y0 + 2 * u * t * cy + t * t * y1;
+        const dx = 2 * u * (cx - x0) + 2 * t * (x1 - cx), dy = 2 * u * (cy - y0) + 2 * t * (y1 - cy), l = Math.hypot(dx, dy) || 1, nx = -dy / l, ny = dx / l;
+        const w = T * (0.18 + 0.82 * Math.pow(Math.sin(Math.PI * Math.min(1, t * 1.15)), 0.55)) / 2;
+        L.push([x + nx * w, y + ny * w]); R.push([x - nx * w, y - ny * w]);
+      }
+      g.beginPath(); L.forEach(([x, y], i) => (i ? g.lineTo(x, y) : g.moveTo(x, y))); R.reverse().forEach(([x, y]) => g.lineTo(x, y)); g.closePath(); g.fillStyle = col; g.fill();
+    };
+    const cross = (cx, cy, w, h, edge, col = '#FF4D52') => {
+      const S = [[cx - w * 0.5, cy - h * 0.22, cx, cy + h * 0.02, cx + w * 0.5, cy + h * 0.3, 12], [cx - w * 0.4, cy + h * 0.5, cx - w * 0.02, cy + h * 0.06, cx + w * 0.42, cy - h * 0.5, 8], [cx - w * 0.34, cy + h * 0.6, cx + w * 0.04, cy + h * 0.18, cx + w * 0.46, cy - h * 0.36, 6]];
+      g.save();
+      if (edge) S.forEach(([a, b, c, d, e, f, T]) => { g.save(); g.strokeStyle = '#0A0A0A'; g.lineWidth = 2.5; g.lineJoin = 'round'; tstroke(a, b, c, d, e, f, T, '#0A0A0A'); g.stroke(); g.restore(); });
+      S.forEach(([a, b, c, d, e, f, T]) => tstroke(a, b, c, d, e, f, T, col));
+      g.restore();
+    };
+    return { fit, mid, width, rr, box, wrap, pic, club, duo, tag, card, ball, tstroke, cross, LVC, W, H };
   }
 
   function build(o) {
