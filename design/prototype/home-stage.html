@@ -33,13 +33,13 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 .nm .gn{font:900 italic 17px/1 var(--f);letter-spacing:.14em;text-transform:uppercase;color:var(--k)}
 .nm .hl{font:900 italic 34px/1.02 var(--f);text-transform:uppercase;margin:7px 22px 0}
 .nm .sb{font:600 13.5px/1.35 var(--f);color:var(--soft);margin:7px 36px 0}
-.st{position:absolute;top:582px;left:18px;right:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.st{position:absolute;top:592px;left:10%;right:10%;display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
 .sh{position:relative;aspect-ratio:100/128;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:30%;text-align:center}
 .sh::before{content:"";position:absolute;inset:0;clip-path:polygon(1% 8.6%,11% .8%,89% .8%,99% 8.6%,99% 84.4%,50% 99.2%,1% 84.4%);background:linear-gradient(155deg,var(--m1) 0%,var(--k2) 32%,var(--m2) 70%,var(--m3) 100%)}
 .sh svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .sh polygon{fill:none;stroke:rgba(255,255,255,.35);stroke-width:1.4;vector-effect:non-scaling-stroke}
-.sh b{position:relative;font:900 italic 24px/30px var(--f);height:30px;color:#0A0A0A;white-space:nowrap}
-.sh span{position:relative;font:800 9px/1.15 var(--f);letter-spacing:.04em;text-transform:uppercase;color:#0A0A0A;margin-top:5px;padding:0 4px;min-height:2.3em}
+.sh b{position:relative;font:900 italic 21px/26px var(--f);height:26px;color:#0A0A0A;white-space:nowrap}
+.sh span{position:relative;font:800 8px/1.15 var(--f);letter-spacing:.04em;text-transform:uppercase;color:#0A0A0A;margin-top:5px;padding:0 4px;min-height:2.3em}
 .sh .cr{position:absolute;top:7%;right:9%;width:17px;height:17px;object-fit:contain}
 .dots{position:absolute;top:708px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:20}
 .dots i{position:relative;width:6px;height:6px;border-radius:3px;background:#3A3A44;transition:width .25s,background .25s}.dots i.on{width:18px;background:var(--k)}
@@ -67,9 +67,12 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 @keyframes shine{0%,40%{background-position:120% 0}70%,100%{background-position:-60% 0}}
 /* Goal Rush: the ball, with formations and real players' shirts floating round it */
 .gr{position:relative;width:340px;height:300px;display:grid;place-items:center}
-.gr>img{width:150px;filter:drop-shadow(0 16px 26px rgba(0,0,0,.6));animation:spin 16s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.gr .fl{position:absolute;animation:float 6s ease-in-out infinite;opacity:0;text-align:center}
+.gr .ball{position:relative;width:150px;height:150px;z-index:2;perspective:500px;filter:drop-shadow(0 16px 26px rgba(0,0,0,.6))}
+.gr .ball img{width:100%;display:block;border-radius:50%;animation:roll 12.5s linear infinite}
+.gr .ball::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.55),transparent 32%),radial-gradient(circle at 70% 78%,rgba(0,0,0,.45),transparent 55%);pointer-events:none}
+@keyframes roll{0%{transform:rotateX(14deg) rotateY(-22deg) rotate(0deg)}25%{transform:rotateX(4deg) rotateY(0deg) rotate(90deg)}50%{transform:rotateX(-14deg) rotateY(22deg) rotate(180deg)}75%{transform:rotateX(-4deg) rotateY(0deg) rotate(270deg)}100%{transform:rotateX(14deg) rotateY(-22deg) rotate(360deg)}}
+.gr .fl{position:absolute;animation:float 7.5s ease-in-out infinite;opacity:0;text-align:center;z-index:1}
+.gr .fl.over{z-index:3}
 .gr .fm{font:900 italic 16px var(--f);color:#FFD21F;padding:4px 10px;border-radius:9px;background:rgba(255,210,31,.12);border:1px solid rgba(255,210,31,.4);transform:skewX(-8deg);display:inline-block}
 .gr .pl img{width:50px;display:block;margin:0 auto;filter:drop-shadow(0 6px 10px rgba(0,0,0,.6))}
 .gr .pl b{display:block;font:900 italic 10.5px var(--f);text-transform:uppercase;margin-top:1px;text-shadow:0 1px 4px #000}
@@ -116,30 +119,31 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 .sheet p{font:600 15px/1.5 var(--f);color:#CFCFD6;margin:0 0 10px}
 .sheet .sbtn{display:flex;align-items:center;justify-content:center;width:100%;min-height:58px;border-radius:29px;background:#12F06C;color:#0A0A0A;font:900 italic 19px var(--f);text-transform:uppercase;border:0;margin-top:8px}
 .scrim{position:absolute;inset:0;z-index:45;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .3s}.scrim.on{opacity:1;pointer-events:auto}
-@media (prefers-reduced-motion:reduce){.gr>img,.gr .fl,.ub .ar svg,.clx img,.dcard::after{animation:none}.gr .fl{opacity:1}.cfan .s{transition:none}}
+@media (prefers-reduced-motion:reduce){.gr .ball img,.gr .fl,.ub .ar svg,.clx img,.dcard::after{animation:none}.gr .fl{opacity:1}.cfan .s{transition:none}}
 </style></head><body><div class="wrap">
 <div class="intro"><div id="main"></div>
 <div class="side">
 <h1>Home: the stage, round two</h1>
 <p class="lead"><b>Swipe left and right</b>, use the arrows, or the arrow keys. Each game turns in on a big wheel and <b>snaps in with a small bounce</b>.</p>
 <ul>
+<li><b>Shields:</b> 80% of the screen's width, no crests on them.</li>
 <li><b>Titles:</b> the game's name a little bigger than before, in its colour, over the headline.</li>
 <li><b>The ? and the account</b> sit together top right, the same round buttons. The ? opens the rules for the game you're on.</li>
 <li><b>Arrows</b> back on both sides so people know to swipe; each hides at the end of the row.</li>
 <li><b>The Play button</b> is the game's own: round ends, uppercase black italic, the soft glow.</li>
 <li><b>Classic:</b> the fan works like home does now: the three cards turn round, then the card at the back <b>cross-fades</b> into a new club. Nothing snaps. (Here every 4 seconds; on home it's every 10 to 15.)</li>
-<li><b>Goal Rush:</b> half the floating things are now <b>real players' pitch shirts from the game</b>, with names, in mixed kits (Bowen, Ings, Duff, McAllister, Alonso, Alli).</li>
-<li><b>Unbeaten:</b> no emblem. The two shirts stand <b>level, as on the game's stage</b>, and the right one <b>spins in like a reel</b> (Kane, Agüero, Henry, Shearer) and lands on Salah's "?", with the swipe arrows between.</li>
+<li><b>Goal Rush:</b> half the floating things are <b>real players' pitch shirts</b>, in mixed kits, now at 0.8x the speed, further in from the edges, some passing <b>in front of the ball</b> and some behind it. The ball turns in 3D.</li>
+<li><b>Unbeaten:</b> no emblem. <b>Drogba at Chelsea</b> (104 career Premier League goals) on the left, level with the right shirt, which <b>spins in like a reel</b> (Kane, Agüero, Henry, Shearer) and lands on Salah's "?", the swipe arrows between.</li>
 </ul></div></div>
 <h2 class="sec">Carry on where you left off</h2>
-<p class="lead">Five ways the stage could show a game you're part way through, here a Classic run with West Ham 2010/11, matchday 14, 6th. Each phone works the same way. A small green dot on the page dots marks any game with a run waiting.</p>
+<p class="lead">Five ways the stage could show a game you're part way through, here a Classic run with West Ham 2010/11, matchday 14, 6th. In every one the button says <b>Continue</b>, with the game's <b>respin arrow</b> to its left to start over (it asks first). A small green dot on the page dots marks any game with a run waiting.</p>
 <div class="cols" id="conts"></div>
 </div>
 <script>
 const UPI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 const CHL='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
 const CHR='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>';
-const PLUS='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
+const RESPIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
 const FR='<svg viewBox="0 0 100 128" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,11 11,1 89,1 99,11 99,108 50,127 1,108" stroke-linejoin="round"/></svg>';
 const SWIPE=(col,down)=>`<svg viewBox="0 0 32 150" class="${down?'dn':'up'}"><g ${down?'transform="rotate(180 16 75)"':''}><path d="M11.5 146 Q16 150 20.5 146 L17.6 26 Q16 22 14.4 26 Z" fill="${col}"/><path d="M4 40 L16 14 Q21 26 29 37" fill="none" stroke="${col}" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></g></svg>`;
 const hex=(h)=>[1,3,5].map((i)=>parseInt(h.slice(i,i+2),16));
@@ -153,29 +157,29 @@ function games(cont){
  const G=[
   {id:'daily',k:'#FFFFFF',name:'Daily Challenge',hl:'Middlesbrough 1992/93',sb:'Same club for everyone today. They went down in 21st.',play:'Play today',
    art:()=>`<div class="dcard" style="--m:url(home-new/cd0.png)"><img src="home-new/cd0.png" alt="Middlesbrough 1992/93"></div>`,
-   st:[['9','Played'],['1st','Best finish','home-new/middlesbrough.png'],['+20','Best rise',null,'#12F06C'],['2','Wins']],
+   st:[['9','Played'],['1st','Best finish'],['+20','Best rise',null,'#12F06C'],['2','Wins']],
    rules:'One club a day for everyone, from the bottom of a real season. A side that really went down plays Classic; anyone above the drop plays Dare2Dream. No respins, one go a day. It closes at midnight.'},
   {id:'classic',k:'#12F06C',name:'Classic',hl:'Pick a new club',sb:'Take a side that went down from the drop to the top.',play:'Spin for a club',
    art:()=>`<div class="cfan"></div>`,st:[['16','Beat the drop'],['14','Top half'],['7','Top 3'],['2','League titles']],
    rules:'Spin for a club that went down for real. Pick your shape, then sign players through the season: three cards a roll, one every three games, more in January. Beat the drop, or take them to the top.'},
   {id:'clubx',k:'#12F06C',name:'Club X',hl:'Career mode',sb:'Draft 11, replace the worst side, win the league. Then go again.',play:'Play Club X',
-   art:()=>`<div class="clx"><img src="share-fx/club_x.png" alt="Club X"></div>`,st:[['4','Seasons'],['2','Titles'],['3','Top 3'],['1st','Best finish','share-fx/club_x.png']],
+   art:()=>`<div class="clx"><img src="share-fx/club_x.png" alt="Club X"></div>`,st:[['4','Seasons'],['2','Titles'],['3','Top 3'],['1st','Best finish']],
    rules:'Spin three seasons and pick one. Club X takes the bottom club\'s place. Draft 11 one shirt at a time, keeper first, then play the season and win the league. Your career carries on, season after season.'},
   {id:'goal',k:'#FFD21F',name:'Goal Rush',hl:'Score exactly <span style="white-space:nowrap">?-?-?</span>',sb:'Pick 11 real players. Their career goals must hit the target.',play:'Play Goal Rush',
-   art:()=>`<div class="gr"><img src="share-fx/goal_rush.png" alt=""></div>`,st:[['12','Games'],['3','Bang on'],['25%','Hit rate'],['8+','Last game']],
+   art:()=>`<div class="gr"><div class="ball"><img src="share-fx/goal_rush.png" alt=""></div></div>`,st:[['12','Games'],['3','Bang on'],['25%','Hit rate'],['8+','Last game']],
    rules:'Each game picks a formation, and its number is your target: 3-5-2 means score exactly 352. Spin three real players for an open shirt and pick one. Get your XI\'s career Premier League goals to the number exactly.'},
   {id:'ub',k:'#22D3EE',name:'Unbeaten Run',hl:'Higher or lower?',sb:'One stat, real Premier League numbers. How long can you go?',play:'Start a run',
-   art:()=>`<div class="ub"><img class="left" src="home-new/ub-rooney.png" alt=""><div class="reel"><div class="strip"></div></div><div class="ar">${SWIPE('#22D3EE')}${SWIPE('#7FE7F7',1)}</div></div>`,
+   art:()=>`<div class="ub"><img class="left" src="home-new/ub-drogba.png" alt="Drogba, Chelsea"><div class="reel"><div class="strip"></div></div><div class="ar">${SWIPE('#22D3EE')}${SWIPE('#7FE7F7',1)}</div></div>`,
    st:[['41','Runs'],['17','Best run'],['9','Topics'],['4','Last run']],
    rules:'Spin a stat. Is the next real number higher or lower? Swipe up for higher, down for lower. One wrong call ends your run.'}];
  if(!cont)return G;
  const c=G[1];c.live=true;
  const line=`${RUN.club} ${RUN.season} · Matchday ${RUN.md} · ${RUN.pos}`;
- if(cont==='A'){c.play=`Continue`;c.playImg=RUN.crest;c.round=true;c.contLine=`<b>${RUN.club} ${RUN.season}</b> · MATCHDAY ${RUN.md} · ${RUN.pos.toUpperCase()}`;}
+ if(cont==='A'){c.play=`Continue`;c.round=true;c.contLine=`<b>${RUN.club} ${RUN.season}</b> · MATCHDAY ${RUN.md} · ${RUN.pos.toUpperCase()}`;}
  if(cont==='B'){c.hl=`${RUN.club} ${RUN.season}`;c.sb=`Matchday ${RUN.md} of 38 · ${RUN.pos} · ${RUN.pts} pts`;c.art=()=>`<div class="dcard" style="--m:url(${RUN.card})"><img src="${RUN.card}" alt=""></div>`;c.st=[[RUN.pos,'Position'],[String(RUN.pts),'Points'],[String(RUN.md),'Played'],['78','Team rating']];c.play='Continue';c.round=true;c.gnExtra=' · IN PROGRESS';}
- if(cont==='C'){c.banner=true;}
+ if(cont==='C'){c.banner=true;c.play='Continue';c.round=true;}
  if(cont==='D'){c.hl=`${RUN.club} ${RUN.season}`;c.sb=`${RUN.pts} pts. ${38-RUN.md} games to go.`;c.art=()=>`<div class="ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="#1C1C21" stroke-width="6"/><circle cx="50" cy="50" r="45" fill="none" stroke="#12F06C" stroke-width="6" stroke-linecap="round" stroke-dasharray="${(2*Math.PI*45*RUN.md/38).toFixed(1)} 400"/></svg><img src="${RUN.crest}" alt=""><span class="pos">${RUN.pos}</span><span class="md">MATCHDAY ${RUN.md} OF 38</span></div>`;c.play='Continue';c.round=true;}
- if(cont==='E'){c.hl=`${RUN.club} ${RUN.season}`;c.sb='Next: Chelsea away';c.art=()=>`<div class="mtab"><div class="h"><span>LEAGUE · MATCHDAY ${RUN.md}</span><span>PTS</span></div>${[['4','man-city','Man City',26],['5','chelsea','Chelsea',24],['6','west-ham','West Ham',21,1],['7','liverpool','Liverpool',20],['8','sunderland','Sunderland',19]].map(([p,f,n,pt,me])=>`<div class="r${me?' me':''}"><span class="p">${p}</span><img src="home-new/c72-${f}.png" alt=""><span class="n">${n}</span><span class="pt">${pt}</span></div>`).join('')}</div>`;c.play='Continue · Matchday 15';c.round=true;}
+ if(cont==='E'){c.hl=`${RUN.club} ${RUN.season}`;c.sb='Next: Chelsea away';c.art=()=>`<div class="mtab"><div class="h"><span>LEAGUE · MATCHDAY ${RUN.md}</span><span>PTS</span></div>${[['4','man-city','Man City',26],['5','chelsea','Chelsea',24],['6','west-ham','West Ham',21,1],['7','liverpool','Liverpool',20],['8','sunderland','Sunderland',19]].map(([p,f,n,pt,me])=>`<div class="r${me?' me':''}"><span class="p">${p}</span><img src="home-new/c72-${f}.png" alt=""><span class="n">${n}</span><span class="pt">${pt}</span></div>`).join('')}</div>`;c.play='Continue';c.round=true;}
  return G;}
 
 function stage(host,cont,start){
@@ -190,7 +194,7 @@ ${g.banner?`<div class="banner"><img src="${RUN.crest}" alt=""><span class="t"><
 <button class="sw l" aria-label="Previous game">${CHL}</button><button class="sw r" aria-label="Next game">${CHR}</button>
 <div class="dots">${G.map((g)=>`<i class="${g.live?'live':''}"></i>`).join('')}</div>
 <div class="cont-line"></div>
-<div class="bbar"><button class="round" aria-label="New run" style="display:none">${PLUS}</button><button class="main"><span class="plbl"></span></button></div>
+<div class="bbar"><button class="round" aria-label="Start over" style="display:none">${RESPIN}</button><button class="main"><span class="plbl"></span></button></div>
 <div class="scrim"></div><div class="sheet"><div class="bar"><i></i></div><div class="sb2"></div></div>`;
  host.appendChild(ph);
  const $=(s)=>ph.querySelector(s),SL=[...ph.querySelectorAll('.sl')],DT=[...ph.querySelectorAll('.dots i')],bg=$('.bg'),wheel=$('.wheel');
@@ -228,8 +232,9 @@ ${g.banner?`<div class="banner"><img src="${RUN.crest}" alt=""><span class="t"><
  // Goal Rush: formations and real players' shirts, floating up round the ball
  const gr=ph.querySelector('.gr');
  if(gr){const FL=[['f','4-4-2'],['p','Bowen'],['f','3-5-2'],['p','Ings'],['f','4-3-3'],['p','Duff'],['f','5-3-2'],['p','McAllister'],['p','Alonso'],['f','3-4-3'],['p','Alli'],['f','4-5-1']];
-  const spots=[[14,30],[236,4],[262,128],[238,218],[20,232],[-6,128],[120,-6],[140,252],[56,-8],[266,58],[6,40],[100,262]];
-  FL.forEach(([t,v],i)=>{const e=document.createElement('div');e.className='fl '+(t==='f'?'':'pl');e.innerHTML=t==='f'?`<span class="fm">${v}</span>`:`<img src="home-new/gr-${v}.png" alt=""><b>${v}</b>`;e.style.left=spots[i][0]+'px';e.style.top=spots[i][1]+'px';e.style.animationDelay=(i*.5)+'s';gr.appendChild(e);});}
+  // in from the edges; the 'o' ones pass in front of the ball, the rest behind it
+  const spots=[[40,40,0],[214,22,0],[236,132,0],[208,214,1],[46,214,0],[30,124,1],[132,6,0],[150,236,0],[78,10,1],[226,70,1],[96,96,1],[134,150,1]];
+  FL.forEach(([t,v],i)=>{const e=document.createElement('div');e.className='fl '+(t==='f'?'':'pl');e.innerHTML=t==='f'?`<span class="fm">${v}</span>`:`<img src="home-new/gr-${v}.png" alt=""><b>${v}</b>`;e.style.left=spots[i][0]+'px';e.style.top=spots[i][1]+'px';if(spots[i][2])e.classList.add('over');e.style.animationDelay=(i*.625)+'s';gr.appendChild(e);});}
  // Unbeaten: the right shirt spins in like a reel and lands on Salah's "?" with a little bounce
  const strip=ph.querySelector('.ub .strip');
  if(strip){const R=['kane','aguero','henry','shearer','salah'],H=167;strip.innerHTML=Array.from({length:8},()=>R).flat().map((r)=>`<img src="home-new/ubq-${r}.png" alt="">`).join('');
@@ -243,7 +248,7 @@ ${g.banner?`<div class="banner"><img src="${RUN.crest}" alt=""><span class="t"><
  const close=()=>{sheet.classList.remove('open');scrim.classList.remove('on');sheet.style.transform='';};
  $('.q').onclick=()=>{const g=G[Math.round(target)];open(`<h3>${g.name}</h3><p>${g.rules}</p>`,g.k);};
  $('.acct').onclick=()=>open(`<h3 style="color:#fff">Your account</h3><p>Sign in with the same email and PIN as Tenaball to keep your record safe.</p><button class="sbtn">Sign in</button>`,'#fff');
- $('.round').onclick=()=>open(`<h3>Start a new run?</h3><p>Your ${RUN.club} run will be lost.</p><button class="sbtn">New run</button>`,'#12F06C');
+ $('.round').onclick=()=>open(`<h3>Start over?</h3><p>Your ${RUN.club} run will be lost.</p><button class="sbtn">Start over</button>`,'#12F06C');
  scrim.onclick=close;
  let sd=null;const bar=$('.sheet .bar');
  bar.addEventListener('pointerdown',(e)=>{sd={y:e.clientY,m:false};bar.setPointerCapture(e.pointerId);sheet.style.transition='none';});
@@ -254,11 +259,11 @@ ${g.banner?`<div class="banner"><img src="${RUN.crest}" alt=""><span class="t"><
 const main=stage(document.getElementById('main'),null,1);
 // arrow keys drive the main phone
 let mk=1;document.addEventListener('keydown',(e)=>{if(e.key==='ArrowRight'){mk=Math.min(4,mk+1);main.goTo(mk);}if(e.key==='ArrowLeft'){mk=Math.max(0,mk-1);main.goTo(mk);}});
-const C=[['A','The button','The stage stays as it is; <b>the button turns into Continue</b> with the club\'s crest on it, a line above says where you are, and a <b>round + beside it</b> starts a new run (it asks first).'],
- ['B','Your club on stage','<b>Your club takes the stage</b>: its card where the fan was, its name as the headline, and the four shields switch to <b>this run</b>: position, points, played, team rating. Continue, with + for a new run.'],
- ['C','A banner','Nothing on the stage changes: a <b>Carry on banner</b> sits across the top with the club, matchday, position and points, and a round go button. Spin still starts a new run.'],
- ['D','The ring','The club\'s crest inside a <b>ring that fills as the season goes</b> (14 of 38), your position in a green badge on its edge. Continue, with + for a new run.'],
- ['E','The table','A slice of <b>the league table</b> around you, your row lit green, so you see the race before you carry on. The button says which matchday is next.']];
+const C=[['A','The button','The stage stays as it is; <b>Continue</b>, a line above it says where you are, and the <b>respin arrow</b> beside it starts over (it asks first).'],
+ ['B','Your club on stage','<b>Your club takes the stage</b>: its card where the fan was, its name as the headline, and the four shields switch to <b>this run</b>: position, points, played, team rating. Continue, with the respin arrow to start over.'],
+ ['C','A banner','Nothing on the stage changes: a <b>Carry on banner</b> sits across the top with the club, matchday, position and points, and a round go button. Continue below, with the respin arrow to start over.'],
+ ['D','The ring','The club\'s crest inside a <b>ring that fills as the season goes</b> (14 of 38), your position in a green badge on its edge. Continue, with the respin arrow to start over.'],
+ ['E','The table','A slice of <b>the league table</b> around you, your row lit green, so you see the race before you carry on. Continue, with the respin arrow to start over.']];
 const cw=document.getElementById('conts');
 C.forEach(([k,n,w])=>{const col=document.createElement('div');col.className='col';col.innerHTML=`<h3>${k} · <span>${n}</span></h3><p>${w}</p>`;cw.appendChild(col);stage(col,k,1);});
 </script></body></html>
