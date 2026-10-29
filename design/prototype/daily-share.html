@@ -1,0 +1,125 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Daily Share Card</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap">
+<style>
+:root{--bg:#000;--ink:#fff;--soft:#BDBDC6;--muted:#8E8E99;--line:#26262C;--g:#12F06C}
+html,body{background:#000;color:#fff;margin:0;font-family:'Exo 2',system-ui,sans-serif}
+.wrap{max-width:1560px;margin:0 auto;padding:28px 16px 80px}
+h1{font:900 italic 30px/1.05 'Exo 2';text-transform:uppercase;margin:0 0 10px}
+.lead{color:var(--soft);font-size:16px;line-height:1.5;max-width:860px;margin:0 0 22px}
+.cols{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
+.col{flex:0 0 360px;max-width:100%}
+.col h2{font:900 italic 20px 'Exo 2';text-transform:uppercase;margin:0 0 4px}
+.col .why{color:var(--soft);font-size:14px;line-height:1.45;margin:0 0 12px;min-height:122px}
+.col .why b{color:#fff}
+/* a WhatsApp chat, light bubbles on a dark wallpaper, as in Craig's screenshot */
+.chat{background:#0B0B0D radial-gradient(120% 60% at 50% 0%,#1A1A1F,#050506);border-radius:22px;padding:16px 10px 18px;box-shadow:0 0 0 1px #222228}
+.bub{margin-left:auto;width:300px;background:#D9FDD3;color:#111B21;border-radius:14px 4px 14px 14px;padding:4px 4px 6px;font:400 15.5px/1.38 -apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;position:relative}
+.bub img{display:block;width:100%;border-radius:11px}
+.bub .cap{white-space:pre-line;padding:6px 7px 0;word-wrap:break-word}
+.bub .cap a{color:#027EB5;text-decoration:underline}
+.bub .cap .dt{text-decoration:underline}
+.bub .tm{display:block;text-align:right;font-size:11px;color:#667781;padding:2px 6px 0}
+.bub .tm i{font-style:normal;color:#53BDEB;margin-left:3px}
+.full{margin-top:10px;font-size:12px;color:var(--muted)}
+.full a{color:var(--soft)}
+.notes{max-width:900px;margin-top:34px;color:#CFCFD6;font-size:15px;line-height:1.5}
+.notes h2{font:900 italic 22px 'Exo 2';text-transform:uppercase;color:#fff;margin:0 0 8px}
+.notes li{margin:0 0 8px}.notes b{color:#fff}
+</style></head><body><div class="wrap">
+<h1>Daily share: four versions</h1>
+<p class="lead">How the Daily shares on WhatsApp today (Middlesbrough 1992/93, Daily #19, 21st to 1st), and three better versions. Each card is drawn on the same 1080 x 1350 canvas the game uses, then shown in a WhatsApp chat with the message text underneath, as it arrives. Tap "full size" under a chat to see the whole image.</p>
+<div class="cols" id="cols"></div>
+<div class="notes">
+<h2>What changes, and why</h2>
+<ul>
+<li><b>The white band.</b> The dare sat at the top of the band with the link under it, so it read low, and WhatsApp's caption box covers the bottom 15 to 20px of the picture, which clipped the link. The link goes (it is in the message already), the dare is centred in the band, and the band sits 64px up from the bottom with black below it, so nothing important is in the strip WhatsApp covers.</li>
+<li><b>Top scorer and best card.</b> Yes, they are the bits your mates will argue about. Both are already worked out for the summary screen (top scorer from your season's goals, best card = the highest-rated player in your final XI). On the card they go in two small tiles under The Rise. Example names here are real 1992/93 players: Paul Wilkinson (Boro's real top scorer, 14) and Eric Cantona (his 90 gold card).</li>
+<li><b>Team colour.</b> The Daily's own colour is white, so the tag stays white, but the club's colour comes in as a glow behind the crest, your finish and the rise in the club's text colour, and the band in the club's colour. Middlesbrough's red here; every club has its colours in the data already.</li>
+<li><b>The message.</b> Broken into short lines with blank lines between the three parts (the club and the result, the highlights, the dare). The date comes out of the message: WhatsApp turns "29 Oct" into a calendar link (the underline in your screenshot). It stays on the picture.</li>
+</ul>
+</div>
+</div>
+<script>
+const W=1080,H=1350;
+const DATA={num:19,date:'29 Oct',club:'Middlesbrough',season:'1992/93',they:'21st',theyPts:'44 pts',me:'1st',mePts:'83 pts',rise:'+20',
+ line:'They went down. You took them to the title. Absolute scenes.',
+ top:{name:'Paul Wilkinson',sur:'Wilkinson',goals:14},best:{name:'Eric Cantona',sur:'Cantona',r:90,pos:'ST'},
+ c:{accent:'#E11B22',ink:'#FFFFFF',text:'#FF545A'}};
+const FONT=(w,px,it)=>`${it?'italic ':''}${w} ${px}px 'Exo 2', sans-serif`;
+const load=(src)=>new Promise((r)=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src;});
+function kit(g){
+ const sp=(on)=>{if('letterSpacing' in g)g.letterSpacing=on||'0px';};
+ const fit=(t,x,y,maxW,w,px,it,col,al='center',ls)=>{sp(ls);let s=px;g.font=FONT(w,s,it);while(s>12&&g.measureText(t).width>maxW){s-=2;g.font=FONT(w,s,it);}g.textAlign=al;g.fillStyle=col;g.fillText(t,x,y);sp();return s;};
+ const rr=(x,y,w,h,r)=>{g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();};
+ const box=(x,y,w,h,r,edge,fill)=>{rr(x,y,w,h,r);g.fillStyle=fill||'#0E0E10';g.fill();g.lineWidth=3;g.strokeStyle=edge||'#222226';g.stroke();};
+ const wrap=(t,x,y,maxW,w,px,col,lh)=>{g.font=FONT(w,px);g.textAlign='center';g.fillStyle=col;let line='',yy=y;t.split(' ').forEach((wd)=>{const s=line?line+' '+wd:wd;if(g.measureText(s).width>maxW&&line){g.fillText(line,x,yy);yy+=lh;line=wd;}else line=s;});if(line)g.fillText(line,x,yy);};
+ const pic=(im,cx,top,size,a=1)=>{if(!im)return;const r=Math.min(size/im.naturalWidth,size/im.naturalHeight),w=im.naturalWidth*r,h=im.naturalHeight*r;g.globalAlpha=a;g.drawImage(im,cx-w/2,top+(size-h)/2,w,h);g.globalAlpha=1;};
+ const logo=(im,y)=>{const lw=640,lh=lw*im.naturalHeight/im.naturalWidth,t=document.createElement('canvas');t.width=lw;t.height=lh;const tg=t.getContext('2d');tg.drawImage(im,0,0,lw,lh);tg.globalCompositeOperation='source-in';tg.fillStyle='#fff';tg.fillRect(0,0,lw,lh);g.drawImage(t,(W-lw)/2,y+(110-lh)/2);};
+ const tag=(label,y,col)=>{label=label.toUpperCase();g.font=FONT(900,40,true);sp('2px');const tw=g.measureText(label).width,pw=tw+60,ph=62,x=(W-pw)/2;g.save();g.translate(W/2,y+ph/2);g.transform(1,0,-0.176,1,0,0);g.translate(-W/2,-(y+ph/2));rr(x,y,pw,ph,12);g.fillStyle=col;g.fill();g.restore();g.fillStyle='#0A0A0A';g.textAlign='center';g.fillText(label,W/2,y+13);sp();};
+ const duo=(y,h,rc)=>{box(90,y,900,h,26);g.fillStyle='#222226';g.fillRect(538,y+3,3,h-6);
+  [['THEY FINISHED',DATA.they,DATA.theyPts,'#FFFFFF',315],['I FINISHED',DATA.me,DATA.mePts,rc,765]].forEach(([a,b,c,col,x])=>{fit(a,x,y+28,400,800,34,false,'#8E8E99','center','3px');fit(b,x,y+70,420,900,128,true,col);fit(c,x,y+206,400,600,36,false,'#BDBDC6');});};
+ return {fit,rr,box,wrap,pic,logo,tag,duo};
+}
+// a card like the game's, drawn small: the shield, the level's face, rating, position, crest, surname
+function miniCard(g,k,x,y,w,im,lv){const h=w*1.3,s=w/114;g.save();g.translate(x,y);g.scale(s,s);
+ const p=new Path2D('M1.77 10.23 L10.23 1.77 Q12 0 14.5 0 L99.5 0 Q102 0 103.77 1.77 L112.23 10.23 Q114 12 114 14.5 L114 127 Q114 130 111.14 130.9 L60.81 146.8 Q57 148 53.19 146.8 L2.86 130.9 Q0 130 0 127 L0 14.5 Q0 12 1.77 10.23Z');
+ const gr=g.createLinearGradient(0,0,114,148);gr.addColorStop(0,'#FFF1B8');gr.addColorStop(.35,'#FFD95A');gr.addColorStop(.7,'#C99A1E');gr.addColorStop(1,'#F2C94C');g.fillStyle=gr;g.fill(p);
+ g.restore();
+ g.textBaseline='top';k.fit(String(DATA.best.r),x+w*0.29,y+w*0.13,w*0.4,900,w*0.32,true,'#2A1B00');
+ k.fit(DATA.best.pos,x+w*0.30,y+w*0.50,w*0.4,800,w*0.13,false,'#2A1B00');
+ k.pic(im,x+w*0.73,y+w*0.14,w*0.32);
+ k.fit(DATA.best.sur.toUpperCase(),x+w/2,y+w*0.78,w*0.86,900,w*0.16,true,'#2A1B00');
+}
+const OPTS=[
+ {id:'today',name:'Today',why:'As it shares now. <b>The band:</b> the dare sits high in the band and the link under it is cut by WhatsApp\'s caption box. <b>No team colour</b> beyond the faded crest, <b>no highlights</b>, and the message runs together with the date turned into a link.',
+  draw(g,k,im){g.fillStyle='#000';g.fillRect(0,0,W,H);k.pic(im.crest,W/2,170,1040,.13);k.logo(im.logo,70);k.tag(`Daily #${DATA.num} · ${DATA.date}`,212,'#FFFFFF');
+   k.pic(im.crest,W/2,290,200);k.fit(DATA.club.toUpperCase(),W/2,510,960,900,80,true,'#FFFFFF');k.fit(DATA.season,W/2,598,960,600,42,false,'#BDBDC6');
+   k.duo(668,270,'#FFFFFF');k.fit('THE RISE '+DATA.rise,W/2,975,960,900,112,true,'#FFFFFF');k.wrap(DATA.line,W/2,1098,860,500,32,'#BDBDC6',42);
+   g.fillStyle='#FFFFFF';g.fillRect(0,H-132,W,132);k.fit(`SAME CLUB TODAY. BEAT ${DATA.me.toUpperCase()}`,W/2,H-132+22,1000,900,50,true,'#0A0A0A');g.globalAlpha=.75;k.fit('404craig.github.io/D2T',W/2,H-132+82,1000,700,30,false,'#0A0A0A');g.globalAlpha=1;},
+  text:`DROP2TOP Daily #19 · <span class="dt">29 Oct</span>\nMiddlesbrough 1992/93 went down in 21st. I finished 1st.\nThe Rise: +20\nMy best Daily yet\nSame club for everyone today. Can you beat 1st?\n<a>404craig.github.io/D2T</a>`},
+ {id:'a',name:'A · Tidy',why:'The same card, fixed. <b>No link</b> on the picture, the dare <b>centred</b> in the band, the band <b>64px up</b> with black under it so WhatsApp\'s caption box only covers black. Everything above moves up a little to make room. The message gets <b>line breaks</b> and loses the date link.',
+  draw(g,k,im){const B=1176,BH=110;g.fillStyle='#000';g.fillRect(0,0,W,H);k.pic(im.crest,W/2,150,1040,.13);k.logo(im.logo,56);k.tag(`Daily #${DATA.num} · ${DATA.date}`,190,'#FFFFFF');
+   k.pic(im.crest,W/2,272,180);k.fit(DATA.club.toUpperCase(),W/2,468,960,900,78,true,'#FFFFFF');k.fit(DATA.season,W/2,552,960,600,40,false,'#BDBDC6');
+   k.duo(616,262,'#FFFFFF');k.fit('THE RISE '+DATA.rise,W/2,904,960,900,108,true,'#FFFFFF');k.wrap(DATA.line,W/2,1030,700,500,32,'#BDBDC6',42);
+   g.fillStyle='#FFFFFF';g.fillRect(0,B,W,BH);g.textBaseline='middle';k.fit(`SAME CLUB TODAY. BEAT ${DATA.me.toUpperCase()}`,W/2,B+BH/2+2,980,900,50,true,'#0A0A0A');g.textBaseline='top';},
+  text:`DROP2TOP Daily #19\n\nMiddlesbrough 1992/93\nThey went down in 21st.\nI finished 1st on 83 pts.\nThe Rise: +20, my best Daily yet\n\nSame club for everyone today.\nCan you beat 1st?\n<a>404craig.github.io/D2T</a>`},
+ {id:'b',name:'B · Club colours and highlights',why:'A, plus <b>the club\'s colour</b>: a red glow behind the crest, your finish and the rise number in Boro\'s red, the dare band in Boro\'s red with white text. <b>Two highlight tiles</b> under The Rise: top scorer and best card. The flavour line makes way for them. The message gets the highlights too.',
+  draw(g,k,im){const C=DATA.c,B=1176,BH=110;g.fillStyle='#000';g.fillRect(0,0,W,H);
+   const rg=g.createRadialGradient(W/2,360,20,W/2,360,620);rg.addColorStop(0,C.accent+'66');rg.addColorStop(.55,C.accent+'1F');rg.addColorStop(1,'#00000000');g.fillStyle=rg;g.fillRect(0,0,W,H);
+   k.pic(im.crest,W/2,150,1040,.11);k.logo(im.logo,56);k.tag(`Daily #${DATA.num} · ${DATA.date}`,190,'#FFFFFF');
+   k.pic(im.crest,W/2,272,180);k.fit(DATA.club.toUpperCase(),W/2,468,960,900,78,true,'#FFFFFF');k.fit(DATA.season,W/2,552,960,600,40,false,'#BDBDC6');
+   k.duo(616,262,C.text);
+   g.font=FONT(900,96,true);const t1='THE RISE ',w1=g.measureText(t1).width,w2=g.measureText(DATA.rise).width,x0=W/2-(w1+w2)/2;g.textAlign='left';g.fillStyle='#FFFFFF';g.fillText(t1,x0,900);g.fillStyle=C.text;g.fillText(DATA.rise,x0+w1,900);
+   [[90,'TOP SCORER',DATA.top.sur.toUpperCase(),DATA.top.goals+' goals'],[555,'BEST CARD',DATA.best.sur.toUpperCase(),DATA.best.r+' gold']].forEach(([x,a,b,c])=>{k.box(x,1012,435,132,22);k.fit(a,x+217,1030,400,800,26,false,'#8E8E99','center','3px');k.fit(b,x+217,1062,400,900,44,true,'#FFFFFF');k.fit(c,x+217,1110,400,700,26,false,C.text);});
+   g.fillStyle=C.accent;g.fillRect(0,B,W,BH);g.textBaseline='middle';k.fit(`SAME CLUB TODAY. BEAT ${DATA.me.toUpperCase()}`,W/2,B+BH/2+2,980,900,50,true,C.ink);g.textBaseline='top';},
+  text:`DROP2TOP Daily #19\n\nMiddlesbrough 1992/93\nThey went down in 21st.\nI finished 1st on 83 pts.\nThe Rise: +20, my best Daily yet\n\nTop scorer: Paul Wilkinson, 14 goals\nBest card: Eric Cantona, 90\n\nSame club for everyone today.\nCan you beat 1st?\n<a>404craig.github.io/D2T</a>`},
+ {id:'c',name:'C · Highlights first',why:'More colour and more story. The top of the card fades down from <b>Boro\'s red</b>; the result is one line, <b>21st to 1st</b>, with the points under; the space goes to the highlights, with <b>the best card drawn as a real card</b> and the top scorer\'s goals big beside it. Same tidy band. The message as B.',
+  draw(g,k,im){const C=DATA.c,B=1176,BH=110;g.fillStyle='#000';g.fillRect(0,0,W,H);
+   const lg=g.createLinearGradient(0,0,0,700);lg.addColorStop(0,C.accent+'AA');lg.addColorStop(.5,C.accent+'33');lg.addColorStop(1,'#00000000');g.fillStyle=lg;g.fillRect(0,0,W,700);
+   k.pic(im.crest,W/2,150,1040,.10);k.logo(im.logo,56);k.tag(`Daily #${DATA.num} · ${DATA.date}`,190,'#FFFFFF');
+   k.pic(im.crest,W/2,276,160);k.fit(DATA.club.toUpperCase(),W/2,452,960,900,78,true,'#FFFFFF');k.fit(DATA.season,W/2,536,960,600,40,false,'#E6E6EA');
+   // 21st -> 1st
+   g.font=FONT(900,150,true);const a=DATA.they,b=DATA.me,wa=g.measureText(a).width,wb=g.measureText(b).width,gap=150,x0=W/2-(wa+gap+wb)/2;g.textAlign='left';g.fillStyle='#8E8E99';g.fillText(a,x0,600);g.fillStyle=C.text;g.fillText(b,x0+wa+gap,600);
+   g.strokeStyle='#FFFFFF';g.lineWidth=10;g.lineCap='round';const ax=x0+wa+28,bx=x0+wa+gap-28,ay=680;g.beginPath();g.moveTo(ax,ay);g.lineTo(bx,ay);g.moveTo(bx-26,ay-24);g.lineTo(bx,ay);g.lineTo(bx-26,ay+24);g.stroke();
+   k.fit(`WENT DOWN · ${DATA.theyPts.toUpperCase()}`,x0+wa/2,770,420,800,28,false,'#8E8E99','center','2px');k.fit(`${DATA.mePts.toUpperCase()} · CHAMPIONS`,x0+wa+gap+wb/2,770,460,800,28,false,C.text,'center','2px');
+   k.fit('THE RISE '+DATA.rise,W/2,830,960,900,92,true,'#FFFFFF');
+   // highlights
+   k.box(90,952,900,196,24);miniCard(g,k,124,964,128,im.star);
+   k.fit('BEST CARD',300,986,260,800,26,false,'#8E8E99','left','3px');k.fit('CANTONA',300,1022,260,900,46,true,'#FFFFFF','left');k.fit('90 · GOLD',300,1078,260,700,28,false,'#FFD95A','left');
+   g.fillStyle='#222226';g.fillRect(586,972,3,156);
+   k.fit('TOP SCORER',620,986,340,800,26,false,'#8E8E99','left','3px');k.fit('WILKINSON',620,1022,340,900,46,true,'#FFFFFF','left');k.fit('14 GOALS',620,1078,340,700,28,false,C.text,'left');
+   g.fillStyle=C.accent;g.fillRect(0,B,W,BH);g.textBaseline='middle';k.fit(`SAME CLUB TODAY. BEAT ${DATA.me.toUpperCase()}`,W/2,B+BH/2+2,980,900,50,true,C.ink);g.textBaseline='top';},
+  text:`DROP2TOP Daily #19\n\nMiddlesbrough 1992/93\nThey went down in 21st.\nI finished 1st on 83 pts.\nThe Rise: +20, my best Daily yet\n\nTop scorer: Paul Wilkinson, 14 goals\nBest card: Eric Cantona, 90\n\nSame club for everyone today.\nCan you beat 1st?\n<a>404craig.github.io/D2T</a>`}
+];
+(async()=>{
+ await document.fonts.load("900 italic 80px 'Exo 2'");await document.fonts.load("800 30px 'Exo 2'");await document.fonts.load("600 30px 'Exo 2'");await document.fonts.load("500 30px 'Exo 2'");await document.fonts.load("700 30px 'Exo 2'");
+ const [logo,crest,star]=await Promise.all(['share-fx/logo-long.png','share-fx/boro.png','share-fx/leeds.png'].map(load));
+ const im={logo,crest,star};
+ const cols=document.getElementById('cols');
+ for(const o of OPTS){const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');g.textBaseline='top';o.draw(g,kit(g),im);
+  const url=c.toDataURL('image/png');
+  const el=document.createElement('div');el.className='col';
+  el.innerHTML=`<h2>${o.name}</h2><p class="why">${o.why}</p><div class="chat"><div class="bub"><img alt="${o.name} share card" src="${url}"><div class="cap">${o.text}</div><span class="tm">06:09<i>✓✓</i></span></div></div><p class="full"><a href="${url}" target="_blank" rel="noopener" download="daily-${o.id}.png">Full size image</a></p>`;
+  cols.appendChild(el);}
+})();
+</script></body></html>
