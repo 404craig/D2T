@@ -1,0 +1,200 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Home Stage</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;0,600;0,700;0,800;1,800;1,900&display=swap">
+<style>
+:root{--g:#12F06C;--soft:#BDBDC6;--mut:#8E8E99;--f:'Exo 2',system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{background:#000;color:#fff;margin:0;font-family:var(--f)}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 16px 80px;display:flex;gap:40px;flex-wrap:wrap;align-items:flex-start}
+.side{flex:1 1 360px;min-width:0}
+h1{font:900 italic 30px/1.05 var(--f);text-transform:uppercase;margin:0 0 10px}
+.lead{color:var(--soft);font-size:16px;line-height:1.5;margin:0 0 16px}.lead b{color:#fff}
+.side ul{color:#CFCFD6;font-size:15px;line-height:1.5;padding-left:20px}.side li{margin:0 0 9px}.side li b{color:#fff}
+.try{display:flex;gap:8px;margin:14px 0 0;flex-wrap:wrap}
+.try button{min-height:44px;padding:0 14px;border-radius:12px;border:1px solid #26262C;background:#0E0E10;color:#fff;font:800 12px var(--f);letter-spacing:.08em;cursor:pointer}
+
+/* ===== the phone ===== */
+.ph{position:relative;flex:none;width:390px;max-width:100%;height:844px;border-radius:46px;overflow:hidden;background:#000;box-shadow:0 0 0 1px #2A2A30,0 0 0 10px #111114;isolation:isolate;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.isl{position:absolute;top:11px;left:50%;width:122px;height:35px;margin-left:-61px;border-radius:20px;background:#000;z-index:40}
+.bg{position:absolute;inset:0;z-index:0;transition:none}
+.top{position:absolute;top:56px;left:18px;right:18px;display:flex;align-items:center;justify-content:space-between;z-index:30}
+.top img{width:122px;display:block}
+.acct{width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.28);background:rgba(255,255,255,.06);display:grid;place-items:center;cursor:pointer;color:#fff;padding:0}
+.acct svg{width:20px;height:20px}
+/* the wheel: every game is a slide hung from a pivot far below the screen */
+.wheel{position:absolute;inset:0;z-index:5;cursor:grab}
+.wheel.drag{cursor:grabbing}
+.sl{position:absolute;inset:0;transform-origin:50% 1500px;will-change:transform,opacity;pointer-events:none}
+.sl.cur{pointer-events:auto}
+.art{position:absolute;top:118px;left:0;right:0;height:300px;display:flex;align-items:center;justify-content:center}
+.floor{position:absolute;left:50%;top:392px;width:280px;height:50px;margin-left:-140px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--k) 50%,transparent),transparent);filter:blur(5px)}
+.nm{position:absolute;top:438px;left:0;right:0;text-align:center}
+.nm .gn{display:inline-flex;align-items:center;gap:10px;font:900 italic 46px/1 var(--f);text-transform:uppercase;color:var(--k);letter-spacing:-.01em}
+.nm .gn .q{width:32px;height:32px;border-radius:50%;border:2px solid currentColor;display:grid;place-items:center;font:900 italic 18px/1 var(--f);cursor:pointer;flex:none;background:none;color:inherit;padding:0;pointer-events:auto}
+.nm .hl{font:900 italic 22px/1.1 var(--f);text-transform:uppercase;margin:8px 20px 0}
+.nm .sb{font:600 13.5px/1.35 var(--f);color:var(--soft);margin:6px 34px 0}
+/* four metallic shields, the record's look */
+.st{position:absolute;top:572px;left:18px;right:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sh{position:relative;aspect-ratio:100/128;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:30%;text-align:center}
+.sh::before{content:"";position:absolute;inset:0;clip-path:polygon(1% 8.6%,11% .8%,89% .8%,99% 8.6%,99% 84.4%,50% 99.2%,1% 84.4%);background:linear-gradient(155deg,var(--m1) 0%,var(--k2) 32%,var(--m2) 70%,var(--m3) 100%)}
+.sh svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.sh polygon{fill:none;stroke:rgba(255,255,255,.35);stroke-width:1.4;vector-effect:non-scaling-stroke}
+.sh b{position:relative;font:900 italic 25px/30px var(--f);height:30px;color:#0A0A0A;white-space:nowrap}
+.sh span{position:relative;font:800 9px/1.15 var(--f);letter-spacing:.04em;text-transform:uppercase;color:#0A0A0A;margin-top:5px;padding:0 4px;min-height:2.3em}
+.sh .cr{position:absolute;top:7%;right:9%;width:17px;height:17px;object-fit:contain}
+.sh.wh b,.sh.wh span{color:#fff}
+.dots{position:absolute;top:700px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:20}
+.dots i{width:6px;height:6px;border-radius:3px;background:#3A3A44;transition:width .25s,background .25s}.dots i.on{width:18px;background:var(--k)}
+.play{position:absolute;left:18px;right:18px;bottom:34px;height:70px;border-radius:20px;border:0;background:var(--k);color:#0A0A0A;font:900 italic 24px var(--f);letter-spacing:.01em;z-index:20;cursor:pointer;transform:skewX(-6deg);box-shadow:0 10px 34px color-mix(in srgb,var(--k) 45%,transparent);transition:background .25s,box-shadow .25s}
+.play span{display:inline-block;transform:skewX(6deg)}
+
+/* ===== art: Classic, the fan that swaps cards ===== */
+.cfan{position:relative;width:260px;height:280px}
+.cfan img{position:absolute;left:50%;top:20px;width:150px;margin-left:-75px;filter:drop-shadow(0 14px 22px rgba(0,0,0,.6));transition:transform .7s cubic-bezier(.2,.9,.25,1.15),opacity .5s}
+.cfan .pL{transform:translate(-78px,22px) rotate(-14deg) scale(.92);z-index:1}
+.cfan .pR{transform:translate(78px,20px) rotate(12deg) scale(.92);z-index:1}
+.cfan .pF{transform:translate(0,0) rotate(0) scale(1.06);z-index:3}
+.cfan .pH{transform:translate(0,120px) scale(.6);opacity:0;z-index:0}
+/* Daily: one club card, a little larger, with a shine */
+.dcard{position:relative;width:186px;filter:drop-shadow(0 18px 30px rgba(0,0,0,.6))}
+.dcard img{width:100%;display:block}
+.dcard::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.35) 48%,transparent 60%);background-size:250% 100%;mix-blend-mode:overlay;animation:shine 4s ease-in-out infinite;-webkit-mask:url(home-new/cd0.png) center/100% 100%;mask:url(home-new/cd0.png) center/100% 100%}
+@keyframes shine{0%,40%{background-position:120% 0}70%,100%{background-position:-60% 0}}
+/* Goal Rush: the ball with formations floating round it */
+.gr{position:relative;width:300px;height:300px;display:grid;place-items:center}
+.gr img{width:170px;filter:drop-shadow(0 16px 26px rgba(0,0,0,.6));animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.gr i{position:absolute;font:900 italic 17px var(--f);color:#FFD21F;padding:4px 10px;border-radius:9px;background:rgba(255,210,31,.12);border:1px solid rgba(255,210,31,.4);transform:skewX(-8deg);animation:float 5.5s ease-in-out infinite;opacity:0}
+@keyframes float{0%{opacity:0;translate:0 10px}15%,70%{opacity:1}50%{translate:0 -10px}100%{opacity:0;translate:0 -18px}}
+/* Unbeaten: the D2T emblem turned to point up and down, two shirts, the swipe arrows */
+.ub{position:relative;width:340px;height:300px}
+.ub .emb{position:absolute;left:50%;top:50%;width:270px;height:270px;margin:-135px 0 0 -135px;background:#22D3EE;opacity:.5;-webkit-mask:url(home-new/emblem_line.png) center/contain no-repeat;mask:url(home-new/emblem_line.png) center/contain no-repeat;transform:rotate(-45deg)}
+.ub .shirt{position:absolute;top:46px;width:118px;filter:drop-shadow(0 12px 20px rgba(0,0,0,.6))}
+.ub .shirt.l{left:14px;transform:rotate(-5deg)}.ub .shirt.r{right:14px;transform:rotate(5deg)}
+.ub .ar{position:absolute;left:50%;top:70px;width:70px;height:170px;margin-left:-35px}
+.ub .ar svg{position:absolute;top:0;width:32px;height:150px;filter:drop-shadow(0 0 8px rgba(34,211,238,.6))}
+.ub .ar .up{left:2px;animation:bobU 2.2s ease-in-out infinite}
+.ub .ar .dn{right:2px;animation:bobD 2.2s ease-in-out infinite}
+@keyframes bobU{0%,100%{transform:translateY(8px)}50%{transform:translateY(-8px)}}
+@keyframes bobD{0%,100%{transform:translateY(-8px)}50%{transform:translateY(8px)}}
+.clx img{width:200px;filter:drop-shadow(0 18px 30px rgba(0,0,0,.6));animation:hover 4s ease-in-out infinite}
+@keyframes hover{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media (prefers-reduced-motion:reduce){.gr img,.gr i,.ub .ar svg,.clx img,.dcard::after{animation:none}.gr i{opacity:1}}
+
+/* sheets, dragged closed by the bar */
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:50;background:#0E0E10;border-radius:26px 26px 0 0;border-top:1px solid #2A2A30;padding:0 22px 40px;transform:translateY(105%);transition:transform .35s cubic-bezier(.2,.9,.3,1)}
+.sheet.open{transform:none}
+.sheet .bar{height:34px;display:grid;place-items:center;cursor:grab;touch-action:none}.sheet .bar i{width:44px;height:5px;border-radius:3px;background:#3A3A44}
+.sheet h3{font:900 italic 26px var(--f);text-transform:uppercase;margin:4px 0 10px;color:var(--k)}
+.sheet p{font:600 15px/1.5 var(--f);color:#CFCFD6;margin:0 0 10px}
+.scrim{position:absolute;inset:0;z-index:45;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .3s}.scrim.on{opacity:1;pointer-events:auto}
+.sheet .sbtn{display:flex;align-items:center;justify-content:center;width:100%;height:52px;border-radius:14px;background:#12F06C;color:#0A0A0A;font:900 italic 17px var(--f);border:0;margin-top:8px}
+</style></head><body><div class="wrap">
+<div class="ph" id="ph" style="--k:#12F06C"><span class="isl"></span><div class="bg" id="bg"></div>
+<div class="top"><img src="share-fx/logo-long.png" alt="DROP2TOP"><button class="acct" id="acct" aria-label="Your account"><svg viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0z"/></svg></button></div>
+<div class="wheel" id="wheel"></div>
+<div class="dots" id="dots"></div>
+<button class="play" id="play"><span id="playL"></span></button>
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet"><div class="bar" id="sbar"><i></i></div><div id="sbody"></div></div>
+</div>
+<div class="side">
+<h1>Home: the stage</h1>
+<p class="lead">Option 1, built out. <b>Swipe left and right</b> (or drag with the mouse) to turn the wheel: the next game rotates in from the side on a big wheel, and when you let go it <b>snaps into place with a small bounce</b>. A quick flick turns it on to the next game.</p>
+<ul>
+<li><b>The game's name is the headline</b>, big in its colour, with a <b>?</b> beside it for that game's rules (a sheet that drags closed). The line under it says what you do.</li>
+<li><b>Four shields</b> across the bottom, in the record's metallic look, with that game's numbers, count first.</li>
+<li><b>No bottom bar.</b> League, Stats and How to play are gone for now; the <b>account</b> is the circle top right. The big Play button sits in the thumb zone.</li>
+<li><b>Classic:</b> the card fan swaps its cards on a beat, like the home screen does now.</li>
+<li><b>Daily:</b> today's club card (Middlesbrough 1992/93, from the game), on its own and a little larger, with a slow shine.</li>
+<li><b>Club X:</b> "Career mode".</li>
+<li><b>Goal Rush:</b> "Score exactly ?-?-?", the ball turning slowly with formations floating round it.</li>
+<li><b>Unbeaten Run:</b> the D2T emblem turned so its arrows point up and down, in Unbeaten's blue, behind two shirts with the swipe arrows between them, gently moving.</li>
+<li>Numbers are made up. With reduced motion on, nothing moves on its own.</li>
+</ul>
+<div class="try" id="try"></div>
+</div>
+</div>
+<script>
+const UP='<svg viewBox="0 0 12 12" width="0.62em" height="0.62em" style="vertical-align:.04em"><path d="M6 1 L11 8 H7.5 V11 H4.5 V8 H1 Z" fill="currentColor"/></svg>';
+const FR='<svg viewBox="0 0 100 128" preserveAspectRatio="none" aria-hidden="true"><polygon points="1,11 11,1 89,1 99,11 99,108 50,127 1,108" stroke-linejoin="round"/></svg>';
+// the game's hand-drawn swipe arrow, standing up (screens/unbeaten.js drawArrow, as a fixed shape)
+const SWIPE=(col,down)=>`<svg viewBox="0 0 32 150" class="${down?'dn':'up'}" style="${down?'transform-origin:center;':''}"><g ${down?'transform="rotate(180 16 75)"':''}><path d="M11.5 146 Q16 150 20.5 146 L17.6 26 Q16 22 14.4 26 Z" fill="${col}"/><path d="M4 40 L16 14 Q21 26 29 37" fill="none" stroke="${col}" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></g></svg>`;
+const G=[
+ {id:'daily',k:'#FFFFFF',name:'Daily',hl:'Middlesbrough 1992/93',sb:'Same club for everyone today. They went down in 21st.',play:'PLAY TODAY',
+  art:`<div class="dcard"><img src="home-new/cd0.png" alt="Middlesbrough 1992/93"></div>`,
+  st:[['9','Played'],['1st','Best finish','home-new/middlesbrough.png'],['+20','Best rise',null,'#12F06C'],['2','Wins']],
+  rules:'One club a day for everyone, from the bottom of a real season. A side that really went down plays Classic; anyone above the drop plays Dare2Dream. No respins, one go a day. It closes at midnight.'},
+ {id:'classic',k:'#12F06C',name:'Classic',hl:'Pick a new club',sb:'Take a side that went down from the drop to the top.',play:'SPIN FOR A CLUB',
+  art:`<div class="cfan" id="cfan"></div>`,st:[['16','Beat the drop'],['14','Top half'],['7','Top 3'],['2','League titles']],
+  rules:'Spin for a club that went down for real. Pick your shape, then sign players through the season: three cards a roll, one every three games, more in January. Beat the drop, or take them to the top.'},
+ {id:'clubx',k:'#12F06C',name:'Club X',hl:'Career mode',sb:'Draft 11, replace the worst side, win the league. Then go again.',play:'PLAY CLUB X',
+  art:`<div class="clx"><img src="share-fx/club_x.png" alt="Club X"></div>`,st:[['4','Seasons'],['2','Titles'],['3','Top 3'],['1st','Best finish','share-fx/club_x.png']],
+  rules:'Spin three seasons and pick one. Club X takes the bottom club\'s place. Draft 11 one shirt at a time, keeper first, then play the season and win the league. Your career carries on season after season.'},
+ {id:'goal',k:'#FFD21F',name:'Goal Rush',hl:'Score exactly ?-?-?',sb:'Pick 11 real players. Their career goals must hit the target.',play:'PLAY GOAL RUSH',
+  art:`<div class="gr" id="gr"><img src="share-fx/goal_rush.png" alt=""></div>`,st:[['12','Games'],['3','Bang on'],['25%','Hit rate'],['8+','Last game']],
+  rules:'Each game picks a formation, and its number is your target: 3-5-2 means score exactly 352. Spin three real players for an open shirt and pick one. Get your XI\'s career Premier League goals to the number exactly.'},
+ {id:'ub',k:'#22D3EE',name:'Unbeaten',hl:'Higher or lower?',sb:'One stat, real Premier League numbers. How long can you go?',play:'START A RUN',
+  art:`<div class="ub"><div class="emb"></div><img class="shirt l" src="home-new/ub-rooney.png" alt=""><img class="shirt r" src="home-new/ub-salah.png" alt=""><div class="ar">${SWIPE('#22D3EE')}${SWIPE('#7FE7F7',1)}</div></div>`,
+  st:[['41','Runs'],['17','Best run'],['9','Topics'],['4','Last run']],
+  rules:'Spin a stat. Is the next real number higher or lower? Swipe up for higher, down for lower. One wrong call ends your run.'}];
+const hex=(h)=>[1,3,5].map((i)=>parseInt(h.slice(i,i+2),16));
+const mix=(a,b,t)=>{const A=hex(a),B=hex(b);return '#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join('');};
+// metallic stops, mixed in JS (as the live build does for older iOS)
+const metal=(c)=>`--k2:${c};--m1:${mix(c,'#ffffff',.45)};--m2:${mix(c,'#000000',.38)};--m3:${mix(c,'#ffffff',.15)}`;
+const wheel=document.getElementById('wheel'),ph=document.getElementById('ph'),bg=document.getElementById('bg');
+wheel.innerHTML=G.map((g,i)=>`<section class="sl" data-i="${i}" style="--k:${g.k}"><div class="floor"></div><div class="art">${g.art}</div>
+<div class="nm"><div class="gn">${g.name}<button class="q" data-q="${i}" aria-label="How to play ${g.name}">?</button></div><div class="hl">${g.hl}</div><p class="sb">${g.sb}</p></div>
+<div class="st">${g.st.map(([n,l,cr,c])=>{const col=c||g.k;return `<div class="sh${col==='#3BA4FF'?' wh':''}" style="${metal(col)}">${FR}${cr?`<img class="cr" src="${cr}" alt="">`:''}<b>${n}</b><span>${l}</span></div>`;}).join('')}</div></section>`).join('');
+const SL=[...wheel.children];
+document.getElementById('dots').innerHTML=G.map(()=>'<i></i>').join('');const DT=[...document.getElementById('dots').children];
+// ---- the wheel ----
+const STEP=24; // degrees between games
+let pos=1,vel=0,target=1,anim=null,drag=null;
+function render(){
+ SL.forEach((s,i)=>{const d=i-pos,a=d*STEP,o=Math.max(0,1-Math.abs(d)*.78);s.style.transform=`rotate(${a}deg)`;s.style.opacity=o;s.style.visibility=Math.abs(d)>1.6?'hidden':'visible';s.classList.toggle('cur',Math.abs(d)<.5);});
+ const i0=Math.max(0,Math.min(G.length-1,Math.floor(pos))),i1=Math.min(G.length-1,i0+1),t=Math.max(0,Math.min(1,pos-i0)),k=mix(G[i0].k,G[i1].k,t);
+ ph.style.setProperty('--k',k);
+ bg.style.background=`radial-gradient(70% 42% at 50% 36%,${k}55,transparent 70%),radial-gradient(120% 55% at 50% 112%,${k}30,#000 70%)`;
+ const n=Math.round(Math.max(0,Math.min(G.length-1,pos)));DT.forEach((d,i)=>d.classList.toggle('on',i===n));document.getElementById('playL').textContent=G[n].play;
+}
+// a spring with a little overshoot: the bounce as it snaps
+function settle(){cancelAnimationFrame(anim);let last=performance.now();
+ const step=(now)=>{const dt=Math.min(.032,(now-last)/1000);last=now;const K=210,C=19;vel+=(-K*(pos-target)-C*vel)*dt;pos+=vel*dt;render();
+  if(Math.abs(pos-target)<.0008&&Math.abs(vel)<.002){pos=target;vel=0;render();return;}anim=requestAnimationFrame(step);};anim=requestAnimationFrame(step);}
+const go=(i)=>{target=Math.max(0,Math.min(G.length-1,i));settle();};
+wheel.addEventListener('pointerdown',(e)=>{if(e.target.closest('.q'))return;cancelAnimationFrame(anim);drag={x:e.clientX,p:pos,t:performance.now(),lx:e.clientX,v:0};wheel.classList.add('drag');wheel.setPointerCapture(e.pointerId);});
+wheel.addEventListener('pointermove',(e)=>{if(!drag)return;const now=performance.now(),W=ph.clientWidth*.85;let p=drag.p-(e.clientX-drag.x)/W;
+ if(p<0)p=p*.35;if(p>G.length-1)p=G.length-1+(p-(G.length-1))*.35; // rubber band at the ends
+ drag.v=-(e.clientX-drag.lx)/W/Math.max(.008,(now-drag.t)/1000);drag.lx=e.clientX;drag.t=now;pos=p;render();});
+const up=()=>{if(!drag)return;wheel.classList.remove('drag');vel=drag.v*.6;const flick=Math.abs(drag.v)>1.2?Math.sign(drag.v):0;
+ target=Math.max(0,Math.min(G.length-1,Math.round(pos+flick*.5)));if(flick&&target===Math.round(drag.p))target=Math.max(0,Math.min(G.length-1,target+flick));drag=null;settle();};
+wheel.addEventListener('pointerup',up);wheel.addEventListener('pointercancel',up);
+document.addEventListener('keydown',(e)=>{if(e.key==='ArrowRight')go(Math.round(target)+1);if(e.key==='ArrowLeft')go(Math.round(target)-1);});
+// ---- Classic's fan: the front card steps aside and a new one comes up, on a beat ----
+const CARDS=['home-new/cc0.png','home-new/cc1.png','home-new/cc2.png','home-new/cc3.png','home-new/cc4.png','home-new/cd1.png','home-new/cd2.png'];
+const fan=document.getElementById('cfan');let next=3;
+const im=CARDS.slice(0,4).map((src,i)=>{const e=document.createElement('img');e.src=src;e.alt='';e.className=['pL','pR','pF','pH'][i];fan.appendChild(e);return e;});
+let order=[...im]; // L, R, F, H
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!reduced)setInterval(()=>{const [L,R,F,H]=order;L.className='pH';F.className='pL';R.className='pF';H.src=CARDS[next++%CARDS.length];H.className='pR';order=[F,H,R,L];},2600);
+// ---- Goal Rush: formations floating round the ball ----
+const FM=['4-4-2','4-3-3','3-5-2','4-5-1','3-4-3','5-3-2','4-2-4','5-4-1'],gr=document.getElementById('gr');
+const spots=[[18,40],[208,24],[230,150],[200,248],[24,230],[0,140],[110,0],[110,270]];
+FM.forEach((f,i)=>{const e=document.createElement('i');e.textContent=f;e.style.left=spots[i][0]+'px';e.style.top=spots[i][1]+'px';e.style.animationDelay=(i*.68)+'s';gr.appendChild(e);});
+// ---- sheets: rules (the ?) and account; tap the bar or drag it down to close ----
+const sheet=document.getElementById('sheet'),scrim=document.getElementById('scrim'),sbody=document.getElementById('sbody');
+const open=(html,k)=>{sbody.innerHTML=html;sheet.style.setProperty('--k',k||'#12F06C');sheet.style.transform='';sheet.classList.add('open');scrim.classList.add('on');};
+const close=()=>{sheet.classList.remove('open');scrim.classList.remove('on');sheet.style.transform='';};
+wheel.addEventListener('click',(e)=>{const q=e.target.closest('.q');if(!q)return;const g=G[+q.dataset.q];open(`<h3>${g.name}</h3><p>${g.rules}</p>`,g.k);});
+document.getElementById('acct').onclick=()=>open(`<h3 style="color:#fff">Your account</h3><p>Sign in with the same email and PIN as Tenaball to keep your record safe.</p><button class="sbtn">Sign in</button>`);
+scrim.onclick=close;
+let sd=null;const bar=document.getElementById('sbar');
+bar.addEventListener('pointerdown',(e)=>{sd={y:e.clientY,moved:false};bar.setPointerCapture(e.pointerId);sheet.style.transition='none';});
+bar.addEventListener('pointermove',(e)=>{if(!sd)return;const dy=Math.max(0,e.clientY-sd.y);if(dy>4)sd.moved=true;sheet.style.transform=`translateY(${dy}px)`;});
+bar.addEventListener('pointerup',(e)=>{if(!sd)return;sheet.style.transition='';const dy=e.clientY-sd.y;if(!sd.moved||dy>80)close();else sheet.style.transform='';sd=null;});
+document.getElementById('play').onclick=()=>{};
+// handy buttons on the side
+document.getElementById('try').innerHTML=G.map((g,i)=>`<button data-i="${i}">${g.name}</button>`).join('');
+document.querySelectorAll('#try button').forEach((b)=>b.onclick=()=>go(+b.dataset.i));
+render();
+</script></body></html>
