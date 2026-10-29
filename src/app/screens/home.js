@@ -177,7 +177,7 @@
   const metal = (c) => { const m = D2T.mix; return [m(c, '#FFFFFF', 0.45), c, m(c, '#000000', 0.38), m(c, '#FFFFFF', 0.15)]; };
   const shieldHTML = (sh, pc) => {
     const c = sh.c || pc, g = metal(c), lt = c === '#3BA4FF';
-    return `<div class="fr-frame fr-al${lt ? ' lt' : ''}" style="--m1:${g[0]};--m2:${g[1]};--m3:${g[2]};--m4:${g[3]}">${FRAME}${sh.crest ? `<img class="cr" src="${sh.crest}" alt="">` : ''}<b>${sh.n}</b><span>${sh.l}</span></div>`;
+    return `<div class="fr-frame fr-al${lt ? ' lt' : ''}" style="--m1:${g[0]};--m2:${g[1]};--m3:${g[2]};--m4:${g[3]}">${FRAME}<b>${sh.n}</b><span>${sh.l}</span></div>`;
   };
   function recordSection(pages) {
     const p0 = pages[0];
