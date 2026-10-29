@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Home Stage</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;0,600;0,700;0,800;1,800;1,900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;0,600;0,700;0,800;1,800;1,900&family=Outfit:wght@700;800&display=swap">
 <style>
 :root{--g:#12F06C;--soft:#BDBDC6;--mut:#8E8E99;--f:'Exo 2',system-ui,sans-serif}
 *{box-sizing:border-box}
@@ -108,6 +108,19 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 @keyframes bobD{0%,100%{transform:translateY(-6px)}50%{transform:translateY(8px)}}
 .tb img{width:210px;filter:drop-shadow(0 18px 30px rgba(0,0,0,.6));animation:breathe 5s ease-in-out infinite}
 @keyframes breathe{0%,100%{transform:scale(.95)}50%{transform:scale(1.05)}}
+.tbb{position:absolute;top:548px;left:10%;right:10%}
+.tbq{font:800 9.5px var(--f);letter-spacing:.14em;color:#B98CFF;text-align:center;margin:0 0 6px}
+.tbw{height:124px;overflow:hidden;border-radius:12px;-webkit-mask:linear-gradient(transparent,#000 14%,#000 86%,transparent);mask:linear-gradient(transparent,#000 14%,#000 86%,transparent)}
+.tbl{transition:transform .6s cubic-bezier(.3,.8,.3,1)}
+.tr{display:flex;height:36px;margin-bottom:5px;border-radius:9px;overflow:hidden;background:rgba(20,22,52,.85);border:1px solid rgba(255,255,255,.12);font-family:'Outfit','Exo 2',sans-serif}
+.tr .no{flex:none;width:36px;display:grid;place-items:center;font:800 16px 'Outfit','Exo 2',sans-serif;color:#C9CCE8;border-right:1px solid rgba(255,255,255,.12)}
+.tr .an{flex:1;display:flex;align-items:center;gap:7px;padding:0 6px 0 8px;opacity:0;transform:translateX(-10px);transition:opacity .45s,transform .45s}
+.tr .an i{flex:none;width:20px;height:20px;border-radius:50%;background:#2B6FE0;border:1.5px solid #fff;display:grid;place-items:center;font:800 8px 'Outfit',sans-serif;font-style:normal;color:#fff}
+.tr .an b{flex:1;font:700 14px 'Outfit','Exo 2',sans-serif;color:#0A0A2A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tr .an em{flex:none;font:700 10px 'Outfit',sans-serif;font-style:normal;color:#fff;background:#0A0A2A;border-radius:10px;padding:3px 7px}
+.tr.on{background:linear-gradient(90deg,#FF4D8D 0%,#FF9A3C 28%,#FFE14D 52%,#7CF06C 76%,#22D3EE 100%);border-color:transparent}
+.tr.on .no{color:#fff;background:rgba(0,0,0,.12);border-right-color:rgba(255,255,255,.35)}
+.tr.on .an{opacity:1;transform:none}
 .clx img{width:200px;filter:drop-shadow(0 18px 30px rgba(0,0,0,.6));animation:hover 4s ease-in-out infinite}
 @keyframes hover{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
@@ -147,7 +160,7 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 <div id="switch"></div>
 <ul>
 <li><b>Round and round:</b> the wheel never ends. Swipe past Tenaball and you're back at the Daily.</li>
-<li><b>Tenaball:</b> added at the end, its logo big and slowly breathing in and out.</li>
+<li><b>Tenaball:</b> its logo big and slowly breathing, and where the shields would be, <b>a Tenaball board filling from 10th up to 1st</b>, each answer lighting up in Tenaball's rainbow, the list climbing as it goes: the Premier League's all-time top ten scorers, from the game's own data.</li>
 <li><b>Daily:</b> in the club's colours, Boro red: the label, the button (white words) and all four shields. The card floats like Club X's badge.</li>
 <li><b>Shields:</b> 80% of the screen's width, no crests on them.</li>
 <li><b>Titles:</b> the game's name a little bigger than before, in its colour, over the headline.</li>
@@ -155,7 +168,7 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 <li><b>Arrows</b> back on both sides so people know to swipe; each hides at the end of the row.</li>
 <li><b>The Play button</b> is the game's own: round ends, uppercase black italic, the soft glow.</li>
 <li><b>Classic:</b> the fan works like home does now: the three cards turn round, and <b>as they start to move</b>, the card heading to the back fades into a new club, as if a new card is shuffled in. Every card is now exactly the same size, so nothing jumps. (Here every 4 seconds; on home it's every 10 to 15.)</li>
-<li><b>Goal Rush:</b> seven floating things (three formations, four real players' shirts in mixed kits), coming in and out slowly, some in front of the ball and some behind. Each shirt's <b>goals roll up and land</b> as it appears, and a few <b>smaller balls</b> drift round too. The ball turns in 3D.</li>
+<li><b>Goal Rush:</b> seven floating things (two formations, three real players' shirts in mixed kits, and two of the game's <b>empty shirts</b>: a DEF and a ?), coming in and out slowly, some in front of the ball and some behind. Each shirt's <b>goals roll up and land</b> as it appears, and a few <b>smaller balls</b> drift round too. The ball turns in 3D.</li>
 <li><b>Unbeaten:</b> no emblem. <b>two club cards</b>, as the game shows its club stats: <b>Man Utd 1999/00, 91 points</b> on the left, and on the right a card that <b>spins in every 10 seconds</b> (Arsenal, Chelsea, Liverpool, Spurs) and lands on <b>Man City 2017/18, ?</b>. Real points from the game's data.</li>
 </ul></div></div>
 <h2 class="sec">Carry on where you left off</h2>
@@ -183,6 +196,8 @@ const metal=(c)=>`--k2:${c};--m1:${mix(c,'#ffffff',.45)};--m2:${mix(c,'#000000',
 const dark=(c)=>{const [r,g,b]=hex(c);return (.299*r+.587*g+.114*b)<150;};
 const shields=(st,k)=>st.map(([n,l,cr,c])=>`<div class="sh${dark(c||k)?' wh':''}" style="${metal(c||k)}">${FR}${cr?`<img class="cr" src="${cr}" alt="">`:''}<b>${n}</b><span>${l}</span></div>`).join('');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+// the all-time Premier League top ten, from the game's own data (career goals in the Goal Rush lists)
+const TOP10=[['Alan Shearer',260],['Harry Kane',213],['Wayne Rooney',208],['Mohamed Salah',193],['Andy Cole',187],['Sergio Agüero',184],['Frank Lampard',177],['Thierry Henry',175],['Robbie Fowler',163],['Jermain Defoe',162]];
 const RUN={crest:'home-new/west-ham.png',card:'home-new/cwhu.png',club:'West Ham',season:'2010/11',md:14,pos:'6th',pts:21};
 
 function games(cont){
@@ -205,7 +220,7 @@ function games(cont){
    st:[['41','Runs'],['17','Best run'],['9','Topics'],['4','Last run']],
    rules:'Spin a stat. Is the next real number higher or lower? Swipe up for higher, down for lower. One wrong call ends your run.'},
   {id:'ten',k:'#A66BFF',name:'Tenaball',hl:'Name the top ten',sb:'Our football quiz. Opens Tenaball in a new tab.',play:'Play Tenaball',
-   art:()=>`<div class="tb"><img src="home-new/tenaball.png" alt="Tenaball"></div>`,st:[],
+   art:()=>`<div class="tb"><img src="home-new/tenaball.png" alt="Tenaball"></div>`,st:[],board:true,
    rules:'Tenaball is our football quiz: name the top ten in a Premier League list. It opens in its own tab, and your Tenaball scores stay there.'}];
  if(!cont)return G;
  const c=G[1];c.live=true;
@@ -226,7 +241,7 @@ function stage(host,cont,start,opt={}){
 <div class="wheel">${G.map((g,i)=>`<section class="sl" style="--k:${g.k};${g.kt?`--kt:${g.kt}`:''}"><div class="floor"></div><div class="art">${g.art()}</div>
 ${g.banner?`<div class="banner"><img src="${RUN.crest}" alt=""><span class="t"><small>CARRY ON</small><b>${RUN.club} ${RUN.season}</b><span>Matchday ${RUN.md} of 38 · ${RUN.pos} · ${RUN.pts} pts</span></span><span class="go">${UPI}</span></div>`:''}
 <div class="nm"><div class="gn">${g.name}${g.gnExtra||''}</div><div class="hl">${g.hl}</div><p class="sb">${g.sb}</p></div>
-${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.share==='shields'?`<button class="shs" aria-label="Share your ${g.name} record">SHARE ${SHARE}</button>`:''}</section>`).join('')}</div>
+${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.board?`<div class="tbb"><div class="tbq">PREMIER LEAGUE ALL-TIME TOP SCORERS</div><div class="tbw"><div class="tbl">${TOP10.map(([n,g],i)=>`<div class="tr" data-r="${i+1}"><span class="no">${i+1}</span><span class="an"><i>${n.split(' ').map((w)=>w[0]).join('')}</i><b>${n}</b><em>${g} goals</em></span></div>`).join('')}</div></div></div>`:''}${g.share==='shields'?`<button class="shs" aria-label="Share your ${g.name} record">SHARE ${SHARE}</button>`:''}</section>`).join('')}</div>
 <button class="sw l" aria-label="Previous game">${CHL}</button><button class="sw r" aria-label="Next game">${CHR}</button>
 <div class="dots">${G.map((g)=>`<i class="${g.live?'live':''}"></i>`).join('')}</div>
 <div class="cont-line"></div>
@@ -241,7 +256,7 @@ ${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.share==='shiel
   const f=Math.floor(pos),i0=((f%N)+N)%N,i1=(i0+1)%N,t=pos-f,k=mix(G[i0].k,G[i1].k,t);
   ph.style.setProperty('--k',k);bg.style.background=`radial-gradient(70% 42% at 50% 36%,${k}55,transparent 70%),radial-gradient(120% 55% at 50% 112%,${k}30,#000 70%)`;
   const n=((Math.round(pos)%N)+N)%N;DT.forEach((d,i)=>d.classList.toggle('on',i===n));
-  if(n!==shown){shown=n;const g=G[n];ph.style.setProperty('--ink',g.ink||'#0A0A0A');$('.plbl').innerHTML=(g.playImg?`<img src="${g.playImg}" alt=""> `:'')+g.play+(g.playImg?'':` ${UPI}`);$('.round').style.display=g.round?'':'none';$('.round').classList.toggle('off',!g.round);ph.querySelectorAll('.shr').forEach((b)=>{b.style.visibility=g.st.length?'visible':'hidden';});$('.cont-line').innerHTML=g.contLine||'';}
+  if(n!==shown){shown=n;const g=G[n];if(g.board&&ph.boardStart)ph.boardStart();ph.style.setProperty('--ink',g.ink||'#0A0A0A');$('.plbl').innerHTML=(g.playImg?`<img src="${g.playImg}" alt=""> `:'')+g.play+(g.playImg?'':` ${UPI}`);$('.round').style.display=g.round?'':'none';$('.round').classList.toggle('off',!g.round);ph.querySelectorAll('.shr').forEach((b)=>{b.style.visibility=g.st.length?'visible':'hidden';});$('.cont-line').innerHTML=g.contLine||'';}
  }
  // a spring with a little overshoot: the bounce as it snaps
  function settle(){cancelAnimationFrame(anim);let last=performance.now();
@@ -270,11 +285,12 @@ ${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.share==='shiel
  const gr=ph.querySelector('.gr');
  if(gr){const GL={Bowen:[65,'#FFFFFF',null],Ings:[72,'#111111','#FFFFFF'],Duff:[54,'#0B2A55','#FFFFFF'],McAllister:[49,'#1D428A',null],Alonso:[26,'#FFFFFF',null],Alli:[51,'#132257',null]};
   // seven things in all, three formations and four real players, slower, some passing in front of the ball
-  const FL=[['f','4-4-2'],['p','Bowen'],['f','3-5-2'],['p','Ings'],['p','Duff'],['f','4-3-3'],['p','Alli']];
+  const FL=[['f','4-4-2'],['p','Bowen'],['e','gre-def'],['p','Ings'],['f','3-5-2'],['e','gre-myst'],['p','Duff']];
   const spots=[[40,40,0],[210,26,1],[236,140,0],[200,214,1],[44,206,0],[30,120,1],[128,8,0]];
   const roll=(el,to)=>{if(reduced){el.textContent=to;return;}let t0=null;const D=1100;const f=(now)=>{if(!t0)t0=now;const k=Math.min(1,(now-t0)/D),e=1-Math.pow(1-k,3);el.textContent=k<1?Math.round(to*e+(1-e)*Math.random()*to):to;if(k<1)requestAnimationFrame(f);};requestAnimationFrame(f);};
   FL.forEach(([t,v],i)=>{const e=document.createElement('div');e.className='fl '+(t==='f'?'':'pl');
    if(t==='f')e.innerHTML=`<span class="fm">${v}</span>`;
+   else if(t==='e'){e.classList.add('pl');e.innerHTML=`<div class="sh2"><img src="home-new/${v}.png" alt=""></div>`;}
    else{const [g,ink,st]=GL[v];e.innerHTML=`<div class="sh2"><img src="home-new/grb-${v}.png" alt=""><span class="num" style="color:${ink};${st?`-webkit-text-stroke:2px ${st};`:''}">${g}</span></div><b>${v}</b>`;
     const num=e.querySelector('.num');const go=()=>roll(num,g);e.addEventListener('animationstart',go);e.addEventListener('animationiteration',go);}
    e.style.left=spots[i][0]+'px';e.style.top=spots[i][1]+'px';if(spots[i][2])e.classList.add('over');e.style.animationDelay=(i*1.57)+'s';gr.appendChild(e);});
@@ -287,6 +303,13 @@ ${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.share==='shiel
   const spin=()=>{at+=R.length;strip.animate([{transform:`translateY(${-(at-R.length)*H}px)`},{transform:`translateY(${-at*H-10}px)`,offset:.86},{transform:`translateY(${-at*H}px)`}],{duration:1400,easing:'cubic-bezier(.3,.05,.2,1)',fill:'forwards'});
    if(at>=R.length*7){setTimeout(()=>{at=4;strip.getAnimations().forEach((a)=>a.cancel());strip.style.transform=`translateY(${-at*H}px)`;},1600);}};
   if(!reduced)setInterval(spin,10000);}
+ const tbl=ph.querySelector('.tbl');
+ if(tbl){const rows=[...tbl.children],RH=41,VIS=3;let r=10;
+  const show=()=>{const top=Math.max(0,r-VIS);tbl.style.transform=`translateY(${-top*RH+4}px)`;rows[r-1].classList.add('on');};
+  const reset=()=>{rows.forEach((x)=>x.classList.remove('on'));r=10;tbl.style.transition='none';tbl.style.transform=`translateY(${-(10-VIS)*RH+4}px)`;void tbl.offsetHeight;tbl.style.transition='';};
+  let tm=0;const tick=()=>{if(r<1){tm=setTimeout(()=>{reset();tm=setTimeout(tick,900);},2600);return;}show();r--;tm=setTimeout(tick,1100);};
+  // starts again from 10th each time you land on Tenaball
+  ph.boardStart=()=>{clearTimeout(tm);reset();if(reduced){rows.forEach((x)=>x.classList.add('on'));tbl.style.transform='translateY(4px)';}else tm=setTimeout(tick,700);};reset();}
  // sheets: the ? (rules for the game you're on) and the account; tap the bar or drag it down to close
  const sheet=$('.sheet'),scrim=$('.scrim'),body=$('.sb2');
  const open=(html,k)=>{body.innerHTML=html;sheet.style.setProperty('--sk',k);sheet.style.transform='';sheet.classList.add('open');scrim.classList.add('on');};
@@ -305,11 +328,11 @@ ${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.share==='shiel
 let main,SHV='bar';const MH=document.getElementById('main');
 const build=()=>{MH.innerHTML='';main=stage(MH,null,1,{share:SHV});};build();
 const sw=document.getElementById('switch');
-const KS=[['#FF7A1A','Orange'],['#FF3EA5','Pink'],['#FFFFFF','White'],['#12F06C','Green (now)']],SV=[['top','Share by the ?'],['shields','Share above the shields'],['bar','Share in the bottom bar']];
+const KS=[['#C9D0D9','Silver'],['#FFFFFF','White'],['#FF3EA5','Pink'],['#12F06C','Green (now)']],SV=[['top','Share by the ?'],['shields','Share above the shields'],['bar','Share in the bottom bar']];
 sw.innerHTML=`<div class="sgrp"><b>Classic's colour</b>${KS.map(([k,n])=>`<button data-k="${k}"><i style="background:${k}"></i>${n}</button>`).join('')}</div><div class="sgrp"><b>Share</b>${SV.map(([v,n])=>`<button data-v="${v}">${n}</button>`).join('')}</div>`;
 const mark=()=>{sw.querySelectorAll('[data-k]').forEach((b)=>b.classList.toggle('on',b.dataset.k===CLASSIC_K));sw.querySelectorAll('[data-v]').forEach((b)=>b.classList.toggle('on',b.dataset.v===SHV));};
 sw.querySelectorAll('[data-k]').forEach((b)=>b.onclick=()=>{CLASSIC_K=b.dataset.k;build();mark();});sw.querySelectorAll('[data-v]').forEach((b)=>b.onclick=()=>{SHV=b.dataset.v;build();mark();});
-CLASSIC_K='#FF7A1A';build();mark();
+CLASSIC_K='#C9D0D9';build();mark();
 // arrow keys drive the main phone
 document.addEventListener('keydown',(e)=>{if(e.key==='ArrowRight')main.step(1);if(e.key==='ArrowLeft')main.step(-1);});
 const C=[['A','The button','The stage stays as it is; <b>Continue</b>, a line above it says where you are, and the <b>respin arrow</b> beside it starts over (it asks first).'],
@@ -319,11 +342,11 @@ const C=[['A','The button','The stage stays as it is; <b>Continue</b>, a line ab
  ['E','The table','A slice of <b>the league table</b> around you, your row lit green, so you see the race before you carry on. Continue, with the respin arrow to start over.']];
 const cw=document.getElementById('conts');
 C.forEach(([k,n,w])=>{const col=document.createElement('div');col.className='col';col.innerHTML=`<h3>${k} · <span>${n}</span></h3><p>${w}</p>`;cw.appendChild(col);stage(col,k,1);});
-const KC=[['#FF7A1A','Orange','Warm and bold, and nothing else in the game uses it now. Sits between Goal Rush\'s yellow and the Daily\'s club red, so it can look close to both on the wheel.'],['#FF3EA5','Pink','The most different from every other game, and loud. Black words on the button read poorly, so it takes white words.'],['#FFFFFF','White','Clean and classic, like the D2T logo itself, with black words. The Daily used white before it took on the club\'s colours, so it\'s free now.']];
+const KC=[['#C9D0D9','Silver','Silver like a trophy, and the metallic shields look like real silverware. Black words, a cool glow, and nothing else in the game is grey. It sits well between the Daily\'s club colour and Club X\'s green.'],['#FF3EA5','Pink','The most different from every other game, and loud. Black words on the button read poorly, so it takes white words.'],['#FFFFFF','White','Clean and classic, like the D2T logo itself, with black words. The Daily used white before it took on the club\'s colours, so it\'s free now.']];
 const kc=document.getElementById('colours');
 KC.forEach(([k,n,w])=>{const col=document.createElement('div');col.className='col';col.innerHTML=`<h3><span style="color:${k}">${n}</span></h3><p>${w}</p>`;kc.appendChild(col);CLASSIC_K=k;stage(col,null,1);});
 const SC=[['top','By the ?','A <b>round share button</b> beside the ? and the account, the same style, top right. Always in reach, never in the way. It shares the record of the game you\'re on.',null],['shields','Above the shields','A small <b>SHARE</b> with the arrow, in the game\'s colour, <b>just above the shields on the right</b>, so it sits with the numbers it shares.',null],['bar','In the bottom bar','<b>Play in the middle</b>, the respin arrow left (when a game has started) and <b>share right</b>: the thumb finds all three. Shown here with a Classic run going, so all three show.','A']];
 const sc=document.getElementById('shares');
-SC.forEach(([v,n,w,c])=>{const col=document.createElement('div');col.className='col';col.innerHTML=`<h3>${n}</h3><p>${w}</p>`;sc.appendChild(col);CLASSIC_K='#FF7A1A';stage(col,c,1,{share:v});});
-CLASSIC_K='#FF7A1A';
+SC.forEach(([v,n,w,c])=>{const col=document.createElement('div');col.className='col';col.innerHTML=`<h3>${n}</h3><p>${w}</p>`;sc.appendChild(col);CLASSIC_K='#C9D0D9';stage(col,c,1,{share:v});});
+CLASSIC_K='#C9D0D9';
 </script></body></html>
