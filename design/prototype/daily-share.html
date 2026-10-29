@@ -120,8 +120,8 @@ const GREEN='#12F06C',BLUE='#3BA4FF',YEL='#FFD21F',CYAN='#22D3EE';
 const RED='#FF4D52';
 // Club X career: four seasons (made up), the badge block and the title count
 const CAREER=[['2003/04','1st',1],['2004/05','2nd',0],['2005/06','1st',1],['2006/07','5th',0]];
-const CAREER_MSG=['DROP2TOP Club X · Season 4','','Drafted from nothing in 2003/04','2 titles in 4 seasons','','My record:','2 titles · 3 top 3 · 4 top half · 4 beat the drop','','All-time top scorer: Ruud van Nistelrooy, 64 goals','Best player: Thierry Henry, 99'];
-const LONG_MSG=['DROP2TOP Club X · Season 20','','Drafted from nothing in 2003/04','7 titles in 20 seasons','','My record:','7 titles · 14 top 3 · 20 top half · 20 beat the drop','','All-time top scorer: Thierry Henry, 214 goals','Best player: Thierry Henry, 99'];
+const CAREER_MSG=['DROP2TOP Club X · Season 4','','Drafted from nothing in 2003/04','','My record:','2 titles · 3 top 3 · 4 top half · 4 beat the drop','','All-time top scorer: Ruud van Nistelrooy, 64 goals','Best player: Thierry Henry, 99'];
+const LONG_MSG=['DROP2TOP Club X · Season 20','','Drafted from nothing in 2003/04','','My record:','7 titles · 14 top 3 · 20 top half · 20 beat the drop','','All-time top scorer: Thierry Henry, 214 goals','Best player: Thierry Henry, 99'];
 function careerHead(k,a='2 TITLES ',b='IN 4 SEASONS'){k.pic(IM.clx,W/2,248,190);k.fit('CLUB X',W/2,452,960,900,70,true,'#FFFFFF');k.fit('Drafted from nothing in 03/04',W/2,528,960,600,34,false,'#E6E6EA');line2(k,a,b,GREEN,592);}
 // Goal Rush: two real XIs from the game's lists, 433 and 441; kits as the game draws them (screens/goals.js KITS, clubs.json)
 const KIT={Spurs:{f:'#FFFFFF',tr:'#132257',ink:'#132257'},Chelsea:{f:'#2B63E0',tr:'#FFFFFF',ink:'#FFFFFF'},Charlton:{f:'#D4021D',tr:'#FFFFFF',ink:'#FFFFFF'},'Aston Villa':{f:'#670E36',sl:'#95BFE5',tr:'#3B0820',ink:'#FFFFFF'},
@@ -129,13 +129,20 @@ const KIT={Spurs:{f:'#FFFFFF',tr:'#132257',ink:'#132257'},Chelsea:{f:'#2B63E0',t
 const XI_HIT=[['Robinson','Spurs',1],['Petrescu','Chelsea',23],['Young','Charlton',9],['Cahill','Chelsea',28],['Alonso','Chelsea',26],['Alli','Spurs',51],['Duff','Blackburn',54],['McAllister','Leeds',49],['Hartson','West Ham',55],['Bowen','West Ham',65],['Ings','Southampton',72]];
 const XI_MISS=XI_HIT.map(x=>x[0]==='Young'?['Southgate','Aston Villa',17]:x);
 const F433=[[540,0],[200,1],[413,1],[667,1],[880,1],[290,2],[540,2],[790,2],[270,3],[540,3],[810,3]];
+
+// a hand-drawn red cross (Craig's reference, 30 Oct): one long flat stroke, crossed by a steeper doubled one, each tapering
+// to fine ends and no thicker than the swipe arrow's shaft (about 12px). edge: a dark rim so it reads on a red shirt.
+function tstroke(g,x0,y0,cx,cy,x1,y1,T,col){const n=48,L=[],R=[];for(let i=0;i<=n;i++){const t=i/n,u=1-t,x=u*u*x0+2*u*t*cx+t*t*x1,y=u*u*y0+2*u*t*cy+t*t*y1,dx=2*u*(cx-x0)+2*t*(x1-cx),dy=2*u*(cy-y0)+2*t*(y1-cy),l=Math.hypot(dx,dy)||1,nx=-dy/l,ny=dx/l,w=T*(0.18+0.82*Math.pow(Math.sin(Math.PI*Math.min(1,t*1.15)),0.55))/2;L.push([x+nx*w,y+ny*w]);R.push([x-nx*w,y-ny*w]);}
+ g.beginPath();L.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));R.reverse().forEach(([x,y])=>g.lineTo(x,y));g.closePath();g.fillStyle=col;g.fill();}
+function cross(g,cx,cy,w,h,edge){const S=[[cx-w*.5,cy-h*.22,cx,cy+h*.02,cx+w*.5,cy+h*.3,12],[cx-w*.4,cy+h*.5,cx-w*.02,cy+h*.06,cx+w*.42,cy-h*.5,8],[cx-w*.34,cy+h*.6,cx+w*.04,cy+h*.18,cx+w*.46,cy-h*.36,6]];
+ g.save();if(edge)S.forEach(([a,b,c,d,e,f,T])=>{g.save();g.strokeStyle='#0A0A0A';g.lineWidth=2.5;g.lineJoin='round';tstroke(g,a,b,c,d,e,f,T,'#0A0A0A');g.stroke();g.restore();});
+ S.forEach(([a,b,c,d,e,f,T])=>tstroke(g,a,b,c,d,e,f,T,RED));g.restore();}
 function grHead(k,xi,over){const t=xi.reduce((a,x)=>a+x[2],0),g=k.g;
  if(!over){k.mid(t+' GOALS',W/2,300,960,900,110,true,'#FFFFFF');return;}
  // a miss: the target struck through with a red scratch, and how far off beside it
  const a='433',b=' GOALS',wa=k.width(a,900,110,true),wb=k.width(b,900,110,true),wo=k.width(over,900,64,true),gap=34,x0=W/2-(wa+wb+gap+wo)/2;
  k.mid(a,x0,300,999,900,110,true,'#FFFFFF','left');k.mid(b,x0+wa+12,300,999,900,110,true,'#FFFFFF','left');
- g.save();g.strokeStyle=RED;g.lineCap='round';g.lineJoin='round';g.lineWidth=9;g.beginPath();g.moveTo(x0-12,318);g.quadraticCurveTo(x0+wa*.5,300,x0+wa+10,282);g.stroke();
- g.lineWidth=5;g.beginPath();g.moveTo(x0-2,330);g.quadraticCurveTo(x0+wa*.55,314,x0+wa+16,296);g.stroke();g.restore();
+ cross(g,x0+wa/2,300,wa+40,84);
  k.mid(over,x0+wa+wb+gap,300,999,900,64,true,RED,'left');}
 function grTotal(k,xi,word,col,cy){const t=xi.reduce((a,x)=>a+x[2],0);k.mid(String(t),W/2,cy,900,900,170,true,col===RED?RED:'#FFFFFF');k.mid(word,W/2,cy+112,900,900,50,true,col);}
 function pitch(g,k,y0,y1){g.save();k.rr(70,y0,940,y1-y0,28);g.clip();const gr=g.createLinearGradient(0,y0,0,y1);gr.addColorStop(0,'#0F3A22');gr.addColorStop(1,'#08200F');g.fillStyle=gr;g.fillRect(70,y0,940,y1-y0);
@@ -171,11 +178,11 @@ function climb(g,k,S,y,h){k.box(90,y,900,h,22);const x0=200,x1=950,yT=y+56,yB=y+
  S.forEach(([s,f,won],i)=>{const x=xs(i),yy=pos(f),r=big?(won?20:13):(won?12:6);g.beginPath();g.arc(x,yy,r,0,7);g.fillStyle=won?'#0C1F14':GREEN;g.fill();if(won){g.lineWidth=big?6:4;g.strokeStyle=GREEN;g.stroke();}
   if(big)k.mid(f,x,yy+(won?-44:-36),120,900,30,true,won?GREEN:'#FFFFFF');
   if(big||i%5===0||i===S.length-1)k.fit(s.slice(2),x,y+h-40,160,800,big?22:18,false,'#8E8E99','center','2px');});
- if(!big)k.fit('● TITLE',x1,y+14,200,800,18,false,GREEN,'right','2px');}
+}
 // Unbeaten: the top of the card, the two club cards, and the game's hand-drawn swipe arrow (screens/unbeaten.js drawArrow)
 function ubHead(g,k){frame(g,k,{wash:CYAN,ghost:null,tag:'Unbeaten Run',tagCol:CYAN,band:CYAN,ink:'#001A1F',dare:'Can you beat 17?'});
  const nw=k.width('17',900,190,true);g.save();g.shadowColor='rgba(34,211,238,.45)';g.shadowBlur=60;k.mid('17',W/2,330,400,900,190,true,CYAN,'center');g.restore();k.mid('IN A',W/2+nw/2+22,304,300,900,40,true,'#FFFFFF','left');k.mid('ROW',W/2+nw/2+22,356,300,900,40,true,'#FFFFFF','left');
- k.box(90,430,900,150,22);k.fit('TOPIC',130,452,300,800,20,false,CYAN,'left','4px');k.fit('CAREER GOALS',130,480,820,900,54,true,'#FFFFFF','left');k.fit('Premier League goals, all time. Higher or lower?',130,540,820,600,26,false,'#BDBDC6','left');}
+ k.box(90,430,900,150,22);k.fit('TOPIC',130,452,300,800,20,false,CYAN,'left','4px');k.fit('Career goals',130,480,820,900,54,true,'#FFFFFF','left');k.fit('Premier League goals, all time. Higher or lower?',130,540,820,600,26,false,'#BDBDC6','left');}
 function swipe(g,x0,y0,x,y,col=CYAN){const dx=x-x0,dy=y-y0,len=Math.hypot(dx,dy),G=Math.min(1,len/360)*2.4,ux=dx/len,uy=dy/len,nx=-uy,ny=ux;
  const tail=(3+8*G),tip=tail*.3,bl=Math.min(len*.6,(11+33*G)),bw=2.5+5*G,ex=x-ux*bw*.45,ey=y-uy*bw*.45,r0=tail/2,r1=tip/2;
  g.save();g.shadowColor=col+'99';g.shadowBlur=16;g.fillStyle=col;g.beginPath();g.moveTo(x0+nx*r0,y0+ny*r0);g.lineTo(ex+nx*r1,ey+ny*r1);g.lineTo(ex-nx*r1,ey-ny*r1);g.lineTo(x0-nx*r0,y0-ny*r0);g.arc(x0,y0,r0,Math.atan2(-ny,-nx),Math.atan2(ny,nx));g.closePath();g.fill();
@@ -231,7 +238,7 @@ const OPTS=[
   text:MSG(['DROP2TOP Goal Rush · 4-3-3','',"My XI's career Premier League goals: 441.",'Target 433: 8 over.'])},
  {sec:'ub',name:'Unbeaten · C1 · side by side',dot:CYAN,why:'<b>"The one that got me"</b>: the two players as the game shows them, and <b>your swipe drawn on</b> in the game\'s cyan marker arrow, up for higher. The real number in red.',
   draw(g,k){ubHead(g,k);k.fit('THE ONE THAT GOT ME',W/2,620,900,800,24,false,'#8E8E99','center','4px');
-   duoCards(g,k,650,390);swipe(g,512,940,512,740,RED);swipe(g,568,740,568,940,'#6A6A73');g.save();g.lineCap='round';[['#0A0A0A',10],[RED,6]].forEach(([c,w])=>{g.strokeStyle=c;g.lineWidth=w;g.beginPath();g.moveTo(724,808);g.quadraticCurveTo(796,798,870,778);g.stroke();});g.restore();
+   duoCards(g,k,650,390);swipe(g,512,940,512,740,RED);swipe(g,568,740,568,940,'#6A6A73');cross(g,797,794,196,76,true);
    k.mid('I SAID HIGHER. IT WAS LOWER.',W/2,1098,900,900,44,true,'#FFFFFF');},
   text:MSG(UB_TXT('The one that got me:'))},
 ];
