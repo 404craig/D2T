@@ -731,6 +731,8 @@
       entry.goals = Object.entries(goals).sort((a, b) => b[1] - a[1]);
       const big = P.filter((m) => m.us > m.them).sort((a, b) => (b.us - b.them) - (a.us - a.them) || b.us - a.us)[0];
       if (big) entry.big = { us: big.us, them: big.them, opp: S.clubs[big.opp].name };
+      // the career share card's best player (Craig, 29 Oct): the season's best card, kept so the best ever can be found
+      const rows = dailyRows(run); if (rows && rows.best) entry.bestCard = rows.best;
     }
     if (run.daily) {
       entry.daily = run.daily;
