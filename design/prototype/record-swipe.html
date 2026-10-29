@@ -145,7 +145,7 @@ h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10p
 .notes h2{font:900 italic 22px var(--font);text-transform:uppercase;color:#fff;margin:0 0 8px}.notes li{margin:0 0 8px}.notes b{color:#fff}
 </style></head><body><div class="wrap">
 <h1>Your record: cards to swipe</h1>
-<h2 class="sec2" style="margin-top:8px">B, refined: metallic, paper plane</h2>
+<h2 class="sec2" style="margin-top:8px">B, refined: metallic, your arrow</h2>
 <p class="lead">Your pick, tidied. <b>Daily first</b>, then Classic and the rest. Every number sits <b>on one line at the same height</b> in every shield, with its label under it (so Goal Rush's last game is just <b>8+</b>). Each page starts with <b>how many you've played</b>. The Daily crest sits <b>in the shield's top corner</b>, so it never pushes the number down.</p>
 <div class="cols"><div class="col"><div class="phone"><div class="sh"><h3>Your record</h3><button class="shr" id="pgSubR" aria-label="Share your Daily record"><span>Share</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7.5 7.5 12 3l4.5 4.5"/><path d="M8 10H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-2"/></svg></button></div><div class="ptabs" id="tabsR"></div><div class="pages" id="pagesR"></div><div class="hint" id="hintR"></div></div><div class="tog2" id="styR"></div></div>
 <div class="col"><p class="why" style="min-height:0"><b>Daily:</b> played, best finish, best rise, wins.<br><b>Classic:</b> as now.<br><b>Goal Rush:</b> games, bang on, hit rate, last game (8+ over, 8- short, 0 bang on).<br><b>Unbeaten:</b> runs, best run, topics tried, last run.<br><b>Club X:</b> seasons, titles, top 3, best finish.<br><b>Dare2Dream:</b> runs, dreams, best rise, titles.<br><br>Swipe the shields or tap a tag. <b>Share</b> in the top right, in the page's colour, shares that game's record (the counts it used to show are already on the shields).</p></div></div>
@@ -282,6 +282,7 @@ const I={
  arrow:'<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5l7 7-7 7"/><path d="M21 12H9a6 6 0 0 0-6 6v1"/></svg>',
  nodes:'<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.8 15.7 6.3M8.3 13.2l7.4 4.5"/></svg>',
  chev:'<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>',
+ fwd:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.1 20.2C2.6 12.4 6.6 7.9 12.7 7.4V3.5l8.4 7.9-8.4 7.9v-4.8c-4.1-.1-7.3 2.1-9.6 5.7z"/></svg>',
  whats:'<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 9.5h6M9 13h4"/></svg>'};
 const SO=[['1','Send','A paper plane after the word. Reads as "send it to your mates".','',I.send],
  ['2','Forward arrow','A curved arrow pointing on, like forwarding a message.','',I.arrow],
@@ -289,11 +290,12 @@ const SO=[['1','Send','A paper plane after the word. Reads as "send it to your m
  ['4','Outlined pill','<b>Share</b> in a thin pill in the page\'s colour, with a small arrow. Clearly a button.','pill',I.chev],
  ['5','Solid tag','A slanted tag in the page\'s colour, dark text, like the game\'s mode tags. The loudest.','solid',''],
  ['6','Round button','No word: the forward arrow in a ring, like the round buttons in the game\'s bottom bar.','round',I.arrow],
- ['7','Chat bubble','A speech bubble, for "send it to the group chat".','',I.whats]];
+ ['7','Chat bubble','A speech bubble, for "send it to the group chat".','',I.whats],
+ ['8','Your arrow','Your reference: the <b>outlined forward arrow</b>, fat head, curved tail, drawn at the weight of the game\'s other line icons.','',I.fwd]];
 const btn=(o,c)=>`<button class="shr ${o[3]}" style="--c:${c}">${o[3]==='round'?'':'<span>Share</span>'}${o[4]}</button>`;
 const so=document.getElementById('shopts');
 so.innerHTML=SO.map((o)=>`<div class="so" data-k="${o[0]}"><h4>${o[0]} · <span>${o[1]}</span></h4><p>${o[2]}</p><div class="phone"><div class="sh" style="margin:0"><h3>Your record</h3>${btn(o,C.w)}</div></div><div class="phone"><div class="sh" style="margin:0"><h3>Your record</h3>${btn(o,C.y)}</div></div></div>`).join('');
-{const b=document.getElementById('pgSubR');b.className='shr';b.innerHTML='<span>Share</span>'+I.send;so.children[0].classList.add('on');}
+{const b=document.getElementById('pgSubR');b.className='shr';b.innerHTML='<span>Share</span>'+I.fwd;so.children[7].classList.add('on');}
 [...so.children].forEach((el,i)=>el.onclick=()=>{[...so.children].forEach((x)=>x.classList.toggle('on',x===el));const o=SO[i],b=document.getElementById('pgSubR');b.className='shr '+o[3];b.innerHTML=(o[3]==='round'?'':'<span>Share</span>')+o[4];});
 
 // ---------- filled shield looks ----------
