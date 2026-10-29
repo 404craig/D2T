@@ -31,7 +31,7 @@ h1{font:900 italic 30px/1.05 'Exo 2';text-transform:uppercase;margin:0 0 10px}
 </style></head><body><div class="wrap">
 <h1>Share cards: every game</h1>
 <p class="lead">Every shirt and card on these is <b>taken from the game itself</b> (rendered from the live build), so they match exactly. The Daily's new card (sent to the game) set the rules; here they are carried to every other game. <b>The same frame:</b> the tag text centred, no link on the picture, the band lifted with black under it so WhatsApp's caption never covers it, a soft wash of the club's or game's colour at the top. <b>The same story:</b> a result line with the arrow on the figures' middle, a smaller line under it, then <b>team sheet rows</b> with the numbers in one column and the words in the next. <b>The same message:</b> short lines in blocks, ending <i>Your turn. Beat that!</i> over the link. Every player and real finish is from the game's data; your finishes are made up for the examples. Tap a picture for full size.</p>
-<h2 class="sec">Club X</h2><p class="lead">Your picks: season one shows where your drafted 11 finished; every season after that is <b>the climb</b>, with years written short (03/04) and the <b>all-time</b> top scorer and best player. After 20 seasons the message lists the last five, then totals.</p><div class="cols" id="clx"></div>
+<h2 class="sec">Club X</h2><p class="lead">Your picks: season one shows where your drafted 11 finished; every season after that is <b>the climb</b>, with years written short (03/04) and the <b>all-time</b> top scorer and best player. The message gives <b>My record</b>: titles, top 3, top half and beat the drop, however many seasons.</p><div class="cols" id="clx"></div>
 <h2 class="sec">Goal Rush</h2><p class="lead">Option A: <b>"433 GOALS"</b> in white, a bigger pitch, and <b>the game\'s own pitch shirts</b> (club kit, crest on its disc, goals on the shirt). Both XIs are real and add up as shown.</p><div class="cols" id="gr"></div>
 <h2 class="sec">Unbeaten Run</h2><p class="lead">C1, now with <b>Unbeaten\'s own shirts</b>: club kit, surname and number on the shirt, crest and flag under, exactly as the game shows them.</p><div class="cols" id="ub"></div>
 <h2 class="sec">The rest, as before</h2><div class="cols" id="rest"></div>
@@ -120,8 +120,8 @@ const GREEN='#12F06C',BLUE='#3BA4FF',YEL='#FFD21F',CYAN='#22D3EE';
 const RED='#FF4D52';
 // Club X career: four seasons (made up), the badge block and the title count
 const CAREER=[['2003/04','1st',1],['2004/05','2nd',0],['2005/06','1st',1],['2006/07','5th',0]];
-const CAREER_MSG=['DROP2TOP Club X · Season 4','','Drafted from nothing in 2003/04','2 titles in 4 seasons','','2003/04: 1st, champions','2004/05: 2nd','2005/06: 1st, champions','2006/07: 5th','','All-time top scorer: Ruud van Nistelrooy, 64 goals','Best player: Thierry Henry, 99'];
-const LONG_MSG=['DROP2TOP Club X · Season 20','','Drafted from nothing in 2003/04','7 titles in 20 seasons','','Last five seasons:','2018/19: 9th','2019/20: 3rd','2020/21: 1st, champions','2021/22: 2nd','2022/23: 4th','','The 15 before that:','6 titles · 11 top 3 · 15 top half · 15 beat the drop','','All-time top scorer: Thierry Henry, 214 goals','Best player: Thierry Henry, 99'];
+const CAREER_MSG=['DROP2TOP Club X · Season 4','','Drafted from nothing in 2003/04','2 titles in 4 seasons','','My record:','2 titles · 3 top 3 · 4 top half · 4 beat the drop','','All-time top scorer: Ruud van Nistelrooy, 64 goals','Best player: Thierry Henry, 99'];
+const LONG_MSG=['DROP2TOP Club X · Season 20','','Drafted from nothing in 2003/04','7 titles in 20 seasons','','My record:','7 titles · 14 top 3 · 20 top half · 20 beat the drop','','All-time top scorer: Thierry Henry, 214 goals','Best player: Thierry Henry, 99'];
 function careerHead(k,a='2 TITLES ',b='IN 4 SEASONS'){k.pic(IM.clx,W/2,248,190);k.fit('CLUB X',W/2,452,960,900,70,true,'#FFFFFF');k.fit('Drafted from nothing in 03/04',W/2,528,960,600,34,false,'#E6E6EA');line2(k,a,b,GREEN,592);}
 // Goal Rush: two real XIs from the game's lists, 433 and 441; kits as the game draws them (screens/goals.js KITS, clubs.json)
 const KIT={Spurs:{f:'#FFFFFF',tr:'#132257',ink:'#132257'},Chelsea:{f:'#2B63E0',tr:'#FFFFFF',ink:'#FFFFFF'},Charlton:{f:'#D4021D',tr:'#FFFFFF',ink:'#FFFFFF'},'Aston Villa':{f:'#670E36',sl:'#95BFE5',tr:'#3B0820',ink:'#FFFFFF'},
@@ -181,7 +181,10 @@ function swipe(g,x0,y0,x,y,col=CYAN){const dx=x-x0,dy=y-y0,len=Math.hypot(dx,dy)
  g.save();g.shadowColor=col+'99';g.shadowBlur=16;g.fillStyle=col;g.beginPath();g.moveTo(x0+nx*r0,y0+ny*r0);g.lineTo(ex+nx*r1,ey+ny*r1);g.lineTo(ex-nx*r1,ey-ny*r1);g.lineTo(x0-nx*r0,y0-ny*r0);g.arc(x0,y0,r0,Math.atan2(-ny,-nx),Math.atan2(ny,nx));g.closePath();g.fill();
  const a1=27*Math.PI/180,a2=34*Math.PI/180,l2=bl*.94,u1x=x-(ux*Math.cos(a1)-nx*Math.sin(a1))*bl,u1y=y-(uy*Math.cos(a1)-ny*Math.sin(a1))*bl,u2x=x-(ux*Math.cos(a2)+nx*Math.sin(a2))*l2,u2y=y-(uy*Math.cos(a2)+ny*Math.sin(a2))*l2;
  const cx=(x+u2x)/2+(ux*.45-nx*.22)*l2*.5,cy=(y+u2y)/2+(uy*.45-ny*.22)*l2*.5;g.strokeStyle=col;g.lineWidth=bw;g.lineCap='round';g.lineJoin='round';g.beginPath();g.moveTo(u1x,u1y);g.lineTo(x,y);g.quadraticCurveTo(cx,cy,u2x,u2y);g.stroke();g.restore();}
-function duoCards(g,k,y,h){[[90,'WAYNE ROONEY','Man Utd','rooney',0],[600,'MOHAMED SALAH','Liverpool','salah',1]].forEach(([x,n,cl,im,i])=>{k.box(x,y,390,h,22,i?RED:null,i?'#1A0709':null);const I=IM['ub-'+im],ih=h-96,iw=ih*I.naturalWidth/I.naturalHeight;g.drawImage(I,x+195-iw/2,y+18,iw,ih);k.fit(n,x+195,y+h-64,350,900,30,true,'#FFFFFF');k.fit(cl.toUpperCase(),x+195,y+h-30,350,800,18,false,'#8E8E99','center','3px');});return;[[90,'WAYNE ROONEY','208',IM.utd,0],[600,'MOHAMED SALAH','193',IM.lfc,1]].forEach(([x,n,v,cr,i])=>{k.box(x,y,390,h,22,i?RED:null,i?'#1A0709':null);k.pic(cr,x+195,y+24,96);k.fit(n,x+195,y+140,350,900,34,true,'#FFFFFF');k.mid(v,x+195,y+236,350,900,80,true,i?RED:'#FFFFFF');});}
+// a red hand-drawn scratch, two strokes, like the Goal Rush miss
+function scratch(g,x0,y0,x1,y1,edge){g.save();g.lineCap='round';g.lineJoin='round';const mx=(x0+x1)/2,my=(y0+y1)/2;
+ [[edge?'#0A0A0A':null,4],[RED,0]].forEach(([c,e])=>{if(!c)return;g.strokeStyle=c;g.lineWidth=(edge?7:11)+e;g.beginPath();g.moveTo(x0,y0);g.quadraticCurveTo(mx,my+10,x1,y1);g.stroke();g.lineWidth=(edge?4:6)+e;g.beginPath();g.moveTo(x0+12,y0+(edge?12:16));g.quadraticCurveTo(mx+6,my+(edge?16:22),x1+10,y1+(edge?12:16));g.stroke();});g.restore();}
+function duoCards(g,k,y,h){[[90,'WAYNE ROONEY','Man Utd','rooney',0],[600,'MOHAMED SALAH','Liverpool','salah',1]].forEach(([x,n,cl,im,i])=>{const I=IM['ub-'+im],ih=h-96,iw=ih*I.naturalWidth/I.naturalHeight;g.drawImage(I,x+195-iw/2,y+18,iw,ih);k.fit(n,x+195,y+h-64,350,900,30,true,'#FFFFFF');k.fit(cl.toUpperCase(),x+195,y+h-30,350,800,18,false,'#8E8E99','center','3px');});return;[[90,'WAYNE ROONEY','208',IM.utd,0],[600,'MOHAMED SALAH','193',IM.lfc,1]].forEach(([x,n,v,cr,i])=>{k.box(x,y,390,h,22,i?RED:null,i?'#1A0709':null);k.pic(cr,x+195,y+24,96);k.fit(n,x+195,y+140,350,900,34,true,'#FFFFFF');k.mid(v,x+195,y+236,350,900,80,true,i?RED:'#FFFFFF');});}
 function clubCard(g,k,x,y,w,h,col,n,v,cr,rot,vc){g.save();g.translate(x+w/2,y+h/2);g.rotate(rot*Math.PI/180);g.translate(-(x+w/2),-(y+h/2));
  const gr=g.createLinearGradient(x,y,x,y+h);gr.addColorStop(0,col);gr.addColorStop(1,'#1A0000');k.rr(x,y,w,h,26);g.fillStyle=gr;g.fill();g.lineWidth=3;g.strokeStyle='rgba(255,255,255,.25)';g.stroke();
  k.pic(cr,x+w/2,y+28,110);k.fit(n.toUpperCase(),x+w/2,y+170,w-30,900,34,true,'#FFFFFF');k.box(x+24,y+236,w-48,128,18,'rgba(255,255,255,.12)','rgba(0,0,0,.45)');k.mid(v,x+w/2,y+300,w-60,900,84,true,vc);g.restore();}
@@ -213,7 +216,7 @@ const OPTS=[
    careerHead(k);climb(g,k,CAREER,676,236);
    row(g,k,930,{icon:'ball',label:'ALL-TIME TOP SCORER',name:P.rvn.name,n:'64',u:'GOALS',col:GREEN});row(g,k,1044,Object.assign(best(P.henry),{label:'BEST PLAYER'}));},
   text:MSG(CAREER_MSG)},
- {sec:'clx',name:'Club X · 20 seasons, climb',dot:GREEN,why:'<b>After 20 seasons</b> the climb still fits: the dots shrink, titles are green rings, seasons marked every five. The message lists the <b>last five</b> seasons, then totals for the rest.',
+ {sec:'clx',name:'Club X · 20 seasons, climb',dot:GREEN,why:'<b>After 20 seasons</b> the climb still fits: the dots shrink, titles are green rings, seasons marked every five. The message gives <b>My record</b>: titles, top 3, top half, beat the drop.',
   draw(g,k){frame(g,k,{wash:GREEN,ghost:IM.clx,ghostA:.07,tag:'Club X · Season 20',tagCol:GREEN,band:GREEN,ink:'#0A0A0A',dare:'Build a dynasty. Beat 7 titles'});
    careerHead(k,'7 TITLES ','IN 20 SEASONS');climb(g,k,LONG,676,236);
    row(g,k,930,{icon:'ball',label:'ALL-TIME TOP SCORER',name:'Thierry Henry',n:'214',u:'GOALS',col:GREEN});row(g,k,1044,Object.assign(best(P.henry),{label:'BEST PLAYER'}));},
@@ -228,7 +231,7 @@ const OPTS=[
   text:MSG(['DROP2TOP Goal Rush · 4-3-3','',"My XI's career Premier League goals: 441.",'Target 433: 8 over.'])},
  {sec:'ub',name:'Unbeaten · C1 · side by side',dot:CYAN,why:'<b>"The one that got me"</b>: the two players as the game shows them, and <b>your swipe drawn on</b> in the game\'s cyan marker arrow, up for higher. The real number in red.',
   draw(g,k){ubHead(g,k);k.fit('THE ONE THAT GOT ME',W/2,620,900,800,24,false,'#8E8E99','center','4px');
-   duoCards(g,k,650,390);swipe(g,540,950,540,730,RED);
+   duoCards(g,k,650,390);swipe(g,512,940,512,740,RED);swipe(g,568,740,568,940,'#6A6A73');g.save();g.lineCap='round';[['#0A0A0A',10],[RED,6]].forEach(([c,w])=>{g.strokeStyle=c;g.lineWidth=w;g.beginPath();g.moveTo(724,808);g.quadraticCurveTo(796,798,870,778);g.stroke();});g.restore();
    k.mid('I SAID HIGHER. IT WAS LOWER.',W/2,1098,900,900,44,true,'#FFFFFF');},
   text:MSG(UB_TXT('The one that got me:'))},
 ];
