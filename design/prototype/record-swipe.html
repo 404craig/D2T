@@ -114,6 +114,17 @@ h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10p
 .al b{font-size:30px;line-height:34px;height:34px;white-space:nowrap}
 .al span{margin-top:7px}
 .al .cr{position:absolute;top:7%;right:9%;width:20px;height:20px;object-fit:contain;margin:0}
+
+.so{flex:0 0 390px;max-width:100%;cursor:pointer}
+.so .phone{padding:14px 16px;margin-bottom:8px}
+.so h4{font:900 italic 16px var(--font);text-transform:uppercase;margin:0 0 6px}.so h4 span{color:var(--g)}
+.so p{color:var(--soft);font-size:13px;line-height:1.4;margin:0 0 8px}
+.so.on .phone{box-shadow:0 0 0 2px var(--g)}
+.shr svg{flex:none}
+.shr.pill{border:1.5px solid var(--c,#fff);border-radius:999px;padding:0 14px;min-height:36px;margin:-6px 0 -6px 0}
+.shr.solid{background:var(--c,#fff);color:#0A0A0A;border-radius:10px;padding:0 14px;min-height:36px;margin:-6px 0;transform:skewX(-10deg)}
+.shr.solid>*{transform:skewX(10deg)}
+.shr.round{width:44px;justify-content:center;padding:0;border-radius:50%;border:1.5px solid var(--c,#fff);min-height:44px;height:44px;margin:-12px 0}
 .notes{max-width:880px;margin-top:34px;color:#CFCFD6;font-size:15px;line-height:1.5}
 .notes h2{font:900 italic 22px var(--font);text-transform:uppercase;color:#fff;margin:0 0 8px}.notes li{margin:0 0 8px}.notes b{color:#fff}
 </style></head><body><div class="wrap">
@@ -122,6 +133,9 @@ h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10p
 <p class="lead">Your pick, tidied. <b>Daily first</b>, then Classic and the rest. Every number sits <b>on one line at the same height</b> in every shield, with its label under it (so Goal Rush's last game is just <b>8+</b>). Each page starts with <b>how many you've played</b>. The Daily crest sits <b>in the shield's top corner</b>, so it never pushes the number down.</p>
 <div class="cols"><div class="col"><div class="phone"><div class="sh"><h3>Your record</h3><button class="shr" id="pgSubR" aria-label="Share your Daily record"><span>Share</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7.5 7.5 12 3l4.5 4.5"/><path d="M8 10H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-2"/></svg></button></div><div class="ptabs" id="tabsR"></div><div class="pages" id="pagesR"></div><div class="hint" id="hintR"></div></div></div>
 <div class="col"><p class="why" style="min-height:0"><b>Daily:</b> played, best finish, best rise, wins.<br><b>Classic:</b> as now.<br><b>Goal Rush:</b> games, bang on, hit rate, last game (8+ over, 8- short, 0 bang on).<br><b>Unbeaten:</b> runs, best run, topics tried, last run.<br><b>Club X:</b> seasons, titles, top 3, best finish.<br><b>Dare2Dream:</b> runs, dreams, best rise, titles.<br><br>Swipe the shields or tap a tag. <b>Share</b> in the top right, in the page's colour, shares that game's record (the counts it used to show are already on the shields).</p></div></div>
+<h2 class="sec2">The share button</h2>
+<p class="lead">Options for the top right, each shown on the Daily page (white) and the Goal Rush page (yellow). <b>Tap any of them</b> to make it the one on the swipeable mock above.</p>
+<div class="cols" id="shopts" style="gap:16px"></div>
 <h2 class="sec2">Earlier ideas</h2>
 <p class="lead"><b>Five more</b>, from your note on B: one set of cards you swipe left and right, <b>no second menu</b>, one card per game, and only the number that matters (Unbeaten is just your best run). Not all shields. Swipe them.</p>
 <div class="cols" id="nv"></div>
@@ -242,4 +256,23 @@ const dR=dots(document.getElementById('hintR'),PR.length);
 const setR=(k)=>{[...tR.children].forEach((b,i)=>b.classList.toggle('on',i===k));dR.forEach((d,i)=>{d.classList.toggle('on',i===k);d.style.background=i===k?PR[k][1]:'';});sR.style.setProperty('--c',PR[k][1]);sR.setAttribute('aria-label','Share your '+PR[k][0].toLowerCase()+' record');tR.children[k].scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'});};
 pR.addEventListener('scroll',()=>setR(Math.round(pR.scrollLeft/pR.clientWidth)),{passive:true});
 [...tR.children].forEach((b,i)=>b.onclick=()=>pR.scrollTo({left:i*pR.clientWidth,behavior:'smooth'}));setR(0);
+
+// ---------- share button options ----------
+const I={
+ send:'<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 10 14"/><path d="M21 3 14.5 21l-4-7-7-4z"/></svg>',
+ arrow:'<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5l7 7-7 7"/><path d="M21 12H9a6 6 0 0 0-6 6v1"/></svg>',
+ nodes:'<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.8 15.7 6.3M8.3 13.2l7.4 4.5"/></svg>',
+ chev:'<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>',
+ whats:'<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 9.5h6M9 13h4"/></svg>'};
+const SO=[['1','Send','A paper plane after the word. Reads as "send it to your mates".','',I.send],
+ ['2','Forward arrow','A curved arrow pointing on, like forwarding a message.','',I.arrow],
+ ['3','Word only','Just <b>SHARE</b>, nothing else. The cleanest.','',''],
+ ['4','Outlined pill','<b>Share</b> in a thin pill in the page\'s colour, with a small arrow. Clearly a button.','pill',I.chev],
+ ['5','Solid tag','A slanted tag in the page\'s colour, dark text, like the game\'s mode tags. The loudest.','solid',''],
+ ['6','Round button','No word: the forward arrow in a ring, like the round buttons in the game\'s bottom bar.','round',I.arrow],
+ ['7','Chat bubble','A speech bubble, for "send it to the group chat".','',I.whats]];
+const btn=(o,c)=>`<button class="shr ${o[3]}" style="--c:${c}">${o[3]==='round'?'':'<span>Share</span>'}${o[4]}</button>`;
+const so=document.getElementById('shopts');
+so.innerHTML=SO.map((o)=>`<div class="so" data-k="${o[0]}"><h4>${o[0]} · <span>${o[1]}</span></h4><p>${o[2]}</p><div class="phone"><div class="sh" style="margin:0"><h3>Your record</h3>${btn(o,C.w)}</div></div><div class="phone"><div class="sh" style="margin:0"><h3>Your record</h3>${btn(o,C.y)}</div></div></div>`).join('');
+[...so.children].forEach((el,i)=>el.onclick=()=>{[...so.children].forEach((x)=>x.classList.toggle('on',x===el));const o=SO[i],b=document.getElementById('pgSubR');b.className='shr '+o[3];b.innerHTML=(o[3]==='round'?'':'<span>Share</span>')+o[4];});
 </script></body></html>
