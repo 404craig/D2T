@@ -50,11 +50,31 @@ h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10p
 .mini .fr{flex:0 0 calc((100% - 32px - 4*8px)/5.5);scroll-snap-align:start}
 .mini .fr b{font-size:22px}.mini .fr span{font-size:8.5px;margin-top:4px}.mini .fr img{width:18px;height:18px;margin-bottom:3px}.mini .fr i{font-size:10px}.mini .fr .tg{font-size:7px}
 .sub2{font:800 11px var(--font);letter-spacing:.14em;color:var(--muted);margin:16px 0 0}
+
+/* D: team sheet rows */
+.trow{display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 12px;margin-top:8px;border-radius:14px;background:#0E0E10;border:1px solid #26262C}
+.trow .mk{flex:none;width:34px;height:34px;display:grid;place-items:center}
+.trow .mk img{width:30px;height:30px;object-fit:contain}
+.trow .mk i{width:26px;height:26px;border-radius:7px;transform:skewX(-10deg);background:var(--c)}
+.trow .tx{flex:1;min-width:0}
+.trow .tx small{display:block;font:800 10px var(--font);letter-spacing:.14em;color:var(--c)}
+.trow .tx span{display:block;font:600 13px var(--font);color:#BDBDC6;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trow .nm{flex:none;width:64px;text-align:right;font:900 italic 26px/1 var(--font);color:var(--c)}
+.trow .un{flex:none;width:54px;font:800 10px var(--font);letter-spacing:.1em;color:var(--c)}
+/* E: flip shields */
+.fl{flex:0 0 calc((100% - 32px - 3*8px)/3.5);scroll-snap-align:start;perspective:600px;cursor:pointer}
+.fl .in{position:relative;aspect-ratio:100/128;transition:transform .5s;transform-style:preserve-3d}
+.fl.on .in{transform:rotateY(180deg)}
+.fl .fr{position:absolute;inset:0;width:100%;height:100%;box-sizing:border-box;aspect-ratio:auto;backface-visibility:hidden}
+#rowE{padding-bottom:6px}
+.fl .bk{transform:rotateY(180deg)}
+.fl .bk ul{position:relative;list-style:none;margin:8px 0 0;padding:0 9px;font:700 11px/1.5 var(--font);color:#fff;text-align:left;width:100%;box-sizing:border-box}
+.fl .bk ul b{font:900 italic 13px var(--font);color:var(--c);float:right}
 .notes{max-width:880px;margin-top:34px;color:#CFCFD6;font-size:15px;line-height:1.5}
 .notes h2{font:900 italic 22px var(--font);text-transform:uppercase;color:#fff;margin:0 0 8px}.notes li{margin:0 0 8px}.notes b{color:#fff}
 </style></head><body><div class="wrap">
-<h1>Your record, one section</h1>
-<p class="lead">Three ways to fold the best Daily, and your other games, into <b>Your record</b>, all in the game's own shield. They're live, so <b>swipe them</b>. Classic's numbers are yours from the screenshot (16 runs); the others are made up for the example.</p>
+<h1>Your record: five designs</h1>
+<p class="lead">Five ways to fold the best Daily, and your other games, into <b>Your record</b>, all in the game's own shield. They're live, so <b>swipe them</b>. Classic's numbers are yours from the screenshot (16 runs); the others are made up for the example.</p>
 <div class="cols">
  <div class="col"><h2>A · <span>One row</span></h2><p class="why"><b>4.5 shields showing</b>, so the half shield says "swipe". Classic's four first, in green as now, then one shield per game in <b>its own colour</b> with its name on top: best Daily, Goal Rush bang-ons, best Unbeaten run, Club X titles, Dare2Dream dreams.</p>
   <div class="phone"><div class="sh"><h3>Your record</h3><small>16 runs</small></div><div class="row" id="rowA"></div><div class="hint" id="hintA"></div></div></div>
@@ -62,6 +82,10 @@ h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10p
   <div class="phone"><div class="sh"><h3>Your record</h3><small id="pgSub">16 runs</small></div><div class="ptabs" id="tabsB"></div><div class="pages" id="pagesB"></div><div class="hint" id="hintB"></div></div></div>
  <div class="col"><h2>C · <span>Classic, then the rest</span></h2><p class="why">Classic's four stay <b>exactly as now</b>, the main record. Under them, a row of <b>smaller shields</b> for the other games, 5.5 showing, that swipes. Classic stays front and centre.</p>
   <div class="phone"><div class="sh"><h3>Your record</h3><small>16 runs</small></div><div class="quad" id="quadC"></div><div class="sub2">YOUR OTHER GAMES</div><div class="mini" id="miniC"></div></div></div>
+ <div class="col"><h2>D · <span>Shields and a sheet</span></h2><p class="why">Classic's four shields as now, then the other games as <b>team sheet rows</b>, the same rows as the share cards: the game's mark, its name, your best, and the numbers lined up in one column. <b>No swiping</b>; everything shows.</p>
+  <div class="phone"><div class="sh"><h3>Your record</h3><small>16 runs</small></div><div class="quad" id="quadD"></div><div id="rowsD"></div></div></div>
+ <div class="col"><h2>E · <span>One shield per game</span></h2><p class="why">Every game, Classic included, gets <b>one shield</b> with its single best number: Classic's titles, your best Daily, Goal Rush bang-ons and so on, 3.5 showing so they're bigger. <b>Tap a shield</b> to flip it and see that game's full record on the back.</p>
+  <div class="phone"><div class="sh"><h3>Your record</h3><small>tap to flip</small></div><div class="row" id="rowE"></div><div class="hint" id="hintE"></div></div></div>
 </div>
 <div class="notes"><h2>Notes</h2><ul>
 <li><b>What the game already keeps:</b> Classic's record, your best Daily and how many you've played, Goal Rush games, exact hits and closest miss, your best Unbeaten run on each topic, Club X titles and Dare2Dream dreams. Nothing new needs saving for these.</li>
@@ -103,4 +127,25 @@ pages.addEventListener('scroll',()=>setB(Math.round(pages.scrollLeft/pages.clien
 [...tabs.children].forEach((b,i)=>b.onclick=()=>pages.scrollTo({left:i*pages.clientWidth,behavior:'smooth'}));
 // C
 document.getElementById('quadC').innerHTML=classic.join('');document.getElementById('miniC').innerHTML=others.join('');
+
+// D
+document.getElementById('quadD').innerHTML=classic.join('');
+const R=[['share-fx/boro.png',C.w,'DAILY','Middlesbrough 92/93 · 9 played','1st','<span style="color:#12F06C">'+UP+'20</span>'],
+ ['share-fx/goal_rush.png',C.y,'GOAL RUSH','Bang on in 12 games','3','BANG ON'],
+ [null,C.c,'UNBEATEN RUN','Career goals · 41 runs','17','IN A ROW'],
+ ['share-fx/club_x.png',C.g,'CLUB X','4 seasons · 3 top 3','2','TITLES'],
+ [null,C.b,'DARE2DREAM','5 runs · best rise +13','3','DREAMS']];
+document.getElementById('rowsD').innerHTML=R.map(([im,c,t,l,n,u])=>`<div class="trow" style="--c:${c}"><span class="mk">${im?`<img src="${im}" alt="">`:'<i></i>'}</span><span class="tx"><small>${t}</small><span>${l}</span></span><span class="nm">${n}</span><span class="un">${u}</span></div>`).join('');
+// E
+const E=[[C.g,'2','Titles',{tag:'CLASSIC',sub:'16 runs'},[['Beat the drop',16],['Top half',14],['Top 3',7],['Titles',2]]],
+ [C.w,'1st','Best Daily',{tag:'DAILY',sub:'<em style="color:#12F06C;font-style:inherit">'+UP+'20</em>'},[['Best',' 1st'],['Rise','+20'],['Played',9],['Wins',2]]],
+ [C.y,'3','Bang on',{tag:'GOAL RUSH',sub:'of 12'},[['Games',12],['Bang on',3],['Hit rate','25%'],['Last','8 over']]],
+ [C.c,'17','Best run',{tag:'UNBEATEN',sub:'career goals'},[['Best',17],['Runs',41],['Topics',9],['Next',14]]],
+ [C.g,'2','Titles',{tag:'CLUB X',sub:'4 seasons'},[['Seasons',4],['Titles',2],['Top 3',3],['Best','1st']]],
+ [C.b,'3','Dreams',{tag:'DARE2DREAM',sub:'of 5'},[['Runs',5],['Dreams',3],['Best rise','+13'],['Titles',1]]]];
+const rowE=document.getElementById('rowE');
+rowE.innerHTML=E.map(([c,b,l,o,back])=>`<div class="fl"><div class="in">${f(c,b,l,Object.assign({mode:1},o))}<div class="fr mode bk" style="--c:${c}">${FRAME}<em class="tg">${o.tag}</em><ul>${back.map(([k,v])=>`<li>${k}<b>${v}</b></li>`).join('')}</ul></div></div></div>`).join('');
+[...rowE.children].forEach((x)=>x.onclick=()=>x.classList.toggle('on'));
+const dE=dots(document.getElementById('hintE'),2);
+rowE.addEventListener('scroll',()=>{const m=rowE.scrollWidth-rowE.clientWidth,k=m&&rowE.scrollLeft>m/2?1:0;dE.forEach((d,i)=>d.classList.toggle('on',i===k));},{passive:true});
 </script></body></html>
