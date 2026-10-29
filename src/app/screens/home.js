@@ -132,15 +132,89 @@
       <img class="fr-dstrip-crest" src="${d.crest}" alt=""><span class="fr-dstrip-txt"><span class="fr-dstrip-lbl${on ? ' on' : ''}">${label}</span>
       <span class="fr-dstrip-big">${esc(big)}</span><span class="fr-dstrip-sub">${small}</span></span><span class="fr-go">${ARROW}</span></button>`;
   }
-  // Your best Daily, a slim row under Your record's four frames once a Daily has been played (Craig, 29 Oct): the finish
-  // and the rise, the club and season, and how many Dailies you have played; tap to share that Daily again
-  function bestDailyRow() {
-    const G = D2T.game, o = D2T.ordinal, esc = D2T.esc, top = G.dailyBest(), n = Object.keys(D2T.state.record.daily || {}).length;
-    if (!top) return '';
-    const c = G.club(top.club), crest = c && c.crest ? `<img src="${c.crest}" alt="">` : '';
-    return `<button type="button" class="fr-dbest" data-act="daily-best" data-date="${esc(top.date)}" aria-label="Your best Daily: ${esc(top.club)} ${esc(top.season || '')}, ${o(top.histFinish)} to ${o(top.finish)}. ${n} Dailies played. Tap to share it">
-      <span class="fr-dbest-l"><i>YOUR BEST DAILY</i><b>${crest}${o(top.finish)}<span class="fr-rise">${UP} ${top.rise}</span></b><small>${esc(top.club)}${top.season ? ' ' + esc(top.season) : ''} · ${o(top.histFinish)} to ${o(top.finish)}</small></span>
-      <span class="fr-dbest-r"><i>DAILIES</i><b>${n}</b></span></button>`;
+  // Your record (Craig, 29 Oct; "B, refined: metallic, your arrow" in design/prototype/record-swipe.html): one record with a
+  // page per game, slanted tags over it, swiped or tapped, dots under it and Share in the heading. Each page is four
+  // metallic shields in the game's colour, its count first; a game never played has no page (Classic always shows).
+  const SHARE_ICON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.1 20.2C2.6 12.4 6.6 7.9 12.7 7.4V3.5l8.4 7.9-8.4 7.9v-4.8c-4.1-.1-7.3 2.1-9.6 5.7z"/></svg>';
+  function recordPages() {
+    const G = D2T.game, o = D2T.ordinal, st = D2T.state, runs = st.record.runs || [], sg = (v) => (v > 0 ? '+' : '') + v, pages = [];
+    const days = Object.values(st.record.daily || {});
+    if (days.length) {
+      const bf = days.slice().sort((a, b) => a.finish - b.finish || b.rise - a.rise)[0], c = G.club(bf.club);
+      pages.push({ k: 'daily', tag: 'DAILY', name: 'Daily', c: '#FFFFFF', mark: { src: c && c.crest }, shields: [
+        { n: days.length, l: 'Played' }, { n: o(bf.finish), l: 'Best finish', crest: c && c.crest },
+        { n: sg(Math.max(...days.map((d) => d.rise))), l: 'Best rise', c: '#12F06C' }, { n: days.filter((d) => d.finish === 1).length, l: 'Wins' }] });
+    }
+    const rec = G.record();
+    pages.push({ k: 'classic', tag: 'CLASSIC', name: 'Classic', c: '#12F06C', mark: { src: D2T.ASSET.emblem, tint: true }, shields: [
+      { n: rec.drop, l: 'Beat the drop' }, { n: rec.half, l: 'Top half' }, { n: rec.top3, l: 'Top 3' }, { n: rec.titles, l: 'League titles' }] });
+    const g4 = G.g433.record();
+    if (g4.games) {
+      const last = g4.last == null ? '-' : g4.last === g4.lastTarget ? '0' : g4.last > g4.lastTarget ? `${g4.last - g4.lastTarget}+` : `${g4.lastTarget - g4.last}-`;
+      pages.push({ k: 'g433', tag: 'GOAL RUSH', name: 'Goal Rush', c: '#FFD21F', mark: { src: window.D2T_GOALRUSH_LOGO }, shields: [
+        { n: g4.games, l: 'Games' }, { n: g4.exact || 0, l: 'Bang on' }, { n: `${Math.round(100 * (g4.exact || 0) / g4.games)}%`, l: 'Hit rate' }, { n: last, l: 'Last game' }] });
+    }
+    const ub = st.ub || {};
+    if (ub.runs) {
+      const best = Object.values(ub.best || {});
+      pages.push({ k: 'unbeaten', tag: 'UNBEATEN', name: 'Unbeaten Run', c: '#22D3EE', mark: { svg: true }, shields: [
+        { n: ub.runs, l: 'Runs' }, { n: best.length ? Math.max(...best) : 0, l: 'Best run' }, { n: best.filter((v) => v > 0).length, l: 'Topics tried' }, { n: ub.lastRun != null ? ub.lastRun : '-', l: 'Last run' }] });
+    }
+    const xr = G.xRecord();
+    if (xr.runs) {
+      const badge = G.club('Club X').crest;
+      pages.push({ k: 'clubx', tag: 'CLUB X', name: 'Club X', c: '#12F06C', mark: { src: badge }, shields: [
+        { n: xr.runs, l: 'Seasons' }, { n: xr.titles, l: 'Titles' }, { n: runs.filter((r) => r.mode === 'clubx' && !r.daily && r.top3).length, l: 'Top 3' }, { n: o(xr.best), l: 'Best finish', crest: badge }] });
+    }
+    const dr = G.dreamRecord();
+    if (dr.runs) {
+      pages.push({ k: 'dream', tag: 'DARE2DREAM', name: 'Dare2Dream', c: '#3BA4FF', mark: { src: D2T.ASSET.emblemLine, tint: true }, shields: [
+        { n: dr.runs, l: 'Runs' }, { n: dr.dreams, l: 'Dreams' }, { n: sg(dr.bestRise), l: 'Best rise' }, { n: runs.filter((r) => r.mode === 'dare2dream' && !r.daily && r.title).length, l: 'Titles' }] });
+    }
+    return pages;
+  }
+  // the metallic face: the game's colour with a sheen, as on the game's cards (155deg: lighter, the colour, darker, light)
+  const metal = (c) => { const m = D2T.mix; return [m(c, '#FFFFFF', 0.45), c, m(c, '#000000', 0.38), m(c, '#FFFFFF', 0.15)]; };
+  const shieldHTML = (sh, pc) => {
+    const c = sh.c || pc, g = metal(c), lt = c === '#3BA4FF';
+    return `<div class="fr-frame fr-al${lt ? ' lt' : ''}" style="--m1:${g[0]};--m2:${g[1]};--m3:${g[2]};--m4:${g[3]}">${FRAME}${sh.crest ? `<img class="cr" src="${sh.crest}" alt="">` : ''}<b>${sh.n}</b><span>${sh.l}</span></div>`;
+  };
+  function recordSection(pages) {
+    const p0 = pages[0];
+    return `<section class="fr-sect fr-in fr-rec" aria-label="Your record">
+      <div class="fr-sect-h"><h2>Your record</h2><button type="button" class="fr-shr" style="--c:${p0.c}" aria-label="Share your ${p0.name} record"><span>Share</span>${SHARE_ICON}</button></div>
+      <div class="fr-ptabs" role="tablist">${pages.map((p, i) => `<button type="button" role="tab" data-i="${i}" style="--c:${p.c}" class="${i ? '' : 'on'}" aria-selected="${!i}"><span>${p.tag}</span></button>`).join('')}</div>
+      <div class="fr-rpages">${pages.map((p) => `<div class="fr-rpage" aria-label="${p.name} record"><div class="fr-record fr-quad">${p.shields.map((sh) => shieldHTML(sh, p.c)).join('')}</div></div>`).join('')}</div>
+      <div class="fr-rdots" aria-hidden="true">${pages.map((p, i) => `<i style="--c:${p.c}" class="${i ? '' : 'on'}"></i>`).join('')}</div></section>`;
+  }
+  // a page's record as a share card: its mark, MY RECORD, the four shields big in a 2 x 2, "CAN YOU BEAT IT?"
+  function recordShare(p) {
+    const text = [`*DROP2TOP ${p.name} record*`, '', p.shields.map((sh) => `${sh.l} ${sh.n}`).join(' · '), '', '_Your turn. Beat that!_', D2T.share.LINK].join('\n');
+    const imgs = {};
+    if (p.mark.svg) imgs.mark = D2T.share.svgSrc(D2T.ubMark.replace('<svg ', `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" color="${p.c}" `));
+    else if (p.mark.src) imgs.mark = p.mark.src;
+    p.shields.forEach((sh, i) => { if (sh.crest) imgs['cr' + i] = sh.crest; });
+    return D2T.share.build({ text, c: p.c, wash: p.c, band: p.c, ink: p.c === '#3BA4FF' ? '#FFFFFF' : '#0A0A0A', tag: p.k === 'daily' ? 'Daily Challenge' : p.name, dare: 'Can you beat it?', imgs,
+      draw: (g, im, k) => {
+        const W = k.W;
+        if (im.mark) {
+          if (p.mark.tint) { const t = document.createElement('canvas'), S = 340; t.width = S; t.height = S; const tg = t.getContext('2d'), r = Math.min(S / im.mark.naturalWidth, S / im.mark.naturalHeight), w = im.mark.naturalWidth * r, h = im.mark.naturalHeight * r;
+            tg.drawImage(im.mark, (S - w) / 2, (S - h) / 2, w, h); tg.globalCompositeOperation = 'source-in'; tg.fillStyle = p.c; tg.fillRect(0, 0, S, S); g.drawImage(t, W / 2 - 85, 250, 170, 170); }
+          else k.pic(im.mark, W / 2, 250, 170);
+        }
+        k.mid('MY RECORD', W / 2, 462, 900, 900, 54, true, '#FFFFFF', 'center', '3px');
+        const SW = 236, SH = 302, PTS = [[1, 11], [11, 1], [89, 1], [99, 11], [99, 108], [50, 127], [1, 108]];
+        p.shields.forEach((sh, i) => {
+          const x0 = W / 2 + (i % 2 ? 22 : -22 - SW), y0 = 512 + Math.floor(i / 2) * (SH + 18), c = sh.c || p.c, m = metal(c), ink = c === '#3BA4FF' ? '#FFFFFF' : '#0A0A0A';
+          g.save(); g.beginPath(); PTS.forEach(([px, py], j) => { const x = x0 + px / 100 * SW, y = y0 + py / 128 * SH; if (j) g.lineTo(x, y); else g.moveTo(x, y); }); g.closePath();
+          const a = 155 * Math.PI / 180, dx = Math.sin(a), dy = -Math.cos(a), L = (Math.abs(SW * dx) + Math.abs(SH * dy)) / 2, cx = x0 + SW / 2, cy = y0 + SH / 2;
+          const gr = g.createLinearGradient(cx - dx * L, cy - dy * L, cx + dx * L, cy + dy * L); [[0, m[0]], [0.32, m[1]], [0.7, m[2]], [1, m[3]]].forEach(([o2, col]) => gr.addColorStop(o2, col));
+          g.fillStyle = gr; g.fill(); g.lineWidth = 3; g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineJoin = 'round'; g.stroke(); g.restore();
+          if (im['cr' + i]) k.pic(im['cr' + i], x0 + SW * 0.91 - 26, y0 + SH * 0.07, 52);
+          k.mid(String(sh.n), cx, y0 + SH * 0.30 + 44, SW - 40, 900, 92, true, ink);
+          k.fit(sh.l.toUpperCase(), cx, y0 + SH * 0.30 + 104, SW - 44, 800, 26, false, ink, 'center', '1px');
+        });
+      } });
   }
 
   // The long logo in two pieces (emblem and name, measured from long.png) so the emblem can turn on its own,
@@ -177,7 +251,7 @@
     title: 'Home', theme: 'black',
     mount(root, params) {
       D2T.game.closeOldDaily();                                  // yesterday's unfinished Daily closed at midnight
-      const rec = D2T.game.record(), dreams = D2T.game.dreamRecord(), xr = D2T.game.xRecord();
+      const rec = D2T.game.record(), dreams = D2T.game.dreamRecord(), xr = D2T.game.xRecord(), recPages = recordPages();
       const body = D2T.h(`<div class="screen-body fr-home">
         <div class="fr-home-top"><button class="fr-home-logo" aria-label="DROP2TOP">${homeLogo()}</button></div>
         ${dailyStrip()}
@@ -186,9 +260,7 @@
           <span class="fr-classic-txt"><span class="fr-tag" style="display:block">CLASSIC</span><span class="fr-big" style="display:block">Pick a new club</span><span class="fr-sub" style="display:block">Take them from the drop to the top.</span>
           <span class="fr-spin">Spin for a club ${ARROW}</span></span></button>
         ${continueCards()}
-        <section class="fr-sect fr-in" aria-label="Your record">
-          <div class="fr-sect-h"><h2>Your record</h2><span>${rec.runs} run${rec.runs === 1 ? '' : 's'}</span></div>
-          ${D2T.frRecord(rec, 'dark')}${bestDailyRow()}</section>
+        ${recordSection(recPages)}
         <section class="fr-sect fr-in" aria-label="Other games">
           <div class="fr-sect-h"><h2>Other games</h2></div>
         ${gameCard({ c: '#12F06C', attrs: 'data-act="pick" data-mode="clubx"', label: 'Club X', tag: 'CLUB X', big: 'From nowhere to champions', sub: 'Career mode. Replace the worst side, win the league, go again.', mark: `<img src="${D2T.game.club('Club X').crest}" alt="">` })}
@@ -271,9 +343,26 @@
           buttons: [{ k: 'share', label: 'Share result', primary: true, fn: () => { window.D2TSound && window.D2TSound.play('share'); D2T.share.send(sh); } },
             { k: 'again', label: 'Go again', fn: () => { G.startDaily(); D2T.toBlack(G.stepFor() || 'table', { from }); } }] }).open();
       };
-      // your best Daily in Your record: share that Daily again
-      const dbest = body.querySelector('[data-act="daily-best"]');
-      if (dbest) dbest.onclick = () => { const sh = D2T.dailyShare && D2T.dailyShare(dbest.dataset.date); if (!sh) return; window.D2TSound && window.D2TSound.play('share'); const go = () => (sh.done ? D2T.share.send(sh) : setTimeout(go, 80)); go(); };
+      // Your record: tags and swipes change the page, Share shares the page on show (its card built ahead)
+      const rsec = body.querySelector('.fr-rec');
+      if (rsec) {
+        const pg = rsec.querySelector('.fr-rpages'), tabs = rsec.querySelector('.fr-ptabs'), shr = rsec.querySelector('.fr-shr'), cards = {};
+        let cur = 0;
+        const card = (i) => cards[i] || (cards[i] = recordShare(recPages[i]));
+        const show = (i) => {
+          cur = i; const p = recPages[i];
+          tabs.querySelectorAll('button').forEach((b, j) => { b.classList.toggle('on', j === i); b.setAttribute('aria-selected', j === i); });
+          rsec.querySelectorAll('.fr-rdots i').forEach((d, j) => d.classList.toggle('on', j === i));
+          shr.style.setProperty('--c', p.c); shr.setAttribute('aria-label', `Share your ${p.name} record`);
+          const t = tabs.children[i]; if (t) { const l = t.offsetLeft - tabs.offsetLeft, r = l + t.offsetWidth; if (l < tabs.scrollLeft) tabs.scrollTo({ left: l - 8, behavior: 'smooth' }); else if (r > tabs.scrollLeft + tabs.clientWidth) tabs.scrollTo({ left: r - tabs.clientWidth + 8, behavior: 'smooth' }); }
+          setTimeout(() => card(i), 0);
+        };
+        tabs.querySelectorAll('button').forEach((b) => b.onclick = () => { const i = +b.dataset.i; pg.scrollTo({ left: i * pg.clientWidth, behavior: D2T.reduced() ? 'auto' : 'smooth' }); show(i); });
+        let raf = 0;
+        pg.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { const i = Math.round(pg.scrollLeft / Math.max(1, pg.clientWidth)); if (i !== cur && recPages[i]) show(i); }); }, { passive: true });
+        shr.onclick = () => { const sh = card(cur); window.D2TSound && window.D2TSound.play('share'); const go = () => (sh.done ? D2T.share.send(sh) : setTimeout(go, 80)); go(); };
+        setTimeout(() => card(0), 1500);
+      }
       const other = body.querySelector('[data-act="continue-other"]');
       if (other) other.onclick = (e) => { D2T.game.switchToOther(); D2T.toBlack(D2T.game.stepFor() || 'squad', { from: e.currentTarget }); };
       body.querySelectorAll('[data-act="pick"]').forEach((btn) => btn.onclick = (e) => {

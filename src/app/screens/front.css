@@ -298,17 +298,30 @@
 .fr-dstrip-sub em { font-style: normal; color: #12F06C; font-weight: 800; }
 .fr-dstrip .fr-go { flex: none; display: grid; place-items: center; width: 22px; height: 44px; color: #fff; }
 .fr-dstrip .fr-go svg { width: 22px; height: 22px; }
-/* your best Daily, a slim row under Your record's four frames */
-.fr-dbest { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; box-sizing: border-box; margin-top: 12px; padding: 10px 14px; min-height: 56px;
-  border-radius: 14px; background: #0E0E10; border: 1px solid #26262C; color: #fff; text-align: left; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-.fr-dbest:active { transform: scale(.98); }
-.fr-dbest i { font: normal 800 11px/1.2 'Exo 2', sans-serif; letter-spacing: 2px; color: #8E8E99; }
-.fr-dbest-l { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-.fr-dbest-l b { font: 900 italic 18px/1 'Exo 2', sans-serif; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
-.fr-dbest-l b img { width: 22px; height: 22px; object-fit: contain; flex: none; }
-.fr-dbest-l small { font-size: 12px; font-weight: 600; color: #8E8E99; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.fr-dbest-r { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; flex: none; }
-.fr-dbest-r b { font: 900 italic 22px/1 'Exo 2', sans-serif; }
+/* Your record, a page per game (Craig, 29 Oct; "B, refined: metallic, your arrow" in design/prototype/record-swipe.html) */
+.fr-shr { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin: -14px -6px -14px 0; padding: 0 6px; background: none; border: 0; color: var(--c, #fff); font: 800 14px var(--font); letter-spacing: .06em; text-transform: uppercase; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.fr-shr svg { flex: none; }
+.fr-sect-h .fr-shr span { font-size: inherit; font-weight: inherit; opacity: 1; }
+.fr-rec .fr-sect-h { align-items: center; }
+.fr-ptabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 0 12px; padding: 0 2px; }
+.fr-ptabs::-webkit-scrollbar { display: none; }
+.fr-ptabs button { flex: none; height: 32px; padding: 0 12px; border-radius: 9px; border: 1px solid #26262C; background: #0E0E10; color: #BDBDC6; font: 800 11px var(--font); letter-spacing: .12em; cursor: pointer; transform: skewX(-10deg); -webkit-tap-highlight-color: transparent; }
+.fr-ptabs button span { display: inline-block; transform: skewX(10deg); }
+.fr-ptabs button.on { background: var(--c); border-color: var(--c); color: #0A0A0A; }
+.fr-rpages { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.fr-rpages::-webkit-scrollbar { display: none; }
+.fr-rpage { flex: 0 0 100%; scroll-snap-align: start; scroll-snap-stop: always; }
+.fr-rdots { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
+.fr-rdots i { width: 6px; height: 6px; border-radius: 3px; background: #3A3A44; transition: width .2s, background .2s; }
+.fr-rdots i.on { width: 18px; background: var(--c); }
+.fr-al { justify-content: flex-start; padding: 30% 0 0; }
+.fr-al::before { content: ""; position: absolute; inset: 0; clip-path: polygon(1% 8.6%, 11% .8%, 89% .8%, 99% 8.6%, 99% 84.4%, 50% 99.2%, 1% 84.4%);
+  background: linear-gradient(155deg, var(--m1) 0%, var(--m2) 32%, var(--m3) 70%, var(--m4) 100%); }
+.fr-record .fr-al polygon { fill: none; stroke: rgba(255,255,255,.35); }
+.fr-record .fr-al b { font: 900 italic 30px/34px var(--font); height: 34px; white-space: nowrap; color: #0A0A0A; }
+.fr-record .fr-al span { margin-top: 7px; font-size: 10px; color: #0A0A0A; }
+.fr-record .fr-al.lt b, .fr-record .fr-al.lt span { color: #fff; }
+.fr-al .cr { position: absolute; top: 7%; right: 9%; width: 20px; height: 20px; object-fit: contain; margin: 0; }
 .fr-rise { color: #12F06C; display: inline-flex; align-items: center; gap: 3px; margin-left: 2px; }
 .fr-up { width: .7em; height: .7em; }
 /* a game locked for repair (Dare2Dream, Craig 13 Oct): no tap, a grey lock badge top right, the wash and mark dimmed */
