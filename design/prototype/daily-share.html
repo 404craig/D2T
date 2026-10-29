@@ -34,7 +34,7 @@ h1{font:900 italic 30px/1.05 'Exo 2';text-transform:uppercase;margin:0 0 10px}
 <div class="cols" id="main"></div>
 
 <h2 class="sec">When one player is both</h2>
-<p class="lead">If your top scorer is also your best card (here Paul Wilkinson, 14 goals, 74 silver), three ways to handle it.</p>
+<p class="lead">If the same player still ends up in both rows (here Paul Wilkinson, 14 goals, 74 silver), both rows stay as they are.</p>
 <div class="cols" id="same"></div>
 
 <h2 class="sec">Card colours</h2>
@@ -91,7 +91,8 @@ function kit(g){
   const pent=(px,py,pr,rot)=>{g.beginPath();for(let i=0;i<5;i++){const a=rot+i*2*Math.PI/5;g.lineTo(px+pr*Math.cos(a),py+pr*Math.sin(a));}g.closePath();g.fillStyle='#0A0A0A';g.fill();};
   pent(cx,cy,r*.36,-Math.PI/2);g.save();g.beginPath();g.arc(cx,cy,r*.96,0,7);g.clip();for(let i=0;i<5;i++){const a=-Math.PI/2+i*2*Math.PI/5;pent(cx+r*.95*Math.cos(a),cy+r*.95*Math.sin(a),r*.3,a+Math.PI/2);}g.restore();};
  // number then a small word, right-aligned to x, both centred on cy
- const stat=(n,u,x,cy,col,px=64)=>{const wu=mid(u,x,cy,200,800,22,false,col,'right','2px');mid(n,x-wu-14,cy,220,900,px,true,col,'right');};
+ // numbers right-aligned in one column, words left-aligned in the next, so the figures line up row to row
+ const NX=826;const stat=(n,u,x,cy,col,px=64)=>{mid(n,NX,cy,220,900,px,true,col,'right');mid(u,NX+14,cy,140,800,22,false,col,'left','2px');};
  return {fit,mid,width,rr,box,pic,logo,tag,card,ball,stat,sp};
 }
 // the shared top: a softer red wash, badge, name, 21st -> 1st, The Rise
@@ -116,21 +117,8 @@ const HL2=(best)=>`Top scorer: Paul Wilkinson, 14 goals\nBest card: ${best.name}
 const sheet=(best)=>(g,k)=>{head(g,k);scorerRow(k,HY,P.wilk);bestRow(k,HY+114,best);band(g,k);};
 const MAIN=[{id:'3',name:'3 · Team sheet',why:'Top scorer and best card as <b>two rows</b>, the number at the right in the row\'s colour: the club\'s red for goals, the card\'s level colour for the rating.',draw:sheet(P.cant),text:MSG(HL2(P.cant))}];
 const SAME=[
- {id:'s1',name:'A · Star man',why:'The two rows become <b>one tall row</b>: a bigger card, "Top scorer and best card" over his name, and <b>both numbers</b> side by side. Fills the same space.',
-  draw(g,k){const C=DATA.c,p=P.wilk,L=LV[p.lv];head(g,k);k.box(90,HY,900,214,24);k.card(122,HY+20,134,p);
-   k.ball(246,HY+168,22);k.fit('TOP SCORER AND BEST CARD',290,HY+34,660,800,22,false,'#8E8E99','left','3px');k.fit(p.name.toUpperCase(),290,HY+64,660,900,46,true,'#FFFFFF','left');
-   g.fillStyle='#222226';g.fillRect(290,HY+124,668,3);
-   const wg=k.mid(String(p.goals),290,HY+168,200,900,54,true,C.text,'left');k.mid('GOALS',290+wg+12,HY+172,200,800,22,false,C.text,'left','2px');
-   const x2=560,wr=k.mid(String(p.r),x2,HY+168,200,900,54,true,L[5],'left');k.mid(L[6],x2+wr+12,HY+172,200,800,22,false,L[5],'left','2px');
-   band(g,k);},text:MSG('Top scorer and best card: Paul Wilkinson, 14 goals, 74')},
- {id:'s2',name:'B · One row, two numbers',why:'The <b>same row size</b> as the others, his card on the left, and both numbers at the right. The space under goes back to <b>breathing room</b> around the rows.',
-  draw(g,k){const C=DATA.c,p=P.wilk,L=LV[p.lv],y=HY+56;head(g,k);k.box(90,y,900,104,22);k.card(126,y+13,58,p);
-   k.fit('TOP SCORER · BEST CARD',206,y+18,420,800,22,false,'#8E8E99','left','3px');k.fit(p.name.toUpperCase(),206,y+48,380,900,40,true,'#FFFFFF','left');
-   k.stat(String(p.r),L[6],958,y+52,L[5],56);const wr=k.width(String(p.r),900,56,true)+k.width(L[6],800,22,false,'2px')+14;k.stat(String(p.goals),'GOALS',958-wr-36,y+52,C.text,56);
-   band(g,k);},text:MSG('Top scorer and best card: Paul Wilkinson, 14 goals, 74')},
- {id:'s3',name:'C · Both rows, flagged',why:'Keep <b>both rows</b> so every share looks the same, and mark the double with a small <b>"Both"</b> tag on the second row. Simplest for the game to build.',
+ {id:'s3',name:'Both rows, no tag',why:'Your pick: <b>both rows</b>, the same player in each, no tag. The game will try to avoid this by giving best card to the <b>next highest card</b> when the top scorer is also the highest.',
   draw(g,k){head(g,k);scorerRow(k,HY,P.wilk);bestRow(k,HY+114,P.wilk);
-   const t='BOTH',tw=k.width(t,900,20,true,'2px')+26,x=206+k.width('BEST CARD',800,22,false,'3px')+16,y=HY+114+14;k.rr(x,y,tw,30,8);g.fillStyle=DATA.c.accent;g.fill();k.mid(t,x+tw/2,y+15,200,900,20,true,'#FFFFFF','center','2px');
    band(g,k);},text:MSG('Top scorer and best card: Paul Wilkinson, 14 goals, 74')}];
 // best card rows in every level
 function stripDraw(g,k){g.fillStyle='#000';g.fillRect(0,0,W,g.canvas.height);[P.falc,P.wilk,P.cant,P.tiss,P.giggs].forEach((p,i)=>bestRow(k,30+i*114,p));}
