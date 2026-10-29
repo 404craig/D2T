@@ -101,15 +101,14 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 .gr .mb img{display:block;width:100%;filter:drop-shadow(0 5px 8px rgba(0,0,0,.6));animation:spin 9s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes drift{0%{opacity:0;translate:0 14px}18%,74%{opacity:1}50%{translate:6px -12px}100%{opacity:0;translate:0 -22px}}
-.gr .pl .sh2{position:relative;width:50px;margin:0 auto}
+.gr .pl .sh2{position:relative;width:46px;margin:0 auto}
 .gr .pl .sh2 img{width:100%;display:block;filter:drop-shadow(0 6px 10px rgba(0,0,0,.6))}
-.gr .pl .num{position:absolute;left:0;right:0;top:56%;text-align:center;font:900 italic 17px/1 var(--f);transform:translateY(-50%);paint-order:stroke;-webkit-text-stroke:0 transparent}
+.gr .pl .num{position:absolute;left:0;right:0;top:58%;text-align:center;font:900 italic 17px/1 var(--f);transform:translateY(-50%);paint-order:stroke;-webkit-text-stroke:0 transparent}
 /* Unbeaten: two shirts, level, as on the game's stage; the right one spins in like a reel */
-.ub{position:relative;width:360px;height:300px;display:flex;align-items:center;justify-content:center;gap:50px}
-.ub .left{width:142px}
-.ub .reel{position:relative;width:142px;height:221px;overflow:hidden}
+.ub{position:relative;width:340px;height:300px;display:flex;align-items:center;justify-content:center;gap:52px}
+.ub .reel{position:relative;width:126px;height:196px;overflow:hidden}
 .ub .strip{position:absolute;left:0;top:0;width:100%}
-.ub .strip img{display:block;width:142px;height:221px;object-fit:contain}
+.ub .strip img{display:block;width:126px;height:196px;object-fit:contain;object-position:50% 50%}
 .ub .ar{position:absolute;left:50%;top:76px;width:56px;height:150px;margin-left:-28px}
 .ub .ar svg{position:absolute;top:0;width:24px;height:136px;filter:drop-shadow(0 0 8px rgba(34,211,238,.55))}
 .ub .ar .up{left:2px;animation:bobU 2.2s ease-in-out infinite}
@@ -143,7 +142,7 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 .bbar2 .newg{background:var(--k);color:var(--ink,#0A0A0A);box-shadow:0 6px 16px -6px var(--k)}
 /* the club sweep from the home screen's continue card: light at the left, the true colour across the middle, deeper at the right */
 .bbar2 .contg{color:#fff;isolation:isolate;padding:0 36px 0 42px;background:linear-gradient(100deg,var(--c0) 0%,var(--c1) 30%,var(--c1) 55%,var(--c2) 100%);box-shadow:0 6px 16px -6px var(--c1),inset 0 0 0 2px rgba(255,255,255,.18);text-shadow:0 1px 3px rgba(0,0,0,.35)}
-.bbar2 .contg::before{content:"";position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(135deg,rgba(255,255,255,.09) 0 2px,rgba(255,255,255,0) 2px 7px)}
+.bbar2 .contg::before{content:"";position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 2px,rgba(255,255,255,0) 2px 7px);-webkit-mask:linear-gradient(90deg,transparent 35%,#000 100%);mask:linear-gradient(90deg,transparent 35%,#000 100%)}
 .bbar2 .contg::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(255,255,255,.32) 0%,rgba(255,255,255,0) 46%)}
 .bbar2 .contg img{position:absolute;left:12px;top:50%;width:26px;height:26px;margin-top:-13px;object-fit:contain;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
 /* stacked: a full Continue in the club's colours above the main button, everything squeezed up */
@@ -193,7 +192,8 @@ h2.sec{font:900 italic 26px var(--f);text-transform:uppercase;margin:56px 0 8px}
 <ul>
 <li><b>Buttons:</b> the arrow now sits at the right-hand end of the button, near the curve, and is centred top to bottom.</li>
 <li><b>Shields:</b> labels a touch bigger, the longer ones over two lines (League / titles).</li>
-<li><b>Goal Rush:</b> the <b>?-?-?</b> rolls up like the game's fruit machine numbers to a formation (4-3-3), holds, rolls back to ?-?-?, then on to the next. The ball keeps its shape and turns slowly.</li>
+<li><b>Goal Rush:</b> the floating players are just <b>their shirts and numbers</b> now, no badge or name. The <b>?-?-?</b> rolls up like the game's fruit machine numbers to a formation (4-3-3), holds, rolls back to ?-?-?, then on to the next. The ball keeps its shape and turns slowly.</li>
+<li><b>Unbeaten:</b> Man Utd and Man City's club cards; every 8 seconds <b>both roll up</b> to two shirts (Rooney 208, Salah ?), and 8 seconds later roll back to the club cards.</li>
 <li><b>Tenaball:</b> the board fills 4th, 3rd, 2nd, 1st, in the Premier League's green to teal.</li>
 </ul></div></div>
 <h2 class="sec">With a game going</h2>
@@ -235,7 +235,7 @@ function games(cont){
    art:()=>`<div class="gr"><div class="ball"><img src="share-fx/goal_rush.png" alt=""></div></div>`,st:[['12','Games'],['3','Bang on'],['25%','Hit rate'],['8+','Last game']],
    rules:'Each game picks a formation, and its number is your target: 3-5-2 means score exactly 352. Spin three real players for an open shirt and pick one. Get your XI\'s career Premier League goals to the number exactly.'},
   {id:'ub',k:'#22D3EE',name:'Unbeaten Run',hl:'Higher or lower?',sb:'One stat, real Premier League numbers. How long can you go?',play:'Start a run',
-   art:()=>`<div class="ub"><img class="left" src="home-new/ucc0.png" alt="Man Utd 1999/00, 91 points"><div class="reel"><div class="strip"></div></div><div class="ar">${SWIPE('#22D3EE')}${SWIPE('#7FE7F7',1)}</div></div>`,
+   art:()=>`<div class="ub"><div class="reel"><div class="strip sl0"></div></div><div class="reel"><div class="strip sl1"></div></div><div class="ar">${SWIPE('#22D3EE')}${SWIPE('#7FE7F7',1)}</div></div>`,
    st:[['41','Runs'],['17','Best run'],['9','Topics'],['4','Last run']],
    rules:'Spin a stat. Is the next real number higher or lower? Swipe up for higher, down for lower. One wrong call ends your run.'},
   {id:'ten',k:'#A66BFF',name:'Tenaball',hl:'Name the top ten',sb:'Our football quiz. Opens Tenaball in a new tab.',play:'Play Tenaball',
@@ -315,18 +315,21 @@ ${g.st.length?`<div class="st">${shields(g.st,g.k)}</div>`:''}${g.board?`<div cl
   FL.forEach(([t,v],i)=>{const e=document.createElement('div');e.className='fl '+(t==='f'?'':'pl');
    if(t==='f')e.innerHTML=`<span class="fm">${v}</span>`;
    else if(t==='e'){e.classList.add('pl');e.innerHTML=`<div class="sh2"><img src="home-new/${v}.png" alt=""></div>`;}
-   else{const [g,ink,st]=GL[v];e.innerHTML=`<div class="sh2"><img src="home-new/grb-${v}.png" alt=""><span class="num" style="color:${ink};${st?`-webkit-text-stroke:2px ${st};`:''}">${g}</span></div><b>${v}</b>`;
+   else{const [g,ink,st]=GL[v];e.innerHTML=`<div class="sh2"><img src="home-new/grn-${v}.png" alt="${v}"><span class="num" style="color:${ink};${st?`-webkit-text-stroke:2px ${st};`:''}">${g}</span></div>`;
     const num=e.querySelector('.num');const go=()=>roll(num,g);e.addEventListener('animationstart',go);e.addEventListener('animationiteration',go);}
    e.style.left=spots[i][0]+'px';e.style.top=spots[i][1]+'px';if(spots[i][2])e.classList.add('over');e.style.animationDelay=(i*1.57)+'s';gr.appendChild(e);});
   // a few smaller balls drifting round too, some in front, some behind
   [[96,40,30,1,.8],[262,92,24,0,3.6],[78,250,34,1,6.2],[240,250,22,0,9.4]].forEach(([x,y,w,o,d])=>{const b=document.createElement('div');b.className='mb'+(o?' over':'');b.style.cssText=`left:${x}px;top:${y}px;width:${w}px;animation-delay:${d}s`;b.innerHTML='<img src="share-fx/goal_rush.png" alt="">';gr.appendChild(b);});}
  // Unbeaten: the right shirt spins in like a reel and lands on Salah's "?" with a little bounce
- const strip=ph.querySelector('.ub .strip');
- if(strip){const R=['ucc2','ucc3','ucc4','ucc5','ucc1'],H=221;strip.innerHTML=Array.from({length:8},()=>R).flat().map((r)=>`<img src="home-new/${r}.png" alt="">`).join('');
-  let at=4;strip.style.transform=`translateY(${-at*H}px)`;
-  const spin=()=>{at+=R.length;strip.animate([{transform:`translateY(${-(at-R.length)*H}px)`},{transform:`translateY(${-at*H-10}px)`,offset:.86},{transform:`translateY(${-at*H}px)`}],{duration:1400,easing:'cubic-bezier(.3,.05,.2,1)',fill:'forwards'});
-   if(at>=R.length*7){setTimeout(()=>{at=4;strip.getAnimations().forEach((a)=>a.cancel());strip.style.transform=`translateY(${-at*H}px)`;},1600);}};
-  if(!reduced)setInterval(spin,10000);}
+ // Unbeaten: Man Utd v Man City club cards; every 8s both roll up, to Rooney (208) and Salah (?), then back again
+ const sA=ph.querySelector('.ub .sl0'),sB=ph.querySelector('.ub .sl1');
+ if(sA){const H=196,L=[['home-new/ucc0.png','home-new/ub-rooney.png'],['home-new/ucc1.png','home-new/ubq-salah.png']],FILL=['home-new/ucc2.png','home-new/ubq-kane.png','home-new/ucc3.png','home-new/ubq-henry.png','home-new/ucc4.png','home-new/ubq-aguero.png'];
+  let side=0;const put=(el,src)=>{el.innerHTML=`<img src="${src}" alt="">`;el.style.transition='none';el.style.transform='translateY(0)';};
+  put(sA,L[0][0]);put(sB,L[1][0]);
+  const roll=(el,from,to,delay)=>{const mid=[...FILL].sort(()=>Math.random()-.5).slice(0,4);el.innerHTML=[from,...mid,to].map((x)=>`<img src="${x}" alt="">`).join('');el.style.transition='none';el.style.transform='translateY(0)';void el.offsetHeight;
+   setTimeout(()=>{el.style.transition='transform 1.3s cubic-bezier(.25,.7,.25,1.1)';el.style.transform=`translateY(-${(mid.length+1)*H}px)`;},delay);};
+  const flip=()=>{const nx=1-side;roll(sA,L[0][side],L[0][nx],0);roll(sB,L[1][side],L[1][nx],180);side=nx;};
+  if(!reduced)setInterval(flip,8000);}
  // Goal Rush's ?-?-?: each figure rolls up like a reel to a formation, holds, rolls on to ?, then the next formation
  const fx=ph.querySelector('.fx');
  if(fx&&!reduced){const DR=[...fx.querySelectorAll('.dr')],FS=['433','442','352','451','343','532','424','541'];let fi=0;
