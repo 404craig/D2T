@@ -1,18 +1,19 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Daily Share Card</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Share Cards</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap">
 <style>
 :root{--bg:#000;--ink:#fff;--soft:#BDBDC6;--muted:#8E8E99;--line:#26262C;--g:#12F06C}
 html,body{background:#000;color:#fff;margin:0;font-family:'Exo 2',system-ui,sans-serif}
 .wrap{max-width:1560px;margin:0 auto;padding:28px 16px 80px}
 h1{font:900 italic 30px/1.05 'Exo 2';text-transform:uppercase;margin:0 0 10px}
-.sec{font:900 italic 22px 'Exo 2';text-transform:uppercase;margin:40px 0 6px}
-.lead{color:var(--soft);font-size:16px;line-height:1.5;max-width:860px;margin:0 0 22px}
+.lead{color:var(--soft);font-size:16px;line-height:1.5;max-width:900px;margin:0 0 22px}
 .lead b{color:#fff}
 .cols{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
 .col{flex:0 0 360px;max-width:100%}
-.col h2{font:900 italic 20px 'Exo 2';text-transform:uppercase;margin:0 0 4px}
-.col .why{color:var(--soft);font-size:14px;line-height:1.45;margin:0 0 12px;min-height:84px}
+.col h2{font:900 italic 20px 'Exo 2';text-transform:uppercase;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+.col h2 i{display:inline-block;width:12px;height:12px;border-radius:3px;transform:skewX(-10deg)}
+.col .why{color:var(--soft);font-size:14px;line-height:1.45;margin:0 0 12px;min-height:104px}
 .col .why b{color:#fff}
+.live{font:800 11px 'Exo 2';letter-spacing:2px;color:#0A0A0A;background:var(--g);padding:2px 7px;border-radius:5px;margin-left:4px}
 /* a WhatsApp chat, light bubbles on a dark wallpaper, as in Craig's screenshot */
 .chat{background:#0B0B0D radial-gradient(120% 60% at 50% 0%,#1A1A1F,#050506);border-radius:22px;padding:16px 10px 18px;box-shadow:0 0 0 1px #222228}
 .bub{margin-left:auto;width:300px;max-width:100%;background:#D9FDD3;color:#111B21;border-radius:14px 4px 14px 14px;padding:4px 4px 6px;font:400 15.5px/1.38 -apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;position:relative}
@@ -23,44 +24,26 @@ h1{font:900 italic 30px/1.05 'Exo 2';text-transform:uppercase;margin:0 0 10px}
 .bub .tm{display:block;text-align:right;font-size:11px;color:#667781;padding:2px 6px 0}
 .bub .tm i{font-style:normal;color:#53BDEB;margin-left:3px}
 .full{margin-top:10px;font-size:12px;color:var(--muted)}
-.strip{max-width:560px}
-.strip img{display:block;width:100%;border-radius:16px;box-shadow:0 0 0 1px #222228;cursor:zoom-in}
 .notes{max-width:900px;margin-top:34px;color:#CFCFD6;font-size:15px;line-height:1.5}
 .notes h2{font:900 italic 22px 'Exo 2';text-transform:uppercase;color:#fff;margin:0 0 8px}
 .notes li{margin:0 0 8px}.notes b{color:#fff}
 </style></head><body><div class="wrap">
-<h1>Daily share: team sheet</h1>
-<p class="lead">Option 3, taken further. The arrow now sits <b>level with the middle of the figures</b>, the club's red at the top is <b>toned down</b>, and the message ends <b><i>Your turn. Beat that!</i></b> above the link. Tap a picture to see it full size.</p>
-<div class="cols" id="main"></div>
-
-<h2 class="sec">When one player is both</h2>
-<p class="lead">If the same player still ends up in both rows (here Paul Wilkinson, 14 goals, 74 silver), both rows stay as they are.</p>
-<div class="cols" id="same"></div>
-
-<h2 class="sec">Card colours</h2>
-<p class="lead">The best card row takes its level's colour: the little card, the number and the word. Every player here is a real 1992/93 card in the game: <b>Willie Falconer</b> (Boro, 69 bronze), <b>Paul Wilkinson</b> (Boro, 74 silver), <b>Eric Cantona</b> (Leeds, 90 gold), <b>Matt Le Tissier</b> (Southampton, 90 purple, "Baller" on the card) and <b>Ryan Giggs</b> (Man Utd, 92 legend). The full card shows the legend in place.</p>
-<div class="cols" id="cols2"></div>
-
+<h1>Share cards: every game</h1>
+<p class="lead">The Daily's new card (sent to the game) set the rules; here they are carried to every other game. <b>The same frame:</b> the tag text centred, no link on the picture, the band lifted with black under it so WhatsApp's caption never covers it, a soft wash of the club's or game's colour at the top. <b>The same story:</b> a result line with the arrow on the figures' middle, a smaller line under it, then <b>team sheet rows</b> with the numbers in one column and the words in the next. <b>The same message:</b> short lines in blocks, ending <i>Your turn. Beat that!</i> over the link. Every player and real finish is from the game's data; your finishes are made up for the examples. Tap a picture for full size.</p>
+<div class="cols" id="cols"></div>
 <div class="notes">
 <h2>Notes</h2>
 <ul>
-<li><b>Tag and band.</b> Both are now centred on the capitals. The live share card has the same fault, so this fixes it there too.</li>
-<li><b>The date in the message.</b> "29th Oct" is back. WhatsApp will probably still underline it as a tappable date; harmless.</li>
-<li><b>Italics.</b> WhatsApp shows text between underscores in italics, so the game sends <code>_Your turn. Beat that!_</code>.</li>
-<li><b>Saved record.</b> Sharing again later from the home card works from the saved record, which doesn't keep the top scorer and best card yet, so the game would need to start saving them.</li>
+<li><b>Colours.</b> The tag is always the game's colour (Classic the club's). The wash and the band are the club's colour in Classic, Daily and Dare2Dream, and the game's colour in Club X, Goal Rush and Unbeaten Run, which have no club of their own.</li>
+<li><b>Best card.</b> The same rule as the Daily everywhere there's a squad: the highest card, or the next highest when he's also the top scorer.</li>
+<li><b>Goal Rush.</b> The XI becomes a team sheet in shape order, keeper first, goals lined up in one column, the biggest in yellow. The example XI is real and does add up to 433.</li>
+<li><b>Club X career.</b> One row a season, up to the last five; titles in green.</li>
+<li><b>Unbeaten Run.</b> No players to show, so the rows are this run against your best before it.</li>
 </ul>
 </div>
 </div>
 <script>
 const W=1080,H=1350;
-const P={
- wilk:{name:'Paul Wilkinson',sur:'Wilkinson',goals:14,r:74,pos:'FWD',lv:'silver',crest:'boro'},
- cant:{name:'Eric Cantona',sur:'Cantona',r:90,pos:'FWD',lv:'gold',crest:'leeds'},
- falc:{name:'Willie Falconer',sur:'Falconer',r:69,pos:'MID',lv:'bronze',crest:'boro'},
- tiss:{name:'Matt Le Tissier',sur:'Le Tissier',r:90,pos:'FWD',lv:'purple',crest:'saints'},
- giggs:{name:'Ryan Giggs',sur:'Giggs',r:92,pos:'MID',lv:'legend',crest:'utd'}};
-const DATA={num:19,date:'29th Oct',club:'Middlesbrough',season:'1992/93',they:'21st',theyPts:'44 pts',me:'1st',mePts:'83 pts',rise:'+20',
- c:{accent:'#E11B22',ink:'#FFFFFF',text:'#FF545A'}};
 const FONT=(w,px,it)=>`${it?'italic ':''}${w} ${px}px 'Exo 2', sans-serif`;
 const load=(src)=>new Promise((r)=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src;});
 // face stops, ink, text colour and word, from the game's cards (core/cards.js)
@@ -73,7 +56,7 @@ function kit(g){
  const size=(t,maxW,w,px,it,ls)=>{sp(ls);let s=px;g.font=FONT(w,s,it);while(s>12&&g.measureText(t).width>maxW){s-=2;g.font=FONT(w,s,it);}return s;};
  const fit=(t,x,y,maxW,w,px,it,col,al='center',ls)=>{const s=size(t,maxW,w,px,it,ls);g.textAlign=al;g.fillStyle=col;g.fillText(t,x,y);sp();return s;};
  // centre the capitals on cy (textBaseline 'top' or 'middle' leaves them low)
- const mid=(t,x,cy,maxW,w,px,it,col,al='center',ls)=>{const s=size(t,maxW,w,px,it,ls);g.textBaseline='alphabetic';const m=g.measureText(t);g.textAlign=al;g.fillStyle=col;g.fillText(t,x,cy+(m.actualBoundingBoxAscent-m.actualBoundingBoxDescent)/2);g.textBaseline='top';const wd=m.width;sp();return wd;};
+ const mid=(t,x,cy,maxW,w,px,it,col,al='center',ls)=>{size(t,maxW,w,px,it,ls);g.textBaseline='alphabetic';const m=g.measureText(t);g.textAlign=al;g.fillStyle=col;g.fillText(t,x,cy+(m.actualBoundingBoxAscent-m.actualBoundingBoxDescent)/2);g.textBaseline='top';sp();return m.width;};
  const width=(t,w,px,it,ls)=>{sp(ls);g.font=FONT(w,px,it);const v=g.measureText(t).width;sp();return v;};
  const rr=(x,y,w,h,r)=>{g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();};
  const box=(x,y,w,h,r,edge,fill)=>{rr(x,y,w,h,r);g.fillStyle=fill||'#0E0E10';g.fill();g.lineWidth=3;g.strokeStyle=edge||'#222226';g.stroke();};
@@ -90,49 +73,100 @@ function kit(g){
  const ball=(cx,cy,r)=>{g.beginPath();g.arc(cx,cy,r,0,7);g.fillStyle='#FFFFFF';g.fill();g.lineWidth=r*.09;g.strokeStyle='#0A0A0A';g.stroke();
   const pent=(px,py,pr,rot)=>{g.beginPath();for(let i=0;i<5;i++){const a=rot+i*2*Math.PI/5;g.lineTo(px+pr*Math.cos(a),py+pr*Math.sin(a));}g.closePath();g.fillStyle='#0A0A0A';g.fill();};
   pent(cx,cy,r*.36,-Math.PI/2);g.save();g.beginPath();g.arc(cx,cy,r*.96,0,7);g.clip();for(let i=0;i<5;i++){const a=-Math.PI/2+i*2*Math.PI/5;pent(cx+r*.95*Math.cos(a),cy+r*.95*Math.sin(a),r*.3,a+Math.PI/2);}g.restore();};
- // number then a small word, right-aligned to x, both centred on cy
- // numbers right-aligned in one column, words left-aligned in the next, so the figures line up row to row
- const NX=826;const stat=(n,u,x,cy,col,px=64)=>{mid(n,NX,cy,220,900,px,true,col,'right');mid(u,NX+14,cy,140,800,22,false,col,'left','2px');};
- return {fit,mid,width,rr,box,pic,logo,tag,card,ball,stat,sp};
+ return {fit,mid,width,rr,box,pic,logo,tag,card,ball,sp};
 }
-// the shared top: a softer red wash, badge, name, 21st -> 1st, The Rise
-function head(g,k){const C=DATA.c;g.fillStyle='#000';g.fillRect(0,0,W,H);
- const lg=g.createLinearGradient(0,0,0,720);lg.addColorStop(0,C.accent+'55');lg.addColorStop(.45,C.accent+'1A');lg.addColorStop(1,'#00000000');g.fillStyle=lg;g.fillRect(0,0,W,720);
- k.pic(IM.boro,W/2,150,1040,.09);k.logo(IM.logo,40);k.tag(`Daily #${DATA.num} · ${DATA.date}`,168,'#FFFFFF');
- k.pic(IM.boro,W/2,252,236);k.fit(DATA.club.toUpperCase(),W/2,500,960,900,74,true,'#FFFFFF');k.fit(DATA.season,W/2,580,960,600,38,false,'#E6E6EA');
- const a=DATA.they,b=DATA.me,wa=k.width(a,900,136,true),wb=k.width(b,900,136,true),gap=140,x0=W/2-(wa+gap+wb)/2,cy=712;
- k.mid(a,x0,cy,999,900,136,true,'#8E8E99','left');k.mid(b,x0+wa+gap,cy,999,900,136,true,C.text,'left');
- // the arrow sits on the middle of the figures
- g.strokeStyle='#FFFFFF';g.lineWidth=9;g.lineCap='round';g.lineJoin='round';const ax=x0+wa+26,bx=x0+wa+gap-26;g.beginPath();g.moveTo(ax,cy);g.lineTo(bx,cy);g.moveTo(bx-24,cy-22);g.lineTo(bx,cy);g.lineTo(bx-24,cy+22);g.stroke();
- k.fit(`WENT DOWN · ${DATA.theyPts.toUpperCase()}`,x0+wa/2,790,420,800,26,false,'#8E8E99','center','2px');k.fit(`${DATA.mePts.toUpperCase()} · CHAMPIONS`,x0+wa+gap+wb/2,790,460,800,26,false,C.text,'center','2px');
- const t1='THE RISE: ',t2=DATA.rise+' PLACES',w1=k.width(t1,900,54,true),w2=k.width(t2,900,54,true),xr=W/2-(w1+w2)/2;k.fit(t1,xr,846,999,900,54,true,'#FFFFFF','left');k.fit(t2,xr+w1,846,999,900,54,true,C.text,'left');}
-function band(g,k){const C=DATA.c,B=1176,BH=110;g.fillStyle=C.accent;g.fillRect(0,B,W,BH);k.mid('SAME CLUB TODAY. BEAT 1ST',W/2,B+BH/2,980,900,50,true,C.ink);}
-const HY=930; // rows: 930 to 1144
-function scorerRow(k,y,p){const C=DATA.c;k.box(90,y,900,100,22);k.ball(150,y+50,28);
- k.fit('TOP SCORER',206,y+18,360,800,22,false,'#8E8E99','left','3px');k.fit(p.name.toUpperCase(),206,y+46,520,900,40,true,'#FFFFFF','left');k.stat(String(p.goals),'GOALS',958,y+50,C.text);}
-function bestRow(k,y,p){const L=LV[p.lv];k.box(90,y,900,100,22);k.card(126,y+12,58,p);
- k.fit('BEST CARD',206,y+18,360,800,22,false,'#8E8E99','left','3px');k.fit(p.name.toUpperCase(),206,y+46,520,900,40,true,'#FFFFFF','left');k.stat(String(p.r),L[6],958,y+50,L[5]);}
-const MSG=(hl)=>`DROP2TOP Daily #19 · <span class="dt">29th Oct</span>\n\nMiddlesbrough 1992/93\nThey went down in 21st.\nI won the league on 83 pts.\nThe Rise: +20 places\n\n${hl}\n\n<i>Your turn. Beat that!</i>\n<a>404craig.github.io/D2T</a>`;
-const HL2=(best)=>`Top scorer: Paul Wilkinson, 14 goals\nBest card: ${best.name}, ${best.r}`;
-const sheet=(best)=>(g,k)=>{head(g,k);scorerRow(k,HY,P.wilk);bestRow(k,HY+114,best);band(g,k);};
-const MAIN=[{id:'3',name:'3 · Team sheet',why:'Top scorer and best card as <b>two rows</b>, the number at the right in the row\'s colour: the club\'s red for goals, the card\'s level colour for the rating.',draw:sheet(P.cant),text:MSG(HL2(P.cant))}];
-const SAME=[
- {id:'s3',name:'Both rows, no tag',why:'Your pick: <b>both rows</b>, the same player in each, no tag. The game will try to avoid this by giving best card to the <b>next highest card</b> when the top scorer is also the highest.',
-  draw(g,k){head(g,k);scorerRow(k,HY,P.wilk);bestRow(k,HY+114,P.wilk);
-   band(g,k);},text:MSG('Top scorer and best card: Paul Wilkinson, 14 goals, 74')}];
-// best card rows in every level
-function stripDraw(g,k){g.fillStyle='#000';g.fillRect(0,0,W,g.canvas.height);[P.falc,P.wilk,P.cant,P.tiss,P.giggs].forEach((p,i)=>bestRow(k,30+i*114,p));}
+// ---------- the frame every card shares ----------
+function frame(g,k,o){g.fillStyle='#000';g.fillRect(0,0,W,H);
+ const lg=g.createLinearGradient(0,0,0,720);lg.addColorStop(0,o.wash+'55');lg.addColorStop(.45,o.wash+'1A');lg.addColorStop(1,o.wash+'00');g.fillStyle=lg;g.fillRect(0,0,W,720);
+ if(o.ghost)k.pic(o.ghost,W/2,150,1040,o.ghostA||.09);k.logo(IM.logo,40);k.tag(o.tag,168,o.tagCol);
+ const B=1176,BH=110;g.fillStyle=o.band;g.fillRect(0,B,W,BH);k.mid(o.dare.toUpperCase(),W/2,B+BH/2,980,900,50,true,o.ink);}
+// crest, name, season line
+function clubBlock(k,im,name,season){k.pic(im,W/2,252,236);k.fit(name.toUpperCase(),W/2,500,960,900,74,true,'#FFFFFF');k.fit(season,W/2,580,960,600,38,false,'#E6E6EA');}
+// "21st -> 1st" with the arrow on the figures' middle, and a small line under each
+function result(g,k,a,b,colB,la,lb,colLb){const C=712,wa=k.width(a,900,136,true),wb=k.width(b,900,136,true),gap=140,x0=W/2-(wa+gap+wb)/2;
+ k.mid(a,x0,C,999,900,136,true,'#8E8E99','left');k.mid(b,x0+wa+gap,C,999,900,136,true,colB,'left');
+ g.strokeStyle='#FFFFFF';g.lineWidth=9;g.lineCap='round';g.lineJoin='round';const ax=x0+wa+26,bx=x0+wa+gap-26;g.beginPath();g.moveTo(ax,C);g.lineTo(bx,C);g.moveTo(bx-24,C-22);g.lineTo(bx,C);g.lineTo(bx-24,C+22);g.stroke();
+ k.fit(la,x0+wa/2,790,440,800,26,false,'#8E8E99','center','2px');k.fit(lb,x0+wa+gap+wb/2,790,460,800,26,false,colLb||colB,'center','2px');}
+// "THE RISE: " white then "+20 PLACES" in colour
+function line2(k,t1,t2,col,y=846){const w1=k.width(t1,900,54,true),w2=k.width(t2,900,54,true),x=W/2-(w1+w2)/2;k.fit(t1,x,y,999,900,54,true,'#FFFFFF','left');k.fit(t2,x+w1,y,999,900,54,true,col,'left');}
+// a team sheet row: icon, small label, name, then the number right-aligned at NX and its word left-aligned after it
+const NX=826;
+function row(g,k,y,r,h=100){k.box(90,y,900,h,22,r.edge,r.fill);const c=y+h/2;
+ if(r.icon==='ball')k.ball(150,c,28);else if(r.icon==='card')k.card(126,c-38,58,r.p);
+ const tx=r.icon?206:126;
+ if(r.label){k.fit(r.label,tx,c-32,560,800,22,false,'#8E8E99','left','3px');k.fit(r.name.toUpperCase(),tx,c-4,560,900,40,true,'#FFFFFF','left');}
+ else k.mid(r.name.toUpperCase(),tx,c,560,900,40,true,'#FFFFFF','left');
+ k.mid(r.n,NX,c,220,900,64,true,r.col,'right');if(r.u)k.mid(r.u,NX+14,c,140,800,22,false,r.col,'left','2px');}
+const scorer=(p,col)=>({icon:'ball',label:'TOP SCORER',name:p.name,n:String(p.goals),u:'GOALS',col});
+const best=(p)=>({icon:'card',label:'BEST CARD',name:p.name,n:String(p.r),u:LV[p.lv][6],col:LV[p.lv][5],p});
+// ---------- the examples (players, crests and real finishes from the game's data) ----------
+const P={
+ wilk:{name:'Paul Wilkinson',sur:'Wilkinson',goals:14,r:74,pos:'FWD',lv:'silver',crest:'boro'},
+ cant:{name:'Eric Cantona',sur:'Cantona',r:90,pos:'FWD',lv:'gold',crest:'leeds'},
+ ba:{name:'Demba Ba',sur:'Ba',goals:7,r:72,pos:'FWD',lv:'silver',crest:'whu'},
+ parker:{name:'Scott Parker',sur:'Parker',r:77,pos:'MID',lv:'silver',crest:'whu'},
+ shearer:{name:'Alan Shearer',sur:'Shearer',goals:22,r:90,pos:'FWD',lv:'gold',crest:'ncl'},
+ henry:{name:'Thierry Henry',sur:'Henry',r:99,pos:'FWD',lv:'legend',crest:'ars'},
+ rvn:{name:'Ruud van Nistelrooy',sur:'van Nistelrooy',goals:20,r:93,pos:'FWD',lv:'purple',crest:'utd'},
+ lamp:{name:'Frank Lampard',sur:'Lampard',r:93,pos:'MID',lv:'legend',crest:'che'}};
+const MSG=(lines)=>lines.join('\n')+`\n\n<i>Your turn. Beat that!</i>\n<a>404craig.github.io/D2T</a>`;
+const BORO={accent:'#E11B22',ink:'#FFFFFF',text:'#FF545A'},WHU={accent:'#1BB1E7',ink:'#3B0F1E',text:'#1BB1E7'},EVE={accent:'#2A5BD7',ink:'#FFFFFF',text:'#7393FF'};
+const GREEN='#12F06C',BLUE='#3BA4FF',YEL='#FFD21F',CYAN='#22D3EE';
+const OPTS=[
+ {name:'Daily',dot:'#FFFFFF',live:true,why:'As sent to the game: Boro\'s red wash and band, the white tag, 21st to 1st, The Rise in places, and the two rows.',
+  draw(g,k){frame(g,k,{wash:BORO.accent,ghost:IM.boro,tag:'Daily #19 · 29th Oct',tagCol:'#FFFFFF',band:BORO.accent,ink:BORO.ink,dare:'Same club today. Beat 1st'});
+   clubBlock(k,IM.boro,'Middlesbrough','1992/93');result(g,k,'21st','1st',BORO.text,'WENT DOWN · 44 PTS','83 PTS · CHAMPIONS');line2(k,'THE RISE: ','+20 PLACES',BORO.text);
+   row(g,k,930,scorer(P.wilk,BORO.text));row(g,k,1044,best(P.cant));},
+  text:MSG(['DROP2TOP Daily #19 · <span class="dt">29th Oct</span>','','Middlesbrough 1992/93','They went down in 21st.','I won the league on 83 pts.','The Rise: +20 places','','Top scorer: Paul Wilkinson, 14 goals','Best card: Eric Cantona, 90'])},
+ {name:'Classic',dot:WHU.text,why:'The Daily\'s card in the club\'s colours, with the tag in the club\'s colour as in the game. West Ham 2010/11 went down in 20th; here you finish 9th. The band keeps Classic\'s dare, <b>"Beat my rise of +11"</b>.',
+  draw(g,k){frame(g,k,{wash:WHU.accent,ghost:IM.whu,tag:'Classic',tagCol:WHU.text,band:WHU.accent,ink:WHU.ink,dare:'Beat my rise of +11'});
+   clubBlock(k,IM.whu,'West Ham','2010/11');result(g,k,'20th','9th',WHU.text,'WENT DOWN · 33 PTS','52 PTS');line2(k,'THE RISE: ','+11 PLACES',WHU.text);
+   row(g,k,930,scorer(P.ba,WHU.text));row(g,k,1044,best(P.parker));},
+  text:MSG(['DROP2TOP Classic','','West Ham 2010/11','They went down in 20th.','I finished 9th on 52 pts.','The Rise: +11 places','','Top scorer: Demba Ba, 7 goals','Best card: Scott Parker, 77'])},
+ {name:'Dare2Dream',dot:BLUE,why:'Everton 2003/04 really finished 17th; you draft 11 and finish 4th. The line under the result becomes <b>"Dream achieved"</b> (or "Fell short") with the places. Club colours on the wash and band, the blue tag says which game.',
+  draw(g,k){frame(g,k,{wash:EVE.accent,ghost:IM.eve,tag:'Dare2Dream',tagCol:BLUE,band:EVE.accent,ink:EVE.ink,dare:'Draft 11. Beat their real finish'});
+   clubBlock(k,IM.eve,'Everton','2003/04 · drafted from nothing');result(g,k,'17th','4th',EVE.text,'REAL FINISH · 39 PTS','71 PTS');line2(k,'DREAM ACHIEVED: ','+13 PLACES',EVE.text);
+   row(g,k,930,scorer(P.shearer,EVE.text));row(g,k,1044,best(P.henry));},
+  text:MSG(['DROP2TOP Dare2Dream','','Everton 2003/04, drafted from nothing','They really finished 17th.','I finished 4th on 71 pts.','Dream achieved: +13 places','','Top scorer: Alan Shearer, 22 goals','Best card: Thierry Henry, 99'])},
+ {name:'Club X · first season',dot:GREEN,why:'Club X\'s badge where the crest goes, and <b>the club it replaced</b> on the left of the result: Wolves really finished 20th in 2003/04, Club X won it. Everything in green.',
+  draw(g,k){frame(g,k,{wash:GREEN,ghost:IM.clx,ghostA:.07,tag:'Club X',tagCol:GREEN,band:GREEN,ink:'#0A0A0A',dare:'Replace the worst. Win the league'});
+   clubBlock(k,IM.clx,'Club X',"2003/04 · in Wolves' place");result(g,k,'20th','1st',GREEN,'WOLVES · 33 PTS','86 PTS · CHAMPIONS');line2(k,'FROM NOWHERE ','TO CHAMPIONS',GREEN);
+   row(g,k,930,scorer(P.rvn,GREEN));row(g,k,1044,best(P.lamp));},
+  text:MSG(['DROP2TOP Club X','',"2003/04, in Wolves' place",'Wolves finished 20th.','Club X won the league on 86 pts.','From nowhere to champions.','','Top scorer: Ruud van Nistelrooy, 20 goals','Best card: Frank Lampard, 93'])},
+ {name:'Club X · career',dot:GREEN,why:'After season one the story is the career: <b>titles over seasons</b> big, then <b>one row a season</b>, finishes lined up in one column, titles picked out in green.',
+  draw(g,k){frame(g,k,{wash:GREEN,ghost:IM.clx,ghostA:.07,tag:'Club X · Season 4',tagCol:GREEN,band:GREEN,ink:'#0A0A0A',dare:'Build a dynasty. Beat 2 titles'});
+   k.pic(IM.clx,W/2,252,200);k.fit('CLUB X',W/2,466,960,900,74,true,'#FFFFFF');k.fit("Career from 2003/04 · in Wolves' place",W/2,546,960,600,36,false,'#E6E6EA');
+   line2(k,'2 TITLES ','IN 4 SEASONS',GREEN,606);
+   [['2003/04','1st',1],['2004/05','2nd',0],['2005/06','1st',1],['2006/07','5th',0]].forEach(([s,f,won],i)=>row(g,k,688+i*116,{label:'SEASON '+(i+1),name:s,n:f,u:won?'CHAMPIONS':'',col:won?GREEN:'#FFFFFF',edge:won?GREEN+'88':null,fill:won?'#0C1F14':null},104));},
+  text:MSG(['DROP2TOP Club X · Season 4','',"Started in Wolves' place, 2003/04",'2 titles in 4 seasons','','2003/04: 1st, champions','2004/05: 2nd','2005/06: 1st, champions','2006/07: 5th'])},
+ {name:'Goal Rush',dot:YEL,why:'The total big over the target, how close in yellow, then the <b>XI as a team sheet</b> in shape order, the goals in one column. A real XI that adds up to exactly 433.',
+  draw(g,k){frame(g,k,{wash:YEL,ghost:IM.gr,ghostA:.07,tag:'Goal Rush · 4-3-3',tagCol:YEL,band:YEL,ink:'#0A0A0A',dare:'Hit 433 exactly'});
+   const t='433',w1=k.width(t,900,200,true),w2=k.width(' / 433',900,90,true),x0=W/2-(w1+w2)/2;k.mid(t,x0,330,999,900,200,true,'#FFFFFF','left');k.mid(' / 433',x0+w1,358,999,900,90,true,'#8E8E99','left');
+   k.mid('BANG ON',W/2,470,960,900,54,true,YEL);
+   const XI=[['GK','Robinson',1],['DEF','Petrescu',23],['DEF','Young',9],['DEF','Cahill',28],['DEF','Alonso',26],['MID','Alli',51],['MID','Duff',54],['MID','McAllister',49],['FWD','Hartson',55],['FWD','Bowen',65],['FWD','Ings',72]];
+   const top=Math.max(...XI.map(x=>x[2]));k.box(90,540,900,620,24);
+   XI.forEach(([pos,s,n],i)=>{const col=i<6?0:1,r=i<6?i:i-6,x=col?560:120,cy=588+r*94,nx=x+330;
+    k.mid(pos,x,cy,70,800,20,false,'#8E8E99','left','2px');k.mid(s.toUpperCase(),x+70,cy,176,900,34,true,'#FFFFFF','left');k.mid(String(n),nx,cy,120,900,42,true,n===top?YEL:'#FFFFFF','right');
+    if(r<(col?4:5)){g.fillStyle='#1C1C21';g.fillRect(x,cy+46,nx-x,2);}});
+   g.fillStyle='#222226';g.fillRect(538,560,3,580);
+   k.mid('TOTAL',580,1104,200,800,22,false,'#8E8E99','left','3px');k.mid('433',890,1104,200,900,42,true,YEL,'right');},
+  text:MSG(['DROP2TOP Goal Rush · 4-3-3','','My XI scored 433 Premier League goals.','Target 433. Bang on.','','Top scorer: Danny Ings, 72 goals'])},
+ {name:'Unbeaten Run',dot:CYAN,why:'The run huge in cyan, the stat under it, and two rows: <b>this run against your best before</b>, the numbers in one column, "NEW BEST" when you beat it.',
+  draw(g,k){frame(g,k,{wash:CYAN,ghost:null,tag:'Unbeaten Run',tagCol:CYAN,band:CYAN,ink:'#001A1F',dare:'Go longer than 17'});
+   g.save();g.shadowColor='rgba(34,211,238,.45)';g.shadowBlur=80;k.mid('17',W/2,450,980,900,360,true,CYAN);g.restore();
+   k.mid('CAREER GOALS',W/2,690,960,900,64,true,'#FFFFFF');k.mid('HIGHER OR LOWER · REAL PREMIER LEAGUE NUMBERS',W/2,756,960,800,24,false,'#8E8E99','center','2px');
+   line2(k,'A ','NEW BEST',CYAN,826);
+   row(g,k,930,{label:'THIS RUN',name:'Unbeaten',n:'17',u:'CALLS',col:CYAN,edge:CYAN+'88',fill:'#06191C'});row(g,k,1044,{label:'YOUR BEST BEFORE',name:'Career goals',n:'12',u:'CALLS',col:'#FFFFFF'});},
+  text:MSG(['DROP2TOP Unbeaten Run','','Career goals, higher or lower','Unbeaten in 17 calls.','A new best (was 12).'])}
+];
 (async()=>{
  await document.fonts.load("900 italic 80px 'Exo 2'");await document.fonts.load("800 30px 'Exo 2'");await document.fonts.load("600 30px 'Exo 2'");await document.fonts.load("700 30px 'Exo 2'");
- const n=['logo-long','boro','leeds','southampton','man-utd'],ims=await Promise.all(n.map((f)=>load(`share-fx/${f}.png`)));
- IM={logo:ims[0],boro:ims[1],leeds:ims[2],saints:ims[3],utd:ims[4]};
+ const F={logo:'logo-long',boro:'boro',leeds:'leeds',whu:'west-ham',eve:'everton',ncl:'newcastle',ars:'arsenal',utd:'man-utd',che:'chelsea',clx:'club_x',gr:'goal_rush'};
+ const ims=await Promise.all(Object.values(F).map((f)=>load(`share-fx/${f}.png`)));Object.keys(F).forEach((k,i)=>{IM[k]=ims[i];});
  const zoom=(img,url)=>{img.onclick=()=>{const z=document.createElement('div');z.style.cssText='position:fixed;inset:0;background:#000e;display:flex;align-items:center;justify-content:center;z-index:9;cursor:zoom-out';z.innerHTML=`<img src="${url}" style="max-width:100%;max-height:100%">`;z.onclick=()=>z.remove();document.body.appendChild(z);};};
- const draw=(fn,h=H)=>{const c=document.createElement('canvas');c.width=W;c.height=h;const g=c.getContext('2d');g.textBaseline='top';fn(g,kit(g));return c.toDataURL('image/png');};
- const put=(id,o)=>{const url=draw(o.draw);const el=document.createElement('div');el.className='col';
-  el.innerHTML=`<h2>${o.name}</h2><p class="why">${o.why}</p><div class="chat"><div class="bub"><img alt="${o.name} share card" src="${url}"><div class="cap">${o.text}</div><span class="tm">06:09<i>✓✓</i></span></div></div><p class="full">Tap the picture for full size</p>`;
-  zoom(el.querySelector('img'),url);document.getElementById(id).appendChild(el);};
- MAIN.forEach((o)=>put('main',o));SAME.forEach((o)=>put('same',o));
- const su=draw(stripDraw,30+5*114+16),sd=document.createElement('div');sd.className='col strip';sd.innerHTML=`<h2>Best card, every level</h2><p class="why">Bronze, silver, gold, purple and legend, as the best card row.</p><img alt="Best card rows in every level" src="${su}">`;zoom(sd.querySelector('img'),su);document.getElementById('cols2').appendChild(sd);
- put('cols2',{id:'lg',name:'Legend in place',why:'The whole card with <b>Ryan Giggs\'s 92 legend</b> as the best card, to see the orange next to the club\'s red.',draw:sheet(P.giggs),text:MSG(HL2(P.giggs))});
+ for(const o of OPTS){const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');g.textBaseline='top';o.draw(g,kit(g));const url=c.toDataURL('image/png');
+  const el=document.createElement('div');el.className='col';
+  el.innerHTML=`<h2><i style="background:${o.dot}"></i>${o.name}${o.live?'<span class="live">SENT</span>':''}</h2><p class="why">${o.why}</p><div class="chat"><div class="bub"><img alt="${o.name} share card" src="${url}"><div class="cap">${o.text}</div><span class="tm">06:09<i>✓✓</i></span></div></div><p class="full">Tap the picture for full size</p>`;
+  zoom(el.querySelector('img'),url);document.getElementById('cols').appendChild(el);}
 })();
 </script></body></html>
