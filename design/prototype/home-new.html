@@ -1,0 +1,286 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Home New Looks</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;0,600;0,700;0,800;1,800;1,900&display=swap">
+<style>
+:root{--g:#12F06C;--y:#FFD21F;--c:#22D3EE;--b:#3BA4FF;--p:#A66BFF;--soft:#BDBDC6;--mut:#8E8E99;--line:#26262C;--ink:#0E0E10;--f:'Exo 2',system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{background:#000;color:#fff;margin:0;font-family:var(--f)}
+.wrap{max-width:2200px;margin:0 auto;padding:28px 16px 80px}
+h1{font:900 italic 30px/1.05 var(--f);text-transform:uppercase;margin:0 0 10px}
+.lead{color:var(--soft);font-size:16px;line-height:1.5;max-width:960px;margin:0 0 10px}.lead b{color:#fff}
+.src{color:var(--mut);font-size:13px;line-height:1.5;max-width:960px;margin:0 0 26px}.src a{color:var(--soft)}
+.cols{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
+.col{flex:0 0 390px;width:390px;max-width:100%;min-width:0}
+.col>h2{font:900 italic 20px var(--f);text-transform:uppercase;margin:0 0 2px}.col>h2 span{color:var(--g)}
+.col>.like{font:800 11px var(--f);letter-spacing:.12em;color:var(--mut);margin:0 0 8px;text-transform:uppercase}
+.why{color:var(--soft);font-size:14px;line-height:1.45;margin:0 0 12px;min-height:146px}.why b{color:#fff}
+.ph{position:relative;width:390px;max-width:100%;height:800px;border-radius:40px;overflow:hidden;background:#000;box-shadow:0 0 0 1px #2A2A30,0 0 0 9px #111114;isolation:isolate}
+.ph .sc{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding:54px 16px 110px}
+.ph .sc::-webkit-scrollbar{display:none}
+.ph .isl{position:absolute;top:11px;left:50%;width:120px;height:34px;margin-left:-60px;border-radius:20px;background:#000;z-index:20;box-shadow:0 0 0 1px #111}
+.nav{position:absolute;left:12px;right:12px;bottom:14px;height:66px;border-radius:22px;background:rgba(18,18,22,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid #2A2A30;display:flex;z-index:15}
+.nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#fff;text-decoration:none;font:800 9.5px var(--f);letter-spacing:.06em}
+.nav a.on{color:var(--g)}
+.nav svg{width:22px;height:22px}
+.tag{display:inline-block;font:800 10.5px var(--f);letter-spacing:.16em;color:var(--k,var(--g))}
+.big{font:900 italic 30px/1 var(--f);text-transform:uppercase;margin:4px 0 0}
+.sub{font:600 13.5px/1.35 var(--f);color:var(--soft);margin:6px 0 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 20px;border-radius:14px;background:var(--k,var(--g));color:#0A0A0A;font:900 italic 16px var(--f);border:0;cursor:pointer}
+.arw{width:16px;height:16px;flex:none}
+.fan{position:relative;width:150px;height:150px;flex:none}
+.fan img{position:absolute;width:84px;top:6px;left:34px;filter:drop-shadow(0 8px 14px rgba(0,0,0,.6))}
+.fan img:nth-child(1){transform:rotate(-14deg) translate(-34px,12px)}
+.fan img:nth-child(2){transform:rotate(12deg) translate(34px,10px)}
+.fan img:nth-child(3){z-index:2}
+.notes{max-width:960px;margin-top:34px;color:#CFCFD6;font-size:15px;line-height:1.5}
+.notes h2{font:900 italic 22px var(--f);text-transform:uppercase;color:#fff;margin:0 0 8px}.notes li{margin:0 0 8px}.notes b{color:#fff}
+
+/* ========== 1 · STAGE ========== */
+.s1 .bar{position:absolute;top:52px;left:16px;right:16px;display:flex;align-items:center;gap:8px;z-index:6}
+.s1 .bar img.lg{width:112px;margin-right:auto}
+.s1 .chip{display:flex;align-items:center;gap:6px;height:36px;padding:0 10px 0 6px;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);font:800 11px var(--f);letter-spacing:.06em}
+.s1 .chip img{width:22px}.s1 .chip svg{width:16px;height:16px}
+.s1 .stage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;transition:background .5s;background:radial-gradient(70% 45% at 50% 42%,color-mix(in srgb,var(--k) 38%,transparent),transparent 70%),radial-gradient(120% 60% at 50% 110%,color-mix(in srgb,var(--k) 22%,#000),#000 70%)}
+.s1 .floor{position:absolute;left:50%;top:405px;width:300px;height:60px;margin-left:-150px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--k) 45%,transparent),transparent);filter:blur(6px)}
+.s1 .art{position:absolute;top:120px;left:0;right:0;height:300px;display:flex;align-items:center;justify-content:center}
+.s1 .art .fan{transform:scale(1.9);transform-origin:center}
+.s1 .art img.solo{width:200px;filter:drop-shadow(0 20px 30px rgba(0,0,0,.6))}
+.s1 .nm{position:absolute;top:448px;left:0;right:0;text-align:center}
+.s1 .nm .big{font-size:38px}
+.s1 .nm .sub{margin:6px 40px 0}
+.s1 .sw{position:absolute;top:248px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;color:#fff;cursor:pointer;z-index:6}
+.s1 .sw.l{left:14px}.s1 .sw.r{right:14px}
+.s1 .pips{position:absolute;top:606px;left:0;right:0;display:flex;justify-content:center;gap:6px}
+.s1 .pips i{width:6px;height:6px;border-radius:3px;background:#3A3A44}.s1 .pips i.on{width:18px;background:var(--k)}
+.s1 .play{position:absolute;left:16px;right:16px;bottom:96px;height:72px;border-radius:20px;font-size:24px;letter-spacing:.02em;box-shadow:0 10px 30px color-mix(in srgb,var(--k) 45%,transparent);transform:skewX(-6deg)}
+.s1 .play>*{transform:skewX(6deg)}
+.s1 .best{position:absolute;top:574px;left:0;right:0;text-align:center;font:800 11px var(--f);letter-spacing:.14em;color:var(--mut)}
+.s1 .best b{color:var(--k);font:900 italic 14px var(--f);letter-spacing:0}
+
+/* ========== 2 · HUB ========== */
+.s2 .hd{display:flex;align-items:center;justify-content:space-between;margin:4px 0 2px}
+.s2 .hd img{width:150px}
+.s2 .dt{font:800 11px var(--f);letter-spacing:.14em;color:var(--mut);margin:14px 0 4px}
+.s2 h3{font:900 italic 26px/1 var(--f);text-transform:uppercase;margin:0 0 14px}
+.s2 .gm{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid #1C1C21;min-height:84px;cursor:pointer}
+.s2 .ic{flex:none;width:62px;height:62px;border-radius:16px;display:grid;place-items:center;position:relative;overflow:hidden;background:linear-gradient(155deg,color-mix(in srgb,var(--k) 60%,#fff) -10%,var(--k) 35%,color-mix(in srgb,var(--k) 50%,#000) 100%)}
+.s2 .ic img{width:44px;height:44px;object-fit:contain}
+.s2 .ic.dk{background:#16161A;border:1px solid #2A2A30}
+.s2 .gm .t{flex:1;min-width:0}.s2 .gm .t b{display:block;font:900 italic 18px/1.05 var(--f);text-transform:uppercase}.s2 .gm .t span{display:block;font:600 12.5px/1.35 var(--f);color:var(--soft);margin-top:3px}
+.s2 .gm .st{flex:none;text-align:right}.s2 .gm .st b{display:block;font:900 italic 22px/1 var(--f);color:var(--k)}.s2 .gm .st small{display:block;font:800 9px var(--f);letter-spacing:.1em;color:var(--mut);margin-top:3px}
+.s2 .gm .t span.pill{display:inline-block;width:auto;margin-top:6px;font:800 9.5px var(--f);letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:var(--k);color:#0A0A0A}
+.s2 .gm .t span.pill.o{background:none;border:1px solid #3A3A44;color:var(--soft)}
+.s2 .today{border-radius:20px;background:#0E0E10;border:1px solid #26262C;padding:4px 14px;margin-bottom:22px}
+.s2 .today .gm:last-child{border-bottom:0}
+
+/* ========== 3 · ROAD ========== */
+.s3 .sc{padding-top:0;padding-bottom:96px}
+.s3 .road{position:relative;height:1500px}
+.s3 svg.path{position:absolute;left:0;top:0;width:100%;height:100%}
+.s3 .top{position:sticky;top:0;z-index:8;padding:52px 0 10px;background:linear-gradient(#000 75%,rgba(0,0,0,0))}
+.s3 .top .row{display:flex;align-items:center;justify-content:space-between}
+.s3 .top img{width:128px}
+.s3 .top .dly{display:flex;align-items:center;gap:6px;height:36px;padding:0 10px 0 6px;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);font:800 10.5px var(--f);letter-spacing:.08em}
+.s3 .top .dly img{width:22px}
+.s3 .ms{position:absolute;width:112px;text-align:center;transform:translateX(-50%)}
+.s3 .ms .sh{position:relative;width:78px;height:96px;margin:0 auto;display:grid;place-items:center}
+.s3 .ms .sh svg{position:absolute;inset:0;width:100%;height:100%}
+.s3 .ms .sh b{position:relative;font:900 italic 28px/1 var(--f);color:#0A0A0A;margin-top:-10px}
+.s3 .ms .lb{font:900 italic 15px var(--f);text-transform:uppercase;margin-top:6px}
+.s3 .ms .lb small{display:block;font:800 9.5px var(--f);letter-spacing:.12em;color:var(--mut);font-style:normal;margin-top:2px}
+.s3 .ms.off .sh b{color:#5A5A63}
+.s3 .you{position:absolute;transform:translateX(-50%);text-align:center;width:220px}
+.s3 .you .fan{margin:0 auto;transform:scale(1.15)}
+.s3 .you .btn{margin-top:4px;height:52px;padding:0 22px;font-size:17px;box-shadow:0 0 0 6px rgba(18,240,108,.15),0 0 30px rgba(18,240,108,.45)}
+.s3 .drop{position:absolute;left:0;right:0;bottom:118px;text-align:center}
+.s3 .drop b{display:block;font:900 italic 22px var(--f);color:#FF4D52;text-transform:uppercase}
+.s3 .drop span{font:600 12.5px var(--f);color:var(--soft)}
+.s3 .side{position:absolute;display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:14px;background:#0E0E10;border:1px solid color-mix(in srgb,var(--k) 50%,transparent);font:900 italic 13px var(--f);text-transform:uppercase}
+.s3 .side img{width:26px;height:26px;object-fit:contain}
+.s3 .side small{display:block;font:800 9px var(--f);letter-spacing:.1em;color:var(--k);font-style:normal}
+.s3 .flag{position:absolute;top:150px;left:0;right:0;text-align:center}
+.s3 .flag b{display:block;font:900 italic 34px/1 var(--f);text-transform:uppercase;color:var(--g)}
+.s3 .flag span{font:800 11px var(--f);letter-spacing:.14em;color:var(--mut)}
+
+/* ========== 4 · SHELVES ========== */
+.s4 .hd{display:flex;align-items:center;justify-content:space-between;margin:2px 0 12px}
+.s4 .hd img{width:140px}
+.s4 .hd .av{width:36px;height:36px;border-radius:50%;background:#1A1A1F;border:1px solid #2A2A30;display:grid;place-items:center;font:900 italic 13px var(--f);color:var(--g)}
+.s4 .feat{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -16px;padding:0 16px;scroll-padding:0 16px}
+.s4 .feat::-webkit-scrollbar,.s4 .shelf::-webkit-scrollbar{display:none}
+.s4 .fc{flex:0 0 100%;scroll-snap-align:start;height:250px;border-radius:24px;position:relative;overflow:hidden;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.85)),radial-gradient(110% 90% at 80% 10%,color-mix(in srgb,var(--k) 60%,#0E0E10),#0E0E10 70%)}
+.s4 .fc .art{position:absolute;right:-10px;top:-6px}
+.s4 .fc .art img{width:170px}
+.s4 .fc .big{font-size:26px;max-width:220px}
+.s4 .fc .btn{height:40px;font-size:14px;margin-top:10px;align-self:flex-start;border-radius:12px}
+.s4 .dots{display:flex;justify-content:center;gap:6px;margin:10px 0 0}.s4 .dots i{width:6px;height:6px;border-radius:3px;background:#3A3A44}.s4 .dots i.on{width:18px;background:#fff}
+.s4 .sh{display:flex;align-items:baseline;justify-content:space-between;margin:22px 0 10px}
+.s4 .sh b{font:900 italic 19px var(--f);text-transform:uppercase}.s4 .sh small{font:800 11px var(--f);letter-spacing:.1em;color:var(--g)}
+.s4 .cont{display:flex;align-items:center;gap:12px;padding:12px;border-radius:18px;background:#0E0E10;border:1px solid #26262C}
+.s4 .cont img{width:54px}
+.s4 .cont .t{flex:1;min-width:0}.s4 .cont .t b{display:block;font:900 italic 17px var(--f);text-transform:uppercase}.s4 .cont .t span{font:600 12px var(--f);color:var(--soft)}
+.s4 .prog{height:4px;border-radius:2px;background:#26262C;margin-top:8px;overflow:hidden}.s4 .prog i{display:block;height:100%;width:37%;background:var(--g)}
+.s4 .cont .go{width:44px;height:44px;border-radius:50%;background:var(--g);display:grid;place-items:center;color:#0A0A0A}
+.s4 .shelf{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px}
+.s4 .app{flex:0 0 84px;text-align:center}
+.s4 .app i{display:grid;place-items:center;width:84px;height:84px;border-radius:22px;background:linear-gradient(155deg,color-mix(in srgb,var(--k) 60%,#fff) -10%,var(--k) 35%,color-mix(in srgb,var(--k) 50%,#000) 100%);margin-bottom:6px;position:relative}
+.s4 .app i img{width:58px;height:58px;object-fit:contain}
+.s4 .app b{display:block;font:800 11.5px var(--f)}.s4 .app span{display:block;font:600 10.5px var(--f);color:var(--mut)}
+.s4 .app.dk i{background:#16161A;border:1px solid #2A2A30}
+.s4 .bests{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px}
+.s4 .bests>div{flex:0 0 120px;padding:12px;border-radius:16px;background:#0E0E10;border:1px solid #26262C}
+.s4 .bests small{display:block;font:800 9.5px var(--f);letter-spacing:.14em;color:var(--k)}
+.s4 .bests b{display:block;font:900 italic 30px/1 var(--f);margin-top:8px}
+.s4 .bests span{display:block;font:700 10.5px var(--f);color:var(--soft);margin-top:4px}
+
+/* ========== 5 · REELS ========== */
+.s5 .pg{position:absolute;inset:0;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none}
+.s5 .pg::-webkit-scrollbar{display:none}
+.s5 .pp{position:relative;height:800px;scroll-snap-align:start;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:0 76px 112px 20px;background:radial-gradient(90% 55% at 50% 38%,color-mix(in srgb,var(--k) 45%,#000),#000 75%)}
+.s5 .pp .art{position:absolute;top:110px;left:0;right:0;display:flex;justify-content:center}
+.s5 .pp .art img{width:230px;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6))}
+.s5 .pp .art .fan img{width:84px}
+.s5 .pp .art .fan{transform:scale(1.55);transform-origin:top center;margin-top:10px}
+.s5 .pp .big{font-size:40px;line-height:.95}
+.s5 .pp .btn{margin-top:16px;align-self:flex-start;height:54px;font-size:18px;padding:0 24px}
+.s5 .rail{position:absolute;right:12px;bottom:126px;display:flex;flex-direction:column;gap:18px;align-items:center;width:56px}
+.s5 .rail div{text-align:center}
+.s5 .rail b{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);font:900 italic 17px var(--f);color:var(--k)}
+.s5 .rail span{display:block;font:800 9px var(--f);letter-spacing:.08em;margin-top:4px}
+.s5 .rail svg{width:22px;height:22px}
+.s5 .tp{position:absolute;top:52px;left:0;right:0;z-index:8;display:flex;justify-content:center;gap:18px;font:800 12px var(--f);letter-spacing:.12em;color:rgba(255,255,255,.55)}
+.s5 .tp b{color:#fff;border-bottom:2px solid #fff;padding-bottom:4px}
+.s5 .lg5{position:absolute;top:88px;left:50%;width:120px;margin-left:-60px;z-index:8;opacity:.9}
+.s5 .hint{position:absolute;bottom:92px;left:0;right:0;text-align:center;font:800 10px var(--f);letter-spacing:.16em;color:rgba(255,255,255,.45);z-index:9}
+.s5 .vdots{position:absolute;right:6px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:9}
+.s5 .vdots i{width:4px;height:4px;border-radius:2px;background:rgba(255,255,255,.35)}.s5 .vdots i.on{height:16px;background:#fff}
+</style></head><body><div class="wrap">
+<h1>Home: five entirely different looks</h1>
+<p class="lead">I looked at how the top game apps build their home screens, and took <b>one different idea from each</b>. Every option is still DROP2TOP: black, Exo 2, the green, each game in its own colour, the real crests, club cards and marks, the bottom bar, and Classic as the main game. <b>They all work</b>: scroll, swipe, and tap the arrows. Numbers are made up.</p>
+<p class="src">What I looked at: Clash Royale's single Battle button home (<a href="https://www.gamegrin.com/articles/what-can-online-apps-learn-from-clash-royales-user-interface" target="_blank" rel="noopener">GameGrin</a>), Brawl Stars' centre stage and Play button (<a href="https://samurai-gamers.com/brawl-stars/main-menu-guide/" target="_blank" rel="noopener">Samurai Gamers</a>), the NYT Games hub of daily games (<a href="https://niemanlab.org/?p=231213" target="_blank" rel="noopener">Nieman Lab</a>), Duolingo's path (<a href="https://blog.duolingo.com/new-duolingo-home-screen-design" target="_blank" rel="noopener">Duolingo</a>), Apple's new Games app with its carousel and Continue Playing (<a href="https://www.macrumors.com/guide/ios-26-games-app" target="_blank" rel="noopener">MacRumors</a>), and the general rule from game UI guides: status at the top, the main action in the thumb zone, a bottom bar (<a href="https://gameanimation.info/en/archives/5601" target="_blank" rel="noopener">guide</a>).</p>
+<div class="cols" id="cols"></div>
+<div class="notes"><h2>How they differ</h2><ul>
+<li><b>1 Stage</b> is the most like a console game: one thing at a time, no scrolling at all.</li>
+<li><b>2 Hub</b> is the calmest and the quickest to read: every game on one screen with your status for today.</li>
+<li><b>3 Road</b> is the most DROP2TOP: the name becomes the screen, from the drop at the bottom to the top. Your record is the road itself.</li>
+<li><b>4 Shelves</b> is the most like an app store: featured at the top, carry on where you left off, then shelves.</li>
+<li><b>5 Reels</b> is the boldest: each game full screen, swipe up for the next, like TikTok.</li>
+<li>If one works, I'll rebuild it on the real home screen with live data, as we did for the Daily strip.</li>
+</ul></div>
+</div>
+<script>
+const IM={logo:'share-fx/logo-long.png',boro:'home-new/middlesbrough.png',whu:'home-new/west-ham.png',clx:'share-fx/club_x.png',gr:'share-fx/goal_rush.png',ten:'home-new/tenaball.png',emb:'home-new/emblem_line.png'};
+const UBM=(c='#22D3EE')=>`<svg viewBox="0 0 100 100" fill="none" stroke="${c}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="50" r="43"/><path d="M30 42 L50 22 L70 42"/><path d="M30 58 L50 78 L70 58"/></svg>`;
+const ARW='<svg class="arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const CHL='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
+const CHR='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>';
+const TROPHY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.3A5 5 0 0 1 13 14.9V18h3v3H8v-3h3v-3.1A5 5 0 0 1 8.3 12H8a4 4 0 0 1-4-4V5h3zm-1 4v1a2 2 0 0 0 1.6 2V7zm12 0v3a2 2 0 0 0 1.4-2V7z"/></svg>';
+const SHARE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.1 20.2C2.6 12.4 6.6 7.9 12.7 7.4V3.5l8.4 7.9-8.4 7.9v-4.8c-4.1-.1-7.3 2.1-9.6 5.7z"/></svg>';
+const FAN=`<div class="fan"><img src="home-new/cc1.png" alt=""><img src="home-new/cc2.png" alt=""><img src="home-new/cc0.png" alt=""></div>`;
+const NAV=(on=0)=>`<nav class="nav">${[[TROPHY,'LEAGUE'],['<svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="13" width="4" height="8" rx="1"/><rect x="10" y="8" width="4" height="13" rx="1"/><rect x="16" y="3" width="4" height="18" rx="1"/></svg>','STATS'],['<svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3h14l-1 15-6 3-6-3z"/><text x="12" y="15" font-size="11" font-weight="900" text-anchor="middle" fill="#000" font-family="Exo 2">?</text></svg>','HOW TO PLAY'],['<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0z"/></svg>','ACCOUNT']].map(([i,l],k)=>`<a class="${k===on-1?'on':''}">${i}${l}</a>`).join('')}</nav>`;
+const SHIELD=(fill,stroke)=>`<svg viewBox="0 0 100 128" preserveAspectRatio="none"><defs><linearGradient id="mg${fill.slice(1)}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".35" stop-color="${fill}"/><stop offset=".75" stop-color="${fill}" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity=".35"/></linearGradient></defs><polygon points="1,11 11,1 89,1 99,11 99,108 50,127 1,108" fill="${fill==='none'?'#0E0E10':`url(#mg${fill.slice(1)})`}" stroke="${stroke}" stroke-width="2" stroke-linejoin="round"/></svg>`;
+
+// ---------- 1 · STAGE ----------
+const MODES=[
+ {k:'#12F06C',t:'CLASSIC',n:'Pick a new club',s:'Take a side that went down from the drop to the top.',art:FAN,play:'SPIN FOR A CLUB',best:'<b>2</b> TITLES · <b>16</b> RUNS'},
+ {k:'#FFFFFF',t:'DAILY CHALLENGE · 29 OCT',n:'Middlesbrough 92/93',s:'Same club for everyone. They went down in 21st.',art:`<img class="solo" src="${IM.boro}" alt="">`,play:'PLAY TODAY',best:'BEST DAILY <b>1st</b>'},
+ {k:'#12F06C',t:'CLUB X',n:'From nowhere to champions',s:'Draft 11, replace the worst side, win the league.',art:`<img class="solo" src="${IM.clx}" alt="" style="width:170px">`,play:'PLAY CLUB X',best:'<b>2</b> TITLES IN <b>4</b> SEASONS'},
+ {k:'#FFD21F',t:'GOAL RUSH',n:'Hit the number',s:'Pick 11. Their career goals must total exactly the target.',art:`<img class="solo" src="${IM.gr}" alt="">`,play:'PLAY GOAL RUSH',best:'<b>3</b> BANG ON'},
+ {k:'#22D3EE',t:'UNBEATEN RUN',n:'Higher or lower?',s:'Real Premier League numbers. How long can you go?',art:`<span style="width:190px;height:190px;display:block">${UBM()}</span>`,play:'START A RUN',best:'BEST RUN <b>17</b>'}];
+function stage(){return `<div class="ph s1" id="p1" style="--k:#12F06C"><span class="isl"></span>
+<div class="stage"><div class="floor"></div><div class="art" id="s1art"></div>
+<div class="nm"><span class="tag" id="s1tag" style="--k:var(--k)"></span><div class="big" id="s1n"></div><p class="sub" id="s1s"></p></div>
+<div class="pips" id="s1p">${MODES.map(()=>'<i></i>').join('')}</div><div class="best" id="s1b"></div></div>
+<div class="bar"><img class="lg" src="${IM.logo}" alt="DROP2TOP"><span class="chip"><img src="${IM.boro}" alt="">DAILY</span><span class="chip" style="color:#12F06C">${TROPHY.replace('<svg','<svg width="16" height="16"')}2</span></div>
+<button class="sw l" id="s1l" aria-label="Previous game">${CHL}</button><button class="sw r" id="s1r" aria-label="Next game">${CHR}</button>
+<button class="btn play" id="s1go"><span id="s1pl"></span></button>${NAV()}</div>`;}
+
+// ---------- 2 · HUB ----------
+const icon=(k,im,dk)=>`<span class="ic${dk?' dk':''}" style="--k:${k}">${im}</span>`;
+function hub(){return `<div class="ph s2"><span class="isl"></span><div class="sc">
+<div class="hd"><img src="${IM.logo}" alt="DROP2TOP"></div>
+<div class="dt">THURSDAY 29 OCTOBER</div><h3>Today</h3>
+<div class="today">
+<div class="gm" style="--k:#FFFFFF">${icon('#FFFFFF',`<img src="${IM.boro}" alt="">`)}<span class="t"><b>Daily Challenge</b><span>Middlesbrough 1992/93. Same club for everyone.</span><span class="pill">NEW TODAY</span></span><span class="st"><b>1st</b><small>YOUR BEST</small></span></div>
+<div class="gm" style="--k:#12F06C">${icon('#12F06C','<span style="font:900 italic 22px var(--f);color:#0A0A0A">D2T</span>')}<span class="t"><b>Classic</b><span>West Ham 2010/11 · Matchday 14 · 6th</span><span class="pill">CARRY ON</span></span><span class="st"><b>2</b><small>TITLES</small></span></div>
+</div>
+<h3 style="font-size:20px">All games</h3>
+${[['#12F06C',`<img src="${IM.clx}" alt="">`,'Club X','Draft 11. From nowhere to champions.','2','TITLES'],['#FFD21F',`<img src="${IM.gr}" alt="">`,'Goal Rush','Hit the target exactly with 11 real players.','3','BANG ON'],['#22D3EE',`<span style="width:42px;height:42px">${UBM('#0A0A0A')}</span>`,'Unbeaten Run','Higher or lower on real numbers.','17','BEST RUN'],['#3BA4FF',`<img src="${IM.emb}" alt="">`,'Dare2Dream','Locked for repair.','','',1],['#A66BFF',`<img src="${IM.ten}" alt="">`,'Tenaball','Name the top ten. Opens Tenaball.','','']].map(([k,im,t,s,n,u,lock])=>`<div class="gm" style="--k:${k}${lock?';opacity:.55':''}">${icon(k,im)}<span class="t"><b>${t}</b><span>${s}</span></span><span class="st"><b>${n}</b><small>${u}</small></span></div>`).join('')}
+<h3 style="font-size:16px;color:#8E8E99;margin-top:22px">Coming soon</h3>
+${[['Head to Head','Play your friends online.'],['Steal','Every card comes from the club you play next.']].map(([t,s])=>`<div class="gm" style="--k:#5A5A63">${icon('#5A5A63','<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8E8E99" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',1)}<span class="t"><b style="color:#8E8E99">${t}</b><span>${s}</span></span></div>`).join('')}
+</div>${NAV()}</div>`;}
+
+// ---------- 3 · ROAD ----------
+function road(){
+ // the road runs from the drop at the bottom to the title at the top
+ const W=358,ms=[['Champions','LEAGUE TITLES',2,1200,'#FFD95A'],['Top 3','',7,960,'#DCE2E8'],['Top half','',14,720,'#E3A577'],['Beat the drop','',16,480,'#12F06C']];
+ const xs=[90,268,90,268];
+ const pts=[[179,1340],[268,1180],[90,1000],[268,800],[90,620],[179,330]];
+ return `<div class="ph s3"><span class="isl"></span><div class="sc" id="s3sc">
+<div class="top"><div class="row"><img src="${IM.logo}" alt="DROP2TOP"><span class="dly"><img src="${IM.boro}" alt="">DAILY ${CHR.replace('width="20" height="20"','width="14" height="14"')}</span></div></div>
+<div class="road">
+<svg class="path" viewBox="0 0 ${W} 1500" preserveAspectRatio="none"><defs><linearGradient id="rg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF4D52"/><stop offset=".3" stop-color="#12F06C"/><stop offset="1" stop-color="#FFD95A"/></linearGradient></defs>
+<path d="M179 1360 C 179 1260, 300 1240, 268 1140 S 60 1000, 90 900 S 300 780, 268 680 S 60 520, 90 440 S 179 300, 179 220" fill="none" stroke="#1C1C21" stroke-width="44" stroke-linecap="round"/>
+<path d="M179 1360 C 179 1260, 300 1240, 268 1140 S 60 1000, 90 900 S 300 780, 268 680 S 60 520, 90 440 S 179 300, 179 220" fill="none" stroke="url(#rg)" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 14"/></svg>
+<div class="flag"><b>The top</b><span>WIN THE LEAGUE</span></div>
+${[['League titles',2,'#FFD95A',179,250],['Top 3',7,'#DCE2E8',90,440],['Top half',14,'#E3A577',268,680],['Beat the drop',16,'#12F06C',90,900]].map(([l,n,c,x,y])=>`<div class="ms" style="left:${x}px;top:${y}px"><div class="sh">${SHIELD(c,'rgba(255,255,255,.4)')}<b>${n}</b></div><div class="lb">${l}<small>${n} OF 16 RUNS</small></div></div>`).join('')}
+<div class="you" style="left:225px;top:1050px">${FAN}<button class="btn">Spin for a club ${ARW}</button></div>
+<div class="side" style="--k:#12F06C;left:180px;top:420px"><img src="${IM.clx}" alt=""><span>Club X<small>2 TITLES</small></span></div>
+<div class="side" style="--k:#FFD21F;left:8px;top:640px"><img src="${IM.gr}" alt=""><span>Goal Rush<small>3 BANG ON</small></span></div>
+<div class="side" style="--k:#22D3EE;left:196px;top:860px"><span style="width:26px;height:26px">${UBM()}</span><span>Unbeaten<small>BEST 17</small></span></div>
+<div class="drop"><b>The drop</b><span>Every run starts here: a side that went down.</span></div>
+</div></div>${NAV()}</div>`;}
+
+// ---------- 4 · SHELVES ----------
+function shelves(){return `<div class="ph s4"><span class="isl"></span><div class="sc">
+<div class="hd"><img src="${IM.logo}" alt="DROP2TOP"><span class="av"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0z"/></svg></span></div>
+<div class="feat" id="s4f">
+<div class="fc" style="--k:#E11B22"><div class="art"><img src="${IM.boro}" alt=""></div><span class="tag" style="--k:#fff">DAILY CHALLENGE · TODAY</span><div class="big">Middlesbrough 1992/93</div><p class="sub">Same club for everyone. They went down in 21st.</p><button class="btn" style="--k:#fff">Play today ${ARW}</button></div>
+<div class="fc" style="--k:#12F06C"><div class="art"><img src="${IM.clx}" alt="" style="width:150px"></div><span class="tag">CLUB X · NEW SEASON</span><div class="big">From nowhere to champions</div><button class="btn">Play ${ARW}</button></div>
+<div class="fc" style="--k:#FFD21F"><div class="art"><img src="${IM.gr}" alt=""></div><span class="tag" style="--k:#FFD21F">GOAL RUSH · 3-5-2</span><div class="big">Score exactly 352</div><button class="btn">Play ${ARW}</button></div>
+</div><div class="dots" id="s4d"><i class="on"></i><i></i><i></i></div>
+<div class="sh"><b>Continue playing</b></div>
+<div class="cont"><img src="${IM.whu}" alt=""><span class="t"><span class="tag">CLASSIC</span><b>West Ham 2010/11</b><span>Matchday 14 of 38 · 6th</span><div class="prog"><i></i></div></span><span class="go">${ARW}</span></div>
+<div class="sh"><b>Your games</b><small>SEE ALL</small></div>
+<div class="shelf">${[['#12F06C','<span style="font:900 italic 24px var(--f);color:#0A0A0A">D2T</span>','Classic','Pick a club'],['#12F06C',`<img src="${IM.clx}" alt="">`,'Club X','Career'],['#FFD21F',`<img src="${IM.gr}" alt="">`,'Goal Rush','Hit the number'],['#22D3EE',`<span style="width:52px;height:52px">${UBM('#0A0A0A')}</span>`,'Unbeaten','Higher or lower'],['#A66BFF',`<img src="${IM.ten}" alt="">`,'Tenaball','Top ten quiz'],['#3BA4FF',`<img src="${IM.emb}" alt="" style="opacity:.6">`,'Dare2Dream','Locked']].map(([k,im,t,s])=>`<div class="app" style="--k:${k}"><i>${im}</i><b>${t}</b><span>${s}</span></div>`).join('')}</div>
+<div class="sh"><b>Your bests</b></div>
+<div class="bests">${[['#12F06C','CLASSIC','2','League titles'],['#FFFFFF','DAILY','1st','Middlesbrough'],['#FFD21F','GOAL RUSH','3','Bang on'],['#22D3EE','UNBEATEN','17','Career goals'],['#12F06C','CLUB X','2','Titles']].map(([k,t,n,l])=>`<div style="--k:${k}"><small>${t}</small><b>${n}</b><span>${l}</span></div>`).join('')}</div>
+<div class="sh"><b>Coming soon</b></div>
+<div class="shelf">${[['Head to Head'],['Steal']].map(([t])=>`<div class="app dk"><i><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#8E8E99" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></i><b style="color:#8E8E99">${t}</b></div>`).join('')}</div>
+</div>${NAV()}</div>`;}
+
+// ---------- 5 · REELS ----------
+const REELS=[
+ {k:'#E11B22',t:'DAILY CHALLENGE · TODAY',n:'Middles&shy;brough<br>92/93',s:'Same club for everyone. They went down in 21st.',art:`<img src="${IM.boro}" alt="">`,b:'PLAY TODAY',rail:[['1st','BEST'],['9','PLAYED']],kb:'#fff'},
+ {k:'#12F06C',t:'CLASSIC',n:'Pick a<br>new club',s:'Take a side that went down to the top.',art:FAN,b:'SPIN FOR A CLUB',rail:[['2','TITLES'],['16','RUNS']]},
+ {k:'#12F06C',t:'CLUB X',n:'From nowhere to champions',s:'Draft 11. Replace the worst side. Win it.',art:`<img src="${IM.clx}" alt="" style="width:190px">`,b:'PLAY CLUB X',rail:[['2','TITLES'],['4','SEASONS']]},
+ {k:'#FFD21F',t:'GOAL RUSH',n:'Hit the number',s:'Pick 11. Their career goals must total the target exactly.',art:`<img src="${IM.gr}" alt="">`,b:'PLAY',rail:[['3','BANG ON'],['12','GAMES']]},
+ {k:'#22D3EE',t:'UNBEATEN RUN',n:'Higher or lower?',s:'Real Premier League numbers. How long can you go?',art:`<span style="width:210px;height:210px;display:block">${UBM()}</span>`,b:'START A RUN',rail:[['17','BEST'],['41','RUNS']]}];
+function reels(){return `<div class="ph s5"><span class="isl"></span>
+<div class="tp"><b>GAMES</b><span>YOUR RECORD</span></div>
+<div class="pg" id="s5pg">${REELS.map((r)=>`<section class="pp" style="--k:${r.k}"><div class="art">${r.art}</div><span class="tag" style="--k:${r.kb||r.k}">${r.t}</span><div class="big">${r.n}</div><p class="sub">${r.s}</p><button class="btn" style="--k:${r.kb||r.k}">${r.b} ${ARW}</button>
+<div class="rail">${r.rail.map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join('')}<div><b style="color:#fff">${SHARE}</b><span>SHARE</span></div></div></section>`).join('')}</div>
+<div class="vdots" id="s5d">${REELS.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>
+<div class="hint">SWIPE UP FOR THE NEXT GAME</div>${NAV()}</div>`;}
+
+const O=[
+ ['1','Stage','Clash Royale · Brawl Stars','<b>One game at a time, centre stage</b>, no scrolling. The game you\'re on stands under a spotlight in its colour (the club card fan for Classic), with its name, your best, and a <b>huge Play button in the thumb zone</b> just above the bottom bar. <b>Tap the arrows</b> to change game; the whole stage changes colour. The Daily and your titles sit as chips in the top bar.',stage()],
+ ['2','Hub','NYT Games','A calm <b>games hub</b>. "Today" first: the Daily and anything you\'re mid-way through, each marked NEW TODAY or CARRY ON. Then <b>every game as a row with an app-style icon</b> in its colour, a line about it, and <b>your best on the right</b>. Everything on one screen, quickest to read.',hub()],
+ ['3','The road','Duolingo · Clash Royale\'s Trophy Road','The name becomes the screen: a <b>road from the drop at the bottom to the top</b>. Your Classic record is the road itself, with milestone shields for beat the drop, top half, top 3 and titles. You start at the bottom with the club fan and <b>Spin</b>; scroll up to see how far you\'ve come. The other games are stops along the way.',road()],
+ ['4','Shelves','Apple Games · App Store','An <b>app store front page</b>. A featured carousel (today\'s Daily, a new Club X season, today\'s Goal Rush shape), then <b>Continue playing</b> with your run and a progress bar, then horizontal shelves: <b>Your games</b> as app icons, <b>Your bests</b>, Coming soon.',shelves()],
+ ['5','Reels','TikTok · Instagram Reels','The boldest. <b>Each game is a full screen</b>, its art big in its colour; <b>swipe up for the next</b>. Your numbers and Share sit down the right side like a reel\'s buttons, Play bottom left. Starts on the Daily, then Classic. Tabs at the top could switch to your record.',reels()]];
+const cols=document.getElementById('cols');
+O.forEach(([n,t,like,why,html])=>{const el=document.createElement('div');el.className='col';el.innerHTML=`<h2>${n} · <span>${t}</span></h2><p class="like">After: ${like}</p><p class="why">${why}</p>${html}`;cols.appendChild(el);});
+
+// stage behaviour
+let m=0;const P1=document.getElementById('p1');
+const setM=(i)=>{m=(i+MODES.length)%MODES.length;const d=MODES[m];P1.style.setProperty('--k',d.k);
+ document.getElementById('s1art').innerHTML=d.art;document.getElementById('s1tag').textContent=d.t;document.getElementById('s1n').textContent=d.n;document.getElementById('s1s').textContent=d.s;document.getElementById('s1pl').textContent=d.play;document.getElementById('s1b').innerHTML=d.best;
+ [...document.getElementById('s1p').children].forEach((x,j)=>x.classList.toggle('on',j===m));};
+document.getElementById('s1l').onclick=()=>setM(m-1);document.getElementById('s1r').onclick=()=>setM(m+1);setM(0);
+// road starts at the bottom, where every run starts
+const s3=document.getElementById('s3sc');s3.scrollTop=s3.scrollHeight;
+// shelves dots
+const f=document.getElementById('s4f'),fd=[...document.getElementById('s4d').children];f.addEventListener('scroll',()=>{const k=Math.round(f.scrollLeft/f.clientWidth);fd.forEach((d,i)=>d.classList.toggle('on',i===k));},{passive:true});
+// reels dots
+const pg=document.getElementById('s5pg'),vd=[...document.getElementById('s5d').children];pg.addEventListener('scroll',()=>{const k=Math.round(pg.scrollTop/pg.clientHeight);vd.forEach((d,i)=>d.classList.toggle('on',i===k));},{passive:true});
+</script></body></html>
