@@ -129,6 +129,7 @@
   // Share a Daily again from home (Craig, 14 Oct): the same share as its summary, built from the day's best go in the record
   D2T.dailyShare = (date) => {
     const G = D2T.game; date = date || G.today();
+    G.fillDailyRows && G.fillDailyRows(date);   // a Daily recorded before build 161 gets its rows from its run, if it is still here
     const r = G.dailyResult(date); if (!r) return null;
     const club = G.club(r.club) || { name: r.club, text: '#FFFFFF' };
     return runShare({ F: { finish: r.finish, histFinish: r.histFinish, rise: r.rise, pts: r.pts, histPts: r.histPts }, club, S: { season: r.season }, line: '', daily: date, mode: 'classic', rows: { topScorer: r.topScorer || null, best: r.best || null } });
