@@ -153,7 +153,9 @@
       if (S.cands && S.cands.some((c) => !c.pos)) S.cands = null;
       const save = () => D2T.save();
       const total = () => S.filled.reduce((t, p) => t + p.goals, 0);
-      let busy = false, sel = null;
+      // counting: a placed player's goals are still rolling up and flying to the tally (Craig, 29 Oct: Spin works then);
+      // a player placed meanwhile waits for the count to finish (pending), so two tallies never run at once
+      let busy = false, sel = null, counting = false, pending = null;
 
       root.classList.add('g4', 'g4-cs-' + CREST());
       root.appendChild(D2T.topbar({ mode: ['Goal Rush', '#FFD21F'] }));
@@ -389,6 +391,7 @@
       }
       function place(i, fromRect, slot) {
         if (busy || !S.cands) return;
+        if (counting) { pending = [i, fromRect, slot]; return; }
         const p = S.cands[i], ni = slot != null ? slot : fitSlots(p.pos)[0];
         if (ni == null || slotOf(ni) || SLOTS[ni][1] !== p.pos) return;
         busy = true;
@@ -411,9 +414,20 @@
           if (!root.isConnected) return;
           fly.remove(); drawPitch(); trioEl.innerHTML = trioMyst();
           setInfo();
-          setUI(done ? 'Play again' : 'Spin', '', true);
           const slotEl = pitchEl.querySelector(`[data-slot="${ni}"]`);
-          rollNumber(slotEl, p, () => shoot(slotEl, p, () => tickTo(from, total(), () => { busy = false; idleUI(); if (done) ending(total(), result); })));
+          if (done) {
+            setUI('Play again', '', true);
+            rollNumber(slotEl, p, () => shoot(slotEl, p, () => tickTo(from, total(), () => { busy = false; idleUI(); ending(total(), result); })));
+            return;
+          }
+          // not the last shirt: Spin is live while his goals count in
+          busy = false; counting = true; idleUI();
+          rollNumber(slotEl, p, () => shoot(slotEl, p, () => tickTo(from, total(), () => {
+            counting = false;
+            if (!root.isConnected) return;
+            if (pending) { const q = pending; pending = null; if (S.cands) place(...q); return; }
+            if (!busy) idleUI();
+          })));
         };
         anim.onfinish = after;
         later(() => { if (fly.isConnected) after(); }, 900);          // in case the animation never reports back
@@ -662,7 +676,7 @@
         timers.forEach(clearTimeout); rafs.forEach(cancelAnimationFrame); timers = []; rafs = [];
         wrap.querySelectorAll('.g4-msg, .g4-dim, .g4-confetti, .g4-track .ghost').forEach((x) => x.remove());
         pitchEl.getAnimations({ subtree: true }).forEach((a) => a.cancel());
-        if (endSheet) { endSheet.close(); endSheet = null; } booed = false; S = D2T.state.g433 = fresh(); setShape(S.formation); save(); sel = null; busy = false; wrap.querySelector('.g4-track').classList.remove('glow'); render(); reveal(); }
+        if (endSheet) { endSheet.close(); endSheet = null; } booed = false; counting = false; pending = null; S = D2T.state.g433 = fresh(); setShape(S.formation); save(); sel = null; busy = false; wrap.querySelector('.g4-track').classList.remove('glow'); render(); reveal(); }
 
       // ---------- the target reveal (UI_SPEC 8f): once per game, never after a refresh; tap to skip, none with reduced motion ----------
       // a dim layer, "THIS GAME'S TARGET", the eight formations rolling through the big number, slowing to stop on this one
