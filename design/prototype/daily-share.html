@@ -113,7 +113,7 @@ const P={
  henry:{name:'Thierry Henry',sur:'Henry',r:99,pos:'FWD',lv:'legend',crest:'ars'},
  rvn:{name:'Ruud van Nistelrooy',sur:'van Nistelrooy',goals:20,r:93,pos:'FWD',lv:'purple',crest:'utd'},
  lamp:{name:'Frank Lampard',sur:'Lampard',r:93,pos:'MID',lv:'legend',crest:'che'}};
-const MSG=(lines)=>lines.join('\n')+`\n\n<i>Your turn. Beat that!</i>\n<a>404craig.github.io/D2T</a>`;
+const MSG=(lines)=>[lines[0].startsWith('<b>')?lines[0]:`<b>${lines[0]}</b>`].concat(lines.slice(1)).join('\n')+`\n\n<i>Your turn. Beat that!</i>\n<a>404craig.github.io/D2T</a>`;
 const BORO={accent:'#E11B22',ink:'#FFFFFF',text:'#FF545A'},WHU={accent:'#1BB1E7',ink:'#3B0F1E',text:'#1BB1E7'},EVE={accent:'#2A5BD7',ink:'#FFFFFF',text:'#7393FF'};
 const GREEN='#12F06C',BLUE='#3BA4FF',YEL='#FFD21F',CYAN='#22D3EE';
 
@@ -166,19 +166,19 @@ function climb(g,k,S,y,h){k.box(90,y,900,h,22);const x0=200,x1=950,yT=y+56,yB=y+
   if(big||i%5===0||i===S.length-1)k.fit(s,x,y+h-40,160,800,big?20:18,false,'#8E8E99','center','2px');});
  if(!big)k.fit('● TITLE',x1,y+14,200,800,18,false,GREEN,'right','2px');}
 // Unbeaten: the top of the card, the two club cards, and the game's hand-drawn swipe arrow (screens/unbeaten.js drawArrow)
-function ubHead(g,k){frame(g,k,{wash:CYAN,ghost:null,tag:'Unbeaten Run',tagCol:CYAN,band:CYAN,ink:'#001A1F',dare:'Go longer than 17'});
- g.save();g.shadowColor='rgba(34,211,238,.45)';g.shadowBlur=60;k.mid('17',W/2-24,330,400,900,190,true,CYAN,'right');g.restore();k.mid('IN A',W/2-4,300,300,900,40,true,'#FFFFFF','left');k.mid('ROW',W/2-4,352,300,900,40,true,'#FFFFFF','left');
+function ubHead(g,k){frame(g,k,{wash:CYAN,ghost:null,tag:'Unbeaten Run',tagCol:CYAN,band:CYAN,ink:'#001A1F',dare:'Can you beat 17?'});
+ const nw=k.width('17',900,190,true);g.save();g.shadowColor='rgba(34,211,238,.45)';g.shadowBlur=60;k.mid('17',W/2,330,400,900,190,true,CYAN,'center');g.restore();k.mid('IN A',W/2+nw/2+22,304,300,900,40,true,'#FFFFFF','left');k.mid('ROW',W/2+nw/2+22,356,300,900,40,true,'#FFFFFF','left');
  k.box(90,430,900,150,22);k.fit('TOPIC',130,452,300,800,20,false,CYAN,'left','4px');k.fit('CAREER GOALS',130,480,820,900,54,true,'#FFFFFF','left');k.fit('Premier League goals, all time. Higher or lower?',130,540,820,600,26,false,'#BDBDC6','left');}
-function swipe(g,x0,y0,x,y){const dx=x-x0,dy=y-y0,len=Math.hypot(dx,dy),G=Math.min(1,len/360)*2.4,ux=dx/len,uy=dy/len,nx=-uy,ny=ux;
+function swipe(g,x0,y0,x,y,col=CYAN){const dx=x-x0,dy=y-y0,len=Math.hypot(dx,dy),G=Math.min(1,len/360)*2.4,ux=dx/len,uy=dy/len,nx=-uy,ny=ux;
  const tail=(3+8*G),tip=tail*.3,bl=Math.min(len*.6,(11+33*G)),bw=2.5+5*G,ex=x-ux*bw*.45,ey=y-uy*bw*.45,r0=tail/2,r1=tip/2;
- g.save();g.shadowColor='rgba(34,211,238,.6)';g.shadowBlur=16;g.fillStyle=CYAN;g.beginPath();g.moveTo(x0+nx*r0,y0+ny*r0);g.lineTo(ex+nx*r1,ey+ny*r1);g.lineTo(ex-nx*r1,ey-ny*r1);g.lineTo(x0-nx*r0,y0-ny*r0);g.arc(x0,y0,r0,Math.atan2(-ny,-nx),Math.atan2(ny,nx));g.closePath();g.fill();
+ g.save();g.shadowColor=col+'99';g.shadowBlur=16;g.fillStyle=col;g.beginPath();g.moveTo(x0+nx*r0,y0+ny*r0);g.lineTo(ex+nx*r1,ey+ny*r1);g.lineTo(ex-nx*r1,ey-ny*r1);g.lineTo(x0-nx*r0,y0-ny*r0);g.arc(x0,y0,r0,Math.atan2(-ny,-nx),Math.atan2(ny,nx));g.closePath();g.fill();
  const a1=27*Math.PI/180,a2=34*Math.PI/180,l2=bl*.94,u1x=x-(ux*Math.cos(a1)-nx*Math.sin(a1))*bl,u1y=y-(uy*Math.cos(a1)-ny*Math.sin(a1))*bl,u2x=x-(ux*Math.cos(a2)+nx*Math.sin(a2))*l2,u2y=y-(uy*Math.cos(a2)+ny*Math.sin(a2))*l2;
- const cx=(x+u2x)/2+(ux*.45-nx*.22)*l2*.5,cy=(y+u2y)/2+(uy*.45-ny*.22)*l2*.5;g.strokeStyle=CYAN;g.lineWidth=bw;g.lineCap='round';g.lineJoin='round';g.beginPath();g.moveTo(u1x,u1y);g.lineTo(x,y);g.quadraticCurveTo(cx,cy,u2x,u2y);g.stroke();g.restore();}
-function duoCards(g,k,y,h){[[90,'WAYNE ROONEY','208',IM.utd,0],[510,'MOHAMED SALAH','193',IM.lfc,1]].forEach(([x,n,v,cr,i])=>{k.box(x,y,390,h,22,i?RED:null,i?'#1A0709':null);k.pic(cr,x+195,y+24,96);k.fit(n,x+195,y+140,350,900,34,true,'#FFFFFF');k.mid(v,x+195,y+236,350,900,80,true,i?RED:'#FFFFFF');});}
+ const cx=(x+u2x)/2+(ux*.45-nx*.22)*l2*.5,cy=(y+u2y)/2+(uy*.45-ny*.22)*l2*.5;g.strokeStyle=col;g.lineWidth=bw;g.lineCap='round';g.lineJoin='round';g.beginPath();g.moveTo(u1x,u1y);g.lineTo(x,y);g.quadraticCurveTo(cx,cy,u2x,u2y);g.stroke();g.restore();}
+function duoCards(g,k,y,h){[[90,'WAYNE ROONEY','208',IM.utd,0],[600,'MOHAMED SALAH','193',IM.lfc,1]].forEach(([x,n,v,cr,i])=>{k.box(x,y,390,h,22,i?RED:null,i?'#1A0709':null);k.pic(cr,x+195,y+24,96);k.fit(n,x+195,y+140,350,900,34,true,'#FFFFFF');k.mid(v,x+195,y+236,350,900,80,true,i?RED:'#FFFFFF');});}
 function clubCard(g,k,x,y,w,h,col,n,v,cr,rot,vc){g.save();g.translate(x+w/2,y+h/2);g.rotate(rot*Math.PI/180);g.translate(-(x+w/2),-(y+h/2));
  const gr=g.createLinearGradient(x,y,x,y+h);gr.addColorStop(0,col);gr.addColorStop(1,'#1A0000');k.rr(x,y,w,h,26);g.fillStyle=gr;g.fill();g.lineWidth=3;g.strokeStyle='rgba(255,255,255,.25)';g.stroke();
  k.pic(cr,x+w/2,y+28,110);k.fit(n.toUpperCase(),x+w/2,y+170,w-30,900,34,true,'#FFFFFF');k.box(x+24,y+236,w-48,128,18,'rgba(255,255,255,.12)','rgba(0,0,0,.45)');k.mid(v,x+w/2,y+300,w-60,900,84,true,vc);g.restore();}
-const UB_TXT=(head)=>['DROP2TOP Unbeaten Run','','Topic: career goals','(Premier League goals, all time)','Unbeaten in 17 calls. A new best.','',head,'Rooney 208, Salah 193.','I said higher.'];
+const UB_TXT=(head)=>['DROP2TOP Unbeaten Run','','Topic: career goals','(Premier League goals, all time)','Unbeaten in 17 calls.','',head,'Rooney 208, Salah 193.','I said higher.'];
 const OPTS=[
  {name:'Daily',dot:'#FFFFFF',live:true,why:'As sent to the game: Boro\'s red wash and band, the white tag, 21st to 1st, The Rise in places, and the two rows.',
   draw(g,k){frame(g,k,{wash:BORO.accent,ghost:IM.boro,tag:'Daily #19 · 29th Oct',tagCol:'#FFFFFF',band:BORO.accent,ink:BORO.ink,dare:'Same club today. Beat 1st'});
@@ -236,25 +236,25 @@ const OPTS=[
   text:MSG(['DROP2TOP Goal Rush · 4-3-3','',"My XI's career Premier League goals: 441.",'Target 433: 8 over.'])},
  {sec:'ub',name:'Unbeaten · C1 · side by side',dot:CYAN,why:'<b>"The one that got me"</b>: the two players as the game shows them, and <b>your swipe drawn on</b> in the game\'s cyan marker arrow, up for higher. The real number in red.',
   draw(g,k){ubHead(g,k);k.fit('THE ONE THAT GOT ME',W/2,620,900,800,24,false,'#8E8E99','center','4px');
-   duoCards(g,k,664,300);swipe(g,958,930,958,690);
-   k.mid('I SAID HIGHER. IT WAS LOWER.',W/2,1010,900,900,40,true,'#FFFFFF');k.mid('YOUR BEST BEFORE: 12 · A NEW BEST',W/2,1086,900,800,24,false,CYAN,'center','3px');},
+   duoCards(g,k,664,300);swipe(g,540,920,540,700,RED);
+   k.mid('I SAID HIGHER. IT WAS LOWER.',W/2,1040,900,900,44,true,'#FFFFFF');},
   text:MSG(UB_TXT('The one that got me:'))},
  {sec:'ub',name:'Unbeaten · C2 · team sheet',dot:CYAN,why:'<b>"The one that beat me"</b> as two team sheet rows, the numbers in one column: the card you had, then the one you called wrong, your <b>swipe arrow</b> up beside it, his number in red.',
   draw(g,k){ubHead(g,k);k.fit('THE ONE THAT BEAT ME',W/2,628,900,800,24,false,'#8E8E99','center','4px');
    row(g,k,680,{icon:'crest',im:IM.utd,label:'ON THE CARD',name:'Wayne Rooney',n:'208',u:'GOALS',col:'#FFFFFF'});
    row(g,k,794,{icon:'crest',im:IM.lfc,label:'I SAID HIGHER',name:'Mohamed Salah',n:'193',u:'GOALS',col:RED,edge:RED,fill:'#1A0709'});
-   swipe(g,1032,880,1032,760);
-   row(g,k,944,{label:'THIS RUN',name:'A new best',n:'17',u:'CALLS',col:CYAN,edge:CYAN+'88',fill:'#06191C'});row(g,k,1058,{label:'YOUR BEST BEFORE',name:'Career goals',n:'12',u:'CALLS',col:'#FFFFFF'},100);},
+   swipe(g,1032,880,1032,760,RED);
+   row(g,k,990,{label:'THIS RUN',name:'Unbeaten',n:'17',u:'CALLS',col:CYAN,edge:CYAN+'88',fill:'#06191C'});},
   text:MSG(UB_TXT('The one that beat me:'))},
  {sec:'ub',name:'Unbeaten · C3 · the cards',dot:CYAN,why:'The two <b>cards in their club colours</b> like the game\'s, Salah\'s tilted where your swipe threw him up, the arrow on it. Headline <b>"Caught out by Salah"</b>, named after whoever ended it.',
   draw(g,k){ubHead(g,k);k.mid('CAUGHT OUT BY SALAH',W/2,640,900,900,46,true,'#FFFFFF');
    clubCard(g,k,100,700,330,400,'#C70101','Wayne Rooney','208',IM.utd,0,'#FFFFFF');clubCard(g,k,520,690,330,400,'#C8102E','Mohamed Salah','193',IM.lfc,-5,RED);
-   swipe(g,950,1070,960,720);k.mid('I SAID HIGHER',685,1136,400,900,26,true,CYAN);},
+   swipe(g,950,1070,960,720,RED);k.mid('I SAID HIGHER',685,1136,400,900,26,true,RED);},
   text:MSG(UB_TXT('Caught out by:'))},
  {sec:'ub',name:'Unbeaten · C4 · the punchline',dot:CYAN,why:'All words: the run, then the call that ended it as a <b>punchline</b> in big type, <b>"Salah. 193. I said higher."</b>, the swipe arrow struck through in red. Loud, and works for any stat.',
   draw(g,k){ubHead(g,k);k.fit('WHERE IT ENDED',W/2,626,900,800,24,false,'#8E8E99','center','4px');
    k.box(90,676,900,440,26);k.pic(IM.lfc,W/2,700,96);k.mid('SALAH.',W/2,860,860,900,96,true,'#FFFFFF');k.mid('193.',W/2,958,860,900,96,true,RED);
-   swipe(g,300,1000,300,870);g.strokeStyle=RED;g.lineWidth=8;g.lineCap='round';g.beginPath();g.moveTo(262,900);g.lineTo(338,968);g.stroke();
+   swipe(g,300,1000,300,870,RED);g.strokeStyle=RED;g.lineWidth=8;g.lineCap='round';g.beginPath();g.moveTo(262,900);g.lineTo(338,968);g.stroke();
    k.mid('I SAID HIGHER THAN ROONEY\'S 208.',W/2,1060,860,900,36,true,'#FFFFFF');},
   text:MSG(UB_TXT('Where it ended:'))}
 ];
