@@ -43,7 +43,7 @@ const O=[['now','Now','Today\'s home: Classic first, the Daily first card under 
 const S=[['s1','1 · <span>First visit</span>','Nothing played yet: the club and season, and the question. Tap to play.'],
  ['s2','2 · <span>You have a best</span>','The strip sets today against your best: <b>"Finish 4th or higher to beat your best"</b>. Your best Daily (West Ham, 3rd, up 17) sits in Your record.'],
  ['s3','3 · <span>Mid-game</span>','A Daily in progress turns the label green: <b>"In progress"</b>, where you are, tap to carry on.'],
- ['s4','4 · <span>Played today</span>','Done: the strip shows <b>your finish and rise</b>, "New best" when it is, and a <b>Share</b> button in place of the arrow. Tap the strip to go again. Your record\'s best Daily updates.']];
+ ['s4','4 · <span>Completed</span>','The same strip as in progress: <b>"Completed"</b> in green, and the line below says how you did, <b>"Finished 1st, up 20 · New best"</b>. White edge as before. Tap to see your result, share it or go again. Your record\'s best Daily updates.']];
 const put=(host)=>([id,name,why])=>{const el=document.createElement('div');el.className='col';
  el.innerHTML=`<h2>${name}</h2><p class="why">${why}</p><div class="phone"><div class="scr"><img alt="${id} home" src="home-daily/${id}.jpg"></div></div><div class="tog"><button class="on" data-v="">First screen</button><button data-v="-full">Whole page</button></div>`;
  const img=el.querySelector('img');el.querySelectorAll('.tog button').forEach((b)=>b.onclick=()=>{el.querySelectorAll('.tog button').forEach((x)=>x.classList.toggle('on',x===b));img.src=`home-daily/${id}${b.dataset.v}.jpg`;el.querySelector('.scr').scrollTop=0;});
