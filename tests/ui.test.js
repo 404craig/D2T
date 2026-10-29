@@ -527,7 +527,7 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.click('.sheet [data-k="keep"]'); await wait(500);
   await page.evaluate(() => { const G = window.D2T.game; window.D2T.state.run.tableSeen = true; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(900); await shot("40-daily-summary");
-  await card("daily", "DROP2TOP Daily #");
+  await card("daily", "*DROP2TOP Daily Challenge*\n\n");
   check(await page.evaluate(() => !!window.D2T.game.dailyResult()), "the daily result was not recorded");
   await openEnd(); await page.waitForSelector('.end-sheet [data-k="share"]', { timeout: 4000 }).catch(() => {});
   check(!!(await page.$(".sm-daily .sm-dv")) && !!(await page.$('.end-sheet [data-k="share"]')), "the daily summary has no today-against-best panel or Share button");

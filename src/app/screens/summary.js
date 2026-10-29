@@ -80,7 +80,8 @@
       const day = `${ord(+dd)} ${M[+mm - 1]}`, won = F.finish === 1, acc = club.accent || '#FFFFFF', txt = club.text || '#FFFFFF';
       const places = `${sign(F.rise)} ${Math.abs(F.rise) === 1 ? 'place' : 'places'}`;
       const ts = rows && rows.topScorer, bc = rows && rows.best;
-      const lines = [`DROP2TOP Daily #${num} · ${day}`, '', `${nm} ${S.season}`, `They went down in ${ord(F.histFinish)}.`,
+      const lines = ['*DROP2TOP Daily Challenge*', '',   // bold in WhatsApp; the number and date are on the picture's tag (Craig, 29 Oct)
+        `${nm} ${S.season}`, `They went down in ${ord(F.histFinish)}.`,
         won ? `I won the league on ${F.pts} pts.` : `I finished ${ord(F.finish)} on ${F.pts} pts.`, `The Rise: ${places}`];
       if (ts || bc) lines.push('');
       if (ts) lines.push(`Top scorer: ${ts.name}, ${ts.goals} goal${ts.goals === 1 ? '' : 's'}`);
