@@ -549,3 +549,8 @@
 .rd-busy .tr-pitch, .rd-busy .sp-stage { pointer-events: none; }
 .se-news.se-nb-wait { visibility: hidden; }
 .rd-busy .game-bar .bar-main, .rd-busy .game-bar .bar-mid { pointer-events: none; }
+
+/* tap to look, drag to swap (Craig, 29 Oct, build 167; Emma kept swapping by mistake): the picked player's positions under his pitch card, main first */
+.se-poslab { position: absolute; left: 50%; top: calc(100% + 3px); transform: translateX(-50%); z-index: 60; pointer-events: none; white-space: nowrap;
+  font: 800 10px/1 'Exo 2', sans-serif; letter-spacing: .04em; color: #fff; background: rgba(10,10,10,.82); border: 1px solid rgba(255,255,255,.18); border-radius: 7px; padding: 3px 6px; }
+.se-poslab i { font-style: normal; opacity: .45; margin: 0 1px; }

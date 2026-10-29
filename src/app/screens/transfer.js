@@ -171,12 +171,13 @@
         const gone = GAME.poachedSlots();   // a Club X career's poached players: their empty shirts keep where they went
         slotsEl.innerHTML = GAME.slots().map((s, i) => {
           const c = L.xi[i] || (janBack && janBack.slot === i ? janBack.card : null), f = pf(i), cls = `se-slot${lit.has(i) ? ' se-best' : ''}${f ? ' se-pf-' + f : ''}${i === mover ? ' se-sel' : ''}`;
+          const plist = i === mover && c ? (c.main ? [c.main, ...(c.alt || [])] : [c.pos]) : null, plab = plist ? `<span class="se-poslab" aria-hidden="true">${plist.join('<i>/</i>')}</span>` : '';
           const say = f ? `, ${fitWord[f]} for ${D2T.esc(inc.name)}` : '';
           if (!c) return `<div class="${cls}" style="${place(fm, s, pw)};z-index:${Math.round(s.y)}" data-i="${i}"><div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="Empty ${s.pos} shirt${lit.has(i) ? ', open for this pick' : ''}${say}">${SE.emptyShirt(s.pos, pw, gone[i])}</div></div>`;
           const fit = GAME.fit(c.id, i), oop = fit !== 'green';
           return `<div class="${cls}" style="${place(fm, s, pw)};z-index:${Math.round(s.y)}" data-i="${i}">
             <div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}. Sign the selected player here${say}">
-              ${D2T.cards.player(c, { w: pw, mini: true, shine: i === fresh, tab: s.pos, cls: 'fit-' + fit, dots: (GAME.settling(c.id) || {}).left })}</div></div>`;
+              ${D2T.cards.player(c, { w: pw, mini: true, shine: i === fresh, tab: s.pos, cls: 'fit-' + fit, dots: (GAME.settling(c.id) || {}).left })}</div>${plab}</div>`;
         }).join('');
         ratingEl.textContent = GAME.rating();
         const tn = field && field.querySelector('.se-tname'); if (tn) tn.textContent = GAME.tacticName();
@@ -228,8 +229,11 @@
           // again for his big card, to see where else he can play before you sign anyone (Craig, 22 Oct)
           const mine = GAME.lineup().xi[slot];
           if (draft && !di.open) { if (mine) { openMine(slot); return; } api.hint('Pick one of the three first, then tap a shirt'); return; }
-          if (mover < 0) { if (!mine) { api.hint('Pick one of the three first, or tap one of yours to move him'); return; } mover = slot; drawPitch(); api.hint('Tap another shirt to swap him, or tap him again for his card'); return; }
+          if (mover < 0) { if (!mine) { api.hint('Pick one of the three first, or tap one of yours to see where he plays'); return; } mover = slot; drawPitch(); api.hint('Drag him onto another shirt to swap, or tap him again for his card'); return; }
           if (mover === slot) { openMine(slot); return; }
+          // tap to look, drag to swap (Craig, 29 Oct, build 167): tapping another of your players picks him instead of swapping (swaps are drags); an empty shirt still
+          // takes the picked player
+          if (mine) { mover = slot; SND.play('cardSelect'); drawPitch(); api.hint('Drag him onto another shirt to swap, or tap him again for his card'); return; }
           moveTo(mover, slot);
         });
       }
