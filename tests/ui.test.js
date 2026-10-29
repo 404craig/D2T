@@ -595,7 +595,7 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => { const n = {}, N = 14000; for (let i = 0; i < N; i++) { const f = window.D2T.game.g433.pickFormation(); n[f] = (n[f] || 0) + 1; } const back5 = (n["532"] + n["541"]) / 2, rest = ["442", "433", "451", "352", "343", "424"].reduce((t, f) => t + n[f], 0) / 6; return Object.keys(n).length === 8 && back5 / rest > 0.4 && back5 / rest < 0.6; }), "Goal Rush: 5-3-2 and 5-4-1 do not come up about half as often");
   // the sheet opens only after the ending (longer when the total breaks through the target), so wait for it
   await page.waitForSelector(".sheet", { timeout: 15000 }).catch(() => {}); await wait(400); await shot("51-goalrush-end");
-  await card("goalrush", "DROP2TOP Goal Rush · ");
+  await card("goalrush", "*DROP2TOP Goal Rush · ");
   check(await page.evaluate(() => window.D2T.state.g433.filled.length === 11 && window.D2T.game.g433.record().games === 1), "Goal Rush: the game did not fill 11 shirts and record a result");
   check(await page.evaluate((f) => window.D2T.game.g433.record().lastTarget === +f, form), "Goal Rush: the result was not recorded against this game's target");
   check(await page.evaluate(() => window.D2T.state.g433.filled.every((p) => window.D2T.state.g433.filled.filter((q) => q.name === p.name).length === 1)), "Goal Rush: the same player appeared twice");

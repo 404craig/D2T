@@ -645,20 +645,74 @@
         const lead = `<div class="g4-end ${k}"><div class="tb" role="img" aria-label="Your XI ${t}, target ${TARGET}"><div class="track"><div class="fill" style="width:${pc(pv)};background-size:${size}"></div>`
           + `${t > TARGET ? `<div class="ovr" style="left:${pc(TARGET)};width:${pc(t - TARGET)}"></div>` : ''}</div><div class="goal" style="left:${pc(TARGET)}"><i>${TARGET}</i></div><span class="you" style="left:${pc(t)}">${t}</span></div>`
           + `<div class="gap">${gap === 0 ? 'Spot on' : `${gap} ${t > TARGET ? 'over' : 'short'}`}<small>YOUR XI ${t} · TARGET ${TARGET}</small></div>${best ? `<div class="q">${best}</div>` : ''}</div>`;
-        // the share card (Craig, 13 Oct): the total big over the target, how far off, the XI and their goals, the dare
-        const shape = shapeText(FORM), xi = S.filled.slice().sort((a, b) => a.slot - b.slot);
-        const how = gap === 0 ? 'BANG ON' : t > TARGET ? `${gap} OVER THE TARGET` : `${gap} SHORT`;
-        const text = gap === 0 ? `DROP2TOP Goal Rush · ${shape}\nMy XI scored ${t} Premier League goals: hit ${TARGET} exactly. Bang on.\nCan you do it?\n${D2T.share.LINK}`
-          : `DROP2TOP Goal Rush · ${shape}\nMy XI scored ${t} Premier League goals. The target was ${TARGET}: ${gap} ${t > TARGET ? 'over' : 'short'}.\nCan you hit it exactly?\n${D2T.share.LINK}`;
-        const card = D2T.share.build({ text, c: '#FFD21F', tag: `Goal Rush · ${shape}`, dare: `Hit ${TARGET} exactly`, ghost: window.D2T_GOALRUSH_LOGO,
+        // the share card (Craig, 29 Oct; "Goal Rush · hit" and "· miss" in design/prototype/daily-share.html): the Daily's
+        // frame in yellow, the target on top ("433 GOALS", or struck through in red with how far off on a miss), then the XI on
+        // a pitch in the game's own shirts (club kit, goals on the shirt, the crest on its white disc), surnames under
+        const shape = shapeText(FORM), over = t > TARGET, RED = '#FF4D52';
+        const lines = [`*DROP2TOP Goal Rush · ${shape}*`, '', `My XI's career Premier League goals: ${t}.`, gap === 0 ? 'Bang on.' : `Target ${TARGET}: ${gap} ${over ? 'over' : 'short'}.`, '', '_Your turn. Beat that!_', D2T.share.LINK];
+        // the XI by line, forwards to keeper, each line left to right as on the pitch
+        const lineOf = { FWD: 0, MID: 1, DEF: 2, GK: 3 }, rowsXI = [[], [], [], []];
+        S.filled.forEach((p) => { const sl = SLOTS[p.slot]; if (sl) rowsXI[lineOf[sl[1]]].push({ p, x: sl[2] }); });
+        rowsXI.forEach((r) => r.sort((a, b) => a.x - b.x));
+        // each shirt as a picture: the game's SVG with its styles written in and the kit patterns, no number (drawn after,
+        // in Exo 2, which an SVG picture cannot load)
+        const SW = 106, DEFS = (defs().match(/<defs>[\s\S]*<\/defs>/) || [''])[0];
+        const svgOf = (p) => {
+          const k = kit(p.club), m = shirt({ w: 40, player: p }).match(/<svg[\s\S]*<\/svg>/);
+          if (!m) return null;
+          const style = `<style>.body{stroke:${k.trim};stroke-width:2.4;stroke-linejoin:round}.trim{fill:none;stroke:${k.trim};stroke-width:4;stroke-linecap:round}</style>`;
+          const svg = m[0].replace(/<text[\s\S]*?<\/text>/g, '').replace(/^<svg[^>]*>/, `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -6 112 112" width="224" height="224">${style}${DEFS}`);
+          return D2T.share.svgSrc(svg);
+        };
+        const imgs = {};
+        S.filled.forEach((p, i) => { imgs['s' + i] = svgOf(p); const k = kit(p.club); if (k.crest) imgs['c' + i] = k.crestLight; });
+        const card = D2T.share.build({ text: lines.join('\n'), c: '#FFD21F', wash: '#FFD21F', band: '#FFD21F', ink: '#0A0A0A', tag: `Goal Rush · ${shape}`, dare: 'Pick 11. Hit the number', imgs,
           draw: (g, im, k) => {
-            g.font = "italic 900 220px 'Exo 2', sans-serif"; const w1 = g.measureText(String(t)).width; g.font = "italic 900 110px 'Exo 2', sans-serif"; const w2 = g.measureText(' / ' + TARGET).width;
-            const x0 = (k.W - w1 - w2) / 2; k.fit(String(t), x0, 330, 900, 900, 220, true, '#FFFFFF', 'left'); k.fit(' / ' + TARGET, x0 + w1, 420, 600, 900, 110, true, '#8E8E99', 'left');
-            k.fit(how, k.W / 2, 562, 960, 800, 46, false, '#FFE375');
-            xi.forEach((p, i) => {
-              const col = i % 2, row = Math.floor(i / 2), x = col ? 590 : 110, y = 650 + row * 72;
-              k.fit(p.sur, x, y, 280, 700, 36, false, '#BDBDC6', 'left'); k.fit(String(p.goals), x + 380, y, 120, 900, 38, true, '#FFFFFF', 'right');
-              g.fillStyle = '#1C1C21'; g.fillRect(x, y + 50, 380, 2);
+            const W = k.W;
+            // the top line
+            if (gap === 0) k.mid(`${TARGET} GOALS`, W / 2, 300, 960, 900, 110, true, '#FFFFFF');
+            else {
+              const a = String(TARGET), b = ' GOALS', o = `${gap} ${over ? 'OVER' : 'SHORT'}`;
+              const wa = k.width(a, 900, 110, true), wb = k.width(b, 900, 110, true), wo = k.width(o, 900, 64, true), x0 = W / 2 - (wa + 12 + wb + 34 + wo) / 2;
+              k.mid(a, x0, 300, 999, 900, 110, true, '#FFFFFF', 'left'); k.mid(b, x0 + wa + 12, 300, 999, 900, 110, true, '#FFFFFF', 'left');
+              g.save(); g.strokeStyle = RED; g.lineCap = 'round'; g.lineJoin = 'round';
+              g.lineWidth = 9; g.beginPath(); g.moveTo(x0 - 12, 318); g.quadraticCurveTo(x0 + wa * 0.5, 300, x0 + wa + 10, 282); g.stroke();
+              g.lineWidth = 5; g.beginPath(); g.moveTo(x0 - 2, 330); g.quadraticCurveTo(x0 + wa * 0.55, 314, x0 + wa + 16, 296); g.stroke(); g.restore();
+              k.mid(o, x0 + wa + 12 + wb + 34, 300, 999, 900, 64, true, RED, 'left');
+            }
+            // the pitch
+            const y0 = 372, y1 = 1150;
+            g.save(); k.rr(70, y0, 940, y1 - y0, 28); g.clip();
+            const gr = g.createLinearGradient(0, y0, 0, y1); gr.addColorStop(0, '#0F3A22'); gr.addColorStop(1, '#08200F'); g.fillStyle = gr; g.fillRect(70, y0, 940, y1 - y0);
+            for (let i = 0; i < 8; i += 2) { g.fillStyle = 'rgba(255,255,255,.03)'; g.fillRect(70, y0 + i * (y1 - y0) / 8, 940, (y1 - y0) / 8); }
+            const rg = g.createRadialGradient(540, y0, 10, 540, y0, 700); rg.addColorStop(0, 'rgba(255,255,255,.10)'); rg.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = rg; g.fillRect(70, y0, 940, y1 - y0);
+            g.strokeStyle = 'rgba(255,255,255,.18)'; g.lineWidth = 3; g.strokeRect(100, y0 + 20, 880, y1 - y0 + 40);
+            g.beginPath(); g.arc(540, y0 + 20, 90, 0, Math.PI); g.stroke(); g.strokeRect(330, y1 - 130, 420, 150); g.strokeRect(440, y1 - 50, 200, 70);
+            g.restore();
+            // the XI: shirt tops per line, forwards to keeper; each line spread across the pitch
+            const tops = [y0 + 22, y0 + 198, y0 + 382, y0 + 566], SH = SW * 1.02;
+            rowsXI.forEach((row, li) => {
+              const n = row.length, gapX = n > 1 ? Math.min(270, 680 / (n - 1)) : 0;
+              row.forEach(({ p }, j) => {
+                const i = S.filled.indexOf(p), cx = 540 + (j - (n - 1) / 2) * gapX, top = tops[li], kt = kit(p.club), s = SW / 100;
+                const sim = im['s' + i]; if (sim) g.drawImage(sim, cx - SW * 1.12 / 2, top - SW * 0.06, SW * 1.12, SW * 1.12);
+                // his goals on the shirt, as the pitch shows them (three figures squeezed to 55 of the shirt's 100)
+                const num = String(p.goals); g.save(); g.font = `italic 900 ${36 * s}px 'Exo 2', sans-serif`; g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+                const nw = g.measureText(num).width, sx = num.length > 2 ? (55 * s) / nw : 1;
+                g.translate(cx, top + 65 * s); g.scale(sx, 1);
+                if (kt.stroke) { g.lineWidth = kt.sw * s * 2 / sx; g.lineJoin = 'round'; g.strokeStyle = kt.stroke; g.strokeText(num, 0, 0); }
+                g.fillStyle = kt.ink; g.fillText(num, 0, 0); g.restore(); g.textBaseline = 'top';
+                // the crest on its white disc above the collar
+                const ci = im['c' + i];
+                if (ci) {
+                  const d = SW * 0.4, dy = top - 0.42 * d + d / 2;
+                  g.save(); g.shadowColor = 'rgba(0,0,0,.45)'; g.shadowBlur = 8; g.shadowOffsetY = 3;
+                  g.beginPath(); g.arc(cx, dy, d / 2, 0, 7); g.fillStyle = '#F4F4F6'; g.fill(); g.restore();
+                  g.lineWidth = 3; g.strokeStyle = kt.trim; g.beginPath(); g.arc(cx, dy, d / 2, 0, 7); g.stroke();
+                  k.pic(ci, cx, dy - d * 0.38, d * 0.76);
+                }
+                k.mid(String(p.sur).toUpperCase(), cx, top + SH + 20, Math.min(220, (gapX || 300) - 14), 900, 30, true, '#FFFFFF');
+              });
             });
           } });
         // the shared end sheet (Craig, 14 Oct; D2T.endSheet): Share, Play again, Home; dragged closed, a slim "Game over"
