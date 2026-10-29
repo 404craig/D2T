@@ -17,11 +17,17 @@ h1{font:900 italic 30px/1.05 'Exo 2';text-transform:uppercase;margin:0 0 10px}
 .tog{display:flex;gap:6px;margin-top:10px}
 .tog button{flex:1;min-height:44px;border-radius:12px;border:1px solid var(--line);background:#0E0E10;color:#fff;font:800 13px 'Exo 2';letter-spacing:1px;cursor:pointer}
 .tog button.on{border-color:var(--g);color:var(--g)}
+.sec{font:900 italic 24px 'Exo 2';text-transform:uppercase;margin:6px 0 6px}
+#strip{margin-bottom:40px}
 .notes{max-width:880px;margin-top:34px;color:#CFCFD6;font-size:15px;line-height:1.5}
 .notes h2{font:900 italic 22px 'Exo 2';text-transform:uppercase;color:#fff;margin:0 0 8px}.notes li{margin:0 0 8px}.notes b{color:#fff}
 </style></head><body><div class="wrap">
 <h1>Daily Challenge on home</h1>
-<p class="lead">Screenshots of the <b>real home screen from build 164</b>, rearranged. Each phone scrolls; the buttons switch between the first screen and the whole page. The Daily is today's (Middlesbrough 1992/93) on a fresh phone, so "None yet".</p>
+<p class="lead">Screenshots of the <b>real home screen (build 167)</b>, rearranged. Each phone scrolls; the buttons switch between the first screen and the whole page. Today's Daily is Middlesbrough 1992/93 (really 21st); your results here are made up.</p>
+<h2 class="sec">C, the strip, through the day</h2>
+<p class="lead">You liked C. The strip <b>changes with your day</b>, and your best Daily moves into <b>Your record</b>, as a slim row under the four frames, with how many Dailies you've played. Today's result sits on the strip itself, with Share.</p>
+<div class="cols" id="strip"></div>
+<h2 class="sec">The first round</h2>
 <div class="cols" id="cols"></div>
 <div class="notes"><h2>Worth weighing</h2><ul>
 <li><b>Your rule:</b> CLAUDE.md says Classic is the main mode and "stays front and centre". A and B put the Daily first; C keeps Classic as the big card and just puts the Daily in reach.</li>
@@ -34,9 +40,13 @@ const O=[['now','Now','Today\'s home: Classic first, the Daily first card under 
  ['a','A · <span>Daily first</span>','The Daily card <b>and its two tiles</b> move above Classic. The Daily is the first thing you see; Classic slides half off the first screen.'],
  ['b','B · <span>Daily first, tiles below</span>','The Daily card above Classic, its tiles move <b>into Your record</b>. Both big cards fit on the first screen.'],
  ['c','C · <span>Daily strip</span>','A <b>slim Daily strip</b> (crest, club and season, arrow) above Classic. Classic stays the hero and almost everything stays where it was.']];
-const cols=document.getElementById('cols');
-O.forEach(([id,name,why])=>{const el=document.createElement('div');el.className='col';
+const S=[['s1','1 · <span>First visit</span>','Nothing played yet: the club and season, and the question. Tap to play.'],
+ ['s2','2 · <span>You have a best</span>','The strip sets today against your best: <b>"Finish 4th or higher to beat your best"</b>. Your best Daily (West Ham, 3rd, up 17) sits in Your record.'],
+ ['s3','3 · <span>Mid-game</span>','A Daily in progress turns the label green: <b>"In progress"</b>, where you are, tap to carry on.'],
+ ['s4','4 · <span>Played today</span>','Done: the strip shows <b>your finish and rise</b>, "New best" when it is, and a <b>Share</b> button in place of the arrow. Tap the strip to go again. Your record\'s best Daily updates.']];
+const put=(host)=>([id,name,why])=>{const el=document.createElement('div');el.className='col';
  el.innerHTML=`<h2>${name}</h2><p class="why">${why}</p><div class="phone"><div class="scr"><img alt="${id} home" src="home-daily/${id}.jpg"></div></div><div class="tog"><button class="on" data-v="">First screen</button><button data-v="-full">Whole page</button></div>`;
  const img=el.querySelector('img');el.querySelectorAll('.tog button').forEach((b)=>b.onclick=()=>{el.querySelectorAll('.tog button').forEach((x)=>x.classList.toggle('on',x===b));img.src=`home-daily/${id}${b.dataset.v}.jpg`;el.querySelector('.scr').scrollTop=0;});
- cols.appendChild(el);});
+ host.appendChild(el);};
+S.forEach(put(document.getElementById('strip')));O.forEach(put(document.getElementById('cols')));
 </script></body></html>
