@@ -77,7 +77,7 @@ function kit(g){
  const ball=(cx,cy,r)=>{g.beginPath();g.arc(cx,cy,r,0,7);g.fillStyle='#FFFFFF';g.fill();g.lineWidth=r*.09;g.strokeStyle='#0A0A0A';g.stroke();
   const pent=(px,py,pr,rot)=>{g.beginPath();for(let i=0;i<5;i++){const a=rot+i*2*Math.PI/5;g.lineTo(px+pr*Math.cos(a),py+pr*Math.sin(a));}g.closePath();g.fillStyle='#0A0A0A';g.fill();};
   pent(cx,cy,r*.36,-Math.PI/2);g.save();g.beginPath();g.arc(cx,cy,r*.96,0,7);g.clip();for(let i=0;i<5;i++){const a=-Math.PI/2+i*2*Math.PI/5;pent(cx+r*.95*Math.cos(a),cy+r*.95*Math.sin(a),r*.3,a+Math.PI/2);}g.restore();};
- return {fit,mid,width,rr,box,pic,logo,tag,card,ball,sp};
+ return {fit,mid,width,rr,box,pic,logo,tag,card,ball,sp,g};
 }
 // ---------- the frame every card shares ----------
 function frame(g,k,o){g.fillStyle='#000';g.fillRect(0,0,W,H);
@@ -129,8 +129,14 @@ const KIT={Spurs:{f:'#FFFFFF',tr:'#132257',ink:'#132257'},Chelsea:{f:'#2B63E0',t
 const XI_HIT=[['Robinson','Spurs',1],['Petrescu','Chelsea',23],['Young','Charlton',9],['Cahill','Chelsea',28],['Alonso','Chelsea',26],['Alli','Spurs',51],['Duff','Blackburn',54],['McAllister','Leeds',49],['Hartson','West Ham',55],['Bowen','West Ham',65],['Ings','Southampton',72]];
 const XI_MISS=XI_HIT.map(x=>x[0]==='Young'?['Southgate','Aston Villa',17]:x);
 const F433=[[540,0],[200,1],[413,1],[667,1],[880,1],[290,2],[540,2],[790,2],[270,3],[540,3],[810,3]];
-function grHead(k,xi,over){const t=xi.reduce((a,x)=>a+x[2],0),txt=t+' GOALS';const w=k.width(txt,900,110,true),ow=over?k.width(over,900,30,true,'2px')+36:0,x0=W/2-(w+(over?ow+20:0))/2;k.mid(txt,x0,300,960,900,110,true,'#FFFFFF','left');
- if(over){const x=x0+w+20;k.rr(x,280,ow,44,10);k.box(x,280,ow,44,10,RED,'#2A0A0C');k.mid(over,x+ow/2,302,ow,900,30,true,RED,'center','2px');}}
+function grHead(k,xi,over){const t=xi.reduce((a,x)=>a+x[2],0),g=k.g;
+ if(!over){k.mid(t+' GOALS',W/2,300,960,900,110,true,'#FFFFFF');return;}
+ // a miss: the target struck through with a red scratch, and how far off beside it
+ const a='433',b=' GOALS',wa=k.width(a,900,110,true),wb=k.width(b,900,110,true),wo=k.width(over,900,64,true),gap=34,x0=W/2-(wa+wb+gap+wo)/2;
+ k.mid(a,x0,300,999,900,110,true,'#FFFFFF','left');k.mid(b,x0+wa+12,300,999,900,110,true,'#FFFFFF','left');
+ g.save();g.strokeStyle=RED;g.lineCap='round';g.lineJoin='round';g.lineWidth=9;g.beginPath();g.moveTo(x0-12,318);g.quadraticCurveTo(x0+wa*.5,300,x0+wa+10,282);g.stroke();
+ g.lineWidth=5;g.beginPath();g.moveTo(x0-2,330);g.quadraticCurveTo(x0+wa*.55,314,x0+wa+16,296);g.stroke();g.restore();
+ k.mid(over,x0+wa+wb+gap,300,999,900,64,true,RED,'left');}
 function grTotal(k,xi,word,col,cy){const t=xi.reduce((a,x)=>a+x[2],0);k.mid(String(t),W/2,cy,900,900,170,true,col===RED?RED:'#FFFFFF');k.mid(word,W/2,cy+112,900,900,50,true,col);}
 function pitch(g,k,y0,y1){g.save();k.rr(70,y0,940,y1-y0,28);g.clip();const gr=g.createLinearGradient(0,y0,0,y1);gr.addColorStop(0,'#0F3A22');gr.addColorStop(1,'#08200F');g.fillStyle=gr;g.fillRect(70,y0,940,y1-y0);
  for(let i=0;i<8;i+=2){g.fillStyle='rgba(255,255,255,.03)';g.fillRect(70,y0+i*(y1-y0)/8,940,(y1-y0)/8);}
@@ -216,7 +222,7 @@ const OPTS=[
   draw(g,k){frame(g,k,{wash:YEL,ghost:null,tag:'Goal Rush · 4-3-3',tagCol:YEL,band:YEL,ink:'#0A0A0A',dare:'Pick 11. Hit the number'});
    grHead(k,XI_HIT);pitch(g,k,372,1150);onPitch(g,k,XI_HIT,F433,372);},
   text:MSG(['DROP2TOP Goal Rush · 4-3-3','',"My XI's career Premier League goals: 433.",'Bang on.'])},
- {sec:'gr',name:'Goal Rush · miss',dot:YEL,why:'The same when you miss: <b>"441 GOALS"</b> still in white, with a small red <b>"8 over"</b> beside it so you can tell at a glance. (Southgate in for Young.)',
+ {sec:'gr',name:'Goal Rush · miss',dot:YEL,why:'When you miss, the top shows the <b>target struck through</b> with a red scratch and <b>"8 OVER"</b> in red beside it (or "12 SHORT" under it). Your total isn\'t shown, the gap says it. (Southgate in for Young makes 441.)',
   draw(g,k){frame(g,k,{wash:YEL,ghost:null,tag:'Goal Rush · 4-3-3',tagCol:YEL,band:YEL,ink:'#0A0A0A',dare:'Pick 11. Hit the number'});
    grHead(k,XI_MISS,'8 OVER');pitch(g,k,372,1150);onPitch(g,k,XI_MISS,F433,372);},
   text:MSG(['DROP2TOP Goal Rush · 4-3-3','',"My XI's career Premier League goals: 441.",'Target 433: 8 over.'])},
