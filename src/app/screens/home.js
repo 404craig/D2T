@@ -177,7 +177,7 @@
   const metal = (c) => { const m = D2T.mix; return [m(c, '#FFFFFF', 0.45), c, m(c, '#000000', 0.38), m(c, '#FFFFFF', 0.15)]; };
   const shieldHTML = (sh, pc) => {
     const c = sh.c || pc, g = metal(c), lt = c === '#3BA4FF';
-    return `<div class="fr-frame fr-al${lt ? ' lt' : ''}" style="--m1:${g[0]};--m2:${g[1]};--m3:${g[2]};--m4:${g[3]}">${FRAME}<b>${sh.n}</b><span>${sh.l}</span></div>`;
+    return `<div class="fr-frame fr-al${lt ? ' lt' : ''}" style="--m1:${g[0]};--m2:${g[1]};--m3:${g[2]};--m4:${g[3]};--r1:${D2T.mix(c, '#FFFFFF', 0.7)};--r2:${D2T.mix(c, '#000000', 0.55)}"><i class="fr-al-rim"></i><i class="fr-al-face"></i><b>${sh.n}</b><span>${sh.l}</span></div>`;
   };
   function recordSection(pages) {
     const p0 = pages[0];
@@ -203,13 +203,13 @@
           else k.pic(im.mark, W / 2, 250, 170);
         }
         k.mid('MY RECORD', W / 2, 462, 900, 900, 54, true, '#FFFFFF', 'center', '3px');
-        const SW = 236, SH = 302, PTS = [[1, 11], [11, 1], [89, 1], [99, 11], [99, 108], [50, 127], [1, 108]];
+        const SW = 232, SH = 301, CARD_PATH = 'M1.77 10.23 L10.23 1.77 Q12 0 14.5 0 L99.5 0 Q102 0 103.77 1.77 L112.23 10.23 Q114 12 114 14.5 L114 127 Q114 130 111.14 130.9 L60.81 146.8 Q57 148 53.19 146.8 L2.86 130.9 Q0 130 0 127 L0 14.5 Q0 12 1.77 10.23Z';
         p.shields.forEach((sh, i) => {
           const x0 = W / 2 + (i % 2 ? 22 : -22 - SW), y0 = 512 + Math.floor(i / 2) * (SH + 18), c = sh.c || p.c, m = metal(c), ink = c === '#3BA4FF' ? '#FFFFFF' : '#0A0A0A';
-          g.save(); g.beginPath(); PTS.forEach(([px, py], j) => { const x = x0 + px / 100 * SW, y = y0 + py / 128 * SH; if (j) g.lineTo(x, y); else g.moveTo(x, y); }); g.closePath();
+          const P = new Path2D(); P.addPath(new Path2D(CARD_PATH), new DOMMatrix().translate(x0, y0).scale(SW / 114, SH / 148)); g.save();
           const a = 155 * Math.PI / 180, dx = Math.sin(a), dy = -Math.cos(a), L = (Math.abs(SW * dx) + Math.abs(SH * dy)) / 2, cx = x0 + SW / 2, cy = y0 + SH / 2;
           const gr = g.createLinearGradient(cx - dx * L, cy - dy * L, cx + dx * L, cy + dy * L); [[0, m[0]], [0.32, m[1]], [0.7, m[2]], [1, m[3]]].forEach(([o2, col]) => gr.addColorStop(o2, col));
-          g.fillStyle = gr; g.fill(); g.lineWidth = 3; g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineJoin = 'round'; g.stroke(); g.restore();
+          g.fillStyle = gr; g.fill(P); g.lineWidth = 4; g.strokeStyle = D2T.mix(c, '#FFFFFF', 0.6); g.lineJoin = 'round'; g.stroke(P); g.restore();
           if (im['cr' + i]) k.pic(im['cr' + i], x0 + SW * 0.91 - 26, y0 + SH * 0.07, 52);
           k.mid(String(sh.n), cx, y0 + SH * 0.30 + 44, SW - 40, 900, 92, true, ink);
           k.fit(sh.l.toUpperCase(), cx, y0 + SH * 0.30 + 104, SW - 44, 800, 26, false, ink, 'center', '1px');
