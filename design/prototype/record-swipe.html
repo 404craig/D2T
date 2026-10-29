@@ -7,7 +7,7 @@ html,body{background:#000;color:#fff;margin:0;font-family:var(--font)}
 h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10px}
 .lead{color:var(--soft);font-size:16px;line-height:1.5;max-width:880px;margin:0 0 24px}.lead b{color:#fff}
 .cols{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
-.col{flex:0 0 390px;max-width:100%}
+.col{flex:0 0 390px;width:390px;max-width:100%;min-width:0}
 .col>h2{font:900 italic 20px var(--font);text-transform:uppercase;margin:0 0 4px}.col>h2 span{color:var(--g)}
 .why{color:var(--soft);font-size:14px;line-height:1.45;margin:0 0 12px;min-height:104px}.why b{color:#fff}
 /* a phone-width slice of home, black like the game */
@@ -70,10 +70,50 @@ h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10p
 .fl .bk{transform:rotateY(180deg)}
 .fl .bk ul{position:relative;list-style:none;margin:8px 0 0;padding:0 9px;font:700 11px/1.5 var(--font);color:#fff;text-align:left;width:100%;box-sizing:border-box}
 .fl .bk ul b{font:900 italic 13px var(--font);color:var(--c);float:right}
+
+.sec2{font:900 italic 24px var(--font);text-transform:uppercase;margin:44px 0 6px}
+.car{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -16px;padding:2px 16px 6px;scroll-padding:0 16px}
+.car::-webkit-scrollbar{display:none}
+.car>*{scroll-snap-align:start;flex:none;box-sizing:border-box}
+.tg2{display:inline-block;font:800 10px var(--font);letter-spacing:.16em;padding:3px 8px;border-radius:5px;background:var(--c);color:#0A0A0A;transform:skewX(-10deg)}
+.tg2 span{display:inline-block;transform:skewX(10deg)}
+.bn{font:900 italic 44px/1 var(--font);color:var(--c)}
+.lb{font:800 11px var(--font);letter-spacing:.12em;color:#BDBDC6;text-transform:uppercase}
+.upg{color:#12F06C}
+/* F: home's game cards */
+.gc{width:78%;min-height:122px;border-radius:18px;padding:14px 16px;position:relative;overflow:hidden;background:linear-gradient(100deg,#0E0E10 42%,color-mix(in srgb,var(--c) 26%,#0E0E10));border:1px solid color-mix(in srgb,var(--c) 45%,transparent)}
+.gc .mk{position:absolute;right:-12px;bottom:-14px;width:110px;height:110px;opacity:.16;object-fit:contain}
+.gc .bn{margin-top:12px}.gc .lb{margin-top:6px}
+.gc .q4{display:flex;gap:16px;margin-top:12px}.gc .q4 div{text-align:left}.gc .q4 b{display:block;font:900 italic 32px/1 var(--font);color:var(--c)}.gc .q4 span{display:block;font:800 9.5px var(--font);letter-spacing:.08em;color:#BDBDC6;margin-top:5px;text-transform:uppercase}
+/* G: portrait cards like the game's player cards */
+.pc{width:calc((100% - 32px - 2*10px)/2.6);aspect-ratio:114/148;clip-path:polygon(3% 12%,16% 0,84% 0,97% 12%,100% 17%,100% 86%,54% 100%,46% 100%,0 86%,0 17%);position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:linear-gradient(160deg,color-mix(in srgb,var(--c) 85%,#fff) 0%,var(--c) 35%,color-mix(in srgb,var(--c) 55%,#000) 100%);color:#0A0A0A;padding-bottom:12%}
+.pc .bn{color:#0A0A0A;font-size:46px}.pc .lb{color:rgba(0,0,0,.72);margin-top:4px;font-size:10px}.pc .tt{position:absolute;top:7%;font:900 italic 12px var(--font);letter-spacing:.06em;color:rgba(0,0,0,.75)}
+.pc.dk{background:linear-gradient(160deg,#3A3A42,#0E0E10)}.pc.dk .bn{color:#fff}.pc.dk .lb,.pc.dk .tt{color:#BDBDC6}
+.pc img{width:24px;height:24px;object-fit:contain;margin:14px 0 0}
+/* H: compact tiles */
+.tl{width:calc((100% - 32px - 3*10px)/3.4);min-height:118px;border-radius:14px;background:#0E0E10;border:1px solid #26262C;padding:0 0 12px;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center}
+.tl .bar{align-self:stretch;height:22px;background:var(--c);color:#0A0A0A;font:800 9.5px/22px var(--font);letter-spacing:.14em}
+.tl .bn{font-size:38px;margin-top:16px;white-space:nowrap}.tl .bn.sm{font-size:30px;margin-top:20px}.tl .lb{margin-top:6px;font-size:9.5px}
+/* I: one big card at a time */
+.hc{width:calc(100% - 44px);min-height:190px;border-radius:22px;padding:18px 20px;position:relative;overflow:hidden;background:radial-gradient(120% 120% at 100% 0%,color-mix(in srgb,var(--c) 35%,#0E0E10),#0E0E10 60%);border:1px solid color-mix(in srgb,var(--c) 40%,transparent)}
+.hc .bn{font-size:88px;margin-top:14px}.hc .lb{font-size:13px;margin-top:6px}
+.hc .q4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:22px}.hc .q4 b{display:block;font:900 italic 40px/1 var(--font);color:var(--c)}.hc .q4 span{display:block;font:800 9.5px var(--font);letter-spacing:.06em;color:#BDBDC6;margin-top:6px;text-transform:uppercase}
+.hc .mk{position:absolute;right:-20px;bottom:-24px;width:150px;height:150px;opacity:.14;object-fit:contain}
+/* J: numbers only, a ticker */
+.tk{display:flex;align-items:stretch;gap:0;margin:0 -16px;padding:0 16px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity}
+.tk::-webkit-scrollbar{display:none}
+.tk>div{flex:none;scroll-snap-align:start;padding:4px 18px 4px 0;margin-right:18px;border-right:1px solid #26262C;min-width:72px}
+.tk>div:last-child{border-right:0}
+.tk .tt{font:800 10px var(--font);letter-spacing:.16em;color:var(--c)}
+.tk .bn{font-size:52px;margin-top:6px;color:#fff}.tk .bn em{font-style:inherit;color:var(--c)}
+.tk .lb{margin-top:4px;font-size:10px}
 .notes{max-width:880px;margin-top:34px;color:#CFCFD6;font-size:15px;line-height:1.5}
 .notes h2{font:900 italic 22px var(--font);text-transform:uppercase;color:#fff;margin:0 0 8px}.notes li{margin:0 0 8px}.notes b{color:#fff}
 </style></head><body><div class="wrap">
-<h1>Your record: five designs</h1>
+<h1>Your record: cards to swipe</h1>
+<p class="lead"><b>Five more</b>, from your note on B: one set of cards you swipe left and right, <b>no second menu</b>, one card per game, and only the number that matters (Unbeaten is just your best run). Not all shields. Swipe them.</p>
+<div class="cols" id="nv"></div>
+<h2 class="sec2">The first five</h2>
 <p class="lead">Five ways to fold the best Daily, and your other games, into <b>Your record</b>, all in the game's own shield. They're live, so <b>swipe them</b>. Classic's numbers are yours from the screenshot (16 runs); the others are made up for the example.</p>
 <div class="cols">
  <div class="col"><h2>A · <span>One row</span></h2><p class="why"><b>4.5 shields showing</b>, so the half shield says "swipe". Classic's four first, in green as now, then one shield per game in <b>its own colour</b> with its name on top: best Daily, Goal Rush bang-ons, best Unbeaten run, Club X titles, Dare2Dream dreams.</p>
@@ -148,4 +188,30 @@ rowE.innerHTML=E.map(([c,b,l,o,back])=>`<div class="fl"><div class="in">${f(c,b,
 [...rowE.children].forEach((x)=>x.onclick=()=>x.classList.toggle('on'));
 const dE=dots(document.getElementById('hintE'),2);
 rowE.addEventListener('scroll',()=>{const m=rowE.scrollWidth-rowE.clientWidth,k=m&&rowE.scrollLeft>m/2?1:0;dE.forEach((d,i)=>d.classList.toggle('on',i===k));},{passive:true});
+
+// ---------- five more: one row of cards, one per game, one number ----------
+const G=[
+ {k:'classic',t:'CLASSIC',c:C.g,mk:null,four:[[16,'Beat the drop'],[14,'Top half'],[7,'Top 3'],[2,'Titles']],n:'2',l:'League titles'},
+ {k:'daily',t:'DAILY',c:C.w,mk:'share-fx/boro.png',n:'1st',sub:UP+'20',l:'Best Daily'},
+ {k:'gr',t:'GOAL RUSH',c:C.y,mk:'share-fx/goal_rush.png',n:'3',l:'Bang on'},
+ {k:'ub',t:'UNBEATEN',c:C.c,mk:null,n:'17',l:'Best run'},
+ {k:'clx',t:'CLUB X',c:C.g,mk:'share-fx/club_x.png',n:'2',l:'Titles'},
+ {k:'d2d',t:'DARE2DREAM',c:C.b,mk:null,n:'3',l:'Dreams'}];
+const tag=(g)=>`<span class="tg2" style="--c:${g.c}"><span>${g.t}</span></span>`;
+const rise=(g)=>g.sub?` <span class="upg" style="font-size:.5em">${g.sub}</span>`:'';
+const NV=[
+ ['F','Game cards','The same card as <b>Other games</b> on home: the game\'s colour washing in from the right, its mark faded behind. Classic\'s card holds its <b>four numbers</b>; every other card has <b>one</b>. A bit over one card shows, so you know to swipe.',
+  ()=>`<div class="car">${G.map((g)=>`<div class="gc" style="--c:${g.c}">${g.mk?`<img class="mk" src="${g.mk}" alt="">`:''}${tag(g)}${g.four?`<div class="q4">${g.four.map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join('')}</div>`:`<div class="bn">${g.n}${rise(g)}</div><div class="lb">${g.l}</div>`}</div>`).join('')}</div>`],
+ ['G','Collector cards','Each game as a <b>card like the game\'s player cards</b>, in the game\'s colour, its number big in the middle, about two and a half showing. Classic gives one card to each of its four numbers, then the other games follow in the same row.',
+  ()=>`<div class="car">${G.flatMap((g)=>g.four?g.four.map(([n,l])=>`<div class="pc" style="--c:${g.c}"><span class="tt">CLASSIC</span><div class="bn">${n}</div><div class="lb">${l}</div></div>`):[`<div class="pc${g.k==='daily'?' dk':''}" style="--c:${g.c}"><span class="tt">${g.t}</span>${g.k==='daily'?`<img src="${g.mk}" alt="">`:''}<div class="bn">${g.n}</div><div class="lb">${g.l}</div></div>`]).join('')}</div>`],
+ ['H','Tiles','Small dark tiles, <b>the game\'s colour as a band</b> across the top with its name, the number underneath. Three and a bit showing. Classic\'s four come first, then one tile per game. The calmest of the five.',
+  ()=>`<div class="car">${G.flatMap((g)=>g.four?g.four.map(([n,l])=>`<div class="tl" style="--c:${g.c}"><div class="bar">CLASSIC</div><div class="bn">${n}</div><div class="lb">${l}</div></div>`):[`<div class="tl" style="--c:${g.c}"><div class="bar">${g.t}</div><div class="bn${g.sub?' sm':''}">${g.n}${rise(g)}</div><div class="lb">${g.l}</div></div>`]).join('')}</div>`],
+ ['I','One big card','<b>One game at a time</b>, big, a sliver of the next showing. Classic\'s card has its four numbers across it; each other card has one huge number. Dots underneath. The loudest of the five, and the tallest.',
+  ()=>`<div class="car" id="carI">${G.map((g)=>`<div class="hc" style="--c:${g.c}">${g.mk?`<img class="mk" src="${g.mk}" alt="">`:''}${tag(g)}${g.four?`<div class="q4">${g.four.map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join('')}</div>`:`<div class="bn">${g.n}${rise(g)}</div><div class="lb">${g.l}</div>`}</div>`).join('')}</div><div class="hint" id="hintI"></div>`],
+ ['J','Just the numbers','No boxes at all: <b>a line of numbers</b> in white, each with its game\'s name in its colour above and what it is below, split by thin rules. Swipe along. Takes the least room on home.',
+  ()=>`<div class="tk">${G.flatMap((g)=>g.four?g.four.map(([n,l])=>`<div style="--c:${g.c}"><div class="tt">CLASSIC</div><div class="bn">${n}</div><div class="lb">${l}</div></div>`):[`<div style="--c:${g.c}"><div class="tt">${g.t}</div><div class="bn">${g.n}${g.sub?`<em style="font-size:.45em"> ${g.sub}</em>`:''}</div><div class="lb">${g.l}</div></div>`]).join('')}</div>`]];
+const nv=document.getElementById('nv');
+NV.forEach(([L,n,why,html])=>{const el=document.createElement('div');el.className='col';el.innerHTML=`<h2>${L} · <span>${n}</span></h2><p class="why">${why}</p><div class="phone"><div class="sh"><h3>Your record</h3><small>16 runs</small></div>${html()}</div>`;nv.appendChild(el);});
+const cI=document.getElementById('carI'),dI=dots(document.getElementById('hintI'),G.length);
+cI.addEventListener('scroll',()=>{const k=Math.round(cI.scrollLeft/(cI.firstElementChild.offsetWidth+10));dI.forEach((d,i)=>d.classList.toggle('on',i===k));},{passive:true});
 </script></body></html>
