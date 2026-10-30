@@ -19,7 +19,7 @@
 .stg-sb { font: 600 13.5px/1.35 var(--font); color: #BDBDC6; margin: 7px 36px 0; }
 /* the record: four metallic shields in the player cards' shape, 80% of the width */
 .stg-st { flex: none; width: 80%; margin-top: 14px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; }
-.stg-st .stg-sh { padding: 24% 0 0; }
+.stg-st .stg-sh { padding: 30% 0 0; }
 .stg-st .stg-sh b { position: relative; font: 900 italic 24px/28px var(--font); height: 28px; white-space: nowrap; color: #0A0A0A; }
 .stg-st .stg-sh span { position: relative; font: 800 10.5px/1.12 var(--font); letter-spacing: .04em; text-transform: uppercase; color: #0A0A0A; margin-top: 5px; padding: 0 4px; min-height: 2.3em; }
 .stg-st .stg-sh.lt b, .stg-st .stg-sh.lt span { color: #fff; }
@@ -30,7 +30,6 @@
 .stg-dots { position: absolute; left: 0; right: 0; bottom: calc(var(--foot) + 80px); z-index: 20; display: flex; justify-content: center; gap: 6px; pointer-events: none; }
 .stg-dots i { position: relative; width: 6px; height: 6px; border-radius: 3px; background: #3A3A44; transition: width .25s, background .25s; }
 .stg-dots i.on { width: 18px; background: var(--k); }
-.stg-dots i.live::after { content: ""; position: absolute; right: -3px; top: -3px; width: 5px; height: 5px; border-radius: 50%; background: #12F06C; box-shadow: 0 0 0 2px #000; }
 .stg-bar { position: absolute; left: 18px; right: 18px; bottom: var(--foot); z-index: 20; display: flex; gap: 10px; }
 .stg-bar.split { display: grid; grid-template-columns: 1fr 1fr; }
 .stg-parw { position: absolute; right: 20px; top: 50%; width: 20px; height: 20px; margin-top: -10px; display: block; }

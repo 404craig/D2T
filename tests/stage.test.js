@@ -73,7 +73,7 @@ const URL = process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index
   const fresh = async (id, want) => { await page.click(".stg-newg"); await wait(600); check(!!(await page.$('.sheet [data-k="yes"]')), `${id}: New game did not ask first`); await page.click('.sheet [data-k="yes"]'); await wait(1800); const s = await scr(); check(want.includes(s), `${id}: New game went to ${s}`); };
   await page.evaluate(() => { const G = window.D2T.game; G.newRun("classic"); G.chooseClub(G.offer()[0].key); window.D2T.save(); }); await play(3);
   check(await split("classic"), "a Classic run did not split the button into New game and Continue");
-  check(await page.$$eval(".stg-dots i.live", (d) => d.length === 1), "the Classic run has no green dot");
+  check(await page.$$eval(".stg-dots i.live", (d) => d.length === 0), "the page dots still carry a green run dot");
   await shot("73-stage-classic-going");
   await cont("classic", ["transfer", "fixtures", "squad"]);
   await home(); check((await onShow()) === "classic", "home did not come back on Classic after leaving a Classic run"); await toSlide("daily"); await page.click(".stg-main"); await wait(1800); check(["table", "squad"].includes(await scr()), "Play today did not start the Daily"); await play(2);
@@ -90,7 +90,6 @@ const URL = process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index
   await page.click(".ub-spin"); await page.waitForFunction(() => document.querySelectorAll(".ub-ans:not([disabled])").length === 2, null, { timeout: 20000 }); await wait(400);
   await page.click(".ub-bar .is-home"); await wait(500); await page.click('.sheet [data-k="home"]'); await wait(1200);
   check(await split("ub"), "an Unbeaten run did not split the button");
-  check(await page.$$eval(".stg-dots i.live", (d) => d.length === 5), "not every game with a run going has its green dot");
   await shot("74-stage-ub-going");
   await cont("ub", ["unbeaten"]);
   await page.waitForFunction(() => document.querySelectorAll(".ub-ans:not([disabled])").length === 2, null, { timeout: 20000 }).catch(() => {});
