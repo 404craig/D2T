@@ -35,14 +35,14 @@
 .stg-parw { position: absolute; right: 20px; top: 50%; width: 20px; height: 20px; margin-top: -10px; display: block; }
 .stg-parw svg { width: 20px; height: 20px; display: block; }
 .stg-main { position: relative; flex: 1; min-height: 58px; padding: 0 46px; border-radius: 29px; border: 0; background: var(--k); color: var(--ink, #0A0A0A); font: 900 italic 21px var(--font); text-transform: uppercase; letter-spacing: .01em;
-  display: flex; align-items: center; justify-content: center; white-space: nowrap; cursor: pointer; box-shadow: 0 0 18px -5px var(--k), 0 -3px 14px -8px var(--k); transition: background .25s, box-shadow .25s, transform .15s; }
+  display: flex; align-items: center; justify-content: center; white-space: nowrap; cursor: pointer; box-shadow: 0 0 14px -6px color-mix(in srgb, var(--k) 50%, transparent); transition: background .25s, box-shadow .25s, transform .15s; }
 .stg-main:active, .stg-newg:active, .stg-contg:active { transform: scale(.97); }
 .stg-newg, .stg-contg { position: relative; min-height: 58px; border-radius: 29px; border: 0; font: 900 italic 16.5px var(--font); text-transform: uppercase; cursor: pointer; display: flex; align-items: center; justify-content: center;
   padding: 0 34px 0 16px; white-space: nowrap; overflow: hidden; transition: transform .15s; }
 .stg-bar .stg-parw { right: 14px; }
-.stg-newg { background: var(--k); color: var(--ink, #0A0A0A); box-shadow: 0 0 18px -5px var(--k), 0 -3px 14px -8px var(--k); }
+.stg-newg { background: var(--k); color: var(--ink, #0A0A0A); box-shadow: 0 0 14px -6px color-mix(in srgb, var(--k) 50%, transparent); }
 /* Continue in the run's colour, solid like New game (Craig, 30 Oct: no stripes or sweep), the badge big on the left */
-.stg-contg { color: var(--ct, #fff); padding: 0 36px 0 52px; background: var(--c1); box-shadow: 0 0 18px -5px var(--c1), 0 -3px 14px -8px var(--c1); }
+.stg-contg { color: var(--ct, #fff); padding: 0 36px 0 52px; background: var(--c1); box-shadow: 0 0 14px -6px color-mix(in srgb, var(--c1) 50%, transparent); }
 .stg-contg img { position: absolute; left: 10px; top: 50%; width: 38px; height: 38px; margin-top: -19px; object-fit: contain; filter: drop-shadow(0 1px 2px rgba(0,0,0,.35)); }
 
 /* in from the intro */
