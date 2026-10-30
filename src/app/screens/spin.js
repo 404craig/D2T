@@ -439,6 +439,8 @@
         settled: st.spun ? GAME.offer() : null,
         onSettled: () => { st.spun = true; D2T.save(); },
         accent: (c) => (x && st.xShown ? { accent: '#12F06C', ink: '#000000' } : { accent: c.accent, ink: c.ink }),
+        // Classic is silver until a club is picked (Craig, 30 Oct: its home colour; green is Club X's)
+        baseBtn: !x && !dream ? { accent: '#C9D0D9', ink: '#0A0A0A' } : undefined,
         caption: (c) => (x ? 'TITLE ' + c.championPts + ' PTS' : c.code),
         details: (c) => x ? `<div class="sp-det-name">${c.season}: ${D2T.esc(GAME.xName())} replaces ${D2T.esc(c.full)}</div><div class="sp-det-line">${D2T.esc(c.name)} finished bottom (${D2T.ordinal(c.pos)}, ${c.pts} pts). ${D2T.esc(c.champion)} won the league on ${c.championPts} points.</div>
           <div class="sp-det-badges"><span>Target: win the league</span></div>` : `<div class="sp-det-name">${D2T.esc(c.full)}</div><div class="sp-det-line">${c.season} · Real finish ${D2T.ordinal(c.pos)} · ${c.gf} scored, ${c.ga} conceded</div>

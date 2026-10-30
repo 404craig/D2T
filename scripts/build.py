@@ -20,7 +20,7 @@ CSS = ["core/base.css", "screens/front.css", "screens/spin.css", "screens/season
 CSS_FIRST = ["core/base.css", "screens/front.css"]   # in the head: all the intro and home need; the rest follows the shell
 LOGOS_FIRST = ["short"]   # the intro's first second; the rest of its pictures follow the shell (D2T.introArt)
 JS = ["../engine.js", "../sound.js", "core/app.js", "core/cards.js", "core/flip.js", "core/game.js", "core/season.js", "core/share.js",
-      "screens/intro.js", "screens/home-v1.js", "screens/home-v2.js", "screens/howto.js", "screens/account.js", "screens/league.js",
+      "screens/intro.js", "screens/home-v1.js", "screens/home-v2.js", "screens/help.js", "screens/howto.js", "screens/account.js", "screens/league.js",
       "screens/spin.js", "screens/reveal.js", "screens/transfer.js", "screens/table.js", "screens/squad.js", "screens/fixtures.js",
       "screens/match.js", "screens/results.js", "screens/summary.js", "screens/history.js", "screens/goals.js", "screens/unbeaten.js", "core/boot.js"]
 SHELL = ["core/app.js", "screens/intro.js"]          # run first, while the rest of the page is still arriving

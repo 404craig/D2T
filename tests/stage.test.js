@@ -76,7 +76,7 @@ const URL = process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index
   check(await page.$$eval(".stg-dots i.live", (d) => d.length === 1), "the Classic run has no green dot");
   await shot("73-stage-classic-going");
   await cont("classic", ["transfer", "fixtures", "squad"]);
-  await home(); await page.click(".stg-main"); await wait(1800); check(["table", "squad"].includes(await scr()), "Play today did not start the Daily"); await play(2);
+  await home(); check((await onShow()) === "classic", "home did not come back on Classic after leaving a Classic run"); await toSlide("daily"); await page.click(".stg-main"); await wait(1800); check(["table", "squad"].includes(await scr()), "Play today did not start the Daily"); await play(2);
   check(await split("daily"), "a Daily go did not split the button"); await cont("daily", ["fixtures", "transfer", "squad"]);
   check(await split("classic"), "the Classic run was lost when the Daily started"); await cont("classic (parked)", ["transfer", "fixtures", "squad"]);
   await page.evaluate(() => { const G = window.D2T.game, st = window.D2T.state; G.stashDaily(); st.parked = st.run; st.run = null; G.newRun("clubx"); G.setXName("Southside Rovers"); const e = G.eng(); if (e.clubOffer) G.chooseClub(e.clubOffer[0]); window.D2T.save(); }); await play(2);

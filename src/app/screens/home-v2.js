@@ -135,6 +135,9 @@
         <div class="stg-dots" aria-hidden="true">${GM.map((g) => `<i class="${g.run ? 'live' : ''}"></i>`).join('')}</div>
         <div class="stg-bar"></div>
         <div class="stg-defs" aria-hidden="true">${D2T.shirts ? D2T.shirts.defs() : ''}</div></div>`);
+      // from the intro the stage starts hidden: the class goes on before the first style is computed (the layout reads
+      // below), or the .5s transition faded the drawn home OUT to black and then back in (Fable, 30 Oct: Craig's flash)
+      if (params.fromIntro && !reduced) el.classList.add('stg-in');
       root.appendChild(el);
       const $ = (s) => el.querySelector(s), SL = [...el.querySelectorAll('.stg-sl')], BG = [...el.querySelectorAll('.stg-bg')], DT = [...el.querySelectorAll('.stg-dots i')];
       const wheel = $('.stg-wheel'), bar = $('.stg-bar');
@@ -152,7 +155,9 @@
       fit(); const onResize = () => fit(); window.addEventListener('resize', onResize); cleanups.push(() => window.removeEventListener('resize', onResize));
 
       // ---------- the wheel ----------
-      let pos = 0, vel = 0, target = 0, raf = 0, drag = null, shown = -1;
+      // a fresh load opens on the Daily; coming back from a game opens on that game (Craig, 30 Oct)
+      const back = params.fromIntro ? -1 : GM.findIndex((g) => g.id === D2T.state.stageAt);
+      let pos = Math.max(0, back), vel = 0, target = pos, raf = 0, drag = null, shown = -1;
       const wrapD = (d) => ((d % N) + N * 1.5) % N - N / 2;
       const idx = (p) => ((Math.round(p) % N) + N) % N;
       function render() {
@@ -253,6 +258,7 @@
       const newRun = (from, mode) => { G.newRun(mode); D2T.toBlack('spin', { from }); };
       function act(kind, g, from) {
         const st = D2T.state;
+        st.stageAt = g.id; D2T.save();
         if (g.id === 'ten') { window.open(TENABALL, '_blank', 'noopener'); return; }
         if (g.id === 'daily') {
           if (kind === 'new') { ask('Start again?', 'Your go at today\'s Daily will be lost. Your best go today still counts.', 'Start again', () => { G.restartDaily(); D2T.toBlack(G.stepFor() || 'table', { from }); }); return; }
@@ -294,8 +300,66 @@
         return out;
       }
       const shareCard = (g) => (g.share ? cards[g.id] || (cards[g.id] = D2T.recordShare(sharePage(g))) : null);
-      $('.stg-shr').onclick = () => { const g = GM[shown], sh = shareCard(g); if (!sh) return; window.D2TSound && window.D2TSound.play('share'); const fire = () => (sh.done ? D2T.share.send(sh) : setTimeout(fire, 80)); fire(); };
-      $('.stg-q').onclick = () => { const g = GM[shown]; D2T.sheet({ title: g.name, body: `<p class="fr-lead">${esc(g.rules)}</p>` }); };
+      // Share opens a choice (Craig, 30 Oct): your game in progress (or today's Daily result) or your record for this game
+      const send = (sh) => { if (!sh) return; window.D2TSound && window.D2TSound.play('share'); const fire = () => (sh.done ? D2T.share.send(sh) : setTimeout(fire, 80)); fire(); };
+      $('.stg-shr').onclick = () => {
+        const g = GM[shown]; if (!g.share) return;
+        const today = g.id === 'daily' && G.dailyResult();
+        const prog = g.run ? progressShare(g) : today ? D2T.dailyShare(G.today()) : null, rec = shareCard(g);
+        const opt = (k, title, line) => `<button class="stg-opt" data-k="${k}"><b>${title}</b><span>${line}</span><i>${ARROW}</i></button>`;
+        const pl = g.run ? progressLine(g) : today ? `Your best go today: ${D2T.ordinal(today.finish)}` : '';
+        const s = D2T.sheet({ title: `Share ${esc(g.name)}`, cls: 'stg-share', body: `<div class="stg-opts" style="--k:${g.k}">${prog ? opt('prog', g.run ? 'Your game so far' : 'Today\'s result', esc(pl)) : ''}${opt('rec', 'Your record', esc(g.st.map(([n, l]) => `${l} ${n}`).join(' · ')))}</div>` });
+        const b1 = s.body.querySelector('[data-k="prog"]'); if (b1) b1.onclick = () => { s.close(); send(prog); };
+        s.body.querySelector('[data-k="rec"]').onclick = () => { s.close(); send(rec); };
+      };
+      $('.stg-q').onclick = () => { const g = GM[shown]; if (D2T.gameHelp) D2T.gameHelp(g); else D2T.sheet({ title: g.name, body: `<p class="fr-lead">${esc(g.rules)}</p>` }); };
+      // where a game in progress stands, for its share
+      function runNow(g) {
+        if (g.id === 'goal') { const S4 = g.run, t = (S4.filled || []).reduce((a, x) => a + (x.goals || 0), 0); return { n: S4.filled.length, total: t, target: +S4.formation, shape: G.g433.shapeText(S4.formation) }; }
+        if (g.id === 'ub') { const A = D2T.ubArt, st = A && A.STATS.find((x) => x.id === g.run.stat); return { streak: g.run.streak || 0, stat: st ? st.big : 'Higher or lower' }; }
+        return viewRun(g.run, () => {
+          const d = D2T.run(), c = d.club, e = G.eng(), games = G.fixtures().length, played = (e.played || []).length;
+          const row = played ? G.standings(null).find((x) => x.name === G.clubName()) : null;
+          const real = g.id === 'clubx' ? null : G.historyTable().find((x) => x.name === G.clubName());   // where they really finished
+          return { c, name: g.id === 'clubx' ? G.xName() : (c.full || c.name), season: d.season, played, games, pos: row ? row.pos : null, pts: row ? row.pts : 0, hist: real ? real.pos : null };
+        });
+      }
+      function progressLine(g) {
+        const r = runNow(g), o = D2T.ordinal;
+        if (g.id === 'goal') return `${r.n} of 11 picked · ${r.total} of ${r.target} goals`;
+        if (g.id === 'ub') return `${r.streak} in a row so far · ${r.stat}`;
+        return r.played ? `${r.name} ${r.season} · ${o(r.pos)} after ${r.played} of ${r.games} games` : `${r.name} ${r.season} · pre-season`;
+      }
+      // a share card for a game in progress, in the share cards' frame
+      function progressShare(g) {
+        const r = runNow(g), o = D2T.ordinal, L = D2T.share.LINK, end = ['', '_Your turn. Beat that!_', L];
+        if (g.id === 'goal') {
+          return D2T.share.build({ text: [`*DROP2TOP Goal Rush · ${r.shape}*`, '', `${r.n} of 11 picked: ${r.total} career goals so far.`, `Target ${r.target}.`].concat(end).join('\n'),
+            c: g.k, wash: g.k, band: g.k, ink: '#0A0A0A', tag: `Goal Rush · ${r.shape}`, dare: 'Pick 11. Hit the number', imgs: { mark: window.D2T_GOALRUSH_LOGO },
+            draw: (gx, im, k) => { k.pic(im.mark, k.W / 2, 262, 220); k.mid(`${r.total}/${r.target}`, k.W / 2, 640, 960, 900, 150, true, '#FFFFFF'); k.fit(`${r.n} OF 11 PICKED · GAME IN PROGRESS`, k.W / 2, 760, 960, 800, 30, false, g.k, 'center', '3px'); } });
+        }
+        if (g.id === 'ub') {
+          return D2T.share.build({ text: ['*DROP2TOP Unbeaten Run*', '', `Topic: ${r.stat.toLowerCase()}`, `Unbeaten in ${r.streak} call${r.streak === 1 ? '' : 's'} so far, and still going.`].concat(end).join('\n'),
+            c: g.k, wash: g.k, band: g.k, ink: '#001A1F', tag: 'Unbeaten Run', dare: `Can you beat ${r.streak}?`, imgs: { mark: D2T.share.svgSrc(D2T.ubMark.replace('<svg ', `<svg xmlns="http://www.w3.org/2000/svg" color="${g.k}" `)) },
+            draw: (gx, im, k) => { k.pic(im.mark, k.W / 2, 262, 200); gx.save(); gx.shadowColor = 'rgba(34,211,238,.45)'; gx.shadowBlur = 60; k.mid(String(r.streak), k.W / 2, 640, 600, 900, 190, true, g.k); gx.restore(); k.fit('IN A ROW AND STILL GOING', k.W / 2, 770, 960, 800, 30, false, '#FFFFFF', 'center', '3px'); k.fit(r.stat.toUpperCase(), k.W / 2, 830, 960, 900, 54, true, '#FFFFFF'); } });
+        }
+        const c = r.c, acc = g.id === 'clubx' ? '#12F06C' : (c.accent || g.k), txt = g.id === 'clubx' ? '#12F06C' : (c.text || '#FFFFFF');
+        const label = g.id === 'daily' ? 'Daily Challenge' : g.name;
+        const where = r.played ? `${o(r.pos)} after ${r.played} of ${r.games} games, on ${r.pts} pts.` : 'Building the squad for the season.';
+        const lines = [`*DROP2TOP ${label}*`, '', `${r.name} ${r.season}`, where];
+        if (r.hist && g.id !== 'clubx') lines.push(`They really went down in ${o(r.hist)}.`);
+        return D2T.share.build({ text: lines.concat(end).join('\n'), c: g.id === 'daily' ? '#FFFFFF' : g.id === 'clubx' ? '#12F06C' : txt, wash: acc, band: acc, ink: g.id === 'clubx' ? '#0A0A0A' : (c.ink || '#0A0A0A'),
+          tag: `${label} · in progress`, dare: 'Can you do better?', imgs: { crest: c.crestCard || c.crest },
+          draw: (gx, im, k) => {
+            k.clubBlock(im.crest, r.name, r.season);
+            k.mid(r.played ? o(r.pos) : 'PRE-SEASON', k.W / 2, 712, 960, 900, r.played ? 150 : 90, true, txt);
+            k.fit(r.played ? `MATCHDAY ${r.played} OF ${r.games} · ${r.pts} PTS` : 'THE SEASON STARTS SOON', k.W / 2, 800, 960, 800, 28, false, '#FFFFFF', 'center', '3px');
+            if (r.hist && g.id !== 'clubx') k.line2('THEY WENT DOWN IN ', o(r.hist).toUpperCase(), txt, 870);
+            else if (g.id === 'clubx') k.line2('CHASING ', 'THE TITLE', txt, 870);
+          } });
+      }
+      // first-time tips on the stage (Craig, 30 Oct): swipe for the other games, then the rules, then Share
+      later(() => { if (!root.isConnected || document.querySelector('.sheet')) return; D2T.tips([['stage-swipe', $('.stg-dots'), 'Swipe for the other games', { side: 'right' }], ['stage-help', $('.stg-q'), 'How each game works', { place: 'below', side: 'right' }], ['stage-share', $('.stg-shr'), 'Share your game or your record', { place: 'below', side: 'right' }]]); }, params.fromIntro ? 2600 : 900);
       $('.stg-acct').onclick = () => D2T.go('account');
       $('.stg-logo').onclick = () => D2T.go('intro');
 
@@ -394,9 +458,10 @@
         const tbl = el.querySelector('.stg-tbl'); if (!tbl) return;
         const rows = [...tbl.children], RH = 41, VIS = 3, TOP = rows.length; let r = TOP, tm = 0;
         const show = () => { const top = Math.max(0, r - VIS); tbl.style.transform = `translateY(${-top * RH + 4}px)`; rows[r - 1].classList.add('on'); };
-        const reset = () => { rows.forEach((x) => x.classList.remove('on')); r = TOP; tbl.style.transition = 'none'; tbl.style.transform = `translateY(${-(TOP - VIS) * RH + 4}px)`; void tbl.offsetHeight; tbl.style.transition = ''; };
-        const tick = () => { if (r < 1) { tm = later(() => { reset(); tm = later(tick, 900); }, 2600); return; } show(); r--; tm = later(tick, 1300); };
-        arts.ten = { start: () => {}, stop: () => clearTimeout(tm), reset: () => { clearTimeout(tm); reset(); if (reduced) { rows.forEach((x) => x.classList.add('on')); tbl.style.transform = 'translateY(4px)'; } else tm = later(tick, 700); } };
+        const reset = () => { rows.forEach((x) => x.classList.remove('on', 'win')); r = TOP; tbl.style.transition = 'none'; tbl.style.transform = `translateY(${-(TOP - VIS) * RH + 4}px)`; void tbl.offsetHeight; tbl.style.transition = ''; };
+        // a little quicker, and the top answer celebrated: it bounces and glows, holds, then the board starts again (Craig, 30 Oct)
+        const tick = () => { if (r < 1) { tm = later(() => { reset(); tm = later(tick, 600); }, 3600); return; } show(); if (r === 1) later(() => rows[0].classList.add('win'), 350); r--; tm = later(tick, 900); };
+        arts.ten = { start: () => {}, stop: () => clearTimeout(tm), reset: () => { clearTimeout(tm); reset(); if (reduced) { rows.forEach((x) => x.classList.add('on')); tbl.style.transform = 'translateY(4px)'; } else tm = later(tick, 500); } };
         reset();
       })();
 
@@ -410,8 +475,8 @@
         const dx = fi.left - (r.left - rr.left), dy = fi.top - (r.top - rr.top), s = fi.width / r.width;
         logo.style.transformOrigin = '0 0';
         logo.animate([{ transform: `translate(${dx}px,${dy}px) scale(${s})` }, { transform: 'none' }], { duration: 760, easing: 'cubic-bezier(.6,0,.2,1)' });
-        el.classList.add('stg-in'); later(() => el.classList.add('on'), 380);
-      } else if (fi && !reduced) { el.classList.add('stg-in'); later(() => el.classList.add('on'), 60); }
+        later(() => el.classList.add('on'), 380);
+      } else if (fi && !reduced) { later(() => el.classList.add('on'), 60); }
       if (D2T.state.dailyClosed) {                                  // say once that an unfinished Daily closed at midnight
         const dc = D2T.state.dailyClosed; delete D2T.state.dailyClosed; D2T.save();
         later(() => { if (root.isConnected) D2T.sheet({ title: 'That Daily has closed', body: `<p class="fr-lead">${esc(G.dailyName(dc))} closed at midnight before you finished it. Today's club is ready for everyone.</p>` }); }, 900);
