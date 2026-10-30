@@ -76,7 +76,8 @@ fs.mkdirSync(OUT, { recursive: true });
     if (!(await page.$(".actionbar, .sp-bar"))) errors.push(`no bottom bar on ${where}`);
   };
 
-  await page.goto(process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index.html"));
+  // the flows below run on home v1 (kept behind ?home=v1); the stage, home v2, has its own test (tests/stage.test.js)
+  await page.goto((process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index.html")) + "?home=v1");
   await page.evaluate(() => { localStorage.clear(); localStorage.setItem("d2t-v2", JSON.stringify({ settings: { muted: true } })); });
   await page.reload();
   await expectScreen("intro");
