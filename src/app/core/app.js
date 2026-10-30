@@ -110,7 +110,7 @@
     if (m === 'dare2dream') return ['Dare2Dream', '#3BA4FF'];
     if (m === 'clubx') return ['Club X', '#12F06C'];
     const d = D2T.run(), c = d && d.club;
-    return ['Classic', c ? (c.text || c.accent) : '#12F06C'];
+    return ['Classic', c ? (c.text || c.accent) : '#C9D0D9'];   // silver before a club is picked (Craig, 30 Oct)
   };
   D2T.modeWord = modeWord;
   D2T.topbar = (opts = {}) => {
@@ -195,10 +195,11 @@
   window.addEventListener('error', (ev) => { D2T.keepError(ev.error || { message: ev.message }, 'window'); });
   window.addEventListener('unhandledrejection', (ev) => { D2T.keepError(ev.reason || {}, 'promise'); });
 
-  D2T.sheet = ({ title = '', body = '', onClose } = {}) => {
+  // foot: html kept fixed under the body, which scrolls on its own (the rules sheets' Done; Craig, 30 Oct)
+  D2T.sheet = ({ title = '', body = '', onClose, foot = '', cls = '' } = {}) => {
     const host = document.getElementById('app');
     const scrim = D2T.h('<div class="sheet-scrim"></div>');
-    const sh = D2T.h(`<section class="sheet" role="dialog" aria-label="${D2T.esc(title)}"><div class="sheet-bar" aria-label="Close"><span></span></div>${title ? `<div class="sheet-title">${title}</div>` : ''}<div class="sheet-body"></div></section>`);
+    const sh = D2T.h(`<section class="sheet${cls ? ' ' + cls : ''}" role="dialog" aria-label="${D2T.esc(title)}"><div class="sheet-bar" aria-label="Close"><span></span></div>${title ? `<div class="sheet-title">${title}</div>` : ''}<div class="sheet-body"></div>${foot ? `<div class="sheet-foot">${foot}</div>` : ''}</section>`);
     const bodyEl = sh.querySelector('.sheet-body');
     if (typeof body === 'string') bodyEl.innerHTML = body; else bodyEl.appendChild(body);
     host.append(scrim, sh);
@@ -222,7 +223,9 @@
       hd.addEventListener('pointerup', () => { if (y0 == null) return; y0 = null; sh.style.transition = ''; if (dy > 80) close(); else sh.style.transform = ''; if (dy > 4) { bar.onclick = null; setTimeout(() => { bar.onclick = close; }, 60); } });
       hd.addEventListener('pointercancel', () => { y0 = null; sh.style.transition = ''; sh.style.transform = ''; });
     });
-    return { el: sh, body: bodyEl, close };
+    const footEl = sh.querySelector('.sheet-foot');
+    if (footEl) footEl.querySelectorAll('[data-done]').forEach((b) => { b.onclick = close; });
+    return { el: sh, body: bodyEl, foot: footEl, close };
   };
 
   // ---------- router ----------
