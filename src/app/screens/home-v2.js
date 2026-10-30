@@ -132,7 +132,7 @@
           <div class="stg-nm"><div class="stg-gn">${esc(g.name)}</div><div class="stg-hl">${g.id === 'goal' ? g.hl : esc(g.hl)}</div><p class="stg-sb">${esc(g.sb)}</p></div>
           ${g.board ? boardHTML() : `<div class="stg-st">${shieldsHTML(g.st, g.k)}</div>`}</section>`).join('')}</div>
         <button class="stg-sw l" aria-label="Previous game">${CHL}</button><button class="stg-sw r" aria-label="Next game">${CHR}</button>
-        <div class="stg-dots" aria-hidden="true">${GM.map((g) => `<i class="${g.run ? 'live' : ''}"></i>`).join('')}</div>
+        <div class="stg-dots" aria-hidden="true">${GM.map((g) => `<i></i>`).join('')}</div>
         <div class="stg-bar"></div>
         <div class="stg-defs" aria-hidden="true">${D2T.shirts ? D2T.shirts.defs() : ''}</div></div>`);
       // from the intro the stage starts hidden: the class goes on before the first style is computed (the layout reads
