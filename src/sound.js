@@ -46,10 +46,14 @@ function decode(k, raw) {
   try { const p = c.decodeAudioData(raw, got, () => {}); if (p && p.then) p.then(got, () => {}); } catch (e) { /* that clip stays silent */ }
 }
 // decodes every clip not started yet: the clips arrive at the end of the page, so this runs again when they land
+// One clip a task, after the tap that asked (Fable's review, 30 Oct: reading every clip at once held the first tap for
+// 140 ms on a slow phone); a context thrown away meanwhile stops its queue, its successor starts its own
 function decodeAll() {
   if (!ctx) return;
-  const src = root.D2T_SOUNDS || {};
-  Object.keys(src).forEach(k => { if (started[k]) return; started[k] = 1; decode(k, dataToBuf(src[k])); });
+  const src = root.D2T_SOUNDS || {}, c = ctx, keys = Object.keys(src).filter(k => !started[k]);
+  keys.forEach(k => { started[k] = 1; });
+  const next = () => { if (c !== ctx || !keys.length) return; const k = keys.shift(); decode(k, dataToBuf(src[k])); if (keys.length) setTimeout(next, 0); };
+  if (keys.length) setTimeout(next, 0);
 }
 function unlock() {
   if (!init()) return;

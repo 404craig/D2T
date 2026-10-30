@@ -141,10 +141,11 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .d2c-hi { position: absolute; inset: 0; background: radial-gradient(120% 55% at 15% 0%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 60%); }
 .d2c-holo { position: absolute; inset: 0; background: var(--holo, none); mix-blend-mode: screen; }
 .d2t-shine { position: absolute; top: -30%; left: -70%; width: 45%; height: 160%; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%); transform: rotate(18deg); animation: d2tShine 4.5s ease-in-out infinite; pointer-events: none; }
-@keyframes d2tShine { 0% { left: -70%; } 30% { left: 130%; } 100% { left: 130%; } }
+/* moved by transform, not left (Fable's review, 30 Oct: left re-laid and re-rastered every card each frame); 200% of the card is 444% of the shine */
+@keyframes d2tShine { 0% { transform: translateX(0) rotate(18deg); } 30% { transform: translateX(444%) rotate(18deg); } 100% { transform: translateX(444%) rotate(18deg); } }
 /* a slower beat: the same sweep (about 1.4s), then a long rest (home's club fan and continue cards) */
 .d2t-shine.slow { animation-name: d2tShineSlow; animation-duration: 10s; }
-@keyframes d2tShineSlow { 0% { left: -70%; } 14% { left: 130%; } 100% { left: 130%; } }
+@keyframes d2tShineSlow { 0% { transform: translateX(0) rotate(18deg); } 14% { transform: translateX(444%) rotate(18deg); } 100% { transform: translateX(444%) rotate(18deg); } }
 .d2c-body { position: relative; display: flex; flex-direction: column; height: 100%; box-sizing: border-box; padding: 1em 0.8em 2.4em; }
 .d2c-top { display: flex; justify-content: space-between; align-items: flex-start; }
 .d2c-left { display: flex; flex-direction: column; align-items: center; width: 3.4em; }
@@ -3604,10 +3605,14 @@ function decode(k, raw) {
   try { const p = c.decodeAudioData(raw, got, () => {}); if (p && p.then) p.then(got, () => {}); } catch (e) { /* that clip stays silent */ }
 }
 // decodes every clip not started yet: the clips arrive at the end of the page, so this runs again when they land
+// One clip a task, after the tap that asked (Fable's review, 30 Oct: reading every clip at once held the first tap for
+// 140 ms on a slow phone); a context thrown away meanwhile stops its queue, its successor starts its own
 function decodeAll() {
   if (!ctx) return;
-  const src = root.D2T_SOUNDS || {};
-  Object.keys(src).forEach(k => { if (started[k]) return; started[k] = 1; decode(k, dataToBuf(src[k])); });
+  const src = root.D2T_SOUNDS || {}, c = ctx, keys = Object.keys(src).filter(k => !started[k]);
+  keys.forEach(k => { started[k] = 1; });
+  const next = () => { if (c !== ctx || !keys.length) return; const k = keys.shift(); decode(k, dataToBuf(src[k])); if (keys.length) setTimeout(next, 0); };
+  if (keys.length) setTimeout(next, 0);
 }
 function unlock() {
   if (!init()) return;
@@ -6248,12 +6253,15 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
       const wheel = $('.stg-wheel'), bar = $('.stg-bar');
 
       // the art is drawn for a 300px box and scaled to the room the phone has
+      // (every read first, then the writes, so mounting lays the page out once; Fable's review, 30 Oct)
+      let W = el.clientWidth * 0.85;
       const fit = () => {
-        const a = SL[0].querySelector('.stg-art'), h = a.getBoundingClientRect().height || 300, s = Math.min(1, h / 300);
+        const a = SL[0].querySelector('.stg-art'), r = a.getBoundingClientRect(), er = el.getBoundingClientRect(), s = Math.min(1, (r.height || 300) / 300);
+        W = er.width * 0.85;
         el.style.setProperty('--as', s.toFixed(3));
-        const r = a.getBoundingClientRect(), er = el.getBoundingClientRect();
         el.style.setProperty('--swy', (r.top - er.top + r.height / 2 - 22).toFixed(0) + 'px');
       };
+      const logo = $('.stg-logo'), logoR = logo.getBoundingClientRect(), rootR = root.getBoundingClientRect();   // for the hand-over from the intro
       fit(); const onResize = () => fit(); window.addEventListener('resize', onResize); cleanups.push(() => window.removeEventListener('resize', onResize));
 
       // ---------- the wheel ----------
@@ -6271,10 +6279,10 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
         const step = (now) => {
           const dt = Math.min(0.032, (now - last) / 1000); last = now;
           vel += (-210 * (pos - target) - 19 * vel) * dt; pos += vel * dt; render();
-          if (Math.abs(pos - target) < 0.0008 && Math.abs(vel) < 0.002) { pos = target; vel = 0; render(); return; }
+          if (Math.abs(pos - target) < 0.0008 && Math.abs(vel) < 0.002) { pos = target; vel = 0; render(); rest(); return; }
           raf = requestAnimationFrame(step);
         };
-        if (reduced) { pos = target; vel = 0; render(); return; }
+        if (reduced) { pos = target; vel = 0; render(); rest(); return; }
         raf = requestAnimationFrame(step);
       }
       cleanups.push(() => cancelAnimationFrame(raf));
@@ -6287,7 +6295,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
       });
       wheel.addEventListener('pointermove', (e) => {
         if (!drag) return;
-        const now = performance.now(), W = el.clientWidth * 0.85;
+        const now = performance.now();
         if (!drag.moved && Math.abs(e.clientX - drag.x) < 4) return;
         drag.moved = true; wheel.classList.add('drag');
         drag.v = -(e.clientX - drag.lx) / W / Math.max(0.008, (now - drag.t) / 1000); drag.lx = e.clientX; drag.t = now;
@@ -6313,10 +6321,22 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
         DT.forEach((d, i) => d.classList.toggle('on', i === n));
         $('.stg-shr').disabled = !g.share; $('.stg-shr').setAttribute('aria-label', g.share ? `Share your ${g.name} record` : 'Share');
         drawBar(g);
-        if (was >= 0 && arts[GM[was].id]) arts[GM[was].id].stop();
-        if (arts[g.id] && !reduced) arts[g.id].start();
-        if (g.board && arts.ten) arts.ten.reset();
-        later(() => shareCard(g), 400);
+      }
+      // once the wheel comes to rest: the game on show starts moving (the one before stops) and its share card is built
+      // when the phone is idle (both ran on every slide passed and while the spring settled: Fable's review, 30 Oct)
+      let moving = -1, idleId = 0;
+      const idle = window.requestIdleCallback ? (f) => window.requestIdleCallback(f, { timeout: 1500 }) : (f) => setTimeout(f, 300);
+      const noIdle = window.cancelIdleCallback || clearTimeout;
+      cleanups.push(() => noIdle(idleId));
+      function rest() {
+        const n = shown, g = GM[n];
+        if (moving !== n) {
+          if (moving >= 0 && arts[GM[moving].id]) arts[GM[moving].id].stop();
+          moving = n;
+          if (arts[g.id] && !reduced) arts[g.id].start();
+          if (g.board && arts.ten) arts.ten.reset();
+        }
+        noIdle(idleId); idleId = idle(() => { if (shown === n && root.isConnected) shareCard(g); });
       }
 
       // ---------- the button at the foot ----------
@@ -6452,23 +6472,33 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
           later(() => { dr.style.transition = 'transform 1.1s cubic-bezier(.2,.75,.25,1.12)'; dr.style.transform = `translateY(-${(seq.length * 1.02).toFixed(2)}em)`; }, delay);
         };
         const cyc = () => { const f = FS[fi++ % FS.length]; DR.forEach((dr, i) => roll(dr, f[i], i * 160)); back = later(() => DR.forEach((dr, i) => roll(dr, '?', i * 160)), 3600); };
-        arts.goal = { start: () => { clearInterval(iv); later(cyc, 900); iv = every(cyc, 6400); }, stop: () => { clearInterval(iv); clearTimeout(back); } };
+        let first = 0;
+        arts.goal = { start: () => { clearInterval(iv); clearTimeout(first); first = later(cyc, 900); iv = every(cyc, 6400); }, stop: () => { clearInterval(iv); clearTimeout(first); clearTimeout(back); } };
       })();
 
       // Unbeaten: Man Utd v Man City's club cards; every 8s both roll up like reels (the right 180ms behind) through other
       // cards and shirts to Rooney 208 and Salah ?, then back again
       (() => {
         const sA = el.querySelector('.stg-strip[data-side="0"]'), sB = el.querySelector('.stg-strip[data-side="1"]'); if (!sA) return;
-        let side = 0, iv = 0;
+        // both ways for both reels are built once, the first time the slide comes on, and only swapped in after that
+        // (rebuilding six items a reel every 8s cost a 50ms frame: Fable's review, 30 Oct)
+        let side = 0, iv = 0, built = null;
         const H = 196;
-        const roll = (strip, from, to, shownTo, delay) => {
-          const mid = UB.fill.slice().sort(() => Math.random() - 0.5).slice(0, 4);
-          strip.innerHTML = ubItem(from[0], from[1]) + mid.map((m) => ubItem(m, false)).join('') + ubItem(to, shownTo);
-          strip.style.transition = 'none'; strip.style.transform = 'translateY(0)'; void strip.offsetHeight;
-          later(() => { strip.style.transition = 'transform 1.3s cubic-bezier(.25,.7,.25,1.1)'; strip.style.transform = `translateY(-${(mid.length + 1) * H}px)`; }, delay);
+        const build = () => {
+          const mid = UB.fill.slice().sort(() => Math.random() - 0.5);
+          built = [0, 1].map((sd) => { const L = sd ? UB.right : UB.left, m = sd ? mid.slice(2, 6) : mid.slice(0, 4);
+            return [0, 1].map((dir) => { const box = document.createElement('div'); box.innerHTML = ubItem(L[dir], !sd) + m.map((x) => ubItem(x, false)).join('') + ubItem(L[1 - dir], !sd); return box; }); });
         };
-        const flip = () => { const nx = 1 - side; roll(sA, [UB.left[side], true], UB.left[nx], true, 0); roll(sB, [UB.right[side], false], UB.right[nx], false, 180); side = nx; };
-        arts.ub = { start: () => { clearInterval(iv); iv = every(flip, 8000); }, stop: () => clearInterval(iv) };
+        const flip = () => {
+          if (!built) build();
+          [sA, sB].forEach((strip, sd) => {
+            strip.getAnimations().forEach((a) => a.cancel());
+            strip.replaceChildren(built[sd][side]);
+            strip.animate([{ transform: 'translateY(0)' }, { transform: `translateY(-${5 * H}px)` }], { duration: 1300, delay: sd ? 180 : 0, easing: 'cubic-bezier(.25,.7,.25,1.1)', fill: 'forwards' });
+          });
+          side = 1 - side;
+        };
+        arts.ub = { start: () => { clearInterval(iv); if (!built) idle(() => { if (!built && root.isConnected) build(); }); iv = every(flip, 8000); }, stop: () => clearInterval(iv) };
       })();
 
       // Tenaball: the board fills from 4th up to 1st in the Premier League's green to teal, climbing as it fills, holds,
@@ -6484,12 +6514,12 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
       })();
 
       // ---------- opening ----------
-      render();
-      if (!reduced) { const g = GM[shown]; if (arts[g.id]) arts[g.id].start(); }
-      // arriving from the intro: take the logo from where the intro left it, then bring the stage in
-      const logo = $('.stg-logo'), fi = params.fromIntro;
+      render(); rest();
+      // arriving from the intro: take the logo from where the intro left it (measured before the wheel was drawn), then
+      // bring the stage in
+      const fi = params.fromIntro;
       if (fi && typeof fi === 'object' && !reduced) {
-        const r = logo.getBoundingClientRect(), rr = root.getBoundingClientRect();
+        const r = logoR, rr = rootR;
         const dx = fi.left - (r.left - rr.left), dy = fi.top - (r.top - rr.top), s = fi.width / r.width;
         logo.style.transformOrigin = '0 0';
         logo.animate([{ transform: `translate(${dx}px,${dy}px) scale(${s})` }, { transform: 'none' }], { duration: 760, easing: 'cubic-bezier(.6,0,.2,1)' });
@@ -11131,6 +11161,8 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
   document.addEventListener('touchmove', (e) => { if (e.touches && e.touches.length > 1) e.preventDefault(); }, { passive: false });
   if (!D2T.started) D2T.start();          // normally the shell started the intro already, before the data arrived
   D2T.ready();
+  // the stage (home v2) reads Unbeaten's decks as it mounts: build them while the intro still plays (Fable's review, 30 Oct)
+  (window.requestIdleCallback || ((f) => setTimeout(f, 200)))(() => { try { if (D2T.ubArt) D2T.ubArt.decks(); } catch (e) { /* home builds them */ } });
   // the sound clips sit at the end of the page as plain JSON: read them once the intro has handed over (or on the first tap)
   let clipsRead = false;
   D2T.loadClips = () => {
