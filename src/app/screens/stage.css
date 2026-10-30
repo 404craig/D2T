@@ -41,13 +41,9 @@
   padding: 0 34px 0 16px; white-space: nowrap; overflow: hidden; transition: transform .15s; }
 .stg-bar .stg-parw { right: 14px; }
 .stg-newg { background: var(--k); color: var(--ink, #0A0A0A); box-shadow: 0 0 18px -5px var(--k), 0 -3px 14px -8px var(--k); }
-/* Continue in the run's own colours: the old continue card's club sweep, its top highlight and fine stripes fading in to the right */
-.stg-contg { color: var(--ct, #fff); isolation: isolate; padding: 0 36px 0 42px; background: linear-gradient(100deg, var(--c0) 0%, var(--c1) 30%, var(--c1) 55%, var(--c2) 100%);
-  box-shadow: 0 0 18px -5px var(--c1), 0 -3px 14px -8px var(--c1), inset 0 0 0 2px rgba(255,255,255,.18); text-shadow: 0 1px 3px rgba(0,0,0,.35); }
-.stg-contg::before { content: ""; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 2px, rgba(255,255,255,0) 2px 7px);
-  -webkit-mask: linear-gradient(90deg, transparent 35%, #000 100%); mask: linear-gradient(90deg, transparent 35%, #000 100%); }
-.stg-contg::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(255,255,255,.32) 0%, rgba(255,255,255,0) 46%); }
-.stg-contg img { position: absolute; left: 12px; top: 50%; width: 26px; height: 26px; margin-top: -13px; object-fit: contain; filter: drop-shadow(0 2px 3px rgba(0,0,0,.4)); }
+/* Continue in the run's colour, solid like New game (Craig, 30 Oct: no stripes or sweep), the badge big on the left */
+.stg-contg { color: var(--ct, #fff); padding: 0 36px 0 52px; background: var(--c1); box-shadow: 0 0 18px -5px var(--c1), 0 -3px 14px -8px var(--c1); }
+.stg-contg img { position: absolute; left: 10px; top: 50%; width: 38px; height: 38px; margin-top: -19px; object-fit: contain; filter: drop-shadow(0 1px 2px rgba(0,0,0,.35)); }
 
 /* in from the intro */
 .stg.stg-in .stg-wheel, .stg.stg-in .stg-bar, .stg.stg-in .stg-dots, .stg.stg-in .stg-sw, .stg.stg-in .stg-rb { opacity: 0; transition: opacity .5s ease; }
@@ -153,10 +149,4 @@
 .hp-gr span { color: #fff; }
 .hp-done { min-height: 54px; }
 /* Share's choice: the game so far, or the record */
-.stg-opts { display: grid; gap: 10px; padding-bottom: 6px; }
-.stg-opt { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; width: 100%; min-height: 64px; padding: 12px 52px 12px 16px; border-radius: 16px; border: 1px solid #2A2A30; background: #18181C; color: #fff; text-align: left; cursor: pointer; }
-.stg-opt b { font: 900 italic 19px/1.1 var(--font); text-transform: uppercase; color: var(--k); }
-.stg-opt span { font: 600 13.5px/1.35 var(--font); color: #BDBDC6; }
-.stg-opt i { position: absolute; right: 16px; top: 50%; width: 22px; height: 22px; margin-top: -11px; color: #fff; }
-.stg-opt i svg { width: 22px; height: 22px; }
-.stg-opt:active { transform: scale(.98); }
+.stg-opts { padding-bottom: 6px; }
