@@ -5,6 +5,9 @@
   D2T.data = window.D2T_DATA;
   D2T.screens = {};
   D2T.screen = (name, def) => { D2T.screens[name] = def; };
+  // Which home (Craig, 29 Oct): 'v2' the stage (screens/home-v2.js), 'v1' the old scrolling home (screens/home-v1.js);
+  // change the default here to switch back, or open the game with ?home=v1
+  D2T.HOME = /[?&]home=v1\b/.test(location.search) ? 'v1' : 'v2';
 
   // ---------- saved state (phone only; safe if storage is blocked) ----------
   const KEY = 'd2t-v2';

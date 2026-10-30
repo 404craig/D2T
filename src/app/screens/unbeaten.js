@@ -849,4 +849,6 @@
   // the home screen card (screens/home.js), in the same shape as the other games' cards
   D2T.ubRecord = () => { const R = D2T.state.ub || { best: {}, runs: 0 }; const top = Math.max(0, ...Object.values(R.best || {})); return { runs: R.runs || 0, top }; };
   D2T.ubMark = MARK;
+  // the home stage's art (screens/home-v2.js): the stage's own cards and shirts, and the decks they come from
+  D2T.ubArt = { item: (statId, r, shown, w) => item(STATS.find((x) => x.id === statId), r, shown, w), decks: () => decks(), STATS };
 })();

@@ -1,3 +1,4 @@
+// Home v1 (kept, Craig 29 Oct: the stage, home-v2.js, replaced it as the default; D2T.HOME in core/app.js switches back).
 // Home (black, the new green as its accent). Also defines D2T.toBlack(next): the move into the game screens,
 // where green light glints through the white logo as it shrinks into the small top-left logo.
 (function () {
@@ -247,7 +248,10 @@
   let fanTimer = 0;
   let idleTimer = 0, idleFirst = 0;
 
-  D2T.screen('home', {
+  // shared with home v2: the long logo in two pieces, the record pages and their share cards
+  D2T.homeLogo = () => homeLogo(); D2T.recordPages = () => recordPages(); D2T.recordShare = (p) => recordShare(p); D2T.metal = (c) => metal(c);
+
+  D2T.screen(D2T.HOME === 'v1' ? 'home' : 'home-v1', {
     title: 'Home', theme: 'black',
     mount(root, params) {
       D2T.game.closeOldDaily();                                  // yesterday's unfinished Daily closed at midnight

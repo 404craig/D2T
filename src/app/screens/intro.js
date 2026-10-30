@@ -107,7 +107,9 @@
       const at = (el, prop, v, delay) => anim(el, [{ [prop]: v }, { [prop]: v }], { duration: 1, delay });   // a step at a set time
       const later = (fn, ms) => timers.push(setTimeout(() => { if (!done) fn(); }, ms));
       // where the home logo will sit, measured from a hidden copy of the home header (its CSS is in the head)
-      const probe = D2T.h(`<div class="fr-home" aria-hidden="true" style="position:absolute;left:0;right:0;top:0;visibility:hidden;pointer-events:none"><div class="fr-home-top"><span class="fr-home-logo" style="display:block">${D2T.logo('long')}</span></div></div>`);
+      // (home v2, the stage, has it top left: Craig, 29 Oct)
+      const probe = D2T.HOME === 'v1' ? D2T.h(`<div class="fr-home" aria-hidden="true" style="position:absolute;left:0;right:0;top:0;visibility:hidden;pointer-events:none"><div class="fr-home-top"><span class="fr-home-logo" style="display:block">${D2T.logo('long')}</span></div></div>`)
+        : D2T.h(`<div aria-hidden="true" style="position:absolute;inset:0;visibility:hidden;pointer-events:none"><div class="stg-top"><span class="fr-home-logo stg-logo" style="display:block">${D2T.logo('long')}</span><span class="stg-rb"></span></div></div>`);
       probe.querySelector('.logo-mask').style.removeProperty('--src');   // only its size is wanted, and the picture may not be in yet
       wrap.appendChild(probe);
       // in the stage's own px (the hand-over piece lives in the stage)

@@ -24,6 +24,12 @@
 .fr-home-top { display: flex; justify-content: center; padding: calc(env(safe-area-inset-top, 0px) + 44px) 0 36px; }
 .fr-home-logo { width: 60%; border: 0; background: none; padding: 0; color: #fff; -webkit-touch-callout: none; user-select: none; }
 .fr-home-logo .logo-mask { width: 100%; }
+/* home v2, the stage: its top bar (here, in the head, so the intro can land its logo on it; the rest is stage.css) */
+.stg-top { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 12px); left: 18px; right: 18px; z-index: 30; display: flex; align-items: center; gap: 10px; }
+.stg-top .stg-logo { flex: none; width: 122px; margin-right: auto; }
+.stg-rb { flex: none; width: 44px; height: 44px; border-radius: 50%; padding: 0; border: 1.5px solid rgba(255,255,255,.28); background: rgba(255,255,255,.06); color: #fff; display: grid; place-items: center; font: 900 italic 19px/1 var(--font); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.stg-rb svg { width: 20px; height: 20px; }
+.stg-rb:disabled { opacity: .3; cursor: default; }
 .fr-card-btn { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; border: 1px solid var(--line); border-radius: 22px; background: var(--ink); color: #fff; text-align: left; padding: 16px 18px; overflow: hidden; transition: transform .16s var(--ease-out); }
 .fr-card-btn:active { transform: scale(0.98); }
 .fr-card-btn + .fr-card-btn { margin-top: 12px; }
