@@ -240,7 +240,7 @@
           const c = contLook(g);
           bar.className = 'stg-bar split';
           bar.innerHTML = `<button class="stg-newg" data-act="new" data-game="${g.id}">New game<span class="stg-parw">${ARROW}</span></button>
-            <button class="stg-contg" data-act="continue" data-game="${g.id}" aria-label="Continue ${esc(c.label)}" style="--c0:${D2T.mix(c.a, '#FFFFFF', 0.4)};--c1:${c.a};--c2:${D2T.mix(c.a, '#000000', 0.45)};--ct:${dark(c.a) ? '#FFFFFF' : '#0A0A0A'}">${c.crest ? `<img src="${c.crest}" alt="">` : ''}Continue<span class="stg-parw">${ARROW}</span></button>`;
+            <button class="stg-contg" data-act="continue" data-game="${g.id}" aria-label="Continue ${esc(c.label)}" style="--c1:${c.a};--ct:${dark(c.a) ? '#FFFFFF' : '#0A0A0A'}">${c.crest ? `<img src="${c.crest}" alt="">` : ''}Continue<span class="stg-parw">${ARROW}</span></button>`;
         }
         bar.querySelectorAll('button').forEach((b) => { b.onclick = (e) => act(b.dataset.act, g, e.currentTarget); });
       }
@@ -306,9 +306,9 @@
         const g = GM[shown]; if (!g.share) return;
         const today = g.id === 'daily' && G.dailyResult();
         const prog = g.run ? progressShare(g) : today ? D2T.dailyShare(G.today()) : null, rec = shareCard(g);
-        const opt = (k, title, line) => `<button class="stg-opt" data-k="${k}"><b>${title}</b><span>${line}</span><i>${ARROW}</i></button>`;
-        const pl = g.run ? progressLine(g) : today ? `Your best go today: ${D2T.ordinal(today.finish)}` : '';
-        const s = D2T.sheet({ title: `Share ${esc(g.name)}`, cls: 'stg-share', body: `<div class="stg-opts" style="--k:${g.k}">${prog ? opt('prog', g.run ? 'Your game so far' : 'Today\'s result', esc(pl)) : ''}${opt('rec', 'Your record', esc(g.st.map(([n, l]) => `${l} ${n}`).join(' · ')))}</div>` });
+        // the end sheet's own pill buttons (Craig, 30 Oct): the first filled in the game's colour, the record as the outlined ghost
+        const btn = (k, label, main) => `<button class="btn ${main ? 'end-primary' : 'btn-ghost'} fr-btn-wide" type="button" data-k="${k}"${main ? ` style="background:${g.k};color:${g.ink || '#0A0A0A'}"` : ' style="border-color:#fff"'}>${label}</button>`;
+        const s = D2T.sheet({ title: `Share ${esc(g.name)}`, cls: 'stg-share', body: `<div class="fr-stack end-stack stg-opts">${prog ? btn('prog', g.run ? 'My game so far' : 'Today\'s result', true) : ''}${btn('rec', 'My record', !prog)}</div>` });
         const b1 = s.body.querySelector('[data-k="prog"]'); if (b1) b1.onclick = () => { s.close(); send(prog); };
         s.body.querySelector('[data-k="rec"]').onclick = () => { s.close(); send(rec); };
       };
@@ -323,12 +323,6 @@
           const real = g.id === 'clubx' ? null : G.historyTable().find((x) => x.name === G.clubName());   // where they really finished
           return { c, name: g.id === 'clubx' ? G.xName() : (c.full || c.name), season: d.season, played, games, pos: row ? row.pos : null, pts: row ? row.pts : 0, hist: real ? real.pos : null };
         });
-      }
-      function progressLine(g) {
-        const r = runNow(g), o = D2T.ordinal;
-        if (g.id === 'goal') return `${r.n} of 11 picked · ${r.total} of ${r.target} goals`;
-        if (g.id === 'ub') return `${r.streak} in a row so far · ${r.stat}`;
-        return r.played ? `${r.name} ${r.season} · ${o(r.pos)} after ${r.played} of ${r.games} games` : `${r.name} ${r.season} · pre-season`;
       }
       // a share card for a game in progress, in the share cards' frame
       function progressShare(g) {
