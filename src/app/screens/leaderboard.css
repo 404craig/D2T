@@ -6,7 +6,7 @@
   background: linear-gradient(to bottom, #000 0, rgba(0,0,0,0) 150px), radial-gradient(ellipse 85% 34% at 50% 20%, color-mix(in srgb, var(--k) 16%, #000) 0%, #070708 70%, #000 100%); }
 .lb-narrow { --cw: 54px; }
 .lb > .topbar { flex: none; }
-.lb-tr { display: flex; gap: 8px; }
+.lb-tr { display: flex; gap: 10px; }
 .lb-tr .lb-share svg { width: 20px; height: 20px; }
 .lb-tr .lb-share[disabled] { opacity: .3; pointer-events: none; }
 .lb-head { flex: none; display: flex; align-items: baseline; gap: 10px; padding: 2px 16px 0; }
