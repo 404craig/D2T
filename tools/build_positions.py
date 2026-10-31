@@ -25,7 +25,7 @@ import unicodedata
 from collections import Counter, defaultdict
 
 sys.path.insert(0, os.path.dirname(__file__))
-from positions_rule import positions, labelled  # noqa: E402
+from positions_rule import positions, labelled, SHARE, CAREER  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 TMDIR = os.path.join(ROOT, "docs", "cards", "feed", "tm")
@@ -33,9 +33,77 @@ BROAD = {"GK": "GK", "CB": "DEF", "RB": "DEF", "LB": "DEF", "RWB": "DEF", "LWB":
          "CAM": "MID", "RM": "MID", "LM": "MID", "RW": "FWD", "LW": "FWD", "ST": "FWD"}
 
 
+CAREER_KNOWN = 20      # recorded games across a career needed to use them directly
+MAX_POSITIONS = 5      # main and up to four others
+
+
 def norm(s):
     s = unicodedata.normalize("NFKD", s.replace("'", "").replace("’", "")).encode("ascii", "ignore").decode().lower()
     return re.sub(r"[^a-z]+", " ", s).strip()
+
+
+def career_positions(out, tids, tmplayer, stats):
+    """Craig, 29 Oct: a player's positions are his career's, the same in every season he plays; only the main
+    position stays the season's own. Career: every position Transfermarkt recorded for him in 10%+ of his
+    recorded Premier League games, or in 15+ of them, most played first. Under 20 recorded games across his
+    career, the positions his seasons were given are pooled instead. Keepers keep GK alone."""
+    seasons_of = defaultdict(list)
+    for season, sp in out.items():
+        for plid in sp:
+            seasons_of[plid].append(season)
+    for plid, ss in seasons_of.items():
+        pool = Counter()
+        for t in {tids[(s, plid)] for s in ss}:
+            for c in tmplayer(t)["seasons"].values():
+                pool.update(labelled(c))
+        total = sum(pool.values())
+        if total >= CAREER_KNOWN:
+            career = [lab for lab, v in pool.most_common() if v / total >= SHARE or v >= CAREER]
+        else:
+            votes = Counter()
+            for s in ss:
+                for k, lab in enumerate(out[s][plid]):
+                    votes[lab] += 2 if k == 0 else 1
+            career = [lab for lab, _ in votes.most_common()]
+            stats["career_thin"] += 1
+        for s in ss:
+            main = out[s][plid][0]
+            if main == "GK":
+                out[s][plid] = ["GK"]
+                continue
+            rest = [lab for lab in career if lab not in (main, "GK")] + [lab for lab in out[s][plid][1:] if lab not in career]
+            out[s][plid] = ([main] + rest)[:MAX_POSITIONS]
+
+
+def wiki_positions(out, by_season, stats):
+    """Craig, 29 Oct: players whose careers Transfermarkt barely recorded (under 20 games with a position) take
+    the positions their Wikipedia page names, in the seasons at the clubs and years of his infobox, each with its quote, in data/source/positions_wiki.json
+    (tools/fetch_wiki_positions.py, then read by hand). They join his career positions after the recorded ones.
+    A player with no recorded positions at all leads with the first of them in his checked broad position."""
+    wp = os.path.join(ROOT, "data", "source", "positions_wiki.json")
+    if not os.path.exists(wp):
+        return
+    wiki = {k: v for k, v in json.load(open(wp)).items() if not k.startswith("_") and v.get("positions")}
+    for season, rows in by_season.items():
+        sp = out.setdefault(season, {})
+        for r in rows:
+            plid, w = r["player_id"], wiki.get(r["player"])   # keyed by the shown name; seasons keep namesakes apart
+            if not w or f"{season}|{r['club']}" not in w["cards"] or r["position"] == "GK":
+                continue
+            extra = w["positions"]
+            cur = sp.get(plid)
+            if cur and cur[0] == "GK":
+                continue
+            if not cur:
+                lead = [x for x in extra if BROAD[x] == r["position"]]
+                if not lead:
+                    continue
+                cur = [lead[0]]
+                stats["wiki_new"] += 1
+            add = [x for x in extra if x not in cur]
+            if add:
+                stats["wiki_added"] += 1
+            sp[plid] = (cur + add)[:MAX_POSITIONS]
 
 
 def main():
@@ -55,6 +123,7 @@ def main():
         return cache[pid]
 
     out, unmatched, report, audit = {}, [], [], []
+    tids = {}
     stats = Counter()
     for season in sorted(by_season):
         year = int(season[:4])
@@ -137,6 +206,7 @@ def main():
                 m = fit[0]
                 stats["thin_conflict_reordered"] += 1
             season_out[plid] = [m] + o
+            tids[(season, plid)] = str(tid)
             if how in ("surname", "fuzzy"):
                 report.append(f"{season} {rs[0]['player']} ({', '.join(sorted(clubs))}) -> TM {tm[str(tid)]['slug']} [{how}]")
             if b == "GK" or m == "GK":
@@ -146,6 +216,8 @@ def main():
             else:
                 stats["broad_same" if BROAD[m] == b else "broad_diff"] += 1
         out[season] = season_out
+    career_positions(out, tids, tmplayer, stats)
+    wiki_positions(out, by_season, stats)
     json.dump(out, open(os.path.join(ROOT, "data", "source", "positions.json"), "w"), separators=(",", ":"))
     json.dump(unmatched, open(os.path.join(TMDIR, "unmatched.json"), "w"), indent=1)
     with open(os.path.join(TMDIR, "matches.csv"), "w", newline="") as fh:  # every match, with both game counts

@@ -37,3 +37,11 @@ Share of player-games with a Transfermarkt position: 8 to 30% for 1992/93 to 200
 - `p` on each player-season (main first), `b` keeps the broad position.
 - Fit: main 100% (green), other preferred 95% (green), next to one of them 90% (amber, the engine's `NEAR` map), elsewhere 70% (red).
 - Balance (`node tests/calibrate-all.js 20`, 2,060 runs): greedy title 1.9% (3.5% with the same engine and broad positions), top 4 12.6%, stay up 93.9%; no change to the spin odds needed.
+
+## Career positions (Craig, 29 Oct 2026)
+
+"Who cares about season specific positions": a player's positions are his career's and the same on every card of his; only the main position stays the season's own.
+
+- Career: every position Transfermarkt recorded for him in 10%+ of his recorded Premier League games, or in 15+ of them, most played first, up to five positions in all. Keepers stay GK only.
+- Under 20 recorded games across his career (873 outfield players with a 10+ game card, mostly 1992/93 to 2002/03): his Wikipedia page. `tools/fetch_wiki_positions.py` fetched each page (one request a second), Sonnet agents read the position sentences and the infobox and mapped them to the game's labels with a quote for each (plain "defender" or "midfielder" adds nothing; a full-back or winger with no side takes the side he already has), and every result was checked: 614 quotes appear word for word on the page, the other 22 have each position's wording on the page. Each player's positions apply only to his cards at the clubs and years of his infobox, so a namesake's cards are untouched (the two David Lees of 1992/93, the two Alan Smiths, the two Chris Armstrongs). 633 players in `data/source/positions_wiki.json`; not verified and left as they were: Scott Taylor, Emerson, Michael Williams, Paul Robinson, Paul Williams, Tony Dobson, Trevor Challis.
+- Result: outfield players (10+ games) with two or more positions, 1992/93 61 of 355 before to 147 of 355 now (average 1.23 to 1.55), 1995/96 126 to 165, 2000/01 171 to 217; every season gains.
