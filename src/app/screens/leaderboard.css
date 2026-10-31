@@ -5,9 +5,11 @@
   /* the glow fades in from the black status bar strip (Craig, 31 Oct: on iOS it began with a hard edge under the clock) */
   background: linear-gradient(to bottom, #000 0, rgba(0,0,0,0) 150px), radial-gradient(ellipse 85% 34% at 50% 20%, color-mix(in srgb, var(--k) 16%, #000) 0%, #070708 70%, #000 100%); }
 .lb-narrow { --cw: 54px; }
-.lb-head { flex: none; display: flex; align-items: center; gap: 10px; padding: calc(env(safe-area-inset-top, 0px) + 14px) 16px 0; }
-.lb-back { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #3a3a40; background: #0e0e10; color: #fff; display: grid; place-items: center; padding: 0; }
-.lb-back svg { width: 20px; height: 20px; }
+.lb > .topbar { flex: none; }
+.lb-tr { display: flex; gap: 8px; }
+.lb-tr .lb-share svg { width: 20px; height: 20px; }
+.lb-tr .lb-share[disabled] { opacity: .3; pointer-events: none; }
+.lb-head { flex: none; display: flex; align-items: baseline; gap: 10px; padding: 2px 16px 0; }
 .lb-head h1 { flex: 1; margin: 0; font: 900 italic clamp(21px, 6vw, 25px)/1 var(--font); text-transform: uppercase; }
 .lb-count { font: 800 clamp(11px, 3.1vw, 13px) var(--font); color: #9a9aa2; letter-spacing: .04em; white-space: nowrap; }
 /* the game: arrows either side of its name and the dots */
@@ -59,9 +61,7 @@
 .lb-you { width: 100%; height: clamp(38px, 11.5vw, 48px); margin-top: 4px; border: 0; cursor: pointer; text-align: left; }
 .lb-you .c-claim { flex: none; font: 800 clamp(11px, 3.2vw, 13px) var(--font); letter-spacing: .04em; text-transform: uppercase; opacity: .8; white-space: nowrap; }
 .lb .actionbar { padding-top: 10px; }
-.lb .lb-main { background: var(--k); color: var(--ink); font-size: 18px; text-transform: uppercase; letter-spacing: .01em; box-shadow: 0 0 14px -6px color-mix(in srgb, var(--k) 50%, transparent); }
-.lb .lb-share svg { width: 22px; height: 22px; }
-.lb .lb-share[disabled] { opacity: .3; pointer-events: none; }
+.lb .lb-main { flex: 1; width: 100%;  background: var(--k); color: var(--ink); font-size: 18px; text-transform: uppercase; letter-spacing: .01em; box-shadow: 0 0 14px -6px color-mix(in srgb, var(--k) 50%, transparent); }
 @media (max-height: 620px) {
   .lb-trophy { margin-top: 8px; } .lb-tc { padding: 6px 12px; } .lb-ti { width: 34px; height: 34px; }
   .lb-tabs { margin-top: 8px; height: 32px; } .lb-cols { margin-top: 8px; }

@@ -36,30 +36,6 @@
     ];
   }
 
-  // ---------- the game's own button: carry on with a run that is going, or start one ----------
-  function playWord(g) {
-    const G = D2T.game, st = D2T.state, today = G.today();
-    const runs = [st.run, st.parked, st.dailyRun].filter((r) => r && G.live(r) && !G.locked(r));
-    if (g.id === 'daily') return runs.some((r) => r.daily === today && !r.recorded && r.eng.phase !== 'summary') ? 'Carry on' : G.dailyResult(today) ? 'Go again' : 'Play today';
-    if (g.id === 'goal') { const g4 = st.g433, n = g4 && Array.isArray(g4.filled) ? g4.filled.length : 0; return n > 0 && n < 11 ? 'Continue' : 'Play Goal Rush'; }
-    if (g.id === 'ub') return st.ub && st.ub.run ? 'Continue' : 'Start a run';
-    return runs.some((r) => !r.daily && r.eng.mode === g.id) ? 'Continue' : g.id === 'classic' ? 'Spin for a club' : 'Play Club X';
-  }
-  function play(g, from) {
-    const G = D2T.game, st = D2T.state;
-    st.stageAt = g.id; D2T.save();
-    if (g.id === 'daily') { G.startDaily(); D2T.toBlack(G.stepFor() || 'table', { from }); return; }
-    if (g.id === 'goal') { D2T.toBlack('goals433', { from }); return; }
-    if (g.id === 'ub') { D2T.toBlack('unbeaten', { from }); return; }
-    const mine = (r) => r && G.live(r) && !r.daily && r.eng.mode === g.id;
-    if (mine(st.run)) { D2T.toBlack(G.stepFor() || 'squad', { from }); return; }
-    if (mine(G.otherRun())) { G.switchToOther(); D2T.toBlack(G.stepFor() || 'squad', { from }); return; }
-    G.stashDaily();
-    // another run on screen with the parking space taken: home asks before anything is lost
-    if (G.live(st.run) && st.parked && G.live(st.parked)) { D2T.go('home'); return; }
-    if (G.live(st.run)) { st.parked = st.run; st.run = null; }
-    G.newRun(g.id); D2T.toBlack('spin', { from });
-  }
 
   let cleanups = [];
   D2T.screen('leaderboard', {
@@ -70,14 +46,19 @@
       let gi = Math.max(0, GM.findIndex((g) => g.id === (params.game || st.lbAt || st.stageAt))), tab = 0, data = null, req = 0, share = null;
       const narrow = root.clientWidth && root.clientWidth < 400;
       const el = D2T.h(`<div class="lb${narrow ? ' lb-narrow' : ''}">
-        <div class="lb-head"><button class="lb-back" type="button" aria-label="Back">${D2T.ICON.back}</button><h1>Leaderboard</h1><span class="lb-count" aria-live="polite"></span></div>
+        <div class="lb-head"><h1>Leaderboard</h1><span class="lb-count" aria-live="polite"></span></div>
         <div class="lb-game"><button class="lb-arr l" type="button" aria-label="Previous game">${CH(0)}</button><div class="lb-gn"><b></b><div class="lb-dots" aria-hidden="true">${GM.map(() => '<i></i>').join('')}</div></div><button class="lb-arr r" type="button" aria-label="Next game">${CH(1)}</button></div>
         <div class="lb-tabs" role="tablist" aria-label="Which table"><button role="tab" type="button" data-t="0"></button><button role="tab" type="button" data-t="1"></button></div>
         <div class="lb-trophy"></div>
         <div class="lb-cols" aria-hidden="true"><span class="c-pos">Pos</span><span class="c-name">Player</span><span class="c-v"></span><span class="c-v"></span><span class="c-v"></span></div>
         <div class="lb-list" role="list"></div>
         <div class="lb-pin"></div>
-        ${SE.bar({ mid: `<button class="icon-btn lb-share bar-mid" type="button" aria-label="Share my place" disabled>${SHARE}</button>`, main: SE.mainBtn('Play', 'lb-main') })}</div>`);
+        <div class="actionbar game-bar lb-bar">${SE.mainBtn('Back to home', 'lb-main')}</div></div>`);
+      // the game's own top bar (Craig, 31 Oct, build 190): the D2T logo home, then Share my place and the account
+      const top = D2T.topbar({ mode: false, noAccount: true });
+      top.lastElementChild.replaceWith(D2T.h(`<span class="lb-tr"><button class="acct-btn lb-share" type="button" aria-label="Share my place" disabled>${SHARE}</button><button class="acct-btn" type="button" aria-label="Account">${D2T.ICON.account}</button></span>`));
+      top.querySelector('.lb-tr .acct-btn:not(.lb-share)').onclick = () => D2T.go('account');
+      el.prepend(top);
       root.appendChild(el);
       const $ = (s) => el.querySelector(s), list = $('.lb-list'), pin = $('.lb-pin'), troph = $('.lb-trophy');
       const snd = (id) => { const S = window.D2TSound; if (S) S.play(id); };
@@ -90,7 +71,6 @@
         $('.lb-gn b').textContent = g.name;
         el.querySelectorAll('.lb-dots i').forEach((d, i) => d.classList.toggle('on', i === gi));
         el.querySelectorAll('.lb-tabs [role="tab"]').forEach((b, i) => { b.textContent = g.tabs[i]; b.setAttribute('aria-selected', String(i === tab)); });
-        $('.lb-main').textContent = playWord(g);
         $('.lb-share').disabled = true; share = null;
         load();
       }
@@ -174,9 +154,7 @@
       $('.lb-share').onclick = () => { if (!share) return; snd('share'); const fire = () => (share.done ? D2T.share.send(share) : setTimeout(fire, 80)); fire(); };
 
       // ---------- the bar ----------
-      $('.lb-back').onclick = () => { snd('tapSmall'); D2T.back(); };
-      $('.bar-home').onclick = () => D2T.go('home');
-      $('.lb-main').onclick = (e) => play(GM[gi], e.currentTarget);
+      $('.lb-main').onclick = () => D2T.go('home');
       showGame();
     },
     unmount() { cleanups.forEach((f) => { try { f(); } catch (e) { /* gone */ } }); cleanups = []; }
