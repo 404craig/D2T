@@ -98,7 +98,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .topbar-l { display: flex; align-items: center; gap: 6px; }
 .topbar.has-mode { display: grid; grid-template-columns: 1fr auto 1fr; }
 .topbar.has-mode .acct-btn { justify-self: end; }
-.mode-tag { font: 900 italic 15px/1 var(--font); letter-spacing: 0.04em; text-transform: uppercase; color: #0A0A0A; background: var(--c); padding: 5px 10px 4px; border-radius: 5px; transform: skewX(-10deg); white-space: nowrap; }
+.mode-tag { position: relative; overflow: hidden; font: 900 italic 15px/1 var(--font); letter-spacing: 0.04em; text-transform: uppercase; color: #0A0A0A; background: var(--c); padding: 5px 10px 4px; border-radius: 5px; transform: skewX(-10deg); white-space: nowrap; }
 .mode-tag > span { display: inline-block; transform: skewX(10deg); }
 .back-btn { width: 44px; height: 44px; margin-left: -10px; border: 0; background: none; padding: 0; display: grid; place-items: center; color: #fff; }
 .back-btn svg { width: 26px; height: 26px; }
@@ -244,6 +244,12 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 @media (max-width: 374px) {
   .game-bar .bar-main, .sp-main { font-size: 17px; padding: 0 12px; }
 }
+/* small motions (build 196; core/motion.js): the odometer's clipped box and the glint */
+.mo-odo { position: relative; display: inline-block; overflow: hidden; vertical-align: bottom; line-height: inherit; }
+.mo-odo .mo-v { display: inline-block; }
+.mo-odo .mo-v.mo-out { position: absolute; left: 0; top: 0; }
+.mo-glint { position: absolute; top: -40%; bottom: -40%; left: 0; width: 60%; pointer-events: none; z-index: 3; mix-blend-mode: overlay;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.9) 50%, rgba(255,255,255,0) 100%); }
 
 /* Front-of-app screens: intro, home, how to play, account, league, stats. Classes prefixed fr-. */
 
@@ -613,7 +619,7 @@ html, body { background: #12F06C; }
 </head>
 <body>
 <div id="app"></div>
-<script>window.D2T_BUILD = "195";</script>
+<script>window.D2T_BUILD = "196";</script>
 <!-- the page streams in parts so the intro starts before the rest has arrived (scripts/build.py) -->
 <script>window.D2T_LOGOS={"short":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA1kAAADxCAQAAACTr7WmAAAtKElEQVR42u2dfWgV19q3ryM7ECFChAgpKESIECG+pA+xaNGioqKiYgoR4kP6EA96iIdYbNGiRYsWLVWOUqVKDVWqnAQMNMUUFS2mqDRFSyNHOZEn5Y2QQuRViKCQwN5w3j+SmK+9Z8/MnrnXmtn39cc5NvtjZq+ZWb91r/vrL/8hxiQopJC5lDCbYgoppPDNKwAphknxmmFe8YIXvOA1wyiKoiiWTupxopASSihhAXMpZR7FFFNEMTNdfHaIYYZ5wQsGeMwf9POMP0npLaIoimILf4mFlVXFAsooZyHllFAQ0LcO8IQefqOXJ7zQW0VRFEUlyz/FVLOYChZQwewQj5PkKQ/p4QH3eKm3jKIoikqWe+ZSzhoWU87cwCwqd/TzkAfc4olKl6IoikqWM1UsZj3LmGP4PHrp5B53eao3kKIoikrWdLFaz0qWuQqkkGKAe3TSpn4uRVEUlawRyllPLdVWidVk4erkIvc0OF5RFCWfJauUNdRbZllloptW2vlDbyhFUZT8k6wV1LKe+ZEay0HauMivelMpiqLki2SVUksd1cKxgEExxD2a6dBtQkVRlLhLVjUN1IWaYyVDN820aiC8oihKXCVrGY3URMJv5Y4emmnmtd5iiqIo8ZKsJRxgXUS3Ap3o4wua9SZTFEWJi2RVs4/aGI/wIz6nTW80RVGUqEtWGXvYnQej3MZxftObTVEUJaqSVcRemmIQauGOIU7xhXq2FEVRoihZ9RxkQZ6NdQ8H+EFvOUVRlChJVgUnWQ8kYxhwkY12dvFMbztFURQ/zBA/4h5+Zz1JyEPBghruxzrYRFEUJTZWVhXnWayDzgX+rvUxFEVRbLay9vOLChYA27nPMh0GRVEUO62sak6zVId7Eof4XAdBURTFNsnay9G89Fxlo53d/KnDoCiKYotkzeU863WgM9DPB/ysw6AoiuKGsH1ZG/ldBcuBedykQYdBURTFvGTtpYM5OsiOFHCBr3QYFEVRshPmxuC3bNcBdsl1tmo5J0VRFDOSVUoLK3V4PfCIDRqKoSiKIi9ZFVzNuwqCuZGkgAE28FCHQlEUJRNh+LJW87sKlkcKgLe4wzodCkVRFDnJ2sI1ZurA+mIW1zV+UFEURUqy6mnXpOGcuMAOHQRFUZTwJauRSzqkOXNeRUtRFCVsyTrMWR3QgERLtwcVRVGmEVzE4Ffs1uEMkA+4rIOgKIoShmR9zS4dzIDZSpsOgqIoyjjBbAweVcEKge9YrYOgKIoSrJXVxOkAzmSQi6SAYVKjf0llfG/qzaupQEcjkeY4mV/N9L6R9ybYw1s5j8m7PNGbVAn0Hi9jLvNIkJjwFCVIOdzf0fhdk/+Vyvh8Tn9aX/GUp7zM6fjreIvhaWeR8DiTuJuZUo7vTIUyqtmPGxSZjzIMDOR+oLpABAtm85rPYjU51OQsWbO5yjs5Pkp2UUg9hVZMb4nQvnnq1DF9gTX5+CmKaOdx6L+6guVUs55STUNJwyue0Eo7T319upIrzNJBFGBfrlbWRjoCPJ3jfBKjwb3P4gC+pZO1AduSJjnKAX3q0tDP/wlxaVJEHevZqFKVlSSX+dyHbH3DToZI6AiHyBAzaef93CRrCbcDrnRxmg9VsmI7JsXc11JeGehgc0hytZcdOdv7+cQgH3qM1q3gd634I3Jl3uVJLuEXFVwN/ELt5mu9MtPGpDEmv6RBBSsjm9gbwrc28n85pILlidlc4kuPo6yCJcEXPMkl/KKEX0KagC7w11gM8O+8HdA3JVnFvciPR4L7gY1IPFke6FWu4DzLdVB9cojPXb6zlH8zWwcsdO7yHuQS5H4ptBXzdv6p12cSBVygLPK/okYFKwstlAb2XXXcV8HKgSNscW1jqWCFT3LMC+5Xsg6zPsTT28YVvUaTWBBQXKZJtHJiNuZxPqBv2ksLs0jqkOYkWm5iW4up16ES4NzYDoQ/yarjUMgnWMs1ivQ6TWCTx/1121jCGr2IQlf5K46PWueKfxa5qvTZyHwdqtDp4dOxf/qRrGq+FTjJ9SpaU9hHndpYepWz8o1W+wyI+qzZe0VawFqEA7z2L1lFXBKKj1nOnQD39uUJPln1aGTHo5xafe5c8i3VOX16pw5hQCylKss7ajUGVoAL/DD+HzN8fHyh2Km+zU1K9Iq9YX5kPVpNWhvANTO55Ht/4Uu26wAGSLbMyj06RKHzfHJVJK+S1SS8Wl7EbRWtSau6KDp756qN5YmFfOPrc/Xs08ELlCVZnsZFOkSh8xl/+pesav4hfsKLuE2xXrc3HI6ghNdoMqtHtvlYv5fzlQ5cwMzLsoBXwqaLc5P/4E2yzhuJQVrEHcr12o0yn6MRO+NCDb3wwUnPrWdOan5QCPduZjZq3lvoJKeHEnmRrIPGUkEXcZvKiA12IrRmDjtZFzEbS7dP/HDBkz3dyCYdshCe4sxoj8Dw+YLf/EtWFUeMGug3s0bv5A/HIhX+r2HA/taX82hx/e5S9uuQhcBwxldWh1pMQQF4kK4dlXvJOmv49N/idhZnaJRWaLnxdoQmqHWaQuyLAmCN68TiPVm8Loo/Xmd8RXPfwuejdH90K1l7WWr8B8zmJiv0OgLQFJmN0jq9WDmwz1WluzK1ZEOiP8Pfq3UbNnROpi8S7U6yKjhsxY+YxTUVrdGROBSJ8yzX7ZMcOe8i9KiROTpQofBbhr/rEiFs+jL1qHcnWaet6Qczk2ueI6niSW0kcp0adDLNkTlcyrLFXKaFWUPjQYYR1zzDsPkk06asG8lqtMobMZNrEYuYC4v9IXrLgqFEV6MBsDRLNmStZr2FRC9/6ELMCO20ZXopu2SVWrIpOE4BV133sokzb1uf79Sgk2kg7HCoOlikNlZoXE+70td2I2HzyqmKS3bJOmzdiiJJAVfUrQ/ssbouSCGNeokC4SFPMr62WrPeQpSsdNRpu5GQ+SKDdetKsiotrAtdABTQoptOLLC6ZMwOfbQDotUh2HqbDk9IdPNz2r/rQixcHnHC6eVskmVzpeILevNQb23FwYSWaQqIvsz7+pRrMFJodKRNJNZSuGGzj5R/yVpieSuDs3lvaS2wdl+9Th/tgLjIs4yvNWhdwZAY5GLkFvFx4Cw3nN/gLFlHrP+BF/J+Ld9gqT9LLeBgGMgwdQKUaLB1aLTyNM1fV1tQUiHeOwofZ3uLk2RFodROH93WnptMCPoiK+0sfbSD4vLkbkGT0J64YTE0teXFKB/p0ITKJw5VHV1I1oEICNaqjPnp+SFYADsszM/SKtdBTZ3NDneYRs2GZ2M9TvPXFVrLJVQuOHhtXUjWFuu7wQywOa3xnm8ssm7qqmSjXpZAaHMI912m/ZpCIpnBxtKAojB5zqdu3pZZsmyvVDzA5rQrIXusLEk7yy4ajLQCjedqXy1ZeX5Ku3dTSY0OTYiccAgzciFZG1lpuSJvsHZLUJ7lVpWw0gpsQfGAnzK+VqWWbGicT/vXRmsqrcbzXj/l7o2ZJMtuN+NzNvBQr/IEbArBqNPeTQFx2SFDpUEn0JC4yw+6EBPnI+dsrGyStcJqG6vf4qALU6ynwpIzKdKqJIEtzDI7o+fqJlVopPdj1Wgp3BA5m743lnvJstnG6mWt1T4sM8y2puWcBl4HRZvD3n6NWrIh8Yj2NH8ttbo0WtTp5RP3b04XIlBpcXOPfjY7lAjNZ2o45da0DhV9tIOi1eGp1fD2sGhOmxm0kiJ6KZw0X6am/H9us276d429MxcLr59hikmMnunkY4+c+7CLM53+K3OdbcY+P8w+hxqargavxtp4rygJVkI4W6qKan41/qvreNvT+5MRiC1MgvBZJinglsNWyTLhRO1+npLyOUWlHOadRNZnCKCEhYK/tCPt39vpdJjAU57nBndSNfKvYZbS4vsXveIuP9DNa4ooBBITpHZcNKb/hkSWK5lyfa2z3Ruvcx08e/vv9KqF5cBMGiyQrEaPE0Qbd3lJgkJmjorDuDwkSbmYKFOelgZ+pt0Ub/GNaC2/AnBIIZZu436cU7z0LVm5LfsgxZeCknU5Q6bnsLsA7JA4msNnZ7GNxdylg595GYeJ7i//mfqXLWn3cm0QrLWRShwu5t/CDQ57ecfwTbkxwxrVSbSu087P2cu0GGVdhs5J4dHFuxlfK+O+YCjAdocahxJUckdsufCcdyycY7w/VekZ4Dpt3PNq1djGjDS3qJ2CtUorXWRhgfFyMt6TW+exk+v8P65Qa3G7ykPiR2x1tLHkBGufYcGCY4L27WUr55igOha+xXau8wtfsixOVlYZ/2uhd6GHtQ7FQe2khH+Jt5FvY6vBX7yMuzle5Vu0WrC5OZUVdAofsY//ymgvF/K72EZZB5sNj309l8SONcg7Tt1wY2ThJ/mNVjqiaQTMmHaL2CdYvayKnGCZmlzLDR4913YjC9nNHe6zhzKrRlW+HFabwwZvrZhgDRlPdinmoODRLlsoWOEUzitgKae5z7esoyjqkrXJujPsZYNR12eUmMNiY8cOpgJbAYs5ye98xxZLHqZK8aoHQ46bcXJP6EXjU/hhwRy/IeNboOnYGOJm/xy2c507HLSmDIEPyVpicMpLzyPes3LtYyvm6s4FWUBoNh/Qzh2+ZInxxip7xfcdWh3iYuVq5GfqGCV5L+8WHfWHFj7P4TeAepsj3OcqjcyNomTZZGMlgUesVQvLE4sMTfGlISS3vs0+urjPYSrzyMaCy0ILg2xnYbbGTBHHRWebZguf5nqh/LtZbOIs9/maJdGSrIRVDcwKVLA8M8guQxUwakMLNXmbQ9znCluMiHGTePHZW/yc8bUSsaoXr9zW1Q6N/YLZWPCjhWE/CfaKHu8tdnHNMj9yFsla4rFyQbhEX7Ckp9hB1rovLhnwLw03RGEmtbQYsLWqDJT4vehoY0nFoJ4znLRfLdwT/aSF80cji0SPlwTa7I8inChZNlVv72aVCpYnnhusb79R4OH6yYCvoUncj9XnmMgvtUk5yBnDT89x0aNdN7TUc6JQvFpngaXbow6SZc+24CM28ALFPQOsMug+lgiGviz+qyoMlC5rdagDspoqobM4YTipZIfw8vm8hU90vYGOCD9EoanTjAkPaJUl59QVeQtLmudGG7KsZrmA1S1fRmyPuI015NAhC3YJnU+f4bV2qWg2FtzlRwttrD3ix0xyOgqT3fj21XJLupx2sSEe5RvFtgYHDHcQkwhFbhYPK6k0YmM9dLibbvGAYYrSto9wd88lcK7QnSJFgk7DOxwHhXuBnbGiac9kGkSDT8buPvu2Rx2n1TVWnM9dNqtgeaKftUZd5SsEUiN6HWvuhUOjgSWc0+ZnynielAxLfFSqzG2J3GahjSVfcWXIuP/S48RaaMW2YCcbLK/pbRt9rDWcai3xcDWLL2NMNKrvcAhvzx+kY/dsnKjrDcRuX46CHwvGfVkVFsTjd7FZBcuzhWVWsMoFotieG1gHN4iXNIYLekOzV7h55QMLbayEgc7erzgRlVtkTLIWGS+He5e1Ue/kktZ+DXMqX2u8mJVEGWX5XJHinEv8eueRhUEA0pSKBx1ctNKPtUj8mK3RKYs3JlmmO6jciplghc9zwz4skNlzf2XAh7PDgI11zsLJU5qDwuP+yICPNPtSVz5W8FWU/KQzRodpkdGz6NQtQY8MssGCMp5NAlPMDfFoyBLhQjkAAxZuUEmzUTjwAi5aGOq130Cs4GUrSwI7SlaJ0fLzdzXowoeFZd5ZKhPXJO/haRLs+js+aeR76nxCuOIF9FrYbqTUQKzgqyjUvJgqWeWCzaqncksFyyN9vGtFdE+DQH5+t3gUXYmBuoJDBmp72MZRceui1UIbq0k4Jw2gLUo21liQgLltwets1j18j2vDtVaUrkyIhCicE1/ONBiYNH403OjDPFXiHpwBC/03pQZiBZNRy/cbsbJM9SPq4P3YClZhKDGD/WywpNayRCncPjqEf1WRgUkDLuX9QuykeMTyZQuLwu1hlvgxf4hKPtZkyTLTdKTN0qCL0kC2hsISLFuCUSWaQ7SKTyv1BmysB3kf3t4o3kVi0EL/jQk/FpyN2s0yAyg0kkbczlZLx+QCF/jSwvPqN1xLcCJbWCwwrUh7eBJGbKyIFMoJjbnCZXABmi3MQ9prIKKgPXoVV2YAc4WzIZJAh6WCleAm64F9fGvZmQ1YkIc1jkS7kQ7x31tvIMC410CNerv4UjwL7rmFNlaZWMfpiTPx2ejdLjOAcuFjFtBurQ/r9pvywNu5apWF9Z5FgrVOoN2IfJnOhJGNmeY8T6FfxjbxY1600MaqN5C+/gM/RVOy5gsf87q1gnVt0lS8idvivYUzrQpXWfWQ7RQ4xg1xt3CNcH27kaVIvoe3HxI/4qCFW7EmSoQlxTPhAlpZIuzJusVmS8fi6rS+zCu5zQbjq2DbBKtSpMq5fBRdo4GxbA81wKSQYuYyn1JKKZnmKUmQ8LQkSwVwPmNzztg3Fgv4RKfSarjncjqajNhYEYsVHJcsSSvrOlsttbCupO37tJybbDZamWCADZZl7UhM7V3iUXQbxaPWYCgkn0oplSxkORWUW9K41R5eWZmPZWK5dD6aFzABzBUULFsTh7/PaDks5TYbfKzLct9STFLAAO9Ztu9eKuImvix+nxwwMJbBpxCXsYnlVItv9keHVgvTtg8asLHao+jHGptYS8QE631rLSynra5F3DaSD1XAgAXtRaZvYYQfijsgHkW32oAfK9icmFJqqaXSYOm1KDBkYaxgJfUGjhrZ7mwJiikK/ShJCmhjm6WC9V3WNoULuG1ge67XosThMYpEHi/5FOJdBsbyVmA5MSuop063AF3Ztfb5b/YbqHlxK7rp6wlKBCSrgDZrE4e/4wMX75rHNY+ilevGYB+rLHQTS1SHGBKvsL1EJKBkKsH8yjoaBVIO4oJ9/psqA0H+RKt2+2RmUCKg8S0uBauYFcK//1tXgjUmWlUelwP+6bdSsGRCL+SLxJpwfvcGUD+xgd9pUcFyzV0L/TfSvdmSwIMod2ebQXHox7jEf7t8ZwkXRPd1v2G7h3fP4yZLRM5rgFWWFL+dzEaRmv/Su+zVrpctQdKeY/LEFv7FBUPVQaOKfbGC1eI2VoGV4+BJssJ2117gf1y/d5gEl8QKl/zDc0rsHK6xOvQ1UL9leVjjSETV3eWG8K/aZ2AkX+W0LbiMm7Qb7iQeRRvLPttij4FjdtEabckqDPX7W/irh3cXkgJaRIqTHvZVJ282t7IGa4zgb1uwgH5WWVSaaSLrRKLqpP1Y1WwxMJY3fF/jIr7m7puyYooXG8u28K9ql3NJsJyJdkvdGaEGX7jfEhwXLYDT7A99deO/UMwVl5uXfkSr17o8LFkbq0d8BbhPvFMTwEmfn6vj30aiG+NgY9lnW+wxcO/djbaNFa6V1eJhS3DqNH+MwyH+6h2+p4wxKW50/Uu8CZadPiyAFSJu/lbhFaCZde51fvXxqWK+o8VAP694cMy6M6o2EisY+VY3idAkqy0HwYKRcpmfhXJm9QGEup6lkFNZ7EWvK6h+1loZJThCg8Ax5DtkNRgZSz+bnys4zwJVHt+LhBvWnZMJP9bdKMcKjllZYVlYudcSPBRKo8X6gAqunsyyeenVyhqw2MKCCpGgmDbhESg3IlndPmp77KFTBcs3SSttLDN+rMgTjmR592GNMVnmgm+02BBghfBjHA3ogYJBC0szTaRJZNddOvh2j5GKERc9LuZK+D7Hjez8lis4xz3rzuuQAT9WV/RtrHAk65KPLcF0ggWwnWsBbl02BJzzc4CvA/iWAvp518JineOUilgjbTwUthxN1HYb8LgtuIxfjNTmiAsF9PGFdWe1Im3fiLgtCSMgWUm85WG5Ea31XAsoqrE+hCTVXXyX83f0WRvWLmuNnBf/VbMMjOVFTynEe7itG4I58pl4xcrsmMgF7I6DjRW0ZBVwyVMeVnbBgpFGi7k3SKkPqWngB1xNK6lufFl2Jw6PUSJijXQKF9MxUz876cnG+oaTRkLw40SbhX2fV0xrJitBc7TzscKRrJacLKzMLOZajqK1JcQut5u4mmbz0o2/ooA+q4MuRmgQ6eYjnULcKO7HSgI/uF6eFHHTc3UWZSr97LbwrEzYWH1Rz8cal6yXgX2X/6CL7CziZg6itZGWUEdxJTc9b15Gw8KChIgfq0+4Q1aFgVjBAnC9cCrjjla4CICdFm4KLjNkY72MxyWdEZixeCEACyvhsJ22kGuU+/rW1VwJfUW9nNvTWmUms0xgAxGwsKCGhQJHuZxjkVivmIkVvOuyS1E1t7XgbQAcsjAby5SN1RyXizojoKniQk4+LPeWVoXnT60QECyAxVNEK1sqcb/FpZkmItGY45Wwv6FMrPTyZNxtfi7jJvNVb3LmEp9beFZLWGfgqCd4ER/JGgzgW84LCBbAfG5T6ekT1Xwv1lp8EXcmbF46C1ZPRARrGStFbCzZsTATK9jnKmJrGdfE7ti4kgSuh+RXz30JKB9Q0y3uKQ5Vsl5m2cByY2H9LaCzSWSNs3uLmx4aLVYKChbAQu64Orte1kZgSxBkSuFKdyGea6TuAJxzsaNRxVVm5fxE5rtgFdDF+1aeW5WR3myn4hErOCZZL3LcGpSysCaKlrtGi5XcFC8iOv/N2WUWX1s7DqezUSUcxT/xm+ivquMtA6Iw6EKYy7jC7KwWuuJMAb28b+kkfcDAMbssDPPP0crKRbJOB2ZhuWcOt100Wqzkmkhw9vSzu0ktZKzZ0RcZwUKkb5l0F+IimoyIQmtWb0IxVzVtOAD62WxhnODInKR1BQORLP/rkbN8aOSsZ2ZttFjNNWNtGmY5dNTqt7yWoPwmRrfLKLqgaDR0X2SzsQr5XvsMB0CPxbVkTBTnfRCPmhcTJSvlO17/LH83eOZXHGLZqvjecF+hS+yNuGDBDpGjNIv2ii0WiYCcTBLoyLr52cJK9WHlzC2LMx1N1RVMxesSzwCfRvTpUATLy/CezdBxpoKrFjTCm57N1Mt7ltcSnEipUAqxbE5+g4Hw8QLI6k34ihrUh5UrZ1lr6ZYgmMnHehSXmheTJavfx+fOG9oSnEy6nlXlVggWaQXraYTujCaRbLZW0Zx8EzYWZC9I2mBlWaFo8ZwPjO76ZLexTNS8OBOnWMFxyfI+kZ41EHSRnmNT2kCW8b2VLuw+Vlm8/ptOQsRRPCS8Bqw3dG84+7HK+IcqTo508I7lcXEfqY0VnGR5jV8Lz4flZ9d134QHvoxrLLLQI9AfoShBycn9R9EuYcVGWpfD8ywTx3lNHc6JHray2fIdjNVG/FjSZdCEVtPQ6+kTJ/nYuvVLIX8HyvmehSSt8wgMRCZxeByZDTTZDllNhsogNTuGt+/X8rc50MspLkZg88uMjXUujpc8ATxlyLXf4jifWPgrdgHnRrcEbROsQdZGKOhihC0sFjhKl2iHrBJDfqxBx4KkKzisuuPTdr1HB62R8NWY8WOdiKONNSJZL3jqslr3ET6z9Hfsot5I3bhs9LNZdPMrGGRim2TXgE1GEsuhzcHCThho4TjAExKkmLwNn8g6S8iQyvp6gpd0082TCKWLmLCxHsTRjzV+Mz52JVnhC1YuGQR2Clb0LCzYwlKBo/SKdsgqNdAfCyDpaGMdFm8xMsQ2fh596mOWr2OxjWXCj3Umrtd3pCvxIxfvPGSthWUr0RQsqTWhrGu4wVDiww2HFOJKA+EgP/IzkCKlghWzPYupNtbluA7nyHqrK+v7DvCF3nueGIhAx+F0rGO5wFEGRbctig3ZWM71E+XbTCY5qQ+muI1lwo91Kr4DOmJlPeFVlnW3CpZ3C+uPSJ75LpGjtIuOjql8LKf6iZUG2kxe5Fd9NIU5ZOCYXXH1Y41L1jPHCWRfnDU7JMFaFcGgC4BqkX33pGjohal8LOf6iTXiNtZQ3Gp6R4AtIi1S88jGGpOsFA8cBOuE3nme6OHdiFpY0AACqdg3RDtkmcrH6ncIMDGxVdkc0WVUlDHhx+oSDWwyJFlk3DA4roLlWbDei1ili3HmsgOJzLbT4r/JBK0OJbpqxWV0QG0scWpFYm+n21ixDq0Zk6xuhtK8eszKxGGb6WNz1lZ+9tIokiUkm0K8w1Cs4CvH8HZ5G+tyZC3/6LLfwDHvxq0/VibJepzmhj7Gp3rXeRSsVRGeGAozNqYMlmbB31RmzMZqc7gTVouvvp+LjroyYmO9beCosbelxyQrRfeUVw6pYHkkirUE5e2RPtGd9h2Gal44u8B3WiWgSjiYCPrpjLuNNS5Z8POkv3/E50bOJ7q7sP0RDroYsbHCr8GXBNoEO2SVGrOx2h1CHarYKHw2r+JZINVq6oz4sY7Hf2DHJevuhEix3YbCJBOC1cyCJWoNHNM9YgtDP0ZBFg9P0DQyx9BonnUcaenw9jaNFRSnychC6UY+SdYfPHxjYZnaD41qGZkeVkVcsKQesQ5BS7REyDc3nVsOASbyEYxJtbHEMRErmMwHG2uiZEHHqGBp4rBXC2tVZMPaxx8xGVex5ORZbygfy7kLcZ14Q8dW0Sw4BeCggWO25Udtk4kbcZ3Abs3e8CxY7znk30QFGVfxLe6J/aJy9hq7I9odnjfp8PakxgqKU88i8WMO5oupMVGyHlLDD3q/eaIvFoK1UWgb46LgbzpvLFbwskPbwXoBj+HUtfc9fUyF51QTi6W8saUnbgy+VsHySDfvxECwpIKue0a3niX41khtN7AthXhIC1qLs8eAjZVH9SNn6B3mmy5WRbjSxThLhFrQyXXI+obtxkbTqUyTTGOXyXatxgrKUmIkVvBiJDvz+TRiFX/cZa3DBlCUkIlgGxTaFkzQQq3B0XSysaQjGAc1VlAcE81En+dTJVi1svzRzYaYCFa5UN+mdpEt1HJuGxWsdgePQjk14mejNpYsRYZsrKf5M8RqZfmhh1WibeDDpFEosTX8uLUSGtnLLKOjeclx/S2bQjyksYLimCjCnGc1+lWyvNPPBsGiQ2FP8zIBAZ08BhJTUsVH7r5c08cLKaGKTawxloc1xgOHACb5xOZW7UEsjETRs+mciXxWqEpWqPTFoNLFxJW/TGJrJTcniVMisPs3QTElhm2rMU45WrPS6++lXLXufkt5vPKpLPfL5NeHR0u+DQNHDGyKNrJA/Ji9+eavVMnyeoOsitGaplAs6HqOsWp/cvQ4VtHeJH4+C8VzwOyh28BTasaPdSo2Oz4usS38ImH5g/BerIzw2jye1ILnjMMW5xYW6wAJcsLARL7DwMb0g/yLCVUry4tgrY1FHtY4jXpRA6OfVodXP9ABEuSRaE+2EQqN9MfKwyQGDXJ3v56Jm2CtNtLRJ6449QGrFg9vz2/OGUhAaTIQK/hAtASaWlkRW7etjd2e8T69rIEx5Dh57NEBEqTbwEReYqSu4LF8vLy2WVl29st6FKOw9jFWsEZnt8C47BCfVqk2VuxtrIMGwotu5WdNWLWystPD2lgUv53MLr2wAdpYTgVzmsS7EOe3jXVZ/JiV7DbwS4/n5wVWX1Z2CyuOglXJFr20gfGZQ6/lMgPh7WpjyWJi47fdofO1SlZer5+3xTK3vIYCvbgB0eVoY9UY69uVnzaWvB+rQryuCcDJfL3EKlnOzDSSHhg2RULV2/ODjxxek+9CnO82lrw3fI+B5V97/jbuVMnKxk6+i6GNNU8vbEAccazkt85Au7/85ZFjblw4lBuxsY7n70XW6hfZ+SB2oqU2VlDc5TPH13frEInaWPL9FfYYCK65lM8Fj9XKcida/4zRr1kh3hs3rjzPUtVCEwkk6TEQK1hhYPn3Kp8aOnqVrELK9EkAYBtXrDyvQh+fqdfLGdhS5qnaWHltYzUZ8GM153fjTmfJGmYNFfosAFBroWg1UOz5M2Wa2BoQH3HD8fUqNuogCdpY8rGC5QaCawbzq6GjV8mC6xzzMS3GV7Rs8rX9g3IfGWM1zCapFzNnTjt2xwKo00SCmNtY+w34sc7EqFtfKJL1Jw8sbBRnUrQKLTmXo9RknTSnU0Qj6FSaMy18mOUdpboBK0ivET9Wnfgx+/Oxdrs3yYIvKLLUj2OCGq5aIVr7OcAnPirL1xromxo/rvM/Wd/ToCnEojbWS/Fj7jViYz3L90vtJmJwO7UcFDmbhKVlcSeyxgLROsgxWhx74GZCO2QFIVjvZ71PCzWRQJBHBvxYVQas6H4DtmQkJeshBzgi4mhMRWLM1nCVIoPH/5IjDPCJj09qb9zcaWOziyp2DQY61OYvzQZsrCYKxH3CzWpjuc3L+oIHXND4pwmiZS4Q42v2AZ/6qny4TS9djpxlm6uFlfqx5OgzUru9Hmmf8ID6sdxLFmwHOlitAzbKekP+vW/ZBbT72gipYJ1euJzYx99dCdZG7fcsyEUDNpaJuoJnYtYVPWTJeswh4HsVrTfUiItWIf9kO9DvM0W1jll62XzTyxrXVQfqdLjE6KdZ/JhVGitov2TBF3Qxiyus0EEbpVa0jFMp19hGEvjM16ZgiW5W5cAF1rruT1ShydqCmPDvmIgVPBG7vuihS1aKnQwym6ss02EbZZuYaFXxCyuBAtp8RkfVaECAb/tqK3/1kMC5Q7sQx9rGqqZW/JgmantEXrLgMZ8Bs7gZok8kEbHx28a3AkfZyJ1Rwel37M7khPZt8sMgx3nHUzqBWrNxt7EaDfixThio7REDyYIzXAdmcl1369+wPXTRaqSDWaMBtbt99kherQEBPmjjPT7xuCHTyBwdOCH6DPh3TORj9Wg+ll/Jgt08B6AllKTUREQys6aK1jchfvthzr7592l+8PktO/VW90gn69nquWZ2kdpYojaWfAzdXiM2Vkovtl/J+oO/j/7rLHsDP5uoXpidfB3K9yb4J4dG/11AFx/7/J5KzanzKFdbWZWlTnt66rQglhgm/FhLDPixutXGykWyoI3To/86zj90AEfZFcL2YCV3RpN/k8CAyyTWdNRrQIBLBjjPGlb5KoY1MtKKFCbylJrUxjLNX/7jZ+1/k5Wj/77EXwMc0DLuMC+yY3nJRbFUL+v1r5n95r+SbPa16gco4fcIj6oUr/iVVjpzau2wjus6kEL08Y64ZFXzQPx3PuAdvdiT5cc7KbbyO/NIUsAHzGari5pr+cAHJPjvgL7ra3ZN+u+PfQsWbGIeSbTlSHqSPKWLG3QGEHu2E0jqOItgwo+1AxgS27EYeWbP6KXO3coCWM2tN//uZit/qJUFwAX+mvN3VHKW5ZP+cvaNB9HPouR3FumNPo0BnvEHXTzgYUABxCvo1GEVop//EpesKrrFf2cX7+rFzt3KAviJjzg5uhZ4m1/Yzo86mMB2Uvwtp2/Yw9Ep67jOrO0EnVhCCQNTrOTx/81kR2f+L+e7KOH4fYmA79KUw99SU/4rxTCvGeQlL3hBD3/wLODdgfU8n/KNKYbTnmUiy1iE7btIGZ49vJxd6s1xEm/+u4gTBmysGl7xkkJSk65fKkOcs7fo59S0T48c4xRKQFYWwLdsn/Bfh/hcrSwATvuWmLmcZ/2Uvz3nPZ7kNK0UO07tQS5/Ur5fDZvUqGyFSRGFDI9ONm4WBuHIS4J8wERibRFFDJMg9eYah/c8JUZl66lKVJCSBTdZM+G/2tmZ49onHpIFx311s6rlqzSdbLf6jl5TFEWJGTNy+vT79E4ynO9r0VwA9nnu4lzIN1xJI1i7VbAURVGCkazXbJjkJ5lPp+fJerpBHAeOsMfDuzfyr7T1KY5rvJCiKMo4uW0MAizh5pQ+TLfY6XMPdi43WWjBqExskJ1KI6kFGT8x4podcRn/zVX15WKOTgloHyOXOEFFURSVrLRsoX3KXwb50GeRkSUUwaiLczLhO+9Tro+W3vmamvR6ghcuKtTV82Wa7UCAlsByvBRFUVSyJtDAhTRT7ofa+NmRck6yKcNrbWzVAVIURZnMjEC+5WKaLk7b+JeBEpJRoYQv+bcKlqIoiryVBbCX42n+2sFuzS2YRhP7M2wHqmApiqIISBY0vanxPpFBTnBKqxC+YSPHHAsoBVtcV1EURSUrA40T2hFOpJePtKATUMWRjJuBI2iUoKIoSkZmBPpt5zJ0v11AB1eozOuRruQ7urMI1mkVLEVRFCkrC9JHD46Q5Byf8TIPR7mC/XyQ9V3H+FRvSEVRFEnJgi20ZOwpM0Az5wLoTBQdqmnIkCo8mY+0arOiKIq8ZEElV5mf8dUBzhhp0CbPahrY5uJ9Q/yP1hJUFEUxI1lQylUWO7z+nIucirW1VUcTS129s4etLupkKIqiqGT9J7zvvpIllXiIVs7wMHZjWkIdO1x3Au5gm5HuP4qiKCpZkzjKgazvaac1Rptiy9hEnYeeXyf5WG9CRVEUGyQL6vguTd3zqXTTzkX+jPRIFlNDPSs9fWYX5/QWVBRFsUWyoIoWVw1FXvEzl+mMYFhGKcupZwlzPH2qj+38rDegoiiKTZIFhVxyXSD3Obe4wd2I1CWs5m3WsG5KvzA3tPA39WApiqLYJ1kAOzjv4d2D/EontywOzVjGGlayxMWmZ7pf57ebmKIoikqWCJWcdxn0PU4PnVznIc8EGjy6IUEpS1nHchb4/g6tba8oimK9ZAEc5AiQ9GibJHnIdR7Tx2NDFeGLqGA+1SxmmS+7aoznfEqz3nSKoihRkCyo4jTLfcgWwBBP+IMeunkoZKfMZSmVLKSCuczO+dsu8WnEoyIVRVHySrIA9nLQR8DCZGvlBX/Sw2N6+JNhXgcUylBEMcWUs4ByFlJKSQBCNUI/H2tJJkVRlOhJFpRzMksbDm/W15884xnPecYLXvKK17xmmGFSDJMiNckTliBBIYUUUkQhRcyklBJKmEMpcynNWNA3F07naQV7RVGUGEgWZO/OmxtJXr+Rq8milaCQBIUU5WjpuaWNk/yqN5qiKEqUJQsS7GF/YFtvNtLFAU0XVhRFiYNkAZRymIacovBspZsTtOoNpiiKEh/JAqimyUXP3ijRzwnOWZJLpiiKopIVMEv4iC2xsLb6OUOzBlsoiqLEV7JGrK1GNnksLmsX3bRyTmsHKoqixF+yAMqopT7ESMKwSHKDy7TrZqCiKEr+SBZAEeupZ4VQEHru9HORNh7rzaQoipJ/kjVCOfXUWG5vPecerdxSz5WiKEp+SxZAIatZz0pXLSKl6eAWHVqTXVEURSVrIqWsZB0rmWfF2QzxGx108pvePIqiKCpZ6SliGetZTKUxH1cvf3CdWzzR20ZRFEUlyw3VLKWCt6kWy+Lq5zHdPOBn9VkpiqKoZHknQSULqGQ5FZSkES8v/bjSv/cVT+niIX081i5XiqIoKllBSFcJc1lEBQsppZjiHFKRX/GSF/xJL0/o4U9eaFKwoiiKSlZYFFHGXN6ilFLeGpWwIgrT9MAaYpjXvOQlLxnkGc/o4yl/8lKTgRVFUVSyTFBMEcWjDR1Hmjsy2j3r9RvJUhRFUSLC/we+AiOQsEV9OAAAAABJRU5ErkJggg=="};</script>
 <script>
@@ -741,6 +747,14 @@ html, body { background: #12F06C; }
     el.querySelector('.logo-home').onclick = () => D2T.go('home');
     const acct = el.querySelector('.acct-btn'); if (acct) acct.onclick = () => D2T.go('account');
     const back = el.querySelector('.back-btn'); if (back) back.onclick = D2T.back;
+    // the mode tag drops in with a bounce and one glint on the first run screen after home (Craig, 31 Oct, build 196)
+    const mt = el.querySelector('.mode-tag');
+    if (mt && (prevName === 'home' || prevName === 'intro') && D2T.mo && !D2T.mo.still()) {
+      requestAnimationFrame(() => {
+        D2T.mo.anim(mt, [{ transform: 'translateY(-44px) skewX(-10deg)', opacity: 0 }, { transform: 'translateY(0) skewX(-10deg)', opacity: 1 }], { duration: 420, delay: 250, easing: 'cubic-bezier(.34,1.56,.64,1)', fill: 'backwards' });
+        D2T.mo.glint(mt, { delay: 750, dur: 480 });
+      });
+    }
     return el;
   };
   // First-time tips (12 Oct): a handwritten note with a curved arrow (the respin tip's style), each shown once ever
@@ -1427,6 +1441,11 @@ D2T.start(); D2T.started = true;
 .tr-seg.is-win.is-todo { background: #3A3A44; }
 .tr-seg.is-done { background: color-mix(in srgb, var(--tr-acc) 45%, transparent); }
 .tr-seg.is-current { background: var(--tr-acc); box-shadow: 0 0 10px var(--tr-acc); }
+/* build 196: the current segment fills left to right with a white leading edge, then glows slowly */
+.tr-seg.tr-fill { position: relative; overflow: hidden; background: #26262C; animation: trGlow 1.3s ease-in-out .9s infinite; }
+.tr-segfill { position: absolute; inset: 0; transform-origin: left center; background: linear-gradient(90deg, var(--tr-acc) 0%, var(--tr-acc) 82%, #fff 100%); }
+@keyframes trGlow { 0%, 100% { box-shadow: 0 0 6px var(--tr-acc); } 50% { box-shadow: 0 0 16px var(--tr-acc); } }
+@media (prefers-reduced-motion: reduce) { .tr-seg.tr-fill { animation: none; } }
 .tr-wins { margin-top: 4px; }
 .tr-wins span { font-weight: 800; font-size: 8.5px; letter-spacing: .14em; text-transform: uppercase; color: #8E8E99; text-align: center; white-space: nowrap; line-height: 1.1; }
 .tr-rollhead .sp-kicker b { font-size: 15px; font-weight: 900; color: var(--tr-acc); letter-spacing: .04em; }
@@ -1553,7 +1572,7 @@ D2T.start(); D2T.started = true;
 .se-sqtext { flex: 1; min-width: 0; }
 .se-sqname { font: var(--display); font-size: 20px; text-transform: uppercase; }
 .se-sqsub { font-size: 12px; font-weight: 700; color: var(--muted); margin-top: 2px; }
-.se-rating { display: flex; align-items: center; gap: 7px; padding: 4px 12px 4px 10px; border-radius: 14px; background: var(--ink-2); border: 1px solid var(--se-acc-b); }
+.se-rating { position: relative; display: flex; align-items: center; gap: 7px; padding: 4px 12px 4px 10px; border-radius: 14px; background: var(--ink-2); border: 1px solid var(--se-acc-b); }
 .se-rating b { font: var(--display); font-size: 24px; color: var(--se-text); font-variant-numeric: tabular-nums; min-width: 1.3em; text-align: center; }
 .se-rating i { font-style: normal; font-size: 9.5px; line-height: 1.15; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); }
 .se-rating.se-bump { animation: seBump .5s cubic-bezier(.3,1.5,.5,1); }
@@ -1829,8 +1848,13 @@ D2T.start(); D2T.started = true;
 .sm-label { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 2px 2px 0; }
 .sm-panel .sm-label { margin-bottom: 8px; }
 .sm-ghost { display: block; width: 100%; height: auto; }
-.sm-line { stroke-dasharray: 2000; animation: smDraw 1.6s .4s ease-out both; }
-@keyframes smDraw { from { stroke-dashoffset: 2000; } to { stroke-dashoffset: 0; } }
+/* build 196: both lines draw together through a widening clip (summary.js motion), so no smDraw */
+.sm-pn, .sm-ps { display: inline-block; }
+.sm-head { position: relative; overflow: hidden; }
+.sm-head.sm-hold { animation: none !important; opacity: 0; }
+.sm-ach span { position: relative; overflow: hidden; }
+.sm-ach span.on.sm-wait { border: 1px dashed var(--line); background: transparent; color: var(--muted); font-style: normal; }
+.sm-achf { position: absolute; inset: -1px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: var(--se-acc); color: var(--se-ink); font-style: italic; font-weight: 900; }
 .sm-key { display: flex; gap: 16px; margin-top: 6px; font-size: 12px; color: var(--soft); }
 .sm-key span { display: inline-flex; align-items: center; gap: 6px; }
 .sm-key i { width: 18px; height: 0; border-top: 3px solid var(--se-text); }
@@ -1850,7 +1874,7 @@ D2T.start(); D2T.started = true;
 .sm-banter { margin: 4px 8px 0; text-align: center; font-style: italic; color: var(--soft); line-height: 1.4; }
 .sm-two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .sm-next { width: 100%; margin: 4px 0 12px; }
-@media (prefers-reduced-motion: reduce) { .sm-in > *, .sm-line { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .sm-in > * { animation: none; } }
 .sm-head.sm-miss { background: var(--ink-2); color: var(--soft); }
 .sm-ach.sm-ach-one { grid-template-columns: 1fr; }
 
@@ -2109,6 +2133,8 @@ D2T.start(); D2T.started = true;
 .rs-club img { width: 38px; height: 38px; }
 .rs-club small { font: 800 10.5px/1.15 var(--font); color: var(--soft); text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
 @media (prefers-reduced-motion: reduce) { .rs-dots i.spend { animation: none; opacity: .5; } }
+/* build 196: the change chip over the team rating as it ticks */
+.mo-chip { position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%); padding: 2px 7px; border-radius: 6px; border: 1px solid var(--se-acc); background: rgba(255,255,255,.06); color: var(--se-text); font: 900 italic 15px/1.1 var(--font); white-space: nowrap; pointer-events: none; z-index: 4; }
 
 /* Goal Rush (screens/goals.js, was 433 Goals): black, yellow #FFD21F as the mode colour (text #FFE375), night stadium pitch, shirts. */
 .g4, .g4-end { --g4: #FFD21F; --g4-t: #FFE375; --g4-gold: #FFF2A8; --g4-red: #FF4D2E; }
@@ -4129,6 +4155,103 @@ function setMuted(m) {
 }
 root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlock, clipsLoaded: decodeAll, loadReveal, reveal };
 })(typeof window !== "undefined" ? window : globalThis);
+
+;
+/* ---- core/motion.js ---- */
+// Small motions (Craig, 31 Oct, build 196; design/prototype/anim-polish.html on the design branch): numbers that roll
+// like an odometer, a white glint, and one rule for all of them: each plays once, never blocks a tap, a tap anywhere
+// jumps every running one to its end, and with reduced motion the final values are there at once.
+(function () {
+  const D2T = window.D2T;
+  const live = new Set();
+  const still = () => (D2T.reduced ? D2T.reduced() : false);
+  // a running motion is anything with finish(); finish() must leave the element in its final state
+  const track = (m) => { live.add(m); return m; };
+  const untrack = (m) => live.delete(m);
+  const finishAll = () => { [...live].forEach((m) => { try { m.finish(); } catch (e) { /* gone */ } }); };
+  // a tap jumps them all to the end; it never stops the tap itself
+  document.addEventListener('pointerdown', finishAll, true);
+
+  // "+20", "-3", "1st", "40%", "8-": a sign, a number and a suffix; anything else ("-") just appears
+  function parse(v) {
+    const m = String(v).match(/^([+\-]?)(\d+)(.*)$/);
+    return m ? { sign: m[1], n: +m[2], suf: m[3] } : null;
+  }
+  const ORD = /^(st|nd|rd|th)$/;
+
+  // the odometer: each step slides up out of a clipped box and the next slides up from below. from: the start (0, or
+  // 20 for a finish), dur, delay; the steps follow an ease-out cubic, at most 14 of them, so a big number still rolls.
+  function odometer(el, to, o = {}) {
+    if (!el) return null;
+    const p = parse(to);
+    if (!p || still()) { el.textContent = String(to); return null; }
+    const ord = ORD.test(p.suf);
+    const fmt = (n) => (ord ? D2T.ordinal(n) : p.sign + n + p.suf);
+    const from = o.from != null ? o.from : ord ? Math.max(p.n, 20) : 0;
+    if (from === p.n) { el.textContent = String(to); return null; }
+    const dur = o.dur || 950, delay = o.delay || 0;
+    const span = Math.abs(p.n - from), N = Math.min(span, 14);
+    const box = document.createElement('span'); box.className = 'mo-odo';
+    const cur = document.createElement('span'); cur.className = 'mo-v'; cur.textContent = fmt(from);
+    box.appendChild(cur); el.textContent = ''; el.appendChild(box);
+    let shown = cur; const timers = [];
+    const m = track({
+      finish() { timers.forEach(clearTimeout); untrack(m); if (el.isConnected || el.firstChild === box) el.textContent = String(to); if (o.done) o.done(); },
+    });
+    for (let k = 1; k <= N; k++) {
+      const f = k / N, at = delay + dur * (1 - Math.cbrt(1 - f)), val = Math.round(from + (p.n - from) * f);
+      const gap = k === 1 ? 140 : dur * (Math.cbrt(1 - (k - 1) / N) - Math.cbrt(1 - f));
+      timers.push(setTimeout(() => {
+        if (!box.isConnected) { m.finish(); return; }
+        const nx = document.createElement('span'); nx.className = 'mo-v mo-in'; nx.textContent = k === N ? String(to) : fmt(val);
+        const t = Math.max(60, Math.min(160, gap));
+        const old = shown; box.appendChild(nx); shown = nx;
+        old.classList.add('mo-out');
+        old.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-100%)' }], { duration: t, easing: 'ease-out' }).finished.catch(() => {}).then(() => old.remove());
+        nx.animate([{ transform: 'translateY(100%)' }, { transform: 'translateY(0)' }], { duration: t, easing: 'ease-out' });
+        if (k === N) timers.push(setTimeout(() => m.finish(), t + 20));
+      }, at));
+    }
+    return m;
+  }
+
+  // the glint: a white diagonal sweep (rotated 18deg, blended as overlay), clipped to the element it runs over
+  function glint(el, o = {}) {
+    if (!el || still()) return null;
+    const g = document.createElement('i'); g.className = 'mo-glint'; g.setAttribute('aria-hidden', 'true');
+    const timer = setTimeout(() => {
+      if (!el.isConnected) return;
+      el.appendChild(g);
+      g.animate([{ transform: 'translateX(-120%) rotate(18deg)' }, { transform: 'translateX(120%) rotate(18deg)' }], { duration: o.dur || 500, easing: 'ease-in-out' })
+        .finished.catch(() => {}).then(() => m.finish());
+    }, o.delay || 0);
+    const m = track({ finish() { clearTimeout(timer); g.remove(); untrack(m); } });
+    return m;
+  }
+
+  // a Web Animation that a tap jumps to its end
+  function anim(el, kf, opts) {
+    if (!el || still()) return null;
+    const a = el.animate(kf, opts);
+    const m = track({ finish() { try { a.finish(); } catch (e) { /* gone */ } untrack(m); } });
+    a.finished.catch(() => {}).then(() => untrack(m));
+    return a;
+  }
+  // timers that a tap runs at once (in order), so a sequence ends where it would have
+  function later(fn, ms) {
+    if (still()) { fn(); return null; }
+    const t = setTimeout(() => { untrack(m); fn(); }, ms);
+    const m = track({ finish() { clearTimeout(t); untrack(m); fn(); } });
+    return m;
+  }
+
+  // what an odometer shows before it rolls: 0 (keeping the sign and suffix), a finish from 20th; anything else as it is
+  function startText(v) {
+    const p = parse(v); if (!p) return String(v);
+    return ORD.test(p.suf) ? D2T.ordinal(Math.max(p.n, 20)) : p.sign + '0' + p.suf;
+  }
+  D2T.mo = { startText, still, track, untrack, finishAll, parse, odometer, glint, anim, later, live: () => live.size };
+})();
 
 ;
 /* ---- core/cards.js ---- */
@@ -6737,7 +6860,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
       // the positions come from the server once it answers: the shields are drawn again if that changes what they show
       const shieldsNow = () => GM.map((g) => (g.board ? '' : homeShields(g).map((x) => x[0] + '|' + x[1]).join(','))).join(';');
       let shieldsWere = shieldsNow();
-      const redrawShields = () => { if (!root.isConnected || shieldsNow() === shieldsWere) return; shieldsWere = shieldsNow(); GM.forEach((g, i) => { const st = SL[i].querySelector('.stg-st'); if (st) st.innerHTML = shieldsHTML(homeShields(g), g.k); }); };
+      const redrawShields = () => { if (!root.isConnected || shieldsNow() === shieldsWere) return; shieldsWere = shieldsNow(); GM.forEach((g, i) => { const st = SL[i].querySelector('.stg-st'); if (st) { st.innerHTML = shieldsHTML(homeShields(g), g.k); primeShields(i); } }); };
       if (D2T.lb) D2T.lb.positions().then(redrawShields).catch(() => {});
       const onKey = (e) => { if (document.querySelector('.sheet')) return; if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('.stg-lb')) { e.preventDefault(); openBoard(GM[shown], e.target.closest('.stg-lb')); return; } if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') dlyBack(); if (e.key === 'ArrowRight') turn(1); else if (e.key === 'ArrowLeft') turn(-1); };
       document.addEventListener('keydown', onKey); cleanups.push(() => document.removeEventListener('keydown', onKey));
@@ -6757,8 +6880,27 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
       const idle = window.requestIdleCallback ? (f) => window.requestIdleCallback(f, { timeout: 1500 }) : (f) => setTimeout(f, 300);
       const noIdle = window.cancelIdleCallback || clearTimeout;
       cleanups.push(() => noIdle(idleId));
+      // Your record rolls in (Craig, 31 Oct, build 196; design/prototype/anim-polish.html): when a slide comes to rest its
+      // four shield numbers roll up from 0 as an odometer (950 ms each, 300 ms after rest, 120 ms apart), then a glint runs
+      // across each shield in turn; once per slide per home visit. Until then a slide's shields show where they start.
+      const MO = D2T.mo, rolled = new Set();
+      function primeShields(n) {
+        if (reduced || !MO || rolled.has(n)) return;
+        SL[n].querySelectorAll('.stg-st .stg-sh b').forEach((b) => { const v = b.dataset.v || b.textContent; b.dataset.v = v; b.textContent = MO.startText(v); });
+      }
+      function rollShields(n) {
+        if (reduced || !MO || rolled.has(n)) return;
+        rolled.add(n);
+        SL[n].querySelectorAll('.stg-st .stg-sh').forEach((sh, i) => {
+          const b = sh.querySelector('b'); if (!b) return;
+          const v = b.dataset.v || b.textContent;
+          MO.odometer(b, v, { delay: 300 + i * 120, dur: 950 });
+          MO.glint(sh.querySelector('.fr-al-face'), { delay: 1500 + i * 90, dur: 520 });
+        });
+      }
       function rest() {
         const n = shown, g = GM[n];
+        rollShields(n);
         dlyRest();
         if (moving !== n) {
           if (moving >= 0 && arts[GM[moving].id]) arts[GM[moving].id].stop();
@@ -7094,6 +7236,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
       })();
 
       // ---------- opening ----------
+      SL.forEach((_, i) => primeShields(i));
       render(); rest();
       // arriving from the intro: take the logo from where the intro left it (measured before the wheel was drawn), then
       // bring the stage in
@@ -7515,6 +7658,8 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
         ${clubs.length ? `<div class="fr-clubs">${clubs.map(([k, c]) => { const [season, name] = k.split(':'); const cl = D2T.game.club(name); return `<div class="fr-club"><img src="${cl.crest}" alt=""><span>${D2T.esc(name)}<small>${season} · best ${D2T.ordinal(c.finish)}</small></span></div>`; }).join('')}</div>` : '<p class="fr-small">No finished seasons yet.</p>'}
       </div>`);
       root.appendChild(body);
+      // the record's shields roll in as the page opens, then a glint runs across each in turn (build 196; as on home)
+      if (D2T.mo) body.querySelectorAll('.fr-record .fr-frame').forEach((f, i) => { const b = f.querySelector('b'); if (!b) return; D2T.mo.odometer(b, b.textContent, { delay: 300 + i * 120, dur: 950 }); D2T.mo.glint(f, { delay: 1500 + i * 90, dur: 520 }); });
     }
   });
 })();
@@ -8446,7 +8591,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
             <div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}. Sign the selected player here${say}">
               ${D2T.cards.player(c, { w: pw, mini: true, shine: i === fresh, tab: s.pos, cls: 'fit-' + fit, dots: (GAME.settling(c.id) || {}).left })}</div>${plab}</div>`;
         }).join('');
-        ratingEl.textContent = GAME.rating();
+        rateTo(GAME.rating());
         const tn = field && field.querySelector('.se-tname'); if (tn) tn.textContent = GAME.tacticName();
         if (fresh >= 0 && !reduced) {
           const el = slotsEl.querySelector(`.se-cardwrap[data-i="${fresh}"]`);
@@ -8781,6 +8926,39 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
           <span class="tr-banner-r"><span class="tr-dots">${Array.from({ length: info.of }, (_, k) => `<i${k < info.step ? ' class="is-on"' : ''}></i>`).join('')}</span><span>${info.step} of ${info.of}</span></span></div>` : '';
         return { top, banner, style: `--tr-acc:${acc}` };
       })();
+      // the team rating ticks up after a signing (Craig, 31 Oct, build 196): an odometer from the old rating to the new,
+      // a chip with the change popping up above the box, and a soft glow in the accent while it rolls
+      let lastRating = null;
+      function rateTo(v) {
+        if (lastRating === v) return;
+        const was = lastRating; lastRating = v;
+        const MO = D2T.mo;
+        if (was == null || !MO || MO.still()) { ratingEl.textContent = v; return; }
+        MO.odometer(ratingEl, v, { from: was, dur: 800 });
+        const box = ratingEl.closest('.se-rating'); if (!box) return;
+        const acc = getComputedStyle(box).getPropertyValue('--se-acc').trim() || '#12F06C';
+        MO.anim(box, [{ boxShadow: `0 0 0 0 ${acc}` }, { boxShadow: `0 0 16px 1px ${acc}`, offset: 0.5 }, { boxShadow: `0 0 0 0 ${acc}` }], { duration: 800, easing: 'ease-out' });
+        const d = v - was, chip = document.createElement('span');
+        chip.className = 'mo-chip'; chip.textContent = (d > 0 ? '+' : '') + d; box.appendChild(chip);
+        chip.animate([{ transform: 'translate(-50%, 10px) scale(.6)', opacity: 0 }, { transform: 'translate(-50%, 0) scale(1)', opacity: 1 }], { duration: 320, easing: 'cubic-bezier(.34,1.56,.64,1)', fill: 'backwards' });
+        const t = setTimeout(() => chip.animate([{ transform: 'translate(-50%, 0)', opacity: 1 }, { transform: 'translate(-50%, -12px)', opacity: 0 }], { duration: 300, easing: 'ease-in', fill: 'forwards' }).finished.catch(() => {}).then(() => cm.finish()), 1600);
+        const cm = MO.track({ finish() { clearTimeout(t); chip.remove(); MO.untrack(cm); } });
+      }
+      // each roll steps the season bar on (build 196): the last roll's segment settles to done, this one fills left to
+      // right with a white leading edge and then glows slowly, and "Transfer N" rolls up from N-1
+      function stepOn() {
+        const MO = D2T.mo; if (!MO || MO.still()) return;
+        const segs = [...body.querySelectorAll('.tr-seg')], ci = segs.findIndex((s) => s.classList.contains('is-current'));
+        if (ci < 0) return;
+        const cur = segs[ci], prev = ci > 0 && segs[ci - 1].classList.contains('is-done') ? segs[ci - 1] : null;
+        const acc = getComputedStyle(cur).getPropertyValue('--tr-acc').trim() || '#12F06C';
+        if (prev) MO.anim(prev, [{ background: acc, boxShadow: `0 0 10px ${acc}` }, { boxShadow: '0 0 0 transparent' }], { duration: 350, easing: 'ease-out' });
+        cur.classList.add('tr-fill');
+        const fill = document.createElement('i'); fill.className = 'tr-segfill'; cur.appendChild(fill);
+        MO.anim(fill, [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 450, delay: 450, easing: 'ease-in-out', fill: 'backwards' });
+        const b = body.querySelector('.sp-kicker b'), n = b ? +b.textContent : 0;
+        if (b && n > 1) MO.odometer(b, n, { from: n - 1, delay: 450, dur: 450 });
+      }
       const build = () => {
         api = D2T.roll.mount(body, {
           kicker: draft ? `${GAME.modeName()} draft · Shirt ${info.step} of ${info.of}` : `Transfer <b>${info.overall}</b> of ${info.total}`,
@@ -8814,6 +8992,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
           onConfirm: (p) => { if (draft) sign(api.results().indexOf(p), di.open ? GAME.draftFits(p.id)[0] : di.slot); }
         });
         api.el.classList.add('sp-reveal');
+        if (st.spun !== rollKey) stepOn();
         buildPitch();
         if (st.spun === rollKey) enterPlacing(false);
       };
@@ -9884,6 +10063,101 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
   };
   const headline = (F) => (F.stars.champions ? 'Champions' : F.finish <= 3 ? 'Top 3' : F.stars.tophalf ? 'Top half' : F.stars.survive ? 'Beat the drop' : 'Relegated');
 
+  // ---------- the season's motions (Craig, 31 Oct, build 196; design/prototype/anim-polish.html) ----------
+  // The finish lands like Goal Rush's fruit machine (rollNumber in goals.js: the same steps, a random place 1 to 20 each
+  // tick, never the final one, the blur on all but the last three, numberTick every other tick), then its suffix wipes
+  // in, the verdict tag stamps in with a glint and the three tiles count up. The targets fill one after another as they
+  // scroll into view, and both lines of the graph draw left to right together. A tap jumps each to its end.
+  function motion(body, F) {
+    const MO = D2T.mo, posEl = body.querySelector('.sm-pos'), headEl = body.querySelector('.sm-head');
+    const num = String(F.finish), ord = D2T.ordinal(F.finish);
+    posEl.innerHTML = `<span class="sm-pn">${num}</span><span class="sm-ps">${D2T.esc(ord.slice(num.length))}</span>`;
+    if (!MO || MO.still()) return;
+    const snd = (k) => window.D2TSound && window.D2TSound.play(k);
+    const pn = posEl.querySelector('.sm-pn'), ps = posEl.querySelector('.sm-ps');
+    const tiles = [...body.querySelectorAll('.sm-tile b')];
+    tiles.forEach((b) => { b.dataset.v = b.textContent; b.textContent = MO.startText(b.textContent); });
+    headEl.classList.add('sm-hold'); ps.style.clipPath = 'inset(0 100% 0 0)';
+    let ended = false, ticking = null;
+    const timers = [];
+    const later = (f, ms) => timers.push(setTimeout(f, ms));
+    const end = () => {
+      if (ended) return; ended = true;
+      timers.forEach(clearTimeout); MO.untrack(seq);
+      pn.textContent = num; pn.style.filter = ''; ps.style.clipPath = '';
+      headEl.classList.remove('sm-hold'); headEl.style.animation = 'none';
+      tiles.forEach((b) => { if (!b.querySelector('.mo-odo')) b.textContent = b.dataset.v; });
+    };
+    const seq = MO.track({ finish() { if (ended) return; end(); tiles.forEach((b) => { b.textContent = b.dataset.v; }); } });
+    const steps = [38, 38, 40, 42, 46, 50, 56, 64, 74, 88, 108, 136];
+    let i = 0;
+    const stamp = () => {
+      headEl.classList.remove('sm-hold'); headEl.style.animation = 'none';
+      headEl.animate([{ transform: 'scale(1.5) rotate(-4deg)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 260, easing: 'cubic-bezier(.34,1.56,.64,1)' });
+      MO.glint(headEl, { delay: 260, dur: 480 });
+      later(() => { end(); tiles.forEach((b, k) => MO.odometer(b, b.dataset.v, { delay: k * 140, dur: 700 })); }, 320);
+    };
+    const tick = () => {
+      if (ended || !pn.isConnected) return;
+      if (i < steps.length) {
+        let v; do { v = 1 + Math.floor(Math.random() * 20); } while (v === F.finish);
+        pn.textContent = v; pn.style.filter = i >= steps.length - 3 ? '' : 'blur(1.4px)';
+        pn.animate([{ transform: 'translateY(-14px)', opacity: 0.4 }, { transform: 'translateY(0)', opacity: 1 }], { duration: steps[i], easing: 'linear' });
+        if (i % 2 === 0) snd('numberTick');
+        later(tick, steps[i++]);
+        return;
+      }
+      pn.textContent = num; pn.style.filter = '';
+      ps.animate([{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 260, easing: 'ease-out' });
+      ps.style.clipPath = '';
+      later(stamp, 280);
+    };
+    pn.textContent = 1 + ((F.finish + 9) % 20);
+    later(tick, 450);
+
+    // the targets you hit fill one after another as the row scrolls into view; the missed ones stay dashed
+    const ach = body.querySelector('.sm-ach'), on = [...body.querySelectorAll('.sm-ach span.on')];
+    if (ach && on.length && window.IntersectionObserver) {
+      on.forEach((s) => s.classList.add('sm-wait'));
+      const io = new IntersectionObserver((es) => {
+        if (!es.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        const tt = [];
+        const done = () => { tt.forEach(clearTimeout); MO.untrack(fm); on.forEach((s) => { s.classList.remove('sm-wait'); s.querySelectorAll('.sm-achf').forEach((x) => x.remove()); }); };
+        const fm = MO.track({ finish: done });
+        on.forEach((s, k) => tt.push(setTimeout(() => {
+          if (!s.isConnected) return;
+          const ov = document.createElement('b'); ov.className = 'sm-achf'; ov.textContent = s.textContent; s.appendChild(ov);
+          ov.animate([{ clipPath: 'inset(0 100% 0 0 round 12px)' }, { clipPath: 'inset(0 0% 0 0 round 12px)' }], { duration: 380, easing: 'ease-in-out' })
+            .finished.catch(() => {}).then(() => { s.classList.remove('sm-wait'); ov.remove(); if (k === on.length - 1) MO.untrack(fm); });
+          MO.glint(s, { delay: 300, dur: 480 });
+        }, k * 420)));
+      }, { threshold: 0.6 });
+      io.observe(ach);
+    }
+
+    // both lines of the graph draw left to right together: a clip that widens over 1.6 s (the dashes stay dashes)
+    const rev = body.querySelector('.sm-rev'), panel = body.querySelector('.sm-ghost');
+    if (rev && panel && window.IntersectionObserver) {
+      const W = +rev.getAttribute('width'), t0 = performance.now();
+      rev.setAttribute('width', '0');
+      let raf = 0;
+      const full = () => { cancelAnimationFrame(raf); rev.setAttribute('width', String(W)); MO.untrack(gm); };
+      const gm = { finish: full };
+      const io = new IntersectionObserver((es) => {
+        if (!es.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        setTimeout(() => {
+          MO.track(gm);
+          const s0 = performance.now();
+          const step = (now) => { const p = Math.min(1, (now - s0) / 1600), e = 1 - Math.pow(1 - p, 3); rev.setAttribute('width', (W * e).toFixed(1)); if (p < 1 && rev.isConnected) raf = requestAnimationFrame(step); else full(); };
+          raf = requestAnimationFrame(step);
+        }, Math.max(0, 400 - (performance.now() - t0)));
+      }, { threshold: 0.3 });
+      io.observe(panel);
+    }
+  }
+
   // Your league position each gameweek (solid, club colour) against history's (dashed grey).
   function ghostSVG(mine, hist, n, rel) {
     const W = 340, H = 180, L = 28, R = 10, T = 12, B = 22, w = W - L - R, h = H - T - B, len = Math.max(hist.length, mine.length, 2);
@@ -9892,8 +10166,9 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
     const grid = [1, Math.round(n / 2), n].map((p) => `<line x1="${L}" x2="${W - R}" y1="${y(p)}" y2="${y(p)}" stroke="#222226" stroke-dasharray="3 4"/><text x="${L - 6}" y="${y(p) + 4}" font-size="10" text-anchor="end" fill="#8E8E99">${p}</text>`).join('');
     return `<svg class="sm-ghost" viewBox="0 0 ${W} ${H}" role="img" aria-label="Your league position each week against history's">
       <rect x="${L}" y="${y(n - rel + 1) - 5}" width="${w}" height="${y(n) - y(n - rel + 1) + 10}" fill="rgba(255,40,80,0.10)"/>${grid}
-      <polyline points="${pts(hist)}" fill="none" stroke="#8E8E99" stroke-width="2" stroke-dasharray="5 4"/>
-      <polyline class="sm-line" points="${pts(mine)}" fill="none" stroke="var(--se-text)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      <defs><clipPath id="smReveal"><rect class="sm-rev" x="0" y="0" width="${W}" height="${H}"/></clipPath></defs>
+      <g clip-path="url(#smReveal)"><polyline points="${pts(hist)}" fill="none" stroke="#8E8E99" stroke-width="2" stroke-dasharray="5 4"/>
+      <polyline class="sm-line" points="${pts(mine)}" fill="none" stroke="var(--se-text)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></g>
       <text x="${L}" y="${H - 6}" font-size="10" fill="#8E8E99">GW1</text><text x="${W - R}" y="${H - 6}" font-size="10" text-anchor="end" fill="#8E8E99">GW${len}</text></svg>`;
   }
 
@@ -10079,6 +10354,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
         </div>
       </div>`);
       root.appendChild(body);
+      motion(body, F);
 
       // the end sheet (Craig, 14 Oct; D2T.endSheet): no bottom bar here. Share, then Play again (the Daily: Go again; Club X:
       // Next season while the career is open, and New career), then Home. Dragged closed, a "Season over" peek bar

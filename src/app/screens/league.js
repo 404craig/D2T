@@ -68,6 +68,8 @@
         ${clubs.length ? `<div class="fr-clubs">${clubs.map(([k, c]) => { const [season, name] = k.split(':'); const cl = D2T.game.club(name); return `<div class="fr-club"><img src="${cl.crest}" alt=""><span>${D2T.esc(name)}<small>${season} · best ${D2T.ordinal(c.finish)}</small></span></div>`; }).join('')}</div>` : '<p class="fr-small">No finished seasons yet.</p>'}
       </div>`);
       root.appendChild(body);
+      // the record's shields roll in as the page opens, then a glint runs across each in turn (build 196; as on home)
+      if (D2T.mo) body.querySelectorAll('.fr-record .fr-frame').forEach((f, i) => { const b = f.querySelector('b'); if (!b) return; D2T.mo.odometer(b, b.textContent, { delay: 300 + i * 120, dur: 950 }); D2T.mo.glint(f, { delay: 1500 + i * 90, dur: 520 }); });
     }
   });
 })();

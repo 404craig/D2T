@@ -235,7 +235,7 @@
       // the positions come from the server once it answers: the shields are drawn again if that changes what they show
       const shieldsNow = () => GM.map((g) => (g.board ? '' : homeShields(g).map((x) => x[0] + '|' + x[1]).join(','))).join(';');
       let shieldsWere = shieldsNow();
-      const redrawShields = () => { if (!root.isConnected || shieldsNow() === shieldsWere) return; shieldsWere = shieldsNow(); GM.forEach((g, i) => { const st = SL[i].querySelector('.stg-st'); if (st) st.innerHTML = shieldsHTML(homeShields(g), g.k); }); };
+      const redrawShields = () => { if (!root.isConnected || shieldsNow() === shieldsWere) return; shieldsWere = shieldsNow(); GM.forEach((g, i) => { const st = SL[i].querySelector('.stg-st'); if (st) { st.innerHTML = shieldsHTML(homeShields(g), g.k); primeShields(i); } }); };
       if (D2T.lb) D2T.lb.positions().then(redrawShields).catch(() => {});
       const onKey = (e) => { if (document.querySelector('.sheet')) return; if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('.stg-lb')) { e.preventDefault(); openBoard(GM[shown], e.target.closest('.stg-lb')); return; } if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') dlyBack(); if (e.key === 'ArrowRight') turn(1); else if (e.key === 'ArrowLeft') turn(-1); };
       document.addEventListener('keydown', onKey); cleanups.push(() => document.removeEventListener('keydown', onKey));
@@ -255,8 +255,27 @@
       const idle = window.requestIdleCallback ? (f) => window.requestIdleCallback(f, { timeout: 1500 }) : (f) => setTimeout(f, 300);
       const noIdle = window.cancelIdleCallback || clearTimeout;
       cleanups.push(() => noIdle(idleId));
+      // Your record rolls in (Craig, 31 Oct, build 196; design/prototype/anim-polish.html): when a slide comes to rest its
+      // four shield numbers roll up from 0 as an odometer (950 ms each, 300 ms after rest, 120 ms apart), then a glint runs
+      // across each shield in turn; once per slide per home visit. Until then a slide's shields show where they start.
+      const MO = D2T.mo, rolled = new Set();
+      function primeShields(n) {
+        if (reduced || !MO || rolled.has(n)) return;
+        SL[n].querySelectorAll('.stg-st .stg-sh b').forEach((b) => { const v = b.dataset.v || b.textContent; b.dataset.v = v; b.textContent = MO.startText(v); });
+      }
+      function rollShields(n) {
+        if (reduced || !MO || rolled.has(n)) return;
+        rolled.add(n);
+        SL[n].querySelectorAll('.stg-st .stg-sh').forEach((sh, i) => {
+          const b = sh.querySelector('b'); if (!b) return;
+          const v = b.dataset.v || b.textContent;
+          MO.odometer(b, v, { delay: 300 + i * 120, dur: 950 });
+          MO.glint(sh.querySelector('.fr-al-face'), { delay: 1500 + i * 90, dur: 520 });
+        });
+      }
       function rest() {
         const n = shown, g = GM[n];
+        rollShields(n);
         dlyRest();
         if (moving !== n) {
           if (moving >= 0 && arts[GM[moving].id]) arts[GM[moving].id].stop();
@@ -592,6 +611,7 @@
       })();
 
       // ---------- opening ----------
+      SL.forEach((_, i) => primeShields(i));
       render(); rest();
       // arriving from the intro: take the logo from where the intro left it (measured before the wheel was drawn), then
       // bring the stage in

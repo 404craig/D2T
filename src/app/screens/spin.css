@@ -268,6 +268,11 @@
 .tr-seg.is-win.is-todo { background: #3A3A44; }
 .tr-seg.is-done { background: color-mix(in srgb, var(--tr-acc) 45%, transparent); }
 .tr-seg.is-current { background: var(--tr-acc); box-shadow: 0 0 10px var(--tr-acc); }
+/* build 196: the current segment fills left to right with a white leading edge, then glows slowly */
+.tr-seg.tr-fill { position: relative; overflow: hidden; background: #26262C; animation: trGlow 1.3s ease-in-out .9s infinite; }
+.tr-segfill { position: absolute; inset: 0; transform-origin: left center; background: linear-gradient(90deg, var(--tr-acc) 0%, var(--tr-acc) 82%, #fff 100%); }
+@keyframes trGlow { 0%, 100% { box-shadow: 0 0 6px var(--tr-acc); } 50% { box-shadow: 0 0 16px var(--tr-acc); } }
+@media (prefers-reduced-motion: reduce) { .tr-seg.tr-fill { animation: none; } }
 .tr-wins { margin-top: 4px; }
 .tr-wins span { font-weight: 800; font-size: 8.5px; letter-spacing: .14em; text-transform: uppercase; color: #8E8E99; text-align: center; white-space: nowrap; line-height: 1.1; }
 .tr-rollhead .sp-kicker b { font-size: 15px; font-weight: 900; color: var(--tr-acc); letter-spacing: .04em; }
