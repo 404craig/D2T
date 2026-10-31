@@ -110,7 +110,7 @@
       if (s.pos === 'CAM' || s.pos === 'LW' || s.pos === 'RW') return { x: 0, y: -4 };
       return { x: 0, y: 0 };
     }
-    if (f === '5-3-2' && s.pos === 'CB') return { x: 0, y: -10 };
+    if ((f === '5-3-2' || f === '5-4-1') && s.pos === 'CB') return { x: 0, y: -10 };
     if (BACK.has(s.pos)) return { x: 0, y: -4 };
     if (s.pos === 'CDM') return { x: 0, y: -8 };
     if (MIDS.has(s.pos)) return { x: 0, y: -4 };

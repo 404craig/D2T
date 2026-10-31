@@ -84,10 +84,10 @@ const RULES = {
   // the tactic is built for and 0.5 in any other, so the shape decides how hard the tactic bites and never pays on its own.
   tactics: {
     mid: {},
-    low: { shapes: ["5-3-2", "4-5-1"], defUp: 0.9, attDown: 0.35 },
-    press: { shapes: ["4-3-3", "3-4-3", "4-2-3-1"], attUp: 0.9, defDown: 0.35 },
-    poss: { shapes: ["4-3-3", "4-2-3-1", "3-5-2"], midInto: 0.5 },
-    counter: { shapes: ["4-4-2", "3-5-2", "5-3-2"], fwd: 0.5, fwdCap: 4, attCost: 3, defUp: 0.5 }
+    low: { shapes: ["5-3-2", "4-5-1", "5-4-1"], defUp: 0.9, attDown: 0.35 },
+    press: { shapes: ["4-3-3", "3-4-3", "4-2-3-1", "4-1-4-1", "3-4-2-1"], attUp: 0.9, defDown: 0.35 },
+    poss: { shapes: ["4-3-3", "4-2-3-1", "3-5-2", "4-1-4-1"], midInto: 0.5 },
+    counter: { shapes: ["4-4-2", "3-5-2", "5-3-2", "4-4-1-1", "5-4-1"], fwd: 0.5, fwdCap: 4, attCost: 3, defUp: 0.5 }
   },
   halfShape: 0.5,
   // the lines are not on quite the same scale (keepers rate high, so a defence reads a shade above its XI): a tactic
@@ -149,14 +149,20 @@ const SLOTW = {
 };
 const TACTIC_NAMES = ["mid", "low", "poss", "counter", "press"];
 // x across (0 left, 100 right) and y up the pitch (0 own goal, 100 opponent goal).
+// shapes (Craig, 31 Oct, build 181: 4-4-1-1, 4-1-4-1, 3-4-2-1 and 5-4-1 added, the most-used shapes the Premier League feed
+// names from 2015/16 that the game lacked; 4-1-4-1 is the attacking one, a holding midfielder, two CAMs and two wingers)
 const FORMATIONS = {
   "4-4-2":   [["GK",50,2],["RB",88,22],["CB",63,22],["CB",37,22],["LB",12,22],["RM",88,52],["CM",63,52],["CM",37,52],["LM",12,52],["ST",63,84],["ST",37,84]],
   "4-3-3":   [["GK",50,2],["RB",88,22],["CB",63,22],["CB",37,22],["LB",12,22],["CM",75,56],["CDM",50,44],["CM",25,56],["RW",85,80],["ST",50,86],["LW",15,80]],
   "4-2-3-1": [["GK",50,2],["RB",88,22],["CB",63,22],["CB",37,22],["LB",12,22],["CDM",64,44],["CDM",36,44],["RW",86,66],["CAM",50,66],["LW",14,66],["ST",50,88]],
+  "4-4-1-1": [["GK",50,2],["RB",88,22],["CB",63,22],["CB",37,22],["LB",12,22],["RM",88,50],["CM",63,48],["CM",37,48],["LM",12,50],["CAM",50,65],["ST",50,87]],
+  "4-1-4-1": [["GK",50,2],["RB",88,22],["CB",63,22],["CB",37,22],["LB",12,22],["CDM",50,42],["RW",87,64],["CAM",63,62],["CAM",37,62],["LW",13,64],["ST",50,87]],
   "4-5-1":   [["GK",50,2],["RB",88,22],["CB",63,22],["CB",37,22],["LB",12,22],["RM",90,54],["CM",70,52],["CDM",50,46],["CM",30,52],["LM",10,54],["ST",50,84]],
   "3-5-2":   [["GK",50,2],["CB",75,22],["CB",50,22],["CB",25,22],["RWB",90,48],["CM",70,56],["CDM",50,44],["CM",30,56],["LWB",10,48],["ST",63,84],["ST",37,84]],
+  "3-4-3":   [["GK",50,2],["CB",75,22],["CB",50,22],["CB",25,22],["RM",88,52],["CM",63,52],["CM",37,52],["LM",12,52],["RW",82,80],["ST",50,86],["LW",18,80]],
+  "3-4-2-1": [["GK",50,2],["CB",75,22],["CB",50,22],["CB",25,22],["RWB",90,48],["CM",63,48],["CM",37,48],["LWB",10,48],["CAM",67,68],["CAM",33,68],["ST",50,87]],
   "5-3-2":   [["GK",50,2],["RWB",90,30],["CB",70,22],["CB",50,22],["CB",30,22],["LWB",10,30],["CM",75,54],["CM",50,54],["CM",25,54],["ST",63,84],["ST",37,84]],
-  "3-4-3":   [["GK",50,2],["CB",75,22],["CB",50,22],["CB",25,22],["RM",88,52],["CM",63,52],["CM",37,52],["LM",12,52],["RW",82,80],["ST",50,86],["LW",18,80]]
+  "5-4-1":   [["GK",50,2],["RWB",90,30],["CB",70,22],["CB",50,22],["CB",30,22],["LWB",10,30],["RM",88,56],["CM",63,54],["CM",37,54],["LM",12,56],["ST",50,84]]
 };
 const FORMATION_NAMES = Object.keys(FORMATIONS);
 
