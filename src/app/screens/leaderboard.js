@@ -38,6 +38,27 @@
   }
 
 
+  // ---------- the entrance (Craig, 31 Oct, build 195; A on claude.ai/artifact/DD8B38XHYZvo1QURf4h9fW) ----------
+  // home's league table shield is lifted off the page as an outline in the game's colour (a ghost on the body, so it
+  // outlives the screen change), flies up and stretches into the trophy card's border, and on the way home flies back
+  // down onto the shield. Positions are measured on both screens, so it lands where the pieces really are.
+  const SHIELD_R = '12px 12px 50% 50% / 12px 12px 34% 34%';
+  const still = () => (D2T.reduced ? D2T.reduced() : matchMedia('(prefers-reduced-motion: reduce)').matches);
+  function ghostAt(r, k, round, inner) {
+    const g = document.createElement('div');
+    g.className = 'lb-ghost'; g.setAttribute('aria-hidden', 'true');
+    g.style.cssText = `left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;border-radius:${round ? '14px' : SHIELD_R};--k:${k}`;
+    if (inner) g.innerHTML = inner;
+    document.body.appendChild(g); return g;
+  }
+  function flyTo(g, r, round, ms) {
+    const a = g.animate([{ left: g.style.left, top: g.style.top, width: g.style.width, height: g.style.height, borderRadius: round ? SHIELD_R : '14px' },
+      { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px', borderRadius: round ? '14px' : SHIELD_R }], { duration: ms, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
+    return a.finished.catch(() => {});
+  }
+  const fadeOut = (g, ms) => g.animate([{ opacity: 1 }, { opacity: 0 }], { duration: ms, fill: 'forwards' }).finished.catch(() => {}).then(() => g.remove());
+  D2T.lbFly = { still, ghostAt, flyTo, fadeOut, FLY: 460 };
+
   let cleanups = [];
   D2T.screen('leaderboard', {
     title: 'Leaderboard', theme: 'black', chrome: ['#000000', '#000000'],
@@ -58,7 +79,7 @@
       // the game's own top bar (Craig, 31 Oct, build 190): the D2T logo home, then Share my place and the account
       // home's own top bar (Craig, 31 Oct, build 193): the long logo at home's size, Share my place, the game's ? and the account
       const top = D2T.h(`<div class="lb-top"><button class="fr-home-logo stg-logo lb-logo" type="button" aria-label="DROP2TOP home">${D2T.homeLogo()}</button><button class="stg-rb lb-share" type="button" aria-label="Share my place" disabled>${SHARE}</button><button class="stg-rb lb-q" type="button" aria-label="How to play this game">?</button><button class="stg-rb lb-acct" type="button" aria-label="Account">${ACCT}</button></div>`);
-      top.querySelector('.lb-logo').onclick = () => D2T.go('home');
+      top.querySelector('.lb-logo').onclick = () => backHome();
       top.querySelector('.lb-q').onclick = () => { if (D2T.gameHelp) D2T.gameHelp(GM[gi]); };
       top.querySelector('.lb-acct').onclick = () => D2T.go('account');
       el.prepend(top);
@@ -150,6 +171,15 @@
         $('.lb-share').disabled = !(d.me && d.me.pos);
         if (d.me && d.me.pos) buildShare(g, d, cols, sort);
       }
+      // the rows drop into place one by one, quickly, once the outline has landed (the first table on the way in only)
+      let dropPending = !still(), landAt = 0;
+      function dropRows() {
+        if (!dropPending || !data) return;
+        dropPending = false;
+        const wait = Math.max(0, landAt - performance.now()) + 40;
+        list.style.opacity = ''; pin.style.opacity = '';
+        [...list.children, ...pin.children].forEach((n, i) => n.animate([{ opacity: 0, transform: 'translateY(-18px)' }, { opacity: 1, transform: 'none' }], { duration: 320, delay: wait + i * 45, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' }));
+      }
       const DEFAULT_COLS = { daily: [['Played', 'Wins', 'Best rise'], ['Goes', 'Best finish', 'Rise']], classic: [['Seasons', 'Titles', 'Top 3'], ['Seasons', 'Titles', 'Top 3']], clubx: [['Seasons', 'Titles', 'In a row'], ['Points', 'Wins', 'Goal diff']], goal: [['Games', 'Spot on', 'Hit rate'], ['Games', 'Spot on', 'Closest']], ub: [['Runs', 'Best run', 'Average'], ['Runs', 'Best run', 'Average']] };
       async function load() {
         const g = GM[gi], t = g.keys[tab], my = ++req;
@@ -157,7 +187,7 @@
         const r = await LB.board(g.id, t);
         if (my !== req || !root.isConnected) return;
         data = r.ok ? r.data : { error: r.status === 0 ? 'Check your connection and try again.' : r.status === 404 || r.status === 405 ? 'The leaderboards are not switched on yet.' : (r.data && r.data.error) || 'Something went wrong. Try again.' };
-        draw();
+        draw(); dropRows();
       }
 
       // ---------- Share my place ----------
@@ -184,8 +214,42 @@
       $('.lb-share').onclick = () => { if (!share) return; snd('share'); const fire = () => (share.done ? D2T.share.send(share) : setTimeout(fire, 80)); fire(); };
 
       // ---------- the bar ----------
-      $('.lb-main').onclick = () => D2T.go('home');
+      $('.lb-main').onclick = () => backHome();
+      if (!still()) { list.style.opacity = '0'; pin.style.opacity = '0'; }
       showGame();
+      // the heading types in, left to right
+      const h1 = $('.lb-head h1'), word = 'Leaderboards';
+      if (!still()) {
+        h1.setAttribute('aria-label', word); h1.textContent = '';
+        let n = 0, tm = 0; const tick = () => { if (!h1.isConnected) return; h1.textContent = word.slice(0, ++n); if (n < word.length) tm = setTimeout(tick, 34); };
+        tm = setTimeout(tick, params.ghost ? 160 : 60); cleanups.push(() => clearTimeout(tm));
+      }
+      // in from home: the shield's outline flies up into the trophy card's border, the page fading in behind it
+      const ghost = params.ghost && params.ghost.isConnected ? params.ghost : null;
+      if (ghost && !still()) {
+        const tc = troph.querySelector('.lb-tc'), r = tc.getBoundingClientRect();
+        troph.style.opacity = '0';
+        el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 320, delay: 120, easing: 'ease-out', fill: 'backwards' });
+        landAt = performance.now() + D2T.lbFly.FLY;
+        flyTo(ghost, r, true, D2T.lbFly.FLY).then(() => {
+          if (troph.isConnected) troph.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 220, fill: 'backwards' });
+          troph.style.opacity = '';
+          fadeOut(ghost, 240);
+        });
+        cleanups.push(() => ghost.remove());
+      } else { if (ghost) ghost.remove(); landAt = performance.now(); }
+      dropRows();
+      // back home: the trophy card's border flies back down onto the league shield (home measures where it is)
+      function backHome() {
+        const g = GM[gi]; st.stageAt = g.id; D2T.save();
+        const tc = troph.querySelector('.lb-tc');
+        if (still() || !tc || !(LB && LB.available())) { D2T.go('home'); return; }
+        const gh = ghostAt(tc.getBoundingClientRect(), g.k, true);
+        troph.style.opacity = '0';
+        [...list.children, ...pin.children].forEach((n, i) => n.animate([{ opacity: 1 }, { opacity: 0, transform: 'translateY(-10px)' }], { duration: 160, delay: Math.min(i, 8) * 12, fill: 'forwards' }));
+        el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, delay: 60, fill: 'forwards' });
+        setTimeout(() => D2T.go('home', { ghostBack: gh }), 200);
+      }
     },
     unmount() { cleanups.forEach((f) => { try { f(); } catch (e) { /* gone */ } }); cleanups = []; }
   });
