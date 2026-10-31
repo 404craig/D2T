@@ -61,7 +61,7 @@
         <div class="actionbar game-bar lb-bar">${SE.mainBtn('Back to home', 'lb-main')}</div></div>`);
       // the game's own top bar (Craig, 31 Oct, build 190): the D2T logo home, then Share my place and the account
       // home's own top bar (Craig, 31 Oct, build 193): the long logo at home's size, Share my place, the game's ? and the account
-      const top = D2T.h(`<div class="lb-top"><button class="fr-home-logo stg-logo lb-logo" type="button" aria-label="DROP2TOP home">${D2T.homeLogo()}</button><button class="stg-rb lb-share" type="button" aria-label="Share my place" disabled>${SHARE}</button><button class="stg-rb lb-q" type="button" aria-label="How to play this game">?</button><button class="stg-rb lb-acct" type="button" aria-label="Account">${ACCT}</button></div>`);
+      const top = D2T.h(`<div class="lb-top"><button class="fr-home-logo stg-logo lb-logo" type="button" aria-label="DROP2TOP home">${D2T.homeLogo()}</button><button class="stg-rb lb-share" type="button" aria-label="Share my place">${SHARE}</button><button class="stg-rb lb-q" type="button" aria-label="How to play this game">?</button><button class="stg-rb lb-acct" type="button" aria-label="Account">${ACCT}</button></div>`);
       top.querySelector('.lb-logo').onclick = () => backHome();
       top.querySelector('.lb-q').onclick = () => { if (D2T.gameHelp) D2T.gameHelp(GM[gi]); };
       top.querySelector('.lb-acct').onclick = () => D2T.go('account');
@@ -78,14 +78,19 @@
         $('.lb-gn b').textContent = g.name;
         el.querySelectorAll('.lb-dots i').forEach((d, i) => d.classList.toggle('on', i === gi));
         el.querySelectorAll('.lb-tabs [role="tab"]').forEach((b, i) => { b.textContent = g.tabs[i]; b.setAttribute('aria-selected', String(i === tab)); });
-        $('.lb-share').disabled = true; share = null;
+        share = null;
         load();
       }
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let slideDir = 0;
+      const body4 = () => [troph, $('.lb-cols'), list, pin];
+      function slideIn(nodes, d) {
+        nodes.forEach((n) => { n.style.transition = ''; n.style.transform = ''; n.style.opacity = ''; if (!reduce && d && n.animate) n.animate([{ transform: `translateX(${d * 46}px)`, opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)' }); });
+      }
       const turn = (d) => {
-        gi = (gi + d + GM.length) % GM.length; tab = 0; snd('tapSmall'); showGame();
-        // the next game slides in from the side it comes from
-        [$('.lb-gn'), troph, $('.lb-cols'), list, pin].forEach((n) => { n.style.transition = ''; n.style.transform = ''; n.style.opacity = ''; if (!reduce && n.animate) n.animate([{ transform: `translateX(${d * 46}px)`, opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)' }); });
+        gi = (gi + d + GM.length) % GM.length; tab = 0; snd('tapSmall');
+        slideIn([$('.lb-gn')], d);          // the game's name and dots at once
+        slideDir = d; showGame();           // the table when it is in (draw slides it)
       };
       $('.lb-arr.l').onclick = () => turn(-1); $('.lb-arr.r').onclick = () => turn(1);
       el.querySelectorAll('.lb-tabs [role="tab"]').forEach((b) => { b.onclick = () => { const t = +b.dataset.t; if (t === tab) return; tab = t; snd('tapSmall'); showGame(); }; });
@@ -151,7 +156,6 @@
           pin.innerHTML = `<button class="lb-row me lb-you" type="button" aria-label="Sign in to join the table">${d.you ? `<span class="c-name">You · would be ${esc(D2T.ordinal(d.you.pos))}</span><span class="c-claim">Sign in to claim it</span>` : '<span class="c-name">You</span><span class="c-claim">Sign in to join</span>'}</button>`;
           pin.querySelector('.lb-you').onclick = () => D2T.go('account');
         }
-        $('.lb-share').disabled = !(d.me && d.me.pos);
         if (d.me && d.me.pos) buildShare(g, d, cols, sort);
       }
       // the rows drop into place one by one, quickly, once the outline has landed (the first table on the way in only)
@@ -164,13 +168,33 @@
         [...list.children, ...pin.children].forEach((n, i) => n.animate([{ opacity: 0, transform: 'translateY(-18px)' }, { opacity: 1, transform: 'none' }], { duration: 320, delay: wait + i * 45, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' }));
       }
       const DEFAULT_COLS = { daily: [['Played', 'Wins', 'Best rise'], ['Goes', 'Best finish', 'Rise']], classic: [['Seasons', 'Titles', 'Top 3'], ['Seasons', 'Titles', 'Top 3']], clubx: [['Seasons', 'Titles', 'In a row'], ['Points', 'Wins', 'Goal diff']], goal: [['Games', 'Spot on', 'Hit rate'], ['Games', 'Spot on', 'Closest']], ub: [['Runs', 'Best run', 'Average'], ['Runs', 'Best run', 'Average']] };
+      // every table loaded is kept for the visit, and the other games' all-time tables are fetched quietly after the first,
+      // so a change of game is usually instant (build 201)
+      const memo = {};
+      const errText = (r) => (r.status === 0 ? 'Check your connection and try again.' : r.status === 404 || r.status === 405 ? 'The leaderboards are not switched on yet.' : (r.data && r.data.error) || 'Something went wrong. Try again.');
+      let prefetched = false;
+      function prefetch() {
+        if (prefetched) return; prefetched = true;
+        GM.forEach((g) => { const k = g.id + ':' + g.keys[0]; if (!memo[k]) LB.board(g.id, g.keys[0]).then((r) => { if (r.ok && !memo[k]) memo[k] = r.data; }).catch(() => {}); });
+      }
+      function shown(d) {                   // the table on screen, sliding in after a change of game
+        data = d; draw();
+        if (slideDir) { slideIn(body4(), slideDir); slideDir = 0; }
+        dropRows();
+      }
       async function load() {
-        const g = GM[gi], t = g.keys[tab], my = ++req;
-        data = null; draw();
+        const g = GM[gi], t = g.keys[tab], my = ++req, key = g.id + ':' + t;
+        if (memo[key]) shown(memo[key]);
+        else if (!data) draw();             // the first table of the visit: "Loading the table..."
+        else body4().forEach((n) => { n.style.transition = 'opacity .12s'; n.style.opacity = '.35'; });   // the old table dimmed until the new one is in
         const r = await LB.board(g.id, t);
         if (my !== req || !root.isConnected) return;
-        data = r.ok ? r.data : { error: r.status === 0 ? 'Check your connection and try again.' : r.status === 404 || r.status === 405 ? 'The leaderboards are not switched on yet.' : (r.data && r.data.error) || 'Something went wrong. Try again.' };
-        draw(); dropRows();
+        if (r.ok) {
+          const same = memo[key] && JSON.stringify(memo[key]) === JSON.stringify(r.data);
+          memo[key] = r.data;
+          if (!same) shown(r.data);
+        } else if (!memo[key]) shown({ error: errText(r) });
+        prefetch();
       }
 
       // ---------- Share my place ----------
@@ -194,7 +218,15 @@
             cols.forEach((cl, i) => { const x = W / 2 + (i - 1) * 300; k.mid(String(d.me.v[i]), x, 940, 280, 900, 72, true, i === sort ? txt : '#FFFFFF'); k.fit(cl.toUpperCase(), x, 1000, 280, 800, 24, false, '#B5B5BB', 'center', '2px'); });
           } });
       }
-      $('.lb-share').onclick = () => { if (!share) return; snd('share'); const fire = () => (share.done ? D2T.share.send(share) : setTimeout(fire, 80)); fire(); };
+      // the share button always looks the same (Craig, 31 Oct, build 201: it greyed out and came back on every change of game);
+      // with no place to share yet, a tap says how to get one
+      $('.lb-share').onclick = () => {
+        if (!share) {
+          const signed = LB && LB.signedIn && LB.signedIn(), loading = !data;
+          if (loading) return;
+          D2T.sheet({ title: 'No place to share yet', body: `<p class="fr-lead">${signed ? `Finish a game of ${esc(GM[gi].name)} to get on this table, then share your place.` : 'Sign in and finish a game to get on the table, then share your place.'}</p>` });
+          return;
+        } snd('share'); const fire = () => (share.done ? D2T.share.send(share) : setTimeout(fire, 80)); fire(); };
 
       // ---------- the bar ----------
       $('.lb-main').onclick = () => backHome();
