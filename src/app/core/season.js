@@ -163,6 +163,16 @@
     requestAnimationFrame(() => { const on = row.querySelector('.is-on'); if (on) row.scrollLeft = Math.max(0, on.offsetLeft - (row.clientWidth - on.offsetWidth) / 2); });
   };
 
+  // the panel under a carousel keeps one height whichever board is picked (Craig, 31 Oct, build 204: the formation sheet
+  // jumped up and down as the panels' lines wrapped differently): every panel is laid out once as the sheet opens and the
+  // tallest sets the panel's height
+  const steady = (pan, keys, render, pick) => {
+    let tall = 0;
+    keys.forEach((k) => { pan.innerHTML = render(k); tall = Math.max(tall, pan.offsetHeight); });
+    pan.innerHTML = render(pick);
+    if (tall) pan.style.minHeight = tall + 'px';
+  };
+
   // `opts.onApply(f)` runs when the sheet closes on a new shape
   SE.formSheet = (root, opts) => {
     opts = opts || {};
@@ -194,6 +204,7 @@
     paint(sh, root);
     sh.el.querySelector('.sheet-title').insertAdjacentHTML('beforeend', legend([[FITC.green, 'in position'], [FITC.amber, 'near'], [FITC.red, 'out']]));
     if (!prev[now]) sh.el.querySelector('.fs-key').remove();
+    steady(el.querySelector('.fs-panel'), GAME.formations(), panel, pending);
     const row = el.querySelector('.fs-row');
     carousel(row, pending, (k) => {
       pending = k;
@@ -231,6 +242,7 @@
       onClose: () => { if (pending === GAME.tactic()) return; GAME.setTactic(pending); window.D2TSound && window.D2TSound.play('formation'); onApply && onApply(pending); } });
     paint(sh, root);
     sh.el.classList.add('se-tacsheet');
+    steady(el.querySelector('.fs-panel'), GAME.TACTICS.map((t) => t.k), panel, pending);
     sh.el.querySelector('.sheet-title').insertAdjacentHTML('beforeend', legend([[FITC.green, 'key players'], ['#6A6A74', 'less involved']]));
     const row = el.querySelector('.fs-row');
     carousel(row, pending, (k) => {

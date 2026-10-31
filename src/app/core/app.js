@@ -238,6 +238,12 @@
       hd.addEventListener('pointerup', () => { if (y0 == null) return; y0 = null; sh.style.transition = ''; if (dy > 80) close(); else sh.style.transform = ''; if (dy > 4) { bar.onclick = null; setTimeout(() => { bar.onclick = close; }, 60); } });
       hd.addEventListener('pointercancel', () => { y0 = null; sh.style.transition = ''; sh.style.transform = ''; });
     });
+    // a sheet never shrinks while it is open (Craig, 31 Oct, build 204: sheets must keep one open height, never jump about);
+    // its content changing to something shorter leaves room at the foot, never drops the sheet
+    if (window.ResizeObserver) {
+      const ro = new ResizeObserver(() => { if (closed || !sh.isConnected) { ro.disconnect(); return; } const hgt = Math.min(sh.offsetHeight, host.clientHeight * .86), min = parseFloat(sh.style.minHeight) || 0; if (hgt > min + 1) sh.style.minHeight = Math.round(hgt) + 'px'; });
+      ro.observe(sh);
+    }
     const footEl = sh.querySelector('.sheet-foot');
     if (footEl) footEl.querySelectorAll('[data-done]').forEach((b) => { b.onclick = close; });
     return { el: sh, body: bodyEl, foot: footEl, close };
