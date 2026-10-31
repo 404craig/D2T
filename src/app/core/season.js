@@ -210,22 +210,21 @@
     let pending = GAME.tactic();
     const keyOf = (t, s) => (s.line === 'GK' ? 0 : TAC[t].lean[LINE_I[s.line]]);
     const tile = (t) => {
-      const fits = GAME.tacticShapes(t.k).includes(f);
       const dots = slots.map((s) => {
         const [nx, ny] = moveFor(t.k, s), kk = keyOf(t.k, s);
         return `<i class="${kk > 0 ? 'key' : kk < 0 ? 'less' : ''}" style="--x0:${s.x}%;--y0:${topOf(s.y)};--x1:${nx}%;--y1:${topOf(ny)};left:${nx}%;top:${topOf(ny)}"></i>`;
       }).join('');
-      return `<button class="se-taccard fs-tile${t.k === pending ? ' is-on' : ''}" type="button" data-k="${t.k}" data-t="${t.k}" aria-pressed="${t.k === pending}" aria-label="${t.name}${fits ? ', built for your shape' : ''}">
-        <span class="se-fpitch fs-pitch fs-tac"><span class="se-fline"></span>${dots}${fits ? '<s class="fs-tick" aria-hidden="true">✓</s>' : ''}</span>
+      return `<button class="se-taccard fs-tile${t.k === pending ? ' is-on' : ''}" type="button" data-k="${t.k}" data-t="${t.k}" aria-pressed="${t.k === pending}" aria-label="${t.name}">
+        <span class="se-fpitch fs-pitch fs-tac"><span class="se-fline"></span>${dots}</span>
         <span class="fs-tl"><b>${t.name}</b></span></button>`;
     };
     const panel = (k) => {
-      const t = GAME.TACTICS.find((x) => x.k === k), T = TAC[k], fits = GAME.tacticShapes(k).includes(f);
+      const t = GAME.TACTICS.find((x) => x.k === k), T = TAC[k];
       const bars = [['Def', L.def, T.lean[0]], ['Mid', L.mid, T.lean[1]], ['Att', L.att, T.lean[2]]].map(([lab, v, lean]) => {
         const w = Math.max(6, Math.min(100, (v - 55) / 40 * 100)), step = 9;
         return `<div class="fs-bar ${lean > 0 ? 'key' : lean < 0 ? 'less' : ''}"><b>${lab}</b><span class="fs-track"><u style="width:${(lean < 0 ? w - step : w).toFixed(0)}%"></u>${lean > 0 ? `<s class="up" style="left:${w.toFixed(0)}%;width:${step}%"></s>` : ''}${lean < 0 ? `<s class="down" style="left:${(w - step).toFixed(0)}%;width:${step}%"></s>` : ''}</span><em>${v}</em><small>${lean > 0 ? 'Key' : lean < 0 ? 'Less involved' : ''}</small></div>`;
       }).join('');
-      return `<div class="fs-head"><b class="fs-name">${t.name}</b>${fits ? `<span class="fs-built">✓ Built for your ${f}</span>` : ''}</div><div class="fs-bars">${bars}</div>${plusMinus(T.how, T.cost)}`;
+      return `<div class="fs-head"><b class="fs-name">${t.name}</b></div><div class="fs-bars">${bars}</div>${plusMinus(T.how, T.cost)}`;
     };
     const el = D2T.h(`<div class="fs"><div class="fs-row">${GAME.TACTICS.map(tile).join('')}</div><div class="fs-panel">${panel(pending)}</div></div>`);
     const sh = D2T.sheet({ title: 'Tactics', body: el, foot: `<button class="btn se-btn se-done" type="button" data-done>Play ${GAME.tacticName(pending)}</button>`,

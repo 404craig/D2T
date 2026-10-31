@@ -572,7 +572,6 @@
 .fs-tac i.less { background: #6A6A74 !important; }
 .fs-tile.is-on .fs-tac i { animation: fsMove 2.4s ease-in-out infinite alternate; }
 @keyframes fsMove { from { left: var(--x0); top: var(--y0); } to { left: var(--x1); top: var(--y1); } }
-.fs-tick { position: absolute; right: 6px; top: 6px; width: 18px; height: 18px; border-radius: 50%; background: #12F06C; color: #0A0A0A; font: 900 12px/18px var(--font); text-align: center; text-decoration: none; }
 .fs-tl { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 0 2px; }
 .se-taccard.fs-tile .fs-tl { justify-content: center; }
 .fs-tl b { font: var(--display); font-size: 14px; color: var(--soft); white-space: nowrap; }
@@ -585,7 +584,6 @@
 .fs-rating { font: var(--display); font-size: 22px; line-height: 1; }
 .fs-delta { font: 800 13px var(--font); color: var(--muted); }
 .fs-delta.up { color: #12F06C; } .fs-delta.down { color: #FF6B6F; }
-.fs-built { font: 800 12px var(--font); padding: 4px 10px; border-radius: 12px; background: rgba(18,240,108,.12); color: #12F06C; align-self: center; }
 .fs-counts { display: flex; gap: 14px; margin-top: 8px; font: 800 14px var(--font); }
 .fs-pm { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
 .fs-pm p { display: flex; gap: 10px; align-items: flex-start; margin: 0; font: 700 14px/1.35 var(--font); color: #E8E8EE; }
