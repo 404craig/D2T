@@ -123,7 +123,7 @@
     const back = el.querySelector('.back-btn'); if (back) back.onclick = D2T.back;
     // the mode tag drops in with a bounce and one glint on the first run screen after home (Craig, 31 Oct, build 196)
     const mt = el.querySelector('.mode-tag');
-    if (mt && (prevName === 'home' || prevName === 'intro') && D2T.mo && !D2T.mo.still()) {
+    if (mt && (fromName === 'home' || fromName === 'intro') && D2T.mo && !D2T.mo.still()) {
       requestAnimationFrame(() => {
         D2T.mo.anim(mt, [{ transform: 'translateY(-44px) skewX(-10deg)', opacity: 0 }, { transform: 'translateY(0) skewX(-10deg)', opacity: 1 }], { duration: 420, delay: 250, easing: 'cubic-bezier(.34,1.56,.64,1)', fill: 'backwards' });
         D2T.mo.glint(mt, { delay: 750, dur: 480 });
@@ -245,7 +245,7 @@
 
   // ---------- router ----------
   D2T.params = {};
-  let current = null, currentName = null, prevName = null, introPlayed = false;
+  let current = null, currentName = null, prevName = null, fromName = null, introPlayed = false;
   D2T.go = (name, params = {}) => {
     D2T.params = params;
     if (location.hash.slice(1) === name) render(name); else location.hash = name;
@@ -265,11 +265,13 @@
     const app = document.getElementById('app');
     if (tipEl) { tipEl.remove(); tipEl = null; }
     if (current && current.unmount) { try { current.unmount(); } catch (e) { console.error(e); } }
+    if (D2T.mo) D2T.mo.finishAll();   // nothing of the old screen's motions stays live or keeps a timer (build 198)
     app.querySelectorAll('.sheet, .sheet-scrim, .card-overlay').forEach((n) => n.remove());
     const def = D2T.screens[name];
     const root = D2T.h(`<main class="screen theme-${def.theme || 'black'}" data-screen="${name}"></main>`);
     app.querySelectorAll('.screen').forEach((n) => n.remove());
     app.appendChild(root);
+    fromName = currentName;   // the screen just before this render, the same one on a same-screen go (Restart; build 198)
     if (currentName !== name) prevName = currentName;
     current = def; currentName = name;
     const ch = def.chrome || THEME_CHROME[def.theme || 'black'] || THEME_CHROME.black;
