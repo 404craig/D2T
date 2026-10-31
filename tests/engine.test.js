@@ -433,6 +433,25 @@ t("Scout a club: 2 respins for three of one club's cards, never your own club, n
   for (const id of st.roll.cards) { const p = D.playerOf(S, id); assert.strictEqual(p.c, pick); assert.ok(p.lv < 3 && !String(id).startsWith("L:"), "a scout brought a purple with golds left, or a legend"); }
   assert.strictEqual(D.scoutClub(st, S, me), false);
 });
+t("Scout a club deals from the club's five best and, where it can, one better than your weakest man", () => {
+  const S = G.seasons["2007/08"]; S.legends = S.legends || [];
+  let checked = 0;
+  for (const seed of ["c1", "c2", "c3", "c4"]) {
+    const st = D.newRun({ seed, mode: "classic", catalogue: [] });
+    const me = D.historyTable(S, S.deductions).slice(-1)[0].c; st.clubOffer = ["2007/08"]; D.chooseClub(st, S, { c: me, f: "4-4-2", xi: [] }); D.startSeason(st, S);
+    const clubs = D.scoutClubs(st, S).slice(0, 2);
+    for (const { club } of clubs) {
+      if (st.respins < D.RULES.scoutCost) break;
+      const top = D.scoutClubPool(st, S, club).slice().sort((a, b) => b.r - a.r).slice(0, 5), topIds = new Set(top.map(p => p.id));
+      const low = Math.min(...st.xi.filter(Boolean).map(id => D.playerOf(S, id).r));
+      assert.ok(D.scoutClub(st, S, club));
+      assert.ok(st.roll.cards.every(id => topIds.has(id)), "a club scout dealt a player outside the club's five best");
+      if (top.some(p => p.r > low)) assert.ok(st.roll.cards.some(id => D.playerOf(S, id).r > low), "a club scout dealt nobody better than your weakest man though the club had one");
+      checked++;
+    }
+  }
+  assert.ok(checked >= 4);
+});
 t("Club X's draft never offers a purple or legend card, and a greedy drafter ends with a mix, not a gold XI", () => {
   const S = G.seasons["2012/13"], L = S.legends; let gold = 0, n = 0;
   for (const seed of ["d1", "d2", "d3", "d4", "d5", "d6"]) {
