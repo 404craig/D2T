@@ -33,9 +33,11 @@
 .lb-tt b { display: block; font: 900 clamp(15px, 4.4vw, 18px)/1.25 var(--font); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .lb-tt span { display: block; font: 700 clamp(11.5px, 3.4vw, 14px)/1.3 var(--font); color: #b5b5bb; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 /* the column headers and the rows share one grid of widths */
-.lb-cols, .lb-row { display: flex; align-items: center; gap: 8px; padding: 0 10px; }
+.lb-cols, .lb-row { display: flex; align-items: center; gap: 8px; padding: 0 clamp(16px, 5vw, 22px) 0 10px; }   /* the numbers kept off the right-hand end (build 191) */
 .lb-cols { flex: none; align-items: flex-end; margin: 10px 16px 0; padding-bottom: 6px; border-bottom: 1px solid #2a2a31; font: 900 clamp(10px, 2.9vw, 12px)/1.15 var(--font); letter-spacing: .03em; text-transform: uppercase; color: #a8a8b0; }
-.lb-cols .c-v { white-space: normal; overflow: visible; line-height: 1.1; }   /* a long header wraps (BEST / RISE), never cut */
+/* the headers in the trophy card's label type (Craig, 31 Oct, build 191: they were the rows' size) */
+.lb-cols > span, .lb-cols .c-v, .lb-cols .c-pos, .lb-cols .c-name { font: 900 italic clamp(10px, 2.9vw, 12px)/1.2 var(--font); letter-spacing: .06em; color: #a8a8b0; }
+.lb-cols .c-v { white-space: normal; overflow: visible; line-height: 1.2; }   /* a long header wraps (BEST / RISE), never cut */
 .lb-cols .c-v.is-sort { color: var(--kt); }
 .c-pos { flex: none; width: clamp(30px, 8.5vw, 36px); font: 900 italic clamp(13px, 3.8vw, 16px) var(--font); color: #8f8f98; }
 .c-name { flex: 1; min-width: 0; font: 700 clamp(13.5px, 4vw, 16.5px) var(--font); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
