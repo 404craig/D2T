@@ -494,6 +494,20 @@
     const slots = E.FORMATIONS[eng.formation], got = eng.xi.map((id, i) => (id == null ? null : E.effRating(E.playerOf(S, id), slots[i][0]))).filter((x) => x != null);
     return got.length ? Math.round(got.reduce((a, b) => a + b, 0) / got.length) : 0;
   };
+  // How your XI would sit in another shape, without changing anything (the formation carousel, Craig 31 Oct): each shirt's
+  // fit and the team rating, picked the way GAME.setFormation would pick them. Null during a draft (no XI yet).
+  GAME.shapePreview = (f) => {
+    const S = GAME.S(), eng = GAME.eng(), slots = E.FORMATIONS[f];
+    if (eng.phase === 'draft' || eng.xi.every((x) => x == null)) return null;
+    const xi = GAME.preseason() && !GAME.isDraftMode() ? E.autoXI(S, eng.club, f, []) : E.reseat(eng, S, f);
+    const fits = xi.map((id, i) => (id == null ? null : E.fitOf(E.playerOf(S, id), slots[i][0])));
+    let rating;
+    if (xi.every((x) => x != null)) rating = Math.round(E.plainStrength(S, Object.assign({}, eng, { xi, formation: f })).ovr);
+    else { const got = xi.map((id, i) => (id == null ? null : E.effRating(E.playerOf(S, id), slots[i][0]))).filter((x) => x != null); rating = got.length ? Math.round(got.reduce((a, b) => a + b, 0) / got.length) : 0; }
+    return { fits, rating };
+  };
+  // a shape's shirts in the engine's own pitch units (x across, y up from your goal) with each shirt's line
+  GAME.shapeSlots = (f) => E.FORMATIONS[f].map(([pos, x, y]) => ({ pos, line: E.SLOT_BROAD[pos], x, y }));
   GAME.setFormation = (f) => {
     const S = GAME.S(), eng = GAME.eng();
     if (eng.phase === 'draft') E.draftFormation(eng, S, f);                                 // the empty shirts, before the first pick
