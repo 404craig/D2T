@@ -153,7 +153,7 @@
     if (g4.games) {
       const last = g4.last == null ? '-' : g4.last === g4.lastTarget ? '0' : g4.last > g4.lastTarget ? `${g4.last - g4.lastTarget}+` : `${g4.lastTarget - g4.last}-`;
       pages.push({ k: 'g433', tag: 'GOAL RUSH', name: 'Goal Rush', c: '#FFD21F', mark: { src: window.D2T_GOALRUSH_LOGO }, shields: [
-        { n: g4.games, l: 'Games' }, { n: g4.exact || 0, l: 'Bang on' }, { n: `${Math.round(100 * (g4.exact || 0) / g4.games)}%`, l: 'Hit rate' }, { n: last, l: 'Last game' }] });
+        { n: g4.games, l: 'Games' }, { n: g4.exact || 0, l: 'Spot on' }, { n: `${Math.round(100 * (g4.exact || 0) / g4.games)}%`, l: 'Hit rate' }, { n: last, l: 'Last game' }] });
     }
     const ub = st.ub || {};
     if (ub.runs) {

@@ -649,7 +649,7 @@
         // frame in yellow, the target on top ("433 GOALS", or struck through in red with how far off on a miss), then the XI on
         // a pitch in the game's own shirts (club kit, goals on the shirt, the crest on its white disc), surnames under
         const shape = shapeText(FORM), over = t > TARGET, RED = '#FF4D52';
-        const lines = [`*DROP2TOP Goal Rush · ${shape}*`, '', `My XI's career Premier League goals: ${t}.`, gap === 0 ? 'Bang on.' : `Target ${TARGET}: ${gap} ${over ? 'over' : 'short'}.`, '', '_Your turn. Beat that!_', D2T.share.LINK];
+        const lines = [`*DROP2TOP Goal Rush · ${shape}*`, '', `My XI's career Premier League goals: ${t}.`, gap === 0 ? 'Spot on.' : `Target ${TARGET}: ${gap} ${over ? 'over' : 'short'}.`, '', '_Your turn. Beat that!_', D2T.share.LINK];
         // the XI by line, forwards to keeper, each line left to right as on the pitch
         const lineOf = { FWD: 0, MID: 1, DEF: 2, GK: 3 }, rowsXI = [[], [], [], []];
         S.filled.forEach((p) => { const sl = SLOTS[p.slot]; if (sl) rowsXI[lineOf[sl[1]]].push({ p, x: sl[2] }); });
