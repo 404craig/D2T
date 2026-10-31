@@ -210,7 +210,7 @@
       });
       const up = () => {
         if (!drag) return; wheel.classList.remove('drag');
-        if (!drag.moved) { const lb = drag.lb; drag = null; go(Math.round(pos)); if (lb && lb.closest('.stg-sl') === SL[shown]) openBoard(GM[shown]); return; }
+        if (!drag.moved) { const lb = drag.lb; drag = null; go(Math.round(pos)); if (lb && lb.closest('.stg-sl') === SL[shown]) openBoard(GM[shown], lb); return; }
         vel = drag.v * 0.6; const flick = Math.abs(drag.v) > 1.2 ? Math.sign(drag.v) : 0;
         let t = Math.round(pos); if (flick && t === Math.round(drag.p)) t += flick;
         drag = null; go(t);
@@ -218,18 +218,26 @@
       wheel.addEventListener('pointerup', up); wheel.addEventListener('pointercancel', up);
       $('.stg-sw.l').onclick = () => turn(-1); $('.stg-sw.r').onclick = () => turn(1);
       // the league table shield: the leaderboard on that game, or the account page to sign in first
-      function openBoard(g) {
+      function openBoard(g, sh) {
         window.D2TSound && window.D2TSound.play('tapSmall');
         D2T.state.stageAt = g.id; D2T.save();
         if (!D2T.lb || !D2T.lb.signedIn()) { D2T.go('account'); return; }
-        D2T.go('leaderboard', { game: g.id });
+        // the shield's outline lifts off and flies to the trophy card on the leaderboard (build 195; leaderboard.js D2T.lbFly)
+        const F = D2T.lbFly;
+        if (!F || F.still() || !sh || !sh.isConnected) { D2T.go('leaderboard', { game: g.id }); return; }
+        const b = sh.querySelector('b'), sp = sh.querySelector('span');
+        const ghost = F.ghostAt(sh.getBoundingClientRect(), g.k, false, `<b>${b ? b.innerHTML : ''}</b><span>${sp ? sp.innerHTML : ''}</span>`);
+        sh.style.visibility = 'hidden';
+        ghost.querySelectorAll('b, span').forEach((n) => n.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, fill: 'forwards' }));
+        el.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(.97)' }], { duration: 220, easing: 'ease-in', fill: 'forwards' });
+        later(() => D2T.go('leaderboard', { game: g.id, ghost }), 160);
       }
       // the positions come from the server once it answers: the shields are drawn again if that changes what they show
       const shieldsNow = () => GM.map((g) => (g.board ? '' : homeShields(g).map((x) => x[0] + '|' + x[1]).join(','))).join(';');
       let shieldsWere = shieldsNow();
       const redrawShields = () => { if (!root.isConnected || shieldsNow() === shieldsWere) return; shieldsWere = shieldsNow(); GM.forEach((g, i) => { const st = SL[i].querySelector('.stg-st'); if (st) st.innerHTML = shieldsHTML(homeShields(g), g.k); }); };
       if (D2T.lb) D2T.lb.positions().then(redrawShields).catch(() => {});
-      const onKey = (e) => { if (document.querySelector('.sheet')) return; if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('.stg-lb')) { e.preventDefault(); openBoard(GM[shown]); return; } if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') dlyBack(); if (e.key === 'ArrowRight') turn(1); else if (e.key === 'ArrowLeft') turn(-1); };
+      const onKey = (e) => { if (document.querySelector('.sheet')) return; if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('.stg-lb')) { e.preventDefault(); openBoard(GM[shown], e.target.closest('.stg-lb')); return; } if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') dlyBack(); if (e.key === 'ArrowRight') turn(1); else if (e.key === 'ArrowLeft') turn(-1); };
       document.addEventListener('keydown', onKey); cleanups.push(() => document.removeEventListener('keydown', onKey));
 
       // ---------- the game on show: dots, colours, the button, its art's motion ----------
@@ -598,6 +606,18 @@
       if (D2T.state.dailyClosed) {                                  // say once that an unfinished Daily closed at midnight
         const dc = D2T.state.dailyClosed; delete D2T.state.dailyClosed; D2T.save();
         later(() => { if (root.isConnected) D2T.sheet({ title: 'That Daily has closed', body: `<p class="fr-lead">${esc(G.dailyName(dc))} closed at midnight before you finished it. Today's club is ready for everyone.</p>` }); }, 900);
+      }
+      // back from the leaderboard: the trophy card's outline lands back on this game's league shield as home fades in (build 195)
+      const gb = params.ghostBack && params.ghostBack.isConnected ? params.ghostBack : null;
+      if (gb) {
+        const F = D2T.lbFly, sh = SL[idx(pos)] && SL[idx(pos)].querySelector('.stg-lb');
+        if (sh && F && !reduced) {
+          const r = sh.getBoundingClientRect();
+          sh.style.visibility = 'hidden';
+          el.animate([{ opacity: 0, transform: 'scale(.97)' }, { opacity: 1, transform: 'none' }], { duration: 320, delay: 120, easing: 'ease-out', fill: 'backwards' });
+          F.flyTo(gb, r, false, F.FLY).then(() => { sh.style.visibility = ''; sh.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 160 }); F.fadeOut(gb, 200); });
+        } else gb.remove();
+        cleanups.push(() => gb.remove());
       }
       // the cards the reels and the fan will show next, so they are ready before they roll in
       later(() => { [...UB.fill, ...UB.left, ...UB.right].forEach((sp) => { const r = ubRow(sp); if (r) { const c = G.club(r.club); [c.crest, c.crestCard, c.crestLight].forEach((u) => { if (u) { const im = new Image(); im.src = u; } }); } }); }, 1200);

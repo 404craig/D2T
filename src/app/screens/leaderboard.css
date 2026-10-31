@@ -73,3 +73,8 @@
 .stg-st .stg-sh.stg-lb span, .stg-st .stg-sh.stg-lb.lt span { color: var(--kt, var(--k)); }
 .stg-st .stg-sh.stg-lb.is-off span { color: #9a9aa2; }
 .stg-st .stg-sh.stg-lb:active { transform: scale(.96); }
+/* the outline that flies between home's league shield and the trophy card (build 195) */
+.lb-ghost { position: fixed; z-index: 9000; box-sizing: border-box; pointer-events: none; border: 1.5px solid var(--k); background: #121216; box-shadow: 0 0 18px -6px color-mix(in srgb, var(--k) 60%, transparent); display: flex; flex-direction: column; align-items: center; padding-top: 28%; color: #fff; overflow: hidden; }
+.lb-ghost b { font: 900 21px/1 var(--font); }
+.lb-ghost span { font: 800 9.5px/1.15 var(--font); margin-top: 4px; text-align: center; text-transform: uppercase; color: var(--k); }
+.lb-head h1 { min-height: 1em; }
