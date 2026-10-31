@@ -37,7 +37,11 @@ const URL = process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index
   check((await scr()) === "home" && !!(await page.$(".stg")), "home is not the stage");
   const ids = await page.$$eval(".stg-sl", (s) => s.map((x) => x.dataset.id));
   check(ids.join(",") === "daily,classic,clubx,goal,ub,ten", "the wheel's games are not Daily, Classic, Club X, Goal Rush, Unbeaten, Tenaball: " + ids);
-  check((await onShow()) === "daily", "home does not open on the Daily Challenge");
+  check((await onShow()) === "classic", "home does not open on Classic after the intro");
+  // the Daily takeover is tested on its own below: off here (its cap for the day reached)
+  await page.evaluate(() => { window.D2T.state.dailyNudge = { day: window.D2T.game.today(), n: 6 }; window.D2T.save(); });
+  await page.keyboard.press("ArrowLeft"); await wait(900);
+  check((await onShow()) === "daily", "the left arrow key did not turn from Classic to the Daily");
   check(!(await page.$(".fr-tabbar")) && !(await page.$('[data-go="league"]')), "the stage still has the tab bar");
   check(await page.$$eval(".stg-top .stg-rb", (b) => b.length === 3 && b.every((x) => x.getBoundingClientRect().width >= 44 && x.getBoundingClientRect().height >= 44)), "the top bar should have three round 44px buttons");
   check(await page.evaluate(() => { const r = document.querySelector(".stg-logo").getBoundingClientRect(); const b = document.querySelector(".stg-rb").getBoundingClientRect(); return r.left < 40 && r.width > 160 && r.height <= 44.5 && r.right < b.left; }), "the logo is not big and top left, clear of the buttons");
@@ -113,7 +117,9 @@ const URL = process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index
     const dHome = async () => { await dp.evaluate(() => window.D2T.go("home")); await wait(900); };
     const dTo = async (id) => { for (let k = 0; k < 6 && (await dShow()) !== id; k++) { await dp.click(".stg-sw.r"); await wait(300); } await wait(500); };
     const shows = (ms) => dp.waitForSelector(".stg-top.dly-full", { timeout: ms }).then(() => true).catch(() => false);
-    await dp.evaluate(() => { window.D2T.state.tips = Object.assign(window.D2T.state.tips || {}, { "stage-swipe": 1, "stage-help": 1, "stage-share": 1 }); window.D2T.save(); });
+    await dp.evaluate(() => { window.D2T.state.tips = Object.assign(window.D2T.state.tips || {}, { "stage-swipe": 1, "stage-help": 1, "stage-share": 1 }); delete window.D2T.state.dailyNudge; window.D2T.save(); });
+    check((await dShow()) === "classic", "a fresh load did not open on Classic");
+    await dTo("daily");
     check(!(await shows(8500)), "the Daily takeover showed on the Daily slide");
     await dTo("classic");
     check(await shows(12000), "the Daily takeover never showed on Classic");
@@ -142,7 +148,7 @@ const URL = process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index
   check(moving === 0, `with reduced motion ${moving} things still move on the stage`);
   await calm.close();
   const small = await open({ viewport: { width: 375, height: 667 } });
-  check(await small.evaluate(() => { const b = document.querySelector(".stg-bar").getBoundingClientRect(), s = document.querySelector('.stg-sl[data-id="daily"] .stg-st').getBoundingClientRect(), d = document.querySelector(".stg-dots").getBoundingClientRect(); return s.bottom <= d.top + 2 && d.bottom <= b.top && b.bottom <= innerHeight; }), "on a 375x667 phone the shields, dots and button overlap");
+  check(await small.evaluate(() => { const b = document.querySelector(".stg-bar").getBoundingClientRect(), s = document.querySelector('.stg-sl[data-id="classic"] .stg-st').getBoundingClientRect(), d = document.querySelector(".stg-dots").getBoundingClientRect(); return s.bottom <= d.top + 2 && d.bottom <= b.top && b.bottom <= innerHeight; }), "on a 375x667 phone the shields, dots and button overlap");
   await small.screenshot({ path: path.join(OUT, "75-stage-small.png") });
   await small.close();
 
