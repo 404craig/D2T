@@ -20,7 +20,7 @@ const homeReady = (p) => p.waitForFunction(() => location.hash.includes("home") 
 // the shown slide's shields: what they show and what they should end on
 const shown = (p) => p.evaluate(() => {
   const sl = [...document.querySelectorAll(".stg-sl")].find((s) => s.style.visibility !== "hidden" && parseFloat(s.style.opacity || "1") > 0.95);
-  return [...sl.querySelectorAll(".stg-st .stg-sh b")].map((b) => ({ t: b.textContent, v: b.dataset.v, odo: !!b.querySelector(".mo-odo") }));
+  return [...sl.querySelectorAll(".stg-st .stg-sh b")].map((b) => ({ t: b.textContent, v: b.dataset.v, odo: !!b.querySelector(".mo-odo"), flat: b.dataset.v == null || window.D2T.mo.startText(b.dataset.v) === b.dataset.v }));
 });
 
 (async () => {
@@ -57,7 +57,8 @@ const shown = (p) => p.evaluate(() => {
     if (moving) {
       await wait(500);
       const mid = await shown(p);
-      check(mid.some((x) => x.odo || x.t !== x.v), `the shields did not roll: ${JSON.stringify(mid)}`);
+      // a season that went down leaves every Classic shield on 0, with nothing to roll
+      check(mid.every((x) => x.flat) || mid.some((x) => x.odo || x.t !== x.v), `the shields did not roll: ${JSON.stringify(mid)}`);
       await wait(2600);
       const end = await shown(p);
       check(end.every((x) => x.t === x.v && !x.odo), `the shields did not end on their values: ${JSON.stringify(end)}`);
