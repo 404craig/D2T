@@ -142,10 +142,18 @@
           if (el) el.classList.add('se-sel'); else sel = null;
         }
         const nm = sel ? last(nameOf(sel.id)) : '';
-        if (!sel) hintEl.textContent = pre ? 'Tap to select, drag onto the pitch' : '';
-        else hintEl.textContent = sel.kind === 'sub' ? `Tap a player to bring on ${nm}` : `Tap a player to swap with ${nm}`;
-        if (!pre) bar.dataset.hint = sel ? `Tap a player to swap with ${nm}` : '';
+        // tap to look, drag to swap (Craig, 29 Oct, build 167): a tap only picks a player, his shirts ring and his positions show under him;
+        // another tap on him opens his card; swaps are drags only, so looking can never swap anyone
+        if (!sel) hintEl.textContent = pre ? 'Tap a player to see where he plays, drag to swap' : '';
+        else hintEl.textContent = sel.kind === 'sub' ? `Drag ${nm} on to bring him in · tap again for his card` : `Drag ${nm} to swap · tap again for his card`;
+        if (!pre) bar.dataset.hint = sel ? `Drag ${nm} onto a player to swap` : '';
         markFit(sel ? sel.id : null);
+        slotsEl.querySelectorAll('.se-poslab').forEach((n) => n.remove());
+        if (sel && sel.kind === 'pitch') {
+          const el = root.querySelector(`[data-kind="pitch"][data-card="${sel.id}"]`), sl = el && el.closest('.se-slot'), c = L.all.get(String(sel.id));
+          const list = c ? (c.main ? [c.main, ...(c.alt || [])] : [c.pos]) : [];
+          if (sl && list.length) sl.insertAdjacentHTML('beforeend', `<span class="se-poslab" aria-hidden="true">${list.join('<i>/</i>')}</span>`);
+        }
       }
       // A card on the pitch shows the shirt it is in on its tab, coloured by fit (green preferred, amber near, red out of
       // position). While a player is selected or dragged, every shirt gets a ring in how he would fit it (Craig, 13 Oct).
@@ -180,8 +188,7 @@
       function tap(item) {
         const kind = item.dataset.kind, id = item.dataset.card;
         if (sel && sel.kind === kind && sel.id === id) { openBig(item, id); return; }
-        if (sel && !(sel.kind === 'sub' && kind === 'sub')) { swap(sel, { kind, id }); return; }
-        select(kind, id);
+        select(kind, id);   // another player is picked instead, never swapped (swaps are drags)
       }
       root.addEventListener('keydown', (e) => { const it = e.target.closest && e.target.closest('[data-card]'); if (it && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); tap(it); } });
 
@@ -277,32 +284,13 @@
 
       // ---------- formation sheet ----------
       body.querySelector('.se-formlink').onclick = () => {
-        let pending = GAME.eng().formation;
-        const tile = (k) => `<button class="se-formcard${k === pending ? ' is-on' : ''}" type="button" data-f="${k}" aria-pressed="${k === pending}">
-          <span class="se-fpitch"><span class="se-fline"></span>${GAME.formationDots(k).map((s) => `<i style="left:${s.x}%;top:${s.y}%"></i>`).join('')}</span><b>${k}</b></button>`;
-        const note = drafting ? 'The draft fills this shape shirt by shirt. It is fixed once you make your first pick, then you can change it again before the season.'
-          : pre && !dream ? 'Your best XI from the squad is picked for the shape you choose. You can still swap anyone after.' : 'Your 11 are moved into the new shape. Players out of their position play at 90% (near) or 70% (wrong).';
-        const el = D2T.h(`<div><div class="se-formgrid">${GAME.formations().map(tile).join('')}</div><p class="se-note">${note}</p><button class="btn se-btn se-done" type="button">Done</button></div>`);
-        const sh = D2T.sheet({
-          title: 'Formation', body: el,
-          onClose: () => {
-            if (pending === GAME.eng().formation) return;
-            const before = new Map(allItems().map((n) => [n.dataset.card, n.getBoundingClientRect()]));
-            GAME.setFormation(pending);
-            window.D2TSound && window.D2TSound.play('formation');
-            sel = null;
-            render(before);
-          }
-        });
-        sh.el.classList.add('se-run');
-        ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
-        el.querySelectorAll('.se-formcard').forEach((b) => {
-          b.onclick = () => {
-            pending = b.dataset.f;
-            el.querySelectorAll('.se-formcard').forEach((x) => { const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); });
-          };
-        });
-        el.querySelector('.se-done').onclick = () => sh.close();
+        SE.formSheet(root, { onApply: (f) => {
+          const before = new Map(allItems().map((n) => [n.dataset.card, n.getBoundingClientRect()]));
+          GAME.setFormation(f);
+          window.D2TSound && window.D2TSound.play('formation');
+          sel = null;
+          render(before);
+        } });
       };
 
       // ---------- tactics sheet (Craig, 18 Oct) ----------

@@ -296,6 +296,96 @@
     return `<b>${D2T.esc(r.name)}</b><span>${where}</span>`;
   };
 
+  // ---------- the share card (Craig, 29 Oct; "C1" in design/prototype/daily-share.html) ----------
+  // The run big in cyan, the topic, then the one that got you: the card you had and the one you called wrong, each as the
+  // stage shows it, your swipe drawn between them (the one you chose red, the other grey) and the wrong number crossed out
+  // in red. A cleared deck has no last call, so the run and the topic sit lower.
+  const CY = '#22D3EE', RED = '#FF4D52';
+  const explain = (stat) => (stat.deck === 'season' ? `${stat.unit} in one season` : stat.deck === 'club' ? `${stat.unit} in a Premier League season` : `${stat.unit}, all time`);
+  const surOf = (n) => String(n).trim().split(' ').slice(1).join(' ') || String(n);
+  function shareCard(stat, n, last) {
+    const G = D2T.game, ex = explain(stat), club = isClub(stat);
+    const label = (r) => (club ? `${G.club(r.club).name}${r.season ? ' ' + r.season : ''}` : surOf(r.name));
+    const lines = ['*DROP2TOP Unbeaten Run*', '', `Topic: ${stat.big.toLowerCase()}`, `(${ex})`, `Unbeaten in ${n} call${n === 1 ? '' : 's'}.`];
+    if (last) lines.push('', 'The one that got me:', `${label(last.a)} ${stat.val(last.a)}, ${label(last.b)} ${stat.val(last.b)}.`, `I said ${last.higher ? 'higher' : 'lower'}.`);
+    else lines.push('', 'I cleared the whole deck.');
+    lines.push('', '_Your turn. Beat that!_', D2T.share.LINK);
+    // each player as a picture: the stage's shirt with its styles written in and the kit patterns, no text (an SVG picture
+    // cannot load Exo 2, so the surname and the number are drawn on the canvas); the crest and flag as pictures
+    const SZ = 250, U = SZ / 112, DEFS = (D2T.shirts.defs().match(/<defs>[\s\S]*<\/defs>/) || [''])[0];
+    const svgOf = (r) => {
+      const k = D2T.shirts.kit(r.club), m = shirt(40, r.club, 'X', 1).match(/<svg[\s\S]*<\/svg>/);
+      if (!m) return null;
+      const style = `<style>.body{stroke:${k.trim};stroke-width:2.4;stroke-linejoin:round}.trim{fill:none;stroke:${k.trim};stroke-width:4;stroke-linecap:round}</style>`;
+      return D2T.share.svgSrc(m[0].replace(/<text[\s\S]*?<\/text>/g, '').replace(/^<svg[^>]*>/, `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -6 112 112" width="${SZ * 2}" height="${SZ * 2}">${style}${DEFS}`));
+    };
+    const imgs = {};
+    if (last) [last.a, last.b].forEach((r, i) => {
+      const c = G.club(r.club);
+      if (club) imgs['c' + i] = c.crestCard || c.crestLight || c.crest;
+      else { imgs['s' + i] = svgOf(r); imgs['c' + i] = c.crest; if (r.nat && G.flag(r.nat)) imgs['f' + i] = G.flag(r.nat); }
+    });
+    const nY = last ? 330 : 470, boxY = last ? 430 : 650, TOP = 668;
+    return D2T.share.build({ text: lines.join('\n'), c: CY, wash: CY, band: CY, ink: '#001A1F', tag: 'Unbeaten Run', dare: `Can you beat ${n}?`, imgs,
+      draw: (g, im, k) => {
+        const W = k.W, ns = String(n), nw = k.width(ns, 900, 190, true);
+        g.save(); g.shadowColor = 'rgba(34,211,238,.45)'; g.shadowBlur = 60; k.mid(ns, W / 2, nY, 400, 900, 190, true, CY); g.restore();
+        k.mid('IN A', W / 2 + nw / 2 + 22, nY - 26, 300, 900, 40, true, '#FFFFFF', 'left'); k.mid('ROW', W / 2 + nw / 2 + 22, nY + 26, 300, 900, 40, true, '#FFFFFF', 'left');
+        k.box(90, boxY, 900, 150, 22);
+        k.fit('TOPIC', 130, boxY + 22, 300, 800, 20, false, CY, 'left', '4px');
+        k.fit(stat.big, 130, boxY + 50, 820, 900, 54, true, '#FFFFFF', 'left');
+        k.fit(`${ex[0].toUpperCase() + ex.slice(1)}. Higher or lower?`, 130, boxY + 110, 820, 600, 26, false, '#BDBDC6', 'left');
+        if (!last) return;
+        k.fit('THE ONE THAT GOT ME', W / 2, 620, 900, 800, 24, false, '#8E8E99', 'center', '4px');
+        let numAt = null;
+        [last.a, last.b].forEach((r, i) => {
+          const cx = i ? 795 : 285, c = G.club(r.club), v = String(stat.val(r));
+          if (club) {
+            // the club's card: its shield in the club's colours, crest, name, the number, the season and the stat
+            const h = 294, w = h * 114 / 148, x = cx - w / 2, a = c.accent || '#444444', mix = D2T.mix;
+            g.save(); g.translate(x, TOP); g.scale(w / 114, h / 148);
+            const gr = g.createLinearGradient(0, 0, 26, 148);
+            [[0, mix(a, '#FFFFFF', 0.55)], [0.22, a], [0.42, mix(a, '#000000', 0.32)], [0.66, mix(a, '#000000', 0.8)], [1, mix(a, '#000000', 0.92)]].forEach(([o, col]) => gr.addColorStop(o, col));
+            const P = new Path2D('M1.77 10.23 L10.23 1.77 Q12 0 14.5 0 L99.5 0 Q102 0 103.77 1.77 L112.23 10.23 Q114 12 114 14.5 L114 127 Q114 130 111.14 130.9 L60.81 146.8 Q57 148 53.19 146.8 L2.86 130.9 Q0 130 0 127 L0 14.5 Q0 12 1.77 10.23Z');
+            g.fillStyle = gr; g.fill(P); g.lineWidth = 2; g.strokeStyle = mix(a, '#FFFFFF', 0.45); g.stroke(P); g.restore();
+            k.pic(im['c' + i], cx, TOP + 22, 74);
+            k.fit(String(c.name).toUpperCase(), cx, TOP + 104, w - 30, 900, 30, true, '#FFFFFF');
+            k.mid(v, cx, TOP + 172, w - 40, 900, v.length > 3 ? 62 : 78, true, '#FFFFFF');
+            const when = r.season || 'All-time', pw = k.width(when, 800, 18) + 24;
+            k.rr(cx - pw / 2, TOP + 210, pw, 30, 10); g.fillStyle = 'rgba(0,0,0,.35)'; g.fill(); k.mid(when, cx, TOP + 225, 200, 800, 18, false, '#FFFFFF');
+            g.fillStyle = 'rgba(255,255,255,.25)'; g.fillRect(cx - w * 0.3, TOP + 248, w * 0.6, 2);
+            k.fit(stat.short || stat.unit.toUpperCase(), cx, TOP + 254, w * 0.55, 800, 15, false, c.text || '#FFFFFF', 'center', '2px');
+            if (i) numAt = [cx, TOP + 172];
+          } else {
+            // the player's shirt with his surname and the stat as his number, the crest and his flag under it
+            const kt = D2T.shirts.kit(r.club), top = TOP - 10 * U, X = (u) => cx - SZ / 2 + (u + 6) * U, Y = (u) => top + (u + 6) * U;
+            if (im['s' + i]) g.drawImage(im['s' + i], cx - SZ / 2, top, SZ, SZ);
+            const txt = (t, u, base, fs, maxU) => {
+              g.save(); g.font = `italic 900 ${fs * U}px 'Exo 2', sans-serif`; g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+              const mw = g.measureText(t).width, lim = maxU * U, sx = mw > lim ? lim / mw : 1;
+              g.translate(X(u), Y(base)); g.scale(sx, 1);
+              if (kt.stroke) { g.lineWidth = 2.6 * U; g.strokeStyle = kt.stroke; g.lineJoin = 'round'; g.strokeText(t, 0, 0); }
+              g.fillStyle = kt.ink; g.fillText(t, 0, 0); g.restore();
+            };
+            const word = r.name.split(' ').slice(-1)[0].toUpperCase(), fs = Math.max(8.5, Math.min(13, 104 / Math.max(6, word.length)));
+            txt(word, 50, 27, fs, Math.min(52, word.length * fs * 0.62));
+            txt(v, 50, +NY(v), NS(v), 46);
+            if (i) numAt = [cx, Y(+NY(v) - NS(v) * 0.36)];
+            const cr = im['c' + i], fl = im['f' + i], cs = 56, fw = 52, fh = 39, gap = 14, tw = cs + (fl ? gap + fw : 0), rx = cx - tw / 2, ry = Y(96) + 16;
+            k.pic(cr, rx + cs / 2, ry, cs);
+            if (fl) { g.save(); k.rr(rx + cs + gap, ry + (cs - fh) / 2, fw, fh, 5); g.clip(); g.drawImage(fl, rx + cs + gap, ry + (cs - fh) / 2, fw, fh); g.restore(); }
+          }
+          const sub = club ? (r.season || 'ALL-TIME') : `${c.name}${stat.deck === 'season' ? ' · ' + r.season : ''}`;
+          k.fit(club ? String(c.full || c.name) : r.name, cx, 976, 380, 900, 30, true, '#FFFFFF');
+          k.fit(String(sub).toUpperCase(), cx, 1010, 380, 800, 18, false, '#8E8E99', 'center', '3px');
+        });
+        k.swipe(512, 940, 512, 740, last.higher ? RED : '#6A6A73');
+        k.swipe(568, 740, 568, 940, last.higher ? '#6A6A73' : RED);
+        if (numAt) k.cross(numAt[0], numAt[1], 196, 76, true);
+        k.mid(last.higher ? 'I SAID HIGHER. IT WAS LOWER.' : 'I SAID LOWER. IT WAS HIGHER.', W / 2, 1098, 900, 900, 44, true, '#FFFFFF');
+      } });
+  }
+
   // ---------- one reel (the club spin's fruit machine, screens/spin.js, sized for these cards) ----------
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   let fid = 0;
@@ -561,6 +651,7 @@
         if (!run || busy) return;
         busy = true; enable(false); snd('tap');
         const a = run.stat.val(run.cur), b = run.stat.val(run.next), right = higher ? b > a : b < a;
+        run.said = higher;   // the share card's last call (Craig, 29 Oct)
         burstReveal(numEl(), b, () => {
           stage.querySelector('.ub-r').classList.add(right ? 'ok' : 'bad');
           if (right) win(); else { snd('wrong'); later(over, reduced ? 200 : 950); }
@@ -651,22 +742,15 @@
       function over(cleared) {
         if (!root.isConnected || !run) return;
         const s = run.stat, n = run.streak, prev = R.best[s.id] || 0, newBest = n > prev && n > 0;
+        const lastCall = cleared ? null : { a: run.cur, b: run.next, higher: !!run.said };
         // the banter is picked against the best before this run (prev) and remembered, so the next sheet avoids it
         const said = banter(R, bucketFor(n, prev, cleared), n, prev);
-        R.runs++; if (newBest) R.best[s.id] = n; R.run = null; save(); bestLine(s);
+        R.runs++; R.lastRun = n; if (newBest) R.best[s.id] = n; R.run = null; save(); bestLine(s);
         if (newBest) { snd('highScore'); highScore(); }
         // the end sheet waits for the HIGH SCORE flash to pass
         const show = () => {
           if (!root.isConnected) return;
-          // the share card (Craig, 13 Oct): the run huge in cyan, the stat, the dare
-          const text = `DROP2TOP Unbeaten Run · ${s.big}\nI went unbeaten in ${n} call${n === 1 ? '' : 's'} of higher or lower.${newBest ? '\nA new best.' : ''}\nCan you go longer?\n${D2T.share.LINK}`;
-          const ring = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="#22D3EE" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="50" r="44"/><path d="M30 42 L50 22 L70 42"/><path d="M30 58 L50 78 L70 58"/></svg>';
-          const card = D2T.share.build({ text, c: '#22D3EE', tag: 'Unbeaten Run', dare: `Go longer than ${n}`, ghost: D2T.share.svgSrc(ring), ghostAlpha: 0.12,
-            draw: (g, im, k) => {
-              g.save(); g.shadowColor = 'rgba(34,211,238,.45)'; g.shadowBlur = 80; k.fit(String(n), k.W / 2, 330, 980, 900, 420, true, '#22D3EE'); g.restore();
-              k.fit(s.big.toUpperCase(), k.W / 2, 730, 960, 900, 64, true, '#FFFFFF');
-              k.wrap(`Unbeaten in ${n} call${n === 1 ? '' : 's'} of higher or lower, real Premier League numbers.`, k.W / 2, 830, 820, 600, 40, '#BDBDC6', 52);
-            } });
+          const card = shareCard(s, n, lastCall);
           // the shared end sheet (Craig, 14 Oct; D2T.endSheet): Share, New run, Home. Closing it goes back to the start page,
           // which has New run and Home of its own, so there is no peek bar here.
           D2T.endSheet({ title: said.title, lead: `<div class="ub-endbig"><b>${n}</b><span>Unbeaten${newBest ? ' · a new best' : ''}</span></div><p class="fr-lead ub-banter">${D2T.esc(said.line)}</p>`,
@@ -765,4 +849,6 @@
   // the home screen card (screens/home.js), in the same shape as the other games' cards
   D2T.ubRecord = () => { const R = D2T.state.ub || { best: {}, runs: 0 }; const top = Math.max(0, ...Object.values(R.best || {})); return { runs: R.runs || 0, top }; };
   D2T.ubMark = MARK;
+  // the home stage's art (screens/home-v2.js): the stage's own cards and shirts, and the decks they come from
+  D2T.ubArt = { item: (statId, r, shown, w) => item(STATS.find((x) => x.id === statId), r, shown, w), decks: () => decks(), STATS };
 })();

@@ -24,6 +24,12 @@
 .fr-home-top { display: flex; justify-content: center; padding: calc(env(safe-area-inset-top, 0px) + 44px) 0 36px; }
 .fr-home-logo { width: 60%; border: 0; background: none; padding: 0; color: #fff; -webkit-touch-callout: none; user-select: none; }
 .fr-home-logo .logo-mask { width: 100%; }
+/* home v2, the stage: its top bar (here, in the head, so the intro can land its logo on it; the rest is stage.css) */
+.stg-top { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 12px); left: 18px; right: 18px; z-index: 30; display: flex; align-items: center; gap: 10px; }
+.stg-top .stg-logo { flex: none; width: min(241.5px, calc(100% - 168px)); margin-right: auto; }   /* the circle as tall as the 44px buttons where the phone has the room (Craig, 30 Oct), else as big as fits beside them */
+.stg-rb { flex: none; width: 44px; height: 44px; border-radius: 50%; padding: 0; border: 1.5px solid rgba(255,255,255,.28); background: rgba(255,255,255,.06); color: #fff; display: grid; place-items: center; font: 900 italic 19px/1 var(--font); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.stg-rb svg { width: 20px; height: 20px; }
+.stg-rb:disabled { opacity: .3; cursor: default; }
 .fr-card-btn { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; border: 1px solid var(--line); border-radius: 22px; background: var(--ink); color: #fff; text-align: left; padding: 16px 18px; overflow: hidden; transition: transform .16s var(--ease-out); }
 .fr-card-btn:active { transform: scale(0.98); }
 .fr-card-btn + .fr-card-btn { margin-top: 12px; }
@@ -269,8 +275,6 @@
 .fr-gm-mark .logo-mask { width: 120px; }
 .fr-gm-mark img { width: 110px; height: auto; opacity: .9; }
 /* the daily's crest at the Club X badge's size (a little wider: most crests are wider than tall), in full colour */
-.fr-gm-daily .fr-gm-mark { opacity: 1; }
-.fr-gm-daily .fr-gm-mark img.fr-gm-crest { width: 124px; height: 144px; object-fit: contain; opacity: 1; filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
 
 /* Coming soon (chosen 12 Oct, grey sweep): two grey squares side by side in the live cards' style */
 .fr-soon { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
@@ -286,16 +290,45 @@
 .fr-soon-nm { font: 900 italic 20px/.95 var(--font); text-transform: uppercase; }
 .fr-soon-sb { font-size: 12px; font-weight: 600; line-height: 1.3; margin-top: 5px; color: #A9A9B2; }
 .fr-soon-t.nudge { animation: frNudge .4s var(--ease-out); }
-/* your best Daily and today's, in two tiles just under the Daily card (Craig, 13 Oct; design/prototype/daily-best.html) */
-.fr-dtiles { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
-.fr-dtile { border-radius: 12px; background: #0E0E10; border: 1px solid #26262C; padding: 7px 10px; display: flex; flex-direction: column; gap: 3px; min-width: 0; color: #fff; }
-.fr-dtile.is-best { border-color: rgba(18,240,108,.6); }
-button.fr-dtile { font: inherit; text-align: left; cursor: pointer; min-height: 44px; -webkit-tap-highlight-color: transparent; }
-button.fr-dtile:active { transform: scale(.98); }
-.fr-dtile i { font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: .12em; color: #8E8E99; }
-.fr-dtile b { font: 900 italic 17px/1 'Exo 2', sans-serif; display: flex; align-items: center; gap: 5px; white-space: nowrap; overflow: hidden; }
-.fr-dtile b img { width: 18px; height: 18px; object-fit: contain; flex: none; }
-.fr-dtile small { font-size: 10px; font-weight: 700; color: #CFCFD6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* the Daily strip between the logo and Classic (Craig, 29 Oct; "C" in design/prototype/home-daily.html) */
+.fr-dstrip { display: flex; align-items: center; gap: 12px; width: 100%; box-sizing: border-box; margin: 2px 0 12px; padding: 11px 12px 11px 14px; min-height: 64px; border-radius: 16px;
+  background: linear-gradient(90deg, #0E0E10 50%, rgba(255,255,255,.14)); border: 1px solid rgba(255,255,255,.35); color: #fff; text-align: left; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform .16s var(--ease-out); }
+.fr-dstrip:active { transform: scale(.98); }
+.fr-dstrip-crest { width: 42px; height: 42px; object-fit: contain; flex: none; }
+.fr-dstrip-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.fr-dstrip-lbl { font: 800 11px/1.2 'Exo 2', sans-serif; letter-spacing: 2px; color: rgba(255,255,255,.7); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fr-dstrip-lbl.on { color: #12F06C; }
+.fr-dstrip-big { font: 900 italic 19px/1.1 'Exo 2', sans-serif; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 2px; }
+.fr-dstrip-sub { font: 600 12.5px/1.3 'Exo 2', sans-serif; color: #BDBDC6; margin-top: 2px; }
+.fr-dstrip-sub b { color: #fff; font-weight: 800; }
+.fr-dstrip-sub em { font-style: normal; color: #12F06C; font-weight: 800; }
+.fr-dstrip .fr-go { flex: none; display: grid; place-items: center; width: 22px; height: 44px; color: #fff; }
+.fr-dstrip .fr-go svg { width: 22px; height: 22px; }
+/* Your record, a page per game (Craig, 29 Oct; "B, refined: metallic, your arrow" in design/prototype/record-swipe.html) */
+.fr-shr { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin: -14px -6px -14px 0; padding: 0 6px; background: none; border: 0; color: var(--c, #fff); font: 800 14px var(--font); letter-spacing: .06em; text-transform: uppercase; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.fr-shr svg { flex: none; }
+.fr-sect-h .fr-shr span { font-size: inherit; font-weight: inherit; opacity: 1; }
+.fr-rec .fr-sect-h { align-items: center; }
+.fr-ptabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 0 12px; padding: 0 2px; }
+.fr-ptabs::-webkit-scrollbar { display: none; }
+.fr-ptabs button { flex: none; height: 32px; padding: 0 12px; border-radius: 9px; border: 1px solid #26262C; background: #0E0E10; color: #BDBDC6; font: 800 11px var(--font); letter-spacing: .12em; cursor: pointer; transform: skewX(-10deg); -webkit-tap-highlight-color: transparent; }
+.fr-ptabs button span { display: inline-block; transform: skewX(10deg); }
+.fr-ptabs button.on { background: var(--c); border-color: var(--c); color: #0A0A0A; }
+.fr-rpages { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.fr-rpages::-webkit-scrollbar { display: none; }
+.fr-rpage { flex: 0 0 100%; scroll-snap-align: start; scroll-snap-stop: always; }
+.fr-rdots { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
+.fr-rdots i { width: 6px; height: 6px; border-radius: 3px; background: #3A3A44; transition: width .2s, background .2s; }
+.fr-rdots i.on { width: 18px; background: var(--c); }
+/* the player cards' own shape (Craig, 29 Oct, build 173: "the same form as the player cards"): the pitch card's shield,
+   114 x 148, a light rim round a metallic face in the game's colour */
+.fr-al { justify-content: flex-start; padding: 24% 0 0; aspect-ratio: 114 / 148; }
+.fr-al-rim, .fr-al-face { position: absolute; }
+.fr-al-rim { inset: 0; background: linear-gradient(170deg, var(--r1), var(--r2)); -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20114%20148'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M1.77%2010.23%20L10.23%201.77%20Q12%200%2014.5%200%20L99.5%200%20Q102%200%20103.77%201.77%20L112.23%2010.23%20Q114%2012%20114%2014.5%20L114%20127%20Q114%20130%20111.14%20130.9%20L60.81%20146.8%20Q57%20148%2053.19%20146.8%20L2.86%20130.9%20Q0%20130%200%20127%20L0%2014.5%20Q0%2012%201.77%2010.23Z'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20114%20148'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M1.77%2010.23%20L10.23%201.77%20Q12%200%2014.5%200%20L99.5%200%20Q102%200%20103.77%201.77%20L112.23%2010.23%20Q114%2012%20114%2014.5%20L114%20127%20Q114%20130%20111.14%20130.9%20L60.81%20146.8%20Q57%20148%2053.19%20146.8%20L2.86%20130.9%20Q0%20130%200%20127%20L0%2014.5%20Q0%2012%201.77%2010.23Z'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat; }
+.fr-al-face { inset: 2px; background: linear-gradient(155deg, var(--m1) 0%, var(--m2) 32%, var(--m3) 70%, var(--m4) 100%); -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20110%20144'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M0.92%2010.08%20L10.08%200.92%20Q11%200%2012.3%200%20L97.7%200%20Q99%200%2099.92%200.92%20L109.08%2010.08%20Q110%2011%20110%2012.3%20L110%20125.2%20Q110%20127%20108.28%20127.53%20L57.68%20143.17%20Q55%20144%2052.32%20143.17%20L1.72%20127.53%20Q0%20127%200%20125.2%20L0%2012.3%20Q0%2011%200.92%2010.08Z'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20110%20144'%20preserveAspectRatio%3D'none'%3E%3Cpath%20d%3D'M0.92%2010.08%20L10.08%200.92%20Q11%200%2012.3%200%20L97.7%200%20Q99%200%2099.92%200.92%20L109.08%2010.08%20Q110%2011%20110%2012.3%20L110%20125.2%20Q110%20127%20108.28%20127.53%20L57.68%20143.17%20Q55%20144%2052.32%20143.17%20L1.72%20127.53%20Q0%20127%200%20125.2%20L0%2012.3%20Q0%2011%200.92%2010.08Z'%20fill%3D'black'%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat; }
+.fr-record .fr-al b { font: 900 italic 30px/34px var(--font); height: 34px; white-space: nowrap; color: #0A0A0A; }
+.fr-record .fr-al span { margin-top: 7px; font-size: 10px; color: #0A0A0A; }
+.fr-record .fr-al.lt b, .fr-record .fr-al.lt span { color: #fff; }
 .fr-rise { color: #12F06C; display: inline-flex; align-items: center; gap: 3px; margin-left: 2px; }
 .fr-up { width: .7em; height: .7em; }
 /* a game locked for repair (Dare2Dream, Craig 13 Oct): no tap, a grey lock badge top right, the wash and mark dimmed */

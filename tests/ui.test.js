@@ -76,7 +76,8 @@ fs.mkdirSync(OUT, { recursive: true });
     if (!(await page.$(".actionbar, .sp-bar"))) errors.push(`no bottom bar on ${where}`);
   };
 
-  await page.goto(process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index.html"));
+  // the flows below run on home v1 (kept behind ?home=v1); the stage, home v2, has its own test (tests/stage.test.js)
+  await page.goto((process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index.html")) + "?home=v1");
   await page.evaluate(() => { localStorage.clear(); localStorage.setItem("d2t-v2", JSON.stringify({ settings: { muted: true } })); });
   await page.reload();
   await expectScreen("intro");
@@ -283,7 +284,7 @@ fs.mkdirSync(OUT, { recursive: true });
   check(!(await page.$(".end-sheet")) && !!(await page.$(".sheet .se-table")) && !!(await page.$(".end-peek")), "Final table on the end sheet should open the table and leave the peek bar");
   await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(500);
   await page.evaluate(() => window.D2T.go("summary")); await expectScreen("summary"); await wait(1200);
-  await card("classic", "DROP2TOP\nI took ");
+  await card("classic", "*DROP2TOP Classic*\n\n");
   await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(500);
   const scored = await page.evaluate(() => window.D2T.game.eng().played.some((r) => r.us > 0));
   check(!scored || (await page.$$eval(".sm-award span", (els) => els.some((e) => /Top scorer/.test(e.textContent)))), "no top scorer award although the club scored");
@@ -387,7 +388,7 @@ fs.mkdirSync(OUT, { recursive: true });
   check(/Dream achieved|Fell short/.test(await page.textContent(".sm-head")), "Dare2Dream summary has no dream result");
   await openEnd();
   check(!!(await page.$('.end-sheet [data-k="again"]')) && !!(await page.$('.end-sheet [data-k="home"]')), "the Dare2Dream end sheet should offer Play again and Home");
-  await card("dare2dream", "DROP2TOP Dare2Dream\n");
+  await card("dare2dream", "*DROP2TOP Dare2Dream*\n\n");
   check(await page.evaluate(() => window.D2T.game.dreamRecord().runs === 1), "Dare2Dream run not recorded");
   check(await page.evaluate((b) => JSON.stringify(window.D2T.game.record()) === b, classicBefore), "Dare2Dream run changed Classic's record");
 
@@ -437,7 +438,7 @@ fs.mkdirSync(OUT, { recursive: true });
   check(await page.evaluate(() => { const e = window.D2T.game.eng(); return e.formation === window.__f && e.xi.filter((x) => x != null).length === 3 && e.phase === "draft"; }), "changing the shape mid-draft lost a drafted player");
   await page.evaluate(() => { const G = window.D2T.game; while (G.inDraft()) G.draftPick(G.rollCards()[0].id); if (G.eng().phase === "setup") G.startSeason(); for (let i = 0; i < 400; i++) { const e = G.eng(); if (e.phase === "summary") break; if (e.phase === "window") G.pass(); else { G.play(); G.afterMatch(); } } window.D2T.go("summary"); });
   await expectScreen("summary"); await wait(1200); await shot("35-clx-summary");
-  await card("clubx", "DROP2TOP Club X\n");
+  await card("clubx", "*DROP2TOP Club X*\n\n");
   check(/Champions|Fell short/.test(await page.textContent(".sm-head")), "Club X summary has no result");
   // the club history page (Craig, 14 Oct): the career's record, big numbers and every season
   await page.evaluate(() => { const el = document.querySelector('.sm [data-act="history"], [data-act="history"]'); el.click(); }); await expectScreen("history"); await wait(600); await shot("35b-clx-history");
@@ -541,9 +542,11 @@ fs.mkdirSync(OUT, { recursive: true });
   // compared with the first go's own cards, so an earlier run of the same club-season (random seeds) can't upset it
   check(await page.evaluate((first) => { const G = window.D2T.game, S = G.S(), e = G.eng(), key = S.season + ":" + S.clubs[e.club].name, rec = (window.D2T.state.recent || {})[key]; return !!(first.length && rec && rec[0] && rec[0].length === first.length && first.every((id) => rec[0].includes(id)) && e.recent && first.every((id) => e.recent[id] === window.D2TE.RULES.recent[0])); }, firstOffered), "the first go's cards were not remembered as recent for the second go");
   await page.evaluate(() => window.D2T.go("home")); await expectScreen("home"); await wait(800);
-  check(/Your best today/.test(await page.textContent(".fr-gm-daily .fr-sub")), "home does not show today's best go");
-  check(/TODAY'S DAILY/.test(await page.textContent(".fr-dtiles")) && (await page.$$(".fr-dtile")).length === 2, "home has no best and today tiles under the daily card");
-  check(await page.evaluate(() => !window.D2T.game.dailyResult() || !/None yet/.test(document.querySelector(".fr-dtile").textContent)), "home says no best Daily beside a Daily already played");
+  // the Daily strip (Craig, 29 Oct): a go in progress says so; Your record has a Daily page; the Daily left Other games
+  check(/DAILY CHALLENGE · IN PROGRESS/.test(await page.textContent(".fr-dstrip")) && /Tap to carry on/.test(await page.textContent(".fr-dstrip-sub")), "the Daily strip does not show the go in progress");
+  check(await page.evaluate(() => { const t = [...document.querySelectorAll(".fr-ptabs button")].map((b) => b.textContent); return t[0] === "DAILY" && t.includes("CLASSIC") && document.querySelectorAll(".fr-rpage").length === t.length && document.querySelectorAll(".fr-rpage")[0].querySelectorAll(".fr-al").length === 4 && /Share/i.test(document.querySelector(".fr-shr").textContent); }), "Your record should open on the Daily page, a page per game played, four shields each, with Share");
+  check(!(await page.$(".fr-gm-daily")) && !(await page.$(".fr-dtiles")), "the old Daily card is still in Other games");
+  check(await page.evaluate(() => { const s = document.querySelector(".fr-dstrip"), c = document.querySelector(".fr-classic"); return s && c && (s.compareDocumentPosition(c) & Node.DOCUMENT_POSITION_FOLLOWING); }), "the Daily strip is not above Classic");
   check(!!(await page.$('[data-act="continue-other"]')), "the parked run has no Continue card after the daily");
   // the Daily closes at midnight: an unfinished one from yesterday is dropped (no result), the parked run comes back, home says so
   await page.evaluate(() => {
@@ -703,7 +706,7 @@ fs.mkdirSync(OUT, { recursive: true });
       // the end sheet's banter (Craig, 14 Oct): a run of 0 with no best yet takes a title and a line from the zero bucket
       const zero = await page.evaluate(() => ({ title: (document.querySelector(".sheet .sheet-title, .sheet h2, .sheet h3") || {}).textContent || document.querySelector(".sheet").textContent, line: (document.querySelector(".sheet .ub-banter") || {}).textContent || "" }));
       check(!!(await page.$(".sheet")) && /Beaten first time|Out first ball|Done in one|Fell at the first/.test(zero.title) && zero.line.length > 10 && !/ had /.test(zero.line), "Unbeaten Run (" + st + "): no end sheet with the zero banter after a wrong answer");
-      await card("unbeaten", "DROP2TOP Unbeaten Run · ");
+      await card("unbeaten", "*DROP2TOP Unbeaten Run*\n\n");
       check(/New run/.test(await page.textContent('.sheet [data-k="again"]')) && !!(await page.$('.end-sheet [data-k="home"]')) && !!(await page.$('.end-sheet [data-k="share"]')), "Unbeaten Run (" + st + "): the end sheet should offer Share, New run and Home");
       check(await page.evaluate((n) => ((window.D2T.state.ub || {}).runs || 0) === n + 1, runsBefore), "Unbeaten Run (" + st + "): a finished run was not recorded");
       await shot("54-unbeaten-end");

@@ -5,6 +5,9 @@
   D2T.data = window.D2T_DATA;
   D2T.screens = {};
   D2T.screen = (name, def) => { D2T.screens[name] = def; };
+  // Which home (Craig, 29 Oct): 'v2' the stage (screens/home-v2.js), 'v1' the old scrolling home (screens/home-v1.js);
+  // change the default here to switch back, or open the game with ?home=v1
+  D2T.HOME = /[?&]home=v1\b/.test(location.search) ? 'v1' : 'v2';
 
   // ---------- saved state (phone only; safe if storage is blocked) ----------
   const KEY = 'd2t-v2';
@@ -107,7 +110,7 @@
     if (m === 'dare2dream') return ['Dare2Dream', '#3BA4FF'];
     if (m === 'clubx') return ['Club X', '#12F06C'];
     const d = D2T.run(), c = d && d.club;
-    return ['Classic', c ? (c.text || c.accent) : '#12F06C'];
+    return ['Classic', c ? (c.text || c.accent) : '#C9D0D9'];   // silver before a club is picked (Craig, 30 Oct)
   };
   D2T.modeWord = modeWord;
   D2T.topbar = (opts = {}) => {
@@ -192,10 +195,11 @@
   window.addEventListener('error', (ev) => { D2T.keepError(ev.error || { message: ev.message }, 'window'); });
   window.addEventListener('unhandledrejection', (ev) => { D2T.keepError(ev.reason || {}, 'promise'); });
 
-  D2T.sheet = ({ title = '', body = '', onClose } = {}) => {
+  // foot: html kept fixed under the body, which scrolls on its own (the rules sheets' Done; Craig, 30 Oct)
+  D2T.sheet = ({ title = '', body = '', onClose, foot = '', cls = '' } = {}) => {
     const host = document.getElementById('app');
     const scrim = D2T.h('<div class="sheet-scrim"></div>');
-    const sh = D2T.h(`<section class="sheet" role="dialog" aria-label="${D2T.esc(title)}"><div class="sheet-bar" aria-label="Close"><span></span></div>${title ? `<div class="sheet-title">${title}</div>` : ''}<div class="sheet-body"></div></section>`);
+    const sh = D2T.h(`<section class="sheet${cls ? ' ' + cls : ''}" role="dialog" aria-label="${D2T.esc(title)}"><div class="sheet-bar" aria-label="Close"><span></span></div>${title ? `<div class="sheet-title">${title}</div>` : ''}<div class="sheet-body"></div>${foot ? `<div class="sheet-foot">${foot}</div>` : ''}</section>`);
     const bodyEl = sh.querySelector('.sheet-body');
     if (typeof body === 'string') bodyEl.innerHTML = body; else bodyEl.appendChild(body);
     host.append(scrim, sh);
@@ -208,10 +212,17 @@
     bar.onclick = close;
     const handles = [bar, sh.querySelector('.sheet-title')].filter(Boolean);
     // the content drags the sheet down too, once it is scrolled to the top (touch)
-    let ty = null, tdy = 0;
-    bodyEl.addEventListener('touchstart', (e) => { ty = bodyEl.scrollTop <= 0 ? e.touches[0].clientY : null; tdy = 0; }, { passive: true });
-    bodyEl.addEventListener('touchmove', (e) => { if (ty == null) return; tdy = Math.max(0, e.touches[0].clientY - ty); if (tdy > 0) { sh.style.transition = 'none'; sh.style.transform = `translateY(${tdy}px)`; if (e.cancelable) e.preventDefault(); } }, { passive: false });
-    bodyEl.addEventListener('touchend', () => { if (ty == null) return; ty = null; sh.style.transition = ''; if (tdy > 90) close(); else sh.style.transform = ''; });
+    // iOS cancels a whole scroll if the first touchmove is prevented, so the drag only takes over after a clear pull down
+    // from the top, and a first move upwards hands the gesture to the scroll (Craig, 31 Oct: the formation sheet would not scroll)
+    let ty = null, tdy = 0, dragging = false;
+    bodyEl.addEventListener('touchstart', (e) => { ty = bodyEl.scrollTop <= 0 ? e.touches[0].clientY : null; tdy = 0; dragging = false; }, { passive: true });
+    bodyEl.addEventListener('touchmove', (e) => {
+      if (ty == null) return;
+      const d = e.touches[0].clientY - ty;
+      if (!dragging) { if (d < -2) { ty = null; return; } if (d < 10) return; dragging = true; }
+      tdy = Math.max(0, d - 10); sh.style.transition = 'none'; sh.style.transform = `translateY(${tdy}px)`; if (e.cancelable) e.preventDefault();
+    }, { passive: false });
+    bodyEl.addEventListener('touchend', () => { if (ty == null) return; ty = null; sh.style.transition = ''; if (dragging && tdy > 90) close(); else sh.style.transform = ''; dragging = false; });
     handles.forEach((hd) => {
       let y0 = null, dy = 0;
       hd.addEventListener('pointerdown', (e) => { y0 = e.clientY; dy = 0; sh.style.transition = 'none'; hd.setPointerCapture(e.pointerId); });
@@ -219,7 +230,9 @@
       hd.addEventListener('pointerup', () => { if (y0 == null) return; y0 = null; sh.style.transition = ''; if (dy > 80) close(); else sh.style.transform = ''; if (dy > 4) { bar.onclick = null; setTimeout(() => { bar.onclick = close; }, 60); } });
       hd.addEventListener('pointercancel', () => { y0 = null; sh.style.transition = ''; sh.style.transform = ''; });
     });
-    return { el: sh, body: bodyEl, close };
+    const footEl = sh.querySelector('.sheet-foot');
+    if (footEl) footEl.querySelectorAll('[data-done]').forEach((b) => { b.onclick = close; });
+    return { el: sh, body: bodyEl, foot: footEl, close };
   };
 
   // ---------- router ----------

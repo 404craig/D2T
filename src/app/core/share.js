@@ -100,7 +100,91 @@
       for (let i = 0; i < 5; i++) { const a = -Math.PI / 2 + i * 2 * Math.PI / 5; pent(cx + r * 0.95 * Math.cos(a), cy + r * 0.95 * Math.sin(a), r * 0.3, a + Math.PI / 2); }
       g.restore();
     };
-    return { fit, mid, width, rr, box, wrap, pic, club, duo, tag, card, ball, LVC, W, H };
+    // a hand-drawn red cross (Craig, 29 Oct; design/prototype/daily-share.html): a quadratic stroke drawn as a filled
+    // shape tapering to fine ends, T its widest; cross() lays a long flat stroke over a steeper doubled one, edge = a black
+    // outline for light backgrounds
+    const tstroke = (x0, y0, cx, cy, x1, y1, T, col) => {
+      const n = 48, L = [], R = [];
+      for (let i = 0; i <= n; i++) {
+        const t = i / n, u = 1 - t, x = u * u * x0 + 2 * u * t * cx + t * t * x1, y = u * u * y0 + 2 * u * t * cy + t * t * y1;
+        const dx = 2 * u * (cx - x0) + 2 * t * (x1 - cx), dy = 2 * u * (cy - y0) + 2 * t * (y1 - cy), l = Math.hypot(dx, dy) || 1, nx = -dy / l, ny = dx / l;
+        const w = T * (0.18 + 0.82 * Math.pow(Math.sin(Math.PI * Math.min(1, t * 1.15)), 0.55)) / 2;
+        L.push([x + nx * w, y + ny * w]); R.push([x - nx * w, y - ny * w]);
+      }
+      g.beginPath(); L.forEach(([x, y], i) => (i ? g.lineTo(x, y) : g.moveTo(x, y))); R.reverse().forEach(([x, y]) => g.lineTo(x, y)); g.closePath(); g.fillStyle = col; g.fill();
+    };
+    const cross = (cx, cy, w, h, edge, col = '#FF4D52') => {
+      const S = [[cx - w * 0.5, cy - h * 0.22, cx, cy + h * 0.02, cx + w * 0.5, cy + h * 0.3, 12], [cx - w * 0.4, cy + h * 0.5, cx - w * 0.02, cy + h * 0.06, cx + w * 0.42, cy - h * 0.5, 8], [cx - w * 0.34, cy + h * 0.6, cx + w * 0.04, cy + h * 0.18, cx + w * 0.46, cy - h * 0.36, 6]];
+      g.save();
+      if (edge) S.forEach(([a, b, c, d, e, f, T]) => { g.save(); g.strokeStyle = '#0A0A0A'; g.lineWidth = 2.5; g.lineJoin = 'round'; tstroke(a, b, c, d, e, f, T, '#0A0A0A'); g.stroke(); g.restore(); });
+      S.forEach(([a, b, c, d, e, f, T]) => tstroke(a, b, c, d, e, f, T, col));
+      g.restore();
+    };
+    // ---------- the new frame's pieces (design/prototype/daily-share.html, Craig, 29 Oct) ----------
+    // crest, name, season line
+    const clubBlock = (im, name, season) => {
+      pic(im, W / 2, 252, 236);
+      fit(String(name).toUpperCase(), W / 2, 500, 960, 900, 74, true, '#FFFFFF');
+      fit(season, W / 2, 580, 960, 600, 38, false, '#E6E6EA');
+    };
+    // "21st -> 1st" with the arrow on the figures' middle, and a small line under each
+    const result = (a, b, colB, la, lb, colLb) => {
+      const C = 712, gap = 140, wa = width(a, 900, 136, true), wb = width(b, 900, 136, true), x0 = W / 2 - (wa + gap + wb) / 2;
+      mid(a, x0, C, 999, 900, 136, true, '#8E8E99', 'left'); mid(b, x0 + wa + gap, C, 999, 900, 136, true, colB, 'left');
+      g.strokeStyle = '#FFFFFF'; g.lineWidth = 9; g.lineCap = 'round'; g.lineJoin = 'round';
+      const ax = x0 + wa + 26, bx = x0 + wa + gap - 26;
+      g.beginPath(); g.moveTo(ax, C); g.lineTo(bx, C); g.moveTo(bx - 24, C - 22); g.lineTo(bx, C); g.lineTo(bx - 24, C + 22); g.stroke();
+      fit(la, x0 + wa / 2, 790, 440, 800, 26, false, '#8E8E99', 'center', '2px');
+      fit(lb, x0 + wa + gap + wb / 2, 790, 460, 800, 26, false, colLb || colB, 'center', '2px');
+    };
+    // "THE RISE: " in white, then "+20 PLACES" in colour
+    const line2 = (t1, t2, col, y = 846) => {
+      const w1 = width(t1, 900, 54, true), w2 = width(t2, 900, 54, true), x = W / 2 - (w1 + w2) / 2;
+      fit(t1, x, y, 999, 900, 54, true, '#FFFFFF', 'left'); fit(t2, x + w1, y, 999, 900, 54, true, col, 'left');
+    };
+    // a team sheet row: the icon (a ball, or a small card: r.p and its crest r.im), a small label over the name, then the
+    // number right-aligned at 826 and its word after it
+    const row = (y, r) => {
+      const h = 100, c = y + h / 2;
+      box(90, y, 900, h, 22);
+      if (r.icon === 'ball') ball(150, c, 28); else if (r.icon === 'card') card(126, c - 38, 58, r.p, r.im);
+      fit(r.label, 206, y + 18, 560, 800, 22, false, '#8E8E99', 'left', '3px');
+      fit(String(r.name).toUpperCase(), 206, y + 46, 560, 900, 40, true, '#FFFFFF', 'left');
+      mid(String(r.n), 826, c, 220, 900, 64, true, r.col, 'right'); if (r.u) mid(r.u, 840, c, 140, 800, 22, false, r.col, 'left', '2px');
+    };
+    // a career down a league table (Club X): S = [[short season, finish, title]], 1st at the top, finishes below 10th on
+    // the floor; up to 6 seasons big dots with their finish over them and every year, more small dots and every 5th year
+    const climb = (S, y, h, col = '#12F06C') => {
+      box(90, y, 900, h, 22);
+      const x0 = 200, x1 = 950, yT = y + 56, yB = y + h - 66, pos = (f) => yT + (Math.min(10, Math.max(1, f)) - 1) / 9 * (yB - yT);
+      const xs = (i) => (S.length > 1 ? x0 + i * (x1 - x0) / (S.length - 1) : (x0 + x1) / 2), big = S.length <= 6;
+      [[1, '1st'], [5, '5th'], [10, '10th']].forEach(([p, l]) => { const yy = pos(p); g.fillStyle = '#1C1C21'; g.fillRect(x0 - 20, yy, x1 - x0 + 40, 2); mid(l, 150, yy, 80, 800, 20, false, '#5A5A63', 'right', '2px'); });
+      g.strokeStyle = col; g.lineWidth = big ? 6 : 4; g.lineJoin = 'round'; g.lineCap = 'round';
+      g.beginPath(); S.forEach(([, f], i) => { const x = xs(i), yy = pos(f); if (i) g.lineTo(x, yy); else g.moveTo(x, yy); }); g.stroke();
+      S.forEach(([s, f, won], i) => {
+        const x = xs(i), yy = pos(f), r = big ? (won ? 20 : 13) : (won ? 12 : 6);
+        g.beginPath(); g.arc(x, yy, r, 0, 7); g.fillStyle = won ? '#0C1F14' : col; g.fill();
+        if (won) { g.lineWidth = big ? 6 : 4; g.strokeStyle = col; g.stroke(); }
+        if (big) mid(D2T.ordinal(f), x, yy + (won ? -44 : -36), 120, 900, 30, true, won ? col : '#FFFFFF');
+        if (big || i % 5 === 0 || i === S.length - 1) fit(s, x, y + h - 40, 160, 800, big ? 22 : 18, false, '#8E8E99', 'center', '2px');
+      });
+    };
+    // Unbeaten's hand-drawn swipe arrow (screens/unbeaten.js drawArrow): a tapered shaft and an open chevron, its weight
+    // growing with its length
+    const swipe = (x0, y0, x, y, col = '#22D3EE') => {
+      const dx = x - x0, dy = y - y0, len = Math.hypot(dx, dy), G = Math.min(1, len / 360) * 2.4, ux = dx / len, uy = dy / len, nx = -uy, ny = ux;
+      const tail = 3 + 8 * G, tip = tail * 0.3, bl = Math.min(len * 0.6, 11 + 33 * G), bw = 2.5 + 5 * G, ex = x - ux * bw * 0.45, ey = y - uy * bw * 0.45, r0 = tail / 2, r1 = tip / 2;
+      g.save(); g.shadowColor = rgba(col, 0.6); g.shadowBlur = 16; g.fillStyle = col;
+      g.beginPath(); g.moveTo(x0 + nx * r0, y0 + ny * r0); g.lineTo(ex + nx * r1, ey + ny * r1); g.lineTo(ex - nx * r1, ey - ny * r1); g.lineTo(x0 - nx * r0, y0 - ny * r0);
+      g.arc(x0, y0, r0, Math.atan2(-ny, -nx), Math.atan2(ny, nx)); g.closePath(); g.fill();
+      const a1 = 27 * Math.PI / 180, a2 = 34 * Math.PI / 180, l2 = bl * 0.94;
+      const u1x = x - (ux * Math.cos(a1) - nx * Math.sin(a1)) * bl, u1y = y - (uy * Math.cos(a1) - ny * Math.sin(a1)) * bl;
+      const u2x = x - (ux * Math.cos(a2) + nx * Math.sin(a2)) * l2, u2y = y - (uy * Math.cos(a2) + ny * Math.sin(a2)) * l2;
+      const cx = (x + u2x) / 2 + (ux * 0.45 - nx * 0.22) * l2 * 0.5, cy = (y + u2y) / 2 + (uy * 0.45 - ny * 0.22) * l2 * 0.5;
+      g.strokeStyle = col; g.lineWidth = bw; g.lineCap = 'round'; g.lineJoin = 'round';
+      g.beginPath(); g.moveTo(u1x, u1y); g.lineTo(x, y); g.quadraticCurveTo(cx, cy, u2x, u2y); g.stroke(); g.restore();
+    };
+    return { fit, mid, width, rr, box, wrap, pic, club, duo, tag, card, ball, tstroke, cross, clubBlock, result, line2, row, climb, swipe, rgba, LVC, W, H, g };
   }
 
   function build(o) {

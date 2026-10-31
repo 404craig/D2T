@@ -156,6 +156,17 @@ for _name, _pos in (json.load(open(_po, encoding="utf-8")) if os.path.exists(_po
         else:
             _season[_name] = list(_pos)
 
+# Wide players (Craig, 31 Oct, build 183: "I don't think anyone should be on LM or RM, they should also be wingers, and
+# similarly wingers should be able to play LM or RM"): a left or right midfielder is also a winger on that side and a
+# winger also a wide midfielder there, the partner added as a preferred position straight after the one he has
+# (Andrei Kanchelskis: RM, then RW).
+for _season in POSITIONS.values():
+    for _name, _ps in _season.items():
+        cur = list(_ps)
+        for a, b in (("LM", "LW"), ("RM", "RW")):
+            if a in cur and b not in cur: cur.insert(cur.index(a) + 1, b)
+            elif b in cur and a not in cur: cur.insert(cur.index(b) + 1, a)
+        _season[_name] = cur
 
 # Icons and honours (Craig, 15 Oct 2026; docs/cards/ICONS.md): the popular all-time players from published lists plus
 # Craig's own, with their verified peak seasons (tools/build_icons.py), and every season's honours (PFA Team of the

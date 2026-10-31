@@ -24,6 +24,8 @@
   document.addEventListener('touchmove', (e) => { if (e.touches && e.touches.length > 1) e.preventDefault(); }, { passive: false });
   if (!D2T.started) D2T.start();          // normally the shell started the intro already, before the data arrived
   D2T.ready();
+  // the stage (home v2) reads Unbeaten's decks as it mounts: build them while the intro still plays (Fable's review, 30 Oct)
+  (window.requestIdleCallback || ((f) => setTimeout(f, 200)))(() => { try { if (D2T.ubArt) D2T.ubArt.decks(); } catch (e) { /* home builds them */ } });
   // the sound clips sit at the end of the page as plain JSON: read them once the intro has handed over (or on the first tap)
   let clipsRead = false;
   D2T.loadClips = () => {

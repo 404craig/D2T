@@ -37,91 +37,100 @@
   function runShare(o) {
     const { F, club, S, line, daily, mode, met, car, x, n, rel, rows } = o;
     const G = D2T.game, ord = D2T.ordinal, nm = club.full || club.name, L = D2T.share.LINK, sim = G.isSim();
-    const mon = (d) => { const M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], [, m, dd] = d.split('-'); return `${+dd} ${M[+m - 1]}`; };
-    const they = sim ? 'FORECAST' : 'THEY FINISHED';
+    const ts = rows && rows.topScorer, bc = rows && rows.best, GREEN = '#12F06C';
+    const goalsW = (g) => (g === 1 ? 'GOAL' : 'GOALS');
+    const placesW = (r) => `${sign(r)} ${Math.abs(r) === 1 ? 'place' : 'places'}`;
+    // the team sheet under every season card (Craig, 29 Oct): the top scorer and the best card (the highest-rated in the
+    // final XI, the next highest when he is also the top scorer), in the message and as two rows on the picture
+    const sheetLines = () => {
+      const out = [];
+      if (ts || bc) out.push('');
+      if (ts) out.push(`Top scorer: ${ts.name}, ${ts.goals} goal${ts.goals === 1 ? '' : 's'}`);
+      if (bc) out.push(`Best card: ${bc.name}, ${bc.r}`);
+      return out;
+    };
+    const bestImg = bc && G.club(bc.crest) && G.club(bc.crest).crest;
+    const sheetRows = (k, im, col, scorer = ts, best = bc, l1 = 'TOP SCORER', l2 = 'BEST CARD') => {
+      if (scorer) k.row(930, { icon: 'ball', label: l1, name: scorer.name, n: scorer.goals, u: goalsW(scorer.goals), col });
+      if (best) { const Lc = k.LVC[best.lv] || k.LVC.bronze; k.row(1044, { icon: 'card', label: l2, name: best.name, n: best.r, u: Lc[6], col: Lc[5], p: best, im: im.best }); }
+    };
+    const end = (lines) => lines.concat(['', '_Your turn. Beat that!_', L]).join('\n');
+    const acc = club.accent || '#FFFFFF', txt = club.text || '#FFFFFF', won = F.finish === 1;
     let spec;
     if (x) {
       const xn = G.xName(), seasons = (car.seasons || []).concat([{ season: S.season, finish: F.finish, sim }]);
-      const start = car.start || { season: S.season, replaced: S.clubs[G.eng().club].name };
-      const titles = seasons.filter((z) => z.finish === 1).length, down = F.finish > n - rel;
+      const start = car.start || { season: S.season };
       if (seasons.length < 2) {
-        spec = { c: '#12F06C', tag: 'Club X', dare: 'From nowhere to champions. Your go',
-          text: `DROP2TOP Club X\nI built ${xn} from nothing, put them in ${start.replaced}'s place in ${S.season} and ${F.finish === 1 ? 'won the league' : `finished ${ord(F.finish)}`}.\n${F.finish === 1 ? 'From nowhere to champions.' : 'Champions next time.'}\nYour turn.\n${L}`,
-          draw: (g, im, k) => { k.club(im.crest, xn, `${S.season} · in ${start.replaced}'s place`); k.duo(`${start.replaced.toUpperCase()} FINISHED`, ord(F.histFinish), `${F.histPts} pts`, 'WE FINISHED', ord(F.finish), `${F.pts} pts`, '#12F06C');
-            k.fit(F.finish === 1 ? 'CHAMPIONS' : ord(F.finish).toUpperCase(), k.W / 2, 975, 960, 900, 112, true, '#12F06C'); } };
-      } else {
-        const last = seasons.slice(-5), list = last.map((z) => `${z.season} ${ord(z.finish)}${z.sim ? ' (forecast)' : ''}`).join(' · ');
-        spec = { c: '#12F06C', tag: `Club X · Season ${seasons.length}`, dare: titles ? `Build a dynasty. Beat ${titles} title${titles === 1 ? '' : 's'}` : 'Build a dynasty. Win one',
-          text: `DROP2TOP Club X · Career\n${xn}: ${seasons.length} seasons, ${titles} title${titles === 1 ? '' : 's'}.\n${list}\n${down ? `Relegated in season ${seasons.length}, after ${titles} title${titles === 1 ? '' : 's'}.\n` : ''}Started in ${start.replaced}'s place. Can you build a dynasty?\n${L}`,
+        // Club X, the first season: no replaced club anywhere, just where your drafted 11 finished
+        const lines = ['*DROP2TOP Club X*', '', `Drafted from nothing, ${S.season}`, won ? `Won the league on ${F.pts} pts.` : `Finished ${ord(F.finish)} on ${F.pts} pts.`];
+        if (won) lines.push('From nowhere to champions.');
+        spec = { c: GREEN, wash: GREEN, band: GREEN, ink: '#0A0A0A', ghostAlpha: 0.07, tag: 'Club X', dare: 'Draft 11. Win the league',
+          text: end(lines.concat(sheetLines())), imgs: { crest: club.crest, best: bestImg },
           draw: (g, im, k) => {
-            k.club(im.crest, xn, `Career from ${start.season} · in ${start.replaced}'s place`);
-            const gap = 18, bw = (900 - gap * (last.length - 1)) / last.length;
-            last.forEach((z, i) => {
-              const bx = 90 + i * (bw + gap), won = z.finish === 1;
-              k.box(bx, 668, bw, 270, 22, won ? '#12F06C' : '#222226', won ? '#0F2A1A' : '#0E0E10');
-              k.fit(z.season, bx + bw / 2, 700, bw - 20, 800, 32, false, '#8E8E99');
-              k.fit(ord(z.finish), bx + bw / 2, 748, bw - 20, 900, 104, true, won ? '#12F06C' : '#FFFFFF');
-              if (won) k.fit('CHAMPIONS', bx + bw / 2, 868, bw - 20, 900, 26, false, '#12F06C', 'center', '3px');
-              if (z.sim) k.fit('FORECAST', bx + bw / 2, won ? 900 : 868, bw - 20, 800, 22, false, '#8E8E99', 'center', '2px');
-            });
-            k.fit(`${titles} TITLE${titles === 1 ? '' : 'S'} IN ${seasons.length} SEASONS`, k.W / 2, 990, 960, 900, 84, true, '#12F06C');
+            k.clubBlock(im.crest, xn, `${S.season} · drafted from nothing`);
+            k.mid(ord(F.finish), k.W / 2, 700, 900, 900, 170, true, GREEN);
+            k.fit(won ? `CHAMPIONS · ${F.pts} PTS` : `${F.pts} PTS`, k.W / 2, 790, 900, 800, 28, false, GREEN, 'center', '3px');
+            if (won) k.line2('FROM NOWHERE ', 'TO CHAMPIONS', GREEN); else k.line2('FINISHED ', `${ord(F.finish).toUpperCase()} OF ${n}`, GREEN);
+            sheetRows(k, im, GREEN);
+          } };
+      } else {
+        // Club X, season 2 on: the career's climb down a league table, the record, the all-time top scorer and best player
+        const titles = seasons.filter((z) => z.finish === 1).length, N = seasons.length, short = (sk) => String(sk).slice(2);
+        const H = G.careerHistory(), top = H.top;
+        const bests = H.seasons.map((r) => r.bestCard).filter(Boolean).concat(bc ? [bc] : []);
+        const bp = bests.sort((a, b) => b.r - a.r)[0] || null, bpImg = bp && G.club(bp.crest) && G.club(bp.crest).crest;
+        const cnt = (f) => seasons.filter(f).length, pl = (v, w) => `${v} ${w}${v === 1 ? '' : 's'}`;
+        const lines = [`*DROP2TOP Club X · Season ${N}*`, '', `Drafted from nothing in ${start.season}`, '', 'My record:',
+          `${pl(titles, 'title')} · ${cnt((z) => z.finish <= 3)} top 3 · ${cnt((z) => z.finish <= n / 2)} top half · ${cnt((z) => z.finish <= n - rel)} beat the drop`];
+        if (top || bp) lines.push('');
+        if (top) lines.push(`All-time top scorer: ${top.name}, ${top.goals} goal${top.goals === 1 ? '' : 's'}`);
+        if (bp) lines.push(`Best player: ${bp.name}, ${bp.r}`);
+        spec = { c: GREEN, wash: GREEN, band: GREEN, ink: '#0A0A0A', ghostAlpha: 0.07, tag: `Club X · Season ${N}`,
+          dare: titles ? `Build a dynasty. Beat ${pl(titles, 'title')}` : 'Build a dynasty. Win one',
+          text: end(lines), imgs: { crest: club.crest, best: bpImg },
+          draw: (g, im, k) => {
+            k.pic(im.crest, k.W / 2, 248, 190);
+            k.fit(String(xn).toUpperCase(), k.W / 2, 452, 960, 900, 70, true, '#FFFFFF');
+            k.fit(`Drafted from nothing in ${short(start.season)}`, k.W / 2, 528, 960, 600, 34, false, '#E6E6EA');
+            k.line2(`${titles} TITLE${titles === 1 ? '' : 'S'} `, `IN ${N} SEASONS`, GREEN, 592);
+            k.climb(seasons.map((z) => [short(z.season), z.finish, z.finish === 1]), 676, 236);
+            sheetRows(k, im, GREEN, top, bp, 'ALL-TIME TOP SCORER', 'BEST PLAYER');
           } };
       }
-      spec.imgs = { crest: club.crest }; spec.ghost = club.crest;
+      spec.ghost = club.crest;
     } else if (mode === 'dare2dream') {
-      spec = { c: '#3BA4FF', tag: 'Dare2Dream', dare: 'Draft 11. Beat their real finish',
-        text: `DROP2TOP Dare2Dream\nI drafted ${nm} ${S.season} from nothing and finished ${ord(F.finish)}. They really finished ${ord(F.histFinish)}.\n${met ? 'Dream achieved.' : 'Fell short.'}\nPick any club and beat their real finish.\n${L}`,
-        draw: (g, im, k) => { k.club(im.crest, nm, `${S.season} · drafted from nothing`); k.duo('THEY FINISHED', ord(F.histFinish), `${F.histPts} pts`, 'I FINISHED', ord(F.finish), `${F.pts} pts`, '#3BA4FF');
-          k.fit(met ? 'DREAM ACHIEVED' : 'FELL SHORT', k.W / 2, 975, 960, 900, 112, true, '#3BA4FF'); } };
-    } else if (daily) {
-      // the Daily (Craig, 29 Oct; "3 · Team sheet" in design/prototype/daily-share.html): the club's wash, the white tag,
-      // their finish to yours, The Rise in places, then a team sheet of the top scorer and the best card
-      const num = G.dailyNumber(daily), M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], [, mm, dd] = daily.split('-');
-      const day = `${ord(+dd)} ${M[+mm - 1]}`, won = F.finish === 1, acc = club.accent || '#FFFFFF', txt = club.text || '#FFFFFF';
-      const places = `${sign(F.rise)} ${Math.abs(F.rise) === 1 ? 'place' : 'places'}`;
-      const ts = rows && rows.topScorer, bc = rows && rows.best;
-      const lines = ['*DROP2TOP Daily Challenge*', '',   // bold in WhatsApp; the number and date are on the picture's tag (Craig, 29 Oct)
-        `${nm} ${S.season}`, `They went down in ${ord(F.histFinish)}.`,
-        won ? `I won the league on ${F.pts} pts.` : `I finished ${ord(F.finish)} on ${F.pts} pts.`, `The Rise: ${places}`];
-      if (ts || bc) lines.push('');
-      if (ts) lines.push(`Top scorer: ${ts.name}, ${ts.goals} goal${ts.goals === 1 ? '' : 's'}`);
-      if (bc) lines.push(`Best card: ${bc.name}, ${bc.r}`);
-      lines.push('', '_Your turn. Beat that!_', L);
-      const bestClub = bc && G.club(bc.crest);
-      spec = { c: '#FFFFFF', wash: acc, band: acc, ink: club.ink || '#0A0A0A', tag: `Daily #${num} · ${day}`, dare: `Same club today. Beat ${ord(F.finish)}`,
-        text: lines.join('\n'), imgs: { crest: club.crest, best: bestClub && bestClub.crest },
+      // Dare2Dream: their real finish against yours, then Dream achieved (or Fell short) in places
+      const line = met ? ['DREAM ACHIEVED: ', F.rise > 0 ? placesW(F.rise).toUpperCase() : 'CHAMPIONS AGAIN'] : ['FELL SHORT: ', F.rise === 0 ? 'SAME PLACE' : placesW(F.rise).toUpperCase()];
+      const lines = ['*DROP2TOP Dare2Dream*', '', `${nm} ${S.season}, drafted from nothing`, `They really finished ${ord(F.histFinish)}.`,
+        won ? `I won the league on ${F.pts} pts.` : `I finished ${ord(F.finish)} on ${F.pts} pts.`, `${line[0][0] + line[0].slice(1, -2).toLowerCase()}: ${line[1].toLowerCase()}`];
+      spec = { c: '#3BA4FF', wash: acc, band: acc, ink: club.ink || '#0A0A0A', tag: 'Dare2Dream', dare: 'Draft 11. Beat their real finish',
+        text: end(lines.concat(sheetLines())), imgs: { crest: club.crest, best: bestImg },
         draw: (g, im, k) => {
-          const W = k.W;
-          k.pic(im.crest, W / 2, 252, 236);
-          k.fit(String(nm).toUpperCase(), W / 2, 500, 960, 900, 74, true, '#FFFFFF');
-          k.fit(S.season, W / 2, 580, 960, 600, 38, false, '#E6E6EA');
-          // 21st -> 1st, the arrow on the figures' middle
-          const a = ord(F.histFinish), b = ord(F.finish), C = 712, gap = 140, wa = k.width(a, 900, 136, true), wb = k.width(b, 900, 136, true), x0 = W / 2 - (wa + gap + wb) / 2;
-          k.mid(a, x0, C, 999, 900, 136, true, '#8E8E99', 'left'); k.mid(b, x0 + wa + gap, C, 999, 900, 136, true, txt, 'left');
-          g.strokeStyle = '#FFFFFF'; g.lineWidth = 9; g.lineCap = 'round'; g.lineJoin = 'round';
-          const ax = x0 + wa + 26, bx = x0 + wa + gap - 26;
-          g.beginPath(); g.moveTo(ax, C); g.lineTo(bx, C); g.moveTo(bx - 24, C - 22); g.lineTo(bx, C); g.lineTo(bx - 24, C + 22); g.stroke();
-          k.fit(`WENT DOWN${F.histPts != null ? ` · ${F.histPts} PTS` : ''}`, x0 + wa / 2, 790, 440, 800, 26, false, '#8E8E99', 'center', '2px');
-          k.fit(`${F.pts} PTS${won ? ' · CHAMPIONS' : ''}`, x0 + wa + gap + wb / 2, 790, 460, 800, 26, false, txt, 'center', '2px');
-          // THE RISE: +20 PLACES
-          const t1 = 'THE RISE: ', t2 = places.toUpperCase(), w1 = k.width(t1, 900, 54, true), w2 = k.width(t2, 900, 54, true), rx = W / 2 - (w1 + w2) / 2;
-          k.fit(t1, rx, 846, 999, 900, 54, true, '#FFFFFF', 'left'); k.fit(t2, rx + w1, 846, 999, 900, 54, true, txt, 'left');
-          // the team sheet: numbers right-aligned in one column, their words after them
-          const row = (y, icon, label, name, num, word, col) => {
-            k.box(90, y, 900, 100, 22); const c = y + 50;
-            icon();
-            k.fit(label, 206, y + 18, 560, 800, 22, false, '#8E8E99', 'left', '3px');
-            k.fit(String(name).toUpperCase(), 206, y + 46, 560, 900, 40, true, '#FFFFFF', 'left');
-            k.mid(num, 826, c, 220, 900, 64, true, col, 'right'); k.mid(word, 840, c, 140, 800, 22, false, col, 'left', '2px');
-          };
-          if (ts) row(930, () => k.ball(150, 980, 28), 'TOP SCORER', ts.name, String(ts.goals), ts.goals === 1 ? 'GOAL' : 'GOALS', txt);
-          if (bc) { const Lc = k.LVC[bc.lv] || k.LVC.bronze; row(1044, () => k.card(126, 1056, 58, bc, im.best), 'BEST CARD', bc.name, String(bc.r), Lc[6], Lc[5]); }
+          k.clubBlock(im.crest, nm, `${S.season} · drafted from nothing`);
+          k.result(ord(F.histFinish), ord(F.finish), txt, `REAL FINISH${F.histPts != null ? ` · ${F.histPts} PTS` : ''}`, `${F.pts} PTS${won ? ' · CHAMPIONS' : ''}`);
+          k.line2(line[0], line[1], txt);
+          sheetRows(k, im, txt);
         } };
     } else {
-      spec = { c: club.text, tag: 'Classic', dare: `Beat my rise of ${sign(F.rise)}`,
-        text: `DROP2TOP\nI took ${nm} ${S.season} from ${ord(F.histFinish)} to ${ord(F.finish)}.\nThe Rise: ${sign(F.rise)} (${F.pts} pts)\nThink you can do better with a side that went down?\n${L}`,
-        draw: (g, im, k) => { k.club(im.crest, nm, S.season); k.duo(they, ord(F.histFinish), `${F.histPts} pts`, 'I FINISHED', ord(F.finish), `${F.pts} pts`, club.text);
-          k.fit('THE RISE ' + sign(F.rise), k.W / 2, 975, 960, 900, 112, true, club.text); k.wrap(line, k.W / 2, 1098, 860, 500, 32, '#BDBDC6', 42); } };
+      // Classic and the Daily (Craig, 29 Oct; "3 · Team sheet" in design/prototype/daily-share.html): the club's wash, their
+      // finish to yours, The Rise in places, then the team sheet; the Daily's tag white with its number and date
+      const places = placesW(F.rise);
+      const lines = [daily ? '*DROP2TOP Daily Challenge*' : '*DROP2TOP Classic*', '',   // bold in WhatsApp; the Daily's number and date are on its tag
+        `${nm} ${S.season}`, `They went down in ${ord(F.histFinish)}.`,
+        won ? `I won the league on ${F.pts} pts.` : `I finished ${ord(F.finish)} on ${F.pts} pts.`, `The Rise: ${places}`];
+      let tag = 'Classic', tagC = txt, dare = `Beat my rise of ${sign(F.rise)}`;
+      if (daily) {
+        const num = G.dailyNumber(daily), M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], [, mm, dd] = daily.split('-');
+        tag = `Daily #${num} · ${ord(+dd)} ${M[+mm - 1]}`; tagC = '#FFFFFF'; dare = `Same club today. Beat ${ord(F.finish)}`;
+      }
+      spec = { c: tagC, wash: acc, band: acc, ink: club.ink || '#0A0A0A', tag, dare,
+        text: end(lines.concat(sheetLines())), imgs: { crest: club.crest, best: bestImg },
+        draw: (g, im, k) => {
+          k.clubBlock(im.crest, nm, S.season);
+          k.result(ord(F.histFinish), ord(F.finish), txt, `WENT DOWN${F.histPts != null ? ` · ${F.histPts} PTS` : ''}`, `${F.pts} PTS${won ? ' · CHAMPIONS' : ''}`);
+          k.line2('THE RISE: ', places.toUpperCase(), txt);
+          sheetRows(k, im, txt);
+        } };
     }
     spec.imgs = spec.imgs || { crest: club.crest }; spec.ghost = spec.ghost || club.crest;
     return D2T.share.build(spec);
