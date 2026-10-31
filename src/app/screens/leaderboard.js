@@ -179,7 +179,8 @@
       }
       function shown(d) {                   // the table on screen, sliding in after a change of game
         data = d; draw();
-        if (slideDir) { slideIn(body4(), slideDir); slideDir = 0; }
+        // back to full brightness whatever brought the table in (build 202: a change of tab left it dimmed at .35)
+        if (slideDir) { slideIn(body4(), slideDir); slideDir = 0; } else body4().forEach((n) => { n.style.transition = 'opacity .15s'; n.style.opacity = ''; });
         dropRows();
       }
       async function load() {
