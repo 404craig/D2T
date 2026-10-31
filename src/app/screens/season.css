@@ -175,6 +175,7 @@
 .se-formcard.is-on b { color: var(--se-text); }
 .se-formcard.is-on i { background: var(--se-acc); }
 .se-done { width: 100%; margin-top: 14px; }
+.sheet-foot .se-done { margin-top: 0; }
 .se-slot:has(.se-sel), .se-slot:has(.se-target) { z-index: 200 !important; }
 .se-squad, .se-ghost { -webkit-user-select: none; user-select: none; }
 
