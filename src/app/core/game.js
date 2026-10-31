@@ -732,8 +732,9 @@
     GAME.rememberOffered(run);
     const name = GAME.clubName(), n = S.clubs.length, rel = S.relegationPlaces || 3, mode = GAME.mode();
     const rec = D2T.state.record, k = `${S.season}:${name}`;
-    const entry = { key: k, mode, season: S.season, club: name, finish: F.finish, rise: F.rise, pts: F.pts, histFinish: F.histFinish,
-      drop: F.finish <= n - rel, half: F.finish <= n / 2, top3: F.finish <= 3, title: F.finish === 1, at: new Date().toISOString().slice(0, 10) };
+    const entry = { key: k, mode, season: S.season, club: name, finish: F.finish, rise: F.rise, pts: F.pts, histFinish: F.histFinish, histPts: F.histPts,
+      drop: F.finish <= n - rel, half: F.finish <= n / 2, top3: F.finish <= 3, title: F.finish === 1, at: new Date().toISOString().slice(0, 10),
+      seed: eng.seed, ms: Date.now() };   // the leaderboards' run id and the moment it finished (core/board.js)
     if (mode !== 'classic') entry.dream = GAME.dreamMet(F.finish, F.histFinish);
     if (mode === 'clubx') {
       entry.career = run.career ? run.career.n : 1; entry.careerId = run.career ? run.career.id : eng.seed; if (S.sim) entry.sim = true;
@@ -759,6 +760,7 @@
       else was.goes = goes;
     }
     rec.runs.push(entry);
+    if (D2T.lb && mode !== 'dare2dream') D2T.lb.onRun(entry, run.daily ? (rec.daily[run.daily] || {}).goes || 1 : 0);   // on to the leaderboard
     const book = mode === 'dare2dream' ? (rec.dreamClubs = rec.dreamClubs || {}) : mode === 'clubx' ? (rec.xClubs = rec.xClubs || {}) : rec.clubs;
     const c = book[k] || { runs: 0, finish: 99, rise: -99 };
     c.runs++; c.finish = Math.min(c.finish, F.finish); c.rise = Math.max(c.rise, F.rise);

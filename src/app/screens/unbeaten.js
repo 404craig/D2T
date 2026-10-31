@@ -504,7 +504,7 @@
       function stash() {
         if (!run) return;
         const at = (r) => run.deck.indexOf(r);
-        R.run = { stat: run.stat.id, cur: at(run.cur), next: at(run.next), used: [...run.used].map(at).filter((i) => i >= 0), streak: run.streak, refreshes: run.refreshes };
+        R.run = { stat: run.stat.id, cur: at(run.cur), next: at(run.next), used: [...run.used].map(at).filter((i) => i >= 0), streak: run.streak, refreshes: run.refreshes, id: run.id };
         save();
       }
       // under the title in a run (Craig, 13 Oct): your best on this stat and your best on any
@@ -530,7 +530,7 @@
         const stat = STATS.find((s) => s.id === sv.stat), deck = stat ? decks()[stat.deck].filter((r) => stat.val(r) > 0) : [];
         R.run = null; save();
         if (!stat || !deck[sv.cur] || !deck[sv.next]) { idle(); return; }
-        run = { stat, deck, used: new Set((sv.used || []).map((i) => deck[i]).filter(Boolean)), streak: sv.streak || 0, refreshes: sv.refreshes == null ? REFRESHES : sv.refreshes, cur: deck[sv.cur], next: deck[sv.next] };
+        run = { stat, deck, used: new Set((sv.used || []).map((i) => deck[i]).filter(Boolean)), streak: sv.streak || 0, refreshes: sv.refreshes == null ? REFRESHES : sv.refreshes, cur: deck[sv.cur], next: deck[sv.next], id: sv.id };
         run.used.add(run.cur); run.used.add(run.next);
         const { sl, sr } = setStage(stat);
         nEl.textContent = run.streak;
@@ -624,7 +624,7 @@
       }
       function startRun(stat) {
         const deck = decks()[stat.deck].filter((r) => stat.val(r) > 0);
-        run = { stat, deck, used: new Set(), streak: 0, refreshes: REFRESHES };
+        run = { stat, deck, used: new Set(), streak: 0, refreshes: REFRESHES, id: Math.random().toString(36).slice(2, 12) + Date.now().toString(36) };
         run.cur = deck[rand(deck.length)]; run.used.add(run.cur);
         run.next = pickNext(); run.used.add(run.next);
         setStage(stat);
@@ -746,6 +746,7 @@
         // the banter is picked against the best before this run (prev) and remembered, so the next sheet avoids it
         const said = banter(R, bucketFor(n, prev, cleared), n, prev);
         R.runs++; R.lastRun = n; if (newBest) R.best[s.id] = n; R.run = null; save(); bestLine(s);
+        if (D2T.lb) D2T.lb.record('ub', { rid: 'ub:' + (run.id || Date.now().toString(36)), stat: s.id, run: n, at: Date.now() });   // on to the leaderboard
         if (newBest) { snd('highScore'); highScore(); }
         // the end sheet waits for the HIGH SCORE flash to pass
         const show = () => {
