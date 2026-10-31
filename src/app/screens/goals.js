@@ -143,7 +143,7 @@
     mount(root) {
       const reduced = D2T.reduced(), G4 = D2T.game.g433;
       booed = false;
-      const fresh = () => { G4.newGame(); return { filled: [], respins: G4.RESPINS, cands: null, recorded: false, gift: null, formation: G4.pickFormation(), revealed: false }; };
+      const fresh = () => { G4.newGame(); return { id: Math.random().toString(36).slice(2, 12) + Date.now().toString(36), filled: [], respins: G4.RESPINS, cands: null, recorded: false, gift: null, formation: G4.pickFormation(), revealed: false }; };
       let S = D2T.state.g433 && Array.isArray(D2T.state.g433.filled) ? D2T.state.g433 : (D2T.state.g433 = fresh());
       // a game saved by 433 Goals carries on as a 4-3-3 with no reveal
       if (!S.formation) { S.formation = '433'; S.revealed = true; }
@@ -402,7 +402,7 @@
         S.filled.push(Object.assign({}, p, { slot: ni })); S.cands = null; sel = null;
         const done = !openSlots().length;
         let result = null;
-        if (done && !S.recorded) { S.recorded = true; result = G4.finish(total(), TARGET); }
+        if (done && !S.recorded) { S.recorded = true; result = G4.finish(total(), TARGET); if (D2T.lb) D2T.lb.record('goal', { rid: 'goal:' + (S.id || Date.now().toString(36)), shape: String(S.formation), total: total(), target: TARGET, at: Date.now() }); }
         save();
         snd('cardDrop');
         const fly = D2T.h(`<div class="g4-flyer">${shirt({ w: TW, player: p })}</div>`);
