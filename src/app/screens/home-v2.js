@@ -39,11 +39,13 @@
   const viewRun = (r, fn) => { const st = D2T.state, keep = st.run; st.run = r; try { return fn(); } finally { st.run = keep; } };
 
   // ---------- each game's record, count first (the Your record shields) ----------
-  function shieldsFor(id, today) {
+  function shieldsFor(id, record) {
     const G = D2T.game, o = D2T.ordinal, st = D2T.state, runs = st.record.runs || [], sg = (v) => (v > 0 ? '+' : '') + v;
     if (id === 'daily') {
       const days = Object.values(st.record.daily || {}), bf = days.slice().sort((a, b) => a.finish - b.finish)[0];
-      return [[days.length, 'Played'], [bf ? o(bf.finish) : '-', 'Best finish'], [days.length ? sg(Math.max(...days.map((d) => d.rise))) : '-', 'Best rise'], [days.filter((d) => d.finish === 1).length, 'Wins']];
+      // once today's Daily has a finished go, its finish (the day's best go) in place of the best finish (Craig, 31 Oct, build 194)
+      const td = record ? null : G.dailyResult(G.today());   // the My record share card keeps the best finish
+      return [[days.length, 'Played'], td && td.finish ? [o(td.finish), "Today's finish"] : [bf ? o(bf.finish) : '-', 'Best finish'], [days.length ? sg(Math.max(...days.map((d) => d.rise))) : '-', 'Best rise'], [days.filter((d) => d.finish === 1).length, 'Wins']];
     }
     if (id === 'classic') { const r = G.record(); return [[r.drop, 'Beat the drop'], [r.half, 'Top half'], [r.top3, 'Top 3'], [r.titles, 'League titles']]; }
     if (id === 'clubx') { const x = G.xRecord(); return [[x.runs, 'Seasons'], [x.titles, 'Titles'], [runs.filter((r) => r.mode === 'clubx' && !r.daily && r.top3).length, 'Top 3'], [x.best ? o(x.best) : '-', 'Best finish']]; }
@@ -319,8 +321,8 @@
       const cards = {};
       function sharePage(g) {
         const p = (D2T.recordPages() || []).find((x) => x.k === g.share);
-        const out = p ? Object.assign({}, p) : { k: g.share, name: g.name, c: g.k, mark: {}, shields: g.st.map(([n, l]) => ({ n, l })) };
-        out.shields = g.st.map(([n, l]) => ({ n, l }));
+        const out = p ? Object.assign({}, p) : { k: g.share, name: g.name, c: g.k, mark: {}, shields: [] };
+        out.shields = (g.id === 'daily' ? shieldsFor('daily', true) : g.st).map(([n, l]) => ({ n, l }));
         if (g.id === 'classic') out.c = CLASSIC;
         if (g.id === 'daily') { out.c = g.k; out.mark = { src: g.entry.crest }; }
         return out;
