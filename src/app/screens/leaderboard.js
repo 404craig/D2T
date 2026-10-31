@@ -10,6 +10,7 @@
   const D2T = window.D2T, SE = D2T.se;
   const esc = (s) => D2T.esc(String(s == null ? '' : s));
   const CH = (d) => `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d ? 'M9 5l7 7-7 7' : 'M15 5l-7 7 7 7'}"/></svg>`;
+  const ACCT = '<svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0z"/></svg>';
   const SHARE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.1 20.2C2.6 12.4 6.6 7.9 12.7 7.4V3.5l8.4 7.9-8.4 7.9v-4.8c-4.1-.1-7.3 2.1-9.6 5.7z"/></svg>';
   const ICON = { crown: 'M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z M5 19h14', star: 'M12 3l2.7 5.6 6.1.8-4.4 4.3 1 6.1L12 17l-5.4 2.8 1-6.1-4.4-4.3 6.1-.8z' };
   const icon = (k, col, w) => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="${col}" stroke-width="${k === 'star' && w > 30 ? 1.6 : 2}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ICON[k]}"/></svg>`;
@@ -46,7 +47,7 @@
       let gi = Math.max(0, GM.findIndex((g) => g.id === (params.game || st.lbAt || st.stageAt))), tab = 0, data = null, req = 0, share = null;
       const narrow = root.clientWidth && root.clientWidth < 400;
       const el = D2T.h(`<div class="lb${narrow ? ' lb-narrow' : ''}">
-        <div class="lb-head"><h1>Leaderboard</h1><span class="lb-count" aria-live="polite"></span></div>
+        <div class="lb-head"><h1>Leaderboards</h1><span class="lb-count" aria-live="polite"></span></div>
         <div class="lb-game"><button class="lb-arr l" type="button" aria-label="Previous game">${CH(0)}</button><div class="lb-gn"><b></b><div class="lb-dots" aria-hidden="true">${GM.map(() => '<i></i>').join('')}</div></div><button class="lb-arr r" type="button" aria-label="Next game">${CH(1)}</button></div>
         <div class="lb-tabs" role="tablist" aria-label="Which table"><button role="tab" type="button" data-t="0"></button><button role="tab" type="button" data-t="1"></button></div>
         <div class="lb-trophy"></div>
@@ -55,9 +56,11 @@
         <div class="lb-pin"></div>
         <div class="actionbar game-bar lb-bar">${SE.mainBtn('Back to home', 'lb-main')}</div></div>`);
       // the game's own top bar (Craig, 31 Oct, build 190): the D2T logo home, then Share my place and the account
-      const top = D2T.topbar({ mode: false, noAccount: true });
-      top.lastElementChild.replaceWith(D2T.h(`<span class="lb-tr"><button class="acct-btn lb-share" type="button" aria-label="Share my place" disabled>${SHARE}</button><button class="acct-btn" type="button" aria-label="Account">${D2T.ICON.account}</button></span>`));
-      top.querySelector('.lb-tr .acct-btn:not(.lb-share)').onclick = () => D2T.go('account');
+      // home's own top bar (Craig, 31 Oct, build 193): the long logo at home's size, Share my place, the game's ? and the account
+      const top = D2T.h(`<div class="lb-top"><button class="fr-home-logo stg-logo lb-logo" type="button" aria-label="DROP2TOP home">${D2T.homeLogo()}</button><button class="stg-rb lb-share" type="button" aria-label="Share my place" disabled>${SHARE}</button><button class="stg-rb lb-q" type="button" aria-label="How to play this game">?</button><button class="stg-rb lb-acct" type="button" aria-label="Account">${ACCT}</button></div>`);
+      top.querySelector('.lb-logo').onclick = () => D2T.go('home');
+      top.querySelector('.lb-q').onclick = () => { if (D2T.gameHelp) D2T.gameHelp(GM[gi]); };
+      top.querySelector('.lb-acct').onclick = () => D2T.go('account');
       el.prepend(top);
       root.appendChild(el);
       const $ = (s) => el.querySelector(s), list = $('.lb-list'), pin = $('.lb-pin'), troph = $('.lb-trophy');
@@ -74,13 +77,38 @@
         $('.lb-share').disabled = true; share = null;
         load();
       }
-      const turn = (d) => { gi = (gi + d + GM.length) % GM.length; tab = 0; snd('tapSmall'); showGame(); };
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const turn = (d) => {
+        gi = (gi + d + GM.length) % GM.length; tab = 0; snd('tapSmall'); showGame();
+        // the next game slides in from the side it comes from
+        [$('.lb-gn'), troph, $('.lb-cols'), list, pin].forEach((n) => { n.style.transition = ''; n.style.transform = ''; n.style.opacity = ''; if (!reduce && n.animate) n.animate([{ transform: `translateX(${d * 46}px)`, opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)' }); });
+      };
       $('.lb-arr.l').onclick = () => turn(-1); $('.lb-arr.r').onclick = () => turn(1);
       el.querySelectorAll('.lb-tabs [role="tab"]').forEach((b) => { b.onclick = () => { const t = +b.dataset.t; if (t === tab) return; tab = t; snd('tapSmall'); showGame(); }; });
-      // a swipe across the page turns to the next game (a vertical one scrolls the table)
+      // a swipe across the page turns to the next game (Craig, 31 Oct, build 193: the pointer swipe was patchy on iPhone,
+      // where a scroll that starts takes the pointer away). Touch: the direction is decided after 8px; a sideways one is
+      // ours (the page follows the finger) and turns on 40px or a quick flick, an upright one is left to the table's scroll.
+      // The mouse keeps the plain drag.
+      const moving = () => [$('.lb-gn'), troph, $('.lb-cols'), list, pin];
+      const follow = (dx) => moving().forEach((n) => { n.style.transition = 'none'; n.style.transform = dx ? `translateX(${dx}px)` : ''; n.style.opacity = dx ? String(Math.max(.4, 1 - Math.abs(dx) / 400)) : ''; });
+      const settle = () => moving().forEach((n) => { n.style.transition = 'transform .22s cubic-bezier(.2,.8,.2,1), opacity .22s'; n.style.transform = ''; n.style.opacity = ''; });
+      let tc = null;
+      el.addEventListener('touchstart', (e) => { if (e.touches.length !== 1 || e.target.closest('button, .sheet')) { tc = null; return; } const t = e.touches[0]; tc = { x: t.clientX, y: t.clientY, t: Date.now(), axis: null, dx: 0 }; }, { passive: true });
+      el.addEventListener('touchmove', (e) => {
+        if (!tc) return; const t = e.touches[0], dx = t.clientX - tc.x, dy = t.clientY - tc.y;
+        if (!tc.axis) { if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return; tc.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'; }
+        if (tc.axis !== 'x') return;
+        e.preventDefault(); tc.dx = dx; follow(dx * 0.5);
+      }, { passive: false });
+      const endTouch = () => {
+        if (!tc) return; const c = tc; tc = null; if (c.axis !== 'x') return;
+        const v = Math.abs(c.dx) / Math.max(1, Date.now() - c.t);
+        if (Math.abs(c.dx) > 40 || (Math.abs(c.dx) > 16 && v > 0.35)) turn(c.dx < 0 ? 1 : -1); else settle();
+      };
+      el.addEventListener('touchend', endTouch); el.addEventListener('touchcancel', endTouch);
       let sw = null;
-      el.addEventListener('pointerdown', (e) => { if (e.button > 0 || e.target.closest('button')) { sw = null; return; } sw = { x: e.clientX, y: e.clientY }; });
-      el.addEventListener('pointerup', (e) => { if (!sw) return; const dx = e.clientX - sw.x, dy = e.clientY - sw.y; sw = null; if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) turn(dx < 0 ? 1 : -1); });
+      el.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse' || e.button > 0 || e.target.closest('button')) { sw = null; return; } sw = { x: e.clientX, y: e.clientY }; });
+      el.addEventListener('pointerup', (e) => { if (!sw) return; const dx = e.clientX - sw.x, dy = e.clientY - sw.y; sw = null; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) turn(dx < 0 ? 1 : -1); });
       el.addEventListener('pointercancel', () => { sw = null; });
       const onKey = (e) => { if (document.querySelector('.sheet')) return; if (e.key === 'ArrowRight') turn(1); else if (e.key === 'ArrowLeft') turn(-1); };
       document.addEventListener('keydown', onKey); cleanups.push(() => document.removeEventListener('keydown', onKey));

@@ -51,7 +51,7 @@
 .sp-ph.is-tick .d2c-scr { opacity: .55; }
 
 /* ---------- action bar ---------- */
-.sp-bar { display: flex; align-items: center; gap: 10px; padding: 10px 16px calc(env(safe-area-inset-bottom, 0px) + 24px); position: relative; z-index: 5; }
+.sp-bar { display: flex; align-items: center; gap: 10px; padding: 10px 18px calc(env(safe-area-inset-bottom, 0px) + 18px); position: relative; z-index: 5; }
 .sp-main { flex: 1 1 auto; min-height: 58px; border-radius: 29px; border: 0; background: var(--sp-btn, var(--green-1)); color: var(--sp-btn-ink, #000); font-weight: 900; font-style: italic; font-size: 21px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 18px; letter-spacing: .01em; text-transform: uppercase; transition: background .25s, color .25s, transform .15s var(--ease-snap), opacity .2s; box-shadow: 0 6px 16px -6px var(--sp-btn, var(--green-1)); }
 .sp-main:active { transform: scale(.97); }
 .sp-main[disabled] { opacity: .35; box-shadow: none; }
@@ -299,6 +299,7 @@
   .sp-screen.is-placing .sp-slot.is-other .sp-gp { transform: translateX(-50%) scale(1.7361); }
   .sp-hint { font-size: 12px; min-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .sp-bar { padding-top: 8px; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); }
+  .sp-round { width: 50px; height: 50px; }   /* base.css's compact size, which this file's own rule overrode (build 193) */
 }
 @media (max-width: 374px) { .tr-head-t .tr-win { display: none; } }
 @media (max-height: 620px) {

@@ -159,7 +159,7 @@ async function mock(page, sc, hits = []) {
     const where = `${w}x${h}`;
     check((await scr(page)) === "leaderboard", `${where}: the leaderboard did not open`);
     // nothing overlaps: each fixed piece ends before the next starts, the bar sits at the foot
-    const R = {}; for (const [k, sel] of [["top", ".lb > .topbar"], ["head", ".lb-head"], ["game", ".lb-game"], ["tabs", ".lb-tabs"], ["trophy", ".lb-trophy"], ["cols", ".lb-cols"], ["list", ".lb-list"], ["bar", ".lb .actionbar"]]) R[k] = await rect(page, sel);
+    const R = {}; for (const [k, sel] of [["top", ".lb-top"], ["head", ".lb-head"], ["game", ".lb-game"], ["tabs", ".lb-tabs"], ["trophy", ".lb-trophy"], ["cols", ".lb-cols"], ["list", ".lb-list"], ["bar", ".lb .actionbar"]]) R[k] = await rect(page, sel);
     const order = ["top", "head", "game", "tabs", "trophy", "cols", "list", "bar"];
     for (let i = 1; i < order.length; i++) check(R[order[i - 1]].bottom <= R[order[i]].top + 0.6, `${where}: ${order[i - 1]} (${Math.round(R[order[i - 1]].bottom)}) runs into ${order[i]} (${Math.round(R[order[i]].top)})`);
     check(R.bar.bottom <= h + 0.5 && R.list.height >= 120, `${where}: the bar is off the screen or the list is too short (${Math.round(R.list.height)}px)`);
@@ -207,8 +207,8 @@ async function mock(page, sc, hits = []) {
     check(!/Bang on|Exactly right/i.test(await page.textContent(".lb")), `${where}: Goal Rush must never say Bang on or Exactly right`);
     await shot(page, `lb-table-goal-${where}`);
     // the game's top bar (the D2T logo, Share my place, the account; no back arrow) and one Back to home button in the game's colour
-    const bar = await page.evaluate(() => { const b = [...document.querySelectorAll(".lb .actionbar > button")], t = document.querySelector(".lb > .topbar"); return { n: b.length, main: b[0].textContent.trim(), col: getComputedStyle(b[0]).backgroundColor, logo: !!t.querySelector(".logo-home"), acct: !!t.querySelector('[aria-label="Account"]'), share: !!t.querySelector(".lb-share:not([disabled])"), back: !!document.querySelector(".lb .lb-back, .lb .back-btn") }; });
-    check(bar.n === 1 && /Back to home/i.test(bar.main) && bar.col === "rgb(255, 210, 31)" && bar.logo && bar.acct && bar.share && !bar.back, `${where}: the bars are wrong: ${JSON.stringify(bar)}`);
+    const bar = await page.evaluate(() => { const b = [...document.querySelectorAll(".lb .actionbar > button")], t = document.querySelector(".lb-top"); return { n: b.length, main: b[0].textContent.trim(), col: getComputedStyle(b[0]).backgroundColor, logo: !!t.querySelector(".lb-logo .fr-hl-p, .lb-logo svg, .lb-logo img, .lb-logo *"), q: !!t.querySelector(".lb-q"), acct: !!t.querySelector('[aria-label="Account"]'), share: !!t.querySelector(".lb-share:not([disabled])"), back: !!document.querySelector(".lb .lb-back, .lb .back-btn") }; });
+    check(bar.n === 1 && /Back to home/i.test(bar.main) && bar.col === "rgb(255, 210, 31)" && bar.logo && bar.q && bar.acct && bar.share && !bar.back, `${where}: the bars are wrong: ${JSON.stringify(bar)}`);
     // Share my place: the card and its message
     await page.click(".lb-share"); await wait(1500);
     const text = await page.evaluate(() => (window.D2T.share.last || {}).text || "");

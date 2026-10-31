@@ -66,7 +66,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .icon-btn { width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--line); background: var(--ink); display: grid; place-items: center; padding: 0; flex-shrink: 0; }
 
 /* Bottom action bar (fixed play / continue bar) */
-.actionbar { position: relative; z-index: 5; display: flex; align-items: center; gap: 10px; padding: 10px 16px calc(env(safe-area-inset-bottom, 0px) + 14px); }
+.actionbar { position: relative; z-index: 5; display: flex; align-items: center; gap: 10px; padding: 10px 18px calc(env(safe-area-inset-bottom, 0px) + 18px); }   /* home's foot: 18px sides and 18px under (build 193) */
 /* every in-game bar (Craig, 13 Oct): home, the round middle button, then the main button 58px high across the right */
 .game-bar .bar-main { min-height: 58px; border-radius: 29px; }
 .game-bar .bar-home svg, .game-bar .bar-mid svg { width: 24px; height: 24px; }
@@ -185,7 +185,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 @media (max-height: 759px) {
   .topbar { padding-top: calc(env(safe-area-inset-top, 0px) + 8px); padding-bottom: 6px; min-height: 40px; }
   .topbar .logo-mask { height: 22px !important; }
-  .actionbar { padding-top: 8px; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px); }
+  .actionbar { padding-top: 8px; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); }
   .game-bar .bar-main, .sp-main { min-height: 52px; border-radius: 26px; font-size: 18px; }
   .actionbar .icon-btn, .sp-round { width: 50px; height: 50px; }
 }
