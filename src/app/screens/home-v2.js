@@ -156,9 +156,10 @@
       fit(); const onResize = () => fit(); window.addEventListener('resize', onResize); cleanups.push(() => window.removeEventListener('resize', onResize));
 
       // ---------- the wheel ----------
-      // a fresh load opens on the Daily; coming back from a game opens on that game (Craig, 30 Oct)
-      const back = params.fromIntro ? -1 : GM.findIndex((g) => g.id === D2T.state.stageAt);
-      let pos = Math.max(0, back), vel = 0, target = pos, raf = 0, drag = null, shown = -1;
+      // coming back from a game opens on that game (Craig, 30 Oct)
+      // a fresh load opens on Classic (Craig, 31 Oct, build 185: the Daily takeover is how people find the Daily now)
+      const classicAt = GM.findIndex((g) => g.id === 'classic'), back = params.fromIntro ? -1 : GM.findIndex((g) => g.id === D2T.state.stageAt);
+      let pos = back >= 0 ? back : Math.max(0, classicAt), vel = 0, target = pos, raf = 0, drag = null, shown = -1;
       const wrapD = (d) => ((d % N) + N * 1.5) % N - N / 2;
       const idx = (p) => ((Math.round(p) % N) + N) % N;
       function render() {
@@ -203,7 +204,7 @@
       };
       wheel.addEventListener('pointerup', up); wheel.addEventListener('pointercancel', up);
       $('.stg-sw.l').onclick = () => turn(-1); $('.stg-sw.r').onclick = () => turn(1);
-      const onKey = (e) => { if (document.querySelector('.sheet')) return; if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') dlyBack(true); if (e.key === 'ArrowRight') turn(1); else if (e.key === 'ArrowLeft') turn(-1); };
+      const onKey = (e) => { if (document.querySelector('.sheet')) return; if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') dlyBack(); if (e.key === 'ArrowRight') turn(1); else if (e.key === 'ArrowLeft') turn(-1); };
       document.addEventListener('keydown', onKey); cleanups.push(() => document.removeEventListener('keydown', onKey));
 
       // ---------- the game on show: dots, colours, the button, its art's motion ----------
@@ -398,6 +399,15 @@
         const tr = DT0.getBoundingClientRect(), er = DEMB.getBoundingClientRect(), left = er.left + er.width / 2 - tr.left - 22;
         DBAR.style.setProperty('--dl', left.toFixed(1) + 'px'); DBAR.style.setProperty('--dw', (tr.width - left).toFixed(1) + 'px');
       }
+      // one continuous timeline (Craig, 31 Oct, build 185; run3() in daily-morph.html at b3eba36): ms from the start, the bar
+      // full by 1400, held to R, then back, the emblem already spinning in as the bar shrinks; every piece is one keyframe track
+      const R = 1400 + 4000, T = R + 1300;
+      function track(node, pts) {
+        const f = pts.map(([t, o, e]) => Object.assign({ offset: t / T }, o, e ? { easing: e } : {}));
+        if (pts[0][0] > 0) f.unshift(Object.assign({}, pts[0][1], { offset: 0 }));
+        if (pts[pts.length - 1][0] < T) f.push(Object.assign({}, pts[pts.length - 1][1], { offset: 1 }));
+        const an = node.animate(f, { duration: T, fill: 'both' }); D.anims.push(an); return an;
+      }
       function dlyPlay() {
         const state = dlyState(); if (!state) return;
         dlyFill(state);
@@ -406,33 +416,41 @@
         DT0.classList.add('dly-on'); DBAR.removeAttribute('aria-hidden'); DBAR.tabIndex = 0;
         if (reduced) {
           DT0.classList.add('dly-rm', 'dly-circ', 'dly-full');
-          dTimer(() => dlyBack(false), 300 + 4000);
+          dTimer(() => dlyBack(), 300 + 4000);
           return;
         }
-        D.anims.push(DEMB.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }], { duration: 800, easing: 'cubic-bezier(.6,0,.3,1)' }));
-        dTimer(() => DT0.classList.add('dly-circ'), 800);
-        dTimer(() => DT0.classList.add('dly-full'), 1050);
-        dTimer(() => { const sh = DBAR.querySelector('.stg-dly-sh'), w = parseFloat(DBAR.style.getPropertyValue('--dw')) || 340; D.anims.push(sh.animate([{ transform: 'translateX(-50px) skewX(-18deg)', opacity: 0 }, { opacity: 1, offset: 0.2 }, { opacity: 1, offset: 0.8 }, { transform: `translateX(${w + 10}px) skewX(-18deg)`, opacity: 0 }], { duration: 800, easing: 'ease-in-out' })); }, 1700);
-        dTimer(() => dlyBack(false), 1600 + 4000);
+        const rot = (d) => `rotate(${d}deg)`, W = (parseFloat(DBAR.style.getPropertyValue('--dw')) || 359) + 'px', Q = (x) => DBAR.querySelector(x);
+        track(DEMB, [[0, { transform: rot(0), opacity: 1 }, 'cubic-bezier(.5,0,1,1)'], [650, { transform: rot(230), opacity: 1 }, 'linear'], [850, { transform: rot(317), opacity: 0 }, 'linear'], [950, { transform: rot(360), opacity: 0 }],
+          [R + 330, { transform: rot(360), opacity: 0 }, 'linear'], [R + 500, { transform: rot(250), opacity: 1 }, 'cubic-bezier(0,0,.3,1)'], [R + 1300, { transform: rot(0), opacity: 1 }]]);
+        track(DBAR, [[650, { opacity: 0, transform: 'scale(.8)', width: '44px' }, 'ease-out'], [800, { opacity: 1, transform: 'scale(1)', width: '44px' }, 'linear'], [820, { opacity: 1, transform: 'scale(1)', width: '44px' }, 'cubic-bezier(.35,.9,.45,1.06)'], [1400, { opacity: 1, transform: 'scale(1)', width: W }],
+          [R, { opacity: 1, transform: 'scale(1)', width: W }, 'cubic-bezier(.55,0,.9,.6)'], [R + 330, { opacity: 1, transform: 'scale(1)', width: '124px' }, 'cubic-bezier(.2,.6,.4,1)'], [R + 520, { opacity: 1, transform: 'scale(1)', width: '44px' }, 'ease-in'], [R + 640, { opacity: 0, transform: 'scale(.8)', width: '44px' }]]);
+        track(Q('.stg-dly-cr'), [[650, { transform: rot(-130) }, 'linear'], [950, { transform: rot(0) }], [R + 330, { transform: rot(0) }, 'linear'], [R + 640, { transform: rot(-200) }]]);
+        track(Q('.stg-dly-tx'), [[950, { opacity: 0, transform: 'translateX(10px)' }, 'ease-out'], [1250, { opacity: 1, transform: 'none' }], [R, { opacity: 1, transform: 'none' }, 'ease-in'], [R + 150, { opacity: 0, transform: 'translateX(6px)' }]]);
+        track(Q('.stg-dly-go'), [[1100, { opacity: 0, transform: 'scale(.6)' }, 'cubic-bezier(.3,1.6,.5,1)'], [1450, { opacity: 1, transform: 'scale(1)' }], [R, { opacity: 1, transform: 'scale(1)' }, 'ease-in'], [R + 150, { opacity: 0, transform: 'scale(.7)' }]]);
+        track(Q('.stg-dly-sh'), [[1500, { transform: 'translateX(-50px)', opacity: 0 }, 'ease-in-out'], [1650, { opacity: 1 }], [2150, { opacity: 1 }], [2300, { transform: `translateX(${W})`, opacity: 0 }]]);
+        DT0.querySelectorAll('.fr-hl-p:not(.fr-hl-emb), .stg-rb').forEach((n) => track(n, [[700, { opacity: 1 }, 'ease-out'], [950, { opacity: 0 }], [R + 330, { opacity: 0 }, 'ease-out'], [R + 700, { opacity: 1 }]]));
+        dTimer(() => DT0.classList.add('dly-circ'), 650);    // the bar takes taps once it shows
+        dTimer(() => DT0.classList.add('dly-full'), 1400);   // full width (the animations draw it; the class marks the state)
+        dTimer(() => dlyBack(), T);
       }
-      // back to the logo: at once (a tap, a swipe, a sheet), or played out
-      function dlyBack(now) {
+      // back to the logo: at once (a tap, a swipe, a sheet) or once the timeline has played out
+      function dlyBack() {
         if (!D.on) return;
         D.steps.forEach(clearTimeout); D.steps = [];
-        const done = () => { D.on = false; DT0.classList.remove('dly-on', 'dly-rm'); DBAR.setAttribute('aria-hidden', 'true'); DBAR.tabIndex = -1; if (GM[shown].id !== 'daily') dlySchedule(45000); };
-        if (now || reduced) { D.anims.forEach((a) => a.cancel()); D.anims = []; DT0.classList.remove('dly-full', 'dly-circ'); done(); return; }
-        DT0.classList.remove('dly-full');
-        dTimer(() => { DT0.classList.remove('dly-circ'); D.anims.push(DEMB.animate([{ transform: 'rotate(360deg)' }, { transform: 'rotate(0deg)' }], { duration: 800, easing: 'cubic-bezier(.6,0,.3,1)' })); }, 550);
-        dTimer(done, 550 + 800);
+        D.anims.forEach((an) => an.cancel()); D.anims = [];
+        if (reduced && DT0.classList.contains('dly-rm')) { DT0.classList.remove('dly-full', 'dly-circ', 'dly-on'); dTimer(() => DT0.classList.remove('dly-rm'), 320); }   // the crossfade back
+        else DT0.classList.remove('dly-full', 'dly-circ', 'dly-on', 'dly-rm');
+        D.on = false; DBAR.setAttribute('aria-hidden', 'true'); DBAR.tabIndex = -1;
+        if (GM[shown].id !== 'daily') dlySchedule(45000);
       }
       DBAR.onclick = (e) => {
         e.stopPropagation(); if (!D.on) return;
-        dlyBack(true);
+        dlyBack();
         const di = GM.findIndex((g) => g.id === 'daily'), cur = Math.round(target);
         go(cur + wrapD(di - idx(cur)));
       };
       // any other touch rolls it back at once and pushes the next one back
-      const dlyTouch = (e) => { D.touched = Date.now(); if (D.on && !DBAR.contains(e.target)) dlyBack(true); };
+      const dlyTouch = (e) => { D.touched = Date.now(); if (D.on && !DBAR.contains(e.target)) dlyBack(); };
       el.addEventListener('pointerdown', dlyTouch, true); cleanups.push(() => el.removeEventListener('pointerdown', dlyTouch, true));
       wheel.addEventListener('pointerdown', () => { D.rest = false; }, true);
       $('.stg-acct').onclick = () => D2T.go('account');
