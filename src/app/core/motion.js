@@ -38,8 +38,9 @@
     // its own element names, so no screen's span rules (home's shield label, for one) reach inside it
     el.innerHTML = `<d2t-odo class="mo-odo" style="height:${lh}px"><d2t-col class="mo-col">${vals.map((v) => `<d2t-v style="height:${lh}px;line-height:${lh}px">${v}</d2t-v>`).join('')}</d2t-col></d2t-odo>`;
     const col = el.querySelector('.mo-col');
-    // a keyframe for each value at its ease-out time (the time at which an ease-out cubic reaches it)
-    const kf = vals.map((_, k) => ({ offset: 1 - Math.cbrt(1 - k / N), transform: `translateY(${(-k * lh).toFixed(2)}px)`, easing: 'ease-out' }));
+    // one smooth roll that slows to a stop (Craig, 31 Oct, build 199: an ease on every step made it pause at each number):
+    // a keyframe for each value at the time an ease-out cubic reaches it, linear in between
+    const kf = vals.map((_, k) => ({ offset: 1 - Math.cbrt(1 - k / N), transform: `translateY(${(-k * lh).toFixed(2)}px)`, easing: 'linear' }));
     const a = col.animate(kf, { duration: dur, delay, fill: 'both' });
     let done = false;
     const m = track({
