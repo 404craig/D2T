@@ -5,7 +5,7 @@
 /* Layout: two live phones side by side, each looping its morph, controls under, notes at the foot */
 :root{--bg:#000;--fg:#fff;--soft:#BDBDC6;--line:#26262C;--g:#12F06C;--phone:#151518;--ink:#1B1F4B;--font:'Exo 2',system-ui,sans-serif;color-scheme:dark}
 body{background:var(--bg);color:var(--fg);font-family:var(--font)}
-.wrap{max-width:1100px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1160px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10px;text-wrap:balance}
 .lead{color:var(--soft);font-size:16px;line-height:1.5;max-width:820px;margin:0 0 18px}.lead b{color:var(--fg)}
 .ctl{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
@@ -13,7 +13,7 @@ h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10p
 .ctl button.on{border-color:var(--g);color:var(--g)}
 .ctl button:focus-visible{outline:2px solid var(--g);outline-offset:2px}
 .cols{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start}
-.col{flex:1 1 300px;max-width:340px;min-width:0}
+.col{flex:1 1 280px;max-width:340px;min-width:0}
 .col h2{font:900 italic 20px var(--font);text-transform:uppercase;margin:0 0 4px}.col h2 span{color:var(--g)}
 .why{color:var(--soft);font-size:14px;line-height:1.45;margin:0 0 12px;min-height:82px}.why b{color:var(--fg)}
 .ph{border-radius:34px;padding:8px;background:var(--phone);box-shadow:0 0 0 1px #2A2A30}
@@ -56,16 +56,35 @@ h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10p
 .grow .pill{opacity:1;width:152px;transition-delay:0s,0s}
 .grow .pill .cr{transform:scale(1);transition-delay:.15s}
 .grow .pill .tx{opacity:1;transform:none;transition-delay:.3s}
+.big{position:absolute;left:12px;top:12px;height:44px;width:44px;box-sizing:border-box;border-radius:22px;background:#fff;border:0;padding:0 5px;display:flex;align-items:center;gap:9px;overflow:hidden;cursor:pointer;
+ opacity:0;transform:scale(.7);transition:width .55s cubic-bezier(.3,1.25,.5,1),opacity .2s,transform .25s;box-shadow:0 0 0 3px rgba(255,255,255,.14),0 0 26px rgba(255,255,255,.35);z-index:5}
+.big .cr{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px rgba(27,31,75,.18);transform:scale(0);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.big .cr img{width:27px;height:27px;object-fit:contain}
+.big .tx{flex:1;min-width:0;text-align:left;white-space:nowrap;opacity:0;transform:translateX(10px);transition:opacity .25s,transform .3s}
+.big .tx i{display:block;font:800 9.5px/1.25 var(--font);letter-spacing:.13em;color:#5A5E80;font-style:normal;text-transform:uppercase}
+.big .tx b{display:block;font:900 italic 17px/1.1 var(--font);text-transform:uppercase;color:var(--ink)}
+.big .go{flex:none;height:34px;padding:0 12px 0 14px;border-radius:17px;background:var(--ink);color:#fff;display:flex;align-items:center;gap:5px;font:900 italic 14px var(--font);text-transform:uppercase;opacity:0;transform:scale(.6);transition:opacity .25s,transform .35s cubic-bezier(.3,1.6,.5,1)}
+.big .sh{position:absolute;top:0;bottom:0;width:40px;left:-50px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.95),transparent);mix-blend-mode:overlay}
+#p3 .emb > img{transition:transform .8s cubic-bezier(.6,0,.3,1),opacity .2s}
+#p3.spin .emb > img{transform:rotate(360deg)}
+#p3.circ .emb > img{opacity:0}
+#p3.circ .big{opacity:1;transform:none}
+#p3 .word img,#p3 .rb{transition:opacity .25s}
+#p3.full .word img,#p3.full .rb{opacity:0}
+#p3.full .big{width:366px}
+#p3.full .big .cr{transform:scale(1);transition-delay:.2s}
+#p3.full .big .tx{opacity:1;transform:none;transition-delay:.35s}
+#p3.full .big .go{opacity:1;transform:none;transition-delay:.45s}
 .st.slow *{transition-duration:1.4s!important}
 .st.ex .pill{background:#fff}
-@media (prefers-reduced-motion:reduce){.rb,.pill,.pill *,.emb *,.word img,.dlg{transition:opacity .3s!important;transform:none!important}}
+@media (prefers-reduced-motion:reduce){.rb,.pill,.pill *,.big,.big *,.emb *,.word img,.dlg{transition:opacity .3s!important;transform:none!important}}
 
 .notes{max-width:820px;margin-top:38px;color:#CFCFD6;font-size:15px;line-height:1.5}
 .notes h2{font:900 italic 22px var(--font);text-transform:uppercase;color:var(--fg);margin:0 0 8px}.notes li{margin:0 0 8px}.notes b{color:var(--fg)}
 </style>
 <div class="wrap">
 <h1>The Daily, by morph</h1>
-<p class="lead">Two ways for the top bar to suggest today's Daily, now and then, <b>only if you haven't played it yet</b>. Both are rebuilt over screenshots of the live home (build 181). Today's Daily is <b>Bolton 1995/96</b>. Tap the white pill or the crest and the wheel turns to the Daily. Each phone loops so you can watch it.</p>
+<p class="lead">Three ways for the top bar to suggest today's Daily, now and then, <b>only if you haven't played it yet</b>. Both are rebuilt over screenshots of the live home (build 181). Today's Daily is <b>Bolton 1995/96</b>. Tap the white pill or the crest and the wheel turns to the Daily. Each phone loops so you can watch it.</p>
 <div class="ctl" role="group" aria-label="Background game">
  <button id="bg-classic" class="on" data-bg="classic">Classic</button><button id="bg-goal" data-bg="goal">Goal Rush</button><button id="bg-ub" data-bg="ub">Unbeaten</button>
  <button id="slow" data-slow>Slow motion</button>
@@ -77,11 +96,15 @@ h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10p
  <div class="col"><h2>2 · <span>The logo turns</span></h2>
   <p class="why">The emblem flips over to <b>Bolton's crest</b> on a white disc, as a glint wipes the wordmark away and writes <b>"Play today's Daily, Bolton 95/96"</b> in its place. Then it flips back to DROP2TOP.</p>
   <div class="ph"><div class="scr"><div class="st" id="p2"></div></div></div><button class="again" id="again2">Play it again</button></div>
+ <div class="col"><h2>3 · <span>The emblem takes over</span></h2>
+  <p class="why">The emblem spins once, turns into a white circle and stretches right across the top, <b>over the logo and the buttons</b>: Bolton's crest, <b>"Today's Daily Challenge, Bolton 1995/96"</b> and Play. Then it shrinks back and spins into the emblem.</p>
+  <div class="ph"><div class="scr"><div class="st" id="p3"></div></div></div><button class="again" id="again3">Play it again</button></div>
 </div>
 <div class="notes"><h2>How it would behave</h2><ul>
 <li><b>Only until you play.</b> Once you've started today's Daily it never shows again that day. No "carry on", no "done".</li>
 <li><b>Now and then.</b> About 4 seconds after you land on any game except the Daily, then every 30 seconds or so, three times a visit at most. It holds for about 4 seconds. Never while you're swiping the wheel.</li>
 <li><b>Tap while it shows</b> and the wheel turns to the Daily, where you press Play. Its own button never starts a game.</li>
+<li><b>3 is the biggest moment</b>: the whole top becomes the Daily for a few seconds, so the share, ? and account buttons can't be tapped while it shows. A tap anywhere on it goes to the Daily.</li>
 <li><b>1 is louder</b>: a white pill is the brightest thing in the top bar. <b>2 is more on brand</b>: it uses the emblem turn and glint the logo already has, so it could take the place of that beat.</li>
 <li>Reduced motion: no flip, slide or glint. It fades from one to the other.</li>
 </ul></div>
@@ -93,13 +116,14 @@ const CHV=(c,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none
 const D='daily-nudge/';
 const logo=(two)=>`<button class="logo" aria-label="DROP2TOP"><span class="emb"><img src="${D}emb.png" alt="">${two?`<span class="cr"><img src="${D}bolton.png" alt="Bolton"></span>`:''}</span><span class="word"><img src="${D}word.png" alt=""><i class="glint"></i></span>${two?`<span class="dlg"><i>Play today's Daily</i><b>Bolton 95/96${CHV('#fff',13)}</b></span>`:''}</button>`;
 const btns=(one)=>`<span class="rb s">${SHARE}</span><span class="rb q">?</span><span class="rb a">${ACCT}</span>${one?`<button class="pill" aria-label="Play today's Daily"><span class="cr"><img src="${D}bolton.png" alt=""></span><span class="tx"><i>Today's Daily</i><b>Play${CHV('#1B1F4B',12)}</b></span><i class="sh"></i></button>`:''}`;
-const p1=document.getElementById('p1'),p2=document.getElementById('p2');
+const p1=document.getElementById('p1'),p2=document.getElementById('p2'),p3=document.getElementById('p3');
 p1.innerHTML=logo(false)+btns(true);p2.innerHTML=logo(true)+btns(false);
+p3.innerHTML=logo(false)+btns(false)+`<button class="big" aria-label="Play today's Daily"><span class="cr"><img src="${D}bolton.png" alt=""></span><span class="tx"><i>Today's Daily Challenge</i><b>Bolton 1995/96</b></span><span class="go">Play${CHV('#fff',12)}</span><i class="sh"></i></button>`;
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let slow=false;const k=()=>slow?3.2:1;
 function size(){document.querySelectorAll('.st').forEach(s=>{s.style.setProperty('--s',(s.parentNode.clientWidth/390).toFixed(4));});}
 addEventListener('resize',size);size();
-const timers={p1:[],p2:[]};
+const timers={p1:[],p2:[],p3:[]};
 const later=(id,f,ms)=>timers[id].push(setTimeout(f,ms*k()));
 const glint=(el,from,to,ms)=>{if(RM)return;el.animate([{left:from+'px',opacity:0},{opacity:1,offset:.2},{opacity:1,offset:.8},{left:to+'px',opacity:0}],{duration:ms*k(),easing:'ease-in-out'});};
 function run1(){const s=p1;timers.p1.forEach(clearTimeout);timers.p1=[];s.classList.remove('merge','grow');
@@ -115,10 +139,19 @@ function run2(){const s=p2;timers.p2.forEach(clearTimeout);timers.p2=[];s.classL
  later('p2',()=>{s.classList.remove('reveal');},6600);
  later('p2',()=>{s.classList.remove('flip','wipe');glint(s.querySelector('.glint'),-20,160,450);},7000);
  later('p2',run2,9800);}
+function run3(){const s=p3;timers.p3.forEach(clearTimeout);timers.p3=[];s.classList.remove('spin','circ','full');
+ later('p3',()=>s.classList.add('spin'),1400);
+ later('p3',()=>s.classList.add('circ'),2200);
+ later('p3',()=>s.classList.add('full'),2450);
+ later('p3',()=>glint(s.querySelector('.big .sh'),-50,380,800),3300);
+ later('p3',()=>s.classList.remove('full'),7300);
+ later('p3',()=>s.classList.remove('circ'),7850);
+ later('p3',()=>s.classList.remove('spin'),8000);
+ later('p3',run3,10800);}
 document.querySelectorAll('[data-bg]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-bg]').forEach(x=>x.classList.toggle('on',x===b));
  document.querySelectorAll('.st').forEach(s=>s.style.backgroundImage=`url(${D}bg_${b.dataset.bg}.jpg)`);});
 document.querySelectorAll('.st').forEach(s=>s.style.backgroundImage=`url(${D}bg_classic.jpg)`);
-document.getElementById('slow').onclick=(e)=>{slow=!slow;e.currentTarget.classList.toggle('on',slow);document.querySelectorAll('.st').forEach(s=>s.classList.toggle('slow',slow));run1();run2();};
-document.getElementById('again1').onclick=run1;document.getElementById('again2').onclick=run2;
-run1();run2();
+document.getElementById('slow').onclick=(e)=>{slow=!slow;e.currentTarget.classList.toggle('on',slow);document.querySelectorAll('.st').forEach(s=>s.classList.toggle('slow',slow));run1();run2();run3();};
+document.getElementById('again1').onclick=run1;document.getElementById('again3').onclick=run3;document.getElementById('again2').onclick=run2;
+run1();run2();run3();
 </script>
