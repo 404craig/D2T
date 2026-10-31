@@ -212,10 +212,17 @@
     bar.onclick = close;
     const handles = [bar, sh.querySelector('.sheet-title')].filter(Boolean);
     // the content drags the sheet down too, once it is scrolled to the top (touch)
-    let ty = null, tdy = 0;
-    bodyEl.addEventListener('touchstart', (e) => { ty = bodyEl.scrollTop <= 0 ? e.touches[0].clientY : null; tdy = 0; }, { passive: true });
-    bodyEl.addEventListener('touchmove', (e) => { if (ty == null) return; tdy = Math.max(0, e.touches[0].clientY - ty); if (tdy > 0) { sh.style.transition = 'none'; sh.style.transform = `translateY(${tdy}px)`; if (e.cancelable) e.preventDefault(); } }, { passive: false });
-    bodyEl.addEventListener('touchend', () => { if (ty == null) return; ty = null; sh.style.transition = ''; if (tdy > 90) close(); else sh.style.transform = ''; });
+    // iOS cancels a whole scroll if the first touchmove is prevented, so the drag only takes over after a clear pull down
+    // from the top, and a first move upwards hands the gesture to the scroll (Craig, 31 Oct: the formation sheet would not scroll)
+    let ty = null, tdy = 0, dragging = false;
+    bodyEl.addEventListener('touchstart', (e) => { ty = bodyEl.scrollTop <= 0 ? e.touches[0].clientY : null; tdy = 0; dragging = false; }, { passive: true });
+    bodyEl.addEventListener('touchmove', (e) => {
+      if (ty == null) return;
+      const d = e.touches[0].clientY - ty;
+      if (!dragging) { if (d < -2) { ty = null; return; } if (d < 10) return; dragging = true; }
+      tdy = Math.max(0, d - 10); sh.style.transition = 'none'; sh.style.transform = `translateY(${tdy}px)`; if (e.cancelable) e.preventDefault();
+    }, { passive: false });
+    bodyEl.addEventListener('touchend', () => { if (ty == null) return; ty = null; sh.style.transition = ''; if (dragging && tdy > 90) close(); else sh.style.transform = ''; dragging = false; });
     handles.forEach((hd) => {
       let y0 = null, dy = 0;
       hd.addEventListener('pointerdown', (e) => { y0 = e.clientY; dy = 0; sh.style.transition = 'none'; hd.setPointerCapture(e.pointerId); });

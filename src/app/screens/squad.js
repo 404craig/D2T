@@ -289,9 +289,9 @@
           <span class="se-fpitch"><span class="se-fline"></span>${GAME.formationDots(k).map((s) => `<i style="left:${s.x}%;top:${s.y}%"></i>`).join('')}</span><b>${k}</b></button>`;
         const note = drafting ? 'The draft fills this shape shirt by shirt. It is fixed once you make your first pick, then you can change it again before the season.'
           : pre && !dream ? 'Your best XI from the squad is picked for the shape you choose. You can still swap anyone after.' : 'Your 11 are moved into the new shape. Players out of their position play at 90% (near) or 70% (wrong).';
-        const el = D2T.h(`<div><div class="se-formgrid">${GAME.formations().map(tile).join('')}</div><p class="se-note">${note}</p><button class="btn se-btn se-done" type="button">Done</button></div>`);
+        const el = D2T.h(`<div><div class="se-formgrid">${GAME.formations().map(tile).join('')}</div><p class="se-note">${note}</p></div>`);
         const sh = D2T.sheet({
-          title: 'Formation', body: el,
+          title: 'Formation', body: el, foot: '<button class="btn se-btn se-done" type="button" data-done>Done</button>',
           onClose: () => {
             if (pending === GAME.eng().formation) return;
             const before = new Map(allItems().map((n) => [n.dataset.card, n.getBoundingClientRect()]));
@@ -309,7 +309,7 @@
             el.querySelectorAll('.se-formcard').forEach((x) => { const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); });
           };
         });
-        el.querySelector('.se-done').onclick = () => sh.close();
+        
       };
 
       // ---------- tactics sheet (Craig, 18 Oct) ----------
