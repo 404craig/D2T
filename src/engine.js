@@ -749,7 +749,16 @@ function scoutClub(st, S, c) {
   const spin = st.roll.spin + 1, r = stream(st.seed, "scoutclub", st.rollIx, st.rollStep, spin), cards = [], taken = new Set();
   const w = (p) => eliteWeight(p) * (st.recent && st.recent[p.id] != null ? st.recent[p.id] : 1);
   const names = new Set();
-  while (cards.length < 3) { const left = pool.filter(x => !taken.has(x.id) && !names.has(nameKey(x))); if (!left.length) break; const p = pickWeighted(r, left, w); taken.add(p.id); names.add(nameKey(p)); cards.push(p.id); }
+  // Craig, 31 Oct (build 186; players kept getting poor players from a club scout): the three come from the club's five
+  // best-rated players only, and where one of those is better than the weakest man in your XI, at least one of the three is
+  const top = pool.slice().sort((a, b) => b.r - a.r).slice(0, 5);
+  const mine = st.xi.filter(id => id != null).map(id => playerOf(S, id, S.legends)).filter(Boolean);
+  const low = mine.length ? Math.min(...mine.map(p => p.r)) : 0, better = top.filter(p => p.r > low);
+  while (cards.length < 3) {
+    const from = !cards.length && better.length ? better : top;
+    const left = from.filter(x => !taken.has(x.id) && !names.has(nameKey(x))); if (!left.length) break;
+    const p = pickWeighted(r, left, w); taken.add(p.id); names.add(nameKey(p)); cards.push(p.id);
+  }
   st.roll = Object.assign({}, st.roll, { spin, cards, scout: null, scoutClub: c, tags: null });
   noteOffered(st, cards);
   st.log.push(["scoutclub", c]);
@@ -1069,7 +1078,7 @@ function seasonSummary(S, st) {
 const API = {
   RULES, LEVELS, POS, FIT, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, reseat, hash32, rng, stream, unit,
   fitOf, effRating, isGK, canPlay, indexSeason, playerOf, clubAt, nameKey, yourNames, xiStrength, userStrength, plainStrength, starRating, settledRating, clubXI, clubStrength,
-  TACTIC_NAMES, tacticOf, tacticLines, setTactic, scoutInfo, scout, scoutClubs, scoutClub, legendRoll, januaryRaid, agedRating,
+  TACTIC_NAMES, tacticOf, tacticLines, setTactic, scoutInfo, scout, scoutClubs, scoutClub, scoutClubPool, legendRoll, januaryRaid, agedRating,
   schedule, fixturesOf, recentWeights, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,
   poach, joinersOf, fillHoles, draftOrder, draftSlot, draftFormation, draftPick, draftFits, listsPos, DRAFT_MODES, carryIn, simResults,
   startSeason, inWindow, currentWindow, newRoll, drawCard, respinCards, signPreview, sign, pass,
