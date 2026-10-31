@@ -106,6 +106,36 @@ const URL = process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index
   check(pop && /404craig\.github\.io\/Tenaball/.test(pop.url()), "Tenaball did not open in a new tab");
   if (pop) await pop.close();
 
+  // ---------- the Daily takes over the top bar (build 184) ----------
+  {
+    const dp = await open();
+    const dShow = () => dp.evaluate(() => { const on = [...document.querySelectorAll(".stg-dots i")].findIndex((d) => d.classList.contains("on")); return document.querySelectorAll(".stg-sl")[on].dataset.id; });
+    const dHome = async () => { await dp.evaluate(() => window.D2T.go("home")); await wait(900); };
+    const dTo = async (id) => { for (let k = 0; k < 6 && (await dShow()) !== id; k++) { await dp.click(".stg-sw.r"); await wait(300); } await wait(500); };
+    const shows = (ms) => dp.waitForSelector(".stg-top.dly-full", { timeout: ms }).then(() => true).catch(() => false);
+    await dp.evaluate(() => { window.D2T.state.tips = Object.assign(window.D2T.state.tips || {}, { "stage-swipe": 1, "stage-help": 1, "stage-share": 1 }); window.D2T.save(); });
+    check(!(await shows(8500)), "the Daily takeover showed on the Daily slide");
+    await dTo("classic");
+    check(await shows(12000), "the Daily takeover never showed on Classic");
+    await wait(700);
+    check(await dp.evaluate(() => { const d = document.querySelector(".stg-dly").getBoundingClientRect(), r = document.querySelector(".stg-acct").getBoundingClientRect(); return Math.abs(d.height - 44) < 0.6 && Math.abs(d.top - r.top) < 0.6 && Math.abs(d.right - r.right) < 1; }), "the Daily bar is not 44px tall and in line with the buttons");
+    check(await dp.evaluate(() => /Today's Daily Challenge/i.test(document.querySelector(".stg-dly").textContent) && /Play/.test(document.querySelector(".stg-dly-go").textContent)), "the Daily bar should say Today's Daily Challenge and Play");
+    await dp.click(".stg-dly"); await wait(1200);
+    check((await dShow()) === "daily", "a tap on the Daily bar did not turn the wheel to the Daily");
+    await dp.click(".stg-q"); await wait(600);
+    check(!!(await dp.$(".sheet")), "the ? button does not work after the Daily takeover");
+    await dp.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(600);
+    // a Daily in progress: Carry on
+    await dp.click(".stg-main"); await wait(1800); await dHome(); await dTo("classic");
+    check(await shows(12000), "the Daily takeover did not show with a Daily in progress");
+    check(await dp.evaluate(() => /Carry on/i.test(document.querySelector(".stg-dly-go").textContent) && /in progress/i.test(document.querySelector(".stg-dly-tx").textContent)), "with a Daily in progress the bar should say Carry on");
+    // today's Daily done: never
+    await dp.evaluate(() => { const G = window.D2T.game, st = window.D2T.state; st.record.daily = st.record.daily || {}; const d = G.dailyEntry(G.today()); st.record.daily[G.today()] = { n: G.dailyNumber(G.today()), club: d.name, season: d.season, mode: 'classic', finish: 9, histFinish: d.pos, rise: d.pos - 9, pts: 50, histPts: 30, goes: 1 }; window.D2T.save(); });
+    await dHome(); await dTo("goal");
+    check(!(await shows(9000)), "the Daily takeover showed after today's Daily was done");
+    await dp.close();
+  }
+
   // ---------- reduced motion, and a short phone ----------
   const calm = await open({ reducedMotion: "reduce" });
   const moving = await calm.evaluate(() => [...document.querySelectorAll(".stg *")].filter((e) => { const a = getComputedStyle(e).animationName; return a && a !== "none"; }).length);
@@ -119,5 +149,5 @@ const URL = process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index
   await browser.close();
   const all = fails.concat(errors);
   if (all.length) { console.log("FAIL\n" + all.join("\n")); process.exit(1); }
-  console.log("ok: the stage (six games, arrows, keys, swipe, loop, rules, account), a run going in every mode with New game and Continue, Tenaball, reduced motion, a short phone");
+  console.log("ok: the stage (six games, arrows, keys, swipe, loop, rules, account), a run going in every mode with New game and Continue, Tenaball, the Daily takeover, reduced motion, a short phone");
 })().catch((e) => { console.log("ERR", e.stack || e.message); process.exit(1); });

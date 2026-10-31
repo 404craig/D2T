@@ -126,7 +126,8 @@
       const el = D2T.h(`<div class="stg">
         <div class="stg-bgs">${GM.map((g) => `<i class="stg-bg" style="background:radial-gradient(70% 42% at 50% 36%,${g.k}55,transparent 70%),radial-gradient(120% 55% at 50% 112%,${g.k}30,#000 70%)"></i>`).join('')}</div>
         <div class="stg-top"><button class="fr-home-logo stg-logo" aria-label="DROP2TOP">${D2T.homeLogo()}</button>
-          <button class="stg-rb stg-shr" aria-label="Share your record">${SHARE}</button><button class="stg-rb stg-q" aria-label="How to play this game">?</button><button class="stg-rb stg-acct" aria-label="Your account">${ACCT}</button></div>
+          <button class="stg-rb stg-shr" aria-label="Share your record">${SHARE}</button><button class="stg-rb stg-q" aria-label="How to play this game">?</button><button class="stg-rb stg-acct" aria-label="Your account">${ACCT}</button>
+          <button class="stg-dly" type="button" tabindex="-1" aria-hidden="true"><span class="stg-dly-cr"><img alt=""></span><span class="stg-dly-tx"><i></i><b></b></span><span class="stg-dly-go"><span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><i class="stg-dly-sh"></i></button></div>
         <div class="stg-wheel" aria-roledescription="carousel">${GM.map((g) => `<section class="stg-sl" data-id="${g.id}" aria-label="${esc(g.name)}" style="--k:${g.k};--kt:${g.kt || g.k}">
           <div class="stg-art"><div class="stg-artin">${artHTML(g)}</div></div>
           <div class="stg-nm"><div class="stg-gn">${esc(g.name)}</div><div class="stg-hl">${g.id === 'goal' ? g.hl : esc(g.hl)}</div><p class="stg-sb">${esc(g.sb)}</p></div>
@@ -178,7 +179,7 @@
         raf = requestAnimationFrame(step);
       }
       cleanups.push(() => cancelAnimationFrame(raf));
-      const go = (t) => { target = t; settle(); };
+      const go = (t) => { target = t; D.rest = false; settle(); };   // D: the Daily takeover's state, below
       const turn = (dlt) => go(Math.round(target) + dlt);
       wheel.addEventListener('pointerdown', (e) => {
         if (e.button > 0) return;
@@ -202,7 +203,7 @@
       };
       wheel.addEventListener('pointerup', up); wheel.addEventListener('pointercancel', up);
       $('.stg-sw.l').onclick = () => turn(-1); $('.stg-sw.r').onclick = () => turn(1);
-      const onKey = (e) => { if (document.querySelector('.sheet')) return; if (e.key === 'ArrowRight') turn(1); else if (e.key === 'ArrowLeft') turn(-1); };
+      const onKey = (e) => { if (document.querySelector('.sheet')) return; if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') dlyBack(true); if (e.key === 'ArrowRight') turn(1); else if (e.key === 'ArrowLeft') turn(-1); };
       document.addEventListener('keydown', onKey); cleanups.push(() => document.removeEventListener('keydown', onKey));
 
       // ---------- the game on show: dots, colours, the button, its art's motion ----------
@@ -222,6 +223,7 @@
       cleanups.push(() => noIdle(idleId));
       function rest() {
         const n = shown, g = GM[n];
+        dlyRest();
         if (moving !== n) {
           if (moving >= 0 && arts[GM[moving].id]) arts[GM[moving].id].stop();
           moving = n;
@@ -354,6 +356,85 @@
       }
       // first-time tips on the stage (Craig, 30 Oct): swipe for the other games, then the rules, then Share
       later(() => { if (!root.isConnected || document.querySelector('.sheet')) return; D2T.tips([['stage-swipe', $('.stg-dots'), 'Swipe for the other games', { side: 'right' }], ['stage-help', $('.stg-q'), 'How each game works', { place: 'below', side: 'right' }], ['stage-share', $('.stg-shr'), 'Share your game or your record', { place: 'below', side: 'right' }]]); }, params.fromIntro ? 2600 : 900);
+
+      // ---------- the Daily takes over the top bar (Craig, 31 Oct, build 184; option 3 in design/prototype/daily-morph.html) ----------
+      // Now and then, only while the wheel rests on another game and today's Daily isn't done: the emblem spins, turns into a
+      // white circle and stretches across the top bar (crest, label, club and season, Play or Carry on), holds, then goes back.
+      // A tap on it turns the wheel to the Daily. 6 s after coming to rest, then every 45 s; at most 2 a visit and 6 a day.
+      const DT0 = $('.stg-top'), DEMB = DT0.querySelector('.fr-hl-emb'), DBAR = DT0.querySelector('.stg-dly');
+      const D = { wait: 0, steps: [], on: false, plays: 0, touched: 0, anims: [] };
+      const dTimer = (f, ms) => { const t = setTimeout(f, ms); D.steps.push(t); return t; };
+      cleanups.push(() => { clearTimeout(D.wait); D.steps.forEach(clearTimeout); D.anims.forEach((a) => a.cancel()); });
+      function dlyState() {
+        const today = G.today(), st = D2T.state;
+        if (G.dailyResult(today)) return null;
+        const done = [st.run, st.dailyRun].some((r) => r && r.daily === today && (r.recorded || (r.eng && r.eng.phase === 'summary')));
+        if (done) return null;
+        return runsGoing().daily ? 'live' : 'new';
+      }
+      const dlyCapped = () => { const c = D2T.state.dailyNudge; return !!(c && c.day === G.today() && c.n >= 6); };
+      const dlyBlocked = () => !root.isConnected || drag || !D.rest || GM[shown].id === 'daily' || document.querySelector('.sheet, .d2t-tip') || Date.now() - D.touched < 3000;
+      function dlySchedule(ms) { clearTimeout(D.wait); if (D.plays >= 2) return; D.wait = setTimeout(dlyTry, ms); }
+      function dlyTry() {
+        if (D.on || D.plays >= 2 || dlyCapped() || !dlyState()) return;
+        if (dlyBlocked()) { if (GM[shown].id !== 'daily') dlySchedule(3000); return; }
+        dlyPlay();
+      }
+      function dlyRest() {
+        D.rest = true;
+        if (GM[shown].id === 'daily') { clearTimeout(D.wait); D.plays = 0; return; }
+        if (!D.on) dlySchedule(6000);
+      }
+      function dlyFill(state) {
+        const d = G.dailyEntry(G.today()), c = G.club(d.name) || {};
+        const ink = c.ink && dark(c.ink) ? c.ink : '#0A0A0A';
+        DBAR.style.setProperty('--dink', ink);
+        DBAR.querySelector('img').src = c.crestLight || c.crest || '';
+        DBAR.querySelector('.stg-dly-tx i').textContent = state === 'live' ? 'Your Daily is in progress' : "Today's Daily Challenge";
+        DBAR.querySelector('.stg-dly-tx b').textContent = `${d.name} ${d.season}`;
+        DBAR.querySelector('.stg-dly-go span').textContent = state === 'live' ? 'Carry on' : 'Play';
+        DBAR.setAttribute('aria-label', state === 'live' ? "Carry on today's Daily" : "Play today's Daily");
+        // the circle sits on the emblem and grows to the account button's right edge
+        const tr = DT0.getBoundingClientRect(), er = DEMB.getBoundingClientRect(), left = er.left + er.width / 2 - tr.left - 22;
+        DBAR.style.setProperty('--dl', left.toFixed(1) + 'px'); DBAR.style.setProperty('--dw', (tr.width - left).toFixed(1) + 'px');
+      }
+      function dlyPlay() {
+        const state = dlyState(); if (!state) return;
+        dlyFill(state);
+        D.on = true; D.plays += 1;
+        const st = D2T.state; if (!st.dailyNudge || st.dailyNudge.day !== G.today()) st.dailyNudge = { day: G.today(), n: 0 }; st.dailyNudge.n += 1; D2T.save();
+        DT0.classList.add('dly-on'); DBAR.removeAttribute('aria-hidden'); DBAR.tabIndex = 0;
+        if (reduced) {
+          DT0.classList.add('dly-rm', 'dly-circ', 'dly-full');
+          dTimer(() => dlyBack(false), 300 + 4000);
+          return;
+        }
+        D.anims.push(DEMB.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }], { duration: 800, easing: 'cubic-bezier(.6,0,.3,1)' }));
+        dTimer(() => DT0.classList.add('dly-circ'), 800);
+        dTimer(() => DT0.classList.add('dly-full'), 1050);
+        dTimer(() => { const sh = DBAR.querySelector('.stg-dly-sh'), w = parseFloat(DBAR.style.getPropertyValue('--dw')) || 340; D.anims.push(sh.animate([{ transform: 'translateX(-50px) skewX(-18deg)', opacity: 0 }, { opacity: 1, offset: 0.2 }, { opacity: 1, offset: 0.8 }, { transform: `translateX(${w + 10}px) skewX(-18deg)`, opacity: 0 }], { duration: 800, easing: 'ease-in-out' })); }, 1700);
+        dTimer(() => dlyBack(false), 1600 + 4000);
+      }
+      // back to the logo: at once (a tap, a swipe, a sheet), or played out
+      function dlyBack(now) {
+        if (!D.on) return;
+        D.steps.forEach(clearTimeout); D.steps = [];
+        const done = () => { D.on = false; DT0.classList.remove('dly-on', 'dly-rm'); DBAR.setAttribute('aria-hidden', 'true'); DBAR.tabIndex = -1; if (GM[shown].id !== 'daily') dlySchedule(45000); };
+        if (now || reduced) { D.anims.forEach((a) => a.cancel()); D.anims = []; DT0.classList.remove('dly-full', 'dly-circ'); done(); return; }
+        DT0.classList.remove('dly-full');
+        dTimer(() => { DT0.classList.remove('dly-circ'); D.anims.push(DEMB.animate([{ transform: 'rotate(360deg)' }, { transform: 'rotate(0deg)' }], { duration: 800, easing: 'cubic-bezier(.6,0,.3,1)' })); }, 550);
+        dTimer(done, 550 + 800);
+      }
+      DBAR.onclick = (e) => {
+        e.stopPropagation(); if (!D.on) return;
+        dlyBack(true);
+        const di = GM.findIndex((g) => g.id === 'daily'), cur = Math.round(target);
+        go(cur + wrapD(di - idx(cur)));
+      };
+      // any other touch rolls it back at once and pushes the next one back
+      const dlyTouch = (e) => { D.touched = Date.now(); if (D.on && !DBAR.contains(e.target)) dlyBack(true); };
+      el.addEventListener('pointerdown', dlyTouch, true); cleanups.push(() => el.removeEventListener('pointerdown', dlyTouch, true));
+      wheel.addEventListener('pointerdown', () => { D.rest = false; }, true);
       $('.stg-acct').onclick = () => D2T.go('account');
       $('.stg-logo').onclick = () => D2T.go('intro');
 
