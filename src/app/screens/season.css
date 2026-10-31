@@ -645,3 +645,4 @@
 @media (prefers-reduced-motion: reduce) { .rs-dots i.spend { animation: none; opacity: .5; } }
 /* build 196: the change chip over the team rating as it ticks */
 .mo-chip { position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%); padding: 2px 7px; border-radius: 6px; border: 1px solid var(--se-acc); background: rgba(255,255,255,.06); color: var(--se-text); font: 900 italic 15px/1.1 var(--font); white-space: nowrap; pointer-events: none; z-index: 4; }
+.mo-glow { position: absolute; inset: 0; border-radius: inherit; box-shadow: 0 0 16px 1px var(--g); opacity: 0; pointer-events: none; }

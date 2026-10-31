@@ -525,7 +525,9 @@
         MO.odometer(ratingEl, v, { from: was, dur: 800 });
         const box = ratingEl.closest('.se-rating'); if (!box) return;
         const acc = getComputedStyle(box).getPropertyValue('--se-acc').trim() || '#12F06C';
-        MO.anim(box, [{ boxShadow: `0 0 0 0 ${acc}` }, { boxShadow: `0 0 16px 1px ${acc}`, offset: 0.5 }, { boxShadow: `0 0 0 0 ${acc}` }], { duration: 800, easing: 'ease-out' });
+        const glow = document.createElement('i'); glow.className = 'mo-glow'; glow.style.setProperty('--g', acc); box.appendChild(glow);
+        const ga = MO.anim(glow, [{ opacity: 0 }, { opacity: 1, offset: 0.5 }, { opacity: 0 }], { duration: 800, easing: 'ease-out' });
+        if (ga) ga.finished.catch(() => {}).then(() => glow.remove()); else glow.remove();
         const d = v - was, chip = document.createElement('span');
         chip.className = 'mo-chip'; chip.textContent = (d > 0 ? '+' : '') + d; box.appendChild(chip);
         chip.animate([{ transform: 'translate(-50%, 10px) scale(.6)', opacity: 0 }, { transform: 'translate(-50%, 0) scale(1)', opacity: 1 }], { duration: 320, easing: 'cubic-bezier(.34,1.56,.64,1)', fill: 'backwards' });
@@ -540,7 +542,7 @@
         if (ci < 0) return;
         const cur = segs[ci], prev = ci > 0 && segs[ci - 1].classList.contains('is-done') ? segs[ci - 1] : null;
         const acc = getComputedStyle(cur).getPropertyValue('--tr-acc').trim() || '#12F06C';
-        if (prev) MO.anim(prev, [{ background: acc, boxShadow: `0 0 10px ${acc}` }, { boxShadow: '0 0 0 transparent' }], { duration: 350, easing: 'ease-out' });
+        if (prev) { const was = document.createElement('i'); was.className = 'tr-segwas'; prev.appendChild(was); const wa = MO.anim(was, [{ opacity: 1 }, { opacity: 0 }], { duration: 350, easing: 'ease-out' }); if (wa) wa.finished.catch(() => {}).then(() => was.remove()); else was.remove(); }
         cur.classList.add('tr-fill');
         const fill = document.createElement('i'); fill.className = 'tr-segfill'; cur.appendChild(fill);
         MO.anim(fill, [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 450, delay: 450, easing: 'ease-in-out', fill: 'backwards' });

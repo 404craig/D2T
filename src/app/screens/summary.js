@@ -54,7 +54,8 @@
       later(() => { end(); tiles.forEach((b, k) => MO.odometer(b, b.dataset.v, { delay: k * 140, dur: 700 })); }, 320);
     };
     const tick = () => {
-      if (ended || !pn.isConnected) return;
+      if (ended) return;
+      if (!pn.isConnected) { end(); return; }
       if (i < steps.length) {
         let v; do { v = 1 + Math.floor(Math.random() * 20); } while (v === F.finish);
         pn.textContent = v; pn.style.filter = i >= steps.length - 3 ? '' : 'blur(1.4px)';

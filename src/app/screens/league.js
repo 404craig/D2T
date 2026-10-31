@@ -69,7 +69,7 @@
       </div>`);
       root.appendChild(body);
       // the record's shields roll in as the page opens, then a glint runs across each in turn (build 196; as on home)
-      if (D2T.mo) body.querySelectorAll('.fr-record .fr-frame').forEach((f, i) => { const b = f.querySelector('b'); if (!b) return; D2T.mo.odometer(b, b.textContent, { delay: 300 + i * 120, dur: 950 }); D2T.mo.glint(f, { delay: 1500 + i * 90, dur: 520 }); });
+      if (D2T.mo) body.querySelectorAll('.fr-record .fr-frame').forEach((f, i) => { const b = f.querySelector('b'); if (!b) return; D2T.mo.odometer(b, b.textContent, { delay: 300 + i * 120, dur: 950 }); });
     }
   });
 })();

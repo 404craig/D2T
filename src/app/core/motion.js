@@ -21,37 +21,31 @@
 
   // the odometer: each step slides up out of a clipped box and the next slides up from below. from: the start (0, or
   // 20 for a finish), dur, delay; the steps follow an ease-out cubic, at most 14 of them, so a big number still rolls.
+  // Built once as a column of the values in one clipped box and moved by one transform animation (Fable's review, 31 Oct,
+  // build 198: a span per step laid the page out every frame); finish() jumps it to the end.
   function odometer(el, to, o = {}) {
     if (!el) return null;
     const p = parse(to);
     if (!p || still()) { el.textContent = String(to); return null; }
     const ord = ORD.test(p.suf);
-    const fmt = (n) => (ord ? D2T.ordinal(n) : p.sign + n + p.suf);
+    const fmt = (n) => (n === 0 && !ord ? '0' + p.suf : ord ? D2T.ordinal(n) : p.sign + n + p.suf);
     const from = o.from != null ? o.from : ord ? Math.max(p.n, 20) : 0;
     if (from === p.n) { el.textContent = String(to); return null; }
     const dur = o.dur || 950, delay = o.delay || 0;
-    const span = Math.abs(p.n - from), N = Math.min(span, 14);
-    const box = document.createElement('span'); box.className = 'mo-odo';
-    const cur = document.createElement('span'); cur.className = 'mo-v'; cur.textContent = fmt(from);
-    box.appendChild(cur); el.textContent = ''; el.appendChild(box);
-    let shown = cur; const timers = [];
+    const N = Math.min(Math.abs(p.n - from), 14), vals = [];
+    for (let k = 0; k <= N; k++) vals.push(k === N ? String(to) : fmt(Math.round(from + (p.n - from) * (k / N))));
+    const cs = getComputedStyle(el), lh = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.2;
+    // its own element names, so no screen's span rules (home's shield label, for one) reach inside it
+    el.innerHTML = `<d2t-odo class="mo-odo" style="height:${lh}px"><d2t-col class="mo-col">${vals.map((v) => `<d2t-v style="height:${lh}px;line-height:${lh}px">${v}</d2t-v>`).join('')}</d2t-col></d2t-odo>`;
+    const col = el.querySelector('.mo-col');
+    // a keyframe for each value at its ease-out time (the time at which an ease-out cubic reaches it)
+    const kf = vals.map((_, k) => ({ offset: 1 - Math.cbrt(1 - k / N), transform: `translateY(${(-k * lh).toFixed(2)}px)`, easing: 'ease-out' }));
+    const a = col.animate(kf, { duration: dur, delay, fill: 'both' });
+    let done = false;
     const m = track({
-      finish() { timers.forEach(clearTimeout); untrack(m); if (el.isConnected || el.firstChild === box) el.textContent = String(to); if (o.done) o.done(); },
+      finish() { if (done) return; done = true; untrack(m); try { a.cancel(); } catch (e) { /* gone */ } el.textContent = String(to); if (o.done) o.done(); },
     });
-    for (let k = 1; k <= N; k++) {
-      const f = k / N, at = delay + dur * (1 - Math.cbrt(1 - f)), val = Math.round(from + (p.n - from) * f);
-      const gap = k === 1 ? 140 : dur * (Math.cbrt(1 - (k - 1) / N) - Math.cbrt(1 - f));
-      timers.push(setTimeout(() => {
-        if (!box.isConnected) { m.finish(); return; }
-        const nx = document.createElement('span'); nx.className = 'mo-v mo-in'; nx.textContent = k === N ? String(to) : fmt(val);
-        const t = Math.max(60, Math.min(160, gap));
-        const old = shown; box.appendChild(nx); shown = nx;
-        old.classList.add('mo-out');
-        old.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-100%)' }], { duration: t, easing: 'ease-out' }).finished.catch(() => {}).then(() => old.remove());
-        nx.animate([{ transform: 'translateY(100%)' }, { transform: 'translateY(0)' }], { duration: t, easing: 'ease-out' });
-        if (k === N) timers.push(setTimeout(() => m.finish(), t + 20));
-      }, at));
-    }
+    a.finished.catch(() => {}).then(() => m.finish());
     return m;
   }
 
@@ -60,7 +54,7 @@
     if (!el || still()) return null;
     const g = document.createElement('i'); g.className = 'mo-glint'; g.setAttribute('aria-hidden', 'true');
     const timer = setTimeout(() => {
-      if (!el.isConnected) return;
+      if (!el.isConnected) { untrack(m); return; }
       el.appendChild(g);
       g.animate([{ transform: 'translateX(-120%) rotate(18deg)' }, { transform: 'translateX(120%) rotate(18deg)' }], { duration: o.dur || 500, easing: 'ease-in-out' })
         .finished.catch(() => {}).then(() => m.finish());
@@ -88,7 +82,7 @@
   // what an odometer shows before it rolls: 0 (keeping the sign and suffix), a finish from 20th; anything else as it is
   function startText(v) {
     const p = parse(v); if (!p) return String(v);
-    return ORD.test(p.suf) ? D2T.ordinal(Math.max(p.n, 20)) : p.sign + '0' + p.suf;
+    return ORD.test(p.suf) ? D2T.ordinal(Math.max(p.n, 20)) : '0' + p.suf;   // a zero start has no sign (no "+0", "-0")
   }
   D2T.mo = { startText, still, track, untrack, finishAll, parse, odometer, glint, anim, later, live: () => live.size };
 })();

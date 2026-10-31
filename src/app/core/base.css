@@ -194,8 +194,8 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
   .game-bar .bar-main, .sp-main { font-size: 17px; padding: 0 12px; }
 }
 /* small motions (build 196; core/motion.js): the odometer's clipped box and the glint */
-.mo-odo { position: relative; display: inline-block; overflow: hidden; vertical-align: bottom; line-height: inherit; }
-.mo-odo .mo-v { display: inline-block; }
-.mo-odo .mo-v.mo-out { position: absolute; left: 0; top: 0; }
+.mo-odo { display: inline-block; overflow: hidden; vertical-align: top; }
+.mo-col { display: flex; flex-direction: column; align-items: center; will-change: transform; }
+.mo-col > d2t-v { display: block; white-space: nowrap; }
 .mo-glint { position: absolute; top: -40%; bottom: -40%; left: 0; width: 60%; pointer-events: none; z-index: 3; mix-blend-mode: overlay;
   background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.9) 50%, rgba(255,255,255,0) 100%); }
