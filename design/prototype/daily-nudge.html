@@ -1,0 +1,55 @@
+<title>Daily Nudge</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;0,600;0,800;1,900&display=swap">
+<style>
+/* Layout: rows of real phone screenshots, a short why above each, notes at the foot */
+:root{--bg:#000;--fg:#fff;--soft:#BDBDC6;--muted:#8E8E99;--line:#26262C;--g:#12F06C;--phone:#151518;--font:'Exo 2',system-ui,sans-serif;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font)}
+.wrap{max-width:1560px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10px;text-wrap:balance}
+.lead{color:var(--soft);font-size:16px;line-height:1.5;max-width:880px;margin:0 0 22px}.lead b{color:var(--fg)}
+.sec{font:900 italic 24px var(--font);text-transform:uppercase;margin:34px 0 6px}
+.sec span,.col h2 span{color:var(--g)}
+.cols{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
+.col{flex:0 0 280px;max-width:100%;min-width:0}
+.col h2{font:900 italic 19px var(--font);text-transform:uppercase;margin:0 0 4px}
+.why{color:var(--soft);font-size:14px;line-height:1.45;margin:0 0 12px;min-height:84px}.why b{color:var(--fg)}
+.phone{border-radius:34px;padding:8px;background:var(--phone);box-shadow:0 0 0 1px #2A2A30}
+.phone img{display:block;width:100%;border-radius:27px}
+.notes{max-width:880px;margin-top:38px;color:#CFCFD6;font-size:15px;line-height:1.5}
+.notes h2{font:900 italic 22px var(--font);text-transform:uppercase;color:var(--fg);margin:0 0 8px}.notes li{margin:0 0 8px}.notes b{color:var(--fg)}
+</style>
+<div class="wrap">
+<h1>Nudging people to the Daily</h1>
+<p class="lead">Screenshots of the <b>live home (build 181)</b> with each idea placed into the real page. Today's Daily is <b>Bolton 1995/96</b> (really 20th, 29 pts). Every idea does the same thing when tapped: the wheel turns back to the Daily, so you see its card and its own Play button. Nothing starts without a second tap. Each one only shows until you've played today's Daily.</p>
+
+<h2 class="sec">On Classic</h2>
+<div class="cols" id="classic"></div>
+
+<h2 class="sec">On every game <span>(the chip)</span></h2>
+<p class="lead">A small chip under the logo with today's crest, shown on every game except the Daily itself. It sits in empty space under the logo, so <b>nothing moves</b> on any page, including Tenaball's board. The red dot means not played yet.</p>
+<div class="cols" id="every"></div>
+
+<h2 class="sec">The chip through the day</h2>
+<div class="cols" id="states"></div>
+
+<div class="notes"><h2>Worth weighing</h2><ul>
+<li><b>Classic stays the hero.</b> None of these change Classic's art, title, shields or Spin button. A and B are on the Classic page only. C goes on every game.</li>
+<li><b>A is the clearest</b> but it's the biggest, and it nudges Classic's art up a little. It only suits pages with room under the shields, so it couldn't go on Tenaball.</li>
+<li><b>B is the subtlest.</b> The Daily is the game to the left of Classic anyway, so its arrow becomes today's crest. It could pulse gently every few seconds.</li>
+<li><b>C works anywhere</b> and could also do A's job on Classic. My pick is <b>C on every game, plus A on Classic only</b> while the Daily hasn't been played. Once it's done, A goes and the chip shows "Done".</li>
+<li><b>Once it's done</b> the chip can either show "Done" with a tick (as below) or disappear until tomorrow. Disappearing is cleaner. "Done" tells people there's one a day.</li>
+</ul></div>
+</div>
+<script>
+const C=[['c0','Now','Today\'s Classic page. The Daily is one swipe left, but nothing says so.'],
+ ['a1','A · <span>Daily row</span>','A slim row under the shields: today\'s crest, <b>"Today\'s Daily Challenge, Bolton 1995/96"</b>, Play.'],
+ ['a2','A · <span>in progress</span>','If your Daily is part-played, the row turns green: <b>"Daily in progress"</b>, Carry on.'],
+ ['b1','B · <span>Crest arrow</span>','The left arrow becomes <b>today\'s crest</b> in a glowing white disc, tagged <b>Daily</b>. One tap turns back to it.'],
+ ['c1','C · <span>Chip</span>','The chip under the logo (below). On Classic it\'s the same as on every other game.']];
+const E=[['e_clubx','Club X',''],['e_goal','Goal Rush',''],['e_ub','Unbeaten Run',''],['e_ten','Tenaball','']];
+const S=[['c1','Not played','Crest, "Daily", the club and season, red dot.'],['s_ip','In progress','Green rim and dot: <b>"Daily, Carry on"</b>.'],['s_done','Done','Dimmed with a green tick: <b>"Daily, Done"</b>. Or it goes until midnight.']];
+const put=(host,short)=>([id,name,why])=>{const el=document.createElement('div');el.className='col';
+ el.innerHTML=`<h2>${name}</h2>${short?'':`<p class="why">${why}</p>`}<div class="phone"><img alt="${name.replace(/<[^>]+>/g,'')}" src="daily-nudge/${id}.jpg"></div>`;host.appendChild(el);};
+C.forEach(put(document.getElementById('classic')));E.forEach(put(document.getElementById('every'),true));S.forEach(put(document.getElementById('states')));
+</script>
