@@ -16,8 +16,8 @@
       return { ok: r.ok, status: r.status, data };
     } catch (e) { return { ok: false, status: 0, data: { error: "Can't reach the server. Check your connection and try again." } }; }
   }
-  const setUser = (user, token) => { const a = acct(); a.user = user; if (token) a.token = token; a.signedIn = true; D2T.save(); };
-  const clearUser = () => { D2T.state.account = {}; D2T.save(); };
+  const setUser = (user, token) => { const a = acct(); a.user = user; if (token) a.token = token; a.signedIn = true; D2T.save(); if (token && D2T.lb) D2T.lb.onSignIn(); };   // a sign-in: the phone's records go on to the leaderboards
+  const clearUser = () => { D2T.state.account = {}; D2T.save(); if (D2T.lb) D2T.lb.onSignOut(); };
   D2T.accountName = () => (acct().user ? acct().user.name : '');
 
   D2T.screen('account', {
@@ -78,7 +78,7 @@
           body.innerHTML = `<h1 class="fr-title">Account</h1>
             <div class="fr-who"><div class="fr-avatar" aria-hidden="true">${D2T.esc((u.name || '?').charAt(0).toUpperCase())}</div>
               <div style="min-width:0"><div class="fr-who-name">${D2T.esc(u.name)}</div><div class="fr-who-mail">${D2T.esc(u.email)}</div></div></div>
-            <p class="fr-small">Signed in with your Tenaball account. Friends leagues for DROP2TOP are coming next; your runs are saved on this phone for now.</p>
+            <p class="fr-small">Signed in with your Tenaball account. Your finished games go on the leaderboards under this name; your runs are saved on this phone.</p>
             <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-act="out">Sign out</button></div>
             ${settings()}`;
           body.querySelector('[data-act="out"]').onclick = async () => { await api('/signout'); clearUser(); draw(); };
