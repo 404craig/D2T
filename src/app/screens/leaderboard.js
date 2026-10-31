@@ -88,7 +88,9 @@
       // ---------- the table ----------
       const cell = (v, k, sort, me) => `<span class="c-v${k === sort ? ' is-sort' : ''}">${esc(v)}</span>`;
       const rowHTML = (r, sort) => r.gap ? '<div class="lb-gap" aria-hidden="true">···</div>'
-        : `<div class="lb-row${r.me ? ' me' : ''}" role="listitem" aria-label="${r.pos}. ${esc(r.name)}"><span class="c-pos" style="${!r.me && MEDAL[r.pos] ? `color:${MEDAL[r.pos]}` : ''}">${esc(r.pos)}</span><span class="c-name">${esc(r.me ? 'You' : r.name)}</span>${(r.v || []).map((v, k) => cell(v, k, sort, r.me)).join('')}</div>`;
+        : `<div class="lb-row${r.me ? ' me' : ''}" role="listitem" aria-label="${r.pos}. ${esc(r.name)}"><span class="c-pos" style="${!r.me && MEDAL[r.pos] ? `color:${MEDAL[r.pos]}` : ''}">${esc(r.pos)}</span><span class="c-name">${esc(r.me ? 'You' : r.name)}</span>${lastSort(r.v || [], sort).map((v, k, a) => cell(v, sort >= 0 && k === a.length - 1 ? sort : -2, sort, r.me)).join('')}</div>`;
+      // the ranking column always sits on the right (Craig, 31 Oct, build 191): the others keep their order before it
+      function lastSort(a, sort) { return sort >= 0 && sort < a.length ? a.filter((_, i) => i !== sort).concat([a[sort]]) : a; }
       const empty = (head, line) => `<div class="lb-empty">${icon('star', '#4a4a52', 40)}<b>${esc(head)}</b><span>${esc(line)}</span></div>`;
       function trophyHTML(g, t) {
         const k = tab === 0 ? 'crown' : 'star', title = t ? t.title : (tab === 0 ? TITLES[g.id][0] : TITLES[g.id][1]);
@@ -99,7 +101,7 @@
         const g = GM[gi], d = data;
         troph.innerHTML = trophyHTML(g, d && d.trophy);
         const cols = (d && d.cols) || DEFAULT_COLS[g.id][tab], sort = d && d.sort != null ? d.sort : 1;
-        el.querySelectorAll('.lb-cols .c-v').forEach((c, i) => { c.textContent = cols[i] || ''; c.classList.toggle('is-sort', i === sort); });
+        const hc = lastSort(cols, sort); el.querySelectorAll('.lb-cols .c-v').forEach((c, i) => { c.textContent = hc[i] || ''; c.classList.toggle('is-sort', i === hc.length - 1 && sort >= 0); });
         $('.lb-count').textContent = d && d.count ? `${fmt(d.count)} PLAYER${d.count === 1 ? '' : 'S'}` : '';
         pin.innerHTML = '';
         if (!d) { list.innerHTML = '<div class="lb-note">Loading the table…</div>'; return; }
