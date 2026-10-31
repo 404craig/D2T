@@ -1,0 +1,49 @@
+<title>Motion Polish</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;0,600;0,800;1,900&display=swap">
+<style>
+/* Layout: one card per idea, a looping clip from the real game beside a short note on what moves and why */
+:root{--bg:#000;--fg:#fff;--soft:#BDBDC6;--muted:#8E8E99;--line:#26262C;--g:#12F06C;--phone:#151518;--font:'Exo 2',system-ui,sans-serif;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font)}
+.wrap{max-width:1180px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10px;text-wrap:balance}
+.lead{color:var(--soft);font-size:16px;line-height:1.5;max-width:820px;margin:0 0 26px}.lead b{color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:30px 26px;align-items:start}
+.idea{min-width:0;display:flex;flex-direction:column;gap:10px}
+.idea h2{font:900 italic 19px/1.15 var(--font);text-transform:uppercase;margin:0;text-wrap:balance}
+.idea h2 span{color:var(--g)}
+.where{font:800 11px var(--font);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.ph{border-radius:30px;padding:7px;background:var(--phone);box-shadow:0 0 0 1px #2A2A30}
+.ph video{display:block;width:100%;height:auto;border-radius:24px;background:#000}
+.ph.strip{border-radius:18px}.ph.strip video{border-radius:12px}
+.idea p{margin:0;color:var(--soft);font-size:14.5px;line-height:1.5}.idea p b{color:var(--fg)}
+.why{border-left:2px solid var(--line);padding-left:10px}
+.notes{max-width:820px;margin-top:40px;color:#CFCFD6;font-size:15px;line-height:1.5}
+.notes h2{font:900 italic 22px var(--font);text-transform:uppercase;color:var(--fg);margin:0 0 8px}.notes li{margin:0 0 8px}.notes b{color:var(--fg)}
+</style>
+<div class="wrap">
+<h1>Small moves, real game</h1>
+<p class="lead">Six small animations for places that are still static, each <b>recorded in the real game (build 194)</b> with the motion added. They reuse what the game already does: <b>rolling numbers</b> like Goal Rush, the logo's <b>glint</b>, and the <b>drop-in with a bounce</b> the cards use. Each plays once when the thing first appears, then stays still. The clips loop so you can watch them.</p>
+<div class="grid" id="grid"></div>
+<div class="notes"><h2>Rules they all keep</h2><ul>
+<li><b>Once, then still.</b> Each plays when the element first appears and never loops in the game. The only ongoing motion is the progress bar's slow glow.</li>
+<li><b>Short.</b> Every one is over within about 1.5 seconds and never holds up a tap. Tapping during one jumps it to the end.</li>
+<li><b>Club colour inside a run</b>, silver, green or the game's colour outside it. No new colours.</li>
+<li><b>Reduced motion</b>: the numbers and tags just appear, with no roll, bounce or glint.</li>
+<li>The record numbers on home and the rating rise are examples. The Leicester season is a real run of the game.</li>
+</ul></div>
+</div>
+<script>
+const I=[
+ ['shields','Home','Your record <span>rolls in</span>','When a game comes to rest on the wheel, its four shield numbers roll up from 0 like the Goal Rush reel, left to right, then a glint runs across the shields in turn. The same would play on My Stats.','The shields are the only part of the home that never moves. This makes your record feel earned each time you land on it.'],
+ ['finish','Season over','The finish <span>climbs</span>','Your finish starts on history\'s place (Leicester 2022/23, 18th for real) and rolls up one place at a time, quick at first and slowing as it lands on 10th. Then "Top half" stamps in with a glint and the three tiles count up.','The biggest moment in a run is one still number. This shows the climb in the game\'s name.'],
+ ['targets','Season over','Targets <span>fill in</span>','Lower down, the targets you hit fill with the club colour one after another, each with a glint. The ones you missed stay dashed.','It turns a row of buttons into a little reward as you scroll to it.'],
+ ['rating','Transfer','Team rating <span>ticks up</span>','After a signing, the team rating rolls to its new number and a small "+2" pops up beside it, then fades. The squad screen already counts its rating up; the transfer screen just swaps the number.','You see straight away what the signing did, which helps you choose the next one.'],
+ ['bar','Each roll','The season bar <span>steps on</span>','When you reach a new roll, the last segment settles to done, the next one fills with a bright sweep and then glows slowly, and "Transfer 6 of 18" rolls to 7.','It shows you are moving through the season, not on the same screen again.'],
+ ['tag','Any run screen','The mode tag <span>drops in</span>','The slanted mode tag in the top bar drops in with a small bounce and one glint when you first open a run screen, like the cards landing on a roll.','A small hello that says which game you are in, then it sits still.']
+];
+const g=document.getElementById('grid');
+I.forEach(([id,where,title,what,why])=>{const strip=id==='bar'||id==='tag';const el=document.createElement('section');el.className='idea';
+ el.innerHTML=`<div class="where">${where}</div><h2>${title}</h2><div class="ph${strip?' strip':''}"><video src="anim-polish/${id}.mp4" poster="anim-polish/${id}.png" muted loop playsinline autoplay preload="auto" aria-label="${title.replace(/<[^>]+>/g,'')}"></video></div><p>${what}</p><p class="why">${why}</p>`;g.appendChild(el);});
+if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.querySelectorAll('video').forEach(v=>{v.removeAttribute('autoplay');v.controls=true;v.pause();});
+</script>
