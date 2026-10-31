@@ -59,8 +59,19 @@
   const shieldsHTML = (list, c) => {
     const m = D2T.metal(c), wh = dark(c);
     const two = (l) => (l.length > 7 && l.includes(' ') ? esc(l).replace(/ (?=[^ ]*$)/, '<br>') : esc(l));
-    return list.map(([n, l]) => `<div class="fr-frame fr-al stg-sh${wh ? ' lt' : ''}" style="--m1:${m[0]};--m2:${m[1]};--m3:${m[2]};--m4:${m[3]};--r1:${D2T.mix(c, '#FFFFFF', 0.7)};--r2:${D2T.mix(c, '#000000', 0.55)}"><i class="fr-al-rim"></i><i class="fr-al-face"></i><b>${esc(n)}</b><span>${two(l)}</span></div>`).join('');
+    // the league table shield (Craig, 31 Oct; HomeKit): an outline in the game's colour round a dark face, tappable
+    return list.map(([n, l, lb]) => lb ? `<div class="fr-frame fr-al stg-sh stg-lb${lb.state === 'pos' ? '' : ' is-off'}" role="button" tabindex="0" data-lb="1" style="--r1:${c};--r2:${D2T.mix(c, '#000000', 0.3)}" aria-label="${esc(lb.state === 'pos' ? `League table: you are ${n}. Open the leaderboard` : lb.state === 'join' ? 'League table: play to join. Open the leaderboard' : 'League table: sign in to join')}"><i class="fr-al-rim"></i><i class="fr-al-face"></i><b>${esc(n)}</b><span>${two(l)}</span></div>`
+      : `<div class="fr-frame fr-al stg-sh${wh ? ' lt' : ''}" style="--m1:${m[0]};--m2:${m[1]};--m3:${m[2]};--m4:${m[3]};--r1:${D2T.mix(c, '#FFFFFF', 0.7)};--r2:${D2T.mix(c, '#000000', 0.55)}"><i class="fr-al-rim"></i><i class="fr-al-face"></i><b>${esc(n)}</b><span>${two(l)}</span></div>`).join('');
   };
+  // what the slide shows (Craig, 31 Oct): once the server answers, three record shields and the league table shield in
+  // their place (each game drops one: the Daily Played, Classic Top half, Club X Top 3, Goal Rush Last game, Unbeaten
+  // Topics); with no server, or the endpoints not there yet, the four record shields as before. The share card keeps all four.
+  const DROP = { daily: 0, classic: 1, clubx: 2, goal: 3, ub: 2 };
+  function homeShields(g) {
+    const lb = D2T.lb && D2T.lb.shield(g.id);
+    if (!lb || lb.state === 'off' || !(g.id in DROP)) return g.st;
+    return g.st.filter((_, i) => i !== DROP[g.id]).concat([[lb.n, lb.l, lb]]);
+  }
 
   // ---------- the games ----------
   function games() {
@@ -131,7 +142,7 @@
         <div class="stg-wheel" aria-roledescription="carousel">${GM.map((g) => `<section class="stg-sl" data-id="${g.id}" aria-label="${esc(g.name)}" style="--k:${g.k};--kt:${g.kt || g.k}">
           <div class="stg-art"><div class="stg-artin">${artHTML(g)}</div></div>
           <div class="stg-nm"><div class="stg-gn">${esc(g.name)}</div><div class="stg-hl">${g.id === 'goal' ? g.hl : esc(g.hl)}</div><p class="stg-sb">${esc(g.sb)}</p></div>
-          ${g.board ? boardHTML() : `<div class="stg-st">${shieldsHTML(g.st, g.k)}</div>`}</section>`).join('')}</div>
+          ${g.board ? boardHTML() : `<div class="stg-st">${shieldsHTML(homeShields(g), g.k)}</div>`}</section>`).join('')}</div>
         <button class="stg-sw l" aria-label="Previous game">${CHL}</button><button class="stg-sw r" aria-label="Next game">${CHR}</button>
         <div class="stg-dots" aria-hidden="true">${GM.map((g) => `<i></i>`).join('')}</div>
         <div class="stg-bar"></div>
@@ -184,7 +195,7 @@
       const turn = (dlt) => go(Math.round(target) + dlt);
       wheel.addEventListener('pointerdown', (e) => {
         if (e.button > 0) return;
-        cancelAnimationFrame(raf); drag = { x: e.clientX, y: e.clientY, p: pos, t: performance.now(), lx: e.clientX, v: 0, moved: false };
+        cancelAnimationFrame(raf); drag = { x: e.clientX, y: e.clientY, p: pos, t: performance.now(), lx: e.clientX, v: 0, moved: false, lb: e.target.closest('.stg-lb') };
         wheel.setPointerCapture(e.pointerId);
       });
       wheel.addEventListener('pointermove', (e) => {
@@ -197,14 +208,26 @@
       });
       const up = () => {
         if (!drag) return; wheel.classList.remove('drag');
-        if (!drag.moved) { drag = null; go(Math.round(pos)); return; }
+        if (!drag.moved) { const lb = drag.lb; drag = null; go(Math.round(pos)); if (lb && lb.closest('.stg-sl') === SL[shown]) openBoard(GM[shown]); return; }
         vel = drag.v * 0.6; const flick = Math.abs(drag.v) > 1.2 ? Math.sign(drag.v) : 0;
         let t = Math.round(pos); if (flick && t === Math.round(drag.p)) t += flick;
         drag = null; go(t);
       };
       wheel.addEventListener('pointerup', up); wheel.addEventListener('pointercancel', up);
       $('.stg-sw.l').onclick = () => turn(-1); $('.stg-sw.r').onclick = () => turn(1);
-      const onKey = (e) => { if (document.querySelector('.sheet')) return; if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') dlyBack(); if (e.key === 'ArrowRight') turn(1); else if (e.key === 'ArrowLeft') turn(-1); };
+      // the league table shield: the leaderboard on that game, or the account page to sign in first
+      function openBoard(g) {
+        window.D2TSound && window.D2TSound.play('tapSmall');
+        D2T.state.stageAt = g.id; D2T.save();
+        if (!D2T.lb || !D2T.lb.signedIn()) { D2T.go('account'); return; }
+        D2T.go('leaderboard', { game: g.id });
+      }
+      // the positions come from the server once it answers: the shields are drawn again if that changes what they show
+      const shieldsNow = () => GM.map((g) => (g.board ? '' : homeShields(g).map((x) => x[0] + '|' + x[1]).join(','))).join(';');
+      let shieldsWere = shieldsNow();
+      const redrawShields = () => { if (!root.isConnected || shieldsNow() === shieldsWere) return; shieldsWere = shieldsNow(); GM.forEach((g, i) => { const st = SL[i].querySelector('.stg-st'); if (st) st.innerHTML = shieldsHTML(homeShields(g), g.k); }); };
+      if (D2T.lb) D2T.lb.positions().then(redrawShields).catch(() => {});
+      const onKey = (e) => { if (document.querySelector('.sheet')) return; if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('.stg-lb')) { e.preventDefault(); openBoard(GM[shown]); return; } if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') dlyBack(); if (e.key === 'ArrowRight') turn(1); else if (e.key === 'ArrowLeft') turn(-1); };
       document.addEventListener('keydown', onKey); cleanups.push(() => document.removeEventListener('keydown', onKey));
 
       // ---------- the game on show: dots, colours, the button, its art's motion ----------
