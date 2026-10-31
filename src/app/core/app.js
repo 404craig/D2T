@@ -91,7 +91,7 @@
   }
 
   const ICON = {
-    account: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.6-3.6 4.6-5.2 8-5.2s6.4 1.6 8 5.2"/></svg>',
+    account: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0z"/></svg>',   // home's filled figure (build 192)
     home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></svg>',
     back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
     // the respin arrow (the bottom bar's middle button, design/prototype bottom-bar.html, Craig 13 Oct)
@@ -121,6 +121,14 @@
     el.querySelector('.logo-home').onclick = () => D2T.go('home');
     const acct = el.querySelector('.acct-btn'); if (acct) acct.onclick = () => D2T.go('account');
     const back = el.querySelector('.back-btn'); if (back) back.onclick = D2T.back;
+    // the mode tag drops in with a bounce and one glint on the first run screen after home (Craig, 31 Oct, build 196)
+    const mt = el.querySelector('.mode-tag');
+    if (mt && (fromName === 'home' || fromName === 'intro') && D2T.mo && !D2T.mo.still()) {
+      requestAnimationFrame(() => {
+        D2T.mo.anim(mt, [{ transform: 'translateY(-44px) skewX(-10deg)', opacity: 0 }, { transform: 'translateY(0) skewX(-10deg)', opacity: 1 }], { duration: 420, delay: 250, easing: 'cubic-bezier(.34,1.56,.64,1)', fill: 'backwards' });
+        D2T.mo.glint(mt, { delay: 750, dur: 480 });
+      });
+    }
     return el;
   };
   // First-time tips (12 Oct): a handwritten note with a curved arrow (the respin tip's style), each shown once ever
@@ -237,7 +245,7 @@
 
   // ---------- router ----------
   D2T.params = {};
-  let current = null, currentName = null, prevName = null, introPlayed = false;
+  let current = null, currentName = null, prevName = null, fromName = null, introPlayed = false;
   D2T.go = (name, params = {}) => {
     D2T.params = params;
     if (location.hash.slice(1) === name) render(name); else location.hash = name;
@@ -257,11 +265,13 @@
     const app = document.getElementById('app');
     if (tipEl) { tipEl.remove(); tipEl = null; }
     if (current && current.unmount) { try { current.unmount(); } catch (e) { console.error(e); } }
+    if (D2T.mo) D2T.mo.finishAll();   // nothing of the old screen's motions stays live or keeps a timer (build 198)
     app.querySelectorAll('.sheet, .sheet-scrim, .card-overlay').forEach((n) => n.remove());
     const def = D2T.screens[name];
     const root = D2T.h(`<main class="screen theme-${def.theme || 'black'}" data-screen="${name}"></main>`);
     app.querySelectorAll('.screen').forEach((n) => n.remove());
     app.appendChild(root);
+    fromName = currentName;   // the screen just before this render, the same one on a same-screen go (Restart; build 198)
     if (currentName !== name) prevName = currentName;
     current = def; currentName = name;
     const ch = def.chrome || THEME_CHROME[def.theme || 'black'] || THEME_CHROME.black;

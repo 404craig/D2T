@@ -51,7 +51,7 @@
 .sp-ph.is-tick .d2c-scr { opacity: .55; }
 
 /* ---------- action bar ---------- */
-.sp-bar { display: flex; align-items: center; gap: 10px; padding: 10px 16px calc(env(safe-area-inset-bottom, 0px) + 24px); position: relative; z-index: 5; }
+.sp-bar { display: flex; align-items: center; gap: 10px; padding: 10px 18px calc(env(safe-area-inset-bottom, 0px) + 18px); position: relative; z-index: 5; }
 .sp-main { flex: 1 1 auto; min-height: 58px; border-radius: 29px; border: 0; background: var(--sp-btn, var(--green-1)); color: var(--sp-btn-ink, #000); font-weight: 900; font-style: italic; font-size: 21px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 18px; letter-spacing: .01em; text-transform: uppercase; transition: background .25s, color .25s, transform .15s var(--ease-snap), opacity .2s; box-shadow: 0 6px 16px -6px var(--sp-btn, var(--green-1)); }
 .sp-main:active { transform: scale(.97); }
 .sp-main[disabled] { opacity: .35; box-shadow: none; }
@@ -268,6 +268,15 @@
 .tr-seg.is-win.is-todo { background: #3A3A44; }
 .tr-seg.is-done { background: color-mix(in srgb, var(--tr-acc) 45%, transparent); }
 .tr-seg.is-current { background: var(--tr-acc); box-shadow: 0 0 10px var(--tr-acc); }
+/* build 196: the current segment fills left to right with a white leading edge, then glows slowly */
+/* the glow is a layer whose opacity breathes, not an animated box-shadow (Fable's review, build 198) */
+.tr-seg.tr-fill { position: relative; background: #26262C; box-shadow: none; }
+.tr-seg.tr-fill::after { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: 0 0 16px var(--tr-acc); opacity: .4; pointer-events: none; animation: trGlow 1.3s ease-in-out .9s infinite; }
+.tr-segfill { position: absolute; inset: 0; border-radius: inherit; transform-origin: left center; background: linear-gradient(90deg, var(--tr-acc) 0%, var(--tr-acc) 82%, #fff 100%); }
+.tr-segwas { position: absolute; inset: 0; border-radius: inherit; background: var(--tr-acc); box-shadow: 0 0 10px var(--tr-acc); pointer-events: none; }
+.tr-seg { position: relative; }
+@keyframes trGlow { 0%, 100% { opacity: .4; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .tr-seg.tr-fill::after { animation: none; } }
 .tr-wins { margin-top: 4px; }
 .tr-wins span { font-weight: 800; font-size: 8.5px; letter-spacing: .14em; text-transform: uppercase; color: #8E8E99; text-align: center; white-space: nowrap; line-height: 1.1; }
 .tr-rollhead .sp-kicker b { font-size: 15px; font-weight: 900; color: var(--tr-acc); letter-spacing: .04em; }
@@ -299,6 +308,7 @@
   .sp-screen.is-placing .sp-slot.is-other .sp-gp { transform: translateX(-50%) scale(1.7361); }
   .sp-hint { font-size: 12px; min-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .sp-bar { padding-top: 8px; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); }
+  .sp-round { width: 50px; height: 50px; }   /* base.css's compact size, which this file's own rule overrode (build 193) */
 }
 @media (max-width: 374px) { .tr-head-t .tr-win { display: none; } }
 @media (max-height: 620px) {

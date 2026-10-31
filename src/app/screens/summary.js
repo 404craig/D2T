@@ -19,6 +19,102 @@
   };
   const headline = (F) => (F.stars.champions ? 'Champions' : F.finish <= 3 ? 'Top 3' : F.stars.tophalf ? 'Top half' : F.stars.survive ? 'Beat the drop' : 'Relegated');
 
+  // ---------- the season's motions (Craig, 31 Oct, build 196; design/prototype/anim-polish.html) ----------
+  // The finish lands like Goal Rush's fruit machine (rollNumber in goals.js: the same steps, a random place 1 to 20 each
+  // tick, never the final one, the blur on all but the last three, numberTick every other tick), then its suffix wipes
+  // in, the verdict tag stamps in with a glint and the three tiles count up. The targets fill one after another as they
+  // scroll into view, and both lines of the graph draw left to right together. A tap jumps each to its end.
+  function motion(body, F) {
+    const MO = D2T.mo, posEl = body.querySelector('.sm-pos'), headEl = body.querySelector('.sm-head');
+    const num = String(F.finish), ord = D2T.ordinal(F.finish);
+    posEl.innerHTML = `<span class="sm-pn">${num}</span><span class="sm-ps">${D2T.esc(ord.slice(num.length))}</span>`;
+    if (!MO || MO.still()) return;
+    const snd = (k) => window.D2TSound && window.D2TSound.play(k);
+    const pn = posEl.querySelector('.sm-pn'), ps = posEl.querySelector('.sm-ps');
+    const tiles = [...body.querySelectorAll('.sm-tile b')];
+    tiles.forEach((b) => { b.dataset.v = b.textContent; b.textContent = MO.startText(b.textContent); });
+    headEl.classList.add('sm-hold'); ps.style.clipPath = 'inset(0 100% 0 0)';
+    let ended = false, ticking = null;
+    const timers = [];
+    const later = (f, ms) => timers.push(setTimeout(f, ms));
+    const end = () => {
+      if (ended) return; ended = true;
+      timers.forEach(clearTimeout); MO.untrack(seq);
+      pn.textContent = num; pn.style.filter = ''; ps.style.clipPath = '';
+      headEl.classList.remove('sm-hold'); headEl.style.animation = 'none';
+      tiles.forEach((b) => { if (!b.querySelector('.mo-odo')) b.textContent = b.dataset.v; });
+    };
+    const seq = MO.track({ finish() { if (ended) return; end(); tiles.forEach((b) => { b.textContent = b.dataset.v; }); } });
+    const steps = [38, 38, 40, 42, 46, 50, 56, 64, 74, 88, 108, 136];
+    let i = 0;
+    const stamp = () => {
+      headEl.classList.remove('sm-hold'); headEl.style.animation = 'none';
+      headEl.animate([{ transform: 'scale(1.5) rotate(-4deg)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 260, easing: 'cubic-bezier(.34,1.56,.64,1)' });
+      MO.glint(headEl, { delay: 260, dur: 480 });
+      later(() => { end(); tiles.forEach((b, k) => MO.odometer(b, b.dataset.v, { delay: k * 140, dur: 700 })); }, 320);
+    };
+    const tick = () => {
+      if (ended) return;
+      if (!pn.isConnected) { end(); return; }
+      if (i < steps.length) {
+        let v; do { v = 1 + Math.floor(Math.random() * 20); } while (v === F.finish);
+        pn.textContent = v; pn.style.filter = i >= steps.length - 3 ? '' : 'blur(1.4px)';
+        pn.animate([{ transform: 'translateY(-14px)', opacity: 0.4 }, { transform: 'translateY(0)', opacity: 1 }], { duration: steps[i], easing: 'linear' });
+        if (i % 2 === 0) snd('numberTick');
+        later(tick, steps[i++]);
+        return;
+      }
+      pn.textContent = num; pn.style.filter = '';
+      ps.animate([{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 260, easing: 'ease-out' });
+      ps.style.clipPath = '';
+      later(stamp, 280);
+    };
+    pn.textContent = 1 + ((F.finish + 9) % 20);
+    later(tick, 450);
+
+    // the targets you hit fill one after another as the row scrolls into view; the missed ones stay dashed
+    const ach = body.querySelector('.sm-ach'), on = [...body.querySelectorAll('.sm-ach span.on')];
+    if (ach && on.length && window.IntersectionObserver) {
+      on.forEach((s) => s.classList.add('sm-wait'));
+      const io = new IntersectionObserver((es) => {
+        if (!es.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        const tt = [];
+        const done = () => { tt.forEach(clearTimeout); MO.untrack(fm); on.forEach((s) => { s.classList.remove('sm-wait'); s.querySelectorAll('.sm-achf').forEach((x) => x.remove()); }); };
+        const fm = MO.track({ finish: done });
+        on.forEach((s, k) => tt.push(setTimeout(() => {
+          if (!s.isConnected) return;
+          const ov = document.createElement('b'); ov.className = 'sm-achf'; ov.textContent = s.textContent; s.appendChild(ov);
+          ov.animate([{ clipPath: 'inset(0 100% 0 0 round 12px)' }, { clipPath: 'inset(0 0% 0 0 round 12px)' }], { duration: 380, easing: 'ease-in-out' })
+            .finished.catch(() => {}).then(() => { s.classList.remove('sm-wait'); ov.remove(); if (k === on.length - 1) MO.untrack(fm); });
+          MO.glint(s, { delay: 300, dur: 480 });
+        }, k * 420)));
+      }, { threshold: 0.6 });
+      io.observe(ach);
+    }
+
+    // both lines of the graph draw left to right together: a clip that widens over 1.6 s (the dashes stay dashes)
+    const rev = body.querySelector('.sm-rev'), panel = body.querySelector('.sm-ghost');
+    if (rev && panel && window.IntersectionObserver) {
+      const W = +rev.getAttribute('width'), t0 = performance.now();
+      rev.setAttribute('width', '0');
+      let raf = 0;
+      const full = () => { cancelAnimationFrame(raf); rev.setAttribute('width', String(W)); MO.untrack(gm); };
+      const gm = { finish: full };
+      const io = new IntersectionObserver((es) => {
+        if (!es.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        setTimeout(() => {
+          MO.track(gm);
+          const s0 = performance.now();
+          const step = (now) => { const p = Math.min(1, (now - s0) / 1600), e = 1 - Math.pow(1 - p, 3); rev.setAttribute('width', (W * e).toFixed(1)); if (p < 1 && rev.isConnected) raf = requestAnimationFrame(step); else full(); };
+          raf = requestAnimationFrame(step);
+        }, Math.max(0, 400 - (performance.now() - t0)));
+      }, { threshold: 0.3 });
+      io.observe(panel);
+    }
+  }
+
   // Your league position each gameweek (solid, club colour) against history's (dashed grey).
   function ghostSVG(mine, hist, n, rel) {
     const W = 340, H = 180, L = 28, R = 10, T = 12, B = 22, w = W - L - R, h = H - T - B, len = Math.max(hist.length, mine.length, 2);
@@ -27,8 +123,9 @@
     const grid = [1, Math.round(n / 2), n].map((p) => `<line x1="${L}" x2="${W - R}" y1="${y(p)}" y2="${y(p)}" stroke="#222226" stroke-dasharray="3 4"/><text x="${L - 6}" y="${y(p) + 4}" font-size="10" text-anchor="end" fill="#8E8E99">${p}</text>`).join('');
     return `<svg class="sm-ghost" viewBox="0 0 ${W} ${H}" role="img" aria-label="Your league position each week against history's">
       <rect x="${L}" y="${y(n - rel + 1) - 5}" width="${w}" height="${y(n) - y(n - rel + 1) + 10}" fill="rgba(255,40,80,0.10)"/>${grid}
-      <polyline points="${pts(hist)}" fill="none" stroke="#8E8E99" stroke-width="2" stroke-dasharray="5 4"/>
-      <polyline class="sm-line" points="${pts(mine)}" fill="none" stroke="var(--se-text)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      <defs><clipPath id="smReveal"><rect class="sm-rev" x="0" y="0" width="${W}" height="${H}"/></clipPath></defs>
+      <g clip-path="url(#smReveal)"><polyline points="${pts(hist)}" fill="none" stroke="#8E8E99" stroke-width="2" stroke-dasharray="5 4"/>
+      <polyline class="sm-line" points="${pts(mine)}" fill="none" stroke="var(--se-text)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></g>
       <text x="${L}" y="${H - 6}" font-size="10" fill="#8E8E99">GW1</text><text x="${W - R}" y="${H - 6}" font-size="10" text-anchor="end" fill="#8E8E99">GW${len}</text></svg>`;
   }
 
@@ -214,6 +311,7 @@
         </div>
       </div>`);
       root.appendChild(body);
+      motion(body, F);
 
       // the end sheet (Craig, 14 Oct; D2T.endSheet): no bottom bar here. Share, then Play again (the Daily: Go again; Club X:
       // Next season while the career is open, and New career), then Home. Dragged closed, a "Season over" peek bar

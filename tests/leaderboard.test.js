@@ -159,8 +159,8 @@ async function mock(page, sc, hits = []) {
     const where = `${w}x${h}`;
     check((await scr(page)) === "leaderboard", `${where}: the leaderboard did not open`);
     // nothing overlaps: each fixed piece ends before the next starts, the bar sits at the foot
-    const R = {}; for (const [k, sel] of [["head", ".lb-head"], ["game", ".lb-game"], ["tabs", ".lb-tabs"], ["trophy", ".lb-trophy"], ["cols", ".lb-cols"], ["list", ".lb-list"], ["bar", ".lb .actionbar"]]) R[k] = await rect(page, sel);
-    const order = ["head", "game", "tabs", "trophy", "cols", "list", "bar"];
+    const R = {}; for (const [k, sel] of [["top", ".lb-top"], ["head", ".lb-head"], ["game", ".lb-game"], ["tabs", ".lb-tabs"], ["trophy", ".lb-trophy"], ["cols", ".lb-cols"], ["list", ".lb-list"], ["bar", ".lb .actionbar"]]) R[k] = await rect(page, sel);
+    const order = ["top", "head", "game", "tabs", "trophy", "cols", "list", "bar"];
     for (let i = 1; i < order.length; i++) check(R[order[i - 1]].bottom <= R[order[i]].top + 0.6, `${where}: ${order[i - 1]} (${Math.round(R[order[i - 1]].bottom)}) runs into ${order[i]} (${Math.round(R[order[i]].top)})`);
     check(R.bar.bottom <= h + 0.5 && R.list.height >= 120, `${where}: the bar is off the screen or the list is too short (${Math.round(R.list.height)}px)`);
     check(await page.$$eval(".lb-tabs [role=tab]", (t) => t.every((b) => b.scrollWidth <= b.clientWidth + 1)), `${where}: a tab label is cut`);
@@ -206,16 +206,16 @@ async function mock(page, sc, hits = []) {
     check(await page.evaluate(() => /SPOT ON/i.test(document.querySelector(".lb-cols").textContent) && /Spot on/.test(document.querySelector(".lb-tt b, .lb-tt span").parentNode.textContent)), `${where}: Goal Rush should say Spot on`);
     check(!/Bang on|Exactly right/i.test(await page.textContent(".lb")), `${where}: Goal Rush must never say Bang on or Exactly right`);
     await shot(page, `lb-table-goal-${where}`);
-    // the bottom bar: home first, share in the middle, the game's button last in its colour
-    const bar = await page.evaluate(() => { const b = [...document.querySelectorAll(".lb .actionbar > button")]; return { order: b.map((x) => x.className.match(/bar-\w+/)[0]).join(","), share: !b[1].disabled, main: b[2].textContent.trim(), col: getComputedStyle(b[2]).backgroundColor, home: Math.round(b[0].getBoundingClientRect().width) }; });
-    check(bar.order === "bar-home,bar-mid,bar-main" && bar.share && /Play Goal Rush/.test(bar.main) && bar.col === "rgb(255, 210, 31)" && bar.home >= 50, `${where}: the bar is wrong: ${JSON.stringify(bar)}`);
+    // the game's top bar (the D2T logo, Share my place, the account; no back arrow) and one Back to home button in the game's colour
+    const bar = await page.evaluate(() => { const b = [...document.querySelectorAll(".lb .actionbar > button")], t = document.querySelector(".lb-top"); return { n: b.length, main: b[0].textContent.trim(), col: getComputedStyle(b[0]).backgroundColor, logo: !!t.querySelector(".lb-logo .fr-hl-p, .lb-logo svg, .lb-logo img, .lb-logo *"), q: !!t.querySelector(".lb-q"), acct: !!t.querySelector('[aria-label="Account"]'), share: !!t.querySelector(".lb-share:not([disabled])"), back: !!document.querySelector(".lb .lb-back, .lb .back-btn") }; });
+    check(bar.n === 1 && /Back to home/i.test(bar.main) && bar.col === "rgb(255, 210, 31)" && bar.logo && bar.q && bar.acct && bar.share && !bar.back, `${where}: the bars are wrong: ${JSON.stringify(bar)}`);
     // Share my place: the card and its message
     await page.click(".lb-share"); await wait(1500);
     const text = await page.evaluate(() => (window.D2T.share.last || {}).text || "");
     check(/^\*DROP2TOP leaderboard · Goal Rush\*/.test(text) && /23rd of 214 all time/.test(text) && text.trim().endsWith("404craig.github.io/D2T"), `${where}: the share message is wrong: ${JSON.stringify(text)}`);
     await page.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await wait(300);
-    await page.click(".lb-back"); await wait(700);
-    check((await scr(page)) === "home", `${where}: back did not go home`);
+    await page.click(".lb-main"); await wait(700);
+    check((await scr(page)) === "home", `${where}: Back to home did not go home`);
     await page.close();
   }
   // in the top ten: no gap row before you, your row sits in the ten
@@ -247,8 +247,8 @@ async function mock(page, sc, hits = []) {
   {
     const page = await open("never");
     await page.evaluate(() => window.D2T.go("leaderboard", { game: "ub" })); await wait(900);
-    const r = await page.evaluate(() => { const me = document.querySelector(".lb-list .lb-row.me"); return me ? { pos: me.querySelector(".c-pos").textContent, name: me.querySelector(".c-name").textContent, v: [...me.querySelectorAll(".c-v")].map((x) => x.textContent).join(""), share: document.querySelector(".lb-share").disabled } : null; });
-    check(r && r.pos === "–" && r.name === "You" && r.v === "–––" && r.share, "never played: a dash row of your own and Share greyed: " + JSON.stringify(r));
+    const r = await page.evaluate(() => { const me = document.querySelector(".lb-list .lb-row.me"); return me ? { pos: me.querySelector(".c-pos").textContent, name: me.querySelector(".c-name").textContent, v: [...me.querySelectorAll(".c-v")].map((x) => x.textContent).join(""), share: !document.querySelector(".lb-share").disabled } : null; });
+    check(r && r.pos === "–" && r.name === "You" && r.v === "–––" && r.share, "never played: a dash row of your own and Share still lit (build 201): " + JSON.stringify(r));
     await shot(page, "lb-table-never");
     await page.close();
     const out = await open("out");
@@ -256,7 +256,10 @@ async function mock(page, sc, hits = []) {
     const pin = await out.textContent(".lb-pin");
     check(/You · would be 12th/.test(pin) && /Sign in to claim it/.test(pin), "signed out: the pinned row should say You · would be 12th · Sign in to claim it: " + pin);
     check(await out.evaluate(() => { const p = document.querySelector(".lb-you").getBoundingClientRect(), l = document.querySelector(".lb-list").getBoundingClientRect(), b = document.querySelector(".lb .actionbar").getBoundingClientRect(); return p.top >= l.bottom - 0.5 && p.bottom <= b.top + 0.5; }), "the pinned row should sit between the list and the bar");
-    check(await out.evaluate(() => document.querySelector(".lb-share").disabled), "signed out: Share my place should be greyed");
+    check(await out.evaluate(() => !document.querySelector(".lb-share").disabled), "signed out: Share my place should stay lit (build 201)");
+    await out.click(".lb-share"); await new Promise((r) => setTimeout(r, 500));
+    check(/Sign in and finish a game/.test(await out.evaluate(() => (document.querySelector(".sheet") || {}).textContent || "")), "signed out: a tap on Share should say how to get a place");
+    await out.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await new Promise((r) => setTimeout(r, 400));
     await shot(out, "lb-table-signedout");
     await out.click(".lb-you"); await wait(700);
     check((await scr(out)) === "account", "the pinned row should open the account page");

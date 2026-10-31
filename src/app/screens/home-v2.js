@@ -39,11 +39,13 @@
   const viewRun = (r, fn) => { const st = D2T.state, keep = st.run; st.run = r; try { return fn(); } finally { st.run = keep; } };
 
   // ---------- each game's record, count first (the Your record shields) ----------
-  function shieldsFor(id, today) {
+  function shieldsFor(id, record) {
     const G = D2T.game, o = D2T.ordinal, st = D2T.state, runs = st.record.runs || [], sg = (v) => (v > 0 ? '+' : '') + v;
     if (id === 'daily') {
       const days = Object.values(st.record.daily || {}), bf = days.slice().sort((a, b) => a.finish - b.finish)[0];
-      return [[days.length, 'Played'], [bf ? o(bf.finish) : '-', 'Best finish'], [days.length ? sg(Math.max(...days.map((d) => d.rise))) : '-', 'Best rise'], [days.filter((d) => d.finish === 1).length, 'Wins']];
+      // once today's Daily has a finished go, its finish (the day's best go) in place of the best finish (Craig, 31 Oct, build 194)
+      const td = record ? null : G.dailyResult(G.today());   // the My record share card keeps the best finish
+      return [[days.length, 'Played'], td && td.finish ? [o(td.finish), "Today's finish"] : [bf ? o(bf.finish) : '-', 'Best finish'], [days.length ? sg(Math.max(...days.map((d) => d.rise))) : '-', 'Best rise'], [days.filter((d) => d.finish === 1).length, 'Wins']];
     }
     if (id === 'classic') { const r = G.record(); return [[r.drop, 'Beat the drop'], [r.half, 'Top half'], [r.top3, 'Top 3'], [r.titles, 'League titles']]; }
     if (id === 'clubx') { const x = G.xRecord(); return [[x.runs, 'Seasons'], [x.titles, 'Titles'], [runs.filter((r) => r.mode === 'clubx' && !r.daily && r.top3).length, 'Top 3'], [x.best ? o(x.best) : '-', 'Best finish']]; }
@@ -161,10 +163,17 @@
         const a = SL[0].querySelector('.stg-art'), r = a.getBoundingClientRect(), er = el.getBoundingClientRect(), s = Math.min(1, (r.height || 300) / 300);
         W = er.width * 0.85;
         el.style.setProperty('--as', s.toFixed(3));
-        el.style.setProperty('--swy', (r.top - er.top + r.height / 2 - 22).toFixed(0) + 'px');
+        // the round arrows at the art's height; a reading taken before iOS has settled the screen (the art 0 tall) is never
+        // used, and it is read again once the page settles and whenever the stage changes size (Craig, 31 Oct, build 200:
+        // on his iPhone they had gone, placed under the top bar by such a reading)
+        // (offsets, which a slide's rotation on the wheel does not move)
+        const ah = a.offsetHeight, at = a.offsetTop + SL[0].offsetTop;
+        if (ah > 60 && er.height > 200) el.style.setProperty('--swy', (at + ah / 2 - 22).toFixed(0) + 'px');
       };
       const logo = $('.stg-logo'), logoR = logo.getBoundingClientRect(), rootR = root.getBoundingClientRect();   // for the hand-over from the intro
       fit(); const onResize = () => fit(); window.addEventListener('resize', onResize); cleanups.push(() => window.removeEventListener('resize', onResize));
+      if (window.ResizeObserver) { const ro = new ResizeObserver(() => fit()); ro.observe(el); cleanups.push(() => ro.disconnect()); }
+      later(fit, 700);
 
       // ---------- the wheel ----------
       // coming back from a game opens on that game (Craig, 30 Oct)
@@ -225,7 +234,7 @@
       // the positions come from the server once it answers: the shields are drawn again if that changes what they show
       const shieldsNow = () => GM.map((g) => (g.board ? '' : homeShields(g).map((x) => x[0] + '|' + x[1]).join(','))).join(';');
       let shieldsWere = shieldsNow();
-      const redrawShields = () => { if (!root.isConnected || shieldsNow() === shieldsWere) return; shieldsWere = shieldsNow(); GM.forEach((g, i) => { const st = SL[i].querySelector('.stg-st'); if (st) st.innerHTML = shieldsHTML(homeShields(g), g.k); }); };
+      const redrawShields = () => { if (!root.isConnected || shieldsNow() === shieldsWere) return; shieldsWere = shieldsNow(); GM.forEach((g, i) => { const st = SL[i].querySelector('.stg-st'); if (st) { st.innerHTML = shieldsHTML(homeShields(g), g.k); primeShields(i); } }); };
       if (D2T.lb) D2T.lb.positions().then(redrawShields).catch(() => {});
       const onKey = (e) => { if (document.querySelector('.sheet')) return; if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('.stg-lb')) { e.preventDefault(); openBoard(GM[shown]); return; } if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') dlyBack(); if (e.key === 'ArrowRight') turn(1); else if (e.key === 'ArrowLeft') turn(-1); };
       document.addEventListener('keydown', onKey); cleanups.push(() => document.removeEventListener('keydown', onKey));
@@ -245,8 +254,27 @@
       const idle = window.requestIdleCallback ? (f) => window.requestIdleCallback(f, { timeout: 1500 }) : (f) => setTimeout(f, 300);
       const noIdle = window.cancelIdleCallback || clearTimeout;
       cleanups.push(() => noIdle(idleId));
+      // Your record rolls in (Craig, 31 Oct, build 196; design/prototype/anim-polish.html): when a slide comes to rest its
+      // four shield numbers roll up from 0 as an odometer (950 ms each, 300 ms after rest, 120 ms apart), then a glint runs
+      // across each shield in turn; once per slide per home visit. Until then a slide's shields show where they start.
+      const MO = D2T.mo, rolled = new Set();
+      function primeShields(n) {
+        if (reduced || !MO || rolled.has(n)) return;
+        SL[n].querySelectorAll('.stg-st .stg-sh b').forEach((b) => { const v = b.dataset.v || b.textContent; b.dataset.v = v; b.textContent = MO.startText(v); });
+      }
+      function rollShields(n) {
+        if (reduced || !MO || rolled.has(n)) return;
+        rolled.add(n);
+        SL[n].querySelectorAll('.stg-st .stg-sh').forEach((sh, i) => {
+          const b = sh.querySelector('b'); if (!b) return;
+          const v = b.dataset.v || b.textContent;
+          MO.odometer(b, v, { delay: 300 + i * 120, dur: 950 });
+          MO.glint(sh.querySelector('.fr-al-face'), { delay: 1500 + i * 90, dur: 520 });
+        });
+      }
       function rest() {
         const n = shown, g = GM[n];
+        rollShields(n);
         dlyRest();
         if (moving !== n) {
           if (moving >= 0 && arts[GM[moving].id]) arts[GM[moving].id].stop();
@@ -319,8 +347,8 @@
       const cards = {};
       function sharePage(g) {
         const p = (D2T.recordPages() || []).find((x) => x.k === g.share);
-        const out = p ? Object.assign({}, p) : { k: g.share, name: g.name, c: g.k, mark: {}, shields: g.st.map(([n, l]) => ({ n, l })) };
-        out.shields = g.st.map(([n, l]) => ({ n, l }));
+        const out = p ? Object.assign({}, p) : { k: g.share, name: g.name, c: g.k, mark: {}, shields: [] };
+        out.shields = (g.id === 'daily' ? shieldsFor('daily', true) : g.st).map(([n, l]) => ({ n, l }));
         if (g.id === 'classic') out.c = CLASSIC;
         if (g.id === 'daily') { out.c = g.k; out.mark = { src: g.entry.crest }; }
         return out;
@@ -445,8 +473,11 @@
         const rot = (d) => `rotate(${d}deg)`, W = (parseFloat(DBAR.style.getPropertyValue('--dw')) || 359) + 'px', Q = (x) => DBAR.querySelector(x);
         track(DEMB, [[0, { transform: rot(0), opacity: 1 }, 'cubic-bezier(.5,0,1,1)'], [650, { transform: rot(230), opacity: 1 }, 'linear'], [850, { transform: rot(317), opacity: 0 }, 'linear'], [950, { transform: rot(360), opacity: 0 }],
           [R + 330, { transform: rot(360), opacity: 0 }, 'linear'], [R + 500, { transform: rot(250), opacity: 1 }, 'cubic-bezier(0,0,.3,1)'], [R + 1300, { transform: rot(0), opacity: 1 }]]);
-        track(DBAR, [[650, { opacity: 0, transform: 'scale(.8)', width: '44px' }, 'ease-out'], [800, { opacity: 1, transform: 'scale(1)', width: '44px' }, 'linear'], [820, { opacity: 1, transform: 'scale(1)', width: '44px' }, 'cubic-bezier(.35,.9,.45,1.06)'], [1400, { opacity: 1, transform: 'scale(1)', width: W }],
-          [R, { opacity: 1, transform: 'scale(1)', width: W }, 'cubic-bezier(.55,0,.9,.6)'], [R + 330, { opacity: 1, transform: 'scale(1)', width: '124px' }, 'cubic-bezier(.2,.6,.4,1)'], [R + 520, { opacity: 1, transform: 'scale(1)', width: '44px' }, 'ease-in'], [R + 640, { opacity: 0, transform: 'scale(.8)', width: '44px' }]]);
+        // the bar is drawn at its full width from the start and revealed by a clip (Fable's review, 31 Oct, build 198: its
+        // width animated, a layout every frame); the rounded ends stay right and the content never lays out again
+        const Wn = parseFloat(W), clip = (w) => `inset(0 ${(Wn - w).toFixed(1)}px 0 0 round 22px)`;
+        track(DBAR, [[650, { opacity: 0, transform: 'scale(.8)', clipPath: clip(44) }, 'ease-out'], [800, { opacity: 1, transform: 'scale(1)', clipPath: clip(44) }, 'linear'], [820, { opacity: 1, transform: 'scale(1)', clipPath: clip(44) }, 'cubic-bezier(.35,.9,.45,1.06)'], [1400, { opacity: 1, transform: 'scale(1)', clipPath: clip(Wn) }],
+          [R, { opacity: 1, transform: 'scale(1)', clipPath: clip(Wn) }, 'cubic-bezier(.55,0,.9,.6)'], [R + 330, { opacity: 1, transform: 'scale(1)', clipPath: clip(124) }, 'cubic-bezier(.2,.6,.4,1)'], [R + 520, { opacity: 1, transform: 'scale(1)', clipPath: clip(44) }, 'ease-in'], [R + 640, { opacity: 0, transform: 'scale(.8)', clipPath: clip(44) }]]);
         track(Q('.stg-dly-cr'), [[650, { transform: rot(-130) }, 'linear'], [950, { transform: rot(0) }], [R + 330, { transform: rot(0) }, 'linear'], [R + 640, { transform: rot(-200) }]]);
         track(Q('.stg-dly-tx'), [[950, { opacity: 0, transform: 'translateX(10px)' }, 'ease-out'], [1250, { opacity: 1, transform: 'none' }], [R, { opacity: 1, transform: 'none' }, 'ease-in'], [R + 150, { opacity: 0, transform: 'translateX(6px)' }]]);
         track(Q('.stg-dly-go'), [[1100, { opacity: 0, transform: 'scale(.6)' }, 'cubic-bezier(.3,1.6,.5,1)'], [1450, { opacity: 1, transform: 'scale(1)' }], [R, { opacity: 1, transform: 'scale(1)' }, 'ease-in'], [R + 150, { opacity: 0, transform: 'scale(.7)' }]]);
@@ -582,6 +613,7 @@
       })();
 
       // ---------- opening ----------
+      SL.forEach((_, i) => primeShields(i));
       render(); rest();
       // arriving from the intro: take the logo from where the intro left it (measured before the wheel was drawn), then
       // bring the stage in

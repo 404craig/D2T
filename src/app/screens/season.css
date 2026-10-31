@@ -82,7 +82,7 @@
 .se-sqtext { flex: 1; min-width: 0; }
 .se-sqname { font: var(--display); font-size: 20px; text-transform: uppercase; }
 .se-sqsub { font-size: 12px; font-weight: 700; color: var(--muted); margin-top: 2px; }
-.se-rating { display: flex; align-items: center; gap: 7px; padding: 4px 12px 4px 10px; border-radius: 14px; background: var(--ink-2); border: 1px solid var(--se-acc-b); }
+.se-rating { position: relative; display: flex; align-items: center; gap: 7px; padding: 4px 12px 4px 10px; border-radius: 14px; background: var(--ink-2); border: 1px solid var(--se-acc-b); }
 .se-rating b { font: var(--display); font-size: 24px; color: var(--se-text); font-variant-numeric: tabular-nums; min-width: 1.3em; text-align: center; }
 .se-rating i { font-style: normal; font-size: 9.5px; line-height: 1.15; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); }
 .se-rating.se-bump { animation: seBump .5s cubic-bezier(.3,1.5,.5,1); }
@@ -358,8 +358,13 @@
 .sm-label { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 2px 2px 0; }
 .sm-panel .sm-label { margin-bottom: 8px; }
 .sm-ghost { display: block; width: 100%; height: auto; }
-.sm-line { stroke-dasharray: 2000; animation: smDraw 1.6s .4s ease-out both; }
-@keyframes smDraw { from { stroke-dashoffset: 2000; } to { stroke-dashoffset: 0; } }
+/* build 196: both lines draw together through a widening clip (summary.js motion), so no smDraw */
+.sm-pn, .sm-ps { display: inline-block; }
+.sm-head { position: relative; overflow: hidden; }
+.sm-head.sm-hold { animation: none !important; opacity: 0; }
+.sm-ach span { position: relative; overflow: hidden; }
+.sm-ach span.on.sm-wait { border: 1px dashed var(--line); background: transparent; color: var(--muted); font-style: normal; }
+.sm-achf { position: absolute; inset: -1px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: var(--se-acc); color: var(--se-ink); font-style: italic; font-weight: 900; }
 .sm-key { display: flex; gap: 16px; margin-top: 6px; font-size: 12px; color: var(--soft); }
 .sm-key span { display: inline-flex; align-items: center; gap: 6px; }
 .sm-key i { width: 18px; height: 0; border-top: 3px solid var(--se-text); }
@@ -379,7 +384,7 @@
 .sm-banter { margin: 4px 8px 0; text-align: center; font-style: italic; color: var(--soft); line-height: 1.4; }
 .sm-two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .sm-next { width: 100%; margin: 4px 0 12px; }
-@media (prefers-reduced-motion: reduce) { .sm-in > *, .sm-line { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .sm-in > * { animation: none; } }
 .sm-head.sm-miss { background: var(--ink-2); color: var(--soft); }
 .sm-ach.sm-ach-one { grid-template-columns: 1fr; }
 
@@ -638,3 +643,6 @@
 .rs-club img { width: 38px; height: 38px; }
 .rs-club small { font: 800 10.5px/1.15 var(--font); color: var(--soft); text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
 @media (prefers-reduced-motion: reduce) { .rs-dots i.spend { animation: none; opacity: .5; } }
+/* build 196: the change chip over the team rating as it ticks */
+.mo-chip { position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%); padding: 2px 7px; border-radius: 6px; border: 1px solid var(--se-acc); background: rgba(255,255,255,.06); color: var(--se-text); font: 900 italic 15px/1.1 var(--font); white-space: nowrap; pointer-events: none; z-index: 4; }
+.mo-glow { position: absolute; inset: 0; border-radius: inherit; box-shadow: 0 0 16px 1px var(--g); opacity: 0; pointer-events: none; }
