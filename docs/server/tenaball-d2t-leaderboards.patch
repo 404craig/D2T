@@ -1,0 +1,636 @@
+From 6e67a6bea2188a2dfe1e89295e785d7ed986bcd1 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Sat, 31 Oct 2026 12:31:14 +0000
+Subject: [PATCH] DROP2TOP leaderboards: results by run id, one aggregate per
+ player per game, the tables and trophies
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01955yZKDqUHLUuKsYhUhN4b
+---
+ CLAUDE.md                 |   1 +
+ server/src/d2t.js         | 210 ++++++++++++++++++++++++++++++++++++++
+ server/src/index.js       | 113 +++++++++++++++++++-
+ tests/d2t-server.test.mjs |  87 ++++++++++++++++
+ tests/d2t.test.mjs        | 114 +++++++++++++++++++++
+ tests/run-all.mjs         |   2 +-
+ 6 files changed, 524 insertions(+), 3 deletions(-)
+ create mode 100644 server/src/d2t.js
+ create mode 100644 tests/d2t-server.test.mjs
+ create mode 100644 tests/d2t.test.mjs
+
+diff --git a/CLAUDE.md b/CLAUDE.md
+index 5c04c4f..d50fe45 100644
+--- a/CLAUDE.md
++++ b/CLAUDE.md
+@@ -57,6 +57,7 @@ Tenable-style football quiz. Everything lives in `index.html` (HTML, CSS and Jav
+ - End of game: `endGame()` builds the final table, records stats (`recordGame`), then runs `trophyReveal()` which hands the winner pill into first place. The trophy sequence is a signed-off copy of `tenable-animation.html`: keep its artwork, timings, colours and effects identical to the preview. `closeTrophy()` stops everything in the overlay (animations, the ribbons' SVG ripple, the idle bolt timer, leftover confetti) whenever it closes; `tests/trophy.test.mjs` checks the sequence and the hand-over. Tapping a row in the final table opens that player's stats for this game (right, wrong, percentage correct, best round, cards, passes, time-outs, full boards, round by round; `gameStatsHTML`), counted in `p.g` by the apply functions so every phone in an online game agrees; a small link under them swaps to the player's all-time stats (`statsHTML`, the account's for a signed-in player). A solo game that ends on 0 points has no winner: no trophy and `-` instead of a place in the table and the share message (`tests/game.test.mjs`). For First touch and Beat the clock the results card is just the final table in the players' gradients with a black line crown on the winner (`modeCard`), and the message is short (no medals). Every game ends with a banter line under the table and in the share message (`banterLine`, `banterKind`, lines in `BANTER`; Craig wants it sarcastic, rude and crude). The rules work on shares of the game's slots (rounds x 10): solo goes by the player's share (0, poor, mid, good, great, perfect); multiplayer takes the first rule that fits: everyone on 0, a tie for first, a table that found hardly anything, a chasm between first and last, a runaway winner, last place on 0, a close finish, then the winner's own score. The pick is seeded from the result, so every phone in an online game shows the same line, and each phone skips lines it showed recently (`tenaball-banter`). Add lines to any list freely; placeholders are listed above `BANTER`.
+ - Accounts and online games: the last `<script>` in `index.html` talks to the server in `server/` (a Cloudflare Worker). `TENABALL_SERVER` switches them on (null means offline, as before). Accounts are an email plus a 4-digit PIN; there's no email checking or PIN recovery by email, Craig resets PINs from the server's `/admin` page. The sign-in email box is `autocomplete="email"` (not `username`, which on iPhone only offers saved passwords) and is filled with the last email signed in on the phone (`EMAIL_KEY`, `tenaball-email`). Stats: `recordGame` keeps local stats for everyone except the signed-in player, whose results go to their account through `accountRecord`.
+ - Online play is a replayed move log. The server's room puts moves in one order, checks the sender is in the game, and lets only the host send `round`, `reveal`, `refresh`, `next` and `skip`; players send `guess`, `pass` and `timeout`. Every phone applies them in order through `applyAction`, which calls the same `applyGuess`, `applyPass`, `applyTimeout`, `applyReveal`, `applyRefresh` and `applyNext` a local game uses. Keep those deterministic: no randomness, clock reads or local-only state in them, or phones will drift apart. Question picking happens only on the host, and the chosen id travels in the move.
++- DROP2TOP's leaderboards (October 2026; `server/src/d2t.js`, the routes in `index.js` under `/api/d2t/`): the same accounts serve DROP2TOP (`https://404craig.github.io/D2T`, allowed by the same origin), one table per game (daily, classic, clubx, goal, ub), every signed-in player on it automatically, no codes or leagues. `/d2t/result` records one finished game and `/d2t/merge` up to 500 a phone already held, each with a run id (`rid`) so a repeat never counts twice; `cleanResult` clamps every number and refuses nonsense, the rise is worked out from the finishes, a Daily keeps its own UK date (`day`), the week starts on Monday UK time. Each result is stored once (`d2t_results`), and `d2t_players` keeps one aggregate per player per game with three sort keys (`k1`..`k3`, bigger first, ties by id) so the all-time table and a player's position are one ordered query (`above`); today's, this week's and best-season tables fold the period's results in JS (`aggregate`, `rank`, `slice`). `/d2t/board` {game, tab} returns the columns, the ranking column, the top ten plus the rows round the caller with gaps, the caller's row, the count and the trophy (`trophy`: most Daily wins, first to win today, the hardest Classic title by real points, the longest Club X dynasty, most points in a season, most times spot on, first spot on today, the record Unbeaten run, the best this week); `/d2t/me` the player's position on every game. Signed out, a board can still be read: the phone sends its own results as `mine` and is told where it would sit (`you`), nothing stored. `GUEST_ROWS` (false) is the one switch to put guests on the tables under an automatic name by the random id their phone keeps. Goal Rush and Unbeaten totals from before the tables are sent once as a `carry` record. Tests: `tests/d2t.test.mjs` (the pure part) and `tests/d2t-server.test.mjs` (the routes, on a local server).
+ - Tests: `cd tests && npm install && (cd ../server && npm install) && npm test` runs the stats tests, the server tests, the game and modes tests, the account and multi-phone online tests (against a local copy of the server) and the trophy tests. `ONLY=text node <suite>` runs just the checks whose names contain the text. Run them after changing the server, the online code, the game loop or the end of game.
+ - Sharing: `prepareShare()` runs from `endGame()`. It builds the WhatsApp-style message (`shareText`, where `*text*` is bold) and draws the results card image (`shareCard`, 1080 by 1350) ahead of time, so tapping Share opens the share sheet straight away. `og-image.jpg` plus the `og:` meta tags give the link preview; it is the one asset kept outside `index.html`, because link previews need a real image URL.
+ 
+diff --git a/server/src/d2t.js b/server/src/d2t.js
+new file mode 100644
+index 0000000..2f6817e
+--- /dev/null
++++ b/server/src/d2t.js
+@@ -0,0 +1,210 @@
++// DROP2TOP leaderboards (October 2026): one table per game, every signed-in player on it automatically. The phone
++// reports each finished game (a Daily go, a Classic season, a Club X season, a Goal Rush game, an Unbeaten run) with a
++// run id of its own, so re-sending never counts twice; the server keeps every result and one aggregate per player per
++// game with three sortable keys, so a table or a position is one ordered query. This file is the pure part (checking a
++// result, folding results into an aggregate, ranking, the trophy and the table's wording); index.js holds the SQL.
++// The games are called by their short ids: daily, classic, clubx, goal (Goal Rush) and ub (Unbeaten Run).
++
++export const D2T_MODES = ["daily", "classic", "clubx", "goal", "ub"];
++// Guests on the tables (false: signed-in players only, a guest is only told where they would sit; true: a guest's results
++// are kept under an automatic name, "Player a1b2", by the random id their phone keeps). One switch, nothing else to change.
++export const GUEST_ROWS = false;
++export const DAILY_START = "2026-10-11";
++const UB_STATS = { cg: "career goals", ca: "career appearances", cas: "career assists", cga: "career goals and assists", sg: "goals in a season", sga: "goals and assists in a season", pts: "club points in a season", w: "club wins in a season", atp: "all-time points" };
++const GR_SHAPES = ["442", "433", "451", "352", "343", "424", "532", "541"];
++const MAX_RESULTS = 5000; // results kept per player per game
++
++/* ---------- dates: the Daily is the UK date, the week starts on Monday UK time ---------- */
++const ukFmt = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false, weekday: "long" });
++function ukParts(ms){ const p = {}; for (const x of ukFmt.formatToParts(new Date(ms))) p[x.type] = x.value; return p; }
++export function ukDay(ms){ const p = ukParts(ms); return `${p.year}-${p.month}-${p.day}`; }
++export function ukTime(ms){ const p = ukParts(ms); return `${p.hour === "24" ? "00" : p.hour}:${p.minute}`; }
++export function ukWeekday(ms){ return ukParts(ms).weekday; }
++export const validDay = d => /^\d{4}-\d{2}-\d{2}$/.test(String(d || "")) && !Number.isNaN(Date.parse(d + "T12:00:00Z")) && ukDay(Date.parse(d + "T12:00:00Z")) === d;
++// the Monday of the week a day is in
++export function weekStart(day){ const t = Date.parse(day + "T12:00:00Z"), wd = (new Date(t).getUTCDay() + 6) % 7; return new Date(t - wd * 864e5).toISOString().slice(0, 10); }
++export const ordinal = n => n + (n % 10 === 1 && n % 100 !== 11 ? "st" : n % 10 === 2 && n % 100 !== 12 ? "nd" : n % 10 === 3 && n % 100 !== 13 ? "rd" : "th");
++const plural = (n, one, many) => `${n} ${n === 1 ? one : many || one + "s"}`;
++
++/* ---------- one result, checked: anything unexpected is clamped or the result is refused (null) ---------- */
++const n = (v, lo, hi) => { v = Math.floor(Number(v)); return Number.isFinite(v) ? Math.max(lo, Math.min(hi, v)) : lo; };
++const str = (v, max) => String(v == null ? "" : v).replace(/\s+/g, " ").trim().slice(0, max);
++const season = s => /^\d{4}\/\d{2}$/.test(String(s || "")) ? String(s) : null;
++export function cleanResult(mode, raw, now = Date.now()){
++  if (!D2T_MODES.includes(mode) || !raw || typeof raw !== "object") return null;
++  const rid = str(raw.rid, 80); if (!/^[A-Za-z0-9:_./-]{1,80}$/.test(rid)) return null;
++  const at = n(raw.at, now - 10 * 365 * 864e5, now) || now;
++  const r = { rid, at };
++  if (raw.carry){ // totals a phone kept before the tables existed, for the games that keep no list of their results
++    if (mode === "goal"){ r.carry = true; r.games = n(raw.games, 0, 100000); r.exact = Math.min(r.games, n(raw.exact, 0, 100000)); r.best = raw.best == null ? null : n(raw.best, 0, 6000); return r; }
++    if (mode === "ub"){ r.carry = true; r.runs = n(raw.runs, 0, 100000); r.best = {}; for (const k of Object.keys(UB_STATS)) if (raw.best && raw.best[k] != null) r.best[k] = n(raw.best[k], 0, 1000); return r; }
++    return null;
++  }
++  if (mode === "daily"){
++    if (!validDay(raw.date) || raw.date < DAILY_START || raw.date > ukDay(now)) return null;
++    r.date = raw.date; r.club = str(raw.club, 40); r.season = season(raw.season); if (!r.club || !r.season) return null;
++    r.finish = n(raw.finish, 1, 24); r.histFinish = n(raw.histFinish, 1, 24); r.rise = r.histFinish - r.finish; r.pts = n(raw.pts, 0, 130); r.histPts = n(raw.histPts, 0, 130); r.goes = n(raw.goes, 1, 500);
++    return r;
++  }
++  if (mode === "classic"){
++    r.club = str(raw.club, 40); r.season = season(raw.season); if (!r.club || !r.season) return null;
++    r.finish = n(raw.finish, 1, 24); r.histFinish = n(raw.histFinish, 1, 24); r.rise = r.histFinish - r.finish; r.pts = n(raw.pts, 0, 130); r.histPts = n(raw.histPts, 0, 130);
++    return r;
++  }
++  if (mode === "clubx"){
++    r.careerId = str(raw.careerId, 80) || rid; r.career = n(raw.career, 1, 200); r.season = season(raw.season); if (!r.season) return null;
++    r.club = str(raw.club, 20) || "Club X"; r.finish = n(raw.finish, 1, 24); r.pts = n(raw.pts, 0, 130);
++    r.w = n(raw.w, 0, 46); r.d = n(raw.d, 0, 46 - r.w); r.l = n(raw.l, 0, 46 - r.w - r.d); r.gf = n(raw.gf, 0, 300); r.ga = n(raw.ga, 0, 300); r.sim = !!raw.sim;
++    return r;
++  }
++  if (mode === "goal"){
++    r.shape = String(raw.shape || ""); if (!GR_SHAPES.includes(r.shape)) return null;
++    r.target = Number(r.shape); r.total = n(raw.total, 0, 6000); r.gap = Math.abs(r.total - r.target);
++    return r;
++  }
++  if (mode === "ub"){
++    r.stat = String(raw.stat || ""); if (!UB_STATS[r.stat]) return null;
++    r.run = n(raw.run, 0, 1000);
++    return r;
++  }
++  return null;
++}
++// the columns the result is stored under: the UK day it belongs to, whether it is a win (a title, spot on) and its
++// sortable value (the club-season's real points for a Classic title, points for Club X, the gap for Goal Rush, the run)
++export function resultKeys(mode, r, now = Date.now()){
++  if (r.carry) return { day: ukDay(r.at), win: 0, val: 0 };
++  if (mode === "daily") return { day: r.date, win: r.finish === 1 ? 1 : 0, val: r.finish };
++  if (mode === "classic") return { day: ukDay(r.at), win: r.finish === 1 ? 1 : 0, val: r.histPts };
++  if (mode === "clubx") return { day: ukDay(r.at), win: r.finish === 1 ? 1 : 0, val: r.pts };
++  if (mode === "goal") return { day: ukDay(r.at), win: r.gap === 0 ? 1 : 0, val: r.gap };
++  return { day: ukDay(r.at), win: 0, val: r.run };
++}
++
++/* ---------- one player's results folded into their aggregate for a game ---------- */
++export function aggregate(mode, results){
++  const R = results.filter(r => r && !r.carry), C = results.filter(r => r && r.carry);
++  if (mode === "daily"){
++    const days = {};
++    for (const r of R){ const d = days[r.date] || (days[r.date] = { goes: 0, finish: 99, rise: -99, club: r.club }); d.goes = Math.max(d.goes, r.goes); if (r.finish < d.finish || (r.finish === d.finish && r.rise > d.rise)){ d.finish = r.finish; d.rise = r.rise; } }
++    const L = Object.values(days);
++    return { played: L.length, wins: L.filter(d => d.finish === 1).length, bestRise: L.length ? Math.max(...L.map(d => d.rise)) : null, bestFinish: L.length ? Math.min(...L.map(d => d.finish)) : null, goes: L.reduce((t, d) => t + d.goes, 0) };
++  }
++  if (mode === "classic"){
++    const titles = R.filter(r => r.finish === 1), hard = titles.slice().sort((a, b) => a.histPts - b.histPts || a.at - b.at)[0] || null;
++    return { seasons: R.length, titles: titles.length, top3: R.filter(r => r.finish <= 3).length, hardest: hard ? { club: hard.club, season: hard.season, histPts: hard.histPts, histFinish: hard.histFinish } : null };
++  }
++  if (mode === "clubx"){
++    const careers = {};
++    for (const r of R) (careers[r.careerId] = careers[r.careerId] || []).push(r);
++    let inARow = 0, dyn = null;
++    for (const list of Object.values(careers)){
++      list.sort((a, b) => a.career - b.career); let run = 0;
++      for (const r of list){ run = r.finish === 1 ? run + 1 : 0; if (run > inARow){ inARow = run; dyn = r.club; } }
++    }
++    const best = R.slice().sort((a, b) => b.pts - a.pts || b.w - a.w || (b.gf - b.ga) - (a.gf - a.ga) || a.at - b.at)[0] || null;
++    return { seasons: R.length, titles: R.filter(r => r.finish === 1).length, inARow, dynasty: dyn, careers: Object.keys(careers).length,
++      best: best ? { pts: best.pts, w: best.w, gd: best.gf - best.ga, club: best.club, career: best.career, season: best.season } : null };
++  }
++  if (mode === "goal"){
++    const games = R.length + C.reduce((t, c) => t + c.games, 0), exact = R.filter(r => r.gap === 0).length + C.reduce((t, c) => t + c.exact, 0);
++    const gaps = R.map(r => r.gap).concat(C.filter(c => c.best != null).map(c => c.best));
++    return { games, exact, rate: games ? exact / games : 0, closest: gaps.length ? Math.min(...gaps) : null };
++  }
++  if (mode === "ub"){
++    const best = {}; for (const c of C) for (const [k, v] of Object.entries(c.best || {})) best[k] = Math.max(best[k] || 0, v);
++    for (const r of R) best[r.stat] = Math.max(best[r.stat] || 0, r.run);
++    const runs = R.length + C.reduce((t, c) => t + c.runs, 0), known = R.length, sum = R.reduce((t, r) => t + r.run, 0);
++    const top = Object.entries(best).sort((a, b) => b[1] - a[1])[0] || null;
++    return { runs, best: top ? top[1] : 0, bestStat: top ? top[0] : null, avg: known ? sum / known : null, known };
++  }
++  return {};
++}
++
++/* ---------- the tables: columns, the ranking column, what each row shows and the sort keys (bigger is better) ---------- */
++const pct = v => `${Math.round(100 * v)}%`;
++const sg = v => (v > 0 ? "+" : "") + v;
++export const BOARDS = {
++  daily: {
++    all: { cols: ["Played", "Wins", "Best rise"], sort: 1, keys: a => [a.wins, a.bestRise == null ? -99 : a.bestRise, -a.played], vals: a => [a.played, a.wins, a.bestRise == null ? "-" : sg(a.bestRise)] },
++    today: { cols: ["Goes", "Best finish", "Rise"], sort: 1, keys: a => [-(a.bestFinish == null ? 99 : a.bestFinish), -a.goes, a.bestRise == null ? -99 : a.bestRise], vals: a => [a.goes, a.bestFinish == null ? "-" : ordinal(a.bestFinish), a.bestRise == null ? "-" : sg(a.bestRise)] }
++  },
++  classic: {
++    all: { cols: ["Seasons", "Titles", "Top 3"], sort: 1, keys: a => [a.titles, a.top3, -a.seasons], vals: a => [a.seasons, a.titles, a.top3] },
++    week: { cols: ["Seasons", "Titles", "Top 3"], sort: 1, keys: a => [a.titles, a.top3, -a.seasons], vals: a => [a.seasons, a.titles, a.top3] }
++  },
++  clubx: {
++    all: { cols: ["Seasons", "Titles", "In a row"], sort: 1, keys: a => [a.titles, a.inARow, -a.seasons], vals: a => [a.seasons, a.titles, a.inARow] },
++    season: { cols: ["Points", "Wins", "Goal diff"], sort: 0, keys: a => [a.best ? a.best.pts : -1, a.best ? a.best.w : -1, a.best ? a.best.gd : -999], vals: a => [a.best ? a.best.pts : "-", a.best ? a.best.w : "-", a.best ? sg(a.best.gd) : "-"] }
++  },
++  goal: {
++    all: { cols: ["Games", "Spot on", "Hit rate"], sort: 1, keys: a => [a.exact, a.rate, a.games], vals: a => [a.games, a.exact, a.games ? pct(a.rate) : "-"] },
++    today: { cols: ["Games", "Spot on", "Closest"], sort: 1, keys: a => [a.exact, -(a.closest == null ? 9999 : a.closest), -a.games], vals: a => [a.games, a.exact, a.closest == null ? "-" : a.closest] }
++  },
++  ub: {
++    all: { cols: ["Runs", "Best run", "Average"], sort: 1, keys: a => [a.best, a.avg == null ? -1 : a.avg, a.runs], vals: a => [a.runs, a.best, a.avg == null ? "-" : a.avg.toFixed(1)] },
++    week: { cols: ["Runs", "Best run", "Average"], sort: 1, keys: a => [a.best, a.avg == null ? -1 : a.avg, a.runs], vals: a => [a.runs, a.best, a.avg == null ? "-" : a.avg.toFixed(1)] }
++  }
++};
++export const TABS = { daily: ["all", "today"], classic: ["all", "week"], clubx: ["all", "season"], goal: ["all", "today"], ub: ["all", "week"] };
++// a player with nothing to rank (no games, no run) stays off the table
++export function onTable(mode, a){
++  if (mode === "daily") return a.played > 0;
++  if (mode === "classic") return a.seasons > 0;
++  if (mode === "clubx") return a.seasons > 0;
++  if (mode === "goal") return a.games > 0;
++  return a.runs > 0;
++}
++// the three stored sort keys for the all-time table (one ordered query ranks everyone)
++export const rankKeys = (mode, a) => BOARDS[mode].all.keys(a);
++// bigger keys first, then the id so ties always come out the same way
++export const compare = (a, b) => { for (let i = 0; i < a.keys.length; i++) if (a.keys[i] !== b.keys[i]) return b.keys[i] - a.keys[i]; return a.uid < b.uid ? -1 : a.uid > b.uid ? 1 : 0; };
++export function rank(mode, tab, players){
++  const spec = BOARDS[mode][tab];
++  const rows = players.filter(p => onTable(mode, p.agg)).map(p => ({ uid: p.uid, name: p.name, agg: p.agg, keys: spec.keys(p.agg) })).sort(compare);
++  rows.forEach((r, i) => r.pos = i + 1);
++  return rows;
++}
++// where an aggregate would sit on a ranked table (a guest's phone-only numbers), without adding it
++export function placeOf(mode, tab, ranked, agg){
++  if (!onTable(mode, agg)) return null;
++  const me = { uid: "\uffff", keys: BOARDS[mode][tab].keys(agg) };   // level with someone on the table, a guest sits after them
++  return 1 + ranked.filter(r => compare(r, me) < 0).length;
++}
++// the rows a phone is sent: the top of the table and the rows around the player, with a gap marked between them
++export function slice(mode, tab, ranked, uid, top = 10, around = 2){
++  const spec = BOARDS[mode][tab], row = r => ({ pos: r.pos, name: r.name, v: spec.vals(r.agg), me: r.uid === uid });
++  const k = ranked.findIndex(r => r.uid === uid), out = ranked.slice(0, top).map(row);
++  if (k >= top){
++    const from = Math.max(top, k - around), to = Math.min(ranked.length, k + around + 1);
++    if (from > top) out.push({ gap: true });
++    ranked.slice(from, to).forEach(r => out.push(row(r)));
++    if (to < ranked.length) out.push({ gap: true });
++  } else if (ranked.length > top) out.push({ gap: true });
++  return { rows: out, me: k >= 0 ? row(ranked[k]) : null, count: ranked.length };
++}
++
++/* ---------- the trophy card: the record and its holder, from the ranked table or the results that set it ---------- */
++export const TROPHY = {
++  daily: { all: "Most Daily wins", today: "First to win the league today" },
++  classic: { all: "The hardest title", week: "Most titles this week" },
++  clubx: { all: "The longest dynasty", season: "Most points in a season" },
++  goal: { all: "Most times spot on", today: "First spot on today" },
++  ub: { all: "The record run", week: "Best run this week" }
++};
++// first: the earliest winning result of the period (daily today, goal today), hardest: the Classic title with the fewest
++// real points, longest: the longest Unbeaten run; each { name, r } or null. ranked: the period's table.
++export function trophy(mode, tab, ranked, { first = null, hardest = null, longest = null } = {}){
++  const title = TROPHY[mode][tab], top = ranked[0], a = top && top.agg;
++  const out = (who, val, what) => ({ title, who, val: String(val), what });
++  if (mode === "daily" && tab === "all") return a && a.wins > 0 ? out(top.name, a.wins, `${plural(a.wins, "league title")} from ${plural(a.played, "Daily", "Dailies")}`) : null;
++  if (mode === "daily") return first ? out(first.name, ukTime(first.r.at), `${first.r.club} champions at ${ukTime(first.r.at)}, on the ${ordinal(first.r.goes)} go`) : null;
++  if (mode === "classic" && tab === "all") return hardest ? out(hardest.name, hardest.r.club, `Won the league with ${hardest.r.club} ${hardest.r.season} (${hardest.r.histPts} pts for real)`) : null;
++  if (mode === "classic") return a && a.titles > 0 ? out(top.name, a.titles, `${plural(a.titles, "title")} this week${a.hardest ? `, the best ${a.hardest.club} ${a.hardest.season} from ${ordinal(a.hardest.histFinish)}` : ""}`) : null;
++  if (mode === "clubx" && tab === "all"){ const d = ranked.slice().sort((x, y) => y.agg.inARow - x.agg.inARow || compare(x, y))[0]; return d && d.agg.inARow > 0 ? out(d.name, d.agg.inARow, `${plural(d.agg.inARow, "title")} in a row with ${d.agg.dynasty}`) : null; }
++  if (mode === "clubx") return a && a.best ? out(top.name, a.best.pts, `${plural(a.best.pts, "point")} with ${a.best.club}, season ${a.best.career}`) : null;
++  if (mode === "goal" && tab === "all") return a && a.exact > 0 ? out(top.name, a.exact, `Spot on ${plural(a.exact, "time")} in ${plural(a.games, "game")}`) : null;
++  if (mode === "goal") return first ? out(first.name, ukTime(first.r.at), `Spot on ${first.r.target} at ${ukTime(first.r.at)}`) : null;
++  if (mode === "ub" && tab === "all") return longest && longest.r.run > 0 ? out(longest.name, longest.r.run, `${longest.r.run} in a row on ${UB_STATS[longest.r.stat]}`) : null;
++  return longest && longest.r.run > 0 ? out(longest.name, longest.r.run, `${longest.r.run} in a row on ${UB_STATS[longest.r.stat]}, ${ukWeekday(longest.r.at)}`) : null;
++}
++export { UB_STATS, GR_SHAPES, MAX_RESULTS };
+diff --git a/server/src/index.js b/server/src/index.js
+index 16318e7..1bc42a6 100644
+--- a/server/src/index.js
++++ b/server/src/index.js
+@@ -4,6 +4,7 @@ import { DurableObject } from "cloudflare:workers";
+ import { ADMIN_PAGE } from "./admin.js";
+ import { BLANK_STATS, bumpStats, mergeStats, upgradeStats } from "./stats.js";
+ import { cleanLeagueGame, leagueTable, leagueMoves } from "./leagues.js";
++import { D2T_MODES, GUEST_ROWS, TABS, BOARDS, MAX_RESULTS, cleanResult, resultKeys, aggregate, onTable, rankKeys, rank, placeOf, slice, trophy, ukDay, weekStart } from "./d2t.js";
+ 
+ const MAX_PLAYERS = 4;
+ // the host's ticked competitions: short lowercase keys only, at most 16, no repeats (the game ignores ones it doesn't know)
+@@ -103,7 +104,7 @@ export default {
+       // accounts, stats and the admin tools
+       if (req.method !== "POST") return withCors(fail(405, "Use POST."));
+       const body = await req.text();
+-      if (body.length > 20000) return withCors(fail(413, "Too much data."));
++      if (body.length > (url.pathname === "/api/d2t/merge" ? 120000 : 20000)) return withCors(fail(413, "Too much data."));
+       const token = (req.headers.get("Authorization") || "").replace(/^Bearer /, "");
+       return withCors(await accounts(env).fetch("https://accounts" + url.pathname.slice(4), { method: "POST", body, headers: { "x-ip": ip, "x-token": token } }));
+     } catch (e){
+@@ -128,6 +129,14 @@ export class Accounts extends DurableObject {
+     this.sql.exec(`CREATE TABLE IF NOT EXISTS leagues (id TEXT PRIMARY KEY, code TEXT UNIQUE NOT NULL, name TEXT NOT NULL, admin TEXT NOT NULL, created INTEGER NOT NULL)`);
+     this.sql.exec(`CREATE TABLE IF NOT EXISTS league_members (lid TEXT NOT NULL, uid TEXT NOT NULL, joined INTEGER NOT NULL, PRIMARY KEY (lid, uid))`);
+     this.sql.exec(`CREATE TABLE IF NOT EXISTS league_games (lid TEXT NOT NULL, gkey TEXT NOT NULL, at INTEGER NOT NULL, data TEXT NOT NULL, PRIMARY KEY (lid, gkey))`);
++    // DROP2TOP's leaderboards (October 2026; src/d2t.js): every finished game by its run id, and one aggregate per player
++    // per game with three sort keys (k1, k2, k3, bigger first) so a table or a position is one ordered query; n is 1 for a
++    // player with something to rank. day is the UK date a result belongs to (a Daily's own date; '-' for carried totals)
++    this.sql.exec(`CREATE TABLE IF NOT EXISTS d2t_results (uid TEXT NOT NULL, mode TEXT NOT NULL, rid TEXT NOT NULL, day TEXT NOT NULL, at INTEGER NOT NULL, win INTEGER NOT NULL, val INTEGER NOT NULL, data TEXT NOT NULL, PRIMARY KEY (uid, mode, rid))`);
++    this.sql.exec(`CREATE INDEX IF NOT EXISTS d2t_results_day ON d2t_results (mode, day, at)`);
++    this.sql.exec(`CREATE INDEX IF NOT EXISTS d2t_results_win ON d2t_results (mode, win, val, at)`);
++    this.sql.exec(`CREATE TABLE IF NOT EXISTS d2t_players (uid TEXT NOT NULL, mode TEXT NOT NULL, name TEXT NOT NULL, agg TEXT NOT NULL, k1 REAL NOT NULL, k2 REAL NOT NULL, k3 REAL NOT NULL, n INTEGER NOT NULL, updated INTEGER NOT NULL, PRIMARY KEY (uid, mode))`);
++    this.sql.exec(`CREATE INDEX IF NOT EXISTS d2t_players_rank ON d2t_players (mode, n, k1, k2, k3, uid)`);
+   }
+   one(q, ...a){ const r = this.sql.exec(q, ...a).toArray(); return r[0] || null; }
+   userOut(u){ return { id: u.id, name: u.name, email: u.email }; }
+@@ -200,8 +209,9 @@ export class Accounts extends DurableObject {
+       return json({ token: await this.newSession(u.id), user: this.userOut(u), stats: this.statsOf(u) });
+     }
+ 
+-    // everything below needs a signed-in player (or, for /admin/*, the admin password)
++    // everything below needs a signed-in player (or, for /admin/*, the admin password; DROP2TOP's tables can be read signed out)
+     if (path.startsWith("/admin/")) return this.admin(path, b, ip);
++    if (path.startsWith("/d2t/")) return this.d2t(path, b, token, ip);
+     const u = await this.userFromToken(token);
+     if (!u) return fail(401, "You're signed out. Sign in again.");
+ 
+@@ -357,6 +367,104 @@ export class Accounts extends DurableObject {
+     if (!left.some(m => m.uid === l.admin)) this.sql.exec("UPDATE leagues SET admin = ? WHERE id = ?", left[0].uid, lid);
+   }
+ 
++  /* ---------- DROP2TOP's leaderboards (October 2026; src/d2t.js) ----------
++     /d2t/result records one finished game, /d2t/merge the results a phone already held (both by run id, so a repeat never
++     counts twice), /d2t/board reads one table (a game and a tab) and /d2t/me the player's position on every game's table.
++     The tables can be read signed out: a guest sends their phone's results and is told where they would sit. */
++  async d2t(path, b, token, ip){
++    const now = Date.now(), today = ukDay(now), u = await this.userFromToken(token);
++    // who the results belong to: the account, or (with GUEST_ROWS on) the random id a phone keeps, under an automatic name
++    let who = u ? { uid: u.id, name: u.name } : null;
++    if (!who && GUEST_ROWS && /^[a-f0-9]{24,64}$/.test(String(b.guest || ""))) who = { uid: "g:" + b.guest, name: "Player " + String(b.guest).slice(0, 4) };
++    const mode = D2T_MODES.includes(b.game) ? b.game : null, tab = mode && TABS[mode].includes(b.tab) ? b.tab : "all";
++    const parse = row => { try { return JSON.parse(row.data); } catch(e){ return null; } };
++    const named = rows => rows.map(r => ({ uid: r.uid, name: r.name, r: parse(r) })).filter(x => x.r);
++    const NAMED = "SELECT r.uid, r.data, COALESCE(u.name, p.name) AS name FROM d2t_results r LEFT JOIN users u ON u.id = r.uid LEFT JOIN d2t_players p ON p.uid = r.uid AND p.mode = r.mode";
++    // a player's results for a game, folded into their aggregate and stored with its sort keys
++    const refresh = (uid, name, m) => {
++      const list = this.sql.exec("SELECT data FROM d2t_results WHERE uid = ? AND mode = ? ORDER BY at", uid, m).toArray().map(parse).filter(Boolean);
++      const agg = aggregate(m, list), k = rankKeys(m, agg);
++      this.sql.exec("INSERT OR REPLACE INTO d2t_players (uid, mode, name, agg, k1, k2, k3, n, updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", uid, m, name, JSON.stringify(agg), k[0], k[1], k[2], onTable(m, agg) ? 1 : 0, now);
++      return agg;
++    };
++    // how many rank above these keys on a game's all-time table (ties by id, as rank() breaks them)
++    const above = (m, k, uid) => this.one("SELECT COUNT(*) AS c FROM d2t_players WHERE mode = ? AND n = 1 AND (k1 > ? OR (k1 = ? AND k2 > ?) OR (k1 = ? AND k2 = ? AND k3 > ?) OR (k1 = ? AND k2 = ? AND k3 = ? AND uid < ?))", m, k[0], k[0], k[1], k[0], k[1], k[2], k[0], k[1], k[2], uid).c;
++    const countOf = m => this.one("SELECT COUNT(*) AS c FROM d2t_players WHERE mode = ? AND n = 1", m).c;
++    const playersOf = (m, limit, offset = 0) => this.sql.exec("SELECT p.uid, p.agg, COALESCE(u.name, p.name) AS name FROM d2t_players p LEFT JOIN users u ON u.id = p.uid WHERE p.mode = ? AND p.n = 1 ORDER BY p.k1 DESC, p.k2 DESC, p.k3 DESC, p.uid LIMIT ? OFFSET ?", m, limit, offset).toArray()
++      .map(p => ({ uid: p.uid, name: p.name, agg: JSON.parse(p.agg) }));
++    const mine = m => { const p = who && this.one("SELECT agg, n FROM d2t_players WHERE uid = ? AND mode = ?", who.uid, m); return p && p.n ? JSON.parse(p.agg) : null; };
++    // the results a guest's phone holds, checked and folded like a player's but never stored
++    const guestAgg = (m, from) => { const list = (Array.isArray(b.mine) ? b.mine : []).slice(0, 500).map(r => cleanResult(m, r, now)).filter(r => r && (!from || (!r.carry && resultKeys(m, r, now).day >= from))); return aggregate(m, list); };
++
++    if (path === "/d2t/board"){
++      if (!mode) return fail(400, "Which table?");
++      const spec = BOARDS[mode][tab], out = { game: mode, tab, cols: spec.cols, sort: spec.sort, signedIn: !!u, name: who ? who.name : null };
++      const extra = {};
++      if (tab === "all"){
++        // the all-time table straight from the stored keys: the top ten, then the rows around the player
++        const count = countOf(mode), top = playersOf(mode, 10), rows = top.map((p, i) => ({ pos: i + 1, name: p.name, v: spec.vals(p.agg), me: !!who && p.uid === who.uid }));
++        let me = rows.find(r => r.me) || null;
++        const my = mine(mode);
++        if (who && my && !me){
++          const pos = 1 + above(mode, rankKeys(mode, my), who.uid);
++          const from = Math.max(10, pos - 3), near = playersOf(mode, 5, from);
++          if (from > 10) rows.push({ gap: true });
++          near.forEach((p, i) => { const r = { pos: from + i + 1, name: p.name, v: spec.vals(p.agg), me: p.uid === who.uid }; rows.push(r); if (r.me) me = r; });
++          if (from + near.length < count) rows.push({ gap: true });
++        } else if (count > 10) rows.push({ gap: true });
++        Object.assign(out, { count, rows, me });
++        if (!who){ const g = guestAgg(mode), k = rankKeys(mode, g); out.you = onTable(mode, g) ? { pos: 1 + above(mode, k, ""), v: spec.vals(g) } : null; }
++        // the record and its holder
++        if (mode === "classic") extra.hardest = named(this.sql.exec(NAMED + " WHERE r.mode = 'classic' AND r.win = 1 ORDER BY r.val ASC, r.at ASC LIMIT 1").toArray())[0] || null;
++        if (mode === "ub") extra.longest = named(this.sql.exec(NAMED + " WHERE r.mode = 'ub' ORDER BY r.val DESC, r.at ASC LIMIT 1").toArray())[0] || null;
++        out.trophy = trophy(mode, tab, mode === "clubx" ? rank(mode, tab, playersOf(mode, 100000)) : top, extra);
++      } else {
++        // today, this week (from Monday) or the best season: the period's results folded per player, ranked here
++        const from = tab === "today" ? today : tab === "week" ? weekStart(today) : null;
++        const byUid = {};
++        if (from){
++          for (const x of named(this.sql.exec(NAMED + " WHERE r.mode = ? AND r.day >= ? ORDER BY r.at", mode, from).toArray()))
++            (byUid[x.uid] = byUid[x.uid] || { uid: x.uid, name: x.name, list: [] }).list.push(x.r);
++        }
++        const players = from ? Object.values(byUid).map(p => ({ uid: p.uid, name: p.name, agg: aggregate(mode, p.list) })) : playersOf(mode, 100000);
++        const ranked = rank(mode, tab, players), sl = slice(mode, tab, ranked, who ? who.uid : "");
++        Object.assign(out, sl);
++        if (!who){ const g = guestAgg(mode, from); const pos = placeOf(mode, tab, ranked, g); out.you = pos ? { pos, v: spec.vals(g) } : null; }
++        if (from && (mode === "daily" || mode === "goal")) extra.first = named(this.sql.exec(NAMED + " WHERE r.mode = ? AND r.day >= ? AND r.win = 1 ORDER BY r.at ASC LIMIT 1", mode, from).toArray())[0] || null;
++        if (from && mode === "ub") extra.longest = named(this.sql.exec(NAMED + " WHERE r.mode = 'ub' AND r.day >= ? ORDER BY r.val DESC, r.at ASC LIMIT 1", from).toArray())[0] || null;
++        out.trophy = trophy(mode, tab, ranked, extra);
++      }
++      return json(out, 200, { "cache-control": "no-store" });
++    }
++    if (path === "/d2t/me"){ // the player's position on every game's all-time table (the home page's shields)
++      if (!who) return json({ signedIn: false, games: {} }, 200, { "cache-control": "no-store" });
++      const games = {};
++      for (const m of D2T_MODES){ const a = mine(m); games[m] = a ? { pos: 1 + above(m, rankKeys(m, a), who.uid), count: countOf(m) } : null; }
++      return json({ signedIn: !!u, name: who.name, games }, 200, { "cache-control": "no-store" });
++    }
++    if (!who) return fail(401, "Sign in to get on the tables.");
++    if (path === "/d2t/result" || path === "/d2t/merge"){
++      const list = path === "/d2t/merge" ? (Array.isArray(b.results) ? b.results : []).slice(0, 500) : [{ game: b.game, rec: b.rec }];
++      if (this.limited("d2t:" + who.uid, 2000, 3600000, list.length)) return fail(429, "That's a lot of results in an hour. Try again later.");
++      let added = 0, refused = 0; const touched = new Set();
++      for (const x of list){
++        const m = x && D2T_MODES.includes(x.game) ? x.game : null, r = m && cleanResult(m, x.rec, now);
++        if (!r){ refused++; continue; }
++        if (this.one("SELECT COUNT(*) AS c FROM d2t_results WHERE uid = ? AND mode = ?", who.uid, m).c >= MAX_RESULTS){ refused++; continue; }
++        const k = resultKeys(m, r, now);
++        const w = this.sql.exec("INSERT OR IGNORE INTO d2t_results (uid, mode, rid, day, at, win, val, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", who.uid, m, r.rid, r.carry ? "-" : k.day, r.at, k.win, k.val, JSON.stringify(r));
++        if (w.rowsWritten){ added++; touched.add(m); }
++      }
++      if (path === "/d2t/result" && !added && refused) return fail(400, "That result doesn't look right.");
++      const games = {};
++      for (const m of touched) games[m] = refresh(who.uid, who.name, m);
++      if (path === "/d2t/result" && !added && mode) games[mode] = mine(mode);
++      const pos = {}; for (const m of Object.keys(games)) if (games[m]) pos[m] = onTable(m, games[m]) ? { pos: 1 + above(m, rankKeys(m, games[m]), who.uid), count: countOf(m) } : null;
++      return json({ added, refused, games, pos });
++    }
++    return fail(404, "Not found");
++  }
++
+   // the admin page: find players, set a new PIN, unlock or delete an account
+   async admin(path, b, ip){
+     if (!this.env.ADMIN_PASSWORD) return fail(503, "The admin page isn't set up yet (ADMIN_PASSWORD is missing).");
+@@ -382,6 +490,7 @@ export class Accounts extends DurableObject {
+     if (path === "/admin/delete"){ this.sql.exec("DELETE FROM sessions WHERE uid = ?", u.id); this.sql.exec("DELETE FROM played WHERE uid = ? OR other = ?", u.id, u.id);
+       const lids = this.sql.exec("SELECT lid FROM league_members WHERE uid = ?", u.id).toArray().map(r => r.lid);
+       this.sql.exec("DELETE FROM league_members WHERE uid = ?", u.id); lids.forEach(lid => this.tidyLeague(lid));
++      this.sql.exec("DELETE FROM d2t_results WHERE uid = ?", u.id); this.sql.exec("DELETE FROM d2t_players WHERE uid = ?", u.id);
+       this.sql.exec("DELETE FROM users WHERE id = ?", u.id); return json({ ok: true }); }
+     return fail(404, "Not found");
+   }
+diff --git a/tests/d2t-server.test.mjs b/tests/d2t-server.test.mjs
+new file mode 100644
+index 0000000..ae6aa8e
+--- /dev/null
++++ b/tests/d2t-server.test.mjs
+@@ -0,0 +1,87 @@
++// DROP2TOP's leaderboard routes on the real server code, run locally with an empty database: results by run id (a repeat
++// never counts twice), a phone's old records merged once, the tables with the rows round the player, a guest told where
++// they would sit, and the home page's positions.
++import { startServer } from "./lib.mjs";
++import { test, assert, eq, report } from "./harness.mjs";
++
++const ORIGIN = "http://127.0.0.1:5199";
++const srv = process.env.D2T_SERVER ? { url: process.env.D2T_SERVER, stop: async () => {} } : await startServer({ port: 8789, origins: [ORIGIN] });
++let ipN = 0; const freshIp = () => `10.1.0.${++ipN}`;
++async function api(path, body = {}, { token, ip = "10.9.9.9" } = {}){
++  const r = await fetch(srv.url + "/api" + path, { method: "POST", headers: { "content-type": "application/json", Origin: ORIGIN, "CF-Connecting-IP": ip, ...(token ? { Authorization: "Bearer " + token } : {}) }, body: JSON.stringify(body) });
++  return { status: r.status, body: await r.json().catch(() => ({})) };
++}
++const signup = async (name, email) => (await api("/signup", { name, email, pin: "1234" }, { ip: freshIp() })).body.token;
++const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/London", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
++const classic = (rid, finish, o = {}) => ({ game: "classic", rec: { rid, club: "Derby", season: "2007/08", finish, histFinish: 20, pts: 70, histPts: 11, at: Date.now(), ...o } });
++const daily = (rid, finish, goes = 1) => ({ game: "daily", rec: { rid, date: today, club: "Bolton", season: "1995/96", finish, histFinish: 20, pts: 60, histPts: 29, goes, at: Date.now() } });
++
++const tom = await signup("toffee_tom", "tom@example.com"), lauren = await signup("LaurenB", "lauren@example.com"), deano = await signup("deano", "deano@example.com");
++
++await test("d2t server: a result needs a sign-in, is checked, and a repeat never counts twice", async () => {
++  eq((await api("/d2t/result", classic("run1", 1))).status, 401);
++  eq((await api("/d2t/result", { game: "classic", rec: { rid: "bad", club: "Derby", season: "x", finish: 1 } }, { token: tom })).status, 400, "nonsense is refused");
++  eq((await api("/d2t/result", { game: "moon", rec: {} }, { token: tom })).status, 400, "a game that is not one");
++  const r = await api("/d2t/result", classic("run1", 1), { token: tom });
++  eq([r.status, r.body.added, r.body.games.classic.titles, r.body.pos.classic], [200, 1, 1, { pos: 1, count: 1 }]);
++  const again = await api("/d2t/result", classic("run1", 1), { token: tom });
++  eq([again.body.added, again.body.games.classic.seasons], [0, 1], "the same run id again adds nothing");
++  await api("/d2t/result", classic("run2", 5), { token: tom });
++  eq((await api("/d2t/me", {}, { token: tom })).body.games.classic, { pos: 1, count: 1 });
++});
++await test("d2t server: a phone's old records merge once, in one call, and the tables rank everyone", async () => {
++  const m = await api("/d2t/merge", { results: [classic("old:1", 1, { club: "Burnley", season: "2009/10", histPts: 30 }), classic("old:2", 2), classic("old:3", 1, { histPts: 25 }), { game: "goal", rec: { rid: "carry:phone1", carry: true, games: 23, exact: 2, best: 4 } }, { game: "nope", rec: {} }] }, { token: deano });
++  eq([m.body.added, m.body.refused, m.body.games.classic.titles, m.body.games.goal.games], [4, 1, 2, 23]);
++  eq((await api("/d2t/merge", { results: [classic("old:1", 1), classic("old:2", 2)] }, { token: deano })).body.added, 0, "sent again: nothing doubles");
++  await api("/d2t/result", classic("l1", 3), { token: lauren });
++  const b = (await api("/d2t/board", { game: "classic", tab: "all" }, { token: lauren })).body;
++  eq(b.cols, ["Seasons", "Titles", "Top 3"]); eq(b.sort, 1); eq(b.count, 3);
++  eq(b.rows.map(r => r.gap ? "…" : `${r.pos} ${r.name} ${r.v.join("/")}`), ["1 deano 3/2/3", "2 toffee_tom 2/1/1", "3 LaurenB 1/0/1"]);
++  eq(b.me, { pos: 3, name: "LaurenB", v: [1, 0, 1], me: true });
++  eq(b.trophy, { title: "The hardest title", who: "toffee_tom", val: "Derby", what: "Won the league with Derby 2007/08 (11 pts for real)" });
++  eq((await api("/d2t/board", { game: "goal", tab: "all" })).body.rows, [{ pos: 1, name: "deano", v: [23, 2, "9%"], me: false }], "carried Goal Rush totals count");
++});
++await test("d2t server: the Daily today: every go counts, the best of the day ranks, the first champion holds the trophy", async () => {
++  await api("/d2t/result", daily("d:tom:1", 4, 1), { token: tom });
++  await api("/d2t/result", daily("d:lauren:1", 1, 1), { token: lauren });
++  await api("/d2t/result", daily("d:tom:2", 1, 2), { token: tom });
++  const b = (await api("/d2t/board", { game: "daily", tab: "today" }, { token: tom })).body;
++  eq(b.rows.map(r => `${r.pos} ${r.name} ${r.v.join("/")}`), ["1 LaurenB 1/1st/+19", "2 toffee_tom 2/1st/+19"], "level on the finish, fewer goes first");
++  eq(b.trophy.who, "LaurenB"); assert(/Bolton champions at \d\d:\d\d, on the 1st go/.test(b.trophy.what), b.trophy.what);
++  const all = (await api("/d2t/board", { game: "daily", tab: "all" }, { token: tom })).body;
++  eq(all.rows[0].v, [1, 1, "+19"]); eq(all.trophy.title, "Most Daily wins");
++  eq((await api("/d2t/board", { game: "classic", tab: "week" }, { token: deano })).body.trophy.what.slice(0, 18), "2 titles this week");
++});
++await test("d2t server: a guest can read every table and is told where their phone's numbers would sit, nothing stored", async () => {
++  const g = (await api("/d2t/board", { game: "classic", tab: "all", mine: [classic("x", 1).rec, classic("y", 1).rec, classic("z", 1).rec] })).body;
++  eq([g.signedIn, g.you, g.me], [false, { pos: 1, v: [3, 3, 3] }, null]);
++  eq((await api("/d2t/board", { game: "classic", tab: "all" })).body.you, null, "nothing played: no row");
++  eq((await api("/d2t/board", { game: "classic", tab: "all" })).body.count, 3, "the guest was not added");
++  eq((await api("/d2t/board", { game: "ub", tab: "week" })).body, { game: "ub", tab: "week", cols: ["Runs", "Best run", "Average"], sort: 1, signedIn: false, name: null, rows: [], me: null, count: 0, you: null, trophy: null }, "an empty table");
++  eq((await api("/d2t/me", {})).body, { signedIn: false, games: {} });
++});
++await test("d2t server: Club X, Goal Rush and Unbeaten tables and positions", async () => {
++  const x = (n, finish, pts) => ({ game: "clubx", rec: { rid: "x:" + n, careerId: "car", career: n, season: "2012/13", club: "Kirk United", finish, pts, w: 30, d: 5, l: 3, gf: 90, ga: 20, at: Date.now() } });
++  await api("/d2t/merge", { results: [x(1, 1, 90), x(2, 1, 104), x(3, 2, 80)] }, { token: deano });
++  const xb = (await api("/d2t/board", { game: "clubx", tab: "season" }, { token: deano })).body;
++  eq(xb.rows[0].v, [104, 30, "+70"]); eq(xb.trophy.what, "104 points with Kirk United, season 2");
++  eq((await api("/d2t/board", { game: "clubx", tab: "all" }, { token: deano })).body.trophy.what, "2 titles in a row with Kirk United");
++  await api("/d2t/merge", { results: [{ game: "goal", rec: { rid: "g1", shape: "433", total: 433, at: Date.now() } }, { game: "goal", rec: { rid: "g2", shape: "541", total: 560, at: Date.now() } }] }, { token: lauren });
++  const gb = (await api("/d2t/board", { game: "goal", tab: "today" }, { token: lauren })).body;
++  eq(gb.rows[0], { pos: 1, name: "LaurenB", v: [2, 1, 0], me: true }); eq(gb.trophy.title, "First spot on today"); assert(/^Spot on 433 at/.test(gb.trophy.what));
++  await api("/d2t/merge", { results: [{ game: "ub", rec: { rid: "u1", stat: "cg", run: 41, at: Date.now() } }, { game: "ub", rec: { rid: "u2", stat: "pts", run: 3, at: Date.now() } }, { game: "ub", rec: { rid: "carry:p", carry: true, runs: 10, best: { w: 9 } } }] }, { token: tom });
++  const ub = (await api("/d2t/board", { game: "ub", tab: "all" }, { token: tom })).body;
++  eq(ub.rows[0].v, [12, 41, "22.0"]); eq(ub.trophy.what, "41 in a row on career goals");
++  const me = (await api("/d2t/me", {}, { token: deano })).body.games;
++  eq([me.classic.pos, me.clubx, me.goal.pos, me.ub, me.daily], [1, { pos: 1, count: 1 }, 1, null, null], "2 spot on in 23 games ranks above 1 in 2");
++});
++await test("d2t server: a long table sends the top ten and the rows round the player", async () => {
++  const toks = []; for (let i = 0; i < 14; i++) toks.push(await signup("p" + i, `p${i}@example.com`));
++  for (let i = 0; i < 14; i++) await api("/d2t/result", { game: "ub", rec: { rid: "r", stat: "cg", run: 50 - i, at: Date.now() } }, { token: toks[i] });
++  const b = (await api("/d2t/board", { game: "ub", tab: "all" }, { token: toks[13] })).body;
++  eq(b.count, 15); eq(b.me.pos, 15);
++  eq(b.rows.map(r => r.gap ? "…" : r.pos), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "…", 13, 14, 15]);
++  eq((await api("/d2t/board", { game: "ub", tab: "all" }, { token: toks[2] })).body.rows.length, 11, "in the top ten: the ten and a gap");
++});
++await srv.stop();
++report();
+diff --git a/tests/d2t.test.mjs b/tests/d2t.test.mjs
+new file mode 100644
+index 0000000..fd0bf55
+--- /dev/null
++++ b/tests/d2t.test.mjs
+@@ -0,0 +1,114 @@
++// DROP2TOP's leaderboards, the pure part (server/src/d2t.js): results are checked, folded per player, ranked and sliced,
++// and the trophy card names the right record and holder. The routes are covered in server.test.mjs.
++import { cleanResult, resultKeys, aggregate, rank, slice, placeOf, trophy, onTable, ukDay, ukTime, weekStart, validDay, BOARDS, TABS } from "../server/src/d2t.js";
++import { test, assert, eq, report } from "./harness.mjs";
++
++const NOW = Date.parse("2026-10-31T14:05:00Z"); // a Saturday, 14:05 UK (GMT)
++const at = (h, d = 0) => Date.parse("2026-10-31T00:00:00Z") + d * 864e5 + h * 3600e3;
++const daily = (o = {}) => cleanResult("daily", { rid: "daily:" + Math.random(), date: "2026-10-31", club: "Bolton", season: "1995/96", finish: 4, histFinish: 20, pts: 60, histPts: 29, goes: 1, at: at(9), ...o }, NOW);
++const classic = (o = {}) => cleanResult("classic", { rid: "c:" + Math.random(), club: "Derby", season: "2007/08", finish: 1, histFinish: 20, pts: 80, histPts: 11, at: at(10), ...o }, NOW);
++const clubx = (o = {}) => cleanResult("clubx", { rid: "x:" + Math.random(), careerId: "car1", career: 1, season: "2012/13", club: "Hollow Rovers", finish: 1, pts: 90, w: 28, d: 6, l: 4, gf: 80, ga: 30, at: at(10), ...o }, NOW);
++const goal = (o = {}) => cleanResult("goal", { rid: "g:" + Math.random(), shape: "433", total: 433, at: at(8.7), ...o }, NOW);
++const ub = (o = {}) => cleanResult("ub", { rid: "u:" + Math.random(), stat: "cg", run: 12, at: at(11), ...o }, NOW);
++
++await test("d2t: dates are UK dates, the week starts on Monday", () => {
++  eq(ukDay(Date.parse("2026-07-01T23:30:00Z")), "2026-07-02", "British Summer Time");
++  eq(ukDay(Date.parse("2026-12-01T23:30:00Z")), "2026-12-01");
++  eq(ukTime(Date.parse("2026-07-01T08:41:00Z")), "09:41");
++  eq(weekStart("2026-10-31"), "2026-10-26"); eq(weekStart("2026-10-26"), "2026-10-26"); eq(weekStart("2026-11-01"), "2026-10-26");
++  assert(validDay("2026-10-31") && !validDay("2026-02-30") && !validDay("31/10/2026"), "a day is checked");
++});
++await test("d2t: a result is checked and clamped, and the rise is worked out, never trusted", () => {
++  const d = daily({ finish: 99, rise: 50, pts: -4, goes: 0 });
++  eq([d.finish, d.rise, d.pts, d.goes], [24, -4, 0, 1]);
++  eq(daily({ date: "2026-11-01" }), null, "a Daily from tomorrow");
++  eq(daily({ date: "2026-10-10" }), null, "a Daily from before the first one");
++  eq(cleanResult("goal", { rid: "g1", shape: "4-3-3", total: 400 }, NOW), null, "a shape the game has not got");
++  eq(goal({ total: 441 }).gap, 8); eq(goal({ shape: "352", total: 352 }).target, 352);
++  eq(cleanResult("ub", { rid: "u1", stat: "xx", run: 5 }, NOW), null, "a stat the game has not got");
++  eq(cleanResult("classic", { rid: "bad id!", club: "Derby", season: "2007/08", finish: 1 }, NOW), null, "a run id with odd characters");
++  eq(cleanResult("classic", { rid: "c1", club: "Derby", season: "200708", finish: 1 }, NOW), null, "a season that is not one");
++  const x = clubx({ w: 40, d: 10, l: 10 }); eq([x.w, x.d, x.l], [40, 6, 0], "wins, draws and losses never add up to more than 46");
++  const c = cleanResult("goal", { rid: "carry:abc", carry: true, games: 23, exact: 2, best: 4 }, NOW); eq([c.carry, c.games, c.exact, c.best], [true, 23, 2, 4]);
++  eq(cleanResult("classic", { rid: "carry:abc", carry: true }, NOW), null, "Classic keeps every season, so nothing is carried");
++  eq(cleanResult("daily", { rid: "d1", date: "2026-10-31", club: "Bolton", season: "1995/96", finish: 1, histFinish: 20, at: NOW + 864e5 }, NOW).at, NOW, "a time from the future is now");
++});
++await test("d2t: stored keys: the Daily's own date, a title or spot on as a win, a sortable value", () => {
++  eq(resultKeys("daily", daily({ finish: 1, date: "2026-10-30" }), NOW), { day: "2026-10-30", win: 1, val: 1 });
++  eq(resultKeys("classic", classic(), NOW), { day: "2026-10-31", win: 1, val: 11 });
++  eq(resultKeys("goal", goal({ total: 440 }), NOW), { day: "2026-10-31", win: 0, val: 7 });
++  eq(resultKeys("ub", ub({ run: 19 }), NOW).val, 19);
++});
++await test("d2t: a Daily folds by day (the best go counts, goes are the most reported), a carried Goal Rush total adds in", () => {
++  const a = aggregate("daily", [daily({ finish: 4, goes: 1 }), daily({ finish: 1, goes: 3 }), daily({ date: "2026-10-30", finish: 9, goes: 2 }), daily({ date: "2026-10-30", finish: 12, goes: 1 })]);
++  eq([a.played, a.wins, a.bestRise, a.bestFinish, a.goes], [2, 1, 19, 1, 5]);
++  const g = aggregate("goal", [goal({ total: 433 }), goal({ total: 440 }), cleanResult("goal", { rid: "carry:p", carry: true, games: 23, exact: 2, best: 4 }, NOW)]);
++  eq([g.games, g.exact, g.closest, Math.round(100 * g.rate)], [25, 3, 0, 12]);
++  const u = aggregate("ub", [ub({ run: 12 }), ub({ run: 7, stat: "pts" }), cleanResult("ub", { rid: "carry:p", carry: true, runs: 10, best: { cg: 15, w: 3 } }, NOW)]);
++  eq([u.runs, u.best, u.bestStat, u.avg, u.known], [12, 15, "cg", 9.5, 2]);
++});
++await test("d2t: Club X counts titles in a row within one career, and the best season by points", () => {
++  const a = aggregate("clubx", [clubx({ career: 1 }), clubx({ career: 2, pts: 95, w: 30 }), clubx({ career: 3, finish: 2 }), clubx({ career: 4 }), clubx({ careerId: "car2", career: 1, finish: 1, pts: 70 })]);
++  eq([a.seasons, a.titles, a.inARow, a.dynasty, a.careers, a.best.pts, a.best.career], [5, 4, 2, "Hollow Rovers", 2, 95, 2]);
++  eq(onTable("clubx", aggregate("clubx", [])), false);
++});
++await test("d2t: ranking puts the most titles first, then top 3s, then fewer seasons, ties by id; a dash row for nobody", () => {
++  const P = [
++    { uid: "a", name: "gaffer_ali", agg: aggregate("classic", [classic(), classic({ finish: 3 }), classic({ finish: 8 })]) },
++    { uid: "b", name: "deano", agg: aggregate("classic", [classic(), classic({ finish: 2 })]) },
++    { uid: "c", name: "TashF", agg: aggregate("classic", [classic({ finish: 5 })]) },
++    { uid: "d", name: "nobody", agg: aggregate("classic", []) }
++  ];
++  const r = rank("classic", "all", P);
++  eq(r.map(x => x.name + ":" + x.pos), ["deano:1", "gaffer_ali:2", "TashF:3"], "deano: 1 title, 2 top 3s in 2 seasons beats 1 title, 2 top 3s in 3 seasons");
++  const s = slice("classic", "all", r, "c", 2, 1);
++  eq(s.rows.map(x => x.gap ? "…" : x.name), ["deano", "gaffer_ali", "TashF"], "around the player: no gap when the rows touch");
++  eq(s.me.pos, 3); eq(s.count, 3); eq(s.rows[2].v, [1, 0, 0]);
++  eq(placeOf("classic", "all", r, aggregate("classic", [classic(), classic()])), 1, "a guest with 2 titles would be top");
++  eq(placeOf("classic", "all", r, aggregate("classic", [classic({ finish: 9 })])), 4, "a guest with no title sits under everyone with one");
++  eq(placeOf("classic", "all", r, aggregate("classic", [])), null);
++});
++await test("d2t: a long table's slice is the top ten, a gap, the rows round the player, a gap", () => {
++  const P = Array.from({ length: 40 }, (_, i) => ({ uid: "u" + String(i).padStart(2, "0"), name: "p" + i, agg: aggregate("ub", [ub({ run: 40 - i })]) }));
++  const s = slice("ub", "all", rank("ub", "all", P), "u22");
++  eq(s.rows.filter(r => !r.gap).map(r => r.pos), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 21, 22, 23, 24, 25]);
++  eq(s.rows.map(r => r.gap ? "…" : "").filter(Boolean).length, 2); eq(s.me.pos, 23); eq(s.count, 40);
++  const top = slice("ub", "all", rank("ub", "all", P), "u03");
++  eq(top.rows.length, 11, "a player in the top ten: the ten and one gap"); eq(top.me.pos, 4);
++});
++await test("d2t: the Daily today ranks by best finish, then fewest goes; Goal Rush today by spot on, then closest", () => {
++  const r = rank("daily", "today", [
++    { uid: "a", name: "jj", agg: aggregate("daily", [daily({ finish: 1, goes: 1 })]) },
++    { uid: "b", name: "lauren", agg: aggregate("daily", [daily({ finish: 1, goes: 2 })]) },
++    { uid: "c", name: "kop", agg: aggregate("daily", [daily({ finish: 2, goes: 1 })]) }]);
++  eq(r.map(x => x.name), ["jj", "lauren", "kop"]); eq(BOARDS.daily.today.vals(r[1].agg), [2, "1st", "+19"]);
++  const g = rank("goal", "today", [
++    { uid: "a", name: "near", agg: aggregate("goal", [goal({ total: 436 })]) },
++    { uid: "b", name: "spot", agg: aggregate("goal", [goal({ total: 433 }), goal({ total: 500 })]) },
++    { uid: "c", name: "far", agg: aggregate("goal", [goal({ total: 300 })]) }]);
++  eq(g.map(x => x.name), ["spot", "near", "far"]); eq(BOARDS.goal.today.vals(g[0].agg), [2, 1, 0]);
++});
++await test("d2t: every game has two tabs, All time first, and every board has three columns", () => {
++  for (const [m, tabs] of Object.entries(TABS)){ eq(tabs[0], "all", m); for (const t of tabs){ eq(BOARDS[m][t].cols.length, 3, m + " " + t); assert(BOARDS[m][t].sort >= 0 && BOARDS[m][t].sort <= 2); } }
++  eq(TABS.clubx[1], "season"); eq(BOARDS.goal.all.cols[1], "Spot on");
++});
++await test("d2t: the trophies name the record and its holder, or nobody", () => {
++  const dailyAll = rank("daily", "all", [{ uid: "a", name: "toffee_tom", agg: aggregate("daily", [daily({ finish: 1 }), daily({ date: "2026-10-30", finish: 1 }), daily({ date: "2026-10-29", finish: 5 })]) }]);
++  eq(trophy("daily", "all", dailyAll), { title: "Most Daily wins", who: "toffee_tom", val: "2", what: "2 league titles from 3 Dailies" });
++  eq(trophy("daily", "all", rank("daily", "all", [{ uid: "a", name: "x", agg: aggregate("daily", [daily({ finish: 5 })]) }])), null, "no wins yet: nobody");
++  eq(trophy("daily", "today", [], { first: { name: "LaurenB", r: daily({ finish: 1, goes: 2, at: at(9.25) }) } }), { title: "First to win the league today", who: "LaurenB", val: "09:15", what: "Bolton champions at 09:15, on the 2nd go" });
++  eq(trophy("daily", "today", [], {}), null);
++  eq(trophy("classic", "all", [], { hardest: { name: "deano", r: classic() } }).what, "Won the league with Derby 2007/08 (11 pts for real)");
++  const wk = rank("classic", "week", [{ uid: "a", name: "gaffer_ali", agg: aggregate("classic", [classic({ club: "Burnley", season: "2009/10", histFinish: 18, histPts: 30 }), classic({ histPts: 40 })]) }]);
++  eq(trophy("classic", "week", wk).what, "2 titles this week, the best Burnley 2009/10 from 18th");
++  const x = rank("clubx", "all", [{ uid: "a", name: "kop_kid", agg: aggregate("clubx", [clubx({ career: 1 }), clubx({ career: 2 }), clubx({ career: 3 })]) }, { uid: "b", name: "more", agg: aggregate("clubx", [clubx({ career: 1 }), clubx({ career: 2, finish: 3 }), clubx({ career: 3 }), clubx({ career: 4 }), clubx({ career: 5, finish: 4 }), clubx({ career: 6 })]) }]);
++  eq(x[0].name, "more", "most titles tops the table");
++  eq(trophy("clubx", "all", x), { title: "The longest dynasty", who: "kop_kid", val: "3", what: "3 titles in a row with Hollow Rovers" }, "the longest run of titles, not the most titles");
++  eq(trophy("clubx", "season", rank("clubx", "season", x)).what, "90 points with Hollow Rovers, season 1");
++  eq(trophy("goal", "all", rank("goal", "all", [{ uid: "a", name: "jj_saints", agg: aggregate("goal", [goal(), goal({ total: 1 })]) }])).what, "Spot on 1 time in 2 games");
++  eq(trophy("goal", "today", [], { first: { name: "jj_saints", r: goal({ at: at(8 + 41 / 60) }) } }).what, "Spot on 433 at 08:41");
++  eq(trophy("ub", "all", [], { longest: { name: "LaurenB", r: ub({ run: 41 }) } }).what, "41 in a row on career goals");
++  eq(trophy("ub", "week", [], { longest: { name: "kop_kid", r: ub({ run: 23, stat: "pts", at: at(12, -4) }) } }).what, "23 in a row on club points in a season, Tuesday");
++  eq(trophy("ub", "week", [], { longest: { name: "x", r: ub({ run: 0 }) } }), null);
++});
++report();
+diff --git a/tests/run-all.mjs b/tests/run-all.mjs
+index 31e9683..279f2a0 100644
+--- a/tests/run-all.mjs
++++ b/tests/run-all.mjs
+@@ -1,6 +1,6 @@
+ // Runs every suite in order.
+ import { spawnSync } from "node:child_process";
+-const suites = ["stats.test.mjs", "server.test.mjs", "game.test.mjs", "modes.test.mjs", "account.test.mjs", "online.test.mjs", "trophy.test.mjs"];
++const suites = ["stats.test.mjs", "d2t.test.mjs", "server.test.mjs", "d2t-server.test.mjs", "game.test.mjs", "modes.test.mjs", "account.test.mjs", "online.test.mjs", "trophy.test.mjs"];
+ let failed = 0;
+ for (const s of suites){
+   console.log(`\n▶ ${s}`);
+-- 
+2.43.0
+
