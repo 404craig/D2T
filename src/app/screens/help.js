@@ -73,7 +73,7 @@
     goal: () => [
       sec('The target', `<div class="hp-gr"><b>3-5-2</b><span>=</span><b>352 goals</b></div>` + p('Each game picks a formation, and its number is your target. Fill the XI so their <b>career Premier League goals</b> add up to it <b>exactly</b>.')),
       sec('Picking your XI', list(['Spin for three real players for the shirts still open. Pick one.', '<b>Drag</b> him onto a yellow shirt, tap him then the shirt, or tap him twice.', 'His goals roll up on his shirt and into your total. You can spin again while they count.', 'You have <b>3 respins</b> a game.'])),
-      sec('Scoring', list(['Land exactly on the target and it\'s <b>Bang on</b>.', 'Go over and you\'re bust: over is over.', 'Your best is how close you got, whatever the formation.'])),
+      sec('Scoring', list(['Land exactly on the target and it\'s <b>Spot on</b>.', 'Go over and you\'re bust: over is over.', 'Your best is how close you got, whatever the formation.'])),
       leaving],
     ub: () => [
       sec('How it works', p('Spin to pick a stat: career goals, appearances, assists, a season\'s goals, a club\'s points, and more. Two real numbers come up side by side. The left one shows; is the right one <b>higher or lower</b>?')),
