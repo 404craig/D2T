@@ -150,3 +150,33 @@
 .hp-done { min-height: 54px; }
 /* Share's choice: the game so far, or the record */
 .stg-opts { padding-bottom: 6px; }
+
+/* the Daily takes over the top bar (Craig, 31 Oct, build 184; option 3 in design/prototype/daily-morph.html): a white bar
+   44px tall, from a circle on the emblem to the account button's right edge (--dl, --dw set as it starts) */
+.stg-dly { position: absolute; top: 0; left: var(--dl, 0); height: 44px; width: 44px; box-sizing: border-box; border-radius: 22px; border: 0; padding: 0 5px; margin: 0;
+  background: #fff; color: var(--dink, #0A0A0A); display: flex; align-items: center; gap: 9px; overflow: hidden; cursor: pointer; z-index: 5;
+  opacity: 0; transform: scale(.7); pointer-events: none; box-shadow: 0 0 18px rgba(255,255,255,.28);
+  transition: width .55s cubic-bezier(.3,1.25,.5,1), opacity .2s, transform .25s; -webkit-tap-highlight-color: transparent; }
+.stg-dly-cr { flex: none; width: 34px; height: 34px; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--dink, #0A0A0A) 18%, transparent); transform: scale(0); transition: transform .35s cubic-bezier(.3,1.6,.5,1); }
+.stg-dly-cr img { width: 27px; height: 27px; object-fit: contain; }
+.stg-dly-tx { flex: 1; min-width: 0; text-align: left; white-space: nowrap; opacity: 0; transform: translateX(10px); transition: opacity .25s, transform .3s; }
+.stg-dly-tx i { display: block; font: 800 9.5px/1.25 var(--font); letter-spacing: .13em; color: #5A5E80; font-style: normal; text-transform: uppercase; }
+.stg-dly-tx b { display: block; font: 900 italic 17px/1.1 var(--font); text-transform: uppercase; color: var(--dink, #0A0A0A); overflow: hidden; text-overflow: ellipsis; }
+.stg-dly-go { flex: none; height: 34px; padding: 0 10px 0 13px; border-radius: 17px; background: var(--dink, #0A0A0A); color: #fff; display: flex; align-items: center; gap: 4px;
+  font: 900 italic 14px var(--font); text-transform: uppercase; white-space: nowrap; opacity: 0; transform: scale(.6); transition: opacity .25s, transform .35s cubic-bezier(.3,1.6,.5,1); }
+.stg-dly-go svg { width: 12px; height: 12px; }
+.stg-dly-sh { position: absolute; top: 0; bottom: 0; left: 0; width: 40px; background: linear-gradient(100deg, transparent, rgba(255,255,255,.95), transparent); mix-blend-mode: overlay; opacity: 0; pointer-events: none; }
+.stg-top .fr-hl-p:not(.fr-hl-emb) { transition: opacity .25s; }
+.stg .stg-top .stg-rb { transition: opacity .25s; }
+.stg-top.dly-on .stg-rb { pointer-events: none; }
+.stg-top.dly-circ .fr-hl-emb { opacity: 0; }
+.stg-top.dly-circ .stg-dly { opacity: 1; transform: none; pointer-events: auto; }
+.stg-top.dly-full .stg-dly { width: var(--dw, 340px); }
+.stg-top.dly-full .fr-hl-p:not(.fr-hl-emb) { opacity: 0; }
+.stg.stg-in.on .stg-top.dly-full .stg-rb, .stg .stg-top.dly-full .stg-rb { opacity: 0; }
+.stg-top.dly-full .stg-dly-cr { transform: scale(1); transition-delay: .2s; }
+.stg-top.dly-full .stg-dly-tx { opacity: 1; transform: none; transition-delay: .35s; }
+.stg-top.dly-full .stg-dly-go { opacity: 1; transform: none; transition-delay: .45s; }
+/* reduced motion: no spin, growth or glint, the logo and buttons crossfade to the full bar */
+.stg-top.dly-rm .stg-dly, .stg-top.dly-rm .stg-dly * { transition: opacity .3s !important; transform: none !important; }
+.stg-top.dly-rm .stg-dly { width: var(--dw, 340px); }
