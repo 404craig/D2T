@@ -163,10 +163,17 @@
         const a = SL[0].querySelector('.stg-art'), r = a.getBoundingClientRect(), er = el.getBoundingClientRect(), s = Math.min(1, (r.height || 300) / 300);
         W = er.width * 0.85;
         el.style.setProperty('--as', s.toFixed(3));
-        el.style.setProperty('--swy', (r.top - er.top + r.height / 2 - 22).toFixed(0) + 'px');
+        // the round arrows at the art's height; a reading taken before iOS has settled the screen (the art 0 tall) is never
+        // used, and it is read again once the page settles and whenever the stage changes size (Craig, 31 Oct, build 200:
+        // on his iPhone they had gone, placed under the top bar by such a reading)
+        // (offsets, which a slide's rotation on the wheel does not move)
+        const ah = a.offsetHeight, at = a.offsetTop + SL[0].offsetTop;
+        if (ah > 60 && er.height > 200) el.style.setProperty('--swy', (at + ah / 2 - 22).toFixed(0) + 'px');
       };
       const logo = $('.stg-logo'), logoR = logo.getBoundingClientRect(), rootR = root.getBoundingClientRect();   // for the hand-over from the intro
       fit(); const onResize = () => fit(); window.addEventListener('resize', onResize); cleanups.push(() => window.removeEventListener('resize', onResize));
+      if (window.ResizeObserver) { const ro = new ResizeObserver(() => fit()); ro.observe(el); cleanups.push(() => ro.disconnect()); }
+      later(fit, 700);
 
       // ---------- the wheel ----------
       // coming back from a game opens on that game (Craig, 30 Oct)
