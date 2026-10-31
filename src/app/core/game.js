@@ -66,8 +66,10 @@
     // balance per formation (tests/sim-goalrush.js): how many top scorers per position each draws from, so a random XI
     // lands near 77% of the target whatever the shape, and the last-shot gift chance; a casual player lands exactly
     // about 1 game in 20 and within 10 about 1 in 5 (5-4-1 the hardest)
-    DEPTH: { 442: 180, 433: 220, 451: 145, 352: 310, 343: 355, 424: 260, 532: 105, 541: 75 },
-    GIFTS: { 442: 0.22, 433: 0.2, 451: 0.27, 352: 0.14, 343: 0.14, 424: 0.18, 532: 0.36, 541: 0.42 },
+    // plus every star (a purple or legend card in that position, Craig, 31 Oct, build 208), so the depths came down to
+    // keep the same average XI and hit rates (tests/sim-goalrush.js)
+    DEPTH: { 442: 170, 433: 214, 451: 123, 352: 305, 343: 353, 424: 256, 532: 77, 541: 35 },
+    GIFTS: { 442: 0.22, 433: 0.2, 451: 0.27, 352: 0.14, 343: 0.14, 424: 0.18, 532: 0.28, 541: 0.28 },
     // how often each shape comes up (Craig, 13 Oct): the back fives, 5-3-2 and 5-4-1, half as often as the rest
     // (about 1 game in 14 each, the other six about 1 in 7)
     FORM_WEIGHT: { 532: 0.5, 541: 0.5 },
@@ -81,7 +83,9 @@
     depth: (f) => GAME.g433.DEPTH[f] || GAME.g433.TOP,
     gift: (f) => (GAME.g433.GIFTS[f] != null ? GAME.g433.GIFTS[f] : 0.2),
     shapeText: (f) => String(f).split('').join('-'),
-    list: (pos) => g4lists[pos] || (g4lists[pos] = G4[pos].map(([name, sur, club, goals]) => ({ name, sur, club, goals, pos }))),
+    list: (pos) => g4lists[pos] || (g4lists[pos] = G4[pos].map(([name, sur, club, goals, star]) => ({ name, sur, club, goals, pos, star: !!star }))),
+    // a shape's pool in a position: its top scorers and every star
+    pool: (pos, f) => { const top = GAME.g433.depth(f); return GAME.g433.list(pos).filter((p, i) => i < top || p.star); },
     // Every spin (Craig, 12 Oct): three players from any position still open on the board, each position as likely as
     // its open shirts. On the last shot, if a player of that position has exactly the goals needed, one game in five
     // (GIFT, decided once per game, so respins keep it) puts him among the three. Balanced with a simulation of
@@ -94,7 +98,7 @@
     recentWeights: () => E.recentWeights((D2T.state.g4recent || []).slice(1)),
     drawOpen(openPos, avoid, need, f) {
       avoid = avoid || [];
-      const slots = [], out = [], top = GAME.g433.depth(f), pickFrom = (pos) => GAME.g433.list(pos).slice(0, top);
+      const slots = [], out = [], pickFrom = (pos) => GAME.g433.pool(pos, f);
       Object.keys(openPos).forEach((pos) => { for (let i = 0; i < openPos[pos]; i++) slots.push(pos); });
       if (!slots.length) return out;
       if (need != null) { const hits = pickFrom(slots[0]).filter((p) => p.goals === need && !avoid.includes(p.name)); if (hits.length) out.push(hits[Math.floor(Math.random() * hits.length)]); }
@@ -107,7 +111,7 @@
       for (const p of out) if (!st.g4recent[0].includes(p.name)) st.g4recent[0].push(p.name);
       return out;
     },
-    canGift: (pos, need, avoid, f) => need >= 0 && GAME.g433.list(pos).slice(0, GAME.g433.depth(f)).some((p) => p.goals === need && !avoid.includes(p.name)),
+    canGift: (pos, need, avoid, f) => need >= 0 && GAME.g433.pool(pos, f).some((p) => p.goals === need && !avoid.includes(p.name)),
     // a best or last from 433 Goals has no target saved: it was 433
     record: () => { const r = Object.assign({ games: 0, exact: 0, best: null, bestTotal: null, last: null }, D2T.state.record.g433 || {}); if (r.best != null && !r.bestTarget) r.bestTarget = 433; if (r.last != null && !r.lastTarget) r.lastTarget = 433; return r; },
     // the record carries on from 433 Goals: best is "N away" whatever the target

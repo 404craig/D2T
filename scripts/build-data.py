@@ -430,6 +430,12 @@ def main():
             k = game["careers"][q["k"]]
             k["as"] = k.get("as", 0) + int(q.get("as") or 0)
             k["cs"] = k.get("cs", 0) + int(q.get("cs") or 0)
+    # Goal Rush stars: a purple or legend card in his Goal Rush position in any season (Craig, 31 Oct, build 208: every
+    # pool takes the stars as well as the top scorers, so Gary Neville, Carragher, Makelele and Cech can come up); a 1 on his row
+    g4star = {(q["n"], q["b"]) for S in game["seasons"].values() for q in S["players"] if q.get("lv", 0) >= 3}
+    for pos, rows in game["g433"].items():
+        for row in rows:
+            if (row[0], pos) in g4star: row.append(1)
     os.makedirs(OUT, exist_ok=True)
     with open(os.path.join(OUT, "game.json"), "w", encoding="utf-8") as f:
         json.dump(game, f, separators=(",", ":"), ensure_ascii=False)
