@@ -113,21 +113,133 @@
     const bar = (k, label, v) => `<span class="se-line${v === top ? ' is-top' : ''}" aria-label="${label} ${v}"><i>${k}</i><b><u style="width:${Math.max(4, Math.min(100, (v - lo) / (hi - lo) * 100)).toFixed(0)}%"></u></b><em>${v}</em></span>`;
     return `<div class="se-linebars">${bar('DEF', 'Defence', L.def)}${bar('MID', 'Midfield', L.mid)}${bar('ATT', 'Attack', L.att)}</div>`;
   };
-  // the tactics sheet: five boards, each a small pitch in your current shape that moves the way the tactic does (reduced
-  // motion: still), the tactic's name, one line on what it leans on, and the shapes it is built for. Done applies it.
-  // `onApply(k)` runs when the sheet closes on a change.
-  SE.tacticSheet = (root, onApply) => {
-    const f = GAME.eng().formation, dots = GAME.formationDots(f);
-    let pending = GAME.tactic();
-    const tile = (t) => `<button class="se-taccard${t.k === pending ? ' is-on' : ''}" type="button" data-t="${t.k}" aria-pressed="${t.k === pending}">
-      <span class="se-fpitch se-tacpitch is-${t.k}"><span class="se-fline"></span>${dots.map((d, i) => `<i style="left:${d.x}%;top:${d.y}%;--i:${i}"></i>`).join('')}${t.k === 'poss' ? '<s class="se-tacball"></s>' : ''}</span>
-      <span class="se-tactext"><b>${t.name}</b><span>${t.line}</span><small>${t.any ? 'Any shape' : 'Built for ' + GAME.tacticShapes(t.k).join(', ').replace(/, ([^,]*)$/, ' and $1')}${!t.any && GAME.tacticShapes(t.k).includes(f) ? ' · your shape' : ''}</small></span></button>`;
-    const el = D2T.h(`<div><div class="se-tacgrid">${GAME.TACTICS.map(tile).join('')}</div><p class="se-note">A tactic leans on one of your lines: it pays when that line is your strength and costs when it is your weakness. In a shape it is built for it bites in full; in any other, half. Change it whenever your squad is up.</p></div>`);
-    const sh = D2T.sheet({ title: 'Tactics', body: el, foot: '<button class="btn se-btn se-done" type="button" data-done>Done</button>', onClose: () => { if (pending === GAME.tactic()) return; GAME.setTactic(pending); window.D2TSound && window.D2TSound.play('formation'); onApply && onApply(pending); } });
-    sh.el.classList.add('se-run', 'se-tacsheet');
+  // ---------- the formation and tactic sheets (Craig, 31 Oct, build 182; Version 1 "Scout's notes" on the carousels canvas) ----------
+  // Both are a carousel of small pitches above a panel about the one picked, and a fixed Play button in the mode's colour.
+  // Closing the sheet any way applies the pick, as Done did before.
+  // A shape's one strength and one weakness, plain football sense, and one fact from the Premier League feed's starting
+  // line-ups since 2015/16 (counted per club-season on 31 Oct; the champions from the game's own results).
+  SE.SHAPES = {
+    '4-4-2': ['Width on both flanks and a strike pair to share the goals.', 'Two in central midfield can be outnumbered by a three.', 'Leicester won the 2015/16 title in it, starting 34 of their 38 games in a 4-4-2.'],
+    '4-3-3': ['Wingers pin back the full backs and a holder screens the defence.', 'Your full backs are left alone if the wingers do not track back.', '7 of the last 11 champions played it most, Liverpool\'s 99-point side of 2019/20 among them.'],
+    '4-2-3-1': ['Two holders protect the back four while three create.', 'The lone striker can be cut off from the rest.', 'The most-used shape in the league since 2015/16. Liverpool started 35 of 38 in it to win in 2024/25.'],
+    '4-4-1-1': ['The second striker links midfield to attack.', 'Hard to find room for a holding midfielder.', 'Everton started 28 of their 38 games in it in 2023/24.'],
+    '4-1-4-1': ['Compact, with one holder screening the back four.', 'Teams that get either side of the holder find space.', 'Leicester started 25 of their 38 games in it in 2019/20.'],
+    '4-5-1': ['Very hard to play through the middle.', 'The striker spends a lot of time on his own.', 'No side has been listed in a flat 4-5-1 since 2015/16. Teams now line it up as a 4-1-4-1.'],
+    '3-5-2': ['Extra bodies in midfield and two up top.', 'Space behind the wing backs when they push on.', 'Sheffield United started all 38 games in it in 2019/20 and finished 9th.'],
+    '3-4-3': ['Three forwards to press high and score.', 'Two in central midfield can be overrun.', 'Chelsea won the 2016/17 title in it, with 22 starts in a 3-4-3.'],
+    '3-4-2-1': ['Two playmakers work between the lines.', 'Wing backs have a whole flank each to cover.', 'Crystal Palace started 35 of their 38 games in it in 2024/25.'],
+    '5-3-2': ['Solid at the back with two outlets up top.', 'Not much width going forward.', 'A rare shape now: Newcastle\'s 12 starts in it in 2020/21 are the most since 2015/16.'],
+    '5-4-1': ['Two deep banks that are hard to break down.', 'Little support for the striker.', 'Newcastle started 22 games in it in 2018/19, the most by any side since 2015/16.']
+  };
+  // each tactic: which lines it makes key (1) or asks less of (-1), Def Mid Att, how its players move on the board, and
+  // what it does and what it costs, in the words of what the engine does with it (never its numbers)
+  const TAC = {
+    mid: { lean: [0, 0, 0], how: 'Keeps your shape in the middle of the pitch.', cost: 'Your best line gets no extra help.' },
+    low: { lean: [1, 0, -1], how: 'Sits deep and protects your box.', cost: 'Fewer chances at the other end.' },
+    poss: { lean: [0, 1, 0], how: 'Keeps the ball and builds through midfield.', cost: 'Only as good as your midfield.' },
+    counter: { lean: [0, 0, 1], how: 'Soaks up pressure, then breaks through your best forward.', cost: 'Fewer players join the attack.' },
+    press: { lean: [-1, 0, 1], how: 'Wins the ball back high up the pitch.', cost: 'Space behind your defence when the press is beaten.' }
+  };
+  const LINE_I = { DEF: 0, MID: 1, FWD: 2 };
+  const moveFor = (k, s) => {
+    const { pos, line, x, y } = s;
+    if (k === 'low') return [50 + (x - 50) * 0.82, pos === 'GK' ? y : y * 0.62 + 6];
+    if (k === 'poss') return line === 'MID' ? [50 + (x - 50) * 0.6, y + 6] : line === 'DEF' ? [x, y + 6] : [x, y];
+    if (k === 'counter') return line === 'FWD' ? [x, Math.min(92, y + 8)] : pos === 'GK' ? [x, y] : [x, y * 0.7 + 4];
+    if (k === 'press') return pos === 'GK' ? [x, y + 4] : [x, Math.min(92, y + 12)];
+    return [x, y];
+  };
+  const topOf = (y) => (89 - y * 0.86).toFixed(1) + '%';
+  const FITC = { green: '#12F06C', amber: '#FFB020', red: '#FF4D52' };
+  const legend = (items) => `<span class="fs-key">${items.map(([c, t]) => `<span><i style="background:${c}"></i>${t}</span>`).join('')}</span>`;
+  const plusMinus = (plus, minus) => `<div class="fs-pm"><p><b class="is-plus">+</b><span>${D2T.esc(plus)}</span></p><p><b class="is-minus">−</b><span>${D2T.esc(minus)}</span></p></div>`;
+  const paint = (sh, root) => {
+    sh.el.classList.add('se-run', 'fs-sheet');
     ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
-    el.querySelectorAll('.se-taccard').forEach((b) => { b.onclick = () => { pending = b.dataset.t; el.querySelectorAll('.se-taccard').forEach((x) => { const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); }); }; });
-    
+  };
+  // the carousel: the picked board grows; scrolled to it when the sheet opens
+  const carousel = (row, sel, onPick) => {
+    row.querySelectorAll('[data-k]').forEach((b) => { b.onclick = () => onPick(b.dataset.k); });
+    requestAnimationFrame(() => { const on = row.querySelector('.is-on'); if (on) row.scrollLeft = Math.max(0, on.offsetLeft - (row.clientWidth - on.offsetWidth) / 2); });
+  };
+
+  // `opts.onApply(f)` runs when the sheet closes on a new shape
+  SE.formSheet = (root, opts) => {
+    opts = opts || {};
+    const now = GAME.eng().formation, prev = {};
+    GAME.formations().forEach((k) => { prev[k] = GAME.shapePreview(k); });
+    const nowR = prev[now] ? prev[now].rating : null;
+    let pending = now;
+    const tile = (k) => {
+      const pv = prev[k], g = pv ? pv.fits.filter((x) => x === 'green').length : null;
+      const dots = GAME.shapeSlots(k).map((s, i) => `<i style="left:${s.x}%;top:${topOf(s.y)};${pv && pv.fits[i] ? 'background:' + FITC[pv.fits[i]] : ''}"></i>`).join('');
+      return `<button class="se-formcard fs-tile${k === pending ? ' is-on' : ''}" type="button" data-k="${k}" data-f="${k}" aria-pressed="${k === pending}" aria-label="${k}${g != null ? `, ${g} of 11 in position` : ''}">
+        <span class="se-fpitch fs-pitch"><span class="se-fline"></span>${dots}</span>
+        <span class="fs-tl"><b>${k}</b>${g != null ? `<em class="${g >= 10 ? 'g' : g >= 8 ? 'a' : 'r'}">${g}/11</em>` : ''}</span></button>`;
+    };
+    const panel = (k) => {
+      const pv = prev[k], info = SE.SHAPES[k] || ['', '', ''];
+      let head = `<div class="fs-head"><b class="fs-name">${k}</b>`;
+      if (pv) {
+        const d = pv.rating - nowR;
+        head += `<b class="fs-rating">${pv.rating}</b><span class="fs-delta ${k === now || !d ? '' : d > 0 ? 'up' : 'down'}">${k === now ? 'your shape now' : !d ? 'same rating' : (d > 0 ? '+' : '') + d + ' rating'}</span>`;
+      }
+      head += '</div>';
+      const counts = pv ? (() => { const c = (t) => pv.fits.filter((x) => x === t).length; return `<div class="fs-counts"><span class="g">${c('green')} in position</span><span class="a">${c('amber')} near</span><span class="r">${c('red')} out</span></div>`; })() : '';
+      return head + counts + plusMinus(info[0], info[1]) + (info[2] ? `<p class="fs-fact">${D2T.esc(info[2])}</p>` : '');
+    };
+    const el = D2T.h(`<div class="fs"><div class="fs-row">${GAME.formations().map(tile).join('')}</div><div class="fs-panel">${panel(pending)}</div></div>`);
+    const sh = D2T.sheet({ title: 'Formation', body: el, foot: `<button class="btn se-btn se-done" type="button" data-done>Play ${pending}</button>`,
+      onClose: () => { if (pending !== GAME.eng().formation && opts.onApply) opts.onApply(pending); } });
+    paint(sh, root);
+    sh.el.querySelector('.sheet-title').insertAdjacentHTML('beforeend', legend([[FITC.green, 'in position'], [FITC.amber, 'near'], [FITC.red, 'out']]));
+    if (!prev[now]) sh.el.querySelector('.fs-key').remove();
+    const row = el.querySelector('.fs-row');
+    carousel(row, pending, (k) => {
+      pending = k;
+      row.querySelectorAll('.fs-tile').forEach((b) => { const on = b.dataset.k === k; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', on); });
+      el.querySelector('.fs-panel').innerHTML = panel(k);
+      sh.foot.querySelector('.se-done').textContent = 'Play ' + k;
+    });
+    return sh;
+  };
+
+  // `onApply(k)` runs when the sheet closes on a change
+  SE.tacticSheet = (root, onApply) => {
+    const f = GAME.eng().formation, slots = GAME.shapeSlots(f), L = GAME.lines();
+    let pending = GAME.tactic();
+    const keyOf = (t, s) => (s.line === 'GK' ? 0 : TAC[t].lean[LINE_I[s.line]]);
+    const tile = (t) => {
+      const fits = GAME.tacticShapes(t.k).includes(f);
+      const dots = slots.map((s) => {
+        const [nx, ny] = moveFor(t.k, s), kk = keyOf(t.k, s);
+        return `<i class="${kk > 0 ? 'key' : kk < 0 ? 'less' : ''}" style="--x0:${s.x}%;--y0:${topOf(s.y)};--x1:${nx}%;--y1:${topOf(ny)};left:${nx}%;top:${topOf(ny)}"></i>`;
+      }).join('');
+      return `<button class="se-taccard fs-tile${t.k === pending ? ' is-on' : ''}" type="button" data-k="${t.k}" data-t="${t.k}" aria-pressed="${t.k === pending}" aria-label="${t.name}${fits ? ', built for your shape' : ''}">
+        <span class="se-fpitch fs-pitch fs-tac"><span class="se-fline"></span>${dots}${fits ? '<s class="fs-tick" aria-hidden="true">✓</s>' : ''}</span>
+        <span class="fs-tl"><b>${t.name}</b></span></button>`;
+    };
+    const panel = (k) => {
+      const t = GAME.TACTICS.find((x) => x.k === k), T = TAC[k], fits = GAME.tacticShapes(k).includes(f);
+      const bars = [['Def', L.def, T.lean[0]], ['Mid', L.mid, T.lean[1]], ['Att', L.att, T.lean[2]]].map(([lab, v, lean]) => {
+        const w = Math.max(6, Math.min(100, (v - 55) / 40 * 100)), step = 9;
+        return `<div class="fs-bar ${lean > 0 ? 'key' : lean < 0 ? 'less' : ''}"><b>${lab}</b><span class="fs-track"><u style="width:${(lean < 0 ? w - step : w).toFixed(0)}%"></u>${lean > 0 ? `<s class="up" style="left:${w.toFixed(0)}%;width:${step}%"></s>` : ''}${lean < 0 ? `<s class="down" style="left:${(w - step).toFixed(0)}%;width:${step}%"></s>` : ''}</span><em>${v}</em><small>${lean > 0 ? 'Key' : lean < 0 ? 'Less involved' : ''}</small></div>`;
+      }).join('');
+      return `<div class="fs-head"><b class="fs-name">${t.name}</b>${fits ? `<span class="fs-built">✓ Built for your ${f}</span>` : ''}</div><div class="fs-bars">${bars}</div>${plusMinus(T.how, T.cost)}`;
+    };
+    const el = D2T.h(`<div class="fs"><div class="fs-row">${GAME.TACTICS.map(tile).join('')}</div><div class="fs-panel">${panel(pending)}</div></div>`);
+    const sh = D2T.sheet({ title: 'Tactics', body: el, foot: `<button class="btn se-btn se-done" type="button" data-done>Play ${GAME.tacticName(pending)}</button>`,
+      onClose: () => { if (pending === GAME.tactic()) return; GAME.setTactic(pending); window.D2TSound && window.D2TSound.play('formation'); onApply && onApply(pending); } });
+    paint(sh, root);
+    sh.el.classList.add('se-tacsheet');
+    sh.el.querySelector('.sheet-title').insertAdjacentHTML('beforeend', legend([[FITC.green, 'key players'], ['#6A6A74', 'less involved']]));
+    const row = el.querySelector('.fs-row');
+    carousel(row, pending, (k) => {
+      pending = k;
+      row.querySelectorAll('.fs-tile').forEach((b) => { const on = b.dataset.k === k; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', on); });
+      el.querySelector('.fs-panel').innerHTML = panel(k);
+      sh.foot.querySelector('.se-done').textContent = 'Play ' + GAME.tacticName(k);
+    });
     return sh;
   };
 

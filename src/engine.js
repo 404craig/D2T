@@ -1067,7 +1067,7 @@ function seasonSummary(S, st) {
 }
 
 const API = {
-  RULES, LEVELS, POS, FIT, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, hash32, rng, stream, unit,
+  RULES, LEVELS, POS, FIT, SLOT_BROAD, broadOf, FORMATIONS, FORMATION_NAMES, reseat, hash32, rng, stream, unit,
   fitOf, effRating, isGK, canPlay, indexSeason, playerOf, clubAt, nameKey, yourNames, xiStrength, userStrength, plainStrength, starRating, settledRating, clubXI, clubStrength,
   TACTIC_NAMES, tacticOf, tacticLines, setTactic, scoutInfo, scout, scoutClubs, scoutClub, legendRoll, januaryRaid, agedRating,
   schedule, fixturesOf, recentWeights, newRun, offerClubs, respinClubs, chooseClub, autoXI, setFormation, swapSetup, squadOf,

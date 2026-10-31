@@ -201,22 +201,14 @@
         const fl = field.querySelector('.se-formlink');
         if (fl) fl.onclick = (e) => {
           e.stopPropagation();
-          let pending = GAME.eng().formation;
-          const tile = (k) => `<button class="se-formcard${k === pending ? ' is-on' : ''}" type="button" data-f="${k}" aria-pressed="${k === pending}">
-            <span class="se-fpitch"><span class="se-fline"></span>${GAME.formationDots(k).map((d) => `<i style="left:${d.x}%;top:${d.y}%"></i>`).join('')}</span><b>${k}</b></button>`;
-          const el = D2T.h(`<div><div class="se-formgrid">${GAME.formations().map(tile).join('')}</div><p class="se-note">${draft ? 'The players you have drafted are moved into the new shape. The three on the table stay.' : 'Your 11 are moved into the new shape. Nobody comes in or goes out.'} Players out of their position play at 90% (near) or 70% (wrong).</p></div>`);
-          const sh = D2T.sheet({ title: 'Formation', body: el, foot: '<button class="btn se-btn se-done" type="button" data-done>Done</button>', onClose: () => {
-            if (pending === GAME.eng().formation || !alive) return;
-            GAME.setFormation(pending);
+          SE.formSheet(root, { onApply: (f) => {
+            if (!alive) return;
+            GAME.setFormation(f);
             window.D2TSound && window.D2TSound.play('formation');
-            fl.querySelector('.se-fname').textContent = pending;
+            fl.querySelector('.se-fname').textContent = f;
             const si = api ? api.selected() : -1, p = si >= 0 ? api.results()[si] : null;
             drawPitch(p && !draft ? GAME.bestSlot(p.id) : -1);
           } });
-          sh.el.classList.add('se-run');
-          ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
-          el.querySelectorAll('.se-formcard').forEach((b) => { b.onclick = () => { pending = b.dataset.f; el.querySelectorAll('.se-formcard').forEach((x) => { const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); }); }; });
-          
         };
         // the tactic (Craig, 18 Oct): its chip bottom right, the twin of the shape chip; a change redraws the best shirt
         const tl = field.querySelector('.se-taclink');

@@ -284,32 +284,13 @@
 
       // ---------- formation sheet ----------
       body.querySelector('.se-formlink').onclick = () => {
-        let pending = GAME.eng().formation;
-        const tile = (k) => `<button class="se-formcard${k === pending ? ' is-on' : ''}" type="button" data-f="${k}" aria-pressed="${k === pending}">
-          <span class="se-fpitch"><span class="se-fline"></span>${GAME.formationDots(k).map((s) => `<i style="left:${s.x}%;top:${s.y}%"></i>`).join('')}</span><b>${k}</b></button>`;
-        const note = drafting ? 'The draft fills this shape shirt by shirt. It is fixed once you make your first pick, then you can change it again before the season.'
-          : pre && !dream ? 'Your best XI from the squad is picked for the shape you choose. You can still swap anyone after.' : 'Your 11 are moved into the new shape. Players out of their position play at 90% (near) or 70% (wrong).';
-        const el = D2T.h(`<div><div class="se-formgrid">${GAME.formations().map(tile).join('')}</div><p class="se-note">${note}</p></div>`);
-        const sh = D2T.sheet({
-          title: 'Formation', body: el, foot: '<button class="btn se-btn se-done" type="button" data-done>Done</button>',
-          onClose: () => {
-            if (pending === GAME.eng().formation) return;
-            const before = new Map(allItems().map((n) => [n.dataset.card, n.getBoundingClientRect()]));
-            GAME.setFormation(pending);
-            window.D2TSound && window.D2TSound.play('formation');
-            sel = null;
-            render(before);
-          }
-        });
-        sh.el.classList.add('se-run');
-        ['--se-acc', '--se-ink', '--se-text', '--se-acc-a', '--se-acc-b'].forEach((v) => sh.el.style.setProperty(v, root.style.getPropertyValue(v)));
-        el.querySelectorAll('.se-formcard').forEach((b) => {
-          b.onclick = () => {
-            pending = b.dataset.f;
-            el.querySelectorAll('.se-formcard').forEach((x) => { const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); });
-          };
-        });
-        
+        SE.formSheet(root, { onApply: (f) => {
+          const before = new Map(allItems().map((n) => [n.dataset.card, n.getBoundingClientRect()]));
+          GAME.setFormation(f);
+          window.D2TSound && window.D2TSound.play('formation');
+          sel = null;
+          render(before);
+        } });
       };
 
       // ---------- tactics sheet (Craig, 18 Oct) ----------

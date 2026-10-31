@@ -555,3 +555,55 @@
 .se-poslab { position: absolute; left: 50%; top: calc(100% + 3px); transform: translateX(-50%); z-index: 60; pointer-events: none; white-space: nowrap;
   font: 800 10px/1 'Exo 2', sans-serif; letter-spacing: .04em; color: #fff; background: rgba(10,10,10,.82); border: 1px solid rgba(255,255,255,.18); border-radius: 7px; padding: 3px 6px; }
 .se-poslab i { font-style: normal; opacity: .45; margin: 0 1px; }
+
+/* the formation and tactic sheets as carousels (Craig, 31 Oct, build 182; "Scout's notes" on the carousels canvas) */
+.fs-sheet .sheet-title { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.fs-key { display: flex; gap: 10px; font: 700 12px var(--font); font-style: normal; color: var(--muted); white-space: nowrap; }
+.fs-key span { display: inline-flex; align-items: center; gap: 4px; }
+.fs-key i { width: 8px; height: 8px; border-radius: 50%; }
+.fs-row { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 2px 18px 12px; margin: 0 -18px; scrollbar-width: none; overscroll-behavior-x: contain; }
+.fs-row::-webkit-scrollbar { display: none; }
+.fs-tile.se-formcard, .fs-tile.se-taccard { flex: none; display: flex; flex-direction: column; align-items: stretch; gap: 6px; width: 118px; padding: 8px; scroll-snap-align: center; transition: width .25s ease, border-color .15s, background-color .15s; }
+.fs-tile.is-on { width: 138px; }
+.fs-tile .fs-pitch { aspect-ratio: auto; height: 150px; }
+.fs-tile .fs-pitch i { width: 10px; height: 10px; margin: -5px; transition: left .5s cubic-bezier(.2,.8,.2,1), top .5s cubic-bezier(.2,.8,.2,1), background-color .3s; }
+.fs-tile.is-on .fs-tac i { background: #E9E9EE; }
+.fs-tac i.key { background: #12F06C !important; }
+.fs-tac i.less { background: #6A6A74 !important; }
+.fs-tile.is-on .fs-tac i { animation: fsMove 2.4s ease-in-out infinite alternate; }
+@keyframes fsMove { from { left: var(--x0); top: var(--y0); } to { left: var(--x1); top: var(--y1); } }
+.fs-tick { position: absolute; right: 6px; top: 6px; width: 18px; height: 18px; border-radius: 50%; background: #12F06C; color: #0A0A0A; font: 900 12px/18px var(--font); text-align: center; text-decoration: none; }
+.fs-tl { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 0 2px; }
+.se-taccard.fs-tile .fs-tl { justify-content: center; }
+.fs-tl b { font: var(--display); font-size: 14px; color: var(--soft); white-space: nowrap; }
+.fs-tile.is-on .fs-tl b { font-size: 16px; color: var(--se-text); }
+.fs-tl em { font: 900 italic 13px var(--font); }
+.fs-tl em.g, .fs-counts .g { color: #12F06C; } .fs-tl em.a, .fs-counts .a { color: #FFB020; } .fs-tl em.r, .fs-counts .r { color: #FF6B6F; }
+.fs-panel { border-top: 1px solid var(--line); padding-top: 12px; }
+.fs-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 12px; }
+.fs-name { font: var(--display); font-size: 32px; line-height: 1; color: var(--se-text); }
+.fs-rating { font: var(--display); font-size: 22px; line-height: 1; }
+.fs-delta { font: 800 13px var(--font); color: var(--muted); }
+.fs-delta.up { color: #12F06C; } .fs-delta.down { color: #FF6B6F; }
+.fs-built { font: 800 12px var(--font); padding: 4px 10px; border-radius: 12px; background: rgba(18,240,108,.12); color: #12F06C; align-self: center; }
+.fs-counts { display: flex; gap: 14px; margin-top: 8px; font: 800 14px var(--font); }
+.fs-pm { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+.fs-pm p { display: flex; gap: 10px; align-items: flex-start; margin: 0; font: 700 14px/1.35 var(--font); color: #E8E8EE; }
+.fs-pm b { flex: none; width: 22px; height: 22px; border-radius: 50%; text-align: center; font: 900 15px/22px var(--font); }
+.fs-pm b.is-plus { background: rgba(18,240,108,.13); color: #12F06C; }
+.fs-pm b.is-minus { background: rgba(255,77,82,.13); color: #FF6B6F; line-height: 21px; }
+.fs-fact { margin: 14px 0 4px; padding: 10px 12px; border-radius: 12px; background: var(--ink-2); border: 1px solid var(--line); font: 700 13.5px/1.4 var(--font); color: #D6D6DE; }
+.fs-bars { display: flex; flex-direction: column; gap: 9px; margin-top: 14px; }
+.fs-bar { display: grid; grid-template-columns: 30px minmax(0, 1fr) 24px 92px; align-items: center; gap: 10px; }
+.fs-bar b { font: var(--display); font-size: 14px; color: #E8E8EE; }
+.fs-bar.key b, .fs-bar.key em, .fs-bar.key small { color: #12F06C; }
+.fs-bar.less b { color: var(--muted); }
+.fs-track { position: relative; height: 12px; border-radius: 6px; background: #222228; overflow: hidden; }
+.fs-track u { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px; background: #9A9AA5; }
+.fs-bar.key .fs-track u { background: #12F06C; } .fs-bar.less .fs-track u { background: #55555F; }
+.fs-track s { position: absolute; top: 0; bottom: 0; border-radius: 0 6px 6px 0; }
+.fs-track s.up { background: repeating-linear-gradient(135deg, #12F06C 0 3px, #0B7A3A 3px 6px); }
+.fs-track s.down { background: repeating-linear-gradient(135deg, #3A3A42 0 3px, #222228 3px 6px); }
+.fs-bar em { font: var(--display); font-size: 15px; font-style: italic; text-align: right; color: #E8E8EE; }
+.fs-bar small { font: 800 11.5px var(--font); color: var(--muted); text-align: right; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .fs-tile.is-on .fs-tac i { animation: none; } .fs-tile, .fs-tile .fs-pitch i { transition: none; } }
