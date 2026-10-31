@@ -47,7 +47,7 @@
       const td = record ? null : G.dailyResult(G.today());   // the My record share card keeps the best finish
       return [[days.length, 'Played'], td && td.finish ? [o(td.finish), "Today's finish"] : [bf ? o(bf.finish) : '-', 'Best finish'], [days.length ? sg(Math.max(...days.map((d) => d.rise))) : '-', 'Best rise'], [days.filter((d) => d.finish === 1).length, 'Wins']];
     }
-    if (id === 'classic') { const r = G.record(); return [[r.drop, 'Beat the drop'], [r.half, 'Top half'], [r.top3, 'Top 3'], [r.titles, 'League titles']]; }
+    if (id === 'classic') { const r = G.record('classic'); return [[r.drop, 'Beat the drop'], [r.half, 'Top half'], [r.top3, 'Top 3'], [r.titles, 'League titles']]; }
     if (id === 'clubx') { const x = G.xRecord(); return [[x.runs, 'Seasons'], [x.titles, 'Titles'], [runs.filter((r) => r.mode === 'clubx' && !r.daily && r.top3).length, 'Top 3'], [x.best ? o(x.best) : '-', 'Best finish']]; }
     if (id === 'goal') {
       const g = G.g433.record(), last = g.last == null ? '-' : g.last === g.lastTarget ? '0' : g.last > g.lastTarget ? `${g.last - g.lastTarget}+` : `${g.lastTarget - g.last}-`;

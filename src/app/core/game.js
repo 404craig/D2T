@@ -772,8 +772,10 @@
   // The home record. Cumulative counts (Craig, 11 Oct): a title also counts as top 3, top half and beating the drop.
   // Every full season counts (Craig, 13 Oct): Classic, every Daily go and every Club X season; Dare2Dream stays apart.
   const classicRuns = () => D2T.state.record.runs.filter((r) => r.mode !== 'dare2dream');
-  GAME.record = () => {
-    const runs = classicRuns();
+  // `classic`: Classic seasons only, as the leaderboard counts them (Craig, 31 Oct, build 207: on the new home every game has
+  // its own stats, never joined; Daily goes and Club X seasons sit on their own slides)
+  GAME.record = (only) => {
+    const runs = only === 'classic' ? classicRuns().filter((r) => !r.daily && r.mode !== 'clubx') : classicRuns();
     return { runs: runs.length, drop: runs.filter((r) => r.drop).length, half: runs.filter((r) => r.half).length,
       top3: runs.filter((r) => r.top3).length, titles: runs.filter((r) => r.title).length,
       bestRise: runs.length ? Math.max(...runs.map((r) => r.rise)) : null };
