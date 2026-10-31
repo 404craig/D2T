@@ -247,8 +247,8 @@ async function mock(page, sc, hits = []) {
   {
     const page = await open("never");
     await page.evaluate(() => window.D2T.go("leaderboard", { game: "ub" })); await wait(900);
-    const r = await page.evaluate(() => { const me = document.querySelector(".lb-list .lb-row.me"); return me ? { pos: me.querySelector(".c-pos").textContent, name: me.querySelector(".c-name").textContent, v: [...me.querySelectorAll(".c-v")].map((x) => x.textContent).join(""), share: document.querySelector(".lb-share").disabled } : null; });
-    check(r && r.pos === "–" && r.name === "You" && r.v === "–––" && r.share, "never played: a dash row of your own and Share greyed: " + JSON.stringify(r));
+    const r = await page.evaluate(() => { const me = document.querySelector(".lb-list .lb-row.me"); return me ? { pos: me.querySelector(".c-pos").textContent, name: me.querySelector(".c-name").textContent, v: [...me.querySelectorAll(".c-v")].map((x) => x.textContent).join(""), share: !document.querySelector(".lb-share").disabled } : null; });
+    check(r && r.pos === "–" && r.name === "You" && r.v === "–––" && r.share, "never played: a dash row of your own and Share still lit (build 201): " + JSON.stringify(r));
     await shot(page, "lb-table-never");
     await page.close();
     const out = await open("out");
@@ -256,7 +256,10 @@ async function mock(page, sc, hits = []) {
     const pin = await out.textContent(".lb-pin");
     check(/You · would be 12th/.test(pin) && /Sign in to claim it/.test(pin), "signed out: the pinned row should say You · would be 12th · Sign in to claim it: " + pin);
     check(await out.evaluate(() => { const p = document.querySelector(".lb-you").getBoundingClientRect(), l = document.querySelector(".lb-list").getBoundingClientRect(), b = document.querySelector(".lb .actionbar").getBoundingClientRect(); return p.top >= l.bottom - 0.5 && p.bottom <= b.top + 0.5; }), "the pinned row should sit between the list and the bar");
-    check(await out.evaluate(() => document.querySelector(".lb-share").disabled), "signed out: Share my place should be greyed");
+    check(await out.evaluate(() => !document.querySelector(".lb-share").disabled), "signed out: Share my place should stay lit (build 201)");
+    await out.click(".lb-share"); await new Promise((r) => setTimeout(r, 500));
+    check(/Sign in and finish a game/.test(await out.evaluate(() => (document.querySelector(".sheet") || {}).textContent || "")), "signed out: a tap on Share should say how to get a place");
+    await out.evaluate(() => { const s = document.querySelector(".sheet-scrim"); if (s) s.click(); }); await new Promise((r) => setTimeout(r, 400));
     await shot(out, "lb-table-signedout");
     await out.click(".lb-you"); await wait(700);
     check((await scr(out)) === "account", "the pinned row should open the account page");
