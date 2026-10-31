@@ -180,3 +180,8 @@
 /* reduced motion: no spin, growth or glint, the logo and buttons crossfade to the full bar */
 .stg-top.dly-rm .stg-dly, .stg-top.dly-rm .stg-dly * { transition: opacity .3s !important; transform: none !important; }
 .stg-top.dly-rm .stg-dly { width: var(--dw, 340px); }
+/* the same foot as every game's bar on a short phone (build 193; base.css compact mode): 52px buttons, 12px under */
+@media (max-height: 759px) {
+  .stg { --foot: calc(env(safe-area-inset-bottom, 0px) + 12px); }
+  .stg-main, .stg-newg, .stg-contg { min-height: 52px; border-radius: 26px; }
+}
