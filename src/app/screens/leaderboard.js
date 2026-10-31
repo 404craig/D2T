@@ -138,7 +138,7 @@
         const g = GM[gi], d = data;
         troph.innerHTML = trophyHTML(g, d && d.trophy);
         const cols = (d && d.cols) || DEFAULT_COLS[g.id][tab], sort = d && d.sort != null ? d.sort : 1;
-        const hc = lastSort(cols, sort); el.querySelectorAll('.lb-cols .c-v').forEach((c, i) => { c.textContent = hc[i] || ''; c.classList.toggle('is-sort', i === hc.length - 1 && sort >= 0); });
+        const hc = lastSort(cols, sort); el.querySelectorAll('.lb-cols .c-v').forEach((c, i) => { c.textContent = HEAD[hc[i]] || hc[i] || ''; c.classList.toggle('is-sort', i === hc.length - 1 && sort >= 0); });
         $('.lb-count').textContent = d && d.count ? `${fmt(d.count)} PLAYER${d.count === 1 ? '' : 'S'}` : '';
         pin.innerHTML = '';
         if (!d) { list.innerHTML = '<div class="lb-note">Loading the table…</div>'; return; }
@@ -167,6 +167,8 @@
         list.style.opacity = ''; pin.style.opacity = '';
         [...list.children, ...pin.children].forEach((n, i) => n.animate([{ opacity: 0, transform: 'translateY(-18px)' }, { opacity: 1, transform: 'none' }], { duration: 320, delay: wait + i * 45, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' }));
       }
+      // short column headers so none wraps (Craig, 31 Oct, build 203: BEST FINISH went over two lines); the share card keeps the full words
+      const HEAD = { 'Best finish': 'Best' };
       const DEFAULT_COLS = { daily: [['Played', 'Wins', 'Best rise'], ['Goes', 'Best finish', 'Rise']], classic: [['Seasons', 'Titles', 'Top 3'], ['Seasons', 'Titles', 'Top 3']], clubx: [['Seasons', 'Titles', 'In a row'], ['Points', 'Wins', 'Goal diff']], goal: [['Games', 'Spot on', 'Hit rate'], ['Games', 'Spot on', 'Closest']], ub: [['Runs', 'Best run', 'Average'], ['Runs', 'Best run', 'Average']] };
       // every table loaded is kept for the visit, and the other games' all-time tables are fetched quietly after the first,
       // so a change of game is usually instant (build 201)

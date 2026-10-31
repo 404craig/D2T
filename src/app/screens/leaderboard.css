@@ -36,7 +36,7 @@
 .lb-cols { flex: none; align-items: flex-end; margin: 10px 16px 0; padding-bottom: 6px; border-bottom: 1px solid #2a2a31; font: 900 clamp(10px, 2.9vw, 12px)/1.15 var(--font); letter-spacing: .03em; text-transform: uppercase; color: #a8a8b0; }
 /* the headers in the trophy card's label type (Craig, 31 Oct, build 191: they were the rows' size) */
 .lb-cols > span, .lb-cols .c-v, .lb-cols .c-pos, .lb-cols .c-name { font: 900 italic clamp(10px, 2.9vw, 12px)/1.2 var(--font); letter-spacing: .06em; color: #a8a8b0; }
-.lb-cols .c-v { white-space: normal; overflow: visible; line-height: 1.2; }   /* a long header wraps (BEST / RISE), never cut */
+.lb-cols .c-v { white-space: nowrap; overflow: visible; line-height: 1.2; }   /* every header on one line (build 203; a long one may reach a little left into the gap) */
 .lb-cols .c-v.is-sort { color: var(--kt); }
 .c-pos { flex: none; width: clamp(30px, 8.5vw, 36px); font: 900 italic clamp(13px, 3.8vw, 16px) var(--font); color: #8f8f98; }
 .c-name { flex: 1; min-width: 0; font: 700 clamp(13.5px, 4vw, 16.5px) var(--font); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
