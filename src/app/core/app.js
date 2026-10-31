@@ -121,6 +121,14 @@
     el.querySelector('.logo-home').onclick = () => D2T.go('home');
     const acct = el.querySelector('.acct-btn'); if (acct) acct.onclick = () => D2T.go('account');
     const back = el.querySelector('.back-btn'); if (back) back.onclick = D2T.back;
+    // the mode tag drops in with a bounce and one glint on the first run screen after home (Craig, 31 Oct, build 196)
+    const mt = el.querySelector('.mode-tag');
+    if (mt && (prevName === 'home' || prevName === 'intro') && D2T.mo && !D2T.mo.still()) {
+      requestAnimationFrame(() => {
+        D2T.mo.anim(mt, [{ transform: 'translateY(-44px) skewX(-10deg)', opacity: 0 }, { transform: 'translateY(0) skewX(-10deg)', opacity: 1 }], { duration: 420, delay: 250, easing: 'cubic-bezier(.34,1.56,.64,1)', fill: 'backwards' });
+        D2T.mo.glint(mt, { delay: 750, dur: 480 });
+      });
+    }
     return el;
   };
   // First-time tips (12 Oct): a handwritten note with a curved arrow (the respin tip's style), each shown once ever

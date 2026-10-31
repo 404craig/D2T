@@ -179,7 +179,7 @@
             <div class="se-cardwrap" data-i="${i}" role="button" tabindex="0" aria-label="${D2T.esc(c.name)}, ${c.ovr}, playing ${s.pos}. Sign the selected player here${say}">
               ${D2T.cards.player(c, { w: pw, mini: true, shine: i === fresh, tab: s.pos, cls: 'fit-' + fit, dots: (GAME.settling(c.id) || {}).left })}</div>${plab}</div>`;
         }).join('');
-        ratingEl.textContent = GAME.rating();
+        rateTo(GAME.rating());
         const tn = field && field.querySelector('.se-tname'); if (tn) tn.textContent = GAME.tacticName();
         if (fresh >= 0 && !reduced) {
           const el = slotsEl.querySelector(`.se-cardwrap[data-i="${fresh}"]`);
@@ -514,6 +514,39 @@
           <span class="tr-banner-r"><span class="tr-dots">${Array.from({ length: info.of }, (_, k) => `<i${k < info.step ? ' class="is-on"' : ''}></i>`).join('')}</span><span>${info.step} of ${info.of}</span></span></div>` : '';
         return { top, banner, style: `--tr-acc:${acc}` };
       })();
+      // the team rating ticks up after a signing (Craig, 31 Oct, build 196): an odometer from the old rating to the new,
+      // a chip with the change popping up above the box, and a soft glow in the accent while it rolls
+      let lastRating = null;
+      function rateTo(v) {
+        if (lastRating === v) return;
+        const was = lastRating; lastRating = v;
+        const MO = D2T.mo;
+        if (was == null || !MO || MO.still()) { ratingEl.textContent = v; return; }
+        MO.odometer(ratingEl, v, { from: was, dur: 800 });
+        const box = ratingEl.closest('.se-rating'); if (!box) return;
+        const acc = getComputedStyle(box).getPropertyValue('--se-acc').trim() || '#12F06C';
+        MO.anim(box, [{ boxShadow: `0 0 0 0 ${acc}` }, { boxShadow: `0 0 16px 1px ${acc}`, offset: 0.5 }, { boxShadow: `0 0 0 0 ${acc}` }], { duration: 800, easing: 'ease-out' });
+        const d = v - was, chip = document.createElement('span');
+        chip.className = 'mo-chip'; chip.textContent = (d > 0 ? '+' : '') + d; box.appendChild(chip);
+        chip.animate([{ transform: 'translate(-50%, 10px) scale(.6)', opacity: 0 }, { transform: 'translate(-50%, 0) scale(1)', opacity: 1 }], { duration: 320, easing: 'cubic-bezier(.34,1.56,.64,1)', fill: 'backwards' });
+        const t = setTimeout(() => chip.animate([{ transform: 'translate(-50%, 0)', opacity: 1 }, { transform: 'translate(-50%, -12px)', opacity: 0 }], { duration: 300, easing: 'ease-in', fill: 'forwards' }).finished.catch(() => {}).then(() => cm.finish()), 1600);
+        const cm = MO.track({ finish() { clearTimeout(t); chip.remove(); MO.untrack(cm); } });
+      }
+      // each roll steps the season bar on (build 196): the last roll's segment settles to done, this one fills left to
+      // right with a white leading edge and then glows slowly, and "Transfer N" rolls up from N-1
+      function stepOn() {
+        const MO = D2T.mo; if (!MO || MO.still()) return;
+        const segs = [...body.querySelectorAll('.tr-seg')], ci = segs.findIndex((s) => s.classList.contains('is-current'));
+        if (ci < 0) return;
+        const cur = segs[ci], prev = ci > 0 && segs[ci - 1].classList.contains('is-done') ? segs[ci - 1] : null;
+        const acc = getComputedStyle(cur).getPropertyValue('--tr-acc').trim() || '#12F06C';
+        if (prev) MO.anim(prev, [{ background: acc, boxShadow: `0 0 10px ${acc}` }, { boxShadow: '0 0 0 transparent' }], { duration: 350, easing: 'ease-out' });
+        cur.classList.add('tr-fill');
+        const fill = document.createElement('i'); fill.className = 'tr-segfill'; cur.appendChild(fill);
+        MO.anim(fill, [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 450, delay: 450, easing: 'ease-in-out', fill: 'backwards' });
+        const b = body.querySelector('.sp-kicker b'), n = b ? +b.textContent : 0;
+        if (b && n > 1) MO.odometer(b, n, { from: n - 1, delay: 450, dur: 450 });
+      }
       const build = () => {
         api = D2T.roll.mount(body, {
           kicker: draft ? `${GAME.modeName()} draft · Shirt ${info.step} of ${info.of}` : `Transfer <b>${info.overall}</b> of ${info.total}`,
@@ -547,6 +580,7 @@
           onConfirm: (p) => { if (draft) sign(api.results().indexOf(p), di.open ? GAME.draftFits(p.id)[0] : di.slot); }
         });
         api.el.classList.add('sp-reveal');
+        if (st.spun !== rollKey) stepOn();
         buildPitch();
         if (st.spun === rollKey) enterPlacing(false);
       };
