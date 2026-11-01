@@ -419,6 +419,12 @@
         if (target) target.classList.remove('se-target'); target = null;
         if (cancel) drag = null;
       }
+      // iOS sends a touch's moves to the element first pressed, even once a redraw has taken it off the page (the pitch
+      // is redrawn as a drag starts), so the window never hears them and Safari scrolls and cancels the drag (Craig,
+      // 1 Nov: Azpilicueta snapped back as soon as the finger left his card): the pressed element blocks the scroll itself
+      let held = null;
+      const hold = (el) => { unhold(); held = el; el.addEventListener('touchmove', blockTouch, { passive: false }); };
+      const unhold = () => { if (held) held.removeEventListener('touchmove', blockTouch); held = null; };
       const onDown = (e) => {
         suppress = -1; suppressPitch = false;   // a new press: any click that follows belongs to it
         if (signing || e.button || !api) return;
@@ -426,16 +432,21 @@
         if (!s || !api.el.contains(s)) {
           // a card of yours on the pitch can be dragged onto another shirt (not in Dare2Dream's draft, not with a tray card picked)
           const w = placing && (!draft || di.open) && e.target.closest('.tr-field .se-cardwrap');
-          if (w && GAME.lineup().xi[+w.dataset.i] && api.selected() < 0) drag = { pitch: +w.dataset.i, x0: e.clientX, y0: e.clientY, pid: e.pointerId, moved: false };
+          if (w && GAME.lineup().xi[+w.dataset.i] && api.selected() < 0) { drag = { pitch: +w.dataset.i, x0: e.clientX, y0: e.clientY, pid: e.pointerId, moved: false }; hold(e.target); }
           return;
         }
         drag = { i: api.slots.indexOf(s), x0: e.clientX, y0: e.clientY, pid: e.pointerId, moved: false };
+        hold(e.target);
       };
       const onMove = (e) => {
         if (!drag || e.pointerId !== drag.pid) return;
         if (!drag.moved) {
           if (Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 8) return;
           if (!api.settled() || leaving || signing) return;
+          // hold the touch on the screen itself (Craig, 1 Nov: on his iPhone a picked player's drag snapped back as soon
+          // as the finger left his card; the redraw below replaces the card under the finger, and Safari could then
+          // take the touch for a scroll and cancel it)
+          try { root.setPointerCapture(e.pointerId); } catch (err) { /* not capturable: the window listeners still run */ }
           if (drag.pitch != null) {
             drag.moved = true; mover = drag.pitch;
             const p = GAME.lineup().xi[drag.pitch];
@@ -465,7 +476,7 @@
       };
       const onUp = (e) => {
         if (!drag || e.pointerId !== drag.pid) return;
-        const d = drag; drag = null;
+        const d = drag; drag = null; unhold();
         if (!d.moved) return;
         if (d.pitch != null) {
           suppressPitch = true;
@@ -479,7 +490,7 @@
       };
       window.addEventListener('pointermove', onMove, { passive: false });
       window.addEventListener('pointerup', onUp);
-      window.addEventListener('pointercancel', () => { if (drag && drag.pitch != null && drag.moved) { mover = -1; drawPitch(); } drag = null; endDrag(false); });
+      window.addEventListener('pointercancel', () => { if (drag && drag.pitch != null && drag.moved) { mover = -1; drawPitch(); } drag = null; unhold(); endDrag(false); });
       root.addEventListener('pointerdown', onDown);
       // a drag is not a tap: swallow the click that follows it (a touch drag has none, so the next press clears it)
       root.addEventListener('click', (e) => {
@@ -563,7 +574,7 @@
           // a purple or legend card gets the rare reveal (screens/reveal.js); the roll counts as spun as it starts
           rare: (p) => D2T.rareReveal.isRare(p),
           // the positions he is green in, under each card, revealed with it as its reel lands (Craig, 15 and 16 Oct)
-          below: (p) => { const list = p.main ? [p.main, ...(p.alt || [])] : [p.pos]; const tags = GAME.rollTags(), ti = tags ? GAME.rollCards().findIndex((c) => c.id === p.id) : -1, tag = ti >= 0 ? tags[ti] : null; return `<div class="sp-gp sp-below" aria-label="Green in ${list.join(', ')}${tag ? tag === 'better' ? ', better than the man in the shirt' : ', the next best there' : ''}">${list.join('<i>/</i>')}${tag === 'next' ? '<span class="sp-tag is-next">Next best</span>' : ''}</div>`; },
+          below: (p) => { const list = p.main ? [p.main, ...(p.alt || [])] : [p.pos]; const tags = GAME.rollTags(), ti = tags ? GAME.rollCards().findIndex((c) => c.id === p.id) : -1, tag = ti >= 0 ? tags[ti] : null; return `<div class="sp-gp sp-below" aria-label="Green in ${list.join(', ')}${tag ? tag === 'better' ? ', better than the man in the shirt' : ', the next best there' : ''}">${list.slice(0, 4).join('<i>/</i>')}${list.length > 4 ? `<span class="sp-gp-more"><i>/</i>${list.slice(4).join('<i>/</i>')}</span>` : ''}${tag === 'next' ? '<span class="sp-tag is-next">Next best</span>' : ''}</div>`; },
           onCommit: () => { st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); },
           onSettled: () => { leaving = false; st.spun = `${GAME.eng().roll.key}.${GAME.eng().roll.spin}`; D2T.save(); timers.push(setTimeout(() => enterPlacing(true), reduced ? 0 : 450)); },
           accent: LV_ACCENT,

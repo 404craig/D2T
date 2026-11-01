@@ -334,17 +334,21 @@ def main():
         if r["club"] not in k["c"]: k["c"].append(r["club"])
     game["careers"] = [{"a": k["a"], "g": k["g"], "n": len(k["s"]), "f": k["s"][0], "l": k["s"][-1], "c": k["c"]} for k in careers]
     # 433 Goals: every Premier League player with 60+ games, by broad position (the one he played most games in),
-    # as [name, surname, club, career goals], most goals first. Club = where he scored most (most games if none).
+    # as [name, surname, club, career goals], most goals first. Club = where he scored most (most games if none); Craig's
+    # own calls in data/source/shirt_overrides.json win (1 Nov: Peter Schmeichel's one goal put him in Villa's shirt).
     g4 = defaultdict(lambda: {"a": 0, "g": 0, "pos": defaultdict(int), "cg": defaultdict(int), "ca": defaultdict(int), "n": "", "s": ""})
     for r in players:
         k = g4[r["player_id"]]; a, g = int(r["apps"]), int(r["goals"])
         k["a"] += a; k["g"] += g; k["pos"][r["position"]] += a; k["cg"][r["club"]] += g; k["ca"][r["club"]] += a
         k["n"], k["s"] = r["player"], r["surname"]
+    _so = os.path.join(SRC, "shirt_overrides.json")
+    SHIRTS = {k: v for k, v in (json.load(open(_so, encoding="utf-8")) if os.path.exists(_so) else {}).items() if not k.startswith("_")}
     g433 = {"GK": [], "DEF": [], "MID": [], "FWD": []}
     for pid, k in sorted(g4.items()):
         if k["a"] < 60: continue
         pos = max(k["pos"].items(), key=lambda x: (x[1], x[0]))[0]
         club = max((k["cg"] if k["g"] > 0 else k["ca"]).items(), key=lambda x: (x[1], k["ca"][x[0]], x[0]))[0]
+        club = SHIRTS.get(k["n"], club)
         g433[pos].append([k["n"], k["s"], club, k["g"]])
     for pos in g433: g433[pos].sort(key=lambda x: (-x[3], x[0]))
     game["g433"] = g433
