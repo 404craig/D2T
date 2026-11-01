@@ -10171,7 +10171,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
         setTimeout(() => {
           MO.track(gm);
           const s0 = performance.now();
-          const step = (now) => { const p = Math.min(1, (now - s0) / 1600), e = 1 - Math.pow(1 - p, 3); rev.setAttribute('width', (W * e).toFixed(1)); if (p < 1 && rev.isConnected) raf = requestAnimationFrame(step); else full(); };
+          const step = (now) => { const p = Math.max(0, Math.min(1, (now - s0) / 1600)), e = 1 - Math.pow(1 - p, 3); rev.setAttribute('width', (W * e).toFixed(1)); if (p < 1 && rev.isConnected) raf = requestAnimationFrame(step); else full(); };
           raf = requestAnimationFrame(step);
         }, Math.max(0, 400 - (performance.now() - t0)));
       }, { threshold: 0.3 });
