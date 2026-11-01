@@ -705,15 +705,26 @@ function signPreview(st, S, cardId, legends) {
 // For each shirt, how many cards the scouts could bring: this season's cards (never legend cards) green in the shirt and
 // rated above the man in it, not seen this run. Zero means nobody better (the shirt is red on the sheet).
 function scoutPool(st, S, slot) {
-  const pos = FORMATIONS[st.formation][slot][0], holder = st.xi[slot] != null ? playerOf(S, st.xi[slot], S.legends) : null, hr = holder ? holder.r : 0;
+  const pos = FORMATIONS[st.formation][slot][0];
+  // The bar (Craig, 1 Nov: an 89 CB moved to ST raised it, so the scouts dealt better strikers and he went back to CB):
+  // the higher of the man in the shirt at his rating there (out of position cut, so a CB at ST counts as about 62) and
+  // the best man in your XI green in that position, wherever he plays, so moving players about never moves it.
+  let hr = 0, by = null;
+  st.xi.forEach((id, k) => {
+    if (id == null) return; const p = playerOf(S, id, S.legends); if (!p || !canPlay(p, pos)) return;
+    if (k !== slot && fitOf(p, pos) !== "green") return;
+    const r = effRating(p, pos); if (r > hr) { hr = r; by = id; }
+  });
   // gold at most (21 Oct); a purple only when no gold or lower is better than the man in the shirt (Craig, 21 Oct); never a legend
   const all = cardPool(S, st).filter(p => fitOf(p, pos) === "green"), pool = all.filter(p => p.lv < 3);
-  let better = pool.filter(p => p.r > hr);
-  if (!better.length) better = all.filter(p => p.lv === 3 && p.r > hr);
-  return { pos, hr, better, below: pool.filter(p => p.r <= hr).sort((a, b) => b.r - a.r || b.a - a.a) };
+  // every card measured at his rating in that shirt too (a winger green at ST plays there at 95%)
+  const er = (p) => effRating(p, pos);
+  let better = pool.filter(p => er(p) > hr);
+  if (!better.length) better = all.filter(p => p.lv === 3 && er(p) > hr);
+  return { pos, hr, by, better, below: pool.filter(p => er(p) <= hr).sort((a, b) => er(b) - er(a) || b.a - a.a) };
 }
 function scoutInfo(st, S) {
-  return FORMATIONS[st.formation].map((_, slot) => { const q = scoutPool(st, S, slot); return { slot, pos: q.pos, better: q.better.length, best: q.better.length ? null : (q.below[0] ? q.below[0].id : null) }; });
+  return FORMATIONS[st.formation].map((_, slot) => { const q = scoutPool(st, S, slot); return { slot, pos: q.pos, bar: q.hr, by: q.by, better: q.better.length, best: q.better.length ? null : (q.below[0] ? q.below[0].id : null) }; });
 }
 // Spend 2 respins on a shirt: three cards, as many as there are better than the man in it (drawn as a roll draws, so a
 // higher-rated card comes up more often), the rest filled with the best below him, each tagged. Refused with nobody better.
