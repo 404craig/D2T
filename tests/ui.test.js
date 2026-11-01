@@ -132,6 +132,8 @@ fs.mkdirSync(OUT, { recursive: true });
     // the last roll carries a legend in the middle (the roll's own cards, swapped in the engine state for the test):
     // his reel never lands on its own, the reveal plays over the screen, then he drops into his slot (Craig, 13 Oct)
     // the other two slots are made plain cards too, so a purple drawn by the seed can't add a second reveal
+    // a man with six or more positions in the middle of the first roll, to check the tray shows four until he is picked
+    if (r === 0) await page.evaluate(() => { const G = window.D2T.game, S = G.S(), e = G.eng(), used = new Set([...e.seen, ...e.roll.cards, ...e.xi]); const p = S.players.find((q) => !used.has(q.id) && (q.p || []).length >= 6 && !/purple|legend/.test(G.card(S, q.id).level) && (q.p[0] !== "GK")); if (p) e.roll.cards[1] = p.id; });
     if (r === 2) await page.evaluate(() => { const G = window.D2T.game, S = G.S(), e = G.eng(), used = new Set([...e.seen, ...e.roll.cards, ...e.xi]); e.roll.cards[1] = G.legends.find((l) => !used.has(l.id)).id; for (const i of [0, 2]) { if (!/purple|legend/.test(G.card(S, e.roll.cards[i]).level)) continue; const p = S.players.find((q) => !used.has(q.id) && !/purple|legend/.test(G.card(S, q.id).level)); used.add(p.id); e.roll.cards[i] = p.id; } });
     await page.click(".sp-main");
     if (r === 2) {
@@ -165,6 +167,12 @@ fs.mkdirSync(OUT, { recursive: true });
       await page.click(".sp-slot >> nth=0"); await wait(400);
       check(await page.evaluate(() => document.querySelector(".sp-slot.is-sel") === document.querySelector(".sp-slot")), "a tap after a drag dropped on nothing did not select the card");
       await shot("10b-selected");
+      // at most four positions under each tray card until it is picked; then all of his, the other two cards' gone (Craig, 1 Nov)
+      check(await page.evaluate(() => [...document.querySelectorAll(".sp-slot")].every((sl) => { const g = sl.querySelector(".sp-gp"); if (!g) return true; const shown = [...g.childNodes].filter((n) => !(n.classList && (n.classList.contains("sp-gp-more") || n.classList.contains("sp-tag")))).map((n) => n.textContent).join("").split("/").filter(Boolean).length; return shown <= 4; })), "a tray card shows more than four positions");
+      await page.click(".sp-slot >> nth=1"); await wait(500);
+      await shot("10c-selected-long");
+      check(await page.evaluate(() => { const sl = document.querySelectorAll(".sp-slot"), m = sl[1].querySelector(".sp-gp-more"); return sl[1].classList.contains("is-sel") && (!m || getComputedStyle(m).display !== "none") && [sl[0], sl[2]].every((o) => { const g = o.querySelector(".sp-gp"); return !g || getComputedStyle(g).opacity === "0"; }); }), "picking a tray card did not show all his positions and hide the others'");
+      await page.click(".sp-slot >> nth=0"); await wait(400);
       check((await page.$$('.tr-field .se-slot[class*="se-pf-"]')).length === 11, "selecting a card did not colour all 11 shirts by fit");
       // the transfer pitch's cards are 57.5 x 75 where the pitch has the height (Craig, 14 Oct), 50 x 65 where it has not
       const trSize = await page.evaluate(() => { const f = document.querySelector(".tr-field"), c = getComputedStyle(f.querySelector(".se-slot .d2c")); return { h: f.clientHeight, big: f.classList.contains("tr-big"), w: parseFloat(c.width), ch: parseFloat(c.height) }; });
