@@ -361,14 +361,24 @@
         });
       }
 
-      async function spin() {
+      async function spin(respun) {
         const open = openSlots();
         if (busy || !open.length) return;
         busy = true; sel = null; markPitch();
         const avoid = S.filled.map((p) => p.name), need = TARGET - total();
         // the last shot: decide once per game whether one of the three is exactly what you need
         if (open.length === 1 && S.gift == null) S.gift = G4.canGift(SLOTS[open[0]][1], need, avoid, FORM) && Math.random() < G4.gift(FORM);
-        S.cands = G4.drawOpen(openPos(), avoid, open.length === 1 && S.gift ? need : null, FORM); save();   // saved first: a refresh shows the same three
+        S.cands = G4.drawOpen(openPos(), avoid, open.length === 1 && S.gift ? need : null, FORM);
+        // a respin with one or two shirts to go buys a route (Craig, 1 Nov, build 209): if none of the three can still
+        // reach the target exactly, one of them is swapped for a man who can
+        if (respun && open.length <= 2) {
+          const route = G4.routeCards(openPos(), avoid, need, FORM), names = new Set(route.map((p) => p.name));
+          if (route.length && !S.cands.some((p) => names.has(p.name))) {
+            const fresh = route.filter((p) => !S.cands.some((c) => c.name === p.name));
+            if (fresh.length) { const r = fresh[Math.floor(Math.random() * fresh.length)], rec = D2T.state.g4recent; S.cands[Math.floor(Math.random() * S.cands.length)] = r; if (rec && rec[0] && !rec[0].includes(r.name)) rec[0].push(r.name); }
+          }
+        }
+        save();   // saved first: a refresh shows the same three
         trioEl.innerHTML = trioMyst();
         setUI('Spinning', '', true); main.classList.add('is-spinning'); snd('roll3');
         await runReels(S.cands);
@@ -774,7 +784,7 @@
         if (!S.cands) { spin(); return; }
         if (sel != null) place(sel);
       };
-      reload.onclick = () => { if (busy || S.respins <= 0 || !S.cands || !openSlots().length) return; S.respins -= 1; save(); spin(); };
+      reload.onclick = () => { if (busy || S.respins <= 0 || !S.cands || !openSlots().length) return; S.respins -= 1; save(); spin(true); };
       render();
       reveal();
     },
