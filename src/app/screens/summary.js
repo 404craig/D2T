@@ -24,6 +24,15 @@
   // tick, never the final one, the blur on all but the last three, numberTick every other tick), then its suffix wipes
   // in, the verdict tag stamps in with a glint and the three tiles count up. The targets fill one after another as they
   // scroll into view, and both lines of the graph draw left to right together. A tap jumps each to its end.
+  // the writing on a fill of the club's text colour (the peek bar, Play again): its ink only when that reads on it, else
+  // black (Craig, 1 Nov, build 213: West Ham's, Villa's and Burnley's ink is now white for their claret, and their text
+  // colour is sky blue)
+  function inkOn(fill, ink) {
+    const L = (h) => { const n = parseInt(String(h).replace('#', ''), 16); return [n >> 16, (n >> 8) & 255, n & 255].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }).reduce((t, v, i) => t + v * [0.2126, 0.7152, 0.0722][i], 0); };
+    if (!ink) return '#0A0A0A';
+    const a = L(fill), b = L(ink), r = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+    return r >= 4.5 ? ink : '#0A0A0A';
+  }
   function motion(body, F) {
     const MO = D2T.mo, posEl = body.querySelector('.sm-pos'), headEl = body.querySelector('.sm-head');
     const num = String(F.finish), ord = D2T.ordinal(F.finish);
@@ -305,7 +314,7 @@
       const tsC = F.topScorer && GAME.card(S, F.topScorer.id), bcC = F.bestCard != null && GAME.card(S, F.bestCard);
       const rows = { topScorer: tsC ? { name: tsC.name, goals: F.topScorer.goals } : null, best: bcC ? { name: bcC.name, r: bcC.ovr, lv: bcC.level, p: bcC.pos, crest: bcC.club } : null };
       const sh = runShare({ F, club, S, line, daily, mode: GAME.mode(), met, car, x, n, rel, rows });
-      const colour = daily ? '#FFFFFF' : x ? '#12F06C' : GAME.mode() === 'dare2dream' ? '#3BA4FF' : club.text, ink = daily || x || GAME.mode() === 'dare2dream' ? '#0A0A0A' : club.ink;
+      const colour = daily ? '#FFFFFF' : x ? '#12F06C' : GAME.mode() === 'dare2dream' ? '#3BA4FF' : club.text, ink = daily || x || GAME.mode() === 'dare2dream' ? '#0A0A0A' : inkOn(club.text, club.ink);
       const again = () => { if (daily) { GAME.restartDaily(); D2T.go(GAME.stepFor() || 'table'); return; } const m = GAME.mode(); GAME.newRun(m); D2T.go('spin'); };
       const buttons = [{ k: 'share', label: 'Share result', fn: () => { window.D2TSound && window.D2TSound.play('share'); D2T.share.send(sh); } }];
       if (nx) buttons.push({ k: 'next', label: `Next season · ${D2T.esc(nx.key)}`, primary: true, fn: () => { if (GAME.nextSeason()) D2T.go('table'); } });
