@@ -127,15 +127,31 @@ const URL = process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index
     await wait(700);
     check(await dp.evaluate(() => { const d = document.querySelector(".stg-dly").getBoundingClientRect(), r = document.querySelector(".stg-acct").getBoundingClientRect(); return Math.abs(d.height - 44) < 0.6 && Math.abs(d.top - r.top) < 0.6 && Math.abs(d.right - r.right) < 1; }), "the Daily bar is not 44px tall and in line with the buttons");
     check(await dp.evaluate(() => /Today's Daily Challenge/i.test(document.querySelector(".stg-dly").textContent) && /Play/.test(document.querySelector(".stg-dly-go").textContent)), "the Daily bar should say Today's Daily Challenge and Play");
+    // the hand back never blinks (build 211): from the moment the bar goes, the logo parts and the three buttons stay at
+    // opacity 1 on every frame for 600 ms
+    const sampleEnd = () => dp.evaluate(() => { window.__dlyMin = null; const top = document.querySelector(".stg-top");
+      const parts = () => [...top.querySelectorAll(".fr-hl-p, .stg-rb")];
+      const go = () => { const t0 = performance.now(); let min = 1; const f = () => { parts().forEach((n) => { min = Math.min(min, +getComputedStyle(n).opacity); }); if (performance.now() - t0 < 600) requestAnimationFrame(f); else window.__dlyMin = min; }; f(); };
+      // Chromium keeps the animated values through the change, so it never shows the blink Safari did; what it can check is
+      // that the hand back runs with transitions off, so nothing can restart a fade from 0
+      const mo = new MutationObserver(() => { if (!top.classList.contains("dly-on")) { mo.disconnect(); window.__dlySnap = parts().every((n) => getComputedStyle(n).transitionDuration.split(",").every((d) => parseFloat(d) === 0)); go(); } }); mo.observe(top, { attributes: true, attributeFilter: ["class"] }); });
+    const endMin = async () => { await dp.waitForFunction(() => window.__dlyMin != null, null, { timeout: 15000 }).catch(() => {}); return dp.evaluate(() => (window.__dlySnap ? window.__dlyMin : 'transitions on: ' + window.__dlyMin)); };
+    await sampleEnd();
     // the full bar holds 6 s (build 210): still there 5 s after it filled, gone by 8 s
     await wait(4300);
     check(!!(await dp.$(".stg-top.dly-full")), "the Daily bar did not hold for 6 s");
     await wait(3500);
     check(!(await dp.$(".stg-top.dly-on")), "the Daily bar did not go back after its hold");
+    { const m = await endMin(); check(m === 1, `the top bar blinked as the Daily bar went back (lowest opacity ${m})`); }
     // no cap (build 210): with the gap shortened it plays a second and a third time on the same visit
     check(await shows(6000), "the Daily takeover did not play a second time");
     await dp.waitForSelector(".stg-top:not(.dly-on)", { timeout: 12000 }).catch(() => {});
     check(await shows(14000), "the Daily takeover did not play a third time on the same visit");
+    // an interrupted one hands back at once, with no fade from 0 either
+    await wait(600); await sampleEnd();
+    await dp.evaluate(() => document.querySelector(".stg").dispatchEvent(new PointerEvent("pointerdown", { bubbles: true })));
+    { const m = await endMin(); check(m === 1, `the top bar blinked when a touch sent the Daily bar back (lowest opacity ${m})`); }
+    check(await shows(14000), "the Daily takeover did not come back after a touch");
     await dp.evaluate(() => { delete window.D2T_DLY_GAP; });
     await dp.click(".stg-dly"); await wait(1200);
     check((await dShow()) === "daily", "a tap on the Daily bar did not turn the wheel to the Daily");

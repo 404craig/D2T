@@ -493,9 +493,15 @@
       function dlyBack() {
         if (!D.on) return;
         D.steps.forEach(clearTimeout); D.steps = [];
-        D.anims.forEach((an) => an.cancel()); D.anims = [];
-        if (reduced && DT0.classList.contains('dly-rm')) { DT0.classList.remove('dly-full', 'dly-circ', 'dly-on'); dTimer(() => DT0.classList.remove('dly-rm'), 320); }   // the crossfade back
-        else DT0.classList.remove('dly-full', 'dly-circ', 'dly-on', 'dly-rm');
+        if (reduced && DT0.classList.contains('dly-rm')) { D.anims.forEach((an) => an.cancel()); D.anims = []; DT0.classList.remove('dly-full', 'dly-circ', 'dly-on'); dTimer(() => DT0.classList.remove('dly-rm'), 320); }   // the crossfade back
+        else {
+          // with transitions off: the classes go first, then the tracks, so nothing restarts a fade from 0 (build 211)
+          DT0.classList.add('dly-snap');
+          DT0.classList.remove('dly-full', 'dly-circ', 'dly-on', 'dly-rm');
+          D.anims.forEach((an) => an.cancel()); D.anims = [];
+          void DT0.offsetWidth;
+          requestAnimationFrame(() => DT0.classList.remove('dly-snap'));
+        }
         D.on = false; DBAR.setAttribute('aria-hidden', 'true'); DBAR.tabIndex = -1;
         if (GM[shown].id !== 'daily') dlySchedule(dlyGap());
       }

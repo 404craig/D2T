@@ -310,7 +310,7 @@ function clubXI(S, club, gone, join) {
   const ix = indexSeason(S);
   const pool = (ix.byClub.get(club) || []).filter(p => !gone.has(p.id)).concat(join || []);
   const broad = p => broadOf(p);
-  const score = p => p.r + Math.min(p.a || 0, 30) * 0.15;
+  const score = p => clubRating(p) + Math.min(p.a || 0, 30) * 0.15;
   const take = (cond, n) => pool.filter(cond).sort((x, y) => score(y) - score(x)).slice(0, n);
   const gk = take(p => broad(p) === "GK", 1);
   const df = take(p => broad(p) === "DEF", 4);
@@ -323,11 +323,13 @@ function clubXI(S, club, gone, join) {
   }
   return xi;
 }
+// A purple lifted to 85 for the card and your XI keeps his own rating for history's clubs (rh, Craig 31 Oct).
+function clubRating(p) { return p.rh != null ? p.rh : p.r; }
 function clubStrength(S, club, gone, join) {
   const xi = clubXI(S, club, gone, join);
   const slots = ["GK","RB","CB","CB","LB","RM","CM","CM","LM","ST","ST"];
   // Club squads are judged on their own broad roles, so every player plays at full rating.
-  const flat = xi.map((p, i) => p ? Object.assign({}, p, { p: [slots[i]] }) : null);
+  const flat = xi.map((p, i) => p ? Object.assign({}, p, { p: [slots[i]], r: clubRating(p) }) : null);
   return xiStrength(flat, slots);
 }
 

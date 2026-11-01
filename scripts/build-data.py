@@ -160,8 +160,11 @@ for _name, _pos in (json.load(open(_po, encoding="utf-8")) if os.path.exists(_po
 # similarly wingers should be able to play LM or RM"): a left or right midfielder is also a winger on that side and a
 # winger also a wide midfielder there, the partner added as a preferred position straight after the one he has
 # (Andrei Kanchelskis: RM, then RW).
+# Craig's own lists (positions_overrides.json) are final and skip this (31 Oct: Lee Sharpe, no LW or RW).
+_final = {k for k, v in (json.load(open(_po, encoding="utf-8")) if os.path.exists(_po) else {}).items() if isinstance(v, list)}
 for _season in POSITIONS.values():
     for _name, _ps in _season.items():
+        if _name in _final: continue
         cur = list(_ps)
         for a, b in (("LM", "LW"), ("RM", "RW")):
             if a in cur and b not in cur: cur.insert(cur.index(a) + 1, b)
@@ -213,6 +216,9 @@ HONOUR_FLOOR = {"FWD": 90, "MID": 80, "DEF": 80, "GK": 80}
 ICON_LIFT = 4           # ranking lift for the most popular icon (consensus 100), none for a non-icon
 # Pool sizes per season (Craig, 15 Oct): 10 to 15 purple and 3 to 6 legends, a few more for all-time great teams.
 PURPLE_CAP, LEGEND_CAP = 15, 6
+# Craig, 31 Oct: no purple is rated under 85 (the 84 purples below it lifted to 85); the lift is for the card and your XI
+# only, history's clubs play him at his own rating (`rh`), so the top sides are no stronger
+PURPLE_MIN = 85
 GREAT_CAP = (18, 8)
 # The all-time great teams' seasons (Craig, 15 Oct: Arsenal's Invincibles, Man Utd's title sides, Chelsea under
 # Mourinho). Man Utd's are the titles with 89+ points or a double or treble in the record: 1993/94 (92, double),
@@ -271,6 +277,9 @@ def icon_levels(season, people):
         if q["_peak"] or (q["_icon"] and q["r"] >= PURPLE_BAND[q["b"]]) or (q["_hon"] and q["r"] >= HONOUR_FLOOR[q["b"]]): purple.add(id(q))
     for q in people:
         q["lv"] = 3 if id(q) in purple else 2 if q["r"] >= 80 else 1 if q["r"] >= 70 else 0
+        if q["lv"] == 3 and q["r"] < PURPLE_MIN:   # a purple is never rated under 85, the lift kept in bst; history's clubs
+            q["rh"] = q["r"]                         # still play him at his own rating (rh), so only your XI gains
+            q["bst"] += PURPLE_MIN - q["r"]; q["r"] = PURPLE_MIN
         if id(q) in legend: q["lg"] = 1
         if not q["bst"]: del q["bst"]
         for k in ("_icon", "_peak", "_hon", "_lift"): del q[k]
