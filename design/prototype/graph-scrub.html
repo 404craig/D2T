@@ -1,0 +1,126 @@
+<meta charset="utf-8">
+<title>Graph Scrub</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;0,600;0,700;0,800;1,800;1,900&display=swap">
+<style>
+/* Layout: one live phone (the real season-over screen, rebuilt) beside the notes; the graph is the thing to touch */
+:root{--bg:#000;--fg:#fff;--soft:#BDBDC6;--muted:#8E8E99;--line:#26262C;--panel:#111114;--g:#12F06C;--phone:#151518;--acc:#2C5BE0;--txt:#7393FF;--font:'Exo 2',system-ui,sans-serif;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font)}
+.wrap{max-width:1040px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10px}
+.lead{color:var(--soft);font-size:16px;line-height:1.5;max-width:760px;margin:0 0 18px}.lead b{color:var(--fg)}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
+.ctl button{min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:#0E0E10;color:var(--fg);font:800 13px var(--font);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.ctl button.on{border-color:var(--g);color:var(--g)}
+.ctl button:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+.cols{display:flex;gap:34px;flex-wrap:wrap;align-items:flex-start}
+.ph{flex:0 0 auto;width:min(390px,100%);border-radius:34px;padding:8px;background:var(--phone);box-shadow:0 0 0 1px #2A2A30}
+.scr{border-radius:27px;overflow:hidden;background:#000;padding:18px 16px 26px;position:relative}
+.notes{flex:1 1 300px;min-width:0;color:#CFCFD6;font-size:15px;line-height:1.5}
+.notes h2{font:900 italic 22px var(--font);text-transform:uppercase;color:var(--fg);margin:0 0 8px}.notes li{margin:0 0 8px}.notes b{color:var(--fg)}
+/* the screen */
+.kick{font:800 12px var(--font);letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+.namer{display:flex;align-items:center;gap:12px;margin:8px 0 10px}.namer img{width:46px;height:46px;object-fit:contain}
+.namer b{font:900 italic 30px/1 var(--font);text-transform:uppercase}
+.tag{display:inline-block;background:var(--acc);color:#fff;font:900 italic 13px/1 var(--font);text-transform:uppercase;padding:6px 10px;border-radius:7px}
+.fin{display:flex;align-items:center;gap:14px;margin:6px 0 12px}.fin .pos{font:900 italic 78px/0.95 var(--font);color:var(--txt);letter-spacing:-.02em}
+.fin .sub b{display:block;font:700 14px var(--font)}.fin .sub span{display:block;color:var(--soft);font-size:14px;margin-top:3px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.tile{border:1px solid var(--line);border-radius:14px;padding:10px 10px 9px;background:var(--panel)}.tile.r{border-color:var(--acc)}
+.tile b{display:block;font:900 italic 24px/1 var(--font)}.tile b.c{color:var(--txt)}.tile span{display:block;font:800 9.5px/1.2 var(--font);letter-spacing:.1em;color:var(--soft);text-transform:uppercase;margin-top:6px}
+.panel{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:12px 12px 10px;position:relative}
+.lab{font:800 11px var(--font);letter-spacing:.14em;color:var(--soft);text-transform:uppercase}
+/* the readout above the graph (A) */
+.ro{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end;margin:8px 0 2px;min-height:56px}
+.ro .gw{grid-column:1/-1;font:800 11px var(--font);letter-spacing:.06em;color:var(--soft);text-transform:uppercase;display:flex;justify-content:space-between;gap:8px}
+.ro .gw em{font-style:normal;color:var(--fg)}
+.ro .who small{display:block;font:800 9.5px var(--font);letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.ro .who b{font:900 italic 24px/1 var(--font);font-variant-numeric:tabular-nums}.ro .who i{font-style:normal;font:700 13px var(--font);color:var(--soft);margin-left:5px}
+.ro .me b{color:var(--txt)}.ro .hi b{color:#C9C9D1}
+.ro .dl{font:900 italic 13px var(--font);color:var(--txt);border:1px solid var(--acc);border-radius:7px;padding:4px 7px;white-space:nowrap;align-self:center}
+.ro .dl.neg{color:#C9C9D1;border-color:#3A3A44}
+.hint{font:600 12px var(--font);color:var(--muted);margin:2px 0 0;transition:opacity .3s}
+.chart{position:relative;touch-action:pan-y;cursor:crosshair;-webkit-user-select:none;user-select:none;margin-top:4px}
+.chart svg{display:block;width:100%;height:auto}
+.leg{display:flex;gap:16px;font:600 12px var(--font);color:var(--soft);margin-top:6px}.leg i{display:inline-block;width:18px;height:3px;border-radius:2px;background:var(--txt);vertical-align:middle;margin-right:6px}.leg i.h{background:repeating-linear-gradient(90deg,#8E8E99 0 5px,transparent 5px 9px)}
+/* the bubble (B) */
+.bub{position:absolute;top:0;transform:translate(-50%,-100%);background:#1C1C22;border:1px solid #33333C;border-radius:12px;padding:7px 9px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:0 8px 24px rgba(0,0,0,.5);z-index:3}
+.bub.on{opacity:1}.bub .t{font:800 10px var(--font);letter-spacing:.1em;color:var(--soft);text-transform:uppercase}
+.bub .r{font:800 13px var(--font);margin-top:3px}.bub .r b{color:var(--txt);font-style:italic}.bub .r.h b{color:#C9C9D1}
+.modeB .ro{display:none}
+@media (prefers-reduced-motion:reduce){.hint,.bub{transition:none}}
+</style>
+<div class="wrap">
+<h1>Scrub the season</h1>
+<p class="lead">Drag along the graph to see each week: your <b>position and points</b> against <b>history's</b>, and the result that week. This is a <b>real season from the game</b>: Leicester 2022/23 (18th and 34 pts for real), taken to 10th. Tap or drag on the graph below. On a phone, a sideways drag scrubs and an up-and-down drag still scrolls the page.</p>
+<div class="ctl" role="group" aria-label="Readout style"><button id="mA" class="on">A · Readout above</button><button id="mB">B · Bubble on the graph</button></div>
+<div class="cols">
+<div class="ph"><div class="scr" id="scr">
+ <div class="kick">Season over · 2022/23</div>
+ <div class="namer"><img src="scrub-crest.png" alt=""><b>Leicester</b></div>
+ <span class="tag">Top half</span>
+ <div class="fin"><span class="pos">10th</span><span class="sub"><b id="sumline"></b><span>History: 18th, 34 pts</span></span></div>
+ <div class="tiles"><div class="tile r"><b class="c">+8</b><span>The rise</span></div><div class="tile"><b id="tpts"></b><span>Points on history</span></div><div class="tile"><b id="tgd"></b><span>Goal difference</span></div></div>
+ <div class="panel">
+  <div class="lab">Your season against history</div>
+  <div class="ro" id="ro"></div>
+  <div class="chart" id="chart"><div class="bub" id="bub"></div></div>
+  <div class="leg"><span><i></i>You</span><span><i class="h"></i>History</span></div>
+  <p class="hint" id="hint">Drag along the graph to see each week</p>
+ </div>
+</div></div>
+<div class="notes"><h2>How it works</h2><ul>
+<li><b>Touch and drag</b> sideways anywhere on the graph. A line snaps to the nearest week, with a dot on each line.</li>
+<li><b>The rest of the season dims</b> past your finger, so you see the season up to that week.</li>
+<li><b>A</b> puts the numbers in a strip above the graph, so your finger never covers them. It shows the final week when you're not touching. <b>B</b> puts a small bubble over the dots instead. It's closer to the action but your thumb can hide it.</li>
+<li>Up-and-down drags still scroll the page, so it never traps you.</li>
+<li>Each week shows <b>who you played and the score</b>. History's score is the real one.</li>
+<li>Let go and it stays on that week. Tap outside the graph to go back to the final week.</li>
+<li>My pick is <b>A</b>.</li>
+</ul></div>
+</div>
+</div>
+<script>
+const D={"club": "Leicester", "crest": "scrub-crest.png", "accent": "#2C5BE0", "text": "#7393FF", "ink": "#FFFFFF", "season": "2022/23", "n": 20, "rel": 3, "finish": 10, "histFinish": 18, "mine": [{"opp": "Brentford", "home": true, "us": 1, "them": 1, "pts": 1, "pos": 12}, {"opp": "Arsenal", "home": false, "us": 1, "them": 1, "pts": 2, "pos": 14}, {"opp": "Southampton", "home": true, "us": 1, "them": 1, "pts": 3, "pos": 12}, {"opp": "Chelsea", "home": false, "us": 1, "them": 0, "pts": 6, "pos": 10}, {"opp": "Man Utd", "home": true, "us": 2, "them": 1, "pts": 9, "pos": 7}, {"opp": "Brighton", "home": false, "us": 1, "them": 1, "pts": 10, "pos": 6}, {"opp": "Spurs", "home": false, "us": 0, "them": 1, "pts": 10, "pos": 9}, {"opp": "Nottingham Forest", "home": true, "us": 4, "them": 2, "pts": 13, "pos": 4}, {"opp": "Bournemouth", "home": false, "us": 0, "them": 2, "pts": 13, "pos": 7}, {"opp": "Crystal Palace", "home": true, "us": 3, "them": 0, "pts": 16, "pos": 7}, {"opp": "Leeds", "home": true, "us": 1, "them": 1, "pts": 17, "pos": 6}, {"opp": "Wolves", "home": false, "us": 1, "them": 0, "pts": 20, "pos": 5}, {"opp": "Man City", "home": true, "us": 2, "them": 1, "pts": 23, "pos": 5}, {"opp": "Everton", "home": false, "us": 1, "them": 1, "pts": 24, "pos": 5}, {"opp": "West Ham", "home": false, "us": 0, "them": 1, "pts": 24, "pos": 5}, {"opp": "Newcastle", "home": true, "us": 1, "them": 1, "pts": 25, "pos": 7}, {"opp": "Liverpool", "home": false, "us": 2, "them": 1, "pts": 28, "pos": 6}, {"opp": "Fulham", "home": true, "us": 3, "them": 3, "pts": 29, "pos": 6}, {"opp": "Nottingham Forest", "home": false, "us": 2, "them": 1, "pts": 32, "pos": 6}, {"opp": "Brighton", "home": true, "us": 1, "them": 2, "pts": 32, "pos": 6}, {"opp": "Aston Villa", "home": false, "us": 0, "them": 3, "pts": 32, "pos": 8}, {"opp": "Spurs", "home": true, "us": 0, "them": 3, "pts": 32, "pos": 10}, {"opp": "Man Utd", "home": false, "us": 2, "them": 0, "pts": 35, "pos": 9}, {"opp": "Arsenal", "home": true, "us": 1, "them": 0, "pts": 38, "pos": 6}, {"opp": "Southampton", "home": false, "us": 0, "them": 1, "pts": 38, "pos": 9}, {"opp": "Chelsea", "home": true, "us": 1, "them": 1, "pts": 39, "pos": 9}, {"opp": "Brentford", "home": false, "us": 3, "them": 0, "pts": 42, "pos": 7}, {"opp": "Crystal Palace", "home": false, "us": 1, "them": 2, "pts": 42, "pos": 9}, {"opp": "Aston Villa", "home": true, "us": 1, "them": 2, "pts": 42, "pos": 9}, {"opp": "Bournemouth", "home": true, "us": 0, "them": 1, "pts": 42, "pos": 9}, {"opp": "Man City", "home": false, "us": 0, "them": 2, "pts": 42, "pos": 10}, {"opp": "Wolves", "home": true, "us": 2, "them": 0, "pts": 45, "pos": 9}, {"opp": "Leeds", "home": false, "us": 1, "them": 0, "pts": 48, "pos": 10}, {"opp": "Everton", "home": true, "us": 2, "them": 0, "pts": 51, "pos": 9}, {"opp": "Fulham", "home": false, "us": 1, "them": 2, "pts": 51, "pos": 10}, {"opp": "Liverpool", "home": true, "us": 0, "them": 2, "pts": 51, "pos": 10}, {"opp": "Newcastle", "home": false, "us": 0, "them": 2, "pts": 51, "pos": 10}, {"opp": "West Ham", "home": true, "us": 2, "them": 0, "pts": 54, "pos": 10}], "hist": [{"opp": "Brentford", "home": true, "us": 2, "them": 2, "pts": 1, "pos": 11}, {"opp": "Arsenal", "home": false, "us": 2, "them": 4, "pts": 1, "pos": 14}, {"opp": "Southampton", "home": true, "us": 1, "them": 2, "pts": 1, "pos": 18}, {"opp": "Chelsea", "home": false, "us": 1, "them": 2, "pts": 1, "pos": 19}, {"opp": "Man Utd", "home": true, "us": 0, "them": 1, "pts": 1, "pos": 20}, {"opp": "Brighton", "home": false, "us": 2, "them": 5, "pts": 1, "pos": 20}, {"opp": "Spurs", "home": false, "us": 2, "them": 6, "pts": 1, "pos": 20}, {"opp": "Nottingham Forest", "home": true, "us": 4, "them": 0, "pts": 4, "pos": 19}, {"opp": "Bournemouth", "home": false, "us": 1, "them": 2, "pts": 4, "pos": 19}, {"opp": "Crystal Palace", "home": true, "us": 0, "them": 0, "pts": 5, "pos": 19}, {"opp": "Leeds", "home": true, "us": 2, "them": 0, "pts": 8, "pos": 19}, {"opp": "Wolves", "home": false, "us": 4, "them": 0, "pts": 11, "pos": 16}, {"opp": "Man City", "home": true, "us": 0, "them": 1, "pts": 11, "pos": 18}, {"opp": "Everton", "home": false, "us": 2, "them": 0, "pts": 14, "pos": 13}, {"opp": "West Ham", "home": false, "us": 2, "them": 0, "pts": 17, "pos": 12}, {"opp": "Newcastle", "home": true, "us": 0, "them": 3, "pts": 17, "pos": 13}, {"opp": "Liverpool", "home": false, "us": 1, "them": 2, "pts": 17, "pos": 13}, {"opp": "Fulham", "home": true, "us": 0, "them": 1, "pts": 17, "pos": 13}, {"opp": "Nottingham Forest", "home": false, "us": 0, "them": 2, "pts": 17, "pos": 15}, {"opp": "Brighton", "home": true, "us": 2, "them": 2, "pts": 18, "pos": 14}, {"opp": "Aston Villa", "home": false, "us": 4, "them": 2, "pts": 21, "pos": 13}, {"opp": "Spurs", "home": true, "us": 4, "them": 1, "pts": 24, "pos": 13}, {"opp": "Man Utd", "home": false, "us": 0, "them": 3, "pts": 24, "pos": 14}, {"opp": "Arsenal", "home": true, "us": 0, "them": 1, "pts": 24, "pos": 14}, {"opp": "Southampton", "home": false, "us": 0, "them": 1, "pts": 24, "pos": 15}, {"opp": "Chelsea", "home": true, "us": 1, "them": 3, "pts": 24, "pos": 16}, {"opp": "Brentford", "home": false, "us": 1, "them": 1, "pts": 25, "pos": 17}, {"opp": "Crystal Palace", "home": false, "us": 1, "them": 2, "pts": 25, "pos": 18}, {"opp": "Aston Villa", "home": true, "us": 1, "them": 2, "pts": 25, "pos": 19}, {"opp": "Bournemouth", "home": true, "us": 0, "them": 1, "pts": 25, "pos": 19}, {"opp": "Man City", "home": false, "us": 1, "them": 3, "pts": 25, "pos": 19}, {"opp": "Wolves", "home": true, "us": 2, "them": 1, "pts": 28, "pos": 17}, {"opp": "Leeds", "home": false, "us": 1, "them": 1, "pts": 29, "pos": 17}, {"opp": "Everton", "home": true, "us": 2, "them": 2, "pts": 30, "pos": 16}, {"opp": "Fulham", "home": false, "us": 3, "them": 5, "pts": 30, "pos": 18}, {"opp": "Liverpool", "home": true, "us": 0, "them": 3, "pts": 30, "pos": 19}, {"opp": "Newcastle", "home": false, "us": 0, "them": 0, "pts": 31, "pos": 18}, {"opp": "West Ham", "home": true, "us": 2, "them": 1, "pts": 34, "pos": 18}]};
+const ord=(n)=>{const s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0]);};
+const W=340,H=180,L=28,R=10,T=12,B=22,w=W-L-R,h=H-T-B,N=D.mine.length,n=D.n,rel=D.rel;
+const x=(i)=>L+i*(w/(N-1)),y=(p)=>T+(p-1)*(h/(n-1));
+const pts=(a)=>a.map((r,i)=>x(i).toFixed(1)+','+y(r.pos).toFixed(1)).join(' ');
+const last=D.mine[N-1];
+document.getElementById('sumline').textContent=last.pts+' pts · W'+D.mine.filter(r=>r.us>r.them).length+' D'+D.mine.filter(r=>r.us===r.them).length+' L'+D.mine.filter(r=>r.us<r.them).length;
+const gd=D.mine.reduce((s,r)=>s+r.us-r.them,0); document.getElementById('tpts').textContent=(last.pts-D.hist[N-1].pts>=0?'+':'')+(last.pts-D.hist[N-1].pts); document.getElementById('tgd').textContent=(gd>=0?'+':'')+gd;
+const grid=[1,Math.round(n/2),n].map(p=>`<line x1="${L}" x2="${W-R}" y1="${y(p)}" y2="${y(p)}" stroke="#222226" stroke-dasharray="3 4"/><text x="${L-6}" y="${y(p)+4}" font-size="10" text-anchor="end" fill="#8E8E99">${p}</text>`).join('');
+const chart=document.getElementById('chart');
+chart.insertAdjacentHTML('afterbegin',`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Your league position each week against history's">
+<rect x="${L}" y="${y(n-rel+1)-5}" width="${w}" height="${y(n)-y(n-rel+1)+10}" fill="rgba(255,40,80,0.10)"/>${grid}
+<defs><clipPath id="past"><rect id="pastR" x="0" y="0" width="${W}" height="${H}"/></clipPath></defs>
+<g opacity=".28"><polyline points="${pts(D.hist)}" fill="none" stroke="#8E8E99" stroke-width="2" stroke-dasharray="5 4"/><polyline points="${pts(D.mine)}" fill="none" stroke="${D.text}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></g>
+<g clip-path="url(#past)"><polyline points="${pts(D.hist)}" fill="none" stroke="#8E8E99" stroke-width="2" stroke-dasharray="5 4"/><polyline points="${pts(D.mine)}" fill="none" stroke="${D.text}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></g>
+<line id="gl" x1="0" x2="0" y1="${T-4}" y2="${H-B+2}" stroke="#fff" stroke-opacity=".35" stroke-width="1"/>
+<circle id="dh" r="4.5" fill="#000" stroke="#C9C9D1" stroke-width="2"/><circle id="dm" r="5.5" fill="${D.text}" stroke="#000" stroke-width="2"/>
+<text x="${L}" y="${H-6}" font-size="10" fill="#8E8E99">GW1</text><text x="${W-R}" y="${H-6}" font-size="10" text-anchor="end" fill="#8E8E99">GW${N}</text></svg>`);
+const svg=chart.querySelector('svg'),pastR=svg.querySelector('#pastR'),gl=svg.querySelector('#gl'),dm=svg.querySelector('#dm'),dh=svg.querySelector('#dh'),ro=document.getElementById('ro'),bub=document.getElementById('bub'),hint=document.getElementById('hint');
+const res=(r)=>`${r.us>r.them?'W':r.us<r.them?'L':'D'} ${r.us}-${r.them}`;
+let cur=N-1,live=false;
+function show(i){ cur=i; const m=D.mine[i],hs=D.hist[i],X=x(i);
+ const full=i===N-1&&!live; pastR.setAttribute('width', full?W:X+0.5); gl.setAttribute('x1',X); gl.setAttribute('x2',X); gl.style.opacity=full?0:1;
+ dm.setAttribute('cx',X); dm.setAttribute('cy',y(m.pos)); dh.setAttribute('cx',X); dh.setAttribute('cy',y(hs.pos));
+ const dp=hs.pos-m.pos;
+ ro.innerHTML=`<div class="gw"><span>GW${i+1} · ${m.opp} (${m.home?'H':'A'})</span><span>You <em>${res(m)}</em> · Real <em>${res(hs)}</em></span></div>
+  <div class="who me"><small>You</small><b>${ord(m.pos)}</b><i>${m.pts} pts</i></div><div class="who hi"><small>History</small><b>${ord(hs.pos)}</b><i>${hs.pts} pts</i></div>
+  <span class="dl${dp<0?' neg':''}">${dp===0?'Level':(dp>0?'+':'')+dp+(Math.abs(dp)===1?' place':' places')}</span>`;
+ const cr=chart.getBoundingClientRect(), sx=cr.width/W; bub.style.left=Math.min(cr.width-70,Math.max(70,X*sx))+'px'; bub.style.top=(Math.min(y(m.pos),y(hs.pos))*sx-10)+'px';
+ bub.innerHTML=`<div class="t">GW${i+1} · ${m.opp} (${m.home?'H':'A'}) ${res(m)}</div><div class="r"><b>${ord(m.pos)}</b> · ${m.pts} pts</div><div class="r h"><b>${ord(hs.pos)}</b> · ${hs.pts} pts · real ${res(hs)}</div>`;
+}
+const at=(e)=>{const r=svg.getBoundingClientRect();const px=(e.clientX-r.left)/r.width*W;return Math.max(0,Math.min(N-1,Math.round((px-L)/(w/(N-1)))));};
+let down=null;
+chart.addEventListener('pointerdown',(e)=>{down={x:e.clientX,y:e.clientY,id:e.pointerId,go:e.pointerType==='mouse'};if(down.go)start(e);});
+chart.addEventListener('pointermove',(e)=>{if(!down)return; if(!down.go){const dx=Math.abs(e.clientX-down.x),dy=Math.abs(e.clientY-down.y); if(dx>6&&dx>dy){down.go=true;start(e);} else if(dy>8){down=null;return;}} if(down&&down.go){show(at(e));}});
+const end=(e)=>{ if(down&&!down.go&&e.type==='pointerup'){ start(e); } if(down){ live=true; bub.classList.remove('on'); } down=null; };
+chart.addEventListener('pointerup',end); chart.addEventListener('pointercancel',()=>{down=null;bub.classList.remove('on');});
+function start(e){ try{chart.setPointerCapture(e.pointerId);}catch(_){} live=true; hint.style.opacity=0; if(document.body.classList.contains('modeB'))bub.classList.add('on'); show(at(e)); }
+document.addEventListener('pointerdown',(e)=>{ if(!chart.contains(e.target)&&!e.target.closest('.ctl')){ live=false; show(N-1); } });
+const mode=(b)=>{document.body.classList.toggle('modeB',b);document.getElementById('mA').classList.toggle('on',!b);document.getElementById('mB').classList.toggle('on',b);};
+document.getElementById('mA').onclick=()=>mode(false); document.getElementById('mB').onclick=()=>mode(true);
+show(N-1);
+</script>
