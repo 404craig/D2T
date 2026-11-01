@@ -272,11 +272,14 @@
 /* the glow is a layer whose opacity breathes, not an animated box-shadow (Fable's review, build 198) */
 .tr-seg.tr-fill { position: relative; background: #26262C; box-shadow: none; }
 .tr-seg.tr-fill::after { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: 0 0 16px var(--tr-acc); opacity: .4; pointer-events: none; animation: trGlow 1.3s ease-in-out .9s infinite; }
-.tr-segfill { position: absolute; inset: 0; border-radius: inherit; transform-origin: left center; background: linear-gradient(90deg, var(--tr-acc) 0%, var(--tr-acc) 82%, #fff 100%); }
+.tr-segfill { position: absolute; inset: 0; border-radius: inherit; transform-origin: left center; background: var(--tr-acc); overflow: hidden; }
+/* the white leading edge only while it fills, then gone (Craig, 31 Oct, build 205: it stayed on the lit pill and looked off) */
+.tr-segfill::after { content: ''; position: absolute; top: 0; bottom: 0; right: 0; width: 22%; background: linear-gradient(90deg, rgba(255,255,255,0), #fff); opacity: 0; animation: trEdge .62s linear .45s both; }
+@keyframes trEdge { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; } }
 .tr-segwas { position: absolute; inset: 0; border-radius: inherit; background: var(--tr-acc); box-shadow: 0 0 10px var(--tr-acc); pointer-events: none; }
 .tr-seg { position: relative; }
 @keyframes trGlow { 0%, 100% { opacity: .4; } 50% { opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .tr-seg.tr-fill::after { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .tr-seg.tr-fill::after, .tr-segfill::after { animation: none; } }
 .tr-wins { margin-top: 4px; }
 .tr-wins span { font-weight: 800; font-size: 8.5px; letter-spacing: .14em; text-transform: uppercase; color: #8E8E99; text-align: center; white-space: nowrap; line-height: 1.1; }
 .tr-rollhead .sp-kicker b { font-size: 15px; font-weight: 900; color: var(--tr-acc); letter-spacing: .04em; }

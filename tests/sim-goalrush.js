@@ -6,10 +6,15 @@ const TOP = 220; let POS = { GK: 1, DEF: 4, MID: 3, FWD: 3 }, T = 433;
 // pool depth per formation: each draws from that many top scorers per position, so a random XI lands near 77% of the
 // target for every shape (as 433 does with 220); five-at-the-back shapes need the deeper scorers cut off
 // last-shot gift chance per formation: a casual player lands exactly about 1 game in 20, one who roughly knows career goals about 1 in 10
-const GIFT = { 442: 0.22, 433: 0.2, 451: 0.27, 352: 0.14, 343: 0.14, 424: 0.18, 532: 0.36, 541: 0.42 };
-const DEPTH = { 442: 180, 433: 220, 451: 145, 352: 310, 343: 355, 424: 260, 532: 105, 541: 75 };
+const GIFT = { 442: 0.22, 433: 0.2, 451: 0.27, 352: 0.14, 343: 0.14, 424: 0.18, 532: 0.28, 541: 0.28 };
+const DEPTH = { 442: 170, 433: 214, 451: 123, 352: 305, 343: 353, 424: 256, 532: 77, 541: 35 };
 let L = {}, MEAN = {};
-const setPool = (k) => { L = {}; MEAN = {}; for (const p in G) L[p] = G[p].slice(0, k).map(([n, s, c, g]) => ({ n, g, pos: p })); for (const p in L) MEAN[p] = L[p].reduce((t, x) => t + x.g, 0) / L[p].length; };
+// every player marked a star (a purple or legend card in that position, `x` on his entry) is in every pool, below the
+// top scorers (Craig, 31 Oct, build 208: Gary Neville, Carragher, Vieira, Makelele, Cech were missing from the shapes)
+const isStar = (row) => !!row[4];
+if (process.env.DEPTHS) Object.assign(DEPTH, JSON.parse(process.env.DEPTHS));
+if (process.env.GIFTS) Object.assign(GIFT, JSON.parse(process.env.GIFTS));
+const setPool = (k) => { L = {}; MEAN = {}; for (const p in G) L[p] = G[p].filter((r, i) => i < k || isStar(r)).map(([n, s, c, g]) => ({ n, g, pos: p })); for (const p in L) MEAN[p] = L[p].reduce((t, x) => t + x.g, 0) / L[p].length; };
 const rnd = (a) => a[Math.floor(Math.random() * a.length)];
 // HIST=1: the app's anti-repeat (GAME.g433.drawOpen): players the last three games offered come up at a tenth, a quarter
 // and half the chance of a fresh one. Games are chained so the memory builds as it does on a phone.

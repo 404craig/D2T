@@ -29,48 +29,28 @@
     const num = String(F.finish), ord = D2T.ordinal(F.finish);
     posEl.innerHTML = `<span class="sm-pn">${num}</span><span class="sm-ps">${D2T.esc(ord.slice(num.length))}</span>`;
     if (!MO || MO.still()) return;
-    const snd = (k) => window.D2TSound && window.D2TSound.play(k);
-    const pn = posEl.querySelector('.sm-pn'), ps = posEl.querySelector('.sm-ps');
     const tiles = [...body.querySelectorAll('.sm-tile b')];
     tiles.forEach((b) => { b.dataset.v = b.textContent; b.textContent = MO.startText(b.textContent); });
-    headEl.classList.add('sm-hold'); ps.style.clipPath = 'inset(0 100% 0 0)';
-    let ended = false, ticking = null;
+    headEl.classList.add('sm-hold');
+    let ended = false;
     const timers = [];
     const later = (f, ms) => timers.push(setTimeout(f, ms));
     const end = () => {
       if (ended) return; ended = true;
       timers.forEach(clearTimeout); MO.untrack(seq);
-      pn.textContent = num; pn.style.filter = ''; ps.style.clipPath = '';
       headEl.classList.remove('sm-hold'); headEl.style.animation = 'none';
       tiles.forEach((b) => { if (!b.querySelector('.mo-odo')) b.textContent = b.dataset.v; });
     };
     const seq = MO.track({ finish() { if (ended) return; end(); tiles.forEach((b) => { b.textContent = b.dataset.v; }); } });
-    const steps = [38, 38, 40, 42, 46, 50, 56, 64, 74, 88, 108, 136];
-    let i = 0;
     const stamp = () => {
       headEl.classList.remove('sm-hold'); headEl.style.animation = 'none';
       headEl.animate([{ transform: 'scale(1.5) rotate(-4deg)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 260, easing: 'cubic-bezier(.34,1.56,.64,1)' });
       MO.glint(headEl, { delay: 260, dur: 480 });
       later(() => { end(); tiles.forEach((b, k) => MO.odometer(b, b.dataset.v, { delay: k * 140, dur: 700 })); }, 320);
     };
-    const tick = () => {
-      if (ended) return;
-      if (!pn.isConnected) { end(); return; }
-      if (i < steps.length) {
-        let v; do { v = 1 + Math.floor(Math.random() * 20); } while (v === F.finish);
-        pn.textContent = v; pn.style.filter = i >= steps.length - 3 ? '' : 'blur(1.4px)';
-        pn.animate([{ transform: 'translateY(-14px)', opacity: 0.4 }, { transform: 'translateY(0)', opacity: 1 }], { duration: steps[i], easing: 'linear' });
-        if (i % 2 === 0) snd('numberTick');
-        later(tick, steps[i++]);
-        return;
-      }
-      pn.textContent = num; pn.style.filter = '';
-      ps.animate([{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 260, easing: 'ease-out' });
-      ps.style.clipPath = '';
-      later(stamp, 280);
-    };
-    pn.textContent = 1 + ((F.finish + 9) % 20);
-    later(tick, 450);
+    // the finish is there at once, number and suffix together (Craig, 31 Oct, build 206: the roll and the suffix wipe looked
+    // terrible); only the verdict tag stamps in and the tiles count up
+    later(stamp, 300);
 
     // the targets you hit fill one after another as the row scrolls into view; the missed ones stay dashed
     const ach = body.querySelector('.sm-ach'), on = [...body.querySelectorAll('.sm-ach span.on')];
