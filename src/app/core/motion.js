@@ -14,7 +14,7 @@
 
   // "+20", "-3", "1st", "40%", "8-": a sign, a number and a suffix; anything else ("-") just appears
   function parse(v) {
-    const m = String(v).match(/^([+\-]?)(\d+)(.*)$/);
+    const m = String(v).match(/^([+\-±]?)(\d+)(.*)$/);
     return m ? { sign: m[1], n: +m[2], suf: m[3] } : null;
   }
   const ORD = /^(st|nd|rd|th)$/;
@@ -28,7 +28,7 @@
     const p = parse(to);
     if (!p || still()) { el.textContent = String(to); return null; }
     const ord = ORD.test(p.suf);
-    const fmt = (n) => (n === 0 && !ord ? '0' + p.suf : ord ? D2T.ordinal(n) : p.sign + n + p.suf);
+    const fmt = (n) => (n === 0 && !ord ? (p.sign === '±' ? '±' : '') + '0' + p.suf : ord ? D2T.ordinal(n) : p.sign + n + p.suf);   // a ± stays fixed while the number rolls
     const from = o.from != null ? o.from : ord ? Math.max(p.n, 20) : 0;
     if (from === p.n) { el.textContent = String(to); return null; }
     const dur = o.dur || 950, delay = o.delay || 0;
@@ -83,7 +83,7 @@
   // what an odometer shows before it rolls: 0 (keeping the sign and suffix), a finish from 20th; anything else as it is
   function startText(v) {
     const p = parse(v); if (!p) return String(v);
-    return ORD.test(p.suf) ? D2T.ordinal(Math.max(p.n, 20)) : '0' + p.suf;   // a zero start has no sign (no "+0", "-0")
+    return ORD.test(p.suf) ? D2T.ordinal(Math.max(p.n, 20)) : (p.sign === '±' ? '±' : '') + '0' + p.suf;   // a zero start has no sign (no "+0", "-0")
   }
   D2T.mo = { startText, still, track, untrack, finishAll, parse, odometer, glint, anim, later, live: () => live.size };
 })();

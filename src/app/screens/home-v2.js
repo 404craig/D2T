@@ -51,7 +51,7 @@
     if (id === 'clubx') { const x = G.xRecord(); return [[x.runs, 'Seasons'], [x.titles, 'Titles'], [runs.filter((r) => r.mode === 'clubx' && !r.daily && r.top3).length, 'Top 3'], [x.best ? o(x.best) : '-', 'Best finish']]; }
     if (id === 'goal') {
       const g = G.g433.record(), last = g.last == null ? '-' : g.last === g.lastTarget ? '0' : g.last > g.lastTarget ? `${g.last - g.lastTarget}+` : `${g.lastTarget - g.last}-`;
-      return [[g.games, 'Games'], [g.exact || 0, 'Spot on'], [g.games ? `${Math.round(100 * (g.exact || 0) / g.games)}%` : '-', 'Hit rate'], [last, 'Last game']];
+      return [[g.games, 'Games'], [g.exact || 0, 'Spot on'], [G.g433.avgOff(g), 'Avg off target'], [last, 'Last game']];
     }
     if (id === 'ub') { const u = st.ub || {}, b = Object.values(u.best || {}); return [[u.runs || 0, 'Runs'], [b.length ? Math.max(...b) : 0, 'Best run'], [b.filter((v) => v > 0).length, 'Topics'], [u.lastRun != null ? u.lastRun : '-', 'Last run']]; }
     return [];
