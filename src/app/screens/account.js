@@ -20,6 +20,65 @@
   const clearUser = () => { D2T.state.account = {}; D2T.save(); if (D2T.lb) D2T.lb.onSignOut(); };
   D2T.accountName = () => (acct().user ? acct().user.name : '');
 
+  // ---------- one sign-in for Tenaball and DROP2TOP (Craig, 1 Nov, build 217, via the design session) ----------
+  // Both games live on 404craig.github.io, so a browser shares their storage. Tenaball keeps its sign-in in
+  // tenaball-token, tenaball-user ({ user, stats }) and tenaball-email, issued by the same server.
+  const TB = { token: 'tenaball-token', user: 'tenaball-user', email: 'tenaball-email' };
+  const hashOf = (t) => { let h = 5381; for (let i = 0; i < t.length; i++) h = ((h * 33) ^ t.charCodeAt(i)) >>> 0; return h.toString(36); };
+  let adopting = false;
+  // signed out here and signed in to Tenaball: check Tenaball's token with the server and sign in with it; a token
+  // turned down with "Not you?" is never taken again; anything that fails is left quietly for the next load
+  async function adopt() {
+    if (adopting || acct().token) return;
+    const t = ls(TB.token); if (!t) return;
+    const st = D2T.state; if ((st.notYou || []).includes(hashOf(t))) return;
+    adopting = true;
+    try {
+      const r = await fetch(SERVER + '/api/me', { method: 'POST', headers: { 'content-type': 'application/json', Authorization: 'Bearer ' + t }, body: '{}' });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok || !d.user || acct().token) return;
+      setUser(d.user, t);
+      acct().adopted = hashOf(t); acct().note = true; D2T.save();
+      // counted on the server so Craig can see how often it happens (the admin page)
+      fetch(SERVER + '/api/d2t/adopted', { method: 'POST', headers: { 'content-type': 'application/json', Authorization: 'Bearer ' + t }, body: '{}' }).catch(() => {});
+      D2T.adoptNote();
+    } catch (e) { /* offline: next load */ } finally { adopting = false; }
+  }
+  // the note after an automatic sign-in, on home, once, gone on the next tap: "Signed in as Craig · Not you?"
+  // (Craig, 1 Nov: DROP2TOP is the main game, so it never names Tenaball)
+  D2T.adoptNote = () => {
+    const a = acct(); if (!a.note || !a.user) return;
+    const scr = document.querySelector('.screen[data-screen="home"]'); if (!scr || document.querySelector('.d2t-signed')) return;
+    a.note = false; D2T.save();
+    const n = D2T.h(`<div class="d2t-signed" role="status"><span>Signed in as <b>${D2T.esc(a.user.name)}</b></span><i aria-hidden="true">·</i><button type="button" class="d2t-notyou">Not you?</button></div>`);
+    document.getElementById('app').appendChild(n);
+    const gone = () => { document.removeEventListener('pointerdown', away, true); n.classList.add('out'); setTimeout(() => n.remove(), 300); };
+    const away = (e) => { if (!n.contains(e.target)) gone(); };
+    setTimeout(() => document.addEventListener('pointerdown', away, true), 0);
+    n.querySelector('.d2t-notyou').onclick = () => {
+      // signs out of DROP2TOP only (Tenaball's session is left alone) and never takes that token again
+      const t = acct().token, st = D2T.state;
+      if (t) st.notYou = (st.notYou || []).concat([hashOf(t)]).slice(-10);
+      clearUser(); gone(); if (location.hash.slice(1) === 'home') D2T.go('home');
+    };
+  };
+  // a sign-in here fills in Tenaball's keys only when Tenaball has none, so it is signed in too on its next load
+  function share(user, token, stats, email) {
+    if (!token || ls(TB.token)) return;
+    ls(TB.token, token); ls(TB.user, JSON.stringify({ user, stats: stats || null }));
+    if (email && !ls(TB.email)) ls(TB.email, email);
+  }
+  // signing out signs out of DROP2TOP only: a session Tenaball holds too is not ended on the server
+  async function signOut() {
+    const t = acct().token, st = D2T.state;
+    if (t && t !== ls(TB.token)) await api('/signout');
+    // and it stays signed out: the token is never taken back from Tenaball's keys (a later, different one still is)
+    if (t) st.notYou = (st.notYou || []).concat([hashOf(t)]).slice(-10);
+    clearUser();
+  }
+  D2T.whenReady(() => { adopt(); });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) adopt(); });
+
   D2T.screen('account', {
     title: 'Account', theme: 'black',
     mount(root) {
@@ -81,7 +140,7 @@
             <p class="fr-small">Signed in with your Tenaball account. Your finished games go on the leaderboards under this name; your runs are saved on this phone.</p>
             <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-act="out">Sign out</button></div>
             ${settings()}`;
-          body.querySelector('[data-act="out"]').onclick = async () => { await api('/signout'); clearUser(); draw(); };
+          body.querySelector('[data-act="out"]').onclick = async () => { await signOut(); draw(); };
           wireSettings();
           return;
         }
@@ -117,6 +176,7 @@
           if (!r.ok) return say(r.data.error || "That didn't work. Try again.");
           ls(EMAIL_KEY, em);
           setUser(r.data.user, r.data.token);
+          share(r.data.user, r.data.token, r.data.stats, em);
           draw();
         };
         wireSettings();
