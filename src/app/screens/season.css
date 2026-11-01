@@ -366,6 +366,15 @@
 .sm-label { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 2px 2px 0; }
 .sm-panel .sm-label { margin-bottom: 8px; }
 .sm-ghost { display: block; width: 100%; height: auto; }
+/* the graph's scrub (build 219, style B): a sideways drag scrubs, an upright one scrolls the page */
+.sm-chart { position: relative; touch-action: pan-y; cursor: crosshair; -webkit-user-select: none; user-select: none; }
+.sm-bub { position: absolute; top: 0; left: 0; transform: translate(-50%, -100%); background: #1C1C22; border: 1px solid #33333C; border-radius: 12px; padding: 7px 9px; white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity .15s; box-shadow: 0 8px 24px rgba(0,0,0,.5); z-index: 3; }
+.sm-bub.on { opacity: 1; }
+.sm-bub .t { font: 800 10px var(--font); letter-spacing: .1em; color: var(--soft); text-transform: uppercase; }
+.sm-bub .r { font: 800 13px var(--font); margin-top: 3px; color: #E8E8EE; }
+.sm-bub .r b { color: var(--se-text); font-style: italic; }
+.sm-bub .r.h b { color: #C9C9D1; }
+@media (prefers-reduced-motion: reduce) { .sm-bub { transition: none; } }
 /* build 196: both lines draw together through a widening clip (summary.js motion), so no smDraw */
 .sm-pn, .sm-ps { display: inline-block; }
 .sm-head { position: relative; overflow: hidden; }

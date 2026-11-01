@@ -48,7 +48,7 @@ const shown = (p) => p.evaluate(() => {
     check(sum.head === "1" && sum.tiles.every((t) => /^[+\-]?\d+$/.test(t)), `${rm}: the tag or tiles did not end shown: ${JSON.stringify(sum)}`);
     // both graph lines end fully drawn once the panel is in view; the targets end filled
     await p.evaluate(() => document.querySelector(".sm-ghost").scrollIntoView()); await wait(moving ? 2400 : 100);
-    const g = await p.evaluate(() => { const r = document.querySelector(".sm-rev"), s = document.querySelector(".sm-ghost"); return { w: +r.getAttribute("width"), full: +s.viewBox.baseVal.width, lines: s.querySelectorAll('g[clip-path] polyline').length }; });
+    const g = await p.evaluate(() => { const r = document.querySelector(".sm-rev"), s = document.querySelector(".sm-ghost"); return { w: +r.getAttribute("width"), full: +s.viewBox.baseVal.width, lines: s.querySelectorAll('g.sm-past polyline').length }; });
     check(g.lines === 2 && g.w === g.full, `${rm}: both graph lines should end fully drawn: ${JSON.stringify(g)}`);
     await p.evaluate(() => document.querySelector(".sm-ach").scrollIntoView()); await wait(moving ? 2400 : 100);
     check(await p.evaluate(() => !document.querySelector(".sm-wait, .sm-achf")), `${rm}: a target was left unfilled`);
