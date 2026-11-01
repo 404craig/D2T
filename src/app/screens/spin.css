@@ -2,6 +2,7 @@
 
 /* ---------- roll screen layout ---------- */
 .sp-screen { display: flex; flex-direction: column; height: 100%; }
+.sp-screen.tr-preraid { position: relative; }   /* the January Transfer News bar is placed in it (build 220) */
 .sp-head { padding: 6px 16px 0; position: relative; z-index: 2; }
 .sp-kicker { display: block; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
 .sp-title { margin: 0; font: var(--display); font-size: 34px; text-transform: uppercase; letter-spacing: -0.01em; }
