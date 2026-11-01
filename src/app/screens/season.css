@@ -336,16 +336,24 @@
 @media (prefers-reduced-motion: reduce) { .se-slot.se-best .se-cardwrap { animation: none; outline: 2px solid var(--se-acc); outline-offset: 3px; border-radius: 8px; } }
 
 /* ---------- season summary ---------- */
-.sm { position: relative; }
+.sm { position: relative; overflow-x: hidden; overflow-anchor: none; }
+/* the big crest sits in a layer the screen's own width, so it never widens the page (build 212: the page was 455px wide
+   on a 390 phone and jumped on iPhone); the crest keeps its size and place */
+.sm-crestwrap { position: absolute; top: 0; left: 0; right: 0; height: 480px; overflow: hidden; pointer-events: none; }
+.sm-crestwrap .sm-crest { top: -40px; }
+/* the club's badge before its name (Craig, 1 Nov, build 212) */
+.sm-title { display: flex; align-items: center; gap: 12px; margin-top: -8px; }
+.sm-badge { flex: none; width: 52px; height: 52px; object-fit: contain; filter: drop-shadow(0 3px 6px rgba(0,0,0,.45)); }
+.sm-title .se-h1 { margin: 0; min-width: 0; }
 .sm-crest { position: absolute; left: 50%; top: -40px; width: 520px; height: 520px; margin-left: -260px; background: center / contain no-repeat; opacity: .14; pointer-events: none;
   -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.6) 45%, transparent 85%); mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.6) 45%, transparent 85%); }
 .sm-in { position: relative; display: flex; flex-direction: column; gap: 14px; padding-top: 10px; }
 .sm-in > * { animation: seRise .55s var(--ease-out) both; }
 .sm-in > :nth-child(2) { animation-delay: .06s; } .sm-in > :nth-child(3) { animation-delay: .12s; } .sm-in > :nth-child(4) { animation-delay: .2s; } .sm-in > :nth-child(5) { animation-delay: .3s; } .sm-in > :nth-child(n+6) { animation-delay: .4s; }
-.sm-in .se-h1 { margin-top: -8px; }
+
 .sm-head { align-self: flex-start; padding: 5px 12px; border-radius: 10px; background: var(--se-acc); color: var(--se-ink); font-weight: 900; font-style: italic; font-size: 15px; text-transform: uppercase; letter-spacing: .04em; }
 .sm-finish { display: flex; align-items: flex-end; gap: 14px; }
-.sm-pos { font: var(--display); font-size: 96px; color: var(--se-text); line-height: .85; }
+.sm-pos { flex: none; white-space: nowrap; font: var(--display); font-size: 96px; color: var(--se-text); line-height: .85; }   /* "20th" on one line (build 212) */
 .sm-sub { display: flex; flex-direction: column; gap: 3px; padding-bottom: 8px; font-size: 14px; }
 .sm-sub span { color: var(--soft); }
 .sm-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
@@ -372,7 +380,9 @@
 .sm-ach { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
 .sm-ach span { display: flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 12px; border: 1px dashed var(--line); color: var(--muted); font-weight: 800; font-size: 14px; }
 .sm-ach span.on { border: 1px solid transparent; background: var(--se-acc); color: var(--se-ink); font-style: italic; font-weight: 900; }
-.sm-awards { display: flex; gap: 10px; overflow-x: auto; padding: 4px 2px 6px; scrollbar-width: none; }
+.sm-awards { display: flex; gap: 10px; overflow-x: auto; overflow-anchor: none; padding: 4px 2px 6px; scrollbar-width: none; }
+.sm-awards .d2t-shine { animation-iteration-count: 1; animation-play-state: paused; }
+.sm-awards.seen .d2t-shine { animation-play-state: running; }
 .sm-awards::-webkit-scrollbar { display: none; }
 .sm-award { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 108px; padding: 0; border: 0; background: none; color: var(--soft); font-size: 11px; font-weight: 700; line-height: 1.25; text-align: center; }
 .sm-award .d2c { pointer-events: none; }

@@ -263,14 +263,13 @@
       const ach = dream ? [[goal, met]] : [['Beat the drop', F.finish <= n - rel], ['Top half', F.finish <= n / 2], ['Top 3', F.finish <= 3], ['Title', F.finish === 1]];
 
       const body = D2T.h(`<div class="screen-body sm">
-        <div class="sm-crest" aria-hidden="true" style="background-image:url('${club.crest}')"></div>
+        <div class="sm-crestwrap" aria-hidden="true"><div class="sm-crest" style="background-image:url('${club.crest}')"></div></div>
         <div class="sm-in">
           <div class="se-kicker">Season over · ${D2T.esc(S.season)}</div>
-          <h1 class="se-h1">${D2T.esc(club.full || club.name)}</h1>
+          <div class="sm-title"><img class="sm-badge" src="${club.crest}" alt=""><h1 class="se-h1">${D2T.esc(club.full || club.name)}</h1></div>
           <div class="sm-head${dream && !met ? ' sm-miss' : ''}">${dream ? (met ? (x ? 'Champions' : 'Dream achieved') : 'Fell short') : headline(F)}</div>
           <div class="sm-finish"><span class="sm-pos">${D2T.ordinal(F.finish)}</span>
             <span class="sm-sub"><b>${F.pts} pts · W${F.w} D${F.d} L${F.l}</b><span>${hw}: ${D2T.ordinal(F.histFinish)}, ${F.histPts} pts</span></span></div>
-          ${daily ? dailyVs(daily) : ''}
           <div class="sm-tiles">
             <div class="sm-tile sm-rise"><b>${sign(F.rise)}</b><span>The Rise</span></div>
             <div class="sm-tile"><b>${sign(F.gained)}</b><span>Points on ${hw.toLowerCase()}</span></div>
@@ -281,17 +280,22 @@
           <div class="sm-ach${dream ? ' sm-ach-one' : ''}">${ach.map(([t, on]) => `<span class="${on ? 'on' : ''}">${t}</span>`).join('')}</div>
           ${awards.length ? `<div class="sm-label">Awards</div><div class="sm-awards">${awards.map(([t, c]) => `<button class="sm-award" data-id="${D2T.esc(String(c.id))}" aria-label="${D2T.esc(t)}: ${D2T.esc(c.name)}">${D2T.cards.player(c, { w: 96 })}<span>${D2T.esc(t)}</span></button>`).join('')}</div>` : ''}
           ${changes ? `<div class="sm-label">How you changed ${D2T.esc(S.season)}</div><div class="sm-list">${changes}</div>` : ''}
-          <p class="sm-banter">${D2T.esc(line)}</p>
           ${x && car.n > 1 ? `<p class="sm-banter">Season ${car.n} of your career${car.seasons.length ? `: ${car.seasons.filter((z) => z.finish === 1).length + (F.finish === 1 ? 1 : 0)} title${car.seasons.filter((z) => z.finish === 1).length + (F.finish === 1 ? 1 : 0) === 1 ? '' : 's'} so far` : ''}.</p>` : ''}
           ${x && !nx ? `<p class="sm-banter">Relegated. The career ends here.</p>` : ''}
           <button class="btn btn-ghost fr-btn-wide" data-act="table">Final table</button>
           ${x ? '<button class="btn btn-ghost fr-btn-wide" data-act="history">Club history</button>' : ''}
+          ${daily ? dailyVs(daily) : ''}
           <div class="se-pad"></div>
           <div class="se-pad"></div>
         </div>
       </div>`);
       root.appendChild(body);
       motion(body, F);
+      // the award cards shine once, as their row comes into view (Craig, 1 Nov, build 212: the endless shine on the masked
+      // cards repainted them and moved the page on iPhone)
+      { const aw = body.querySelector('.sm-awards');
+        if (aw && window.IntersectionObserver) { const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { aw.classList.add('seen'); io.disconnect(); } }, { threshold: 0.4 }); io.observe(aw); }
+        else if (aw) aw.classList.add('seen'); }
 
       // the end sheet (Craig, 14 Oct; D2T.endSheet): no bottom bar here. Share, then Play again (the Daily: Go again; Club X:
       // Next season while the career is open, and New career), then Home. Dragged closed, a "Season over" peek bar
@@ -315,7 +319,8 @@
       const lead = x ? `<b>${D2T.esc(GAME.xName())}</b> finished ${D2T.ordinal(F.finish)} in ${D2T.esc(S.season)}${nx ? `. The career goes on to ${D2T.esc(nx.key)}.` : '.'}`
         : dream ? `<b>${D2T.esc(club.name)}</b> finished ${D2T.ordinal(F.finish)}. The dream was ${goal.toLowerCase()}.`
         : `<b>${D2T.esc(club.name)}</b> finished ${D2T.ordinal(F.finish)}, ${F.rise > 0 ? `${F.rise} place${F.rise === 1 ? '' : 's'} above` : F.rise < 0 ? `${-F.rise} place${F.rise === -1 ? '' : 's'} below` : 'level with'} ${hw.toLowerCase()}.`;
-      const end = D2T.endSheet({ title: `Season over · ${dream ? (met ? (x ? 'Champions' : 'Dream achieved') : 'Fell short') : headline(F)}`, lead, colour, ink, buttons, peek: 'Season over', host: root });
+      // the banter line sits in the sheet under the lead, not on the screen (Craig, 1 Nov, build 212)
+      const end = D2T.endSheet({ title: `Season over · ${dream ? (met ? (x ? 'Champions' : 'Dream achieved') : 'Fell short') : headline(F)}`, lead: lead + `<p class="end-banter">${D2T.esc(line)}</p>`, colour, ink, buttons, peek: 'Season over', host: root });
       this._end = end;
       // the summary first (Craig, 25 Oct): the sheet starts collapsed, its "Season over" peek bar brings it up
       end.peek(); this._kill = null;
