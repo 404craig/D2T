@@ -254,6 +254,7 @@
   D2T.screen(D2T.HOME === 'v1' ? 'home' : 'home-v1', {
     title: 'Home', theme: 'black',
     mount(root, params) {
+      setTimeout(() => { if (D2T.adoptNote) D2T.adoptNote(); }, 900);   // "Signed in as ..." after an automatic sign-in (build 217)
       D2T.game.closeOldDaily();                                  // yesterday's unfinished Daily closed at midnight
       const rec = D2T.game.record(), dreams = D2T.game.dreamRecord(), xr = D2T.game.xRecord(), recPages = recordPages();
       const body = D2T.h(`<div class="screen-body fr-home">

@@ -199,3 +199,11 @@ button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--green-
 .mo-col > d2t-v { display: block; white-space: nowrap; }
 .mo-glint { position: absolute; top: -40%; bottom: -40%; left: 0; width: 60%; pointer-events: none; z-index: 3; mix-blend-mode: overlay;
   background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.9) 50%, rgba(255,255,255,0) 100%); }
+
+/* the note after an automatic sign-in (build 217): under the top bar, gone on the next tap */
+.d2t-signed { position: fixed; z-index: 70; left: 50%; top: calc(env(safe-area-inset-top, 0px) + 68px); transform: translateX(-50%); display: flex; align-items: center; gap: 8px; max-width: calc(100% - 32px); padding: 9px 8px 9px 16px; border-radius: 999px; background: #16161A; border: 1px solid #2A2A31; box-shadow: 0 8px 24px rgba(0,0,0,.6); color: #E8E8EE; font: 700 14px var(--font); white-space: nowrap; animation: d2tSignedIn .35s var(--ease-out) both; transition: opacity .3s, transform .3s; }
+.d2t-signed b { color: #fff; } .d2t-signed i { color: #6A6A74; font-style: normal; }
+.d2t-signed button { min-height: 32px; padding: 0 10px; border: 0; border-radius: 999px; background: transparent; color: #12F06C; font: 800 14px var(--font); cursor: pointer; }
+.d2t-signed.out { opacity: 0; transform: translate(-50%, -8px); }
+@keyframes d2tSignedIn { from { opacity: 0; transform: translate(-50%, -10px); } }
+@media (prefers-reduced-motion: reduce) { .d2t-signed { animation: none; } }
