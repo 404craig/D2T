@@ -16,8 +16,8 @@
       return { ok: r.ok, status: r.status, data };
     } catch (e) { return { ok: false, status: 0, data: { error: "Can't reach the server. Check your connection and try again." } }; }
   }
-  const setUser = (user, token) => { const a = acct(); a.user = user; if (token) a.token = token; a.signedIn = true; D2T.save(); if (token && D2T.lb) D2T.lb.onSignIn(); };   // a sign-in: the phone's records go on to the leaderboards
-  const clearUser = () => { D2T.state.account = {}; D2T.save(); if (D2T.lb) D2T.lb.onSignOut(); };
+  const setUser = (user, token) => { const a = acct(); a.user = user; if (token) a.token = token; a.signedIn = true; D2T.save(); if (token && D2T.lb) D2T.lb.onSignIn(); if (token && D2T.backup) D2T.backup.onSignIn(); };   // a sign-in: the phone's records go on to the leaderboards
+  const clearUser = () => { if (D2T.backup) D2T.backup.onSignOut(); D2T.state.account = {}; D2T.save(); if (D2T.lb) D2T.lb.onSignOut(); };
   D2T.accountName = () => (acct().user ? acct().user.name : '');
 
   // ---------- one sign-in for Tenaball and DROP2TOP (Craig, 1 Nov, build 217, via the design session) ----------
@@ -88,11 +88,13 @@
       let mode = 'in', alive = true;
       this._kill = () => { alive = false; };
 
+      const backedUp = () => { const t = D2T.backup ? D2T.backup.last() : 0; if (!t) return 'Not yet'; const m = Math.round((Date.now() - t) / 60000); return m < 1 ? 'Just now' : m < 60 ? `${m} min ago` : m < 1440 ? `${Math.round(m / 60)} hr ago` : new Date(t).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }); };
       const settings = () => {
         const set = D2T.state.settings || (D2T.state.settings = { muted: false });
         return `<h2 class="fr-h2" style="margin-top:26px">Settings</h2>
           <div class="fr-panel"><button class="fr-row" data-act="sound"><span>Sound</span><span>${set.muted ? 'Off' : 'On'} ›</span></button>
-          <div class="fr-row"><span>Runs saved on this phone</span><span>${D2T.state.record.runs.length}</span></div></div>
+          <div class="fr-row"><span>Runs saved on this phone</span><span>${D2T.state.record.runs.length}</span></div>
+          ${acct().user ? `<div class="fr-row"><span>Backed up to your account</span><span>${backedUp()}</span></div>` : ''}</div>
           <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide fr-danger" data-act="del">Delete my data on this phone</button></div>
           ${diagnostics()}`;
       };
@@ -123,7 +125,7 @@
         const cl = body.querySelector('[data-act="clrerr"]');
         if (cl) cl.onclick = () => { try { localStorage.removeItem('d2t-errors'); } catch (e) { /* blocked */ } draw(); };
         body.querySelector('[data-act="del"]').onclick = () => {
-          const s = D2T.sheet({ title: 'Delete your data?', body: `<p class="fr-lead">This clears your saved run and your achievements on this phone. It can't be undone.</p>
+          const s = D2T.sheet({ title: 'Delete your data?', body: `<p class="fr-lead">This clears your saved run and your achievements on this phone. If you are signed in, your account backup brings them back.</p>
             <div class="fr-two"><button class="btn btn-ghost" data-k="no">Keep it</button><button class="btn btn-ghost fr-danger" data-k="yes">Delete</button></div>` });
           s.body.querySelector('[data-k="no"]').onclick = s.close;
           s.body.querySelector('[data-k="yes"]').onclick = () => { const a = D2T.state.account; D2T.resetState(); D2T.state.account = a || {}; D2T.save(); s.close(); draw(); };
@@ -137,7 +139,7 @@
           body.innerHTML = `<h1 class="fr-title">Account</h1>
             <div class="fr-who"><div class="fr-avatar" aria-hidden="true">${D2T.esc((u.name || '?').charAt(0).toUpperCase())}</div>
               <div style="min-width:0"><div class="fr-who-name">${D2T.esc(u.name)}</div><div class="fr-who-mail">${D2T.esc(u.email)}</div></div></div>
-            <p class="fr-small">Signed in with your Tenaball account. Your finished games go on the leaderboards under this name; your runs are saved on this phone.</p>
+            <p class="fr-small">Signed in with your Tenaball account. Your finished games go on the leaderboards under this name, and your records and runs are backed up to your account, so signing in on another phone or browser brings them back.</p>
             <div class="fr-stack"><button class="btn btn-ghost fr-btn-wide" data-act="out">Sign out</button></div>
             ${settings()}`;
           body.querySelector('[data-act="out"]').onclick = async () => { await signOut(); draw(); };

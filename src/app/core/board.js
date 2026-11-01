@@ -130,7 +130,7 @@
     return p && p.pos ? { state: 'pos', n: D2T.ordinal(p.pos), l: 'League table', count: p.count } : { state: 'join', n: '-', l: 'Play to join' };
   }
 
-  D2T.lb = { GAMES, api, record, flush, mergeOnce, positions, sync, board, shield, results, signedIn, available: () => lb().ok === true, phone: () => lb().phone,
+  D2T.lb = { GAMES, api, server: SERVER, record, flush, mergeOnce, positions, sync, board, shield, results, signedIn, available: () => lb().ok === true, phone: () => lb().phone,
     // GAME.finish hands over each finished run as it is recorded
     onRun: (entry, goes) => { const x = fromRun(entry, null, goes); if (x.rec.rid) record(x.game, x.rec); },
     // sign-in and sign-out from the account page
