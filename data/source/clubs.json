@@ -12,8 +12,8 @@
   "name": "Aston Villa",
   "full": "Aston Villa",
   "crest": "aston-villa.png",
-  "accent": "#95BFE5",
-  "ink": "#4A0E25",
+  "accent": "#670E36",
+  "ink": "#FFFFFF",
   "text": "#95BFE5",
   "code": "AVL"
  },
@@ -103,8 +103,8 @@
   "name": "Burnley",
   "full": "Burnley",
   "crest": "burnley.png",
-  "accent": "#99D6EA",
-  "ink": "#6C1D45",
+  "accent": "#6C1D45",
+  "ink": "#FFFFFF",
   "text": "#99D6EA",
   "code": "BUR"
  },
@@ -435,8 +435,8 @@
   "name": "West Ham",
   "full": "West Ham",
   "crest": "west-ham.png",
-  "accent": "#1BB1E7",
-  "ink": "#3B0F1E",
+  "accent": "#7A263A",
+  "ink": "#FFFFFF",
   "text": "#1BB1E7",
   "code": "WHU"
  },
