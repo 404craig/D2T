@@ -412,7 +412,8 @@
       // ---------- the Daily takes over the top bar (Craig, 31 Oct, build 184; option 3 in design/prototype/daily-morph.html) ----------
       // Now and then, only while the wheel rests on another game and today's Daily isn't done: the emblem spins, turns into a
       // white circle and stretches across the top bar (crest, label, club and season, Play or Carry on), holds, then goes back.
-      // A tap on it turns the wheel to the Daily. 6 s after coming to rest, then every 45 s; at most 2 a visit and 6 a day.
+      // A tap on it turns the wheel to the Daily. 6 s after coming to rest on any other game, then 40 s after each play ends,
+      // with no cap (Craig, 1 Nov, build 210, via the design session).
       const DT0 = $('.stg-top'), DEMB = DT0.querySelector('.fr-hl-emb'), DBAR = DT0.querySelector('.stg-dly');
       const D = { wait: 0, steps: [], on: false, plays: 0, touched: 0, anims: [] };
       const dTimer = (f, ms) => { const t = setTimeout(f, ms); D.steps.push(t); return t; };
@@ -424,17 +425,19 @@
         if (done) return null;
         return runsGoing().daily ? 'live' : 'new';
       }
-      const dlyCapped = () => { const c = D2T.state.dailyNudge; return !!(c && c.day === G.today() && c.n >= 6); };
+      // tests only: state.dailyNudge.off keeps it away, window.D2T_DLY_GAP shortens the 40 s between plays
+      const dlyOff = () => !!(D2T.state.dailyNudge && D2T.state.dailyNudge.off);
+      const dlyGap = () => window.D2T_DLY_GAP || 40000;
       const dlyBlocked = () => !root.isConnected || drag || !D.rest || GM[shown].id === 'daily' || document.querySelector('.sheet, .d2t-tip') || Date.now() - D.touched < 3000;
-      function dlySchedule(ms) { clearTimeout(D.wait); if (D.plays >= 2) return; D.wait = setTimeout(dlyTry, ms); }
+      function dlySchedule(ms) { clearTimeout(D.wait); D.wait = setTimeout(dlyTry, ms); }
       function dlyTry() {
-        if (D.on || D.plays >= 2 || dlyCapped() || !dlyState()) return;
+        if (D.on || dlyOff() || !dlyState()) return;
         if (dlyBlocked()) { if (GM[shown].id !== 'daily') dlySchedule(3000); return; }
         dlyPlay();
       }
       function dlyRest() {
         D.rest = true;
-        if (GM[shown].id === 'daily') { clearTimeout(D.wait); D.plays = 0; return; }
+        if (GM[shown].id === 'daily') { clearTimeout(D.wait); return; }
         if (!D.on) dlySchedule(6000);
       }
       function dlyFill(state) {
@@ -452,7 +455,7 @@
       }
       // one continuous timeline (Craig, 31 Oct, build 185; run3() in daily-morph.html at b3eba36): ms from the start, the bar
       // full by 1400, held to R, then back, the emblem already spinning in as the bar shrinks; every piece is one keyframe track
-      const R = 1400 + 4000, T = R + 1300;
+      const R = 1400 + 6000, T = R + 1300;   // the full bar holds 6 s (Craig, 1 Nov, build 210: was 4 s)
       function track(node, pts) {
         const f = pts.map(([t, o, e]) => Object.assign({ offset: t / T }, o, e ? { easing: e } : {}));
         if (pts[0][0] > 0) f.unshift(Object.assign({}, pts[0][1], { offset: 0 }));
@@ -463,11 +466,10 @@
         const state = dlyState(); if (!state) return;
         dlyFill(state);
         D.on = true; D.plays += 1;
-        const st = D2T.state; if (!st.dailyNudge || st.dailyNudge.day !== G.today()) st.dailyNudge = { day: G.today(), n: 0 }; st.dailyNudge.n += 1; D2T.save();
         DT0.classList.add('dly-on'); DBAR.removeAttribute('aria-hidden'); DBAR.tabIndex = 0;
         if (reduced) {
           DT0.classList.add('dly-rm', 'dly-circ', 'dly-full');
-          dTimer(() => dlyBack(), 300 + 4000);
+          dTimer(() => dlyBack(), 300 + 6000);
           return;
         }
         const rot = (d) => `rotate(${d}deg)`, W = (parseFloat(DBAR.style.getPropertyValue('--dw')) || 359) + 'px', Q = (x) => DBAR.querySelector(x);
@@ -495,7 +497,7 @@
         if (reduced && DT0.classList.contains('dly-rm')) { DT0.classList.remove('dly-full', 'dly-circ', 'dly-on'); dTimer(() => DT0.classList.remove('dly-rm'), 320); }   // the crossfade back
         else DT0.classList.remove('dly-full', 'dly-circ', 'dly-on', 'dly-rm');
         D.on = false; DBAR.setAttribute('aria-hidden', 'true'); DBAR.tabIndex = -1;
-        if (GM[shown].id !== 'daily') dlySchedule(45000);
+        if (GM[shown].id !== 'daily') dlySchedule(dlyGap());
       }
       DBAR.onclick = (e) => {
         e.stopPropagation(); if (!D.on) return;

@@ -38,8 +38,8 @@ const URL = process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index
   const ids = await page.$$eval(".stg-sl", (s) => s.map((x) => x.dataset.id));
   check(ids.join(",") === "daily,classic,clubx,goal,ub,ten", "the wheel's games are not Daily, Classic, Club X, Goal Rush, Unbeaten, Tenaball: " + ids);
   check((await onShow()) === "classic", "home does not open on Classic after the intro");
-  // the Daily takeover is tested on its own below: off here (its cap for the day reached)
-  await page.evaluate(() => { window.D2T.state.dailyNudge = { day: window.D2T.game.today(), n: 6 }; window.D2T.save(); });
+  // the Daily takeover is tested on its own below: off here (the test switch)
+  await page.evaluate(() => { window.D2T.state.dailyNudge = { off: true }; window.D2T.save(); });
   await page.keyboard.press("ArrowLeft"); await wait(900);
   check((await onShow()) === "daily", "the left arrow key did not turn from Classic to the Daily");
   check(!(await page.$(".fr-tabbar")) && !(await page.$('[data-go="league"]')), "the stage still has the tab bar");
@@ -121,11 +121,22 @@ const URL = process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index
     check((await dShow()) === "classic", "a fresh load did not open on Classic");
     await dTo("daily");
     check(!(await shows(8500)), "the Daily takeover showed on the Daily slide");
+    await dp.evaluate(() => { window.D2T_DLY_GAP = 1500; });   // 40 s between plays, shortened for the test
     await dTo("classic");
     check(await shows(12000), "the Daily takeover never showed on Classic");
     await wait(700);
     check(await dp.evaluate(() => { const d = document.querySelector(".stg-dly").getBoundingClientRect(), r = document.querySelector(".stg-acct").getBoundingClientRect(); return Math.abs(d.height - 44) < 0.6 && Math.abs(d.top - r.top) < 0.6 && Math.abs(d.right - r.right) < 1; }), "the Daily bar is not 44px tall and in line with the buttons");
     check(await dp.evaluate(() => /Today's Daily Challenge/i.test(document.querySelector(".stg-dly").textContent) && /Play/.test(document.querySelector(".stg-dly-go").textContent)), "the Daily bar should say Today's Daily Challenge and Play");
+    // the full bar holds 6 s (build 210): still there 5 s after it filled, gone by 8 s
+    await wait(4300);
+    check(!!(await dp.$(".stg-top.dly-full")), "the Daily bar did not hold for 6 s");
+    await wait(3500);
+    check(!(await dp.$(".stg-top.dly-on")), "the Daily bar did not go back after its hold");
+    // no cap (build 210): with the gap shortened it plays a second and a third time on the same visit
+    check(await shows(6000), "the Daily takeover did not play a second time");
+    await dp.waitForSelector(".stg-top:not(.dly-on)", { timeout: 12000 }).catch(() => {});
+    check(await shows(14000), "the Daily takeover did not play a third time on the same visit");
+    await dp.evaluate(() => { delete window.D2T_DLY_GAP; });
     await dp.click(".stg-dly"); await wait(1200);
     check((await dShow()) === "daily", "a tap on the Daily bar did not turn the wheel to the Daily");
     await dp.click(".stg-q"); await wait(600);
