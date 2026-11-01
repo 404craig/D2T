@@ -1,0 +1,49 @@
+<title>West Ham Colours</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;0,600;0,800;1,900&display=swap">
+<style>
+/* Layout: three colour options side by side, one row per place in the game, notes at the foot */
+:root{--bg:#000;--fg:#fff;--soft:#BDBDC6;--muted:#8E8E99;--line:#26262C;--g:#12F06C;--phone:#151518;--font:'Exo 2',system-ui,sans-serif;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font)}
+.wrap{max-width:1180px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10px}
+.lead{color:var(--soft);font-size:16px;line-height:1.5;max-width:820px;margin:0 0 22px}.lead b{color:var(--fg)}
+.heads,.row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.heads{position:sticky;top:env(safe-area-inset-top,0px);z-index:2;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.heads div{min-width:0}
+.heads b{display:block;font:900 italic 18px/1.1 var(--font);text-transform:uppercase}
+.heads span{display:block;color:var(--soft);font-size:13px;line-height:1.35;margin-top:3px}
+.sw{display:inline-flex;gap:4px;margin-top:6px}.sw i{width:18px;height:18px;border-radius:5px;border:1px solid #333}
+.sec{font:800 12px var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:26px 0 10px}
+.row > div{min-width:0}
+.ph{border-radius:26px;padding:6px;background:var(--phone);box-shadow:0 0 0 1px #2A2A30}
+.ph img{display:block;width:100%;height:auto;border-radius:21px}
+.card img{display:block;width:100%;max-width:260px;margin:0 auto;height:auto}
+.notes{max-width:820px;margin-top:38px;color:#CFCFD6;font-size:15px;line-height:1.5}
+.notes h2{font:900 italic 22px var(--font);text-transform:uppercase;color:var(--fg);margin:0 0 8px}.notes li{margin:0 0 8px}.notes b{color:var(--fg)}
+@media (max-width:560px){.heads span{display:none}.row{gap:8px}.heads{gap:8px}.ph{border-radius:14px;padding:3px}.ph img{border-radius:11px}}
+</style>
+<div class="wrap">
+<h1>West Ham: claret or blue?</h1>
+<p class="lead">The real game (build 210) with West Ham 2010/11 recoloured three ways, in the places a club's colour shows. The badge is the same in all three. Only the game's colours change.</p>
+<div class="heads">
+ <div><b>Now · Sky blue</b><span>Blue fills, claret writing on it. Blue text on black.</span><div class="sw"><i style="background:#1BB1E7"></i><i style="background:#3B0F1E"></i></div></div>
+ <div><b>A · Claret</b><span>Claret fills, white writing. A lighter claret for text on black.</span><div class="sw"><i style="background:#7A263A"></i><i style="background:#FFFFFF"></i><i style="background:#D0607E"></i></div></div>
+ <div><b>B · Claret and blue</b><span>Claret fills, white writing. Sky blue for text on black, like the sleeves.</span><div class="sw"><i style="background:#7A263A"></i><i style="background:#FFFFFF"></i><i style="background:#1BB1E7"></i></div></div>
+</div>
+<div class="sec">The club card</div>
+<div class="row card"><div><img src="whu/blue_card.png" alt="Sky blue club card"></div><div><img src="whu/claret_card.png" alt="Claret club card"></div><div><img src="whu/mix_card.png" alt="Claret and blue club card"></div></div>
+<div class="sec">A transfer roll</div>
+<div class="row"><div class="ph"><img src="whu/blue_transfer.png" alt=""></div><div class="ph"><img src="whu/claret_transfer.png" alt=""></div><div class="ph"><img src="whu/mix_transfer.png" alt=""></div></div>
+<div class="sec">Home, with a West Ham run going (Continue)</div>
+<div class="row"><div class="ph"><img src="whu/blue_home.png" alt=""></div><div class="ph"><img src="whu/claret_home.png" alt=""></div><div class="ph"><img src="whu/mix_home.png" alt=""></div></div>
+<div class="sec">Season over</div>
+<div class="row"><div class="ph"><img src="whu/blue_summary.png" alt=""></div><div class="ph"><img src="whu/claret_summary.png" alt=""></div><div class="ph"><img src="whu/mix_summary.png" alt=""></div></div>
+<div class="notes"><h2>Worth knowing</h2><ul>
+<li><b>Claret is too dark to read on black.</b> It only reaches 2.2 to 1 against black, and the game's rule is 4.5 to 1 for any club text. So A needs a lighter claret for text (5.7 to 1), and B uses the sky blue.</li>
+<li><b>Glows are weaker in claret</b>: the card's edge, the active season bar segment and the buttons glow far less than the blue.</li>
+<li><b>Aston Villa and Burnley</b> are also sky blue in the game for the same reason. If West Ham go claret, they probably should too, so the three claret-and-blue clubs match.</li>
+<li>The badge sits well on all three. Its claret and gold read more strongly on the blue card. On claret it blends into the background a little more.</li>
+</ul></div>
+</div>
