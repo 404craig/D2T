@@ -22,7 +22,7 @@ LOGOS_FIRST = ["short"]   # the intro's first second; the rest of its pictures f
 JS = ["../engine.js", "../sound.js", "core/app.js", "core/motion.js", "core/cards.js", "core/flip.js", "core/game.js", "core/season.js", "core/share.js",
       "screens/intro.js", "screens/home-v1.js", "screens/home-v2.js", "screens/help.js", "screens/howto.js", "screens/account.js", "screens/league.js",
       "screens/spin.js", "screens/reveal.js", "screens/transfer.js", "screens/table.js", "screens/squad.js", "screens/fixtures.js",
-      "screens/match.js", "screens/results.js", "screens/summary.js", "screens/history.js", "screens/goals.js", "screens/unbeaten.js", "core/board.js", "screens/leaderboard.js", "core/boot.js"]
+      "screens/match.js", "screens/results.js", "screens/summary.js", "screens/history.js", "screens/goals.js", "screens/unbeaten.js", "core/board.js", "core/backup.js", "screens/leaderboard.js", "core/boot.js"]
 SHELL = ["core/app.js", "screens/intro.js"]          # run first, while the rest of the page is still arriving
 
 
