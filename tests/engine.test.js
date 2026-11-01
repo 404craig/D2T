@@ -384,8 +384,21 @@ t("scouting: 2 respins, three cards green in the shirt and better than its man (
   // nobody better: put a 99 in the shirt
   const st2 = D.newRun({ seed: "scout2", catalogue: G.catalogue, fixedClub: "2007/08:Derby" });
   D.chooseClub(st2, S, S.relegated.find(r => r.c === d)); D.startSeason(st2, S);
-  const top = S.players.slice().sort((a, b) => b.r - a.r)[0]; st2.xi[9] = top.id;
+  const p9 = D.FORMATIONS[st2.formation][9][0], top = S.players.slice().sort((a, b) => D.effRating(b, p9) - D.effRating(a, p9))[0]; st2.xi[9] = top.id;
   assert.strictEqual(D.scoutInfo(st2, S)[9].better, 0); assert.ok(!D.scout(st2, S, 9));
+});
+t("the scout's bar never moves by shuffling (Craig, 1 Nov): a top CB moved to ST lowers nothing and raises nothing", () => {
+  const S = G.seasons["2007/08"], d = S.clubs.find(c => c.name === "Derby").id;
+  const st = D.newRun({ seed: "scoutx", catalogue: G.catalogue, fixedClub: "2007/08:Derby" });
+  D.chooseClub(st, S, S.relegated.find(r => r.c === d)); D.startSeason(st, S);
+  const F = D.FORMATIONS[st.formation], st9 = F.findIndex(f => f[0] === "ST"), cb = F.findIndex(f => f[0] === "CB");
+  const star = S.players.filter(p => (p.p || [])[0] === "CB" && !(p.p || []).includes("ST")).sort((a, b) => b.r - a.r)[0];
+  st.xi[cb] = star.id;
+  const before = D.scoutInfo(st, S)[st9];
+  const t1 = st.xi[st9]; st.xi[st9] = st.xi[cb]; st.xi[cb] = t1;   // the CB to ST, the striker to CB
+  const after = D.scoutInfo(st, S)[st9];
+  assert.ok(after.bar <= before.bar + 1e-9, `the bar rose from ${before.bar} to ${after.bar}`);
+  assert.ok(after.bar < star.r, "a CB at ST never sets the bar at his own rating");
 });
 t("no guaranteed legend any more (Craig, 21 Oct): legends come by the 1% odds alone, so some runs see none", () => {
   assert.strictEqual(D.RULES.legendGuarantee, false); assert.strictEqual(D.RULES.levelOdds[3], 0.02); assert.strictEqual(D.RULES.levelOdds[4], 0.01);

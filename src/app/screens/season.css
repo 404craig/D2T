@@ -642,9 +642,11 @@
 .rs-cost { display: flex; gap: 5px; flex: none; }
 .rs-cost i { width: 13px; height: 13px; border-radius: 50%; background: var(--se-acc); }
 .rs-key { margin: 0 0 10px; font: 700 13px var(--font); color: var(--muted); }
-.rs-key b { font: var(--display); font-size: 15px; color: #fff; margin-right: 4px; }
+.rs-key { display: flex; align-items: center; gap: 8px; }
+.rs-key[hidden] { display: none; }
+.rs-keyred { width: 14px; height: 16px; border-radius: 4px; border: 1.5px dashed #FF6B6F; flex: none; }
 .rs-pitch .rs-shirt { width: 54px; height: 60px; border-radius: 10px; border: 1.5px dashed rgba(255,255,255,.5); background: rgba(0,0,0,.35); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; cursor: pointer; }
-.rs-shirt b { font: var(--display); font-size: 11px; opacity: .75; }
+.rs-shirt b { font: var(--display); font-size: 15px; opacity: .9; }
 .rs-shirt span { font: var(--display); font-size: 21px; line-height: 1; }
 .rs-shirt.is-none { border-color: #FF6B6F; color: #FF6B6F; }
 .rs-shirt:active { transform: translate(-50%, -50%) scale(.95); }

@@ -322,7 +322,8 @@
       }
       // Respin or scout (Craig, 18 and 20 Oct): the respin button opens one sheet in the game's style, "N respins left",
       // three option cards: Respin (1), Scout a position (2) and Scout a club (2). A position: your shirts drawn as the
-      // pitch's own shirts, red where nobody this season is better than the man in it, a count on the rest; tap one and
+      // pitch's own shirts, red where nobody this season is better than the man in it (no count on the rest since 1 Nov,
+      // Craig: the count told you where to move a star to raise the bar); tap one and
       // the scouts' three cards roll in (GAME.scout). A club: the season's clubs by final position, tap one for three of
       // its players (GAME.scoutClub). Neither ever brings a legend card.
       const ICON_SHIRT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h2.2a1.8 1.8 0 0 0 3.6 0H16l5 3.5-2 3.8-2.3-1.2V21H7.3V9.1L5 10.3 3 6.5Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>';
@@ -352,17 +353,17 @@
         return new Promise((resolve) => {
           let done = false; const fin = (v) => { if (!done) { done = true; resolve(v); } };
           const info = GAME.scoutInfo(), slots = GAME.slots(), L = GAME.lineup(), n = GAME.eng().respins;
-          const shirt = (s, i) => { const q = info[i], none = !q.better; return `<button class="se-scoutshirt rs-shirt${none ? ' is-none' : ''}" type="button" data-i="${i}" style="left:${s.x}%;top:${s.y}%" aria-label="${s.pos}, ${none ? 'nobody better this season' : q.better + ' better'}"><b>${s.pos}</b><span>${none ? '0' : q.better}</span></button>`; };
-          const el = D2T.h(`<div><p class="rs-key"><b>72</b> on a shirt: players this season better than yours there</p>
+          const shirt = (s, i) => { const q = info[i], none = !q.better; return `<button class="se-scoutshirt rs-shirt${none ? ' is-none' : ''}" type="button" data-i="${i}" style="left:${s.x}%;top:${s.y}%" aria-label="${s.pos}${none ? ', nobody better this season' : ''}"><b>${s.pos}</b></button>`; };
+          const el = D2T.h(`<div><p class="rs-key"><i class="rs-keyred" aria-hidden="true"></i>Red: nobody better this season</p>
             <div class="se-scoutpitch rs-pitch">${SE.pitchLines}${slots.map(shirt).join('')}</div>
             <p class="se-scoutnone" aria-live="polite"></p></div>`);
-          el.querySelector('.rs-key b').textContent = Math.max(...info.map((q) => q.better || 0));
+          if (!info.some((q) => !q.better)) el.querySelector('.rs-key').hidden = true;
           const sh = D2T.sheet({ title: titleWith('Scout a position', n, GAME.scoutCost()), body: el, onClose: () => fin(null) });
           tint(sh); sh.el.classList.add('se-scoutsheet', 'rs-sheet');
           const none = el.querySelector('.se-scoutnone');
           el.querySelectorAll('.se-scoutshirt').forEach((b) => {
             b.onclick = () => {
-              const i = +b.dataset.i, q = info[i], mine = L.xi[i];
+              const i = +b.dataset.i, q = info[i], bi = q.by != null ? GAME.eng().xi.indexOf(q.by) : -1, mine = L.xi[bi >= 0 ? bi : i];
               if (!q.better) { SND.play('tapSmall'); none.textContent = `Nobody better than ${mine ? surname(mine.name) : 'nobody'} at ${q.pos} in ${run.season}.${q.bestCard ? ` Best there: ${q.bestCard.name} (${q.bestCard.ovr}).` : ''}`; return; }
               if (!GAME.scout(i)) { none.textContent = `The scouts need ${GAME.scoutCost()} respins.`; return; }
               SND.play('respin'); done = true; sh.close(); resolve(GAME.eng().respins);
