@@ -172,6 +172,8 @@
 .stg-top .fr-hl-p:not(.fr-hl-emb) { transition: opacity .25s; }
 .stg .stg-top .stg-rb { transition: opacity .25s; }
 .stg-top.dly-on .stg-rb { pointer-events: none; }
+/* the hand back snaps, never fades from 0 (Craig, 1 Nov, build 211: the logo and buttons blinked off and faded back in) */
+.stg-top.dly-snap, .stg-top.dly-snap * { transition: none !important; }
 .stg-top.dly-circ .fr-hl-emb { opacity: 0; }
 .stg-top.dly-circ .stg-dly { opacity: 1; transform: none; pointer-events: auto; }
 .stg-top.dly-full .stg-dly { width: var(--dw, 340px); }

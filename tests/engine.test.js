@@ -127,7 +127,8 @@ t("signing a player weakens his club and he never scores against you", () => {
     assert.ok(D.strengthLoss(run1.S, p.c, new Set([s.id])) >= 0);
   }
   const signedAt = new Map(run1.st.signed.map(s => [s.id, s.gw]));
-  for (const r of run1.st.played) for (const e of r.events) if (!e.us && signedAt.has(e.id)) assert.ok(r.gw < signedAt.get(e.id), "signed player scored against you");
+  const goneAt = new Map((run1.st.poached || []).map(p => [p.id, p.gw]));   // a raid can take him to a rival later
+  for (const r of run1.st.played) for (const e of r.events) if (!e.us && signedAt.has(e.id) && !(goneAt.has(e.id) && r.gw >= goneAt.get(e.id))) assert.ok(r.gw < signedAt.get(e.id), "signed player scored against you");
 });
 t("raids only ever take points off raided clubs", () => {
   const H = D.historyTable(run1.S), T = D.table(run1.S, run1.st, null);

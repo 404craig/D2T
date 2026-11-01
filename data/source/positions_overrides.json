@@ -1,5 +1,18 @@
 {
-  "_note": "Craig's own calls on a player's preferred positions, main first, applied to every season of his over data/source/positions.json by scripts/build-data.py: a list replaces his positions, {\"add\": [...]} adds these as preferred positions after his main one in every season. Keyed by the player name as in positions.json.",
-  "Gianfranco Zola": ["CAM", "ST"],
-  "Gareth Bale": {"add": ["LW"]}
+  "_note": "Craig's own calls on a player's preferred positions, main first, applied to every season of his over data/source/positions.json by scripts/build-data.py: a list replaces his positions, {\"add\": [...]} adds these as preferred positions after his main one in every season. A list is final: the wide-player pairing in build-data.py leaves it alone. Keyed by the player name as in positions.json.",
+  "Gianfranco Zola": [
+    "CAM",
+    "ST"
+  ],
+  "Gareth Bale": {
+    "add": [
+      "LW"
+    ]
+  },
+  "Lee Sharpe": [
+    "LM",
+    "LB",
+    "RM",
+    "CM"
+  ]
 }
