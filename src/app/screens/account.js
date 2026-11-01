@@ -62,6 +62,25 @@
       clearUser(); gone(); if (location.hash.slice(1) === 'home') D2T.go('home');
     };
   };
+  // The sign-in nudge (Craig, 1 Nov, build 218): signed out with 3 or more finished games, home says once a week
+  // "Sign in to back up your records" (records on a phone alone go with Safari's clear-out); Sign in opens the account
+  // page, any other tap puts it away until next week. Never with a Tenaball sign-in on the phone (that one is taken
+  // automatically), a tip up or the server off.
+  D2T.backupNudge = () => {
+    const st = D2T.state, a = acct();
+    if (a.token || ls(TB.token) || !(D2T.lb && D2T.lb.server)) return;
+    const rec = st.record || {}, games = (rec.runs || []).length + ((rec.g433 || {}).games || 0) + ((st.ub || {}).runs || 0);
+    const nd = st.signNudge || {};
+    if (games < 3 || (nd.at && Date.now() - nd.at < 7 * 864e5)) return;
+    const scr = document.querySelector('.screen[data-screen="home"]'); if (!scr || document.querySelector('.d2t-signed, .d2t-tip')) return;
+    st.signNudge = { at: Date.now(), n: (nd.n || 0) + 1 }; D2T.save();
+    const n = D2T.h(`<div class="d2t-signed d2t-nudge" role="status"><span>Sign in to back up your records</span><button type="button" class="d2t-signin">Sign in</button></div>`);
+    document.getElementById('app').appendChild(n);
+    const gone = () => { document.removeEventListener('pointerdown', away, true); window.removeEventListener('hashchange', gone); n.classList.add('out'); setTimeout(() => n.remove(), 300); };
+    const away = (e) => { if (!n.contains(e.target)) gone(); };
+    setTimeout(() => { document.addEventListener('pointerdown', away, true); window.addEventListener('hashchange', gone); }, 0);
+    n.querySelector('.d2t-signin').onclick = () => { gone(); D2T.go('account'); };
+  };
   // a sign-in here fills in Tenaball's keys only when Tenaball has none, so it is signed in too on its next load
   function share(user, token, stats, email) {
     if (!token || ls(TB.token)) return;

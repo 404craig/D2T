@@ -114,8 +114,24 @@ const run = (seed, ms, o = {}) => Object.assign({ key: "2007/08:Derby", mode: "c
   await D.p.evaluate(() => window.D2T.backup.sync()); await wait(800);
   check((await rec(D.p)).run === null, "a run this phone dropped came back on the next sync");
 
+  // 8. the sign-in nudge: signed out with 3 games, once a week, Sign in opens the account page; never under 3 games
+  const runs3 = { record: { runs: [run("n1", 1), run("n2", 2), run("n3", 3)], clubs: {} }, migrated: true };
+  const N = await open(runs3);
+  await wait(3200);
+  const nudge = () => N.p.evaluate(() => { const n = document.querySelector(".d2t-nudge"); return n ? n.textContent.trim() : null; });
+  check((await nudge()) === "Sign in to back up your recordsSign in", "the sign-in nudge did not show: " + (await nudge()));
+  await N.p.click(".d2t-signin"); await wait(600);
+  check((await N.p.evaluate(() => location.hash)).includes("account"), "Sign in on the nudge did not open the account page");
+  await N.p.evaluate(() => window.D2T.go("home")); await wait(3200);
+  check((await nudge()) === null, "the nudge showed twice in a week");
+  const few = await open({ record: { runs: [run("f1", 1)], clubs: {} }, migrated: true });
+  await wait(3200);
+  check(!(await few.p.evaluate(() => !!document.querySelector(".d2t-nudge"))), "the nudge showed with only one game");
+  check(!(await A.p.evaluate(() => !!document.querySelector(".d2t-nudge"))), "the nudge showed signed in");
+  [N, few].forEach((x) => check(!x.errs.length, "page errors: " + x.errs.join(" | ")));
+
   [A, B, C, D].forEach((x) => check(!x.errs.length, "page errors: " + x.errs.join(" | ")));
   await browser.close();
   if (fails) { console.log(`${fails} check(s) failed`); process.exit(1); }
-  console.log("ok: backup (records go up, a second phone gets them and keeps its own, games go up after they finish, a phone behind merges, the leaderboard results rebuild an empty phone, accounts on one phone stay apart, a run in progress comes down once)");
+  console.log("ok: backup (records go up, a second phone gets them and keeps its own, games go up after they finish, a phone behind merges, the leaderboard results rebuild an empty phone, accounts on one phone stay apart, a run in progress comes down once, the sign-in nudge once a week signed out)");
 })();

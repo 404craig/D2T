@@ -128,6 +128,7 @@
     title: 'Home', theme: 'black', chrome: ['#000000', '#000000'],
     mount(root, params) {
       setTimeout(() => { if (D2T.adoptNote) D2T.adoptNote(); }, 900);   // "Signed in as ..." after an automatic sign-in (build 217)
+      setTimeout(() => { if (D2T.backupNudge && location.hash.slice(1) === 'home') D2T.backupNudge(); }, 2600);   // "Sign in to back up your records", once a week signed out (build 218)
       const G = D2T.game, reduced = D2T.reduced();
       G.closeOldDaily();                                           // yesterday's unfinished Daily closed at midnight
       cleanups = [];
