@@ -825,8 +825,9 @@ function poach(st, S) {
   const avg = cand.reduce((a, c) => a + c.p.r, 0) / Math.max(1, cand.length);
   const hist = historyTable(S, S.deductions), out = [], usedClubs = new Set([st.club]);
   for (let k = 0; k < 3 && cand.length; k++) {
-    // your best outfield player goes for certain (Craig, 19 Oct: a career kept its legends), the other two by weight
-    const v = k === 0 ? cand.slice().sort((a, b) => b.p.r - a.p.r)[0] : pickWeighted(r, cand, c => Math.pow(c.p.r / avg, RULES.raidOut.poachPower));
+    // all three by the 6th-power weight, stars far likelier to go but nobody certain (Craig, 1 Nov; from 19 Oct to 1 Nov
+    // the best outfield player went for certain)
+    const v = pickWeighted(r, cand, c => Math.pow(c.p.r / avg, RULES.raidOut.poachPower));
     cand.splice(cand.indexOf(v), 1);
     const clubs = hist.map((row, pos) => ({ c: row.c, w: hist.length + 1 - (pos + 1) }))
       .filter(x => !usedClubs.has(x.c) && x.c !== v.p.c && x.c !== v.p.c2);
