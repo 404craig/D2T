@@ -148,19 +148,31 @@
   }
   // put the phone's part of the state in place of what is there (the keys not backed up stay)
   // (a game in progress the copy left out for size stays, unless all is being swapped for another account's)
+  // The objects already there are filled in place, never replaced (Fable, 1 Nov: Unbeaten and Goal Rush hold state.ub and
+  // state.g433 while they are on screen, and a replaced object took their next writes with it).
+  const isObj = (v) => v && typeof v === 'object' && !Array.isArray(v);
   function apply(part, all) {
-    const st = D2T.state;
-    Object.keys(st).forEach((k) => { if (!OWN.includes(k) && (all || !SLOTS.includes(k) || k in part)) delete st[k]; });
-    Object.assign(st, clone(part));
+    const st = D2T.state, next = clone(part);
+    Object.keys(st).forEach((k) => { if (!OWN.includes(k) && !(k in next) && (all || !SLOTS.includes(k))) delete st[k]; });
+    Object.keys(next).forEach((k) => {
+      if (isObj(st[k]) && isObj(next[k])) { Object.keys(st[k]).forEach((x) => { if (!(x in next[k])) delete st[k][x]; }); Object.assign(st[k], next[k]); }
+      else st[k] = next[k];
+    });
     if (!st.record) st.record = { runs: [], clubs: {} };
   }
   // another account signs in on this phone: put the last one's records aside, bring this one's back if they were here
   function swapOwner(id) {
     const b = B();
     if (b.owner && b.owner !== id) {
-      try { localStorage.setItem('d2t-keep-' + b.owner, JSON.stringify(pick(D2T.state))); } catch (e) { /* no room: the server has them */ }
+      // the records and the leaderboard's own corner (its queue, what was sent, the carried totals, which account the old
+      // records went to) are put aside together, so a new account never sends the last one's games (Fable, 1 Nov)
+      const L = D2T.state.lb || {}, LK = ['queue', 'sent', 'carry', 'sentFor'];
+      const mine = { v: 2, part: pick(D2T.state), lb: {} }; LK.forEach((k) => { if (L[k] !== undefined) mine.lb[k] = L[k]; });
+      try { localStorage.setItem('d2t-keep-' + b.owner, JSON.stringify(mine)); } catch (e) { /* no room: the server has them */ }
       let kept = null; try { kept = JSON.parse(localStorage.getItem('d2t-keep-' + id) || 'null'); } catch (e) { kept = null; }
-      apply(kept || {}, true);
+      const theirs = kept && kept.v === 2 ? kept : { part: kept || {}, lb: {} };
+      apply(theirs.part || {}, true);
+      if (D2T.state.lb) { Object.assign(D2T.state.lb, { queue: [], sent: [], carry: null, sentFor: null, pos: {}, posAt: 0 }, theirs.lb || {}); if (!theirs.lb || !theirs.lb.sentFor) D2T.state.lb.carry = { goal: null, ub: null }; }
       try { localStorage.removeItem('d2t-keep-' + id); } catch (e) { /* fine */ }
       D2T.state.backup = { owner: id };
       D2T.save(true);
@@ -183,12 +195,14 @@
         let mine = merge(pick(D2T.state), r.data.data, first && tries === 0);
         if (first && tries === 0 && r.data.results) mine = fromResults(mine, r.data.results);
         const now = JSON.stringify(mine), changed = now !== before;
+        const shown = (x) => JSON.stringify([x.record, x.ub && { runs: x.ub.runs, best: x.ub.best, lastRun: x.ub.lastRun }, x.run && x.run.eng && x.run.eng.seed, x.dailyRun && x.dailyRun.daily, x.g433 && (x.g433.xi || []).length]);
+        const visible = changed && shown(JSON.parse(before)) !== shown(mine);
         if (changed) { apply(mine); }
-        Object.assign(B(), { for: id, v: r.data.v, got: hash(JSON.stringify(r.data.data || {})), at: Date.now() });
+        Object.assign(B(), { for: id, v: r.data.v });
         D2T.save(true);
-        if (changed) refresh();
+        if (visible) refresh();
         const h = hash(now);
-        if (r.data.data && hash(JSON.stringify(r.data.data)) === h) { B().sent = h; D2T.save(true); return true; }
+        if (r.data.data && hash(JSON.stringify(r.data.data)) === h) { Object.assign(B(), { sent: h, at: Date.now() }); D2T.save(true); return true; }
         const p = await call({ op: 'put', base: r.data.v, data: mine });
         if (uid() !== id) return false;
         if (p.ok) { Object.assign(B(), { v: p.data.v, sent: h, at: Date.now() }); D2T.save(true); return true; }
@@ -210,9 +224,13 @@
     else if (p.status === 409) sync();
   }
   // what's on screen shows what came back: home and the account page are drawn again (never a game screen)
-  function refresh() {
+  let touched = 0;
+  document.addEventListener('pointerdown', () => { touched = Date.now(); }, true);
+  function refresh(tries = 0) {
     const name = (location.hash || '').slice(1).split(/[?&]/)[0];
-    if ((name === 'home' || name === 'account') && D2T.go) D2T.go(name);
+    if (!(name === 'home' || name === 'account') || !D2T.go) return;
+    if (Date.now() - touched < 3000 || document.querySelector('.sheet.open')) { if (tries < 10) setTimeout(() => refresh(tries + 1), 3000); return; }   // never under a finger or a sheet
+    D2T.go(name);
   }
   let timer = null;
   const later = () => { if (!timer) timer = setTimeout(() => { timer = null; push(); }, 4000); };   // at most one a few seconds after a change (home saves often)
@@ -220,7 +238,8 @@
   D2T.save = (quiet) => { save(); if (!quiet && uid()) later(); };
 
   D2T.backup = { sync, push, merge, mergeRecord, fromResults, pick, last: () => B().at || 0,
-    onSignIn: () => setTimeout(sync, 80),
+    // on a sign-in the account's records are put in place first, then the leaderboards send (Fable, 1 Nov)
+    onSignIn: () => setTimeout(() => { const s = sync(); Promise.resolve(s).catch(() => {}).then(() => { if (D2T.lb) D2T.lb.onSignIn(); }); }, 30),
     onSignOut: () => { clearTimeout(timer); timer = null; } };
   D2T.whenReady(() => { setTimeout(sync, 1500); });
   document.addEventListener('visibilitychange', () => { if (document.hidden) { clearTimeout(timer); timer = null; push(true); } else sync(); });

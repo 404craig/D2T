@@ -16,7 +16,7 @@
       return { ok: r.ok, status: r.status, data };
     } catch (e) { return { ok: false, status: 0, data: { error: "Can't reach the server. Check your connection and try again." } }; }
   }
-  const setUser = (user, token) => { const a = acct(); a.user = user; if (token) a.token = token; a.signedIn = true; D2T.save(); if (token && D2T.lb) D2T.lb.onSignIn(); if (token && D2T.backup) D2T.backup.onSignIn(); };   // a sign-in: the phone's records go on to the leaderboards
+  const setUser = (user, token) => { const a = acct(); a.user = user; if (token) a.token = token; a.signedIn = true; D2T.save(); if (token) { if (D2T.backup) D2T.backup.onSignIn(); else if (D2T.lb) D2T.lb.onSignIn(); } };   // the backup puts this account's records in place, then the leaderboards send   // a sign-in: the phone's records go on to the leaderboards
   const clearUser = () => { if (D2T.backup) D2T.backup.onSignOut(); D2T.state.account = {}; D2T.save(); if (D2T.lb) D2T.lb.onSignOut(); };
   D2T.accountName = () => (acct().user ? acct().user.name : '');
 
@@ -147,7 +147,7 @@
           const s = D2T.sheet({ title: 'Delete your data?', body: `<p class="fr-lead">This clears your saved run and your achievements on this phone. If you are signed in, your account backup brings them back.</p>
             <div class="fr-two"><button class="btn btn-ghost" data-k="no">Keep it</button><button class="btn btn-ghost fr-danger" data-k="yes">Delete</button></div>` });
           s.body.querySelector('[data-k="no"]').onclick = s.close;
-          s.body.querySelector('[data-k="yes"]').onclick = () => { const a = D2T.state.account; D2T.resetState(); D2T.state.account = a || {}; D2T.save(); s.close(); draw(); };
+          s.body.querySelector('[data-k="yes"]').onclick = () => { const a = D2T.state.account, ny = D2T.state.notYou; D2T.resetState(); D2T.state.account = a || {}; if (ny) D2T.state.notYou = ny; D2T.save(); s.close(); draw(); };   // a refused sign-in stays refused
         };
       };
 

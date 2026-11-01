@@ -8,7 +8,7 @@ let fails = 0;
 const check = (ok, msg) => { if (!ok) { fails++; console.log("FAIL: " + msg); } };
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const USERS = { tA: { id: "u1", name: "Aiden", email: "a@example.com" }, tB: { id: "u2", name: "Craig", email: "c@example.com" } };
-const server = { backup: {}, results: { u1: [], u2: [] }, puts: 0, conflicts: 0 };
+const server = { backup: {}, results: { u1: [], u2: [] }, puts: 0, conflicts: 0, merges: [] };
 
 const run = (seed, ms, o = {}) => Object.assign({ key: "2007/08:Derby", mode: "classic", season: "2007/08", club: "Derby", finish: 10, rise: 10, pts: 50, histFinish: 20, histPts: 11, drop: true, half: true, top3: false, title: false, at: "2026-10-20", seed, ms }, o);
 
@@ -30,6 +30,9 @@ const run = (seed, ms, o = {}) => Object.assign({ key: "2007/08:Derby", mode: "c
         }
         return json(Object.assign({ v: cur.v, data: cur.data }, body.results ? { results: server.results[u.id] } : {}));
       }
+      if (path === "/signin") { const t = body.email === "c@example.com" ? "tB" : "tA"; return json({ token: t, user: USERS[t], stats: {} }); }
+      if (path === "/signout") return json({ ok: true });
+      if (path === "/d2t/merge") { server.merges.push({ auth, rids: (body.results || []).map((x) => x.game + ":" + x.rec.rid) }); return json({ ok: true, added: 0, pos: {} }); }
       if (path.startsWith("/d2t/")) return json({ ok: true, games: {}, signedIn: !!u, pos: {}, added: 0 });
       return json({});
     });
@@ -129,6 +132,25 @@ const run = (seed, ms, o = {}) => Object.assign({ key: "2007/08:Derby", mode: "c
   check(!(await few.p.evaluate(() => !!document.querySelector(".d2t-nudge"))), "the nudge showed with only one game");
   check(!(await A.p.evaluate(() => !!document.querySelector(".d2t-nudge"))), "the nudge showed signed in");
   [N, few].forEach((x) => check(!x.errs.length, "page errors: " + x.errs.join(" | ")));
+
+  // 9. through the real sign-in form (Fable, 1 Nov): Aiden signs out, Craig signs in on the same phone; nothing of Aiden's
+  // goes to Craig's tables, and Aiden's old seasons keep their ids so a restore never sends them twice
+  const S9 = await open(Object.assign(signedIn("tA"), { record: { runs: [run("a9", 9100), run(null, null, { key: "1997/98:Barnsley", season: "1997/98", club: "Barnsley", at: "2026-09-01" })], clubs: {} } }));
+  await synced(S9.p); await wait(3000);
+  const aidenRid = await S9.p.evaluate(() => (window.D2T.state.record.runs.find((r) => !r.seed && r.club === "Barnsley" && r.at === "2026-09-01") || {}).rid);
+  check(/^old:/.test(aidenRid || ""), "a run from before the seed was kept should get its id kept on it: " + aidenRid);
+  server.merges = [];
+  await S9.p.evaluate(() => window.D2T.go("account")); await wait(700);
+  await S9.p.click('[data-act="out"]'); await wait(500);
+  await S9.p.fill('input[name="email"]', "c@example.com"); await S9.p.fill('input[name="pin"]', "1234");
+  await S9.p.click('form [type="submit"]'); await wait(2500);
+  const leaked = server.merges.filter((m) => m.auth === "tB").flatMap((m) => m.rids).filter((r) => /a9|old:|carry:/.test(r));
+  check(!leaked.length, "Craig's sign-in sent the last account's games to his tables: " + leaked.join(","));
+  // a screen holding state.ub keeps it after a sync brings more in (Fable, 1 Nov): the object is filled in place
+  server.backup.u1.data.ub = Object.assign({}, server.backup.u1.data.ub, { runs: 99 }); server.backup.u1.v++;
+  const same = await B.p.evaluate(async () => { const ref = window.D2T.state.ub; await window.D2T.backup.sync(); return window.D2T.state.ub === ref && ref.runs === 99; });
+  check(same, "a sync replaced state.ub instead of filling it in place, so a screen holding it would lose its writes");
+  check(!S9.errs.length, "page errors: " + S9.errs.join(" | "));
 
   [A, B, C, D].forEach((x) => check(!x.errs.length, "page errors: " + x.errs.join(" | ")));
   await browser.close();

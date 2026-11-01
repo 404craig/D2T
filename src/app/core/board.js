@@ -45,7 +45,11 @@
   }
   function results() {
     const st = D2T.state, L = lb(), rec = st.record || {}, out = [], runs = rec.runs || [], seen = {};
-    runs.forEach((r, i) => { if (r.mode === 'dare2dream') return; if (r.daily) seen[r.daily] = (seen[r.daily] || 0) + 1; out.push(fromRun(r, `old:${L.phone}:${i}`, r.daily ? seen[r.daily] : 0)); });
+    // a run from before the seed was kept gets its id once and keeps it on the run (`rid`), so a backup restored on another
+    // phone, or after Delete my data, sends the same id and never counts twice (Fable, 1 Nov)
+    let stamped = false;
+    runs.forEach((r, i) => { if (r.mode === 'dare2dream') return; if (r.daily) seen[r.daily] = (seen[r.daily] || 0) + 1; if (!r.seed && !r.rid) { r.rid = `old:${L.phone}:${i}`; stamped = true; } out.push(fromRun(r, r.rid, r.daily ? seen[r.daily] : 0)); });
+    if (stamped) D2T.save();
     // a Daily best from before every go was kept in runs (build 95 and before) would have no run of its own: fill from the day's record
     Object.keys(rec.daily || {}).forEach((d) => { if (seen[d]) return; const x = rec.daily[d]; out.push({ game: 'daily', rec: { rid: `old:${L.phone}:daily:${d}`, date: d, club: x.club, season: x.season, finish: x.finish, histFinish: x.histFinish, pts: x.pts, histPts: x.histPts, goes: x.goes || 1, at: noon(d) } }); });
     // Goal Rush and Unbeaten totals from before the tables, frozen the first time they are sent
@@ -59,7 +63,9 @@
     // the results that came after, kept on the phone so a guest's place and a second sign-in have them too
     (L.sent || []).forEach((x) => out.push(x));
     (L.queue || []).forEach((x) => out.push(x));
-    return out;
+    // each result once (a finished game is in the record and in the queue or the sent list; Fable, 1 Nov)
+    const ids = new Set();
+    return out.filter((x) => { const k = x.game + '|' + x.rec.rid; if (ids.has(k)) return false; ids.add(k); return true; });
   }
 
   // ---------- sending ----------
