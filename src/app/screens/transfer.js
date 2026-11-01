@@ -263,7 +263,21 @@
         // the Transfer News bar takes the hint line's place (Craig, 21 Oct): the rumour as the sweep starts, the deal as
         // the badge lands, no count (one raid); it stays until you move on
         const hint = api.el.querySelector('.sp-hint');
-        if (hint && !janNews) { janNews = SE.newsBar({ count: false }); janNews.el.classList.add('se-news-flow'); hint.style.display = 'none'; hint.after(janNews.el); }
+        // before the first spin (no tray) it sits centred between the pitch and the bottom bar, as the Summer's does (Craig,
+        // 1 Nov, build 220: it sat low in January); after a spin (a refresh with the raid unseen) in the hint line's place
+        if (hint && !janNews) {
+          janNews = SE.newsBar({ count: false }); hint.style.display = 'none';
+          const scr = api.el, gbar = scr.querySelector('.game-bar');
+          if (scr.classList.contains('tr-preraid') && gbar && field) {
+            const el = janNews.el; scr.appendChild(el);
+            const place = () => { if (!el.isConnected) return; const pe = field.querySelector('.tr-field') || field.querySelector('.se-pitch') || field, rr = scr.getBoundingClientRect(), pb = pe.getBoundingClientRect().bottom, bt = gbar.getBoundingClientRect().top; el.style.top = `${Math.round((pb + bt) / 2 - rr.top - (el.offsetHeight || 50) / 2)}px`; };
+            // measured again as the screen settles (the pitch grows into the room the tray leaves) and before each headline
+            place(); const ro = window.ResizeObserver ? new ResizeObserver(place) : null; if (ro) { ro.observe(scr); ro.observe(field); ro.observe(gbar); }
+            [80, 300, 700, 1200].forEach((ms) => timers.push(setTimeout(place, ms)));
+            const say = janNews.say; janNews.say = (...a) => { place(); return say(...a); };
+            const stop = janNews.stop; janNews.stop = () => { ro && ro.disconnect(); stop(); };
+          } else { janNews.el.classList.add('se-news-flow'); hint.after(janNews.el); }
+        }
         const words = SE.raidWords(0);
         await new Promise((r) => timers.push(setTimeout(r, delay)));
         if (!alive) return;

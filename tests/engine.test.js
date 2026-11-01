@@ -279,6 +279,11 @@ t("Club X career: Poached takes 3 outfield players to 3 different league clubs, 
   assert.deepStrictEqual(D.poach(setup("poach-1"), S), out, "the same seed takes the same players to the same clubs");
   const two = new Set(); for (let i = 0; i < 12; i++) two.add(JSON.stringify(D.poach(setup("poach-v" + i), S)));
   assert.ok(two.size > 6, "different seeds poach differently");
+  // all three by weight (Craig, 1 Nov): the best outfield player is the likeliest to go but never certain
+  { const out0 = setup("w0"), ids = out0.xi.map((id, i) => ({ id, i, r: D.playerOf(S, id).r })).filter((c) => slots[c.i] !== "GK").sort((a, b) => b.r - a.r), best = ids[0].id, worst = ids[ids.length - 1].id;
+    let nb = 0, nw = 0; const N = 300;
+    for (let i = 0; i < N; i++) { const o = D.poach(setup("w" + i), S).map((x) => x.id); if (o.includes(best)) nb++; if (o.includes(worst)) nw++; }
+    assert.ok(nb < N && nb > nw, `the best goes in ${nb} of ${N}, the weakest in ${nw}`); }
   assert.strictEqual(D.poach(Object.assign(setup("poach-2"), { career: 1 }), S), null, "not in a career's first season");
   // a poached player joins his new club: it picks him, and is stronger for it
   assert.ok(out.every((x) => D.clubXI(S, x.club, new Set(), D.joinersOf(S, first, x.club)).length === 11));
@@ -428,13 +433,19 @@ t("aging: a carried card keeps its number for a season, then loses 3 a season; t
   const L = D.userStrength(S, st, []);
   assert.ok(Math.abs(L.ovr - (93 + D.RULES.star.cap / 11)) < 1e-6, "cap not applied: " + L.ovr);
 });
-t("Club X Summer poach takes your best outfield player for certain", () => {
+t("Club X Summer poach: all three by weight, so the best outfield player can stay (Craig, 1 Nov)", () => {
   const S = G.seasons["2013/14"]; S.legends = S.legends || [];
   const st = D.newRun({ seed: "pb", mode: "clubx", catalogue: [] });
   st.seasonKey = S.season; st.club = D.historyTable(S, S.deductions).slice(-1)[0].c; st.formation = "4-4-2"; st.career = 2;
   const best = S.players.filter(p => (p.a || 0) >= 10 && p.b !== "GK").sort((a, b) => b.r - a.r).slice(0, 10).map(p => p.id), gk = S.players.filter(p => p.b === "GK" && (p.a || 0) >= 10)[0].id;
-  D.carryIn(st, S, [gk].concat(best));
-  const out = D.poach(st, S); assert.strictEqual(out.length, 3); assert.strictEqual(out[0].id, best[0]);
+  let kept = 0;
+  for (let i = 0; i < 40; i++) {
+    const s2 = D.newRun({ seed: "pb" + i, mode: "clubx", catalogue: [] }); Object.assign(s2, { seasonKey: S.season, club: st.club, formation: "4-4-2", career: 2 });
+    D.carryIn(s2, S, [gk].concat(best));
+    const out = D.poach(s2, S); assert.strictEqual(out.length, 3);
+    if (!out.some((x) => x.id === best[0])) kept++;
+  }
+  assert.ok(kept > 0, "the best player was taken on every seed");
 });
 t("Scout a club: 2 respins for three of one club's cards, never your own club, never legends", () => {
   const S = G.seasons["2007/08"]; S.legends = S.legends || [];
