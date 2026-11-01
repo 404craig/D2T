@@ -8,7 +8,8 @@
   // a running motion is anything with finish(); finish() must leave the element in its final state
   const track = (m) => { live.add(m); return m; };
   const untrack = (m) => live.delete(m);
-  const finishAll = () => { [...live].forEach((m) => { try { m.finish(); } catch (e) { /* gone */ } }); };
+  // finishing a delay can start the motion it was waiting for, so sweep until none are left (a few passes at most)
+  const finishAll = () => { for (let k = 0; k < 5 && live.size; k++) [...live].forEach((m) => { try { m.finish(); } catch (e) { live.delete(m); } }); };
   // a tap jumps them all to the end; it never stops the tap itself
   document.addEventListener('pointerdown', finishAll, true);
 

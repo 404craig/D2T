@@ -53,7 +53,7 @@
     const seq = MO.track({ finish() { if (ended) return; end(); tiles.forEach((b) => { b.textContent = b.dataset.v; }); } });
     const stamp = () => {
       headEl.classList.remove('sm-hold'); headEl.style.animation = 'none';
-      headEl.animate([{ transform: 'scale(1.5) rotate(-4deg)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 260, easing: 'cubic-bezier(.34,1.56,.64,1)' });
+      MO.anim(headEl, [{ transform: 'scale(1.5) rotate(-4deg)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 260, easing: 'cubic-bezier(.34,1.56,.64,1)' });   // tracked, so a tap lands it
       MO.glint(headEl, { delay: 260, dur: 480 });
       later(() => { end(); tiles.forEach((b, k) => MO.odometer(b, b.dataset.v, { delay: k * 140, dur: 700 })); }, 320);
     };
@@ -104,18 +104,65 @@
     }
   }
 
-  // Your league position each gameweek (solid, club colour) against history's (dashed grey).
+  // Your league position each gameweek (solid, club colour) against history's (dashed grey). Scrubbing (Craig, 1 Nov,
+  // build 219, style B "Bubble on the graph" in design/prototype/graph-scrub.html): the lines are drawn twice, once at 28%
+  // and once bright under a clip (smPast) that stops at the week picked, with a guide line and a dot on each line there.
+  const GEO = { W: 340, H: 180, L: 28, R: 10, T: 12, B: 22 };
   function ghostSVG(mine, hist, n, rel) {
-    const W = 340, H = 180, L = 28, R = 10, T = 12, B = 22, w = W - L - R, h = H - T - B, len = Math.max(hist.length, mine.length, 2);
+    const { W, H, L, R, T, B } = GEO, w = W - L - R, h = H - T - B, len = Math.max(hist.length, mine.length, 2);
     const x = (i) => L + i * (w / (len - 1)), y = (p) => T + (p - 1) * (h / (n - 1));
     const pts = (a) => a.map((p, i) => `${x(i).toFixed(1)},${y(p).toFixed(1)}`).join(' ');
     const grid = [1, Math.round(n / 2), n].map((p) => `<line x1="${L}" x2="${W - R}" y1="${y(p)}" y2="${y(p)}" stroke="#222226" stroke-dasharray="3 4"/><text x="${L - 6}" y="${y(p) + 4}" font-size="10" text-anchor="end" fill="#8E8E99">${p}</text>`).join('');
-    return `<svg class="sm-ghost" viewBox="0 0 ${W} ${H}" role="img" aria-label="Your league position each week against history's">
+    const lines = (cls) => `<polyline points="${pts(hist)}" fill="none" stroke="#8E8E99" stroke-width="2" stroke-dasharray="5 4"/>
+      <polyline${cls ? ` class="${cls}"` : ''} points="${pts(mine)}" fill="none" stroke="var(--se-text)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>`;
+    return `<div class="sm-chart"><svg class="sm-ghost" viewBox="0 0 ${W} ${H}" role="img" aria-label="Your league position each week against history's">
       <rect x="${L}" y="${y(n - rel + 1) - 5}" width="${w}" height="${y(n) - y(n - rel + 1) + 10}" fill="rgba(255,40,80,0.10)"/>${grid}
-      <defs><clipPath id="smReveal"><rect class="sm-rev" x="0" y="0" width="${W}" height="${H}"/></clipPath></defs>
-      <g clip-path="url(#smReveal)"><polyline points="${pts(hist)}" fill="none" stroke="#8E8E99" stroke-width="2" stroke-dasharray="5 4"/>
-      <polyline class="sm-line" points="${pts(mine)}" fill="none" stroke="var(--se-text)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></g>
-      <text x="${L}" y="${H - 6}" font-size="10" fill="#8E8E99">GW1</text><text x="${W - R}" y="${H - 6}" font-size="10" text-anchor="end" fill="#8E8E99">GW${len}</text></svg>`;
+      <defs><clipPath id="smReveal"><rect class="sm-rev" x="0" y="0" width="${W}" height="${H}"/></clipPath><clipPath id="smPast"><rect class="sm-pastr" x="0" y="0" width="${W}" height="${H}"/></clipPath></defs>
+      <g clip-path="url(#smReveal)"><g opacity=".28">${lines('')}</g><g class="sm-past" clip-path="url(#smPast)">${lines('sm-line')}</g></g>
+      <g class="sm-scrub" style="opacity:0"><line class="sm-gl" x1="0" x2="0" y1="${T - 4}" y2="${H - B + 2}" stroke="#fff" stroke-opacity=".35" stroke-width="1"/>
+      <circle class="sm-dh" r="4.5" fill="#000" stroke="#C9C9D1" stroke-width="2"/><circle class="sm-dm" r="5.5" fill="var(--se-text)" stroke="#000" stroke-width="2"/></g>
+      <text x="${L}" y="${H - 6}" font-size="10" fill="#8E8E99">GW1</text><text x="${W - R}" y="${H - 6}" font-size="10" text-anchor="end" fill="#8E8E99">GW${len}</text></svg>
+      <div class="sm-bub" aria-hidden="true"></div></div>`;
+  }
+  // a sideways drag scrubs (a mouse at once, a tap picks that week); an upright one is left to the page's scroll; the
+  // week stays on release and a tap anywhere else goes back to the whole season
+  function scrub(body, weeks, n, sim) {
+    const chart = body.querySelector('.sm-chart'); if (!chart || !weeks || !weeks.length) return;
+    const svg = chart.querySelector('svg'), past = svg.querySelector('.sm-pastr'), sc = svg.querySelector('.sm-scrub'), gl = svg.querySelector('.sm-gl'),
+      dm = svg.querySelector('.sm-dm'), dh = svg.querySelector('.sm-dh'), bub = chart.querySelector('.sm-bub');
+    const { W, H, L, R, T, B } = GEO, N = weeks.length, w = W - L - R, h = H - T - B;
+    const x = (i) => L + i * (w / Math.max(1, N - 1)), y = (p) => T + (p - 1) * (h / (n - 1));
+    const res = (u, t) => `${u > t ? 'W' : u < t ? 'L' : 'D'} ${u}-${t}`, real = sim ? 'forecast' : 'real', ord = D2T.ordinal, esc = D2T.esc;
+    function show(i, on) {
+      if (i == null) { past.setAttribute('width', String(W)); sc.style.opacity = '0'; return; }
+      const m = weeks[i], X = x(i);
+      past.setAttribute('width', (X + 0.5).toFixed(1)); sc.style.opacity = '1';
+      gl.setAttribute('x1', X); gl.setAttribute('x2', X);
+      dm.setAttribute('cx', X); dm.setAttribute('cy', y(m.pos)); dh.setAttribute('cx', X); dh.setAttribute('cy', y(m.hpos || m.pos));
+      dh.style.display = m.hpos ? '' : 'none';
+      bub.innerHTML = `<div class="t">GW${i + 1} · ${esc(m.opp)} (${m.home ? 'H' : 'A'}) ${res(m.us, m.them)}</div><div class="r"><b>${ord(m.pos)}</b> · ${m.pts} pts</div>`
+        + (m.hpos ? `<div class="r h"><b>${ord(m.hpos)}</b> · ${m.hpts} pts${m.rus != null ? ` · ${real} ${res(m.rus, m.rthem)}` : ''}</div>` : '');
+      const cw = chart.clientWidth, s = cw / W, bw = bub.offsetWidth || 150;
+      bub.style.left = Math.min(cw - bw / 2 - 2, Math.max(bw / 2 + 2, X * s)) + 'px';
+      // over the higher dot, or under the lower one when it would leave the panel at the top
+      const hi = Math.min(y(m.pos), m.hpos ? y(m.hpos) : 1e9) * s - 10, lo = Math.max(y(m.pos), m.hpos ? y(m.hpos) : 0) * s + 12, bh = bub.offsetHeight || 60;
+      const under = hi - bh < -28;
+      bub.style.top = (under ? lo : hi) + 'px'; bub.style.transform = under ? 'translate(-50%, 0)' : '';
+      bub.classList.toggle('on', !!on);
+    }
+    const at = (e) => { const r = svg.getBoundingClientRect(), px = (e.clientX - r.left) / r.width * W; return Math.max(0, Math.min(N - 1, Math.round((px - L) / (w / Math.max(1, N - 1))))); };
+    let down = null, cur = null;
+    const start = (e) => { try { chart.setPointerCapture(e.pointerId); } catch (_) { /* fine */ } cur = at(e); show(cur, true); };
+    chart.addEventListener('pointerdown', (e) => { down = { x: e.clientX, y: e.clientY, go: e.pointerType === 'mouse' }; if (down.go) start(e); });
+    chart.addEventListener('pointermove', (e) => {
+      if (!down) return;
+      if (!down.go) { const dx = Math.abs(e.clientX - down.x), dy = Math.abs(e.clientY - down.y); if (dx > 6 && dx > dy) { down.go = true; start(e); } else if (dy > 8) { down = null; return; } }
+      if (down && down.go) { cur = at(e); show(cur, true); }
+    });
+    chart.addEventListener('pointerup', (e) => { if (down && !down.go) start(e); down = null; bub.classList.remove('on'); });
+    chart.addEventListener('pointercancel', () => { down = null; bub.classList.remove('on'); });
+    const away = (e) => { if (!chart.isConnected) { document.removeEventListener('pointerdown', away, true); return; } if (!chart.contains(e.target) && cur != null) { cur = null; show(null); } };
+    document.addEventListener('pointerdown', away, true);
   }
 
   // ---------- share (Craig, 13 Oct; design/prototype/share-cards.html): image and a short message ending in a dare ----------
@@ -300,6 +347,7 @@
       </div>`);
       root.appendChild(body);
       motion(body, F);
+      scrub(body, GAME.weekly(), n, GAME.isSim());   // scrub the graph week by week (build 219)
       // the award cards shine once, as their row comes into view (Craig, 1 Nov, build 212: the endless shine on the masked
       // cards repainted them and moved the page on iPhone)
       { const aw = body.querySelector('.sm-awards');

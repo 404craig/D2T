@@ -808,6 +808,19 @@
       bestRise: runs.length ? Math.max(...runs.map((r) => r.rise)) : null };
   };
   GAME.classicRuns = classicRuns;
+  // The season week by week for the season-over graph's scrub (Craig, 1 Nov, build 219): after each gameweek your place
+  // and points, the match and its score, and history's place, points (running, from the real scores of the club's own
+  // fixtures, which are the played matches' `real`) and real score; a forecast season's "real" is the forecast
+  GAME.weekly = () => {
+    const st = GAME.eng(), S = GAME.S(), F = st && st.final; if (!F || !S) return null;
+    const ded = S.deductions || null; let hp = 0;
+    return (st.played || []).map((m, i) => {
+      const row = E.table(S, st, i + 1, ded).find((r) => r.c === st.club), r = m.real || [];
+      if (r.length === 2) hp += r[0] > r[1] ? 3 : r[0] === r[1] ? 1 : 0;
+      return { opp: S.clubs[m.opp] ? S.clubs[m.opp].name : '', home: !!m.home, us: m.us, them: m.them, pos: F.positions[i], pts: row ? row.pts : 0,
+        hpos: (F.history || [])[i] || null, hpts: r.length === 2 ? hp : null, rus: r.length === 2 ? r[0] : null, rthem: r.length === 2 ? r[1] : null };
+    });
+  };
   // Club X: every season counts; seasons of one career share a careerId (a season before careers is a career of its own)
   GAME.xRecord = () => {
     const runs = D2T.state.record.runs.filter((r) => r.mode === 'clubx' && !r.daily);
