@@ -111,6 +111,25 @@
       for (const p of out) if (!st.g4recent[0].includes(p.name)) st.g4recent[0].push(p.name);
       return out;
     },
+    // the players who keep an exact route open with one or two shirts to fill (Craig, 1 Nov, build 209: a respin then
+    // always deals at least one): one to go, a man with exactly the goals needed; two to go, a man for one of the
+    // shirts for whom someone in the other shirt's pool has exactly the rest
+    routeCards(openPos, avoid, need, f) {
+      const slots = []; Object.keys(openPos).forEach((pos) => { for (let i = 0; i < openPos[pos]; i++) slots.push(pos); });
+      const ok = (p) => !avoid.includes(p.name);
+      if (slots.length === 1) return GAME.g433.pool(slots[0], f).filter((p) => ok(p) && p.goals === need);
+      if (slots.length !== 2) return [];
+      const out = [], seen = new Set();
+      [[slots[0], slots[1]], [slots[1], slots[0]]].forEach(([a, b]) => {
+        const rest = new Map(); GAME.g433.pool(b, f).forEach((y) => { if (ok(y)) rest.set(y.goals, (rest.get(y.goals) || []).concat([y.name])); });
+        GAME.g433.pool(a, f).forEach((x) => {
+          if (!ok(x) || seen.has(x.name) || x.goals > need) return;
+          const ys = rest.get(need - x.goals);
+          if (ys && ys.some((n) => n !== x.name)) { seen.add(x.name); out.push(x); }
+        });
+      });
+      return out;
+    },
     canGift: (pos, need, avoid, f) => need >= 0 && GAME.g433.pool(pos, f).some((p) => p.goals === need && !avoid.includes(p.name)),
     // a best or last from 433 Goals has no target saved: it was 433
     record: () => { const r = Object.assign({ games: 0, exact: 0, best: null, bestTotal: null, last: null }, D2T.state.record.g433 || {}); if (r.best != null && !r.bestTarget) r.bestTarget = 433; if (r.last != null && !r.lastTarget) r.lastTarget = 433; return r; },
