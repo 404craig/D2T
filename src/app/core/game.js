@@ -132,11 +132,15 @@
     },
     canGift: (pos, need, avoid, f) => need >= 0 && GAME.g433.pool(pos, f).some((p) => p.goals === need && !avoid.includes(p.name)),
     // a best or last from 433 Goals has no target saved: it was 433
-    record: () => { const r = Object.assign({ games: 0, exact: 0, best: null, bestTotal: null, last: null }, D2T.state.record.g433 || {}); if (r.best != null && !r.bestTarget) r.bestTarget = 433; if (r.last != null && !r.lastTarget) r.lastTarget = 433; return r; },
+    record: () => { const r = Object.assign({ games: 0, exact: 0, best: null, bestTotal: null, last: null, gapSum: 0, gapGames: 0 }, D2T.state.record.g433 || {}); if (r.best != null && !r.bestTarget) r.bestTarget = 433; if (r.last != null && !r.lastTarget) r.lastTarget = 433; return r; },
     // the record carries on from 433 Goals: best is "N away" whatever the target
+    // the average distance from the target per game, rounded to a whole goal: "±11", "±0" when every counted game was
+    // spot on, "-" before the first counted one (Craig, 1 Nov, build 215: it replaced the hit rate)
+    avgOff: (r) => { r = r || GAME.g433.record(); return r.gapGames ? '±' + Math.round(r.gapSum / r.gapGames) : '-'; },
     finish(total, target) {
       const r = GAME.g433.record(), gap = Math.abs(total - target), newBest = r.best == null || gap < r.best;
       r.games += 1; if (gap === 0) r.exact += 1;
+      r.gapSum += gap; r.gapGames += 1;   // the average off target counts from build 215 on (Craig, 1 Nov); earlier games stay out
       if (newBest) { r.best = gap; r.bestTotal = total; r.bestTarget = target; }
       r.last = total; r.lastTarget = target; D2T.state.record.g433 = r; D2T.save();
       return { rec: r, newBest };
