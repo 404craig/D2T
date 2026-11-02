@@ -278,7 +278,10 @@
       sh = D2T.sheet({ title: o.title || '', body: `${o.lead ? `<div class="end-lead">${o.lead}</div>` : ''}<div class="fr-stack end-stack">${rows}</div>`,
         onClose: () => { sh = null; if (chosen) return; showPeek(); o.onClose && o.onClose(); } });
       sh.el.classList.add('end-sheet');
-      (o.buttons || []).forEach((b) => { const el = sh.body.querySelector(`[data-k="${b.k}"]`); if (el) el.onclick = () => { chosen = true; const s = sh; sh = null; s.close(); if (b.peek) showPeek(); b.fn && b.fn(); }; });
+      // Share keeps the sheet open (Craig, 2 Nov, build 223: back from WhatsApp the sheet and its peek bar were gone and
+      // there was no way home but the logo); every other button closes it first
+      (o.buttons || []).forEach((b) => { const el = sh.body.querySelector(`[data-k="${b.k}"]`); if (!el) return;
+        el.onclick = () => { if (b.k === 'share' || b.stay) { b.fn && b.fn(); return; } chosen = true; const s = sh; sh = null; s.close(); if (b.peek) showPeek(); b.fn && b.fn(); }; });
       return sh;
     };
     const close = () => { if (sh) { const s = sh; sh = null; chosen = true; s.close(); } removePeek(); };

@@ -447,6 +447,20 @@ t("Club X Summer poach: all three by weight, so the best outfield player can sta
   }
   assert.ok(kept > 0, "the best player was taken on every seed");
 });
+t("Scout a club lists the clubs as the table stands in the run, each with its real position (by name before a game)", () => {
+  const S = G.seasons["2007/08"]; S.legends = S.legends || [];
+  const st = D.newRun({ seed: "scpos", mode: "classic", catalogue: [] });
+  const me = D.historyTable(S, S.deductions).slice(-1)[0].c; st.clubOffer = ["2007/08"]; D.chooseClub(st, S, { c: me, f: "4-4-2", xi: [] }); D.startSeason(st, S);
+  const pre = D.scoutClubs(st, S); assert.ok(pre.every((x) => x.pos == null), "no positions before a game");
+  const names = pre.map((x) => S.clubs[x.club].name); assert.deepStrictEqual(names, names.slice().sort(), "by name before a game");
+  let g = 0; while (st.played.length < 9 && g++ < 200) { if (st.phase === "window") D.pass(st, S); else D.playMatch(st, S); }
+  while (st.phase !== "window" && g++ < 260) D.playMatch(st, S);
+  const t = D.table(S, st, st.played.length, S.deductions), place = new Map(t.map((r, i) => [r.c, i + 1]));
+  const list = D.scoutClubs(st, S);
+  assert.ok(list.length && list.every((x) => x.pos === place.get(x.club)), "each club's number is its place in the table now");
+  assert.ok(list.every((x, i) => i === 0 || x.pos > list[i - 1].pos), "in table order");
+  assert.ok(list.some((x) => x.pos !== D.historyTable(S, S.deductions).findIndex((r) => r.c === x.club) + 1), "not the real final table");
+});
 t("Scout a club: 2 respins for three of one club's cards, never your own club, never legends", () => {
   const S = G.seasons["2007/08"]; S.legends = S.legends || [];
   const st = D.newRun({ seed: "sc", mode: "classic", catalogue: [] });

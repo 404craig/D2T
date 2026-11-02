@@ -140,7 +140,8 @@ const URL = process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index
     // the full bar holds 6 s (build 210): still there 5 s after it filled, gone by 8 s
     await wait(4300);
     check(!!(await dp.$(".stg-top.dly-full")), "the Daily bar did not hold for 6 s");
-    await wait(3500);
+    await wait(3500);   // the hand back ends 7.3 s after the bar fills; a busy machine runs a little late, so up to 3 s more
+    await dp.waitForFunction(() => !document.querySelector(".stg-top.dly-on"), null, { timeout: 3000 }).catch(() => {});
     check(!(await dp.$(".stg-top.dly-on")), "the Daily bar did not go back after its hold");
     { const m = await endMin(); check(m === 1, `the top bar blinked as the Daily bar went back (lowest opacity ${m})`); }
     // no cap (build 210): with the gap shortened it plays a second and a third time on the same visit

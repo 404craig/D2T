@@ -511,7 +511,7 @@
   GAME.scout = (slot) => { const eng = GAME.eng(), ok = E.scout(eng, GAME.S(), slot); if (ok) { D2T.state.run.spun = ''; D2T.save(); } return ok; };
   GAME.rollTags = () => { const r = GAME.eng().roll; return r && r.tags ? r.tags : null; };
   // scout a club (Craig, 20 Oct): the season's clubs with cards to come, by final position, and the spend on one
-  GAME.scoutClubs = () => { const S = GAME.S(); return E.scoutClubs(GAME.eng(), S).map((x) => { const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { club: x.club, n: x.n, name, crest: c.crest, code: c.code }; }); };
+  GAME.scoutClubs = () => { const S = GAME.S(); return E.scoutClubs(GAME.eng(), S).map((x) => { const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { club: x.club, n: x.n, pos: x.pos, name, crest: c.crest, code: c.code }; }); };
   GAME.scoutClub = (c) => { const eng = GAME.eng(), ok = E.scoutClub(eng, GAME.S(), c); if (ok) { D2T.state.run.spun = ''; D2T.save(); } return ok; };
   GAME.scoutedClub = () => { const r = GAME.eng().roll; if (!r || r.scoutClub == null) return null; return GAME.S().clubs[r.scoutClub].name; };
   // During a Dare2Dream draft some shirts are empty: the rating is the average of the shirts filled so far.

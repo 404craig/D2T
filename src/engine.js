@@ -750,9 +750,13 @@ function scoutClubPool(st, S, c) { const d = scoutDate(st), all = cardPool(S, st
 function scoutClubs(st, S) {
   const d = scoutDate(st), count = new Map();
   for (const p of cardPool(S, st)) { const c = clubAt(p, d); if (c == null || c === st.club) continue; count.set(c, (count.get(c) || 0) + 1); }
-  let order = S.clubs.map((_, i) => i);
-  try { order = historyTable(S, S.deductions).map(row => row.c); } catch (e) { /* no table: club order */ }
-  return order.filter(c => count.has(c)).map(c => ({ club: c, n: count.get(c) }));
+  // in the league table as it stands in this run (Craig, 2 Nov, build 223: it was the real final table, and the number
+  // was the place in this list, which left your club out), each with its position; before a game is played the clubs
+  // go by name with no position
+  const played = (st.played || []).length;
+  let order = S.clubs.map((_, i) => i).sort((a, b) => (S.clubs[a].name < S.clubs[b].name ? -1 : 1)), pos = null;
+  if (played) { try { const t = table(S, st, played, S.deductions); order = t.map(row => row.c); pos = new Map(order.map((c, i) => [c, i + 1])); } catch (e) { /* no table: by name */ } }
+  return order.filter(c => count.has(c)).map(c => ({ club: c, n: count.get(c), pos: pos ? pos.get(c) : null }));
 }
 function scoutClub(st, S, c) {
   if (st.phase !== "window" || !st.roll || st.roll.window === "draft" || st.respins < RULES.scoutCost || c === st.club) return false;

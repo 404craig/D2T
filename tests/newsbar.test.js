@@ -28,8 +28,12 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
     });
     check(ok, `${w}x${h}: never reached the January window with its raid`);
     if (!ok) { await ctx.close(); continue; }
+    // from the moment it shows, the box never moves (Craig, 2 Nov, build 223: it came in about 15px low and snapped up)
+    await p.evaluate(() => { window.__nbTops = []; const t0 = performance.now(); const f = () => { const n = document.querySelector(".se-news"); if (n && !n.classList.contains("se-nb-wait")) window.__nbTops.push(n.getBoundingClientRect().top); if (performance.now() - t0 < 9000) requestAnimationFrame(f); }; requestAnimationFrame(f); });
     await p.waitForSelector(".se-news:not(.se-nb-wait)", { timeout: 15000 }).catch(() => {});
-    await wait(600);
+    await wait(2500);
+    const tops = await p.evaluate(() => window.__nbTops);
+    check(tops.length > 10 && Math.max(...tops) - Math.min(...tops) <= 1, `${w}x${h}: the news box moved after it appeared: ${tops.length ? Math.round(Math.min(...tops)) + " to " + Math.round(Math.max(...tops)) : "never seen"}`);
     const g = await p.evaluate(() => {
       const n = document.querySelector(".se-news"), f = document.querySelector(".tr-field"), b = document.querySelector(".sp-screen .game-bar");
       if (!n || !f || !b) return null;
