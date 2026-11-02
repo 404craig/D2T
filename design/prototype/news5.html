@@ -1,0 +1,45 @@
+<title>Transfer News Looks</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;0,600;0,800;1,900&display=swap">
+<style>
+/* Layout: one row per look (name and why on the left, the rumour and the done deal on the real screen on the right) */
+:root{--bg:#000;--fg:#fff;--soft:#BDBDC6;--muted:#8E8E99;--line:#26262C;--g:#12F06C;--phone:#151518;--font:'Exo 2',system-ui,sans-serif;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font)}
+.wrap{max-width:1100px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10px}
+.lead{color:var(--soft);font-size:16px;line-height:1.5;max-width:800px;margin:0 0 26px}.lead b{color:var(--fg)}
+.opt{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:22px;align-items:start;padding:22px 0;border-top:1px solid var(--line)}
+.opt h2{font:900 italic 21px/1.1 var(--font);text-transform:uppercase;margin:0 0 6px}.opt h2 span{color:var(--g)}
+.opt p{margin:0 0 8px;color:var(--soft);font-size:14.5px;line-height:1.5}.opt p b{color:var(--fg)}
+.like{font:800 11px var(--font);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pair figure{margin:0;min-width:0}.pair figcaption{font:800 11px var(--font);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.ph{border-radius:20px;padding:5px;background:var(--phone);box-shadow:0 0 0 1px #2A2A30}.ph img{display:block;width:100%;height:auto;border-radius:16px}
+.notes{max-width:800px;margin-top:30px;color:#CFCFD6;font-size:15px;line-height:1.5}
+.notes h2{font:900 italic 22px var(--font);text-transform:uppercase;color:var(--fg);margin:0 0 8px}.notes li{margin:0 0 8px}.notes b{color:var(--fg)}
+@media (max-width:700px){.opt{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+<h1>Transfer News, five new looks</h1>
+<p class="lead">Today's bar is a full-width <b>yellow</b> strip: the one colour on the screen that isn't the club's. These five bring it into line with the rest of the game. Each is placed into the <b>real squad screen</b> (Club X, pre-season), centred in the gap as now, showing a rumour and then the done deal. The words still type in letter by letter as today.</p>
+<div id="list"></div>
+<div class="notes"><h2>My view</h2><ul>
+<li><b>C</b> fits best: the shield and the three small shields use the game's own shapes, the buying club's crest says who it is at a glance, and the count becomes something you can see.</li>
+<li><b>B</b> is the boldest and matches the Daily bar, but a white pill on the squad screen may fight the Start button for attention.</li>
+<li><b>D</b> is the smallest change if you like today's bar and just want it in the club's colour.</li>
+<li>Whichever you pick, the deal moment can add one glint, as the other new animations do.</li>
+</ul></div>
+</div>
+<script>
+const O=[
+ ['now','Now · <span>Yellow strip</span>','Today','Full width, yellow, a black slanted tag and "0/3". It is the only yellow in a run, which is why it feels apart.'],
+ ['A','A · <span>Panel and tag</span>','Like the season-over panels and the mode tag','A dark rounded panel like the tiles and graph, the slanted <b>Transfer news</b> tag in the club colour (the same shape as the CLASSIC or CLUB X tag in the top bar), the headline in white, and <b>three dots</b> for the count, filled as players go (like the respin dots).'],
+ ['B','B · <span>White pill</span>','Like the Daily bar','A white pill the height of the Daily bar, with the <b>buying club\'s crest</b> on the left, "Transfer news · Rumour" or "Done deal" above the headline, and the count in a black chip in the club colour.'],
+ ['C','C · <span>Shield and crest</span>','Like the record shields','The buying club\'s crest on a <b>metallic shield</b> (the home shields\' finish), "Transfer news · Rumour" above the headline, and the count as <b>three small shields</b> that fill in the club colour. No box at all.'],
+ ['D','D · <span>Club-colour strip</span>','Today\'s bar, brought in','Today\'s layout kept, but in the <b>club\'s colour</b> instead of yellow, inset from the edges with rounded corners like the buttons.'],
+ ['E','E · <span>Headline</span>','Like the screen headings','No bar: a small kicker in the club colour, "Transfer news · Rumour · 0 of 3", over a <b>big white headline</b> like "Who comes in?", with the buying club\'s crest beside it.']
+];
+const L=document.getElementById('list');
+O.forEach(([id,t,like,why])=>{const el=document.createElement('section');el.className='opt';
+ el.innerHTML=`<div><h2>${t}</h2><div class="like">${like}</div><p>${why}</p></div><div class="pair"><figure><figcaption>Rumour</figcaption><div class="ph"><img src="news5/${id}_r.jpg" alt=""></div></figure><figure><figcaption>Done deal</figcaption><div class="ph"><img src="news5/${id}_d.jpg" alt=""></div></figure></div>`;L.appendChild(el);});
+</script>
