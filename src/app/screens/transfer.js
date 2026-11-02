@@ -274,7 +274,7 @@
             // measured again as the screen settles (the pitch grows into the room the tray leaves) and before each headline
             place(); const ro = window.ResizeObserver ? new ResizeObserver(place) : null; if (ro) { ro.observe(scr); ro.observe(field); ro.observe(gbar); }
             [80, 300, 700, 1200].forEach((ms) => timers.push(setTimeout(place, ms)));
-            const say = janNews.say; janNews.say = (...a) => { place(); return say(...a); };
+            const say = janNews.say; janNews.say = (...a) => { const r = say(...a); place(); return r; };   // placed with its headline in, before it is drawn
             const stop = janNews.stop; janNews.stop = () => { ro && ro.disconnect(); stop(); };
           } else { janNews.el.classList.add('se-news-flow'); hint.after(janNews.el); }
         }

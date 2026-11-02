@@ -461,7 +461,7 @@
 .se-nb-count { flex: none; display: flex; gap: 5px; }
 .se-nb-count i { width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; border: 2px solid #FFD500; background: transparent; opacity: .45; }
 .se-nb-count i.on { background: #FFD500; opacity: 1; }
-.se-nb-view { min-width: 0; overflow: hidden; }
+.se-nb-view { min-width: 0; overflow: hidden; min-height: 42px; }   /* two lines from the start, so the box never grows (and jumps) as its first headline lands (Craig, 2 Nov, build 223) */
 .se-nb-text { display: block; white-space: nowrap; font: 900 italic 20px/1.03 var(--font); text-transform: uppercase; color: #fff; max-width: 100%; }
 .se-nb-text .w { white-space: nowrap; }
 .se-nb-text i { font-style: inherit; opacity: 0; }
