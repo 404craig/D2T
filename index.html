@@ -1981,7 +1981,7 @@ D2T.start(); D2T.started = true;
 .se-nb-count { flex: none; display: flex; gap: 5px; }
 .se-nb-count i { width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; border: 2px solid #FFD500; background: transparent; opacity: .45; }
 .se-nb-count i.on { background: #FFD500; opacity: 1; }
-.se-nb-view { min-width: 0; overflow: hidden; }
+.se-nb-view { min-width: 0; overflow: hidden; min-height: 42px; }   /* two lines from the start, so the box never grows (and jumps) as its first headline lands (Craig, 2 Nov, build 223) */
 .se-nb-text { display: block; white-space: nowrap; font: 900 italic 20px/1.03 var(--font); text-transform: uppercase; color: #fff; max-width: 100%; }
 .se-nb-text .w { white-space: nowrap; }
 .se-nb-text i { font-style: inherit; opacity: 0; }
@@ -8923,7 +8923,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
             // measured again as the screen settles (the pitch grows into the room the tray leaves) and before each headline
             place(); const ro = window.ResizeObserver ? new ResizeObserver(place) : null; if (ro) { ro.observe(scr); ro.observe(field); ro.observe(gbar); }
             [80, 300, 700, 1200].forEach((ms) => timers.push(setTimeout(place, ms)));
-            const say = janNews.say; janNews.say = (...a) => { place(); return say(...a); };
+            const say = janNews.say; janNews.say = (...a) => { const r = say(...a); place(); return r; };   // placed with its headline in, before it is drawn
             const stop = janNews.stop; janNews.stop = () => { ro && ro.disconnect(); stop(); };
           } else { janNews.el.classList.add('se-news-flow'); hint.after(janNews.el); }
         }
