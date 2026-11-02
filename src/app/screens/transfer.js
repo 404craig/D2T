@@ -388,7 +388,7 @@
       function scoutClubSheet(clubs) {
         return new Promise((resolve) => {
           let done = false; const fin = (v) => { if (!done) { done = true; resolve(v); } };
-          const tile = (c, i) => `<button class="se-clubtile rs-club" type="button" data-c="${c.club}" aria-label="${D2T.esc(c.name)}, ${D2T.ordinal(i + 1)}"><em>${i + 1}</em>${c.crest ? `<img src="${c.crest}" alt="">` : `<b>${D2T.esc(c.name)}</b>`}<small>${D2T.esc(c.name)}</small></button>`;
+          const tile = (c) => `<button class="se-clubtile rs-club" type="button" data-c="${c.club}" aria-label="${D2T.esc(c.name)}${c.pos ? ', ' + D2T.ordinal(c.pos) : ''}">${c.pos ? `<em>${c.pos}</em>` : ''}${c.crest ? `<img src="${c.crest}" alt="">` : `<b>${D2T.esc(c.name)}</b>`}<small>${D2T.esc(c.name)}</small></button>`;
           const el = D2T.h(`<div><div class="se-clubgrid rs-clubs">${clubs.map(tile).join('')}</div></div>`);
           const sh = D2T.sheet({ title: titleWith('Scout a club', GAME.eng().respins, GAME.scoutCost()), body: el, onClose: () => fin(null) });
           tint(sh); sh.el.classList.add('se-scoutsheet', 'rs-sheet');

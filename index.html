@@ -3564,9 +3564,13 @@ function scoutClubPool(st, S, c) { const d = scoutDate(st), all = cardPool(S, st
 function scoutClubs(st, S) {
   const d = scoutDate(st), count = new Map();
   for (const p of cardPool(S, st)) { const c = clubAt(p, d); if (c == null || c === st.club) continue; count.set(c, (count.get(c) || 0) + 1); }
-  let order = S.clubs.map((_, i) => i);
-  try { order = historyTable(S, S.deductions).map(row => row.c); } catch (e) { /* no table: club order */ }
-  return order.filter(c => count.has(c)).map(c => ({ club: c, n: count.get(c) }));
+  // in the league table as it stands in this run (Craig, 2 Nov, build 223: it was the real final table, and the number
+  // was the place in this list, which left your club out), each with its position; before a game is played the clubs
+  // go by name with no position
+  const played = (st.played || []).length;
+  let order = S.clubs.map((_, i) => i).sort((a, b) => (S.clubs[a].name < S.clubs[b].name ? -1 : 1)), pos = null;
+  if (played) { try { const t = table(S, st, played, S.deductions); order = t.map(row => row.c); pos = new Map(order.map((c, i) => [c, i + 1])); } catch (e) { /* no table: by name */ } }
+  return order.filter(c => count.has(c)).map(c => ({ club: c, n: count.get(c), pos: pos ? pos.get(c) : null }));
 }
 function scoutClub(st, S, c) {
   if (st.phase !== "window" || !st.roll || st.roll.window === "draft" || st.respins < RULES.scoutCost || c === st.club) return false;
@@ -5118,7 +5122,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
   GAME.scout = (slot) => { const eng = GAME.eng(), ok = E.scout(eng, GAME.S(), slot); if (ok) { D2T.state.run.spun = ''; D2T.save(); } return ok; };
   GAME.rollTags = () => { const r = GAME.eng().roll; return r && r.tags ? r.tags : null; };
   // scout a club (Craig, 20 Oct): the season's clubs with cards to come, by final position, and the spend on one
-  GAME.scoutClubs = () => { const S = GAME.S(); return E.scoutClubs(GAME.eng(), S).map((x) => { const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { club: x.club, n: x.n, name, crest: c.crest, code: c.code }; }); };
+  GAME.scoutClubs = () => { const S = GAME.S(); return E.scoutClubs(GAME.eng(), S).map((x) => { const name = S.clubs[x.club].name, c = GAME.club(name) || {}; return { club: x.club, n: x.n, pos: x.pos, name, crest: c.crest, code: c.code }; }); };
   GAME.scoutClub = (c) => { const eng = GAME.eng(), ok = E.scoutClub(eng, GAME.S(), c); if (ok) { D2T.state.run.spun = ''; D2T.save(); } return ok; };
   GAME.scoutedClub = () => { const r = GAME.eng().roll; if (!r || r.scoutClub == null) return null; return GAME.S().clubs[r.scoutClub].name; };
   // During a Dare2Dream draft some shirts are empty: the rating is the average of the shirts filled so far.
@@ -9033,7 +9037,7 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
       function scoutClubSheet(clubs) {
         return new Promise((resolve) => {
           let done = false; const fin = (v) => { if (!done) { done = true; resolve(v); } };
-          const tile = (c, i) => `<button class="se-clubtile rs-club" type="button" data-c="${c.club}" aria-label="${D2T.esc(c.name)}, ${D2T.ordinal(i + 1)}"><em>${i + 1}</em>${c.crest ? `<img src="${c.crest}" alt="">` : `<b>${D2T.esc(c.name)}</b>`}<small>${D2T.esc(c.name)}</small></button>`;
+          const tile = (c) => `<button class="se-clubtile rs-club" type="button" data-c="${c.club}" aria-label="${D2T.esc(c.name)}${c.pos ? ', ' + D2T.ordinal(c.pos) : ''}">${c.pos ? `<em>${c.pos}</em>` : ''}${c.crest ? `<img src="${c.crest}" alt="">` : `<b>${D2T.esc(c.name)}</b>`}<small>${D2T.esc(c.name)}</small></button>`;
           const el = D2T.h(`<div><div class="se-clubgrid rs-clubs">${clubs.map(tile).join('')}</div></div>`);
           const sh = D2T.sheet({ title: titleWith('Scout a club', GAME.eng().respins, GAME.scoutCost()), body: el, onClose: () => fin(null) });
           tint(sh); sh.el.classList.add('se-scoutsheet', 'rs-sheet');
