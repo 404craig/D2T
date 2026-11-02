@@ -9854,8 +9854,10 @@ root.D2TSound = { play, tick, tease, crowd, setMuted, isMuted: () => muted, unlo
         root.appendChild(el); root.classList.add('se-has-news');
         const place = () => SE.placeNews(el, root, pitch, bar);
         place();
-        const ro = window.ResizeObserver ? new ResizeObserver(place) : null; ro && ro.observe(root);
-        return { el, say: nb.say, stop() { nb.stop(); ro && ro.disconnect(); } };
+        // measured again as the box takes its headline (it grows) and whenever the screen or the box changes size
+        const ro = window.ResizeObserver ? new ResizeObserver(place) : null; if (ro) { ro.observe(root); ro.observe(el); }
+        const say = (...x) => { nb.say(...x); place(); };
+        return { el, say, stop() { nb.stop(); ro && ro.disconnect(); } };
       }
       // the end state after a refresh or with reduced motion: the last deal, all three counted
       function lastDeal(list) { const x = list[list.length - 1]; ticker.say(SE.raidWords(list.length - 1).deal(x.club, x.name), { n: list.length, still: true, crest: x.crest, kind: 'deal' }); }   // hoisted: called from the refresh branch above
