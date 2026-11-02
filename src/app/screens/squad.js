@@ -343,17 +343,15 @@
       function makeNews() {
         const nb = SE.newsBar({ count: true }), el = nb.el, pitch = body.querySelector('.se-pitch');
         root.appendChild(el); root.classList.add('se-has-news');
-        const place = () => {
-          if (!el.isConnected) return;
-          const rr = root.getBoundingClientRect(), pb = pitch.getBoundingClientRect().bottom, bt = bar.getBoundingClientRect().top;
-          el.style.top = `${Math.round((pb + bt) / 2 - rr.top - (el.offsetHeight || 50) / 2)}px`;
-        };
+        const place = () => SE.placeNews(el, root, pitch, bar);
         place();
-        const ro = window.ResizeObserver ? new ResizeObserver(place) : null; ro && ro.observe(root);
-        return { el, say: nb.say, stop() { nb.stop(); ro && ro.disconnect(); } };
+        // measured again as the box takes its headline (it grows) and whenever the screen or the box changes size
+        const ro = window.ResizeObserver ? new ResizeObserver(place) : null; if (ro) { ro.observe(root); ro.observe(el); }
+        const say = (...x) => { nb.say(...x); place(); };
+        return { el, say, stop() { nb.stop(); ro && ro.disconnect(); } };
       }
       // the end state after a refresh or with reduced motion: the last deal, all three counted
-      function lastDeal(list) { const x = list[list.length - 1]; ticker.say(SE.raidWords(list.length - 1).deal(x.club, x.name), { n: list.length, still: true }); }   // hoisted: called from the refresh branch above
+      function lastDeal(list) { const x = list[list.length - 1]; ticker.say(SE.raidWords(list.length - 1).deal(x.club, x.name), { n: list.length, still: true, crest: x.crest, kind: 'deal' }); }   // hoisted: called from the refresh branch above
       function poachSummary(list) {
         const el = D2T.h(`<div class="se-poach-sum"><p class="se-note">Other sides came in over the summer. Fill the gaps with your rolls.</p>
           <ul>${list.map((x) => `<li>${x.crest ? `<img src="${x.crest}" alt="">` : ''}<b>${D2T.esc(x.name)}</b><span>to ${D2T.esc(x.club)}</span></li>`).join('')}</ul>
@@ -385,8 +383,8 @@
           const words = SE.raidWords(k);
           take = SE.raidTake({
             pitch, slotsEl, slot: x.slot, crest: x.crestLight || x.crest, dark: x.dark,   // the club's own crest on the yellow disc (black for a yellow crest)
-            onStart: () => ticker.say(words.rumour(x.club), { n: done, dim: true }),    // the rumour as the sweep starts
-            onLanded: () => { done++; ticker.say(words.deal(x.club, x.name), { n: done }); },   // the deal as the badge lands
+            onStart: () => ticker.say(words.rumour(x.club), { n: done, crest: x.crest, kind: 'rumour' }),    // the rumour as the sweep starts
+            onLanded: () => { done++; ticker.say(words.deal(x.club, x.name), { n: done, crest: x.crest, kind: 'deal' }); },   // the deal as the badge lands
             onEmpty: () => { sl.innerHTML = SE.emptyShirt(pitchSlots[x.slot].pos, PITCH_W, x); setRating(GAME.rating()); }
           });
           await take.done; take = null;
