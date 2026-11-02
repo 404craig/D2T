@@ -450,19 +450,23 @@
 .se-pc-rival.rd-dark { background: #0A0A0A; box-shadow: 0 8px 24px rgba(0,0,0,.6), 0 0 0 3px #FFD500; }   /* a mostly yellow crest (clubs.json darkDisc) */
 .se-pc-rival img { width: 44px; height: 44px; object-fit: contain; }
 .se-pc-line { position: absolute; width: 3px; border-radius: 2px; background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.3)); transform-origin: 50% 0; }
-/* the Transfer News bar, centred in the space between the pitch and the bottom bar: the pill, then one headline */
-/* the Transfer News bar (Craig, 21 Oct; deadline-day yellow and black, SE.newsBar): centred between the pitch and the
-   bottom bar on the squad (placed by squad.js), in the hint line's place on the transfer screen */
-.se-news { position: absolute; left: 0; right: 0; top: 0; z-index: 6; height: clamp(50px, 15vw, 66px);   /* scales with the phone (Craig, 21 Oct: too small on an iPhone 16 Pro) */ display: flex; align-items: stretch; background: #FFD500; color: #0A0A0A; overflow: hidden; }
-.se-nb-tag { flex: none; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 2px; padding: 0 20px 0 14px; background: #0A0A0A; color: #FFD500; font: 900 italic clamp(11px, 3.4vw, 14px)/1 var(--font); letter-spacing: .12em; text-transform: uppercase; clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%); }
-.se-nb-view { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; padding-left: 8px; overflow: hidden; }
-.se-nb-text { display: block; white-space: nowrap; font: 900 italic clamp(11px, 3.7vw, 15.5px)/1.25 var(--font); text-transform: uppercase; letter-spacing: .08em; max-width: 100%; }
+/* the Transfer News bar (Craig, 2 Nov, build 222; option F in design/prototype/news5.html, SE.newsBar): a dark box inset
+   16px, centred between the pitch and the bottom bar on the squad (squad.js) and before the January raid (transfer.js) */
+.se-news { position: absolute; left: 16px; right: 16px; top: 0; z-index: 6; display: flex; gap: 12px; align-items: center; padding: 11px 14px 13px; background: #111114; border: 1px solid #26262C; border-radius: 16px; color: #fff; overflow: hidden; }
+.se-nb-crest { flex: none; width: 44px; height: 44px; object-fit: contain; }
+.se-nb-col { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.se-nb-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.se-nb-tag { font: 800 11px/1.2 var(--font); letter-spacing: .16em; text-transform: uppercase; color: #FFD500; white-space: nowrap; }
+.se-nb-kind { color: #8E8E99; }
+.se-nb-count { flex: none; display: flex; gap: 5px; }
+.se-nb-count i { width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; border: 2px solid #FFD500; background: transparent; opacity: .45; }
+.se-nb-count i.on { background: #FFD500; opacity: 1; }
+.se-nb-view { min-width: 0; overflow: hidden; }
+.se-nb-text { display: block; white-space: nowrap; font: 900 italic 20px/1.03 var(--font); text-transform: uppercase; color: #fff; max-width: 100%; }
 .se-nb-text .w { white-space: nowrap; }
 .se-nb-text i { font-style: inherit; opacity: 0; }
 .se-nb-text i.on { opacity: 1; }
-.se-nb-count { flex: none; display: flex; align-items: center; padding: 0 12px; font: 900 italic clamp(13px, 4vw, 17px)/1 var(--font); }
-.se-nb-count.is-dim { opacity: .35; }
-.se-news.se-news-flow { position: relative; z-index: 2; margin: 6px 0 4px; }
+.se-news.se-news-flow { position: relative; left: auto; right: auto; z-index: 2; margin: 6px 0 4px; }
 .se-has-news .se-gone { visibility: hidden; }
 /* the summary sheet */
 .se-poach-sum .se-note { margin: 0 0 10px; }

@@ -270,7 +270,7 @@
           const scr = api.el, gbar = scr.querySelector('.game-bar');
           if (scr.classList.contains('tr-preraid') && gbar && field) {
             const el = janNews.el; scr.appendChild(el);
-            const place = () => { if (!el.isConnected) return; const pe = field.querySelector('.tr-field') || field.querySelector('.se-pitch') || field, rr = scr.getBoundingClientRect(), pb = pe.getBoundingClientRect().bottom, bt = gbar.getBoundingClientRect().top; el.style.top = `${Math.round((pb + bt) / 2 - rr.top - (el.offsetHeight || 50) / 2)}px`; };
+            const place = () => SE.placeNews(el, scr, field.querySelector('.tr-field') || field.querySelector('.se-pitch') || field, gbar);
             // measured again as the screen settles (the pitch grows into the room the tray leaves) and before each headline
             place(); const ro = window.ResizeObserver ? new ResizeObserver(place) : null; if (ro) { ro.observe(scr); ro.observe(field); ro.observe(gbar); }
             [80, 300, 700, 1200].forEach((ms) => timers.push(setTimeout(place, ms)));
@@ -283,8 +283,8 @@
         if (!alive) return;
         janTake = SE.raidTake({
           pitch: pitchEl, slotsEl, slot: jr.slot, crest: jr.crestLight || jr.crest, dark: jr.dark,
-          onStart: () => janNews && janNews.say(words.rumour(jr.club)),
-          onLanded: () => janNews && janNews.say(words.deal(jr.club, jr.name)),
+          onStart: () => janNews && janNews.say(words.rumour(jr.club), { crest: jr.crest, kind: 'rumour' }),
+          onLanded: () => janNews && janNews.say(words.deal(jr.club, jr.name), { crest: jr.crest, kind: 'deal' }),
           onEmpty: () => { janBack = null; drawPitch(lastBest); }
         });
         await janTake.done; janTake = null; janBack = null;

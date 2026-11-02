@@ -410,23 +410,38 @@
     return { done, cancel };
   };
 
-  // ---------- the Transfer News bar (Craig, 21 Oct; option A in design/prototype/raid-deadline.html) ----------
-  // Full width, 50px, yellow: a black TRANSFER / NEWS tag on the left, the headline in black capitals always on two lines
-  // broken at the word gap that makes them most even (never mid-word, never inside a name: names come with non-breaking
-  // spaces), printed letter by letter once the lines are laid out (28 ms a letter, 60 at a word gap, 200 ms after the
-  // change; reduced motion: at once), stepping down to 10px if a line still overflows; on the right the count "n/3"
-  // (dimmed while the hunt is on), none when `count` is false. say(text, { n, dim }).
+  // ---------- the Transfer News bar (Craig, 21 Oct; option F since 2 Nov, build 222, design/prototype/news5.html) ----------
+  // A dark box inset 16px: the buying club's crest (44px), then TRANSFER NEWS in the news yellow with " · Rumour" or
+  // " · Done deal" in grey, the count as three dots on the right (none when `count` is false: January's one raid), and
+  // the headline under it in white capitals, always on two lines broken at the word gap that makes them most even (never
+  // mid-word, never inside a name: names come with non-breaking spaces), stepping down to 90% then 80% if a line
+  // overflows, printed letter by letter (28 ms a letter, 60 at a word gap, 200 ms after the change; reduced motion: at
+  // once). say(text, { n, crest, kind: 'rumour' | 'deal', still }).
   SE.newsBar = ({ count = true } = {}) => {
-    // hidden until its first headline; then it wipes in left to right over a second (Craig, 25 Oct), the black tag
-    // first, and that headline prints once the wipe is done; later headlines never wipe; `still` (a refresh's last deal)
-    // and reduced motion show it at once
-    const el = D2T.h(`<div class="se-news se-nb-wait" role="status" aria-label="Transfer news"><b class="se-nb-tag"><span>Transfer</span><span>News</span></b><div class="se-nb-view"><span class="se-nb-text"></span></div>${count ? '<b class="se-nb-count"></b>' : ''}</div>`);
-    const tx = el.querySelector('.se-nb-text'), ct = el.querySelector('.se-nb-count');
-    let timers = [], shown = false;
+    // hidden until its first headline; then it wipes in left to right over a second (Craig, 25 Oct), and that headline
+    // prints once the wipe is done; later headlines never wipe; `still` (a refresh's last deal) and reduced motion show it
+    // at once; a deal fills the next dot with a pop and one glint across the box
+    const el = D2T.h(`<div class="se-news se-nb-wait" role="status" aria-label="Transfer news"><img class="se-nb-crest" alt="" hidden><div class="se-nb-col">
+      <div class="se-nb-top"><b class="se-nb-tag">Transfer news<span class="se-nb-kind"></span></b>${count ? '<span class="se-nb-count" aria-hidden="true"><i></i><i></i><i></i></span>' : ''}</div>
+      <div class="se-nb-view"><span class="se-nb-text"></span></div></div></div>`);
+    const tx = el.querySelector('.se-nb-text'), ct = el.querySelector('.se-nb-count'), crestEl = el.querySelector('.se-nb-crest'), kindEl = el.querySelector('.se-nb-kind');
+    let timers = [], shown = false, filled = 0;
     const clear = () => { timers.forEach(clearTimeout); timers = []; };
     const say = (text, o = {}) => {
       clear();
-      if (ct) { ct.textContent = `${o.n == null ? 0 : o.n}/${o.of == null ? 3 : o.of}`; ct.classList.toggle('is-dim', !!o.dim); }
+      if (o.crest) { crestEl.src = o.crest; crestEl.hidden = false; }
+      const kind = o.kind || (o.dim ? 'rumour' : 'deal');
+      kindEl.textContent = kind === 'rumour' ? ' · Rumour' : ' · Done deal';
+      const n = o.n == null ? 0 : o.n, quiet = !!o.still || D2T.reduced();
+      if (ct) {
+        [...ct.children].forEach((d, i) => d.classList.toggle('on', i < n));
+        if (n > filled && !quiet && shown) {
+          const d = ct.children[n - 1];
+          if (d) d.animate([{ transform: 'scale(1.4)' }, { transform: 'scale(1)' }], { duration: 300, easing: 'cubic-bezier(.34,1.56,.64,1)' });
+          if (D2T.mo && D2T.mo.glint) D2T.mo.glint(el, { dur: 600 });
+        }
+        filled = n;
+      }
       tx.style.fontSize = ''; tx.style.letterSpacing = '';
       tx.innerHTML = String(text).split(' ').map((w) => `<span class="w">${[...w].map((ch) => `<i>${D2T.esc(ch)}</i>`).join('')}</span>`).join(' ');
       const fit = () => {
@@ -438,22 +453,32 @@
         ws[best].before(document.createElement('br'));
         return Math.max(...ws.map((w) => w.getBoundingClientRect().right)) - tx.parentNode.getBoundingClientRect().right;
       };
-      // too wide for two lines at 11px: 10px, then 9px with the letter-spacing eased (320px phones)
-      // the size follows the phone (CSS clamp); too wide for two lines: 90% of it, then 80% with the letter-spacing eased
-      const base = parseFloat(getComputedStyle(tx).fontSize) || 11;
-      if (fit() > 0) { tx.style.fontSize = `${(base * 0.9).toFixed(1)}px`; if (fit() > 0) { tx.style.fontSize = `${(base * 0.8).toFixed(1)}px`; tx.style.letterSpacing = '.04em'; fit(); } } else tx.style.letterSpacing = '';
+      // too wide for two lines: 90% of the size, then 80%, and on in steps until it fits (the longest headlines on a 320px
+      // phone, "Nottingham Forest" with a long name, need about 55%), never under 10px
+      const base = parseFloat(getComputedStyle(tx).fontSize) || 20;
+      for (const f of [0.9, 0.8, 0.72, 0.65, 0.58, 0.52]) { if (fit() <= 0) break; tx.style.fontSize = `${Math.max(10, base * f).toFixed(1)}px`; if (f <= 0.8) tx.style.letterSpacing = '-.01em'; }
+      fit();
       const cs = [...tx.querySelectorAll('i')];
       let wait = 200;
       if (!shown) {
         shown = true; el.classList.remove('se-nb-wait');
-        if (!o.still && !D2T.reduced()) { el.animate([{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 1000, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' }); wait = 1000; }
+        if (!quiet) { el.animate([{ clipPath: 'inset(0 100% 0 0 round 16px)' }, { clipPath: 'inset(0 0 0 0 round 16px)' }], { duration: 1000, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' }); wait = 1000; }
       }
-      if (D2T.reduced() || o.still) { cs.forEach((c) => c.classList.add('on')); return; }
+      if (quiet) { cs.forEach((c) => c.classList.add('on')); return; }
       let k = 0;
       const type = () => { if (k >= cs.length || !el.isConnected) return; cs[k].classList.add('on'); const gap = cs[k + 1] && cs[k + 1].parentNode !== cs[k].parentNode; k++; timers.push(setTimeout(type, gap ? 60 : 28)); };
       timers.push(setTimeout(type, wait));
     };
     return { el, say, stop: clear };
+  };
+  // The box sits centred in the gap between the pitch and the bottom bar; where the gap is shorter than the box (it is
+  // taller than the old strip, build 222) the pitch gives up the room, never the box (Craig: 10px above and below at least)
+  SE.placeNews = (el, frame, pitchEl, barEl) => {
+    if (!el.isConnected || !pitchEl || !barEl) return;
+    const h = el.offsetHeight || 80, need = h + 20, pr = pitchEl.getBoundingClientRect(), gap = barEl.getBoundingClientRect().top - pr.bottom;
+    if (gap < need - 0.5 && pr.height > 200) { pitchEl.style.maxHeight = `${Math.floor(pr.height - (need - gap))}px`; pitchEl.classList.add('se-gave'); }
+    const rr = frame.getBoundingClientRect(), pb = pitchEl.getBoundingClientRect().bottom, bt = barEl.getBoundingClientRect().top;
+    el.style.top = `${Math.round((pb + bt) / 2 - rr.top - h / 2)}px`;
   };
   // the headlines: {club} the buying club, {you} your club's name, {surname} everything after his first name; a rumour as
   // the sweep starts, the deal as the badge lands; the variants cycle from a seeded start so the same never comes twice
