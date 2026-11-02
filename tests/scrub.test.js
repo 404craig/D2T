@@ -71,6 +71,12 @@ const ord = (n) => n + (["th", "st", "nd", "rd"][((n % 100) - 20) % 10] || ["th"
   b = await bub(); await up(); s = await state();
   check(!b.on && s.scrub === "0", "an upright drag scrubbed: " + JSON.stringify(s));
   check(s.y > y0 + 40, `an upright drag on the graph did not scroll the page (${y0} -> ${s.y})`);
+  // Share keeps the Season over sheet open (Craig, 2 Nov, build 223: back from WhatsApp it and its peek bar were gone)
+  await p.evaluate(() => { navigator.share = () => Promise.resolve(); navigator.canShare = () => true; });
+  await p.evaluate(() => document.querySelector(".end-peek") && document.querySelector(".end-peek").click()); await wait(700);
+  check(!!(await p.$(".end-sheet.open")), "the Season over sheet did not open from its peek bar");
+  await p.evaluate(() => document.querySelector('.end-sheet [data-k="share"]').click()); await wait(900);
+  check(!!(await p.$(".end-sheet.open")), "Share closed the Season over sheet, leaving no way home");
   check(!errs.length, "page errors: " + errs.join(" | "));
   await browser.close();
   if (fails) { console.log(`${fails} check(s) failed`); process.exit(1); }
