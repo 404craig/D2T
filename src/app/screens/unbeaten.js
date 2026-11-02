@@ -238,7 +238,9 @@
     const career = [];
     (G.careers || []).forEach((k, i) => {
       if (name[i] == null) return;
-      const club = Object.entries(apps[i]).sort((x, y) => y[1] - x[1])[0][0];
+      // his shirt: the club he scored most for (most games if he never scored), Craig's calls winning, as in Goal Rush
+      // (`sh`, build-data.py; Craig, 2 Nov: Declan Rice was in West Ham's by most games); most games when the data has none
+      const club = k.sh || Object.entries(apps[i]).sort((x, y) => y[1] - x[1])[0][0];
       career.push({ name: name[i], club, a: k.a, g: k.g, as: as[i], f: k.f, l: k.l, nat: nat[i] });
     });
     const club = (G.clubSeasons || []).map((c) => ({ club: c.club, season: c.season, pts: c.pts, w: c.w }));

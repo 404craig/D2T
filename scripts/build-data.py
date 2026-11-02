@@ -352,6 +352,13 @@ def main():
         g433[pos].append([k["n"], k["s"], club, k["g"]])
     for pos in g433: g433[pos].sort(key=lambda x: (-x[3], x[0]))
     game["g433"] = g433
+    # The same shirt on every career card (Craig, 2 Nov: Unbeaten Run had Declan Rice in West Ham's, by most games, while
+    # Goal Rush had him in Arsenal's): where he scored most, most games if he never scored, Craig's calls winning
+    for pid, i in cidx.items():
+        k = g4.get(pid)
+        if not k or not k["ca"]: continue
+        club = max((k["cg"] if k["g"] > 0 else k["ca"]).items(), key=lambda x: (x[1], k["ca"][x[0]], x[0]))[0]
+        game["careers"][i]["sh"] = SHIRTS.get(k["n"], club)
     career = defaultdict(int)   # Premier League appearances before the current season, per person
     for season in sorted(by_season):
         table = tables[season]
