@@ -487,7 +487,10 @@
   // the sweep starts, the deal as the badge lands; the variants cycle from a seeded start so the same never comes twice
   // in a row; names never break across the two lines (non-breaking spaces)
   const NB = (t) => String(t).replace(/ /g, ' ');
-  const RUMOURS = [(c, y) => `${c} are eyeing a ${y} star`, (c, y) => `${c} scouts watching ${y} closely`, (c, y) => `${c} plot a raid on ${y}`, (c, y) => `${c} make an enquiry to ${y}`];
+  // "an Ipswich star", "an Arsenal star", "a Derby star" (Craig, 3 Nov, build 224): an before a vowel sound, so not before
+  // "Uni..." or "Eu..." (a United star, a Europa star), which start with a "you"
+  const aOrAn = (y) => { const w = String(y).replace(/\u00a0/g, ' ').trim(); return /^[aeio]/i.test(w) || (/^u/i.test(w) && !/^u(ni|ra|re|ri|ro|s|t)/i.test(w)) ? (/^eu/i.test(w) ? 'a' : 'an') : 'a'; };
+  const RUMOURS = [(c, y) => `${c} are eyeing ${aOrAn(y)} ${y} star`, (c, y) => `${c} scouts watching ${y} closely`, (c, y) => `${c} plot a raid on ${y}`, (c, y) => `${c} make an enquiry to ${y}`];
   const DEALS = [(c, y, p) => `${c} sign ${p} for an undisclosed fee`, (c, y, p) => `${p} leaves ${y} for ${c}`, (c, y, p) => `${c} snap up ${y}'s ${p}`];
   const hashOf = (str) => { let h = 0; for (const ch of String(str)) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return h; };
   SE.raidWords = (k = 0) => {
