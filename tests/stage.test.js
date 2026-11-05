@@ -180,6 +180,32 @@ const URL = process.env.D2T_URL || "file://" + path.join(__dirname, "..", "index
   await small.screenshot({ path: path.join(OUT, "75-stage-small.png") });
   await small.close();
 
+  // ---------- Safari's double bottom bar (Craig, 5 Nov, build 225) ----------
+  // An iPhone 16 (393 x 852) with Safari's address bar and its toolbar both showing has about 694px of page, 59 of them
+  // the Dynamic Island's inset; Chromium has no inset, so 393 x 635 gives home the same room. On every slide the art
+  // must clear the top bar and the game's name, and the shields, dots and button must not overlap (the art's scale
+  // was read from the Daily slide's bounding rect while it was turned on the wheel, so it stayed at 1 whenever the
+  // box was short and the card sat over the top bar and the name)
+  for (const [w, h] of [[393, 635], [375, 667]]) {
+    const p = await open({ viewport: { width: w, height: h } });
+    await p.evaluate(() => { window.D2T.state.dailyNudge = { off: true }; window.D2T.save(); });
+    await p.keyboard.press("ArrowLeft"); await wait(1200);
+    for (let k = 0; k < 6; k++) {
+      const m = await p.evaluate(() => {
+        const on = [...document.querySelectorAll(".stg-dots i")].findIndex((d) => d.classList.contains("on")), sl = document.querySelectorAll(".stg-sl")[on];
+        const R = (e) => e.getBoundingClientRect(), top = R(document.querySelector(".stg-top")), name = R(sl.querySelector(".stg-gn")), st = R(sl.querySelector(".stg-st") || sl.querySelector(".stg-tbb")), dots = R(document.querySelector(".stg-dots")), bar = R(document.querySelector(".stg-bar"));
+        const parts = [...sl.querySelectorAll(".stg-artin > *, .stg-artin > * > *")].filter((e) => !e.classList.contains("d2t-shine") && parseFloat(getComputedStyle(e).opacity) > 0.1).map(R).filter((r) => r.width > 0 && r.height > 0);
+        return { id: sl.dataset.id, artTop: Math.min(...parts.map((r) => r.top)), artBot: Math.max(...parts.map((r) => r.bottom)), topBot: top.bottom, nameTop: name.top, stBot: st.bottom, dotsTop: dots.top, dotsBot: dots.bottom, barTop: bar.top, barBot: bar.bottom, as: getComputedStyle(sl).getPropertyValue("--as").trim() };
+      });
+      check(m.artTop >= m.topBot - 2, `${w}x${h} ${m.id}: the art (top ${Math.round(m.artTop)}) overlaps the top bar (bottom ${Math.round(m.topBot)}), --as ${m.as}`);
+      check(m.artBot <= m.nameTop + 4, `${w}x${h} ${m.id}: the art (bottom ${Math.round(m.artBot)}) covers the game's name (top ${Math.round(m.nameTop)}), --as ${m.as}`);
+      check(m.stBot <= m.dotsTop + 2 && m.dotsBot <= m.barTop && m.barBot <= h, `${w}x${h} ${m.id}: the shields, dots and button overlap`);
+      if (k === 0) await p.screenshot({ path: path.join(OUT, `76-stage-${w}x${h}.png`) });
+      await p.click(".stg-sw.r"); await wait(1100);
+    }
+    await p.close();
+  }
+
   await browser.close();
   const all = fails.concat(errors);
   if (all.length) { console.log("FAIL\n" + all.join("\n")); process.exit(1); }

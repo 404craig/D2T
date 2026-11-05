@@ -160,11 +160,19 @@
 
       // the art is drawn for a 300px box and scaled to the room the phone has
       // (every read first, then the writes, so mounting lays the page out once; Fable's review, 30 Oct)
+      // The box's height is its layout height (offsetHeight), never its bounding rect (Craig, 5 Nov, build 225: with
+      // Safari's double bottom bar on his iPhone 16 the Daily's card sat at full size over the top bar and the game's
+      // name; the slide measured is the Daily's, and once the wheel rests on Classic it is turned 24 degrees, so its
+      // rect was the box plus sin(24) x the width, about 160px, and the 700 ms re-read took the art back to full size
+      // whenever the box was short; a box of 300 or more read 1 either way, which is why full-height phones never
+      // showed it). Each slide takes its own scale from its own box (a two-line headline, Goal Rush's, leaves its box
+      // 34px shorter than the others'). A reading of 0, before iOS has settled the screen, is skipped and taken again
+      // at 700 ms.
       let W = el.clientWidth * 0.85;
       const fit = () => {
-        const a = SL[0].querySelector('.stg-art'), r = a.getBoundingClientRect(), er = el.getBoundingClientRect(), s = Math.min(1, (r.height || 300) / 300);
+        const a = SL[0].querySelector('.stg-art'), er = el.getBoundingClientRect(), boxes = SL.map((s) => s.querySelector('.stg-art').offsetHeight);
         W = er.width * 0.85;
-        el.style.setProperty('--as', s.toFixed(3));
+        SL.forEach((s, i) => { if (boxes[i] > 0) s.style.setProperty('--as', Math.min(1, boxes[i] / 300).toFixed(3)); });
         // the round arrows at the art's height; a reading taken before iOS has settled the screen (the art 0 tall) is never
         // used, and it is read again once the page settles and whenever the stage changes size (Craig, 31 Oct, build 200:
         // on his iPhone they had gone, placed under the top bar by such a reading)
