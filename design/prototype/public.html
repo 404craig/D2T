@@ -1,0 +1,76 @@
+<title>Public Version Look</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;0,600;0,800;1,900&display=swap">
+<style>
+/* Layout: two toggles at the top (version, then the crest replacement), the eight screens below in a grid, notes at the foot */
+:root{--bg:#000;--fg:#fff;--soft:#BDBDC6;--muted:#8E8E99;--line:#26262C;--g:#12F06C;--phone:#151518;--font:'Exo 2',system-ui,sans-serif;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1240px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10px;text-wrap:balance}
+.lead{color:var(--soft);font-size:16px;line-height:1.5;max-width:860px;margin:0 0 18px}.lead b{color:var(--fg)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
+.seg{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.seg > span{font:800 11px var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.seg button{min-height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:#0E0E10;color:var(--fg);font:800 13px var(--font);letter-spacing:.04em;cursor:pointer;display:flex;align-items:center;gap:8px}
+.seg button.on{border-color:var(--g);color:var(--g)}
+.seg button:disabled{opacity:.35;cursor:default}
+.seg button img{width:26px;height:26px}
+.seg button:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+.marks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:22px 0 6px}
+.mk{border:1px solid var(--line);border-radius:16px;padding:12px;background:#0B0B0D;min-width:0;cursor:pointer}
+.mk.on{border-color:var(--g)}
+.mk h3{margin:0 0 4px;font:900 italic 17px var(--font);text-transform:uppercase}.mk h3 span{color:var(--g)}
+.mk p{margin:0 0 10px;color:var(--soft);font-size:13.5px;line-height:1.45}
+.mk .row{display:flex;flex-wrap:wrap;gap:6px}.mk .row img{width:40px;height:40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px 18px;margin-top:22px}
+.sc{min-width:0}.sc h2{font:800 11px var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 7px}
+.sc h2 b{color:var(--fg);font-weight:800}
+.ph{border-radius:28px;padding:6px;background:var(--phone);box-shadow:0 0 0 1px #2A2A30}.ph img{display:block;width:100%;height:auto;border-radius:23px;background:#000}
+.ph.sq{border-radius:14px}.ph.sq img{border-radius:9px}
+.notes{max-width:860px;margin-top:38px;color:#CFCFD6;font-size:15px;line-height:1.5}
+.notes h2{font:900 italic 22px var(--font);text-transform:uppercase;color:var(--fg);margin:22px 0 8px}.notes li{margin:0 0 8px}.notes b{color:var(--fg)}
+@media (max-width:700px){.marks{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+<h1>DROP2TOP without licences</h1>
+<p class="lead">How a public App Store and Play version could look with <b>no club crests and no real kits</b>, like Golazo: real player and club names, club colours, and all our own art kept. Every screen is the <b>real game (build 225)</b> with the crests swapped out by the game's own data, so each mark is drawn in that club's colours. Switch between the family version and the public one, and between the three replacements.</p>
+<div class="bar">
+ <div class="seg" role="group" aria-label="Version"><span>Version</span><button id="v-fam" class="on" data-v="fam">Family</button><button id="v-pub" data-v="pub">Public</button></div>
+ <div class="seg" role="group" aria-label="Crest replacement"><span>In place of crests</span><button id="o-A" data-o="A" disabled>A · Strips</button><button id="o-B" data-o="B" disabled>B · Roundel</button><button id="o-C" data-o="C" disabled>C · Badge</button></div>
+</div>
+<div class="marks" id="marks"></div>
+<div class="grid" id="grid"></div>
+<div class="notes">
+<h2>What changes in the public version</h2><ul>
+<li><b>Gone:</b> every club crest (cards, pitch cards, shirts, sheets, share images, the faded crest behind screens, home, tables) and the crest plate on the Goal Rush and Unbeaten shirts.</li>
+<li><b>Kept:</b> real player names and stats, club names as plain text, club colours, the card levels, the layout, and all our own art: the D2T logo and emblem, the Club X badge, the Goal Rush ball and the Unbeaten mark.</li>
+<li>The shirts' patterns are already our own generic set (stripes, halves, hoops), not real kits. On the public version they lose their crest plate and stay plain.</li>
+</ul>
+<h2>The three options</h2><ul>
+<li><b>A · Strips</b> is the closest to Golazo and the quietest, but clubs with the same colours look identical: Man Utd, Bournemouth and Swindon are all red and white; Derby, Fulham and Newcastle all white and black; Barnsley and Southampton too.</li>
+<li><b>B · Roundel</b> is the clearest: every club's 3-letter code is different (MUN, ARS, WHU), so no two clubs ever look the same, even at the tiny size in tables. It reads more as a sticker than a badge.</li>
+<li><b>C · Badge</b> looks most like a football badge without copying any real one: the same drawn shield for every club, in its colours, with its 3-letter code. (With two-letter initials six pairs clashed, like Blackburn, Brentford and Brighton, so it uses the codes.)</li>
+<li>My pick is <b>C</b> for the look or <b>B</b> for clarity: both use the codes, so neither confuses two clubs. A is only safe with something else beside it, like the club's name.</li>
+</ul>
+<h2>Worth knowing</h2><ul>
+<li>This is a look only. Whether real player names are allowed is the question you're asking FIFPRO.</li>
+<li>Small text that says "Premier League" as a fact (career goals, top scorers) stays; nothing uses the league's name or lion as branding.</li>
+</ul></div>
+</div>
+<script>
+const SCR=[['home_classic','Home','Classic'],['home_daily','Home','Daily Challenge'],['spin','Classic','Club spin'],['transfer','Classic','Transfer roll and tray'],['summary','Season over','Header and faded background'],['goals','Goal Rush','Pitch shirts'],['unbeaten','Unbeaten Run','Shirt and club cards'],['share','Daily','Share image']];
+const CLUBS=["manutd", "arsenal", "liverpool", "chelsea", "mancity", "spurs", "newcastle", "fulham", "westham", "leicester", "wolves", "bournemouth"];
+let v='fam',o='B';
+const g=document.getElementById('grid');
+function draw(){ const k=v==='fam'?'fam':o;
+ document.querySelectorAll('[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+ document.querySelectorAll('[data-o]').forEach(b=>{b.disabled=v==='fam';b.classList.toggle('on',v!=='fam'&&b.dataset.o===o);});
+ document.querySelectorAll('.mk').forEach(m=>m.classList.toggle('on',v!=='fam'&&m.dataset.o===o));
+ g.innerHTML=SCR.map(([id,a,b])=>`<section class="sc"><h2>${a} · <b>${b}</b></h2><div class="ph${id==='share'?' sq':''}"><img loading="lazy" alt="${a}, ${b}" src="public/${k}_${id}.jpg"></div></section>`).join(''); }
+const M=[['A','A · <span>Strips</span>','A shield in the crest\'s shape, three upright bands of the club\'s two colours.'],['B','B · <span>Roundel</span>','A round badge in the club\'s colour with its 3-letter code.'],['C','C · <span>Badge</span>','One drawn shield for every club: its colour across the top, its initials, a chevron.']];
+document.getElementById('marks').innerHTML=M.map(([id,t,d])=>`<div class="mk" data-o="${id}" role="button" tabindex="0"><h3>${t}</h3><p>${d}</p><div class="row">${CLUBS.map(c=>`<img src="public/mk_${id}_${c}.png" alt="${c}">`).join('')}</div></div>`).join('');
+document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{v=b.dataset.v;draw();});
+document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{o=b.dataset.o;draw();});
+document.querySelectorAll('.mk').forEach(m=>{const f=()=>{v='pub';o=m.dataset.o;draw();};m.onclick=f;m.onkeydown=(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f();}};});
+draw();
+</script>
