@@ -1,0 +1,70 @@
+<title>Club Badge Options</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,500;0,600;0,800;1,900&display=swap">
+<style>
+/* Layout: a sheet of all ten badges first (big, on a light card, and table size), then one option at a time in the real game */
+:root{--bg:#000;--fg:#fff;--soft:#BDBDC6;--muted:#8E8E99;--line:#26262C;--g:#12F06C;--phone:#151518;--font:'Exo 2',system-ui,sans-serif;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1240px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font:900 italic 30px/1.05 var(--font);text-transform:uppercase;margin:0 0 10px;text-wrap:balance}
+.lead{color:var(--soft);font-size:16px;line-height:1.5;max-width:860px;margin:0 0 20px}.lead b{color:var(--fg)}
+.sec{font:900 italic 22px var(--font);text-transform:uppercase;margin:30px 0 10px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px}
+.op{border:1px solid var(--line);border-radius:16px;padding:12px 14px;background:#0B0B0D;min-width:0;cursor:pointer}
+.op.on{border-color:var(--g)}
+.op:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+.op h3{margin:0 0 3px;font:900 italic 17px var(--font);text-transform:uppercase}.op h3 span{color:var(--g)}
+.op p{margin:0 0 10px;color:var(--soft);font-size:13.5px;line-height:1.45}
+.row{display:flex;flex-wrap:wrap;gap:5px}.row img{width:44px;height:44px}
+.lt{display:flex;align-items:center;gap:10px;margin-top:8px;background:#ECEDF0;border-radius:10px;padding:6px 10px}
+.lt img{width:30px;height:30px}.lt .tiny{display:flex;gap:6px;margin-left:auto}.lt .tiny img{width:18px;height:18px}
+.lt small{font:800 9.5px var(--font);letter-spacing:.12em;text-transform:uppercase;color:#55555E}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.bar span{font:800 11px var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.bar button{min-width:44px;min-height:44px;padding:0 12px;border-radius:12px;border:1px solid var(--line);background:#0E0E10;color:var(--fg);font:900 italic 15px var(--font);cursor:pointer}
+.bar button.on{border-color:var(--g);color:var(--g)}
+.bar button:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px 18px;margin-top:18px}
+.sc{min-width:0}.sc h2{font:800 11px var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 7px}.sc h2 b{color:var(--fg)}
+.ph{border-radius:28px;padding:6px;background:var(--phone);box-shadow:0 0 0 1px #2A2A30}.ph img{display:block;width:100%;height:auto;border-radius:23px;background:#000}
+.notes{max-width:860px;margin-top:36px;color:#CFCFD6;font-size:15px;line-height:1.5}
+.notes h2{font:900 italic 22px var(--font);text-transform:uppercase;color:var(--fg);margin:0 0 8px}.notes li{margin:0 0 8px}.notes b{color:var(--fg)}
+@media (max-width:420px){.opts{grid-template-columns:1fr}.row img{width:38px;height:38px}}
+</style>
+<div class="wrap">
+<h1>Ten more club badges</h1>
+<p class="lead">Ten more ways to stand in for crests in the public version, following A, B and C. Every one is a <b>single shared template</b> filled from the game's own data: the club's two colours and its <b>3-letter code</b>, so no two clubs ever match and none copies a real crest. Each shows on black, on a light card face, and at table size. Tap one to see it in the <b>real game</b> below (build 225): the club spin, a transfer roll and the season-over screen, the same moment each time.</p>
+<div class="sec">The ten</div>
+<div class="opts" id="opts"></div>
+<div class="sec">In the game</div>
+<div class="bar" role="group" aria-label="Badge option"><span>Showing</span><button data-o="fam" id="b-fam">Family</button></div>
+<div class="grid" id="grid"></div>
+<div class="notes"><h2>My view</h2><ul>
+<li><b>F · Hexagon</b> and <b>I · Halves</b> read best at every size, including the tiny table crest, and feel like the game's own shapes.</li>
+<li><b>J · Seal</b> looks the most like a real club badge, with the club's name round the ring, but the ring text is too small to read below card size.</li>
+<li><b>K · Shirt</b> is the most football, but it repeats the shirts we already draw in Goal Rush and Unbeaten.</li>
+<li>Any of them can be mixed with A, B or C: for example C's shield with F's inner line.</li>
+</ul></div>
+</div>
+<script>
+const O=[['D','Hoops','A round badge in horizontal hoops, the code on a white bar across the middle.'],
+ ['E','Sash','A shield in the club colour with a diagonal sash in the second colour, the code on the sash.'],
+ ['F','Hexagon','A hexagon in the club colour with an inner line in the second, the code in the middle.'],
+ ['G','Pennant','A hanging pennant like an old terrace flag, a band at the top, the code below it.'],
+ ['H','Quarters','A heater shield quartered in the two colours, the code on a white tab across the top.'],
+ ['I','Halves','A round badge split down the middle in the two colours, the code across both in white.'],
+ ['J','Seal','A seal: the club\'s name round a ring in the club colour, the code in the middle.'],
+ ['K','Shirt','A small shirt, body in the club colour, sleeves in the second, the code on the chest.'],
+ ['L','Diamond','A diamond in the club colour with two chevrons, the code above them.'],
+ ['M','Ribbon','A heater shield in thin pinstripes with a ribbon across it carrying the code.']];
+const CL=['manutd','arsenal','liverpool','chelsea','mancity','spurs','newcastle','fulham','westham','leicester','wolves','bournemouth'];
+const SC=[['spin','Classic','Club spin'],['transfer','Classic','Transfer roll and tray'],['summary','Season over','Header and faded background']];
+let cur='F';
+document.getElementById('opts').innerHTML=O.map(([o,t,d])=>`<div class="op" data-o="${o}" role="button" tabindex="0"><h3>${o} · <span>${t}</span></h3><p>${d}</p><div class="row">${CL.map(c=>`<img src="badges10/mk_${o}_${c}.png" alt="">`).join('')}</div><div class="lt"><small>On a card</small>${CL.slice(0,4).map(c=>`<img src="badges10/mk_${o}_${c}.png" alt="">`).join('')}<div class="tiny"><small>Table</small>${CL.slice(0,6).map(c=>`<img src="badges10/mk_${o}_${c}.png" alt="">`).join('')}</div></div></div>`).join('');
+const bar=document.querySelector('.bar'); O.forEach(([o,t])=>{const b=document.createElement('button');b.dataset.o=o;b.textContent=o;b.title=t;bar.appendChild(b);});
+function draw(){ document.querySelectorAll('[data-o]').forEach(b=>b.classList.toggle('on',b.dataset.o===cur));
+ document.getElementById('grid').innerHTML=SC.map(([id,a,b])=>`<section class="sc"><h2>${a} · <b>${b}</b></h2><div class="ph"><img loading="lazy" alt="${a}, ${b}" src="badges10/${cur}_${id}.jpg"></div></section>`).join(''); }
+document.querySelectorAll('[data-o]').forEach(el=>{const f=()=>{cur=el.dataset.o;draw(); if(el.classList.contains('op')) document.querySelector('.bar').scrollIntoView({behavior:'smooth'});}; el.onclick=f; el.onkeydown=(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f();}};});
+draw();
+</script>
