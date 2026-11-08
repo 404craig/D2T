@@ -495,7 +495,7 @@
   const hashOf = (str) => { let h = 0; for (const ch of String(str)) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return h; };
   SE.raidWords = (k = 0) => {
     const e = GAME.eng(), you = NB(GAME.mode() === 'clubx' ? GAME.xName() : (GAME.clubName() || 'us')), start = hashOf(e ? e.seed : '');
-    const surname = (n) => { const parts = String(n || '').trim().split(' '); return parts.length > 1 ? parts.slice(1).join(' ') : parts[0]; };
+    const surname = (n) => { const t = String(n || '').trim(), k = ((window.D2T_GAME || {}).splits || {})[t]; if (k != null) return t.slice(k + 1); const parts = t.split(' '); return parts.length > 1 ? parts.slice(1).join(' ') : parts[0]; };   // Solskjaer, not Gunnar Solskjaer (build 226)
     return {
       rumour: (club) => RUMOURS[(start + k) % RUMOURS.length](NB(club), you),
       deal: (club, name) => DEALS[(start + k) % DEALS.length](NB(club), you, NB(surname(name)))

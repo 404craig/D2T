@@ -352,6 +352,15 @@ def main():
         g433[pos].append([k["n"], k["s"], club, k["g"]])
     for pos in g433: g433[pos].sort(key=lambda x: (-x[3], x[0]))
     game["g433"] = g433
+    # Where a player's first name is more than one word (Ole Gunnar Solskjaer, Jimmy Floyd Hasselbaink), the cards break
+    # his name before the surname the dataset gives, not at the first space (Craig, 8 Nov, build 226): the length of the
+    # first line, by name; only when that surname ends the name and leaves more than one word in front of it
+    splits = {}
+    for r in players:
+        n, s = r["player"].strip(), (r.get("surname") or "").strip()
+        if s and n.endswith(" " + s) and " " in n[: -len(s) - 1]:
+            splits[n] = len(n) - len(s) - 1
+    game["splits"] = splits
     # The same shirt on every career card (Craig, 2 Nov: Unbeaten Run had Declan Rice in West Ham's, by most games, while
     # Goal Rush had him in Arsenal's): where he scored most, most games if he never scored, Craig's calls winning
     for pid, i in cidx.items():
