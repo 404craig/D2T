@@ -43,7 +43,13 @@
       glow: `drop-shadow(0 0 10px ${a}55)`
     };
   }
-  const splitName = (n) => { const i = n.indexOf(' '); return i < 0 ? ['', n] : [n.slice(0, i), n.slice(i + 1)]; };
+  // the first name on the top line, the surname big under it; a first name of more than one word (Ole Gunnar Solskjaer)
+  // breaks where the data's surname starts (`splits`, build-data.py; Craig, 8 Nov, build 226), anyone else at the first space
+  const splitName = (n) => {
+    const sp = (window.D2T_GAME && window.D2T_GAME.splits) || {}, k = sp[String(n).replace(/\s*\([^)]*\)$/, '')];
+    const i = k != null ? k : n.indexOf(' ');
+    return i < 0 ? ['', n] : [n.slice(0, i), n.slice(i + 1)];
+  };
 
   function player(c, opts = {}) {
     const w = opts.w || 114, L = LV[c.level] || LV.bronze;
