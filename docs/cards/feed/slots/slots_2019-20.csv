@@ -1,0 +1,477 @@
+season,club_feed,feed_id,name,profile_position,starts_with_slot,slots
+2019/20,Arsenal,5110,Pierre-Emerick Aubameyang,Centre Striker,35,LW:17 ST:14 RW:3 CAM:1
+2019/20,Arsenal,4100,David Luiz,Centre Central Defender,32,CB:32
+2019/20,Arsenal,4985,Bernd Leno,Goalkeeper,30,GK:30
+2019/20,Arsenal,12136,Granit Xhaka,Centre Central Midfielder,30,CDM:21 CM:9
+2019/20,Arsenal,6899,Alexandre Lacazette,Centre Striker,22,ST:22
+2019/20,Arsenal,50252,Nicolas Pepe,Right Winger,22,RW:18 ST:2 RM:1 LW:1
+2019/20,Arsenal,5093,Sokratis Papastathopoulos,Centre Central Defender,19,CB:18 RB:1
+2019/20,Arsenal,50512,Mattéo Guendouzi,Centre Central Midfielder,19,CDM:10 CM:9
+2019/20,Arsenal,5368,Sead Kolasinac,Left Full Back,19,LB:13 CB:5 LWB:1
+2019/20,Arsenal,49481,Bukayo Saka,Left Winger,19,LB:8 LW:4 LWB:3 RW:2 CAM:1 CM:1
+2019/20,Arsenal,7163,Dani Ceballos,Left/Centre/Right Attacking Midfielder,18,CM:9 CAM:4 CDM:4 LM:1
+2019/20,Arsenal,4714,Mesut Özil,Centre/Right Attacking Midfielder,18,CAM:16 LW:2
+2019/20,Arsenal,23033,Lucas Torreira,Centre Central Midfielder,17,CDM:10 CM:7
+2019/20,Arsenal,10428,Ainsley Maitland-Niles,Left Wing Back,15,RB:15
+2019/20,Arsenal,4620,Calum Chambers,Centre/Right Central Defender,13,CB:7 RB:6
+2019/20,Arsenal,4474,Héctor Bellerín,Right Full Back,13,RB:7 RWB:6
+2019/20,Arsenal,3869,Shkodran Mustafi,Centre/Right Central Defender,13,CB:13
+2019/20,Arsenal,12185,Kieran Tierney,Left Full Back,12,LB:5 LWB:5 CB:2
+2019/20,Arsenal,14446,Joe Willock,Centre Central Midfielder,8,CAM:5 CM:2 CDM:1
+2019/20,Arsenal,4245,Emiliano Martínez,Goalkeeper,8,GK:8
+2019/20,Arsenal,14450,Reiss Nelson,Left/Centre/Right Striker,7,RW:5 LW:2
+2019/20,Arsenal,14451,Eddie Nketiah,Centre Striker,7,ST:6 RW:1
+2019/20,Arsenal,11575,Rob Holding,Centre Central Defender,6,CB:6
+2019/20,Arsenal,66104,Gabriel Martinelli,Left Winger,6,LW:5 RW:1
+2019/20,Arsenal,4472,Nacho Monreal,Left Full Back,3,LB:3
+2019/20,Arsenal,11347,Cédric Soares,Right Wing Back,3,RWB:3
+2019/20,Arsenal,20097,Pablo Marí,Centre Central Defender,2,CB:2
+2019/20,Arsenal,5102,Henrikh Mkhitaryan,Centre/Right Attacking Midfielder,1,RW:1
+2019/20,Arsenal,14445,Emile Smith Rowe,Midfielder,1,CAM:1
+2019/20,Aston Villa,4260,Jack Grealish,Left/Centre/Right Attacking Midfielder,36,LW:19 CM:7 CAM:5 LM:4 ST:1
+2019/20,Aston Villa,8900,Tyrone Mings,Centre Central Defender,33,CB:33
+2019/20,Aston Villa,24626,Douglas Luiz,Centre Central Midfielder,28,CDM:16 CM:12
+2019/20,Aston Villa,51423,John McGinn,Centre Central Midfielder,27,CM:27
+2019/20,Aston Villa,4815,Matt Targett,Left Full Back,27,LB:22 LWB:5
+2019/20,Aston Villa,11033,Anwar El Ghazi,Left/Right Winger,26,RW:15 LW:3 RM:3 ST:3 LM:1 CAM:1
+2019/20,Aston Villa,13274,Ezri Konsa,Centre Central Defender,24,CB:18 RB:6
+2019/20,Aston Villa,15549,Frédéric Guilbert,Right Full Back,22,RB:16 RWB:6
+2019/20,Aston Villa,15580,Wesley,Centre Striker,21,ST:21
+2019/20,Aston Villa,2933,Tom Heaton,Goalkeeper,20,GK:20
+2019/20,Aston Villa,16087,Trézéguet,Left/Right Winger,20,RW:9 LW:5 RM:3 LM:3
+2019/20,Aston Villa,45351,Marvelous Nakamba,Centre Central Midfielder,19,CDM:13 CM:6
+2019/20,Aston Villa,9377,Conor Hourihane,Centre Central Midfielder,18,CM:16 CDM:2
+2019/20,Aston Villa,10000,Kortney Hause,Centre Central Defender,17,CB:17
+2019/20,Aston Villa,12199,Björn Engels,Centre Central Defender,15,CB:15
+2019/20,Aston Villa,2911,Pepe Reina,Goalkeeper,12,GK:12
+2019/20,Aston Villa,4183,Ahmed El Mohamady,Right Full Back,11,RB:9 RWB:1 RM:1
+2019/20,Aston Villa,4402,Neil Taylor,Left Full Back,11,LB:9 LWB:2
+2019/20,Aston Villa,20490,Mbwana Samatta,Centre Striker,11,ST:11
+2019/20,Aston Villa,51416,Ørjan Nyland,Goalkeeper,5,GK:5
+2019/20,Aston Villa,10604,Jota,Left/Centre Attacking Midfielder,4,RW:3 RM:1
+2019/20,Aston Villa,3670,Danny Drinkwater,Centre Central Midfielder,4,CM:4
+2019/20,Aston Villa,13130,Keinan Davis,Centre Striker,4,ST:4
+2019/20,Aston Villa,3049,Henri Lansbury,Centre Central Midfielder,2,CM:1 CAM:1
+2019/20,Aston Villa,4348,Jed Steer,Goalkeeper,1,GK:1
+2019/20,Bournemouth,13703,Aaron Ramsdale,Goalkeeper,37,GK:37
+2019/20,Bournemouth,8454,Callum Wilson,Centre Striker,32,ST:32
+2019/20,Bournemouth,37776,Jefferson Lerma,Centre Central Midfielder,31,CM:24 CDM:7
+2019/20,Bournemouth,4499,Nathan Aké,Left/Centre Central Defender,29,CB:27 LB:2
+2019/20,Bournemouth,8882,Philip Billing,Centre Defensive Midfielder,29,CM:29
+2019/20,Bournemouth,8045,Steve Cook,Centre Central Defender,28,CB:28
+2019/20,Bournemouth,26076,Diego Rico,Left Full Back,27,LB:25 LWB:2
+2019/20,Bournemouth,3512,Adam Smith,Right Full Back,24,RB:16 LB:5 RWB:3
+2019/20,Bournemouth,3926,Joshua King,Centre/Right Second Striker,24,ST:11 LM:7 CAM:3 LW:2 RM:1
+2019/20,Bournemouth,8052,Ryan Fraser,Left/Right Winger,21,LM:10 CAM:5 LW:3 RM:2 RW:1
+2019/20,Bournemouth,13961,Harry Wilson,Left/Right Winger,20,RM:14 RW:5 CAM:1
+2019/20,Bournemouth,10881,Jack Stacey,Right Wing Back,17,RB:17
+2019/20,Bournemouth,10443,Dominic Solanke,Centre Striker,17,ST:15 LW:1 CAM:1
+2019/20,Bournemouth,10766,Lewis Cook,Centre Central Midfielder,14,CM:12 CAM:2
+2019/20,Bournemouth,3390,Dan Gosling,Centre/Right Central Midfielder,14,CM:14
+2019/20,Bournemouth,14063,Chris Mepham,Centre Central Defender,10,CB:10
+2019/20,Bournemouth,8044,Simon Francis,Centre/Right Central Defender,10,CB:8 RB:2
+2019/20,Bournemouth,13706,David Brooks,Left/Centre/Right Attacking Midfielder,8,RM:6 CM:1 CAM:1
+2019/20,Bournemouth,3766,Junior Stanislas,Left/Right Winger,7,LM:5 CAM:1 RM:1
+2019/20,Bournemouth,21585,Lloyd Kelly,Left Full Back,7,CB:6 LB:1
+2019/20,Bournemouth,16524,Arnaut Danjuma,Left/Right Winger,6,LM:4 RM:2
+2019/20,Bournemouth,3242,Charlie Daniels,Left Full Back,2,LB:1 LWB:1
+2019/20,Bournemouth,2338,Andrew Surman,Centre Central Midfielder,2,CM:1 CDM:1
+2019/20,Bournemouth,13193,Jack Simpson,Centre Central Defender,1,LB:1
+2019/20,Bournemouth,50453,Mark Travers,Goalkeeper,1,GK:1
+2019/20,Brighton & Hove Albion,12192,Mathew Ryan,Goalkeeper,37,GK:37
+2019/20,Brighton & Hove Albion,8163,Lewis Dunk,Centre Central Defender,35,CB:35
+2019/20,Brighton & Hove Albion,8707,Dan Burn,Centre Central Defender,32,LB:21 CB:9 LWB:2
+2019/20,Brighton & Hove Albion,16790,Davy Pröpper,Centre Central Midfielder,31,CM:20 CDM:10 RM:1
+2019/20,Brighton & Hove Albion,9426,Adam Webster,Centre Central Defender,30,CB:30
+2019/20,Brighton & Hove Albion,16256,Neal Maupay,Centre Striker,29,ST:28 RW:1
+2019/20,Brighton & Hove Albion,8168,Dale Stephens,Centre Central Midfielder,27,CM:21 CDM:6
+2019/20,Brighton & Hove Albion,19619,Aaron Mooy,Centre Central Midfielder,24,CAM:7 CM:6 LM:3 RW:3 RM:2 LW:2 CDM:1
+2019/20,Brighton & Hove Albion,4955,Martín Montoya,Right Full Back,22,RB:15 RWB:7
+2019/20,Brighton & Hove Albion,20486,Leandro Trossard,Left/Centre Winger,22,LW:11 CAM:6 LM:3 ST:2
+2019/20,Brighton & Hove Albion,22542,Pascal Groß,Centre Central Midfielder,21,CAM:8 RW:7 RM:3 CM:1 LM:1 ST:1
+2019/20,Brighton & Hove Albion,50245,Yves Bissouma,Centre Central Midfielder,15,CDM:7 CM:5 CAM:2 LM:1
+2019/20,Brighton & Hove Albion,21653,Aaron Connolly,Centre Striker,14,ST:14
+2019/20,Brighton & Hove Albion,3601,Shane Duffy,Left/Centre Central Defender,12,CB:12
+2019/20,Brighton & Hove Albion,8171,Solly March,Left/Centre/Right Attacking Midfielder,11,LWB:6 RW:3 RWB:1 LW:1
+2019/20,Brighton & Hove Albion,20723,Steven Alzate,Centre Striker,11,CM:4 RB:4 LWB:1 LM:1 RM:1
+2019/20,Brighton & Hove Albion,4772,Glenn Murray,Centre Striker,7,ST:6 LW:1
+2019/20,Brighton & Hove Albion,23591,Bernardo,Left Full Back,7,LB:4 LWB:3
+2019/20,Brighton & Hove Albion,23704,Tariq Lamptey,Right Full Back,7,RB:4 RWB:2 RM:1
+2019/20,Brighton & Hove Albion,16234,Ezequiel Schelotto,Right Full Back,4,RWB:2 RB:2
+2019/20,Brighton & Hove Albion,63633,Alexis Mac Allister,Left/Centre/Right Attacking Midfielder,4,CAM:2 ST:1 CM:1
+2019/20,Brighton & Hove Albion,15480,Alireza Jahanbakhsh,Right Winger,3,RW:2 RM:1
+2019/20,Brighton & Hove Albion,7124,Jürgen Locadia,Centre Striker,1,LW:1
+2019/20,Brighton & Hove Albion,37587,Florin Andone,Centre Striker,1,ST:1
+2019/20,Burnley,10079,Nick Pope,Goalkeeper,38,GK:38
+2019/20,Burnley,8143,James Tarkowski,Centre Central Defender,38,CB:38
+2019/20,Burnley,24797,Dwight McNeil,Left/Centre Winger,38,LM:34 RM:3 CAM:1
+2019/20,Burnley,4489,Ashley Westwood,Centre Central Midfielder,35,CM:35
+2019/20,Burnley,3909,Ben Mee,Left/Centre Central Defender,32,CB:32
+2019/20,Burnley,2889,Jack Cork,Centre Central Midfielder,30,CM:30
+2019/20,Burnley,3756,Chris Wood,Centre Striker,29,ST:29
+2019/20,Burnley,8586,Jeff Hendrick,Centre Central Midfielder,22,RM:16 CM:4 CAM:2
+2019/20,Burnley,8691,Charlie Taylor,Left Full Back,22,LB:22
+2019/20,Burnley,4821,Erik Pieters,Left Full Back,21,LB:16 RM:3 LM:2
+2019/20,Burnley,2517,Phil Bardsley,Right Full Back,21,RB:21
+2019/20,Burnley,3851,Jay Rodriguez,Left/Centre/Right Second Striker,20,ST:20
+2019/20,Burnley,4487,Matthew Lowton,Right Full Back,17,RB:17
+2019/20,Burnley,8246,Ashley Barnes,Centre Striker,17,ST:17
+2019/20,Burnley,9457,Josh Brownhill,Centre Central Midfielder,9,CM:6 RM:3
+2019/20,Burnley,4851,Matej Vydra,Centre Striker,7,ST:7
+2019/20,Burnley,6210,Jóhann Gudmundsson,Left Winger,6,RM:6
+2019/20,Burnley,3837,Kevin Long,Centre Central Defender,6,CB:6
+2019/20,Burnley,4158,Robert Brady,Left Winger,5,RM:3 LM:2
+2019/20,Burnley,2270,Aaron Lennon,Right Winger,4,RM:4
+2019/20,Burnley,3670,Danny Drinkwater,Centre Central Midfielder,1,CM:1
+2019/20,Chelsea,4496,César Azpilicueta,Left/Right Full Back,36,RB:18 LB:10 RWB:4 CB:4
+2019/20,Chelsea,11373,Kepa Arrizabalaga,Goalkeeper,33,GK:33
+2019/20,Chelsea,14580,Mason Mount,Centre Attacking Midfielder,32,CAM:14 CM:14 LW:3 RW:1
+2019/20,Chelsea,4748,Willian,Left/Centre/Right Winger,29,RW:19 CAM:5 LW:5
+2019/20,Chelsea,5682,Jorginho,Centre Central Midfielder,27,CDM:21 CM:6
+2019/20,Chelsea,5175,Kurt Zouma,Centre Central Defender,25,CB:25
+2019/20,Chelsea,13286,Tammy Abraham,Centre Striker,25,ST:25
+2019/20,Chelsea,12520,Mateo Kovacic,Centre Central Midfielder,23,CM:16 CDM:7
+2019/20,Chelsea,4495,Andreas Christensen,Centre Central Defender,21,CB:21
+2019/20,Chelsea,13492,N'Golo Kanté,Centre Central Midfielder,20,CM:12 CDM:8
+2019/20,Chelsea,15559,Christian Pulisic,Left/Centre/Right Attacking Midfielder,19,LW:17 RW:2
+2019/20,Chelsea,16801,Antonio Rüdiger,Centre Central Defender,19,CB:19
+2019/20,Chelsea,14571,Reece James,Right Full Back,16,RB:12 RWB:4
+2019/20,Chelsea,13281,Fikayo Tomori,Centre/Right Central Defender,15,CB:15
+2019/20,Chelsea,4093,Marcos Alonso,Left Full Back,15,LB:9 LWB:6
+2019/20,Chelsea,16803,Emerson,Left Full Back,13,LB:11 LWB:2
+2019/20,Chelsea,4115,Ross Barkley,Centre Attacking Midfielder,13,CM:11 LW:1 CAM:1
+2019/20,Chelsea,4481,Olivier Giroud,Centre Striker,12,ST:12
+2019/20,Chelsea,4972,Pedro,Left/Right Winger,8,RW:5 LW:2 CAM:1
+2019/20,Chelsea,23702,Callum Hudson-Odoi,Left/Right Winger,7,RW:4 LW:2 CAM:1
+2019/20,Chelsea,10466,Willy Caballero,Goalkeeper,5,GK:5
+2019/20,Chelsea,24221,Billy Gilmour,Midfielder,2,CDM:2
+2019/20,Chelsea,5179,Ruben Loftus-Cheek,Centre Central Midfielder,2,LW:1 CM:1
+2019/20,Chelsea,7450,Michy Batshuayi,Centre Striker,1,ST:1
+2019/20,Crystal Palace,4224,James McArthur,Centre Central Midfielder,37,CM:35 CAM:1 LM:1
+2019/20,Crystal Palace,5595,Jordan Ayew,Centre Striker,37,ST:24 RW:5 CAM:5 LM:2 RM:1
+2019/20,Crystal Palace,4539,Wilfried Zaha,Left/Centre/Right Winger,37,CAM:23 LW:5 ST:4 LM:2 RM:2 RW:1
+2019/20,Crystal Palace,7548,Vicente Guaita,Goalkeeper,35,GK:35
+2019/20,Crystal Palace,3362,Patrick van Aanholt,Left Full Back,29,LB:29
+2019/20,Crystal Palace,5861,Cheikhou Kouyaté,Centre Central Midfielder,29,CM:27 CB:2
+2019/20,Crystal Palace,5859,Luka Milivojevic,Centre Central Midfielder,28,CM:22 CDM:6
+2019/20,Crystal Palace,3929,Joel Ward,Right Full Back,27,RB:27
+2019/20,Crystal Palace,2620,Gary Cahill,Centre Central Defender,25,CB:25
+2019/20,Crystal Palace,3517,James Tomkins,Centre Central Defender,18,CB:18
+2019/20,Crystal Palace,3644,Martin Kelly,Right Full Back,17,RB:11 CB:6
+2019/20,Crystal Palace,3979,James McCarthy,Centre Central Midfielder,16,CM:12 CDM:4
+2019/20,Crystal Palace,3807,Scott Dann,Centre Central Defender,14,CB:14
+2019/20,Crystal Palace,3724,Andros Townsend,Left/Right Winger,14,CAM:8 RM:6
+2019/20,Crystal Palace,4492,Christian Benteke,Centre Striker,13,ST:13
+2019/20,Crystal Palace,8980,Jeffrey Schlupp,Left Winger,11,CAM:5 CM:2 LM:2 LW:1 LB:1
+2019/20,Crystal Palace,4796,Mamadou Sakho,Centre Central Defender,11,CB:11
+2019/20,Crystal Palace,4878,Jairo Riedewald,Centre Central Midfielder,7,LB:6 CM:1
+2019/20,Crystal Palace,5377,Max Meyer,Left/Centre/Right Attacking Midfielder,6,CAM:4 LM:2
+2019/20,Crystal Palace,2569,Wayne Hennessey,Goalkeeper,3,GK:3
+2019/20,Crystal Palace,12114,Cenk Tosun,Centre Striker,2,ST:2
+2019/20,Crystal Palace,24334,Tyrick Mitchell,Left Full Back,2,LB:2
+2019/20,Everton,4640,Jordan Pickford,Goalkeeper,38,GK:38
+2019/20,Everton,24630,Richarlison,Left/Centre/Right Second Striker,36,ST:21 RW:7 LW:6 LM:2
+2019/20,Everton,5758,Lucas Digne,Left Full Back,35,LB:30 LWB:4 CB:1
+2019/20,Everton,9576,Dominic Calvert-Lewin,Centre Striker,30,ST:30
+2019/20,Everton,4333,Michael Keane,Centre Central Defender,28,CB:28
+2019/20,Everton,4421,Gylfi Sigurdsson,Left/Centre/Right Attacking Midfielder,28,CM:13 CAM:12 LM:3
+2019/20,Everton,32923,Yerry Mina,Centre Central Defender,25,CB:25
+2019/20,Everton,10564,Mason Holgate,Centre Central Defender,24,CB:23 CM:1
+2019/20,Everton,13389,Tom Davies,Centre Central Midfielder,23,CM:15 CDM:6 RM:2
+2019/20,Everton,3600,Séamus Coleman,Right Full Back,21,RB:19 CB:2
+2019/20,Everton,4717,Alex Iwobi,Left/Centre/Right Second Striker,19,RM:8 LM:5 LW:3 CAM:2 RW:1
+2019/20,Everton,12576,Djibril Sidibé,Right Full Back,18,RB:14 RWB:4
+2019/20,Everton,5061,André Gomes,Centre Central Midfielder,17,CM:9 CDM:8
+2019/20,Everton,2839,Theo Walcott,Centre/Right Second Striker,17,RM:9 RW:7 RWB:1
+2019/20,Everton,5907,Bernard,Left Winger,15,LM:7 LW:6 CAM:1 RM:1
+2019/20,Everton,3799,Fabian Delph,Left/Centre Central Midfielder,13,CM:7 CDM:6
+2019/20,Everton,4615,Morgan Schneiderlin,Centre Defensive Midfielder,12,CDM:8 CM:4
+2019/20,Everton,20958,Moise Kean,Centre Striker,6,ST:6
+2019/20,Everton,3030,Leighton Baines,Left Full Back,4,LB:3 LWB:1
+2019/20,Everton,23747,Anthony Gordon,Centre Second Striker,4,LM:3 CM:1
+2019/20,Everton,12114,Cenk Tosun,Centre Striker,2,ST:2
+2019/20,Everton,66318,Jarrad Branthwaite,Centre Central Defender,2,CB:2
+2019/20,Everton,20187,Jean-Philippe Gbamin,Centre Central Midfielder,1,CDM:1
+2019/20,Leicester City,2508,Kasper Schmeichel,Goalkeeper,38,GK:38
+2019/20,Leicester City,3156,Jonny Evans,Centre Central Defender,38,CB:38
+2019/20,Leicester City,26216,Çaglar Söyüncü,Centre Central Defender,34,CB:34
+2019/20,Leicester City,8979,Jamie Vardy,Centre Striker,34,ST:34
+2019/20,Leicester City,5865,Youri Tielemans,Centre Central Midfielder,32,CM:32
+2019/20,Leicester City,20479,Wilfred Ndidi,Centre Central Midfielder,29,CDM:22 CM:7
+2019/20,Leicester City,8456,James Maddison,Left/Centre/Right Attacking Midfielder,29,CM:20 LM:6 CAM:2 LW:1
+2019/20,Leicester City,5343,Ricardo Pereira,Right Full Back,28,RB:26 RWB:2
+2019/20,Leicester City,13491,Ben Chilwell,Left Full Back,27,LB:24 LWB:3
+2019/20,Leicester City,10487,Ayoze Pérez,Centre/Right Striker,26,RM:18 RW:3 CAM:3 ST:1 LW:1
+2019/20,Leicester City,14716,Harvey Barnes,Left/Centre/Right Attacking Midfielder,24,LM:20 RM:2 LW:2
+2019/20,Leicester City,5860,Dennis Praet,Centre Attacking Midfielder,12,CM:12
+2019/20,Leicester City,13554,Kelechi Iheanacho,Centre Striker,12,ST:11 RW:1
+2019/20,Leicester City,13515,James Justin,Right Full Back,11,RB:4 CB:3 RWB:3 LB:1
+2019/20,Leicester City,13248,Hamza Choudhury,Centre Central Midfielder,10,CM:5 CDM:5
+2019/20,Leicester City,3564,Marc Albrighton,Left/Right Winger,9,RM:4 RWB:3 LM:1 LWB:1
+2019/20,Leicester City,5371,Christian Fuchs,Left Full Back,8,LB:5 CB:2 LWB:1
+2019/20,Leicester City,8966,Wes Morgan,Centre Central Defender,4,CB:4
+2019/20,Leicester City,19617,Nampalys Mendy,Centre Defensive Midfielder,4,CM:2 CDM:2
+2019/20,Leicester City,7946,Demarai Gray,Left/Right Winger,3,RM:3
+2019/20,Leicester City,4351,Ryan Bennett,Centre Central Defender,3,CB:3
+2019/20,Leicester City,23796,Luke Thomas,Left Full Back,3,LWB:3
+2019/20,Liverpool,5140,Virgil van Dijk,Centre Central Defender,38,CB:38
+2019/20,Liverpool,14732,Trent Alexander-Arnold,Right Full Back,35,RB:35
+2019/20,Liverpool,7114,Georginio Wijnaldum,Left/Centre/Right Attacking Midfielder,35,CM:30 CDM:5
+2019/20,Liverpool,10458,Andy Robertson,Left Full Back,34,LB:34
+2019/20,Liverpool,13511,Roberto Firmino,Left/Centre/Right Striker,34,ST:31 CAM:2 LW:1
+2019/20,Liverpool,5178,Mohamed Salah,Left/Centre/Right Winger,33,RW:30 ST:3
+2019/20,Liverpool,6519,Sadio Mané,Left/Right Winger,31,LW:27 RW:3 ST:1
+2019/20,Liverpool,20559,Alisson Becker,Goalkeeper,29,GK:29
+2019/20,Liverpool,3712,Jordan Henderson,Centre Central Midfielder,26,CM:14 CDM:12
+2019/20,Liverpool,10651,Joe Gomez,Left/Centre/Right Central Defender,22,CB:21 RB:1
+2019/20,Liverpool,11247,Fabinho,Centre Defensive Midfielder,22,CDM:22
+2019/20,Liverpool,4252,Alex Oxlade-Chamberlain,Left/Centre/Right Central Midfielder,17,CM:11 LW:5 RW:1
+2019/20,Liverpool,4852,Adrián,Goalkeeper,9,GK:9
+2019/20,Liverpool,2100,James Milner,Left/Centre/Right Central Midfielder,9,CM:5 LB:3 CDM:1
+2019/20,Liverpool,4813,Dejan Lovren,Centre Central Defender,9,CB:9
+2019/20,Liverpool,12316,Naby Keïta,Centre Central Midfielder,9,CM:9
+2019/20,Liverpool,5375,Joël Matip,Centre Central Defender,8,CB:8
+2019/20,Liverpool,10465,Divock Origi,Centre Striker,7,LW:4 ST:3
+2019/20,Liverpool,4618,Adam Lallana,Left/Centre/Right Attacking Midfielder,3,CDM:1 CAM:1 RW:1
+2019/20,Liverpool,23811,Neco Williams,Right Full Back,3,RB:2 LB:1
+2019/20,Liverpool,5267,Xherdan Shaqiri,Left/Right Winger,2,RW:2
+2019/20,Liverpool,12322,Takumi Minamino,Left/Centre/Right Striker,2,RW:1 LW:1
+2019/20,Liverpool,23815,Curtis Jones,Centre Central Midfielder,1,CM:1
+2019/20,Manchester City,12707,Ederson,Goalkeeper,35,GK:35
+2019/20,Manchester City,4288,Kevin De Bruyne,Left/Centre/Right Attacking Midfielder,32,CM:26 CAM:6
+2019/20,Manchester City,4316,Raheem Sterling,Left/Centre/Right Second Striker,30,LW:26 RW:3 CAM:1
+2019/20,Manchester City,16286,Rodri,Centre Central Midfielder,29,CDM:26 CB:2 CM:1
+2019/20,Manchester City,3955,Kyle Walker,Right Full Back,28,RB:27 RWB:1
+2019/20,Manchester City,4804,Fernandinho,Centre Defensive Midfielder,26,CB:24 CDM:2
+2019/20,Manchester City,5067,Bernardo Silva,Left/Centre Attacking Midfielder,23,RW:11 CM:6 LW:3 CDM:2 ST:1
+2019/20,Manchester City,4145,David Silva,Left/Centre/Right Attacking Midfielder,22,CM:19 CAM:3
+2019/20,Manchester City,8983,Riyad Mahrez,Left/Right Winger,21,RW:19 CAM:2
+2019/20,Manchester City,19680,Gabriel Jesus,Left/Centre/Right Second Striker,21,ST:19 LW:2
+2019/20,Manchester City,5101,Ilkay Gündogan,Centre Central Midfielder,21,CDM:15 CM:6
+2019/20,Manchester City,6058,Nicolás Otamendi,Centre Central Defender,18,CB:18
+2019/20,Manchester City,4328,Sergio Agüero,Centre Striker,18,ST:18
+2019/20,Manchester City,5575,Benjamin Mendy,Left Full Back,18,LB:17 LWB:1
+2019/20,Manchester City,11044,Aymeric Laporte,Centre Central Defender,14,CB:14
+2019/20,Manchester City,19620,Oleksandr Zinchenko,Left Full Back,13,LB:12 LWB:1
+2019/20,Manchester City,5051,João Cancelo,Right Full Back,13,RB:9 LB:3 RWB:1
+2019/20,Manchester City,4505,John Stones,Centre Central Defender,12,CB:12
+2019/20,Manchester City,14805,Phil Foden,Centre/Right Attacking Midfielder,9,LW:5 RW:3 CAM:1
+2019/20,Manchester City,24635,Eric García,Centre Central Defender,8,CB:8
+2019/20,Manchester City,10467,Angeliño,Left Full Back,4,LB:4
+2019/20,Manchester City,5810,Claudio Bravo,Goalkeeper,3,GK:3
+2019/20,Manchester United,4330,David de Gea,Goalkeeper,38,GK:38
+2019/20,Manchester United,9566,Harry Maguire,Centre Central Defender,38,CB:38
+2019/20,Manchester United,5066,Victor Lindelöf,Centre/Right Central Defender,35,CB:35
+2019/20,Manchester United,14164,Aaron Wan-Bissaka,Right Full Back,34,RB:29 RWB:5
+2019/20,Manchester United,13565,Marcus Rashford,Left/Centre Second Striker,31,LW:24 ST:6 CAM:1
+2019/20,Manchester United,11272,Anthony Martial,Left/Centre Second Striker,31,ST:31
+2019/20,Manchester United,13797,Daniel James,Left/Right Winger,26,RW:13 LW:8 ST:4 CAM:1
+2019/20,Manchester United,5906,Fred,Centre Central Midfielder,23,CDM:17 CM:6
+2019/20,Manchester United,4608,Luke Shaw,Left Full Back,20,LB:17 CB:3
+2019/20,Manchester United,14824,Scott McTominay,Centre Central Midfielder,20,CDM:18 CM:2
+2019/20,Manchester United,10476,Andreas Pereira,Left/Centre/Right Attacking Midfielder,18,CAM:10 RW:5 CDM:2 CM:1
+2019/20,Manchester United,3861,Nemanja Matic,Centre Central Midfielder,18,CDM:15 CM:3
+2019/20,Manchester United,23396,Bruno Fernandes,Left/Centre/Right Attacking Midfielder,14,CAM:14
+2019/20,Manchester United,3920,Paul Pogba,Centre Central Midfielder,13,CDM:13
+2019/20,Manchester United,25266,Mason Greenwood,Centre Striker,12,RW:10 ST:2
+2019/20,Manchester United,23834,Brandon Williams,Left Full Back,11,LB:7 LWB:4
+2019/20,Manchester United,3062,Ashley Young,Left/Right Wing Back,10,LB:7 RB:2 LWB:1
+2019/20,Manchester United,4337,Jesse Lingard,Left/Centre/Right Attacking Midfielder,9,CAM:8 RW:1
+2019/20,Manchester United,4287,Juan Mata,Left/Centre/Right Attacking Midfielder,8,CAM:5 RW:3
+2019/20,Manchester United,13559,Axel Tuanzebe,Centre Central Defender,2,LB:1 CB:1
+2019/20,Manchester United,3820,Phil Jones,Centre Central Defender,2,CB:2
+2019/20,Manchester United,13561,Timothy Fosu-Mensah,Left/Centre/Right Central Defender,2,LB:1 RB:1
+2019/20,Manchester United,24252,Diogo Dalot,Right Full Back,1,RB:1
+2019/20,Manchester United,10472,Marcos Rojo,Left/Centre Full Back,1,CB:1
+2019/20,Manchester United,12937,Eric Bailly,Centre Central Defender,1,CB:1
+2019/20,Newcastle United,6451,Martin Dúbravka,Goalkeeper,37,GK:37
+2019/20,Newcastle United,54312,Miguel Almirón,Left/Centre/Right Second Striker,34,RM:17 CM:6 CAM:5 ST:4 RW:1 LM:1
+2019/20,Newcastle United,20607,Joelinton,Left Central Midfielder,31,ST:26 LM:2 LW:2 RM:1
+2019/20,Newcastle United,5672,Federico Fernández,Centre Central Defender,29,CB:29
+2019/20,Newcastle United,4713,Isaac Hayden,Centre Central Midfielder,25,CM:21 CDM:2 RWB:2
+2019/20,Newcastle United,4135,Jonjo Shelvey,Centre Central Midfielder,24,CM:21 CDM:2 CAM:1
+2019/20,Newcastle United,9257,Jamaal Lascelles,Centre Central Defender,23,CB:23
+2019/20,Newcastle United,12817,Allan Saint-Maximin,Left/Right Winger,23,LM:17 ST:3 RW:2 RM:1
+2019/20,Newcastle United,5220,Fabian Schär,Centre Central Defender,17,CB:15 CM:2
+2019/20,Newcastle United,4918,Javier Manquillo,Right Full Back,17,RWB:9 RB:5 LB:2 CB:1
+2019/20,Newcastle United,7105,Jetro Willems,Left Full Back,17,LWB:17
+2019/20,Newcastle United,14897,Sean Longstaff,Centre Central Midfielder,14,CM:12 CDM:1 CAM:1
+2019/20,Newcastle United,3934,Matt Ritchie,Left/Right Winger,14,LWB:8 RM:4 LM:2
+2019/20,Newcastle United,3562,Ciaran Clark,Central Defender,14,CB:14
+2019/20,Newcastle United,4340,Paul Dummett,Left Full Back,13,CB:11 LB:1 LWB:1
+2019/20,Newcastle United,66494,Emil Krafth,Right Full Back,11,RWB:5 RB:3 CB:3
+2019/20,Newcastle United,10522,DeAndre Yedlin,Right Full Back,10,RWB:9 RB:1
+2019/20,Newcastle United,4771,Dwight Gayle,Centre Striker,10,ST:10
+2019/20,Newcastle United,3507,Danny Rose,Left Full Back,10,LB:6 LWB:2 CB:2
+2019/20,Newcastle United,4847,Nabil Bentaleb,Central Midfielder,8,CM:7 CDM:1
+2019/20,Newcastle United,14903,Matty Longstaff,Centre Defensive Midfielder,6,CM:6
+2019/20,Newcastle United,4859,Christian Atsu,Left/Right Winger,5,LM:3 LW:1 RM:1
+2019/20,Newcastle United,3175,Andy Carroll,Centre Striker,4,ST:4
+2019/20,Newcastle United,16607,Florian Lejeune,Centre Central Defender,4,CB:4
+2019/20,Newcastle United,6528,Valentino Lazaro,Right Winger,4,RWB:3 RM:1
+2019/20,Newcastle United,20196,Yoshinori Muto,Centre Striker,2,CAM:2
+2019/20,Newcastle United,4656,Ki Sung-Yueng,Centre Central Midfielder,1,CM:1
+2019/20,Norwich City,3169,Tim Krul,Goalkeeper,36,GK:36
+2019/20,Norwich City,19970,Max Aarons,Right Full Back,36,RB:36
+2019/20,Norwich City,5169,Teemu Pukki,Centre Striker,33,ST:33
+2019/20,Norwich City,33061,Kenny McLean,Centre Central Midfielder,32,CDM:18 CAM:9 CM:5
+2019/20,Norwich City,10968,Ben Godfrey,Centre Central Defender,30,CB:30
+2019/20,Norwich City,14944,Todd Cantwell,Left Winger,30,LW:19 RW:5 LM:4 RM:1 CAM:1
+2019/20,Norwich City,26408,Emiliano Buendía,Left/Right Attacking Midfielder,28,RW:23 RM:4 LW:1
+2019/20,Norwich City,4560,Alexander Tettey,Centre Defensive Midfielder,28,CDM:25 CB:3
+2019/20,Norwich City,14938,Jamal Lewis,Left Wing Back,25,LB:25
+2019/20,Norwich City,22047,Christoph Zimmermann,Centre Central Defender,16,CB:16
+2019/20,Norwich City,8945,Sam Byram,Right Full Back,15,LB:13 RB:2
+2019/20,Norwich City,3819,Grant Hanley,Centre Central Defender,14,CB:14
+2019/20,Norwich City,24412,Tom Trybull,Centre Defensive Midfielder,14,CDM:13 CM:1
+2019/20,Norwich City,23199,Marco Stiepermann,Centre Central Midfielder,14,CAM:14
+2019/20,Norwich City,33066,Onel Hernández,Left/Right Winger,14,LW:13 LM:1
+2019/20,Norwich City,6820,Ondrej Duda,Centre Attacking Midfielder,9,CAM:9
+2019/20,Norwich City,49990,Ibrahim Amadou,Centre Central Midfielder,8,CB:6 CDM:2
+2019/20,Norwich City,25203,Lukas Rupp,Left/Centre/Right Central Midfielder,8,RW:5 CM:2 CDM:1
+2019/20,Norwich City,15558,Moritz Leitner,Centre Central Midfielder,7,CDM:5 CM:2
+2019/20,Norwich City,12891,Timm Klose,Centre Central Defender,7,CB:7
+2019/20,Norwich City,22040,Mario Vrancic,Centre Central Midfielder,6,CDM:6
+2019/20,Norwich City,11111,Josip Drmic,Centre Striker,5,ST:5
+2019/20,Norwich City,5361,Ralf Fährmann,Goalkeeper,1,GK:1
+2019/20,Norwich City,19675,Michael McGovern,Goalkeeper,1,GK:1
+2019/20,Norwich City,24641,Adam Idah,Centre Striker,1,ST:1
+2019/20,Sheffield United,3581,Chris Basham,Centre Central Defender,38,CB:38
+2019/20,Sheffield United,9169,George Baldock,Right Full Back,38,RWB:38
+2019/20,Sheffield United,4258,Enda Stevens,Left Full Back,38,LWB:38
+2019/20,Sheffield United,3924,Oliver Norwood,Centre Central Midfielder,37,CM:37
+2019/20,Sheffield United,13988,Dean Henderson,Goalkeeper,36,GK:36
+2019/20,Sheffield United,4394,John Egan,Centre Central Defender,36,CB:36
+2019/20,Sheffield United,9491,Jack O'Connell,Centre Central Defender,32,CB:32
+2019/20,Sheffield United,8444,John Fleck,Centre Central Midfielder,28,CM:28
+2019/20,Sheffield United,4509,John Lundstram,Centre Central Midfielder,26,CM:26
+2019/20,Sheffield United,8107,Oliver McBurnie,Centre Striker,24,ST:24
+2019/20,Sheffield United,2340,David McGoldrick,Centre Striker,22,ST:22
+2019/20,Sheffield United,21614,Sander Berge,Centre Central Midfielder,12,CM:12
+2019/20,Sheffield United,19603,Lys Mousset,Centre Striker,11,ST:11
+2019/20,Sheffield United,4626,Billy Sharp,Centre Striker,10,ST:10
+2019/20,Sheffield United,4725,Callum Robinson,Left/Centre Striker,9,ST:9
+2019/20,Sheffield United,3902,Jack Robinson,Left Full Back,6,CB:6
+2019/20,Sheffield United,9266,Ben Osborn,Centre Central Midfielder,6,CM:6
+2019/20,Sheffield United,3320,Luke Freeman,Left Attacking Midfielder,3,CM:3
+2019/20,Sheffield United,4727,Simon Moore,Goalkeeper,2,GK:2
+2019/20,Sheffield United,3222,Phil Jagielka,Centre Central Defender,2,CB:2
+2019/20,Sheffield United,10451,Muhamed Besic,Centre Defensive Midfielder,2,CM:2
+2019/20,Southampton,4617,James Ward-Prowse,Centre Central Midfielder,38,CM:28 CAM:5 RB:3 RWB:1 CDM:1
+2019/20,Southampton,19589,Jan Bednarek,Centre Central Defender,34,CB:34
+2019/20,Southampton,8245,Danny Ings,Centre Striker,32,ST:31 CAM:1
+2019/20,Southampton,3811,Nathan Redmond,Left/Right Winger,32,LM:21 ST:6 CAM:3 RW:2
+2019/20,Southampton,2886,Ryan Bertrand,Left Full Back,31,LB:26 LWB:5
+2019/20,Southampton,5272,Pierre-Emile Højbjerg,Centre Central Midfielder,30,CM:24 CDM:4 LWB:1 RB:1
+2019/20,Southampton,4573,Alex McCarthy,Goalkeeper,28,GK:28
+2019/20,Southampton,4612,Jack Stephens,Centre Central Defender,27,CB:27
+2019/20,Southampton,4286,Oriol Romeu,Centre Defensive Midfielder,20,CM:16 CDM:4
+2019/20,Southampton,12186,Stuart Armstrong,Left Winger,19,RM:16 CM:1 RWB:1 CAM:1
+2019/20,Southampton,20109,Jannik Vestergaard,Centre Central Defender,17,CB:17
+2019/20,Southampton,11347,Cédric Soares,Right Wing Back,16,RB:13 RWB:1 LB:1 LWB:1
+2019/20,Southampton,3206,Shane Long,Centre Striker,15,ST:14 LW:1
+2019/20,Southampton,10905,Ché Adams,Centre Striker,12,ST:12
+2019/20,Southampton,15269,Angus Gunn,Goalkeeper,10,GK:10
+2019/20,Southampton,15011,Yan Valery,Right Full Back,10,RWB:5 RB:5
+2019/20,Southampton,52153,Moussa Djenepo,Left/Right Winger,10,RM:5 LM:3 LWB:1 LW:1
+2019/20,Southampton,12584,Sofiane Boufal,Left/Centre/Right Attacking Midfielder,8,CAM:5 RM:2 LM:1
+2019/20,Southampton,21532,Michael Obafemi,Centre Striker,8,ST:8
+2019/20,Southampton,13815,Kyle Walker-Peters,Right Full Back,7,RB:7
+2019/20,Southampton,4605,Maya Yoshida,Centre Central Defender,6,CB:6
+2019/20,Southampton,14997,Will Smallbone,Centre Central Midfielder,4,CM:2 RM:2
+2019/20,Southampton,25892,Kevin Danso,Centre Central Defender,3,LB:2 RB:1
+2019/20,Southampton,15013,Jake Vokins,Left Full Back,1,LB:1
+2019/20,Tottenham Hotspur,4916,Toby Alderweireld,Centre/Right Central Defender,33,CB:33
+2019/20,Tottenham Hotspur,11293,Sèrge Aurier,Right Full Back,31,RB:26 RWB:4 RM:1
+2019/20,Tottenham Hotspur,3960,Harry Kane,Centre Striker,29,ST:29
+2019/20,Tottenham Hotspur,4549,Moussa Sissoko,Left/Centre/Right Attacking Midfielder,28,CDM:13 CM:9 RW:4 RB:1 RM:1
+2019/20,Tottenham Hotspur,4999,Son Heung-Min,Left/Centre/Right Winger,28,LW:20 ST:4 RW:2 LM:1 CAM:1
+2019/20,Tottenham Hotspur,20224,Davinson Sánchez,Centre Central Defender,27,CB:26 RB:1
+2019/20,Tottenham Hotspur,7488,Harry Winks,Centre Central Midfielder,26,CDM:19 CM:7
+2019/20,Tottenham Hotspur,5762,Lucas Moura,Right Winger,25,RW:14 ST:6 CAM:2 LM:2 LW:1
+2019/20,Tottenham Hotspur,4664,Hugo Lloris,Goalkeeper,21,GK:21
+2019/20,Tottenham Hotspur,9167,Dele Alli,Centre Attacking Midfielder,21,CAM:13 ST:4 CM:3 LW:1
+2019/20,Tottenham Hotspur,4666,Jan Vertonghen,Centre Central Defender,19,CB:13 LB:5 LWB:1
+2019/20,Tottenham Hotspur,4600,Paulo Gazzaniga,Goalkeeper,17,GK:17
+2019/20,Tottenham Hotspur,4408,Ben Davies,Left Full Back,16,LB:14 LWB:2
+2019/20,Tottenham Hotspur,4112,Eric Dier,Centre Central Defender,15,CB:8 CDM:7
+2019/20,Tottenham Hotspur,19851,Giovani Lo Celso,Centre Attacking Midfielder,15,CM:7 CDM:4 CAM:2 RW:1 RM:1
+2019/20,Tottenham Hotspur,25329,Tanguy Ndombélé,Centre Central Midfielder,12,CDM:8 CM:4
+2019/20,Tottenham Hotspur,4842,Érik Lamela,Centre/Right Attacking Midfielder,12,CAM:8 RW:4
+2019/20,Tottenham Hotspur,3507,Danny Rose,Left Full Back,10,LB:9 LWB:1
+2019/20,Tottenham Hotspur,4845,Christian Eriksen,Left/Centre/Right Attacking Midfielder,10,CAM:5 CM:2 LW:1 RW:1 CDM:1
+2019/20,Tottenham Hotspur,12703,Steven Bergwijn,Left/Right Winger,8,LW:4 CAM:2 ST:1 RW:1
+2019/20,Tottenham Hotspur,15116,Japhet Tanganga,Centre Central Defender,6,LB:2 RWB:2 RB:1 CB:1
+2019/20,Tottenham Hotspur,14656,Ryan Sessegnon,Left/Right Winger,4,LWB:2 LB:2
+2019/20,Tottenham Hotspur,13815,Kyle Walker-Peters,Right Full Back,3,RB:3
+2019/20,Tottenham Hotspur,25309,Juan Foyth,Centre Central Defender,1,CB:1
+2019/20,Tottenham Hotspur,21413,Oliver Skipp,Midfielder,1,CM:1
+2019/20,Watford,2932,Ben Foster,Goalkeeper,38,GK:38
+2019/20,Watford,13823,Abdoulaye Doucouré,Centre Central Midfielder,36,CAM:16 CM:13 CDM:7
+2019/20,Watford,4843,Étienne Capoue,Centre Defensive Midfielder,30,CDM:22 CM:8
+2019/20,Watford,3160,Craig Cathcart,Centre Central Defender,28,CB:28
+2019/20,Watford,8589,Will Hughes,Centre Central Midfielder,27,CDM:14 CM:6 CAM:4 LM:2 RW:1
+2019/20,Watford,22546,Kiko Femenía,Right Wing Back,26,RB:16 LB:7 RWB:2 LWB:1
+2019/20,Watford,4198,Craig Dawson,Centre Central Defender,26,CB:24 RB:2
+2019/20,Watford,9947,Troy Deeney,Centre Striker,26,ST:26
+2019/20,Watford,19605,Christian Kabasele,Centre Central Defender,26,CB:26
+2019/20,Watford,4777,Gerard Deulofeu,Left/Right Winger,25,LW:15 ST:8 CAM:1 RM:1
+2019/20,Watford,49796,Ismaïla Sarr,Left/Right Winger,22,RW:16 CAM:3 RM:2 ST:1
+2019/20,Watford,49992,Adam Masina,Left Full Back,20,LB:17 LWB:2 CB:1
+2019/20,Watford,11213,Roberto Pereyra,Left/Centre/Right Central Midfielder,17,CAM:5 RW:4 ST:3 LW:3 CM:1 LM:1
+2019/20,Watford,3251,Adrian Mariappa,Centre/Right Central Defender,15,RB:11 CB:4
+2019/20,Watford,5713,José Holebas,Left Full Back,11,LB:6 LWB:5
+2019/20,Watford,3448,Tom Cleverley,Centre Central Midfielder,11,CM:6 CAM:4 LM:1
+2019/20,Watford,4105,Nathaniel Chalobah,Centre Defensive Midfielder,10,CDM:5 CM:4 CAM:1
+2019/20,Watford,3452,Danny Welbeck,Centre Striker,8,ST:5 LW:3
+2019/20,Watford,9060,Andre Gray,Centre Striker,7,ST:7
+2019/20,Watford,10480,Daryl Janmaat,Right Full Back,7,RWB:6 RB:1
+2019/20,Watford,25292,Dimitri Foulquier,Right Full Back,1,RM:1
+2019/20,Watford,13822,Sebastian Prödl,Centre Central Defender,1,CB:1
+2019/20,West Ham United,15202,Declan Rice,Centre Central Midfielder,38,CDM:22 CM:15 CB:1
+2019/20,West Ham United,3014,Mark Noble,Centre Central Midfielder,32,CM:24 CAM:6 CDM:2
+2019/20,West Ham United,49884,Issa Diop,Centre Central Defender,31,CB:31
+2019/20,West Ham United,8897,Aaron Cresswell,Left Full Back,31,LB:27 CB:4
+2019/20,West Ham United,5514,Angelo Ogbonna,Left/Centre Central Defender,31,CB:31
+2019/20,West Ham United,3309,Lukasz Fabianski,Goalkeeper,25,GK:25
+2019/20,West Ham United,3958,Ryan Fredericks,Right Full Back,25,RB:24 RWB:1
+2019/20,West Ham United,49761,Sébastien Haller,Centre Striker,24,ST:24
+2019/20,West Ham United,25246,Pablo Fornals,Centre Central Midfielder,24,LM:10 LW:6 CAM:4 CM:2 RM:1 RW:1
+2019/20,West Ham United,6784,Felipe Anderson,Left/Centre/Right Attacking Midfielder,20,LM:10 CAM:6 LW:3 RW:1
+2019/20,West Ham United,9595,Michail Antonio,Left/Centre/Right Striker,19,ST:17 LW:1 LM:1
+2019/20,West Ham United,4558,Robert Snodgrass,Left/Right Attacking Midfielder,17,RM:11 CM:3 CAM:1 ST:1 RW:1
+2019/20,West Ham United,13872,Manuel Lanzini,Left/Centre/Right Attacking Midfielder,14,CAM:5 CM:5 LW:2 ST:1 LM:1
+2019/20,West Ham United,32435,Fabián Balbuena,Centre Central Defender,13,CB:13
+2019/20,West Ham United,25183,Tomás Soucek,Centre Defensive Midfielder,12,CDM:10 CM:2
+2019/20,West Ham United,8868,Jarrod Bowen,Centre Striker,11,RW:8 RM:2 LW:1
+2019/20,West Ham United,11284,Arthur Masuaku,Left Full Back,10,LB:6 LWB:4
+2019/20,West Ham United,6389,Andrii Yarmolenko,Left/Right Winger,10,RM:8 RW:2
+2019/20,West Ham United,4909,Roberto Jiménez,Goalkeeper,7,GK:7
+2019/20,West Ham United,3654,Pablo Zabaleta,Right Full Back,6,RB:4 RWB:2
+2019/20,West Ham United,20064,Jeremy Ngakia,Full Back,5,RB:4 RWB:1
+2019/20,West Ham United,2912,David Martin,Goalkeeper,4,GK:4
+2019/20,West Ham United,15212,Ben Johnson,Right Full Back,3,RB:2 LB:1
+2019/20,West Ham United,3547,Jack Wilshere,Centre Central Midfielder,2,CDM:1 CM:1
+2019/20,West Ham United,2216,Darren Randolph,Goalkeeper,2,GK:2
+2019/20,West Ham United,4161,Chicharito,Centre Striker,1,ST:1
+2019/20,West Ham United,10430,Carlos Sánchez,Centre Defensive Midfielder,1,CDM:1
+2019/20,Wolverhampton Wanderers,11341,Rui Patrício,Goalkeeper,38,GK:38
+2019/20,Wolverhampton Wanderers,4136,Conor Coady,Centre Central Defender,38,CB:38
+2019/20,Wolverhampton Wanderers,11071,Raúl Jiménez,Centre Striker,37,ST:37
+2019/20,Wolverhampton Wanderers,11180,Rúben Neves,Centre Central Midfielder,35,CM:35
+2019/20,Wolverhampton Wanderers,11259,João Moutinho,Centre Central Midfielder,34,CM:34
+2019/20,Wolverhampton Wanderers,20277,Jonny,Left Full Back,33,LWB:32 RWB:1
+2019/20,Wolverhampton Wanderers,4229,Matt Doherty,Left/Right Full Back,32,RWB:31 CB:1
+2019/20,Wolverhampton Wanderers,5866,Leander Dendoncker,Centre Central Midfielder,32,CM:19 CB:13
+2019/20,Wolverhampton Wanderers,20745,Romain Saïss,Centre Defensive Midfielder,31,CB:30 CM:1
+2019/20,Wolverhampton Wanderers,19758,Diogo Jota,Centre Striker,27,LW:16 ST:10 CAM:1
+2019/20,Wolverhampton Wanderers,4979,Adama Traoré,Right Winger,27,RW:17 RWB:6 ST:2 CAM:1 LW:1
+2019/20,Wolverhampton Wanderers,16204,Willy Boly,Centre Central Defender,22,CB:22
+2019/20,Wolverhampton Wanderers,21998,Pedro Neto,Right Winger,9,CAM:3 RW:3 LW:2 ST:1
+2019/20,Wolverhampton Wanderers,4351,Ryan Bennett,Centre Central Defender,7,CB:7
+2019/20,Wolverhampton Wanderers,20171,Rúben Vinagre,Left Full Back,6,LWB:6
+2019/20,Wolverhampton Wanderers,22870,Patrick Cutrone,Centre Striker,3,ST:3
+2019/20,Wolverhampton Wanderers,11362,Daniel Podence,Left/Right Winger,3,LW:2 RW:1
+2019/20,Wolverhampton Wanderers,13522,Maximilian Kilman,Left/Centre Central Defender,2,CB:2
+2019/20,Wolverhampton Wanderers,15259,Morgan Gibbs-White,Centre Attacking Midfielder,1,CM:1
+2019/20,Wolverhampton Wanderers,19564,Jesús Vallejo,Centre Central Defender,1,CB:1
